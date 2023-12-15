@@ -1,1 +1,1 @@
-# elevenlabs-typescript
+# elevenlabs-js
