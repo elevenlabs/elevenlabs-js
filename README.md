@@ -32,7 +32,7 @@ const elevenlabs = new ElevenLabsClient({
   apiKey: process.env.ELEVENLABS_API_KEY // Defaults to this
 })
 
-const audio = elevenlabs.textToSpeech.convert("Bella", {
+const audio = elevenlabs.textToSpeech.convert('21m00Tcm4TlvDq8ikWAM', {
   text: "Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
   model_id: "eleven_multilingual_v2"
 });
@@ -97,6 +97,21 @@ const voices = elevenlabs.voices.getAll();
         ...
       ]
     }
+```
+
+## 🚿 Streaming
+
+Stream audio in real-time, as it's being generated.
+
+```ts
+import { ElevenLabsClient, stream } from "@elevenlabs/api";
+
+const audioStream = elevenlabs.textToSpeech.convert('21m00Tcm4TlvDq8ikWAM', {
+  text: "This is a... streaming voice!!",
+  model_id: "eleven_multilingual_v2"
+});
+
+stream(audioStream)
 ```
 
 ## Elevenlabs Namespace
