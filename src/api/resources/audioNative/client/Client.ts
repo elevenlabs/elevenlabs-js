@@ -58,8 +58,8 @@ export class AudioNative {
                         ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.0.8",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "0.1.0",
             },
             contentType: "multipart/form-data; boundary=" + _request.getBoundary(),
             body: _request,
@@ -118,8 +118,8 @@ export class AudioNative {
                         ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.0.8",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "0.1.0",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -178,8 +178,8 @@ export class AudioNative {
                         ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
-                "X-Fern-SDK-Version": "0.0.8",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "0.1.0",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,

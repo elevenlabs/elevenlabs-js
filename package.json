@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "version": "0.0.8",
+    "name": "elevenlabs",
+    "version": "0.1.0",
     "private": false,
     "repository": "https://github.com/elevenlabs/elevenlabs-js",
     "main": "./index.js",
