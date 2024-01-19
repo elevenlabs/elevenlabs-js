@@ -26,13 +26,14 @@ pip install @elevenlabs/api
 We support two main models: the newest `eleven_multilingual_v2`, a single foundational model supporting 29 languages including English, Chinese, Spanish, Hindi, Portuguese, French, German, Japanese, Arabic, Korean, Indonesian, Italian, Dutch, Turkish, Polish, Swedish, Filipino, Malay, Russian, Romanian, Ukrainian, Greek, Czech, Danish, Finnish, Bulgarian, Croatian, Slovak, and Tamil; and `eleven_monolingual_v1`, a low-latency model specifically trained for English speech.
 
 ```ts
-import { ElevenLabsClient, play } from "@elevenlabs/api";
+import { ElevenLabsClient, play } from "elevenlabs";
 
 const elevenlabs = new ElevenLabsClient({
-  apiKey: process.env.ELEVENLABS_API_KEY // Defaults to this
+  apiKey: "YOUR_API_KEY" // Defaults to process.env.ELEVENLABS_API_KEY
 })
 
-const audio = elevenlabs.textToSpeech.convert('21m00Tcm4TlvDq8ikWAM', {
+const audio = await elevenlabs.generate({
+  voice: "Rachel",
   text: "Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
   model_id: "eleven_multilingual_v2"
 });
@@ -52,13 +53,12 @@ await play(audio);
 
 List all your available voices with `voices()`.
 ```ts
-import { ElevenLabsClient } from "@elevenlabs/api";
+import { ElevenLabsClient } from "elevenlabs";
 
 const elevenlabs = new ElevenLabsClient({
-  apiKey: process.env.ELEVENLABS_API_KEY // Defaults to this
+  apiKey: "YOUR_API_KEY" // Defaults to process.env.ELEVENLABS_API_KEY
 })
-
-const voices = elevenlabs.voices.getAll();
+const voices = await elevenlabs.voices.getAll();
 ```
 
 <details> <summary> Show output </summary> </details>
@@ -104,9 +104,28 @@ const voices = elevenlabs.voices.getAll();
 Stream audio in real-time, as it's being generated.
 
 ```ts
+import { ElevenLabsClient, stream } from "elevenlabs";
+
+const audioStream = await elevenlabs.generate({
+  stream: true,
+  voice: "Bella",
+  text: "This is a... streaming voice",
+  model_id: "eleven_multilingual_v2"
+});
+
+stream(audioStream)
+```
+
+## HTTP Client
+The SDK also exposes an HTTP client that you can use to query our 
+various endpoints directly. 
+
+```ts
 import { ElevenLabsClient, stream } from "@elevenlabs/api";
 
-const audioStream = elevenlabs.textToSpeech.convert('21m00Tcm4TlvDq8ikWAM', {
+const models = await eleven.models.getAll();
+
+const audioStream = await elevenlabs.textToSpeech.convert('21m00Tcm4TlvDq8ikWAM', {
   text: "This is a... streaming voice!!",
   model_id: "eleven_multilingual_v2"
 });
