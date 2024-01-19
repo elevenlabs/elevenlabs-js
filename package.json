@@ -1,6 +1,6 @@
 {
     "name": "",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "private": false,
     "repository": "https://github.com/elevenlabs/elevenlabs-js",
     "main": "./index.js",
@@ -14,7 +14,9 @@
         "url-join": "4.0.1",
         "form-data": "4.0.0",
         "node-fetch": "2.7.0",
-        "qs": "6.11.2"
+        "qs": "6.11.2",
+        "command-exists": "^1.2.9",
+        "execa": "^5.1.1"
     },
     "devDependencies": {
         "@types/url-join": "4.0.1",
