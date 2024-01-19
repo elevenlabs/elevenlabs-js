@@ -16,7 +16,9 @@ Check out the [HTTP API documentation](https://elevenlabs.io/docs/api-reference)
 ## ⚙️ Install
 
 ```bash
-pip install @elevenlabs/api
+npm install elevenlabs
+# or 
+yarn add elevenlabs
 ```
 
 ## 🗣️ Usage
