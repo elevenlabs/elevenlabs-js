@@ -63,7 +63,7 @@ const elevenlabs = new ElevenLabsClient({
 const voices = await elevenlabs.voices.getAll();
 ```
 
-<details> <summary> Show output </summary> </details>
+<details> <summary> Show output </summary> 
 
 ```ts
     {
@@ -100,6 +100,7 @@ const voices = await elevenlabs.voices.getAll();
       ]
     }
 ```
+</details>
 
 ## 🚿 Streaming
 
