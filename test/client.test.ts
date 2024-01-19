@@ -31,4 +31,16 @@ describe("eleven labs", () => {
         });
         stream(audioStream);
     });
+
+    it.skip("generate", async () => {
+        const eleven = new ElevenLabsClient({
+            apiKey: "197464a32e60dfb6982e479cbbd49748",
+        });
+        const audio = await eleven.generate({
+            voice: "Rachel",
+            text: "Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
+            model_id: "eleven_multilingual_v2",
+        });
+        await play(audio);
+    });
 });
