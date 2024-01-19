@@ -1,1 +1,10 @@
 # Specify files that shouldn't be modified by Fern
+
+README.md
+assets/
+
+test/
+jest.config.js
+
+src/wrapper
+wrc/index.ts
