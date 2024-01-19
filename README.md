@@ -26,16 +26,18 @@ pip install @elevenlabs/api
 We support two main models: the newest `eleven_multilingual_v2`, a single foundational model supporting 29 languages including English, Chinese, Spanish, Hindi, Portuguese, French, German, Japanese, Arabic, Korean, Indonesian, Italian, Dutch, Turkish, Polish, Swedish, Filipino, Malay, Russian, Romanian, Ukrainian, Greek, Czech, Danish, Finnish, Bulgarian, Croatian, Slovak, and Tamil; and `eleven_monolingual_v1`, a low-latency model specifically trained for English speech.
 
 ```ts
-import { ElevenLabsClient } from "@elevenlabs/api";
+import { ElevenLabsClient, play } from "@elevenlabs/api";
 
 const elevenlabs = new ElevenLabsClient({
   apiKey: process.env.ELEVENLABS_API_KEY // Defaults to this
 })
 
 const audio = elevenlabs.textToSpeech.convert("Bella", {
-  text="Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
+  text: "Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
   model_id: "eleven_multilingual_v2"
 });
+
+await play(audio);
 ```
 
 <details> <summary> Play </summary>
@@ -62,24 +64,45 @@ const voices = elevenlabs.voices.getAll();
 <details> <summary> Show output </summary>
 
 ```ts
-{
-  voices=[
+    {
+      voices: [
         {
-            voice_id='21m00Tcm4TlvDq8ikWAM',
-            name='Rachel',
-            category='premade',
-            settings=None,
+          voice_id: '21m00Tcm4TlvDq8ikWAM',
+          name: 'Rachel',
+          samples: null,
+          category: 'premade',
+          fine_tuning: [Object],
+          labels: [Object],
+          description: null,
+          preview_url: 'https://storage.googleapis.com/eleven-public-prod/premade/voices/21m00Tcm4TlvDq8ikWAM/df6788f9-5c96-470d-8312-aab3b3d8f50a.mp3',
+          available_for_tiers: [],
+          settings: null,
+          sharing: null,
+          high_quality_base_model_ids: []
         },
         {
-            voice_id='AZnzlk1XvdvUeBnXmlld',
-            name='Domi',
-            category='premade',
-            settings=None,
+          voice_id: '29vD33N1CtxCmqQRPOHJ',
+          name: 'Drew',
+          samples: null,
+          category: 'premade',
+          fine_tuning: [Object],
+          labels: [Object],
+          description: null,
+          preview_url: 'https://storage.googleapis.com/eleven-public-prod/premade/voices/29vD33N1CtxCmqQRPOHJ/e8b52a3f-9732-440f-b78a-16d5e26407a1.mp3',
+          available_for_tiers: [],
+          settings: null,
+          sharing: null,
+          high_quality_base_model_ids: []
         },
         ...
-    ]
-}
+      ]
+    }
 ```
+
+## Elevenlabs Namespace
+All of the ElevenLabs models are nested within the `ElevenLabs` namespace. 
+
+![Alt text](assets/module.png)
 
 ## Languages Supported
 
