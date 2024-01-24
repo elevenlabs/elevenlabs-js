@@ -145,7 +145,7 @@ All of the ElevenLabs models are nested within the `ElevenLabs` namespace.
 
 We support 29 languages and 100+ accents. Explore [all languages](https://elevenlabs.io/languages).
 
-<img src="https://github.com/fern-elevenlabs/elevenlabs-python/assets/83524670/ea02a0a8-2691-4403-bbb1-ec14993a0adf" width="900">
+![Alt text](assets/languages.png)
 
 ## Contributing
 
