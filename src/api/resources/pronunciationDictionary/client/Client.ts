@@ -50,7 +50,7 @@ export class PronunciationDictionary {
                         ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
+                "X-Fern-SDK-Name": "elevenlabs",
                 "X-Fern-SDK-Version": "0.1.2",
             },
             contentType: "multipart/form-data; boundary=" + _request.getBoundary(),
@@ -111,7 +111,7 @@ export class PronunciationDictionary {
                         ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
+                "X-Fern-SDK-Name": "elevenlabs",
                 "X-Fern-SDK-Version": "0.1.2",
             },
             contentType: "application/json",

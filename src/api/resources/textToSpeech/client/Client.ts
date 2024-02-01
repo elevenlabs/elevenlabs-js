@@ -57,7 +57,7 @@ export class TextToSpeech {
                         ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
+                "X-Fern-SDK-Name": "elevenlabs",
                 "X-Fern-SDK-Version": "0.1.2",
             },
             contentType: "application/json",
@@ -123,7 +123,7 @@ export class TextToSpeech {
                         ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "",
+                "X-Fern-SDK-Name": "elevenlabs",
                 "X-Fern-SDK-Version": "0.1.2",
             },
             contentType: "application/json",
