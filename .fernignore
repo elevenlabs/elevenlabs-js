@@ -7,4 +7,4 @@ test/
 jest.config.js
 
 src/wrapper
-wrc/index.ts
+src/index.ts
