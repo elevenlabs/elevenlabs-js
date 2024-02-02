@@ -5,6 +5,7 @@ assets/
 
 test/
 jest.config.js
+jest.config.js
 
 src/wrapper
 src/index.ts
