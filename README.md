@@ -107,8 +107,6 @@ const voices = await elevenlabs.voices.getAll();
 Stream audio in real-time, as it's being generated.
 
 ```ts
-import { ElevenLabsClient, stream } from "elevenlabs";
-
 const audioStream = await elevenlabs.generate({
   stream: true,
   voice: "Bella",
@@ -119,22 +117,66 @@ const audioStream = await elevenlabs.generate({
 stream(audioStream)
 ```
 
-## HTTP Client
-The SDK also exposes an HTTP client that you can use to query our 
-various endpoints directly. 
+## Retries
+
+This Node SDK is instrumented with automatic retries with exponential backoff. A request will be
+retried as long as the request is deemed retriable and the number of retry attempts has not grown larger
+than the configured retry limit (default: 2).
+
+A request is deemed retriable when any of the following HTTP status codes is returned:
+
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [409](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409) (Conflict)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
+  
+Use the `maxRetries` request option to configure this behavior. 
 
 ```ts
-import { ElevenLabsClient, stream } from "@elevenlabs/api";
-
-const models = await eleven.models.getAll();
-
-const audioStream = await elevenlabs.textToSpeech.convert('21m00Tcm4TlvDq8ikWAM', {
-  text: "This is a... streaming voice!!",
-  model_id: "eleven_multilingual_v2"
+const response = await elevenlabs.voices.getAll({
+  maxRetries: 0 // override maxRetries at the request level
 });
-
-stream(audioStream)
 ```
+
+## Timeouts
+
+The SDK defaults to a 60 second timout. Use the `timeoutInSeconds` option to 
+configure this behavior. 
+
+```ts
+const response = elevenlabs.voices.getAll({
+  timeoutInSeconds: 30 // override timeout to 30s
+});
+```
+
+## Runtime compatiblity
+
+The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK 
+works in the following runtimes: 
+
+The following runtimes are supported:
+
+- Node.js 15+ 
+- Vercel 
+- Cloudflare Workers
+- Deno v1.25+
+- Bun 1.0+
+
+### Customizing Fetch client
+
+The SDK provides a way for you to customize the underlying HTTP client / Fetch function. If you're 
+running in an unsupported environment, this provides a way for you to break the glass and 
+ensure the SDK works. 
+
+```ts
+import { ElevenLabsClient } from "elevenlabs";
+
+const elevenlabs = new ElevenLabsClient({
+  apiKey: "...",
+  fetcher: // provide your implementation here
+});
+```
+
 
 ## Elevenlabs Namespace
 All of the ElevenLabs models are nested within the `ElevenLabs` namespace. 
