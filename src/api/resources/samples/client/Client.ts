@@ -11,7 +11,7 @@ import * as errors from "../../../../errors";
 export declare namespace Samples {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
-        xiApiKey?: core.Supplier<string | undefined>;
+        apiKey?: core.Supplier<string | undefined>;
     }
 
     interface RequestOptions {
@@ -20,15 +20,15 @@ export declare namespace Samples {
     }
 }
 
-/**
- * Access to your samples. A sample is any audio file you attached to a voice. A voice can have one or more samples.
- */
 export class Samples {
     constructor(protected readonly _options: Samples.Options = {}) {}
 
     /**
      * Removes a sample by its ID.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.samples.delete("voice_id", "sample_id")
      */
     public async delete(voiceId: string, sampleId: string, requestOptions?: Samples.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -39,12 +39,12 @@ export class Samples {
             method: "DELETE",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -90,7 +90,7 @@ export class Samples {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.samples.getAudio("voice-id", "sample-id")
+     *     await elevenLabs.samples.getAudio("voice_id", "sample_id")
      */
     public async getAudio(voiceId: string, sampleId: string, requestOptions?: Samples.RequestOptions): Promise<void> {
         const _response = await core.fetcher({
@@ -101,12 +101,12 @@ export class Samples {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

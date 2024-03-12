@@ -12,7 +12,7 @@ import * as errors from "../../../../errors";
 export declare namespace TextToSpeech {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
-        xiApiKey?: core.Supplier<string | undefined>;
+        apiKey?: core.Supplier<string | undefined>;
     }
 
     interface RequestOptions {
@@ -21,9 +21,6 @@ export declare namespace TextToSpeech {
     }
 }
 
-/**
- * Convert text into lifelike speech using a voice of your choice.
- */
 export class TextToSpeech {
     constructor(protected readonly _options: TextToSpeech.Options = {}) {}
 
@@ -32,11 +29,11 @@ export class TextToSpeech {
      */
     public async convert(
         voiceId: string,
-        request: ElevenLabs.BodyTextToSpeechV1TextToSpeechVoiceIdPost,
+        request: ElevenLabs.TextToSpeechRequest,
         requestOptions?: TextToSpeech.RequestOptions
     ): Promise<stream.Readable> {
         const { optimize_streaming_latency: optimizeStreamingLatency, output_format: outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (optimizeStreamingLatency != null) {
             _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
@@ -53,12 +50,12 @@ export class TextToSpeech {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -100,11 +97,11 @@ export class TextToSpeech {
      */
     public async convertAsStream(
         voiceId: string,
-        request: ElevenLabs.BodyTextToSpeechV1TextToSpeechVoiceIdStreamPost,
+        request: ElevenLabs.TextToSpeechAsStreamRequest,
         requestOptions?: TextToSpeech.RequestOptions
     ): Promise<stream.Readable> {
         const { optimize_streaming_latency: optimizeStreamingLatency, output_format: outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (optimizeStreamingLatency != null) {
             _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
@@ -121,12 +118,12 @@ export class TextToSpeech {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

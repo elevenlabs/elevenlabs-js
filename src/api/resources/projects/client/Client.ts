@@ -9,13 +9,11 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors";
 import * as fs from "fs";
 import { default as FormData } from "form-data";
-import * as stream from "stream";
-import { Chapters } from "../resources/chapters/client/Client";
 
 export declare namespace Projects {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
-        xiApiKey?: core.Supplier<string | undefined>;
+        apiKey?: core.Supplier<string | undefined>;
     }
 
     interface RequestOptions {
@@ -24,9 +22,6 @@ export declare namespace Projects {
     }
 }
 
-/**
- * Access, create and convert Projects programmatically, only specifically whitelisted accounts can access the Projects API. If you need access please contact our sales team.
- */
 export class Projects {
     constructor(protected readonly _options: Projects.Options = {}) {}
 
@@ -37,7 +32,7 @@ export class Projects {
      * @example
      *     await elevenLabs.projects.getAll()
      */
-    public async getAll(requestOptions?: Projects.RequestOptions): Promise<ElevenLabs.GetProjectsResponseModel> {
+    public async getAll(requestOptions?: Projects.RequestOptions): Promise<ElevenLabs.GetProjectsResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -46,12 +41,12 @@ export class Projects {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -60,7 +55,7 @@ export class Projects {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetProjectsResponseModel;
+            return _response.body as ElevenLabs.GetProjectsResponse;
         }
 
         if (_response.error.reason === "status-code") {
@@ -97,14 +92,17 @@ export class Projects {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async add(
-        fromDocument: File | fs.ReadStream,
+        fromDocument: File | fs.ReadStream | undefined,
         request: ElevenLabs.BodyAddProjectV1ProjectsAddPost,
         requestOptions?: Projects.RequestOptions
     ): Promise<ElevenLabs.AddProjectResponseModel> {
         const _request = new FormData();
         _request.append("name", request.name);
         _request.append("from_url", request.from_url);
-        _request.append("from_document", fromDocument);
+        if (fromDocument != null) {
+            _request.append("from_document", fromDocument);
+        }
+
         _request.append("default_title_voice_id", request.default_title_voice_id);
         _request.append("default_paragraph_voice_id", request.default_paragraph_voice_id);
         _request.append("default_model_id", request.default_model_id);
@@ -113,10 +111,12 @@ export class Projects {
         _request.append("author", request.author);
         _request.append("isbn_number", request.isbn_number);
         _request.append("acx_volume_normalization", request.acx_volume_normalization.toString());
+        _request.append("volume_normalization", request.volume_normalization.toString());
         for (const _item of request.pronunciation_dictionary_locators) {
             _request.append("pronunciation_dictionary_locators", _item);
         }
 
+        _request.append("callback_url", request.callback_url);
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -125,12 +125,12 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -175,6 +175,9 @@ export class Projects {
     /**
      * Returns information about a specific project. This endpoint returns more detailed information about a project than GET api.elevenlabs.io/v1/projects.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.projects.get("project_id")
      */
     public async get(
         projectId: string,
@@ -188,12 +191,12 @@ export class Projects {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -237,6 +240,9 @@ export class Projects {
     /**
      * Delete a project by its project_id.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.projects.delete("project_id")
      */
     public async delete(projectId: string, requestOptions?: Projects.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -247,12 +253,12 @@ export class Projects {
             method: "DELETE",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -296,6 +302,9 @@ export class Projects {
     /**
      * Starts conversion of a project and all of its chapters.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.projects.convert("project_id")
      */
     public async convert(projectId: string, requestOptions?: Projects.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -306,12 +315,12 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -357,12 +366,12 @@ export class Projects {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.projects.getSnapshots("project-id")
+     *     await elevenLabs.projects.getSnapshots("project_id")
      */
     public async getSnapshots(
         projectId: string,
         requestOptions?: Projects.RequestOptions
-    ): Promise<ElevenLabs.ProjectSnapshotsResponseModel> {
+    ): Promise<ElevenLabs.ProjectSnapshotsResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -371,12 +380,12 @@ export class Projects {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -385,7 +394,7 @@ export class Projects {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.ProjectSnapshotsResponseModel;
+            return _response.body as ElevenLabs.ProjectSnapshotsResponse;
         }
 
         if (_response.error.reason === "status-code") {
@@ -419,13 +428,17 @@ export class Projects {
 
     /**
      * Stream the audio from a project snapshot.
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.projects.streamAudio("project_id", "project_snapshot_id")
      */
     public async streamAudio(
         projectId: string,
         projectSnapshotId: string,
         requestOptions?: Projects.RequestOptions
-    ): Promise<stream.Readable> {
-        const _response = await core.fetcher<stream.Readable>({
+    ): Promise<void> {
+        const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
                 `v1/projects/${projectId}/snapshots/${projectSnapshotId}/stream`
@@ -433,29 +446,35 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
-            responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return _response.body;
+            return;
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.ElevenLabsError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-            });
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
         }
 
         switch (_response.error.reason) {
@@ -476,10 +495,18 @@ export class Projects {
     /**
      * Updates the set of pronunciation dictionaries acting on a project. This will automatically mark text within this project as requiring reconverting where the new dictionary would apply or the old one no longer does.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.projects.updatePronunciationDictionaries("project_id", {
+     *         pronunciation_dictionary_locators: [{
+     *                 pronunciation_dictionary_id: "pronunciation_dictionary_id",
+     *                 version_id: "version_id"
+     *             }]
+     *     })
      */
     public async updatePronunciationDictionaries(
         projectId: string,
-        request: ElevenLabs.BodyUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost,
+        request: ElevenLabs.UpdatePronunciationDictionariesRequest,
         requestOptions?: Projects.RequestOptions
     ): Promise<unknown> {
         const _response = await core.fetcher({
@@ -490,12 +517,12 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -535,11 +562,5 @@ export class Projects {
                     message: _response.error.errorMessage,
                 });
         }
-    }
-
-    protected _chapters: Chapters | undefined;
-
-    public get chapters(): Chapters {
-        return (this._chapters ??= new Chapters(this._options));
     }
 }

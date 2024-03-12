@@ -11,7 +11,7 @@ import * as errors from "../../../../errors";
 export declare namespace User {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
-        xiApiKey?: core.Supplier<string | undefined>;
+        apiKey?: core.Supplier<string | undefined>;
     }
 
     interface RequestOptions {
@@ -26,10 +26,11 @@ export class User {
     /**
      * Gets extended information about the users subscription
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.user.getSubscription()
      */
-    public async getSubscription(
-        requestOptions?: User.RequestOptions
-    ): Promise<ElevenLabs.ExtendedSubscriptionResponseModel> {
+    public async getSubscription(requestOptions?: User.RequestOptions): Promise<ElevenLabs.Subscription> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -38,12 +39,12 @@ export class User {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -52,7 +53,7 @@ export class User {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.ExtendedSubscriptionResponseModel;
+            return _response.body as ElevenLabs.Subscription;
         }
 
         if (_response.error.reason === "status-code") {
@@ -87,8 +88,11 @@ export class User {
     /**
      * Gets information about the user
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.user.get()
      */
-    public async get(requestOptions?: User.RequestOptions): Promise<ElevenLabs.UserResponse> {
+    public async get(requestOptions?: User.RequestOptions): Promise<ElevenLabs.User> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -97,12 +101,12 @@ export class User {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -111,7 +115,7 @@ export class User {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.UserResponse;
+            return _response.body as ElevenLabs.User;
         }
 
         if (_response.error.reason === "status-code") {

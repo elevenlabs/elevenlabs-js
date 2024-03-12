@@ -7,8 +7,10 @@ export interface BodyCreatesAudioNativeEnabledProjectV1AudioNativePost {
     name: string;
     /** Image URL used in the player. If not provided, default image set in the Player settings is used. */
     image: string;
-    /** Author used in the player. If not provided, default author set in the Player settings is used. */
+    /** Author used in the player and inserted at the start of the uploaded article. If not provided, the default author set in the Player settings is used. */
     author: string;
+    /** Title used in the player and inserted at the top of the uploaded article. If not provided, the default title set in the Player settings is used. */
+    title: string;
     /** Whether to use small player or not. If not provided, default value set in the Player settings is used. */
     small: boolean;
     /** Text color used in the player. If not provided, default text color set in the Player settings is used. */

@@ -5,8 +5,6 @@
 export interface BodyAddVoiceV1VoicesAddPost {
     /** The name that identifies this voice. This will be displayed in the dropdown of the website. */
     name: string;
-    /** One or more audio files to clone the voice from */
-    files: string[];
     /** How would you describe the voice? */
     description: string;
     /** Serialized labels dictionary for the voice. */

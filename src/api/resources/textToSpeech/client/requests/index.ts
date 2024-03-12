@@ -1,2 +1,2 @@
-export { BodyTextToSpeechV1TextToSpeechVoiceIdPost } from "./BodyTextToSpeechV1TextToSpeechVoiceIdPost";
-export { BodyTextToSpeechV1TextToSpeechVoiceIdStreamPost } from "./BodyTextToSpeechV1TextToSpeechVoiceIdStreamPost";
+export { TextToSpeechRequest } from "./TextToSpeechRequest";
+export { TextToSpeechAsStreamRequest } from "./TextToSpeechAsStreamRequest";

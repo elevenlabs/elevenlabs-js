@@ -13,7 +13,7 @@ import * as errors from "../../../../errors";
 export declare namespace PronunciationDictionary {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
-        xiApiKey?: core.Supplier<string | undefined>;
+        apiKey?: core.Supplier<string | undefined>;
     }
 
     interface RequestOptions {
@@ -30,12 +30,15 @@ export class PronunciationDictionary {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async addFromFile(
-        file: File | fs.ReadStream,
+        file: File | fs.ReadStream | undefined,
         request: ElevenLabs.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost,
         requestOptions?: PronunciationDictionary.RequestOptions
     ): Promise<ElevenLabs.AddPronunciationDictionaryResponseModel> {
         const _request = new FormData();
-        _request.append("file", file);
+        if (file != null) {
+            _request.append("file", file);
+        }
+
         _request.append("name", request.name);
         _request.append("description", request.description);
         const _response = await core.fetcher({
@@ -46,12 +49,12 @@ export class PronunciationDictionary {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -96,11 +99,14 @@ export class PronunciationDictionary {
     /**
      * Get metadata for a pronunciation dictionary
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.pronunciationDictionary.getMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet("pronunciation_dictionary_id")
      */
-    public async getMetadata(
+    public async getMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet(
         pronunciationDictionaryId: string,
         requestOptions?: PronunciationDictionary.RequestOptions
-    ): Promise<ElevenLabs.GetPronunciationDictionaryMetadataResponseModel> {
+    ): Promise<ElevenLabs.GetPronunciationDictionaryMetadataResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -109,12 +115,12 @@ export class PronunciationDictionary {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -123,7 +129,7 @@ export class PronunciationDictionary {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetPronunciationDictionaryMetadataResponseModel;
+            return _response.body as ElevenLabs.GetPronunciationDictionaryMetadataResponse;
         }
 
         if (_response.error.reason === "status-code") {

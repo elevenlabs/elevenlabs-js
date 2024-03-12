@@ -12,7 +12,7 @@ import * as stream from "stream";
 export declare namespace History {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
-        xiApiKey?: core.Supplier<string | undefined>;
+        apiKey?: core.Supplier<string | undefined>;
     }
 
     interface RequestOptions {
@@ -21,28 +21,36 @@ export declare namespace History {
     }
 }
 
-/**
- * Accesses your history. Your history is a list of all your created audio including its metadata.
- */
 export class History {
     constructor(protected readonly _options: History.Options = {}) {}
 
     /**
      * Returns metadata about all your generated audio.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.history.getAll()
      */
     public async getAll(
         request: ElevenLabs.HistoryGetAllRequest = {},
         requestOptions?: History.RequestOptions
-    ): Promise<ElevenLabs.GetHistoryResponseModel> {
-        const { page_size: pageSize, start_after_history_item_id: startAfterHistoryItemId } = request;
-        const _queryParams: Record<string, string | string[]> = {};
+    ): Promise<ElevenLabs.GetSpeechHistoryResponse> {
+        const {
+            page_size: pageSize,
+            start_after_history_item_id: startAfterHistoryItemId,
+            voice_id: voiceId,
+        } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (pageSize != null) {
             _queryParams["page_size"] = pageSize.toString();
         }
 
         if (startAfterHistoryItemId != null) {
             _queryParams["start_after_history_item_id"] = startAfterHistoryItemId;
+        }
+
+        if (voiceId != null) {
+            _queryParams["voice_id"] = voiceId;
         }
 
         const _response = await core.fetcher({
@@ -53,12 +61,12 @@ export class History {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -68,7 +76,7 @@ export class History {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetHistoryResponseModel;
+            return _response.body as ElevenLabs.GetSpeechHistoryResponse;
         }
 
         if (_response.error.reason === "status-code") {
@@ -103,8 +111,14 @@ export class History {
     /**
      * Returns information about an history item by its ID.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.history.get("history_item_id")
      */
-    public async get(historyItemId: string, requestOptions?: History.RequestOptions): Promise<ElevenLabs.HistoryItem> {
+    public async get(
+        historyItemId: string,
+        requestOptions?: History.RequestOptions
+    ): Promise<ElevenLabs.SpeechHistoryItemResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -113,12 +127,12 @@ export class History {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -127,7 +141,7 @@ export class History {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.HistoryItem;
+            return _response.body as ElevenLabs.SpeechHistoryItemResponse;
         }
 
         if (_response.error.reason === "status-code") {
@@ -162,6 +176,9 @@ export class History {
     /**
      * Delete a history item by its ID
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.history.delete("history_item_id")
      */
     public async delete(historyItemId: string, requestOptions?: History.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -172,12 +189,12 @@ export class History {
             method: "DELETE",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -230,12 +247,12 @@ export class History {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -276,11 +293,11 @@ export class History {
      *
      * @example
      *     await elevenLabs.history.download({
-     *         history_item_ids: []
+     *         history_item_ids: ["history_item_ids"]
      *     })
      */
     public async download(
-        request: ElevenLabs.BodyDownloadHistoryItemsV1HistoryDownloadPost,
+        request: ElevenLabs.DownloadHistoryRequest,
         requestOptions?: History.RequestOptions
     ): Promise<void> {
         const _response = await core.fetcher({
@@ -291,12 +308,12 @@ export class History {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
