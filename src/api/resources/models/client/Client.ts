@@ -11,7 +11,7 @@ import * as errors from "../../../../errors";
 export declare namespace Models {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
-        xiApiKey?: core.Supplier<string | undefined>;
+        apiKey?: core.Supplier<string | undefined>;
     }
 
     interface RequestOptions {
@@ -20,9 +20,6 @@ export declare namespace Models {
     }
 }
 
-/**
- * Access the different models of the platform.
- */
 export class Models {
     constructor(protected readonly _options: Models.Options = {}) {}
 
@@ -33,7 +30,7 @@ export class Models {
      * @example
      *     await elevenLabs.models.getAll()
      */
-    public async getAll(requestOptions?: Models.RequestOptions): Promise<ElevenLabs.ModelResponse[]> {
+    public async getAll(requestOptions?: Models.RequestOptions): Promise<ElevenLabs.Model[]> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -42,12 +39,12 @@ export class Models {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.xiApiKey)) != null
-                        ? await core.Supplier.get(this._options.xiApiKey)
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.1.6",
+                "X-Fern-SDK-Version": "0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -56,7 +53,7 @@ export class Models {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.ModelResponse[];
+            return _response.body as ElevenLabs.Model[];
         }
 
         if (_response.error.reason === "status-code") {

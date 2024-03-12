@@ -3,7 +3,7 @@
  */
 
 export const ElevenLabsEnvironment = {
-    Production: "https://api.elevenlabs.io/",
+    Production: "https://api.elevenlabs.io",
 } as const;
 
 export type ElevenLabsEnvironment = typeof ElevenLabsEnvironment.Production;

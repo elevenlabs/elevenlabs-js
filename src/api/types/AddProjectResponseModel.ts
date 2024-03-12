@@ -5,5 +5,5 @@
 import * as ElevenLabs from "..";
 
 export interface AddProjectResponseModel {
-    project: ElevenLabs.ProjectResponseModel;
+    project: ElevenLabs.ProjectResponse;
 }

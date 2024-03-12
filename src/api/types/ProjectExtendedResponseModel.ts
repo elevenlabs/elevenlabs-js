@@ -11,8 +11,8 @@ export interface ProjectExtendedResponseModel {
     default_title_voice_id: string;
     default_paragraph_voice_id: string;
     default_model_id: string;
+    last_conversion_date_unix: number;
     can_be_downloaded: boolean;
     state: ElevenLabs.ProjectState;
-    chapters: ElevenLabs.ChapterResponseModel[];
-    last_conversion_date_unix?: number;
+    chapters: ElevenLabs.ChapterResponse[];
 }
