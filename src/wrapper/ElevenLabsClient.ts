@@ -13,9 +13,9 @@ export declare namespace ElevenLabsClient {
         apiKey?: core.Supplier<string>;
     }
 
-    interface GeneratAudioBulk extends ElevenLabs.BodyTextToSpeechV1TextToSpeechVoiceIdPost {}
+    interface GeneratAudioBulk extends ElevenLabs.TextToSpeechRequest {}
 
-    interface GenerateAudioStream extends ElevenLabs.BodyTextToSpeechV1TextToSpeechVoiceIdStreamPost {
+    interface GenerateAudioStream extends ElevenLabs.TextToSpeechAsStreamRequest {
         /* Specify stream: true if you would like to get the audio in chunks */
         stream: true;
     }
@@ -30,7 +30,7 @@ export class ElevenLabsClient extends FernClient {
             });
         }
         super({
-            xiApiKey: apiKey,
+            apiKey,
         });
     }
 
