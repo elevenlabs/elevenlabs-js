@@ -36,17 +36,47 @@ export class AudioNative {
     ): Promise<ElevenLabs.AudioNativeCreateProjectResponseModel> {
         const _request = new FormData();
         _request.append("name", request.name);
-        _request.append("image", request.image);
-        _request.append("author", request.author);
-        _request.append("title", request.title);
-        _request.append("small", request.small.toString());
-        _request.append("text_color", request.text_color);
-        _request.append("background_color", request.background_color);
-        _request.append("sessionization", request.sessionization.toString());
-        _request.append("voice_id", request.voice_id);
-        _request.append("model_id", request.model_id);
+        if (request.image != null) {
+            _request.append("image", request.image);
+        }
+
+        if (request.author != null) {
+            _request.append("author", request.author);
+        }
+
+        if (request.title != null) {
+            _request.append("title", request.title);
+        }
+
+        if (request.small != null) {
+            _request.append("small", request.small.toString());
+        }
+
+        if (request.text_color != null) {
+            _request.append("text_color", request.text_color);
+        }
+
+        if (request.background_color != null) {
+            _request.append("background_color", request.background_color);
+        }
+
+        if (request.sessionization != null) {
+            _request.append("sessionization", request.sessionization.toString());
+        }
+
+        if (request.voice_id != null) {
+            _request.append("voice_id", request.voice_id);
+        }
+
+        if (request.model_id != null) {
+            _request.append("model_id", request.model_id);
+        }
+
         _request.append("file", file);
-        _request.append("auto_convert", request.auto_convert.toString());
+        if (request.auto_convert != null) {
+            _request.append("auto_convert", request.auto_convert.toString());
+        }
+
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -60,7 +90,7 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

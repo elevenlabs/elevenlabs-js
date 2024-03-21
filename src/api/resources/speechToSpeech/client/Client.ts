@@ -42,8 +42,14 @@ export class SpeechToSpeech {
 
         const _request = new FormData();
         _request.append("audio", audio);
-        _request.append("model_id", request.model_id);
-        _request.append("voice_settings", request.voice_settings);
+        if (request.model_id != null) {
+            _request.append("model_id", request.model_id);
+        }
+
+        if (request.voice_settings != null) {
+            _request.append("voice_settings", request.voice_settings);
+        }
+
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -57,7 +63,7 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -110,8 +116,14 @@ export class SpeechToSpeech {
 
         const _request = new FormData();
         _request.append("audio", audio);
-        _request.append("model_id", request.model_id);
-        _request.append("voice_settings", request.voice_settings);
+        if (request.model_id != null) {
+            _request.append("model_id", request.model_id);
+        }
+
+        if (request.voice_settings != null) {
+            _request.append("voice_settings", request.voice_settings);
+        }
+
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -125,7 +137,7 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

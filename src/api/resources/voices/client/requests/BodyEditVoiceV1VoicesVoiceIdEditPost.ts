@@ -6,7 +6,7 @@ export interface BodyEditVoiceV1VoicesVoiceIdEditPost {
     /** The name that identifies this voice. This will be displayed in the dropdown of the website. */
     name: string;
     /** How would you describe the voice? */
-    description: string;
+    description?: string;
     /** Serialized labels dictionary for the voice. */
-    labels: string;
+    labels?: string;
 }

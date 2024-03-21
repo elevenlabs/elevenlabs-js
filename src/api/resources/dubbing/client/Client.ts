@@ -38,7 +38,10 @@ export class Dubbing {
         requestOptions?: Dubbing.RequestOptions
     ): Promise<ElevenLabs.DoDubbingResponse> {
         const _request = new FormData();
-        _request.append("mode", request.mode);
+        if (request.mode != null) {
+            _request.append("mode", request.mode);
+        }
+
         if (file != null) {
             _request.append("file", file);
         }
@@ -55,16 +58,43 @@ export class Dubbing {
             _request.append("background_audio_file", backgroundAudioFile);
         }
 
-        _request.append("name", request.name);
-        _request.append("source_url", request.source_url);
-        _request.append("source_lang", request.source_lang);
+        if (request.name != null) {
+            _request.append("name", request.name);
+        }
+
+        if (request.source_url != null) {
+            _request.append("source_url", request.source_url);
+        }
+
+        if (request.source_lang != null) {
+            _request.append("source_lang", request.source_lang);
+        }
+
         _request.append("target_lang", request.target_lang);
-        _request.append("num_speakers", request.num_speakers.toString());
-        _request.append("watermark", request.watermark.toString());
-        _request.append("start_time", request.start_time.toString());
-        _request.append("end_time", request.end_time.toString());
-        _request.append("highest_resolution", request.highest_resolution.toString());
-        _request.append("dubbing_studio", request.dubbing_studio.toString());
+        if (request.num_speakers != null) {
+            _request.append("num_speakers", request.num_speakers.toString());
+        }
+
+        if (request.watermark != null) {
+            _request.append("watermark", request.watermark.toString());
+        }
+
+        if (request.start_time != null) {
+            _request.append("start_time", request.start_time.toString());
+        }
+
+        if (request.end_time != null) {
+            _request.append("end_time", request.end_time.toString());
+        }
+
+        if (request.highest_resolution != null) {
+            _request.append("highest_resolution", request.highest_resolution.toString());
+        }
+
+        if (request.dubbing_studio != null) {
+            _request.append("dubbing_studio", request.dubbing_studio.toString());
+        }
+
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -78,7 +108,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -144,7 +174,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -206,7 +236,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -272,7 +302,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

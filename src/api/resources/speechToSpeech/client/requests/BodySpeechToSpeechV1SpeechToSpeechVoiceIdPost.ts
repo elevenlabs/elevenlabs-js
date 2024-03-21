@@ -15,7 +15,7 @@ export interface BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost {
      */
     optimize_streaming_latency?: number;
     /** Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for speech to speech, you can check this using the can_do_voice_conversion property. */
-    model_id: string;
+    model_id?: string;
     /** Voice settings overriding stored setttings for the given voice. They are applied only on the given request. Needs to be send as a JSON encoded string. */
-    voice_settings: string;
+    voice_settings?: string;
 }
