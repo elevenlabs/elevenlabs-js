@@ -6,5 +6,5 @@ export interface BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFr
     /** The name of the pronunciation dictionary, used for identification only. */
     name: string;
     /** A description of the pronunciation dictionary, used for identification only. */
-    description: string;
+    description?: string;
 }

@@ -46,7 +46,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -98,7 +98,10 @@ export class Projects {
     ): Promise<ElevenLabs.AddProjectResponseModel> {
         const _request = new FormData();
         _request.append("name", request.name);
-        _request.append("from_url", request.from_url);
+        if (request.from_url != null) {
+            _request.append("from_url", request.from_url);
+        }
+
         if (fromDocument != null) {
             _request.append("from_document", fromDocument);
         }
@@ -106,17 +109,38 @@ export class Projects {
         _request.append("default_title_voice_id", request.default_title_voice_id);
         _request.append("default_paragraph_voice_id", request.default_paragraph_voice_id);
         _request.append("default_model_id", request.default_model_id);
-        _request.append("quality_preset", request.quality_preset);
-        _request.append("title", request.title);
-        _request.append("author", request.author);
-        _request.append("isbn_number", request.isbn_number);
-        _request.append("acx_volume_normalization", request.acx_volume_normalization.toString());
-        _request.append("volume_normalization", request.volume_normalization.toString());
+        if (request.quality_preset != null) {
+            _request.append("quality_preset", request.quality_preset);
+        }
+
+        if (request.title != null) {
+            _request.append("title", request.title);
+        }
+
+        if (request.author != null) {
+            _request.append("author", request.author);
+        }
+
+        if (request.isbn_number != null) {
+            _request.append("isbn_number", request.isbn_number);
+        }
+
+        if (request.acx_volume_normalization != null) {
+            _request.append("acx_volume_normalization", request.acx_volume_normalization.toString());
+        }
+
+        if (request.volume_normalization != null) {
+            _request.append("volume_normalization", request.volume_normalization.toString());
+        }
+
         for (const _item of request.pronunciation_dictionary_locators) {
             _request.append("pronunciation_dictionary_locators", _item);
         }
 
-        _request.append("callback_url", request.callback_url);
+        if (request.callback_url != null) {
+            _request.append("callback_url", request.callback_url);
+        }
+
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -130,7 +154,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -196,7 +220,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -258,7 +282,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -320,7 +344,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -385,7 +409,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -451,7 +475,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -522,7 +546,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
