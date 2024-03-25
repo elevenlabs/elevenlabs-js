@@ -68,7 +68,7 @@ export class ElevenLabsClient extends FernClient {
             });
         }
         if (isGenerateAudioStream(request)) {
-            return await this.textToSpeech.convert(voiceId, request, requestOptions);
+            return await this.textToSpeech.convertAsStream(voiceId, request, requestOptions);
         } else {
             return await this.textToSpeech.convert(voiceId, request, requestOptions);
         }
