@@ -11,7 +11,7 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     source_url?: string;
     /** Source language. */
     source_lang?: string;
-    /** Target language. */
+    /** The Target language to dub the content into. Can be none if dubbing studio editor is enabled and running manual mode */
     target_lang: string;
     /** Number of speakers to use for the dubbing. */
     num_speakers?: number;

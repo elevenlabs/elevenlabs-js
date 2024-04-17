@@ -18,6 +18,7 @@ export interface BodyAddProjectV1ProjectsAddPost {
      * standard - standard output format, 128kbps with 44.1kHz sample rate.
      * high - high quality output format, 192kbps with 44.1kHz sample rate and major improvements on our side. Using this setting increases the character cost by 20%.
      * ultra - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side. Using this setting increases the character cost by 50%.
+     * ultra lossless - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format. Using this setting increases the character cost by 100%.
      *
      */
     quality_preset?: string;
