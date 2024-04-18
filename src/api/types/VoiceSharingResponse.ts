@@ -18,11 +18,9 @@ export interface VoiceSharingResponse {
     notice_period?: number;
     disable_at_unix?: number;
     voice_mixing_allowed?: boolean;
-    instagram_username?: string;
-    twitter_username?: string;
-    youtube_username?: string;
-    tiktok_username?: string;
     featured?: boolean;
+    category?: ElevenLabs.Category;
+    reader_app_enabled?: boolean;
     ban_reason?: string;
     liked_by_count?: number;
     cloned_by_count?: number;
@@ -32,4 +30,8 @@ export interface VoiceSharingResponse {
     review_status?: ElevenLabs.ReviewStatus;
     review_message?: string;
     enabled_in_library?: boolean;
+    instagram_username?: string;
+    twitter_username?: string;
+    youtube_username?: string;
+    tiktok_username?: string;
 }

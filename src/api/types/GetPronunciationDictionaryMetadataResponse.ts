@@ -4,6 +4,7 @@
 
 export interface GetPronunciationDictionaryMetadataResponse {
     id: string;
+    latest_version_id: string;
     name: string;
     created_by: string;
     creation_time_unix: number;

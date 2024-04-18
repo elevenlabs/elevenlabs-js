@@ -40,6 +40,10 @@ export class SpeechToSpeech {
             _queryParams["optimize_streaming_latency"] = request.optimize_streaming_latency.toString();
         }
 
+        if (request.output_format != null) {
+            _queryParams["output_format"] = request.output_format;
+        }
+
         const _request = new FormData();
         _request.append("audio", audio);
         if (request.model_id != null) {
@@ -63,7 +67,7 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.1.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -114,6 +118,10 @@ export class SpeechToSpeech {
             _queryParams["optimize_streaming_latency"] = request.optimize_streaming_latency.toString();
         }
 
+        if (request.output_format != null) {
+            _queryParams["output_format"] = request.output_format;
+        }
+
         const _request = new FormData();
         _request.append("audio", audio);
         if (request.model_id != null) {
@@ -137,7 +145,7 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.1.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

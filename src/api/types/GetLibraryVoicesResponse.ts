@@ -6,6 +6,6 @@ import * as ElevenLabs from "..";
 
 export interface GetLibraryVoicesResponse {
     voices: ElevenLabs.LibraryVoiceResponse[];
-    last_sort_id: string;
     has_more: boolean;
+    last_sort_id?: string;
 }

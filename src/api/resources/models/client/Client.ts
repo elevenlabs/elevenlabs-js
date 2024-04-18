@@ -20,6 +20,9 @@ export declare namespace Models {
     }
 }
 
+/**
+ * Access the different models of the platform.
+ */
 export class Models {
     constructor(protected readonly _options: Models.Options = {}) {}
 
@@ -44,7 +47,7 @@ export class Models {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.1.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
