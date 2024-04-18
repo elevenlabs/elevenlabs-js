@@ -4,9 +4,9 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as ElevenLabs from "../../..";
+import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
-import * as errors from "../../../../errors";
+import * as errors from "../../../../errors/index";
 import * as fs from "fs";
 import { default as FormData } from "form-data";
 
@@ -49,7 +49,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -110,7 +110,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -150,6 +150,9 @@ export class Voices {
      *
      * @example
      *     await elevenLabs.voices.getSettings("voice_id")
+     *
+     * @example
+     *     await elevenLabs.voices.getSettings("string")
      */
     public async getSettings(
         voiceId: string,
@@ -168,7 +171,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -215,6 +218,11 @@ export class Voices {
      *
      * @example
      *     await elevenLabs.voices.get("voice_id")
+     *
+     * @example
+     *     await elevenLabs.voices.get("string", {
+     *         with_settings: true
+     *     })
      */
     public async get(
         voiceId: string,
@@ -240,7 +248,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -288,6 +296,9 @@ export class Voices {
      *
      * @example
      *     await elevenLabs.voices.delete("voice_id")
+     *
+     * @example
+     *     await elevenLabs.voices.delete("string")
      */
     public async delete(voiceId: string, requestOptions?: Voices.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -303,7 +314,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -350,6 +361,9 @@ export class Voices {
      *
      * @example
      *     await elevenLabs.voices.editSettings("voice_id", {})
+     *
+     * @example
+     *     await elevenLabs.voices.editSettings("string", {})
      */
     public async editSettings(
         voiceId: string,
@@ -369,7 +383,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -414,6 +428,11 @@ export class Voices {
     /**
      * Add a new voice to your collection of voices in VoiceLab.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.voices.add(fs.createReadStream("/path/to/your/file"), {
+     *         name: "name"
+     *     })
      */
     public async add(
         files: File | fs.ReadStream,
@@ -444,7 +463,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -489,6 +508,16 @@ export class Voices {
     /**
      * Edit a voice created by you.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.voices.edit(fs.createReadStream("/path/to/your/file"), "voice_id", {
+     *         name: "name"
+     *     })
+     *
+     * @example
+     *     await elevenLabs.voices.edit(fs.createReadStream("/path/to/your/file"), "string", {
+     *         name: "name"
+     *     })
      */
     public async edit(
         files: File | fs.ReadStream | undefined,
@@ -523,7 +552,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -573,6 +602,11 @@ export class Voices {
      *     await elevenLabs.voices.addSharingVoice("public_user_id", "voice_id", {
      *         new_name: "new_name"
      *     })
+     *
+     * @example
+     *     await elevenLabs.voices.addSharingVoice("string", "string", {
+     *         new_name: "new_name"
+     *     })
      */
     public async addSharingVoice(
         publicUserId: string,
@@ -593,7 +627,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -641,6 +675,24 @@ export class Voices {
      *
      * @example
      *     await elevenLabs.voices.getShared()
+     *
+     * @example
+     *     await elevenLabs.voices.getShared({
+     *         page_size: 1,
+     *         category: "string",
+     *         gender: "string",
+     *         age: "string",
+     *         accent: "string",
+     *         language: "string",
+     *         search: "string",
+     *         use_cases: "string",
+     *         descriptives: "string",
+     *         featured: true,
+     *         reader_app_enabled: true,
+     *         owner_id: "string",
+     *         sort: "string",
+     *         page: 1
+     *     })
      */
     public async getShared(
         request: ElevenLabs.VoicesGetSharedRequest = {},
@@ -740,7 +792,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

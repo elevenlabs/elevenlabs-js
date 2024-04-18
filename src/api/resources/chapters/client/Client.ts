@@ -4,9 +4,9 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as ElevenLabs from "../../..";
+import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
-import * as errors from "../../../../errors";
+import * as errors from "../../../../errors/index";
 
 export declare namespace Chapters {
     interface Options {
@@ -29,6 +29,9 @@ export class Chapters {
      *
      * @example
      *     await elevenLabs.chapters.getAll("project_id")
+     *
+     * @example
+     *     await elevenLabs.chapters.getAll("string")
      */
     public async getAll(
         projectId: string,
@@ -47,7 +50,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -94,6 +97,9 @@ export class Chapters {
      *
      * @example
      *     await elevenLabs.chapters.get("project_id", "chapter_id")
+     *
+     * @example
+     *     await elevenLabs.chapters.get("string", "string")
      */
     public async get(
         projectId: string,
@@ -113,7 +119,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -160,6 +166,9 @@ export class Chapters {
      *
      * @example
      *     await elevenLabs.chapters.delete("project_id", "chapter_id")
+     *
+     * @example
+     *     await elevenLabs.chapters.delete("string", "string")
      */
     public async delete(
         projectId: string,
@@ -179,7 +188,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -226,6 +235,9 @@ export class Chapters {
      *
      * @example
      *     await elevenLabs.chapters.convert("project_id", "chapter_id")
+     *
+     * @example
+     *     await elevenLabs.chapters.convert("string", "string")
      */
     public async convert(
         projectId: string,
@@ -245,7 +257,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -292,6 +304,9 @@ export class Chapters {
      *
      * @example
      *     await elevenLabs.chapters.getAllSnapshots("project_id", "chapter_id")
+     *
+     * @example
+     *     await elevenLabs.chapters.getAllSnapshots("string", "string")
      */
     public async getAllSnapshots(
         projectId: string,
@@ -311,7 +326,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -358,6 +373,9 @@ export class Chapters {
      *
      * @example
      *     await elevenLabs.chapters.streamSnapshot("project_id", "chapter_id", "chapter_snapshot_id")
+     *
+     * @example
+     *     await elevenLabs.chapters.streamSnapshot("string", "string", "string")
      */
     public async streamSnapshot(
         projectId: string,
@@ -379,7 +397,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.3.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

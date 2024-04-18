@@ -5,6 +5,12 @@
 /**
  * @example
  *     {}
+ *
+ * @example
+ *     {
+ *         optimize_streaming_latency: 1,
+ *         output_format: "string"
+ *     }
  */
 export interface BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost {
     /**

@@ -5,6 +5,20 @@
 /**
  * @example
  *     {}
+ *
+ * @example
+ *     {
+ *         page_size: 1,
+ *         start_after_history_item_id: "string",
+ *         voice_id: "string"
+ *     }
+ *
+ * @example
+ *     {
+ *         page_size: 1,
+ *         start_after_history_item_id: "string",
+ *         voice_id: "string"
+ *     }
  */
 export interface HistoryGetAllRequest {
     /**
