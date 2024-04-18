@@ -6,9 +6,9 @@
  * @example
  *     {}
  */
-export interface VoicesGetVoicesRequest {
+export interface VoicesGetSharedRequest {
     /**
-     * How many shared voices to return at maximum. Can not exceed 500, defaults to 30.
+     * How many shared voices to return at maximum. Can not exceed 100, defaults to 30.
      */
     page_size?: number;
     /**
@@ -28,6 +28,10 @@ export interface VoicesGetVoicesRequest {
      */
     accent?: string;
     /**
+     * language used for filtering
+     */
+    language?: string;
+    /**
      * search term used for filtering
      */
     search?: string;
@@ -40,12 +44,20 @@ export interface VoicesGetVoicesRequest {
      */
     descriptives?: string | string[];
     /**
-     * sort criteria
-     */
-    sort?: string;
-    /**
      * Filter featured voices
      */
     featured?: boolean;
+    /**
+     * Filter voices that are enabled for the reader app
+     */
+    reader_app_enabled?: boolean;
+    /**
+     * Filter voices by public owner ID
+     */
+    owner_id?: string;
+    /**
+     * sort criteria
+     */
+    sort?: string;
     page?: number;
 }

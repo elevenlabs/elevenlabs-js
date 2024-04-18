@@ -35,7 +35,7 @@ export class TextToSpeech {
         const { optimize_streaming_latency: optimizeStreamingLatency, output_format: outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
         }
 
         if (outputFormat != null) {
@@ -55,7 +55,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.2.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -103,7 +103,7 @@ export class TextToSpeech {
         const { optimize_streaming_latency: optimizeStreamingLatency, output_format: outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
         }
 
         if (outputFormat != null) {
@@ -123,7 +123,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.2.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

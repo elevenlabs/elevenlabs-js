@@ -57,7 +57,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.2.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -100,13 +100,217 @@ export class PronunciationDictionary {
     }
 
     /**
+     * Add rules to the pronunciation dictionary
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.pronunciationDictionary.addRulesToThePronunciationDictionary("pronunciation_dictionary_id", {
+     *         rules: []
+     *     })
+     */
+    public async addRulesToThePronunciationDictionary(
+        pronunciationDictionaryId: string,
+        request: ElevenLabs.BodyAddRulesToThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdAddRulesPost,
+        requestOptions?: PronunciationDictionary.RequestOptions
+    ): Promise<ElevenLabs.AddPronunciationDictionaryRulesResponseModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
+                `v1/pronunciation-dictionaries/${pronunciationDictionaryId}/add-rules`
+            ),
+            method: "POST",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "v0.2.3",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.AddPronunciationDictionaryRulesResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError();
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Remove rules from the pronunciation dictionary
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.pronunciationDictionary.removeRulesFromThePronunciationDictionary("pronunciation_dictionary_id", {
+     *         rule_strings: ["rule_strings"]
+     *     })
+     */
+    public async removeRulesFromThePronunciationDictionary(
+        pronunciationDictionaryId: string,
+        request: ElevenLabs.BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost,
+        requestOptions?: PronunciationDictionary.RequestOptions
+    ): Promise<ElevenLabs.RemovePronunciationDictionaryRulesResponseModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
+                `v1/pronunciation-dictionaries/${pronunciationDictionaryId}/remove-rules`
+            ),
+            method: "POST",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "v0.2.3",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.RemovePronunciationDictionaryRulesResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError();
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Get PLS file with a pronunciation dictionary version rules
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.pronunciationDictionary.getPlsFileWithAPronunciationDictionaryVersionRules("dictionary_id", "version_id")
+     */
+    public async getPlsFileWithAPronunciationDictionaryVersionRules(
+        dictionaryId: string,
+        versionId: string,
+        requestOptions?: PronunciationDictionary.RequestOptions
+    ): Promise<unknown> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
+                `v1/pronunciation-dictionaries/${dictionaryId}/${versionId}/download`
+            ),
+            method: "GET",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "v0.2.3",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError();
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
      * Get metadata for a pronunciation dictionary
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.pronunciationDictionary.getMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet("pronunciation_dictionary_id")
+     *     await elevenLabs.pronunciationDictionary.get("pronunciation_dictionary_id")
      */
-    public async getMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet(
+    public async get(
         pronunciationDictionaryId: string,
         requestOptions?: PronunciationDictionary.RequestOptions
     ): Promise<ElevenLabs.GetPronunciationDictionaryMetadataResponse> {
@@ -123,7 +327,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.2.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -133,6 +337,82 @@ export class PronunciationDictionary {
         });
         if (_response.ok) {
             return _response.body as ElevenLabs.GetPronunciationDictionaryMetadataResponse;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError();
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Get a list of the pronunciation dictionaries you have access to and their metadata
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.pronunciationDictionary.getAll()
+     */
+    public async getAll(
+        request: ElevenLabs.PronunciationDictionaryGetAllRequest = {},
+        requestOptions?: PronunciationDictionary.RequestOptions
+    ): Promise<ElevenLabs.GetPronunciationDictionariesMetadataResponseModel> {
+        const { cursor, page_size: pageSize } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (cursor != null) {
+            _queryParams["cursor"] = cursor;
+        }
+
+        if (pageSize != null) {
+            _queryParams["page_size"] = pageSize.toString();
+        }
+
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
+                "v1/pronunciation-dictionaries"
+            ),
+            method: "GET",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "v0.2.3",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.GetPronunciationDictionariesMetadataResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
