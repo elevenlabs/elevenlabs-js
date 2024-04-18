@@ -7,6 +7,16 @@
  *     {
  *         name: "name"
  *     }
+ *
+ * @example
+ *     {
+ *         name: "name"
+ *     }
+ *
+ * @example
+ *     {
+ *         name: "name"
+ *     }
  */
 export interface BodyCreatesAudioNativeEnabledProjectV1AudioNativePost {
     /** Project name. */

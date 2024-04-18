@@ -7,6 +7,16 @@
  *     {
  *         name: "name"
  *     }
+ *
+ * @example
+ *     {
+ *         name: "name"
+ *     }
+ *
+ * @example
+ *     {
+ *         name: "name"
+ *     }
  */
 export interface BodyAddVoiceV1VoicesAddPost {
     /** The name that identifies this voice. This will be displayed in the dropdown of the website. */

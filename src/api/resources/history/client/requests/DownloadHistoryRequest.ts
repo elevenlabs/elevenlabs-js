@@ -7,6 +7,16 @@
  *     {
  *         history_item_ids: ["history_item_ids"]
  *     }
+ *
+ * @example
+ *     {
+ *         history_item_ids: ["history_item_ids"]
+ *     }
+ *
+ * @example
+ *     {
+ *         history_item_ids: ["history_item_ids"]
+ *     }
  */
 export interface DownloadHistoryRequest {
     /** A list of history items to download, you can get IDs of history items and other metadata using the GET https://api.elevenlabs.io/v1/history endpoint. */

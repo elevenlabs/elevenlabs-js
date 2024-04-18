@@ -5,6 +5,16 @@
 /**
  * @example
  *     {}
+ *
+ * @example
+ *     {
+ *         with_settings: true
+ *     }
+ *
+ * @example
+ *     {
+ *         with_settings: true
+ *     }
  */
 export interface VoicesGetRequest {
     /**
