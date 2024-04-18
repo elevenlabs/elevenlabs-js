@@ -19,4 +19,6 @@ export interface Voice {
     high_quality_base_model_ids?: string[];
     safety_control?: ElevenLabs.VoiceResponseModelSafetyControl;
     voice_verification?: ElevenLabs.VoiceVerificationResponse;
+    owner_id?: string;
+    permission_on_resource?: string;
 }

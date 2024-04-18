@@ -22,10 +22,10 @@ export interface LibraryVoiceResponse {
     rate: number;
     free_users_allowed: boolean;
     live_moderation_enabled: boolean;
-    notice_period: number;
-    instagram_username: string;
-    twitter_username: string;
-    youtube_username: string;
-    tiktok_username: string;
     featured: boolean;
+    notice_period?: number;
+    instagram_username?: string;
+    twitter_username?: string;
+    youtube_username?: string;
+    tiktok_username?: string;
 }
