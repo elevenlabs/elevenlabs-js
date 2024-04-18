@@ -4,6 +4,16 @@
 
 import * as ElevenLabs from "../../../..";
 
+/**
+ * @example
+ *     {
+ *         gender: ElevenLabs.Gender.Male,
+ *         accent: "accent",
+ *         age: ElevenLabs.Age.Young,
+ *         accent_strength: 1.1,
+ *         text: "text"
+ *     }
+ */
 export interface GenerateVoiceRequest {
     /** Category code corresponding to the gender of the generated voice. Possible values: female, male. */
     gender: ElevenLabs.Gender;

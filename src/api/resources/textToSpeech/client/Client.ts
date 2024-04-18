@@ -34,14 +34,8 @@ export class TextToSpeech {
     ): Promise<stream.Readable> {
         const { optimize_streaming_latency: optimizeStreamingLatency, output_format: outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
-        if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
-        }
-
-        if (outputFormat != null) {
-            _queryParams["output_format"] = outputFormat;
-        }
-
+        _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+        _queryParams["output_format"] = outputFormat;
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -55,7 +49,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.2.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -102,14 +96,8 @@ export class TextToSpeech {
     ): Promise<stream.Readable> {
         const { optimize_streaming_latency: optimizeStreamingLatency, output_format: outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
-        if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
-        }
-
-        if (outputFormat != null) {
-            _queryParams["output_format"] = outputFormat;
-        }
-
+        _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+        _queryParams["output_format"] = outputFormat;
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -123,7 +111,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.2.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

@@ -20,6 +20,9 @@ export declare namespace Samples {
     }
 }
 
+/**
+ * Access to your samples. A sample is any audio file you attached to a voice. A voice can have one or more samples.
+ */
 export class Samples {
     constructor(protected readonly _options: Samples.Options = {}) {}
 
@@ -44,7 +47,7 @@ export class Samples {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.2.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -106,7 +109,7 @@ export class Samples {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.2.2",
+                "X-Fern-SDK-Version": "v0.2.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
