@@ -5,10 +5,10 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as fs from "fs";
-import * as ElevenLabs from "../../..";
+import * as ElevenLabs from "../../../index";
 import { default as FormData } from "form-data";
 import urlJoin from "url-join";
-import * as errors from "../../../../errors";
+import * as errors from "../../../../errors/index";
 
 export declare namespace AudioNative {
     interface Options {
@@ -28,6 +28,11 @@ export class AudioNative {
     /**
      * Creates AudioNative enabled project, optionally starts conversion and returns project id and embeddable html snippet.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.audioNative.create(fs.createReadStream("/path/to/your/file"), {
+     *         name: "name"
+     *     })
      */
     public async create(
         file: File | fs.ReadStream,
@@ -90,7 +95,7 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

@@ -4,9 +4,9 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as ElevenLabs from "../../..";
+import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
-import * as errors from "../../../../errors";
+import * as errors from "../../../../errors/index";
 import * as fs from "fs";
 import { default as FormData } from "form-data";
 
@@ -49,7 +49,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -93,6 +93,15 @@ export class Projects {
     /**
      * Creates a new project, it can be either initialized as blank, from a document or from a URL.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.projects.add(fs.createReadStream("/path/to/your/file"), {
+     *         name: "name",
+     *         default_title_voice_id: "default_title_voice_id",
+     *         default_paragraph_voice_id: "default_paragraph_voice_id",
+     *         default_model_id: "default_model_id",
+     *         pronunciation_dictionary_locators: ["pronunciation_dictionary_locators"]
+     *     })
      */
     public async add(
         fromDocument: File | fs.ReadStream | undefined,
@@ -157,7 +166,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -205,6 +214,9 @@ export class Projects {
      *
      * @example
      *     await elevenLabs.projects.get("project_id")
+     *
+     * @example
+     *     await elevenLabs.projects.get("string")
      */
     public async get(
         projectId: string,
@@ -223,7 +235,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -270,6 +282,9 @@ export class Projects {
      *
      * @example
      *     await elevenLabs.projects.delete("project_id")
+     *
+     * @example
+     *     await elevenLabs.projects.delete("string")
      */
     public async delete(projectId: string, requestOptions?: Projects.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -285,7 +300,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -332,6 +347,9 @@ export class Projects {
      *
      * @example
      *     await elevenLabs.projects.convert("project_id")
+     *
+     * @example
+     *     await elevenLabs.projects.convert("string")
      */
     public async convert(projectId: string, requestOptions?: Projects.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -347,7 +365,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -394,6 +412,9 @@ export class Projects {
      *
      * @example
      *     await elevenLabs.projects.getSnapshots("project_id")
+     *
+     * @example
+     *     await elevenLabs.projects.getSnapshots("string")
      */
     public async getSnapshots(
         projectId: string,
@@ -412,7 +433,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -459,6 +480,9 @@ export class Projects {
      *
      * @example
      *     await elevenLabs.projects.streamAudio("project_id", "project_snapshot_id")
+     *
+     * @example
+     *     await elevenLabs.projects.streamAudio("string", "string")
      */
     public async streamAudio(
         projectId: string,
@@ -479,7 +503,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -527,6 +551,9 @@ export class Projects {
      *
      * @example
      *     await elevenLabs.projects.streamArchive("project_id", "project_snapshot_id")
+     *
+     * @example
+     *     await elevenLabs.projects.streamArchive("string", "string")
      */
     public async streamArchive(
         projectId: string,
@@ -546,7 +573,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -598,6 +625,14 @@ export class Projects {
      *                 version_id: "version_id"
      *             }]
      *     })
+     *
+     * @example
+     *     await elevenLabs.projects.updatePronunciationDictionaries("string", {
+     *         pronunciation_dictionary_locators: [{
+     *                 pronunciation_dictionary_id: "pronunciation_dictionary_id",
+     *                 version_id: "version_id"
+     *             }]
+     *     })
      */
     public async updatePronunciationDictionaries(
         projectId: string,
@@ -617,7 +652,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

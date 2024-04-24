@@ -4,10 +4,10 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as ElevenLabs from "../../..";
+import * as ElevenLabs from "../../../index";
 import * as stream from "stream";
 import urlJoin from "url-join";
-import * as errors from "../../../../errors";
+import * as errors from "../../../../errors/index";
 
 export declare namespace TextToSpeech {
     interface Options {
@@ -26,6 +26,7 @@ export class TextToSpeech {
 
     /**
      * Converts text into speech using a voice of your choice and returns audio.
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async convert(
         voiceId: string,
@@ -55,7 +56,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -71,10 +72,17 @@ export class TextToSpeech {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.ElevenLabsError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-            });
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
         }
 
         switch (_response.error.reason) {
@@ -94,6 +102,7 @@ export class TextToSpeech {
 
     /**
      * Converts text into speech using a voice of your choice and returns audio as an audio stream.
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async convertAsStream(
         voiceId: string,
@@ -123,7 +132,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -139,10 +148,17 @@ export class TextToSpeech {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.ElevenLabsError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-            });
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
         }
 
         switch (_response.error.reason) {

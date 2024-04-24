@@ -7,6 +7,16 @@
  *     {
  *         new_name: "new_name"
  *     }
+ *
+ * @example
+ *     {
+ *         new_name: "new_name"
+ *     }
+ *
+ * @example
+ *     {
+ *         new_name: "new_name"
+ *     }
  */
 export interface AddSharingVoiceRequest {
     /** The name that identifies this voice. This will be displayed in the dropdown of the website. */

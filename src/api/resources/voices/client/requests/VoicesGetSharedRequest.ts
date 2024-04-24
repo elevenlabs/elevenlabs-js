@@ -5,6 +5,42 @@
 /**
  * @example
  *     {}
+ *
+ * @example
+ *     {
+ *         page_size: 1,
+ *         category: "string",
+ *         gender: "string",
+ *         age: "string",
+ *         accent: "string",
+ *         language: "string",
+ *         search: "string",
+ *         use_cases: "string",
+ *         descriptives: "string",
+ *         featured: true,
+ *         reader_app_enabled: true,
+ *         owner_id: "string",
+ *         sort: "string",
+ *         page: 1
+ *     }
+ *
+ * @example
+ *     {
+ *         page_size: 1,
+ *         category: "string",
+ *         gender: "string",
+ *         age: "string",
+ *         accent: "string",
+ *         language: "string",
+ *         search: "string",
+ *         use_cases: "string",
+ *         descriptives: "string",
+ *         featured: true,
+ *         reader_app_enabled: true,
+ *         owner_id: "string",
+ *         sort: "string",
+ *         page: 1
+ *     }
  */
 export interface VoicesGetSharedRequest {
     /**

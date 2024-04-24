@@ -5,6 +5,12 @@
 /**
  * @example
  *     {}
+ *
+ * @example
+ *     {}
+ *
+ * @example
+ *     {}
  */
 export interface BodyStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost {
     /** Whether to convert the audio to mpeg format. */

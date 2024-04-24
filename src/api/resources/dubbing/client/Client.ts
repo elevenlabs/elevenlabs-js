@@ -5,10 +5,11 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as fs from "fs";
-import * as ElevenLabs from "../../..";
+import * as ElevenLabs from "../../../index";
 import { default as FormData } from "form-data";
 import urlJoin from "url-join";
-import * as errors from "../../../../errors";
+import * as errors from "../../../../errors/index";
+import * as stream from "stream";
 
 export declare namespace Dubbing {
     interface Options {
@@ -28,6 +29,11 @@ export class Dubbing {
     /**
      * Dubs provided audio or video file into given language.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await elevenLabs.dubbing.dubAVideoOrAnAudioFile(fs.createReadStream("/path/to/your/file"), fs.createReadStream("/path/to/your/file"), fs.createReadStream("/path/to/your/file"), fs.createReadStream("/path/to/your/file"), {
+     *         target_lang: "target_lang"
+     *     })
      */
     public async dubAVideoOrAnAudioFile(
         file: File | fs.ReadStream | undefined,
@@ -108,7 +114,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -156,6 +162,9 @@ export class Dubbing {
      *
      * @example
      *     await elevenLabs.dubbing.getDubbingProjectMetadata("dubbing_id")
+     *
+     * @example
+     *     await elevenLabs.dubbing.getDubbingProjectMetadata("string")
      */
     public async getDubbingProjectMetadata(
         dubbingId: string,
@@ -174,7 +183,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -221,6 +230,9 @@ export class Dubbing {
      *
      * @example
      *     await elevenLabs.dubbing.deleteDubbingProject("dubbing_id")
+     *
+     * @example
+     *     await elevenLabs.dubbing.deleteDubbingProject("string")
      */
     public async deleteDubbingProject(dubbingId: string, requestOptions?: Dubbing.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -236,7 +248,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -280,16 +292,13 @@ export class Dubbing {
     /**
      * Returns dubbed file as a streamed file. Videos will be returned in MP4 format and audio only dubs will be returned in MP3.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await elevenLabs.dubbing.getDubbedFile("dubbing_id", "language_code")
      */
     public async getDubbedFile(
         dubbingId: string,
         languageCode: string,
         requestOptions?: Dubbing.RequestOptions
-    ): Promise<void> {
-        const _response = await core.fetcher({
+    ): Promise<stream.Readable> {
+        const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
                 `v1/dubbing/${dubbingId}/audio/${languageCode}`
@@ -302,16 +311,17 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return;
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {

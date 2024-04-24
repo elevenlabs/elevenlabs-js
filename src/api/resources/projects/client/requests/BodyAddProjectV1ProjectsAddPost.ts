@@ -11,6 +11,24 @@
  *         default_model_id: "default_model_id",
  *         pronunciation_dictionary_locators: ["pronunciation_dictionary_locators"]
  *     }
+ *
+ * @example
+ *     {
+ *         name: "name",
+ *         default_title_voice_id: "default_title_voice_id",
+ *         default_paragraph_voice_id: "default_paragraph_voice_id",
+ *         default_model_id: "default_model_id",
+ *         pronunciation_dictionary_locators: ["pronunciation_dictionary_locators"]
+ *     }
+ *
+ * @example
+ *     {
+ *         name: "name",
+ *         default_title_voice_id: "default_title_voice_id",
+ *         default_paragraph_voice_id: "default_paragraph_voice_id",
+ *         default_model_id: "default_model_id",
+ *         pronunciation_dictionary_locators: ["pronunciation_dictionary_locators"]
+ *     }
  */
 export interface BodyAddProjectV1ProjectsAddPost {
     /** The name of the project, used for identification only. */

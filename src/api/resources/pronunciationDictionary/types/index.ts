@@ -1,1 +1,1 @@
-export * from "./BodyAddRulesToThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdAddRulesPostRulesItem";
+export * from "./PronunciationDictionaryRule";

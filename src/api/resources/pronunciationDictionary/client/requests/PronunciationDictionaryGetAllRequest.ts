@@ -5,6 +5,18 @@
 /**
  * @example
  *     {}
+ *
+ * @example
+ *     {
+ *         cursor: "string",
+ *         page_size: 1
+ *     }
+ *
+ * @example
+ *     {
+ *         cursor: "string",
+ *         page_size: 1
+ *     }
  */
 export interface PronunciationDictionaryGetAllRequest {
     /**

@@ -9,6 +9,20 @@
  *         voice_description: "voice_description",
  *         generated_voice_id: "generated_voice_id"
  *     }
+ *
+ * @example
+ *     {
+ *         voice_name: "voice_name",
+ *         voice_description: "voice_description",
+ *         generated_voice_id: "generated_voice_id"
+ *     }
+ *
+ * @example
+ *     {
+ *         voice_name: "voice_name",
+ *         voice_description: "voice_description",
+ *         generated_voice_id: "generated_voice_id"
+ *     }
  */
 export interface CreatePreviouslyGenertedVoiceRequest {
     /** Name to use for the created voice. */
