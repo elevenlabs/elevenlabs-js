@@ -4,9 +4,9 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as ElevenLabs from "../../..";
+import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
-import * as errors from "../../../../errors";
+import * as errors from "../../../../errors/index";
 import * as stream from "stream";
 
 export declare namespace History {
@@ -30,6 +30,13 @@ export class History {
      *
      * @example
      *     await elevenLabs.history.getAll()
+     *
+     * @example
+     *     await elevenLabs.history.getAll({
+     *         page_size: 1,
+     *         start_after_history_item_id: "string",
+     *         voice_id: "string"
+     *     })
      */
     public async getAll(
         request: ElevenLabs.HistoryGetAllRequest = {},
@@ -66,7 +73,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -114,6 +121,9 @@ export class History {
      *
      * @example
      *     await elevenLabs.history.get("history_item_id")
+     *
+     * @example
+     *     await elevenLabs.history.get("string")
      */
     public async get(
         historyItemId: string,
@@ -132,7 +142,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -179,6 +189,9 @@ export class History {
      *
      * @example
      *     await elevenLabs.history.delete("history_item_id")
+     *
+     * @example
+     *     await elevenLabs.history.delete("string")
      */
     public async delete(historyItemId: string, requestOptions?: History.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -194,7 +207,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -237,6 +250,7 @@ export class History {
 
     /**
      * Returns the audio of an history item.
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async getAudio(historyItemId: string, requestOptions?: History.RequestOptions): Promise<stream.Readable> {
         const _response = await core.fetcher<stream.Readable>({
@@ -252,7 +266,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -266,10 +280,17 @@ export class History {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.ElevenLabsError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-            });
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
         }
 
         switch (_response.error.reason) {
@@ -313,7 +334,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

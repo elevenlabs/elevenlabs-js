@@ -4,9 +4,9 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as ElevenLabs from "../../..";
+import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
-import * as errors from "../../../../errors";
+import * as errors from "../../../../errors/index";
 import * as stream from "stream";
 
 export declare namespace VoiceGeneration {
@@ -46,7 +46,7 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -82,6 +82,7 @@ export class VoiceGeneration {
 
     /**
      * Generate a random voice based on parameters. This method returns a generated_voice_id in the response header, and a sample of the voice in the body. If you like the generated voice call /v1/voice-generation/create-voice with the generated_voice_id to create the voice.
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async generate(
         request: ElevenLabs.GenerateVoiceRequest,
@@ -100,7 +101,7 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -115,10 +116,17 @@ export class VoiceGeneration {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.ElevenLabsError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-            });
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
         }
 
         switch (_response.error.reason) {
@@ -164,7 +172,7 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.3.0",
+                "X-Fern-SDK-Version": "v0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
