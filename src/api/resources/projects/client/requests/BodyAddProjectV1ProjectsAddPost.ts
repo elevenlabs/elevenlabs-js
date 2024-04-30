@@ -8,8 +8,7 @@
  *         name: "name",
  *         default_title_voice_id: "default_title_voice_id",
  *         default_paragraph_voice_id: "default_paragraph_voice_id",
- *         default_model_id: "default_model_id",
- *         pronunciation_dictionary_locators: ["pronunciation_dictionary_locators"]
+ *         default_model_id: "default_model_id"
  *     }
  *
  * @example
@@ -17,8 +16,7 @@
  *         name: "name",
  *         default_title_voice_id: "default_title_voice_id",
  *         default_paragraph_voice_id: "default_paragraph_voice_id",
- *         default_model_id: "default_model_id",
- *         pronunciation_dictionary_locators: ["pronunciation_dictionary_locators"]
+ *         default_model_id: "default_model_id"
  *     }
  *
  * @example
@@ -26,8 +24,7 @@
  *         name: "name",
  *         default_title_voice_id: "default_title_voice_id",
  *         default_paragraph_voice_id: "default_paragraph_voice_id",
- *         default_model_id: "default_model_id",
- *         pronunciation_dictionary_locators: ["pronunciation_dictionary_locators"]
+ *         default_model_id: "default_model_id"
  *     }
  */
 export interface BodyAddProjectV1ProjectsAddPost {
@@ -61,7 +58,7 @@ export interface BodyAddProjectV1ProjectsAddPost {
     /** When the project is downloaded, should the returned audio have postprocessing in order to make it compliant with audiobook normalized volume requirements */
     volume_normalization?: boolean;
     /** A list of pronunciation dictionary locators (id, version_id) encoded as a list of JSON strings for pronunciation dictionaries to be applied to the text.  A list of json encoded strings is required as adding projects may occur through formData as opposed to jsonBody */
-    pronunciation_dictionary_locators: string[];
+    pronunciation_dictionary_locators?: string[];
     /** A url that will be called by our service when the project is converted with a json containing the status of the conversion */
     callback_url?: string;
 }

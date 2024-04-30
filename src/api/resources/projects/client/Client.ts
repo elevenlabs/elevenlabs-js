@@ -9,6 +9,7 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 import * as fs from "fs";
 import { default as FormData } from "form-data";
+import * as stream from "stream";
 
 export declare namespace Projects {
     interface Options {
@@ -49,7 +50,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.0",
+                "X-Fern-SDK-Version": "v0.4.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -99,8 +100,7 @@ export class Projects {
      *         name: "name",
      *         default_title_voice_id: "default_title_voice_id",
      *         default_paragraph_voice_id: "default_paragraph_voice_id",
-     *         default_model_id: "default_model_id",
-     *         pronunciation_dictionary_locators: ["pronunciation_dictionary_locators"]
+     *         default_model_id: "default_model_id"
      *     })
      */
     public async add(
@@ -145,8 +145,10 @@ export class Projects {
             _request.append("volume_normalization", request.volume_normalization.toString());
         }
 
-        for (const _item of request.pronunciation_dictionary_locators) {
-            _request.append("pronunciation_dictionary_locators", _item);
+        if (request.pronunciation_dictionary_locators != null) {
+            for (const _item of request.pronunciation_dictionary_locators) {
+                _request.append("pronunciation_dictionary_locators", _item);
+            }
         }
 
         if (request.callback_url != null) {
@@ -166,7 +168,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.0",
+                "X-Fern-SDK-Version": "v0.4.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -235,7 +237,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.0",
+                "X-Fern-SDK-Version": "v0.4.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -300,7 +302,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.0",
+                "X-Fern-SDK-Version": "v0.4.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -365,7 +367,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.0",
+                "X-Fern-SDK-Version": "v0.4.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -433,7 +435,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.0",
+                "X-Fern-SDK-Version": "v0.4.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -477,20 +479,14 @@ export class Projects {
     /**
      * Stream the audio from a project snapshot.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await elevenLabs.projects.streamAudio("project_id", "project_snapshot_id")
-     *
-     * @example
-     *     await elevenLabs.projects.streamAudio("string", "string")
      */
     public async streamAudio(
         projectId: string,
         projectSnapshotId: string,
         request: ElevenLabs.BodyStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost = {},
         requestOptions?: Projects.RequestOptions
-    ): Promise<void> {
-        const _response = await core.fetcher({
+    ): Promise<stream.Readable> {
+        const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
                 `v1/projects/${projectId}/snapshots/${projectSnapshotId}/stream`
@@ -503,17 +499,18 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.0",
+                "X-Fern-SDK-Version": "v0.4.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             body: request,
+            responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return;
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {
@@ -573,7 +570,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.0",
+                "X-Fern-SDK-Version": "v0.4.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -652,7 +649,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.0",
+                "X-Fern-SDK-Version": "v0.4.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
