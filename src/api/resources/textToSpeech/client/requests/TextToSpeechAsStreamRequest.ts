@@ -9,36 +9,36 @@ import * as ElevenLabs from "../../../../index";
  *     {
  *         optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
  *         output_format: ElevenLabs.OutputFormat.Mp32205032,
- *         text: "string",
- *         model_id: "string",
+ *         text: "It sure does, Jackie. My mama always said, \u201Cin Carolina the air is so thick, you can wear it.\u201D",
  *         voice_settings: {
- *             stability: 1.1,
- *             similarity_boost: 1.1,
- *             style: 1.1,
- *             use_speaker_boost: true
- *         },
- *         pronunciation_dictionary_locators: [{
- *                 pronunciation_dictionary_id: "string",
- *                 version_id: "string"
- *             }]
+ *             stability: 0.1,
+ *             similarity_boost: 0.3,
+ *             style: 0.2
+ *         }
  *     }
  *
  * @example
  *     {
  *         optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
  *         output_format: ElevenLabs.OutputFormat.Mp32205032,
- *         text: "string",
- *         model_id: "string",
+ *         text: "It sure does, Jackie. My mama always said, \u201Cin Carolina the air is so thick, you can wear it.\u201D",
  *         voice_settings: {
- *             stability: 1.1,
- *             similarity_boost: 1.1,
- *             style: 1.1,
- *             use_speaker_boost: true
- *         },
- *         pronunciation_dictionary_locators: [{
- *                 pronunciation_dictionary_id: "string",
- *                 version_id: "string"
- *             }]
+ *             stability: 0.1,
+ *             similarity_boost: 0.3,
+ *             style: 0.2
+ *         }
+ *     }
+ *
+ * @example
+ *     {
+ *         optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
+ *         output_format: ElevenLabs.OutputFormat.Mp32205032,
+ *         text: "It sure does, Jackie. My mama always said, \u201Cin Carolina the air is so thick, you can wear it.\u201D",
+ *         voice_settings: {
+ *             stability: 0.1,
+ *             similarity_boost: 0.3,
+ *             style: 0.2
+ *         }
  *     }
  */
 export interface TextToSpeechAsStreamRequest {

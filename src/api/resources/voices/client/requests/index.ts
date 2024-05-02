@@ -1,5 +1,5 @@
-export { VoicesGetRequest } from "./VoicesGetRequest";
-export { BodyAddVoiceV1VoicesAddPost } from "./BodyAddVoiceV1VoicesAddPost";
-export { BodyEditVoiceV1VoicesVoiceIdEditPost } from "./BodyEditVoiceV1VoicesVoiceIdEditPost";
-export { AddSharingVoiceRequest } from "./AddSharingVoiceRequest";
-export { VoicesGetSharedRequest } from "./VoicesGetSharedRequest";
+export { type VoicesGetRequest } from "./VoicesGetRequest";
+export { type BodyAddVoiceV1VoicesAddPost } from "./BodyAddVoiceV1VoicesAddPost";
+export { type BodyEditVoiceV1VoicesVoiceIdEditPost } from "./BodyEditVoiceV1VoicesVoiceIdEditPost";
+export { type AddSharingVoiceRequest } from "./AddSharingVoiceRequest";
+export { type VoicesGetSharedRequest } from "./VoicesGetSharedRequest";

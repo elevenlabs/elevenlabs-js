@@ -1,8 +1,9 @@
+export * as textToSpeech from "./textToSpeech";
+export * from "./textToSpeech/types";
 export * as pronunciationDictionary from "./pronunciationDictionary";
 export * from "./pronunciationDictionary/types";
 export * as history from "./history";
 export * as samples from "./samples";
-export * as textToSpeech from "./textToSpeech";
 export * as speechToSpeech from "./speechToSpeech";
 export * as voiceGeneration from "./voiceGeneration";
 export * as user from "./user";

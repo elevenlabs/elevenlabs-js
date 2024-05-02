@@ -5,17 +5,17 @@
 /**
  * @example
  *     {
- *         name: "name"
+ *         name: "Alex"
  *     }
  *
  * @example
  *     {
- *         name: "name"
+ *         name: "Alex"
  *     }
  *
  * @example
  *     {
- *         name: "name"
+ *         name: "Alex"
  *     }
  */
 export interface BodyAddVoiceV1VoicesAddPost {
