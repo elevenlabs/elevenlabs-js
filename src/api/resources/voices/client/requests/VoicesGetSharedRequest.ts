@@ -4,7 +4,11 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         page_size: 1,
+ *         gender: "female",
+ *         language: "en"
+ *     }
  *
  * @example
  *     {

@@ -71,6 +71,8 @@ export * from "./Age";
 export * from "./Gender";
 export * from "./OutputFormat";
 export * from "./OptimizeStreamingLatency";
+export * from "./InitializeConnection";
+export * from "./CloseConnection";
 export * from "./SendText";
 export * from "./RealtimeVoiceSettings";
 export * from "./GenerationConfig";
