@@ -5,17 +5,17 @@
 /**
  * @example
  *     {
- *         history_item_ids: ["history_item_ids"]
+ *         history_item_ids: ["ja9xsmfGhxYcymxGcOGB"]
  *     }
  *
  * @example
  *     {
- *         history_item_ids: ["history_item_ids"]
+ *         history_item_ids: ["ja9xsmfGhxYcymxGcOGB"]
  *     }
  *
  * @example
  *     {
- *         history_item_ids: ["history_item_ids"]
+ *         history_item_ids: ["ja9xsmfGhxYcymxGcOGB"]
  *     }
  */
 export interface DownloadHistoryRequest {

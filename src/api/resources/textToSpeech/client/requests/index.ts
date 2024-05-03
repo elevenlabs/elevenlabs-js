@@ -1,2 +1,2 @@
-export { TextToSpeechRequest } from "./TextToSpeechRequest";
-export { TextToSpeechAsStreamRequest } from "./TextToSpeechAsStreamRequest";
+export { type TextToSpeechRequest } from "./TextToSpeechRequest";
+export { type TextToSpeechAsStreamRequest } from "./TextToSpeechAsStreamRequest";

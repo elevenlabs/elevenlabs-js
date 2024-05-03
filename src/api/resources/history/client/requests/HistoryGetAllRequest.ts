@@ -4,7 +4,10 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         page_size: 1,
+ *         voice_id: "pMsXgVXv3BLzUgSXRplE"
+ *     }
  *
  * @example
  *     {

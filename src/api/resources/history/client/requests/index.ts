@@ -1,2 +1,2 @@
-export { HistoryGetAllRequest } from "./HistoryGetAllRequest";
-export { DownloadHistoryRequest } from "./DownloadHistoryRequest";
+export { type HistoryGetAllRequest } from "./HistoryGetAllRequest";
+export { type DownloadHistoryRequest } from "./DownloadHistoryRequest";

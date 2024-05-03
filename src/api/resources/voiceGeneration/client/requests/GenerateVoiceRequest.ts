@@ -7,20 +7,29 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         gender: ElevenLabs.Gender.Male,
- *         accent: "string",
- *         age: ElevenLabs.Age.Young,
- *         accent_strength: 1.1,
- *         text: "string"
+ *         gender: ElevenLabs.Gender.Female,
+ *         accent: "american",
+ *         age: ElevenLabs.Age.MiddleAged,
+ *         accent_strength: 2,
+ *         text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D"
  *     }
  *
  * @example
  *     {
- *         gender: ElevenLabs.Gender.Male,
- *         accent: "string",
- *         age: ElevenLabs.Age.Young,
- *         accent_strength: 1.1,
- *         text: "string"
+ *         gender: ElevenLabs.Gender.Female,
+ *         accent: "american",
+ *         age: ElevenLabs.Age.MiddleAged,
+ *         accent_strength: 2,
+ *         text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D"
+ *     }
+ *
+ * @example
+ *     {
+ *         gender: ElevenLabs.Gender.Female,
+ *         accent: "american",
+ *         age: ElevenLabs.Age.MiddleAged,
+ *         accent_strength: 2,
+ *         text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D"
  *     }
  */
 export interface GenerateVoiceRequest {

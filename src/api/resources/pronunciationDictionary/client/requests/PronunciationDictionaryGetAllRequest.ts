@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         page_size: 1
+ *     }
  *
  * @example
  *     {

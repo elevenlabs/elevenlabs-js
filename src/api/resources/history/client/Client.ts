@@ -29,7 +29,10 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.history.getAll()
+     *     await elevenLabs.history.getAll({
+     *         page_size: 1,
+     *         voice_id: "pMsXgVXv3BLzUgSXRplE"
+     *     })
      *
      * @example
      *     await elevenLabs.history.getAll({
@@ -73,7 +76,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -120,7 +123,7 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.history.get("history_item_id")
+     *     await elevenLabs.history.get("ja9xsmfGhxYcymxGcOGB")
      *
      * @example
      *     await elevenLabs.history.get("string")
@@ -142,7 +145,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -188,7 +191,7 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.history.delete("history_item_id")
+     *     await elevenLabs.history.delete("ja9xsmfGhxYcymxGcOGB")
      *
      * @example
      *     await elevenLabs.history.delete("string")
@@ -207,7 +210,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -266,7 +269,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -314,7 +317,7 @@ export class History {
      *
      * @example
      *     await elevenLabs.history.download({
-     *         history_item_ids: ["history_item_ids"]
+     *         history_item_ids: ["ja9xsmfGhxYcymxGcOGB"]
      *     })
      */
     public async download(
@@ -334,7 +337,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

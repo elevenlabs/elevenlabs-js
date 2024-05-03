@@ -46,7 +46,7 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -101,7 +101,7 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -150,9 +150,9 @@ export class VoiceGeneration {
      *
      * @example
      *     await elevenLabs.voiceGeneration.createAPreviouslyGeneratedVoice({
-     *         voice_name: "voice_name",
-     *         voice_description: "voice_description",
-     *         generated_voice_id: "generated_voice_id"
+     *         voice_name: "Alex",
+     *         voice_description: "Middle-aged American woman",
+     *         generated_voice_id: "rbVJFu6SGRD1dbWpKnWl"
      *     })
      */
     public async createAPreviouslyGeneratedVoice(
@@ -172,7 +172,7 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

@@ -1,2 +1,2 @@
-export { GenerateVoiceRequest } from "./GenerateVoiceRequest";
-export { CreatePreviouslyGenertedVoiceRequest } from "./CreatePreviouslyGenertedVoiceRequest";
+export { type GenerateVoiceRequest } from "./GenerateVoiceRequest";
+export { type CreatePreviouslyGenertedVoiceRequest } from "./CreatePreviouslyGenertedVoiceRequest";
