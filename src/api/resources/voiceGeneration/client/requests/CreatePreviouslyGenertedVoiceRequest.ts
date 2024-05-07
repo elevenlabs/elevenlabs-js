@@ -5,23 +5,9 @@
 /**
  * @example
  *     {
- *         voice_name: "voice_name",
- *         voice_description: "voice_description",
- *         generated_voice_id: "generated_voice_id"
- *     }
- *
- * @example
- *     {
- *         voice_name: "voice_name",
- *         voice_description: "voice_description",
- *         generated_voice_id: "generated_voice_id"
- *     }
- *
- * @example
- *     {
- *         voice_name: "voice_name",
- *         voice_description: "voice_description",
- *         generated_voice_id: "generated_voice_id"
+ *         voice_name: "Alex",
+ *         voice_description: "Middle-aged American woman",
+ *         generated_voice_id: "rbVJFu6SGRD1dbWpKnWl"
  *     }
  */
 export interface CreatePreviouslyGenertedVoiceRequest {

@@ -27,6 +27,11 @@ export class PronunciationDictionary {
 
     /**
      * Creates a new pronunciation dictionary from a lexicon .PLS file
+     *
+     * @param {File | fs.ReadStream | undefined} file
+     * @param {ElevenLabs.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost} request
+     * @param {PronunciationDictionary.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
@@ -62,7 +67,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -106,15 +111,15 @@ export class PronunciationDictionary {
 
     /**
      * Add rules to the pronunciation dictionary
+     *
+     * @param {string} pronunciationDictionaryId - The id of the pronunciation dictionary
+     * @param {ElevenLabs.PronunciationDictionary} request
+     * @param {PronunciationDictionary.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.pronunciationDictionary.addRulesToThePronunciationDictionary("pronunciation_dictionary_id", {
-     *         rules: []
-     *     })
-     *
-     * @example
-     *     await elevenLabs.pronunciationDictionary.addRulesToThePronunciationDictionary("string", {
      *         rules: []
      *     })
      */
@@ -126,7 +131,7 @@ export class PronunciationDictionary {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/pronunciation-dictionaries/${pronunciationDictionaryId}/add-rules`
+                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}/add-rules`
             ),
             method: "POST",
             headers: {
@@ -136,7 +141,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -180,15 +185,15 @@ export class PronunciationDictionary {
 
     /**
      * Remove rules from the pronunciation dictionary
+     *
+     * @param {string} pronunciationDictionaryId - The id of the pronunciation dictionary
+     * @param {ElevenLabs.BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost} request
+     * @param {PronunciationDictionary.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.pronunciationDictionary.removeRulesFromThePronunciationDictionary("pronunciation_dictionary_id", {
-     *         rule_strings: ["rule_strings"]
-     *     })
-     *
-     * @example
-     *     await elevenLabs.pronunciationDictionary.removeRulesFromThePronunciationDictionary("string", {
      *         rule_strings: ["rule_strings"]
      *     })
      */
@@ -200,7 +205,7 @@ export class PronunciationDictionary {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/pronunciation-dictionaries/${pronunciationDictionaryId}/remove-rules`
+                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}/remove-rules`
             ),
             method: "POST",
             headers: {
@@ -210,7 +215,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -254,12 +259,17 @@ export class PronunciationDictionary {
 
     /**
      * Get PLS file with a pronunciation dictionary version rules
+     *
+     * @param {string} dictionaryId - The id of the pronunciation dictionary
+     * @param {string} versionId - The id of the version of the pronunciation dictionary
+     * @param {PronunciationDictionary.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.pronunciationDictionary.getPlsFileWithAPronunciationDictionaryVersionRules("string", "string")
+     *     await elevenLabs.pronunciationDictionary.download("Fm6AvNgS53NXe6Kqxp3e", "KZFyRUq3R6kaqhKI146w")
      */
-    public async getPlsFileWithAPronunciationDictionaryVersionRules(
+    public async download(
         dictionaryId: string,
         versionId: string,
         requestOptions?: PronunciationDictionary.RequestOptions
@@ -267,7 +277,9 @@ export class PronunciationDictionary {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/pronunciation-dictionaries/${dictionaryId}/${versionId}/download`
+                `v1/pronunciation-dictionaries/${encodeURIComponent(dictionaryId)}/${encodeURIComponent(
+                    versionId
+                )}/download`
             ),
             method: "GET",
             headers: {
@@ -277,7 +289,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -321,13 +333,14 @@ export class PronunciationDictionary {
 
     /**
      * Get metadata for a pronunciation dictionary
+     *
+     * @param {string} pronunciationDictionaryId - The id of the pronunciation dictionary
+     * @param {PronunciationDictionary.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.pronunciationDictionary.get("pronunciation_dictionary_id")
-     *
-     * @example
-     *     await elevenLabs.pronunciationDictionary.get("string")
+     *     await elevenLabs.pronunciationDictionary.get("Fm6AvNgS53NXe6Kqxp3e")
      */
     public async get(
         pronunciationDictionaryId: string,
@@ -336,7 +349,7 @@ export class PronunciationDictionary {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/pronunciation-dictionaries/${pronunciationDictionaryId}/`
+                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}/`
             ),
             method: "GET",
             headers: {
@@ -346,7 +359,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -389,14 +402,14 @@ export class PronunciationDictionary {
 
     /**
      * Get a list of the pronunciation dictionaries you have access to and their metadata
+     *
+     * @param {ElevenLabs.PronunciationDictionaryGetAllRequest} request
+     * @param {PronunciationDictionary.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.pronunciationDictionary.getAll()
-     *
-     * @example
      *     await elevenLabs.pronunciationDictionary.getAll({
-     *         cursor: "string",
      *         page_size: 1
      *     })
      */
@@ -427,7 +440,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

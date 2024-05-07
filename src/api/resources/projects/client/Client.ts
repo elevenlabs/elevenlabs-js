@@ -31,6 +31,9 @@ export class Projects {
 
     /**
      * Returns a list of your projects together and its metadata.
+     *
+     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
@@ -50,7 +53,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -93,6 +96,11 @@ export class Projects {
 
     /**
      * Creates a new project, it can be either initialized as blank, from a document or from a URL.
+     *
+     * @param {File | fs.ReadStream | undefined} fromDocument
+     * @param {ElevenLabs.BodyAddProjectV1ProjectsAddPost} request
+     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
@@ -168,7 +176,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -212,13 +220,14 @@ export class Projects {
 
     /**
      * Returns information about a specific project. This endpoint returns more detailed information about a project than GET api.elevenlabs.io/v1/projects.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.projects.get("project_id")
-     *
-     * @example
-     *     await elevenLabs.projects.get("string")
      */
     public async get(
         projectId: string,
@@ -227,7 +236,7 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}`
+                `v1/projects/${encodeURIComponent(projectId)}`
             ),
             method: "GET",
             headers: {
@@ -237,7 +246,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -280,19 +289,20 @@ export class Projects {
 
     /**
      * Delete a project by its project_id.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.projects.delete("project_id")
-     *
-     * @example
-     *     await elevenLabs.projects.delete("string")
      */
     public async delete(projectId: string, requestOptions?: Projects.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}`
+                `v1/projects/${encodeURIComponent(projectId)}`
             ),
             method: "DELETE",
             headers: {
@@ -302,7 +312,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -345,19 +355,20 @@ export class Projects {
 
     /**
      * Starts conversion of a project and all of its chapters.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.projects.convert("project_id")
-     *
-     * @example
-     *     await elevenLabs.projects.convert("string")
      */
     public async convert(projectId: string, requestOptions?: Projects.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/convert`
+                `v1/projects/${encodeURIComponent(projectId)}/convert`
             ),
             method: "POST",
             headers: {
@@ -367,7 +378,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -410,13 +421,14 @@ export class Projects {
 
     /**
      * Gets the snapshots of a project.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.projects.getSnapshots("project_id")
-     *
-     * @example
-     *     await elevenLabs.projects.getSnapshots("string")
      */
     public async getSnapshots(
         projectId: string,
@@ -425,7 +437,7 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/snapshots`
+                `v1/projects/${encodeURIComponent(projectId)}/snapshots`
             ),
             method: "GET",
             headers: {
@@ -435,7 +447,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -489,7 +501,7 @@ export class Projects {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/snapshots/${projectSnapshotId}/stream`
+                `v1/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(projectSnapshotId)}/stream`
             ),
             method: "POST",
             headers: {
@@ -499,7 +511,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -544,13 +556,15 @@ export class Projects {
 
     /**
      * Streams archive with project audio.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {string} projectSnapshotId - The project_snapshot_id of the project snapshot. You can query GET /v1/projects/{project_id}/snapshots to list all available snapshots for a project.
+     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.projects.streamArchive("project_id", "project_snapshot_id")
-     *
-     * @example
-     *     await elevenLabs.projects.streamArchive("string", "string")
      */
     public async streamArchive(
         projectId: string,
@@ -560,7 +574,9 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/snapshots/${projectSnapshotId}/archive`
+                `v1/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(
+                    projectSnapshotId
+                )}/archive`
             ),
             method: "POST",
             headers: {
@@ -570,7 +586,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -613,18 +629,15 @@ export class Projects {
 
     /**
      * Updates the set of pronunciation dictionaries acting on a project. This will automatically mark text within this project as requiring reconverting where the new dictionary would apply or the old one no longer does.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {ElevenLabs.UpdatePronunciationDictionariesRequest} request
+     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.projects.updatePronunciationDictionaries("project_id", {
-     *         pronunciation_dictionary_locators: [{
-     *                 pronunciation_dictionary_id: "pronunciation_dictionary_id",
-     *                 version_id: "version_id"
-     *             }]
-     *     })
-     *
-     * @example
-     *     await elevenLabs.projects.updatePronunciationDictionaries("string", {
      *         pronunciation_dictionary_locators: [{
      *                 pronunciation_dictionary_id: "pronunciation_dictionary_id",
      *                 version_id: "version_id"
@@ -639,7 +652,7 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/update-pronunciation-dictionaries`
+                `v1/projects/${encodeURIComponent(projectId)}/update-pronunciation-dictionaries`
             ),
             method: "POST",
             headers: {
@@ -649,7 +662,7 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

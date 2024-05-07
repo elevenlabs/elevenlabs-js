@@ -28,6 +28,14 @@ export class Dubbing {
 
     /**
      * Dubs provided audio or video file into given language.
+     *
+     * @param {File | fs.ReadStream | undefined} file
+     * @param {File | fs.ReadStream | undefined} csvFile
+     * @param {File | fs.ReadStream | undefined} foregroundAudioFile
+     * @param {File | fs.ReadStream | undefined} backgroundAudioFile
+     * @param {ElevenLabs.BodyDubAVideoOrAnAudioFileV1DubbingPost} request
+     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
@@ -114,7 +122,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -158,13 +166,14 @@ export class Dubbing {
 
     /**
      * Returns metadata about a dubbing project, including whether it's still in progress or not
+     *
+     * @param {string} dubbingId - ID of the dubbing project.
+     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.dubbing.getDubbingProjectMetadata("dubbing_id")
-     *
-     * @example
-     *     await elevenLabs.dubbing.getDubbingProjectMetadata("string")
      */
     public async getDubbingProjectMetadata(
         dubbingId: string,
@@ -173,7 +182,7 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/dubbing/${dubbingId}`
+                `v1/dubbing/${encodeURIComponent(dubbingId)}`
             ),
             method: "GET",
             headers: {
@@ -183,7 +192,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -226,19 +235,20 @@ export class Dubbing {
 
     /**
      * Deletes a dubbing project.
+     *
+     * @param {string} dubbingId - ID of the dubbing project.
+     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.dubbing.deleteDubbingProject("dubbing_id")
-     *
-     * @example
-     *     await elevenLabs.dubbing.deleteDubbingProject("string")
      */
     public async deleteDubbingProject(dubbingId: string, requestOptions?: Dubbing.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/dubbing/${dubbingId}`
+                `v1/dubbing/${encodeURIComponent(dubbingId)}`
             ),
             method: "DELETE",
             headers: {
@@ -248,7 +258,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -301,7 +311,7 @@ export class Dubbing {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/dubbing/${dubbingId}/audio/${languageCode}`
+                `v1/dubbing/${encodeURIComponent(dubbingId)}/audio/${encodeURIComponent(languageCode)}`
             ),
             method: "GET",
             headers: {
@@ -311,7 +321,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

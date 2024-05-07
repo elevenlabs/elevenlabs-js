@@ -25,6 +25,9 @@ export class User {
 
     /**
      * Gets extended information about the users subscription
+     *
+     * @param {User.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
@@ -44,7 +47,7 @@ export class User {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -87,6 +90,9 @@ export class User {
 
     /**
      * Gets information about the user
+     *
+     * @param {User.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
@@ -106,7 +112,7 @@ export class User {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

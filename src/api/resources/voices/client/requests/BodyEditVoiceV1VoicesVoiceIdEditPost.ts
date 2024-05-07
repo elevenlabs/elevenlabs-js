@@ -5,17 +5,7 @@
 /**
  * @example
  *     {
- *         name: "name"
- *     }
- *
- * @example
- *     {
- *         name: "name"
- *     }
- *
- * @example
- *     {
- *         name: "name"
+ *         name: "George"
  *     }
  */
 export interface BodyEditVoiceV1VoicesVoiceIdEditPost {

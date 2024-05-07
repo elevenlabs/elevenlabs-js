@@ -30,6 +30,9 @@ export class Voices {
 
     /**
      * Gets a list of all available voices for a user.
+     *
+     * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
@@ -49,7 +52,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -93,6 +96,8 @@ export class Voices {
     /**
      * Gets the default settings for voices. "similarity_boost" corresponds to"Clarity + Similarity Enhancement" in the web app and "stability" corresponds to "Stability" slider in the web app.
      *
+     * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @example
      *     await elevenLabs.voices.getDefaultSettings()
      */
@@ -110,7 +115,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -146,13 +151,14 @@ export class Voices {
 
     /**
      * Returns the settings for a specific voice. "similarity_boost" corresponds to"Clarity + Similarity Enhancement" in the web app and "stability" corresponds to "Stability" slider in the web app.
+     *
+     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.getSettings("voice_id")
-     *
-     * @example
-     *     await elevenLabs.voices.getSettings("string")
+     *     await elevenLabs.voices.getSettings("2EiwWnXFnvU5JabPnv8n")
      */
     public async getSettings(
         voiceId: string,
@@ -161,7 +167,7 @@ export class Voices {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${voiceId}/settings`
+                `v1/voices/${encodeURIComponent(voiceId)}/settings`
             ),
             method: "GET",
             headers: {
@@ -171,7 +177,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -214,15 +220,15 @@ export class Voices {
 
     /**
      * Returns metadata about a specific voice.
+     *
+     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {ElevenLabs.VoicesGetRequest} request
+     * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.get("voice_id")
-     *
-     * @example
-     *     await elevenLabs.voices.get("string", {
-     *         with_settings: true
-     *     })
+     *     await elevenLabs.voices.get("29vD33N1CtxCmqQRPOHJ")
      */
     public async get(
         voiceId: string,
@@ -238,7 +244,7 @@ export class Voices {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${voiceId}`
+                `v1/voices/${encodeURIComponent(voiceId)}`
             ),
             method: "GET",
             headers: {
@@ -248,7 +254,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -292,19 +298,20 @@ export class Voices {
 
     /**
      * Deletes a voice by its ID.
+     *
+     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.delete("voice_id")
-     *
-     * @example
-     *     await elevenLabs.voices.delete("string")
+     *     await elevenLabs.voices.delete("29vD33N1CtxCmqQRPOHJ")
      */
     public async delete(voiceId: string, requestOptions?: Voices.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${voiceId}`
+                `v1/voices/${encodeURIComponent(voiceId)}`
             ),
             method: "DELETE",
             headers: {
@@ -314,7 +321,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -357,13 +364,19 @@ export class Voices {
 
     /**
      * Edit your settings for a specific voice. "similarity_boost" corresponds to"Clarity + Similarity Enhancement" in the web app and "stability" corresponds to "Stability" slider in the web app.
+     *
+     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {ElevenLabs.VoiceSettings} request
+     * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.editSettings("voice_id", {})
-     *
-     * @example
-     *     await elevenLabs.voices.editSettings("string", {})
+     *     await elevenLabs.voices.editSettings("29vD33N1CtxCmqQRPOHJ", {
+     *         stability: 0.1,
+     *         similarity_boost: 0.3,
+     *         style: 0.2
+     *     })
      */
     public async editSettings(
         voiceId: string,
@@ -373,7 +386,7 @@ export class Voices {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${voiceId}/settings/edit`
+                `v1/voices/${encodeURIComponent(voiceId)}/settings/edit`
             ),
             method: "POST",
             headers: {
@@ -383,7 +396,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -427,21 +440,29 @@ export class Voices {
 
     /**
      * Add a new voice to your collection of voices in VoiceLab.
+     *
+     * @param {File[] | fs.ReadStream[]} files
+     * @param {ElevenLabs.BodyAddVoiceV1VoicesAddPost} request
+     * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.add(fs.createReadStream("/path/to/your/file"), {
-     *         name: "name"
+     *     await elevenLabs.voices.add([fs.createReadStream("/path/to/your/file")], {
+     *         name: "Alex"
      *     })
      */
     public async add(
-        files: File | fs.ReadStream,
+        files: File[] | fs.ReadStream[],
         request: ElevenLabs.BodyAddVoiceV1VoicesAddPost,
         requestOptions?: Voices.RequestOptions
     ): Promise<ElevenLabs.AddVoiceResponseModel> {
         const _request = new FormData();
         _request.append("name", request.name);
-        _request.append("files", files);
+        for (const _file of files) {
+            _request.append("files", _file);
+        }
+
         if (request.description != null) {
             _request.append("description", request.description);
         }
@@ -463,7 +484,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -507,20 +528,21 @@ export class Voices {
 
     /**
      * Edit a voice created by you.
+     *
+     * @param {File[] | fs.ReadStream[] | undefined} files
+     * @param {string} voiceId
+     * @param {ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost} request
+     * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.edit(fs.createReadStream("/path/to/your/file"), "voice_id", {
-     *         name: "name"
-     *     })
-     *
-     * @example
-     *     await elevenLabs.voices.edit(fs.createReadStream("/path/to/your/file"), "string", {
-     *         name: "name"
+     *     await elevenLabs.voices.edit([fs.createReadStream("/path/to/your/file")], "JBFqnCBsd6RMkjVDRZzb", {
+     *         name: "George"
      *     })
      */
     public async edit(
-        files: File | fs.ReadStream | undefined,
+        files: File[] | fs.ReadStream[] | undefined,
         voiceId: string,
         request: ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost,
         requestOptions?: Voices.RequestOptions
@@ -528,7 +550,9 @@ export class Voices {
         const _request = new FormData();
         _request.append("name", request.name);
         if (files != null) {
-            _request.append("files", files);
+            for (const _file of files) {
+                _request.append("files", _file);
+            }
         }
 
         if (request.description != null) {
@@ -542,7 +566,7 @@ export class Voices {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${voiceId}/edit`
+                `v1/voices/${encodeURIComponent(voiceId)}/edit`
             ),
             method: "POST",
             headers: {
@@ -552,7 +576,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -596,16 +620,17 @@ export class Voices {
 
     /**
      * Add a sharing voice to your collection of voices in VoiceLab.
+     *
+     * @param {string} publicUserId - Public user ID used to publicly identify ElevenLabs users.
+     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {ElevenLabs.AddSharingVoiceRequest} request
+     * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.addSharingVoice("public_user_id", "voice_id", {
-     *         new_name: "new_name"
-     *     })
-     *
-     * @example
-     *     await elevenLabs.voices.addSharingVoice("string", "string", {
-     *         new_name: "new_name"
+     *     await elevenLabs.voices.addSharingVoice("63e84100a6bf7874ba37a1bab9a31828a379ec94b891b401653b655c5110880f", "sB1b5zUrxQVAFl2PhZFp", {
+     *         new_name: "Alita"
      *     })
      */
     public async addSharingVoice(
@@ -617,7 +642,7 @@ export class Voices {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/add/${publicUserId}/${voiceId}`
+                `v1/voices/add/${encodeURIComponent(publicUserId)}/${encodeURIComponent(voiceId)}`
             ),
             method: "POST",
             headers: {
@@ -627,7 +652,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -671,27 +696,17 @@ export class Voices {
 
     /**
      * Gets a list of shared voices.
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
-     * @example
-     *     await elevenLabs.voices.getShared()
+     * @param {ElevenLabs.VoicesGetSharedRequest} request
+     * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.voices.getShared({
      *         page_size: 1,
-     *         category: "string",
-     *         gender: "string",
-     *         age: "string",
-     *         accent: "string",
-     *         language: "string",
-     *         search: "string",
-     *         use_cases: "string",
-     *         descriptives: "string",
-     *         featured: true,
-     *         reader_app_enabled: true,
-     *         owner_id: "string",
-     *         sort: "string",
-     *         page: 1
+     *         gender: "female",
+     *         language: "en"
      *     })
      */
     public async getShared(
@@ -792,7 +807,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

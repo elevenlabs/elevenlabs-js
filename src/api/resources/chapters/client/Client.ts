@@ -25,13 +25,14 @@ export class Chapters {
 
     /**
      * Returns a list of your chapters for a project together and its metadata.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.chapters.getAll("project_id")
-     *
-     * @example
-     *     await elevenLabs.chapters.getAll("string")
      */
     public async getAll(
         projectId: string,
@@ -40,7 +41,7 @@ export class Chapters {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/chapters`
+                `v1/projects/${encodeURIComponent(projectId)}/chapters`
             ),
             method: "GET",
             headers: {
@@ -50,7 +51,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -93,13 +94,15 @@ export class Chapters {
 
     /**
      * Returns information about a specific chapter.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {string} chapterId - The chapter_id of the chapter. You can query GET https://api.elevenlabs.io/v1/projects/{project_id}/chapters to list all available chapters for a project.
+     * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.chapters.get("project_id", "chapter_id")
-     *
-     * @example
-     *     await elevenLabs.chapters.get("string", "string")
      */
     public async get(
         projectId: string,
@@ -109,7 +112,7 @@ export class Chapters {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/chapters/${chapterId}`
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}`
             ),
             method: "GET",
             headers: {
@@ -119,7 +122,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -162,13 +165,15 @@ export class Chapters {
 
     /**
      * Delete a chapter by its chapter_id.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {string} chapterId - The chapter_id of the chapter. You can query GET https://api.elevenlabs.io/v1/projects/{project_id}/chapters to list all available chapters for a project.
+     * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.chapters.delete("project_id", "chapter_id")
-     *
-     * @example
-     *     await elevenLabs.chapters.delete("string", "string")
      */
     public async delete(
         projectId: string,
@@ -178,7 +183,7 @@ export class Chapters {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/chapters/${chapterId}`
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}`
             ),
             method: "DELETE",
             headers: {
@@ -188,7 +193,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -231,13 +236,15 @@ export class Chapters {
 
     /**
      * Starts conversion of a specific chapter.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {string} chapterId - The chapter_id of the chapter. You can query GET https://api.elevenlabs.io/v1/projects/{project_id}/chapters to list all available chapters for a project.
+     * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.chapters.convert("project_id", "chapter_id")
-     *
-     * @example
-     *     await elevenLabs.chapters.convert("string", "string")
      */
     public async convert(
         projectId: string,
@@ -247,7 +254,7 @@ export class Chapters {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/chapters/${chapterId}/convert`
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}/convert`
             ),
             method: "POST",
             headers: {
@@ -257,7 +264,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -300,13 +307,15 @@ export class Chapters {
 
     /**
      * Gets information about all the snapshots of a chapter, each snapshot corresponds can be downloaded as audio. Whenever a chapter is converted a snapshot will be automatically created.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {string} chapterId - The chapter_id of the chapter. You can query GET https://api.elevenlabs.io/v1/projects/{project_id}/chapters to list all available chapters for a project.
+     * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.chapters.getAllSnapshots("project_id", "chapter_id")
-     *
-     * @example
-     *     await elevenLabs.chapters.getAllSnapshots("string", "string")
      */
     public async getAllSnapshots(
         projectId: string,
@@ -316,7 +325,7 @@ export class Chapters {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/chapters/${chapterId}/snapshots`
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}/snapshots`
             ),
             method: "GET",
             headers: {
@@ -326,7 +335,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -369,13 +378,17 @@ export class Chapters {
 
     /**
      * Stream the audio from a chapter snapshot. Use `GET /v1/projects/{project_id}/chapters/{chapter_id}/snapshots` to return the chapter snapshots of a chapter.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {string} chapterId - The chapter_id of the chapter. You can query GET https://api.elevenlabs.io/v1/projects/{project_id}/chapters to list all available chapters for a project.
+     * @param {string} chapterSnapshotId - The chapter_snapshot_id of the chapter snapshot. You can query GET /v1/projects/{project_id}/chapters/{chapter_id}/snapshots to the all available snapshots for a chapter.
+     * @param {ElevenLabs.BodyStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost} request
+     * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.chapters.streamSnapshot("project_id", "chapter_id", "chapter_snapshot_id")
-     *
-     * @example
-     *     await elevenLabs.chapters.streamSnapshot("string", "string", "string")
      */
     public async streamSnapshot(
         projectId: string,
@@ -387,7 +400,9 @@ export class Chapters {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${projectId}/chapters/${chapterId}/snapshots/${chapterSnapshotId}/stream`
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(
+                    chapterId
+                )}/snapshots/${encodeURIComponent(chapterSnapshotId)}/stream`
             ),
             method: "POST",
             headers: {
@@ -397,7 +412,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

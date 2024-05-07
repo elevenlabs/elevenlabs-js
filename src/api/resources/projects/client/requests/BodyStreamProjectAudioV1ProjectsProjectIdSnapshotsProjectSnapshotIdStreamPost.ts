@@ -7,11 +7,6 @@
  *     {
  *         convert_to_mpeg: true
  *     }
- *
- * @example
- *     {
- *         convert_to_mpeg: true
- *     }
  */
 export interface BodyStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost {
     /** Whether to convert the audio to mpeg format. */

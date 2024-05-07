@@ -46,7 +46,7 @@ export class TextToSpeech {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/text-to-speech/${voiceId}`
+                `v1/text-to-speech/${encodeURIComponent(voiceId)}`
             ),
             method: "POST",
             headers: {
@@ -56,7 +56,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -122,7 +122,7 @@ export class TextToSpeech {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/text-to-speech/${voiceId}/stream`
+                `v1/text-to-speech/${encodeURIComponent(voiceId)}/stream`
             ),
             method: "POST",
             headers: {
@@ -132,7 +132,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

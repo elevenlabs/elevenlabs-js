@@ -5,17 +5,7 @@
 /**
  * @example
  *     {
- *         new_name: "new_name"
- *     }
- *
- * @example
- *     {
- *         new_name: "new_name"
- *     }
- *
- * @example
- *     {
- *         new_name: "new_name"
+ *         new_name: "Alita"
  *     }
  */
 export interface AddSharingVoiceRequest {
