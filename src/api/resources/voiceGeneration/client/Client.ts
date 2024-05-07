@@ -27,6 +27,8 @@ export class VoiceGeneration {
     /**
      * Get possible parameters for the /v1/voice-generation/generate-voice endpoint.
      *
+     * @param {VoiceGeneration.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @example
      *     await elevenLabs.voiceGeneration.generateParameters()
      */
@@ -46,7 +48,7 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -101,7 +103,7 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -146,13 +148,17 @@ export class VoiceGeneration {
 
     /**
      * Create a previously generated voice. This endpoint should be called after you fetched a generated_voice_id using /v1/voice-generation/generate-voice.
+     *
+     * @param {ElevenLabs.CreatePreviouslyGenertedVoiceRequest} request
+     * @param {VoiceGeneration.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.voiceGeneration.createAPreviouslyGeneratedVoice({
-     *         voice_name: "voice_name",
-     *         voice_description: "voice_description",
-     *         generated_voice_id: "generated_voice_id"
+     *         voice_name: "Alex",
+     *         voice_description: "Middle-aged American woman",
+     *         generated_voice_id: "rbVJFu6SGRD1dbWpKnWl"
      *     })
      */
     public async createAPreviouslyGeneratedVoice(
@@ -172,7 +178,7 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

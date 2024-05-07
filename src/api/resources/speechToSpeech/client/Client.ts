@@ -38,7 +38,7 @@ export class SpeechToSpeech {
     ): Promise<stream.Readable> {
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (request.optimize_streaming_latency != null) {
-            _queryParams["optimize_streaming_latency"] = request.optimize_streaming_latency.toString();
+            _queryParams["optimize_streaming_latency"] = request.optimize_streaming_latency;
         }
 
         if (request.output_format != null) {
@@ -58,7 +58,7 @@ export class SpeechToSpeech {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/speech-to-speech/${voiceId}`
+                `v1/speech-to-speech/${encodeURIComponent(voiceId)}`
             ),
             method: "POST",
             headers: {
@@ -68,7 +68,7 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -124,7 +124,7 @@ export class SpeechToSpeech {
     ): Promise<stream.Readable> {
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (request.optimize_streaming_latency != null) {
-            _queryParams["optimize_streaming_latency"] = request.optimize_streaming_latency.toString();
+            _queryParams["optimize_streaming_latency"] = request.optimize_streaming_latency;
         }
 
         if (request.output_format != null) {
@@ -144,7 +144,7 @@ export class SpeechToSpeech {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/speech-to-speech/${voiceId}/stream`
+                `v1/speech-to-speech/${encodeURIComponent(voiceId)}/stream`
             ),
             method: "POST",
             headers: {
@@ -154,7 +154,7 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

@@ -7,16 +7,6 @@
  *     {
  *         name: "name"
  *     }
- *
- * @example
- *     {
- *         name: "name"
- *     }
- *
- * @example
- *     {
- *         name: "name"
- *     }
  */
 export interface BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost {
     /** The name of the pronunciation dictionary, used for identification only. */

@@ -1,4 +1,4 @@
-export { BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost";
-export { PronunciationDictionary } from "./PronunciationDictionary";
-export { BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost } from "./BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost";
-export { PronunciationDictionaryGetAllRequest } from "./PronunciationDictionaryGetAllRequest";
+export { type BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost";
+export { type PronunciationDictionary } from "./PronunciationDictionary";
+export { type BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost } from "./BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost";
+export { type PronunciationDictionaryGetAllRequest } from "./PronunciationDictionaryGetAllRequest";

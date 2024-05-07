@@ -7,16 +7,6 @@
  *     {
  *         target_lang: "target_lang"
  *     }
- *
- * @example
- *     {
- *         target_lang: "target_lang"
- *     }
- *
- * @example
- *     {
- *         target_lang: "target_lang"
- *     }
  */
 export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     /** automatic or manual. */

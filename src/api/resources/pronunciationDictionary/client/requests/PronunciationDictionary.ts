@@ -9,16 +9,6 @@ import * as ElevenLabs from "../../../../index";
  *     {
  *         rules: []
  *     }
- *
- * @example
- *     {
- *         rules: []
- *     }
- *
- * @example
- *     {
- *         rules: []
- *     }
  */
 export interface PronunciationDictionary {
     /**

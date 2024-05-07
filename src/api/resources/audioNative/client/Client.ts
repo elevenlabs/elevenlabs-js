@@ -27,6 +27,11 @@ export class AudioNative {
 
     /**
      * Creates AudioNative enabled project, optionally starts conversion and returns project id and embeddable html snippet.
+     *
+     * @param {File | fs.ReadStream} file
+     * @param {ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost} request
+     * @param {AudioNative.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
@@ -95,7 +100,7 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

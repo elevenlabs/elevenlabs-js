@@ -28,19 +28,21 @@ export class Samples {
 
     /**
      * Removes a sample by its ID.
+     *
+     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {string} sampleId - Sample ID to be used, you can use GET https://api.elevenlabs.io/v1/voices/{voice_id} to list all the available samples for a voice.
+     * @param {Samples.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.samples.delete("voice_id", "sample_id")
-     *
-     * @example
-     *     await elevenLabs.samples.delete("string", "string")
+     *     await elevenLabs.samples.delete("ja9xsmfGhxYcymxGcOGB", "pMsXgVXv3BLzUgSXRplE")
      */
     public async delete(voiceId: string, sampleId: string, requestOptions?: Samples.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${voiceId}/samples/${sampleId}`
+                `v1/voices/${encodeURIComponent(voiceId)}/samples/${encodeURIComponent(sampleId)}`
             ),
             method: "DELETE",
             headers: {
@@ -50,7 +52,7 @@ export class Samples {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -93,19 +95,21 @@ export class Samples {
 
     /**
      * Returns the audio corresponding to a sample attached to a voice.
+     *
+     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {string} sampleId - Sample ID to be used, you can use GET https://api.elevenlabs.io/v1/voices/{voice_id} to list all the available samples for a voice.
+     * @param {Samples.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.samples.getAudio("voice_id", "sample_id")
-     *
-     * @example
-     *     await elevenLabs.samples.getAudio("string", "string")
+     *     await elevenLabs.samples.getAudio("ja9xsmfGhxYcymxGcOGB", "pMsXgVXv3BLzUgSXRplE")
      */
     public async getAudio(voiceId: string, sampleId: string, requestOptions?: Samples.RequestOptions): Promise<void> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${voiceId}/samples/${sampleId}/audio`
+                `v1/voices/${encodeURIComponent(voiceId)}/samples/${encodeURIComponent(sampleId)}/audio`
             ),
             method: "GET",
             headers: {
@@ -115,7 +119,7 @@ export class Samples {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

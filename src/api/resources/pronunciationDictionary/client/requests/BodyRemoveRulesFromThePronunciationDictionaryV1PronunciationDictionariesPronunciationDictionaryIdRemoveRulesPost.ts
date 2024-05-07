@@ -7,16 +7,6 @@
  *     {
  *         rule_strings: ["rule_strings"]
  *     }
- *
- * @example
- *     {
- *         rule_strings: ["rule_strings"]
- *     }
- *
- * @example
- *     {
- *         rule_strings: ["rule_strings"]
- *     }
  */
 export interface BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost {
     /** List of strings to remove from the pronunciation dictionary. */

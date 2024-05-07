@@ -26,16 +26,16 @@ export class History {
 
     /**
      * Returns metadata about all your generated audio.
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
-     * @example
-     *     await elevenLabs.history.getAll()
+     * @param {ElevenLabs.HistoryGetAllRequest} request
+     * @param {History.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.history.getAll({
      *         page_size: 1,
-     *         start_after_history_item_id: "string",
-     *         voice_id: "string"
+     *         voice_id: "pMsXgVXv3BLzUgSXRplE"
      *     })
      */
     public async getAll(
@@ -73,7 +73,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -117,13 +117,14 @@ export class History {
 
     /**
      * Returns information about an history item by its ID.
+     *
+     * @param {string} historyItemId - History item ID to be used, you can use GET https://api.elevenlabs.io/v1/history to receive a list of history items and their IDs.
+     * @param {History.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.history.get("history_item_id")
-     *
-     * @example
-     *     await elevenLabs.history.get("string")
+     *     await elevenLabs.history.get("ja9xsmfGhxYcymxGcOGB")
      */
     public async get(
         historyItemId: string,
@@ -132,7 +133,7 @@ export class History {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/history/${historyItemId}`
+                `v1/history/${encodeURIComponent(historyItemId)}`
             ),
             method: "GET",
             headers: {
@@ -142,7 +143,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -185,19 +186,20 @@ export class History {
 
     /**
      * Delete a history item by its ID
+     *
+     * @param {string} historyItemId - History item ID to be used, you can use GET https://api.elevenlabs.io/v1/history to receive a list of history items and their IDs.
+     * @param {History.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.history.delete("history_item_id")
-     *
-     * @example
-     *     await elevenLabs.history.delete("string")
+     *     await elevenLabs.history.delete("ja9xsmfGhxYcymxGcOGB")
      */
     public async delete(historyItemId: string, requestOptions?: History.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/history/${historyItemId}`
+                `v1/history/${encodeURIComponent(historyItemId)}`
             ),
             method: "DELETE",
             headers: {
@@ -207,7 +209,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -256,7 +258,7 @@ export class History {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/history/${historyItemId}/audio`
+                `v1/history/${encodeURIComponent(historyItemId)}/audio`
             ),
             method: "GET",
             headers: {
@@ -266,7 +268,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -310,11 +312,15 @@ export class History {
 
     /**
      * Download one or more history items. If one history item ID is provided, we will return a single audio file. If more than one history item IDs are provided, we will provide the history items packed into a .zip file.
+     *
+     * @param {ElevenLabs.DownloadHistoryRequest} request
+     * @param {History.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await elevenLabs.history.download({
-     *         history_item_ids: ["history_item_ids"]
+     *         history_item_ids: ["ja9xsmfGhxYcymxGcOGB"]
      *     })
      */
     public async download(
@@ -334,7 +340,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.4.1",
+                "X-Fern-SDK-Version": "v0.5.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
