@@ -8,3 +8,19 @@ jest.config.js
 
 src/wrapper
 src/index.ts
+
+# Temporary workaround for file upload properties.
+src/api/resources/audioNative/client/Client.ts
+src/api/resources/audioNative/client/requests/BodyCreatesAudioNativeEnabledProjectV1AudioNativePost.ts
+src/api/resources/dubbing/client/Client.ts
+src/api/resources/dubbing/client/requests/BodyDubAVideoOrAnAudioFileV1DubbingPost.ts
+src/api/resources/projects/client/Client.ts
+src/api/resources/projects/client/requests/BodyAddProjectV1ProjectsAddPost.ts
+src/api/resources/pronunciationDictionary/client/Client.ts
+src/api/resources/pronunciationDictionary/client/requests/BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost.ts
+src/api/resources/speechToSpeech/client/Client.ts
+src/api/resources/speechToSpeech/client/requests/BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIdStreamPost.ts
+src/api/resources/speechToSpeech/client/requests/BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost.ts
+src/api/resources/voices/client/Client.ts
+src/api/resources/voices/client/requests/BodyAddVoiceV1VoicesAddPost.ts
+src/api/resources/voices/client/requests/BodyEditVoiceV1VoicesVoiceIdEditPost.ts
