@@ -7,6 +7,7 @@ import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
+import * as stream from "stream";
 
 export declare namespace Samples {
     interface Options {
@@ -52,7 +53,7 @@ export class Samples {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -95,18 +96,14 @@ export class Samples {
 
     /**
      * Returns the audio corresponding to a sample attached to a voice.
-     *
-     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
-     * @param {string} sampleId - Sample ID to be used, you can use GET https://api.elevenlabs.io/v1/voices/{voice_id} to list all the available samples for a voice.
-     * @param {Samples.RequestOptions} requestOptions - Request-specific configuration.
-     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await elevenLabs.samples.getAudio("ja9xsmfGhxYcymxGcOGB", "pMsXgVXv3BLzUgSXRplE")
      */
-    public async getAudio(voiceId: string, sampleId: string, requestOptions?: Samples.RequestOptions): Promise<void> {
-        const _response = await core.fetcher({
+    public async getAudio(
+        voiceId: string,
+        sampleId: string,
+        requestOptions?: Samples.RequestOptions
+    ): Promise<stream.Readable> {
+        const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
                 `v1/voices/${encodeURIComponent(voiceId)}/samples/${encodeURIComponent(sampleId)}/audio`
@@ -119,16 +116,17 @@ export class Samples {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return;
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {

@@ -4,10 +4,8 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as fs from "fs";
 import * as ElevenLabs from "../../../index";
 import * as stream from "stream";
-import { default as FormData } from "form-data";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -31,7 +29,6 @@ export class SpeechToSpeech {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async convert(
-        audio: File | fs.ReadStream,
         voiceId: string,
         request: ElevenLabs.BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost,
         requestOptions?: SpeechToSpeech.RequestOptions
@@ -45,16 +42,17 @@ export class SpeechToSpeech {
             _queryParams["output_format"] = request.output_format;
         }
 
-        const _request = new FormData();
-        _request.append("audio", audio);
+        const _request = new core.FormDataWrapper();
+        await _request.append("audio", request.audio);
         if (request.model_id != null) {
-            _request.append("model_id", request.model_id);
+            await _request.append("model_id", request.model_id);
         }
 
         if (request.voice_settings != null) {
-            _request.append("voice_settings", request.voice_settings);
+            await _request.append("voice_settings", request.voice_settings);
         }
 
+        const _maybeEncodedRequest = _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -68,13 +66,13 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await _maybeEncodedRequest.getHeaders()),
             },
-            contentType: "multipart/form-data; boundary=" + _request.getBoundary(),
             queryParameters: _queryParams,
-            body: _request,
+            body: await _maybeEncodedRequest.getBody(),
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
@@ -117,7 +115,6 @@ export class SpeechToSpeech {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async convertAsStream(
-        audio: File | fs.ReadStream,
         voiceId: string,
         request: ElevenLabs.BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIdStreamPost,
         requestOptions?: SpeechToSpeech.RequestOptions
@@ -131,16 +128,17 @@ export class SpeechToSpeech {
             _queryParams["output_format"] = request.output_format;
         }
 
-        const _request = new FormData();
-        _request.append("audio", audio);
+        const _request = new core.FormDataWrapper();
+        await _request.append("audio", request.audio);
         if (request.model_id != null) {
-            _request.append("model_id", request.model_id);
+            await _request.append("model_id", request.model_id);
         }
 
         if (request.voice_settings != null) {
-            _request.append("voice_settings", request.voice_settings);
+            await _request.append("voice_settings", request.voice_settings);
         }
 
+        const _maybeEncodedRequest = _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -154,13 +152,13 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await _maybeEncodedRequest.getHeaders()),
             },
-            contentType: "multipart/form-data; boundary=" + _request.getBoundary(),
             queryParameters: _queryParams,
-            body: _request,
+            body: await _maybeEncodedRequest.getBody(),
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
