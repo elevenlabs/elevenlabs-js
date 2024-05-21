@@ -4,9 +4,7 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as fs from "fs";
 import * as ElevenLabs from "../../../index";
-import { default as FormData } from "form-data";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -28,32 +26,31 @@ export class PronunciationDictionary {
     /**
      * Creates a new pronunciation dictionary from a lexicon .PLS file
      *
-     * @param {File | fs.ReadStream | undefined} file
      * @param {ElevenLabs.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost} request
      * @param {PronunciationDictionary.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.pronunciationDictionary.addFromFile(fs.createReadStream("/path/to/your/file"), {
+     *     await elevenLabs.pronunciationDictionary.addFromFile({
      *         name: "name"
      *     })
      */
     public async addFromFile(
-        file: File | fs.ReadStream | undefined,
         request: ElevenLabs.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost,
         requestOptions?: PronunciationDictionary.RequestOptions
     ): Promise<ElevenLabs.AddPronunciationDictionaryResponseModel> {
-        const _request = new FormData();
-        if (file != null) {
-            _request.append("file", file);
+        const _request = new core.FormDataWrapper();
+        if (request.file != null) {
+            await _request.append("file", request.file);
         }
 
-        _request.append("name", request.name);
+        await _request.append("name", request.name);
         if (request.description != null) {
-            _request.append("description", request.description);
+            await _request.append("description", request.description);
         }
 
+        const _maybeEncodedRequest = _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -67,12 +64,12 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await _maybeEncodedRequest.getHeaders()),
             },
-            contentType: "multipart/form-data; boundary=" + _request.getBoundary(),
-            body: _request,
+            body: await _maybeEncodedRequest.getBody(),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
@@ -141,7 +138,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -215,7 +212,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -289,7 +286,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -359,7 +356,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -440,7 +437,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

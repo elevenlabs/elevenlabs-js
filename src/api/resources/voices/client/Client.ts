@@ -8,7 +8,6 @@ import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 import * as fs from "fs";
-import { default as FormData } from "form-data";
 
 export declare namespace Voices {
     interface Options {
@@ -52,7 +51,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -115,7 +114,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -177,7 +176,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -254,7 +253,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -321,7 +320,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -396,7 +395,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -441,36 +440,36 @@ export class Voices {
     /**
      * Add a new voice to your collection of voices in VoiceLab.
      *
-     * @param {File[] | fs.ReadStream[]} files
      * @param {ElevenLabs.BodyAddVoiceV1VoicesAddPost} request
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.add([fs.createReadStream("/path/to/your/file")], {
+     *     await elevenLabs.voices.add({
+     *         files: [fs.createReadStream("/path/to/your/file")],
      *         name: "Alex"
      *     })
      */
     public async add(
-        files: File[] | fs.ReadStream[],
         request: ElevenLabs.BodyAddVoiceV1VoicesAddPost,
         requestOptions?: Voices.RequestOptions
     ): Promise<ElevenLabs.AddVoiceResponseModel> {
-        const _request = new FormData();
-        _request.append("name", request.name);
-        for (const _file of files) {
-            _request.append("files", _file);
+        const _request = new core.FormDataWrapper();
+        await _request.append("name", request.name);
+        for (const _file of request.files) {
+            await _request.append("files", _file);
         }
 
         if (request.description != null) {
-            _request.append("description", request.description);
+            await _request.append("description", request.description);
         }
 
         if (request.labels != null) {
-            _request.append("labels", request.labels);
+            await _request.append("labels", request.labels);
         }
 
+        const _maybeEncodedRequest = _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -484,12 +483,12 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await _maybeEncodedRequest.getHeaders()),
             },
-            contentType: "multipart/form-data; boundary=" + _request.getBoundary(),
-            body: _request,
+            body: await _maybeEncodedRequest.getBody(),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
@@ -529,7 +528,6 @@ export class Voices {
     /**
      * Edit a voice created by you.
      *
-     * @param {File[] | fs.ReadStream[] | undefined} files
      * @param {string} voiceId
      * @param {ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost} request
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
@@ -537,32 +535,32 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.edit([fs.createReadStream("/path/to/your/file")], "JBFqnCBsd6RMkjVDRZzb", {
+     *     await elevenLabs.voices.edit("JBFqnCBsd6RMkjVDRZzb", {
      *         name: "George"
      *     })
      */
     public async edit(
-        files: File[] | fs.ReadStream[] | undefined,
         voiceId: string,
         request: ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost,
         requestOptions?: Voices.RequestOptions
     ): Promise<unknown> {
-        const _request = new FormData();
-        _request.append("name", request.name);
-        if (files != null) {
-            for (const _file of files) {
-                _request.append("files", _file);
+        const _request = new core.FormDataWrapper();
+        await _request.append("name", request.name);
+        if (request.files != null) {
+            for (const _file of request.files) {
+                await _request.append("files", _file);
             }
         }
 
         if (request.description != null) {
-            _request.append("description", request.description);
+            await _request.append("description", request.description);
         }
 
         if (request.labels != null) {
-            _request.append("labels", request.labels);
+            await _request.append("labels", request.labels);
         }
 
+        const _maybeEncodedRequest = _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -576,12 +574,12 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await _maybeEncodedRequest.getHeaders()),
             },
-            contentType: "multipart/form-data; boundary=" + _request.getBoundary(),
-            body: _request,
+            body: await _maybeEncodedRequest.getBody(),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
@@ -652,7 +650,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -807,7 +805,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

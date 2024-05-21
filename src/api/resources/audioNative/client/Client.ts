@@ -4,9 +4,8 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as fs from "fs";
 import * as ElevenLabs from "../../../index";
-import { default as FormData } from "form-data";
+import * as fs from "fs";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -28,65 +27,65 @@ export class AudioNative {
     /**
      * Creates AudioNative enabled project, optionally starts conversion and returns project id and embeddable html snippet.
      *
-     * @param {File | fs.ReadStream} file
      * @param {ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost} request
      * @param {AudioNative.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.audioNative.create(fs.createReadStream("/path/to/your/file"), {
+     *     await elevenLabs.audioNative.create({
+     *         file: fs.createReadStream("/path/to/your/file"),
      *         name: "name"
      *     })
      */
     public async create(
-        file: File | fs.ReadStream,
         request: ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost,
         requestOptions?: AudioNative.RequestOptions
     ): Promise<ElevenLabs.AudioNativeCreateProjectResponseModel> {
-        const _request = new FormData();
-        _request.append("name", request.name);
+        const _request = new core.FormDataWrapper();
+        await _request.append("name", request.name);
         if (request.image != null) {
-            _request.append("image", request.image);
+            await _request.append("image", request.image);
         }
 
         if (request.author != null) {
-            _request.append("author", request.author);
+            await _request.append("author", request.author);
         }
 
         if (request.title != null) {
-            _request.append("title", request.title);
+            await _request.append("title", request.title);
         }
 
         if (request.small != null) {
-            _request.append("small", request.small.toString());
+            await _request.append("small", request.small.toString());
         }
 
         if (request.text_color != null) {
-            _request.append("text_color", request.text_color);
+            await _request.append("text_color", request.text_color);
         }
 
         if (request.background_color != null) {
-            _request.append("background_color", request.background_color);
+            await _request.append("background_color", request.background_color);
         }
 
         if (request.sessionization != null) {
-            _request.append("sessionization", request.sessionization.toString());
+            await _request.append("sessionization", request.sessionization.toString());
         }
 
         if (request.voice_id != null) {
-            _request.append("voice_id", request.voice_id);
+            await _request.append("voice_id", request.voice_id);
         }
 
         if (request.model_id != null) {
-            _request.append("model_id", request.model_id);
+            await _request.append("model_id", request.model_id);
         }
 
-        _request.append("file", file);
+        await _request.append("file", request.file);
         if (request.auto_convert != null) {
-            _request.append("auto_convert", request.auto_convert.toString());
+            await _request.append("auto_convert", request.auto_convert.toString());
         }
 
+        const _maybeEncodedRequest = _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -100,12 +99,12 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await _maybeEncodedRequest.getHeaders()),
             },
-            contentType: "multipart/form-data; boundary=" + _request.getBoundary(),
-            body: _request,
+            body: await _maybeEncodedRequest.getBody(),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });

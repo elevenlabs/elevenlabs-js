@@ -4,9 +4,7 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as fs from "fs";
 import * as ElevenLabs from "../../../index";
-import { default as FormData } from "form-data";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 import * as stream from "stream";
@@ -29,86 +27,79 @@ export class Dubbing {
     /**
      * Dubs provided audio or video file into given language.
      *
-     * @param {File | fs.ReadStream | undefined} file
-     * @param {File | fs.ReadStream | undefined} csvFile
-     * @param {File | fs.ReadStream | undefined} foregroundAudioFile
-     * @param {File | fs.ReadStream | undefined} backgroundAudioFile
      * @param {ElevenLabs.BodyDubAVideoOrAnAudioFileV1DubbingPost} request
      * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.dubbing.dubAVideoOrAnAudioFile(fs.createReadStream("/path/to/your/file"), fs.createReadStream("/path/to/your/file"), fs.createReadStream("/path/to/your/file"), fs.createReadStream("/path/to/your/file"), {
+     *     await elevenLabs.dubbing.dubAVideoOrAnAudioFile({
      *         target_lang: "target_lang"
      *     })
      */
     public async dubAVideoOrAnAudioFile(
-        file: File | fs.ReadStream | undefined,
-        csvFile: File | fs.ReadStream | undefined,
-        foregroundAudioFile: File | fs.ReadStream | undefined,
-        backgroundAudioFile: File | fs.ReadStream | undefined,
         request: ElevenLabs.BodyDubAVideoOrAnAudioFileV1DubbingPost,
         requestOptions?: Dubbing.RequestOptions
     ): Promise<ElevenLabs.DoDubbingResponse> {
-        const _request = new FormData();
+        const _request = new core.FormDataWrapper();
         if (request.mode != null) {
-            _request.append("mode", request.mode);
+            await _request.append("mode", request.mode);
         }
 
-        if (file != null) {
-            _request.append("file", file);
+        if (request.file != null) {
+            await _request.append("file", request.file);
         }
 
-        if (csvFile != null) {
-            _request.append("csv_file", csvFile);
+        if (request.csv_file != null) {
+            await _request.append("csv_file", request.csv_file);
         }
 
-        if (foregroundAudioFile != null) {
-            _request.append("foreground_audio_file", foregroundAudioFile);
+        if (request.foreground_audio_file != null) {
+            await _request.append("foreground_audio_file", request.foreground_audio_file);
         }
 
-        if (backgroundAudioFile != null) {
-            _request.append("background_audio_file", backgroundAudioFile);
+        if (request.background_audio_file != null) {
+            await _request.append("background_audio_file", request.background_audio_file);
         }
 
         if (request.name != null) {
-            _request.append("name", request.name);
+            await _request.append("name", request.name);
         }
 
         if (request.source_url != null) {
-            _request.append("source_url", request.source_url);
+            await _request.append("source_url", request.source_url);
         }
 
         if (request.source_lang != null) {
-            _request.append("source_lang", request.source_lang);
+            await _request.append("source_lang", request.source_lang);
         }
 
-        _request.append("target_lang", request.target_lang);
+        await _request.append("target_lang", request.target_lang);
         if (request.num_speakers != null) {
-            _request.append("num_speakers", request.num_speakers.toString());
+            await _request.append("num_speakers", request.num_speakers.toString());
         }
 
         if (request.watermark != null) {
-            _request.append("watermark", request.watermark.toString());
+            await _request.append("watermark", request.watermark.toString());
         }
 
         if (request.start_time != null) {
-            _request.append("start_time", request.start_time.toString());
+            await _request.append("start_time", request.start_time.toString());
         }
 
         if (request.end_time != null) {
-            _request.append("end_time", request.end_time.toString());
+            await _request.append("end_time", request.end_time.toString());
         }
 
         if (request.highest_resolution != null) {
-            _request.append("highest_resolution", request.highest_resolution.toString());
+            await _request.append("highest_resolution", request.highest_resolution.toString());
         }
 
         if (request.dubbing_studio != null) {
-            _request.append("dubbing_studio", request.dubbing_studio.toString());
+            await _request.append("dubbing_studio", request.dubbing_studio.toString());
         }
 
+        const _maybeEncodedRequest = _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -122,12 +113,12 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await _maybeEncodedRequest.getHeaders()),
             },
-            contentType: "multipart/form-data; boundary=" + _request.getBoundary(),
-            body: _request,
+            body: await _maybeEncodedRequest.getBody(),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
@@ -192,7 +183,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -258,7 +249,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -321,7 +312,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v0.5.0",
+                "X-Fern-SDK-Version": "v0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
