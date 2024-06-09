@@ -27,6 +27,7 @@ export declare namespace ElevenLabsClient {
     interface RequestOptions {
         timeoutInSeconds?: number;
         maxRetries?: number;
+        abortSignal?: AbortSignal;
     }
 }
 
