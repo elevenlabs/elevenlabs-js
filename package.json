@@ -1,4 +1,8 @@
 {
+    "browser": {
+        "command-exists": false,
+        "execa": false
+    },
     "name": "elevenlabs",
     "version": "0.7.0",
     "private": false,
