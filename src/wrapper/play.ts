@@ -1,20 +1,25 @@
-import commandExists from "command-exists";
 import * as stream from "stream";
 import { ElevenLabsError } from "../errors/ElevenLabsError";
-import execa from "execa";
+import { RUNTIME } from "../core/runtime/runtime"
+import {exec} from "child_process"
 
 export async function play(audio: stream.Readable): Promise<void> {
-    if (!commandExists("ffplay")) {
+    if (RUNTIME.type !== "node") {
         throw new ElevenLabsError({
-            message: `ffplay from ffmpeg not found, necessary to play audio. 
-            On mac you can install it with 'brew install ffmpeg'. 
-            On linux and windows you can install it from https://ffmpeg.org/`,
-        });
+            message: `This function is only supported in node environments. ${RUNTIME.type} is not supported`
+        })
     }
-    const ffmpeg = execa("ffplay", ["-autoexit", "-", "-nodisp"]);
-    for await (const data of audio) {
-        ffmpeg.stdin?.write(data);
+    try {
+        const exe = exec('ffplay -autoexit - -nodisp');
+        for await (const data of audio) {
+            exe.stdin?.write(data)
+        }
+        exe.stdin?.end()
+        // await exe
+    } catch (error) {
+        throw new ElevenLabsError({
+            message: `Play has failed to properly execute. Please see error below`,
+            body: error
+        })
     }
-    ffmpeg.stdin?.end();
-    await ffmpeg;
 }
