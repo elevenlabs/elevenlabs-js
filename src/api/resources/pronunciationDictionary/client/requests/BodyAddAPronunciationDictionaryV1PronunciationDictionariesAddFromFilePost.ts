@@ -3,6 +3,7 @@
  */
 
 import * as fs from "fs";
+import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
@@ -11,9 +12,11 @@ import * as fs from "fs";
  *     }
  */
 export interface BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost {
-    file?: File | fs.ReadStream | undefined;
     /** The name of the pronunciation dictionary, used for identification only. */
     name: string;
+    file?: File | fs.ReadStream | undefined;
     /** A description of the pronunciation dictionary, used for identification only. */
     description?: string;
+    /** Should be one of 'editor' or 'viewer'. If not provided, defaults to no access. */
+    workspace_access?: ElevenLabs.PronunciationDictionaryAddFromFileRequestWorkspaceAccess;
 }

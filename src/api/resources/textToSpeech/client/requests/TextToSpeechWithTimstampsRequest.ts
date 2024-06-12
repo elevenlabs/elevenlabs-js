@@ -7,17 +7,10 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
- *         output_format: ElevenLabs.OutputFormat.Mp32205032,
- *         text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D",
- *         voice_settings: {
- *             stability: 0.1,
- *             similarity_boost: 0.3,
- *             style: 0.2
- *         }
+ *         text: "text"
  *     }
  */
-export interface TextToSpeechRequest {
+export interface TextToSpeechWithTimstampsRequest {
     /**
      * When enable_logging is set to false full privacy mode will be used for the request. This will mean history features are unavailable for this request, including request stitching. Full privacy mode may only be used by enterprise customers.
      */

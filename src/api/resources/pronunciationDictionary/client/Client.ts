@@ -42,13 +42,17 @@ export class PronunciationDictionary {
         requestOptions?: PronunciationDictionary.RequestOptions
     ): Promise<ElevenLabs.AddPronunciationDictionaryResponseModel> {
         const _request = new core.FormDataWrapper();
+        await _request.append("name", request.name);
         if (request.file != null) {
             await _request.append("file", request.file);
         }
 
-        await _request.append("name", request.name);
         if (request.description != null) {
             await _request.append("description", request.description);
+        }
+
+        if (request.workspace_access != null) {
+            await _request.append("workspace_access", request.workspace_access);
         }
 
         const _maybeEncodedRequest = _request.getRequest();
@@ -65,7 +69,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.0",
+                "X-Fern-SDK-Version": "v0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...(await _maybeEncodedRequest.getHeaders()),
@@ -140,7 +144,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.0",
+                "X-Fern-SDK-Version": "v0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -215,7 +219,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.0",
+                "X-Fern-SDK-Version": "v0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -290,7 +294,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.0",
+                "X-Fern-SDK-Version": "v0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -361,7 +365,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.0",
+                "X-Fern-SDK-Version": "v0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -443,7 +447,7 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.0",
+                "X-Fern-SDK-Version": "v0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

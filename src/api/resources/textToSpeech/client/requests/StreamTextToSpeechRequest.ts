@@ -17,7 +17,7 @@ import * as ElevenLabs from "../../../../index";
  *         }
  *     }
  */
-export interface TextToSpeechRequest {
+export interface StreamTextToSpeechRequest {
     /**
      * When enable_logging is set to false full privacy mode will be used for the request. This will mean history features are unavailable for this request, including request stitching. Full privacy mode may only be used by enterprise customers.
      */
