@@ -5,7 +5,6 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import * as fs from "fs";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -35,7 +34,6 @@ export class AudioNative {
      *
      * @example
      *     await elevenLabs.audioNative.create({
-     *         file: fs.createReadStream("/path/to/your/file"),
      *         name: "name"
      *     })
      */
@@ -81,7 +79,10 @@ export class AudioNative {
             await _request.append("model_id", request.model_id);
         }
 
-        await _request.append("file", request.file);
+        if (request.file != null) {
+            await _request.append("file", request.file);
+        }
+
         if (request.auto_convert != null) {
             await _request.append("auto_convert", request.auto_convert.toString());
         }
@@ -100,7 +101,7 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.0",
+                "X-Fern-SDK-Version": "0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...(await _maybeEncodedRequest.getHeaders()),

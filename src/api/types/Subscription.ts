@@ -21,6 +21,7 @@ export interface Subscription {
     currency?: ElevenLabs.Currency;
     status?: ElevenLabs.SubscriptionStatus;
     billing_period?: ElevenLabs.ExtendedSubscriptionResponseModelBillingPeriod;
+    character_refresh_period?: ElevenLabs.ExtendedSubscriptionResponseModelCharacterRefreshPeriod;
     next_invoice?: ElevenLabs.Invoice;
     has_open_invoices?: boolean;
 }

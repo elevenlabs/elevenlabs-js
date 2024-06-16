@@ -10,5 +10,8 @@ export interface User {
     xi_api_key: string;
     can_use_delayed_payment_methods: boolean;
     is_onboarding_completed: boolean;
+    is_onboarding_checklist_completed: boolean;
     first_name?: string;
+    is_api_key_hashed?: boolean;
+    xi_api_key_preview?: string;
 }
