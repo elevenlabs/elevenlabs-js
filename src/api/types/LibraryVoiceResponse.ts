@@ -18,6 +18,7 @@ export interface LibraryVoiceResponse {
     preview_url: string;
     usage_character_count_1y: number;
     usage_character_count_7d: number;
+    play_api_usage_character_count_1y: number;
     cloned_by_count: number;
     rate: number;
     free_users_allowed: boolean;

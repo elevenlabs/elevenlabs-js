@@ -5,6 +5,7 @@
 import * as environments from "./environments";
 import * as core from "./core";
 import { History } from "./api/resources/history/client/Client";
+import { TextToSoundEffects } from "./api/resources/textToSoundEffects/client/Client";
 import { Samples } from "./api/resources/samples/client/Client";
 import { TextToSpeech } from "./api/resources/textToSpeech/client/Client";
 import { SpeechToSpeech } from "./api/resources/speechToSpeech/client/Client";
@@ -17,6 +18,7 @@ import { Dubbing } from "./api/resources/dubbing/client/Client";
 import { Models } from "./api/resources/models/client/Client";
 import { AudioNative } from "./api/resources/audioNative/client/Client";
 import { PronunciationDictionary } from "./api/resources/pronunciationDictionary/client/Client";
+import { Workspace } from "./api/resources/workspace/client/Client";
 
 export declare namespace ElevenLabsClient {
     interface Options {
@@ -38,6 +40,12 @@ export class ElevenLabsClient {
 
     public get history(): History {
         return (this._history ??= new History(this._options));
+    }
+
+    protected _textToSoundEffects: TextToSoundEffects | undefined;
+
+    public get textToSoundEffects(): TextToSoundEffects {
+        return (this._textToSoundEffects ??= new TextToSoundEffects(this._options));
     }
 
     protected _samples: Samples | undefined;
@@ -110,5 +118,11 @@ export class ElevenLabsClient {
 
     public get pronunciationDictionary(): PronunciationDictionary {
         return (this._pronunciationDictionary ??= new PronunciationDictionary(this._options));
+    }
+
+    protected _workspace: Workspace | undefined;
+
+    public get workspace(): Workspace {
+        return (this._workspace ??= new Workspace(this._options));
     }
 }

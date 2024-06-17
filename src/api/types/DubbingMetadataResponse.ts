@@ -6,6 +6,6 @@ export interface DubbingMetadataResponse {
     dubbing_id: string;
     name: string;
     status: string;
-    error: string;
     target_languages: string[];
+    error?: string;
 }
