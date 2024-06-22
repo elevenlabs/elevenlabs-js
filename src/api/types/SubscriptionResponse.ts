@@ -21,4 +21,5 @@ export interface SubscriptionResponse {
     currency: ElevenLabs.Currency;
     status: ElevenLabs.SubscriptionStatus;
     billing_period: ElevenLabs.SubscriptionResponseModelBillingPeriod;
+    character_refresh_period: ElevenLabs.SubscriptionResponseModelCharacterRefreshPeriod;
 }

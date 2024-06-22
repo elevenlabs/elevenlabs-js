@@ -35,6 +35,10 @@ export class SpeechToSpeech {
         requestOptions?: SpeechToSpeech.RequestOptions
     ): Promise<stream.Readable> {
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (request.enable_logging != null) {
+            _queryParams["enable_logging"] = request.enable_logging;
+        }
+
         if (request.optimize_streaming_latency != null) {
             _queryParams["optimize_streaming_latency"] = request.optimize_streaming_latency;
         }
@@ -53,6 +57,10 @@ export class SpeechToSpeech {
             await _request.append("voice_settings", request.voice_settings);
         }
 
+        if (request.seed != null) {
+            await _request.append("seed", request.seed.toString());
+        }
+
         const _maybeEncodedRequest = _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
@@ -67,7 +75,7 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.0",
+                "X-Fern-SDK-Version": "0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...(await _maybeEncodedRequest.getHeaders()),
@@ -122,6 +130,10 @@ export class SpeechToSpeech {
         requestOptions?: SpeechToSpeech.RequestOptions
     ): Promise<stream.Readable> {
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (request.enable_logging != null) {
+            _queryParams["enable_logging"] = request.enable_logging;
+        }
+
         if (request.optimize_streaming_latency != null) {
             _queryParams["optimize_streaming_latency"] = request.optimize_streaming_latency;
         }
@@ -140,6 +152,10 @@ export class SpeechToSpeech {
             await _request.append("voice_settings", request.voice_settings);
         }
 
+        if (request.seed != null) {
+            await _request.append("seed", request.seed.toString());
+        }
+
         const _maybeEncodedRequest = _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
@@ -154,7 +170,7 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.0",
+                "X-Fern-SDK-Version": "0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...(await _maybeEncodedRequest.getHeaders()),

@@ -18,5 +18,6 @@ export interface Model {
     requires_alpha_access?: boolean;
     max_characters_request_free_user?: number;
     max_characters_request_subscribed_user?: number;
+    maximum_text_length_per_request?: number;
     languages?: ElevenLabs.LanguageResponse[];
 }

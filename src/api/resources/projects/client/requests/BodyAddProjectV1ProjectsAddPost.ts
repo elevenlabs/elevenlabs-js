@@ -16,15 +16,15 @@ import * as fs from "fs";
 export interface BodyAddProjectV1ProjectsAddPost {
     /** The name of the project, used for identification only. */
     name: string;
-    /** An optional URL from which we will extract content to initialize the project. If this is set, 'from_url' must be null. If neither 'from_url' or 'from_document' are provided we will initialize the project as blank. */
-    from_url?: string;
-    from_document?: File | fs.ReadStream | undefined;
     /** The voice_id that corresponds to the default voice used for new titles. */
     default_title_voice_id: string;
     /** The voice_id that corresponds to the default voice used for new paragraphs. */
     default_paragraph_voice_id: string;
     /** The model_id of the model to be used for this project, you can query GET https://api.elevenlabs.io/v1/models to list all available models. */
     default_model_id: string;
+    /** An optional URL from which we will extract content to initialize the project. If this is set, 'from_url' must be null. If neither 'from_url' or 'from_document' are provided we will initialize the project as blank. */
+    from_url?: string;
+    from_document?: File | fs.ReadStream | undefined;
     /**
      * Output quality of the generated audio. Must be one of:
      * standard - standard output format, 128kbps with 44.1kHz sample rate.
@@ -44,7 +44,7 @@ export interface BodyAddProjectV1ProjectsAddPost {
     acx_volume_normalization?: boolean;
     /** When the project is downloaded, should the returned audio have postprocessing in order to make it compliant with audiobook normalized volume requirements */
     volume_normalization?: boolean;
-    /** A list of pronunciation dictionary locators (id, version_id) encoded as a list of JSON strings for pronunciation dictionaries to be applied to the text.  A list of json encoded strings is required as adding projects may occur through formData as opposed to jsonBody */
+    /** A list of pronunciation dictionary locators (pronunciation_dictionary_id, version_id) encoded as a list of JSON strings for pronunciation dictionaries to be applied to the text.  A list of json encoded strings is required as adding projects may occur through formData as opposed to jsonBody. To specify multiple dictionaries use multiple --form lines in your curl, such as --form 'pronunciation_dictionary_locators="{\"pronunciation_dictionary_id\":\"Vmd4Zor6fplcA7WrINey\",\"version_id\":\"hRPaxjlTdR7wFMhV4w0b\"}"' --form 'pronunciation_dictionary_locators="{\"pronunciation_dictionary_id\":\"JzWtcGQMJ6bnlWwyMo7e\",\"version_id\":\"lbmwxiLu4q6txYxgdZqn\"}"'. Note that multiple dictionaries are not currently supported by our UI which will only show the first. */
     pronunciation_dictionary_locators?: string[];
     /** A url that will be called by our service when the project is converted with a json containing the status of the conversion */
     callback_url?: string;

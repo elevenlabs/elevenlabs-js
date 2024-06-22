@@ -15,7 +15,7 @@ export declare namespace ElevenLabsClient {
 
     interface GeneratAudioBulk extends ElevenLabs.TextToSpeechRequest {}
 
-    interface GenerateAudioStream extends ElevenLabs.TextToSpeechAsStreamRequest {
+    interface GenerateAudioStream extends ElevenLabs.StreamTextToSpeechRequest {
         /* Specify stream: true if you would like to get the audio in chunks */
         stream: true;
     }

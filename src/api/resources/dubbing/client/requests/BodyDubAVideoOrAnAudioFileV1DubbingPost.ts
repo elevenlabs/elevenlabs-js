@@ -11,7 +11,7 @@ import * as fs from "fs";
  *     }
  */
 export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
-    /** automatic or manual. */
+    /** automatic or manual. Manual mode is only supported when creating a dubbing studio project */
     mode?: string;
     file?: File | fs.ReadStream | undefined;
     csv_file?: File | fs.ReadStream | undefined;
@@ -25,7 +25,7 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     source_lang?: string;
     /** The Target language to dub the content into. Can be none if dubbing studio editor is enabled and running manual mode */
     target_lang: string;
-    /** Number of speakers to use for the dubbing. */
+    /** Number of speakers to use for the dubbing. Set to 0 to automatically detect the number of speakers */
     num_speakers?: number;
     /** Whether to apply watermark to the output video. */
     watermark?: boolean;
