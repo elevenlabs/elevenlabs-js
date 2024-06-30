@@ -16,9 +16,14 @@ export declare namespace History {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Override the xi-api-key header */
+        apiKey?: string | undefined;
     }
 }
 
@@ -34,7 +39,7 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.history.getAll({
+     *     await client.history.getAll({
      *         page_size: 1,
      *         voice_id: "pMsXgVXv3BLzUgSXRplE"
      *     })
@@ -74,7 +79,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -126,7 +131,7 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.history.get("ja9xsmfGhxYcymxGcOGB")
+     *     await client.history.get("ja9xsmfGhxYcymxGcOGB")
      */
     public async get(
         historyItemId: string,
@@ -145,7 +150,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -196,7 +201,7 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.history.delete("ja9xsmfGhxYcymxGcOGB")
+     *     await client.history.delete("ja9xsmfGhxYcymxGcOGB")
      */
     public async delete(historyItemId: string, requestOptions?: History.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -212,7 +217,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -272,7 +277,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -324,7 +329,7 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.history.download({
+     *     await client.history.download({
      *         history_item_ids: ["ja9xsmfGhxYcymxGcOGB"]
      *     })
      */
@@ -345,7 +350,7 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

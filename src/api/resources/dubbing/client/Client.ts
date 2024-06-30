@@ -16,9 +16,14 @@ export declare namespace Dubbing {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Override the xi-api-key header */
+        apiKey?: string | undefined;
     }
 }
 
@@ -34,7 +39,7 @@ export class Dubbing {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.dubbing.dubAVideoOrAnAudioFile({
+     *     await client.dubbing.dubAVideoOrAnAudioFile({
      *         target_lang: "target_lang"
      *     })
      */
@@ -114,7 +119,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...(await _maybeEncodedRequest.getHeaders()),
@@ -166,7 +171,7 @@ export class Dubbing {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.dubbing.getDubbingProjectMetadata("dubbing_id")
+     *     await client.dubbing.getDubbingProjectMetadata("dubbing_id")
      */
     public async getDubbingProjectMetadata(
         dubbingId: string,
@@ -185,7 +190,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -236,7 +241,7 @@ export class Dubbing {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.dubbing.deleteDubbingProject("dubbing_id")
+     *     await client.dubbing.deleteDubbingProject("dubbing_id")
      */
     public async deleteDubbingProject(dubbingId: string, requestOptions?: Dubbing.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -252,7 +257,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -316,7 +321,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -370,7 +375,7 @@ export class Dubbing {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.dubbing.getTranscriptForDub("dubbing_id", "language_code")
+     *     await client.dubbing.getTranscriptForDub("dubbing_id", "language_code")
      */
     public async getTranscriptForDub(
         dubbingId: string,
@@ -397,7 +402,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

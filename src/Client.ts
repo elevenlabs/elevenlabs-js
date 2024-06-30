@@ -27,9 +27,14 @@ export declare namespace ElevenLabsClient {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Override the xi-api-key header */
+        apiKey?: string | undefined;
     }
 }
 

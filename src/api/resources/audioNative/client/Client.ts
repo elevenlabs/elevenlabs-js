@@ -15,9 +15,14 @@ export declare namespace AudioNative {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Override the xi-api-key header */
+        apiKey?: string | undefined;
     }
 }
 
@@ -33,7 +38,7 @@ export class AudioNative {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.audioNative.create({
+     *     await client.audioNative.create({
      *         name: "name"
      *     })
      */
@@ -101,7 +106,7 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...(await _maybeEncodedRequest.getHeaders()),
