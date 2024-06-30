@@ -15,9 +15,14 @@ export declare namespace Chapters {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Override the xi-api-key header */
+        apiKey?: string | undefined;
     }
 }
 
@@ -33,7 +38,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.chapters.getAll("project_id")
+     *     await client.chapters.getAll("project_id")
      */
     public async getAll(
         projectId: string,
@@ -52,7 +57,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -104,7 +109,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.chapters.get("project_id", "chapter_id")
+     *     await client.chapters.get("project_id", "chapter_id")
      */
     public async get(
         projectId: string,
@@ -124,7 +129,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -176,7 +181,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.chapters.delete("project_id", "chapter_id")
+     *     await client.chapters.delete("project_id", "chapter_id")
      */
     public async delete(
         projectId: string,
@@ -196,7 +201,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -248,7 +253,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.chapters.convert("project_id", "chapter_id")
+     *     await client.chapters.convert("project_id", "chapter_id")
      */
     public async convert(
         projectId: string,
@@ -268,7 +273,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -320,7 +325,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.chapters.getAllSnapshots("project_id", "chapter_id")
+     *     await client.chapters.getAllSnapshots("project_id", "chapter_id")
      */
     public async getAllSnapshots(
         projectId: string,
@@ -340,7 +345,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -394,7 +399,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.chapters.streamSnapshot("project_id", "chapter_id", "chapter_snapshot_id")
+     *     await client.chapters.streamSnapshot("project_id", "chapter_id", "chapter_snapshot_id")
      */
     public async streamSnapshot(
         projectId: string,
@@ -418,7 +423,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

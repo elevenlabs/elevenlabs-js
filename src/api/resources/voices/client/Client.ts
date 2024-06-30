@@ -16,9 +16,14 @@ export declare namespace Voices {
     }
 
     interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
+        /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Override the xi-api-key header */
+        apiKey?: string | undefined;
     }
 }
 
@@ -36,7 +41,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.getAll()
+     *     await client.voices.getAll()
      */
     public async getAll(requestOptions?: Voices.RequestOptions): Promise<ElevenLabs.GetVoicesResponse> {
         const _response = await core.fetcher({
@@ -52,7 +57,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -100,7 +105,7 @@ export class Voices {
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await elevenLabs.voices.getDefaultSettings()
+     *     await client.voices.getDefaultSettings()
      */
     public async getDefaultSettings(requestOptions?: Voices.RequestOptions): Promise<ElevenLabs.VoiceSettings> {
         const _response = await core.fetcher({
@@ -116,7 +121,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -160,7 +165,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.getSettings("2EiwWnXFnvU5JabPnv8n")
+     *     await client.voices.getSettings("2EiwWnXFnvU5JabPnv8n")
      */
     public async getSettings(
         voiceId: string,
@@ -179,7 +184,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -231,7 +236,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.get("29vD33N1CtxCmqQRPOHJ")
+     *     await client.voices.get("29vD33N1CtxCmqQRPOHJ")
      */
     public async get(
         voiceId: string,
@@ -257,7 +262,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -309,7 +314,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.delete("29vD33N1CtxCmqQRPOHJ")
+     *     await client.voices.delete("29vD33N1CtxCmqQRPOHJ")
      */
     public async delete(voiceId: string, requestOptions?: Voices.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -325,7 +330,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -377,7 +382,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.editSettings("29vD33N1CtxCmqQRPOHJ", {
+     *     await client.voices.editSettings("29vD33N1CtxCmqQRPOHJ", {
      *         stability: 0.1,
      *         similarity_boost: 0.3,
      *         style: 0.2
@@ -401,7 +406,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -453,7 +458,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.add({
+     *     await client.voices.add({
      *         files: [fs.createReadStream("/path/to/your/file")],
      *         name: "Alex"
      *     })
@@ -490,7 +495,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...(await _maybeEncodedRequest.getHeaders()),
@@ -543,7 +548,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.edit("JBFqnCBsd6RMkjVDRZzb", {
+     *     await client.voices.edit("JBFqnCBsd6RMkjVDRZzb", {
      *         name: "George"
      *     })
      */
@@ -582,7 +587,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...(await _maybeEncodedRequest.getHeaders()),
@@ -636,7 +641,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.addSharingVoice("63e84100a6bf7874ba37a1bab9a31828a379ec94b891b401653b655c5110880f", "sB1b5zUrxQVAFl2PhZFp", {
+     *     await client.voices.addSharingVoice("63e84100a6bf7874ba37a1bab9a31828a379ec94b891b401653b655c5110880f", "sB1b5zUrxQVAFl2PhZFp", {
      *         new_name: "Alita"
      *     })
      */
@@ -659,7 +664,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -711,7 +716,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.getShared({
+     *     await client.voices.getShared({
      *         page_size: 1,
      *         gender: "female",
      *         language: "en"
@@ -815,7 +820,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -867,7 +872,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await elevenLabs.voices.getAProfilePage("handle")
+     *     await client.voices.getAProfilePage("handle")
      */
     public async getAProfilePage(
         handle: string,
@@ -886,7 +891,7 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.8.1",
+                "X-Fern-SDK-Version": "0.8.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
