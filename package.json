@@ -1,6 +1,6 @@
 {
     "name": "elevenlabs",
-    "version": "0.8.1",
+    "version": "v0.8.2",
     "private": false,
     "repository": "https://github.com/elevenlabs/elevenlabs-js",
     "license": "MIT",
@@ -36,6 +36,9 @@
         "@types/command-exists": "^1.2.3"
     },
     "browser": {
+        "fs": false,
+        "os": false,
+        "path": false,
         "command-exists": false,
         "execa": false
     }
