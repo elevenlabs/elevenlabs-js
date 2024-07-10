@@ -1,6 +1,6 @@
 {
     "name": "elevenlabs",
-    "version": "0.9.0",
+    "version": "0.9.1",
     "private": false,
     "repository": "https://github.com/elevenlabs/elevenlabs-js",
     "license": "MIT",
