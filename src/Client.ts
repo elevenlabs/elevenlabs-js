@@ -6,6 +6,7 @@ import * as environments from "./environments";
 import * as core from "./core";
 import { History } from "./api/resources/history/client/Client";
 import { TextToSoundEffects } from "./api/resources/textToSoundEffects/client/Client";
+import { AudioIsolation } from "./api/resources/audioIsolation/client/Client";
 import { Samples } from "./api/resources/samples/client/Client";
 import { TextToSpeech } from "./api/resources/textToSpeech/client/Client";
 import { SpeechToSpeech } from "./api/resources/speechToSpeech/client/Client";
@@ -51,6 +52,12 @@ export class ElevenLabsClient {
 
     public get textToSoundEffects(): TextToSoundEffects {
         return (this._textToSoundEffects ??= new TextToSoundEffects(this._options));
+    }
+
+    protected _audioIsolation: AudioIsolation | undefined;
+
+    public get audioIsolation(): AudioIsolation {
+        return (this._audioIsolation ??= new AudioIsolation(this._options));
     }
 
     protected _samples: Samples | undefined;
