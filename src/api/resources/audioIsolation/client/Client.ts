@@ -5,7 +5,7 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import * as fs from "fs";
+import * as stream from "stream";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -32,25 +32,16 @@ export class AudioIsolation {
 
     /**
      * Removes background noise from audio
-     *
-     * @param {ElevenLabs.BodyAudioIsolationV1AudioIsolationPost} request
-     * @param {AudioIsolation.RequestOptions} requestOptions - Request-specific configuration.
-     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.audioIsolation.audioIsolation({
-     *         audio: fs.createReadStream("/path/to/your/file")
-     *     })
      */
     public async audioIsolation(
         request: ElevenLabs.BodyAudioIsolationV1AudioIsolationPost,
         requestOptions?: AudioIsolation.RequestOptions
-    ): Promise<ElevenLabs.AudioIsolationResponseModel> {
+    ): Promise<stream.Readable> {
         const _request = new core.FormDataWrapper();
         await _request.append("audio", request.audio);
         const _maybeEncodedRequest = _request.getRequest();
-        const _response = await core.fetcher({
+        const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
                 "v1/audio-isolation"
@@ -63,18 +54,19 @@ export class AudioIsolation {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.9.0",
+                "X-Fern-SDK-Version": "0.9.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...(await _maybeEncodedRequest.getHeaders()),
             },
             body: await _maybeEncodedRequest.getBody(),
+            responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.AudioIsolationResponseModel;
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {
@@ -108,25 +100,16 @@ export class AudioIsolation {
 
     /**
      * Removes background noise from audio and streams the result
-     *
-     * @param {ElevenLabs.BodyAudioIsolationStreamV1AudioIsolationStreamPost} request
-     * @param {AudioIsolation.RequestOptions} requestOptions - Request-specific configuration.
-     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.audioIsolation.audioIsolationStream({
-     *         audio: fs.createReadStream("/path/to/your/file")
-     *     })
      */
     public async audioIsolationStream(
         request: ElevenLabs.BodyAudioIsolationStreamV1AudioIsolationStreamPost,
         requestOptions?: AudioIsolation.RequestOptions
-    ): Promise<void> {
+    ): Promise<stream.Readable> {
         const _request = new core.FormDataWrapper();
         await _request.append("audio", request.audio);
         const _maybeEncodedRequest = _request.getRequest();
-        const _response = await core.fetcher({
+        const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
                 "v1/audio-isolation/stream"
@@ -139,18 +122,19 @@ export class AudioIsolation {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.9.0",
+                "X-Fern-SDK-Version": "0.9.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...(await _maybeEncodedRequest.getHeaders()),
             },
             body: await _maybeEncodedRequest.getBody(),
+            responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {
