@@ -12,6 +12,7 @@ import * as errors from "../../../../errors/index";
 export declare namespace TextToSoundEffects {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
@@ -51,11 +52,12 @@ export class TextToSoundEffects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.9.1",
+                "X-Fern-SDK-Version": "0.10.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            requestType: "json",
             body: request,
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,

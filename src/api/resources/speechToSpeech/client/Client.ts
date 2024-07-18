@@ -12,6 +12,7 @@ import * as errors from "../../../../errors/index";
 export declare namespace SpeechToSpeech {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
@@ -52,8 +53,8 @@ export class SpeechToSpeech {
             _queryParams["output_format"] = request.output_format;
         }
 
-        const _request = new core.FormDataWrapper();
-        await _request.append("audio", request.audio);
+        const _request = await core.newFormData();
+        await _request.appendFile("audio", request.audio);
         if (request.model_id != null) {
             await _request.append("model_id", request.model_id);
         }
@@ -66,7 +67,7 @@ export class SpeechToSpeech {
             await _request.append("seed", request.seed.toString());
         }
 
-        const _maybeEncodedRequest = _request.getRequest();
+        const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -80,13 +81,15 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.9.1",
+                "X-Fern-SDK-Version": "0.10.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...(await _maybeEncodedRequest.getHeaders()),
+                ..._maybeEncodedRequest.headers,
             },
             queryParameters: _queryParams,
-            body: await _maybeEncodedRequest.getBody(),
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
@@ -147,8 +150,8 @@ export class SpeechToSpeech {
             _queryParams["output_format"] = request.output_format;
         }
 
-        const _request = new core.FormDataWrapper();
-        await _request.append("audio", request.audio);
+        const _request = await core.newFormData();
+        await _request.appendFile("audio", request.audio);
         if (request.model_id != null) {
             await _request.append("model_id", request.model_id);
         }
@@ -161,7 +164,7 @@ export class SpeechToSpeech {
             await _request.append("seed", request.seed.toString());
         }
 
-        const _maybeEncodedRequest = _request.getRequest();
+        const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -175,13 +178,15 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.9.1",
+                "X-Fern-SDK-Version": "0.10.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...(await _maybeEncodedRequest.getHeaders()),
+                ..._maybeEncodedRequest.headers,
             },
             queryParameters: _queryParams,
-            body: await _maybeEncodedRequest.getBody(),
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,

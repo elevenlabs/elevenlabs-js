@@ -24,6 +24,7 @@ import { Workspace } from "./api/resources/workspace/client/Client";
 export declare namespace ElevenLabsClient {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
