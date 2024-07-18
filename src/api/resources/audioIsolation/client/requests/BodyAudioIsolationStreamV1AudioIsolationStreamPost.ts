@@ -11,5 +11,5 @@ import * as fs from "fs";
  *     }
  */
 export interface BodyAudioIsolationStreamV1AudioIsolationStreamPost {
-    audio: File | fs.ReadStream;
+    audio: File | fs.ReadStream | Blob;
 }

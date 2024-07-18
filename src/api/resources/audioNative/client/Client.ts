@@ -11,6 +11,7 @@ import * as errors from "../../../../errors/index";
 export declare namespace AudioNative {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
@@ -46,7 +47,7 @@ export class AudioNative {
         request: ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost,
         requestOptions?: AudioNative.RequestOptions
     ): Promise<ElevenLabs.AudioNativeCreateProjectResponseModel> {
-        const _request = new core.FormDataWrapper();
+        const _request = await core.newFormData();
         await _request.append("name", request.name);
         if (request.image != null) {
             await _request.append("image", request.image);
@@ -85,14 +86,14 @@ export class AudioNative {
         }
 
         if (request.file != null) {
-            await _request.append("file", request.file);
+            await _request.appendFile("file", request.file);
         }
 
         if (request.auto_convert != null) {
             await _request.append("auto_convert", request.auto_convert.toString());
         }
 
-        const _maybeEncodedRequest = _request.getRequest();
+        const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -106,12 +107,14 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.9.1",
+                "X-Fern-SDK-Version": "0.10.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...(await _maybeEncodedRequest.getHeaders()),
+                ..._maybeEncodedRequest.headers,
             },
-            body: await _maybeEncodedRequest.getBody(),
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

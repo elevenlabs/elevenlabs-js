@@ -13,7 +13,7 @@ import * as fs from "fs";
 export interface BodyEditVoiceV1VoicesVoiceIdEditPost {
     /** The name that identifies this voice. This will be displayed in the dropdown of the website. */
     name: string;
-    files?: File[] | fs.ReadStream[] | undefined;
+    files?: File[] | fs.ReadStream[] | Blob[] | undefined;
     /** How would you describe the voice? */
     description?: string;
     /** Serialized labels dictionary for the voice. */

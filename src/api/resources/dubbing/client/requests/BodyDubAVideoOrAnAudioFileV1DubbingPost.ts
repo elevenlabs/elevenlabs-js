@@ -13,10 +13,10 @@ import * as fs from "fs";
 export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     /** automatic or manual. Manual mode is only supported when creating a dubbing studio project */
     mode?: string;
-    file?: File | fs.ReadStream | undefined;
-    csv_file?: File | fs.ReadStream | undefined;
-    foreground_audio_file?: File | fs.ReadStream | undefined;
-    background_audio_file?: File | fs.ReadStream | undefined;
+    file?: File | fs.ReadStream | Blob | undefined;
+    csv_file?: File | fs.ReadStream | Blob | undefined;
+    foreground_audio_file?: File | fs.ReadStream | Blob | undefined;
+    background_audio_file?: File | fs.ReadStream | Blob | undefined;
     /** Name of the dubbing project. */
     name?: string;
     /** URL of the source video/audio file. */

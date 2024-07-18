@@ -31,7 +31,7 @@ export interface BodyCreatesAudioNativeEnabledProjectV1AudioNativePost {
     voice_id?: string;
     /** TTS Model ID used in the player. If not provided, default model ID set in the Player settings is used. */
     model_id?: string;
-    file?: File | fs.ReadStream | undefined;
+    file?: File | fs.ReadStream | Blob | undefined;
     /** Whether to auto convert the project to audio or not. */
     auto_convert?: boolean;
 }

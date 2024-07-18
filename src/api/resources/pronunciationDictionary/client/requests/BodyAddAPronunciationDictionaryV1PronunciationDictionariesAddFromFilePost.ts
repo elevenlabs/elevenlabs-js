@@ -14,7 +14,7 @@ import * as ElevenLabs from "../../../../index";
 export interface BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost {
     /** The name of the pronunciation dictionary, used for identification only. */
     name: string;
-    file?: File | fs.ReadStream | undefined;
+    file?: File | fs.ReadStream | Blob | undefined;
     /** A description of the pronunciation dictionary, used for identification only. */
     description?: string;
     /** Should be one of 'editor' or 'viewer'. If not provided, defaults to no access. */

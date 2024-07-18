@@ -38,7 +38,7 @@ export interface BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost {
      * ulaw_8000 - μ-law format (sometimes written mu-law, often approximated as u-law) with 8kHz sample rate. Note that this format is commonly used for Twilio audio inputs.
      */
     output_format?: string;
-    audio: File | fs.ReadStream;
+    audio: File | fs.ReadStream | Blob;
     /** Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for speech to speech, you can check this using the can_do_voice_conversion property. */
     model_id?: string;
     /** Voice settings overriding stored setttings for the given voice. They are applied only on the given request. Needs to be send as a JSON encoded string. */

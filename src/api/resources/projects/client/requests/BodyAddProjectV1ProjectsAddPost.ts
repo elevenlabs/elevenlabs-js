@@ -24,7 +24,7 @@ export interface BodyAddProjectV1ProjectsAddPost {
     default_model_id: string;
     /** An optional URL from which we will extract content to initialize the project. If this is set, 'from_url' must be null. If neither 'from_url' or 'from_document' are provided we will initialize the project as blank. */
     from_url?: string;
-    from_document?: File | fs.ReadStream | undefined;
+    from_document?: File | fs.ReadStream | Blob | undefined;
     /**
      * Output quality of the generated audio. Must be one of:
      * standard - standard output format, 128kbps with 44.1kHz sample rate.
