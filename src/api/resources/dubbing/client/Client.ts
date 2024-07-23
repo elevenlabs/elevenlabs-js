@@ -49,24 +49,8 @@ export class Dubbing {
         requestOptions?: Dubbing.RequestOptions
     ): Promise<ElevenLabs.DoDubbingResponse> {
         const _request = await core.newFormData();
-        if (request.mode != null) {
-            await _request.append("mode", request.mode);
-        }
-
         if (request.file != null) {
             await _request.appendFile("file", request.file);
-        }
-
-        if (request.csv_file != null) {
-            await _request.appendFile("csv_file", request.csv_file);
-        }
-
-        if (request.foreground_audio_file != null) {
-            await _request.appendFile("foreground_audio_file", request.foreground_audio_file);
-        }
-
-        if (request.background_audio_file != null) {
-            await _request.appendFile("background_audio_file", request.background_audio_file);
         }
 
         if (request.name != null) {
@@ -102,10 +86,6 @@ export class Dubbing {
             await _request.append("highest_resolution", request.highest_resolution.toString());
         }
 
-        if (request.dubbing_studio != null) {
-            await _request.append("dubbing_studio", request.dubbing_studio.toString());
-        }
-
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
@@ -120,7 +100,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -193,7 +173,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -261,7 +241,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -326,7 +306,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -408,7 +388,7 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

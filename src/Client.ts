@@ -18,6 +18,7 @@ import { Chapters } from "./api/resources/chapters/client/Client";
 import { Dubbing } from "./api/resources/dubbing/client/Client";
 import { Models } from "./api/resources/models/client/Client";
 import { AudioNative } from "./api/resources/audioNative/client/Client";
+import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionary } from "./api/resources/pronunciationDictionary/client/Client";
 import { Workspace } from "./api/resources/workspace/client/Client";
 
@@ -125,6 +126,12 @@ export class ElevenLabsClient {
 
     public get audioNative(): AudioNative {
         return (this._audioNative ??= new AudioNative(this._options));
+    }
+
+    protected _usage: Usage | undefined;
+
+    public get usage(): Usage {
+        return (this._usage ??= new Usage(this._options));
     }
 
     protected _pronunciationDictionary: PronunciationDictionary | undefined;

@@ -21,4 +21,5 @@ export interface SpeechHistoryItemResponse {
     feedback?: ElevenLabs.FeedbackItem;
     share_link_id?: string;
     source?: ElevenLabs.Source;
+    alignments?: ElevenLabs.HistoryAlignmentsResponseModel;
 }

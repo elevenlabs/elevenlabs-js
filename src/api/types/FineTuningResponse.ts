@@ -6,15 +6,16 @@ import * as ElevenLabs from "../index";
 
 export interface FineTuningResponse {
     is_allowed_to_fine_tune?: boolean;
-    finetuning_state?: ElevenLabs.FinetuningState;
+    state?: Record<string, ElevenLabs.FineTuningResponseModelStateValue>;
     verification_failures?: string[];
     verification_attempts_count?: number;
     manual_verification_requested?: boolean;
     language?: string;
-    finetuning_progress?: Record<string, number>;
-    message?: string;
+    progress?: Record<string, number>;
+    message?: Record<string, string>;
     dataset_duration_seconds?: number;
     verification_attempts?: ElevenLabs.VerificationAttemptResponse[];
     slice_ids?: string[];
     manual_verification?: ElevenLabs.ManualVerificationResponse;
+    finetuning_state?: unknown;
 }
