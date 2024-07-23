@@ -29,4 +29,5 @@ export interface LibraryVoiceResponse {
     twitter_username?: string;
     youtube_username?: string;
     tiktok_username?: string;
+    image_url?: string;
 }

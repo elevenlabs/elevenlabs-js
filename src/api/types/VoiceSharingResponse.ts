@@ -21,6 +21,7 @@ export interface VoiceSharingResponse {
     featured?: boolean;
     category?: ElevenLabs.Category;
     reader_app_enabled?: boolean;
+    image_url?: string;
     ban_reason?: string;
     liked_by_count?: number;
     cloned_by_count?: number;

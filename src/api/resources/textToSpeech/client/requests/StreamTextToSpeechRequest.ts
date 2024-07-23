@@ -34,6 +34,8 @@ export interface StreamTextToSpeechRequest {
     text: string;
     /** Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property. */
     model_id?: string;
+    /** Language code (ISO 639-1) used to enforce a language for the model. Currently only Turbo v2.5 supports language enforcement. For other models, an error will be returned if language code is provided. */
+    language_code?: string;
     /** Voice settings overriding stored setttings for the given voice. They are applied only on the given request. */
     voice_settings?: ElevenLabs.VoiceSettings;
     /** A list of pronunciation dictionary locators (id, version_id) to be applied to the text. They will be applied in order. You may have up to 3 locators per request */

@@ -72,7 +72,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -128,7 +128,7 @@ export class TextToSpeech {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.textToSpeech.convertWithTimstamps("voice_id", {
+     *     await client.textToSpeech.convertWithTimstamps("21m00Tcm4TlvDq8ikWAM", {
      *         text: "text"
      *     })
      */
@@ -169,7 +169,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -255,7 +255,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -311,7 +311,7 @@ export class TextToSpeech {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.textToSpeech.streamWithTimestamps("voice_id", {
+     *     await client.textToSpeech.streamWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
      *         text: "text"
      *     })
      */
@@ -352,7 +352,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

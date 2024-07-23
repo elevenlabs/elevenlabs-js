@@ -5,11 +5,10 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import * as stream from "stream";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
-export declare namespace TextToSoundEffects {
+export declare namespace Usage {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Override the xi-api-key header */
@@ -28,23 +27,50 @@ export declare namespace TextToSoundEffects {
     }
 }
 
-export class TextToSoundEffects {
-    constructor(protected readonly _options: TextToSoundEffects.Options = {}) {}
+export class Usage {
+    constructor(protected readonly _options: Usage.Options = {}) {}
 
     /**
-     * Converts a text of your choice into sound
+     * Returns the characters usage metrics for the current user or the entire workspace they are part of. The response will return a time axis with unix timestamps for each day and daily usage along that axis. The usage will be broken down by the specified breakdown type. For example, breakdown type "voice" will return the usage of each voice along the time axis.
+     *
+     * @param {ElevenLabs.UsageGetCharactersUsageMetricsRequest} request
+     * @param {Usage.RequestOptions} requestOptions - Request-specific configuration.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.usage.getCharactersUsageMetrics({
+     *         start_unix: 1,
+     *         end_unix: 1
+     *     })
      */
-    public async convert(
-        request: ElevenLabs.BodySoundGenerationV1SoundGenerationPost,
-        requestOptions?: TextToSoundEffects.RequestOptions
-    ): Promise<stream.Readable> {
-        const _response = await core.fetcher<stream.Readable>({
+    public async getCharactersUsageMetrics(
+        request: ElevenLabs.UsageGetCharactersUsageMetricsRequest,
+        requestOptions?: Usage.RequestOptions
+    ): Promise<ElevenLabs.UsageCharactersResponseModel> {
+        const {
+            start_unix: startUnix,
+            end_unix: endUnix,
+            include_workspace_metrics: includeWorkspaceMetrics,
+            breakdown_type: breakdownType,
+        } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        _queryParams["start_unix"] = startUnix.toString();
+        _queryParams["end_unix"] = endUnix.toString();
+        if (includeWorkspaceMetrics != null) {
+            _queryParams["include_workspace_metrics"] = includeWorkspaceMetrics.toString();
+        }
+
+        if (breakdownType != null) {
+            _queryParams["breakdown_type"] = breakdownType;
+        }
+
+        const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/sound-generation"
+                "v1/usage/character-stats"
             ),
-            method: "POST",
+            method: "GET",
             headers: {
                 "xi-api-key":
                     (await core.Supplier.get(this._options.apiKey)) != null
@@ -57,15 +83,14 @@ export class TextToSoundEffects {
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
-            body: request,
-            responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.UsageCharactersResponseModel;
         }
 
         if (_response.error.reason === "status-code") {

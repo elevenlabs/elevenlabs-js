@@ -21,4 +21,5 @@ export interface Voice {
     voice_verification?: ElevenLabs.VoiceVerificationResponse;
     owner_id?: string;
     permission_on_resource?: string;
+    is_legacy?: boolean;
 }

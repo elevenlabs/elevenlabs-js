@@ -9,6 +9,10 @@
  *     }
  */
 export interface AddSharingVoiceRequest {
+    /**
+     * Your app check token.
+     */
+    "xi-app-check-token"?: string;
     /** The name that identifies this voice. This will be displayed in the dropdown of the website. */
     new_name: string;
 }

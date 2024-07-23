@@ -39,7 +39,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.chapters.getAll("project_id")
+     *     await client.chapters.getAll("21m00Tcm4TlvDq8ikWAM")
      */
     public async getAll(
         projectId: string,
@@ -58,7 +58,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -111,7 +111,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.chapters.get("project_id", "chapter_id")
+     *     await client.chapters.get("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM")
      */
     public async get(
         projectId: string,
@@ -131,7 +131,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -184,7 +184,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.chapters.delete("project_id", "chapter_id")
+     *     await client.chapters.delete("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM")
      */
     public async delete(
         projectId: string,
@@ -204,7 +204,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -257,7 +257,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.chapters.convert("project_id", "chapter_id")
+     *     await client.chapters.convert("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM")
      */
     public async convert(
         projectId: string,
@@ -277,7 +277,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -330,7 +330,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.chapters.getAllSnapshots("project_id", "chapter_id")
+     *     await client.chapters.getAllSnapshots("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM")
      */
     public async getAllSnapshots(
         projectId: string,
@@ -350,7 +350,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -405,7 +405,7 @@ export class Chapters {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.chapters.streamSnapshot("project_id", "chapter_id", "chapter_snapshot_id")
+     *     await client.chapters.streamSnapshot("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM")
      */
     public async streamSnapshot(
         projectId: string,
@@ -429,7 +429,7 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.10.0",
+                "X-Fern-SDK-Version": "0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
