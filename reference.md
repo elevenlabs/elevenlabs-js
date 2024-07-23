@@ -777,7 +777,7 @@ Converts text into speech using a voice of your choice and returns JSON containi
 <dd>
 
 ```typescript
-await client.textToSpeech.convertWithTimstamps("voice_id", {
+await client.textToSpeech.convertWithTimstamps("21m00Tcm4TlvDq8ikWAM", {
     text: "text",
 });
 ```
@@ -930,7 +930,7 @@ Converts text into speech using a voice of your choice and returns a stream of J
 <dd>
 
 ```typescript
-await client.textToSpeech.streamWithTimestamps("voice_id", {
+await client.textToSpeech.streamWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
     text: "text",
 });
 ```
@@ -1436,7 +1436,7 @@ await client.user.get();
 
 ## voices
 
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAll</a>() -> ElevenLabs.GetVoicesResponse</code></summary>
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetVoicesResponse</code></summary>
 <dl>
 <dd>
 
@@ -1476,6 +1476,14 @@ await client.voices.getAll();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.VoicesGetAllRequest`
+
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -2109,6 +2117,69 @@ await client.voices.getShared({
 </dl>
 </details>
 
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getSimilarLibraryVoices</a>({ ...params }) -> ElevenLabs.GetLibraryVoicesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of shared voices similar to the provided audio sample. If neither similarity_threshold nor top_k is provided, we will apply default values.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.getSimilarLibraryVoices({});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Voices.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAProfilePage</a>(handle) -> ElevenLabs.ProfilePageResponseModel</code></summary>
 <dl>
 <dd>
@@ -2137,7 +2208,7 @@ Gets a profile page based on a handle
 <dd>
 
 ```typescript
-await client.voices.getAProfilePage("handle");
+await client.voices.getAProfilePage("talexgeorge");
 ```
 
 </dd>
@@ -2325,7 +2396,7 @@ Returns information about a specific project. This endpoint returns more detaile
 <dd>
 
 ```typescript
-await client.projects.get("project_id");
+await client.projects.get("21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -2388,7 +2459,7 @@ Edits basic project info.
 <dd>
 
 ```typescript
-await client.projects.editBasicProjectInfo("project_id", {
+await client.projects.editBasicProjectInfo("21m00Tcm4TlvDq8ikWAM", {
     name: "name",
     default_title_voice_id: "default_title_voice_id",
     default_paragraph_voice_id: "default_paragraph_voice_id",
@@ -2463,7 +2534,7 @@ Delete a project by its project_id.
 <dd>
 
 ```typescript
-await client.projects.delete("project_id");
+await client.projects.delete("21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -2526,7 +2597,7 @@ Starts conversion of a project and all of its chapters.
 <dd>
 
 ```typescript
-await client.projects.convert("project_id");
+await client.projects.convert("21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -2589,7 +2660,7 @@ Gets the snapshots of a project.
 <dd>
 
 ```typescript
-await client.projects.getSnapshots("project_id");
+await client.projects.getSnapshots("21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -2733,7 +2804,7 @@ Streams archive with project audio.
 <dd>
 
 ```typescript
-await client.projects.streamArchive("project_id", "project_snapshot_id");
+await client.projects.streamArchive("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -2804,7 +2875,7 @@ Updates the set of pronunciation dictionaries acting on a project. This will aut
 <dd>
 
 ```typescript
-await client.projects.updatePronunciationDictionaries("project_id", {
+await client.projects.updatePronunciationDictionaries("21m00Tcm4TlvDq8ikWAM", {
     pronunciation_dictionary_locators: [
         {
             pronunciation_dictionary_id: "pronunciation_dictionary_id",
@@ -2884,7 +2955,7 @@ Returns a list of your chapters for a project together and its metadata.
 <dd>
 
 ```typescript
-await client.chapters.getAll("project_id");
+await client.chapters.getAll("21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -2947,7 +3018,7 @@ Returns information about a specific chapter.
 <dd>
 
 ```typescript
-await client.chapters.get("project_id", "chapter_id");
+await client.chapters.get("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -3018,7 +3089,7 @@ Delete a chapter by its chapter_id.
 <dd>
 
 ```typescript
-await client.chapters.delete("project_id", "chapter_id");
+await client.chapters.delete("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -3089,7 +3160,7 @@ Starts conversion of a specific chapter.
 <dd>
 
 ```typescript
-await client.chapters.convert("project_id", "chapter_id");
+await client.chapters.convert("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -3160,7 +3231,7 @@ Gets information about all the snapshots of a chapter, each snapshot corresponds
 <dd>
 
 ```typescript
-await client.chapters.getAllSnapshots("project_id", "chapter_id");
+await client.chapters.getAllSnapshots("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -3231,7 +3302,7 @@ Stream the audio from a chapter snapshot. Use `GET /v1/projects/{project_id}/cha
 <dd>
 
 ```typescript
-await client.chapters.streamSnapshot("project_id", "chapter_id", "chapter_snapshot_id");
+await client.chapters.streamSnapshot("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -3757,6 +3828,74 @@ await client.audioNative.create({
 </dl>
 </details>
 
+## Usage
+
+<details><summary><code>client.usage.<a href="/src/api/resources/usage/client/Client.ts">getCharactersUsageMetrics</a>({ ...params }) -> ElevenLabs.UsageCharactersResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the characters usage metrics for the current user or the entire workspace they are part of. The response will return a time axis with unix timestamps for each day and daily usage along that axis. The usage will be broken down by the specified breakdown type. For example, breakdown type "voice" will return the usage of each voice along the time axis.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.usage.getCharactersUsageMetrics({
+    start_unix: 1,
+    end_unix: 1,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.UsageGetCharactersUsageMetricsRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Usage.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## PronunciationDictionary
 
 <details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">addFromFile</a>({ ...params }) -> ElevenLabs.AddPronunciationDictionaryResponseModel</code></summary>
@@ -3852,7 +3991,7 @@ Add rules to the pronunciation dictionary
 <dd>
 
 ```typescript
-await client.pronunciationDictionary.addRulesToThePronunciationDictionary("pronunciation_dictionary_id", {
+await client.pronunciationDictionary.addRulesToThePronunciationDictionary("21m00Tcm4TlvDq8ikWAM", {
     rules: [],
 });
 ```
@@ -3925,7 +4064,7 @@ Remove rules from the pronunciation dictionary
 <dd>
 
 ```typescript
-await client.pronunciationDictionary.removeRulesFromThePronunciationDictionary("pronunciation_dictionary_id", {
+await client.pronunciationDictionary.removeRulesFromThePronunciationDictionary("21m00Tcm4TlvDq8ikWAM", {
     rule_strings: ["rule_strings"],
 });
 ```

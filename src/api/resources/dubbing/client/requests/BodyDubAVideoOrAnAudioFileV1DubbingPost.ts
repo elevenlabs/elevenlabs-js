@@ -11,19 +11,14 @@ import * as fs from "fs";
  *     }
  */
 export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
-    /** automatic or manual. Manual mode is only supported when creating a dubbing studio project */
-    mode?: string;
     file?: File | fs.ReadStream | Blob | undefined;
-    csv_file?: File | fs.ReadStream | Blob | undefined;
-    foreground_audio_file?: File | fs.ReadStream | Blob | undefined;
-    background_audio_file?: File | fs.ReadStream | Blob | undefined;
     /** Name of the dubbing project. */
     name?: string;
     /** URL of the source video/audio file. */
     source_url?: string;
     /** Source language. */
     source_lang?: string;
-    /** The Target language to dub the content into. Can be none if dubbing studio editor is enabled and running manual mode */
+    /** The Target language to dub the content into. */
     target_lang: string;
     /** Number of speakers to use for the dubbing. Set to 0 to automatically detect the number of speakers */
     num_speakers?: number;
@@ -35,6 +30,4 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     end_time?: number;
     /** Whether to use the highest resolution available. */
     highest_resolution?: boolean;
-    /** Whether to prepare dub for edits in dubbing studio. */
-    dubbing_studio?: boolean;
 }

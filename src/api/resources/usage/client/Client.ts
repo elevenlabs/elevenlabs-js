@@ -8,7 +8,7 @@ import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
-export declare namespace AudioNative {
+export declare namespace Usage {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Override the xi-api-key header */
@@ -27,79 +27,50 @@ export declare namespace AudioNative {
     }
 }
 
-export class AudioNative {
-    constructor(protected readonly _options: AudioNative.Options = {}) {}
+export class Usage {
+    constructor(protected readonly _options: Usage.Options = {}) {}
 
     /**
-     * Creates AudioNative enabled project, optionally starts conversion and returns project id and embeddable html snippet.
+     * Returns the characters usage metrics for the current user or the entire workspace they are part of. The response will return a time axis with unix timestamps for each day and daily usage along that axis. The usage will be broken down by the specified breakdown type. For example, breakdown type "voice" will return the usage of each voice along the time axis.
      *
-     * @param {ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost} request
-     * @param {AudioNative.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {ElevenLabs.UsageGetCharactersUsageMetricsRequest} request
+     * @param {Usage.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.audioNative.create({
-     *         name: "name"
+     *     await client.usage.getCharactersUsageMetrics({
+     *         start_unix: 1,
+     *         end_unix: 1
      *     })
      */
-    public async create(
-        request: ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost,
-        requestOptions?: AudioNative.RequestOptions
-    ): Promise<ElevenLabs.AudioNativeCreateProjectResponseModel> {
-        const _request = await core.newFormData();
-        await _request.append("name", request.name);
-        if (request.image != null) {
-            await _request.append("image", request.image);
+    public async getCharactersUsageMetrics(
+        request: ElevenLabs.UsageGetCharactersUsageMetricsRequest,
+        requestOptions?: Usage.RequestOptions
+    ): Promise<ElevenLabs.UsageCharactersResponseModel> {
+        const {
+            start_unix: startUnix,
+            end_unix: endUnix,
+            include_workspace_metrics: includeWorkspaceMetrics,
+            breakdown_type: breakdownType,
+        } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        _queryParams["start_unix"] = startUnix.toString();
+        _queryParams["end_unix"] = endUnix.toString();
+        if (includeWorkspaceMetrics != null) {
+            _queryParams["include_workspace_metrics"] = includeWorkspaceMetrics.toString();
         }
 
-        if (request.author != null) {
-            await _request.append("author", request.author);
+        if (breakdownType != null) {
+            _queryParams["breakdown_type"] = breakdownType;
         }
 
-        if (request.title != null) {
-            await _request.append("title", request.title);
-        }
-
-        if (request.small != null) {
-            await _request.append("small", request.small.toString());
-        }
-
-        if (request.text_color != null) {
-            await _request.append("text_color", request.text_color);
-        }
-
-        if (request.background_color != null) {
-            await _request.append("background_color", request.background_color);
-        }
-
-        if (request.sessionization != null) {
-            await _request.append("sessionization", request.sessionization.toString());
-        }
-
-        if (request.voice_id != null) {
-            await _request.append("voice_id", request.voice_id);
-        }
-
-        if (request.model_id != null) {
-            await _request.append("model_id", request.model_id);
-        }
-
-        if (request.file != null) {
-            await _request.appendFile("file", request.file);
-        }
-
-        if (request.auto_convert != null) {
-            await _request.append("auto_convert", request.auto_convert.toString());
-        }
-
-        const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/audio-native"
+                "v1/usage/character-stats"
             ),
-            method: "POST",
+            method: "GET",
             headers: {
                 "xi-api-key":
                     (await core.Supplier.get(this._options.apiKey)) != null
@@ -110,17 +81,16 @@ export class AudioNative {
                 "X-Fern-SDK-Version": "v0.11.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ..._maybeEncodedRequest.headers,
             },
-            requestType: "file",
-            duplex: _maybeEncodedRequest.duplex,
-            body: _maybeEncodedRequest.body,
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.AudioNativeCreateProjectResponseModel;
+            return _response.body as ElevenLabs.UsageCharactersResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
