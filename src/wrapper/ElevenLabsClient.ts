@@ -61,7 +61,11 @@ export class ElevenLabsClient extends FernClient {
         const voiceIdOrName = request.voice ?? "Bella";
         const voiceId = isVoiceId(voiceIdOrName)
             ? voiceIdOrName
-            : (await this.voices.getAll()).voices.filter((voice) => voice.name === voiceIdOrName)[0]?.voice_id;
+            : (
+                  await this.voices.getAll({
+                      show_legacy: true,
+                  })
+              ).voices.filter((voice) => voice.name === voiceIdOrName)[0]?.voice_id;
         if (voiceId == null) {
             throw new errors.ElevenLabsError({
                 message: `${voiceIdOrName} is not a valid voice name`,
