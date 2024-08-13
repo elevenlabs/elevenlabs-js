@@ -749,7 +749,7 @@ await client.textToSpeech.convert("pMsXgVXv3BLzUgSXRplE", {
 </dl>
 </details>
 
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">convertWithTimstamps</a>(voiceId, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">convertWithTimestamps</a>(voiceId, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -777,7 +777,7 @@ Converts text into speech using a voice of your choice and returns JSON containi
 <dd>
 
 ```typescript
-await client.textToSpeech.convertWithTimstamps("21m00Tcm4TlvDq8ikWAM", {
+await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
     text: "text",
 });
 ```
@@ -803,7 +803,7 @@ await client.textToSpeech.convertWithTimstamps("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.TextToSpeechWithTimstampsRequest`
+**request:** `ElevenLabs.TextToSpeechWithTimestampsRequest`
 
 </dd>
 </dl>

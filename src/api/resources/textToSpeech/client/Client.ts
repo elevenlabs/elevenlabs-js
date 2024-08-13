@@ -72,7 +72,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.14.0",
+                "X-Fern-SDK-Version": "0.15.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -122,19 +122,19 @@ export class TextToSpeech {
      * Converts text into speech using a voice of your choice and returns JSON containing audio as a base64 encoded string together with information on when which character was spoken.
      *
      * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
-     * @param {ElevenLabs.TextToSpeechWithTimstampsRequest} request
+     * @param {ElevenLabs.TextToSpeechWithTimestampsRequest} request
      * @param {TextToSpeech.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.textToSpeech.convertWithTimstamps("21m00Tcm4TlvDq8ikWAM", {
+     *     await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
      *         text: "text"
      *     })
      */
-    public async convertWithTimstamps(
+    public async convertWithTimestamps(
         voiceId: string,
-        request: ElevenLabs.TextToSpeechWithTimstampsRequest,
+        request: ElevenLabs.TextToSpeechWithTimestampsRequest,
         requestOptions?: TextToSpeech.RequestOptions
     ): Promise<unknown> {
         const {
@@ -169,7 +169,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.14.0",
+                "X-Fern-SDK-Version": "0.15.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -255,7 +255,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.14.0",
+                "X-Fern-SDK-Version": "0.15.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -352,7 +352,7 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.14.0",
+                "X-Fern-SDK-Version": "0.15.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
