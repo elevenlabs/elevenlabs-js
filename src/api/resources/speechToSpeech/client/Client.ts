@@ -42,7 +42,7 @@ export class SpeechToSpeech {
     ): Promise<stream.Readable> {
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (request.enable_logging != null) {
-            _queryParams["enable_logging"] = request.enable_logging;
+            _queryParams["enable_logging"] = request.enable_logging.toString();
         }
 
         if (request.optimize_streaming_latency != null) {
@@ -81,7 +81,7 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.15.0",
+                "X-Fern-SDK-Version": "0.15.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -178,7 +178,7 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.15.0",
+                "X-Fern-SDK-Version": "0.15.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
