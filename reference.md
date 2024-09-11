@@ -1007,9 +1007,9 @@ Create speech by combining the content and emotion of the uploaded audio with a 
 ```typescript
 await client.speechToSpeech.convert("string", {
     audio: fs.createReadStream("/path/to/your/file"),
-    enable_logging: ElevenLabs.OptimizeStreamingLatency.Zero,
-    optimize_streaming_latency: ElevenLabs.OutputFormat.Mp32205032,
-    output_format: "string",
+    enable_logging: true,
+    optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
+    output_format: ElevenLabs.OutputFormat.Mp32205032,
 });
 ```
 
