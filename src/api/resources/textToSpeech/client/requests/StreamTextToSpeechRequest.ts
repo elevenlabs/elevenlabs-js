@@ -7,8 +7,8 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
- *         output_format: ElevenLabs.OutputFormat.Mp32205032,
+ *         optimize_streaming_latency: "0",
+ *         output_format: "mp3_22050_32",
  *         text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D",
  *         voice_settings: {
  *             stability: 0.1,

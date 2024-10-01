@@ -7,9 +7,9 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         gender: ElevenLabs.Gender.Female,
+ *         gender: "female",
  *         accent: "american",
- *         age: ElevenLabs.Age.MiddleAged,
+ *         age: "middle_aged",
  *         accent_strength: 2,
  *         text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D"
  *     }

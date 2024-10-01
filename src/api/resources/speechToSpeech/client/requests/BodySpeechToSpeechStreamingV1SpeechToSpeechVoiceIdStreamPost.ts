@@ -9,8 +9,8 @@ import * as ElevenLabs from "../../../../index";
  * @example
  *     {
  *         audio: fs.createReadStream("/path/to/your/file"),
- *         enable_logging: ElevenLabs.OptimizeStreamingLatency.Zero,
- *         optimize_streaming_latency: ElevenLabs.OutputFormat.Mp32205032,
+ *         enable_logging: "0",
+ *         optimize_streaming_latency: "mp3_22050_32",
  *         output_format: "string"
  *     }
  */

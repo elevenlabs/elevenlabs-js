@@ -68,7 +68,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -134,7 +135,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -198,7 +200,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -277,7 +280,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -346,7 +350,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -423,7 +428,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -488,7 +494,7 @@ export class Voices {
         const _request = await core.newFormData();
         await _request.append("name", request.name);
         for (const _file of request.files) {
-            await _request.append("files", _file);
+            await _request.appendFile("files", _file);
         }
 
         if (request.description != null) {
@@ -513,7 +519,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -581,7 +588,7 @@ export class Voices {
         await _request.append("name", request.name);
         if (request.files != null) {
             for (const _file of request.files) {
-                await _request.append("files", _file);
+                await _request.appendFile("files", _file);
             }
         }
 
@@ -607,7 +614,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -687,7 +695,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 "xi-app-check-token": xiAppCheckToken != null ? xiAppCheckToken : undefined,
@@ -845,7 +854,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -931,7 +941,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -1004,7 +1015,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.16.0",
+                "X-Fern-SDK-Version": "v0.16.1",
+                "User-Agent": "elevenlabs/v0.16.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
