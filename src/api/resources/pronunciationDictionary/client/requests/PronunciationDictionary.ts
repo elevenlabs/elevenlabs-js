@@ -7,7 +7,12 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         rules: []
+ *         rules: [{
+ *                 type: "phoneme",
+ *                 string_to_replace: "rules",
+ *                 phoneme: "rules",
+ *                 alphabet: "rules"
+ *             }]
  *     }
  */
 export interface PronunciationDictionary {

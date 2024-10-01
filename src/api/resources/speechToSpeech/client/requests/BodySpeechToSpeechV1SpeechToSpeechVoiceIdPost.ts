@@ -10,8 +10,8 @@ import * as ElevenLabs from "../../../../index";
  *     {
  *         audio: fs.createReadStream("/path/to/your/file"),
  *         enable_logging: true,
- *         optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
- *         output_format: ElevenLabs.OutputFormat.Mp32205032
+ *         optimize_streaming_latency: "0",
+ *         output_format: "mp3_22050_32"
  *     }
  */
 export interface BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost {

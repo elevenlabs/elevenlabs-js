@@ -698,8 +698,8 @@ Converts text into speech using a voice of your choice and returns audio.
 
 ```typescript
 await client.textToSpeech.convert("pMsXgVXv3BLzUgSXRplE", {
-    optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
-    output_format: ElevenLabs.OutputFormat.Mp32205032,
+    optimize_streaming_latency: "0",
+    output_format: "mp3_22050_32",
     text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D",
     voice_settings: {
         stability: 0.1,
@@ -851,8 +851,8 @@ Converts text into speech using a voice of your choice and returns audio as an a
 
 ```typescript
 await client.textToSpeech.convertAsStream("pMsXgVXv3BLzUgSXRplE", {
-    optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
-    output_format: ElevenLabs.OutputFormat.Mp32205032,
+    optimize_streaming_latency: "0",
+    output_format: "mp3_22050_32",
     text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D",
     voice_settings: {
         stability: 0.1,
@@ -1008,8 +1008,8 @@ Create speech by combining the content and emotion of the uploaded audio with a 
 await client.speechToSpeech.convert("string", {
     audio: fs.createReadStream("/path/to/your/file"),
     enable_logging: true,
-    optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
-    output_format: ElevenLabs.OutputFormat.Mp32205032,
+    optimize_streaming_latency: "0",
+    output_format: "mp3_22050_32",
 });
 ```
 
@@ -1083,8 +1083,8 @@ Create speech by combining the content and emotion of the uploaded audio with a 
 ```typescript
 await client.speechToSpeech.convertAsStream("string", {
     audio: fs.createReadStream("/path/to/your/file"),
-    enable_logging: ElevenLabs.OptimizeStreamingLatency.Zero,
-    optimize_streaming_latency: ElevenLabs.OutputFormat.Mp32205032,
+    enable_logging: "0",
+    optimize_streaming_latency: "mp3_22050_32",
     output_format: "string",
 });
 ```
@@ -1215,9 +1215,9 @@ Generate a random voice based on parameters. This method returns a generated_voi
 
 ```typescript
 await client.voiceGeneration.generate({
-    gender: ElevenLabs.Gender.Female,
+    gender: "female",
     accent: "american",
-    age: ElevenLabs.Age.MiddleAged,
+    age: "middle_aged",
     accent_strength: 2,
     text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D",
 });
@@ -3992,7 +3992,14 @@ Add rules to the pronunciation dictionary
 
 ```typescript
 await client.pronunciationDictionary.addRulesToThePronunciationDictionary("21m00Tcm4TlvDq8ikWAM", {
-    rules: [],
+    rules: [
+        {
+            type: "phoneme",
+            string_to_replace: "rules",
+            phoneme: "rules",
+            alphabet: "rules",
+        },
+    ],
 });
 ```
 
