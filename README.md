@@ -51,6 +51,8 @@ await play(audio);
 
 </details>
 
+⚠️ elevenlabs-js requires [MPV](https://mpv.io/) and [ffmpeg](https://ffmpeg.org/).
+
 ## 🗣️ Voices
 
 List all your available voices with `voices()`.
