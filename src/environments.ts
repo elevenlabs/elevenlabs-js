@@ -4,6 +4,7 @@
 
 export const ElevenLabsEnvironment = {
     Production: "https://api.elevenlabs.io",
+    ProductionUs: "https://api.us.elevenlabs.io",
 } as const;
 
-export type ElevenLabsEnvironment = typeof ElevenLabsEnvironment.Production;
+export type ElevenLabsEnvironment = typeof ElevenLabsEnvironment.Production | typeof ElevenLabsEnvironment.ProductionUs;
