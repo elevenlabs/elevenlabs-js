@@ -5,7 +5,7 @@ import * as errors from "../errors";
 import * as stream from "stream";
 
 export declare namespace ElevenLabsClient {
-    interface Options {
+    interface Options extends FernClient.Options {
         /**
          * Your ElevenLabs API Key. Defaults to the environment
          * variable ELEVENLABS_API_KEY.
@@ -29,9 +29,8 @@ export class ElevenLabsClient extends FernClient {
                 message: "Please pass in your ElevenLabs API Key or export ELEVENLABS_API_KEY in your environment.",
             });
         }
-        super({
-            apiKey,
-        });
+        options.apiKey = apiKey;
+        super(options);
     }
 
     /**
