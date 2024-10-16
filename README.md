@@ -2,6 +2,8 @@
 
 ![LOGO](https://github.com/elevenlabs/elevenlabs-python/assets/12028621/21267d89-5e82-4e7e-9c81-caf30b237683)
 
+> ⚠️ **Important Note**: This is the Node.js library for ElevenLabs. If you're looking for the browser SDK, please see [@11labs/client](https://www.npmjs.com/package/@11labs/client). For the React SDK, check out [@11labs/react](https://www.npmjs.com/package/@11labs/react).
+
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://buildwithfern.com/?utm_source=fern-elevenlabs/elevenlabs-python/readme)
 [![Discord](https://badgen.net/badge/black/ElevenLabs/icon?icon=discord&label)](https://discord.gg/elevenlabs)
 [![Twitter](https://badgen.net/badge/black/elevenlabsio/icon?icon=twitter&label)](https://twitter.com/elevenlabsio)
@@ -17,11 +19,12 @@ Check out the [HTTP API documentation](https://elevenlabs.io/docs/api-reference)
 
 ```bash
 npm install elevenlabs
-# or 
+# or
 yarn add elevenlabs
 ```
 
 ## 🗣️ Usage
+
 [![Open in Spaces](https://img.shields.io/badge/🤗-Open%20in%20Spaces-blue.svg)](https://huggingface.co/spaces/elevenlabs/tts)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/gist/flavioschneider/49468d728a816c6538fd2f56b3b50b96/elevenlabs-python.ipynb)
 
@@ -31,13 +34,13 @@ We support two main models: the newest `eleven_multilingual_v2`, a single founda
 import { ElevenLabsClient, play } from "elevenlabs";
 
 const elevenlabs = new ElevenLabsClient({
-  apiKey: "YOUR_API_KEY" // Defaults to process.env.ELEVENLABS_API_KEY
-})
+    apiKey: "YOUR_API_KEY", // Defaults to process.env.ELEVENLABS_API_KEY
+});
 
 const audio = await elevenlabs.generate({
-  voice: "Rachel",
-  text: "Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
-  model_id: "eleven_multilingual_v2"
+    voice: "Rachel",
+    text: "Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
+    model_id: "eleven_multilingual_v2",
 });
 
 await play(audio);
@@ -54,16 +57,17 @@ await play(audio);
 ## 🗣️ Voices
 
 List all your available voices with `voices()`.
+
 ```ts
 import { ElevenLabsClient } from "elevenlabs";
 
 const elevenlabs = new ElevenLabsClient({
-  apiKey: "YOUR_API_KEY" // Defaults to process.env.ELEVENLABS_API_KEY
-})
+    apiKey: "YOUR_API_KEY", // Defaults to process.env.ELEVENLABS_API_KEY
+});
 const voices = await elevenlabs.voices.getAll();
 ```
 
-<details> <summary> Show output </summary> 
+<details> <summary> Show output </summary>
 
 ```ts
     {
@@ -100,6 +104,7 @@ const voices = await elevenlabs.voices.getAll();
       ]
     }
 ```
+
 </details>
 
 ## 🚿 Streaming
@@ -108,13 +113,13 @@ Stream audio in real-time, as it's being generated.
 
 ```ts
 const audioStream = await elevenlabs.generate({
-  stream: true,
-  voice: "Bella",
-  text: "This is a... streaming voice",
-  model_id: "eleven_multilingual_v2"
+    stream: true,
+    voice: "Bella",
+    text: "This is a... streaming voice",
+    model_id: "eleven_multilingual_v2",
 });
 
-stream(audioStream)
+stream(audioStream);
 ```
 
 ## Retries
@@ -125,48 +130,48 @@ than the configured retry limit (default: 2).
 
 A request is deemed retriable when any of the following HTTP status codes is returned:
 
-- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
-- [409](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409) (Conflict)
-- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
-- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
-  
-Use the `maxRetries` request option to configure this behavior. 
+-   [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+-   [409](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409) (Conflict)
+-   [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+-   [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
+
+Use the `maxRetries` request option to configure this behavior.
 
 ```ts
 const response = await elevenlabs.voices.getAll({
-  maxRetries: 0 // override maxRetries at the request level
+    maxRetries: 0, // override maxRetries at the request level
 });
 ```
 
 ## Timeouts
 
-The SDK defaults to a 60 second timout. Use the `timeoutInSeconds` option to 
-configure this behavior. 
+The SDK defaults to a 60 second timout. Use the `timeoutInSeconds` option to
+configure this behavior.
 
 ```ts
 const response = elevenlabs.voices.getAll({
-  timeoutInSeconds: 30 // override timeout to 30s
+    timeoutInSeconds: 30, // override timeout to 30s
 });
 ```
 
 ## Runtime compatiblity
 
-The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK 
-works in the following runtimes: 
+The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK
+works in the following runtimes:
 
 The following runtimes are supported:
 
-- Node.js 15+ 
-- Vercel 
-- Cloudflare Workers
-- Deno v1.25+
-- Bun 1.0+
+-   Node.js 15+
+-   Vercel
+-   Cloudflare Workers
+-   Deno v1.25+
+-   Bun 1.0+
 
 ### Customizing Fetch client
 
-The SDK provides a way for you to customize the underlying HTTP client / Fetch function. If you're 
-running in an unsupported environment, this provides a way for you to break the glass and 
-ensure the SDK works. 
+The SDK provides a way for you to customize the underlying HTTP client / Fetch function. If you're
+running in an unsupported environment, this provides a way for you to break the glass and
+ensure the SDK works.
 
 ```ts
 import { ElevenLabsClient } from "elevenlabs";
@@ -177,9 +182,9 @@ const elevenlabs = new ElevenLabsClient({
 });
 ```
 
-
 ## Elevenlabs Namespace
-All of the ElevenLabs models are nested within the `ElevenLabs` namespace. 
+
+All of the ElevenLabs models are nested within the `ElevenLabs` namespace.
 
 ![Alt text](assets/namespace.png)
 
@@ -191,6 +196,6 @@ We support 29 languages and 100+ accents. Explore [all languages](https://eleven
 
 ## Contributing
 
-While we value open-source contributions to this SDK, this library is generated programmatically. Additions made directly to this library would have to be moved over to our generation code, otherwise they would be overwritten upon the next generated release. Feel free to open a PR as a proof of concept, but know that we will not be able to merge it as-is. We suggest opening an issue first to discuss with us! 
+While we value open-source contributions to this SDK, this library is generated programmatically. Additions made directly to this library would have to be moved over to our generation code, otherwise they would be overwritten upon the next generated release. Feel free to open a PR as a proof of concept, but know that we will not be able to merge it as-is. We suggest opening an issue first to discuss with us!
 
 On the other hand, contributions to the README are always very welcome!
