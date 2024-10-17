@@ -2,12 +2,12 @@
 
 ![LOGO](https://github.com/elevenlabs/elevenlabs-python/assets/12028621/21267d89-5e82-4e7e-9c81-caf30b237683)
 
-> ⚠️ **Important Note**: This is the Node.js library for ElevenLabs. If you're looking for the browser SDK, please see [@11labs/client](https://www.npmjs.com/package/@11labs/client). For the React SDK, check out [@11labs/react](https://www.npmjs.com/package/@11labs/react).
-
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://buildwithfern.com/?utm_source=fern-elevenlabs/elevenlabs-python/readme)
 [![Discord](https://badgen.net/badge/black/ElevenLabs/icon?icon=discord&label)](https://discord.gg/elevenlabs)
 [![Twitter](https://badgen.net/badge/black/elevenlabsio/icon?icon=twitter&label)](https://twitter.com/elevenlabsio)
 [![npm shield](https://img.shields.io/npm/v/elevenlabs)](https://www.npmjs.com/package/elevenlabs)
+
+> **Note:** This is the Node.js library for ElevenLabs. For the browser SDK, visit [`@11labs/client`](https://www.npmjs.com/package/@11labs/client). For the React SDK, check out [`@11labs/react`](https://www.npmjs.com/package/@11labs/react).
 
 The official JS API for [ElevenLabs](https://elevenlabs.io/) [text-to-speech software.](https://elevenlabs.io/text-to-speech) Eleven brings the most compelling, rich and lifelike voices to creators and developers in just a few lines of code.
 
@@ -31,14 +31,15 @@ yarn add elevenlabs
 ### Main Models
 
 1. **Eleven Multilingual v2** (`eleven_multilingual_v2`)
-   - Excels in stability, language diversity, and accent accuracy
-   - Supports 29 languages
-   - Recommended for most use cases
+
+    - Excels in stability, language diversity, and accent accuracy
+    - Supports 29 languages
+    - Recommended for most use cases
 
 2. **Eleven Turbo v2.5** (`eleven_turbo_v2_5`)
-   - High quality, lowest latency
-   - Ideal for developer use cases where speed is crucial
-   - Supports 32 languages
+    - High quality, lowest latency
+    - Ideal for developer use cases where speed is crucial
+    - Supports 32 languages
 
 For more detailed information about these models and others, visit the [ElevenLabs Models documentation](https://elevenlabs.io/docs/speech-synthesis/models).
 
@@ -50,7 +51,7 @@ const elevenlabs = new ElevenLabsClient({
 });
 
 const audio = await elevenlabs.generate({
-    voice: "Rachel",
+    voice: "Sarah",
     text: "Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
     model_id: "eleven_multilingual_v2",
 });
@@ -81,45 +82,7 @@ const elevenlabs = new ElevenLabsClient({
 const voices = await elevenlabs.voices.getAll();
 ```
 
-<details> <summary> Show output </summary>
-
-```ts
-    {
-      voices: [
-        {
-          voice_id: '21m00Tcm4TlvDq8ikWAM',
-          name: 'Rachel',
-          samples: null,
-          category: 'premade',
-          fine_tuning: [Object],
-          labels: [Object],
-          description: null,
-          preview_url: 'https://storage.googleapis.com/eleven-public-prod/premade/voices/21m00Tcm4TlvDq8ikWAM/df6788f9-5c96-470d-8312-aab3b3d8f50a.mp3',
-          available_for_tiers: [],
-          settings: null,
-          sharing: null,
-          high_quality_base_model_ids: []
-        },
-        {
-          voice_id: '29vD33N1CtxCmqQRPOHJ',
-          name: 'Drew',
-          samples: null,
-          category: 'premade',
-          fine_tuning: [Object],
-          labels: [Object],
-          description: null,
-          preview_url: 'https://storage.googleapis.com/eleven-public-prod/premade/voices/29vD33N1CtxCmqQRPOHJ/e8b52a3f-9732-440f-b78a-16d5e26407a1.mp3',
-          available_for_tiers: [],
-          settings: null,
-          sharing: null,
-          high_quality_base_model_ids: []
-        },
-        ...
-      ]
-    }
-```
-
-</details>
+For information about the structure of the voices output, please refer to the [official ElevenLabs API documentation for Get Voices](https://elevenlabs.io/docs/api-reference/get-voices).
 
 ## 🚿 Streaming
 
@@ -152,8 +115,8 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```ts
-const response = await elevenlabs.voices.getAll({
-    maxRetries: 0, // override maxRetries at the request level
+const response = await elevenlabs.voices.getAll({}, {
+  maxRetries: 2 // Set the maximum number of retries
 });
 ```
 
@@ -163,7 +126,7 @@ The SDK defaults to a 60 second timout. Use the `timeoutInSeconds` option to
 configure this behavior.
 
 ```ts
-const response = elevenlabs.voices.getAll({
+const response = await elevenlabs.voices.getAll({}, {
     timeoutInSeconds: 30, // override timeout to 30s
 });
 ```
@@ -181,20 +144,6 @@ The following runtimes are supported:
 -   Deno v1.25+
 -   Bun 1.0+
 
-### Customizing Fetch client
-
-The SDK provides a way for you to customize the underlying HTTP client / Fetch function. If you're
-running in an unsupported environment, this provides a way for you to break the glass and
-ensure the SDK works.
-
-```ts
-import { ElevenLabsClient } from "elevenlabs";
-
-const elevenlabs = new ElevenLabsClient({
-  apiKey: "...",
-  fetcher: // provide your implementation here
-});
-```
 
 ## Elevenlabs Namespace
 
@@ -204,7 +153,7 @@ All of the ElevenLabs models are nested within the `ElevenLabs` namespace.
 
 ## Languages Supported
 
-We support 29 languages and 100+ accents. Explore [all languages](https://elevenlabs.io/languages).
+We support 32 languages and 100+ accents. Explore [all languages](https://elevenlabs.io/languages).
 
 ![Alt text](assets/languages.png)
 
