@@ -31,6 +31,82 @@ export class Workspace {
     constructor(protected readonly _options: Workspace.Options = {}) {}
 
     /**
+     * @param {ElevenLabs.GetSsoProviderAdminAdminN8EnylacgdSsoProviderGetRequest} request
+     * @param {Workspace.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.workspace.getSsoProviderAdmin({
+     *         workspace_id: "workspace_id"
+     *     })
+     */
+    public async getSsoProviderAdmin(
+        request: ElevenLabs.GetSsoProviderAdminAdminN8EnylacgdSsoProviderGetRequest,
+        requestOptions?: Workspace.RequestOptions
+    ): Promise<ElevenLabs.SsoProviderResponseModel> {
+        const { workspace_id: workspaceId } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        _queryParams["workspace_id"] = workspaceId;
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
+                "admin/n8enylacgd/sso-provider"
+            ),
+            method: "GET",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.SsoProviderResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError();
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
      * Sends an email invitation to join your workspace to the provided email. If the user doesn't have an account they will be prompted to create one. If the user accepts this invite they will be added as a user to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace administrators.
      *
      * @param {ElevenLabs.BodyInviteUserV1WorkspaceInvitesAddPost} request
@@ -60,8 +136,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -135,8 +211,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -210,8 +286,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

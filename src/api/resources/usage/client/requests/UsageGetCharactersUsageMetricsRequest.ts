@@ -27,5 +27,5 @@ export interface UsageGetCharactersUsageMetricsRequest {
     /**
      * How to break down the information. Cannot be "user" if include_workspace_metrics is False.
      */
-    breakdown_type?: ElevenLabs.UsageGetCharactersUsageMetricsRequestBreakdownType;
+    breakdown_type?: ElevenLabs.BreakdownTypes;
 }

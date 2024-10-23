@@ -86,6 +86,14 @@ export class Dubbing {
             await _request.append("highest_resolution", request.highest_resolution.toString());
         }
 
+        if (request.drop_background_audio != null) {
+            await _request.append("drop_background_audio", request.drop_background_audio.toString());
+        }
+
+        if (request.use_profanity_filter != null) {
+            await _request.append("use_profanity_filter", request.use_profanity_filter.toString());
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
@@ -100,8 +108,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -174,8 +182,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -243,8 +251,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -309,8 +317,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -392,8 +400,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

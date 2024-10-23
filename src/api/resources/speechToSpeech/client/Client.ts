@@ -67,6 +67,10 @@ export class SpeechToSpeech {
             await _request.append("seed", request.seed.toString());
         }
 
+        if (request.remove_background_noise != null) {
+            await _request.append("remove_background_noise", request.remove_background_noise.toString());
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
@@ -81,8 +85,8 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -165,6 +169,10 @@ export class SpeechToSpeech {
             await _request.append("seed", request.seed.toString());
         }
 
+        if (request.remove_background_noise != null) {
+            await _request.append("remove_background_noise", request.remove_background_noise.toString());
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
@@ -179,8 +187,8 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,

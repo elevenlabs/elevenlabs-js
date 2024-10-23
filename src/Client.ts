@@ -11,16 +11,17 @@ import { Samples } from "./api/resources/samples/client/Client";
 import { TextToSpeech } from "./api/resources/textToSpeech/client/Client";
 import { SpeechToSpeech } from "./api/resources/speechToSpeech/client/Client";
 import { VoiceGeneration } from "./api/resources/voiceGeneration/client/Client";
+import { TextToVoice } from "./api/resources/textToVoice/client/Client";
 import { User } from "./api/resources/user/client/Client";
 import { Voices } from "./api/resources/voices/client/Client";
 import { Projects } from "./api/resources/projects/client/Client";
 import { Chapters } from "./api/resources/chapters/client/Client";
 import { Dubbing } from "./api/resources/dubbing/client/Client";
+import { Workspace } from "./api/resources/workspace/client/Client";
 import { Models } from "./api/resources/models/client/Client";
 import { AudioNative } from "./api/resources/audioNative/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionary } from "./api/resources/pronunciationDictionary/client/Client";
-import { Workspace } from "./api/resources/workspace/client/Client";
 
 export declare namespace ElevenLabsClient {
     interface Options {
@@ -86,6 +87,12 @@ export class ElevenLabsClient {
         return (this._voiceGeneration ??= new VoiceGeneration(this._options));
     }
 
+    protected _textToVoice: TextToVoice | undefined;
+
+    public get textToVoice(): TextToVoice {
+        return (this._textToVoice ??= new TextToVoice(this._options));
+    }
+
     protected _user: User | undefined;
 
     public get user(): User {
@@ -116,6 +123,12 @@ export class ElevenLabsClient {
         return (this._dubbing ??= new Dubbing(this._options));
     }
 
+    protected _workspace: Workspace | undefined;
+
+    public get workspace(): Workspace {
+        return (this._workspace ??= new Workspace(this._options));
+    }
+
     protected _models: Models | undefined;
 
     public get models(): Models {
@@ -138,11 +151,5 @@ export class ElevenLabsClient {
 
     public get pronunciationDictionary(): PronunciationDictionary {
         return (this._pronunciationDictionary ??= new PronunciationDictionary(this._options));
-    }
-
-    protected _workspace: Workspace | undefined;
-
-    public get workspace(): Workspace {
-        return (this._workspace ??= new Workspace(this._options));
     }
 }

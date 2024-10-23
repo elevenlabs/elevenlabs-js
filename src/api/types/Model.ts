@@ -20,4 +20,6 @@ export interface Model {
     max_characters_request_subscribed_user?: number;
     maximum_text_length_per_request?: number;
     languages?: ElevenLabs.LanguageResponse[];
+    model_rates?: ElevenLabs.ModelRatesResponseModel;
+    concurrency_group?: ElevenLabs.ModelResponseModelConcurrencyGroup;
 }

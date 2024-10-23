@@ -31,7 +31,7 @@ export class Usage {
     constructor(protected readonly _options: Usage.Options = {}) {}
 
     /**
-     * Returns the characters usage metrics for the current user or the entire workspace they are part of. The response will return a time axis with unix timestamps for each day and daily usage along that axis. The usage will be broken down by the specified breakdown type. For example, breakdown type "voice" will return the usage of each voice along the time axis.
+     * Returns the credit usage metrics for the current user or the entire workspace they are part of. The response will return a time axis with unix timestamps for each day and daily usage along that axis. The usage will be broken down by the specified breakdown type. For example, breakdown type "voice" will return the usage of each voice along the time axis.
      *
      * @param {ElevenLabs.UsageGetCharactersUsageMetricsRequest} request
      * @param {Usage.RequestOptions} requestOptions - Request-specific configuration.
@@ -78,8 +78,8 @@ export class Usage {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

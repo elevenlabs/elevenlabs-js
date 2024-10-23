@@ -5,6 +5,6 @@
 import * as ElevenLabs from "../index";
 
 export interface ProjectSnapshotUploadResponseModel {
-    status: ElevenLabs.Status;
+    status: ElevenLabs.ProjectSnapshotUploadResponseModelStatus;
     acx_volume_normalization?: boolean;
 }

@@ -58,8 +58,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -147,6 +147,36 @@ export class Projects {
             await _request.append("author", request.author);
         }
 
+        if (request.description != null) {
+            await _request.append("description", request.description);
+        }
+
+        if (request.genres != null) {
+            for (const _item of request.genres) {
+                await _request.append("genres", _item);
+            }
+        }
+
+        if (request.target_audience != null) {
+            await _request.append("target_audience", request.target_audience);
+        }
+
+        if (request.language != null) {
+            await _request.append("language", request.language);
+        }
+
+        if (request.content_type != null) {
+            await _request.append("content_type", request.content_type);
+        }
+
+        if (request.original_publication_date != null) {
+            await _request.append("original_publication_date", request.original_publication_date);
+        }
+
+        if (request.mature_content != null) {
+            await _request.append("mature_content", request.mature_content.toString());
+        }
+
         if (request.isbn_number != null) {
             await _request.append("isbn_number", request.isbn_number);
         }
@@ -179,8 +209,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -253,8 +283,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -331,8 +361,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -401,8 +431,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -470,8 +500,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -542,8 +572,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -609,8 +639,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -687,8 +717,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -700,6 +730,83 @@ export class Projects {
         });
         if (_response.ok) {
             return;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError();
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Creates a new chapter either as blank or from a URL.
+     *
+     * @param {string} projectId - The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+     * @param {ElevenLabs.BodyAddChapterToAProjectV1ProjectsProjectIdChaptersAddPost} request
+     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.projects.addChapterToAProject("21m00Tcm4TlvDq8ikWAM", {
+     *         name: "name"
+     *     })
+     */
+    public async addChapterToAProject(
+        projectId: string,
+        request: ElevenLabs.BodyAddChapterToAProjectV1ProjectsProjectIdChaptersAddPost,
+        requestOptions?: Projects.RequestOptions
+    ): Promise<ElevenLabs.AddChapterResponseModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/add`
+            ),
+            method: "POST",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.AddChapterResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -766,8 +873,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.17.0",
-                "User-Agent": "elevenlabs/0.17.0",
+                "X-Fern-SDK-Version": "1.11.0-beta0",
+                "User-Agent": "elevenlabs/1.11.0-beta0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
