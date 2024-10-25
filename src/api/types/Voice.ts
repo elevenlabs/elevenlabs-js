@@ -8,7 +8,7 @@ export interface Voice {
     voice_id: string;
     name?: string;
     samples?: ElevenLabs.VoiceSample[];
-    category?: string;
+    category?: ElevenLabs.VoiceResponseModelCategory;
     fine_tuning?: ElevenLabs.FineTuningResponse;
     labels?: Record<string, string>;
     description?: string;
@@ -19,7 +19,8 @@ export interface Voice {
     high_quality_base_model_ids?: string[];
     safety_control?: ElevenLabs.VoiceResponseModelSafetyControl;
     voice_verification?: ElevenLabs.VoiceVerificationResponse;
-    owner_id?: string;
     permission_on_resource?: string;
+    is_owner?: boolean;
     is_legacy?: boolean;
+    is_mixed?: boolean;
 }

@@ -30,4 +30,8 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     end_time?: number;
     /** Whether to use the highest resolution available. */
     highest_resolution?: boolean;
+    /** An advanced setting. Whether to drop background audio from the final dub. This can improve dub quality where it's known that audio shouldn't have a background track such as for speeches or monologues. */
+    drop_background_audio?: boolean;
+    /** [BETA] Whether transcripts should have profanities censored with the words '[censored]' */
+    use_profanity_filter?: boolean;
 }

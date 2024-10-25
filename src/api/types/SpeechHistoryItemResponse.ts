@@ -20,6 +20,6 @@ export interface SpeechHistoryItemResponse {
     settings?: Record<string, unknown>;
     feedback?: ElevenLabs.FeedbackItem;
     share_link_id?: string;
-    source?: ElevenLabs.Source;
+    source?: ElevenLabs.SpeechHistoryItemResponseModelSource;
     alignments?: ElevenLabs.HistoryAlignmentsResponseModel;
 }

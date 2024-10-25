@@ -45,4 +45,6 @@ export interface BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIdStreamPost {
     voice_settings?: string;
     /** If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. */
     seed?: number;
+    /** If set will remove the background noise from your audio input using our audio isolation model. Only applies to Voice Changer. */
+    remove_background_noise?: boolean;
 }

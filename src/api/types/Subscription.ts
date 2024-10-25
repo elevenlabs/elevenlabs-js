@@ -18,7 +18,7 @@ export interface Subscription {
     can_extend_voice_limit: boolean;
     can_use_instant_voice_cloning: boolean;
     can_use_professional_voice_cloning: boolean;
-    currency?: ElevenLabs.Currency;
+    currency?: ElevenLabs.ExtendedSubscriptionResponseModelCurrency;
     status?: ElevenLabs.SubscriptionStatus;
     billing_period?: ElevenLabs.ExtendedSubscriptionResponseModelBillingPeriod;
     character_refresh_period?: ElevenLabs.ExtendedSubscriptionResponseModelCharacterRefreshPeriod;

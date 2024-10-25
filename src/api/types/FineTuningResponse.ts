@@ -17,5 +17,7 @@ export interface FineTuningResponse {
     verification_attempts?: ElevenLabs.VerificationAttemptResponse[];
     slice_ids?: string[];
     manual_verification?: ElevenLabs.ManualVerificationResponse;
+    max_verification_attempts?: number;
+    next_max_verification_attempts_reset_unix_ms?: number;
     finetuning_state?: unknown;
 }
