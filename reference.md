@@ -1322,6 +1322,141 @@ await client.voiceGeneration.createAPreviouslyGeneratedVoice({
 </dl>
 </details>
 
+## TextToVoice
+
+<details><summary><code>client.textToVoice.<a href="/src/api/resources/textToVoice/client/Client.ts">createPreviews</a>({ ...params }) -> ElevenLabs.VoicePreviewsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. If you like the a voice previewand want to create the voice call /v1/text-to-voice/create-voice-from-preview with the generated_voice_id to create the voice.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.textToVoice.createPreviews({
+    voice_description: "voice_description",
+    text: "text",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyGenerateAVoicePreviewFromDescriptionV1TextToVoiceCreatePreviewsPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TextToVoice.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.textToVoice.<a href="/src/api/resources/textToVoice/client/Client.ts">createVoiceFromPreview</a>({ ...params }) -> ElevenLabs.Voice</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a voice from previously generated voice preview. This endpoint should be called after you fetched a generated_voice_id using /v1/text-to-voice/create-previews.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.textToVoice.createVoiceFromPreview({
+    voice_name: "voice_name",
+    voice_description: "voice_description",
+    generated_voice_id: "generated_voice_id",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyCreateANewVoiceFromVoicePreviewV1TextToVoiceCreateVoiceFromPreviewPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TextToVoice.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## User
 
 <details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">getSubscription</a>() -> ElevenLabs.Subscription</code></summary>
@@ -1826,7 +1961,7 @@ await client.voices.editSettings("29vD33N1CtxCmqQRPOHJ", {
 </dl>
 </details>
 
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">add</a>({ ...params }) -> ElevenLabs.AddVoiceResponseModel</code></summary>
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">add</a>({ ...params }) -> ElevenLabs.AddVoiceIvcResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -2847,6 +2982,79 @@ await client.projects.streamArchive("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWA
 </dl>
 </details>
 
+<details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">addChapterToAProject</a>(projectId, { ...params }) -> ElevenLabs.AddChapterResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new chapter either as blank or from a URL.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.projects.addChapterToAProject("21m00Tcm4TlvDq8ikWAM", {
+    name: "name",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `string` — The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyAddChapterToAProjectV1ProjectsProjectIdChaptersAddPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Projects.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">updatePronunciationDictionaries</a>(projectId, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
@@ -3704,6 +3912,253 @@ await client.dubbing.getTranscriptForDub("dubbing_id", "language_code");
 </dl>
 </details>
 
+## Workspace
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">getSsoProviderAdmin</a>({ ...params }) -> ElevenLabs.SsoProviderResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.getSsoProviderAdmin({
+    workspace_id: "workspace_id",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.GetSsoProviderAdminAdminN8EnylacgdSsoProviderGetRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">inviteUser</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends an email invitation to join your workspace to the provided email. If the user doesn't have an account they will be prompted to create one. If the user accepts this invite they will be added as a user to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace administrators.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.inviteUser({
+    email: "email",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyInviteUserV1WorkspaceInvitesAddPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">deleteExistingInvitation</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Invalidates an existing email invitation. The invitation will still show up in the inbox it has been delivered to, but activating it to join the workspace won't work. This endpoint may only be called by workspace administrators.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.deleteExistingInvitation({
+    email: "email",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">updateMember</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates attributes of a workspace member. Apart from the email identifier, all parameters will remain unchanged unless specified. This endpoint may only be called by workspace administrators.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.updateMember({
+    email: "email",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUpdateMemberV1WorkspaceMembersPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Models
 
 <details><summary><code>client.models.<a href="/src/api/resources/models/client/Client.ts">getAll</a>() -> ElevenLabs.Model[]</code></summary>
@@ -3842,7 +4297,7 @@ await client.audioNative.create({
 <dl>
 <dd>
 
-Returns the characters usage metrics for the current user or the entire workspace they are part of. The response will return a time axis with unix timestamps for each day and daily usage along that axis. The usage will be broken down by the specified breakdown type. For example, breakdown type "voice" will return the usage of each voice along the time axis.
+Returns the credit usage metrics for the current user or the entire workspace they are part of. The response will return a time axis with unix timestamps for each day and daily usage along that axis. The usage will be broken down by the specified breakdown type. For example, breakdown type "voice" will return the usage of each voice along the time axis.
 
 </dd>
 </dl>
@@ -4305,203 +4760,6 @@ await client.pronunciationDictionary.getAll({
 <dd>
 
 **requestOptions:** `PronunciationDictionary.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Workspace
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">inviteUser</a>({ ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Sends an email invitation to join your workspace to the provided email. If the user doesn't have an account they will be prompted to create one. If the user accepts this invite they will be added as a user to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace administrators.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.inviteUser({
-    email: "email",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyInviteUserV1WorkspaceInvitesAddPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">deleteExistingInvitation</a>({ ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Invalidates an existing email invitation. The invitation will still show up in the inbox it has been delivered to, but activating it to join the workspace won't work. This endpoint may only be called by workspace administrators.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.deleteExistingInvitation({
-    email: "email",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">updateMember</a>({ ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Updates attributes of a workspace member. Apart from the email identifier, all parameters will remain unchanged unless specified. This endpoint may only be called by workspace administrators.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.updateMember({
-    email: "email",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyUpdateMemberV1WorkspaceMembersPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
 
 </dd>
 </dl>

@@ -3,6 +3,7 @@
  */
 
 import * as fs from "fs";
+import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
@@ -28,9 +29,9 @@ export interface BodyAddProjectV1ProjectsAddPost {
     /**
      * Output quality of the generated audio. Must be one of:
      * standard - standard output format, 128kbps with 44.1kHz sample rate.
-     * high - high quality output format, 192kbps with 44.1kHz sample rate and major improvements on our side. Using this setting increases the character cost by 20%.
-     * ultra - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side. Using this setting increases the character cost by 50%.
-     * ultra lossless - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format. Using this setting increases the character cost by 100%.
+     * high - high quality output format, 192kbps with 44.1kHz sample rate and major improvements on our side. Using this setting increases the credit cost by 20%.
+     * ultra - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side. Using this setting increases the credit cost by 50%.
+     * ultra lossless - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format. Using this setting increases the credit cost by 100%.
      *
      */
     quality_preset?: string;
@@ -38,6 +39,20 @@ export interface BodyAddProjectV1ProjectsAddPost {
     title?: string;
     /** An optional name of the author of the project, this will be added as metadata to the mp3 file on project / chapter download. */
     author?: string;
+    /** An optional description of the project. */
+    description?: string;
+    /** An optional list of genres associated with the project. */
+    genres?: string[];
+    /** An optional target audience of the project. */
+    target_audience?: ElevenLabs.ProjectsAddRequestTargetAudience;
+    /** An optional language of the project. Two-letter language code (ISO 639-1). */
+    language?: string;
+    /** An optional content type of the project. */
+    content_type?: string;
+    /** An optional original publication date of the project, in the format YYYY-MM-DD or YYYY. */
+    original_publication_date?: string;
+    /** An optional mature content of the project. */
+    mature_content?: boolean;
     /** An optional ISBN number of the project you want to create, this will be added as metadata to the mp3 file on project / chapter download. */
     isbn_number?: string;
     /** [Deprecated] When the project is downloaded, should the returned audio have postprocessing in order to make it compliant with audiobook normalized volume requirements */

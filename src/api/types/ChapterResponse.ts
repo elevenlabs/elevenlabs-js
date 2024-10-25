@@ -7,9 +7,9 @@ import * as ElevenLabs from "../index";
 export interface ChapterResponse {
     chapter_id: string;
     name: string;
-    last_conversion_date_unix: number;
-    conversion_progress: number;
+    last_conversion_date_unix?: number;
+    conversion_progress?: number;
     can_be_downloaded: boolean;
     state: ElevenLabs.ChapterState;
-    statistics: ElevenLabs.ChapterStatisticsResponse;
+    statistics?: ElevenLabs.ChapterStatisticsResponse;
 }

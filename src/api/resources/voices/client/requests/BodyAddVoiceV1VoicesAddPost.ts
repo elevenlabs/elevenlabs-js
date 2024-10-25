@@ -15,6 +15,8 @@ export interface BodyAddVoiceV1VoicesAddPost {
     /** The name that identifies this voice. This will be displayed in the dropdown of the website. */
     name: string;
     files: File[] | fs.ReadStream[] | Blob[];
+    /** If set will remove background noise for voice samples using our audio isolation model. If the samples do not include background noise, it can make the quality worse. */
+    remove_background_noise?: boolean;
     /** How would you describe the voice? */
     description?: string;
     /** Serialized labels dictionary for the voice. */

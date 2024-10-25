@@ -19,7 +19,7 @@ export interface VoiceSharingResponse {
     disable_at_unix?: number;
     voice_mixing_allowed?: boolean;
     featured?: boolean;
-    category?: ElevenLabs.Category;
+    category?: ElevenLabs.VoiceSharingResponseModelCategory;
     reader_app_enabled?: boolean;
     image_url?: string;
     ban_reason?: string;
@@ -35,4 +35,5 @@ export interface VoiceSharingResponse {
     twitter_username?: string;
     youtube_username?: string;
     tiktok_username?: string;
+    moderation_check?: ElevenLabs.VoiceSharingModerationCheckResponseModel;
 }
