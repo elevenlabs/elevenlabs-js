@@ -5,5 +5,6 @@
 export interface VoicePreviewResponseModel {
     audio_base_64: string;
     generated_voice_id: string;
-    media_type?: "audio/mpeg";
+    media_type: string;
+    duration_secs: number;
 }

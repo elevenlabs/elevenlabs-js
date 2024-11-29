@@ -40,7 +40,7 @@ export interface TextToSpeechRequest {
     voice_settings?: ElevenLabs.VoiceSettings;
     /** A list of pronunciation dictionary locators (id, version_id) to be applied to the text. They will be applied in order. You may have up to 3 locators per request */
     pronunciation_dictionary_locators?: ElevenLabs.PronunciationDictionaryVersionLocator[];
-    /** If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. */
+    /** If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be integer between 0 and 4294967295. */
     seed?: number;
     /** The text that came before the text of the current request. Can be used to improve the flow of prosody when concatenating together multiple generations or to influence the prosody in the current generation. */
     previous_text?: string;

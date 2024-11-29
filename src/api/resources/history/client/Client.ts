@@ -53,6 +53,8 @@ export class History {
             page_size: pageSize,
             start_after_history_item_id: startAfterHistoryItemId,
             voice_id: voiceId,
+            search,
+            source,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (pageSize != null) {
@@ -65,6 +67,14 @@ export class History {
 
         if (voiceId != null) {
             _queryParams["voice_id"] = voiceId;
+        }
+
+        if (search != null) {
+            _queryParams["search"] = search;
+        }
+
+        if (source != null) {
+            _queryParams["source"] = source;
         }
 
         const _response = await core.fetcher({
@@ -80,8 +90,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.0",
-                "User-Agent": "elevenlabs/0.18.0",
+                "X-Fern-SDK-Version": "v0.18.1",
+                "User-Agent": "elevenlabs/v0.18.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -153,8 +163,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.0",
-                "User-Agent": "elevenlabs/0.18.0",
+                "X-Fern-SDK-Version": "v0.18.1",
+                "User-Agent": "elevenlabs/v0.18.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -222,8 +232,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.0",
-                "User-Agent": "elevenlabs/0.18.0",
+                "X-Fern-SDK-Version": "v0.18.1",
+                "User-Agent": "elevenlabs/v0.18.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -284,8 +294,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.0",
-                "User-Agent": "elevenlabs/0.18.0",
+                "X-Fern-SDK-Version": "v0.18.1",
+                "User-Agent": "elevenlabs/v0.18.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -359,8 +369,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.0",
-                "User-Agent": "elevenlabs/0.18.0",
+                "X-Fern-SDK-Version": "v0.18.1",
+                "User-Agent": "elevenlabs/v0.18.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

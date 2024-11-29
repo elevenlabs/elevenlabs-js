@@ -14,4 +14,6 @@ export interface User {
     first_name?: string;
     is_api_key_hashed?: boolean;
     xi_api_key_preview?: string;
+    referral_link_code?: string;
+    partnerstack_partner_default_link?: string;
 }

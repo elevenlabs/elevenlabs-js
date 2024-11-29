@@ -17,7 +17,7 @@ import * as ElevenLabs from "../../../../index";
 export interface GenerateVoiceRequest {
     /** Category code corresponding to the gender of the generated voice. Possible values: female, male. */
     gender: ElevenLabs.Gender;
-    /** Category code corresponding to the accent of the generated voice. Possible values: american, british, african, australian, indian. */
+    /** Category code corresponding to the accent of the generated voice. Possible values: british, american, african, australian, indian. */
     accent: string;
     /** Category code corresponding to the age of the generated voice. Possible values: young, middle_aged, old. */
     age: ElevenLabs.Age;

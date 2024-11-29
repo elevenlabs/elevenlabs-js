@@ -27,8 +27,12 @@ export interface ProjectExtendedResponseModel {
     volume_normalization: boolean;
     state: ElevenLabs.ProjectState;
     access_level: ElevenLabs.ProjectExtendedResponseModelAccessLevel;
+    fiction?: ElevenLabs.ProjectExtendedResponseModelFiction;
+    quality_check_on: boolean;
+    quality_check_on_when_bulk_convert: boolean;
     quality_preset: ElevenLabs.ProjectExtendedResponseModelQualityPreset;
     chapters: ElevenLabs.ChapterResponse[];
     pronunciation_dictionary_versions: ElevenLabs.PronunciationDictionaryVersionResponseModel[];
+    apply_text_normalization: ElevenLabs.ProjectExtendedResponseModelApplyTextNormalization;
     experimental: Record<string, unknown>;
 }

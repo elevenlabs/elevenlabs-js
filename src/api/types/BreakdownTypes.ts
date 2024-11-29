@@ -5,7 +5,15 @@
 /**
  * How to break down the information. Cannot be "user" or "api_key" if include_workspace_metrics is False.
  */
-export type BreakdownTypes = "none" | "voice" | "user" | "api_keys" | "all_api_keys" | "product_type" | "model";
+export type BreakdownTypes =
+    | "none"
+    | "voice"
+    | "user"
+    | "api_keys"
+    | "all_api_keys"
+    | "product_type"
+    | "model"
+    | "resource";
 
 export const BreakdownTypes = {
     None: "none",
@@ -15,4 +23,5 @@ export const BreakdownTypes = {
     AllApiKeys: "all_api_keys",
     ProductType: "product_type",
     Model: "model",
+    Resource: "resource",
 } as const;

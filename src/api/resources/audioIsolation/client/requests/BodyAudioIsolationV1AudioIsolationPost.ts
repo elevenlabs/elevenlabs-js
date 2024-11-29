@@ -4,12 +4,6 @@
 
 import * as fs from "fs";
 
-/**
- * @example
- *     {
- *         audio: fs.createReadStream("/path/to/your/file")
- *     }
- */
 export interface BodyAudioIsolationV1AudioIsolationPost {
     audio: File | fs.ReadStream | Blob;
 }
