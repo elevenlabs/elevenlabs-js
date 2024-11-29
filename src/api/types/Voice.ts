@@ -23,4 +23,5 @@ export interface Voice {
     is_owner?: boolean;
     is_legacy?: boolean;
     is_mixed?: boolean;
+    created_at_unix?: number;
 }

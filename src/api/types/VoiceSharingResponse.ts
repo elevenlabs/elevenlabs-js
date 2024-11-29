@@ -36,4 +36,5 @@ export interface VoiceSharingResponse {
     youtube_username?: string;
     tiktok_username?: string;
     moderation_check?: ElevenLabs.VoiceSharingModerationCheckResponseModel;
+    reader_restricted_on?: ElevenLabs.ReaderResourceResponseModel[];
 }

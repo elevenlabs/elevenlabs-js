@@ -17,11 +17,12 @@ import { Voices } from "./api/resources/voices/client/Client";
 import { Projects } from "./api/resources/projects/client/Client";
 import { Chapters } from "./api/resources/chapters/client/Client";
 import { Dubbing } from "./api/resources/dubbing/client/Client";
-import { Workspace } from "./api/resources/workspace/client/Client";
 import { Models } from "./api/resources/models/client/Client";
 import { AudioNative } from "./api/resources/audioNative/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionary } from "./api/resources/pronunciationDictionary/client/Client";
+import { Workspace } from "./api/resources/workspace/client/Client";
+import { ConversationalAi } from "./api/resources/conversationalAi/client/Client";
 
 export declare namespace ElevenLabsClient {
     interface Options {
@@ -123,12 +124,6 @@ export class ElevenLabsClient {
         return (this._dubbing ??= new Dubbing(this._options));
     }
 
-    protected _workspace: Workspace | undefined;
-
-    public get workspace(): Workspace {
-        return (this._workspace ??= new Workspace(this._options));
-    }
-
     protected _models: Models | undefined;
 
     public get models(): Models {
@@ -151,5 +146,17 @@ export class ElevenLabsClient {
 
     public get pronunciationDictionary(): PronunciationDictionary {
         return (this._pronunciationDictionary ??= new PronunciationDictionary(this._options));
+    }
+
+    protected _workspace: Workspace | undefined;
+
+    public get workspace(): Workspace {
+        return (this._workspace ??= new Workspace(this._options));
+    }
+
+    protected _conversationalAi: ConversationalAi | undefined;
+
+    public get conversationalAi(): ConversationalAi {
+        return (this._conversationalAi ??= new ConversationalAi(this._options));
     }
 }

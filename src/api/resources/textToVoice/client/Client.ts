@@ -33,21 +33,27 @@ export class TextToVoice {
     /**
      * Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. If you like the a voice previewand want to create the voice call /v1/text-to-voice/create-voice-from-preview with the generated_voice_id to create the voice.
      *
-     * @param {ElevenLabs.BodyGenerateAVoicePreviewFromDescriptionV1TextToVoiceCreatePreviewsPost} request
+     * @param {ElevenLabs.VoicePreviewsRequestModel} request
      * @param {TextToVoice.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await client.textToVoice.createPreviews({
-     *         voice_description: "voice_description",
-     *         text: "text"
+     *         voice_description: "A sassy little squeaky mouse",
+     *         text: "Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted."
      *     })
      */
     public async createPreviews(
-        request: ElevenLabs.BodyGenerateAVoicePreviewFromDescriptionV1TextToVoiceCreatePreviewsPost,
+        request: ElevenLabs.VoicePreviewsRequestModel,
         requestOptions?: TextToVoice.RequestOptions
     ): Promise<ElevenLabs.VoicePreviewsResponseModel> {
+        const { output_format: outputFormat, ..._body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (outputFormat != null) {
+            _queryParams["output_format"] = outputFormat;
+        }
+
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
@@ -61,14 +67,15 @@ export class TextToVoice {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.0",
-                "User-Agent": "elevenlabs/0.18.0",
+                "X-Fern-SDK-Version": "0.18.1",
+                "User-Agent": "elevenlabs/0.18.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
-            body: request,
+            body: _body,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -116,9 +123,9 @@ export class TextToVoice {
      *
      * @example
      *     await client.textToVoice.createVoiceFromPreview({
-     *         voice_name: "voice_name",
-     *         voice_description: "voice_description",
-     *         generated_voice_id: "generated_voice_id"
+     *         voice_name: "Little squeaky mouse",
+     *         voice_description: "A sassy little squeaky mouse",
+     *         generated_voice_id: "37HceQefKmEi3bGovXjL"
      *     })
      */
     public async createVoiceFromPreview(
@@ -138,8 +145,8 @@ export class TextToVoice {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.0",
-                "User-Agent": "elevenlabs/0.18.0",
+                "X-Fern-SDK-Version": "0.18.1",
+                "User-Agent": "elevenlabs/0.18.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
