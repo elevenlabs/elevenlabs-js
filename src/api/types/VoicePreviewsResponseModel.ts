@@ -6,4 +6,5 @@ import * as ElevenLabs from "../index";
 
 export interface VoicePreviewsResponseModel {
     previews: ElevenLabs.VoicePreviewResponseModel[];
+    text: string;
 }

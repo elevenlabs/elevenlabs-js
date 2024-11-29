@@ -324,204 +324,7 @@ await client.history.download({
 
 ## TextToSoundEffects
 
-<details><summary><code>client.textToSoundEffects.<a href="/src/api/resources/textToSoundEffects/client/Client.ts">convert</a>({ ...params }) -> stream.Readable</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Converts a text of your choice into sound
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.textToSoundEffects.convert({
-    text: "string",
-    duration_seconds: 1.1,
-    prompt_influence: 1.1,
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodySoundGenerationV1SoundGenerationPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TextToSoundEffects.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 ## AudioIsolation
-
-<details><summary><code>client.audioIsolation.<a href="/src/api/resources/audioIsolation/client/Client.ts">audioIsolation</a>({ ...params }) -> stream.Readable</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Removes background noise from audio
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.audioIsolation.audioIsolation({
-    audio: fs.createReadStream("/path/to/your/file"),
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyAudioIsolationV1AudioIsolationPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AudioIsolation.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.audioIsolation.<a href="/src/api/resources/audioIsolation/client/Client.ts">audioIsolationStream</a>({ ...params }) -> stream.Readable</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Removes background noise from audio and streams the result
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.audioIsolation.audioIsolationStream({
-    audio: fs.createReadStream("/path/to/your/file"),
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyAudioIsolationStreamV1AudioIsolationStreamPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AudioIsolation.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
 
 ## Samples
 
@@ -977,158 +780,6 @@ await client.textToSpeech.streamWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
 
 ## SpeechToSpeech
 
-<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">convert</a>(voiceId, { ...params }) -> stream.Readable</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create speech by combining the content and emotion of the uploaded audio with a voice of your choice.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.speechToSpeech.convert("string", {
-    audio: fs.createReadStream("/path/to/your/file"),
-    enable_logging: true,
-    optimize_streaming_latency: "0",
-    output_format: "mp3_22050_32",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**voiceId:** `string`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SpeechToSpeech.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">convertAsStream</a>(voiceId, { ...params }) -> stream.Readable</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create speech by combining the content and emotion of the uploaded audio with a voice of your choice and returns an audio stream.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.speechToSpeech.convertAsStream("string", {
-    audio: fs.createReadStream("/path/to/your/file"),
-    enable_logging: "0",
-    optimize_streaming_latency: "mp3_22050_32",
-    output_format: "string",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**voiceId:** `string`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIdStreamPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SpeechToSpeech.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 ## VoiceGeneration
 
 <details><summary><code>client.voiceGeneration.<a href="/src/api/resources/voiceGeneration/client/Client.ts">generateParameters</a>() -> ElevenLabs.VoiceGenerationParameterResponse</code></summary>
@@ -1353,8 +1004,8 @@ Generate a custom voice based on voice description. This method returns a list o
 
 ```typescript
 await client.textToVoice.createPreviews({
-    voice_description: "voice_description",
-    text: "text",
+    voice_description: "A sassy little squeaky mouse",
+    text: "Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted.",
 });
 ```
 
@@ -1371,7 +1022,7 @@ await client.textToVoice.createPreviews({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.BodyGenerateAVoicePreviewFromDescriptionV1TextToVoiceCreatePreviewsPost`
+**request:** `ElevenLabs.VoicePreviewsRequestModel`
 
 </dd>
 </dl>
@@ -1419,9 +1070,9 @@ Create a voice from previously generated voice preview. This endpoint should be 
 
 ```typescript
 await client.textToVoice.createVoiceFromPreview({
-    voice_name: "voice_name",
-    voice_description: "voice_description",
-    generated_voice_id: "generated_voice_id",
+    voice_name: "Little squeaky mouse",
+    voice_description: "A sassy little squeaky mouse",
+    generated_voice_id: "37HceQefKmEi3bGovXjL",
 });
 ```
 
@@ -2830,87 +2481,6 @@ await client.projects.getSnapshots("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">streamAudio</a>(projectId, projectSnapshotId, { ...params }) -> stream.Readable</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Stream the audio from a project snapshot.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.projects.streamAudio("string", "string", {
-    convert_to_mpeg: true,
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**projectId:** `string` — The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**projectSnapshotId:** `string` — The project_snapshot_id of the project snapshot. You can query GET /v1/projects/{project_id}/snapshots to list all available snapshots for a project.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Projects.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">streamArchive</a>(projectId, projectSnapshotId) -> void</code></summary>
 <dl>
 <dd>
@@ -3762,77 +3332,6 @@ await client.dubbing.deleteDubbingProject("dubbing_id");
 </dl>
 </details>
 
-<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">getDubbedFile</a>(dubbingId, languageCode) -> stream.Readable</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns dubbed file as a streamed file. Videos will be returned in MP4 format and audio only dubs will be returned in MP3.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.getDubbedFile("string", "string");
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbingId:** `string` — ID of the dubbing project.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**languageCode:** `string` — ID of the language.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Dubbing.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">getTranscriptForDub</a>(dubbingId, languageCode, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
@@ -3902,253 +3401,6 @@ await client.dubbing.getTranscriptForDub("dubbing_id", "language_code");
 <dd>
 
 **requestOptions:** `Dubbing.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Workspace
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">getSsoProviderAdmin</a>({ ...params }) -> ElevenLabs.SsoProviderResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.getSsoProviderAdmin({
-    workspace_id: "workspace_id",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.GetSsoProviderAdminAdminN8EnylacgdSsoProviderGetRequest`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">inviteUser</a>({ ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Sends an email invitation to join your workspace to the provided email. If the user doesn't have an account they will be prompted to create one. If the user accepts this invite they will be added as a user to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace administrators.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.inviteUser({
-    email: "email",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyInviteUserV1WorkspaceInvitesAddPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">deleteExistingInvitation</a>({ ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Invalidates an existing email invitation. The invitation will still show up in the inbox it has been delivered to, but activating it to join the workspace won't work. This endpoint may only be called by workspace administrators.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.deleteExistingInvitation({
-    email: "email",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">updateMember</a>({ ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Updates attributes of a workspace member. Apart from the email identifier, all parameters will remain unchanged unless specified. This endpoint may only be called by workspace administrators.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.updateMember({
-    email: "email",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyUpdateMemberV1WorkspaceMembersPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
 
 </dd>
 </dl>
@@ -4760,6 +4012,1209 @@ await client.pronunciationDictionary.getAll({
 <dd>
 
 **requestOptions:** `PronunciationDictionary.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Workspace
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">inviteUser</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends an email invitation to join your workspace to the provided email. If the user doesn't have an account they will be prompted to create one. If the user accepts this invite they will be added as a user to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace administrators.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.inviteUser({
+    email: "email",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyInviteUserV1WorkspaceInvitesAddPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">deleteExistingInvitation</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Invalidates an existing email invitation. The invitation will still show up in the inbox it has been delivered to, but activating it to join the workspace won't work. This endpoint may only be called by workspace administrators.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.deleteExistingInvitation({
+    email: "email",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">updateMember</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates attributes of a workspace member. Apart from the email identifier, all parameters will remain unchanged unless specified. This endpoint may only be called by workspace administrators.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.updateMember({
+    email: "email",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUpdateMemberV1WorkspaceMembersPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getSignedUrl</a>({ ...params }) -> ElevenLabs.ConversationSignedUrlResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a signed url to start a conversation with an agent with an agent that requires authorization
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getSignedUrl({
+    agent_id: "21m00Tcm4TlvDq8ikWAM",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ConversationalAiGetSignedUrlRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">createAgent</a>({ ...params }) -> ElevenLabs.CreateAgentResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create an agent from a config object
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.createAgent({
+    conversation_config: {},
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyCreateAgentV1ConvaiAgentsCreatePost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getAgent</a>(agentId) -> ElevenLabs.GetAgentResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve config for an agent
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getAgent("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">deleteAgent</a>(agentId) -> Record<string, string></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an agent
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.deleteAgent("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updateAgent</a>(agentId, { ...params }) -> ElevenLabs.GetAgentResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Patches an Agent settings
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.updateAgent("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatch`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getWidget</a>(agentId, { ...params }) -> ElevenLabs.GetAgentEmbedResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the widget configuration for an agent
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getWidget("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ConversationalAiGetWidgetRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getLink</a>(agentId) -> ElevenLabs.GetAgentLinkResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the current link used to share the agent with others
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getLink("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">postAvatar</a>(agentId, { ...params }) -> ElevenLabs.PostAgentAvatarResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sets the avatar for an agent displayed in the widget
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.postAvatar("21m00Tcm4TlvDq8ikWAM", {
+    avatar_file: fs.createReadStream("/path/to/your/file"),
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getKnowledgeBaseDocument</a>(agentId, documentationId) -> ElevenLabs.GetKnowledgeBaseReponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get details about a specific documentation making up the agent's knowledge base
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getKnowledgeBaseDocument("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentationId:** `string` — The id of a document from the agent's knowledge base. This is returned on document addition.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">addAgentSecret</a>(agentId, { ...params }) -> ElevenLabs.AddAgentSecretResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Uploads a file or reference a webpage for the agent to use as part of it's knowledge base
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.addAgentSecret("21m00Tcm4TlvDq8ikWAM", {
+    name: "name",
+    secret_value: "secret_value",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyAddASecretToTheAgentWhichCanBeReferencedInToolCallsV1ConvaiAgentsAgentIdAddSecretPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">createKnowledgeBaseDocument</a>(agentId, { ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Uploads a file or reference a webpage for the agent to use as part of it's knowledge base
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.createKnowledgeBaseDocument("21m00Tcm4TlvDq8ikWAM", {});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyAddToAgentSKnowledgeBaseV1ConvaiAgentsAgentIdAddToKnowledgeBasePost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getAgents</a>({ ...params }) -> ElevenLabs.GetAgentsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a page of your agents and their metadata.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getAgents();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ConversationalAiGetAgentsRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getConversations</a>({ ...params }) -> ElevenLabs.GetConversationsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all conversations of agents that user owns. With option to restrict to a specific agent.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getConversations({
+    agent_id: "21m00Tcm4TlvDq8ikWAM",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ConversationalAiGetConversationsRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getConversation</a>(conversationId) -> ElevenLabs.GetConversationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the details of a particular conversation
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getConversation("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversationId:** `string` — The id of the conversation you're taking the action on.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getConversationAudio</a>(conversationId) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the audio recording of a particular conversation
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getConversationAudio("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversationId:** `string` — The id of the conversation you're taking the action on.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
 
 </dd>
 </dl>

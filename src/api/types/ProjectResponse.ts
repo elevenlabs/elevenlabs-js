@@ -27,4 +27,7 @@ export interface ProjectResponse {
     volume_normalization: boolean;
     state: ElevenLabs.ProjectState;
     access_level: ElevenLabs.ProjectResponseModelAccessLevel;
+    fiction?: ElevenLabs.ProjectResponseModelFiction;
+    quality_check_on: boolean;
+    quality_check_on_when_bulk_convert: boolean;
 }

@@ -5,9 +5,9 @@
 /**
  * @example
  *     {
- *         voice_name: "voice_name",
- *         voice_description: "voice_description",
- *         generated_voice_id: "generated_voice_id"
+ *         voice_name: "Little squeaky mouse",
+ *         voice_description: "A sassy little squeaky mouse",
+ *         generated_voice_id: "37HceQefKmEi3bGovXjL"
  *     }
  */
 export interface BodyCreateANewVoiceFromVoicePreviewV1TextToVoiceCreateVoiceFromPreviewPost {

@@ -12,4 +12,5 @@ export interface ChapterResponse {
     can_be_downloaded: boolean;
     state: ElevenLabs.ChapterState;
     statistics?: ElevenLabs.ChapterStatisticsResponse;
+    last_conversion_error?: string;
 }
