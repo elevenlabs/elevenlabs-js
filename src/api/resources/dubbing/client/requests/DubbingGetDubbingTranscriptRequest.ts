@@ -8,9 +8,9 @@ import * as ElevenLabs from "../../../../index";
  * @example
  *     {}
  */
-export interface GetTranscriptForDubV1DubbingDubbingIdTranscriptLanguageCodeGetRequest {
+export interface DubbingGetDubbingTranscriptRequest {
     /**
      * Format to use for the subtitle file, either 'srt' or 'webvtt'
      */
-    format_type?: ElevenLabs.GetTranscriptForDubV1DubbingDubbingIdTranscriptLanguageCodeGetRequestFormatType;
+    format_type?: ElevenLabs.DubbingGetDubbingTranscriptRequestFormatType;
 }

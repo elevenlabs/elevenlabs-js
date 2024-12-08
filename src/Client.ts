@@ -5,7 +5,7 @@
 import * as environments from "./environments";
 import * as core from "./core";
 import { History } from "./api/resources/history/client/Client";
-import { TextToSoundEffects } from "./api/resources/textToSoundEffects/client/Client";
+import { SoundGeneration } from "./api/resources/soundGeneration/client/Client";
 import { AudioIsolation } from "./api/resources/audioIsolation/client/Client";
 import { Samples } from "./api/resources/samples/client/Client";
 import { TextToSpeech } from "./api/resources/textToSpeech/client/Client";
@@ -22,6 +22,7 @@ import { AudioNative } from "./api/resources/audioNative/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionary } from "./api/resources/pronunciationDictionary/client/Client";
 import { Workspace } from "./api/resources/workspace/client/Client";
+import { Profile } from "./api/resources/profile/client/Client";
 import { ConversationalAi } from "./api/resources/conversationalAi/client/Client";
 
 export declare namespace ElevenLabsClient {
@@ -52,10 +53,10 @@ export class ElevenLabsClient {
         return (this._history ??= new History(this._options));
     }
 
-    protected _textToSoundEffects: TextToSoundEffects | undefined;
+    protected _soundGeneration: SoundGeneration | undefined;
 
-    public get textToSoundEffects(): TextToSoundEffects {
-        return (this._textToSoundEffects ??= new TextToSoundEffects(this._options));
+    public get soundGeneration(): SoundGeneration {
+        return (this._soundGeneration ??= new SoundGeneration(this._options));
     }
 
     protected _audioIsolation: AudioIsolation | undefined;
@@ -152,6 +153,12 @@ export class ElevenLabsClient {
 
     public get workspace(): Workspace {
         return (this._workspace ??= new Workspace(this._options));
+    }
+
+    protected _profile: Profile | undefined;
+
+    public get profile(): Profile {
+        return (this._profile ??= new Profile(this._options));
     }
 
     protected _conversationalAi: ConversationalAi | undefined;

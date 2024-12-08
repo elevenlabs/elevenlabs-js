@@ -322,7 +322,7 @@ await client.history.download({
 </dl>
 </details>
 
-## TextToSoundEffects
+## SoundGeneration
 
 ## AudioIsolation
 
@@ -705,7 +705,7 @@ await client.textToSpeech.convertAsStream("pMsXgVXv3BLzUgSXRplE", {
 </dl>
 </details>
 
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">streamWithTimestamps</a>(voiceId, { ...params }) -> void</code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">streamWithTimestamps</a>(voiceId, { ...params }) -> core.Stream<ElevenLabs.TextToSpeechStreamWithTimestampsResponse></code></summary>
 <dl>
 <dd>
 
@@ -1220,7 +1220,7 @@ await client.user.get();
 </dl>
 </details>
 
-## voices
+## Voices
 
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetVoicesResponse</code></summary>
 <dl>
@@ -1966,69 +1966,6 @@ await client.voices.getSimilarLibraryVoices({});
 </dl>
 </details>
 
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAProfilePage</a>(handle) -> ElevenLabs.ProfilePageResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Gets a profile page based on a handle
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.getAProfilePage("talexgeorge");
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**handle:** `string` — Handle for a VA's profile page
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Voices.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 ## Projects
 
 <details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">getAll</a>() -> ElevenLabs.GetProjectsResponse</code></summary>
@@ -2552,79 +2489,6 @@ await client.projects.streamArchive("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWA
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">addChapterToAProject</a>(projectId, { ...params }) -> ElevenLabs.AddChapterResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Creates a new chapter either as blank or from a URL.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.projects.addChapterToAProject("21m00Tcm4TlvDq8ikWAM", {
-    name: "name",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**projectId:** `string` — The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyAddChapterToAProjectV1ProjectsProjectIdChaptersAddPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Projects.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">updatePronunciationDictionaries</a>(projectId, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
@@ -2892,6 +2756,79 @@ await client.chapters.delete("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **chapterId:** `string` — The chapter_id of the chapter. You can query GET https://api.elevenlabs.io/v1/projects/{project_id}/chapters to list all available chapters for a project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Chapters.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.chapters.<a href="/src/api/resources/chapters/client/Client.ts">create</a>(projectId, { ...params }) -> ElevenLabs.AddChapterResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new chapter either as blank or from a URL.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.chapters.create("21m00Tcm4TlvDq8ikWAM", {
+    name: "name",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `string` — The project_id of the project, you can query GET https://api.elevenlabs.io/v1/projects to list all available projects.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyAddChapterToAProjectV1ProjectsProjectIdChaptersAddPost`
 
 </dd>
 </dl>
@@ -3332,7 +3269,7 @@ await client.dubbing.deleteDubbingProject("dubbing_id");
 </dl>
 </details>
 
-<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">getTranscriptForDub</a>(dubbingId, languageCode, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">getDubbingTranscript</a>(dubbingId, languageCode, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -3360,7 +3297,7 @@ Returns transcript for the dub as an SRT file.
 <dd>
 
 ```typescript
-await client.dubbing.getTranscriptForDub("dubbing_id", "language_code");
+await client.dubbing.getDubbingTranscript("dubbing_id", "language_code");
 ```
 
 </dd>
@@ -3392,7 +3329,7 @@ await client.dubbing.getTranscriptForDub("dubbing_id", "language_code");
 <dl>
 <dd>
 
-**request:** `ElevenLabs.GetTranscriptForDubV1DubbingDubbingIdTranscriptLanguageCodeGetRequest`
+**request:** `ElevenLabs.DubbingGetDubbingTranscriptRequest`
 
 </dd>
 </dl>
@@ -3584,7 +3521,7 @@ await client.usage.getCharactersUsageMetrics({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.UsageGetCharactersUsageMetricsRequest`
+**request:** `ElevenLabs.GetCharactersUsageMetricsV1UsageCharacterStatsGetRequest`
 
 </dd>
 </dl>
@@ -3670,7 +3607,7 @@ await client.pronunciationDictionary.addFromFile({
 </dl>
 </details>
 
-<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">addRulesToThePronunciationDictionary</a>(pronunciationDictionaryId, { ...params }) -> ElevenLabs.AddPronunciationDictionaryRulesResponseModel</code></summary>
+<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">addRules</a>(pronunciationDictionaryId, { ...params }) -> ElevenLabs.AddPronunciationDictionaryRulesResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -3698,7 +3635,7 @@ Add rules to the pronunciation dictionary
 <dd>
 
 ```typescript
-await client.pronunciationDictionary.addRulesToThePronunciationDictionary("21m00Tcm4TlvDq8ikWAM", {
+await client.pronunciationDictionary.addRules("21m00Tcm4TlvDq8ikWAM", {
     rules: [
         {
             type: "phoneme",
@@ -3750,7 +3687,7 @@ await client.pronunciationDictionary.addRulesToThePronunciationDictionary("21m00
 </dl>
 </details>
 
-<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">removeRulesFromThePronunciationDictionary</a>(pronunciationDictionaryId, { ...params }) -> ElevenLabs.RemovePronunciationDictionaryRulesResponseModel</code></summary>
+<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">removeRules</a>(pronunciationDictionaryId, { ...params }) -> ElevenLabs.RemovePronunciationDictionaryRulesResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -3778,7 +3715,7 @@ Remove rules from the pronunciation dictionary
 <dd>
 
 ```typescript
-await client.pronunciationDictionary.removeRulesFromThePronunciationDictionary("21m00Tcm4TlvDq8ikWAM", {
+await client.pronunciationDictionary.removeRules("21m00Tcm4TlvDq8ikWAM", {
     rule_strings: ["rule_strings"],
 });
 ```
@@ -4219,6 +4156,71 @@ await client.workspace.updateMember({
 </dl>
 </details>
 
+## Profile
+
+<details><summary><code>client.profile.<a href="/src/api/resources/profile/client/Client.ts">get</a>(handle) -> ElevenLabs.ProfilePageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets a profile page based on a handle
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.profile.get("talexgeorge");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**handle:** `string` — Handle for a VA's profile page
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Profile.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi
 
 <details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getSignedUrl</a>({ ...params }) -> ElevenLabs.ConversationSignedUrlResponseModel</code></summary>
@@ -4548,7 +4550,7 @@ await client.conversationalAi.updateAgent("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getWidget</a>(agentId, { ...params }) -> ElevenLabs.GetAgentEmbedResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getAgentWidget</a>(agentId, { ...params }) -> ElevenLabs.GetAgentEmbedResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4576,7 +4578,7 @@ Retrieve the widget configuration for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.getWidget("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.getAgentWidget("21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -4600,7 +4602,7 @@ await client.conversationalAi.getWidget("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**request:** `ElevenLabs.ConversationalAiGetWidgetRequest`
+**request:** `ElevenLabs.ConversationalAiGetAgentWidgetRequest`
 
 </dd>
 </dl>
@@ -4619,7 +4621,7 @@ await client.conversationalAi.getWidget("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getLink</a>(agentId) -> ElevenLabs.GetAgentLinkResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getAgentLink</a>(agentId) -> ElevenLabs.GetAgentLinkResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4647,7 +4649,7 @@ Get the current link used to share the agent with others
 <dd>
 
 ```typescript
-await client.conversationalAi.getLink("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.getAgentLink("21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -4682,7 +4684,7 @@ await client.conversationalAi.getLink("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">postAvatar</a>(agentId, { ...params }) -> ElevenLabs.PostAgentAvatarResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">postAgentAvatar</a>(agentId, { ...params }) -> ElevenLabs.PostAgentAvatarResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4710,7 +4712,7 @@ Sets the avatar for an agent displayed in the widget
 <dd>
 
 ```typescript
-await client.conversationalAi.postAvatar("21m00Tcm4TlvDq8ikWAM", {
+await client.conversationalAi.postAgentAvatar("21m00Tcm4TlvDq8ikWAM", {
     avatar_file: fs.createReadStream("/path/to/your/file"),
 });
 ```
@@ -4755,7 +4757,7 @@ await client.conversationalAi.postAvatar("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getKnowledgeBaseDocument</a>(agentId, documentationId) -> ElevenLabs.GetKnowledgeBaseReponseModel</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getAgentKnowledgeBaseDocumentById</a>(agentId, documentationId) -> ElevenLabs.GetKnowledgeBaseReponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4783,7 +4785,7 @@ Get details about a specific documentation making up the agent's knowledge base
 <dd>
 
 ```typescript
-await client.conversationalAi.getKnowledgeBaseDocument("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.getAgentKnowledgeBaseDocumentById("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -4900,7 +4902,7 @@ await client.conversationalAi.addAgentSecret("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">createKnowledgeBaseDocument</a>(agentId, { ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">addToAgentKnowledgeBase</a>(agentId, { ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4928,7 +4930,7 @@ Uploads a file or reference a webpage for the agent to use as part of it's knowl
 <dd>
 
 ```typescript
-await client.conversationalAi.createKnowledgeBaseDocument("21m00Tcm4TlvDq8ikWAM", {});
+await client.conversationalAi.addToAgentKnowledgeBase("21m00Tcm4TlvDq8ikWAM", {});
 ```
 
 </dd>
@@ -5162,6 +5164,69 @@ await client.conversationalAi.getConversation("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">deleteConversation</a>(conversationId) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a particular conversation
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.deleteConversation("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversationId:** `string` — The id of the conversation you're taking the action on.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getConversationAudio</a>(conversationId) -> void</code></summary>
 <dl>
 <dd>
@@ -5210,6 +5275,400 @@ await client.conversationalAi.getConversationAudio("21m00Tcm4TlvDq8ikWAM");
 
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">postConversationFeedback</a>(conversationId, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Send the feedback for the given conversation
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.postConversationFeedback("21m00Tcm4TlvDq8ikWAM", {
+    feedback: "like",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversationId:** `string` — The id of the conversation you're taking the action on.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">createPhoneNumber</a>({ ...params }) -> ElevenLabs.CreatePhoneNumberResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Import Phone Number from Twilio configuration
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.createPhoneNumber({
+    phone_number: "phone_number",
+    provider: "twilio",
+    label: "label",
+    sid: "sid",
+    token: "token",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreatePhoneNumberRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getPhoneNumber</a>(phoneNumberId) -> ElevenLabs.GetPhoneNumberResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve Phone Number details by ID
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getPhoneNumber("TeaqRRdTcIfIu2i7BYfT");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phoneNumberId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">deletePhoneNumber</a>(phoneNumberId) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete Phone Number by ID
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.deletePhoneNumber("TeaqRRdTcIfIu2i7BYfT");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phoneNumberId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updatePhoneNumber</a>(phoneNumberId, { ...params }) -> ElevenLabs.GetPhoneNumberResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update Phone Number details by ID
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.updatePhoneNumber("TeaqRRdTcIfIu2i7BYfT");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phoneNumberId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.UpdatePhoneNumberRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getPhoneNumbers</a>() -> ElevenLabs.GetPhoneNumberResponseModel[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve all Phone Numbers
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getPhoneNumbers();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
 
 <dl>
 <dd>

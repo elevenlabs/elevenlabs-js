@@ -9,7 +9,7 @@ import * as stream from "stream";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
-export declare namespace TextToSoundEffects {
+export declare namespace SoundGeneration {
     interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Override the xi-api-key header */
@@ -28,16 +28,16 @@ export declare namespace TextToSoundEffects {
     }
 }
 
-export class TextToSoundEffects {
-    constructor(protected readonly _options: TextToSoundEffects.Options = {}) {}
+export class SoundGeneration {
+    constructor(protected readonly _options: SoundGeneration.Options = {}) {}
 
     /**
      * Converts a text of your choice into sound
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    public async convert(
+    public async soundGeneration(
         request: ElevenLabs.BodySoundGenerationV1SoundGenerationPost,
-        requestOptions?: TextToSoundEffects.RequestOptions
+        requestOptions?: SoundGeneration.RequestOptions
     ): Promise<stream.Readable> {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
@@ -52,8 +52,8 @@ export class TextToSoundEffects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.19.0",
+                "User-Agent": "elevenlabs/0.19.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

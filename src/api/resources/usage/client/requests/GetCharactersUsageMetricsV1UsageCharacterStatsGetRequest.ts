@@ -11,7 +11,7 @@ import * as ElevenLabs from "../../../../index";
  *         end_unix: 1
  *     }
  */
-export interface UsageGetCharactersUsageMetricsRequest {
+export interface GetCharactersUsageMetricsV1UsageCharacterStatsGetRequest {
     /**
      * UTC Unix timestamp for the start of the usage window, in milliseconds. To include the first day of the window, the timestamp should be at 00:00:00 of that day.
      */
