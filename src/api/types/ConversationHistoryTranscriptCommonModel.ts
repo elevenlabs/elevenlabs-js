@@ -9,5 +9,7 @@ export interface ConversationHistoryTranscriptCommonModel {
     message?: string;
     tool_calls?: ElevenLabs.ConversationHistoryTranscriptToolCallCommonModel[];
     tool_results?: ElevenLabs.ConversationHistoryTranscriptToolResultCommonModel[];
+    feedback?: ElevenLabs.UserFeedback;
     time_in_call_secs: number;
+    conversation_turn_metrics?: Record<string, unknown>;
 }

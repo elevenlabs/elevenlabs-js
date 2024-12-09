@@ -23,6 +23,7 @@ import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionary } from "./api/resources/pronunciationDictionary/client/Client";
 import { Workspace } from "./api/resources/workspace/client/Client";
 import { ConversationalAi } from "./api/resources/conversationalAi/client/Client";
+import { ReaderPublisherProfiles } from "./api/resources/readerPublisherProfiles/client/Client";
 
 export declare namespace ElevenLabsClient {
     interface Options {
@@ -158,5 +159,11 @@ export class ElevenLabsClient {
 
     public get conversationalAi(): ConversationalAi {
         return (this._conversationalAi ??= new ConversationalAi(this._options));
+    }
+
+    protected _readerPublisherProfiles: ReaderPublisherProfiles | undefined;
+
+    public get readerPublisherProfiles(): ReaderPublisherProfiles {
+        return (this._readerPublisherProfiles ??= new ReaderPublisherProfiles(this._options));
     }
 }
