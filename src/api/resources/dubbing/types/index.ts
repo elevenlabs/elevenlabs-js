@@ -1,1 +1,1 @@
-export * from "./GetTranscriptForDubV1DubbingDubbingIdTranscriptLanguageCodeGetRequestFormatType";
+export * from "./DubbingGetDubbingTranscriptRequestFormatType";
