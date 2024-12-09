@@ -9,5 +9,7 @@ export interface AgentPlatformSettings {
     evaluation?: ElevenLabs.EvaluationSettings;
     widget?: ElevenLabs.EmbedConfig;
     data_collection?: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
+    overrides?: ElevenLabs.ConversationInitiationClientDataConfig;
     ban?: ElevenLabs.AgentBan;
+    safety?: ElevenLabs.Safety;
 }
