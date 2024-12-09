@@ -4,6 +4,9 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
+import * as ElevenLabs from "./api/index";
+import urlJoin from "url-join";
+import * as errors from "./errors/index";
 import { History } from "./api/resources/history/client/Client";
 import { TextToSoundEffects } from "./api/resources/textToSoundEffects/client/Client";
 import { AudioIsolation } from "./api/resources/audioIsolation/client/Client";
@@ -22,7 +25,9 @@ import { AudioNative } from "./api/resources/audioNative/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionary } from "./api/resources/pronunciationDictionary/client/Client";
 import { Workspace } from "./api/resources/workspace/client/Client";
+import { Profile } from "./api/resources/profile/client/Client";
 import { ConversationalAi } from "./api/resources/conversationalAi/client/Client";
+import { ReaderPublisherProfiles } from "./api/resources/readerPublisherProfiles/client/Client";
 
 export declare namespace ElevenLabsClient {
     interface Options {
@@ -45,6 +50,83 @@ export declare namespace ElevenLabsClient {
 
 export class ElevenLabsClient {
     constructor(protected readonly _options: ElevenLabsClient.Options = {}) {}
+
+    /**
+     * Manually review a read
+     *
+     * @param {string} readId - The ID of the read to get the HTML for.
+     * @param {ElevenLabs.BodyManuallyReviewAReadAdmin6Rnp7Bvc2TReadsReadIdReviewPost} request
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.manuallyReviewAReadAdmin6Rnp7Bvc2TReadsReadIdReviewPost("read_id", {
+     *         review_status: "approved"
+     *     })
+     */
+    public async manuallyReviewAReadAdmin6Rnp7Bvc2TReadsReadIdReviewPost(
+        readId: string,
+        request: ElevenLabs.BodyManuallyReviewAReadAdmin6Rnp7Bvc2TReadsReadIdReviewPost,
+        requestOptions?: ElevenLabsClient.RequestOptions
+    ): Promise<unknown> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
+                `admin/6rnp7bvc2t/reads/${encodeURIComponent(readId)}/review`
+            ),
+            method: "POST",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "0.19.0",
+                "User-Agent": "elevenlabs/0.19.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError();
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
 
     protected _history: History | undefined;
 
@@ -154,9 +236,21 @@ export class ElevenLabsClient {
         return (this._workspace ??= new Workspace(this._options));
     }
 
+    protected _profile: Profile | undefined;
+
+    public get profile(): Profile {
+        return (this._profile ??= new Profile(this._options));
+    }
+
     protected _conversationalAi: ConversationalAi | undefined;
 
     public get conversationalAi(): ConversationalAi {
         return (this._conversationalAi ??= new ConversationalAi(this._options));
+    }
+
+    protected _readerPublisherProfiles: ReaderPublisherProfiles | undefined;
+
+    public get readerPublisherProfiles(): ReaderPublisherProfiles {
+        return (this._readerPublisherProfiles ??= new ReaderPublisherProfiles(this._options));
     }
 }

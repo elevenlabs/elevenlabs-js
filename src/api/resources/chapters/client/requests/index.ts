@@ -1,1 +1,2 @@
+export { type BodyAddChapterToAProjectV1ProjectsProjectIdChaptersAddPost } from "./BodyAddChapterToAProjectV1ProjectsProjectIdChaptersAddPost";
 export { type BodyStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost } from "./BodyStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost";

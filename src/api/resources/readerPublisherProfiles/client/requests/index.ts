@@ -1,0 +1,2 @@
+export { type BodyUpdateAPublisherProfileV1PublisherProfilesPublisherProfileIdPost } from "./BodyUpdateAPublisherProfileV1PublisherProfilesPublisherProfileIdPost";
+export { type BodyCreateAnPublisherProfileV1PublisherProfilesPost } from "./BodyCreateAnPublisherProfileV1PublisherProfilesPost";
