@@ -705,7 +705,7 @@ await client.textToSpeech.convertAsStream("pMsXgVXv3BLzUgSXRplE", {
 </dl>
 </details>
 
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">streamWithTimestamps</a>(voiceId, { ...params }) -> void</code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">streamWithTimestamps</a>(voiceId, { ...params }) -> core.Stream<ElevenLabs.TextToSpeechStreamWithTimestampsResponse></code></summary>
 <dl>
 <dd>
 
