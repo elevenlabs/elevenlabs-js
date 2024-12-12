@@ -115,9 +115,12 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```ts
-const response = await elevenlabs.voices.getAll({}, {
-  maxRetries: 2 // Set the maximum number of retries
-});
+const response = await elevenlabs.voices.getAll(
+    {},
+    {
+        maxRetries: 2, // Set the maximum number of retries
+    }
+);
 ```
 
 ## Timeouts
@@ -126,9 +129,12 @@ The SDK defaults to a 60 second timout. Use the `timeoutInSeconds` option to
 configure this behavior.
 
 ```ts
-const response = await elevenlabs.voices.getAll({}, {
-    timeoutInSeconds: 30, // override timeout to 30s
-});
+const response = await elevenlabs.voices.getAll(
+    {},
+    {
+        timeoutInSeconds: 30, // override timeout to 30s
+    }
+);
 ```
 
 ## Runtime compatiblity
@@ -143,7 +149,6 @@ The following runtimes are supported:
 -   Cloudflare Workers
 -   Deno v1.25+
 -   Bun 1.0+
-
 
 ## Elevenlabs Namespace
 
