@@ -30,6 +30,7 @@ export interface ProjectExtendedResponseModel {
     fiction?: ElevenLabs.ProjectExtendedResponseModelFiction;
     quality_check_on: boolean;
     quality_check_on_when_bulk_convert: boolean;
+    creation_meta?: ElevenLabs.ProjectCreationMetaResponseModel;
     quality_preset: ElevenLabs.ProjectExtendedResponseModelQualityPreset;
     chapters: ElevenLabs.ChapterResponse[];
     pronunciation_dictionary_versions: ElevenLabs.PronunciationDictionaryVersionResponseModel[];
