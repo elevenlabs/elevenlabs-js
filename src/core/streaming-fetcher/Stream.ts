@@ -89,10 +89,12 @@ export class Stream<T> implements AsyncIterable<T> {
                 if (this.streamTerminator != null && line.includes(this.streamTerminator)) {
                     return;
                 }
-
-                // Otherwise, yield message from the prefix to the terminator
-                const message = await this.parse(JSON.parse(line));
-                yield message;
+                // (Louis custom fix) Trim whitespace and check if line is not empty
+                const trimmedLine = line.trim();
+                if (trimmedLine) {
+                    const message = await this.parse(JSON.parse(trimmedLine));
+                    yield message;
+                }
                 prefixSeen = false;
             }
         }

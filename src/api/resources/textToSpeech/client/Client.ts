@@ -8,7 +8,6 @@ import * as ElevenLabs from "../../../index";
 import * as stream from "stream";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
-import * as serializers from "../../../../serialization/index";
 
 export declare namespace TextToSpeech {
     interface Options {
@@ -362,15 +361,7 @@ export class TextToSpeech {
         if (_response.ok) {
             return new core.Stream({
                 stream: _response.body,
-                parse: async (data) => {
-                    return serializers.TextToSpeechStreamWithTimestampsResponse.parseOrThrow(data, {
-                        unrecognizedObjectKeys: "passthrough",
-                        allowUnrecognizedUnionMembers: true,
-                        allowUnrecognizedEnumValues: true,
-                        skipValidation: true,
-                        breadcrumbsPrefix: ["response"],
-                    });
-                },
+                parse: (data) => data as any,
                 signal: requestOptions?.abortSignal,
                 eventShape: {
                     type: "json",
