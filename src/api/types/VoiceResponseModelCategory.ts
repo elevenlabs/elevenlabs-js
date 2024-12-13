@@ -9,7 +9,6 @@ export type VoiceResponseModelCategory =
     | "professional"
     | "famous"
     | "high_quality";
-
 export const VoiceResponseModelCategory = {
     Generated: "generated",
     Cloned: "cloned",

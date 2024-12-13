@@ -705,7 +705,7 @@ await client.textToSpeech.convertAsStream("pMsXgVXv3BLzUgSXRplE", {
 </dl>
 </details>
 
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">streamWithTimestamps</a>(voiceId, { ...params }) -> void</code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">streamWithTimestamps</a>(voiceId, { ...params }) -> core.Stream<ElevenLabs.TextToSpeechStreamWithTimestampsResponse></code></summary>
 <dl>
 <dd>
 
@@ -733,9 +733,12 @@ Converts text into speech using a voice of your choice and returns a stream of J
 <dd>
 
 ```typescript
-await client.textToSpeech.streamWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
+const response = await client.textToSpeech.streamWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
     text: "text",
 });
+for await (const item of response) {
+    console.log(item);
+}
 ```
 
 </dd>

@@ -3,7 +3,6 @@
  */
 
 export type ExtendedSubscriptionResponseModelCharacterRefreshPeriod = "monthly_period" | "annual_period";
-
 export const ExtendedSubscriptionResponseModelCharacterRefreshPeriod = {
     MonthlyPeriod: "monthly_period",
     AnnualPeriod: "annual_period",

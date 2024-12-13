@@ -3,7 +3,6 @@
  */
 
 export type ProjectState = "default" | "converting" | "in_queue";
-
 export const ProjectState = {
     Default: "default",
     Converting: "converting",

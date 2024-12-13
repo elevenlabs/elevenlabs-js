@@ -3,7 +3,6 @@
  */
 
 export type ReviewStatus = "not_requested" | "pending" | "declined" | "allowed" | "allowed_with_changes";
-
 export const ReviewStatus = {
     NotRequested: "not_requested",
     Pending: "pending",

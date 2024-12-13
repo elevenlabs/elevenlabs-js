@@ -8,12 +8,12 @@ export type PronunciationDictionaryRule =
     | ElevenLabs.PronunciationDictionaryRule.Alias
     | ElevenLabs.PronunciationDictionaryRule.Phoneme;
 
-export declare namespace PronunciationDictionaryRule {
-    interface Alias extends ElevenLabs.PronunciationDictionaryAliasRuleRequestModel {
+export namespace PronunciationDictionaryRule {
+    export interface Alias extends ElevenLabs.PronunciationDictionaryAliasRuleRequestModel {
         type: "alias";
     }
 
-    interface Phoneme extends ElevenLabs.PronunciationDictionaryPhonemeRuleRequestModel {
+    export interface Phoneme extends ElevenLabs.PronunciationDictionaryPhonemeRuleRequestModel {
         type: "phoneme";
     }
 }

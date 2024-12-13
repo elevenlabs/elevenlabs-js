@@ -36,7 +36,6 @@ export type OutputFormat =
     /**
      * μ-law format (sometimes written mu-law, often approximated as u-law) with 8kHz sample rate. Note that this format is commonly used for Twilio audio inputs. */
     | "ulaw_8000";
-
 export const OutputFormat = {
     Mp32205032: "mp3_22050_32",
     Mp34410032: "mp3_44100_32",

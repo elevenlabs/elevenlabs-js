@@ -6,7 +6,6 @@
  * Should be one of 'editor' or 'viewer'. If not provided, defaults to no access.
  */
 export type PronunciationDictionaryAddFromFileRequestWorkspaceAccess = "admin" | "editor" | "viewer";
-
 export const PronunciationDictionaryAddFromFileRequestWorkspaceAccess = {
     Admin: "admin",
     Editor: "editor",

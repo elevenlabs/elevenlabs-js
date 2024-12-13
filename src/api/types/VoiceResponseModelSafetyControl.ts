@@ -9,7 +9,6 @@ export type VoiceResponseModelSafetyControl =
     | "CAPTCHA_AND_MODERATION"
     | "ENTERPRISE_BAN"
     | "ENTERPRISE_CAPTCHA";
-
 export const VoiceResponseModelSafetyControl = {
     None: "NONE",
     Ban: "BAN",

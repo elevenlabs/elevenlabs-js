@@ -3,7 +3,6 @@
  */
 
 export type SpeechHistoryItemResponseModelVoiceCategory = "premade" | "cloned" | "generated" | "professional";
-
 export const SpeechHistoryItemResponseModelVoiceCategory = {
     Premade: "premade",
     Cloned: "cloned",

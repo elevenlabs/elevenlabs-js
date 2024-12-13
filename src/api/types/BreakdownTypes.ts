@@ -14,7 +14,6 @@ export type BreakdownTypes =
     | "product_type"
     | "model"
     | "resource";
-
 export const BreakdownTypes = {
     None: "none",
     Voice: "voice",

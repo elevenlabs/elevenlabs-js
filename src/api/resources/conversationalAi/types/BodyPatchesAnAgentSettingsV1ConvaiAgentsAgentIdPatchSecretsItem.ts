@@ -8,12 +8,12 @@ export type BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchSecretsItem =
     | ElevenLabs.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchSecretsItem.New
     | ElevenLabs.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchSecretsItem.Stored;
 
-export declare namespace BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchSecretsItem {
-    interface New extends ElevenLabs.ConvAiNewSecretConfig {
+export namespace BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchSecretsItem {
+    export interface New extends ElevenLabs.ConvAiNewSecretConfig {
         type: "new";
     }
 
-    interface Stored extends ElevenLabs.ConvAiStoredSecretConfig {
+    export interface Stored extends ElevenLabs.ConvAiStoredSecretConfig {
         type: "stored";
     }
 }

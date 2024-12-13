@@ -25,6 +25,8 @@ export declare namespace History {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -90,10 +92,11 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -127,7 +130,7 @@ export class History {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/history.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -163,10 +166,11 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -199,7 +203,9 @@ export class History {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/history/{history_item_id}."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -232,10 +238,11 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -268,7 +275,9 @@ export class History {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling DELETE /v1/history/{history_item_id}."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -294,10 +303,11 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -331,7 +341,9 @@ export class History {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/history/{history_item_id}/audio."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -369,10 +381,11 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -406,7 +419,7 @@ export class History {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/history/download.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,

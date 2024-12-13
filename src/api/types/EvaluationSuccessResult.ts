@@ -6,7 +6,6 @@
  * An enumeration.
  */
 export type EvaluationSuccessResult = "success" | "failure" | "unknown";
-
 export const EvaluationSuccessResult = {
     Success: "success",
     Failure: "failure",

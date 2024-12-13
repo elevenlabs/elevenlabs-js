@@ -3,7 +3,6 @@
  */
 
 export type LiteralJsonSchemaPropertyType = "boolean" | "string" | "integer" | "number";
-
 export const LiteralJsonSchemaPropertyType = {
     Boolean: "boolean",
     String: "string",

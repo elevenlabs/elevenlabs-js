@@ -3,7 +3,6 @@
  */
 
 export type ReaderResourceResponseModelResourceType = "read" | "collection";
-
 export const ReaderResourceResponseModelResourceType = {
     Read: "read",
     Collection: "collection",

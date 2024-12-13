@@ -18,7 +18,6 @@ export type ClientEvent =
     | "internal_vad_score"
     | "internal_turn_probability"
     | "internal_tentative_agent_response";
-
 export const ClientEvent = {
     ConversationInitiationMetadata: "conversation_initiation_metadata",
     AsrInitiationMetadata: "asr_initiation_metadata",

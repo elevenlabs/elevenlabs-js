@@ -6,7 +6,6 @@
  * An enumeration.
  */
 export type AsrInputFormat = "pcm_16000" | "pcm_22050" | "pcm_24000" | "pcm_44100" | "ulaw_8000";
-
 export const AsrInputFormat = {
     Pcm16000: "pcm_16000",
     Pcm22050: "pcm_22050",

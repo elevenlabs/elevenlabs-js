@@ -6,7 +6,6 @@
  * An enumeration.
  */
 export type ConversationTokenPurpose = "signed_url" | "shareable_link";
-
 export const ConversationTokenPurpose = {
     SignedUrl: "signed_url",
     ShareableLink: "shareable_link",

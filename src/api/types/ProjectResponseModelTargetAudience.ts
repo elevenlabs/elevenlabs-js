@@ -3,7 +3,6 @@
  */
 
 export type ProjectResponseModelTargetAudience = "children" | "young adult" | "adult" | "all ages";
-
 export const ProjectResponseModelTargetAudience = {
     Children: "children",
     YoungAdult: "young adult",

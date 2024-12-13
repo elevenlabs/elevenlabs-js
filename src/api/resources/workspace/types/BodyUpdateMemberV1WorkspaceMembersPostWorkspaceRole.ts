@@ -6,7 +6,6 @@
  * Role dictating permissions in the workspace.
  */
 export type BodyUpdateMemberV1WorkspaceMembersPostWorkspaceRole = "workspace_admin" | "workspace_member";
-
 export const BodyUpdateMemberV1WorkspaceMembersPostWorkspaceRole = {
     WorkspaceAdmin: "workspace_admin",
     WorkspaceMember: "workspace_member",

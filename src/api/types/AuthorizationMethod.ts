@@ -6,7 +6,6 @@
  * An enumeration.
  */
 export type AuthorizationMethod = "public" | "authorization_header" | "signed_url" | "shareable_link";
-
 export const AuthorizationMethod = {
     Public: "public",
     AuthorizationHeader: "authorization_header",

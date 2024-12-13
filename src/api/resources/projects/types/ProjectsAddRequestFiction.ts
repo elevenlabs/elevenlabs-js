@@ -6,7 +6,6 @@
  * An optional fiction of the project.
  */
 export type ProjectsAddRequestFiction = "fiction" | "non-fiction";
-
 export const ProjectsAddRequestFiction = {
     Fiction: "fiction",
     NonFiction: "non-fiction",
