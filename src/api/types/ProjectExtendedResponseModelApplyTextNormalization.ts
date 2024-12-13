@@ -3,7 +3,6 @@
  */
 
 export type ProjectExtendedResponseModelApplyTextNormalization = "auto" | "on" | "off" | "apply_english";
-
 export const ProjectExtendedResponseModelApplyTextNormalization = {
     Auto: "auto",
     On: "on",

@@ -3,7 +3,6 @@
  */
 
 export type GetKnowledgeBaseReponseModelType = "file" | "url";
-
 export const GetKnowledgeBaseReponseModelType = {
     File: "file",
     Url: "url",

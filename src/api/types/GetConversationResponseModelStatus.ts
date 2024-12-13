@@ -3,7 +3,6 @@
  */
 
 export type GetConversationResponseModelStatus = "processing" | "done";
-
 export const GetConversationResponseModelStatus = {
     Processing: "processing",
     Done: "done",

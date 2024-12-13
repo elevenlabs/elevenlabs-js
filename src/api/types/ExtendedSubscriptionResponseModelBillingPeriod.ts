@@ -3,7 +3,6 @@
  */
 
 export type ExtendedSubscriptionResponseModelBillingPeriod = "monthly_period" | "annual_period";
-
 export const ExtendedSubscriptionResponseModelBillingPeriod = {
     MonthlyPeriod: "monthly_period",
     AnnualPeriod: "annual_period",

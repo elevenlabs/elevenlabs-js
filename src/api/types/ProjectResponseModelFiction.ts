@@ -3,7 +3,6 @@
  */
 
 export type ProjectResponseModelFiction = "fiction" | "non-fiction";
-
 export const ProjectResponseModelFiction = {
     Fiction: "fiction",
     NonFiction: "non-fiction",

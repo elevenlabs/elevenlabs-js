@@ -25,6 +25,8 @@ export declare namespace Dubbing {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -108,11 +110,12 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
+                ...requestOptions?.headers,
             },
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
@@ -146,7 +149,7 @@ export class Dubbing {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/dubbing.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -182,10 +185,11 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -218,7 +222,7 @@ export class Dubbing {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/dubbing/{dubbing_id}.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -251,10 +255,11 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -287,7 +292,9 @@ export class Dubbing {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling DELETE /v1/dubbing/{dubbing_id}."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -317,10 +324,11 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -354,7 +362,9 @@ export class Dubbing {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/dubbing/{dubbing_id}/audio/{language_code}."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -400,10 +410,11 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -437,7 +448,9 @@ export class Dubbing {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/dubbing/{dubbing_id}/transcript/{language_code}."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,

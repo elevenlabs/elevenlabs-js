@@ -6,7 +6,6 @@
  * This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped. Cannot be turned on for 'eleven_turbo_v2_5' model.
  */
 export type BodyTextToSpeechV1TextToSpeechVoiceIdPostApplyTextNormalization = "auto" | "on" | "off";
-
 export const BodyTextToSpeechV1TextToSpeechVoiceIdPostApplyTextNormalization = {
     Auto: "auto",
     On: "on",

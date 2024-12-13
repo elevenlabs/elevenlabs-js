@@ -25,6 +25,8 @@ export declare namespace AudioIsolation {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -55,11 +57,12 @@ export class AudioIsolation {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
+                ...requestOptions?.headers,
             },
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
@@ -94,7 +97,7 @@ export class AudioIsolation {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/audio-isolation.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -126,11 +129,12 @@ export class AudioIsolation {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
+                ...requestOptions?.headers,
             },
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
@@ -165,7 +169,9 @@ export class AudioIsolation {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/audio-isolation/stream."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,

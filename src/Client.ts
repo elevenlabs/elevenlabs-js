@@ -40,121 +40,105 @@ export declare namespace ElevenLabsClient {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
 export class ElevenLabsClient {
-    constructor(protected readonly _options: ElevenLabsClient.Options = {}) {}
-
     protected _history: History | undefined;
+    protected _textToSoundEffects: TextToSoundEffects | undefined;
+    protected _audioIsolation: AudioIsolation | undefined;
+    protected _samples: Samples | undefined;
+    protected _textToSpeech: TextToSpeech | undefined;
+    protected _speechToSpeech: SpeechToSpeech | undefined;
+    protected _voiceGeneration: VoiceGeneration | undefined;
+    protected _textToVoice: TextToVoice | undefined;
+    protected _user: User | undefined;
+    protected _voices: Voices | undefined;
+    protected _projects: Projects | undefined;
+    protected _chapters: Chapters | undefined;
+    protected _dubbing: Dubbing | undefined;
+    protected _models: Models | undefined;
+    protected _audioNative: AudioNative | undefined;
+    protected _usage: Usage | undefined;
+    protected _pronunciationDictionary: PronunciationDictionary | undefined;
+    protected _workspace: Workspace | undefined;
+    protected _conversationalAi: ConversationalAi | undefined;
+
+    constructor(protected readonly _options: ElevenLabsClient.Options = {}) {}
 
     public get history(): History {
         return (this._history ??= new History(this._options));
     }
 
-    protected _textToSoundEffects: TextToSoundEffects | undefined;
-
     public get textToSoundEffects(): TextToSoundEffects {
         return (this._textToSoundEffects ??= new TextToSoundEffects(this._options));
     }
-
-    protected _audioIsolation: AudioIsolation | undefined;
 
     public get audioIsolation(): AudioIsolation {
         return (this._audioIsolation ??= new AudioIsolation(this._options));
     }
 
-    protected _samples: Samples | undefined;
-
     public get samples(): Samples {
         return (this._samples ??= new Samples(this._options));
     }
-
-    protected _textToSpeech: TextToSpeech | undefined;
 
     public get textToSpeech(): TextToSpeech {
         return (this._textToSpeech ??= new TextToSpeech(this._options));
     }
 
-    protected _speechToSpeech: SpeechToSpeech | undefined;
-
     public get speechToSpeech(): SpeechToSpeech {
         return (this._speechToSpeech ??= new SpeechToSpeech(this._options));
     }
-
-    protected _voiceGeneration: VoiceGeneration | undefined;
 
     public get voiceGeneration(): VoiceGeneration {
         return (this._voiceGeneration ??= new VoiceGeneration(this._options));
     }
 
-    protected _textToVoice: TextToVoice | undefined;
-
     public get textToVoice(): TextToVoice {
         return (this._textToVoice ??= new TextToVoice(this._options));
     }
-
-    protected _user: User | undefined;
 
     public get user(): User {
         return (this._user ??= new User(this._options));
     }
 
-    protected _voices: Voices | undefined;
-
     public get voices(): Voices {
         return (this._voices ??= new Voices(this._options));
     }
-
-    protected _projects: Projects | undefined;
 
     public get projects(): Projects {
         return (this._projects ??= new Projects(this._options));
     }
 
-    protected _chapters: Chapters | undefined;
-
     public get chapters(): Chapters {
         return (this._chapters ??= new Chapters(this._options));
     }
-
-    protected _dubbing: Dubbing | undefined;
 
     public get dubbing(): Dubbing {
         return (this._dubbing ??= new Dubbing(this._options));
     }
 
-    protected _models: Models | undefined;
-
     public get models(): Models {
         return (this._models ??= new Models(this._options));
     }
-
-    protected _audioNative: AudioNative | undefined;
 
     public get audioNative(): AudioNative {
         return (this._audioNative ??= new AudioNative(this._options));
     }
 
-    protected _usage: Usage | undefined;
-
     public get usage(): Usage {
         return (this._usage ??= new Usage(this._options));
     }
-
-    protected _pronunciationDictionary: PronunciationDictionary | undefined;
 
     public get pronunciationDictionary(): PronunciationDictionary {
         return (this._pronunciationDictionary ??= new PronunciationDictionary(this._options));
     }
 
-    protected _workspace: Workspace | undefined;
-
     public get workspace(): Workspace {
         return (this._workspace ??= new Workspace(this._options));
     }
-
-    protected _conversationalAi: ConversationalAi | undefined;
 
     public get conversationalAi(): ConversationalAi {
         return (this._conversationalAi ??= new ConversationalAi(this._options));

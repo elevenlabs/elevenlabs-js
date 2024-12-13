@@ -25,6 +25,8 @@ export declare namespace Projects {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -58,10 +60,11 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -94,7 +97,7 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/projects.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -217,11 +220,12 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
+                ...requestOptions?.headers,
             },
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
@@ -255,7 +259,7 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/projects/add.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -291,10 +295,11 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -327,7 +332,7 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/projects/{project_id}.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -369,10 +374,11 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -406,7 +412,9 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -439,10 +447,11 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -475,7 +484,9 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling DELETE /v1/projects/{project_id}."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -508,10 +519,11 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -544,7 +556,9 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/convert."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -580,10 +594,11 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -616,7 +631,9 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/projects/{project_id}/snapshots."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -647,10 +664,11 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -685,7 +703,9 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/snapshots/{project_snapshot_id}/stream."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -725,10 +745,11 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -761,7 +782,9 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/snapshots/{project_snapshot_id}/archive."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -801,10 +824,11 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -838,7 +862,9 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/chapters/add."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -881,10 +907,11 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "0.18.1",
-                "User-Agent": "elevenlabs/0.18.1",
+                "X-Fern-SDK-Version": "0.18.2",
+                "User-Agent": "elevenlabs/0.18.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -918,7 +945,9 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError();
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/update-pronunciation-dictionaries."
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,

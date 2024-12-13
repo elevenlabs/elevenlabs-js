@@ -3,7 +3,6 @@
  */
 
 export type ProjectResponseModelAccessLevel = "admin" | "editor" | "viewer";
-
 export const ProjectResponseModelAccessLevel = {
     Admin: "admin",
     Editor: "editor",

@@ -3,7 +3,6 @@
  */
 
 export type Currency = "usd" | "eur";
-
 export const Currency = {
     Usd: "usd",
     Eur: "eur",
