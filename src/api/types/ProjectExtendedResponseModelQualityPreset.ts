@@ -3,7 +3,6 @@
  */
 
 export type ProjectExtendedResponseModelQualityPreset = "standard" | "high" | "highest" | "ultra" | "ultra_lossless";
-
 export const ProjectExtendedResponseModelQualityPreset = {
     Standard: "standard",
     High: "high",

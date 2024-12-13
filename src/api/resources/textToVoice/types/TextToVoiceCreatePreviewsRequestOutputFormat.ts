@@ -28,7 +28,6 @@ export type TextToVoiceCreatePreviewsRequestOutputFormat =
     | "pcm_24000"
     | "pcm_44100"
     | "ulaw_8000";
-
 export const TextToVoiceCreatePreviewsRequestOutputFormat = {
     Mp32205032: "mp3_22050_32",
     Mp34410032: "mp3_44100_32",

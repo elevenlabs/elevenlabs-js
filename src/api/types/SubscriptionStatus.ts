@@ -11,7 +11,6 @@ export type SubscriptionStatus =
     | "canceled"
     | "unpaid"
     | "free";
-
 export const SubscriptionStatus = {
     Trialing: "trialing",
     Active: "active",

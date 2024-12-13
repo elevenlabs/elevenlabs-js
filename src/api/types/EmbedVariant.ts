@@ -6,7 +6,6 @@
  * An enumeration.
  */
 export type EmbedVariant = "compact" | "full" | "expandable";
-
 export const EmbedVariant = {
     Compact: "compact",
     Full: "full",

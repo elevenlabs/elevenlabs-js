@@ -3,7 +3,6 @@
  */
 
 export type WebhookToolApiSchemaConfigMethod = "GET" | "POST" | "PATCH" | "DELETE";
-
 export const WebhookToolApiSchemaConfigMethod = {
     Get: "GET",
     Post: "POST",

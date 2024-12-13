@@ -3,7 +3,6 @@
  */
 
 export type ChapterState = "default" | "converting";
-
 export const ChapterState = {
     Default: "default",
     Converting: "converting",

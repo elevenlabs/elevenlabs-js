@@ -3,7 +3,6 @@
  */
 
 export type ExtendedSubscriptionResponseModelCurrency = "usd" | "eur";
-
 export const ExtendedSubscriptionResponseModelCurrency = {
     Usd: "usd",
     Eur: "eur",

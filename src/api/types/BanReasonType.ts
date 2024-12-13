@@ -6,7 +6,6 @@
  * An enumeration.
  */
 export type BanReasonType = "safety" | "manual";
-
 export const BanReasonType = {
     Safety: "safety",
     Manual: "manual",

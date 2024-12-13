@@ -6,7 +6,6 @@
  * Source of the generated history item
  */
 export type HistoryGetAllRequestSource = "TTS" | "STS";
-
 export const HistoryGetAllRequestSource = {
     Tts: "TTS",
     Sts: "STS",

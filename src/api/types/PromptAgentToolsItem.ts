@@ -6,12 +6,12 @@ import * as ElevenLabs from "../index";
 
 export type PromptAgentToolsItem = ElevenLabs.PromptAgentToolsItem.Webhook | ElevenLabs.PromptAgentToolsItem.Client;
 
-export declare namespace PromptAgentToolsItem {
-    interface Webhook extends ElevenLabs.WebhookToolConfig {
+export namespace PromptAgentToolsItem {
+    export interface Webhook extends ElevenLabs.WebhookToolConfig {
         type: "webhook";
     }
 
-    interface Client extends ElevenLabs.ClientToolConfig {
+    export interface Client extends ElevenLabs.ClientToolConfig {
         type: "client";
     }
 }

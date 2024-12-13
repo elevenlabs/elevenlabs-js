@@ -3,7 +3,6 @@
  */
 
 export type ConversationHistoryTranscriptCommonModelRole = "user" | "agent";
-
 export const ConversationHistoryTranscriptCommonModelRole = {
     User: "user",
     Agent: "agent",

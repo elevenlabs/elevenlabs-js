@@ -18,7 +18,6 @@ export type OptimizeStreamingLatency =
     /**
      * Max latency optimizations, but also with text normalizer turned off for even more latency savings (best latency, but can mispronounce eg numbers and dates). */
     | "4";
-
 export const OptimizeStreamingLatency = {
     Zero: "0",
     One: "1",

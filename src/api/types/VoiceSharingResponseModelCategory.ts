@@ -3,7 +3,6 @@
  */
 
 export type VoiceSharingResponseModelCategory = "generated" | "professional" | "high_quality" | "famous";
-
 export const VoiceSharingResponseModelCategory = {
     Generated: "generated",
     Professional: "professional",

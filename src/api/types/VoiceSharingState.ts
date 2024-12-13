@@ -3,7 +3,6 @@
  */
 
 export type VoiceSharingState = "enabled" | "disabled" | "copied" | "copied_disabled";
-
 export const VoiceSharingState = {
     Enabled: "enabled",
     Disabled: "disabled",

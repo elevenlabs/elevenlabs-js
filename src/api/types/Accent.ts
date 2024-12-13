@@ -3,7 +3,6 @@
  */
 
 export type Accent = "british" | "american" | "african" | "australian" | "indian";
-
 export const Accent = {
     British: "british",
     American: "american",

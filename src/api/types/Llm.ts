@@ -18,7 +18,6 @@ export type Llm =
     | "claude-3-haiku"
     | "grok-beta"
     | "custom-llm";
-
 export const Llm = {
     Gpt4OMini: "gpt-4o-mini",
     Gpt4O: "gpt-4o",
