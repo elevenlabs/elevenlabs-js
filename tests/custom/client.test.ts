@@ -42,25 +42,23 @@ describe("ElevenLabs API Tests", () => {
             expect(result.alignment).toBeDefined();
             await playIfNotGithub(Buffer.from(result.audio_base64, "base64"));
         });
-        // !!! streamWithTimestamps isn't returning anything - uncomment this once Fern fixes issue upstream
+        it("streamWithTimestamps", async () => {
+            const client = new ElevenLabsClient();
+            let audioData = Buffer.alloc(0);
 
-        // it("streamWithTimestamps", async () => {
-        //     const client = new ElevenLabsClient();
-        //     let audioData = Buffer.alloc(0);
-
-        //     const stream = await client.textToSpeech.streamWithTimestamps(DEFAULT_VOICE, {
-        //         text: DEFAULT_TEXT,
-        //         model_id: DEFAULT_MODEL,
-        //     });
-        //     for await (const chunk of stream) {
-        //         if ("audio_base64" in chunk) {
-        //             const audioChunk = Buffer.from(chunk.audio_base64, "base64");
-        //             audioData = Buffer.concat([audioData, audioChunk]);
-        //         }
-        //     }
-        //     expect(audioData.length).toBeGreaterThan(0);
-        //     await playIfNotGithub(audioData);
-        // });
+            const stream = await client.textToSpeech.streamWithTimestamps(DEFAULT_VOICE, {
+                text: DEFAULT_TEXT,
+                model_id: DEFAULT_MODEL,
+            });
+            for await (const chunk of stream) {
+                if ("audio_base64" in chunk) {
+                    const audioChunk = Buffer.from(chunk.audio_base64, "base64");
+                    audioData = Buffer.concat([audioData, audioChunk]);
+                }
+            }
+            expect(audioData.length).toBeGreaterThan(0);
+            await playIfNotGithub(audioData);
+        });
     });
 
     describe("audioIsolation", () => {
