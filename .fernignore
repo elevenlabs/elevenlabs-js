@@ -3,7 +3,7 @@
 README.md
 assets/
 
-test/
+tests/custom/
 jest.config.js
 
 src/wrapper
