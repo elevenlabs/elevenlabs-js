@@ -52,8 +52,10 @@ describe("ElevenLabs API Tests", () => {
             });
             for await (const chunk of stream) {
                 if ("audio_base64" in chunk) {
-                    const audioChunk = Buffer.from(chunk.audio_base64, "base64");
-                    audioData = Buffer.concat([audioData, audioChunk]);
+                    if (chunk.audio_base64) {
+                        const audioChunk = Buffer.from(chunk.audio_base64, "base64");
+                        audioData = Buffer.concat([audioData, audioChunk]);
+                    }
                 }
             }
             expect(audioData.length).toBeGreaterThan(0);
