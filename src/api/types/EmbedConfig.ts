@@ -7,6 +7,7 @@ import * as ElevenLabs from "../index";
 export interface EmbedConfig {
     variant?: ElevenLabs.EmbedVariant;
     avatar?: ElevenLabs.EmbedConfigAvatar;
+    feedback_mode?: ElevenLabs.WidgetFeedbackMode;
     custom_avatar_path?: string;
     bg_color?: string;
     text_color?: string;

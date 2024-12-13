@@ -3,7 +3,6 @@
  */
 
 export type Age = "young" | "middle_aged" | "old";
-
 export const Age = {
     Young: "young",
     MiddleAged: "middle_aged",

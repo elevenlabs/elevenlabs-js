@@ -3,7 +3,6 @@
  */
 
 export type KnowledgeBaseLocatorType = "file" | "url";
-
 export const KnowledgeBaseLocatorType = {
     File: "file",
     Url: "url",

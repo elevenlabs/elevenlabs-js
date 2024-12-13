@@ -6,6 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface User {
     subscription: ElevenLabs.SubscriptionResponse;
+    subscription_extras?: unknown;
     is_new_user: boolean;
     xi_api_key: string;
     can_use_delayed_payment_methods: boolean;

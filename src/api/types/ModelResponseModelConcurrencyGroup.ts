@@ -3,7 +3,6 @@
  */
 
 export type ModelResponseModelConcurrencyGroup = "standard" | "turbo";
-
 export const ModelResponseModelConcurrencyGroup = {
     Standard: "standard",
     Turbo: "turbo",

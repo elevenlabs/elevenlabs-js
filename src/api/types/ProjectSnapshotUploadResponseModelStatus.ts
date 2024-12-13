@@ -3,7 +3,6 @@
  */
 
 export type ProjectSnapshotUploadResponseModelStatus = "success" | "in_queue" | "pending" | "failed";
-
 export const ProjectSnapshotUploadResponseModelStatus = {
     Success: "success",
     InQueue: "in_queue",

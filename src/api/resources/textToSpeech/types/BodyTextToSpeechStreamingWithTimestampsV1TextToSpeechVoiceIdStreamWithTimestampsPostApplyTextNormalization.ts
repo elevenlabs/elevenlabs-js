@@ -7,7 +7,6 @@
  */
 export type BodyTextToSpeechStreamingWithTimestampsV1TextToSpeechVoiceIdStreamWithTimestampsPostApplyTextNormalization =
     "auto" | "on" | "off";
-
 export const BodyTextToSpeechStreamingWithTimestampsV1TextToSpeechVoiceIdStreamWithTimestampsPostApplyTextNormalization =
     {
         Auto: "auto",

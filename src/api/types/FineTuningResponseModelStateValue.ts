@@ -9,7 +9,6 @@ export type FineTuningResponseModelStateValue =
     | "fine_tuned"
     | "failed"
     | "delayed";
-
 export const FineTuningResponseModelStateValue = {
     NotStarted: "not_started",
     Queued: "queued",

@@ -6,7 +6,6 @@
  * An optional target audience of the project.
  */
 export type ProjectsAddRequestTargetAudience = "children" | "young adult" | "adult" | "all ages";
-
 export const ProjectsAddRequestTargetAudience = {
     Children: "children",
     YoungAdult: "young adult",

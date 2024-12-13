@@ -9,16 +9,16 @@ export type EmbedConfigAvatar =
     | ElevenLabs.EmbedConfigAvatar.Url
     | ElevenLabs.EmbedConfigAvatar.Image;
 
-export declare namespace EmbedConfigAvatar {
-    interface Orb extends ElevenLabs.OrbAvatar {
+export namespace EmbedConfigAvatar {
+    export interface Orb extends ElevenLabs.OrbAvatar {
         type: "orb";
     }
 
-    interface Url extends ElevenLabs.UrlAvatar {
+    export interface Url extends ElevenLabs.UrlAvatar {
         type: "url";
     }
 
-    interface Image extends ElevenLabs.ImageAvatar {
+    export interface Image extends ElevenLabs.ImageAvatar {
         type: "image";
     }
 }
