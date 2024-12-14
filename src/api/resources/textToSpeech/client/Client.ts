@@ -54,7 +54,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -74,8 +74,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -128,19 +128,21 @@ export class TextToSpeech {
      * Converts text into speech using a voice of your choice and returns JSON containing audio as a base64 encoded string together with information on when which character was spoken.
      *
      * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
-     * @param {ElevenLabs.TextToSpeechWithTimestampsRequest} request
+     * @param {ElevenLabs.BodyTextToSpeechWithTimestampsV1TextToSpeechVoiceIdWithTimestampsPost} request
      * @param {TextToSpeech.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
-     *         text: "text"
+     *     await client.textToSpeech.convertWithTimestamps("JBFqnCBsd6RMkjVDRZzb", {
+     *         output_format: "mp3_44100_128",
+     *         text: "The first move is what sets everything in motion.",
+     *         model_id: "eleven_multilingual_v2"
      *     })
      */
     public async convertWithTimestamps(
         voiceId: string,
-        request: ElevenLabs.TextToSpeechWithTimestampsRequest,
+        request: ElevenLabs.BodyTextToSpeechWithTimestampsV1TextToSpeechVoiceIdWithTimestampsPost,
         requestOptions?: TextToSpeech.RequestOptions
     ): Promise<unknown> {
         const {
@@ -155,7 +157,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -175,8 +177,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -230,7 +232,7 @@ export class TextToSpeech {
      */
     public async convertAsStream(
         voiceId: string,
-        request: ElevenLabs.StreamTextToSpeechRequest,
+        request: ElevenLabs.BodyTextToSpeechStreamingV1TextToSpeechVoiceIdStreamPost,
         requestOptions?: TextToSpeech.RequestOptions
     ): Promise<stream.Readable> {
         const {
@@ -245,7 +247,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -265,8 +267,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -320,7 +322,7 @@ export class TextToSpeech {
      */
     public async streamWithTimestamps(
         voiceId: string,
-        request: ElevenLabs.StreamTextToSpeechWithTimstampsRequest,
+        request: ElevenLabs.BodyTextToSpeechStreamingWithTimestampsV1TextToSpeechVoiceIdStreamWithTimestampsPost,
         requestOptions?: TextToSpeech.RequestOptions
     ): Promise<core.Stream<ElevenLabs.TextToSpeechStreamWithTimestampsResponse>> {
         const {
@@ -335,7 +337,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -355,8 +357,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
