@@ -6,7 +6,7 @@
  * @example
  *     {}
  */
-export interface ConversationalAiGetWidgetRequest {
+export interface ConversationalAiGetAgentWidgetRequest {
     /**
      * An expiring token that enables a conversation to start. These can be generated for an agent using the /v1/convai/conversation/get_signed_url endpoint
      */
