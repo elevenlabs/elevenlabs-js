@@ -500,15 +500,10 @@ Converts text into speech using a voice of your choice and returns audio.
 <dd>
 
 ```typescript
-await client.textToSpeech.convert("pMsXgVXv3BLzUgSXRplE", {
-    optimize_streaming_latency: "0",
-    output_format: "mp3_22050_32",
-    text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D",
-    voice_settings: {
-        stability: 0.5,
-        similarity_boost: 0.75,
-        style: 0,
-    },
+await client.textToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
+    output_format: "mp3_44100_128",
+    text: "Hello! \u4F60\u597D! Hola! \u0928\u092E\u0938\u094D\u0924\u0947! Bonjour! \u3053\u3093\u306B\u3061\u306F! \u0645\u0631\u062D\u0628\u0627! \uC548\uB155\uD558\uC138\uC694! Ciao! Cze\u015B\u0107! \u041F\u0440\u0438\u0432\u0456\u0442! \u0BB5\u0BA3\u0B95\u0BCD\u0B95\u0BAE\u0BCD!",
+    model_id: "eleven_multilingual_v2",
 });
 ```
 
@@ -653,15 +648,10 @@ Converts text into speech using a voice of your choice and returns audio as an a
 <dd>
 
 ```typescript
-await client.textToSpeech.convertAsStream("pMsXgVXv3BLzUgSXRplE", {
-    optimize_streaming_latency: "0",
-    output_format: "mp3_22050_32",
-    text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D",
-    voice_settings: {
-        stability: 0.1,
-        similarity_boost: 0.3,
-        style: 0.2,
-    },
+await client.textToSpeech.convertAsStream("JBFqnCBsd6RMkjVDRZzb", {
+    output_format: "mp3_44100_128",
+    text: "Hello! \u4F60\u597D! Hola! \u0928\u092E\u0938\u094D\u0924\u0947! Bonjour! \u3053\u3093\u306B\u3061\u306F! \u0645\u0631\u062D\u0628\u0627! \uC548\uB155\uD558\uC138\uC694! Ciao! Cze\u015B\u0107! \u041F\u0440\u0438\u0432\u0456\u0442! \u0BB5\u0BA3\u0B95\u0BCD\u0B95\u0BAE\u0BCD!",
+    model_id: "eleven_multilingual_v2",
 });
 ```
 
