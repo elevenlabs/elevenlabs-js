@@ -90,9 +90,13 @@ export class Stream<T> implements AsyncIterable<T> {
                     return;
                 }
 
-                // Otherwise, yield message from the prefix to the terminator
-                const message = await this.parse(JSON.parse(line));
-                yield message;
+                // (Louis custom fix do not override) Trim whitespace and check if line is not empty
+                // Reason: ElevenLabs occasionally returns empty chunks
+                const trimmedLine = line.trim();
+                if (trimmedLine) {
+                    const message = await this.parse(JSON.parse(trimmedLine));
+                    yield message;
+                }
                 prefixSeen = false;
             }
         }
