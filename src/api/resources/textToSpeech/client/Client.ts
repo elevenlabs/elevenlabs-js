@@ -54,7 +54,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -74,8 +74,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -155,7 +155,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -175,8 +175,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -245,7 +245,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -265,8 +265,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -335,7 +335,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -355,8 +355,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
