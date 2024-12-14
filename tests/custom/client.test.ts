@@ -13,6 +13,30 @@ const DEFAULT_VOICE_FILE = path.join(__dirname, "./fixtures/voice_sample.mp3");
 describe("ElevenLabs API Tests", () => {
     jest.setTimeout(120000);
 
+    describe("generate", () => {
+        it("generate", async () => {
+            const client = new ElevenLabsClient();
+            const audioStream = await client.generate({
+                voice: "Sarah",
+                text: DEFAULT_TEXT,
+                model_id: DEFAULT_MODEL,
+            });
+            const audio = Buffer.concat(await streamToBuffer(audioStream));
+            expect(Buffer.isBuffer(audio)).toBeTruthy();
+            await playIfNotGithub(audio);
+        });
+
+        it("generate stream", async () => {
+            const client = new ElevenLabsClient();
+            const audioStream = await client.generate({
+                stream: true,
+                text: DEFAULT_TEXT,
+                model_id: DEFAULT_MODEL,
+            });
+            await playIfNotGithub(audioStream);
+        });
+    });
+
     describe("textToSpeech", () => {
         it("convert", async () => {
             const client = new ElevenLabsClient();

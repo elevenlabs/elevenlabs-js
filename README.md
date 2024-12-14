@@ -91,7 +91,7 @@ Stream audio in real-time, as it's being generated.
 ```ts
 const audioStream = await elevenlabs.generate({
     stream: true,
-    voice: "Bella",
+    voice: "Sarah",
     text: "This is a... streaming voice",
     model_id: "eleven_multilingual_v2",
 });

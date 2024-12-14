@@ -40,7 +40,7 @@ export class ElevenLabsClient extends FernClient {
      * import { play } from "elevenlabs";
      *
      * const audio = eleven.generate({
-     *   voiceId: "George" // defaults to Bella
+     *   voiceId: "Matilda" // defaults to Sarah
      * })
      * await play(audio);
      *
@@ -49,7 +49,7 @@ export class ElevenLabsClient extends FernClient {
      *
      * const audioStream = eleven.generate({
      *   stream: true,
-     *   voice: "Bella"
+     *   voice: "Sarah"
      * })
      * await stream(audioStream);
      */
@@ -57,7 +57,7 @@ export class ElevenLabsClient extends FernClient {
         request: (ElevenLabsClient.GeneratAudioBulk | ElevenLabsClient.GenerateAudioStream) & { voice?: string },
         requestOptions: FernClient.RequestOptions = {}
     ): Promise<stream.Readable> {
-        const voiceIdOrName = request.voice ?? "Bella";
+        const voiceIdOrName = request.voice ?? "Sarah";
         const voiceId = isVoiceId(voiceIdOrName)
             ? voiceIdOrName
             : (
