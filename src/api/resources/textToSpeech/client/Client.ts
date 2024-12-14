@@ -54,7 +54,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -74,8 +74,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -134,8 +134,10 @@ export class TextToSpeech {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
-     *         text: "text"
+     *     await client.textToSpeech.convertWithTimestamps("JBFqnCBsd6RMkjVDRZzb", {
+     *         output_format: "mp3_44100_128",
+     *         text: "The first move is what sets everything in motion.",
+     *         model_id: "eleven_multilingual_v2"
      *     })
      */
     public async convertWithTimestamps(
@@ -155,7 +157,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -175,8 +177,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -245,7 +247,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -265,8 +267,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -335,7 +337,7 @@ export class TextToSpeech {
         }
 
         if (optimizeStreamingLatency != null) {
-            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency;
+            _queryParams["optimize_streaming_latency"] = optimizeStreamingLatency.toString();
         }
 
         if (outputFormat != null) {
@@ -355,8 +357,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

@@ -30,10 +30,7 @@ Returns metadata about all your generated audio.
 <dd>
 
 ```typescript
-await client.history.getAll({
-    page_size: 1,
-    voice_id: "pMsXgVXv3BLzUgSXRplE",
-});
+await client.history.getAll();
 ```
 
 </dd>
@@ -96,7 +93,7 @@ Returns information about an history item by its ID.
 <dd>
 
 ```typescript
-await client.history.get("ja9xsmfGhxYcymxGcOGB");
+await client.history.get("HISTORY_ITEM_ID");
 ```
 
 </dd>
@@ -159,7 +156,7 @@ Delete a history item by its ID
 <dd>
 
 ```typescript
-await client.history.delete("ja9xsmfGhxYcymxGcOGB");
+await client.history.delete("HISTORY_ITEM_ID");
 ```
 
 </dd>
@@ -222,7 +219,7 @@ Returns the audio of an history item.
 <dd>
 
 ```typescript
-await client.history.getAudio("ja9xsmfGhxYcymxGcOGB");
+await client.history.getAudio("HISTORY_ITEM_ID");
 ```
 
 </dd>
@@ -286,7 +283,7 @@ Download one or more history items. If one history item ID is provided, we will 
 
 ```typescript
 await client.history.download({
-    history_item_ids: ["ja9xsmfGhxYcymxGcOGB"],
+    history_item_ids: ["HISTORY_ITEM_ID"],
 });
 ```
 
@@ -324,6 +321,71 @@ await client.history.download({
 
 ## TextToSoundEffects
 
+<details><summary><code>client.textToSoundEffects.<a href="/src/api/resources/textToSoundEffects/client/Client.ts">convert</a>({ ...params }) -> stream.Readable</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Converts a text of your choice into sound
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.textToSoundEffects.convert({
+    text: "Spacious braam suitable for high-impact movie trailer moments",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodySoundGenerationV1SoundGenerationPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TextToSoundEffects.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## AudioIsolation
 
 ## samples
@@ -356,7 +418,7 @@ Removes a sample by its ID.
 <dd>
 
 ```typescript
-await client.samples.delete("ja9xsmfGhxYcymxGcOGB", "pMsXgVXv3BLzUgSXRplE");
+await client.samples.delete("VOICE_ID", "SAMPLE_ID");
 ```
 
 </dd>
@@ -427,7 +489,7 @@ Returns the audio corresponding to a sample attached to a voice.
 <dd>
 
 ```typescript
-await client.samples.getAudio("ja9xsmfGhxYcymxGcOGB", "pMsXgVXv3BLzUgSXRplE");
+await client.samples.getAudio("VOICE_ID", "SAMPLE_ID");
 ```
 
 </dd>
@@ -500,15 +562,10 @@ Converts text into speech using a voice of your choice and returns audio.
 <dd>
 
 ```typescript
-await client.textToSpeech.convert("pMsXgVXv3BLzUgSXRplE", {
-    optimize_streaming_latency: "0",
-    output_format: "mp3_22050_32",
-    text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D",
-    voice_settings: {
-        stability: 0.5,
-        similarity_boost: 0.75,
-        style: 0,
-    },
+await client.textToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
+    output_format: "mp3_44100_128",
+    text: "The first move is what sets everything in motion.",
+    model_id: "eleven_multilingual_v2",
 });
 ```
 
@@ -580,8 +637,10 @@ Converts text into speech using a voice of your choice and returns JSON containi
 <dd>
 
 ```typescript
-await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
-    text: "text",
+await client.textToSpeech.convertWithTimestamps("JBFqnCBsd6RMkjVDRZzb", {
+    output_format: "mp3_44100_128",
+    text: "The first move is what sets everything in motion.",
+    model_id: "eleven_multilingual_v2",
 });
 ```
 
@@ -653,15 +712,10 @@ Converts text into speech using a voice of your choice and returns audio as an a
 <dd>
 
 ```typescript
-await client.textToSpeech.convertAsStream("pMsXgVXv3BLzUgSXRplE", {
-    optimize_streaming_latency: "0",
-    output_format: "mp3_22050_32",
-    text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D",
-    voice_settings: {
-        stability: 0.1,
-        similarity_boost: 0.3,
-        style: 0.2,
-    },
+await client.textToSpeech.convertAsStream("JBFqnCBsd6RMkjVDRZzb", {
+    output_format: "mp3_44100_128",
+    text: "The first move is what sets everything in motion.",
+    model_id: "eleven_multilingual_v2",
 });
 ```
 
@@ -733,8 +787,10 @@ Converts text into speech using a voice of your choice and returns a stream of J
 <dd>
 
 ```typescript
-const response = await client.textToSpeech.streamWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
-    text: "text",
+const response = await client.textToSpeech.streamWithTimestamps("JBFqnCBsd6RMkjVDRZzb", {
+    output_format: "mp3_44100_128",
+    text: "The first move is what sets everything in motion.",
+    model_id: "eleven_multilingual_v2",
 });
 for await (const item of response) {
     console.log(item);
@@ -782,6 +838,156 @@ for await (const item of response) {
 </details>
 
 ## SpeechToSpeech
+
+<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">convert</a>(voiceId, { ...params }) -> stream.Readable</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create speech by combining the content and emotion of the uploaded audio with a voice of your choice.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
+    audio: fs.createReadStream("/path/to/your/file"),
+    output_format: "mp3_44100_128",
+    model_id: "eleven_multilingual_sts_v2",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpeechToSpeech.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">convertAsStream</a>(voiceId, { ...params }) -> stream.Readable</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create speech by combining the content and emotion of the uploaded audio with a voice of your choice and returns an audio stream.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechToSpeech.convertAsStream("JBFqnCBsd6RMkjVDRZzb", {
+    audio: fs.createReadStream("/path/to/your/file"),
+    output_format: "mp3_44100_128",
+    model_id: "eleven_multilingual_sts_v2",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIdStreamPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpeechToSpeech.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
 
 ## VoiceGeneration
 
@@ -1371,7 +1577,7 @@ Returns the settings for a specific voice. "similarity_boost" corresponds to"Cla
 <dd>
 
 ```typescript
-await client.voices.getSettings("2EiwWnXFnvU5JabPnv8n");
+await client.voices.getSettings("JBFqnCBsd6RMkjVDRZzb");
 ```
 
 </dd>
@@ -1434,7 +1640,7 @@ Returns metadata about a specific voice.
 <dd>
 
 ```typescript
-await client.voices.get("29vD33N1CtxCmqQRPOHJ");
+await client.voices.get("JBFqnCBsd6RMkjVDRZzb");
 ```
 
 </dd>
@@ -1505,7 +1711,7 @@ Deletes a voice by its ID.
 <dd>
 
 ```typescript
-await client.voices.delete("29vD33N1CtxCmqQRPOHJ");
+await client.voices.delete("VOICE_ID");
 ```
 
 </dd>
@@ -1568,7 +1774,7 @@ Edit your settings for a specific voice. "similarity_boost" corresponds to"Clari
 <dd>
 
 ```typescript
-await client.voices.editSettings("29vD33N1CtxCmqQRPOHJ", {
+await client.voices.editSettings("VOICE_ID", {
     stability: 0.1,
     similarity_boost: 0.3,
     style: 0.2,
@@ -1709,7 +1915,7 @@ Edit a voice created by you.
 <dd>
 
 ```typescript
-await client.voices.edit("JBFqnCBsd6RMkjVDRZzb", {
+await client.voices.edit("VOICE_ID", {
     name: "George",
 });
 ```
