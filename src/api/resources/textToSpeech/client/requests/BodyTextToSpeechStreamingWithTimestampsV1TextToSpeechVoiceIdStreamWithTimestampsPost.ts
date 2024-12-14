@@ -7,18 +7,27 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         text: "text"
+ *         output_format: "mp3_44100_128",
+ *         text: "The first move is what sets everything in motion.",
+ *         model_id: "eleven_multilingual_v2"
  *     }
  */
-export interface StreamTextToSpeechWithTimstampsRequest {
+export interface BodyTextToSpeechStreamingWithTimestampsV1TextToSpeechVoiceIdStreamWithTimestampsPost {
     /**
      * When enable_logging is set to false full privacy mode will be used for the request. This will mean history features are unavailable for this request, including request stitching. Full privacy mode may only be used by enterprise customers.
      */
     enable_logging?: boolean;
     /**
-     * You can turn on latency optimizations at some cost of quality. The best possible final latency varies by model.
+     * You can turn on latency optimizations at some cost of quality. The best possible final latency varies by model. Possible values:
+     * 0 - default mode (no latency optimizations)
+     * 1 - normal latency optimizations (about 50% of possible latency improvement of option 3)
+     * 2 - strong latency optimizations (about 75% of possible latency improvement of option 3)
+     * 3 - max latency optimizations
+     * 4 - max latency optimizations, but also with text normalizer turned off for even more latency savings (best latency, but can mispronounce eg numbers and dates).
+     *
+     * Defaults to None.
      */
-    optimize_streaming_latency?: ElevenLabs.OptimizeStreamingLatency;
+    optimize_streaming_latency?: number;
     /**
      * The output format of the generated audio.
      */

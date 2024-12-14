@@ -46,7 +46,7 @@ export class Samples {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.samples.delete("ja9xsmfGhxYcymxGcOGB", "pMsXgVXv3BLzUgSXRplE")
+     *     await client.samples.delete("VOICE_ID", "SAMPLE_ID")
      */
     public async delete(voiceId: string, sampleId: string, requestOptions?: Samples.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -62,8 +62,8 @@ export class Samples {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.3",
+                "User-Agent": "elevenlabs/1.50.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -131,8 +131,8 @@ export class Samples {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.3",
+                "User-Agent": "elevenlabs/1.50.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
