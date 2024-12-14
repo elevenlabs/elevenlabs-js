@@ -42,10 +42,7 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.history.getAll({
-     *         page_size: 1,
-     *         voice_id: "pMsXgVXv3BLzUgSXRplE"
-     *     })
+     *     await client.history.getAll()
      */
     public async getAll(
         request: ElevenLabs.HistoryGetAllRequest = {},
@@ -92,8 +89,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -147,7 +144,7 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.history.get("ja9xsmfGhxYcymxGcOGB")
+     *     await client.history.get("HISTORY_ITEM_ID")
      */
     public async get(
         historyItemId: string,
@@ -166,8 +163,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -222,7 +219,7 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.history.delete("ja9xsmfGhxYcymxGcOGB")
+     *     await client.history.delete("HISTORY_ITEM_ID")
      */
     public async delete(historyItemId: string, requestOptions?: History.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -238,8 +235,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -303,8 +300,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -361,7 +358,7 @@ export class History {
      *
      * @example
      *     await client.history.download({
-     *         history_item_ids: ["ja9xsmfGhxYcymxGcOGB"]
+     *         history_item_ids: ["HISTORY_ITEM_ID"]
      *     })
      */
     public async download(
@@ -381,8 +378,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.1",
-                "User-Agent": "elevenlabs/1.50.1",
+                "X-Fern-SDK-Version": "1.50.2",
+                "User-Agent": "elevenlabs/1.50.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
