@@ -5,7 +5,7 @@
 /**
  * @example
  *     {
- *         history_item_ids: ["ja9xsmfGhxYcymxGcOGB"]
+ *         history_item_ids: ["HISTORY_ITEM_ID"]
  *     }
  */
 export interface DownloadHistoryRequest {

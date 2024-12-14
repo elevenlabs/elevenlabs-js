@@ -6,10 +6,7 @@ import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
- *     {
- *         page_size: 1,
- *         voice_id: "pMsXgVXv3BLzUgSXRplE"
- *     }
+ *     {}
  */
 export interface HistoryGetAllRequest {
     /**
