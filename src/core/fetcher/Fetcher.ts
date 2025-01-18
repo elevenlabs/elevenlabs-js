@@ -1,6 +1,5 @@
 import { APIResponse } from "./APIResponse";
 import { createRequestUrl } from "./createRequestUrl";
-import { getFetchFn } from "./getFetchFn";
 import { getRequestBody } from "./getRequestBody";
 import { getResponseBody } from "./getResponseBody";
 import { makeRequest } from "./makeRequest";
@@ -68,7 +67,7 @@ export async function fetcherImpl<R = unknown>(args: Fetcher.Args): Promise<APIR
         body: args.body,
         type: args.requestType === "json" ? "json" : "other",
     });
-    const fetchFn = await getFetchFn();
+    const fetchFn = globalThis.fetch;
 
     try {
         const response = await requestWithRetries(
