@@ -63,6 +63,18 @@ export interface BodyAddProjectV1ProjectsAddPost {
     pronunciation_dictionary_locators?: string[];
     /** An optional fiction of the project. */
     fiction?: ElevenLabs.ProjectsAddRequestFiction;
-    /** Whether to run quality check on the generated audio and regenerate if needed. Applies to individual block conversion. */
+    /** [Depracated] Whether to run quality check on the generated audio and regenerate if needed. Applies to individual block conversion. */
     quality_check_on?: boolean;
+    /**
+     *     This parameter controls text normalization with four modes: 'auto', 'on', 'apply_english' and 'off'.
+     *     When set to 'auto', the system will automatically decide whether to apply text normalization
+     *     (e.g., spelling out numbers). With 'on', text normalization will always be applied, while
+     *     with 'off', it will be skipped. 'apply_english' is the same as 'on' but will assume that text is in English.
+     *
+     */
+    apply_text_normalization?: ElevenLabs.ProjectsAddRequestApplyTextNormalization;
+    /** Whether to auto convert the project to audio or not. */
+    auto_convert?: boolean;
+    /** [Alpha Feature] Whether automatically assign voices to phrases in the create Project. */
+    auto_assign_voices?: boolean;
 }

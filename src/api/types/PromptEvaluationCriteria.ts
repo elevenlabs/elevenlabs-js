@@ -10,4 +10,5 @@ export interface PromptEvaluationCriteria {
     name?: string;
     type?: "prompt";
     conversation_goal_prompt: string;
+    use_knowledge_base?: boolean;
 }

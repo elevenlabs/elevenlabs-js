@@ -7,9 +7,10 @@ import * as ElevenLabs from "../index";
 export interface AgentPlatformSettings {
     auth?: ElevenLabs.AuthSettings;
     evaluation?: ElevenLabs.EvaluationSettings;
-    widget?: ElevenLabs.EmbedConfig;
+    widget?: ElevenLabs.WidgetConfig;
     data_collection?: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
     overrides?: ElevenLabs.ConversationInitiationClientDataConfig;
+    call_limits?: ElevenLabs.AgentCallLimits;
     ban?: ElevenLabs.AgentBan;
     safety?: ElevenLabs.Safety;
     privacy?: ElevenLabs.PrivacyConfig;

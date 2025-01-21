@@ -8,7 +8,9 @@
 export type BreakdownTypes =
     | "none"
     | "voice"
+    | "voice_multiplier"
     | "user"
+    | "groups"
     | "api_keys"
     | "all_api_keys"
     | "product_type"
@@ -17,7 +19,9 @@ export type BreakdownTypes =
 export const BreakdownTypes = {
     None: "none",
     Voice: "voice",
+    VoiceMultiplier: "voice_multiplier",
     User: "user",
+    Groups: "groups",
     ApiKeys: "api_keys",
     AllApiKeys: "all_api_keys",
     ProductType: "product_type",

@@ -4,11 +4,10 @@
 
 import * as ElevenLabs from "../index";
 
-export interface EmbedConfig {
+export interface WidgetConfigResponseModel {
     variant?: ElevenLabs.EmbedVariant;
-    avatar?: ElevenLabs.EmbedConfigAvatar;
+    avatar?: ElevenLabs.WidgetConfigResponseModelAvatar;
     feedback_mode?: ElevenLabs.WidgetFeedbackMode;
-    custom_avatar_path?: string;
     bg_color?: string;
     text_color?: string;
     btn_color?: string;
@@ -24,4 +23,9 @@ export interface EmbedConfig {
     listening_text?: string;
     speaking_text?: string;
     shareable_page_text?: string;
+    terms_text?: string;
+    terms_html?: string;
+    terms_key?: string;
+    language: string;
+    supported_language_overrides?: string[];
 }
