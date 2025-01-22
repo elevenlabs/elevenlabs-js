@@ -70,6 +70,9 @@ export class Stream<T> implements AsyncIterable<T> {
                 let line = buf.slice(0, terminatorIndex + 1);
                 buf = buf.slice(terminatorIndex + 1);
 
+                // Trim the line to remove any extraneous whitespace
+                line = line.trim();
+
                 // Skip empty lines
                 if (line.length === 0) {
                     continue;
@@ -90,10 +93,27 @@ export class Stream<T> implements AsyncIterable<T> {
                     return;
                 }
 
-                // Otherwise, yield message from the prefix to the terminator
-                const message = await this.parse(JSON.parse(line));
+                // Attempt to parse the JSON line
+                try {
+                    const json = JSON.parse(line);
+                    const message = await this.parse(json);
+                    yield message;
+                    prefixSeen = false;
+                } catch (error) {
+                    console.error(`Failed to parse JSON line: "${line}". Error: ${error}`);
+                    continue;
+                }
+            }
+        }
+
+        // After the stream ends, check if there's any remaining buffer
+        if (buf.trim().length > 0) {
+            try {
+                const json = JSON.parse(buf.trim());
+                const message = await this.parse(json);
                 yield message;
-                prefixSeen = false;
+            } catch (error) {
+                console.error(`Failed to parse remaining buffer: "${buf}". Error: ${error}`);
             }
         }
     }
