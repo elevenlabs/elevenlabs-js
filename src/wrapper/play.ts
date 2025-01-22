@@ -1,7 +1,6 @@
 import commandExists from "command-exists";
 import * as stream from "stream";
 import { ElevenLabsError } from "../errors/ElevenLabsError";
-import { RUNTIME } from "../core/runtime/runtime";
 import execa from "execa";
 
 export async function play(audio: stream.Readable): Promise<void> {
