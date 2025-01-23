@@ -11,6 +11,7 @@ export interface SubscriptionResponse {
     can_extend_character_limit: boolean;
     allowed_to_extend_character_limit: boolean;
     next_character_count_reset_unix: number;
+    voice_slots_used: number;
     voice_limit: number;
     max_voice_add_edits: number;
     voice_add_edit_counter: number;

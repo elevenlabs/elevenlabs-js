@@ -9,6 +9,6 @@
  *     }
  */
 export interface BodyDeleteExistingInvitationV1WorkspaceInvitesDelete {
-    /** Email of the target user. */
+    /** The email of the customer */
     email: string;
 }

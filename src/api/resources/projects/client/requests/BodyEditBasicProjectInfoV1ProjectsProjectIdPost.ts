@@ -25,6 +25,6 @@ export interface BodyEditBasicProjectInfoV1ProjectsProjectIdPost {
     isbn_number?: string;
     /** When the project is downloaded, should the returned audio have postprocessing in order to make it compliant with audiobook normalized volume requirements */
     volume_normalization?: boolean;
-    /** Whether to run quality check on the generated audio and regenerate if needed. Applies to individual block conversion. */
+    /** [Depracated] Whether to run quality check on the generated audio and regenerate if needed. Applies to individual block conversion. */
     quality_check_on?: boolean;
 }

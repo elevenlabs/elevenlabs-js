@@ -68,10 +68,10 @@ export class Stream<T> implements AsyncIterable<T> {
             while ((terminatorIndex = buf.indexOf(this.messageTerminator)) >= 0) {
                 // Extract the line from the buffer
                 let line = buf.slice(0, terminatorIndex + 1);
-                buf = buf.slice(terminatorIndex + 1);
+                buf = buf.slice(terminatorIndex + this.messageTerminator.length);
 
                 // Skip empty lines
-                if (line.length === 0) {
+                if (!line.trim()) {
                     continue;
                 }
 
@@ -90,13 +90,9 @@ export class Stream<T> implements AsyncIterable<T> {
                     return;
                 }
 
-                // (Louis custom fix do not override) Trim whitespace and check if line is not empty
-                // Reason: ElevenLabs occasionally returns empty chunks
-                const trimmedLine = line.trim();
-                if (trimmedLine) {
-                    const message = await this.parse(JSON.parse(trimmedLine));
-                    yield message;
-                }
+                // Otherwise, yield message from the prefix to the terminator
+                const message = await this.parse(JSON.parse(line));
+                yield message;
                 prefixSeen = false;
             }
         }
@@ -116,7 +112,7 @@ export class Stream<T> implements AsyncIterable<T> {
             decoded += decoder.decode(chunk);
         }
         // Buffer is present in Node.js environment
-        else if (RUNTIME.type === "node" && typeof chunk != "undefined") {
+        else if (RUNTIME.type === "node" && typeof chunk !== "undefined") {
             decoded += Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
         }
         return decoded;

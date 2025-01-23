@@ -2564,6 +2564,77 @@ await client.projects.delete("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
+<details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">updateContent</a>(projectId, { ...params }) -> ElevenLabs.EditProjectResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Edits project content.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.projects.updateContent("21m00Tcm4TlvDq8ikWAM", {});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyEditProjectContentV1ProjectsProjectIdContentPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Projects.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">convert</a>(projectId) -> unknown</code></summary>
 <dl>
 <dd>
@@ -3726,6 +3797,77 @@ await client.audioNative.create({
 <dd>
 
 **request:** `ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioNative.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">updateContent</a>(projectId, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates content for the specific AudioNative Project.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioNative.updateContent("21m00Tcm4TlvDq8ikWAM", {});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost`
 
 </dd>
 </dl>
