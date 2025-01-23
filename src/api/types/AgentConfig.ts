@@ -8,4 +8,5 @@ export interface AgentConfig {
     prompt?: ElevenLabs.PromptAgent;
     first_message?: string;
     language?: string;
+    dynamic_variables?: ElevenLabs.DynamicVariablesConfig;
 }

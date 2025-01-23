@@ -13,4 +13,5 @@ export interface ModerationStatusResponseModel {
     enterprise_background_moderation_enabled: boolean;
     safety_status: ElevenLabs.ModerationStatusResponseModelSafetyStatus;
     warning_status: ElevenLabs.ModerationStatusResponseModelWarningStatus;
+    on_watchlist: boolean;
 }

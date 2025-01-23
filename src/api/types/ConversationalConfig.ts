@@ -10,4 +10,5 @@ export interface ConversationalConfig {
     turn?: ElevenLabs.TurnConfig;
     tts?: ElevenLabs.TtsConversationalConfig;
     conversation?: ElevenLabs.ConversationConfig;
+    language_presets?: Record<string, ElevenLabs.LanguagePreset>;
 }

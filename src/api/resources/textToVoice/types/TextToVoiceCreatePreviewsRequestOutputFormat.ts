@@ -23,6 +23,7 @@ export type TextToVoiceCreatePreviewsRequestOutputFormat =
     | "mp3_44100_96"
     | "mp3_44100_128"
     | "mp3_44100_192"
+    | "pcm_8000"
     | "pcm_16000"
     | "pcm_22050"
     | "pcm_24000"
@@ -35,6 +36,7 @@ export const TextToVoiceCreatePreviewsRequestOutputFormat = {
     Mp34410096: "mp3_44100_96",
     Mp344100128: "mp3_44100_128",
     Mp344100192: "mp3_44100_192",
+    Pcm8000: "pcm_8000",
     Pcm16000: "pcm_16000",
     Pcm22050: "pcm_22050",
     Pcm24000: "pcm_24000",

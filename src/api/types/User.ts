@@ -5,6 +5,7 @@
 import * as ElevenLabs from "../index";
 
 export interface User {
+    user_id: string;
     subscription: ElevenLabs.SubscriptionResponse;
     subscription_extras?: unknown;
     is_new_user: boolean;

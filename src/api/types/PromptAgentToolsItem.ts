@@ -4,7 +4,10 @@
 
 import * as ElevenLabs from "../index";
 
-export type PromptAgentToolsItem = ElevenLabs.PromptAgentToolsItem.Webhook | ElevenLabs.PromptAgentToolsItem.Client;
+export type PromptAgentToolsItem =
+    | ElevenLabs.PromptAgentToolsItem.Webhook
+    | ElevenLabs.PromptAgentToolsItem.Client
+    | ElevenLabs.PromptAgentToolsItem.System;
 
 export namespace PromptAgentToolsItem {
     export interface Webhook extends ElevenLabs.WebhookToolConfig {
@@ -13,5 +16,9 @@ export namespace PromptAgentToolsItem {
 
     export interface Client extends ElevenLabs.ClientToolConfig {
         type: "client";
+    }
+
+    export interface System extends ElevenLabs.SystemToolConfig {
+        type: "system";
     }
 }

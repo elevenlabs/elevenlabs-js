@@ -5,8 +5,9 @@
 /**
  * An enumeration.
  */
-export type TtsOutputFormat = "pcm_16000" | "pcm_22050" | "pcm_24000" | "pcm_44100" | "ulaw_8000";
+export type TtsOutputFormat = "pcm_8000" | "pcm_16000" | "pcm_22050" | "pcm_24000" | "pcm_44100" | "ulaw_8000";
 export const TtsOutputFormat = {
+    Pcm8000: "pcm_8000",
     Pcm16000: "pcm_16000",
     Pcm22050: "pcm_22050",
     Pcm24000: "pcm_24000",

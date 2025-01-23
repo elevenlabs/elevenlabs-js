@@ -4,12 +4,12 @@
 
 import * as ElevenLabs from "../index";
 
-export type EmbedConfigAvatar =
-    | ElevenLabs.EmbedConfigAvatar.Orb
-    | ElevenLabs.EmbedConfigAvatar.Url
-    | ElevenLabs.EmbedConfigAvatar.Image;
+export type WidgetConfigResponseModelAvatar =
+    | ElevenLabs.WidgetConfigResponseModelAvatar.Orb
+    | ElevenLabs.WidgetConfigResponseModelAvatar.Url
+    | ElevenLabs.WidgetConfigResponseModelAvatar.Image;
 
-export namespace EmbedConfigAvatar {
+export namespace WidgetConfigResponseModelAvatar {
     export interface Orb extends ElevenLabs.OrbAvatar {
         type: "orb";
     }
