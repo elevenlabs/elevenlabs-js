@@ -4,7 +4,7 @@ import { getRequestBody } from "../../../src/core/fetcher/getRequestBody";
 describe("Test getRequestBody", () => {
     it("should return FormData as is in Node environment", async () => {
         if (RUNTIME.type === "node") {
-            const formData = new (await import("formdata-node")).FormData();
+            const formData = new FormData();
             formData.append("key", "value");
             const result = await getRequestBody({
                 body: formData,
@@ -27,7 +27,7 @@ describe("Test getRequestBody", () => {
 
     it("should return FormData in browser environment", async () => {
         if (RUNTIME.type === "browser") {
-            const formData = new (await import("form-data")).default();
+            const formData = new FormData();
             formData.append("key", "value");
             const result = await getRequestBody({
                 body: formData,

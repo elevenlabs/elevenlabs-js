@@ -139,12 +139,11 @@ const response = await elevenlabs.voices.getAll(
 
 ## Runtime compatiblity
 
-The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK
-works in the following runtimes:
+The SDK works in the following runtimes:
 
 The following runtimes are supported:
 
--   Node.js 15+
+-   Node.js 22+
 -   Vercel
 -   Cloudflare Workers
 -   Deno v1.25+

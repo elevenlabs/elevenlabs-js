@@ -1,4 +1,4 @@
-import type { Writable } from "readable-stream";
+import type { Writable } from "node:stream";
 import { EventCallback, StreamWrapper } from "./chooseStreamWrapper";
 
 export class Node18UniversalStreamWrapper<ReadFormat extends Uint8Array | Uint16Array | Uint32Array>
