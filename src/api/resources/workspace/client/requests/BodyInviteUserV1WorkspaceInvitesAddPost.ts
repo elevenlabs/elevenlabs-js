@@ -9,6 +9,6 @@
  *     }
  */
 export interface BodyInviteUserV1WorkspaceInvitesAddPost {
-    /** Email of the target user. */
+    /** The email of the customer */
     email: string;
 }

@@ -11,4 +11,5 @@ export interface ConversationHistoryMetadataCommonModel {
     feedback?: ElevenLabs.ConversationHistoryFeedbackCommonModel;
     authorization_method?: ElevenLabs.AuthorizationMethod;
     charging?: ElevenLabs.ConversationChargingCommonModel;
+    termination_reason?: string;
 }

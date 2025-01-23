@@ -13,19 +13,19 @@ import * as fs from "fs";
 export interface BodyCreatesAudioNativeEnabledProjectV1AudioNativePost {
     /** Project name. */
     name: string;
-    /** Image URL used in the player. If not provided, default image set in the Player settings is used. */
+    /** (Deprecated) Image URL used in the player. If not provided, default image set in the Player settings is used. */
     image?: string;
     /** Author used in the player and inserted at the start of the uploaded article. If not provided, the default author set in the Player settings is used. */
     author?: string;
     /** Title used in the player and inserted at the top of the uploaded article. If not provided, the default title set in the Player settings is used. */
     title?: string;
-    /** Whether to use small player or not. If not provided, default value set in the Player settings is used. */
+    /** (Deprecated) Whether to use small player or not. If not provided, default value set in the Player settings is used. */
     small?: boolean;
     /** Text color used in the player. If not provided, default text color set in the Player settings is used. */
     text_color?: string;
     /** Background color used in the player. If not provided, default background color set in the Player settings is used. */
     background_color?: string;
-    /** Specifies for how many minutes to persist the session across page reloads. If not provided, default sessionization set in the Player settings is used. */
+    /** (Deprecated) Specifies for how many minutes to persist the session across page reloads. If not provided, default sessionization set in the Player settings is used. */
     sessionization?: number;
     /** Voice ID used to voice the content. If not provided, default voice ID set in the Player settings is used. */
     voice_id?: string;

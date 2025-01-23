@@ -6,5 +6,6 @@ import * as ElevenLabs from "../index";
 
 export interface LiteralJsonSchemaProperty {
     type: ElevenLabs.LiteralJsonSchemaPropertyType;
-    description: string;
+    description?: string;
+    dynamic_variable?: string;
 }
