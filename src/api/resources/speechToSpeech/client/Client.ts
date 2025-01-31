@@ -10,13 +10,15 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace SpeechToSpeech {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -40,9 +42,9 @@ export class SpeechToSpeech {
     public async convert(
         voiceId: string,
         request: ElevenLabs.BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost,
-        requestOptions?: SpeechToSpeech.RequestOptions
+        requestOptions?: SpeechToSpeech.RequestOptions,
     ): Promise<stream.Readable> {
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (request.enable_logging != null) {
             _queryParams["enable_logging"] = request.enable_logging.toString();
         }
@@ -58,26 +60,28 @@ export class SpeechToSpeech {
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
         if (request.model_id != null) {
-            await _request.append("model_id", request.model_id);
+            _request.append("model_id", request.model_id);
         }
 
         if (request.voice_settings != null) {
-            await _request.append("voice_settings", request.voice_settings);
+            _request.append("voice_settings", request.voice_settings);
         }
 
         if (request.seed != null) {
-            await _request.append("seed", request.seed.toString());
+            _request.append("seed", request.seed.toString());
         }
 
         if (request.remove_background_noise != null) {
-            await _request.append("remove_background_noise", request.remove_background_noise.toString());
+            _request.append("remove_background_noise", request.remove_background_noise.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/speech-to-speech/${encodeURIComponent(voiceId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/speech-to-speech/${encodeURIComponent(voiceId)}`,
             ),
             method: "POST",
             headers: {
@@ -87,8 +91,8 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -111,7 +115,7 @@ export class SpeechToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -129,7 +133,7 @@ export class SpeechToSpeech {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/speech-to-speech/{voice_id}."
+                    "Timeout exceeded when calling POST /v1/speech-to-speech/{voice_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -145,9 +149,9 @@ export class SpeechToSpeech {
     public async convertAsStream(
         voiceId: string,
         request: ElevenLabs.BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIdStreamPost,
-        requestOptions?: SpeechToSpeech.RequestOptions
+        requestOptions?: SpeechToSpeech.RequestOptions,
     ): Promise<stream.Readable> {
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (request.enable_logging != null) {
             _queryParams["enable_logging"] = request.enable_logging.toString();
         }
@@ -163,26 +167,28 @@ export class SpeechToSpeech {
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
         if (request.model_id != null) {
-            await _request.append("model_id", request.model_id);
+            _request.append("model_id", request.model_id);
         }
 
         if (request.voice_settings != null) {
-            await _request.append("voice_settings", request.voice_settings);
+            _request.append("voice_settings", request.voice_settings);
         }
 
         if (request.seed != null) {
-            await _request.append("seed", request.seed.toString());
+            _request.append("seed", request.seed.toString());
         }
 
         if (request.remove_background_noise != null) {
-            await _request.append("remove_background_noise", request.remove_background_noise.toString());
+            _request.append("remove_background_noise", request.remove_background_noise.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/speech-to-speech/${encodeURIComponent(voiceId)}/stream`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/speech-to-speech/${encodeURIComponent(voiceId)}/stream`,
             ),
             method: "POST",
             headers: {
@@ -192,8 +198,8 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -216,7 +222,7 @@ export class SpeechToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -234,7 +240,7 @@ export class SpeechToSpeech {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/speech-to-speech/{voice_id}/stream."
+                    "Timeout exceeded when calling POST /v1/speech-to-speech/{voice_id}/stream.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

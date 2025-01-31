@@ -10,13 +10,15 @@ import * as errors from "../../../../errors/index";
 import * as stream from "stream";
 
 export declare namespace VoiceGeneration {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -42,12 +44,14 @@ export class VoiceGeneration {
      *     await client.voiceGeneration.generateParameters()
      */
     public async generateParameters(
-        requestOptions?: VoiceGeneration.RequestOptions
+        requestOptions?: VoiceGeneration.RequestOptions,
     ): Promise<ElevenLabs.VoiceGenerationParameterResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/voice-generation/generate-voice/parameters"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/voice-generation/generate-voice/parameters",
             ),
             method: "GET",
             headers: {
@@ -57,8 +61,8 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -88,7 +92,7 @@ export class VoiceGeneration {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/voice-generation/generate-voice/parameters."
+                    "Timeout exceeded when calling GET /v1/voice-generation/generate-voice/parameters.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -103,12 +107,14 @@ export class VoiceGeneration {
      */
     public async generate(
         request: ElevenLabs.GenerateVoiceRequest,
-        requestOptions?: VoiceGeneration.RequestOptions
+        requestOptions?: VoiceGeneration.RequestOptions,
     ): Promise<stream.Readable> {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/voice-generation/generate-voice"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/voice-generation/generate-voice",
             ),
             method: "POST",
             headers: {
@@ -118,8 +124,8 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -140,7 +146,7 @@ export class VoiceGeneration {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -158,7 +164,7 @@ export class VoiceGeneration {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/voice-generation/generate-voice."
+                    "Timeout exceeded when calling POST /v1/voice-generation/generate-voice.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -184,12 +190,14 @@ export class VoiceGeneration {
      */
     public async createAPreviouslyGeneratedVoice(
         request: ElevenLabs.CreatePreviouslyGenertedVoiceRequest,
-        requestOptions?: VoiceGeneration.RequestOptions
+        requestOptions?: VoiceGeneration.RequestOptions,
     ): Promise<ElevenLabs.Voice> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/voice-generation/create-voice"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/voice-generation/create-voice",
             ),
             method: "POST",
             headers: {
@@ -199,8 +207,8 @@ export class VoiceGeneration {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -220,7 +228,7 @@ export class VoiceGeneration {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -238,7 +246,7 @@ export class VoiceGeneration {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/voice-generation/create-voice."
+                    "Timeout exceeded when calling POST /v1/voice-generation/create-voice.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

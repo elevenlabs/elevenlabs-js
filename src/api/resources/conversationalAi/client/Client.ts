@@ -10,13 +10,15 @@ import * as errors from "../../../../errors/index";
 import * as fs from "fs";
 
 export declare namespace ConversationalAi {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -48,15 +50,17 @@ export class ConversationalAi {
      */
     public async getSignedUrl(
         request: ElevenLabs.ConversationalAiGetSignedUrlRequest,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.ConversationSignedUrlResponseModel> {
         const { agent_id: agentId } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["agent_id"] = agentId;
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/convai/conversation/get_signed_url"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/conversation/get_signed_url",
             ),
             method: "GET",
             headers: {
@@ -66,8 +70,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -87,7 +91,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -105,7 +109,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/convai/conversation/get_signed_url."
+                    "Timeout exceeded when calling GET /v1/convai/conversation/get_signed_url.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -129,12 +133,14 @@ export class ConversationalAi {
      */
     public async createAgent(
         request: ElevenLabs.BodyCreateAgentV1ConvaiAgentsCreatePost,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.CreateAgentResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/convai/agents/create"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/agents/create",
             ),
             method: "POST",
             headers: {
@@ -144,8 +150,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -165,7 +171,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -203,12 +209,14 @@ export class ConversationalAi {
      */
     public async getAgent(
         agentId: string,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetAgentResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/agents/${encodeURIComponent(agentId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${encodeURIComponent(agentId)}`,
             ),
             method: "GET",
             headers: {
@@ -218,8 +226,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -238,7 +246,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -256,7 +264,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/convai/agents/{agent_id}."
+                    "Timeout exceeded when calling GET /v1/convai/agents/{agent_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -278,12 +286,14 @@ export class ConversationalAi {
      */
     public async deleteAgent(
         agentId: string,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<Record<string, string>> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/agents/${encodeURIComponent(agentId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${encodeURIComponent(agentId)}`,
             ),
             method: "DELETE",
             headers: {
@@ -293,8 +303,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -313,7 +323,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -331,7 +341,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling DELETE /v1/convai/agents/{agent_id}."
+                    "Timeout exceeded when calling DELETE /v1/convai/agents/{agent_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -355,12 +365,14 @@ export class ConversationalAi {
     public async updateAgent(
         agentId: string,
         request: ElevenLabs.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatch = {},
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetAgentResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/agents/${encodeURIComponent(agentId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${encodeURIComponent(agentId)}`,
             ),
             method: "PATCH",
             headers: {
@@ -370,8 +382,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -391,7 +403,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -409,7 +421,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling PATCH /v1/convai/agents/{agent_id}."
+                    "Timeout exceeded when calling PATCH /v1/convai/agents/{agent_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -433,18 +445,20 @@ export class ConversationalAi {
     public async getAgentWidget(
         agentId: string,
         request: ElevenLabs.ConversationalAiGetAgentWidgetRequest = {},
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetAgentEmbedResponseModel> {
         const { conversation_signature: conversationSignature } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (conversationSignature != null) {
             _queryParams["conversation_signature"] = conversationSignature;
         }
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/agents/${encodeURIComponent(agentId)}/widget`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${encodeURIComponent(agentId)}/widget`,
             ),
             method: "GET",
             headers: {
@@ -454,8 +468,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -475,7 +489,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -493,7 +507,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/convai/agents/{agent_id}/widget."
+                    "Timeout exceeded when calling GET /v1/convai/agents/{agent_id}/widget.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -515,12 +529,14 @@ export class ConversationalAi {
      */
     public async getAgentLink(
         agentId: string,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetAgentLinkResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/agents/${encodeURIComponent(agentId)}/link`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${encodeURIComponent(agentId)}/link`,
             ),
             method: "GET",
             headers: {
@@ -530,8 +546,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -550,7 +566,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -568,7 +584,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/convai/agents/{agent_id}/link."
+                    "Timeout exceeded when calling GET /v1/convai/agents/{agent_id}/link.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -594,15 +610,17 @@ export class ConversationalAi {
     public async postAgentAvatar(
         agentId: string,
         request: ElevenLabs.BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.PostAgentAvatarResponseModel> {
         const _request = await core.newFormData();
         await _request.appendFile("avatar_file", request.avatar_file);
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/agents/${encodeURIComponent(agentId)}/avatar`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${encodeURIComponent(agentId)}/avatar`,
             ),
             method: "POST",
             headers: {
@@ -612,8 +630,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -634,7 +652,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -652,7 +670,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/convai/agents/{agent_id}/avatar."
+                    "Timeout exceeded when calling POST /v1/convai/agents/{agent_id}/avatar.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -676,12 +694,14 @@ export class ConversationalAi {
     public async getAgentKnowledgeBaseDocumentById(
         agentId: string,
         documentationId: string,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetKnowledgeBaseReponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/agents/${encodeURIComponent(agentId)}/knowledge-base/${encodeURIComponent(documentationId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${encodeURIComponent(agentId)}/knowledge-base/${encodeURIComponent(documentationId)}`,
             ),
             method: "GET",
             headers: {
@@ -691,8 +711,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -711,7 +731,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -729,7 +749,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/convai/agents/{agent_id}/knowledge-base/{documentation_id}."
+                    "Timeout exceeded when calling GET /v1/convai/agents/{agent_id}/knowledge-base/{documentation_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -756,12 +776,14 @@ export class ConversationalAi {
     public async addAgentSecret(
         agentId: string,
         request: ElevenLabs.BodyAddASecretToTheAgentWhichCanBeReferencedInToolCallsV1ConvaiAgentsAgentIdAddSecretPost,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.AddAgentSecretResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/agents/${encodeURIComponent(agentId)}/add-secret`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${encodeURIComponent(agentId)}/add-secret`,
             ),
             method: "POST",
             headers: {
@@ -771,8 +793,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -792,7 +814,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -810,7 +832,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/convai/agents/{agent_id}/add-secret."
+                    "Timeout exceeded when calling POST /v1/convai/agents/{agent_id}/add-secret.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -834,11 +856,11 @@ export class ConversationalAi {
     public async addToAgentKnowledgeBase(
         agentId: string,
         request: ElevenLabs.BodyAddToAgentSKnowledgeBaseV1ConvaiAgentsAgentIdAddToKnowledgeBasePost,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.AddKnowledgeBaseResponseModel> {
         const _request = await core.newFormData();
         if (request.url != null) {
-            await _request.append("url", request.url);
+            _request.append("url", request.url);
         }
 
         if (request.file != null) {
@@ -848,8 +870,10 @@ export class ConversationalAi {
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/agents/${encodeURIComponent(agentId)}/add-to-knowledge-base`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${encodeURIComponent(agentId)}/add-to-knowledge-base`,
             ),
             method: "POST",
             headers: {
@@ -859,8 +883,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -881,7 +905,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -899,7 +923,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/convai/agents/{agent_id}/add-to-knowledge-base."
+                    "Timeout exceeded when calling POST /v1/convai/agents/{agent_id}/add-to-knowledge-base.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -921,10 +945,10 @@ export class ConversationalAi {
      */
     public async getAgents(
         request: ElevenLabs.ConversationalAiGetAgentsRequest = {},
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetAgentsPageResponseModel> {
         const { cursor, page_size: pageSize, search } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
             _queryParams["cursor"] = cursor;
         }
@@ -939,8 +963,10 @@ export class ConversationalAi {
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/convai/agents"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/agents",
             ),
             method: "GET",
             headers: {
@@ -950,8 +976,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -971,7 +997,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1011,10 +1037,10 @@ export class ConversationalAi {
      */
     public async getConversations(
         request: ElevenLabs.ConversationalAiGetConversationsRequest = {},
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetConversationsPageResponseModel> {
         const { cursor, agent_id: agentId, call_successful: callSuccessful, page_size: pageSize } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
             _queryParams["cursor"] = cursor;
         }
@@ -1033,8 +1059,10 @@ export class ConversationalAi {
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/convai/conversations"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/conversations",
             ),
             method: "GET",
             headers: {
@@ -1044,8 +1072,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1065,7 +1093,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1103,12 +1131,14 @@ export class ConversationalAi {
      */
     public async getConversation(
         conversationId: string,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetConversationResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/conversations/${encodeURIComponent(conversationId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${encodeURIComponent(conversationId)}`,
             ),
             method: "GET",
             headers: {
@@ -1118,8 +1148,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1138,7 +1168,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1156,7 +1186,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/convai/conversations/{conversation_id}."
+                    "Timeout exceeded when calling GET /v1/convai/conversations/{conversation_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -1178,12 +1208,14 @@ export class ConversationalAi {
      */
     public async deleteConversation(
         conversationId: string,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/conversations/${encodeURIComponent(conversationId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${encodeURIComponent(conversationId)}`,
             ),
             method: "DELETE",
             headers: {
@@ -1193,8 +1225,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1213,7 +1245,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1231,7 +1263,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling DELETE /v1/convai/conversations/{conversation_id}."
+                    "Timeout exceeded when calling DELETE /v1/convai/conversations/{conversation_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -1253,12 +1285,14 @@ export class ConversationalAi {
      */
     public async getConversationAudio(
         conversationId: string,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<void> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/conversations/${encodeURIComponent(conversationId)}/audio`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${encodeURIComponent(conversationId)}/audio`,
             ),
             method: "GET",
             headers: {
@@ -1268,8 +1302,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1288,7 +1322,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1306,7 +1340,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/convai/conversations/{conversation_id}/audio."
+                    "Timeout exceeded when calling GET /v1/convai/conversations/{conversation_id}/audio.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -1332,12 +1366,14 @@ export class ConversationalAi {
     public async postConversationFeedback(
         conversationId: string,
         request: ElevenLabs.BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/conversations/${encodeURIComponent(conversationId)}/feedback`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${encodeURIComponent(conversationId)}/feedback`,
             ),
             method: "POST",
             headers: {
@@ -1347,8 +1383,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1368,7 +1404,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1386,7 +1422,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/convai/conversations/{conversation_id}/feedback."
+                    "Timeout exceeded when calling POST /v1/convai/conversations/{conversation_id}/feedback.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -1414,12 +1450,14 @@ export class ConversationalAi {
      */
     public async createPhoneNumber(
         request: ElevenLabs.CreatePhoneNumberRequest,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.CreatePhoneNumberResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/convai/phone-numbers/create"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/phone-numbers/create",
             ),
             method: "POST",
             headers: {
@@ -1429,8 +1467,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1450,7 +1488,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1468,7 +1506,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/convai/phone-numbers/create."
+                    "Timeout exceeded when calling POST /v1/convai/phone-numbers/create.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -1490,12 +1528,14 @@ export class ConversationalAi {
      */
     public async getPhoneNumber(
         phoneNumberId: string,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetPhoneNumberResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/phone-numbers/${encodeURIComponent(phoneNumberId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/phone-numbers/${encodeURIComponent(phoneNumberId)}`,
             ),
             method: "GET",
             headers: {
@@ -1505,8 +1545,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1525,7 +1565,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1543,7 +1583,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/convai/phone-numbers/{phone_number_id}."
+                    "Timeout exceeded when calling GET /v1/convai/phone-numbers/{phone_number_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -1565,12 +1605,14 @@ export class ConversationalAi {
      */
     public async deletePhoneNumber(
         phoneNumberId: string,
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/phone-numbers/${encodeURIComponent(phoneNumberId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/phone-numbers/${encodeURIComponent(phoneNumberId)}`,
             ),
             method: "DELETE",
             headers: {
@@ -1580,8 +1622,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1600,7 +1642,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1618,7 +1660,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling DELETE /v1/convai/phone-numbers/{phone_number_id}."
+                    "Timeout exceeded when calling DELETE /v1/convai/phone-numbers/{phone_number_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -1642,12 +1684,14 @@ export class ConversationalAi {
     public async updatePhoneNumber(
         phoneNumberId: string,
         request: ElevenLabs.UpdatePhoneNumberRequest = {},
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetPhoneNumberResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/convai/phone-numbers/${encodeURIComponent(phoneNumberId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/phone-numbers/${encodeURIComponent(phoneNumberId)}`,
             ),
             method: "PATCH",
             headers: {
@@ -1657,8 +1701,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1678,7 +1722,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1696,7 +1740,7 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling PATCH /v1/convai/phone-numbers/{phone_number_id}."
+                    "Timeout exceeded when calling PATCH /v1/convai/phone-numbers/{phone_number_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -1716,12 +1760,14 @@ export class ConversationalAi {
      *     await client.conversationalAi.getPhoneNumbers()
      */
     public async getPhoneNumbers(
-        requestOptions?: ConversationalAi.RequestOptions
+        requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.GetPhoneNumberResponseModel[]> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/convai/phone-numbers/"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/phone-numbers/",
             ),
             method: "GET",
             headers: {
@@ -1731,8 +1777,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1751,7 +1797,7 @@ export class ConversationalAi {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({

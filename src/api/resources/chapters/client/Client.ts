@@ -9,13 +9,15 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Chapters {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -45,12 +47,14 @@ export class Chapters {
      */
     public async getAll(
         projectId: string,
-        requestOptions?: Chapters.RequestOptions
+        requestOptions?: Chapters.RequestOptions,
     ): Promise<ElevenLabs.GetChaptersResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/chapters`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/chapters`,
             ),
             method: "GET",
             headers: {
@@ -60,8 +64,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -80,7 +84,7 @@ export class Chapters {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -98,7 +102,7 @@ export class Chapters {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/projects/{project_id}/chapters."
+                    "Timeout exceeded when calling GET /v1/projects/{project_id}/chapters.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -122,12 +126,14 @@ export class Chapters {
     public async get(
         projectId: string,
         chapterId: string,
-        requestOptions?: Chapters.RequestOptions
+        requestOptions?: Chapters.RequestOptions,
     ): Promise<ElevenLabs.ChapterResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}`,
             ),
             method: "GET",
             headers: {
@@ -137,8 +143,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -157,7 +163,7 @@ export class Chapters {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -175,7 +181,7 @@ export class Chapters {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/projects/{project_id}/chapters/{chapter_id}."
+                    "Timeout exceeded when calling GET /v1/projects/{project_id}/chapters/{chapter_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -199,12 +205,14 @@ export class Chapters {
     public async delete(
         projectId: string,
         chapterId: string,
-        requestOptions?: Chapters.RequestOptions
+        requestOptions?: Chapters.RequestOptions,
     ): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}`,
             ),
             method: "DELETE",
             headers: {
@@ -214,8 +222,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -234,7 +242,7 @@ export class Chapters {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -252,7 +260,7 @@ export class Chapters {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling DELETE /v1/projects/{project_id}/chapters/{chapter_id}."
+                    "Timeout exceeded when calling DELETE /v1/projects/{project_id}/chapters/{chapter_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -278,12 +286,14 @@ export class Chapters {
     public async create(
         projectId: string,
         request: ElevenLabs.BodyAddChapterToAProjectV1ProjectsProjectIdChaptersAddPost,
-        requestOptions?: Chapters.RequestOptions
+        requestOptions?: Chapters.RequestOptions,
     ): Promise<ElevenLabs.AddChapterResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/chapters/add`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/add`,
             ),
             method: "POST",
             headers: {
@@ -293,8 +303,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -314,7 +324,7 @@ export class Chapters {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -332,7 +342,7 @@ export class Chapters {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/projects/{project_id}/chapters/add."
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/chapters/add.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -356,12 +366,14 @@ export class Chapters {
     public async convert(
         projectId: string,
         chapterId: string,
-        requestOptions?: Chapters.RequestOptions
+        requestOptions?: Chapters.RequestOptions,
     ): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}/convert`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}/convert`,
             ),
             method: "POST",
             headers: {
@@ -371,8 +383,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -391,7 +403,7 @@ export class Chapters {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -409,7 +421,7 @@ export class Chapters {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/projects/{project_id}/chapters/{chapter_id}/convert."
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/chapters/{chapter_id}/convert.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -433,12 +445,14 @@ export class Chapters {
     public async getAllSnapshots(
         projectId: string,
         chapterId: string,
-        requestOptions?: Chapters.RequestOptions
+        requestOptions?: Chapters.RequestOptions,
     ): Promise<ElevenLabs.ChapterSnapshotsResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}/snapshots`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}/snapshots`,
             ),
             method: "GET",
             headers: {
@@ -448,8 +462,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -468,7 +482,7 @@ export class Chapters {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -486,7 +500,7 @@ export class Chapters {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/projects/{project_id}/chapters/{chapter_id}/snapshots."
+                    "Timeout exceeded when calling GET /v1/projects/{project_id}/chapters/{chapter_id}/snapshots.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -514,14 +528,14 @@ export class Chapters {
         chapterId: string,
         chapterSnapshotId: string,
         request: ElevenLabs.BodyStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost = {},
-        requestOptions?: Chapters.RequestOptions
+        requestOptions?: Chapters.RequestOptions,
     ): Promise<void> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(
-                    chapterId
-                )}/snapshots/${encodeURIComponent(chapterSnapshotId)}/stream`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}/snapshots/${encodeURIComponent(chapterSnapshotId)}/stream`,
             ),
             method: "POST",
             headers: {
@@ -531,8 +545,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -552,7 +566,7 @@ export class Chapters {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -570,7 +584,7 @@ export class Chapters {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/projects/{project_id}/chapters/{chapter_id}/snapshots/{chapter_snapshot_id}/stream."
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/chapters/{chapter_id}/snapshots/{chapter_snapshot_id}/stream.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

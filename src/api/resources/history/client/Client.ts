@@ -10,13 +10,15 @@ import * as errors from "../../../../errors/index";
 import * as stream from "stream";
 
 export declare namespace History {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -46,7 +48,7 @@ export class History {
      */
     public async getAll(
         request: ElevenLabs.HistoryGetAllRequest = {},
-        requestOptions?: History.RequestOptions
+        requestOptions?: History.RequestOptions,
     ): Promise<ElevenLabs.GetSpeechHistoryResponse> {
         const {
             page_size: pageSize,
@@ -55,7 +57,7 @@ export class History {
             search,
             source,
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (pageSize != null) {
             _queryParams["page_size"] = pageSize.toString();
         }
@@ -78,8 +80,10 @@ export class History {
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/history"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/history",
             ),
             method: "GET",
             headers: {
@@ -89,8 +93,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -110,7 +114,7 @@ export class History {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -148,12 +152,14 @@ export class History {
      */
     public async get(
         historyItemId: string,
-        requestOptions?: History.RequestOptions
+        requestOptions?: History.RequestOptions,
     ): Promise<ElevenLabs.SpeechHistoryItemResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/history/${encodeURIComponent(historyItemId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/history/${encodeURIComponent(historyItemId)}`,
             ),
             method: "GET",
             headers: {
@@ -163,8 +169,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -183,7 +189,7 @@ export class History {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -201,7 +207,7 @@ export class History {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/history/{history_item_id}."
+                    "Timeout exceeded when calling GET /v1/history/{history_item_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -224,8 +230,10 @@ export class History {
     public async delete(historyItemId: string, requestOptions?: History.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/history/${encodeURIComponent(historyItemId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/history/${encodeURIComponent(historyItemId)}`,
             ),
             method: "DELETE",
             headers: {
@@ -235,8 +243,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -255,7 +263,7 @@ export class History {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -273,7 +281,7 @@ export class History {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling DELETE /v1/history/{history_item_id}."
+                    "Timeout exceeded when calling DELETE /v1/history/{history_item_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -289,8 +297,10 @@ export class History {
     public async getAudio(historyItemId: string, requestOptions?: History.RequestOptions): Promise<stream.Readable> {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/history/${encodeURIComponent(historyItemId)}/audio`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/history/${encodeURIComponent(historyItemId)}/audio`,
             ),
             method: "GET",
             headers: {
@@ -300,8 +310,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -321,7 +331,7 @@ export class History {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -339,7 +349,7 @@ export class History {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/history/{history_item_id}/audio."
+                    "Timeout exceeded when calling GET /v1/history/{history_item_id}/audio.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -363,12 +373,14 @@ export class History {
      */
     public async download(
         request: ElevenLabs.DownloadHistoryRequest,
-        requestOptions?: History.RequestOptions
+        requestOptions?: History.RequestOptions,
     ): Promise<void> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/history/download"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/history/download",
             ),
             method: "POST",
             headers: {
@@ -378,8 +390,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.60.0",
+                "User-Agent": "elevenlabs/1.60.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -399,7 +411,7 @@ export class History {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({

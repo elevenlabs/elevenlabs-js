@@ -1993,7 +1993,7 @@ await client.voices.addSharingVoice(
     "sB1b5zUrxQVAFl2PhZFp",
     {
         new_name: "Alita",
-    }
+    },
 );
 ```
 
