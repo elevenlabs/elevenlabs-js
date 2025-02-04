@@ -9,13 +9,15 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Usage {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -48,7 +50,7 @@ export class Usage {
      */
     public async getCharactersUsageMetrics(
         request: ElevenLabs.UsageGetCharactersUsageMetricsRequest,
-        requestOptions?: Usage.RequestOptions
+        requestOptions?: Usage.RequestOptions,
     ): Promise<ElevenLabs.UsageCharactersResponseModel> {
         const {
             start_unix: startUnix,
@@ -56,7 +58,7 @@ export class Usage {
             include_workspace_metrics: includeWorkspaceMetrics,
             breakdown_type: breakdownType,
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["start_unix"] = startUnix.toString();
         _queryParams["end_unix"] = endUnix.toString();
         if (includeWorkspaceMetrics != null) {
@@ -69,8 +71,10 @@ export class Usage {
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/usage/character-stats"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/usage/character-stats",
             ),
             method: "GET",
             headers: {
@@ -80,8 +84,8 @@ export class Usage {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -101,7 +105,7 @@ export class Usage {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({

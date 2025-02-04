@@ -10,13 +10,15 @@ import * as errors from "../../../../errors/index";
 import * as fs from "fs";
 
 export declare namespace Voices {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -49,18 +51,20 @@ export class Voices {
      */
     public async getAll(
         request: ElevenLabs.VoicesGetAllRequest = {},
-        requestOptions?: Voices.RequestOptions
+        requestOptions?: Voices.RequestOptions,
     ): Promise<ElevenLabs.GetVoicesResponse> {
         const { show_legacy: showLegacy } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (showLegacy != null) {
             _queryParams["show_legacy"] = showLegacy.toString();
         }
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/voices"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/voices",
             ),
             method: "GET",
             headers: {
@@ -70,8 +74,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -91,7 +95,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -127,8 +131,10 @@ export class Voices {
     public async getDefaultSettings(requestOptions?: Voices.RequestOptions): Promise<ElevenLabs.VoiceSettings> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/voices/settings/default"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/voices/settings/default",
             ),
             method: "GET",
             headers: {
@@ -138,8 +144,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -169,7 +175,7 @@ export class Voices {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/voices/settings/default."
+                    "Timeout exceeded when calling GET /v1/voices/settings/default.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -191,12 +197,14 @@ export class Voices {
      */
     public async getSettings(
         voiceId: string,
-        requestOptions?: Voices.RequestOptions
+        requestOptions?: Voices.RequestOptions,
     ): Promise<ElevenLabs.VoiceSettings> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${encodeURIComponent(voiceId)}/settings`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/voices/${encodeURIComponent(voiceId)}/settings`,
             ),
             method: "GET",
             headers: {
@@ -206,8 +214,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -226,7 +234,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -244,7 +252,7 @@ export class Voices {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/voices/{voice_id}/settings."
+                    "Timeout exceeded when calling GET /v1/voices/{voice_id}/settings.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -268,18 +276,20 @@ export class Voices {
     public async get(
         voiceId: string,
         request: ElevenLabs.VoicesGetRequest = {},
-        requestOptions?: Voices.RequestOptions
+        requestOptions?: Voices.RequestOptions,
     ): Promise<ElevenLabs.Voice> {
         const { with_settings: withSettings } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (withSettings != null) {
             _queryParams["with_settings"] = withSettings.toString();
         }
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${encodeURIComponent(voiceId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/voices/${encodeURIComponent(voiceId)}`,
             ),
             method: "GET",
             headers: {
@@ -289,8 +299,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -310,7 +320,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -349,8 +359,10 @@ export class Voices {
     public async delete(voiceId: string, requestOptions?: Voices.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${encodeURIComponent(voiceId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/voices/${encodeURIComponent(voiceId)}`,
             ),
             method: "DELETE",
             headers: {
@@ -360,8 +372,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -380,7 +392,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -424,12 +436,14 @@ export class Voices {
     public async editSettings(
         voiceId: string,
         request: ElevenLabs.VoiceSettings,
-        requestOptions?: Voices.RequestOptions
+        requestOptions?: Voices.RequestOptions,
     ): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${encodeURIComponent(voiceId)}/settings/edit`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/voices/${encodeURIComponent(voiceId)}/settings/edit`,
             ),
             method: "POST",
             headers: {
@@ -439,8 +453,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -460,7 +474,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -478,7 +492,7 @@ export class Voices {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/voices/{voice_id}/settings/edit."
+                    "Timeout exceeded when calling POST /v1/voices/{voice_id}/settings/edit.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -503,31 +517,33 @@ export class Voices {
      */
     public async add(
         request: ElevenLabs.BodyAddVoiceV1VoicesAddPost,
-        requestOptions?: Voices.RequestOptions
+        requestOptions?: Voices.RequestOptions,
     ): Promise<ElevenLabs.AddVoiceIvcResponseModel> {
         const _request = await core.newFormData();
-        await _request.append("name", request.name);
+        _request.append("name", request.name);
         for (const _file of request.files) {
             await _request.appendFile("files", _file);
         }
 
         if (request.remove_background_noise != null) {
-            await _request.append("remove_background_noise", request.remove_background_noise.toString());
+            _request.append("remove_background_noise", request.remove_background_noise.toString());
         }
 
         if (request.description != null) {
-            await _request.append("description", request.description);
+            _request.append("description", request.description);
         }
 
         if (request.labels != null) {
-            await _request.append("labels", request.labels);
+            _request.append("labels", request.labels);
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/voices/add"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/voices/add",
             ),
             method: "POST",
             headers: {
@@ -537,8 +553,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -559,7 +575,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -601,10 +617,10 @@ export class Voices {
     public async edit(
         voiceId: string,
         request: ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost,
-        requestOptions?: Voices.RequestOptions
+        requestOptions?: Voices.RequestOptions,
     ): Promise<unknown> {
         const _request = await core.newFormData();
-        await _request.append("name", request.name);
+        _request.append("name", request.name);
         if (request.files != null) {
             for (const _file of request.files) {
                 await _request.appendFile("files", _file);
@@ -612,22 +628,24 @@ export class Voices {
         }
 
         if (request.remove_background_noise != null) {
-            await _request.append("remove_background_noise", request.remove_background_noise.toString());
+            _request.append("remove_background_noise", request.remove_background_noise.toString());
         }
 
         if (request.description != null) {
-            await _request.append("description", request.description);
+            _request.append("description", request.description);
         }
 
         if (request.labels != null) {
-            await _request.append("labels", request.labels);
+            _request.append("labels", request.labels);
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${encodeURIComponent(voiceId)}/edit`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/voices/${encodeURIComponent(voiceId)}/edit`,
             ),
             method: "POST",
             headers: {
@@ -637,8 +655,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -659,7 +677,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -677,7 +695,7 @@ export class Voices {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/voices/{voice_id}/edit."
+                    "Timeout exceeded when calling POST /v1/voices/{voice_id}/edit.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -705,12 +723,14 @@ export class Voices {
         publicUserId: string,
         voiceId: string,
         request: ElevenLabs.AddSharingVoiceRequest,
-        requestOptions?: Voices.RequestOptions
+        requestOptions?: Voices.RequestOptions,
     ): Promise<ElevenLabs.AddVoiceResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/voices/add/${encodeURIComponent(publicUserId)}/${encodeURIComponent(voiceId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/voices/add/${encodeURIComponent(publicUserId)}/${encodeURIComponent(voiceId)}`,
             ),
             method: "POST",
             headers: {
@@ -720,8 +740,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -741,7 +761,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -759,7 +779,7 @@ export class Voices {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/voices/add/{public_user_id}/{voice_id}."
+                    "Timeout exceeded when calling POST /v1/voices/add/{public_user_id}/{voice_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -785,7 +805,7 @@ export class Voices {
      */
     public async getShared(
         request: ElevenLabs.VoicesGetSharedRequest = {},
-        requestOptions?: Voices.RequestOptions
+        requestOptions?: Voices.RequestOptions,
     ): Promise<ElevenLabs.GetLibraryVoicesResponse> {
         const {
             page_size: pageSize,
@@ -803,7 +823,7 @@ export class Voices {
             sort,
             page,
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (pageSize != null) {
             _queryParams["page_size"] = pageSize.toString();
         }
@@ -870,8 +890,10 @@ export class Voices {
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/shared-voices"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/shared-voices",
             ),
             method: "GET",
             headers: {
@@ -881,8 +903,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -902,7 +924,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -940,7 +962,7 @@ export class Voices {
      */
     public async getSimilarLibraryVoices(
         request: ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost,
-        requestOptions?: Voices.RequestOptions
+        requestOptions?: Voices.RequestOptions,
     ): Promise<ElevenLabs.GetLibraryVoicesResponse> {
         const _request = await core.newFormData();
         if (request.audio_file != null) {
@@ -948,18 +970,20 @@ export class Voices {
         }
 
         if (request.similarity_threshold != null) {
-            await _request.append("similarity_threshold", request.similarity_threshold.toString());
+            _request.append("similarity_threshold", request.similarity_threshold.toString());
         }
 
         if (request.top_k != null) {
-            await _request.append("top_k", request.top_k.toString());
+            _request.append("top_k", request.top_k.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/similar-voices"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/similar-voices",
             ),
             method: "POST",
             headers: {
@@ -969,8 +993,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -991,7 +1015,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -1029,12 +1053,14 @@ export class Voices {
      */
     public async getAProfilePage(
         handle: string,
-        requestOptions?: Voices.RequestOptions
+        requestOptions?: Voices.RequestOptions,
     ): Promise<ElevenLabs.ProfilePageResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `profile/${encodeURIComponent(handle)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `profile/${encodeURIComponent(handle)}`,
             ),
             method: "GET",
             headers: {
@@ -1044,8 +1070,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1064,7 +1090,7 @@ export class Voices {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({

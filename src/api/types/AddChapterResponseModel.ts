@@ -5,5 +5,5 @@
 import * as ElevenLabs from "../index";
 
 export interface AddChapterResponseModel {
-    chapter: ElevenLabs.ChapterResponse;
+    chapter: ElevenLabs.ChapterWithContentResponseModel;
 }

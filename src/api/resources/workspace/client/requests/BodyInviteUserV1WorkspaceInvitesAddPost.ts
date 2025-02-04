@@ -11,4 +11,6 @@
 export interface BodyInviteUserV1WorkspaceInvitesAddPost {
     /** The email of the customer */
     email: string;
+    /** The group ids of the user */
+    group_ids?: string[];
 }

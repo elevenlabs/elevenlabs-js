@@ -9,13 +9,15 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace AudioNative {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -47,44 +49,44 @@ export class AudioNative {
      */
     public async create(
         request: ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost,
-        requestOptions?: AudioNative.RequestOptions
+        requestOptions?: AudioNative.RequestOptions,
     ): Promise<ElevenLabs.AudioNativeCreateProjectResponseModel> {
         const _request = await core.newFormData();
-        await _request.append("name", request.name);
+        _request.append("name", request.name);
         if (request.image != null) {
-            await _request.append("image", request.image);
+            _request.append("image", request.image);
         }
 
         if (request.author != null) {
-            await _request.append("author", request.author);
+            _request.append("author", request.author);
         }
 
         if (request.title != null) {
-            await _request.append("title", request.title);
+            _request.append("title", request.title);
         }
 
         if (request.small != null) {
-            await _request.append("small", request.small.toString());
+            _request.append("small", request.small.toString());
         }
 
         if (request.text_color != null) {
-            await _request.append("text_color", request.text_color);
+            _request.append("text_color", request.text_color);
         }
 
         if (request.background_color != null) {
-            await _request.append("background_color", request.background_color);
+            _request.append("background_color", request.background_color);
         }
 
         if (request.sessionization != null) {
-            await _request.append("sessionization", request.sessionization.toString());
+            _request.append("sessionization", request.sessionization.toString());
         }
 
         if (request.voice_id != null) {
-            await _request.append("voice_id", request.voice_id);
+            _request.append("voice_id", request.voice_id);
         }
 
         if (request.model_id != null) {
-            await _request.append("model_id", request.model_id);
+            _request.append("model_id", request.model_id);
         }
 
         if (request.file != null) {
@@ -92,14 +94,16 @@ export class AudioNative {
         }
 
         if (request.auto_convert != null) {
-            await _request.append("auto_convert", request.auto_convert.toString());
+            _request.append("auto_convert", request.auto_convert.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/audio-native"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/audio-native",
             ),
             method: "POST",
             headers: {
@@ -109,8 +113,8 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -131,7 +135,7 @@ export class AudioNative {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -171,26 +175,28 @@ export class AudioNative {
     public async updateContent(
         projectId: string,
         request: ElevenLabs.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost,
-        requestOptions?: AudioNative.RequestOptions
-    ): Promise<unknown> {
+        requestOptions?: AudioNative.RequestOptions,
+    ): Promise<ElevenLabs.AudioNativeEditContentResponseModel> {
         const _request = await core.newFormData();
         if (request.file != null) {
             await _request.appendFile("file", request.file);
         }
 
         if (request.auto_convert != null) {
-            await _request.append("auto_convert", request.auto_convert.toString());
+            _request.append("auto_convert", request.auto_convert.toString());
         }
 
         if (request.auto_publish != null) {
-            await _request.append("auto_publish", request.auto_publish.toString());
+            _request.append("auto_publish", request.auto_publish.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/audio-native/${encodeURIComponent(projectId)}/content`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/audio-native/${encodeURIComponent(projectId)}/content`,
             ),
             method: "POST",
             headers: {
@@ -200,8 +206,8 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -215,14 +221,14 @@ export class AudioNative {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.AudioNativeEditContentResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -240,7 +246,7 @@ export class AudioNative {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/audio-native/{project_id}/content."
+                    "Timeout exceeded when calling POST /v1/audio-native/{project_id}/content.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

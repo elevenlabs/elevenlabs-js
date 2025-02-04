@@ -13,6 +13,7 @@ export type Llm =
     | "gpt-3.5-turbo"
     | "gemini-1.5-pro"
     | "gemini-1.5-flash"
+    | "gemini-2.0-flash-exp"
     | "gemini-1.0-pro"
     | "claude-3-5-sonnet"
     | "claude-3-haiku"
@@ -26,6 +27,7 @@ export const Llm = {
     Gpt35Turbo: "gpt-3.5-turbo",
     Gemini15Pro: "gemini-1.5-pro",
     Gemini15Flash: "gemini-1.5-flash",
+    Gemini20FlashExp: "gemini-2.0-flash-exp",
     Gemini10Pro: "gemini-1.0-pro",
     Claude35Sonnet: "claude-3-5-sonnet",
     Claude3Haiku: "claude-3-haiku",

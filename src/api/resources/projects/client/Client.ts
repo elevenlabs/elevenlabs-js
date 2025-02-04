@@ -10,13 +10,15 @@ import * as errors from "../../../../errors/index";
 import * as stream from "stream";
 
 export declare namespace Projects {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -37,6 +39,96 @@ export class Projects {
     constructor(protected readonly _options: Projects.Options = {}) {}
 
     /**
+     * Create and auto-convert a podcast project. Currently, the LLM cost is covered by us. In the future, this cost will be passed onto you.
+     *
+     * @param {ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePost} request
+     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.projects.createPodcast({
+     *         model_id: "model_id",
+     *         mode: {
+     *             type: "bulletin",
+     *             bulletin: {
+     *                 host_voice_id: "host_voice_id"
+     *             }
+     *         },
+     *         source: {
+     *             type: "url",
+     *             url: "source"
+     *         }
+     *     })
+     */
+    public async createPodcast(
+        request: ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePost,
+        requestOptions?: Projects.RequestOptions,
+    ): Promise<ElevenLabs.PodcastProjectResponseModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/projects/podcast/create",
+            ),
+            method: "POST",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.PodcastProjectResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/projects/podcast/create.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
      * Returns a list of your projects together and its metadata.
      *
      * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
@@ -49,8 +141,10 @@ export class Projects {
     public async getAll(requestOptions?: Projects.RequestOptions): Promise<ElevenLabs.GetProjectsResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/projects"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/projects",
             ),
             method: "GET",
             headers: {
@@ -60,8 +154,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -80,7 +174,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -123,15 +217,15 @@ export class Projects {
      */
     public async add(
         request: ElevenLabs.BodyAddProjectV1ProjectsAddPost,
-        requestOptions?: Projects.RequestOptions
+        requestOptions?: Projects.RequestOptions,
     ): Promise<ElevenLabs.AddProjectResponseModel> {
         const _request = await core.newFormData();
-        await _request.append("name", request.name);
-        await _request.append("default_title_voice_id", request.default_title_voice_id);
-        await _request.append("default_paragraph_voice_id", request.default_paragraph_voice_id);
-        await _request.append("default_model_id", request.default_model_id);
+        _request.append("name", request.name);
+        _request.append("default_title_voice_id", request.default_title_voice_id);
+        _request.append("default_paragraph_voice_id", request.default_paragraph_voice_id);
+        _request.append("default_model_id", request.default_model_id);
         if (request.from_url != null) {
-            await _request.append("from_url", request.from_url);
+            _request.append("from_url", request.from_url);
         }
 
         if (request.from_document != null) {
@@ -139,90 +233,92 @@ export class Projects {
         }
 
         if (request.quality_preset != null) {
-            await _request.append("quality_preset", request.quality_preset);
+            _request.append("quality_preset", request.quality_preset);
         }
 
         if (request.title != null) {
-            await _request.append("title", request.title);
+            _request.append("title", request.title);
         }
 
         if (request.author != null) {
-            await _request.append("author", request.author);
+            _request.append("author", request.author);
         }
 
         if (request.description != null) {
-            await _request.append("description", request.description);
+            _request.append("description", request.description);
         }
 
         if (request.genres != null) {
             for (const _item of request.genres) {
-                await _request.append("genres", _item);
+                _request.append("genres", _item);
             }
         }
 
         if (request.target_audience != null) {
-            await _request.append("target_audience", request.target_audience);
+            _request.append("target_audience", request.target_audience);
         }
 
         if (request.language != null) {
-            await _request.append("language", request.language);
+            _request.append("language", request.language);
         }
 
         if (request.content_type != null) {
-            await _request.append("content_type", request.content_type);
+            _request.append("content_type", request.content_type);
         }
 
         if (request.original_publication_date != null) {
-            await _request.append("original_publication_date", request.original_publication_date);
+            _request.append("original_publication_date", request.original_publication_date);
         }
 
         if (request.mature_content != null) {
-            await _request.append("mature_content", request.mature_content.toString());
+            _request.append("mature_content", request.mature_content.toString());
         }
 
         if (request.isbn_number != null) {
-            await _request.append("isbn_number", request.isbn_number);
+            _request.append("isbn_number", request.isbn_number);
         }
 
         if (request.acx_volume_normalization != null) {
-            await _request.append("acx_volume_normalization", request.acx_volume_normalization.toString());
+            _request.append("acx_volume_normalization", request.acx_volume_normalization.toString());
         }
 
         if (request.volume_normalization != null) {
-            await _request.append("volume_normalization", request.volume_normalization.toString());
+            _request.append("volume_normalization", request.volume_normalization.toString());
         }
 
         if (request.pronunciation_dictionary_locators != null) {
             for (const _item of request.pronunciation_dictionary_locators) {
-                await _request.append("pronunciation_dictionary_locators", _item);
+                _request.append("pronunciation_dictionary_locators", _item);
             }
         }
 
         if (request.fiction != null) {
-            await _request.append("fiction", request.fiction);
+            _request.append("fiction", request.fiction);
         }
 
         if (request.quality_check_on != null) {
-            await _request.append("quality_check_on", request.quality_check_on.toString());
+            _request.append("quality_check_on", request.quality_check_on.toString());
         }
 
         if (request.apply_text_normalization != null) {
-            await _request.append("apply_text_normalization", request.apply_text_normalization);
+            _request.append("apply_text_normalization", request.apply_text_normalization);
         }
 
         if (request.auto_convert != null) {
-            await _request.append("auto_convert", request.auto_convert.toString());
+            _request.append("auto_convert", request.auto_convert.toString());
         }
 
         if (request.auto_assign_voices != null) {
-            await _request.append("auto_assign_voices", request.auto_assign_voices.toString());
+            _request.append("auto_assign_voices", request.auto_assign_voices.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/projects/add"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/projects/add",
             ),
             method: "POST",
             headers: {
@@ -232,8 +328,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -254,7 +350,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -292,12 +388,14 @@ export class Projects {
      */
     public async get(
         projectId: string,
-        requestOptions?: Projects.RequestOptions
+        requestOptions?: Projects.RequestOptions,
     ): Promise<ElevenLabs.ProjectExtendedResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}`,
             ),
             method: "GET",
             headers: {
@@ -307,8 +405,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -327,7 +425,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -371,12 +469,14 @@ export class Projects {
     public async editBasicProjectInfo(
         projectId: string,
         request: ElevenLabs.BodyEditBasicProjectInfoV1ProjectsProjectIdPost,
-        requestOptions?: Projects.RequestOptions
+        requestOptions?: Projects.RequestOptions,
     ): Promise<ElevenLabs.EditProjectResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}`,
             ),
             method: "POST",
             headers: {
@@ -386,8 +486,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -407,7 +507,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -425,7 +525,7 @@ export class Projects {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/projects/{project_id}."
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -448,8 +548,10 @@ export class Projects {
     public async delete(projectId: string, requestOptions?: Projects.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}`,
             ),
             method: "DELETE",
             headers: {
@@ -459,8 +561,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -479,7 +581,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -497,7 +599,7 @@ export class Projects {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling DELETE /v1/projects/{project_id}."
+                    "Timeout exceeded when calling DELETE /v1/projects/{project_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -521,11 +623,11 @@ export class Projects {
     public async updateContent(
         projectId: string,
         request: ElevenLabs.BodyEditProjectContentV1ProjectsProjectIdContentPost,
-        requestOptions?: Projects.RequestOptions
+        requestOptions?: Projects.RequestOptions,
     ): Promise<ElevenLabs.EditProjectResponseModel> {
         const _request = await core.newFormData();
         if (request.from_url != null) {
-            await _request.append("from_url", request.from_url);
+            _request.append("from_url", request.from_url);
         }
 
         if (request.from_document != null) {
@@ -533,14 +635,16 @@ export class Projects {
         }
 
         if (request.auto_convert != null) {
-            await _request.append("auto_convert", request.auto_convert.toString());
+            _request.append("auto_convert", request.auto_convert.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/content`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/content`,
             ),
             method: "POST",
             headers: {
@@ -550,8 +654,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -572,7 +676,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -590,7 +694,7 @@ export class Projects {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/projects/{project_id}/content."
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/content.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -613,8 +717,10 @@ export class Projects {
     public async convert(projectId: string, requestOptions?: Projects.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/convert`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/convert`,
             ),
             method: "POST",
             headers: {
@@ -624,8 +730,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -644,7 +750,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -662,7 +768,7 @@ export class Projects {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/projects/{project_id}/convert."
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/convert.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -684,12 +790,14 @@ export class Projects {
      */
     public async getSnapshots(
         projectId: string,
-        requestOptions?: Projects.RequestOptions
+        requestOptions?: Projects.RequestOptions,
     ): Promise<ElevenLabs.ProjectSnapshotsResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/snapshots`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/snapshots`,
             ),
             method: "GET",
             headers: {
@@ -699,8 +807,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -719,7 +827,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -737,7 +845,7 @@ export class Projects {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/projects/{project_id}/snapshots."
+                    "Timeout exceeded when calling GET /v1/projects/{project_id}/snapshots.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -754,12 +862,14 @@ export class Projects {
         projectId: string,
         projectSnapshotId: string,
         request: ElevenLabs.BodyStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost = {},
-        requestOptions?: Projects.RequestOptions
+        requestOptions?: Projects.RequestOptions,
     ): Promise<stream.Readable> {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(projectSnapshotId)}/stream`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(projectSnapshotId)}/stream`,
             ),
             method: "POST",
             headers: {
@@ -769,8 +879,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -791,7 +901,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -809,7 +919,7 @@ export class Projects {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/projects/{project_id}/snapshots/{project_snapshot_id}/stream."
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/snapshots/{project_snapshot_id}/stream.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -833,14 +943,14 @@ export class Projects {
     public async streamArchive(
         projectId: string,
         projectSnapshotId: string,
-        requestOptions?: Projects.RequestOptions
+        requestOptions?: Projects.RequestOptions,
     ): Promise<void> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(
-                    projectSnapshotId
-                )}/archive`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(projectSnapshotId)}/archive`,
             ),
             method: "POST",
             headers: {
@@ -850,8 +960,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -870,7 +980,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -888,7 +998,7 @@ export class Projects {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/projects/{project_id}/snapshots/{project_snapshot_id}/archive."
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/snapshots/{project_snapshot_id}/archive.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -917,12 +1027,14 @@ export class Projects {
     public async updatePronunciationDictionaries(
         projectId: string,
         request: ElevenLabs.UpdatePronunciationDictionariesRequest,
-        requestOptions?: Projects.RequestOptions
+        requestOptions?: Projects.RequestOptions,
     ): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/projects/${encodeURIComponent(projectId)}/update-pronunciation-dictionaries`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/projects/${encodeURIComponent(projectId)}/update-pronunciation-dictionaries`,
             ),
             method: "POST",
             headers: {
@@ -932,8 +1044,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "v1.50.5",
+                "User-Agent": "elevenlabs/v1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -953,7 +1065,7 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -971,7 +1083,7 @@ export class Projects {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/projects/{project_id}/update-pronunciation-dictionaries."
+                    "Timeout exceeded when calling POST /v1/projects/{project_id}/update-pronunciation-dictionaries.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
