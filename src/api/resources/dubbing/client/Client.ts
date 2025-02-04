@@ -10,13 +10,15 @@ import * as errors from "../../../../errors/index";
 import * as stream from "stream";
 
 export declare namespace Dubbing {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -48,7 +50,7 @@ export class Dubbing {
      */
     public async dubAVideoOrAnAudioFile(
         request: ElevenLabs.BodyDubAVideoOrAnAudioFileV1DubbingPost,
-        requestOptions?: Dubbing.RequestOptions
+        requestOptions?: Dubbing.RequestOptions,
     ): Promise<ElevenLabs.DoDubbingResponse> {
         const _request = await core.newFormData();
         if (request.file != null) {
@@ -56,51 +58,53 @@ export class Dubbing {
         }
 
         if (request.name != null) {
-            await _request.append("name", request.name);
+            _request.append("name", request.name);
         }
 
         if (request.source_url != null) {
-            await _request.append("source_url", request.source_url);
+            _request.append("source_url", request.source_url);
         }
 
         if (request.source_lang != null) {
-            await _request.append("source_lang", request.source_lang);
+            _request.append("source_lang", request.source_lang);
         }
 
-        await _request.append("target_lang", request.target_lang);
+        _request.append("target_lang", request.target_lang);
         if (request.num_speakers != null) {
-            await _request.append("num_speakers", request.num_speakers.toString());
+            _request.append("num_speakers", request.num_speakers.toString());
         }
 
         if (request.watermark != null) {
-            await _request.append("watermark", request.watermark.toString());
+            _request.append("watermark", request.watermark.toString());
         }
 
         if (request.start_time != null) {
-            await _request.append("start_time", request.start_time.toString());
+            _request.append("start_time", request.start_time.toString());
         }
 
         if (request.end_time != null) {
-            await _request.append("end_time", request.end_time.toString());
+            _request.append("end_time", request.end_time.toString());
         }
 
         if (request.highest_resolution != null) {
-            await _request.append("highest_resolution", request.highest_resolution.toString());
+            _request.append("highest_resolution", request.highest_resolution.toString());
         }
 
         if (request.drop_background_audio != null) {
-            await _request.append("drop_background_audio", request.drop_background_audio.toString());
+            _request.append("drop_background_audio", request.drop_background_audio.toString());
         }
 
         if (request.use_profanity_filter != null) {
-            await _request.append("use_profanity_filter", request.use_profanity_filter.toString());
+            _request.append("use_profanity_filter", request.use_profanity_filter.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/dubbing"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/dubbing",
             ),
             method: "POST",
             headers: {
@@ -110,8 +114,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -132,7 +136,7 @@ export class Dubbing {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -170,12 +174,14 @@ export class Dubbing {
      */
     public async getDubbingProjectMetadata(
         dubbingId: string,
-        requestOptions?: Dubbing.RequestOptions
+        requestOptions?: Dubbing.RequestOptions,
     ): Promise<ElevenLabs.DubbingMetadataResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/dubbing/${encodeURIComponent(dubbingId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/dubbing/${encodeURIComponent(dubbingId)}`,
             ),
             method: "GET",
             headers: {
@@ -185,8 +191,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -205,7 +211,7 @@ export class Dubbing {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -244,8 +250,10 @@ export class Dubbing {
     public async deleteDubbingProject(dubbingId: string, requestOptions?: Dubbing.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/dubbing/${encodeURIComponent(dubbingId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/dubbing/${encodeURIComponent(dubbingId)}`,
             ),
             method: "DELETE",
             headers: {
@@ -255,8 +263,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -275,7 +283,7 @@ export class Dubbing {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -293,7 +301,7 @@ export class Dubbing {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling DELETE /v1/dubbing/{dubbing_id}."
+                    "Timeout exceeded when calling DELETE /v1/dubbing/{dubbing_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -309,12 +317,14 @@ export class Dubbing {
     public async getDubbedFile(
         dubbingId: string,
         languageCode: string,
-        requestOptions?: Dubbing.RequestOptions
+        requestOptions?: Dubbing.RequestOptions,
     ): Promise<stream.Readable> {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/dubbing/${encodeURIComponent(dubbingId)}/audio/${encodeURIComponent(languageCode)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/dubbing/${encodeURIComponent(dubbingId)}/audio/${encodeURIComponent(languageCode)}`,
             ),
             method: "GET",
             headers: {
@@ -324,8 +334,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -345,7 +355,7 @@ export class Dubbing {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -363,7 +373,7 @@ export class Dubbing {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/dubbing/{dubbing_id}/audio/{language_code}."
+                    "Timeout exceeded when calling GET /v1/dubbing/{dubbing_id}/audio/{language_code}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -389,18 +399,20 @@ export class Dubbing {
         dubbingId: string,
         languageCode: string,
         request: ElevenLabs.DubbingGetTranscriptForDubRequest = {},
-        requestOptions?: Dubbing.RequestOptions
+        requestOptions?: Dubbing.RequestOptions,
     ): Promise<unknown> {
         const { format_type: formatType } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (formatType != null) {
             _queryParams["format_type"] = formatType;
         }
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/dubbing/${encodeURIComponent(dubbingId)}/transcript/${encodeURIComponent(languageCode)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/dubbing/${encodeURIComponent(dubbingId)}/transcript/${encodeURIComponent(languageCode)}`,
             ),
             method: "GET",
             headers: {
@@ -410,8 +422,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -431,7 +443,7 @@ export class Dubbing {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -449,7 +461,7 @@ export class Dubbing {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/dubbing/{dubbing_id}/transcript/{language_code}."
+                    "Timeout exceeded when calling GET /v1/dubbing/{dubbing_id}/transcript/{language_code}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

@@ -4,4 +4,8 @@
 
 export interface PrivacyConfig {
     record_voice?: boolean;
+    retention_days?: number;
+    delete_transcript_and_pii?: boolean;
+    delete_audio?: boolean;
+    apply_to_existing_conversations?: boolean;
 }

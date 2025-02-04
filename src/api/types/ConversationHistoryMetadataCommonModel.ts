@@ -8,6 +8,7 @@ export interface ConversationHistoryMetadataCommonModel {
     start_time_unix_secs: number;
     call_duration_secs: number;
     cost?: number;
+    deletion_settings?: ElevenLabs.ConversationDeletionSettings;
     feedback?: ElevenLabs.ConversationHistoryFeedbackCommonModel;
     authorization_method?: ElevenLabs.AuthorizationMethod;
     charging?: ElevenLabs.ConversationChargingCommonModel;
