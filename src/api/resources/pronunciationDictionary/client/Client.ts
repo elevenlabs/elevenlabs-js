@@ -9,13 +9,15 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace PronunciationDictionary {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -47,27 +49,29 @@ export class PronunciationDictionary {
      */
     public async addFromFile(
         request: ElevenLabs.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost,
-        requestOptions?: PronunciationDictionary.RequestOptions
+        requestOptions?: PronunciationDictionary.RequestOptions,
     ): Promise<ElevenLabs.AddPronunciationDictionaryResponseModel> {
         const _request = await core.newFormData();
-        await _request.append("name", request.name);
+        _request.append("name", request.name);
         if (request.file != null) {
             await _request.appendFile("file", request.file);
         }
 
         if (request.description != null) {
-            await _request.append("description", request.description);
+            _request.append("description", request.description);
         }
 
         if (request.workspace_access != null) {
-            await _request.append("workspace_access", request.workspace_access);
+            _request.append("workspace_access", request.workspace_access);
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/pronunciation-dictionaries/add-from-file"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/pronunciation-dictionaries/add-from-file",
             ),
             method: "POST",
             headers: {
@@ -77,8 +81,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -99,7 +103,7 @@ export class PronunciationDictionary {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -117,7 +121,7 @@ export class PronunciationDictionary {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/pronunciation-dictionaries/add-from-file."
+                    "Timeout exceeded when calling POST /v1/pronunciation-dictionaries/add-from-file.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -148,12 +152,14 @@ export class PronunciationDictionary {
     public async addRules(
         pronunciationDictionaryId: string,
         request: ElevenLabs.PronunciationDictionary,
-        requestOptions?: PronunciationDictionary.RequestOptions
+        requestOptions?: PronunciationDictionary.RequestOptions,
     ): Promise<ElevenLabs.AddPronunciationDictionaryRulesResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}/add-rules`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}/add-rules`,
             ),
             method: "POST",
             headers: {
@@ -163,8 +169,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -184,7 +190,7 @@ export class PronunciationDictionary {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -202,7 +208,7 @@ export class PronunciationDictionary {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/pronunciation-dictionaries/{pronunciation_dictionary_id}/add-rules."
+                    "Timeout exceeded when calling POST /v1/pronunciation-dictionaries/{pronunciation_dictionary_id}/add-rules.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -228,12 +234,14 @@ export class PronunciationDictionary {
     public async removeRules(
         pronunciationDictionaryId: string,
         request: ElevenLabs.BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost,
-        requestOptions?: PronunciationDictionary.RequestOptions
+        requestOptions?: PronunciationDictionary.RequestOptions,
     ): Promise<ElevenLabs.RemovePronunciationDictionaryRulesResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}/remove-rules`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}/remove-rules`,
             ),
             method: "POST",
             headers: {
@@ -243,8 +251,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -264,7 +272,7 @@ export class PronunciationDictionary {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -282,7 +290,7 @@ export class PronunciationDictionary {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/pronunciation-dictionaries/{pronunciation_dictionary_id}/remove-rules."
+                    "Timeout exceeded when calling POST /v1/pronunciation-dictionaries/{pronunciation_dictionary_id}/remove-rules.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -306,14 +314,14 @@ export class PronunciationDictionary {
     public async download(
         dictionaryId: string,
         versionId: string,
-        requestOptions?: PronunciationDictionary.RequestOptions
+        requestOptions?: PronunciationDictionary.RequestOptions,
     ): Promise<string> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/pronunciation-dictionaries/${encodeURIComponent(dictionaryId)}/${encodeURIComponent(
-                    versionId
-                )}/download`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/pronunciation-dictionaries/${encodeURIComponent(dictionaryId)}/${encodeURIComponent(versionId)}/download`,
             ),
             method: "GET",
             headers: {
@@ -323,8 +331,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -344,7 +352,7 @@ export class PronunciationDictionary {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -362,7 +370,7 @@ export class PronunciationDictionary {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/{dictionary_id}/{version_id}/download."
+                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/{dictionary_id}/{version_id}/download.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -384,12 +392,14 @@ export class PronunciationDictionary {
      */
     public async get(
         pronunciationDictionaryId: string,
-        requestOptions?: PronunciationDictionary.RequestOptions
+        requestOptions?: PronunciationDictionary.RequestOptions,
     ): Promise<ElevenLabs.GetPronunciationDictionaryMetadataResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}/`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}/`,
             ),
             method: "GET",
             headers: {
@@ -399,8 +409,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -419,7 +429,7 @@ export class PronunciationDictionary {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -437,7 +447,7 @@ export class PronunciationDictionary {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/{pronunciation_dictionary_id}/."
+                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/{pronunciation_dictionary_id}/.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -461,10 +471,10 @@ export class PronunciationDictionary {
      */
     public async getAll(
         request: ElevenLabs.PronunciationDictionaryGetAllRequest = {},
-        requestOptions?: PronunciationDictionary.RequestOptions
+        requestOptions?: PronunciationDictionary.RequestOptions,
     ): Promise<ElevenLabs.GetPronunciationDictionariesMetadataResponseModel> {
         const { cursor, page_size: pageSize } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
             _queryParams["cursor"] = cursor;
         }
@@ -475,8 +485,10 @@ export class PronunciationDictionary {
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/pronunciation-dictionaries/"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/pronunciation-dictionaries/",
             ),
             method: "GET",
             headers: {
@@ -486,8 +498,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -507,7 +519,7 @@ export class PronunciationDictionary {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -525,7 +537,7 @@ export class PronunciationDictionary {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/."
+                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

@@ -22,16 +22,19 @@ import { AudioNative } from "./api/resources/audioNative/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionary } from "./api/resources/pronunciationDictionary/client/Client";
 import { Workspace } from "./api/resources/workspace/client/Client";
+import { SpeechToText } from "./api/resources/speechToText/client/Client";
 import { ConversationalAi } from "./api/resources/conversationalAi/client/Client";
 
 export declare namespace ElevenLabsClient {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -64,6 +67,7 @@ export class ElevenLabsClient {
     protected _usage: Usage | undefined;
     protected _pronunciationDictionary: PronunciationDictionary | undefined;
     protected _workspace: Workspace | undefined;
+    protected _speechToText: SpeechToText | undefined;
     protected _conversationalAi: ConversationalAi | undefined;
 
     constructor(protected readonly _options: ElevenLabsClient.Options = {}) {}
@@ -138,6 +142,10 @@ export class ElevenLabsClient {
 
     public get workspace(): Workspace {
         return (this._workspace ??= new Workspace(this._options));
+    }
+
+    public get speechToText(): SpeechToText {
+        return (this._speechToText ??= new SpeechToText(this._options));
     }
 
     public get conversationalAi(): ConversationalAi {

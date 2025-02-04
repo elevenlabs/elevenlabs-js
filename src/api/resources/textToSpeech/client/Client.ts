@@ -10,13 +10,15 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace TextToSpeech {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -40,7 +42,7 @@ export class TextToSpeech {
     public async convert(
         voiceId: string,
         request: ElevenLabs.TextToSpeechRequest,
-        requestOptions?: TextToSpeech.RequestOptions
+        requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<stream.Readable> {
         const {
             enable_logging: enableLogging,
@@ -48,7 +50,7 @@ export class TextToSpeech {
             output_format: outputFormat,
             ..._body
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (enableLogging != null) {
             _queryParams["enable_logging"] = enableLogging.toString();
         }
@@ -63,8 +65,10 @@ export class TextToSpeech {
 
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/text-to-speech/${encodeURIComponent(voiceId)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/text-to-speech/${encodeURIComponent(voiceId)}`,
             ),
             method: "POST",
             headers: {
@@ -74,8 +78,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -97,7 +101,7 @@ export class TextToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -115,7 +119,7 @@ export class TextToSpeech {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/text-to-speech/{voice_id}."
+                    "Timeout exceeded when calling POST /v1/text-to-speech/{voice_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -143,7 +147,7 @@ export class TextToSpeech {
     public async convertWithTimestamps(
         voiceId: string,
         request: ElevenLabs.TextToSpeechWithTimestampsRequest,
-        requestOptions?: TextToSpeech.RequestOptions
+        requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<unknown> {
         const {
             enable_logging: enableLogging,
@@ -151,7 +155,7 @@ export class TextToSpeech {
             output_format: outputFormat,
             ..._body
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (enableLogging != null) {
             _queryParams["enable_logging"] = enableLogging.toString();
         }
@@ -166,8 +170,10 @@ export class TextToSpeech {
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/text-to-speech/${encodeURIComponent(voiceId)}/with-timestamps`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/text-to-speech/${encodeURIComponent(voiceId)}/with-timestamps`,
             ),
             method: "POST",
             headers: {
@@ -177,8 +183,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -199,7 +205,7 @@ export class TextToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -217,7 +223,7 @@ export class TextToSpeech {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/text-to-speech/{voice_id}/with-timestamps."
+                    "Timeout exceeded when calling POST /v1/text-to-speech/{voice_id}/with-timestamps.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -233,7 +239,7 @@ export class TextToSpeech {
     public async convertAsStream(
         voiceId: string,
         request: ElevenLabs.StreamTextToSpeechRequest,
-        requestOptions?: TextToSpeech.RequestOptions
+        requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<stream.Readable> {
         const {
             enable_logging: enableLogging,
@@ -241,7 +247,7 @@ export class TextToSpeech {
             output_format: outputFormat,
             ..._body
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (enableLogging != null) {
             _queryParams["enable_logging"] = enableLogging.toString();
         }
@@ -256,8 +262,10 @@ export class TextToSpeech {
 
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/text-to-speech/${encodeURIComponent(voiceId)}/stream`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/text-to-speech/${encodeURIComponent(voiceId)}/stream`,
             ),
             method: "POST",
             headers: {
@@ -267,8 +275,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -290,7 +298,7 @@ export class TextToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -308,7 +316,7 @@ export class TextToSpeech {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/text-to-speech/{voice_id}/stream."
+                    "Timeout exceeded when calling POST /v1/text-to-speech/{voice_id}/stream.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -323,7 +331,7 @@ export class TextToSpeech {
     public async streamWithTimestamps(
         voiceId: string,
         request: ElevenLabs.StreamTextToSpeechWithTimstampsRequest,
-        requestOptions?: TextToSpeech.RequestOptions
+        requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<core.Stream<ElevenLabs.TextToSpeechStreamWithTimestampsResponse>> {
         const {
             enable_logging: enableLogging,
@@ -331,7 +339,7 @@ export class TextToSpeech {
             output_format: outputFormat,
             ..._body
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (enableLogging != null) {
             _queryParams["enable_logging"] = enableLogging.toString();
         }
@@ -346,8 +354,10 @@ export class TextToSpeech {
 
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                `v1/text-to-speech/${encodeURIComponent(voiceId)}/stream/with-timestamps`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/text-to-speech/${encodeURIComponent(voiceId)}/stream/with-timestamps`,
             ),
             method: "POST",
             headers: {
@@ -357,8 +367,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -388,7 +398,7 @@ export class TextToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -406,7 +416,7 @@ export class TextToSpeech {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/text-to-speech/{voice_id}/stream/with-timestamps."
+                    "Timeout exceeded when calling POST /v1/text-to-speech/{voice_id}/stream/with-timestamps.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

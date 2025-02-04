@@ -97,7 +97,7 @@ export type Node16FormDataFd =
                         filename?: string;
                         filepath?: string;
                         contentType?: string;
-                    }
+                    },
           ): void;
 
           getHeaders(): Record<string, string>;
@@ -164,6 +164,10 @@ export class WebFormData implements CrossPlatformFormData {
     public async appendFile(key: string, value: any, fileName?: string): Promise<void> {
         if (fileName == null && isNamedValue(value)) {
             fileName = value.name;
+        }
+        if (value instanceof Blob) {
+            this.fd?.append(key, value, fileName);
+            return;
         }
         this.fd?.append(key, new Blob([value]), fileName);
     }

@@ -9,13 +9,15 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace TextToVoice {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -48,18 +50,20 @@ export class TextToVoice {
      */
     public async createPreviews(
         request: ElevenLabs.VoicePreviewsRequestModel,
-        requestOptions?: TextToVoice.RequestOptions
+        requestOptions?: TextToVoice.RequestOptions,
     ): Promise<ElevenLabs.VoicePreviewsResponseModel> {
         const { output_format: outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
             _queryParams["output_format"] = outputFormat;
         }
 
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/text-to-voice/create-previews"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/text-to-voice/create-previews",
             ),
             method: "POST",
             headers: {
@@ -69,8 +73,8 @@ export class TextToVoice {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -91,7 +95,7 @@ export class TextToVoice {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -109,7 +113,7 @@ export class TextToVoice {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/text-to-voice/create-previews."
+                    "Timeout exceeded when calling POST /v1/text-to-voice/create-previews.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -135,12 +139,14 @@ export class TextToVoice {
      */
     public async createVoiceFromPreview(
         request: ElevenLabs.BodyCreateANewVoiceFromVoicePreviewV1TextToVoiceCreateVoiceFromPreviewPost,
-        requestOptions?: TextToVoice.RequestOptions
+        requestOptions?: TextToVoice.RequestOptions,
     ): Promise<ElevenLabs.Voice> {
         const _response = await core.fetcher({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/text-to-voice/create-voice-from-preview"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/text-to-voice/create-voice-from-preview",
             ),
             method: "POST",
             headers: {
@@ -150,8 +156,8 @@ export class TextToVoice {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -171,7 +177,7 @@ export class TextToVoice {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -189,7 +195,7 @@ export class TextToVoice {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/text-to-voice/create-voice-from-preview."
+                    "Timeout exceeded when calling POST /v1/text-to-voice/create-voice-from-preview.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

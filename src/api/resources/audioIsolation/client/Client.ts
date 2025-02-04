@@ -10,13 +10,15 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace AudioIsolation {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
@@ -39,15 +41,17 @@ export class AudioIsolation {
      */
     public async audioIsolation(
         request: ElevenLabs.BodyAudioIsolationV1AudioIsolationPost,
-        requestOptions?: AudioIsolation.RequestOptions
+        requestOptions?: AudioIsolation.RequestOptions,
     ): Promise<stream.Readable> {
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/audio-isolation"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/audio-isolation",
             ),
             method: "POST",
             headers: {
@@ -57,8 +61,8 @@ export class AudioIsolation {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -80,7 +84,7 @@ export class AudioIsolation {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -111,15 +115,17 @@ export class AudioIsolation {
      */
     public async audioIsolationStream(
         request: ElevenLabs.BodyAudioIsolationStreamV1AudioIsolationStreamPost,
-        requestOptions?: AudioIsolation.RequestOptions
+        requestOptions?: AudioIsolation.RequestOptions,
     ): Promise<stream.Readable> {
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ElevenLabsEnvironment.Production,
-                "v1/audio-isolation/stream"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/audio-isolation/stream",
             ),
             method: "POST",
             headers: {
@@ -129,8 +135,8 @@ export class AudioIsolation {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.4",
-                "User-Agent": "elevenlabs/1.50.4",
+                "X-Fern-SDK-Version": "1.50.5",
+                "User-Agent": "elevenlabs/1.50.5",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -152,7 +158,7 @@ export class AudioIsolation {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError
+                        _response.error.body as ElevenLabs.HttpValidationError,
                     );
                 default:
                     throw new errors.ElevenLabsError({
@@ -170,7 +176,7 @@ export class AudioIsolation {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/audio-isolation/stream."
+                    "Timeout exceeded when calling POST /v1/audio-isolation/stream.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
