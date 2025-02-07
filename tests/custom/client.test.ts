@@ -5,6 +5,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 const IN_GITHUB = process.env.GITHUB_ACTIONS !== undefined;
+const DEFAULT_EXT_AUDIO = "https://storage.googleapis.com/eleven-public-cdn/audio/marketing/nicole.mp3";
 const DEFAULT_VOICE = "21m00Tcm4TlvDq8ikWAM";
 const DEFAULT_TEXT = "Hello";
 const DEFAULT_MODEL = "eleven_multilingual_v2";
@@ -85,6 +86,44 @@ describe("ElevenLabs API Tests", () => {
             expect(audioData.length).toBeGreaterThan(0);
             await playIfNotGithub(audioData);
         });
+    });
+
+    describe("speechToText", () => {
+        it("convert", async () => {
+            const client = new ElevenLabsClient();
+
+            const audioFile = await fetch(DEFAULT_EXT_AUDIO);
+
+            const audioBlob = new Blob([await audioFile.arrayBuffer()], { type: "audio/mp3" });
+            const transcription = await client.speechToText.convert({
+                file: audioBlob,
+                model_id: "scribe_v1",
+            });
+            expect(typeof transcription.text).toBe("string");
+            expect(transcription.text.length).toBeGreaterThan(0);
+            expect(Array.isArray(transcription.words)).toBeTruthy();
+            expect(transcription.words.length).toBeGreaterThan(0);
+        });
+
+        // it("convertAsStream", async () => {
+        //     const client = new ElevenLabsClient();
+
+        //     const audioFile = await fetch(DEFAULT_EXT_AUDIO);
+
+        //     const audioBlob = new Blob([await audioFile.arrayBuffer()], { type: "audio/mp3" });
+        //     const stream = await client.speechToText.convertAsStream({
+        //         file: audioBlob,
+        //         model_id: "scribe_v1",
+        //     });
+
+        //     let transcriptionText = "";
+        //     for await (const chunk of stream) {
+        //         expect(typeof chunk.text).toBe("string");
+        //         transcriptionText += chunk.text;
+        //     }
+
+        //     expect(transcriptionText.length).toBeGreaterThan(0);
+        // });
     });
 
     describe("audioIsolation", () => {
