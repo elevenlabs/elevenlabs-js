@@ -9,9 +9,9 @@ import * as fs from "fs";
  *     {}
  */
 export interface BodyEditProjectContentV1ProjectsProjectIdContentPost {
-    /** An optional URL from which we will extract content to initialize the project. If this is set, 'from_url' must be null. If neither 'from_url' or 'from_document' are provided we will initialize the project as blank. */
+    /** An optional URL from which we will extract content to initialize the Studio project. If this is set, 'from_url' must be null. If neither 'from_url' or 'from_document' are provided we will initialize the Studio project as blank. */
     from_url?: string;
     from_document?: File | fs.ReadStream | Blob | undefined;
-    /** Whether to auto convert the project to audio or not. */
+    /** Whether to auto convert the Studio project to audio or not. */
     auto_convert?: boolean;
 }

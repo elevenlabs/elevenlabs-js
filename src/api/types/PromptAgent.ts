@@ -10,7 +10,8 @@ export interface PromptAgent {
     temperature?: number;
     max_tokens?: number;
     tools?: ElevenLabs.PromptAgentToolsItem[];
-    used_tools?: ElevenLabs.ToolConfigLocator[];
+    tool_ids?: string[];
     knowledge_base?: ElevenLabs.KnowledgeBaseLocator[];
+    knowledge_base_document_ids?: string[];
     custom_llm?: ElevenLabs.CustomLlm;
 }

@@ -11,6 +11,6 @@
 export interface BodyAddChapterToAProjectV1ProjectsProjectIdChaptersAddPost {
     /** The name of the chapter, used for identification only. */
     name: string;
-    /** An optional URL from which we will extract content to initialize the project. If this is set, 'from_url' must be null. If neither 'from_url' or 'from_document' are provided we will initialize the project as blank. */
+    /** An optional URL from which we will extract content to initialize the Studio project. If this is set, 'from_url' must be null. If neither 'from_url' or 'from_document' are provided we will initialize the Studio project as blank. */
     from_url?: string;
 }
