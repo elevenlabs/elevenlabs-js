@@ -7,14 +7,13 @@ import * as fs from "fs";
 /**
  * @example
  *     {
- *         file: fs.createReadStream("/path/to/your/file"),
  *         model_id: "model_id"
  *     }
  */
-export interface BodySpeechToTextV1SpeechToTextStreamPost {
-    file: File | fs.ReadStream | Blob;
+export interface BodySpeechToTextStreamV1SpeechToTextStreamPost {
     /** The ID of the model to use for transcription, currently only 'scribe_v1' is available. */
     model_id: string;
+    file?: File | fs.ReadStream | Blob | undefined;
     /** An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file. Can sometimes improve transcription performance if known beforehand. Defaults to null, in this case the language is predicted automatically. */
     language_code?: string;
     /** Whether to tag audio events like (laughter), (footsteps), etc. in the transcription. */

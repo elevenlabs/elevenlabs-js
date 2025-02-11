@@ -8,15 +8,6 @@ import * as ElevenLabs from "../../../index";
  * The source content for the Podcast.
  */
 export type BodyCreatePodcastV1ProjectsPodcastCreatePostSource =
-    | ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePostSource.Text
-    | ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePostSource.Url;
-
-export namespace BodyCreatePodcastV1ProjectsPodcastCreatePostSource {
-    export interface Text extends ElevenLabs.PodcastTextSource {
-        type: "text";
-    }
-
-    export interface Url extends ElevenLabs.PodcastUrlSource {
-        type: "url";
-    }
-}
+    | ElevenLabs.PodcastTextSource
+    | ElevenLabs.PodcastUrlSource
+    | ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePostSourceItem[];

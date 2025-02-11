@@ -9,4 +9,6 @@ export { type ConversationalAiGetConversationsRequest } from "./ConversationalAi
 export { type BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost } from "./BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost";
 export { type CreatePhoneNumberRequest } from "./CreatePhoneNumberRequest";
 export { type UpdatePhoneNumberRequest } from "./UpdatePhoneNumberRequest";
+export { type ConversationalAiGetKnowledgeBaseListRequest } from "./ConversationalAiGetKnowledgeBaseListRequest";
 export { type BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost } from "./BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost";
+export { type ConversationalAiGetDependentAgentsRequest } from "./ConversationalAiGetDependentAgentsRequest";
