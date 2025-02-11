@@ -7,4 +7,5 @@ import * as ElevenLabs from "../index";
 export interface ToolResponseModel {
     id: string;
     tool_config: ElevenLabs.ToolResponseModelToolConfig;
+    dependent_agents: ElevenLabs.ToolResponseModelDependentAgentsItem[];
 }

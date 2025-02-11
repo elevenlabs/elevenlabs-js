@@ -5,9 +5,9 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import * as fs from "fs";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
+import * as stream from "stream";
 
 export declare namespace SpeechToText {
     export interface Options {
@@ -45,7 +45,6 @@ export class SpeechToText {
      *
      * @example
      *     await client.speechToText.convert({
-     *         file: fs.createReadStream("/path/to/your/file"),
      *         model_id: "model_id"
      *     })
      */
@@ -54,8 +53,11 @@ export class SpeechToText {
         requestOptions?: SpeechToText.RequestOptions,
     ): Promise<ElevenLabs.SpeechToTextChunkResponseModel> {
         const _request = await core.newFormData();
-        await _request.appendFile("file", request.file);
         _request.append("model_id", request.model_id);
+        if (request.file != null) {
+            await _request.appendFile("file", request.file);
+        }
+
         if (request.language_code != null) {
             _request.append("language_code", request.language_code);
         }
@@ -84,8 +86,8 @@ export class SpeechToText {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.5",
-                "User-Agent": "elevenlabs/1.50.5",
+                "X-Fern-SDK-Version": "1.51.0",
+                "User-Agent": "elevenlabs/1.51.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -132,26 +134,18 @@ export class SpeechToText {
     }
 
     /**
-     * Transcribe an audio or video file with a streamed response.
-     *
-     * @param {ElevenLabs.BodySpeechToTextV1SpeechToTextStreamPost} request
-     * @param {SpeechToText.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.speechToText.convertAsStream({
-     *         file: fs.createReadStream("/path/to/your/file"),
-     *         model_id: "model_id"
-     *     })
+     * Transcribe an audio or video file with streaming response. Returns chunks of transcription as they become available, with each chunk separated by double newlines (\n\n).
      */
     public async convertAsStream(
-        request: ElevenLabs.BodySpeechToTextV1SpeechToTextStreamPost,
+        request: ElevenLabs.BodySpeechToTextStreamV1SpeechToTextStreamPost,
         requestOptions?: SpeechToText.RequestOptions,
-    ): Promise<void> {
+    ): Promise<core.Stream<ElevenLabs.SpeechToTextStreamResponseModel>> {
         const _request = await core.newFormData();
-        await _request.appendFile("file", request.file);
         _request.append("model_id", request.model_id);
+        if (request.file != null) {
+            await _request.appendFile("file", request.file);
+        }
+
         if (request.language_code != null) {
             _request.append("language_code", request.language_code);
         }
@@ -165,7 +159,7 @@ export class SpeechToText {
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
-        const _response = await core.fetcher({
+        const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
@@ -180,8 +174,8 @@ export class SpeechToText {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.50.5",
-                "User-Agent": "elevenlabs/1.50.5",
+                "X-Fern-SDK-Version": "1.51.0",
+                "User-Agent": "elevenlabs/1.51.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -190,16 +184,27 @@ export class SpeechToText {
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
+            responseType: "sse",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return new core.Stream({
+                stream: _response.body,
+                parse: (data) => data as any,
+                signal: requestOptions?.abortSignal,
+                eventShape: {
+                    type: "json",
+                    messageTerminator: "\n",
+                },
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 400:
+                    throw new ElevenLabs.BadRequestError(_response.error.body as unknown);
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,

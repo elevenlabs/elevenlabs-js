@@ -3,7 +3,7 @@
  */
 
 /**
- * An optional fiction of the project.
+ * An optional specification of whether the content of this Studio project is fiction.
  */
 export type ProjectsAddRequestFiction = "fiction" | "non-fiction";
 export const ProjectsAddRequestFiction = {

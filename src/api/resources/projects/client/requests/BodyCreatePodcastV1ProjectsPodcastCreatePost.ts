@@ -9,19 +9,19 @@ import * as ElevenLabs from "../../../../index";
  *     {
  *         model_id: "model_id",
  *         mode: {
- *             type: "bulletin",
- *             bulletin: {
- *                 host_voice_id: "host_voice_id"
+ *             type: "conversation",
+ *             conversation: {
+ *                 host_voice_id: "host_voice_id",
+ *                 guest_voice_id: "guest_voice_id"
  *             }
  *         },
  *         source: {
- *             type: "url",
- *             url: "source"
+ *             text: "text"
  *         }
  *     }
  */
 export interface BodyCreatePodcastV1ProjectsPodcastCreatePost {
-    /** The model_id of the model to be used for this project, you can query GET https://api.elevenlabs.io/v1/models to list all available models. */
+    /** The ID of the model to be used for this Studio project, you can query GET /v1/models to list all available models. */
     model_id: string;
     /** The type of podcast to generate */
     mode: ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePostMode;
@@ -44,10 +44,10 @@ export interface BodyCreatePodcastV1ProjectsPodcastCreatePost {
      *
      */
     duration_scale?: ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePostDurationScale;
-    /** An optional language of the project. Two-letter language code (ISO 639-1). */
+    /** An optional language of the Studio project. Two-letter language code (ISO 639-1). */
     language?: string;
-    /** A brief summary or highlights of the project's content, providing key points or themes. This should be between 10 and 70 characters. */
+    /** A brief summary or highlights of the Studio project's content, providing key points or themes. This should be between 10 and 70 characters. */
     highlights?: string[];
-    /** A url that will be called by our service when the project is converted with a json containing the status of the conversion */
+    /** A url that will be called by our service when the Studio project is converted. Request will contain a json blob containing the status of the conversion */
     callback_url?: string;
 }

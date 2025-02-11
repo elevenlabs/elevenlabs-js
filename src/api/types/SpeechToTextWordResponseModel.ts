@@ -17,5 +17,5 @@ export interface SpeechToTextWordResponseModel {
     /** The type of the word or sound. 'audio_event' is used for non-word sounds like laughter or footsteps. */
     type: ElevenLabs.SpeechToTextWordResponseModelType;
     /** Unique identifier for the speaker of this word. */
-    speaker_id: string;
+    speaker_id?: string;
 }
