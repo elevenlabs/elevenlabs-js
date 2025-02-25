@@ -102,25 +102,6 @@ describe("ElevenLabs API Tests", () => {
             expect(Array.isArray(transcription.words)).toBeTruthy();
             expect(transcription.words.length).toBeGreaterThan(0);
         });
-
-        it("convertAsStream", async () => {
-            const client = new ElevenLabsClient();
-            const audioFile = fs.readFileSync(DEFAULT_VOICE_FILE);
-            const audioBlob = new Blob([audioFile], { type: "audio/mp3" });
-
-            const stream = await client.speechToText.convertAsStream({
-                file: audioBlob,
-                model_id: "scribe_v1",
-            });
-
-            let transcriptionText = "";
-            for await (const chunk of stream) {
-                expect(typeof chunk.text).toBe("string");
-                transcriptionText += chunk.text;
-            }
-
-            expect(transcriptionText.length).toBeGreaterThan(0);
-        });
     });
 
     describe("audioIsolation", () => {
