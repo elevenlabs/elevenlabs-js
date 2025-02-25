@@ -57,7 +57,7 @@ export class Studio {
      *
      * @example
      *     await client.studio.createPodcast({
-     *         model_id: "model_id",
+     *         model_id: "21m00Tcm4TlvDq8ikWAM",
      *         mode: {
      *             type: "conversation",
      *             conversation: {
@@ -89,8 +89,8 @@ export class Studio {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

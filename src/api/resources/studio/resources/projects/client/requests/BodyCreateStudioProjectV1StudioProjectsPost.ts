@@ -65,8 +65,6 @@ export interface BodyCreateStudioProjectV1StudioProjectsPost {
     callback_url?: string;
     /** An optional specification of whether the content of this Studio project is fiction. */
     fiction?: ElevenLabs.studio.ProjectsAddRequestFiction;
-    /** [Depracated] Whether to run quality check on the generated audio and regenerate if needed. Applies to individual block conversion. */
-    quality_check_on?: boolean;
     /**
      *     This parameter controls text normalization with four modes: 'auto', 'on', 'apply_english' and 'off'.
      *     When set to 'auto', the system will automatically decide whether to apply text normalization

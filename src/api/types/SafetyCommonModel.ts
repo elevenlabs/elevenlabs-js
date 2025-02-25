@@ -7,7 +7,7 @@ import * as ElevenLabs from "../index";
 /**
  * Safety object that has the information of safety evaluations based on used voice.
  */
-export interface Safety {
+export interface SafetyCommonModel {
     ivc?: ElevenLabs.SafetyEvaluation;
     non_ivc?: ElevenLabs.SafetyEvaluation;
 }

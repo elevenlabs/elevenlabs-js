@@ -5,7 +5,7 @@
 /**
  * @example
  *     {
- *         name: "name"
+ *         name: "Chapter 1"
  *     }
  */
 export interface BodyCreateChapterV1StudioProjectsProjectIdChaptersPost {

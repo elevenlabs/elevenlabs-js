@@ -5,9 +5,9 @@
 /**
  * @example
  *     {
- *         name: "name",
- *         default_title_voice_id: "default_title_voice_id",
- *         default_paragraph_voice_id: "default_paragraph_voice_id"
+ *         name: "Project 1",
+ *         default_title_voice_id: "21m00Tcm4TlvDq8ikWAM",
+ *         default_paragraph_voice_id: "21m00Tcm4TlvDq8ikWAM"
  *     }
  */
 export interface BodyUpdateStudioProjectMetadataV1StudioProjectsProjectIdPost {
@@ -25,6 +25,4 @@ export interface BodyUpdateStudioProjectMetadataV1StudioProjectsProjectIdPost {
     isbn_number?: string;
     /** When the Studio project is downloaded, should the returned audio have postprocessing in order to make it compliant with audiobook normalized volume requirements */
     volume_normalization?: boolean;
-    /** [Depracated] Whether to run quality check on the generated audio and regenerate if needed. Applies to individual block conversion. */
-    quality_check_on?: boolean;
 }

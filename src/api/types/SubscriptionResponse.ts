@@ -5,22 +5,40 @@
 import * as ElevenLabs from "../index";
 
 export interface SubscriptionResponse {
+    /** The tier of the user's subscription. */
     tier: string;
+    /** The number of characters used by the user. */
     character_count: number;
+    /** The maximum number of characters allowed in the current billing period. */
     character_limit: number;
+    /** Whether the user can extend their character limit. */
     can_extend_character_limit: boolean;
+    /** Whether the user is allowed to extend their character limit. */
     allowed_to_extend_character_limit: boolean;
-    next_character_count_reset_unix: number;
+    /** The Unix timestamp of the next character count reset. */
+    next_character_count_reset_unix?: number;
+    /** The number of voice slots used by the user. */
     voice_slots_used: number;
+    /** The maximum number of voice slots allowed for the user. */
     voice_limit: number;
-    max_voice_add_edits: number;
+    /** The maximum number of voice add/edits allowed for the user. */
+    max_voice_add_edits?: number;
+    /** The number of voice add/edits used by the user. */
     voice_add_edit_counter: number;
+    /** The maximum number of professional voices allowed for the user. */
     professional_voice_limit: number;
+    /** Whether the user can extend their voice limit. */
     can_extend_voice_limit: boolean;
+    /** Whether the user can use instant voice cloning. */
     can_use_instant_voice_cloning: boolean;
+    /** Whether the user can use professional voice cloning. */
     can_use_professional_voice_cloning: boolean;
-    currency: ElevenLabs.SubscriptionResponseModelCurrency;
+    /** The currency of the user's subscription. */
+    currency?: ElevenLabs.SubscriptionResponseModelCurrency;
+    /** The status of the user's subscription. */
     status: ElevenLabs.SubscriptionStatus;
-    billing_period: ElevenLabs.SubscriptionResponseModelBillingPeriod;
-    character_refresh_period: ElevenLabs.SubscriptionResponseModelCharacterRefreshPeriod;
+    /** The billing period of the user's subscription. */
+    billing_period?: ElevenLabs.SubscriptionResponseModelBillingPeriod;
+    /** The character refresh period of the user's subscription. */
+    character_refresh_period?: ElevenLabs.SubscriptionResponseModelCharacterRefreshPeriod;
 }

@@ -17,6 +17,7 @@ export interface Voice {
     settings?: ElevenLabs.VoiceSettings;
     sharing?: ElevenLabs.VoiceSharingResponse;
     high_quality_base_model_ids?: string[];
+    verified_languages?: ElevenLabs.VerifiedVoiceLanguageResponseModel[];
     safety_control?: ElevenLabs.VoiceResponseModelSafetyControl;
     voice_verification?: ElevenLabs.VoiceVerificationResponse;
     permission_on_resource?: string;

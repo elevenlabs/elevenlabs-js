@@ -3,6 +3,8 @@
  */
 
 export interface Invoice {
+    /** The amount due in cents. */
     amount_due_cents: number;
+    /** The Unix timestamp of the next payment attempt. */
     next_payment_attempt_unix: number;
 }

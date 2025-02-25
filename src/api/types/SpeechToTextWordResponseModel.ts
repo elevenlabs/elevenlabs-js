@@ -18,4 +18,6 @@ export interface SpeechToTextWordResponseModel {
     type: ElevenLabs.SpeechToTextWordResponseModelType;
     /** Unique identifier for the speaker of this word. */
     speaker_id?: string;
+    /** The characters that make up the word and their timing information. */
+    characters?: ElevenLabs.SpeechToTextCharacterResponseModel[];
 }
