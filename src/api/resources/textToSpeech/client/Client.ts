@@ -78,8 +78,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -129,7 +129,7 @@ export class TextToSpeech {
     }
 
     /**
-     * Converts text into speech using a voice of your choice and returns JSON containing audio as a base64 encoded string together with information on when which character was spoken.
+     * Generate speech from text with precise character-level timing information for audio-text synchronization.
      *
      * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
      * @param {ElevenLabs.TextToSpeechWithTimestampsRequest} request
@@ -138,17 +138,15 @@ export class TextToSpeech {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.textToSpeech.convertWithTimestamps("JBFqnCBsd6RMkjVDRZzb", {
-     *         output_format: "mp3_44100_128",
-     *         text: "The first move is what sets everything in motion.",
-     *         model_id: "eleven_multilingual_v2"
+     *     await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
+     *         text: "This is a test for the API of ElevenLabs."
      *     })
      */
     public async convertWithTimestamps(
         voiceId: string,
         request: ElevenLabs.TextToSpeechWithTimestampsRequest,
         requestOptions?: TextToSpeech.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.AudioWithTimestampsResponseModel> {
         const {
             enable_logging: enableLogging,
             optimize_streaming_latency: optimizeStreamingLatency,
@@ -183,8 +181,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -198,7 +196,7 @@ export class TextToSpeech {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.AudioWithTimestampsResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -275,8 +273,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -332,7 +330,7 @@ export class TextToSpeech {
         voiceId: string,
         request: ElevenLabs.StreamTextToSpeechWithTimstampsRequest,
         requestOptions?: TextToSpeech.RequestOptions,
-    ): Promise<core.Stream<ElevenLabs.TextToSpeechStreamWithTimestampsResponse>> {
+    ): Promise<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponseModel>> {
         const {
             enable_logging: enableLogging,
             optimize_streaming_latency: optimizeStreamingLatency,
@@ -367,8 +365,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

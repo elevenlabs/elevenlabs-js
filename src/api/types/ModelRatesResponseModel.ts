@@ -3,5 +3,6 @@
  */
 
 export interface ModelRatesResponseModel {
+    /** The cost multiplier for characters. */
     character_cost_multiplier: number;
 }

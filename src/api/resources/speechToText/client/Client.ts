@@ -5,9 +5,9 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
+import * as fs from "fs";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
-import * as stream from "stream";
 
 export declare namespace SpeechToText {
     export interface Options {
@@ -45,6 +45,7 @@ export class SpeechToText {
      *
      * @example
      *     await client.speechToText.convert({
+     *         file: fs.createReadStream("/path/to/your/file"),
      *         model_id: "model_id"
      *     })
      */
@@ -54,10 +55,7 @@ export class SpeechToText {
     ): Promise<ElevenLabs.SpeechToTextChunkResponseModel> {
         const _request = await core.newFormData();
         _request.append("model_id", request.model_id);
-        if (request.file != null) {
-            await _request.appendFile("file", request.file);
-        }
-
+        await _request.appendFile("file", request.file);
         if (request.language_code != null) {
             _request.append("language_code", request.language_code);
         }
@@ -68,6 +66,14 @@ export class SpeechToText {
 
         if (request.num_speakers != null) {
             _request.append("num_speakers", request.num_speakers.toString());
+        }
+
+        if (request.timestamps_granularity != null) {
+            _request.append("timestamps_granularity", request.timestamps_granularity);
+        }
+
+        if (request.diarize != null) {
+            _request.append("diarize", request.diarize.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -86,8 +92,8 @@ export class SpeechToText {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -126,107 +132,6 @@ export class SpeechToText {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/speech-to-text.");
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Transcribe an audio or video file with streaming response. Returns chunks of transcription as they become available, with each chunk separated by double newlines (\n\n).
-     */
-    public async convertAsStream(
-        request: ElevenLabs.BodySpeechToTextStreamV1SpeechToTextStreamPost,
-        requestOptions?: SpeechToText.RequestOptions,
-    ): Promise<core.Stream<ElevenLabs.SpeechToTextStreamResponseModel>> {
-        const _request = await core.newFormData();
-        _request.append("model_id", request.model_id);
-        if (request.file != null) {
-            await _request.appendFile("file", request.file);
-        }
-
-        if (request.language_code != null) {
-            _request.append("language_code", request.language_code);
-        }
-
-        if (request.tag_audio_events != null) {
-            _request.append("tag_audio_events", request.tag_audio_events.toString());
-        }
-
-        if (request.num_speakers != null) {
-            _request.append("num_speakers", request.num_speakers.toString());
-        }
-
-        const _maybeEncodedRequest = await _request.getRequest();
-        const _response = await core.fetcher<stream.Readable>({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                "v1/speech-to-text/stream",
-            ),
-            method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ..._maybeEncodedRequest.headers,
-                ...requestOptions?.headers,
-            },
-            requestType: "file",
-            duplex: _maybeEncodedRequest.duplex,
-            body: _maybeEncodedRequest.body,
-            responseType: "sse",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return new core.Stream({
-                stream: _response.body,
-                parse: (data) => data as any,
-                signal: requestOptions?.abortSignal,
-                eventShape: {
-                    type: "json",
-                    messageTerminator: "\n",
-                },
-            });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new ElevenLabs.BadRequestError(_response.error.body as unknown);
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/speech-to-text/stream.",
-                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,

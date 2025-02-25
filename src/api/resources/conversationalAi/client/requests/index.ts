@@ -12,3 +12,5 @@ export { type UpdatePhoneNumberRequest } from "./UpdatePhoneNumberRequest";
 export { type ConversationalAiGetKnowledgeBaseListRequest } from "./ConversationalAiGetKnowledgeBaseListRequest";
 export { type BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost } from "./BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost";
 export { type ConversationalAiGetDependentAgentsRequest } from "./ConversationalAiGetDependentAgentsRequest";
+export { type PatchConvaiSettingsRequest } from "./PatchConvaiSettingsRequest";
+export { type PostWorkspaceSecretRequest } from "./PostWorkspaceSecretRequest";

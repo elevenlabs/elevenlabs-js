@@ -1,5 +1,60 @@
 # Reference
 
+<details><summary><code>client.<a href="/src/Client.ts">computeAQuoteForAAsrTranscriptionReviewTaskV1SpeechToTextReviewsGetQuotePost</a>({ ...params }) -> ElevenLabs.QuoteResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAQuoteForAAsrTranscriptionReviewTaskV1SpeechToTextReviewsGetQuotePost({
+    content_hash: "content_hash",
+    duration_s: 1.1,
+    speaker_count: 1,
+    language: "language",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.QuoteRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+##
+
 ## History
 
 <details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetSpeechHistoryResponse</code></summary>
@@ -390,7 +445,7 @@ await client.textToSoundEffects.convert({
 
 ## samples
 
-<details><summary><code>client.samples.<a href="/src/api/resources/samples/client/Client.ts">delete</a>(voiceId, sampleId) -> unknown</code></summary>
+<details><summary><code>client.samples.<a href="/src/api/resources/samples/client/Client.ts">delete</a>(voiceId, sampleId) -> ElevenLabs.DeleteSampleResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -609,7 +664,7 @@ await client.textToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
 </dl>
 </details>
 
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">convertWithTimestamps</a>(voiceId, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">convertWithTimestamps</a>(voiceId, { ...params }) -> ElevenLabs.AudioWithTimestampsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -621,7 +676,7 @@ await client.textToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
 <dl>
 <dd>
 
-Converts text into speech using a voice of your choice and returns JSON containing audio as a base64 encoded string together with information on when which character was spoken.
+Generate speech from text with precise character-level timing information for audio-text synchronization.
 
 </dd>
 </dl>
@@ -637,10 +692,8 @@ Converts text into speech using a voice of your choice and returns JSON containi
 <dd>
 
 ```typescript
-await client.textToSpeech.convertWithTimestamps("JBFqnCBsd6RMkjVDRZzb", {
-    output_format: "mp3_44100_128",
-    text: "The first move is what sets everything in motion.",
-    model_id: "eleven_multilingual_v2",
+await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
+    text: "This is a test for the API of ElevenLabs.",
 });
 ```
 
@@ -759,7 +812,7 @@ await client.textToSpeech.convertAsStream("JBFqnCBsd6RMkjVDRZzb", {
 </dl>
 </details>
 
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">streamWithTimestamps</a>(voiceId, { ...params }) -> core.Stream<ElevenLabs.TextToSpeechStreamWithTimestampsResponse></code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">streamWithTimestamps</a>(voiceId, { ...params }) -> core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponseModel></code></summary>
 <dl>
 <dd>
 
@@ -851,7 +904,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-Create speech by combining the content and emotion of the uploaded audio with a voice of your choice.
+Transform audio from one voice to another. Maintain full control over emotion, timing and delivery.
 
 </dd>
 </dl>
@@ -926,7 +979,7 @@ await client.speechToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
 <dl>
 <dd>
 
-Create speech by combining the content and emotion of the uploaded audio with a voice of your choice and returns an audio stream.
+Stream audio from one voice to another. Maintain full control over emotion, timing and delivery.
 
 </dd>
 </dl>
@@ -2269,7 +2322,7 @@ Create and auto-convert a podcast project. Currently, the LLM cost is covered by
 
 ```typescript
 await client.studio.createPodcast({
-    model_id: "model_id",
+    model_id: "21m00Tcm4TlvDq8ikWAM",
     mode: {
         type: "conversation",
         conversation: {
@@ -2346,7 +2399,7 @@ Create and auto-convert a podcast project. Currently, the LLM cost is covered by
 
 ```typescript
 await client.projects.createPodcast({
-    model_id: "model_id",
+    model_id: "21m00Tcm4TlvDq8ikWAM",
     mode: {
         type: "conversation",
         conversation: {
@@ -2607,9 +2660,9 @@ Edits basic project info.
 
 ```typescript
 await client.projects.editBasicProjectInfo("21m00Tcm4TlvDq8ikWAM", {
-    name: "name",
-    default_title_voice_id: "default_title_voice_id",
-    default_paragraph_voice_id: "default_paragraph_voice_id",
+    name: "Project 1",
+    default_title_voice_id: "21m00Tcm4TlvDq8ikWAM",
+    default_paragraph_voice_id: "21m00Tcm4TlvDq8ikWAM",
 });
 ```
 
@@ -3297,7 +3350,7 @@ Creates a new chapter either as blank or from a URL.
 
 ```typescript
 await client.projects.addChapterToAProject("21m00Tcm4TlvDq8ikWAM", {
-    name: "name",
+    name: "Chapter 1",
 });
 ```
 
@@ -4026,6 +4079,69 @@ await client.audioNative.create({
 <dd>
 
 **request:** `ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioNative.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">getSettings</a>(projectId) -> ElevenLabs.GetAudioNativeProjectSettingsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get player settings for the specific project.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioNative.getSettings("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `string` — The ID of the Studio project.
 
 </dd>
 </dl>
@@ -4843,7 +4959,7 @@ Sends an email invitation to join your workspace to the provided email. If the u
 
 ```typescript
 await client.workspace.inviteUser({
-    email: "email",
+    email: "john.doe@testmail.com",
 });
 ```
 
@@ -4973,7 +5089,7 @@ Invalidates an existing email invitation. The invitation will still show up in t
 
 ```typescript
 await client.workspace.deleteExistingInvitation({
-    email: "email",
+    email: "john.doe@testmail.com",
 });
 ```
 
@@ -5105,6 +5221,7 @@ Transcribe an audio or video file.
 
 ```typescript
 await client.speechToText.convert({
+    file: fs.createReadStream("/path/to/your/file"),
     model_id: "model_id",
 });
 ```
@@ -5123,74 +5240,6 @@ await client.speechToText.convert({
 <dd>
 
 **request:** `ElevenLabs.BodySpeechToTextV1SpeechToTextPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SpeechToText.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.speechToText.<a href="/src/api/resources/speechToText/client/Client.ts">convertAsStream</a>({ ...params }) -> core.Stream<ElevenLabs.SpeechToTextStreamResponseModel></code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Transcribe an audio or video file with streaming response. Returns chunks of transcription as they become available, with each chunk separated by double newlines (\n\n).
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const response = await client.speechToText.convertAsStream({
-    model_id: "model_id",
-});
-for await (const item of response) {
-    console.log(item);
-}
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodySpeechToTextStreamV1SpeechToTextStreamPost`
 
 </dd>
 </dl>
@@ -5774,8 +5823,8 @@ Uploads a file or reference a webpage for the agent to use as part of it's knowl
 
 ```typescript
 await client.conversationalAi.addAgentSecret("21m00Tcm4TlvDq8ikWAM", {
-    name: "name",
-    secret_value: "secret_value",
+    name: "MY API KEY",
+    secret_value: "sk_api_12354abc",
 });
 ```
 
@@ -7186,6 +7235,253 @@ await client.conversationalAi.updateTool("tool_id", {
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getSettings</a>() -> ElevenLabs.GetConvaiSettingsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve Convai settings for the workspace
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getSettings();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updateSettings</a>({ ...params }) -> ElevenLabs.GetConvaiSettingsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update Convai settings for the workspace
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.updateSettings({
+    secrets: [
+        {
+            type: "new",
+            name: "name",
+            value: "value",
+        },
+    ],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.PatchConvaiSettingsRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getSecrets</a>() -> ElevenLabs.GetWorkspaceSecretsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all secrets for the workspace
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getSecrets();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">createSecret</a>({ ...params }) -> ElevenLabs.PostWorkspaceSecretResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new secret for the workspace
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.createSecret({
+    name: "name",
+    value: "value",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.PostWorkspaceSecretRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Studio Projects
 
 <details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">getAll</a>() -> ElevenLabs.GetProjectsResponse</code></summary>
@@ -7403,9 +7699,9 @@ Updates Studio project metadata.
 
 ```typescript
 await client.studio.projects.updateMetadata("21m00Tcm4TlvDq8ikWAM", {
-    name: "name",
-    default_title_voice_id: "default_title_voice_id",
-    default_paragraph_voice_id: "default_paragraph_voice_id",
+    name: "Project 1",
+    default_title_voice_id: "21m00Tcm4TlvDq8ikWAM",
+    default_paragraph_voice_id: "21m00Tcm4TlvDq8ikWAM",
 });
 ```
 
@@ -8031,7 +8327,7 @@ Creates a new chapter either as blank or from a URL.
 
 ```typescript
 await client.studio.chapters.create("21m00Tcm4TlvDq8ikWAM", {
-    name: "name",
+    name: "Chapter 1",
 });
 ```
 
@@ -8436,91 +8732,3 @@ await client.studio.chapters.getAllSnapshots("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4T
 
 </dd>
 </dl>
-</details>
-
-<details><summary><code>client.studio.chapters.<a href="/src/api/resources/studio/resources/chapters/client/Client.ts">streamSnapshot</a>(projectId, chapterId, chapterSnapshotId, { ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Stream the audio from a chapter snapshot. Use `GET /v1/studio/projects/{project_id}/chapters/{chapter_id}/snapshots` to return the snapshots of a chapter.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.studio.chapters.streamSnapshot("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**projectId:** `string` — The ID of the Studio project.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**chapterId:** `string` — The ID of the chapter.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**chapterSnapshotId:** `string` — The ID of the chapter snapshot.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.studio.BodyStreamChapterAudioV1StudioProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Chapters.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
