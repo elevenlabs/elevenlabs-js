@@ -5,7 +5,7 @@
 /**
  * @example
  *     {
- *         email: "email"
+ *         email: "john.doe@testmail.com"
  *     }
  */
 export interface BodyInviteUserV1WorkspaceInvitesAddPost {

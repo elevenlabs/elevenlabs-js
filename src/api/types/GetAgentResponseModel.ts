@@ -9,6 +9,7 @@ export interface GetAgentResponseModel {
     name: string;
     conversation_config: ElevenLabs.ConversationalConfig;
     metadata: ElevenLabs.AgentMetadataResponseModel;
-    platform_settings?: ElevenLabs.AgentPlatformSettings;
+    platform_settings?: ElevenLabs.AgentPlatformSettingsResponseModel;
     secrets: ElevenLabs.ConvAiStoredSecretConfig[];
+    phone_numbers?: ElevenLabs.GetPhoneNumberResponseModel[];
 }

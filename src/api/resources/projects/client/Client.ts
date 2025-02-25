@@ -48,7 +48,7 @@ export class Projects {
      *
      * @example
      *     await client.projects.createPodcast({
-     *         model_id: "model_id",
+     *         model_id: "21m00Tcm4TlvDq8ikWAM",
      *         mode: {
      *             type: "conversation",
      *             conversation: {
@@ -80,8 +80,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -154,8 +154,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -296,10 +296,6 @@ export class Projects {
             _request.append("fiction", request.fiction);
         }
 
-        if (request.quality_check_on != null) {
-            _request.append("quality_check_on", request.quality_check_on.toString());
-        }
-
         if (request.apply_text_normalization != null) {
             _request.append("apply_text_normalization", request.apply_text_normalization);
         }
@@ -328,8 +324,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -405,8 +401,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -461,9 +457,9 @@ export class Projects {
      *
      * @example
      *     await client.projects.editBasicProjectInfo("21m00Tcm4TlvDq8ikWAM", {
-     *         name: "name",
-     *         default_title_voice_id: "default_title_voice_id",
-     *         default_paragraph_voice_id: "default_paragraph_voice_id"
+     *         name: "Project 1",
+     *         default_title_voice_id: "21m00Tcm4TlvDq8ikWAM",
+     *         default_paragraph_voice_id: "21m00Tcm4TlvDq8ikWAM"
      *     })
      */
     public async editBasicProjectInfo(
@@ -486,8 +482,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -561,8 +557,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -654,8 +650,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -730,8 +726,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -807,8 +803,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -879,8 +875,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -960,8 +956,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1037,8 +1033,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1116,8 +1112,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1195,8 +1191,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1276,8 +1272,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1335,7 +1331,7 @@ export class Projects {
      *
      * @example
      *     await client.projects.addChapterToAProject("21m00Tcm4TlvDq8ikWAM", {
-     *         name: "name"
+     *         name: "Chapter 1"
      *     })
      */
     public async addChapterToAProject(
@@ -1358,8 +1354,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1438,8 +1434,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1517,8 +1513,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1600,8 +1596,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1685,8 +1681,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

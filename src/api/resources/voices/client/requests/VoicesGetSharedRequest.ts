@@ -52,6 +52,10 @@ export interface VoicesGetSharedRequest {
      */
     featured?: boolean;
     /**
+     * Filter voices with a minimum notice period of the given number of days.
+     */
+    min_notice_period_days?: number;
+    /**
      * Filter voices that are enabled for the reader app
      */
     reader_app_enabled?: boolean;

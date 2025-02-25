@@ -6,6 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface WidgetConfigResponseModel {
     variant?: ElevenLabs.EmbedVariant;
+    expandable?: ElevenLabs.WidgetExpandable;
     avatar?: ElevenLabs.WidgetConfigResponseModelAvatar;
     feedback_mode?: ElevenLabs.WidgetFeedbackMode;
     bg_color?: string;
@@ -26,6 +27,9 @@ export interface WidgetConfigResponseModel {
     terms_text?: string;
     terms_html?: string;
     terms_key?: string;
+    show_avatar_when_collapsed?: boolean;
+    /** Whether to disable the ConvAI widget banner */
+    disable_banner?: boolean;
     language: string;
     supported_language_overrides?: string[];
 }

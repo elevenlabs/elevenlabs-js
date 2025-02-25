@@ -36,7 +36,7 @@ export class SpeechToSpeech {
     constructor(protected readonly _options: SpeechToSpeech.Options = {}) {}
 
     /**
-     * Create speech by combining the content and emotion of the uploaded audio with a voice of your choice.
+     * Transform audio from one voice to another. Maintain full control over emotion, timing and delivery.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async convert(
@@ -91,8 +91,8 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -143,7 +143,7 @@ export class SpeechToSpeech {
     }
 
     /**
-     * Create speech by combining the content and emotion of the uploaded audio with a voice of your choice and returns an audio stream.
+     * Stream audio from one voice to another. Maintain full control over emotion, timing and delivery.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async convertAsStream(
@@ -198,8 +198,8 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.51.0",
-                "User-Agent": "elevenlabs/1.51.0",
+                "X-Fern-SDK-Version": "1.52.0",
+                "User-Agent": "elevenlabs/1.52.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,

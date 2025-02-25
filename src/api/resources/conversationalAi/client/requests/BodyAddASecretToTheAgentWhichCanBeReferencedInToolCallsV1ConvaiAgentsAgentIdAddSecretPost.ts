@@ -5,8 +5,8 @@
 /**
  * @example
  *     {
- *         name: "name",
- *         secret_value: "secret_value"
+ *         name: "MY API KEY",
+ *         secret_value: "sk_api_12354abc"
  *     }
  */
 export interface BodyAddASecretToTheAgentWhichCanBeReferencedInToolCallsV1ConvaiAgentsAgentIdAddSecretPost {

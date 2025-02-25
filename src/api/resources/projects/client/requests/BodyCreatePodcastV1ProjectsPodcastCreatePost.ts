@@ -7,7 +7,7 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         model_id: "model_id",
+ *         model_id: "21m00Tcm4TlvDq8ikWAM",
  *         mode: {
  *             type: "conversation",
  *             conversation: {

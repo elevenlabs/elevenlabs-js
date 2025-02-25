@@ -4,7 +4,7 @@
 
 import * as ElevenLabs from "../index";
 
-export interface AgentPlatformSettings {
+export interface AgentPlatformSettingsRequestModel {
     auth?: ElevenLabs.AuthSettings;
     evaluation?: ElevenLabs.EvaluationSettings;
     widget?: ElevenLabs.WidgetConfig;
@@ -12,6 +12,6 @@ export interface AgentPlatformSettings {
     overrides?: ElevenLabs.ConversationInitiationClientDataConfig;
     call_limits?: ElevenLabs.AgentCallLimits;
     ban?: ElevenLabs.AgentBan;
-    safety?: ElevenLabs.Safety;
     privacy?: ElevenLabs.PrivacyConfig;
+    safety?: ElevenLabs.SafetyCommonModel;
 }

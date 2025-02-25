@@ -26,10 +26,12 @@ export interface LibraryVoiceResponse {
     free_users_allowed: boolean;
     live_moderation_enabled: boolean;
     featured: boolean;
+    verified_languages?: ElevenLabs.VerifiedVoiceLanguageResponseModel[];
     notice_period?: number;
     instagram_username?: string;
     twitter_username?: string;
     youtube_username?: string;
     tiktok_username?: string;
     image_url?: string;
+    is_added_by_user?: boolean;
 }
