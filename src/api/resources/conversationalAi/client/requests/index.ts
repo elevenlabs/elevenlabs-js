@@ -11,6 +11,7 @@ export { type CreatePhoneNumberRequest } from "./CreatePhoneNumberRequest";
 export { type UpdatePhoneNumberRequest } from "./UpdatePhoneNumberRequest";
 export { type ConversationalAiGetKnowledgeBaseListRequest } from "./ConversationalAiGetKnowledgeBaseListRequest";
 export { type BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost } from "./BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost";
+export { type RagIndexRequestModel } from "./RagIndexRequestModel";
 export { type ConversationalAiGetDependentAgentsRequest } from "./ConversationalAiGetDependentAgentsRequest";
-export { type PatchConvaiSettingsRequest } from "./PatchConvaiSettingsRequest";
+export { type PatchConvAiSettingsRequest } from "./PatchConvAiSettingsRequest";
 export { type PostWorkspaceSecretRequest } from "./PostWorkspaceSecretRequest";

@@ -5,8 +5,8 @@
 /**
  * @example
  *     {
- *         voice_name: "Little squeaky mouse",
- *         voice_description: "A sassy little squeaky mouse",
+ *         voice_name: "Sassy squeaky mouse",
+ *         voice_description: "A sassy squeaky mouse",
  *         generated_voice_id: "37HceQefKmEi3bGovXjL"
  *     }
  */
@@ -15,7 +15,7 @@ export interface BodyCreateANewVoiceFromVoicePreviewV1TextToVoiceCreateVoiceFrom
     voice_name: string;
     /** Description to use for the created voice. */
     voice_description: string;
-    /** The generated_voice_id to create, call POST /v1/voice-generation/generate-voice and fetch the generated_voice_id from the response header if don't have one yet. */
+    /** The generated_voice_id to create, call POST /v1/text-to-voice/create-previews and fetch the generated_voice_id from the response header if don't have one yet. */
     generated_voice_id: string;
     /** Optional, metadata to add to the created voice. Defaults to None. */
     labels?: Record<string, string>;

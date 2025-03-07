@@ -8,4 +8,5 @@ export interface KnowledgeBaseLocator {
     type: ElevenLabs.KnowledgeBaseLocatorType;
     name: string;
     id: string;
+    usage_mode?: ElevenLabs.DocumentUsageModeEnum;
 }

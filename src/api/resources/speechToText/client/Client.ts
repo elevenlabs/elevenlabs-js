@@ -53,6 +53,11 @@ export class SpeechToText {
         request: ElevenLabs.BodySpeechToTextV1SpeechToTextPost,
         requestOptions?: SpeechToText.RequestOptions,
     ): Promise<ElevenLabs.SpeechToTextChunkResponseModel> {
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (request.enable_logging != null) {
+            _queryParams["enable_logging"] = request.enable_logging.toString();
+        }
+
         const _request = await core.newFormData();
         _request.append("model_id", request.model_id);
         await _request.appendFile("file", request.file);
@@ -92,13 +97,14 @@ export class SpeechToText {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
                 ...requestOptions?.headers,
             },
+            queryParameters: _queryParams,
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

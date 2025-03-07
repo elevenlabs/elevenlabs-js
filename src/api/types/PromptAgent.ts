@@ -12,6 +12,6 @@ export interface PromptAgent {
     tools?: ElevenLabs.PromptAgentToolsItem[];
     tool_ids?: string[];
     knowledge_base?: ElevenLabs.KnowledgeBaseLocator[];
-    knowledge_base_document_ids?: string[];
     custom_llm?: ElevenLabs.CustomLlm;
+    rag?: ElevenLabs.RagConfig;
 }

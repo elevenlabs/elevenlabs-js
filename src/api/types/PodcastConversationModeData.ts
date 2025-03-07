@@ -3,6 +3,8 @@
  */
 
 export interface PodcastConversationModeData {
+    /** The ID of the host voice. */
     host_voice_id: string;
+    /** The ID of the guest voice. */
     guest_voice_id: string;
 }

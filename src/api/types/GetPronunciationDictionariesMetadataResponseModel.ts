@@ -5,7 +5,10 @@
 import * as ElevenLabs from "../index";
 
 export interface GetPronunciationDictionariesMetadataResponseModel {
+    /** A list of pronunciation dictionaries and their metadata. */
     pronunciation_dictionaries: ElevenLabs.GetPronunciationDictionaryMetadataResponse[];
-    next_cursor: string;
+    /** The next cursor to use for pagination. */
+    next_cursor?: string;
+    /** Whether there are more pronunciation dictionaries to fetch. */
     has_more: boolean;
 }

@@ -36,10 +36,10 @@ export interface BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost {
     audio: File | fs.ReadStream | Blob;
     /** Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for speech to speech, you can check this using the can_do_voice_conversion property. */
     model_id?: string;
-    /** Voice settings overriding stored setttings for the given voice. They are applied only on the given request. Needs to be send as a JSON encoded string. */
+    /** Voice settings overriding stored settings for the given voice. They are applied only on the given request. Needs to be send as a JSON encoded string. */
     voice_settings?: string;
     /** If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be integer between 0 and 4294967295. */
     seed?: number;
-    /** If set will remove the background noise from your audio input using our audio isolation model. Only applies to Voice Changer. */
+    /** If set, will remove the background noise from your audio input using our audio isolation model. Only applies to Voice Changer. */
     remove_background_noise?: boolean;
 }

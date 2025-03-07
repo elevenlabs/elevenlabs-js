@@ -69,8 +69,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -135,7 +135,7 @@ export class Workspace {
         groupId: string,
         request: ElevenLabs.BodyDeleteMemberFromUserGroupV1WorkspaceGroupsGroupIdMembersRemovePost,
         requestOptions?: Workspace.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.DeleteWorkspaceGroupMemberResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -151,8 +151,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -165,7 +165,7 @@ export class Workspace {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.DeleteWorkspaceGroupMemberResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -217,7 +217,7 @@ export class Workspace {
         groupId: string,
         request: ElevenLabs.BodyAddMemberToUserGroupV1WorkspaceGroupsGroupIdMembersPost,
         requestOptions?: Workspace.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.AddWorkspaceGroupMemberResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -233,8 +233,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -247,7 +247,7 @@ export class Workspace {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.AddWorkspaceGroupMemberResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -297,7 +297,7 @@ export class Workspace {
     public async inviteUser(
         request: ElevenLabs.BodyInviteUserV1WorkspaceInvitesAddPost,
         requestOptions?: Workspace.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.AddWorkspaceInviteResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -313,8 +313,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -327,7 +327,7 @@ export class Workspace {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.AddWorkspaceInviteResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -377,7 +377,7 @@ export class Workspace {
     public async inviteMultipleUsers(
         request: ElevenLabs.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost,
         requestOptions?: Workspace.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.AddWorkspaceInviteResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -393,8 +393,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -407,7 +407,7 @@ export class Workspace {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.AddWorkspaceInviteResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -457,7 +457,7 @@ export class Workspace {
     public async deleteExistingInvitation(
         request: ElevenLabs.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete,
         requestOptions?: Workspace.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.DeleteWorkspaceInviteResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -473,8 +473,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -487,7 +487,7 @@ export class Workspace {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.DeleteWorkspaceInviteResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -535,7 +535,7 @@ export class Workspace {
     public async updateMember(
         request: ElevenLabs.BodyUpdateMemberV1WorkspaceMembersPost,
         requestOptions?: Workspace.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.UpdateWorkspaceMemberResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -551,8 +551,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -565,7 +565,7 @@ export class Workspace {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.UpdateWorkspaceMemberResponseModel;
         }
 
         if (_response.error.reason === "status-code") {

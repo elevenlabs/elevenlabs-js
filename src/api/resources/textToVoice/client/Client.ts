@@ -44,7 +44,7 @@ export class TextToVoice {
      *
      * @example
      *     await client.textToVoice.createPreviews({
-     *         voice_description: "A sassy little squeaky mouse",
+     *         voice_description: "A sassy squeaky mouse",
      *         text: "Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted."
      *     })
      */
@@ -73,8 +73,8 @@ export class TextToVoice {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -123,7 +123,7 @@ export class TextToVoice {
     }
 
     /**
-     * Create a voice from previously generated voice preview. This endpoint should be called after you fetched a generated_voice_id using /v1/text-to-voice/create-previews.
+     * Create a voice from previously generated voice preview. This endpoint should be called after you fetched a generated_voice_id using POST /v1/text-to-voice/create-previews.
      *
      * @param {ElevenLabs.BodyCreateANewVoiceFromVoicePreviewV1TextToVoiceCreateVoiceFromPreviewPost} request
      * @param {TextToVoice.RequestOptions} requestOptions - Request-specific configuration.
@@ -132,8 +132,8 @@ export class TextToVoice {
      *
      * @example
      *     await client.textToVoice.createVoiceFromPreview({
-     *         voice_name: "Little squeaky mouse",
-     *         voice_description: "A sassy little squeaky mouse",
+     *         voice_name: "Sassy squeaky mouse",
+     *         voice_description: "A sassy squeaky mouse",
      *         generated_voice_id: "37HceQefKmEi3bGovXjL"
      *     })
      */
@@ -156,8 +156,8 @@ export class TextToVoice {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

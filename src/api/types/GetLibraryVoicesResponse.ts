@@ -5,7 +5,9 @@
 import * as ElevenLabs from "../index";
 
 export interface GetLibraryVoicesResponse {
+    /** The list of shared voices */
     voices: ElevenLabs.LibraryVoiceResponse[];
+    /** Whether there are more shared voices in subsequent pages. */
     has_more: boolean;
     last_sort_id?: string;
 }

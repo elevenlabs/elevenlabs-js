@@ -11,19 +11,19 @@ import * as ElevenLabs from "../../../../index";
  *         mode: {
  *             type: "conversation",
  *             conversation: {
- *                 host_voice_id: "host_voice_id",
- *                 guest_voice_id: "guest_voice_id"
+ *                 host_voice_id: "aw1NgEzBg83R7vgmiJt6",
+ *                 guest_voice_id: "aw1NgEzBg83R7vgmiJt7"
  *             }
  *         },
  *         source: {
- *             text: "text"
+ *             text: "This is a test podcast."
  *         }
  *     }
  */
 export interface BodyCreatePodcastV1StudioPodcastsPost {
     /** The ID of the model to be used for this Studio project, you can query GET /v1/models to list all available models. */
     model_id: string;
-    /** The type of podcast to generate */
+    /** The type of podcast to generate. Can be 'conversation', an interaction between two voices, or 'bulletin', a monologue. */
     mode: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostMode;
     /** The source content for the Podcast. */
     source: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSource;

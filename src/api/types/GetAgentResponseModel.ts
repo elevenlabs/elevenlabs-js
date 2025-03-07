@@ -7,9 +7,8 @@ import * as ElevenLabs from "../index";
 export interface GetAgentResponseModel {
     agent_id: string;
     name: string;
-    conversation_config: ElevenLabs.ConversationalConfig;
+    conversation_config: ElevenLabs.ConversationalConfigApiModel;
     metadata: ElevenLabs.AgentMetadataResponseModel;
     platform_settings?: ElevenLabs.AgentPlatformSettingsResponseModel;
-    secrets: ElevenLabs.ConvAiStoredSecretConfig[];
     phone_numbers?: ElevenLabs.GetPhoneNumberResponseModel[];
 }

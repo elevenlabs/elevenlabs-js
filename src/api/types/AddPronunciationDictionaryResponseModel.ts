@@ -3,10 +3,16 @@
  */
 
 export interface AddPronunciationDictionaryResponseModel {
+    /** The ID of the created pronunciation dictionary. */
     id: string;
+    /** The name of the created pronunciation dictionary. */
     name: string;
+    /** The user ID of the creator of the pronunciation dictionary. */
     created_by: string;
+    /** The creation time of the pronunciation dictionary in Unix timestamp. */
     creation_time_unix: number;
+    /** The ID of the created pronunciation dictionary version. */
     version_id: string;
+    /** The description of the pronunciation dictionary. */
     description?: string;
 }

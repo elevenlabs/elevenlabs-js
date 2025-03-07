@@ -19,6 +19,6 @@ export interface CreatePhoneNumberRequest {
     label: string;
     /** Twilio Account SID */
     sid: string;
-    /** Twilio Token */
+    /** Twilio Auth Token */
     token: string;
 }
