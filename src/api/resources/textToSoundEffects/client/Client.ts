@@ -36,13 +36,19 @@ export class TextToSoundEffects {
     constructor(protected readonly _options: TextToSoundEffects.Options = {}) {}
 
     /**
-     * Converts a text of your choice into sound
+     * Turn text into sound effects for your videos, voice-overs or video games using the most advanced sound effects model in the world.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async convert(
         request: ElevenLabs.BodySoundGenerationV1SoundGenerationPost,
         requestOptions?: TextToSoundEffects.RequestOptions,
     ): Promise<stream.Readable> {
+        const { output_format: outputFormat, ..._body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (outputFormat != null) {
+            _queryParams["output_format"] = outputFormat;
+        }
+
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -58,15 +64,16 @@ export class TextToSoundEffects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
-            body: request,
+            body: _body,
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,

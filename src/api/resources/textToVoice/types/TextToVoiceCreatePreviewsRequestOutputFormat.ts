@@ -3,18 +3,7 @@
  */
 
 /**
- * Output format of the generated audio. Must be one of:
- * mp3_22050_32 - output format, mp3 with 22.05kHz sample rate at 32kbps.
- * mp3_44100_32 - output format, mp3 with 44.1kHz sample rate at 32kbps.
- * mp3_44100_64 - output format, mp3 with 44.1kHz sample rate at 64kbps.
- * mp3_44100_96 - output format, mp3 with 44.1kHz sample rate at 96kbps.
- * mp3_44100_128 - default output format, mp3 with 44.1kHz sample rate at 128kbps.
- * mp3_44100_192 - output format, mp3 with 44.1kHz sample rate at 192kbps. Requires you to be subscribed to Creator tier or above.
- * pcm_16000 - PCM format (S16LE) with 16kHz sample rate.
- * pcm_22050 - PCM format (S16LE) with 22.05kHz sample rate.
- * pcm_24000 - PCM format (S16LE) with 24kHz sample rate.
- * pcm_44100 - PCM format (S16LE) with 44.1kHz sample rate. Requires you to be subscribed to Pro tier or above.
- * ulaw_8000 - μ-law format (sometimes written mu-law, often approximated as u-law) with 8kHz sample rate. Note that this format is commonly used for Twilio audio inputs.
+ * Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
  */
 export type TextToVoiceCreatePreviewsRequestOutputFormat =
     | "mp3_22050_32"

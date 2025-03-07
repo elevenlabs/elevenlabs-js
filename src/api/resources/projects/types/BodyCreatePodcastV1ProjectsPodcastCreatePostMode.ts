@@ -5,7 +5,7 @@
 import * as ElevenLabs from "../../../index";
 
 /**
- * The type of podcast to generate
+ * The type of podcast to generate. Can be 'conversation', an interaction between two voices, or 'bulletin', a monologue.
  */
 export type BodyCreatePodcastV1ProjectsPodcastCreatePostMode =
     | ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePostMode.Conversation

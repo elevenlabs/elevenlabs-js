@@ -5,8 +5,9 @@
 /**
  * The granularity of the timestamps in the transcription. 'word' provides word-level timestamps and 'character' provides character-level timestamps per word.
  */
-export type SpeechToTextConvertRequestTimestampsGranularity = "word" | "character";
+export type SpeechToTextConvertRequestTimestampsGranularity = "none" | "word" | "character";
 export const SpeechToTextConvertRequestTimestampsGranularity = {
+    None: "none",
     Word: "word",
     Character: "character",
 } as const;

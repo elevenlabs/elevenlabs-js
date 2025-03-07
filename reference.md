@@ -1,60 +1,5 @@
 # Reference
 
-<details><summary><code>client.<a href="/src/Client.ts">computeAQuoteForAAsrTranscriptionReviewTaskV1SpeechToTextReviewsGetQuotePost</a>({ ...params }) -> ElevenLabs.QuoteResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.computeAQuoteForAAsrTranscriptionReviewTaskV1SpeechToTextReviewsGetQuotePost({
-    content_hash: "content_hash",
-    duration_s: 1.1,
-    speaker_count: 1,
-    language: "language",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.QuoteRequestModel`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ElevenLabsClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-##
-
 ## History
 
 <details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetSpeechHistoryResponse</code></summary>
@@ -388,7 +333,7 @@ await client.history.download({
 <dl>
 <dd>
 
-Converts a text of your choice into sound
+Turn text into sound effects for your videos, voice-overs or video games using the most advanced sound effects model in the world.
 
 </dd>
 </dl>
@@ -1266,7 +1211,7 @@ Generate a custom voice based on voice description. This method returns a list o
 
 ```typescript
 await client.textToVoice.createPreviews({
-    voice_description: "A sassy little squeaky mouse",
+    voice_description: "A sassy squeaky mouse",
     text: "Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted.",
 });
 ```
@@ -1315,7 +1260,7 @@ await client.textToVoice.createPreviews({
 <dl>
 <dd>
 
-Create a voice from previously generated voice preview. This endpoint should be called after you fetched a generated_voice_id using /v1/text-to-voice/create-previews.
+Create a voice from previously generated voice preview. This endpoint should be called after you fetched a generated_voice_id using POST /v1/text-to-voice/create-previews.
 
 </dd>
 </dl>
@@ -1332,8 +1277,8 @@ Create a voice from previously generated voice preview. This endpoint should be 
 
 ```typescript
 await client.textToVoice.createVoiceFromPreview({
-    voice_name: "Little squeaky mouse",
-    voice_description: "A sassy little squeaky mouse",
+    voice_name: "Sassy squeaky mouse",
+    voice_description: "A sassy squeaky mouse",
     generated_voice_id: "37HceQefKmEi3bGovXjL",
 });
 ```
@@ -1496,7 +1441,7 @@ await client.user.get();
 <dl>
 <dd>
 
-Gets a list of all available voices for a user.
+Returns a list of all available voices for a user.
 
 </dd>
 </dl>
@@ -1736,7 +1681,7 @@ await client.voices.get("JBFqnCBsd6RMkjVDRZzb");
 </dl>
 </details>
 
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">delete</a>(voiceId) -> unknown</code></summary>
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">delete</a>(voiceId) -> ElevenLabs.DeleteVoiceResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -1799,7 +1744,7 @@ await client.voices.delete("VOICE_ID");
 </dl>
 </details>
 
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">editSettings</a>(voiceId, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">editSettings</a>(voiceId, { ...params }) -> ElevenLabs.EditVoiceSettingsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -1811,7 +1756,7 @@ await client.voices.delete("VOICE_ID");
 <dl>
 <dd>
 
-Edit your settings for a specific voice. "similarity_boost" corresponds to"Clarity + Similarity Enhancement" in the web app and "stability" corresponds to "Stability" slider in the web app.
+Edit your settings for a specific voice. "similarity_boost" corresponds to "Clarity + Similarity Enhancement" in the web app and "stability" corresponds to "Stability" slider in the web app.
 
 </dd>
 </dl>
@@ -1940,7 +1885,7 @@ await client.voices.add({
 </dl>
 </details>
 
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">edit</a>(voiceId, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">edit</a>(voiceId, { ...params }) -> ElevenLabs.EditVoiceResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -2025,7 +1970,7 @@ await client.voices.edit("VOICE_ID", {
 <dl>
 <dd>
 
-Add a sharing voice to your collection of voices in VoiceLab.
+Add a shared voice to your collection of voices.
 
 </dd>
 </dl>
@@ -2079,7 +2024,7 @@ await client.voices.addSharingVoice(
 <dl>
 <dd>
 
-**request:** `ElevenLabs.AddSharingVoiceRequest`
+**request:** `ElevenLabs.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost`
 
 </dd>
 </dl>
@@ -2110,7 +2055,7 @@ await client.voices.addSharingVoice(
 <dl>
 <dd>
 
-Gets a list of shared voices.
+Retrieves a list of shared voices.
 
 </dd>
 </dl>
@@ -2326,12 +2271,12 @@ await client.studio.createPodcast({
     mode: {
         type: "conversation",
         conversation: {
-            host_voice_id: "host_voice_id",
-            guest_voice_id: "guest_voice_id",
+            host_voice_id: "aw1NgEzBg83R7vgmiJt6",
+            guest_voice_id: "aw1NgEzBg83R7vgmiJt7",
         },
     },
     source: {
-        text: "text",
+        text: "This is a test podcast.",
     },
 });
 ```
@@ -2403,12 +2348,12 @@ await client.projects.createPodcast({
     mode: {
         type: "conversation",
         conversation: {
-            host_voice_id: "host_voice_id",
-            guest_voice_id: "guest_voice_id",
+            host_voice_id: "aw1NgEzBg83R7vgmiJt6",
+            guest_voice_id: "aw1NgEzBg83R7vgmiJt7",
         },
     },
     source: {
-        text: "text",
+        text: "This is a test podcast.",
     },
 });
 ```
@@ -3477,7 +3422,7 @@ await client.projects.convertChapter("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikW
 <dl>
 <dd>
 
-Gets information about all the snapshots of a chapter, each snapshot corresponds can be downloaded as audio. Whenever a chapter is converted a snapshot will be automatically created.
+Gets information about all the snapshots of a chapter. Each snapshot can be downloaded as audio. Whenever a chapter is converted a snapshot will automatically be created.
 
 </dd>
 </dl>
@@ -3703,6 +3648,603 @@ await client.projects.updatePronunciationDictionaries("21m00Tcm4TlvDq8ikWAM", {
 
 ## Dubbing
 
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">getDubbingResource</a>(dubbingId) -> ElevenLabs.DubbingResource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Given a dubbing ID generated from the '/v1/dubbing' endpoint with studio enabled, returns the dubbing resource.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.getDubbingResource("dubbing_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Dubbing.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">addLanguageToResource</a>(dubbingId, { ...params }) -> ElevenLabs.LanguageAddedResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Adds the given ElevenLab Turbo V2/V2.5 language code to the resource. Does not automatically generate transcripts/translations/audio.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.addLanguageToResource("dubbing_id", {
+    language: "language",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIdLanguagePost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Dubbing.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">createSegmentForSpeaker</a>(dubbingId, speakerId, { ...params }) -> ElevenLabs.SegmentCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new segment in dubbing resource with a start and end time for the speaker in every available language. Does not automatically generate transcripts/translations/audio.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.createSegmentForSpeaker("dubbing_id", "speaker_id", {
+    start_time: 1.1,
+    end_time: 1.1,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**speakerId:** `string` — ID of the speaker.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.SegmentCreatePayload`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Dubbing.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">updateSegmentLanguage</a>(dubbingId, segmentId, language, { ...params }) -> ElevenLabs.SegmentUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Modifies a single segment with new text and/or start/end times. Will update the values for only a specific language of a segment. Does not automatically regenerate the dub.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.updateSegmentLanguage("dubbing_id", "segment_id", "language");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**segmentId:** `string` — ID of the segment
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language:** `string` — ID of the language.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.SegmentUpdatePayload`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Dubbing.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">deleteSegment</a>(dubbingId, segmentId) -> ElevenLabs.SegmentDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a single segment from the dubbing.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.deleteSegment("dubbing_id", "segment_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**segmentId:** `string` — ID of the segment
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Dubbing.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">transcribeSegments</a>(dubbingId, { ...params }) -> ElevenLabs.SegmentTranscriptionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Regenerate the transcriptions for the specified segments. Does not automatically regenerate translations or dubs.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.transcribeSegments("dubbing_id", {
+    segments: ["segments"],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyTranscribesSegmentsV1DubbingResourceDubbingIdTranscribePost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Dubbing.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">translateSegments</a>(dubbingId, { ...params }) -> ElevenLabs.SegmentTranslationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Regenerate the translations for either the entire resource or the specified segments/languages. Will automatically transcribe missing transcriptions. Will not automatically regenerate the dubs.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.translateSegments("dubbing_id", {
+    segments: ["segments"],
+    languages: ["languages"],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdTranslatePost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Dubbing.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">dubSegments</a>(dubbingId, { ...params }) -> ElevenLabs.SegmentDubResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Regenerate the dubs for either the entire resource or the specified segments/languages. Will automatically transcribe and translate any missing transcriptions and translations.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.dubSegments("dubbing_id", {
+    segments: ["segments"],
+    languages: ["languages"],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdDubPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Dubbing.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">dubAVideoOrAnAudioFile</a>({ ...params }) -> ElevenLabs.DoDubbingResponse</code></summary>
 <dl>
 <dd>
@@ -3715,7 +4257,7 @@ await client.projects.updatePronunciationDictionaries("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-Dubs provided audio or video file into given language.
+Dubs a provided audio or video file into given language.
 
 </dd>
 </dl>
@@ -3831,7 +4373,7 @@ await client.dubbing.getDubbingProjectMetadata("dubbing_id");
 </dl>
 </details>
 
-<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">deleteDubbingProject</a>(dubbingId) -> unknown</code></summary>
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">deleteDubbingProject</a>(dubbingId) -> ElevenLabs.DeleteDubbingResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -3894,7 +4436,7 @@ await client.dubbing.deleteDubbingProject("dubbing_id");
 </dl>
 </details>
 
-<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">getTranscriptForDub</a>(dubbingId, languageCode, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">getTranscriptForDub</a>(dubbingId, languageCode, { ...params }) -> string</code></summary>
 <dl>
 <dd>
 
@@ -3906,7 +4448,7 @@ await client.dubbing.deleteDubbingProject("dubbing_id");
 <dl>
 <dd>
 
-Returns transcript for the dub as an SRT file.
+Returns transcript for the dub as an SRT or WEBVTT file.
 
 </dd>
 </dl>
@@ -4044,7 +4586,7 @@ await client.models.getAll();
 <dl>
 <dd>
 
-Creates AudioNative enabled project, optionally starts conversion and returns project id and embeddable html snippet.
+Creates Audio Native enabled project, optionally starts conversion and returns project ID and embeddable HTML snippet.
 
 </dd>
 </dl>
@@ -4398,8 +4940,8 @@ await client.pronunciationDictionary.addRules("21m00Tcm4TlvDq8ikWAM", {
     rules: [
         {
             type: "alias",
-            string_to_replace: "string_to_replace",
-            alias: "alias",
+            string_to_replace: "Thailand",
+            alias: "tie-land",
         },
     ],
 });
@@ -4518,7 +5060,7 @@ await client.pronunciationDictionary.removeRules("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">download</a>(dictionaryId, versionId) -> string</code></summary>
+<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">download</a>(dictionaryId, versionId) -> stream.Readable</code></summary>
 <dl>
 <dd>
 
@@ -4530,7 +5072,7 @@ await client.pronunciationDictionary.removeRules("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-Get PLS file with a pronunciation dictionary version rules
+Get a PLS file with a pronunciation dictionary version rules
 
 </dd>
 </dl>
@@ -4784,7 +5326,7 @@ await client.workspace.searchUserGroups({
 </dl>
 </details>
 
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">deleteMemberFromUserGroup</a>(groupId, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">deleteMemberFromUserGroup</a>(groupId, { ...params }) -> ElevenLabs.DeleteWorkspaceGroupMemberResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4857,7 +5399,7 @@ await client.workspace.deleteMemberFromUserGroup("group_id", {
 </dl>
 </details>
 
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">addMemberToUserGroup</a>(groupId, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">addMemberToUserGroup</a>(groupId, { ...params }) -> ElevenLabs.AddWorkspaceGroupMemberResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4930,7 +5472,7 @@ await client.workspace.addMemberToUserGroup("group_id", {
 </dl>
 </details>
 
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">inviteUser</a>({ ...params }) -> unknown</code></summary>
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">inviteUser</a>({ ...params }) -> ElevenLabs.AddWorkspaceInviteResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4995,7 +5537,7 @@ await client.workspace.inviteUser({
 </dl>
 </details>
 
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">inviteMultipleUsers</a>({ ...params }) -> unknown</code></summary>
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">inviteMultipleUsers</a>({ ...params }) -> ElevenLabs.AddWorkspaceInviteResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5060,7 +5602,7 @@ await client.workspace.inviteMultipleUsers({
 </dl>
 </details>
 
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">deleteExistingInvitation</a>({ ...params }) -> unknown</code></summary>
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">deleteExistingInvitation</a>({ ...params }) -> ElevenLabs.DeleteWorkspaceInviteResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5125,7 +5667,7 @@ await client.workspace.deleteExistingInvitation({
 </dl>
 </details>
 
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">updateMember</a>({ ...params }) -> unknown</code></summary>
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">updateMember</a>({ ...params }) -> ElevenLabs.UpdateWorkspaceMemberResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -6705,6 +7247,79 @@ await client.conversationalAi.addToKnowledgeBase({});
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">ragIndexStatus</a>(documentationId, { ...params }) -> ElevenLabs.RagIndexResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+In case the document is not RAG indexed, it triggers rag indexing task, otherwise it just returns the current status.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.ragIndexStatus("21m00Tcm4TlvDq8ikWAM", {
+    model: "e5_mistral_7b_instruct",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentationId:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.RagIndexRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getKnowledgeBaseDocumentById</a>(documentationId) -> ElevenLabs.GetKnowledgeBaseResponseModel</code></summary>
 <dl>
 <dd>
@@ -6902,340 +7517,7 @@ await client.conversationalAi.getDependentAgents("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getTools</a>() -> ElevenLabs.ToolsResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get all available tools available in the workspace.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.getTools();
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationalAi.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">addTool</a>({ ...params }) -> ElevenLabs.ToolResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Add a new tool to the available tools in the workspace.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.addTool({
-    tool_config: {
-        type: "webhook",
-        name: "name",
-        description: "description",
-        api_schema: {
-            url: "url",
-        },
-    },
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.ToolRequestModel`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationalAi.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getTool</a>(toolId) -> ElevenLabs.ToolResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get tool that is available in the workspace.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.getTool("tool_id");
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**toolId:** `string` — ID of the requested tool.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationalAi.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">removeTool</a>(toolId) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete tool from the workspace.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.removeTool("tool_id");
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**toolId:** `string` — ID of the requested tool.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationalAi.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updateTool</a>(toolId, { ...params }) -> ElevenLabs.ToolResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update tool that is available in the workspace.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.updateTool("tool_id", {
-    tool_config: {
-        type: "webhook",
-        name: "name",
-        description: "description",
-        api_schema: {
-            url: "url",
-        },
-    },
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**toolId:** `string` — ID of the requested tool.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.ToolRequestModel`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationalAi.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getSettings</a>() -> ElevenLabs.GetConvaiSettingsResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getSettings</a>() -> ElevenLabs.GetConvAiSettingsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -7290,7 +7572,7 @@ await client.conversationalAi.getSettings();
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updateSettings</a>({ ...params }) -> ElevenLabs.GetConvaiSettingsResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updateSettings</a>({ ...params }) -> ElevenLabs.GetConvAiSettingsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -7318,15 +7600,7 @@ Update Convai settings for the workspace
 <dd>
 
 ```typescript
-await client.conversationalAi.updateSettings({
-    secrets: [
-        {
-            type: "new",
-            name: "name",
-            value: "value",
-        },
-    ],
-});
+await client.conversationalAi.updateSettings();
 ```
 
 </dd>
@@ -7342,7 +7616,7 @@ await client.conversationalAi.updateSettings({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.PatchConvaiSettingsRequest`
+**request:** `ElevenLabs.PatchConvAiSettingsRequest`
 
 </dd>
 </dl>
@@ -7373,7 +7647,7 @@ await client.conversationalAi.updateSettings({
 <dl>
 <dd>
 
-Get all secrets for the workspace
+Get all workspace secrets for the user
 
 </dd>
 </dl>
@@ -7464,6 +7738,69 @@ await client.conversationalAi.createSecret({
 <dd>
 
 **request:** `ElevenLabs.PostWorkspaceSecretRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">deleteSecret</a>(secretId) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a workspace secret if it's not in use
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.deleteSecret("secret_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**secretId:** `string`
 
 </dd>
 </dl>
@@ -7682,7 +8019,7 @@ await client.studio.projects.get("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-Updates Studio project metadata.
+Updates the specified Studio project by setting the values of the parameters passed.
 
 </dd>
 </dl>
@@ -7726,7 +8063,7 @@ await client.studio.projects.updateMetadata("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.studio.BodyUpdateStudioProjectMetadataV1StudioProjectsProjectIdPost`
+**request:** `ElevenLabs.studio.BodyUpdateStudioProjectV1StudioProjectsProjectIdPost`
 
 </dd>
 </dl>
@@ -7745,7 +8082,7 @@ await client.studio.projects.updateMetadata("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">delete</a>(projectId) -> unknown</code></summary>
+<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">delete</a>(projectId) -> ElevenLabs.DeleteProjectResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -7879,7 +8216,7 @@ await client.studio.projects.updateContent("21m00Tcm4TlvDq8ikWAM", {});
 </dl>
 </details>
 
-<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">convert</a>(projectId) -> unknown</code></summary>
+<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">convert</a>(projectId) -> ElevenLabs.ConvertProjectResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -7954,7 +8291,7 @@ await client.studio.projects.convert("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-Gets the snapshots of a Studio project.
+Retrieves a list of snapshots for a Studio project.
 
 </dd>
 </dl>
@@ -7987,6 +8324,77 @@ await client.studio.projects.getSnapshots("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **projectId:** `string` — The ID of the Studio project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Projects.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">getProjectSnapshot</a>(projectId, projectSnapshotId) -> ElevenLabs.ProjectSnapshotExtendedResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the project snapshot.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.studio.projects.getProjectSnapshot("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `string` — The ID of the Studio project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**projectSnapshotId:** `string` — The ID of the Studio project snapshot.
 
 </dd>
 </dl>
@@ -8084,78 +8492,7 @@ await client.studio.projects.streamAudio("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq
 </dl>
 </details>
 
-<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">streamArchive</a>(projectId, projectSnapshotId) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a compressed archive of the Studio project's audio.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.studio.projects.streamArchive("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**projectId:** `string` — The ID of the Studio project.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**projectSnapshotId:** `string` — The ID of the Studio project snapshot.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Projects.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">updatePronunciationDictionaries</a>(projectId, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">updatePronunciationDictionaries</a>(projectId, { ...params }) -> ElevenLabs.CreatePronunciationDictionaryResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -8521,7 +8858,7 @@ await client.studio.chapters.edit("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM"
 </dl>
 </details>
 
-<details><summary><code>client.studio.chapters.<a href="/src/api/resources/studio/resources/chapters/client/Client.ts">delete</a>(projectId, chapterId) -> unknown</code></summary>
+<details><summary><code>client.studio.chapters.<a href="/src/api/resources/studio/resources/chapters/client/Client.ts">delete</a>(projectId, chapterId) -> ElevenLabs.DeleteChapterResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -8592,7 +8929,7 @@ await client.studio.chapters.delete("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWA
 </dl>
 </details>
 
-<details><summary><code>client.studio.chapters.<a href="/src/api/resources/studio/resources/chapters/client/Client.ts">convert</a>(projectId, chapterId) -> unknown</code></summary>
+<details><summary><code>client.studio.chapters.<a href="/src/api/resources/studio/resources/chapters/client/Client.ts">convert</a>(projectId, chapterId) -> ElevenLabs.ConvertChapterResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -8675,7 +9012,7 @@ await client.studio.chapters.convert("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikW
 <dl>
 <dd>
 
-Gets information about all the snapshots of a chapter, each snapshot corresponds can be downloaded as audio. Whenever a chapter is converted a snapshot will be automatically created.
+Gets information about all the snapshots of a chapter. Each snapshot can be downloaded as audio. Whenever a chapter is converted a snapshot will automatically be created.
 
 </dd>
 </dl>
@@ -8734,7 +9071,7 @@ await client.studio.chapters.getAllSnapshots("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4T
 </dl>
 </details>
 
-<details><summary><code>client.studio.chapters.<a href="/src/api/resources/studio/resources/chapters/client/Client.ts">streamSnapshot</a>(projectId, chapterId, chapterSnapshotId, { ...params }) -> void</code></summary>
+<details><summary><code>client.studio.chapters.<a href="/src/api/resources/studio/resources/chapters/client/Client.ts">getChapterSnapshot</a>(projectId, chapterId, chapterSnapshotId) -> ElevenLabs.ChapterSnapshotExtendedResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -8746,7 +9083,7 @@ await client.studio.chapters.getAllSnapshots("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4T
 <dl>
 <dd>
 
-Stream the audio from a chapter snapshot. Use `GET /v1/studio/projects/{project_id}/chapters/{chapter_id}/snapshots` to return the snapshots of a chapter.
+Returns the chapter snapshot.
 
 </dd>
 </dl>
@@ -8762,7 +9099,7 @@ Stream the audio from a chapter snapshot. Use `GET /v1/studio/projects/{project_
 <dd>
 
 ```typescript
-await client.studio.chapters.streamSnapshot("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
+await client.studio.chapters.getChapterSnapshot("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -8795,14 +9132,6 @@ await client.studio.chapters.streamSnapshot("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4Tl
 <dd>
 
 **chapterSnapshotId:** `string` — The ID of the chapter snapshot.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.studio.BodyStreamChapterAudioV1StudioProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost`
 
 </dd>
 </dl>

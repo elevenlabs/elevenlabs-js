@@ -5,5 +5,6 @@
 import * as ElevenLabs from "../index";
 
 export interface PodcastProjectResponseModel {
+    /** The project associated with the created podcast. */
     project: ElevenLabs.ProjectResponse;
 }

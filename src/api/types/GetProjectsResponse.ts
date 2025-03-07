@@ -5,5 +5,6 @@
 import * as ElevenLabs from "../index";
 
 export interface GetProjectsResponse {
+    /** A list of projects with their metadata. */
     projects: ElevenLabs.ProjectResponse[];
 }

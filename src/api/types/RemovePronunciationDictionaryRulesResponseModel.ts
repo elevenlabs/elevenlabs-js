@@ -3,6 +3,8 @@
  */
 
 export interface RemovePronunciationDictionaryRulesResponseModel {
+    /** The ID of the pronunciation dictionary. */
     id: string;
+    /** The version ID of the pronunciation dictionary. */
     version_id: string;
 }

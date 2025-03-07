@@ -3,6 +3,8 @@
  */
 
 export interface PronunciationDictionaryAliasRuleRequestModel {
+    /** The string to replace. Must be a non-empty string. */
     string_to_replace: string;
+    /** The alias for the string to be replaced. */
     alias: string;
 }

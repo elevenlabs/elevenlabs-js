@@ -10,8 +10,8 @@ import * as fs from "fs";
  */
 export interface BodyGetSimilarLibraryVoicesV1SimilarVoicesPost {
     audio_file?: File | fs.ReadStream | Blob | undefined;
-    /** Threshold for voice similarity between provided sample and library voices. Must be in range <0, 2>. The smaller the value the more similar voices will be returned. */
+    /** Threshold for voice similarity between provided sample and library voices. Values range from 0 to 2. The smaller the value the more similar voices will be returned. */
     similarity_threshold?: number;
-    /** Number of most similar voices to return. If similarity_threshold is provided, less than this number of voices may be returned. Must be in range <1, 100>. */
+    /** Number of most similar voices to return. If similarity_threshold is provided, less than this number of voices may be returned. Values range from 1 to 100. */
     top_k?: number;
 }

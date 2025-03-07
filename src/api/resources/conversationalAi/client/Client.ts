@@ -70,8 +70,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -156,8 +156,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -233,8 +233,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -307,8 +307,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -392,8 +392,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -479,8 +479,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -557,8 +557,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -641,8 +641,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -725,8 +725,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -817,8 +817,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -913,8 +913,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -989,8 +989,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1066,8 +1066,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1143,8 +1143,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1224,8 +1224,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1308,8 +1308,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1386,8 +1386,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1463,8 +1463,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1542,8 +1542,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1618,8 +1618,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1721,8 +1721,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1783,6 +1783,10 @@ export class ConversationalAi {
         requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<ElevenLabs.AddKnowledgeBaseResponseModel> {
         const _request = await core.newFormData();
+        if (request.name != null) {
+            _request.append("name", request.name);
+        }
+
         if (request.url != null) {
             _request.append("url", request.url);
         }
@@ -1807,8 +1811,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -1857,6 +1861,95 @@ export class ConversationalAi {
     }
 
     /**
+     * In case the document is not RAG indexed, it triggers rag indexing task, otherwise it just returns the current status.
+     *
+     * @param {string} documentationId - The id of a document from the knowledge base. This is returned on document addition.
+     * @param {ElevenLabs.RagIndexRequestModel} request
+     * @param {ConversationalAi.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.ragIndexStatus("21m00Tcm4TlvDq8ikWAM", {
+     *         model: "e5_mistral_7b_instruct"
+     *     })
+     */
+    public async ragIndexStatus(
+        documentationId: string,
+        request: ElevenLabs.RagIndexRequestModel,
+        requestOptions?: ConversationalAi.RequestOptions,
+    ): Promise<ElevenLabs.RagIndexResponseModel> {
+        const { force_reindex: forceReindex, ..._body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (forceReindex != null) {
+            _queryParams["force_reindex"] = forceReindex.toString();
+        }
+
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/knowledge-base/${encodeURIComponent(documentationId)}/rag-index`,
+            ),
+            method: "POST",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            body: _body,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.RagIndexResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/convai/knowledge-base/{documentation_id}/rag-index.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
      * Get details about a specific documentation making up the agent's knowledge base
      *
      * @param {string} documentationId - The id of a document from the knowledge base. This is returned on document addition.
@@ -1886,8 +1979,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1963,8 +2056,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -2052,8 +2145,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -2101,402 +2194,6 @@ export class ConversationalAi {
     }
 
     /**
-     * Get all available tools available in the workspace.
-     *
-     * @param {ConversationalAi.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.conversationalAi.getTools()
-     */
-    public async getTools(requestOptions?: ConversationalAi.RequestOptions): Promise<ElevenLabs.ToolsResponseModel> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                "v1/convai/tools",
-            ),
-            method: "GET",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.ToolsResponseModel;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/convai/tools.");
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Add a new tool to the available tools in the workspace.
-     *
-     * @param {ElevenLabs.ToolRequestModel} request
-     * @param {ConversationalAi.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.conversationalAi.addTool({
-     *         tool_config: {
-     *             type: "webhook",
-     *             name: "name",
-     *             description: "description",
-     *             api_schema: {
-     *                 url: "url"
-     *             }
-     *         }
-     *     })
-     */
-    public async addTool(
-        request: ElevenLabs.ToolRequestModel,
-        requestOptions?: ConversationalAi.RequestOptions,
-    ): Promise<ElevenLabs.ToolResponseModel> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                "v1/convai/tools",
-            ),
-            method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            body: request,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.ToolResponseModel;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/convai/tools.");
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Get tool that is available in the workspace.
-     *
-     * @param {string} toolId - ID of the requested tool.
-     * @param {ConversationalAi.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.conversationalAi.getTool("tool_id")
-     */
-    public async getTool(
-        toolId: string,
-        requestOptions?: ConversationalAi.RequestOptions,
-    ): Promise<ElevenLabs.ToolResponseModel> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                `v1/convai/tools/${encodeURIComponent(toolId)}`,
-            ),
-            method: "GET",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.ToolResponseModel;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/convai/tools/{tool_id}.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Delete tool from the workspace.
-     *
-     * @param {string} toolId - ID of the requested tool.
-     * @param {ConversationalAi.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.conversationalAi.removeTool("tool_id")
-     */
-    public async removeTool(toolId: string, requestOptions?: ConversationalAi.RequestOptions): Promise<unknown> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                `v1/convai/tools/${encodeURIComponent(toolId)}`,
-            ),
-            method: "DELETE",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling DELETE /v1/convai/tools/{tool_id}.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Update tool that is available in the workspace.
-     *
-     * @param {string} toolId - ID of the requested tool.
-     * @param {ElevenLabs.ToolRequestModel} request
-     * @param {ConversationalAi.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.conversationalAi.updateTool("tool_id", {
-     *         tool_config: {
-     *             type: "webhook",
-     *             name: "name",
-     *             description: "description",
-     *             api_schema: {
-     *                 url: "url"
-     *             }
-     *         }
-     *     })
-     */
-    public async updateTool(
-        toolId: string,
-        request: ElevenLabs.ToolRequestModel,
-        requestOptions?: ConversationalAi.RequestOptions,
-    ): Promise<ElevenLabs.ToolResponseModel> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                `v1/convai/tools/${encodeURIComponent(toolId)}`,
-            ),
-            method: "PATCH",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            body: request,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.ToolResponseModel;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling PATCH /v1/convai/tools/{tool_id}.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
      * Retrieve Convai settings for the workspace
      *
      * @param {ConversationalAi.RequestOptions} requestOptions - Request-specific configuration.
@@ -2508,7 +2205,7 @@ export class ConversationalAi {
      */
     public async getSettings(
         requestOptions?: ConversationalAi.RequestOptions,
-    ): Promise<ElevenLabs.GetConvaiSettingsResponseModel> {
+    ): Promise<ElevenLabs.GetConvAiSettingsResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -2524,8 +2221,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -2537,7 +2234,7 @@ export class ConversationalAi {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetConvaiSettingsResponseModel;
+            return _response.body as ElevenLabs.GetConvAiSettingsResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -2572,24 +2269,18 @@ export class ConversationalAi {
     /**
      * Update Convai settings for the workspace
      *
-     * @param {ElevenLabs.PatchConvaiSettingsRequest} request
+     * @param {ElevenLabs.PatchConvAiSettingsRequest} request
      * @param {ConversationalAi.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.updateSettings({
-     *         secrets: [{
-     *                 type: "new",
-     *                 name: "name",
-     *                 value: "value"
-     *             }]
-     *     })
+     *     await client.conversationalAi.updateSettings()
      */
     public async updateSettings(
-        request: ElevenLabs.PatchConvaiSettingsRequest,
+        request: ElevenLabs.PatchConvAiSettingsRequest = {},
         requestOptions?: ConversationalAi.RequestOptions,
-    ): Promise<ElevenLabs.GetConvaiSettingsResponseModel> {
+    ): Promise<ElevenLabs.GetConvAiSettingsResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -2605,8 +2296,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -2619,7 +2310,7 @@ export class ConversationalAi {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetConvaiSettingsResponseModel;
+            return _response.body as ElevenLabs.GetConvAiSettingsResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -2652,7 +2343,7 @@ export class ConversationalAi {
     }
 
     /**
-     * Get all secrets for the workspace
+     * Get all workspace secrets for the user
      *
      * @param {ConversationalAi.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2679,8 +2370,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -2757,8 +2448,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -2796,6 +2487,80 @@ export class ConversationalAi {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/convai/secrets.");
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Delete a workspace secret if it's not in use
+     *
+     * @param {string} secretId
+     * @param {ConversationalAi.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.deleteSecret("secret_id")
+     */
+    public async deleteSecret(secretId: string, requestOptions?: ConversationalAi.RequestOptions): Promise<void> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/secrets/${encodeURIComponent(secretId)}`,
+            ),
+            method: "DELETE",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling DELETE /v1/convai/secrets/{secret_id}.",
+                );
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,

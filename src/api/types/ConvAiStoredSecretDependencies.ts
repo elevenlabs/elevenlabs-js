@@ -6,6 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface ConvAiStoredSecretDependencies {
     tools: ElevenLabs.ConvAiStoredSecretDependenciesToolsItem[];
-    agents: ElevenLabs.ConvAiStoredSecretDependenciesAgentsItem[];
+    agent_tools: ElevenLabs.ConvAiStoredSecretDependenciesAgentToolsItem[];
     others: ElevenLabs.SecretDependencyType[];
+    phone_numbers?: ElevenLabs.DependentPhoneNumberIdentifier[];
 }

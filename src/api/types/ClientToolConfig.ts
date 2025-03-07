@@ -13,4 +13,5 @@ export interface ClientToolConfig {
     parameters?: ElevenLabs.ObjectJsonSchemaProperty;
     expects_response?: boolean;
     response_timeout_secs?: number;
+    dynamic_variables?: ElevenLabs.DynamicVariablesConfig;
 }

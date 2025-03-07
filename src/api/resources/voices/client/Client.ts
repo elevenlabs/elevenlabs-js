@@ -39,7 +39,7 @@ export class Voices {
     constructor(protected readonly _options: Voices.Options = {}) {}
 
     /**
-     * Gets a list of all available voices for a user.
+     * Returns a list of all available voices for a user.
      *
      * @param {ElevenLabs.VoicesGetAllRequest} request
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
@@ -74,8 +74,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -144,8 +144,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -214,8 +214,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -299,8 +299,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -356,7 +356,10 @@ export class Voices {
      * @example
      *     await client.voices.delete("VOICE_ID")
      */
-    public async delete(voiceId: string, requestOptions?: Voices.RequestOptions): Promise<unknown> {
+    public async delete(
+        voiceId: string,
+        requestOptions?: Voices.RequestOptions,
+    ): Promise<ElevenLabs.DeleteVoiceResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -372,8 +375,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -385,7 +388,7 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.DeleteVoiceResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -418,7 +421,7 @@ export class Voices {
     }
 
     /**
-     * Edit your settings for a specific voice. "similarity_boost" corresponds to"Clarity + Similarity Enhancement" in the web app and "stability" corresponds to "Stability" slider in the web app.
+     * Edit your settings for a specific voice. "similarity_boost" corresponds to "Clarity + Similarity Enhancement" in the web app and "stability" corresponds to "Stability" slider in the web app.
      *
      * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
      * @param {ElevenLabs.VoiceSettings} request
@@ -437,7 +440,7 @@ export class Voices {
         voiceId: string,
         request: ElevenLabs.VoiceSettings,
         requestOptions?: Voices.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.EditVoiceSettingsResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -453,8 +456,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -467,7 +470,7 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.EditVoiceSettingsResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -553,8 +556,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -618,7 +621,7 @@ export class Voices {
         voiceId: string,
         request: ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost,
         requestOptions?: Voices.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.EditVoiceResponseModel> {
         const _request = await core.newFormData();
         _request.append("name", request.name);
         if (request.files != null) {
@@ -655,8 +658,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -670,7 +673,7 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.EditVoiceResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -705,11 +708,11 @@ export class Voices {
     }
 
     /**
-     * Add a sharing voice to your collection of voices in VoiceLab.
+     * Add a shared voice to your collection of voices.
      *
      * @param {string} publicUserId - Public user ID used to publicly identify ElevenLabs users.
      * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
-     * @param {ElevenLabs.AddSharingVoiceRequest} request
+     * @param {ElevenLabs.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost} request
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -722,7 +725,7 @@ export class Voices {
     public async addSharingVoice(
         publicUserId: string,
         voiceId: string,
-        request: ElevenLabs.AddSharingVoiceRequest,
+        request: ElevenLabs.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost,
         requestOptions?: Voices.RequestOptions,
     ): Promise<ElevenLabs.AddVoiceResponseModel> {
         const _response = await core.fetcher({
@@ -740,8 +743,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -789,7 +792,7 @@ export class Voices {
     }
 
     /**
-     * Gets a list of shared voices.
+     * Retrieves a list of shared voices.
      *
      * @param {ElevenLabs.VoicesGetSharedRequest} request
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
@@ -908,8 +911,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -998,8 +1001,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -1075,8 +1078,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

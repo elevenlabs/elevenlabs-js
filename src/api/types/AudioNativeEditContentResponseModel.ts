@@ -3,8 +3,12 @@
  */
 
 export interface AudioNativeEditContentResponseModel {
+    /** The ID of the project. */
     project_id: string;
+    /** Whether the project is currently being converted. */
     converting: boolean;
+    /** Whether the project is currently being published. */
     publishing: boolean;
+    /** The HTML snippet to embed the Audio Native player. */
     html_snippet: string;
 }

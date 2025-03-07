@@ -13,6 +13,10 @@ import * as ElevenLabs from "../../../../index";
  *     }
  */
 export interface BodySpeechToTextV1SpeechToTextPost {
+    /**
+     * When enable_logging is set to false zero retention mode will be used for the request. This will mean history features are unavailable for this request, including request stitching. Zero retention mode may only be used by enterprise customers.
+     */
+    enable_logging?: boolean;
     /** The ID of the model to use for transcription, currently only 'scribe_v1' is available. */
     model_id: string;
     file: File | fs.ReadStream | Blob;
@@ -24,6 +28,6 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     num_speakers?: number;
     /** The granularity of the timestamps in the transcription. 'word' provides word-level timestamps and 'character' provides character-level timestamps per word. */
     timestamps_granularity?: ElevenLabs.SpeechToTextConvertRequestTimestampsGranularity;
-    /** Whether to annotate which speaker is currently talking in the uploaded file. Enabling this will limit the maximum duration of your inputs to 8 minutes. */
+    /** Whether to annotate which speaker is currently talking in the uploaded file. */
     diarize?: boolean;
 }

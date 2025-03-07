@@ -17,6 +17,6 @@ export interface BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFr
     file?: File | fs.ReadStream | Blob | undefined;
     /** A description of the pronunciation dictionary, used for identification only. */
     description?: string;
-    /** Should be one of 'editor' or 'viewer'. If not provided, defaults to no access. */
+    /** Should be one of 'admin', 'editor' or 'viewer'. If not provided, defaults to no access. */
     workspace_access?: ElevenLabs.PronunciationDictionaryAddFromFileRequestWorkspaceAccess;
 }

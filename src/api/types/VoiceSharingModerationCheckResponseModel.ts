@@ -3,13 +3,22 @@
  */
 
 export interface VoiceSharingModerationCheckResponseModel {
+    /** The date the moderation check was made in Unix time. */
     date_checked_unix?: number;
+    /** The name value of the voice. */
     name_value?: string;
+    /** Whether the name check was successful. */
     name_check?: boolean;
+    /** The description value of the voice. */
     description_value?: string;
+    /** Whether the description check was successful. */
     description_check?: boolean;
+    /** A list of sample IDs. */
     sample_ids?: string[];
+    /** A list of sample checks. */
     sample_checks?: number[];
+    /** A list of captcha IDs. */
     captcha_ids?: string[];
+    /** A list of CAPTCHA check values. */
     captcha_checks?: number[];
 }

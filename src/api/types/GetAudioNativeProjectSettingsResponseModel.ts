@@ -5,7 +5,10 @@
 import * as ElevenLabs from "../index";
 
 export interface GetAudioNativeProjectSettingsResponseModel {
+    /** Whether the project is enabled. */
     enabled: boolean;
-    snapshot_id: string;
-    settings: ElevenLabs.AudioNativeProjectSettingsResponseModel;
+    /** The ID of the latest snapshot of the project. */
+    snapshot_id?: string;
+    /** The settings of the project. */
+    settings?: ElevenLabs.AudioNativeProjectSettingsResponseModel;
 }

@@ -9,8 +9,8 @@ import * as ElevenLabs from "../../../../index";
  *     {
  *         rules: [{
  *                 type: "alias",
- *                 string_to_replace: "string_to_replace",
- *                 alias: "alias"
+ *                 string_to_replace: "Thailand",
+ *                 alias: "tie-land"
  *             }]
  *     }
  */

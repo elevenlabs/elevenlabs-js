@@ -24,6 +24,7 @@ export interface WidgetConfigResponseModel {
     listening_text?: string;
     speaking_text?: string;
     shareable_page_text?: string;
+    shareable_page_show_terms?: boolean;
     terms_text?: string;
     terms_html?: string;
     terms_key?: string;

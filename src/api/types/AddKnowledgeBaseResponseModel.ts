@@ -4,4 +4,5 @@
 
 export interface AddKnowledgeBaseResponseModel {
     id: string;
+    prompt_injectable: boolean;
 }

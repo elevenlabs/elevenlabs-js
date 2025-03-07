@@ -5,10 +5,16 @@
 import * as ElevenLabs from "../index";
 
 export interface ProjectSnapshotResponse {
+    /** The ID of the project snapshot. */
     project_snapshot_id: string;
+    /** The ID of the project. */
     project_id: string;
+    /** The creation date of the project snapshot. */
     created_at_unix: number;
+    /** The name of the project snapshot. */
     name: string;
+    /** The audio upload of the project snapshot. */
     audio_upload?: ElevenLabs.ProjectSnapshotUploadResponseModel;
+    /** The zip upload of the project snapshot. */
     zip_upload?: ElevenLabs.ProjectSnapshotUploadResponseModel;
 }

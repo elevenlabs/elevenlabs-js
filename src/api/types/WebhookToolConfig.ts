@@ -11,4 +11,5 @@ export interface WebhookToolConfig {
     name: string;
     description: string;
     api_schema: ElevenLabs.WebhookToolApiSchemaConfig;
+    dynamic_variables?: ElevenLabs.DynamicVariablesConfig;
 }

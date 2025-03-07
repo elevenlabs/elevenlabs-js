@@ -8,6 +8,8 @@ export interface GetKnowledgeBaseSummaryResponseModel {
     id: string;
     name: string;
     type: ElevenLabs.GetKnowledgeBaseSummaryResponseModelType;
+    metadata: ElevenLabs.KnowledgeBaseDocumentMetadataResponseModel;
+    prompt_injectable: boolean;
     dependent_agents: ElevenLabs.GetKnowledgeBaseSummaryResponseModelDependentAgentsItem[];
     access_level: ElevenLabs.GetKnowledgeBaseSummaryResponseModelAccessLevel;
 }

@@ -7,6 +7,7 @@ import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../../../errors/index";
+import * as stream from "stream";
 
 export declare namespace Chapters {
     export interface Options {
@@ -64,8 +65,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -145,8 +146,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -225,8 +226,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -306,8 +307,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -370,7 +371,7 @@ export class Chapters {
         projectId: string,
         chapterId: string,
         requestOptions?: Chapters.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.DeleteChapterResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -386,8 +387,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -399,7 +400,7 @@ export class Chapters {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.DeleteChapterResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -449,7 +450,7 @@ export class Chapters {
         projectId: string,
         chapterId: string,
         requestOptions?: Chapters.RequestOptions,
-    ): Promise<unknown> {
+    ): Promise<ElevenLabs.ConvertChapterResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -465,8 +466,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -478,7 +479,7 @@ export class Chapters {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.ConvertChapterResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -513,7 +514,7 @@ export class Chapters {
     }
 
     /**
-     * Gets information about all the snapshots of a chapter, each snapshot corresponds can be downloaded as audio. Whenever a chapter is converted a snapshot will be automatically created.
+     * Gets information about all the snapshots of a chapter. Each snapshot can be downloaded as audio. Whenever a chapter is converted a snapshot will automatically be created.
      *
      * @param {string} projectId - The ID of the Studio project.
      * @param {string} chapterId - The ID of the chapter.
@@ -544,8 +545,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -592,18 +593,89 @@ export class Chapters {
     }
 
     /**
-     * Stream the audio from a chapter snapshot. Use `GET /v1/studio/projects/{project_id}/chapters/{chapter_id}/snapshots` to return the snapshots of a chapter.
+     * Returns the chapter snapshot.
      *
      * @param {string} projectId - The ID of the Studio project.
      * @param {string} chapterId - The ID of the chapter.
      * @param {string} chapterSnapshotId - The ID of the chapter snapshot.
-     * @param {ElevenLabs.studio.BodyStreamChapterAudioV1StudioProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost} request
      * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.studio.chapters.streamSnapshot("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM")
+     *     await client.studio.chapters.getChapterSnapshot("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM")
+     */
+    public async getChapterSnapshot(
+        projectId: string,
+        chapterId: string,
+        chapterSnapshotId: string,
+        requestOptions?: Chapters.RequestOptions,
+    ): Promise<ElevenLabs.ChapterSnapshotExtendedResponseModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/studio/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}/snapshots/${encodeURIComponent(chapterSnapshotId)}`,
+            ),
+            method: "GET",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.ChapterSnapshotExtendedResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/studio/projects/{project_id}/chapters/{chapter_id}/snapshots/{chapter_snapshot_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Stream the audio from a chapter snapshot. Use `GET /v1/studio/projects/{project_id}/chapters/{chapter_id}/snapshots` to return the snapshots of a chapter.
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async streamSnapshot(
         projectId: string,
@@ -611,8 +683,8 @@ export class Chapters {
         chapterSnapshotId: string,
         request: ElevenLabs.studio.BodyStreamChapterAudioV1StudioProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost = {},
         requestOptions?: Chapters.RequestOptions,
-    ): Promise<void> {
-        const _response = await core.fetcher({
+    ): Promise<stream.Readable> {
+        const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
@@ -627,8 +699,8 @@ export class Chapters {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -636,12 +708,13 @@ export class Chapters {
             contentType: "application/json",
             requestType: "json",
             body: request,
+            responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {

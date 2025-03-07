@@ -10,6 +10,7 @@ export interface TtsConversationalConfig {
     agent_output_audio_format?: ElevenLabs.TtsOutputFormat;
     optimize_streaming_latency?: ElevenLabs.TtsOptimizeStreamingLatency;
     stability?: number;
+    speed?: number;
     similarity_boost?: number;
     pronunciation_dictionary_locators?: ElevenLabs.PydanticPronunciationDictionaryVersionLocator[];
 }

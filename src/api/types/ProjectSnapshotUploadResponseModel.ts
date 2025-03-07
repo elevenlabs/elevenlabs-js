@@ -5,6 +5,8 @@
 import * as ElevenLabs from "../index";
 
 export interface ProjectSnapshotUploadResponseModel {
+    /** The status of the snapshot upload. */
     status: ElevenLabs.ProjectSnapshotUploadResponseModelStatus;
+    /** Whether volume normalization was applied to the snapshot. */
     acx_volume_normalization?: boolean;
 }

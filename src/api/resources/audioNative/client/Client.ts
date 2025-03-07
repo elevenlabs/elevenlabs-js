@@ -35,7 +35,7 @@ export class AudioNative {
     constructor(protected readonly _options: AudioNative.Options = {}) {}
 
     /**
-     * Creates AudioNative enabled project, optionally starts conversion and returns project id and embeddable html snippet.
+     * Creates Audio Native enabled project, optionally starts conversion and returns project ID and embeddable HTML snippet.
      *
      * @param {ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost} request
      * @param {AudioNative.RequestOptions} requestOptions - Request-specific configuration.
@@ -113,8 +113,8 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -190,8 +190,8 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -283,8 +283,8 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,

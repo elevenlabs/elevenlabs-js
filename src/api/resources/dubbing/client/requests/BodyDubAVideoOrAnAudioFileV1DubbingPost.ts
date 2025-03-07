@@ -34,4 +34,6 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     drop_background_audio?: boolean;
     /** [BETA] Whether transcripts should have profanities censored with the words '[censored]' */
     use_profanity_filter?: boolean;
+    /** Whether to prepare dub for edits in dubbing studio or edits as a dubbing resource. */
+    dubbing_studio?: boolean;
 }

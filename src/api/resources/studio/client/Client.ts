@@ -61,12 +61,12 @@ export class Studio {
      *         mode: {
      *             type: "conversation",
      *             conversation: {
-     *                 host_voice_id: "host_voice_id",
-     *                 guest_voice_id: "guest_voice_id"
+     *                 host_voice_id: "aw1NgEzBg83R7vgmiJt6",
+     *                 guest_voice_id: "aw1NgEzBg83R7vgmiJt7"
      *             }
      *         },
      *         source: {
-     *             text: "text"
+     *             text: "This is a test podcast."
      *         }
      *     })
      */
@@ -89,8 +89,8 @@ export class Studio {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.52.0",
-                "User-Agent": "elevenlabs/1.52.0",
+                "X-Fern-SDK-Version": "1.53.0",
+                "User-Agent": "elevenlabs/1.53.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
