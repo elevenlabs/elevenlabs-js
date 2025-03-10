@@ -14,7 +14,7 @@
 <dl>
 <dd>
 
-Returns metadata about all your generated audio.
+Returns a list of your generated audio.
 
 </dd>
 </dl>
@@ -77,7 +77,7 @@ await client.history.getAll();
 <dl>
 <dd>
 
-Returns information about an history item by its ID.
+Retrieves a history item.
 
 </dd>
 </dl>
@@ -128,7 +128,7 @@ await client.history.get("HISTORY_ITEM_ID");
 </dl>
 </details>
 
-<details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">delete</a>(historyItemId) -> unknown</code></summary>
+<details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">delete</a>(historyItemId) -> ElevenLabs.DeleteHistoryItemResponse</code></summary>
 <dl>
 <dd>
 
@@ -254,7 +254,7 @@ await client.history.getAudio("HISTORY_ITEM_ID");
 </dl>
 </details>
 
-<details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">download</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">download</a>({ ...params }) -> stream.Readable</code></summary>
 <dl>
 <dd>
 

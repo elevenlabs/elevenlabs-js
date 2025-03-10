@@ -36,7 +36,7 @@ export class History {
     constructor(protected readonly _options: History.Options = {}) {}
 
     /**
-     * Returns metadata about all your generated audio.
+     * Returns a list of your generated audio.
      *
      * @param {ElevenLabs.HistoryGetAllRequest} request
      * @param {History.RequestOptions} requestOptions - Request-specific configuration.
@@ -93,8 +93,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.53.0",
-                "User-Agent": "elevenlabs/1.53.0",
+                "X-Fern-SDK-Version": "1.54.0",
+                "User-Agent": "elevenlabs/1.54.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -140,7 +140,7 @@ export class History {
     }
 
     /**
-     * Returns information about an history item by its ID.
+     * Retrieves a history item.
      *
      * @param {string} historyItemId - History item ID to be used, you can use GET https://api.elevenlabs.io/v1/history to receive a list of history items and their IDs.
      * @param {History.RequestOptions} requestOptions - Request-specific configuration.
@@ -169,8 +169,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.53.0",
-                "User-Agent": "elevenlabs/1.53.0",
+                "X-Fern-SDK-Version": "1.54.0",
+                "User-Agent": "elevenlabs/1.54.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -227,7 +227,10 @@ export class History {
      * @example
      *     await client.history.delete("HISTORY_ITEM_ID")
      */
-    public async delete(historyItemId: string, requestOptions?: History.RequestOptions): Promise<unknown> {
+    public async delete(
+        historyItemId: string,
+        requestOptions?: History.RequestOptions,
+    ): Promise<ElevenLabs.DeleteHistoryItemResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -243,8 +246,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.53.0",
-                "User-Agent": "elevenlabs/1.53.0",
+                "X-Fern-SDK-Version": "1.54.0",
+                "User-Agent": "elevenlabs/1.54.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -256,7 +259,7 @@ export class History {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return _response.body as ElevenLabs.DeleteHistoryItemResponse;
         }
 
         if (_response.error.reason === "status-code") {
@@ -310,8 +313,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.53.0",
-                "User-Agent": "elevenlabs/1.53.0",
+                "X-Fern-SDK-Version": "1.54.0",
+                "User-Agent": "elevenlabs/1.54.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -360,22 +363,14 @@ export class History {
 
     /**
      * Download one or more history items. If one history item ID is provided, we will return a single audio file. If more than one history item IDs are provided, we will provide the history items packed into a .zip file.
-     *
-     * @param {ElevenLabs.DownloadHistoryRequest} request
-     * @param {History.RequestOptions} requestOptions - Request-specific configuration.
-     *
+     * @throws {@link ElevenLabs.BadRequestError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.history.download({
-     *         history_item_ids: ["HISTORY_ITEM_ID"]
-     *     })
      */
     public async download(
         request: ElevenLabs.DownloadHistoryRequest,
         requestOptions?: History.RequestOptions,
-    ): Promise<void> {
-        const _response = await core.fetcher({
+    ): Promise<stream.Readable> {
+        const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
@@ -390,8 +385,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.53.0",
-                "User-Agent": "elevenlabs/1.53.0",
+                "X-Fern-SDK-Version": "1.54.0",
+                "User-Agent": "elevenlabs/1.54.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -399,16 +394,19 @@ export class History {
             contentType: "application/json",
             requestType: "json",
             body: request,
+            responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 400:
+                    throw new ElevenLabs.BadRequestError(_response.error.body as unknown);
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,

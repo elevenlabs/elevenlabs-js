@@ -5,6 +5,8 @@
 import * as ElevenLabs from "../index";
 
 export interface HistoryAlignmentsResponseModel {
+    /** The alignment of the text. */
     alignment: ElevenLabs.HistoryAlignmentResponseModel;
+    /** The normalized alignment of the text. */
     normalized_alignment: ElevenLabs.HistoryAlignmentResponseModel;
 }
