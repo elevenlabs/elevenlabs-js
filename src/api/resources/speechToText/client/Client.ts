@@ -81,6 +81,12 @@ export class SpeechToText {
             _request.append("diarize", request.diarize.toString());
         }
 
+        if (request.biased_keywords != null) {
+            for (const _item of request.biased_keywords) {
+                _request.append("biased_keywords", _item);
+            }
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
@@ -97,8 +103,8 @@ export class SpeechToText {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.53.0",
-                "User-Agent": "elevenlabs/1.53.0",
+                "X-Fern-SDK-Version": "1.54.0",
+                "User-Agent": "elevenlabs/1.54.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,

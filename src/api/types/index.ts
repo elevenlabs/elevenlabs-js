@@ -93,6 +93,7 @@ export * from "./CustomLlm";
 export * from "./DataCollectionResultCommonModel";
 export * from "./DeleteChapterResponseModel";
 export * from "./DeleteDubbingResponseModel";
+export * from "./DeleteHistoryItemResponse";
 export * from "./DeleteProjectResponseModel";
 export * from "./DeleteSampleResponseModel";
 export * from "./DeleteVoiceResponseModel";
