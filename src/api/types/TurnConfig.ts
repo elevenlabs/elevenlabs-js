@@ -5,6 +5,8 @@
 import * as ElevenLabs from "../index";
 
 export interface TurnConfig {
+    /** Maximum wait time for the user’s reply before re-engaging the user */
     turn_timeout?: number;
+    /** The mode of turn detection */
     mode?: ElevenLabs.TurnMode;
 }

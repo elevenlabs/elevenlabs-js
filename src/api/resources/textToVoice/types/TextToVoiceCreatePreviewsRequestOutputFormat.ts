@@ -17,7 +17,12 @@ export type TextToVoiceCreatePreviewsRequestOutputFormat =
     | "pcm_22050"
     | "pcm_24000"
     | "pcm_44100"
-    | "ulaw_8000";
+    | "ulaw_8000"
+    | "opus_48000_32"
+    | "opus_48000_64"
+    | "opus_48000_96"
+    | "opus_48000_128"
+    | "opus_48000_192";
 export const TextToVoiceCreatePreviewsRequestOutputFormat = {
     Mp32205032: "mp3_22050_32",
     Mp34410032: "mp3_44100_32",
@@ -31,4 +36,9 @@ export const TextToVoiceCreatePreviewsRequestOutputFormat = {
     Pcm24000: "pcm_24000",
     Pcm44100: "pcm_44100",
     Ulaw8000: "ulaw_8000",
+    Opus4800032: "opus_48000_32",
+    Opus4800064: "opus_48000_64",
+    Opus4800096: "opus_48000_96",
+    Opus48000128: "opus_48000_128",
+    Opus48000192: "opus_48000_192",
 } as const;

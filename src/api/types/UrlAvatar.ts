@@ -3,5 +3,6 @@
  */
 
 export interface UrlAvatar {
+    /** The custom URL of the avatar */
     custom_url?: string;
 }

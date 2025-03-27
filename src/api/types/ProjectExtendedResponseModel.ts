@@ -59,6 +59,8 @@ export interface ProjectExtendedResponseModel {
     creation_meta?: ElevenLabs.ProjectCreationMetaResponseModel;
     /** The source type of the project. */
     source_type?: ElevenLabs.ProjectExtendedResponseModelSourceType;
+    /** Whether chapters are enabled for the project. */
+    chapters_enabled?: boolean;
     /** The quality preset level of the project. */
     quality_preset: ElevenLabs.ProjectExtendedResponseModelQualityPreset;
     /** List of chapters of the project and their metadata. */

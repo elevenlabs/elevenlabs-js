@@ -38,6 +38,10 @@ export interface VoicesGetSharedRequest {
      */
     language?: string;
     /**
+     * Locale used for filtering
+     */
+    locale?: string;
+    /**
      * Search term used for filtering
      */
     search?: string;

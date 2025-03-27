@@ -6,3 +6,4 @@ export * from "./BodyCreatePodcastV1ProjectsPodcastCreatePostDurationScale";
 export * from "./AddProjectV1ProjectsAddPostRequestTargetAudience";
 export * from "./AddProjectV1ProjectsAddPostRequestFiction";
 export * from "./AddProjectV1ProjectsAddPostRequestApplyTextNormalization";
+export * from "./AddProjectV1ProjectsAddPostRequestSourceType";

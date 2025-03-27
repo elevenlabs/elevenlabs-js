@@ -9,5 +9,6 @@ import * as ElevenLabs from "../index";
  * Agents are evaluated against a set of criteria, with success being defined as meeting some combination of those criteria.
  */
 export interface EvaluationSettings {
+    /** Individual criteria that the agent should be evaluated against */
     criteria?: ElevenLabs.PromptEvaluationCriteria[];
 }

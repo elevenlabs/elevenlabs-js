@@ -4,6 +4,9 @@
 
 import * as ElevenLabs from "../index";
 
+/**
+ * The avatar of the widget
+ */
 export type WidgetConfigAvatar =
     | ElevenLabs.WidgetConfigAvatar.Orb
     | ElevenLabs.WidgetConfigAvatar.Url

@@ -5,7 +5,10 @@
 import * as ElevenLabs from "../index";
 
 export interface CustomLlm {
+    /** The URL of the Chat Completions compatible endpoint */
     url: string;
+    /** The model ID to be used if URL serves multiple models */
     model_id?: string;
+    /** The API key for authentication */
     api_key?: ElevenLabs.ConvAiSecretLocator;
 }

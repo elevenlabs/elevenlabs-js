@@ -5,3 +5,6 @@ export { type BodyInviteUserV1WorkspaceInvitesAddPost } from "./BodyInviteUserV1
 export { type BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost } from "./BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost";
 export { type BodyDeleteExistingInvitationV1WorkspaceInvitesDelete } from "./BodyDeleteExistingInvitationV1WorkspaceInvitesDelete";
 export { type BodyUpdateMemberV1WorkspaceMembersPost } from "./BodyUpdateMemberV1WorkspaceMembersPost";
+export { type GetResourceV1WorkspaceResourcesResourceIdGetRequest } from "./GetResourceV1WorkspaceResourcesResourceIdGetRequest";
+export { type BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePost } from "./BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePost";
+export { type BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIdUnsharePost } from "./BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIdUnsharePost";

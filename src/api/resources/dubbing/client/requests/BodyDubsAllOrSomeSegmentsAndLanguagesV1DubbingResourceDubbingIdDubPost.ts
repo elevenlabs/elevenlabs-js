@@ -5,13 +5,12 @@
 /**
  * @example
  *     {
- *         segments: ["segments"],
- *         languages: ["languages"]
+ *         segments: ["segments"]
  *     }
  */
 export interface BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdDubPost {
     /** Dub only this list of segments. */
     segments: string[];
     /** Dub only these languages for each segment. */
-    languages: string[];
+    languages?: string[];
 }

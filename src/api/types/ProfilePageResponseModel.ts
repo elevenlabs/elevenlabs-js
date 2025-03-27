@@ -3,9 +3,9 @@
  */
 
 export interface ProfilePageResponseModel {
-    handle: string;
-    public_user_id: string;
-    name: string;
-    bio: string;
-    profile_picture: string;
+    handle?: string;
+    public_user_id?: string;
+    name?: string;
+    bio?: string;
+    profile_picture?: string;
 }

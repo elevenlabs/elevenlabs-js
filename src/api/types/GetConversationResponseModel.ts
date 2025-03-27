@@ -11,5 +11,5 @@ export interface GetConversationResponseModel {
     transcript: ElevenLabs.ConversationHistoryTranscriptCommonModel[];
     metadata: ElevenLabs.ConversationHistoryMetadataCommonModel;
     analysis?: ElevenLabs.ConversationHistoryAnalysisCommonModel;
-    conversation_initiation_client_data?: ElevenLabs.ConversationInitiationClientData;
+    conversation_initiation_client_data?: ElevenLabs.ConversationInitiationClientDataRequestOutput;
 }

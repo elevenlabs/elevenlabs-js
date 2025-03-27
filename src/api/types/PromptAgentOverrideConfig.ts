@@ -3,5 +3,6 @@
  */
 
 export interface PromptAgentOverrideConfig {
+    /** Whether to allow prompt overriding */
     prompt?: boolean;
 }

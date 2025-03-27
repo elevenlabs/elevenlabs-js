@@ -5,7 +5,10 @@
 import * as ElevenLabs from "../index";
 
 export interface AgentConfigOverrideConfig {
+    /** Overrides for the prompt configuration */
     prompt?: ElevenLabs.PromptAgentOverrideConfig;
+    /** Whether to allow overriding the first message */
     first_message?: boolean;
+    /** Whether to allow overriding the language */
     language?: boolean;
 }
