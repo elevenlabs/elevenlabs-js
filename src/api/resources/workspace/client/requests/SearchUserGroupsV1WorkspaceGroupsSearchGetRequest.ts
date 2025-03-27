@@ -10,7 +10,7 @@
  */
 export interface SearchUserGroupsV1WorkspaceGroupsSearchGetRequest {
     /**
-     * Name of the group to find.
+     * Name of the target group.
      */
     name: string;
 }

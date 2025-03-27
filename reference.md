@@ -1212,7 +1212,6 @@ Generate a custom voice based on voice description. This method returns a list o
 ```typescript
 await client.textToVoice.createPreviews({
     voice_description: "A sassy squeaky mouse",
-    text: "Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted.",
 });
 ```
 
@@ -1474,6 +1473,71 @@ await client.voices.getAll();
 <dd>
 
 **request:** `ElevenLabs.VoicesGetAllRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Voices.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.GetVoicesV2ResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets a list of all available voices for a user with search, filtering and pagination.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.search({
+    include_total_count: true,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.VoicesSearchRequest`
 
 </dd>
 </dl>
@@ -3600,7 +3664,6 @@ await client.projects.updatePronunciationDictionaries("21m00Tcm4TlvDq8ikWAM", {
     pronunciation_dictionary_locators: [
         {
             pronunciation_dictionary_id: "pronunciation_dictionary_id",
-            version_id: "version_id",
         },
     ],
 });
@@ -3739,9 +3802,7 @@ Adds the given ElevenLab Turbo V2/V2.5 language code to the resource. Does not a
 <dd>
 
 ```typescript
-await client.dubbing.addLanguageToResource("dubbing_id", {
-    language: "language",
-});
+await client.dubbing.addLanguageToResource("dubbing_id");
 ```
 
 </dd>
@@ -4127,7 +4188,6 @@ Regenerate the translations for either the entire resource or the specified segm
 ```typescript
 await client.dubbing.translateSegments("dubbing_id", {
     segments: ["segments"],
-    languages: ["languages"],
 });
 ```
 
@@ -4201,7 +4261,6 @@ Regenerate the dubs for either the entire resource or the specified segments/lan
 ```typescript
 await client.dubbing.dubSegments("dubbing_id", {
     segments: ["segments"],
-    languages: ["languages"],
 });
 ```
 
@@ -4273,9 +4332,7 @@ Dubs a provided audio or video file into given language.
 <dd>
 
 ```typescript
-await client.dubbing.dubAVideoOrAnAudioFile({
-    target_lang: "target_lang",
-});
+await client.dubbing.dubAVideoOrAnAudioFile({});
 ```
 
 </dd>
@@ -4908,6 +4965,78 @@ await client.pronunciationDictionary.addFromFile({
 </dl>
 </details>
 
+<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">addFromRules</a>({ ...params }) -> ElevenLabs.AddPronunciationDictionaryResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new pronunciation dictionary from provided rules.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.pronunciationDictionary.addFromRules({
+    rules: [
+        {
+            type: "alias",
+            string_to_replace: "Thailand",
+            alias: "tie-land",
+        },
+    ],
+    name: "My Dictionary",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PronunciationDictionary.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">addRules</a>(pronunciationDictionaryId, { ...params }) -> ElevenLabs.AddPronunciationDictionaryRulesResponseModel</code></summary>
 <dl>
 <dd>
@@ -5060,77 +5189,6 @@ await client.pronunciationDictionary.removeRules("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">download</a>(dictionaryId, versionId) -> stream.Readable</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get a PLS file with a pronunciation dictionary version rules
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.pronunciationDictionary.download("Fm6AvNgS53NXe6Kqxp3e", "KZFyRUq3R6kaqhKI146w");
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dictionaryId:** `string` — The id of the pronunciation dictionary
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**versionId:** `string` — The id of the version of the pronunciation dictionary
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PronunciationDictionary.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">get</a>(pronunciationDictionaryId) -> ElevenLabs.GetPronunciationDictionaryMetadataResponse</code></summary>
 <dl>
 <dd>
@@ -5159,7 +5217,7 @@ Get metadata for a pronunciation dictionary
 <dd>
 
 ```typescript
-await client.pronunciationDictionary.get("Fm6AvNgS53NXe6Kqxp3e");
+await client.pronunciationDictionary.get("21m00Tcm4TlvDq8ikWAM");
 ```
 
 </dd>
@@ -5222,9 +5280,7 @@ Get a list of the pronunciation dictionaries you have access to and their metada
 <dd>
 
 ```typescript
-await client.pronunciationDictionary.getAll({
-    page_size: 1,
-});
+await client.pronunciationDictionary.getAll();
 ```
 
 </dd>
@@ -5732,6 +5788,226 @@ await client.workspace.updateMember({
 </dl>
 </details>
 
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">getResource</a>(resourceId, { ...params }) -> ElevenLabs.ResourceMetadataResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets the metadata of a resource by ID.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.getResource("resource_id", {
+    resource_type: "voice",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**resourceId:** `string` — The ID of the target resource.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.GetResourceV1WorkspaceResourcesResourceIdGetRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">shareWorkspaceResource</a>(resourceId, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Grants a role on a workspace resource to a user or a group. It overrides any existing role this user/group/workspace api key has on the resource. To target a user, pass only the user email. The user must be in your workspace. To target a group, pass only the group id. To target a workspace api key, pass the api key id. You must have admin access to the resource to share it.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.shareWorkspaceResource("resource_id", {
+    role: "admin",
+    resource_type: "voice",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**resourceId:** `string` — The ID of the target resource.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">unshareWorkspaceResource</a>(resourceId, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes any existing role on a workspace resource from a user or a group. To target a user, pass only the user email. The user must be in your workspace. To target a group, pass only the group id. To target a workspace api key, pass the api key id. You must have admin access to the resource to unshare it. You cannot remove permissions from the user who created the resource.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.unshareWorkspaceResource("resource_id", {
+    resource_type: "voice",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**resourceId:** `string` — The ID of the target resource.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIdUnsharePost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## SpeechToText
 
 <details><summary><code>client.speechToText.<a href="/src/api/resources/speechToText/client/Client.ts">convert</a>({ ...params }) -> ElevenLabs.SpeechToTextChunkResponseModel</code></summary>
@@ -5849,6 +6125,73 @@ await client.conversationalAi.getSignedUrl({
 <dd>
 
 **request:** `ElevenLabs.ConversationalAiGetSignedUrlRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">twilioOutboundCall</a>({ ...params }) -> ElevenLabs.TwilioOutboundCallResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Handle an outbound call via Twilio
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.twilioOutboundCall({
+    agent_id: "agent_id",
+    agent_phone_number_id: "agent_phone_number_id",
+    to_number: "to_number",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost`
 
 </dd>
 </dl>
@@ -5995,7 +6338,7 @@ await client.conversationalAi.getAgent("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">deleteAgent</a>(agentId) -> unknown</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">deleteAgent</a>(agentId) -> void</code></summary>
 <dl>
 <dd>
 
@@ -6422,7 +6765,7 @@ await client.conversationalAi.addAgentSecret("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-Returns a page of your agents and their metadata.
+Returns a list of your agents and their metadata.
 
 </dd>
 </dl>
@@ -6501,9 +6844,7 @@ Get all conversations of agents that user owns. With option to restrict to a spe
 <dd>
 
 ```typescript
-await client.conversationalAi.getConversations({
-    agent_id: "21m00Tcm4TlvDq8ikWAM",
-});
+await client.conversationalAi.getConversations();
 ```
 
 </dd>
@@ -6812,7 +7153,7 @@ await client.conversationalAi.postConversationFeedback("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-Import Phone Number from Twilio configuration
+Import Phone Number from provider configuration (Twilio or SIP trunk)
 
 </dd>
 </dl>
@@ -6830,7 +7171,6 @@ Import Phone Number from Twilio configuration
 ```typescript
 await client.conversationalAi.createPhoneNumber({
     phone_number: "phone_number",
-    provider: "twilio",
     label: "label",
     sid: "sid",
     token: "token",
@@ -6850,7 +7190,7 @@ await client.conversationalAi.createPhoneNumber({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.CreatePhoneNumberRequest`
+**request:** `ElevenLabs.ConversationalAiCreatePhoneNumberRequestBody`
 
 </dd>
 </dl>
@@ -7320,7 +7660,7 @@ await client.conversationalAi.ragIndexStatus("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getKnowledgeBaseDocumentById</a>(documentationId) -> ElevenLabs.GetKnowledgeBaseResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getKnowledgeBaseDocumentById</a>(documentationId) -> ElevenLabs.ConversationalAiGetKnowledgeBaseDocumentByIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -7499,6 +7839,140 @@ await client.conversationalAi.getDependentAgents("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **request:** `ElevenLabs.ConversationalAiGetDependentAgentsRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getKnowledgeBaseDocumentContent</a>(documentationId) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the entire content of a document from the knowledge base
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getKnowledgeBaseDocumentContent("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentationId:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getKnowledgeBaseDocumentPartById</a>(documentationId, chunkId) -> ElevenLabs.KnowledgeBaseDocumentChunkResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get details about a specific documentation part used by RAG.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getKnowledgeBaseDocumentPartById("21m00Tcm4TlvDq8ikWAM", "chunk_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentationId:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**chunkId:** `string` — The id of a document RAG chunk from the knowledge base.
 
 </dd>
 </dl>
@@ -8524,7 +8998,6 @@ await client.studio.projects.updatePronunciationDictionaries("21m00Tcm4TlvDq8ikW
     pronunciation_dictionary_locators: [
         {
             pronunciation_dictionary_id: "pronunciation_dictionary_id",
-            version_id: "version_id",
         },
     ],
 });

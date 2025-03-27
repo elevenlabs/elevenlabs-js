@@ -10,7 +10,7 @@ import * as errors from "../../../../errors/index";
 
 export declare namespace TextToVoice {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -44,8 +44,7 @@ export class TextToVoice {
      *
      * @example
      *     await client.textToVoice.createPreviews({
-     *         voice_description: "A sassy squeaky mouse",
-     *         text: "Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted."
+     *         voice_description: "A sassy squeaky mouse"
      *     })
      */
     public async createPreviews(
@@ -61,8 +60,10 @@ export class TextToVoice {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 "v1/text-to-voice/create-previews",
             ),
             method: "POST",
@@ -73,8 +74,8 @@ export class TextToVoice {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -144,8 +145,10 @@ export class TextToVoice {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 "v1/text-to-voice/create-voice-from-preview",
             ),
             method: "POST",
@@ -156,8 +159,8 @@ export class TextToVoice {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

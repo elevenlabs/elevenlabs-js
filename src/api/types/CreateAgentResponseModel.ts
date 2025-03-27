@@ -3,5 +3,6 @@
  */
 
 export interface CreateAgentResponseModel {
+    /** ID of the created agent */
     agent_id: string;
 }

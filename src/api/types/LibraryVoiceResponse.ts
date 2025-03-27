@@ -27,6 +27,8 @@ export interface LibraryVoiceResponse {
     category: ElevenLabs.LibraryVoiceResponseModelCategory;
     /** The language of the voice. */
     language?: string;
+    /** The locale of the voice. */
+    locale?: string;
     /** The description of the voice. */
     description?: string;
     /** The preview URL of the voice. */

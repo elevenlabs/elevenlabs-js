@@ -11,7 +11,7 @@ import * as stream from "stream";
 
 export declare namespace History {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -81,8 +81,10 @@ export class History {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 "v1/history",
             ),
             method: "GET",
@@ -93,8 +95,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -157,8 +159,10 @@ export class History {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/history/${encodeURIComponent(historyItemId)}`,
             ),
             method: "GET",
@@ -169,8 +173,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -234,8 +238,10 @@ export class History {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/history/${encodeURIComponent(historyItemId)}`,
             ),
             method: "DELETE",
@@ -246,8 +252,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -301,8 +307,10 @@ export class History {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/history/${encodeURIComponent(historyItemId)}/audio`,
             ),
             method: "GET",
@@ -313,8 +321,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -373,8 +381,10 @@ export class History {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 "v1/history/download",
             ),
             method: "POST",
@@ -385,8 +395,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

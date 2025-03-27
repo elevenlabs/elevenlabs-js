@@ -5,10 +5,16 @@
 import * as ElevenLabs from "../index";
 
 export interface GetAgentResponseModel {
+    /** The ID of the agent */
     agent_id: string;
+    /** The name of the agent */
     name: string;
-    conversation_config: ElevenLabs.ConversationalConfigApiModel;
+    /** The conversation configuration of the agent */
+    conversation_config: ElevenLabs.ConversationalConfigApiModelOutput;
+    /** The metadata of the agent */
     metadata: ElevenLabs.AgentMetadataResponseModel;
+    /** The platform settings of the agent */
     platform_settings?: ElevenLabs.AgentPlatformSettingsResponseModel;
+    /** The phone numbers of the agent */
     phone_numbers?: ElevenLabs.GetPhoneNumberResponseModel[];
 }

@@ -11,7 +11,7 @@ import * as stream from "stream";
 
 export declare namespace Projects {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -49,8 +49,10 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 "v1/studio/projects",
             ),
             method: "GET",
@@ -61,8 +63,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -136,7 +138,7 @@ export class Projects {
         }
 
         if (request.from_document != null) {
-            await _request.appendFile("from_document", request.from_document);
+            _request.append("from_document", request.from_document);
         }
 
         if (request.quality_preset != null) {
@@ -219,12 +221,18 @@ export class Projects {
             _request.append("auto_assign_voices", request.auto_assign_voices.toString());
         }
 
+        if (request.source_type != null) {
+            _request.append("source_type", request.source_type);
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 "v1/studio/projects",
             ),
             method: "POST",
@@ -235,8 +243,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -300,8 +308,10 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/studio/projects/${encodeURIComponent(projectId)}`,
             ),
             method: "GET",
@@ -312,8 +322,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -383,8 +393,10 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/studio/projects/${encodeURIComponent(projectId)}`,
             ),
             method: "POST",
@@ -395,8 +407,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -461,8 +473,10 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/studio/projects/${encodeURIComponent(projectId)}`,
             ),
             method: "DELETE",
@@ -473,8 +487,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -543,7 +557,7 @@ export class Projects {
         }
 
         if (request.from_document != null) {
-            await _request.appendFile("from_document", request.from_document);
+            _request.append("from_document", request.from_document);
         }
 
         if (request.auto_convert != null) {
@@ -554,8 +568,10 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/content`,
             ),
             method: "POST",
@@ -566,8 +582,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -633,8 +649,10 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/convert`,
             ),
             method: "POST",
@@ -645,8 +663,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -710,8 +728,10 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/snapshots`,
             ),
             method: "GET",
@@ -722,8 +742,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -789,8 +809,10 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(projectSnapshotId)}`,
             ),
             method: "GET",
@@ -801,8 +823,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -870,8 +892,10 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(projectSnapshotId)}/stream`,
             ),
             method: "POST",
@@ -882,8 +906,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -942,8 +966,10 @@ export class Projects {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(projectSnapshotId)}/archive`,
             ),
             method: "POST",
@@ -954,8 +980,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1014,8 +1040,7 @@ export class Projects {
      * @example
      *     await client.studio.projects.updatePronunciationDictionaries("21m00Tcm4TlvDq8ikWAM", {
      *         pronunciation_dictionary_locators: [{
-     *                 pronunciation_dictionary_id: "pronunciation_dictionary_id",
-     *                 version_id: "version_id"
+     *                 pronunciation_dictionary_id: "pronunciation_dictionary_id"
      *             }]
      *     })
      */
@@ -1027,8 +1052,10 @@ export class Projects {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/pronunciation-dictionaries`,
             ),
             method: "POST",
@@ -1039,8 +1066,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

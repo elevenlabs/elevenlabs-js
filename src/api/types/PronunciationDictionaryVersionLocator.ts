@@ -4,5 +4,5 @@
 
 export interface PronunciationDictionaryVersionLocator {
     pronunciation_dictionary_id: string;
-    version_id: string;
+    version_id?: string;
 }

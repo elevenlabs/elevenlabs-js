@@ -59,4 +59,6 @@ export interface ProjectResponse {
     creation_meta?: ElevenLabs.ProjectCreationMetaResponseModel;
     /** The source type of the project. */
     source_type?: ElevenLabs.ProjectResponseModelSourceType;
+    /** Whether chapters are enabled for the project. */
+    chapters_enabled?: boolean;
 }

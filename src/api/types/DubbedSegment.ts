@@ -7,6 +7,6 @@ import * as ElevenLabs from "../index";
 export interface DubbedSegment {
     start_time: number;
     end_time: number;
-    text: string;
-    media_ref: ElevenLabs.DubbingMediaReference;
+    text?: string;
+    media_ref?: ElevenLabs.DubbingMediaReference;
 }

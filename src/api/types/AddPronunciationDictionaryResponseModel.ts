@@ -13,6 +13,8 @@ export interface AddPronunciationDictionaryResponseModel {
     creation_time_unix: number;
     /** The ID of the created pronunciation dictionary version. */
     version_id: string;
+    /** The number of rules in the version of the pronunciation dictionary. */
+    version_rules_num: number;
     /** The description of the pronunciation dictionary. */
     description?: string;
 }
