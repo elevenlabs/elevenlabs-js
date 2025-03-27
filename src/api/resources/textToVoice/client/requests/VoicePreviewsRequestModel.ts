@@ -7,8 +7,7 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         voice_description: "A sassy squeaky mouse",
- *         text: "Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted."
+ *         voice_description: "A sassy squeaky mouse"
  *     }
  */
 export interface VoicePreviewsRequestModel {
@@ -19,7 +18,7 @@ export interface VoicePreviewsRequestModel {
     /** Description to use for the created voice. */
     voice_description: string;
     /** Text to generate, text length has to be between 100 and 1000. */
-    text: string;
+    text?: string;
     /** Whether to automatically generate a text suitable for the voice description. */
     auto_generate_text?: boolean;
     /** Controls the volume level of the generated voice. -1 is quietest, 1 is loudest, 0 corresponds to roughly -24 LUFS. */

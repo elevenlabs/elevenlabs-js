@@ -3,6 +3,6 @@
  */
 
 export interface CreatePhoneNumberResponseModel {
-    /** Phone entity id */
+    /** Phone entity ID */
     phone_number_id: string;
 }

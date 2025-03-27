@@ -8,6 +8,8 @@
  * Required to ensure compat with the rest of the agent data models.
  */
 export interface PydanticPronunciationDictionaryVersionLocator {
+    /** The ID of the pronunciation dictionary */
     pronunciation_dictionary_id: string;
-    version_id: string;
+    /** The ID of the version of the pronunciation dictionary */
+    version_id?: string;
 }

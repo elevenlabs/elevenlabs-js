@@ -5,8 +5,12 @@
 import * as ElevenLabs from "../index";
 
 export interface KnowledgeBaseLocator {
+    /** The type of the knowledge base */
     type: ElevenLabs.KnowledgeBaseLocatorType;
+    /** The name of the knowledge base */
     name: string;
+    /** The ID of the knowledge base */
     id: string;
+    /** The usage mode of the knowledge base */
     usage_mode?: ElevenLabs.DocumentUsageModeEnum;
 }

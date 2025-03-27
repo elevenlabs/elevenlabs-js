@@ -11,7 +11,7 @@ import * as stream from "stream";
 
 export declare namespace Dubbing {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -53,8 +53,10 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/resource/${encodeURIComponent(dubbingId)}`,
             ),
             method: "GET",
@@ -65,8 +67,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -122,20 +124,20 @@ export class Dubbing {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.dubbing.addLanguageToResource("dubbing_id", {
-     *         language: "language"
-     *     })
+     *     await client.dubbing.addLanguageToResource("dubbing_id")
      */
     public async addLanguageToResource(
         dubbingId: string,
-        request: ElevenLabs.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIdLanguagePost,
+        request: ElevenLabs.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIdLanguagePost = {},
         requestOptions?: Dubbing.RequestOptions,
     ): Promise<ElevenLabs.LanguageAddedResponse> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/language`,
             ),
             method: "POST",
@@ -146,8 +148,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -219,8 +221,10 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/speaker/${encodeURIComponent(speakerId)}/segment`,
             ),
             method: "POST",
@@ -231,8 +235,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -303,8 +307,10 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/segment/${encodeURIComponent(segmentId)}/${encodeURIComponent(language)}`,
             ),
             method: "PATCH",
@@ -315,8 +321,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -383,8 +389,10 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/segment/${encodeURIComponent(segmentId)}`,
             ),
             method: "DELETE",
@@ -395,8 +403,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -464,8 +472,10 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/transcribe`,
             ),
             method: "POST",
@@ -476,8 +486,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -535,8 +545,7 @@ export class Dubbing {
      *
      * @example
      *     await client.dubbing.translateSegments("dubbing_id", {
-     *         segments: ["segments"],
-     *         languages: ["languages"]
+     *         segments: ["segments"]
      *     })
      */
     public async translateSegments(
@@ -547,8 +556,10 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/translate`,
             ),
             method: "POST",
@@ -559,8 +570,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -618,8 +629,7 @@ export class Dubbing {
      *
      * @example
      *     await client.dubbing.dubSegments("dubbing_id", {
-     *         segments: ["segments"],
-     *         languages: ["languages"]
+     *         segments: ["segments"]
      *     })
      */
     public async dubSegments(
@@ -630,8 +640,10 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/dub`,
             ),
             method: "POST",
@@ -642,8 +654,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -699,9 +711,7 @@ export class Dubbing {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.dubbing.dubAVideoOrAnAudioFile({
-     *         target_lang: "target_lang"
-     *     })
+     *     await client.dubbing.dubAVideoOrAnAudioFile({})
      */
     public async dubAVideoOrAnAudioFile(
         request: ElevenLabs.BodyDubAVideoOrAnAudioFileV1DubbingPost,
@@ -709,7 +719,19 @@ export class Dubbing {
     ): Promise<ElevenLabs.DoDubbingResponse> {
         const _request = await core.newFormData();
         if (request.file != null) {
-            await _request.appendFile("file", request.file);
+            _request.append("file", request.file);
+        }
+
+        if (request.csv_file != null) {
+            _request.append("csv_file", request.csv_file);
+        }
+
+        if (request.foreground_audio_file != null) {
+            _request.append("foreground_audio_file", request.foreground_audio_file);
+        }
+
+        if (request.background_audio_file != null) {
+            _request.append("background_audio_file", request.background_audio_file);
         }
 
         if (request.name != null) {
@@ -724,7 +746,10 @@ export class Dubbing {
             _request.append("source_lang", request.source_lang);
         }
 
-        _request.append("target_lang", request.target_lang);
+        if (request.target_lang != null) {
+            _request.append("target_lang", request.target_lang);
+        }
+
         if (request.num_speakers != null) {
             _request.append("num_speakers", request.num_speakers.toString());
         }
@@ -757,12 +782,22 @@ export class Dubbing {
             _request.append("dubbing_studio", request.dubbing_studio.toString());
         }
 
+        if (request.disable_voice_cloning != null) {
+            _request.append("disable_voice_cloning", request.disable_voice_cloning.toString());
+        }
+
+        if (request.mode != null) {
+            _request.append("mode", request.mode);
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 "v1/dubbing",
             ),
             method: "POST",
@@ -773,8 +808,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -838,8 +873,10 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/${encodeURIComponent(dubbingId)}`,
             ),
             method: "GET",
@@ -850,8 +887,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -913,8 +950,10 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/${encodeURIComponent(dubbingId)}`,
             ),
             method: "DELETE",
@@ -925,8 +964,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -987,8 +1026,10 @@ export class Dubbing {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/${encodeURIComponent(dubbingId)}/audio/${encodeURIComponent(languageCode)}`,
             ),
             method: "GET",
@@ -999,8 +1040,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1084,8 +1125,10 @@ export class Dubbing {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
                 `v1/dubbing/${encodeURIComponent(dubbingId)}/transcript/${encodeURIComponent(languageCode)}`,
             ),
             method: "GET",
@@ -1096,8 +1139,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.54.0",
-                "User-Agent": "elevenlabs/1.54.0",
+                "X-Fern-SDK-Version": "1.55.0",
+                "User-Agent": "elevenlabs/1.55.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

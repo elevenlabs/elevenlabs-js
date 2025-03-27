@@ -3,6 +3,8 @@
  */
 
 export interface AgentCallLimits {
+    /** The maximum number of concurrent conversations. -1 indicates that there is no maximum */
     agent_concurrency_limit?: number;
+    /** The maximum number of conversations per day */
     daily_limit?: number;
 }

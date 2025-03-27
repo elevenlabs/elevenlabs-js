@@ -16,7 +16,7 @@ export interface Subscription {
     /** Whether the user is allowed to extend their character limit. */
     allowed_to_extend_character_limit: boolean;
     /** The Unix timestamp of the next character count reset. */
-    next_character_count_reset_unix: number;
+    next_character_count_reset_unix?: number;
     /** The number of voice slots used by the user. */
     voice_slots_used?: number;
     /** The maximum number of voice slots allowed for the user. */

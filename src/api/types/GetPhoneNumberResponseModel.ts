@@ -11,6 +11,8 @@ export interface GetPhoneNumberResponseModel {
     provider: ElevenLabs.TelephonyProvider;
     /** Label for the phone number */
     label: string;
+    /** The ID of the phone number */
     phone_number_id: string;
+    /** The agent that is assigned to the phone number */
     assigned_agent?: ElevenLabs.PhoneNumberAgentInfo;
 }

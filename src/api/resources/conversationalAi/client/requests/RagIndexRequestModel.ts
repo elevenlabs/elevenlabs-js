@@ -11,9 +11,5 @@ import * as ElevenLabs from "../../../../index";
  *     }
  */
 export interface RagIndexRequestModel {
-    /**
-     * In case the document is indexed and for some reason you want to reindex it, set this param as true.
-     */
-    force_reindex?: boolean;
     model: ElevenLabs.EmbeddingModelEnum;
 }

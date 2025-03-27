@@ -8,8 +8,7 @@ import * as ElevenLabs from "../../../../../../index";
  * @example
  *     {
  *         pronunciation_dictionary_locators: [{
- *                 pronunciation_dictionary_id: "pronunciation_dictionary_id",
- *                 version_id: "version_id"
+ *                 pronunciation_dictionary_id: "pronunciation_dictionary_id"
  *             }]
  *     }
  */

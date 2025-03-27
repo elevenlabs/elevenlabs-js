@@ -5,8 +5,12 @@
 import * as ElevenLabs from "../index";
 
 export interface AsrConversationalConfig {
+    /** The quality of the transcription */
     quality?: ElevenLabs.AsrQuality;
+    /** The provider of the transcription service */
     provider?: ElevenLabs.AsrProvider;
+    /** The format of the audio to be transcribed */
     user_input_audio_format?: ElevenLabs.AsrInputFormat;
+    /** Keywords to boost prediction probability for */
     keywords?: string[];
 }

@@ -5,6 +5,8 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationConfig {
+    /** The maximum duration of a conversation in seconds */
     max_duration_seconds?: number;
+    /** The events that will be sent to the client */
     client_events?: ElevenLabs.ClientEvent[];
 }

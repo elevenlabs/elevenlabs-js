@@ -27,7 +27,7 @@ import { ConversationalAi } from "./api/resources/conversationalAi/client/Client
 
 export declare namespace ElevenLabsClient {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */

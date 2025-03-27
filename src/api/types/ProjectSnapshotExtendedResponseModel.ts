@@ -13,9 +13,9 @@ export interface ProjectSnapshotExtendedResponseModel {
     created_at_unix: number;
     /** The name of the project snapshot. */
     name: string;
-    /** The audio upload of the project snapshot. */
-    audio_upload?: ElevenLabs.ProjectSnapshotUploadResponseModel;
-    /** The zip upload of the project snapshot. */
-    zip_upload?: ElevenLabs.ProjectSnapshotUploadResponseModel;
+    /** (Deprecated) */
+    audio_upload?: Record<string, unknown>;
+    /** (Deprecated) */
+    zip_upload?: Record<string, unknown>;
     character_alignments: ElevenLabs.CharacterAlignmentModel[];
 }

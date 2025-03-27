@@ -5,7 +5,7 @@
 import * as ElevenLabs from "../index";
 
 export interface GetKnowledgeBaseListResponseModel {
-    documents: ElevenLabs.GetKnowledgeBaseSummaryResponseModel[];
+    documents: ElevenLabs.GetKnowledgeBaseListResponseModelDocumentsItem[];
     next_cursor?: string;
     has_more: boolean;
 }

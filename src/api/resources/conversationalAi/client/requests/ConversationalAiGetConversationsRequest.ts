@@ -6,9 +6,7 @@ import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
- *     {
- *         agent_id: "21m00Tcm4TlvDq8ikWAM"
- *     }
+ *     {}
  */
 export interface ConversationalAiGetConversationsRequest {
     /**

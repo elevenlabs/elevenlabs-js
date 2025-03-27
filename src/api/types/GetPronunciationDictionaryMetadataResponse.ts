@@ -7,12 +7,16 @@ export interface GetPronunciationDictionaryMetadataResponse {
     id: string;
     /** The ID of the latest version of the pronunciation dictionary. */
     latest_version_id: string;
+    /** The number of rules in the latest version of the pronunciation dictionary. */
+    latest_version_rules_num: number;
     /** The name of the pronunciation dictionary. */
     name: string;
     /** The user ID of the creator of the pronunciation dictionary. */
     created_by: string;
     /** The creation time of the pronunciation dictionary in Unix timestamp. */
     creation_time_unix: number;
+    /** The archive time of the pronunciation dictionary in Unix timestamp. */
+    archived_time_unix?: number;
     /** The description of the pronunciation dictionary. */
     description?: string;
 }

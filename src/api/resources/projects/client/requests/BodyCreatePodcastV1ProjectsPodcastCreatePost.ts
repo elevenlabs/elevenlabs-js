@@ -33,7 +33,6 @@ export interface BodyCreatePodcastV1ProjectsPodcastCreatePost {
      * high - high quality output format, 192kbps with 44.1kHz sample rate and major improvements on our side. Using this setting increases the credit cost by 20%.
      * ultra - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side. Using this setting increases the credit cost by 50%.
      * ultra lossless - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format. Using this setting increases the credit cost by 100%.
-     *
      */
     quality_preset?: ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePostQualityPreset;
     /**
@@ -41,7 +40,6 @@ export interface BodyCreatePodcastV1ProjectsPodcastCreatePost {
      * short - produces podcasts shorter than 3 minutes.
      * default - produces podcasts roughly between 3-7 minutes.
      * long - prodces podcasts longer than 7 minutes.
-     *
      */
     duration_scale?: ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePostDurationScale;
     /** An optional language of the Studio project. Two-letter language code (ISO 639-1). */

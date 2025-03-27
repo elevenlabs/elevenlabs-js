@@ -1,4 +1,5 @@
 export { type ConversationalAiGetSignedUrlRequest } from "./ConversationalAiGetSignedUrlRequest";
+export { type BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost } from "./BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost";
 export { type BodyCreateAgentV1ConvaiAgentsCreatePost } from "./BodyCreateAgentV1ConvaiAgentsCreatePost";
 export { type BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatch } from "./BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatch";
 export { type ConversationalAiGetAgentWidgetRequest } from "./ConversationalAiGetAgentWidgetRequest";
@@ -7,7 +8,6 @@ export { type BodyAddASecretToTheAgentWhichCanBeReferencedInToolCallsV1ConvaiAge
 export { type ConversationalAiGetAgentsRequest } from "./ConversationalAiGetAgentsRequest";
 export { type ConversationalAiGetConversationsRequest } from "./ConversationalAiGetConversationsRequest";
 export { type BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost } from "./BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost";
-export { type CreatePhoneNumberRequest } from "./CreatePhoneNumberRequest";
 export { type UpdatePhoneNumberRequest } from "./UpdatePhoneNumberRequest";
 export { type ConversationalAiGetKnowledgeBaseListRequest } from "./ConversationalAiGetKnowledgeBaseListRequest";
 export { type BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost } from "./BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost";
