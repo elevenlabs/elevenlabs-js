@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import * as fs from "fs";
+import { toJson } from "../../../../core/json";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -81,6 +82,12 @@ export class SpeechToText {
             _request.append("diarize", request.diarize.toString());
         }
 
+        if (request.additional_formats != null) {
+            for (const _item of request.additional_formats) {
+                _request.append("additional_formats", toJson(_item));
+            }
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
@@ -99,8 +106,8 @@ export class SpeechToText {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.55.0",
-                "User-Agent": "elevenlabs/1.55.0",
+                "X-Fern-SDK-Version": "1.56.0",
+                "User-Agent": "elevenlabs/1.56.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,

@@ -3,6 +3,7 @@
  */
 
 export interface ConversationHistoryTranscriptToolResultCommonModel {
+    type?: string;
     request_id: string;
     tool_name: string;
     result_value: string;

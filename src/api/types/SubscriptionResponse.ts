@@ -11,6 +11,8 @@ export interface SubscriptionResponse {
     character_count: number;
     /** The maximum number of characters allowed in the current billing period. */
     character_limit: number;
+    /** Maximum number of characters that the character limit can be exceeded by. Managed by the workspace admin. */
+    max_character_limit_extension?: number;
     /** Whether the user can extend their character limit. */
     can_extend_character_limit: boolean;
     /** Whether the user is allowed to extend their character limit. */
@@ -19,6 +21,8 @@ export interface SubscriptionResponse {
     next_character_count_reset_unix?: number;
     /** The number of voice slots used by the user. */
     voice_slots_used: number;
+    /** The number of professional voice slots used by the workspace/user if single seat. */
+    professional_voice_slots_used: number;
     /** The maximum number of voice slots allowed for the user. */
     voice_limit: number;
     /** The maximum number of voice add/edits allowed for the user. */

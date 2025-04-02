@@ -6,7 +6,8 @@ import * as ElevenLabs from "../../../index";
 
 export type ConversationalAiGetKnowledgeBaseDocumentByIdResponse =
     | ElevenLabs.ConversationalAiGetKnowledgeBaseDocumentByIdResponse.Url
-    | ElevenLabs.ConversationalAiGetKnowledgeBaseDocumentByIdResponse.File_;
+    | ElevenLabs.ConversationalAiGetKnowledgeBaseDocumentByIdResponse.File_
+    | ElevenLabs.ConversationalAiGetKnowledgeBaseDocumentByIdResponse.Text;
 
 export namespace ConversationalAiGetKnowledgeBaseDocumentByIdResponse {
     export interface Url extends ElevenLabs.GetKnowledgeBaseUrlResponseModel {
@@ -15,5 +16,9 @@ export namespace ConversationalAiGetKnowledgeBaseDocumentByIdResponse {
 
     export interface File_ extends ElevenLabs.GetKnowledgeBaseFileResponseModel {
         type: "file";
+    }
+
+    export interface Text extends ElevenLabs.GetKnowledgeBaseTextResponseModel {
+        type: "text";
     }
 }

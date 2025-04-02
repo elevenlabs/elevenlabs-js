@@ -4,13 +4,15 @@ export { type BodyCreateAgentV1ConvaiAgentsCreatePost } from "./BodyCreateAgentV
 export { type BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatch } from "./BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatch";
 export { type ConversationalAiGetAgentWidgetRequest } from "./ConversationalAiGetAgentWidgetRequest";
 export { type BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost } from "./BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost";
-export { type BodyAddASecretToTheAgentWhichCanBeReferencedInToolCallsV1ConvaiAgentsAgentIdAddSecretPost } from "./BodyAddASecretToTheAgentWhichCanBeReferencedInToolCallsV1ConvaiAgentsAgentIdAddSecretPost";
 export { type ConversationalAiGetAgentsRequest } from "./ConversationalAiGetAgentsRequest";
 export { type ConversationalAiGetConversationsRequest } from "./ConversationalAiGetConversationsRequest";
 export { type BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost } from "./BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost";
 export { type UpdatePhoneNumberRequest } from "./UpdatePhoneNumberRequest";
 export { type ConversationalAiGetKnowledgeBaseListRequest } from "./ConversationalAiGetKnowledgeBaseListRequest";
 export { type BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost } from "./BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost";
+export { type BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost } from "./BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost";
+export { type BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost } from "./BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost";
+export { type BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost } from "./BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost";
 export { type RagIndexRequestModel } from "./RagIndexRequestModel";
 export { type ConversationalAiGetDependentAgentsRequest } from "./ConversationalAiGetDependentAgentsRequest";
 export { type PatchConvAiSettingsRequest } from "./PatchConvAiSettingsRequest";
