@@ -30,4 +30,6 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     timestamps_granularity?: ElevenLabs.SpeechToTextConvertRequestTimestampsGranularity;
     /** Whether to annotate which speaker is currently talking in the uploaded file. */
     diarize?: boolean;
+    /** A list of additional formats to export the transcript to. */
+    additional_formats?: ElevenLabs.AdditionalFormats;
 }

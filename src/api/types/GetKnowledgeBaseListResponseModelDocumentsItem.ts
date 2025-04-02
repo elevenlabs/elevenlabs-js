@@ -6,11 +6,16 @@ import * as ElevenLabs from "../index";
 
 export type GetKnowledgeBaseListResponseModelDocumentsItem =
     | ElevenLabs.GetKnowledgeBaseListResponseModelDocumentsItem.File_
+    | ElevenLabs.GetKnowledgeBaseListResponseModelDocumentsItem.Text
     | ElevenLabs.GetKnowledgeBaseListResponseModelDocumentsItem.Url;
 
 export namespace GetKnowledgeBaseListResponseModelDocumentsItem {
     export interface File_ extends ElevenLabs.GetKnowledgeBaseSummaryFileResponseModel {
         type: "file";
+    }
+
+    export interface Text extends ElevenLabs.GetKnowledgeBaseSummaryTextResponseModel {
+        type: "text";
     }
 
     export interface Url extends ElevenLabs.GetKnowledgeBaseSummaryUrlResponseModel {

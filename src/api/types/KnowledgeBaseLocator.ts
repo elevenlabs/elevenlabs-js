@@ -6,7 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface KnowledgeBaseLocator {
     /** The type of the knowledge base */
-    type: ElevenLabs.KnowledgeBaseLocatorType;
+    type: ElevenLabs.KnowledgeBaseDocumentType;
     /** The name of the knowledge base */
     name: string;
     /** The ID of the knowledge base */

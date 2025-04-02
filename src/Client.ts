@@ -23,6 +23,7 @@ import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionary } from "./api/resources/pronunciationDictionary/client/Client";
 import { Workspace } from "./api/resources/workspace/client/Client";
 import { SpeechToText } from "./api/resources/speechToText/client/Client";
+import { ForcedAlignment } from "./api/resources/forcedAlignment/client/Client";
 import { ConversationalAi } from "./api/resources/conversationalAi/client/Client";
 
 export declare namespace ElevenLabsClient {
@@ -68,6 +69,7 @@ export class ElevenLabsClient {
     protected _pronunciationDictionary: PronunciationDictionary | undefined;
     protected _workspace: Workspace | undefined;
     protected _speechToText: SpeechToText | undefined;
+    protected _forcedAlignment: ForcedAlignment | undefined;
     protected _conversationalAi: ConversationalAi | undefined;
 
     constructor(protected readonly _options: ElevenLabsClient.Options = {}) {}
@@ -146,6 +148,10 @@ export class ElevenLabsClient {
 
     public get speechToText(): SpeechToText {
         return (this._speechToText ??= new SpeechToText(this._options));
+    }
+
+    public get forcedAlignment(): ForcedAlignment {
+        return (this._forcedAlignment ??= new ForcedAlignment(this._options));
     }
 
     public get conversationalAi(): ConversationalAi {

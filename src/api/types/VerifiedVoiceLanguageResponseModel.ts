@@ -9,6 +9,8 @@ export interface VerifiedVoiceLanguageResponseModel {
     model_id: string;
     /** The voice's accent, if applicable. */
     accent?: string;
+    /** The voice's locale, if applicable. */
+    locale?: string;
     /** The voice's preview URL, if applicable. */
     preview_url?: string;
 }
