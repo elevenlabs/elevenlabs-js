@@ -1,6 +1,5 @@
-import { RUNTIME } from "../../../src/core/runtime";
 import { getResponseBody } from "../../../src/core/fetcher/getResponseBody";
-import { chooseStreamWrapper } from "../../../src/core/fetcher/stream-wrappers/chooseStreamWrapper";
+import { RUNTIME } from "../../../src/core/runtime";
 
 describe("Test getResponseBody", () => {
     it("should handle blob response type", async () => {
@@ -26,7 +25,7 @@ describe("Test getResponseBody", () => {
             const mockResponse = new Response(mockStream);
             const result = await getResponseBody(mockResponse, "streaming");
             // need to reinstantiate string as a result of locked state in Readable Stream after registration with Response
-            expect(JSON.stringify(result)).toBe(JSON.stringify(await chooseStreamWrapper(new ReadableStream())));
+            expect(JSON.stringify(result)).toBe(JSON.stringify(new ReadableStream()));
         }
     });
 

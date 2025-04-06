@@ -16,3 +16,4 @@ src/api/resources/speechToText/client/Client.ts
 
 # Return Web Readable Stream
 src/core/fetcher/getResponseBody.ts
+tests/unit/fetcher/getResponseBody.test.ts
