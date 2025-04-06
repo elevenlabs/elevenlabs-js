@@ -13,3 +13,6 @@ src/index.ts
 src/api/resources/speechToText/client/Client.ts
 
 .github/workflows
+
+# Return Web Readable Stream
+src/core/fetcher/getResponseBody.ts
