@@ -10,3 +10,6 @@ src/wrapper
 src/index.ts
 
 .github/workflows
+
+# Return Web Readable Stream
+src/core/fetcher/getResponseBody.ts

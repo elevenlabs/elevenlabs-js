@@ -1,5 +1,3 @@
-import { chooseStreamWrapper } from "./stream-wrappers/chooseStreamWrapper";
-
 export async function getResponseBody(response: Response, responseType?: string): Promise<unknown> {
     if (response.body != null && responseType === "blob") {
         return await response.blob();
@@ -8,7 +6,7 @@ export async function getResponseBody(response: Response, responseType?: string)
     } else if (response.body != null && responseType === "sse") {
         return response.body;
     } else if (response.body != null && responseType === "streaming") {
-        return chooseStreamWrapper(response.body);
+        return response.body;
     } else if (response.body != null && responseType === "text") {
         return await response.text();
     } else {
