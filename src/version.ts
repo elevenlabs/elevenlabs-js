@@ -1,1 +1,1 @@
-export const SDK_VERSION = "1.56.1-alpha0";
+export const SDK_VERSION = "v1.56.1";
