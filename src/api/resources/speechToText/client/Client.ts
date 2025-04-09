@@ -83,9 +83,7 @@ export class SpeechToText {
         }
 
         if (request.additional_formats != null) {
-            for (const _item of request.additional_formats) {
-                _request.append("additional_formats", toJson(_item));
-            }
+            _request.append("additional_formats", toJson(request.additional_formats));
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
