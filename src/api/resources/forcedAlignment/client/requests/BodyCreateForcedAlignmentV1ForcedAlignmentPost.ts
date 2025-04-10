@@ -13,6 +13,6 @@ import * as fs from "fs";
  */
 export interface BodyCreateForcedAlignmentV1ForcedAlignmentPost {
     file: File | fs.ReadStream | Blob;
-    /** The text to align with the audio or video. The input text can be in any format, however diarization is not supported at this time. */
+    /** The text to align with the audio. The input text can be in any format, however diarization is not supported at this time. */
     text: string;
 }
