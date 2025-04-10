@@ -9,8 +9,10 @@ export interface DubbingResource {
     version: number;
     source_language: string;
     target_languages: string[];
+    input: ElevenLabs.DubbingMediaReference;
     background: ElevenLabs.DubbingMediaReference;
     foreground: ElevenLabs.DubbingMediaReference;
     speaker_tracks: Record<string, ElevenLabs.SpeakerTrack>;
     speaker_segments: Record<string, ElevenLabs.SpeakerSegment>;
+    renders: Record<string, ElevenLabs.Render>;
 }
