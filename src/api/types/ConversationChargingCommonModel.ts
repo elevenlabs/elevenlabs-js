@@ -4,4 +4,5 @@
 
 export interface ConversationChargingCommonModel {
     dev_discount?: boolean;
+    tier?: string;
 }

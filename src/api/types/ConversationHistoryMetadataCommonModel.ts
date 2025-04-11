@@ -6,6 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface ConversationHistoryMetadataCommonModel {
     start_time_unix_secs: number;
+    accepted_time_unix_secs?: number;
     call_duration_secs: number;
     cost?: number;
     deletion_settings?: ElevenLabs.ConversationDeletionSettings;
@@ -14,4 +15,7 @@ export interface ConversationHistoryMetadataCommonModel {
     charging?: ElevenLabs.ConversationChargingCommonModel;
     phone_call?: ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall;
     termination_reason?: string;
+    error?: ElevenLabs.ConversationHistoryErrorCommonModel;
+    main_language?: string;
+    rag_usage?: ElevenLabs.ConversationHistoryRagUsageCommonModel;
 }
