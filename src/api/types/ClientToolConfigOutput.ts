@@ -8,6 +8,7 @@ import * as ElevenLabs from "../index";
  * A client tool is one that sends an event to the user's client to trigger something client side
  */
 export interface ClientToolConfigOutput {
+    id?: string;
     name: string;
     description: string;
     /** Schema for any parameters to pass to the client */

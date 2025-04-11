@@ -7,6 +7,7 @@
  */
 export type WorkspaceResourceType =
     | "voice"
+    | "voice_collection"
     | "pronunciation_dictionary"
     | "dubbing"
     | "project"
@@ -19,6 +20,7 @@ export type WorkspaceResourceType =
     | "convai_phone_numbers";
 export const WorkspaceResourceType = {
     Voice: "voice",
+    VoiceCollection: "voice_collection",
     PronunciationDictionary: "pronunciation_dictionary",
     Dubbing: "dubbing",
     Project: "project",
