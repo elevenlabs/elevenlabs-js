@@ -4304,6 +4304,87 @@ await client.dubbing.dubSegments("dubbing_id", {
 </dl>
 </details>
 
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">renderDub</a>(dubbingId, language, { ...params }) -> ElevenLabs.DubbingRenderResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Regenerate the dubs for either the entire resource or the specified segments/languages. Will automatically transcribe and translate any missing transcriptions and translations.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.renderDub("dubbing_id", "language", {
+    render_type: "mp4",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language:** `string` — Render this language
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Dubbing.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">dubAVideoOrAnAudioFile</a>({ ...params }) -> ElevenLabs.DoDubbingResponse</code></summary>
 <dl>
 <dd>
@@ -5037,7 +5118,7 @@ await client.pronunciationDictionary.addFromRules({
 </dl>
 </details>
 
-<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">addRules</a>(pronunciationDictionaryId, { ...params }) -> ElevenLabs.AddPronunciationDictionaryRulesResponseModel</code></summary>
+<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">addRules</a>(pronunciationDictionaryId, { ...params }) -> ElevenLabs.PronunciationDictionaryRulesResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5116,7 +5197,7 @@ await client.pronunciationDictionary.addRules("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">removeRules</a>(pronunciationDictionaryId, { ...params }) -> ElevenLabs.RemovePronunciationDictionaryRulesResponseModel</code></summary>
+<details><summary><code>client.pronunciationDictionary.<a href="/src/api/resources/pronunciationDictionary/client/Client.ts">removeRules</a>(pronunciationDictionaryId, { ...params }) -> ElevenLabs.PronunciationDictionaryRulesResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5788,6 +5869,71 @@ await client.workspace.updateMember({
 </dl>
 </details>
 
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">deleteMember</a>({ ...params }) -> ElevenLabs.DeleteWorkspaceMemberResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a workspace member. This endpoint may only be called by workspace administrators.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.deleteMember({
+    email: "email",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyDeleteMemberV1WorkspaceMembersDelete`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">getResource</a>(resourceId, { ...params }) -> ElevenLabs.ResourceMetadataResponseModel</code></summary>
 <dl>
 <dd>
@@ -6039,7 +6185,6 @@ Transcribe an audio or video file.
 
 ```typescript
 await client.speechToText.convert({
-    file: fs.createReadStream("/path/to/your/file"),
     model_id: "model_id",
 });
 ```
@@ -9739,6 +9884,1029 @@ await client.studio.chapters.getChapterSnapshot("21m00Tcm4TlvDq8ikWAM", "21m00Tc
 <dd>
 
 **requestOptions:** `Chapters.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Voices Pvc
+
+<details><summary><code>client.voices.pvc.<a href="/src/api/resources/voices/resources/pvc/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.AddVoiceResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new PVC voice with metadata but no samples
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.create({
+    name: "John Smith",
+    language: "en",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.BodyCreatePvcVoiceV1VoicesPvcPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Pvc.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.pvc.<a href="/src/api/resources/voices/resources/pvc/client/Client.ts">update</a>(voiceId, { ...params }) -> ElevenLabs.AddVoiceResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Edit PVC voice metadata
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.update("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.BodyEditPvcVoiceV1VoicesPvcVoiceIdPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Pvc.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.pvc.<a href="/src/api/resources/voices/resources/pvc/client/Client.ts">train</a>(voiceId, { ...params }) -> ElevenLabs.StartPvcVoiceTrainingResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start PVC training process for a voice.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.train("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.BodyRunPvcTrainingV1VoicesPvcVoiceIdTrainPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Pvc.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Voices Pvc Samples
+
+<details><summary><code>client.voices.pvc.samples.<a href="/src/api/resources/voices/resources/pvc/resources/samples/client/Client.ts">create</a>(voiceId, { ...params }) -> ElevenLabs.VoiceSample[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add audio samples to a PVC voice
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.samples.create("21m00Tcm4TlvDq8ikWAM", {
+    files: [fs.createReadStream("/path/to/your/file")],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.pvc.BodyAddSamplesToPvcVoiceV1VoicesPvcVoiceIdSamplesPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Samples.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.pvc.samples.<a href="/src/api/resources/voices/resources/pvc/resources/samples/client/Client.ts">update</a>(voiceId, sampleId, { ...params }) -> ElevenLabs.AddVoiceResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a PVC voice sample - apply noise removal, or select speaker.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.samples.update("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sampleId:** `string` — Sample ID to be used
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.pvc.BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Samples.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.pvc.samples.<a href="/src/api/resources/voices/resources/pvc/resources/samples/client/Client.ts">delete</a>(voiceId, sampleId) -> ElevenLabs.DeleteVoiceSampleResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a sample from a PVC voice.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.samples.delete("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sampleId:** `string` — Sample ID to be used
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Samples.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Voices Pvc Verification
+
+<details><summary><code>client.voices.pvc.verification.<a href="/src/api/resources/voices/resources/pvc/resources/verification/client/Client.ts">request</a>(voiceId, { ...params }) -> ElevenLabs.RequestPvcManualVerificationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Request manual verification for a PVC voice.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.verification.request("21m00Tcm4TlvDq8ikWAM", {
+    files: [fs.createReadStream("/path/to/your/file")],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.pvc.BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Verification.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Voices Pvc Samples Audio
+
+<details><summary><code>client.voices.pvc.samples.audio.<a href="/src/api/resources/voices/resources/pvc/resources/samples/resources/audio/client/Client.ts">get</a>(voiceId, sampleId) -> ElevenLabs.VoiceSamplePreviewResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the first 30 seconds of voice sample audio with or without noise removal.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.samples.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sampleId:** `string` — Sample ID to be used
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Audio.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Voices Pvc Samples Waveform
+
+<details><summary><code>client.voices.pvc.samples.waveform.<a href="/src/api/resources/voices/resources/pvc/resources/samples/resources/waveform/client/Client.ts">get</a>(voiceId, sampleId) -> ElevenLabs.VoiceSampleVisualWaveformResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the visual waveform of a voice sample.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.samples.waveform.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sampleId:** `string` — Sample ID to be used
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Waveform.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Voices Pvc Samples Speakers
+
+<details><summary><code>client.voices.pvc.samples.speakers.<a href="/src/api/resources/voices/resources/pvc/resources/samples/resources/speakers/client/Client.ts">get</a>(voiceId, sampleId) -> ElevenLabs.SpeakerSeparationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the status of the speaker separation process and the list of detected speakers if complete.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.samples.speakers.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sampleId:** `string` — Sample ID to be used
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Speakers.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.pvc.samples.speakers.<a href="/src/api/resources/voices/resources/pvc/resources/samples/resources/speakers/client/Client.ts">separate</a>(voiceId, sampleId) -> ElevenLabs.StartSpeakerSeparationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start speaker separation process for a sample
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.samples.speakers.separate("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sampleId:** `string` — Sample ID to be used
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Speakers.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Voices Pvc Samples Speakers Audio
+
+<details><summary><code>client.voices.pvc.samples.speakers.audio.<a href="/src/api/resources/voices/resources/pvc/resources/samples/resources/speakers/resources/audio/client/Client.ts">get</a>(voiceId, sampleId, speakerId) -> ElevenLabs.SpeakerAudioResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the separated audio for a specific speaker.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.samples.speakers.audio.get(
+    "21m00Tcm4TlvDq8ikWAM",
+    "VW7YKqPnjY4h39yTbx2L",
+    "VW7YKqPnjY4h39yTbx2L",
+);
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sampleId:** `string` — Sample ID to be used
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**speakerId:** `string` — Speaker ID to be used, you can use GET https://api.elevenlabs.io/v1/voices/{voice_id}/samples/{sample_id}/speakers to list all the available speakers for a sample.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Audio.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Voices Pvc Verification Captcha
+
+<details><summary><code>client.voices.pvc.verification.captcha.<a href="/src/api/resources/voices/resources/pvc/resources/verification/resources/captcha/client/Client.ts">get</a>(voiceId) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get captcha for PVC voice verification.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.verification.captcha.get("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Captcha.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.pvc.verification.captcha.<a href="/src/api/resources/voices/resources/pvc/resources/verification/resources/captcha/client/Client.ts">verify</a>(voiceId, { ...params }) -> ElevenLabs.VerifyPvcVoiceCaptchaResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Submit captcha verification for PVC voice.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.pvc.verification.captcha.verify("21m00Tcm4TlvDq8ikWAM", {
+    recording: fs.createReadStream("/path/to/your/file"),
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.pvc.verification.BodyVerifyPvcVoiceCaptchaV1VoicesPvcVoiceIdCaptchaPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Captcha.RequestOptions`
 
 </dd>
 </dl>

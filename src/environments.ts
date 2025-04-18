@@ -4,17 +4,17 @@
 
 export interface ElevenLabsEnvironmentUrls {
     base: string;
-    api: string;
+    wss: string;
 }
 
 export const ElevenLabsEnvironment = {
     Production: {
         base: "https://api.elevenlabs.io",
-        api: "wss://api.elevenlabs.io",
+        wss: "wss://api.elevenlabs.io",
     },
     ProductionUs: {
         base: "https://api.us.elevenlabs.io",
-        api: "wss://api.elevenlabs.io",
+        wss: "wss://api.elevenlabs.io",
     },
 } as const;
 

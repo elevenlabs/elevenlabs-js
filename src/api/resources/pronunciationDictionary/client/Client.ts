@@ -55,7 +55,7 @@ export class PronunciationDictionary {
         const _request = await core.newFormData();
         _request.append("name", request.name);
         if (request.file != null) {
-            _request.append("file", request.file);
+            await _request.appendFile("file", request.file);
         }
 
         if (request.description != null) {
@@ -84,8 +84,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -172,8 +172,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -242,7 +242,7 @@ export class PronunciationDictionary {
         pronunciationDictionaryId: string,
         request: ElevenLabs.PronunciationDictionary,
         requestOptions?: PronunciationDictionary.RequestOptions,
-    ): Promise<ElevenLabs.AddPronunciationDictionaryRulesResponseModel> {
+    ): Promise<ElevenLabs.PronunciationDictionaryRulesResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -260,8 +260,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -274,7 +274,7 @@ export class PronunciationDictionary {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.AddPronunciationDictionaryRulesResponseModel;
+            return _response.body as ElevenLabs.PronunciationDictionaryRulesResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -326,7 +326,7 @@ export class PronunciationDictionary {
         pronunciationDictionaryId: string,
         request: ElevenLabs.BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost,
         requestOptions?: PronunciationDictionary.RequestOptions,
-    ): Promise<ElevenLabs.RemovePronunciationDictionaryRulesResponseModel> {
+    ): Promise<ElevenLabs.PronunciationDictionaryRulesResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -344,8 +344,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -358,7 +358,7 @@ export class PronunciationDictionary {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.RemovePronunciationDictionaryRulesResponseModel;
+            return _response.body as ElevenLabs.PronunciationDictionaryRulesResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -418,8 +418,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -498,8 +498,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -595,8 +595,8 @@ export class PronunciationDictionary {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

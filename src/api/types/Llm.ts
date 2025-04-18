@@ -7,6 +7,9 @@ export type Llm =
     | "gpt-4o"
     | "gpt-4"
     | "gpt-4-turbo"
+    | "gpt-4.1"
+    | "gpt-4.1-mini"
+    | "gpt-4.1-nano"
     | "gpt-3.5-turbo"
     | "gemini-1.5-pro"
     | "gemini-1.5-flash"
@@ -24,6 +27,9 @@ export const Llm = {
     Gpt4O: "gpt-4o",
     Gpt4: "gpt-4",
     Gpt4Turbo: "gpt-4-turbo",
+    Gpt41: "gpt-4.1",
+    Gpt41Mini: "gpt-4.1-mini",
+    Gpt41Nano: "gpt-4.1-nano",
     Gpt35Turbo: "gpt-3.5-turbo",
     Gemini15Pro: "gemini-1.5-pro",
     Gemini15Flash: "gemini-1.5-flash",

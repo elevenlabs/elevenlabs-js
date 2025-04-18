@@ -12,4 +12,7 @@ export interface GetConversationResponseModel {
     metadata: ElevenLabs.ConversationHistoryMetadataCommonModel;
     analysis?: ElevenLabs.ConversationHistoryAnalysisCommonModel;
     conversation_initiation_client_data?: ElevenLabs.ConversationInitiationClientDataRequestOutput;
+    has_audio: boolean;
+    has_user_audio: boolean;
+    has_response_audio: boolean;
 }
