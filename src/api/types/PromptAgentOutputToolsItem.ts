@@ -17,7 +17,7 @@ export namespace PromptAgentOutputToolsItem {
         type: "client";
     }
 
-    export interface System extends ElevenLabs.SystemToolConfig {
+    export interface System extends ElevenLabs.SystemToolConfigOutput {
         type: "system";
     }
 

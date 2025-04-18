@@ -5,4 +5,5 @@
 export interface SafetyResponseModel {
     is_blocked_ivc?: boolean;
     is_blocked_non_ivc?: boolean;
+    ignore_safety_evaluation?: boolean;
 }

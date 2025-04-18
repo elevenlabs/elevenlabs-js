@@ -8,6 +8,7 @@ import * as ElevenLabs from "../index";
  * A webhook tool is a tool that calls an external webhook from our server
  */
 export interface WebhookToolConfigInput {
+    id?: string;
     name: string;
     description: string;
     /** The schema for the outgoing webhoook, including parameters and URL specification */

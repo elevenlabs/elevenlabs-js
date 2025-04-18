@@ -56,6 +56,10 @@ export class ForcedAlignment {
         const _request = await core.newFormData();
         await _request.appendFile("file", request.file);
         _request.append("text", request.text);
+        if (request.enabled_spooled_file != null) {
+            _request.append("enabled_spooled_file", request.enabled_spooled_file.toString());
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
@@ -74,8 +78,8 @@ export class ForcedAlignment {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,

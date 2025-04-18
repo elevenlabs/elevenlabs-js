@@ -42,6 +42,10 @@ export interface VoicesSearchRequest {
      */
     fine_tuning_state?: string;
     /**
+     * Collection ID to filter voices by.
+     */
+    collection_id?: string;
+    /**
      * Whether to include the total count of voices found in the response. Incurs a performance cost.
      */
     include_total_count?: boolean;
