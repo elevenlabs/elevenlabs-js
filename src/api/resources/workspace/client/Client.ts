@@ -71,8 +71,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -155,8 +155,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -239,8 +239,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -321,8 +321,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -403,8 +403,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -485,8 +485,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -565,8 +565,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -604,6 +604,86 @@ export class Workspace {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/workspace/members.");
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Deletes a workspace member. This endpoint may only be called by workspace administrators.
+     *
+     * @param {ElevenLabs.BodyDeleteMemberV1WorkspaceMembersDelete} request
+     * @param {Workspace.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.workspace.deleteMember({
+     *         email: "email"
+     *     })
+     */
+    public async deleteMember(
+        request: ElevenLabs.BodyDeleteMemberV1WorkspaceMembersDelete,
+        requestOptions?: Workspace.RequestOptions,
+    ): Promise<ElevenLabs.DeleteWorkspaceMemberResponseModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                "v1/workspace/members",
+            ),
+            method: "DELETE",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.DeleteWorkspaceMemberResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling DELETE /v1/workspace/members.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
@@ -650,8 +730,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -735,8 +815,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -819,8 +899,8 @@ export class Workspace {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.1",
-                "User-Agent": "elevenlabs/1.56.1",
+                "X-Fern-SDK-Version": "1.57.0",
+                "User-Agent": "elevenlabs/1.57.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

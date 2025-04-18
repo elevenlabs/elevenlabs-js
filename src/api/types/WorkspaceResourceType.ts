@@ -7,6 +7,7 @@
  */
 export type WorkspaceResourceType =
     | "voice"
+    | "voice_collection"
     | "pronunciation_dictionary"
     | "dubbing"
     | "project"
@@ -16,9 +17,11 @@ export type WorkspaceResourceType =
     | "convai_settings"
     | "convai_secrets"
     | "music_latent"
-    | "convai_phone_numbers";
+    | "convai_phone_numbers"
+    | "convai_batch_calls";
 export const WorkspaceResourceType = {
     Voice: "voice",
+    VoiceCollection: "voice_collection",
     PronunciationDictionary: "pronunciation_dictionary",
     Dubbing: "dubbing",
     Project: "project",
@@ -29,4 +32,5 @@ export const WorkspaceResourceType = {
     ConvaiSecrets: "convai_secrets",
     MusicLatent: "music_latent",
     ConvaiPhoneNumbers: "convai_phone_numbers",
+    ConvaiBatchCalls: "convai_batch_calls",
 } as const;

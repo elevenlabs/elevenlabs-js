@@ -20,4 +20,6 @@ export interface VoiceSample {
     has_isolated_audio?: boolean;
     has_isolated_audio_preview?: boolean;
     speaker_separation?: ElevenLabs.SpeakerSeparationResponseModel;
+    trim_start?: number;
+    trim_end?: number;
 }
