@@ -2528,7 +2528,7 @@ export class ConversationalAi {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {
