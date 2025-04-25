@@ -16,4 +16,5 @@ export { type BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost } from "./Body
 export { type RagIndexRequestModel } from "./RagIndexRequestModel";
 export { type ConversationalAiGetDependentAgentsRequest } from "./ConversationalAiGetDependentAgentsRequest";
 export { type PatchConvAiSettingsRequest } from "./PatchConvAiSettingsRequest";
+export { type PatchConvAiDashboardSettingsRequest } from "./PatchConvAiDashboardSettingsRequest";
 export { type PostWorkspaceSecretRequest } from "./PostWorkspaceSecretRequest";

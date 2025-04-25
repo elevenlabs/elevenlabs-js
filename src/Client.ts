@@ -4,6 +4,9 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
+import * as ElevenLabs from "./api/index";
+import urlJoin from "url-join";
+import * as errors from "./errors/index";
 import { History } from "./api/resources/history/client/Client";
 import { TextToSoundEffects } from "./api/resources/textToSoundEffects/client/Client";
 import { AudioIsolation } from "./api/resources/audioIsolation/client/Client";
@@ -156,5 +159,658 @@ export class ElevenLabsClient {
 
     public get conversationalAi(): ConversationalAi {
         return (this._conversationalAi ??= new ConversationalAi(this._options));
+    }
+
+    /**
+     * @param {string} workspaceId
+     * @param {ElevenLabs.ListProductionsProjectsV1ProductionsWorkspaceWorkspaceIdProjectsGetRequest} request
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.listProductionsProjectsV1ProductionsWorkspaceWorkspaceIdProjectsGet("workspace_id")
+     */
+    public async listProductionsProjectsV1ProductionsWorkspaceWorkspaceIdProjectsGet(
+        workspaceId: string,
+        request: ElevenLabs.ListProductionsProjectsV1ProductionsWorkspaceWorkspaceIdProjectsGetRequest = {},
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<ElevenLabs.ProjectList> {
+        const { top_level: topLevel } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (topLevel != null) {
+            _queryParams["top_level"] = topLevel.toString();
+        }
+
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/productions/workspace/${encodeURIComponent(workspaceId)}/projects`,
+            ),
+            method: "GET",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.59.0",
+                "User-Agent": "elevenlabs/1.59.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.ProjectList;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/productions/workspace/{workspace_id}/projects.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} workspaceId
+     * @param {ElevenLabs.CreateProjectRequestBody} request
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.createProductionsProjectV1ProductionsWorkspaceWorkspaceIdProjectsPost("workspace_id", {
+     *         name: "name"
+     *     })
+     */
+    public async createProductionsProjectV1ProductionsWorkspaceWorkspaceIdProjectsPost(
+        workspaceId: string,
+        request: ElevenLabs.CreateProjectRequestBody,
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<ElevenLabs.ProjectModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/productions/workspace/${encodeURIComponent(workspaceId)}/projects`,
+            ),
+            method: "POST",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.59.0",
+                "User-Agent": "elevenlabs/1.59.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.ProjectModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/productions/workspace/{workspace_id}/projects.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} projectId
+     * @param {string} workspaceId
+     * @param {ElevenLabs.RenameProjectRequestBody} request
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.renameProductionsProjectV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdRenamePut("project_id", "workspace_id", {
+     *         new_name: "new_name"
+     *     })
+     */
+    public async renameProductionsProjectV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdRenamePut(
+        projectId: string,
+        workspaceId: string,
+        request: ElevenLabs.RenameProjectRequestBody,
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/productions/workspace/${encodeURIComponent(workspaceId)}/projects/${encodeURIComponent(projectId)}/rename`,
+            ),
+            method: "PUT",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.59.0",
+                "User-Agent": "elevenlabs/1.59.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling PUT /v1/productions/workspace/{workspace_id}/projects/{project_id}/rename.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} projectId
+     * @param {string} workspaceId
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.getProductionsProjectByIdV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdGet("project_id", "workspace_id")
+     */
+    public async getProductionsProjectByIdV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdGet(
+        projectId: string,
+        workspaceId: string,
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<ElevenLabs.ProjectModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/productions/workspace/${encodeURIComponent(workspaceId)}/projects/${encodeURIComponent(projectId)}`,
+            ),
+            method: "GET",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.59.0",
+                "User-Agent": "elevenlabs/1.59.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.ProjectModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/productions/workspace/{workspace_id}/projects/{project_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} projectId
+     * @param {string} workspaceId
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.deleteProjectV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdDelete("project_id", "workspace_id")
+     */
+    public async deleteProjectV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdDelete(
+        projectId: string,
+        workspaceId: string,
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/productions/workspace/${encodeURIComponent(workspaceId)}/projects/${encodeURIComponent(projectId)}`,
+            ),
+            method: "DELETE",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.59.0",
+                "User-Agent": "elevenlabs/1.59.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling DELETE /v1/productions/workspace/{workspace_id}/projects/{project_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} descriptionId
+     * @param {string} projectId
+     * @param {string} workspaceId
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.addAProductionToAProjectV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdAddProductionsDescriptionIdPut("description_id", "project_id", "workspace_id")
+     */
+    public async addAProductionToAProjectV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdAddProductionsDescriptionIdPut(
+        descriptionId: string,
+        projectId: string,
+        workspaceId: string,
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<ElevenLabs.ProjectModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/productions/workspace/${encodeURIComponent(workspaceId)}/projects/${encodeURIComponent(projectId)}/add/productions/${encodeURIComponent(descriptionId)}`,
+            ),
+            method: "PUT",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.59.0",
+                "User-Agent": "elevenlabs/1.59.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.ProjectModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling PUT /v1/productions/workspace/{workspace_id}/projects/{project_id}/add/productions/{description_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} subprojectId
+     * @param {string} projectId
+     * @param {string} workspaceId
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.addASubprojectToAProjectV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdAddSubprojectSubprojectIdPut("subproject_id", "project_id", "workspace_id")
+     */
+    public async addASubprojectToAProjectV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdAddSubprojectSubprojectIdPut(
+        subprojectId: string,
+        projectId: string,
+        workspaceId: string,
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<ElevenLabs.ProjectModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/productions/workspace/${encodeURIComponent(workspaceId)}/projects/${encodeURIComponent(projectId)}/add/subproject/${encodeURIComponent(subprojectId)}`,
+            ),
+            method: "PUT",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.59.0",
+                "User-Agent": "elevenlabs/1.59.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.ProjectModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling PUT /v1/productions/workspace/{workspace_id}/projects/{project_id}/add/subproject/{subproject_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} itemId
+     * @param {string} projectId
+     * @param {string} workspaceId
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.removeItemFromAProductionV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdItemIdDelete("item_id", "project_id", "workspace_id")
+     */
+    public async removeItemFromAProductionV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdItemIdDelete(
+        itemId: string,
+        projectId: string,
+        workspaceId: string,
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/productions/workspace/${encodeURIComponent(workspaceId)}/projects/${encodeURIComponent(projectId)}/${encodeURIComponent(itemId)}`,
+            ),
+            method: "DELETE",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "1.59.0",
+                "User-Agent": "elevenlabs/1.59.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling DELETE /v1/productions/workspace/{workspace_id}/projects/{project_id}/{item_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
     }
 }

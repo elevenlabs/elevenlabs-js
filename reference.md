@@ -1,5 +1,75 @@
 # Reference
 
+<details><summary><code>client.<a href="/src/Client.ts">removeItemFromAProductionV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdItemIdDelete</a>(itemId, projectId, workspaceId) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.removeItemFromAProductionV1ProductionsWorkspaceWorkspaceIdProjectsProjectIdItemIdDelete(
+    "item_id",
+    "project_id",
+    "workspace_id",
+);
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**itemId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**projectId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspaceId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+##
+
 ## History
 
 <details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetSpeechHistoryResponse</code></summary>
@@ -8362,6 +8432,124 @@ await client.conversationalAi.updateSettings();
 <dd>
 
 **request:** `ElevenLabs.PatchConvAiSettingsRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getDashboardSettings</a>() -> ElevenLabs.GetConvAiDashboardSettingsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve Convai dashboard settings for the workspace
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getDashboardSettings();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updateDashboardSettings</a>({ ...params }) -> ElevenLabs.GetConvAiDashboardSettingsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update Convai dashboard settings for the workspace
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.updateDashboardSettings();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.PatchConvAiDashboardSettingsRequest`
 
 </dd>
 </dl>

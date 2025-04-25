@@ -67,6 +67,8 @@ export interface ProjectExtendedResponseModel {
     chapters: ElevenLabs.ChapterResponse[];
     /** List of pronunciation dictionary versions of the project and their metadata. */
     pronunciation_dictionary_versions: ElevenLabs.PronunciationDictionaryVersionResponseModel[];
+    /** List of pronunciation dictionary locators. */
+    pronunciation_dictionary_locators: ElevenLabs.PronunciationDictionaryLocatorResponseModel[];
     /** Whether text normalization is applied to the project. */
     apply_text_normalization: ElevenLabs.ProjectExtendedResponseModelApplyTextNormalization;
     /** Experimental features of the project. */
