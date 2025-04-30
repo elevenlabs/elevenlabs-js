@@ -8,7 +8,7 @@ import * as fs from "fs";
  * @example
  *     {
  *         files: [fs.createReadStream("/path/to/your/file")],
- *         name: "Alex"
+ *         name: "name"
  *     }
  */
 export interface BodyAddVoiceV1VoicesAddPost {

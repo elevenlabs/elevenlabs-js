@@ -1,4 +1,4 @@
 export { type TextToSpeechRequest } from "./TextToSpeechRequest";
-export { type TextToSpeechWithTimestampsRequest } from "./TextToSpeechWithTimestampsRequest";
+export { type BodyTextToSpeechWithTimestampsV1TextToSpeechVoiceIdWithTimestampsPost } from "./BodyTextToSpeechWithTimestampsV1TextToSpeechVoiceIdWithTimestampsPost";
 export { type StreamTextToSpeechRequest } from "./StreamTextToSpeechRequest";
-export { type StreamTextToSpeechWithTimstampsRequest } from "./StreamTextToSpeechWithTimstampsRequest";
+export { type StreamTextToSpeechWithTimestampsRequest } from "./StreamTextToSpeechWithTimestampsRequest";

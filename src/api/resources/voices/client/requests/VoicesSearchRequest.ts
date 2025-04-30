@@ -30,7 +30,7 @@ export interface VoicesSearchRequest {
      */
     sort_direction?: string;
     /**
-     * Type of the voice to filter by. One of 'personal', 'community', 'default', 'workspace'.
+     * Type of the voice to filter by. One of 'personal', 'community', 'default', 'workspace', 'non-default'. 'non-default' is equal to 'personal' plus 'community'.
      */
     voice_type?: string;
     /**

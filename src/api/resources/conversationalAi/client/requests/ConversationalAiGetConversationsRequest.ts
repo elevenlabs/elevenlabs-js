@@ -22,6 +22,10 @@ export interface ConversationalAiGetConversationsRequest {
      */
     call_successful?: ElevenLabs.EvaluationSuccessResult;
     /**
+     * Unix timestamp (in seconds) to filter conversations up to this start date.
+     */
+    call_start_before_unix?: number;
+    /**
      * How many conversations to return at maximum. Can not exceed 100, defaults to 30.
      */
     page_size?: number;

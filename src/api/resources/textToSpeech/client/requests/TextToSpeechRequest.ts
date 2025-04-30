@@ -29,9 +29,9 @@ export interface TextToSpeechRequest {
      */
     optimize_streaming_latency?: number;
     /**
-     * The output format of the generated audio.
+     * Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
      */
-    output_format?: ElevenLabs.OutputFormat;
+    output_format?: ElevenLabs.TextToSpeechConvertRequestOutputFormat;
     /** The text that will get converted into speech. */
     text: string;
     /** Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property. */
@@ -39,9 +39,9 @@ export interface TextToSpeechRequest {
     /** Language code (ISO 639-1) used to enforce a language for the model. Currently only Turbo v2.5 and Flash v2.5 support language enforcement. For other models, an error will be returned if language code is provided. */
     language_code?: string;
     /** Voice settings overriding stored settings for the given voice. They are applied only on the given request. */
-    voice_settings?: ElevenLabs.VoiceSettings;
+    voice_settings?: ElevenLabs.VoiceSettingsResponseModel;
     /** A list of pronunciation dictionary locators (id, version_id) to be applied to the text. They will be applied in order. You may have up to 3 locators per request */
-    pronunciation_dictionary_locators?: ElevenLabs.PronunciationDictionaryVersionLocator[];
+    pronunciation_dictionary_locators?: ElevenLabs.PronunciationDictionaryVersionLocatorDbModel[];
     /** If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be integer between 0 and 4294967295. */
     seed?: number;
     /** The text that came before the text of the current request. Can be used to improve the speech's continuity when concatenating together multiple generations or to influence the speech's continuity in the current generation. */

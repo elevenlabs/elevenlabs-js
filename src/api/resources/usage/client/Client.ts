@@ -57,6 +57,8 @@ export class Usage {
             end_unix: endUnix,
             include_workspace_metrics: includeWorkspaceMetrics,
             breakdown_type: breakdownType,
+            aggregation_interval: aggregationInterval,
+            metric,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["start_unix"] = startUnix.toString();
@@ -67,6 +69,14 @@ export class Usage {
 
         if (breakdownType != null) {
             _queryParams["breakdown_type"] = breakdownType;
+        }
+
+        if (aggregationInterval != null) {
+            _queryParams["aggregation_interval"] = aggregationInterval;
+        }
+
+        if (metric != null) {
+            _queryParams["metric"] = metric;
         }
 
         const _response = await core.fetcher({
@@ -86,8 +96,8 @@ export class Usage {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

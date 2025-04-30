@@ -47,7 +47,7 @@ export class Models {
      * @example
      *     await client.models.getAll()
      */
-    public async getAll(requestOptions?: Models.RequestOptions): Promise<ElevenLabs.Model[]> {
+    public async getAll(requestOptions?: Models.RequestOptions): Promise<ElevenLabs.ModelResponseModel[]> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -65,8 +65,8 @@ export class Models {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -78,7 +78,7 @@ export class Models {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.Model[];
+            return _response.body as ElevenLabs.ModelResponseModel[];
         }
 
         if (_response.error.reason === "status-code") {

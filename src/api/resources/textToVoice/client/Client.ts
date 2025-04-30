@@ -35,7 +35,7 @@ export class TextToVoice {
     constructor(protected readonly _options: TextToVoice.Options = {}) {}
 
     /**
-     * Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. If you like the a voice previewand want to create the voice call /v1/text-to-voice/create-voice-from-preview with the generated_voice_id to create the voice.
+     * Create a voice from a text prompt.
      *
      * @param {ElevenLabs.VoicePreviewsRequestModel} request
      * @param {TextToVoice.RequestOptions} requestOptions - Request-specific configuration.
@@ -74,8 +74,8 @@ export class TextToVoice {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -124,7 +124,7 @@ export class TextToVoice {
     }
 
     /**
-     * Create a voice from previously generated voice preview. This endpoint should be called after you fetched a generated_voice_id using POST /v1/text-to-voice/create-previews.
+     * Add a generated voice to the voice library.
      *
      * @param {ElevenLabs.BodyCreateANewVoiceFromVoicePreviewV1TextToVoiceCreateVoiceFromPreviewPost} request
      * @param {TextToVoice.RequestOptions} requestOptions - Request-specific configuration.
@@ -141,7 +141,7 @@ export class TextToVoice {
     public async createVoiceFromPreview(
         request: ElevenLabs.BodyCreateANewVoiceFromVoicePreviewV1TextToVoiceCreateVoiceFromPreviewPost,
         requestOptions?: TextToVoice.RequestOptions,
-    ): Promise<ElevenLabs.Voice> {
+    ): Promise<ElevenLabs.VoiceResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -159,8 +159,8 @@ export class TextToVoice {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -173,7 +173,7 @@ export class TextToVoice {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.Voice;
+            return _response.body as ElevenLabs.VoiceResponseModel;
         }
 
         if (_response.error.reason === "status-code") {

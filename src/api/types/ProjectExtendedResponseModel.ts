@@ -46,7 +46,7 @@ export interface ProjectExtendedResponseModel {
     /** Whether the project uses volume normalization. */
     volume_normalization: boolean;
     /** The state of the project. */
-    state: ElevenLabs.ProjectState;
+    state: ElevenLabs.ProjectExtendedResponseModelState;
     /** The access level of the project. */
     access_level: ElevenLabs.ProjectExtendedResponseModelAccessLevel;
     /** Whether the project is fiction. */
@@ -64,9 +64,11 @@ export interface ProjectExtendedResponseModel {
     /** The quality preset level of the project. */
     quality_preset: ElevenLabs.ProjectExtendedResponseModelQualityPreset;
     /** List of chapters of the project and their metadata. */
-    chapters: ElevenLabs.ChapterResponse[];
+    chapters: ElevenLabs.ChapterResponseModel[];
     /** List of pronunciation dictionary versions of the project and their metadata. */
     pronunciation_dictionary_versions: ElevenLabs.PronunciationDictionaryVersionResponseModel[];
+    /** List of pronunciation dictionary locators. */
+    pronunciation_dictionary_locators: ElevenLabs.PronunciationDictionaryLocatorResponseModel[];
     /** Whether text normalization is applied to the project. */
     apply_text_normalization: ElevenLabs.ProjectExtendedResponseModelApplyTextNormalization;
     /** Experimental features of the project. */

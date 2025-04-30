@@ -49,7 +49,7 @@ export class History {
     public async getAll(
         request: ElevenLabs.HistoryGetAllRequest = {},
         requestOptions?: History.RequestOptions,
-    ): Promise<ElevenLabs.GetSpeechHistoryResponse> {
+    ): Promise<ElevenLabs.GetSpeechHistoryResponseModel> {
         const {
             page_size: pageSize,
             start_after_history_item_id: startAfterHistoryItemId,
@@ -95,8 +95,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -109,7 +109,7 @@ export class History {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetSpeechHistoryResponse;
+            return _response.body as ElevenLabs.GetSpeechHistoryResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -144,18 +144,18 @@ export class History {
     /**
      * Retrieves a history item.
      *
-     * @param {string} historyItemId - History item ID to be used, you can use GET https://api.elevenlabs.io/v1/history to receive a list of history items and their IDs.
+     * @param {string} historyItemId - ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/get-all) endpoint to retrieve a list of history items.
      * @param {History.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.history.get("HISTORY_ITEM_ID")
+     *     await client.history.get("VW7YKqPnjY4h39yTbx2L")
      */
     public async get(
         historyItemId: string,
         requestOptions?: History.RequestOptions,
-    ): Promise<ElevenLabs.SpeechHistoryItemResponse> {
+    ): Promise<ElevenLabs.SpeechHistoryItemResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -173,8 +173,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -186,7 +186,7 @@ export class History {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.SpeechHistoryItemResponse;
+            return _response.body as ElevenLabs.SpeechHistoryItemResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -223,13 +223,13 @@ export class History {
     /**
      * Delete a history item by its ID
      *
-     * @param {string} historyItemId - History item ID to be used, you can use GET https://api.elevenlabs.io/v1/history to receive a list of history items and their IDs.
+     * @param {string} historyItemId - ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/get-all) endpoint to retrieve a list of history items.
      * @param {History.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.history.delete("HISTORY_ITEM_ID")
+     *     await client.history.delete("VW7YKqPnjY4h39yTbx2L")
      */
     public async delete(
         historyItemId: string,
@@ -252,8 +252,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -321,8 +321,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -375,7 +375,7 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async download(
-        request: ElevenLabs.DownloadHistoryRequest,
+        request: ElevenLabs.BodyDownloadHistoryItemsV1HistoryDownloadPost,
         requestOptions?: History.RequestOptions,
     ): Promise<stream.Readable> {
         const _response = await core.fetcher<stream.Readable>({
@@ -395,8 +395,8 @@ export class History {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
