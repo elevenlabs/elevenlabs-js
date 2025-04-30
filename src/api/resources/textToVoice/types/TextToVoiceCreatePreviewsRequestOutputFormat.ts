@@ -17,6 +17,7 @@ export type TextToVoiceCreatePreviewsRequestOutputFormat =
     | "pcm_22050"
     | "pcm_24000"
     | "pcm_44100"
+    | "pcm_48000"
     | "ulaw_8000"
     | "alaw_8000"
     | "opus_48000_32"
@@ -36,6 +37,7 @@ export const TextToVoiceCreatePreviewsRequestOutputFormat = {
     Pcm22050: "pcm_22050",
     Pcm24000: "pcm_24000",
     Pcm44100: "pcm_44100",
+    Pcm48000: "pcm_48000",
     Ulaw8000: "ulaw_8000",
     Alaw8000: "alaw_8000",
     Opus4800032: "opus_48000_32",

@@ -1,2 +1,2 @@
 export { type HistoryGetAllRequest } from "./HistoryGetAllRequest";
-export { type DownloadHistoryRequest } from "./DownloadHistoryRequest";
+export { type BodyDownloadHistoryItemsV1HistoryDownloadPost } from "./BodyDownloadHistoryItemsV1HistoryDownloadPost";

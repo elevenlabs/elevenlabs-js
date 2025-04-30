@@ -18,7 +18,7 @@ export interface ChapterWithContentResponseModel {
     /** The state of the chapter. */
     state: ElevenLabs.ChapterWithContentResponseModelState;
     /** The statistics of the chapter. */
-    statistics?: ElevenLabs.ChapterStatisticsResponse;
+    statistics?: ElevenLabs.ChapterStatisticsResponseModel;
     /** The last conversion error of the chapter. */
     last_conversion_error?: string;
     content: ElevenLabs.ChapterContentResponseModel;

@@ -15,8 +15,9 @@ export declare namespace Voices {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
+        apiKey: core.Supplier<string>;
         /** Override the xi-api-key header */
-        apiKey?: core.Supplier<string | undefined>;
+        xiApiKey?: core.Supplier<string | undefined>;
     }
 
     export interface RequestOptions {
@@ -27,7 +28,7 @@ export declare namespace Voices {
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
-        apiKey?: string | undefined;
+        xiApiKey?: string | undefined;
         /** Additional headers to include in the request. */
         headers?: Record<string, string>;
     }
@@ -39,7 +40,7 @@ export declare namespace Voices {
 export class Voices {
     protected _pvc: Pvc | undefined;
 
-    constructor(protected readonly _options: Voices.Options = {}) {}
+    constructor(protected readonly _options: Voices.Options) {}
 
     public get pvc(): Pvc {
         return (this._pvc ??= new Pvc(this._options));
@@ -59,7 +60,7 @@ export class Voices {
     public async getAll(
         request: ElevenLabs.VoicesGetAllRequest = {},
         requestOptions?: Voices.RequestOptions,
-    ): Promise<ElevenLabs.GetVoicesResponse> {
+    ): Promise<ElevenLabs.GetVoicesResponseModel> {
         const { show_legacy: showLegacy } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (showLegacy != null) {
@@ -78,15 +79,16 @@ export class Voices {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -97,7 +99,7 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetVoicesResponse;
+            return _response.body as ElevenLabs.GetVoicesResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -211,15 +213,16 @@ export class Voices {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -270,7 +273,9 @@ export class Voices {
      * @example
      *     await client.voices.getDefaultSettings()
      */
-    public async getDefaultSettings(requestOptions?: Voices.RequestOptions): Promise<ElevenLabs.VoiceSettings> {
+    public async getDefaultSettings(
+        requestOptions?: Voices.RequestOptions,
+    ): Promise<ElevenLabs.VoiceSettingsResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -283,15 +288,16 @@ export class Voices {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -301,7 +307,7 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.VoiceSettings;
+            return _response.body as ElevenLabs.VoiceSettingsResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -337,12 +343,12 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.voices.getSettings("JBFqnCBsd6RMkjVDRZzb")
+     *     await client.voices.getSettings("21m00Tcm4TlvDq8ikWAM")
      */
     public async getSettings(
         voiceId: string,
         requestOptions?: Voices.RequestOptions,
-    ): Promise<ElevenLabs.VoiceSettings> {
+    ): Promise<ElevenLabs.VoiceSettingsResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -355,15 +361,16 @@ export class Voices {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -373,7 +380,7 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.VoiceSettings;
+            return _response.body as ElevenLabs.VoiceSettingsResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -410,20 +417,20 @@ export class Voices {
     /**
      * Returns metadata about a specific voice.
      *
-     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {string} voiceId - ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
      * @param {ElevenLabs.VoicesGetRequest} request
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.voices.get("JBFqnCBsd6RMkjVDRZzb")
+     *     await client.voices.get("21m00Tcm4TlvDq8ikWAM")
      */
     public async get(
         voiceId: string,
         request: ElevenLabs.VoicesGetRequest = {},
         requestOptions?: Voices.RequestOptions,
-    ): Promise<ElevenLabs.Voice> {
+    ): Promise<ElevenLabs.VoiceResponseModel> {
         const { with_settings: withSettings } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (withSettings != null) {
@@ -442,15 +449,16 @@ export class Voices {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -461,7 +469,7 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.Voice;
+            return _response.body as ElevenLabs.VoiceResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -496,13 +504,13 @@ export class Voices {
     /**
      * Deletes a voice by its ID.
      *
-     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {string} voiceId - ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.voices.delete("VOICE_ID")
+     *     await client.voices.delete("21m00Tcm4TlvDq8ikWAM")
      */
     public async delete(
         voiceId: string,
@@ -520,15 +528,16 @@ export class Voices {
             method: "DELETE",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -573,22 +582,24 @@ export class Voices {
     /**
      * Edit your settings for a specific voice. "similarity_boost" corresponds to "Clarity + Similarity Enhancement" in the web app and "stability" corresponds to "Stability" slider in the web app.
      *
-     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
-     * @param {ElevenLabs.VoiceSettings} request
+     * @param {string} voiceId - ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
+     * @param {ElevenLabs.VoiceSettingsResponseModel} request
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.voices.editSettings("VOICE_ID", {
-     *         stability: 0.1,
-     *         similarity_boost: 0.3,
-     *         style: 0.2
+     *     await client.voices.editSettings("21m00Tcm4TlvDq8ikWAM", {
+     *         stability: 1,
+     *         similarity_boost: 1,
+     *         style: 0,
+     *         use_speaker_boost: true,
+     *         speed: 1
      *     })
      */
     public async editSettings(
         voiceId: string,
-        request: ElevenLabs.VoiceSettings,
+        request: ElevenLabs.VoiceSettingsResponseModel,
         requestOptions?: Voices.RequestOptions,
     ): Promise<ElevenLabs.EditVoiceSettingsResponseModel> {
         const _response = await core.fetcher({
@@ -603,15 +614,16 @@ export class Voices {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -657,7 +669,7 @@ export class Voices {
     }
 
     /**
-     * Add a new voice to your collection of voices in VoiceLab.
+     * Create a voice clone and add it to your Voices
      *
      * @param {ElevenLabs.BodyAddVoiceV1VoicesAddPost} request
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
@@ -667,7 +679,7 @@ export class Voices {
      * @example
      *     await client.voices.add({
      *         files: [fs.createReadStream("/path/to/your/file")],
-     *         name: "Alex"
+     *         name: "name"
      *     })
      */
     public async add(
@@ -705,15 +717,16 @@ export class Voices {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ..._maybeEncodedRequest.headers,
                 ...requestOptions?.headers,
             },
@@ -767,8 +780,8 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.voices.edit("VOICE_ID", {
-     *         name: "George"
+     *     await client.voices.edit("21m00Tcm4TlvDq8ikWAM", {
+     *         name: "name"
      *     })
      */
     public async edit(
@@ -809,15 +822,16 @@ export class Voices {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ..._maybeEncodedRequest.headers,
                 ...requestOptions?.headers,
             },
@@ -864,18 +878,18 @@ export class Voices {
     }
 
     /**
-     * Add a shared voice to your collection of voices.
+     * Add a shared voice to your collection of Voices
      *
      * @param {string} publicUserId - Public user ID used to publicly identify ElevenLabs users.
-     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {string} voiceId - ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
      * @param {ElevenLabs.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost} request
      * @param {Voices.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.voices.addSharingVoice("63e84100a6bf7874ba37a1bab9a31828a379ec94b891b401653b655c5110880f", "sB1b5zUrxQVAFl2PhZFp", {
-     *         new_name: "Alita"
+     *     await client.voices.addSharingVoice("63e06b7e7cafdc46be4d2e0b3f045940231ae058d508589653d74d1265a574ca", "21m00Tcm4TlvDq8ikWAM", {
+     *         new_name: "John Smith"
      *     })
      */
     public async addSharingVoice(
@@ -896,15 +910,16 @@ export class Voices {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -959,15 +974,14 @@ export class Voices {
      *
      * @example
      *     await client.voices.getShared({
-     *         page_size: 1,
-     *         gender: "female",
-     *         language: "en"
+     *         featured: true,
+     *         reader_app_enabled: true
      *     })
      */
     public async getShared(
         request: ElevenLabs.VoicesGetSharedRequest = {},
         requestOptions?: Voices.RequestOptions,
-    ): Promise<ElevenLabs.GetLibraryVoicesResponse> {
+    ): Promise<ElevenLabs.GetLibraryVoicesResponseModel> {
         const {
             page_size: pageSize,
             category,
@@ -1071,15 +1085,16 @@ export class Voices {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -1090,7 +1105,7 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetLibraryVoicesResponse;
+            return _response.body as ElevenLabs.GetLibraryVoicesResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -1136,7 +1151,7 @@ export class Voices {
     public async getSimilarLibraryVoices(
         request: ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost,
         requestOptions?: Voices.RequestOptions,
-    ): Promise<ElevenLabs.GetLibraryVoicesResponse> {
+    ): Promise<ElevenLabs.GetLibraryVoicesResponseModel> {
         const _request = await core.newFormData();
         if (request.audio_file != null) {
             await _request.appendFile("audio_file", request.audio_file);
@@ -1163,15 +1178,16 @@ export class Voices {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ..._maybeEncodedRequest.headers,
                 ...requestOptions?.headers,
             },
@@ -1183,7 +1199,7 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetLibraryVoicesResponse;
+            return _response.body as ElevenLabs.GetLibraryVoicesResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -1242,15 +1258,16 @@ export class Voices {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -1290,5 +1307,10 @@ export class Voices {
                     message: _response.error.errorMessage,
                 });
         }
+    }
+
+    protected async _getCustomAuthorizationHeaders() {
+        const apiKeyValue = await core.Supplier.get(this._options.apiKey);
+        return { "xi-api-key": apiKeyValue };
     }
 }

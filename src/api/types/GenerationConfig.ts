@@ -5,13 +5,19 @@
 export interface GenerationConfig {
     /**
      * This is an advanced setting that most users shouldn't need to use. It relates to our
-     * generation schedule explained [here](https://elevenlabs.io/docs/api-reference/websockets#understanding-how-our-websockets-buffer-text).
+     * generation schedule.
      *
-     * Determines the minimum amount of text that needs to be sent and present in our
+     * Our WebSocket service incorporates a buffer system designed to optimize the Time To First Byte (TTFB) while maintaining high-quality streaming.
+     *
+     * All text sent to the WebSocket endpoint is added to this buffer and only when that buffer reaches a certain size is an audio generation attempted. This is because our model provides higher quality audio when the model has longer inputs, and can deduce more context about how the text should be delivered.
+     *
+     * The buffer ensures smooth audio data delivery and is automatically emptied with a final audio generation either when the stream is closed, or upon sending a `flush` command. We have advanced settings for changing the chunk schedule, which can improve latency at the cost of quality by generating audio more frequently with smaller text inputs.
+     *
+     * The `chunk_length_schedule` determines the minimum amount of text that needs to be sent and present in our
      * buffer before audio starts being generated. This is to maximise the amount of context available to
      * the model to improve audio quality, whilst balancing latency of the returned audio chunks.
      *
-     * The default value is: [120, 160, 250, 290].
+     * The default value for `chunk_length_schedule` is: [120, 160, 250, 290].
      *
      * This means that the first chunk of audio will not be generated until you send text that
      * totals at least 120 characters long. The next chunk of audio will only be generated once a

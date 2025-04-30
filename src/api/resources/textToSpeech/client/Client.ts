@@ -14,8 +14,9 @@ export declare namespace TextToSpeech {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
+        apiKey: core.Supplier<string>;
         /** Override the xi-api-key header */
-        apiKey?: core.Supplier<string | undefined>;
+        xiApiKey?: core.Supplier<string | undefined>;
     }
 
     export interface RequestOptions {
@@ -26,14 +27,14 @@ export declare namespace TextToSpeech {
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
-        apiKey?: string | undefined;
+        xiApiKey?: string | undefined;
         /** Additional headers to include in the request. */
         headers?: Record<string, string>;
     }
 }
 
 export class TextToSpeech {
-    constructor(protected readonly _options: TextToSpeech.Options = {}) {}
+    constructor(protected readonly _options: TextToSpeech.Options) {}
 
     /**
      * Converts text into speech using a voice of your choice and returns audio.
@@ -41,7 +42,7 @@ export class TextToSpeech {
      */
     public async convert(
         voiceId: string,
-        request: ElevenLabs.TextToSpeechRequest,
+        request: ElevenLabs.BodyTextToSpeechV1TextToSpeechVoiceIdPost,
         requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<stream.Readable> {
         const {
@@ -75,15 +76,16 @@ export class TextToSpeech {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -134,7 +136,7 @@ export class TextToSpeech {
      * Generate speech from text with precise character-level timing information for audio-text synchronization.
      *
      * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
-     * @param {ElevenLabs.TextToSpeechWithTimestampsRequest} request
+     * @param {ElevenLabs.BodyTextToSpeechWithTimestampsV1TextToSpeechVoiceIdWithTimestampsPost} request
      * @param {TextToSpeech.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -146,7 +148,7 @@ export class TextToSpeech {
      */
     public async convertWithTimestamps(
         voiceId: string,
-        request: ElevenLabs.TextToSpeechWithTimestampsRequest,
+        request: ElevenLabs.BodyTextToSpeechWithTimestampsV1TextToSpeechVoiceIdWithTimestampsPost,
         requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<ElevenLabs.AudioWithTimestampsResponseModel> {
         const {
@@ -180,15 +182,16 @@ export class TextToSpeech {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -274,15 +277,16 @@ export class TextToSpeech {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -334,7 +338,7 @@ export class TextToSpeech {
      */
     public async streamWithTimestamps(
         voiceId: string,
-        request: ElevenLabs.StreamTextToSpeechWithTimstampsRequest,
+        request: ElevenLabs.StreamTextToSpeechWithTimestampsRequest,
         requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponseModel>> {
         const {
@@ -368,15 +372,16 @@ export class TextToSpeech {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -429,5 +434,10 @@ export class TextToSpeech {
                     message: _response.error.errorMessage,
                 });
         }
+    }
+
+    protected async _getCustomAuthorizationHeaders() {
+        const apiKeyValue = await core.Supplier.get(this._options.apiKey);
+        return { "xi-api-key": apiKeyValue };
     }
 }

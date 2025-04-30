@@ -14,8 +14,9 @@ export declare namespace Projects {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
+        apiKey: core.Supplier<string>;
         /** Override the xi-api-key header */
-        apiKey?: core.Supplier<string | undefined>;
+        xiApiKey?: core.Supplier<string | undefined>;
     }
 
     export interface RequestOptions {
@@ -26,14 +27,14 @@ export declare namespace Projects {
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
-        apiKey?: string | undefined;
+        xiApiKey?: string | undefined;
         /** Additional headers to include in the request. */
         headers?: Record<string, string>;
     }
 }
 
 export class Projects {
-    constructor(protected readonly _options: Projects.Options = {}) {}
+    constructor(protected readonly _options: Projects.Options) {}
 
     /**
      * Returns a list of your Studio projects with metadata.
@@ -45,7 +46,7 @@ export class Projects {
      * @example
      *     await client.studio.projects.getAll()
      */
-    public async getAll(requestOptions?: Projects.RequestOptions): Promise<ElevenLabs.GetProjectsResponse> {
+    public async getAll(requestOptions?: Projects.RequestOptions): Promise<ElevenLabs.GetProjectsResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -58,15 +59,16 @@ export class Projects {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -76,7 +78,7 @@ export class Projects {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetProjectsResponse;
+            return _response.body as ElevenLabs.GetProjectsResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -238,15 +240,16 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ..._maybeEncodedRequest.headers,
                 ...requestOptions?.headers,
             },
@@ -293,7 +296,7 @@ export class Projects {
     /**
      * Returns information about a specific Studio project. This endpoint returns more detailed information about a project than `GET /v1/studio`.
      *
-     * @param {string} projectId - The ID of the Studio project.
+     * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
      * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -317,15 +320,16 @@ export class Projects {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -372,7 +376,7 @@ export class Projects {
     /**
      * Updates the specified Studio project by setting the values of the parameters passed.
      *
-     * @param {string} projectId - The ID of the Studio project.
+     * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
      * @param {ElevenLabs.studio.BodyUpdateStudioProjectV1StudioProjectsProjectIdPost} request
      * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -402,15 +406,16 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -458,7 +463,7 @@ export class Projects {
     /**
      * Deletes a Studio project.
      *
-     * @param {string} projectId - The ID of the Studio project.
+     * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
      * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -482,15 +487,16 @@ export class Projects {
             method: "DELETE",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -577,15 +583,16 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ..._maybeEncodedRequest.headers,
                 ...requestOptions?.headers,
             },
@@ -634,7 +641,7 @@ export class Projects {
     /**
      * Starts conversion of a Studio project and all of its chapters.
      *
-     * @param {string} projectId - The ID of the Studio project.
+     * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
      * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -658,15 +665,16 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -724,7 +732,7 @@ export class Projects {
     public async getSnapshots(
         projectId: string,
         requestOptions?: Projects.RequestOptions,
-    ): Promise<ElevenLabs.ProjectSnapshotsResponse> {
+    ): Promise<ElevenLabs.ProjectSnapshotsResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -737,15 +745,16 @@ export class Projects {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -755,7 +764,7 @@ export class Projects {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.ProjectSnapshotsResponse;
+            return _response.body as ElevenLabs.ProjectSnapshotsResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -818,15 +827,16 @@ export class Projects {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -872,24 +882,15 @@ export class Projects {
 
     /**
      * Stream the audio from a Studio project snapshot.
-     *
-     * @param {string} projectId - The ID of the Studio project.
-     * @param {string} projectSnapshotId - The ID of the Studio project snapshot.
-     * @param {ElevenLabs.studio.BodyStreamStudioProjectAudioV1StudioProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost} request
-     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
-     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.studio.projects.streamAudio("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM")
      */
     public async streamAudio(
         projectId: string,
         projectSnapshotId: string,
         request: ElevenLabs.studio.BodyStreamStudioProjectAudioV1StudioProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost = {},
         requestOptions?: Projects.RequestOptions,
-    ): Promise<void> {
-        const _response = await core.fetcher({
+    ): Promise<stream.Readable> {
+        const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
@@ -901,26 +902,28 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
             body: request,
+            responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {
@@ -975,15 +978,16 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -1031,7 +1035,7 @@ export class Projects {
     /**
      * Create a set of pronunciation dictionaries acting on a project. This will automatically mark text within this project as requiring reconverting where the new dictionary would apply or the old one no longer does.
      *
-     * @param {string} projectId - The ID of the Studio project.
+     * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
      * @param {ElevenLabs.studio.BodyCreatePronunciationDictionariesV1StudioProjectsProjectIdPronunciationDictionariesPost} request
      * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1061,15 +1065,16 @@ export class Projects {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -1112,5 +1117,10 @@ export class Projects {
                     message: _response.error.errorMessage,
                 });
         }
+    }
+
+    protected async _getCustomAuthorizationHeaders() {
+        const apiKeyValue = await core.Supplier.get(this._options.apiKey);
+        return { "xi-api-key": apiKeyValue };
     }
 }

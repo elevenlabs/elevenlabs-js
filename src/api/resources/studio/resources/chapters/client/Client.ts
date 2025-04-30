@@ -14,8 +14,9 @@ export declare namespace Chapters {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
+        apiKey: core.Supplier<string>;
         /** Override the xi-api-key header */
-        apiKey?: core.Supplier<string | undefined>;
+        xiApiKey?: core.Supplier<string | undefined>;
     }
 
     export interface RequestOptions {
@@ -26,14 +27,14 @@ export declare namespace Chapters {
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
-        apiKey?: string | undefined;
+        xiApiKey?: string | undefined;
         /** Additional headers to include in the request. */
         headers?: Record<string, string>;
     }
 }
 
 export class Chapters {
-    constructor(protected readonly _options: Chapters.Options = {}) {}
+    constructor(protected readonly _options: Chapters.Options) {}
 
     /**
      * Returns a list of a Studio project's chapters.
@@ -49,7 +50,7 @@ export class Chapters {
     public async getAll(
         projectId: string,
         requestOptions?: Chapters.RequestOptions,
-    ): Promise<ElevenLabs.GetChaptersResponse> {
+    ): Promise<ElevenLabs.GetChaptersResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -62,15 +63,16 @@ export class Chapters {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -80,7 +82,7 @@ export class Chapters {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetChaptersResponse;
+            return _response.body as ElevenLabs.GetChaptersResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -145,15 +147,16 @@ export class Chapters {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -201,8 +204,8 @@ export class Chapters {
     /**
      * Returns information about a specific chapter.
      *
-     * @param {string} projectId - The ID of the Studio project.
-     * @param {string} chapterId - The ID of the chapter.
+     * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+     * @param {string} chapterId - The ID of the chapter to be used. You can use the [List project chapters](/docs/api-reference/studio/get-chapters) endpoint to list all the available chapters.
      * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -227,15 +230,16 @@ export class Chapters {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -282,8 +286,8 @@ export class Chapters {
     /**
      * Updates a chapter.
      *
-     * @param {string} projectId - The ID of the Studio project.
-     * @param {string} chapterId - The ID of the chapter.
+     * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+     * @param {string} chapterId - The ID of the chapter to be used. You can use the [List project chapters](/docs/api-reference/studio/get-chapters) endpoint to list all the available chapters.
      * @param {ElevenLabs.studio.BodyUpdateChapterV1StudioProjectsProjectIdChaptersChapterIdPost} request
      * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -310,15 +314,16 @@ export class Chapters {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -366,8 +371,8 @@ export class Chapters {
     /**
      * Deletes a chapter.
      *
-     * @param {string} projectId - The ID of the Studio project.
-     * @param {string} chapterId - The ID of the chapter.
+     * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+     * @param {string} chapterId - The ID of the chapter to be used. You can use the [List project chapters](/docs/api-reference/studio/get-chapters) endpoint to list all the available chapters.
      * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -392,15 +397,16 @@ export class Chapters {
             method: "DELETE",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -447,8 +453,8 @@ export class Chapters {
     /**
      * Starts conversion of a specific chapter.
      *
-     * @param {string} projectId - The ID of the Studio project.
-     * @param {string} chapterId - The ID of the chapter.
+     * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+     * @param {string} chapterId - The ID of the chapter to be used. You can use the [List project chapters](/docs/api-reference/studio/get-chapters) endpoint to list all the available chapters.
      * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -473,15 +479,16 @@ export class Chapters {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -528,8 +535,8 @@ export class Chapters {
     /**
      * Gets information about all the snapshots of a chapter. Each snapshot can be downloaded as audio. Whenever a chapter is converted a snapshot will automatically be created.
      *
-     * @param {string} projectId - The ID of the Studio project.
-     * @param {string} chapterId - The ID of the chapter.
+     * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+     * @param {string} chapterId - The ID of the chapter to be used. You can use the [List project chapters](/docs/api-reference/studio/get-chapters) endpoint to list all the available chapters.
      * @param {Chapters.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -541,7 +548,7 @@ export class Chapters {
         projectId: string,
         chapterId: string,
         requestOptions?: Chapters.RequestOptions,
-    ): Promise<ElevenLabs.ChapterSnapshotsResponse> {
+    ): Promise<ElevenLabs.ChapterSnapshotsResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -554,15 +561,16 @@ export class Chapters {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -572,7 +580,7 @@ export class Chapters {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.ChapterSnapshotsResponse;
+            return _response.body as ElevenLabs.ChapterSnapshotsResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -637,15 +645,16 @@ export class Chapters {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -712,15 +721,16 @@ export class Chapters {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -764,5 +774,10 @@ export class Chapters {
                     message: _response.error.errorMessage,
                 });
         }
+    }
+
+    protected async _getCustomAuthorizationHeaders() {
+        const apiKeyValue = await core.Supplier.get(this._options.apiKey);
+        return { "xi-api-key": apiKeyValue };
     }
 }

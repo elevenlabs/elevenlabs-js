@@ -28,4 +28,12 @@ export interface UsageGetCharactersUsageMetricsRequest {
      * How to break down the information. Cannot be "user" if include_workspace_metrics is False.
      */
     breakdown_type?: ElevenLabs.BreakdownTypes;
+    /**
+     * How to aggregate usage data over time. Can be "hour", "day", "week", "month", or "cumulative".
+     */
+    aggregation_interval?: ElevenLabs.UsageAggregationInterval;
+    /**
+     * Which metric to aggregate.
+     */
+    metric?: ElevenLabs.MetricType;
 }

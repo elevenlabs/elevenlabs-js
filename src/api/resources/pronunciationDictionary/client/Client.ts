@@ -14,8 +14,9 @@ export declare namespace PronunciationDictionary {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
+        apiKey: core.Supplier<string>;
         /** Override the xi-api-key header */
-        apiKey?: core.Supplier<string | undefined>;
+        xiApiKey?: core.Supplier<string | undefined>;
     }
 
     export interface RequestOptions {
@@ -26,14 +27,14 @@ export declare namespace PronunciationDictionary {
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
-        apiKey?: string | undefined;
+        xiApiKey?: string | undefined;
         /** Additional headers to include in the request. */
         headers?: Record<string, string>;
     }
 }
 
 export class PronunciationDictionary {
-    constructor(protected readonly _options: PronunciationDictionary.Options = {}) {}
+    constructor(protected readonly _options: PronunciationDictionary.Options) {}
 
     /**
      * Creates a new pronunciation dictionary from a lexicon .PLS file
@@ -79,15 +80,16 @@ export class PronunciationDictionary {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ..._maybeEncodedRequest.headers,
                 ...requestOptions?.headers,
             },
@@ -167,15 +169,16 @@ export class PronunciationDictionary {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -224,7 +227,7 @@ export class PronunciationDictionary {
      * Add rules to the pronunciation dictionary
      *
      * @param {string} pronunciationDictionaryId - The id of the pronunciation dictionary
-     * @param {ElevenLabs.PronunciationDictionary} request
+     * @param {ElevenLabs.BodyAddRulesToThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdAddRulesPost} request
      * @param {PronunciationDictionary.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -240,7 +243,7 @@ export class PronunciationDictionary {
      */
     public async addRules(
         pronunciationDictionaryId: string,
-        request: ElevenLabs.PronunciationDictionary,
+        request: ElevenLabs.BodyAddRulesToThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdAddRulesPost,
         requestOptions?: PronunciationDictionary.RequestOptions,
     ): Promise<ElevenLabs.PronunciationDictionaryRulesResponseModel> {
         const _response = await core.fetcher({
@@ -255,15 +258,16 @@ export class PronunciationDictionary {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -339,15 +343,16 @@ export class PronunciationDictionary {
             method: "POST",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -413,15 +418,16 @@ export class PronunciationDictionary {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -480,7 +486,7 @@ export class PronunciationDictionary {
     public async get(
         pronunciationDictionaryId: string,
         requestOptions?: PronunciationDictionary.RequestOptions,
-    ): Promise<ElevenLabs.GetPronunciationDictionaryMetadataResponse> {
+    ): Promise<ElevenLabs.GetPronunciationDictionaryMetadataResponseModel> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -493,15 +499,16 @@ export class PronunciationDictionary {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -511,7 +518,7 @@ export class PronunciationDictionary {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetPronunciationDictionaryMetadataResponse;
+            return _response.body as ElevenLabs.GetPronunciationDictionaryMetadataResponseModel;
         }
 
         if (_response.error.reason === "status-code") {
@@ -590,15 +597,16 @@ export class PronunciationDictionary {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -641,5 +649,10 @@ export class PronunciationDictionary {
                     message: _response.error.errorMessage,
                 });
         }
+    }
+
+    protected async _getCustomAuthorizationHeaders() {
+        const apiKeyValue = await core.Supplier.get(this._options.apiKey);
+        return { "xi-api-key": apiKeyValue };
     }
 }

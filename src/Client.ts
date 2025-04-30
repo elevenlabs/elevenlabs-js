@@ -10,12 +10,10 @@ import { AudioIsolation } from "./api/resources/audioIsolation/client/Client";
 import { Samples } from "./api/resources/samples/client/Client";
 import { TextToSpeech } from "./api/resources/textToSpeech/client/Client";
 import { SpeechToSpeech } from "./api/resources/speechToSpeech/client/Client";
-import { VoiceGeneration } from "./api/resources/voiceGeneration/client/Client";
 import { TextToVoice } from "./api/resources/textToVoice/client/Client";
 import { User } from "./api/resources/user/client/Client";
 import { Voices } from "./api/resources/voices/client/Client";
 import { Studio } from "./api/resources/studio/client/Client";
-import { Projects } from "./api/resources/projects/client/Client";
 import { Dubbing } from "./api/resources/dubbing/client/Client";
 import { Models } from "./api/resources/models/client/Client";
 import { AudioNative } from "./api/resources/audioNative/client/Client";
@@ -31,8 +29,9 @@ export declare namespace ElevenLabsClient {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
+        apiKey: core.Supplier<string>;
         /** Override the xi-api-key header */
-        apiKey?: core.Supplier<string | undefined>;
+        xiApiKey?: core.Supplier<string | undefined>;
     }
 
     export interface RequestOptions {
@@ -43,7 +42,7 @@ export declare namespace ElevenLabsClient {
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
-        apiKey?: string | undefined;
+        xiApiKey?: string | undefined;
         /** Additional headers to include in the request. */
         headers?: Record<string, string>;
     }
@@ -56,12 +55,10 @@ export class ElevenLabsClient {
     protected _samples: Samples | undefined;
     protected _textToSpeech: TextToSpeech | undefined;
     protected _speechToSpeech: SpeechToSpeech | undefined;
-    protected _voiceGeneration: VoiceGeneration | undefined;
     protected _textToVoice: TextToVoice | undefined;
     protected _user: User | undefined;
     protected _voices: Voices | undefined;
     protected _studio: Studio | undefined;
-    protected _projects: Projects | undefined;
     protected _dubbing: Dubbing | undefined;
     protected _models: Models | undefined;
     protected _audioNative: AudioNative | undefined;
@@ -72,7 +69,7 @@ export class ElevenLabsClient {
     protected _forcedAlignment: ForcedAlignment | undefined;
     protected _conversationalAi: ConversationalAi | undefined;
 
-    constructor(protected readonly _options: ElevenLabsClient.Options = {}) {}
+    constructor(protected readonly _options: ElevenLabsClient.Options) {}
 
     public get history(): History {
         return (this._history ??= new History(this._options));
@@ -98,10 +95,6 @@ export class ElevenLabsClient {
         return (this._speechToSpeech ??= new SpeechToSpeech(this._options));
     }
 
-    public get voiceGeneration(): VoiceGeneration {
-        return (this._voiceGeneration ??= new VoiceGeneration(this._options));
-    }
-
     public get textToVoice(): TextToVoice {
         return (this._textToVoice ??= new TextToVoice(this._options));
     }
@@ -116,10 +109,6 @@ export class ElevenLabsClient {
 
     public get studio(): Studio {
         return (this._studio ??= new Studio(this._options));
-    }
-
-    public get projects(): Projects {
-        return (this._projects ??= new Projects(this._options));
     }
 
     public get dubbing(): Dubbing {

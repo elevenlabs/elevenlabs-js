@@ -13,8 +13,9 @@ export declare namespace Usage {
         environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
+        apiKey: core.Supplier<string>;
         /** Override the xi-api-key header */
-        apiKey?: core.Supplier<string | undefined>;
+        xiApiKey?: core.Supplier<string | undefined>;
     }
 
     export interface RequestOptions {
@@ -25,14 +26,14 @@ export declare namespace Usage {
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
-        apiKey?: string | undefined;
+        xiApiKey?: string | undefined;
         /** Additional headers to include in the request. */
         headers?: Record<string, string>;
     }
 }
 
 export class Usage {
-    constructor(protected readonly _options: Usage.Options = {}) {}
+    constructor(protected readonly _options: Usage.Options) {}
 
     /**
      * Returns the credit usage metrics for the current user or the entire workspace they are part of. The response will return a time axis with unix timestamps for each day and daily usage along that axis. The usage will be broken down by the specified breakdown type. For example, breakdown type "voice" will return the usage of each voice along the time axis.
@@ -57,6 +58,8 @@ export class Usage {
             end_unix: endUnix,
             include_workspace_metrics: includeWorkspaceMetrics,
             breakdown_type: breakdownType,
+            aggregation_interval: aggregationInterval,
+            metric,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["start_unix"] = startUnix.toString();
@@ -67,6 +70,14 @@ export class Usage {
 
         if (breakdownType != null) {
             _queryParams["breakdown_type"] = breakdownType;
+        }
+
+        if (aggregationInterval != null) {
+            _queryParams["aggregation_interval"] = aggregationInterval;
+        }
+
+        if (metric != null) {
+            _queryParams["metric"] = metric;
         }
 
         const _response = await core.fetcher({
@@ -81,15 +92,16 @@ export class Usage {
             method: "GET",
             headers: {
                 "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
+                    (await core.Supplier.get(this._options.xiApiKey)) != null
+                        ? await core.Supplier.get(this._options.xiApiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...(await this._getCustomAuthorizationHeaders()),
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
@@ -130,5 +142,10 @@ export class Usage {
                     message: _response.error.errorMessage,
                 });
         }
+    }
+
+    protected async _getCustomAuthorizationHeaders() {
+        const apiKeyValue = await core.Supplier.get(this._options.apiKey);
+        return { "xi-api-key": apiKeyValue };
     }
 }
