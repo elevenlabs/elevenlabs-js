@@ -80,8 +80,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -148,7 +148,7 @@ export class TextToSpeech {
         voiceId: string,
         request: ElevenLabs.TextToSpeechWithTimestampsRequest,
         requestOptions?: TextToSpeech.RequestOptions,
-    ): Promise<ElevenLabs.AudioWithTimestampsResponseModel> {
+    ): Promise<ElevenLabs.AudioWithTimestampsResponse> {
         const {
             enable_logging: enableLogging,
             optimize_streaming_latency: optimizeStreamingLatency,
@@ -185,8 +185,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -200,7 +200,7 @@ export class TextToSpeech {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.AudioWithTimestampsResponseModel;
+            return _response.body as ElevenLabs.AudioWithTimestampsResponse;
         }
 
         if (_response.error.reason === "status-code") {
@@ -279,8 +279,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -334,9 +334,9 @@ export class TextToSpeech {
      */
     public async streamWithTimestamps(
         voiceId: string,
-        request: ElevenLabs.StreamTextToSpeechWithTimstampsRequest,
+        request: ElevenLabs.StreamTextToSpeechWithTimestampsRequest,
         requestOptions?: TextToSpeech.RequestOptions,
-    ): Promise<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponseModel>> {
+    ): Promise<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponse>> {
         const {
             enable_logging: enableLogging,
             optimize_streaming_latency: optimizeStreamingLatency,
@@ -373,8 +373,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

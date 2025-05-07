@@ -9,6 +9,6 @@ export interface ShareOptionResponseModel {
     name: string;
     /** The ID of the principal. */
     id: string;
-    /** The type of the principal: user, group, or workspace api key. */
+    /** The type of the principal: user, group, or service account (under 'key'). */
     type: ElevenLabs.ShareOptionResponseModelType;
 }

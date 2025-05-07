@@ -10,23 +10,23 @@ export interface SpeechHistoryItemResponse {
     /** The ID of the request. */
     request_id?: string;
     /** The ID of the voice used. */
-    voice_id?: string;
+    voice_id: string;
     /** The ID of the model. */
     model_id?: string;
     /** The name of the voice. */
-    voice_name?: string;
+    voice_name: string;
     /** The category of the voice. Either 'premade', 'cloned', 'generated' or 'professional'. */
     voice_category?: ElevenLabs.SpeechHistoryItemResponseModelVoiceCategory;
     /** The text used to generate the audio item. */
-    text?: string;
+    text: string;
     /** Unix timestamp of when the item was created. */
-    date_unix?: number;
+    date_unix: number;
     /** The character count change from. */
-    character_count_change_from?: number;
+    character_count_change_from: number;
     /** The character count change to. */
-    character_count_change_to?: number;
+    character_count_change_to: number;
     /** The content type of the generated item. */
-    content_type?: string;
+    content_type: string;
     state?: unknown;
     /** The settings of the history item. */
     settings?: Record<string, unknown>;

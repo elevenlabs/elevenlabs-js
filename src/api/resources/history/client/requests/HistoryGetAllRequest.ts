@@ -18,11 +18,11 @@ export interface HistoryGetAllRequest {
      */
     start_after_history_item_id?: string;
     /**
-     * Voice ID to be filtered for, you can use GET https://api.elevenlabs.io/v1/voices to receive a list of voices and their IDs.
+     * ID of the voice to be filtered for. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
      */
     voice_id?: string;
     /**
-     * search term used for filtering
+     * Search term used for filtering history items. If provided, source becomes required.
      */
     search?: string;
     /**

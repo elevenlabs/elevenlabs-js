@@ -14,4 +14,5 @@ export interface ConversationHistoryTranscriptCommonModel {
     time_in_call_secs: number;
     conversation_turn_metrics?: ElevenLabs.ConversationTurnMetrics;
     rag_retrieval_info?: ElevenLabs.RagRetrievalInfo;
+    llm_usage?: ElevenLabs.LlmUsage;
 }

@@ -8,7 +8,7 @@
 export interface PromptEvaluationCriteria {
     /** The unique identifier for the evaluation criteria */
     id: string;
-    name?: string;
+    name: string;
     /** The type of evaluation criteria */
     type?: "prompt";
     /** The prompt that the agent should use to evaluate the conversation */

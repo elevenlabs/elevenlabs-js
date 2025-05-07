@@ -8,11 +8,16 @@ export interface InitializeConnection {
     /** The initial text that must be sent is a blank space. */
     text: " ";
     voice_settings?: ElevenLabs.RealtimeVoiceSettings;
-    /** This property should only be provided in the first message you send. */
     generation_config?: ElevenLabs.GenerationConfig;
     /**
-     * Your ElevenLabs API key. This is a required parameter that should be provided in the first message you send.
-     * You can find your API key in the [API Keys section](https://elevenlabs.io/docs/api-reference/websockets#api-keys).
+     * Optional list of pronunciation dictionary locators. If provided, these dictionaries will be used to
+     * modify pronunciation of matching text. Must only be provided in the first message.
+     *
+     * Note: Pronunciation dictionary matches will only be respected within a provided chunk.
      */
-    "xi-api-key": string;
+    pronunciation_dictionary_locators?: ElevenLabs.PronunciationDictionaryLocator[];
+    /** Your ElevenLabs API key. This can only be included in the first message and is not needed if present in the header. */
+    "xi-api-key"?: string;
+    /** Your authorization bearer token. This can only be included in the first message and is not needed if present in the header. */
+    authorization?: string;
 }

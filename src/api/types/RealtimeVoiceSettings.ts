@@ -4,11 +4,13 @@
 
 export interface RealtimeVoiceSettings {
     /** Defines the stability for voice settings. */
-    stability: number;
+    stability?: number;
     /** Defines the similarity boost for voice settings. */
-    similarity_boost: number;
+    similarity_boost?: number;
     /** Defines the style for voice settings. This parameter is available on V2+ models. */
     style?: number;
     /** Defines the use speaker boost for voice settings. This parameter is available on V2+ models. */
     use_speaker_boost?: boolean;
+    /** Controls the speed of the generated speech. Values range from 0.7 to 1.2, with 1.0 being the default speed. */
+    speed?: number;
 }

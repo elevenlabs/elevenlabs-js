@@ -7,7 +7,7 @@ import * as fs from "fs";
 /**
  * @example
  *     {
- *         name: "George"
+ *         name: "name"
  *     }
  */
 export interface BodyEditVoiceV1VoicesVoiceIdEditPost {

@@ -50,7 +50,7 @@ export class Pvc {
     /**
      * Creates a new PVC voice with metadata but no samples
      *
-     * @param {ElevenLabs.voices.BodyCreatePvcVoiceV1VoicesPvcPost} request
+     * @param {ElevenLabs.voices.CreatePvcVoiceRequest} request
      * @param {Pvc.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -62,7 +62,7 @@ export class Pvc {
      *     })
      */
     public async create(
-        request: ElevenLabs.voices.BodyCreatePvcVoiceV1VoicesPvcPost,
+        request: ElevenLabs.voices.CreatePvcVoiceRequest,
         requestOptions?: Pvc.RequestOptions,
     ): Promise<ElevenLabs.AddVoiceResponseModel> {
         const _response = await core.fetcher({
@@ -82,8 +82,8 @@ export class Pvc {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -162,8 +162,8 @@ export class Pvc {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -244,8 +244,8 @@ export class Pvc {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

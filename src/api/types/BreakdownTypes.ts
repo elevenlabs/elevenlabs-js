@@ -15,7 +15,8 @@ export type BreakdownTypes =
     | "all_api_keys"
     | "product_type"
     | "model"
-    | "resource";
+    | "resource"
+    | "request_queue";
 export const BreakdownTypes = {
     None: "none",
     Voice: "voice",
@@ -27,4 +28,5 @@ export const BreakdownTypes = {
     ProductType: "product_type",
     Model: "model",
     Resource: "resource",
+    RequestQueue: "request_queue",
 } as const;

@@ -40,7 +40,7 @@ export class TextToSoundEffects {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public async convert(
-        request: ElevenLabs.BodySoundGenerationV1SoundGenerationPost,
+        request: ElevenLabs.CreateSoundEffectRequest,
         requestOptions?: TextToSoundEffects.RequestOptions,
     ): Promise<stream.Readable> {
         const { output_format: outputFormat, ..._body } = request;
@@ -66,8 +66,8 @@ export class TextToSoundEffects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.57.0",
-                "User-Agent": "elevenlabs/1.57.0",
+                "X-Fern-SDK-Version": "v1.58.0",
+                "User-Agent": "elevenlabs/v1.58.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
