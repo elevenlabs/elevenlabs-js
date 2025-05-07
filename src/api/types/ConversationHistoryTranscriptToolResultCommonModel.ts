@@ -9,4 +9,5 @@ export interface ConversationHistoryTranscriptToolResultCommonModel {
     result_value: string;
     is_error: boolean;
     tool_has_been_called: boolean;
+    tool_latency_secs?: number;
 }

@@ -5,10 +5,11 @@
 /**
  * The HTTP method to use for the webhook
  */
-export type WebhookToolApiSchemaConfigOutputMethod = "GET" | "POST" | "PATCH" | "DELETE";
+export type WebhookToolApiSchemaConfigOutputMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 export const WebhookToolApiSchemaConfigOutputMethod = {
     Get: "GET",
     Post: "POST",
+    Put: "PUT",
     Patch: "PATCH",
     Delete: "DELETE",
 } as const;

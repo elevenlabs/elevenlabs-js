@@ -5,5 +5,5 @@
 import * as ElevenLabs from "../index";
 
 export interface TransferToAgentToolConfig {
-    transfers: ElevenLabs.Transfer[];
+    transfers: ElevenLabs.AgentTransfer[];
 }

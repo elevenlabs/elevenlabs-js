@@ -5,7 +5,7 @@
 /**
  * @example
  *     {
- *         new_name: "Alita"
+ *         new_name: "John Smith"
  *     }
  */
 export interface BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost {

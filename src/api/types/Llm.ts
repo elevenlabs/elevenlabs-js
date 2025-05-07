@@ -15,6 +15,7 @@ export type Llm =
     | "gemini-1.5-flash"
     | "gemini-2.0-flash-001"
     | "gemini-2.0-flash-lite"
+    | "gemini-2.5-flash"
     | "gemini-1.0-pro"
     | "claude-3-7-sonnet"
     | "claude-3-5-sonnet"
@@ -35,6 +36,7 @@ export const Llm = {
     Gemini15Flash: "gemini-1.5-flash",
     Gemini20Flash001: "gemini-2.0-flash-001",
     Gemini20FlashLite: "gemini-2.0-flash-lite",
+    Gemini25Flash: "gemini-2.5-flash",
     Gemini10Pro: "gemini-1.0-pro",
     Claude37Sonnet: "claude-3-7-sonnet",
     Claude35Sonnet: "claude-3-5-sonnet",

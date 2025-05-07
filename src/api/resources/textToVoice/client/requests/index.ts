@@ -1,2 +1,2 @@
-export { type VoicePreviewsRequestModel } from "./VoicePreviewsRequestModel";
-export { type BodyCreateANewVoiceFromVoicePreviewV1TextToVoiceCreateVoiceFromPreviewPost } from "./BodyCreateANewVoiceFromVoicePreviewV1TextToVoiceCreateVoiceFromPreviewPost";
+export { type VoiceDesignRequest } from "./VoiceDesignRequest";
+export { type SaveVoicePreviewRequest } from "./SaveVoicePreviewRequest";

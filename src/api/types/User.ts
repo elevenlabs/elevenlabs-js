@@ -10,7 +10,7 @@ export interface User {
     /** Details of the user's subscription. */
     subscription: ElevenLabs.SubscriptionResponse;
     /** Optional additional details about the user's subscription. */
-    subscription_extras?: unknown;
+    subscription_extras?: ElevenLabs.SubscriptionExtrasResponseModel;
     /** Whether the user is new. */
     is_new_user: boolean;
     /** The API key of the user. */

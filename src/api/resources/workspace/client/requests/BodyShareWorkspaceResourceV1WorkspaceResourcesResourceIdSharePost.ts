@@ -16,7 +16,7 @@ export interface BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePo
     role: ElevenLabs.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole;
     /** Resource type of the target resource. */
     resource_type: ElevenLabs.WorkspaceResourceType;
-    /** The email of the user */
+    /** The email of the user or service account. */
     user_email?: string;
     /** The ID of the target group. To target the permissions principals have by default on this resource, use the value 'default'. */
     group_id?: string;

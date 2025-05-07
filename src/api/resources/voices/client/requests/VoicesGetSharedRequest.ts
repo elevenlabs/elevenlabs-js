@@ -7,9 +7,8 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         page_size: 1,
- *         gender: "female",
- *         language: "en"
+ *         featured: true,
+ *         reader_app_enabled: true
  *     }
  */
 export interface VoicesGetSharedRequest {

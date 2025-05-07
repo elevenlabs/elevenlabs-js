@@ -9,8 +9,7 @@ export interface AudioOutput {
      * A generated partial audio chunk, encoded using the selected output_format, by default this
      * is MP3 encoded as a base64 string.
      */
-    audio?: string;
-    /** Indicates if the generation is complete. If set to `True`, `audio` will be null. */
-    isFinal?: boolean;
+    audio: string;
     normalizedAlignment?: ElevenLabs.NormalizedAlignment;
+    alignment?: ElevenLabs.Alignment;
 }

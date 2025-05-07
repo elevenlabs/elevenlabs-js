@@ -3,7 +3,7 @@
  */
 
 /**
- * The type of the principal: user, group, or workspace api key.
+ * The type of the principal: user, group, or service account (under 'key').
  */
 export type ShareOptionResponseModelType = "user" | "group" | "key";
 export const ShareOptionResponseModelType = {

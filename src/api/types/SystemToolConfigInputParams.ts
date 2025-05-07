@@ -7,7 +7,8 @@ import * as ElevenLabs from "../index";
 export type SystemToolConfigInputParams =
     | ElevenLabs.SystemToolConfigInputParams.EndCall
     | ElevenLabs.SystemToolConfigInputParams.LanguageDetection
-    | ElevenLabs.SystemToolConfigInputParams.TransferToAgent;
+    | ElevenLabs.SystemToolConfigInputParams.TransferToAgent
+    | ElevenLabs.SystemToolConfigInputParams.TransferToNumber;
 
 export namespace SystemToolConfigInputParams {
     export interface EndCall extends ElevenLabs.EndCallToolConfig {
@@ -20,5 +21,9 @@ export namespace SystemToolConfigInputParams {
 
     export interface TransferToAgent extends ElevenLabs.TransferToAgentToolConfig {
         system_tool_type: "transfer_to_agent";
+    }
+
+    export interface TransferToNumber extends ElevenLabs.TransferToNumberToolConfig {
+        system_tool_type: "transfer_to_number";
     }
 }

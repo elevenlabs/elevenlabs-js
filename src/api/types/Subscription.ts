@@ -20,15 +20,15 @@ export interface Subscription {
     /** The Unix timestamp of the next character count reset. */
     next_character_count_reset_unix?: number;
     /** The number of voice slots used by the user. */
-    voice_slots_used?: number;
+    voice_slots_used: number;
     /** The number of professional voice slots used by the workspace/user if single seat. */
-    professional_voice_slots_used?: number;
+    professional_voice_slots_used: number;
     /** The maximum number of voice slots allowed for the user. */
     voice_limit: number;
     /** The maximum number of voice add/edits allowed for the user. */
     max_voice_add_edits?: number;
     /** The number of voice add/edits used by the user. */
-    voice_add_edit_counter?: number;
+    voice_add_edit_counter: number;
     /** The maximum number of professional voices allowed for the user. */
     professional_voice_limit: number;
     /** Whether the user can extend their voice limit. */
@@ -40,13 +40,13 @@ export interface Subscription {
     /** The currency of the user's subscription. */
     currency?: ElevenLabs.ExtendedSubscriptionResponseModelCurrency;
     /** The status of the user's subscription. */
-    status?: ElevenLabs.SubscriptionStatus;
+    status: ElevenLabs.ExtendedSubscriptionResponseModelStatus;
     /** The billing period of the user's subscription. */
     billing_period?: ElevenLabs.ExtendedSubscriptionResponseModelBillingPeriod;
     /** The character refresh period of the user's subscription. */
     character_refresh_period?: ElevenLabs.ExtendedSubscriptionResponseModelCharacterRefreshPeriod;
     /** The next invoice for the user. */
-    next_invoice?: ElevenLabs.Invoice;
+    next_invoice?: ElevenLabs.InvoiceResponse;
     /** Whether the user has open invoices. */
-    has_open_invoices?: boolean;
+    has_open_invoices: boolean;
 }

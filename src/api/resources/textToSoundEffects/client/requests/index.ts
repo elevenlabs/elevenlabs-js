@@ -1,1 +1,1 @@
-export { type BodySoundGenerationV1SoundGenerationPost } from "./BodySoundGenerationV1SoundGenerationPost";
+export { type CreateSoundEffectRequest } from "./CreateSoundEffectRequest";

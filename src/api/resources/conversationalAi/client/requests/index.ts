@@ -1,7 +1,7 @@
 export { type ConversationalAiGetSignedUrlRequest } from "./ConversationalAiGetSignedUrlRequest";
 export { type BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost } from "./BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost";
 export { type BodyCreateAgentV1ConvaiAgentsCreatePost } from "./BodyCreateAgentV1ConvaiAgentsCreatePost";
-export { type BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatch } from "./BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatch";
+export { type UpdateAgentRequest } from "./UpdateAgentRequest";
 export { type ConversationalAiGetAgentWidgetRequest } from "./ConversationalAiGetAgentWidgetRequest";
 export { type BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost } from "./BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost";
 export { type ConversationalAiGetAgentsRequest } from "./ConversationalAiGetAgentsRequest";
@@ -16,4 +16,5 @@ export { type BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost } from "./Body
 export { type RagIndexRequestModel } from "./RagIndexRequestModel";
 export { type ConversationalAiGetDependentAgentsRequest } from "./ConversationalAiGetDependentAgentsRequest";
 export { type PatchConvAiSettingsRequest } from "./PatchConvAiSettingsRequest";
+export { type PatchConvAiDashboardSettingsRequest } from "./PatchConvAiDashboardSettingsRequest";
 export { type PostWorkspaceSecretRequest } from "./PostWorkspaceSecretRequest";

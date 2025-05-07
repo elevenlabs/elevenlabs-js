@@ -10,11 +10,15 @@ export interface GetAgentResponseModel {
     /** The name of the agent */
     name: string;
     /** The conversation configuration of the agent */
-    conversation_config: ElevenLabs.ConversationalConfigApiModelOutput;
+    conversation_config: ElevenLabs.ConversationalConfig;
     /** The metadata of the agent */
     metadata: ElevenLabs.AgentMetadataResponseModel;
     /** The platform settings of the agent */
     platform_settings?: ElevenLabs.AgentPlatformSettingsResponseModel;
     /** The phone numbers of the agent */
     phone_numbers?: ElevenLabs.GetPhoneNumberResponseModel[];
+    /** The access information of the agent for the user */
+    access_info?: ElevenLabs.ResourceAccessInfo;
+    /** The categories of the agent */
+    categories?: string[];
 }
