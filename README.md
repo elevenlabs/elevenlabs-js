@@ -36,8 +36,15 @@ yarn add elevenlabs
     - Supports 29 languages
     - Recommended for most use cases
 
+2. **Eleven Flash v2.5** (`eleven_flash_v2_5`)
+
+    - Ultra-low latency
+    - Supports 32 languages
+    - Faster model, 50% lower price per character
+
 2. **Eleven Turbo v2.5** (`eleven_turbo_v2_5`)
-    - High quality, lowest latency
+
+    - Good balance of quality and latency
     - Ideal for developer use cases where speed is crucial
     - Supports 32 languages
 
@@ -50,8 +57,7 @@ const elevenlabs = new ElevenLabsClient({
     apiKey: "YOUR_API_KEY", // Defaults to process.env.ELEVENLABS_API_KEY
 });
 
-const audio = await elevenlabs.generate({
-    voice: "Sarah",
+const audio = await elevenlabs.textToSpeech.convert("Xb7hH8MSUJpSbSDYk0k2", {
     text: "Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
     model_id: "eleven_multilingual_v2",
 });
@@ -67,11 +73,11 @@ await play(audio);
 
 </details>
 
-⚠️ elevenlabs-js requires [MPV](https://mpv.io/) and [ffmpeg](https://ffmpeg.org/).
+⚠️ elevenlabs-js requires [MPV](https://mpv.io/) and [ffmpeg](https://ffmpeg.org/) to play audio.
 
 ## 🗣️ Voices
 
-List all your available voices with `voices()`.
+List all your available voices with `getAll()`.
 
 ```ts
 import { ElevenLabsClient } from "elevenlabs";
@@ -79,6 +85,7 @@ import { ElevenLabsClient } from "elevenlabs";
 const elevenlabs = new ElevenLabsClient({
     apiKey: "YOUR_API_KEY", // Defaults to process.env.ELEVENLABS_API_KEY
 });
+
 const voices = await elevenlabs.voices.getAll();
 ```
 
@@ -89,9 +96,7 @@ For information about the structure of the voices output, please refer to the [o
 Stream audio in real-time, as it's being generated.
 
 ```ts
-const audioStream = await elevenlabs.generate({
-    stream: true,
-    voice: "Sarah",
+const audioStream = await elevenlabs.textToSpeech.convertAsStream("JBFqnCBsd6RMkjVDRZzb", {
     text: "This is a... streaming voice",
     model_id: "eleven_multilingual_v2",
 });

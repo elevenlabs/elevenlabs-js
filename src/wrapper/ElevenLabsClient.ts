@@ -36,6 +36,8 @@ export class ElevenLabsClient extends FernClient {
     /**
      * Generates audio for a voice.
      *
+     * @deprecated Use `textToSpeech.convert` or `textToSpeech.convertAsStream` instead. Will be removed in a future major version.
+     *
      * @example Generate the entire audio
      * import { play } from "elevenlabs";
      *
