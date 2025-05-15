@@ -1,5 +1,4 @@
 export { type BodyAddALanguageToTheResourceV1DubbingResourceDubbingIdLanguagePost } from "./BodyAddALanguageToTheResourceV1DubbingResourceDubbingIdLanguagePost";
-export { type SegmentCreatePayload } from "./SegmentCreatePayload";
 export { type SegmentUpdatePayload } from "./SegmentUpdatePayload";
 export { type BodyTranscribesSegmentsV1DubbingResourceDubbingIdTranscribePost } from "./BodyTranscribesSegmentsV1DubbingResourceDubbingIdTranscribePost";
 export { type BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdTranslatePost } from "./BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdTranslatePost";

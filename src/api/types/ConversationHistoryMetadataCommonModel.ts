@@ -14,6 +14,7 @@ export interface ConversationHistoryMetadataCommonModel {
     authorization_method?: ElevenLabs.AuthorizationMethod;
     charging?: ElevenLabs.ConversationChargingCommonModel;
     phone_call?: ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall;
+    batch_call?: ElevenLabs.ConversationHistoryBatchCallModel;
     termination_reason?: string;
     error?: ElevenLabs.ConversationHistoryErrorCommonModel;
     main_language?: string;

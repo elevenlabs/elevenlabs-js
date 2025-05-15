@@ -12,18 +12,18 @@ export interface NormalizedAlignment {
      * Note these times are relative to the returned chunk from the model, and not the
      * full audio response.
      */
-    char_start_times_ms?: number[];
+    charStartTimesMs?: number[];
     /**
      * A list of durations (in milliseconds) for each character in the normalized text as it
      * corresponds to the audio. For instance, the character 'H' lasts for 3 ms in the audio.
      * Note these times are relative to the returned chunk from the model, and not the
      * full audio response.
      */
-    chars_durations_ms?: number[];
+    charsDurationsMs?: number[];
     /**
      * A list of characters in the normalized text sequence. For instance, the first character is 'H'.
      * Note that this list may contain spaces, punctuation, and other special characters.
-     * The length of this list should be the same as the lengths of `char_start_times_ms` and `chars_durations_ms`.
+     * The length of this list should be the same as the lengths of `charStartTimesMs` and `charsDurationsMs`.
      */
     chars?: string[];
 }

@@ -8,5 +8,6 @@ export interface SpeakerTrack {
     id: string;
     media_ref: ElevenLabs.DubbingMediaReference;
     speaker_name: string;
+    voices: Record<string, string>;
     segments: string[];
 }

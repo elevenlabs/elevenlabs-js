@@ -16,6 +16,13 @@ export const ElevenLabsEnvironment = {
         base: "https://api.us.elevenlabs.io",
         wss: "wss://api.elevenlabs.io",
     },
+    ProductionEu: {
+        base: "https://api.eu.residency.elevenlabs.io",
+        wss: "wss://api.elevenlabs.io",
+    },
 } as const;
 
-export type ElevenLabsEnvironment = typeof ElevenLabsEnvironment.Production | typeof ElevenLabsEnvironment.ProductionUs;
+export type ElevenLabsEnvironment =
+    | typeof ElevenLabsEnvironment.Production
+    | typeof ElevenLabsEnvironment.ProductionUs
+    | typeof ElevenLabsEnvironment.ProductionEu;

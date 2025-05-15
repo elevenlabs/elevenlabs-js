@@ -26,6 +26,8 @@ export * as conversationalAi from "./conversationalAi";
 export * from "./conversationalAi/types";
 export * as v1TextToSpeechVoiceIdStreamInput from "./v1TextToSpeechVoiceIdStreamInput";
 export * from "./v1TextToSpeechVoiceIdStreamInput/types";
+export * as v1TextToSpeechVoiceIdMultiStreamInput from "./v1TextToSpeechVoiceIdMultiStreamInput";
+export * from "./v1TextToSpeechVoiceIdMultiStreamInput/types";
 export * as samples from "./samples";
 export * as user from "./user";
 export * as models from "./models";

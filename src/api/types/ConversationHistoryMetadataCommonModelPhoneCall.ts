@@ -5,9 +5,14 @@
 import * as ElevenLabs from "../index";
 
 export type ConversationHistoryMetadataCommonModelPhoneCall =
-    ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall.Twilio;
+    | ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall.SipTrunking
+    | ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall.Twilio;
 
 export namespace ConversationHistoryMetadataCommonModelPhoneCall {
+    export interface SipTrunking extends ElevenLabs.ConversationHistorySipTrunkingPhoneCallModel {
+        type: "sip_trunking";
+    }
+
     export interface Twilio extends ElevenLabs.ConversationHistoryTwilioPhoneCallModel {
         type: "twilio";
     }

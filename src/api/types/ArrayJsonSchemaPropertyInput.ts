@@ -6,6 +6,6 @@ import * as ElevenLabs from "../index";
 
 export interface ArrayJsonSchemaPropertyInput {
     type?: "array";
-    items: ElevenLabs.ArrayJsonSchemaPropertyInputItems;
     description?: string;
+    items: ElevenLabs.ArrayJsonSchemaPropertyInputItems;
 }

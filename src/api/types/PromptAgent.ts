@@ -17,6 +17,8 @@ export interface PromptAgent {
     tools?: ElevenLabs.PromptAgentOutputToolsItem[];
     /** A list of IDs of tools used by the agent */
     tool_ids?: string[];
+    /** A list of MCP server ids to be used by the agent */
+    mcp_server_ids?: string[];
     /** A list of knowledge bases to be used by the agent */
     knowledge_base?: ElevenLabs.KnowledgeBaseLocator[];
     /** Definition for a custom LLM if LLM field is set to 'CUSTOM_LLM' */
