@@ -17,6 +17,6 @@ export interface BodyCreateAgentV1ConvaiAgentsCreatePost {
     platform_settings?: ElevenLabs.AgentPlatformSettingsRequestModel;
     /** A name to make the agent easier to find */
     name?: string;
-    /** Categories to help classify and filter the agent */
-    categories?: string[];
+    /** Tags to help classify and filter the agent */
+    tags?: string[];
 }

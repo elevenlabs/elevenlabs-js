@@ -11,4 +11,5 @@ import * as ElevenLabs from "../../../../index";
 export interface PatchConvAiSettingsRequest {
     conversation_initiation_client_data_webhook?: ElevenLabs.ConversationInitiationClientDataWebhook;
     webhooks?: ElevenLabs.ConvAiWebhooks;
+    rag_retention_period_days?: number;
 }

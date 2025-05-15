@@ -8,6 +8,7 @@ import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 import * as stream from "stream";
+import { Speaker } from "../resources/speaker/client/Client";
 
 export declare namespace Dubbing {
     export interface Options {
@@ -33,7 +34,13 @@ export declare namespace Dubbing {
 }
 
 export class Dubbing {
+    protected _speaker: Speaker | undefined;
+
     constructor(protected readonly _options: Dubbing.Options = {}) {}
+
+    public get speaker(): Speaker {
+        return (this._speaker ??= new Speaker(this._options));
+    }
 
     /**
      * Given a dubbing ID generated from the '/v1/dubbing' endpoint with studio enabled, returns the dubbing resource.
@@ -67,8 +74,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -148,8 +155,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -197,93 +204,6 @@ export class Dubbing {
     }
 
     /**
-     * Creates a new segment in dubbing resource with a start and end time for the speaker in every available language. Does not automatically generate transcripts/translations/audio.
-     *
-     * @param {string} dubbingId - ID of the dubbing project.
-     * @param {string} speakerId - ID of the speaker.
-     * @param {ElevenLabs.SegmentCreatePayload} request
-     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.dubbing.createSegmentForSpeaker("dubbing_id", "speaker_id", {
-     *         start_time: 1.1,
-     *         end_time: 1.1
-     *     })
-     */
-    public async createSegmentForSpeaker(
-        dubbingId: string,
-        speakerId: string,
-        request: ElevenLabs.SegmentCreatePayload,
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<ElevenLabs.SegmentCreateResponse> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/speaker/${encodeURIComponent(speakerId)}/segment`,
-            ),
-            method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            body: request,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.SegmentCreateResponse;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/dubbing/resource/{dubbing_id}/speaker/{speaker_id}/segment.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
      * Modifies a single segment with new text and/or start/end times. Will update the values for only a specific language of a segment. Does not automatically regenerate the dub.
      *
      * @param {string} dubbingId - ID of the dubbing project.
@@ -321,8 +241,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -403,8 +323,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -486,8 +406,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -570,8 +490,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -654,8 +574,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -740,8 +660,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -894,8 +814,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -973,8 +893,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1050,8 +970,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1126,8 +1046,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1225,8 +1145,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.58.0",
-                "User-Agent": "elevenlabs/v1.58.0",
+                "X-Fern-SDK-Version": "v1.59.0",
+                "User-Agent": "elevenlabs/v1.59.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

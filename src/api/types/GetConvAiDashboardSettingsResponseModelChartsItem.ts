@@ -6,7 +6,8 @@ import * as ElevenLabs from "../index";
 
 export type GetConvAiDashboardSettingsResponseModelChartsItem =
     | ElevenLabs.GetConvAiDashboardSettingsResponseModelChartsItem.CallSuccess
-    | ElevenLabs.GetConvAiDashboardSettingsResponseModelChartsItem.Criteria;
+    | ElevenLabs.GetConvAiDashboardSettingsResponseModelChartsItem.Criteria
+    | ElevenLabs.GetConvAiDashboardSettingsResponseModelChartsItem.DataCollection;
 
 export namespace GetConvAiDashboardSettingsResponseModelChartsItem {
     export interface CallSuccess extends ElevenLabs.DashboardCallSuccessChartModel {
@@ -15,5 +16,9 @@ export namespace GetConvAiDashboardSettingsResponseModelChartsItem {
 
     export interface Criteria extends ElevenLabs.DashboardCriteriaChartModel {
         type: "criteria";
+    }
+
+    export interface DataCollection extends ElevenLabs.DashboardDataCollectionChartModel {
+        type: "data_collection";
     }
 }

@@ -6,7 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface ObjectJsonSchemaPropertyInput {
     type?: "object";
-    properties?: Record<string, ElevenLabs.ObjectJsonSchemaPropertyInputPropertiesValue>;
     required?: string[];
     description?: string;
+    properties?: Record<string, ElevenLabs.ObjectJsonSchemaPropertyInputPropertiesValue>;
 }

@@ -8,5 +8,15 @@ import * as ElevenLabs from "../../../index";
  * Create Phone Request Information
  */
 export type ConversationalAiCreatePhoneNumberRequestBody =
-    | ElevenLabs.CreateTwilioPhoneNumberRequest
-    | ElevenLabs.CreateSipTrunkPhoneNumberRequest;
+    | ElevenLabs.ConversationalAiCreatePhoneNumberRequestBody.Twilio
+    | ElevenLabs.ConversationalAiCreatePhoneNumberRequestBody.SipTrunk;
+
+export namespace ConversationalAiCreatePhoneNumberRequestBody {
+    export interface Twilio extends ElevenLabs.CreateTwilioPhoneNumberRequest {
+        provider: "twilio";
+    }
+
+    export interface SipTrunk extends ElevenLabs.CreateSipTrunkPhoneNumberRequest {
+        provider: "sip_trunk";
+    }
+}

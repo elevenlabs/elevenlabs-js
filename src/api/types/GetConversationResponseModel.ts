@@ -8,7 +8,7 @@ export interface GetConversationResponseModel {
     agent_id: string;
     conversation_id: string;
     status: ElevenLabs.GetConversationResponseModelStatus;
-    transcript: ElevenLabs.ConversationHistoryTranscriptCommonModel[];
+    transcript: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
     metadata: ElevenLabs.ConversationHistoryMetadataCommonModel;
     analysis?: ElevenLabs.ConversationHistoryAnalysisCommonModel;
     conversation_initiation_client_data?: ElevenLabs.ConversationInitiationClientDataRequestOutput;

@@ -11,12 +11,12 @@ export interface ClientToolConfigInput {
     id?: string;
     name: string;
     description: string;
+    /** The maximum time in seconds to wait for the tool call to complete. Must be between 1 and 30 seconds (inclusive). */
+    response_timeout_secs?: number;
     /** Schema for any parameters to pass to the client */
     parameters?: ElevenLabs.ObjectJsonSchemaPropertyInput;
     /** If true, calling this tool should block the conversation until the client responds with some response which is passed to the llm. If false then we will continue the conversation without waiting for the client to respond, this is useful to show content to a user but not block the conversation */
     expects_response?: boolean;
-    /** The maximum time in seconds to wait for a response from the client. Should only be set if expects_response is true */
-    response_timeout_secs?: number;
     /** Configuration for dynamic variables */
     dynamic_variables?: ElevenLabs.DynamicVariablesConfig;
 }

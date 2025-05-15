@@ -1846,69 +1846,6 @@ await client.voices.getSimilarLibraryVoices({});
 </dl>
 </details>
 
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAProfilePage</a>(handle) -> ElevenLabs.ProfilePageResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Gets a profile page based on a handle
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.getAProfilePage("talexgeorge");
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**handle:** `string` — Handle for a VA's profile page
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Voices.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 ## Studio
 
 <details><summary><code>client.studio.<a href="/src/api/resources/studio/client/Client.ts">createPodcast</a>({ ...params }) -> ElevenLabs.PodcastProjectResponseModel</code></summary>
@@ -2104,88 +2041,6 @@ await client.dubbing.addLanguageToResource("dubbing_id");
 <dd>
 
 **request:** `ElevenLabs.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIdLanguagePost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Dubbing.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">createSegmentForSpeaker</a>(dubbingId, speakerId, { ...params }) -> ElevenLabs.SegmentCreateResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Creates a new segment in dubbing resource with a start and end time for the speaker in every available language. Does not automatically generate transcripts/translations/audio.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.createSegmentForSpeaker("dubbing_id", "speaker_id", {
-    start_time: 1.1,
-    end_time: 1.1,
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbingId:** `string` — ID of the dubbing project.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**speakerId:** `string` — ID of the speaker.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.SegmentCreatePayload`
 
 </dd>
 </dl>
@@ -3202,7 +3057,7 @@ await client.audioNative.updateContent("21m00Tcm4TlvDq8ikWAM", {});
 <dl>
 <dd>
 
-Returns the credit usage metrics for the current user or the entire workspace they are part of. The response will return a time axis with unix timestamps for each day and daily usage along that axis. The usage will be broken down by the specified breakdown type. For example, breakdown type "voice" will return the usage of each voice along the time axis.
+Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
 
 </dd>
 </dl>
@@ -5523,6 +5378,7 @@ Import Phone Number from provider configuration (Twilio or SIP trunk)
 
 ```typescript
 await client.conversationalAi.createPhoneNumber({
+    provider: "twilio",
     phone_number: "phone_number",
     label: "label",
     sid: "sid",
@@ -5562,7 +5418,7 @@ await client.conversationalAi.createPhoneNumber({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getPhoneNumber</a>(phoneNumberId) -> ElevenLabs.GetPhoneNumberResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getPhoneNumber</a>(phoneNumberId) -> ElevenLabs.ConversationalAiGetPhoneNumberResponse</code></summary>
 <dl>
 <dd>
 
@@ -5688,7 +5544,7 @@ await client.conversationalAi.deletePhoneNumber("TeaqRRdTcIfIu2i7BYfT");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updatePhoneNumber</a>(phoneNumberId, { ...params }) -> ElevenLabs.GetPhoneNumberResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updatePhoneNumber</a>(phoneNumberId, { ...params }) -> ElevenLabs.ConversationalAiUpdatePhoneNumberResponse</code></summary>
 <dl>
 <dd>
 
@@ -5759,7 +5615,7 @@ await client.conversationalAi.updatePhoneNumber("TeaqRRdTcIfIu2i7BYfT");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getPhoneNumbers</a>() -> ElevenLabs.GetPhoneNumberResponseModel[]</code></summary>
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getPhoneNumbers</a>() -> ElevenLabs.ConversationalAiGetPhoneNumbersResponseItem[]</code></summary>
 <dl>
 <dd>
 
@@ -6135,79 +5991,6 @@ await client.conversationalAi.createKnowledgeBaseTextDocument({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">ragIndexStatus</a>(documentationId, { ...params }) -> ElevenLabs.RagIndexResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-In case the document is not RAG indexed, it triggers rag indexing task, otherwise it just returns the current status.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.ragIndexStatus("21m00Tcm4TlvDq8ikWAM", {
-    model: "e5_mistral_7b_instruct",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**documentationId:** `string` — The id of a document from the knowledge base. This is returned on document addition.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.RagIndexRequestModel`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationalAi.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getKnowledgeBaseDocumentById</a>(documentationId) -> ElevenLabs.ConversationalAiGetKnowledgeBaseDocumentByIdResponse</code></summary>
 <dl>
 <dd>
@@ -6316,6 +6099,79 @@ await client.conversationalAi.deleteKnowledgeBaseDocument("21m00Tcm4TlvDq8ikWAM"
 <dd>
 
 **documentationId:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updateKnowledgeBaseDocument</a>(documentationId, { ...params }) -> ElevenLabs.ConversationalAiUpdateKnowledgeBaseDocumentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the name of a document
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.updateKnowledgeBaseDocument("21m00Tcm4TlvDq8ikWAM", {
+    name: "name",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentationId:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch`
 
 </dd>
 </dl>
@@ -6949,6 +6805,607 @@ await client.conversationalAi.deleteSecret("secret_id");
 <dd>
 
 **requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getBatchCall</a>(batchId) -> ElevenLabs.BatchCallDetailedResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get detailed information about a batch call including all recipients.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.getBatchCall("batch_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**batchId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAi.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Agents
+
+<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">simulateConversation</a>(agentId, { ...params }) -> ElevenLabs.AgentSimulatedChatTestResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Run a conversation between the agent and a simulated user.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.simulateConversation("21m00Tcm4TlvDq8ikWAM", {
+    simulation_specification: {
+        simulated_user_config: {
+            first_message: "Hello, how can I help you today?",
+            language: "en",
+        },
+    },
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BodySimulatesAConversationV1ConvaiAgentsAgentIdSimulateConversationPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">simulateConversationStream</a>(agentId, { ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8ikWAM", {
+    simulation_specification: {
+        simulated_user_config: {
+            first_message: "Hello, how can I help you today?",
+            language: "en",
+        },
+    },
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi SipTrunk
+
+<details><summary><code>client.conversationalAi.sipTrunk.<a href="/src/api/resources/conversationalAi/resources/sipTrunk/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.SipTrunkOutboundCallResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Handle an outbound call via SIP trunk
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.sipTrunk.outboundCall({
+    agent_id: "agent_id",
+    agent_phone_number_id: "agent_phone_number_id",
+    to_number: "to_number",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SipTrunk.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi KnowledgeBase Document
+
+<details><summary><code>client.conversationalAi.knowledgeBase.document.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/document/client/Client.ts">computeRagIndex</a>(documentationId, { ...params }) -> ElevenLabs.RagIndexResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+In case the document is not RAG indexed, it triggers rag indexing task, otherwise it just returns the current status.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.document.computeRagIndex("21m00Tcm4TlvDq8ikWAM", {
+    model: "e5_mistral_7b_instruct",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentationId:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.RagIndexRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Document.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Dubbing Speaker
+
+<details><summary><code>client.dubbing.speaker.<a href="/src/api/resources/dubbing/resources/speaker/client/Client.ts">update</a>(dubbingId, speakerId, { ...params }) -> ElevenLabs.SpeakerUpdatedResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Amend the metadata associated with a speaker, such as their voice. Both voice cloning and using voices from the ElevenLabs library are supported.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.speaker.update("dubbing_id", "speaker_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**speakerId:** `string` — ID of the speaker.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Speaker.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.speaker.<a href="/src/api/resources/dubbing/resources/speaker/client/Client.ts">similarVoices</a>(dubbingId, speakerId) -> ElevenLabs.SimilarVoicesForSpeakerResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fetch the top 10 similar voices to a speaker, including the voice IDs, names, descriptions, and, where possible, a sample audio recording.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.speaker.similarVoices("dubbing_id", "speaker_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**speakerId:** `string` — ID of the speaker.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Speaker.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Dubbing Speaker Segment
+
+<details><summary><code>client.dubbing.speaker.segment.<a href="/src/api/resources/dubbing/resources/speaker/resources/segment/client/Client.ts">create</a>(dubbingId, speakerId, { ...params }) -> ElevenLabs.SegmentCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new segment in dubbing resource with a start and end time for the speaker in every available language. Does not automatically generate transcripts/translations/audio.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.speaker.segment.create("dubbing_id", "speaker_id", {
+    start_time: 1.1,
+    end_time: 1.1,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**speakerId:** `string` — ID of the speaker.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.speaker.SegmentCreatePayload`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Segment.RequestOptions`
 
 </dd>
 </dl>

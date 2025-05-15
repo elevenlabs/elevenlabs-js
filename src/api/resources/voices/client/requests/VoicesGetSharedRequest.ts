@@ -61,6 +61,10 @@ export interface VoicesGetSharedRequest {
      */
     min_notice_period_days?: number;
     /**
+     * Include/exclude voices with custom rates
+     */
+    include_custom_rates?: boolean;
+    /**
      * Filter voices that are enabled for the reader app
      */
     reader_app_enabled?: boolean;

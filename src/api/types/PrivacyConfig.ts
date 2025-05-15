@@ -13,4 +13,6 @@ export interface PrivacyConfig {
     delete_audio?: boolean;
     /** Whether to apply the privacy settings to existing conversations */
     apply_to_existing_conversations?: boolean;
+    /** Whether to enable zero retention mode - no PII data is stored */
+    zero_retention_mode?: boolean;
 }

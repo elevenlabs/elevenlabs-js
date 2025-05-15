@@ -18,6 +18,8 @@ export interface SpeechToTextWordResponseModel {
     type: ElevenLabs.SpeechToTextWordResponseModelType;
     /** Unique identifier for the speaker of this word. */
     speaker_id?: string;
+    /** The log of the probability with which this word was predicted. Logprobs are in range [-infinity, 0], higher logprobs indicate a higher confidence the model has in its predictions. */
+    logprob: number;
     /** The characters that make up the word and their timing information. */
     characters?: ElevenLabs.SpeechToTextCharacterResponseModel[];
 }
