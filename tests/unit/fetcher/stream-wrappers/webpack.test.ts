@@ -22,6 +22,9 @@ describe("test env compatibility", () => {
                             ".js": [".ts", ".js"],
                             ".jsx": [".tsx", ".jsx"],
                         },
+                        fallback: {
+                            "crypto": false
+                        }
                     },
                 },
                 (err, stats) => {
@@ -30,6 +33,7 @@ describe("test env compatibility", () => {
                         if (stats?.hasErrors()) {
                             console.log(stats?.toString());
                         }
+
                         expect(stats?.hasErrors()).toBe(false);
                         resolve();
                     } catch (error) {
