@@ -9,21 +9,26 @@ export class WebhooksClient {
    * Constructs a webhook event object from a payload and signature.
    * Verifies the webhook signature to ensure the event came from ElevenLabs.
    *
-   * @param payload - The webhook payload (request body)
+   * @param rawBody - The webhook request body. Must be the raw body, not a JSON object
    * @param sigHeader - The signature header from the request
    * @param secret - Your webhook secret
    * @returns The verified webhook event
    * @throws {ElevenLabsError} if the signature is invalid or missing
    */
-  constructEvent(payload: unknown, sigHeader: string, secret: string) {
-    const body = JSON.stringify(payload);
-
+  constructEvent(rawBody: string, sigHeader: string, secret: string) {
     if (!sigHeader) {
       throw new ElevenLabsError({
         message: 'Missing signature header',
         statusCode: 400,
       });
     }
+
+    if (!secret) {
+        throw new ElevenLabsError({
+          message: 'Webhook secret not configured',
+          statusCode: 400,
+        });
+      }
 
     const headers = sigHeader.split(',');
     const timestamp = headers.find((e) => e.startsWith('t='))?.substring(2);
@@ -47,14 +52,7 @@ export class WebhooksClient {
     }
 
     // Validate hash
-    const message = `${timestamp}.${body}`;
-
-    if (!secret) {
-      throw new ElevenLabsError({
-        message: 'Webhook secret not configured',
-        statusCode: 400,
-      });
-    }
+    const message = `${timestamp}.${rawBody}`;
 
     const digest = `v0=${crypto.createHmac('sha256', secret).update(message).digest('hex')}`;
 
@@ -65,6 +63,6 @@ export class WebhooksClient {
       });
     }
 
-    return JSON.parse(body);
+    return JSON.parse(rawBody);
   }
 }
