@@ -7,8 +7,9 @@ import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
-import * as stream from "stream";
-import { Speaker } from "../resources/speaker/client/Client";
+import { Resource } from "../resources/resource/client/Client";
+import { Audio } from "../resources/audio/client/Client";
+import { Transcript } from "../resources/transcript/client/Client";
 
 export declare namespace Dubbing {
     export interface Options {
@@ -34,678 +35,22 @@ export declare namespace Dubbing {
 }
 
 export class Dubbing {
-    protected _speaker: Speaker | undefined;
+    protected _resource: Resource | undefined;
+    protected _audio: Audio | undefined;
+    protected _transcript: Transcript | undefined;
 
     constructor(protected readonly _options: Dubbing.Options = {}) {}
 
-    public get speaker(): Speaker {
-        return (this._speaker ??= new Speaker(this._options));
+    public get resource(): Resource {
+        return (this._resource ??= new Resource(this._options));
     }
 
-    /**
-     * Given a dubbing ID generated from the '/v1/dubbing' endpoint with studio enabled, returns the dubbing resource.
-     *
-     * @param {string} dubbingId - ID of the dubbing project.
-     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.dubbing.getDubbingResource("dubbing_id")
-     */
-    public async getDubbingResource(
-        dubbingId: string,
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<ElevenLabs.DubbingResource> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/resource/${encodeURIComponent(dubbingId)}`,
-            ),
-            method: "GET",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.DubbingResource;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/dubbing/resource/{dubbing_id}.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
+    public get audio(): Audio {
+        return (this._audio ??= new Audio(this._options));
     }
 
-    /**
-     * Adds the given ElevenLab Turbo V2/V2.5 language code to the resource. Does not automatically generate transcripts/translations/audio.
-     *
-     * @param {string} dubbingId - ID of the dubbing project.
-     * @param {ElevenLabs.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIdLanguagePost} request
-     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.dubbing.addLanguageToResource("dubbing_id")
-     */
-    public async addLanguageToResource(
-        dubbingId: string,
-        request: ElevenLabs.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIdLanguagePost = {},
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<ElevenLabs.LanguageAddedResponse> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/language`,
-            ),
-            method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            body: request,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.LanguageAddedResponse;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/dubbing/resource/{dubbing_id}/language.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Modifies a single segment with new text and/or start/end times. Will update the values for only a specific language of a segment. Does not automatically regenerate the dub.
-     *
-     * @param {string} dubbingId - ID of the dubbing project.
-     * @param {string} segmentId - ID of the segment
-     * @param {string} language - ID of the language.
-     * @param {ElevenLabs.SegmentUpdatePayload} request
-     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.dubbing.updateSegmentLanguage("dubbing_id", "segment_id", "language")
-     */
-    public async updateSegmentLanguage(
-        dubbingId: string,
-        segmentId: string,
-        language: string,
-        request: ElevenLabs.SegmentUpdatePayload = {},
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<ElevenLabs.SegmentUpdateResponse> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/segment/${encodeURIComponent(segmentId)}/${encodeURIComponent(language)}`,
-            ),
-            method: "PATCH",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            body: request,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.SegmentUpdateResponse;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling PATCH /v1/dubbing/resource/{dubbing_id}/segment/{segment_id}/{language}.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Deletes a single segment from the dubbing.
-     *
-     * @param {string} dubbingId - ID of the dubbing project.
-     * @param {string} segmentId - ID of the segment
-     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.dubbing.deleteSegment("dubbing_id", "segment_id")
-     */
-    public async deleteSegment(
-        dubbingId: string,
-        segmentId: string,
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<ElevenLabs.SegmentDeleteResponse> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/segment/${encodeURIComponent(segmentId)}`,
-            ),
-            method: "DELETE",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.SegmentDeleteResponse;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling DELETE /v1/dubbing/resource/{dubbing_id}/segment/{segment_id}.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Regenerate the transcriptions for the specified segments. Does not automatically regenerate translations or dubs.
-     *
-     * @param {string} dubbingId - ID of the dubbing project.
-     * @param {ElevenLabs.BodyTranscribesSegmentsV1DubbingResourceDubbingIdTranscribePost} request
-     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.dubbing.transcribeSegments("dubbing_id", {
-     *         segments: ["segments"]
-     *     })
-     */
-    public async transcribeSegments(
-        dubbingId: string,
-        request: ElevenLabs.BodyTranscribesSegmentsV1DubbingResourceDubbingIdTranscribePost,
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<ElevenLabs.SegmentTranscriptionResponse> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/transcribe`,
-            ),
-            method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            body: request,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.SegmentTranscriptionResponse;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/dubbing/resource/{dubbing_id}/transcribe.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Regenerate the translations for either the entire resource or the specified segments/languages. Will automatically transcribe missing transcriptions. Will not automatically regenerate the dubs.
-     *
-     * @param {string} dubbingId - ID of the dubbing project.
-     * @param {ElevenLabs.BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdTranslatePost} request
-     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.dubbing.translateSegments("dubbing_id", {
-     *         segments: ["segments"]
-     *     })
-     */
-    public async translateSegments(
-        dubbingId: string,
-        request: ElevenLabs.BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdTranslatePost,
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<ElevenLabs.SegmentTranslationResponse> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/translate`,
-            ),
-            method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            body: request,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.SegmentTranslationResponse;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/dubbing/resource/{dubbing_id}/translate.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Regenerate the dubs for either the entire resource or the specified segments/languages. Will automatically transcribe and translate any missing transcriptions and translations.
-     *
-     * @param {string} dubbingId - ID of the dubbing project.
-     * @param {ElevenLabs.BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdDubPost} request
-     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.dubbing.dubSegments("dubbing_id", {
-     *         segments: ["segments"]
-     *     })
-     */
-    public async dubSegments(
-        dubbingId: string,
-        request: ElevenLabs.BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdDubPost,
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<ElevenLabs.SegmentDubResponse> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/dub`,
-            ),
-            method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            body: request,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.SegmentDubResponse;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/dubbing/resource/{dubbing_id}/dub.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Regenerate the dubs for either the entire resource or the specified segments/languages. Will automatically transcribe and translate any missing transcriptions and translations.
-     *
-     * @param {string} dubbingId - ID of the dubbing project.
-     * @param {string} language - Render this language
-     * @param {ElevenLabs.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost} request
-     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.dubbing.renderDub("dubbing_id", "language", {
-     *         render_type: "mp4"
-     *     })
-     */
-    public async renderDub(
-        dubbingId: string,
-        language: string,
-        request: ElevenLabs.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost,
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<ElevenLabs.DubbingRenderResponseModel> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/render/${encodeURIComponent(language)}`,
-            ),
-            method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            body: request,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as ElevenLabs.DubbingRenderResponseModel;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling POST /v1/dubbing/resource/{dubbing_id}/render/{language}.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
+    public get transcript(): Transcript {
+        return (this._transcript ??= new Transcript(this._options));
     }
 
     /**
@@ -717,9 +62,9 @@ export class Dubbing {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.dubbing.dubAVideoOrAnAudioFile({})
+     *     await client.dubbing.create({})
      */
-    public async dubAVideoOrAnAudioFile(
+    public async create(
         request: ElevenLabs.BodyDubAVideoOrAnAudioFileV1DubbingPost,
         requestOptions?: Dubbing.RequestOptions,
     ): Promise<ElevenLabs.DoDubbingResponse> {
@@ -814,8 +159,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -870,9 +215,9 @@ export class Dubbing {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.dubbing.getDubbingProjectMetadata("dubbing_id")
+     *     await client.dubbing.get("dubbing_id")
      */
-    public async getDubbingProjectMetadata(
+    public async get(
         dubbingId: string,
         requestOptions?: Dubbing.RequestOptions,
     ): Promise<ElevenLabs.DubbingMetadataResponse> {
@@ -893,8 +238,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -947,9 +292,9 @@ export class Dubbing {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.dubbing.deleteDubbingProject("dubbing_id")
+     *     await client.dubbing.delete("dubbing_id")
      */
-    public async deleteDubbingProject(
+    public async delete(
         dubbingId: string,
         requestOptions?: Dubbing.RequestOptions,
     ): Promise<ElevenLabs.DeleteDubbingResponseModel> {
@@ -970,8 +315,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -1009,189 +354,6 @@ export class Dubbing {
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
                     "Timeout exceeded when calling DELETE /v1/dubbing/{dubbing_id}.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Returns dubbed file as a streamed file. Videos will be returned in MP4 format and audio only dubs will be returned in MP3.
-     * @throws {@link ElevenLabs.ForbiddenError}
-     * @throws {@link ElevenLabs.NotFoundError}
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     * @throws {@link ElevenLabs.TooEarlyError}
-     */
-    public async getDubbedFile(
-        dubbingId: string,
-        languageCode: string,
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<stream.Readable> {
-        const _response = await core.fetcher<stream.Readable>({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/${encodeURIComponent(dubbingId)}/audio/${encodeURIComponent(languageCode)}`,
-            ),
-            method: "GET",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            responseType: "streaming",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 403:
-                    throw new ElevenLabs.ForbiddenError(_response.error.body as unknown);
-                case 404:
-                    throw new ElevenLabs.NotFoundError(_response.error.body as unknown);
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                case 425:
-                    throw new ElevenLabs.TooEarlyError(_response.error.body as unknown);
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/dubbing/{dubbing_id}/audio/{language_code}.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Returns transcript for the dub as an SRT or WEBVTT file.
-     *
-     * @param {string} dubbingId - ID of the dubbing project.
-     * @param {string} languageCode - ID of the language.
-     * @param {ElevenLabs.DubbingGetTranscriptForDubRequest} request
-     * @param {Dubbing.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.ForbiddenError}
-     * @throws {@link ElevenLabs.NotFoundError}
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     * @throws {@link ElevenLabs.TooEarlyError}
-     *
-     * @example
-     *     await client.dubbing.getTranscriptForDub("dubbing_id", "language_code")
-     */
-    public async getTranscriptForDub(
-        dubbingId: string,
-        languageCode: string,
-        request: ElevenLabs.DubbingGetTranscriptForDubRequest = {},
-        requestOptions?: Dubbing.RequestOptions,
-    ): Promise<string> {
-        const { format_type: formatType } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (formatType != null) {
-            _queryParams["format_type"] = formatType;
-        }
-
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
-                `v1/dubbing/${encodeURIComponent(dubbingId)}/transcript/${encodeURIComponent(languageCode)}`,
-            ),
-            method: "GET",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            queryParameters: _queryParams,
-            requestType: "json",
-            responseType: "text",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body as string;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 403:
-                    throw new ElevenLabs.ForbiddenError(_response.error.body as unknown);
-                case 404:
-                    throw new ElevenLabs.NotFoundError(_response.error.body as unknown);
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
-                    );
-                case 425:
-                    throw new ElevenLabs.TooEarlyError(_response.error.body as unknown);
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/dubbing/{dubbing_id}/transcript/{language_code}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

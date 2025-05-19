@@ -1,0 +1,2 @@
+export { type BodyCreateChapterV1StudioProjectsProjectIdChaptersPost } from "./BodyCreateChapterV1StudioProjectsProjectIdChaptersPost";
+export { type BodyUpdateChapterV1StudioProjectsProjectIdChaptersChapterIdPost } from "./BodyUpdateChapterV1StudioProjectsProjectIdChaptersChapterIdPost";

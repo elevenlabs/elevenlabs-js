@@ -8,7 +8,6 @@ import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 import { Projects } from "../resources/projects/client/Client";
-import { Chapters } from "../resources/chapters/client/Client";
 
 export declare namespace Studio {
     export interface Options {
@@ -35,16 +34,11 @@ export declare namespace Studio {
 
 export class Studio {
     protected _projects: Projects | undefined;
-    protected _chapters: Chapters | undefined;
 
     constructor(protected readonly _options: Studio.Options = {}) {}
 
     public get projects(): Projects {
         return (this._projects ??= new Projects(this._options));
-    }
-
-    public get chapters(): Chapters {
-        return (this._chapters ??= new Chapters(this._options));
     }
 
     /**
@@ -91,8 +85,8 @@ export class Studio {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

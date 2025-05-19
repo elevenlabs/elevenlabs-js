@@ -37,19 +37,19 @@ export class Usage {
     /**
      * Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
      *
-     * @param {ElevenLabs.UsageGetCharactersUsageMetricsRequest} request
+     * @param {ElevenLabs.UsageGetRequest} request
      * @param {Usage.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.usage.getCharactersUsageMetrics({
+     *     await client.usage.get({
      *         start_unix: 1,
      *         end_unix: 1
      *     })
      */
-    public async getCharactersUsageMetrics(
-        request: ElevenLabs.UsageGetCharactersUsageMetricsRequest,
+    public async get(
+        request: ElevenLabs.UsageGetRequest,
         requestOptions?: Usage.RequestOptions,
     ): Promise<ElevenLabs.UsageCharactersResponseModel> {
         const {
@@ -96,8 +96,8 @@ export class Usage {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

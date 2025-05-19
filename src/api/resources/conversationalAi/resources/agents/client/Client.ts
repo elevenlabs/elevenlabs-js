@@ -7,6 +7,8 @@ import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../../../errors/index";
+import { Widget } from "../resources/widget/client/Client";
+import { Link } from "../resources/link/client/Client";
 
 export declare namespace Agents {
     export interface Options {
@@ -32,7 +34,427 @@ export declare namespace Agents {
 }
 
 export class Agents {
+    protected _widget: Widget | undefined;
+    protected _link: Link | undefined;
+
     constructor(protected readonly _options: Agents.Options = {}) {}
+
+    public get widget(): Widget {
+        return (this._widget ??= new Widget(this._options));
+    }
+
+    public get link(): Link {
+        return (this._link ??= new Link(this._options));
+    }
+
+    /**
+     * Create an agent from a config object
+     *
+     * @param {ElevenLabs.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost} request
+     * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.agents.create({
+     *         conversation_config: {}
+     *     })
+     */
+    public async create(
+        request: ElevenLabs.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost,
+        requestOptions?: Agents.RequestOptions,
+    ): Promise<ElevenLabs.CreateAgentResponseModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                "v1/convai/agents/create",
+            ),
+            method: "POST",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.CreateAgentResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/convai/agents/create.");
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Retrieve config for an agent
+     *
+     * @param {string} agentId - The id of an agent. This is returned on agent creation.
+     * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.agents.get("21m00Tcm4TlvDq8ikWAM")
+     */
+    public async get(
+        agentId: string,
+        requestOptions?: Agents.RequestOptions,
+    ): Promise<ElevenLabs.GetAgentResponseModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/convai/agents/${encodeURIComponent(agentId)}`,
+            ),
+            method: "GET",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.GetAgentResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/convai/agents/{agent_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Delete an agent
+     *
+     * @param {string} agentId - The id of an agent. This is returned on agent creation.
+     * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.agents.delete("21m00Tcm4TlvDq8ikWAM")
+     */
+    public async delete(agentId: string, requestOptions?: Agents.RequestOptions): Promise<void> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/convai/agents/${encodeURIComponent(agentId)}`,
+            ),
+            method: "DELETE",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling DELETE /v1/convai/agents/{agent_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Patches an Agent settings
+     *
+     * @param {string} agentId - The id of an agent. This is returned on agent creation.
+     * @param {ElevenLabs.conversationalAi.UpdateAgentRequest} request
+     * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.agents.update("21m00Tcm4TlvDq8ikWAM")
+     */
+    public async update(
+        agentId: string,
+        request: ElevenLabs.conversationalAi.UpdateAgentRequest = {},
+        requestOptions?: Agents.RequestOptions,
+    ): Promise<ElevenLabs.GetAgentResponseModel> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                `v1/convai/agents/${encodeURIComponent(agentId)}`,
+            ),
+            method: "PATCH",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.GetAgentResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling PATCH /v1/convai/agents/{agent_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Returns a list of your agents and their metadata.
+     *
+     * @param {ElevenLabs.conversationalAi.AgentsListRequest} request
+     * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.agents.list()
+     */
+    public async list(
+        request: ElevenLabs.conversationalAi.AgentsListRequest = {},
+        requestOptions?: Agents.RequestOptions,
+    ): Promise<ElevenLabs.GetAgentsPageResponseModel> {
+        const { cursor, page_size: pageSize, search } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (cursor != null) {
+            _queryParams["cursor"] = cursor;
+        }
+
+        if (pageSize != null) {
+            _queryParams["page_size"] = pageSize.toString();
+        }
+
+        if (search != null) {
+            _queryParams["search"] = search;
+        }
+
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                "v1/convai/agents",
+            ),
+            method: "GET",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "elevenlabs",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as ElevenLabs.GetAgentsPageResponseModel;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/convai/agents.");
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
 
     /**
      * Run a conversation between the agent and a simulated user.
@@ -75,8 +497,8 @@ export class Agents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -164,8 +586,8 @@ export class Agents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

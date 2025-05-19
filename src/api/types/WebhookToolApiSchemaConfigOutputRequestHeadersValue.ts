@@ -4,4 +4,7 @@
 
 import * as ElevenLabs from "../index";
 
-export type WebhookToolApiSchemaConfigOutputRequestHeadersValue = string | ElevenLabs.ConvAiSecretLocator;
+export type WebhookToolApiSchemaConfigOutputRequestHeadersValue =
+    | string
+    | ElevenLabs.ConvAiSecretLocator
+    | ElevenLabs.ConvAiDynamicVariable;

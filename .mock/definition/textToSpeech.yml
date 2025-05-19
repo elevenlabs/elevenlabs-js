@@ -95,7 +95,7 @@ types:
     inline: true
     source:
       openapi: openapi.json
-  TextToSpeechConvertAsStreamRequestOutputFormat:
+  TextToSpeechStreamRequestOutputFormat:
     enum:
       - mp3_22050_32
       - mp3_44100_32
@@ -285,8 +285,7 @@ service:
                 Voice settings overriding stored settings for the given voice.
                 They are applied only on the given request.
             pronunciation_dictionary_locators:
-              type: >-
-                optional<list<root.PronunciationDictionaryVersionLocatorRequestModel>>
+              type: optional<list<root.PronunciationDictionaryVersionLocator>>
               docs: >-
                 A list of pronunciation dictionary locators (id, version_id) to
                 be applied to the text. They will be applied in order. You may
@@ -465,8 +464,7 @@ service:
                 Voice settings overriding stored settings for the given voice.
                 They are applied only on the given request.
             pronunciation_dictionary_locators:
-              type: >-
-                optional<list<root.PronunciationDictionaryVersionLocatorRequestModel>>
+              type: optional<list<root.PronunciationDictionaryVersionLocator>>
               docs: >-
                 A list of pronunciation dictionary locators (id, version_id) to
                 be applied to the text. They will be applied in order. You may
@@ -596,7 +594,7 @@ service:
                   - 0.3
                   - 0.4
                   - 0.5
-    convert_as_stream:
+    stream:
       path: /v1/text-to-speech/{voice_id}/stream
       method: POST
       auth: false
@@ -648,7 +646,7 @@ service:
               Defaults to None.
             availability: deprecated
           output_format:
-            type: optional<TextToSpeechConvertAsStreamRequestOutputFormat>
+            type: optional<TextToSpeechStreamRequestOutputFormat>
             default: mp3_44100_128
             docs: >-
               Output format of the generated audio. Formatted as
@@ -684,8 +682,7 @@ service:
                 Voice settings overriding stored settings for the given voice.
                 They are applied only on the given request.
             pronunciation_dictionary_locators:
-              type: >-
-                optional<list<root.PronunciationDictionaryVersionLocatorRequestModel>>
+              type: optional<list<root.PronunciationDictionaryVersionLocator>>
               docs: >-
                 A list of pronunciation dictionary locators (id, version_id) to
                 be applied to the text. They will be applied in order. You may
@@ -866,8 +863,7 @@ service:
                 Voice settings overriding stored settings for the given voice.
                 They are applied only on the given request.
             pronunciation_dictionary_locators:
-              type: >-
-                optional<list<root.PronunciationDictionaryVersionLocatorRequestModel>>
+              type: optional<list<root.PronunciationDictionaryVersionLocator>>
               docs: >-
                 A list of pronunciation dictionary locators (id, version_id) to
                 be applied to the text. They will be applied in order. You may

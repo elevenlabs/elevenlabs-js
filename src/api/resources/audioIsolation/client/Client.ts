@@ -39,7 +39,7 @@ export class AudioIsolation {
      * Removes background noise from audio.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    public async audioIsolation(
+    public async convert(
         request: ElevenLabs.BodyAudioIsolationV1AudioIsolationPost,
         requestOptions?: AudioIsolation.RequestOptions,
     ): Promise<stream.Readable> {
@@ -67,8 +67,8 @@ export class AudioIsolation {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -119,7 +119,7 @@ export class AudioIsolation {
      * Removes background noise from audio.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    public async audioIsolationStream(
+    public async stream(
         request: ElevenLabs.BodyAudioIsolationStreamV1AudioIsolationStreamPost,
         requestOptions?: AudioIsolation.RequestOptions,
     ): Promise<stream.Readable> {
@@ -147,8 +147,8 @@ export class AudioIsolation {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "elevenlabs/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,

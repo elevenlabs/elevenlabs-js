@@ -25,6 +25,8 @@ export interface VoiceSharingResponse {
     live_moderation_enabled?: boolean;
     /** The rate of the voice sharing. */
     rate?: number;
+    /** The rate of the voice sharing in USD per 1000 credits. */
+    fiat_rate?: number;
     /** The notice period of the voice sharing. */
     notice_period?: number;
     /** The date of the voice sharing in Unix time. */

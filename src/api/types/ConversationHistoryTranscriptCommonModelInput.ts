@@ -11,8 +11,11 @@ export interface ConversationHistoryTranscriptCommonModelInput {
     tool_results?: ElevenLabs.ConversationHistoryTranscriptToolResultCommonModel[];
     feedback?: ElevenLabs.UserFeedback;
     llm_override?: string;
+    source_medium?: ElevenLabs.ConversationHistoryTranscriptCommonModelInputSourceMedium;
     time_in_call_secs: number;
     conversation_turn_metrics?: ElevenLabs.ConversationTurnMetrics;
     rag_retrieval_info?: ElevenLabs.RagRetrievalInfo;
     llm_usage?: ElevenLabs.LlmUsageInput;
+    interrupted?: boolean;
+    original_message?: string;
 }
