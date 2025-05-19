@@ -2,7 +2,8 @@ import { ElevenLabsClient as FernClient } from "../Client";
 import * as ElevenLabs from "../api";
 import * as core from "../core";
 import * as errors from "../errors";
-import * as stream from "stream";
+import * as stream from "node:stream";
+import { WebhooksClient } from "./webhooks";
 
 export declare namespace ElevenLabsClient {
     interface Options extends FernClient.Options {
@@ -22,8 +23,10 @@ export declare namespace ElevenLabsClient {
 }
 
 export class ElevenLabsClient extends FernClient {
+    public readonly webhooks: WebhooksClient;
+
     constructor(options: ElevenLabsClient.Options = {}) {
-        const apiKey = options.apiKey ?? process.env["ELEVENLABS_API_KEY"];
+        const apiKey = options.apiKey ?? process.env.ELEVENLABS_API_KEY;
         if (apiKey == null) {
             throw new errors.ElevenLabsError({
                 message: "Please pass in your ElevenLabs API Key or export ELEVENLABS_API_KEY in your environment.",
@@ -31,6 +34,7 @@ export class ElevenLabsClient extends FernClient {
         }
         options.apiKey = apiKey;
         super(options);
+        this.webhooks = new WebhooksClient();
     }
 
     /**
