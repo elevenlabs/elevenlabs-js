@@ -27,7 +27,7 @@ describe("ElevenLabs API Tests", () => {
         });
         it("convertAsStream", async () => {
             const client = new ElevenLabsClient();
-            const audioStream = await client.textToSpeech.convertAsStream(DEFAULT_VOICE, {
+            const audioStream = await client.textToSpeech.stream(DEFAULT_VOICE, {
                 text: DEFAULT_TEXT,
                 model_id: DEFAULT_MODEL,
             });
@@ -86,7 +86,7 @@ describe("ElevenLabs API Tests", () => {
             const client = new ElevenLabsClient();
 
             const audioFile = fs.readFileSync(DEFAULT_VOICE_FILE);
-            const audioStream = await client.audioIsolation.audioIsolation({
+            const audioStream = await client.audioIsolation.convert({
                 audio: new Blob([audioFile], { type: "audio/mp3" }),
             });
             const audio = Buffer.concat(await streamToBuffer(audioStream));
@@ -97,7 +97,7 @@ describe("ElevenLabs API Tests", () => {
         it("audioIsolationStream", async () => {
             const client = new ElevenLabsClient();
             const audioFile = fs.readFileSync(DEFAULT_VOICE_FILE);
-            const audioStream = await client.audioIsolation.audioIsolationStream({
+            const audioStream = await client.audioIsolation.stream({
                 audio: new Blob([audioFile], { type: "audio/mp3" }),
             });
             await playIfNotGithub(audioStream);
@@ -108,7 +108,7 @@ describe("ElevenLabs API Tests", () => {
         it("getAll", async () => {
             const client = new ElevenLabsClient();
 
-            const response = await client.voices.getAll();
+            const response = await client.voices.search();
             expect(response.voices.length).toBeGreaterThan(0);
         });
 
@@ -162,7 +162,7 @@ describe("ElevenLabs API Tests", () => {
     describe("models", () => {
         it("getAll", async () => {
             const client = new ElevenLabsClient();
-            const models = await client.models.getAll();
+            const models = await client.models.list();
             expect(models.length).toBeGreaterThan(0);
         });
     });
@@ -182,7 +182,7 @@ describe("ElevenLabs API Tests", () => {
         it("convertAsStream", async () => {
             const client = new ElevenLabsClient();
             const audioFile = fs.readFileSync(DEFAULT_VOICE_FILE);
-            const audioStream = await client.speechToSpeech.convertAsStream(DEFAULT_VOICE, {
+            const audioStream = await client.speechToSpeech.stream(DEFAULT_VOICE, {
                 audio: new Blob([audioFile], { type: "audio/mp3" }),
             });
             await playIfNotGithub(audioStream);
@@ -192,7 +192,7 @@ describe("ElevenLabs API Tests", () => {
     describe("history", () => {
         it("getAll", async () => {
             const client = new ElevenLabsClient();
-            const history = await client.history.getAll({ page_size: 5 });
+            const history = await client.history.list({ page_size: 5 });
             expect(history.history).toBeDefined();
             expect(Array.isArray(history.history)).toBeTruthy();
         });
