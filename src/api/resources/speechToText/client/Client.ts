@@ -55,35 +55,35 @@ export class SpeechToText {
         requestOptions?: SpeechToText.RequestOptions,
     ): Promise<ElevenLabs.SpeechToTextChunkResponseModel> {
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (request.enable_logging != null) {
-            _queryParams["enable_logging"] = request.enable_logging.toString();
+        if (request.enableLogging != null) {
+            _queryParams["enable_logging"] = request.enableLogging.toString();
         }
 
         const _request = await core.newFormData();
-        _request.append("model_id", request.model_id);
+        _request.append("model_id", request.modelId);
         await _request.appendFile("file", request.file);
-        if (request.language_code != null) {
-            _request.append("language_code", request.language_code);
+        if (request.languageCode != null) {
+            _request.append("language_code", request.languageCode);
         }
 
-        if (request.tag_audio_events != null) {
-            _request.append("tag_audio_events", request.tag_audio_events.toString());
+        if (request.tagAudioEvents != null) {
+            _request.append("tag_audio_events", request.tagAudioEvents.toString());
         }
 
-        if (request.num_speakers != null) {
-            _request.append("num_speakers", request.num_speakers.toString());
+        if (request.numSpeakers != null) {
+            _request.append("num_speakers", request.numSpeakers.toString());
         }
 
-        if (request.timestamps_granularity != null) {
-            _request.append("timestamps_granularity", request.timestamps_granularity);
+        if (request.timestampsGranularity != null) {
+            _request.append("timestamps_granularity", request.timestampsGranularity);
         }
 
         if (request.diarize != null) {
             _request.append("diarize", request.diarize.toString());
         }
 
-        if (request.additional_formats != null) {
-            _request.append("additional_formats", toJson(request.additional_formats));
+        if (request.additionalFormats != null) {
+            _request.append("additional_formats", toJson(request.additionalFormats));
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
