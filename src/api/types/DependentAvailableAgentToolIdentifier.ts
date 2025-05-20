@@ -5,9 +5,9 @@
 import * as ElevenLabs from "../index";
 
 export interface DependentAvailableAgentToolIdentifier {
-    agent_id: string;
-    agent_name: string;
-    used_by: string[];
-    created_at_unix_secs: number;
-    access_level: ElevenLabs.DependentAvailableAgentToolIdentifierAccessLevel;
+    agentId: string;
+    agentName: string;
+    usedBy: string[];
+    createdAtUnixSecs: number;
+    accessLevel: ElevenLabs.DependentAvailableAgentToolIdentifierAccessLevel;
 }

@@ -4,5 +4,5 @@
 
 export interface SegmentCreateResponse {
     version: number;
-    new_segment: string;
+    newSegment: string;
 }

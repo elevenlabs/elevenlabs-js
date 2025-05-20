@@ -3,6 +3,6 @@
  */
 
 export interface ToolMockConfig {
-    default_return_value?: string;
-    default_is_error?: boolean;
+    defaultReturnValue?: string;
+    defaultIsError?: boolean;
 }

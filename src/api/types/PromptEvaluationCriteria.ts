@@ -12,7 +12,7 @@ export interface PromptEvaluationCriteria {
     /** The type of evaluation criteria */
     type?: "prompt";
     /** The prompt that the agent should use to evaluate the conversation */
-    conversation_goal_prompt: string;
+    conversationGoalPrompt: string;
     /** When evaluating the prompt, should the agent's knowledge base be used. */
-    use_knowledge_base?: boolean;
+    useKnowledgeBase?: boolean;
 }

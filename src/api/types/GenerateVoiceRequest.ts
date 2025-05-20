@@ -12,7 +12,7 @@ export interface GenerateVoiceRequest {
     /** Category code corresponding to the age of the generated voice. Possible values: young, middle_aged, old. */
     age: ElevenLabs.BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostAge;
     /** The strength of the accent of the generated voice. Has to be between 0.3 and 2.0. */
-    accent_strength: number;
+    accentStrength: number;
     /** Text to generate, text length has to be between 100 and 1000. */
     text: string;
 }

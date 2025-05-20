@@ -12,5 +12,5 @@ export interface BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost {
     /** The email of the customer */
     emails: string[];
     /** The group ids of the user */
-    group_ids?: string[];
+    groupIds?: string[];
 }

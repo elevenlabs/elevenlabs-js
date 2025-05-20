@@ -3,6 +3,6 @@
  */
 
 export interface ConversationHistoryRagUsageCommonModel {
-    usage_count: number;
-    embedding_model: string;
+    usageCount: number;
+    embeddingModel: string;
 }

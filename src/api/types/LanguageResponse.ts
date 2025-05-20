@@ -4,7 +4,7 @@
 
 export interface LanguageResponse {
     /** The unique identifier of the language. */
-    language_id: string;
+    languageId: string;
     /** The name of the language. */
     name: string;
 }

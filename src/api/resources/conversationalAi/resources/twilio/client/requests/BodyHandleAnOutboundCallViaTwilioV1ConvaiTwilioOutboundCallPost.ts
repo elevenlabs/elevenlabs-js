@@ -7,14 +7,14 @@ import * as ElevenLabs from "../../../../../../index";
 /**
  * @example
  *     {
- *         agent_id: "agent_id",
- *         agent_phone_number_id: "agent_phone_number_id",
- *         to_number: "to_number"
+ *         agentId: "agent_id",
+ *         agentPhoneNumberId: "agent_phone_number_id",
+ *         toNumber: "to_number"
  *     }
  */
 export interface BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost {
-    agent_id: string;
-    agent_phone_number_id: string;
-    to_number: string;
-    conversation_initiation_client_data?: ElevenLabs.ConversationInitiationClientDataRequestInput;
+    agentId: string;
+    agentPhoneNumberId: string;
+    toNumber: string;
+    conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestInput;
 }

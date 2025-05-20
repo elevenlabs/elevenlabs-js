@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Samples {
@@ -79,8 +80,8 @@ export class Samples {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -92,14 +93,27 @@ export class Samples {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.DeleteSampleResponse, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.DeleteSampleResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

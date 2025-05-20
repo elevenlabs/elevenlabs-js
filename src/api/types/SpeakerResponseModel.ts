@@ -6,9 +6,9 @@ import * as ElevenLabs from "../index";
 
 export interface SpeakerResponseModel {
     /** The ID of the speaker. */
-    speaker_id: string;
+    speakerId: string;
     /** The duration of the speaker segment in seconds. */
-    duration_secs: number;
+    durationSecs: number;
     /** The utterances of the speaker. */
     utterances?: ElevenLabs.UtteranceResponseModel[];
 }

@@ -16,7 +16,7 @@ export interface PronunciationDictionariesListRequest {
     /**
      * How many pronunciation dictionaries to return at maximum. Can not exceed 100, defaults to 30.
      */
-    page_size?: number;
+    pageSize?: number;
     /**
      * Which field to sort by, one of 'created_at_unix' or 'name'.
      */
@@ -24,5 +24,5 @@ export interface PronunciationDictionariesListRequest {
     /**
      * Which direction to sort the voices in. 'ascending' or 'descending'.
      */
-    sort_direction?: string;
+    sortDirection?: string;
 }

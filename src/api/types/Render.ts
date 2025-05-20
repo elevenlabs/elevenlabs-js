@@ -9,6 +9,6 @@ export interface Render {
     version: number;
     language?: string;
     type?: ElevenLabs.RenderType;
-    media_ref?: ElevenLabs.DubbingMediaReference;
+    mediaRef?: ElevenLabs.DubbingMediaReference;
     status: ElevenLabs.RenderStatus;
 }

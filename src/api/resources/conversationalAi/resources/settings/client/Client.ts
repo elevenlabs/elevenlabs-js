@@ -6,6 +6,7 @@ import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../../../serialization/index";
 import * as errors from "../../../../../../errors/index";
 
 export declare namespace Settings {
@@ -70,8 +71,8 @@ export class Settings {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -84,7 +85,12 @@ export class Settings {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.GetConvAiSettingsResponseModel,
+                data: serializers.GetConvAiSettingsResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -93,7 +99,12 @@ export class Settings {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -161,22 +172,29 @@ export class Settings {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
-            body: request,
+            body: serializers.conversationalAi.PatchConvAiSettingsRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.GetConvAiSettingsResponseModel,
+                data: serializers.GetConvAiSettingsResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -185,7 +203,12 @@ export class Settings {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

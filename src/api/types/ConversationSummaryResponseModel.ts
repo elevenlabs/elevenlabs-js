@@ -5,12 +5,12 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationSummaryResponseModel {
-    agent_id: string;
-    agent_name?: string;
-    conversation_id: string;
-    start_time_unix_secs: number;
-    call_duration_secs: number;
-    message_count: number;
+    agentId: string;
+    agentName?: string;
+    conversationId: string;
+    startTimeUnixSecs: number;
+    callDurationSecs: number;
+    messageCount: number;
     status: ElevenLabs.ConversationSummaryResponseModelStatus;
-    call_successful: ElevenLabs.EvaluationSuccessResult;
+    callSuccessful: ElevenLabs.EvaluationSuccessResult;
 }

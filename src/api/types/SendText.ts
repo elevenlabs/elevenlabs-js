@@ -20,11 +20,11 @@ export interface SendText {
      * really need text to be processed immediately. We generally recommend keeping the default value of
      * `false` and adjusting the `chunk_length_schedule` in the `generation_config` instead.
      */
-    try_trigger_generation?: boolean;
+    tryTriggerGeneration?: boolean;
     /** The voice settings field can be provided in the first `InitializeConnection` message and then must either be not provided or not changed. */
-    voice_settings?: ElevenLabs.RealtimeVoiceSettings;
+    voiceSettings?: ElevenLabs.RealtimeVoiceSettings;
     /** The generator config field can be provided in the first `InitializeConnection` message and then must either be not provided or not changed. */
-    generator_config?: ElevenLabs.GenerationConfig;
+    generatorConfig?: ElevenLabs.GenerationConfig;
     /**
      * Flush forces the generation of audio. Set this value to true when you have finished sending text, but want to keep the websocket connection open.
      *

@@ -5,14 +5,14 @@
 import * as ElevenLabs from "../index";
 
 export interface GetConversationResponseModel {
-    agent_id: string;
-    conversation_id: string;
+    agentId: string;
+    conversationId: string;
     status: ElevenLabs.GetConversationResponseModelStatus;
     transcript: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
     metadata: ElevenLabs.ConversationHistoryMetadataCommonModel;
     analysis?: ElevenLabs.ConversationHistoryAnalysisCommonModel;
-    conversation_initiation_client_data?: ElevenLabs.ConversationInitiationClientDataRequestOutput;
-    has_audio: boolean;
-    has_user_audio: boolean;
-    has_response_audio: boolean;
+    conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestOutput;
+    hasAudio: boolean;
+    hasUserAudio: boolean;
+    hasResponseAudio: boolean;
 }

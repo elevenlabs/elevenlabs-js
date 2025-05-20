@@ -5,6 +5,7 @@
 import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
+import * as serializers from "../../../../../../serialization/index";
 import urlJoin from "url-join";
 import * as errors from "../../../../../../errors/index";
 
@@ -44,11 +45,11 @@ export class BatchCalls {
      *
      * @example
      *     await client.conversationalAi.batchCalls.create({
-     *         call_name: "call_name",
-     *         agent_id: "agent_id",
-     *         agent_phone_number_id: "agent_phone_number_id",
+     *         callName: "call_name",
+     *         agentId: "agent_id",
+     *         agentPhoneNumberId: "agent_phone_number_id",
      *         recipients: [{
-     *                 phone_number: "phone_number"
+     *                 phoneNumber: "phone_number"
      *             }]
      *     })
      */
@@ -80,28 +81,44 @@ export class BatchCalls {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
-            body: request,
+            body: serializers.conversationalAi.BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost.jsonOrThrow(
+                request,
+                { unrecognizedObjectKeys: "strip" },
+            ),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.BatchCallResponse, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.BatchCallResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -154,7 +171,7 @@ export class BatchCalls {
         request: ElevenLabs.conversationalAi.BatchCallsListRequest = {},
         requestOptions?: BatchCalls.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.WorkspaceBatchCallsResponse>> {
-        const { limit, last_doc: lastDoc } = request;
+        const { limit, lastDoc } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (limit != null) {
             _queryParams["limit"] = limit.toString();
@@ -181,8 +198,8 @@ export class BatchCalls {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -196,7 +213,12 @@ export class BatchCalls {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.WorkspaceBatchCallsResponse,
+                data: serializers.WorkspaceBatchCallsResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -205,7 +227,12 @@ export class BatchCalls {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -275,8 +302,8 @@ export class BatchCalls {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -288,14 +315,27 @@ export class BatchCalls {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.BatchCallDetailedResponse, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.BatchCallDetailedResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

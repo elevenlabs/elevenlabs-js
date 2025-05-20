@@ -7,7 +7,7 @@
  *     {}
  */
 export interface SegmentUpdatePayload {
-    start_time?: number;
-    end_time?: number;
+    startTime?: number;
+    endTime?: number;
     text?: string;
 }

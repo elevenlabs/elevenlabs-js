@@ -6,15 +6,15 @@ import * as ElevenLabs from "../index";
 
 export interface BatchCallResponse {
     id: string;
-    phone_number_id: string;
-    phone_provider?: ElevenLabs.TelephonyProvider;
+    phoneNumberId: string;
+    phoneProvider?: ElevenLabs.TelephonyProvider;
     name: string;
-    agent_id: string;
-    created_at_unix: number;
-    scheduled_time_unix: number;
-    total_calls_dispatched: number;
-    total_calls_scheduled: number;
-    last_updated_at_unix: number;
+    agentId: string;
+    createdAtUnix: number;
+    scheduledTimeUnix: number;
+    totalCallsDispatched: number;
+    totalCallsScheduled: number;
+    lastUpdatedAtUnix: number;
     status: ElevenLabs.BatchCallStatus;
-    agent_name: string;
+    agentName: string;
 }

@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import * as stream from "stream";
+import * as serializers from "../../../../serialization/index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -52,8 +53,13 @@ export class AudioIsolation {
     ): Promise<core.WithRawResponse<stream.Readable>> {
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
-        if (request.file_format != null) {
-            _request.append("file_format", request.file_format);
+        if (request.fileFormat != null) {
+            _request.append(
+                "file_format",
+                serializers.AudioIsolationConvertRequestFileFormat.jsonOrThrow(request.fileFormat, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -74,8 +80,8 @@ export class AudioIsolation {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -97,7 +103,12 @@ export class AudioIsolation {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -143,8 +154,13 @@ export class AudioIsolation {
     ): Promise<core.WithRawResponse<stream.Readable>> {
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
-        if (request.file_format != null) {
-            _request.append("file_format", request.file_format);
+        if (request.fileFormat != null) {
+            _request.append(
+                "file_format",
+                serializers.AudioIsolationStreamRequestFileFormat.jsonOrThrow(request.fileFormat, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -165,8 +181,8 @@ export class AudioIsolation {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -188,7 +204,12 @@ export class AudioIsolation {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

@@ -12,5 +12,5 @@ export interface TranscriptGetTranscriptForDubRequest {
     /**
      * Format to use for the subtitle file, either 'srt' or 'webvtt'
      */
-    format_type?: ElevenLabs.dubbing.TranscriptGetTranscriptForDubRequestFormatType;
+    formatType?: ElevenLabs.dubbing.TranscriptGetTranscriptForDubRequestFormatType;
 }

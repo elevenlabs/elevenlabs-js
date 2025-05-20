@@ -4,9 +4,9 @@
 
 export interface SpeakerAudioResponseModel {
     /** The base64 encoded audio. */
-    audio_base_64: string;
+    audioBase64: string;
     /** The media type of the audio. */
-    media_type: string;
+    mediaType: string;
     /** The duration of the audio in seconds. */
-    duration_secs: number;
+    durationSecs: number;
 }

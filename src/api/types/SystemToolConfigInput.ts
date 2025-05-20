@@ -12,6 +12,6 @@ export interface SystemToolConfigInput {
     name: string;
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. */
-    response_timeout_secs?: number;
+    responseTimeoutSecs?: number;
     params: ElevenLabs.SystemToolConfigInputParams;
 }

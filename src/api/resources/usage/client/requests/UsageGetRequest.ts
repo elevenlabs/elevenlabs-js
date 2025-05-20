@@ -7,31 +7,31 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         start_unix: 1,
- *         end_unix: 1
+ *         startUnix: 1,
+ *         endUnix: 1
  *     }
  */
 export interface UsageGetRequest {
     /**
      * UTC Unix timestamp for the start of the usage window, in milliseconds. To include the first day of the window, the timestamp should be at 00:00:00 of that day.
      */
-    start_unix: number;
+    startUnix: number;
     /**
      * UTC Unix timestamp for the end of the usage window, in milliseconds. To include the last day of the window, the timestamp should be at 23:59:59 of that day.
      */
-    end_unix: number;
+    endUnix: number;
     /**
      * Whether or not to include the statistics of the entire workspace.
      */
-    include_workspace_metrics?: boolean;
+    includeWorkspaceMetrics?: boolean;
     /**
      * How to break down the information. Cannot be "user" if include_workspace_metrics is False.
      */
-    breakdown_type?: ElevenLabs.BreakdownTypes;
+    breakdownType?: ElevenLabs.BreakdownTypes;
     /**
      * How to aggregate usage data over time. Can be "hour", "day", "week", "month", or "cumulative".
      */
-    aggregation_interval?: ElevenLabs.UsageAggregationInterval;
+    aggregationInterval?: ElevenLabs.UsageAggregationInterval;
     /**
      * Which metric to aggregate.
      */

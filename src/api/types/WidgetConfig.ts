@@ -12,55 +12,55 @@ export interface WidgetConfig {
     /** The avatar of the widget */
     avatar?: ElevenLabs.WidgetConfigAvatar;
     /** The feedback mode of the widget */
-    feedback_mode?: ElevenLabs.WidgetFeedbackMode;
+    feedbackMode?: ElevenLabs.WidgetFeedbackMode;
     /** The background color of the widget */
-    bg_color?: string;
+    bgColor?: string;
     /** The text color of the widget */
-    text_color?: string;
+    textColor?: string;
     /** The button color of the widget */
-    btn_color?: string;
+    btnColor?: string;
     /** The button text color of the widget */
-    btn_text_color?: string;
+    btnTextColor?: string;
     /** The border color of the widget */
-    border_color?: string;
+    borderColor?: string;
     /** The focus color of the widget */
-    focus_color?: string;
+    focusColor?: string;
     /** The border radius of the widget */
-    border_radius?: number;
+    borderRadius?: number;
     /** The button radius of the widget */
-    btn_radius?: number;
+    btnRadius?: number;
     /** The action text of the widget */
-    action_text?: string;
+    actionText?: string;
     /** The start call text of the widget */
-    start_call_text?: string;
+    startCallText?: string;
     /** The end call text of the widget */
-    end_call_text?: string;
+    endCallText?: string;
     /** The expand text of the widget */
-    expand_text?: string;
+    expandText?: string;
     /** The text to display when the agent is listening */
-    listening_text?: string;
+    listeningText?: string;
     /** The text to display when the agent is speaking */
-    speaking_text?: string;
+    speakingText?: string;
     /** The text to display when sharing */
-    shareable_page_text?: string;
+    shareablePageText?: string;
     /** Whether to show terms and conditions on the shareable page */
-    shareable_page_show_terms?: boolean;
+    shareablePageShowTerms?: boolean;
     /** The text to display for terms and conditions */
-    terms_text?: string;
+    termsText?: string;
     /** The HTML to display for terms and conditions */
-    terms_html?: string;
+    termsHtml?: string;
     /** The key to display for terms and conditions */
-    terms_key?: string;
+    termsKey?: string;
     /** Whether to show the avatar when the widget is collapsed */
-    show_avatar_when_collapsed?: boolean;
+    showAvatarWhenCollapsed?: boolean;
     /** Whether to disable the banner */
-    disable_banner?: boolean;
+    disableBanner?: boolean;
     /** The override link for the widget */
-    override_link?: string;
+    overrideLink?: string;
     /** Whether to enable mic muting */
-    mic_muting_enabled?: boolean;
+    micMutingEnabled?: boolean;
     /** Whether to show the language selector */
-    language_selector?: boolean;
+    languageSelector?: boolean;
     /** The custom avatar path */
-    custom_avatar_path?: string;
+    customAvatarPath?: string;
 }

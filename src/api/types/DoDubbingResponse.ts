@@ -4,7 +4,7 @@
 
 export interface DoDubbingResponse {
     /** The ID of the dubbing project. */
-    dubbing_id: string;
+    dubbingId: string;
     /** The expected duration of the dubbing project in seconds. */
-    expected_duration_sec: number;
+    expectedDurationSec: number;
 }

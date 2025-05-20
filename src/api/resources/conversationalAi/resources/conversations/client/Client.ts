@@ -6,6 +6,7 @@ import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../../../serialization/index";
 import * as errors from "../../../../../../errors/index";
 import { Audio } from "../resources/audio/client/Client";
 import { Feedback } from "../resources/feedback/client/Client";
@@ -57,7 +58,7 @@ export class Conversations {
      *
      * @example
      *     await client.conversationalAi.conversations.getSignedUrl({
-     *         agent_id: "21m00Tcm4TlvDq8ikWAM"
+     *         agentId: "21m00Tcm4TlvDq8ikWAM"
      *     })
      */
     public getSignedUrl(
@@ -71,7 +72,7 @@ export class Conversations {
         request: ElevenLabs.conversationalAi.ConversationsGetSignedUrlRequest,
         requestOptions?: Conversations.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ConversationSignedUrlResponseModel>> {
-        const { agent_id: agentId } = request;
+        const { agentId } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["agent_id"] = agentId;
         const _response = await core.fetcher({
@@ -91,8 +92,8 @@ export class Conversations {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -106,7 +107,12 @@ export class Conversations {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.ConversationSignedUrlResponseModel,
+                data: serializers.ConversationSignedUrlResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -115,7 +121,12 @@ export class Conversations {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -168,14 +179,7 @@ export class Conversations {
         request: ElevenLabs.conversationalAi.ConversationsListRequest = {},
         requestOptions?: Conversations.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetConversationsPageResponseModel>> {
-        const {
-            cursor,
-            agent_id: agentId,
-            call_successful: callSuccessful,
-            call_start_before_unix: callStartBeforeUnix,
-            call_start_after_unix: callStartAfterUnix,
-            page_size: pageSize,
-        } = request;
+        const { cursor, agentId, callSuccessful, callStartBeforeUnix, callStartAfterUnix, pageSize } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
             _queryParams["cursor"] = cursor;
@@ -186,7 +190,9 @@ export class Conversations {
         }
 
         if (callSuccessful != null) {
-            _queryParams["call_successful"] = callSuccessful;
+            _queryParams["call_successful"] = serializers.EvaluationSuccessResult.jsonOrThrow(callSuccessful, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         if (callStartBeforeUnix != null) {
@@ -218,8 +224,8 @@ export class Conversations {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -233,7 +239,12 @@ export class Conversations {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.GetConversationsPageResponseModel,
+                data: serializers.GetConversationsPageResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -242,7 +253,12 @@ export class Conversations {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -310,8 +326,8 @@ export class Conversations {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -324,7 +340,12 @@ export class Conversations {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.GetConversationResponseModel,
+                data: serializers.GetConversationResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -333,7 +354,12 @@ export class Conversations {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -403,8 +429,8 @@ export class Conversations {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -423,7 +449,12 @@ export class Conversations {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

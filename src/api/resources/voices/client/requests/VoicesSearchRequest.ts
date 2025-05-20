@@ -5,18 +5,18 @@
 /**
  * @example
  *     {
- *         include_total_count: true
+ *         includeTotalCount: true
  *     }
  */
 export interface VoicesSearchRequest {
     /**
      * The next page token to use for pagination. Returned from the previous request.
      */
-    next_page_token?: string;
+    nextPageToken?: string;
     /**
      * How many voices to return at maximum. Can not exceed 100, defaults to 10. Page 0 may include more voices due to default voices being included.
      */
-    page_size?: number;
+    pageSize?: number;
     /**
      * Search term to filter voices by. Searches in name, description, labels, category.
      */
@@ -28,11 +28,11 @@ export interface VoicesSearchRequest {
     /**
      * Which direction to sort the voices in. 'asc' or 'desc'.
      */
-    sort_direction?: string;
+    sortDirection?: string;
     /**
      * Type of the voice to filter by. One of 'personal', 'community', 'default', 'workspace', 'non-default'. 'non-default' is equal to 'personal' plus 'community'.
      */
-    voice_type?: string;
+    voiceType?: string;
     /**
      * Category of the voice to filter by. One of 'premade', 'cloned', 'generated', 'professional'
      */
@@ -40,13 +40,13 @@ export interface VoicesSearchRequest {
     /**
      * State of the voice's fine tuning to filter by. Applicable only to professional voices clones. One of 'draft', 'not_verified', 'not_started', 'queued', 'fine_tuning', 'fine_tuned', 'failed', 'delayed'
      */
-    fine_tuning_state?: string;
+    fineTuningState?: string;
     /**
      * Collection ID to filter voices by.
      */
-    collection_id?: string;
+    collectionId?: string;
     /**
      * Whether to include the total count of voices found in the response. Incurs a performance cost.
      */
-    include_total_count?: boolean;
+    includeTotalCount?: boolean;
 }

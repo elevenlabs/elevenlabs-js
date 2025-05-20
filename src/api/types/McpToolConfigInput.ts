@@ -12,11 +12,11 @@ export interface McpToolConfigInput {
     name: string;
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. */
-    response_timeout_secs?: number;
+    responseTimeoutSecs?: number;
     /** Schema for any parameters the LLM needs to provide to the MCP tool. */
     parameters?: ElevenLabs.ObjectJsonSchemaPropertyInput;
     /** The name of the MCP tool to call */
-    mcp_tool_name: string;
+    mcpToolName: string;
     /** The id of the MCP server to call */
-    mcp_server_id: string;
+    mcpServerId: string;
 }

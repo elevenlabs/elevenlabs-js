@@ -7,8 +7,8 @@
  *     {}
  */
 export interface UpdateAgentRequest {
-    conversation_config?: unknown;
-    platform_settings?: unknown;
+    conversationConfig?: unknown;
+    platformSettings?: unknown;
     /** A name to make the agent easier to find */
     name?: string;
     /** Tags to help classify and filter the agent */

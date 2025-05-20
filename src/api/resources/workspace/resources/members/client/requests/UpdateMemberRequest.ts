@@ -14,7 +14,7 @@ export interface UpdateMemberRequest {
     /** Email of the target user. */
     email: string;
     /** Whether to lock or unlock the user account. */
-    is_locked?: boolean;
+    isLocked?: boolean;
     /** Role dictating permissions in the workspace. */
-    workspace_role?: ElevenLabs.workspace.BodyUpdateMemberV1WorkspaceMembersPostWorkspaceRole;
+    workspaceRole?: ElevenLabs.workspace.BodyUpdateMemberV1WorkspaceMembersPostWorkspaceRole;
 }

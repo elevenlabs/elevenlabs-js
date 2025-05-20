@@ -4,5 +4,5 @@
 
 export interface HistoryItemResponse {
     state?: unknown;
-    voice_category?: unknown;
+    voiceCategory?: unknown;
 }

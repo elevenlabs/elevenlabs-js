@@ -12,9 +12,9 @@ export interface WebhookToolConfigInput {
     name: string;
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. Must be between 5 and 120 seconds (inclusive). */
-    response_timeout_secs?: number;
+    responseTimeoutSecs?: number;
     /** The schema for the outgoing webhoook, including parameters and URL specification */
-    api_schema: ElevenLabs.WebhookToolApiSchemaConfigInput;
+    apiSchema: ElevenLabs.WebhookToolApiSchemaConfigInput;
     /** Configuration for dynamic variables */
-    dynamic_variables?: ElevenLabs.DynamicVariablesConfig;
+    dynamicVariables?: ElevenLabs.DynamicVariablesConfig;
 }

@@ -7,12 +7,12 @@ import * as ElevenLabs from "../../../../../../index";
 /**
  * @example
  *     {
- *         resource_type: "voice"
+ *         resourceType: "voice"
  *     }
  */
 export interface ResourcesGetRequest {
     /**
      * Resource type of the target resource.
      */
-    resource_type: ElevenLabs.WorkspaceResourceType;
+    resourceType: ElevenLabs.WorkspaceResourceType;
 }

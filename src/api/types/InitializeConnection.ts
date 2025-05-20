@@ -7,17 +7,17 @@ import * as ElevenLabs from "../index";
 export interface InitializeConnection {
     /** The initial text that must be sent is a blank space. */
     text: " ";
-    voice_settings?: ElevenLabs.RealtimeVoiceSettings;
-    generation_config?: ElevenLabs.GenerationConfig;
+    voiceSettings?: ElevenLabs.RealtimeVoiceSettings;
+    generationConfig?: ElevenLabs.GenerationConfig;
     /**
      * Optional list of pronunciation dictionary locators. If provided, these dictionaries will be used to
      * modify pronunciation of matching text. Must only be provided in the first message.
      *
      * Note: Pronunciation dictionary matches will only be respected within a provided chunk.
      */
-    pronunciation_dictionary_locators?: ElevenLabs.PronunciationDictionaryLocator[];
+    pronunciationDictionaryLocators?: ElevenLabs.PronunciationDictionaryLocator[];
     /** Your ElevenLabs API key. This can only be included in the first message and is not needed if present in the header. */
-    "xi-api-key"?: string;
+    xiApiKey?: string;
     /** Your authorization bearer token. This can only be included in the first message and is not needed if present in the header. */
     authorization?: string;
 }

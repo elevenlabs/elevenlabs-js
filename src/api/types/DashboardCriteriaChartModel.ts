@@ -4,5 +4,5 @@
 
 export interface DashboardCriteriaChartModel {
     name: string;
-    criteria_id: string;
+    criteriaId: string;
 }

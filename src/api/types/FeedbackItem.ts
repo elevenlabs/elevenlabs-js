@@ -4,19 +4,19 @@
 
 export interface FeedbackItem {
     /** Whether the user liked the generated item. */
-    thumbs_up: boolean;
+    thumbsUp: boolean;
     /** The feedback text provided by the user. */
     feedback: string;
     /** Whether the user provided emotions. */
     emotions: boolean;
     /** Whether the user thinks the clone is inaccurate. */
-    inaccurate_clone: boolean;
+    inaccurateClone: boolean;
     /** Whether the user thinks there are glitches in the audio. */
     glitches: boolean;
     /** Whether the user thinks the audio quality is good. */
-    audio_quality: boolean;
+    audioQuality: boolean;
     /** Whether the user provided other feedback. */
     other: boolean;
     /** The review status of the item. Defaults to 'not_reviewed'. */
-    review_status?: string;
+    reviewStatus?: string;
 }

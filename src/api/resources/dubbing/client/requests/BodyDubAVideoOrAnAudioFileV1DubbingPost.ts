@@ -10,35 +10,35 @@ import * as fs from "fs";
  */
 export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     file?: File | fs.ReadStream | Blob | undefined;
-    csv_file?: File | fs.ReadStream | Blob | undefined;
-    foreground_audio_file?: File | fs.ReadStream | Blob | undefined;
-    background_audio_file?: File | fs.ReadStream | Blob | undefined;
+    csvFile?: File | fs.ReadStream | Blob | undefined;
+    foregroundAudioFile?: File | fs.ReadStream | Blob | undefined;
+    backgroundAudioFile?: File | fs.ReadStream | Blob | undefined;
     /** Name of the dubbing project. */
     name?: string;
     /** URL of the source video/audio file. */
-    source_url?: string;
+    sourceUrl?: string;
     /** Source language. */
-    source_lang?: string;
+    sourceLang?: string;
     /** The Target language to dub the content into. */
-    target_lang?: string;
+    targetLang?: string;
     /** Number of speakers to use for the dubbing. Set to 0 to automatically detect the number of speakers */
-    num_speakers?: number;
+    numSpeakers?: number;
     /** Whether to apply watermark to the output video. */
     watermark?: boolean;
     /** Start time of the source video/audio file. */
-    start_time?: number;
+    startTime?: number;
     /** End time of the source video/audio file. */
-    end_time?: number;
+    endTime?: number;
     /** Whether to use the highest resolution available. */
-    highest_resolution?: boolean;
+    highestResolution?: boolean;
     /** An advanced setting. Whether to drop background audio from the final dub. This can improve dub quality where it's known that audio shouldn't have a background track such as for speeches or monologues. */
-    drop_background_audio?: boolean;
+    dropBackgroundAudio?: boolean;
     /** [BETA] Whether transcripts should have profanities censored with the words '[censored]' */
-    use_profanity_filter?: boolean;
+    useProfanityFilter?: boolean;
     /** Whether to prepare dub for edits in dubbing studio or edits as a dubbing resource. */
-    dubbing_studio?: boolean;
+    dubbingStudio?: boolean;
     /** [BETA] Instead of using a voice clone in dubbing, use a similar voice from the ElevenLabs Voice Library. */
-    disable_voice_cloning?: boolean;
+    disableVoiceCloning?: boolean;
     /** automatic or manual. Manual mode is only supported when creating a dubbing studio project */
     mode?: string;
 }

@@ -4,5 +4,5 @@
 
 export interface DubbingRenderResponseModel {
     version: number;
-    render_id: string;
+    renderId: string;
 }

@@ -5,6 +5,7 @@
 import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
+import * as serializers from "../../../../../../serialization/index";
 import urlJoin from "url-join";
 import * as errors from "../../../../../../errors/index";
 
@@ -67,10 +68,13 @@ export class Transcript {
         request: ElevenLabs.dubbing.TranscriptGetTranscriptForDubRequest = {},
         requestOptions?: Transcript.RequestOptions,
     ): Promise<core.WithRawResponse<string>> {
-        const { format_type: formatType } = request;
+        const { formatType } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (formatType != null) {
-            _queryParams["format_type"] = formatType;
+            _queryParams["format_type"] =
+                serializers.dubbing.TranscriptGetTranscriptForDubRequestFormatType.jsonOrThrow(formatType, {
+                    unrecognizedObjectKeys: "strip",
+                });
         }
 
         const _response = await core.fetcher({
@@ -90,8 +94,8 @@ export class Transcript {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -111,16 +115,21 @@ export class Transcript {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 403:
-                    throw new ElevenLabs.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                    throw new ElevenLabs.ForbiddenError(_response.error.body, _response.rawResponse);
                 case 404:
-                    throw new ElevenLabs.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                    throw new ElevenLabs.NotFoundError(_response.error.body, _response.rawResponse);
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 case 425:
-                    throw new ElevenLabs.TooEarlyError(_response.error.body as unknown, _response.rawResponse);
+                    throw new ElevenLabs.TooEarlyError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,

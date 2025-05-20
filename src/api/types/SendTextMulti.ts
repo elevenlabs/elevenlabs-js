@@ -9,7 +9,7 @@ export interface SendTextMulti {
     /** Text to synthesize. Should end with a single space. */
     text: string;
     /** The target context_id for this text. */
-    context_id?: string;
+    contextId?: string;
     /** If true, flushes the audio buffer for the specified context. If false, the text will be appended to the buffer to be generated. */
     flush?: boolean;
 }

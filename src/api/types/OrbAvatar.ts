@@ -4,7 +4,7 @@
 
 export interface OrbAvatar {
     /** The first color of the avatar */
-    color_1?: string;
+    color1?: string;
     /** The second color of the avatar */
-    color_2?: string;
+    color2?: string;
 }

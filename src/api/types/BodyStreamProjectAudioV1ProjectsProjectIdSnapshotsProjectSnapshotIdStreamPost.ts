@@ -4,5 +4,5 @@
 
 export interface BodyStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost {
     /** Whether to convert the audio to mpeg format. */
-    convert_to_mpeg?: boolean;
+    convertToMpeg?: boolean;
 }

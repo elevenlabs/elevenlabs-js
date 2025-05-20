@@ -11,7 +11,7 @@ import * as fs from "fs";
 export interface BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost {
     file?: File | fs.ReadStream | Blob | undefined;
     /** Whether to auto convert the project to audio or not. */
-    auto_convert?: boolean;
+    autoConvert?: boolean;
     /** Whether to auto publish the new project snapshot after it's converted. */
-    auto_publish?: boolean;
+    autoPublish?: boolean;
 }

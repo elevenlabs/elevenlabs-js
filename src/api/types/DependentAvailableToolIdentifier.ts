@@ -7,6 +7,6 @@ import * as ElevenLabs from "../index";
 export interface DependentAvailableToolIdentifier {
     id: string;
     name: string;
-    created_at_unix_secs: number;
-    access_level: ElevenLabs.DependentAvailableToolIdentifierAccessLevel;
+    createdAtUnixSecs: number;
+    accessLevel: ElevenLabs.DependentAvailableToolIdentifierAccessLevel;
 }

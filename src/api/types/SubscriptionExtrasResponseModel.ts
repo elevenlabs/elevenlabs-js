@@ -8,23 +8,23 @@ export interface SubscriptionExtrasResponseModel {
     /** The concurrency of the user. */
     concurrency: number;
     /** The Convai concurrency of the user. */
-    convai_concurrency: number;
+    convaiConcurrency: number;
     /** The Convai characters per minute of the user. */
-    convai_chars_per_minute?: number;
+    convaiCharsPerMinute?: number;
     /** The Convai ASR characters per minute of the user. */
-    convai_asr_chars_per_minute?: number;
+    convaiAsrCharsPerMinute?: number;
     /** Whether the user's logging is disabled. */
-    force_logging_disabled: boolean;
+    forceLoggingDisabled: boolean;
     /** Whether the user can request manual pro voice verification. */
-    can_request_manual_pro_voice_verification: boolean;
+    canRequestManualProVoiceVerification: boolean;
     /** Whether the user can bypass the voice captcha. */
-    can_bypass_voice_captcha: boolean;
+    canBypassVoiceCaptcha: boolean;
     /** The moderation status of the user. */
     moderation: ElevenLabs.ModerationStatusResponseModel;
     /** The unused characters rolled over from the previous period. */
-    unused_characters_rolled_over_from_previous_period?: number;
+    unusedCharactersRolledOverFromPreviousPeriod?: number;
     /** The overused characters rolled over from the previous period. */
-    overused_characters_rolled_over_from_previous_period?: number;
+    overusedCharactersRolledOverFromPreviousPeriod?: number;
     /** Data on how the subscription is being used. */
     usage?: ElevenLabs.SubscriptionUsageResponseModel;
 }

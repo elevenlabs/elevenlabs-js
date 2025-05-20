@@ -3,9 +3,9 @@
  */
 
 export interface SegmentedJsonExportOptions {
-    include_speakers?: boolean;
-    include_timestamps?: boolean;
-    segment_on_silence_longer_than_s?: number;
-    max_segment_duration_s?: number;
-    max_segment_chars?: number;
+    includeSpeakers?: boolean;
+    includeTimestamps?: boolean;
+    segmentOnSilenceLongerThanS?: number;
+    maxSegmentDurationS?: number;
+    maxSegmentChars?: number;
 }

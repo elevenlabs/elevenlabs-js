@@ -6,7 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface GetAgentLinkResponseModel {
     /** The ID of the agent */
-    agent_id: string;
+    agentId: string;
     /** The token data for the agent */
     token?: ElevenLabs.ConversationTokenDbModel;
 }

@@ -13,11 +13,11 @@ export interface WebhookToolApiSchemaConfigOutput {
     /** The HTTP method to use for the webhook */
     method?: ElevenLabs.WebhookToolApiSchemaConfigOutputMethod;
     /** Schema for path parameters, if any. The keys should match the placeholders in the URL. */
-    path_params_schema?: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
+    pathParamsSchema?: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
     /** Schema for any query params, if any. These will be added to end of the URL as query params. Note: properties in a query param must all be literal types */
-    query_params_schema?: ElevenLabs.QueryParamsJsonSchema;
+    queryParamsSchema?: ElevenLabs.QueryParamsJsonSchema;
     /** Schema for the body parameters, if any. Used for POST/PATCH/PUT requests. The schema should be an object which will be sent as the json body */
-    request_body_schema?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
+    requestBodySchema?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
     /** Headers that should be included in the request */
-    request_headers?: Record<string, ElevenLabs.WebhookToolApiSchemaConfigOutputRequestHeadersValue>;
+    requestHeaders?: Record<string, ElevenLabs.WebhookToolApiSchemaConfigOutputRequestHeadersValue>;
 }

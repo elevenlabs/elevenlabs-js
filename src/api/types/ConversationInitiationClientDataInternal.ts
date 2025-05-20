@@ -5,9 +5,9 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationInitiationClientDataInternal {
-    conversation_config_override?: ElevenLabs.ConversationConfigClientOverrideOutput;
-    custom_llm_extra_body?: Record<string, unknown>;
-    dynamic_variables?: Record<
+    conversationConfigOverride?: ElevenLabs.ConversationConfigClientOverrideOutput;
+    customLlmExtraBody?: Record<string, unknown>;
+    dynamicVariables?: Record<
         string,
         ElevenLabs.ConversationInitiationClientDataInternalDynamicVariablesValue | undefined
     >;

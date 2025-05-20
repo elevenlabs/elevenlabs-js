@@ -6,6 +6,7 @@ import * as environments from "../../../../../../../../environments";
 import * as core from "../../../../../../../../core";
 import * as ElevenLabs from "../../../../../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../../../../../serialization/index";
 import * as errors from "../../../../../../../../errors/index";
 import { Avatar } from "../resources/avatar/client/Client";
 
@@ -66,7 +67,7 @@ export class Widget {
         request: ElevenLabs.conversationalAi.agents.WidgetGetRequest = {},
         requestOptions?: Widget.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentEmbedResponseModel>> {
-        const { conversation_signature: conversationSignature } = request;
+        const { conversationSignature } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (conversationSignature != null) {
             _queryParams["conversation_signature"] = conversationSignature;
@@ -89,8 +90,8 @@ export class Widget {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -104,7 +105,12 @@ export class Widget {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.GetAgentEmbedResponseModel,
+                data: serializers.GetAgentEmbedResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -113,7 +119,12 @@ export class Widget {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

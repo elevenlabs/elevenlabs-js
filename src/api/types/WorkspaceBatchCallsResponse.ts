@@ -5,9 +5,9 @@
 import * as ElevenLabs from "../index";
 
 export interface WorkspaceBatchCallsResponse {
-    batch_calls: ElevenLabs.BatchCallResponse[];
+    batchCalls: ElevenLabs.BatchCallResponse[];
     /** The next document, used to paginate through the batch calls */
-    next_doc?: string;
+    nextDoc?: string;
     /** Whether there are more batch calls to paginate through */
-    has_more?: boolean;
+    hasMore?: boolean;
 }

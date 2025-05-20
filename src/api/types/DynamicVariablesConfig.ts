@@ -6,5 +6,5 @@ import * as ElevenLabs from "../index";
 
 export interface DynamicVariablesConfig {
     /** A dictionary of dynamic variable placeholders and their values */
-    dynamic_variable_placeholders?: Record<string, ElevenLabs.DynamicVariablesConfigDynamicVariablePlaceholdersValue>;
+    dynamicVariablePlaceholders?: Record<string, ElevenLabs.DynamicVariablesConfigDynamicVariablePlaceholdersValue>;
 }

@@ -6,9 +6,9 @@ import * as ElevenLabs from "../index";
 
 export interface RagConfig {
     enabled?: boolean;
-    embedding_model?: ElevenLabs.EmbeddingModelEnum;
+    embeddingModel?: ElevenLabs.EmbeddingModelEnum;
     /** Maximum vector distance of retrieved chunks. */
-    max_vector_distance?: number;
+    maxVectorDistance?: number;
     /** Maximum total length of document chunks retrieved from RAG. */
-    max_documents_length?: number;
+    maxDocumentsLength?: number;
 }

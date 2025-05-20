@@ -7,9 +7,9 @@ import * as ElevenLabs from "../../../../../../index";
 /**
  * @example
  *     {
- *         simulation_specification: {
- *             simulated_user_config: {
- *                 first_message: "Hello, how can I help you today?",
+ *         simulationSpecification: {
+ *             simulatedUserConfig: {
+ *                 firstMessage: "Hello, how can I help you today?",
  *                 language: "en"
  *             }
  *         }
@@ -17,7 +17,7 @@ import * as ElevenLabs from "../../../../../../index";
  */
 export interface BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost {
     /** A specification detailing how the conversation should be simulated */
-    simulation_specification: ElevenLabs.ConversationSimulationSpecification;
+    simulationSpecification: ElevenLabs.ConversationSimulationSpecification;
     /** A list of evaluation criteria to test */
-    extra_evaluation_criteria?: ElevenLabs.PromptEvaluationCriteria[];
+    extraEvaluationCriteria?: ElevenLabs.PromptEvaluationCriteria[];
 }

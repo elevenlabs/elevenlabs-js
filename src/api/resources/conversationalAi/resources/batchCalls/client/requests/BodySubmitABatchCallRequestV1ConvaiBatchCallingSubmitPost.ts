@@ -7,18 +7,18 @@ import * as ElevenLabs from "../../../../../../index";
 /**
  * @example
  *     {
- *         call_name: "call_name",
- *         agent_id: "agent_id",
- *         agent_phone_number_id: "agent_phone_number_id",
+ *         callName: "call_name",
+ *         agentId: "agent_id",
+ *         agentPhoneNumberId: "agent_phone_number_id",
  *         recipients: [{
- *                 phone_number: "phone_number"
+ *                 phoneNumber: "phone_number"
  *             }]
  *     }
  */
 export interface BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
-    call_name: string;
-    agent_id: string;
-    agent_phone_number_id: string;
-    scheduled_time_unix?: number;
+    callName: string;
+    agentId: string;
+    agentPhoneNumberId: string;
+    scheduledTimeUnix?: number;
     recipients: ElevenLabs.OutboundCallRecipient[];
 }

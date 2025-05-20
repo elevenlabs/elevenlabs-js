@@ -5,6 +5,6 @@
 import * as ElevenLabs from "../index";
 
 export interface ChapterContentBlockInputModel {
-    block_id?: string;
+    blockId?: string;
     nodes: ElevenLabs.ChapterContentParagraphTtsNodeInputModel[];
 }

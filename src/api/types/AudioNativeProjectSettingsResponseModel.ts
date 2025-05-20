@@ -14,15 +14,15 @@ export interface AudioNativeProjectSettingsResponseModel {
     /** Whether the project is small. */
     small: boolean;
     /** The text color of the project. */
-    text_color: string;
+    textColor: string;
     /** The background color of the project. */
-    background_color: string;
+    backgroundColor: string;
     /** The sessionization of the project. Specifies for how many minutes to persist the session across page reloads. */
     sessionization: number;
     /** The path of the audio file. */
-    audio_path?: string;
+    audioPath?: string;
     /** The URL of the audio file. */
-    audio_url?: string;
+    audioUrl?: string;
     /** Current state of the project */
     status?: ElevenLabs.AudioNativeProjectSettingsResponseModelStatus;
 }

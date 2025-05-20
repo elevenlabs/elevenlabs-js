@@ -1,0 +1,1 @@
+export { BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost } from "./BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost";

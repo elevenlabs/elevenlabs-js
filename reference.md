@@ -364,9 +364,9 @@ Converts text into speech using a voice of your choice and returns audio.
 
 ```typescript
 await client.textToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
-    output_format: "mp3_44100_128",
+    outputFormat: "mp3_44100_128",
     text: "The first move is what sets everything in motion.",
-    model_id: "eleven_multilingual_v2",
+    modelId: "eleven_multilingual_v2",
 });
 ```
 
@@ -512,9 +512,9 @@ Converts text into speech using a voice of your choice and returns audio as an a
 
 ```typescript
 await client.textToSpeech.stream("JBFqnCBsd6RMkjVDRZzb", {
-    output_format: "mp3_44100_128",
+    outputFormat: "mp3_44100_128",
     text: "The first move is what sets everything in motion.",
-    model_id: "eleven_multilingual_v2",
+    modelId: "eleven_multilingual_v2",
 });
 ```
 
@@ -587,9 +587,9 @@ Converts text into speech using a voice of your choice and returns a stream of J
 
 ```typescript
 const response = await client.textToSpeech.streamWithTimestamps("JBFqnCBsd6RMkjVDRZzb", {
-    output_format: "mp3_44100_128",
+    outputFormat: "mp3_44100_128",
     text: "The first move is what sets everything in motion.",
-    model_id: "eleven_multilingual_v2",
+    modelId: "eleven_multilingual_v2",
 });
 for await (const item of response) {
     console.log(item);
@@ -668,8 +668,8 @@ Transform audio from one voice to another. Maintain full control over emotion, t
 ```typescript
 await client.speechToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
     audio: fs.createReadStream("/path/to/your/file"),
-    output_format: "mp3_44100_128",
-    model_id: "eleven_multilingual_sts_v2",
+    outputFormat: "mp3_44100_128",
+    modelId: "eleven_multilingual_sts_v2",
 });
 ```
 
@@ -743,8 +743,8 @@ Stream audio from one voice to another. Maintain full control over emotion, timi
 ```typescript
 await client.speechToSpeech.stream("JBFqnCBsd6RMkjVDRZzb", {
     audio: fs.createReadStream("/path/to/your/file"),
-    output_format: "mp3_44100_128",
-    model_id: "eleven_multilingual_sts_v2",
+    outputFormat: "mp3_44100_128",
+    modelId: "eleven_multilingual_sts_v2",
 });
 ```
 
@@ -819,7 +819,7 @@ Create a voice from a text prompt.
 
 ```typescript
 await client.textToVoice.createPreviews({
-    voice_description: "A sassy squeaky mouse",
+    voiceDescription: "A sassy squeaky mouse",
 });
 ```
 
@@ -884,9 +884,9 @@ Add a generated voice to the voice library.
 
 ```typescript
 await client.textToVoice.createVoiceFromPreview({
-    voice_name: "Sassy squeaky mouse",
-    voice_description: "A sassy squeaky mouse",
-    generated_voice_id: "37HceQefKmEi3bGovXjL",
+    voiceName: "Sassy squeaky mouse",
+    voiceDescription: "A sassy squeaky mouse",
+    generatedVoiceId: "37HceQefKmEi3bGovXjL",
 });
 ```
 
@@ -1073,7 +1073,7 @@ Gets a list of all available voices for a user with search, filtering and pagina
 
 ```typescript
 await client.voices.search({
-    include_total_count: true,
+    includeTotalCount: true,
 });
 ```
 
@@ -1345,7 +1345,7 @@ Add a shared voice to your collection of Voices
 
 ```typescript
 await client.voices.share("63e06b7e7cafdc46be4d2e0b3f045940231ae058d508589653d74d1265a574ca", "21m00Tcm4TlvDq8ikWAM", {
-    new_name: "John Smith",
+    newName: "John Smith",
 });
 ```
 
@@ -1427,7 +1427,7 @@ Retrieves a list of shared voices.
 ```typescript
 await client.voices.getShared({
     featured: true,
-    reader_app_enabled: true,
+    readerAppEnabled: true,
 });
 ```
 
@@ -1557,12 +1557,12 @@ Create and auto-convert a podcast project. Currently, the LLM cost is covered by
 
 ```typescript
 await client.studio.createPodcast({
-    model_id: "21m00Tcm4TlvDq8ikWAM",
+    modelId: "21m00Tcm4TlvDq8ikWAM",
     mode: {
         type: "conversation",
         conversation: {
-            host_voice_id: "aw1NgEzBg83R7vgmiJt6",
-            guest_voice_id: "aw1NgEzBg83R7vgmiJt7",
+            hostVoiceId: "aw1NgEzBg83R7vgmiJt6",
+            guestVoiceId: "aw1NgEzBg83R7vgmiJt7",
         },
     },
     source: {
@@ -2083,8 +2083,8 @@ Returns the usage metrics for the current user or the entire workspace they are 
 
 ```typescript
 await client.usage.get({
-    start_unix: 1,
-    end_unix: 1,
+    startUnix: 1,
+    endUnix: 1,
 });
 ```
 
@@ -2219,7 +2219,7 @@ await client.pronunciationDictionaries.createFromRules({
     rules: [
         {
             type: "alias",
-            string_to_replace: "Thailand",
+            stringToReplace: "Thailand",
             alias: "tie-land",
         },
     ],
@@ -2416,7 +2416,7 @@ Transcribe an audio or video file.
 
 ```typescript
 await client.speechToText.convert({
-    model_id: "model_id",
+    modelId: "model_id",
 });
 ```
 
@@ -2690,7 +2690,7 @@ Get a signed url to start a conversation with an agent with an agent that requir
 
 ```typescript
 await client.conversationalAi.conversations.getSignedUrl({
-    agent_id: "21m00Tcm4TlvDq8ikWAM",
+    agentId: "21m00Tcm4TlvDq8ikWAM",
 });
 ```
 
@@ -2946,9 +2946,9 @@ Handle an outbound call via Twilio
 
 ```typescript
 await client.conversationalAi.twilio.outboundCall({
-    agent_id: "agent_id",
-    agent_phone_number_id: "agent_phone_number_id",
-    to_number: "to_number",
+    agentId: "agent_id",
+    agentPhoneNumberId: "agent_phone_number_id",
+    toNumber: "to_number",
 });
 ```
 
@@ -3015,7 +3015,7 @@ Create an agent from a config object
 
 ```typescript
 await client.conversationalAi.agents.create({
-    conversation_config: {},
+    conversationConfig: {},
 });
 ```
 
@@ -3340,9 +3340,9 @@ Run a conversation between the agent and a simulated user.
 
 ```typescript
 await client.conversationalAi.agents.simulateConversation("21m00Tcm4TlvDq8ikWAM", {
-    simulation_specification: {
-        simulated_user_config: {
-            first_message: "Hello, how can I help you today?",
+    simulationSpecification: {
+        simulatedUserConfig: {
+            firstMessage: "Hello, how can I help you today?",
             language: "en",
         },
     },
@@ -3418,9 +3418,9 @@ Run a conversation between the agent and a simulated user and stream back the re
 
 ```typescript
 await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8ikWAM", {
-    simulation_specification: {
-        simulated_user_config: {
-            first_message: "Hello, how can I help you today?",
+    simulationSpecification: {
+        simulatedUserConfig: {
+            firstMessage: "Hello, how can I help you today?",
             language: "en",
         },
     },
@@ -3499,7 +3499,7 @@ Import Phone Number from provider configuration (Twilio or SIP trunk)
 ```typescript
 await client.conversationalAi.phoneNumbers.create({
     provider: "twilio",
-    phone_number: "phone_number",
+    phoneNumber: "phone_number",
     label: "label",
     sid: "sid",
     token: "token",
@@ -4192,12 +4192,12 @@ Submit a batch call request to schedule calls for multiple recipients.
 
 ```typescript
 await client.conversationalAi.batchCalls.create({
-    call_name: "call_name",
-    agent_id: "agent_id",
-    agent_phone_number_id: "agent_phone_number_id",
+    callName: "call_name",
+    agentId: "agent_id",
+    agentPhoneNumberId: "agent_phone_number_id",
     recipients: [
         {
-            phone_number: "phone_number",
+            phoneNumber: "phone_number",
         },
     ],
 });
@@ -4392,9 +4392,9 @@ Handle an outbound call via SIP trunk
 
 ```typescript
 await client.conversationalAi.sipTrunk.outboundCall({
-    agent_id: "agent_id",
-    agent_phone_number_id: "agent_phone_number_id",
-    to_number: "to_number",
+    agentId: "agent_id",
+    agentPhoneNumberId: "agent_phone_number_id",
+    toNumber: "to_number",
 });
 ```
 
@@ -4599,7 +4599,7 @@ Sets the avatar for an agent displayed in the widget
 
 ```typescript
 await client.conversationalAi.agents.widget.avatar.create("21m00Tcm4TlvDq8ikWAM", {
-    avatar_file: fs.createReadStream("/path/to/your/file"),
+    avatarFile: fs.createReadStream("/path/to/your/file"),
 });
 ```
 
@@ -5831,7 +5831,7 @@ Regenerate the output media for a language using the latest Studio state. Please
 
 ```typescript
 await client.dubbing.resource.render("dubbing_id", "language", {
-    render_type: "mp4",
+    renderType: "mp4",
 });
 ```
 
@@ -6382,8 +6382,8 @@ Creates a new segment in dubbing resource with a start and end time for the spea
 
 ```typescript
 await client.dubbing.resource.speaker.segment.create("dubbing_id", "speaker_id", {
-    start_time: 1.1,
-    end_time: 1.1,
+    startTime: 1.1,
+    endTime: 1.1,
 });
 ```
 
@@ -6469,7 +6469,7 @@ await client.pronunciationDictionaries.rules.add("21m00Tcm4TlvDq8ikWAM", {
     rules: [
         {
             type: "alias",
-            string_to_replace: "Thailand",
+            stringToReplace: "Thailand",
             alias: "tie-land",
         },
     ],
@@ -6545,7 +6545,7 @@ Remove rules from the pronunciation dictionary
 
 ```typescript
 await client.pronunciationDictionaries.rules.remove("21m00Tcm4TlvDq8ikWAM", {
-    rule_strings: ["rule_strings"],
+    ruleStrings: ["rule_strings"],
 });
 ```
 
@@ -6676,9 +6676,9 @@ Creates a new Studio project, it can be either initialized as blank, from a docu
 ```typescript
 await client.studio.projects.create({
     name: "name",
-    default_title_voice_id: "default_title_voice_id",
-    default_paragraph_voice_id: "default_paragraph_voice_id",
-    default_model_id: "default_model_id",
+    defaultTitleVoiceId: "default_title_voice_id",
+    defaultParagraphVoiceId: "default_paragraph_voice_id",
+    defaultModelId: "default_model_id",
 });
 ```
 
@@ -6807,8 +6807,8 @@ Updates the specified Studio project by setting the values of the parameters pas
 ```typescript
 await client.studio.projects.update("21m00Tcm4TlvDq8ikWAM", {
     name: "Project 1",
-    default_title_voice_id: "21m00Tcm4TlvDq8ikWAM",
-    default_paragraph_voice_id: "21m00Tcm4TlvDq8ikWAM",
+    defaultTitleVoiceId: "21m00Tcm4TlvDq8ikWAM",
+    defaultParagraphVoiceId: "21m00Tcm4TlvDq8ikWAM",
 });
 ```
 
@@ -7648,9 +7648,9 @@ Create a set of pronunciation dictionaries acting on a project. This will automa
 
 ```typescript
 await client.studio.projects.pronunciationDictionaries.create("21m00Tcm4TlvDq8ikWAM", {
-    pronunciation_dictionary_locators: [
+    pronunciationDictionaryLocators: [
         {
-            pronunciation_dictionary_id: "pronunciation_dictionary_id",
+            pronunciationDictionaryId: "pronunciation_dictionary_id",
         },
     ],
 });
@@ -8059,9 +8059,9 @@ Edit your settings for a specific voice. "similarity_boost" corresponds to "Clar
 ```typescript
 await client.voices.settings.update("21m00Tcm4TlvDq8ikWAM", {
     stability: 1,
-    similarity_boost: 1,
+    similarityBoost: 1,
     style: 0,
-    use_speaker_boost: true,
+    useSpeakerBoost: true,
     speed: 1,
 });
 ```
@@ -9626,7 +9626,7 @@ Gets the metadata of a resource by ID.
 
 ```typescript
 await client.workspace.resources.get("resource_id", {
-    resource_type: "voice",
+    resourceType: "voice",
 });
 ```
 
@@ -9700,7 +9700,7 @@ Grants a role on a workspace resource to a user or a group. It overrides any exi
 ```typescript
 await client.workspace.resources.share("resource_id", {
     role: "admin",
-    resource_type: "voice",
+    resourceType: "voice",
 });
 ```
 
@@ -9773,7 +9773,7 @@ Removes any existing role on a workspace resource from a user, service account, 
 
 ```typescript
 await client.workspace.resources.unshare("resource_id", {
-    resource_type: "voice",
+    resourceType: "voice",
 });
 ```
 

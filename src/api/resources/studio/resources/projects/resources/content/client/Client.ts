@@ -6,6 +6,7 @@ import * as environments from "../../../../../../../../environments";
 import * as core from "../../../../../../../../core";
 import * as ElevenLabs from "../../../../../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../../../../../serialization/index";
 import * as errors from "../../../../../../../../errors/index";
 
 export declare namespace Content {
@@ -60,16 +61,16 @@ export class Content {
         requestOptions?: Content.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.EditProjectResponseModel>> {
         const _request = await core.newFormData();
-        if (request.from_url != null) {
-            _request.append("from_url", request.from_url);
+        if (request.fromUrl != null) {
+            _request.append("from_url", request.fromUrl);
         }
 
-        if (request.from_document != null) {
-            await _request.appendFile("from_document", request.from_document);
+        if (request.fromDocument != null) {
+            await _request.appendFile("from_document", request.fromDocument);
         }
 
-        if (request.auto_convert != null) {
-            _request.append("auto_convert", request.auto_convert.toString());
+        if (request.autoConvert != null) {
+            _request.append("auto_convert", request.autoConvert.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -90,8 +91,8 @@ export class Content {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -105,14 +106,27 @@ export class Content {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.EditProjectResponseModel, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.EditProjectResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

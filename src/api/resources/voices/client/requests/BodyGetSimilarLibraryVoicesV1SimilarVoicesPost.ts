@@ -9,9 +9,9 @@ import * as fs from "fs";
  *     {}
  */
 export interface BodyGetSimilarLibraryVoicesV1SimilarVoicesPost {
-    audio_file?: File | fs.ReadStream | Blob | undefined;
+    audioFile?: File | fs.ReadStream | Blob | undefined;
     /** Threshold for voice similarity between provided sample and library voices. Values range from 0 to 2. The smaller the value the more similar voices will be returned. */
-    similarity_threshold?: number;
+    similarityThreshold?: number;
     /** Number of most similar voices to return. If similarity_threshold is provided, less than this number of voices may be returned. Values range from 1 to 100. */
-    top_k?: number;
+    topK?: number;
 }

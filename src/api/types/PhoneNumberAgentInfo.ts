@@ -4,7 +4,7 @@
 
 export interface PhoneNumberAgentInfo {
     /** The ID of the agent */
-    agent_id: string;
+    agentId: string;
     /** The name of the agent */
-    agent_name: string;
+    agentName: string;
 }

@@ -7,6 +7,7 @@ import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import * as fs from "fs";
 import urlJoin from "url-join";
+import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace ForcedAlignment {
@@ -63,8 +64,8 @@ export class ForcedAlignment {
         const _request = await core.newFormData();
         await _request.appendFile("file", request.file);
         _request.append("text", request.text);
-        if (request.enabled_spooled_file != null) {
-            _request.append("enabled_spooled_file", request.enabled_spooled_file.toString());
+        if (request.enabledSpooledFile != null) {
+            _request.append("enabled_spooled_file", request.enabledSpooledFile.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -85,8 +86,8 @@ export class ForcedAlignment {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -101,7 +102,12 @@ export class ForcedAlignment {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.ForcedAlignmentResponseModel,
+                data: serializers.ForcedAlignmentResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -110,7 +116,12 @@ export class ForcedAlignment {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

@@ -5,6 +5,6 @@
 import * as ElevenLabs from "../index";
 
 export interface AgentSimulatedChatTestResponseModel {
-    simulated_conversation: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
+    simulatedConversation: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
     analysis: ElevenLabs.ConversationHistoryAnalysisCommonModel;
 }

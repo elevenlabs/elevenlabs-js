@@ -6,19 +6,19 @@ import * as ElevenLabs from "../index";
 
 export interface ChapterResponse {
     /** The ID of the chapter. */
-    chapter_id: string;
+    chapterId: string;
     /** The name of the chapter. */
     name: string;
     /** The last conversion date of the chapter. */
-    last_conversion_date_unix?: number;
+    lastConversionDateUnix?: number;
     /** The conversion progress of the chapter. */
-    conversion_progress?: number;
+    conversionProgress?: number;
     /** Whether the chapter can be downloaded. */
-    can_be_downloaded: boolean;
+    canBeDownloaded: boolean;
     /** The state of the chapter. */
     state: ElevenLabs.ChapterState;
     /** The statistics of the chapter. */
     statistics?: ElevenLabs.ChapterStatisticsResponse;
     /** The last conversion error of the chapter. */
-    last_conversion_error?: string;
+    lastConversionError?: string;
 }

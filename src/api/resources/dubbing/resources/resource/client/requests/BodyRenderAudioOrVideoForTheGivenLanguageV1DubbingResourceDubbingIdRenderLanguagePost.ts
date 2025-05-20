@@ -7,10 +7,10 @@ import * as ElevenLabs from "../../../../../../index";
 /**
  * @example
  *     {
- *         render_type: "mp4"
+ *         renderType: "mp4"
  *     }
  */
 export interface BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost {
     /** The type of the render. One of ['mp4', 'aac', 'mp3', 'wav', 'aaf', 'tracks_zip', 'clips_zip'] */
-    render_type: ElevenLabs.RenderType;
+    renderType: ElevenLabs.RenderType;
 }

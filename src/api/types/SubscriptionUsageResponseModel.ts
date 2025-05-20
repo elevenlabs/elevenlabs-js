@@ -4,19 +4,19 @@
 
 export interface SubscriptionUsageResponseModel {
     /** The rollover credits quota. */
-    rollover_credits_quota: number;
+    rolloverCreditsQuota: number;
     /** The subscription cycle credits quota. */
-    subscription_cycle_credits_quota: number;
+    subscriptionCycleCreditsQuota: number;
     /** The manually gifted credits quota. */
-    manually_gifted_credits_quota: number;
+    manuallyGiftedCreditsQuota: number;
     /** The rollover credits used. */
-    rollover_credits_used: number;
+    rolloverCreditsUsed: number;
     /** The subscription cycle credits used. */
-    subscription_cycle_credits_used: number;
+    subscriptionCycleCreditsUsed: number;
     /** The manually gifted credits used. */
-    manually_gifted_credits_used: number;
+    manuallyGiftedCreditsUsed: number;
     /** The paid usage based credits used. */
-    paid_usage_based_credits_used: number;
+    paidUsageBasedCreditsUsed: number;
     /** The actual reported credits. */
-    actual_reported_credits: number;
+    actualReportedCredits: number;
 }

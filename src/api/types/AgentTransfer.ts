@@ -3,6 +3,6 @@
  */
 
 export interface AgentTransfer {
-    agent_id: string;
+    agentId: string;
     condition: string;
 }

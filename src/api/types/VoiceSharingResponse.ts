@@ -8,45 +8,45 @@ export interface VoiceSharingResponse {
     /** The status of the voice sharing. */
     status?: ElevenLabs.VoiceSharingState;
     /** The sample ID of the history item. */
-    history_item_sample_id?: string;
+    historyItemSampleId?: string;
     /** The date of the voice sharing in Unix time. */
-    date_unix?: number;
+    dateUnix?: number;
     /** A list of whitelisted emails. */
-    whitelisted_emails?: string[];
+    whitelistedEmails?: string[];
     /** The ID of the public owner. */
-    public_owner_id?: string;
+    publicOwnerId?: string;
     /** The ID of the original voice. */
-    original_voice_id?: string;
+    originalVoiceId?: string;
     /** Whether financial rewards are enabled. */
-    financial_rewards_enabled?: boolean;
+    financialRewardsEnabled?: boolean;
     /** Whether free users are allowed. */
-    free_users_allowed?: boolean;
+    freeUsersAllowed?: boolean;
     /** Whether live moderation is enabled. */
-    live_moderation_enabled?: boolean;
+    liveModerationEnabled?: boolean;
     /** The rate of the voice sharing. */
     rate?: number;
     /** The rate of the voice sharing in USD per 1000 credits. */
-    fiat_rate?: number;
+    fiatRate?: number;
     /** The notice period of the voice sharing. */
-    notice_period?: number;
+    noticePeriod?: number;
     /** The date of the voice sharing in Unix time. */
-    disable_at_unix?: number;
+    disableAtUnix?: number;
     /** Whether voice mixing is allowed. */
-    voice_mixing_allowed?: boolean;
+    voiceMixingAllowed?: boolean;
     /** Whether the voice is featured. */
     featured?: boolean;
     /** The category of the voice. */
     category?: ElevenLabs.VoiceSharingResponseModelCategory;
     /** Whether the reader app is enabled. */
-    reader_app_enabled?: boolean;
+    readerAppEnabled?: boolean;
     /** The image URL of the voice. */
-    image_url?: string;
+    imageUrl?: string;
     /** The ban reason of the voice. */
-    ban_reason?: string;
+    banReason?: string;
     /** The number of likes on the voice. */
-    liked_by_count?: number;
+    likedByCount?: number;
     /** The number of clones on the voice. */
-    cloned_by_count?: number;
+    clonedByCount?: number;
     /** The name of the voice. */
     name?: string;
     /** The description of the voice. */
@@ -54,21 +54,21 @@ export interface VoiceSharingResponse {
     /** The labels of the voice. */
     labels?: Record<string, string>;
     /** The review status of the voice. */
-    review_status?: ElevenLabs.ReviewStatus;
+    reviewStatus?: ElevenLabs.ReviewStatus;
     /** The review message of the voice. */
-    review_message?: string;
+    reviewMessage?: string;
     /** Whether the voice is enabled in the library. */
-    enabled_in_library?: boolean;
+    enabledInLibrary?: boolean;
     /** The Instagram username of the voice. */
-    instagram_username?: string;
+    instagramUsername?: string;
     /** The Twitter/X username of the voice. */
-    twitter_username?: string;
+    twitterUsername?: string;
     /** The YouTube username of the voice. */
-    youtube_username?: string;
+    youtubeUsername?: string;
     /** The TikTok username of the voice. */
-    tiktok_username?: string;
+    tiktokUsername?: string;
     /** The moderation check of the voice. */
-    moderation_check?: ElevenLabs.VoiceSharingModerationCheckResponseModel;
+    moderationCheck?: ElevenLabs.VoiceSharingModerationCheckResponseModel;
     /** The reader restricted on of the voice. */
-    reader_restricted_on?: ElevenLabs.ReaderResourceResponseModel[];
+    readerRestrictedOn?: ElevenLabs.ReaderResourceResponseModel[];
 }

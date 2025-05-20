@@ -3,5 +3,5 @@
  */
 
 export interface ConversationConfigOverride {
-    text_only?: boolean;
+    textOnly?: boolean;
 }

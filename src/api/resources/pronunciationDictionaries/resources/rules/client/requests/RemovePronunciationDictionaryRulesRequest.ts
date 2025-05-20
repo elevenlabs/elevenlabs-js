@@ -5,10 +5,10 @@
 /**
  * @example
  *     {
- *         rule_strings: ["rule_strings"]
+ *         ruleStrings: ["rule_strings"]
  *     }
  */
 export interface RemovePronunciationDictionaryRulesRequest {
     /** List of strings to remove from the pronunciation dictionary. */
-    rule_strings: string[];
+    ruleStrings: string[];
 }

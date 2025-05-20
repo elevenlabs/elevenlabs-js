@@ -8,7 +8,7 @@ export interface GetKnowledgeBaseSummaryFileResponseModel {
     id: string;
     name: string;
     metadata: ElevenLabs.KnowledgeBaseDocumentMetadataResponseModel;
-    prompt_injectable: boolean;
-    access_info: ElevenLabs.ResourceAccessInfo;
-    dependent_agents: ElevenLabs.GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem[];
+    promptInjectable: boolean;
+    accessInfo: ElevenLabs.ResourceAccessInfo;
+    dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem[];
 }

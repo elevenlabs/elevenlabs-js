@@ -6,9 +6,9 @@ import * as ElevenLabs from "../index";
 
 export interface ConversationInitiationClientDataConfigOutput {
     /** Overrides for the conversation configuration */
-    conversation_config_override?: ElevenLabs.ConversationConfigClientOverrideConfigOutput;
+    conversationConfigOverride?: ElevenLabs.ConversationConfigClientOverrideConfigOutput;
     /** Whether to include custom LLM extra body */
-    custom_llm_extra_body?: boolean;
+    customLlmExtraBody?: boolean;
     /** Whether to enable conversation initiation client data from webhooks */
-    enable_conversation_initiation_client_data_from_webhook?: boolean;
+    enableConversationInitiationClientDataFromWebhook?: boolean;
 }

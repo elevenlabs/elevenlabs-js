@@ -6,5 +6,5 @@
  * Used to reference a dynamic variable.
  */
 export interface ConvAiDynamicVariable {
-    variable_name: string;
+    variableName: string;
 }

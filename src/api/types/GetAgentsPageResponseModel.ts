@@ -8,7 +8,7 @@ export interface GetAgentsPageResponseModel {
     /** A list of agents and their metadata */
     agents: ElevenLabs.AgentSummaryResponseModel[];
     /** The next cursor to paginate through the agents */
-    next_cursor?: string;
+    nextCursor?: string;
     /** Whether there are more agents to paginate through */
-    has_more: boolean;
+    hasMore: boolean;
 }

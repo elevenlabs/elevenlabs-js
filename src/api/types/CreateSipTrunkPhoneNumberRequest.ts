@@ -13,17 +13,17 @@ import * as ElevenLabs from "../index";
  */
 export interface CreateSipTrunkPhoneNumberRequest {
     /** Phone number */
-    phone_number: string;
+    phoneNumber: string;
     /** Label for the phone number */
     label: string;
     /** SIP trunk termination URI */
-    termination_uri: string;
+    terminationUri: string;
     /** Hostname or IP the SIP INVITE is sent to. */
     address?: string;
     /** Protocol to use for SIP transport (signalling layer). */
     transport?: ElevenLabs.SipTrunkTransportEnum;
     /** Whether or not to encrypt media (data layer). */
-    media_encryption?: ElevenLabs.SipMediaEncryptionEnum;
+    mediaEncryption?: ElevenLabs.SipMediaEncryptionEnum;
     /** SIP X-* headers for INVITE request. These headers are sent as-is and may help identify this call. */
     headers?: Record<string, string>;
     /** Optional digest authentication credentials (username/password). If not provided, ACL authentication is assumed. */

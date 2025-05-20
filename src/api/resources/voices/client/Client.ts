@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 import { Settings } from "../resources/settings/client/Client";
 import { Ivc } from "../resources/ivc/client/Client";
@@ -84,7 +85,7 @@ export class Voices {
         request: ElevenLabs.VoicesGetAllRequest = {},
         requestOptions?: Voices.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetVoicesResponse>> {
-        const { show_legacy: showLegacy } = request;
+        const { showLegacy } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (showLegacy != null) {
             _queryParams["show_legacy"] = showLegacy.toString();
@@ -107,8 +108,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -121,14 +122,27 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.GetVoicesResponse, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.GetVoicesResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -167,7 +181,7 @@ export class Voices {
      *
      * @example
      *     await client.voices.search({
-     *         include_total_count: true
+     *         includeTotalCount: true
      *     })
      */
     public search(
@@ -182,16 +196,16 @@ export class Voices {
         requestOptions?: Voices.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetVoicesV2Response>> {
         const {
-            next_page_token: nextPageToken,
-            page_size: pageSize,
+            nextPageToken,
+            pageSize,
             search,
             sort,
-            sort_direction: sortDirection,
-            voice_type: voiceType,
+            sortDirection,
+            voiceType,
             category,
-            fine_tuning_state: fineTuningState,
-            collection_id: collectionId,
-            include_total_count: includeTotalCount,
+            fineTuningState,
+            collectionId,
+            includeTotalCount,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (nextPageToken != null) {
@@ -251,8 +265,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -265,14 +279,27 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.GetVoicesV2Response, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.GetVoicesV2Response.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -326,7 +353,7 @@ export class Voices {
         request: ElevenLabs.VoicesGetRequest = {},
         requestOptions?: Voices.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.Voice>> {
-        const { with_settings: withSettings } = request;
+        const { withSettings } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (withSettings != null) {
             _queryParams["with_settings"] = withSettings.toString();
@@ -349,8 +376,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -363,14 +390,27 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.Voice, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.Voice.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -438,8 +478,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -451,14 +491,27 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.DeleteVoiceResponseModel, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.DeleteVoiceResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -522,8 +575,8 @@ export class Voices {
             }
         }
 
-        if (request.remove_background_noise != null) {
-            _request.append("remove_background_noise", request.remove_background_noise.toString());
+        if (request.removeBackgroundNoise != null) {
+            _request.append("remove_background_noise", request.removeBackgroundNoise.toString());
         }
 
         if (request.description != null) {
@@ -552,8 +605,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -567,14 +620,27 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.EditVoiceResponseModel, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.EditVoiceResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -617,7 +683,7 @@ export class Voices {
      *
      * @example
      *     await client.voices.share("63e06b7e7cafdc46be4d2e0b3f045940231ae058d508589653d74d1265a574ca", "21m00Tcm4TlvDq8ikWAM", {
-     *         new_name: "John Smith"
+     *         newName: "John Smith"
      *     })
      */
     public share(
@@ -652,28 +718,43 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
-            body: request,
+            body: serializers.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.AddVoiceResponseModel, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.AddVoiceResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -715,7 +796,7 @@ export class Voices {
      * @example
      *     await client.voices.getShared({
      *         featured: true,
-     *         reader_app_enabled: true
+     *         readerAppEnabled: true
      *     })
      */
     public getShared(
@@ -730,7 +811,7 @@ export class Voices {
         requestOptions?: Voices.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetLibraryVoicesResponse>> {
         const {
-            page_size: pageSize,
+            pageSize,
             category,
             gender,
             age,
@@ -738,13 +819,13 @@ export class Voices {
             language,
             locale,
             search,
-            use_cases: useCases,
+            useCases,
             descriptives,
             featured,
-            min_notice_period_days: minNoticePeriodDays,
-            include_custom_rates: includeCustomRates,
-            reader_app_enabled: readerAppEnabled,
-            owner_id: ownerId,
+            minNoticePeriodDays,
+            includeCustomRates,
+            readerAppEnabled,
+            ownerId,
             sort,
             page,
         } = request;
@@ -754,7 +835,9 @@ export class Voices {
         }
 
         if (category != null) {
-            _queryParams["category"] = category;
+            _queryParams["category"] = serializers.VoicesGetSharedRequestCategory.jsonOrThrow(category, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         if (gender != null) {
@@ -842,8 +925,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -856,14 +939,27 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.GetLibraryVoicesResponse, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.GetLibraryVoicesResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -915,16 +1011,16 @@ export class Voices {
         requestOptions?: Voices.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetLibraryVoicesResponse>> {
         const _request = await core.newFormData();
-        if (request.audio_file != null) {
-            await _request.appendFile("audio_file", request.audio_file);
+        if (request.audioFile != null) {
+            await _request.appendFile("audio_file", request.audioFile);
         }
 
-        if (request.similarity_threshold != null) {
-            _request.append("similarity_threshold", request.similarity_threshold.toString());
+        if (request.similarityThreshold != null) {
+            _request.append("similarity_threshold", request.similarityThreshold.toString());
         }
 
-        if (request.top_k != null) {
-            _request.append("top_k", request.top_k.toString());
+        if (request.topK != null) {
+            _request.append("top_k", request.topK.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -945,8 +1041,8 @@ export class Voices {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -960,14 +1056,27 @@ export class Voices {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.GetLibraryVoicesResponse, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.GetLibraryVoicesResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

@@ -10,5 +10,5 @@ export interface VoicesGetRequest {
     /**
      * This parameter is now deprecated. It is ignored and will be removed in a future version.
      */
-    with_settings?: boolean;
+    withSettings?: boolean;
 }

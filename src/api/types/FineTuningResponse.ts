@@ -6,15 +6,15 @@ import * as ElevenLabs from "../index";
 
 export interface FineTuningResponse {
     /** Whether the user is allowed to fine-tune the voice. */
-    is_allowed_to_fine_tune?: boolean;
+    isAllowedToFineTune?: boolean;
     /** The state of the fine-tuning process for each model. */
     state?: Record<string, ElevenLabs.FineTuningResponseModelStateValue>;
     /** List of verification failures in the fine-tuning process. */
-    verification_failures?: string[];
+    verificationFailures?: string[];
     /** The number of verification attempts in the fine-tuning process. */
-    verification_attempts_count?: number;
+    verificationAttemptsCount?: number;
     /** Whether a manual verification was requested for the fine-tuning process. */
-    manual_verification_requested?: boolean;
+    manualVerificationRequested?: boolean;
     /** The language of the fine-tuning process. */
     language?: string;
     /** The progress of the fine-tuning process. */
@@ -22,16 +22,16 @@ export interface FineTuningResponse {
     /** The message of the fine-tuning process. */
     message?: Record<string, string | undefined>;
     /** The duration of the dataset in seconds. */
-    dataset_duration_seconds?: number;
+    datasetDurationSeconds?: number;
     /** The number of verification attempts. */
-    verification_attempts?: ElevenLabs.VerificationAttemptResponse[];
+    verificationAttempts?: ElevenLabs.VerificationAttemptResponse[];
     /** List of slice IDs. */
-    slice_ids?: string[];
+    sliceIds?: string[];
     /** The manual verification of the fine-tuning process. */
-    manual_verification?: ElevenLabs.ManualVerificationResponse;
+    manualVerification?: ElevenLabs.ManualVerificationResponse;
     /** The maximum number of verification attempts. */
-    max_verification_attempts?: number;
+    maxVerificationAttempts?: number;
     /** The next maximum verification attempts reset time in Unix milliseconds. */
-    next_max_verification_attempts_reset_unix_ms?: number;
-    finetuning_state?: unknown;
+    nextMaxVerificationAttemptsResetUnixMs?: number;
+    finetuningState?: unknown;
 }

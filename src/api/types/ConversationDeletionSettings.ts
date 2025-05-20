@@ -3,10 +3,10 @@
  */
 
 export interface ConversationDeletionSettings {
-    deletion_time_unix_secs?: number;
-    deleted_logs_at_time_unix_secs?: number;
-    deleted_audio_at_time_unix_secs?: number;
-    deleted_transcript_at_time_unix_secs?: number;
-    delete_transcript_and_pii?: boolean;
-    delete_audio?: boolean;
+    deletionTimeUnixSecs?: number;
+    deletedLogsAtTimeUnixSecs?: number;
+    deletedAudioAtTimeUnixSecs?: number;
+    deletedTranscriptAtTimeUnixSecs?: number;
+    deleteTranscriptAndPii?: boolean;
+    deleteAudio?: boolean;
 }

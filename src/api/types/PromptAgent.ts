@@ -12,19 +12,19 @@ export interface PromptAgent {
     /** The temperature for the LLM */
     temperature?: number;
     /** If greater than 0, maximum number of tokens the LLM can predict */
-    max_tokens?: number;
+    maxTokens?: number;
     /** A list of tools that the agent can use over the course of the conversation */
     tools?: ElevenLabs.PromptAgentOutputToolsItem[];
     /** A list of IDs of tools used by the agent */
-    tool_ids?: string[];
+    toolIds?: string[];
     /** A list of MCP server ids to be used by the agent */
-    mcp_server_ids?: string[];
+    mcpServerIds?: string[];
     /** A list of knowledge bases to be used by the agent */
-    knowledge_base?: ElevenLabs.KnowledgeBaseLocator[];
+    knowledgeBase?: ElevenLabs.KnowledgeBaseLocator[];
     /** Definition for a custom LLM if LLM field is set to 'CUSTOM_LLM' */
-    custom_llm?: ElevenLabs.CustomLlm;
+    customLlm?: ElevenLabs.CustomLlm;
     /** Whether to ignore the default personality */
-    ignore_default_personality?: boolean;
+    ignoreDefaultPersonality?: boolean;
     /** Configuration for RAG */
     rag?: ElevenLabs.RagConfig;
 }

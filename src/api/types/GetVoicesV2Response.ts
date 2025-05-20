@@ -6,7 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface GetVoicesV2Response {
     voices: ElevenLabs.Voice[];
-    has_more: boolean;
-    total_count: number;
-    next_page_token?: string;
+    hasMore: boolean;
+    totalCount: number;
+    nextPageToken?: string;
 }

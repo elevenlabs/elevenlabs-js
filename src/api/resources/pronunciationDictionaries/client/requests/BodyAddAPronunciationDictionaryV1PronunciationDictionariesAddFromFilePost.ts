@@ -18,5 +18,5 @@ export interface BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFr
     /** A description of the pronunciation dictionary, used for identification only. */
     description?: string;
     /** Should be one of 'admin', 'editor' or 'viewer'. If not provided, defaults to no access. */
-    workspace_access?: ElevenLabs.PronunciationDictionariesCreateFromFileRequestWorkspaceAccess;
+    workspaceAccess?: ElevenLabs.PronunciationDictionariesCreateFromFileRequestWorkspaceAccess;
 }

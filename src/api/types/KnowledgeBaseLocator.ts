@@ -12,5 +12,5 @@ export interface KnowledgeBaseLocator {
     /** The ID of the knowledge base */
     id: string;
     /** The usage mode of the knowledge base */
-    usage_mode?: ElevenLabs.DocumentUsageModeEnum;
+    usageMode?: ElevenLabs.DocumentUsageModeEnum;
 }

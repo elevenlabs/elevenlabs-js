@@ -7,6 +7,6 @@ import * as ElevenLabs from "../index";
 export interface DependentAvailableAgentIdentifier {
     id: string;
     name: string;
-    created_at_unix_secs: number;
-    access_level: ElevenLabs.DependentAvailableAgentIdentifierAccessLevel;
+    createdAtUnixSecs: number;
+    accessLevel: ElevenLabs.DependentAvailableAgentIdentifierAccessLevel;
 }

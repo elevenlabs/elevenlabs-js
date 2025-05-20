@@ -5,6 +5,6 @@
 import * as ElevenLabs from "../index";
 
 export interface ChapterContentBlockResponseModel {
-    block_id: string;
+    blockId: string;
     nodes: ElevenLabs.ChapterContentBlockResponseModelNodesItem[];
 }

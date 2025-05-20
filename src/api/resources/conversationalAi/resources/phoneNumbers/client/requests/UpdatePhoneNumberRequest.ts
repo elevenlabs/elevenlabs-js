@@ -7,5 +7,5 @@
  *     {}
  */
 export interface UpdatePhoneNumberRequest {
-    agent_id?: string;
+    agentId?: string;
 }

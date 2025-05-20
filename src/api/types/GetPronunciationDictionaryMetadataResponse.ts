@@ -8,19 +8,19 @@ export interface GetPronunciationDictionaryMetadataResponse {
     /** The ID of the pronunciation dictionary. */
     id: string;
     /** The ID of the latest version of the pronunciation dictionary. */
-    latest_version_id: string;
+    latestVersionId: string;
     /** The number of rules in the latest version of the pronunciation dictionary. */
-    latest_version_rules_num: number;
+    latestVersionRulesNum: number;
     /** The name of the pronunciation dictionary. */
     name: string;
     /** The permission on the resource of the pronunciation dictionary. */
-    permission_on_resource?: ElevenLabs.GetPronunciationDictionaryMetadataResponseModelPermissionOnResource;
+    permissionOnResource?: ElevenLabs.GetPronunciationDictionaryMetadataResponseModelPermissionOnResource;
     /** The user ID of the creator of the pronunciation dictionary. */
-    created_by: string;
+    createdBy: string;
     /** The creation time of the pronunciation dictionary in Unix timestamp. */
-    creation_time_unix: number;
+    creationTimeUnix: number;
     /** The archive time of the pronunciation dictionary in Unix timestamp. */
-    archived_time_unix?: number;
+    archivedTimeUnix?: number;
     /** The description of the pronunciation dictionary. */
     description?: string;
 }

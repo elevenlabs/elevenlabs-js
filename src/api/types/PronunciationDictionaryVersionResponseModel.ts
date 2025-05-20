@@ -5,13 +5,13 @@
 import * as ElevenLabs from "../index";
 
 export interface PronunciationDictionaryVersionResponseModel {
-    version_id: string;
-    version_rules_num: number;
-    pronunciation_dictionary_id: string;
-    dictionary_name: string;
-    version_name: string;
-    permission_on_resource?: ElevenLabs.PronunciationDictionaryVersionResponseModelPermissionOnResource;
-    created_by: string;
-    creation_time_unix: number;
-    archived_time_unix?: number;
+    versionId: string;
+    versionRulesNum: number;
+    pronunciationDictionaryId: string;
+    dictionaryName: string;
+    versionName: string;
+    permissionOnResource?: ElevenLabs.PronunciationDictionaryVersionResponseModelPermissionOnResource;
+    createdBy: string;
+    creationTimeUnix: number;
+    archivedTimeUnix?: number;
 }

@@ -6,19 +6,19 @@ import * as ElevenLabs from "../index";
 
 export interface TtsConversationalConfig {
     /** The model to use for TTS */
-    model_id?: ElevenLabs.TtsConversationalModel;
+    modelId?: ElevenLabs.TtsConversationalModel;
     /** The voice ID to use for TTS */
-    voice_id?: string;
+    voiceId?: string;
     /** The audio format to use for TTS */
-    agent_output_audio_format?: ElevenLabs.TtsOutputFormat;
+    agentOutputAudioFormat?: ElevenLabs.TtsOutputFormat;
     /** The optimization for streaming latency */
-    optimize_streaming_latency?: ElevenLabs.TtsOptimizeStreamingLatency;
+    optimizeStreamingLatency?: ElevenLabs.TtsOptimizeStreamingLatency;
     /** The stability of generated speech */
     stability?: number;
     /** The speed of generated speech */
     speed?: number;
     /** The similarity boost for generated speech */
-    similarity_boost?: number;
+    similarityBoost?: number;
     /** The pronunciation dictionary locators */
-    pronunciation_dictionary_locators?: ElevenLabs.PydanticPronunciationDictionaryVersionLocator[];
+    pronunciationDictionaryLocators?: ElevenLabs.PydanticPronunciationDictionaryVersionLocator[];
 }

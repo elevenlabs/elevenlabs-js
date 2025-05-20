@@ -30,5 +30,5 @@ export interface GenerationConfig {
      *
      * Each item should be in the range 50-500.
      */
-    chunk_length_schedule?: number[];
+    chunkLengthSchedule?: number[];
 }

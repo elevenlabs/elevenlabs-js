@@ -14,7 +14,7 @@ export interface AgentsListRequest {
     /**
      * How many Agents to return at maximum. Can not exceed 100, defaults to 30.
      */
-    page_size?: number;
+    pageSize?: number;
     /**
      * Search by agents name.
      */

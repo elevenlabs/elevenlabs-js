@@ -5,6 +5,6 @@
 export interface TwilioOutboundCallResponse {
     success: boolean;
     message: string;
-    conversation_id?: string;
+    conversationId?: string;
     callSid?: string;
 }

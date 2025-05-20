@@ -7,20 +7,20 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         voice_description: "A sassy squeaky mouse"
+ *         voiceDescription: "A sassy squeaky mouse"
  *     }
  */
 export interface VoiceDesignRequest {
     /**
      * The output format of the generated audio.
      */
-    output_format?: ElevenLabs.TextToVoiceCreatePreviewsRequestOutputFormat;
+    outputFormat?: ElevenLabs.TextToVoiceCreatePreviewsRequestOutputFormat;
     /** Description to use for the created voice. */
-    voice_description: string;
+    voiceDescription: string;
     /** Text to generate, text length has to be between 100 and 1000. */
     text?: string;
     /** Whether to automatically generate a text suitable for the voice description. */
-    auto_generate_text?: boolean;
+    autoGenerateText?: boolean;
     /** Controls the volume level of the generated voice. -1 is quietest, 1 is loudest, 0 corresponds to roughly -24 LUFS. */
     loudness?: number;
     /** Higher quality results in better voice output but less variety. */
@@ -28,5 +28,5 @@ export interface VoiceDesignRequest {
     /** Random number that controls the voice generation. Same seed with same inputs produces same voice. */
     seed?: number;
     /** Controls how closely the AI follows the prompt. Lower numbers give the AI more freedom to be creative, while higher numbers force it to stick more to the prompt. High numbers can cause voice to sound artificial or robotic. We recommend to use longer, more detailed prompts at lower Guidance Scale. */
-    guidance_scale?: number;
+    guidanceScale?: number;
 }

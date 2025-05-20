@@ -6,13 +6,13 @@ import * as ElevenLabs from "../index";
 
 export interface SpeakerSeparationResponseModel {
     /** The ID of the voice. */
-    voice_id: string;
+    voiceId: string;
     /** The ID of the sample. */
-    sample_id: string;
+    sampleId: string;
     /** The status of the speaker separation. */
     status: ElevenLabs.SpeakerSeparationResponseModelStatus;
     /** The speakers of the sample. */
     speakers?: Record<string, ElevenLabs.SpeakerResponseModel | undefined>;
     /** The IDs of the selected speakers. */
-    selected_speaker_ids?: string[];
+    selectedSpeakerIds?: string[];
 }

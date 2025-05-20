@@ -3,6 +3,6 @@
  */
 
 export interface PhoneNumberTransfer {
-    phone_number: string;
+    phoneNumber: string;
     condition: string;
 }

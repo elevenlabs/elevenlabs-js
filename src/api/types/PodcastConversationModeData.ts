@@ -4,7 +4,7 @@
 
 export interface PodcastConversationModeData {
     /** The ID of the host voice. */
-    host_voice_id: string;
+    hostVoiceId: string;
     /** The ID of the guest voice. */
-    guest_voice_id: string;
+    guestVoiceId: string;
 }

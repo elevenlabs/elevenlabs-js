@@ -6,7 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface RagRetrievalInfo {
     chunks: ElevenLabs.RagChunkMetadata[];
-    embedding_model: ElevenLabs.EmbeddingModelEnum;
-    retrieval_query: string;
-    rag_latency_secs: number;
+    embeddingModel: ElevenLabs.EmbeddingModelEnum;
+    retrievalQuery: string;
+    ragLatencySecs: number;
 }

@@ -4,5 +4,5 @@
 
 export interface DashboardDataCollectionChartModel {
     name: string;
-    data_collection_id: string;
+    dataCollectionId: string;
 }
