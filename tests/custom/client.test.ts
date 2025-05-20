@@ -38,10 +38,10 @@ describe("ElevenLabs API Tests", () => {
             const result = (await client.textToSpeech.convertWithTimestamps(DEFAULT_VOICE, {
                 text: DEFAULT_TEXT,
                 modelId: DEFAULT_MODEL,
-            })) as unknown as { audio_base64: string; alignment: string }; // Fern type-gen issue
-            expect(result.audio_base64).toBeDefined();
+            })) as unknown as { audioBase64: string; alignment: string }; // Fern type-gen issue
+            expect(result.audioBase64).toBeDefined();
             expect(result.alignment).toBeDefined();
-            await playIfNotGithub(Buffer.from(result.audio_base64, "base64"));
+            await playIfNotGithub(Buffer.from(result.audioBase64, "base64"));
         });
         it("streamWithTimestamps", async () => {
             const client = new ElevenLabsClient();
@@ -52,7 +52,7 @@ describe("ElevenLabs API Tests", () => {
                 modelId: DEFAULT_MODEL,
             });
             for await (const chunk of stream) {
-                if ("audio_base64" in chunk) {
+                if ("audioBase64" in chunk) {
                     if (chunk.audioBase64) {
                         const audioChunk = Buffer.from(chunk.audioBase64, "base64");
                         audioData = Buffer.concat([audioData, audioChunk]);
