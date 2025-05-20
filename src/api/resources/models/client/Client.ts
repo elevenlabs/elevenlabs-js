@@ -45,9 +45,13 @@ export class Models {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.models.getAll()
+     *     await client.models.list()
      */
-    public async getAll(requestOptions?: Models.RequestOptions): Promise<ElevenLabs.Model[]> {
+    public list(requestOptions?: Models.RequestOptions): core.HttpResponsePromise<ElevenLabs.Model[]> {
+        return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
+    }
+
+    private async __list(requestOptions?: Models.RequestOptions): Promise<core.WithRawResponse<ElevenLabs.Model[]>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -64,9 +68,9 @@ export class Models {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -78,7 +82,7 @@ export class Models {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.Model[];
+            return { data: _response.body as ElevenLabs.Model[], rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -86,11 +90,13 @@ export class Models {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -100,12 +106,14 @@ export class Models {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/models.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

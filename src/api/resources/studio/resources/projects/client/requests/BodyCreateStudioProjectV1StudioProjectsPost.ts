@@ -43,7 +43,7 @@ export interface BodyCreateStudioProjectV1StudioProjectsPost {
     /** An optional list of genres associated with the Studio project. */
     genres?: string[];
     /** An optional target audience of the Studio project. */
-    target_audience?: ElevenLabs.studio.ProjectsAddRequestTargetAudience;
+    target_audience?: ElevenLabs.studio.ProjectsCreateRequestTargetAudience;
     /** An optional language of the Studio project. Two-letter language code (ISO 639-1). */
     language?: string;
     /** An optional content type of the Studio project. */
@@ -63,7 +63,7 @@ export interface BodyCreateStudioProjectV1StudioProjectsPost {
     /** A url that will be called by our service when the Studio project is converted. Request will contain a json blob containing the status of the conversion */
     callback_url?: string;
     /** An optional specification of whether the content of this Studio project is fiction. */
-    fiction?: ElevenLabs.studio.ProjectsAddRequestFiction;
+    fiction?: ElevenLabs.studio.ProjectsCreateRequestFiction;
     /**
      *     This parameter controls text normalization with four modes: 'auto', 'on', 'apply_english' and 'off'.
      *     When set to 'auto', the system will automatically decide whether to apply text normalization
@@ -71,11 +71,11 @@ export interface BodyCreateStudioProjectV1StudioProjectsPost {
      *     with 'off', it will be skipped. 'apply_english' is the same as 'on' but will assume that text is in English.
      *
      */
-    apply_text_normalization?: ElevenLabs.studio.ProjectsAddRequestApplyTextNormalization;
+    apply_text_normalization?: ElevenLabs.studio.ProjectsCreateRequestApplyTextNormalization;
     /** Whether to auto convert the Studio project to audio or not. */
     auto_convert?: boolean;
     /** [Alpha Feature] Whether automatically assign voices to phrases in the create Project. */
     auto_assign_voices?: boolean;
     /** The type of Studio project to create. */
-    source_type?: ElevenLabs.studio.ProjectsAddRequestSourceType;
+    source_type?: ElevenLabs.studio.ProjectsCreateRequestSourceType;
 }

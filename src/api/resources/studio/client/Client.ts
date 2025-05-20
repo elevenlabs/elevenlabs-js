@@ -8,7 +8,6 @@ import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 import { Projects } from "../resources/projects/client/Client";
-import { Chapters } from "../resources/chapters/client/Client";
 
 export declare namespace Studio {
     export interface Options {
@@ -35,16 +34,11 @@ export declare namespace Studio {
 
 export class Studio {
     protected _projects: Projects | undefined;
-    protected _chapters: Chapters | undefined;
 
     constructor(protected readonly _options: Studio.Options = {}) {}
 
     public get projects(): Projects {
         return (this._projects ??= new Projects(this._options));
-    }
-
-    public get chapters(): Chapters {
-        return (this._chapters ??= new Chapters(this._options));
     }
 
     /**
@@ -70,10 +64,17 @@ export class Studio {
      *         }
      *     })
      */
-    public async createPodcast(
+    public createPodcast(
         request: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPost,
         requestOptions?: Studio.RequestOptions,
-    ): Promise<ElevenLabs.PodcastProjectResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.PodcastProjectResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__createPodcast(request, requestOptions));
+    }
+
+    private async __createPodcast(
+        request: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPost,
+        requestOptions?: Studio.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.PodcastProjectResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -90,9 +91,9 @@ export class Studio {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -105,7 +106,10 @@ export class Studio {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.PodcastProjectResponseModel;
+            return {
+                data: _response.body as ElevenLabs.PodcastProjectResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -113,11 +117,13 @@ export class Studio {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -127,12 +133,14 @@ export class Studio {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/studio/podcasts.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

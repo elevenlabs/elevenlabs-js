@@ -9,4 +9,6 @@ export interface ConversationConfigClientOverrideOutput {
     agent?: ElevenLabs.AgentConfigOverride;
     /** The overrides for the TTS configuration */
     tts?: ElevenLabs.TtsConversationalConfigOverride;
+    /** The overrides for the conversation configuration */
+    conversation?: ElevenLabs.ConversationConfigOverride;
 }

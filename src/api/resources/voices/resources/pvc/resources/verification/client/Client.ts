@@ -56,11 +56,19 @@ export class Verification {
      *         files: [fs.createReadStream("/path/to/your/file")]
      *     })
      */
-    public async request(
+    public request(
         voiceId: string,
         request: ElevenLabs.voices.pvc.BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost,
         requestOptions?: Verification.RequestOptions,
-    ): Promise<ElevenLabs.RequestPvcManualVerificationResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.RequestPvcManualVerificationResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__request(voiceId, request, requestOptions));
+    }
+
+    private async __request(
+        voiceId: string,
+        request: ElevenLabs.voices.pvc.BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost,
+        requestOptions?: Verification.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.RequestPvcManualVerificationResponseModel>> {
         const _request = await core.newFormData();
         for (const _file of request.files) {
             await _request.appendFile("files", _file);
@@ -87,9 +95,9 @@ export class Verification {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -103,7 +111,10 @@ export class Verification {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.RequestPvcManualVerificationResponseModel;
+            return {
+                data: _response.body as ElevenLabs.RequestPvcManualVerificationResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -111,11 +122,13 @@ export class Verification {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -125,6 +138,7 @@ export class Verification {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -133,6 +147,7 @@ export class Verification {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

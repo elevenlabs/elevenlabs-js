@@ -46,7 +46,11 @@ export class Captcha {
      * @example
      *     await client.voices.pvc.verification.captcha.get("21m00Tcm4TlvDq8ikWAM")
      */
-    public async get(voiceId: string, requestOptions?: Captcha.RequestOptions): Promise<void> {
+    public get(voiceId: string, requestOptions?: Captcha.RequestOptions): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__get(voiceId, requestOptions));
+    }
+
+    private async __get(voiceId: string, requestOptions?: Captcha.RequestOptions): Promise<core.WithRawResponse<void>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -63,9 +67,9 @@ export class Captcha {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -77,7 +81,7 @@ export class Captcha {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return;
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -85,11 +89,13 @@ export class Captcha {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -99,6 +105,7 @@ export class Captcha {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -107,6 +114,7 @@ export class Captcha {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -125,11 +133,19 @@ export class Captcha {
      *         recording: fs.createReadStream("/path/to/your/file")
      *     })
      */
-    public async verify(
+    public verify(
         voiceId: string,
         request: ElevenLabs.voices.pvc.verification.BodyVerifyPvcVoiceCaptchaV1VoicesPvcVoiceIdCaptchaPost,
         requestOptions?: Captcha.RequestOptions,
-    ): Promise<ElevenLabs.VerifyPvcVoiceCaptchaResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.VerifyPvcVoiceCaptchaResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__verify(voiceId, request, requestOptions));
+    }
+
+    private async __verify(
+        voiceId: string,
+        request: ElevenLabs.voices.pvc.verification.BodyVerifyPvcVoiceCaptchaV1VoicesPvcVoiceIdCaptchaPost,
+        requestOptions?: Captcha.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.VerifyPvcVoiceCaptchaResponseModel>> {
         const _request = await core.newFormData();
         await _request.appendFile("recording", request.recording);
         const _maybeEncodedRequest = await _request.getRequest();
@@ -149,9 +165,9 @@ export class Captcha {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -165,7 +181,10 @@ export class Captcha {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.VerifyPvcVoiceCaptchaResponseModel;
+            return {
+                data: _response.body as ElevenLabs.VerifyPvcVoiceCaptchaResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -173,11 +192,13 @@ export class Captcha {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -187,6 +208,7 @@ export class Captcha {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -195,6 +217,7 @@ export class Captcha {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

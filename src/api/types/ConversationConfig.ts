@@ -5,6 +5,8 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationConfig {
+    /** If enabled audio will not be processed and only text will be used, use to avoid audio pricing. */
+    text_only?: boolean;
     /** The maximum duration of a conversation in seconds */
     max_duration_seconds?: number;
     /** The events that will be sent to the client */

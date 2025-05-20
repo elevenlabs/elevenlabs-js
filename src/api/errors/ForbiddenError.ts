@@ -3,13 +3,15 @@
  */
 
 import * as errors from "../../errors/index";
+import * as core from "../../core";
 
 export class ForbiddenError extends errors.ElevenLabsError {
-    constructor(body?: unknown) {
+    constructor(body?: unknown, rawResponse?: core.RawResponse) {
         super({
             message: "ForbiddenError",
             statusCode: 403,
             body: body,
+            rawResponse: rawResponse,
         });
         Object.setPrototypeOf(this, ForbiddenError.prototype);
     }

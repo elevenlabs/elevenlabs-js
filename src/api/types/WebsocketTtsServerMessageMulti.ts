@@ -10,10 +10,10 @@ import * as ElevenLabs from "../index";
 export interface WebsocketTtsServerMessageMulti {
     /** A generated partial audio chunk, encoded using the selected output_format (e.g., MP3 as a base64 string). */
     audio?: string;
-    /** If true, indicates that this is the final message for the specified `context_id`. This is sent when a context is closed. `audio` will be null or empty. */
+    /** If true, indicates that this is the final message for the specified contextId. This is sent when a context is closed. `audio` will be null or empty. */
     is_final?: boolean;
     normalizedAlignment?: ElevenLabs.NormalizedAlignment;
     alignment?: ElevenLabs.Alignment;
     /** The context identifier to which this message pertains. */
-    context_id?: string;
+    contextId?: string;
 }

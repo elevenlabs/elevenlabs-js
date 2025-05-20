@@ -49,10 +49,17 @@ export class ForcedAlignment {
      *         text: "text"
      *     })
      */
-    public async create(
+    public create(
         request: ElevenLabs.BodyCreateForcedAlignmentV1ForcedAlignmentPost,
         requestOptions?: ForcedAlignment.RequestOptions,
-    ): Promise<ElevenLabs.ForcedAlignmentResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.ForcedAlignmentResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
+    }
+
+    private async __create(
+        request: ElevenLabs.BodyCreateForcedAlignmentV1ForcedAlignmentPost,
+        requestOptions?: ForcedAlignment.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.ForcedAlignmentResponseModel>> {
         const _request = await core.newFormData();
         await _request.appendFile("file", request.file);
         _request.append("text", request.text);
@@ -77,9 +84,9 @@ export class ForcedAlignment {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -93,7 +100,10 @@ export class ForcedAlignment {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.ForcedAlignmentResponseModel;
+            return {
+                data: _response.body as ElevenLabs.ForcedAlignmentResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -101,11 +111,13 @@ export class ForcedAlignment {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -115,12 +127,14 @@ export class ForcedAlignment {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/forced-alignment.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

@@ -10,6 +10,7 @@ import * as ElevenLabs from "../index";
 export interface BatchCallDetailedResponse {
     id: string;
     phone_number_id: string;
+    phone_provider?: ElevenLabs.TelephonyProvider;
     name: string;
     agent_id: string;
     created_at_unix: number;

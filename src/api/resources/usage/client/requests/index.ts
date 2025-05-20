@@ -1,1 +1,1 @@
-export { type UsageGetCharactersUsageMetricsRequest } from "./UsageGetCharactersUsageMetricsRequest";
+export { type UsageGetRequest } from "./UsageGetRequest";

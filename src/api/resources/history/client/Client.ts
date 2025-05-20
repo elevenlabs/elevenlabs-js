@@ -38,18 +38,25 @@ export class History {
     /**
      * Returns a list of your generated audio.
      *
-     * @param {ElevenLabs.HistoryGetAllRequest} request
+     * @param {ElevenLabs.HistoryListRequest} request
      * @param {History.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.history.getAll()
+     *     await client.history.list()
      */
-    public async getAll(
-        request: ElevenLabs.HistoryGetAllRequest = {},
+    public list(
+        request: ElevenLabs.HistoryListRequest = {},
         requestOptions?: History.RequestOptions,
-    ): Promise<ElevenLabs.GetSpeechHistoryResponse> {
+    ): core.HttpResponsePromise<ElevenLabs.GetSpeechHistoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
+    }
+
+    private async __list(
+        request: ElevenLabs.HistoryListRequest = {},
+        requestOptions?: History.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetSpeechHistoryResponse>> {
         const {
             page_size: pageSize,
             start_after_history_item_id: startAfterHistoryItemId,
@@ -94,9 +101,9 @@ export class History {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -109,7 +116,7 @@ export class History {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetSpeechHistoryResponse;
+            return { data: _response.body as ElevenLabs.GetSpeechHistoryResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -117,11 +124,13 @@ export class History {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -131,12 +140,14 @@ export class History {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/history.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -152,10 +163,17 @@ export class History {
      * @example
      *     await client.history.get("VW7YKqPnjY4h39yTbx2L")
      */
-    public async get(
+    public get(
         historyItemId: string,
         requestOptions?: History.RequestOptions,
-    ): Promise<ElevenLabs.SpeechHistoryItemResponse> {
+    ): core.HttpResponsePromise<ElevenLabs.SpeechHistoryItemResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__get(historyItemId, requestOptions));
+    }
+
+    private async __get(
+        historyItemId: string,
+        requestOptions?: History.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.SpeechHistoryItemResponse>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -172,9 +190,9 @@ export class History {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -186,7 +204,7 @@ export class History {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.SpeechHistoryItemResponse;
+            return { data: _response.body as ElevenLabs.SpeechHistoryItemResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -194,11 +212,13 @@ export class History {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -208,6 +228,7 @@ export class History {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -216,6 +237,7 @@ export class History {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -231,10 +253,17 @@ export class History {
      * @example
      *     await client.history.delete("VW7YKqPnjY4h39yTbx2L")
      */
-    public async delete(
+    public delete(
         historyItemId: string,
         requestOptions?: History.RequestOptions,
-    ): Promise<ElevenLabs.DeleteHistoryItemResponse> {
+    ): core.HttpResponsePromise<ElevenLabs.DeleteHistoryItemResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(historyItemId, requestOptions));
+    }
+
+    private async __delete(
+        historyItemId: string,
+        requestOptions?: History.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.DeleteHistoryItemResponse>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -251,9 +280,9 @@ export class History {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -265,7 +294,7 @@ export class History {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.DeleteHistoryItemResponse;
+            return { data: _response.body as ElevenLabs.DeleteHistoryItemResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -273,11 +302,13 @@ export class History {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -287,6 +318,7 @@ export class History {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -295,6 +327,7 @@ export class History {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -303,7 +336,17 @@ export class History {
      * Returns the audio of an history item.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    public async getAudio(historyItemId: string, requestOptions?: History.RequestOptions): Promise<stream.Readable> {
+    public getAudio(
+        historyItemId: string,
+        requestOptions?: History.RequestOptions,
+    ): core.HttpResponsePromise<stream.Readable> {
+        return core.HttpResponsePromise.fromPromise(this.__getAudio(historyItemId, requestOptions));
+    }
+
+    private async __getAudio(
+        historyItemId: string,
+        requestOptions?: History.RequestOptions,
+    ): Promise<core.WithRawResponse<stream.Readable>> {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -320,9 +363,9 @@ export class History {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -335,7 +378,7 @@ export class History {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return { data: _response.body, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -343,11 +386,13 @@ export class History {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -357,6 +402,7 @@ export class History {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -365,6 +411,7 @@ export class History {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -374,10 +421,17 @@ export class History {
      * @throws {@link ElevenLabs.BadRequestError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    public async download(
+    public download(
         request: ElevenLabs.DownloadHistoryRequest,
         requestOptions?: History.RequestOptions,
-    ): Promise<stream.Readable> {
+    ): core.HttpResponsePromise<stream.Readable> {
+        return core.HttpResponsePromise.fromPromise(this.__download(request, requestOptions));
+    }
+
+    private async __download(
+        request: ElevenLabs.DownloadHistoryRequest,
+        requestOptions?: History.RequestOptions,
+    ): Promise<core.WithRawResponse<stream.Readable>> {
         const _response = await core.fetcher<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -394,9 +448,9 @@ export class History {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -410,21 +464,23 @@ export class History {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return { data: _response.body, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new ElevenLabs.BadRequestError(_response.error.body as unknown);
+                    throw new ElevenLabs.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -434,12 +490,14 @@ export class History {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/history/download.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

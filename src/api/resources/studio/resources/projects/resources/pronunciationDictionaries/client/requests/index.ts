@@ -1,0 +1,1 @@
+export { type BodyCreatePronunciationDictionariesV1StudioProjectsProjectIdPronunciationDictionariesPost } from "./BodyCreatePronunciationDictionariesV1StudioProjectsProjectIdPronunciationDictionariesPost";

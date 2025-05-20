@@ -39,10 +39,17 @@ export class AudioIsolation {
      * Removes background noise from audio.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    public async audioIsolation(
+    public convert(
         request: ElevenLabs.BodyAudioIsolationV1AudioIsolationPost,
         requestOptions?: AudioIsolation.RequestOptions,
-    ): Promise<stream.Readable> {
+    ): core.HttpResponsePromise<stream.Readable> {
+        return core.HttpResponsePromise.fromPromise(this.__convert(request, requestOptions));
+    }
+
+    private async __convert(
+        request: ElevenLabs.BodyAudioIsolationV1AudioIsolationPost,
+        requestOptions?: AudioIsolation.RequestOptions,
+    ): Promise<core.WithRawResponse<stream.Readable>> {
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
         if (request.file_format != null) {
@@ -66,9 +73,9 @@ export class AudioIsolation {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -83,7 +90,7 @@ export class AudioIsolation {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return { data: _response.body, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -91,11 +98,13 @@ export class AudioIsolation {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -105,12 +114,14 @@ export class AudioIsolation {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/audio-isolation.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -119,10 +130,17 @@ export class AudioIsolation {
      * Removes background noise from audio.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    public async audioIsolationStream(
+    public stream(
         request: ElevenLabs.BodyAudioIsolationStreamV1AudioIsolationStreamPost,
         requestOptions?: AudioIsolation.RequestOptions,
-    ): Promise<stream.Readable> {
+    ): core.HttpResponsePromise<stream.Readable> {
+        return core.HttpResponsePromise.fromPromise(this.__stream(request, requestOptions));
+    }
+
+    private async __stream(
+        request: ElevenLabs.BodyAudioIsolationStreamV1AudioIsolationStreamPost,
+        requestOptions?: AudioIsolation.RequestOptions,
+    ): Promise<core.WithRawResponse<stream.Readable>> {
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
         if (request.file_format != null) {
@@ -146,9 +164,9 @@ export class AudioIsolation {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -163,7 +181,7 @@ export class AudioIsolation {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return { data: _response.body, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -171,11 +189,13 @@ export class AudioIsolation {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -185,6 +205,7 @@ export class AudioIsolation {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -193,6 +214,7 @@ export class AudioIsolation {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

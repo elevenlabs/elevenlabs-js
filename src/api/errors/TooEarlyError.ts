@@ -3,13 +3,15 @@
  */
 
 import * as errors from "../../errors/index";
+import * as core from "../../core";
 
 export class TooEarlyError extends errors.ElevenLabsError {
-    constructor(body?: unknown) {
+    constructor(body?: unknown, rawResponse?: core.RawResponse) {
         super({
             message: "TooEarlyError",
             statusCode: 425,
             body: body,
+            rawResponse: rawResponse,
         });
         Object.setPrototypeOf(this, TooEarlyError.prototype);
     }

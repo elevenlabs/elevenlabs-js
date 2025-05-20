@@ -41,8 +41,10 @@ export interface LibraryVoiceResponse {
     play_api_usage_character_count_1y: number;
     /** The number of times the voice has been cloned. */
     cloned_by_count: number;
-    /** The rate of the voice. */
+    /** The rate multiplier of the voice. */
     rate?: number;
+    /** The rate of the voice in USD per 1000 credits. null if default */
+    fiat_rate?: number;
     /** Whether free users are allowed to use the voice. */
     free_users_allowed: boolean;
     /** Whether live moderation is enabled for the voice. */
