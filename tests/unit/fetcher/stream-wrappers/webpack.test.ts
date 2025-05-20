@@ -22,6 +22,9 @@ describe("test env compatibility", () => {
                             ".js": [".ts", ".js"],
                             ".jsx": [".tsx", ".jsx"],
                         },
+                        fallback: {
+                            "crypto": false
+                        }
                     },
                 },
                 (err, stats) => {
