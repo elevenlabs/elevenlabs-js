@@ -18,9 +18,9 @@ Check out the [HTTP API documentation](https://elevenlabs.io/docs/api-reference)
 ## ⚙️ Install
 
 ```bash
-npm install elevenlabs
+npm install @elevenlabs/elevenlabs-js
 # or
-yarn add elevenlabs
+yarn add @elevenlabs/elevenlabs-js
 ```
 
 ## 🗣️ Usage
@@ -48,7 +48,7 @@ yarn add elevenlabs
     - Ideal for developer use cases where speed is crucial
     - Supports 32 languages
 
-For more detailed information about these models and others, visit the [ElevenLabs Models documentation](https://elevenlabs.io/docs/speech-synthesis/models).
+For more detailed information about these models and others, visit the [ElevenLabs Models documentation](https://elevenlabs.io/docs/models).
 
 ```ts
 import { ElevenLabsClient, play } from "elevenlabs";
@@ -59,7 +59,7 @@ const elevenlabs = new ElevenLabsClient({
 
 const audio = await elevenlabs.textToSpeech.convert("Xb7hH8MSUJpSbSDYk0k2", {
     text: "Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
-    model_id: "eleven_multilingual_v2",
+    modelId: "eleven_multilingual_v2",
 });
 
 await play(audio);
@@ -77,7 +77,7 @@ await play(audio);
 
 ## 🗣️ Voices
 
-List all your available voices with `getAll()`.
+List all your available voices with `search()`.
 
 ```ts
 import { ElevenLabsClient } from "elevenlabs";
@@ -86,7 +86,7 @@ const elevenlabs = new ElevenLabsClient({
     apiKey: "YOUR_API_KEY", // Defaults to process.env.ELEVENLABS_API_KEY
 });
 
-const voices = await elevenlabs.voices.getAll();
+const voices = await elevenlabs.voices.search();
 ```
 
 For information about the structure of the voices output, please refer to the [official ElevenLabs API documentation for Get Voices](https://elevenlabs.io/docs/api-reference/get-voices).
@@ -96,9 +96,9 @@ For information about the structure of the voices output, please refer to the [o
 Stream audio in real-time, as it's being generated.
 
 ```ts
-const audioStream = await elevenlabs.textToSpeech.convertAsStream("JBFqnCBsd6RMkjVDRZzb", {
+const audioStream = await elevenlabs.textToSpeech.stream("JBFqnCBsd6RMkjVDRZzb", {
     text: "This is a... streaming voice",
-    model_id: "eleven_multilingual_v2",
+    modelId: "eleven_multilingual_v2",
 });
 
 stream(audioStream);
@@ -110,7 +110,7 @@ This Node SDK is instrumented with automatic retries with exponential backoff. A
 retried as long as the request is deemed retriable and the number of retry attempts has not grown larger
 than the configured retry limit (default: 2).
 
-A request is deemed retriable when any of the following HTTP status codes is returned:
+A request is deemed able to retry when any of the following HTTP status codes is returned:
 
 -   [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
 -   [409](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409) (Conflict)
@@ -120,7 +120,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```ts
-const response = await elevenlabs.voices.getAll(
+const response = await elevenlabs.voices.search(
     {},
     {
         maxRetries: 2, // Set the maximum number of retries
@@ -134,7 +134,7 @@ The SDK defaults to a 60 second timout. Use the `timeoutInSeconds` option to
 configure this behavior.
 
 ```ts
-const response = await elevenlabs.voices.getAll(
+const response = await elevenlabs.voices.search(
     {},
     {
         timeoutInSeconds: 30, // override timeout to 30s
