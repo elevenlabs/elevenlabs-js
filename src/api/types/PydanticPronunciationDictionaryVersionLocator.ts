@@ -9,7 +9,7 @@
  */
 export interface PydanticPronunciationDictionaryVersionLocator {
     /** The ID of the pronunciation dictionary */
-    pronunciation_dictionary_id: string;
+    pronunciationDictionaryId: string;
     /** The ID of the version of the pronunciation dictionary */
-    version_id?: string;
+    versionId?: string;
 }

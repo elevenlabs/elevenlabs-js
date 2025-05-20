@@ -5,6 +5,7 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
+import * as serializers from "../../../../serialization/index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -44,8 +45,8 @@ export class Usage {
      *
      * @example
      *     await client.usage.get({
-     *         start_unix: 1,
-     *         end_unix: 1
+     *         startUnix: 1,
+     *         endUnix: 1
      *     })
      */
     public get(
@@ -59,14 +60,7 @@ export class Usage {
         request: ElevenLabs.UsageGetRequest,
         requestOptions?: Usage.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.UsageCharactersResponseModel>> {
-        const {
-            start_unix: startUnix,
-            end_unix: endUnix,
-            include_workspace_metrics: includeWorkspaceMetrics,
-            breakdown_type: breakdownType,
-            aggregation_interval: aggregationInterval,
-            metric,
-        } = request;
+        const { startUnix, endUnix, includeWorkspaceMetrics, breakdownType, aggregationInterval, metric } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["start_unix"] = startUnix.toString();
         _queryParams["end_unix"] = endUnix.toString();
@@ -75,15 +69,20 @@ export class Usage {
         }
 
         if (breakdownType != null) {
-            _queryParams["breakdown_type"] = breakdownType;
+            _queryParams["breakdown_type"] = serializers.BreakdownTypes.jsonOrThrow(breakdownType, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         if (aggregationInterval != null) {
-            _queryParams["aggregation_interval"] = aggregationInterval;
+            _queryParams["aggregation_interval"] = serializers.UsageAggregationInterval.jsonOrThrow(
+                aggregationInterval,
+                { unrecognizedObjectKeys: "strip" },
+            );
         }
 
         if (metric != null) {
-            _queryParams["metric"] = metric;
+            _queryParams["metric"] = serializers.MetricType.jsonOrThrow(metric, { unrecognizedObjectKeys: "strip" });
         }
 
         const _response = await core.fetcher({
@@ -103,8 +102,8 @@ export class Usage {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -118,7 +117,12 @@ export class Usage {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.UsageCharactersResponseModel,
+                data: serializers.UsageCharactersResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -127,7 +131,12 @@ export class Usage {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

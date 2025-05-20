@@ -6,11 +6,11 @@ import * as ElevenLabs from "../index";
 
 export interface ConversationTokenDbModel {
     /** The ID of the agent */
-    agent_id: string;
+    agentId: string;
     /** The token for the agent */
-    conversation_token: string;
+    conversationToken: string;
     /** The expiration time of the token in unix seconds */
-    expiration_time_unix_secs?: number;
+    expirationTimeUnixSecs?: number;
     /** The purpose of the token */
     purpose?: ElevenLabs.ConversationTokenPurpose;
 }

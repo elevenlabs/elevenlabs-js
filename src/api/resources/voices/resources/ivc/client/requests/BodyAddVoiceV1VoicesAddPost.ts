@@ -16,7 +16,7 @@ export interface BodyAddVoiceV1VoicesAddPost {
     name: string;
     files: File[] | fs.ReadStream[] | Blob[];
     /** If set will remove background noise for voice samples using our audio isolation model. If the samples do not include background noise, it can make the quality worse. */
-    remove_background_noise?: boolean;
+    removeBackgroundNoise?: boolean;
     /** A description of the voice. */
     description?: string;
     /** Serialized labels dictionary for the voice. */

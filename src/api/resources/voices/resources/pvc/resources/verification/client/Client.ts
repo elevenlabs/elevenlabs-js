@@ -7,6 +7,7 @@ import * as core from "../../../../../../../../core";
 import * as ElevenLabs from "../../../../../../../index";
 import * as fs from "fs";
 import urlJoin from "url-join";
+import * as serializers from "../../../../../../../../serialization/index";
 import * as errors from "../../../../../../../../errors/index";
 import { Captcha } from "../resources/captcha/client/Client";
 
@@ -74,8 +75,8 @@ export class Verification {
             await _request.appendFile("files", _file);
         }
 
-        if (request.extra_text != null) {
-            _request.append("extra_text", request.extra_text);
+        if (request.extraText != null) {
+            _request.append("extra_text", request.extraText);
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -96,8 +97,8 @@ export class Verification {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -112,7 +113,12 @@ export class Verification {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.RequestPvcManualVerificationResponseModel,
+                data: serializers.RequestPvcManualVerificationResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -121,7 +127,12 @@ export class Verification {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

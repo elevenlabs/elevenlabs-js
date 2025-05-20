@@ -6,12 +6,12 @@ import * as ElevenLabs from "../index";
 
 export interface GetPhoneNumberSipTrunkResponseModel {
     /** Phone number */
-    phone_number: string;
+    phoneNumber: string;
     /** Label for the phone number */
     label: string;
     /** The ID of the phone number */
-    phone_number_id: string;
+    phoneNumberId: string;
     /** The agent that is assigned to the phone number */
-    assigned_agent?: ElevenLabs.PhoneNumberAgentInfo;
-    provider_config?: ElevenLabs.SipTrunkConfigResponseModel;
+    assignedAgent?: ElevenLabs.PhoneNumberAgentInfo;
+    providerConfig?: ElevenLabs.SipTrunkConfigResponseModel;
 }

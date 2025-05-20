@@ -6,10 +6,10 @@ import * as ElevenLabs from "../index";
 
 export interface OutboundCallRecipientResponseModel {
     id: string;
-    phone_number: string;
+    phoneNumber: string;
     status: ElevenLabs.BatchCallRecipientStatus;
-    created_at_unix: number;
-    updated_at_unix: number;
-    conversation_id?: string;
-    conversation_initiation_client_data?: ElevenLabs.ConversationInitiationClientDataInternal;
+    createdAtUnix: number;
+    updatedAtUnix: number;
+    conversationId?: string;
+    conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataInternal;
 }

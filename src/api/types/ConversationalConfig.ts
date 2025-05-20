@@ -14,7 +14,7 @@ export interface ConversationalConfig {
     /** Configuration for conversational events */
     conversation?: ElevenLabs.ConversationConfig;
     /** Language presets for conversations */
-    language_presets?: Record<string, ElevenLabs.LanguagePresetOutput>;
+    languagePresets?: Record<string, ElevenLabs.LanguagePresetOutput>;
     /** Agent specific configuration */
     agent?: ElevenLabs.AgentConfig;
 }

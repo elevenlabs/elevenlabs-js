@@ -6,9 +6,9 @@ import * as ElevenLabs from "../index";
 
 export interface TurnConfig {
     /** Maximum wait time for the user's reply before re-engaging the user */
-    turn_timeout?: number;
+    turnTimeout?: number;
     /** Maximum wait time since the user last spoke before terminating the call */
-    silence_end_call_timeout?: number;
+    silenceEndCallTimeout?: number;
     /** The mode of turn detection */
     mode?: ElevenLabs.TurnMode;
 }

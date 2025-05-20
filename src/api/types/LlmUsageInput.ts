@@ -5,5 +5,5 @@
 import * as ElevenLabs from "../index";
 
 export interface LlmUsageInput {
-    model_usage?: Record<string, ElevenLabs.LlmInputOutputTokensUsage>;
+    modelUsage?: Record<string, ElevenLabs.LlmInputOutputTokensUsage>;
 }

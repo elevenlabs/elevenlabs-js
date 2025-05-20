@@ -6,20 +6,20 @@ import * as ElevenLabs from "../index";
 
 export interface VoiceSample {
     /** The ID of the sample. */
-    sample_id?: string;
+    sampleId?: string;
     /** The name of the sample file. */
-    file_name?: string;
+    fileName?: string;
     /** The MIME type of the sample file. */
-    mime_type?: string;
+    mimeType?: string;
     /** The size of the sample file in bytes. */
-    size_bytes?: number;
+    sizeBytes?: number;
     /** The hash of the sample file. */
     hash?: string;
-    duration_secs?: number;
-    remove_background_noise?: boolean;
-    has_isolated_audio?: boolean;
-    has_isolated_audio_preview?: boolean;
-    speaker_separation?: ElevenLabs.SpeakerSeparationResponseModel;
-    trim_start?: number;
-    trim_end?: number;
+    durationSecs?: number;
+    removeBackgroundNoise?: boolean;
+    hasIsolatedAudio?: boolean;
+    hasIsolatedAudioPreview?: boolean;
+    speakerSeparation?: ElevenLabs.SpeakerSeparationResponseModel;
+    trimStart?: number;
+    trimEnd?: number;
 }

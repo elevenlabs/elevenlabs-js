@@ -4,13 +4,13 @@
 
 export interface RecordingResponse {
     /** The ID of the recording. */
-    recording_id: string;
+    recordingId: string;
     /** The MIME type of the recording. */
-    mime_type: string;
+    mimeType: string;
     /** The size of the recording in bytes. */
-    size_bytes: number;
+    sizeBytes: number;
     /** The date of the recording in Unix time. */
-    upload_date_unix: number;
+    uploadDateUnix: number;
     /** The transcription of the recording. */
     transcription: string;
 }

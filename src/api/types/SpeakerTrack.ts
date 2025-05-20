@@ -6,8 +6,8 @@ import * as ElevenLabs from "../index";
 
 export interface SpeakerTrack {
     id: string;
-    media_ref: ElevenLabs.DubbingMediaReference;
-    speaker_name: string;
+    mediaRef: ElevenLabs.DubbingMediaReference;
+    speakerName: string;
     voices: Record<string, string>;
     segments: string[];
 }

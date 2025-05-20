@@ -4,9 +4,9 @@
 
 export interface AudioNativeCreateProjectResponseModel {
     /** The ID of the created Audio Native project. */
-    project_id: string;
+    projectId: string;
     /** Whether the project is currently being converted. */
     converting: boolean;
     /** The HTML snippet to embed the Audio Native player. */
-    html_snippet: string;
+    htmlSnippet: string;
 }

@@ -6,9 +6,9 @@ import * as ElevenLabs from "../index";
 
 export interface AudioWithTimestampsResponse {
     /** Base64 encoded audio data */
-    audio_base64: string;
+    audioBase64: string;
     /** Timestamp information for each character in the original text */
     alignment?: ElevenLabs.CharacterAlignmentResponseModel;
     /** Timestamp information for each character in the normalized text */
-    normalized_alignment?: ElevenLabs.CharacterAlignmentResponseModel;
+    normalizedAlignment?: ElevenLabs.CharacterAlignmentResponseModel;
 }

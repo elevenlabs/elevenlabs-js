@@ -8,5 +8,5 @@ export interface LanguagePresetInput {
     /** The overrides for the language preset */
     overrides: ElevenLabs.ConversationConfigClientOverrideInput;
     /** The translation of the first message */
-    first_message_translation?: ElevenLabs.LanguagePresetTranslation;
+    firstMessageTranslation?: ElevenLabs.LanguagePresetTranslation;
 }

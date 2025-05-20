@@ -5,6 +5,6 @@
 export interface SipTrunkOutboundCallResponse {
     success: boolean;
     message: string;
-    conversation_id?: string;
-    sip_call_id?: string;
+    conversationId?: string;
+    sipCallId?: string;
 }

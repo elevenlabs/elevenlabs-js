@@ -6,11 +6,11 @@ import * as ElevenLabs from "../index";
 
 export interface ResourceAccessInfo {
     /** Whether the user making the request is the creator of the agent */
-    is_creator: boolean;
+    isCreator: boolean;
     /** Name of the agent's creator */
-    creator_name: string;
+    creatorName: string;
     /** Email of the agent's creator */
-    creator_email: string;
+    creatorEmail: string;
     /** The role of the user making the request */
     role: ElevenLabs.ResourceAccessInfoRole;
 }

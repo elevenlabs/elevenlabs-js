@@ -4,5 +4,5 @@
 
 export interface TtsConversationalConfigOverrideConfig {
     /** Whether to allow overriding the voice ID */
-    voice_id?: boolean;
+    voiceId?: boolean;
 }

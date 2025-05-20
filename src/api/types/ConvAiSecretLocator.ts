@@ -6,5 +6,5 @@
  * Used to reference a secret from the agent's secret store.
  */
 export interface ConvAiSecretLocator {
-    secret_id: string;
+    secretId: string;
 }

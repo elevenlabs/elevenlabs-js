@@ -6,6 +6,7 @@ import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../../../serialization/index";
 import * as errors from "../../../../../../errors/index";
 import { Content } from "../resources/content/client/Client";
 import { Snapshots } from "../resources/snapshots/client/Client";
@@ -93,8 +94,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -106,14 +107,27 @@ export class Projects {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.GetProjectsResponse, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.GetProjectsResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -153,9 +167,9 @@ export class Projects {
      * @example
      *     await client.studio.projects.create({
      *         name: "name",
-     *         default_title_voice_id: "default_title_voice_id",
-     *         default_paragraph_voice_id: "default_paragraph_voice_id",
-     *         default_model_id: "default_model_id"
+     *         defaultTitleVoiceId: "default_title_voice_id",
+     *         defaultParagraphVoiceId: "default_paragraph_voice_id",
+     *         defaultModelId: "default_model_id"
      *     })
      */
     public create(
@@ -171,19 +185,19 @@ export class Projects {
     ): Promise<core.WithRawResponse<ElevenLabs.AddProjectResponseModel>> {
         const _request = await core.newFormData();
         _request.append("name", request.name);
-        _request.append("default_title_voice_id", request.default_title_voice_id);
-        _request.append("default_paragraph_voice_id", request.default_paragraph_voice_id);
-        _request.append("default_model_id", request.default_model_id);
-        if (request.from_url != null) {
-            _request.append("from_url", request.from_url);
+        _request.append("default_title_voice_id", request.defaultTitleVoiceId);
+        _request.append("default_paragraph_voice_id", request.defaultParagraphVoiceId);
+        _request.append("default_model_id", request.defaultModelId);
+        if (request.fromUrl != null) {
+            _request.append("from_url", request.fromUrl);
         }
 
-        if (request.from_document != null) {
-            await _request.appendFile("from_document", request.from_document);
+        if (request.fromDocument != null) {
+            await _request.appendFile("from_document", request.fromDocument);
         }
 
-        if (request.quality_preset != null) {
-            _request.append("quality_preset", request.quality_preset);
+        if (request.qualityPreset != null) {
+            _request.append("quality_preset", request.qualityPreset);
         }
 
         if (request.title != null) {
@@ -204,66 +218,87 @@ export class Projects {
             }
         }
 
-        if (request.target_audience != null) {
-            _request.append("target_audience", request.target_audience);
+        if (request.targetAudience != null) {
+            _request.append(
+                "target_audience",
+                serializers.studio.ProjectsCreateRequestTargetAudience.jsonOrThrow(request.targetAudience, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
         }
 
         if (request.language != null) {
             _request.append("language", request.language);
         }
 
-        if (request.content_type != null) {
-            _request.append("content_type", request.content_type);
+        if (request.contentType != null) {
+            _request.append("content_type", request.contentType);
         }
 
-        if (request.original_publication_date != null) {
-            _request.append("original_publication_date", request.original_publication_date);
+        if (request.originalPublicationDate != null) {
+            _request.append("original_publication_date", request.originalPublicationDate);
         }
 
-        if (request.mature_content != null) {
-            _request.append("mature_content", request.mature_content.toString());
+        if (request.matureContent != null) {
+            _request.append("mature_content", request.matureContent.toString());
         }
 
-        if (request.isbn_number != null) {
-            _request.append("isbn_number", request.isbn_number);
+        if (request.isbnNumber != null) {
+            _request.append("isbn_number", request.isbnNumber);
         }
 
-        if (request.acx_volume_normalization != null) {
-            _request.append("acx_volume_normalization", request.acx_volume_normalization.toString());
+        if (request.acxVolumeNormalization != null) {
+            _request.append("acx_volume_normalization", request.acxVolumeNormalization.toString());
         }
 
-        if (request.volume_normalization != null) {
-            _request.append("volume_normalization", request.volume_normalization.toString());
+        if (request.volumeNormalization != null) {
+            _request.append("volume_normalization", request.volumeNormalization.toString());
         }
 
-        if (request.pronunciation_dictionary_locators != null) {
-            for (const _item of request.pronunciation_dictionary_locators) {
+        if (request.pronunciationDictionaryLocators != null) {
+            for (const _item of request.pronunciationDictionaryLocators) {
                 _request.append("pronunciation_dictionary_locators", _item);
             }
         }
 
-        if (request.callback_url != null) {
-            _request.append("callback_url", request.callback_url);
+        if (request.callbackUrl != null) {
+            _request.append("callback_url", request.callbackUrl);
         }
 
         if (request.fiction != null) {
-            _request.append("fiction", request.fiction);
+            _request.append(
+                "fiction",
+                serializers.studio.ProjectsCreateRequestFiction.jsonOrThrow(request.fiction, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
         }
 
-        if (request.apply_text_normalization != null) {
-            _request.append("apply_text_normalization", request.apply_text_normalization);
+        if (request.applyTextNormalization != null) {
+            _request.append(
+                "apply_text_normalization",
+                serializers.studio.ProjectsCreateRequestApplyTextNormalization.jsonOrThrow(
+                    request.applyTextNormalization,
+                    { unrecognizedObjectKeys: "strip" },
+                ),
+            );
         }
 
-        if (request.auto_convert != null) {
-            _request.append("auto_convert", request.auto_convert.toString());
+        if (request.autoConvert != null) {
+            _request.append("auto_convert", request.autoConvert.toString());
         }
 
-        if (request.auto_assign_voices != null) {
-            _request.append("auto_assign_voices", request.auto_assign_voices.toString());
+        if (request.autoAssignVoices != null) {
+            _request.append("auto_assign_voices", request.autoAssignVoices.toString());
         }
 
-        if (request.source_type != null) {
-            _request.append("source_type", request.source_type);
+        if (request.sourceType != null) {
+            _request.append(
+                "source_type",
+                serializers.studio.ProjectsCreateRequestSourceType.jsonOrThrow(request.sourceType, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -284,8 +319,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -299,14 +334,27 @@ export class Projects {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.AddProjectResponseModel, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.AddProjectResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -374,8 +422,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -387,14 +435,27 @@ export class Projects {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.ProjectExtendedResponse, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.ProjectExtendedResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -437,8 +498,8 @@ export class Projects {
      * @example
      *     await client.studio.projects.update("21m00Tcm4TlvDq8ikWAM", {
      *         name: "Project 1",
-     *         default_title_voice_id: "21m00Tcm4TlvDq8ikWAM",
-     *         default_paragraph_voice_id: "21m00Tcm4TlvDq8ikWAM"
+     *         defaultTitleVoiceId: "21m00Tcm4TlvDq8ikWAM",
+     *         defaultParagraphVoiceId: "21m00Tcm4TlvDq8ikWAM"
      *     })
      */
     public update(
@@ -471,28 +532,43 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
-            body: request,
+            body: serializers.studio.BodyUpdateStudioProjectV1StudioProjectsProjectIdPost.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.EditProjectResponseModel, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.EditProjectResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -562,8 +638,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -576,7 +652,12 @@ export class Projects {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.DeleteProjectResponseModel,
+                data: serializers.DeleteProjectResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -585,7 +666,12 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -655,8 +741,8 @@ export class Projects {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -669,7 +755,12 @@ export class Projects {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.ConvertProjectResponseModel,
+                data: serializers.ConvertProjectResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -678,7 +769,12 @@ export class Projects {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

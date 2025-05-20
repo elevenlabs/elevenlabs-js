@@ -4,13 +4,13 @@
 
 export interface AdditionalFormatResponseModel {
     /** The requested format. */
-    requested_format: string;
+    requestedFormat: string;
     /** The file extension of the additional format. */
-    file_extension: string;
+    fileExtension: string;
     /** The content type of the additional format. */
-    content_type: string;
+    contentType: string;
     /** Whether the content is base64 encoded. */
-    is_base64_encoded: boolean;
+    isBase64Encoded: boolean;
     /** The content of the additional format. */
     content: string;
 }

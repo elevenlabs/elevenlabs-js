@@ -5,7 +5,7 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationHistoryEvaluationCriteriaResultCommonModel {
-    criteria_id: string;
+    criteriaId: string;
     result: ElevenLabs.EvaluationSuccessResult;
     rationale: string;
 }

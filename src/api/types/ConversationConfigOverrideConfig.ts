@@ -4,5 +4,5 @@
 
 export interface ConversationConfigOverrideConfig {
     /** Whether to allow overriding the text only configuration */
-    text_only?: boolean;
+    textOnly?: boolean;
 }

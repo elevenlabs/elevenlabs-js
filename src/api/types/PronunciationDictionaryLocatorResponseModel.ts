@@ -3,6 +3,6 @@
  */
 
 export interface PronunciationDictionaryLocatorResponseModel {
-    pronunciation_dictionary_id: string;
-    version_id?: string;
+    pronunciationDictionaryId: string;
+    versionId?: string;
 }

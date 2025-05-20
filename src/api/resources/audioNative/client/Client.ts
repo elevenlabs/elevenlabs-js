@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace AudioNative {
@@ -76,32 +77,32 @@ export class AudioNative {
             _request.append("small", request.small.toString());
         }
 
-        if (request.text_color != null) {
-            _request.append("text_color", request.text_color);
+        if (request.textColor != null) {
+            _request.append("text_color", request.textColor);
         }
 
-        if (request.background_color != null) {
-            _request.append("background_color", request.background_color);
+        if (request.backgroundColor != null) {
+            _request.append("background_color", request.backgroundColor);
         }
 
         if (request.sessionization != null) {
             _request.append("sessionization", request.sessionization.toString());
         }
 
-        if (request.voice_id != null) {
-            _request.append("voice_id", request.voice_id);
+        if (request.voiceId != null) {
+            _request.append("voice_id", request.voiceId);
         }
 
-        if (request.model_id != null) {
-            _request.append("model_id", request.model_id);
+        if (request.modelId != null) {
+            _request.append("model_id", request.modelId);
         }
 
         if (request.file != null) {
             await _request.appendFile("file", request.file);
         }
 
-        if (request.auto_convert != null) {
-            _request.append("auto_convert", request.auto_convert.toString());
+        if (request.autoConvert != null) {
+            _request.append("auto_convert", request.autoConvert.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -122,8 +123,8 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -138,7 +139,12 @@ export class AudioNative {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.AudioNativeCreateProjectResponseModel,
+                data: serializers.AudioNativeCreateProjectResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -147,7 +153,12 @@ export class AudioNative {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -215,8 +226,8 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -229,7 +240,12 @@ export class AudioNative {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.GetAudioNativeProjectSettingsResponseModel,
+                data: serializers.GetAudioNativeProjectSettingsResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -238,7 +254,12 @@ export class AudioNative {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -299,12 +320,12 @@ export class AudioNative {
             await _request.appendFile("file", request.file);
         }
 
-        if (request.auto_convert != null) {
-            _request.append("auto_convert", request.auto_convert.toString());
+        if (request.autoConvert != null) {
+            _request.append("auto_convert", request.autoConvert.toString());
         }
 
-        if (request.auto_publish != null) {
-            _request.append("auto_publish", request.auto_publish.toString());
+        if (request.autoPublish != null) {
+            _request.append("auto_publish", request.autoPublish.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -325,8 +346,8 @@ export class AudioNative {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -341,7 +362,12 @@ export class AudioNative {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.AudioNativeEditContentResponseModel,
+                data: serializers.AudioNativeEditContentResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -350,7 +376,12 @@ export class AudioNative {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

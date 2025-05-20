@@ -13,13 +13,13 @@ export interface SipTrunkConfigResponseModel {
     /** Protocol to use for SIP transport */
     transport: ElevenLabs.SipTrunkTransportEnum;
     /** Whether or not to encrypt media (data layer). */
-    media_encryption: ElevenLabs.SipMediaEncryptionEnum;
+    mediaEncryption: ElevenLabs.SipMediaEncryptionEnum;
     /** SIP headers for INVITE request */
     headers?: Record<string, string>;
     /** Whether authentication credentials are configured */
-    has_auth_credentials: boolean;
+    hasAuthCredentials: boolean;
     /** SIP trunk username (if available) */
     username?: string;
     /** Whether a LiveKit SIP outbound trunk is configured */
-    has_outbound_trunk?: boolean;
+    hasOutboundTrunk?: boolean;
 }

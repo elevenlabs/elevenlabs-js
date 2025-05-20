@@ -3,6 +3,6 @@
  */
 
 export interface ConversationHistoryBatchCallModel {
-    batch_call_id: string;
-    batch_call_recipient_id: string;
+    batchCallId: string;
+    batchCallRecipientId: string;
 }

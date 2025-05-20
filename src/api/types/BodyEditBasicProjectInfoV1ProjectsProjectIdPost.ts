@@ -6,15 +6,15 @@ export interface BodyEditBasicProjectInfoV1ProjectsProjectIdPost {
     /** The name of the Studio project, used for identification only. */
     name: string;
     /** The voice_id that corresponds to the default voice used for new titles. */
-    default_title_voice_id: string;
+    defaultTitleVoiceId: string;
     /** The voice_id that corresponds to the default voice used for new paragraphs. */
-    default_paragraph_voice_id: string;
+    defaultParagraphVoiceId: string;
     /** An optional name of the author of the Studio project, this will be added as metadata to the mp3 file on Studio project or chapter download. */
     title?: string;
     /** An optional name of the author of the Studio project, this will be added as metadata to the mp3 file on Studio project or chapter download. */
     author?: string;
     /** An optional ISBN number of the Studio project you want to create, this will be added as metadata to the mp3 file on Studio project or chapter download. */
-    isbn_number?: string;
+    isbnNumber?: string;
     /** When the Studio project is downloaded, should the returned audio have postprocessing in order to make it compliant with audiobook normalized volume requirements */
-    volume_normalization?: boolean;
+    volumeNormalization?: boolean;
 }

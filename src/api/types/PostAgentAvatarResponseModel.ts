@@ -3,6 +3,6 @@
  */
 
 export interface PostAgentAvatarResponseModel {
-    agent_id: string;
-    avatar_url?: string;
+    agentId: string;
+    avatarUrl?: string;
 }

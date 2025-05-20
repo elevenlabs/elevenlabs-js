@@ -4,5 +4,5 @@
 
 export interface AgentMetadataResponseModel {
     /** The creation time of the agent in unix seconds */
-    created_at_unix_secs: number;
+    createdAtUnixSecs: number;
 }

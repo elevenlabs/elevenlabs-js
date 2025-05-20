@@ -5,6 +5,7 @@
 import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
+import * as serializers from "../../../../../../serialization/index";
 import urlJoin from "url-join";
 import * as errors from "../../../../../../errors/index";
 import { Documents } from "../resources/documents/client/Client";
@@ -69,14 +70,7 @@ export class KnowledgeBase {
         request: ElevenLabs.conversationalAi.KnowledgeBaseListRequest = {},
         requestOptions?: KnowledgeBase.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetKnowledgeBaseListResponseModel>> {
-        const {
-            cursor,
-            page_size: pageSize,
-            search,
-            show_only_owned_documents: showOnlyOwnedDocuments,
-            types,
-            use_typesense: useTypesense,
-        } = request;
+        const { cursor, pageSize, search, showOnlyOwnedDocuments, types, useTypesense } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
             _queryParams["cursor"] = cursor;
@@ -96,9 +90,13 @@ export class KnowledgeBase {
 
         if (types != null) {
             if (Array.isArray(types)) {
-                _queryParams["types"] = types.map((item) => item);
+                _queryParams["types"] = types.map((item) =>
+                    serializers.KnowledgeBaseDocumentType.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
+                );
             } else {
-                _queryParams["types"] = types;
+                _queryParams["types"] = serializers.KnowledgeBaseDocumentType.jsonOrThrow(types, {
+                    unrecognizedObjectKeys: "strip",
+                });
             }
         }
 
@@ -123,8 +121,8 @@ export class KnowledgeBase {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -138,7 +136,12 @@ export class KnowledgeBase {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.GetKnowledgeBaseListResponseModel,
+                data: serializers.GetKnowledgeBaseListResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -147,7 +150,12 @@ export class KnowledgeBase {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

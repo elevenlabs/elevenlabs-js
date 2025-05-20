@@ -9,5 +9,5 @@ export interface KeepContextAlive {
     /** An empty string. This text is ignored by the server but its presence resets the inactivity timeout for the specified context. */
     text: "";
     /** The identifier of the context to keep alive. */
-    context_id: string;
+    contextId: string;
 }

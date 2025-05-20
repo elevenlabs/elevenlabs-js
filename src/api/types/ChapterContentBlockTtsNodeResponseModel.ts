@@ -3,6 +3,6 @@
  */
 
 export interface ChapterContentBlockTtsNodeResponseModel {
-    voice_id: string;
+    voiceId: string;
     text: string;
 }

@@ -6,7 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface Voice {
     /** The ID of the voice. */
-    voice_id: string;
+    voiceId: string;
     /** The name of the voice. */
     name?: string;
     /** List of samples associated with the voice. */
@@ -14,35 +14,35 @@ export interface Voice {
     /** The category of the voice. */
     category?: ElevenLabs.VoiceResponseModelCategory;
     /** Fine-tuning information for the voice. */
-    fine_tuning?: ElevenLabs.FineTuningResponse;
+    fineTuning?: ElevenLabs.FineTuningResponse;
     /** Labels associated with the voice. */
     labels?: Record<string, string>;
     /** The description of the voice. */
     description?: string;
     /** The preview URL of the voice. */
-    preview_url?: string;
+    previewUrl?: string;
     /** The tiers the voice is available for. */
-    available_for_tiers?: string[];
+    availableForTiers?: string[];
     /** The settings of the voice. */
     settings?: ElevenLabs.VoiceSettings;
     /** The sharing information of the voice. */
     sharing?: ElevenLabs.VoiceSharingResponse;
     /** The base model IDs for high-quality voices. */
-    high_quality_base_model_ids?: string[];
+    highQualityBaseModelIds?: string[];
     /** The verified languages of the voice. */
-    verified_languages?: ElevenLabs.VerifiedVoiceLanguageResponseModel[];
+    verifiedLanguages?: ElevenLabs.VerifiedVoiceLanguageResponseModel[];
     /** The safety controls of the voice. */
-    safety_control?: ElevenLabs.VoiceResponseModelSafetyControl;
+    safetyControl?: ElevenLabs.VoiceResponseModelSafetyControl;
     /** The voice verification of the voice. */
-    voice_verification?: ElevenLabs.VoiceVerificationResponse;
+    voiceVerification?: ElevenLabs.VoiceVerificationResponse;
     /** The permission on the resource of the voice. */
-    permission_on_resource?: string;
+    permissionOnResource?: string;
     /** Whether the voice is owned by the user. */
-    is_owner?: boolean;
+    isOwner?: boolean;
     /** Whether the voice is legacy. */
-    is_legacy?: boolean;
+    isLegacy?: boolean;
     /** Whether the voice is mixed. */
-    is_mixed?: boolean;
+    isMixed?: boolean;
     /** The creation time of the voice in Unix time. */
-    created_at_unix?: number;
+    createdAtUnix?: number;
 }

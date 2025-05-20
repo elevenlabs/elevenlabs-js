@@ -16,21 +16,21 @@ export interface ConversationsListRequest {
     /**
      * The id of the agent you're taking the action on.
      */
-    agent_id?: string;
+    agentId?: string;
     /**
      * The result of the success evaluation
      */
-    call_successful?: ElevenLabs.EvaluationSuccessResult;
+    callSuccessful?: ElevenLabs.EvaluationSuccessResult;
     /**
      * Unix timestamp (in seconds) to filter conversations up to this start date.
      */
-    call_start_before_unix?: number;
+    callStartBeforeUnix?: number;
     /**
      * Unix timestamp (in seconds) to filter conversations after to this start date.
      */
-    call_start_after_unix?: number;
+    callStartAfterUnix?: number;
     /**
      * How many conversations to return at maximum. Can not exceed 100, defaults to 30.
      */
-    page_size?: number;
+    pageSize?: number;
 }

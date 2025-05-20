@@ -4,13 +4,13 @@
 
 export interface VoiceSamplePreviewResponseModel {
     /** The base64 encoded audio. */
-    audio_base_64: string;
+    audioBase64: string;
     /** The ID of the voice. */
-    voice_id: string;
+    voiceId: string;
     /** The ID of the sample. */
-    sample_id: string;
+    sampleId: string;
     /** The media type of the audio. */
-    media_type: string;
+    mediaType: string;
     /** The duration of the audio in seconds. */
-    duration_secs?: number;
+    durationSecs?: number;
 }

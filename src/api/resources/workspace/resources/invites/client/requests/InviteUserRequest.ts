@@ -14,7 +14,7 @@ export interface InviteUserRequest {
     /** The email of the customer */
     email: string;
     /** The group ids of the user */
-    group_ids?: string[];
+    groupIds?: string[];
     /** The workspace permission of the user */
-    workspace_permission?: ElevenLabs.workspace.BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission;
+    workspacePermission?: ElevenLabs.workspace.BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission;
 }

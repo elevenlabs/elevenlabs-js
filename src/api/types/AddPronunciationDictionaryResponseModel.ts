@@ -10,15 +10,15 @@ export interface AddPronunciationDictionaryResponseModel {
     /** The name of the created pronunciation dictionary. */
     name: string;
     /** The user ID of the creator of the pronunciation dictionary. */
-    created_by: string;
+    createdBy: string;
     /** The creation time of the pronunciation dictionary in Unix timestamp. */
-    creation_time_unix: number;
+    creationTimeUnix: number;
     /** The ID of the created pronunciation dictionary version. */
-    version_id: string;
+    versionId: string;
     /** The number of rules in the version of the pronunciation dictionary. */
-    version_rules_num: number;
+    versionRulesNum: number;
     /** The description of the pronunciation dictionary. */
     description?: string;
     /** The permission on the resource of the pronunciation dictionary. */
-    permission_on_resource?: ElevenLabs.AddPronunciationDictionaryResponseModelPermissionOnResource;
+    permissionOnResource?: ElevenLabs.AddPronunciationDictionaryResponseModelPermissionOnResource;
 }

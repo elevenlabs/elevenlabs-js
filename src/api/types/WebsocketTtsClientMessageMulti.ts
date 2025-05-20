@@ -16,21 +16,21 @@ export interface WebsocketTtsClientMessageMulti {
      */
     text?: string;
     /** Voice settings. Can only be provided in the first message for a given context_id (or first message overall if context_id is not used/default). */
-    voice_settings?: ElevenLabs.RealtimeVoiceSettings;
+    voiceSettings?: ElevenLabs.RealtimeVoiceSettings;
     /** Generation config. Can only be provided in the first message for a given context_id (or first message overall if context_id is not used/default). */
-    generation_config?: ElevenLabs.GenerationConfig;
+    generationConfig?: ElevenLabs.GenerationConfig;
     /** Your ElevenLabs API key. Can only be provided in the first message for a given context_id if not present in the header. */
-    "xi-api-key"?: string;
+    xiApiKey?: string;
     /** Your authorization bearer token. Can only be provided in the first message for a given context_id if not present in the header. */
     authorization?: string;
     /** If true, flushes the audio buffer and returns the remaining audio for the specified `context_id`. */
     flush?: boolean;
     /** Optional list of pronunciation dictionary locators. Can only be provided in the first message for a given context_id. */
-    pronunciation_dictionary_locators?: ElevenLabs.PronunciationDictionaryLocator[];
+    pronunciationDictionaryLocators?: ElevenLabs.PronunciationDictionaryLocator[];
     /** An identifier for the text-to-speech context. Allows managing multiple independent audio generation streams over a single WebSocket connection. If omitted, a default context is used. */
-    context_id?: string;
+    contextId?: string;
     /** If true, closes the specified `context_id`. No further audio will be generated for this context. The `text` field is ignored. */
-    close_context?: boolean;
+    closeContext?: boolean;
     /** If true, flushes all contexts and closes the entire WebSocket connection. The `text` and `context_id` fields are ignored. */
-    close_socket?: boolean;
+    closeSocket?: boolean;
 }

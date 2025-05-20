@@ -227,26 +227,6 @@ types:
         type: optional<DynamicVariablesConfig>
         docs: Configuration for dynamic variables
       prompt:
-        type: optional<PromptAgent>
-        docs: The prompt for the agent
-    source:
-      openapi: openapi.json
-  AgentConfigDbModel:
-    properties:
-      first_message:
-        type: optional<string>
-        docs: >-
-          If non-empty, the first message the agent will say. If empty, the
-          agent waits for the user to start the discussion.
-        default: ''
-      language:
-        type: optional<string>
-        docs: Language of the agent - used for ASR and TTS
-        default: en
-      dynamic_variables:
-        type: optional<DynamicVariablesConfig>
-        docs: Configuration for dynamic variables
-      prompt:
         type: optional<PromptAgentDbModel>
     source:
       openapi: openapi.json
@@ -2135,7 +2115,7 @@ types:
       agent and an AI user.
     properties:
       simulated_user_config:
-        type: AgentConfigDbModel
+        type: AgentConfig
       tool_mock_config:
         type: optional<map<string, ToolMockConfig>>
       partial_conversation_history:

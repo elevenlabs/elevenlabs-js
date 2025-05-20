@@ -6,15 +6,15 @@ import * as ElevenLabs from "../index";
 
 export interface VoiceVerificationResponse {
     /** Whether the voice requires verification. */
-    requires_verification: boolean;
+    requiresVerification: boolean;
     /** Whether the voice has been verified. */
-    is_verified: boolean;
+    isVerified: boolean;
     /** List of verification failures. */
-    verification_failures: string[];
+    verificationFailures: string[];
     /** The number of verification attempts. */
-    verification_attempts_count: number;
+    verificationAttemptsCount: number;
     /** The language of the voice. */
     language?: string;
     /** Number of times a verification was attempted. */
-    verification_attempts?: ElevenLabs.VerificationAttemptResponse[];
+    verificationAttempts?: ElevenLabs.VerificationAttemptResponse[];
 }

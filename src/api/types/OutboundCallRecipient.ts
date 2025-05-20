@@ -6,6 +6,6 @@ import * as ElevenLabs from "../index";
 
 export interface OutboundCallRecipient {
     id?: string;
-    phone_number: string;
-    conversation_initiation_client_data?: ElevenLabs.ConversationInitiationClientDataRequestInput;
+    phoneNumber: string;
+    conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestInput;
 }

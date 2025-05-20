@@ -3,5 +3,5 @@
  */
 
 export interface ConversationSignedUrlResponseModel {
-    signed_url: string;
+    signedUrl: string;
 }

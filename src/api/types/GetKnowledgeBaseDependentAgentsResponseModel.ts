@@ -6,6 +6,6 @@ import * as ElevenLabs from "../index";
 
 export interface GetKnowledgeBaseDependentAgentsResponseModel {
     agents: ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModelAgentsItem[];
-    next_cursor?: string;
-    has_more: boolean;
+    nextCursor?: string;
+    hasMore: boolean;
 }

@@ -5,7 +5,7 @@
 import * as ElevenLabs from "../index";
 
 export interface AgentBan {
-    at_unix: number;
+    atUnix: number;
     reason?: string;
-    reason_type: ElevenLabs.BanReasonType;
+    reasonType: ElevenLabs.BanReasonType;
 }

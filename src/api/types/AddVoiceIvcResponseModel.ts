@@ -4,7 +4,7 @@
 
 export interface AddVoiceIvcResponseModel {
     /** The ID of the newly created voice. */
-    voice_id: string;
+    voiceId: string;
     /** Whether the voice requires verification */
-    requires_verification: boolean;
+    requiresVerification: boolean;
 }

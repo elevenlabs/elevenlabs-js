@@ -5,6 +5,6 @@
 import * as ElevenLabs from "../index";
 
 export interface LlmCategoryUsage {
-    irreversible_generation?: ElevenLabs.LlmUsageOutput;
-    initiated_generation?: ElevenLabs.LlmUsageOutput;
+    irreversibleGeneration?: ElevenLabs.LlmUsageOutput;
+    initiatedGeneration?: ElevenLabs.LlmUsageOutput;
 }

@@ -5,7 +5,7 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationHistoryFeedbackCommonModel {
-    overall_score?: ElevenLabs.UserFeedbackScore;
+    overallScore?: ElevenLabs.UserFeedbackScore;
     likes?: number;
     dislikes?: number;
 }

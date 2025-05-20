@@ -5,12 +5,12 @@
 /**
  * @example
  *     {
- *         agent_id: "21m00Tcm4TlvDq8ikWAM"
+ *         agentId: "21m00Tcm4TlvDq8ikWAM"
  *     }
  */
 export interface ConversationsGetSignedUrlRequest {
     /**
      * The id of the agent you're taking the action on.
      */
-    agent_id: string;
+    agentId: string;
 }

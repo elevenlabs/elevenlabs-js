@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import * as stream from "stream";
+import * as serializers from "../../../../serialization/index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -52,12 +53,7 @@ export class TextToSpeech {
         request: ElevenLabs.TextToSpeechRequest,
         requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<core.WithRawResponse<stream.Readable>> {
-        const {
-            enable_logging: enableLogging,
-            optimize_streaming_latency: optimizeStreamingLatency,
-            output_format: outputFormat,
-            ..._body
-        } = request;
+        const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (enableLogging != null) {
             _queryParams["enable_logging"] = enableLogging.toString();
@@ -68,7 +64,10 @@ export class TextToSpeech {
         }
 
         if (outputFormat != null) {
-            _queryParams["output_format"] = outputFormat;
+            _queryParams["output_format"] = serializers.TextToSpeechConvertRequestOutputFormat.jsonOrThrow(
+                outputFormat,
+                { unrecognizedObjectKeys: "strip" },
+            );
         }
 
         const _response = await core.fetcher<stream.Readable>({
@@ -88,8 +87,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -97,7 +96,7 @@ export class TextToSpeech {
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
-            body: _body,
+            body: serializers.TextToSpeechRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
@@ -111,7 +110,12 @@ export class TextToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -169,12 +173,7 @@ export class TextToSpeech {
         request: ElevenLabs.TextToSpeechWithTimestampsRequest,
         requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AudioWithTimestampsResponse>> {
-        const {
-            enable_logging: enableLogging,
-            optimize_streaming_latency: optimizeStreamingLatency,
-            output_format: outputFormat,
-            ..._body
-        } = request;
+        const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (enableLogging != null) {
             _queryParams["enable_logging"] = enableLogging.toString();
@@ -185,7 +184,10 @@ export class TextToSpeech {
         }
 
         if (outputFormat != null) {
-            _queryParams["output_format"] = outputFormat;
+            _queryParams["output_format"] =
+                serializers.TextToSpeechConvertWithTimestampsRequestOutputFormat.jsonOrThrow(outputFormat, {
+                    unrecognizedObjectKeys: "strip",
+                });
         }
 
         const _response = await core.fetcher({
@@ -205,8 +207,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -214,14 +216,19 @@ export class TextToSpeech {
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
-            body: _body,
+            body: serializers.TextToSpeechWithTimestampsRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.AudioWithTimestampsResponse,
+                data: serializers.AudioWithTimestampsResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -230,7 +237,12 @@ export class TextToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -278,12 +290,7 @@ export class TextToSpeech {
         request: ElevenLabs.StreamTextToSpeechRequest,
         requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<core.WithRawResponse<stream.Readable>> {
-        const {
-            enable_logging: enableLogging,
-            optimize_streaming_latency: optimizeStreamingLatency,
-            output_format: outputFormat,
-            ..._body
-        } = request;
+        const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (enableLogging != null) {
             _queryParams["enable_logging"] = enableLogging.toString();
@@ -294,7 +301,10 @@ export class TextToSpeech {
         }
 
         if (outputFormat != null) {
-            _queryParams["output_format"] = outputFormat;
+            _queryParams["output_format"] = serializers.TextToSpeechStreamRequestOutputFormat.jsonOrThrow(
+                outputFormat,
+                { unrecognizedObjectKeys: "strip" },
+            );
         }
 
         const _response = await core.fetcher<stream.Readable>({
@@ -314,8 +324,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -323,7 +333,7 @@ export class TextToSpeech {
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
-            body: _body,
+            body: serializers.StreamTextToSpeechRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
@@ -337,7 +347,12 @@ export class TextToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -384,12 +399,7 @@ export class TextToSpeech {
         request: ElevenLabs.StreamTextToSpeechWithTimestampsRequest,
         requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<core.WithRawResponse<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponse>>> {
-        const {
-            enable_logging: enableLogging,
-            optimize_streaming_latency: optimizeStreamingLatency,
-            output_format: outputFormat,
-            ..._body
-        } = request;
+        const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (enableLogging != null) {
             _queryParams["enable_logging"] = enableLogging.toString();
@@ -400,7 +410,10 @@ export class TextToSpeech {
         }
 
         if (outputFormat != null) {
-            _queryParams["output_format"] = outputFormat;
+            _queryParams["output_format"] = serializers.TextToSpeechStreamWithTimestampsRequestOutputFormat.jsonOrThrow(
+                outputFormat,
+                { unrecognizedObjectKeys: "strip" },
+            );
         }
 
         const _response = await core.fetcher<stream.Readable>({
@@ -420,8 +433,8 @@ export class TextToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -429,7 +442,9 @@ export class TextToSpeech {
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
-            body: _body,
+            body: serializers.StreamTextToSpeechWithTimestampsRequest.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "strip",
+            }),
             responseType: "sse",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
@@ -439,7 +454,14 @@ export class TextToSpeech {
             return {
                 data: new core.Stream({
                     stream: _response.body,
-                    parse: (data) => data as any,
+                    parse: async (data) => {
+                        return serializers.StreamingAudioChunkWithTimestampsResponse.parseOrThrow(data, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        });
+                    },
                     signal: requestOptions?.abortSignal,
                     eventShape: {
                         type: "json",
@@ -454,7 +476,12 @@ export class TextToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

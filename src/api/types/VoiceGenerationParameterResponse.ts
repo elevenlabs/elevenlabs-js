@@ -8,8 +8,8 @@ export interface VoiceGenerationParameterResponse {
     genders: ElevenLabs.VoiceGenerationParameterOptionResponse[];
     accents: ElevenLabs.VoiceGenerationParameterOptionResponse[];
     ages: ElevenLabs.VoiceGenerationParameterOptionResponse[];
-    minimum_characters: number;
-    maximum_characters: number;
-    minimum_accent_strength: number;
-    maximum_accent_strength: number;
+    minimumCharacters: number;
+    maximumCharacters: number;
+    minimumAccentStrength: number;
+    maximumAccentStrength: number;
 }

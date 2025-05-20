@@ -6,7 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface LlmInputOutputTokensUsage {
     input?: ElevenLabs.LlmTokensCategoryUsage;
-    input_cache_read?: ElevenLabs.LlmTokensCategoryUsage;
-    input_cache_write?: ElevenLabs.LlmTokensCategoryUsage;
-    output_total?: ElevenLabs.LlmTokensCategoryUsage;
+    inputCacheRead?: ElevenLabs.LlmTokensCategoryUsage;
+    inputCacheWrite?: ElevenLabs.LlmTokensCategoryUsage;
+    outputTotal?: ElevenLabs.LlmTokensCategoryUsage;
 }

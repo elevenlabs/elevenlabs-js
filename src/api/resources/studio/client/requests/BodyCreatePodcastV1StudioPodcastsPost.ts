@@ -7,12 +7,12 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         model_id: "21m00Tcm4TlvDq8ikWAM",
+ *         modelId: "21m00Tcm4TlvDq8ikWAM",
  *         mode: {
  *             type: "conversation",
  *             conversation: {
- *                 host_voice_id: "aw1NgEzBg83R7vgmiJt6",
- *                 guest_voice_id: "aw1NgEzBg83R7vgmiJt7"
+ *                 hostVoiceId: "aw1NgEzBg83R7vgmiJt6",
+ *                 guestVoiceId: "aw1NgEzBg83R7vgmiJt7"
  *             }
  *         },
  *         source: {
@@ -22,7 +22,7 @@ import * as ElevenLabs from "../../../../index";
  */
 export interface BodyCreatePodcastV1StudioPodcastsPost {
     /** The ID of the model to be used for this Studio project, you can query GET /v1/models to list all available models. */
-    model_id: string;
+    modelId: string;
     /** The type of podcast to generate. Can be 'conversation', an interaction between two voices, or 'bulletin', a monologue. */
     mode: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostMode;
     /** The source content for the Podcast. */
@@ -34,18 +34,18 @@ export interface BodyCreatePodcastV1StudioPodcastsPost {
      * ultra - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side. Using this setting increases the credit cost by 50%.
      * ultra lossless - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format. Using this setting increases the credit cost by 100%.
      */
-    quality_preset?: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostQualityPreset;
+    qualityPreset?: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostQualityPreset;
     /**
      * Duration of the generated podcast. Must be one of:
      * short - produces podcasts shorter than 3 minutes.
      * default - produces podcasts roughly between 3-7 minutes.
      * long - prodces podcasts longer than 7 minutes.
      */
-    duration_scale?: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostDurationScale;
+    durationScale?: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostDurationScale;
     /** An optional language of the Studio project. Two-letter language code (ISO 639-1). */
     language?: string;
     /** A brief summary or highlights of the Studio project's content, providing key points or themes. This should be between 10 and 70 characters. */
     highlights?: string[];
     /** A url that will be called by our service when the Studio project is converted. Request will contain a json blob containing the status of the conversion */
-    callback_url?: string;
+    callbackUrl?: string;
 }

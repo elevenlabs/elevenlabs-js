@@ -12,18 +12,18 @@ export type SystemToolConfigOutputParams =
 
 export namespace SystemToolConfigOutputParams {
     export interface EndCall extends ElevenLabs.EndCallToolConfig {
-        system_tool_type: "end_call";
+        systemToolType: "end_call";
     }
 
     export interface LanguageDetection extends ElevenLabs.LanguageDetectionToolConfig {
-        system_tool_type: "language_detection";
+        systemToolType: "language_detection";
     }
 
     export interface TransferToAgent extends ElevenLabs.TransferToAgentToolConfig {
-        system_tool_type: "transfer_to_agent";
+        systemToolType: "transfer_to_agent";
     }
 
     export interface TransferToNumber extends ElevenLabs.TransferToNumberToolConfig {
-        system_tool_type: "transfer_to_number";
+        systemToolType: "transfer_to_number";
     }
 }

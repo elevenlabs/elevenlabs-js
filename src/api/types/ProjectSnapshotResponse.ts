@@ -4,15 +4,15 @@
 
 export interface ProjectSnapshotResponse {
     /** The ID of the project snapshot. */
-    project_snapshot_id: string;
+    projectSnapshotId: string;
     /** The ID of the project. */
-    project_id: string;
+    projectId: string;
     /** The creation date of the project snapshot. */
-    created_at_unix: number;
+    createdAtUnix: number;
     /** The name of the project snapshot. */
     name: string;
     /** (Deprecated) */
-    audio_upload?: Record<string, unknown>;
+    audioUpload?: Record<string, unknown>;
     /** (Deprecated) */
-    zip_upload?: Record<string, unknown>;
+    zipUpload?: Record<string, unknown>;
 }

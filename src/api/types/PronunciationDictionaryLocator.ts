@@ -7,7 +7,7 @@
  */
 export interface PronunciationDictionaryLocator {
     /** The unique identifier of the pronunciation dictionary */
-    dictionary_id: string;
+    dictionaryId: string;
     /** The version identifier of the pronunciation dictionary */
-    version_id: string;
+    versionId: string;
 }

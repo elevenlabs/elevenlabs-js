@@ -6,15 +6,15 @@ import * as ElevenLabs from "../index";
 
 export interface DubbingMetadataResponse {
     /** The ID of the dubbing project. */
-    dubbing_id: string;
+    dubbingId: string;
     /** The name of the dubbing project. */
     name: string;
     /** The status of the dubbing project. Either 'dubbed', 'dubbing' or 'failed'. */
     status: string;
     /** The target languages of the dubbing project. */
-    target_languages: string[];
+    targetLanguages: string[];
     /** The media metadata of the dubbing project. */
-    media_metadata?: ElevenLabs.DubbingMediaMetadata;
+    mediaMetadata?: ElevenLabs.DubbingMediaMetadata;
     /** Optional error message if the dubbing project failed. */
     error?: string;
 }

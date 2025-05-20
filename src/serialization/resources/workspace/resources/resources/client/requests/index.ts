@@ -1,0 +1,2 @@
+export { BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePost } from "./BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePost";
+export { BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIdUnsharePost } from "./BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIdUnsharePost";

@@ -3,5 +3,5 @@
  */
 
 export interface TtsConversationalConfigOverride {
-    voice_id?: string;
+    voiceId?: string;
 }

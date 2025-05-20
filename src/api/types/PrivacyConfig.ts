@@ -4,15 +4,15 @@
 
 export interface PrivacyConfig {
     /** Whether to record the conversation */
-    record_voice?: boolean;
+    recordVoice?: boolean;
     /** The number of days to retain the conversation. -1 indicates there is no retention limit */
-    retention_days?: number;
+    retentionDays?: number;
     /** Whether to delete the transcript and PII */
-    delete_transcript_and_pii?: boolean;
+    deleteTranscriptAndPii?: boolean;
     /** Whether to delete the audio */
-    delete_audio?: boolean;
+    deleteAudio?: boolean;
     /** Whether to apply the privacy settings to existing conversations */
-    apply_to_existing_conversations?: boolean;
+    applyToExistingConversations?: boolean;
     /** Whether to enable zero retention mode - no PII data is stored */
-    zero_retention_mode?: boolean;
+    zeroRetentionMode?: boolean;
 }

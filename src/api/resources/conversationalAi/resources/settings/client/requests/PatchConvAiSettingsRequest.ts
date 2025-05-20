@@ -9,9 +9,9 @@ import * as ElevenLabs from "../../../../../../index";
  *     {}
  */
 export interface PatchConvAiSettingsRequest {
-    conversation_initiation_client_data_webhook?: ElevenLabs.ConversationInitiationClientDataWebhook;
+    conversationInitiationClientDataWebhook?: ElevenLabs.ConversationInitiationClientDataWebhook;
     webhooks?: ElevenLabs.ConvAiWebhooks;
     /** Whether the workspace can use MCP servers */
-    can_use_mcp_servers?: boolean;
-    rag_retention_period_days?: number;
+    canUseMcpServers?: boolean;
+    ragRetentionPeriodDays?: number;
 }

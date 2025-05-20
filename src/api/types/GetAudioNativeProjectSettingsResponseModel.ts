@@ -8,7 +8,7 @@ export interface GetAudioNativeProjectSettingsResponseModel {
     /** Whether the project is enabled. */
     enabled: boolean;
     /** The ID of the latest snapshot of the project. */
-    snapshot_id?: string;
+    snapshotId?: string;
     /** The settings of the project. */
     settings?: ElevenLabs.AudioNativeProjectSettingsResponseModel;
 }

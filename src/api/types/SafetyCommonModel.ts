@@ -9,5 +9,5 @@ import * as ElevenLabs from "../index";
  */
 export interface SafetyCommonModel {
     ivc?: ElevenLabs.SafetyEvaluation;
-    non_ivc?: ElevenLabs.SafetyEvaluation;
+    nonIvc?: ElevenLabs.SafetyEvaluation;
 }

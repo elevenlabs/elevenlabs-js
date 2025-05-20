@@ -5,8 +5,8 @@
 import * as ElevenLabs from "../index";
 
 export interface DataCollectionResultCommonModel {
-    data_collection_id: string;
+    dataCollectionId: string;
     value?: unknown;
-    json_schema?: ElevenLabs.LiteralJsonSchemaProperty;
+    jsonSchema?: ElevenLabs.LiteralJsonSchemaProperty;
     rationale: string;
 }

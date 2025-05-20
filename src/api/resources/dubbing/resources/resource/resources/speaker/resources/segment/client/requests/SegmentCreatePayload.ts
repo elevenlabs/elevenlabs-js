@@ -5,13 +5,13 @@
 /**
  * @example
  *     {
- *         start_time: 1.1,
- *         end_time: 1.1
+ *         startTime: 1.1,
+ *         endTime: 1.1
  *     }
  */
 export interface SegmentCreatePayload {
-    start_time: number;
-    end_time: number;
+    startTime: number;
+    endTime: number;
     text?: string;
     translations?: Record<string, string | undefined>;
 }

@@ -12,15 +12,15 @@ export interface HistoryListRequest {
     /**
      * How many history items to return at maximum. Can not exceed 1000, defaults to 100.
      */
-    page_size?: number;
+    pageSize?: number;
     /**
      * After which ID to start fetching, use this parameter to paginate across a large collection of history items. In case this parameter is not provided history items will be fetched starting from the most recently created one ordered descending by their creation date.
      */
-    start_after_history_item_id?: string;
+    startAfterHistoryItemId?: string;
     /**
      * ID of the voice to be filtered for. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
      */
-    voice_id?: string;
+    voiceId?: string;
     /**
      * Search term used for filtering history items. If provided, source becomes required.
      */

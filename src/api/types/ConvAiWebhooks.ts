@@ -3,5 +3,5 @@
  */
 
 export interface ConvAiWebhooks {
-    post_call_webhook_id?: string;
+    postCallWebhookId?: string;
 }

@@ -3,6 +3,6 @@
  */
 
 export interface LanguagePresetTranslation {
-    source_hash: string;
+    sourceHash: string;
     text: string;
 }

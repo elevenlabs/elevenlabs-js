@@ -12,14 +12,14 @@ export interface AgentPlatformSettingsResponseModel {
     /** Configuration for the widget */
     widget?: ElevenLabs.WidgetConfig;
     /** Data collection settings */
-    data_collection?: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
+    dataCollection?: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
     /** Additional overrides for the agent during conversation initiation */
     overrides?: ElevenLabs.ConversationInitiationClientDataConfigOutput;
     /** Call limits for the agent */
-    call_limits?: ElevenLabs.AgentCallLimits;
+    callLimits?: ElevenLabs.AgentCallLimits;
     /** Privacy settings for the agent */
     privacy?: ElevenLabs.PrivacyConfig;
     /** Workspace overrides for the agent */
-    workspace_overrides?: ElevenLabs.AgentWorkspaceOverridesOutput;
+    workspaceOverrides?: ElevenLabs.AgentWorkspaceOverridesOutput;
     safety?: ElevenLabs.SafetyResponseModel;
 }

@@ -6,29 +6,29 @@ import * as ElevenLabs from "../index";
 
 export interface User {
     /** The unique identifier of the user. */
-    user_id: string;
+    userId: string;
     /** Details of the user's subscription. */
     subscription: ElevenLabs.SubscriptionResponse;
     /** Optional additional details about the user's subscription. */
-    subscription_extras?: ElevenLabs.SubscriptionExtrasResponseModel;
+    subscriptionExtras?: ElevenLabs.SubscriptionExtrasResponseModel;
     /** Whether the user is new. */
-    is_new_user: boolean;
+    isNewUser: boolean;
     /** The API key of the user. */
-    xi_api_key?: string;
+    xiApiKey?: string;
     /** Whether the user can use delayed payment methods. */
-    can_use_delayed_payment_methods: boolean;
+    canUseDelayedPaymentMethods: boolean;
     /** Whether the user's onboarding is completed. */
-    is_onboarding_completed: boolean;
+    isOnboardingCompleted: boolean;
     /** Whether the user's onboarding checklist is completed. */
-    is_onboarding_checklist_completed: boolean;
+    isOnboardingChecklistCompleted: boolean;
     /** First name of the user. */
-    first_name?: string;
+    firstName?: string;
     /** Whether the user's API key is hashed. */
-    is_api_key_hashed?: boolean;
+    isApiKeyHashed?: boolean;
     /** The preview of the user's API key. */
-    xi_api_key_preview?: string;
+    xiApiKeyPreview?: string;
     /** The referral link code of the user. */
-    referral_link_code?: string;
+    referralLinkCode?: string;
     /** The Partnerstack partner default link of the user. */
-    partnerstack_partner_default_link?: string;
+    partnerstackPartnerDefaultLink?: string;
 }

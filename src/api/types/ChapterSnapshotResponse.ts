@@ -4,13 +4,13 @@
 
 export interface ChapterSnapshotResponse {
     /** The ID of the chapter snapshot. */
-    chapter_snapshot_id: string;
+    chapterSnapshotId: string;
     /** The ID of the project. */
-    project_id: string;
+    projectId: string;
     /** The ID of the chapter. */
-    chapter_id: string;
+    chapterId: string;
     /** The creation date of the chapter snapshot. */
-    created_at_unix: number;
+    createdAtUnix: number;
     /** The name of the chapter snapshot. */
     name: string;
 }

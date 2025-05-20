@@ -4,5 +4,5 @@
 
 export interface PodcastBulletinModeData {
     /** The ID of the host voice. */
-    host_voice_id: string;
+    hostVoiceId: string;
 }

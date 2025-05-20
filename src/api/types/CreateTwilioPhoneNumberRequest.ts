@@ -4,7 +4,7 @@
 
 export interface CreateTwilioPhoneNumberRequest {
     /** Phone number */
-    phone_number: string;
+    phoneNumber: string;
     /** Label for the phone number */
     label: string;
     /** Twilio Account SID */

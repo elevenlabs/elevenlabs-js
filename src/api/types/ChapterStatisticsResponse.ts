@@ -4,11 +4,11 @@
 
 export interface ChapterStatisticsResponse {
     /** The number of unconverted characters. */
-    characters_unconverted: number;
+    charactersUnconverted: number;
     /** The number of converted characters. */
-    characters_converted: number;
+    charactersConverted: number;
     /** The number of converted paragraphs. */
-    paragraphs_converted: number;
+    paragraphsConverted: number;
     /** The number of unconverted paragraphs. */
-    paragraphs_unconverted: number;
+    paragraphsUnconverted: number;
 }

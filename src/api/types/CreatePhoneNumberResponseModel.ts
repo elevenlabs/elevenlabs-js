@@ -4,5 +4,5 @@
 
 export interface CreatePhoneNumberResponseModel {
     /** Phone entity ID */
-    phone_number_id: string;
+    phoneNumberId: string;
 }

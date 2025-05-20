@@ -4,7 +4,7 @@
 
 export interface VoiceSampleVisualWaveformResponseModel {
     /** The ID of the sample. */
-    sample_id: string;
+    sampleId: string;
     /** The visual waveform of the sample, represented as a list of floats. */
-    visual_waveform: number[];
+    visualWaveform: number[];
 }

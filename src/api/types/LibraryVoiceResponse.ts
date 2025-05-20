@@ -6,11 +6,11 @@ import * as ElevenLabs from "../index";
 
 export interface LibraryVoiceResponse {
     /** The public owner id of the voice. */
-    public_owner_id: string;
+    publicOwnerId: string;
     /** The id of the voice. */
-    voice_id: string;
+    voiceId: string;
     /** The date the voice was added to the library in Unix time. */
-    date_unix: number;
+    dateUnix: number;
     /** The name of the voice. */
     name: string;
     /** The accent of the voice. */
@@ -22,7 +22,7 @@ export interface LibraryVoiceResponse {
     /** The descriptive of the voice. */
     descriptive: string;
     /** The use case of the voice. */
-    use_case: string;
+    useCase: string;
     /** The category of the voice. */
     category: ElevenLabs.LibraryVoiceResponseModelCategory;
     /** The language of the voice. */
@@ -32,39 +32,39 @@ export interface LibraryVoiceResponse {
     /** The description of the voice. */
     description?: string;
     /** The preview URL of the voice. */
-    preview_url?: string;
+    previewUrl?: string;
     /** The usage character count of the voice in the last year. */
-    usage_character_count_1y: number;
+    usageCharacterCount1Y: number;
     /** The usage character count of the voice in the last 7 days. */
-    usage_character_count_7d: number;
+    usageCharacterCount7D: number;
     /** The play API usage character count of the voice in the last year. */
-    play_api_usage_character_count_1y: number;
+    playApiUsageCharacterCount1Y: number;
     /** The number of times the voice has been cloned. */
-    cloned_by_count: number;
+    clonedByCount: number;
     /** The rate multiplier of the voice. */
     rate?: number;
     /** The rate of the voice in USD per 1000 credits. null if default */
-    fiat_rate?: number;
+    fiatRate?: number;
     /** Whether free users are allowed to use the voice. */
-    free_users_allowed: boolean;
+    freeUsersAllowed: boolean;
     /** Whether live moderation is enabled for the voice. */
-    live_moderation_enabled: boolean;
+    liveModerationEnabled: boolean;
     /** Whether the voice is featured. */
     featured: boolean;
     /** The verified languages of the voice. */
-    verified_languages?: ElevenLabs.VerifiedVoiceLanguageResponseModel[];
+    verifiedLanguages?: ElevenLabs.VerifiedVoiceLanguageResponseModel[];
     /** The notice period of the voice. */
-    notice_period?: number;
+    noticePeriod?: number;
     /** The Instagram username of the voice. */
-    instagram_username?: string;
+    instagramUsername?: string;
     /** The Twitter username of the voice. */
-    twitter_username?: string;
+    twitterUsername?: string;
     /** The YouTube username of the voice. */
-    youtube_username?: string;
+    youtubeUsername?: string;
     /** The TikTok username of the voice. */
-    tiktok_username?: string;
+    tiktokUsername?: string;
     /** The image URL of the voice. */
-    image_url?: string;
+    imageUrl?: string;
     /** Whether the voice was added by the user. */
-    is_added_by_user?: boolean;
+    isAddedByUser?: boolean;
 }

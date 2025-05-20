@@ -9,7 +9,7 @@ export interface LiteralJsonSchemaProperty {
     /** The description of the property */
     description?: string;
     /** The dynamic variable of the property */
-    dynamic_variable?: string;
+    dynamicVariable?: string;
     /** The constant value of the property */
-    constant_value?: ElevenLabs.LiteralJsonSchemaPropertyConstantValue;
+    constantValue?: ElevenLabs.LiteralJsonSchemaPropertyConstantValue;
 }

@@ -8,8 +8,8 @@ export interface GetKnowledgeBaseUrlResponseModel {
     id: string;
     name: string;
     metadata: ElevenLabs.KnowledgeBaseDocumentMetadataResponseModel;
-    prompt_injectable: boolean;
-    access_info: ElevenLabs.ResourceAccessInfo;
-    extracted_inner_html: string;
+    promptInjectable: boolean;
+    accessInfo: ElevenLabs.ResourceAccessInfo;
+    extractedInnerHtml: string;
     url: string;
 }

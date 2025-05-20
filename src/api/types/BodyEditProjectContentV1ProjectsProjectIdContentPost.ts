@@ -4,9 +4,9 @@
 
 export interface BodyEditProjectContentV1ProjectsProjectIdContentPost {
     /** An optional URL from which we will extract content to initialize the Studio project. If this is set, 'from_url' must be null. If neither 'from_url' or 'from_document' are provided we will initialize the Studio project as blank. */
-    from_url?: string;
+    fromUrl?: string;
     /** An optional .epub, .pdf, .txt or similar file can be provided. If provided, we will initialize the Studio project with its content. If this is set, 'from_url' must be null.  If neither 'from_url' or 'from_document' are provided we will initialize the Studio project as blank. */
-    from_document?: string;
+    fromDocument?: string;
     /** Whether to auto convert the Studio project to audio or not. */
-    auto_convert?: boolean;
+    autoConvert?: boolean;
 }

@@ -8,18 +8,18 @@ import * as ElevenLabs from "../../../../../../index";
  * @example
  *     {
  *         role: "admin",
- *         resource_type: "voice"
+ *         resourceType: "voice"
  *     }
  */
 export interface BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePost {
     /** Role to update the target principal with. */
     role: ElevenLabs.workspace.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole;
     /** Resource type of the target resource. */
-    resource_type: ElevenLabs.WorkspaceResourceType;
+    resourceType: ElevenLabs.WorkspaceResourceType;
     /** The email of the user or service account. */
-    user_email?: string;
+    userEmail?: string;
     /** The ID of the target group. To target the permissions principals have by default on this resource, use the value 'default'. */
-    group_id?: string;
+    groupId?: string;
     /** The ID of the target workspace API key. This isn't the same as the key itself that would you pass in the header for authentication. Workspace admins can find this in the workspace settings UI. */
-    workspace_api_key_id?: string;
+    workspaceApiKeyId?: string;
 }

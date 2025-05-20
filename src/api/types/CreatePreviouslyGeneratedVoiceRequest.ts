@@ -4,13 +4,13 @@
 
 export interface CreatePreviouslyGeneratedVoiceRequest {
     /** Name to use for the created voice. */
-    voice_name: string;
+    voiceName: string;
     /** Description to use for the created voice. */
-    voice_description: string;
+    voiceDescription: string;
     /** The generated_voice_id to create, call POST /v1/text-to-voice/create-previews and fetch the generated_voice_id from the response header if don't have one yet. */
-    generated_voice_id: string;
+    generatedVoiceId: string;
     /** List of voice ids that the user has played but not selected. Used for RLHF. */
-    played_not_selected_voice_ids?: string[];
+    playedNotSelectedVoiceIds?: string[];
     /** Optional, metadata to add to the created voice. Defaults to None. */
     labels?: Record<string, string | undefined>;
 }

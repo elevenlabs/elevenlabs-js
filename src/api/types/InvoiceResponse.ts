@@ -4,9 +4,9 @@
 
 export interface InvoiceResponse {
     /** The amount due in cents. */
-    amount_due_cents: number;
+    amountDueCents: number;
     /** The discount applied to the invoice. E.g. [20.0f] for 20% off. */
-    discount_percent_off?: number;
+    discountPercentOff?: number;
     /** The Unix timestamp of the next payment attempt. */
-    next_payment_attempt_unix: number;
+    nextPaymentAttemptUnix: number;
 }

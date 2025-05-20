@@ -9,8 +9,8 @@ import * as ElevenLabs from "../index";
  * The unsafe reason is provided from the evaluation
  */
 export interface SafetyEvaluation {
-    is_unsafe?: boolean;
-    llm_reason?: string;
-    safety_prompt_version?: number;
-    matched_rule_id?: ElevenLabs.SafetyRule[];
+    isUnsafe?: boolean;
+    llmReason?: string;
+    safetyPromptVersion?: number;
+    matchedRuleId?: ElevenLabs.SafetyRule[];
 }

@@ -6,9 +6,9 @@ import * as ElevenLabs from "../index";
 
 export interface ConversationHistoryTranscriptToolCallCommonModel {
     type?: string;
-    request_id: string;
-    tool_name: string;
-    params_as_json: string;
-    tool_has_been_called: boolean;
-    tool_details?: ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelToolDetails;
+    requestId: string;
+    toolName: string;
+    paramsAsJson: string;
+    toolHasBeenCalled: boolean;
+    toolDetails?: ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelToolDetails;
 }

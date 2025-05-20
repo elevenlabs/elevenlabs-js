@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import * as stream from "stream";
+import * as serializers from "../../../../serialization/index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -53,38 +54,46 @@ export class SpeechToSpeech {
         requestOptions?: SpeechToSpeech.RequestOptions,
     ): Promise<core.WithRawResponse<stream.Readable>> {
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (request.enable_logging != null) {
-            _queryParams["enable_logging"] = request.enable_logging.toString();
+        if (request.enableLogging != null) {
+            _queryParams["enable_logging"] = request.enableLogging.toString();
         }
 
-        if (request.optimize_streaming_latency != null) {
-            _queryParams["optimize_streaming_latency"] = request.optimize_streaming_latency.toString();
+        if (request.optimizeStreamingLatency != null) {
+            _queryParams["optimize_streaming_latency"] = request.optimizeStreamingLatency.toString();
         }
 
-        if (request.output_format != null) {
-            _queryParams["output_format"] = request.output_format;
+        if (request.outputFormat != null) {
+            _queryParams["output_format"] = serializers.SpeechToSpeechConvertRequestOutputFormat.jsonOrThrow(
+                request.outputFormat,
+                { unrecognizedObjectKeys: "strip" },
+            );
         }
 
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
-        if (request.model_id != null) {
-            _request.append("model_id", request.model_id);
+        if (request.modelId != null) {
+            _request.append("model_id", request.modelId);
         }
 
-        if (request.voice_settings != null) {
-            _request.append("voice_settings", request.voice_settings);
+        if (request.voiceSettings != null) {
+            _request.append("voice_settings", request.voiceSettings);
         }
 
         if (request.seed != null) {
             _request.append("seed", request.seed.toString());
         }
 
-        if (request.remove_background_noise != null) {
-            _request.append("remove_background_noise", request.remove_background_noise.toString());
+        if (request.removeBackgroundNoise != null) {
+            _request.append("remove_background_noise", request.removeBackgroundNoise.toString());
         }
 
-        if (request.file_format != null) {
-            _request.append("file_format", request.file_format);
+        if (request.fileFormat != null) {
+            _request.append(
+                "file_format",
+                serializers.SpeechToSpeechConvertRequestFileFormat.jsonOrThrow(request.fileFormat, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -105,8 +114,8 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -129,7 +138,12 @@ export class SpeechToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -178,38 +192,46 @@ export class SpeechToSpeech {
         requestOptions?: SpeechToSpeech.RequestOptions,
     ): Promise<core.WithRawResponse<stream.Readable>> {
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (request.enable_logging != null) {
-            _queryParams["enable_logging"] = request.enable_logging.toString();
+        if (request.enableLogging != null) {
+            _queryParams["enable_logging"] = request.enableLogging.toString();
         }
 
-        if (request.optimize_streaming_latency != null) {
-            _queryParams["optimize_streaming_latency"] = request.optimize_streaming_latency.toString();
+        if (request.optimizeStreamingLatency != null) {
+            _queryParams["optimize_streaming_latency"] = request.optimizeStreamingLatency.toString();
         }
 
-        if (request.output_format != null) {
-            _queryParams["output_format"] = request.output_format;
+        if (request.outputFormat != null) {
+            _queryParams["output_format"] = serializers.SpeechToSpeechStreamRequestOutputFormat.jsonOrThrow(
+                request.outputFormat,
+                { unrecognizedObjectKeys: "strip" },
+            );
         }
 
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
-        if (request.model_id != null) {
-            _request.append("model_id", request.model_id);
+        if (request.modelId != null) {
+            _request.append("model_id", request.modelId);
         }
 
-        if (request.voice_settings != null) {
-            _request.append("voice_settings", request.voice_settings);
+        if (request.voiceSettings != null) {
+            _request.append("voice_settings", request.voiceSettings);
         }
 
         if (request.seed != null) {
             _request.append("seed", request.seed.toString());
         }
 
-        if (request.remove_background_noise != null) {
-            _request.append("remove_background_noise", request.remove_background_noise.toString());
+        if (request.removeBackgroundNoise != null) {
+            _request.append("remove_background_noise", request.removeBackgroundNoise.toString());
         }
 
-        if (request.file_format != null) {
-            _request.append("file_format", request.file_format);
+        if (request.fileFormat != null) {
+            _request.append(
+                "file_format",
+                serializers.SpeechToSpeechStreamRequestFileFormat.jsonOrThrow(request.fileFormat, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -230,8 +252,8 @@ export class SpeechToSpeech {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -254,7 +276,12 @@ export class SpeechToSpeech {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

@@ -6,11 +6,10 @@ import * as ElevenLabs from "../index";
 
 export interface AgentConfig {
     /** If non-empty, the first message the agent will say. If empty, the agent waits for the user to start the discussion. */
-    first_message?: string;
+    firstMessage?: string;
     /** Language of the agent - used for ASR and TTS */
     language?: string;
     /** Configuration for dynamic variables */
-    dynamic_variables?: ElevenLabs.DynamicVariablesConfig;
-    /** The prompt for the agent */
-    prompt?: ElevenLabs.PromptAgent;
+    dynamicVariables?: ElevenLabs.DynamicVariablesConfig;
+    prompt?: ElevenLabs.PromptAgentDbModel;
 }

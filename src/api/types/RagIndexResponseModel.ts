@@ -6,5 +6,5 @@ import * as ElevenLabs from "../index";
 
 export interface RagIndexResponseModel {
     status: ElevenLabs.RagIndexStatus;
-    progress_percentage: number;
+    progressPercentage: number;
 }

@@ -8,5 +8,5 @@ export interface WorkspaceGroupByNameResponseModel {
     /** The ID of the workspace group. */
     id: string;
     /** The emails of the members of the workspace group. */
-    members_emails: string[];
+    membersEmails: string[];
 }

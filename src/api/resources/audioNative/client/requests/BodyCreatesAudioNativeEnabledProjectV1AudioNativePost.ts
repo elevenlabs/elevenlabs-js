@@ -22,16 +22,16 @@ export interface BodyCreatesAudioNativeEnabledProjectV1AudioNativePost {
     /** (Deprecated) Whether to use small player or not. If not provided, default value set in the Player settings is used. */
     small?: boolean;
     /** Text color used in the player. If not provided, default text color set in the Player settings is used. */
-    text_color?: string;
+    textColor?: string;
     /** Background color used in the player. If not provided, default background color set in the Player settings is used. */
-    background_color?: string;
+    backgroundColor?: string;
     /** (Deprecated) Specifies for how many minutes to persist the session across page reloads. If not provided, default sessionization set in the Player settings is used. */
     sessionization?: number;
     /** Voice ID used to voice the content. If not provided, default voice ID set in the Player settings is used. */
-    voice_id?: string;
+    voiceId?: string;
     /** TTS Model ID used in the player. If not provided, default model ID set in the Player settings is used. */
-    model_id?: string;
+    modelId?: string;
     file?: File | fs.ReadStream | Blob | undefined;
     /** Whether to auto convert the project to audio or not. */
-    auto_convert?: boolean;
+    autoConvert?: boolean;
 }

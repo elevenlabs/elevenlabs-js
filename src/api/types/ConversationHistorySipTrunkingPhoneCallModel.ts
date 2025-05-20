@@ -6,8 +6,8 @@ import * as ElevenLabs from "../index";
 
 export interface ConversationHistorySipTrunkingPhoneCallModel {
     direction: ElevenLabs.ConversationHistorySipTrunkingPhoneCallModelDirection;
-    phone_number_id: string;
-    agent_number: string;
-    external_number: string;
-    call_sid: string;
+    phoneNumberId: string;
+    agentNumber: string;
+    externalNumber: string;
+    callSid: string;
 }

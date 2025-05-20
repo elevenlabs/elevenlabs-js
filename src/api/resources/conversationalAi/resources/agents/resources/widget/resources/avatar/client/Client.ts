@@ -7,6 +7,7 @@ import * as core from "../../../../../../../../../../core";
 import * as ElevenLabs from "../../../../../../../../../index";
 import * as fs from "fs";
 import urlJoin from "url-join";
+import * as serializers from "../../../../../../../../../../serialization/index";
 import * as errors from "../../../../../../../../../../errors/index";
 
 export declare namespace Avatar {
@@ -46,7 +47,7 @@ export class Avatar {
      *
      * @example
      *     await client.conversationalAi.agents.widget.avatar.create("21m00Tcm4TlvDq8ikWAM", {
-     *         avatar_file: fs.createReadStream("/path/to/your/file")
+     *         avatarFile: fs.createReadStream("/path/to/your/file")
      *     })
      */
     public create(
@@ -63,7 +64,7 @@ export class Avatar {
         requestOptions?: Avatar.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.PostAgentAvatarResponseModel>> {
         const _request = await core.newFormData();
-        await _request.appendFile("avatar_file", request.avatar_file);
+        await _request.appendFile("avatar_file", request.avatarFile);
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
@@ -82,8 +83,8 @@ export class Avatar {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -98,7 +99,12 @@ export class Avatar {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.PostAgentAvatarResponseModel,
+                data: serializers.PostAgentAvatarResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -107,7 +113,12 @@ export class Avatar {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

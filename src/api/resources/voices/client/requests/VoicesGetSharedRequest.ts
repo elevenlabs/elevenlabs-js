@@ -8,14 +8,14 @@ import * as ElevenLabs from "../../../../index";
  * @example
  *     {
  *         featured: true,
- *         reader_app_enabled: true
+ *         readerAppEnabled: true
  *     }
  */
 export interface VoicesGetSharedRequest {
     /**
      * How many shared voices to return at maximum. Can not exceed 100, defaults to 30.
      */
-    page_size?: number;
+    pageSize?: number;
     /**
      * Voice category used for filtering
      */
@@ -47,7 +47,7 @@ export interface VoicesGetSharedRequest {
     /**
      * Use-case used for filtering
      */
-    use_cases?: string | string[];
+    useCases?: string | string[];
     /**
      * Search term used for filtering
      */
@@ -59,19 +59,19 @@ export interface VoicesGetSharedRequest {
     /**
      * Filter voices with a minimum notice period of the given number of days.
      */
-    min_notice_period_days?: number;
+    minNoticePeriodDays?: number;
     /**
      * Include/exclude voices with custom rates
      */
-    include_custom_rates?: boolean;
+    includeCustomRates?: boolean;
     /**
      * Filter voices that are enabled for the reader app
      */
-    reader_app_enabled?: boolean;
+    readerAppEnabled?: boolean;
     /**
      * Filter voices by public owner ID
      */
-    owner_id?: string;
+    ownerId?: string;
     /**
      * Sort criteria
      */

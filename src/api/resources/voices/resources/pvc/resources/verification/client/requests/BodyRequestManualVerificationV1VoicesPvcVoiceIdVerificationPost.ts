@@ -13,5 +13,5 @@ import * as fs from "fs";
 export interface BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost {
     files: File[] | fs.ReadStream[] | Blob[];
     /** Extra text to be used in the manual verification process. */
-    extra_text?: string;
+    extraText?: string;
 }

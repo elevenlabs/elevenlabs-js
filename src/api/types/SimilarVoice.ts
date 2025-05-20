@@ -5,9 +5,9 @@
 import * as ElevenLabs from "../index";
 
 export interface SimilarVoice {
-    voice_id: string;
+    voiceId: string;
     name: string;
     category: ElevenLabs.SimilarVoiceCategory;
     description?: string;
-    preview_url?: string;
+    previewUrl?: string;
 }

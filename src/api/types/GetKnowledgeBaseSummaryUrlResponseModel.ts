@@ -8,8 +8,8 @@ export interface GetKnowledgeBaseSummaryUrlResponseModel {
     id: string;
     name: string;
     metadata: ElevenLabs.KnowledgeBaseDocumentMetadataResponseModel;
-    prompt_injectable: boolean;
-    access_info: ElevenLabs.ResourceAccessInfo;
-    dependent_agents: ElevenLabs.GetKnowledgeBaseSummaryUrlResponseModelDependentAgentsItem[];
+    promptInjectable: boolean;
+    accessInfo: ElevenLabs.ResourceAccessInfo;
+    dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryUrlResponseModelDependentAgentsItem[];
     url: string;
 }

@@ -4,5 +4,5 @@
 
 export interface AddVoiceResponseModel {
     /** The ID of the voice. */
-    voice_id: string;
+    voiceId: string;
 }

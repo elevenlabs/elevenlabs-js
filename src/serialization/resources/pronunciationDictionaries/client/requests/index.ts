@@ -1,0 +1,1 @@
+export { BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost";

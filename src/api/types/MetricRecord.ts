@@ -3,5 +3,5 @@
  */
 
 export interface MetricRecord {
-    elapsed_time: number;
+    elapsedTime: number;
 }

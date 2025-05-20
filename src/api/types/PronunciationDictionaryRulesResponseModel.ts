@@ -6,7 +6,7 @@ export interface PronunciationDictionaryRulesResponseModel {
     /** The ID of the pronunciation dictionary. */
     id: string;
     /** The version ID of the pronunciation dictionary. */
-    version_id: string;
+    versionId: string;
     /** The number of rules in the version of the pronunciation dictionary. */
-    version_rules_num: number;
+    versionRulesNum: number;
 }

@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 import { Resource } from "../resources/resource/client/Client";
 import { Audio } from "../resources/audio/client/Client";
@@ -80,68 +81,68 @@ export class Dubbing {
             await _request.appendFile("file", request.file);
         }
 
-        if (request.csv_file != null) {
-            await _request.appendFile("csv_file", request.csv_file);
+        if (request.csvFile != null) {
+            await _request.appendFile("csv_file", request.csvFile);
         }
 
-        if (request.foreground_audio_file != null) {
-            await _request.appendFile("foreground_audio_file", request.foreground_audio_file);
+        if (request.foregroundAudioFile != null) {
+            await _request.appendFile("foreground_audio_file", request.foregroundAudioFile);
         }
 
-        if (request.background_audio_file != null) {
-            await _request.appendFile("background_audio_file", request.background_audio_file);
+        if (request.backgroundAudioFile != null) {
+            await _request.appendFile("background_audio_file", request.backgroundAudioFile);
         }
 
         if (request.name != null) {
             _request.append("name", request.name);
         }
 
-        if (request.source_url != null) {
-            _request.append("source_url", request.source_url);
+        if (request.sourceUrl != null) {
+            _request.append("source_url", request.sourceUrl);
         }
 
-        if (request.source_lang != null) {
-            _request.append("source_lang", request.source_lang);
+        if (request.sourceLang != null) {
+            _request.append("source_lang", request.sourceLang);
         }
 
-        if (request.target_lang != null) {
-            _request.append("target_lang", request.target_lang);
+        if (request.targetLang != null) {
+            _request.append("target_lang", request.targetLang);
         }
 
-        if (request.num_speakers != null) {
-            _request.append("num_speakers", request.num_speakers.toString());
+        if (request.numSpeakers != null) {
+            _request.append("num_speakers", request.numSpeakers.toString());
         }
 
         if (request.watermark != null) {
             _request.append("watermark", request.watermark.toString());
         }
 
-        if (request.start_time != null) {
-            _request.append("start_time", request.start_time.toString());
+        if (request.startTime != null) {
+            _request.append("start_time", request.startTime.toString());
         }
 
-        if (request.end_time != null) {
-            _request.append("end_time", request.end_time.toString());
+        if (request.endTime != null) {
+            _request.append("end_time", request.endTime.toString());
         }
 
-        if (request.highest_resolution != null) {
-            _request.append("highest_resolution", request.highest_resolution.toString());
+        if (request.highestResolution != null) {
+            _request.append("highest_resolution", request.highestResolution.toString());
         }
 
-        if (request.drop_background_audio != null) {
-            _request.append("drop_background_audio", request.drop_background_audio.toString());
+        if (request.dropBackgroundAudio != null) {
+            _request.append("drop_background_audio", request.dropBackgroundAudio.toString());
         }
 
-        if (request.use_profanity_filter != null) {
-            _request.append("use_profanity_filter", request.use_profanity_filter.toString());
+        if (request.useProfanityFilter != null) {
+            _request.append("use_profanity_filter", request.useProfanityFilter.toString());
         }
 
-        if (request.dubbing_studio != null) {
-            _request.append("dubbing_studio", request.dubbing_studio.toString());
+        if (request.dubbingStudio != null) {
+            _request.append("dubbing_studio", request.dubbingStudio.toString());
         }
 
-        if (request.disable_voice_cloning != null) {
-            _request.append("disable_voice_cloning", request.disable_voice_cloning.toString());
+        if (request.disableVoiceCloning != null) {
+            _request.append("disable_voice_cloning", request.disableVoiceCloning.toString());
         }
 
         if (request.mode != null) {
@@ -166,8 +167,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -181,14 +182,27 @@ export class Dubbing {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.DoDubbingResponse, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.DoDubbingResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -256,8 +270,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -269,14 +283,27 @@ export class Dubbing {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as ElevenLabs.DubbingMetadataResponse, rawResponse: _response.rawResponse };
+            return {
+                data: serializers.DubbingMetadataResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:
@@ -344,8 +371,8 @@ export class Dubbing {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-SDK-Version": "v2.0.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -358,7 +385,12 @@ export class Dubbing {
         });
         if (_response.ok) {
             return {
-                data: _response.body as ElevenLabs.DeleteDubbingResponseModel,
+                data: serializers.DeleteDubbingResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -367,7 +399,12 @@ export class Dubbing {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         _response.rawResponse,
                     );
                 default:

@@ -8,5 +8,5 @@
  */
 export interface BatchCallsListRequest {
     limit?: number;
-    last_doc?: string;
+    lastDoc?: string;
 }

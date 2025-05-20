@@ -6,8 +6,8 @@ import * as ElevenLabs from "../index";
 
 export interface SpeakerSegment {
     id: string;
-    start_time: number;
-    end_time: number;
+    startTime: number;
+    endTime: number;
     text: string;
     dubs: Record<string, ElevenLabs.DubbedSegment>;
 }

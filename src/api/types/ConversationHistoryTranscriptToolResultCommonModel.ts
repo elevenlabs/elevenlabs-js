@@ -4,10 +4,10 @@
 
 export interface ConversationHistoryTranscriptToolResultCommonModel {
     type?: string;
-    request_id: string;
-    tool_name: string;
-    result_value: string;
-    is_error: boolean;
-    tool_has_been_called: boolean;
-    tool_latency_secs?: number;
+    requestId: string;
+    toolName: string;
+    resultValue: string;
+    isError: boolean;
+    toolHasBeenCalled: boolean;
+    toolLatencySecs?: number;
 }

@@ -4,6 +4,6 @@
 
 export interface PostWorkspaceSecretResponseModel {
     type: "stored";
-    secret_id: string;
+    secretId: string;
     name: string;
 }

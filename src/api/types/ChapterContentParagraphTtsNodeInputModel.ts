@@ -5,5 +5,5 @@
 export interface ChapterContentParagraphTtsNodeInputModel {
     type: "tts_node";
     text: string;
-    voice_id: string;
+    voiceId: string;
 }

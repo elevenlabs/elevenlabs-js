@@ -6,7 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface ConvAiWorkspaceStoredSecretConfig {
     type: "stored";
-    secret_id: string;
+    secretId: string;
     name: string;
-    used_by: ElevenLabs.ConvAiStoredSecretDependencies;
+    usedBy: ElevenLabs.ConvAiStoredSecretDependencies;
 }

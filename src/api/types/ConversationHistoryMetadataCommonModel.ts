@@ -5,18 +5,18 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationHistoryMetadataCommonModel {
-    start_time_unix_secs: number;
-    accepted_time_unix_secs?: number;
-    call_duration_secs: number;
+    startTimeUnixSecs: number;
+    acceptedTimeUnixSecs?: number;
+    callDurationSecs: number;
     cost?: number;
-    deletion_settings?: ElevenLabs.ConversationDeletionSettings;
+    deletionSettings?: ElevenLabs.ConversationDeletionSettings;
     feedback?: ElevenLabs.ConversationHistoryFeedbackCommonModel;
-    authorization_method?: ElevenLabs.AuthorizationMethod;
+    authorizationMethod?: ElevenLabs.AuthorizationMethod;
     charging?: ElevenLabs.ConversationChargingCommonModel;
-    phone_call?: ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall;
-    batch_call?: ElevenLabs.ConversationHistoryBatchCallModel;
-    termination_reason?: string;
+    phoneCall?: ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall;
+    batchCall?: ElevenLabs.ConversationHistoryBatchCallModel;
+    terminationReason?: string;
     error?: ElevenLabs.ConversationHistoryErrorCommonModel;
-    main_language?: string;
-    rag_usage?: ElevenLabs.ConversationHistoryRagUsageCommonModel;
+    mainLanguage?: string;
+    ragUsage?: ElevenLabs.ConversationHistoryRagUsageCommonModel;
 }

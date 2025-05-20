@@ -5,8 +5,8 @@
 import * as ElevenLabs from "../index";
 
 export interface DependentPhoneNumberIdentifier {
-    phone_number_id: string;
-    phone_number: string;
+    phoneNumberId: string;
+    phoneNumber: string;
     label: string;
     provider: ElevenLabs.TelephonyProvider;
 }

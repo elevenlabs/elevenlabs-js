@@ -6,6 +6,6 @@ import * as ElevenLabs from "../index";
 
 export interface AgentWorkspaceOverridesOutput {
     /** The webhook to send conversation initiation client data to */
-    conversation_initiation_client_data_webhook?: ElevenLabs.ConversationInitiationClientDataWebhook;
+    conversationInitiationClientDataWebhook?: ElevenLabs.ConversationInitiationClientDataWebhook;
     webhooks?: ElevenLabs.ConvAiWebhooks;
 }

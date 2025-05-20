@@ -7,9 +7,9 @@ import * as fs from "fs";
 /**
  * @example
  *     {
- *         avatar_file: fs.createReadStream("/path/to/your/file")
+ *         avatarFile: fs.createReadStream("/path/to/your/file")
  *     }
  */
 export interface BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost {
-    avatar_file: File | fs.ReadStream | Blob;
+    avatarFile: File | fs.ReadStream | Blob;
 }

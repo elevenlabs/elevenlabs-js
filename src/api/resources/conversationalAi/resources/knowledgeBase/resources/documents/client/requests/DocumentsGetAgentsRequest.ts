@@ -14,5 +14,5 @@ export interface DocumentsGetAgentsRequest {
     /**
      * How many documents to return at maximum. Can not exceed 100, defaults to 30.
      */
-    page_size?: number;
+    pageSize?: number;
 }

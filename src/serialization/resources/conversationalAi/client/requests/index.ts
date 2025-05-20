@@ -1,0 +1,1 @@
+export { PatchWorkspaceSecretRequest } from "./PatchWorkspaceSecretRequest";

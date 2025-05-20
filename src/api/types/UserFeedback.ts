@@ -6,5 +6,5 @@ import * as ElevenLabs from "../index";
 
 export interface UserFeedback {
     score: ElevenLabs.UserFeedbackScore;
-    time_in_call_secs: number;
+    timeInCallSecs: number;
 }
