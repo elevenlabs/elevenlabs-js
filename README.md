@@ -51,7 +51,7 @@ yarn add @elevenlabs/elevenlabs-js
 For more detailed information about these models and others, visit the [ElevenLabs Models documentation](https://elevenlabs.io/docs/models).
 
 ```ts
-import { ElevenLabsClient, play } from "elevenlabs";
+import { ElevenLabsClient, play } from "@elevenlabs/elevenlabs-js";
 
 const elevenlabs = new ElevenLabsClient({
     apiKey: "YOUR_API_KEY", // Defaults to process.env.ELEVENLABS_API_KEY
@@ -80,7 +80,7 @@ await play(audio);
 List all your available voices with `search()`.
 
 ```ts
-import { ElevenLabsClient } from "elevenlabs";
+import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 
 const elevenlabs = new ElevenLabsClient({
     apiKey: "YOUR_API_KEY", // Defaults to process.env.ELEVENLABS_API_KEY
