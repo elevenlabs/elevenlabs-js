@@ -19,7 +19,7 @@ describe("ElevenLabs API Tests", () => {
             const client = new ElevenLabsClient();
             const audioStream = await client.textToSpeech.convert(DEFAULT_VOICE, {
                 text: DEFAULT_TEXT,
-                model_id: DEFAULT_MODEL,
+                modelId: DEFAULT_MODEL,
             });
             const audio = Buffer.concat(await streamToBuffer(audioStream));
             expect(Buffer.isBuffer(audio)).toBeTruthy();
@@ -29,7 +29,7 @@ describe("ElevenLabs API Tests", () => {
             const client = new ElevenLabsClient();
             const audioStream = await client.textToSpeech.stream(DEFAULT_VOICE, {
                 text: DEFAULT_TEXT,
-                model_id: DEFAULT_MODEL,
+                modelId: DEFAULT_MODEL,
             });
             await playIfNotGithub(audioStream);
         });
@@ -37,7 +37,7 @@ describe("ElevenLabs API Tests", () => {
             const client = new ElevenLabsClient();
             const result = (await client.textToSpeech.convertWithTimestamps(DEFAULT_VOICE, {
                 text: DEFAULT_TEXT,
-                model_id: DEFAULT_MODEL,
+                modelId: DEFAULT_MODEL,
             })) as unknown as { audio_base64: string; alignment: string }; // Fern type-gen issue
             expect(result.audio_base64).toBeDefined();
             expect(result.alignment).toBeDefined();
@@ -49,12 +49,12 @@ describe("ElevenLabs API Tests", () => {
 
             const stream = await client.textToSpeech.streamWithTimestamps(DEFAULT_VOICE, {
                 text: DEFAULT_TEXT,
-                model_id: DEFAULT_MODEL,
+                modelId: DEFAULT_MODEL,
             });
             for await (const chunk of stream) {
                 if ("audio_base64" in chunk) {
-                    if (chunk.audio_base64) {
-                        const audioChunk = Buffer.from(chunk.audio_base64, "base64");
+                    if (chunk.audioBase64) {
+                        const audioChunk = Buffer.from(chunk.audioBase64, "base64");
                         audioData = Buffer.concat([audioData, audioChunk]);
                     }
                 }
@@ -72,7 +72,7 @@ describe("ElevenLabs API Tests", () => {
 
             const transcription = await client.speechToText.convert({
                 file: audioBlob,
-                model_id: "scribe_v1",
+                modelId: "scribe_v1",
             });
             expect(typeof transcription.text).toBe("string");
             expect(transcription.text.length).toBeGreaterThan(0);
@@ -116,7 +116,7 @@ describe("ElevenLabs API Tests", () => {
             const client = new ElevenLabsClient();
 
             const voice = await client.voices.get(DEFAULT_VOICE);
-            expect(voice.voice_id).toBe(DEFAULT_VOICE);
+            expect(voice.voiceId).toBe(DEFAULT_VOICE);
             if (voice.settings) {
                 expect(voice.settings).toBeDefined();
             }
@@ -133,15 +133,15 @@ describe("ElevenLabs API Tests", () => {
                 "This is a test message that needs to be at least one hundred characters long to meet the API requirements. Here it is.";
 
             const previews = await client.textToVoice.createPreviews({
-                voice_description: description,
+                voiceDescription: description,
                 text: sampleText,
             });
 
             expect(previews.previews.length).toBeGreaterThan(0);
-            expect(previews.previews[0].generated_voice_id).toBeDefined();
-            expect(previews.previews[0].audio_base_64).toBeDefined();
+            expect(previews.previews[0].generatedVoiceId).toBeDefined();
+            expect(previews.previews[0].audioBase64).toBeDefined();
 
-            await playIfNotGithub(Buffer.from(previews.previews[0].audio_base_64, "base64"));
+            await playIfNotGithub(Buffer.from(previews.previews[0].audioBase64, "base64"));
         });
     });
 
@@ -151,7 +151,7 @@ describe("ElevenLabs API Tests", () => {
 
             const audioStream = await client.textToSoundEffects.convert({
                 text: "Hypnotic throbbing sound effect. Increases in intensity.",
-                duration_seconds: 2,
+                durationSeconds: 2,
             });
             const audio = Buffer.concat(await streamToBuffer(audioStream));
             expect(Buffer.isBuffer(audio)).toBeTruthy();
@@ -192,7 +192,7 @@ describe("ElevenLabs API Tests", () => {
     describe("history", () => {
         it("getAll", async () => {
             const client = new ElevenLabsClient();
-            const history = await client.history.list({ page_size: 5 });
+            const history = await client.history.list({ pageSize: 5 });
             expect(history.history).toBeDefined();
             expect(Array.isArray(history.history)).toBeTruthy();
         });
@@ -203,7 +203,7 @@ describe("ElevenLabs API Tests", () => {
             const elevenlabs = new ElevenLabsClient();
 
             // Create test payload
-            const payload = { event_type: "test_event", data: { id: "123" } };
+            const payload = { eventType: "test_event", data: { id: "123" } };
 
             // Create mock signature components
             const timestamp = Math.floor(Date.now() / 1000).toString();
