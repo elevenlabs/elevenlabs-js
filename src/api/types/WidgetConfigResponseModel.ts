@@ -55,6 +55,8 @@ export interface WidgetConfigResponseModel {
     show_avatar_when_collapsed?: boolean;
     /** Whether to disable the banner */
     disable_banner?: boolean;
+    /** The override link for the widget */
+    override_link?: string;
     /** Whether to enable mic muting */
     mic_muting_enabled?: boolean;
     language: string;

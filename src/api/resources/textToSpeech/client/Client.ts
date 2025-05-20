@@ -39,11 +39,19 @@ export class TextToSpeech {
      * Converts text into speech using a voice of your choice and returns audio.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    public async convert(
+    public convert(
         voiceId: string,
         request: ElevenLabs.TextToSpeechRequest,
         requestOptions?: TextToSpeech.RequestOptions,
-    ): Promise<stream.Readable> {
+    ): core.HttpResponsePromise<stream.Readable> {
+        return core.HttpResponsePromise.fromPromise(this.__convert(voiceId, request, requestOptions));
+    }
+
+    private async __convert(
+        voiceId: string,
+        request: ElevenLabs.TextToSpeechRequest,
+        requestOptions?: TextToSpeech.RequestOptions,
+    ): Promise<core.WithRawResponse<stream.Readable>> {
         const {
             enable_logging: enableLogging,
             optimize_streaming_latency: optimizeStreamingLatency,
@@ -79,9 +87,9 @@ export class TextToSpeech {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -96,7 +104,7 @@ export class TextToSpeech {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return { data: _response.body, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -104,11 +112,13 @@ export class TextToSpeech {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -118,6 +128,7 @@ export class TextToSpeech {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -126,6 +137,7 @@ export class TextToSpeech {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -144,11 +156,19 @@ export class TextToSpeech {
      *         text: "This is a test for the API of ElevenLabs."
      *     })
      */
-    public async convertWithTimestamps(
+    public convertWithTimestamps(
         voiceId: string,
         request: ElevenLabs.TextToSpeechWithTimestampsRequest,
         requestOptions?: TextToSpeech.RequestOptions,
-    ): Promise<ElevenLabs.AudioWithTimestampsResponse> {
+    ): core.HttpResponsePromise<ElevenLabs.AudioWithTimestampsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__convertWithTimestamps(voiceId, request, requestOptions));
+    }
+
+    private async __convertWithTimestamps(
+        voiceId: string,
+        request: ElevenLabs.TextToSpeechWithTimestampsRequest,
+        requestOptions?: TextToSpeech.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.AudioWithTimestampsResponse>> {
         const {
             enable_logging: enableLogging,
             optimize_streaming_latency: optimizeStreamingLatency,
@@ -184,9 +204,9 @@ export class TextToSpeech {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -200,7 +220,10 @@ export class TextToSpeech {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.AudioWithTimestampsResponse;
+            return {
+                data: _response.body as ElevenLabs.AudioWithTimestampsResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -208,11 +231,13 @@ export class TextToSpeech {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -222,6 +247,7 @@ export class TextToSpeech {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -230,6 +256,7 @@ export class TextToSpeech {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -238,11 +265,19 @@ export class TextToSpeech {
      * Converts text into speech using a voice of your choice and returns audio as an audio stream.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    public async convertAsStream(
+    public stream(
         voiceId: string,
         request: ElevenLabs.StreamTextToSpeechRequest,
         requestOptions?: TextToSpeech.RequestOptions,
-    ): Promise<stream.Readable> {
+    ): core.HttpResponsePromise<stream.Readable> {
+        return core.HttpResponsePromise.fromPromise(this.__stream(voiceId, request, requestOptions));
+    }
+
+    private async __stream(
+        voiceId: string,
+        request: ElevenLabs.StreamTextToSpeechRequest,
+        requestOptions?: TextToSpeech.RequestOptions,
+    ): Promise<core.WithRawResponse<stream.Readable>> {
         const {
             enable_logging: enableLogging,
             optimize_streaming_latency: optimizeStreamingLatency,
@@ -278,9 +313,9 @@ export class TextToSpeech {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -295,7 +330,7 @@ export class TextToSpeech {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return { data: _response.body, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -303,11 +338,13 @@ export class TextToSpeech {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -317,6 +354,7 @@ export class TextToSpeech {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -325,6 +363,7 @@ export class TextToSpeech {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -332,11 +371,19 @@ export class TextToSpeech {
     /**
      * Converts text into speech using a voice of your choice and returns a stream of JSONs containing audio as a base64 encoded string together with information on when which character was spoken.
      */
-    public async streamWithTimestamps(
+    public streamWithTimestamps(
         voiceId: string,
         request: ElevenLabs.StreamTextToSpeechWithTimestampsRequest,
         requestOptions?: TextToSpeech.RequestOptions,
-    ): Promise<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponse>> {
+    ): core.HttpResponsePromise<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponse>> {
+        return core.HttpResponsePromise.fromPromise(this.__streamWithTimestamps(voiceId, request, requestOptions));
+    }
+
+    private async __streamWithTimestamps(
+        voiceId: string,
+        request: ElevenLabs.StreamTextToSpeechWithTimestampsRequest,
+        requestOptions?: TextToSpeech.RequestOptions,
+    ): Promise<core.WithRawResponse<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponse>>> {
         const {
             enable_logging: enableLogging,
             optimize_streaming_latency: optimizeStreamingLatency,
@@ -372,9 +419,9 @@ export class TextToSpeech {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -389,15 +436,18 @@ export class TextToSpeech {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return new core.Stream({
-                stream: _response.body,
-                parse: (data) => data as any,
-                signal: requestOptions?.abortSignal,
-                eventShape: {
-                    type: "json",
-                    messageTerminator: "\n",
-                },
-            });
+            return {
+                data: new core.Stream({
+                    stream: _response.body,
+                    parse: (data) => data as any,
+                    signal: requestOptions?.abortSignal,
+                    eventShape: {
+                        type: "json",
+                        messageTerminator: "\n",
+                    },
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -405,11 +455,13 @@ export class TextToSpeech {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -419,6 +471,7 @@ export class TextToSpeech {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -427,6 +480,7 @@ export class TextToSpeech {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

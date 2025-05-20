@@ -4,6 +4,10 @@
 
 import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
+import * as ElevenLabs from "../../../../../index";
+import urlJoin from "url-join";
+import * as errors from "../../../../../../errors/index";
+import { Documents } from "../resources/documents/client/Client";
 import { Document } from "../resources/document/client/Client";
 
 export declare namespace KnowledgeBase {
@@ -30,11 +34,145 @@ export declare namespace KnowledgeBase {
 }
 
 export class KnowledgeBase {
+    protected _documents: Documents | undefined;
     protected _document: Document | undefined;
 
     constructor(protected readonly _options: KnowledgeBase.Options = {}) {}
 
+    public get documents(): Documents {
+        return (this._documents ??= new Documents(this._options));
+    }
+
     public get document(): Document {
         return (this._document ??= new Document(this._options));
+    }
+
+    /**
+     * Get a list of available knowledge base documents
+     *
+     * @param {ElevenLabs.conversationalAi.KnowledgeBaseListRequest} request
+     * @param {KnowledgeBase.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.knowledgeBase.list()
+     */
+    public list(
+        request: ElevenLabs.conversationalAi.KnowledgeBaseListRequest = {},
+        requestOptions?: KnowledgeBase.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetKnowledgeBaseListResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
+    }
+
+    private async __list(
+        request: ElevenLabs.conversationalAi.KnowledgeBaseListRequest = {},
+        requestOptions?: KnowledgeBase.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetKnowledgeBaseListResponseModel>> {
+        const {
+            cursor,
+            page_size: pageSize,
+            search,
+            show_only_owned_documents: showOnlyOwnedDocuments,
+            types,
+            use_typesense: useTypesense,
+        } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (cursor != null) {
+            _queryParams["cursor"] = cursor;
+        }
+
+        if (pageSize != null) {
+            _queryParams["page_size"] = pageSize.toString();
+        }
+
+        if (search != null) {
+            _queryParams["search"] = search;
+        }
+
+        if (showOnlyOwnedDocuments != null) {
+            _queryParams["show_only_owned_documents"] = showOnlyOwnedDocuments.toString();
+        }
+
+        if (types != null) {
+            if (Array.isArray(types)) {
+                _queryParams["types"] = types.map((item) => item);
+            } else {
+                _queryParams["types"] = types;
+            }
+        }
+
+        if (useTypesense != null) {
+            _queryParams["use_typesense"] = useTypesense.toString();
+        }
+
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                "v1/convai/knowledge-base",
+            ),
+            method: "GET",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as ElevenLabs.GetKnowledgeBaseListResponseModel,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/convai/knowledge-base.");
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
     }
 }

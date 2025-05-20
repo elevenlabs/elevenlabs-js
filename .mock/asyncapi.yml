@@ -39,7 +39,48 @@ channels:
     bindings:
       ws:
         query:
-          $ref: '#/components/schemas/StreamInputQueryParameters'
+          type: object
+          properties:
+            authorization:
+              description: Your authorization bearer token.
+              type: string
+            model_id:
+              description: The model ID to use.
+              type: string
+            language_code:
+              description: The ISO 639-1 language code (for specific models).
+              type: string
+            enable_logging:
+              description: Whether to enable logging of the request.
+              type: boolean
+              default: true
+            enable_ssml_parsing:
+              description: Whether to enable SSML parsing.
+              type: boolean
+              default: false
+            output_format:
+              $ref: '#/components/schemas/TextToSpeechOutputFormatEnum'
+            inactivity_timeout:
+              description: Timeout for inactivity before a context is closed (seconds), can be up to 180 seconds.
+              type: integer
+              default: 20
+            sync_alignment:
+              description: Whether to include timing data with every audio chunk.
+              type: boolean
+              default: false
+            auto_mode:
+              description: Reduces latency by disabling chunk schedule and buffers. Recommended for full sentences/phrases.
+              type: boolean
+              default: false
+            apply_text_normalization:
+              $ref: '#/components/schemas/TextToSpeechApplyTextNormalizationEnum'
+            seed:
+              description: If specified, system will best-effort sample deterministically. Integer between 0 and 4294967295.
+              type: integer
+              minimum: 0
+              maximum: 4294967295
+              example: 12345
+
     publish:
       description: Send messages to the WebSocket
       operationId: sendMessage
@@ -102,7 +143,7 @@ channels:
       This is useful for scenarios requiring concurrent or interleaved audio generations, such as dynamic
       conversational AI applications.
 
-      Each context, identified by a `context_id`, maintains its own state. You can send text to specific
+      Each context, identified by a context id, maintains its own state. You can send text to specific
       contexts, flush them, or close them independently. A `close_socket` message can be used to terminate
       the entire connection gracefully.
 
@@ -210,7 +251,7 @@ channels:
                 charStartTimesMs: [0, 3, 7, 9, 11, 12, 13, 15, 17, 19, 21]
                 charsDurationsMs: [3, 4, 2, 2, 1, 1, 2, 2, 2, 2, 3]
                 chars: ['H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd']
-              context_id: 'conv_1'
+              contextId: 'conv_1'
           - type: publish
             messageId: InitialiseContext
             value:
@@ -234,12 +275,12 @@ channels:
             value:
               audio: Y3VyaW91cyBtaW5kcyB0aGluayBhbGlrZSA6KQ==
               is_final: false
-              context_id: 'interruption_context'
+              contextId: 'interruption_context'
           - type: subscribe
             messageId: FinalOutputMulti
             value:
               is_final: true
-              context_id: 'interruption_context'
+              contextId: 'interruption_context'
           - type: publish
             messageId: KeepContextAlive
             value:
@@ -607,14 +648,14 @@ components:
         is_final:
           type: boolean
           nullable: true
-          description: If true, indicates that this is the final message for the specified `context_id`. This is sent when a context is closed. `audio` will be null or empty.
+          description: If true, indicates that this is the final message for the specified contextId. This is sent when a context is closed. `audio` will be null or empty.
         normalizedAlignment:
           $ref: '#/components/schemas/NormalizedAlignment'
           nullable: true
         alignment:
           $ref: '#/components/schemas/Alignment'
           nullable: true
-        context_id:
+        contextId:
           type: string
           nullable: true
           description: The context identifier to which this message pertains.
@@ -734,7 +775,7 @@ components:
         isFinal:
           x-fern-type: literal<true>
           description: Indicates this is the final message for the context.
-        context_id:
+        contextId:
           type: string
           description: The context_id for which this is the final message.
 
@@ -813,50 +854,3 @@ components:
           'opus_48000_192',
         ]
       default: 'mp3_44100'
-    StreamInputQueryParameters:
-      type: object
-      properties:
-        model_id:
-          description: The model ID to use
-          type: string
-        language_code:
-          description: The ISO 639-1 language code (for Turbo v2.5 and Flash v2.5 models only)
-          type: string
-        enable_logging:
-          description: Whether to enable logging of the request
-          type: string
-        enable_ssml_parsing:
-          description: Whether to enable SSML parsing
-          type: boolean
-          default: false
-        optimize_streaming_latency:
-          description: Latency optimization level (deprecated)
-          type: string
-          enum: ['0', '1', '2', '3', '4']
-          default: '0'
-          deprecated: true
-        output_format:
-          $ref: '#/components/schemas/TextToSpeechOutputFormatEnum'
-        inactivity_timeout:
-          description: Timeout for inactivity before connection is closed
-          type: number
-          default: 20
-        sync_alignment:
-          description: Whether to include timing data with every audio chunk
-          type: boolean
-          default: false
-        auto_mode:
-          description: This parameter focuses on reducing the latency by disabling the chunk schedule and all buffers. It is only recommended when sending full sentences or phrases, sending partial phrases will result in highly reduced quality. By default it's set to false.
-          type: boolean
-          default: false
-        apply_text_normalization:
-          $ref: '#/components/schemas/TextToSpeechApplyTextNormalizationEnum'
-        seed:
-          description: >-
-            If specified, our system will make a best effort to sample deterministically, such that repeated requests
-            with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be an
-            integer between 0 and 4294967295.
-          type: integer
-          minimum: 0
-          maximum: 4294967295
-          example: 12345

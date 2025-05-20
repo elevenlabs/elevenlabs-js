@@ -1,6 +1,6 @@
 {
     "name": "@elevenlabs/elevenlabs-js",
-    "version": "v1.59.0",
+    "version": "v2.0.0",
     "private": false,
     "repository": "https://github.com/elevenlabs/elevenlabs-js",
     "license": "MIT",
@@ -45,5 +45,6 @@
         "path": false,
         "command-exists": false,
         "execa": false
-    }
+    },
+    "packageManager": "yarn@1.22.22"
 }

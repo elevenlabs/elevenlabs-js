@@ -41,7 +41,7 @@ export interface TextToSpeechRequest {
     /** Voice settings overriding stored settings for the given voice. They are applied only on the given request. */
     voice_settings?: ElevenLabs.VoiceSettings;
     /** A list of pronunciation dictionary locators (id, version_id) to be applied to the text. They will be applied in order. You may have up to 3 locators per request */
-    pronunciation_dictionary_locators?: ElevenLabs.PronunciationDictionaryVersionLocatorRequestModel[];
+    pronunciation_dictionary_locators?: ElevenLabs.PronunciationDictionaryVersionLocator[];
     /** If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be integer between 0 and 4294967295. */
     seed?: number;
     /** The text that came before the text of the current request. Can be used to improve the speech's continuity when concatenating together multiple generations or to influence the speech's continuity in the current generation. */

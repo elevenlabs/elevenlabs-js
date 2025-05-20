@@ -47,12 +47,21 @@ export class Audio {
      * @example
      *     await client.voices.pvc.samples.speakers.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", "VW7YKqPnjY4h39yTbx2L")
      */
-    public async get(
+    public get(
         voiceId: string,
         sampleId: string,
         speakerId: string,
         requestOptions?: Audio.RequestOptions,
-    ): Promise<ElevenLabs.SpeakerAudioResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.SpeakerAudioResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__get(voiceId, sampleId, speakerId, requestOptions));
+    }
+
+    private async __get(
+        voiceId: string,
+        sampleId: string,
+        speakerId: string,
+        requestOptions?: Audio.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.SpeakerAudioResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -69,9 +78,9 @@ export class Audio {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -83,7 +92,7 @@ export class Audio {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.SpeakerAudioResponseModel;
+            return { data: _response.body as ElevenLabs.SpeakerAudioResponseModel, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -91,11 +100,13 @@ export class Audio {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -105,6 +116,7 @@ export class Audio {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -113,6 +125,7 @@ export class Audio {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

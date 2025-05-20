@@ -37,21 +37,28 @@ export class Usage {
     /**
      * Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
      *
-     * @param {ElevenLabs.UsageGetCharactersUsageMetricsRequest} request
+     * @param {ElevenLabs.UsageGetRequest} request
      * @param {Usage.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.usage.getCharactersUsageMetrics({
+     *     await client.usage.get({
      *         start_unix: 1,
      *         end_unix: 1
      *     })
      */
-    public async getCharactersUsageMetrics(
-        request: ElevenLabs.UsageGetCharactersUsageMetricsRequest,
+    public get(
+        request: ElevenLabs.UsageGetRequest,
         requestOptions?: Usage.RequestOptions,
-    ): Promise<ElevenLabs.UsageCharactersResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.UsageCharactersResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
+    }
+
+    private async __get(
+        request: ElevenLabs.UsageGetRequest,
+        requestOptions?: Usage.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.UsageCharactersResponseModel>> {
         const {
             start_unix: startUnix,
             end_unix: endUnix,
@@ -95,9 +102,9 @@ export class Usage {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -110,7 +117,10 @@ export class Usage {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.UsageCharactersResponseModel;
+            return {
+                data: _response.body as ElevenLabs.UsageCharactersResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -118,11 +128,13 @@ export class Usage {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -132,12 +144,14 @@ export class Usage {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/usage/character-stats.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

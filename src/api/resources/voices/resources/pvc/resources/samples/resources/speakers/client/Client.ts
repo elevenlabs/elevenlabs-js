@@ -53,11 +53,19 @@ export class Speakers {
      * @example
      *     await client.voices.pvc.samples.speakers.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L")
      */
-    public async get(
+    public get(
         voiceId: string,
         sampleId: string,
         requestOptions?: Speakers.RequestOptions,
-    ): Promise<ElevenLabs.SpeakerSeparationResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.SpeakerSeparationResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__get(voiceId, sampleId, requestOptions));
+    }
+
+    private async __get(
+        voiceId: string,
+        sampleId: string,
+        requestOptions?: Speakers.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.SpeakerSeparationResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -74,9 +82,9 @@ export class Speakers {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -88,7 +96,10 @@ export class Speakers {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.SpeakerSeparationResponseModel;
+            return {
+                data: _response.body as ElevenLabs.SpeakerSeparationResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -96,11 +107,13 @@ export class Speakers {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -110,6 +123,7 @@ export class Speakers {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -118,6 +132,7 @@ export class Speakers {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -134,11 +149,19 @@ export class Speakers {
      * @example
      *     await client.voices.pvc.samples.speakers.separate("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L")
      */
-    public async separate(
+    public separate(
         voiceId: string,
         sampleId: string,
         requestOptions?: Speakers.RequestOptions,
-    ): Promise<ElevenLabs.StartSpeakerSeparationResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.StartSpeakerSeparationResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__separate(voiceId, sampleId, requestOptions));
+    }
+
+    private async __separate(
+        voiceId: string,
+        sampleId: string,
+        requestOptions?: Speakers.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.StartSpeakerSeparationResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -155,9 +178,9 @@ export class Speakers {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -169,7 +192,10 @@ export class Speakers {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.StartSpeakerSeparationResponseModel;
+            return {
+                data: _response.body as ElevenLabs.StartSpeakerSeparationResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -177,11 +203,13 @@ export class Speakers {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -191,6 +219,7 @@ export class Speakers {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -199,6 +228,7 @@ export class Speakers {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

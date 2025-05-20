@@ -1,2 +1,2 @@
-export * from "./AudioIsolationAudioIsolationRequestFileFormat";
-export * from "./AudioIsolationAudioIsolationStreamRequestFileFormat";
+export * from "./AudioIsolationConvertRequestFileFormat";
+export * from "./AudioIsolationStreamRequestFileFormat";

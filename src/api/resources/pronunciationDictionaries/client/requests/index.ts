@@ -1,0 +1,3 @@
+export { type BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost";
+export { type BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost";
+export { type PronunciationDictionariesListRequest } from "./PronunciationDictionariesListRequest";

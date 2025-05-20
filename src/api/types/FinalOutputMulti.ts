@@ -9,5 +9,5 @@ export interface FinalOutputMulti {
     /** Indicates this is the final message for the context. */
     isFinal: true;
     /** The context_id for which this is the final message. */
-    context_id?: string;
+    contextId?: string;
 }

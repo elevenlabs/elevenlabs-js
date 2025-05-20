@@ -68,11 +68,19 @@ export class Samples {
      *         files: [fs.createReadStream("/path/to/your/file")]
      *     })
      */
-    public async create(
+    public create(
         voiceId: string,
         request: ElevenLabs.voices.pvc.BodyAddSamplesToPvcVoiceV1VoicesPvcVoiceIdSamplesPost,
         requestOptions?: Samples.RequestOptions,
-    ): Promise<ElevenLabs.VoiceSample[]> {
+    ): core.HttpResponsePromise<ElevenLabs.VoiceSample[]> {
+        return core.HttpResponsePromise.fromPromise(this.__create(voiceId, request, requestOptions));
+    }
+
+    private async __create(
+        voiceId: string,
+        request: ElevenLabs.voices.pvc.BodyAddSamplesToPvcVoiceV1VoicesPvcVoiceIdSamplesPost,
+        requestOptions?: Samples.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.VoiceSample[]>> {
         const _request = await core.newFormData();
         for (const _file of request.files) {
             await _request.appendFile("files", _file);
@@ -99,9 +107,9 @@ export class Samples {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -115,7 +123,7 @@ export class Samples {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.VoiceSample[];
+            return { data: _response.body as ElevenLabs.VoiceSample[], rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -123,11 +131,13 @@ export class Samples {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -137,6 +147,7 @@ export class Samples {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -145,6 +156,7 @@ export class Samples {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -162,12 +174,21 @@ export class Samples {
      * @example
      *     await client.voices.pvc.samples.update("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L")
      */
-    public async update(
+    public update(
         voiceId: string,
         sampleId: string,
         request: ElevenLabs.voices.pvc.BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost = {},
         requestOptions?: Samples.RequestOptions,
-    ): Promise<ElevenLabs.AddVoiceResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.AddVoiceResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__update(voiceId, sampleId, request, requestOptions));
+    }
+
+    private async __update(
+        voiceId: string,
+        sampleId: string,
+        request: ElevenLabs.voices.pvc.BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost = {},
+        requestOptions?: Samples.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.AddVoiceResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -184,9 +205,9 @@ export class Samples {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -199,7 +220,7 @@ export class Samples {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.AddVoiceResponseModel;
+            return { data: _response.body as ElevenLabs.AddVoiceResponseModel, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -207,11 +228,13 @@ export class Samples {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -221,6 +244,7 @@ export class Samples {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -229,6 +253,7 @@ export class Samples {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -245,11 +270,19 @@ export class Samples {
      * @example
      *     await client.voices.pvc.samples.delete("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L")
      */
-    public async delete(
+    public delete(
         voiceId: string,
         sampleId: string,
         requestOptions?: Samples.RequestOptions,
-    ): Promise<ElevenLabs.DeleteVoiceSampleResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.DeleteVoiceSampleResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(voiceId, sampleId, requestOptions));
+    }
+
+    private async __delete(
+        voiceId: string,
+        sampleId: string,
+        requestOptions?: Samples.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.DeleteVoiceSampleResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -266,9 +299,9 @@ export class Samples {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -280,7 +313,10 @@ export class Samples {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.DeleteVoiceSampleResponseModel;
+            return {
+                data: _response.body as ElevenLabs.DeleteVoiceSampleResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -288,11 +324,13 @@ export class Samples {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -302,6 +340,7 @@ export class Samples {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -310,6 +349,7 @@ export class Samples {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

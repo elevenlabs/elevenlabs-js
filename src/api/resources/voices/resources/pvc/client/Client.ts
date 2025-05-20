@@ -61,10 +61,17 @@ export class Pvc {
      *         language: "en"
      *     })
      */
-    public async create(
+    public create(
         request: ElevenLabs.voices.CreatePvcVoiceRequest,
         requestOptions?: Pvc.RequestOptions,
-    ): Promise<ElevenLabs.AddVoiceResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.AddVoiceResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
+    }
+
+    private async __create(
+        request: ElevenLabs.voices.CreatePvcVoiceRequest,
+        requestOptions?: Pvc.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.AddVoiceResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -81,9 +88,9 @@ export class Pvc {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -96,7 +103,7 @@ export class Pvc {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.AddVoiceResponseModel;
+            return { data: _response.body as ElevenLabs.AddVoiceResponseModel, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -104,11 +111,13 @@ export class Pvc {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -118,12 +127,14 @@ export class Pvc {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/voices/pvc.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -140,11 +151,19 @@ export class Pvc {
      * @example
      *     await client.voices.pvc.update("21m00Tcm4TlvDq8ikWAM")
      */
-    public async update(
+    public update(
         voiceId: string,
         request: ElevenLabs.voices.BodyEditPvcVoiceV1VoicesPvcVoiceIdPost = {},
         requestOptions?: Pvc.RequestOptions,
-    ): Promise<ElevenLabs.AddVoiceResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.AddVoiceResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__update(voiceId, request, requestOptions));
+    }
+
+    private async __update(
+        voiceId: string,
+        request: ElevenLabs.voices.BodyEditPvcVoiceV1VoicesPvcVoiceIdPost = {},
+        requestOptions?: Pvc.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.AddVoiceResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -161,9 +180,9 @@ export class Pvc {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -176,7 +195,7 @@ export class Pvc {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.AddVoiceResponseModel;
+            return { data: _response.body as ElevenLabs.AddVoiceResponseModel, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -184,11 +203,13 @@ export class Pvc {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -198,6 +219,7 @@ export class Pvc {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -206,6 +228,7 @@ export class Pvc {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -222,11 +245,19 @@ export class Pvc {
      * @example
      *     await client.voices.pvc.train("21m00Tcm4TlvDq8ikWAM")
      */
-    public async train(
+    public train(
         voiceId: string,
         request: ElevenLabs.voices.BodyRunPvcTrainingV1VoicesPvcVoiceIdTrainPost = {},
         requestOptions?: Pvc.RequestOptions,
-    ): Promise<ElevenLabs.StartPvcVoiceTrainingResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.StartPvcVoiceTrainingResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__train(voiceId, request, requestOptions));
+    }
+
+    private async __train(
+        voiceId: string,
+        request: ElevenLabs.voices.BodyRunPvcTrainingV1VoicesPvcVoiceIdTrainPost = {},
+        requestOptions?: Pvc.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.StartPvcVoiceTrainingResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -243,9 +274,9 @@ export class Pvc {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -258,7 +289,10 @@ export class Pvc {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.StartPvcVoiceTrainingResponseModel;
+            return {
+                data: _response.body as ElevenLabs.StartPvcVoiceTrainingResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -266,11 +300,13 @@ export class Pvc {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -280,6 +316,7 @@ export class Pvc {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -288,6 +325,7 @@ export class Pvc {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

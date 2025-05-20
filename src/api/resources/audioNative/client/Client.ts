@@ -47,10 +47,17 @@ export class AudioNative {
      *         name: "name"
      *     })
      */
-    public async create(
+    public create(
         request: ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost,
         requestOptions?: AudioNative.RequestOptions,
-    ): Promise<ElevenLabs.AudioNativeCreateProjectResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.AudioNativeCreateProjectResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
+    }
+
+    private async __create(
+        request: ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost,
+        requestOptions?: AudioNative.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.AudioNativeCreateProjectResponseModel>> {
         const _request = await core.newFormData();
         _request.append("name", request.name);
         if (request.image != null) {
@@ -114,9 +121,9 @@ export class AudioNative {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -130,7 +137,10 @@ export class AudioNative {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.AudioNativeCreateProjectResponseModel;
+            return {
+                data: _response.body as ElevenLabs.AudioNativeCreateProjectResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -138,11 +148,13 @@ export class AudioNative {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -152,12 +164,14 @@ export class AudioNative {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/audio-native.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -173,10 +187,17 @@ export class AudioNative {
      * @example
      *     await client.audioNative.getSettings("21m00Tcm4TlvDq8ikWAM")
      */
-    public async getSettings(
+    public getSettings(
         projectId: string,
         requestOptions?: AudioNative.RequestOptions,
-    ): Promise<ElevenLabs.GetAudioNativeProjectSettingsResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.GetAudioNativeProjectSettingsResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__getSettings(projectId, requestOptions));
+    }
+
+    private async __getSettings(
+        projectId: string,
+        requestOptions?: AudioNative.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetAudioNativeProjectSettingsResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -193,9 +214,9 @@ export class AudioNative {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -207,7 +228,10 @@ export class AudioNative {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.GetAudioNativeProjectSettingsResponseModel;
+            return {
+                data: _response.body as ElevenLabs.GetAudioNativeProjectSettingsResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -215,11 +239,13 @@ export class AudioNative {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -229,6 +255,7 @@ export class AudioNative {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -237,6 +264,7 @@ export class AudioNative {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -251,13 +279,21 @@ export class AudioNative {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.audioNative.updateContent("21m00Tcm4TlvDq8ikWAM", {})
+     *     await client.audioNative.update("21m00Tcm4TlvDq8ikWAM", {})
      */
-    public async updateContent(
+    public update(
         projectId: string,
         request: ElevenLabs.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost,
         requestOptions?: AudioNative.RequestOptions,
-    ): Promise<ElevenLabs.AudioNativeEditContentResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.AudioNativeEditContentResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__update(projectId, request, requestOptions));
+    }
+
+    private async __update(
+        projectId: string,
+        request: ElevenLabs.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost,
+        requestOptions?: AudioNative.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.AudioNativeEditContentResponseModel>> {
         const _request = await core.newFormData();
         if (request.file != null) {
             await _request.appendFile("file", request.file);
@@ -288,9 +324,9 @@ export class AudioNative {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "v1.59.0",
-                "User-Agent": "elevenlabs/v1.59.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.0.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -304,7 +340,10 @@ export class AudioNative {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.AudioNativeEditContentResponseModel;
+            return {
+                data: _response.body as ElevenLabs.AudioNativeEditContentResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -312,11 +351,13 @@ export class AudioNative {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         _response.error.body as ElevenLabs.HttpValidationError,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -326,6 +367,7 @@ export class AudioNative {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
@@ -334,6 +376,7 @@ export class AudioNative {
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
