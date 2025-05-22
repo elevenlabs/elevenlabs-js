@@ -10,6 +10,7 @@ import * as ElevenLabs from "../index";
 export type PromptAgentInputToolsItem =
     | ElevenLabs.PromptAgentInputToolsItem.Client
     | ElevenLabs.PromptAgentInputToolsItem.Mcp
+    | ElevenLabs.PromptAgentInputToolsItem.NativeMcp
     | ElevenLabs.PromptAgentInputToolsItem.System
     | ElevenLabs.PromptAgentInputToolsItem.Webhook;
 
@@ -20,6 +21,10 @@ export namespace PromptAgentInputToolsItem {
 
     export interface Mcp extends ElevenLabs.McpToolConfigInput {
         type: "mcp";
+    }
+
+    export interface NativeMcp extends ElevenLabs.NativeMcpToolConfigInput {
+        type: "native_mcp";
     }
 
     export interface System extends ElevenLabs.SystemToolConfigInput {

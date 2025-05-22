@@ -25,6 +25,10 @@ export const PromptAgentDbModel: core.serialization.ObjectSchema<
         "mcp_server_ids",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    nativeMcpServerIds: core.serialization.property(
+        "native_mcp_server_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     knowledgeBase: core.serialization.property(
         "knowledge_base",
         core.serialization.list(KnowledgeBaseLocator).optional(),
@@ -50,6 +54,7 @@ export declare namespace PromptAgentDbModel {
         tools?: PromptAgentDbModelToolsItem.Raw[] | null;
         tool_ids?: string[] | null;
         mcp_server_ids?: string[] | null;
+        native_mcp_server_ids?: string[] | null;
         knowledge_base?: KnowledgeBaseLocator.Raw[] | null;
         custom_llm?: CustomLlm.Raw | null;
         ignore_default_personality?: boolean | null;

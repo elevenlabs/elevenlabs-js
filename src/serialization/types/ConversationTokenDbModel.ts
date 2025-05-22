@@ -17,6 +17,7 @@ export const ConversationTokenDbModel: core.serialization.ObjectSchema<
         "expiration_time_unix_secs",
         core.serialization.number().optional(),
     ),
+    conversationId: core.serialization.property("conversation_id", core.serialization.string().optional()),
     purpose: ConversationTokenPurpose.optional(),
 });
 
@@ -25,6 +26,7 @@ export declare namespace ConversationTokenDbModel {
         agent_id: string;
         conversation_token: string;
         expiration_time_unix_secs?: number | null;
+        conversation_id?: string | null;
         purpose?: ConversationTokenPurpose.Raw | null;
     }
 }

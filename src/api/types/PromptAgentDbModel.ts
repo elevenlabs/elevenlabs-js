@@ -19,6 +19,8 @@ export interface PromptAgentDbModel {
     toolIds?: string[];
     /** A list of MCP server ids to be used by the agent */
     mcpServerIds?: string[];
+    /** A list of Native MCP server ids to be used by the agent */
+    nativeMcpServerIds?: string[];
     /** A list of knowledge bases to be used by the agent */
     knowledgeBase?: ElevenLabs.KnowledgeBaseLocator[];
     /** Definition for a custom LLM if LLM field is set to 'CUSTOM_LLM' */

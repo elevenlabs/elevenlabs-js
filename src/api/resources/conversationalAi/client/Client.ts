@@ -12,6 +12,7 @@ import { Conversations } from "../resources/conversations/client/Client";
 import { Twilio } from "../resources/twilio/client/Client";
 import { Agents } from "../resources/agents/client/Client";
 import { PhoneNumbers } from "../resources/phoneNumbers/client/Client";
+import { LlmUsage } from "../resources/llmUsage/client/Client";
 import { KnowledgeBase } from "../resources/knowledgeBase/client/Client";
 import { Settings } from "../resources/settings/client/Client";
 import { Secrets } from "../resources/secrets/client/Client";
@@ -47,6 +48,7 @@ export class ConversationalAi {
     protected _twilio: Twilio | undefined;
     protected _agents: Agents | undefined;
     protected _phoneNumbers: PhoneNumbers | undefined;
+    protected _llmUsage: LlmUsage | undefined;
     protected _knowledgeBase: KnowledgeBase | undefined;
     protected _settings: Settings | undefined;
     protected _secrets: Secrets | undefined;
@@ -70,6 +72,10 @@ export class ConversationalAi {
 
     public get phoneNumbers(): PhoneNumbers {
         return (this._phoneNumbers ??= new PhoneNumbers(this._options));
+    }
+
+    public get llmUsage(): LlmUsage {
+        return (this._llmUsage ??= new LlmUsage(this._options));
     }
 
     public get knowledgeBase(): KnowledgeBase {
@@ -149,8 +155,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
+                "X-Fern-SDK-Version": "v2.1.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -159,7 +165,7 @@ export class ConversationalAi {
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
@@ -260,8 +266,8 @@ export class ConversationalAi {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
+                "X-Fern-SDK-Version": "v2.1.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -272,7 +278,7 @@ export class ConversationalAi {
                 ...serializers.PatchWorkspaceSecretRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
                 type: "update",
             },
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
