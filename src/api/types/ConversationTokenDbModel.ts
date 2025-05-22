@@ -11,6 +11,8 @@ export interface ConversationTokenDbModel {
     conversationToken: string;
     /** The expiration time of the token in unix seconds */
     expirationTimeUnixSecs?: number;
+    /** The ID of the conversation */
+    conversationId?: string;
     /** The purpose of the token */
     purpose?: ElevenLabs.ConversationTokenPurpose;
 }

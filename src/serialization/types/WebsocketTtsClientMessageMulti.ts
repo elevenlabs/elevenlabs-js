@@ -23,7 +23,7 @@ export const WebsocketTtsClientMessageMulti: core.serialization.ObjectSchema<
         "pronunciation_dictionary_locators",
         core.serialization.list(PronunciationDictionaryLocator).optional(),
     ),
-    contextId: core.serialization.property("context_id", core.serialization.string().optional()),
+    contextId: core.serialization.string().optional(),
     closeContext: core.serialization.property("close_context", core.serialization.boolean().optional()),
     closeSocket: core.serialization.property("close_socket", core.serialization.boolean().optional()),
 });
@@ -37,7 +37,7 @@ export declare namespace WebsocketTtsClientMessageMulti {
         authorization?: string | null;
         flush?: boolean | null;
         pronunciation_dictionary_locators?: PronunciationDictionaryLocator.Raw[] | null;
-        context_id?: string | null;
+        contextId?: string | null;
         close_context?: boolean | null;
         close_socket?: boolean | null;
     }

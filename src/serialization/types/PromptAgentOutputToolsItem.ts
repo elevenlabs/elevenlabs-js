@@ -7,6 +7,7 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ClientToolConfigOutput } from "./ClientToolConfigOutput";
 import { McpToolConfigOutput } from "./McpToolConfigOutput";
+import { NativeMcpToolConfigOutput } from "./NativeMcpToolConfigOutput";
 import { SystemToolConfigOutput } from "./SystemToolConfigOutput";
 import { WebhookToolConfigOutput } from "./WebhookToolConfigOutput";
 
@@ -17,6 +18,7 @@ export const PromptAgentOutputToolsItem: core.serialization.Schema<
     .union("type", {
         client: ClientToolConfigOutput,
         mcp: McpToolConfigOutput,
+        native_mcp: NativeMcpToolConfigOutput,
         system: SystemToolConfigOutput,
         webhook: WebhookToolConfigOutput,
     })
@@ -29,6 +31,7 @@ export declare namespace PromptAgentOutputToolsItem {
     export type Raw =
         | PromptAgentOutputToolsItem.Client
         | PromptAgentOutputToolsItem.Mcp
+        | PromptAgentOutputToolsItem.NativeMcp
         | PromptAgentOutputToolsItem.System
         | PromptAgentOutputToolsItem.Webhook;
 
@@ -38,6 +41,10 @@ export declare namespace PromptAgentOutputToolsItem {
 
     export interface Mcp extends McpToolConfigOutput.Raw {
         type: "mcp";
+    }
+
+    export interface NativeMcp extends NativeMcpToolConfigOutput.Raw {
+        type: "native_mcp";
     }
 
     export interface System extends SystemToolConfigOutput.Raw {

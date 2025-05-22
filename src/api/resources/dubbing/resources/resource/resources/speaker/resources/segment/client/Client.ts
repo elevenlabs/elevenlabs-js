@@ -83,8 +83,8 @@ export class Segment {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
+                "X-Fern-SDK-Version": "v2.0.2",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -94,7 +94,7 @@ export class Segment {
             body: serializers.dubbing.resource.speaker.SegmentCreatePayload.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
