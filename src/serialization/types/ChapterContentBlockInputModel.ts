@@ -5,18 +5,21 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { ChapterContentBlockInputModelSubType } from "./ChapterContentBlockInputModelSubType";
 import { ChapterContentParagraphTtsNodeInputModel } from "./ChapterContentParagraphTtsNodeInputModel";
 
 export const ChapterContentBlockInputModel: core.serialization.ObjectSchema<
     serializers.ChapterContentBlockInputModel.Raw,
     ElevenLabs.ChapterContentBlockInputModel
 > = core.serialization.object({
+    subType: core.serialization.property("sub_type", ChapterContentBlockInputModelSubType.optional()),
     blockId: core.serialization.property("block_id", core.serialization.string().optional()),
     nodes: core.serialization.list(ChapterContentParagraphTtsNodeInputModel),
 });
 
 export declare namespace ChapterContentBlockInputModel {
     export interface Raw {
+        sub_type?: ChapterContentBlockInputModelSubType.Raw | null;
         block_id?: string | null;
         nodes: ChapterContentParagraphTtsNodeInputModel.Raw[];
     }

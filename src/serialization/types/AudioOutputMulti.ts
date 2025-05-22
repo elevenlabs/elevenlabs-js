@@ -15,7 +15,7 @@ export const AudioOutputMulti: core.serialization.ObjectSchema<
     audio: core.serialization.string(),
     normalizedAlignment: NormalizedAlignment.optional(),
     alignment: Alignment.optional(),
-    contextId: core.serialization.property("context_id", core.serialization.string().optional()),
+    contextId: core.serialization.string().optional(),
 });
 
 export declare namespace AudioOutputMulti {
@@ -23,6 +23,6 @@ export declare namespace AudioOutputMulti {
         audio: string;
         normalizedAlignment?: NormalizedAlignment.Raw | null;
         alignment?: Alignment.Raw | null;
-        context_id?: string | null;
+        contextId?: string | null;
     }
 }

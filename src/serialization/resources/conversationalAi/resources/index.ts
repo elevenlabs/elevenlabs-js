@@ -7,6 +7,8 @@ export * from "./twilio/client/requests";
 export * as agents from "./agents";
 export * from "./agents/client/requests";
 export * from "./phoneNumbers/client/requests";
+export * as llmUsage from "./llmUsage";
+export * from "./llmUsage/client/requests";
 export * as settings from "./settings";
 export * from "./settings/client/requests";
 export * as secrets from "./secrets";

@@ -29,8 +29,8 @@ export interface WebsocketTtsClientMessageMulti {
     pronunciationDictionaryLocators?: ElevenLabs.PronunciationDictionaryLocator[];
     /** An identifier for the text-to-speech context. Allows managing multiple independent audio generation streams over a single WebSocket connection. If omitted, a default context is used. */
     contextId?: string;
-    /** If true, closes the specified `context_id`. No further audio will be generated for this context. The `text` field is ignored. */
+    /** If true, closes the specified `contextId`. No further audio will be generated for this context. The `text` field is ignored. */
     closeContext?: boolean;
-    /** If true, flushes all contexts and closes the entire WebSocket connection. The `text` and `context_id` fields are ignored. */
+    /** If true, flushes all contexts and closes the entire WebSocket connection. The `text` and `contextId` fields are ignored. */
     closeSocket?: boolean;
 }

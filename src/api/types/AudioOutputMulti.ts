@@ -12,6 +12,6 @@ export interface AudioOutputMulti {
     audio: string;
     normalizedAlignment?: ElevenLabs.NormalizedAlignment;
     alignment?: ElevenLabs.Alignment;
-    /** The context_id for which this audio is. */
+    /** The contextId for which this audio is. */
     contextId?: string;
 }

@@ -10,6 +10,8 @@ import urlJoin from "url-join";
 import * as errors from "../../../../../../errors/index";
 import { Widget } from "../resources/widget/client/Client";
 import { Link } from "../resources/link/client/Client";
+import { KnowledgeBase } from "../resources/knowledgeBase/client/Client";
+import { LlmUsage } from "../resources/llmUsage/client/Client";
 
 export declare namespace Agents {
     export interface Options {
@@ -37,6 +39,8 @@ export declare namespace Agents {
 export class Agents {
     protected _widget: Widget | undefined;
     protected _link: Link | undefined;
+    protected _knowledgeBase: KnowledgeBase | undefined;
+    protected _llmUsage: LlmUsage | undefined;
 
     constructor(protected readonly _options: Agents.Options = {}) {}
 
@@ -46,6 +50,14 @@ export class Agents {
 
     public get link(): Link {
         return (this._link ??= new Link(this._options));
+    }
+
+    public get knowledgeBase(): KnowledgeBase {
+        return (this._knowledgeBase ??= new KnowledgeBase(this._options));
+    }
+
+    public get llmUsage(): LlmUsage {
+        return (this._llmUsage ??= new LlmUsage(this._options));
     }
 
     /**
@@ -89,8 +101,8 @@ export class Agents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
+                "X-Fern-SDK-Version": "v2.1.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -100,7 +112,7 @@ export class Agents {
             body: serializers.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
@@ -193,15 +205,15 @@ export class Agents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
+                "X-Fern-SDK-Version": "v2.1.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
@@ -293,15 +305,15 @@ export class Agents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
+                "X-Fern-SDK-Version": "v2.1.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
@@ -391,8 +403,8 @@ export class Agents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
+                "X-Fern-SDK-Version": "v2.1.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -402,7 +414,7 @@ export class Agents {
             body: serializers.conversationalAi.UpdateAgentRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
@@ -511,8 +523,8 @@ export class Agents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
+                "X-Fern-SDK-Version": "v2.1.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -520,7 +532,7 @@ export class Agents {
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
@@ -623,8 +635,8 @@ export class Agents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
+                "X-Fern-SDK-Version": "v2.1.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -635,7 +647,7 @@ export class Agents {
                 request,
                 { unrecognizedObjectKeys: "strip" },
             ),
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
@@ -742,8 +754,8 @@ export class Agents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.0.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.0.1",
+                "X-Fern-SDK-Version": "v2.1.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -754,7 +766,7 @@ export class Agents {
                 request,
                 { unrecognizedObjectKeys: "strip" },
             ),
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
