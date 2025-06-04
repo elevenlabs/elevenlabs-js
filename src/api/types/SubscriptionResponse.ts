@@ -40,7 +40,7 @@ export interface SubscriptionResponse {
     /** The currency of the user's subscription. */
     currency?: ElevenLabs.SubscriptionResponseModelCurrency;
     /** The status of the user's subscription. */
-    status: ElevenLabs.SubscriptionStatus;
+    status: ElevenLabs.SubscriptionStatusType;
     /** The billing period of the user's subscription. */
     billingPeriod?: ElevenLabs.SubscriptionResponseModelBillingPeriod;
     /** The character refresh period of the user's subscription. */

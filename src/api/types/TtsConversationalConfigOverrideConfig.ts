@@ -3,6 +3,6 @@
  */
 
 export interface TtsConversationalConfigOverrideConfig {
-    /** Whether to allow overriding the voice ID */
+    /** Whether to allow overriding the voice_id field. */
     voiceId?: boolean;
 }

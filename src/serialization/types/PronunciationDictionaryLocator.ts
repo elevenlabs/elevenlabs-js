@@ -10,13 +10,13 @@ export const PronunciationDictionaryLocator: core.serialization.ObjectSchema<
     serializers.PronunciationDictionaryLocator.Raw,
     ElevenLabs.PronunciationDictionaryLocator
 > = core.serialization.object({
-    dictionaryId: core.serialization.property("dictionary_id", core.serialization.string()),
+    pronunciationDictionaryId: core.serialization.property("pronunciation_dictionary_id", core.serialization.string()),
     versionId: core.serialization.property("version_id", core.serialization.string()),
 });
 
 export declare namespace PronunciationDictionaryLocator {
     export interface Raw {
-        dictionary_id: string;
+        pronunciation_dictionary_id: string;
         version_id: string;
     }
 }

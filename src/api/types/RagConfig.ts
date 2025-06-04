@@ -11,4 +11,6 @@ export interface RagConfig {
     maxVectorDistance?: number;
     /** Maximum total length of document chunks retrieved from RAG. */
     maxDocumentsLength?: number;
+    /** Maximum number of RAG document chunks to initially retrieve from the vector store. These are then further filtered by vector distance and total length. */
+    maxRetrievedRagChunksCount?: number;
 }

@@ -7,10 +7,12 @@ import * as ElevenLabs from "../index";
 export interface WidgetConfig {
     /** The variant of the widget */
     variant?: ElevenLabs.EmbedVariant;
+    /** The placement of the widget on the screen */
+    placement?: ElevenLabs.WidgetPlacement;
     /** Whether the widget is expandable */
     expandable?: ElevenLabs.WidgetExpandable;
     /** The avatar of the widget */
-    avatar?: ElevenLabs.WidgetConfigAvatar;
+    avatar?: ElevenLabs.WidgetConfigOutputAvatar;
     /** The feedback mode of the widget */
     feedbackMode?: ElevenLabs.WidgetFeedbackMode;
     /** The background color of the widget */
@@ -59,8 +61,18 @@ export interface WidgetConfig {
     overrideLink?: string;
     /** Whether to enable mic muting */
     micMutingEnabled?: boolean;
+    /** Whether the widget should show the conversation transcript as it goes on */
+    transcriptEnabled?: boolean;
+    /** Whether the user should be able to send text messages */
+    textInputEnabled?: boolean;
+    /** Text contents of the widget */
+    textContents?: ElevenLabs.WidgetTextContents;
     /** Whether to show the language selector */
     languageSelector?: boolean;
+    /** Whether the widget can switch to text only mode */
+    supportsTextOnly?: boolean;
     /** The custom avatar path */
     customAvatarPath?: string;
+    /** Language presets for the widget */
+    languagePresets?: Record<string, ElevenLabs.WidgetLanguagePreset>;
 }

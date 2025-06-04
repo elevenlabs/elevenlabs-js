@@ -35,4 +35,6 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     fileFormat?: ElevenLabs.SpeechToTextConvertRequestFileFormat;
     /** The valid AWS S3, Cloudflare R2 or Google Cloud Storage URL of the file to transcribe. Exactly one of the file or cloud_storage_url parameters must be provided. The file must be a valid publicly accessible cloud storage URL. The file size must be less than 2GB. URL can be pre-signed. */
     cloudStorageUrl?: string;
+    /** Whether to send the transcription result to configured speech-to-text webhooks.  If set the request will return early without the transcription, which will be delivered later via webhook. Webhooks can be created and assigned to a transcription task in webhook settings page in the UI. */
+    webhook?: boolean;
 }

@@ -7,8 +7,8 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 
 export const EmbedVariant: core.serialization.Schema<serializers.EmbedVariant.Raw, ElevenLabs.EmbedVariant> =
-    core.serialization.enum_(["compact", "full", "expandable"]);
+    core.serialization.enum_(["tiny", "compact", "full", "expandable"]);
 
 export declare namespace EmbedVariant {
-    export type Raw = "compact" | "full" | "expandable";
+    export type Raw = "tiny" | "compact" | "full" | "expandable";
 }

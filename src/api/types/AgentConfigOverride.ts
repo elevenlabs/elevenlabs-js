@@ -5,10 +5,10 @@
 import * as ElevenLabs from "../index";
 
 export interface AgentConfigOverride {
-    /** The overrides for the prompt configuration */
-    prompt?: ElevenLabs.PromptAgentOverride;
-    /** If non-empty, the first message the agent will say. If empty, the agent waits for the user to start the discussion */
+    /** If non-empty, the first message the agent will say. If empty, the agent waits for the user to start the discussion. */
     firstMessage?: string;
-    /** The language of the agent, used for ASR and TTS */
+    /** Language of the agent - used for ASR and TTS */
     language?: string;
+    /** The prompt for the agent */
+    prompt?: ElevenLabs.PromptAgentOverride;
 }

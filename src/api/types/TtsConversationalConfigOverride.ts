@@ -3,5 +3,6 @@
  */
 
 export interface TtsConversationalConfigOverride {
+    /** The voice ID to use for TTS */
     voiceId?: string;
 }

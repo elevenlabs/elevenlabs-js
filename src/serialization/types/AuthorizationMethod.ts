@@ -17,6 +17,7 @@ export const AuthorizationMethod: core.serialization.Schema<
     "shareable_link",
     "livekit_token",
     "livekit_token_website",
+    "genesys_api_key",
 ]);
 
 export declare namespace AuthorizationMethod {
@@ -27,5 +28,6 @@ export declare namespace AuthorizationMethod {
         | "signed_url"
         | "shareable_link"
         | "livekit_token"
-        | "livekit_token_website";
+        | "livekit_token_website"
+        | "genesys_api_key";
 }

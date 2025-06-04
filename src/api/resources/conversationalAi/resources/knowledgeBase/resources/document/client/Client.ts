@@ -53,7 +53,7 @@ export class Document {
         documentationId: string,
         request: ElevenLabs.conversationalAi.knowledgeBase.RagIndexRequestModel,
         requestOptions?: Document.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.RagIndexResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.RagDocumentIndexResponseModel> {
         return core.HttpResponsePromise.fromPromise(this.__computeRagIndex(documentationId, request, requestOptions));
     }
 
@@ -61,7 +61,7 @@ export class Document {
         documentationId: string,
         request: ElevenLabs.conversationalAi.knowledgeBase.RagIndexRequestModel,
         requestOptions?: Document.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.RagIndexResponseModel>> {
+    ): Promise<core.WithRawResponse<ElevenLabs.RagDocumentIndexResponseModel>> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -79,8 +79,8 @@ export class Document {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -96,7 +96,7 @@ export class Document {
         });
         if (_response.ok) {
             return {
-                data: serializers.RagIndexResponseModel.parseOrThrow(_response.body, {
+                data: serializers.RagDocumentIndexResponseModel.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

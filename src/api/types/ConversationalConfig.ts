@@ -10,7 +10,7 @@ export interface ConversationalConfig {
     /** Configuration for turn detection */
     turn?: ElevenLabs.TurnConfig;
     /** Configuration for conversational text to speech */
-    tts?: ElevenLabs.TtsConversationalConfig;
+    tts?: ElevenLabs.TtsConversationalConfigOutput;
     /** Configuration for conversational events */
     conversation?: ElevenLabs.ConversationConfig;
     /** Language presets for conversations */

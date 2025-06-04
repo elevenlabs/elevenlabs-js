@@ -9,6 +9,7 @@ import { TextToSoundEffects } from "./api/resources/textToSoundEffects/client/Cl
 import { AudioIsolation } from "./api/resources/audioIsolation/client/Client";
 import { Samples } from "./api/resources/samples/client/Client";
 import { TextToSpeech } from "./api/resources/textToSpeech/client/Client";
+import { TextToDialogue } from "./api/resources/textToDialogue/client/Client";
 import { SpeechToSpeech } from "./api/resources/speechToSpeech/client/Client";
 import { TextToVoice } from "./api/resources/textToVoice/client/Client";
 import { User } from "./api/resources/user/client/Client";
@@ -53,6 +54,7 @@ export class ElevenLabsClient {
     protected _audioIsolation: AudioIsolation | undefined;
     protected _samples: Samples | undefined;
     protected _textToSpeech: TextToSpeech | undefined;
+    protected _textToDialogue: TextToDialogue | undefined;
     protected _speechToSpeech: SpeechToSpeech | undefined;
     protected _textToVoice: TextToVoice | undefined;
     protected _user: User | undefined;
@@ -88,6 +90,10 @@ export class ElevenLabsClient {
 
     public get textToSpeech(): TextToSpeech {
         return (this._textToSpeech ??= new TextToSpeech(this._options));
+    }
+
+    public get textToDialogue(): TextToDialogue {
+        return (this._textToDialogue ??= new TextToDialogue(this._options));
     }
 
     public get speechToSpeech(): SpeechToSpeech {

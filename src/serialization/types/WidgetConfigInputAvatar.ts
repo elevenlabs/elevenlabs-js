@@ -9,22 +9,22 @@ import { OrbAvatar } from "./OrbAvatar";
 import { UrlAvatar } from "./UrlAvatar";
 import { ImageAvatar } from "./ImageAvatar";
 
-export const WidgetConfigAvatar: core.serialization.Schema<
-    serializers.WidgetConfigAvatar.Raw,
-    ElevenLabs.WidgetConfigAvatar
+export const WidgetConfigInputAvatar: core.serialization.Schema<
+    serializers.WidgetConfigInputAvatar.Raw,
+    ElevenLabs.WidgetConfigInputAvatar
 > = core.serialization
     .union("type", {
         orb: OrbAvatar,
         url: UrlAvatar,
         image: ImageAvatar,
     })
-    .transform<ElevenLabs.WidgetConfigAvatar>({
+    .transform<ElevenLabs.WidgetConfigInputAvatar>({
         transform: (value) => value,
         untransform: (value) => value,
     });
 
-export declare namespace WidgetConfigAvatar {
-    export type Raw = WidgetConfigAvatar.Orb | WidgetConfigAvatar.Url | WidgetConfigAvatar.Image;
+export declare namespace WidgetConfigInputAvatar {
+    export type Raw = WidgetConfigInputAvatar.Orb | WidgetConfigInputAvatar.Url | WidgetConfigInputAvatar.Image;
 
     export interface Orb extends OrbAvatar.Raw {
         type: "orb";

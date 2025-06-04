@@ -19,4 +19,6 @@ export interface McpToolConfigOutput {
     mcpToolName: string;
     /** The id of the MCP server to call */
     mcpServerId: string;
+    /** If set to approved, the tool will be pre-approved and not require user approval before executing */
+    approvalMode?: ElevenLabs.McpApprovalRequiredModel;
 }

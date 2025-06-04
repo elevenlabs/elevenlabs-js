@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
+import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
 import { GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem } from "./GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem";
 
@@ -16,7 +17,7 @@ export const GetKnowledgeBaseSummaryFileResponseModel: core.serialization.Object
     id: core.serialization.string(),
     name: core.serialization.string(),
     metadata: KnowledgeBaseDocumentMetadataResponseModel,
-    promptInjectable: core.serialization.property("prompt_injectable", core.serialization.boolean()),
+    supportedUsages: core.serialization.property("supported_usages", core.serialization.list(DocumentUsageModeEnum)),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
     dependentAgents: core.serialization.property(
         "dependent_agents",
@@ -29,7 +30,7 @@ export declare namespace GetKnowledgeBaseSummaryFileResponseModel {
         id: string;
         name: string;
         metadata: KnowledgeBaseDocumentMetadataResponseModel.Raw;
-        prompt_injectable: boolean;
+        supported_usages: DocumentUsageModeEnum.Raw[];
         access_info: ResourceAccessInfo.Raw;
         dependent_agents: GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem.Raw[];
     }

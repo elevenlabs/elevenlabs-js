@@ -5,10 +5,10 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationConfigClientOverrideOutput {
-    /** The overrides for the agent configuration */
-    agent?: ElevenLabs.AgentConfigOverride;
-    /** The overrides for the TTS configuration */
+    /** Configuration for conversational text to speech */
     tts?: ElevenLabs.TtsConversationalConfigOverride;
-    /** The overrides for the conversation configuration */
+    /** Configuration for conversational events */
     conversation?: ElevenLabs.ConversationConfigOverride;
+    /** Agent specific configuration */
+    agent?: ElevenLabs.AgentConfigOverride;
 }

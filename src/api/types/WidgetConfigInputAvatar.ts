@@ -7,12 +7,12 @@ import * as ElevenLabs from "../index";
 /**
  * The avatar of the widget
  */
-export type WidgetConfigAvatar =
-    | ElevenLabs.WidgetConfigAvatar.Orb
-    | ElevenLabs.WidgetConfigAvatar.Url
-    | ElevenLabs.WidgetConfigAvatar.Image;
+export type WidgetConfigInputAvatar =
+    | ElevenLabs.WidgetConfigInputAvatar.Orb
+    | ElevenLabs.WidgetConfigInputAvatar.Url
+    | ElevenLabs.WidgetConfigInputAvatar.Image;
 
-export namespace WidgetConfigAvatar {
+export namespace WidgetConfigInputAvatar {
     export interface Orb extends ElevenLabs.OrbAvatar {
         type: "orb";
     }

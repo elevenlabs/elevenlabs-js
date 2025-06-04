@@ -14,7 +14,8 @@ export type ClientEvent =
     | "client_tool_call"
     | "vad_score"
     | "internal_turn_probability"
-    | "internal_tentative_agent_response";
+    | "internal_tentative_agent_response"
+    | "internal_native_mcp_tool_call";
 export const ClientEvent = {
     ConversationInitiationMetadata: "conversation_initiation_metadata",
     AsrInitiationMetadata: "asr_initiation_metadata",
@@ -28,4 +29,5 @@ export const ClientEvent = {
     VadScore: "vad_score",
     InternalTurnProbability: "internal_turn_probability",
     InternalTentativeAgentResponse: "internal_tentative_agent_response",
+    InternalNativeMcpToolCall: "internal_native_mcp_tool_call",
 } as const;

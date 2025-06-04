@@ -65,6 +65,10 @@ export interface VoicesGetSharedRequest {
      */
     includeCustomRates?: boolean;
     /**
+     * Include/exclude voices that are live moderated
+     */
+    includeLiveModerated?: boolean;
+    /**
      * Filter voices that are enabled for the reader app
      */
     readerAppEnabled?: boolean;

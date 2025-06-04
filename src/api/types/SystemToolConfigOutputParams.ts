@@ -7,6 +7,7 @@ import * as ElevenLabs from "../index";
 export type SystemToolConfigOutputParams =
     | ElevenLabs.SystemToolConfigOutputParams.EndCall
     | ElevenLabs.SystemToolConfigOutputParams.LanguageDetection
+    | ElevenLabs.SystemToolConfigOutputParams.SkipTurn
     | ElevenLabs.SystemToolConfigOutputParams.TransferToAgent
     | ElevenLabs.SystemToolConfigOutputParams.TransferToNumber;
 
@@ -17,6 +18,10 @@ export namespace SystemToolConfigOutputParams {
 
     export interface LanguageDetection extends ElevenLabs.LanguageDetectionToolConfig {
         systemToolType: "language_detection";
+    }
+
+    export interface SkipTurn extends ElevenLabs.SkipTurnToolConfig {
+        systemToolType: "skip_turn";
     }
 
     export interface TransferToAgent extends ElevenLabs.TransferToAgentToolConfig {

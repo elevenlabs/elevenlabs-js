@@ -6,7 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { SubscriptionResponseModelCurrency } from "./SubscriptionResponseModelCurrency";
-import { SubscriptionStatus } from "./SubscriptionStatus";
+import { SubscriptionStatusType } from "./SubscriptionStatusType";
 import { SubscriptionResponseModelBillingPeriod } from "./SubscriptionResponseModelBillingPeriod";
 import { SubscriptionResponseModelCharacterRefreshPeriod } from "./SubscriptionResponseModelCharacterRefreshPeriod";
 
@@ -49,7 +49,7 @@ export const SubscriptionResponse: core.serialization.ObjectSchema<
         core.serialization.boolean(),
     ),
     currency: SubscriptionResponseModelCurrency.optional(),
-    status: SubscriptionStatus,
+    status: SubscriptionStatusType,
     billingPeriod: core.serialization.property("billing_period", SubscriptionResponseModelBillingPeriod.optional()),
     characterRefreshPeriod: core.serialization.property(
         "character_refresh_period",
@@ -76,7 +76,7 @@ export declare namespace SubscriptionResponse {
         can_use_instant_voice_cloning: boolean;
         can_use_professional_voice_cloning: boolean;
         currency?: SubscriptionResponseModelCurrency.Raw | null;
-        status: SubscriptionStatus.Raw;
+        status: SubscriptionStatusType.Raw;
         billing_period?: SubscriptionResponseModelBillingPeriod.Raw | null;
         character_refresh_period?: SubscriptionResponseModelCharacterRefreshPeriod.Raw | null;
     }

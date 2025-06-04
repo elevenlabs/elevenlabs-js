@@ -9,10 +9,10 @@ import { ConversationHistoryTranscriptCommonModelOutputRole } from "./Conversati
 import { ConversationHistoryTranscriptToolCallCommonModel } from "./ConversationHistoryTranscriptToolCallCommonModel";
 import { ConversationHistoryTranscriptToolResultCommonModel } from "./ConversationHistoryTranscriptToolResultCommonModel";
 import { UserFeedback } from "./UserFeedback";
-import { ConversationHistoryTranscriptCommonModelOutputSourceMedium } from "./ConversationHistoryTranscriptCommonModelOutputSourceMedium";
 import { ConversationTurnMetrics } from "./ConversationTurnMetrics";
 import { RagRetrievalInfo } from "./RagRetrievalInfo";
 import { LlmUsageOutput } from "./LlmUsageOutput";
+import { ConversationHistoryTranscriptCommonModelOutputSourceMedium } from "./ConversationHistoryTranscriptCommonModelOutputSourceMedium";
 
 export const ConversationHistoryTranscriptCommonModelOutput: core.serialization.ObjectSchema<
     serializers.ConversationHistoryTranscriptCommonModelOutput.Raw,
@@ -30,10 +30,6 @@ export const ConversationHistoryTranscriptCommonModelOutput: core.serialization.
     ),
     feedback: UserFeedback.optional(),
     llmOverride: core.serialization.property("llm_override", core.serialization.string().optional()),
-    sourceMedium: core.serialization.property(
-        "source_medium",
-        ConversationHistoryTranscriptCommonModelOutputSourceMedium.optional(),
-    ),
     timeInCallSecs: core.serialization.property("time_in_call_secs", core.serialization.number()),
     conversationTurnMetrics: core.serialization.property(
         "conversation_turn_metrics",
@@ -43,6 +39,10 @@ export const ConversationHistoryTranscriptCommonModelOutput: core.serialization.
     llmUsage: core.serialization.property("llm_usage", LlmUsageOutput.optional()),
     interrupted: core.serialization.boolean().optional(),
     originalMessage: core.serialization.property("original_message", core.serialization.string().optional()),
+    sourceMedium: core.serialization.property(
+        "source_medium",
+        ConversationHistoryTranscriptCommonModelOutputSourceMedium.optional(),
+    ),
 });
 
 export declare namespace ConversationHistoryTranscriptCommonModelOutput {
@@ -53,12 +53,12 @@ export declare namespace ConversationHistoryTranscriptCommonModelOutput {
         tool_results?: ConversationHistoryTranscriptToolResultCommonModel.Raw[] | null;
         feedback?: UserFeedback.Raw | null;
         llm_override?: string | null;
-        source_medium?: ConversationHistoryTranscriptCommonModelOutputSourceMedium.Raw | null;
         time_in_call_secs: number;
         conversation_turn_metrics?: ConversationTurnMetrics.Raw | null;
         rag_retrieval_info?: RagRetrievalInfo.Raw | null;
         llm_usage?: LlmUsageOutput.Raw | null;
         interrupted?: boolean | null;
         original_message?: string | null;
+        source_medium?: ConversationHistoryTranscriptCommonModelOutputSourceMedium.Raw | null;
     }
 }

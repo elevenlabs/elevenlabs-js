@@ -5,19 +5,19 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { WidgetConfigResponseModel } from "./WidgetConfigResponseModel";
+import { WidgetConfigResponse } from "./WidgetConfigResponse";
 
 export const GetAgentEmbedResponseModel: core.serialization.ObjectSchema<
     serializers.GetAgentEmbedResponseModel.Raw,
     ElevenLabs.GetAgentEmbedResponseModel
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string()),
-    widgetConfig: core.serialization.property("widget_config", WidgetConfigResponseModel),
+    widgetConfig: core.serialization.property("widget_config", WidgetConfigResponse),
 });
 
 export declare namespace GetAgentEmbedResponseModel {
     export interface Raw {
         agent_id: string;
-        widget_config: WidgetConfigResponseModel.Raw;
+        widget_config: WidgetConfigResponse.Raw;
     }
 }

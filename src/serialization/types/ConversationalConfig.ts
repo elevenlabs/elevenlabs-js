@@ -7,7 +7,7 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { AsrConversationalConfig } from "./AsrConversationalConfig";
 import { TurnConfig } from "./TurnConfig";
-import { TtsConversationalConfig } from "./TtsConversationalConfig";
+import { TtsConversationalConfigOutput } from "./TtsConversationalConfigOutput";
 import { ConversationConfig } from "./ConversationConfig";
 import { LanguagePresetOutput } from "./LanguagePresetOutput";
 import { AgentConfig } from "./AgentConfig";
@@ -18,7 +18,7 @@ export const ConversationalConfig: core.serialization.ObjectSchema<
 > = core.serialization.object({
     asr: AsrConversationalConfig.optional(),
     turn: TurnConfig.optional(),
-    tts: TtsConversationalConfig.optional(),
+    tts: TtsConversationalConfigOutput.optional(),
     conversation: ConversationConfig.optional(),
     languagePresets: core.serialization.property(
         "language_presets",
@@ -31,7 +31,7 @@ export declare namespace ConversationalConfig {
     export interface Raw {
         asr?: AsrConversationalConfig.Raw | null;
         turn?: TurnConfig.Raw | null;
-        tts?: TtsConversationalConfig.Raw | null;
+        tts?: TtsConversationalConfigOutput.Raw | null;
         conversation?: ConversationConfig.Raw | null;
         language_presets?: Record<string, LanguagePresetOutput.Raw> | null;
         agent?: AgentConfig.Raw | null;

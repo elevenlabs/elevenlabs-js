@@ -19,4 +19,6 @@ export interface ConversationHistoryMetadataCommonModel {
     error?: ElevenLabs.ConversationHistoryErrorCommonModel;
     mainLanguage?: string;
     ragUsage?: ElevenLabs.ConversationHistoryRagUsageCommonModel;
+    textOnly?: boolean;
+    featuresUsage?: ElevenLabs.FeaturesUsageCommonModel;
 }

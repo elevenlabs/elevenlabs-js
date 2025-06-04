@@ -9,6 +9,7 @@ import { SpeechHistoryItemResponseModelVoiceCategory } from "./SpeechHistoryItem
 import { FeedbackItem } from "./FeedbackItem";
 import { SpeechHistoryItemResponseModelSource } from "./SpeechHistoryItemResponseModelSource";
 import { HistoryAlignmentsResponseModel } from "./HistoryAlignmentsResponseModel";
+import { DialogueInputResponseModel } from "./DialogueInputResponseModel";
 
 export const SpeechHistoryItemResponse: core.serialization.ObjectSchema<
     serializers.SpeechHistoryItemResponse.Raw,
@@ -16,14 +17,14 @@ export const SpeechHistoryItemResponse: core.serialization.ObjectSchema<
 > = core.serialization.object({
     historyItemId: core.serialization.property("history_item_id", core.serialization.string()),
     requestId: core.serialization.property("request_id", core.serialization.string().optional()),
-    voiceId: core.serialization.property("voice_id", core.serialization.string()),
+    voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
     modelId: core.serialization.property("model_id", core.serialization.string().optional()),
-    voiceName: core.serialization.property("voice_name", core.serialization.string()),
+    voiceName: core.serialization.property("voice_name", core.serialization.string().optional()),
     voiceCategory: core.serialization.property(
         "voice_category",
         SpeechHistoryItemResponseModelVoiceCategory.optional(),
     ),
-    text: core.serialization.string(),
+    text: core.serialization.string().optional(),
     dateUnix: core.serialization.property("date_unix", core.serialization.number()),
     characterCountChangeFrom: core.serialization.property("character_count_change_from", core.serialization.number()),
     characterCountChangeTo: core.serialization.property("character_count_change_to", core.serialization.number()),
@@ -34,17 +35,18 @@ export const SpeechHistoryItemResponse: core.serialization.ObjectSchema<
     shareLinkId: core.serialization.property("share_link_id", core.serialization.string().optional()),
     source: SpeechHistoryItemResponseModelSource.optional(),
     alignments: HistoryAlignmentsResponseModel.optional(),
+    dialogue: core.serialization.list(DialogueInputResponseModel).optional(),
 });
 
 export declare namespace SpeechHistoryItemResponse {
     export interface Raw {
         history_item_id: string;
         request_id?: string | null;
-        voice_id: string;
+        voice_id?: string | null;
         model_id?: string | null;
-        voice_name: string;
+        voice_name?: string | null;
         voice_category?: SpeechHistoryItemResponseModelVoiceCategory.Raw | null;
-        text: string;
+        text?: string | null;
         date_unix: number;
         character_count_change_from: number;
         character_count_change_to: number;
@@ -55,5 +57,6 @@ export declare namespace SpeechHistoryItemResponse {
         share_link_id?: string | null;
         source?: SpeechHistoryItemResponseModelSource.Raw | null;
         alignments?: HistoryAlignmentsResponseModel.Raw | null;
+        dialogue?: DialogueInputResponseModel.Raw[] | null;
     }
 }
