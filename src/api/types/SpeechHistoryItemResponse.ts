@@ -10,15 +10,15 @@ export interface SpeechHistoryItemResponse {
     /** The ID of the request. */
     requestId?: string;
     /** The ID of the voice used. */
-    voiceId: string;
+    voiceId?: string;
     /** The ID of the model. */
     modelId?: string;
     /** The name of the voice. */
-    voiceName: string;
+    voiceName?: string;
     /** The category of the voice. Either 'premade', 'cloned', 'generated' or 'professional'. */
     voiceCategory?: ElevenLabs.SpeechHistoryItemResponseModelVoiceCategory;
     /** The text used to generate the audio item. */
-    text: string;
+    text?: string;
     /** Unix timestamp of when the item was created. */
     dateUnix: number;
     /** The character count change from. */
@@ -38,4 +38,6 @@ export interface SpeechHistoryItemResponse {
     source?: ElevenLabs.SpeechHistoryItemResponseModelSource;
     /** The alignments of the history item. */
     alignments?: ElevenLabs.HistoryAlignmentsResponseModel;
+    /** The dialogue (voice and text pairs) used to generate the audio item. If this is set then the top level `text` and `voice_id` fields will be empty. */
+    dialogue?: ElevenLabs.DialogueInputResponseModel[];
 }

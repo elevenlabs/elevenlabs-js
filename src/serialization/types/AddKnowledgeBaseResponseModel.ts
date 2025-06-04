@@ -12,13 +12,11 @@ export const AddKnowledgeBaseResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     id: core.serialization.string(),
     name: core.serialization.string(),
-    promptInjectable: core.serialization.property("prompt_injectable", core.serialization.boolean()),
 });
 
 export declare namespace AddKnowledgeBaseResponseModel {
     export interface Raw {
         id: string;
         name: string;
-        prompt_injectable: boolean;
     }
 }

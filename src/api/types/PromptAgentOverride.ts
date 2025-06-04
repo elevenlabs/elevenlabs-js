@@ -3,6 +3,6 @@
  */
 
 export interface PromptAgentOverride {
-    /** The initial system message that defines the agent, e.g. “You are a German language teacher named Laura.” */
+    /** The prompt for the agent */
     prompt?: string;
 }

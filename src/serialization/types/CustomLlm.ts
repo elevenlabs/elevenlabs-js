@@ -6,12 +6,17 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ConvAiSecretLocator } from "./ConvAiSecretLocator";
+import { CustomLlmRequestHeadersValue } from "./CustomLlmRequestHeadersValue";
 
 export const CustomLlm: core.serialization.ObjectSchema<serializers.CustomLlm.Raw, ElevenLabs.CustomLlm> =
     core.serialization.object({
         url: core.serialization.string(),
         modelId: core.serialization.property("model_id", core.serialization.string().optional()),
         apiKey: core.serialization.property("api_key", ConvAiSecretLocator.optional()),
+        requestHeaders: core.serialization.property(
+            "request_headers",
+            core.serialization.record(core.serialization.string(), CustomLlmRequestHeadersValue).optional(),
+        ),
     });
 
 export declare namespace CustomLlm {
@@ -19,5 +24,6 @@ export declare namespace CustomLlm {
         url: string;
         model_id?: string | null;
         api_key?: ConvAiSecretLocator.Raw | null;
+        request_headers?: Record<string, CustomLlmRequestHeadersValue.Raw> | null;
     }
 }

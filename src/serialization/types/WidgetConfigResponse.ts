@@ -6,15 +6,19 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { EmbedVariant } from "./EmbedVariant";
+import { WidgetPlacement } from "./WidgetPlacement";
 import { WidgetExpandable } from "./WidgetExpandable";
 import { WidgetConfigResponseModelAvatar } from "./WidgetConfigResponseModelAvatar";
 import { WidgetFeedbackMode } from "./WidgetFeedbackMode";
+import { WidgetTextContents } from "./WidgetTextContents";
+import { WidgetLanguagePresetResponse } from "./WidgetLanguagePresetResponse";
 
-export const WidgetConfigResponseModel: core.serialization.ObjectSchema<
-    serializers.WidgetConfigResponseModel.Raw,
-    ElevenLabs.WidgetConfigResponseModel
+export const WidgetConfigResponse: core.serialization.ObjectSchema<
+    serializers.WidgetConfigResponse.Raw,
+    ElevenLabs.WidgetConfigResponse
 > = core.serialization.object({
     variant: EmbedVariant.optional(),
+    placement: WidgetPlacement.optional(),
     expandable: WidgetExpandable.optional(),
     avatar: WidgetConfigResponseModelAvatar.optional(),
     feedbackMode: core.serialization.property("feedback_mode", WidgetFeedbackMode.optional()),
@@ -47,16 +51,27 @@ export const WidgetConfigResponseModel: core.serialization.ObjectSchema<
     disableBanner: core.serialization.property("disable_banner", core.serialization.boolean().optional()),
     overrideLink: core.serialization.property("override_link", core.serialization.string().optional()),
     micMutingEnabled: core.serialization.property("mic_muting_enabled", core.serialization.boolean().optional()),
+    transcriptEnabled: core.serialization.property("transcript_enabled", core.serialization.boolean().optional()),
+    textInputEnabled: core.serialization.property("text_input_enabled", core.serialization.boolean().optional()),
+    textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
     language: core.serialization.string(),
     supportedLanguageOverrides: core.serialization.property(
         "supported_language_overrides",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    languagePresets: core.serialization.property(
+        "language_presets",
+        core.serialization.record(core.serialization.string(), WidgetLanguagePresetResponse).optional(),
+    ),
+    textOnly: core.serialization.property("text_only", core.serialization.boolean().optional()),
+    supportsTextOnly: core.serialization.property("supports_text_only", core.serialization.boolean().optional()),
+    firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
 });
 
-export declare namespace WidgetConfigResponseModel {
+export declare namespace WidgetConfigResponse {
     export interface Raw {
         variant?: EmbedVariant.Raw | null;
+        placement?: WidgetPlacement.Raw | null;
         expandable?: WidgetExpandable.Raw | null;
         avatar?: WidgetConfigResponseModelAvatar.Raw | null;
         feedback_mode?: WidgetFeedbackMode.Raw | null;
@@ -83,7 +98,14 @@ export declare namespace WidgetConfigResponseModel {
         disable_banner?: boolean | null;
         override_link?: string | null;
         mic_muting_enabled?: boolean | null;
+        transcript_enabled?: boolean | null;
+        text_input_enabled?: boolean | null;
+        text_contents?: WidgetTextContents.Raw | null;
         language: string;
         supported_language_overrides?: string[] | null;
+        language_presets?: Record<string, WidgetLanguagePresetResponse.Raw> | null;
+        text_only?: boolean | null;
+        supports_text_only?: boolean | null;
+        first_message?: string | null;
     }
 }

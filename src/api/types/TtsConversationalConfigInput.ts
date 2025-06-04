@@ -4,11 +4,13 @@
 
 import * as ElevenLabs from "../index";
 
-export interface TtsConversationalConfig {
+export interface TtsConversationalConfigInput {
     /** The model to use for TTS */
     modelId?: ElevenLabs.TtsConversationalModel;
     /** The voice ID to use for TTS */
     voiceId?: string;
+    /** Additional supported voices for the agent */
+    supportedVoices?: ElevenLabs.SupportedVoice[];
     /** The audio format to use for TTS */
     agentOutputAudioFormat?: ElevenLabs.TtsOutputFormat;
     /** The optimization for streaming latency */

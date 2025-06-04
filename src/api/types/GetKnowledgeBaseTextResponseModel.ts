@@ -8,7 +8,7 @@ export interface GetKnowledgeBaseTextResponseModel {
     id: string;
     name: string;
     metadata: ElevenLabs.KnowledgeBaseDocumentMetadataResponseModel;
-    promptInjectable: boolean;
+    supportedUsages: ElevenLabs.DocumentUsageModeEnum[];
     accessInfo: ElevenLabs.ResourceAccessInfo;
     extractedInnerHtml: string;
 }

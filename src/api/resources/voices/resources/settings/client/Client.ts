@@ -67,8 +67,8 @@ export class Settings {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -157,8 +157,8 @@ export class Settings {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -233,9 +233,9 @@ export class Settings {
      * @example
      *     await client.voices.settings.update("21m00Tcm4TlvDq8ikWAM", {
      *         stability: 1,
+     *         useSpeakerBoost: true,
      *         similarityBoost: 1,
      *         style: 0,
-     *         useSpeakerBoost: true,
      *         speed: 1
      *     })
      */
@@ -269,8 +269,8 @@ export class Settings {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

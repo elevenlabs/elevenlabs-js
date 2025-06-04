@@ -9,7 +9,8 @@ export type AuthorizationMethod =
     | "signed_url"
     | "shareable_link"
     | "livekit_token"
-    | "livekit_token_website";
+    | "livekit_token_website"
+    | "genesys_api_key";
 export const AuthorizationMethod = {
     Invalid: "invalid",
     Public: "public",
@@ -18,4 +19,5 @@ export const AuthorizationMethod = {
     ShareableLink: "shareable_link",
     LivekitToken: "livekit_token",
     LivekitTokenWebsite: "livekit_token_website",
+    GenesysApiKey: "genesys_api_key",
 } as const;

@@ -11,4 +11,6 @@ export interface CustomLlm {
     modelId?: string;
     /** The API key for authentication */
     apiKey?: ElevenLabs.ConvAiSecretLocator;
+    /** Headers that should be included in the request */
+    requestHeaders?: Record<string, ElevenLabs.CustomLlmRequestHeadersValue>;
 }

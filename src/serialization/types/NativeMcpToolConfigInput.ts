@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { McpApprovalRequiredModel } from "./McpApprovalRequiredModel";
 
 export const NativeMcpToolConfigInput: core.serialization.ObjectSchema<
     serializers.NativeMcpToolConfigInput.Raw,
@@ -17,6 +18,7 @@ export const NativeMcpToolConfigInput: core.serialization.ObjectSchema<
     parameters: core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyInput).optional(),
     mcpToolName: core.serialization.property("mcp_tool_name", core.serialization.string()),
     mcpServerId: core.serialization.property("mcp_server_id", core.serialization.string()),
+    approvalMode: core.serialization.property("approval_mode", McpApprovalRequiredModel.optional()),
 });
 
 export declare namespace NativeMcpToolConfigInput {
@@ -28,5 +30,6 @@ export declare namespace NativeMcpToolConfigInput {
         parameters?: serializers.ObjectJsonSchemaPropertyInput.Raw | null;
         mcp_tool_name: string;
         mcp_server_id: string;
+        approval_mode?: McpApprovalRequiredModel.Raw | null;
     }
 }

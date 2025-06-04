@@ -4,9 +4,11 @@
 
 import * as ElevenLabs from "../index";
 
-export interface WidgetConfigResponseModel {
+export interface WidgetConfigResponse {
     /** The variant of the widget */
     variant?: ElevenLabs.EmbedVariant;
+    /** The placement of the widget on the screen */
+    placement?: ElevenLabs.WidgetPlacement;
     /** Whether the widget is expandable */
     expandable?: ElevenLabs.WidgetExpandable;
     /** The avatar of the widget */
@@ -59,6 +61,19 @@ export interface WidgetConfigResponseModel {
     overrideLink?: string;
     /** Whether to enable mic muting */
     micMutingEnabled?: boolean;
+    /** Whether the widget should show the conversation transcript as it goes on */
+    transcriptEnabled?: boolean;
+    /** Whether the user should be able to send text messages */
+    textInputEnabled?: boolean;
+    /** Text contents of the widget */
+    textContents?: ElevenLabs.WidgetTextContents;
     language: string;
     supportedLanguageOverrides?: string[];
+    /** Language presets for the widget */
+    languagePresets?: Record<string, ElevenLabs.WidgetLanguagePresetResponse>;
+    /** Whether the agent uses text-only mode */
+    textOnly?: boolean;
+    /** Whether the agent can be switched to text-only mode */
+    supportsTextOnly?: boolean;
+    firstMessage?: string;
 }

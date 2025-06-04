@@ -6,16 +6,21 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { TtsConversationalModel } from "./TtsConversationalModel";
+import { SupportedVoice } from "./SupportedVoice";
 import { TtsOutputFormat } from "./TtsOutputFormat";
 import { TtsOptimizeStreamingLatency } from "./TtsOptimizeStreamingLatency";
 import { PydanticPronunciationDictionaryVersionLocator } from "./PydanticPronunciationDictionaryVersionLocator";
 
-export const TtsConversationalConfig: core.serialization.ObjectSchema<
-    serializers.TtsConversationalConfig.Raw,
-    ElevenLabs.TtsConversationalConfig
+export const TtsConversationalConfigInput: core.serialization.ObjectSchema<
+    serializers.TtsConversationalConfigInput.Raw,
+    ElevenLabs.TtsConversationalConfigInput
 > = core.serialization.object({
     modelId: core.serialization.property("model_id", TtsConversationalModel.optional()),
     voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
+    supportedVoices: core.serialization.property(
+        "supported_voices",
+        core.serialization.list(SupportedVoice).optional(),
+    ),
     agentOutputAudioFormat: core.serialization.property("agent_output_audio_format", TtsOutputFormat.optional()),
     optimizeStreamingLatency: core.serialization.property(
         "optimize_streaming_latency",
@@ -30,10 +35,11 @@ export const TtsConversationalConfig: core.serialization.ObjectSchema<
     ),
 });
 
-export declare namespace TtsConversationalConfig {
+export declare namespace TtsConversationalConfigInput {
     export interface Raw {
         model_id?: TtsConversationalModel.Raw | null;
         voice_id?: string | null;
+        supported_voices?: SupportedVoice.Raw[] | null;
         agent_output_audio_format?: TtsOutputFormat.Raw | null;
         optimize_streaming_latency?: TtsOptimizeStreamingLatency.Raw | null;
         stability?: number | null;

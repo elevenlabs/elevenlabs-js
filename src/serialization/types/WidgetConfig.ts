@@ -6,15 +6,19 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { EmbedVariant } from "./EmbedVariant";
+import { WidgetPlacement } from "./WidgetPlacement";
 import { WidgetExpandable } from "./WidgetExpandable";
-import { WidgetConfigAvatar } from "./WidgetConfigAvatar";
+import { WidgetConfigOutputAvatar } from "./WidgetConfigOutputAvatar";
 import { WidgetFeedbackMode } from "./WidgetFeedbackMode";
+import { WidgetTextContents } from "./WidgetTextContents";
+import { WidgetLanguagePreset } from "./WidgetLanguagePreset";
 
 export const WidgetConfig: core.serialization.ObjectSchema<serializers.WidgetConfig.Raw, ElevenLabs.WidgetConfig> =
     core.serialization.object({
         variant: EmbedVariant.optional(),
+        placement: WidgetPlacement.optional(),
         expandable: WidgetExpandable.optional(),
-        avatar: WidgetConfigAvatar.optional(),
+        avatar: WidgetConfigOutputAvatar.optional(),
         feedbackMode: core.serialization.property("feedback_mode", WidgetFeedbackMode.optional()),
         bgColor: core.serialization.property("bg_color", core.serialization.string().optional()),
         textColor: core.serialization.property("text_color", core.serialization.string().optional()),
@@ -45,15 +49,24 @@ export const WidgetConfig: core.serialization.ObjectSchema<serializers.WidgetCon
         disableBanner: core.serialization.property("disable_banner", core.serialization.boolean().optional()),
         overrideLink: core.serialization.property("override_link", core.serialization.string().optional()),
         micMutingEnabled: core.serialization.property("mic_muting_enabled", core.serialization.boolean().optional()),
+        transcriptEnabled: core.serialization.property("transcript_enabled", core.serialization.boolean().optional()),
+        textInputEnabled: core.serialization.property("text_input_enabled", core.serialization.boolean().optional()),
+        textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
         languageSelector: core.serialization.property("language_selector", core.serialization.boolean().optional()),
+        supportsTextOnly: core.serialization.property("supports_text_only", core.serialization.boolean().optional()),
         customAvatarPath: core.serialization.property("custom_avatar_path", core.serialization.string().optional()),
+        languagePresets: core.serialization.property(
+            "language_presets",
+            core.serialization.record(core.serialization.string(), WidgetLanguagePreset).optional(),
+        ),
     });
 
 export declare namespace WidgetConfig {
     export interface Raw {
         variant?: EmbedVariant.Raw | null;
+        placement?: WidgetPlacement.Raw | null;
         expandable?: WidgetExpandable.Raw | null;
-        avatar?: WidgetConfigAvatar.Raw | null;
+        avatar?: WidgetConfigOutputAvatar.Raw | null;
         feedback_mode?: WidgetFeedbackMode.Raw | null;
         bg_color?: string | null;
         text_color?: string | null;
@@ -78,7 +91,12 @@ export declare namespace WidgetConfig {
         disable_banner?: boolean | null;
         override_link?: string | null;
         mic_muting_enabled?: boolean | null;
+        transcript_enabled?: boolean | null;
+        text_input_enabled?: boolean | null;
+        text_contents?: WidgetTextContents.Raw | null;
         language_selector?: boolean | null;
+        supports_text_only?: boolean | null;
         custom_avatar_path?: string | null;
+        language_presets?: Record<string, WidgetLanguagePreset.Raw> | null;
     }
 }

@@ -13,6 +13,10 @@ export const RagConfig: core.serialization.ObjectSchema<serializers.RagConfig.Ra
         embeddingModel: core.serialization.property("embedding_model", EmbeddingModelEnum.optional()),
         maxVectorDistance: core.serialization.property("max_vector_distance", core.serialization.number().optional()),
         maxDocumentsLength: core.serialization.property("max_documents_length", core.serialization.number().optional()),
+        maxRetrievedRagChunksCount: core.serialization.property(
+            "max_retrieved_rag_chunks_count",
+            core.serialization.number().optional(),
+        ),
     });
 
 export declare namespace RagConfig {
@@ -21,5 +25,6 @@ export declare namespace RagConfig {
         embedding_model?: EmbeddingModelEnum.Raw | null;
         max_vector_distance?: number | null;
         max_documents_length?: number | null;
+        max_retrieved_rag_chunks_count?: number | null;
     }
 }

@@ -4,7 +4,10 @@
 
 import * as ElevenLabs from "../index";
 
-export interface RagIndexResponseModel {
+export interface RagDocumentIndexResponseModel {
+    id: string;
+    model: ElevenLabs.EmbeddingModelEnum;
     status: ElevenLabs.RagIndexStatus;
     progressPercentage: number;
+    documentModelIndexUsage: ElevenLabs.RagDocumentIndexUsage;
 }

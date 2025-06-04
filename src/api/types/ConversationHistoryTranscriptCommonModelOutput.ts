@@ -11,11 +11,11 @@ export interface ConversationHistoryTranscriptCommonModelOutput {
     toolResults?: ElevenLabs.ConversationHistoryTranscriptToolResultCommonModel[];
     feedback?: ElevenLabs.UserFeedback;
     llmOverride?: string;
-    sourceMedium?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutputSourceMedium;
     timeInCallSecs: number;
     conversationTurnMetrics?: ElevenLabs.ConversationTurnMetrics;
     ragRetrievalInfo?: ElevenLabs.RagRetrievalInfo;
     llmUsage?: ElevenLabs.LlmUsageOutput;
     interrupted?: boolean;
     originalMessage?: string;
+    sourceMedium?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutputSourceMedium;
 }

@@ -6,5 +6,5 @@ import * as ElevenLabs from "../index";
 
 export interface GetAgentEmbedResponseModel {
     agentId: string;
-    widgetConfig: ElevenLabs.WidgetConfigResponseModel;
+    widgetConfig: ElevenLabs.WidgetConfigResponse;
 }

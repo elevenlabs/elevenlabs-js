@@ -9,18 +9,18 @@ import * as core from "../../core";
 export const VoiceSettings: core.serialization.ObjectSchema<serializers.VoiceSettings.Raw, ElevenLabs.VoiceSettings> =
     core.serialization.object({
         stability: core.serialization.number().optional(),
+        useSpeakerBoost: core.serialization.property("use_speaker_boost", core.serialization.boolean().optional()),
         similarityBoost: core.serialization.property("similarity_boost", core.serialization.number().optional()),
         style: core.serialization.number().optional(),
-        useSpeakerBoost: core.serialization.property("use_speaker_boost", core.serialization.boolean().optional()),
         speed: core.serialization.number().optional(),
     });
 
 export declare namespace VoiceSettings {
     export interface Raw {
         stability?: number | null;
+        use_speaker_boost?: boolean | null;
         similarity_boost?: number | null;
         style?: number | null;
-        use_speaker_boost?: boolean | null;
         speed?: number | null;
     }
 }

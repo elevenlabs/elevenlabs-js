@@ -13,16 +13,41 @@ export type Llm =
     | "gpt-3.5-turbo"
     | "gemini-1.5-pro"
     | "gemini-1.5-flash"
-    | "gemini-2.0-flash-001"
+    | "gemini-2.0-flash"
     | "gemini-2.0-flash-lite"
     | "gemini-2.5-flash"
-    | "gemini-1.0-pro"
+    | "claude-sonnet-4"
     | "claude-3-7-sonnet"
     | "claude-3-5-sonnet"
     | "claude-3-5-sonnet-v1"
     | "claude-3-haiku"
     | "grok-beta"
-    | "custom-llm";
+    | "custom-llm"
+    | "gemini-2.5-flash-preview-05-20"
+    | "gemini-2.5-flash-preview-04-17"
+    | "gemini-2.0-flash-lite-001"
+    | "gemini-2.0-flash-001"
+    | "gemini-1.5-flash-002"
+    | "gemini-1.5-flash-001"
+    | "gemini-1.5-pro-002"
+    | "gemini-1.5-pro-001"
+    | "claude-sonnet-4@20250514"
+    | "claude-3-7-sonnet@20250219"
+    | "claude-3-5-sonnet@20240620"
+    | "claude-3-5-sonnet-v2@20241022"
+    | "claude-3-haiku@20240307"
+    | "gpt-4.1-2025-04-14"
+    | "gpt-4.1-mini-2025-04-14"
+    | "gpt-4.1-nano-2025-04-14"
+    | "gpt-4o-mini-2024-07-18"
+    | "gpt-4o-2024-11-20"
+    | "gpt-4o-2024-08-06"
+    | "gpt-4o-2024-05-13"
+    | "gpt-4-0613"
+    | "gpt-4-0314"
+    | "gpt-4-turbo-2024-04-09"
+    | "gpt-3.5-turbo-0125"
+    | "gpt-3.5-turbo-1106";
 export const Llm = {
     Gpt4OMini: "gpt-4o-mini",
     Gpt4O: "gpt-4o",
@@ -34,14 +59,39 @@ export const Llm = {
     Gpt35Turbo: "gpt-3.5-turbo",
     Gemini15Pro: "gemini-1.5-pro",
     Gemini15Flash: "gemini-1.5-flash",
-    Gemini20Flash001: "gemini-2.0-flash-001",
+    Gemini20Flash: "gemini-2.0-flash",
     Gemini20FlashLite: "gemini-2.0-flash-lite",
     Gemini25Flash: "gemini-2.5-flash",
-    Gemini10Pro: "gemini-1.0-pro",
+    ClaudeSonnet4: "claude-sonnet-4",
     Claude37Sonnet: "claude-3-7-sonnet",
     Claude35Sonnet: "claude-3-5-sonnet",
     Claude35SonnetV1: "claude-3-5-sonnet-v1",
     Claude3Haiku: "claude-3-haiku",
     GrokBeta: "grok-beta",
     CustomLlm: "custom-llm",
+    Gemini25FlashPreview0520: "gemini-2.5-flash-preview-05-20",
+    Gemini25FlashPreview0417: "gemini-2.5-flash-preview-04-17",
+    Gemini20FlashLite001: "gemini-2.0-flash-lite-001",
+    Gemini20Flash001: "gemini-2.0-flash-001",
+    Gemini15Flash002: "gemini-1.5-flash-002",
+    Gemini15Flash001: "gemini-1.5-flash-001",
+    Gemini15Pro002: "gemini-1.5-pro-002",
+    Gemini15Pro001: "gemini-1.5-pro-001",
+    ClaudeSonnet420250514: "claude-sonnet-4@20250514",
+    Claude37Sonnet20250219: "claude-3-7-sonnet@20250219",
+    Claude35Sonnet20240620: "claude-3-5-sonnet@20240620",
+    Claude35SonnetV220241022: "claude-3-5-sonnet-v2@20241022",
+    Claude3Haiku20240307: "claude-3-haiku@20240307",
+    Gpt4120250414: "gpt-4.1-2025-04-14",
+    Gpt41Mini20250414: "gpt-4.1-mini-2025-04-14",
+    Gpt41Nano20250414: "gpt-4.1-nano-2025-04-14",
+    Gpt4OMini20240718: "gpt-4o-mini-2024-07-18",
+    Gpt4O20241120: "gpt-4o-2024-11-20",
+    Gpt4O20240806: "gpt-4o-2024-08-06",
+    Gpt4O20240513: "gpt-4o-2024-05-13",
+    Gpt40613: "gpt-4-0613",
+    Gpt40314: "gpt-4-0314",
+    Gpt4Turbo20240409: "gpt-4-turbo-2024-04-09",
+    Gpt35Turbo0125: "gpt-3.5-turbo-0125",
+    Gpt35Turbo1106: "gpt-3.5-turbo-1106",
 } as const;

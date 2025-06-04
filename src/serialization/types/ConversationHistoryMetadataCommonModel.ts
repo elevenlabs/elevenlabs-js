@@ -13,6 +13,7 @@ import { ConversationHistoryMetadataCommonModelPhoneCall } from "./ConversationH
 import { ConversationHistoryBatchCallModel } from "./ConversationHistoryBatchCallModel";
 import { ConversationHistoryErrorCommonModel } from "./ConversationHistoryErrorCommonModel";
 import { ConversationHistoryRagUsageCommonModel } from "./ConversationHistoryRagUsageCommonModel";
+import { FeaturesUsageCommonModel } from "./FeaturesUsageCommonModel";
 
 export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSchema<
     serializers.ConversationHistoryMetadataCommonModel.Raw,
@@ -35,6 +36,8 @@ export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSc
     error: ConversationHistoryErrorCommonModel.optional(),
     mainLanguage: core.serialization.property("main_language", core.serialization.string().optional()),
     ragUsage: core.serialization.property("rag_usage", ConversationHistoryRagUsageCommonModel.optional()),
+    textOnly: core.serialization.property("text_only", core.serialization.boolean().optional()),
+    featuresUsage: core.serialization.property("features_usage", FeaturesUsageCommonModel.optional()),
 });
 
 export declare namespace ConversationHistoryMetadataCommonModel {
@@ -53,5 +56,7 @@ export declare namespace ConversationHistoryMetadataCommonModel {
         error?: ConversationHistoryErrorCommonModel.Raw | null;
         main_language?: string | null;
         rag_usage?: ConversationHistoryRagUsageCommonModel.Raw | null;
+        text_only?: boolean | null;
+        features_usage?: FeaturesUsageCommonModel.Raw | null;
     }
 }

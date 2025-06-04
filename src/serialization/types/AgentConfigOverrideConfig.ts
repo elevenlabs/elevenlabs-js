@@ -11,15 +11,15 @@ export const AgentConfigOverrideConfig: core.serialization.ObjectSchema<
     serializers.AgentConfigOverrideConfig.Raw,
     ElevenLabs.AgentConfigOverrideConfig
 > = core.serialization.object({
-    prompt: PromptAgentOverrideConfig.optional(),
     firstMessage: core.serialization.property("first_message", core.serialization.boolean().optional()),
     language: core.serialization.boolean().optional(),
+    prompt: PromptAgentOverrideConfig.optional(),
 });
 
 export declare namespace AgentConfigOverrideConfig {
     export interface Raw {
-        prompt?: PromptAgentOverrideConfig.Raw | null;
         first_message?: boolean | null;
         language?: boolean | null;
+        prompt?: PromptAgentOverrideConfig.Raw | null;
     }
 }

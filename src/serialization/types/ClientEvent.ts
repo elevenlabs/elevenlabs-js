@@ -20,6 +20,7 @@ export const ClientEvent: core.serialization.Schema<serializers.ClientEvent.Raw,
         "vad_score",
         "internal_turn_probability",
         "internal_tentative_agent_response",
+        "internal_native_mcp_tool_call",
     ]);
 
 export declare namespace ClientEvent {
@@ -35,5 +36,6 @@ export declare namespace ClientEvent {
         | "client_tool_call"
         | "vad_score"
         | "internal_turn_probability"
-        | "internal_tentative_agent_response";
+        | "internal_tentative_agent_response"
+        | "internal_native_mcp_tool_call";
 }

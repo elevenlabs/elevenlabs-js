@@ -5,21 +5,23 @@
 import * as serializers from "../../../../../../index";
 import * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
+import { ConversationalConfig } from "../../../../../../types/ConversationalConfig";
+import { AgentPlatformSettingsRequestModel } from "../../../../../../types/AgentPlatformSettingsRequestModel";
 
 export const UpdateAgentRequest: core.serialization.Schema<
     serializers.conversationalAi.UpdateAgentRequest.Raw,
     ElevenLabs.conversationalAi.UpdateAgentRequest
 > = core.serialization.object({
-    conversationConfig: core.serialization.property("conversation_config", core.serialization.unknown().optional()),
-    platformSettings: core.serialization.property("platform_settings", core.serialization.unknown().optional()),
+    conversationConfig: core.serialization.property("conversation_config", ConversationalConfig.optional()),
+    platformSettings: core.serialization.property("platform_settings", AgentPlatformSettingsRequestModel.optional()),
     name: core.serialization.string().optional(),
     tags: core.serialization.list(core.serialization.string()).optional(),
 });
 
 export declare namespace UpdateAgentRequest {
     export interface Raw {
-        conversation_config?: unknown | null;
-        platform_settings?: unknown | null;
+        conversation_config?: ConversationalConfig.Raw | null;
+        platform_settings?: AgentPlatformSettingsRequestModel.Raw | null;
         name?: string | null;
         tags?: string[] | null;
     }

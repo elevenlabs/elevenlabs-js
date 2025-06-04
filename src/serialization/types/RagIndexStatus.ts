@@ -7,8 +7,15 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 
 export const RagIndexStatus: core.serialization.Schema<serializers.RagIndexStatus.Raw, ElevenLabs.RagIndexStatus> =
-    core.serialization.enum_(["created", "processing", "failed", "succeeded"]);
+    core.serialization.enum_([
+        "created",
+        "processing",
+        "failed",
+        "succeeded",
+        "rag_limit_exceeded",
+        "document_too_small",
+    ]);
 
 export declare namespace RagIndexStatus {
-    export type Raw = "created" | "processing" | "failed" | "succeeded";
+    export type Raw = "created" | "processing" | "failed" | "succeeded" | "rag_limit_exceeded" | "document_too_small";
 }

@@ -84,8 +84,8 @@ export class Documents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -200,8 +200,8 @@ export class Documents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -307,8 +307,8 @@ export class Documents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -414,8 +414,8 @@ export class Documents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -482,6 +482,7 @@ export class Documents {
      * Delete a document from the knowledge base
      *
      * @param {string} documentationId - The id of a document from the knowledge base. This is returned on document addition.
+     * @param {ElevenLabs.conversationalAi.knowledgeBase.DocumentsDeleteRequest} request
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -491,15 +492,23 @@ export class Documents {
      */
     public delete(
         documentationId: string,
+        request: ElevenLabs.conversationalAi.knowledgeBase.DocumentsDeleteRequest = {},
         requestOptions?: Documents.RequestOptions,
     ): core.HttpResponsePromise<unknown> {
-        return core.HttpResponsePromise.fromPromise(this.__delete(documentationId, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__delete(documentationId, request, requestOptions));
     }
 
     private async __delete(
         documentationId: string,
+        request: ElevenLabs.conversationalAi.knowledgeBase.DocumentsDeleteRequest = {},
         requestOptions?: Documents.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
+        const { force } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (force != null) {
+            _queryParams["force"] = force.toString();
+        }
+
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -517,13 +526,14 @@ export class Documents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
@@ -617,8 +627,8 @@ export class Documents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -737,8 +747,8 @@ export class Documents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -841,8 +851,8 @@ export class Documents {
                         : undefined,
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.1.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.1.0",
+                "X-Fern-SDK-Version": "v2.2.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
