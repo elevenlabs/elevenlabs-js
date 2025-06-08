@@ -71,10 +71,10 @@ describe("Conversation", () => {
             on: jest.fn(),
             send: jest.fn(),
             close: jest.fn(),
-            readyState: 1,
-            OPEN: 1,
+            readyState: 1, // OPEN
         };
         WebSocket.mockImplementation(() => mockWebSocket);
+        WebSocket.OPEN = 1;
         
         // Create conversation instance
         conversation = new Conversation({
@@ -356,7 +356,7 @@ describe("Conversation", () => {
             // Wait for async tool execution
             await new Promise(resolve => setTimeout(resolve, 10));
             
-            expect(mockWebSocket.send).toHaveBeenCalledWith(
+            expect(mockWebSocket.send).toHaveBeenLastCalledWith(
                 JSON.stringify({
                     type: "client_tool_result",
                     tool_call_id: "call-123",
@@ -376,6 +376,9 @@ describe("Conversation", () => {
             });
 
             await conversation.startSession();
+            
+            // Wait for session to be fully started
+            await new Promise(resolve => setTimeout(resolve, 10));
             expect(conversation.isSessionActive()).toBe(true);
             
             conversation.endSession();
