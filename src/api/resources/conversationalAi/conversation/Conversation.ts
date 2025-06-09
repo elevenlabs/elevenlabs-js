@@ -13,6 +13,8 @@ import {
     UserAudioChunkEvent,
     PongEvent,
 } from "./events";
+import { WebSocketFactory, WebSocketInterface, DefaultWebSocketFactory } from "./interfaces/WebSocketInterface";
+import { ConversationClient } from "./interfaces/ConversationClient";
 
 /**
  * Conversational AI session for Node.js.
@@ -26,6 +28,8 @@ export class Conversation extends EventEmitter {
     private audioInterface: AudioInterface;
     private clientTools: ClientTools;
     private config: ConversationInitiationData;
+    private webSocketFactory: WebSocketFactory;
+    private conversationClient: ConversationClient;
 
     // Callback functions
     private callbackAgentResponse?: (response: string) => void;
@@ -34,14 +38,16 @@ export class Conversation extends EventEmitter {
     private callbackLatencyMeasurement?: (latencyMs: number) => void;
 
     // Internal state
-    private ws?: WebSocket;
+    private ws?: WebSocketInterface;
     private shouldStop: boolean = false;
     private conversationId?: string;
     private lastInterruptId: number = 0;
     private inputCallback?: (audio: Buffer) => void;
 
     constructor(options: {
-        client: ElevenLabsClient;
+        client?: ElevenLabsClient;
+        conversationClient?: ConversationClient;
+        webSocketFactory?: WebSocketFactory;
         agentId: string;
         requiresAuth: boolean;
         audioInterface: AudioInterface;
@@ -54,12 +60,14 @@ export class Conversation extends EventEmitter {
     }) {
         super();
         
-        this.client = options.client;
+        this.client = options.client || new ElevenLabsClient();
         this.agentId = options.agentId;
         this.requiresAuth = options.requiresAuth;
         this.audioInterface = options.audioInterface;
         this.clientTools = options.clientTools || new ClientTools();
         this.config = options.config || { extraBody: {}, conversationConfigOverride: {}, dynamicVariables: {} };
+        this.conversationClient = options.conversationClient || this.client;
+        this.webSocketFactory = options.webSocketFactory || new DefaultWebSocketFactory();
         
         this.callbackAgentResponse = options.callbackAgentResponse;
         this.callbackAgentResponseCorrection = options.callbackAgentResponseCorrection;
@@ -80,7 +88,7 @@ export class Conversation extends EventEmitter {
         const wsUrl = this.requiresAuth ? await this._getSignedUrl() : this._getWssUrl();
         
         return new Promise((resolve, reject) => {
-            this.ws = new WebSocket(wsUrl, {
+            this.ws = this.webSocketFactory.create(wsUrl, {
                 perMessageDeflate: false,
                 maxPayload: 16 * 1024 * 1024, // 16MB max message size
             });
@@ -339,7 +347,7 @@ export class Conversation extends EventEmitter {
     }
 
     private async _getSignedUrl(): Promise<string> {
-        const response = await this.client.conversationalAi.conversations.getSignedUrl({
+        const response = await this.conversationClient.conversationalAi.conversations.getSignedUrl({
             agentId: this.agentId,
         });
         return response.signedUrl;
