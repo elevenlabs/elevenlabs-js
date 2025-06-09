@@ -1,4 +1,6 @@
 import { createTestConversation } from "../../src/api/resources/conversationalAi/conversation/mocks/";
+import { Conversation } from "../../src/api/resources/conversationalAi/conversation/Conversation";
+import { MockWebSocket } from "../../src/api/resources/conversationalAi/conversation/mocks/MockConversation";
 
 describe("Conversation", () => {
     test("should start session and handle basic flow", async () => {
@@ -68,7 +70,7 @@ describe("Conversation", () => {
     });
 });
 
-async function startMockSession(conversation, mockWebSocket) {
+async function startMockSession(conversation: Conversation, mockWebSocket: MockWebSocket) {
     const sessionPromise = conversation.startSession();
     mockWebSocket.simulateOpen();
     await sessionPromise;
