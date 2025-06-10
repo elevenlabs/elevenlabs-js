@@ -10,7 +10,7 @@ src/wrapper
 src/index.ts
 
 # Temporary patch for additional_formats serialization format.
-src/api/resources/speechToText/client/Client.ts
+# src/api/resources/speechToText/client/Client.ts
 
 .github/workflows
 
