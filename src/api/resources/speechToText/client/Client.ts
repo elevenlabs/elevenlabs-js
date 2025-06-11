@@ -5,7 +5,7 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import * as fs from "fs";
+import * as serializers from "../../../../serialization/index";
 import { toJson } from "../../../../core/json";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
@@ -37,7 +37,7 @@ export class SpeechToText {
     constructor(protected readonly _options: SpeechToText.Options = {}) {}
 
     /**
-     * Transcribe an audio or video file.
+     * Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks.
      *
      * @param {ElevenLabs.BodySpeechToTextV1SpeechToTextPost} request
      * @param {SpeechToText.RequestOptions} requestOptions - Request-specific configuration.
@@ -46,14 +46,20 @@ export class SpeechToText {
      *
      * @example
      *     await client.speechToText.convert({
-     *         file: fs.createReadStream("/path/to/your/file"),
-     *         model_id: "model_id"
+     *         modelId: "model_id"
      *     })
      */
-    public async convert(
+    public convert(
         request: ElevenLabs.BodySpeechToTextV1SpeechToTextPost,
         requestOptions?: SpeechToText.RequestOptions,
-    ): Promise<ElevenLabs.SpeechToTextChunkResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.SpeechToTextChunkResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__convert(request, requestOptions));
+    }
+
+    private async __convert(
+        request: ElevenLabs.BodySpeechToTextV1SpeechToTextPost,
+        requestOptions?: SpeechToText.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.SpeechToTextChunkResponseModel>> {
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (request.enableLogging != null) {
             _queryParams["enable_logging"] = request.enableLogging.toString();
@@ -61,7 +67,10 @@ export class SpeechToText {
 
         const _request = await core.newFormData();
         _request.append("model_id", request.modelId);
-        await _request.appendFile("file", request.file);
+        if (request.file != null) {
+            await _request.appendFile("file", request.file);
+        }
+
         if (request.languageCode != null) {
             _request.append("language_code", request.languageCode);
         }
@@ -75,15 +84,42 @@ export class SpeechToText {
         }
 
         if (request.timestampsGranularity != null) {
-            _request.append("timestamps_granularity", request.timestampsGranularity);
+            _request.append(
+                "timestamps_granularity",
+                serializers.SpeechToTextConvertRequestTimestampsGranularity.jsonOrThrow(request.timestampsGranularity, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
         }
 
         if (request.diarize != null) {
             _request.append("diarize", request.diarize.toString());
         }
 
+        // Customized by hand
         if (request.additionalFormats != null) {
-            _request.append("additional_formats", toJson(request.additionalFormats));
+            _request.append(
+                "additional_formats",
+                toJson(serializers.AdditionalFormats.jsonOrThrow(request.additionalFormats, { unrecognizedObjectKeys: "strip" })),
+            );
+        }
+        // end of customization
+
+        if (request.fileFormat != null) {
+            _request.append(
+                "file_format",
+                serializers.SpeechToTextConvertRequestFileFormat.jsonOrThrow(request.fileFormat, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
+        }
+
+        if (request.cloudStorageUrl != null) {
+            _request.append("cloud_storage_url", request.cloudStorageUrl);
+        }
+
+        if (request.webhook != null) {
+            _request.append("webhook", request.webhook.toString());
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
@@ -103,9 +139,9 @@ export class SpeechToText {
                         ? await core.Supplier.get(this._options.apiKey)
                         : undefined,
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "elevenlabs",
-                "X-Fern-SDK-Version": "1.56.0",
-                "User-Agent": "elevenlabs/1.56.0",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "2.2.1",
+                "User-Agent": "@elevenlabs/elevenlabs-js/2.2.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ..._maybeEncodedRequest.headers,
@@ -115,24 +151,39 @@ export class SpeechToText {
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as ElevenLabs.SpeechToTextChunkResponseModel;
+            return {
+                data: serializers.SpeechToTextChunkResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
-                        _response.error.body as ElevenLabs.HttpValidationError,
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -142,12 +193,14 @@ export class SpeechToText {
                 throw new errors.ElevenLabsError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/speech-to-text.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
