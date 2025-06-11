@@ -10,7 +10,6 @@ import * as ElevenLabs from "../index";
 export type PromptAgentDbModelToolsItem =
     | ElevenLabs.PromptAgentDbModelToolsItem.Client
     | ElevenLabs.PromptAgentDbModelToolsItem.Mcp
-    | ElevenLabs.PromptAgentDbModelToolsItem.NativeMcp
     | ElevenLabs.PromptAgentDbModelToolsItem.System
     | ElevenLabs.PromptAgentDbModelToolsItem.Webhook;
 
@@ -21,10 +20,6 @@ export namespace PromptAgentDbModelToolsItem {
 
     export interface Mcp extends ElevenLabs.McpToolConfigInput {
         type: "mcp";
-    }
-
-    export interface NativeMcp extends ElevenLabs.NativeMcpToolConfigInput {
-        type: "native_mcp";
     }
 
     export interface System extends ElevenLabs.SystemToolConfigInput {

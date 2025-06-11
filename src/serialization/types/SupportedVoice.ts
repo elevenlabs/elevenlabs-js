@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { TtsModelFamily } from "./TtsModelFamily";
+import { TtsOptimizeStreamingLatency } from "./TtsOptimizeStreamingLatency";
 
 export const SupportedVoice: core.serialization.ObjectSchema<
     serializers.SupportedVoice.Raw,
@@ -16,6 +17,13 @@ export const SupportedVoice: core.serialization.ObjectSchema<
     description: core.serialization.string().optional(),
     language: core.serialization.string().optional(),
     modelFamily: core.serialization.property("model_family", TtsModelFamily.optional()),
+    optimizeStreamingLatency: core.serialization.property(
+        "optimize_streaming_latency",
+        TtsOptimizeStreamingLatency.optional(),
+    ),
+    stability: core.serialization.number().optional(),
+    speed: core.serialization.number().optional(),
+    similarityBoost: core.serialization.property("similarity_boost", core.serialization.number().optional()),
 });
 
 export declare namespace SupportedVoice {
@@ -25,5 +33,9 @@ export declare namespace SupportedVoice {
         description?: string | null;
         language?: string | null;
         model_family?: TtsModelFamily.Raw | null;
+        optimize_streaming_latency?: TtsOptimizeStreamingLatency.Raw | null;
+        stability?: number | null;
+        speed?: number | null;
+        similarity_boost?: number | null;
     }
 }

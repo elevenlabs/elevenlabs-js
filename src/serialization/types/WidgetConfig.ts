@@ -11,6 +11,7 @@ import { WidgetExpandable } from "./WidgetExpandable";
 import { WidgetConfigOutputAvatar } from "./WidgetConfigOutputAvatar";
 import { WidgetFeedbackMode } from "./WidgetFeedbackMode";
 import { WidgetTextContents } from "./WidgetTextContents";
+import { WidgetStyles } from "./WidgetStyles";
 import { WidgetLanguagePreset } from "./WidgetLanguagePreset";
 
 export const WidgetConfig: core.serialization.ObjectSchema<serializers.WidgetConfig.Raw, ElevenLabs.WidgetConfig> =
@@ -52,6 +53,7 @@ export const WidgetConfig: core.serialization.ObjectSchema<serializers.WidgetCon
         transcriptEnabled: core.serialization.property("transcript_enabled", core.serialization.boolean().optional()),
         textInputEnabled: core.serialization.property("text_input_enabled", core.serialization.boolean().optional()),
         textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
+        styles: WidgetStyles.optional(),
         languageSelector: core.serialization.property("language_selector", core.serialization.boolean().optional()),
         supportsTextOnly: core.serialization.property("supports_text_only", core.serialization.boolean().optional()),
         customAvatarPath: core.serialization.property("custom_avatar_path", core.serialization.string().optional()),
@@ -94,6 +96,7 @@ export declare namespace WidgetConfig {
         transcript_enabled?: boolean | null;
         text_input_enabled?: boolean | null;
         text_contents?: WidgetTextContents.Raw | null;
+        styles?: WidgetStyles.Raw | null;
         language_selector?: boolean | null;
         supports_text_only?: boolean | null;
         custom_avatar_path?: string | null;

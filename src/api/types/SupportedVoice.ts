@@ -10,4 +10,8 @@ export interface SupportedVoice {
     description?: string;
     language?: string;
     modelFamily?: ElevenLabs.TtsModelFamily;
+    optimizeStreamingLatency?: ElevenLabs.TtsOptimizeStreamingLatency;
+    stability?: number;
+    speed?: number;
+    similarityBoost?: number;
 }

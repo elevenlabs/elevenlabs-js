@@ -5,7 +5,7 @@
 import * as ElevenLabs from "../index";
 
 /**
- * A MCP tool is a tool that is used to call a MCP server
+ * An MCP tool configuration that can be used to call MCP servers
  */
 export interface McpToolConfigOutput {
     id?: string;
@@ -13,12 +13,20 @@ export interface McpToolConfigOutput {
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. */
     responseTimeoutSecs?: number;
+    /** The type of MCP tool */
+    integrationType: ElevenLabs.IntegrationType;
     /** Schema for any parameters the LLM needs to provide to the MCP tool. */
     parameters?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
+    /** The approval policy for the MCP tool */
+    approvalPolicy?: ElevenLabs.McpApprovalPolicy;
     /** The name of the MCP tool to call */
     mcpToolName: string;
+    /** The description of the MCP tool to call */
+    mcpToolDescription: string;
     /** The id of the MCP server to call */
     mcpServerId: string;
-    /** If set to approved, the tool will be pre-approved and not require user approval before executing */
-    approvalMode?: ElevenLabs.McpApprovalRequiredModel;
+    /** The name of the MCP server to call */
+    mcpServerName: string;
+    /** Original inputSchema dict for consistent hashing (pure MCP format) */
+    mcpInputSchema?: Record<string, unknown>;
 }
