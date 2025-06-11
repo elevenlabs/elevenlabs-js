@@ -1,4 +1,4 @@
-import qs from "qs";
+import qs from "neoqs/legacy";
 
 export function createRequestUrl(
     baseUrl: string,
