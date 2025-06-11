@@ -18,7 +18,7 @@ export type WorkspaceResourceType =
     | "convai_secrets"
     | "music_latent"
     | "convai_phone_numbers"
-    | "convai_mcps"
+    | "convai_mcp_servers"
     | "convai_batch_calls";
 export const WorkspaceResourceType = {
     Voice: "voice",
@@ -33,6 +33,6 @@ export const WorkspaceResourceType = {
     ConvaiSecrets: "convai_secrets",
     MusicLatent: "music_latent",
     ConvaiPhoneNumbers: "convai_phone_numbers",
-    ConvaiMcps: "convai_mcps",
+    ConvaiMcpServers: "convai_mcp_servers",
     ConvaiBatchCalls: "convai_batch_calls",
 } as const;

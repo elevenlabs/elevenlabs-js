@@ -10,6 +10,7 @@ import { PromptAgentDbModelToolsItem } from "./PromptAgentDbModelToolsItem";
 import { KnowledgeBaseLocator } from "./KnowledgeBaseLocator";
 import { CustomLlm } from "./CustomLlm";
 import { RagConfig } from "./RagConfig";
+import { BuiltInTools } from "./BuiltInTools";
 
 export const PromptAgentDbModel: core.serialization.ObjectSchema<
     serializers.PromptAgentDbModel.Raw,
@@ -43,6 +44,7 @@ export const PromptAgentDbModel: core.serialization.ObjectSchema<
         "knowledge_base_document_ids",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    builtInTools: core.serialization.property("built_in_tools", BuiltInTools.optional()),
 });
 
 export declare namespace PromptAgentDbModel {
@@ -60,5 +62,6 @@ export declare namespace PromptAgentDbModel {
         ignore_default_personality?: boolean | null;
         rag?: RagConfig.Raw | null;
         knowledge_base_document_ids?: string[] | null;
+        built_in_tools?: BuiltInTools.Raw | null;
     }
 }

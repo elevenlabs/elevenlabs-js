@@ -20,10 +20,10 @@ import { Models } from "./api/resources/models/client/Client";
 import { AudioNative } from "./api/resources/audioNative/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionaries } from "./api/resources/pronunciationDictionaries/client/Client";
+import { Workspace } from "./api/resources/workspace/client/Client";
 import { SpeechToText } from "./api/resources/speechToText/client/Client";
 import { ForcedAlignment } from "./api/resources/forcedAlignment/client/Client";
 import { ConversationalAi } from "./api/resources/conversationalAi/client/Client";
-import { Workspace } from "./api/resources/workspace/client/Client";
 
 export declare namespace ElevenLabsClient {
     export interface Options {
@@ -65,10 +65,10 @@ export class ElevenLabsClient {
     protected _audioNative: AudioNative | undefined;
     protected _usage: Usage | undefined;
     protected _pronunciationDictionaries: PronunciationDictionaries | undefined;
+    protected _workspace: Workspace | undefined;
     protected _speechToText: SpeechToText | undefined;
     protected _forcedAlignment: ForcedAlignment | undefined;
     protected _conversationalAi: ConversationalAi | undefined;
-    protected _workspace: Workspace | undefined;
 
     constructor(protected readonly _options: ElevenLabsClient.Options = {}) {}
 
@@ -136,6 +136,10 @@ export class ElevenLabsClient {
         return (this._pronunciationDictionaries ??= new PronunciationDictionaries(this._options));
     }
 
+    public get workspace(): Workspace {
+        return (this._workspace ??= new Workspace(this._options));
+    }
+
     public get speechToText(): SpeechToText {
         return (this._speechToText ??= new SpeechToText(this._options));
     }
@@ -146,9 +150,5 @@ export class ElevenLabsClient {
 
     public get conversationalAi(): ConversationalAi {
         return (this._conversationalAi ??= new ConversationalAi(this._options));
-    }
-
-    public get workspace(): Workspace {
-        return (this._workspace ??= new Workspace(this._options));
     }
 }
