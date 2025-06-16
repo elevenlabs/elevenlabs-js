@@ -5,11 +5,11 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://buildwithfern.com/?utm_source=fern-elevenlabs/elevenlabs-python/readme)
 [![Discord](https://badgen.net/badge/black/ElevenLabs/icon?icon=discord&label)](https://discord.gg/elevenlabs)
 [![Twitter](https://badgen.net/badge/black/elevenlabsio/icon?icon=twitter&label)](https://twitter.com/elevenlabsio)
-[![npm shield](https://img.shields.io/npm/v/elevenlabs)](https://www.npmjs.com/package/elevenlabs)
+[![npm shield](https://img.shields.io/npm/v/elevenlabs)](https://www.npmjs.com/package/@elevenlabs/elevenlabs-js)
 
-> **Note:** This is the Node.js library for ElevenLabs. For the browser SDK, visit [`@11labs/client`](https://www.npmjs.com/package/@11labs/client). For the React SDK, check out [`@11labs/react`](https://www.npmjs.com/package/@11labs/react).
+> **Note:** This is the Node.js library for ElevenLabs. For the browser SDK, visit [`@elevenlabs/client`](https://www.npmjs.com/package/@elevenlabs/client). For the React SDK, check out [`@elevenlabs/react`](https://www.npmjs.com/package/@elevenlabs/react).
 
-The official JS API for [ElevenLabs](https://elevenlabs.io/) [text-to-speech software.](https://elevenlabs.io/text-to-speech) Eleven brings the most compelling, rich and lifelike voices to creators and developers in just a few lines of code.
+The official Node SDK for [ElevenLabs](https://elevenlabs.io/). ElevenLabs brings the most compelling, rich and lifelike voices to creators and developers in just a few lines of code.
 
 ## 📖 API & Docs
 
@@ -22,11 +22,6 @@ npm install @elevenlabs/elevenlabs-js
 # or
 yarn add @elevenlabs/elevenlabs-js
 ```
-
-## 🗣️ Usage
-
-[![Open in Spaces](https://img.shields.io/badge/🤗-Open%20in%20Spaces-blue.svg)](https://huggingface.co/spaces/elevenlabs/tts)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/gist/flavioschneider/49468d728a816c6538fd2f56b3b50b96/elevenlabs-python.ipynb)
 
 ### Main Models
 
@@ -163,9 +158,7 @@ All of the ElevenLabs models are nested within the `ElevenLabs` namespace.
 
 ## Languages Supported
 
-We support 32 languages and 100+ accents. Explore [all languages](https://elevenlabs.io/languages).
-
-![Alt text](assets/languages.png)
+Explore [all models & languages](https://elevenlabs.io/docs/models).
 
 ## Contributing
 

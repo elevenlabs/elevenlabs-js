@@ -18,11 +18,12 @@
         "form-data": "^4.0.0",
         "form-data-encoder": "^4.0.2",
         "formdata-node": "^6.0.3",
+        "neoqs": "^6.13.0",
         "node-fetch": "^2.7.0",
-        "qs": "^6.13.1",
         "readable-stream": "^4.5.2",
         "url-join": "4.0.1",
         "ws": "^8.18.2"
+        "url-join": "4.0.1"
     },
     "devDependencies": {
         "@types/command-exists": "^1.2.3",
