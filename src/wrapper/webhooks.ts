@@ -1,5 +1,23 @@
-import crypto from 'node:crypto';
+import { webcrypto as nodeWebcrypto } from 'crypto';
 import { ElevenLabsError } from '../errors';
+
+const crypto = globalThis.crypto ?? nodeWebcrypto;
+
+// Async HMAC-SHA256 using Web Crypto API
+async function hmacSHA256(key: string, message: string): Promise<string> {
+  const enc = new TextEncoder();
+  const keyData = enc.encode(key);
+  const msgData = enc.encode(message);
+  const cryptoKey = await crypto.subtle.importKey(
+    'raw',
+    keyData,
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const sig = await crypto.subtle.sign('HMAC', cryptoKey, msgData);
+  return 'v0=' + Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
 /**
  * A client to handle ElevenLabs webhook-related functionality
@@ -15,7 +33,7 @@ export class WebhooksClient {
    * @returns The verified webhook event
    * @throws {ElevenLabsError} if the signature is invalid or missing
    */
-  constructEvent(rawBody: string, sigHeader: string, secret: string) {
+  async constructEvent(rawBody: string, sigHeader: string, secret: string) {
     if (!sigHeader) {
       throw new ElevenLabsError({
         message: 'Missing signature header',
@@ -24,11 +42,11 @@ export class WebhooksClient {
     }
 
     if (!secret) {
-        throw new ElevenLabsError({
-          message: 'Webhook secret not configured',
-          statusCode: 400,
-        });
-      }
+      throw new ElevenLabsError({
+        message: 'Webhook secret not configured',
+        statusCode: 400,
+      });
+    }
 
     const headers = sigHeader.split(',');
     const timestamp = headers.find((e) => e.startsWith('t='))?.substring(2);
@@ -53,8 +71,7 @@ export class WebhooksClient {
 
     // Validate hash
     const message = `${timestamp}.${rawBody}`;
-
-    const digest = `v0=${crypto.createHmac('sha256', secret).update(message).digest('hex')}`;
+    const digest = await hmacSHA256(secret, message);
 
     if (signature !== digest) {
       throw new ElevenLabsError({

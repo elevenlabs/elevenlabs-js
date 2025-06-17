@@ -199,8 +199,10 @@ describe("ElevenLabs API Tests", () => {
     });
 
     describe("webhooks", () => {
-        it("constructEvent", () => {
-            const elevenlabs = new ElevenLabsClient();
+        it("constructEvent", async () => {
+            const elevenlabs = new ElevenLabsClient({
+                apiKey: "1234567890",
+            });
 
             // Create test payload
             const payload = { eventType: "test_event", data: { id: "123" } };
@@ -216,31 +218,31 @@ describe("ElevenLabs API Tests", () => {
             const sigHeader = `t=${timestamp},v0=${signature}`;
 
             // Test valid webhook construction
-            const result = elevenlabs.webhooks.constructEvent(body, sigHeader, secret);
+            const result = await elevenlabs.webhooks.constructEvent(body, sigHeader, secret);
 
             // Verify result matches original payload
             expect(result).toEqual(payload);
 
             // Test secret not configured
-            expect(() => {
-                elevenlabs.webhooks.constructEvent(body, sigHeader, "");
-            }).toThrow("Webhook secret not configured");
+            expect(async () => {
+                await elevenlabs.webhooks.constructEvent(body, sigHeader, "");
+            }).rejects.toThrow("Webhook secret not configured");
 
             // Test invalid signature header
-            expect(() => {
-                elevenlabs.webhooks.constructEvent(body, "", secret);
-            }).toThrow("Missing signature header");
+            expect(async () => {
+                await elevenlabs.webhooks.constructEvent(body, "", secret);
+            }).rejects.toThrow("Missing signature header");
 
             // Test invalid signature format
-            expect(() => {
-                elevenlabs.webhooks.constructEvent(body, "invalid_format", secret);
-            }).toThrow("No signature hash found with expected scheme v0");
+            expect(async () => {
+                await elevenlabs.webhooks.constructEvent(body, "invalid_format", secret);
+            }).rejects.toThrow("No signature hash found with expected scheme v0");
 
             // Test invalid signature
             const invalidSigHeader = `t=${timestamp},v0=invalid_signature`;
-            expect(() => {
-                elevenlabs.webhooks.constructEvent(body, invalidSigHeader, secret);
-            }).toThrow("Signature hash does not match the expected signature hash for payload");
+            expect(async () => {
+                await elevenlabs.webhooks.constructEvent(body, invalidSigHeader, secret);
+            }).rejects.toThrow("Signature hash does not match the expected signature hash for payload");
         });
     });
 });
