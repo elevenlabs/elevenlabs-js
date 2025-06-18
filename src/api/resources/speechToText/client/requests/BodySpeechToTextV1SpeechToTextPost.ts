@@ -35,6 +35,8 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     fileFormat?: ElevenLabs.SpeechToTextConvertRequestFileFormat;
     /** The valid AWS S3, Cloudflare R2 or Google Cloud Storage URL of the file to transcribe. Exactly one of the file or cloud_storage_url parameters must be provided. The file must be a valid publicly accessible cloud storage URL. The file size must be less than 2GB. URL can be pre-signed. */
     cloudStorageUrl?: string;
-    /** Whether to send the transcription result to configured speech-to-text webhooks.  If set the request will return early without the transcription, which will be delivered later via webhook. Webhooks can be created and assigned to a transcription task in webhook settings page in the UI. */
+    /** Whether to send the transcription result to configured speech-to-text webhooks.  If set the request will return early without the transcription, which will be delivered later via webhook. */
     webhook?: boolean;
+    /** Controls the randomness of the transcription output. Accepts values between 0.0 and 2.0, where higher values result in more diverse and less deterministic results. If omitted, we will use a temperature based on the model you selected which is usually 0. */
+    temperature?: number;
 }

@@ -30,4 +30,5 @@ export interface PromptAgentDbModel {
     /** Configuration for RAG */
     rag?: ElevenLabs.RagConfig;
     knowledgeBaseDocumentIds?: string[];
+    builtInTools?: ElevenLabs.BuiltInTools;
 }

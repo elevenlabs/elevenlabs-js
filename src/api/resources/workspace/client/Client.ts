@@ -4,6 +4,10 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
+import * as ElevenLabs from "../../../index";
+import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
+import * as errors from "../../../../errors/index";
 import { Groups } from "../resources/groups/client/Client";
 import { Invites } from "../resources/invites/client/Client";
 import { Members } from "../resources/members/client/Client";
@@ -16,6 +20,19 @@ export declare namespace Workspace {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+    }
+
+    export interface RequestOptions {
+        /** The maximum time to wait for a response in seconds. */
+        timeoutInSeconds?: number;
+        /** The number of times to retry the request. Defaults to 2. */
+        maxRetries?: number;
+        /** A hook to abort the request. */
+        abortSignal?: AbortSignal;
+        /** Override the xi-api-key header */
+        apiKey?: string | undefined;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -41,5 +58,105 @@ export class Workspace {
 
     public get resources(): Resources {
         return (this._resources ??= new Resources(this._options));
+    }
+
+    /**
+     * Update user auto provisioning settings for the workspace.
+     *
+     * @param {ElevenLabs.BodyUpdateUserAutoProvisioningV1WorkspaceUserAutoProvisioningPost} request
+     * @param {Workspace.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.workspace.updateUserAutoProvisioning({
+     *         enabled: true
+     *     })
+     */
+    public updateUserAutoProvisioning(
+        request: ElevenLabs.BodyUpdateUserAutoProvisioningV1WorkspaceUserAutoProvisioningPost,
+        requestOptions?: Workspace.RequestOptions,
+    ): core.HttpResponsePromise<unknown> {
+        return core.HttpResponsePromise.fromPromise(this.__updateUserAutoProvisioning(request, requestOptions));
+    }
+
+    private async __updateUserAutoProvisioning(
+        request: ElevenLabs.BodyUpdateUserAutoProvisioningV1WorkspaceUserAutoProvisioningPost,
+        requestOptions?: Workspace.RequestOptions,
+    ): Promise<core.WithRawResponse<unknown>> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (
+                        (await core.Supplier.get(this._options.environment)) ??
+                        environments.ElevenLabsEnvironment.Production
+                    ).base,
+                "v1/workspace/user-auto-provisioning",
+            ),
+            method: "POST",
+            headers: {
+                "xi-api-key":
+                    (await core.Supplier.get(this._options.apiKey)) != null
+                        ? await core.Supplier.get(this._options.apiKey)
+                        : undefined,
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                "X-Fern-SDK-Version": "v2.3.0",
+                "User-Agent": "@elevenlabs/elevenlabs-js/v2.3.0",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.BodyUpdateUserAutoProvisioningV1WorkspaceUserAutoProvisioningPost.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/workspace/user-auto-provisioning.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
     }
 }
