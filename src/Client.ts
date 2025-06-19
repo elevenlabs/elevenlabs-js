@@ -4,6 +4,7 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
+import { mergeHeaders } from "./core/headers.js";
 import { History } from "./api/resources/history/client/Client";
 import { TextToSoundEffects } from "./api/resources/textToSoundEffects/client/Client";
 import { AudioIsolation } from "./api/resources/audioIsolation/client/Client";
@@ -20,10 +21,11 @@ import { Models } from "./api/resources/models/client/Client";
 import { AudioNative } from "./api/resources/audioNative/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionaries } from "./api/resources/pronunciationDictionaries/client/Client";
+import { Workspace } from "./api/resources/workspace/client/Client";
+import { Webhooks } from "./api/resources/webhooks/client/Client";
 import { SpeechToText } from "./api/resources/speechToText/client/Client";
 import { ForcedAlignment } from "./api/resources/forcedAlignment/client/Client";
 import { ConversationalAi } from "./api/resources/conversationalAi/client/Client";
-import { Workspace } from "./api/resources/workspace/client/Client";
 
 export declare namespace ElevenLabsClient {
     export interface Options {
@@ -32,6 +34,8 @@ export declare namespace ElevenLabsClient {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 
     export interface RequestOptions {
@@ -44,11 +48,12 @@ export declare namespace ElevenLabsClient {
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string>;
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class ElevenLabsClient {
+    protected readonly _options: ElevenLabsClient.Options;
     protected _history: History | undefined;
     protected _textToSoundEffects: TextToSoundEffects | undefined;
     protected _audioIsolation: AudioIsolation | undefined;
@@ -65,12 +70,29 @@ export class ElevenLabsClient {
     protected _audioNative: AudioNative | undefined;
     protected _usage: Usage | undefined;
     protected _pronunciationDictionaries: PronunciationDictionaries | undefined;
+    protected _workspace: Workspace | undefined;
+    protected _webhooks: Webhooks | undefined;
     protected _speechToText: SpeechToText | undefined;
     protected _forcedAlignment: ForcedAlignment | undefined;
     protected _conversationalAi: ConversationalAi | undefined;
-    protected _workspace: Workspace | undefined;
 
-    constructor(protected readonly _options: ElevenLabsClient.Options = {}) {}
+    constructor(_options: ElevenLabsClient.Options = {}) {
+        this._options = {
+            ..._options,
+            headers: mergeHeaders(
+                {
+                    "xi-api-key": _options?.apiKey,
+                    "X-Fern-Language": "JavaScript",
+                    "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                    "X-Fern-SDK-Version": "v2.3.0",
+                    "User-Agent": "@elevenlabs/elevenlabs-js/v2.3.0",
+                    "X-Fern-Runtime": core.RUNTIME.type,
+                    "X-Fern-Runtime-Version": core.RUNTIME.version,
+                },
+                _options?.headers,
+            ),
+        };
+    }
 
     public get history(): History {
         return (this._history ??= new History(this._options));
@@ -136,6 +158,14 @@ export class ElevenLabsClient {
         return (this._pronunciationDictionaries ??= new PronunciationDictionaries(this._options));
     }
 
+    public get workspace(): Workspace {
+        return (this._workspace ??= new Workspace(this._options));
+    }
+
+    public get webhooks(): Webhooks {
+        return (this._webhooks ??= new Webhooks(this._options));
+    }
+
     public get speechToText(): SpeechToText {
         return (this._speechToText ??= new SpeechToText(this._options));
     }
@@ -146,9 +176,5 @@ export class ElevenLabsClient {
 
     public get conversationalAi(): ConversationalAi {
         return (this._conversationalAi ??= new ConversationalAi(this._options));
-    }
-
-    public get workspace(): Workspace {
-        return (this._workspace ??= new Workspace(this._options));
     }
 }

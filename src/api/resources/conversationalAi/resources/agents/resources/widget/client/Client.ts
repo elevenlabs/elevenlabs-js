@@ -5,6 +5,7 @@
 import * as environments from "../../../../../../../../environments";
 import * as core from "../../../../../../../../core";
 import * as ElevenLabs from "../../../../../../../index";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../core/headers.js";
 import urlJoin from "url-join";
 import * as serializers from "../../../../../../../../serialization/index";
 import * as errors from "../../../../../../../../errors/index";
@@ -17,6 +18,8 @@ export declare namespace Widget {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 
     export interface RequestOptions {
@@ -29,14 +32,17 @@ export declare namespace Widget {
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string>;
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class Widget {
+    protected readonly _options: Widget.Options;
     protected _avatar: Avatar | undefined;
 
-    constructor(protected readonly _options: Widget.Options = {}) {}
+    constructor(_options: Widget.Options = {}) {
+        this._options = _options;
+    }
 
     public get avatar(): Avatar {
         return (this._avatar ??= new Avatar(this._options));
@@ -83,22 +89,12 @@ export class Widget {
                 `v1/convai/agents/${encodeURIComponent(agentId)}/widget`,
             ),
             method: "GET",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             queryParameters: _queryParams,
-            requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

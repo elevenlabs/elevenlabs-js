@@ -15,10 +15,9 @@ export const SubscriptionStatusType: core.serialization.Schema<
     "incomplete",
     "incomplete_expired",
     "past_due",
-    "canceled",
-    "unpaid",
     "free",
     "free_disabled",
+    "canceled",
 ]);
 
 export declare namespace SubscriptionStatusType {
@@ -28,8 +27,7 @@ export declare namespace SubscriptionStatusType {
         | "incomplete"
         | "incomplete_expired"
         | "past_due"
-        | "canceled"
-        | "unpaid"
         | "free"
-        | "free_disabled";
+        | "free_disabled"
+        | "canceled";
 }

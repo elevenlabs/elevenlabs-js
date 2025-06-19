@@ -1,0 +1,1 @@
+export { type BodyUpdateUserAutoProvisioningV1WorkspaceUserAutoProvisioningPost } from "./BodyUpdateUserAutoProvisioningV1WorkspaceUserAutoProvisioningPost";

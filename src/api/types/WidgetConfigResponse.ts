@@ -67,6 +67,8 @@ export interface WidgetConfigResponse {
     textInputEnabled?: boolean;
     /** Text contents of the widget */
     textContents?: ElevenLabs.WidgetTextContents;
+    /** Styles for the widget */
+    styles?: ElevenLabs.WidgetStyles;
     language: string;
     supportedLanguageOverrides?: string[];
     /** Language presets for the widget */

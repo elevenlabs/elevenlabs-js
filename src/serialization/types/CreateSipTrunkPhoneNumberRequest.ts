@@ -19,6 +19,7 @@ export const CreateSipTrunkPhoneNumberRequest: core.serialization.ObjectSchema<
     address: core.serialization.string().optional(),
     transport: SipTrunkTransportEnum.optional(),
     mediaEncryption: core.serialization.property("media_encryption", SipMediaEncryptionEnum.optional()),
+    inboundMediaEncryption: core.serialization.property("inbound_media_encryption", SipMediaEncryptionEnum.optional()),
     headers: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     credentials: SipTrunkCredentials.optional(),
 });
@@ -31,6 +32,7 @@ export declare namespace CreateSipTrunkPhoneNumberRequest {
         address?: string | null;
         transport?: SipTrunkTransportEnum.Raw | null;
         media_encryption?: SipMediaEncryptionEnum.Raw | null;
+        inbound_media_encryption?: SipMediaEncryptionEnum.Raw | null;
         headers?: Record<string, string> | null;
         credentials?: SipTrunkCredentials.Raw | null;
     }

@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import * as stream from "stream";
 import * as serializers from "../../../../serialization/index";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -17,6 +17,8 @@ export declare namespace TextToDialogue {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 
     export interface RequestOptions {
@@ -29,12 +31,16 @@ export declare namespace TextToDialogue {
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string>;
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class TextToDialogue {
-    constructor(protected readonly _options: TextToDialogue.Options = {}) {}
+    protected readonly _options: TextToDialogue.Options;
+
+    constructor(_options: TextToDialogue.Options = {}) {
+        this._options = _options;
+    }
 
     /**
      * <Warning>Eleven v3 API access is currently not publicly available, but will be soon.</Warning><br/>Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
@@ -43,14 +49,14 @@ export class TextToDialogue {
     public convert(
         request: ElevenLabs.BodyTextToDialogueMultiVoiceV1TextToDialoguePost,
         requestOptions?: TextToDialogue.RequestOptions,
-    ): core.HttpResponsePromise<stream.Readable> {
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(this.__convert(request, requestOptions));
     }
 
     private async __convert(
         request: ElevenLabs.BodyTextToDialogueMultiVoiceV1TextToDialoguePost,
         requestOptions?: TextToDialogue.RequestOptions,
-    ): Promise<core.WithRawResponse<stream.Readable>> {
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
@@ -60,7 +66,7 @@ export class TextToDialogue {
             );
         }
 
-        const _response = await core.fetcher<stream.Readable>({
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
@@ -70,19 +76,11 @@ export class TextToDialogue {
                 "v1/text-to-dialogue",
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
@@ -143,14 +141,14 @@ export class TextToDialogue {
     public stream(
         request: ElevenLabs.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost,
         requestOptions?: TextToDialogue.RequestOptions,
-    ): core.HttpResponsePromise<stream.Readable> {
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(this.__stream(request, requestOptions));
     }
 
     private async __stream(
         request: ElevenLabs.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost,
         requestOptions?: TextToDialogue.RequestOptions,
-    ): Promise<core.WithRawResponse<stream.Readable>> {
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
@@ -160,7 +158,7 @@ export class TextToDialogue {
             );
         }
 
-        const _response = await core.fetcher<stream.Readable>({
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
@@ -170,19 +168,11 @@ export class TextToDialogue {
                 "v1/text-to-dialogue/stream",
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",

@@ -22,7 +22,7 @@ export const WorkspaceResourceType: core.serialization.Schema<
     "convai_secrets",
     "music_latent",
     "convai_phone_numbers",
-    "convai_mcps",
+    "convai_mcp_servers",
     "convai_batch_calls",
 ]);
 
@@ -40,6 +40,6 @@ export declare namespace WorkspaceResourceType {
         | "convai_secrets"
         | "music_latent"
         | "convai_phone_numbers"
-        | "convai_mcps"
+        | "convai_mcp_servers"
         | "convai_batch_calls";
 }

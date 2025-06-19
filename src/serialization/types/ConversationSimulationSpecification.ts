@@ -8,6 +8,7 @@ import * as core from "../../core";
 import { AgentConfig } from "./AgentConfig";
 import { ToolMockConfig } from "./ToolMockConfig";
 import { ConversationHistoryTranscriptCommonModelInput } from "./ConversationHistoryTranscriptCommonModelInput";
+import { ConversationSimulationSpecificationDynamicVariablesValue } from "./ConversationSimulationSpecificationDynamicVariablesValue";
 
 export const ConversationSimulationSpecification: core.serialization.ObjectSchema<
     serializers.ConversationSimulationSpecification.Raw,
@@ -22,6 +23,12 @@ export const ConversationSimulationSpecification: core.serialization.ObjectSchem
         "partial_conversation_history",
         core.serialization.list(ConversationHistoryTranscriptCommonModelInput).optional(),
     ),
+    dynamicVariables: core.serialization.property(
+        "dynamic_variables",
+        core.serialization
+            .record(core.serialization.string(), ConversationSimulationSpecificationDynamicVariablesValue.optional())
+            .optional(),
+    ),
 });
 
 export declare namespace ConversationSimulationSpecification {
@@ -29,5 +36,9 @@ export declare namespace ConversationSimulationSpecification {
         simulated_user_config: AgentConfig.Raw;
         tool_mock_config?: Record<string, ToolMockConfig.Raw> | null;
         partial_conversation_history?: ConversationHistoryTranscriptCommonModelInput.Raw[] | null;
+        dynamic_variables?: Record<
+            string,
+            ConversationSimulationSpecificationDynamicVariablesValue.Raw | null | undefined
+        > | null;
     }
 }

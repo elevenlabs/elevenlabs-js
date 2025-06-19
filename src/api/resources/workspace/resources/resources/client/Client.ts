@@ -6,6 +6,7 @@ import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
 import * as serializers from "../../../../../../serialization/index";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers.js";
 import urlJoin from "url-join";
 import * as errors from "../../../../../../errors/index";
 
@@ -16,6 +17,8 @@ export declare namespace Resources {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 
     export interface RequestOptions {
@@ -28,12 +31,16 @@ export declare namespace Resources {
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string>;
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class Resources {
-    constructor(protected readonly _options: Resources.Options = {}) {}
+    protected readonly _options: Resources.Options;
+
+    constructor(_options: Resources.Options = {}) {
+        this._options = _options;
+    }
 
     /**
      * Gets the metadata of a resource by ID.
@@ -77,22 +84,12 @@ export class Resources {
                 `v1/workspace/resources/${encodeURIComponent(resourceId)}`,
             ),
             method: "GET",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             queryParameters: _queryParams,
-            requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -187,19 +184,11 @@ export class Resources {
                 `v1/workspace/resources/${encodeURIComponent(resourceId)}/share`,
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             contentType: "application/json",
             requestType: "json",
             body: serializers.workspace.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePost.jsonOrThrow(
@@ -291,19 +280,11 @@ export class Resources {
                 `v1/workspace/resources/${encodeURIComponent(resourceId)}/unshare`,
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             contentType: "application/json",
             requestType: "json",
             body: serializers.workspace.BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIdUnsharePost.jsonOrThrow(

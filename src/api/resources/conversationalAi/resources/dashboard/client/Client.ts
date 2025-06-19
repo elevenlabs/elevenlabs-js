@@ -13,13 +13,18 @@ export declare namespace Dashboard {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class Dashboard {
+    protected readonly _options: Dashboard.Options;
     protected _settings: Settings | undefined;
 
-    constructor(protected readonly _options: Dashboard.Options = {}) {}
+    constructor(_options: Dashboard.Options = {}) {
+        this._options = _options;
+    }
 
     public get settings(): Settings {
         return (this._settings ??= new Settings(this._options));

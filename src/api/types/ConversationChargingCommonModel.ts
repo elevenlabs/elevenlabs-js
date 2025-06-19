@@ -6,6 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface ConversationChargingCommonModel {
     devDiscount?: boolean;
+    isBurst?: boolean;
     tier?: string;
     llmUsage?: ElevenLabs.LlmCategoryUsage;
     llmPrice?: number;

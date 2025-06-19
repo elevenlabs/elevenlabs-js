@@ -12,6 +12,7 @@ export const ConversationChargingCommonModel: core.serialization.ObjectSchema<
     ElevenLabs.ConversationChargingCommonModel
 > = core.serialization.object({
     devDiscount: core.serialization.property("dev_discount", core.serialization.boolean().optional()),
+    isBurst: core.serialization.property("is_burst", core.serialization.boolean().optional()),
     tier: core.serialization.string().optional(),
     llmUsage: core.serialization.property("llm_usage", LlmCategoryUsage.optional()),
     llmPrice: core.serialization.property("llm_price", core.serialization.number().optional()),
@@ -20,6 +21,7 @@ export const ConversationChargingCommonModel: core.serialization.ObjectSchema<
 export declare namespace ConversationChargingCommonModel {
     export interface Raw {
         dev_discount?: boolean | null;
+        is_burst?: boolean | null;
         tier?: string | null;
         llm_usage?: LlmCategoryUsage.Raw | null;
         llm_price?: number | null;

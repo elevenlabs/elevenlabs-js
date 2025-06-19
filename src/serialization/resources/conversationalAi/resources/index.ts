@@ -17,4 +17,6 @@ export * as batchCalls from "./batchCalls";
 export * from "./batchCalls/client/requests";
 export * as sipTrunk from "./sipTrunk";
 export * from "./sipTrunk/client/requests";
+export * as mcpServers from "./mcpServers";
+export * from "./mcpServers/client/requests";
 export * as conversations from "./conversations";

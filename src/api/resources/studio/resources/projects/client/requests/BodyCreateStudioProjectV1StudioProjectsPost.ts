@@ -23,9 +23,11 @@ export interface BodyCreateStudioProjectV1StudioProjectsPost {
     defaultParagraphVoiceId: string;
     /** The ID of the model to be used for this Studio project, you can query GET /v1/models to list all available models. */
     defaultModelId: string;
-    /** An optional URL from which we will extract content to initialize the Studio project. If this is set, 'from_url' must be null. If neither 'from_url' or 'from_document' are provided we will initialize the Studio project as blank. */
+    /** An optional URL from which we will extract content to initialize the Studio project. If this is set, 'from_url' and 'from_content' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank. */
     fromUrl?: string;
     fromDocument?: File | fs.ReadStream | Blob | undefined;
+    /** An optional content to initialize the Studio project with. If this is set, 'from_url' and 'from_document' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank. */
+    fromContentJson?: string;
     /**
      * Output quality of the generated audio. Must be one of:
      * standard - standard output format, 128kbps with 44.1kHz sample rate.
@@ -60,7 +62,62 @@ export interface BodyCreateStudioProjectV1StudioProjectsPost {
     volumeNormalization?: boolean;
     /** A list of pronunciation dictionary locators (pronunciation_dictionary_id, version_id) encoded as a list of JSON strings for pronunciation dictionaries to be applied to the text. A list of json encoded strings is required as adding projects may occur through formData as opposed to jsonBody. To specify multiple dictionaries use multiple --form lines in your curl, such as --form 'pronunciation_dictionary_locators="{\"pronunciation_dictionary_id\":\"Vmd4Zor6fplcA7WrINey\",\"version_id\":\"hRPaxjlTdR7wFMhV4w0b\"}"' --form 'pronunciation_dictionary_locators="{\"pronunciation_dictionary_id\":\"JzWtcGQMJ6bnlWwyMo7e\",\"version_id\":\"lbmwxiLu4q6txYxgdZqn\"}"'. Note that multiple dictionaries are not currently supported by our UI which will only show the first. */
     pronunciationDictionaryLocators?: string[];
-    /** A url that will be called by our service when the Studio project is converted. Request will contain a json blob containing the status of the conversion */
+    /**
+     *     A url that will be called by our service when the Studio project is converted. Request will contain a json blob containing the status of the conversion
+     *     Messages:
+     *     1. When project was converted successfully:
+     *     {
+     *       type: "project_conversion_status",
+     *       event_timestamp: 1234567890,
+     *       data: {
+     *         request_id: "1234567890",
+     *         project_id: "21m00Tcm4TlvDq8ikWAM",
+     *         conversion_status: "success",
+     *         project_snapshot_id: "22m00Tcm4TlvDq8ikMAT",
+     *         error_details: None,
+     *       }
+     *     }
+     *     2. When project conversion failed:
+     *     {
+     *       type: "project_conversion_status",
+     *       event_timestamp: 1234567890,
+     *       data: {
+     *         request_id: "1234567890",
+     *         project_id: "21m00Tcm4TlvDq8ikWAM",
+     *         conversion_status: "error",
+     *         project_snapshot_id: None,
+     *         error_details: "Error details if conversion failed"
+     *       }
+     *     }
+     *
+     *     3. When chapter was converted successfully:
+     *     {
+     *       type: "chapter_conversion_status",
+     *       event_timestamp: 1234567890,
+     *       data: {
+     *         request_id: "1234567890",
+     *         project_id: "21m00Tcm4TlvDq8ikWAM",
+     *         chapter_id: "22m00Tcm4TlvDq8ikMAT",
+     *         conversion_status: "success",
+     *         chapter_snapshot_id: "23m00Tcm4TlvDq8ikMAV",
+     *         error_details: None,
+     *       }
+     *     }
+     *     4. When chapter conversion failed:
+     *     {
+     *       type: "chapter_conversion_status",
+     *       event_timestamp: 1234567890,
+     *       data: {
+     *         request_id: "1234567890",
+     *         project_id: "21m00Tcm4TlvDq8ikWAM",
+     *         chapter_id: "22m00Tcm4TlvDq8ikMAT",
+     *         conversion_status: "error",
+     *         chapter_snapshot_id: None,
+     *         error_details: "Error details if conversion failed"
+     *       }
+     *     }
+     *
+     */
     callbackUrl?: string;
     /** An optional specification of whether the content of this Studio project is fiction. */
     fiction?: ElevenLabs.studio.ProjectsCreateRequestFiction;

@@ -8,18 +8,16 @@ export type SubscriptionStatusType =
     | "incomplete"
     | "incomplete_expired"
     | "past_due"
-    | "canceled"
-    | "unpaid"
     | "free"
-    | "free_disabled";
+    | "free_disabled"
+    | "canceled";
 export const SubscriptionStatusType = {
     Trialing: "trialing",
     Active: "active",
     Incomplete: "incomplete",
     IncompleteExpired: "incomplete_expired",
     PastDue: "past_due",
-    Canceled: "canceled",
-    Unpaid: "unpaid",
     Free: "free",
     FreeDisabled: "free_disabled",
+    Canceled: "canceled",
 } as const;

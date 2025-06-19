@@ -17,10 +17,12 @@ export const ClientEvent: core.serialization.Schema<serializers.ClientEvent.Raw,
         "agent_response",
         "agent_response_correction",
         "client_tool_call",
+        "mcp_tool_call",
+        "mcp_connection_status",
+        "agent_tool_response",
         "vad_score",
         "internal_turn_probability",
         "internal_tentative_agent_response",
-        "internal_native_mcp_tool_call",
     ]);
 
 export declare namespace ClientEvent {
@@ -34,8 +36,10 @@ export declare namespace ClientEvent {
         | "agent_response"
         | "agent_response_correction"
         | "client_tool_call"
+        | "mcp_tool_call"
+        | "mcp_connection_status"
+        | "agent_tool_response"
         | "vad_score"
         | "internal_turn_probability"
-        | "internal_tentative_agent_response"
-        | "internal_native_mcp_tool_call";
+        | "internal_tentative_agent_response";
 }

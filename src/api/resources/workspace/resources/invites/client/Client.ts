@@ -5,6 +5,7 @@
 import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers.js";
 import * as serializers from "../../../../../../serialization/index";
 import urlJoin from "url-join";
 import * as errors from "../../../../../../errors/index";
@@ -16,6 +17,8 @@ export declare namespace Invites {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 
     export interface RequestOptions {
@@ -28,12 +31,16 @@ export declare namespace Invites {
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string>;
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class Invites {
-    constructor(protected readonly _options: Invites.Options = {}) {}
+    protected readonly _options: Invites.Options;
+
+    constructor(_options: Invites.Options = {}) {
+        this._options = _options;
+    }
 
     /**
      * Sends an email invitation to join your workspace to the provided email. If the user doesn't have an account they will be prompted to create one. If the user accepts this invite they will be added as a user to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace administrators. If the user is already in the workspace a 400 error will be returned.
@@ -69,19 +76,11 @@ export class Invites {
                 "v1/workspace/invites/add",
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             contentType: "application/json",
             requestType: "json",
             body: serializers.workspace.InviteUserRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -175,19 +174,11 @@ export class Invites {
                 "v1/workspace/invites/add-bulk",
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             contentType: "application/json",
             requestType: "json",
             body: serializers.workspace.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost.jsonOrThrow(request, {
@@ -283,19 +274,11 @@ export class Invites {
                 "v1/workspace/invites",
             ),
             method: "DELETE",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             contentType: "application/json",
             requestType: "json",
             body: serializers.workspace.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete.jsonOrThrow(request, {

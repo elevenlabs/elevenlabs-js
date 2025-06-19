@@ -5,7 +5,8 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { McpApprovalRequiredModel } from "./McpApprovalRequiredModel";
+import { IntegrationType } from "./IntegrationType";
+import { McpApprovalPolicy } from "./McpApprovalPolicy";
 
 export const McpToolConfigOutput: core.serialization.ObjectSchema<
     serializers.McpToolConfigOutput.Raw,
@@ -15,10 +16,17 @@ export const McpToolConfigOutput: core.serialization.ObjectSchema<
     name: core.serialization.string(),
     description: core.serialization.string(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
+    integrationType: core.serialization.property("integration_type", IntegrationType),
     parameters: core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyOutput).optional(),
+    approvalPolicy: core.serialization.property("approval_policy", McpApprovalPolicy.optional()),
     mcpToolName: core.serialization.property("mcp_tool_name", core.serialization.string()),
+    mcpToolDescription: core.serialization.property("mcp_tool_description", core.serialization.string()),
     mcpServerId: core.serialization.property("mcp_server_id", core.serialization.string()),
-    approvalMode: core.serialization.property("approval_mode", McpApprovalRequiredModel.optional()),
+    mcpServerName: core.serialization.property("mcp_server_name", core.serialization.string()),
+    mcpInputSchema: core.serialization.property(
+        "mcp_input_schema",
+        core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    ),
 });
 
 export declare namespace McpToolConfigOutput {
@@ -27,9 +35,13 @@ export declare namespace McpToolConfigOutput {
         name: string;
         description: string;
         response_timeout_secs?: number | null;
+        integration_type: IntegrationType.Raw;
         parameters?: serializers.ObjectJsonSchemaPropertyOutput.Raw | null;
+        approval_policy?: McpApprovalPolicy.Raw | null;
         mcp_tool_name: string;
+        mcp_tool_description: string;
         mcp_server_id: string;
-        approval_mode?: McpApprovalRequiredModel.Raw | null;
+        mcp_server_name: string;
+        mcp_input_schema?: Record<string, unknown> | null;
     }
 }

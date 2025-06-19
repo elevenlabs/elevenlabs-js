@@ -5,10 +5,10 @@
 import * as environments from "../../../../../../../../environments";
 import * as core from "../../../../../../../../core";
 import * as ElevenLabs from "../../../../../../../index";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../core/headers.js";
 import urlJoin from "url-join";
 import * as serializers from "../../../../../../../../serialization/index";
 import * as errors from "../../../../../../../../errors/index";
-import * as stream from "stream";
 
 export declare namespace Snapshots {
     export interface Options {
@@ -17,6 +17,8 @@ export declare namespace Snapshots {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 
     export interface RequestOptions {
@@ -29,12 +31,16 @@ export declare namespace Snapshots {
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string>;
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class Snapshots {
-    constructor(protected readonly _options: Snapshots.Options = {}) {}
+    protected readonly _options: Snapshots.Options;
+
+    constructor(_options: Snapshots.Options = {}) {
+        this._options = _options;
+    }
 
     /**
      * Retrieves a list of snapshots for a Studio project.
@@ -68,21 +74,11 @@ export class Snapshots {
                 `v1/studio/projects/${encodeURIComponent(projectId)}/snapshots`,
             ),
             method: "GET",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -174,21 +170,11 @@ export class Snapshots {
                 `v1/studio/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(projectSnapshotId)}`,
             ),
             method: "GET",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -254,7 +240,7 @@ export class Snapshots {
         projectSnapshotId: string,
         request: ElevenLabs.studio.projects.BodyStreamStudioProjectAudioV1StudioProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost = {},
         requestOptions?: Snapshots.RequestOptions,
-    ): core.HttpResponsePromise<stream.Readable> {
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(
             this.__stream(projectId, projectSnapshotId, request, requestOptions),
         );
@@ -265,8 +251,8 @@ export class Snapshots {
         projectSnapshotId: string,
         request: ElevenLabs.studio.projects.BodyStreamStudioProjectAudioV1StudioProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost = {},
         requestOptions?: Snapshots.RequestOptions,
-    ): Promise<core.WithRawResponse<stream.Readable>> {
-        const _response = await core.fetcher<stream.Readable>({
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
@@ -276,19 +262,11 @@ export class Snapshots {
                 `v1/studio/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(projectSnapshotId)}/stream`,
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             contentType: "application/json",
             requestType: "json",
             body: serializers.studio.projects.BodyStreamStudioProjectAudioV1StudioProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost.jsonOrThrow(
@@ -352,7 +330,7 @@ export class Snapshots {
         projectId: string,
         projectSnapshotId: string,
         requestOptions?: Snapshots.RequestOptions,
-    ): core.HttpResponsePromise<stream.Readable> {
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(this.__streamArchive(projectId, projectSnapshotId, requestOptions));
     }
 
@@ -360,8 +338,8 @@ export class Snapshots {
         projectId: string,
         projectSnapshotId: string,
         requestOptions?: Snapshots.RequestOptions,
-    ): Promise<core.WithRawResponse<stream.Readable>> {
-        const _response = await core.fetcher<stream.Readable>({
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
@@ -371,21 +349,11 @@ export class Snapshots {
                 `v1/studio/projects/${encodeURIComponent(projectId)}/snapshots/${encodeURIComponent(projectSnapshotId)}/archive`,
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,

@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import * as stream from "stream";
 import * as serializers from "../../../../serialization/index";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -17,6 +17,8 @@ export declare namespace AudioIsolation {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 
     export interface RequestOptions {
@@ -29,12 +31,16 @@ export declare namespace AudioIsolation {
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string>;
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class AudioIsolation {
-    constructor(protected readonly _options: AudioIsolation.Options = {}) {}
+    protected readonly _options: AudioIsolation.Options;
+
+    constructor(_options: AudioIsolation.Options = {}) {
+        this._options = _options;
+    }
 
     /**
      * Removes background noise from audio.
@@ -43,14 +49,14 @@ export class AudioIsolation {
     public convert(
         request: ElevenLabs.BodyAudioIsolationV1AudioIsolationPost,
         requestOptions?: AudioIsolation.RequestOptions,
-    ): core.HttpResponsePromise<stream.Readable> {
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(this.__convert(request, requestOptions));
     }
 
     private async __convert(
         request: ElevenLabs.BodyAudioIsolationV1AudioIsolationPost,
         requestOptions?: AudioIsolation.RequestOptions,
-    ): Promise<core.WithRawResponse<stream.Readable>> {
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
         if (request.fileFormat != null) {
@@ -63,7 +69,7 @@ export class AudioIsolation {
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
-        const _response = await core.fetcher<stream.Readable>({
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
@@ -73,20 +79,11 @@ export class AudioIsolation {
                 "v1/audio-isolation",
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ..._maybeEncodedRequest.headers,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey, ..._maybeEncodedRequest.headers }),
+                requestOptions?.headers,
+            ),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -144,14 +141,14 @@ export class AudioIsolation {
     public stream(
         request: ElevenLabs.BodyAudioIsolationStreamV1AudioIsolationStreamPost,
         requestOptions?: AudioIsolation.RequestOptions,
-    ): core.HttpResponsePromise<stream.Readable> {
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(this.__stream(request, requestOptions));
     }
 
     private async __stream(
         request: ElevenLabs.BodyAudioIsolationStreamV1AudioIsolationStreamPost,
         requestOptions?: AudioIsolation.RequestOptions,
-    ): Promise<core.WithRawResponse<stream.Readable>> {
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const _request = await core.newFormData();
         await _request.appendFile("audio", request.audio);
         if (request.fileFormat != null) {
@@ -164,7 +161,7 @@ export class AudioIsolation {
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
-        const _response = await core.fetcher<stream.Readable>({
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
@@ -174,20 +171,11 @@ export class AudioIsolation {
                 "v1/audio-isolation/stream",
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ..._maybeEncodedRequest.headers,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey, ..._maybeEncodedRequest.headers }),
+                requestOptions?.headers,
+            ),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

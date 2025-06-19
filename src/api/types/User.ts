@@ -15,7 +15,7 @@ export interface User {
     isNewUser: boolean;
     /** The API key of the user. */
     xiApiKey?: string;
-    /** Whether the user can use delayed payment methods. */
+    /** This field is deprecated and will be removed in a future major version. Instead use subscription.trust_on_invoice_creation. */
     canUseDelayedPaymentMethods: boolean;
     /** Whether the user's onboarding is completed. */
     isOnboardingCompleted: boolean;

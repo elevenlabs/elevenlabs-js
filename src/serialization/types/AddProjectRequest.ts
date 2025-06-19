@@ -20,6 +20,7 @@ export const AddProjectRequest: core.serialization.ObjectSchema<
     defaultModelId: core.serialization.property("default_model_id", core.serialization.string()),
     fromUrl: core.serialization.property("from_url", core.serialization.string().optional()),
     fromDocument: core.serialization.property("from_document", core.serialization.string().optional()),
+    fromContentJson: core.serialization.property("from_content_json", core.serialization.string().optional()),
     qualityPreset: core.serialization.property("quality_preset", core.serialization.string().optional()),
     title: core.serialization.string().optional(),
     author: core.serialization.string().optional(),
@@ -65,6 +66,7 @@ export declare namespace AddProjectRequest {
         default_model_id: string;
         from_url?: string | null;
         from_document?: string | null;
+        from_content_json?: string | null;
         quality_preset?: string | null;
         title?: string | null;
         author?: string | null;

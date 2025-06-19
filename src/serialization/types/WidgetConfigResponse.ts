@@ -11,6 +11,7 @@ import { WidgetExpandable } from "./WidgetExpandable";
 import { WidgetConfigResponseModelAvatar } from "./WidgetConfigResponseModelAvatar";
 import { WidgetFeedbackMode } from "./WidgetFeedbackMode";
 import { WidgetTextContents } from "./WidgetTextContents";
+import { WidgetStyles } from "./WidgetStyles";
 import { WidgetLanguagePresetResponse } from "./WidgetLanguagePresetResponse";
 
 export const WidgetConfigResponse: core.serialization.ObjectSchema<
@@ -54,6 +55,7 @@ export const WidgetConfigResponse: core.serialization.ObjectSchema<
     transcriptEnabled: core.serialization.property("transcript_enabled", core.serialization.boolean().optional()),
     textInputEnabled: core.serialization.property("text_input_enabled", core.serialization.boolean().optional()),
     textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
+    styles: WidgetStyles.optional(),
     language: core.serialization.string(),
     supportedLanguageOverrides: core.serialization.property(
         "supported_language_overrides",
@@ -101,6 +103,7 @@ export declare namespace WidgetConfigResponse {
         transcript_enabled?: boolean | null;
         text_input_enabled?: boolean | null;
         text_contents?: WidgetTextContents.Raw | null;
+        styles?: WidgetStyles.Raw | null;
         language: string;
         supported_language_overrides?: string[] | null;
         language_presets?: Record<string, WidgetLanguagePresetResponse.Raw> | null;
