@@ -4,8 +4,8 @@
 
 import * as environments from "../../../../../../../../environments";
 import * as core from "../../../../../../../../core";
-import * as stream from "stream";
 import * as ElevenLabs from "../../../../../../../index";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../core/headers.js";
 import urlJoin from "url-join";
 import * as errors from "../../../../../../../../errors/index";
 import * as serializers from "../../../../../../../../serialization/index";
@@ -17,6 +17,8 @@ export declare namespace Audio {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 
     export interface RequestOptions {
@@ -29,12 +31,16 @@ export declare namespace Audio {
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string>;
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class Audio {
-    constructor(protected readonly _options: Audio.Options = {}) {}
+    protected readonly _options: Audio.Options;
+
+    constructor(_options: Audio.Options = {}) {
+        this._options = _options;
+    }
 
     /**
      * Get the audio recording of a particular conversation
@@ -43,15 +49,15 @@ export class Audio {
     public get(
         conversationId: string,
         requestOptions?: Audio.RequestOptions,
-    ): core.HttpResponsePromise<stream.Readable> {
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(this.__get(conversationId, requestOptions));
     }
 
     private async __get(
         conversationId: string,
         requestOptions?: Audio.RequestOptions,
-    ): Promise<core.WithRawResponse<stream.Readable>> {
-        const _response = await core.fetcher<stream.Readable>({
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
@@ -61,21 +67,11 @@ export class Audio {
                 `v1/convai/conversations/${encodeURIComponent(conversationId)}/audio`,
             ),
             method: "GET",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,

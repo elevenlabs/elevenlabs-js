@@ -13,14 +13,14 @@ export const ChapterContentBlockInputModel: core.serialization.ObjectSchema<
     ElevenLabs.ChapterContentBlockInputModel
 > = core.serialization.object({
     subType: core.serialization.property("sub_type", ChapterContentBlockInputModelSubType.optional()),
-    blockId: core.serialization.property("block_id", core.serialization.string().optional()),
     nodes: core.serialization.list(ChapterContentParagraphTtsNodeInputModel),
+    blockId: core.serialization.property("block_id", core.serialization.string().optional()),
 });
 
 export declare namespace ChapterContentBlockInputModel {
     export interface Raw {
         sub_type?: ChapterContentBlockInputModelSubType.Raw | null;
-        block_id?: string | null;
         nodes: ChapterContentParagraphTtsNodeInputModel.Raw[];
+        block_id?: string | null;
     }
 }

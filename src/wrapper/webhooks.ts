@@ -1,5 +1,6 @@
 import { webcrypto as nodeWebcrypto } from 'crypto';
 import { ElevenLabsError } from '../errors';
+import { Webhooks } from '../api/resources/webhooks/client/Client';
 
 const crypto = globalThis.crypto ?? nodeWebcrypto;
 
@@ -20,9 +21,9 @@ async function hmacSHA256(key: string, message: string): Promise<string> {
 }
 
 /**
- * A client to handle ElevenLabs webhook-related functionality
+ * Extended webhook client that includes both auto-generated API methods and custom functionality
  */
-export class WebhooksClient {
+export class WebhooksClient extends Webhooks {
   /**
    * Constructs a webhook event object from a payload and signature.
    * Verifies the webhook signature to ensure the event came from ElevenLabs.

@@ -12,10 +12,12 @@ export type ClientEvent =
     | "agent_response"
     | "agent_response_correction"
     | "client_tool_call"
+    | "mcp_tool_call"
+    | "mcp_connection_status"
+    | "agent_tool_response"
     | "vad_score"
     | "internal_turn_probability"
-    | "internal_tentative_agent_response"
-    | "internal_native_mcp_tool_call";
+    | "internal_tentative_agent_response";
 export const ClientEvent = {
     ConversationInitiationMetadata: "conversation_initiation_metadata",
     AsrInitiationMetadata: "asr_initiation_metadata",
@@ -26,8 +28,10 @@ export const ClientEvent = {
     AgentResponse: "agent_response",
     AgentResponseCorrection: "agent_response_correction",
     ClientToolCall: "client_tool_call",
+    McpToolCall: "mcp_tool_call",
+    McpConnectionStatus: "mcp_connection_status",
+    AgentToolResponse: "agent_tool_response",
     VadScore: "vad_score",
     InternalTurnProbability: "internal_turn_probability",
     InternalTentativeAgentResponse: "internal_tentative_agent_response",
-    InternalNativeMcpToolCall: "internal_native_mcp_tool_call",
 } as const;

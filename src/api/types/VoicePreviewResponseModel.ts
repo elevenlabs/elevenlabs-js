@@ -3,8 +3,12 @@
  */
 
 export interface VoicePreviewResponseModel {
+    /** The base64 encoded audio of the preview. */
     audioBase64: string;
+    /** The ID of the generated voice. Use it to create a voice from the preview. */
     generatedVoiceId: string;
+    /** The media type of the preview. */
     mediaType: string;
+    /** The duration of the preview in seconds. */
     durationSecs: number;
 }

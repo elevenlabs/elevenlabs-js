@@ -24,6 +24,8 @@ export interface CreateSipTrunkPhoneNumberRequest {
     transport?: ElevenLabs.SipTrunkTransportEnum;
     /** Whether or not to encrypt media (data layer). */
     mediaEncryption?: ElevenLabs.SipMediaEncryptionEnum;
+    /** Whether or not to encrypt media (data layer) for inbound calls. */
+    inboundMediaEncryption?: ElevenLabs.SipMediaEncryptionEnum;
     /** SIP X-* headers for INVITE request. These headers are sent as-is and may help identify this call. */
     headers?: Record<string, string>;
     /** Optional digest authentication credentials (username/password). If not provided, ACL authentication is assumed. */

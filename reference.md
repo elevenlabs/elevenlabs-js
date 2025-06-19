@@ -193,7 +193,7 @@ await client.history.delete("VW7YKqPnjY4h39yTbx2L");
 
 ## TextToSoundEffects
 
-<details><summary><code>client.textToSoundEffects.<a href="/src/api/resources/textToSoundEffects/client/Client.ts">convert</a>({ ...params }) -> stream.Readable</code></summary>
+<details><summary><code>client.textToSoundEffects.<a href="/src/api/resources/textToSoundEffects/client/Client.ts">convert</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
 <dl>
 <dd>
 
@@ -335,7 +335,7 @@ await client.samples.delete("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
 
 ## TextToSpeech
 
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">convert</a>(voiceId, { ...params }) -> stream.Readable</code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">convert</a>(voiceId, { ...params }) -> ReadableStream<Uint8Array></code></summary>
 <dl>
 <dd>
 
@@ -483,7 +483,7 @@ await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">stream</a>(voiceId, { ...params }) -> stream.Readable</code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">stream</a>(voiceId, { ...params }) -> ReadableStream<Uint8Array></code></summary>
 <dl>
 <dd>
 
@@ -638,7 +638,7 @@ for await (const item of response) {
 
 ## TextToDialogue
 
-<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">convert</a>({ ...params }) -> stream.Readable</code></summary>
+<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">convert</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
 <dl>
 <dd>
 
@@ -712,7 +712,7 @@ await client.textToDialogue.convert({
 </dl>
 </details>
 
-<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">stream</a>({ ...params }) -> stream.Readable</code></summary>
+<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">stream</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
 <dl>
 <dd>
 
@@ -788,7 +788,7 @@ await client.textToDialogue.stream({
 
 ## SpeechToSpeech
 
-<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">convert</a>(voiceId, { ...params }) -> stream.Readable</code></summary>
+<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">convert</a>(voiceId, { ...params }) -> ReadableStream<Uint8Array></code></summary>
 <dl>
 <dd>
 
@@ -863,7 +863,7 @@ await client.speechToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
 </dl>
 </details>
 
-<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">stream</a>(voiceId, { ...params }) -> stream.Readable</code></summary>
+<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">stream</a>(voiceId, { ...params }) -> ReadableStream<Uint8Array></code></summary>
 <dl>
 <dd>
 
@@ -1707,7 +1707,7 @@ Create and auto-convert a podcast project. Currently, the LLM cost is covered by
 
 ```typescript
 await client.studio.createPodcast({
-    modelId: "21m00Tcm4TlvDq8ikWAM",
+    modelId: "eleven_multilingual_v2",
     mode: {
         type: "conversation",
         conversation: {
@@ -2525,6 +2525,140 @@ await client.pronunciationDictionaries.list();
 <dd>
 
 **requestOptions:** `PronunciationDictionaries.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Workspace
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">updateUserAutoProvisioning</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update user auto provisioning settings for the workspace.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.updateUserAutoProvisioning({
+    enabled: true,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUpdateUserAutoProvisioningV1WorkspaceUserAutoProvisioningPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workspace.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Webhooks
+
+<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.WorkspaceWebhookListResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all webhooks for a workspace
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.webhooks.list({
+    includeUsages: false,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.WebhooksListRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Webhooks.RequestOptions`
 
 </dd>
 </dl>
@@ -4964,6 +5098,194 @@ await client.conversationalAi.sipTrunk.outboundCall({
 </dl>
 </details>
 
+## ConversationalAi McpServers
+
+<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">list</a>() -> ElevenLabs.McpServersResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve all MCP server configurations available in the workspace.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.list();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServers.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new MCP server configuration in the workspace.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.create({
+    config: {
+        url: "url",
+        name: "name",
+    },
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.McpServerRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServers.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">get</a>(mcpServerId) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a specific MCP server configuration from the workspace.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.get("mcp_server_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServers.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents Widget
 
 <details><summary><code>client.conversationalAi.agents.widget.<a href="/src/api/resources/conversationalAi/resources/agents/resources/widget/client/Client.ts">get</a>(agentId, { ...params }) -> ElevenLabs.GetAgentEmbedResponseModel</code></summary>
@@ -6188,6 +6510,293 @@ await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8
 <dd>
 
 **requestOptions:** `Chunk.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi McpServers Tools
+
+<details><summary><code>client.conversationalAi.mcpServers.tools.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/tools/client/Client.ts">list</a>(mcpServerId) -> ElevenLabs.ListMcpToolsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve all tools available for a specific MCP server configuration.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.tools.list("mcp_server_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Tools.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi McpServers ApprovalPolicy
+
+<details><summary><code>client.conversationalAi.mcpServers.approvalPolicy.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/approvalPolicy/client/Client.ts">update</a>(mcpServerId, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the approval policy configuration for an MCP server.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.approvalPolicy.update("mcp_server_id", {
+    approvalPolicy: "auto_approve_all",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.mcpServers.McpApprovalPolicyUpdateRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ApprovalPolicy.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi McpServers ToolApprovals
+
+<details><summary><code>client.conversationalAi.mcpServers.toolApprovals.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolApprovals/client/Client.ts">create</a>(mcpServerId, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add approval for a specific MCP tool when using per-tool approval mode.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.toolApprovals.create("mcp_server_id", {
+    toolName: "tool_name",
+    toolDescription: "tool_description",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.mcpServers.McpToolAddApprovalRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolApprovals.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.mcpServers.toolApprovals.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolApprovals/client/Client.ts">delete</a>(mcpServerId, toolName) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove approval for a specific MCP tool when using per-tool approval mode.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.toolApprovals.delete("mcp_server_id", "tool_name");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**toolName:** `string` — Name of the MCP tool to remove approval for.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolApprovals.RequestOptions`
 
 </dd>
 </dl>

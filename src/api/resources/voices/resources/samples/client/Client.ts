@@ -13,13 +13,18 @@ export declare namespace Samples {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class Samples {
+    protected readonly _options: Samples.Options;
     protected _audio: Audio | undefined;
 
-    constructor(protected readonly _options: Samples.Options = {}) {}
+    constructor(_options: Samples.Options = {}) {
+        this._options = _options;
+    }
 
     public get audio(): Audio {
         return (this._audio ??= new Audio(this._options));

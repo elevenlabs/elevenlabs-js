@@ -1,4 +1,4 @@
-import * as qs from "neoqs/legacy";
+import qs from "qs";
 
 /**
  * Takes an unknown value, stringifies it using qs, and parses it into a key-value record

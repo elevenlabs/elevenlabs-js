@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import * as stream from "stream";
 import * as serializers from "../../../../serialization/index";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -17,6 +17,8 @@ export declare namespace SpeechToSpeech {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 
     export interface RequestOptions {
@@ -29,12 +31,16 @@ export declare namespace SpeechToSpeech {
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string>;
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class SpeechToSpeech {
-    constructor(protected readonly _options: SpeechToSpeech.Options = {}) {}
+    protected readonly _options: SpeechToSpeech.Options;
+
+    constructor(_options: SpeechToSpeech.Options = {}) {
+        this._options = _options;
+    }
 
     /**
      * Transform audio from one voice to another. Maintain full control over emotion, timing and delivery.
@@ -44,7 +50,7 @@ export class SpeechToSpeech {
         voiceId: string,
         request: ElevenLabs.BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost,
         requestOptions?: SpeechToSpeech.RequestOptions,
-    ): core.HttpResponsePromise<stream.Readable> {
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(this.__convert(voiceId, request, requestOptions));
     }
 
@@ -52,7 +58,7 @@ export class SpeechToSpeech {
         voiceId: string,
         request: ElevenLabs.BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost,
         requestOptions?: SpeechToSpeech.RequestOptions,
-    ): Promise<core.WithRawResponse<stream.Readable>> {
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (request.enableLogging != null) {
             _queryParams["enable_logging"] = request.enableLogging.toString();
@@ -97,7 +103,7 @@ export class SpeechToSpeech {
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
-        const _response = await core.fetcher<stream.Readable>({
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
@@ -107,20 +113,11 @@ export class SpeechToSpeech {
                 `v1/speech-to-speech/${encodeURIComponent(voiceId)}`,
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ..._maybeEncodedRequest.headers,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey, ..._maybeEncodedRequest.headers }),
+                requestOptions?.headers,
+            ),
             queryParameters: _queryParams,
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
@@ -182,7 +179,7 @@ export class SpeechToSpeech {
         voiceId: string,
         request: ElevenLabs.BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIdStreamPost,
         requestOptions?: SpeechToSpeech.RequestOptions,
-    ): core.HttpResponsePromise<stream.Readable> {
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(this.__stream(voiceId, request, requestOptions));
     }
 
@@ -190,7 +187,7 @@ export class SpeechToSpeech {
         voiceId: string,
         request: ElevenLabs.BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIdStreamPost,
         requestOptions?: SpeechToSpeech.RequestOptions,
-    ): Promise<core.WithRawResponse<stream.Readable>> {
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (request.enableLogging != null) {
             _queryParams["enable_logging"] = request.enableLogging.toString();
@@ -235,7 +232,7 @@ export class SpeechToSpeech {
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
-        const _response = await core.fetcher<stream.Readable>({
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
@@ -245,20 +242,11 @@ export class SpeechToSpeech {
                 `v1/speech-to-speech/${encodeURIComponent(voiceId)}/stream`,
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "v2.2.0",
-                "User-Agent": "@elevenlabs/elevenlabs-js/v2.2.0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ..._maybeEncodedRequest.headers,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey, ..._maybeEncodedRequest.headers }),
+                requestOptions?.headers,
+            ),
             queryParameters: _queryParams,
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
