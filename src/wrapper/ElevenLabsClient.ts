@@ -1,8 +1,7 @@
 import { ElevenLabsClient as FernClient } from "../Client";
-import * as ElevenLabs from "../api";
-import * as core from "../core";
+import type * as ElevenLabs from "../api";
+import type * as core from "../core";
 import * as errors from "../errors";
-import * as stream from "node:stream";
 import { WebhooksClient } from "./webhooks";
 
 export declare namespace ElevenLabsClient {
@@ -23,7 +22,7 @@ export declare namespace ElevenLabsClient {
 }
 
 export class ElevenLabsClient extends FernClient {
-    public readonly webhooks: WebhooksClient;
+    private _customWebhooks: WebhooksClient | undefined;
 
     constructor(options: ElevenLabsClient.Options = {}) {
         const apiKey = options.apiKey ?? process.env.ELEVENLABS_API_KEY;
@@ -34,6 +33,12 @@ export class ElevenLabsClient extends FernClient {
         }
         options.apiKey = apiKey;
         super(options);
-        this.webhooks = new WebhooksClient();
+    }
+
+    public get webhooks(): WebhooksClient {
+        if (!this._customWebhooks) {
+            this._customWebhooks = new WebhooksClient(this._options);
+        }
+        return this._customWebhooks;
     }
 }
