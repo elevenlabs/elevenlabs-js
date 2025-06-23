@@ -10,5 +10,5 @@ export interface AgentConfigOverride {
     /** Language of the agent - used for ASR and TTS */
     language?: string;
     /** The prompt for the agent */
-    prompt?: ElevenLabs.PromptAgentOverride;
+    prompt?: ElevenLabs.PromptAgentApiModelOverride;
 }

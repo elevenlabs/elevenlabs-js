@@ -10,4 +10,6 @@ export interface ConversationChargingCommonModel {
     tier?: string;
     llmUsage?: ElevenLabs.LlmCategoryUsage;
     llmPrice?: number;
+    llmCharge?: number;
+    callCharge?: number;
 }

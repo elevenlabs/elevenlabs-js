@@ -8,7 +8,6 @@ import * as ElevenLabs from "../index";
  * A client tool is one that sends an event to the user's client to trigger something client side
  */
 export interface ClientToolConfigOutput {
-    id?: string;
     name: string;
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. Must be between 1 and 30 seconds (inclusive). */

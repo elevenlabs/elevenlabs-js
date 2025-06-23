@@ -29,11 +29,10 @@ describe("Secrets", () => {
                                 type: "available",
                             },
                         ],
-                        agent_tools: [
+                        agents: [
                             {
-                                agent_id: "agent_id",
-                                agent_name: "agent_name",
-                                used_by: ["used_by"],
+                                id: "id",
+                                name: "name",
                                 created_at_unix_secs: 1,
                                 access_level: "admin",
                                 type: "available",
@@ -63,12 +62,11 @@ describe("Secrets", () => {
                                 accessLevel: "admin",
                             },
                         ],
-                        agentTools: [
+                        agents: [
                             {
                                 type: "available",
-                                agentId: "agent_id",
-                                agentName: "agent_name",
-                                usedBy: ["used_by"],
+                                id: "id",
+                                name: "name",
                                 createdAtUnixSecs: 1,
                                 accessLevel: "admin",
                             },

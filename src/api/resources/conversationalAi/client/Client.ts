@@ -15,6 +15,7 @@ import { Agents } from "../resources/agents/client/Client";
 import { PhoneNumbers } from "../resources/phoneNumbers/client/Client";
 import { LlmUsage } from "../resources/llmUsage/client/Client";
 import { KnowledgeBase } from "../resources/knowledgeBase/client/Client";
+import { Tools } from "../resources/tools/client/Client";
 import { Settings } from "../resources/settings/client/Client";
 import { Secrets } from "../resources/secrets/client/Client";
 import { BatchCalls } from "../resources/batchCalls/client/Client";
@@ -55,6 +56,7 @@ export class ConversationalAi {
     protected _phoneNumbers: PhoneNumbers | undefined;
     protected _llmUsage: LlmUsage | undefined;
     protected _knowledgeBase: KnowledgeBase | undefined;
+    protected _tools: Tools | undefined;
     protected _settings: Settings | undefined;
     protected _secrets: Secrets | undefined;
     protected _batchCalls: BatchCalls | undefined;
@@ -88,6 +90,10 @@ export class ConversationalAi {
 
     public get knowledgeBase(): KnowledgeBase {
         return (this._knowledgeBase ??= new KnowledgeBase(this._options));
+    }
+
+    public get tools(): Tools {
+        return (this._tools ??= new Tools(this._options));
     }
 
     public get settings(): Settings {

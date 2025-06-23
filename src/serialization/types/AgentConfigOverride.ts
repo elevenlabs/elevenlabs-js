@@ -5,7 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { PromptAgentOverride } from "./PromptAgentOverride";
+import { PromptAgentApiModelOverride } from "./PromptAgentApiModelOverride";
 
 export const AgentConfigOverride: core.serialization.ObjectSchema<
     serializers.AgentConfigOverride.Raw,
@@ -13,13 +13,13 @@ export const AgentConfigOverride: core.serialization.ObjectSchema<
 > = core.serialization.object({
     firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
     language: core.serialization.string().optional(),
-    prompt: PromptAgentOverride.optional(),
+    prompt: PromptAgentApiModelOverride.optional(),
 });
 
 export declare namespace AgentConfigOverride {
     export interface Raw {
         first_message?: string | null;
         language?: string | null;
-        prompt?: PromptAgentOverride.Raw | null;
+        prompt?: PromptAgentApiModelOverride.Raw | null;
     }
 }

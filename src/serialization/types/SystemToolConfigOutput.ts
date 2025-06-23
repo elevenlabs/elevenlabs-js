@@ -11,7 +11,6 @@ export const SystemToolConfigOutput: core.serialization.ObjectSchema<
     serializers.SystemToolConfigOutput.Raw,
     ElevenLabs.SystemToolConfigOutput
 > = core.serialization.object({
-    id: core.serialization.string().optional(),
     name: core.serialization.string(),
     description: core.serialization.string(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
@@ -20,7 +19,6 @@ export const SystemToolConfigOutput: core.serialization.ObjectSchema<
 
 export declare namespace SystemToolConfigOutput {
     export interface Raw {
-        id?: string | null;
         name: string;
         description: string;
         response_timeout_secs?: number | null;

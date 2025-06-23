@@ -30,4 +30,86 @@ describe("Workspace", () => {
             key: "value",
         });
     });
+
+    test("getDefaultSharingPreferences", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({
+            apiKey: "test",
+            environment: { base: server.baseUrl, wss: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            default_sharing_groups: [{ name: "name", id: "id", members: ["members"], permissions: ["text_to_speech"] }],
+        };
+        server
+            .mockEndpoint()
+            .get("/v1/workspace/default-sharing-preferences")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.getDefaultSharingPreferences();
+        expect(response).toEqual({
+            defaultSharingGroups: [
+                {
+                    name: "name",
+                    id: "id",
+                    members: ["members"],
+                    permissions: ["text_to_speech"],
+                },
+            ],
+        });
+    });
+
+    test("updateDefaultSharingPreferences", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({
+            apiKey: "test",
+            environment: { base: server.baseUrl, wss: server.baseUrl },
+        });
+        const rawRequestBody = { default_sharing_groups: ["default_sharing_groups"] };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/v1/workspace/default-sharing-preferences")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.updateDefaultSharingPreferences({
+            defaultSharingGroups: ["default_sharing_groups"],
+        });
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
+
+    test("getShareOptions", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({
+            apiKey: "test",
+            environment: { base: server.baseUrl, wss: server.baseUrl },
+        });
+
+        const rawResponseBody = [{ name: "name", id: "id", type: "user" }];
+        server
+            .mockEndpoint()
+            .get("/v1/workspace/share-options")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.getShareOptions();
+        expect(response).toEqual([
+            {
+                name: "name",
+                id: "id",
+                type: "user",
+            },
+        ]);
+    });
 });

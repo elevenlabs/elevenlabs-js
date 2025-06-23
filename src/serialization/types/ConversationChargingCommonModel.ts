@@ -16,6 +16,8 @@ export const ConversationChargingCommonModel: core.serialization.ObjectSchema<
     tier: core.serialization.string().optional(),
     llmUsage: core.serialization.property("llm_usage", LlmCategoryUsage.optional()),
     llmPrice: core.serialization.property("llm_price", core.serialization.number().optional()),
+    llmCharge: core.serialization.property("llm_charge", core.serialization.number().optional()),
+    callCharge: core.serialization.property("call_charge", core.serialization.number().optional()),
 });
 
 export declare namespace ConversationChargingCommonModel {
@@ -25,5 +27,7 @@ export declare namespace ConversationChargingCommonModel {
         tier?: string | null;
         llm_usage?: LlmCategoryUsage.Raw | null;
         llm_price?: number | null;
+        llm_charge?: number | null;
+        call_charge?: number | null;
     }
 }

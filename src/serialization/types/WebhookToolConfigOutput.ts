@@ -12,7 +12,6 @@ export const WebhookToolConfigOutput: core.serialization.ObjectSchema<
     serializers.WebhookToolConfigOutput.Raw,
     ElevenLabs.WebhookToolConfigOutput
 > = core.serialization.object({
-    id: core.serialization.string().optional(),
     name: core.serialization.string(),
     description: core.serialization.string(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
@@ -22,7 +21,6 @@ export const WebhookToolConfigOutput: core.serialization.ObjectSchema<
 
 export declare namespace WebhookToolConfigOutput {
     export interface Raw {
-        id?: string | null;
         name: string;
         description: string;
         response_timeout_secs?: number | null;

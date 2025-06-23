@@ -13,10 +13,10 @@ export interface PromptAgentDbModel {
     temperature?: number;
     /** If greater than 0, maximum number of tokens the LLM can predict */
     maxTokens?: number;
-    /** A list of tools that the agent can use over the course of the conversation */
-    tools?: ElevenLabs.PromptAgentDbModelToolsItem[];
     /** A list of IDs of tools used by the agent */
     toolIds?: string[];
+    /** Built-in system tools to be used by the agent */
+    builtInTools?: ElevenLabs.BuiltInToolsInput;
     /** A list of MCP server ids to be used by the agent */
     mcpServerIds?: string[];
     /** A list of Native MCP server ids to be used by the agent */
@@ -30,5 +30,5 @@ export interface PromptAgentDbModel {
     /** Configuration for RAG */
     rag?: ElevenLabs.RagConfig;
     knowledgeBaseDocumentIds?: string[];
-    builtInTools?: ElevenLabs.BuiltInTools;
+    tools?: unknown;
 }

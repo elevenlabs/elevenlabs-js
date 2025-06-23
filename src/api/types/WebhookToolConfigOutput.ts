@@ -8,7 +8,6 @@ import * as ElevenLabs from "../index";
  * A webhook tool is a tool that calls an external webhook from our server
  */
 export interface WebhookToolConfigOutput {
-    id?: string;
     name: string;
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. Must be between 5 and 120 seconds (inclusive). */

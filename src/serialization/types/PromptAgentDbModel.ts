@@ -6,11 +6,10 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { Llm } from "./Llm";
-import { PromptAgentDbModelToolsItem } from "./PromptAgentDbModelToolsItem";
+import { BuiltInToolsInput } from "./BuiltInToolsInput";
 import { KnowledgeBaseLocator } from "./KnowledgeBaseLocator";
 import { CustomLlm } from "./CustomLlm";
 import { RagConfig } from "./RagConfig";
-import { BuiltInTools } from "./BuiltInTools";
 
 export const PromptAgentDbModel: core.serialization.ObjectSchema<
     serializers.PromptAgentDbModel.Raw,
@@ -20,8 +19,8 @@ export const PromptAgentDbModel: core.serialization.ObjectSchema<
     llm: Llm.optional(),
     temperature: core.serialization.number().optional(),
     maxTokens: core.serialization.property("max_tokens", core.serialization.number().optional()),
-    tools: core.serialization.list(PromptAgentDbModelToolsItem).optional(),
     toolIds: core.serialization.property("tool_ids", core.serialization.list(core.serialization.string()).optional()),
+    builtInTools: core.serialization.property("built_in_tools", BuiltInToolsInput.optional()),
     mcpServerIds: core.serialization.property(
         "mcp_server_ids",
         core.serialization.list(core.serialization.string()).optional(),
@@ -44,7 +43,7 @@ export const PromptAgentDbModel: core.serialization.ObjectSchema<
         "knowledge_base_document_ids",
         core.serialization.list(core.serialization.string()).optional(),
     ),
-    builtInTools: core.serialization.property("built_in_tools", BuiltInTools.optional()),
+    tools: core.serialization.unknown().optional(),
 });
 
 export declare namespace PromptAgentDbModel {
@@ -53,8 +52,8 @@ export declare namespace PromptAgentDbModel {
         llm?: Llm.Raw | null;
         temperature?: number | null;
         max_tokens?: number | null;
-        tools?: PromptAgentDbModelToolsItem.Raw[] | null;
         tool_ids?: string[] | null;
+        built_in_tools?: BuiltInToolsInput.Raw | null;
         mcp_server_ids?: string[] | null;
         native_mcp_server_ids?: string[] | null;
         knowledge_base?: KnowledgeBaseLocator.Raw[] | null;
@@ -62,6 +61,6 @@ export declare namespace PromptAgentDbModel {
         ignore_default_personality?: boolean | null;
         rag?: RagConfig.Raw | null;
         knowledge_base_document_ids?: string[] | null;
-        built_in_tools?: BuiltInTools.Raw | null;
+        tools?: unknown | null;
     }
 }

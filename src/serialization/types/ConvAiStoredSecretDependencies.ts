@@ -6,7 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ConvAiStoredSecretDependenciesToolsItem } from "./ConvAiStoredSecretDependenciesToolsItem";
-import { ConvAiStoredSecretDependenciesAgentToolsItem } from "./ConvAiStoredSecretDependenciesAgentToolsItem";
+import { ConvAiStoredSecretDependenciesAgentsItem } from "./ConvAiStoredSecretDependenciesAgentsItem";
 import { SecretDependencyType } from "./SecretDependencyType";
 import { DependentPhoneNumberIdentifier } from "./DependentPhoneNumberIdentifier";
 
@@ -15,10 +15,7 @@ export const ConvAiStoredSecretDependencies: core.serialization.ObjectSchema<
     ElevenLabs.ConvAiStoredSecretDependencies
 > = core.serialization.object({
     tools: core.serialization.list(ConvAiStoredSecretDependenciesToolsItem),
-    agentTools: core.serialization.property(
-        "agent_tools",
-        core.serialization.list(ConvAiStoredSecretDependenciesAgentToolsItem),
-    ),
+    agents: core.serialization.list(ConvAiStoredSecretDependenciesAgentsItem),
     others: core.serialization.list(SecretDependencyType),
     phoneNumbers: core.serialization.property(
         "phone_numbers",
@@ -29,7 +26,7 @@ export const ConvAiStoredSecretDependencies: core.serialization.ObjectSchema<
 export declare namespace ConvAiStoredSecretDependencies {
     export interface Raw {
         tools: ConvAiStoredSecretDependenciesToolsItem.Raw[];
-        agent_tools: ConvAiStoredSecretDependenciesAgentToolsItem.Raw[];
+        agents: ConvAiStoredSecretDependenciesAgentsItem.Raw[];
         others: SecretDependencyType.Raw[];
         phone_numbers?: DependentPhoneNumberIdentifier.Raw[] | null;
     }

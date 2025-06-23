@@ -41,4 +41,6 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     disableVoiceCloning?: boolean;
     /** automatic or manual. Manual mode is only supported when creating a dubbing studio project */
     mode?: string;
+    /** Frames per second to use when parsing a CSV file for dubbing. If not provided, FPS will be inferred from timecodes. */
+    csvFps?: number;
 }

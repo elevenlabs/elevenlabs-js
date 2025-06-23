@@ -12,7 +12,6 @@ export const McpToolConfigInput: core.serialization.ObjectSchema<
     serializers.McpToolConfigInput.Raw,
     ElevenLabs.McpToolConfigInput
 > = core.serialization.object({
-    id: core.serialization.string().optional(),
     name: core.serialization.string(),
     description: core.serialization.string(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
@@ -31,7 +30,6 @@ export const McpToolConfigInput: core.serialization.ObjectSchema<
 
 export declare namespace McpToolConfigInput {
     export interface Raw {
-        id?: string | null;
         name: string;
         description: string;
         response_timeout_secs?: number | null;
