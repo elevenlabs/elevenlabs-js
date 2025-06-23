@@ -8,7 +8,6 @@ import * as ElevenLabs from "../index";
  * An MCP tool configuration that can be used to call MCP servers
  */
 export interface McpToolConfigOutput {
-    id?: string;
     name: string;
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. */

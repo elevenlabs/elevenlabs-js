@@ -8,7 +8,6 @@ import * as ElevenLabs from "../index";
  * A system tool is a tool that is used to call a system method in the server
  */
 export interface SystemToolConfigOutput {
-    id?: string;
     name: string;
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. */

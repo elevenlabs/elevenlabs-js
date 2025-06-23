@@ -155,6 +155,10 @@ export class Dubbing {
             _request.append("mode", request.mode);
         }
 
+        if (request.csvFps != null) {
+            _request.append("csv_fps", request.csvFps.toString());
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(

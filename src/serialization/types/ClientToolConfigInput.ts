@@ -11,7 +11,6 @@ export const ClientToolConfigInput: core.serialization.ObjectSchema<
     serializers.ClientToolConfigInput.Raw,
     ElevenLabs.ClientToolConfigInput
 > = core.serialization.object({
-    id: core.serialization.string().optional(),
     name: core.serialization.string(),
     description: core.serialization.string(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
@@ -22,7 +21,6 @@ export const ClientToolConfigInput: core.serialization.ObjectSchema<
 
 export declare namespace ClientToolConfigInput {
     export interface Raw {
-        id?: string | null;
         name: string;
         description: string;
         response_timeout_secs?: number | null;

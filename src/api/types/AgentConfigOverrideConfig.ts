@@ -10,5 +10,5 @@ export interface AgentConfigOverrideConfig {
     /** Whether to allow overriding the language field. */
     language?: boolean;
     /** Configures overrides for nested fields. */
-    prompt?: ElevenLabs.PromptAgentOverrideConfig;
+    prompt?: ElevenLabs.PromptAgentApiModelOverrideConfig;
 }

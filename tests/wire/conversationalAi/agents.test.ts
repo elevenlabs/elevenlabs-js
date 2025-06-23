@@ -84,15 +84,6 @@ describe("Agents", () => {
                         llm: "gemini-2.0-flash-001",
                         temperature: 0,
                         max_tokens: -1,
-                        tools: [
-                            {
-                                name: "name",
-                                description: "description",
-                                expects_response: false,
-                                dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
-                                type: "client",
-                            },
-                        ],
                         tool_ids: ["tool_ids"],
                         knowledge_base: [{ type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" }],
                     },
@@ -282,19 +273,6 @@ describe("Agents", () => {
                         llm: "gemini-2.0-flash-001",
                         temperature: 0,
                         maxTokens: -1,
-                        tools: [
-                            {
-                                type: "client",
-                                name: "name",
-                                description: "description",
-                                expectsResponse: false,
-                                dynamicVariables: {
-                                    dynamicVariablePlaceholders: {
-                                        user_name: "John Doe",
-                                    },
-                                },
-                            },
-                        ],
                         toolIds: ["tool_ids"],
                         knowledgeBase: [
                             {
@@ -506,15 +484,6 @@ describe("Agents", () => {
                         llm: "gemini-2.0-flash-001",
                         temperature: 0,
                         max_tokens: -1,
-                        tools: [
-                            {
-                                name: "name",
-                                description: "description",
-                                expects_response: false,
-                                dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
-                                type: "client",
-                            },
-                        ],
                         tool_ids: ["tool_ids"],
                         knowledge_base: [{ type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" }],
                     },
@@ -705,19 +674,6 @@ describe("Agents", () => {
                         llm: "gemini-2.0-flash-001",
                         temperature: 0,
                         maxTokens: -1,
-                        tools: [
-                            {
-                                type: "client",
-                                name: "name",
-                                description: "description",
-                                expectsResponse: false,
-                                dynamicVariables: {
-                                    dynamicVariablePlaceholders: {
-                                        user_name: "John Doe",
-                                    },
-                                },
-                            },
-                        ],
                         toolIds: ["tool_ids"],
                         knowledgeBase: [
                             {
@@ -908,6 +864,29 @@ describe("Agents", () => {
             ],
             nextCursor: "123",
             hasMore: false,
+        });
+    });
+
+    test("duplicate", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({
+            apiKey: "test",
+            environment: { base: server.baseUrl, wss: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM/duplicate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.agents.duplicate("21m00Tcm4TlvDq8ikWAM");
+        expect(response).toEqual({
+            agentId: "J3Pbu5gP6NNKBscdCdwB",
         });
     });
 
