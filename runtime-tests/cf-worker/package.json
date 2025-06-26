@@ -1,0 +1,17 @@
+{
+    "name": "cf-worker-test",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "wrangler dev",
+        "typecheck": "wrangler typecheck"
+    },
+    "dependencies": {
+        "@elevenlabs/elevenlabs-js": "file:../.."
+    },
+    "devDependencies": {
+        "@cloudflare/workers-types": "^4.20240512.0",
+        "typescript": "^5.0.4",
+        "wrangler": "^4.22.0"
+    }
+}

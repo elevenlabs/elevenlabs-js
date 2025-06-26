@@ -3,6 +3,7 @@
         "extendedDiagnostics": true,
         "strict": true,
         "target": "ES6",
+        "lib": ["ES2018", "DOM", "DOM.Iterable"],
         "moduleResolution": "node",
         "esModuleInterop": true,
         "skipLibCheck": true,

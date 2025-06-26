@@ -21,7 +21,7 @@ describe("ElevenLabs API Tests", () => {
                 text: DEFAULT_TEXT,
                 modelId: DEFAULT_MODEL,
             });
-            const audio = Buffer.concat(await streamToBuffer(audioStream));
+            const audio = await streamToBuffer(audioStream);
             expect(Buffer.isBuffer(audio)).toBeTruthy();
             await playIfNotGithub(audio);
         });
@@ -89,7 +89,7 @@ describe("ElevenLabs API Tests", () => {
             const audioStream = await client.audioIsolation.convert({
                 audio: new Blob([audioFile], { type: "audio/mp3" }),
             });
-            const audio = Buffer.concat(await streamToBuffer(audioStream));
+            const audio = await streamToBuffer(audioStream);
             expect(Buffer.isBuffer(audio)).toBeTruthy();
             await playIfNotGithub(audio);
         });
@@ -153,7 +153,7 @@ describe("ElevenLabs API Tests", () => {
                 text: "Hypnotic throbbing sound effect. Increases in intensity.",
                 durationSeconds: 2,
             });
-            const audio = Buffer.concat(await streamToBuffer(audioStream));
+            const audio = await streamToBuffer(audioStream);
             expect(Buffer.isBuffer(audio)).toBeTruthy();
             await playIfNotGithub(audio);
         });
@@ -174,7 +174,7 @@ describe("ElevenLabs API Tests", () => {
             const audioStream = await client.speechToSpeech.convert(DEFAULT_VOICE, {
                 audio: new Blob([audioFile], { type: "audio/mp3" }),
             });
-            const audio = Buffer.concat(await streamToBuffer(audioStream));
+            const audio = await streamToBuffer(audioStream);
             expect(Buffer.isBuffer(audio)).toBeTruthy();
             await playIfNotGithub(audio);
         });
@@ -247,16 +247,42 @@ describe("ElevenLabs API Tests", () => {
     });
 });
 
-async function streamToBuffer(stream: AsyncIterable<Buffer>): Promise<Buffer[]> {
+async function streamToBuffer(stream: ReadableStream<Uint8Array>): Promise<Buffer> {
+    const reader = stream.getReader();
     const chunks: Buffer[] = [];
-    for await (const chunk of stream) {
-        chunks.push(chunk);
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+            break;
+        }
+        if (value) {
+            chunks.push(Buffer.from(value));
+        }
     }
-    return chunks;
+    return Buffer.concat(chunks);
 }
 
-const playIfNotGithub = async (audio: Buffer | AsyncIterable<Buffer>) => {
+async function playReadableStream(stream: ReadableStream<Uint8Array>) {
+    const reader = stream.getReader();
+    const nodeStream = new Readable({
+        async read() {
+            const { done, value } = await reader.read();
+            if (done) {
+                this.push(null);
+            } else {
+                this.push(value);
+            }
+        },
+    });
+    await play(nodeStream);
+}
+
+const playIfNotGithub = async (audio: Buffer | ReadableStream<Uint8Array>) => {
     if (!IN_GITHUB) {
-        Buffer.isBuffer(audio) ? await play(Readable.from(audio)) : await stream(Readable.from(audio));
+        if (Buffer.isBuffer(audio)) {
+            await play(Readable.from(audio));
+        } else {
+            await playReadableStream(audio);
+        }
     }
 };

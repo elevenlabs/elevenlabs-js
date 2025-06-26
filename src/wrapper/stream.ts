@@ -1,26 +1,51 @@
-import commandExists from "command-exists";
-import * as nodeStream from "stream";
+import { isNode, toAsyncIterable } from "./utils";
 import { ElevenLabsError } from "../errors/ElevenLabsError";
-import { RUNTIME } from "../core/runtime/runtime";
-import execa from "execa";
 
-export async function stream(audio: nodeStream.Readable): Promise<void> {
-    if (RUNTIME.type !== "node") {
+export async function stream(audio: ReadableStream<Uint8Array>): Promise<void> {
+    if (!isNode()) {
         throw new ElevenLabsError({
-            message: `This function is only supported in node environments. ${RUNTIME.type} is not supported`,
+            message: "The stream function is only available in a Node.js environment.",
         });
     }
-    if (!commandExists("mpv")) {
+
+    const { spawn } = await import("node:child_process");
+    const { Readable } = await import("node:stream");
+    const commandExists = (await import("command-exists")).default;
+
+    if (!commandExists.sync("mpv")) {
         throw new ElevenLabsError({
             message: `mpv not found, necessary to stream audio."
             On mac you can install it with 'brew install mpv'.
             On linux and windows you can install it from https://mpv.io/`,
         });
     }
-    const mpv = execa("mpv", ["--no-cache", "--no-terminal", "--", "fd://0"]);
-    for await (const data of audio) {
-        mpv.stdin?.write(data);
-    }
-    mpv.stdin?.end();
-    await mpv;
+
+    const mpv = spawn("mpv", ["--no-cache", "--no-terminal", "--", "fd://0"], {
+        stdio: ["pipe", "ignore", "pipe"],
+    });
+
+    Readable.from(toAsyncIterable(audio)).pipe(mpv.stdin);
+
+    const errorChunks: Buffer[] = [];
+    mpv.stderr.on("data", (chunk) => {
+        errorChunks.push(chunk);
+    });
+
+    return new Promise<void>((resolve, reject) => {
+        mpv.on("close", (code) => {
+            if (code === 0) {
+                resolve();
+            } else {
+                const error = Buffer.concat(errorChunks).toString();
+                reject(
+                    new ElevenLabsError({
+                        message: `mpv exited with code ${code}. Stderr: ${error}`,
+                    }),
+                );
+            }
+        });
+        mpv.on("error", (err) => {
+            reject(new ElevenLabsError({ message: `Failed to start mpv: ${err.message}` }));
+        });
+    });
 }
