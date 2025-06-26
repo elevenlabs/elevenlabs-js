@@ -21,8 +21,7 @@
         "node-fetch": "^2.7.0",
         "qs": "^6.13.1",
         "form-data-encoder": "^4.0.2",
-        "command-exists": "^1.2.9",
-        "execa": "^5.1.1"
+        "command-exists": "^1.2.9"
     },
     "devDependencies": {
         "@types/url-join": "4.0.1",
