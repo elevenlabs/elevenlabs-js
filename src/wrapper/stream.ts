@@ -1,9 +1,17 @@
-import commandExists from "command-exists";
-import { spawn } from "node:child_process";
-import * as nodeStream from "node:stream";
+import { isNode, toAsyncIterable } from "./utils";
 import { ElevenLabsError } from "../errors/ElevenLabsError";
 
-export async function stream(audio: nodeStream.Readable): Promise<void> {
+export async function stream(audio: ReadableStream<Uint8Array>): Promise<void> {
+    if (!isNode()) {
+        throw new ElevenLabsError({
+            message: "The stream function is only available in a Node.js environment.",
+        });
+    }
+
+    const { spawn } = await import("node:child_process");
+    const { Readable } = await import("node:stream");
+    const commandExists = (await import("command-exists")).default;
+
     if (!commandExists.sync("mpv")) {
         throw new ElevenLabsError({
             message: `mpv not found, necessary to stream audio."
@@ -16,7 +24,7 @@ export async function stream(audio: nodeStream.Readable): Promise<void> {
         stdio: ["pipe", "ignore", "pipe"],
     });
 
-    audio.pipe(mpv.stdin);
+    Readable.from(toAsyncIterable(audio)).pipe(mpv.stdin);
 
     const errorChunks: Buffer[] = [];
     mpv.stderr.on("data", (chunk) => {

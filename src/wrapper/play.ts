@@ -1,9 +1,17 @@
-import commandExists from "command-exists";
-import { spawn } from "node:child_process";
-import { Readable } from "node:stream";
 import { ElevenLabsError } from "../errors/ElevenLabsError";
+import { isNode } from "./utils";
 
 export async function play(audio: AsyncIterable<Uint8Array>): Promise<void> {
+    if (!isNode()) {
+        throw new ElevenLabsError({
+            message: "The play function is only available in a Node.js environment.",
+        });
+    }
+
+    const { spawn } = await import("node:child_process");
+    const { Readable } = await import("node:stream");
+    const commandExists = (await import("command-exists")).default;
+
     if (!commandExists.sync("ffplay")) {
         throw new ElevenLabsError({
             message: `ffplay from ffmpeg not found, necessary to play audio.
