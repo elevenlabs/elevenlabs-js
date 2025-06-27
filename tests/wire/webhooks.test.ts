@@ -23,7 +23,7 @@ describe("Webhooks", () => {
                     is_auto_disabled: false,
                     created_at_unix: 123456789,
                     auth_type: "hmac",
-                    usage: [{ usage_type: "ConvAI Agent Settings" }],
+                    usage: [{ usage_type: "ConvAI Settings" }],
                     most_recent_failure_error_code: 404,
                     most_recent_failure_timestamp: 123456799,
                 },
@@ -52,7 +52,7 @@ describe("Webhooks", () => {
                     authType: "hmac",
                     usage: [
                         {
-                            usageType: "ConvAI Agent Settings",
+                            usageType: "ConvAI Settings",
                         },
                     ],
                     mostRecentFailureErrorCode: 404,

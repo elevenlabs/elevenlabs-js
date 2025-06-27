@@ -3,6 +3,7 @@
  */
 
 import * as fs from "fs";
+import * as core from "../../../../../../../../../../../core";
 
 /**
  * @example
@@ -11,5 +12,5 @@ import * as fs from "fs";
  *     }
  */
 export interface BodyVerifyPvcVoiceCaptchaV1VoicesPvcVoiceIdCaptchaPost {
-    recording: File | fs.ReadStream | Blob;
+    recording: core.FileLike;
 }

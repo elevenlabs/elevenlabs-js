@@ -3,10 +3,11 @@
  */
 
 import * as errors from "../../errors/index";
+import * as ElevenLabs from "../index";
 import * as core from "../../core";
 
 export class BadRequestError extends errors.ElevenLabsError {
-    constructor(body?: unknown, rawResponse?: core.RawResponse) {
+    constructor(body: ElevenLabs.BadRequestErrorBody, rawResponse?: core.RawResponse) {
         super({
             message: "BadRequestError",
             statusCode: 400,

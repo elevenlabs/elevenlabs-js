@@ -451,7 +451,7 @@ export class PhoneNumbers {
                         (await core.Supplier.get(this._options.environment)) ??
                         environments.ElevenLabsEnvironment.Production
                     ).base,
-                "v1/convai/phone-numbers/",
+                "v1/convai/phone-numbers",
             ),
             method: "GET",
             headers: mergeHeaders(
@@ -504,7 +504,7 @@ export class PhoneNumbers {
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/convai/phone-numbers/.");
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling GET /v1/convai/phone-numbers.");
             case "unknown":
                 throw new errors.ElevenLabsError({
                     message: _response.error.errorMessage,

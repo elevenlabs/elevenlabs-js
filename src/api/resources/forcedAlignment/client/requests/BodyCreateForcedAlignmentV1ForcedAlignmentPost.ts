@@ -3,6 +3,7 @@
  */
 
 import * as fs from "fs";
+import * as core from "../../../../../core";
 
 /**
  * @example
@@ -12,7 +13,7 @@ import * as fs from "fs";
  *     }
  */
 export interface BodyCreateForcedAlignmentV1ForcedAlignmentPost {
-    file: File | fs.ReadStream | Blob;
+    file: core.FileLike;
     /** The text to align with the audio. The input text can be in any format, however diarization is not supported at this time. */
     text: string;
     /** If true, the file will be streamed to the server and processed in chunks. This is useful for large files that cannot be loaded into memory. The default is false. */

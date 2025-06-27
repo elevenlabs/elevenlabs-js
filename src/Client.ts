@@ -21,11 +21,11 @@ import { Models } from "./api/resources/models/client/Client";
 import { AudioNative } from "./api/resources/audioNative/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionaries } from "./api/resources/pronunciationDictionaries/client/Client";
-import { Workspace } from "./api/resources/workspace/client/Client";
 import { Webhooks } from "./api/resources/webhooks/client/Client";
 import { SpeechToText } from "./api/resources/speechToText/client/Client";
 import { ForcedAlignment } from "./api/resources/forcedAlignment/client/Client";
 import { ConversationalAi } from "./api/resources/conversationalAi/client/Client";
+import { Workspace } from "./api/resources/workspace/client/Client";
 
 export declare namespace ElevenLabsClient {
     export interface Options {
@@ -70,11 +70,11 @@ export class ElevenLabsClient {
     protected _audioNative: AudioNative | undefined;
     protected _usage: Usage | undefined;
     protected _pronunciationDictionaries: PronunciationDictionaries | undefined;
-    protected _workspace: Workspace | undefined;
     protected _webhooks: Webhooks | undefined;
     protected _speechToText: SpeechToText | undefined;
     protected _forcedAlignment: ForcedAlignment | undefined;
     protected _conversationalAi: ConversationalAi | undefined;
+    protected _workspace: Workspace | undefined;
 
     constructor(_options: ElevenLabsClient.Options = {}) {
         this._options = {
@@ -83,9 +83,8 @@ export class ElevenLabsClient {
                 {
                     "xi-api-key": _options?.apiKey,
                     "X-Fern-Language": "JavaScript",
-                    "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                    "X-Fern-SDK-Version": "v2.4.0",
-                    "User-Agent": "@elevenlabs/elevenlabs-js/v2.4.0",
+                    "X-Fern-SDK-Name": "",
+                    "X-Fern-SDK-Version": "0.0.307",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -158,10 +157,6 @@ export class ElevenLabsClient {
         return (this._pronunciationDictionaries ??= new PronunciationDictionaries(this._options));
     }
 
-    public get workspace(): Workspace {
-        return (this._workspace ??= new Workspace(this._options));
-    }
-
     public get webhooks(): Webhooks {
         return (this._webhooks ??= new Webhooks(this._options));
     }
@@ -176,5 +171,9 @@ export class ElevenLabsClient {
 
     public get conversationalAi(): ConversationalAi {
         return (this._conversationalAi ??= new ConversationalAi(this._options));
+    }
+
+    public get workspace(): Workspace {
+        return (this._workspace ??= new Workspace(this._options));
     }
 }

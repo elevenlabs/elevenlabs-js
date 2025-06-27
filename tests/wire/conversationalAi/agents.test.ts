@@ -100,7 +100,7 @@ describe("Agents", () => {
                     criteria: [
                         {
                             id: "1234567890",
-                            name: "name",
+                            name: "Customer satisfaction check",
                             conversation_goal_prompt:
                                 "You are a helpful assistant that can answer questions about the topic of the conversation.",
                             use_knowledge_base: false,
@@ -145,7 +145,7 @@ describe("Agents", () => {
                 },
                 data_collection: {
                     key: {
-                        type: "boolean",
+                        type: "string",
                         description: "My property",
                         dynamic_variable: "Dynamic variable",
                         constant_value: "Constant value",
@@ -174,9 +174,9 @@ describe("Agents", () => {
             },
             phone_numbers: [
                 {
-                    phone_number: "phone_number",
-                    label: "label",
-                    phone_number_id: "X3Pbu5gP6NNKBscdCdwB",
+                    phone_number: "+1987654321",
+                    label: "Sales Team",
+                    phone_number_id: "phone_456",
                     assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
                     provider_config: {
                         address: "address",
@@ -302,7 +302,7 @@ describe("Agents", () => {
                     criteria: [
                         {
                             id: "1234567890",
-                            name: "name",
+                            name: "Customer satisfaction check",
                             conversationGoalPrompt:
                                 "You are a helpful assistant that can answer questions about the topic of the conversation.",
                             useKnowledgeBase: false,
@@ -353,7 +353,7 @@ describe("Agents", () => {
                 },
                 dataCollection: {
                     key: {
-                        type: "boolean",
+                        type: "string",
                         description: "My property",
                         dynamicVariable: "Dynamic variable",
                         constantValue: "Constant value",
@@ -393,9 +393,9 @@ describe("Agents", () => {
             phoneNumbers: [
                 {
                     provider: "sip_trunk",
-                    phoneNumber: "phone_number",
-                    label: "label",
-                    phoneNumberId: "X3Pbu5gP6NNKBscdCdwB",
+                    phoneNumber: "+1987654321",
+                    label: "Sales Team",
+                    phoneNumberId: "phone_456",
                     assignedAgent: {
                         agentId: "F3Pbu5gP6NNKBscdCdwB",
                         agentName: "My Agent",
@@ -500,7 +500,7 @@ describe("Agents", () => {
                     criteria: [
                         {
                             id: "1234567890",
-                            name: "name",
+                            name: "Customer satisfaction check",
                             conversation_goal_prompt:
                                 "You are a helpful assistant that can answer questions about the topic of the conversation.",
                             use_knowledge_base: false,
@@ -545,7 +545,7 @@ describe("Agents", () => {
                 },
                 data_collection: {
                     key: {
-                        type: "boolean",
+                        type: "string",
                         description: "My property",
                         dynamic_variable: "Dynamic variable",
                         constant_value: "Constant value",
@@ -574,9 +574,9 @@ describe("Agents", () => {
             },
             phone_numbers: [
                 {
-                    phone_number: "phone_number",
-                    label: "label",
-                    phone_number_id: "X3Pbu5gP6NNKBscdCdwB",
+                    phone_number: "+1987654321",
+                    label: "Sales Team",
+                    phone_number_id: "phone_456",
                     assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
                     provider_config: {
                         address: "address",
@@ -703,7 +703,7 @@ describe("Agents", () => {
                     criteria: [
                         {
                             id: "1234567890",
-                            name: "name",
+                            name: "Customer satisfaction check",
                             conversationGoalPrompt:
                                 "You are a helpful assistant that can answer questions about the topic of the conversation.",
                             useKnowledgeBase: false,
@@ -754,7 +754,7 @@ describe("Agents", () => {
                 },
                 dataCollection: {
                     key: {
-                        type: "boolean",
+                        type: "string",
                         description: "My property",
                         dynamicVariable: "Dynamic variable",
                         constantValue: "Constant value",
@@ -794,9 +794,9 @@ describe("Agents", () => {
             phoneNumbers: [
                 {
                     provider: "sip_trunk",
-                    phoneNumber: "phone_number",
-                    label: "label",
-                    phoneNumberId: "X3Pbu5gP6NNKBscdCdwB",
+                    phoneNumber: "+1987654321",
+                    label: "Sales Team",
+                    phoneNumberId: "phone_456",
                     assignedAgent: {
                         agentId: "F3Pbu5gP6NNKBscdCdwB",
                         agentName: "My Agent",
@@ -836,7 +836,7 @@ describe("Agents", () => {
                     access_info: {
                         is_creator: true,
                         creator_name: "John Doe",
-                        creator_email: "john.doe@example.com",
+                        creator_email: "john@example.com",
                         role: "admin",
                     },
                 },
@@ -857,7 +857,7 @@ describe("Agents", () => {
                     accessInfo: {
                         isCreator: true,
                         creatorName: "John Doe",
-                        creatorEmail: "john.doe@example.com",
+                        creatorEmail: "john@example.com",
                         role: "admin",
                     },
                 },

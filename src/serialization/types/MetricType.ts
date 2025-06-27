@@ -7,8 +7,23 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 
 export const MetricType: core.serialization.Schema<serializers.MetricType.Raw, ElevenLabs.MetricType> =
-    core.serialization.enum_(["credits", "minutes_used", "request_count", "ttfb_avg", "ttfb_p95", "fiat_units_spent"]);
+    core.serialization.enum_([
+        "credits",
+        "minutes_used",
+        "request_count",
+        "ttfb_avg",
+        "ttfb_p95",
+        "fiat_units_spent",
+        "concurrency",
+    ]);
 
 export declare namespace MetricType {
-    export type Raw = "credits" | "minutes_used" | "request_count" | "ttfb_avg" | "ttfb_p95" | "fiat_units_spent";
+    export type Raw =
+        | "credits"
+        | "minutes_used"
+        | "request_count"
+        | "ttfb_avg"
+        | "ttfb_p95"
+        | "fiat_units_spent"
+        | "concurrency";
 }

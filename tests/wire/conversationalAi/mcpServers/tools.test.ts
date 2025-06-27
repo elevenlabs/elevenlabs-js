@@ -17,8 +17,8 @@ describe("Tools", () => {
             success: true,
             tools: [
                 {
-                    name: "weather_by_zapier_get_tomorrow",
-                    description: "Gets tomorrow's forecasted weather conditions for a location.",
+                    name: "weather_by_zapier_get_current",
+                    description: "Gets current weather conditions for a location.",
                     inputSchema: {
                         properties: {
                             latitude: { description: "Latitude", type: "string" },
@@ -28,7 +28,7 @@ describe("Tools", () => {
                         type: "object",
                     },
                 },
-                { name: "tool2", description: "Description of tool2", inputSchema: { key: "value" } },
+                { name: "tool2", description: "Description of tool2", inputSchema: { properties: {}, type: "object" } },
             ],
             error_message: "error_message",
         };
@@ -45,8 +45,8 @@ describe("Tools", () => {
             success: true,
             tools: [
                 {
-                    name: "weather_by_zapier_get_tomorrow",
-                    description: "Gets tomorrow's forecasted weather conditions for a location.",
+                    name: "weather_by_zapier_get_current",
+                    description: "Gets current weather conditions for a location.",
                     inputSchema: {
                         properties: {
                             latitude: {
@@ -66,7 +66,8 @@ describe("Tools", () => {
                     name: "tool2",
                     description: "Description of tool2",
                     inputSchema: {
-                        key: "value",
+                        properties: {},
+                        type: "object",
                     },
                 },
             ],

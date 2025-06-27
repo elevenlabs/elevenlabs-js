@@ -47,26 +47,37 @@ export class Audio {
      *
      * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
      * @param {string} sampleId - Sample ID to be used
+     * @param {ElevenLabs.voices.pvc.samples.AudioGetRequest} request
      * @param {Audio.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.voices.pvc.samples.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L")
+     *     await client.voices.pvc.samples.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", {
+     *         removeBackgroundNoise: true
+     *     })
      */
     public get(
         voiceId: string,
         sampleId: string,
+        request: ElevenLabs.voices.pvc.samples.AudioGetRequest = {},
         requestOptions?: Audio.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.VoiceSamplePreviewResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__get(voiceId, sampleId, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(voiceId, sampleId, request, requestOptions));
     }
 
     private async __get(
         voiceId: string,
         sampleId: string,
+        request: ElevenLabs.voices.pvc.samples.AudioGetRequest = {},
         requestOptions?: Audio.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.VoiceSamplePreviewResponseModel>> {
+        const { removeBackgroundNoise } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (removeBackgroundNoise != null) {
+            _queryParams["remove_background_noise"] = removeBackgroundNoise.toString();
+        }
+
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -82,6 +93,7 @@ export class Audio {
                 mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
                 requestOptions?.headers,
             ),
+            queryParameters: _queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

@@ -75,7 +75,7 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
         "apply_text_normalization",
         ProjectExtendedResponseModelApplyTextNormalization,
     ),
-    experimental: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
+    experimental: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
 });
 
 export declare namespace ProjectExtendedResponse {
@@ -113,6 +113,6 @@ export declare namespace ProjectExtendedResponse {
         pronunciation_dictionary_versions: PronunciationDictionaryVersionResponseModel.Raw[];
         pronunciation_dictionary_locators: PronunciationDictionaryLocatorResponseModel.Raw[];
         apply_text_normalization: ProjectExtendedResponseModelApplyTextNormalization.Raw;
-        experimental: Record<string, unknown>;
+        experimental?: Record<string, unknown> | null;
     }
 }

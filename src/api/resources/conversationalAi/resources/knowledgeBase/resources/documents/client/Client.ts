@@ -360,6 +360,7 @@ export class Documents {
      * Get details about a specific documentation making up the agent's knowledge base
      *
      * @param {string} documentationId - The id of a document from the knowledge base. This is returned on document addition.
+     * @param {ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetRequest} request
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -369,15 +370,23 @@ export class Documents {
      */
     public get(
         documentationId: string,
+        request: ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetRequest = {},
         requestOptions?: Documents.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__get(documentationId, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(documentationId, request, requestOptions));
     }
 
     private async __get(
         documentationId: string,
+        request: ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetRequest = {},
         requestOptions?: Documents.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetResponse>> {
+        const { agentId } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (agentId != null) {
+            _queryParams["agent_id"] = agentId;
+        }
+
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -393,6 +402,7 @@ export class Documents {
                 mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
                 requestOptions?.headers,
             ),
+            queryParameters: _queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

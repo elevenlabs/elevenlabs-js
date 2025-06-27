@@ -71,6 +71,6 @@ export interface ProjectExtendedResponse {
     pronunciationDictionaryLocators: ElevenLabs.PronunciationDictionaryLocatorResponseModel[];
     /** Whether text normalization is applied to the project. */
     applyTextNormalization: ElevenLabs.ProjectExtendedResponseModelApplyTextNormalization;
-    /** Experimental features of the project. */
-    experimental: Record<string, unknown>;
+    /** Experimental features for the project. */
+    experimental?: Record<string, unknown>;
 }

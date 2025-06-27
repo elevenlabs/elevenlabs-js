@@ -1,2 +1,0 @@
-export { BodyUpdateUserAutoProvisioningV1WorkspaceUserAutoProvisioningPost } from "./BodyUpdateUserAutoProvisioningV1WorkspaceUserAutoProvisioningPost";
-export { BodyUpdateDefaultSharingPreferencesV1WorkspaceDefaultSharingPreferencesPost } from "./BodyUpdateDefaultSharingPreferencesV1WorkspaceDefaultSharingPreferencesPost";

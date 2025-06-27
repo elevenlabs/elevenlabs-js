@@ -7,6 +7,7 @@ import * as ElevenLabs from "../index";
 export type SystemToolConfigInputParams =
     | ElevenLabs.SystemToolConfigInputParams.EndCall
     | ElevenLabs.SystemToolConfigInputParams.LanguageDetection
+    | ElevenLabs.SystemToolConfigInputParams.PlayKeypadTouchTone
     | ElevenLabs.SystemToolConfigInputParams.SkipTurn
     | ElevenLabs.SystemToolConfigInputParams.TransferToAgent
     | ElevenLabs.SystemToolConfigInputParams.TransferToNumber;
@@ -18,6 +19,10 @@ export namespace SystemToolConfigInputParams {
 
     export interface LanguageDetection extends ElevenLabs.LanguageDetectionToolConfig {
         systemToolType: "language_detection";
+    }
+
+    export interface PlayKeypadTouchTone extends ElevenLabs.PlayDtmfToolConfig {
+        systemToolType: "play_keypad_touch_tone";
     }
 
     export interface SkipTurn extends ElevenLabs.SkipTurnToolConfig {

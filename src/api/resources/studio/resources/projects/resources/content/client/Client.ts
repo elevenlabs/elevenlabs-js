@@ -76,6 +76,10 @@ export class Content {
             await _request.appendFile("from_document", request.fromDocument);
         }
 
+        if (request.fromContentJson != null) {
+            _request.append("from_content_json", request.fromContentJson);
+        }
+
         if (request.autoConvert != null) {
             _request.append("auto_convert", request.autoConvert.toString());
         }

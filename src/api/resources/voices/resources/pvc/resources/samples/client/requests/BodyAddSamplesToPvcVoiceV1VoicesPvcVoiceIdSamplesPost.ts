@@ -3,6 +3,7 @@
  */
 
 import * as fs from "fs";
+import * as core from "../../../../../../../../../core";
 
 /**
  * @example
@@ -11,7 +12,7 @@ import * as fs from "fs";
  *     }
  */
 export interface BodyAddSamplesToPvcVoiceV1VoicesPvcVoiceIdSamplesPost {
-    files: File[] | fs.ReadStream[] | Blob[];
+    files: core.FileLike[];
     /** If set will remove background noise for voice samples using our audio isolation model. If the samples do not include background noise, it can make the quality worse. */
     removeBackgroundNoise?: boolean;
 }

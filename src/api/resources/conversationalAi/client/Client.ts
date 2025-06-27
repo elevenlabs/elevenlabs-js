@@ -142,6 +142,11 @@ export class ConversationalAi {
         request: ElevenLabs.BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost,
         requestOptions?: ConversationalAi.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AddKnowledgeBaseResponseModel>> {
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (request.agentId != null) {
+            _queryParams["agent_id"] = request.agentId;
+        }
+
         const _request = await core.newFormData();
         if (request.name != null) {
             _request.append("name", request.name);
@@ -171,6 +176,7 @@ export class ConversationalAi {
                 mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey, ..._maybeEncodedRequest.headers }),
                 requestOptions?.headers,
             ),
+            queryParameters: _queryParams,
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

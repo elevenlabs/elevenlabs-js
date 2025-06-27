@@ -3,6 +3,7 @@
  */
 
 import * as fs from "fs";
+import * as core from "../../../../../../../../../core";
 
 /**
  * @example
@@ -11,7 +12,7 @@ import * as fs from "fs";
  *     }
  */
 export interface BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost {
-    file: File | fs.ReadStream | Blob;
+    file: core.FileLike;
     /** A custom, human-readable name for the document. */
     name?: string;
 }

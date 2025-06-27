@@ -12,6 +12,7 @@ export const BodyEditProjectContentV1ProjectsProjectIdContentPost: core.serializ
 > = core.serialization.object({
     fromUrl: core.serialization.property("from_url", core.serialization.string().optional()),
     fromDocument: core.serialization.property("from_document", core.serialization.string().optional()),
+    fromContentJson: core.serialization.property("from_content_json", core.serialization.string().optional()),
     autoConvert: core.serialization.property("auto_convert", core.serialization.boolean().optional()),
 });
 
@@ -19,6 +20,7 @@ export declare namespace BodyEditProjectContentV1ProjectsProjectIdContentPost {
     export interface Raw {
         from_url?: string | null;
         from_document?: string | null;
+        from_content_json?: string | null;
         auto_convert?: boolean | null;
     }
 }

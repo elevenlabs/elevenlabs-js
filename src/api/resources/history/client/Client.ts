@@ -469,7 +469,15 @@ export class History {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new ElevenLabs.BadRequestError(_response.error.body, _response.rawResponse);
+                    throw new ElevenLabs.BadRequestError(
+                        serializers.BadRequestErrorBody.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(
                         serializers.HttpValidationError.parseOrThrow(_response.error.body, {

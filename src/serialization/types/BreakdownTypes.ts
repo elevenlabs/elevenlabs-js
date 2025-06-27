@@ -19,6 +19,8 @@ export const BreakdownTypes: core.serialization.Schema<serializers.BreakdownType
         "model",
         "resource",
         "request_queue",
+        "region",
+        "subresource_id",
     ]);
 
 export declare namespace BreakdownTypes {
@@ -33,5 +35,7 @@ export declare namespace BreakdownTypes {
         | "product_type"
         | "model"
         | "resource"
-        | "request_queue";
+        | "request_queue"
+        | "region"
+        | "subresource_id";
 }

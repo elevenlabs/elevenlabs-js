@@ -47,7 +47,6 @@ export * from "./dubbing/client/requests";
 export * from "./audioNative/client/requests";
 export * from "./usage/client/requests";
 export * from "./pronunciationDictionaries/client/requests";
-export * from "./workspace/client/requests";
 export * from "./webhooks/client/requests";
 export * from "./speechToText/client/requests";
 export * from "./forcedAlignment/client/requests";
