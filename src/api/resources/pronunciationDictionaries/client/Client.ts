@@ -383,7 +383,7 @@ export class PronunciationDictionaries {
                         (await core.Supplier.get(this._options.environment)) ??
                         environments.ElevenLabsEnvironment.Production
                     ).base,
-                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}/`,
+                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}`,
             ),
             method: "GET",
             headers: mergeHeaders(
@@ -437,7 +437,7 @@ export class PronunciationDictionaries {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/{pronunciation_dictionary_id}/.",
+                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/{pronunciation_dictionary_id}.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({
@@ -496,7 +496,7 @@ export class PronunciationDictionaries {
                         (await core.Supplier.get(this._options.environment)) ??
                         environments.ElevenLabsEnvironment.Production
                     ).base,
-                "v1/pronunciation-dictionaries/",
+                "v1/pronunciation-dictionaries",
             ),
             method: "GET",
             headers: mergeHeaders(
@@ -551,7 +551,7 @@ export class PronunciationDictionaries {
                 });
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/.",
+                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

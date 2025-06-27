@@ -93,7 +93,16 @@ describe("Voices", () => {
                         "eleven_flash_v2_5",
                         "eleven_turbo_v2",
                     ],
-                    verified_languages: [{ language: "en", model_id: "eleven_turbo_v2_5", accent: "American" }],
+                    verified_languages: [
+                        {
+                            language: "en",
+                            model_id: "eleven_multilingual_v2",
+                            accent: "american",
+                            locale: "en-US",
+                            preview_url:
+                                "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
+                        },
+                    ],
                     safety_control: "NONE",
                     voice_verification: {
                         requires_verification: false,
@@ -228,8 +237,11 @@ describe("Voices", () => {
                     verifiedLanguages: [
                         {
                             language: "en",
-                            modelId: "eleven_turbo_v2_5",
-                            accent: "American",
+                            modelId: "eleven_multilingual_v2",
+                            accent: "american",
+                            locale: "en-US",
+                            previewUrl:
+                                "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
                         },
                     ],
                     safetyControl: "NONE",
@@ -353,7 +365,16 @@ describe("Voices", () => {
                         "eleven_flash_v2_5",
                         "eleven_turbo_v2",
                     ],
-                    verified_languages: [{ language: "en", model_id: "eleven_turbo_v2_5", accent: "American" }],
+                    verified_languages: [
+                        {
+                            language: "en",
+                            model_id: "eleven_multilingual_v2",
+                            accent: "american",
+                            locale: "en-US",
+                            preview_url:
+                                "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
+                        },
+                    ],
                     safety_control: "NONE",
                     voice_verification: {
                         requires_verification: false,
@@ -493,8 +514,11 @@ describe("Voices", () => {
                     verifiedLanguages: [
                         {
                             language: "en",
-                            modelId: "eleven_turbo_v2_5",
-                            accent: "American",
+                            modelId: "eleven_multilingual_v2",
+                            accent: "american",
+                            locale: "en-US",
+                            previewUrl:
+                                "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
                         },
                     ],
                     safetyControl: "NONE",
@@ -678,10 +702,11 @@ describe("Voices", () => {
             verified_languages: [
                 {
                     language: "en",
-                    model_id: "eleven_turbo_v2_5",
-                    accent: "American",
-                    locale: "locale",
-                    preview_url: "preview_url",
+                    model_id: "eleven_multilingual_v2",
+                    accent: "american",
+                    locale: "en-US",
+                    preview_url:
+                        "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
                 },
             ],
             safety_control: "NONE",
@@ -882,10 +907,11 @@ describe("Voices", () => {
             verifiedLanguages: [
                 {
                     language: "en",
-                    modelId: "eleven_turbo_v2_5",
-                    accent: "American",
-                    locale: "locale",
-                    previewUrl: "preview_url",
+                    modelId: "eleven_multilingual_v2",
+                    accent: "american",
+                    locale: "en-US",
+                    previewUrl:
+                        "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
                 },
             ],
             safetyControl: "NONE",
@@ -1007,7 +1033,16 @@ describe("Voices", () => {
                     free_users_allowed: true,
                     live_moderation_enabled: false,
                     featured: false,
-                    verified_languages: [{ language: "en", model_id: "eleven_turbo_v2_5", accent: "American" }],
+                    verified_languages: [
+                        {
+                            language: "en",
+                            model_id: "eleven_multilingual_v2",
+                            accent: "american",
+                            locale: "en-US",
+                            preview_url:
+                                "https://storage.googleapis.com/eleven-public-prod/wqkMCd9huxXHX1dy5mLJn4QEQHj1/voices/sB1b5zUrxQVAFl2PhZFp/55e71aac-5cb7-4b3d-8241-429388160509.mp3",
+                        },
+                    ],
                     notice_period: 1,
                     instagram_username: "instagram_username",
                     twitter_username: "twitter_username",
@@ -1056,8 +1091,11 @@ describe("Voices", () => {
                     verifiedLanguages: [
                         {
                             language: "en",
-                            modelId: "eleven_turbo_v2_5",
-                            accent: "American",
+                            modelId: "eleven_multilingual_v2",
+                            accent: "american",
+                            locale: "en-US",
+                            previewUrl:
+                                "https://storage.googleapis.com/eleven-public-prod/wqkMCd9huxXHX1dy5mLJn4QEQHj1/voices/sB1b5zUrxQVAFl2PhZFp/55e71aac-5cb7-4b3d-8241-429388160509.mp3",
                         },
                     ],
                     noticePeriod: 1,

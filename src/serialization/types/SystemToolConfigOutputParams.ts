@@ -7,6 +7,7 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { EndCallToolConfig } from "./EndCallToolConfig";
 import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
+import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
 import { TransferToAgentToolConfig } from "./TransferToAgentToolConfig";
 import { TransferToNumberToolConfig } from "./TransferToNumberToolConfig";
@@ -18,6 +19,7 @@ export const SystemToolConfigOutputParams: core.serialization.Schema<
     .union(core.serialization.discriminant("systemToolType", "system_tool_type"), {
         end_call: EndCallToolConfig,
         language_detection: LanguageDetectionToolConfig,
+        play_keypad_touch_tone: PlayDtmfToolConfig,
         skip_turn: SkipTurnToolConfig,
         transfer_to_agent: TransferToAgentToolConfig,
         transfer_to_number: TransferToNumberToolConfig,
@@ -31,6 +33,7 @@ export declare namespace SystemToolConfigOutputParams {
     export type Raw =
         | SystemToolConfigOutputParams.EndCall
         | SystemToolConfigOutputParams.LanguageDetection
+        | SystemToolConfigOutputParams.PlayKeypadTouchTone
         | SystemToolConfigOutputParams.SkipTurn
         | SystemToolConfigOutputParams.TransferToAgent
         | SystemToolConfigOutputParams.TransferToNumber;
@@ -41,6 +44,10 @@ export declare namespace SystemToolConfigOutputParams {
 
     export interface LanguageDetection extends LanguageDetectionToolConfig.Raw {
         system_tool_type: "language_detection";
+    }
+
+    export interface PlayKeypadTouchTone extends PlayDtmfToolConfig.Raw {
+        system_tool_type: "play_keypad_touch_tone";
     }
 
     export interface SkipTurn extends SkipTurnToolConfig.Raw {
