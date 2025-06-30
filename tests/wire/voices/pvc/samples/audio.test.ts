@@ -28,7 +28,9 @@ describe("Audio", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.voices.pvc.samples.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
+        const response = await client.voices.pvc.samples.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", {
+            removeBackgroundNoise: true,
+        });
         expect(response).toEqual({
             audioBase64: "audio_base_64",
             voiceId: "DCwhRBWXzGAHq8TQ4Fs18",

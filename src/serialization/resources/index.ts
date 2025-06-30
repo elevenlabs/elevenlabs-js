@@ -36,5 +36,4 @@ export * from "./textToVoice/client/requests";
 export * from "./voices/client/requests";
 export * from "./studio/client/requests";
 export * from "./pronunciationDictionaries/client/requests";
-export * from "./workspace/client/requests";
 export * from "./conversationalAi/client/requests";

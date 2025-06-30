@@ -9,8 +9,8 @@ import * as core from "../../../../../../core";
 export const ProjectsCreateRequestSourceType: core.serialization.Schema<
     serializers.studio.ProjectsCreateRequestSourceType.Raw,
     ElevenLabs.studio.ProjectsCreateRequestSourceType
-> = core.serialization.enum_(["blank", "book", "article", "genfm"]);
+> = core.serialization.enum_(["blank", "book", "article", "genfm", "video"]);
 
 export declare namespace ProjectsCreateRequestSourceType {
-    export type Raw = "blank" | "book" | "article" | "genfm";
+    export type Raw = "blank" | "book" | "article" | "genfm" | "video";
 }

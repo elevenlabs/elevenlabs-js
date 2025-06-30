@@ -9,6 +9,7 @@ import * as fs from "fs";
  *     {}
  */
 export interface BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost {
+    agentId?: string;
     /** A custom, human-readable name for the document. */
     name?: string;
     /** URL to a page of documentation that the agent will have access to in order to interact with users. */

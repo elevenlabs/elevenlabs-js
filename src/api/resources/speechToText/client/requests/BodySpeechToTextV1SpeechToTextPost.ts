@@ -29,6 +29,8 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     timestampsGranularity?: ElevenLabs.SpeechToTextConvertRequestTimestampsGranularity;
     /** Whether to annotate which speaker is currently talking in the uploaded file. */
     diarize?: boolean;
+    /** Diarization threshold to apply during speaker diarization. A higher value means there will be a lower chance of one speaker being diarized as two different speakers but also a higher chance of two different speakers being diarized as one speaker (less total speakers predicted). A low value means there will be a higher chance of one speaker being diarized as two different speakers but also a lower chance of two different speakers being diarized as one speaker (more total speakers predicted). Can only be set when diarize=True and num_speakers=None. Defaults to None, in which case we will choose a threshold based on the model_id (0.22 usually). */
+    diarizationThreshold?: number;
     /** A list of additional formats to export the transcript to. */
     additionalFormats?: ElevenLabs.AdditionalFormats;
     /** The format of input audio. Options are 'pcm_s16le_16' or 'other' For `pcm_s16le_16`, the input audio must be 16-bit PCM at a 16kHz sample rate, single channel (mono), and little-endian byte order. Latency will be lower than with passing an encoded waveform. */

@@ -22,6 +22,7 @@ describe("Chapters", () => {
                     conversion_progress: 0.5,
                     can_be_downloaded: true,
                     state: "converting",
+                    has_video: true,
                     statistics: {
                         characters_unconverted: 1000,
                         characters_converted: 500,
@@ -50,6 +51,7 @@ describe("Chapters", () => {
                     conversionProgress: 0.5,
                     canBeDownloaded: true,
                     state: "converting",
+                    hasVideo: true,
                     statistics: {
                         charactersUnconverted: 1000,
                         charactersConverted: 500,
@@ -76,14 +78,15 @@ describe("Chapters", () => {
                 last_conversion_date_unix: 1714204800,
                 conversion_progress: 0.5,
                 can_be_downloaded: true,
-                state: "converting",
+                state: "default",
+                has_video: true,
                 statistics: {
-                    characters_unconverted: 1000,
-                    characters_converted: 500,
-                    paragraphs_converted: 20,
-                    paragraphs_unconverted: 10,
+                    characters_unconverted: 100,
+                    characters_converted: 200,
+                    paragraphs_converted: 5,
+                    paragraphs_unconverted: 3,
                 },
-                last_conversion_error: "Error message",
+                last_conversion_error: "last_conversion_error",
                 content: {
                     blocks: [
                         { block_id: "block_id", nodes: [{ voice_id: "voice_id", text: "text", type: "tts_node" }] },
@@ -110,14 +113,15 @@ describe("Chapters", () => {
                 lastConversionDateUnix: 1714204800,
                 conversionProgress: 0.5,
                 canBeDownloaded: true,
-                state: "converting",
+                state: "default",
+                hasVideo: true,
                 statistics: {
-                    charactersUnconverted: 1000,
-                    charactersConverted: 500,
-                    paragraphsConverted: 20,
-                    paragraphsUnconverted: 10,
+                    charactersUnconverted: 100,
+                    charactersConverted: 200,
+                    paragraphsConverted: 5,
+                    paragraphsUnconverted: 3,
                 },
-                lastConversionError: "Error message",
+                lastConversionError: "last_conversion_error",
                 content: {
                     blocks: [
                         {
@@ -149,14 +153,15 @@ describe("Chapters", () => {
             last_conversion_date_unix: 1714204800,
             conversion_progress: 0.5,
             can_be_downloaded: true,
-            state: "converting",
+            state: "default",
+            has_video: true,
             statistics: {
-                characters_unconverted: 1000,
-                characters_converted: 500,
-                paragraphs_converted: 20,
-                paragraphs_unconverted: 10,
+                characters_unconverted: 100,
+                characters_converted: 200,
+                paragraphs_converted: 5,
+                paragraphs_unconverted: 3,
             },
-            last_conversion_error: "Error message",
+            last_conversion_error: "last_conversion_error",
             content: {
                 blocks: [{ block_id: "block_id", nodes: [{ voice_id: "voice_id", text: "text", type: "tts_node" }] }],
             },
@@ -176,14 +181,15 @@ describe("Chapters", () => {
             lastConversionDateUnix: 1714204800,
             conversionProgress: 0.5,
             canBeDownloaded: true,
-            state: "converting",
+            state: "default",
+            hasVideo: true,
             statistics: {
-                charactersUnconverted: 1000,
-                charactersConverted: 500,
-                paragraphsConverted: 20,
-                paragraphsUnconverted: 10,
+                charactersUnconverted: 100,
+                charactersConverted: 200,
+                paragraphsConverted: 5,
+                paragraphsUnconverted: 3,
             },
-            lastConversionError: "Error message",
+            lastConversionError: "last_conversion_error",
             content: {
                 blocks: [
                     {
@@ -215,14 +221,15 @@ describe("Chapters", () => {
                 last_conversion_date_unix: 1714204800,
                 conversion_progress: 0.5,
                 can_be_downloaded: true,
-                state: "converting",
+                state: "default",
+                has_video: true,
                 statistics: {
-                    characters_unconverted: 1000,
-                    characters_converted: 500,
-                    paragraphs_converted: 20,
-                    paragraphs_unconverted: 10,
+                    characters_unconverted: 100,
+                    characters_converted: 200,
+                    paragraphs_converted: 5,
+                    paragraphs_unconverted: 3,
                 },
-                last_conversion_error: "Error message",
+                last_conversion_error: "last_conversion_error",
                 content: {
                     blocks: [
                         { block_id: "block_id", nodes: [{ voice_id: "voice_id", text: "text", type: "tts_node" }] },
@@ -247,14 +254,15 @@ describe("Chapters", () => {
                 lastConversionDateUnix: 1714204800,
                 conversionProgress: 0.5,
                 canBeDownloaded: true,
-                state: "converting",
+                state: "default",
+                hasVideo: true,
                 statistics: {
-                    charactersUnconverted: 1000,
-                    charactersConverted: 500,
-                    paragraphsConverted: 20,
-                    paragraphsUnconverted: 10,
+                    charactersUnconverted: 100,
+                    charactersConverted: 200,
+                    paragraphsConverted: 5,
+                    paragraphsUnconverted: 3,
                 },
-                lastConversionError: "Error message",
+                lastConversionError: "last_conversion_error",
                 content: {
                     blocks: [
                         {

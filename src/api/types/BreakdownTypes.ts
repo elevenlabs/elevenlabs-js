@@ -16,7 +16,9 @@ export type BreakdownTypes =
     | "product_type"
     | "model"
     | "resource"
-    | "request_queue";
+    | "request_queue"
+    | "region"
+    | "subresource_id";
 export const BreakdownTypes = {
     None: "none",
     Voice: "voice",
@@ -29,4 +31,6 @@ export const BreakdownTypes = {
     Model: "model",
     Resource: "resource",
     RequestQueue: "request_queue",
+    Region: "region",
+    SubresourceId: "subresource_id",
 } as const;
