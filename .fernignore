@@ -4,16 +4,8 @@ README.md
 assets/
 
 tests/custom/
-jest.config.js
 
 src/wrapper
 src/index.ts
 
-# Temporary patch for additional_formats serialization format.
-src/api/resources/speechToText/client/Client.ts
-
 .github/workflows
-
-# Return Web Readable Stream
-src/core/fetcher/getResponseBody.ts
-tests/unit/fetcher/getResponseBody.test.ts
