@@ -17,6 +17,8 @@ export interface ChapterWithContentResponseModel {
     canBeDownloaded: boolean;
     /** The state of the chapter. */
     state: ElevenLabs.ChapterWithContentResponseModelState;
+    /** Whether the chapter has a video. */
+    hasVideo?: boolean;
     /** The statistics of the chapter. */
     statistics?: ElevenLabs.ChapterStatisticsResponse;
     /** The last conversion error of the chapter. */

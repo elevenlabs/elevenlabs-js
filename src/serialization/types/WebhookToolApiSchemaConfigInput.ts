@@ -9,6 +9,7 @@ import { WebhookToolApiSchemaConfigInputMethod } from "./WebhookToolApiSchemaCon
 import { LiteralJsonSchemaProperty } from "./LiteralJsonSchemaProperty";
 import { QueryParamsJsonSchema } from "./QueryParamsJsonSchema";
 import { WebhookToolApiSchemaConfigInputRequestHeadersValue } from "./WebhookToolApiSchemaConfigInputRequestHeadersValue";
+import { AuthConnectionLocator } from "./AuthConnectionLocator";
 
 export const WebhookToolApiSchemaConfigInput: core.serialization.ObjectSchema<
     serializers.WebhookToolApiSchemaConfigInput.Raw,
@@ -31,6 +32,7 @@ export const WebhookToolApiSchemaConfigInput: core.serialization.ObjectSchema<
             .record(core.serialization.string(), WebhookToolApiSchemaConfigInputRequestHeadersValue)
             .optional(),
     ),
+    authConnection: core.serialization.property("auth_connection", AuthConnectionLocator.optional()),
 });
 
 export declare namespace WebhookToolApiSchemaConfigInput {
@@ -41,5 +43,6 @@ export declare namespace WebhookToolApiSchemaConfigInput {
         query_params_schema?: QueryParamsJsonSchema.Raw | null;
         request_body_schema?: serializers.ObjectJsonSchemaPropertyInput.Raw | null;
         request_headers?: Record<string, WebhookToolApiSchemaConfigInputRequestHeadersValue.Raw> | null;
+        auth_connection?: AuthConnectionLocator.Raw | null;
     }
 }

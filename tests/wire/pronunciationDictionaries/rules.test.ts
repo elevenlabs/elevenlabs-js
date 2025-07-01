@@ -16,7 +16,7 @@ describe("Rules", () => {
         const rawResponseBody = {
             id: "5xM3yVvZQKV0EfqQpLrJ",
             version_id: "5xM3yVvZQKV0EfqQpLr2",
-            version_rules_num: 1,
+            version_rules_num: 5,
         };
         server
             .mockEndpoint()
@@ -39,7 +39,7 @@ describe("Rules", () => {
         expect(response).toEqual({
             id: "5xM3yVvZQKV0EfqQpLrJ",
             versionId: "5xM3yVvZQKV0EfqQpLr2",
-            versionRulesNum: 1,
+            versionRulesNum: 5,
         });
     });
 
@@ -53,7 +53,7 @@ describe("Rules", () => {
         const rawResponseBody = {
             id: "5xM3yVvZQKV0EfqQpLrJ",
             version_id: "5xM3yVvZQKV0EfqQpLr2",
-            version_rules_num: 1,
+            version_rules_num: 5,
         };
         server
             .mockEndpoint()
@@ -70,7 +70,7 @@ describe("Rules", () => {
         expect(response).toEqual({
             id: "5xM3yVvZQKV0EfqQpLrJ",
             versionId: "5xM3yVvZQKV0EfqQpLr2",
-            versionRulesNum: 1,
+            versionRulesNum: 5,
         });
     });
 });

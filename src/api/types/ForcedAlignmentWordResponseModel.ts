@@ -12,4 +12,6 @@ export interface ForcedAlignmentWordResponseModel {
     start: number;
     /** The end time of the word in seconds. */
     end: number;
+    /** The average alignment loss/confidence score for this word, calculated from its constituent characters. */
+    loss: number;
 }

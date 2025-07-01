@@ -15,4 +15,6 @@ export interface BuiltInToolsInput {
     transferToNumber?: ElevenLabs.SystemToolConfigInput;
     /** The skip turn tool */
     skipTurn?: ElevenLabs.SystemToolConfigInput;
+    /** The play DTMF tool */
+    playKeypadTouchTone?: ElevenLabs.SystemToolConfigInput;
 }

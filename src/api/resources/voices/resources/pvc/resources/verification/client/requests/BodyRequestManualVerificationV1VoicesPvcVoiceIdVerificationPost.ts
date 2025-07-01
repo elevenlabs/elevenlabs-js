@@ -3,6 +3,7 @@
  */
 
 import * as fs from "fs";
+import * as core from "../../../../../../../../../core";
 
 /**
  * @example
@@ -11,7 +12,7 @@ import * as fs from "fs";
  *     }
  */
 export interface BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost {
-    files: File[] | fs.ReadStream[] | Blob[];
+    files: core.FileLike[];
     /** Extra text to be used in the manual verification process. */
     extraText?: string;
 }

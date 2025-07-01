@@ -1204,7 +1204,7 @@ await client.textToVoice.design({
 </dl>
 </details>
 
-## User
+## user
 
 <details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">get</a>() -> ElevenLabs.User</code></summary>
 <dl>
@@ -2334,7 +2334,7 @@ await client.audioNative.update("21m00Tcm4TlvDq8ikWAM", {});
 </dl>
 </details>
 
-## Usage
+## usage
 
 <details><summary><code>client.usage.<a href="/src/api/resources/usage/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.UsageCharactersResponseModel</code></summary>
 <dl>
@@ -2657,248 +2657,6 @@ await client.pronunciationDictionaries.list();
 <dd>
 
 **requestOptions:** `PronunciationDictionaries.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Workspace
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">updateUserAutoProvisioning</a>({ ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update user auto provisioning settings for the workspace.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.updateUserAutoProvisioning({
-    enabled: true,
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyUpdateUserAutoProvisioningV1WorkspaceUserAutoProvisioningPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">getDefaultSharingPreferences</a>() -> ElevenLabs.DefaultSharingPreferencesResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get the user's default sharing preferences.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.getDefaultSharingPreferences();
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">updateDefaultSharingPreferences</a>({ ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update the user's default sharing preferences.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.updateDefaultSharingPreferences({
-    defaultSharingGroups: ["default_sharing_groups"],
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyUpdateDefaultSharingPreferencesV1WorkspaceDefaultSharingPreferencesPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">getShareOptions</a>() -> ElevenLabs.ShareOptionResponseModel[]</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get the share options for a workspace.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workspace.getShareOptions();
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `Workspace.RequestOptions`
 
 </dd>
 </dl>
@@ -6811,7 +6569,7 @@ await client.conversationalAi.knowledgeBase.documents.createFromText({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">get</a>(documentationId) -> ElevenLabs.DocumentsGetResponse</code></summary>
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">get</a>(documentationId, { ...params }) -> ElevenLabs.DocumentsGetResponse</code></summary>
 <dl>
 <dd>
 
@@ -6856,6 +6614,14 @@ await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM"
 <dd>
 
 **documentationId:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetRequest`
 
 </dd>
 </dl>
@@ -10755,7 +10521,7 @@ await client.voices.pvc.verification.request("21m00Tcm4TlvDq8ikWAM", {
 
 ## Voices Pvc Samples Audio
 
-<details><summary><code>client.voices.pvc.samples.audio.<a href="/src/api/resources/voices/resources/pvc/resources/samples/resources/audio/client/Client.ts">get</a>(voiceId, sampleId) -> ElevenLabs.VoiceSamplePreviewResponseModel</code></summary>
+<details><summary><code>client.voices.pvc.samples.audio.<a href="/src/api/resources/voices/resources/pvc/resources/samples/resources/audio/client/Client.ts">get</a>(voiceId, sampleId, { ...params }) -> ElevenLabs.VoiceSamplePreviewResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -10783,7 +10549,9 @@ Retrieve the first 30 seconds of voice sample audio with or without noise remova
 <dd>
 
 ```typescript
-await client.voices.pvc.samples.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
+await client.voices.pvc.samples.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", {
+    removeBackgroundNoise: true,
+});
 ```
 
 </dd>
@@ -10808,6 +10576,14 @@ await client.voices.pvc.samples.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h3
 <dd>
 
 **sampleId:** `string` — Sample ID to be used
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.pvc.samples.AudioGetRequest`
 
 </dd>
 </dl>

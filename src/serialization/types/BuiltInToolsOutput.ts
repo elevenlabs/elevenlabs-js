@@ -16,6 +16,7 @@ export const BuiltInToolsOutput: core.serialization.ObjectSchema<
     transferToAgent: core.serialization.property("transfer_to_agent", SystemToolConfigOutput.optional()),
     transferToNumber: core.serialization.property("transfer_to_number", SystemToolConfigOutput.optional()),
     skipTurn: core.serialization.property("skip_turn", SystemToolConfigOutput.optional()),
+    playKeypadTouchTone: core.serialization.property("play_keypad_touch_tone", SystemToolConfigOutput.optional()),
 });
 
 export declare namespace BuiltInToolsOutput {
@@ -25,5 +26,6 @@ export declare namespace BuiltInToolsOutput {
         transfer_to_agent?: SystemToolConfigOutput.Raw | null;
         transfer_to_number?: SystemToolConfigOutput.Raw | null;
         skip_turn?: SystemToolConfigOutput.Raw | null;
+        play_keypad_touch_tone?: SystemToolConfigOutput.Raw | null;
     }
 }

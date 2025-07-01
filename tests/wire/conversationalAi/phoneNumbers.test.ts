@@ -49,9 +49,9 @@ describe("PhoneNumbers", () => {
         });
 
         const rawResponseBody = {
-            phone_number: "phone_number",
-            label: "label",
-            phone_number_id: "X3Pbu5gP6NNKBscdCdwB",
+            phone_number: "+1234567890",
+            label: "Customer Support",
+            phone_number_id: "phone_123",
             assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
             provider: "twilio",
         };
@@ -66,9 +66,9 @@ describe("PhoneNumbers", () => {
         const response = await client.conversationalAi.phoneNumbers.get("TeaqRRdTcIfIu2i7BYfT");
         expect(response).toEqual({
             provider: "twilio",
-            phoneNumber: "phone_number",
-            label: "label",
-            phoneNumberId: "X3Pbu5gP6NNKBscdCdwB",
+            phoneNumber: "+1234567890",
+            label: "Customer Support",
+            phoneNumberId: "phone_123",
             assignedAgent: {
                 agentId: "F3Pbu5gP6NNKBscdCdwB",
                 agentName: "My Agent",
@@ -106,9 +106,9 @@ describe("PhoneNumbers", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            phone_number: "phone_number",
-            label: "label",
-            phone_number_id: "X3Pbu5gP6NNKBscdCdwB",
+            phone_number: "+1234567890",
+            label: "Customer Support",
+            phone_number_id: "phone_123",
             assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
             provider: "twilio",
         };
@@ -124,9 +124,9 @@ describe("PhoneNumbers", () => {
         const response = await client.conversationalAi.phoneNumbers.update("TeaqRRdTcIfIu2i7BYfT");
         expect(response).toEqual({
             provider: "twilio",
-            phoneNumber: "phone_number",
-            label: "label",
-            phoneNumberId: "X3Pbu5gP6NNKBscdCdwB",
+            phoneNumber: "+1234567890",
+            label: "Customer Support",
+            phoneNumberId: "phone_123",
             assignedAgent: {
                 agentId: "F3Pbu5gP6NNKBscdCdwB",
                 agentName: "My Agent",
@@ -143,16 +143,16 @@ describe("PhoneNumbers", () => {
 
         const rawResponseBody = [
             {
-                phone_number: "phone_number",
-                label: "label",
-                phone_number_id: "X3Pbu5gP6NNKBscdCdwB",
+                phone_number: "+1234567890",
+                label: "Customer Support",
+                phone_number_id: "phone_123",
                 assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
                 provider: "twilio",
             },
         ];
         server
             .mockEndpoint()
-            .get("/v1/convai/phone-numbers/")
+            .get("/v1/convai/phone-numbers")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
@@ -162,9 +162,9 @@ describe("PhoneNumbers", () => {
         expect(response).toEqual([
             {
                 provider: "twilio",
-                phoneNumber: "phone_number",
-                label: "label",
-                phoneNumberId: "X3Pbu5gP6NNKBscdCdwB",
+                phoneNumber: "+1234567890",
+                label: "Customer Support",
+                phoneNumberId: "phone_123",
                 assignedAgent: {
                     agentId: "F3Pbu5gP6NNKBscdCdwB",
                     agentName: "My Agent",

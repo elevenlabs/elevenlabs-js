@@ -3,6 +3,7 @@
  */
 
 import * as fs from "fs";
+import * as core from "../../../../../../../../../../../core";
 
 /**
  * @example
@@ -11,5 +12,5 @@ import * as fs from "fs";
  *     }
  */
 export interface BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost {
-    avatarFile: File | fs.ReadStream | Blob;
+    avatarFile: core.FileLike;
 }
