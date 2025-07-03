@@ -13,6 +13,7 @@ export const ForcedAlignmentWordResponseModel: core.serialization.ObjectSchema<
     text: core.serialization.string(),
     start: core.serialization.number(),
     end: core.serialization.number(),
+    loss: core.serialization.number(),
 });
 
 export declare namespace ForcedAlignmentWordResponseModel {
@@ -20,5 +21,6 @@ export declare namespace ForcedAlignmentWordResponseModel {
         text: string;
         start: number;
         end: number;
+        loss: number;
     }
 }

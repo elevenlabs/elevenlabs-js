@@ -22,6 +22,7 @@ export const ChapterWithContentResponseModel: core.serialization.ObjectSchema<
     conversionProgress: core.serialization.property("conversion_progress", core.serialization.number().optional()),
     canBeDownloaded: core.serialization.property("can_be_downloaded", core.serialization.boolean()),
     state: ChapterWithContentResponseModelState,
+    hasVideo: core.serialization.property("has_video", core.serialization.boolean().optional()),
     statistics: ChapterStatisticsResponse.optional(),
     lastConversionError: core.serialization.property("last_conversion_error", core.serialization.string().optional()),
     content: ChapterContentResponseModel,
@@ -35,6 +36,7 @@ export declare namespace ChapterWithContentResponseModel {
         conversion_progress?: number | null;
         can_be_downloaded: boolean;
         state: ChapterWithContentResponseModelState.Raw;
+        has_video?: boolean | null;
         statistics?: ChapterStatisticsResponse.Raw | null;
         last_conversion_error?: string | null;
         content: ChapterContentResponseModel.Raw;

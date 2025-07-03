@@ -12,4 +12,6 @@ export interface ForcedAlignmentResponseModel {
     characters: ElevenLabs.ForcedAlignmentCharacterResponseModel[];
     /** List of words with their timing information. */
     words: ElevenLabs.ForcedAlignmentWordResponseModel[];
+    /** The average alignment loss/confidence score for the entire transcript, calculated from all characters. */
+    loss: number;
 }

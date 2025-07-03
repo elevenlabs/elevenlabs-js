@@ -83,7 +83,7 @@ describe("Tools", () => {
                     description: "description",
                     properties: {
                         key: {
-                            type: "boolean",
+                            type: "string",
                             description: "My property",
                             dynamic_variable: "Dynamic variable",
                             constant_value: "Constant value",
@@ -131,7 +131,7 @@ describe("Tools", () => {
                     description: "description",
                     properties: {
                         key: {
-                            type: "boolean",
+                            type: "string",
                             description: "My property",
                             dynamicVariable: "Dynamic variable",
                             constantValue: "Constant value",
@@ -173,7 +173,7 @@ describe("Tools", () => {
                     description: "description",
                     properties: {
                         key: {
-                            type: "boolean",
+                            type: "string",
                             description: "My property",
                             dynamic_variable: "Dynamic variable",
                             constant_value: "Constant value",
@@ -213,7 +213,7 @@ describe("Tools", () => {
                     description: "description",
                     properties: {
                         key: {
-                            type: "boolean",
+                            type: "string",
                             description: "My property",
                             dynamicVariable: "Dynamic variable",
                             constantValue: "Constant value",
@@ -279,7 +279,7 @@ describe("Tools", () => {
                     description: "description",
                     properties: {
                         key: {
-                            type: "boolean",
+                            type: "string",
                             description: "My property",
                             dynamic_variable: "Dynamic variable",
                             constant_value: "Constant value",
@@ -327,7 +327,7 @@ describe("Tools", () => {
                     description: "description",
                     properties: {
                         key: {
-                            type: "boolean",
+                            type: "string",
                             description: "My property",
                             dynamicVariable: "Dynamic variable",
                             constantValue: "Constant value",

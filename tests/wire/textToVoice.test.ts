@@ -197,10 +197,11 @@ describe("TextToVoice", () => {
             verified_languages: [
                 {
                     language: "en",
-                    model_id: "eleven_turbo_v2_5",
-                    accent: "American",
-                    locale: "locale",
-                    preview_url: "preview_url",
+                    model_id: "eleven_multilingual_v2",
+                    accent: "american",
+                    locale: "en-US",
+                    preview_url:
+                        "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
                 },
             ],
             safety_control: "NONE",
@@ -406,10 +407,11 @@ describe("TextToVoice", () => {
             verifiedLanguages: [
                 {
                     language: "en",
-                    modelId: "eleven_turbo_v2_5",
-                    accent: "American",
-                    locale: "locale",
-                    previewUrl: "preview_url",
+                    modelId: "eleven_multilingual_v2",
+                    accent: "american",
+                    locale: "en-US",
+                    previewUrl:
+                        "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
                 },
             ],
             safetyControl: "NONE",
@@ -592,10 +594,11 @@ describe("TextToVoice", () => {
             verified_languages: [
                 {
                     language: "en",
-                    model_id: "eleven_turbo_v2_5",
-                    accent: "American",
-                    locale: "locale",
-                    preview_url: "preview_url",
+                    model_id: "eleven_multilingual_v2",
+                    accent: "american",
+                    locale: "en-US",
+                    preview_url:
+                        "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
                 },
             ],
             safety_control: "NONE",
@@ -801,10 +804,11 @@ describe("TextToVoice", () => {
             verifiedLanguages: [
                 {
                     language: "en",
-                    modelId: "eleven_turbo_v2_5",
-                    accent: "American",
-                    locale: "locale",
-                    previewUrl: "preview_url",
+                    modelId: "eleven_multilingual_v2",
+                    accent: "american",
+                    locale: "en-US",
+                    previewUrl:
+                        "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
                 },
             ],
             safetyControl: "NONE",

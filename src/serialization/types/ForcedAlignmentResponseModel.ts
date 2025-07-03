@@ -14,11 +14,13 @@ export const ForcedAlignmentResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     characters: core.serialization.list(ForcedAlignmentCharacterResponseModel),
     words: core.serialization.list(ForcedAlignmentWordResponseModel),
+    loss: core.serialization.number(),
 });
 
 export declare namespace ForcedAlignmentResponseModel {
     export interface Raw {
         characters: ForcedAlignmentCharacterResponseModel.Raw[];
         words: ForcedAlignmentWordResponseModel.Raw[];
+        loss: number;
     }
 }

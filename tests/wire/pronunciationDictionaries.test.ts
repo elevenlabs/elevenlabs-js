@@ -22,7 +22,7 @@ describe("PronunciationDictionaries", () => {
             created_by: "ar6633Es2kUjFXBdR1iVc9ztsXl1",
             creation_time_unix: 1714156800,
             version_id: "5xM3yVvZQKV0EfqQpLrJ",
-            version_rules_num: 1,
+            version_rules_num: 5,
             description: "This is a test dictionary",
             permission_on_resource: "admin",
         };
@@ -51,7 +51,7 @@ describe("PronunciationDictionaries", () => {
             createdBy: "ar6633Es2kUjFXBdR1iVc9ztsXl1",
             creationTimeUnix: 1714156800,
             versionId: "5xM3yVvZQKV0EfqQpLrJ",
-            versionRulesNum: 1,
+            versionRulesNum: 5,
             description: "This is a test dictionary",
             permissionOnResource: "admin",
         });
@@ -77,7 +77,7 @@ describe("PronunciationDictionaries", () => {
         };
         server
             .mockEndpoint()
-            .get("/v1/pronunciation-dictionaries/21m00Tcm4TlvDq8ikWAM/")
+            .get("/v1/pronunciation-dictionaries/21m00Tcm4TlvDq8ikWAM")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
@@ -123,7 +123,7 @@ describe("PronunciationDictionaries", () => {
         };
         server
             .mockEndpoint()
-            .get("/v1/pronunciation-dictionaries/")
+            .get("/v1/pronunciation-dictionaries")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)

@@ -7,6 +7,7 @@ import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import * as serializers from "../../../../serialization/index";
 import { toJson } from "../../../../core/json";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
@@ -17,6 +18,8 @@ export declare namespace SpeechToText {
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
+        /** Additional headers to include in requests. */
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 
     export interface RequestOptions {
@@ -29,12 +32,16 @@ export declare namespace SpeechToText {
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string>;
+        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
 }
 
 export class SpeechToText {
-    constructor(protected readonly _options: SpeechToText.Options = {}) {}
+    protected readonly _options: SpeechToText.Options;
+
+    constructor(_options: SpeechToText.Options = {}) {
+        this._options = _options;
+    }
 
     /**
      * Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks.
@@ -96,14 +103,13 @@ export class SpeechToText {
             _request.append("diarize", request.diarize.toString());
         }
 
-        // Customized by hand
-        if (request.additionalFormats != null) {
-            _request.append(
-                "additional_formats",
-                toJson(serializers.AdditionalFormats.jsonOrThrow(request.additionalFormats, { unrecognizedObjectKeys: "strip" })),
-            );
+        if (request.diarizationThreshold != null) {
+            _request.append("diarization_threshold", request.diarizationThreshold.toString());
         }
-        // end of customization
+
+        if (request.additionalFormats != null) {
+            _request.append("additional_formats", toJson(request.additionalFormats));
+        }
 
         if (request.fileFormat != null) {
             _request.append(
@@ -122,6 +128,10 @@ export class SpeechToText {
             _request.append("webhook", request.webhook.toString());
         }
 
+        if (request.temperature != null) {
+            _request.append("temperature", request.temperature.toString());
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: urlJoin(
@@ -133,20 +143,11 @@ export class SpeechToText {
                 "v1/speech-to-text",
             ),
             method: "POST",
-            headers: {
-                "xi-api-key":
-                    (await core.Supplier.get(this._options.apiKey)) != null
-                        ? await core.Supplier.get(this._options.apiKey)
-                        : undefined,
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                "X-Fern-SDK-Version": "2.2.1",
-                "User-Agent": "@elevenlabs/elevenlabs-js/2.2.1",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ..._maybeEncodedRequest.headers,
-                ...requestOptions?.headers,
-            },
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey, ..._maybeEncodedRequest.headers }),
+                requestOptions?.headers,
+            ),
             queryParameters: _queryParams,
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
