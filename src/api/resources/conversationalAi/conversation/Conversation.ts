@@ -171,17 +171,17 @@ export class Conversation extends EventEmitter {
      *
      * Contextual updates are non-interrupting content that is sent to the server
      * to update the conversation state without directly prompting the agent.
-     *
-     * @param content The contextual information to send to the conversation
+     * 
+     * @param text The contextual information to send to the conversation
      */
-    public sendContextualUpdate(content: string): void {
+    public sendContextualUpdate(text: string): void {
         if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
             throw new Error("Session not started or websocket not connected");
         }
 
         const event: ContextualUpdateClientToOrchestratorEvent = {
             type: ClientToOrchestratorEvent.CONTEXTUAL_UPDATE,
-            content,
+            text,
         };
 
         this.ws.send(JSON.stringify(event));

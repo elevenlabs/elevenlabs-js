@@ -201,7 +201,7 @@ describe("Conversation", () => {
             expect(mockWebSocket.send).toHaveBeenCalledWith(
                 JSON.stringify({
                     type: "contextual_update",
-                    content: "User is looking at product page",
+                    text: "User is looking at product page",
                 })
             );
         });
