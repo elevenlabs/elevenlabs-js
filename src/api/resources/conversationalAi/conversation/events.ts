@@ -41,7 +41,7 @@ export interface UserActivityClientToOrchestratorEvent extends BaseClientToOrche
  */
 export interface ContextualUpdateClientToOrchestratorEvent extends BaseClientToOrchestratorEvent {
     type: ClientToOrchestratorEvent.CONTEXTUAL_UPDATE;
-    content: string;
+    text: string;
 }
 
 /**
