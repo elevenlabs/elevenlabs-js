@@ -9,3 +9,5 @@ src/wrapper
 src/index.ts
 
 .github/workflows
+
+src/api/resources/conversationalAi/conversation
