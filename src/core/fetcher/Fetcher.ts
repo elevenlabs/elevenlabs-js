@@ -6,6 +6,7 @@ import { createRequestUrl } from "./createRequestUrl";
 import { getFetchFn } from "./getFetchFn";
 import { getRequestBody } from "./getRequestBody";
 import { getResponseBody } from "./getResponseBody";
+import { getBadResponseBody } from "./getBadResponseBody";
 import { makeRequest } from "./makeRequest";
 import { requestWithRetries } from "./requestWithRetries";
 
@@ -100,12 +101,11 @@ export async function fetcherImpl<R = unknown>(args: Fetcher.Args): Promise<APIR
                 ),
             args.maxRetries,
         );
-        const responseBody = await getResponseBody(response, args.responseType);
 
         if (response.status >= 200 && response.status < 400) {
             return {
                 ok: true,
-                body: responseBody as R,
+                body: await getResponseBody(response, args.responseType) as R,
                 headers: response.headers,
                 rawResponse: toRawResponse(response),
             };
@@ -115,7 +115,7 @@ export async function fetcherImpl<R = unknown>(args: Fetcher.Args): Promise<APIR
                 error: {
                     reason: "status-code",
                     statusCode: response.status,
-                    body: responseBody,
+                    body: await getBadResponseBody(response),
                 },
                 rawResponse: toRawResponse(response),
             };
