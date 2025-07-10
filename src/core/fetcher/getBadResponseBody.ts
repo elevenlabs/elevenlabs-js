@@ -19,18 +19,14 @@ export async function getBadResponseBody(response: Response): Promise<unknown> {
         case "text/json":
             const text = await response.text();
             return text.length > 0 ? fromJson(text) : undefined;
-        case "application/problem+xml":
-        case "application/xml":
-        case "text/html":
-        case "text/plain":
-        case "text/xml":
-            return await response.text();
         default:
             if (contentType.startsWith("application/vnd.") && contentType.endsWith("+json")) {
                 const text = await response.text();
                 return text.length > 0 ? fromJson(text) : undefined;
             }
 
-            return response.body;
+            // Fallback to plain text if content type is not recognized
+            // Even if no body is present, the response will be an empty string
+            return await response.text();
     }
 }
