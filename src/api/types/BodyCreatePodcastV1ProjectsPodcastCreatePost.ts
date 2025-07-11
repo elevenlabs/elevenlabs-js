@@ -28,6 +28,12 @@ export interface BodyCreatePodcastV1ProjectsPodcastCreatePost {
     durationScale?: ElevenLabs.BodyCreatePodcastV1ProjectsPodcastCreatePostDurationScale;
     /** An optional language of the Studio project. Two-letter language code (ISO 639-1). */
     language?: string;
+    /** The intro text that will always be added to the beginning of the podcast. */
+    intro?: string;
+    /** The outro text that will always be added to the end of the podcast. */
+    outro?: string;
+    /** Additional instructions prompt for the podcast generation used to adjust the podcast's style and tone. */
+    instructionsPrompt?: string;
     /** A brief summary or highlights of the Studio project's content, providing key points or themes. This should be between 10 and 70 characters. */
     highlights?: string[];
     /**

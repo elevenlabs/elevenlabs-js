@@ -8,9 +8,9 @@ import * as core from "../../core";
 import { SipTrunkTransportEnum } from "./SipTrunkTransportEnum";
 import { SipMediaEncryptionEnum } from "./SipMediaEncryptionEnum";
 
-export const SipTrunkConfigResponseModel: core.serialization.ObjectSchema<
-    serializers.SipTrunkConfigResponseModel.Raw,
-    ElevenLabs.SipTrunkConfigResponseModel
+export const GetPhoneNumberOutboundSipTrunkConfigResponseModel: core.serialization.ObjectSchema<
+    serializers.GetPhoneNumberOutboundSipTrunkConfigResponseModel.Raw,
+    ElevenLabs.GetPhoneNumberOutboundSipTrunkConfigResponseModel
 > = core.serialization.object({
     address: core.serialization.string(),
     transport: SipTrunkTransportEnum,
@@ -21,7 +21,7 @@ export const SipTrunkConfigResponseModel: core.serialization.ObjectSchema<
     hasOutboundTrunk: core.serialization.property("has_outbound_trunk", core.serialization.boolean().optional()),
 });
 
-export declare namespace SipTrunkConfigResponseModel {
+export declare namespace GetPhoneNumberOutboundSipTrunkConfigResponseModel {
     export interface Raw {
         address: string;
         transport: SipTrunkTransportEnum.Raw;

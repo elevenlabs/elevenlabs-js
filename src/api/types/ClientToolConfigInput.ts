@@ -10,7 +10,7 @@ import * as ElevenLabs from "../index";
 export interface ClientToolConfigInput {
     name: string;
     description: string;
-    /** The maximum time in seconds to wait for the tool call to complete. Must be between 1 and 30 seconds (inclusive). */
+    /** The maximum time in seconds to wait for the tool call to complete. Must be between 1 and 120 seconds (inclusive). */
     responseTimeoutSecs?: number;
     /** Schema for any parameters to pass to the client */
     parameters?: ElevenLabs.ObjectJsonSchemaPropertyInput;

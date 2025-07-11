@@ -6,15 +6,15 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 
-export const SipTrunkCredentials: core.serialization.ObjectSchema<
-    serializers.SipTrunkCredentials.Raw,
-    ElevenLabs.SipTrunkCredentials
+export const SipTrunkCredentialsRequestModel: core.serialization.ObjectSchema<
+    serializers.SipTrunkCredentialsRequestModel.Raw,
+    ElevenLabs.SipTrunkCredentialsRequestModel
 > = core.serialization.object({
     username: core.serialization.string(),
     password: core.serialization.string(),
 });
 
-export declare namespace SipTrunkCredentials {
+export declare namespace SipTrunkCredentialsRequestModel {
     export interface Raw {
         username: string;
         password: string;

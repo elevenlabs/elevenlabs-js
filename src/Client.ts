@@ -4,7 +4,7 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
-import { mergeHeaders } from "./core/headers.js";
+import { mergeHeaders } from "./core/headers";
 import { History } from "./api/resources/history/client/Client";
 import { TextToSoundEffects } from "./api/resources/textToSoundEffects/client/Client";
 import { AudioIsolation } from "./api/resources/audioIsolation/client/Client";
@@ -84,8 +84,8 @@ export class ElevenLabsClient {
                     "xi-api-key": _options?.apiKey,
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                    "X-Fern-SDK-Version": "v2.5.0",
-                    "User-Agent": "@elevenlabs/elevenlabs-js/v2.5.0",
+                    "X-Fern-SDK-Version": "v2.6.0",
+                    "User-Agent": "@elevenlabs/elevenlabs-js/v2.6.0",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },

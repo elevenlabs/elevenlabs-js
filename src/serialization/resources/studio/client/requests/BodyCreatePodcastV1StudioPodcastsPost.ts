@@ -26,6 +26,9 @@ export const BodyCreatePodcastV1StudioPodcastsPost: core.serialization.Schema<
         BodyCreatePodcastV1StudioPodcastsPostDurationScale.optional(),
     ),
     language: core.serialization.string().optional(),
+    intro: core.serialization.string().optional(),
+    outro: core.serialization.string().optional(),
+    instructionsPrompt: core.serialization.property("instructions_prompt", core.serialization.string().optional()),
     highlights: core.serialization.list(core.serialization.string()).optional(),
     callbackUrl: core.serialization.property("callback_url", core.serialization.string().optional()),
 });
@@ -38,6 +41,9 @@ export declare namespace BodyCreatePodcastV1StudioPodcastsPost {
         quality_preset?: BodyCreatePodcastV1StudioPodcastsPostQualityPreset.Raw | null;
         duration_scale?: BodyCreatePodcastV1StudioPodcastsPostDurationScale.Raw | null;
         language?: string | null;
+        intro?: string | null;
+        outro?: string | null;
+        instructions_prompt?: string | null;
         highlights?: string[] | null;
         callback_url?: string | null;
     }

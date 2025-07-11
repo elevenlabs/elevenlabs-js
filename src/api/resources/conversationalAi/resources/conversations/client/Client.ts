@@ -5,8 +5,7 @@
 import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers.js";
-import urlJoin from "url-join";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers";
 import * as serializers from "../../../../../../serialization/index";
 import * as errors from "../../../../../../errors/index";
 import { Audio } from "../resources/audio/client/Client";
@@ -82,7 +81,7 @@ export class Conversations {
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["agent_id"] = agentId;
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -204,7 +203,7 @@ export class Conversations {
         }
 
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -296,7 +295,7 @@ export class Conversations {
         requestOptions?: Conversations.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetConversationResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -389,7 +388,7 @@ export class Conversations {
         requestOptions?: Conversations.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??

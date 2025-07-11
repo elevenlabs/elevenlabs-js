@@ -11,10 +11,12 @@ export const ConvAiWebhooks: core.serialization.ObjectSchema<
     ElevenLabs.ConvAiWebhooks
 > = core.serialization.object({
     postCallWebhookId: core.serialization.property("post_call_webhook_id", core.serialization.string().optional()),
+    sendAudio: core.serialization.property("send_audio", core.serialization.boolean().optional()),
 });
 
 export declare namespace ConvAiWebhooks {
     export interface Raw {
         post_call_webhook_id?: string | null;
+        send_audio?: boolean | null;
     }
 }

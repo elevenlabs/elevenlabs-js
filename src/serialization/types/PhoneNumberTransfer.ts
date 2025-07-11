@@ -5,18 +5,27 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { PhoneNumberTransferTransferDestination } from "./PhoneNumberTransferTransferDestination";
+import { TransferTypeEnum } from "./TransferTypeEnum";
 
 export const PhoneNumberTransfer: core.serialization.ObjectSchema<
     serializers.PhoneNumberTransfer.Raw,
     ElevenLabs.PhoneNumberTransfer
 > = core.serialization.object({
-    phoneNumber: core.serialization.property("phone_number", core.serialization.string()),
+    transferDestination: core.serialization.property(
+        "transfer_destination",
+        PhoneNumberTransferTransferDestination.optional(),
+    ),
+    phoneNumber: core.serialization.property("phone_number", core.serialization.string().optional()),
     condition: core.serialization.string(),
+    transferType: core.serialization.property("transfer_type", TransferTypeEnum.optional()),
 });
 
 export declare namespace PhoneNumberTransfer {
     export interface Raw {
-        phone_number: string;
+        transfer_destination?: PhoneNumberTransferTransferDestination.Raw | null;
+        phone_number?: string | null;
         condition: string;
+        transfer_type?: TransferTypeEnum.Raw | null;
     }
 }

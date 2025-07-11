@@ -6,8 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import * as serializers from "../../../../serialization/index";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
-import urlJoin from "url-join";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers";
 import * as errors from "../../../../errors/index";
 import { Rules } from "../resources/rules/client/Client";
 
@@ -94,7 +93,7 @@ export class PronunciationDictionaries {
 
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -197,7 +196,7 @@ export class PronunciationDictionaries {
         requestOptions?: PronunciationDictionaries.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AddPronunciationDictionaryResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -291,7 +290,7 @@ export class PronunciationDictionaries {
         requestOptions?: PronunciationDictionaries.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const _response = await core.fetcher<ReadableStream<Uint8Array>>({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -377,7 +376,7 @@ export class PronunciationDictionaries {
         requestOptions?: PronunciationDictionaries.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetPronunciationDictionaryMetadataResponse>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -490,7 +489,7 @@ export class PronunciationDictionaries {
         }
 
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??

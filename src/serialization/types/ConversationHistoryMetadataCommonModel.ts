@@ -14,6 +14,8 @@ import { ConversationHistoryBatchCallModel } from "./ConversationHistoryBatchCal
 import { ConversationHistoryErrorCommonModel } from "./ConversationHistoryErrorCommonModel";
 import { ConversationHistoryRagUsageCommonModel } from "./ConversationHistoryRagUsageCommonModel";
 import { FeaturesUsageCommonModel } from "./FeaturesUsageCommonModel";
+import { ConversationHistoryElevenAssistantCommonModel } from "./ConversationHistoryElevenAssistantCommonModel";
+import { ConversationInitiationSource } from "./ConversationInitiationSource";
 
 export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSchema<
     serializers.ConversationHistoryMetadataCommonModel.Raw,
@@ -38,6 +40,15 @@ export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSc
     ragUsage: core.serialization.property("rag_usage", ConversationHistoryRagUsageCommonModel.optional()),
     textOnly: core.serialization.property("text_only", core.serialization.boolean().optional()),
     featuresUsage: core.serialization.property("features_usage", FeaturesUsageCommonModel.optional()),
+    elevenAssistant: core.serialization.property(
+        "eleven_assistant",
+        ConversationHistoryElevenAssistantCommonModel.optional(),
+    ),
+    initiatorId: core.serialization.property("initiator_id", core.serialization.string().optional()),
+    conversationInitiationSource: core.serialization.property(
+        "conversation_initiation_source",
+        ConversationInitiationSource.optional(),
+    ),
 });
 
 export declare namespace ConversationHistoryMetadataCommonModel {
@@ -58,5 +69,8 @@ export declare namespace ConversationHistoryMetadataCommonModel {
         rag_usage?: ConversationHistoryRagUsageCommonModel.Raw | null;
         text_only?: boolean | null;
         features_usage?: FeaturesUsageCommonModel.Raw | null;
+        eleven_assistant?: ConversationHistoryElevenAssistantCommonModel.Raw | null;
+        initiator_id?: string | null;
+        conversation_initiation_source?: ConversationInitiationSource.Raw | null;
     }
 }

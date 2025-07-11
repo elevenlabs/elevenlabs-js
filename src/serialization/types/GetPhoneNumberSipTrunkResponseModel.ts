@@ -6,7 +6,8 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { PhoneNumberAgentInfo } from "./PhoneNumberAgentInfo";
-import { SipTrunkConfigResponseModel } from "./SipTrunkConfigResponseModel";
+import { GetPhoneNumberOutboundSipTrunkConfigResponseModel } from "./GetPhoneNumberOutboundSipTrunkConfigResponseModel";
+import { GetPhoneNumberInboundSipTrunkConfigResponseModel } from "./GetPhoneNumberInboundSipTrunkConfigResponseModel";
 
 export const GetPhoneNumberSipTrunkResponseModel: core.serialization.ObjectSchema<
     serializers.GetPhoneNumberSipTrunkResponseModel.Raw,
@@ -16,7 +17,18 @@ export const GetPhoneNumberSipTrunkResponseModel: core.serialization.ObjectSchem
     label: core.serialization.string(),
     phoneNumberId: core.serialization.property("phone_number_id", core.serialization.string()),
     assignedAgent: core.serialization.property("assigned_agent", PhoneNumberAgentInfo.optional()),
-    providerConfig: core.serialization.property("provider_config", SipTrunkConfigResponseModel.optional()),
+    providerConfig: core.serialization.property(
+        "provider_config",
+        GetPhoneNumberOutboundSipTrunkConfigResponseModel.optional(),
+    ),
+    outboundTrunk: core.serialization.property(
+        "outbound_trunk",
+        GetPhoneNumberOutboundSipTrunkConfigResponseModel.optional(),
+    ),
+    inboundTrunk: core.serialization.property(
+        "inbound_trunk",
+        GetPhoneNumberInboundSipTrunkConfigResponseModel.optional(),
+    ),
 });
 
 export declare namespace GetPhoneNumberSipTrunkResponseModel {
@@ -25,6 +37,8 @@ export declare namespace GetPhoneNumberSipTrunkResponseModel {
         label: string;
         phone_number_id: string;
         assigned_agent?: PhoneNumberAgentInfo.Raw | null;
-        provider_config?: SipTrunkConfigResponseModel.Raw | null;
+        provider_config?: GetPhoneNumberOutboundSipTrunkConfigResponseModel.Raw | null;
+        outbound_trunk?: GetPhoneNumberOutboundSipTrunkConfigResponseModel.Raw | null;
+        inbound_trunk?: GetPhoneNumberInboundSipTrunkConfigResponseModel.Raw | null;
     }
 }

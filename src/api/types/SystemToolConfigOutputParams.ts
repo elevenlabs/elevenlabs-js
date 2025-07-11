@@ -33,7 +33,7 @@ export namespace SystemToolConfigOutputParams {
         systemToolType: "transfer_to_agent";
     }
 
-    export interface TransferToNumber extends ElevenLabs.TransferToNumberToolConfig {
+    export interface TransferToNumber extends ElevenLabs.TransferToNumberToolConfigOutput {
         systemToolType: "transfer_to_number";
     }
 }

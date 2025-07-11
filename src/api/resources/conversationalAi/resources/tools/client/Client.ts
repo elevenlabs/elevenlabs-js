@@ -5,8 +5,7 @@
 import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers.js";
-import urlJoin from "url-join";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers";
 import * as serializers from "../../../../../../serialization/index";
 import * as errors from "../../../../../../errors/index";
 
@@ -60,7 +59,7 @@ export class Tools {
         requestOptions?: Tools.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ToolsResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -158,7 +157,7 @@ export class Tools {
         requestOptions?: Tools.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ToolResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -252,7 +251,7 @@ export class Tools {
         requestOptions?: Tools.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ToolResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -342,7 +341,7 @@ export class Tools {
         requestOptions?: Tools.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -437,7 +436,7 @@ export class Tools {
         requestOptions?: Tools.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ToolResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -546,7 +545,7 @@ export class Tools {
         }
 
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??

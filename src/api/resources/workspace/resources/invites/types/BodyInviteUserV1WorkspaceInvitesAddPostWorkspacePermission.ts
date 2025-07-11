@@ -18,7 +18,9 @@ export type BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission =
     | "quality_check_admin"
     | "workspace_migration_admin"
     | "human_reviewer"
-    | "productions_admin";
+    | "productions_admin"
+    | "support"
+    | "internal";
 export const BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission = {
     External: "external",
     Admin: "admin",
@@ -36,4 +38,6 @@ export const BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission = {
     WorkspaceMigrationAdmin: "workspace_migration_admin",
     HumanReviewer: "human_reviewer",
     ProductionsAdmin: "productions_admin",
+    Support: "support",
+    Internal: "internal",
 } as const;

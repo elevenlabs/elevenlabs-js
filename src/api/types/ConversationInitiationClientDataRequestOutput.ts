@@ -7,6 +7,8 @@ import * as ElevenLabs from "../index";
 export interface ConversationInitiationClientDataRequestOutput {
     conversationConfigOverride?: ElevenLabs.ConversationConfigClientOverrideOutput;
     customLlmExtraBody?: Record<string, unknown>;
+    /** ID of the end user participating in this conversation (for agent owner's user identification) */
+    userId?: string;
     dynamicVariables?: Record<
         string,
         ElevenLabs.ConversationInitiationClientDataRequestOutputDynamicVariablesValue | undefined

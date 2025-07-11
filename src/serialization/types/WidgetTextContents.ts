@@ -12,6 +12,7 @@ export const WidgetTextContents: core.serialization.ObjectSchema<
 > = core.serialization.object({
     mainLabel: core.serialization.property("main_label", core.serialization.string().optional()),
     startCall: core.serialization.property("start_call", core.serialization.string().optional()),
+    startChat: core.serialization.property("start_chat", core.serialization.string().optional()),
     newCall: core.serialization.property("new_call", core.serialization.string().optional()),
     endCall: core.serialization.property("end_call", core.serialization.string().optional()),
     muteMicrophone: core.serialization.property("mute_microphone", core.serialization.string().optional()),
@@ -24,8 +25,17 @@ export const WidgetTextContents: core.serialization.ObjectSchema<
     listeningStatus: core.serialization.property("listening_status", core.serialization.string().optional()),
     speakingStatus: core.serialization.property("speaking_status", core.serialization.string().optional()),
     connectingStatus: core.serialization.property("connecting_status", core.serialization.string().optional()),
+    chattingStatus: core.serialization.property("chatting_status", core.serialization.string().optional()),
     inputLabel: core.serialization.property("input_label", core.serialization.string().optional()),
     inputPlaceholder: core.serialization.property("input_placeholder", core.serialization.string().optional()),
+    inputPlaceholderTextOnly: core.serialization.property(
+        "input_placeholder_text_only",
+        core.serialization.string().optional(),
+    ),
+    inputPlaceholderNewConversation: core.serialization.property(
+        "input_placeholder_new_conversation",
+        core.serialization.string().optional(),
+    ),
     userEndedConversation: core.serialization.property(
         "user_ended_conversation",
         core.serialization.string().optional(),
@@ -43,6 +53,7 @@ export declare namespace WidgetTextContents {
     export interface Raw {
         main_label?: string | null;
         start_call?: string | null;
+        start_chat?: string | null;
         new_call?: string | null;
         end_call?: string | null;
         mute_microphone?: string | null;
@@ -55,8 +66,11 @@ export declare namespace WidgetTextContents {
         listening_status?: string | null;
         speaking_status?: string | null;
         connecting_status?: string | null;
+        chatting_status?: string | null;
         input_label?: string | null;
         input_placeholder?: string | null;
+        input_placeholder_text_only?: string | null;
+        input_placeholder_new_conversation?: string | null;
         user_ended_conversation?: string | null;
         agent_ended_conversation?: string | null;
         conversation_id?: string | null;

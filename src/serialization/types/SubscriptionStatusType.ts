@@ -9,25 +9,8 @@ import * as core from "../../core";
 export const SubscriptionStatusType: core.serialization.Schema<
     serializers.SubscriptionStatusType.Raw,
     ElevenLabs.SubscriptionStatusType
-> = core.serialization.enum_([
-    "trialing",
-    "active",
-    "incomplete",
-    "incomplete_expired",
-    "past_due",
-    "free",
-    "free_disabled",
-    "canceled",
-]);
+> = core.serialization.enum_(["trialing", "active", "incomplete", "past_due", "free", "free_disabled"]);
 
 export declare namespace SubscriptionStatusType {
-    export type Raw =
-        | "trialing"
-        | "active"
-        | "incomplete"
-        | "incomplete_expired"
-        | "past_due"
-        | "free"
-        | "free_disabled"
-        | "canceled";
+    export type Raw = "trialing" | "active" | "incomplete" | "past_due" | "free" | "free_disabled";
 }

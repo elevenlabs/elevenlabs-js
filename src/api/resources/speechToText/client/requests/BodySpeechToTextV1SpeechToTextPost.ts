@@ -41,4 +41,6 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     webhook?: boolean;
     /** Controls the randomness of the transcription output. Accepts values between 0.0 and 2.0, where higher values result in more diverse and less deterministic results. If omitted, we will use a temperature based on the model you selected which is usually 0. */
     temperature?: number;
+    /** If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be an integer between 0 and 2147483647. */
+    seed?: number;
 }

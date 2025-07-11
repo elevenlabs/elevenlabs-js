@@ -7,6 +7,8 @@ export interface WidgetTextContents {
     mainLabel?: string;
     /** Text and ARIA label for the start call button. */
     startCall?: string;
+    /** Text and ARIA label for the start chat button (text only) */
+    startChat?: string;
     /** Text and ARIA label for the new call button. Displayed when the caller already finished at least one call in order ot start the next one. */
     newCall?: string;
     /** Text and ARIA label for the end call button. */
@@ -31,10 +33,16 @@ export interface WidgetTextContents {
     speakingStatus?: string;
     /** Status displayed when the agent is connecting. */
     connectingStatus?: string;
+    /** Status displayed when the agent is chatting (text only) */
+    chattingStatus?: string;
     /** ARIA label for the text message input. */
     inputLabel?: string;
     /** Placeholder text for the text message input. */
     inputPlaceholder?: string;
+    /** Placeholder text for the text message input (text only) */
+    inputPlaceholderTextOnly?: string;
+    /** Placeholder text for the text message input when starting a new conversation (text only) */
+    inputPlaceholderNewConversation?: string;
     /** Information message displayed when the user ends the conversation. */
     userEndedConversation?: string;
     /** Information message displayed when the agent ends the conversation. */

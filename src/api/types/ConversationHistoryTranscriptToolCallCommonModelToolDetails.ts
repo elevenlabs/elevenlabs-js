@@ -6,11 +6,16 @@ import * as ElevenLabs from "../index";
 
 export type ConversationHistoryTranscriptToolCallCommonModelToolDetails =
     | ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelToolDetails.Client
+    | ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelToolDetails.Mcp
     | ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelToolDetails.Webhook;
 
 export namespace ConversationHistoryTranscriptToolCallCommonModelToolDetails {
     export interface Client extends ElevenLabs.ConversationHistoryTranscriptToolCallClientDetails {
         type: "client";
+    }
+
+    export interface Mcp extends ElevenLabs.ConversationHistoryTranscriptToolCallMcpDetails {
+        type: "mcp";
     }
 
     export interface Webhook extends ElevenLabs.ConversationHistoryTranscriptToolCallWebhookDetails {

@@ -4,30 +4,11 @@
 
 import * as ElevenLabs from "../index";
 
-/**
- * SIP trunk phone number request
- *
- * Includes termination URI and optional digest authentication credentials.
- * If credentials are provided, both username and password must be included.
- * If credentials are not provided, ACL authentication is assumed. (user needs to add our ips in their settings)
- */
 export interface CreateSipTrunkPhoneNumberRequest {
     /** Phone number */
     phoneNumber: string;
     /** Label for the phone number */
     label: string;
-    /** SIP trunk termination URI */
-    terminationUri: string;
-    /** Hostname or IP the SIP INVITE is sent to. */
-    address?: string;
-    /** Protocol to use for SIP transport (signalling layer). */
-    transport?: ElevenLabs.SipTrunkTransportEnum;
-    /** Whether or not to encrypt media (data layer). */
-    mediaEncryption?: ElevenLabs.SipMediaEncryptionEnum;
-    /** Whether or not to encrypt media (data layer) for inbound calls. */
-    inboundMediaEncryption?: ElevenLabs.SipMediaEncryptionEnum;
-    /** SIP X-* headers for INVITE request. These headers are sent as-is and may help identify this call. */
-    headers?: Record<string, string>;
-    /** Optional digest authentication credentials (username/password). If not provided, ACL authentication is assumed. */
-    credentials?: ElevenLabs.SipTrunkCredentials;
+    inboundTrunkConfig?: ElevenLabs.InboundSipTrunkConfigRequestModel;
+    outboundTrunkConfig?: ElevenLabs.OutboundSipTrunkConfigRequestModel;
 }

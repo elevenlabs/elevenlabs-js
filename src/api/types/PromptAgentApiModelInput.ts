@@ -7,7 +7,7 @@ import * as ElevenLabs from "../index";
 export interface PromptAgentApiModelInput {
     /** The prompt for the agent */
     prompt?: string;
-    /** The LLM to query with the prompt and the chat history */
+    /** The LLM to query with the prompt and the chat history. If using data residency, the LLM must be supported in the data residency environment */
     llm?: ElevenLabs.Llm;
     /** The temperature for the LLM */
     temperature?: number;

@@ -6,9 +6,9 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
 import * as serializers from "../../../../serialization/index";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
-import urlJoin from "url-join";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers";
 import * as errors from "../../../../errors/index";
+import { Preview } from "../resources/preview/client/Client";
 
 export declare namespace TextToVoice {
     export interface Options {
@@ -37,9 +37,14 @@ export declare namespace TextToVoice {
 
 export class TextToVoice {
     protected readonly _options: TextToVoice.Options;
+    protected _preview: Preview | undefined;
 
     constructor(_options: TextToVoice.Options = {}) {
         this._options = _options;
+    }
+
+    public get preview(): Preview {
+        return (this._preview ??= new Preview(this._options));
     }
 
     /**
@@ -76,7 +81,7 @@ export class TextToVoice {
         }
 
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -177,7 +182,7 @@ export class TextToVoice {
         requestOptions?: TextToVoice.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.Voice>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -277,7 +282,7 @@ export class TextToVoice {
         requestOptions?: TextToVoice.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.Voice>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -383,7 +388,7 @@ export class TextToVoice {
         }
 
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??

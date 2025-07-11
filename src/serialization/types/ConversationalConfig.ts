@@ -34,6 +34,6 @@ export declare namespace ConversationalConfig {
         tts?: TtsConversationalConfigOutput.Raw | null;
         conversation?: ConversationConfig.Raw | null;
         language_presets?: Record<string, LanguagePresetOutput.Raw> | null;
-        agent?: AgentConfig.Raw | null;
+        agent?: (AgentConfig.Raw | undefined) | null;
     }
 }

@@ -3951,7 +3951,7 @@ Run a conversation between the agent and a simulated user.
 await client.conversationalAi.agents.simulateConversation("21m00Tcm4TlvDq8ikWAM", {
     simulationSpecification: {
         simulatedUserConfig: {
-            firstMessage: "Hello, how can I help you today?",
+            first_message: "Hello, how can I help you today?",
             language: "en",
         },
     },
@@ -4029,7 +4029,7 @@ Run a conversation between the agent and a simulated user and stream back the re
 await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8ikWAM", {
     simulationSpecification: {
         simulatedUserConfig: {
-            firstMessage: "Hello, how can I help you today?",
+            first_message: "Hello, how can I help you today?",
             language: "en",
         },
     },
@@ -4077,6 +4077,61 @@ await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8
 </details>
 
 ## ConversationalAi PhoneNumbers
+
+<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">list</a>() -> ElevenLabs.PhoneNumbersListResponseItem[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve all Phone Numbers
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.phoneNumbers.list();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbers.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
 
 <details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreatePhoneNumberResponseModel</code></summary>
 <dl>
@@ -4329,61 +4384,6 @@ await client.conversationalAi.phoneNumbers.update("TeaqRRdTcIfIu2i7BYfT");
 
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PhoneNumbers.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">list</a>() -> ElevenLabs.PhoneNumbersListResponseItem[]</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve all Phone Numbers
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.phoneNumbers.list();
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
 
 <dl>
 <dd>
@@ -5516,7 +5516,7 @@ await client.conversationalAi.batchCalls.cancel("batch_id");
 <dl>
 <dd>
 
-Retry a batch call by setting completed recipients back to pending status.
+Retry a batch call, calling failed and no-response recipients again.
 
 </dd>
 </dl>
@@ -9686,6 +9686,8 @@ await client.studio.projects.chapters.snapshots.get(
 </dd>
 </dl>
 </details>
+
+## TextToVoice Preview
 
 ## User Subscription
 

@@ -4,7 +4,7 @@
 
 import * as ElevenLabs from "../index";
 
-export interface TransferToNumberToolConfig {
+export interface TransferToNumberToolConfigOutput {
     transfers: ElevenLabs.PhoneNumberTransfer[];
     /** Whether to play a message to the client while they wait for transfer. Defaults to true for backward compatibility. */
     enableClientMessage?: boolean;

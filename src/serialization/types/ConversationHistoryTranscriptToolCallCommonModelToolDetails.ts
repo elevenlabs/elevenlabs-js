@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ConversationHistoryTranscriptToolCallClientDetails } from "./ConversationHistoryTranscriptToolCallClientDetails";
+import { ConversationHistoryTranscriptToolCallMcpDetails } from "./ConversationHistoryTranscriptToolCallMcpDetails";
 import { ConversationHistoryTranscriptToolCallWebhookDetails } from "./ConversationHistoryTranscriptToolCallWebhookDetails";
 
 export const ConversationHistoryTranscriptToolCallCommonModelToolDetails: core.serialization.Schema<
@@ -14,6 +15,7 @@ export const ConversationHistoryTranscriptToolCallCommonModelToolDetails: core.s
 > = core.serialization
     .union("type", {
         client: ConversationHistoryTranscriptToolCallClientDetails,
+        mcp: ConversationHistoryTranscriptToolCallMcpDetails,
         webhook: ConversationHistoryTranscriptToolCallWebhookDetails,
     })
     .transform<ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelToolDetails>({
@@ -24,10 +26,15 @@ export const ConversationHistoryTranscriptToolCallCommonModelToolDetails: core.s
 export declare namespace ConversationHistoryTranscriptToolCallCommonModelToolDetails {
     export type Raw =
         | ConversationHistoryTranscriptToolCallCommonModelToolDetails.Client
+        | ConversationHistoryTranscriptToolCallCommonModelToolDetails.Mcp
         | ConversationHistoryTranscriptToolCallCommonModelToolDetails.Webhook;
 
     export interface Client extends ConversationHistoryTranscriptToolCallClientDetails.Raw {
         type: "client";
+    }
+
+    export interface Mcp extends ConversationHistoryTranscriptToolCallMcpDetails.Raw {
+        type: "mcp";
     }
 
     export interface Webhook extends ConversationHistoryTranscriptToolCallWebhookDetails.Raw {
