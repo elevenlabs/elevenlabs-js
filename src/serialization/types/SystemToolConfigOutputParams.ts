@@ -10,7 +10,7 @@ import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
 import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
 import { TransferToAgentToolConfig } from "./TransferToAgentToolConfig";
-import { TransferToNumberToolConfig } from "./TransferToNumberToolConfig";
+import { TransferToNumberToolConfigOutput } from "./TransferToNumberToolConfigOutput";
 
 export const SystemToolConfigOutputParams: core.serialization.Schema<
     serializers.SystemToolConfigOutputParams.Raw,
@@ -22,7 +22,7 @@ export const SystemToolConfigOutputParams: core.serialization.Schema<
         play_keypad_touch_tone: PlayDtmfToolConfig,
         skip_turn: SkipTurnToolConfig,
         transfer_to_agent: TransferToAgentToolConfig,
-        transfer_to_number: TransferToNumberToolConfig,
+        transfer_to_number: TransferToNumberToolConfigOutput,
     })
     .transform<ElevenLabs.SystemToolConfigOutputParams>({
         transform: (value) => value,
@@ -58,7 +58,7 @@ export declare namespace SystemToolConfigOutputParams {
         system_tool_type: "transfer_to_agent";
     }
 
-    export interface TransferToNumber extends TransferToNumberToolConfig.Raw {
+    export interface TransferToNumber extends TransferToNumberToolConfigOutput.Raw {
         system_tool_type: "transfer_to_number";
     }
 }

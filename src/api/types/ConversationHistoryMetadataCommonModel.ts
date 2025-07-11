@@ -21,4 +21,7 @@ export interface ConversationHistoryMetadataCommonModel {
     ragUsage?: ElevenLabs.ConversationHistoryRagUsageCommonModel;
     textOnly?: boolean;
     featuresUsage?: ElevenLabs.FeaturesUsageCommonModel;
+    elevenAssistant?: ElevenLabs.ConversationHistoryElevenAssistantCommonModel;
+    initiatorId?: string;
+    conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
 }

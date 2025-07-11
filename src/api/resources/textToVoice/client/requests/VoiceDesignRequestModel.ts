@@ -29,6 +29,8 @@ export interface VoiceDesignRequestModel {
     seed?: number;
     /** Controls how closely the AI follows the prompt. Lower numbers give the AI more freedom to be creative, while higher numbers force it to stick more to the prompt. High numbers can cause voice to sound artificial or robotic. We recommend to use longer, more detailed prompts at lower Guidance Scale. */
     guidanceScale?: number;
+    /** Determines whether the Text to Voice previews should be included in the response. If true, only the generated IDs will be returned which can then be streamed via the /v1/text-to-voice/:generated_voice_id/stream endpoint. */
+    streamPreviews?: boolean;
     /** Higher quality results in better voice output but less variety. */
     quality?: number;
     /** Reference audio to use for the voice generation. The audio should be base64 encoded. Only supported when using the  eleven_ttv_v3 model. */

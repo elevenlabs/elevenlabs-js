@@ -5,9 +5,8 @@
 import * as environments from "../../../../../../environments";
 import * as core from "../../../../../../core";
 import * as ElevenLabs from "../../../../../index";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers.js";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers";
 import * as serializers from "../../../../../../serialization/index";
-import urlJoin from "url-join";
 import * as errors from "../../../../../../errors/index";
 import { Widget } from "../resources/widget/client/Client";
 import { Link } from "../resources/link/client/Client";
@@ -91,7 +90,7 @@ export class Agents {
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.CreateAgentResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -187,7 +186,7 @@ export class Agents {
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -277,7 +276,7 @@ export class Agents {
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -365,7 +364,7 @@ export class Agents {
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -477,7 +476,7 @@ export class Agents {
         }
 
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -572,7 +571,7 @@ export class Agents {
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.CreateAgentResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -661,8 +660,8 @@ export class Agents {
      *     await client.conversationalAi.agents.simulateConversation("21m00Tcm4TlvDq8ikWAM", {
      *         simulationSpecification: {
      *             simulatedUserConfig: {
-     *                 firstMessage: "Hello, how can I help you today?",
-     *                 language: "en"
+     *                 "first_message": "Hello, how can I help you today?",
+     *                 "language": "en"
      *             }
      *         }
      *     })
@@ -681,7 +680,7 @@ export class Agents {
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AgentSimulatedChatTestResponseModel>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -770,8 +769,8 @@ export class Agents {
      *     await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8ikWAM", {
      *         simulationSpecification: {
      *             simulatedUserConfig: {
-     *                 firstMessage: "Hello, how can I help you today?",
-     *                 language: "en"
+     *                 "first_message": "Hello, how can I help you today?",
+     *                 "language": "en"
      *             }
      *         }
      *     })
@@ -792,7 +791,7 @@ export class Agents {
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??

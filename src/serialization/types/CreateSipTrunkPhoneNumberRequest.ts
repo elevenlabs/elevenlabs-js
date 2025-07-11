@@ -5,9 +5,8 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { SipTrunkTransportEnum } from "./SipTrunkTransportEnum";
-import { SipMediaEncryptionEnum } from "./SipMediaEncryptionEnum";
-import { SipTrunkCredentials } from "./SipTrunkCredentials";
+import { InboundSipTrunkConfigRequestModel } from "./InboundSipTrunkConfigRequestModel";
+import { OutboundSipTrunkConfigRequestModel } from "./OutboundSipTrunkConfigRequestModel";
 
 export const CreateSipTrunkPhoneNumberRequest: core.serialization.ObjectSchema<
     serializers.CreateSipTrunkPhoneNumberRequest.Raw,
@@ -15,25 +14,21 @@ export const CreateSipTrunkPhoneNumberRequest: core.serialization.ObjectSchema<
 > = core.serialization.object({
     phoneNumber: core.serialization.property("phone_number", core.serialization.string()),
     label: core.serialization.string(),
-    terminationUri: core.serialization.property("termination_uri", core.serialization.string()),
-    address: core.serialization.string().optional(),
-    transport: SipTrunkTransportEnum.optional(),
-    mediaEncryption: core.serialization.property("media_encryption", SipMediaEncryptionEnum.optional()),
-    inboundMediaEncryption: core.serialization.property("inbound_media_encryption", SipMediaEncryptionEnum.optional()),
-    headers: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
-    credentials: SipTrunkCredentials.optional(),
+    inboundTrunkConfig: core.serialization.property(
+        "inbound_trunk_config",
+        InboundSipTrunkConfigRequestModel.optional(),
+    ),
+    outboundTrunkConfig: core.serialization.property(
+        "outbound_trunk_config",
+        OutboundSipTrunkConfigRequestModel.optional(),
+    ),
 });
 
 export declare namespace CreateSipTrunkPhoneNumberRequest {
     export interface Raw {
         phone_number: string;
         label: string;
-        termination_uri: string;
-        address?: string | null;
-        transport?: SipTrunkTransportEnum.Raw | null;
-        media_encryption?: SipMediaEncryptionEnum.Raw | null;
-        inbound_media_encryption?: SipMediaEncryptionEnum.Raw | null;
-        headers?: Record<string, string> | null;
-        credentials?: SipTrunkCredentials.Raw | null;
+        inbound_trunk_config?: InboundSipTrunkConfigRequestModel.Raw | null;
+        outbound_trunk_config?: OutboundSipTrunkConfigRequestModel.Raw | null;
     }
 }

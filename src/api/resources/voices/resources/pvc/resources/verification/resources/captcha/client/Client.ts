@@ -5,8 +5,7 @@
 import * as environments from "../../../../../../../../../../environments";
 import * as core from "../../../../../../../../../../core";
 import * as ElevenLabs from "../../../../../../../../../index";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../../../core/headers.js";
-import urlJoin from "url-join";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../../../core/headers";
 import * as errors from "../../../../../../../../../../errors/index";
 import * as serializers from "../../../../../../../../../../serialization/index";
 import * as fs from "fs";
@@ -60,7 +59,7 @@ export class Captcha {
 
     private async __get(voiceId: string, requestOptions?: Captcha.RequestOptions): Promise<core.WithRawResponse<void>> {
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??
@@ -153,7 +152,7 @@ export class Captcha {
         await _request.appendFile("recording", request.recording);
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
-            url: urlJoin(
+            url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (
                         (await core.Supplier.get(this._options.environment)) ??

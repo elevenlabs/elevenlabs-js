@@ -7,15 +7,15 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { PhoneNumberTransfer } from "./PhoneNumberTransfer";
 
-export const TransferToNumberToolConfig: core.serialization.ObjectSchema<
-    serializers.TransferToNumberToolConfig.Raw,
-    ElevenLabs.TransferToNumberToolConfig
+export const TransferToNumberToolConfigInput: core.serialization.ObjectSchema<
+    serializers.TransferToNumberToolConfigInput.Raw,
+    ElevenLabs.TransferToNumberToolConfigInput
 > = core.serialization.object({
     transfers: core.serialization.list(PhoneNumberTransfer),
     enableClientMessage: core.serialization.property("enable_client_message", core.serialization.boolean().optional()),
 });
 
-export declare namespace TransferToNumberToolConfig {
+export declare namespace TransferToNumberToolConfigInput {
     export interface Raw {
         transfers: PhoneNumberTransfer.Raw[];
         enable_client_message?: boolean | null;

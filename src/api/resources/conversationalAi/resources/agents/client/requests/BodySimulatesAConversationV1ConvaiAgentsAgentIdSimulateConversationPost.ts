@@ -9,8 +9,8 @@ import * as ElevenLabs from "../../../../../../index";
  *     {
  *         simulationSpecification: {
  *             simulatedUserConfig: {
- *                 firstMessage: "Hello, how can I help you today?",
- *                 language: "en"
+ *                 "first_message": "Hello, how can I help you today?",
+ *                 "language": "en"
  *             }
  *         }
  *     }

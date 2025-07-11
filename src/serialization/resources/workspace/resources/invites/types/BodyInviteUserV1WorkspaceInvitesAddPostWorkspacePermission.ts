@@ -26,6 +26,8 @@ export const BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission: core.se
     "workspace_migration_admin",
     "human_reviewer",
     "productions_admin",
+    "support",
+    "internal",
 ]);
 
 export declare namespace BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission {
@@ -45,5 +47,7 @@ export declare namespace BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermiss
         | "quality_check_admin"
         | "workspace_migration_admin"
         | "human_reviewer"
-        | "productions_admin";
+        | "productions_admin"
+        | "support"
+        | "internal";
 }

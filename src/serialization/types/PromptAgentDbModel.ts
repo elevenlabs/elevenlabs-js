@@ -5,62 +5,16 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { Llm } from "./Llm";
-import { BuiltInToolsInput } from "./BuiltInToolsInput";
-import { KnowledgeBaseLocator } from "./KnowledgeBaseLocator";
-import { CustomLlm } from "./CustomLlm";
-import { RagConfig } from "./RagConfig";
 
 export const PromptAgentDbModel: core.serialization.ObjectSchema<
     serializers.PromptAgentDbModel.Raw,
     ElevenLabs.PromptAgentDbModel
 > = core.serialization.object({
-    prompt: core.serialization.string().optional(),
-    llm: Llm.optional(),
-    temperature: core.serialization.number().optional(),
-    maxTokens: core.serialization.property("max_tokens", core.serialization.number().optional()),
-    toolIds: core.serialization.property("tool_ids", core.serialization.list(core.serialization.string()).optional()),
-    builtInTools: core.serialization.property("built_in_tools", BuiltInToolsInput.optional()),
-    mcpServerIds: core.serialization.property(
-        "mcp_server_ids",
-        core.serialization.list(core.serialization.string()).optional(),
-    ),
-    nativeMcpServerIds: core.serialization.property(
-        "native_mcp_server_ids",
-        core.serialization.list(core.serialization.string()).optional(),
-    ),
-    knowledgeBase: core.serialization.property(
-        "knowledge_base",
-        core.serialization.list(KnowledgeBaseLocator).optional(),
-    ),
-    customLlm: core.serialization.property("custom_llm", CustomLlm.optional()),
-    ignoreDefaultPersonality: core.serialization.property(
-        "ignore_default_personality",
-        core.serialization.boolean().optional(),
-    ),
-    rag: RagConfig.optional(),
-    knowledgeBaseDocumentIds: core.serialization.property(
-        "knowledge_base_document_ids",
-        core.serialization.list(core.serialization.string()).optional(),
-    ),
     tools: core.serialization.unknown().optional(),
 });
 
 export declare namespace PromptAgentDbModel {
     export interface Raw {
-        prompt?: string | null;
-        llm?: Llm.Raw | null;
-        temperature?: number | null;
-        max_tokens?: number | null;
-        tool_ids?: string[] | null;
-        built_in_tools?: BuiltInToolsInput.Raw | null;
-        mcp_server_ids?: string[] | null;
-        native_mcp_server_ids?: string[] | null;
-        knowledge_base?: KnowledgeBaseLocator.Raw[] | null;
-        custom_llm?: CustomLlm.Raw | null;
-        ignore_default_personality?: boolean | null;
-        rag?: RagConfig.Raw | null;
-        knowledge_base_document_ids?: string[] | null;
         tools?: unknown | null;
     }
 }

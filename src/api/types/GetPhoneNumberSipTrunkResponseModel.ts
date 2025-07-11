@@ -13,5 +13,9 @@ export interface GetPhoneNumberSipTrunkResponseModel {
     phoneNumberId: string;
     /** The agent that is assigned to the phone number */
     assignedAgent?: ElevenLabs.PhoneNumberAgentInfo;
-    providerConfig?: ElevenLabs.SipTrunkConfigResponseModel;
+    providerConfig?: ElevenLabs.GetPhoneNumberOutboundSipTrunkConfigResponseModel;
+    /** Configuration of the Outbound SIP trunk - if configured. */
+    outboundTrunk?: ElevenLabs.GetPhoneNumberOutboundSipTrunkConfigResponseModel;
+    /** Configuration of the Inbound SIP trunk - if configured. */
+    inboundTrunk?: ElevenLabs.GetPhoneNumberInboundSipTrunkConfigResponseModel;
 }

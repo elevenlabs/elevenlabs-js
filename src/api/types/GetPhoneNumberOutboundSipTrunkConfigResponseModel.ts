@@ -7,7 +7,7 @@ import * as ElevenLabs from "../index";
 /**
  * SIP Trunk configuration details for a phone number
  */
-export interface SipTrunkConfigResponseModel {
+export interface GetPhoneNumberOutboundSipTrunkConfigResponseModel {
     /** Hostname or IP the SIP INVITE is sent to */
     address: string;
     /** Protocol to use for SIP transport */

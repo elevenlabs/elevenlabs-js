@@ -10,11 +10,20 @@ export const AgentTransfer: core.serialization.ObjectSchema<serializers.AgentTra
     core.serialization.object({
         agentId: core.serialization.property("agent_id", core.serialization.string()),
         condition: core.serialization.string(),
+        delayMs: core.serialization.property("delay_ms", core.serialization.number().optional()),
+        transferMessage: core.serialization.property("transfer_message", core.serialization.string().optional()),
+        enableTransferredAgentFirstMessage: core.serialization.property(
+            "enable_transferred_agent_first_message",
+            core.serialization.boolean().optional(),
+        ),
     });
 
 export declare namespace AgentTransfer {
     export interface Raw {
         agent_id: string;
         condition: string;
+        delay_ms?: number | null;
+        transfer_message?: string | null;
+        enable_transferred_agent_first_message?: boolean | null;
     }
 }

@@ -4,4 +4,6 @@
 
 export interface ConvAiWebhooks {
     postCallWebhookId?: string;
+    /** Whether to send audio data with post-call webhooks for ConvAI conversations */
+    sendAudio?: boolean;
 }

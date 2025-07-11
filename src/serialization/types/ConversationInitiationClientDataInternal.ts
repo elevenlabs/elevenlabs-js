@@ -20,6 +20,7 @@ export const ConversationInitiationClientDataInternal: core.serialization.Object
         "custom_llm_extra_body",
         core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     ),
+    userId: core.serialization.property("user_id", core.serialization.string().optional()),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
         core.serialization
@@ -35,6 +36,7 @@ export declare namespace ConversationInitiationClientDataInternal {
     export interface Raw {
         conversation_config_override?: ConversationConfigClientOverrideOutput.Raw | null;
         custom_llm_extra_body?: Record<string, unknown> | null;
+        user_id?: string | null;
         dynamic_variables?: Record<
             string,
             ConversationInitiationClientDataInternalDynamicVariablesValue.Raw | null | undefined

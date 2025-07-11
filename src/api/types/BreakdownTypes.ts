@@ -18,7 +18,8 @@ export type BreakdownTypes =
     | "resource"
     | "request_queue"
     | "region"
-    | "subresource_id";
+    | "subresource_id"
+    | "reporting_workspace_id";
 export const BreakdownTypes = {
     None: "none",
     Voice: "voice",
@@ -33,4 +34,5 @@ export const BreakdownTypes = {
     RequestQueue: "request_queue",
     Region: "region",
     SubresourceId: "subresource_id",
+    ReportingWorkspaceId: "reporting_workspace_id",
 } as const;
