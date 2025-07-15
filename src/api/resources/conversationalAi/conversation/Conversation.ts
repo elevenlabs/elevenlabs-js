@@ -1,6 +1,7 @@
 import { EventEmitter } from "events";
 import WebSocket from "ws";
 import { ElevenLabsClient } from "../../../../Client";
+import { SDK_VERSION } from "../../../../version";
 import { AudioInterface } from "./AudioInterface";
 import { ClientTools } from "./ClientTools";
 import { ConversationInitiationData } from "./ConversationConfig";
@@ -343,13 +344,15 @@ export class Conversation extends EventEmitter {
     private _getWssUrl(): string {
         // Default to production environment WebSocket URL
         const baseWsUrl = "wss://api.elevenlabs.io";
-        return `${baseWsUrl}/v1/convai/conversation?agent_id=${this.agentId}`;
+        return `${baseWsUrl}/v1/convai/conversation?agent_id=${this.agentId}&source=js_sdk&version=${SDK_VERSION}`;
     }
 
     private async _getSignedUrl(): Promise<string> {
         const response = await this.conversationClient.conversationalAi.conversations.getSignedUrl({
             agentId: this.agentId,
         });
-        return response.signedUrl;
+        const signedUrl = response.signedUrl;
+        const separator = signedUrl.includes("?") ? "&" : "?";
+        return `${signedUrl}${separator}source=js_sdk&version=${SDK_VERSION}`;
     }
 }
