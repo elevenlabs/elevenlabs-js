@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../../../src/Client";
 describe("Chapters", () => {
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             chapters: [
@@ -66,10 +63,7 @@ describe("Chapters", () => {
 
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "Chapter 1" };
         const rawResponseBody = {
             chapter: {
@@ -142,10 +136,7 @@ describe("Chapters", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             chapter_id: "aw1NgEzBg83R7vgmiJt6",
@@ -209,10 +200,7 @@ describe("Chapters", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             chapter: {
@@ -283,10 +271,7 @@ describe("Chapters", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
         server
@@ -305,10 +290,7 @@ describe("Chapters", () => {
 
     test("convert", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
         server

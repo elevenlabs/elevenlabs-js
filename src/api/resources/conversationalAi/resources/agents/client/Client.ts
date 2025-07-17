@@ -15,7 +15,7 @@ import { LlmUsage } from "../resources/llmUsage/client/Client";
 
 export declare namespace Agents {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -92,10 +92,8 @@ export class Agents {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 "v1/convai/agents/create",
             ),
             method: "POST",
@@ -188,10 +186,8 @@ export class Agents {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/convai/agents/${encodeURIComponent(agentId)}`,
             ),
             method: "GET",
@@ -278,10 +274,8 @@ export class Agents {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/convai/agents/${encodeURIComponent(agentId)}`,
             ),
             method: "DELETE",
@@ -366,10 +360,8 @@ export class Agents {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/convai/agents/${encodeURIComponent(agentId)}`,
             ),
             method: "PATCH",
@@ -478,10 +470,8 @@ export class Agents {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 "v1/convai/agents",
             ),
             method: "GET",
@@ -573,10 +563,8 @@ export class Agents {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/convai/agents/${encodeURIComponent(agentId)}/duplicate`,
             ),
             method: "POST",
@@ -682,10 +670,8 @@ export class Agents {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/convai/agents/${encodeURIComponent(agentId)}/simulate-conversation`,
             ),
             method: "POST",
@@ -793,10 +779,8 @@ export class Agents {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/convai/agents/${encodeURIComponent(agentId)}/simulate-conversation/stream`,
             ),
             method: "POST",

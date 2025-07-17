@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../../src/Client";
 describe("Resource", () => {
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             id: "id",
@@ -188,10 +185,7 @@ describe("Resource", () => {
 
     test("transcribe", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
         const rawResponseBody = { version: 1 };
         server
@@ -213,10 +207,7 @@ describe("Resource", () => {
 
     test("translate", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
         const rawResponseBody = { version: 1 };
         server
@@ -238,10 +229,7 @@ describe("Resource", () => {
 
     test("dub", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
         const rawResponseBody = { version: 1 };
         server
@@ -263,10 +251,7 @@ describe("Resource", () => {
 
     test("render", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { render_type: "mp4" };
         const rawResponseBody = { version: 1, render_id: "render_id" };
         server

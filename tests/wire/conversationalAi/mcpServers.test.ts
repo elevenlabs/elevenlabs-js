@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../../src/Client";
 describe("McpServers", () => {
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             mcp_servers: [
@@ -73,10 +70,7 @@ describe("McpServers", () => {
 
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { config: { url: "url", name: "name" } };
         const rawResponseBody = {
             id: "id",
@@ -161,10 +155,7 @@ describe("McpServers", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             id: "id",

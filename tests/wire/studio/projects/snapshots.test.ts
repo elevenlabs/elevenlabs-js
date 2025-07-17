@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../../../src/Client";
 describe("Snapshots", () => {
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             snapshots: [
@@ -54,10 +51,7 @@ describe("Snapshots", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             project_snapshot_id: "aw1NgEzBg83R7vgmiJt6",

@@ -1887,6 +1887,69 @@ await client.studio.createPodcast({
 
 ## Dubbing
 
+<details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.DubbingMetadataPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the dubs you have access to.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.list();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.DubbingListRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Dubbing.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.DoDubbingResponse</code></summary>
 <dl>
 <dd>

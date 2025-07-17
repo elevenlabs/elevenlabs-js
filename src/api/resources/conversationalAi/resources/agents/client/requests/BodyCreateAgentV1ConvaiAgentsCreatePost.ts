@@ -15,6 +15,7 @@ export interface BodyCreateAgentV1ConvaiAgentsCreatePost {
     conversationConfig: ElevenLabs.ConversationalConfig;
     /** Platform settings for the agent are all settings that aren't related to the conversation orchestration and content. */
     platformSettings?: ElevenLabs.AgentPlatformSettingsRequestModel;
+    workflow?: unknown;
     /** A name to make the agent easier to find */
     name?: string;
     /** Tags to help classify and filter the agent */

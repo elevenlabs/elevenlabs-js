@@ -29,7 +29,7 @@ import { Workspace } from "./api/resources/workspace/client/Client";
 
 export declare namespace ElevenLabsClient {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -84,8 +84,8 @@ export class ElevenLabsClient {
                     "xi-api-key": _options?.apiKey,
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                    "X-Fern-SDK-Version": "v2.6.0",
-                    "User-Agent": "@elevenlabs/elevenlabs-js/v2.6.0",
+                    "X-Fern-SDK-Version": "v2.7.0",
+                    "User-Agent": "@elevenlabs/elevenlabs-js/v2.7.0",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },

@@ -12,7 +12,7 @@ import * as errors from "../../../../errors/index";
 
 export declare namespace SpeechToText {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -127,6 +127,10 @@ export class SpeechToText {
             _request.append("webhook", request.webhook.toString());
         }
 
+        if (request.webhookId != null) {
+            _request.append("webhook_id", request.webhookId);
+        }
+
         if (request.temperature != null) {
             _request.append("temperature", request.temperature.toString());
         }
@@ -139,10 +143,8 @@ export class SpeechToText {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 "v1/speech-to-text",
             ),
             method: "POST",

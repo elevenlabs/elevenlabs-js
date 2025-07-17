@@ -6,18 +6,61 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../src/Client";
 
 describe("Dubbing", () => {
+    test("list", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            dubs: [
+                {
+                    dubbing_id: "21m00Tcm4TlvDq8ikWAM",
+                    name: "My Dubbing Project",
+                    status: "dubbed",
+                    target_languages: ["es", "fr", "de"],
+                    editable: true,
+                    created_at: "2025-07-15T14:49:41Z",
+                    media_metadata: { content_type: "video/mp4", duration: 127.5 },
+                    error: "error",
+                },
+            ],
+            next_cursor: "next_cursor",
+            has_more: true,
+        };
+        server.mockEndpoint().get("/v1/dubbing").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.dubbing.list();
+        expect(response).toEqual({
+            dubs: [
+                {
+                    dubbingId: "21m00Tcm4TlvDq8ikWAM",
+                    name: "My Dubbing Project",
+                    status: "dubbed",
+                    targetLanguages: ["es", "fr", "de"],
+                    editable: true,
+                    createdAt: new Date("2025-07-15T14:49:41.000Z"),
+                    mediaMetadata: {
+                        contentType: "video/mp4",
+                        duration: 127.5,
+                    },
+                    error: "error",
+                },
+            ],
+            nextCursor: "next_cursor",
+            hasMore: true,
+        });
+    });
+
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             dubbing_id: "21m00Tcm4TlvDq8ikWAM",
             name: "My Dubbing Project",
             status: "dubbed",
             target_languages: ["es", "fr", "de"],
+            editable: true,
+            created_at: "2025-07-15T14:49:41Z",
             media_metadata: { content_type: "video/mp4", duration: 127.5 },
             error: "error",
         };
@@ -35,6 +78,8 @@ describe("Dubbing", () => {
             name: "My Dubbing Project",
             status: "dubbed",
             targetLanguages: ["es", "fr", "de"],
+            editable: true,
+            createdAt: new Date("2025-07-15T14:49:41.000Z"),
             mediaMetadata: {
                 contentType: "video/mp4",
                 duration: 127.5,
@@ -45,10 +90,7 @@ describe("Dubbing", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
         server

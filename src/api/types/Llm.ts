@@ -23,8 +23,6 @@ export type Llm =
     | "claude-3-haiku"
     | "grok-beta"
     | "custom-llm"
-    | "gemini-2.5-flash-preview-05-20"
-    | "gemini-2.5-flash-preview-04-17"
     | "gemini-2.0-flash-lite-001"
     | "gemini-2.0-flash-001"
     | "gemini-1.5-flash-002"
@@ -69,8 +67,6 @@ export const Llm = {
     Claude3Haiku: "claude-3-haiku",
     GrokBeta: "grok-beta",
     CustomLlm: "custom-llm",
-    Gemini25FlashPreview0520: "gemini-2.5-flash-preview-05-20",
-    Gemini25FlashPreview0417: "gemini-2.5-flash-preview-04-17",
     Gemini20FlashLite001: "gemini-2.0-flash-lite-001",
     Gemini20Flash001: "gemini-2.0-flash-001",
     Gemini15Flash002: "gemini-1.5-flash-002",

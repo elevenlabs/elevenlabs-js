@@ -8,7 +8,7 @@ import { Audio } from "../resources/audio/client/Client";
 
 export declare namespace Samples {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */

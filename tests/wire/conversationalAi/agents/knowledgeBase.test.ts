@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../../../src/Client";
 describe("KnowledgeBase", () => {
     test("size", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { number_of_pages: 1.1 };
         server

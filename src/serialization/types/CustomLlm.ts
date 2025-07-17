@@ -17,6 +17,7 @@ export const CustomLlm: core.serialization.ObjectSchema<serializers.CustomLlm.Ra
             "request_headers",
             core.serialization.record(core.serialization.string(), CustomLlmRequestHeadersValue).optional(),
         ),
+        apiVersion: core.serialization.property("api_version", core.serialization.string().optional()),
     });
 
 export declare namespace CustomLlm {
@@ -25,5 +26,6 @@ export declare namespace CustomLlm {
         model_id?: string | null;
         api_key?: ConvAiSecretLocator.Raw | null;
         request_headers?: Record<string, CustomLlmRequestHeadersValue.Raw> | null;
+        api_version?: string | null;
     }
 }

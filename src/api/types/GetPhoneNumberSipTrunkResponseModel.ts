@@ -9,6 +9,10 @@ export interface GetPhoneNumberSipTrunkResponseModel {
     phoneNumber: string;
     /** Label for the phone number */
     label: string;
+    /** Whether this phone number supports inbound calls */
+    supportsInbound?: boolean;
+    /** Whether this phone number supports outbound calls */
+    supportsOutbound?: boolean;
     /** The ID of the phone number */
     phoneNumberId: string;
     /** The agent that is assigned to the phone number */

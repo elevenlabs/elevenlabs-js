@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../../src/Client";
 describe("Members", () => {
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { email: "email" };
         const rawResponseBody = { status: "ok" };
         server
@@ -33,10 +30,7 @@ describe("Members", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { email: "email" };
         const rawResponseBody = { status: "ok" };
         server

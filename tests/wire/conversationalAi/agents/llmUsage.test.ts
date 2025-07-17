@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../../../src/Client";
 describe("LlmUsage", () => {
     test("calculate", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { llm_prices: [{ llm: "gpt-4o-mini", price_per_minute: 1.1 }] };
         server

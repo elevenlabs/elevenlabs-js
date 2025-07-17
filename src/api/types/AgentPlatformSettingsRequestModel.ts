@@ -21,4 +21,6 @@ export interface AgentPlatformSettingsRequestModel {
     privacy?: ElevenLabs.PrivacyConfig;
     /** Workspace overrides for the agent */
     workspaceOverrides?: ElevenLabs.AgentWorkspaceOverridesInput;
+    /** Testing configuration for the agent */
+    testing?: ElevenLabs.AgentTestingSettings;
 }

@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../../../../src/Client";
 describe("Waveform", () => {
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { sample_id: "DCwhRBWXzGAHq8TQ4Fs18", visual_waveform: [0.1, 0.2, 0.3, 0.4, 0.5] };
         server

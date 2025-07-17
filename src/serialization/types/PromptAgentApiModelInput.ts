@@ -40,6 +40,7 @@ export const PromptAgentApiModelInput: core.serialization.ObjectSchema<
         core.serialization.boolean().optional(),
     ),
     rag: RagConfig.optional(),
+    timezone: core.serialization.string().optional(),
     tools: core.serialization.list(PromptAgentApiModelInputToolsItem).optional(),
 });
 
@@ -57,6 +58,7 @@ export declare namespace PromptAgentApiModelInput {
         custom_llm?: CustomLlm.Raw | null;
         ignore_default_personality?: boolean | null;
         rag?: RagConfig.Raw | null;
+        timezone?: string | null;
         tools?: PromptAgentApiModelInputToolsItem.Raw[] | null;
     }
 }

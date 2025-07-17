@@ -15,6 +15,8 @@ export const GetPhoneNumberSipTrunkResponseModel: core.serialization.ObjectSchem
 > = core.serialization.object({
     phoneNumber: core.serialization.property("phone_number", core.serialization.string()),
     label: core.serialization.string(),
+    supportsInbound: core.serialization.property("supports_inbound", core.serialization.boolean().optional()),
+    supportsOutbound: core.serialization.property("supports_outbound", core.serialization.boolean().optional()),
     phoneNumberId: core.serialization.property("phone_number_id", core.serialization.string()),
     assignedAgent: core.serialization.property("assigned_agent", PhoneNumberAgentInfo.optional()),
     providerConfig: core.serialization.property(
@@ -35,6 +37,8 @@ export declare namespace GetPhoneNumberSipTrunkResponseModel {
     export interface Raw {
         phone_number: string;
         label: string;
+        supports_inbound?: boolean | null;
+        supports_outbound?: boolean | null;
         phone_number_id: string;
         assigned_agent?: PhoneNumberAgentInfo.Raw | null;
         provider_config?: GetPhoneNumberOutboundSipTrunkConfigResponseModel.Raw | null;

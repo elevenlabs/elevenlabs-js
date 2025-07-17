@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../src/Client";
 describe("TextToVoice", () => {
     test("create_previews", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { voice_description: "A sassy squeaky mouse" };
         const rawResponseBody = {
             previews: [
@@ -51,10 +48,7 @@ describe("TextToVoice", () => {
 
     test("create_voice_from_preview", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             voice_name: "Sassy squeaky mouse",
             voice_description: "A sassy squeaky mouse",
@@ -448,10 +442,7 @@ describe("TextToVoice", () => {
 
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             voice_name: "Sassy squeaky mouse",
             voice_description: "A sassy squeaky mouse",
@@ -845,10 +836,7 @@ describe("TextToVoice", () => {
 
     test("design", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { voice_description: "A sassy squeaky mouse" };
         const rawResponseBody = {
             previews: [

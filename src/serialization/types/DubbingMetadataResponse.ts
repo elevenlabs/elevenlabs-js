@@ -18,6 +18,8 @@ export const DubbingMetadataResponse: core.serialization.ObjectSchema<
         "target_languages",
         core.serialization.list(core.serialization.string()),
     ),
+    editable: core.serialization.boolean().optional(),
+    createdAt: core.serialization.property("created_at", core.serialization.date()),
     mediaMetadata: core.serialization.property("media_metadata", DubbingMediaMetadata.optional()),
     error: core.serialization.string().optional(),
 });
@@ -28,6 +30,8 @@ export declare namespace DubbingMetadataResponse {
         name: string;
         status: string;
         target_languages: string[];
+        editable?: boolean | null;
+        created_at: string;
         media_metadata?: DubbingMediaMetadata.Raw | null;
         error?: string | null;
     }

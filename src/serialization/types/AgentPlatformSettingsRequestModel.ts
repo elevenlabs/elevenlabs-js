@@ -13,6 +13,7 @@ import { ConversationInitiationClientDataConfigInput } from "./ConversationIniti
 import { AgentCallLimits } from "./AgentCallLimits";
 import { PrivacyConfig } from "./PrivacyConfig";
 import { AgentWorkspaceOverridesInput } from "./AgentWorkspaceOverridesInput";
+import { AgentTestingSettings } from "./AgentTestingSettings";
 
 export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
     serializers.AgentPlatformSettingsRequestModel.Raw,
@@ -29,6 +30,7 @@ export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
     privacy: PrivacyConfig.optional(),
     workspaceOverrides: core.serialization.property("workspace_overrides", AgentWorkspaceOverridesInput.optional()),
+    testing: AgentTestingSettings.optional(),
 });
 
 export declare namespace AgentPlatformSettingsRequestModel {
@@ -41,5 +43,6 @@ export declare namespace AgentPlatformSettingsRequestModel {
         call_limits?: AgentCallLimits.Raw | null;
         privacy?: PrivacyConfig.Raw | null;
         workspace_overrides?: AgentWorkspaceOverridesInput.Raw | null;
+        testing?: AgentTestingSettings.Raw | null;
     }
 }

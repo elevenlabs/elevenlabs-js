@@ -8,15 +8,14 @@ import { ElevenLabsClient } from "../../../src/Client";
 describe("PhoneNumbers", () => {
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = [
             {
                 phone_number: "+1234567890",
                 label: "Customer Support",
+                supports_inbound: true,
+                supports_outbound: true,
                 phone_number_id: "phone_123",
                 assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
                 provider: "twilio",
@@ -36,6 +35,8 @@ describe("PhoneNumbers", () => {
                 provider: "twilio",
                 phoneNumber: "+1234567890",
                 label: "Customer Support",
+                supportsInbound: true,
+                supportsOutbound: true,
                 phoneNumberId: "phone_123",
                 assignedAgent: {
                     agentId: "F3Pbu5gP6NNKBscdCdwB",
@@ -47,10 +48,7 @@ describe("PhoneNumbers", () => {
 
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             phone_number: "phone_number",
             label: "label",
@@ -82,14 +80,13 @@ describe("PhoneNumbers", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             phone_number: "+1234567890",
             label: "Customer Support",
+            supports_inbound: true,
+            supports_outbound: true,
             phone_number_id: "phone_123",
             assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
             provider: "twilio",
@@ -107,6 +104,8 @@ describe("PhoneNumbers", () => {
             provider: "twilio",
             phoneNumber: "+1234567890",
             label: "Customer Support",
+            supportsInbound: true,
+            supportsOutbound: true,
             phoneNumberId: "phone_123",
             assignedAgent: {
                 agentId: "F3Pbu5gP6NNKBscdCdwB",
@@ -117,10 +116,7 @@ describe("PhoneNumbers", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -139,14 +135,13 @@ describe("PhoneNumbers", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             phone_number: "+1234567890",
             label: "Customer Support",
+            supports_inbound: true,
+            supports_outbound: true,
             phone_number_id: "phone_123",
             assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
             provider: "twilio",
@@ -165,6 +160,8 @@ describe("PhoneNumbers", () => {
             provider: "twilio",
             phoneNumber: "+1234567890",
             label: "Customer Support",
+            supportsInbound: true,
+            supportsOutbound: true,
             phoneNumberId: "phone_123",
             assignedAgent: {
                 agentId: "F3Pbu5gP6NNKBscdCdwB",

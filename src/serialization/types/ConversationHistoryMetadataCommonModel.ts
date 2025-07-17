@@ -49,6 +49,11 @@ export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSc
         "conversation_initiation_source",
         ConversationInitiationSource.optional(),
     ),
+    conversationInitiationSourceVersion: core.serialization.property(
+        "conversation_initiation_source_version",
+        core.serialization.string().optional(),
+    ),
+    timezone: core.serialization.string().optional(),
 });
 
 export declare namespace ConversationHistoryMetadataCommonModel {
@@ -72,5 +77,7 @@ export declare namespace ConversationHistoryMetadataCommonModel {
         eleven_assistant?: ConversationHistoryElevenAssistantCommonModel.Raw | null;
         initiator_id?: string | null;
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
+        conversation_initiation_source_version?: string | null;
+        timezone?: string | null;
     }
 }
