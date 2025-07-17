@@ -12,6 +12,8 @@ export const CreateTwilioPhoneNumberRequest: core.serialization.ObjectSchema<
 > = core.serialization.object({
     phoneNumber: core.serialization.property("phone_number", core.serialization.string()),
     label: core.serialization.string(),
+    supportsInbound: core.serialization.property("supports_inbound", core.serialization.boolean().optional()),
+    supportsOutbound: core.serialization.property("supports_outbound", core.serialization.boolean().optional()),
     sid: core.serialization.string(),
     token: core.serialization.string(),
 });
@@ -20,6 +22,8 @@ export declare namespace CreateTwilioPhoneNumberRequest {
     export interface Raw {
         phone_number: string;
         label: string;
+        supports_inbound?: boolean | null;
+        supports_outbound?: boolean | null;
         sid: string;
         token: string;
     }

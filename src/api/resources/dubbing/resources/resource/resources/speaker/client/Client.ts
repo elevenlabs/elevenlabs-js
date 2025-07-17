@@ -12,7 +12,7 @@ import { Segment } from "../resources/segment/client/Client";
 
 export declare namespace Speaker {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -78,10 +78,8 @@ export class Speaker {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/speaker/${encodeURIComponent(speakerId)}`,
             ),
             method: "PATCH",
@@ -180,10 +178,8 @@ export class Speaker {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/dubbing/resource/${encodeURIComponent(dubbingId)}/speaker/${encodeURIComponent(speakerId)}/similar-voices`,
             ),
             method: "GET",

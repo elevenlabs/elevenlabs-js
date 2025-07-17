@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../../src/Client";
 describe("SipTrunk", () => {
     test("outbound_call", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             agent_id: "agent_id",
             agent_phone_number_id: "agent_phone_number_id",

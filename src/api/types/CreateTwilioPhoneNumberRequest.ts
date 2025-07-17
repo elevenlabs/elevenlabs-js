@@ -7,6 +7,10 @@ export interface CreateTwilioPhoneNumberRequest {
     phoneNumber: string;
     /** Label for the phone number */
     label: string;
+    /** Whether this phone number supports inbound calls */
+    supportsInbound?: boolean;
+    /** Whether this phone number supports outbound calls */
+    supportsOutbound?: boolean;
     /** Twilio Account SID */
     sid: string;
     /** Twilio Auth Token */

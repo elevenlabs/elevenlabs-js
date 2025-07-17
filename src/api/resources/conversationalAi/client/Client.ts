@@ -24,7 +24,7 @@ import { Dashboard } from "../resources/dashboard/client/Client";
 
 export declare namespace ConversationalAi {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -163,10 +163,8 @@ export class ConversationalAi {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 "v1/convai/knowledge-base",
             ),
             method: "POST",
@@ -260,10 +258,8 @@ export class ConversationalAi {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/convai/knowledge-base/${encodeURIComponent(documentationId)}/rag-index`,
             ),
             method: "GET",
@@ -358,10 +354,8 @@ export class ConversationalAi {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/convai/knowledge-base/${encodeURIComponent(documentationId)}/rag-index/${encodeURIComponent(ragIndexId)}`,
             ),
             method: "DELETE",
@@ -448,10 +442,8 @@ export class ConversationalAi {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 "v1/convai/knowledge-base/rag-index",
             ),
             method: "GET",
@@ -547,10 +539,8 @@ export class ConversationalAi {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/convai/secrets/${encodeURIComponent(secretId)}`,
             ),
             method: "PATCH",

@@ -13,4 +13,6 @@ export interface CustomLlm {
     apiKey?: ElevenLabs.ConvAiSecretLocator;
     /** Headers that should be included in the request */
     requestHeaders?: Record<string, ElevenLabs.CustomLlmRequestHeadersValue>;
+    /** The API version to use for the request */
+    apiVersion?: string;
 }

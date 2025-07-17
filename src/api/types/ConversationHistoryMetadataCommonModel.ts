@@ -24,4 +24,6 @@ export interface ConversationHistoryMetadataCommonModel {
     elevenAssistant?: ElevenLabs.ConversationHistoryElevenAssistantCommonModel;
     initiatorId?: string;
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
+    conversationInitiationSourceVersion?: string;
+    timezone?: string;
 }

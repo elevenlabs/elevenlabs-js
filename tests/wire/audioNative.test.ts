@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../src/Client";
 describe("AudioNative", () => {
     test("get_settings", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             enabled: true,

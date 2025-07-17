@@ -11,7 +11,7 @@ import * as errors from "../../../../errors/index";
 
 export declare namespace AudioIsolation {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -71,10 +71,8 @@ export class AudioIsolation {
         const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 "v1/audio-isolation",
             ),
             method: "POST",
@@ -163,10 +161,8 @@ export class AudioIsolation {
         const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 "v1/audio-isolation/stream",
             ),
             method: "POST",
