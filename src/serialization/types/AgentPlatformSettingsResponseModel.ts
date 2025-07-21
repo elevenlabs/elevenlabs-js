@@ -13,6 +13,7 @@ import { ConversationInitiationClientDataConfigOutput } from "./ConversationInit
 import { AgentCallLimits } from "./AgentCallLimits";
 import { PrivacyConfig } from "./PrivacyConfig";
 import { AgentWorkspaceOverridesOutput } from "./AgentWorkspaceOverridesOutput";
+import { AgentTestingSettings } from "./AgentTestingSettings";
 import { SafetyResponseModel } from "./SafetyResponseModel";
 
 export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema<
@@ -30,6 +31,7 @@ export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
     privacy: PrivacyConfig.optional(),
     workspaceOverrides: core.serialization.property("workspace_overrides", AgentWorkspaceOverridesOutput.optional()),
+    testing: AgentTestingSettings.optional(),
     safety: SafetyResponseModel.optional(),
 });
 
@@ -43,6 +45,7 @@ export declare namespace AgentPlatformSettingsResponseModel {
         call_limits?: AgentCallLimits.Raw | null;
         privacy?: PrivacyConfig.Raw | null;
         workspace_overrides?: AgentWorkspaceOverridesOutput.Raw | null;
+        testing?: AgentTestingSettings.Raw | null;
         safety?: SafetyResponseModel.Raw | null;
     }
 }

@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../src/Client";
 describe("ConversationalAi", () => {
     test("get_document_rag_indexes", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             indexes: [
@@ -50,10 +47,7 @@ describe("ConversationalAi", () => {
 
     test("delete_document_rag_index", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             id: "id",
@@ -87,10 +81,7 @@ describe("ConversationalAi", () => {
 
     test("rag_index_overview", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             total_used_bytes: 1,
@@ -120,10 +111,7 @@ describe("ConversationalAi", () => {
 
     test("update_secret", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { type: "update", name: "name", value: "value" };
         const rawResponseBody = { type: "stored", secret_id: "secret_id", name: "name" };
         server

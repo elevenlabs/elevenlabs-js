@@ -21,5 +21,7 @@ export interface AgentPlatformSettingsResponseModel {
     privacy?: ElevenLabs.PrivacyConfig;
     /** Workspace overrides for the agent */
     workspaceOverrides?: ElevenLabs.AgentWorkspaceOverridesOutput;
+    /** Testing configuration for the agent */
+    testing?: ElevenLabs.AgentTestingSettings;
     safety?: ElevenLabs.SafetyResponseModel;
 }

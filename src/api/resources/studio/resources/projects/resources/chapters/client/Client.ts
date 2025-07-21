@@ -12,7 +12,7 @@ import { Snapshots } from "../resources/snapshots/client/Client";
 
 export declare namespace Chapters {
     export interface Options {
-        environment?: core.Supplier<environments.ElevenLabsEnvironment | environments.ElevenLabsEnvironmentUrls>;
+        environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Override the xi-api-key header */
@@ -72,10 +72,8 @@ export class Chapters {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/chapters`,
             ),
             method: "GET",
@@ -170,10 +168,8 @@ export class Chapters {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/chapters`,
             ),
             method: "POST",
@@ -272,10 +268,8 @@ export class Chapters {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}`,
             ),
             method: "GET",
@@ -371,10 +365,8 @@ export class Chapters {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}`,
             ),
             method: "POST",
@@ -473,10 +465,8 @@ export class Chapters {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}`,
             ),
             method: "DELETE",
@@ -569,10 +559,8 @@ export class Chapters {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (
-                        (await core.Supplier.get(this._options.environment)) ??
-                        environments.ElevenLabsEnvironment.Production
-                    ).base,
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
                 `v1/studio/projects/${encodeURIComponent(projectId)}/chapters/${encodeURIComponent(chapterId)}/convert`,
             ),
             method: "POST",

@@ -14,6 +14,8 @@ export const CreateSipTrunkPhoneNumberRequest: core.serialization.ObjectSchema<
 > = core.serialization.object({
     phoneNumber: core.serialization.property("phone_number", core.serialization.string()),
     label: core.serialization.string(),
+    supportsInbound: core.serialization.property("supports_inbound", core.serialization.boolean().optional()),
+    supportsOutbound: core.serialization.property("supports_outbound", core.serialization.boolean().optional()),
     inboundTrunkConfig: core.serialization.property(
         "inbound_trunk_config",
         InboundSipTrunkConfigRequestModel.optional(),
@@ -28,6 +30,8 @@ export declare namespace CreateSipTrunkPhoneNumberRequest {
     export interface Raw {
         phone_number: string;
         label: string;
+        supports_inbound?: boolean | null;
+        supports_outbound?: boolean | null;
         inbound_trunk_config?: InboundSipTrunkConfigRequestModel.Raw | null;
         outbound_trunk_config?: OutboundSipTrunkConfigRequestModel.Raw | null;
     }

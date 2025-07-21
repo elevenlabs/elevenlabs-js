@@ -29,6 +29,8 @@ export interface PromptAgentApiModelInput {
     ignoreDefaultPersonality?: boolean;
     /** Configuration for RAG */
     rag?: ElevenLabs.RagConfig;
+    /** Timezone for displaying current time in system prompt. If set, the current time will be included in the system prompt using this timezone. Must be a valid timezone name (e.g., 'America/New_York', 'Europe/London', 'UTC'). */
+    timezone?: string;
     /** A list of tools that the agent can use over the course of the conversation, use tool_ids instead */
     tools?: ElevenLabs.PromptAgentApiModelInputToolsItem[];
 }

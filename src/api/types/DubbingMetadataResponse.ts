@@ -13,6 +13,10 @@ export interface DubbingMetadataResponse {
     status: string;
     /** The target languages of the dubbing project. */
     targetLanguages: string[];
+    /** Whether this dubbing project is editable in Dubbing Studio. */
+    editable?: boolean;
+    /** Timestamp this dub was created. */
+    createdAt: Date;
     /** The media metadata of the dubbing project. */
     mediaMetadata?: ElevenLabs.DubbingMediaMetadata;
     /** Optional error message if the dubbing project failed. */

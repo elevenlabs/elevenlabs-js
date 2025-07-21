@@ -8,10 +8,7 @@ import { ElevenLabsClient } from "../../../src/Client";
 describe("Agents", () => {
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { conversation_config: {} };
         const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
         server
@@ -33,10 +30,7 @@ describe("Agents", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             agent_id: "J3Pbu5gP6NNKBscdCdwB",
@@ -170,12 +164,15 @@ describe("Agents", () => {
                         request_headers: { "Content-Type": "application/json" },
                     },
                 },
+                testing: { test_ids: ["test_123", "test_456"] },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
                 {
                     phone_number: "+1987654321",
                     label: "Sales Team",
+                    supports_inbound: true,
+                    supports_outbound: true,
                     phone_number_id: "phone_456",
                     assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
                     outbound_trunk: {
@@ -192,6 +189,7 @@ describe("Agents", () => {
                     provider: "sip_trunk",
                 },
             ],
+            workflow: { key: "value" },
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -389,6 +387,9 @@ describe("Agents", () => {
                         },
                     },
                 },
+                testing: {
+                    testIds: ["test_123", "test_456"],
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -400,6 +401,8 @@ describe("Agents", () => {
                     provider: "sip_trunk",
                     phoneNumber: "+1987654321",
                     label: "Sales Team",
+                    supportsInbound: true,
+                    supportsOutbound: true,
                     phoneNumberId: "phone_456",
                     assignedAgent: {
                         agentId: "F3Pbu5gP6NNKBscdCdwB",
@@ -418,6 +421,9 @@ describe("Agents", () => {
                     },
                 },
             ],
+            workflow: {
+                key: "value",
+            },
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -430,10 +436,7 @@ describe("Agents", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         server.mockEndpoint().delete("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM").respondWith().statusCode(200).build();
 
@@ -443,10 +446,7 @@ describe("Agents", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             agent_id: "J3Pbu5gP6NNKBscdCdwB",
@@ -580,12 +580,15 @@ describe("Agents", () => {
                         request_headers: { "Content-Type": "application/json" },
                     },
                 },
+                testing: { test_ids: ["test_123", "test_456"] },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
                 {
                     phone_number: "+1987654321",
                     label: "Sales Team",
+                    supports_inbound: true,
+                    supports_outbound: true,
                     phone_number_id: "phone_456",
                     assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
                     outbound_trunk: {
@@ -602,6 +605,7 @@ describe("Agents", () => {
                     provider: "sip_trunk",
                 },
             ],
+            workflow: { key: "value" },
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -800,6 +804,9 @@ describe("Agents", () => {
                         },
                     },
                 },
+                testing: {
+                    testIds: ["test_123", "test_456"],
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -811,6 +818,8 @@ describe("Agents", () => {
                     provider: "sip_trunk",
                     phoneNumber: "+1987654321",
                     label: "Sales Team",
+                    supportsInbound: true,
+                    supportsOutbound: true,
                     phoneNumberId: "phone_456",
                     assignedAgent: {
                         agentId: "F3Pbu5gP6NNKBscdCdwB",
@@ -829,6 +838,9 @@ describe("Agents", () => {
                     },
                 },
             ],
+            workflow: {
+                key: "value",
+            },
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -841,10 +853,7 @@ describe("Agents", () => {
 
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             agents: [
@@ -889,10 +898,7 @@ describe("Agents", () => {
 
     test("duplicate", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
         server
@@ -912,10 +918,7 @@ describe("Agents", () => {
 
     test("simulate_conversation", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             simulation_specification: {
                 simulated_user_config: { first_message: "Hello, how can I help you today?", language: "en" },
@@ -1050,10 +1053,7 @@ describe("Agents", () => {
 
     test("simulate_conversation_stream", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({
-            apiKey: "test",
-            environment: { base: server.baseUrl, wss: server.baseUrl },
-        });
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             simulation_specification: {
                 simulated_user_config: { first_message: "Hello, how can I help you today?", language: "en" },
