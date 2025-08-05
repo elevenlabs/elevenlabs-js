@@ -74,10 +74,17 @@ describe("ElevenLabs API Tests", () => {
                 file: audioBlob,
                 modelId: "scribe_v1",
             });
-            expect(typeof transcription.text).toBe("string");
-            expect(transcription.text.length).toBeGreaterThan(0);
-            expect(Array.isArray(transcription.words)).toBeTruthy();
-            expect(transcription.words.length).toBeGreaterThan(0);
+            if ("text" in transcription) {
+                expect(typeof transcription.text).toBe("string");
+                expect(transcription.text.length).toBeGreaterThan(0);
+                expect(Array.isArray(transcription.words)).toBeTruthy();
+                expect(transcription.words.length).toBeGreaterThan(0);
+            } else {
+                expect(Array.isArray(transcription.transcripts)).toBeTruthy();
+                expect(transcription.transcripts.length).toBeGreaterThan(0);
+                expect(typeof transcription.transcripts[0].text).toBe("string");
+                expect(transcription.transcripts[0].text.length).toBeGreaterThan(0);
+            }
         });
     });
 

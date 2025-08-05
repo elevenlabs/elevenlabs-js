@@ -72,7 +72,7 @@ describe("Tools", () => {
                     outputSchema: {
                         key: "value",
                     },
-                    meta: {
+                    _meta: {
                         key: "value",
                     },
                 },
@@ -87,7 +87,7 @@ describe("Tools", () => {
                     outputSchema: {
                         key: "value",
                     },
-                    meta: {
+                    _meta: {
                         key: "value",
                     },
                 },
