@@ -8,21 +8,18 @@ import * as ElevenLabs from "../../../../../../index";
 /**
  * @example
  *     {
- *         name: "name",
- *         defaultTitleVoiceId: "default_title_voice_id",
- *         defaultParagraphVoiceId: "default_paragraph_voice_id",
- *         defaultModelId: "default_model_id"
+ *         name: "name"
  *     }
  */
 export interface BodyCreateStudioProjectV1StudioProjectsPost {
     /** The name of the Studio project, used for identification only. */
     name: string;
     /** The voice_id that corresponds to the default voice used for new titles. */
-    defaultTitleVoiceId: string;
+    defaultTitleVoiceId?: string;
     /** The voice_id that corresponds to the default voice used for new paragraphs. */
-    defaultParagraphVoiceId: string;
+    defaultParagraphVoiceId?: string;
     /** The ID of the model to be used for this Studio project, you can query GET /v1/models to list all available models. */
-    defaultModelId: string;
+    defaultModelId?: string;
     /** An optional URL from which we will extract content to initialize the Studio project. If this is set, 'from_url' and 'from_content' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank. */
     fromUrl?: string;
     fromDocument?: core.FileLike | undefined;

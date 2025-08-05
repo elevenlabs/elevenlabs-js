@@ -21,6 +21,8 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     sourceLang?: string;
     /** The Target language to dub the content into. */
     targetLang?: string;
+    /** [Experimental] An accent to apply when selecting voices from the library and to use to inform translation of the dialect to prefer. */
+    targetAccent?: string;
     /** Number of speakers to use for the dubbing. Set to 0 to automatically detect the number of speakers */
     numSpeakers?: number;
     /** Whether to apply watermark to the output video. */

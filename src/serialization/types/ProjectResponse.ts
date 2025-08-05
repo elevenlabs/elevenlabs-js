@@ -11,6 +11,7 @@ import { ProjectResponseModelAccessLevel } from "./ProjectResponseModelAccessLev
 import { ProjectResponseModelFiction } from "./ProjectResponseModelFiction";
 import { ProjectCreationMetaResponseModel } from "./ProjectCreationMetaResponseModel";
 import { ProjectResponseModelSourceType } from "./ProjectResponseModelSourceType";
+import { CaptionStyleModel } from "./CaptionStyleModel";
 
 export const ProjectResponse: core.serialization.ObjectSchema<
     serializers.ProjectResponse.Raw,
@@ -53,6 +54,8 @@ export const ProjectResponse: core.serialization.ObjectSchema<
     creationMeta: core.serialization.property("creation_meta", ProjectCreationMetaResponseModel.optional()),
     sourceType: core.serialization.property("source_type", ProjectResponseModelSourceType.optional()),
     chaptersEnabled: core.serialization.property("chapters_enabled", core.serialization.boolean().optional()),
+    captionsEnabled: core.serialization.property("captions_enabled", core.serialization.boolean().optional()),
+    captionStyle: core.serialization.property("caption_style", CaptionStyleModel.optional()),
 });
 
 export declare namespace ProjectResponse {
@@ -85,5 +88,7 @@ export declare namespace ProjectResponse {
         creation_meta?: ProjectCreationMetaResponseModel.Raw | null;
         source_type?: ProjectResponseModelSourceType.Raw | null;
         chapters_enabled?: boolean | null;
+        captions_enabled?: boolean | null;
+        caption_style?: CaptionStyleModel.Raw | null;
     }
 }

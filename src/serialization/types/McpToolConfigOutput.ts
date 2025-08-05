@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { IntegrationType } from "./IntegrationType";
 import { McpApprovalPolicy } from "./McpApprovalPolicy";
 
@@ -15,6 +16,9 @@ export const McpToolConfigOutput: core.serialization.ObjectSchema<
     name: core.serialization.string(),
     description: core.serialization.string(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
+    disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
+    assignments: core.serialization.list(DynamicVariableAssignment).optional(),
     integrationType: core.serialization.property("integration_type", IntegrationType),
     parameters: core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyOutput).optional(),
     approvalPolicy: core.serialization.property("approval_policy", McpApprovalPolicy.optional()),
@@ -33,6 +37,9 @@ export declare namespace McpToolConfigOutput {
         name: string;
         description: string;
         response_timeout_secs?: number | null;
+        disable_interruptions?: boolean | null;
+        force_pre_tool_speech?: boolean | null;
+        assignments?: DynamicVariableAssignment.Raw[] | null;
         integration_type: IntegrationType.Raw;
         parameters?: serializers.ObjectJsonSchemaPropertyOutput.Raw | null;
         approval_policy?: McpApprovalPolicy.Raw | null;

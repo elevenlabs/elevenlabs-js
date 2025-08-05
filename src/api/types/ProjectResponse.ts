@@ -61,4 +61,8 @@ export interface ProjectResponse {
     sourceType?: ElevenLabs.ProjectResponseModelSourceType;
     /** Whether chapters are enabled for the project. */
     chaptersEnabled?: boolean;
+    /** Whether captions are enabled for the project. */
+    captionsEnabled?: boolean;
+    /** Global styling to be applied to all captions */
+    captionStyle?: ElevenLabs.CaptionStyleModel;
 }

@@ -9,4 +9,5 @@ export interface ConversationHistoryAnalysisCommonModel {
     dataCollectionResults?: Record<string, ElevenLabs.DataCollectionResultCommonModel>;
     callSuccessful: ElevenLabs.EvaluationSuccessResult;
     transcriptSummary: string;
+    callSummaryTitle?: string;
 }

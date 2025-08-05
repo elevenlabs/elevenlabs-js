@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { SegmentSubtitleFrame } from "./SegmentSubtitleFrame";
 import { DubbedSegment } from "./DubbedSegment";
 
 export const SpeakerSegment: core.serialization.ObjectSchema<
@@ -15,6 +16,7 @@ export const SpeakerSegment: core.serialization.ObjectSchema<
     startTime: core.serialization.property("start_time", core.serialization.number()),
     endTime: core.serialization.property("end_time", core.serialization.number()),
     text: core.serialization.string(),
+    subtitles: core.serialization.list(SegmentSubtitleFrame),
     dubs: core.serialization.record(core.serialization.string(), DubbedSegment),
 });
 
@@ -24,6 +26,7 @@ export declare namespace SpeakerSegment {
         start_time: number;
         end_time: number;
         text: string;
+        subtitles: SegmentSubtitleFrame.Raw[];
         dubs: Record<string, DubbedSegment.Raw>;
     }
 }

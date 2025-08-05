@@ -9,4 +9,5 @@ export interface ToolResponseModel {
     /** The type of tool */
     toolConfig: ElevenLabs.ToolResponseModelToolConfig;
     accessInfo: ElevenLabs.ResourceAccessInfo;
+    usageStats: ElevenLabs.ToolUsageStatsResponseModel;
 }

@@ -648,8 +648,8 @@ export class Agents {
      *     await client.conversationalAi.agents.simulateConversation("21m00Tcm4TlvDq8ikWAM", {
      *         simulationSpecification: {
      *             simulatedUserConfig: {
-     *                 "first_message": "Hello, how can I help you today?",
-     *                 "language": "en"
+     *                 firstMessage: "Hello, how can I help you today?",
+     *                 language: "en"
      *             }
      *         }
      *     })
@@ -755,8 +755,8 @@ export class Agents {
      *     await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8ikWAM", {
      *         simulationSpecification: {
      *             simulatedUserConfig: {
-     *                 "first_message": "Hello, how can I help you today?",
-     *                 "language": "en"
+     *                 firstMessage: "Hello, how can I help you today?",
+     *                 language: "en"
      *             }
      *         }
      *     })

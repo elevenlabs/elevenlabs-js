@@ -5,13 +5,14 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { ToolType } from "./ToolType";
 import { ConversationHistoryTranscriptToolCallCommonModelToolDetails } from "./ConversationHistoryTranscriptToolCallCommonModelToolDetails";
 
 export const ConversationHistoryTranscriptToolCallCommonModel: core.serialization.ObjectSchema<
     serializers.ConversationHistoryTranscriptToolCallCommonModel.Raw,
     ElevenLabs.ConversationHistoryTranscriptToolCallCommonModel
 > = core.serialization.object({
-    type: core.serialization.string().optional(),
+    type: ToolType.optional(),
     requestId: core.serialization.property("request_id", core.serialization.string()),
     toolName: core.serialization.property("tool_name", core.serialization.string()),
     paramsAsJson: core.serialization.property("params_as_json", core.serialization.string()),
@@ -24,7 +25,7 @@ export const ConversationHistoryTranscriptToolCallCommonModel: core.serializatio
 
 export declare namespace ConversationHistoryTranscriptToolCallCommonModel {
     export interface Raw {
-        type?: string | null;
+        type?: ToolType.Raw | null;
         request_id: string;
         tool_name: string;
         params_as_json: string;

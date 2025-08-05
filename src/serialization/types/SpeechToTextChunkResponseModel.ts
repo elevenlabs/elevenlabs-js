@@ -16,6 +16,7 @@ export const SpeechToTextChunkResponseModel: core.serialization.ObjectSchema<
     languageProbability: core.serialization.property("language_probability", core.serialization.number()),
     text: core.serialization.string(),
     words: core.serialization.list(SpeechToTextWordResponseModel),
+    channelIndex: core.serialization.property("channel_index", core.serialization.number().optional()),
     additionalFormats: core.serialization.property(
         "additional_formats",
         core.serialization.list(AdditionalFormatResponseModel.optional()).optional(),
@@ -28,6 +29,7 @@ export declare namespace SpeechToTextChunkResponseModel {
         language_probability: number;
         text: string;
         words: SpeechToTextWordResponseModel.Raw[];
+        channel_index?: number | null;
         additional_formats?: (AdditionalFormatResponseModel.Raw | null | undefined)[] | null;
     }
 }

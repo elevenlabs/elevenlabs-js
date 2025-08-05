@@ -10,18 +10,27 @@ import { ToolAnnotations } from "./ToolAnnotations";
 export const Tool: core.serialization.ObjectSchema<serializers.Tool.Raw, ElevenLabs.Tool> = core.serialization
     .object({
         name: core.serialization.string(),
+        title: core.serialization.string().optional(),
         description: core.serialization.string().optional(),
         inputSchema: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
+        outputSchema: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
         annotations: ToolAnnotations.optional(),
+        meta: core.serialization.property(
+            "_meta",
+            core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+        ),
     })
     .passthrough();
 
 export declare namespace Tool {
     export interface Raw {
         name: string;
+        title?: string | null;
         description?: string | null;
         inputSchema: Record<string, unknown>;
+        outputSchema?: Record<string, unknown> | null;
         annotations?: ToolAnnotations.Raw | null;
+        _meta?: Record<string, unknown> | null;
         [key: string]: any;
     }
 }

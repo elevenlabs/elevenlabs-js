@@ -11,10 +11,15 @@ export const PromptAgentApiModelOverride: core.serialization.ObjectSchema<
     ElevenLabs.PromptAgentApiModelOverride
 > = core.serialization.object({
     prompt: core.serialization.string().optional(),
+    nativeMcpServerIds: core.serialization.property(
+        "native_mcp_server_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace PromptAgentApiModelOverride {
     export interface Raw {
         prompt?: string | null;
+        native_mcp_server_ids?: string[] | null;
     }
 }

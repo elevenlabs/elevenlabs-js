@@ -7,6 +7,7 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ToolResponseModelToolConfig } from "./ToolResponseModelToolConfig";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
+import { ToolUsageStatsResponseModel } from "./ToolUsageStatsResponseModel";
 
 export const ToolResponseModel: core.serialization.ObjectSchema<
     serializers.ToolResponseModel.Raw,
@@ -15,6 +16,7 @@ export const ToolResponseModel: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     toolConfig: core.serialization.property("tool_config", ToolResponseModelToolConfig),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
+    usageStats: core.serialization.property("usage_stats", ToolUsageStatsResponseModel),
 });
 
 export declare namespace ToolResponseModel {
@@ -22,5 +24,6 @@ export declare namespace ToolResponseModel {
         id: string;
         tool_config: ToolResponseModelToolConfig.Raw;
         access_info: ResourceAccessInfo.Raw;
+        usage_stats: ToolUsageStatsResponseModel.Raw;
     }
 }

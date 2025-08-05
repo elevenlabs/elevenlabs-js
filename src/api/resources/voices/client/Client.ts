@@ -199,6 +199,7 @@ export class Voices {
             fineTuningState,
             collectionId,
             includeTotalCount,
+            voiceIds,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (nextPageToken != null) {
@@ -239,6 +240,14 @@ export class Voices {
 
         if (includeTotalCount != null) {
             _queryParams["include_total_count"] = includeTotalCount.toString();
+        }
+
+        if (voiceIds != null) {
+            if (Array.isArray(voiceIds)) {
+                _queryParams["voice_ids"] = voiceIds.map((item) => item);
+            } else {
+                _queryParams["voice_ids"] = voiceIds;
+            }
         }
 
         const _response = await core.fetcher({

@@ -65,6 +65,10 @@ export interface WidgetConfigResponse {
     transcriptEnabled?: boolean;
     /** Whether the user should be able to send text messages */
     textInputEnabled?: boolean;
+    /** Whether the widget should be expanded by default */
+    defaultExpanded?: boolean;
+    /** Whether the widget should always be expanded */
+    alwaysExpanded?: boolean;
     /** Text contents of the widget */
     textContents?: ElevenLabs.WidgetTextContents;
     /** Styles for the widget */

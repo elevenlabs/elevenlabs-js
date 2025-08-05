@@ -16,6 +16,10 @@ export const AgentSummaryResponseModel: core.serialization.ObjectSchema<
     tags: core.serialization.list(core.serialization.string()),
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
+    lastCallTimeUnixSecs: core.serialization.property(
+        "last_call_time_unix_secs",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace AgentSummaryResponseModel {
@@ -25,5 +29,6 @@ export declare namespace AgentSummaryResponseModel {
         tags: string[];
         created_at_unix_secs: number;
         access_info: ResourceAccessInfo.Raw;
+        last_call_time_unix_secs?: number | null;
     }
 }

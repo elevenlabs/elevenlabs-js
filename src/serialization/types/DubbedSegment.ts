@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { SegmentSubtitleFrame } from "./SegmentSubtitleFrame";
 import { DubbingMediaReference } from "./DubbingMediaReference";
 
 export const DubbedSegment: core.serialization.ObjectSchema<serializers.DubbedSegment.Raw, ElevenLabs.DubbedSegment> =
@@ -12,6 +13,7 @@ export const DubbedSegment: core.serialization.ObjectSchema<serializers.DubbedSe
         startTime: core.serialization.property("start_time", core.serialization.number()),
         endTime: core.serialization.property("end_time", core.serialization.number()),
         text: core.serialization.string().optional(),
+        subtitles: core.serialization.list(SegmentSubtitleFrame),
         audioStale: core.serialization.property("audio_stale", core.serialization.boolean()),
         mediaRef: core.serialization.property("media_ref", DubbingMediaReference.optional()),
     });
@@ -21,6 +23,7 @@ export declare namespace DubbedSegment {
         start_time: number;
         end_time: number;
         text?: string | null;
+        subtitles: SegmentSubtitleFrame.Raw[];
         audio_stale: boolean;
         media_ref?: DubbingMediaReference.Raw | null;
     }

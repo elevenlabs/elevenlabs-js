@@ -9,6 +9,10 @@ export interface FeaturesUsageCommonModel {
     transferToAgent?: ElevenLabs.FeatureStatusCommonModel;
     transferToNumber?: ElevenLabs.FeatureStatusCommonModel;
     multivoice?: ElevenLabs.FeatureStatusCommonModel;
+    dtmfTones?: ElevenLabs.FeatureStatusCommonModel;
+    externalMcpServers?: ElevenLabs.FeatureStatusCommonModel;
     piiZrmWorkspace?: boolean;
     piiZrmAgent?: boolean;
+    toolDynamicVariableUpdates?: ElevenLabs.FeatureStatusCommonModel;
+    isLivekit?: boolean;
 }

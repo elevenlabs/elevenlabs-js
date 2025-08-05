@@ -227,6 +227,10 @@ export class Dubbing {
             _request.append("target_lang", request.targetLang);
         }
 
+        if (request.targetAccent != null) {
+            _request.append("target_accent", request.targetAccent);
+        }
+
         if (request.numSpeakers != null) {
             _request.append("num_speakers", request.numSpeakers.toString());
         }

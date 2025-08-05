@@ -9,6 +9,7 @@ export interface ConversationInitiationClientDataRequestInput {
     customLlmExtraBody?: Record<string, unknown>;
     /** ID of the end user participating in this conversation (for agent owner's user identification) */
     userId?: string;
+    sourceInfo?: ElevenLabs.ConversationInitiationSourceInfo;
     dynamicVariables?: Record<
         string,
         ElevenLabs.ConversationInitiationClientDataRequestInputDynamicVariablesValue | undefined

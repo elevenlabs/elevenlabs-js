@@ -27,6 +27,7 @@ export * from "./v1TextToSpeechVoiceIdStreamInput/types";
 export * as v1TextToSpeechVoiceIdMultiStreamInput from "./v1TextToSpeechVoiceIdMultiStreamInput";
 export * from "./v1TextToSpeechVoiceIdMultiStreamInput/types";
 export * as conversationalAi from "./conversationalAi";
+export * as serviceAccounts from "./serviceAccounts";
 export * as workspace from "./workspace";
 export * as models from "./models";
 export * from "./history/client/requests";

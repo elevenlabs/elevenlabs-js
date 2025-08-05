@@ -8,6 +8,7 @@ export interface DubbedSegment {
     startTime: number;
     endTime: number;
     text?: string;
+    subtitles: ElevenLabs.SegmentSubtitleFrame[];
     audioStale: boolean;
     mediaRef?: ElevenLabs.DubbingMediaReference;
 }

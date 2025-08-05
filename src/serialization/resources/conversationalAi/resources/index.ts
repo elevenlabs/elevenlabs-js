@@ -1,3 +1,5 @@
+export * as conversations from "./conversations";
+export * from "./conversations/types";
 export * as phoneNumbers from "./phoneNumbers";
 export * from "./phoneNumbers/types";
 export * as dashboard from "./dashboard";
@@ -19,4 +21,3 @@ export * as sipTrunk from "./sipTrunk";
 export * from "./sipTrunk/client/requests";
 export * as mcpServers from "./mcpServers";
 export * from "./mcpServers/client/requests";
-export * as conversations from "./conversations";

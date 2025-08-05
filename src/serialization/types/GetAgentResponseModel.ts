@@ -24,7 +24,6 @@ export const GetAgentResponseModel: core.serialization.ObjectSchema<
         "phone_numbers",
         core.serialization.list(GetAgentResponseModelPhoneNumbersItem).optional(),
     ),
-    workflow: core.serialization.unknown().optional(),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
     tags: core.serialization.list(core.serialization.string()).optional(),
 });
@@ -37,7 +36,6 @@ export declare namespace GetAgentResponseModel {
         metadata: AgentMetadataResponseModel.Raw;
         platform_settings?: AgentPlatformSettingsResponseModel.Raw | null;
         phone_numbers?: GetAgentResponseModelPhoneNumbersItem.Raw[] | null;
-        workflow?: unknown | null;
         access_info?: ResourceAccessInfo.Raw | null;
         tags?: string[] | null;
     }

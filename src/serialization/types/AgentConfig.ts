@@ -5,10 +5,22 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
+import { PromptAgentApiModelOutput } from "./PromptAgentApiModelOutput";
 
-export const AgentConfig: core.serialization.Schema<serializers.AgentConfig.Raw, ElevenLabs.AgentConfig> =
-    core.serialization.unknown();
+export const AgentConfig: core.serialization.ObjectSchema<serializers.AgentConfig.Raw, ElevenLabs.AgentConfig> =
+    core.serialization.object({
+        firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
+        language: core.serialization.string().optional(),
+        dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
+        prompt: PromptAgentApiModelOutput.optional(),
+    });
 
 export declare namespace AgentConfig {
-    export type Raw = unknown;
+    export interface Raw {
+        first_message?: string | null;
+        language?: string | null;
+        dynamic_variables?: DynamicVariablesConfig.Raw | null;
+        prompt?: PromptAgentApiModelOutput.Raw | null;
+    }
 }

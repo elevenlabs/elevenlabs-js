@@ -11,6 +11,7 @@ import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
 import { TransferToAgentToolConfig } from "./TransferToAgentToolConfig";
 import { TransferToNumberToolConfigOutput } from "./TransferToNumberToolConfigOutput";
+import { VoicemailDetectionToolConfig } from "./VoicemailDetectionToolConfig";
 
 export const SystemToolConfigOutputParams: core.serialization.Schema<
     serializers.SystemToolConfigOutputParams.Raw,
@@ -23,6 +24,7 @@ export const SystemToolConfigOutputParams: core.serialization.Schema<
         skip_turn: SkipTurnToolConfig,
         transfer_to_agent: TransferToAgentToolConfig,
         transfer_to_number: TransferToNumberToolConfigOutput,
+        voicemail_detection: VoicemailDetectionToolConfig,
     })
     .transform<ElevenLabs.SystemToolConfigOutputParams>({
         transform: (value) => value,
@@ -36,7 +38,8 @@ export declare namespace SystemToolConfigOutputParams {
         | SystemToolConfigOutputParams.PlayKeypadTouchTone
         | SystemToolConfigOutputParams.SkipTurn
         | SystemToolConfigOutputParams.TransferToAgent
-        | SystemToolConfigOutputParams.TransferToNumber;
+        | SystemToolConfigOutputParams.TransferToNumber
+        | SystemToolConfigOutputParams.VoicemailDetection;
 
     export interface EndCall extends EndCallToolConfig.Raw {
         system_tool_type: "end_call";
@@ -60,5 +63,9 @@ export declare namespace SystemToolConfigOutputParams {
 
     export interface TransferToNumber extends TransferToNumberToolConfigOutput.Raw {
         system_tool_type: "transfer_to_number";
+    }
+
+    export interface VoicemailDetection extends VoicemailDetectionToolConfig.Raw {
+        system_tool_type: "voicemail_detection";
     }
 }

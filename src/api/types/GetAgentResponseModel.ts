@@ -17,7 +17,6 @@ export interface GetAgentResponseModel {
     platformSettings?: ElevenLabs.AgentPlatformSettingsResponseModel;
     /** The phone numbers of the agent */
     phoneNumbers?: ElevenLabs.GetAgentResponseModelPhoneNumbersItem[];
-    workflow?: unknown;
     /** The access information of the agent for the user */
     accessInfo?: ElevenLabs.ResourceAccessInfo;
     /** Agent tags used to categorize the agent */

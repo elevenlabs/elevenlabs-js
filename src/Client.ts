@@ -4,7 +4,8 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
-import { mergeHeaders } from "./core/headers";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "./core/headers";
+import * as errors from "./errors/index";
 import { History } from "./api/resources/history/client/Client";
 import { TextToSoundEffects } from "./api/resources/textToSoundEffects/client/Client";
 import { AudioIsolation } from "./api/resources/audioIsolation/client/Client";
@@ -21,6 +22,7 @@ import { Models } from "./api/resources/models/client/Client";
 import { AudioNative } from "./api/resources/audioNative/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { PronunciationDictionaries } from "./api/resources/pronunciationDictionaries/client/Client";
+import { ServiceAccounts } from "./api/resources/serviceAccounts/client/Client";
 import { Webhooks } from "./api/resources/webhooks/client/Client";
 import { SpeechToText } from "./api/resources/speechToText/client/Client";
 import { ForcedAlignment } from "./api/resources/forcedAlignment/client/Client";
@@ -70,6 +72,7 @@ export class ElevenLabsClient {
     protected _audioNative: AudioNative | undefined;
     protected _usage: Usage | undefined;
     protected _pronunciationDictionaries: PronunciationDictionaries | undefined;
+    protected _serviceAccounts: ServiceAccounts | undefined;
     protected _webhooks: Webhooks | undefined;
     protected _speechToText: SpeechToText | undefined;
     protected _forcedAlignment: ForcedAlignment | undefined;
@@ -84,8 +87,8 @@ export class ElevenLabsClient {
                     "xi-api-key": _options?.apiKey,
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                    "X-Fern-SDK-Version": "v2.7.0",
-                    "User-Agent": "@elevenlabs/elevenlabs-js/v2.7.0",
+                    "X-Fern-SDK-Version": "v2.8.0",
+                    "User-Agent": "@elevenlabs/elevenlabs-js/v2.8.0",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -158,6 +161,10 @@ export class ElevenLabsClient {
         return (this._pronunciationDictionaries ??= new PronunciationDictionaries(this._options));
     }
 
+    public get serviceAccounts(): ServiceAccounts {
+        return (this._serviceAccounts ??= new ServiceAccounts(this._options));
+    }
+
     public get webhooks(): Webhooks {
         return (this._webhooks ??= new Webhooks(this._options));
     }
@@ -176,5 +183,68 @@ export class ElevenLabsClient {
 
     public get workspace(): Workspace {
         return (this._workspace ??= new Workspace(this._options));
+    }
+
+    /**
+     * Add a generated voice to the voice library.
+     *
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.saveAVoicePreview()
+     */
+    public saveAVoicePreview(requestOptions?: ElevenLabsClient.RequestOptions): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__saveAVoicePreview(requestOptions));
+    }
+
+    private async __saveAVoicePreview(
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/text-to-voice/create-voice-from-preview",
+            ),
+            method: "POST",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return { data: undefined, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ElevenLabsError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/text-to-voice/create-voice-from-preview.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
     }
 }

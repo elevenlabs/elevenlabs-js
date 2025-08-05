@@ -12,6 +12,12 @@ export interface ClientToolConfigOutput {
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. Must be between 1 and 120 seconds (inclusive). */
     responseTimeoutSecs?: number;
+    /** If true, the user will not be able to interrupt the agent while this tool is running. */
+    disableInterruptions?: boolean;
+    /** If true, the agent will speak before the tool call. */
+    forcePreToolSpeech?: boolean;
+    /** Configuration for extracting values from tool responses and assigning them to dynamic variables */
+    assignments?: ElevenLabs.DynamicVariableAssignment[];
     /** Schema for any parameters to pass to the client */
     parameters?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
     /** If true, calling this tool should block the conversation until the client responds with some response which is passed to the llm. If false then we will continue the conversation without waiting for the client to respond, this is useful to show content to a user but not block the conversation */

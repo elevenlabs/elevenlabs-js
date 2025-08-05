@@ -49,4 +49,8 @@ export interface VoicesSearchRequest {
      * Whether to include the total count of voices found in the response. Incurs a performance cost.
      */
     includeTotalCount?: boolean;
+    /**
+     * Voice IDs to lookup by. Maximum 100 voice IDs.
+     */
+    voiceIds?: string | string[];
 }

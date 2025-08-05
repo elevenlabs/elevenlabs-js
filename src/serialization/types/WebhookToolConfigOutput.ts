@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { WebhookToolApiSchemaConfigOutput } from "./WebhookToolApiSchemaConfigOutput";
 import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
 
@@ -15,6 +16,9 @@ export const WebhookToolConfigOutput: core.serialization.ObjectSchema<
     name: core.serialization.string(),
     description: core.serialization.string(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
+    disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
+    assignments: core.serialization.list(DynamicVariableAssignment).optional(),
     apiSchema: core.serialization.property("api_schema", WebhookToolApiSchemaConfigOutput),
     dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
 });
@@ -24,6 +28,9 @@ export declare namespace WebhookToolConfigOutput {
         name: string;
         description: string;
         response_timeout_secs?: number | null;
+        disable_interruptions?: boolean | null;
+        force_pre_tool_speech?: boolean | null;
+        assignments?: DynamicVariableAssignment.Raw[] | null;
         api_schema: WebhookToolApiSchemaConfigOutput.Raw;
         dynamic_variables?: DynamicVariablesConfig.Raw | null;
     }
