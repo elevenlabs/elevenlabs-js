@@ -5,4 +5,6 @@
 export interface PromptAgentApiModelOverride {
     /** The prompt for the agent */
     prompt?: string;
+    /** A list of Native MCP server ids to be used by the agent */
+    nativeMcpServerIds?: string[];
 }

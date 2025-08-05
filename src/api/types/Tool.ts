@@ -9,9 +9,12 @@ import * as ElevenLabs from "../index";
  */
 export interface Tool {
     name: string;
+    title?: string;
     description?: string;
     inputSchema: Record<string, unknown>;
+    outputSchema?: Record<string, unknown>;
     annotations?: ElevenLabs.ToolAnnotations;
+    meta?: Record<string, unknown>;
     /** Accepts any additional properties */
     [key: string]: any;
 }

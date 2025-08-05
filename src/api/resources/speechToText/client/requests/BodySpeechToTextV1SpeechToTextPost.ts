@@ -10,6 +10,11 @@ import * as ElevenLabs from "../../../../index";
  *     {
  *         modelId: "model_id"
  *     }
+ *
+ * @example
+ *     {
+ *         modelId: "model_id"
+ *     }
  */
 export interface BodySpeechToTextV1SpeechToTextPost {
     /**
@@ -45,4 +50,6 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     temperature?: number;
     /** If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be an integer between 0 and 2147483647. */
     seed?: number;
+    /** Whether the audio file contains multiple channels where each channel contains a single speaker. When enabled, each channel will be transcribed independently and the results will be combined. Each word in the response will include a 'channel_index' field indicating which channel it was spoken on. A maximum of 5 channels is supported. */
+    useMultiChannel?: boolean;
 }

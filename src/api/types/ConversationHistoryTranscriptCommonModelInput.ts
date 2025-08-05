@@ -8,7 +8,7 @@ export interface ConversationHistoryTranscriptCommonModelInput {
     role: ElevenLabs.ConversationHistoryTranscriptCommonModelInputRole;
     message?: string;
     toolCalls?: ElevenLabs.ConversationHistoryTranscriptToolCallCommonModel[];
-    toolResults?: ElevenLabs.ConversationHistoryTranscriptToolResultCommonModel[];
+    toolResults?: ElevenLabs.ConversationHistoryTranscriptCommonModelInputToolResultsItem[];
     feedback?: ElevenLabs.UserFeedback;
     llmOverride?: string;
     timeInCallSecs: number;

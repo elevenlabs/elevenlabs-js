@@ -21,6 +21,7 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "sip_trunk",
     "twilio",
     "genesys",
+    "swift_sdk",
 ]);
 
 export declare namespace ConversationInitiationSource {
@@ -35,5 +36,6 @@ export declare namespace ConversationInitiationSource {
         | "widget"
         | "sip_trunk"
         | "twilio"
-        | "genesys";
+        | "genesys"
+        | "swift_sdk";
 }

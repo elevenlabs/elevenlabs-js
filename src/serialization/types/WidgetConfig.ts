@@ -52,6 +52,8 @@ export const WidgetConfig: core.serialization.ObjectSchema<serializers.WidgetCon
         micMutingEnabled: core.serialization.property("mic_muting_enabled", core.serialization.boolean().optional()),
         transcriptEnabled: core.serialization.property("transcript_enabled", core.serialization.boolean().optional()),
         textInputEnabled: core.serialization.property("text_input_enabled", core.serialization.boolean().optional()),
+        defaultExpanded: core.serialization.property("default_expanded", core.serialization.boolean().optional()),
+        alwaysExpanded: core.serialization.property("always_expanded", core.serialization.boolean().optional()),
         textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
         styles: WidgetStyles.optional(),
         languageSelector: core.serialization.property("language_selector", core.serialization.boolean().optional()),
@@ -95,6 +97,8 @@ export declare namespace WidgetConfig {
         mic_muting_enabled?: boolean | null;
         transcript_enabled?: boolean | null;
         text_input_enabled?: boolean | null;
+        default_expanded?: boolean | null;
+        always_expanded?: boolean | null;
         text_contents?: WidgetTextContents.Raw | null;
         styles?: WidgetStyles.Raw | null;
         language_selector?: boolean | null;

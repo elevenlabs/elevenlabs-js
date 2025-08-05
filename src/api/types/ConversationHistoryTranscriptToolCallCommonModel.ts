@@ -5,7 +5,7 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationHistoryTranscriptToolCallCommonModel {
-    type?: string;
+    type?: ElevenLabs.ToolType;
     requestId: string;
     toolName: string;
     paramsAsJson: string;

@@ -21,7 +21,8 @@ export type WorkspaceResourceType =
     | "convai_phone_numbers"
     | "convai_mcp_servers"
     | "convai_batch_calls"
-    | "convai_agent_response_tests";
+    | "convai_agent_response_tests"
+    | "convai_test_suite_invocations";
 export const WorkspaceResourceType = {
     Voice: "voice",
     VoiceCollection: "voice_collection",
@@ -39,4 +40,5 @@ export const WorkspaceResourceType = {
     ConvaiMcpServers: "convai_mcp_servers",
     ConvaiBatchCalls: "convai_batch_calls",
     ConvaiAgentResponseTests: "convai_agent_response_tests",
+    ConvaiTestSuiteInvocations: "convai_test_suite_invocations",
 } as const;

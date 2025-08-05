@@ -65,7 +65,15 @@ describe("Resource", () => {
                     start_time: 1.1,
                     end_time: 1.1,
                     text: "text",
-                    dubs: { key: { start_time: 1.1, end_time: 1.1, audio_stale: true } },
+                    subtitles: [{ start_time: 1.1, end_time: 1.1, lines: ["lines"] }],
+                    dubs: {
+                        key: {
+                            start_time: 1.1,
+                            end_time: 1.1,
+                            subtitles: [{ start_time: 1.1, end_time: 1.1, lines: ["lines"] }],
+                            audio_stale: true,
+                        },
+                    },
                 },
             },
             renders: {
@@ -153,10 +161,24 @@ describe("Resource", () => {
                     startTime: 1.1,
                     endTime: 1.1,
                     text: "text",
+                    subtitles: [
+                        {
+                            startTime: 1.1,
+                            endTime: 1.1,
+                            lines: ["lines"],
+                        },
+                    ],
                     dubs: {
                         key: {
                             startTime: 1.1,
                             endTime: 1.1,
+                            subtitles: [
+                                {
+                                    startTime: 1.1,
+                                    endTime: 1.1,
+                                    lines: ["lines"],
+                                },
+                            ],
                             audioStale: true,
                         },
                     },

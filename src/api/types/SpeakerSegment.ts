@@ -9,5 +9,6 @@ export interface SpeakerSegment {
     startTime: number;
     endTime: number;
     text: string;
+    subtitles: ElevenLabs.SegmentSubtitleFrame[];
     dubs: Record<string, ElevenLabs.DubbedSegment>;
 }

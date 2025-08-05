@@ -20,11 +20,13 @@ export const BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConver
         "extra_evaluation_criteria",
         core.serialization.list(PromptEvaluationCriteria).optional(),
     ),
+    newTurnsLimit: core.serialization.property("new_turns_limit", core.serialization.number().optional()),
 });
 
 export declare namespace BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost {
     export interface Raw {
         simulation_specification: ConversationSimulationSpecification.Raw;
         extra_evaluation_criteria?: PromptEvaluationCriteria.Raw[] | null;
+        new_turns_limit?: number | null;
     }
 }

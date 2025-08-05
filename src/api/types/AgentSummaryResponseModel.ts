@@ -15,4 +15,6 @@ export interface AgentSummaryResponseModel {
     createdAtUnixSecs: number;
     /** The access information of the agent */
     accessInfo: ElevenLabs.ResourceAccessInfo;
+    /** The time of the most recent call in unix seconds, null if no calls have been made */
+    lastCallTimeUnixSecs?: number;
 }

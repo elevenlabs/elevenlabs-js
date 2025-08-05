@@ -151,6 +151,117 @@ export class Conversations {
     }
 
     /**
+     * Get a WebRTC session token for real-time communication.
+     *
+     * @param {ElevenLabs.conversationalAi.ConversationsGetWebrtcTokenRequest} request
+     * @param {Conversations.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.conversations.getWebrtcToken({
+     *         agentId: "21m00Tcm4TlvDq8ikWAM"
+     *     })
+     */
+    public getWebrtcToken(
+        request: ElevenLabs.conversationalAi.ConversationsGetWebrtcTokenRequest,
+        requestOptions?: Conversations.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.TokenResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__getWebrtcToken(request, requestOptions));
+    }
+
+    private async __getWebrtcToken(
+        request: ElevenLabs.conversationalAi.ConversationsGetWebrtcTokenRequest,
+        requestOptions?: Conversations.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.TokenResponseModel>> {
+        const { agentId, participantName, source, version } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        _queryParams["agent_id"] = agentId;
+        if (participantName != null) {
+            _queryParams["participant_name"] = participantName;
+        }
+
+        if (source != null) {
+            _queryParams["source"] = serializers.ConversationInitiationSource.jsonOrThrow(source, {
+                unrecognizedObjectKeys: "strip",
+            });
+        }
+
+        if (version != null) {
+            _queryParams["version"] = version;
+        }
+
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/conversation/token",
+            ),
+            method: "GET",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
+            queryParameters: _queryParams,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.TokenResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/convai/conversation/token.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
      * Get all conversations of agents that user owns. With option to restrict to a specific agent.
      *
      * @param {ElevenLabs.conversationalAi.ConversationsListRequest} request
@@ -172,7 +283,16 @@ export class Conversations {
         request: ElevenLabs.conversationalAi.ConversationsListRequest = {},
         requestOptions?: Conversations.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetConversationsPageResponseModel>> {
-        const { cursor, agentId, callSuccessful, callStartBeforeUnix, callStartAfterUnix, pageSize } = request;
+        const {
+            cursor,
+            agentId,
+            callSuccessful,
+            callStartBeforeUnix,
+            callStartAfterUnix,
+            userId,
+            pageSize,
+            summaryMode,
+        } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
             _queryParams["cursor"] = cursor;
@@ -196,8 +316,19 @@ export class Conversations {
             _queryParams["call_start_after_unix"] = callStartAfterUnix.toString();
         }
 
+        if (userId != null) {
+            _queryParams["user_id"] = userId;
+        }
+
         if (pageSize != null) {
             _queryParams["page_size"] = pageSize.toString();
+        }
+
+        if (summaryMode != null) {
+            _queryParams["summary_mode"] = serializers.conversationalAi.ConversationsListRequestSummaryMode.jsonOrThrow(
+                summaryMode,
+                { unrecognizedObjectKeys: "strip" },
+            );
         }
 
         const _response = await core.fetcher({

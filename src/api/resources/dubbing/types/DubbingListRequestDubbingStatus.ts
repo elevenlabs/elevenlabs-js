@@ -3,7 +3,7 @@
  */
 
 /**
- * Status of the dubbing, either 'in_progress', 'completed' or 'failed'.
+ * What state the dub is currently in.
  */
 export type DubbingListRequestDubbingStatus = "dubbing" | "dubbed" | "failed";
 export const DubbingListRequestDubbingStatus = {

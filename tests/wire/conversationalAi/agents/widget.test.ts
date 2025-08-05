@@ -43,6 +43,8 @@ describe("Widget", () => {
                 mic_muting_enabled: true,
                 transcript_enabled: true,
                 text_input_enabled: true,
+                default_expanded: true,
+                always_expanded: true,
                 text_contents: {
                     main_label: "main_label",
                     start_call: "start_call",
@@ -146,6 +148,8 @@ describe("Widget", () => {
                 micMutingEnabled: true,
                 transcriptEnabled: true,
                 textInputEnabled: true,
+                defaultExpanded: true,
+                alwaysExpanded: true,
                 textContents: {
                     mainLabel: "main_label",
                     startCall: "start_call",

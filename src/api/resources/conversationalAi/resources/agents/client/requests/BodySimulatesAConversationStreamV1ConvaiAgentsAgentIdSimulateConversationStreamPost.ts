@@ -20,4 +20,6 @@ export interface BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateCo
     simulationSpecification: ElevenLabs.ConversationSimulationSpecification;
     /** A list of evaluation criteria to test */
     extraEvaluationCriteria?: ElevenLabs.PromptEvaluationCriteria[];
+    /** Maximum number of new turns to generate in the conversation simulation */
+    newTurnsLimit?: number;
 }

@@ -12,6 +12,12 @@ export interface McpToolConfigInput {
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. */
     responseTimeoutSecs?: number;
+    /** If true, the user will not be able to interrupt the agent while this tool is running. */
+    disableInterruptions?: boolean;
+    /** If true, the agent will speak before the tool call. */
+    forcePreToolSpeech?: boolean;
+    /** Configuration for extracting values from tool responses and assigning them to dynamic variables */
+    assignments?: ElevenLabs.DynamicVariableAssignment[];
     /** The type of MCP tool */
     integrationType: ElevenLabs.IntegrationType;
     /** Schema for any parameters the LLM needs to provide to the MCP tool. */

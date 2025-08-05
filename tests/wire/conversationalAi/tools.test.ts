@@ -17,6 +17,7 @@ describe("Tools", () => {
                     tool_config: {
                         name: "name",
                         description: "description",
+                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                         expects_response: false,
                         dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                         type: "client",
@@ -27,6 +28,7 @@ describe("Tools", () => {
                         creator_email: "john.doe@example.com",
                         role: "admin",
                     },
+                    usage_stats: { avg_latency_secs: 1.1 },
                 },
             ],
         };
@@ -41,6 +43,13 @@ describe("Tools", () => {
                         type: "client",
                         name: "name",
                         description: "description",
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamicVariable: "user_name",
+                                valuePath: "user.name",
+                            },
+                        ],
                         expectsResponse: false,
                         dynamicVariables: {
                             dynamicVariablePlaceholders: {
@@ -53,6 +62,9 @@ describe("Tools", () => {
                         creatorName: "John Doe",
                         creatorEmail: "john.doe@example.com",
                         role: "admin",
+                    },
+                    usageStats: {
+                        avgLatencySecs: 1.1,
                     },
                 },
             ],
@@ -71,6 +83,9 @@ describe("Tools", () => {
                 name: "name",
                 description: "description",
                 response_timeout_secs: 1,
+                disable_interruptions: true,
+                force_pre_tool_speech: true,
+                assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -94,6 +109,7 @@ describe("Tools", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
             },
+            usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
         };
         server
             .mockEndpoint()
@@ -119,6 +135,15 @@ describe("Tools", () => {
                 name: "name",
                 description: "description",
                 responseTimeoutSecs: 1,
+                disableInterruptions: true,
+                forcePreToolSpeech: true,
+                assignments: [
+                    {
+                        source: "response",
+                        dynamicVariable: "user_name",
+                        valuePath: "user.name",
+                    },
+                ],
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -145,6 +170,10 @@ describe("Tools", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
             },
+            usageStats: {
+                totalCalls: 1,
+                avgLatencySecs: 1.1,
+            },
         });
     });
 
@@ -158,6 +187,9 @@ describe("Tools", () => {
                 name: "name",
                 description: "description",
                 response_timeout_secs: 1,
+                disable_interruptions: true,
+                force_pre_tool_speech: true,
+                assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -181,6 +213,7 @@ describe("Tools", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
             },
+            usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
         };
         server
             .mockEndpoint()
@@ -198,6 +231,15 @@ describe("Tools", () => {
                 name: "name",
                 description: "description",
                 responseTimeoutSecs: 1,
+                disableInterruptions: true,
+                forcePreToolSpeech: true,
+                assignments: [
+                    {
+                        source: "response",
+                        dynamicVariable: "user_name",
+                        valuePath: "user.name",
+                    },
+                ],
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -223,6 +265,10 @@ describe("Tools", () => {
                 creatorName: "John Doe",
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
+            },
+            usageStats: {
+                totalCalls: 1,
+                avgLatencySecs: 1.1,
             },
         });
     });
@@ -258,6 +304,9 @@ describe("Tools", () => {
                 name: "name",
                 description: "description",
                 response_timeout_secs: 1,
+                disable_interruptions: true,
+                force_pre_tool_speech: true,
+                assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -281,6 +330,7 @@ describe("Tools", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
             },
+            usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
         };
         server
             .mockEndpoint()
@@ -306,6 +356,15 @@ describe("Tools", () => {
                 name: "name",
                 description: "description",
                 responseTimeoutSecs: 1,
+                disableInterruptions: true,
+                forcePreToolSpeech: true,
+                assignments: [
+                    {
+                        source: "response",
+                        dynamicVariable: "user_name",
+                        valuePath: "user.name",
+                    },
+                ],
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -331,6 +390,10 @@ describe("Tools", () => {
                 creatorName: "John Doe",
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
+            },
+            usageStats: {
+                totalCalls: 1,
+                avgLatencySecs: 1.1,
             },
         });
     });

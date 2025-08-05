@@ -16,7 +16,8 @@ export type ConversationInitiationSource =
     | "widget"
     | "sip_trunk"
     | "twilio"
-    | "genesys";
+    | "genesys"
+    | "swift_sdk";
 export const ConversationInitiationSource = {
     Unknown: "unknown",
     AndroidSdk: "android_sdk",
@@ -29,4 +30,5 @@ export const ConversationInitiationSource = {
     SipTrunk: "sip_trunk",
     Twilio: "twilio",
     Genesys: "genesys",
+    SwiftSdk: "swift_sdk",
 } as const;

@@ -159,10 +159,7 @@ export class Projects {
      *
      * @example
      *     await client.studio.projects.create({
-     *         name: "name",
-     *         defaultTitleVoiceId: "default_title_voice_id",
-     *         defaultParagraphVoiceId: "default_paragraph_voice_id",
-     *         defaultModelId: "default_model_id"
+     *         name: "name"
      *     })
      */
     public create(
@@ -178,9 +175,18 @@ export class Projects {
     ): Promise<core.WithRawResponse<ElevenLabs.AddProjectResponseModel>> {
         const _request = await core.newFormData();
         _request.append("name", request.name);
-        _request.append("default_title_voice_id", request.defaultTitleVoiceId);
-        _request.append("default_paragraph_voice_id", request.defaultParagraphVoiceId);
-        _request.append("default_model_id", request.defaultModelId);
+        if (request.defaultTitleVoiceId != null) {
+            _request.append("default_title_voice_id", request.defaultTitleVoiceId);
+        }
+
+        if (request.defaultParagraphVoiceId != null) {
+            _request.append("default_paragraph_voice_id", request.defaultParagraphVoiceId);
+        }
+
+        if (request.defaultModelId != null) {
+            _request.append("default_model_id", request.defaultModelId);
+        }
+
         if (request.fromUrl != null) {
             _request.append("from_url", request.fromUrl);
         }

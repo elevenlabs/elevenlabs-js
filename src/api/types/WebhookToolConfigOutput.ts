@@ -12,6 +12,12 @@ export interface WebhookToolConfigOutput {
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. Must be between 5 and 120 seconds (inclusive). */
     responseTimeoutSecs?: number;
+    /** If true, the user will not be able to interrupt the agent while this tool is running. */
+    disableInterruptions?: boolean;
+    /** If true, the agent will speak before the tool call. */
+    forcePreToolSpeech?: boolean;
+    /** Configuration for extracting values from tool responses and assigning them to dynamic variables */
+    assignments?: ElevenLabs.DynamicVariableAssignment[];
     /** The schema for the outgoing webhoook, including parameters and URL specification */
     apiSchema: ElevenLabs.WebhookToolApiSchemaConfigOutput;
     /** Configuration for dynamic variables */

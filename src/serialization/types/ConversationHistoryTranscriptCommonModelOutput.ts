@@ -7,7 +7,7 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ConversationHistoryTranscriptCommonModelOutputRole } from "./ConversationHistoryTranscriptCommonModelOutputRole";
 import { ConversationHistoryTranscriptToolCallCommonModel } from "./ConversationHistoryTranscriptToolCallCommonModel";
-import { ConversationHistoryTranscriptToolResultCommonModel } from "./ConversationHistoryTranscriptToolResultCommonModel";
+import { ConversationHistoryTranscriptCommonModelOutputToolResultsItem } from "./ConversationHistoryTranscriptCommonModelOutputToolResultsItem";
 import { UserFeedback } from "./UserFeedback";
 import { ConversationTurnMetrics } from "./ConversationTurnMetrics";
 import { RagRetrievalInfo } from "./RagRetrievalInfo";
@@ -26,7 +26,7 @@ export const ConversationHistoryTranscriptCommonModelOutput: core.serialization.
     ),
     toolResults: core.serialization.property(
         "tool_results",
-        core.serialization.list(ConversationHistoryTranscriptToolResultCommonModel).optional(),
+        core.serialization.list(ConversationHistoryTranscriptCommonModelOutputToolResultsItem).optional(),
     ),
     feedback: UserFeedback.optional(),
     llmOverride: core.serialization.property("llm_override", core.serialization.string().optional()),
@@ -50,7 +50,7 @@ export declare namespace ConversationHistoryTranscriptCommonModelOutput {
         role: ConversationHistoryTranscriptCommonModelOutputRole.Raw;
         message?: string | null;
         tool_calls?: ConversationHistoryTranscriptToolCallCommonModel.Raw[] | null;
-        tool_results?: ConversationHistoryTranscriptToolResultCommonModel.Raw[] | null;
+        tool_results?: ConversationHistoryTranscriptCommonModelOutputToolResultsItem.Raw[] | null;
         feedback?: UserFeedback.Raw | null;
         llm_override?: string | null;
         time_in_call_secs: number;

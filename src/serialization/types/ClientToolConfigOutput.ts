@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
 
 export const ClientToolConfigOutput: core.serialization.ObjectSchema<
@@ -14,6 +15,9 @@ export const ClientToolConfigOutput: core.serialization.ObjectSchema<
     name: core.serialization.string(),
     description: core.serialization.string(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
+    disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
+    assignments: core.serialization.list(DynamicVariableAssignment).optional(),
     parameters: core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyOutput).optional(),
     expectsResponse: core.serialization.property("expects_response", core.serialization.boolean().optional()),
     dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
@@ -24,6 +28,9 @@ export declare namespace ClientToolConfigOutput {
         name: string;
         description: string;
         response_timeout_secs?: number | null;
+        disable_interruptions?: boolean | null;
+        force_pre_tool_speech?: boolean | null;
+        assignments?: DynamicVariableAssignment.Raw[] | null;
         parameters?: serializers.ObjectJsonSchemaPropertyOutput.Raw | null;
         expects_response?: boolean | null;
         dynamic_variables?: DynamicVariablesConfig.Raw | null;

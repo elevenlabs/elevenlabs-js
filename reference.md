@@ -1,5 +1,62 @@
 # Reference
 
+<details><summary><code>client.<a href="/src/Client.ts">saveAVoicePreview</a>() -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a generated voice to the voice library.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.saveAVoicePreview();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+##
+
 ## History
 
 <details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetSpeechHistoryResponse</code></summary>
@@ -987,73 +1044,6 @@ await client.textToVoice.createPreviews({
 <dd>
 
 **request:** `ElevenLabs.VoiceDesignRequest`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TextToVoice.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.textToVoice.<a href="/src/api/resources/textToVoice/client/Client.ts">createVoiceFromPreview</a>({ ...params }) -> ElevenLabs.Voice</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Add a generated voice to the voice library.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.textToVoice.createVoiceFromPreview({
-    voiceName: "Sassy squeaky mouse",
-    voiceDescription: "A sassy squeaky mouse",
-    generatedVoiceId: "37HceQefKmEi3bGovXjL",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.SaveVoicePreviewRequest`
 
 </dd>
 </dl>
@@ -2730,6 +2720,63 @@ await client.pronunciationDictionaries.list();
 </dl>
 </details>
 
+## ServiceAccounts
+
+<details><summary><code>client.serviceAccounts.<a href="/src/api/resources/serviceAccounts/client/Client.ts">list</a>() -> ElevenLabs.WorkspaceServiceAccountListResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all service accounts in the workspace
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.serviceAccounts.list();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServiceAccounts.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Webhooks
 
 <details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.WorkspaceWebhookListResponseModel</code></summary>
@@ -2799,7 +2846,7 @@ await client.webhooks.list({
 
 ## SpeechToText
 
-<details><summary><code>client.speechToText.<a href="/src/api/resources/speechToText/client/Client.ts">convert</a>({ ...params }) -> ElevenLabs.SpeechToTextChunkResponseModel</code></summary>
+<details><summary><code>client.speechToText.<a href="/src/api/resources/speechToText/client/Client.ts">convert</a>({ ...params }) -> ElevenLabs.SpeechToTextConvertResponse</code></summary>
 <dl>
 <dd>
 
@@ -2811,7 +2858,7 @@ await client.webhooks.list({
 <dl>
 <dd>
 
-Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks.
+Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned. Otherwise, returns a single transcript.
 
 </dd>
 </dl>
@@ -3309,6 +3356,71 @@ await client.conversationalAi.conversations.getSignedUrl({
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.ConversationsGetSignedUrlRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Conversations.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">getWebrtcToken</a>({ ...params }) -> ElevenLabs.TokenResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a WebRTC session token for real-time communication.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.getWebrtcToken({
+    agentId: "21m00Tcm4TlvDq8ikWAM",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.ConversationsGetWebrtcTokenRequest`
 
 </dd>
 </dl>
@@ -8487,6 +8599,299 @@ await client.pronunciationDictionaries.rules.remove("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
+## ServiceAccounts ApiKeys
+
+<details><summary><code>client.serviceAccounts.apiKeys.<a href="/src/api/resources/serviceAccounts/resources/apiKeys/client/Client.ts">list</a>(serviceAccountUserId) -> ElevenLabs.WorkspaceApiKeyListResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all API keys for a service account
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.serviceAccounts.apiKeys.list("service_account_user_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**serviceAccountUserId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ApiKeys.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.serviceAccounts.apiKeys.<a href="/src/api/resources/serviceAccounts/resources/apiKeys/client/Client.ts">create</a>(serviceAccountUserId, { ...params }) -> ElevenLabs.WorkspaceCreateApiKeyResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new API key for a service account
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.serviceAccounts.apiKeys.create("service_account_user_id", {
+    name: "name",
+    permissions: ["text_to_speech"],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**serviceAccountUserId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.serviceAccounts.BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ApiKeys.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.serviceAccounts.apiKeys.<a href="/src/api/resources/serviceAccounts/resources/apiKeys/client/Client.ts">delete</a>(serviceAccountUserId, apiKeyId) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an existing API key for a service account
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.serviceAccounts.apiKeys.delete("service_account_user_id", "api_key_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**serviceAccountUserId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**apiKeyId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ApiKeys.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.serviceAccounts.apiKeys.<a href="/src/api/resources/serviceAccounts/resources/apiKeys/client/Client.ts">update</a>(serviceAccountUserId, apiKeyId, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing API key for a service account
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_id", {
+    isEnabled: true,
+    name: "Sneaky Fox",
+    permissions: ["text_to_speech"],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**serviceAccountUserId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**apiKeyId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatch`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ApiKeys.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Studio Projects
 
 <details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">list</a>() -> ElevenLabs.GetProjectsResponse</code></summary>
@@ -8574,9 +8979,6 @@ Creates a new Studio project, it can be either initialized as blank, from a docu
 ```typescript
 await client.studio.projects.create({
     name: "name",
-    defaultTitleVoiceId: "default_title_voice_id",
-    defaultParagraphVoiceId: "default_paragraph_voice_id",
-    defaultModelId: "default_model_id",
 });
 ```
 
