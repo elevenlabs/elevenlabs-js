@@ -9,15 +9,8 @@ import * as core from "../../core";
 export const VoiceResponseModelSafetyControl: core.serialization.Schema<
     serializers.VoiceResponseModelSafetyControl.Raw,
     ElevenLabs.VoiceResponseModelSafetyControl
-> = core.serialization.enum_([
-    "NONE",
-    "BAN",
-    "CAPTCHA",
-    "CAPTCHA_AND_MODERATION",
-    "ENTERPRISE_BAN",
-    "ENTERPRISE_CAPTCHA",
-]);
+> = core.serialization.enum_(["NONE", "BAN", "CAPTCHA", "ENTERPRISE_BAN", "ENTERPRISE_CAPTCHA"]);
 
 export declare namespace VoiceResponseModelSafetyControl {
-    export type Raw = "NONE" | "BAN" | "CAPTCHA" | "CAPTCHA_AND_MODERATION" | "ENTERPRISE_BAN" | "ENTERPRISE_CAPTCHA";
+    export type Raw = "NONE" | "BAN" | "CAPTCHA" | "ENTERPRISE_BAN" | "ENTERPRISE_CAPTCHA";
 }

@@ -8,7 +8,7 @@ import * as ElevenLabs from "../index";
  * A specification that will be used to simulate a conversation between an agent and an AI user.
  */
 export interface ConversationSimulationSpecification {
-    simulatedUserConfig?: ElevenLabs.AgentConfig;
+    simulatedUserConfig: ElevenLabs.AgentConfig;
     toolMockConfig?: Record<string, ElevenLabs.ToolMockConfig>;
     /** A partial conversation history to start the simulation from. If empty, simulation starts fresh. */
     partialConversationHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelInput[];

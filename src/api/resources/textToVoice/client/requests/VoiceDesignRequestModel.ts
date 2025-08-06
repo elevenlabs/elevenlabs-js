@@ -31,6 +31,10 @@ export interface VoiceDesignRequestModel {
     guidanceScale?: number;
     /** Determines whether the Text to Voice previews should be included in the response. If true, only the generated IDs will be returned which can then be streamed via the /v1/text-to-voice/:generated_voice_id/stream endpoint. */
     streamPreviews?: boolean;
+    /** The remixing session id. */
+    remixingSessionId?: string;
+    /** The id of the remixing session iteration where these generations should be attached to. If not provided, a new iteration will be created. */
+    remixingSessionIterationId?: string;
     /** Higher quality results in better voice output but less variety. */
     quality?: number;
     /** Reference audio to use for the voice generation. The audio should be base64 encoded. Only supported when using the  eleven_ttv_v3 model. */

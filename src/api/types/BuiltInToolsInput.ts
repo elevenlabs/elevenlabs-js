@@ -17,4 +17,6 @@ export interface BuiltInToolsInput {
     skipTurn?: ElevenLabs.SystemToolConfigInput;
     /** The play DTMF tool */
     playKeypadTouchTone?: ElevenLabs.SystemToolConfigInput;
+    /** The voicemail detection tool */
+    voicemailDetection?: ElevenLabs.SystemToolConfigInput;
 }

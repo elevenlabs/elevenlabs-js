@@ -30,7 +30,15 @@ export interface ConversationsListRequest {
      */
     callStartAfterUnix?: number;
     /**
+     * Filter conversations by the user ID who initiated them.
+     */
+    userId?: string;
+    /**
      * How many conversations to return at maximum. Can not exceed 100, defaults to 30.
      */
     pageSize?: number;
+    /**
+     * Whether to include transcript summaries in the response.
+     */
+    summaryMode?: ElevenLabs.conversationalAi.ConversationsListRequestSummaryMode;
 }

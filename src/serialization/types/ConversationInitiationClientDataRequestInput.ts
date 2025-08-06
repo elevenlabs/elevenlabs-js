@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ConversationConfigClientOverrideInput } from "./ConversationConfigClientOverrideInput";
+import { ConversationInitiationSourceInfo } from "./ConversationInitiationSourceInfo";
 import { ConversationInitiationClientDataRequestInputDynamicVariablesValue } from "./ConversationInitiationClientDataRequestInputDynamicVariablesValue";
 
 export const ConversationInitiationClientDataRequestInput: core.serialization.ObjectSchema<
@@ -21,6 +22,7 @@ export const ConversationInitiationClientDataRequestInput: core.serialization.Ob
         core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     ),
     userId: core.serialization.property("user_id", core.serialization.string().optional()),
+    sourceInfo: core.serialization.property("source_info", ConversationInitiationSourceInfo.optional()),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
         core.serialization
@@ -37,6 +39,7 @@ export declare namespace ConversationInitiationClientDataRequestInput {
         conversation_config_override?: ConversationConfigClientOverrideInput.Raw | null;
         custom_llm_extra_body?: Record<string, unknown> | null;
         user_id?: string | null;
+        source_info?: ConversationInitiationSourceInfo.Raw | null;
         dynamic_variables?: Record<
             string,
             ConversationInitiationClientDataRequestInputDynamicVariablesValue.Raw | null | undefined

@@ -15,6 +15,7 @@ describe("Tools", () => {
             tools: [
                 {
                     name: "weather_by_zapier_get_current",
+                    title: "title",
                     description: "Gets current weather conditions for a location.",
                     inputSchema: {
                         properties: {
@@ -24,8 +25,17 @@ describe("Tools", () => {
                         required: ["latitude", "longitude"],
                         type: "object",
                     },
+                    outputSchema: { key: "value" },
+                    meta: { key: "value" },
                 },
-                { name: "tool2", description: "Description of tool2", inputSchema: { properties: {}, type: "object" } },
+                {
+                    name: "tool2",
+                    title: "title",
+                    description: "Description of tool2",
+                    inputSchema: { properties: {}, type: "object" },
+                    outputSchema: { key: "value" },
+                    meta: { key: "value" },
+                },
             ],
             error_message: "error_message",
         };
@@ -43,6 +53,7 @@ describe("Tools", () => {
             tools: [
                 {
                     name: "weather_by_zapier_get_current",
+                    title: "title",
                     description: "Gets current weather conditions for a location.",
                     inputSchema: {
                         properties: {
@@ -58,13 +69,26 @@ describe("Tools", () => {
                         required: ["latitude", "longitude"],
                         type: "object",
                     },
+                    outputSchema: {
+                        key: "value",
+                    },
+                    meta: {
+                        key: "value",
+                    },
                 },
                 {
                     name: "tool2",
+                    title: "title",
                     description: "Description of tool2",
                     inputSchema: {
                         properties: {},
                         type: "object",
+                    },
+                    outputSchema: {
+                        key: "value",
+                    },
+                    meta: {
+                        key: "value",
                     },
                 },
             ],

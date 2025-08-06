@@ -132,6 +132,8 @@ describe("Agents", () => {
                     mic_muting_enabled: true,
                     transcript_enabled: true,
                     text_input_enabled: true,
+                    default_expanded: true,
+                    always_expanded: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -189,7 +191,6 @@ describe("Agents", () => {
                     provider: "sip_trunk",
                 },
             ],
-            workflow: { key: "value" },
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -264,10 +265,10 @@ describe("Agents", () => {
                     },
                 },
                 agent: {
-                    first_message: "Hello, how can I help you today?",
+                    firstMessage: "Hello, how can I help you today?",
                     language: "en",
-                    dynamic_variables: {
-                        dynamic_variable_placeholders: {
+                    dynamicVariables: {
+                        dynamicVariablePlaceholders: {
                             user_name: "John Doe",
                         },
                     },
@@ -275,14 +276,14 @@ describe("Agents", () => {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
                         temperature: 0,
-                        max_tokens: -1,
-                        tool_ids: ["tool_ids"],
-                        knowledge_base: [
+                        maxTokens: -1,
+                        toolIds: ["tool_ids"],
+                        knowledgeBase: [
                             {
                                 type: "file",
                                 name: "My Knowledge Base",
                                 id: "123",
-                                usage_mode: "auto",
+                                usageMode: "auto",
                             },
                         ],
                     },
@@ -347,6 +348,8 @@ describe("Agents", () => {
                     micMutingEnabled: true,
                     transcriptEnabled: true,
                     textInputEnabled: true,
+                    defaultExpanded: true,
+                    alwaysExpanded: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -421,9 +424,6 @@ describe("Agents", () => {
                     },
                 },
             ],
-            workflow: {
-                key: "value",
-            },
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -548,6 +548,8 @@ describe("Agents", () => {
                     mic_muting_enabled: true,
                     transcript_enabled: true,
                     text_input_enabled: true,
+                    default_expanded: true,
+                    always_expanded: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -605,7 +607,6 @@ describe("Agents", () => {
                     provider: "sip_trunk",
                 },
             ],
-            workflow: { key: "value" },
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -681,10 +682,10 @@ describe("Agents", () => {
                     },
                 },
                 agent: {
-                    first_message: "Hello, how can I help you today?",
+                    firstMessage: "Hello, how can I help you today?",
                     language: "en",
-                    dynamic_variables: {
-                        dynamic_variable_placeholders: {
+                    dynamicVariables: {
+                        dynamicVariablePlaceholders: {
                             user_name: "John Doe",
                         },
                     },
@@ -692,14 +693,14 @@ describe("Agents", () => {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
                         temperature: 0,
-                        max_tokens: -1,
-                        tool_ids: ["tool_ids"],
-                        knowledge_base: [
+                        maxTokens: -1,
+                        toolIds: ["tool_ids"],
+                        knowledgeBase: [
                             {
                                 type: "file",
                                 name: "My Knowledge Base",
                                 id: "123",
-                                usage_mode: "auto",
+                                usageMode: "auto",
                             },
                         ],
                     },
@@ -764,6 +765,8 @@ describe("Agents", () => {
                     micMutingEnabled: true,
                     transcriptEnabled: true,
                     textInputEnabled: true,
+                    defaultExpanded: true,
+                    alwaysExpanded: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -838,9 +841,6 @@ describe("Agents", () => {
                     },
                 },
             ],
-            workflow: {
-                key: "value",
-            },
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -868,6 +868,7 @@ describe("Agents", () => {
                         creator_email: "john@example.com",
                         role: "admin",
                     },
+                    last_call_time_unix_secs: 1,
                 },
             ],
             next_cursor: "123",
@@ -889,6 +890,7 @@ describe("Agents", () => {
                         creatorEmail: "john@example.com",
                         role: "admin",
                     },
+                    lastCallTimeUnixSecs: 1,
                 },
             ],
             nextCursor: "123",
@@ -944,6 +946,7 @@ describe("Agents", () => {
                             result_value: "result_value",
                             is_error: true,
                             tool_has_been_called: true,
+                            type: "client",
                         },
                     ],
                     feedback: { score: "like", time_in_call_secs: 1 },
@@ -967,6 +970,7 @@ describe("Agents", () => {
                 data_collection_results: { key: { data_collection_id: "data_collection_id", rationale: "rationale" } },
                 call_successful: "success",
                 transcript_summary: "transcript_summary",
+                call_summary_title: "call_summary_title",
             },
         };
         server
@@ -981,7 +985,7 @@ describe("Agents", () => {
         const response = await client.conversationalAi.agents.simulateConversation("21m00Tcm4TlvDq8ikWAM", {
             simulationSpecification: {
                 simulatedUserConfig: {
-                    first_message: "Hello, how can I help you today?",
+                    firstMessage: "Hello, how can I help you today?",
                     language: "en",
                 },
             },
@@ -1006,6 +1010,7 @@ describe("Agents", () => {
                             resultValue: "result_value",
                             isError: true,
                             toolHasBeenCalled: true,
+                            type: "client",
                         },
                     ],
                     feedback: {
@@ -1047,6 +1052,7 @@ describe("Agents", () => {
                 },
                 callSuccessful: "success",
                 transcriptSummary: "transcript_summary",
+                callSummaryTitle: "call_summary_title",
             },
         });
     });
@@ -1071,7 +1077,7 @@ describe("Agents", () => {
         const response = await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8ikWAM", {
             simulationSpecification: {
                 simulatedUserConfig: {
-                    first_message: "Hello, how can I help you today?",
+                    firstMessage: "Hello, how can I help you today?",
                     language: "en",
                 },
             },

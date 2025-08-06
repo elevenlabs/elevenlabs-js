@@ -1,8 +1,9 @@
+export * as conversations from "./conversations";
+export * from "./conversations/types";
 export * as phoneNumbers from "./phoneNumbers";
 export * from "./phoneNumbers/types";
 export * as dashboard from "./dashboard";
 export * as knowledgeBase from "./knowledgeBase";
-export * as conversations from "./conversations";
 export * as twilio from "./twilio";
 export * as agents from "./agents";
 export * as llmUsage from "./llmUsage";

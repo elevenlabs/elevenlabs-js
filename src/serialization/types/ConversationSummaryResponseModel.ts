@@ -20,6 +20,8 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     messageCount: core.serialization.property("message_count", core.serialization.number()),
     status: ConversationSummaryResponseModelStatus,
     callSuccessful: core.serialization.property("call_successful", EvaluationSuccessResult),
+    transcriptSummary: core.serialization.property("transcript_summary", core.serialization.string().optional()),
+    callSummaryTitle: core.serialization.property("call_summary_title", core.serialization.string().optional()),
 });
 
 export declare namespace ConversationSummaryResponseModel {
@@ -32,5 +34,7 @@ export declare namespace ConversationSummaryResponseModel {
         message_count: number;
         status: ConversationSummaryResponseModelStatus.Raw;
         call_successful: EvaluationSuccessResult.Raw;
+        transcript_summary?: string | null;
+        call_summary_title?: string | null;
     }
 }

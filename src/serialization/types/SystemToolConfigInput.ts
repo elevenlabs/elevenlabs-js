@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { SystemToolConfigInputParams } from "./SystemToolConfigInputParams";
 
 export const SystemToolConfigInput: core.serialization.ObjectSchema<
@@ -14,6 +15,9 @@ export const SystemToolConfigInput: core.serialization.ObjectSchema<
     name: core.serialization.string(),
     description: core.serialization.string(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
+    disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
+    assignments: core.serialization.list(DynamicVariableAssignment).optional(),
     params: SystemToolConfigInputParams,
 });
 
@@ -22,6 +26,9 @@ export declare namespace SystemToolConfigInput {
         name: string;
         description: string;
         response_timeout_secs?: number | null;
+        disable_interruptions?: boolean | null;
+        force_pre_tool_speech?: boolean | null;
+        assignments?: DynamicVariableAssignment.Raw[] | null;
         params: SystemToolConfigInputParams.Raw;
     }
 }

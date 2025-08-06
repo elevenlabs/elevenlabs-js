@@ -11,6 +11,7 @@ import { ProjectExtendedResponseModelAccessLevel } from "./ProjectExtendedRespon
 import { ProjectExtendedResponseModelFiction } from "./ProjectExtendedResponseModelFiction";
 import { ProjectCreationMetaResponseModel } from "./ProjectCreationMetaResponseModel";
 import { ProjectExtendedResponseModelSourceType } from "./ProjectExtendedResponseModelSourceType";
+import { CaptionStyleModel } from "./CaptionStyleModel";
 import { ProjectExtendedResponseModelQualityPreset } from "./ProjectExtendedResponseModelQualityPreset";
 import { ChapterResponse } from "./ChapterResponse";
 import { PronunciationDictionaryVersionResponseModel } from "./PronunciationDictionaryVersionResponseModel";
@@ -61,6 +62,8 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     creationMeta: core.serialization.property("creation_meta", ProjectCreationMetaResponseModel.optional()),
     sourceType: core.serialization.property("source_type", ProjectExtendedResponseModelSourceType.optional()),
     chaptersEnabled: core.serialization.property("chapters_enabled", core.serialization.boolean().optional()),
+    captionsEnabled: core.serialization.property("captions_enabled", core.serialization.boolean().optional()),
+    captionStyle: core.serialization.property("caption_style", CaptionStyleModel.optional()),
     qualityPreset: core.serialization.property("quality_preset", ProjectExtendedResponseModelQualityPreset),
     chapters: core.serialization.list(ChapterResponse),
     pronunciationDictionaryVersions: core.serialization.property(
@@ -108,6 +111,8 @@ export declare namespace ProjectExtendedResponse {
         creation_meta?: ProjectCreationMetaResponseModel.Raw | null;
         source_type?: ProjectExtendedResponseModelSourceType.Raw | null;
         chapters_enabled?: boolean | null;
+        captions_enabled?: boolean | null;
+        caption_style?: CaptionStyleModel.Raw | null;
         quality_preset: ProjectExtendedResponseModelQualityPreset.Raw;
         chapters: ChapterResponse.Raw[];
         pronunciation_dictionary_versions: PronunciationDictionaryVersionResponseModel.Raw[];

@@ -15,6 +15,7 @@ export type Llm =
     | "gemini-1.5-flash"
     | "gemini-2.0-flash"
     | "gemini-2.0-flash-lite"
+    | "gemini-2.5-flash-lite"
     | "gemini-2.5-flash"
     | "claude-sonnet-4"
     | "claude-3-7-sonnet"
@@ -23,6 +24,11 @@ export type Llm =
     | "claude-3-haiku"
     | "grok-beta"
     | "custom-llm"
+    | "qwen3-4b"
+    | "watt-tool-8b"
+    | "gemini-2.5-flash-preview-05-20"
+    | "gemini-2.5-flash-preview-04-17"
+    | "gemini-2.5-flash-lite-preview-06-17"
     | "gemini-2.0-flash-lite-001"
     | "gemini-2.0-flash-001"
     | "gemini-1.5-flash-002"
@@ -59,6 +65,7 @@ export const Llm = {
     Gemini15Flash: "gemini-1.5-flash",
     Gemini20Flash: "gemini-2.0-flash",
     Gemini20FlashLite: "gemini-2.0-flash-lite",
+    Gemini25FlashLite: "gemini-2.5-flash-lite",
     Gemini25Flash: "gemini-2.5-flash",
     ClaudeSonnet4: "claude-sonnet-4",
     Claude37Sonnet: "claude-3-7-sonnet",
@@ -67,6 +74,11 @@ export const Llm = {
     Claude3Haiku: "claude-3-haiku",
     GrokBeta: "grok-beta",
     CustomLlm: "custom-llm",
+    Qwen34B: "qwen3-4b",
+    WattTool8B: "watt-tool-8b",
+    Gemini25FlashPreview0520: "gemini-2.5-flash-preview-05-20",
+    Gemini25FlashPreview0417: "gemini-2.5-flash-preview-04-17",
+    Gemini25FlashLitePreview0617: "gemini-2.5-flash-lite-preview-06-17",
     Gemini20FlashLite001: "gemini-2.0-flash-lite-001",
     Gemini20Flash001: "gemini-2.0-flash-001",
     Gemini15Flash002: "gemini-1.5-flash-002",

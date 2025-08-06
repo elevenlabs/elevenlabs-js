@@ -43,7 +43,7 @@ export class SpeechToText {
     }
 
     /**
-     * Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks.
+     * Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned. Otherwise, returns a single transcript.
      *
      * @param {ElevenLabs.BodySpeechToTextV1SpeechToTextPost} request
      * @param {SpeechToText.RequestOptions} requestOptions - Request-specific configuration.
@@ -58,14 +58,14 @@ export class SpeechToText {
     public convert(
         request: ElevenLabs.BodySpeechToTextV1SpeechToTextPost,
         requestOptions?: SpeechToText.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.SpeechToTextChunkResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.SpeechToTextConvertResponse> {
         return core.HttpResponsePromise.fromPromise(this.__convert(request, requestOptions));
     }
 
     private async __convert(
         request: ElevenLabs.BodySpeechToTextV1SpeechToTextPost,
         requestOptions?: SpeechToText.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.SpeechToTextChunkResponseModel>> {
+    ): Promise<core.WithRawResponse<ElevenLabs.SpeechToTextConvertResponse>> {
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (request.enableLogging != null) {
             _queryParams["enable_logging"] = request.enableLogging.toString();
@@ -139,6 +139,10 @@ export class SpeechToText {
             _request.append("seed", request.seed.toString());
         }
 
+        if (request.useMultiChannel != null) {
+            _request.append("use_multi_channel", request.useMultiChannel.toString());
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await core.fetcher({
             url: core.url.join(
@@ -163,7 +167,7 @@ export class SpeechToText {
         });
         if (_response.ok) {
             return {
-                data: serializers.SpeechToTextChunkResponseModel.parseOrThrow(_response.body, {
+                data: serializers.SpeechToTextConvertResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

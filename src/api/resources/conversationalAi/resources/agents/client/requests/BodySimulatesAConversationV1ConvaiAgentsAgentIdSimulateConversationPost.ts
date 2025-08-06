@@ -9,8 +9,8 @@ import * as ElevenLabs from "../../../../../../index";
  *     {
  *         simulationSpecification: {
  *             simulatedUserConfig: {
- *                 "first_message": "Hello, how can I help you today?",
- *                 "language": "en"
+ *                 firstMessage: "Hello, how can I help you today?",
+ *                 language: "en"
  *             }
  *         }
  *     }
@@ -20,4 +20,6 @@ export interface BodySimulatesAConversationV1ConvaiAgentsAgentIdSimulateConversa
     simulationSpecification: ElevenLabs.ConversationSimulationSpecification;
     /** A list of evaluation criteria to test */
     extraEvaluationCriteria?: ElevenLabs.PromptEvaluationCriteria[];
+    /** Maximum number of new turns to generate in the conversation simulation */
+    newTurnsLimit?: number;
 }

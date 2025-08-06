@@ -10,7 +10,8 @@ export type SystemToolConfigInputParams =
     | ElevenLabs.SystemToolConfigInputParams.PlayKeypadTouchTone
     | ElevenLabs.SystemToolConfigInputParams.SkipTurn
     | ElevenLabs.SystemToolConfigInputParams.TransferToAgent
-    | ElevenLabs.SystemToolConfigInputParams.TransferToNumber;
+    | ElevenLabs.SystemToolConfigInputParams.TransferToNumber
+    | ElevenLabs.SystemToolConfigInputParams.VoicemailDetection;
 
 export namespace SystemToolConfigInputParams {
     export interface EndCall extends ElevenLabs.EndCallToolConfig {
@@ -35,5 +36,9 @@ export namespace SystemToolConfigInputParams {
 
     export interface TransferToNumber extends ElevenLabs.TransferToNumberToolConfigInput {
         systemToolType: "transfer_to_number";
+    }
+
+    export interface VoicemailDetection extends ElevenLabs.VoicemailDetectionToolConfig {
+        systemToolType: "voicemail_detection";
     }
 }

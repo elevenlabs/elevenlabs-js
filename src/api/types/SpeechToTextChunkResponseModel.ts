@@ -16,6 +16,8 @@ export interface SpeechToTextChunkResponseModel {
     text: string;
     /** List of words with their timing information. */
     words: ElevenLabs.SpeechToTextWordResponseModel[];
+    /** The channel index this transcript belongs to (for multichannel audio). */
+    channelIndex?: number;
     /** Requested additional formats of the transcript. */
     additionalFormats?: (ElevenLabs.AdditionalFormatResponseModel | undefined)[];
 }

@@ -19,6 +19,11 @@ export const VoiceDesignRequestModel: core.serialization.Schema<
     seed: core.serialization.number().optional(),
     guidanceScale: core.serialization.property("guidance_scale", core.serialization.number().optional()),
     streamPreviews: core.serialization.property("stream_previews", core.serialization.boolean().optional()),
+    remixingSessionId: core.serialization.property("remixing_session_id", core.serialization.string().optional()),
+    remixingSessionIterationId: core.serialization.property(
+        "remixing_session_iteration_id",
+        core.serialization.string().optional(),
+    ),
     quality: core.serialization.number().optional(),
     referenceAudioBase64: core.serialization.property("reference_audio_base64", core.serialization.string().optional()),
     promptStrength: core.serialization.property("prompt_strength", core.serialization.number().optional()),
@@ -34,6 +39,8 @@ export declare namespace VoiceDesignRequestModel {
         seed?: number | null;
         guidance_scale?: number | null;
         stream_previews?: boolean | null;
+        remixing_session_id?: string | null;
+        remixing_session_iteration_id?: string | null;
         quality?: number | null;
         reference_audio_base64?: string | null;
         prompt_strength?: number | null;

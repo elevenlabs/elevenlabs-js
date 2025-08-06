@@ -27,6 +27,27 @@ describe("Conversations", () => {
         });
     });
 
+    test("get_webrtc_token", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { token: "token" };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/conversation/token")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.conversations.getWebrtcToken({
+            agentId: "21m00Tcm4TlvDq8ikWAM",
+        });
+        expect(response).toEqual({
+            token: "token",
+        });
+    });
+
     test("list", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
@@ -42,6 +63,8 @@ describe("Conversations", () => {
                     message_count: 1,
                     status: "initiated",
                     call_successful: "success",
+                    transcript_summary: "transcript_summary",
+                    call_summary_title: "call_summary_title",
                 },
             ],
             next_cursor: "next_cursor",
@@ -67,6 +90,8 @@ describe("Conversations", () => {
                     messageCount: 1,
                     status: "initiated",
                     callSuccessful: "success",
+                    transcriptSummary: "transcript_summary",
+                    callSummaryTitle: "call_summary_title",
                 },
             ],
             nextCursor: "next_cursor",

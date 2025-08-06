@@ -13,4 +13,6 @@ export interface ConversationSummaryResponseModel {
     messageCount: number;
     status: ElevenLabs.ConversationSummaryResponseModelStatus;
     callSuccessful: ElevenLabs.EvaluationSuccessResult;
+    transcriptSummary?: string;
+    callSummaryTitle?: string;
 }

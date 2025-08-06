@@ -5,25 +5,12 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { PronunciationDictionaryVersionLocator } from "./PronunciationDictionaryVersionLocator";
 
-export const UpdatePronunciationDictionariesRequest: core.serialization.ObjectSchema<
+export const UpdatePronunciationDictionariesRequest: core.serialization.Schema<
     serializers.UpdatePronunciationDictionariesRequest.Raw,
     ElevenLabs.UpdatePronunciationDictionariesRequest
-> = core.serialization.object({
-    pronunciationDictionaryLocators: core.serialization.property(
-        "pronunciation_dictionary_locators",
-        core.serialization.list(PronunciationDictionaryVersionLocator),
-    ),
-    invalidateAffectedText: core.serialization.property(
-        "invalidate_affected_text",
-        core.serialization.boolean().optional(),
-    ),
-});
+> = core.serialization.unknown();
 
 export declare namespace UpdatePronunciationDictionariesRequest {
-    export interface Raw {
-        pronunciation_dictionary_locators: PronunciationDictionaryVersionLocator.Raw[];
-        invalidate_affected_text?: boolean | null;
-    }
+    export type Raw = unknown;
 }

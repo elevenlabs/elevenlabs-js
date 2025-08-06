@@ -33,7 +33,7 @@ export const ConversationSimulationSpecification: core.serialization.ObjectSchem
 
 export declare namespace ConversationSimulationSpecification {
     export interface Raw {
-        simulated_user_config?: AgentConfig.Raw;
+        simulated_user_config: AgentConfig.Raw;
         tool_mock_config?: Record<string, ToolMockConfig.Raw> | null;
         partial_conversation_history?: ConversationHistoryTranscriptCommonModelInput.Raw[] | null;
         dynamic_variables?: Record<

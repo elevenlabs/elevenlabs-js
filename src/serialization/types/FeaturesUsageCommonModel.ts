@@ -15,8 +15,15 @@ export const FeaturesUsageCommonModel: core.serialization.ObjectSchema<
     transferToAgent: core.serialization.property("transfer_to_agent", FeatureStatusCommonModel.optional()),
     transferToNumber: core.serialization.property("transfer_to_number", FeatureStatusCommonModel.optional()),
     multivoice: FeatureStatusCommonModel.optional(),
+    dtmfTones: core.serialization.property("dtmf_tones", FeatureStatusCommonModel.optional()),
+    externalMcpServers: core.serialization.property("external_mcp_servers", FeatureStatusCommonModel.optional()),
     piiZrmWorkspace: core.serialization.property("pii_zrm_workspace", core.serialization.boolean().optional()),
     piiZrmAgent: core.serialization.property("pii_zrm_agent", core.serialization.boolean().optional()),
+    toolDynamicVariableUpdates: core.serialization.property(
+        "tool_dynamic_variable_updates",
+        FeatureStatusCommonModel.optional(),
+    ),
+    isLivekit: core.serialization.property("is_livekit", core.serialization.boolean().optional()),
 });
 
 export declare namespace FeaturesUsageCommonModel {
@@ -25,7 +32,11 @@ export declare namespace FeaturesUsageCommonModel {
         transfer_to_agent?: FeatureStatusCommonModel.Raw | null;
         transfer_to_number?: FeatureStatusCommonModel.Raw | null;
         multivoice?: FeatureStatusCommonModel.Raw | null;
+        dtmf_tones?: FeatureStatusCommonModel.Raw | null;
+        external_mcp_servers?: FeatureStatusCommonModel.Raw | null;
         pii_zrm_workspace?: boolean | null;
         pii_zrm_agent?: boolean | null;
+        tool_dynamic_variable_updates?: FeatureStatusCommonModel.Raw | null;
+        is_livekit?: boolean | null;
     }
 }

@@ -18,7 +18,7 @@ export interface DubbingListRequest {
      */
     pageSize?: number;
     /**
-     * Status of the dubbing, either 'in_progress', 'completed' or 'failed'.
+     * What state the dub is currently in.
      */
     dubbingStatus?: ElevenLabs.DubbingListRequestDubbingStatus;
     /**
