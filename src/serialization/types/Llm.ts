@@ -14,6 +14,9 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gpt-4.1",
     "gpt-4.1-mini",
     "gpt-4.1-nano",
+    "gpt-5",
+    "gpt-5-mini",
+    "gpt-5-nano",
     "gpt-3.5-turbo",
     "gemini-1.5-pro",
     "gemini-1.5-flash",
@@ -29,7 +32,9 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "grok-beta",
     "custom-llm",
     "qwen3-4b",
+    "qwen3-30b-a3b",
     "watt-tool-8b",
+    "watt-tool-70b",
     "gemini-2.5-flash-preview-05-20",
     "gemini-2.5-flash-preview-04-17",
     "gemini-2.5-flash-lite-preview-06-17",
@@ -44,6 +49,9 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "claude-3-5-sonnet@20240620",
     "claude-3-5-sonnet-v2@20241022",
     "claude-3-haiku@20240307",
+    "gpt-5-2025-08-07",
+    "gpt-5-mini-2025-08-07",
+    "gpt-5-nano-2025-08-07",
     "gpt-4.1-2025-04-14",
     "gpt-4.1-mini-2025-04-14",
     "gpt-4.1-nano-2025-04-14",
@@ -67,6 +75,9 @@ export declare namespace Llm {
         | "gpt-4.1"
         | "gpt-4.1-mini"
         | "gpt-4.1-nano"
+        | "gpt-5"
+        | "gpt-5-mini"
+        | "gpt-5-nano"
         | "gpt-3.5-turbo"
         | "gemini-1.5-pro"
         | "gemini-1.5-flash"
@@ -82,7 +93,9 @@ export declare namespace Llm {
         | "grok-beta"
         | "custom-llm"
         | "qwen3-4b"
+        | "qwen3-30b-a3b"
         | "watt-tool-8b"
+        | "watt-tool-70b"
         | "gemini-2.5-flash-preview-05-20"
         | "gemini-2.5-flash-preview-04-17"
         | "gemini-2.5-flash-lite-preview-06-17"
@@ -97,6 +110,9 @@ export declare namespace Llm {
         | "claude-3-5-sonnet@20240620"
         | "claude-3-5-sonnet-v2@20241022"
         | "claude-3-haiku@20240307"
+        | "gpt-5-2025-08-07"
+        | "gpt-5-mini-2025-08-07"
+        | "gpt-5-nano-2025-08-07"
         | "gpt-4.1-2025-04-14"
         | "gpt-4.1-mini-2025-04-14"
         | "gpt-4.1-nano-2025-04-14"

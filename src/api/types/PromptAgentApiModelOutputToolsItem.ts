@@ -18,8 +18,9 @@ export namespace PromptAgentApiModelOutputToolsItem {
         type: "client";
     }
 
-    export interface Mcp extends ElevenLabs.McpToolConfigOutput {
+    export interface Mcp {
         type: "mcp";
+        value?: unknown;
     }
 
     export interface System extends ElevenLabs.SystemToolConfigOutput {

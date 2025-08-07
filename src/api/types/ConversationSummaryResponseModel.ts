@@ -15,4 +15,5 @@ export interface ConversationSummaryResponseModel {
     callSuccessful: ElevenLabs.EvaluationSuccessResult;
     transcriptSummary?: string;
     callSummaryTitle?: string;
+    direction?: ElevenLabs.ConversationSummaryResponseModelDirection;
 }
