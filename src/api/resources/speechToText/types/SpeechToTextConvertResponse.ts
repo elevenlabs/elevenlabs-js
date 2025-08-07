@@ -6,4 +6,5 @@ import * as ElevenLabs from "../../../index";
 
 export type SpeechToTextConvertResponse =
     | ElevenLabs.SpeechToTextChunkResponseModel
-    | ElevenLabs.MultichannelSpeechToTextResponseModel;
+    | ElevenLabs.MultichannelSpeechToTextResponseModel
+    | ElevenLabs.SpeechToTextWebhookResponseModel;
