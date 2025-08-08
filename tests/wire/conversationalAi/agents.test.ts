@@ -191,6 +191,7 @@ describe("Agents", () => {
                     provider: "sip_trunk",
                 },
             ],
+            workflow: { key: "value" },
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -424,6 +425,9 @@ describe("Agents", () => {
                     },
                 },
             ],
+            workflow: {
+                key: "value",
+            },
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -607,6 +611,7 @@ describe("Agents", () => {
                     provider: "sip_trunk",
                 },
             ],
+            workflow: { key: "value" },
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -841,6 +846,9 @@ describe("Agents", () => {
                     },
                 },
             ],
+            workflow: {
+                key: "value",
+            },
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
