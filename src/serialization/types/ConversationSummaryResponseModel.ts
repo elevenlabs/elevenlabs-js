@@ -7,6 +7,7 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ConversationSummaryResponseModelStatus } from "./ConversationSummaryResponseModelStatus";
 import { EvaluationSuccessResult } from "./EvaluationSuccessResult";
+import { ConversationSummaryResponseModelDirection } from "./ConversationSummaryResponseModelDirection";
 
 export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     serializers.ConversationSummaryResponseModel.Raw,
@@ -22,6 +23,7 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     callSuccessful: core.serialization.property("call_successful", EvaluationSuccessResult),
     transcriptSummary: core.serialization.property("transcript_summary", core.serialization.string().optional()),
     callSummaryTitle: core.serialization.property("call_summary_title", core.serialization.string().optional()),
+    direction: ConversationSummaryResponseModelDirection.optional(),
 });
 
 export declare namespace ConversationSummaryResponseModel {
@@ -36,5 +38,6 @@ export declare namespace ConversationSummaryResponseModel {
         call_successful: EvaluationSuccessResult.Raw;
         transcript_summary?: string | null;
         call_summary_title?: string | null;
+        direction?: ConversationSummaryResponseModelDirection.Raw | null;
     }
 }

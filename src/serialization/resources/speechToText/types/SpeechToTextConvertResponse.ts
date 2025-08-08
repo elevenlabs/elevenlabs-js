@@ -7,12 +7,20 @@ import * as ElevenLabs from "../../../../api/index";
 import * as core from "../../../../core";
 import { SpeechToTextChunkResponseModel } from "../../../types/SpeechToTextChunkResponseModel";
 import { MultichannelSpeechToTextResponseModel } from "../../../types/MultichannelSpeechToTextResponseModel";
+import { SpeechToTextWebhookResponseModel } from "../../../types/SpeechToTextWebhookResponseModel";
 
 export const SpeechToTextConvertResponse: core.serialization.Schema<
     serializers.SpeechToTextConvertResponse.Raw,
     ElevenLabs.SpeechToTextConvertResponse
-> = core.serialization.undiscriminatedUnion([SpeechToTextChunkResponseModel, MultichannelSpeechToTextResponseModel]);
+> = core.serialization.undiscriminatedUnion([
+    SpeechToTextChunkResponseModel,
+    MultichannelSpeechToTextResponseModel,
+    SpeechToTextWebhookResponseModel,
+]);
 
 export declare namespace SpeechToTextConvertResponse {
-    export type Raw = SpeechToTextChunkResponseModel.Raw | MultichannelSpeechToTextResponseModel.Raw;
+    export type Raw =
+        | SpeechToTextChunkResponseModel.Raw
+        | MultichannelSpeechToTextResponseModel.Raw
+        | SpeechToTextWebhookResponseModel.Raw;
 }

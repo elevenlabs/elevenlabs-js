@@ -14,6 +14,7 @@ export const BodyCreateAgentV1ConvaiAgentsCreatePost: core.serialization.Schema<
 > = core.serialization.object({
     conversationConfig: core.serialization.property("conversation_config", ConversationalConfig),
     platformSettings: core.serialization.property("platform_settings", AgentPlatformSettingsRequestModel.optional()),
+    workflow: core.serialization.unknown().optional(),
     name: core.serialization.string().optional(),
     tags: core.serialization.list(core.serialization.string()).optional(),
 });
@@ -22,6 +23,7 @@ export declare namespace BodyCreateAgentV1ConvaiAgentsCreatePost {
     export interface Raw {
         conversation_config: ConversationalConfig.Raw;
         platform_settings?: AgentPlatformSettingsRequestModel.Raw | null;
+        workflow?: unknown | null;
         name?: string | null;
         tags?: string[] | null;
     }
