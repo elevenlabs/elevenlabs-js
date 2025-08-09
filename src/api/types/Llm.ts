@@ -10,6 +10,9 @@ export type Llm =
     | "gpt-4.1"
     | "gpt-4.1-mini"
     | "gpt-4.1-nano"
+    | "gpt-5"
+    | "gpt-5-mini"
+    | "gpt-5-nano"
     | "gpt-3.5-turbo"
     | "gemini-1.5-pro"
     | "gemini-1.5-flash"
@@ -24,8 +27,6 @@ export type Llm =
     | "claude-3-haiku"
     | "grok-beta"
     | "custom-llm"
-    | "qwen3-4b"
-    | "watt-tool-8b"
     | "gemini-2.5-flash-preview-05-20"
     | "gemini-2.5-flash-preview-04-17"
     | "gemini-2.5-flash-lite-preview-06-17"
@@ -40,6 +41,9 @@ export type Llm =
     | "claude-3-5-sonnet@20240620"
     | "claude-3-5-sonnet-v2@20241022"
     | "claude-3-haiku@20240307"
+    | "gpt-5-2025-08-07"
+    | "gpt-5-mini-2025-08-07"
+    | "gpt-5-nano-2025-08-07"
     | "gpt-4.1-2025-04-14"
     | "gpt-4.1-mini-2025-04-14"
     | "gpt-4.1-nano-2025-04-14"
@@ -60,6 +64,9 @@ export const Llm = {
     Gpt41: "gpt-4.1",
     Gpt41Mini: "gpt-4.1-mini",
     Gpt41Nano: "gpt-4.1-nano",
+    Gpt5: "gpt-5",
+    Gpt5Mini: "gpt-5-mini",
+    Gpt5Nano: "gpt-5-nano",
     Gpt35Turbo: "gpt-3.5-turbo",
     Gemini15Pro: "gemini-1.5-pro",
     Gemini15Flash: "gemini-1.5-flash",
@@ -74,8 +81,6 @@ export const Llm = {
     Claude3Haiku: "claude-3-haiku",
     GrokBeta: "grok-beta",
     CustomLlm: "custom-llm",
-    Qwen34B: "qwen3-4b",
-    WattTool8B: "watt-tool-8b",
     Gemini25FlashPreview0520: "gemini-2.5-flash-preview-05-20",
     Gemini25FlashPreview0417: "gemini-2.5-flash-preview-04-17",
     Gemini25FlashLitePreview0617: "gemini-2.5-flash-lite-preview-06-17",
@@ -90,6 +95,9 @@ export const Llm = {
     Claude35Sonnet20240620: "claude-3-5-sonnet@20240620",
     Claude35SonnetV220241022: "claude-3-5-sonnet-v2@20241022",
     Claude3Haiku20240307: "claude-3-haiku@20240307",
+    Gpt520250807: "gpt-5-2025-08-07",
+    Gpt5Mini20250807: "gpt-5-mini-2025-08-07",
+    Gpt5Nano20250807: "gpt-5-nano-2025-08-07",
     Gpt4120250414: "gpt-4.1-2025-04-14",
     Gpt41Mini20250414: "gpt-4.1-mini-2025-04-14",
     Gpt41Nano20250414: "gpt-4.1-nano-2025-04-14",
