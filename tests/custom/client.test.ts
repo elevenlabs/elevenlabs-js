@@ -79,11 +79,15 @@ describe("ElevenLabs API Tests", () => {
                 expect(transcription.text.length).toBeGreaterThan(0);
                 expect(Array.isArray(transcription.words)).toBeTruthy();
                 expect(transcription.words.length).toBeGreaterThan(0);
-            } else {
+            } else if ("transcripts" in transcription) {
                 expect(Array.isArray(transcription.transcripts)).toBeTruthy();
                 expect(transcription.transcripts.length).toBeGreaterThan(0);
                 expect(typeof transcription.transcripts[0].text).toBe("string");
                 expect(transcription.transcripts[0].text.length).toBeGreaterThan(0);
+            } else {
+                expect(typeof transcription.message).toBe("string");
+                expect(transcription.message.length).toBeGreaterThan(0);
+                expect(transcription.requestId).toBeDefined();
             }
         });
     });

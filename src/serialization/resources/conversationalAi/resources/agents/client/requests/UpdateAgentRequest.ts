@@ -14,7 +14,6 @@ export const UpdateAgentRequest: core.serialization.Schema<
 > = core.serialization.object({
     conversationConfig: core.serialization.property("conversation_config", ConversationalConfig.optional()),
     platformSettings: core.serialization.property("platform_settings", AgentPlatformSettingsRequestModel.optional()),
-    workflow: core.serialization.unknown().optional(),
     name: core.serialization.string().optional(),
     tags: core.serialization.list(core.serialization.string()).optional(),
 });
@@ -23,7 +22,6 @@ export declare namespace UpdateAgentRequest {
     export interface Raw {
         conversation_config?: ConversationalConfig.Raw | null;
         platform_settings?: AgentPlatformSettingsRequestModel.Raw | null;
-        workflow?: unknown | null;
         name?: string | null;
         tags?: string[] | null;
     }
