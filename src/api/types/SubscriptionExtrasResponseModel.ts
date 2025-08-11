@@ -9,9 +9,9 @@ export interface SubscriptionExtrasResponseModel {
     concurrency: number;
     /** The Convai concurrency of the user. */
     convaiConcurrency: number;
-    /** The Convai characters per minute of the user. */
+    /** The Convai characters per minute of the user. This field is deprecated and will always return None. */
     convaiCharsPerMinute?: number;
-    /** The Convai ASR characters per minute of the user. */
+    /** The Convai ASR characters per minute of the user. This field is deprecated and will always return None. */
     convaiAsrCharsPerMinute?: number;
     /** Whether the user's logging is disabled. */
     forceLoggingDisabled: boolean;

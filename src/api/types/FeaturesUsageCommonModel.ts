@@ -15,4 +15,5 @@ export interface FeaturesUsageCommonModel {
     piiZrmAgent?: boolean;
     toolDynamicVariableUpdates?: ElevenLabs.FeatureStatusCommonModel;
     isLivekit?: boolean;
+    voicemailDetection?: ElevenLabs.FeatureStatusCommonModel;
 }

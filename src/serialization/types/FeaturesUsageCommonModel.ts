@@ -24,6 +24,7 @@ export const FeaturesUsageCommonModel: core.serialization.ObjectSchema<
         FeatureStatusCommonModel.optional(),
     ),
     isLivekit: core.serialization.property("is_livekit", core.serialization.boolean().optional()),
+    voicemailDetection: core.serialization.property("voicemail_detection", FeatureStatusCommonModel.optional()),
 });
 
 export declare namespace FeaturesUsageCommonModel {
@@ -38,5 +39,6 @@ export declare namespace FeaturesUsageCommonModel {
         pii_zrm_agent?: boolean | null;
         tool_dynamic_variable_updates?: FeatureStatusCommonModel.Raw | null;
         is_livekit?: boolean | null;
+        voicemail_detection?: FeatureStatusCommonModel.Raw | null;
     }
 }
