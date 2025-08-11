@@ -37,8 +37,8 @@ describe("User", () => {
             subscription_extras: {
                 concurrency: 10,
                 convai_concurrency: 10,
-                convai_chars_per_minute: 1000,
-                convai_asr_chars_per_minute: 1000,
+                convai_chars_per_minute: 1,
+                convai_asr_chars_per_minute: 1,
                 force_logging_disabled: false,
                 can_request_manual_pro_voice_verification: true,
                 can_bypass_voice_captcha: true,
@@ -107,8 +107,8 @@ describe("User", () => {
             subscriptionExtras: {
                 concurrency: 10,
                 convaiConcurrency: 10,
-                convaiCharsPerMinute: 1000,
-                convaiAsrCharsPerMinute: 1000,
+                convaiCharsPerMinute: 1,
+                convaiAsrCharsPerMinute: 1,
                 forceLoggingDisabled: false,
                 canRequestManualProVoiceVerification: true,
                 canBypassVoiceCaptcha: true,

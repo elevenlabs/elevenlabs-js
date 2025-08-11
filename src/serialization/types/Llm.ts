@@ -31,6 +31,10 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "claude-3-haiku",
     "grok-beta",
     "custom-llm",
+    "qwen3-4b",
+    "qwen3-30b-a3b",
+    "watt-tool-8b",
+    "watt-tool-70b",
     "gemini-2.5-flash-preview-05-20",
     "gemini-2.5-flash-preview-04-17",
     "gemini-2.5-flash-lite-preview-06-17",
@@ -88,6 +92,10 @@ export declare namespace Llm {
         | "claude-3-haiku"
         | "grok-beta"
         | "custom-llm"
+        | "qwen3-4b"
+        | "qwen3-30b-a3b"
+        | "watt-tool-8b"
+        | "watt-tool-70b"
         | "gemini-2.5-flash-preview-05-20"
         | "gemini-2.5-flash-preview-04-17"
         | "gemini-2.5-flash-lite-preview-06-17"
