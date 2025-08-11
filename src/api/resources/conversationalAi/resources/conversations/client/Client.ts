@@ -174,21 +174,11 @@ export class Conversations {
         request: ElevenLabs.conversationalAi.ConversationsGetWebrtcTokenRequest,
         requestOptions?: Conversations.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.TokenResponseModel>> {
-        const { agentId, participantName, source, version } = request;
+        const { agentId, participantName } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["agent_id"] = agentId;
         if (participantName != null) {
             _queryParams["participant_name"] = participantName;
-        }
-
-        if (source != null) {
-            _queryParams["source"] = serializers.ConversationInitiationSource.jsonOrThrow(source, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (version != null) {
-            _queryParams["version"] = version;
         }
 
         const _response = await core.fetcher({
