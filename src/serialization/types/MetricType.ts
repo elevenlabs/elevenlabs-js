@@ -15,6 +15,7 @@ export const MetricType: core.serialization.Schema<serializers.MetricType.Raw, E
         "ttfb_p95",
         "fiat_units_spent",
         "concurrency",
+        "concurrency_average",
     ]);
 
 export declare namespace MetricType {
@@ -25,5 +26,6 @@ export declare namespace MetricType {
         | "ttfb_avg"
         | "ttfb_p95"
         | "fiat_units_spent"
-        | "concurrency";
+        | "concurrency"
+        | "concurrency_average";
 }

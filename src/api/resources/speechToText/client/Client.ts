@@ -43,7 +43,7 @@ export class SpeechToText {
     }
 
     /**
-     * Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned. Otherwise, returns a single transcript.
+     * Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned. Otherwise, returns a single transcript. The optional webhook_metadata parameter allows you to attach custom data that will be included in webhook responses for request correlation and tracking.
      *
      * @param {ElevenLabs.BodySpeechToTextV1SpeechToTextPost} request
      * @param {SpeechToText.RequestOptions} requestOptions - Request-specific configuration.
@@ -141,6 +141,19 @@ export class SpeechToText {
 
         if (request.useMultiChannel != null) {
             _request.append("use_multi_channel", request.useMultiChannel.toString());
+        }
+
+        if (request.webhookMetadata != null) {
+            _request.append(
+                "webhook_metadata",
+                (() => {
+                    const mapped = serializers.SpeechToTextConvertRequestWebhookMetadata.jsonOrThrow(
+                        request.webhookMetadata,
+                        { unrecognizedObjectKeys: "strip" },
+                    );
+                    return typeof mapped === "string" ? mapped : toJson(mapped);
+                })(),
+            );
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
