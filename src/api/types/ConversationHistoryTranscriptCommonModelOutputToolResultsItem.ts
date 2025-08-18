@@ -6,4 +6,5 @@ import * as ElevenLabs from "../index";
 
 export type ConversationHistoryTranscriptCommonModelOutputToolResultsItem =
     | ElevenLabs.ConversationHistoryTranscriptOtherToolsResultCommonModel
-    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModel;
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModel
+    | ElevenLabs.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput;

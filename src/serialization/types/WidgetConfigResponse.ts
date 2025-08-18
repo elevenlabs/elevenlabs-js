@@ -70,6 +70,7 @@ export const WidgetConfigResponse: core.serialization.ObjectSchema<
     textOnly: core.serialization.property("text_only", core.serialization.boolean().optional()),
     supportsTextOnly: core.serialization.property("supports_text_only", core.serialization.boolean().optional()),
     firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
+    useRtc: core.serialization.property("use_rtc", core.serialization.boolean().optional()),
 });
 
 export declare namespace WidgetConfigResponse {
@@ -114,5 +115,6 @@ export declare namespace WidgetConfigResponse {
         text_only?: boolean | null;
         supports_text_only?: boolean | null;
         first_message?: string | null;
+        use_rtc?: boolean | null;
     }
 }

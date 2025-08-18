@@ -15,6 +15,7 @@ import { TransferToAgentToolResultSuccessModel } from "./TransferToAgentToolResu
 import { TransferToNumberResultErrorModel } from "./TransferToNumberResultErrorModel";
 import { TransferToNumberResultSipSuccessModel } from "./TransferToNumberResultSipSuccessModel";
 import { TransferToNumberResultTwilioSuccessModel } from "./TransferToNumberResultTwilioSuccessModel";
+import { VoiceMailDetectionResultSuccessModel } from "./VoiceMailDetectionResultSuccessModel";
 
 export const ConversationHistoryTranscriptSystemToolResultCommonModelResult: core.serialization.Schema<
     serializers.ConversationHistoryTranscriptSystemToolResultCommonModelResult.Raw,
@@ -31,6 +32,7 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelResult: cor
         transfer_to_number_error: TransferToNumberResultErrorModel,
         transfer_to_number_sip_success: TransferToNumberResultSipSuccessModel,
         transfer_to_number_twilio_success: TransferToNumberResultTwilioSuccessModel,
+        voicemail_detection_success: VoiceMailDetectionResultSuccessModel,
     })
     .transform<ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult>({
         transform: (value) => value,
@@ -48,7 +50,8 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
         | ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToAgentSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToNumberError
         | ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToNumberSipSuccess
-        | ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToNumberTwilioSuccess;
+        | ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToNumberTwilioSuccess
+        | ConversationHistoryTranscriptSystemToolResultCommonModelResult.VoicemailDetectionSuccess;
 
     export interface EndCallSuccess extends EndCallToolResultModel.Raw {
         result_type: "end_call_success";
@@ -88,5 +91,9 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
 
     export interface TransferToNumberTwilioSuccess extends TransferToNumberResultTwilioSuccessModel.Raw {
         result_type: "transfer_to_number_twilio_success";
+    }
+
+    export interface VoicemailDetectionSuccess extends VoiceMailDetectionResultSuccessModel.Raw {
+        result_type: "voicemail_detection_success";
     }
 }

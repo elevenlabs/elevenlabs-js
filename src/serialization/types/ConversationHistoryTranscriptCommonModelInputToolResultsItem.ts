@@ -14,10 +14,12 @@ export const ConversationHistoryTranscriptCommonModelInputToolResultsItem: core.
 > = core.serialization.undiscriminatedUnion([
     ConversationHistoryTranscriptOtherToolsResultCommonModel,
     ConversationHistoryTranscriptSystemToolResultCommonModel,
+    core.serialization.lazyObject(() => serializers.ConversationHistoryTranscriptWorkflowToolsResultCommonModelInput),
 ]);
 
 export declare namespace ConversationHistoryTranscriptCommonModelInputToolResultsItem {
     export type Raw =
         | ConversationHistoryTranscriptOtherToolsResultCommonModel.Raw
-        | ConversationHistoryTranscriptSystemToolResultCommonModel.Raw;
+        | ConversationHistoryTranscriptSystemToolResultCommonModel.Raw
+        | serializers.ConversationHistoryTranscriptWorkflowToolsResultCommonModelInput.Raw;
 }
