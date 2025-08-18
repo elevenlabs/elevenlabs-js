@@ -66,7 +66,15 @@ export class Usage {
         request: ElevenLabs.UsageGetRequest,
         requestOptions?: Usage.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.UsageCharactersResponseModel>> {
-        const { startUnix, endUnix, includeWorkspaceMetrics, breakdownType, aggregationInterval, metric } = request;
+        const {
+            startUnix,
+            endUnix,
+            includeWorkspaceMetrics,
+            breakdownType,
+            aggregationInterval,
+            aggregationBucketSize,
+            metric,
+        } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["start_unix"] = startUnix.toString();
         _queryParams["end_unix"] = endUnix.toString();
@@ -85,6 +93,10 @@ export class Usage {
                 aggregationInterval,
                 { unrecognizedObjectKeys: "strip" },
             );
+        }
+
+        if (aggregationBucketSize != null) {
+            _queryParams["aggregation_bucket_size"] = aggregationBucketSize.toString();
         }
 
         if (metric != null) {

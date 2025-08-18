@@ -100,6 +100,7 @@ describe("Widget", () => {
                 text_only: false,
                 supports_text_only: true,
                 first_message: "Hello! How can I help you today?",
+                use_rtc: false,
             },
         };
         server
@@ -207,6 +208,7 @@ describe("Widget", () => {
                 textOnly: false,
                 supportsTextOnly: true,
                 firstMessage: "Hello! How can I help you today?",
+                useRtc: false,
             },
         });
     });

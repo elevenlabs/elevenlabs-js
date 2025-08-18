@@ -82,4 +82,6 @@ export interface WidgetConfigResponse {
     /** Whether the agent can be switched to text-only mode */
     supportsTextOnly?: boolean;
     firstMessage?: string;
+    /** Whether to use WebRTC for conversation connections */
+    useRtc?: boolean;
 }

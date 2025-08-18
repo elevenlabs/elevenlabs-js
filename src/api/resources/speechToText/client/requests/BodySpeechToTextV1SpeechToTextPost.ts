@@ -52,4 +52,6 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     seed?: number;
     /** Whether the audio file contains multiple channels where each channel contains a single speaker. When enabled, each channel will be transcribed independently and the results will be combined. Each word in the response will include a 'channel_index' field indicating which channel it was spoken on. A maximum of 5 channels is supported. */
     useMultiChannel?: boolean;
+    /** Optional metadata to be included in the webhook response. This should be a JSON string representing an object with a maximum depth of 2 levels and maximum size of 16KB. Useful for tracking internal IDs, job references, or other contextual information. */
+    webhookMetadata?: ElevenLabs.SpeechToTextConvertRequestWebhookMetadata;
 }

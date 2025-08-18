@@ -9,7 +9,8 @@ export type MetricType =
     | "ttfb_avg"
     | "ttfb_p95"
     | "fiat_units_spent"
-    | "concurrency";
+    | "concurrency"
+    | "concurrency_average";
 export const MetricType = {
     Credits: "credits",
     MinutesUsed: "minutes_used",
@@ -18,4 +19,5 @@ export const MetricType = {
     TtfbP95: "ttfb_p95",
     FiatUnitsSpent: "fiat_units_spent",
     Concurrency: "concurrency",
+    ConcurrencyAverage: "concurrency_average",
 } as const;

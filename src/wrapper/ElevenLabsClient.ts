@@ -3,6 +3,7 @@ import type * as ElevenLabs from "../api";
 import type * as core from "../core";
 import * as errors from "../errors";
 import { WebhooksClient } from "./webhooks";
+import { Music } from "./music";
 
 export declare namespace ElevenLabsClient {
     interface Options extends FernClient.Options {
@@ -23,6 +24,7 @@ export declare namespace ElevenLabsClient {
 
 export class ElevenLabsClient extends FernClient {
     private _customWebhooks: WebhooksClient | undefined;
+    private _customMusic: Music | undefined;
 
     constructor(options: ElevenLabsClient.Options = {}) {
         const apiKey = options.apiKey ?? process.env.ELEVENLABS_API_KEY;
@@ -40,5 +42,13 @@ export class ElevenLabsClient extends FernClient {
             this._customWebhooks = new WebhooksClient(this._options);
         }
         return this._customWebhooks;
+    }
+
+    // @ts-expect-error - Intentionally overriding parent getter with custom Music wrapper
+    public get music(): Music {
+        if (!this._customMusic) {
+            this._customMusic = new Music(this._options);
+        }
+        return this._customMusic;
     }
 }

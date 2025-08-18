@@ -22,6 +22,7 @@ export const BreakdownTypes: core.serialization.Schema<serializers.BreakdownType
         "region",
         "subresource_id",
         "reporting_workspace_id",
+        "has_api_key",
     ]);
 
 export declare namespace BreakdownTypes {
@@ -39,5 +40,6 @@ export declare namespace BreakdownTypes {
         | "request_queue"
         | "region"
         | "subresource_id"
-        | "reporting_workspace_id";
+        | "reporting_workspace_id"
+        | "has_api_key";
 }

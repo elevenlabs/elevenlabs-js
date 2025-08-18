@@ -33,6 +33,10 @@ export interface UsageGetRequest {
      */
     aggregationInterval?: ElevenLabs.UsageAggregationInterval;
     /**
+     * Aggregation bucket size in seconds. Overrides the aggregation interval.
+     */
+    aggregationBucketSize?: number;
+    /**
      * Which metric to aggregate.
      */
     metric?: ElevenLabs.MetricType;

@@ -14,7 +14,8 @@ export type ConversationHistoryTranscriptSystemToolResultCommonModelResult =
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToAgentSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToNumberError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToNumberSipSuccess
-    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToNumberTwilioSuccess;
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToNumberTwilioSuccess
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.VoicemailDetectionSuccess;
 
 export namespace ConversationHistoryTranscriptSystemToolResultCommonModelResult {
     export interface EndCallSuccess extends ElevenLabs.EndCallToolResultModel {
@@ -55,5 +56,9 @@ export namespace ConversationHistoryTranscriptSystemToolResultCommonModelResult 
 
     export interface TransferToNumberTwilioSuccess extends ElevenLabs.TransferToNumberResultTwilioSuccessModel {
         resultType: "transfer_to_number_twilio_success";
+    }
+
+    export interface VoicemailDetectionSuccess extends ElevenLabs.VoiceMailDetectionResultSuccessModel {
+        resultType: "voicemail_detection_success";
     }
 }

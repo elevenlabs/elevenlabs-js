@@ -2858,7 +2858,7 @@ await client.webhooks.list({
 <dl>
 <dd>
 
-Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned. Otherwise, returns a single transcript.
+Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned. Otherwise, returns a single transcript. The optional webhook_metadata parameter allows you to attach custom data that will be included in webhook responses for request correlation and tracking.
 
 </dd>
 </dl>
@@ -2993,7 +2993,7 @@ await client.forcedAlignment.create({
 <dl>
 <dd>
 
-Upload a file or webpage URL to create a knowledge base document. <br> <Note> After creating the document, update the agent's knowledge base by calling [Update agent](/docs/conversational-ai/api-reference/agents/update-agent). </Note>
+Upload a file or webpage URL to create a knowledge base document. <br> <Note> After creating the document, update the agent's knowledge base by calling [Update agent](/docs/api-reference/agents/update). </Note>
 
 </dd>
 </dl>
@@ -3306,6 +3306,8 @@ await client.conversationalAi.updateSecret("secret_id", {
 </dd>
 </dl>
 </details>
+
+## Music
 
 ## ConversationalAi Conversations
 
@@ -8435,6 +8437,73 @@ await client.dubbing.resource.speaker.segment.create("dubbing_id", "speaker_id",
 <dd>
 
 **requestOptions:** `Segment.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Music CompositionPlan
+
+<details><summary><code>client.music.compositionPlan.<a href="/src/api/resources/music/resources/compositionPlan/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.MusicPrompt</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a composition plan for music generation. Usage of this endpoint does not cost any credits but is subject to rate limiting depending on your tier.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.compositionPlan.create({
+    prompt: "prompt",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.music.BodyGenerateCompositionPlanV1MusicPlanPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CompositionPlan.RequestOptions`
 
 </dd>
 </dl>
