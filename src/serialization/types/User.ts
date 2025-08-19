@@ -31,6 +31,7 @@ export const User: core.serialization.ObjectSchema<serializers.User.Raw, ElevenL
         "partnerstack_partner_default_link",
         core.serialization.string().optional(),
     ),
+    createdAt: core.serialization.property("created_at", core.serialization.number()),
 });
 
 export declare namespace User {
@@ -48,5 +49,6 @@ export declare namespace User {
         xi_api_key_preview?: string | null;
         referral_link_code?: string | null;
         partnerstack_partner_default_link?: string | null;
+        created_at: number;
     }
 }
