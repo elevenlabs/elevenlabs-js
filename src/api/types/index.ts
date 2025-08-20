@@ -45,7 +45,6 @@ export * from "./BatchCallDetailedResponse";
 export * from "./BatchCallRecipientStatus";
 export * from "./BatchCallResponse";
 export * from "./BatchCallStatus";
-export * from "./BodyComposeMusicWithADetailedResponseV1MusicDetailedPost";
 export * from "./CreatePreviouslyGeneratedVoiceRequest";
 export * from "./BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostGender";
 export * from "./BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostAge";

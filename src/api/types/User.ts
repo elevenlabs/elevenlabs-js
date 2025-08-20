@@ -11,7 +11,7 @@ export interface User {
     subscription: ElevenLabs.SubscriptionResponse;
     /** Optional additional details about the user's subscription. */
     subscriptionExtras?: ElevenLabs.SubscriptionExtrasResponseModel;
-    /** Whether the user is new. */
+    /** Whether the user is new. This field is deprecated and will be removed in the future. Use 'created_at' instead. */
     isNewUser: boolean;
     /** The API key of the user. */
     xiApiKey?: string;
@@ -31,4 +31,6 @@ export interface User {
     referralLinkCode?: string;
     /** The Partnerstack partner default link of the user. */
     partnerstackPartnerDefaultLink?: string;
+    /** The unix timestamp of the user's creation. 0 if the user was created before the unix timestamp was added. */
+    createdAt: number;
 }

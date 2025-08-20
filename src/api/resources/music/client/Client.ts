@@ -135,6 +135,96 @@ export class Music {
     }
 
     /**
+     * Compose a song from a prompt or a composition plan.
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     */
+    public composeDetailed(
+        request: ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost = {},
+        requestOptions?: Music.RequestOptions,
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
+        return core.HttpResponsePromise.fromPromise(this.__composeDetailed(request, requestOptions));
+    }
+
+    private async __composeDetailed(
+        request: ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost = {},
+        requestOptions?: Music.RequestOptions,
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        const { outputFormat, ..._body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (outputFormat != null) {
+            _queryParams["output_format"] = serializers.MusicComposeDetailedRequestOutputFormat.jsonOrThrow(
+                outputFormat,
+                { unrecognizedObjectKeys: "strip" },
+            );
+        }
+
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/music/detailed",
+            ),
+            method: "POST",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            body: serializers.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            responseType: "streaming",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError("Timeout exceeded when calling POST /v1/music/detailed.");
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
      * Stream a composed song from a prompt or a composition plan.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
