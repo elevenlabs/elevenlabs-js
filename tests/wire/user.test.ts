@@ -76,6 +76,7 @@ describe("User", () => {
             xi_api_key_preview: "xi_api_key_preview",
             referral_link_code: "referral_link_code",
             partnerstack_partner_default_link: "partnerstack_partner_default_link",
+            created_at: 1753999199,
         };
         server.mockEndpoint().get("/v1/user").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
@@ -146,6 +147,7 @@ describe("User", () => {
             xiApiKeyPreview: "xi_api_key_preview",
             referralLinkCode: "referral_link_code",
             partnerstackPartnerDefaultLink: "partnerstack_partner_default_link",
+            createdAt: 1753999199,
         });
     });
 });
