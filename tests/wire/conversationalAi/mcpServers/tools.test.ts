@@ -75,6 +75,9 @@ describe("Tools", () => {
                     meta: {
                         key: "value",
                     },
+                    _meta: {
+                        key: "value",
+                    },
                 },
                 {
                     name: "tool2",
@@ -88,6 +91,9 @@ describe("Tools", () => {
                         key: "value",
                     },
                     meta: {
+                        key: "value",
+                    },
+                    _meta: {
                         key: "value",
                     },
                 },
