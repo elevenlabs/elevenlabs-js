@@ -21,7 +21,6 @@ export const WorkspaceResourceType: core.serialization.Schema<
     "convai_settings",
     "convai_secrets",
     "workspace_auth_connections",
-    "music_latent",
     "convai_phone_numbers",
     "convai_mcp_servers",
     "convai_batch_calls",
@@ -42,7 +41,6 @@ export declare namespace WorkspaceResourceType {
         | "convai_settings"
         | "convai_secrets"
         | "workspace_auth_connections"
-        | "music_latent"
         | "convai_phone_numbers"
         | "convai_mcp_servers"
         | "convai_batch_calls"

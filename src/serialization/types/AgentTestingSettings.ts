@@ -5,16 +5,17 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { AttachedTestModel } from "./AttachedTestModel";
 
 export const AgentTestingSettings: core.serialization.ObjectSchema<
     serializers.AgentTestingSettings.Raw,
     ElevenLabs.AgentTestingSettings
 > = core.serialization.object({
-    testIds: core.serialization.property("test_ids", core.serialization.list(core.serialization.string()).optional()),
+    attachedTests: core.serialization.property("attached_tests", core.serialization.list(AttachedTestModel).optional()),
 });
 
 export declare namespace AgentTestingSettings {
     export interface Raw {
-        test_ids?: string[] | null;
+        attached_tests?: AttachedTestModel.Raw[] | null;
     }
 }

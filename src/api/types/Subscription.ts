@@ -49,4 +49,6 @@ export interface Subscription {
     nextInvoice?: ElevenLabs.InvoiceResponse;
     /** Whether the user has open invoices. */
     hasOpenInvoices: boolean;
+    /** The pending change for the user. */
+    pendingChange?: ElevenLabs.ExtendedSubscriptionResponseModelPendingChange;
 }

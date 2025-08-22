@@ -707,7 +707,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-<Warning>Eleven v3 API access is currently not publicly available, but will be soon.</Warning><br/>Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
+Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
 
 </dd>
 </dl>
@@ -781,7 +781,7 @@ await client.textToDialogue.convert({
 <dl>
 <dd>
 
-<Warning>Eleven v3 API access is currently not publicly available, but will be soon.</Warning><br/>Converts a list of text and voice ID pairs into speech (dialogue) and returns an audio stream.
+Converts a list of text and voice ID pairs into speech (dialogue) and returns an audio stream.
 
 </dd>
 </dl>
@@ -2639,6 +2639,77 @@ await client.pronunciationDictionaries.get("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **pronunciationDictionaryId:** `string` — The id of the pronunciation dictionary
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PronunciationDictionaries.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pronunciationDictionaries.<a href="/src/api/resources/pronunciationDictionaries/client/Client.ts">update</a>(pronunciationDictionaryId, { ...params }) -> ElevenLabs.GetPronunciationDictionaryMetadataResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Partially update the pronunciation dictionary without changing the version
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.pronunciationDictionaries.update("21m00Tcm4TlvDq8ikWAM");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**pronunciationDictionaryId:** `string` — The id of the pronunciation dictionary
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch`
 
 </dd>
 </dl>
@@ -4724,7 +4795,7 @@ await client.conversationalAi.knowledgeBase.list();
 <dl>
 <dd>
 
-Get all available tools available in the workspace.
+Get all available tools in the workspace.
 
 </dd>
 </dl>

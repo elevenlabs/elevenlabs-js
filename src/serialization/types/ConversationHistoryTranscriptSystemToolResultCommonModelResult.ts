@@ -10,6 +10,7 @@ import { LanguageDetectionToolResultModel } from "./LanguageDetectionToolResultM
 import { PlayDtmfResultErrorModel } from "./PlayDtmfResultErrorModel";
 import { PlayDtmfResultSuccessModel } from "./PlayDtmfResultSuccessModel";
 import { SkipTurnToolResponseModel } from "./SkipTurnToolResponseModel";
+import { TestToolResultModel } from "./TestToolResultModel";
 import { TransferToAgentToolResultErrorModel } from "./TransferToAgentToolResultErrorModel";
 import { TransferToAgentToolResultSuccessModel } from "./TransferToAgentToolResultSuccessModel";
 import { TransferToNumberResultErrorModel } from "./TransferToNumberResultErrorModel";
@@ -27,6 +28,7 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelResult: cor
         play_dtmf_error: PlayDtmfResultErrorModel,
         play_dtmf_success: PlayDtmfResultSuccessModel,
         skip_turn_success: SkipTurnToolResponseModel,
+        testing_tool_result: TestToolResultModel,
         transfer_to_agent_error: TransferToAgentToolResultErrorModel,
         transfer_to_agent_success: TransferToAgentToolResultSuccessModel,
         transfer_to_number_error: TransferToNumberResultErrorModel,
@@ -46,6 +48,7 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
         | ConversationHistoryTranscriptSystemToolResultCommonModelResult.PlayDtmfError
         | ConversationHistoryTranscriptSystemToolResultCommonModelResult.PlayDtmfSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelResult.SkipTurnSuccess
+        | ConversationHistoryTranscriptSystemToolResultCommonModelResult.TestingToolResult
         | ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToAgentError
         | ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToAgentSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToNumberError
@@ -71,6 +74,10 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
 
     export interface SkipTurnSuccess extends SkipTurnToolResponseModel.Raw {
         result_type: "skip_turn_success";
+    }
+
+    export interface TestingToolResult extends TestToolResultModel.Raw {
+        result_type: "testing_tool_result";
     }
 
     export interface TransferToAgentError extends TransferToAgentToolResultErrorModel.Raw {

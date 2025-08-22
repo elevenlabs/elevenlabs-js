@@ -166,7 +166,7 @@ describe("Agents", () => {
                         request_headers: { "Content-Type": "application/json" },
                     },
                 },
-                testing: { test_ids: ["test_123", "test_456"] },
+                testing: { attached_tests: [{ test_id: "test_123" }, { test_id: "test_456" }] },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -392,7 +392,14 @@ describe("Agents", () => {
                     },
                 },
                 testing: {
-                    testIds: ["test_123", "test_456"],
+                    attachedTests: [
+                        {
+                            testId: "test_123",
+                        },
+                        {
+                            testId: "test_456",
+                        },
+                    ],
                 },
                 safety: {
                     isBlockedIvc: true,
@@ -586,7 +593,7 @@ describe("Agents", () => {
                         request_headers: { "Content-Type": "application/json" },
                     },
                 },
-                testing: { test_ids: ["test_123", "test_456"] },
+                testing: { attached_tests: [{ test_id: "test_123" }, { test_id: "test_456" }] },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -813,7 +820,14 @@ describe("Agents", () => {
                     },
                 },
                 testing: {
-                    testIds: ["test_123", "test_456"],
+                    attachedTests: [
+                        {
+                            testId: "test_123",
+                        },
+                        {
+                            testId: "test_456",
+                        },
+                    ],
                 },
                 safety: {
                     isBlockedIvc: true,

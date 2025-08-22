@@ -269,85 +269,6 @@ export class PronunciationDictionaries {
     }
 
     /**
-     * Get a PLS file with a pronunciation dictionary version rules
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     */
-    public download(
-        dictionaryId: string,
-        versionId: string,
-        requestOptions?: PronunciationDictionaries.RequestOptions,
-    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
-        return core.HttpResponsePromise.fromPromise(this.__download(dictionaryId, versionId, requestOptions));
-    }
-
-    private async __download(
-        dictionaryId: string,
-        versionId: string,
-        requestOptions?: PronunciationDictionaries.RequestOptions,
-    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                `v1/pronunciation-dictionaries/${encodeURIComponent(dictionaryId)}/${encodeURIComponent(versionId)}/download`,
-            ),
-            method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
-            responseType: "streaming",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return { data: _response.body, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ElevenLabsError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.ElevenLabsTimeoutError(
-                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/{dictionary_id}/{version_id}/download.",
-                );
-            case "unknown":
-                throw new errors.ElevenLabsError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
-    }
-
-    /**
      * Get metadata for a pronunciation dictionary
      *
      * @param {string} pronunciationDictionaryId - The id of the pronunciation dictionary
@@ -429,6 +350,185 @@ export class PronunciationDictionaries {
             case "timeout":
                 throw new errors.ElevenLabsTimeoutError(
                     "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/{pronunciation_dictionary_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * Partially update the pronunciation dictionary without changing the version
+     *
+     * @param {string} pronunciationDictionaryId - The id of the pronunciation dictionary
+     * @param {ElevenLabs.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch} request
+     * @param {PronunciationDictionaries.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.pronunciationDictionaries.update("21m00Tcm4TlvDq8ikWAM")
+     */
+    public update(
+        pronunciationDictionaryId: string,
+        request: ElevenLabs.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch = {},
+        requestOptions?: PronunciationDictionaries.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetPronunciationDictionaryMetadataResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__update(pronunciationDictionaryId, request, requestOptions));
+    }
+
+    private async __update(
+        pronunciationDictionaryId: string,
+        request: ElevenLabs.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch = {},
+        requestOptions?: PronunciationDictionaries.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetPronunciationDictionaryMetadataResponse>> {
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}`,
+            ),
+            method: "PATCH",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch.jsonOrThrow(
+                request,
+                { unrecognizedObjectKeys: "strip" },
+            ),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetPronunciationDictionaryMetadataResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling PATCH /v1/pronunciation-dictionaries/{pronunciation_dictionary_id}.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * Get a PLS file with a pronunciation dictionary version rules
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     */
+    public download(
+        dictionaryId: string,
+        versionId: string,
+        requestOptions?: PronunciationDictionaries.RequestOptions,
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
+        return core.HttpResponsePromise.fromPromise(this.__download(dictionaryId, versionId, requestOptions));
+    }
+
+    private async __download(
+        dictionaryId: string,
+        versionId: string,
+        requestOptions?: PronunciationDictionaries.RequestOptions,
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/pronunciation-dictionaries/${encodeURIComponent(dictionaryId)}/${encodeURIComponent(versionId)}/download`,
+            ),
+            method: "GET",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
+            responseType: "streaming",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling GET /v1/pronunciation-dictionaries/{dictionary_id}/{version_id}/download.",
                 );
             case "unknown":
                 throw new errors.ElevenLabsError({

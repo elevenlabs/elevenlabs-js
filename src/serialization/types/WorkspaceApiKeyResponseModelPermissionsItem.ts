@@ -35,6 +35,9 @@ export const WorkspaceApiKeyResponseModelPermissionsItem: core.serialization.Sch
     "workspace_read",
     "workspace_write",
     "forced_alignment",
+    "convai_read",
+    "convai_write",
+    "music_generation",
 ]);
 
 export declare namespace WorkspaceApiKeyResponseModelPermissionsItem {
@@ -63,5 +66,8 @@ export declare namespace WorkspaceApiKeyResponseModelPermissionsItem {
         | "audio_native_write"
         | "workspace_read"
         | "workspace_write"
-        | "forced_alignment";
+        | "forced_alignment"
+        | "convai_read"
+        | "convai_write"
+        | "music_generation";
 }

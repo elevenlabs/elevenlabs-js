@@ -27,7 +27,10 @@ export type WorkspaceApiKeyResponseModelPermissionsItem =
     | "audio_native_write"
     | "workspace_read"
     | "workspace_write"
-    | "forced_alignment";
+    | "forced_alignment"
+    | "convai_read"
+    | "convai_write"
+    | "music_generation";
 export const WorkspaceApiKeyResponseModelPermissionsItem = {
     TextToSpeech: "text_to_speech",
     SpeechToSpeech: "speech_to_speech",
@@ -54,4 +57,7 @@ export const WorkspaceApiKeyResponseModelPermissionsItem = {
     WorkspaceRead: "workspace_read",
     WorkspaceWrite: "workspace_write",
     ForcedAlignment: "forced_alignment",
+    ConvaiRead: "convai_read",
+    ConvaiWrite: "convai_write",
+    MusicGeneration: "music_generation",
 } as const;
