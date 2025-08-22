@@ -16,4 +16,5 @@ export interface FeaturesUsageCommonModel {
     toolDynamicVariableUpdates?: ElevenLabs.FeatureStatusCommonModel;
     isLivekit?: boolean;
     voicemailDetection?: ElevenLabs.FeatureStatusCommonModel;
+    workflow?: ElevenLabs.WorkflowFeaturesUsageCommonModel;
 }

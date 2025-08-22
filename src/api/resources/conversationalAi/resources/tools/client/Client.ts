@@ -42,7 +42,7 @@ export class Tools {
     }
 
     /**
-     * Get all available tools available in the workspace.
+     * Get all available tools in the workspace.
      *
      * @param {Tools.RequestOptions} requestOptions - Request-specific configuration.
      *

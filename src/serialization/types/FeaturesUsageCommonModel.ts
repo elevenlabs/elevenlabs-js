@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { FeatureStatusCommonModel } from "./FeatureStatusCommonModel";
+import { WorkflowFeaturesUsageCommonModel } from "./WorkflowFeaturesUsageCommonModel";
 
 export const FeaturesUsageCommonModel: core.serialization.ObjectSchema<
     serializers.FeaturesUsageCommonModel.Raw,
@@ -25,6 +26,7 @@ export const FeaturesUsageCommonModel: core.serialization.ObjectSchema<
     ),
     isLivekit: core.serialization.property("is_livekit", core.serialization.boolean().optional()),
     voicemailDetection: core.serialization.property("voicemail_detection", FeatureStatusCommonModel.optional()),
+    workflow: WorkflowFeaturesUsageCommonModel.optional(),
 });
 
 export declare namespace FeaturesUsageCommonModel {
@@ -40,5 +42,6 @@ export declare namespace FeaturesUsageCommonModel {
         tool_dynamic_variable_updates?: FeatureStatusCommonModel.Raw | null;
         is_livekit?: boolean | null;
         voicemail_detection?: FeatureStatusCommonModel.Raw | null;
+        workflow?: WorkflowFeaturesUsageCommonModel.Raw | null;
     }
 }

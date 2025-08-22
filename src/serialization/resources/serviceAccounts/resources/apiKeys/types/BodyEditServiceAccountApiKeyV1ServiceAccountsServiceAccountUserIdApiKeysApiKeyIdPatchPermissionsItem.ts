@@ -35,6 +35,9 @@ export const BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdAp
     "workspace_read",
     "workspace_write",
     "forced_alignment",
+    "convai_read",
+    "convai_write",
+    "music_generation",
 ]);
 
 export declare namespace BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissionsItem {
@@ -63,5 +66,8 @@ export declare namespace BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAcc
         | "audio_native_write"
         | "workspace_read"
         | "workspace_write"
-        | "forced_alignment";
+        | "forced_alignment"
+        | "convai_read"
+        | "convai_write"
+        | "music_generation";
 }

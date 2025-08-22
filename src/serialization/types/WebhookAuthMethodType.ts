@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const WebhookAuthMethodType: core.serialization.Schema<
     serializers.WebhookAuthMethodType.Raw,
     ElevenLabs.WebhookAuthMethodType
-> = core.serialization.enum_(["hmac", "oauth2"]);
+> = core.serialization.enum_(["hmac", "oauth2", "mtls"]);
 
 export declare namespace WebhookAuthMethodType {
-    export type Raw = "hmac" | "oauth2";
+    export type Raw = "hmac" | "oauth2" | "mtls";
 }

@@ -17,7 +17,6 @@ export type WorkspaceResourceType =
     | "convai_settings"
     | "convai_secrets"
     | "workspace_auth_connections"
-    | "music_latent"
     | "convai_phone_numbers"
     | "convai_mcp_servers"
     | "convai_batch_calls"
@@ -35,7 +34,6 @@ export const WorkspaceResourceType = {
     ConvaiSettings: "convai_settings",
     ConvaiSecrets: "convai_secrets",
     WorkspaceAuthConnections: "workspace_auth_connections",
-    MusicLatent: "music_latent",
     ConvaiPhoneNumbers: "convai_phone_numbers",
     ConvaiMcpServers: "convai_mcp_servers",
     ConvaiBatchCalls: "convai_batch_calls",

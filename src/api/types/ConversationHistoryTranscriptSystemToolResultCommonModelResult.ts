@@ -10,6 +10,7 @@ export type ConversationHistoryTranscriptSystemToolResultCommonModelResult =
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.PlayDtmfError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.PlayDtmfSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.SkipTurnSuccess
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.TestingToolResult
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToAgentError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToAgentSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult.TransferToNumberError
@@ -36,6 +37,10 @@ export namespace ConversationHistoryTranscriptSystemToolResultCommonModelResult 
 
     export interface SkipTurnSuccess extends ElevenLabs.SkipTurnToolResponseModel {
         resultType: "skip_turn_success";
+    }
+
+    export interface TestingToolResult extends ElevenLabs.TestToolResultModel {
+        resultType: "testing_tool_result";
     }
 
     export interface TransferToAgentError extends ElevenLabs.TransferToAgentToolResultErrorModel {

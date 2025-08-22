@@ -10,6 +10,7 @@ import { SubscriptionStatusType } from "./SubscriptionStatusType";
 import { ExtendedSubscriptionResponseModelBillingPeriod } from "./ExtendedSubscriptionResponseModelBillingPeriod";
 import { ExtendedSubscriptionResponseModelCharacterRefreshPeriod } from "./ExtendedSubscriptionResponseModelCharacterRefreshPeriod";
 import { InvoiceResponse } from "./InvoiceResponse";
+import { ExtendedSubscriptionResponseModelPendingChange } from "./ExtendedSubscriptionResponseModelPendingChange";
 
 export const Subscription: core.serialization.ObjectSchema<serializers.Subscription.Raw, ElevenLabs.Subscription> =
     core.serialization.object({
@@ -62,6 +63,10 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
         ),
         nextInvoice: core.serialization.property("next_invoice", InvoiceResponse.optional()),
         hasOpenInvoices: core.serialization.property("has_open_invoices", core.serialization.boolean()),
+        pendingChange: core.serialization.property(
+            "pending_change",
+            ExtendedSubscriptionResponseModelPendingChange.optional(),
+        ),
     });
 
 export declare namespace Subscription {
@@ -88,5 +93,6 @@ export declare namespace Subscription {
         character_refresh_period?: ExtendedSubscriptionResponseModelCharacterRefreshPeriod.Raw | null;
         next_invoice?: InvoiceResponse.Raw | null;
         has_open_invoices: boolean;
+        pending_change?: ExtendedSubscriptionResponseModelPendingChange.Raw | null;
     }
 }

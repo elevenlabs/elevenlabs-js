@@ -91,6 +91,44 @@ describe("PronunciationDictionaries", () => {
         });
     });
 
+    test("update", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = {
+            id: "5xM3yVvZQKV0EfqQpLrJ",
+            latest_version_id: "5xM3yVvZQKV0EfqQpLr2",
+            latest_version_rules_num: 2,
+            name: "My Dictionary",
+            permission_on_resource: "admin",
+            created_by: "ar6633Es2kUjFXBdR1iVc9ztsXl1",
+            creation_time_unix: 1714156800,
+            archived_time_unix: 1,
+            description: "This is a test dictionary",
+        };
+        server
+            .mockEndpoint()
+            .patch("/v1/pronunciation-dictionaries/21m00Tcm4TlvDq8ikWAM")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.pronunciationDictionaries.update("21m00Tcm4TlvDq8ikWAM");
+        expect(response).toEqual({
+            id: "5xM3yVvZQKV0EfqQpLrJ",
+            latestVersionId: "5xM3yVvZQKV0EfqQpLr2",
+            latestVersionRulesNum: 2,
+            name: "My Dictionary",
+            permissionOnResource: "admin",
+            createdBy: "ar6633Es2kUjFXBdR1iVc9ztsXl1",
+            creationTimeUnix: 1714156800,
+            archivedTimeUnix: 1,
+            description: "This is a test dictionary",
+        });
+    });
+
     test("list", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });

@@ -29,8 +29,8 @@ export type Llm =
     | "custom-llm"
     | "qwen3-4b"
     | "qwen3-30b-a3b"
-    | "watt-tool-8b"
-    | "watt-tool-70b"
+    | "gpt-oss-20b"
+    | "gpt-oss-120b"
     | "gemini-2.5-flash-preview-05-20"
     | "gemini-2.5-flash-preview-04-17"
     | "gemini-2.5-flash-lite-preview-06-17"
@@ -87,8 +87,8 @@ export const Llm = {
     CustomLlm: "custom-llm",
     Qwen34B: "qwen3-4b",
     Qwen330Ba3B: "qwen3-30b-a3b",
-    WattTool8B: "watt-tool-8b",
-    WattTool70B: "watt-tool-70b",
+    GptOss20B: "gpt-oss-20b",
+    GptOss120B: "gpt-oss-120b",
     Gemini25FlashPreview0520: "gemini-2.5-flash-preview-05-20",
     Gemini25FlashPreview0417: "gemini-2.5-flash-preview-04-17",
     Gemini25FlashLitePreview0617: "gemini-2.5-flash-lite-preview-06-17",

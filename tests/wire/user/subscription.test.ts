@@ -38,6 +38,7 @@ describe("Subscription", () => {
                 next_payment_attempt_unix: 1738356858,
             },
             has_open_invoices: false,
+            pending_change: { kind: "change", next_tier: "free", timestamp_seconds: 1 },
         };
         server
             .mockEndpoint()
@@ -76,6 +77,11 @@ describe("Subscription", () => {
                 nextPaymentAttemptUnix: 1738356858,
             },
             hasOpenInvoices: false,
+            pendingChange: {
+                kind: "change",
+                nextTier: "free",
+                timestampSeconds: 1,
+            },
         });
     });
 });
