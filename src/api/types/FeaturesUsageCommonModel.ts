@@ -17,4 +17,5 @@ export interface FeaturesUsageCommonModel {
     isLivekit?: boolean;
     voicemailDetection?: ElevenLabs.FeatureStatusCommonModel;
     workflow?: ElevenLabs.WorkflowFeaturesUsageCommonModel;
+    agentTesting?: ElevenLabs.TestsFeatureUsageCommonModel;
 }

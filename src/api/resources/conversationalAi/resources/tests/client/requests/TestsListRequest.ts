@@ -6,7 +6,7 @@
  * @example
  *     {}
  */
-export interface ListChatResponseTestsRouteRequest {
+export interface TestsListRequest {
     /**
      * Used for fetching next page. Cursor is returned in the response.
      */

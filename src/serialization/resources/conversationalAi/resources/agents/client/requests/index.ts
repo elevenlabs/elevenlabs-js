@@ -3,3 +3,4 @@ export { UpdateAgentRequest } from "./UpdateAgentRequest";
 export { BodyDuplicateAgentV1ConvaiAgentsAgentIdDuplicatePost } from "./BodyDuplicateAgentV1ConvaiAgentsAgentIdDuplicatePost";
 export { BodySimulatesAConversationV1ConvaiAgentsAgentIdSimulateConversationPost } from "./BodySimulatesAConversationV1ConvaiAgentsAgentIdSimulateConversationPost";
 export { BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost } from "./BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost";
+export { RunAgentTestsRequestModel } from "./RunAgentTestsRequestModel";

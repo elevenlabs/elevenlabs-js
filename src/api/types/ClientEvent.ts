@@ -9,6 +9,7 @@ export type ClientEvent =
     | "audio"
     | "interruption"
     | "user_transcript"
+    | "tentative_user_transcript"
     | "agent_response"
     | "agent_response_correction"
     | "client_tool_call"
@@ -25,6 +26,7 @@ export const ClientEvent = {
     Audio: "audio",
     Interruption: "interruption",
     UserTranscript: "user_transcript",
+    TentativeUserTranscript: "tentative_user_transcript",
     AgentResponse: "agent_response",
     AgentResponseCorrection: "agent_response_correction",
     ClientToolCall: "client_tool_call",

@@ -1,5 +1,7 @@
 export * as conversations from "./conversations";
 export * from "./conversations/types";
+export * as tests from "./tests";
+export * from "./tests/types";
 export * as phoneNumbers from "./phoneNumbers";
 export * from "./phoneNumbers/types";
 export * as dashboard from "./dashboard";
@@ -16,6 +18,7 @@ export * as mcpServers from "./mcpServers";
 export * from "./conversations/client/requests";
 export * from "./twilio/client/requests";
 export * from "./agents/client/requests";
+export * from "./tests/client/requests";
 export * from "./phoneNumbers/client/requests";
 export * from "./llmUsage/client/requests";
 export * from "./knowledgeBase/client/requests";

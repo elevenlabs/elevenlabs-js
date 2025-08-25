@@ -1106,4 +1106,65 @@ describe("Agents", () => {
         });
         expect(response).toEqual(undefined);
     });
+
+    test("run_tests", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { tests: [{ test_id: "test_id" }] };
+        const rawResponseBody = {
+            id: "id",
+            created_at: 1,
+            test_runs: [
+                {
+                    test_run_id: "test_run_id",
+                    test_invocation_id: "test_invocation_id",
+                    agent_id: "agent_id",
+                    status: "pending",
+                    agent_responses: [{ role: "user", time_in_call_secs: 1 }],
+                    test_id: "test_id",
+                    condition_result: { result: "success" },
+                    last_updated_at_unix: 1,
+                },
+            ],
+        };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM/run-tests")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.agents.runTests("21m00Tcm4TlvDq8ikWAM", {
+            tests: [
+                {
+                    testId: "test_id",
+                },
+            ],
+        });
+        expect(response).toEqual({
+            id: "id",
+            createdAt: 1,
+            testRuns: [
+                {
+                    testRunId: "test_run_id",
+                    testInvocationId: "test_invocation_id",
+                    agentId: "agent_id",
+                    status: "pending",
+                    agentResponses: [
+                        {
+                            role: "user",
+                            timeInCallSecs: 1,
+                        },
+                    ],
+                    testId: "test_id",
+                    conditionResult: {
+                        result: "success",
+                    },
+                    lastUpdatedAtUnix: 1,
+                },
+            ],
+        });
+    });
 });
