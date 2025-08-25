@@ -14,6 +14,7 @@ export const ClientEvent: core.serialization.Schema<serializers.ClientEvent.Raw,
         "audio",
         "interruption",
         "user_transcript",
+        "tentative_user_transcript",
         "agent_response",
         "agent_response_correction",
         "client_tool_call",
@@ -33,6 +34,7 @@ export declare namespace ClientEvent {
         | "audio"
         | "interruption"
         | "user_transcript"
+        | "tentative_user_transcript"
         | "agent_response"
         | "agent_response_correction"
         | "client_tool_call"

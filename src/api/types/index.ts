@@ -1,6 +1,4 @@
 export * from "./BadRequestErrorBody";
-export * from "./CreateUnitTestRequestDynamicVariablesValue";
-export * from "./UpdateUnitTestRequestDynamicVariablesValue";
 export * from "./AsrConversationalConfig";
 export * from "./AsrInputFormat";
 export * from "./AsrProvider";
@@ -511,6 +509,7 @@ export * from "./TestConditionRationaleCommonModel";
 export * from "./TestConditionResultCommonModel";
 export * from "./TestRunStatus";
 export * from "./TestToolResultModel";
+export * from "./TestsFeatureUsageCommonModel";
 export * from "./TokenResponseModel";
 export * from "./Tool";
 export * from "./ToolAnnotations";

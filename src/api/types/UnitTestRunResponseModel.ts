@@ -12,4 +12,5 @@ export interface UnitTestRunResponseModel {
     agentResponses?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
     testId: string;
     conditionResult?: ElevenLabs.TestConditionResultCommonModel;
+    lastUpdatedAtUnix?: number;
 }

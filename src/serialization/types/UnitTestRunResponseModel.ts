@@ -23,6 +23,7 @@ export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
     ),
     testId: core.serialization.property("test_id", core.serialization.string()),
     conditionResult: core.serialization.property("condition_result", TestConditionResultCommonModel.optional()),
+    lastUpdatedAtUnix: core.serialization.property("last_updated_at_unix", core.serialization.number().optional()),
 });
 
 export declare namespace UnitTestRunResponseModel {
@@ -34,5 +35,6 @@ export declare namespace UnitTestRunResponseModel {
         agent_responses?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
         test_id: string;
         condition_result?: TestConditionResultCommonModel.Raw | null;
+        last_updated_at_unix?: number | null;
     }
 }

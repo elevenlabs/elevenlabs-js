@@ -842,4 +842,107 @@ export class Agents {
                 });
         }
     }
+
+    /**
+     * Run selected tests on the agent with provided configuration. If the agent configuration is provided, it will be used to override default agent configuration.
+     *
+     * @param {string} agentId - The id of an agent. This is returned on agent creation.
+     * @param {ElevenLabs.conversationalAi.RunAgentTestsRequestModel} request
+     * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.agents.runTests("21m00Tcm4TlvDq8ikWAM", {
+     *         tests: [{
+     *                 testId: "test_id"
+     *             }]
+     *     })
+     */
+    public runTests(
+        agentId: string,
+        request: ElevenLabs.conversationalAi.RunAgentTestsRequestModel,
+        requestOptions?: Agents.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetTestSuiteInvocationResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__runTests(agentId, request, requestOptions));
+    }
+
+    private async __runTests(
+        agentId: string,
+        request: ElevenLabs.conversationalAi.RunAgentTestsRequestModel,
+        requestOptions?: Agents.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetTestSuiteInvocationResponseModel>> {
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${encodeURIComponent(agentId)}/run-tests`,
+            ),
+            method: "POST",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.conversationalAi.RunAgentTestsRequestModel.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetTestSuiteInvocationResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/convai/agents/{agent_id}/run-tests.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
 }

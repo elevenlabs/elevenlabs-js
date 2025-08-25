@@ -1,5 +1,7 @@
 export * as conversations from "./conversations";
 export * from "./conversations/types";
+export * as tests from "./tests";
+export * from "./tests/types";
 export * as phoneNumbers from "./phoneNumbers";
 export * from "./phoneNumbers/types";
 export * as dashboard from "./dashboard";
@@ -8,6 +10,7 @@ export * as twilio from "./twilio";
 export * from "./twilio/client/requests";
 export * as agents from "./agents";
 export * from "./agents/client/requests";
+export * from "./tests/client/requests";
 export * from "./phoneNumbers/client/requests";
 export * as llmUsage from "./llmUsage";
 export * from "./llmUsage/client/requests";
