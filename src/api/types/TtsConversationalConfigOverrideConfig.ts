@@ -5,4 +5,10 @@
 export interface TtsConversationalConfigOverrideConfig {
     /** Whether to allow overriding the voice_id field. */
     voiceId?: boolean;
+    /** Whether to allow overriding the stability field. */
+    stability?: boolean;
+    /** Whether to allow overriding the speed field. */
+    speed?: boolean;
+    /** Whether to allow overriding the similarity_boost field. */
+    similarityBoost?: boolean;
 }

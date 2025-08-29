@@ -11,6 +11,7 @@ export const CreateSoundEffectRequest: core.serialization.Schema<
     Omit<ElevenLabs.CreateSoundEffectRequest, "outputFormat">
 > = core.serialization.object({
     text: core.serialization.string(),
+    loop: core.serialization.boolean().optional(),
     durationSeconds: core.serialization.property("duration_seconds", core.serialization.number().optional()),
     promptInfluence: core.serialization.property("prompt_influence", core.serialization.number().optional()),
 });
@@ -18,6 +19,7 @@ export const CreateSoundEffectRequest: core.serialization.Schema<
 export declare namespace CreateSoundEffectRequest {
     export interface Raw {
         text: string;
+        loop?: boolean | null;
         duration_seconds?: number | null;
         prompt_influence?: number | null;
     }

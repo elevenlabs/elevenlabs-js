@@ -14,6 +14,7 @@ export const VoicePreviewResponseModel: core.serialization.ObjectSchema<
     generatedVoiceId: core.serialization.property("generated_voice_id", core.serialization.string()),
     mediaType: core.serialization.property("media_type", core.serialization.string()),
     durationSecs: core.serialization.property("duration_secs", core.serialization.number()),
+    language: core.serialization.string().optional(),
 });
 
 export declare namespace VoicePreviewResponseModel {
@@ -22,5 +23,6 @@ export declare namespace VoicePreviewResponseModel {
         generated_voice_id: string;
         media_type: string;
         duration_secs: number;
+        language?: string | null;
     }
 }

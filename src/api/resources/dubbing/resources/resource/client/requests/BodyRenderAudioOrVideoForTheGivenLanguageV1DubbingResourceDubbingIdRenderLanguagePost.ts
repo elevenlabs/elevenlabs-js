@@ -11,6 +11,10 @@ import * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost {
+    /**
+     * Whether to normalize the volume of the rendered audio.
+     */
+    shouldNormalizeVolume?: boolean;
     /** The type of the render. One of ['mp4', 'aac', 'mp3', 'wav', 'aaf', 'tracks_zip', 'clips_zip'] */
     renderType: ElevenLabs.RenderType;
 }

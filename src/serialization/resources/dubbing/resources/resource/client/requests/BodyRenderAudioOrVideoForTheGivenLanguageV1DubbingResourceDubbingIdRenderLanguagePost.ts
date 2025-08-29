@@ -9,7 +9,10 @@ import { RenderType } from "../../../../../../types/RenderType";
 
 export const BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost: core.serialization.Schema<
     serializers.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost.Raw,
-    ElevenLabs.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost
+    Omit<
+        ElevenLabs.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost,
+        "shouldNormalizeVolume"
+    >
 > = core.serialization.object({
     renderType: core.serialization.property("render_type", RenderType),
 });

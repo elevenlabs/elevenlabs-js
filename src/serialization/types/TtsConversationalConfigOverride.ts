@@ -11,10 +11,16 @@ export const TtsConversationalConfigOverride: core.serialization.ObjectSchema<
     ElevenLabs.TtsConversationalConfigOverride
 > = core.serialization.object({
     voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
+    stability: core.serialization.number().optional(),
+    speed: core.serialization.number().optional(),
+    similarityBoost: core.serialization.property("similarity_boost", core.serialization.number().optional()),
 });
 
 export declare namespace TtsConversationalConfigOverride {
     export interface Raw {
         voice_id?: string | null;
+        stability?: number | null;
+        speed?: number | null;
+        similarity_boost?: number | null;
     }
 }

@@ -11,10 +11,12 @@ export const AgentMetadataResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.AgentMetadataResponseModel
 > = core.serialization.object({
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
+    updatedAtUnixSecs: core.serialization.property("updated_at_unix_secs", core.serialization.number()),
 });
 
 export declare namespace AgentMetadataResponseModel {
     export interface Raw {
         created_at_unix_secs: number;
+        updated_at_unix_secs: number;
     }
 }

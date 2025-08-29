@@ -47,6 +47,8 @@ export interface Subscription {
     characterRefreshPeriod?: ElevenLabs.ExtendedSubscriptionResponseModelCharacterRefreshPeriod;
     /** The next invoice for the user. */
     nextInvoice?: ElevenLabs.InvoiceResponse;
+    /** The open invoices for the user. */
+    openInvoices: ElevenLabs.InvoiceResponse[];
     /** Whether the user has open invoices. */
     hasOpenInvoices: boolean;
     /** The pending change for the user. */

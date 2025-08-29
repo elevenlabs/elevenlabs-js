@@ -26,7 +26,7 @@ describe("Tools", () => {
                         type: "object",
                     },
                     outputSchema: { key: "value" },
-                    _meta: { key: "value" },
+                    meta: { key: "value" },
                 },
                 {
                     name: "tool2",
@@ -34,7 +34,7 @@ describe("Tools", () => {
                     description: "Description of tool2",
                     inputSchema: { properties: {}, type: "object" },
                     outputSchema: { key: "value" },
-                    _meta: { key: "value" },
+                    meta: { key: "value" },
                 },
             ],
             error_message: "error_message",
@@ -75,9 +75,6 @@ describe("Tools", () => {
                     meta: {
                         key: "value",
                     },
-                    _meta: {
-                        key: "value",
-                    },
                 },
                 {
                     name: "tool2",
@@ -91,9 +88,6 @@ describe("Tools", () => {
                         key: "value",
                     },
                     meta: {
-                        key: "value",
-                    },
-                    _meta: {
                         key: "value",
                     },
                 },

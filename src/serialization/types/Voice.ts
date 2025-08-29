@@ -47,6 +47,7 @@ export const Voice: core.serialization.ObjectSchema<serializers.Voice.Raw, Eleve
         isOwner: core.serialization.property("is_owner", core.serialization.boolean().optional()),
         isLegacy: core.serialization.property("is_legacy", core.serialization.boolean().optional()),
         isMixed: core.serialization.property("is_mixed", core.serialization.boolean().optional()),
+        favoritedAtUnix: core.serialization.property("favorited_at_unix", core.serialization.number().optional()),
         createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number().optional()),
     });
 
@@ -71,6 +72,7 @@ export declare namespace Voice {
         is_owner?: boolean | null;
         is_legacy?: boolean | null;
         is_mixed?: boolean | null;
+        favorited_at_unix?: number | null;
         created_at_unix?: number | null;
     }
 }

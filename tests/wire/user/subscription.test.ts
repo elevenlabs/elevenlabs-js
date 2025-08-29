@@ -36,8 +36,18 @@ describe("Subscription", () => {
                 discount_percent_off: 1.1,
                 discount_amount_off: 1.1,
                 next_payment_attempt_unix: 1738356858,
+                payment_intent_status: "processing",
             },
-            has_open_invoices: false,
+            open_invoices: [
+                {
+                    amount_due_cents: 1000,
+                    discount_percent_off: 1.1,
+                    discount_amount_off: 1.1,
+                    next_payment_attempt_unix: 1738356858,
+                    payment_intent_status: "processing",
+                },
+            ],
+            has_open_invoices: true,
             pending_change: { kind: "change", next_tier: "free", timestamp_seconds: 1 },
         };
         server
@@ -75,8 +85,18 @@ describe("Subscription", () => {
                 discountPercentOff: 1.1,
                 discountAmountOff: 1.1,
                 nextPaymentAttemptUnix: 1738356858,
+                paymentIntentStatus: "processing",
             },
-            hasOpenInvoices: false,
+            openInvoices: [
+                {
+                    amountDueCents: 1000,
+                    discountPercentOff: 1.1,
+                    discountAmountOff: 1.1,
+                    nextPaymentAttemptUnix: 1738356858,
+                    paymentIntentStatus: "processing",
+                },
+            ],
+            hasOpenInvoices: true,
             pendingChange: {
                 kind: "change",
                 nextTier: "free",

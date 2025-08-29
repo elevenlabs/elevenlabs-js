@@ -146,7 +146,7 @@ describe("BatchCalls", () => {
                     conversation_id: "conversation_id",
                     conversation_initiation_client_data: {
                         conversation_config_override: {
-                            tts: { voice_id: "cjVigY5qzO86Huf0OWal" },
+                            tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -193,6 +193,9 @@ describe("BatchCalls", () => {
                         conversationConfigOverride: {
                             tts: {
                                 voiceId: "cjVigY5qzO86Huf0OWal",
+                                stability: 0.5,
+                                speed: 1,
+                                similarityBoost: 0.8,
                             },
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
