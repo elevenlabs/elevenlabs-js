@@ -43,6 +43,8 @@ export interface Voice {
     isLegacy?: boolean;
     /** Whether the voice is mixed. */
     isMixed?: boolean;
+    /** Timestamp when the voice was marked as favorite in Unix time. */
+    favoritedAtUnix?: number;
     /** The creation time of the voice in Unix time. */
     createdAtUnix?: number;
 }

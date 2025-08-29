@@ -58,7 +58,7 @@ describe("Agents", () => {
                 language_presets: {
                     key: {
                         overrides: {
-                            tts: { voice_id: "cjVigY5qzO86Huf0OWal" },
+                            tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -83,7 +83,7 @@ describe("Agents", () => {
                     },
                 },
             },
-            metadata: { created_at_unix_secs: 1 },
+            metadata: { created_at_unix_secs: 1, updated_at_unix_secs: 1 },
             platform_settings: {
                 auth: {
                     enable_auth: true,
@@ -254,6 +254,9 @@ describe("Agents", () => {
                         overrides: {
                             tts: {
                                 voiceId: "cjVigY5qzO86Huf0OWal",
+                                stability: 0.5,
+                                speed: 1,
+                                similarityBoost: 0.8,
                             },
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
@@ -292,6 +295,7 @@ describe("Agents", () => {
             },
             metadata: {
                 createdAtUnixSecs: 1,
+                updatedAtUnixSecs: 1,
             },
             platformSettings: {
                 auth: {
@@ -485,7 +489,7 @@ describe("Agents", () => {
                 language_presets: {
                     key: {
                         overrides: {
-                            tts: { voice_id: "cjVigY5qzO86Huf0OWal" },
+                            tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -510,7 +514,7 @@ describe("Agents", () => {
                     },
                 },
             },
-            metadata: { created_at_unix_secs: 1 },
+            metadata: { created_at_unix_secs: 1, updated_at_unix_secs: 1 },
             platform_settings: {
                 auth: {
                     enable_auth: true,
@@ -682,6 +686,9 @@ describe("Agents", () => {
                         overrides: {
                             tts: {
                                 voiceId: "cjVigY5qzO86Huf0OWal",
+                                stability: 0.5,
+                                speed: 1,
+                                similarityBoost: 0.8,
                             },
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
@@ -720,6 +727,7 @@ describe("Agents", () => {
             },
             metadata: {
                 createdAtUnixSecs: 1,
+                updatedAtUnixSecs: 1,
             },
             platformSettings: {
                 auth: {

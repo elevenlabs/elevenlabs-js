@@ -11,4 +11,6 @@ export interface VoicePreviewResponseModel {
     mediaType: string;
     /** The duration of the preview in seconds. */
     durationSecs: number;
+    /** The language of the preview. */
+    language?: string;
 }

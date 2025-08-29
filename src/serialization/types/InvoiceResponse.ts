@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { InvoiceResponseModelPaymentIntentStatus } from "./InvoiceResponseModelPaymentIntentStatus";
 
 export const InvoiceResponse: core.serialization.ObjectSchema<
     serializers.InvoiceResponse.Raw,
@@ -14,6 +15,10 @@ export const InvoiceResponse: core.serialization.ObjectSchema<
     discountPercentOff: core.serialization.property("discount_percent_off", core.serialization.number().optional()),
     discountAmountOff: core.serialization.property("discount_amount_off", core.serialization.number().optional()),
     nextPaymentAttemptUnix: core.serialization.property("next_payment_attempt_unix", core.serialization.number()),
+    paymentIntentStatus: core.serialization.property(
+        "payment_intent_status",
+        InvoiceResponseModelPaymentIntentStatus.optional(),
+    ),
 });
 
 export declare namespace InvoiceResponse {
@@ -22,5 +27,6 @@ export declare namespace InvoiceResponse {
         discount_percent_off?: number | null;
         discount_amount_off?: number | null;
         next_payment_attempt_unix: number;
+        payment_intent_status?: InvoiceResponseModelPaymentIntentStatus.Raw | null;
     }
 }

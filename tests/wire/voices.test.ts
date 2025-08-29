@@ -128,6 +128,7 @@ describe("Voices", () => {
                     is_owner: false,
                     is_legacy: false,
                     is_mixed: false,
+                    favorited_at_unix: 1,
                     created_at_unix: 1,
                 },
             ],
@@ -269,6 +270,7 @@ describe("Voices", () => {
                     isOwner: false,
                     isLegacy: false,
                     isMixed: false,
+                    favoritedAtUnix: 1,
                     createdAtUnix: 1,
                 },
             ],
@@ -397,6 +399,7 @@ describe("Voices", () => {
                     is_owner: false,
                     is_legacy: false,
                     is_mixed: false,
+                    favorited_at_unix: 1,
                     created_at_unix: 1,
                 },
             ],
@@ -543,6 +546,7 @@ describe("Voices", () => {
                     isOwner: false,
                     isLegacy: false,
                     isMixed: false,
+                    favoritedAtUnix: 1,
                     createdAtUnix: 1,
                 },
             ],
@@ -728,6 +732,7 @@ describe("Voices", () => {
             is_owner: false,
             is_legacy: false,
             is_mixed: false,
+            favorited_at_unix: 1,
             created_at_unix: 1,
         };
         server
@@ -933,6 +938,7 @@ describe("Voices", () => {
             isOwner: false,
             isLegacy: false,
             isMixed: false,
+            favoritedAtUnix: 1,
             createdAtUnix: 1,
         });
     });

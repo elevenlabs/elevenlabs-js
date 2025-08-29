@@ -27,26 +27,4 @@ describe("Members", () => {
             status: "ok",
         });
     });
-
-    test("delete", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { email: "email" };
-        const rawResponseBody = { status: "ok" };
-        server
-            .mockEndpoint()
-            .delete("/v1/workspace/members")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.workspace.members.delete({
-            email: "email",
-        });
-        expect(response).toEqual({
-            status: "ok",
-        });
-    });
 });

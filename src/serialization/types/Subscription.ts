@@ -62,6 +62,7 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
             ExtendedSubscriptionResponseModelCharacterRefreshPeriod.optional(),
         ),
         nextInvoice: core.serialization.property("next_invoice", InvoiceResponse.optional()),
+        openInvoices: core.serialization.property("open_invoices", core.serialization.list(InvoiceResponse)),
         hasOpenInvoices: core.serialization.property("has_open_invoices", core.serialization.boolean()),
         pendingChange: core.serialization.property(
             "pending_change",
@@ -92,6 +93,7 @@ export declare namespace Subscription {
         billing_period?: ExtendedSubscriptionResponseModelBillingPeriod.Raw | null;
         character_refresh_period?: ExtendedSubscriptionResponseModelCharacterRefreshPeriod.Raw | null;
         next_invoice?: InvoiceResponse.Raw | null;
+        open_invoices: InvoiceResponse.Raw[];
         has_open_invoices: boolean;
         pending_change?: ExtendedSubscriptionResponseModelPendingChange.Raw | null;
     }

@@ -17,6 +17,7 @@ describe("TextToVoice", () => {
                     generated_voice_id: "generated_voice_id",
                     media_type: "media_type",
                     duration_secs: 1.1,
+                    language: "language",
                 },
             ],
             text: "text",
@@ -40,6 +41,7 @@ describe("TextToVoice", () => {
                     generatedVoiceId: "generated_voice_id",
                     mediaType: "media_type",
                     durationSecs: 1.1,
+                    language: "language",
                 },
             ],
             text: "text",
@@ -226,6 +228,7 @@ describe("TextToVoice", () => {
             is_owner: false,
             is_legacy: false,
             is_mixed: false,
+            favorited_at_unix: 1,
             created_at_unix: 1,
         };
         server
@@ -436,6 +439,7 @@ describe("TextToVoice", () => {
             isOwner: false,
             isLegacy: false,
             isMixed: false,
+            favoritedAtUnix: 1,
             createdAtUnix: 1,
         });
     });
@@ -451,6 +455,7 @@ describe("TextToVoice", () => {
                     generated_voice_id: "generated_voice_id",
                     media_type: "media_type",
                     duration_secs: 1.1,
+                    language: "language",
                 },
             ],
             text: "text",
@@ -474,6 +479,7 @@ describe("TextToVoice", () => {
                     generatedVoiceId: "generated_voice_id",
                     mediaType: "media_type",
                     durationSecs: 1.1,
+                    language: "language",
                 },
             ],
             text: "text",
