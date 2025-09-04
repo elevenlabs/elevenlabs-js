@@ -379,6 +379,7 @@ export class Projects {
      * Returns information about a specific Studio project. This endpoint returns more detailed information about a project than `GET /v1/studio`.
      *
      * @param {string} projectId - The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+     * @param {ElevenLabs.studio.ProjectsGetRequest} request
      * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -388,15 +389,23 @@ export class Projects {
      */
     public get(
         projectId: string,
+        request: ElevenLabs.studio.ProjectsGetRequest = {},
         requestOptions?: Projects.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.ProjectExtendedResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__get(projectId, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(projectId, request, requestOptions));
     }
 
     private async __get(
         projectId: string,
+        request: ElevenLabs.studio.ProjectsGetRequest = {},
         requestOptions?: Projects.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ProjectExtendedResponse>> {
+        const { shareId } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (shareId != null) {
+            _queryParams["share_id"] = shareId;
+        }
+
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -410,6 +419,7 @@ export class Projects {
                 mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
                 requestOptions?.headers,
             ),
+            queryParameters: _queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

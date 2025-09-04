@@ -7,6 +7,7 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ConversationalConfig } from "./ConversationalConfig";
 import { AgentPlatformSettingsRequestModel } from "./AgentPlatformSettingsRequestModel";
+import { AgentWorkflowRequestModel } from "./AgentWorkflowRequestModel";
 
 export const AdhocAgentConfigOverrideForTestRequestModel: core.serialization.ObjectSchema<
     serializers.AdhocAgentConfigOverrideForTestRequestModel.Raw,
@@ -14,11 +15,13 @@ export const AdhocAgentConfigOverrideForTestRequestModel: core.serialization.Obj
 > = core.serialization.object({
     conversationConfig: core.serialization.property("conversation_config", ConversationalConfig),
     platformSettings: core.serialization.property("platform_settings", AgentPlatformSettingsRequestModel),
+    workflow: AgentWorkflowRequestModel.optional(),
 });
 
 export declare namespace AdhocAgentConfigOverrideForTestRequestModel {
     export interface Raw {
         conversation_config: ConversationalConfig.Raw;
         platform_settings: AgentPlatformSettingsRequestModel.Raw;
+        workflow?: AgentWorkflowRequestModel.Raw | null;
     }
 }

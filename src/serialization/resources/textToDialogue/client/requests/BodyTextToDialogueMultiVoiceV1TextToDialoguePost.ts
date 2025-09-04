@@ -8,6 +8,7 @@ import * as core from "../../../../../core";
 import { DialogueInput } from "../../../../types/DialogueInput";
 import { ModelSettingsResponseModel } from "../../../../types/ModelSettingsResponseModel";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
+import { BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization } from "../../types/BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization";
 
 export const BodyTextToDialogueMultiVoiceV1TextToDialoguePost: core.serialization.Schema<
     serializers.BodyTextToDialogueMultiVoiceV1TextToDialoguePost.Raw,
@@ -15,20 +16,27 @@ export const BodyTextToDialogueMultiVoiceV1TextToDialoguePost: core.serializatio
 > = core.serialization.object({
     inputs: core.serialization.list(DialogueInput),
     modelId: core.serialization.property("model_id", core.serialization.string().optional()),
+    languageCode: core.serialization.property("language_code", core.serialization.string().optional()),
     settings: ModelSettingsResponseModel.optional(),
     pronunciationDictionaryLocators: core.serialization.property(
         "pronunciation_dictionary_locators",
         core.serialization.list(PronunciationDictionaryVersionLocator).optional(),
     ),
     seed: core.serialization.number().optional(),
+    applyTextNormalization: core.serialization.property(
+        "apply_text_normalization",
+        BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization.optional(),
+    ),
 });
 
 export declare namespace BodyTextToDialogueMultiVoiceV1TextToDialoguePost {
     export interface Raw {
         inputs: DialogueInput.Raw[];
         model_id?: string | null;
+        language_code?: string | null;
         settings?: ModelSettingsResponseModel.Raw | null;
         pronunciation_dictionary_locators?: PronunciationDictionaryVersionLocator.Raw[] | null;
         seed?: number | null;
+        apply_text_normalization?: BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization.Raw | null;
     }
 }

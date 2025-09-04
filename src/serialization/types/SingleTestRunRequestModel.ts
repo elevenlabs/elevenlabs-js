@@ -11,10 +11,12 @@ export const SingleTestRunRequestModel: core.serialization.ObjectSchema<
     ElevenLabs.SingleTestRunRequestModel
 > = core.serialization.object({
     testId: core.serialization.property("test_id", core.serialization.string()),
+    workflowNodeId: core.serialization.property("workflow_node_id", core.serialization.string().optional()),
 });
 
 export declare namespace SingleTestRunRequestModel {
     export interface Raw {
         test_id: string;
+        workflow_node_id?: string | null;
     }
 }

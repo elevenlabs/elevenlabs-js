@@ -961,6 +961,7 @@ describe("Agents", () => {
                 {
                     role: "user",
                     message: "message",
+                    multivoice_message: { parts: [{ text: "text" }] },
                     tool_calls: [
                         {
                             request_id: "request_id",
@@ -1025,6 +1026,13 @@ describe("Agents", () => {
                 {
                     role: "user",
                     message: "message",
+                    multivoiceMessage: {
+                        parts: [
+                            {
+                                text: "text",
+                            },
+                        ],
+                    },
                     toolCalls: [
                         {
                             requestId: "request_id",
@@ -1127,11 +1135,17 @@ describe("Agents", () => {
                     test_run_id: "test_run_id",
                     test_invocation_id: "test_invocation_id",
                     agent_id: "agent_id",
+                    workflow_node_id: "workflow_node_id",
                     status: "pending",
                     agent_responses: [{ role: "user", time_in_call_secs: 1 }],
                     test_id: "test_id",
                     condition_result: { result: "success" },
                     last_updated_at_unix: 1,
+                    metadata: {
+                        workspace_id: "workspace_id",
+                        test_name: "test_name",
+                        ran_by_user_email: "ran_by_user_email",
+                    },
                 },
             ],
         };
@@ -1159,6 +1173,7 @@ describe("Agents", () => {
                     testRunId: "test_run_id",
                     testInvocationId: "test_invocation_id",
                     agentId: "agent_id",
+                    workflowNodeId: "workflow_node_id",
                     status: "pending",
                     agentResponses: [
                         {
@@ -1171,6 +1186,11 @@ describe("Agents", () => {
                         result: "success",
                     },
                     lastUpdatedAtUnix: 1,
+                    metadata: {
+                        workspaceId: "workspace_id",
+                        testName: "test_name",
+                        ranByUserEmail: "ran_by_user_email",
+                    },
                 },
             ],
         });

@@ -77,9 +77,13 @@ export class Conversations {
         request: ElevenLabs.conversationalAi.ConversationsGetSignedUrlRequest,
         requestOptions?: Conversations.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ConversationSignedUrlResponseModel>> {
-        const { agentId } = request;
+        const { agentId, includeConversationId } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["agent_id"] = agentId;
+        if (includeConversationId != null) {
+            _queryParams["include_conversation_id"] = includeConversationId.toString();
+        }
+
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??

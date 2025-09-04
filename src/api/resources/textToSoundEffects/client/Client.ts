@@ -42,7 +42,7 @@ export class TextToSoundEffects {
     }
 
     /**
-     * Turn text into sound effects for your videos, voice-overs or video games using the most advanced sound effects model in the world.
+     * Turn text into sound effects for your videos, voice-overs or video games using the most advanced sound effects models in the world.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public convert(

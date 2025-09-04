@@ -11,6 +11,8 @@ export interface ResourceMetadataResponseModel {
     resourceType: ElevenLabs.WorkspaceResourceType;
     /** The ID of the user who created the resource. */
     creatorUserId?: string;
+    /** The access level for anonymous users. If None, the resource is not shared publicly. */
+    anonymousAccessLevelOverride?: ElevenLabs.ResourceMetadataResponseModelAnonymousAccessLevelOverride;
     /** A mapping of roles to group IDs. When the resource is shared with a user, the group id is the user's id. */
     roleToGroupIds: Record<string, string[]>;
     /** List of options for sharing the resource further in the workspace. These are users who don't have access to the resource yet. */

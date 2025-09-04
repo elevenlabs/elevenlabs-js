@@ -8,6 +8,7 @@ import * as core from "../../core";
 import { TestRunStatus } from "./TestRunStatus";
 import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
 import { TestConditionResultCommonModel } from "./TestConditionResultCommonModel";
+import { TestRunMetadata } from "./TestRunMetadata";
 
 export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
     serializers.UnitTestRunResponseModel.Raw,
@@ -16,6 +17,7 @@ export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
     testRunId: core.serialization.property("test_run_id", core.serialization.string()),
     testInvocationId: core.serialization.property("test_invocation_id", core.serialization.string()),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
+    workflowNodeId: core.serialization.property("workflow_node_id", core.serialization.string().optional()),
     status: TestRunStatus,
     agentResponses: core.serialization.property(
         "agent_responses",
@@ -24,6 +26,7 @@ export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
     testId: core.serialization.property("test_id", core.serialization.string()),
     conditionResult: core.serialization.property("condition_result", TestConditionResultCommonModel.optional()),
     lastUpdatedAtUnix: core.serialization.property("last_updated_at_unix", core.serialization.number().optional()),
+    metadata: TestRunMetadata.optional(),
 });
 
 export declare namespace UnitTestRunResponseModel {
@@ -31,10 +34,12 @@ export declare namespace UnitTestRunResponseModel {
         test_run_id: string;
         test_invocation_id: string;
         agent_id: string;
+        workflow_node_id?: string | null;
         status: TestRunStatus.Raw;
         agent_responses?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
         test_id: string;
         condition_result?: TestConditionResultCommonModel.Raw | null;
         last_updated_at_unix?: number | null;
+        metadata?: TestRunMetadata.Raw | null;
     }
 }

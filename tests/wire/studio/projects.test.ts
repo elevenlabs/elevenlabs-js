@@ -42,6 +42,7 @@ describe("Projects", () => {
                     source_type: "blank",
                     chapters_enabled: true,
                     captions_enabled: true,
+                    public_share_id: "abc123def456789",
                 },
             ],
         };
@@ -90,6 +91,7 @@ describe("Projects", () => {
                     sourceType: "blank",
                     chaptersEnabled: true,
                     captionsEnabled: true,
+                    publicShareId: "abc123def456789",
                 },
             ],
         });
@@ -130,7 +132,7 @@ describe("Projects", () => {
             chapters_enabled: true,
             captions_enabled: true,
             caption_style: {
-                template: { key: "key", label: "label" },
+                template: { key: "key", label: "label", requires_high_fps: true },
                 text_font: "text_font",
                 text_scale: 1.1,
                 text_color: "text_color",
@@ -154,6 +156,7 @@ describe("Projects", () => {
                 max_lines_per_section: 1,
                 max_words_per_line: 1,
             },
+            public_share_id: "abc123def456789",
             quality_preset: "standard",
             chapters: [
                 {
@@ -239,6 +242,7 @@ describe("Projects", () => {
                 template: {
                     key: "key",
                     label: "label",
+                    requiresHighFps: true,
                 },
                 textFont: "text_font",
                 textScale: 1.1,
@@ -278,6 +282,7 @@ describe("Projects", () => {
                 maxLinesPerSection: 1,
                 maxWordsPerLine: 1,
             },
+            publicShareId: "abc123def456789",
             qualityPreset: "standard",
             chapters: [
                 {
@@ -387,6 +392,7 @@ describe("Projects", () => {
                     max_lines_per_section: 1,
                     max_words_per_line: 1,
                 },
+                public_share_id: "abc123def456789",
             },
         };
         server
@@ -481,6 +487,7 @@ describe("Projects", () => {
                     maxLinesPerSection: 1,
                     maxWordsPerLine: 1,
                 },
+                publicShareId: "abc123def456789",
             },
         });
     });

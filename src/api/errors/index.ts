@@ -3,3 +3,4 @@ export * from "./BadRequestError";
 export * from "./ForbiddenError";
 export * from "./NotFoundError";
 export * from "./TooEarlyError";
+export * from "./UnauthorizedError";

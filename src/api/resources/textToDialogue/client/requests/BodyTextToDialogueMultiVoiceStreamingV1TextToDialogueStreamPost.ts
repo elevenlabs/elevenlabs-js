@@ -25,10 +25,14 @@ export interface BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost
     inputs: ElevenLabs.DialogueInput[];
     /** Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property. */
     modelId?: string;
+    /** Language code (ISO 639-1) used to enforce a language for the model and text normalization. If the model does not support provided language code, an error will be returned. */
+    languageCode?: string;
     /** Settings controlling the dialogue generation. */
     settings?: ElevenLabs.ModelSettingsResponseModel;
     /** A list of pronunciation dictionary locators (id, version_id) to be applied to the text. They will be applied in order. You may have up to 3 locators per request */
     pronunciationDictionaryLocators?: ElevenLabs.PronunciationDictionaryVersionLocator[];
     /** If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be integer between 0 and 4294967295. */
     seed?: number;
+    /** This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped. For 'eleven_turbo_v2_5' and 'eleven_flash_v2_5' models, text normalization can only be enabled with Enterprise plans. */
+    applyTextNormalization?: ElevenLabs.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization;
 }

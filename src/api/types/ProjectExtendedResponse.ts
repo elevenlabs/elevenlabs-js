@@ -65,6 +65,8 @@ export interface ProjectExtendedResponse {
     captionsEnabled?: boolean;
     /** Global styling to be applied to all captions */
     captionStyle?: ElevenLabs.CaptionStyleModel;
+    /** The public share ID of the project. */
+    publicShareId?: string;
     /** The quality preset level of the project. */
     qualityPreset: ElevenLabs.ProjectExtendedResponseModelQualityPreset;
     /** List of chapters of the project and their metadata. */
