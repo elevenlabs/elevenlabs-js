@@ -20,4 +20,6 @@ export interface SpeechToTextChunkResponseModel {
     channelIndex?: number;
     /** Requested additional formats of the transcript. */
     additionalFormats?: (ElevenLabs.AdditionalFormatResponseModel | undefined)[];
+    /** The transcription ID of the response. */
+    transcriptionId?: string;
 }

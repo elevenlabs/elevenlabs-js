@@ -9,6 +9,7 @@ import * as serializers from "../../../../serialization/index";
 import { toJson } from "../../../../core/json";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers";
 import * as errors from "../../../../errors/index";
+import { Transcripts } from "../resources/transcripts/client/Client";
 
 export declare namespace SpeechToText {
     export interface Options {
@@ -37,9 +38,14 @@ export declare namespace SpeechToText {
 
 export class SpeechToText {
     protected readonly _options: SpeechToText.Options;
+    protected _transcripts: Transcripts | undefined;
 
     constructor(_options: SpeechToText.Options = {}) {
         this._options = _options;
+    }
+
+    public get transcripts(): Transcripts {
+        return (this._transcripts ??= new Transcripts(this._options));
     }
 
     /**

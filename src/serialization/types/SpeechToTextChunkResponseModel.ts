@@ -21,6 +21,7 @@ export const SpeechToTextChunkResponseModel: core.serialization.ObjectSchema<
         "additional_formats",
         core.serialization.list(AdditionalFormatResponseModel.optional()).optional(),
     ),
+    transcriptionId: core.serialization.property("transcription_id", core.serialization.string().optional()),
 });
 
 export declare namespace SpeechToTextChunkResponseModel {
@@ -31,5 +32,6 @@ export declare namespace SpeechToTextChunkResponseModel {
         words: SpeechToTextWordResponseModel.Raw[];
         channel_index?: number | null;
         additional_formats?: (AdditionalFormatResponseModel.Raw | null | undefined)[] | null;
+        transcription_id?: string | null;
     }
 }

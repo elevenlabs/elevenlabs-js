@@ -14,6 +14,7 @@ describe("Resources", () => {
             resource_id: "4ZUqyldxf71HqUbcP2Lc",
             resource_type: "voice",
             creator_user_id: "5zavrE1kZXv2lFw9BKgEkf0B5Wqo",
+            anonymous_access_level_override: "viewer",
             role_to_group_ids: {
                 admin: ["5zavrE1kZXv2lFw9BKgEkf0B5Wqo"],
                 editor: ["8ruQDGM2R4w1mFbHI5aROCUjIpJZ"],
@@ -39,6 +40,7 @@ describe("Resources", () => {
             resourceId: "4ZUqyldxf71HqUbcP2Lc",
             resourceType: "voice",
             creatorUserId: "5zavrE1kZXv2lFw9BKgEkf0B5Wqo",
+            anonymousAccessLevelOverride: "viewer",
             roleToGroupIds: {
                 admin: ["5zavrE1kZXv2lFw9BKgEkf0B5Wqo"],
                 editor: ["8ruQDGM2R4w1mFbHI5aROCUjIpJZ"],

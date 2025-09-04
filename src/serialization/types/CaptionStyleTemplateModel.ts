@@ -12,11 +12,13 @@ export const CaptionStyleTemplateModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     key: core.serialization.string(),
     label: core.serialization.string(),
+    requiresHighFps: core.serialization.property("requires_high_fps", core.serialization.boolean().optional()),
 });
 
 export declare namespace CaptionStyleTemplateModel {
     export interface Raw {
         key: string;
         label: string;
+        requires_high_fps?: boolean | null;
     }
 }

@@ -8,6 +8,7 @@ import * as core from "../../../../../core";
 import { DialogueInput } from "../../../../types/DialogueInput";
 import { ModelSettingsResponseModel } from "../../../../types/ModelSettingsResponseModel";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
+import { BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization } from "../../types/BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization";
 
 export const BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost: core.serialization.Schema<
     serializers.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost.Raw,
@@ -15,20 +16,27 @@ export const BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost: co
 > = core.serialization.object({
     inputs: core.serialization.list(DialogueInput),
     modelId: core.serialization.property("model_id", core.serialization.string().optional()),
+    languageCode: core.serialization.property("language_code", core.serialization.string().optional()),
     settings: ModelSettingsResponseModel.optional(),
     pronunciationDictionaryLocators: core.serialization.property(
         "pronunciation_dictionary_locators",
         core.serialization.list(PronunciationDictionaryVersionLocator).optional(),
     ),
     seed: core.serialization.number().optional(),
+    applyTextNormalization: core.serialization.property(
+        "apply_text_normalization",
+        BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization.optional(),
+    ),
 });
 
 export declare namespace BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost {
     export interface Raw {
         inputs: DialogueInput.Raw[];
         model_id?: string | null;
+        language_code?: string | null;
         settings?: ModelSettingsResponseModel.Raw | null;
         pronunciation_dictionary_locators?: PronunciationDictionaryVersionLocator.Raw[] | null;
         seed?: number | null;
+        apply_text_normalization?: BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization.Raw | null;
     }
 }

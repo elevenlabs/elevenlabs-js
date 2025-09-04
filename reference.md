@@ -262,7 +262,7 @@ await client.history.delete("VW7YKqPnjY4h39yTbx2L");
 <dl>
 <dd>
 
-Turn text into sound effects for your videos, voice-overs or video games using the most advanced sound effects model in the world.
+Turn text into sound effects for your videos, voice-overs or video games using the most advanced sound effects models in the world.
 
 </dd>
 </dl>
@@ -9680,6 +9680,71 @@ await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_
 </dl>
 </details>
 
+## SpeechToText Transcripts
+
+<details><summary><code>client.speechToText.transcripts.<a href="/src/api/resources/speechToText/resources/transcripts/client/Client.ts">get</a>(transcriptionId) -> ElevenLabs.TranscriptsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a previously generated transcript by its ID.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechToText.transcripts.get("transcription_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**transcriptionId:** `string` — The unique ID of the transcript to retrieve
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Transcripts.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Studio Projects
 
 <details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">list</a>() -> ElevenLabs.GetProjectsResponse</code></summary>
@@ -9802,7 +9867,7 @@ await client.studio.projects.create({
 </dl>
 </details>
 
-<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">get</a>(projectId) -> ElevenLabs.ProjectExtendedResponse</code></summary>
+<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">get</a>(projectId, { ...params }) -> ElevenLabs.ProjectExtendedResponse</code></summary>
 <dl>
 <dd>
 
@@ -9847,6 +9912,14 @@ await client.studio.projects.get("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **projectId:** `string` — The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.studio.ProjectsGetRequest`
 
 </dd>
 </dl>

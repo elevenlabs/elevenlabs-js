@@ -18,11 +18,17 @@ describe("Invocations", () => {
                     test_run_id: "test_run_id",
                     test_invocation_id: "test_invocation_id",
                     agent_id: "agent_id",
+                    workflow_node_id: "workflow_node_id",
                     status: "pending",
                     agent_responses: [{ role: "user", time_in_call_secs: 1 }],
                     test_id: "test_id",
                     condition_result: { result: "success" },
                     last_updated_at_unix: 1,
+                    metadata: {
+                        workspace_id: "workspace_id",
+                        test_name: "test_name",
+                        ran_by_user_email: "ran_by_user_email",
+                    },
                 },
             ],
         };
@@ -43,6 +49,7 @@ describe("Invocations", () => {
                     testRunId: "test_run_id",
                     testInvocationId: "test_invocation_id",
                     agentId: "agent_id",
+                    workflowNodeId: "workflow_node_id",
                     status: "pending",
                     agentResponses: [
                         {
@@ -55,6 +62,11 @@ describe("Invocations", () => {
                         result: "success",
                     },
                     lastUpdatedAtUnix: 1,
+                    metadata: {
+                        workspaceId: "workspace_id",
+                        testName: "test_name",
+                        ranByUserEmail: "ran_by_user_email",
+                    },
                 },
             ],
         });

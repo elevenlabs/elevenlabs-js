@@ -13,4 +13,8 @@ export interface ConversationsGetSignedUrlRequest {
      * The id of the agent you're taking the action on.
      */
     agentId: string;
+    /**
+     * Whether to include a conversation_id with the response. If included, the conversation_signature cannot be used again.
+     */
+    includeConversationId?: boolean;
 }

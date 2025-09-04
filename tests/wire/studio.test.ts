@@ -73,6 +73,7 @@ describe("Studio", () => {
                     max_lines_per_section: 1,
                     max_words_per_line: 1,
                 },
+                public_share_id: "abc123def456789",
             },
         };
         server
@@ -175,6 +176,7 @@ describe("Studio", () => {
                     maxLinesPerSection: 1,
                     maxWordsPerLine: 1,
                 },
+                publicShareId: "abc123def456789",
             },
         });
     });

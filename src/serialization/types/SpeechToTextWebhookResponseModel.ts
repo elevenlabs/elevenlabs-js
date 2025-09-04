@@ -12,11 +12,13 @@ export const SpeechToTextWebhookResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     message: core.serialization.string(),
     requestId: core.serialization.property("request_id", core.serialization.string()),
+    transcriptionId: core.serialization.property("transcription_id", core.serialization.string().optional()),
 });
 
 export declare namespace SpeechToTextWebhookResponseModel {
     export interface Raw {
         message: string;
         request_id: string;
+        transcription_id?: string | null;
     }
 }

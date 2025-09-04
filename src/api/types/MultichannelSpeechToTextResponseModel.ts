@@ -10,4 +10,6 @@ import * as ElevenLabs from "../index";
 export interface MultichannelSpeechToTextResponseModel {
     /** List of transcripts, one for each audio channel. Each transcript contains the text and word-level details for its respective channel. */
     transcripts: ElevenLabs.SpeechToTextChunkResponseModel[];
+    /** The transcription ID of the response. */
+    transcriptionId?: string;
 }

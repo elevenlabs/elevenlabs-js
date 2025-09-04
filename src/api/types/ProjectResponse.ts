@@ -65,4 +65,6 @@ export interface ProjectResponse {
     captionsEnabled?: boolean;
     /** Global styling to be applied to all captions */
     captionStyle?: ElevenLabs.CaptionStyleModel;
+    /** The public share ID of the project. */
+    publicShareId?: string;
 }

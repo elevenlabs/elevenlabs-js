@@ -56,6 +56,7 @@ export const ProjectResponse: core.serialization.ObjectSchema<
     chaptersEnabled: core.serialization.property("chapters_enabled", core.serialization.boolean().optional()),
     captionsEnabled: core.serialization.property("captions_enabled", core.serialization.boolean().optional()),
     captionStyle: core.serialization.property("caption_style", CaptionStyleModel.optional()),
+    publicShareId: core.serialization.property("public_share_id", core.serialization.string().optional()),
 });
 
 export declare namespace ProjectResponse {
@@ -90,5 +91,6 @@ export declare namespace ProjectResponse {
         chapters_enabled?: boolean | null;
         captions_enabled?: boolean | null;
         caption_style?: CaptionStyleModel.Raw | null;
+        public_share_id?: string | null;
     }
 }

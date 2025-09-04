@@ -7,6 +7,7 @@ import * as ElevenLabs from "../index";
 export interface ConversationHistoryTranscriptCommonModelOutput {
     role: ElevenLabs.ConversationHistoryTranscriptCommonModelOutputRole;
     message?: string;
+    multivoiceMessage?: ElevenLabs.ConversationHistoryMultivoiceMessageModel;
     toolCalls?: ElevenLabs.ConversationHistoryTranscriptToolCallCommonModel[];
     toolResults?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutputToolResultsItem[];
     feedback?: ElevenLabs.UserFeedback;

@@ -64,6 +64,7 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     chaptersEnabled: core.serialization.property("chapters_enabled", core.serialization.boolean().optional()),
     captionsEnabled: core.serialization.property("captions_enabled", core.serialization.boolean().optional()),
     captionStyle: core.serialization.property("caption_style", CaptionStyleModel.optional()),
+    publicShareId: core.serialization.property("public_share_id", core.serialization.string().optional()),
     qualityPreset: core.serialization.property("quality_preset", ProjectExtendedResponseModelQualityPreset),
     chapters: core.serialization.list(ChapterResponse),
     pronunciationDictionaryVersions: core.serialization.property(
@@ -113,6 +114,7 @@ export declare namespace ProjectExtendedResponse {
         chapters_enabled?: boolean | null;
         captions_enabled?: boolean | null;
         caption_style?: CaptionStyleModel.Raw | null;
+        public_share_id?: string | null;
         quality_preset: ProjectExtendedResponseModelQualityPreset.Raw;
         chapters: ChapterResponse.Raw[];
         pronunciation_dictionary_versions: PronunciationDictionaryVersionResponseModel.Raw[];

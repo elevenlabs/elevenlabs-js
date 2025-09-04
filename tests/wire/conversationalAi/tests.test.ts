@@ -62,6 +62,7 @@ describe("Tests", () => {
                 {
                     role: "user",
                     message: "message",
+                    multivoice_message: { parts: [{ text: "text" }] },
                     tool_calls: [
                         {
                             request_id: "request_id",
@@ -119,6 +120,13 @@ describe("Tests", () => {
                 {
                     role: "user",
                     message: "message",
+                    multivoiceMessage: {
+                        parts: [
+                            {
+                                text: "text",
+                            },
+                        ],
+                    },
                     toolCalls: [
                         {
                             requestId: "request_id",
@@ -211,6 +219,7 @@ describe("Tests", () => {
                 {
                     role: "user",
                     message: "message",
+                    multivoice_message: { parts: [{ text: "text" }] },
                     tool_calls: [
                         {
                             request_id: "request_id",
@@ -290,6 +299,13 @@ describe("Tests", () => {
                 {
                     role: "user",
                     message: "message",
+                    multivoiceMessage: {
+                        parts: [
+                            {
+                                text: "text",
+                            },
+                        ],
+                    },
                     toolCalls: [
                         {
                             requestId: "request_id",

@@ -34,7 +34,7 @@ export interface SpeechHistoryItemResponse {
     feedback?: ElevenLabs.FeedbackItem;
     /** The ID of the share link. */
     shareLinkId?: string;
-    /** The source of the history item. Either TTS (text to speech), STS (speech to text), AN (audio native), Projects, Dubbing, PlayAPI, PD (pronunciation dictionary) or ConvAI (conversational AI). */
+    /** The source of the history item. Either TTS (text to speech), STS (speech to text), AN (audio native), Projects, Dubbing, PlayAPI, PD (pronunciation dictionary) or ConvAI (Agents Platform). */
     source?: ElevenLabs.SpeechHistoryItemResponseModelSource;
     /** The alignments of the history item. */
     alignments?: ElevenLabs.HistoryAlignmentsResponseModel;

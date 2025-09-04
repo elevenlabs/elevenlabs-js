@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { WorkspaceResourceType } from "./WorkspaceResourceType";
+import { ResourceMetadataResponseModelAnonymousAccessLevelOverride } from "./ResourceMetadataResponseModelAnonymousAccessLevelOverride";
 import { ShareOptionResponseModel } from "./ShareOptionResponseModel";
 
 export const ResourceMetadataResponseModel: core.serialization.ObjectSchema<
@@ -15,6 +16,10 @@ export const ResourceMetadataResponseModel: core.serialization.ObjectSchema<
     resourceId: core.serialization.property("resource_id", core.serialization.string()),
     resourceType: core.serialization.property("resource_type", WorkspaceResourceType),
     creatorUserId: core.serialization.property("creator_user_id", core.serialization.string().optional()),
+    anonymousAccessLevelOverride: core.serialization.property(
+        "anonymous_access_level_override",
+        ResourceMetadataResponseModelAnonymousAccessLevelOverride.optional(),
+    ),
     roleToGroupIds: core.serialization.property(
         "role_to_group_ids",
         core.serialization.record(core.serialization.string(), core.serialization.list(core.serialization.string())),
@@ -27,6 +32,7 @@ export declare namespace ResourceMetadataResponseModel {
         resource_id: string;
         resource_type: WorkspaceResourceType.Raw;
         creator_user_id?: string | null;
+        anonymous_access_level_override?: ResourceMetadataResponseModelAnonymousAccessLevelOverride.Raw | null;
         role_to_group_ids: Record<string, string[]>;
         share_options: ShareOptionResponseModel.Raw[];
     }
