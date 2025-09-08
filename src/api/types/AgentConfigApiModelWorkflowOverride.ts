@@ -11,6 +11,8 @@ export interface AgentConfigApiModelWorkflowOverride {
     language?: string;
     /** Configuration for dynamic variables */
     dynamicVariables?: ElevenLabs.DynamicVariablesConfigWorkflowOverride;
+    /** If true, the user will not be able to interrupt the agent while the first message is being delivered. */
+    disableFirstMessageInterruptions?: boolean;
     /** The prompt for the agent */
     prompt?: ElevenLabs.PromptAgentApiModelWorkflowOverride;
 }

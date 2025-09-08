@@ -353,4 +353,112 @@ export class TextToVoice {
                 });
         }
     }
+
+    /**
+     * Remix an existing voice via a prompt. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. To create a voice use the generated_voice_id of the preferred preview with the /v1/text-to-voice endpoint.
+     *
+     * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {ElevenLabs.VoiceRemixRequestModel} request
+     * @param {TextToVoice.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.textToVoice.remix("21m00Tcm4TlvDq8ikWAM", {
+     *         voiceDescription: "Make the voice have a higher pitch."
+     *     })
+     */
+    public remix(
+        voiceId: string,
+        request: ElevenLabs.VoiceRemixRequestModel,
+        requestOptions?: TextToVoice.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.VoiceDesignPreviewResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__remix(voiceId, request, requestOptions));
+    }
+
+    private async __remix(
+        voiceId: string,
+        request: ElevenLabs.VoiceRemixRequestModel,
+        requestOptions?: TextToVoice.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.VoiceDesignPreviewResponse>> {
+        const { outputFormat, ..._body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (outputFormat != null) {
+            _queryParams["output_format"] = serializers.TextToVoiceRemixRequestOutputFormat.jsonOrThrow(outputFormat, {
+                unrecognizedObjectKeys: "strip",
+            });
+        }
+
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/text-to-voice/${encodeURIComponent(voiceId)}/remix`,
+            ),
+            method: "POST",
+            headers: mergeHeaders(
+                this._options?.headers,
+                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
+                requestOptions?.headers,
+            ),
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            body: serializers.VoiceRemixRequestModel.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.VoiceDesignPreviewResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/text-to-voice/{voice_id}/remix.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
 }

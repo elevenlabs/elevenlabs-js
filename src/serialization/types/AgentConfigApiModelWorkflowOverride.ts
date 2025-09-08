@@ -18,6 +18,10 @@ export const AgentConfigApiModelWorkflowOverride: core.serialization.ObjectSchem
         "dynamic_variables",
         DynamicVariablesConfigWorkflowOverride.optional(),
     ),
+    disableFirstMessageInterruptions: core.serialization.property(
+        "disable_first_message_interruptions",
+        core.serialization.boolean().optional(),
+    ),
     prompt: PromptAgentApiModelWorkflowOverride.optional(),
 });
 
@@ -26,6 +30,7 @@ export declare namespace AgentConfigApiModelWorkflowOverride {
         first_message?: string | null;
         language?: string | null;
         dynamic_variables?: DynamicVariablesConfigWorkflowOverride.Raw | null;
+        disable_first_message_interruptions?: boolean | null;
         prompt?: PromptAgentApiModelWorkflowOverride.Raw | null;
     }
 }

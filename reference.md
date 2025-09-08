@@ -1194,6 +1194,79 @@ await client.textToVoice.design({
 </dl>
 </details>
 
+<details><summary><code>client.textToVoice.<a href="/src/api/resources/textToVoice/client/Client.ts">remix</a>(voiceId, { ...params }) -> ElevenLabs.VoiceDesignPreviewResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remix an existing voice via a prompt. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. To create a voice use the generated_voice_id of the preferred preview with the /v1/text-to-voice endpoint.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.textToVoice.remix("21m00Tcm4TlvDq8ikWAM", {
+    voiceDescription: "Make the voice have a higher pitch.",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.VoiceRemixRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TextToVoice.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## user
 
 <details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">get</a>() -> ElevenLabs.User</code></summary>
@@ -4201,6 +4274,7 @@ await client.conversationalAi.agents.simulateConversation("21m00Tcm4TlvDq8ikWAM"
         simulatedUserConfig: {
             firstMessage: "Hello, how can I help you today?",
             language: "en",
+            disableFirstMessageInterruptions: false,
         },
     },
 });
@@ -4279,6 +4353,7 @@ await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8
         simulatedUserConfig: {
             firstMessage: "Hello, how can I help you today?",
             language: "en",
+            disableFirstMessageInterruptions: false,
         },
     },
 });

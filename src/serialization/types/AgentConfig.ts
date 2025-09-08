@@ -13,6 +13,10 @@ export const AgentConfig: core.serialization.ObjectSchema<serializers.AgentConfi
         firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
         language: core.serialization.string().optional(),
         dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
+        disableFirstMessageInterruptions: core.serialization.property(
+            "disable_first_message_interruptions",
+            core.serialization.boolean().optional(),
+        ),
         prompt: PromptAgentApiModelOutput.optional(),
     });
 
@@ -21,6 +25,7 @@ export declare namespace AgentConfig {
         first_message?: string | null;
         language?: string | null;
         dynamic_variables?: DynamicVariablesConfig.Raw | null;
+        disable_first_message_interruptions?: boolean | null;
         prompt?: PromptAgentApiModelOutput.Raw | null;
     }
 }

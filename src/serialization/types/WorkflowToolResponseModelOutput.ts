@@ -5,13 +5,11 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { TransferToAgentToolResultSuccessModel } from "./TransferToAgentToolResultSuccessModel";
 
 export const WorkflowToolResponseModelOutput: core.serialization.ObjectSchema<
     serializers.WorkflowToolResponseModelOutput.Raw,
     ElevenLabs.WorkflowToolResponseModelOutput
 > = core.serialization.object({
-    finalTransfer: core.serialization.property("final_transfer", TransferToAgentToolResultSuccessModel.optional()),
     steps: core.serialization
         .list(core.serialization.lazy(() => serializers.WorkflowToolResponseModelOutputStepsItem))
         .optional(),
@@ -19,7 +17,6 @@ export const WorkflowToolResponseModelOutput: core.serialization.ObjectSchema<
 
 export declare namespace WorkflowToolResponseModelOutput {
     export interface Raw {
-        final_transfer?: TransferToAgentToolResultSuccessModel.Raw | null;
         steps?: serializers.WorkflowToolResponseModelOutputStepsItem.Raw[] | null;
     }
 }

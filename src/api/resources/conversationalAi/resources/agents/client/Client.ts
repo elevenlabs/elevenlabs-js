@@ -649,7 +649,8 @@ export class Agents {
      *         simulationSpecification: {
      *             simulatedUserConfig: {
      *                 firstMessage: "Hello, how can I help you today?",
-     *                 language: "en"
+     *                 language: "en",
+     *                 disableFirstMessageInterruptions: false
      *             }
      *         }
      *     })
@@ -756,7 +757,8 @@ export class Agents {
      *         simulationSpecification: {
      *             simulatedUserConfig: {
      *                 firstMessage: "Hello, how can I help you today?",
-     *                 language: "en"
+     *                 language: "en",
+     *                 disableFirstMessageInterruptions: false
      *             }
      *         }
      *     })

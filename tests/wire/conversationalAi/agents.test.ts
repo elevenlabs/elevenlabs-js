@@ -73,6 +73,7 @@ describe("Agents", () => {
                     first_message: "Hello, how can I help you today?",
                     language: "en",
                     dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                    disable_first_message_interruptions: false,
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -276,6 +277,7 @@ describe("Agents", () => {
                             user_name: "John Doe",
                         },
                     },
+                    disableFirstMessageInterruptions: false,
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -504,6 +506,7 @@ describe("Agents", () => {
                     first_message: "Hello, how can I help you today?",
                     language: "en",
                     dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                    disable_first_message_interruptions: false,
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -708,6 +711,7 @@ describe("Agents", () => {
                             user_name: "John Doe",
                         },
                     },
+                    disableFirstMessageInterruptions: false,
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -953,7 +957,11 @@ describe("Agents", () => {
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             simulation_specification: {
-                simulated_user_config: { first_message: "Hello, how can I help you today?", language: "en" },
+                simulated_user_config: {
+                    first_message: "Hello, how can I help you today?",
+                    language: "en",
+                    disable_first_message_interruptions: false,
+                },
             },
         };
         const rawResponseBody = {
@@ -1018,6 +1026,7 @@ describe("Agents", () => {
                 simulatedUserConfig: {
                     firstMessage: "Hello, how can I help you today?",
                     language: "en",
+                    disableFirstMessageInterruptions: false,
                 },
             },
         });
@@ -1100,7 +1109,11 @@ describe("Agents", () => {
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             simulation_specification: {
-                simulated_user_config: { first_message: "Hello, how can I help you today?", language: "en" },
+                simulated_user_config: {
+                    first_message: "Hello, how can I help you today?",
+                    language: "en",
+                    disable_first_message_interruptions: false,
+                },
             },
         };
 
@@ -1117,6 +1130,7 @@ describe("Agents", () => {
                 simulatedUserConfig: {
                     firstMessage: "Hello, how can I help you today?",
                     language: "en",
+                    disableFirstMessageInterruptions: false,
                 },
             },
         });
