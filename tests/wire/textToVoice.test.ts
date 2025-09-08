@@ -485,4 +485,46 @@ describe("TextToVoice", () => {
             text: "text",
         });
     });
+
+    test("remix", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { voice_description: "Make the voice have a higher pitch." };
+        const rawResponseBody = {
+            previews: [
+                {
+                    audio_base_64: "audio_base_64",
+                    generated_voice_id: "generated_voice_id",
+                    media_type: "media_type",
+                    duration_secs: 1.1,
+                    language: "language",
+                },
+            ],
+            text: "text",
+        };
+        server
+            .mockEndpoint()
+            .post("/v1/text-to-voice/21m00Tcm4TlvDq8ikWAM/remix")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.textToVoice.remix("21m00Tcm4TlvDq8ikWAM", {
+            voiceDescription: "Make the voice have a higher pitch.",
+        });
+        expect(response).toEqual({
+            previews: [
+                {
+                    audioBase64: "audio_base_64",
+                    generatedVoiceId: "generated_voice_id",
+                    mediaType: "media_type",
+                    durationSecs: 1.1,
+                    language: "language",
+                },
+            ],
+            text: "text",
+        });
+    });
 });

@@ -8,6 +8,5 @@ import * as ElevenLabs from "../index";
  * A common model for workflow tool responses.
  */
 export interface WorkflowToolResponseModelOutput {
-    finalTransfer?: ElevenLabs.TransferToAgentToolResultSuccessModel;
     steps?: ElevenLabs.WorkflowToolResponseModelOutputStepsItem[];
 }
