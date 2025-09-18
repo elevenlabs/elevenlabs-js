@@ -15,6 +15,8 @@ export interface ConversationalConfig {
     conversation?: ElevenLabs.ConversationConfig;
     /** Language presets for conversations */
     languagePresets?: Record<string, ElevenLabs.LanguagePresetOutput>;
+    /** Configuration for voice activity detection */
+    vad?: ElevenLabs.VadConfig;
     /** Agent specific configuration */
     agent?: ElevenLabs.AgentConfig;
 }

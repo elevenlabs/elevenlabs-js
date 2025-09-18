@@ -24,6 +24,22 @@ export interface HistoryListRequest {
     /**
      * Search term used for filtering history items. If provided, source becomes required.
      */
+    modelId?: string;
+    /**
+     * Unix timestamp to filter history items before this date (exclusive).
+     */
+    dateBeforeUnix?: number;
+    /**
+     * Unix timestamp to filter history items after this date (inclusive).
+     */
+    dateAfterUnix?: number;
+    /**
+     * Sort direction for the results.
+     */
+    sortDirection?: ElevenLabs.HistoryListRequestSortDirection;
+    /**
+     * search term used for filtering
+     */
     search?: string;
     /**
      * Source of the generated history item

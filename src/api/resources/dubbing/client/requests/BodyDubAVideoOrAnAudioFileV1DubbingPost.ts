@@ -39,7 +39,7 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     useProfanityFilter?: boolean;
     /** Whether to prepare dub for edits in dubbing studio or edits as a dubbing resource. */
     dubbingStudio?: boolean;
-    /** [BETA] Instead of using a voice clone in dubbing, use a similar voice from the ElevenLabs Voice Library. */
+    /** Instead of using a voice clone in dubbing, use a similar voice from the ElevenLabs Voice Library. Voices used from the library will contribute towards a workspace's custom voices limit, and if there aren't enough available slots the dub will fail. Using this feature requires the caller to have the 'add_voice_from_voice_library' permission on their workspace to access new voices. */
     disableVoiceCloning?: boolean;
     /** automatic or manual. Manual mode is only supported when creating a dubbing studio project */
     mode?: string;

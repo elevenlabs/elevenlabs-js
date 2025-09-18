@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
+import { UnitTestCommonModelType } from "./UnitTestCommonModelType";
 
 export const UnitTestSummaryResponseModel: core.serialization.ObjectSchema<
     serializers.UnitTestSummaryResponseModel.Raw,
@@ -16,6 +17,7 @@ export const UnitTestSummaryResponseModel: core.serialization.ObjectSchema<
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
     lastUpdatedAtUnixSecs: core.serialization.property("last_updated_at_unix_secs", core.serialization.number()),
+    type: UnitTestCommonModelType,
 });
 
 export declare namespace UnitTestSummaryResponseModel {
@@ -25,5 +27,6 @@ export declare namespace UnitTestSummaryResponseModel {
         access_info?: ResourceAccessInfo.Raw | null;
         created_at_unix_secs: number;
         last_updated_at_unix_secs: number;
+        type: UnitTestCommonModelType.Raw;
     }
 }

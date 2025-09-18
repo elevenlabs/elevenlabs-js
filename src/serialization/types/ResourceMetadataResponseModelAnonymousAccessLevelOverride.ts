@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const ResourceMetadataResponseModelAnonymousAccessLevelOverride: core.serialization.Schema<
     serializers.ResourceMetadataResponseModelAnonymousAccessLevelOverride.Raw,
     ElevenLabs.ResourceMetadataResponseModelAnonymousAccessLevelOverride
-> = core.serialization.enum_(["admin", "editor", "viewer"]);
+> = core.serialization.enum_(["admin", "editor", "commenter", "viewer"]);
 
 export declare namespace ResourceMetadataResponseModelAnonymousAccessLevelOverride {
-    export type Raw = "admin" | "editor" | "viewer";
+    export type Raw = "admin" | "editor" | "commenter" | "viewer";
 }

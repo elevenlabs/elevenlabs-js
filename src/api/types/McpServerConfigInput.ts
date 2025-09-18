@@ -18,4 +18,6 @@ export interface McpServerConfigInput {
     requestHeaders?: Record<string, ElevenLabs.McpServerConfigInputRequestHeadersValue>;
     name: string;
     description?: string;
+    /** If true, all tools from this MCP server will require pre-tool execution speech */
+    forcePreToolSpeech?: boolean;
 }

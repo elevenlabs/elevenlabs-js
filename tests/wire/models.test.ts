@@ -29,7 +29,7 @@ describe("Models", () => {
                 maximum_text_length_per_request: 1000000,
                 languages: [{ language_id: "en", name: "English" }],
                 model_rates: { character_cost_multiplier: 1 },
-                concurrency_group: "standard",
+                concurrency_group: "standard_eleven_multilingual_v2",
             },
         ];
         server.mockEndpoint().get("/v1/models").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -61,7 +61,7 @@ describe("Models", () => {
                 modelRates: {
                     characterCostMultiplier: 1,
                 },
-                concurrencyGroup: "standard",
+                concurrencyGroup: "standard_eleven_multilingual_v2",
             },
         ]);
     });

@@ -22,4 +22,6 @@ export interface GetPhoneNumberSipTrunkResponseModel {
     outboundTrunk?: ElevenLabs.GetPhoneNumberOutboundSipTrunkConfigResponseModel;
     /** Configuration of the Inbound SIP trunk - if configured. */
     inboundTrunk?: ElevenLabs.GetPhoneNumberInboundSipTrunkConfigResponseModel;
+    /** Type of Livekit stack used for this number. */
+    livekitStack: ElevenLabs.LivekitStackType;
 }

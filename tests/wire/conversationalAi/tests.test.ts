@@ -61,6 +61,7 @@ describe("Tests", () => {
             chat_history: [
                 {
                     role: "user",
+                    agent_metadata: { agent_id: "agent_id" },
                     message: "message",
                     multivoice_message: { parts: [{ text: "text" }] },
                     tool_calls: [
@@ -78,7 +79,6 @@ describe("Tests", () => {
                             result_value: "result_value",
                             is_error: true,
                             tool_has_been_called: true,
-                            type: "client",
                         },
                     ],
                     feedback: { score: "like", time_in_call_secs: 1 },
@@ -99,10 +99,12 @@ describe("Tests", () => {
             success_examples: [{ response: "response", type: "success" }],
             failure_examples: [{ response: "response", type: "failure" }],
             tool_call_parameters: {
-                parameters: [{ eval: { expected_value: "expected_value", type: "exact" }, path: "path" }],
+                parameters: [{ eval: { type: "anything" }, path: "path" }],
                 referenced_tool: { id: "id", type: "system" },
+                verify_absence: true,
             },
             dynamic_variables: { key: "value" },
+            type: "llm",
             id: "id",
             name: "name",
         };
@@ -119,6 +121,9 @@ describe("Tests", () => {
             chatHistory: [
                 {
                     role: "user",
+                    agentMetadata: {
+                        agentId: "agent_id",
+                    },
                     message: "message",
                     multivoiceMessage: {
                         parts: [
@@ -142,7 +147,6 @@ describe("Tests", () => {
                             resultValue: "result_value",
                             isError: true,
                             toolHasBeenCalled: true,
-                            type: "client",
                         },
                     ],
                     feedback: {
@@ -185,8 +189,7 @@ describe("Tests", () => {
                 parameters: [
                     {
                         eval: {
-                            type: "exact",
-                            expectedValue: "expected_value",
+                            type: "anything",
                         },
                         path: "path",
                     },
@@ -195,10 +198,12 @@ describe("Tests", () => {
                     id: "id",
                     type: "system",
                 },
+                verifyAbsence: true,
             },
             dynamicVariables: {
                 key: "value",
             },
+            type: "llm",
             id: "id",
             name: "name",
         });
@@ -218,6 +223,7 @@ describe("Tests", () => {
             chat_history: [
                 {
                     role: "user",
+                    agent_metadata: { agent_id: "agent_id" },
                     message: "message",
                     multivoice_message: { parts: [{ text: "text" }] },
                     tool_calls: [
@@ -235,7 +241,6 @@ describe("Tests", () => {
                             result_value: "result_value",
                             is_error: true,
                             tool_has_been_called: true,
-                            type: "client",
                         },
                     ],
                     feedback: { score: "like", time_in_call_secs: 1 },
@@ -256,10 +261,12 @@ describe("Tests", () => {
             success_examples: [{ response: "response", type: "success" }],
             failure_examples: [{ response: "response", type: "failure" }],
             tool_call_parameters: {
-                parameters: [{ eval: { expected_value: "expected_value", type: "exact" }, path: "path" }],
+                parameters: [{ eval: { type: "anything" }, path: "path" }],
                 referenced_tool: { id: "id", type: "system" },
+                verify_absence: true,
             },
             dynamic_variables: { key: "value" },
+            type: "llm",
             id: "id",
             name: "name",
         };
@@ -298,6 +305,9 @@ describe("Tests", () => {
             chatHistory: [
                 {
                     role: "user",
+                    agentMetadata: {
+                        agentId: "agent_id",
+                    },
                     message: "message",
                     multivoiceMessage: {
                         parts: [
@@ -321,7 +331,6 @@ describe("Tests", () => {
                             resultValue: "result_value",
                             isError: true,
                             toolHasBeenCalled: true,
-                            type: "client",
                         },
                     ],
                     feedback: {
@@ -364,8 +373,7 @@ describe("Tests", () => {
                 parameters: [
                     {
                         eval: {
-                            type: "exact",
-                            expectedValue: "expected_value",
+                            type: "anything",
                         },
                         path: "path",
                     },
@@ -374,10 +382,12 @@ describe("Tests", () => {
                     id: "id",
                     type: "system",
                 },
+                verifyAbsence: true,
             },
             dynamicVariables: {
                 key: "value",
             },
+            type: "llm",
             id: "id",
             name: "name",
         });
@@ -419,6 +429,7 @@ describe("Tests", () => {
                     },
                     created_at_unix_secs: 1,
                     last_updated_at_unix_secs: 1,
+                    type: "llm",
                 },
             },
         };
@@ -447,6 +458,7 @@ describe("Tests", () => {
                     },
                     createdAtUnixSecs: 1,
                     lastUpdatedAtUnixSecs: 1,
+                    type: "llm",
                 },
             },
         });
@@ -469,6 +481,7 @@ describe("Tests", () => {
                     },
                     created_at_unix_secs: 1,
                     last_updated_at_unix_secs: 1,
+                    type: "llm",
                 },
             ],
             next_cursor: "next_cursor",
@@ -496,6 +509,7 @@ describe("Tests", () => {
                     },
                     createdAtUnixSecs: 1,
                     lastUpdatedAtUnixSecs: 1,
+                    type: "llm",
                 },
             ],
             nextCursor: "next_cursor",

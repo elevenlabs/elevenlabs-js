@@ -55,6 +55,7 @@ describe("History", () => {
             ],
             last_history_item_id: "ja9xsmfGhxYcymxGcOGB",
             has_more: true,
+            scanned_until: 1714650306,
         };
         server.mockEndpoint().get("/v1/history").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
@@ -115,6 +116,7 @@ describe("History", () => {
             ],
             lastHistoryItemId: "ja9xsmfGhxYcymxGcOGB",
             hasMore: true,
+            scannedUntil: 1714650306,
         });
     });
 

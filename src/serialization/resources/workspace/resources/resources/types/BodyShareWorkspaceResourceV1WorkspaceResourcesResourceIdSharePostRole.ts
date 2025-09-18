@@ -9,8 +9,8 @@ import * as core from "../../../../../../core";
 export const BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole: core.serialization.Schema<
     serializers.workspace.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole.Raw,
     ElevenLabs.workspace.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole
-> = core.serialization.enum_(["admin", "editor", "viewer"]);
+> = core.serialization.enum_(["admin", "editor", "commenter", "viewer"]);
 
 export declare namespace BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole {
-    export type Raw = "admin" | "editor" | "viewer";
+    export type Raw = "admin" | "editor" | "commenter" | "viewer";
 }

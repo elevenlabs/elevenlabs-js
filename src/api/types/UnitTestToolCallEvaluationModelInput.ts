@@ -8,5 +8,7 @@ export interface UnitTestToolCallEvaluationModelInput {
     /** Parameters to evaluate for the agent's tool call. If empty, the tool call parameters are not evaluated. */
     parameters?: ElevenLabs.UnitTestToolCallParameter[];
     /** The tool to evaluate a call against. */
-    referencedTool: ElevenLabs.ReferencedToolCommonModel;
+    referencedTool?: ElevenLabs.ReferencedToolCommonModel;
+    /** Whether to verify that the tool was NOT called. */
+    verifyAbsence?: boolean;
 }
