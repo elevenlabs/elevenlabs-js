@@ -9,8 +9,19 @@ import * as core from "../../core";
 export const TtsConversationalModel: core.serialization.Schema<
     serializers.TtsConversationalModel.Raw,
     ElevenLabs.TtsConversationalModel
-> = core.serialization.enum_(["eleven_turbo_v2", "eleven_turbo_v2_5", "eleven_flash_v2", "eleven_flash_v2_5"]);
+> = core.serialization.enum_([
+    "eleven_turbo_v2",
+    "eleven_turbo_v2_5",
+    "eleven_flash_v2",
+    "eleven_flash_v2_5",
+    "eleven_multilingual_v2",
+]);
 
 export declare namespace TtsConversationalModel {
-    export type Raw = "eleven_turbo_v2" | "eleven_turbo_v2_5" | "eleven_flash_v2" | "eleven_flash_v2_5";
+    export type Raw =
+        | "eleven_turbo_v2"
+        | "eleven_turbo_v2_5"
+        | "eleven_flash_v2"
+        | "eleven_flash_v2_5"
+        | "eleven_multilingual_v2";
 }

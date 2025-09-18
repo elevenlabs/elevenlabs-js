@@ -13,7 +13,7 @@ export const SystemToolConfigOutput: core.serialization.ObjectSchema<
     ElevenLabs.SystemToolConfigOutput
 > = core.serialization.object({
     name: core.serialization.string(),
-    description: core.serialization.string(),
+    description: core.serialization.string().optional(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
@@ -24,7 +24,7 @@ export const SystemToolConfigOutput: core.serialization.ObjectSchema<
 export declare namespace SystemToolConfigOutput {
     export interface Raw {
         name: string;
-        description: string;
+        description?: string | null;
         response_timeout_secs?: number | null;
         disable_interruptions?: boolean | null;
         force_pre_tool_speech?: boolean | null;

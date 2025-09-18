@@ -81,7 +81,7 @@ export class Dubbing {
         request: ElevenLabs.DubbingListRequest = {},
         requestOptions?: Dubbing.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DubbingMetadataPageResponseModel>> {
-        const { cursor, pageSize, dubbingStatus, filterByCreator } = request;
+        const { cursor, pageSize, dubbingStatus, filterByCreator, orderBy, orderDirection } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
             _queryParams["cursor"] = cursor;
@@ -102,6 +102,16 @@ export class Dubbing {
                 filterByCreator,
                 { unrecognizedObjectKeys: "strip" },
             );
+        }
+
+        if (orderBy != null) {
+            _queryParams["order_by"] = orderBy;
+        }
+
+        if (orderDirection != null) {
+            _queryParams["order_direction"] = serializers.DubbingListRequestOrderDirection.jsonOrThrow(orderDirection, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         const _response = await core.fetcher({

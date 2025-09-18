@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { MatchAnythingParameterEvaluationStrategy } from "./MatchAnythingParameterEvaluationStrategy";
 import { ExactParameterEvaluationStrategy } from "./ExactParameterEvaluationStrategy";
 import { LlmParameterEvaluationStrategy } from "./LlmParameterEvaluationStrategy";
 import { RegexParameterEvaluationStrategy } from "./RegexParameterEvaluationStrategy";
@@ -14,6 +15,7 @@ export const UnitTestToolCallParameterEval: core.serialization.Schema<
     ElevenLabs.UnitTestToolCallParameterEval
 > = core.serialization
     .union("type", {
+        anything: MatchAnythingParameterEvaluationStrategy,
         exact: ExactParameterEvaluationStrategy,
         llm: LlmParameterEvaluationStrategy,
         regex: RegexParameterEvaluationStrategy,
@@ -25,9 +27,14 @@ export const UnitTestToolCallParameterEval: core.serialization.Schema<
 
 export declare namespace UnitTestToolCallParameterEval {
     export type Raw =
+        | UnitTestToolCallParameterEval.Anything
         | UnitTestToolCallParameterEval.Exact
         | UnitTestToolCallParameterEval.Llm
         | UnitTestToolCallParameterEval.Regex;
+
+    export interface Anything extends MatchAnythingParameterEvaluationStrategy.Raw {
+        type: "anything";
+    }
 
     export interface Exact extends ExactParameterEvaluationStrategy.Raw {
         type: "exact";

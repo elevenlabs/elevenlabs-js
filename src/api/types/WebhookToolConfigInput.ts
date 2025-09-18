@@ -9,6 +9,7 @@ import * as ElevenLabs from "../index";
  */
 export interface WebhookToolConfigInput {
     name: string;
+    /** Description of when the tool should be used and what it does. */
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. Must be between 5 and 120 seconds (inclusive). */
     responseTimeoutSecs?: number;

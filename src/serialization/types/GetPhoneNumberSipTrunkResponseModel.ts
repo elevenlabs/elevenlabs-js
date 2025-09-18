@@ -8,6 +8,7 @@ import * as core from "../../core";
 import { PhoneNumberAgentInfo } from "./PhoneNumberAgentInfo";
 import { GetPhoneNumberOutboundSipTrunkConfigResponseModel } from "./GetPhoneNumberOutboundSipTrunkConfigResponseModel";
 import { GetPhoneNumberInboundSipTrunkConfigResponseModel } from "./GetPhoneNumberInboundSipTrunkConfigResponseModel";
+import { LivekitStackType } from "./LivekitStackType";
 
 export const GetPhoneNumberSipTrunkResponseModel: core.serialization.ObjectSchema<
     serializers.GetPhoneNumberSipTrunkResponseModel.Raw,
@@ -31,6 +32,7 @@ export const GetPhoneNumberSipTrunkResponseModel: core.serialization.ObjectSchem
         "inbound_trunk",
         GetPhoneNumberInboundSipTrunkConfigResponseModel.optional(),
     ),
+    livekitStack: core.serialization.property("livekit_stack", LivekitStackType),
 });
 
 export declare namespace GetPhoneNumberSipTrunkResponseModel {
@@ -44,5 +46,6 @@ export declare namespace GetPhoneNumberSipTrunkResponseModel {
         provider_config?: GetPhoneNumberOutboundSipTrunkConfigResponseModel.Raw | null;
         outbound_trunk?: GetPhoneNumberOutboundSipTrunkConfigResponseModel.Raw | null;
         inbound_trunk?: GetPhoneNumberInboundSipTrunkConfigResponseModel.Raw | null;
+        livekit_stack: LivekitStackType.Raw;
     }
 }

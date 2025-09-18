@@ -5,9 +5,14 @@
 /**
  * Role to update the target principal with.
  */
-export type BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole = "admin" | "editor" | "viewer";
+export type BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole =
+    | "admin"
+    | "editor"
+    | "commenter"
+    | "viewer";
 export const BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole = {
     Admin: "admin",
     Editor: "editor",
+    Commenter: "commenter",
     Viewer: "viewer",
 } as const;

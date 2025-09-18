@@ -7,6 +7,7 @@ import * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import { ConversationInitiationClientDataWebhook } from "../../../../../../types/ConversationInitiationClientDataWebhook";
 import { ConvAiWebhooks } from "../../../../../../types/ConvAiWebhooks";
+import { LivekitStackType } from "../../../../../../types/LivekitStackType";
 
 export const PatchConvAiSettingsRequest: core.serialization.Schema<
     serializers.conversationalAi.PatchConvAiSettingsRequest.Raw,
@@ -22,6 +23,7 @@ export const PatchConvAiSettingsRequest: core.serialization.Schema<
         "rag_retention_period_days",
         core.serialization.number().optional(),
     ),
+    defaultLivekitStack: core.serialization.property("default_livekit_stack", LivekitStackType.optional()),
 });
 
 export declare namespace PatchConvAiSettingsRequest {
@@ -30,5 +32,6 @@ export declare namespace PatchConvAiSettingsRequest {
         webhooks?: ConvAiWebhooks.Raw | null;
         can_use_mcp_servers?: boolean | null;
         rag_retention_period_days?: number | null;
+        default_livekit_stack?: LivekitStackType.Raw | null;
     }
 }

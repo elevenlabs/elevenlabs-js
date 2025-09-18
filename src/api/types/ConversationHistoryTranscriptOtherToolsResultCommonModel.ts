@@ -12,5 +12,5 @@ export interface ConversationHistoryTranscriptOtherToolsResultCommonModel {
     toolHasBeenCalled: boolean;
     toolLatencySecs?: number;
     dynamicVariableUpdates?: ElevenLabs.DynamicVariableUpdateCommonModel[];
-    type: ElevenLabs.ConversationHistoryTranscriptOtherToolsResultCommonModelType;
+    type?: ElevenLabs.ConversationHistoryTranscriptOtherToolsResultCommonModelType;
 }

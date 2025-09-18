@@ -5,9 +5,10 @@
 /**
  * The access level of the project.
  */
-export type ProjectResponseModelAccessLevel = "admin" | "editor" | "viewer";
+export type ProjectResponseModelAccessLevel = "admin" | "editor" | "commenter" | "viewer";
 export const ProjectResponseModelAccessLevel = {
     Admin: "admin",
     Editor: "editor",
+    Commenter: "commenter",
     Viewer: "viewer",
 } as const;

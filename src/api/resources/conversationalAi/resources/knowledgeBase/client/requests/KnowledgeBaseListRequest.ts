@@ -10,10 +10,6 @@ import * as ElevenLabs from "../../../../../../index";
  */
 export interface KnowledgeBaseListRequest {
     /**
-     * Used for fetching next page. Cursor is returned in the response.
-     */
-    cursor?: string;
-    /**
      * How many documents to return at maximum. Can not exceed 100, defaults to 30.
      */
     pageSize?: number;
@@ -30,7 +26,19 @@ export interface KnowledgeBaseListRequest {
      */
     types?: ElevenLabs.KnowledgeBaseDocumentType | ElevenLabs.KnowledgeBaseDocumentType[];
     /**
+     * The direction to sort the results
+     */
+    sortDirection?: ElevenLabs.SortDirection;
+    /**
+     * The field to sort the results by
+     */
+    sortBy?: ElevenLabs.KnowledgeBaseSortBy;
+    /**
      * If set to true, the endpoint will use typesense DB to search for the documents).
      */
     useTypesense?: boolean;
+    /**
+     * Used for fetching next page. Cursor is returned in the response.
+     */
+    cursor?: string;
 }

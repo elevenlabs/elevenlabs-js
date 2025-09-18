@@ -145,7 +145,7 @@ export class TextToSpeech {
      * Generate speech from text with precise character-level timing information for audio-text synchronization.
      *
      * @param {string} voiceId - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
-     * @param {ElevenLabs.TextToSpeechWithTimestampsRequest} request
+     * @param {ElevenLabs.BodyTextToSpeechFullWithTimestamps} request
      * @param {TextToSpeech.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -157,7 +157,7 @@ export class TextToSpeech {
      */
     public convertWithTimestamps(
         voiceId: string,
-        request: ElevenLabs.TextToSpeechWithTimestampsRequest,
+        request: ElevenLabs.BodyTextToSpeechFullWithTimestamps,
         requestOptions?: TextToSpeech.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.AudioWithTimestampsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__convertWithTimestamps(voiceId, request, requestOptions));
@@ -165,7 +165,7 @@ export class TextToSpeech {
 
     private async __convertWithTimestamps(
         voiceId: string,
-        request: ElevenLabs.TextToSpeechWithTimestampsRequest,
+        request: ElevenLabs.BodyTextToSpeechFullWithTimestamps,
         requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AudioWithTimestampsResponse>> {
         const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
@@ -201,7 +201,9 @@ export class TextToSpeech {
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
-            body: serializers.TextToSpeechWithTimestampsRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.BodyTextToSpeechFullWithTimestamps.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
