@@ -22,7 +22,7 @@ export const ConversationHistoryTranscriptOtherToolsResultCommonModel: core.seri
         "dynamic_variable_updates",
         core.serialization.list(DynamicVariableUpdateCommonModel).optional(),
     ),
-    type: ConversationHistoryTranscriptOtherToolsResultCommonModelType,
+    type: ConversationHistoryTranscriptOtherToolsResultCommonModelType.optional(),
 });
 
 export declare namespace ConversationHistoryTranscriptOtherToolsResultCommonModel {
@@ -34,6 +34,6 @@ export declare namespace ConversationHistoryTranscriptOtherToolsResultCommonMode
         tool_has_been_called: boolean;
         tool_latency_secs?: number | null;
         dynamic_variable_updates?: DynamicVariableUpdateCommonModel.Raw[] | null;
-        type: ConversationHistoryTranscriptOtherToolsResultCommonModelType.Raw;
+        type?: ConversationHistoryTranscriptOtherToolsResultCommonModelType.Raw | null;
     }
 }

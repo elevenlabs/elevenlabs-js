@@ -10,6 +10,7 @@ import { AgentSuccessfulResponseExample } from "./AgentSuccessfulResponseExample
 import { AgentFailureResponseExample } from "./AgentFailureResponseExample";
 import { UnitTestToolCallEvaluationModelOutput } from "./UnitTestToolCallEvaluationModelOutput";
 import { GetUnitTestResponseModelDynamicVariablesValue } from "./GetUnitTestResponseModelDynamicVariablesValue";
+import { UnitTestCommonModelType } from "./UnitTestCommonModelType";
 
 export const GetUnitTestResponseModel: core.serialization.ObjectSchema<
     serializers.GetUnitTestResponseModel.Raw,
@@ -38,6 +39,7 @@ export const GetUnitTestResponseModel: core.serialization.ObjectSchema<
             .record(core.serialization.string(), GetUnitTestResponseModelDynamicVariablesValue.optional())
             .optional(),
     ),
+    type: UnitTestCommonModelType.optional(),
     id: core.serialization.string(),
     name: core.serialization.string(),
 });
@@ -50,6 +52,7 @@ export declare namespace GetUnitTestResponseModel {
         failure_examples: AgentFailureResponseExample.Raw[];
         tool_call_parameters?: UnitTestToolCallEvaluationModelOutput.Raw | null;
         dynamic_variables?: Record<string, GetUnitTestResponseModelDynamicVariablesValue.Raw | null | undefined> | null;
+        type?: UnitTestCommonModelType.Raw | null;
         id: string;
         name: string;
     }

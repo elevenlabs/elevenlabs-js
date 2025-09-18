@@ -5,6 +5,4 @@
 export interface ModelSettingsResponseModel {
     /** Determines how stable the voice is and the randomness between each generation. Lower values introduce broader emotional range for the voice. Higher values can result in a monotonous voice with limited emotion. */
     stability?: number;
-    /** This setting boosts the similarity to the original speaker. Using this setting requires a slightly higher computational load, which in turn increases latency. */
-    useSpeakerBoost?: boolean;
 }

@@ -63,7 +63,17 @@ export class History {
         request: ElevenLabs.HistoryListRequest = {},
         requestOptions?: History.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetSpeechHistoryResponse>> {
-        const { pageSize, startAfterHistoryItemId, voiceId, search, source } = request;
+        const {
+            pageSize,
+            startAfterHistoryItemId,
+            voiceId,
+            modelId,
+            dateBeforeUnix,
+            dateAfterUnix,
+            sortDirection,
+            search,
+            source,
+        } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (pageSize != null) {
             _queryParams["page_size"] = pageSize.toString();
@@ -75,6 +85,24 @@ export class History {
 
         if (voiceId != null) {
             _queryParams["voice_id"] = voiceId;
+        }
+
+        if (modelId != null) {
+            _queryParams["model_id"] = modelId;
+        }
+
+        if (dateBeforeUnix != null) {
+            _queryParams["date_before_unix"] = dateBeforeUnix.toString();
+        }
+
+        if (dateAfterUnix != null) {
+            _queryParams["date_after_unix"] = dateAfterUnix.toString();
+        }
+
+        if (sortDirection != null) {
+            _queryParams["sort_direction"] = serializers.HistoryListRequestSortDirection.jsonOrThrow(sortDirection, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         if (search != null) {

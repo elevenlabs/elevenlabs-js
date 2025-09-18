@@ -9,7 +9,8 @@ import * as ElevenLabs from "../index";
  */
 export interface SystemToolConfigOutput {
     name: string;
-    description: string;
+    /** Description of when the tool should be used and what it does. Leave empty to use the default description that's optimized for the specific tool type. */
+    description?: string;
     /** The maximum time in seconds to wait for the tool call to complete. */
     responseTimeoutSecs?: number;
     /** If true, the user will not be able to interrupt the agent while this tool is running. */

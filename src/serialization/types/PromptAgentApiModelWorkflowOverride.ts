@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { Llm } from "./Llm";
+import { LlmReasoningEffort } from "./LlmReasoningEffort";
 import { BuiltInToolsWorkflowOverride } from "./BuiltInToolsWorkflowOverride";
 import { KnowledgeBaseLocator } from "./KnowledgeBaseLocator";
 import { CustomLlm } from "./CustomLlm";
@@ -18,6 +19,7 @@ export const PromptAgentApiModelWorkflowOverride: core.serialization.ObjectSchem
 > = core.serialization.object({
     prompt: core.serialization.string().optional(),
     llm: Llm.optional(),
+    reasoningEffort: core.serialization.property("reasoning_effort", LlmReasoningEffort.optional()),
     temperature: core.serialization.number().optional(),
     maxTokens: core.serialization.property("max_tokens", core.serialization.number().optional()),
     toolIds: core.serialization.property("tool_ids", core.serialization.list(core.serialization.string()).optional()),
@@ -48,6 +50,7 @@ export declare namespace PromptAgentApiModelWorkflowOverride {
     export interface Raw {
         prompt?: string | null;
         llm?: Llm.Raw | null;
+        reasoning_effort?: LlmReasoningEffort.Raw | null;
         temperature?: number | null;
         max_tokens?: number | null;
         tool_ids?: string[] | null;
