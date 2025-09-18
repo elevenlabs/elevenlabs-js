@@ -20,7 +20,8 @@ export type BreakdownTypes =
     | "region"
     | "subresource_id"
     | "reporting_workspace_id"
-    | "has_api_key";
+    | "has_api_key"
+    | "request_source";
 export const BreakdownTypes = {
     None: "none",
     Voice: "voice",
@@ -37,4 +38,5 @@ export const BreakdownTypes = {
     SubresourceId: "subresource_id",
     ReportingWorkspaceId: "reporting_workspace_id",
     HasApiKey: "has_api_key",
+    RequestSource: "request_source",
 } as const;

@@ -14,6 +14,7 @@ export const LiteralJsonSchemaProperty: core.serialization.ObjectSchema<
 > = core.serialization.object({
     type: LiteralJsonSchemaPropertyType,
     description: core.serialization.string().optional(),
+    enum: core.serialization.list(core.serialization.string()).optional(),
     dynamicVariable: core.serialization.property("dynamic_variable", core.serialization.string().optional()),
     constantValue: core.serialization.property("constant_value", LiteralJsonSchemaPropertyConstantValue.optional()),
 });
@@ -22,6 +23,7 @@ export declare namespace LiteralJsonSchemaProperty {
     export interface Raw {
         type: LiteralJsonSchemaPropertyType.Raw;
         description?: string | null;
+        enum?: string[] | null;
         dynamic_variable?: string | null;
         constant_value?: LiteralJsonSchemaPropertyConstantValue.Raw | null;
     }

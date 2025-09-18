@@ -8,6 +8,8 @@ export interface LiteralJsonSchemaProperty {
     type: ElevenLabs.LiteralJsonSchemaPropertyType;
     /** The description of the property */
     description?: string;
+    /** List of allowed string values for string type parameters */
+    enum?: string[];
     /** The dynamic variable of the property */
     dynamicVariable?: string;
     /** The constant value of the property */

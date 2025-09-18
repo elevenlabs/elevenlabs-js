@@ -9,6 +9,8 @@ export interface BodyComposeMusicV1MusicPost {
      * Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
      */
     outputFormat?: ElevenLabs.MusicComposeRequestOutputFormat;
+    /** Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan`. When set to true, the model will precisely respect each section's `duration_ms` from the plan. When set to false, the model may adjust individual section durations which will generally lead to better generation quality and improved latency, while always preserving the total song duration from the plan. */
+    respectSectionsDurations?: boolean;
     /** A simple text prompt to generate a song from. Cannot be used in conjunction with `composition_plan`. */
     prompt?: string;
     /** A music prompt. Deprecated. Use `composition_plan` instead. */
@@ -19,4 +21,6 @@ export interface BodyComposeMusicV1MusicPost {
     musicLengthMs?: number;
     /** The model to use for the generation. */
     modelId?: "music_v1";
+    /** The seed to use for the generation. */
+    seed?: number;
 }

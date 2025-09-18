@@ -19,4 +19,6 @@ export interface BodyStreamComposedMusicV1MusicStreamPost {
     musicLengthMs?: number;
     /** The model to use for the generation. */
     modelId?: "music_v1";
+    /** The seed to use for the generation. */
+    seed?: number;
 }

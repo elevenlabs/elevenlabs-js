@@ -83,6 +83,7 @@ describe("McpServers", () => {
                 request_headers: { key: "value" },
                 name: "name",
                 description: "description",
+                force_pre_tool_speech: true,
             },
             access_info: {
                 is_creator: true,
@@ -130,6 +131,7 @@ describe("McpServers", () => {
                 },
                 name: "name",
                 description: "description",
+                forcePreToolSpeech: true,
             },
             accessInfo: {
                 isCreator: true,
@@ -168,6 +170,7 @@ describe("McpServers", () => {
                 request_headers: { key: "value" },
                 name: "name",
                 description: "description",
+                force_pre_tool_speech: true,
             },
             access_info: {
                 is_creator: true,
@@ -209,6 +212,89 @@ describe("McpServers", () => {
                 },
                 name: "name",
                 description: "description",
+                forcePreToolSpeech: true,
+            },
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+            },
+            dependentAgents: [
+                {
+                    type: "available",
+                    id: "id",
+                    name: "name",
+                    createdAtUnixSecs: 1,
+                    accessLevel: "admin",
+                },
+            ],
+            metadata: {
+                createdAt: 1,
+                ownerUserId: "owner_user_id",
+            },
+        });
+    });
+
+    test("update", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = {
+            id: "id",
+            config: {
+                approval_policy: "auto_approve_all",
+                tool_approval_hashes: [{ tool_name: "tool_name", tool_hash: "tool_hash" }],
+                transport: "SSE",
+                url: "url",
+                secret_token: { secret_id: "secret_id" },
+                request_headers: { key: "value" },
+                name: "name",
+                description: "description",
+                force_pre_tool_speech: true,
+            },
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+            },
+            dependent_agents: [
+                { id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin", type: "available" },
+            ],
+            metadata: { created_at: 1, owner_user_id: "owner_user_id" },
+        };
+        server
+            .mockEndpoint()
+            .patch("/v1/convai/mcp-servers/mcp_server_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.mcpServers.update("mcp_server_id");
+        expect(response).toEqual({
+            id: "id",
+            config: {
+                approvalPolicy: "auto_approve_all",
+                toolApprovalHashes: [
+                    {
+                        toolName: "tool_name",
+                        toolHash: "tool_hash",
+                    },
+                ],
+                transport: "SSE",
+                url: "url",
+                secretToken: {
+                    secretId: "secret_id",
+                },
+                requestHeaders: {
+                    key: "value",
+                },
+                name: "name",
+                description: "description",
+                forcePreToolSpeech: true,
             },
             accessInfo: {
                 isCreator: true,

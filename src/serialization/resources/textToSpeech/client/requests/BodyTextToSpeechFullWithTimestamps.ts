@@ -7,11 +7,11 @@ import * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import { VoiceSettings } from "../../../../types/VoiceSettings";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
-import { BodyTextToSpeechWithTimestampsV1TextToSpeechVoiceIdWithTimestampsPostApplyTextNormalization } from "../../types/BodyTextToSpeechWithTimestampsV1TextToSpeechVoiceIdWithTimestampsPostApplyTextNormalization";
+import { BodyTextToSpeechFullWithTimestampsApplyTextNormalization } from "../../types/BodyTextToSpeechFullWithTimestampsApplyTextNormalization";
 
-export const TextToSpeechWithTimestampsRequest: core.serialization.Schema<
-    serializers.TextToSpeechWithTimestampsRequest.Raw,
-    Omit<ElevenLabs.TextToSpeechWithTimestampsRequest, "enableLogging" | "optimizeStreamingLatency" | "outputFormat">
+export const BodyTextToSpeechFullWithTimestamps: core.serialization.Schema<
+    serializers.BodyTextToSpeechFullWithTimestamps.Raw,
+    Omit<ElevenLabs.BodyTextToSpeechFullWithTimestamps, "enableLogging" | "optimizeStreamingLatency" | "outputFormat">
 > = core.serialization.object({
     text: core.serialization.string(),
     modelId: core.serialization.property("model_id", core.serialization.string().optional()),
@@ -35,7 +35,7 @@ export const TextToSpeechWithTimestampsRequest: core.serialization.Schema<
     usePvcAsIvc: core.serialization.property("use_pvc_as_ivc", core.serialization.boolean().optional()),
     applyTextNormalization: core.serialization.property(
         "apply_text_normalization",
-        BodyTextToSpeechWithTimestampsV1TextToSpeechVoiceIdWithTimestampsPostApplyTextNormalization.optional(),
+        BodyTextToSpeechFullWithTimestampsApplyTextNormalization.optional(),
     ),
     applyLanguageTextNormalization: core.serialization.property(
         "apply_language_text_normalization",
@@ -43,7 +43,7 @@ export const TextToSpeechWithTimestampsRequest: core.serialization.Schema<
     ),
 });
 
-export declare namespace TextToSpeechWithTimestampsRequest {
+export declare namespace BodyTextToSpeechFullWithTimestamps {
     export interface Raw {
         text: string;
         model_id?: string | null;
@@ -56,7 +56,7 @@ export declare namespace TextToSpeechWithTimestampsRequest {
         previous_request_ids?: string[] | null;
         next_request_ids?: string[] | null;
         use_pvc_as_ivc?: boolean | null;
-        apply_text_normalization?: BodyTextToSpeechWithTimestampsV1TextToSpeechVoiceIdWithTimestampsPostApplyTextNormalization.Raw | null;
+        apply_text_normalization?: BodyTextToSpeechFullWithTimestampsApplyTextNormalization.Raw | null;
         apply_language_text_normalization?: boolean | null;
     }
 }

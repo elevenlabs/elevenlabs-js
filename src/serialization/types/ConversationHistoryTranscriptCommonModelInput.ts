@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ConversationHistoryTranscriptCommonModelInputRole } from "./ConversationHistoryTranscriptCommonModelInputRole";
+import { AgentMetadata } from "./AgentMetadata";
 import { ConversationHistoryMultivoiceMessageModel } from "./ConversationHistoryMultivoiceMessageModel";
 import { ConversationHistoryTranscriptToolCallCommonModel } from "./ConversationHistoryTranscriptToolCallCommonModel";
 import { ConversationHistoryTranscriptCommonModelInputToolResultsItem } from "./ConversationHistoryTranscriptCommonModelInputToolResultsItem";
@@ -20,6 +21,7 @@ export const ConversationHistoryTranscriptCommonModelInput: core.serialization.O
     ElevenLabs.ConversationHistoryTranscriptCommonModelInput
 > = core.serialization.object({
     role: ConversationHistoryTranscriptCommonModelInputRole,
+    agentMetadata: core.serialization.property("agent_metadata", AgentMetadata.optional()),
     message: core.serialization.string().optional(),
     multivoiceMessage: core.serialization.property(
         "multivoice_message",
@@ -53,6 +55,7 @@ export const ConversationHistoryTranscriptCommonModelInput: core.serialization.O
 export declare namespace ConversationHistoryTranscriptCommonModelInput {
     export interface Raw {
         role: ConversationHistoryTranscriptCommonModelInputRole.Raw;
+        agent_metadata?: AgentMetadata.Raw | null;
         message?: string | null;
         multivoice_message?: ConversationHistoryMultivoiceMessageModel.Raw | null;
         tool_calls?: ConversationHistoryTranscriptToolCallCommonModel.Raw[] | null;

@@ -521,7 +521,7 @@ await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.TextToSpeechWithTimestampsRequest`
+**request:** `ElevenLabs.BodyTextToSpeechFullWithTimestamps`
 
 </dd>
 </dl>
@@ -5172,7 +5172,7 @@ await client.conversationalAi.phoneNumbers.delete("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-Update Phone Number details by ID
+Update assigned agent of a phone number
 
 </dd>
 </dl>
@@ -6656,6 +6656,77 @@ await client.conversationalAi.mcpServers.get("mcp_server_id");
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">update</a>(mcpServerId, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the configuration settings for an MCP server.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.update("mcp_server_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServers.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents Widget
 
 <details><summary><code>client.conversationalAi.agents.widget.<a href="/src/api/resources/conversationalAi/resources/agents/resources/widget/client/Client.ts">get</a>(agentId, { ...params }) -> ElevenLabs.GetAgentEmbedResponseModel</code></summary>
@@ -7977,7 +8048,7 @@ await client.conversationalAi.mcpServers.tools.list("mcp_server_id");
 <dl>
 <dd>
 
-Update the approval policy configuration for an MCP server.
+Update the approval policy configuration for an MCP server. DEPRECATED: Use PATCH /mcp-servers/{id} endpoint instead.
 
 </dd>
 </dl>
@@ -9802,6 +9873,69 @@ await client.speechToText.transcripts.get("transcription_id");
 <dd>
 
 **transcriptionId:** `string` — The unique ID of the transcript to retrieve
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Transcripts.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.speechToText.transcripts.<a href="/src/api/resources/speechToText/resources/transcripts/client/Client.ts">delete</a>(transcriptionId) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a previously generated transcript by its ID.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechToText.transcripts.delete("transcription_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**transcriptionId:** `string` — The unique ID of the transcript to delete
 
 </dd>
 </dl>

@@ -3,6 +3,7 @@
  */
 
 import * as core from "../../../../../core";
+import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
@@ -34,4 +35,12 @@ export interface BodyCreatesAudioNativeEnabledProjectV1AudioNativePost {
     file?: core.FileLike | undefined;
     /** Whether to auto convert the project to audio or not. */
     autoConvert?: boolean;
+    /**
+     *     This parameter controls text normalization with four modes: 'auto', 'on', 'apply_english' and 'off'.
+     *     When set to 'auto', the system will automatically decide whether to apply text normalization
+     *     (e.g., spelling out numbers). With 'on', text normalization will always be applied, while
+     *     with 'off', it will be skipped. 'apply_english' is the same as 'on' but will assume that text is in English.
+     *
+     */
+    applyTextNormalization?: ElevenLabs.AudioNativeCreateRequestApplyTextNormalization;
 }

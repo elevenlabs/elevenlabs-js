@@ -38,5 +38,5 @@ export interface Model {
     /** The rates for the model. */
     modelRates?: ElevenLabs.ModelRatesResponseModel;
     /** The concurrency group for the model. */
-    concurrencyGroup?: ElevenLabs.ModelResponseModelConcurrencyGroup;
+    concurrencyGroup?: string;
 }

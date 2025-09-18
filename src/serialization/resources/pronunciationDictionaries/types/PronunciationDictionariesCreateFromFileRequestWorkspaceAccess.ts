@@ -9,8 +9,8 @@ import * as core from "../../../../core";
 export const PronunciationDictionariesCreateFromFileRequestWorkspaceAccess: core.serialization.Schema<
     serializers.PronunciationDictionariesCreateFromFileRequestWorkspaceAccess.Raw,
     ElevenLabs.PronunciationDictionariesCreateFromFileRequestWorkspaceAccess
-> = core.serialization.enum_(["admin", "editor", "viewer"]);
+> = core.serialization.enum_(["admin", "editor", "commenter", "viewer"]);
 
 export declare namespace PronunciationDictionariesCreateFromFileRequestWorkspaceAccess {
-    export type Raw = "admin" | "editor" | "viewer";
+    export type Raw = "admin" | "editor" | "commenter" | "viewer";
 }

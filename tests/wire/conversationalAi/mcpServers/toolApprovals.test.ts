@@ -21,6 +21,7 @@ describe("ToolApprovals", () => {
                 request_headers: { key: "value" },
                 name: "name",
                 description: "description",
+                force_pre_tool_speech: true,
             },
             access_info: {
                 is_creator: true,
@@ -66,6 +67,7 @@ describe("ToolApprovals", () => {
                 },
                 name: "name",
                 description: "description",
+                forcePreToolSpeech: true,
             },
             accessInfo: {
                 isCreator: true,
@@ -104,6 +106,7 @@ describe("ToolApprovals", () => {
                 request_headers: { key: "value" },
                 name: "name",
                 description: "description",
+                force_pre_tool_speech: true,
             },
             access_info: {
                 is_creator: true,
@@ -145,6 +148,7 @@ describe("ToolApprovals", () => {
                 },
                 name: "name",
                 description: "description",
+                forcePreToolSpeech: true,
             },
             accessInfo: {
                 isCreator: true,

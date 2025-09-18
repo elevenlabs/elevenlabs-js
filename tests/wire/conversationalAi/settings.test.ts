@@ -18,6 +18,7 @@ describe("Settings", () => {
             webhooks: { post_call_webhook_id: "post_call_webhook_id", send_audio: true },
             can_use_mcp_servers: true,
             rag_retention_period_days: 1,
+            default_livekit_stack: "standard",
         };
         server
             .mockEndpoint()
@@ -41,6 +42,7 @@ describe("Settings", () => {
             },
             canUseMcpServers: true,
             ragRetentionPeriodDays: 1,
+            defaultLivekitStack: "standard",
         });
     });
 
@@ -56,6 +58,7 @@ describe("Settings", () => {
             webhooks: { post_call_webhook_id: "post_call_webhook_id", send_audio: true },
             can_use_mcp_servers: true,
             rag_retention_period_days: 1,
+            default_livekit_stack: "standard",
         };
         server
             .mockEndpoint()
@@ -80,6 +83,7 @@ describe("Settings", () => {
             },
             canUseMcpServers: true,
             ragRetentionPeriodDays: 1,
+            defaultLivekitStack: "standard",
         });
     });
 });

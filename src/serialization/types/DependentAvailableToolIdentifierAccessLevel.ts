@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const DependentAvailableToolIdentifierAccessLevel: core.serialization.Schema<
     serializers.DependentAvailableToolIdentifierAccessLevel.Raw,
     ElevenLabs.DependentAvailableToolIdentifierAccessLevel
-> = core.serialization.enum_(["admin", "editor", "viewer"]);
+> = core.serialization.enum_(["admin", "editor", "commenter", "viewer"]);
 
 export declare namespace DependentAvailableToolIdentifierAccessLevel {
-    export type Raw = "admin" | "editor" | "viewer";
+    export type Raw = "admin" | "editor" | "commenter" | "viewer";
 }

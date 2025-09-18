@@ -7,7 +7,7 @@ import * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import { VoiceSettings } from "../../../../types/VoiceSettings";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
-import { BodyTextToSpeechStreamingWithTimestampsV1TextToSpeechVoiceIdStreamWithTimestampsPostApplyTextNormalization } from "../../types/BodyTextToSpeechStreamingWithTimestampsV1TextToSpeechVoiceIdStreamWithTimestampsPostApplyTextNormalization";
+import { BodyTextToSpeechStreamWithTimestampsApplyTextNormalization } from "../../types/BodyTextToSpeechStreamWithTimestampsApplyTextNormalization";
 
 export const StreamTextToSpeechWithTimestampsRequest: core.serialization.Schema<
     serializers.StreamTextToSpeechWithTimestampsRequest.Raw,
@@ -38,7 +38,7 @@ export const StreamTextToSpeechWithTimestampsRequest: core.serialization.Schema<
     usePvcAsIvc: core.serialization.property("use_pvc_as_ivc", core.serialization.boolean().optional()),
     applyTextNormalization: core.serialization.property(
         "apply_text_normalization",
-        BodyTextToSpeechStreamingWithTimestampsV1TextToSpeechVoiceIdStreamWithTimestampsPostApplyTextNormalization.optional(),
+        BodyTextToSpeechStreamWithTimestampsApplyTextNormalization.optional(),
     ),
     applyLanguageTextNormalization: core.serialization.property(
         "apply_language_text_normalization",
@@ -59,7 +59,7 @@ export declare namespace StreamTextToSpeechWithTimestampsRequest {
         previous_request_ids?: string[] | null;
         next_request_ids?: string[] | null;
         use_pvc_as_ivc?: boolean | null;
-        apply_text_normalization?: BodyTextToSpeechStreamingWithTimestampsV1TextToSpeechVoiceIdStreamWithTimestampsPostApplyTextNormalization.Raw | null;
+        apply_text_normalization?: BodyTextToSpeechStreamWithTimestampsApplyTextNormalization.Raw | null;
         apply_language_text_normalization?: boolean | null;
     }
 }
