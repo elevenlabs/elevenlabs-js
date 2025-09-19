@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const ResourceAccessInfoRole: core.serialization.Schema<
     serializers.ResourceAccessInfoRole.Raw,
     ElevenLabs.ResourceAccessInfoRole
-> = core.serialization.enum_(["admin", "editor", "viewer"]);
+> = core.serialization.enum_(["admin", "editor", "commenter", "viewer"]);
 
 export declare namespace ResourceAccessInfoRole {
-    export type Raw = "admin" | "editor" | "viewer";
+    export type Raw = "admin" | "editor" | "commenter" | "viewer";
 }

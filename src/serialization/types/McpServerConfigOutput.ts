@@ -30,6 +30,7 @@ export const McpServerConfigOutput: core.serialization.ObjectSchema<
     ),
     name: core.serialization.string(),
     description: core.serialization.string().optional(),
+    forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
 });
 
 export declare namespace McpServerConfigOutput {
@@ -42,5 +43,6 @@ export declare namespace McpServerConfigOutput {
         request_headers?: Record<string, McpServerConfigOutputRequestHeadersValue.Raw> | null;
         name: string;
         description?: string | null;
+        force_pre_tool_speech?: boolean | null;
     }
 }

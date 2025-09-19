@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const GetPronunciationDictionaryMetadataResponseModelPermissionOnResource: core.serialization.Schema<
     serializers.GetPronunciationDictionaryMetadataResponseModelPermissionOnResource.Raw,
     ElevenLabs.GetPronunciationDictionaryMetadataResponseModelPermissionOnResource
-> = core.serialization.enum_(["admin", "editor", "viewer"]);
+> = core.serialization.enum_(["admin", "editor", "commenter", "viewer"]);
 
 export declare namespace GetPronunciationDictionaryMetadataResponseModelPermissionOnResource {
-    export type Raw = "admin" | "editor" | "viewer";
+    export type Raw = "admin" | "editor" | "commenter" | "viewer";
 }

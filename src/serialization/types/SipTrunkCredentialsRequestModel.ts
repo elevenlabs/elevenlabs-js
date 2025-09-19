@@ -11,12 +11,12 @@ export const SipTrunkCredentialsRequestModel: core.serialization.ObjectSchema<
     ElevenLabs.SipTrunkCredentialsRequestModel
 > = core.serialization.object({
     username: core.serialization.string(),
-    password: core.serialization.string(),
+    password: core.serialization.string().optional(),
 });
 
 export declare namespace SipTrunkCredentialsRequestModel {
     export interface Raw {
         username: string;
-        password: string;
+        password?: string | null;
     }
 }

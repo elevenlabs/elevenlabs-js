@@ -18,6 +18,8 @@ export * as studio from "./studio";
 export * from "./studio/types";
 export * as dubbing from "./dubbing";
 export * from "./dubbing/types";
+export * as audioNative from "./audioNative";
+export * from "./audioNative/types";
 export * as pronunciationDictionaries from "./pronunciationDictionaries";
 export * from "./pronunciationDictionaries/types";
 export * as speechToText from "./speechToText";

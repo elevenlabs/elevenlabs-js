@@ -4,6 +4,17 @@
 
 import * as ElevenLabs from "../../../../index";
 
+/**
+ * @example
+ *     {
+ *         prompt: undefined,
+ *         musicPrompt: undefined,
+ *         compositionPlan: undefined,
+ *         musicLengthMs: undefined,
+ *         modelId: undefined,
+ *         seed: undefined
+ *     }
+ */
 export interface BodyStreamComposedMusicV1MusicStreamPost {
     /**
      * Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
@@ -19,4 +30,6 @@ export interface BodyStreamComposedMusicV1MusicStreamPost {
     musicLengthMs?: number;
     /** The model to use for the generation. */
     modelId?: "music_v1";
+    /** The seed to use for the generation. */
+    seed?: number;
 }

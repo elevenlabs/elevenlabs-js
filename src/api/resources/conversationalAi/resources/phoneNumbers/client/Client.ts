@@ -402,7 +402,7 @@ export class PhoneNumbers {
     }
 
     /**
-     * Update Phone Number details by ID
+     * Update assigned agent of a phone number
      *
      * @param {string} phoneNumberId - The id of an agent. This is returned on agent creation.
      * @param {ElevenLabs.conversationalAi.UpdatePhoneNumberRequest} request

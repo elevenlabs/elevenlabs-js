@@ -486,12 +486,6 @@ export class Resource {
         request: ElevenLabs.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost,
         requestOptions?: Resource.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DubbingRenderResponseModel>> {
-        const { shouldNormalizeVolume, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (shouldNormalizeVolume != null) {
-            _queryParams["should_normalize_volume"] = shouldNormalizeVolume.toString();
-        }
-
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -506,10 +500,9 @@ export class Resource {
                 requestOptions?.headers,
             ),
             contentType: "application/json",
-            queryParameters: _queryParams,
             requestType: "json",
             body: serializers.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost.jsonOrThrow(
-                _body,
+                request,
                 { unrecognizedObjectKeys: "strip" },
             ),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,

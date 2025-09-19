@@ -7,7 +7,6 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { LanguageResponse } from "./LanguageResponse";
 import { ModelRatesResponseModel } from "./ModelRatesResponseModel";
-import { ModelResponseModelConcurrencyGroup } from "./ModelResponseModelConcurrencyGroup";
 
 export const Model: core.serialization.ObjectSchema<serializers.Model.Raw, ElevenLabs.Model> =
     core.serialization.object({
@@ -48,10 +47,7 @@ export const Model: core.serialization.ObjectSchema<serializers.Model.Raw, Eleve
         ),
         languages: core.serialization.list(LanguageResponse).optional(),
         modelRates: core.serialization.property("model_rates", ModelRatesResponseModel.optional()),
-        concurrencyGroup: core.serialization.property(
-            "concurrency_group",
-            ModelResponseModelConcurrencyGroup.optional(),
-        ),
+        concurrencyGroup: core.serialization.property("concurrency_group", core.serialization.string().optional()),
     });
 
 export declare namespace Model {
@@ -72,6 +68,6 @@ export declare namespace Model {
         maximum_text_length_per_request?: number | null;
         languages?: LanguageResponse.Raw[] | null;
         model_rates?: ModelRatesResponseModel.Raw | null;
-        concurrency_group?: ModelResponseModelConcurrencyGroup.Raw | null;
+        concurrency_group?: string | null;
     }
 }

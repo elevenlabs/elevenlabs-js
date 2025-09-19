@@ -5,11 +5,16 @@
 import * as ElevenLabs from "../index";
 
 export type UnitTestToolCallParameterEval =
+    | ElevenLabs.UnitTestToolCallParameterEval.Anything
     | ElevenLabs.UnitTestToolCallParameterEval.Exact
     | ElevenLabs.UnitTestToolCallParameterEval.Llm
     | ElevenLabs.UnitTestToolCallParameterEval.Regex;
 
 export namespace UnitTestToolCallParameterEval {
+    export interface Anything extends ElevenLabs.MatchAnythingParameterEvaluationStrategy {
+        type: "anything";
+    }
+
     export interface Exact extends ElevenLabs.ExactParameterEvaluationStrategy {
         type: "exact";
     }

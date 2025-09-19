@@ -7,6 +7,7 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ConversationInitiationClientDataWebhook } from "./ConversationInitiationClientDataWebhook";
 import { ConvAiWebhooks } from "./ConvAiWebhooks";
+import { LivekitStackType } from "./LivekitStackType";
 
 export const GetConvAiSettingsResponseModel: core.serialization.ObjectSchema<
     serializers.GetConvAiSettingsResponseModel.Raw,
@@ -22,6 +23,7 @@ export const GetConvAiSettingsResponseModel: core.serialization.ObjectSchema<
         "rag_retention_period_days",
         core.serialization.number().optional(),
     ),
+    defaultLivekitStack: core.serialization.property("default_livekit_stack", LivekitStackType.optional()),
 });
 
 export declare namespace GetConvAiSettingsResponseModel {
@@ -30,5 +32,6 @@ export declare namespace GetConvAiSettingsResponseModel {
         webhooks?: ConvAiWebhooks.Raw | null;
         can_use_mcp_servers?: boolean | null;
         rag_retention_period_days?: number | null;
+        default_livekit_stack?: LivekitStackType.Raw | null;
     }
 }

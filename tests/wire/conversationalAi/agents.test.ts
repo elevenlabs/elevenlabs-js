@@ -69,6 +69,7 @@ describe("Agents", () => {
                         },
                     },
                 },
+                vad: { background_voice_detection: false },
                 agent: {
                     first_message: "Hello, how can I help you today?",
                     language: "en",
@@ -167,7 +168,9 @@ describe("Agents", () => {
                         request_headers: { "Content-Type": "application/json" },
                     },
                 },
-                testing: { attached_tests: [{ test_id: "test_123" }, { test_id: "test_456" }] },
+                testing: {
+                    attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -189,6 +192,7 @@ describe("Agents", () => {
                         media_encryption: "disabled",
                         has_auth_credentials: true,
                     },
+                    livekit_stack: "standard",
                     provider: "sip_trunk",
                 },
             ],
@@ -268,6 +272,9 @@ describe("Agents", () => {
                             },
                         },
                     },
+                },
+                vad: {
+                    backgroundVoiceDetection: false,
                 },
                 agent: {
                     firstMessage: "Hello, how can I help you today?",
@@ -401,6 +408,7 @@ describe("Agents", () => {
                     attachedTests: [
                         {
                             testId: "test_123",
+                            workflowNodeId: "node_abc",
                         },
                         {
                             testId: "test_456",
@@ -436,6 +444,7 @@ describe("Agents", () => {
                         mediaEncryption: "disabled",
                         hasAuthCredentials: true,
                     },
+                    livekitStack: "standard",
                 },
             ],
             workflow: {
@@ -502,6 +511,7 @@ describe("Agents", () => {
                         },
                     },
                 },
+                vad: { background_voice_detection: false },
                 agent: {
                     first_message: "Hello, how can I help you today?",
                     language: "en",
@@ -600,7 +610,9 @@ describe("Agents", () => {
                         request_headers: { "Content-Type": "application/json" },
                     },
                 },
-                testing: { attached_tests: [{ test_id: "test_123" }, { test_id: "test_456" }] },
+                testing: {
+                    attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -622,6 +634,7 @@ describe("Agents", () => {
                         media_encryption: "disabled",
                         has_auth_credentials: true,
                     },
+                    livekit_stack: "standard",
                     provider: "sip_trunk",
                 },
             ],
@@ -703,6 +716,9 @@ describe("Agents", () => {
                         },
                     },
                 },
+                vad: {
+                    backgroundVoiceDetection: false,
+                },
                 agent: {
                     firstMessage: "Hello, how can I help you today?",
                     language: "en",
@@ -835,6 +851,7 @@ describe("Agents", () => {
                     attachedTests: [
                         {
                             testId: "test_123",
+                            workflowNodeId: "node_abc",
                         },
                         {
                             testId: "test_456",
@@ -870,6 +887,7 @@ describe("Agents", () => {
                         mediaEncryption: "disabled",
                         hasAuthCredentials: true,
                     },
+                    livekitStack: "standard",
                 },
             ],
             workflow: {
@@ -968,6 +986,7 @@ describe("Agents", () => {
             simulated_conversation: [
                 {
                     role: "user",
+                    agent_metadata: { agent_id: "agent_id" },
                     message: "message",
                     multivoice_message: { parts: [{ text: "text" }] },
                     tool_calls: [
@@ -985,7 +1004,6 @@ describe("Agents", () => {
                             result_value: "result_value",
                             is_error: true,
                             tool_has_been_called: true,
-                            type: "client",
                         },
                     ],
                     feedback: { score: "like", time_in_call_secs: 1 },
@@ -1034,6 +1052,9 @@ describe("Agents", () => {
             simulatedConversation: [
                 {
                     role: "user",
+                    agentMetadata: {
+                        agentId: "agent_id",
+                    },
                     message: "message",
                     multivoiceMessage: {
                         parts: [
@@ -1057,7 +1078,6 @@ describe("Agents", () => {
                             resultValue: "result_value",
                             isError: true,
                             toolHasBeenCalled: true,
-                            type: "client",
                         },
                     ],
                     feedback: {
@@ -1153,6 +1173,7 @@ describe("Agents", () => {
                     status: "pending",
                     agent_responses: [{ role: "user", time_in_call_secs: 1 }],
                     test_id: "test_id",
+                    test_name: "test_name",
                     condition_result: { result: "success" },
                     last_updated_at_unix: 1,
                     metadata: {
@@ -1196,6 +1217,7 @@ describe("Agents", () => {
                         },
                     ],
                     testId: "test_id",
+                    testName: "test_name",
                     conditionResult: {
                         result: "success",
                     },

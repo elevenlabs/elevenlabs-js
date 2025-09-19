@@ -75,12 +75,9 @@ export class KnowledgeBase {
         request: ElevenLabs.conversationalAi.KnowledgeBaseListRequest = {},
         requestOptions?: KnowledgeBase.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetKnowledgeBaseListResponseModel>> {
-        const { cursor, pageSize, search, showOnlyOwnedDocuments, types, useTypesense } = request;
+        const { pageSize, search, showOnlyOwnedDocuments, types, sortDirection, sortBy, useTypesense, cursor } =
+            request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (cursor != null) {
-            _queryParams["cursor"] = cursor;
-        }
-
         if (pageSize != null) {
             _queryParams["page_size"] = pageSize.toString();
         }
@@ -105,8 +102,24 @@ export class KnowledgeBase {
             }
         }
 
+        if (sortDirection != null) {
+            _queryParams["sort_direction"] = serializers.SortDirection.jsonOrThrow(sortDirection, {
+                unrecognizedObjectKeys: "strip",
+            });
+        }
+
+        if (sortBy != null) {
+            _queryParams["sort_by"] = serializers.KnowledgeBaseSortBy.jsonOrThrow(sortBy, {
+                unrecognizedObjectKeys: "strip",
+            });
+        }
+
         if (useTypesense != null) {
             _queryParams["use_typesense"] = useTypesense.toString();
+        }
+
+        if (cursor != null) {
+            _queryParams["cursor"] = cursor;
         }
 
         const _response = await core.fetcher({

@@ -5,16 +5,31 @@
 import * as serializers from "../../../../../../index";
 import * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
+import { InboundSipTrunkConfigRequestModel } from "../../../../../../types/InboundSipTrunkConfigRequestModel";
+import { OutboundSipTrunkConfigRequestModel } from "../../../../../../types/OutboundSipTrunkConfigRequestModel";
+import { LivekitStackType } from "../../../../../../types/LivekitStackType";
 
 export const UpdatePhoneNumberRequest: core.serialization.Schema<
     serializers.conversationalAi.UpdatePhoneNumberRequest.Raw,
     ElevenLabs.conversationalAi.UpdatePhoneNumberRequest
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
+    inboundTrunkConfig: core.serialization.property(
+        "inbound_trunk_config",
+        InboundSipTrunkConfigRequestModel.optional(),
+    ),
+    outboundTrunkConfig: core.serialization.property(
+        "outbound_trunk_config",
+        OutboundSipTrunkConfigRequestModel.optional(),
+    ),
+    livekitStack: core.serialization.property("livekit_stack", LivekitStackType.optional()),
 });
 
 export declare namespace UpdatePhoneNumberRequest {
     export interface Raw {
         agent_id?: string | null;
+        inbound_trunk_config?: InboundSipTrunkConfigRequestModel.Raw | null;
+        outbound_trunk_config?: OutboundSipTrunkConfigRequestModel.Raw | null;
+        livekit_stack?: LivekitStackType.Raw | null;
     }
 }

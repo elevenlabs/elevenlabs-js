@@ -11,4 +11,6 @@ export interface GetSpeechHistoryResponse {
     lastHistoryItemId?: string;
     /** Whether there are more history items to fetch. */
     hasMore: boolean;
+    /** The timestamp of the last history item. */
+    scannedUntil?: number;
 }

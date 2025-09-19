@@ -5,9 +5,11 @@
 export type BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostWorkspaceAccess =
     | "admin"
     | "editor"
+    | "commenter"
     | "viewer";
 export const BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostWorkspaceAccess = {
     Admin: "admin",
     Editor: "editor",
+    Commenter: "commenter",
     Viewer: "viewer",
 } as const;
