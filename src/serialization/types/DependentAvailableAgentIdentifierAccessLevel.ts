@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const DependentAvailableAgentIdentifierAccessLevel: core.serialization.Schema<
     serializers.DependentAvailableAgentIdentifierAccessLevel.Raw,
     ElevenLabs.DependentAvailableAgentIdentifierAccessLevel
-> = core.serialization.enum_(["admin", "editor", "viewer"]);
+> = core.serialization.enum_(["admin", "editor", "commenter", "viewer"]);
 
 export declare namespace DependentAvailableAgentIdentifierAccessLevel {
-    export type Raw = "admin" | "editor" | "viewer";
+    export type Raw = "admin" | "editor" | "commenter" | "viewer";
 }

@@ -453,18 +453,28 @@ export class Agents {
         request: ElevenLabs.conversationalAi.AgentsListRequest = {},
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentsPageResponseModel>> {
-        const { cursor, pageSize, search } = request;
+        const { pageSize, search, sortDirection, sortBy, cursor } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (cursor != null) {
-            _queryParams["cursor"] = cursor;
-        }
-
         if (pageSize != null) {
             _queryParams["page_size"] = pageSize.toString();
         }
 
         if (search != null) {
             _queryParams["search"] = search;
+        }
+
+        if (sortDirection != null) {
+            _queryParams["sort_direction"] = serializers.SortDirection.jsonOrThrow(sortDirection, {
+                unrecognizedObjectKeys: "strip",
+            });
+        }
+
+        if (sortBy != null) {
+            _queryParams["sort_by"] = serializers.AgentSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" });
+        }
+
+        if (cursor != null) {
+            _queryParams["cursor"] = cursor;
         }
 
         const _response = await core.fetcher({

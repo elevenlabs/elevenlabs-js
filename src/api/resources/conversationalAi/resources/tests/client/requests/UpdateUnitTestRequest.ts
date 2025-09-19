@@ -38,5 +38,6 @@ export interface UpdateUnitTestRequest {
         string,
         ElevenLabs.conversationalAi.UpdateUnitTestRequestDynamicVariablesValue | undefined
     >;
+    type?: ElevenLabs.UnitTestCommonModelType;
     name: string;
 }

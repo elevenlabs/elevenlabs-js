@@ -13,12 +13,14 @@ export const UnitTestToolCallEvaluationModelInput: core.serialization.ObjectSche
     ElevenLabs.UnitTestToolCallEvaluationModelInput
 > = core.serialization.object({
     parameters: core.serialization.list(UnitTestToolCallParameter).optional(),
-    referencedTool: core.serialization.property("referenced_tool", ReferencedToolCommonModel),
+    referencedTool: core.serialization.property("referenced_tool", ReferencedToolCommonModel.optional()),
+    verifyAbsence: core.serialization.property("verify_absence", core.serialization.boolean().optional()),
 });
 
 export declare namespace UnitTestToolCallEvaluationModelInput {
     export interface Raw {
         parameters?: UnitTestToolCallParameter.Raw[] | null;
-        referenced_tool: ReferencedToolCommonModel.Raw;
+        referenced_tool?: ReferencedToolCommonModel.Raw | null;
+        verify_absence?: boolean | null;
     }
 }

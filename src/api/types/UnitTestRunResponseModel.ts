@@ -12,6 +12,7 @@ export interface UnitTestRunResponseModel {
     status: ElevenLabs.TestRunStatus;
     agentResponses?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
     testId: string;
+    testName?: string;
     conditionResult?: ElevenLabs.TestConditionResultCommonModel;
     lastUpdatedAtUnix?: number;
     metadata?: ElevenLabs.TestRunMetadata;

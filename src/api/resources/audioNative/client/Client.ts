@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers";
 import * as serializers from "../../../../serialization/index";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers";
 import * as errors from "../../../../errors/index";
 
 export declare namespace AudioNative {
@@ -109,6 +109,15 @@ export class AudioNative {
 
         if (request.autoConvert != null) {
             _request.append("auto_convert", request.autoConvert.toString());
+        }
+
+        if (request.applyTextNormalization != null) {
+            _request.append(
+                "apply_text_normalization",
+                serializers.AudioNativeCreateRequestApplyTextNormalization.jsonOrThrow(request.applyTextNormalization, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
         }
 
         const _maybeEncodedRequest = await _request.getRequest();

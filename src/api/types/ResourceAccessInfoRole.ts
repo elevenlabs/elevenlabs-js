@@ -5,9 +5,10 @@
 /**
  * The role of the user making the request
  */
-export type ResourceAccessInfoRole = "admin" | "editor" | "viewer";
+export type ResourceAccessInfoRole = "admin" | "editor" | "commenter" | "viewer";
 export const ResourceAccessInfoRole = {
     Admin: "admin",
     Editor: "editor",
+    Commenter: "commenter",
     Viewer: "viewer",
 } as const;

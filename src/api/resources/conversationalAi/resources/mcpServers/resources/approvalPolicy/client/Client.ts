@@ -42,7 +42,7 @@ export class ApprovalPolicy {
     }
 
     /**
-     * Update the approval policy configuration for an MCP server.
+     * Update the approval policy configuration for an MCP server. DEPRECATED: Use PATCH /mcp-servers/{id} endpoint instead.
      *
      * @param {string} mcpServerId - ID of the MCP Server.
      * @param {ElevenLabs.conversationalAi.mcpServers.McpApprovalPolicyUpdateRequestModel} request

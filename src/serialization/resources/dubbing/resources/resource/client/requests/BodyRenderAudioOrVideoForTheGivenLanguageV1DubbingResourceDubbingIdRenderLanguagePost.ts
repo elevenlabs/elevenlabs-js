@@ -9,16 +9,15 @@ import { RenderType } from "../../../../../../types/RenderType";
 
 export const BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost: core.serialization.Schema<
     serializers.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost.Raw,
-    Omit<
-        ElevenLabs.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost,
-        "shouldNormalizeVolume"
-    >
+    ElevenLabs.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost
 > = core.serialization.object({
     renderType: core.serialization.property("render_type", RenderType),
+    normalizeVolume: core.serialization.property("normalize_volume", core.serialization.boolean().optional()),
 });
 
 export declare namespace BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost {
     export interface Raw {
         render_type: RenderType.Raw;
+        normalize_volume?: boolean | null;
     }
 }

@@ -16,6 +16,7 @@ export interface GetUnitTestResponseModel {
     toolCallParameters?: ElevenLabs.UnitTestToolCallEvaluationModelOutput;
     /** Dynamic variables to replace in the agent config during testing */
     dynamicVariables?: Record<string, ElevenLabs.GetUnitTestResponseModelDynamicVariablesValue | undefined>;
+    type?: ElevenLabs.UnitTestCommonModelType;
     id: string;
     name: string;
 }

@@ -10,6 +10,7 @@ import { TurnConfigWorkflowOverride } from "./TurnConfigWorkflowOverride";
 import { TtsConversationalConfigWorkflowOverride } from "./TtsConversationalConfigWorkflowOverride";
 import { ConversationConfigWorkflowOverride } from "./ConversationConfigWorkflowOverride";
 import { LanguagePresetInput } from "./LanguagePresetInput";
+import { VadConfigWorkflowOverride } from "./VadConfigWorkflowOverride";
 import { AgentConfigApiModelWorkflowOverride } from "./AgentConfigApiModelWorkflowOverride";
 
 export const ConversationalConfigApiModelWorkflowOverride: core.serialization.ObjectSchema<
@@ -24,6 +25,7 @@ export const ConversationalConfigApiModelWorkflowOverride: core.serialization.Ob
         "language_presets",
         core.serialization.record(core.serialization.string(), LanguagePresetInput.optional()).optional(),
     ),
+    vad: VadConfigWorkflowOverride.optional(),
     agent: AgentConfigApiModelWorkflowOverride.optional(),
 });
 
@@ -34,6 +36,7 @@ export declare namespace ConversationalConfigApiModelWorkflowOverride {
         tts?: TtsConversationalConfigWorkflowOverride.Raw | null;
         conversation?: ConversationConfigWorkflowOverride.Raw | null;
         language_presets?: Record<string, LanguagePresetInput.Raw | null | undefined> | null;
+        vad?: VadConfigWorkflowOverride.Raw | null;
         agent?: AgentConfigApiModelWorkflowOverride.Raw | null;
     }
 }

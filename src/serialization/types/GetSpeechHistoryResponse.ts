@@ -14,6 +14,7 @@ export const GetSpeechHistoryResponse: core.serialization.ObjectSchema<
     history: core.serialization.list(SpeechHistoryItemResponse),
     lastHistoryItemId: core.serialization.property("last_history_item_id", core.serialization.string().optional()),
     hasMore: core.serialization.property("has_more", core.serialization.boolean()),
+    scannedUntil: core.serialization.property("scanned_until", core.serialization.number().optional()),
 });
 
 export declare namespace GetSpeechHistoryResponse {
@@ -21,5 +22,6 @@ export declare namespace GetSpeechHistoryResponse {
         history: SpeechHistoryItemResponse.Raw[];
         last_history_item_id?: string | null;
         has_more: boolean;
+        scanned_until?: number | null;
     }
 }

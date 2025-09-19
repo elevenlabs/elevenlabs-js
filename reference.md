@@ -248,6 +248,135 @@ await client.history.delete("VW7YKqPnjY4h39yTbx2L");
 </dl>
 </details>
 
+<details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">getAudio</a>(historyItemId) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the audio of an history item.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.history.getAudio("history_item_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**historyItemId:** `string` — ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/get-all) endpoint to retrieve a list of history items.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `History.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">download</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download one or more history items. If one history item ID is provided, we will return a single audio file. If more than one history item IDs are provided, we will provide the history items packed into a .zip file.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.history.download({
+    historyItemIds: ["history_item_ids", "history_item_ids"],
+    outputFormat: undefined,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.DownloadHistoryRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `History.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## TextToSoundEffects
 
 <details><summary><code>client.textToSoundEffects.<a href="/src/api/resources/textToSoundEffects/client/Client.ts">convert</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
@@ -521,7 +650,7 @@ await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.TextToSpeechWithTimestampsRequest`
+**request:** `ElevenLabs.BodyTextToSpeechFullWithTimestamps`
 
 </dd>
 </dl>
@@ -2801,6 +2930,77 @@ await client.pronunciationDictionaries.update("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
+<details><summary><code>client.pronunciationDictionaries.<a href="/src/api/resources/pronunciationDictionaries/client/Client.ts">download</a>(dictionaryId, versionId) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a PLS file with a pronunciation dictionary version rules
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.pronunciationDictionaries.download("dictionary_id", "version_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dictionaryId:** `string` — The id of the pronunciation dictionary
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**versionId:** `string` — The id of the version of the pronunciation dictionary
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PronunciationDictionaries.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.pronunciationDictionaries.<a href="/src/api/resources/pronunciationDictionaries/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetPronunciationDictionariesMetadataResponseModel</code></summary>
 <dl>
 <dd>
@@ -3452,6 +3652,217 @@ await client.conversationalAi.updateSecret("secret_id", {
 </details>
 
 ## Music
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">compose</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Compose a song from a prompt or a composition plan.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.compose({
+    respectSectionsDurations: undefined,
+    prompt: undefined,
+    musicPrompt: undefined,
+    compositionPlan: undefined,
+    musicLengthMs: undefined,
+    modelId: undefined,
+    seed: undefined,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyComposeMusicV1MusicPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Music.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailed</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Compose a song from a prompt or a composition plan.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.composeDetailed({
+    prompt: undefined,
+    musicPrompt: undefined,
+    compositionPlan: undefined,
+    musicLengthMs: undefined,
+    modelId: undefined,
+    seed: undefined,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Music.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">stream</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stream a composed song from a prompt or a composition plan.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.stream({
+    prompt: undefined,
+    musicPrompt: undefined,
+    compositionPlan: undefined,
+    musicLengthMs: undefined,
+    modelId: undefined,
+    seed: undefined,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Music.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
 
 ## ConversationalAi Conversations
 
@@ -5172,7 +5583,7 @@ await client.conversationalAi.phoneNumbers.delete("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-Update Phone Number details by ID
+Update assigned agent of a phone number
 
 </dd>
 </dl>
@@ -6656,6 +7067,77 @@ await client.conversationalAi.mcpServers.get("mcp_server_id");
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">update</a>(mcpServerId, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the configuration settings for an MCP server.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.update("mcp_server_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServers.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents Widget
 
 <details><summary><code>client.conversationalAi.agents.widget.<a href="/src/api/resources/conversationalAi/resources/agents/resources/widget/client/Client.ts">get</a>(agentId, { ...params }) -> ElevenLabs.GetAgentEmbedResponseModel</code></summary>
@@ -7008,6 +7490,69 @@ await client.conversationalAi.agents.widget.avatar.create("21m00Tcm4TlvDq8ikWAM"
 </details>
 
 ## ConversationalAi Conversations Audio
+
+<details><summary><code>client.conversationalAi.conversations.audio.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/audio/client/Client.ts">get</a>(conversationId) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the audio recording of a particular conversation
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.audio.get("conversation_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversationId:** `string` — The id of the conversation you're taking the action on.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Audio.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
 
 ## ConversationalAi Conversations Feedback
 
@@ -7977,7 +8522,7 @@ await client.conversationalAi.mcpServers.tools.list("mcp_server_id");
 <dl>
 <dd>
 
-Update the approval policy configuration for an MCP server.
+Update the approval policy configuration for an MCP server. DEPRECATED: Use PATCH /mcp-servers/{id} endpoint instead.
 
 </dd>
 </dl>
@@ -8690,6 +9235,77 @@ await client.dubbing.resource.render("dubbing_id", "language", {
 </details>
 
 ## Dubbing Audio
+
+<details><summary><code>client.dubbing.audio.<a href="/src/api/resources/dubbing/resources/audio/client/Client.ts">get</a>(dubbingId, languageCode) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns dub as a streamed MP3 or MP4 file. If this dub has been edited using Dubbing Studio you need to use the resource render endpoint as this endpoint only returns the original automatic dub result.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.audio.get("dubbing_id", "language_code");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbingId:** `string` — ID of the dubbing project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**languageCode:** `string` — ID of the language.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Audio.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
 
 ## Dubbing Transcript
 
@@ -9820,6 +10436,69 @@ await client.speechToText.transcripts.get("transcription_id");
 </dl>
 </details>
 
+<details><summary><code>client.speechToText.transcripts.<a href="/src/api/resources/speechToText/resources/transcripts/client/Client.ts">delete</a>(transcriptionId) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a previously generated transcript by its ID.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechToText.transcripts.delete("transcription_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**transcriptionId:** `string` — The unique ID of the transcript to delete
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Transcripts.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Studio Projects
 
 <details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">list</a>() -> ElevenLabs.GetProjectsResponse</code></summary>
@@ -10397,6 +11076,158 @@ await client.studio.projects.snapshots.get("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4Tlv
 <dd>
 
 **projectId:** `string` — The ID of the Studio project.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**projectSnapshotId:** `string` — The ID of the Studio project snapshot.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Snapshots.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.studio.projects.snapshots.<a href="/src/api/resources/studio/resources/projects/resources/snapshots/client/Client.ts">stream</a>(projectId, projectSnapshotId, { ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stream the audio from a Studio project snapshot.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.studio.projects.snapshots.stream("project_id", "project_snapshot_id", {
+    convertToMpeg: undefined,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `string` — The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**projectSnapshotId:** `string` — The ID of the Studio project snapshot.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.studio.projects.BodyStreamStudioProjectAudioV1StudioProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Snapshots.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.studio.projects.snapshots.<a href="/src/api/resources/studio/resources/projects/resources/snapshots/client/Client.ts">streamArchive</a>(projectId, projectSnapshotId) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a compressed archive of the Studio project's audio.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.studio.projects.snapshots.streamArchive("project_id", "project_snapshot_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `string` — The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
 
 </dd>
 </dl>
@@ -11088,7 +11919,159 @@ await client.studio.projects.chapters.snapshots.get(
 </dl>
 </details>
 
+<details><summary><code>client.studio.projects.chapters.snapshots.<a href="/src/api/resources/studio/resources/projects/resources/chapters/resources/snapshots/client/Client.ts">stream</a>(projectId, chapterId, chapterSnapshotId, { ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stream the audio from a chapter snapshot. Use `GET /v1/studio/projects/{project_id}/chapters/{chapter_id}/snapshots` to return the snapshots of a chapter.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.studio.projects.chapters.snapshots.stream("project_id", "chapter_id", "chapter_snapshot_id", {
+    convertToMpeg: undefined,
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `string` — The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**chapterId:** `string` — The ID of the chapter to be used. You can use the [List project chapters](/docs/api-reference/studio/get-chapters) endpoint to list all the available chapters.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**chapterSnapshotId:** `string` — The ID of the chapter snapshot to be used. You can use the [List project chapter snapshots](/docs/api-reference/studio/get-snapshots) endpoint to list all the available snapshots.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.studio.projects.chapters.BodyStreamChapterAudioV1StudioProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Snapshots.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## TextToVoice Preview
+
+<details><summary><code>client.textToVoice.preview.<a href="/src/api/resources/textToVoice/resources/preview/client/Client.ts">stream</a>(generatedVoiceId) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stream a voice preview that was created via the /v1/text-to-voice/design endpoint.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.textToVoice.preview.stream("generated_voice_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**generatedVoiceId:** `string` — The generated_voice_id to stream.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Preview.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
 
 ## User Subscription
 
@@ -12446,6 +13429,77 @@ await client.voices.pvc.verification.captcha.verify("21m00Tcm4TlvDq8ikWAM", {
 </details>
 
 ## Voices Samples Audio
+
+<details><summary><code>client.voices.samples.audio.<a href="/src/api/resources/voices/resources/samples/resources/audio/client/Client.ts">get</a>(voiceId, sampleId) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the audio corresponding to a sample attached to a voice.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.samples.audio.get("voice_id", "sample_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voiceId:** `string` — ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sampleId:** `string` — ID of the sample to be used. You can use the [Get voices](/docs/api-reference/voices/get) endpoint list all the available samples for a voice.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Audio.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
 
 ## Workspace Groups
 
