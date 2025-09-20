@@ -21,6 +21,7 @@ describe("ApprovalPolicy", () => {
                 request_headers: { key: "value" },
                 name: "name",
                 description: "description",
+                force_pre_tool_speech: true,
             },
             access_info: {
                 is_creator: true,
@@ -65,6 +66,7 @@ describe("ApprovalPolicy", () => {
                 },
                 name: "name",
                 description: "description",
+                forcePreToolSpeech: true,
             },
             accessInfo: {
                 isCreator: true,

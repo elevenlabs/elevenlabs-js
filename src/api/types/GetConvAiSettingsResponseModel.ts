@@ -10,4 +10,5 @@ export interface GetConvAiSettingsResponseModel {
     /** Whether the workspace can use MCP servers */
     canUseMcpServers?: boolean;
     ragRetentionPeriodDays?: number;
+    defaultLivekitStack?: ElevenLabs.LivekitStackType;
 }

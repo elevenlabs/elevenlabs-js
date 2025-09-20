@@ -11,12 +11,10 @@ export const ModelSettingsResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.ModelSettingsResponseModel
 > = core.serialization.object({
     stability: core.serialization.number().optional(),
-    useSpeakerBoost: core.serialization.property("use_speaker_boost", core.serialization.boolean().optional()),
 });
 
 export declare namespace ModelSettingsResponseModel {
     export interface Raw {
         stability?: number | null;
-        use_speaker_boost?: boolean | null;
     }
 }

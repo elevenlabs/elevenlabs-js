@@ -10,6 +10,7 @@ import { TurnConfig } from "./TurnConfig";
 import { TtsConversationalConfigOutput } from "./TtsConversationalConfigOutput";
 import { ConversationConfig } from "./ConversationConfig";
 import { LanguagePresetOutput } from "./LanguagePresetOutput";
+import { VadConfig } from "./VadConfig";
 import { AgentConfig } from "./AgentConfig";
 
 export const ConversationalConfig: core.serialization.ObjectSchema<
@@ -24,6 +25,7 @@ export const ConversationalConfig: core.serialization.ObjectSchema<
         "language_presets",
         core.serialization.record(core.serialization.string(), LanguagePresetOutput).optional(),
     ),
+    vad: VadConfig.optional(),
     agent: AgentConfig.optional(),
 });
 
@@ -34,6 +36,7 @@ export declare namespace ConversationalConfig {
         tts?: TtsConversationalConfigOutput.Raw | null;
         conversation?: ConversationConfig.Raw | null;
         language_presets?: Record<string, LanguagePresetOutput.Raw> | null;
+        vad?: VadConfig.Raw | null;
         agent?: AgentConfig.Raw | null;
     }
 }

@@ -22,6 +22,7 @@ describe("Invocations", () => {
                     status: "pending",
                     agent_responses: [{ role: "user", time_in_call_secs: 1 }],
                     test_id: "test_id",
+                    test_name: "test_name",
                     condition_result: { result: "success" },
                     last_updated_at_unix: 1,
                     metadata: {
@@ -58,6 +59,7 @@ describe("Invocations", () => {
                         },
                     ],
                     testId: "test_id",
+                    testName: "test_name",
                     conditionResult: {
                         result: "success",
                     },

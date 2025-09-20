@@ -128,4 +128,23 @@ describe("Transcripts", () => {
             transcriptionId: "transcription_id",
         });
     });
+
+    test("delete", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .delete("/v1/speech-to-text/transcripts/transcription_id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.speechToText.transcripts.delete("transcription_id");
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
 });

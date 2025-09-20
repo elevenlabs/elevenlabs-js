@@ -9,7 +9,7 @@ export interface DubbingMetadataResponse {
     dubbingId: string;
     /** The name of the dubbing project. */
     name: string;
-    /** The status of the dubbing project. Either 'dubbed', 'dubbing' or 'failed'. */
+    /** The status of the dubbing project. Either 'dubbed', 'dubbing', 'failed', or 'cloning'. */
     status: string;
     /** The target languages of the dubbing project. */
     targetLanguages: string[];

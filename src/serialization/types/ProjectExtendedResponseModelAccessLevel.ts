@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const ProjectExtendedResponseModelAccessLevel: core.serialization.Schema<
     serializers.ProjectExtendedResponseModelAccessLevel.Raw,
     ElevenLabs.ProjectExtendedResponseModelAccessLevel
-> = core.serialization.enum_(["admin", "editor", "viewer"]);
+> = core.serialization.enum_(["admin", "editor", "commenter", "viewer"]);
 
 export declare namespace ProjectExtendedResponseModelAccessLevel {
-    export type Raw = "admin" | "editor" | "viewer";
+    export type Raw = "admin" | "editor" | "commenter" | "viewer";
 }
