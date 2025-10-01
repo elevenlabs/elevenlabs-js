@@ -23,5 +23,7 @@ export interface AgentPlatformSettingsResponseModel {
     workspaceOverrides?: ElevenLabs.AgentWorkspaceOverridesOutput;
     /** Testing configuration for the agent */
     testing?: ElevenLabs.AgentTestingSettings;
+    /** Whether the agent is archived */
+    archived?: boolean;
     safety?: ElevenLabs.SafetyResponseModel;
 }

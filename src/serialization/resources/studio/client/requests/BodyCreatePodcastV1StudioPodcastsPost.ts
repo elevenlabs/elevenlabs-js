@@ -9,6 +9,7 @@ import { BodyCreatePodcastV1StudioPodcastsPostMode } from "../../types/BodyCreat
 import { BodyCreatePodcastV1StudioPodcastsPostSource } from "../../types/BodyCreatePodcastV1StudioPodcastsPostSource";
 import { BodyCreatePodcastV1StudioPodcastsPostQualityPreset } from "../../types/BodyCreatePodcastV1StudioPodcastsPostQualityPreset";
 import { BodyCreatePodcastV1StudioPodcastsPostDurationScale } from "../../types/BodyCreatePodcastV1StudioPodcastsPostDurationScale";
+import { BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization } from "../../types/BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization";
 
 export const BodyCreatePodcastV1StudioPodcastsPost: core.serialization.Schema<
     serializers.BodyCreatePodcastV1StudioPodcastsPost.Raw,
@@ -31,6 +32,10 @@ export const BodyCreatePodcastV1StudioPodcastsPost: core.serialization.Schema<
     instructionsPrompt: core.serialization.property("instructions_prompt", core.serialization.string().optional()),
     highlights: core.serialization.list(core.serialization.string()).optional(),
     callbackUrl: core.serialization.property("callback_url", core.serialization.string().optional()),
+    applyTextNormalization: core.serialization.property(
+        "apply_text_normalization",
+        BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization.optional(),
+    ),
 });
 
 export declare namespace BodyCreatePodcastV1StudioPodcastsPost {
@@ -46,5 +51,6 @@ export declare namespace BodyCreatePodcastV1StudioPodcastsPost {
         instructions_prompt?: string | null;
         highlights?: string[] | null;
         callback_url?: string | null;
+        apply_text_normalization?: BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization.Raw | null;
     }
 }

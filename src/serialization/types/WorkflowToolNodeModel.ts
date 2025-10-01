@@ -13,12 +13,17 @@ export const WorkflowToolNodeModel: core.serialization.ObjectSchema<
     ElevenLabs.WorkflowToolNodeModel
 > = core.serialization.object({
     position: Position.optional(),
+    edgeOrder: core.serialization.property(
+        "edge_order",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     tools: core.serialization.list(WorkflowToolLocator).optional(),
 });
 
 export declare namespace WorkflowToolNodeModel {
     export interface Raw {
         position?: Position.Raw | null;
+        edge_order?: string[] | null;
         tools?: WorkflowToolLocator.Raw[] | null;
     }
 }

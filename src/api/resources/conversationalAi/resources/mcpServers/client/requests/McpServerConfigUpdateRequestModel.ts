@@ -13,4 +13,6 @@ export interface McpServerConfigUpdateRequestModel {
     approvalPolicy?: ElevenLabs.McpApprovalPolicy;
     /** Whether to force pre-tool speech for all tools from this MCP server */
     forcePreToolSpeech?: boolean;
+    /** Whether to disable interruptions for all tools from this MCP server */
+    disableInterruptions?: boolean;
 }

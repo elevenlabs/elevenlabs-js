@@ -134,7 +134,9 @@ export class ConversationalAi {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.addToKnowledgeBase({})
+     *     await client.conversationalAi.addToKnowledgeBase({
+     *         agentId: "agent_id"
+     *     })
      */
     public addToKnowledgeBase(
         request: ElevenLabs.BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost,

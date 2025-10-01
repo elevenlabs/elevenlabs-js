@@ -52,7 +52,9 @@ describe("Agents", () => {
                     stability: 0.5,
                     speed: 1,
                     similarity_boost: 0.8,
-                    pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
+                    pronunciation_dictionary_locators: [
+                        { pronunciation_dictionary_id: "pronunciation_dictionary_id", version_id: undefined },
+                    ],
                 },
                 conversation: { text_only: true, max_duration_seconds: 600, client_events: ["audio", "interruption"] },
                 language_presets: {
@@ -171,6 +173,7 @@ describe("Agents", () => {
                 testing: {
                     attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
                 },
+                archived: true,
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -189,6 +192,7 @@ describe("Agents", () => {
                     },
                     inbound_trunk: {
                         allowed_addresses: ["allowed_addresses"],
+                        allowed_numbers: null,
                         media_encryption: "disabled",
                         has_auth_credentials: true,
                     },
@@ -246,6 +250,7 @@ describe("Agents", () => {
                     pronunciationDictionaryLocators: [
                         {
                             pronunciationDictionaryId: "pronunciation_dictionary_id",
+                            versionId: undefined,
                         },
                     ],
                 },
@@ -415,6 +420,7 @@ describe("Agents", () => {
                         },
                     ],
                 },
+                archived: true,
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -441,6 +447,7 @@ describe("Agents", () => {
                     },
                     inboundTrunk: {
                         allowedAddresses: ["allowed_addresses"],
+                        allowedNumbers: undefined,
                         mediaEncryption: "disabled",
                         hasAuthCredentials: true,
                     },
@@ -494,7 +501,9 @@ describe("Agents", () => {
                     stability: 0.5,
                     speed: 1,
                     similarity_boost: 0.8,
-                    pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
+                    pronunciation_dictionary_locators: [
+                        { pronunciation_dictionary_id: "pronunciation_dictionary_id", version_id: undefined },
+                    ],
                 },
                 conversation: { text_only: true, max_duration_seconds: 600, client_events: ["audio", "interruption"] },
                 language_presets: {
@@ -613,6 +622,7 @@ describe("Agents", () => {
                 testing: {
                     attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
                 },
+                archived: true,
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -631,6 +641,7 @@ describe("Agents", () => {
                     },
                     inbound_trunk: {
                         allowed_addresses: ["allowed_addresses"],
+                        allowed_numbers: null,
                         media_encryption: "disabled",
                         has_auth_credentials: true,
                     },
@@ -689,6 +700,7 @@ describe("Agents", () => {
                     pronunciationDictionaryLocators: [
                         {
                             pronunciationDictionaryId: "pronunciation_dictionary_id",
+                            versionId: undefined,
                         },
                     ],
                 },
@@ -858,6 +870,7 @@ describe("Agents", () => {
                         },
                     ],
                 },
+                archived: true,
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -884,6 +897,7 @@ describe("Agents", () => {
                     },
                     inboundTrunk: {
                         allowedAddresses: ["allowed_addresses"],
+                        allowedNumbers: undefined,
                         mediaEncryption: "disabled",
                         hasAuthCredentials: true,
                     },
@@ -928,7 +942,13 @@ describe("Agents", () => {
         };
         server.mockEndpoint().get("/v1/convai/agents").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.conversationalAi.agents.list();
+        const response = await client.conversationalAi.agents.list({
+            pageSize: 1,
+            search: "search",
+            sortDirection: "asc",
+            sortBy: "name",
+            cursor: "cursor",
+        });
         expect(response).toEqual({
             agents: [
                 {
@@ -988,7 +1008,9 @@ describe("Agents", () => {
                     role: "user",
                     agent_metadata: { agent_id: "agent_id" },
                     message: "message",
-                    multivoice_message: { parts: [{ text: "text" }] },
+                    multivoice_message: {
+                        parts: [{ text: "text", voice_label: undefined, time_in_call_secs: undefined }],
+                    },
                     tool_calls: [
                         {
                             request_id: "request_id",
@@ -1060,6 +1082,8 @@ describe("Agents", () => {
                         parts: [
                             {
                                 text: "text",
+                                voiceLabel: undefined,
+                                timeInCallSecs: undefined,
                             },
                         ],
                     },
@@ -1163,6 +1187,7 @@ describe("Agents", () => {
         const rawRequestBody = { tests: [{ test_id: "test_id" }] };
         const rawResponseBody = {
             id: "id",
+            agent_id: "agent_id",
             created_at: 1,
             test_runs: [
                 {
@@ -1202,6 +1227,7 @@ describe("Agents", () => {
         });
         expect(response).toEqual({
             id: "id",
+            agentId: "agent_id",
             createdAt: 1,
             testRuns: [
                 {

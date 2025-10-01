@@ -59,7 +59,17 @@ describe("History", () => {
         };
         server.mockEndpoint().get("/v1/history").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.history.list();
+        const response = await client.history.list({
+            pageSize: 1,
+            startAfterHistoryItemId: "start_after_history_item_id",
+            voiceId: "voice_id",
+            modelId: "model_id",
+            dateBeforeUnix: 1,
+            dateAfterUnix: 1,
+            sortDirection: "asc",
+            search: "search",
+            source: "TTS",
+        });
         expect(response).toEqual({
             history: [
                 {

@@ -21,6 +21,7 @@ describe("Conversations", () => {
 
         const response = await client.conversationalAi.conversations.getSignedUrl({
             agentId: "21m00Tcm4TlvDq8ikWAM",
+            includeConversationId: true,
         });
         expect(response).toEqual({
             signedUrl: "signed_url",
@@ -42,6 +43,7 @@ describe("Conversations", () => {
 
         const response = await client.conversationalAi.conversations.getWebrtcToken({
             agentId: "21m00Tcm4TlvDq8ikWAM",
+            participantName: "participant_name",
         });
         expect(response).toEqual({
             token: "token",
@@ -79,7 +81,16 @@ describe("Conversations", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.conversations.list();
+        const response = await client.conversationalAi.conversations.list({
+            cursor: "cursor",
+            agentId: "agent_id",
+            callSuccessful: "success",
+            callStartBeforeUnix: 1,
+            callStartAfterUnix: 1,
+            userId: "user_id",
+            pageSize: 1,
+            summaryMode: "exclude",
+        });
         expect(response).toEqual({
             conversations: [
                 {

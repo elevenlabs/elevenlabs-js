@@ -27,6 +27,10 @@ export const WorkflowOverrideAgentNodeModel: core.serialization.ObjectSchema<
         core.serialization.list(core.serialization.string()).optional(),
     ),
     position: Position.optional(),
+    edgeOrder: core.serialization.property(
+        "edge_order",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     label: core.serialization.string(),
 });
 
@@ -37,6 +41,7 @@ export declare namespace WorkflowOverrideAgentNodeModel {
         additional_knowledge_base?: KnowledgeBaseLocator.Raw[] | null;
         additional_tool_ids?: string[] | null;
         position?: Position.Raw | null;
+        edge_order?: string[] | null;
         label: string;
     }
 }

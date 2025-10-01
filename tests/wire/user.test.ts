@@ -37,6 +37,7 @@ describe("User", () => {
             subscription_extras: {
                 concurrency: 10,
                 convai_concurrency: 10,
+                enterprise_music_concurrency: 5,
                 convai_chars_per_minute: 1,
                 convai_asr_chars_per_minute: 1,
                 force_logging_disabled: false,
@@ -108,6 +109,7 @@ describe("User", () => {
             subscriptionExtras: {
                 concurrency: 10,
                 convaiConcurrency: 10,
+                enterpriseMusicConcurrency: 5,
                 convaiCharsPerMinute: 1,
                 convaiAsrCharsPerMinute: 1,
                 forceLoggingDisabled: false,

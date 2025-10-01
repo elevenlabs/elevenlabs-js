@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         force: true
+ *     }
  */
 export interface DocumentsDeleteRequest {
     /**

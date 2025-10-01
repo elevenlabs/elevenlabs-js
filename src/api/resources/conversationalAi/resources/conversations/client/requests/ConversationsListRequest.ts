@@ -6,7 +6,16 @@ import * as ElevenLabs from "../../../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         cursor: "cursor",
+ *         agentId: "agent_id",
+ *         callSuccessful: "success",
+ *         callStartBeforeUnix: 1,
+ *         callStartAfterUnix: 1,
+ *         userId: "user_id",
+ *         pageSize: 1,
+ *         summaryMode: "exclude"
+ *     }
  */
 export interface ConversationsListRequest {
     /**

@@ -5,9 +5,9 @@
 import * as ElevenLabs from "../index";
 
 export interface MusicPrompt {
-    /** The styles that should be present in the entire song. */
+    /** The styles that should be present in the entire song. Use English language for best result. */
     positiveGlobalStyles: string[];
-    /** The styles that should not be present in the entire song. */
+    /** The styles that should not be present in the entire song. Use English language for best result. */
     negativeGlobalStyles: string[];
     /** The sections of the song. */
     sections: ElevenLabs.SongSection[];

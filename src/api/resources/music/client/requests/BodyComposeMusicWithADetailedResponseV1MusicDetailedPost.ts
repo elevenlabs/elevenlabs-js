@@ -12,7 +12,8 @@ import * as ElevenLabs from "../../../../index";
  *         compositionPlan: undefined,
  *         musicLengthMs: undefined,
  *         modelId: undefined,
- *         seed: undefined
+ *         seed: undefined,
+ *         forceInstrumental: undefined
  *     }
  */
 export interface BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
@@ -32,4 +33,6 @@ export interface BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
     modelId?: "music_v1";
     /** The seed to use for the generation. */
     seed?: number;
+    /** If true, guarantees that the generated song will be instrumental. If false, the song may or may not be instrumental depending on the `prompt`. Can only be used with `prompt`. */
+    forceInstrumental?: boolean;
 }

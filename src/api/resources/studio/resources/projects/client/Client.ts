@@ -385,7 +385,9 @@ export class Projects {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.studio.projects.get("21m00Tcm4TlvDq8ikWAM")
+     *     await client.studio.projects.get("21m00Tcm4TlvDq8ikWAM", {
+     *         shareId: "share_id"
+     *     })
      */
     public get(
         projectId: string,

@@ -6,6 +6,7 @@ import * as ElevenLabs from "../index";
 
 export interface GetTestSuiteInvocationResponseModel {
     id: string;
+    agentId?: string;
     createdAt?: number;
     testRuns: ElevenLabs.UnitTestRunResponseModel[];
 }

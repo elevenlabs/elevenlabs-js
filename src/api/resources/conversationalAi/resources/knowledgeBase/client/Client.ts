@@ -62,7 +62,15 @@ export class KnowledgeBase {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.knowledgeBase.list()
+     *     await client.conversationalAi.knowledgeBase.list({
+     *         pageSize: 1,
+     *         search: "search",
+     *         showOnlyOwnedDocuments: true,
+     *         sortDirection: "asc",
+     *         sortBy: "name",
+     *         useTypesense: true,
+     *         cursor: "cursor"
+     *     })
      */
     public list(
         request: ElevenLabs.conversationalAi.KnowledgeBaseListRequest = {},

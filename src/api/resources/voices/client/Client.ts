@@ -77,7 +77,9 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.voices.getAll()
+     *     await client.voices.getAll({
+     *         showLegacy: true
+     *     })
      */
     public getAll(
         request: ElevenLabs.VoicesGetAllRequest = {},
@@ -174,6 +176,15 @@ export class Voices {
      *
      * @example
      *     await client.voices.search({
+     *         nextPageToken: "next_page_token",
+     *         pageSize: 1,
+     *         search: "search",
+     *         sort: "sort",
+     *         sortDirection: "sort_direction",
+     *         voiceType: "voice_type",
+     *         category: "category",
+     *         fineTuningState: "fine_tuning_state",
+     *         collectionId: "collection_id",
      *         includeTotalCount: true
      *     })
      */
@@ -328,7 +339,9 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.voices.get("21m00Tcm4TlvDq8ikWAM")
+     *     await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
+     *         withSettings: true
+     *     })
      */
     public get(
         voiceId: string,
@@ -740,8 +753,22 @@ export class Voices {
      *
      * @example
      *     await client.voices.getShared({
+     *         pageSize: 1,
+     *         category: "professional",
+     *         gender: "gender",
+     *         age: "age",
+     *         accent: "accent",
+     *         language: "language",
+     *         locale: "locale",
+     *         search: "search",
      *         featured: true,
-     *         readerAppEnabled: true
+     *         minNoticePeriodDays: 1,
+     *         includeCustomRates: true,
+     *         includeLiveModerated: true,
+     *         readerAppEnabled: true,
+     *         ownerId: "owner_id",
+     *         sort: "sort",
+     *         page: 1
      *     })
      */
     public getShared(

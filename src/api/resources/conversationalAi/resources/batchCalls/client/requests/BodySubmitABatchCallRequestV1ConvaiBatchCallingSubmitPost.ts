@@ -19,6 +19,6 @@ export interface BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
     callName: string;
     agentId: string;
     agentPhoneNumberId: string;
-    scheduledTimeUnix?: number;
     recipients: ElevenLabs.OutboundCallRecipient[];
+    scheduledTimeUnix?: number;
 }

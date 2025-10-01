@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         withSettings: true
+ *     }
  */
 export interface VoicesGetRequest {
     /**

@@ -17,6 +17,8 @@ export interface GetUnitTestResponseModel {
     /** Dynamic variables to replace in the agent config during testing */
     dynamicVariables?: Record<string, ElevenLabs.GetUnitTestResponseModelDynamicVariablesValue | undefined>;
     type?: ElevenLabs.UnitTestCommonModelType;
+    /** Metadata of a conversation this test was created from (if applicable). */
+    fromConversationMetadata?: ElevenLabs.TestFromConversationMetadataOutput;
     id: string;
     name: string;
 }

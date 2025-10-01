@@ -109,4 +109,12 @@ export interface BodyCreatePodcastV1StudioPodcastsPost {
      *
      */
     callbackUrl?: string;
+    /**
+     *     This parameter controls text normalization with four modes: 'auto', 'on', 'apply_english' and 'off'.
+     *     When set to 'auto', the system will automatically decide whether to apply text normalization
+     *     (e.g., spelling out numbers). With 'on', text normalization will always be applied, while
+     *     with 'off', it will be skipped. 'apply_english' is the same as 'on' but will assume that text is in English.
+     *
+     */
+    applyTextNormalization?: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization;
 }

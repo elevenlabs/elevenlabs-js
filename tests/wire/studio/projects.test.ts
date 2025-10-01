@@ -203,7 +203,9 @@ describe("Projects", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.studio.projects.get("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.studio.projects.get("21m00Tcm4TlvDq8ikWAM", {
+            shareId: "share_id",
+        });
         expect(response).toEqual({
             projectId: "aw1NgEzBg83R7vgmiJt6",
             name: "My Project",

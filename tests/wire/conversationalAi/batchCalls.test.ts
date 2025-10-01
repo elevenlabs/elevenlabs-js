@@ -96,7 +96,10 @@ describe("BatchCalls", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.batchCalls.list();
+        const response = await client.conversationalAi.batchCalls.list({
+            limit: 1,
+            lastDoc: "last_doc",
+        });
         expect(response).toEqual({
             batchCalls: [
                 {

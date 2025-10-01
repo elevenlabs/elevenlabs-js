@@ -70,8 +70,10 @@ describe("Resource", () => {
                         key: {
                             start_time: 1.1,
                             end_time: 1.1,
+                            text: undefined,
                             subtitles: [{ start_time: 1.1, end_time: 1.1, lines: ["lines"] }],
                             audio_stale: true,
+                            media_ref: undefined,
                         },
                     },
                 },
@@ -172,6 +174,7 @@ describe("Resource", () => {
                         key: {
                             startTime: 1.1,
                             endTime: 1.1,
+                            text: undefined,
                             subtitles: [
                                 {
                                     startTime: 1.1,
@@ -180,6 +183,7 @@ describe("Resource", () => {
                                 },
                             ],
                             audioStale: true,
+                            mediaRef: undefined,
                         },
                     },
                 },

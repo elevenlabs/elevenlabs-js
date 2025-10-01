@@ -12,6 +12,7 @@ export const GetTestSuiteInvocationResponseModel: core.serialization.ObjectSchem
     ElevenLabs.GetTestSuiteInvocationResponseModel
 > = core.serialization.object({
     id: core.serialization.string(),
+    agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
     createdAt: core.serialization.property("created_at", core.serialization.number().optional()),
     testRuns: core.serialization.property("test_runs", core.serialization.list(UnitTestRunResponseModel)),
 });
@@ -19,6 +20,7 @@ export const GetTestSuiteInvocationResponseModel: core.serialization.ObjectSchem
 export declare namespace GetTestSuiteInvocationResponseModel {
     export interface Raw {
         id: string;
+        agent_id?: string | null;
         created_at?: number | null;
         test_runs: UnitTestRunResponseModel.Raw[];
     }

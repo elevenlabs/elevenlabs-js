@@ -550,7 +550,11 @@ export class Tests {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.tests.list()
+     *     await client.conversationalAi.tests.list({
+     *         cursor: "cursor",
+     *         pageSize: 1,
+     *         search: "search"
+     *     })
      */
     public list(
         request: ElevenLabs.conversationalAi.TestsListRequest = {},
