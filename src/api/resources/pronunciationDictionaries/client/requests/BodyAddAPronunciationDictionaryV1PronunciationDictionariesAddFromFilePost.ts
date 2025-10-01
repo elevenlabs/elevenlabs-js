@@ -14,7 +14,8 @@ import * as ElevenLabs from "../../../../index";
 export interface BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost {
     /** The name of the pronunciation dictionary, used for identification only. */
     name: string;
-    file?: core.FileLike | undefined;
+    /** A lexicon .pls file which we will use to initialize the project with. */
+    file?: core.file.Uploadable.FileLike | undefined;
     /** A description of the pronunciation dictionary, used for identification only. */
     description?: string;
     /** Should be one of 'admin', 'editor' or 'viewer'. If not provided, defaults to no access. */

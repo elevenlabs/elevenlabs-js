@@ -27,7 +27,7 @@ export interface PromptAgentApiModelWorkflowOverride {
     knowledgeBase?: ElevenLabs.KnowledgeBaseLocator[];
     /** Definition for a custom LLM if LLM field is set to 'CUSTOM_LLM' */
     customLlm?: ElevenLabs.CustomLlm;
-    /** Whether to ignore the default personality */
+    /** Whether to remove the default personality lines from the system prompt */
     ignoreDefaultPersonality?: boolean;
     /** Configuration for RAG */
     rag?: ElevenLabs.RagConfigWorkflowOverride;

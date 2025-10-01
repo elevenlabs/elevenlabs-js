@@ -20,6 +20,7 @@ export const BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost: core
     ),
     trimStartTime: core.serialization.property("trim_start_time", core.serialization.number().optional()),
     trimEndTime: core.serialization.property("trim_end_time", core.serialization.number().optional()),
+    fileName: core.serialization.property("file_name", core.serialization.string().optional()),
 });
 
 export declare namespace BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost {
@@ -28,5 +29,6 @@ export declare namespace BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSample
         selected_speaker_ids?: string[] | null;
         trim_start_time?: number | null;
         trim_end_time?: number | null;
+        file_name?: string | null;
     }
 }

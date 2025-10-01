@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../src/Client";
+import * as ElevenLabs from "../../src/api/index";
 
 describe("Voices", () => {
-    test("get_all", async () => {
+    test("get_all (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -135,7 +136,9 @@ describe("Voices", () => {
         };
         server.mockEndpoint().get("/v1/voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.voices.getAll();
+        const response = await client.voices.getAll({
+            showLegacy: true,
+        });
         expect(response).toEqual({
             voices: [
                 {
@@ -277,7 +280,19 @@ describe("Voices", () => {
         });
     });
 
-    test("search", async () => {
+    test("get_all (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server.mockEndpoint().get("/v1/voices").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.voices.getAll();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("search (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -410,6 +425,15 @@ describe("Voices", () => {
         server.mockEndpoint().get("/v2/voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.voices.search({
+            nextPageToken: "next_page_token",
+            pageSize: 1,
+            search: "search",
+            sort: "sort",
+            sortDirection: "sort_direction",
+            voiceType: "voice_type",
+            category: "category",
+            fineTuningState: "fine_tuning_state",
+            collectionId: "collection_id",
             includeTotalCount: true,
         });
         expect(response).toEqual({
@@ -556,7 +580,19 @@ describe("Voices", () => {
         });
     });
 
-    test("get", async () => {
+    test("search (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server.mockEndpoint().get("/v2/voices").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.voices.search();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -743,7 +779,9 @@ describe("Voices", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.voices.get("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
+            withSettings: true,
+        });
         expect(response).toEqual({
             voiceId: "21m00Tcm4TlvDq8ikWAM",
             name: "Rachel",
@@ -943,7 +981,25 @@ describe("Voices", () => {
         });
     });
 
-    test("delete", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/voices/voice_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.voices.get("voice_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -962,7 +1018,25 @@ describe("Voices", () => {
         });
     });
 
-    test("share", async () => {
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/voices/voice_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.voices.delete("voice_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("share (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { new_name: "John Smith" };
@@ -990,7 +1064,28 @@ describe("Voices", () => {
         });
     });
 
-    test("get_shared", async () => {
+    test("share (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { new_name: "new_name" };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/voices/add/public_user_id/voice_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.voices.share("public_user_id", "voice_id", {
+                newName: "new_name",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get_shared (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -1046,8 +1141,22 @@ describe("Voices", () => {
         server.mockEndpoint().get("/v1/shared-voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.voices.getShared({
+            pageSize: 1,
+            category: "professional",
+            gender: "gender",
+            age: "age",
+            accent: "accent",
+            language: "language",
+            locale: "locale",
+            search: "search",
             featured: true,
+            minNoticePeriodDays: 1,
+            includeCustomRates: true,
+            includeLiveModerated: true,
             readerAppEnabled: true,
+            ownerId: "owner_id",
+            sort: "sort",
+            page: 1,
         });
         expect(response).toEqual({
             voices: [
@@ -1098,5 +1207,17 @@ describe("Voices", () => {
             hasMore: false,
             lastSortId: "last_sort_id",
         });
+    });
+
+    test("get_shared (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server.mockEndpoint().get("/v1/shared-voices").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.voices.getShared();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

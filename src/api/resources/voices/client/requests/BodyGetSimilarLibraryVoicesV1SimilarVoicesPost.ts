@@ -9,7 +9,7 @@ import * as core from "../../../../../core";
  *     {}
  */
 export interface BodyGetSimilarLibraryVoicesV1SimilarVoicesPost {
-    audioFile?: core.FileLike | undefined;
+    audioFile?: core.file.Uploadable.FileLike | undefined;
     /** Threshold for voice similarity between provided sample and library voices. Values range from 0 to 2. The smaller the value the more similar voices will be returned. */
     similarityThreshold?: number;
     /** Number of most similar voices to return. If similarity_threshold is provided, less than this number of voices may be returned. Values range from 1 to 100. */

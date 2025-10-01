@@ -3,3 +3,4 @@ export * from "./BodyCreatePodcastV1StudioPodcastsPostSourceItem";
 export * from "./BodyCreatePodcastV1StudioPodcastsPostSource";
 export * from "./BodyCreatePodcastV1StudioPodcastsPostQualityPreset";
 export * from "./BodyCreatePodcastV1StudioPodcastsPostDurationScale";
+export * from "./BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization";

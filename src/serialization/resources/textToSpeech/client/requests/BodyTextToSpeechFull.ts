@@ -7,11 +7,11 @@ import * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import { VoiceSettings } from "../../../../types/VoiceSettings";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
-import { BodyTextToSpeechV1TextToSpeechVoiceIdPostApplyTextNormalization } from "../../types/BodyTextToSpeechV1TextToSpeechVoiceIdPostApplyTextNormalization";
+import { BodyTextToSpeechFullApplyTextNormalization } from "../../types/BodyTextToSpeechFullApplyTextNormalization";
 
-export const TextToSpeechRequest: core.serialization.Schema<
-    serializers.TextToSpeechRequest.Raw,
-    Omit<ElevenLabs.TextToSpeechRequest, "enableLogging" | "optimizeStreamingLatency" | "outputFormat">
+export const BodyTextToSpeechFull: core.serialization.Schema<
+    serializers.BodyTextToSpeechFull.Raw,
+    Omit<ElevenLabs.BodyTextToSpeechFull, "enableLogging" | "optimizeStreamingLatency" | "outputFormat">
 > = core.serialization.object({
     text: core.serialization.string(),
     modelId: core.serialization.property("model_id", core.serialization.string().optional()),
@@ -35,15 +35,16 @@ export const TextToSpeechRequest: core.serialization.Schema<
     usePvcAsIvc: core.serialization.property("use_pvc_as_ivc", core.serialization.boolean().optional()),
     applyTextNormalization: core.serialization.property(
         "apply_text_normalization",
-        BodyTextToSpeechV1TextToSpeechVoiceIdPostApplyTextNormalization.optional(),
+        BodyTextToSpeechFullApplyTextNormalization.optional(),
     ),
     applyLanguageTextNormalization: core.serialization.property(
         "apply_language_text_normalization",
         core.serialization.boolean().optional(),
     ),
+    hcaptchaToken: core.serialization.property("hcaptcha_token", core.serialization.string().optional()),
 });
 
-export declare namespace TextToSpeechRequest {
+export declare namespace BodyTextToSpeechFull {
     export interface Raw {
         text: string;
         model_id?: string | null;
@@ -56,7 +57,8 @@ export declare namespace TextToSpeechRequest {
         previous_request_ids?: string[] | null;
         next_request_ids?: string[] | null;
         use_pvc_as_ivc?: boolean | null;
-        apply_text_normalization?: BodyTextToSpeechV1TextToSpeechVoiceIdPostApplyTextNormalization.Raw | null;
+        apply_text_normalization?: BodyTextToSpeechFullApplyTextNormalization.Raw | null;
         apply_language_text_normalization?: boolean | null;
+        hcaptcha_token?: string | null;
     }
 }

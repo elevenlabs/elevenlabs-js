@@ -6,27 +6,23 @@ import * as ElevenLabs from "../../../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         pageSize: 1,
+ *         search: "search",
+ *         sortDirection: "asc",
+ *         sortBy: "name",
+ *         cursor: "cursor"
+ *     }
  */
 export interface AgentsListRequest {
-    /**
-     * How many Agents to return at maximum. Can not exceed 100, defaults to 30.
-     */
+    /** How many Agents to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
-    /**
-     * Search by agents name.
-     */
+    /** Search by agents name. */
     search?: string;
-    /**
-     * The direction to sort the results
-     */
+    /** The direction to sort the results */
     sortDirection?: ElevenLabs.SortDirection;
-    /**
-     * The field to sort the results by
-     */
+    /** The field to sort the results by */
     sortBy?: ElevenLabs.AgentSortBy;
-    /**
-     * Used for fetching next page. Cursor is returned in the response.
-     */
+    /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
 }

@@ -12,4 +12,6 @@ export interface ConversationChargingCommonModel {
     llmPrice?: number;
     llmCharge?: number;
     callCharge?: number;
+    freeMinutesConsumed?: number;
+    freeLlmDollarsConsumed?: number;
 }

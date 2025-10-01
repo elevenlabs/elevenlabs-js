@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("Chapters", () => {
-    test("list", async () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -61,7 +62,25 @@ describe("Chapters", () => {
         });
     });
 
-    test("create", async () => {
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/studio/projects/project_id/chapters")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.studio.projects.chapters.list("project_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "Chapter 1" };
@@ -83,7 +102,7 @@ describe("Chapters", () => {
                 last_conversion_error: "last_conversion_error",
                 content: {
                     blocks: [
-                        { block_id: "block_id", nodes: [{ voice_id: "voice_id", text: "text", type: "tts_node" }] },
+                        { block_id: "block_id", nodes: [{ type: "tts_node", voice_id: "voice_id", text: "text" }] },
                     ],
                 },
             },
@@ -134,7 +153,29 @@ describe("Chapters", () => {
         });
     });
 
-    test("get", async () => {
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { name: "name", from_url: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/studio/projects/project_id/chapters")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.studio.projects.chapters.create("project_id", {
+                name: "name",
+                fromUrl: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -154,7 +195,7 @@ describe("Chapters", () => {
             },
             last_conversion_error: "last_conversion_error",
             content: {
-                blocks: [{ block_id: "block_id", nodes: [{ voice_id: "voice_id", text: "text", type: "tts_node" }] }],
+                blocks: [{ block_id: "block_id", nodes: [{ type: "tts_node", voice_id: "voice_id", text: "text" }] }],
             },
         };
         server
@@ -198,7 +239,25 @@ describe("Chapters", () => {
         });
     });
 
-    test("update", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/studio/projects/project_id/chapters/chapter_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.studio.projects.chapters.get("project_id", "chapter_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -220,7 +279,7 @@ describe("Chapters", () => {
                 last_conversion_error: "last_conversion_error",
                 content: {
                     blocks: [
-                        { block_id: "block_id", nodes: [{ voice_id: "voice_id", text: "text", type: "tts_node" }] },
+                        { block_id: "block_id", nodes: [{ type: "tts_node", voice_id: "voice_id", text: "text" }] },
                     ],
                 },
             },
@@ -269,7 +328,29 @@ describe("Chapters", () => {
         });
     });
 
-    test("delete", async () => {
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { name: undefined, content: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/studio/projects/project_id/chapters/chapter_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.studio.projects.chapters.update("project_id", "chapter_id", {
+                name: undefined,
+                content: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -288,7 +369,25 @@ describe("Chapters", () => {
         });
     });
 
-    test("convert", async () => {
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/studio/projects/project_id/chapters/chapter_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.studio.projects.chapters.delete("project_id", "chapter_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("convert (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -305,5 +404,23 @@ describe("Chapters", () => {
         expect(response).toEqual({
             status: "ok",
         });
+    });
+
+    test("convert (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/studio/projects/project_id/chapters/chapter_id/convert")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.studio.projects.chapters.convert("project_id", "chapter_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

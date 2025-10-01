@@ -14,8 +14,8 @@ export const BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost: core.ser
     callName: core.serialization.property("call_name", core.serialization.string()),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     agentPhoneNumberId: core.serialization.property("agent_phone_number_id", core.serialization.string()),
-    scheduledTimeUnix: core.serialization.property("scheduled_time_unix", core.serialization.number().optional()),
     recipients: core.serialization.list(OutboundCallRecipient),
+    scheduledTimeUnix: core.serialization.property("scheduled_time_unix", core.serialization.number().optional()),
 });
 
 export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
@@ -23,7 +23,7 @@ export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPo
         call_name: string;
         agent_id: string;
         agent_phone_number_id: string;
-        scheduled_time_unix?: number | null;
         recipients: OutboundCallRecipient.Raw[];
+        scheduled_time_unix?: number | null;
     }
 }

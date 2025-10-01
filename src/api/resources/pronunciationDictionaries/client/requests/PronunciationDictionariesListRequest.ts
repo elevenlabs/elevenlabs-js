@@ -6,23 +6,20 @@ import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         cursor: "cursor",
+ *         pageSize: 1,
+ *         sort: "creation_time_unix",
+ *         sortDirection: "sort_direction"
+ *     }
  */
 export interface PronunciationDictionariesListRequest {
-    /**
-     * Used for fetching next page. Cursor is returned in the response.
-     */
+    /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
-    /**
-     * How many pronunciation dictionaries to return at maximum. Can not exceed 100, defaults to 30.
-     */
+    /** How many pronunciation dictionaries to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
-    /**
-     * Which field to sort by, one of 'created_at_unix' or 'name'.
-     */
+    /** Which field to sort by, one of 'created_at_unix' or 'name'. */
     sort?: ElevenLabs.PronunciationDictionariesListRequestSort;
-    /**
-     * Which direction to sort the voices in. 'ascending' or 'descending'.
-     */
+    /** Which direction to sort the voices in. 'ascending' or 'descending'. */
     sortDirection?: string;
 }

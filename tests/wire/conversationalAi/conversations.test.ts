@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("Conversations", () => {
-    test("get_signed_url", async () => {
+    test("get_signed_url (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -21,13 +22,34 @@ describe("Conversations", () => {
 
         const response = await client.conversationalAi.conversations.getSignedUrl({
             agentId: "21m00Tcm4TlvDq8ikWAM",
+            includeConversationId: true,
         });
         expect(response).toEqual({
             signedUrl: "signed_url",
         });
     });
 
-    test("get_webrtc_token", async () => {
+    test("get_signed_url (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/conversation/get-signed-url")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.conversations.getSignedUrl({
+                agentId: "agent_id",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get_webrtc_token (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -42,13 +64,34 @@ describe("Conversations", () => {
 
         const response = await client.conversationalAi.conversations.getWebrtcToken({
             agentId: "21m00Tcm4TlvDq8ikWAM",
+            participantName: "participant_name",
         });
         expect(response).toEqual({
             token: "token",
         });
     });
 
-    test("list", async () => {
+    test("get_webrtc_token (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/conversation/token")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.conversations.getWebrtcToken({
+                agentId: "agent_id",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -79,7 +122,16 @@ describe("Conversations", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.conversations.list();
+        const response = await client.conversationalAi.conversations.list({
+            cursor: "cursor",
+            agentId: "agent_id",
+            callSuccessful: "success",
+            callStartBeforeUnix: 1,
+            callStartAfterUnix: 1,
+            userId: "user_id",
+            pageSize: 1,
+            summaryMode: "exclude",
+        });
         expect(response).toEqual({
             conversations: [
                 {
@@ -101,7 +153,25 @@ describe("Conversations", () => {
         });
     });
 
-    test("get", async () => {
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/conversations")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.conversations.list();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -145,7 +215,25 @@ describe("Conversations", () => {
         });
     });
 
-    test("delete", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/conversations/conversation_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.conversations.get("conversation_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -162,5 +250,23 @@ describe("Conversations", () => {
         expect(response).toEqual({
             key: "value",
         });
+    });
+
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/conversations/conversation_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.conversations.delete("conversation_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

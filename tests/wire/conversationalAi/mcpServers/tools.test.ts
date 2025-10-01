@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("Tools", () => {
-    test("list", async () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -52,9 +53,8 @@ describe("Tools", () => {
             success: true,
             tools: [
                 {
-                    _meta: {
-                        key: "value",
-                    },
+                    name: "weather_by_zapier_get_current",
+                    title: "title",
                     description: "Gets current weather conditions for a location.",
                     inputSchema: {
                         properties: {
@@ -70,35 +70,48 @@ describe("Tools", () => {
                         required: ["latitude", "longitude"],
                         type: "object",
                     },
-                    meta: {
-                        key: "value",
-                    },
-                    name: "weather_by_zapier_get_current",
                     outputSchema: {
                         key: "value",
                     },
-                    title: "title",
-                },
-                {
-                    _meta: {
+                    meta: {
                         key: "value",
                     },
+                },
+                {
+                    name: "tool2",
+                    title: "title",
                     description: "Description of tool2",
                     inputSchema: {
                         properties: {},
                         type: "object",
                     },
-                    meta: {
-                        key: "value",
-                    },
-                    name: "tool2",
                     outputSchema: {
                         key: "value",
                     },
-                    title: "title",
+                    meta: {
+                        key: "value",
+                    },
                 },
             ],
             errorMessage: "error_message",
         });
+    });
+
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/mcp-servers/mcp_server_id/tools")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.mcpServers.tools.list("mcp_server_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

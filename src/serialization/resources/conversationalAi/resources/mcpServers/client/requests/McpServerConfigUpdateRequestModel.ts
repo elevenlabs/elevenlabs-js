@@ -13,11 +13,13 @@ export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
 > = core.serialization.object({
     approvalPolicy: core.serialization.property("approval_policy", McpApprovalPolicy.optional()),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
+    disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
 });
 
 export declare namespace McpServerConfigUpdateRequestModel {
     export interface Raw {
         approval_policy?: McpApprovalPolicy.Raw | null;
         force_pre_tool_speech?: boolean | null;
+        disable_interruptions?: boolean | null;
     }
 }

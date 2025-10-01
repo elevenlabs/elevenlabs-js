@@ -9,8 +9,6 @@
  *     }
  */
 export interface GroupsSearchRequest {
-    /**
-     * Name of the target group.
-     */
+    /** Name of the target group. */
     name: string;
 }

@@ -5,11 +5,16 @@
 import * as ElevenLabs from "../index";
 
 export type WorkflowEdgeModelBackwardCondition =
+    | ElevenLabs.WorkflowEdgeModelBackwardCondition.Expression
     | ElevenLabs.WorkflowEdgeModelBackwardCondition.Llm
     | ElevenLabs.WorkflowEdgeModelBackwardCondition.Result
     | ElevenLabs.WorkflowEdgeModelBackwardCondition.Unconditional;
 
 export namespace WorkflowEdgeModelBackwardCondition {
+    export interface Expression extends ElevenLabs.WorkflowExpressionConditionModel {
+        type: "expression";
+    }
+
     export interface Llm extends ElevenLabs.WorkflowLlmConditionModel {
         type: "llm";
     }

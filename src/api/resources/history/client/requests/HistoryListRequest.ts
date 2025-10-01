@@ -6,43 +6,35 @@ import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         pageSize: 1,
+ *         startAfterHistoryItemId: "start_after_history_item_id",
+ *         voiceId: "voice_id",
+ *         modelId: "model_id",
+ *         dateBeforeUnix: 1,
+ *         dateAfterUnix: 1,
+ *         sortDirection: "asc",
+ *         search: "search",
+ *         source: "TTS"
+ *     }
  */
 export interface HistoryListRequest {
-    /**
-     * How many history items to return at maximum. Can not exceed 1000, defaults to 100.
-     */
+    /** How many history items to return at maximum. Can not exceed 1000, defaults to 100. */
     pageSize?: number;
-    /**
-     * After which ID to start fetching, use this parameter to paginate across a large collection of history items. In case this parameter is not provided history items will be fetched starting from the most recently created one ordered descending by their creation date.
-     */
+    /** After which ID to start fetching, use this parameter to paginate across a large collection of history items. In case this parameter is not provided history items will be fetched starting from the most recently created one ordered descending by their creation date. */
     startAfterHistoryItemId?: string;
-    /**
-     * ID of the voice to be filtered for. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
-     */
+    /** ID of the voice to be filtered for. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices. */
     voiceId?: string;
-    /**
-     * Search term used for filtering history items. If provided, source becomes required.
-     */
+    /** Search term used for filtering history items. If provided, source becomes required. */
     modelId?: string;
-    /**
-     * Unix timestamp to filter history items before this date (exclusive).
-     */
+    /** Unix timestamp to filter history items before this date (exclusive). */
     dateBeforeUnix?: number;
-    /**
-     * Unix timestamp to filter history items after this date (inclusive).
-     */
+    /** Unix timestamp to filter history items after this date (inclusive). */
     dateAfterUnix?: number;
-    /**
-     * Sort direction for the results.
-     */
+    /** Sort direction for the results. */
     sortDirection?: ElevenLabs.HistoryListRequestSortDirection;
-    /**
-     * search term used for filtering
-     */
+    /** search term used for filtering */
     search?: string;
-    /**
-     * Source of the generated history item
-     */
+    /** Source of the generated history item */
     source?: ElevenLabs.HistoryListRequestSource;
 }

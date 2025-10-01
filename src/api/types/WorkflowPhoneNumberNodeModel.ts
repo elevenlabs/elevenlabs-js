@@ -7,6 +7,8 @@ import * as ElevenLabs from "../index";
 export interface WorkflowPhoneNumberNodeModel {
     /** Position of the node in the workflow. */
     position?: ElevenLabs.Position;
+    /** The ids of outgoing edges in the order they should be evaluated. */
+    edgeOrder?: string[];
     transferDestination: ElevenLabs.WorkflowPhoneNumberNodeModelTransferDestination;
     transferType?: ElevenLabs.TransferTypeEnum;
 }

@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("Secrets", () => {
-    test("list", async () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -19,20 +20,20 @@ describe("Secrets", () => {
                     used_by: {
                         tools: [
                             {
+                                type: "available",
                                 id: "id",
                                 name: "name",
                                 created_at_unix_secs: 1,
                                 access_level: "admin",
-                                type: "available",
                             },
                         ],
                         agents: [
                             {
+                                type: "available",
                                 id: "id",
                                 name: "name",
                                 created_at_unix_secs: 1,
                                 access_level: "admin",
-                                type: "available",
                             },
                         ],
                         others: ["conversation_initiation_webhook"],
@@ -75,7 +76,19 @@ describe("Secrets", () => {
         });
     });
 
-    test("create", async () => {
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server.mockEndpoint().get("/v1/convai/secrets").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.conversationalAi.secrets.list();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { type: "new", name: "name", value: "value" };
@@ -100,7 +113,29 @@ describe("Secrets", () => {
         });
     });
 
-    test("delete", async () => {
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { type: "new", name: "name", value: "value" };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/secrets")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.secrets.create({
+                name: "name",
+                value: "value",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -108,5 +143,23 @@ describe("Secrets", () => {
 
         const response = await client.conversationalAi.secrets.delete("secret_id");
         expect(response).toEqual(undefined);
+    });
+
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/secrets/secret_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.secrets.delete("secret_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

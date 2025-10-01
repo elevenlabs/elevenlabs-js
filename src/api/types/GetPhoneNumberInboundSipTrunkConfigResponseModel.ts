@@ -14,4 +14,6 @@ export interface GetPhoneNumberInboundSipTrunkConfigResponseModel {
     hasAuthCredentials: boolean;
     /** SIP trunk username (if available) */
     username?: string;
+    /** Domains of remote SIP servers used to validate TLS certificates. */
+    remoteDomains?: string[];
 }

@@ -5,9 +5,9 @@
 export interface SongSection {
     /** The name of the section. Must be between 1 and 100 characters. */
     sectionName: string;
-    /** The styles that should be present in this section. */
+    /** The styles that should be present in this section. Use English language for best result. */
     positiveLocalStyles: string[];
-    /** The styles that should not be present in this section. */
+    /** The styles that should not be present in this section. Use English language for best result. */
     negativeLocalStyles: string[];
     /** The duration of the section in milliseconds. Must be between 3000ms and 120000ms. */
     durationMs: number;

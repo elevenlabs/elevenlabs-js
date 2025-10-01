@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("Resource", () => {
-    test("get", async () => {
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -70,8 +71,10 @@ describe("Resource", () => {
                         key: {
                             start_time: 1.1,
                             end_time: 1.1,
+                            text: undefined,
                             subtitles: [{ start_time: 1.1, end_time: 1.1, lines: ["lines"] }],
                             audio_stale: true,
+                            media_ref: undefined,
                         },
                     },
                 },
@@ -172,6 +175,7 @@ describe("Resource", () => {
                         key: {
                             startTime: 1.1,
                             endTime: 1.1,
+                            text: undefined,
                             subtitles: [
                                 {
                                     startTime: 1.1,
@@ -180,6 +184,7 @@ describe("Resource", () => {
                                 },
                             ],
                             audioStale: true,
+                            mediaRef: undefined,
                         },
                     },
                 },
@@ -205,7 +210,25 @@ describe("Resource", () => {
         });
     });
 
-    test("transcribe", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/dubbing/resource/dubbing_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.dubbing.resource.get("dubbing_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("transcribe (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
@@ -227,7 +250,28 @@ describe("Resource", () => {
         });
     });
 
-    test("translate", async () => {
+    test("transcribe (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { segments: ["segments", "segments"] };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/dubbing/resource/dubbing_id/transcribe")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.dubbing.resource.transcribe("dubbing_id", {
+                segments: ["segments", "segments"],
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("translate (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
@@ -249,7 +293,29 @@ describe("Resource", () => {
         });
     });
 
-    test("dub", async () => {
+    test("translate (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { segments: ["segments", "segments"], languages: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/dubbing/resource/dubbing_id/translate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.dubbing.resource.translate("dubbing_id", {
+                segments: ["segments", "segments"],
+                languages: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("dub (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
@@ -271,7 +337,29 @@ describe("Resource", () => {
         });
     });
 
-    test("render", async () => {
+    test("dub (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { segments: ["segments", "segments"], languages: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/dubbing/resource/dubbing_id/dub")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.dubbing.resource.dub("dubbing_id", {
+                segments: ["segments", "segments"],
+                languages: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("render (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { render_type: "mp4" };
@@ -292,5 +380,27 @@ describe("Resource", () => {
             version: 1,
             renderId: "render_id",
         });
+    });
+
+    test("render (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { render_type: "mp4", normalize_volume: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/dubbing/resource/dubbing_id/render/language")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.dubbing.resource.render("dubbing_id", "language", {
+                renderType: "mp4",
+                normalizeVolume: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

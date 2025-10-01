@@ -17,6 +17,7 @@ export const BodyComposeMusicWithADetailedResponseV1MusicDetailedPost: core.seri
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
     modelId: core.serialization.property("model_id", core.serialization.stringLiteral("music_v1").optional()),
     seed: core.serialization.number().optional(),
+    forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
 });
 
 export declare namespace BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
@@ -27,5 +28,6 @@ export declare namespace BodyComposeMusicWithADetailedResponseV1MusicDetailedPos
         music_length_ms?: number | null;
         model_id?: "music_v1" | null;
         seed?: number | null;
+        force_instrumental?: boolean | null;
     }
 }

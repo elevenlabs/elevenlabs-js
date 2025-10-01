@@ -4,14 +4,103 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("Invocations", () => {
-    test("get", async () => {
+    test("list (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            meta: { total: 1, page: 1, page_size: 1 },
+            results: [
+                {
+                    id: "id",
+                    created_at_unix_secs: 1,
+                    test_run_count: 1,
+                    passed_count: 1,
+                    failed_count: 1,
+                    pending_count: 1,
+                    title: "title",
+                    access_info: {
+                        is_creator: true,
+                        creator_name: "John Doe",
+                        creator_email: "john.doe@example.com",
+                        role: "admin",
+                    },
+                },
+            ],
+            next_cursor: "next_cursor",
+            has_more: true,
+        };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/test-invocations")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.tests.invocations.list({
+            agentId: "agent_id",
+            pageSize: 1,
+            cursor: "cursor",
+        });
+        expect(response).toEqual({
+            meta: {
+                total: 1,
+                page: 1,
+                pageSize: 1,
+            },
+            results: [
+                {
+                    id: "id",
+                    createdAtUnixSecs: 1,
+                    testRunCount: 1,
+                    passedCount: 1,
+                    failedCount: 1,
+                    pendingCount: 1,
+                    title: "title",
+                    accessInfo: {
+                        isCreator: true,
+                        creatorName: "John Doe",
+                        creatorEmail: "john.doe@example.com",
+                        role: "admin",
+                    },
+                },
+            ],
+            nextCursor: "next_cursor",
+            hasMore: true,
+        });
+    });
+
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/test-invocations")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.invocations.list({
+                agentId: "agent_id",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             id: "id",
+            agent_id: "agent_id",
             created_at: 1,
             test_runs: [
                 {
@@ -44,6 +133,7 @@ describe("Invocations", () => {
         const response = await client.conversationalAi.tests.invocations.get("test_invocation_id");
         expect(response).toEqual({
             id: "id",
+            agentId: "agent_id",
             createdAt: 1,
             testRuns: [
                 {
@@ -74,7 +164,25 @@ describe("Invocations", () => {
         });
     });
 
-    test("resubmit", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/test-invocations/test_invocation_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.invocations.get("test_invocation_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("resubmit (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { test_run_ids: ["test_run_ids"], agent_id: "agent_id" };
@@ -95,5 +203,32 @@ describe("Invocations", () => {
         expect(response).toEqual({
             key: "value",
         });
+    });
+
+    test("resubmit (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            test_run_ids: ["test_run_ids", "test_run_ids"],
+            agent_config_override: undefined,
+            agent_id: "agent_id",
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/test-invocations/test_invocation_id/resubmit")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.invocations.resubmit("test_invocation_id", {
+                testRunIds: ["test_run_ids", "test_run_ids"],
+                agentConfigOverride: undefined,
+                agentId: "agent_id",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

@@ -14,6 +14,10 @@ export const WorkflowPhoneNumberNodeModel: core.serialization.ObjectSchema<
     ElevenLabs.WorkflowPhoneNumberNodeModel
 > = core.serialization.object({
     position: Position.optional(),
+    edgeOrder: core.serialization.property(
+        "edge_order",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     transferDestination: core.serialization.property(
         "transfer_destination",
         WorkflowPhoneNumberNodeModelTransferDestination,
@@ -24,6 +28,7 @@ export const WorkflowPhoneNumberNodeModel: core.serialization.ObjectSchema<
 export declare namespace WorkflowPhoneNumberNodeModel {
     export interface Raw {
         position?: Position.Raw | null;
+        edge_order?: string[] | null;
         transfer_destination: WorkflowPhoneNumberNodeModelTransferDestination.Raw;
         transfer_type?: TransferTypeEnum.Raw | null;
     }

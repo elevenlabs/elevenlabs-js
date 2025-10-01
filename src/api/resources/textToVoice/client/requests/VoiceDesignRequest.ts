@@ -7,13 +7,12 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
+ *         outputFormat: "mp3_22050_32",
  *         voiceDescription: "A sassy squeaky mouse"
  *     }
  */
 export interface VoiceDesignRequest {
-    /**
-     * The output format of the generated audio.
-     */
+    /** The output format of the generated audio. */
     outputFormat?: ElevenLabs.TextToVoiceCreatePreviewsRequestOutputFormat;
     /** Description to use for the created voice. */
     voiceDescription: string;

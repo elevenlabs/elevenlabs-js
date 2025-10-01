@@ -4,19 +4,17 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         cursor: "cursor",
+ *         pageSize: 1,
+ *         search: "search"
+ *     }
  */
 export interface TestsListRequest {
-    /**
-     * Used for fetching next page. Cursor is returned in the response.
-     */
+    /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
-    /**
-     * How many Tests to return at maximum. Can not exceed 100, defaults to 30.
-     */
+    /** How many Tests to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
-    /**
-     * Search query to filter tests by name.
-     */
+    /** Search query to filter tests by name. */
     search?: string;
 }

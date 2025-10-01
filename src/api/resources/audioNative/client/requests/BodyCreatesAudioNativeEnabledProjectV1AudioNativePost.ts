@@ -32,7 +32,8 @@ export interface BodyCreatesAudioNativeEnabledProjectV1AudioNativePost {
     voiceId?: string;
     /** TTS Model ID used in the player. If not provided, default model ID set in the Player settings is used. */
     modelId?: string;
-    file?: core.FileLike | undefined;
+    /** Either txt or HTML input file containing the article content. HTML should be formatted as follows '&lt;html&gt;&lt;body&gt;&lt;div&gt;&lt;p&gt;Your content&lt;/p&gt;&lt;h3&gt;More of your content&lt;/h3&gt;&lt;p&gt;Some more of your content&lt;/p&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;' */
+    file?: core.file.Uploadable.FileLike | undefined;
     /** Whether to auto convert the project to audio or not. */
     autoConvert?: boolean;
     /**

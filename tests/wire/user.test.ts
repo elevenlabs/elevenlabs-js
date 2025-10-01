@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../src/Client";
+import * as ElevenLabs from "../../src/api/index";
 
 describe("User", () => {
-    test("get", async () => {
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -37,6 +38,7 @@ describe("User", () => {
             subscription_extras: {
                 concurrency: 10,
                 convai_concurrency: 10,
+                enterprise_music_concurrency: 5,
                 convai_chars_per_minute: 1,
                 convai_asr_chars_per_minute: 1,
                 force_logging_disabled: false,
@@ -108,6 +110,7 @@ describe("User", () => {
             subscriptionExtras: {
                 concurrency: 10,
                 convaiConcurrency: 10,
+                enterpriseMusicConcurrency: 5,
                 convaiCharsPerMinute: 1,
                 convaiAsrCharsPerMinute: 1,
                 forceLoggingDisabled: false,
@@ -149,5 +152,17 @@ describe("User", () => {
             partnerstackPartnerDefaultLink: "partnerstack_partner_default_link",
             createdAt: 1753999199,
         });
+    });
+
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server.mockEndpoint().get("/v1/user").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.user.get();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

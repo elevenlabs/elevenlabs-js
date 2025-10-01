@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../../src/Client";
+import * as ElevenLabs from "../../../../../src/api/index";
 
 describe("Captcha", () => {
-    test("get", async () => {
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -14,5 +15,23 @@ describe("Captcha", () => {
 
         const response = await client.voices.pvc.verification.captcha.get("21m00Tcm4TlvDq8ikWAM");
         expect(response).toEqual(undefined);
+    });
+
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/voices/pvc/voice_id/captcha")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.voices.pvc.verification.captcha.get("voice_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

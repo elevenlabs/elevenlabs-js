@@ -13,9 +13,7 @@ import * as ElevenLabs from "../../../../index";
  *     }
  */
 export interface StreamTextToSpeechRequest {
-    /**
-     * When enable_logging is set to false zero retention mode will be used for the request. This will mean history features are unavailable for this request, including request stitching. Zero retention mode may only be used by enterprise customers.
-     */
+    /** When enable_logging is set to false zero retention mode will be used for the request. This will mean history features are unavailable for this request, including request stitching. Zero retention mode may only be used by enterprise customers. */
     enableLogging?: boolean;
     /**
      * You can turn on latency optimizations at some cost of quality. The best possible final latency varies by model. Possible values:
@@ -28,9 +26,7 @@ export interface StreamTextToSpeechRequest {
      * Defaults to None.
      */
     optimizeStreamingLatency?: number;
-    /**
-     * Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
-     */
+    /** Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs. */
     outputFormat?: ElevenLabs.TextToSpeechStreamRequestOutputFormat;
     /** The text that will get converted into speech. */
     text: string;
@@ -55,7 +51,9 @@ export interface StreamTextToSpeechRequest {
     /** If true, we won't use PVC version of the voice for the generation but the IVC version. This is a temporary workaround for higher latency in PVC versions. */
     usePvcAsIvc?: boolean;
     /** This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped. For 'eleven_turbo_v2_5' and 'eleven_flash_v2_5' models, text normalization can only be enabled with Enterprise plans. */
-    applyTextNormalization?: ElevenLabs.BodyTextToSpeechStreamingV1TextToSpeechVoiceIdStreamPostApplyTextNormalization;
+    applyTextNormalization?: ElevenLabs.BodyTextToSpeechStreamApplyTextNormalization;
     /** This parameter controls language text normalization. This helps with proper pronunciation of text in some supported languages. WARNING: This parameter can heavily increase the latency of the request. Currently only supported for Japanese. */
     applyLanguageTextNormalization?: boolean;
+    /** HCaptcha token used to prevent spam, generated on the frontend either automatically or when the client solves the hCapctha challenge. */
+    hcaptchaToken?: string;
 }

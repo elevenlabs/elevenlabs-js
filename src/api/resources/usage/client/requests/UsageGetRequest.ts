@@ -8,36 +8,27 @@ import * as ElevenLabs from "../../../../index";
  * @example
  *     {
  *         startUnix: 1,
- *         endUnix: 1
+ *         endUnix: 1,
+ *         includeWorkspaceMetrics: true,
+ *         breakdownType: "none",
+ *         aggregationInterval: "hour",
+ *         aggregationBucketSize: 1,
+ *         metric: "credits"
  *     }
  */
 export interface UsageGetRequest {
-    /**
-     * UTC Unix timestamp for the start of the usage window, in milliseconds. To include the first day of the window, the timestamp should be at 00:00:00 of that day.
-     */
+    /** UTC Unix timestamp for the start of the usage window, in milliseconds. To include the first day of the window, the timestamp should be at 00:00:00 of that day. */
     startUnix: number;
-    /**
-     * UTC Unix timestamp for the end of the usage window, in milliseconds. To include the last day of the window, the timestamp should be at 23:59:59 of that day.
-     */
+    /** UTC Unix timestamp for the end of the usage window, in milliseconds. To include the last day of the window, the timestamp should be at 23:59:59 of that day. */
     endUnix: number;
-    /**
-     * Whether or not to include the statistics of the entire workspace.
-     */
+    /** Whether or not to include the statistics of the entire workspace. */
     includeWorkspaceMetrics?: boolean;
-    /**
-     * How to break down the information. Cannot be "user" if include_workspace_metrics is False.
-     */
+    /** How to break down the information. Cannot be "user" if include_workspace_metrics is False. */
     breakdownType?: ElevenLabs.BreakdownTypes;
-    /**
-     * How to aggregate usage data over time. Can be "hour", "day", "week", "month", or "cumulative".
-     */
+    /** How to aggregate usage data over time. Can be "hour", "day", "week", "month", or "cumulative". */
     aggregationInterval?: ElevenLabs.UsageAggregationInterval;
-    /**
-     * Aggregation bucket size in seconds. Overrides the aggregation interval.
-     */
+    /** Aggregation bucket size in seconds. Overrides the aggregation interval. */
     aggregationBucketSize?: number;
-    /**
-     * Which metric to aggregate.
-     */
+    /** Which metric to aggregate. */
     metric?: ElevenLabs.MetricType;
 }

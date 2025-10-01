@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../src/Client";
+import * as ElevenLabs from "../../src/api/index";
 
 describe("TextToVoice", () => {
-    test("create_previews", async () => {
+    test("create_previews (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { voice_description: "A sassy squeaky mouse" };
@@ -32,6 +33,7 @@ describe("TextToVoice", () => {
             .build();
 
         const response = await client.textToVoice.createPreviews({
+            outputFormat: "mp3_22050_32",
             voiceDescription: "A sassy squeaky mouse",
         });
         expect(response).toEqual({
@@ -48,7 +50,42 @@ describe("TextToVoice", () => {
         });
     });
 
-    test("create", async () => {
+    test("create_previews (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            voice_description: "blackcurrant........",
+            text: undefined,
+            auto_generate_text: undefined,
+            loudness: undefined,
+            quality: undefined,
+            seed: undefined,
+            guidance_scale: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/text-to-voice/create-previews")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.textToVoice.createPreviews({
+                voiceDescription: "blackcurrant........",
+                text: undefined,
+                autoGenerateText: undefined,
+                loudness: undefined,
+                quality: undefined,
+                seed: undefined,
+                guidanceScale: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
@@ -444,7 +481,38 @@ describe("TextToVoice", () => {
         });
     });
 
-    test("design", async () => {
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            voice_name: "voice_name",
+            voice_description: "blackcurrant........",
+            generated_voice_id: "generated_voice_id",
+            labels: undefined,
+            played_not_selected_voice_ids: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/text-to-voice")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.textToVoice.create({
+                voiceName: "voice_name",
+                voiceDescription: "blackcurrant........",
+                generatedVoiceId: "generated_voice_id",
+                labels: undefined,
+                playedNotSelectedVoiceIds: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("design (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { voice_description: "A sassy squeaky mouse" };
@@ -470,6 +538,7 @@ describe("TextToVoice", () => {
             .build();
 
         const response = await client.textToVoice.design({
+            outputFormat: "mp3_22050_32",
             voiceDescription: "A sassy squeaky mouse",
         });
         expect(response).toEqual({
@@ -486,7 +555,54 @@ describe("TextToVoice", () => {
         });
     });
 
-    test("remix", async () => {
+    test("design (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            voice_description: "blackcurrant........",
+            model_id: undefined,
+            text: undefined,
+            auto_generate_text: undefined,
+            loudness: undefined,
+            seed: undefined,
+            guidance_scale: undefined,
+            stream_previews: undefined,
+            remixing_session_id: undefined,
+            remixing_session_iteration_id: undefined,
+            quality: undefined,
+            reference_audio_base64: undefined,
+            prompt_strength: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/text-to-voice/design")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.textToVoice.design({
+                voiceDescription: "blackcurrant........",
+                modelId: undefined,
+                text: undefined,
+                autoGenerateText: undefined,
+                loudness: undefined,
+                seed: undefined,
+                guidanceScale: undefined,
+                streamPreviews: undefined,
+                remixingSessionId: undefined,
+                remixingSessionIterationId: undefined,
+                quality: undefined,
+                referenceAudioBase64: undefined,
+                promptStrength: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("remix (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { voice_description: "Make the voice have a higher pitch." };
@@ -512,6 +628,7 @@ describe("TextToVoice", () => {
             .build();
 
         const response = await client.textToVoice.remix("21m00Tcm4TlvDq8ikWAM", {
+            outputFormat: "mp3_22050_32",
             voiceDescription: "Make the voice have a higher pitch.",
         });
         expect(response).toEqual({
@@ -526,5 +643,46 @@ describe("TextToVoice", () => {
             ],
             text: "text",
         });
+    });
+
+    test("remix (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            voice_description: "alpha",
+            text: undefined,
+            auto_generate_text: undefined,
+            loudness: undefined,
+            seed: undefined,
+            guidance_scale: undefined,
+            stream_previews: undefined,
+            remixing_session_id: undefined,
+            remixing_session_iteration_id: undefined,
+            prompt_strength: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/text-to-voice/voice_id/remix")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.textToVoice.remix("voice_id", {
+                voiceDescription: "alpha",
+                text: undefined,
+                autoGenerateText: undefined,
+                loudness: undefined,
+                seed: undefined,
+                guidanceScale: undefined,
+                streamPreviews: undefined,
+                remixingSessionId: undefined,
+                remixingSessionIterationId: undefined,
+                promptStrength: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

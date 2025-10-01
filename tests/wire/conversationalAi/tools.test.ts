@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("Tools", () => {
-    test("list", async () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -15,12 +16,12 @@ describe("Tools", () => {
                 {
                     id: "id",
                     tool_config: {
+                        type: "client",
                         name: "name",
                         description: "description",
                         assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                         expects_response: false,
                         dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
-                        type: "client",
                     },
                     access_info: {
                         is_creator: true,
@@ -71,15 +72,28 @@ describe("Tools", () => {
         });
     });
 
-    test("create", async () => {
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server.mockEndpoint().get("/v1/convai/tools").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tools.list();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
-            tool_config: { name: "name", description: "description", expects_response: false, type: "client" },
+            tool_config: { type: "client", name: "name", description: "description", expects_response: false },
         };
         const rawResponseBody = {
             id: "id",
             tool_config: {
+                type: "client",
                 name: "name",
                 description: "description",
                 response_timeout_secs: 1,
@@ -101,7 +115,6 @@ describe("Tools", () => {
                 },
                 expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
-                type: "client",
             },
             access_info: {
                 is_creator: true,
@@ -177,13 +190,59 @@ describe("Tools", () => {
         });
     });
 
-    test("get", async () => {
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            tool_config: {
+                type: "client",
+                name: "name",
+                description: "description",
+                response_timeout_secs: undefined,
+                disable_interruptions: undefined,
+                force_pre_tool_speech: undefined,
+                assignments: undefined,
+                parameters: undefined,
+                expects_response: undefined,
+                dynamic_variables: undefined,
+            },
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/tools")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tools.create({
+                toolConfig: {
+                    type: "client",
+                    name: "name",
+                    description: "description",
+                    responseTimeoutSecs: undefined,
+                    disableInterruptions: undefined,
+                    forcePreToolSpeech: undefined,
+                    assignments: undefined,
+                    parameters: undefined,
+                    expectsResponse: undefined,
+                    dynamicVariables: undefined,
+                },
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             id: "id",
             tool_config: {
+                type: "client",
                 name: "name",
                 description: "description",
                 response_timeout_secs: 1,
@@ -205,7 +264,6 @@ describe("Tools", () => {
                 },
                 expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
-                type: "client",
             },
             access_info: {
                 is_creator: true,
@@ -273,7 +331,25 @@ describe("Tools", () => {
         });
     });
 
-    test("delete", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/tools/tool_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tools.get("tool_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -292,15 +368,34 @@ describe("Tools", () => {
         });
     });
 
-    test("update", async () => {
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/tools/tool_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tools.delete("tool_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
-            tool_config: { name: "name", description: "description", expects_response: false, type: "client" },
+            tool_config: { type: "client", name: "name", description: "description", expects_response: false },
         };
         const rawResponseBody = {
             id: "id",
             tool_config: {
+                type: "client",
                 name: "name",
                 description: "description",
                 response_timeout_secs: 1,
@@ -322,7 +417,6 @@ describe("Tools", () => {
                 },
                 expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
-                type: "client",
             },
             access_info: {
                 is_creator: true,
@@ -398,12 +492,57 @@ describe("Tools", () => {
         });
     });
 
-    test("get_dependent_agents", async () => {
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            tool_config: {
+                type: "client",
+                name: "name",
+                description: "description",
+                response_timeout_secs: undefined,
+                disable_interruptions: undefined,
+                force_pre_tool_speech: undefined,
+                assignments: undefined,
+                parameters: undefined,
+                expects_response: undefined,
+                dynamic_variables: undefined,
+            },
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .patch("/v1/convai/tools/tool_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tools.update("tool_id", {
+                toolConfig: {
+                    type: "client",
+                    name: "name",
+                    description: "description",
+                    responseTimeoutSecs: undefined,
+                    disableInterruptions: undefined,
+                    forcePreToolSpeech: undefined,
+                    assignments: undefined,
+                    parameters: undefined,
+                    expectsResponse: undefined,
+                    dynamicVariables: undefined,
+                },
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get_dependent_agents (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            agents: [{ id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin", type: "available" }],
+            agents: [{ type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" }],
             next_cursor: "next_cursor",
             has_more: true,
         };
@@ -415,7 +554,10 @@ describe("Tools", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.tools.getDependentAgents("tool_id");
+        const response = await client.conversationalAi.tools.getDependentAgents("tool_id", {
+            cursor: "cursor",
+            pageSize: 1,
+        });
         expect(response).toEqual({
             agents: [
                 {
@@ -429,5 +571,23 @@ describe("Tools", () => {
             nextCursor: "next_cursor",
             hasMore: true,
         });
+    });
+
+    test("get_dependent_agents (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/tools/tool_id/dependent-agents")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tools.getDependentAgents("tool_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../src/Client";
+import * as ElevenLabs from "../../src/api/index";
 
 describe("TextToSpeech", () => {
-    test("convert_with_timestamps", async () => {
+    test("convert_with_timestamps (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { text: "This is a test for the API of ElevenLabs." };
@@ -33,6 +34,9 @@ describe("TextToSpeech", () => {
             .build();
 
         const response = await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
+            enableLogging: true,
+            optimizeStreamingLatency: 1,
+            outputFormat: "mp3_22050_32",
             text: "This is a test for the API of ElevenLabs.",
         });
         expect(response).toEqual({
@@ -48,5 +52,54 @@ describe("TextToSpeech", () => {
                 characterEndTimesSeconds: [0.1, 0.2, 0.3, 0.4, 0.5],
             },
         });
+    });
+
+    test("convert_with_timestamps (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            text: "text",
+            model_id: undefined,
+            language_code: undefined,
+            voice_settings: undefined,
+            pronunciation_dictionary_locators: undefined,
+            seed: undefined,
+            previous_text: undefined,
+            next_text: undefined,
+            previous_request_ids: undefined,
+            next_request_ids: undefined,
+            use_pvc_as_ivc: undefined,
+            apply_text_normalization: undefined,
+            apply_language_text_normalization: undefined,
+            hcaptcha_token: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/text-to-speech/voice_id/with-timestamps")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.textToSpeech.convertWithTimestamps("voice_id", {
+                text: "text",
+                modelId: undefined,
+                languageCode: undefined,
+                voiceSettings: undefined,
+                pronunciationDictionaryLocators: undefined,
+                seed: undefined,
+                previousText: undefined,
+                nextText: undefined,
+                previousRequestIds: undefined,
+                nextRequestIds: undefined,
+                usePvcAsIvc: undefined,
+                applyTextNormalization: undefined,
+                applyLanguageTextNormalization: undefined,
+                hcaptchaToken: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

@@ -6,31 +6,26 @@ import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         cursor: "cursor",
+ *         pageSize: 1,
+ *         dubbingStatus: "dubbing",
+ *         filterByCreator: "personal",
+ *         orderBy: "created_at",
+ *         orderDirection: "DESCENDING"
+ *     }
  */
 export interface DubbingListRequest {
-    /**
-     * Used for fetching next page. Cursor is returned in the response.
-     */
+    /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
-    /**
-     * How many dubs to return at maximum. Can not exceed 200, defaults to 100.
-     */
+    /** How many dubs to return at maximum. Can not exceed 200, defaults to 100. */
     pageSize?: number;
-    /**
-     * What state the dub is currently in.
-     */
+    /** What state the dub is currently in. */
     dubbingStatus?: ElevenLabs.DubbingListRequestDubbingStatus;
-    /**
-     * Filters who created the resources being listed, whether it was the user running the request or someone else that shared the resource with them.
-     */
+    /** Filters who created the resources being listed, whether it was the user running the request or someone else that shared the resource with them. */
     filterByCreator?: ElevenLabs.DubbingListRequestFilterByCreator;
-    /**
-     * The field to use for ordering results from this query.
-     */
+    /** The field to use for ordering results from this query. */
     orderBy?: "created_at";
-    /**
-     * The order direction to use for results from this query.
-     */
+    /** The order direction to use for results from this query. */
     orderDirection?: ElevenLabs.DubbingListRequestOrderDirection;
 }

@@ -31,6 +31,7 @@ export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
     privacy: PrivacyConfig.optional(),
     workspaceOverrides: core.serialization.property("workspace_overrides", AgentWorkspaceOverridesInput.optional()),
     testing: AgentTestingSettings.optional(),
+    archived: core.serialization.boolean().optional(),
 });
 
 export declare namespace AgentPlatformSettingsRequestModel {
@@ -44,5 +45,6 @@ export declare namespace AgentPlatformSettingsRequestModel {
         privacy?: PrivacyConfig.Raw | null;
         workspace_overrides?: AgentWorkspaceOverridesInput.Raw | null;
         testing?: AgentTestingSettings.Raw | null;
+        archived?: boolean | null;
     }
 }

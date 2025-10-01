@@ -17,7 +17,7 @@ export declare namespace TextToSpeech {
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
         /** Additional headers to include in requests. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 
     export interface RequestOptions {
@@ -29,8 +29,10 @@ export declare namespace TextToSpeech {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional query string parameters to include in the request. */
+        queryParams?: Record<string, unknown>;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 }
 
@@ -47,7 +49,7 @@ export class TextToSpeech {
      */
     public convert(
         voiceId: string,
-        request: ElevenLabs.TextToSpeechRequest,
+        request: ElevenLabs.BodyTextToSpeechFull,
         requestOptions?: TextToSpeech.RequestOptions,
     ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(this.__convert(voiceId, request, requestOptions));
@@ -55,7 +57,7 @@ export class TextToSpeech {
 
     private async __convert(
         voiceId: string,
-        request: ElevenLabs.TextToSpeechRequest,
+        request: ElevenLabs.BodyTextToSpeechFull,
         requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
@@ -75,6 +77,11 @@ export class TextToSpeech {
             );
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -83,15 +90,11 @@ export class TextToSpeech {
                 `v1/text-to-speech/${encodeURIComponent(voiceId)}`,
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
-            queryParameters: _queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
-            body: serializers.TextToSpeechRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.BodyTextToSpeechFull.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
@@ -152,6 +155,9 @@ export class TextToSpeech {
      *
      * @example
      *     await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
+     *         enableLogging: true,
+     *         optimizeStreamingLatency: 1,
+     *         outputFormat: "mp3_22050_32",
      *         text: "This is a test for the API of ElevenLabs."
      *     })
      */
@@ -185,6 +191,11 @@ export class TextToSpeech {
                 });
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -193,13 +204,9 @@ export class TextToSpeech {
                 `v1/text-to-speech/${encodeURIComponent(voiceId)}/with-timestamps`,
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
-            queryParameters: _queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.BodyTextToSpeechFullWithTimestamps.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -294,6 +301,11 @@ export class TextToSpeech {
             );
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -302,13 +314,9 @@ export class TextToSpeech {
                 `v1/text-to-speech/${encodeURIComponent(voiceId)}/stream`,
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
-            queryParameters: _queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.StreamTextToSpeechRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
@@ -393,6 +401,11 @@ export class TextToSpeech {
             );
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher<ReadableStream>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -401,13 +414,9 @@ export class TextToSpeech {
                 `v1/text-to-speech/${encodeURIComponent(voiceId)}/stream/with-timestamps`,
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
-            queryParameters: _queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.StreamTextToSpeechWithTimestampsRequest.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",

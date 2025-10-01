@@ -13,4 +13,6 @@ export interface InboundSipTrunkConfigRequestModel {
     mediaEncryption?: ElevenLabs.SipMediaEncryptionEnum;
     /** Optional digest authentication credentials (username/password). */
     credentials?: ElevenLabs.SipTrunkCredentialsRequestModel;
+    /** Domains of remote SIP servers used to validate TLS certificates. */
+    remoteDomains?: string[];
 }

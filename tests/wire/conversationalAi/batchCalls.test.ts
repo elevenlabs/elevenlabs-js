@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("BatchCalls", () => {
-    test("create", async () => {
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
@@ -64,7 +65,52 @@ describe("BatchCalls", () => {
         });
     });
 
-    test("list", async () => {
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            call_name: "call_name",
+            agent_id: "agent_id",
+            agent_phone_number_id: "agent_phone_number_id",
+            recipients: [
+                { id: undefined, phone_number: "phone_number", conversation_initiation_client_data: undefined },
+                { id: undefined, phone_number: "phone_number", conversation_initiation_client_data: undefined },
+            ],
+            scheduled_time_unix: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/batch-calling/submit")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.batchCalls.create({
+                callName: "call_name",
+                agentId: "agent_id",
+                agentPhoneNumberId: "agent_phone_number_id",
+                recipients: [
+                    {
+                        id: undefined,
+                        phoneNumber: "phone_number",
+                        conversationInitiationClientData: undefined,
+                    },
+                    {
+                        id: undefined,
+                        phoneNumber: "phone_number",
+                        conversationInitiationClientData: undefined,
+                    },
+                ],
+                scheduledTimeUnix: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -96,7 +142,10 @@ describe("BatchCalls", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.batchCalls.list();
+        const response = await client.conversationalAi.batchCalls.list({
+            limit: 1,
+            lastDoc: "last_doc",
+        });
         expect(response).toEqual({
             batchCalls: [
                 {
@@ -119,7 +168,25 @@ describe("BatchCalls", () => {
         });
     });
 
-    test("get", async () => {
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/batch-calling/workspace")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.batchCalls.list();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -211,7 +278,25 @@ describe("BatchCalls", () => {
         });
     });
 
-    test("cancel", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/batch-calling/batch_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.batchCalls.get("batch_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("cancel (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -254,7 +339,25 @@ describe("BatchCalls", () => {
         });
     });
 
-    test("retry", async () => {
+    test("cancel (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/batch-calling/batch_id/cancel")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.batchCalls.cancel("batch_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("retry (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -295,5 +398,23 @@ describe("BatchCalls", () => {
             status: "pending",
             agentName: "agent_name",
         });
+    });
+
+    test("retry (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/batch-calling/batch_id/retry")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.batchCalls.retry("batch_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });
