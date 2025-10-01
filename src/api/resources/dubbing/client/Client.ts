@@ -68,7 +68,14 @@ export class Dubbing {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.dubbing.list()
+     *     await client.dubbing.list({
+     *         cursor: "cursor",
+     *         pageSize: 1,
+     *         dubbingStatus: "dubbing",
+     *         filterByCreator: "personal",
+     *         orderBy: "created_at",
+     *         orderDirection: "DESCENDING"
+     *     })
      */
     public list(
         request: ElevenLabs.DubbingListRequest = {},
@@ -278,7 +285,10 @@ export class Dubbing {
         }
 
         if (request.mode != null) {
-            _request.append("mode", request.mode);
+            _request.append(
+                "mode",
+                serializers.DubbingCreateRequestMode.jsonOrThrow(request.mode, { unrecognizedObjectKeys: "strip" }),
+            );
         }
 
         if (request.csvFps != null) {

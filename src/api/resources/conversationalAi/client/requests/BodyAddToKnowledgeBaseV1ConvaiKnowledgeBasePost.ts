@@ -6,7 +6,9 @@ import * as core from "../../../../../core";
 
 /**
  * @example
- *     {}
+ *     {
+ *         agentId: "agent_id"
+ *     }
  */
 export interface BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost {
     agentId?: string;

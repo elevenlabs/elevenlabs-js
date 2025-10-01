@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         conversationSignature: "conversation_signature"
+ *     }
  */
 export interface WidgetGetRequest {
     /**

@@ -22,6 +22,11 @@ describe("Usage", () => {
         const response = await client.usage.get({
             startUnix: 1,
             endUnix: 1,
+            includeWorkspaceMetrics: true,
+            breakdownType: "none",
+            aggregationInterval: "hour",
+            aggregationBucketSize: 1,
+            metric: "credits",
         });
         expect(response).toEqual({
             time: [1738252091000, 1739404800000],

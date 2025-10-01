@@ -12,10 +12,15 @@ export const WorkflowStartNodeModel: core.serialization.ObjectSchema<
     ElevenLabs.WorkflowStartNodeModel
 > = core.serialization.object({
     position: Position.optional(),
+    edgeOrder: core.serialization.property(
+        "edge_order",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace WorkflowStartNodeModel {
     export interface Raw {
         position?: Position.Raw | null;
+        edge_order?: string[] | null;
     }
 }

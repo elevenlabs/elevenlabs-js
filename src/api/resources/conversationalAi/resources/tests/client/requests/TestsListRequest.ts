@@ -4,7 +4,11 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         cursor: "cursor",
+ *         pageSize: 1,
+ *         search: "search"
+ *     }
  */
 export interface TestsListRequest {
     /**

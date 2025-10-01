@@ -22,6 +22,10 @@ export const GetPhoneNumberInboundSipTrunkConfigResponseModel: core.serializatio
     mediaEncryption: core.serialization.property("media_encryption", SipMediaEncryptionEnum),
     hasAuthCredentials: core.serialization.property("has_auth_credentials", core.serialization.boolean()),
     username: core.serialization.string().optional(),
+    remoteDomains: core.serialization.property(
+        "remote_domains",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace GetPhoneNumberInboundSipTrunkConfigResponseModel {
@@ -31,5 +35,6 @@ export declare namespace GetPhoneNumberInboundSipTrunkConfigResponseModel {
         media_encryption: SipMediaEncryptionEnum.Raw;
         has_auth_credentials: boolean;
         username?: string | null;
+        remote_domains?: string[] | null;
     }
 }

@@ -5,7 +5,8 @@
 /**
  * @example
  *     {
- *         agentId: "21m00Tcm4TlvDq8ikWAM"
+ *         agentId: "21m00Tcm4TlvDq8ikWAM",
+ *         participantName: "participant_name"
  *     }
  */
 export interface ConversationsGetWebrtcTokenRequest {

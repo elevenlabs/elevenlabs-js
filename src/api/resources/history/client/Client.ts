@@ -50,7 +50,17 @@ export class History {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.history.list()
+     *     await client.history.list({
+     *         pageSize: 1,
+     *         startAfterHistoryItemId: "start_after_history_item_id",
+     *         voiceId: "voice_id",
+     *         modelId: "model_id",
+     *         dateBeforeUnix: 1,
+     *         dateAfterUnix: 1,
+     *         sortDirection: "asc",
+     *         search: "search",
+     *         source: "TTS"
+     *     })
      */
     public list(
         request: ElevenLabs.HistoryListRequest = {},

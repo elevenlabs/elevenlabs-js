@@ -7,8 +7,22 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
+ *         pageSize: 1,
+ *         category: "professional",
+ *         gender: "gender",
+ *         age: "age",
+ *         accent: "accent",
+ *         language: "language",
+ *         locale: "locale",
+ *         search: "search",
  *         featured: true,
- *         readerAppEnabled: true
+ *         minNoticePeriodDays: 1,
+ *         includeCustomRates: true,
+ *         includeLiveModerated: true,
+ *         readerAppEnabled: true,
+ *         ownerId: "owner_id",
+ *         sort: "sort",
+ *         page: 1
  *     }
  */
 export interface VoicesGetSharedRequest {

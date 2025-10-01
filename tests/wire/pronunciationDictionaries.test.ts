@@ -158,7 +158,12 @@ describe("PronunciationDictionaries", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.pronunciationDictionaries.list();
+        const response = await client.pronunciationDictionaries.list({
+            cursor: "cursor",
+            pageSize: 1,
+            sort: "creation_time_unix",
+            sortDirection: "sort_direction",
+        });
         expect(response).toEqual({
             pronunciationDictionaries: [
                 {

@@ -6,7 +6,14 @@ import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         cursor: "cursor",
+ *         pageSize: 1,
+ *         dubbingStatus: "dubbing",
+ *         filterByCreator: "personal",
+ *         orderBy: "created_at",
+ *         orderDirection: "DESCENDING"
+ *     }
  */
 export interface DubbingListRequest {
     /**

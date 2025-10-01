@@ -4,7 +4,10 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         cursor: "cursor",
+ *         pageSize: 1
+ *     }
  */
 export interface DocumentsGetAgentsRequest {
     /**

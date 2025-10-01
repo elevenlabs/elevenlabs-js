@@ -440,7 +440,13 @@ export class Agents {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.list()
+     *     await client.conversationalAi.agents.list({
+     *         pageSize: 1,
+     *         search: "search",
+     *         sortDirection: "asc",
+     *         sortBy: "name",
+     *         cursor: "cursor"
+     *     })
      */
     public list(
         request: ElevenLabs.conversationalAi.AgentsListRequest = {},

@@ -39,5 +39,7 @@ export interface UpdateUnitTestRequest {
         ElevenLabs.conversationalAi.UpdateUnitTestRequestDynamicVariablesValue | undefined
     >;
     type?: ElevenLabs.UnitTestCommonModelType;
+    /** Metadata of a conversation this test was created from (if applicable). */
+    fromConversationMetadata?: ElevenLabs.TestFromConversationMetadataInput;
     name: string;
 }

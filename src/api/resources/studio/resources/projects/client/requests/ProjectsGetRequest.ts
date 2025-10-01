@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         shareId: "share_id"
+ *     }
  */
 export interface ProjectsGetRequest {
     /**

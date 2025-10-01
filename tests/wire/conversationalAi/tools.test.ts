@@ -415,7 +415,10 @@ describe("Tools", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.tools.getDependentAgents("tool_id");
+        const response = await client.conversationalAi.tools.getDependentAgents("tool_id", {
+            cursor: "cursor",
+            pageSize: 1,
+        });
         expect(response).toEqual({
             agents: [
                 {

@@ -8,11 +8,13 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
+ *         enableLogging: true,
  *         modelId: "model_id"
  *     }
  *
  * @example
  *     {
+ *         enableLogging: true,
  *         modelId: "model_id"
  *     }
  */

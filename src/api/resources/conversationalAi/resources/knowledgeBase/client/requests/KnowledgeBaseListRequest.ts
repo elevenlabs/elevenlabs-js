@@ -6,7 +6,15 @@ import * as ElevenLabs from "../../../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         pageSize: 1,
+ *         search: "search",
+ *         showOnlyOwnedDocuments: true,
+ *         sortDirection: "asc",
+ *         sortBy: "name",
+ *         useTypesense: true,
+ *         cursor: "cursor"
+ *     }
  */
 export interface KnowledgeBaseListRequest {
     /**

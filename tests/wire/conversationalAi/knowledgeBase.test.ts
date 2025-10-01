@@ -40,7 +40,15 @@ describe("KnowledgeBase", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.knowledgeBase.list();
+        const response = await client.conversationalAi.knowledgeBase.list({
+            pageSize: 1,
+            search: "search",
+            showOnlyOwnedDocuments: true,
+            sortDirection: "asc",
+            sortBy: "name",
+            useTypesense: true,
+            cursor: "cursor",
+        });
         expect(response).toEqual({
             documents: [
                 {

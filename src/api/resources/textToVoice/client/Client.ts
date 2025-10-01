@@ -57,6 +57,7 @@ export class TextToVoice {
      *
      * @example
      *     await client.textToVoice.createPreviews({
+     *         outputFormat: "mp3_22050_32",
      *         voiceDescription: "A sassy squeaky mouse"
      *     })
      */
@@ -261,6 +262,7 @@ export class TextToVoice {
      *
      * @example
      *     await client.textToVoice.design({
+     *         outputFormat: "mp3_22050_32",
      *         voiceDescription: "A sassy squeaky mouse"
      *     })
      */
@@ -365,6 +367,7 @@ export class TextToVoice {
      *
      * @example
      *     await client.textToVoice.remix("21m00Tcm4TlvDq8ikWAM", {
+     *         outputFormat: "mp3_22050_32",
      *         voiceDescription: "Make the voice have a higher pitch."
      *     })
      */

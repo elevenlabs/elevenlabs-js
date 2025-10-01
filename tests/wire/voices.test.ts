@@ -135,7 +135,9 @@ describe("Voices", () => {
         };
         server.mockEndpoint().get("/v1/voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.voices.getAll();
+        const response = await client.voices.getAll({
+            showLegacy: true,
+        });
         expect(response).toEqual({
             voices: [
                 {
@@ -410,6 +412,15 @@ describe("Voices", () => {
         server.mockEndpoint().get("/v2/voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.voices.search({
+            nextPageToken: "next_page_token",
+            pageSize: 1,
+            search: "search",
+            sort: "sort",
+            sortDirection: "sort_direction",
+            voiceType: "voice_type",
+            category: "category",
+            fineTuningState: "fine_tuning_state",
+            collectionId: "collection_id",
             includeTotalCount: true,
         });
         expect(response).toEqual({
@@ -743,7 +754,9 @@ describe("Voices", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.voices.get("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
+            withSettings: true,
+        });
         expect(response).toEqual({
             voiceId: "21m00Tcm4TlvDq8ikWAM",
             name: "Rachel",
@@ -1046,8 +1059,22 @@ describe("Voices", () => {
         server.mockEndpoint().get("/v1/shared-voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.voices.getShared({
+            pageSize: 1,
+            category: "professional",
+            gender: "gender",
+            age: "age",
+            accent: "accent",
+            language: "language",
+            locale: "locale",
+            search: "search",
             featured: true,
+            minNoticePeriodDays: 1,
+            includeCustomRates: true,
+            includeLiveModerated: true,
             readerAppEnabled: true,
+            ownerId: "owner_id",
+            sort: "sort",
+            page: 1,
         });
         expect(response).toEqual({
             voices: [

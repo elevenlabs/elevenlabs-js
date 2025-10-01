@@ -6,7 +6,12 @@ import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         cursor: "cursor",
+ *         pageSize: 1,
+ *         sort: "creation_time_unix",
+ *         sortDirection: "sort_direction"
+ *     }
  */
 export interface PronunciationDictionariesListRequest {
     /**
