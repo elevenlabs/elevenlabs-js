@@ -13,13 +13,6 @@ export declare namespace ElevenLabsClient {
          */
         apiKey?: core.Supplier<string>;
     }
-
-    interface GeneratAudioBulk extends ElevenLabs.TextToSpeechRequest {}
-
-    interface GenerateAudioStream extends ElevenLabs.StreamTextToSpeechRequest {
-        /* Specify stream: true if you would like to get the audio in chunks */
-        stream: true;
-    }
 }
 
 export class ElevenLabsClient extends FernClient {
