@@ -12,3 +12,4 @@ src/index.ts
 .npmignore
 
 src/api/resources/conversationalAi/conversation
+tests/wire/conversationalAi/mcpServers/tools.test.ts

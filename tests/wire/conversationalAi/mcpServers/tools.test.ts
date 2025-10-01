@@ -26,7 +26,8 @@ describe("Tools", () => {
                         type: "object",
                     },
                     outputSchema: { key: "value" },
-                    _meta: { key: "value" },
+                    // TODO: Fern to fix _meta vs meta inconsistency
+                    meta: { key: "value" },
                 },
                 {
                     name: "tool2",
@@ -34,7 +35,8 @@ describe("Tools", () => {
                     description: "Description of tool2",
                     inputSchema: { properties: {}, type: "object" },
                     outputSchema: { key: "value" },
-                    _meta: { key: "value" },
+                    // TODO: Fern to fix _meta vs meta inconsistency
+                    meta: { key: "value" },
                 },
             ],
             error_message: "error_message",
