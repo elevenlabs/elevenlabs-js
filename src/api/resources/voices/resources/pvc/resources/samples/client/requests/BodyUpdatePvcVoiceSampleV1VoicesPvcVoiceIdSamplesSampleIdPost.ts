@@ -15,4 +15,6 @@ export interface BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost {
     trimStartTime?: number;
     /** The end time of the audio to be used for PVC training. Time should be in milliseconds */
     trimEndTime?: number;
+    /** The name of the audio file to be used for PVC training. */
+    fileName?: string;
 }

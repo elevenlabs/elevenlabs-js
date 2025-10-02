@@ -52,7 +52,12 @@ export class Usage {
      * @example
      *     await client.usage.get({
      *         startUnix: 1,
-     *         endUnix: 1
+     *         endUnix: 1,
+     *         includeWorkspaceMetrics: true,
+     *         breakdownType: "none",
+     *         aggregationInterval: "hour",
+     *         aggregationBucketSize: 1,
+     *         metric: "credits"
      *     })
      */
     public get(

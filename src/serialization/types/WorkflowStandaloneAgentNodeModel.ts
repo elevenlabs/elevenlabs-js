@@ -12,6 +12,10 @@ export const WorkflowStandaloneAgentNodeModel: core.serialization.ObjectSchema<
     ElevenLabs.WorkflowStandaloneAgentNodeModel
 > = core.serialization.object({
     position: Position.optional(),
+    edgeOrder: core.serialization.property(
+        "edge_order",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     delayMs: core.serialization.property("delay_ms", core.serialization.number().optional()),
     transferMessage: core.serialization.property("transfer_message", core.serialization.string().optional()),
@@ -24,6 +28,7 @@ export const WorkflowStandaloneAgentNodeModel: core.serialization.ObjectSchema<
 export declare namespace WorkflowStandaloneAgentNodeModel {
     export interface Raw {
         position?: Position.Raw | null;
+        edge_order?: string[] | null;
         agent_id: string;
         delay_ms?: number | null;
         transfer_message?: string | null;

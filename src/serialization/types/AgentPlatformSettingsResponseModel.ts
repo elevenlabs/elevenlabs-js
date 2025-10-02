@@ -32,6 +32,7 @@ export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema
     privacy: PrivacyConfig.optional(),
     workspaceOverrides: core.serialization.property("workspace_overrides", AgentWorkspaceOverridesOutput.optional()),
     testing: AgentTestingSettings.optional(),
+    archived: core.serialization.boolean().optional(),
     safety: SafetyResponseModel.optional(),
 });
 
@@ -46,6 +47,7 @@ export declare namespace AgentPlatformSettingsResponseModel {
         privacy?: PrivacyConfig.Raw | null;
         workspace_overrides?: AgentWorkspaceOverridesOutput.Raw | null;
         testing?: AgentTestingSettings.Raw | null;
+        archived?: boolean | null;
         safety?: SafetyResponseModel.Raw | null;
     }
 }

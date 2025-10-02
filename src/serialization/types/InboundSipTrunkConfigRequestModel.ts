@@ -22,6 +22,10 @@ export const InboundSipTrunkConfigRequestModel: core.serialization.ObjectSchema<
     ),
     mediaEncryption: core.serialization.property("media_encryption", SipMediaEncryptionEnum.optional()),
     credentials: SipTrunkCredentialsRequestModel.optional(),
+    remoteDomains: core.serialization.property(
+        "remote_domains",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace InboundSipTrunkConfigRequestModel {
@@ -30,5 +34,6 @@ export declare namespace InboundSipTrunkConfigRequestModel {
         allowed_numbers?: string[] | null;
         media_encryption?: SipMediaEncryptionEnum.Raw | null;
         credentials?: SipTrunkCredentialsRequestModel.Raw | null;
+        remote_domains?: string[] | null;
     }
 }

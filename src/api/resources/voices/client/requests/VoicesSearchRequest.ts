@@ -5,6 +5,15 @@
 /**
  * @example
  *     {
+ *         nextPageToken: "next_page_token",
+ *         pageSize: 1,
+ *         search: "search",
+ *         sort: "sort",
+ *         sortDirection: "sort_direction",
+ *         voiceType: "voice_type",
+ *         category: "category",
+ *         fineTuningState: "fine_tuning_state",
+ *         collectionId: "collection_id",
  *         includeTotalCount: true
  *     }
  */

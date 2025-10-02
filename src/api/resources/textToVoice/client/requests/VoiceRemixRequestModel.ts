@@ -7,6 +7,7 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
+ *         outputFormat: "mp3_22050_32",
  *         voiceDescription: "Make the voice have a higher pitch."
  *     }
  */

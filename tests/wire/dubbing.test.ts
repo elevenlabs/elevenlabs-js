@@ -28,7 +28,14 @@ describe("Dubbing", () => {
         };
         server.mockEndpoint().get("/v1/dubbing").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.dubbing.list();
+        const response = await client.dubbing.list({
+            cursor: "cursor",
+            pageSize: 1,
+            dubbingStatus: "dubbing",
+            filterByCreator: "personal",
+            orderBy: "created_at",
+            orderDirection: "DESCENDING",
+        });
         expect(response).toEqual({
             dubs: [
                 {

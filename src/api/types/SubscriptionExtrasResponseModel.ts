@@ -9,6 +9,8 @@ export interface SubscriptionExtrasResponseModel {
     concurrency: number;
     /** The Convai concurrency of the user. */
     convaiConcurrency: number;
+    /** The Music concurrency of the user on enterprise plan. */
+    enterpriseMusicConcurrency?: number;
     /** The Convai characters per minute of the user. This field is deprecated and will always return None. */
     convaiCharsPerMinute?: number;
     /** The Convai ASR characters per minute of the user. This field is deprecated and will always return None. */

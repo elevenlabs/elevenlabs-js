@@ -20,4 +20,6 @@ export interface McpServerConfigInput {
     description?: string;
     /** If true, all tools from this MCP server will require pre-tool execution speech */
     forcePreToolSpeech?: boolean;
+    /** If true, the user will not be able to interrupt the agent while tools from this MCP server are running */
+    disableInterruptions?: boolean;
 }

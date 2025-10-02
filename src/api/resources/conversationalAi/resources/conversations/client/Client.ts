@@ -63,7 +63,8 @@ export class Conversations {
      *
      * @example
      *     await client.conversationalAi.conversations.getSignedUrl({
-     *         agentId: "21m00Tcm4TlvDq8ikWAM"
+     *         agentId: "21m00Tcm4TlvDq8ikWAM",
+     *         includeConversationId: true
      *     })
      */
     public getSignedUrl(
@@ -164,7 +165,8 @@ export class Conversations {
      *
      * @example
      *     await client.conversationalAi.conversations.getWebrtcToken({
-     *         agentId: "21m00Tcm4TlvDq8ikWAM"
+     *         agentId: "21m00Tcm4TlvDq8ikWAM",
+     *         participantName: "participant_name"
      *     })
      */
     public getWebrtcToken(
@@ -264,7 +266,16 @@ export class Conversations {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.conversations.list()
+     *     await client.conversationalAi.conversations.list({
+     *         cursor: "cursor",
+     *         agentId: "agent_id",
+     *         callSuccessful: "success",
+     *         callStartBeforeUnix: 1,
+     *         callStartAfterUnix: 1,
+     *         userId: "user_id",
+     *         pageSize: 1,
+     *         summaryMode: "exclude"
+     *     })
      */
     public list(
         request: ElevenLabs.conversationalAi.ConversationsListRequest = {},

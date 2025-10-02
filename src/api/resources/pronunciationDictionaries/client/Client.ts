@@ -547,7 +547,12 @@ export class PronunciationDictionaries {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.pronunciationDictionaries.list()
+     *     await client.pronunciationDictionaries.list({
+     *         cursor: "cursor",
+     *         pageSize: 1,
+     *         sort: "creation_time_unix",
+     *         sortDirection: "sort_direction"
+     *     })
      */
     public list(
         request: ElevenLabs.PronunciationDictionariesListRequest = {},

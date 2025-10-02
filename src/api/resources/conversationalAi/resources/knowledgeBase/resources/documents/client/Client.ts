@@ -359,7 +359,9 @@ export class Documents {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM")
+     *     await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM", {
+     *         agentId: "agent_id"
+     *     })
      */
     public get(
         documentationId: string,
@@ -460,7 +462,9 @@ export class Documents {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikWAM")
+     *     await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikWAM", {
+     *         force: true
+     *     })
      */
     public delete(
         documentationId: string,
@@ -655,7 +659,10 @@ export class Documents {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8ikWAM")
+     *     await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8ikWAM", {
+     *         cursor: "cursor",
+     *         pageSize: 1
+     *     })
      */
     public getAgents(
         documentationId: string,

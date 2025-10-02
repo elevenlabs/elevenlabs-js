@@ -18,6 +18,11 @@ export const ConversationChargingCommonModel: core.serialization.ObjectSchema<
     llmPrice: core.serialization.property("llm_price", core.serialization.number().optional()),
     llmCharge: core.serialization.property("llm_charge", core.serialization.number().optional()),
     callCharge: core.serialization.property("call_charge", core.serialization.number().optional()),
+    freeMinutesConsumed: core.serialization.property("free_minutes_consumed", core.serialization.number().optional()),
+    freeLlmDollarsConsumed: core.serialization.property(
+        "free_llm_dollars_consumed",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace ConversationChargingCommonModel {
@@ -29,5 +34,7 @@ export declare namespace ConversationChargingCommonModel {
         llm_price?: number | null;
         llm_charge?: number | null;
         call_charge?: number | null;
+        free_minutes_consumed?: number | null;
+        free_llm_dollars_consumed?: number | null;
     }
 }

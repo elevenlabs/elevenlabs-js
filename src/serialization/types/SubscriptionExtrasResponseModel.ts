@@ -14,6 +14,10 @@ export const SubscriptionExtrasResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     concurrency: core.serialization.number(),
     convaiConcurrency: core.serialization.property("convai_concurrency", core.serialization.number()),
+    enterpriseMusicConcurrency: core.serialization.property(
+        "enterprise_music_concurrency",
+        core.serialization.number().optional(),
+    ),
     convaiCharsPerMinute: core.serialization.property(
         "convai_chars_per_minute",
         core.serialization.number().optional(),
@@ -44,6 +48,7 @@ export declare namespace SubscriptionExtrasResponseModel {
     export interface Raw {
         concurrency: number;
         convai_concurrency: number;
+        enterprise_music_concurrency?: number | null;
         convai_chars_per_minute?: number | null;
         convai_asr_chars_per_minute?: number | null;
         force_logging_disabled: boolean;

@@ -154,7 +154,10 @@ export class BatchCalls {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.batchCalls.list()
+     *     await client.conversationalAi.batchCalls.list({
+     *         limit: 1,
+     *         lastDoc: "last_doc"
+     *     })
      */
     public list(
         request: ElevenLabs.conversationalAi.BatchCallsListRequest = {},

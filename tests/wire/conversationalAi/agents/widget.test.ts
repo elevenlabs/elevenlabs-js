@@ -111,7 +111,9 @@ describe("Widget", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.widget.get("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.conversationalAi.agents.widget.get("21m00Tcm4TlvDq8ikWAM", {
+            conversationSignature: "conversation_signature",
+        });
         expect(response).toEqual({
             agentId: "agent_id",
             widgetConfig: {

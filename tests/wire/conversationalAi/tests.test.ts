@@ -63,7 +63,9 @@ describe("Tests", () => {
                     role: "user",
                     agent_metadata: { agent_id: "agent_id" },
                     message: "message",
-                    multivoice_message: { parts: [{ text: "text" }] },
+                    multivoice_message: {
+                        parts: [{ text: "text", voice_label: undefined, time_in_call_secs: undefined }],
+                    },
                     tool_calls: [
                         {
                             request_id: "request_id",
@@ -105,6 +107,12 @@ describe("Tests", () => {
             },
             dynamic_variables: { key: "value" },
             type: "llm",
+            from_conversation_metadata: {
+                conversation_id: "conversation_id",
+                agent_id: "agent_id",
+                workflow_node_id: "workflow_node_id",
+                original_agent_reply: [{ role: "user", time_in_call_secs: 1 }],
+            },
             id: "id",
             name: "name",
         };
@@ -129,6 +137,8 @@ describe("Tests", () => {
                         parts: [
                             {
                                 text: "text",
+                                voiceLabel: undefined,
+                                timeInCallSecs: undefined,
                             },
                         ],
                     },
@@ -204,6 +214,17 @@ describe("Tests", () => {
                 key: "value",
             },
             type: "llm",
+            fromConversationMetadata: {
+                conversationId: "conversation_id",
+                agentId: "agent_id",
+                workflowNodeId: "workflow_node_id",
+                originalAgentReply: [
+                    {
+                        role: "user",
+                        timeInCallSecs: 1,
+                    },
+                ],
+            },
             id: "id",
             name: "name",
         });
@@ -225,7 +246,9 @@ describe("Tests", () => {
                     role: "user",
                     agent_metadata: { agent_id: "agent_id" },
                     message: "message",
-                    multivoice_message: { parts: [{ text: "text" }] },
+                    multivoice_message: {
+                        parts: [{ text: "text", voice_label: undefined, time_in_call_secs: undefined }],
+                    },
                     tool_calls: [
                         {
                             request_id: "request_id",
@@ -267,6 +290,12 @@ describe("Tests", () => {
             },
             dynamic_variables: { key: "value" },
             type: "llm",
+            from_conversation_metadata: {
+                conversation_id: "conversation_id",
+                agent_id: "agent_id",
+                workflow_node_id: "workflow_node_id",
+                original_agent_reply: [{ role: "user", time_in_call_secs: 1 }],
+            },
             id: "id",
             name: "name",
         };
@@ -313,6 +342,8 @@ describe("Tests", () => {
                         parts: [
                             {
                                 text: "text",
+                                voiceLabel: undefined,
+                                timeInCallSecs: undefined,
                             },
                         ],
                     },
@@ -388,6 +419,17 @@ describe("Tests", () => {
                 key: "value",
             },
             type: "llm",
+            fromConversationMetadata: {
+                conversationId: "conversation_id",
+                agentId: "agent_id",
+                workflowNodeId: "workflow_node_id",
+                originalAgentReply: [
+                    {
+                        role: "user",
+                        timeInCallSecs: 1,
+                    },
+                ],
+            },
             id: "id",
             name: "name",
         });
@@ -495,7 +537,11 @@ describe("Tests", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.tests.list();
+        const response = await client.conversationalAi.tests.list({
+            cursor: "cursor",
+            pageSize: 1,
+            search: "search",
+        });
         expect(response).toEqual({
             tests: [
                 {

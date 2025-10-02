@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         showLegacy: true
+ *     }
  */
 export interface VoicesGetAllRequest {
     /**

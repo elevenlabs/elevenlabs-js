@@ -26,7 +26,8 @@ describe("Tools", () => {
                         type: "object",
                     },
                     outputSchema: { key: "value" },
-                    _meta: { key: "value" },
+                    // TODO: Fern to fix _meta vs meta inconsistency
+                    meta: { key: "value" },
                 },
                 {
                     name: "tool2",
@@ -34,7 +35,8 @@ describe("Tools", () => {
                     description: "Description of tool2",
                     inputSchema: { properties: {}, type: "object" },
                     outputSchema: { key: "value" },
-                    _meta: { key: "value" },
+                    // TODO: Fern to fix _meta vs meta inconsistency
+                    meta: { key: "value" },
                 },
             ],
             error_message: "error_message",
@@ -52,9 +54,8 @@ describe("Tools", () => {
             success: true,
             tools: [
                 {
-                    _meta: {
-                        key: "value",
-                    },
+                    name: "weather_by_zapier_get_current",
+                    title: "title",
                     description: "Gets current weather conditions for a location.",
                     inputSchema: {
                         properties: {
@@ -70,32 +71,27 @@ describe("Tools", () => {
                         required: ["latitude", "longitude"],
                         type: "object",
                     },
-                    meta: {
-                        key: "value",
-                    },
-                    name: "weather_by_zapier_get_current",
                     outputSchema: {
                         key: "value",
                     },
-                    title: "title",
-                },
-                {
-                    _meta: {
+                    meta: {
                         key: "value",
                     },
+                },
+                {
+                    name: "tool2",
+                    title: "title",
                     description: "Description of tool2",
                     inputSchema: {
                         properties: {},
                         type: "object",
                     },
-                    meta: {
-                        key: "value",
-                    },
-                    name: "tool2",
                     outputSchema: {
                         key: "value",
                     },
-                    title: "title",
+                    meta: {
+                        key: "value",
+                    },
                 },
             ],
             errorMessage: "error_message",

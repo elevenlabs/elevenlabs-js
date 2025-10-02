@@ -58,6 +58,7 @@ export class SpeechToText {
      *
      * @example
      *     await client.speechToText.convert({
+     *         enableLogging: true,
      *         modelId: "model_id"
      *     })
      */

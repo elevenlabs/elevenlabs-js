@@ -11,26 +11,28 @@ export const BodyComposeMusicV1MusicPost: core.serialization.Schema<
     serializers.BodyComposeMusicV1MusicPost.Raw,
     Omit<ElevenLabs.BodyComposeMusicV1MusicPost, "outputFormat">
 > = core.serialization.object({
-    respectSectionsDurations: core.serialization.property(
-        "respect_sections_durations",
-        core.serialization.boolean().optional(),
-    ),
     prompt: core.serialization.string().optional(),
     musicPrompt: core.serialization.property("music_prompt", MusicPrompt.optional()),
     compositionPlan: core.serialization.property("composition_plan", MusicPrompt.optional()),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
     modelId: core.serialization.property("model_id", core.serialization.stringLiteral("music_v1").optional()),
     seed: core.serialization.number().optional(),
+    forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
+    respectSectionsDurations: core.serialization.property(
+        "respect_sections_durations",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace BodyComposeMusicV1MusicPost {
     export interface Raw {
-        respect_sections_durations?: boolean | null;
         prompt?: string | null;
         music_prompt?: MusicPrompt.Raw | null;
         composition_plan?: MusicPrompt.Raw | null;
         music_length_ms?: number | null;
         model_id?: "music_v1" | null;
         seed?: number | null;
+        force_instrumental?: boolean | null;
+        respect_sections_durations?: boolean | null;
     }
 }

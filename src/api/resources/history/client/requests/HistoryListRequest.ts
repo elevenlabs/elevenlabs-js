@@ -6,7 +6,17 @@ import * as ElevenLabs from "../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         pageSize: 1,
+ *         startAfterHistoryItemId: "start_after_history_item_id",
+ *         voiceId: "voice_id",
+ *         modelId: "model_id",
+ *         dateBeforeUnix: 1,
+ *         dateAfterUnix: 1,
+ *         sortDirection: "asc",
+ *         search: "search",
+ *         source: "TTS"
+ *     }
  */
 export interface HistoryListRequest {
     /**

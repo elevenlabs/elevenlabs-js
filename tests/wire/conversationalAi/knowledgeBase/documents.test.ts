@@ -79,7 +79,9 @@ describe("Documents", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM", {
+            agentId: "agent_id",
+        });
         expect(response).toEqual({
             type: "url",
             id: "id",
@@ -114,7 +116,9 @@ describe("Documents", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikWAM", {
+            force: true,
+        });
         expect(response).toEqual({
             key: "value",
         });
@@ -189,7 +193,10 @@ describe("Documents", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8ikWAM", {
+            cursor: "cursor",
+            pageSize: 1,
+        });
         expect(response).toEqual({
             agents: [
                 {

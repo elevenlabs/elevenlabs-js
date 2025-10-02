@@ -6,7 +6,13 @@ import * as ElevenLabs from "../../../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         pageSize: 1,
+ *         search: "search",
+ *         sortDirection: "asc",
+ *         sortBy: "name",
+ *         cursor: "cursor"
+ *     }
  */
 export interface AgentsListRequest {
     /**

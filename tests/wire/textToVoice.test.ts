@@ -32,6 +32,7 @@ describe("TextToVoice", () => {
             .build();
 
         const response = await client.textToVoice.createPreviews({
+            outputFormat: "mp3_22050_32",
             voiceDescription: "A sassy squeaky mouse",
         });
         expect(response).toEqual({
@@ -470,6 +471,7 @@ describe("TextToVoice", () => {
             .build();
 
         const response = await client.textToVoice.design({
+            outputFormat: "mp3_22050_32",
             voiceDescription: "A sassy squeaky mouse",
         });
         expect(response).toEqual({
@@ -512,6 +514,7 @@ describe("TextToVoice", () => {
             .build();
 
         const response = await client.textToVoice.remix("21m00Tcm4TlvDq8ikWAM", {
+            outputFormat: "mp3_22050_32",
             voiceDescription: "Make the voice have a higher pitch.",
         });
         expect(response).toEqual({

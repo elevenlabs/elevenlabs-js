@@ -509,7 +509,10 @@ export class Tools {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.tools.getDependentAgents("tool_id")
+     *     await client.conversationalAi.tools.getDependentAgents("tool_id", {
+     *         cursor: "cursor",
+     *         pageSize: 1
+     *     })
      */
     public getDependentAgents(
         toolId: string,

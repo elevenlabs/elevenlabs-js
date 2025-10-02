@@ -7,6 +7,8 @@ import * as ElevenLabs from "../index";
 export interface WorkflowStandaloneAgentNodeModel {
     /** Position of the node in the workflow. */
     position?: ElevenLabs.Position;
+    /** The ids of outgoing edges in the order they should be evaluated. */
+    edgeOrder?: string[];
     agentId: string;
     delayMs?: number;
     transferMessage?: string;

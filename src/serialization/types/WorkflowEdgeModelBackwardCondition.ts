@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { WorkflowExpressionConditionModel } from "./WorkflowExpressionConditionModel";
 import { WorkflowLlmConditionModel } from "./WorkflowLlmConditionModel";
 import { WorkflowResultConditionModel } from "./WorkflowResultConditionModel";
 import { WorkflowUnconditionalModel } from "./WorkflowUnconditionalModel";
@@ -14,6 +15,7 @@ export const WorkflowEdgeModelBackwardCondition: core.serialization.Schema<
     ElevenLabs.WorkflowEdgeModelBackwardCondition
 > = core.serialization
     .union("type", {
+        expression: WorkflowExpressionConditionModel,
         llm: WorkflowLlmConditionModel,
         result: WorkflowResultConditionModel,
         unconditional: WorkflowUnconditionalModel,
@@ -25,9 +27,14 @@ export const WorkflowEdgeModelBackwardCondition: core.serialization.Schema<
 
 export declare namespace WorkflowEdgeModelBackwardCondition {
     export type Raw =
+        | WorkflowEdgeModelBackwardCondition.Expression
         | WorkflowEdgeModelBackwardCondition.Llm
         | WorkflowEdgeModelBackwardCondition.Result
         | WorkflowEdgeModelBackwardCondition.Unconditional;
+
+    export interface Expression extends WorkflowExpressionConditionModel.Raw {
+        type: "expression";
+    }
 
     export interface Llm extends WorkflowLlmConditionModel.Raw {
         type: "llm";

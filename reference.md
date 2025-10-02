@@ -87,7 +87,17 @@ Returns a list of your generated audio.
 <dd>
 
 ```typescript
-await client.history.list();
+await client.history.list({
+    pageSize: 1,
+    startAfterHistoryItemId: "start_after_history_item_id",
+    voiceId: "voice_id",
+    modelId: "model_id",
+    dateBeforeUnix: 1,
+    dateAfterUnix: 1,
+    sortDirection: "asc",
+    search: "search",
+    source: "TTS",
+});
 ```
 
 </dd>
@@ -577,7 +587,7 @@ await client.textToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.TextToSpeechRequest`
+**request:** `ElevenLabs.BodyTextToSpeechFull`
 
 </dd>
 </dl>
@@ -625,6 +635,9 @@ Generate speech from text with precise character-level timing information for au
 
 ```typescript
 await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
+    enableLogging: true,
+    optimizeStreamingLatency: 1,
+    outputFormat: "mp3_22050_32",
     text: "This is a test for the API of ElevenLabs.",
 });
 ```
@@ -1155,6 +1168,7 @@ Create a voice from a text prompt.
 
 ```typescript
 await client.textToVoice.createPreviews({
+    outputFormat: "mp3_22050_32",
     voiceDescription: "A sassy squeaky mouse",
 });
 ```
@@ -1287,6 +1301,7 @@ Design a voice via a prompt. This method returns a list of voice previews. Each 
 
 ```typescript
 await client.textToVoice.design({
+    outputFormat: "mp3_22050_32",
     voiceDescription: "A sassy squeaky mouse",
 });
 ```
@@ -1352,6 +1367,7 @@ Remix an existing voice via a prompt. This method returns a list of voice previe
 
 ```typescript
 await client.textToVoice.remix("21m00Tcm4TlvDq8ikWAM", {
+    outputFormat: "mp3_22050_32",
     voiceDescription: "Make the voice have a higher pitch.",
 });
 ```
@@ -1483,7 +1499,9 @@ Returns a list of all available voices for a user.
 <dd>
 
 ```typescript
-await client.voices.getAll();
+await client.voices.getAll({
+    showLegacy: true,
+});
 ```
 
 </dd>
@@ -1547,6 +1565,15 @@ Gets a list of all available voices for a user with search, filtering and pagina
 
 ```typescript
 await client.voices.search({
+    nextPageToken: "next_page_token",
+    pageSize: 1,
+    search: "search",
+    sort: "sort",
+    sortDirection: "sort_direction",
+    voiceType: "voice_type",
+    category: "category",
+    fineTuningState: "fine_tuning_state",
+    collectionId: "collection_id",
     includeTotalCount: true,
 });
 ```
@@ -1611,7 +1638,9 @@ Returns metadata about a specific voice.
 <dd>
 
 ```typescript
-await client.voices.get("21m00Tcm4TlvDq8ikWAM");
+await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
+    withSettings: true,
+});
 ```
 
 </dd>
@@ -1900,8 +1929,22 @@ Retrieves a list of shared voices.
 
 ```typescript
 await client.voices.getShared({
+    pageSize: 1,
+    category: "professional",
+    gender: "gender",
+    age: "age",
+    accent: "accent",
+    language: "language",
+    locale: "locale",
+    search: "search",
     featured: true,
+    minNoticePeriodDays: 1,
+    includeCustomRates: true,
+    includeLiveModerated: true,
     readerAppEnabled: true,
+    ownerId: "owner_id",
+    sort: "sort",
+    page: 1,
 });
 ```
 
@@ -2107,7 +2150,14 @@ List the dubs you have access to.
 <dd>
 
 ```typescript
-await client.dubbing.list();
+await client.dubbing.list({
+    cursor: "cursor",
+    pageSize: 1,
+    dubbingStatus: "dubbing",
+    filterByCreator: "personal",
+    orderBy: "created_at",
+    orderDirection: "DESCENDING",
+});
 ```
 
 </dd>
@@ -2622,6 +2672,11 @@ Returns the usage metrics for the current user or the entire workspace they are 
 await client.usage.get({
     startUnix: 1,
     endUnix: 1,
+    includeWorkspaceMetrics: true,
+    breakdownType: "none",
+    aggregationInterval: "hour",
+    aggregationBucketSize: 1,
+    metric: "credits",
 });
 ```
 
@@ -3029,7 +3084,12 @@ Get a list of the pronunciation dictionaries you have access to and their metada
 <dd>
 
 ```typescript
-await client.pronunciationDictionaries.list();
+await client.pronunciationDictionaries.list({
+    cursor: "cursor",
+    pageSize: 1,
+    sort: "creation_time_unix",
+    sortDirection: "sort_direction",
+});
 ```
 
 </dd>
@@ -3219,6 +3279,7 @@ Transcribe an audio or video file. If webhook is set to true, the request will b
 
 ```typescript
 await client.speechToText.convert({
+    enableLogging: true,
     modelId: "model_id",
 });
 ```
@@ -3353,7 +3414,9 @@ Upload a file or webpage URL to create a knowledge base document. <br> <Note> Af
 <dd>
 
 ```typescript
-await client.conversationalAi.addToKnowledgeBase({});
+await client.conversationalAi.addToKnowledgeBase({
+    agentId: "agent_id",
+});
 ```
 
 </dd>
@@ -3682,13 +3745,14 @@ Compose a song from a prompt or a composition plan.
 
 ```typescript
 await client.music.compose({
-    respectSectionsDurations: undefined,
     prompt: undefined,
     musicPrompt: undefined,
     compositionPlan: undefined,
     musicLengthMs: undefined,
     modelId: undefined,
     seed: undefined,
+    forceInstrumental: undefined,
+    respectSectionsDurations: undefined,
 });
 ```
 
@@ -3759,6 +3823,7 @@ await client.music.composeDetailed({
     musicLengthMs: undefined,
     modelId: undefined,
     seed: undefined,
+    forceInstrumental: undefined,
 });
 ```
 
@@ -3829,6 +3894,7 @@ await client.music.stream({
     musicLengthMs: undefined,
     modelId: undefined,
     seed: undefined,
+    forceInstrumental: undefined,
 });
 ```
 
@@ -3896,6 +3962,7 @@ Get a signed url to start a conversation with an agent with an agent that requir
 ```typescript
 await client.conversationalAi.conversations.getSignedUrl({
     agentId: "21m00Tcm4TlvDq8ikWAM",
+    includeConversationId: true,
 });
 ```
 
@@ -3961,6 +4028,7 @@ Get a WebRTC session token for real-time communication.
 ```typescript
 await client.conversationalAi.conversations.getWebrtcToken({
     agentId: "21m00Tcm4TlvDq8ikWAM",
+    participantName: "participant_name",
 });
 ```
 
@@ -4024,7 +4092,16 @@ Get all conversations of agents that user owns. With option to restrict to a spe
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.list();
+await client.conversationalAi.conversations.list({
+    cursor: "cursor",
+    agentId: "agent_id",
+    callSuccessful: "success",
+    callStartBeforeUnix: 1,
+    callStartAfterUnix: 1,
+    userId: "user_id",
+    pageSize: 1,
+    summaryMode: "exclude",
+});
 ```
 
 </dd>
@@ -4546,7 +4623,13 @@ Returns a list of your agents and their metadata.
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.list();
+await client.conversationalAi.agents.list({
+    pageSize: 1,
+    search: "search",
+    sortDirection: "asc",
+    sortBy: "name",
+    cursor: "cursor",
+});
 ```
 
 </dd>
@@ -5284,7 +5367,11 @@ Lists all agent response tests with pagination support and optional search filte
 <dd>
 
 ```typescript
-await client.conversationalAi.tests.list();
+await client.conversationalAi.tests.list({
+    cursor: "cursor",
+    pageSize: 1,
+    search: "search",
+});
 ```
 
 </dd>
@@ -5741,7 +5828,15 @@ Get a list of available knowledge base documents
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.list();
+await client.conversationalAi.knowledgeBase.list({
+    pageSize: 1,
+    search: "search",
+    showOnlyOwnedDocuments: true,
+    sortDirection: "asc",
+    sortBy: "name",
+    useTypesense: true,
+    cursor: "cursor",
+});
 ```
 
 </dd>
@@ -6135,7 +6230,10 @@ Get a list of agents depending on this tool
 <dd>
 
 ```typescript
-await client.conversationalAi.tools.getDependentAgents("tool_id");
+await client.conversationalAi.tools.getDependentAgents("tool_id", {
+    cursor: "cursor",
+    pageSize: 1,
+});
 ```
 
 </dd>
@@ -6586,7 +6684,10 @@ Get all batch calls for the current workspace.
 <dd>
 
 ```typescript
-await client.conversationalAi.batchCalls.list();
+await client.conversationalAi.batchCalls.list({
+    limit: 1,
+    lastDoc: "last_doc",
+});
 ```
 
 </dd>
@@ -7168,7 +7269,9 @@ Retrieve the widget configuration for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.widget.get("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.agents.widget.get("21m00Tcm4TlvDq8ikWAM", {
+    conversationSignature: "conversation_signature",
+});
 ```
 
 </dd>
@@ -7974,7 +8077,9 @@ Get details about a specific documentation making up the agent's knowledge base
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM", {
+    agentId: "agent_id",
+});
 ```
 
 </dd>
@@ -8045,7 +8150,9 @@ Delete a document from the knowledge base
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikWAM", {
+    force: true,
+});
 ```
 
 </dd>
@@ -8189,7 +8296,10 @@ Get a list of agents depending on this knowledge base document
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8ikWAM", {
+    cursor: "cursor",
+    pageSize: 1,
+});
 ```
 
 </dd>
@@ -8731,6 +8841,73 @@ await client.conversationalAi.mcpServers.toolApprovals.delete("mcp_server_id", "
 </details>
 
 ## ConversationalAi Tests Invocations
+
+<details><summary><code>client.conversationalAi.tests.invocations.<a href="/src/api/resources/conversationalAi/resources/tests/resources/invocations/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetTestInvocationsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists all test invocations with pagination support and optional search filtering.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.tests.invocations.list({
+    agentId: "agent_id",
+    pageSize: 1,
+    cursor: "cursor",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.tests.InvocationsListRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Invocations.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
 
 <details><summary><code>client.conversationalAi.tests.invocations.<a href="/src/api/resources/conversationalAi/resources/tests/resources/invocations/client/Client.ts">get</a>(testInvocationId) -> ElevenLabs.GetTestSuiteInvocationResponseModel</code></summary>
 <dl>
@@ -10649,7 +10826,9 @@ Returns information about a specific Studio project. This endpoint returns more 
 <dd>
 
 ```typescript
-await client.studio.projects.get("21m00Tcm4TlvDq8ikWAM");
+await client.studio.projects.get("21m00Tcm4TlvDq8ikWAM", {
+    shareId: "share_id",
+});
 ```
 
 </dd>
@@ -12692,7 +12871,7 @@ await client.voices.pvc.samples.create("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-Update a PVC voice sample - apply noise removal, or select speaker.
+Update a PVC voice sample - apply noise removal, select speaker, change trim times or file name.
 
 </dd>
 </dl>

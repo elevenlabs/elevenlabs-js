@@ -47,7 +47,7 @@ export class TextToSpeech {
      */
     public convert(
         voiceId: string,
-        request: ElevenLabs.TextToSpeechRequest,
+        request: ElevenLabs.BodyTextToSpeechFull,
         requestOptions?: TextToSpeech.RequestOptions,
     ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return core.HttpResponsePromise.fromPromise(this.__convert(voiceId, request, requestOptions));
@@ -55,7 +55,7 @@ export class TextToSpeech {
 
     private async __convert(
         voiceId: string,
-        request: ElevenLabs.TextToSpeechRequest,
+        request: ElevenLabs.BodyTextToSpeechFull,
         requestOptions?: TextToSpeech.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
@@ -91,7 +91,7 @@ export class TextToSpeech {
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
-            body: serializers.TextToSpeechRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.BodyTextToSpeechFull.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
@@ -152,6 +152,9 @@ export class TextToSpeech {
      *
      * @example
      *     await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
+     *         enableLogging: true,
+     *         optimizeStreamingLatency: 1,
+     *         outputFormat: "mp3_22050_32",
      *         text: "This is a test for the API of ElevenLabs."
      *     })
      */

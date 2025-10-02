@@ -57,7 +57,9 @@ export class Widget {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.widget.get("21m00Tcm4TlvDq8ikWAM")
+     *     await client.conversationalAi.agents.widget.get("21m00Tcm4TlvDq8ikWAM", {
+     *         conversationSignature: "conversation_signature"
+     *     })
      */
     public get(
         agentId: string,

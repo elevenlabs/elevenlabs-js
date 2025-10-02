@@ -11,6 +11,7 @@ import { AgentFailureResponseExample } from "../../../../../../types/AgentFailur
 import { UnitTestToolCallEvaluationModelInput } from "../../../../../../types/UnitTestToolCallEvaluationModelInput";
 import { CreateUnitTestRequestDynamicVariablesValue } from "../../types/CreateUnitTestRequestDynamicVariablesValue";
 import { UnitTestCommonModelType } from "../../../../../../types/UnitTestCommonModelType";
+import { TestFromConversationMetadataInput } from "../../../../../../types/TestFromConversationMetadataInput";
 
 export const CreateUnitTestRequest: core.serialization.Schema<
     serializers.conversationalAi.CreateUnitTestRequest.Raw,
@@ -40,6 +41,10 @@ export const CreateUnitTestRequest: core.serialization.Schema<
             .optional(),
     ),
     type: UnitTestCommonModelType.optional(),
+    fromConversationMetadata: core.serialization.property(
+        "from_conversation_metadata",
+        TestFromConversationMetadataInput.optional(),
+    ),
     name: core.serialization.string(),
 });
 
@@ -52,6 +57,7 @@ export declare namespace CreateUnitTestRequest {
         tool_call_parameters?: UnitTestToolCallEvaluationModelInput.Raw | null;
         dynamic_variables?: Record<string, CreateUnitTestRequestDynamicVariablesValue.Raw | null | undefined> | null;
         type?: UnitTestCommonModelType.Raw | null;
+        from_conversation_metadata?: TestFromConversationMetadataInput.Raw | null;
         name: string;
     }
 }

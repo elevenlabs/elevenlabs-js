@@ -6,12 +6,80 @@ import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
 
 describe("Invocations", () => {
+    test("list", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            meta: { total: 1, page: 1, page_size: 1 },
+            results: [
+                {
+                    id: "id",
+                    created_at_unix_secs: 1,
+                    test_run_count: 1,
+                    passed_count: 1,
+                    failed_count: 1,
+                    pending_count: 1,
+                    title: "title",
+                    access_info: {
+                        is_creator: true,
+                        creator_name: "John Doe",
+                        creator_email: "john.doe@example.com",
+                        role: "admin",
+                    },
+                },
+            ],
+            next_cursor: "next_cursor",
+            has_more: true,
+        };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/test-invocations")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.tests.invocations.list({
+            agentId: "agent_id",
+            pageSize: 1,
+            cursor: "cursor",
+        });
+        expect(response).toEqual({
+            meta: {
+                total: 1,
+                page: 1,
+                pageSize: 1,
+            },
+            results: [
+                {
+                    id: "id",
+                    createdAtUnixSecs: 1,
+                    testRunCount: 1,
+                    passedCount: 1,
+                    failedCount: 1,
+                    pendingCount: 1,
+                    title: "title",
+                    accessInfo: {
+                        isCreator: true,
+                        creatorName: "John Doe",
+                        creatorEmail: "john.doe@example.com",
+                        role: "admin",
+                    },
+                },
+            ],
+            nextCursor: "next_cursor",
+            hasMore: true,
+        });
+    });
+
     test("get", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             id: "id",
+            agent_id: "agent_id",
             created_at: 1,
             test_runs: [
                 {
@@ -44,6 +112,7 @@ describe("Invocations", () => {
         const response = await client.conversationalAi.tests.invocations.get("test_invocation_id");
         expect(response).toEqual({
             id: "id",
+            agentId: "agent_id",
             createdAt: 1,
             testRuns: [
                 {
