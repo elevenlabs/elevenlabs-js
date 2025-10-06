@@ -18,7 +18,7 @@ export declare namespace PronunciationDictionaries {
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
         /** Additional headers to include in requests. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 
     export interface RequestOptions {
@@ -30,8 +30,10 @@ export declare namespace PronunciationDictionaries {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional query string parameters to include in the request. */
+        queryParams?: Record<string, unknown>;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 }
 
@@ -56,6 +58,7 @@ export class PronunciationDictionaries {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
+     *     import { createReadStream } from "fs";
      *     await client.pronunciationDictionaries.createFromFile({
      *         name: "name"
      *     })
@@ -92,6 +95,14 @@ export class PronunciationDictionaries {
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                ..._maybeEncodedRequest.headers,
+            }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -100,11 +111,8 @@ export class PronunciationDictionaries {
                 "v1/pronunciation-dictionaries/add-from-file",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey, ..._maybeEncodedRequest.headers }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -193,6 +201,11 @@ export class PronunciationDictionaries {
         request: ElevenLabs.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost,
         requestOptions?: PronunciationDictionaries.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AddPronunciationDictionaryResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -201,12 +214,9 @@ export class PronunciationDictionaries {
                 "v1/pronunciation-dictionaries/add-from-rules",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost.jsonOrThrow(
                 request,
@@ -290,6 +300,11 @@ export class PronunciationDictionaries {
         pronunciationDictionaryId: string,
         requestOptions?: PronunciationDictionaries.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetPronunciationDictionaryMetadataResponse>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -298,11 +313,8 @@ export class PronunciationDictionaries {
                 `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}`,
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -384,6 +396,11 @@ export class PronunciationDictionaries {
         request: ElevenLabs.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch = {},
         requestOptions?: PronunciationDictionaries.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetPronunciationDictionaryMetadataResponse>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -392,12 +409,9 @@ export class PronunciationDictionaries {
                 `v1/pronunciation-dictionaries/${encodeURIComponent(pronunciationDictionaryId)}`,
             ),
             method: "PATCH",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch.jsonOrThrow(
                 request,
@@ -476,6 +490,11 @@ export class PronunciationDictionaries {
         versionId: string,
         requestOptions?: PronunciationDictionaries.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -484,11 +503,8 @@ export class PronunciationDictionaries {
                 `v1/pronunciation-dictionaries/${encodeURIComponent(dictionaryId)}/${encodeURIComponent(versionId)}/download`,
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             responseType: "streaming",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
@@ -585,6 +601,11 @@ export class PronunciationDictionaries {
             _queryParams["sort_direction"] = sortDirection;
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -593,12 +614,8 @@ export class PronunciationDictionaries {
                 "v1/pronunciation-dictionaries",
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
-            queryParameters: _queryParams,
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

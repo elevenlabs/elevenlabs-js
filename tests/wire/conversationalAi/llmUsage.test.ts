@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("LlmUsage", () => {
-    test("calculate", async () => {
+    test("calculate (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { prompt_length: 1, number_of_pages: 1, rag_enabled: true };
@@ -33,5 +34,28 @@ describe("LlmUsage", () => {
                 },
             ],
         });
+    });
+
+    test("calculate (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { prompt_length: 1, number_of_pages: 1, rag_enabled: true };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/llm-usage/calculate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.llmUsage.calculate({
+                promptLength: 1,
+                numberOfPages: 1,
+                ragEnabled: true,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

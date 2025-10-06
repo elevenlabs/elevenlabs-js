@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("ApprovalPolicy", () => {
-    test("update", async () => {
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { approval_policy: "auto_approve_all" };
@@ -31,7 +32,7 @@ describe("ApprovalPolicy", () => {
                 role: "admin",
             },
             dependent_agents: [
-                { id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin", type: "available" },
+                { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
@@ -90,5 +91,26 @@ describe("ApprovalPolicy", () => {
                 ownerUserId: "owner_user_id",
             },
         });
+    });
+
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { approval_policy: "auto_approve_all" };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .patch("/v1/convai/mcp-servers/mcp_server_id/approval-policy")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.mcpServers.approvalPolicy.update("mcp_server_id", {
+                approvalPolicy: "auto_approve_all",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

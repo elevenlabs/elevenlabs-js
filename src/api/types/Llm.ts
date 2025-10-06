@@ -20,6 +20,7 @@ export type Llm =
     | "gemini-2.0-flash-lite"
     | "gemini-2.5-flash-lite"
     | "gemini-2.5-flash"
+    | "claude-sonnet-4-5"
     | "claude-sonnet-4"
     | "claude-3-7-sonnet"
     | "claude-3-5-sonnet"
@@ -32,6 +33,8 @@ export type Llm =
     | "gpt-oss-20b"
     | "gpt-oss-120b"
     | "glm-45-air-fp8"
+    | "gemini-2.5-flash-preview-09-2025"
+    | "gemini-2.5-flash-lite-preview-09-2025"
     | "gemini-2.5-flash-preview-05-20"
     | "gemini-2.5-flash-preview-04-17"
     | "gemini-2.5-flash-lite-preview-06-17"
@@ -42,6 +45,7 @@ export type Llm =
     | "gemini-1.5-pro-002"
     | "gemini-1.5-pro-001"
     | "claude-sonnet-4@20250514"
+    | "claude-sonnet-4-5@20250929"
     | "claude-3-7-sonnet@20250219"
     | "claude-3-5-sonnet@20240620"
     | "claude-3-5-sonnet-v2@20241022"
@@ -81,6 +85,7 @@ export const Llm = {
     Gemini20FlashLite: "gemini-2.0-flash-lite",
     Gemini25FlashLite: "gemini-2.5-flash-lite",
     Gemini25Flash: "gemini-2.5-flash",
+    ClaudeSonnet45: "claude-sonnet-4-5",
     ClaudeSonnet4: "claude-sonnet-4",
     Claude37Sonnet: "claude-3-7-sonnet",
     Claude35Sonnet: "claude-3-5-sonnet",
@@ -93,6 +98,8 @@ export const Llm = {
     GptOss20B: "gpt-oss-20b",
     GptOss120B: "gpt-oss-120b",
     Glm45AirFp8: "glm-45-air-fp8",
+    Gemini25FlashPreview092025: "gemini-2.5-flash-preview-09-2025",
+    Gemini25FlashLitePreview092025: "gemini-2.5-flash-lite-preview-09-2025",
     Gemini25FlashPreview0520: "gemini-2.5-flash-preview-05-20",
     Gemini25FlashPreview0417: "gemini-2.5-flash-preview-04-17",
     Gemini25FlashLitePreview0617: "gemini-2.5-flash-lite-preview-06-17",
@@ -103,6 +110,7 @@ export const Llm = {
     Gemini15Pro002: "gemini-1.5-pro-002",
     Gemini15Pro001: "gemini-1.5-pro-001",
     ClaudeSonnet420250514: "claude-sonnet-4@20250514",
+    ClaudeSonnet4520250929: "claude-sonnet-4-5@20250929",
     Claude37Sonnet20250219: "claude-3-7-sonnet@20250219",
     Claude35Sonnet20240620: "claude-3-5-sonnet@20240620",
     Claude35SonnetV220241022: "claude-3-5-sonnet-v2@20241022",

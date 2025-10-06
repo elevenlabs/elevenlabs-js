@@ -13,7 +13,8 @@ import * as core from "../../../../../core";
  *     }
  */
 export interface BodyCreateForcedAlignmentV1ForcedAlignmentPost {
-    file: core.FileLike;
+    /** The file to align. All major audio formats are supported. The file size must be less than 1GB. */
+    file: core.file.Uploadable.FileLike;
     /** The text to align with the audio. The input text can be in any format, however diarization is not supported at this time. */
     text: string;
     /** If true, the file will be streamed to the server and processed in chunks. This is useful for large files that cannot be loaded into memory. The default is false. */

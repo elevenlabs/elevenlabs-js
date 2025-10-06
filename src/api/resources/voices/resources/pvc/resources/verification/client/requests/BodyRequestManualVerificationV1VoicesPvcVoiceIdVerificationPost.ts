@@ -12,7 +12,8 @@ import * as core from "../../../../../../../../../core";
  *     }
  */
 export interface BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost {
-    files: core.FileLike[];
+    /** Verification documents */
+    files: core.file.Uploadable.FileLike[];
     /** Extra text to be used in the manual verification process. */
     extraText?: string;
 }

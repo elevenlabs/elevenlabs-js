@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("ApiKeys", () => {
-    test("list", async () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -51,7 +52,25 @@ describe("ApiKeys", () => {
         });
     });
 
-    test("create", async () => {
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/service-accounts/service_account_user_id/api-keys")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.serviceAccounts.apiKeys.list("service_account_user_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "name", permissions: ["text_to_speech"] };
@@ -74,7 +93,34 @@ describe("ApiKeys", () => {
         });
     });
 
-    test("delete", async () => {
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            name: "name",
+            permissions: ["text_to_speech", "text_to_speech"],
+            character_limit: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/service-accounts/service_account_user_id/api-keys")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.serviceAccounts.apiKeys.create("service_account_user_id", {
+                name: "name",
+                permissions: ["text_to_speech", "text_to_speech"],
+                characterLimit: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -93,7 +139,25 @@ describe("ApiKeys", () => {
         });
     });
 
-    test("update", async () => {
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/service-accounts/service_account_user_id/api-keys/api_key_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.serviceAccounts.apiKeys.delete("service_account_user_id", "api_key_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { is_enabled: true, name: "Sneaky Fox", permissions: ["text_to_speech"] };
@@ -115,5 +179,34 @@ describe("ApiKeys", () => {
         expect(response).toEqual({
             key: "value",
         });
+    });
+
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            is_enabled: true,
+            name: "name",
+            permissions: ["text_to_speech", "text_to_speech"],
+            character_limit: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .patch("/v1/service-accounts/service_account_user_id/api-keys/api_key_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_id", {
+                isEnabled: true,
+                name: "name",
+                permissions: ["text_to_speech", "text_to_speech"],
+                characterLimit: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

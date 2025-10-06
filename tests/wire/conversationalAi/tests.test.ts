@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("Tests", () => {
-    test("create", async () => {
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
@@ -53,7 +54,140 @@ describe("Tests", () => {
         });
     });
 
-    test("get", async () => {
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            chat_history: [
+                {
+                    role: "user",
+                    agent_metadata: undefined,
+                    message: undefined,
+                    multivoice_message: undefined,
+                    tool_calls: undefined,
+                    tool_results: undefined,
+                    feedback: undefined,
+                    llm_override: undefined,
+                    time_in_call_secs: 1,
+                    conversation_turn_metrics: undefined,
+                    rag_retrieval_info: undefined,
+                    llm_usage: undefined,
+                    interrupted: undefined,
+                    original_message: undefined,
+                    source_medium: undefined,
+                },
+                {
+                    role: "user",
+                    agent_metadata: undefined,
+                    message: undefined,
+                    multivoice_message: undefined,
+                    tool_calls: undefined,
+                    tool_results: undefined,
+                    feedback: undefined,
+                    llm_override: undefined,
+                    time_in_call_secs: 1,
+                    conversation_turn_metrics: undefined,
+                    rag_retrieval_info: undefined,
+                    llm_usage: undefined,
+                    interrupted: undefined,
+                    original_message: undefined,
+                    source_medium: undefined,
+                },
+            ],
+            success_condition: "success_condition",
+            success_examples: [
+                { response: "response", type: "success" },
+                { response: "response", type: "success" },
+            ],
+            failure_examples: [
+                { response: "response", type: "failure" },
+                { response: "response", type: "failure" },
+            ],
+            tool_call_parameters: undefined,
+            dynamic_variables: undefined,
+            type: undefined,
+            from_conversation_metadata: undefined,
+            name: "name",
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/agent-testing/create")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.create({
+                chatHistory: [
+                    {
+                        role: "user",
+                        agentMetadata: undefined,
+                        message: undefined,
+                        multivoiceMessage: undefined,
+                        toolCalls: undefined,
+                        toolResults: undefined,
+                        feedback: undefined,
+                        llmOverride: undefined,
+                        timeInCallSecs: 1,
+                        conversationTurnMetrics: undefined,
+                        ragRetrievalInfo: undefined,
+                        llmUsage: undefined,
+                        interrupted: undefined,
+                        originalMessage: undefined,
+                        sourceMedium: undefined,
+                    },
+                    {
+                        role: "user",
+                        agentMetadata: undefined,
+                        message: undefined,
+                        multivoiceMessage: undefined,
+                        toolCalls: undefined,
+                        toolResults: undefined,
+                        feedback: undefined,
+                        llmOverride: undefined,
+                        timeInCallSecs: 1,
+                        conversationTurnMetrics: undefined,
+                        ragRetrievalInfo: undefined,
+                        llmUsage: undefined,
+                        interrupted: undefined,
+                        originalMessage: undefined,
+                        sourceMedium: undefined,
+                    },
+                ],
+                successCondition: "success_condition",
+                successExamples: [
+                    {
+                        response: "response",
+                        type: "success",
+                    },
+                    {
+                        response: "response",
+                        type: "success",
+                    },
+                ],
+                failureExamples: [
+                    {
+                        response: "response",
+                        type: "failure",
+                    },
+                    {
+                        response: "response",
+                        type: "failure",
+                    },
+                ],
+                toolCallParameters: undefined,
+                dynamicVariables: undefined,
+                type: undefined,
+                fromConversationMetadata: undefined,
+                name: "name",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -230,7 +364,25 @@ describe("Tests", () => {
         });
     });
 
-    test("update", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/agent-testing/test_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.get("test_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
@@ -435,7 +587,140 @@ describe("Tests", () => {
         });
     });
 
-    test("delete", async () => {
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            chat_history: [
+                {
+                    role: "user",
+                    agent_metadata: undefined,
+                    message: undefined,
+                    multivoice_message: undefined,
+                    tool_calls: undefined,
+                    tool_results: undefined,
+                    feedback: undefined,
+                    llm_override: undefined,
+                    time_in_call_secs: 1,
+                    conversation_turn_metrics: undefined,
+                    rag_retrieval_info: undefined,
+                    llm_usage: undefined,
+                    interrupted: undefined,
+                    original_message: undefined,
+                    source_medium: undefined,
+                },
+                {
+                    role: "user",
+                    agent_metadata: undefined,
+                    message: undefined,
+                    multivoice_message: undefined,
+                    tool_calls: undefined,
+                    tool_results: undefined,
+                    feedback: undefined,
+                    llm_override: undefined,
+                    time_in_call_secs: 1,
+                    conversation_turn_metrics: undefined,
+                    rag_retrieval_info: undefined,
+                    llm_usage: undefined,
+                    interrupted: undefined,
+                    original_message: undefined,
+                    source_medium: undefined,
+                },
+            ],
+            success_condition: "success_condition",
+            success_examples: [
+                { response: "response", type: "success" },
+                { response: "response", type: "success" },
+            ],
+            failure_examples: [
+                { response: "response", type: "failure" },
+                { response: "response", type: "failure" },
+            ],
+            tool_call_parameters: undefined,
+            dynamic_variables: undefined,
+            type: undefined,
+            from_conversation_metadata: undefined,
+            name: "name",
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .put("/v1/convai/agent-testing/test_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.update("test_id", {
+                chatHistory: [
+                    {
+                        role: "user",
+                        agentMetadata: undefined,
+                        message: undefined,
+                        multivoiceMessage: undefined,
+                        toolCalls: undefined,
+                        toolResults: undefined,
+                        feedback: undefined,
+                        llmOverride: undefined,
+                        timeInCallSecs: 1,
+                        conversationTurnMetrics: undefined,
+                        ragRetrievalInfo: undefined,
+                        llmUsage: undefined,
+                        interrupted: undefined,
+                        originalMessage: undefined,
+                        sourceMedium: undefined,
+                    },
+                    {
+                        role: "user",
+                        agentMetadata: undefined,
+                        message: undefined,
+                        multivoiceMessage: undefined,
+                        toolCalls: undefined,
+                        toolResults: undefined,
+                        feedback: undefined,
+                        llmOverride: undefined,
+                        timeInCallSecs: 1,
+                        conversationTurnMetrics: undefined,
+                        ragRetrievalInfo: undefined,
+                        llmUsage: undefined,
+                        interrupted: undefined,
+                        originalMessage: undefined,
+                        sourceMedium: undefined,
+                    },
+                ],
+                successCondition: "success_condition",
+                successExamples: [
+                    {
+                        response: "response",
+                        type: "success",
+                    },
+                    {
+                        response: "response",
+                        type: "success",
+                    },
+                ],
+                failureExamples: [
+                    {
+                        response: "response",
+                        type: "failure",
+                    },
+                    {
+                        response: "response",
+                        type: "failure",
+                    },
+                ],
+                toolCallParameters: undefined,
+                dynamicVariables: undefined,
+                type: undefined,
+                fromConversationMetadata: undefined,
+                name: "name",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -454,7 +739,25 @@ describe("Tests", () => {
         });
     });
 
-    test("summaries", async () => {
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/agent-testing/test_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.delete("test_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("summaries (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { test_ids: ["test_id_1", "test_id_2"] };
@@ -506,7 +809,28 @@ describe("Tests", () => {
         });
     });
 
-    test("list", async () => {
+    test("summaries (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { test_ids: ["test_ids", "test_ids"] };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/agent-testing/summaries")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.summaries({
+                testIds: ["test_ids", "test_ids"],
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -561,5 +885,23 @@ describe("Tests", () => {
             nextCursor: "next_cursor",
             hasMore: true,
         });
+    });
+
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/agent-testing")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.list();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

@@ -12,7 +12,8 @@ import * as core from "../../../../../../../../../core";
  *     }
  */
 export interface BodyAddSamplesToPvcVoiceV1VoicesPvcVoiceIdSamplesPost {
-    files: core.FileLike[];
+    /** Audio files used to create the voice. */
+    files: core.file.Uploadable.FileLike[];
     /** If set will remove background noise for voice samples using our audio isolation model. If the samples do not include background noise, it can make the quality worse. */
     removeBackgroundNoise?: boolean;
 }

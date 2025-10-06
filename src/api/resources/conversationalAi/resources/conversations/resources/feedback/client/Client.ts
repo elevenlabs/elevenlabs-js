@@ -17,7 +17,7 @@ export declare namespace Feedback {
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
         /** Additional headers to include in requests. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 
     export interface RequestOptions {
@@ -29,8 +29,10 @@ export declare namespace Feedback {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional query string parameters to include in the request. */
+        queryParams?: Record<string, unknown>;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 }
 
@@ -68,6 +70,11 @@ export class Feedback {
         request: ElevenLabs.conversationalAi.conversations.BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost,
         requestOptions?: Feedback.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -76,12 +83,9 @@ export class Feedback {
                 `v1/convai/conversations/${encodeURIComponent(conversationId)}/feedback`,
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.conversationalAi.conversations.BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost.jsonOrThrow(
                 request,

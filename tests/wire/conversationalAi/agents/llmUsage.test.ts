@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("LlmUsage", () => {
-    test("calculate", async () => {
+    test("calculate (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -29,5 +30,28 @@ describe("LlmUsage", () => {
                 },
             ],
         });
+    });
+
+    test("calculate (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { prompt_length: undefined, number_of_pages: undefined, rag_enabled: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/agent/agent_id/llm-usage/calculate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.agents.llmUsage.calculate("agent_id", {
+                promptLength: undefined,
+                numberOfPages: undefined,
+                ragEnabled: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

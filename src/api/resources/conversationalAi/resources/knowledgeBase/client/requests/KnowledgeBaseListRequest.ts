@@ -17,36 +17,20 @@ import * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface KnowledgeBaseListRequest {
-    /**
-     * How many documents to return at maximum. Can not exceed 100, defaults to 30.
-     */
+    /** How many documents to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
-    /**
-     * If specified, the endpoint returns only such knowledge base documents whose names start with this string.
-     */
+    /** If specified, the endpoint returns only such knowledge base documents whose names start with this string. */
     search?: string;
-    /**
-     * If set to true, the endpoint will return only documents owned by you (and not shared from somebody else).
-     */
+    /** If set to true, the endpoint will return only documents owned by you (and not shared from somebody else). */
     showOnlyOwnedDocuments?: boolean;
-    /**
-     * If present, the endpoint will return only documents of the given types.
-     */
+    /** If present, the endpoint will return only documents of the given types. */
     types?: ElevenLabs.KnowledgeBaseDocumentType | ElevenLabs.KnowledgeBaseDocumentType[];
-    /**
-     * The direction to sort the results
-     */
+    /** The direction to sort the results */
     sortDirection?: ElevenLabs.SortDirection;
-    /**
-     * The field to sort the results by
-     */
+    /** The field to sort the results by */
     sortBy?: ElevenLabs.KnowledgeBaseSortBy;
-    /**
-     * If set to true, the endpoint will use typesense DB to search for the documents).
-     */
+    /** If set to true, the endpoint will use typesense DB to search for the documents). */
     useTypesense?: boolean;
-    /**
-     * Used for fetching next page. Cursor is returned in the response.
-     */
+    /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
 }

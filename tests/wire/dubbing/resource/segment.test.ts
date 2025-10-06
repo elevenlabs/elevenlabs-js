@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("Segment", () => {
-    test("update", async () => {
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -26,7 +27,30 @@ describe("Segment", () => {
         });
     });
 
-    test("delete", async () => {
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { start_time: undefined, end_time: undefined, text: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .patch("/v1/dubbing/resource/dubbing_id/segment/segment_id/language")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.dubbing.resource.segment.update("dubbing_id", "segment_id", "language", {
+                startTime: undefined,
+                endTime: undefined,
+                text: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -43,5 +67,23 @@ describe("Segment", () => {
         expect(response).toEqual({
             version: 1,
         });
+    });
+
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/dubbing/resource/dubbing_id/segment/segment_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.dubbing.resource.segment.delete("dubbing_id", "segment_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

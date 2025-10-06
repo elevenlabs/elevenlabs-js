@@ -12,9 +12,7 @@ import * as ElevenLabs from "../../../../index";
  *     }
  */
 export interface VoiceDesignRequest {
-    /**
-     * The output format of the generated audio.
-     */
+    /** The output format of the generated audio. */
     outputFormat?: ElevenLabs.TextToVoiceCreatePreviewsRequestOutputFormat;
     /** Description to use for the created voice. */
     voiceDescription: string;

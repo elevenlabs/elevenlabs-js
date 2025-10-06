@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("Transcripts", () => {
-    test("get", async () => {
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -129,7 +130,61 @@ describe("Transcripts", () => {
         });
     });
 
-    test("delete", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .get("/v1/speech-to-text/transcripts/transcription_id")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.speechToText.transcripts.get("transcription_id");
+        }).rejects.toThrow(ElevenLabs.UnauthorizedError);
+    });
+
+    test("get (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .get("/v1/speech-to-text/transcripts/transcription_id")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.speechToText.transcripts.get("transcription_id");
+        }).rejects.toThrow(ElevenLabs.NotFoundError);
+    });
+
+    test("get (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/speech-to-text/transcripts/transcription_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.speechToText.transcripts.get("transcription_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -146,5 +201,41 @@ describe("Transcripts", () => {
         expect(response).toEqual({
             key: "value",
         });
+    });
+
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .delete("/v1/speech-to-text/transcripts/transcription_id")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.speechToText.transcripts.delete("transcription_id");
+        }).rejects.toThrow(ElevenLabs.UnauthorizedError);
+    });
+
+    test("delete (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/speech-to-text/transcripts/transcription_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.speechToText.transcripts.delete("transcription_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

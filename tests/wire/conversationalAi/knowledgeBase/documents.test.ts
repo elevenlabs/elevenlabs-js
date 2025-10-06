@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("Documents", () => {
-    test("create_from_url", async () => {
+    test("create_from_url (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { url: "url" };
@@ -29,7 +30,29 @@ describe("Documents", () => {
         });
     });
 
-    test("create_from_text", async () => {
+    test("create_from_url (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { url: "url", name: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/knowledge-base/url")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.knowledgeBase.documents.createFromUrl({
+                url: "url",
+                name: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("create_from_text (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { text: "text" };
@@ -52,11 +75,34 @@ describe("Documents", () => {
         });
     });
 
-    test("get", async () => {
+    test("create_from_text (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { text: "text", name: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/knowledge-base/text")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.knowledgeBase.documents.createFromText({
+                text: "text",
+                name: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
+            type: "url",
             id: "id",
             name: "name",
             metadata: { created_at_unix_secs: 1, last_updated_at_unix_secs: 1, size_bytes: 1 },
@@ -69,7 +115,6 @@ describe("Documents", () => {
             },
             extracted_inner_html: "extracted_inner_html",
             url: "url",
-            type: "url",
         };
         server
             .mockEndpoint()
@@ -103,7 +148,25 @@ describe("Documents", () => {
         });
     });
 
-    test("delete", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/knowledge-base/documentation_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.knowledgeBase.documents.get("documentation_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -124,11 +187,30 @@ describe("Documents", () => {
         });
     });
 
-    test("update", async () => {
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/knowledge-base/documentation_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.knowledgeBase.documents.delete("documentation_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "name" };
         const rawResponseBody = {
+            type: "url",
             id: "id",
             name: "name",
             metadata: { created_at_unix_secs: 1, last_updated_at_unix_secs: 1, size_bytes: 1 },
@@ -141,7 +223,6 @@ describe("Documents", () => {
             },
             extracted_inner_html: "extracted_inner_html",
             url: "url",
-            type: "url",
         };
         server
             .mockEndpoint()
@@ -176,12 +257,33 @@ describe("Documents", () => {
         });
     });
 
-    test("get_agents", async () => {
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { name: "x" };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .patch("/v1/convai/knowledge-base/documentation_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.knowledgeBase.documents.update("documentation_id", {
+                name: "x",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get_agents (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            agents: [{ id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin", type: "available" }],
+            agents: [{ type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" }],
             next_cursor: "next_cursor",
             has_more: true,
         };
@@ -212,7 +314,25 @@ describe("Documents", () => {
         });
     });
 
-    test("get_content", async () => {
+    test("get_agents (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/knowledge-base/documentation_id/dependent-agents")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.knowledgeBase.documents.getAgents("documentation_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get_content (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -225,5 +345,23 @@ describe("Documents", () => {
 
         const response = await client.conversationalAi.knowledgeBase.documents.getContent("21m00Tcm4TlvDq8ikWAM");
         expect(response).toEqual(undefined);
+    });
+
+    test("get_content (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/knowledge-base/documentation_id/content")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.knowledgeBase.documents.getContent("documentation_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

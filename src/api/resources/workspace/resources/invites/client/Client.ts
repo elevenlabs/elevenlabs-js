@@ -17,7 +17,7 @@ export declare namespace Invites {
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
         /** Additional headers to include in requests. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 
     export interface RequestOptions {
@@ -29,8 +29,10 @@ export declare namespace Invites {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional query string parameters to include in the request. */
+        queryParams?: Record<string, unknown>;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 }
 
@@ -65,6 +67,11 @@ export class Invites {
         request: ElevenLabs.workspace.InviteUserRequest,
         requestOptions?: Invites.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AddWorkspaceInviteResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -73,12 +80,9 @@ export class Invites {
                 "v1/workspace/invites/add",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.workspace.InviteUserRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
@@ -161,6 +165,11 @@ export class Invites {
         request: ElevenLabs.workspace.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost,
         requestOptions?: Invites.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AddWorkspaceInviteResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -169,12 +178,9 @@ export class Invites {
                 "v1/workspace/invites/add-bulk",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.workspace.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -259,6 +265,11 @@ export class Invites {
         request: ElevenLabs.workspace.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete,
         requestOptions?: Invites.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DeleteWorkspaceInviteResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -267,12 +278,9 @@ export class Invites {
                 "v1/workspace/invites",
             ),
             method: "DELETE",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.workspace.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("McpServers", () => {
-    test("list", async () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -22,7 +23,7 @@ describe("McpServers", () => {
                         role: "admin",
                     },
                     dependent_agents: [
-                        { id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin", type: "available" },
+                        { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
                     ],
                     metadata: { created_at: 1 },
                 },
@@ -68,7 +69,25 @@ describe("McpServers", () => {
         });
     });
 
-    test("create", async () => {
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/mcp-servers")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.mcpServers.list();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { config: { url: "url", name: "name" } };
@@ -93,7 +112,7 @@ describe("McpServers", () => {
                 role: "admin",
             },
             dependent_agents: [
-                { id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin", type: "available" },
+                { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
@@ -157,7 +176,52 @@ describe("McpServers", () => {
         });
     });
 
-    test("get", async () => {
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            config: {
+                approval_policy: undefined,
+                tool_approval_hashes: undefined,
+                transport: undefined,
+                url: "url",
+                secret_token: undefined,
+                request_headers: undefined,
+                name: "name",
+                description: undefined,
+                force_pre_tool_speech: undefined,
+                disable_interruptions: undefined,
+            },
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/mcp-servers")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.mcpServers.create({
+                config: {
+                    approvalPolicy: undefined,
+                    toolApprovalHashes: undefined,
+                    transport: undefined,
+                    url: "url",
+                    secretToken: undefined,
+                    requestHeaders: undefined,
+                    name: "name",
+                    description: undefined,
+                    forcePreToolSpeech: undefined,
+                    disableInterruptions: undefined,
+                },
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -182,7 +246,7 @@ describe("McpServers", () => {
                 role: "admin",
             },
             dependent_agents: [
-                { id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin", type: "available" },
+                { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
@@ -240,7 +304,25 @@ describe("McpServers", () => {
         });
     });
 
-    test("update", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/mcp-servers/mcp_server_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.mcpServers.get("mcp_server_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -265,7 +347,7 @@ describe("McpServers", () => {
                 role: "admin",
             },
             dependent_agents: [
-                { id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin", type: "available" },
+                { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
@@ -322,5 +404,32 @@ describe("McpServers", () => {
                 ownerUserId: "owner_user_id",
             },
         });
+    });
+
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            approval_policy: undefined,
+            force_pre_tool_speech: undefined,
+            disable_interruptions: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .patch("/v1/convai/mcp-servers/mcp_server_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.mcpServers.update("mcp_server_id", {
+                approvalPolicy: undefined,
+                forcePreToolSpeech: undefined,
+                disableInterruptions: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

@@ -3037,7 +3037,7 @@ await client.pronunciationDictionaries.download("dictionary_id", "version_id");
 <dl>
 <dd>
 
-**versionId:** `string` — The id of the version of the pronunciation dictionary
+**versionId:** `string` — The id of the pronunciation dictionary version
 
 </dd>
 </dl>
@@ -3625,80 +3625,6 @@ await client.conversationalAi.ragIndexOverview();
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationalAi.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">updateSecret</a>(secretId, { ...params }) -> ElevenLabs.PostWorkspaceSecretResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update an existing secret for the workspace
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.updateSecret("secret_id", {
-    name: "name",
-    value: "value",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**secretId:** `string`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.PatchWorkspaceSecretRequest`
-
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -6564,6 +6490,80 @@ await client.conversationalAi.secrets.delete("secret_id");
 <dd>
 
 **secretId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Secrets.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">update</a>(secretId, { ...params }) -> ElevenLabs.PostWorkspaceSecretResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing secret for the workspace
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.secrets.update("secret_id", {
+    name: "name",
+    value: "value",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**secretId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.PatchWorkspaceSecretRequest`
 
 </dd>
 </dl>
@@ -11072,6 +11072,85 @@ await client.studio.projects.convert("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
+## Studio Projects PronunciationDictionaries
+
+<details><summary><code>client.studio.projects.pronunciationDictionaries.<a href="/src/api/resources/studio/resources/projects/resources/pronunciationDictionaries/client/Client.ts">create</a>(projectId, { ...params }) -> ElevenLabs.CreatePronunciationDictionaryResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a set of pronunciation dictionaries acting on a project. This will automatically mark text within this project as requiring reconverting where the new dictionary would apply or the old one no longer does.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.studio.projects.pronunciationDictionaries.create("21m00Tcm4TlvDq8ikWAM", {
+    pronunciationDictionaryLocators: [
+        {
+            pronunciationDictionaryId: "pronunciation_dictionary_id",
+        },
+    ],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `string` — The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.studio.projects.BodyCreatePronunciationDictionariesV1StudioProjectsProjectIdPronunciationDictionariesPost`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PronunciationDictionaries.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Studio Projects Content
 
 <details><summary><code>client.studio.projects.content.<a href="/src/api/resources/studio/resources/projects/resources/content/client/Client.ts">update</a>(projectId, { ...params }) -> ElevenLabs.EditProjectResponseModel</code></summary>
@@ -11853,85 +11932,6 @@ await client.studio.projects.chapters.convert("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4
 <dd>
 
 **requestOptions:** `Chapters.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Studio Projects PronunciationDictionaries
-
-<details><summary><code>client.studio.projects.pronunciationDictionaries.<a href="/src/api/resources/studio/resources/projects/resources/pronunciationDictionaries/client/Client.ts">create</a>(projectId, { ...params }) -> ElevenLabs.CreatePronunciationDictionaryResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create a set of pronunciation dictionaries acting on a project. This will automatically mark text within this project as requiring reconverting where the new dictionary would apply or the old one no longer does.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.studio.projects.pronunciationDictionaries.create("21m00Tcm4TlvDq8ikWAM", {
-    pronunciationDictionaryLocators: [
-        {
-            pronunciationDictionaryId: "pronunciation_dictionary_id",
-        },
-    ],
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**projectId:** `string` — The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.studio.projects.BodyCreatePronunciationDictionariesV1StudioProjectsProjectIdPronunciationDictionariesPost`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PronunciationDictionaries.RequestOptions`
 
 </dd>
 </dl>

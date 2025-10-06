@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("Members", () => {
-    test("remove", async () => {
+    test("remove (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { email: "email" };
@@ -28,7 +29,28 @@ describe("Members", () => {
         });
     });
 
-    test("add", async () => {
+    test("remove (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { email: "email" };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/workspace/groups/group_id/members/remove")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.groups.members.remove("group_id", {
+                email: "email",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("add (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { email: "email" };
@@ -48,5 +70,26 @@ describe("Members", () => {
         expect(response).toEqual({
             status: "ok",
         });
+    });
+
+    test("add (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { email: "email" };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/workspace/groups/group_id/members")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.groups.members.add("group_id", {
+                email: "email",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

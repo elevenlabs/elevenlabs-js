@@ -4,16 +4,17 @@
 
 import { mockServerPool } from "../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../src/Client";
+import * as ElevenLabs from "../../src/api/index";
 
 describe("Studio", () => {
-    test("create_podcast", async () => {
+    test("create_podcast (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             model_id: "eleven_multilingual_v2",
             mode: {
-                conversation: { host_voice_id: "aw1NgEzBg83R7vgmiJt6", guest_voice_id: "aw1NgEzBg83R7vgmiJt7" },
                 type: "conversation",
+                conversation: { host_voice_id: "aw1NgEzBg83R7vgmiJt6", guest_voice_id: "aw1NgEzBg83R7vgmiJt7" },
             },
             source: { text: "This is a test podcast." },
         };
@@ -179,5 +180,61 @@ describe("Studio", () => {
                 publicShareId: "abc123def456789",
             },
         });
+    });
+
+    test("create_podcast (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            model_id: "model_id",
+            mode: {
+                type: "conversation",
+                conversation: { host_voice_id: "host_voice_id", guest_voice_id: "guest_voice_id" },
+            },
+            source: { text: "text" },
+            quality_preset: undefined,
+            duration_scale: undefined,
+            language: undefined,
+            intro: undefined,
+            outro: undefined,
+            instructions_prompt: undefined,
+            highlights: undefined,
+            callback_url: undefined,
+            apply_text_normalization: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/studio/podcasts")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.studio.createPodcast({
+                modelId: "model_id",
+                mode: {
+                    type: "conversation",
+                    conversation: {
+                        hostVoiceId: "host_voice_id",
+                        guestVoiceId: "guest_voice_id",
+                    },
+                },
+                source: {
+                    text: "text",
+                },
+                qualityPreset: undefined,
+                durationScale: undefined,
+                language: undefined,
+                intro: undefined,
+                outro: undefined,
+                instructionsPrompt: undefined,
+                highlights: undefined,
+                callbackUrl: undefined,
+                applyTextNormalization: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

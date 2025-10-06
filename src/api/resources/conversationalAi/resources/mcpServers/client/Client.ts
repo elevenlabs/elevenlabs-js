@@ -20,7 +20,7 @@ export declare namespace McpServers {
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
         /** Additional headers to include in requests. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 
     export interface RequestOptions {
@@ -32,8 +32,10 @@ export declare namespace McpServers {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional query string parameters to include in the request. */
+        queryParams?: Record<string, unknown>;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 }
 
@@ -78,6 +80,11 @@ export class McpServers {
     private async __list(
         requestOptions?: McpServers.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.McpServersResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -86,11 +93,8 @@ export class McpServers {
                 "v1/convai/mcp-servers",
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -172,6 +176,11 @@ export class McpServers {
         request: ElevenLabs.conversationalAi.McpServerRequestModel,
         requestOptions?: McpServers.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.McpServerResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -180,12 +189,9 @@ export class McpServers {
                 "v1/convai/mcp-servers",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.conversationalAi.McpServerRequestModel.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -266,6 +272,11 @@ export class McpServers {
         mcpServerId: string,
         requestOptions?: McpServers.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.McpServerResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -274,11 +285,8 @@ export class McpServers {
                 `v1/convai/mcp-servers/${encodeURIComponent(mcpServerId)}`,
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -360,6 +368,11 @@ export class McpServers {
         request: ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModel = {},
         requestOptions?: McpServers.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.McpServerResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -368,12 +381,9 @@ export class McpServers {
                 `v1/convai/mcp-servers/${encodeURIComponent(mcpServerId)}`,
             ),
             method: "PATCH",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.conversationalAi.McpServerConfigUpdateRequestModel.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

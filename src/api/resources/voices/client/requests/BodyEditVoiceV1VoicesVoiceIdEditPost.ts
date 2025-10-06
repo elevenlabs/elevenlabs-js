@@ -13,7 +13,8 @@ import * as core from "../../../../../core";
 export interface BodyEditVoiceV1VoicesVoiceIdEditPost {
     /** The name that identifies this voice. This will be displayed in the dropdown of the website. */
     name: string;
-    files?: core.FileLike[] | undefined;
+    /** Audio files to add to the voice */
+    files?: core.file.Uploadable.FileLike[] | undefined;
     /** If set will remove background noise for voice samples using our audio isolation model. If the samples do not include background noise, it can make the quality worse. */
     removeBackgroundNoise?: boolean;
     /** A description of the voice. */

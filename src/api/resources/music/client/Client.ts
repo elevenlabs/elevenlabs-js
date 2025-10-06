@@ -18,7 +18,7 @@ export declare namespace Music {
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
         /** Additional headers to include in requests. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 
     export interface RequestOptions {
@@ -30,8 +30,10 @@ export declare namespace Music {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional query string parameters to include in the request. */
+        queryParams?: Record<string, unknown>;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 }
 
@@ -70,6 +72,11 @@ export class Music {
             });
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -78,13 +85,9 @@ export class Music {
                 "v1/music",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
-            queryParameters: _queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.BodyComposeMusicV1MusicPost.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
@@ -158,6 +161,11 @@ export class Music {
             );
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -166,13 +174,9 @@ export class Music {
                 "v1/music/detailed",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
-            queryParameters: _queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -247,6 +251,11 @@ export class Music {
             });
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher<ReadableStream<Uint8Array>>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -255,13 +264,9 @@ export class Music {
                 "v1/music/stream",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
-            queryParameters: _queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.BodyStreamComposedMusicV1MusicStreamPost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",

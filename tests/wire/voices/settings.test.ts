@@ -4,6 +4,7 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("Settings", () => {
     test("get_default", async () => {
@@ -29,7 +30,7 @@ describe("Settings", () => {
         });
     });
 
-    test("get", async () => {
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -52,7 +53,25 @@ describe("Settings", () => {
         });
     });
 
-    test("update", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/voices/voice_id/settings")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.voices.settings.get("voice_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { stability: 1, use_speaker_boost: true, similarity_boost: 1, style: 0, speed: 1 };
@@ -76,5 +95,36 @@ describe("Settings", () => {
         expect(response).toEqual({
             status: "ok",
         });
+    });
+
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            stability: undefined,
+            use_speaker_boost: undefined,
+            similarity_boost: undefined,
+            style: undefined,
+            speed: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/voices/voice_id/settings/edit")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.voices.settings.update("voice_id", {
+                stability: undefined,
+                useSpeakerBoost: undefined,
+                similarityBoost: undefined,
+                style: undefined,
+                speed: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../../src/Client";
+import * as ElevenLabs from "../../../../../src/api/index";
 
 describe("Speakers", () => {
-    test("get", async () => {
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -48,7 +49,25 @@ describe("Speakers", () => {
         });
     });
 
-    test("separate", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/voices/pvc/voice_id/samples/sample_id/speakers")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.voices.pvc.samples.speakers.get("voice_id", "sample_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("separate (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -68,5 +87,23 @@ describe("Speakers", () => {
         expect(response).toEqual({
             status: "ok",
         });
+    });
+
+    test("separate (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/voices/pvc/voice_id/samples/sample_id/separate-speakers")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.voices.pvc.samples.speakers.separate("voice_id", "sample_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

@@ -21,7 +21,7 @@ export declare namespace Voices {
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
         /** Additional headers to include in requests. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 
     export interface RequestOptions {
@@ -33,8 +33,10 @@ export declare namespace Voices {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional query string parameters to include in the request. */
+        queryParams?: Record<string, unknown>;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 }
 
@@ -98,6 +100,11 @@ export class Voices {
             _queryParams["show_legacy"] = showLegacy.toString();
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -106,12 +113,8 @@ export class Voices {
                 "v1/voices",
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
-            queryParameters: _queryParams,
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -261,6 +264,11 @@ export class Voices {
             }
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -269,12 +277,8 @@ export class Voices {
                 "v2/voices",
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
-            queryParameters: _queryParams,
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -362,6 +366,11 @@ export class Voices {
             _queryParams["with_settings"] = withSettings.toString();
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -370,12 +379,8 @@ export class Voices {
                 `v1/voices/${encodeURIComponent(voiceId)}`,
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
-            queryParameters: _queryParams,
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -452,6 +457,11 @@ export class Voices {
         voiceId: string,
         requestOptions?: Voices.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DeleteVoiceResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -460,11 +470,8 @@ export class Voices {
                 `v1/voices/${encodeURIComponent(voiceId)}`,
             ),
             method: "DELETE",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -529,6 +536,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
+     *     import { createReadStream } from "fs";
      *     await client.voices.update("21m00Tcm4TlvDq8ikWAM", {
      *         name: "name"
      *     })
@@ -567,6 +575,14 @@ export class Voices {
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                ..._maybeEncodedRequest.headers,
+            }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -575,11 +591,8 @@ export class Voices {
                 `v1/voices/${encodeURIComponent(voiceId)}/edit`,
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey, ..._maybeEncodedRequest.headers }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -669,6 +682,11 @@ export class Voices {
         request: ElevenLabs.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost,
         requestOptions?: Voices.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AddVoiceResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -677,12 +695,9 @@ export class Voices {
                 `v1/voices/add/${encodeURIComponent(publicUserId)}/${encodeURIComponent(voiceId)}`,
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -885,6 +900,11 @@ export class Voices {
             _queryParams["page"] = page.toString();
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -893,12 +913,8 @@ export class Voices {
                 "v1/shared-voices",
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
-            queryParameters: _queryParams,
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -962,6 +978,7 @@ export class Voices {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
+     *     import { createReadStream } from "fs";
      *     await client.voices.findSimilarVoices({})
      */
     public findSimilarVoices(
@@ -989,6 +1006,14 @@ export class Voices {
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                ..._maybeEncodedRequest.headers,
+            }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -997,11 +1022,8 @@ export class Voices {
                 "v1/similar-voices",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey, ..._maybeEncodedRequest.headers }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

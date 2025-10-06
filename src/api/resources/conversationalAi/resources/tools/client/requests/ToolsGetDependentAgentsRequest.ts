@@ -10,12 +10,8 @@
  *     }
  */
 export interface ToolsGetDependentAgentsRequest {
-    /**
-     * Used for fetching next page. Cursor is returned in the response.
-     */
+    /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
-    /**
-     * How many documents to return at maximum. Can not exceed 100, defaults to 30.
-     */
+    /** How many documents to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
 }

@@ -12,7 +12,8 @@ import * as core from "../../../../../../../../../core";
  *     }
  */
 export interface BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost {
-    file: core.FileLike;
+    /** Documentation that the agent will have access to in order to interact with users. */
+    file: core.file.Uploadable.FileLike;
     /** A custom, human-readable name for the document. */
     name?: string;
 }

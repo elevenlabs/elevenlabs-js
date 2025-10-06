@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("Invocations", () => {
-    test("list", async () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -73,7 +74,27 @@ describe("Invocations", () => {
         });
     });
 
-    test("get", async () => {
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/test-invocations")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.invocations.list({
+                agentId: "agent_id",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -143,7 +164,25 @@ describe("Invocations", () => {
         });
     });
 
-    test("resubmit", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/test-invocations/test_invocation_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.invocations.get("test_invocation_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("resubmit (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { test_run_ids: ["test_run_ids"], agent_id: "agent_id" };
@@ -164,5 +203,32 @@ describe("Invocations", () => {
         expect(response).toEqual({
             key: "value",
         });
+    });
+
+    test("resubmit (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            test_run_ids: ["test_run_ids", "test_run_ids"],
+            agent_config_override: undefined,
+            agent_id: "agent_id",
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/test-invocations/test_invocation_id/resubmit")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.tests.invocations.resubmit("test_invocation_id", {
+                testRunIds: ["test_run_ids", "test_run_ids"],
+                agentConfigOverride: undefined,
+                agentId: "agent_id",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

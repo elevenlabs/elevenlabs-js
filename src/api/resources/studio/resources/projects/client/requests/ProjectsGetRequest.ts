@@ -9,8 +9,6 @@
  *     }
  */
 export interface ProjectsGetRequest {
-    /**
-     * The share ID of the project
-     */
+    /** The share ID of the project */
     shareId?: string;
 }

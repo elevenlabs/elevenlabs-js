@@ -26,6 +26,7 @@ export const WorkspaceResourceType: core.serialization.Schema<
     "convai_batch_calls",
     "convai_agent_response_tests",
     "convai_test_suite_invocations",
+    "convai_whatsapp_accounts",
 ]);
 
 export declare namespace WorkspaceResourceType {
@@ -45,5 +46,6 @@ export declare namespace WorkspaceResourceType {
         | "convai_mcp_servers"
         | "convai_batch_calls"
         | "convai_agent_response_tests"
-        | "convai_test_suite_invocations";
+        | "convai_test_suite_invocations"
+        | "convai_whatsapp_accounts";
 }

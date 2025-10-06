@@ -15,7 +15,8 @@ import * as core from "../../../../../../../core";
 export interface BodyAddVoiceV1VoicesAddPost {
     /** The name that identifies this voice. This will be displayed in the dropdown of the website. */
     name: string;
-    files: core.FileLike[];
+    /** A list of file paths to audio recordings intended for voice cloning. */
+    files: core.file.Uploadable.FileLike[];
     /** If set will remove background noise for voice samples using our audio isolation model. If the samples do not include background noise, it can make the quality worse. */
     removeBackgroundNoise?: boolean;
     /** A description of the voice. */

@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("PronunciationDictionaries", () => {
-    test("create", async () => {
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
@@ -32,5 +33,42 @@ describe("PronunciationDictionaries", () => {
         expect(response).toEqual({
             status: "ok",
         });
+    });
+
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            pronunciation_dictionary_locators: [
+                { pronunciation_dictionary_id: "pronunciation_dictionary_id", version_id: undefined },
+                { pronunciation_dictionary_id: "pronunciation_dictionary_id", version_id: undefined },
+            ],
+            invalidate_affected_text: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/studio/projects/project_id/pronunciation-dictionaries")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.studio.projects.pronunciationDictionaries.create("project_id", {
+                pronunciationDictionaryLocators: [
+                    {
+                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                        versionId: undefined,
+                    },
+                    {
+                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                        versionId: undefined,
+                    },
+                ],
+                invalidateAffectedText: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });
