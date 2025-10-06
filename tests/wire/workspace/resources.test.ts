@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("Resources", () => {
-    test("get", async () => {
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -61,7 +62,27 @@ describe("Resources", () => {
         });
     });
 
-    test("share", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/workspace/resources/resource_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.resources.get("resource_id", {
+                resourceType: "voice",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("share (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { role: "admin", resource_type: "voice" };
@@ -84,7 +105,38 @@ describe("Resources", () => {
         });
     });
 
-    test("unshare", async () => {
+    test("share (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            role: "admin",
+            resource_type: "voice",
+            user_email: undefined,
+            group_id: undefined,
+            workspace_api_key_id: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/workspace/resources/resource_id/share")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.resources.share("resource_id", {
+                role: "admin",
+                resourceType: "voice",
+                userEmail: undefined,
+                groupId: undefined,
+                workspaceApiKeyId: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("unshare (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { resource_type: "voice" };
@@ -104,5 +156,34 @@ describe("Resources", () => {
         expect(response).toEqual({
             key: "value",
         });
+    });
+
+    test("unshare (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            resource_type: "voice",
+            user_email: undefined,
+            group_id: undefined,
+            workspace_api_key_id: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/workspace/resources/resource_id/unshare")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.resources.unshare("resource_id", {
+                resourceType: "voice",
+                userEmail: undefined,
+                groupId: undefined,
+                workspaceApiKeyId: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

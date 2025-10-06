@@ -11,7 +11,8 @@ import * as core from "../../../../../../../../../core";
 export interface BodyUpdateStudioProjectContentV1StudioProjectsProjectIdContentPost {
     /** An optional URL from which we will extract content to initialize the Studio project. If this is set, 'from_url' and 'from_content' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank. */
     fromUrl?: string;
-    fromDocument?: core.FileLike | undefined;
+    /** An optional .epub, .pdf, .txt or similar file can be provided. If provided, we will initialize the Studio project with its content. If this is set, 'from_url' and 'from_content' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank. */
+    fromDocument?: core.file.Uploadable.FileLike | undefined;
     /**
      *     An optional content to initialize the Studio project with. If this is set, 'from_url' and 'from_document' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank.
      *

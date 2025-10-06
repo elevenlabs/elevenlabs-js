@@ -16,5 +16,6 @@ export interface BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost {
     name?: string;
     /** URL to a page of documentation that the agent will have access to in order to interact with users. */
     url?: string;
-    file?: core.FileLike | undefined;
+    /** Documentation that the agent will have access to in order to interact with users. */
+    file?: core.file.Uploadable.FileLike | undefined;
 }

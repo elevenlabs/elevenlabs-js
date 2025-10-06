@@ -12,5 +12,6 @@ import * as core from "../../../../../../../../../../../core";
  *     }
  */
 export interface BodyVerifyPvcVoiceCaptchaV1VoicesPvcVoiceIdCaptchaPost {
-    recording: core.FileLike;
+    /** Audio recording of the user */
+    recording: core.file.Uploadable.FileLike;
 }

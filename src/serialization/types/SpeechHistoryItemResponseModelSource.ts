@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const SpeechHistoryItemResponseModelSource: core.serialization.Schema<
     serializers.SpeechHistoryItemResponseModelSource.Raw,
     ElevenLabs.SpeechHistoryItemResponseModelSource
-> = core.serialization.enum_(["TTS", "STS", "Projects", "PD", "AN", "Dubbing", "PlayAPI", "ConvAI"]);
+> = core.serialization.enum_(["TTS", "STS", "Projects", "PD", "AN", "Dubbing", "PlayAPI", "ConvAI", "VoiceGeneration"]);
 
 export declare namespace SpeechHistoryItemResponseModelSource {
-    export type Raw = "TTS" | "STS" | "Projects" | "PD" | "AN" | "Dubbing" | "PlayAPI" | "ConvAI";
+    export type Raw = "TTS" | "STS" | "Projects" | "PD" | "AN" | "Dubbing" | "PlayAPI" | "ConvAI" | "VoiceGeneration";
 }

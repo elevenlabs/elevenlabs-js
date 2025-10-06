@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../../src/Client";
+import * as ElevenLabs from "../../../../../src/api/index";
 
 describe("Segment", () => {
-    test("create", async () => {
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { start_time: 1.1, end_time: 1.1 };
@@ -28,5 +29,29 @@ describe("Segment", () => {
             version: 1,
             newSegment: "new_segment",
         });
+    });
+
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { start_time: 1.1, end_time: 1.1, text: undefined, translations: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/dubbing/resource/dubbing_id/speaker/speaker_id/segment")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.dubbing.resource.speaker.segment.create("dubbing_id", "speaker_id", {
+                startTime: 1.1,
+                endTime: 1.1,
+                text: undefined,
+                translations: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

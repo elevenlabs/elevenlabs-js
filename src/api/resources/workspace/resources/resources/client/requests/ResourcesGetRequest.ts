@@ -11,8 +11,6 @@ import * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface ResourcesGetRequest {
-    /**
-     * Resource type of the target resource.
-     */
+    /** Resource type of the target resource. */
     resourceType: ElevenLabs.WorkspaceResourceType;
 }

@@ -4,13 +4,14 @@
 
 import { mockServerPool } from "../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../src/Client";
+import * as ElevenLabs from "../../src/api/index";
 
 describe("PronunciationDictionaries", () => {
-    test("create_from_rules", async () => {
+    test("create_from_rules (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
-            rules: [{ string_to_replace: "Thailand", alias: "tie-land", type: "alias" }],
+            rules: [{ type: "alias", string_to_replace: "Thailand", alias: "tie-land" }],
             name: "My Dictionary",
         };
         const rawResponseBody = {
@@ -54,7 +55,50 @@ describe("PronunciationDictionaries", () => {
         });
     });
 
-    test("get", async () => {
+    test("create_from_rules (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            rules: [
+                { type: "alias", string_to_replace: "string_to_replace", alias: "alias" },
+                { type: "alias", string_to_replace: "string_to_replace", alias: "alias" },
+            ],
+            name: "name",
+            description: undefined,
+            workspace_access: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/pronunciation-dictionaries/add-from-rules")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.pronunciationDictionaries.createFromRules({
+                rules: [
+                    {
+                        type: "alias",
+                        stringToReplace: "string_to_replace",
+                        alias: "alias",
+                    },
+                    {
+                        type: "alias",
+                        stringToReplace: "string_to_replace",
+                        alias: "alias",
+                    },
+                ],
+                name: "name",
+                description: undefined,
+                workspaceAccess: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -91,7 +135,25 @@ describe("PronunciationDictionaries", () => {
         });
     });
 
-    test("update", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/pronunciation-dictionaries/pronunciation_dictionary_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.pronunciationDictionaries.get("pronunciation_dictionary_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -129,7 +191,29 @@ describe("PronunciationDictionaries", () => {
         });
     });
 
-    test("list", async () => {
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { archived: undefined, name: undefined };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .patch("/v1/pronunciation-dictionaries/pronunciation_dictionary_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.pronunciationDictionaries.update("pronunciation_dictionary_id", {
+                archived: undefined,
+                name: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -181,5 +265,23 @@ describe("PronunciationDictionaries", () => {
             nextCursor: "5xM3yVvZQKV0EfqQpLr2",
             hasMore: false,
         });
+    });
+
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/pronunciation-dictionaries")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.pronunciationDictionaries.list();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

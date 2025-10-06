@@ -12,5 +12,6 @@ import * as core from "../../../../../../../../../../../core";
  *     }
  */
 export interface BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost {
-    avatarFile: core.FileLike;
+    /** An image file to be used as the agent's avatar. */
+    avatarFile: core.file.Uploadable.FileLike;
 }

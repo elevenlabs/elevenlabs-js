@@ -10,7 +10,8 @@ export type SpeechHistoryItemResponseModelSource =
     | "AN"
     | "Dubbing"
     | "PlayAPI"
-    | "ConvAI";
+    | "ConvAI"
+    | "VoiceGeneration";
 export const SpeechHistoryItemResponseModelSource = {
     Tts: "TTS",
     Sts: "STS",
@@ -20,4 +21,5 @@ export const SpeechHistoryItemResponseModelSource = {
     Dubbing: "Dubbing",
     PlayApi: "PlayAPI",
     ConvAi: "ConvAI",
+    VoiceGeneration: "VoiceGeneration",
 } as const;

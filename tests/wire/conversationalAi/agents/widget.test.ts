@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("Widget", () => {
-    test("get", async () => {
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -16,7 +17,7 @@ describe("Widget", () => {
                 variant: "tiny",
                 placement: "top-left",
                 expandable: "never",
-                avatar: { color_1: "#2792dc", color_2: "#9ce6e6", type: "orb" },
+                avatar: { type: "orb", color_1: "#2792dc", color_2: "#9ce6e6" },
                 feedback_mode: "none",
                 bg_color: "bg_color",
                 text_color: "text_color",
@@ -213,5 +214,23 @@ describe("Widget", () => {
                 useRtc: false,
             },
         });
+    });
+
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/agents/agent_id/widget")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.agents.widget.get("agent_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

@@ -24,6 +24,7 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gemini-2.0-flash-lite",
     "gemini-2.5-flash-lite",
     "gemini-2.5-flash",
+    "claude-sonnet-4-5",
     "claude-sonnet-4",
     "claude-3-7-sonnet",
     "claude-3-5-sonnet",
@@ -36,6 +37,8 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gpt-oss-20b",
     "gpt-oss-120b",
     "glm-45-air-fp8",
+    "gemini-2.5-flash-preview-09-2025",
+    "gemini-2.5-flash-lite-preview-09-2025",
     "gemini-2.5-flash-preview-05-20",
     "gemini-2.5-flash-preview-04-17",
     "gemini-2.5-flash-lite-preview-06-17",
@@ -46,6 +49,7 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gemini-1.5-pro-002",
     "gemini-1.5-pro-001",
     "claude-sonnet-4@20250514",
+    "claude-sonnet-4-5@20250929",
     "claude-3-7-sonnet@20250219",
     "claude-3-5-sonnet@20240620",
     "claude-3-5-sonnet-v2@20241022",
@@ -88,6 +92,7 @@ export declare namespace Llm {
         | "gemini-2.0-flash-lite"
         | "gemini-2.5-flash-lite"
         | "gemini-2.5-flash"
+        | "claude-sonnet-4-5"
         | "claude-sonnet-4"
         | "claude-3-7-sonnet"
         | "claude-3-5-sonnet"
@@ -100,6 +105,8 @@ export declare namespace Llm {
         | "gpt-oss-20b"
         | "gpt-oss-120b"
         | "glm-45-air-fp8"
+        | "gemini-2.5-flash-preview-09-2025"
+        | "gemini-2.5-flash-lite-preview-09-2025"
         | "gemini-2.5-flash-preview-05-20"
         | "gemini-2.5-flash-preview-04-17"
         | "gemini-2.5-flash-lite-preview-06-17"
@@ -110,6 +117,7 @@ export declare namespace Llm {
         | "gemini-1.5-pro-002"
         | "gemini-1.5-pro-001"
         | "claude-sonnet-4@20250514"
+        | "claude-sonnet-4-5@20250929"
         | "claude-3-7-sonnet@20250219"
         | "claude-3-5-sonnet@20240620"
         | "claude-3-5-sonnet-v2@20241022"

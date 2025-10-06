@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("SipTrunk", () => {
-    test("outbound_call", async () => {
+    test("outbound_call (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
@@ -40,5 +41,34 @@ describe("SipTrunk", () => {
             conversationId: "conversation_id",
             sipCallId: "sip_call_id",
         });
+    });
+
+    test("outbound_call (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            agent_id: "agent_id",
+            agent_phone_number_id: "agent_phone_number_id",
+            to_number: "to_number",
+            conversation_initiation_client_data: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/sip-trunk/outbound-call")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.sipTrunk.outboundCall({
+                agentId: "agent_id",
+                agentPhoneNumberId: "agent_phone_number_id",
+                toNumber: "to_number",
+                conversationInitiationClientData: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

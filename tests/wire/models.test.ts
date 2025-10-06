@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../src/Client";
+import * as ElevenLabs from "../../src/api/index";
 
 describe("Models", () => {
-    test("list", async () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -64,5 +65,17 @@ describe("Models", () => {
                 concurrencyGroup: "standard_eleven_multilingual_v2",
             },
         ]);
+    });
+
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server.mockEndpoint().get("/v1/models").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.models.list();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

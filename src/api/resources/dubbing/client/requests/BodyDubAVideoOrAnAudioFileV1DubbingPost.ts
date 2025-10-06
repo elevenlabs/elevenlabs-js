@@ -10,10 +10,14 @@ import * as ElevenLabs from "../../../../index";
  *     {}
  */
 export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
-    file?: core.FileLike | undefined;
-    csvFile?: core.FileLike | undefined;
-    foregroundAudioFile?: core.FileLike | undefined;
-    backgroundAudioFile?: core.FileLike | undefined;
+    /** A list of file paths to audio recordings intended for voice cloning */
+    file?: core.file.Uploadable.FileLike | undefined;
+    /** CSV file containing transcription/translation metadata */
+    csvFile?: core.file.Uploadable.FileLike | undefined;
+    /** For use only with csv input */
+    foregroundAudioFile?: core.file.Uploadable.FileLike | undefined;
+    /** For use only with csv input */
+    backgroundAudioFile?: core.file.Uploadable.FileLike | undefined;
     /** Name of the dubbing project. */
     name?: string;
     /** URL of the source video/audio file. */

@@ -8,10 +8,10 @@ import * as ElevenLabs from "../../../../../index";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers";
 import * as serializers from "../../../../../../serialization/index";
 import * as errors from "../../../../../../errors/index";
+import { PronunciationDictionaries } from "../resources/pronunciationDictionaries/client/Client";
 import { Content } from "../resources/content/client/Client";
 import { Snapshots } from "../resources/snapshots/client/Client";
 import { Chapters } from "../resources/chapters/client/Client";
-import { PronunciationDictionaries } from "../resources/pronunciationDictionaries/client/Client";
 
 export declare namespace Projects {
     export interface Options {
@@ -21,7 +21,7 @@ export declare namespace Projects {
         /** Override the xi-api-key header */
         apiKey?: core.Supplier<string | undefined>;
         /** Additional headers to include in requests. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 
     export interface RequestOptions {
@@ -33,20 +33,26 @@ export declare namespace Projects {
         abortSignal?: AbortSignal;
         /** Override the xi-api-key header */
         apiKey?: string | undefined;
+        /** Additional query string parameters to include in the request. */
+        queryParams?: Record<string, unknown>;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 }
 
 export class Projects {
     protected readonly _options: Projects.Options;
+    protected _pronunciationDictionaries: PronunciationDictionaries | undefined;
     protected _content: Content | undefined;
     protected _snapshots: Snapshots | undefined;
     protected _chapters: Chapters | undefined;
-    protected _pronunciationDictionaries: PronunciationDictionaries | undefined;
 
     constructor(_options: Projects.Options = {}) {
         this._options = _options;
+    }
+
+    public get pronunciationDictionaries(): PronunciationDictionaries {
+        return (this._pronunciationDictionaries ??= new PronunciationDictionaries(this._options));
     }
 
     public get content(): Content {
@@ -59,10 +65,6 @@ export class Projects {
 
     public get chapters(): Chapters {
         return (this._chapters ??= new Chapters(this._options));
-    }
-
-    public get pronunciationDictionaries(): PronunciationDictionaries {
-        return (this._pronunciationDictionaries ??= new PronunciationDictionaries(this._options));
     }
 
     /**
@@ -82,6 +84,11 @@ export class Projects {
     private async __list(
         requestOptions?: Projects.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetProjectsResponse>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -90,11 +97,8 @@ export class Projects {
                 "v1/studio/projects",
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -158,6 +162,7 @@ export class Projects {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
+     *     import { createReadStream } from "fs";
      *     await client.studio.projects.create({
      *         name: "name"
      *     })
@@ -305,6 +310,14 @@ export class Projects {
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                ..._maybeEncodedRequest.headers,
+            }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -313,11 +326,8 @@ export class Projects {
                 "v1/studio/projects",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey, ..._maybeEncodedRequest.headers }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -408,6 +418,11 @@ export class Projects {
             _queryParams["share_id"] = shareId;
         }
 
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -416,12 +431,8 @@ export class Projects {
                 `v1/studio/projects/${encodeURIComponent(projectId)}`,
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
-            queryParameters: _queryParams,
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -507,6 +518,11 @@ export class Projects {
         request: ElevenLabs.studio.BodyUpdateStudioProjectV1StudioProjectsProjectIdPost,
         requestOptions?: Projects.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.EditProjectResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -515,12 +531,9 @@ export class Projects {
                 `v1/studio/projects/${encodeURIComponent(projectId)}`,
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.studio.BodyUpdateStudioProjectV1StudioProjectsProjectIdPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -603,6 +616,11 @@ export class Projects {
         projectId: string,
         requestOptions?: Projects.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DeleteProjectResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -611,11 +629,8 @@ export class Projects {
                 `v1/studio/projects/${encodeURIComponent(projectId)}`,
             ),
             method: "DELETE",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -694,6 +709,11 @@ export class Projects {
         projectId: string,
         requestOptions?: Projects.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ConvertProjectResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -702,11 +722,8 @@ export class Projects {
                 `v1/studio/projects/${encodeURIComponent(projectId)}/convert`,
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

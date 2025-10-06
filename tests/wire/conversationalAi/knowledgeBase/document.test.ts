@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../../src/Client";
+import * as ElevenLabs from "../../../../src/api/index";
 
 describe("Document", () => {
-    test("compute_rag_index", async () => {
+    test("compute_rag_index (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "e5_mistral_7b_instruct" };
@@ -38,5 +39,26 @@ describe("Document", () => {
                 usedBytes: 1,
             },
         });
+    });
+
+    test("compute_rag_index (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { model: "e5_mistral_7b_instruct" };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/knowledge-base/documentation_id/rag-index")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.knowledgeBase.document.computeRagIndex("documentation_id", {
+                model: "e5_mistral_7b_instruct",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

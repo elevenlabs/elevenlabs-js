@@ -4,21 +4,22 @@
 
 import { mockServerPool } from "../../mock-server/MockServerPool";
 import { ElevenLabsClient } from "../../../src/Client";
+import * as ElevenLabs from "../../../src/api/index";
 
 describe("PhoneNumbers", () => {
-    test("list", async () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = [
             {
+                provider: "twilio",
                 phone_number: "+1234567890",
                 label: "Customer Support",
                 supports_inbound: true,
                 supports_outbound: true,
                 phone_number_id: "phone_123",
                 assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
-                provider: "twilio",
             },
         ];
         server
@@ -46,15 +47,33 @@ describe("PhoneNumbers", () => {
         ]);
     });
 
-    test("create", async () => {
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/phone-numbers")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.phoneNumbers.list();
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
+            provider: "twilio",
             phone_number: "phone_number",
             label: "label",
             sid: "sid",
             token: "token",
-            provider: "twilio",
         };
         const rawResponseBody = { phone_number_id: "phone_number_id" };
         server
@@ -78,18 +97,53 @@ describe("PhoneNumbers", () => {
         });
     });
 
-    test("get", async () => {
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            provider: "twilio",
+            phone_number: "phone_number",
+            label: "label",
+            supports_inbound: undefined,
+            supports_outbound: undefined,
+            sid: "sid",
+            token: "token",
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/phone-numbers")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.phoneNumbers.create({
+                provider: "twilio",
+                phoneNumber: "phone_number",
+                label: "label",
+                supportsInbound: undefined,
+                supportsOutbound: undefined,
+                sid: "sid",
+                token: "token",
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
+            provider: "twilio",
             phone_number: "+1234567890",
             label: "Customer Support",
             supports_inbound: true,
             supports_outbound: true,
             phone_number_id: "phone_123",
             assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
-            provider: "twilio",
         };
         server
             .mockEndpoint()
@@ -114,7 +168,25 @@ describe("PhoneNumbers", () => {
         });
     });
 
-    test("delete", async () => {
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/phone-numbers/phone_number_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.phoneNumbers.get("phone_number_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
@@ -133,18 +205,36 @@ describe("PhoneNumbers", () => {
         });
     });
 
-    test("update", async () => {
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/phone-numbers/phone_number_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.phoneNumbers.delete("phone_number_id");
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
+    });
+
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
+            provider: "twilio",
             phone_number: "+1234567890",
             label: "Customer Support",
             supports_inbound: true,
             supports_outbound: true,
             phone_number_id: "phone_123",
             assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
-            provider: "twilio",
         };
         server
             .mockEndpoint()
@@ -168,5 +258,34 @@ describe("PhoneNumbers", () => {
                 agentName: "My Agent",
             },
         });
+    });
+
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            agent_id: undefined,
+            inbound_trunk_config: undefined,
+            outbound_trunk_config: undefined,
+            livekit_stack: undefined,
+        };
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .patch("/v1/convai/phone-numbers/phone_number_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.conversationalAi.phoneNumbers.update("phone_number_id", {
+                agentId: undefined,
+                inboundTrunkConfig: undefined,
+                outboundTrunkConfig: undefined,
+                livekitStack: undefined,
+            });
+        }).rejects.toThrow(ElevenLabs.UnprocessableEntityError);
     });
 });

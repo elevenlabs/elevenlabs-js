@@ -9,8 +9,6 @@
  *     }
  */
 export interface WidgetGetRequest {
-    /**
-     * An expiring token that enables a websocket conversation to start. These can be generated for an agent using the /v1/convai/conversation/get-signed-url endpoint
-     */
+    /** An expiring token that enables a websocket conversation to start. These can be generated for an agent using the /v1/convai/conversation/get-signed-url endpoint */
     conversationSignature?: string;
 }

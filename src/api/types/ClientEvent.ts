@@ -17,6 +17,7 @@ export type ClientEvent =
     | "mcp_connection_status"
     | "agent_tool_response"
     | "vad_score"
+    | "agent_chat_response_part"
     | "internal_turn_probability"
     | "internal_tentative_agent_response";
 export const ClientEvent = {
@@ -34,6 +35,7 @@ export const ClientEvent = {
     McpConnectionStatus: "mcp_connection_status",
     AgentToolResponse: "agent_tool_response",
     VadScore: "vad_score",
+    AgentChatResponsePart: "agent_chat_response_part",
     InternalTurnProbability: "internal_turn_probability",
     InternalTentativeAgentResponse: "internal_tentative_agent_response",
 } as const;
