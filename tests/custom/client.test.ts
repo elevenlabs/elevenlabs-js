@@ -225,7 +225,7 @@ describe("ElevenLabs API Tests", () => {
             const secret = "webhook_secret";
 
             // Generate expected signature
-            const signature = crypto.createHmac('sha256', secret).update(message).digest('hex');
+            const signature = crypto.createHmac("sha256", secret).update(message).digest("hex");
             const sigHeader = `t=${timestamp},v0=${signature}`;
 
             // Test valid webhook construction

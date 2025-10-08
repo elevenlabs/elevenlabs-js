@@ -26,19 +26,16 @@ yarn add @elevenlabs/elevenlabs-js
 ### Main Models
 
 1. **Eleven Multilingual v2** (`eleven_multilingual_v2`)
-
     - Excels in stability, language diversity, and accent accuracy
     - Supports 29 languages
     - Recommended for most use cases
 
 2. **Eleven Flash v2.5** (`eleven_flash_v2_5`)
-
     - Ultra-low latency
     - Supports 32 languages
     - Faster model, 50% lower price per character
 
-2. **Eleven Turbo v2.5** (`eleven_turbo_v2_5`)
-
+3. **Eleven Turbo v2.5** (`eleven_turbo_v2_5`)
     - Good balance of quality and latency
     - Ideal for developer use cases where speed is crucial
     - Supports 32 languages
@@ -107,10 +104,10 @@ than the configured retry limit (default: 2).
 
 A request is deemed able to retry when any of the following HTTP status codes is returned:
 
--   [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
--   [409](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409) (Conflict)
--   [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
--   [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [409](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409) (Conflict)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
 
 Use the `maxRetries` request option to configure this behavior.
 
@@ -119,7 +116,7 @@ const response = await elevenlabs.voices.search(
     {},
     {
         maxRetries: 2, // Set the maximum number of retries
-    }
+    },
 );
 ```
 
@@ -133,7 +130,7 @@ const response = await elevenlabs.voices.search(
     {},
     {
         timeoutInSeconds: 30, // override timeout to 30s
-    }
+    },
 );
 ```
 
@@ -144,11 +141,11 @@ works in the following runtimes:
 
 The following runtimes are supported:
 
--   Node.js 15+
--   Vercel
--   Cloudflare Workers
--   Deno v1.25+
--   Bun 1.0+
+- Node.js 15+
+- Vercel
+- Cloudflare Workers
+- Deno v1.25+
+- Bun 1.0+
 
 ## Elevenlabs Namespace
 

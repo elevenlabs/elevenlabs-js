@@ -17,7 +17,7 @@ export interface ConversationInitiationData {
  * @returns Complete conversation initiation data object
  */
 export function createConversationInitiationData(
-    options: Partial<ConversationInitiationData> = {}
+    options: Partial<ConversationInitiationData> = {},
 ): ConversationInitiationData {
     return {
         extraBody: options.extraBody || {},

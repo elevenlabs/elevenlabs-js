@@ -14,20 +14,20 @@ export class MockWebSocket extends EventEmitter implements WebSocketInterface {
 
     close(): void {
         this.readyState = 3; // CLOSED
-        this.emit('close', 1000, Buffer.from('Normal closure'));
+        this.emit("close", 1000, Buffer.from("Normal closure"));
     }
 
     // Helper methods for testing
     simulateMessage(message: any): void {
-        this.emit('message', JSON.stringify(message));
+        this.emit("message", JSON.stringify(message));
     }
 
     simulateError(error: Error): void {
-        this.emit('error', error);
+        this.emit("error", error);
     }
 
     simulateOpen(): void {
-        this.emit('open');
+        this.emit("open");
     }
 
     getSentMessages(): any[] {
@@ -101,18 +101,22 @@ export class MockAudioInterface extends AudioInterface {
 export class MockConversationClient implements ConversationClient {
     private mockSignedUrl = "wss://mock.elevenlabs.io/signed";
 
-    conversationalAi = {
+    conversationalAi: {
+        conversations: {
+            getSignedUrl: jest.Mock<any, any, any>;
+        };
+    } = {
         conversations: {
             getSignedUrl: jest.fn().mockResolvedValue({
-                signedUrl: this.mockSignedUrl
-            })
-        }
+                signedUrl: this.mockSignedUrl,
+            }),
+        },
     };
 
     setMockSignedUrl(url: string): void {
         this.mockSignedUrl = url;
         this.conversationalAi.conversations.getSignedUrl.mockResolvedValue({
-            signedUrl: url
+            signedUrl: url,
         });
     }
 }

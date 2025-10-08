@@ -7,7 +7,9 @@ export function isNode(): boolean {
     );
 }
 
-export async function* toAsyncIterable(stream: ReadableStream<Uint8Array>) {
+export async function* toAsyncIterable(
+    stream: ReadableStream<Uint8Array>,
+): AsyncGenerator<Uint8Array<ArrayBufferLike>, void, unknown> {
     const reader = stream.getReader();
     try {
         while (true) {
