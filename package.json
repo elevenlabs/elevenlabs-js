@@ -1,6 +1,6 @@
 {
     "name": "@elevenlabs/elevenlabs-js",
-    "version": "v2.17.0",
+    "version": "v2.18.0",
     "private": false,
     "repository": "github:elevenlabs/elevenlabs-js",
     "license": "MIT",
@@ -12,7 +12,6 @@
         "prepack": "cp -rv dist/. .",
         "test": "jest --config jest.config.mjs",
         "test:unit": "jest --selectProjects unit",
-        "test:browser": "jest --selectProjects browser",
         "test:wire": "jest --selectProjects wire"
     },
     "dependencies": {
