@@ -172,7 +172,7 @@ export class Conversation extends EventEmitter {
      *
      * Contextual updates are non-interrupting content that is sent to the server
      * to update the conversation state without directly prompting the agent.
-     * 
+     *
      * @param text The contextual information to send to the conversation
      */
     public sendContextualUpdate(text: string): void {
@@ -289,7 +289,7 @@ export class Conversation extends EventEmitter {
                     const correctionEvent = message.agent_response_correction_event;
                     this.callbackAgentResponseCorrection(
                         correctionEvent.original_agent_response.trim(),
-                        correctionEvent.corrected_agent_response.trim()
+                        correctionEvent.corrected_agent_response.trim(),
                     );
                 }
                 break;

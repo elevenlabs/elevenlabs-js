@@ -181,7 +181,7 @@ describe("Conversation", () => {
                 JSON.stringify({
                     type: "user_message",
                     text: "Hello, how are you?",
-                })
+                }),
             );
         });
 
@@ -191,7 +191,7 @@ describe("Conversation", () => {
             expect(mockWebSocket.send).toHaveBeenCalledWith(
                 JSON.stringify({
                     type: "user_activity",
-                })
+                }),
             );
         });
 
@@ -202,7 +202,7 @@ describe("Conversation", () => {
                 JSON.stringify({
                     type: "contextual_update",
                     text: "User is looking at product page",
-                })
+                }),
             );
         });
 
@@ -210,7 +210,7 @@ describe("Conversation", () => {
             conversation.endSession();
 
             expect(() => conversation.sendUserMessage("test")).toThrow(
-                "Session not started or websocket not connected"
+                "Session not started or websocket not connected",
             );
         });
     });
@@ -314,7 +314,7 @@ describe("Conversation", () => {
                 JSON.stringify({
                     type: "pong",
                     event_id: "ping-123",
-                })
+                }),
             );
         });
     });
@@ -354,7 +354,7 @@ describe("Conversation", () => {
             messageHandler(Buffer.from(JSON.stringify(message)));
 
             // Wait for async tool execution
-            await new Promise(resolve => setTimeout(resolve, 10));
+            await new Promise((resolve) => setTimeout(resolve, 10));
 
             expect(mockWebSocket.send).toHaveBeenLastCalledWith(
                 JSON.stringify({
@@ -362,7 +362,7 @@ describe("Conversation", () => {
                     tool_call_id: "call-123",
                     result: "Tool called with: test input",
                     is_error: false,
-                })
+                }),
             );
         });
     });
@@ -378,7 +378,7 @@ describe("Conversation", () => {
             await conversation.startSession();
 
             // Wait for session to be fully started
-            await new Promise(resolve => setTimeout(resolve, 10));
+            await new Promise((resolve) => setTimeout(resolve, 10));
             expect(conversation.isSessionActive()).toBe(true);
 
             conversation.endSession();
@@ -404,7 +404,7 @@ describe("Conversation", () => {
             conversation.endSession();
 
             // Wait for events to be emitted
-            await new Promise(resolve => setTimeout(resolve, 10));
+            await new Promise((resolve) => setTimeout(resolve, 10));
 
             expect(sessionStartedSpy).toHaveBeenCalled();
             expect(sessionEndedSpy).toHaveBeenCalled();

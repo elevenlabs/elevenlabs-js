@@ -7,10 +7,13 @@ import { ClientToolResultEvent, ClientToOrchestratorEvent } from "./events";
  * ensuring non-blocking operation of the main conversation thread.
  */
 export class ClientTools {
-    private tools: Map<string, {
-        handler: (parameters: Record<string, any>) => any | Promise<any>;
-        isAsync: boolean;
-    }> = new Map();
+    private tools: Map<
+        string,
+        {
+            handler: (parameters: Record<string, any>) => any | Promise<any>;
+            isAsync: boolean;
+        }
+    > = new Map();
 
     /**
      * Register a new tool that can be called by the AI agent.
@@ -22,7 +25,7 @@ export class ClientTools {
     public register(
         toolName: string,
         handler: (parameters: Record<string, any>) => any | Promise<any>,
-        isAsync?: boolean
+        isAsync?: boolean,
     ): void {
         if (!handler || typeof handler !== "function") {
             throw new Error("Handler must be a function");
@@ -73,7 +76,7 @@ export class ClientTools {
     public executeToolAsync(
         toolName: string,
         parameters: Record<string, any>,
-        callback: (response: ClientToolResultEvent) => void
+        callback: (response: ClientToolResultEvent) => void,
     ): void {
         // Run the tool execution in the next tick to avoid blocking
         setImmediate(async () => {

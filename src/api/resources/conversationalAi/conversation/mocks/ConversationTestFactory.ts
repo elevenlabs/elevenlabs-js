@@ -10,11 +10,13 @@ export interface TestConversationSetup {
     mockTools: ClientTools;
 }
 
-export function createTestConversation(options: {
-    agentId?: string;
-    requiresAuth?: boolean;
-    config?: any;
-} = {}): TestConversationSetup {
+export function createTestConversation(
+    options: {
+        agentId?: string;
+        requiresAuth?: boolean;
+        config?: any;
+    } = {},
+): TestConversationSetup {
     const mockWebSocketFactory = new MockWebSocketFactory();
     const mockAudio = new MockAudioInterface();
     const mockClient = new MockConversationClient();
@@ -27,7 +29,7 @@ export function createTestConversation(options: {
         requiresAuth: options.requiresAuth || false,
         audioInterface: mockAudio,
         clientTools: mockTools,
-        config: options.config
+        config: options.config,
     });
 
     return {
@@ -35,6 +37,6 @@ export function createTestConversation(options: {
         mockWebSocket: mockWebSocketFactory.getMockWebSocket(),
         mockAudio,
         mockClient,
-        mockTools
+        mockTools,
     };
 }
