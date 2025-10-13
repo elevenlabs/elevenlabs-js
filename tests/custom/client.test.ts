@@ -135,7 +135,7 @@ describe("ElevenLabs API Tests", () => {
     });
 
     describe("textToVoice", () => {
-        it("createPreviews", async () => {
+        it("design", async () => {
             const client = new ElevenLabsClient();
 
             const description =
