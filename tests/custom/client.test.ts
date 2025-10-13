@@ -143,7 +143,7 @@ describe("ElevenLabs API Tests", () => {
             const sampleText =
                 "This is a test message that needs to be at least one hundred characters long to meet the API requirements. Here it is.";
 
-            const previews = await client.textToVoice.createPreviews({
+            const previews = await client.textToVoice.design({
                 voiceDescription: description,
                 text: sampleText,
             });
