@@ -3,12 +3,14 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { Llm } from "./Llm";
 
 export const PromptAgentApiModelOverride: core.serialization.ObjectSchema<
     serializers.PromptAgentApiModelOverride.Raw,
     ElevenLabs.PromptAgentApiModelOverride
 > = core.serialization.object({
     prompt: core.serialization.string().optional(),
+    llm: Llm.optional(),
     nativeMcpServerIds: core.serialization.property(
         "native_mcp_server_ids",
         core.serialization.list(core.serialization.string()).optional(),
@@ -18,6 +20,7 @@ export const PromptAgentApiModelOverride: core.serialization.ObjectSchema<
 export declare namespace PromptAgentApiModelOverride {
     export interface Raw {
         prompt?: string | null;
+        llm?: Llm.Raw | null;
         native_mcp_server_ids?: string[] | null;
     }
 }

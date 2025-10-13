@@ -67,6 +67,10 @@ export class AudioIsolation {
             );
         }
 
+        if (request.previewB64 != null) {
+            _request.append("preview_b64", request.previewB64);
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

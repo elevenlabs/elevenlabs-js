@@ -20,6 +20,7 @@ export const BodyComposeMusicV1MusicPost: core.serialization.Schema<
         "respect_sections_durations",
         core.serialization.boolean().optional(),
     ),
+    storeForInpainting: core.serialization.property("store_for_inpainting", core.serialization.boolean().optional()),
 });
 
 export declare namespace BodyComposeMusicV1MusicPost {
@@ -32,5 +33,6 @@ export declare namespace BodyComposeMusicV1MusicPost {
         seed?: number | null;
         force_instrumental?: boolean | null;
         respect_sections_durations?: boolean | null;
+        store_for_inpainting?: boolean | null;
     }
 }

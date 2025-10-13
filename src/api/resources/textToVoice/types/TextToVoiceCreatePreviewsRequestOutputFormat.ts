@@ -3,6 +3,7 @@
 /** Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs. */
 export const TextToVoiceCreatePreviewsRequestOutputFormat = {
     Mp32205032: "mp3_22050_32",
+    Mp32400048: "mp3_24000_48",
     Mp34410032: "mp3_44100_32",
     Mp34410064: "mp3_44100_64",
     Mp34410096: "mp3_44100_96",
@@ -12,6 +13,7 @@ export const TextToVoiceCreatePreviewsRequestOutputFormat = {
     Pcm16000: "pcm_16000",
     Pcm22050: "pcm_22050",
     Pcm24000: "pcm_24000",
+    Pcm32000: "pcm_32000",
     Pcm44100: "pcm_44100",
     Pcm48000: "pcm_48000",
     Ulaw8000: "ulaw_8000",

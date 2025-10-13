@@ -3,21 +3,20 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { AuthSettings } from "./AuthSettings";
 import { EvaluationSettings } from "./EvaluationSettings";
 import { WidgetConfig } from "./WidgetConfig";
 import { LiteralJsonSchemaProperty } from "./LiteralJsonSchemaProperty";
 import { ConversationInitiationClientDataConfigInput } from "./ConversationInitiationClientDataConfigInput";
-import { AgentCallLimits } from "./AgentCallLimits";
-import { PrivacyConfig } from "./PrivacyConfig";
 import { AgentWorkspaceOverridesInput } from "./AgentWorkspaceOverridesInput";
 import { AgentTestingSettings } from "./AgentTestingSettings";
+import { AuthSettings } from "./AuthSettings";
+import { AgentCallLimits } from "./AgentCallLimits";
+import { PrivacyConfig } from "./PrivacyConfig";
 
 export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
     serializers.AgentPlatformSettingsRequestModel.Raw,
     ElevenLabs.AgentPlatformSettingsRequestModel
 > = core.serialization.object({
-    auth: AuthSettings.optional(),
     evaluation: EvaluationSettings.optional(),
     widget: WidgetConfig.optional(),
     dataCollection: core.serialization.property(
@@ -25,24 +24,25 @@ export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
         core.serialization.record(core.serialization.string(), LiteralJsonSchemaProperty).optional(),
     ),
     overrides: ConversationInitiationClientDataConfigInput.optional(),
-    callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
-    privacy: PrivacyConfig.optional(),
     workspaceOverrides: core.serialization.property("workspace_overrides", AgentWorkspaceOverridesInput.optional()),
     testing: AgentTestingSettings.optional(),
     archived: core.serialization.boolean().optional(),
+    auth: AuthSettings.optional(),
+    callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
+    privacy: PrivacyConfig.optional(),
 });
 
 export declare namespace AgentPlatformSettingsRequestModel {
     export interface Raw {
-        auth?: AuthSettings.Raw | null;
         evaluation?: EvaluationSettings.Raw | null;
         widget?: WidgetConfig.Raw | null;
         data_collection?: Record<string, LiteralJsonSchemaProperty.Raw> | null;
         overrides?: ConversationInitiationClientDataConfigInput.Raw | null;
-        call_limits?: AgentCallLimits.Raw | null;
-        privacy?: PrivacyConfig.Raw | null;
         workspace_overrides?: AgentWorkspaceOverridesInput.Raw | null;
         testing?: AgentTestingSettings.Raw | null;
         archived?: boolean | null;
+        auth?: AuthSettings.Raw | null;
+        call_limits?: AgentCallLimits.Raw | null;
+        privacy?: PrivacyConfig.Raw | null;
     }
 }

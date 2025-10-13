@@ -154,6 +154,7 @@ describe("BatchCalls", () => {
                                 language: "en",
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
                                     native_mcp_server_ids: undefined,
                                 },
                             },
@@ -207,6 +208,7 @@ describe("BatchCalls", () => {
                                 language: "en",
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
                                     nativeMcpServerIds: undefined,
                                 },
                             },

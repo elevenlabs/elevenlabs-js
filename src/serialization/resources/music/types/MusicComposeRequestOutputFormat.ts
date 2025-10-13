@@ -9,6 +9,7 @@ export const MusicComposeRequestOutputFormat: core.serialization.Schema<
     ElevenLabs.MusicComposeRequestOutputFormat
 > = core.serialization.enum_([
     "mp3_22050_32",
+    "mp3_24000_48",
     "mp3_44100_32",
     "mp3_44100_64",
     "mp3_44100_96",
@@ -18,6 +19,7 @@ export const MusicComposeRequestOutputFormat: core.serialization.Schema<
     "pcm_16000",
     "pcm_22050",
     "pcm_24000",
+    "pcm_32000",
     "pcm_44100",
     "pcm_48000",
     "ulaw_8000",
@@ -32,6 +34,7 @@ export const MusicComposeRequestOutputFormat: core.serialization.Schema<
 export declare namespace MusicComposeRequestOutputFormat {
     export type Raw =
         | "mp3_22050_32"
+        | "mp3_24000_48"
         | "mp3_44100_32"
         | "mp3_44100_64"
         | "mp3_44100_96"
@@ -41,6 +44,7 @@ export declare namespace MusicComposeRequestOutputFormat {
         | "pcm_16000"
         | "pcm_22050"
         | "pcm_24000"
+        | "pcm_32000"
         | "pcm_44100"
         | "pcm_48000"
         | "ulaw_8000"

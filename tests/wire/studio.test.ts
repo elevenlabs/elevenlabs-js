@@ -72,6 +72,7 @@ describe("Studio", () => {
                     max_words_per_line: 1,
                 },
                 public_share_id: "abc123def456789",
+                aspect_ratio: "16:9",
             },
         };
         server
@@ -175,6 +176,7 @@ describe("Studio", () => {
                     maxWordsPerLine: 1,
                 },
                 publicShareId: "abc123def456789",
+                aspectRatio: "16:9",
             },
         });
     });

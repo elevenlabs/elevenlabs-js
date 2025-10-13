@@ -5,6 +5,7 @@ import * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import { ConversationalConfig } from "../../../../../../types/ConversationalConfig";
 import { AgentPlatformSettingsRequestModel } from "../../../../../../types/AgentPlatformSettingsRequestModel";
+import { AgentWorkflowRequestModel } from "../../../../../../types/AgentWorkflowRequestModel";
 
 export const UpdateAgentRequest: core.serialization.Schema<
     serializers.conversationalAi.UpdateAgentRequest.Raw,
@@ -12,7 +13,7 @@ export const UpdateAgentRequest: core.serialization.Schema<
 > = core.serialization.object({
     conversationConfig: core.serialization.property("conversation_config", ConversationalConfig.optional()),
     platformSettings: core.serialization.property("platform_settings", AgentPlatformSettingsRequestModel.optional()),
-    workflow: core.serialization.unknown().optional(),
+    workflow: AgentWorkflowRequestModel.optional(),
     name: core.serialization.string().optional(),
     tags: core.serialization.list(core.serialization.string()).optional(),
 });
@@ -21,7 +22,7 @@ export declare namespace UpdateAgentRequest {
     export interface Raw {
         conversation_config?: ConversationalConfig.Raw | null;
         platform_settings?: AgentPlatformSettingsRequestModel.Raw | null;
-        workflow?: unknown | null;
+        workflow?: AgentWorkflowRequestModel.Raw | null;
         name?: string | null;
         tags?: string[] | null;
     }

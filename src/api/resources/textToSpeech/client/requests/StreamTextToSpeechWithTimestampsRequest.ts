@@ -52,6 +52,4 @@ export interface StreamTextToSpeechWithTimestampsRequest {
     applyTextNormalization?: ElevenLabs.BodyTextToSpeechStreamWithTimestampsApplyTextNormalization;
     /** This parameter controls language text normalization. This helps with proper pronunciation of text in some supported languages. WARNING: This parameter can heavily increase the latency of the request. Currently only supported for Japanese. */
     applyLanguageTextNormalization?: boolean;
-    /** HCaptcha token used to prevent spam, generated on the frontend either automatically or when the client solves the hCapctha challenge. */
-    hcaptchaToken?: string;
 }
