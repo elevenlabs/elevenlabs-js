@@ -65,6 +65,8 @@ export interface ProjectExtendedResponse {
     captionStyle?: ElevenLabs.CaptionStyleModel;
     /** The public share ID of the project. */
     publicShareId?: string;
+    /** The aspect ratio of the project. */
+    aspectRatio?: ElevenLabs.ProjectExtendedResponseModelAspectRatio;
     /** The quality preset level of the project. */
     qualityPreset: ElevenLabs.ProjectExtendedResponseModelQualityPreset;
     /** List of chapters of the project and their metadata. */

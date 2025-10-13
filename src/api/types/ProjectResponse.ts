@@ -65,4 +65,6 @@ export interface ProjectResponse {
     captionStyle?: ElevenLabs.CaptionStyleModel;
     /** The public share ID of the project. */
     publicShareId?: string;
+    /** The aspect ratio of the project. */
+    aspectRatio?: ElevenLabs.ProjectResponseModelAspectRatio;
 }

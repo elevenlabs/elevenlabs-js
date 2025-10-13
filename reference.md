@@ -3686,6 +3686,7 @@ await client.music.compose({
     seed: undefined,
     forceInstrumental: undefined,
     respectSectionsDurations: undefined,
+    storeForInpainting: undefined,
 });
 ```
 
@@ -3757,6 +3758,7 @@ await client.music.composeDetailed({
     modelId: undefined,
     seed: undefined,
     forceInstrumental: undefined,
+    storeForInpainting: undefined,
 });
 ```
 
@@ -3828,6 +3830,7 @@ await client.music.stream({
     modelId: undefined,
     seed: undefined,
     forceInstrumental: undefined,
+    storeForInpainting: undefined,
 });
 ```
 
@@ -4331,7 +4334,7 @@ await client.conversationalAi.agents.create({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">get</a>(agentId) -> ElevenLabs.GetAgentResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">get</a>(agentId, { ...params }) -> ElevenLabs.GetAgentResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4359,7 +4362,9 @@ Retrieve config for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.get("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    versionId: "version_id",
+});
 ```
 
 </dd>
@@ -4376,6 +4381,14 @@ await client.conversationalAi.agents.get("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **agentId:** `string` — The id of an agent. This is returned on agent creation.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.AgentsGetRequest`
 
 </dd>
 </dl>
@@ -4422,7 +4435,7 @@ Delete an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.delete("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
 ```
 
 </dd>
@@ -4485,7 +4498,7 @@ Patches an Agent settings
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.update("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
 ```
 
 </dd>
@@ -4625,7 +4638,7 @@ Create a new agent by duplicating an existing one
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.duplicate("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
 ```
 
 </dd>
@@ -4696,7 +4709,7 @@ Run a conversation between the agent and a simulated user.
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.simulateConversation("21m00Tcm4TlvDq8ikWAM", {
+await client.conversationalAi.agents.simulateConversation("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     simulationSpecification: {
         simulatedUserConfig: {
             firstMessage: "Hello, how can I help you today?",
@@ -4775,7 +4788,7 @@ Run a conversation between the agent and a simulated user and stream back the re
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8ikWAM", {
+await client.conversationalAi.agents.simulateConversationStream("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     simulationSpecification: {
         simulatedUserConfig: {
             firstMessage: "Hello, how can I help you today?",
@@ -4854,7 +4867,7 @@ Run selected tests on the agent with provided configuration. If the agent config
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.runTests("21m00Tcm4TlvDq8ikWAM", {
+await client.conversationalAi.agents.runTests("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     tests: [
         {
             testId: "test_id",
@@ -7276,7 +7289,7 @@ Retrieve the widget configuration for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.widget.get("21m00Tcm4TlvDq8ikWAM", {
+await client.conversationalAi.agents.widget.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     conversationSignature: "conversation_signature",
 });
 ```
@@ -7351,7 +7364,7 @@ Get the current link used to share the agent with others
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.link.get("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.agents.link.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
 ```
 
 </dd>
@@ -7554,7 +7567,7 @@ Sets the avatar for an agent displayed in the widget
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.widget.avatar.create("21m00Tcm4TlvDq8ikWAM", {
+await client.conversationalAi.agents.widget.avatar.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     avatarFile: fs.createReadStream("/path/to/your/file"),
 });
 ```

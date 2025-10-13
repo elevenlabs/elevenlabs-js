@@ -8,4 +8,6 @@ export interface BodyAudioIsolationV1AudioIsolationPost {
     audio: core.file.Uploadable.FileLike;
     /** The format of input audio. Options are 'pcm_s16le_16' or 'other' For `pcm_s16le_16`, the input audio must be 16-bit PCM at a 16kHz sample rate, single channel (mono), and little-endian byte order. Latency will be lower than with passing an encoded waveform. */
     fileFormat?: ElevenLabs.AudioIsolationConvertRequestFileFormat;
+    /** Optional preview image base64 for tracking this generation. */
+    previewB64?: string;
 }

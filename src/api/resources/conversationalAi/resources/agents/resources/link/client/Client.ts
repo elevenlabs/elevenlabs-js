@@ -50,7 +50,7 @@ export class Link {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.link.get("21m00Tcm4TlvDq8ikWAM")
+     *     await client.conversationalAi.agents.link.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz")
      */
     public get(
         agentId: string,

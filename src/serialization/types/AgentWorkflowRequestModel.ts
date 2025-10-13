@@ -3,20 +3,20 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { WorkflowEdgeModel } from "./WorkflowEdgeModel";
+import { WorkflowEdgeModelInput } from "./WorkflowEdgeModelInput";
 import { AgentWorkflowRequestModelNodesValue } from "./AgentWorkflowRequestModelNodesValue";
 
 export const AgentWorkflowRequestModel: core.serialization.ObjectSchema<
     serializers.AgentWorkflowRequestModel.Raw,
     ElevenLabs.AgentWorkflowRequestModel
 > = core.serialization.object({
-    edges: core.serialization.record(core.serialization.string(), WorkflowEdgeModel).optional(),
+    edges: core.serialization.record(core.serialization.string(), WorkflowEdgeModelInput).optional(),
     nodes: core.serialization.record(core.serialization.string(), AgentWorkflowRequestModelNodesValue).optional(),
 });
 
 export declare namespace AgentWorkflowRequestModel {
     export interface Raw {
-        edges?: Record<string, WorkflowEdgeModel.Raw> | null;
+        edges?: Record<string, WorkflowEdgeModelInput.Raw> | null;
         nodes?: Record<string, AgentWorkflowRequestModelNodesValue.Raw> | null;
     }
 }

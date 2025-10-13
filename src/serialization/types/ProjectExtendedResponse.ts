@@ -10,6 +10,7 @@ import { ProjectExtendedResponseModelFiction } from "./ProjectExtendedResponseMo
 import { ProjectCreationMetaResponseModel } from "./ProjectCreationMetaResponseModel";
 import { ProjectExtendedResponseModelSourceType } from "./ProjectExtendedResponseModelSourceType";
 import { CaptionStyleModel } from "./CaptionStyleModel";
+import { ProjectExtendedResponseModelAspectRatio } from "./ProjectExtendedResponseModelAspectRatio";
 import { ProjectExtendedResponseModelQualityPreset } from "./ProjectExtendedResponseModelQualityPreset";
 import { ChapterResponse } from "./ChapterResponse";
 import { PronunciationDictionaryVersionResponseModel } from "./PronunciationDictionaryVersionResponseModel";
@@ -63,6 +64,7 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     captionsEnabled: core.serialization.property("captions_enabled", core.serialization.boolean().optional()),
     captionStyle: core.serialization.property("caption_style", CaptionStyleModel.optional()),
     publicShareId: core.serialization.property("public_share_id", core.serialization.string().optional()),
+    aspectRatio: core.serialization.property("aspect_ratio", ProjectExtendedResponseModelAspectRatio.optional()),
     qualityPreset: core.serialization.property("quality_preset", ProjectExtendedResponseModelQualityPreset),
     chapters: core.serialization.list(ChapterResponse),
     pronunciationDictionaryVersions: core.serialization.property(
@@ -113,6 +115,7 @@ export declare namespace ProjectExtendedResponse {
         captions_enabled?: boolean | null;
         caption_style?: CaptionStyleModel.Raw | null;
         public_share_id?: string | null;
+        aspect_ratio?: ProjectExtendedResponseModelAspectRatio.Raw | null;
         quality_preset: ProjectExtendedResponseModelQualityPreset.Raw;
         chapters: ChapterResponse.Raw[];
         pronunciation_dictionary_versions: PronunciationDictionaryVersionResponseModel.Raw[];

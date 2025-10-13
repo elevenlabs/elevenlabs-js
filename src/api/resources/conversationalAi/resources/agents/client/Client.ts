@@ -167,24 +167,35 @@ export class Agents {
      * Retrieve config for an agent
      *
      * @param {string} agentId - The id of an agent. This is returned on agent creation.
+     * @param {ElevenLabs.conversationalAi.AgentsGetRequest} request
      * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.get("21m00Tcm4TlvDq8ikWAM")
+     *     await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+     *         versionId: "version_id"
+     *     })
      */
     public get(
         agentId: string,
+        request: ElevenLabs.conversationalAi.AgentsGetRequest = {},
         requestOptions?: Agents.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.GetAgentResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__get(agentId, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(agentId, request, requestOptions));
     }
 
     private async __get(
         agentId: string,
+        request: ElevenLabs.conversationalAi.AgentsGetRequest = {},
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
+        const { versionId } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (versionId != null) {
+            _queryParams["version_id"] = versionId;
+        }
+
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -199,7 +210,7 @@ export class Agents {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -265,7 +276,7 @@ export class Agents {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.delete("21m00Tcm4TlvDq8ikWAM")
+     *     await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz")
      */
     public delete(agentId: string, requestOptions?: Agents.RequestOptions): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__delete(agentId, requestOptions));
@@ -348,7 +359,7 @@ export class Agents {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.update("21m00Tcm4TlvDq8ikWAM")
+     *     await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz")
      */
     public update(
         agentId: string,
@@ -570,7 +581,7 @@ export class Agents {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.duplicate("21m00Tcm4TlvDq8ikWAM")
+     *     await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfyszkz")
      */
     public duplicate(
         agentId: string,
@@ -672,7 +683,7 @@ export class Agents {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.simulateConversation("21m00Tcm4TlvDq8ikWAM", {
+     *     await client.conversationalAi.agents.simulateConversation("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
      *         simulationSpecification: {
      *             simulatedUserConfig: {
      *                 firstMessage: "Hello, how can I help you today?",
@@ -782,7 +793,7 @@ export class Agents {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8ikWAM", {
+     *     await client.conversationalAi.agents.simulateConversationStream("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
      *         simulationSpecification: {
      *             simulatedUserConfig: {
      *                 firstMessage: "Hello, how can I help you today?",
@@ -886,7 +897,7 @@ export class Agents {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.runTests("21m00Tcm4TlvDq8ikWAM", {
+     *     await client.conversationalAi.agents.runTests("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
      *         tests: [{
      *                 testId: "test_id"
      *             }]

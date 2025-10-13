@@ -39,7 +39,6 @@ export const StreamTextToSpeechRequest: core.serialization.Schema<
         "apply_language_text_normalization",
         core.serialization.boolean().optional(),
     ),
-    hcaptchaToken: core.serialization.property("hcaptcha_token", core.serialization.string().optional()),
 });
 
 export declare namespace StreamTextToSpeechRequest {
@@ -57,6 +56,5 @@ export declare namespace StreamTextToSpeechRequest {
         use_pvc_as_ivc?: boolean | null;
         apply_text_normalization?: BodyTextToSpeechStreamApplyTextNormalization.Raw | null;
         apply_language_text_normalization?: boolean | null;
-        hcaptcha_token?: string | null;
     }
 }
