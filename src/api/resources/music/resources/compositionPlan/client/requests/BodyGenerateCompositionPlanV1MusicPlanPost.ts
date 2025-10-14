@@ -11,7 +11,7 @@ import * as ElevenLabs from "../../../../../../index";
 export interface BodyGenerateCompositionPlanV1MusicPlanPost {
     /** A simple text prompt to compose a plan from. */
     prompt: string;
-    /** The length of the composition plan to generate in milliseconds. Must be between 10000ms and 300000ms. Optional - if not provided, the model will choose a length based on the prompt. */
+    /** The length of the composition plan to generate in milliseconds. Must be between 3000ms and 300000ms. Optional - if not provided, the model will choose a length based on the prompt. */
     musicLengthMs?: number;
     /** An optional composition plan to use as a source for the new composition plan. */
     sourceCompositionPlan?: ElevenLabs.MusicPrompt;

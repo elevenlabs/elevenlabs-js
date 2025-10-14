@@ -18,6 +18,7 @@ describe("CompositionPlan", () => {
                     negative_local_styles: ["metal", "hip-hop", "country"],
                     duration_ms: 10000,
                     lines: ["Verse 1 lyrics"],
+                    source_from: { song_id: "song_id", range: { start_ms: 1, end_ms: 1 } },
                 },
             ],
         };
@@ -43,6 +44,13 @@ describe("CompositionPlan", () => {
                     negativeLocalStyles: ["metal", "hip-hop", "country"],
                     durationMs: 10000,
                     lines: ["Verse 1 lyrics"],
+                    sourceFrom: {
+                        songId: "song_id",
+                        range: {
+                            startMs: 1,
+                            endMs: 1,
+                        },
+                    },
                 },
             ],
         });

@@ -16,9 +16,11 @@ export interface GetAgentResponseModel {
     /** The phone numbers of the agent */
     phoneNumbers?: ElevenLabs.GetAgentResponseModelPhoneNumbersItem[];
     /** The workflow of the agent */
-    workflow?: unknown;
+    workflow?: ElevenLabs.AgentWorkflowResponseModel;
     /** The access information of the agent for the user */
     accessInfo?: ElevenLabs.ResourceAccessInfo;
     /** Agent tags used to categorize the agent */
     tags?: string[];
+    /** INTERNAL */
+    versionId?: string;
 }

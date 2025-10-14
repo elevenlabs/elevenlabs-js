@@ -12,7 +12,7 @@ export interface UpdateAgentRequest {
     /** Platform settings for the agent are all settings that aren't related to the conversation orchestration and content. */
     platformSettings?: ElevenLabs.AgentPlatformSettingsRequestModel;
     /** Workflow for the agent. This is used to define the flow of the conversation and how the agent interacts with tools. */
-    workflow?: unknown;
+    workflow?: ElevenLabs.AgentWorkflowRequestModel;
     /** A name to make the agent easier to find */
     name?: string;
     /** Tags to help classify and filter the agent */

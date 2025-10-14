@@ -66,6 +66,7 @@ describe("Projects", () => {
                         max_words_per_line: undefined,
                     },
                     public_share_id: "abc123def456789",
+                    aspect_ratio: "16:9",
                 },
             ],
         };
@@ -140,6 +141,7 @@ describe("Projects", () => {
                         maxWordsPerLine: undefined,
                     },
                     publicShareId: "abc123def456789",
+                    aspectRatio: "16:9",
                 },
             ],
         });
@@ -205,6 +207,7 @@ describe("Projects", () => {
                 max_words_per_line: 1,
             },
             public_share_id: "abc123def456789",
+            aspect_ratio: "16:9",
             quality_preset: "standard",
             chapters: [
                 {
@@ -333,6 +336,7 @@ describe("Projects", () => {
                 maxWordsPerLine: 1,
             },
             publicShareId: "abc123def456789",
+            aspectRatio: "16:9",
             qualityPreset: "standard",
             chapters: [
                 {
@@ -443,6 +447,7 @@ describe("Projects", () => {
                     max_words_per_line: 1,
                 },
                 public_share_id: "abc123def456789",
+                aspect_ratio: "16:9",
             },
         };
         server
@@ -538,6 +543,7 @@ describe("Projects", () => {
                     maxWordsPerLine: 1,
                 },
                 publicShareId: "abc123def456789",
+                aspectRatio: "16:9",
             },
         });
     });

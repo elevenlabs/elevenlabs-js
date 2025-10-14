@@ -3,24 +3,24 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { WorkflowEndNodeModel } from "./WorkflowEndNodeModel";
-import { WorkflowOverrideAgentNodeModel } from "./WorkflowOverrideAgentNodeModel";
-import { WorkflowPhoneNumberNodeModel } from "./WorkflowPhoneNumberNodeModel";
-import { WorkflowStandaloneAgentNodeModel } from "./WorkflowStandaloneAgentNodeModel";
-import { WorkflowStartNodeModel } from "./WorkflowStartNodeModel";
-import { WorkflowToolNodeModel } from "./WorkflowToolNodeModel";
+import { WorkflowEndNodeModelInput } from "./WorkflowEndNodeModelInput";
+import { WorkflowOverrideAgentNodeModelInput } from "./WorkflowOverrideAgentNodeModelInput";
+import { WorkflowPhoneNumberNodeModelInput } from "./WorkflowPhoneNumberNodeModelInput";
+import { WorkflowStandaloneAgentNodeModelInput } from "./WorkflowStandaloneAgentNodeModelInput";
+import { WorkflowStartNodeModelInput } from "./WorkflowStartNodeModelInput";
+import { WorkflowToolNodeModelInput } from "./WorkflowToolNodeModelInput";
 
 export const AgentWorkflowRequestModelNodesValue: core.serialization.Schema<
     serializers.AgentWorkflowRequestModelNodesValue.Raw,
     ElevenLabs.AgentWorkflowRequestModelNodesValue
 > = core.serialization
     .union("type", {
-        end: WorkflowEndNodeModel,
-        override_agent: WorkflowOverrideAgentNodeModel,
-        phone_number: WorkflowPhoneNumberNodeModel,
-        standalone_agent: WorkflowStandaloneAgentNodeModel,
-        start: WorkflowStartNodeModel,
-        tool: WorkflowToolNodeModel,
+        end: WorkflowEndNodeModelInput,
+        override_agent: WorkflowOverrideAgentNodeModelInput,
+        phone_number: WorkflowPhoneNumberNodeModelInput,
+        standalone_agent: WorkflowStandaloneAgentNodeModelInput,
+        start: WorkflowStartNodeModelInput,
+        tool: WorkflowToolNodeModelInput,
     })
     .transform<ElevenLabs.AgentWorkflowRequestModelNodesValue>({
         transform: (value) => value,
@@ -36,27 +36,27 @@ export declare namespace AgentWorkflowRequestModelNodesValue {
         | AgentWorkflowRequestModelNodesValue.Start
         | AgentWorkflowRequestModelNodesValue.Tool;
 
-    export interface End extends WorkflowEndNodeModel.Raw {
+    export interface End extends WorkflowEndNodeModelInput.Raw {
         type: "end";
     }
 
-    export interface OverrideAgent extends WorkflowOverrideAgentNodeModel.Raw {
+    export interface OverrideAgent extends WorkflowOverrideAgentNodeModelInput.Raw {
         type: "override_agent";
     }
 
-    export interface PhoneNumber extends WorkflowPhoneNumberNodeModel.Raw {
+    export interface PhoneNumber extends WorkflowPhoneNumberNodeModelInput.Raw {
         type: "phone_number";
     }
 
-    export interface StandaloneAgent extends WorkflowStandaloneAgentNodeModel.Raw {
+    export interface StandaloneAgent extends WorkflowStandaloneAgentNodeModelInput.Raw {
         type: "standalone_agent";
     }
 
-    export interface Start extends WorkflowStartNodeModel.Raw {
+    export interface Start extends WorkflowStartNodeModelInput.Raw {
         type: "start";
     }
 
-    export interface Tool extends WorkflowToolNodeModel.Raw {
+    export interface Tool extends WorkflowToolNodeModelInput.Raw {
         type: "tool";
     }
 }

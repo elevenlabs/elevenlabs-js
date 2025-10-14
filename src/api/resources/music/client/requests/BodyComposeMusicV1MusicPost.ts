@@ -12,7 +12,8 @@ import * as ElevenLabs from "../../../../index";
  *         modelId: undefined,
  *         seed: undefined,
  *         forceInstrumental: undefined,
- *         respectSectionsDurations: undefined
+ *         respectSectionsDurations: undefined,
+ *         storeForInpainting: undefined
  *     }
  */
 export interface BodyComposeMusicV1MusicPost {
@@ -24,7 +25,7 @@ export interface BodyComposeMusicV1MusicPost {
     musicPrompt?: ElevenLabs.MusicPrompt;
     /** A detailed composition plan to guide music generation. Cannot be used in conjunction with `prompt`. */
     compositionPlan?: ElevenLabs.MusicPrompt;
-    /** The length of the song to generate in milliseconds. Used only in conjunction with `prompt`. Must be between 10000ms and 300000ms. Optional - if not provided, the model will choose a length based on the prompt. */
+    /** The length of the song to generate in milliseconds. Used only in conjunction with `prompt`. Must be between 3000ms and 300000ms. Optional - if not provided, the model will choose a length based on the prompt. */
     musicLengthMs?: number;
     /** The model to use for the generation. */
     modelId?: "music_v1";
@@ -34,4 +35,6 @@ export interface BodyComposeMusicV1MusicPost {
     forceInstrumental?: boolean;
     /** Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan`. When set to true, the model will precisely respect each section's `duration_ms` from the plan. When set to false, the model may adjust individual section durations which will generally lead to better generation quality and improved latency, while always preserving the total song duration from the plan. */
     respectSectionsDurations?: boolean;
+    /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting API. */
+    storeForInpainting?: boolean;
 }

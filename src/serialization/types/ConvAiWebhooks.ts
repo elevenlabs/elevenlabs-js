@@ -3,18 +3,21 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { WebhookEventType } from "./WebhookEventType";
 
 export const ConvAiWebhooks: core.serialization.ObjectSchema<
     serializers.ConvAiWebhooks.Raw,
     ElevenLabs.ConvAiWebhooks
 > = core.serialization.object({
     postCallWebhookId: core.serialization.property("post_call_webhook_id", core.serialization.string().optional()),
+    events: core.serialization.list(WebhookEventType).optional(),
     sendAudio: core.serialization.property("send_audio", core.serialization.boolean().optional()),
 });
 
 export declare namespace ConvAiWebhooks {
     export interface Raw {
         post_call_webhook_id?: string | null;
+        events?: WebhookEventType.Raw[] | null;
         send_audio?: boolean | null;
     }
 }

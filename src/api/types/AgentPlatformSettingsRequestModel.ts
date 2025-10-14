@@ -3,8 +3,6 @@
 import * as ElevenLabs from "../index";
 
 export interface AgentPlatformSettingsRequestModel {
-    /** Settings for authentication */
-    auth?: ElevenLabs.AuthSettings;
     /** Settings for evaluation */
     evaluation?: ElevenLabs.EvaluationSettings;
     /** Configuration for the widget */
@@ -13,14 +11,16 @@ export interface AgentPlatformSettingsRequestModel {
     dataCollection?: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
     /** Additional overrides for the agent during conversation initiation */
     overrides?: ElevenLabs.ConversationInitiationClientDataConfigInput;
-    /** Call limits for the agent */
-    callLimits?: ElevenLabs.AgentCallLimits;
-    /** Privacy settings for the agent */
-    privacy?: ElevenLabs.PrivacyConfig;
     /** Workspace overrides for the agent */
     workspaceOverrides?: ElevenLabs.AgentWorkspaceOverridesInput;
     /** Testing configuration for the agent */
     testing?: ElevenLabs.AgentTestingSettings;
     /** Whether the agent is archived */
     archived?: boolean;
+    /** Settings for authentication */
+    auth?: ElevenLabs.AuthSettings;
+    /** Call limits for the agent */
+    callLimits?: ElevenLabs.AgentCallLimits;
+    /** Privacy settings for the agent */
+    privacy?: ElevenLabs.PrivacyConfig;
 }

@@ -53,7 +53,7 @@ export class Avatar {
      *
      * @example
      *     import { createReadStream } from "fs";
-     *     await client.conversationalAi.agents.widget.avatar.create("21m00Tcm4TlvDq8ikWAM", {
+     *     await client.conversationalAi.agents.widget.avatar.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
      *         avatarFile: fs.createReadStream("/path/to/your/file")
      *     })
      */

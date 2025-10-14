@@ -8,5 +8,5 @@ export interface ConversationConfigClientOverrideOutput {
     /** Configuration for conversational events */
     conversation?: ElevenLabs.ConversationConfigOverride;
     /** Agent specific configuration */
-    agent?: ElevenLabs.AgentConfigOverride;
+    agent?: ElevenLabs.AgentConfigOverrideOutput;
 }

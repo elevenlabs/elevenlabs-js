@@ -3,6 +3,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { SectionSource } from "./SectionSource";
 
 export const SongSection: core.serialization.ObjectSchema<serializers.SongSection.Raw, ElevenLabs.SongSection> =
     core.serialization.object({
@@ -17,6 +18,7 @@ export const SongSection: core.serialization.ObjectSchema<serializers.SongSectio
         ),
         durationMs: core.serialization.property("duration_ms", core.serialization.number()),
         lines: core.serialization.list(core.serialization.string()),
+        sourceFrom: core.serialization.property("source_from", SectionSource.optional()),
     });
 
 export declare namespace SongSection {
@@ -26,5 +28,6 @@ export declare namespace SongSection {
         negative_local_styles: string[];
         duration_ms: number;
         lines: string[];
+        source_from?: SectionSource.Raw | null;
     }
 }

@@ -42,7 +42,6 @@ export const StreamTextToSpeechWithTimestampsRequest: core.serialization.Schema<
         "apply_language_text_normalization",
         core.serialization.boolean().optional(),
     ),
-    hcaptchaToken: core.serialization.property("hcaptcha_token", core.serialization.string().optional()),
 });
 
 export declare namespace StreamTextToSpeechWithTimestampsRequest {
@@ -60,6 +59,5 @@ export declare namespace StreamTextToSpeechWithTimestampsRequest {
         use_pvc_as_ivc?: boolean | null;
         apply_text_normalization?: BodyTextToSpeechStreamWithTimestampsApplyTextNormalization.Raw | null;
         apply_language_text_normalization?: boolean | null;
-        hcaptcha_token?: string | null;
     }
 }

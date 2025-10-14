@@ -5,4 +5,7 @@ import * as ElevenLabs from "../index";
 export interface WorkflowFeaturesUsageCommonModel {
     enabled?: boolean;
     toolNode?: ElevenLabs.FeatureStatusCommonModel;
+    standaloneAgentNode?: ElevenLabs.FeatureStatusCommonModel;
+    phoneNumberNode?: ElevenLabs.FeatureStatusCommonModel;
+    endNode?: ElevenLabs.FeatureStatusCommonModel;
 }

@@ -20,13 +20,13 @@ describe("Link", () => {
         };
         server
             .mockEndpoint()
-            .get("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM/link")
+            .get("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/link")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.link.get("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.conversationalAi.agents.link.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
         expect(response).toEqual({
             agentId: "J3Pbu5gP6NNKBscdCdwB",
             token: {

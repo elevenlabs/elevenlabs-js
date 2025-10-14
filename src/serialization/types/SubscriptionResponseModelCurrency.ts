@@ -7,8 +7,8 @@ import * as core from "../../core";
 export const SubscriptionResponseModelCurrency: core.serialization.Schema<
     serializers.SubscriptionResponseModelCurrency.Raw,
     ElevenLabs.SubscriptionResponseModelCurrency
-> = core.serialization.enum_(["usd", "eur"]);
+> = core.serialization.enum_(["usd", "eur", "inr"]);
 
 export declare namespace SubscriptionResponseModelCurrency {
-    export type Raw = "usd" | "eur";
+    export type Raw = "usd" | "eur" | "inr";
 }

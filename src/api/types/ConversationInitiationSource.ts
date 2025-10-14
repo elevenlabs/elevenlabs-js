@@ -14,6 +14,7 @@ export const ConversationInitiationSource = {
     Twilio: "twilio",
     Genesys: "genesys",
     SwiftSdk: "swift_sdk",
+    Whatsapp: "whatsapp",
 } as const;
 export type ConversationInitiationSource =
     (typeof ConversationInitiationSource)[keyof typeof ConversationInitiationSource];

@@ -11,27 +11,27 @@ export type AgentWorkflowRequestModelNodesValue =
     | ElevenLabs.AgentWorkflowRequestModelNodesValue.Tool;
 
 export namespace AgentWorkflowRequestModelNodesValue {
-    export interface End extends ElevenLabs.WorkflowEndNodeModel {
+    export interface End extends ElevenLabs.WorkflowEndNodeModelInput {
         type: "end";
     }
 
-    export interface OverrideAgent extends ElevenLabs.WorkflowOverrideAgentNodeModel {
+    export interface OverrideAgent extends ElevenLabs.WorkflowOverrideAgentNodeModelInput {
         type: "override_agent";
     }
 
-    export interface PhoneNumber extends ElevenLabs.WorkflowPhoneNumberNodeModel {
+    export interface PhoneNumber extends ElevenLabs.WorkflowPhoneNumberNodeModelInput {
         type: "phone_number";
     }
 
-    export interface StandaloneAgent extends ElevenLabs.WorkflowStandaloneAgentNodeModel {
+    export interface StandaloneAgent extends ElevenLabs.WorkflowStandaloneAgentNodeModelInput {
         type: "standalone_agent";
     }
 
-    export interface Start extends ElevenLabs.WorkflowStartNodeModel {
+    export interface Start extends ElevenLabs.WorkflowStartNodeModelInput {
         type: "start";
     }
 
-    export interface Tool extends ElevenLabs.WorkflowToolNodeModel {
+    export interface Tool extends ElevenLabs.WorkflowToolNodeModelInput {
         type: "tool";
     }
 }

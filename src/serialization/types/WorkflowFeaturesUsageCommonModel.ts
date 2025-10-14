@@ -11,11 +11,17 @@ export const WorkflowFeaturesUsageCommonModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     enabled: core.serialization.boolean().optional(),
     toolNode: core.serialization.property("tool_node", FeatureStatusCommonModel.optional()),
+    standaloneAgentNode: core.serialization.property("standalone_agent_node", FeatureStatusCommonModel.optional()),
+    phoneNumberNode: core.serialization.property("phone_number_node", FeatureStatusCommonModel.optional()),
+    endNode: core.serialization.property("end_node", FeatureStatusCommonModel.optional()),
 });
 
 export declare namespace WorkflowFeaturesUsageCommonModel {
     export interface Raw {
         enabled?: boolean | null;
         tool_node?: FeatureStatusCommonModel.Raw | null;
+        standalone_agent_node?: FeatureStatusCommonModel.Raw | null;
+        phone_number_node?: FeatureStatusCommonModel.Raw | null;
+        end_node?: FeatureStatusCommonModel.Raw | null;
     }
 }
