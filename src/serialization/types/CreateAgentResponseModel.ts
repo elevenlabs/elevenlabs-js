@@ -9,10 +9,14 @@ export const CreateAgentResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.CreateAgentResponseModel
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string()),
+    mainBranchId: core.serialization.property("main_branch_id", core.serialization.string().optional()),
+    initialVersionId: core.serialization.property("initial_version_id", core.serialization.string().optional()),
 });
 
 export declare namespace CreateAgentResponseModel {
     export interface Raw {
         agent_id: string;
+        main_branch_id?: string | null;
+        initial_version_id?: string | null;
     }
 }

@@ -103,13 +103,13 @@ describe("Widget", () => {
         };
         server
             .mockEndpoint()
-            .get("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM/widget")
+            .get("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/widget")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.widget.get("21m00Tcm4TlvDq8ikWAM", {
+        const response = await client.conversationalAi.agents.widget.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
             conversationSignature: "conversation_signature",
         });
         expect(response).toEqual({

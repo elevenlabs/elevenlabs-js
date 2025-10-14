@@ -9,14 +9,14 @@ export const NormalizedAlignment: core.serialization.ObjectSchema<
     ElevenLabs.NormalizedAlignment
 > = core.serialization.object({
     charStartTimesMs: core.serialization.list(core.serialization.number()).optional(),
-    charsDurationsMs: core.serialization.list(core.serialization.number()).optional(),
+    charDurationsMs: core.serialization.list(core.serialization.number()).optional(),
     chars: core.serialization.list(core.serialization.string()).optional(),
 });
 
 export declare namespace NormalizedAlignment {
     export interface Raw {
         charStartTimesMs?: number[] | null;
-        charsDurationsMs?: number[] | null;
+        charDurationsMs?: number[] | null;
         chars?: string[] | null;
     }
 }

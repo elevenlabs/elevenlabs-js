@@ -1,4 +1,5 @@
 export { type BodyCreateAgentV1ConvaiAgentsCreatePost } from "./BodyCreateAgentV1ConvaiAgentsCreatePost";
+export { type AgentsGetRequest } from "./AgentsGetRequest";
 export { type UpdateAgentRequest } from "./UpdateAgentRequest";
 export { type AgentsListRequest } from "./AgentsListRequest";
 export { type BodyDuplicateAgentV1ConvaiAgentsAgentIdDuplicatePost } from "./BodyDuplicateAgentV1ConvaiAgentsAgentIdDuplicatePost";

@@ -3,6 +3,7 @@
 export const ExtendedSubscriptionResponseModelCurrency = {
     Usd: "usd",
     Eur: "eur",
+    Inr: "inr",
 } as const;
 export type ExtendedSubscriptionResponseModelCurrency =
     (typeof ExtendedSubscriptionResponseModelCurrency)[keyof typeof ExtendedSubscriptionResponseModelCurrency];

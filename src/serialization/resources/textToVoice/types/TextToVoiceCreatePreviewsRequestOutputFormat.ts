@@ -9,6 +9,7 @@ export const TextToVoiceCreatePreviewsRequestOutputFormat: core.serialization.Sc
     ElevenLabs.TextToVoiceCreatePreviewsRequestOutputFormat
 > = core.serialization.enum_([
     "mp3_22050_32",
+    "mp3_24000_48",
     "mp3_44100_32",
     "mp3_44100_64",
     "mp3_44100_96",
@@ -18,6 +19,7 @@ export const TextToVoiceCreatePreviewsRequestOutputFormat: core.serialization.Sc
     "pcm_16000",
     "pcm_22050",
     "pcm_24000",
+    "pcm_32000",
     "pcm_44100",
     "pcm_48000",
     "ulaw_8000",
@@ -32,6 +34,7 @@ export const TextToVoiceCreatePreviewsRequestOutputFormat: core.serialization.Sc
 export declare namespace TextToVoiceCreatePreviewsRequestOutputFormat {
     export type Raw =
         | "mp3_22050_32"
+        | "mp3_24000_48"
         | "mp3_44100_32"
         | "mp3_44100_64"
         | "mp3_44100_96"
@@ -41,6 +44,7 @@ export declare namespace TextToVoiceCreatePreviewsRequestOutputFormat {
         | "pcm_16000"
         | "pcm_22050"
         | "pcm_24000"
+        | "pcm_32000"
         | "pcm_44100"
         | "pcm_48000"
         | "ulaw_8000"

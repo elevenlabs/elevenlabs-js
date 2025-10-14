@@ -14,6 +14,8 @@ import { ConversationHistoryRagUsageCommonModel } from "./ConversationHistoryRag
 import { FeaturesUsageCommonModel } from "./FeaturesUsageCommonModel";
 import { ConversationHistoryElevenAssistantCommonModel } from "./ConversationHistoryElevenAssistantCommonModel";
 import { ConversationInitiationSource } from "./ConversationInitiationSource";
+import { ConversationHistoryMetadataCommonModelInitiationTrigger } from "./ConversationHistoryMetadataCommonModelInitiationTrigger";
+import { AsyncConversationMetadata } from "./AsyncConversationMetadata";
 
 export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSchema<
     serializers.ConversationHistoryMetadataCommonModel.Raw,
@@ -52,6 +54,11 @@ export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSc
         core.serialization.string().optional(),
     ),
     timezone: core.serialization.string().optional(),
+    initiationTrigger: core.serialization.property(
+        "initiation_trigger",
+        ConversationHistoryMetadataCommonModelInitiationTrigger.optional(),
+    ),
+    asyncMetadata: core.serialization.property("async_metadata", AsyncConversationMetadata.optional()),
 });
 
 export declare namespace ConversationHistoryMetadataCommonModel {
@@ -77,5 +84,7 @@ export declare namespace ConversationHistoryMetadataCommonModel {
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
         conversation_initiation_source_version?: string | null;
         timezone?: string | null;
+        initiation_trigger?: ConversationHistoryMetadataCommonModelInitiationTrigger.Raw | null;
+        async_metadata?: AsyncConversationMetadata.Raw | null;
     }
 }

@@ -8,7 +8,11 @@ describe("Agents", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { conversation_config: {} };
-        const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
+        const rawResponseBody = {
+            agent_id: "J3Pbu5gP6NNKBscdCdwB",
+            main_branch_id: "main_branch_id",
+            initial_version_id: "initial_version_id",
+        };
         server
             .mockEndpoint()
             .post("/v1/convai/agents/create")
@@ -23,6 +27,8 @@ describe("Agents", () => {
         });
         expect(response).toEqual({
             agentId: "J3Pbu5gP6NNKBscdCdwB",
+            mainBranchId: "main_branch_id",
+            initialVersionId: "initial_version_id",
         });
     });
 
@@ -31,7 +37,7 @@ describe("Agents", () => {
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            agent_id: "J3Pbu5gP6NNKBscdCdwB",
+            agent_id: "agent_7101k5zvyjhmfg983brhmhkd98n6",
             name: "My Agent",
             conversation_config: {
                 asr: {
@@ -77,6 +83,7 @@ describe("Agents", () => {
                                 language: "en",
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
                                     native_mcp_server_ids: undefined,
                                 },
                             },
@@ -107,11 +114,6 @@ describe("Agents", () => {
             },
             metadata: { created_at_unix_secs: 1, updated_at_unix_secs: 1 },
             platform_settings: {
-                auth: {
-                    enable_auth: true,
-                    allowlist: [{ hostname: "https://example.com" }],
-                    shareable_token: "1234567890",
-                },
                 evaluation: {
                     criteria: [
                         {
@@ -223,6 +225,25 @@ describe("Agents", () => {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
                 },
+                workspace_overrides: {
+                    conversation_initiation_client_data_webhook: {
+                        url: "https://example.com/webhook",
+                        request_headers: { "Content-Type": "application/json" },
+                    },
+                    webhooks: { post_call_webhook_id: undefined, send_audio: undefined },
+                },
+                testing: {
+                    attached_tests: [
+                        { test_id: "test_123", workflow_node_id: "node_abc" },
+                        { test_id: "test_456", workflow_node_id: undefined },
+                    ],
+                },
+                archived: true,
+                auth: {
+                    enable_auth: true,
+                    allowlist: [{ hostname: "https://example.com" }],
+                    shareable_token: "1234567890",
+                },
                 call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
                 privacy: {
                     record_voice: true,
@@ -232,20 +253,6 @@ describe("Agents", () => {
                     apply_to_existing_conversations: false,
                     zero_retention_mode: false,
                 },
-                workspace_overrides: {
-                    conversation_initiation_client_data_webhook: {
-                        url: "https://example.com/webhook",
-                        request_headers: { "Content-Type": "application/json" },
-                    },
-                    webhooks: { post_call_webhook_id: undefined },
-                },
-                testing: {
-                    attached_tests: [
-                        { test_id: "test_123", workflow_node_id: "node_abc" },
-                        { test_id: "test_456", workflow_node_id: undefined },
-                    ],
-                },
-                archived: true,
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -282,7 +289,399 @@ describe("Agents", () => {
                     livekit_stack: "standard",
                 },
             ],
-            workflow: { key: "value" },
+            workflow: {
+                edges: {
+                    entry_to_tool_a: {
+                        source: "entry_node",
+                        target: "tool_node_a",
+                        forward_condition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    start_to_entry: {
+                        source: "start_node",
+                        target: "entry_node",
+                        forward_condition: { type: "unconditional", label: undefined },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_a_to_failure: {
+                        source: "tool_node_a",
+                        target: "failure_node",
+                        forward_condition: { type: "result", label: undefined, successful: true },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_a_to_tool_b: {
+                        source: "tool_node_a",
+                        target: "tool_node_b",
+                        forward_condition: { type: "result", label: undefined, successful: true },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_b_to_agent_transfer: {
+                        source: "tool_node_b",
+                        target: "success_transfer",
+                        forward_condition: { type: "unconditional", label: undefined },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_b_to_conversation: {
+                        source: "tool_node_b",
+                        target: "success_conversation",
+                        forward_condition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_b_to_end: {
+                        source: "tool_node_b",
+                        target: "success_end",
+                        forward_condition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_b_to_phone: {
+                        source: "tool_node_b",
+                        target: "success_phone",
+                        forward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                },
+                nodes: {
+                    entry_node: {
+                        type: "override_agent",
+                        conversation_config: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                user_input_audio_format: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            tts: {
+                                model_id: "eleven_turbo_v2",
+                                voice_id: "cjVigY5qzO86Huf0OWal",
+                                supported_voices: undefined,
+                                agent_output_audio_format: "pcm_16000",
+                                optimize_streaming_latency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarity_boost: 0.8,
+                                pronunciation_dictionary_locators: [
+                                    {
+                                        pronunciation_dictionary_id: "pronunciation_dictionary_id",
+                                        version_id: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                text_only: undefined,
+                                max_duration_seconds: 600,
+                                client_events: ["audio", "interruption"],
+                            },
+                            language_presets: undefined,
+                            vad: { background_voice_detection: false },
+                            agent: {
+                                first_message: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                                disable_first_message_interruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoning_effort: undefined,
+                                    thinking_budget: undefined,
+                                    temperature: 0,
+                                    max_tokens: -1,
+                                    tool_ids: ["tool_ids"],
+                                    built_in_tools: undefined,
+                                    mcp_server_ids: undefined,
+                                    native_mcp_server_ids: undefined,
+                                    knowledge_base: [
+                                        { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                                    ],
+                                    custom_llm: undefined,
+                                    ignore_default_personality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expects_response: false,
+                                            dynamic_variables: {
+                                                dynamic_variable_placeholders: { user_name: "John Doe" },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additional_prompt: "additional_prompt",
+                        additional_knowledge_base: [
+                            { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                        ],
+                        additional_tool_ids: ["additional_tool_ids"],
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        label: "label",
+                    },
+                    failure_node: {
+                        type: "override_agent",
+                        conversation_config: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                user_input_audio_format: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            tts: {
+                                model_id: "eleven_turbo_v2",
+                                voice_id: "cjVigY5qzO86Huf0OWal",
+                                supported_voices: undefined,
+                                agent_output_audio_format: "pcm_16000",
+                                optimize_streaming_latency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarity_boost: 0.8,
+                                pronunciation_dictionary_locators: [
+                                    {
+                                        pronunciation_dictionary_id: "pronunciation_dictionary_id",
+                                        version_id: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                text_only: undefined,
+                                max_duration_seconds: 600,
+                                client_events: ["audio", "interruption"],
+                            },
+                            language_presets: undefined,
+                            vad: { background_voice_detection: false },
+                            agent: {
+                                first_message: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                                disable_first_message_interruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoning_effort: undefined,
+                                    thinking_budget: undefined,
+                                    temperature: 0,
+                                    max_tokens: -1,
+                                    tool_ids: ["tool_ids"],
+                                    built_in_tools: undefined,
+                                    mcp_server_ids: undefined,
+                                    native_mcp_server_ids: undefined,
+                                    knowledge_base: [
+                                        { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                                    ],
+                                    custom_llm: undefined,
+                                    ignore_default_personality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expects_response: false,
+                                            dynamic_variables: {
+                                                dynamic_variable_placeholders: { user_name: "John Doe" },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additional_prompt: "additional_prompt",
+                        additional_knowledge_base: [
+                            { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                        ],
+                        additional_tool_ids: ["additional_tool_ids"],
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        label: "label",
+                    },
+                    start_node: { type: "start", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
+                    success_conversation: {
+                        type: "override_agent",
+                        conversation_config: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                user_input_audio_format: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            tts: {
+                                model_id: "eleven_turbo_v2",
+                                voice_id: "cjVigY5qzO86Huf0OWal",
+                                supported_voices: undefined,
+                                agent_output_audio_format: "pcm_16000",
+                                optimize_streaming_latency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarity_boost: 0.8,
+                                pronunciation_dictionary_locators: [
+                                    {
+                                        pronunciation_dictionary_id: "pronunciation_dictionary_id",
+                                        version_id: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                text_only: undefined,
+                                max_duration_seconds: 600,
+                                client_events: ["audio", "interruption"],
+                            },
+                            language_presets: undefined,
+                            vad: { background_voice_detection: false },
+                            agent: {
+                                first_message: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                                disable_first_message_interruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoning_effort: undefined,
+                                    thinking_budget: undefined,
+                                    temperature: 0,
+                                    max_tokens: -1,
+                                    tool_ids: ["tool_ids"],
+                                    built_in_tools: undefined,
+                                    mcp_server_ids: undefined,
+                                    native_mcp_server_ids: undefined,
+                                    knowledge_base: [
+                                        { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                                    ],
+                                    custom_llm: undefined,
+                                    ignore_default_personality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expects_response: false,
+                                            dynamic_variables: {
+                                                dynamic_variable_placeholders: { user_name: "John Doe" },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additional_prompt: "additional_prompt",
+                        additional_knowledge_base: [
+                            { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                        ],
+                        additional_tool_ids: ["additional_tool_ids"],
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        label: "label",
+                    },
+                    success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
+                    success_phone: {
+                        type: "phone_number",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        transfer_destination: { type: "phone", phone_number: "phone_number" },
+                        transfer_type: "conference",
+                    },
+                    success_transfer: {
+                        type: "standalone_agent",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        agent_id: "agent_id",
+                        delay_ms: 1,
+                        transfer_message: undefined,
+                        enable_transferred_agent_first_message: true,
+                    },
+                    tool_node_a: {
+                        type: "tool",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        tools: [{ tool_id: "tool_id" }],
+                    },
+                    tool_node_b: {
+                        type: "tool",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        tools: [{ tool_id: "tool_id" }],
+                    },
+                },
+            },
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -290,18 +689,21 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            version_id: "version_id",
         };
         server
             .mockEndpoint()
-            .get("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM")
+            .get("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.get("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+            versionId: "version_id",
+        });
         expect(response).toEqual({
-            agentId: "J3Pbu5gP6NNKBscdCdwB",
+            agentId: "agent_7101k5zvyjhmfg983brhmhkd98n6",
             name: "My Agent",
             conversationConfig: {
                 asr: {
@@ -363,6 +765,7 @@ describe("Agents", () => {
                                 language: "en",
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
                                     nativeMcpServerIds: undefined,
                                 },
                             },
@@ -409,15 +812,6 @@ describe("Agents", () => {
                 updatedAtUnixSecs: 1,
             },
             platformSettings: {
-                auth: {
-                    enableAuth: true,
-                    allowlist: [
-                        {
-                            hostname: "https://example.com",
-                        },
-                    ],
-                    shareableToken: "1234567890",
-                },
                 evaluation: {
                     criteria: [
                         {
@@ -537,19 +931,6 @@ describe("Agents", () => {
                     customLlmExtraBody: true,
                     enableConversationInitiationClientDataFromWebhook: true,
                 },
-                callLimits: {
-                    agentConcurrencyLimit: -1,
-                    dailyLimit: 100000,
-                    burstingEnabled: true,
-                },
-                privacy: {
-                    recordVoice: true,
-                    retentionDays: -1,
-                    deleteTranscriptAndPii: false,
-                    deleteAudio: false,
-                    applyToExistingConversations: false,
-                    zeroRetentionMode: false,
-                },
                 workspaceOverrides: {
                     conversationInitiationClientDataWebhook: {
                         url: "https://example.com/webhook",
@@ -559,6 +940,7 @@ describe("Agents", () => {
                     },
                     webhooks: {
                         postCallWebhookId: undefined,
+                        sendAudio: undefined,
                     },
                 },
                 testing: {
@@ -574,6 +956,28 @@ describe("Agents", () => {
                     ],
                 },
                 archived: true,
+                auth: {
+                    enableAuth: true,
+                    allowlist: [
+                        {
+                            hostname: "https://example.com",
+                        },
+                    ],
+                    shareableToken: "1234567890",
+                },
+                callLimits: {
+                    agentConcurrencyLimit: -1,
+                    dailyLimit: 100000,
+                    burstingEnabled: true,
+                },
+                privacy: {
+                    recordVoice: true,
+                    retentionDays: -1,
+                    deleteTranscriptAndPii: false,
+                    deleteAudio: false,
+                    applyToExistingConversations: false,
+                    zeroRetentionMode: false,
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -618,7 +1022,595 @@ describe("Agents", () => {
                 },
             ],
             workflow: {
-                key: "value",
+                edges: {
+                    entry_to_tool_a: {
+                        source: "entry_node",
+                        target: "tool_node_a",
+                        forwardCondition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    start_to_entry: {
+                        source: "start_node",
+                        target: "entry_node",
+                        forwardCondition: {
+                            type: "unconditional",
+                            label: undefined,
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_a_to_failure: {
+                        source: "tool_node_a",
+                        target: "failure_node",
+                        forwardCondition: {
+                            type: "result",
+                            label: undefined,
+                            successful: true,
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_a_to_tool_b: {
+                        source: "tool_node_a",
+                        target: "tool_node_b",
+                        forwardCondition: {
+                            type: "result",
+                            label: undefined,
+                            successful: true,
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_b_to_agent_transfer: {
+                        source: "tool_node_b",
+                        target: "success_transfer",
+                        forwardCondition: {
+                            type: "unconditional",
+                            label: undefined,
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_b_to_conversation: {
+                        source: "tool_node_b",
+                        target: "success_conversation",
+                        forwardCondition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_b_to_end: {
+                        source: "tool_node_b",
+                        target: "success_end",
+                        forwardCondition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_b_to_phone: {
+                        source: "tool_node_b",
+                        target: "success_phone",
+                        forwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                },
+                nodes: {
+                    entry_node: {
+                        type: "override_agent",
+                        conversationConfig: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                userInputAudioFormat: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: {
+                                turnTimeout: 7,
+                                silenceEndCallTimeout: -1,
+                                mode: "turn",
+                            },
+                            tts: {
+                                modelId: "eleven_turbo_v2",
+                                voiceId: "cjVigY5qzO86Huf0OWal",
+                                supportedVoices: undefined,
+                                agentOutputAudioFormat: "pcm_16000",
+                                optimizeStreamingLatency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarityBoost: 0.8,
+                                pronunciationDictionaryLocators: [
+                                    {
+                                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                                        versionId: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                textOnly: undefined,
+                                maxDurationSeconds: 600,
+                                clientEvents: ["audio", "interruption"],
+                            },
+                            languagePresets: undefined,
+                            vad: {
+                                backgroundVoiceDetection: false,
+                            },
+                            agent: {
+                                firstMessage: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamicVariables: {
+                                    dynamicVariablePlaceholders: {
+                                        user_name: "John Doe",
+                                    },
+                                },
+                                disableFirstMessageInterruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoningEffort: undefined,
+                                    thinkingBudget: undefined,
+                                    temperature: 0,
+                                    maxTokens: -1,
+                                    toolIds: ["tool_ids"],
+                                    builtInTools: undefined,
+                                    mcpServerIds: undefined,
+                                    nativeMcpServerIds: undefined,
+                                    knowledgeBase: [
+                                        {
+                                            type: "file",
+                                            name: "My Knowledge Base",
+                                            id: "123",
+                                            usageMode: "auto",
+                                        },
+                                    ],
+                                    customLlm: undefined,
+                                    ignoreDefaultPersonality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expectsResponse: false,
+                                            dynamicVariables: {
+                                                dynamicVariablePlaceholders: {
+                                                    user_name: "John Doe",
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additionalPrompt: "additional_prompt",
+                        additionalKnowledgeBase: [
+                            {
+                                type: "file",
+                                name: "My Knowledge Base",
+                                id: "123",
+                                usageMode: "auto",
+                            },
+                        ],
+                        additionalToolIds: ["additional_tool_ids"],
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        label: "label",
+                    },
+                    failure_node: {
+                        type: "override_agent",
+                        conversationConfig: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                userInputAudioFormat: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: {
+                                turnTimeout: 7,
+                                silenceEndCallTimeout: -1,
+                                mode: "turn",
+                            },
+                            tts: {
+                                modelId: "eleven_turbo_v2",
+                                voiceId: "cjVigY5qzO86Huf0OWal",
+                                supportedVoices: undefined,
+                                agentOutputAudioFormat: "pcm_16000",
+                                optimizeStreamingLatency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarityBoost: 0.8,
+                                pronunciationDictionaryLocators: [
+                                    {
+                                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                                        versionId: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                textOnly: undefined,
+                                maxDurationSeconds: 600,
+                                clientEvents: ["audio", "interruption"],
+                            },
+                            languagePresets: undefined,
+                            vad: {
+                                backgroundVoiceDetection: false,
+                            },
+                            agent: {
+                                firstMessage: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamicVariables: {
+                                    dynamicVariablePlaceholders: {
+                                        user_name: "John Doe",
+                                    },
+                                },
+                                disableFirstMessageInterruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoningEffort: undefined,
+                                    thinkingBudget: undefined,
+                                    temperature: 0,
+                                    maxTokens: -1,
+                                    toolIds: ["tool_ids"],
+                                    builtInTools: undefined,
+                                    mcpServerIds: undefined,
+                                    nativeMcpServerIds: undefined,
+                                    knowledgeBase: [
+                                        {
+                                            type: "file",
+                                            name: "My Knowledge Base",
+                                            id: "123",
+                                            usageMode: "auto",
+                                        },
+                                    ],
+                                    customLlm: undefined,
+                                    ignoreDefaultPersonality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expectsResponse: false,
+                                            dynamicVariables: {
+                                                dynamicVariablePlaceholders: {
+                                                    user_name: "John Doe",
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additionalPrompt: "additional_prompt",
+                        additionalKnowledgeBase: [
+                            {
+                                type: "file",
+                                name: "My Knowledge Base",
+                                id: "123",
+                                usageMode: "auto",
+                            },
+                        ],
+                        additionalToolIds: ["additional_tool_ids"],
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        label: "label",
+                    },
+                    start_node: {
+                        type: "start",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                    },
+                    success_conversation: {
+                        type: "override_agent",
+                        conversationConfig: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                userInputAudioFormat: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: {
+                                turnTimeout: 7,
+                                silenceEndCallTimeout: -1,
+                                mode: "turn",
+                            },
+                            tts: {
+                                modelId: "eleven_turbo_v2",
+                                voiceId: "cjVigY5qzO86Huf0OWal",
+                                supportedVoices: undefined,
+                                agentOutputAudioFormat: "pcm_16000",
+                                optimizeStreamingLatency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarityBoost: 0.8,
+                                pronunciationDictionaryLocators: [
+                                    {
+                                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                                        versionId: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                textOnly: undefined,
+                                maxDurationSeconds: 600,
+                                clientEvents: ["audio", "interruption"],
+                            },
+                            languagePresets: undefined,
+                            vad: {
+                                backgroundVoiceDetection: false,
+                            },
+                            agent: {
+                                firstMessage: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamicVariables: {
+                                    dynamicVariablePlaceholders: {
+                                        user_name: "John Doe",
+                                    },
+                                },
+                                disableFirstMessageInterruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoningEffort: undefined,
+                                    thinkingBudget: undefined,
+                                    temperature: 0,
+                                    maxTokens: -1,
+                                    toolIds: ["tool_ids"],
+                                    builtInTools: undefined,
+                                    mcpServerIds: undefined,
+                                    nativeMcpServerIds: undefined,
+                                    knowledgeBase: [
+                                        {
+                                            type: "file",
+                                            name: "My Knowledge Base",
+                                            id: "123",
+                                            usageMode: "auto",
+                                        },
+                                    ],
+                                    customLlm: undefined,
+                                    ignoreDefaultPersonality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expectsResponse: false,
+                                            dynamicVariables: {
+                                                dynamicVariablePlaceholders: {
+                                                    user_name: "John Doe",
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additionalPrompt: "additional_prompt",
+                        additionalKnowledgeBase: [
+                            {
+                                type: "file",
+                                name: "My Knowledge Base",
+                                id: "123",
+                                usageMode: "auto",
+                            },
+                        ],
+                        additionalToolIds: ["additional_tool_ids"],
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        label: "label",
+                    },
+                    success_end: {
+                        type: "end",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                    },
+                    success_phone: {
+                        type: "phone_number",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        transferDestination: {
+                            type: "phone",
+                            phoneNumber: "phone_number",
+                        },
+                        transferType: "conference",
+                    },
+                    success_transfer: {
+                        type: "standalone_agent",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        agentId: "agent_id",
+                        delayMs: 1,
+                        transferMessage: undefined,
+                        enableTransferredAgentFirstMessage: true,
+                    },
+                    tool_node_a: {
+                        type: "tool",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        tools: [
+                            {
+                                toolId: "tool_id",
+                            },
+                        ],
+                    },
+                    tool_node_b: {
+                        type: "tool",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        tools: [
+                            {
+                                toolId: "tool_id",
+                            },
+                        ],
+                    },
+                },
             },
             accessInfo: {
                 isCreator: true,
@@ -627,6 +1619,7 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            versionId: "version_id",
         });
     });
 
@@ -634,9 +1627,14 @@ describe("Agents", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
 
-        server.mockEndpoint().delete("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM").respondWith().statusCode(200).build();
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz")
+            .respondWith()
+            .statusCode(200)
+            .build();
 
-        const response = await client.conversationalAi.agents.delete("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
         expect(response).toEqual(undefined);
     });
 
@@ -645,7 +1643,7 @@ describe("Agents", () => {
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
-            agent_id: "J3Pbu5gP6NNKBscdCdwB",
+            agent_id: "agent_7101k5zvyjhmfg983brhmhkd98n6",
             name: "My Agent",
             conversation_config: {
                 asr: {
@@ -691,6 +1689,7 @@ describe("Agents", () => {
                                 language: "en",
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
                                     native_mcp_server_ids: undefined,
                                 },
                             },
@@ -721,11 +1720,6 @@ describe("Agents", () => {
             },
             metadata: { created_at_unix_secs: 1, updated_at_unix_secs: 1 },
             platform_settings: {
-                auth: {
-                    enable_auth: true,
-                    allowlist: [{ hostname: "https://example.com" }],
-                    shareable_token: "1234567890",
-                },
                 evaluation: {
                     criteria: [
                         {
@@ -837,6 +1831,25 @@ describe("Agents", () => {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
                 },
+                workspace_overrides: {
+                    conversation_initiation_client_data_webhook: {
+                        url: "https://example.com/webhook",
+                        request_headers: { "Content-Type": "application/json" },
+                    },
+                    webhooks: { post_call_webhook_id: undefined, send_audio: undefined },
+                },
+                testing: {
+                    attached_tests: [
+                        { test_id: "test_123", workflow_node_id: "node_abc" },
+                        { test_id: "test_456", workflow_node_id: undefined },
+                    ],
+                },
+                archived: true,
+                auth: {
+                    enable_auth: true,
+                    allowlist: [{ hostname: "https://example.com" }],
+                    shareable_token: "1234567890",
+                },
                 call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
                 privacy: {
                     record_voice: true,
@@ -846,20 +1859,6 @@ describe("Agents", () => {
                     apply_to_existing_conversations: false,
                     zero_retention_mode: false,
                 },
-                workspace_overrides: {
-                    conversation_initiation_client_data_webhook: {
-                        url: "https://example.com/webhook",
-                        request_headers: { "Content-Type": "application/json" },
-                    },
-                    webhooks: { post_call_webhook_id: undefined },
-                },
-                testing: {
-                    attached_tests: [
-                        { test_id: "test_123", workflow_node_id: "node_abc" },
-                        { test_id: "test_456", workflow_node_id: undefined },
-                    ],
-                },
-                archived: true,
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -896,7 +1895,399 @@ describe("Agents", () => {
                     livekit_stack: "standard",
                 },
             ],
-            workflow: { key: "value" },
+            workflow: {
+                edges: {
+                    entry_to_tool_a: {
+                        source: "entry_node",
+                        target: "tool_node_a",
+                        forward_condition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    start_to_entry: {
+                        source: "start_node",
+                        target: "entry_node",
+                        forward_condition: { type: "unconditional", label: undefined },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_a_to_failure: {
+                        source: "tool_node_a",
+                        target: "failure_node",
+                        forward_condition: { type: "result", label: undefined, successful: true },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_a_to_tool_b: {
+                        source: "tool_node_a",
+                        target: "tool_node_b",
+                        forward_condition: { type: "result", label: undefined, successful: true },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_b_to_agent_transfer: {
+                        source: "tool_node_b",
+                        target: "success_transfer",
+                        forward_condition: { type: "unconditional", label: undefined },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_b_to_conversation: {
+                        source: "tool_node_b",
+                        target: "success_conversation",
+                        forward_condition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_b_to_end: {
+                        source: "tool_node_b",
+                        target: "success_end",
+                        forward_condition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                    tool_b_to_phone: {
+                        source: "tool_node_b",
+                        target: "success_phone",
+                        forward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                        backward_condition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                        },
+                    },
+                },
+                nodes: {
+                    entry_node: {
+                        type: "override_agent",
+                        conversation_config: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                user_input_audio_format: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            tts: {
+                                model_id: "eleven_turbo_v2",
+                                voice_id: "cjVigY5qzO86Huf0OWal",
+                                supported_voices: undefined,
+                                agent_output_audio_format: "pcm_16000",
+                                optimize_streaming_latency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarity_boost: 0.8,
+                                pronunciation_dictionary_locators: [
+                                    {
+                                        pronunciation_dictionary_id: "pronunciation_dictionary_id",
+                                        version_id: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                text_only: undefined,
+                                max_duration_seconds: 600,
+                                client_events: ["audio", "interruption"],
+                            },
+                            language_presets: undefined,
+                            vad: { background_voice_detection: false },
+                            agent: {
+                                first_message: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                                disable_first_message_interruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoning_effort: undefined,
+                                    thinking_budget: undefined,
+                                    temperature: 0,
+                                    max_tokens: -1,
+                                    tool_ids: ["tool_ids"],
+                                    built_in_tools: undefined,
+                                    mcp_server_ids: undefined,
+                                    native_mcp_server_ids: undefined,
+                                    knowledge_base: [
+                                        { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                                    ],
+                                    custom_llm: undefined,
+                                    ignore_default_personality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expects_response: false,
+                                            dynamic_variables: {
+                                                dynamic_variable_placeholders: { user_name: "John Doe" },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additional_prompt: "additional_prompt",
+                        additional_knowledge_base: [
+                            { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                        ],
+                        additional_tool_ids: ["additional_tool_ids"],
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        label: "label",
+                    },
+                    failure_node: {
+                        type: "override_agent",
+                        conversation_config: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                user_input_audio_format: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            tts: {
+                                model_id: "eleven_turbo_v2",
+                                voice_id: "cjVigY5qzO86Huf0OWal",
+                                supported_voices: undefined,
+                                agent_output_audio_format: "pcm_16000",
+                                optimize_streaming_latency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarity_boost: 0.8,
+                                pronunciation_dictionary_locators: [
+                                    {
+                                        pronunciation_dictionary_id: "pronunciation_dictionary_id",
+                                        version_id: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                text_only: undefined,
+                                max_duration_seconds: 600,
+                                client_events: ["audio", "interruption"],
+                            },
+                            language_presets: undefined,
+                            vad: { background_voice_detection: false },
+                            agent: {
+                                first_message: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                                disable_first_message_interruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoning_effort: undefined,
+                                    thinking_budget: undefined,
+                                    temperature: 0,
+                                    max_tokens: -1,
+                                    tool_ids: ["tool_ids"],
+                                    built_in_tools: undefined,
+                                    mcp_server_ids: undefined,
+                                    native_mcp_server_ids: undefined,
+                                    knowledge_base: [
+                                        { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                                    ],
+                                    custom_llm: undefined,
+                                    ignore_default_personality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expects_response: false,
+                                            dynamic_variables: {
+                                                dynamic_variable_placeholders: { user_name: "John Doe" },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additional_prompt: "additional_prompt",
+                        additional_knowledge_base: [
+                            { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                        ],
+                        additional_tool_ids: ["additional_tool_ids"],
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        label: "label",
+                    },
+                    start_node: { type: "start", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
+                    success_conversation: {
+                        type: "override_agent",
+                        conversation_config: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                user_input_audio_format: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            tts: {
+                                model_id: "eleven_turbo_v2",
+                                voice_id: "cjVigY5qzO86Huf0OWal",
+                                supported_voices: undefined,
+                                agent_output_audio_format: "pcm_16000",
+                                optimize_streaming_latency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarity_boost: 0.8,
+                                pronunciation_dictionary_locators: [
+                                    {
+                                        pronunciation_dictionary_id: "pronunciation_dictionary_id",
+                                        version_id: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                text_only: undefined,
+                                max_duration_seconds: 600,
+                                client_events: ["audio", "interruption"],
+                            },
+                            language_presets: undefined,
+                            vad: { background_voice_detection: false },
+                            agent: {
+                                first_message: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                                disable_first_message_interruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoning_effort: undefined,
+                                    thinking_budget: undefined,
+                                    temperature: 0,
+                                    max_tokens: -1,
+                                    tool_ids: ["tool_ids"],
+                                    built_in_tools: undefined,
+                                    mcp_server_ids: undefined,
+                                    native_mcp_server_ids: undefined,
+                                    knowledge_base: [
+                                        { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                                    ],
+                                    custom_llm: undefined,
+                                    ignore_default_personality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expects_response: false,
+                                            dynamic_variables: {
+                                                dynamic_variable_placeholders: { user_name: "John Doe" },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additional_prompt: "additional_prompt",
+                        additional_knowledge_base: [
+                            { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                        ],
+                        additional_tool_ids: ["additional_tool_ids"],
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        label: "label",
+                    },
+                    success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
+                    success_phone: {
+                        type: "phone_number",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        transfer_destination: { type: "phone", phone_number: "phone_number" },
+                        transfer_type: "conference",
+                    },
+                    success_transfer: {
+                        type: "standalone_agent",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        agent_id: "agent_id",
+                        delay_ms: 1,
+                        transfer_message: undefined,
+                        enable_transferred_agent_first_message: true,
+                    },
+                    tool_node_a: {
+                        type: "tool",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        tools: [{ tool_id: "tool_id" }],
+                    },
+                    tool_node_b: {
+                        type: "tool",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        tools: [{ tool_id: "tool_id" }],
+                    },
+                },
+            },
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -904,19 +2295,20 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            version_id: "version_id",
         };
         server
             .mockEndpoint()
-            .patch("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM")
+            .patch("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.update("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
         expect(response).toEqual({
-            agentId: "J3Pbu5gP6NNKBscdCdwB",
+            agentId: "agent_7101k5zvyjhmfg983brhmhkd98n6",
             name: "My Agent",
             conversationConfig: {
                 asr: {
@@ -978,6 +2370,7 @@ describe("Agents", () => {
                                 language: "en",
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
                                     nativeMcpServerIds: undefined,
                                 },
                             },
@@ -1024,15 +2417,6 @@ describe("Agents", () => {
                 updatedAtUnixSecs: 1,
             },
             platformSettings: {
-                auth: {
-                    enableAuth: true,
-                    allowlist: [
-                        {
-                            hostname: "https://example.com",
-                        },
-                    ],
-                    shareableToken: "1234567890",
-                },
                 evaluation: {
                     criteria: [
                         {
@@ -1152,19 +2536,6 @@ describe("Agents", () => {
                     customLlmExtraBody: true,
                     enableConversationInitiationClientDataFromWebhook: true,
                 },
-                callLimits: {
-                    agentConcurrencyLimit: -1,
-                    dailyLimit: 100000,
-                    burstingEnabled: true,
-                },
-                privacy: {
-                    recordVoice: true,
-                    retentionDays: -1,
-                    deleteTranscriptAndPii: false,
-                    deleteAudio: false,
-                    applyToExistingConversations: false,
-                    zeroRetentionMode: false,
-                },
                 workspaceOverrides: {
                     conversationInitiationClientDataWebhook: {
                         url: "https://example.com/webhook",
@@ -1174,6 +2545,7 @@ describe("Agents", () => {
                     },
                     webhooks: {
                         postCallWebhookId: undefined,
+                        sendAudio: undefined,
                     },
                 },
                 testing: {
@@ -1189,6 +2561,28 @@ describe("Agents", () => {
                     ],
                 },
                 archived: true,
+                auth: {
+                    enableAuth: true,
+                    allowlist: [
+                        {
+                            hostname: "https://example.com",
+                        },
+                    ],
+                    shareableToken: "1234567890",
+                },
+                callLimits: {
+                    agentConcurrencyLimit: -1,
+                    dailyLimit: 100000,
+                    burstingEnabled: true,
+                },
+                privacy: {
+                    recordVoice: true,
+                    retentionDays: -1,
+                    deleteTranscriptAndPii: false,
+                    deleteAudio: false,
+                    applyToExistingConversations: false,
+                    zeroRetentionMode: false,
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -1233,7 +2627,595 @@ describe("Agents", () => {
                 },
             ],
             workflow: {
-                key: "value",
+                edges: {
+                    entry_to_tool_a: {
+                        source: "entry_node",
+                        target: "tool_node_a",
+                        forwardCondition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    start_to_entry: {
+                        source: "start_node",
+                        target: "entry_node",
+                        forwardCondition: {
+                            type: "unconditional",
+                            label: undefined,
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_a_to_failure: {
+                        source: "tool_node_a",
+                        target: "failure_node",
+                        forwardCondition: {
+                            type: "result",
+                            label: undefined,
+                            successful: true,
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_a_to_tool_b: {
+                        source: "tool_node_a",
+                        target: "tool_node_b",
+                        forwardCondition: {
+                            type: "result",
+                            label: undefined,
+                            successful: true,
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_b_to_agent_transfer: {
+                        source: "tool_node_b",
+                        target: "success_transfer",
+                        forwardCondition: {
+                            type: "unconditional",
+                            label: undefined,
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_b_to_conversation: {
+                        source: "tool_node_b",
+                        target: "success_conversation",
+                        forwardCondition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_b_to_end: {
+                        source: "tool_node_b",
+                        target: "success_end",
+                        forwardCondition: {
+                            type: "llm",
+                            label: undefined,
+                            condition: "User's last message contains a question about our pricing.",
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                    tool_b_to_phone: {
+                        source: "tool_node_b",
+                        target: "success_phone",
+                        forwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                        backwardCondition: {
+                            type: "expression",
+                            label: undefined,
+                            expression: {
+                                type: "and_operator",
+                                children: [
+                                    {
+                                        type: "boolean_literal",
+                                        value: true,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                },
+                nodes: {
+                    entry_node: {
+                        type: "override_agent",
+                        conversationConfig: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                userInputAudioFormat: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: {
+                                turnTimeout: 7,
+                                silenceEndCallTimeout: -1,
+                                mode: "turn",
+                            },
+                            tts: {
+                                modelId: "eleven_turbo_v2",
+                                voiceId: "cjVigY5qzO86Huf0OWal",
+                                supportedVoices: undefined,
+                                agentOutputAudioFormat: "pcm_16000",
+                                optimizeStreamingLatency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarityBoost: 0.8,
+                                pronunciationDictionaryLocators: [
+                                    {
+                                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                                        versionId: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                textOnly: undefined,
+                                maxDurationSeconds: 600,
+                                clientEvents: ["audio", "interruption"],
+                            },
+                            languagePresets: undefined,
+                            vad: {
+                                backgroundVoiceDetection: false,
+                            },
+                            agent: {
+                                firstMessage: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamicVariables: {
+                                    dynamicVariablePlaceholders: {
+                                        user_name: "John Doe",
+                                    },
+                                },
+                                disableFirstMessageInterruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoningEffort: undefined,
+                                    thinkingBudget: undefined,
+                                    temperature: 0,
+                                    maxTokens: -1,
+                                    toolIds: ["tool_ids"],
+                                    builtInTools: undefined,
+                                    mcpServerIds: undefined,
+                                    nativeMcpServerIds: undefined,
+                                    knowledgeBase: [
+                                        {
+                                            type: "file",
+                                            name: "My Knowledge Base",
+                                            id: "123",
+                                            usageMode: "auto",
+                                        },
+                                    ],
+                                    customLlm: undefined,
+                                    ignoreDefaultPersonality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expectsResponse: false,
+                                            dynamicVariables: {
+                                                dynamicVariablePlaceholders: {
+                                                    user_name: "John Doe",
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additionalPrompt: "additional_prompt",
+                        additionalKnowledgeBase: [
+                            {
+                                type: "file",
+                                name: "My Knowledge Base",
+                                id: "123",
+                                usageMode: "auto",
+                            },
+                        ],
+                        additionalToolIds: ["additional_tool_ids"],
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        label: "label",
+                    },
+                    failure_node: {
+                        type: "override_agent",
+                        conversationConfig: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                userInputAudioFormat: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: {
+                                turnTimeout: 7,
+                                silenceEndCallTimeout: -1,
+                                mode: "turn",
+                            },
+                            tts: {
+                                modelId: "eleven_turbo_v2",
+                                voiceId: "cjVigY5qzO86Huf0OWal",
+                                supportedVoices: undefined,
+                                agentOutputAudioFormat: "pcm_16000",
+                                optimizeStreamingLatency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarityBoost: 0.8,
+                                pronunciationDictionaryLocators: [
+                                    {
+                                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                                        versionId: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                textOnly: undefined,
+                                maxDurationSeconds: 600,
+                                clientEvents: ["audio", "interruption"],
+                            },
+                            languagePresets: undefined,
+                            vad: {
+                                backgroundVoiceDetection: false,
+                            },
+                            agent: {
+                                firstMessage: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamicVariables: {
+                                    dynamicVariablePlaceholders: {
+                                        user_name: "John Doe",
+                                    },
+                                },
+                                disableFirstMessageInterruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoningEffort: undefined,
+                                    thinkingBudget: undefined,
+                                    temperature: 0,
+                                    maxTokens: -1,
+                                    toolIds: ["tool_ids"],
+                                    builtInTools: undefined,
+                                    mcpServerIds: undefined,
+                                    nativeMcpServerIds: undefined,
+                                    knowledgeBase: [
+                                        {
+                                            type: "file",
+                                            name: "My Knowledge Base",
+                                            id: "123",
+                                            usageMode: "auto",
+                                        },
+                                    ],
+                                    customLlm: undefined,
+                                    ignoreDefaultPersonality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expectsResponse: false,
+                                            dynamicVariables: {
+                                                dynamicVariablePlaceholders: {
+                                                    user_name: "John Doe",
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additionalPrompt: "additional_prompt",
+                        additionalKnowledgeBase: [
+                            {
+                                type: "file",
+                                name: "My Knowledge Base",
+                                id: "123",
+                                usageMode: "auto",
+                            },
+                        ],
+                        additionalToolIds: ["additional_tool_ids"],
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        label: "label",
+                    },
+                    start_node: {
+                        type: "start",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                    },
+                    success_conversation: {
+                        type: "override_agent",
+                        conversationConfig: {
+                            asr: {
+                                quality: "high",
+                                provider: "elevenlabs",
+                                userInputAudioFormat: "pcm_16000",
+                                keywords: ["hello", "world"],
+                            },
+                            turn: {
+                                turnTimeout: 7,
+                                silenceEndCallTimeout: -1,
+                                mode: "turn",
+                            },
+                            tts: {
+                                modelId: "eleven_turbo_v2",
+                                voiceId: "cjVigY5qzO86Huf0OWal",
+                                supportedVoices: undefined,
+                                agentOutputAudioFormat: "pcm_16000",
+                                optimizeStreamingLatency: 3,
+                                stability: 0.5,
+                                speed: 1,
+                                similarityBoost: 0.8,
+                                pronunciationDictionaryLocators: [
+                                    {
+                                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                                        versionId: undefined,
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                textOnly: undefined,
+                                maxDurationSeconds: 600,
+                                clientEvents: ["audio", "interruption"],
+                            },
+                            languagePresets: undefined,
+                            vad: {
+                                backgroundVoiceDetection: false,
+                            },
+                            agent: {
+                                firstMessage: "Hello, how can I help you today?",
+                                language: "en",
+                                dynamicVariables: {
+                                    dynamicVariablePlaceholders: {
+                                        user_name: "John Doe",
+                                    },
+                                },
+                                disableFirstMessageInterruptions: false,
+                                prompt: {
+                                    prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                                    llm: "gemini-2.0-flash-001",
+                                    reasoningEffort: undefined,
+                                    thinkingBudget: undefined,
+                                    temperature: 0,
+                                    maxTokens: -1,
+                                    toolIds: ["tool_ids"],
+                                    builtInTools: undefined,
+                                    mcpServerIds: undefined,
+                                    nativeMcpServerIds: undefined,
+                                    knowledgeBase: [
+                                        {
+                                            type: "file",
+                                            name: "My Knowledge Base",
+                                            id: "123",
+                                            usageMode: "auto",
+                                        },
+                                    ],
+                                    customLlm: undefined,
+                                    ignoreDefaultPersonality: undefined,
+                                    rag: undefined,
+                                    timezone: undefined,
+                                    tools: [
+                                        {
+                                            type: "client",
+                                            name: "name",
+                                            description: "description",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                },
+                                            ],
+                                            parameters: undefined,
+                                            expectsResponse: false,
+                                            dynamicVariables: {
+                                                dynamicVariablePlaceholders: {
+                                                    user_name: "John Doe",
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                        additionalPrompt: "additional_prompt",
+                        additionalKnowledgeBase: [
+                            {
+                                type: "file",
+                                name: "My Knowledge Base",
+                                id: "123",
+                                usageMode: "auto",
+                            },
+                        ],
+                        additionalToolIds: ["additional_tool_ids"],
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        label: "label",
+                    },
+                    success_end: {
+                        type: "end",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                    },
+                    success_phone: {
+                        type: "phone_number",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        transferDestination: {
+                            type: "phone",
+                            phoneNumber: "phone_number",
+                        },
+                        transferType: "conference",
+                    },
+                    success_transfer: {
+                        type: "standalone_agent",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        agentId: "agent_id",
+                        delayMs: 1,
+                        transferMessage: undefined,
+                        enableTransferredAgentFirstMessage: true,
+                    },
+                    tool_node_a: {
+                        type: "tool",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        tools: [
+                            {
+                                toolId: "tool_id",
+                            },
+                        ],
+                    },
+                    tool_node_b: {
+                        type: "tool",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
+                        tools: [
+                            {
+                                toolId: "tool_id",
+                            },
+                        ],
+                    },
+                },
             },
             accessInfo: {
                 isCreator: true,
@@ -1242,6 +3224,7 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            versionId: "version_id",
         });
     });
 
@@ -1302,19 +3285,25 @@ describe("Agents", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
+        const rawResponseBody = {
+            agent_id: "J3Pbu5gP6NNKBscdCdwB",
+            main_branch_id: "main_branch_id",
+            initial_version_id: "initial_version_id",
+        };
         server
             .mockEndpoint()
-            .post("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM/duplicate")
+            .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/duplicate")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.duplicate("21m00Tcm4TlvDq8ikWAM");
+        const response = await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
         expect(response).toEqual({
             agentId: "J3Pbu5gP6NNKBscdCdwB",
+            mainBranchId: "main_branch_id",
+            initialVersionId: "initial_version_id",
         });
     });
 
@@ -1399,22 +3388,25 @@ describe("Agents", () => {
         };
         server
             .mockEndpoint()
-            .post("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM/simulate-conversation")
+            .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/simulate-conversation")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.simulateConversation("21m00Tcm4TlvDq8ikWAM", {
-            simulationSpecification: {
-                simulatedUserConfig: {
-                    firstMessage: "Hello, how can I help you today?",
-                    language: "en",
-                    disableFirstMessageInterruptions: false,
+        const response = await client.conversationalAi.agents.simulateConversation(
+            "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
+            {
+                simulationSpecification: {
+                    simulatedUserConfig: {
+                        firstMessage: "Hello, how can I help you today?",
+                        language: "en",
+                        disableFirstMessageInterruptions: false,
+                    },
                 },
             },
-        });
+        );
         expect(response).toEqual({
             simulatedConversation: [
                 {
@@ -1521,21 +3513,24 @@ describe("Agents", () => {
 
         server
             .mockEndpoint()
-            .post("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM/simulate-conversation/stream")
+            .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/simulate-conversation/stream")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .build();
 
-        const response = await client.conversationalAi.agents.simulateConversationStream("21m00Tcm4TlvDq8ikWAM", {
-            simulationSpecification: {
-                simulatedUserConfig: {
-                    firstMessage: "Hello, how can I help you today?",
-                    language: "en",
-                    disableFirstMessageInterruptions: false,
+        const response = await client.conversationalAi.agents.simulateConversationStream(
+            "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
+            {
+                simulationSpecification: {
+                    simulatedUserConfig: {
+                        firstMessage: "Hello, how can I help you today?",
+                        language: "en",
+                        disableFirstMessageInterruptions: false,
+                    },
                 },
             },
-        });
+        );
         expect(response).toEqual(undefined);
     });
 
@@ -1607,14 +3602,14 @@ describe("Agents", () => {
         };
         server
             .mockEndpoint()
-            .post("/v1/convai/agents/21m00Tcm4TlvDq8ikWAM/run-tests")
+            .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/run-tests")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.runTests("21m00Tcm4TlvDq8ikWAM", {
+        const response = await client.conversationalAi.agents.runTests("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
             tests: [
                 {
                     testId: "test_id",
