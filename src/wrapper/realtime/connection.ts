@@ -30,6 +30,8 @@ export enum RealtimeEvents {
     PARTIAL_TRANSCRIPT = "partial_transcript",
     FINAL_TRANSCRIPT = "final_transcript",
     ERROR = "error",
+    OPEN = "open",
+    CLOSE = "close",
 }
 
 export class RealtimeConnection {
@@ -44,6 +46,10 @@ export class RealtimeConnection {
 
     public setWebSocket(websocket: WebSocket): void {
         this.websocket = websocket;
+
+        this.websocket.on("open", () => {
+            this.eventEmitter.emit(RealtimeEvents.OPEN);
+        });
 
         this.websocket.on("message", (event: WebSocket.Data) => {
             const data = JSON.parse(event.toString()) as WebSocketMessage;
@@ -66,6 +72,7 @@ export class RealtimeConnection {
         });
 
         this.websocket.on("close", () => {
+            this.eventEmitter.emit(RealtimeEvents.CLOSE);
             this.cleanup();
         });
     }
