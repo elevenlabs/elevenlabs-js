@@ -52,12 +52,24 @@ export interface AudioOptions extends BaseOptions {
     url?: never;
 }
 
+/**
+ * Options for streaming audio from a URL.
+ * @remarks
+ * **Node.js only**: Requires ffmpeg to be installed and available in PATH.
+ * This will not work in browsers, Deno, or Cloudflare Workers.
+ */
 export interface UrlOptions extends BaseOptions {
     url: string;
     audioFormat?: never;
     sampleRate?: never;
 }
 
+/**
+ * Real-time speech-to-text transcription client.
+ * @remarks
+ * **Node.js only**: This class uses Node.js-specific APIs (WebSocket from 'ws', child_process).
+ * It will not work in browsers, Deno, or Cloudflare Workers without modifications.
+ */
 export class ScribeRealtime {
     private uri = "wss://api.elevenlabs.io/v1/speech-to-text/realtime-beta";
     private options: SpeechToText.Options;
@@ -115,6 +127,32 @@ export class ScribeRealtime {
         return queryString ? `${this.uri}?${queryString}` : this.uri;
     }
 
+    /**
+     * Establishes a WebSocket connection for real-time speech-to-text transcription.
+     *
+     * @param options - Configuration options for the connection
+     * @returns A promise that resolves to a RealtimeConnection instance
+     *
+     * @remarks
+     * **Node.js only**: This method uses Node.js-specific APIs.
+     *
+     * When using `UrlOptions` with a URL, ffmpeg must be installed and available in PATH.
+     * The SDK will automatically convert the stream to 16kHz mono PCM format.
+     *
+     * @example
+     * ```typescript
+     * // Manual audio streaming
+     * const connection = await client.speechToText.realtime.connect({
+     *     audioFormat: AudioFormat.PCM_16000,
+     *     sampleRate: 16000,
+     * });
+     *
+     * // Automatic URL streaming (requires ffmpeg)
+     * const connection = await client.speechToText.realtime.connect({
+     *     url: "https://example.com/stream.mp3",
+     * });
+     * ```
+     */
     public async connect(options: AudioOptions | UrlOptions): Promise<RealtimeConnection> {
         let apiKey = this.options.apiKey;
         if (!apiKey) {
