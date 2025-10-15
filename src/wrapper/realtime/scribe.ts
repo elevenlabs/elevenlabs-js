@@ -1,0 +1,220 @@
+import type { SpeechToText } from "../../api/resources/speechToText/client/Client";
+import WebSocket from "ws";
+import { spawn, execSync } from "node:child_process";
+import { RealtimeConnection } from "./connection";
+
+export enum AudioFormat {
+    PCM_8000 = "pcm_8000",
+    PCM_16000 = "pcm_16000",
+    PCM_22050 = "pcm_22050",
+    PCM_24000 = "pcm_24000",
+    PCM_44100 = "pcm_44100",
+    PCM_48000 = "pcm_48000",
+    ULAW_8000 = "ulaw_8000",
+}
+
+export enum CommitStrategy {
+    MANUAL = "manual",
+    VAD = "vad",
+}
+
+interface BaseOptions {
+    /**
+     * Strategy for committing transcriptions.
+     * @default CommitStrategy.MANUAL
+     */
+    commitStrategy?: CommitStrategy;
+    /**
+     * Silence threshold in seconds for VAD (Voice Activity Detection).
+     * Must be a positive number between 0.3 and 3.0
+     */
+    vadSilenceThresholdSecs?: number;
+    /**
+     * Threshold for voice activity detection.
+     * Must be between 0.1 and 0.9.
+     */
+    vadThreshold?: number;
+    /**
+     * Minimum speech duration in milliseconds.
+     * Must be a positive integer between 50 and 2000.
+     */
+    minSpeechDurationMs?: number;
+    /**
+     * Minimum silence duration in milliseconds.
+     * Must be a positive integer between 50 and 2000.
+     */
+    minSilenceDurationMs?: number;
+}
+
+export interface AudioOptions extends BaseOptions {
+    audioFormat: AudioFormat;
+    sampleRate: number;
+    url?: never;
+}
+
+export interface UrlOptions extends BaseOptions {
+    url: string;
+    audioFormat?: never;
+    sampleRate?: never;
+}
+
+export class ScribeRealtime {
+    private uri = "wss://api.elevenlabs.io/v1/speech-to-text/realtime-beta";
+    private options: SpeechToText.Options;
+
+    constructor(options: SpeechToText.Options = {}) {
+        this.options = options;
+    }
+
+    private checkFfmpegInstalled(): void {
+        try {
+            const command = process.platform === "win32" ? "where ffmpeg" : "which ffmpeg";
+            execSync(command, { stdio: "ignore" });
+        } catch {
+            throw new Error(
+                "ffmpeg is required for URL streaming but was not found. " +
+                "Please install ffmpeg and ensure it is available in your PATH. " +
+                "Visit https://ffmpeg.org/download.html for installation instructions."
+            );
+        }
+    }
+
+    private buildWebSocketUri(options: AudioOptions | UrlOptions): string {
+        const params = new URLSearchParams();
+
+        // Add optional parameters if provided, with validation
+        if (options.commitStrategy !== undefined) {
+            params.append("commit_strategy", options.commitStrategy);
+        }
+        if (options.vadSilenceThresholdSecs !== undefined) {
+            if (options.vadSilenceThresholdSecs <= 0.3 || options.vadSilenceThresholdSecs > 3.0) {
+                throw new Error("vadSilenceThresholdSecs must be between 0.3 and 3.0");
+            }
+            params.append("vad_silence_threshold_secs", options.vadSilenceThresholdSecs.toString());
+        }
+        if (options.vadThreshold !== undefined) {
+            if (options.vadThreshold < 0.1 || options.vadThreshold > 0.9) {
+                throw new Error("vadThreshold must be between 0.1 and 0.9");
+            }
+            params.append("vad_threshold", options.vadThreshold.toString());
+        }
+        if (options.minSpeechDurationMs !== undefined) {
+            if (options.minSpeechDurationMs <= 50 || options.minSpeechDurationMs > 2000) {
+                throw new Error("minSpeechDurationMs must be between 50 and 2000");
+            }
+            params.append("min_speech_duration_ms", options.minSpeechDurationMs.toString());
+        }
+        if (options.minSilenceDurationMs !== undefined) {
+            if (options.minSilenceDurationMs <= 50 || options.minSilenceDurationMs > 2000) {
+                throw new Error("minSilenceDurationMs must be between 50 and 2000");
+            }
+            params.append("min_silence_duration_ms", options.minSilenceDurationMs.toString());
+        }
+
+        const queryString = params.toString();
+        return queryString ? `${this.uri}?${queryString}` : this.uri;
+    }
+
+    public async connect(options: AudioOptions | UrlOptions): Promise<RealtimeConnection> {
+        let apiKey = this.options.apiKey;
+        if (!apiKey) {
+            throw new Error("API key is required");
+        }
+
+        // Resolve API key if it's a function or promise
+        if (typeof apiKey === "function") {
+            apiKey = apiKey();
+        }
+        if (apiKey instanceof Promise) {
+            apiKey = await apiKey;
+        }
+
+        if (!apiKey) {
+            throw new Error("API key is required");
+        }
+
+        return new Promise((resolve, reject) => {
+            // Create connection object first so users can attach event listeners before messages arrive
+            const sampleRate = "url" in options ? 16000 : options.sampleRate;
+            const connection = new RealtimeConnection(sampleRate);
+
+            // Resolve immediately with connection so users can attach listeners
+            resolve(connection);
+
+            // Build WebSocket URI with query parameters
+            const uri = this.buildWebSocketUri(options);
+
+            const websocket = new WebSocket(uri, {
+                headers: {
+                    "xi-api-key": apiKey as string,
+                },
+            });
+
+            websocket.on("open", () => {
+                // Attach websocket to connection after listeners are set up
+                connection.setWebSocket(websocket);
+
+                // If UrlOptions, start streaming from URL with ffmpeg
+                if ("url" in options) {
+                    const commitStrategy = options.commitStrategy ?? CommitStrategy.MANUAL;
+                    this.streamFromUrl(options as UrlOptions, connection, commitStrategy);
+                }
+            });
+
+            websocket.on("error", (error: Error) => {
+                reject(error);
+            });
+        });
+    }
+
+    private streamFromUrl(options: UrlOptions, connection: RealtimeConnection, commitStrategy: CommitStrategy): void {
+        // Check if ffmpeg is installed before attempting to use it
+        this.checkFfmpegInstalled();
+
+        // Spawn ffmpeg to convert the stream to 16kHz mono PCM
+        const ffmpegProcess = spawn("ffmpeg", [
+            "-i", options.url,
+            "-f", "s16le",           // 16-bit PCM, little-endian
+            "-acodec", "pcm_s16le",  // PCM codec
+            "-ar", "16000",          // 16kHz sample rate
+            "-ac", "1",              // mono (1 channel)
+            "pipe:1"                 // output to stdout
+        ]);
+
+        connection.setFfmpegProcess(ffmpegProcess);
+
+        ffmpegProcess.stdout?.on("data", (chunk: Buffer) => {
+            const base64Audio = chunk.toString("base64");
+            connection.send({
+                audioBase64: base64Audio,
+            });
+        });
+
+        ffmpegProcess.stdout?.on("end", () => {
+            if (commitStrategy === CommitStrategy.MANUAL) {
+                // Manual strategy: commit to finalize transcription, then close
+                console.log("Stream ended, sending final commit");
+                connection.commit();
+            }
+            // Close connection since no more audio will be sent
+            connection.close();
+        });
+
+        ffmpegProcess.stderr?.on("data", (data) => {
+            // ffmpeg outputs progress info to stderr, only log errors
+            const message = data.toString();
+            if (message.includes("Error") || message.includes("error")) {
+                console.error("ffmpeg error:", message);
+            }
+        });
+
+        ffmpegProcess.on("error", (error: Error) => {
+            console.error("Failed to start ffmpeg:", error);
+        });
+
+        ffmpegProcess.on("close", (code: number | null) => {
+            console.log(`ffmpeg process exited with code ${code}`);
+        });
+    }
+}
+
