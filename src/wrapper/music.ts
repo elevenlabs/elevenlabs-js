@@ -1,6 +1,8 @@
 import { Music as GeneratedMusic } from "../api/resources/music/client/Client";
 import type * as ElevenLabs from "../api";
 import type { CompositionPlan } from "../api/resources/music/resources/compositionPlan/client/Client";
+import * as core from "../core";
+import type { WithRawResponse } from "../core/fetcher/RawResponse";
 
 export declare namespace Music {
     interface Options extends GeneratedMusic.Options {}
@@ -31,21 +33,28 @@ export class Music extends GeneratedMusic {
 
     /**
      * Compose a song from a prompt or a composition plan with detailed response parsing.
-     * This method calls the original composeDetailed and then parses the stream response.
+     * This method calls composeDetailed and then parses the multipart stream response,
+     * extracting both the composition metadata and the audio file.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    // @ts-expect-error - Intentionally overriding parent method with different return type
-    public async composeDetailed(
+    public composeDetailedWithMetadata(
         request: ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost = {},
         requestOptions?: Music.RequestOptions,
-    ): Promise<MultipartResponse> {
-        // Call the parent method to get the stream
-        const response = await super.composeDetailed(request, requestOptions);
+    ): core.HttpResponsePromise<MultipartResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__composeDetailedWithMetadata(request, requestOptions));
+    }
 
-        // Parse the stream using your existing parsing method
-        const parsedResponse = await this.parseMultipart(response);
+    private async __composeDetailedWithMetadata(
+        request: ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost = {},
+        requestOptions?: Music.RequestOptions,
+    ): Promise<WithRawResponse<MultipartResponse>> {
+        // Call the parent method to get the stream with raw response
+        const { data: stream, rawResponse } = await this.composeDetailed(request, requestOptions).withRawResponse();
 
-        return parsedResponse;
+        // Parse the stream using the existing parsing method
+        const parsedResponse = await this.parseMultipart(stream);
+
+        return { data: parsedResponse, rawResponse };
     }
 
     /**
