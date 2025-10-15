@@ -4,6 +4,7 @@ import type * as core from "../core";
 import * as errors from "../errors";
 import { WebhooksClient } from "./webhooks";
 import { Music } from "./music";
+import { Music as GeneratedMusic } from "../api/resources/music/client/Client";
 
 export declare namespace ElevenLabsClient {
     interface Options extends FernClient.Options {
@@ -37,7 +38,8 @@ export class ElevenLabsClient extends FernClient {
         return this._customWebhooks;
     }
 
-    public get music(): Music {
+    // @ts-expect-error - Intentionally overriding with wrapper Music that has enhanced composeDetailed
+    public override get music(): Music {
         if (!this._customMusic) {
             this._customMusic = new Music(this._options);
         }

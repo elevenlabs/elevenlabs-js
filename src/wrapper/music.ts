@@ -26,35 +26,66 @@ export interface MultipartResponse {
     filename: string;
 }
 
-export class Music extends GeneratedMusic {
+export class Music {
+    private _client: GeneratedMusic;
+
     constructor(options: Music.Options = {}) {
-        super(options);
+        this._client = new GeneratedMusic(options);
+    }
+
+    /**
+     * Get the composition plan client
+     */
+    public get compositionPlan(): CompositionPlan {
+        return this._client.compositionPlan;
+    }
+
+    /**
+     * Compose a song from a prompt or a composition plan.
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     */
+    public compose(
+        request: ElevenLabs.BodyComposeMusicV1MusicPost = {},
+        requestOptions?: Music.RequestOptions,
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
+        return this._client.compose(request, requestOptions);
     }
 
     /**
      * Compose a song from a prompt or a composition plan with detailed response parsing.
-     * This method calls composeDetailed and then parses the multipart stream response,
-     * extracting both the composition metadata and the audio file.
+     * This method parses the multipart stream response, extracting both the composition
+     * metadata and the audio file.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
-    public composeDetailedWithMetadata(
+    public composeDetailed(
         request: ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost = {},
         requestOptions?: Music.RequestOptions,
     ): core.HttpResponsePromise<MultipartResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__composeDetailedWithMetadata(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__composeDetailed(request, requestOptions));
     }
 
-    private async __composeDetailedWithMetadata(
+    private async __composeDetailed(
         request: ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost = {},
         requestOptions?: Music.RequestOptions,
     ): Promise<WithRawResponse<MultipartResponse>> {
-        // Call the parent method to get the stream with raw response
-        const { data: stream, rawResponse } = await this.composeDetailed(request, requestOptions).withRawResponse();
+        // Call the base client method to get the stream with raw response
+        const { data: stream, rawResponse } = await this._client.composeDetailed(request, requestOptions).withRawResponse();
 
         // Parse the stream using the existing parsing method
         const parsedResponse = await this.parseMultipart(stream);
 
         return { data: parsedResponse, rawResponse };
+    }
+
+    /**
+     * Stream a composed song from a prompt or a composition plan.
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     */
+    public stream(
+        request: ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost = {},
+        requestOptions?: Music.RequestOptions,
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
+        return this._client.stream(request, requestOptions);
     }
 
     /**
