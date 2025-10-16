@@ -93,9 +93,15 @@ export class RealtimeConnection {
     public setWebSocket(websocket: WebSocket): void {
         this.websocket = websocket;
 
-        this.websocket.on("open", () => {
+        // If WebSocket is already open, emit OPEN event immediately
+        if (this.websocket.readyState === WebSocket.OPEN) {
             this.eventEmitter.emit(RealtimeEvents.OPEN);
-        });
+        } else {
+            // Otherwise, wait for the open event
+            this.websocket.on("open", () => {
+                this.eventEmitter.emit(RealtimeEvents.OPEN);
+            });
+        }
 
         this.websocket.on("message", (event: WebSocket.Data) => {
             const data = JSON.parse(event.toString()) as WebSocketMessage;

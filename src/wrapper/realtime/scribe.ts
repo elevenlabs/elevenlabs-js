@@ -2,6 +2,8 @@ import type { SpeechToText } from "../../api/resources/speechToText/client/Clien
 import WebSocket from "ws";
 import { spawn, execSync } from "node:child_process";
 import { RealtimeConnection } from "./connection";
+import * as core from "../../core";
+import * as environments from "../../environments";
 
 export enum AudioFormat {
     PCM_8000 = "pcm_8000",
@@ -71,11 +73,25 @@ export interface UrlOptions extends BaseOptions {
  * It will not work in browsers, Deno, or Cloudflare Workers without modifications.
  */
 export class ScribeRealtime {
-    private uri = "wss://api.elevenlabs.io/v1/speech-to-text/realtime-beta";
     private options: SpeechToText.Options;
 
     constructor(options: SpeechToText.Options = {}) {
         this.options = options;
+    }
+
+    private async getWebSocketUri(): Promise<string> {
+        // Get base URL from options, preferring baseUrl, then environment, then default Production
+        const baseUrl =
+            (await core.Supplier.get(this.options.baseUrl)) ??
+            (await core.Supplier.get(this.options.environment)) ??
+            environments.ElevenLabsEnvironment.Production;
+
+        // Convert HTTP(S) to WS(S)
+        const wsUrl = baseUrl.replace(/^https?:\/\//i, (match) =>
+            match.toLowerCase() === "https://" ? "wss://" : "ws://"
+        );
+
+        return `${wsUrl}/v1/speech-to-text/realtime-beta`;
     }
 
     private checkFfmpegInstalled(): void {
@@ -91,7 +107,8 @@ export class ScribeRealtime {
         }
     }
 
-    private buildWebSocketUri(options: AudioOptions | UrlOptions): string {
+    private async buildWebSocketUri(options: AudioOptions | UrlOptions): Promise<string> {
+        const baseUri = await this.getWebSocketUri();
         const params = new URLSearchParams();
 
         // Add optional parameters if provided, with validation
@@ -124,7 +141,7 @@ export class ScribeRealtime {
         }
 
         const queryString = params.toString();
-        return queryString ? `${this.uri}?${queryString}` : this.uri;
+        return queryString ? `${baseUri}?${queryString}` : baseUri;
     }
 
     /**
@@ -171,16 +188,16 @@ export class ScribeRealtime {
             throw new Error("API key is required");
         }
 
-        return new Promise((resolve, reject) => {
-            // Create connection object first so users can attach event listeners before messages arrive
-            const sampleRate = "url" in options ? 16000 : options.sampleRate;
-            const connection = new RealtimeConnection(sampleRate);
+        // Create connection object first so users can attach event listeners before messages arrive
+        const sampleRate = "url" in options ? 16000 : options.sampleRate;
+        const connection = new RealtimeConnection(sampleRate);
 
+        // Build WebSocket URI with query parameters
+        const uri = await this.buildWebSocketUri(options);
+
+        return new Promise((resolve, reject) => {
             // Resolve immediately with connection so users can attach listeners
             resolve(connection);
-
-            // Build WebSocket URI with query parameters
-            const uri = this.buildWebSocketUri(options);
 
             const websocket = new WebSocket(uri, {
                 headers: {
