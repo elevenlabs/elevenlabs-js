@@ -1,6 +1,5 @@
 import type { SpeechToText } from "../../api/resources/speechToText/client/Client";
 import WebSocket from "ws";
-import { spawn, execSync } from "node:child_process";
 import { RealtimeConnection } from "./connection";
 import * as core from "../../core";
 import * as environments from "../../environments";
@@ -94,8 +93,9 @@ export class ScribeRealtime {
         return `${wsUrl}/v1/speech-to-text/realtime-beta`;
     }
 
-    private checkFfmpegInstalled(): void {
+    private async checkFfmpegInstalled(): Promise<void> {
         try {
+            const { execSync } = await import("node:child_process");
             const command = process.platform === "win32" ? "where ffmpeg" : "which ffmpeg";
             execSync(command, { stdio: "ignore" });
         } catch {
@@ -222,9 +222,12 @@ export class ScribeRealtime {
         });
     }
 
-    private streamFromUrl(options: UrlOptions, connection: RealtimeConnection, commitStrategy: CommitStrategy): void {
+    private async streamFromUrl(options: UrlOptions, connection: RealtimeConnection, commitStrategy: CommitStrategy): Promise<void> {
         // Check if ffmpeg is installed before attempting to use it
-        this.checkFfmpegInstalled();
+        await this.checkFfmpegInstalled();
+
+        // Dynamically import spawn to avoid bundling issues in non-Node.js environments
+        const { spawn } = await import("node:child_process");
 
         // Spawn ffmpeg to convert the stream to 16kHz mono PCM
         const ffmpegProcess = spawn("ffmpeg", [

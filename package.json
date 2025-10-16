@@ -39,7 +39,8 @@
         "os": false,
         "path": false,
         "stream": false,
-        "command-exists": false
+        "command-exists": false,
+        "child_process": false
     },
     "packageManager": "yarn@1.22.22",
     "engines": {
