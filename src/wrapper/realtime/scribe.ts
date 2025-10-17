@@ -195,29 +195,26 @@ export class ScribeRealtime {
         // Build WebSocket URI with query parameters
         const uri = await this.buildWebSocketUri(options);
 
-        return new Promise((resolve, reject) => {
-            // Resolve immediately with connection so users can attach listeners
-            resolve(connection);
-
+        return new Promise((resolve) => {
             const websocket = new WebSocket(uri, {
                 headers: {
                     "xi-api-key": apiKey as string,
                 },
             });
 
-            websocket.on("open", () => {
-                // Attach websocket to connection after listeners are set up
-                connection.setWebSocket(websocket);
+            // Attach websocket to connection immediately so error handlers are registered
+            // This ensures errors during handshake (like 403) are properly emitted via event emitter
+            connection.setWebSocket(websocket);
 
+            // Resolve immediately with connection so users can attach listeners
+            resolve(connection);
+
+            websocket.on("open", () => {
                 // If UrlOptions, start streaming from URL with ffmpeg
                 if ("url" in options) {
                     const commitStrategy = options.commitStrategy ?? CommitStrategy.MANUAL;
                     this.streamFromUrl(options as UrlOptions, connection, commitStrategy);
                 }
-            });
-
-            websocket.on("error", (error: Error) => {
-                reject(error);
             });
         });
     }

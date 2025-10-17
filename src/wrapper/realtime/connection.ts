@@ -23,7 +23,12 @@ interface FinalTranscriptMessage {
     transcript: string;
 }
 
-type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | FinalTranscriptMessage;
+interface AlignedTranscriptMessage {
+    message_type: "aligned_transcript";
+    transcript: string;
+}
+
+type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | FinalTranscriptMessage | AlignedTranscriptMessage;
 
 /**
  * Events emitted by the RealtimeConnection.
@@ -35,6 +40,8 @@ export enum RealtimeEvents {
     PARTIAL_TRANSCRIPT = "partial_transcript",
     /** Emitted when a final transcript is available */
     FINAL_TRANSCRIPT = "final_transcript",
+    /** Emitted when an aligned transcript is available */
+    ALIGNED_TRANSCRIPT = "aligned_transcript",
     /** Emitted when an error occurs */
     ERROR = "error",
     /** Emitted when the WebSocket connection is opened */
@@ -106,6 +113,8 @@ export class RealtimeConnection {
         this.websocket.on("message", (event: WebSocket.Data) => {
             const data = JSON.parse(event.toString()) as WebSocketMessage;
 
+            console.log("WebSocket message received:", data.message_type);
+
             switch (data.message_type) {
                 case "session_started":
                     this.eventEmitter.emit(RealtimeEvents.SESSION_STARTED, data);
@@ -115,6 +124,9 @@ export class RealtimeConnection {
                     break;
                 case "final_transcript":
                     this.eventEmitter.emit(RealtimeEvents.FINAL_TRANSCRIPT, data);
+                    break;
+                case "aligned_transcript":
+                    this.eventEmitter.emit(RealtimeEvents.ALIGNED_TRANSCRIPT, data);
                     this.close();
                     break;
             }
