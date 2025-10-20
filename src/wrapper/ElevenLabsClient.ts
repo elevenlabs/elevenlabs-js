@@ -4,7 +4,7 @@ import type * as core from "../core";
 import * as errors from "../errors";
 import { WebhooksClient } from "./webhooks";
 import { Music } from "./music";
-import { Music as GeneratedMusic } from "../api/resources/music/client/Client";
+import { SpeechToText } from "./speechToText";
 
 export declare namespace ElevenLabsClient {
     interface Options extends FernClient.Options {
@@ -19,6 +19,7 @@ export declare namespace ElevenLabsClient {
 export class ElevenLabsClient extends FernClient {
     private _customWebhooks: WebhooksClient | undefined;
     private _customMusic: Music | undefined;
+    private _customSpeechToText: SpeechToText | undefined;
 
     constructor(options: ElevenLabsClient.Options = {}) {
         const apiKey = options.apiKey ?? process.env.ELEVENLABS_API_KEY;
@@ -44,5 +45,12 @@ export class ElevenLabsClient extends FernClient {
             this._customMusic = new Music(this._options);
         }
         return this._customMusic;
+    }
+
+    public get speechToText(): SpeechToText {
+        if (!this._customSpeechToText) {
+            this._customSpeechToText = new SpeechToText(this._options);
+        }
+        return this._customSpeechToText;
     }
 }

@@ -57,6 +57,7 @@ export class Studio {
      *
      * @example
      *     await client.studio.createPodcast({
+     *         safetyIdentifier: "safety-identifier",
      *         modelId: "eleven_multilingual_v2",
      *         mode: {
      *             type: "conversation",
@@ -81,9 +82,13 @@ export class Studio {
         request: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPost,
         requestOptions?: Studio.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.PodcastProjectResponseModel>> {
+        const { safetyIdentifier, ..._body } = request;
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "safety-identifier": safetyIdentifier != null ? safetyIdentifier : undefined,
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+            }),
             requestOptions?.headers,
         );
         const _response = await core.fetcher({
@@ -98,7 +103,7 @@ export class Studio {
             contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
             requestType: "json",
-            body: serializers.BodyCreatePodcastV1StudioPodcastsPost.jsonOrThrow(request, {
+            body: serializers.BodyCreatePodcastV1StudioPodcastsPost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,

@@ -7,6 +7,7 @@ import * as ElevenLabs from "../../../../../../index";
  *     {
  *         pageSize: 1,
  *         search: "search",
+ *         archived: true,
  *         sortDirection: "asc",
  *         sortBy: "name",
  *         cursor: "cursor"
@@ -17,6 +18,8 @@ export interface AgentsListRequest {
     pageSize?: number;
     /** Search by agents name. */
     search?: string;
+    /** Filter agents by archived status */
+    archived?: boolean;
     /** The direction to sort the results */
     sortDirection?: ElevenLabs.SortDirection;
     /** The field to sort the results by */

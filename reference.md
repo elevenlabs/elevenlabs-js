@@ -2074,6 +2074,7 @@ Create and auto-convert a podcast project. Currently, the LLM cost is covered by
 
 ```typescript
 await client.studio.createPodcast({
+    safetyIdentifier: "safety-identifier",
     modelId: "eleven_multilingual_v2",
     mode: {
         type: "conversation",
@@ -4334,7 +4335,7 @@ await client.conversationalAi.agents.create({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">get</a>(agentId, { ...params }) -> ElevenLabs.GetAgentResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">get</a>(agentId) -> ElevenLabs.GetAgentResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4362,9 +4363,7 @@ Retrieve config for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-    versionId: "version_id",
-});
+await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
 ```
 
 </dd>
@@ -4381,14 +4380,6 @@ await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
 <dd>
 
 **agentId:** `string` — The id of an agent. This is returned on agent creation.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.AgentsGetRequest`
 
 </dd>
 </dl>
@@ -4572,6 +4563,7 @@ Returns a list of your agents and their metadata.
 await client.conversationalAi.agents.list({
     pageSize: 1,
     search: "search",
+    archived: true,
     sortDirection: "asc",
     sortBy: "name",
     cursor: "cursor",

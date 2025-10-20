@@ -26,7 +26,6 @@ export const GetAgentResponseModel: core.serialization.ObjectSchema<
     workflow: AgentWorkflowResponseModel.optional(),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
     tags: core.serialization.list(core.serialization.string()).optional(),
-    versionId: core.serialization.property("version_id", core.serialization.string().optional()),
 });
 
 export declare namespace GetAgentResponseModel {
@@ -40,6 +39,5 @@ export declare namespace GetAgentResponseModel {
         workflow?: AgentWorkflowResponseModel.Raw | null;
         access_info?: ResourceAccessInfo.Raw | null;
         tags?: string[] | null;
-        version_id?: string | null;
     }
 }
