@@ -45,6 +45,11 @@ interface BaseOptions {
      * Must be a positive integer between 50 and 2000.
      */
     minSilenceDurationMs?: number;
+    /**
+     * Model ID to use for transcription.
+     * Must be a valid model ID.
+     */
+    modelId: string;
 }
 
 export interface AudioOptions extends BaseOptions {
@@ -110,6 +115,9 @@ export class ScribeRealtime {
     private async buildWebSocketUri(options: AudioOptions | UrlOptions): Promise<string> {
         const baseUri = await this.getWebSocketUri();
         const params = new URLSearchParams();
+
+        // Model ID is required, so no check required
+        params.append("model_id", options.modelId);
 
         // Add optional parameters if provided, with validation
         if (options.commitStrategy !== undefined) {
@@ -186,6 +194,10 @@ export class ScribeRealtime {
 
         if (!apiKey) {
             throw new Error("API key is required");
+        }
+
+        if (!options.modelId) {
+            throw new Error("modelId is required");
         }
 
         // Create connection object first so users can attach event listeners before messages arrive
