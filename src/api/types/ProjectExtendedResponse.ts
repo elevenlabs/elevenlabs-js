@@ -9,6 +9,8 @@ export interface ProjectExtendedResponse {
     name: string;
     /** The creation date of the project. */
     createDateUnix: number;
+    /** The user ID who created the project. */
+    createdByUserId?: string;
     /** The default title voice ID. */
     defaultTitleVoiceId: string;
     /** The default paragraph voice ID. */

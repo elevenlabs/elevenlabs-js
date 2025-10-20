@@ -21,6 +21,4 @@ export interface GetAgentResponseModel {
     accessInfo?: ElevenLabs.ResourceAccessInfo;
     /** Agent tags used to categorize the agent */
     tags?: string[];
-    /** INTERNAL */
-    versionId?: string;
 }

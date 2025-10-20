@@ -26,4 +26,7 @@ export interface ConversationHistoryMetadataCommonModel {
     timezone?: string;
     initiationTrigger?: ElevenLabs.ConversationHistoryMetadataCommonModelInitiationTrigger;
     asyncMetadata?: ElevenLabs.AsyncConversationMetadata;
+    whatsapp?: ElevenLabs.WhatsAppConversationInfo;
+    agentCreatedFrom?: ElevenLabs.AgentDefinitionSource;
+    agentLastUpdatedFrom?: ElevenLabs.AgentDefinitionSource;
 }

@@ -15,4 +15,6 @@ export interface AgentSummaryResponseModel {
     accessInfo: ElevenLabs.ResourceAccessInfo;
     /** The time of the most recent call in unix seconds, null if no calls have been made */
     lastCallTimeUnixSecs?: number;
+    /** Whether the agent is archived */
+    archived?: boolean;
 }

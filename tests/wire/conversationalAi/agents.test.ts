@@ -8,11 +8,7 @@ describe("Agents", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { conversation_config: {} };
-        const rawResponseBody = {
-            agent_id: "J3Pbu5gP6NNKBscdCdwB",
-            main_branch_id: "main_branch_id",
-            initial_version_id: "initial_version_id",
-        };
+        const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
         server
             .mockEndpoint()
             .post("/v1/convai/agents/create")
@@ -27,8 +23,6 @@ describe("Agents", () => {
         });
         expect(response).toEqual({
             agentId: "J3Pbu5gP6NNKBscdCdwB",
-            mainBranchId: "main_branch_id",
-            initialVersionId: "initial_version_id",
         });
     });
 
@@ -689,7 +683,6 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
-            version_id: "version_id",
         };
         server
             .mockEndpoint()
@@ -699,9 +692,7 @@ describe("Agents", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-            versionId: "version_id",
-        });
+        const response = await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
         expect(response).toEqual({
             agentId: "agent_7101k5zvyjhmfg983brhmhkd98n6",
             name: "My Agent",
@@ -1619,7 +1610,6 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
-            versionId: "version_id",
         });
     });
 
@@ -2295,7 +2285,6 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
-            version_id: "version_id",
         };
         server
             .mockEndpoint()
@@ -3224,7 +3213,6 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
-            versionId: "version_id",
         });
     });
 
@@ -3246,6 +3234,7 @@ describe("Agents", () => {
                         role: "admin",
                     },
                     last_call_time_unix_secs: 1,
+                    archived: false,
                 },
             ],
             next_cursor: "123",
@@ -3256,6 +3245,7 @@ describe("Agents", () => {
         const response = await client.conversationalAi.agents.list({
             pageSize: 1,
             search: "search",
+            archived: true,
             sortDirection: "asc",
             sortBy: "name",
             cursor: "cursor",
@@ -3274,6 +3264,7 @@ describe("Agents", () => {
                         role: "admin",
                     },
                     lastCallTimeUnixSecs: 1,
+                    archived: false,
                 },
             ],
             nextCursor: "123",
@@ -3285,11 +3276,7 @@ describe("Agents", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = {
-            agent_id: "J3Pbu5gP6NNKBscdCdwB",
-            main_branch_id: "main_branch_id",
-            initial_version_id: "initial_version_id",
-        };
+        const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
         server
             .mockEndpoint()
             .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/duplicate")
@@ -3302,8 +3289,6 @@ describe("Agents", () => {
         const response = await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
         expect(response).toEqual({
             agentId: "J3Pbu5gP6NNKBscdCdwB",
-            mainBranchId: "main_branch_id",
-            initialVersionId: "initial_version_id",
         });
     });
 

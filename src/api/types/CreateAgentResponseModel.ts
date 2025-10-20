@@ -3,8 +3,4 @@
 export interface CreateAgentResponseModel {
     /** ID of the created agent */
     agentId: string;
-    /** INTERNAL */
-    mainBranchId?: string;
-    /** INTERNAL */
-    initialVersionId?: string;
 }

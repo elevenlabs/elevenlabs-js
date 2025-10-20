@@ -103,6 +103,7 @@ describe("Tools", () => {
                 },
                 expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                execution_mode: "immediate",
             },
             access_info: {
                 is_creator: true,
@@ -165,6 +166,7 @@ describe("Tools", () => {
                         user_name: "John Doe",
                     },
                 },
+                executionMode: "immediate",
             },
             accessInfo: {
                 isCreator: true,
@@ -209,6 +211,7 @@ describe("Tools", () => {
                 },
                 expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                execution_mode: "immediate",
             },
             access_info: {
                 is_creator: true,
@@ -263,6 +266,7 @@ describe("Tools", () => {
                         user_name: "John Doe",
                     },
                 },
+                executionMode: "immediate",
             },
             accessInfo: {
                 isCreator: true,
@@ -328,6 +332,7 @@ describe("Tools", () => {
                 },
                 expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                execution_mode: "immediate",
             },
             access_info: {
                 is_creator: true,
@@ -390,6 +395,7 @@ describe("Tools", () => {
                         user_name: "John Doe",
                     },
                 },
+                executionMode: "immediate",
             },
             accessInfo: {
                 isCreator: true,
