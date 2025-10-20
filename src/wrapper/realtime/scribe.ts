@@ -168,12 +168,14 @@ export class ScribeRealtime {
      * ```typescript
      * // Manual audio streaming
      * const connection = await client.speechToText.realtime.connect({
+     *     modelId: "scribe_realtime_v2",
      *     audioFormat: AudioFormat.PCM_16000,
      *     sampleRate: 16000,
      * });
      *
      * // Automatic URL streaming (requires ffmpeg)
      * const connection = await client.speechToText.realtime.connect({
+     *     modelId: "scribe_realtime_v2",
      *     url: "https://example.com/stream.mp3",
      * });
      * ```
