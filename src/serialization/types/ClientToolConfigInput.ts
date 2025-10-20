@@ -5,6 +5,7 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
+import { ToolExecutionMode } from "./ToolExecutionMode";
 
 export const ClientToolConfigInput: core.serialization.ObjectSchema<
     serializers.ClientToolConfigInput.Raw,
@@ -19,6 +20,7 @@ export const ClientToolConfigInput: core.serialization.ObjectSchema<
     parameters: core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyInput).optional(),
     expectsResponse: core.serialization.property("expects_response", core.serialization.boolean().optional()),
     dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
+    executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
 });
 
 export declare namespace ClientToolConfigInput {
@@ -32,5 +34,6 @@ export declare namespace ClientToolConfigInput {
         parameters?: serializers.ObjectJsonSchemaPropertyInput.Raw | null;
         expects_response?: boolean | null;
         dynamic_variables?: DynamicVariablesConfig.Raw | null;
+        execution_mode?: ToolExecutionMode.Raw | null;
     }
 }

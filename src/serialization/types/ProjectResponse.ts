@@ -19,6 +19,7 @@ export const ProjectResponse: core.serialization.ObjectSchema<
     projectId: core.serialization.property("project_id", core.serialization.string()),
     name: core.serialization.string(),
     createDateUnix: core.serialization.property("create_date_unix", core.serialization.number()),
+    createdByUserId: core.serialization.property("created_by_user_id", core.serialization.string().optional()),
     defaultTitleVoiceId: core.serialization.property("default_title_voice_id", core.serialization.string()),
     defaultParagraphVoiceId: core.serialization.property("default_paragraph_voice_id", core.serialization.string()),
     defaultModelId: core.serialization.property("default_model_id", core.serialization.string()),
@@ -64,6 +65,7 @@ export declare namespace ProjectResponse {
         project_id: string;
         name: string;
         create_date_unix: number;
+        created_by_user_id?: string | null;
         default_title_voice_id: string;
         default_paragraph_voice_id: string;
         default_model_id: string;

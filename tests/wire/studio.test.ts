@@ -20,6 +20,7 @@ describe("Studio", () => {
                 project_id: "aw1NgEzBg83R7vgmiJt6",
                 name: "My Project",
                 create_date_unix: 1714204800,
+                created_by_user_id: "Vbtgl3bRdj6lk79rYAgx",
                 default_title_voice_id: "JBFqnCBsd6RMkjVDRZzb",
                 default_paragraph_voice_id: "JBFqnCBsd6RMkjVDRZzb",
                 default_model_id: "eleven_multilingual_v2",
@@ -78,6 +79,7 @@ describe("Studio", () => {
         server
             .mockEndpoint()
             .post("/v1/studio/podcasts")
+            .header("safety-identifier", "safety-identifier")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
@@ -85,6 +87,7 @@ describe("Studio", () => {
             .build();
 
         const response = await client.studio.createPodcast({
+            safetyIdentifier: "safety-identifier",
             modelId: "eleven_multilingual_v2",
             mode: {
                 type: "conversation",
@@ -102,6 +105,7 @@ describe("Studio", () => {
                 projectId: "aw1NgEzBg83R7vgmiJt6",
                 name: "My Project",
                 createDateUnix: 1714204800,
+                createdByUserId: "Vbtgl3bRdj6lk79rYAgx",
                 defaultTitleVoiceId: "JBFqnCBsd6RMkjVDRZzb",
                 defaultParagraphVoiceId: "JBFqnCBsd6RMkjVDRZzb",
                 defaultModelId: "eleven_multilingual_v2",

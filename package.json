@@ -1,6 +1,6 @@
 {
     "name": "@elevenlabs/elevenlabs-js",
-    "version": "v2.19.0",
+    "version": "v2.20.0",
     "private": false,
     "repository": "github:elevenlabs/elevenlabs-js",
     "license": "MIT",
@@ -39,8 +39,7 @@
         "os": false,
         "path": false,
         "stream": false,
-        "command-exists": false,
-        "child_process": false
+        "command-exists": false
     },
     "packageManager": "yarn@1.22.22",
     "engines": {

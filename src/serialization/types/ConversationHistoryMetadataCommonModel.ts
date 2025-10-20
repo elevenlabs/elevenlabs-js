@@ -16,6 +16,8 @@ import { ConversationHistoryElevenAssistantCommonModel } from "./ConversationHis
 import { ConversationInitiationSource } from "./ConversationInitiationSource";
 import { ConversationHistoryMetadataCommonModelInitiationTrigger } from "./ConversationHistoryMetadataCommonModelInitiationTrigger";
 import { AsyncConversationMetadata } from "./AsyncConversationMetadata";
+import { WhatsAppConversationInfo } from "./WhatsAppConversationInfo";
+import { AgentDefinitionSource } from "./AgentDefinitionSource";
 
 export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSchema<
     serializers.ConversationHistoryMetadataCommonModel.Raw,
@@ -59,6 +61,9 @@ export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSc
         ConversationHistoryMetadataCommonModelInitiationTrigger.optional(),
     ),
     asyncMetadata: core.serialization.property("async_metadata", AsyncConversationMetadata.optional()),
+    whatsapp: WhatsAppConversationInfo.optional(),
+    agentCreatedFrom: core.serialization.property("agent_created_from", AgentDefinitionSource.optional()),
+    agentLastUpdatedFrom: core.serialization.property("agent_last_updated_from", AgentDefinitionSource.optional()),
 });
 
 export declare namespace ConversationHistoryMetadataCommonModel {
@@ -86,5 +91,8 @@ export declare namespace ConversationHistoryMetadataCommonModel {
         timezone?: string | null;
         initiation_trigger?: ConversationHistoryMetadataCommonModelInitiationTrigger.Raw | null;
         async_metadata?: AsyncConversationMetadata.Raw | null;
+        whatsapp?: WhatsAppConversationInfo.Raw | null;
+        agent_created_from?: AgentDefinitionSource.Raw | null;
+        agent_last_updated_from?: AgentDefinitionSource.Raw | null;
     }
 }

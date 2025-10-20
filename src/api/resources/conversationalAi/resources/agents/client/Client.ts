@@ -167,35 +167,24 @@ export class Agents {
      * Retrieve config for an agent
      *
      * @param {string} agentId - The id of an agent. This is returned on agent creation.
-     * @param {ElevenLabs.conversationalAi.AgentsGetRequest} request
      * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-     *         versionId: "version_id"
-     *     })
+     *     await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz")
      */
     public get(
         agentId: string,
-        request: ElevenLabs.conversationalAi.AgentsGetRequest = {},
         requestOptions?: Agents.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.GetAgentResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__get(agentId, request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(agentId, requestOptions));
     }
 
     private async __get(
         agentId: string,
-        request: ElevenLabs.conversationalAi.AgentsGetRequest = {},
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
-        const { versionId } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (versionId != null) {
-            _queryParams["version_id"] = versionId;
-        }
-
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -210,7 +199,7 @@ export class Agents {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -462,6 +451,7 @@ export class Agents {
      *     await client.conversationalAi.agents.list({
      *         pageSize: 1,
      *         search: "search",
+     *         archived: true,
      *         sortDirection: "asc",
      *         sortBy: "name",
      *         cursor: "cursor"
@@ -478,7 +468,7 @@ export class Agents {
         request: ElevenLabs.conversationalAi.AgentsListRequest = {},
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentsPageResponseModel>> {
-        const { pageSize, search, sortDirection, sortBy, cursor } = request;
+        const { pageSize, search, archived, sortDirection, sortBy, cursor } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (pageSize != null) {
             _queryParams["page_size"] = pageSize.toString();
@@ -486,6 +476,10 @@ export class Agents {
 
         if (search != null) {
             _queryParams["search"] = search;
+        }
+
+        if (archived != null) {
+            _queryParams["archived"] = archived.toString();
         }
 
         if (sortDirection != null) {
