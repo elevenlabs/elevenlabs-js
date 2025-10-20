@@ -23,12 +23,12 @@ interface FinalTranscriptMessage {
     transcript: string;
 }
 
-interface AlignedTranscriptMessage {
-    message_type: "aligned_transcript";
+interface FinalTranscriptWithTimestampsMessage {
+    message_type: "final_transcript_with_timestamps";
     transcript: string;
 }
 
-type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | FinalTranscriptMessage | AlignedTranscriptMessage;
+type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | FinalTranscriptMessage | FinalTranscriptWithTimestampsMessage;
 
 /**
  * Events emitted by the RealtimeConnection.
@@ -40,8 +40,8 @@ export enum RealtimeEvents {
     PARTIAL_TRANSCRIPT = "partial_transcript",
     /** Emitted when a final transcript is available */
     FINAL_TRANSCRIPT = "final_transcript",
-    /** Emitted when an aligned transcript is available */
-    ALIGNED_TRANSCRIPT = "aligned_transcript",
+    /** Emitted when a final transcript with timestamps is available */
+    FINAL_TRANSCRIPT_WITH_TIMESTAMPS = "final_transcript_with_timestamps",
     /** Emitted when an error occurs */
     ERROR = "error",
     /** Emitted when the WebSocket connection is opened */
@@ -113,8 +113,6 @@ export class RealtimeConnection {
         this.websocket.on("message", (event: WebSocket.Data) => {
             const data = JSON.parse(event.toString()) as WebSocketMessage;
 
-            console.log("WebSocket message received:", data.message_type);
-
             switch (data.message_type) {
                 case "session_started":
                     this.eventEmitter.emit(RealtimeEvents.SESSION_STARTED, data);
@@ -125,8 +123,8 @@ export class RealtimeConnection {
                 case "final_transcript":
                     this.eventEmitter.emit(RealtimeEvents.FINAL_TRANSCRIPT, data);
                     break;
-                case "aligned_transcript":
-                    this.eventEmitter.emit(RealtimeEvents.ALIGNED_TRANSCRIPT, data);
+                case "final_transcript_with_timestamps":
+                    this.eventEmitter.emit(RealtimeEvents.FINAL_TRANSCRIPT_WITH_TIMESTAMPS, data);
                     this.close();
                     break;
             }
