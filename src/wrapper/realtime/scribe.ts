@@ -54,7 +54,7 @@ interface BaseOptions {
      * An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file.
      * Can sometimes improve transcription performance if known beforehand.
      */
-    languageCode: string;
+    languageCode?: string;
 }
 
 export interface AudioOptions extends BaseOptions {

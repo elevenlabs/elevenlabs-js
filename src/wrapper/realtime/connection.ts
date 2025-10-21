@@ -126,7 +126,6 @@ export class RealtimeConnection {
                     break;
                 case "final_transcript_with_timestamps":
                     this.eventEmitter.emit(RealtimeEvents.FINAL_TRANSCRIPT_WITH_TIMESTAMPS, data);
-                    this.close();
                     break;
             }
         });
