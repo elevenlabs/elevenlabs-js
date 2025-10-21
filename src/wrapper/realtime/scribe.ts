@@ -50,6 +50,11 @@ interface BaseOptions {
      * Must be a valid model ID.
      */
     modelId: string;
+    /**
+     * An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file.
+     * Can sometimes improve transcription performance if known beforehand.
+     */
+    languageCode: string;
 }
 
 export interface AudioOptions extends BaseOptions {
@@ -146,6 +151,10 @@ export class ScribeRealtime {
                 throw new Error("minSilenceDurationMs must be between 50 and 2000");
             }
             params.append("min_silence_duration_ms", options.minSilenceDurationMs.toString());
+        }
+
+        if (options.languageCode !== undefined) {
+            params.append("language_code", options.languageCode);
         }
 
         const queryString = params.toString();
