@@ -23,4 +23,6 @@ export interface ClientToolConfigOutput {
     expectsResponse?: boolean;
     /** Configuration for dynamic variables */
     dynamicVariables?: ElevenLabs.DynamicVariablesConfig;
+    /** Determines when and how the tool executes: 'immediate' executes the tool right away when requested by the LLM, 'post_tool_speech' waits for the agent to finish speaking before executing, 'async' runs the tool in the background without blocking - best for long-running operations. */
+    executionMode?: ElevenLabs.ToolExecutionMode;
 }

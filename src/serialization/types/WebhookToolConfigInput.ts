@@ -6,6 +6,7 @@ import * as core from "../../core";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { WebhookToolApiSchemaConfigInput } from "./WebhookToolApiSchemaConfigInput";
 import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
+import { ToolExecutionMode } from "./ToolExecutionMode";
 
 export const WebhookToolConfigInput: core.serialization.ObjectSchema<
     serializers.WebhookToolConfigInput.Raw,
@@ -19,6 +20,7 @@ export const WebhookToolConfigInput: core.serialization.ObjectSchema<
     assignments: core.serialization.list(DynamicVariableAssignment).optional(),
     apiSchema: core.serialization.property("api_schema", WebhookToolApiSchemaConfigInput),
     dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
+    executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
 });
 
 export declare namespace WebhookToolConfigInput {
@@ -31,5 +33,6 @@ export declare namespace WebhookToolConfigInput {
         assignments?: DynamicVariableAssignment.Raw[] | null;
         api_schema: WebhookToolApiSchemaConfigInput.Raw;
         dynamic_variables?: DynamicVariablesConfig.Raw | null;
+        execution_mode?: ToolExecutionMode.Raw | null;
     }
 }

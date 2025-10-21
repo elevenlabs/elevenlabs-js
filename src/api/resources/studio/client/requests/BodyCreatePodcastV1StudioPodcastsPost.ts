@@ -5,6 +5,7 @@ import * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
+ *         safetyIdentifier: "safety-identifier",
  *         modelId: "eleven_multilingual_v2",
  *         mode: {
  *             type: "conversation",
@@ -19,6 +20,8 @@ import * as ElevenLabs from "../../../../index";
  *     }
  */
 export interface BodyCreatePodcastV1StudioPodcastsPost {
+    /** Used for moderation. Your workspace must be allowlisted to use this feature. */
+    safetyIdentifier?: string;
     /** The ID of the model to be used for this Studio project, you can query GET /v1/models to list all available models. */
     modelId: string;
     /** The type of podcast to generate. Can be 'conversation', an interaction between two voices, or 'bulletin', a monologue. */

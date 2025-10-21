@@ -11,7 +11,7 @@ import { BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization } from "../
 
 export const BodyCreatePodcastV1StudioPodcastsPost: core.serialization.Schema<
     serializers.BodyCreatePodcastV1StudioPodcastsPost.Raw,
-    ElevenLabs.BodyCreatePodcastV1StudioPodcastsPost
+    Omit<ElevenLabs.BodyCreatePodcastV1StudioPodcastsPost, "safetyIdentifier">
 > = core.serialization.object({
     modelId: core.serialization.property("model_id", core.serialization.string()),
     mode: BodyCreatePodcastV1StudioPodcastsPostMode,
