@@ -1,6 +1,6 @@
 import WebSocket from "ws";
-import type { ChildProcess } from "node:child_process";
-import { EventEmitter } from "node:events";
+import type { ChildProcess } from "../../stubs/child_process";
+import { EventEmitter } from "events";
 
 interface InputAudioChunk {
     message_type: "input_audio_chunk";
