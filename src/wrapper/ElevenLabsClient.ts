@@ -39,8 +39,8 @@ export class ElevenLabsClient extends FernClient {
         return this._customWebhooks;
     }
 
-    // @ts-expect-error - Intentionally overriding parent getter with custom Music wrapper
-    public get music(): Music {
+    // @ts-expect-error - Intentionally overriding with wrapper Music that has enhanced composeDetailed
+    public override get music(): Music {
         if (!this._customMusic) {
             this._customMusic = new Music(this._options);
         }
