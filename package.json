@@ -4,8 +4,8 @@
     "private": false,
     "repository": "github:elevenlabs/elevenlabs-js",
     "license": "MIT",
-    "main": "./index.js",
-    "types": "./index.d.ts",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "scripts": {
         "format": "prettier . --write --ignore-unknown",
         "build": "tsc",
