@@ -59,6 +59,7 @@ export class Conversation extends EventEmitter {
         callbackAgentResponseCorrection?: (original: string, corrected: string) => void;
         callbackUserTranscript?: (transcript: string) => void;
         callbackLatencyMeasurement?: (latencyMs: number) => void;
+        callbackMessageReceived?: (message: any) => void;
     }) {
         super();
 
@@ -75,6 +76,7 @@ export class Conversation extends EventEmitter {
         this.callbackAgentResponseCorrection = options.callbackAgentResponseCorrection;
         this.callbackUserTranscript = options.callbackUserTranscript;
         this.callbackLatencyMeasurement = options.callbackLatencyMeasurement;
+        this.callbackMessageReceived = options.callbackMessageReceived;
     }
 
     /**
