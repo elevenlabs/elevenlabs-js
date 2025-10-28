@@ -37,6 +37,7 @@ export class Conversation extends EventEmitter {
     private callbackAgentResponseCorrection?: (original: string, corrected: string) => void;
     private callbackUserTranscript?: (transcript: string) => void;
     private callbackLatencyMeasurement?: (latencyMs: number) => void;
+    private callbackMessageReceived?: (message: any) => void;
 
     // Internal state
     private ws?: WebSocketInterface;
@@ -338,6 +339,10 @@ export class Conversation extends EventEmitter {
             default:
                 // Ignore unknown message types
                 break;
+        }
+
+        if (this.callbackMessageReceived) {
+            this.callbackMessageReceived(message);
         }
     }
 
