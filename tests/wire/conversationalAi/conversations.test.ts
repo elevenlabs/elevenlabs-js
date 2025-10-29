@@ -88,6 +88,7 @@ describe("Conversations", () => {
             userId: "user_id",
             pageSize: 1,
             summaryMode: "exclude",
+            search: "search",
         });
         expect(response).toEqual({
             conversations: [

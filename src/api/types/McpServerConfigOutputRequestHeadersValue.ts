@@ -2,4 +2,7 @@
 
 import * as ElevenLabs from "../index";
 
-export type McpServerConfigOutputRequestHeadersValue = string | ElevenLabs.ConvAiSecretLocator;
+export type McpServerConfigOutputRequestHeadersValue =
+    | string
+    | ElevenLabs.ConvAiSecretLocator
+    | ElevenLabs.ConvAiDynamicVariable;

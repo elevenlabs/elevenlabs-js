@@ -4,12 +4,13 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { ConvAiSecretLocator } from "./ConvAiSecretLocator";
+import { ConvAiDynamicVariable } from "./ConvAiDynamicVariable";
 
 export const McpServerConfigOutputRequestHeadersValue: core.serialization.Schema<
     serializers.McpServerConfigOutputRequestHeadersValue.Raw,
     ElevenLabs.McpServerConfigOutputRequestHeadersValue
-> = core.serialization.undiscriminatedUnion([core.serialization.string(), ConvAiSecretLocator]);
+> = core.serialization.undiscriminatedUnion([core.serialization.string(), ConvAiSecretLocator, ConvAiDynamicVariable]);
 
 export declare namespace McpServerConfigOutputRequestHeadersValue {
-    export type Raw = string | ConvAiSecretLocator.Raw;
+    export type Raw = string | ConvAiSecretLocator.Raw | ConvAiDynamicVariable.Raw;
 }

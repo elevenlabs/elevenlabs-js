@@ -7,6 +7,7 @@ import * as core from "../../core";
 export const MetricType: core.serialization.Schema<serializers.MetricType.Raw, ElevenLabs.MetricType> =
     core.serialization.enum_([
         "credits",
+        "tts_characters",
         "minutes_used",
         "request_count",
         "ttfb_avg",
@@ -19,6 +20,7 @@ export const MetricType: core.serialization.Schema<serializers.MetricType.Raw, E
 export declare namespace MetricType {
     export type Raw =
         | "credits"
+        | "tts_characters"
         | "minutes_used"
         | "request_count"
         | "ttfb_avg"

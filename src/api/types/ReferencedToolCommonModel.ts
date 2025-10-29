@@ -9,5 +9,5 @@ export interface ReferencedToolCommonModel {
     /** The ID of the tool */
     id: string;
     /** The type of the tool */
-    type: ElevenLabs.ToolType;
+    type: ElevenLabs.ReferencedToolCommonModelType;
 }

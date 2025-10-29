@@ -5,15 +5,8 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 
 export const VadConfig: core.serialization.ObjectSchema<serializers.VadConfig.Raw, ElevenLabs.VadConfig> =
-    core.serialization.object({
-        backgroundVoiceDetection: core.serialization.property(
-            "background_voice_detection",
-            core.serialization.boolean().optional(),
-        ),
-    });
+    core.serialization.object({});
 
 export declare namespace VadConfig {
-    export interface Raw {
-        background_voice_detection?: boolean | null;
-    }
+    export interface Raw {}
 }

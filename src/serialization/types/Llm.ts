@@ -24,6 +24,7 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gemini-2.5-flash",
     "claude-sonnet-4-5",
     "claude-sonnet-4",
+    "claude-haiku-4-5",
     "claude-3-7-sonnet",
     "claude-3-5-sonnet",
     "claude-3-5-sonnet-v1",
@@ -48,6 +49,7 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gemini-1.5-pro-001",
     "claude-sonnet-4@20250514",
     "claude-sonnet-4-5@20250929",
+    "claude-haiku-4-5@20251001",
     "claude-3-7-sonnet@20250219",
     "claude-3-5-sonnet@20240620",
     "claude-3-5-sonnet-v2@20241022",
@@ -92,6 +94,7 @@ export declare namespace Llm {
         | "gemini-2.5-flash"
         | "claude-sonnet-4-5"
         | "claude-sonnet-4"
+        | "claude-haiku-4-5"
         | "claude-3-7-sonnet"
         | "claude-3-5-sonnet"
         | "claude-3-5-sonnet-v1"
@@ -116,6 +119,7 @@ export declare namespace Llm {
         | "gemini-1.5-pro-001"
         | "claude-sonnet-4@20250514"
         | "claude-sonnet-4-5@20250929"
+        | "claude-haiku-4-5@20251001"
         | "claude-3-7-sonnet@20250219"
         | "claude-3-5-sonnet@20240620"
         | "claude-3-5-sonnet-v2@20241022"

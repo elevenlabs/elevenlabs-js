@@ -6,7 +6,6 @@ import * as ElevenLabs from "../../../../../index";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers";
 import * as serializers from "../../../../../../serialization/index";
 import * as errors from "../../../../../../errors/index";
-import * as fs from "fs";
 import { PronunciationDictionaries } from "../resources/pronunciationDictionaries/client/Client";
 import { Content } from "../resources/content/client/Client";
 import { Snapshots } from "../resources/snapshots/client/Client";
@@ -163,7 +162,6 @@ export class Projects {
      * @example
      *     import { createReadStream } from "fs";
      *     await client.studio.projects.create({
-     *         fromDocument: fs.createReadStream("/path/to/your/file"),
      *         name: "name"
      *     })
      */
@@ -196,7 +194,10 @@ export class Projects {
             _request.append("from_url", request.fromUrl);
         }
 
-        await _request.appendFile("from_document", request.fromDocument);
+        if (request.fromDocument != null) {
+            await _request.appendFile("from_document", request.fromDocument);
+        }
+
         if (request.fromContentJson != null) {
             _request.append("from_content_json", request.fromContentJson);
         }

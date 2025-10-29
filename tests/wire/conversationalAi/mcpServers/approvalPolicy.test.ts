@@ -21,6 +21,7 @@ describe("ApprovalPolicy", () => {
                 description: "description",
                 force_pre_tool_speech: true,
                 disable_interruptions: true,
+                execution_mode: "immediate",
             },
             access_info: {
                 is_creator: true,
@@ -67,6 +68,7 @@ describe("ApprovalPolicy", () => {
                 description: "description",
                 forcePreToolSpeech: true,
                 disableInterruptions: true,
+                executionMode: "immediate",
             },
             accessInfo: {
                 isCreator: true,

@@ -3,7 +3,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { TurnMode } from "./TurnMode";
+import { TurnEagerness } from "./TurnEagerness";
 
 export const TurnConfig: core.serialization.ObjectSchema<serializers.TurnConfig.Raw, ElevenLabs.TurnConfig> =
     core.serialization.object({
@@ -12,13 +12,13 @@ export const TurnConfig: core.serialization.ObjectSchema<serializers.TurnConfig.
             "silence_end_call_timeout",
             core.serialization.number().optional(),
         ),
-        mode: TurnMode.optional(),
+        turnEagerness: core.serialization.property("turn_eagerness", TurnEagerness.optional()),
     });
 
 export declare namespace TurnConfig {
     export interface Raw {
         turn_timeout?: number | null;
         silence_end_call_timeout?: number | null;
-        mode?: TurnMode.Raw | null;
+        turn_eagerness?: TurnEagerness.Raw | null;
     }
 }

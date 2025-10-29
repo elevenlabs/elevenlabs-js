@@ -6,7 +6,6 @@ import * as ElevenLabs from "../../../index";
 import * as serializers from "../../../../serialization/index";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers";
 import * as errors from "../../../../errors/index";
-import * as fs from "fs";
 import { Resource } from "../resources/resource/client/Client";
 import { Audio } from "../resources/audio/client/Client";
 import { Transcript } from "../resources/transcript/client/Client";
@@ -201,12 +200,7 @@ export class Dubbing {
      *
      * @example
      *     import { createReadStream } from "fs";
-     *     await client.dubbing.create({
-     *         file: fs.createReadStream("/path/to/your/file"),
-     *         csvFile: fs.createReadStream("/path/to/your/file"),
-     *         foregroundAudioFile: fs.createReadStream("/path/to/your/file"),
-     *         backgroundAudioFile: fs.createReadStream("/path/to/your/file")
-     *     })
+     *     await client.dubbing.create({})
      */
     public create(
         request: ElevenLabs.BodyDubAVideoOrAnAudioFileV1DubbingPost,
@@ -220,10 +214,22 @@ export class Dubbing {
         requestOptions?: Dubbing.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DoDubbingResponse>> {
         const _request = await core.newFormData();
-        await _request.appendFile("file", request.file);
-        await _request.appendFile("csv_file", request.csvFile);
-        await _request.appendFile("foreground_audio_file", request.foregroundAudioFile);
-        await _request.appendFile("background_audio_file", request.backgroundAudioFile);
+        if (request.file != null) {
+            await _request.appendFile("file", request.file);
+        }
+
+        if (request.csvFile != null) {
+            await _request.appendFile("csv_file", request.csvFile);
+        }
+
+        if (request.foregroundAudioFile != null) {
+            await _request.appendFile("foreground_audio_file", request.foregroundAudioFile);
+        }
+
+        if (request.backgroundAudioFile != null) {
+            await _request.appendFile("background_audio_file", request.backgroundAudioFile);
+        }
+
         if (request.name != null) {
             _request.append("name", request.name);
         }

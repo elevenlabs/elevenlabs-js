@@ -2,6 +2,7 @@
 
 export const MetricType = {
     Credits: "credits",
+    TtsCharacters: "tts_characters",
     MinutesUsed: "minutes_used",
     RequestCount: "request_count",
     TtfbAvg: "ttfb_avg",

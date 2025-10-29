@@ -40,7 +40,7 @@ describe("Agents", () => {
                     user_input_audio_format: "pcm_16000",
                     keywords: ["hello", "world"],
                 },
-                turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
                 tts: {
                     model_id: "eleven_turbo_v2",
                     voice_id: "cjVigY5qzO86Huf0OWal",
@@ -85,7 +85,6 @@ describe("Agents", () => {
                         first_message_translation: undefined,
                     },
                 },
-                vad: { background_voice_detection: false },
                 agent: {
                     first_message: "Hello, how can I help you today?",
                     language: "en",
@@ -392,7 +391,7 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -415,7 +414,7 @@ describe("Agents", () => {
                                 client_events: ["audio", "interruption"],
                             },
                             language_presets: undefined,
-                            vad: { background_voice_detection: false },
+                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -451,6 +450,7 @@ describe("Agents", () => {
                                                     value_path: "user.name",
                                                 },
                                             ],
+                                            tool_call_sound: undefined,
                                             parameters: undefined,
                                             expects_response: false,
                                             dynamic_variables: {
@@ -479,7 +479,7 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -502,7 +502,7 @@ describe("Agents", () => {
                                 client_events: ["audio", "interruption"],
                             },
                             language_presets: undefined,
-                            vad: { background_voice_detection: false },
+                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -538,6 +538,7 @@ describe("Agents", () => {
                                                     value_path: "user.name",
                                                 },
                                             ],
+                                            tool_call_sound: undefined,
                                             parameters: undefined,
                                             expects_response: false,
                                             dynamic_variables: {
@@ -567,7 +568,7 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -590,7 +591,7 @@ describe("Agents", () => {
                                 client_events: ["audio", "interruption"],
                             },
                             language_presets: undefined,
-                            vad: { background_voice_detection: false },
+                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -626,6 +627,7 @@ describe("Agents", () => {
                                                     value_path: "user.name",
                                                 },
                                             ],
+                                            tool_call_sound: undefined,
                                             parameters: undefined,
                                             expects_response: false,
                                             dynamic_variables: {
@@ -706,7 +708,7 @@ describe("Agents", () => {
                 turn: {
                     turnTimeout: 7,
                     silenceEndCallTimeout: -1,
-                    mode: "turn",
+                    turnEagerness: "normal",
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -763,9 +765,6 @@ describe("Agents", () => {
                         },
                         firstMessageTranslation: undefined,
                     },
-                },
-                vad: {
-                    backgroundVoiceDetection: false,
                 },
                 agent: {
                     firstMessage: "Hello, how can I help you today?",
@@ -1210,7 +1209,7 @@ describe("Agents", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
-                                mode: "turn",
+                                turnEagerness: "normal",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1234,9 +1233,7 @@ describe("Agents", () => {
                                 clientEvents: ["audio", "interruption"],
                             },
                             languagePresets: undefined,
-                            vad: {
-                                backgroundVoiceDetection: false,
-                            },
+                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -1281,6 +1278,7 @@ describe("Agents", () => {
                                                     valuePath: "user.name",
                                                 },
                                             ],
+                                            toolCallSound: undefined,
                                             parameters: undefined,
                                             expectsResponse: false,
                                             dynamicVariables: {
@@ -1322,7 +1320,7 @@ describe("Agents", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
-                                mode: "turn",
+                                turnEagerness: "normal",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1346,9 +1344,7 @@ describe("Agents", () => {
                                 clientEvents: ["audio", "interruption"],
                             },
                             languagePresets: undefined,
-                            vad: {
-                                backgroundVoiceDetection: false,
-                            },
+                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -1393,6 +1389,7 @@ describe("Agents", () => {
                                                     valuePath: "user.name",
                                                 },
                                             ],
+                                            toolCallSound: undefined,
                                             parameters: undefined,
                                             expectsResponse: false,
                                             dynamicVariables: {
@@ -1442,7 +1439,7 @@ describe("Agents", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
-                                mode: "turn",
+                                turnEagerness: "normal",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1466,9 +1463,7 @@ describe("Agents", () => {
                                 clientEvents: ["audio", "interruption"],
                             },
                             languagePresets: undefined,
-                            vad: {
-                                backgroundVoiceDetection: false,
-                            },
+                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -1513,6 +1508,7 @@ describe("Agents", () => {
                                                     valuePath: "user.name",
                                                 },
                                             ],
+                                            toolCallSound: undefined,
                                             parameters: undefined,
                                             expectsResponse: false,
                                             dynamicVariables: {
@@ -1642,7 +1638,7 @@ describe("Agents", () => {
                     user_input_audio_format: "pcm_16000",
                     keywords: ["hello", "world"],
                 },
-                turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
                 tts: {
                     model_id: "eleven_turbo_v2",
                     voice_id: "cjVigY5qzO86Huf0OWal",
@@ -1687,7 +1683,6 @@ describe("Agents", () => {
                         first_message_translation: undefined,
                     },
                 },
-                vad: { background_voice_detection: false },
                 agent: {
                     first_message: "Hello, how can I help you today?",
                     language: "en",
@@ -1994,7 +1989,7 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -2017,7 +2012,7 @@ describe("Agents", () => {
                                 client_events: ["audio", "interruption"],
                             },
                             language_presets: undefined,
-                            vad: { background_voice_detection: false },
+                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -2053,6 +2048,7 @@ describe("Agents", () => {
                                                     value_path: "user.name",
                                                 },
                                             ],
+                                            tool_call_sound: undefined,
                                             parameters: undefined,
                                             expects_response: false,
                                             dynamic_variables: {
@@ -2081,7 +2077,7 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -2104,7 +2100,7 @@ describe("Agents", () => {
                                 client_events: ["audio", "interruption"],
                             },
                             language_presets: undefined,
-                            vad: { background_voice_detection: false },
+                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -2140,6 +2136,7 @@ describe("Agents", () => {
                                                     value_path: "user.name",
                                                 },
                                             ],
+                                            tool_call_sound: undefined,
                                             parameters: undefined,
                                             expects_response: false,
                                             dynamic_variables: {
@@ -2169,7 +2166,7 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, mode: "turn" },
+                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -2192,7 +2189,7 @@ describe("Agents", () => {
                                 client_events: ["audio", "interruption"],
                             },
                             language_presets: undefined,
-                            vad: { background_voice_detection: false },
+                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -2228,6 +2225,7 @@ describe("Agents", () => {
                                                     value_path: "user.name",
                                                 },
                                             ],
+                                            tool_call_sound: undefined,
                                             parameters: undefined,
                                             expects_response: false,
                                             dynamic_variables: {
@@ -2309,7 +2307,7 @@ describe("Agents", () => {
                 turn: {
                     turnTimeout: 7,
                     silenceEndCallTimeout: -1,
-                    mode: "turn",
+                    turnEagerness: "normal",
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -2366,9 +2364,6 @@ describe("Agents", () => {
                         },
                         firstMessageTranslation: undefined,
                     },
-                },
-                vad: {
-                    backgroundVoiceDetection: false,
                 },
                 agent: {
                     firstMessage: "Hello, how can I help you today?",
@@ -2813,7 +2808,7 @@ describe("Agents", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
-                                mode: "turn",
+                                turnEagerness: "normal",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2837,9 +2832,7 @@ describe("Agents", () => {
                                 clientEvents: ["audio", "interruption"],
                             },
                             languagePresets: undefined,
-                            vad: {
-                                backgroundVoiceDetection: false,
-                            },
+                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -2884,6 +2877,7 @@ describe("Agents", () => {
                                                     valuePath: "user.name",
                                                 },
                                             ],
+                                            toolCallSound: undefined,
                                             parameters: undefined,
                                             expectsResponse: false,
                                             dynamicVariables: {
@@ -2925,7 +2919,7 @@ describe("Agents", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
-                                mode: "turn",
+                                turnEagerness: "normal",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2949,9 +2943,7 @@ describe("Agents", () => {
                                 clientEvents: ["audio", "interruption"],
                             },
                             languagePresets: undefined,
-                            vad: {
-                                backgroundVoiceDetection: false,
-                            },
+                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -2996,6 +2988,7 @@ describe("Agents", () => {
                                                     valuePath: "user.name",
                                                 },
                                             ],
+                                            toolCallSound: undefined,
                                             parameters: undefined,
                                             expectsResponse: false,
                                             dynamicVariables: {
@@ -3045,7 +3038,7 @@ describe("Agents", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
-                                mode: "turn",
+                                turnEagerness: "normal",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -3069,9 +3062,7 @@ describe("Agents", () => {
                                 clientEvents: ["audio", "interruption"],
                             },
                             languagePresets: undefined,
-                            vad: {
-                                backgroundVoiceDetection: false,
-                            },
+                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -3116,6 +3107,7 @@ describe("Agents", () => {
                                                     valuePath: "user.name",
                                                 },
                                             ],
+                                            toolCallSound: undefined,
                                             parameters: undefined,
                                             expectsResponse: false,
                                             dynamicVariables: {

@@ -21,6 +21,7 @@ describe("ToolApprovals", () => {
                 description: "description",
                 force_pre_tool_speech: true,
                 disable_interruptions: true,
+                execution_mode: "immediate",
             },
             access_info: {
                 is_creator: true,
@@ -68,6 +69,7 @@ describe("ToolApprovals", () => {
                 description: "description",
                 forcePreToolSpeech: true,
                 disableInterruptions: true,
+                executionMode: "immediate",
             },
             accessInfo: {
                 isCreator: true,
@@ -108,6 +110,7 @@ describe("ToolApprovals", () => {
                 description: "description",
                 force_pre_tool_speech: true,
                 disable_interruptions: true,
+                execution_mode: "immediate",
             },
             access_info: {
                 is_creator: true,
@@ -151,6 +154,7 @@ describe("ToolApprovals", () => {
                 description: "description",
                 forcePreToolSpeech: true,
                 disableInterruptions: true,
+                executionMode: "immediate",
             },
             accessInfo: {
                 isCreator: true,

@@ -19,6 +19,8 @@ export const WorkspaceResourceType = {
     ConvaiBatchCalls: "convai_batch_calls",
     ConvaiAgentResponseTests: "convai_agent_response_tests",
     ConvaiTestSuiteInvocations: "convai_test_suite_invocations",
+    ConvaiCrawlJobs: "convai_crawl_jobs",
+    ConvaiCrawlTasks: "convai_crawl_tasks",
     ConvaiWhatsappAccounts: "convai_whatsapp_accounts",
 } as const;
 export type WorkspaceResourceType = (typeof WorkspaceResourceType)[keyof typeof WorkspaceResourceType];

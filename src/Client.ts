@@ -26,6 +26,7 @@ import { SpeechToText } from "./api/resources/speechToText/client/Client";
 import { ForcedAlignment } from "./api/resources/forcedAlignment/client/Client";
 import { ConversationalAi } from "./api/resources/conversationalAi/client/Client";
 import { Music } from "./api/resources/music/client/Client";
+import { Tokens } from "./api/resources/tokens/client/Client";
 import { Workspace } from "./api/resources/workspace/client/Client";
 
 export declare namespace ElevenLabsClient {
@@ -79,6 +80,7 @@ export class ElevenLabsClient {
     protected _forcedAlignment: ForcedAlignment | undefined;
     protected _conversationalAi: ConversationalAi | undefined;
     protected _music: Music | undefined;
+    protected _tokens: Tokens | undefined;
     protected _workspace: Workspace | undefined;
 
     constructor(_options: ElevenLabsClient.Options = {}) {
@@ -89,8 +91,8 @@ export class ElevenLabsClient {
                     "xi-api-key": _options?.apiKey,
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-                    "X-Fern-SDK-Version": "v2.20.1",
-                    "User-Agent": "@elevenlabs/elevenlabs-js/v2.20.1",
+                    "X-Fern-SDK-Version": "v2.21.0",
+                    "User-Agent": "@elevenlabs/elevenlabs-js/v2.21.0",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -185,6 +187,10 @@ export class ElevenLabsClient {
 
     public get music(): Music {
         return (this._music ??= new Music(this._options));
+    }
+
+    public get tokens(): Tokens {
+        return (this._tokens ??= new Tokens(this._options));
     }
 
     public get workspace(): Workspace {

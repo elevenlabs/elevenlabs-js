@@ -11,7 +11,7 @@ export interface SongSection {
     negativeLocalStyles: string[];
     /** The duration of the section in milliseconds. Must be between 3000ms and 120000ms. */
     durationMs: number;
-    /** The lyrics of the section. */
+    /** The lyrics of the section. Max 200 characters per line. */
     lines: string[];
     /** Optional source to extract the section from. Used for inpainting. Only available to enterprise clients with access to the inpainting API. */
     sourceFrom?: ElevenLabs.SectionSource;

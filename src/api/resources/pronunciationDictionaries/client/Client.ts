@@ -3,7 +3,6 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import * as fs from "fs";
 import * as serializers from "../../../../serialization/index";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers";
 import * as errors from "../../../../errors/index";
@@ -59,7 +58,6 @@ export class PronunciationDictionaries {
      * @example
      *     import { createReadStream } from "fs";
      *     await client.pronunciationDictionaries.createFromFile({
-     *         file: fs.createReadStream("/path/to/your/file"),
      *         name: "name"
      *     })
      */
@@ -76,7 +74,10 @@ export class PronunciationDictionaries {
     ): Promise<core.WithRawResponse<ElevenLabs.AddPronunciationDictionaryResponseModel>> {
         const _request = await core.newFormData();
         _request.append("name", request.name);
-        await _request.appendFile("file", request.file);
+        if (request.file != null) {
+            await _request.appendFile("file", request.file);
+        }
+
         if (request.description != null) {
             _request.append("description", request.description);
         }
