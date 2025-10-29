@@ -985,6 +985,159 @@ await client.textToDialogue.stream({
 </dl>
 </details>
 
+<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">streamWithTimestamps</a>({ ...params }) -> core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsAndVoiceSegmentsResponseModel></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Converts a list of text and voice ID pairs into speech (dialogue) and returns a stream of JSON blobs containing audio as a base64 encoded string and timestamps
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.textToDialogue.streamWithTimestamps({
+    outputFormat: "mp3_22050_32",
+    inputs: [
+        {
+            text: "Hello, how are you?",
+            voiceId: "bYTqZQo3Jz7LQtmGTgwi",
+        },
+        {
+            text: "I'm doing well, thank you!",
+            voiceId: "6lCwbsX1yVjD49QmpkTR",
+        },
+    ],
+});
+for await (const item of response) {
+    console.log(item);
+}
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyTextToDialogueStreamWithTimestamps`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TextToDialogue.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">convertWithTimestamps</a>({ ...params }) -> ElevenLabs.AudioWithTimestampsAndVoiceSegmentsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate dialogue from text with precise character-level timing information for audio-text synchronization.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.textToDialogue.convertWithTimestamps({
+    outputFormat: "mp3_22050_32",
+    inputs: [
+        {
+            text: "Hello, how are you?",
+            voiceId: "bYTqZQo3Jz7LQtmGTgwi",
+        },
+        {
+            text: "I'm doing well, thank you!",
+            voiceId: "6lCwbsX1yVjD49QmpkTR",
+        },
+    ],
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyTextToDialogueFullWithTimestamps`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TextToDialogue.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## SpeechToSpeech
 
 <details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">convert</a>(voiceId, { ...params }) -> ReadableStream<Uint8Array></code></summary>
@@ -2221,12 +2374,7 @@ Dubs a provided audio or video file into given language.
 <dd>
 
 ```typescript
-await client.dubbing.create({
-    file: fs.createReadStream("/path/to/your/file"),
-    csvFile: fs.createReadStream("/path/to/your/file"),
-    foregroundAudioFile: fs.createReadStream("/path/to/your/file"),
-    backgroundAudioFile: fs.createReadStream("/path/to/your/file"),
-});
+await client.dubbing.create({});
 ```
 
 </dd>
@@ -2749,7 +2897,6 @@ Creates a new pronunciation dictionary from a lexicon .PLS file
 
 ```typescript
 await client.pronunciationDictionaries.createFromFile({
-    file: fs.createReadStream("/path/to/your/file"),
     name: "name",
 });
 ```
@@ -3286,7 +3433,6 @@ Transcribe an audio or video file. If webhook is set to true, the request will b
 
 ```typescript
 await client.speechToText.convert({
-    file: fs.createReadStream("/path/to/your/file"),
     enableLogging: true,
     modelId: "model_id",
 });
@@ -3680,11 +3826,9 @@ Compose a song from a prompt or a composition plan.
 ```typescript
 await client.music.compose({
     prompt: undefined,
-    musicPrompt: undefined,
     compositionPlan: undefined,
     musicLengthMs: undefined,
     modelId: undefined,
-    seed: undefined,
     forceInstrumental: undefined,
     respectSectionsDurations: undefined,
     storeForInpainting: undefined,
@@ -3753,11 +3897,9 @@ Compose a song from a prompt or a composition plan.
 ```typescript
 await client.music.composeDetailed({
     prompt: undefined,
-    musicPrompt: undefined,
     compositionPlan: undefined,
     musicLengthMs: undefined,
     modelId: undefined,
-    seed: undefined,
     forceInstrumental: undefined,
     storeForInpainting: undefined,
 });
@@ -3825,11 +3967,9 @@ Stream a composed song from a prompt or a composition plan.
 ```typescript
 await client.music.stream({
     prompt: undefined,
-    musicPrompt: undefined,
     compositionPlan: undefined,
     musicLengthMs: undefined,
     modelId: undefined,
-    seed: undefined,
     forceInstrumental: undefined,
     storeForInpainting: undefined,
 });
@@ -4038,6 +4178,7 @@ await client.conversationalAi.conversations.list({
     userId: "user_id",
     pageSize: 1,
     summaryMode: "exclude",
+    search: "search",
 });
 ```
 
@@ -10774,7 +10915,6 @@ Creates a new Studio project, it can be either initialized as blank, from a docu
 
 ```typescript
 await client.studio.projects.create({
-    fromDocument: fs.createReadStream("/path/to/your/file"),
     name: "name",
 });
 ```
@@ -11194,9 +11334,7 @@ Updates Studio project content.
 <dd>
 
 ```typescript
-await client.studio.projects.content.update("21m00Tcm4TlvDq8ikWAM", {
-    fromDocument: fs.createReadStream("/path/to/your/file"),
-});
+await client.studio.projects.content.update("21m00Tcm4TlvDq8ikWAM", {});
 ```
 
 </dd>
@@ -12257,6 +12395,71 @@ await client.textToVoice.preview.stream("generated_voice_id");
 <dd>
 
 **requestOptions:** `Preview.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Tokens SingleUse
+
+<details><summary><code>client.tokens.singleUse.<a href="/src/api/resources/tokens/resources/singleUse/client/Client.ts">create</a>(tokenType) -> ElevenLabs.SingleUseTokenResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate a time limited single-use token with embedded authentication for frontend clients.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tokens.singleUse.create("realtime_scribe");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tokenType:** `ElevenLabs.SingleUseTokenType`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SingleUse.RequestOptions`
 
 </dd>
 </dl>

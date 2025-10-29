@@ -17,6 +17,7 @@ describe("Tools", () => {
                         name: "name",
                         description: "description",
                         assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                        tool_call_sound: undefined,
                         parameters: undefined,
                         expects_response: false,
                         dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
@@ -49,6 +50,7 @@ describe("Tools", () => {
                                 valuePath: "user.name",
                             },
                         ],
+                        toolCallSound: undefined,
                         parameters: undefined,
                         expectsResponse: false,
                         dynamicVariables: {
@@ -87,6 +89,8 @@ describe("Tools", () => {
                 disable_interruptions: true,
                 force_pre_tool_speech: true,
                 assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                tool_call_sound: "typing",
+                tool_call_sound_behavior: "auto",
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -146,6 +150,8 @@ describe("Tools", () => {
                         valuePath: "user.name",
                     },
                 ],
+                toolCallSound: "typing",
+                toolCallSoundBehavior: "auto",
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -195,6 +201,8 @@ describe("Tools", () => {
                 disable_interruptions: true,
                 force_pre_tool_speech: true,
                 assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                tool_call_sound: "typing",
+                tool_call_sound_behavior: "auto",
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -246,6 +254,8 @@ describe("Tools", () => {
                         valuePath: "user.name",
                     },
                 ],
+                toolCallSound: "typing",
+                toolCallSoundBehavior: "auto",
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -316,6 +326,8 @@ describe("Tools", () => {
                 disable_interruptions: true,
                 force_pre_tool_speech: true,
                 assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                tool_call_sound: "typing",
+                tool_call_sound_behavior: "auto",
                 parameters: {
                     type: "object",
                     required: ["required"],
@@ -375,6 +387,8 @@ describe("Tools", () => {
                         valuePath: "user.name",
                     },
                 ],
+                toolCallSound: "typing",
+                toolCallSoundBehavior: "auto",
                 parameters: {
                     type: "object",
                     required: ["required"],

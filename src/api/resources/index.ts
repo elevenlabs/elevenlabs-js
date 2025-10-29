@@ -39,6 +39,7 @@ export * as models from "./models";
 export * as usage from "./usage";
 export * as webhooks from "./webhooks";
 export * as forcedAlignment from "./forcedAlignment";
+export * as tokens from "./tokens";
 export * from "./history/client/requests";
 export * from "./textToSoundEffects/client/requests";
 export * from "./audioIsolation/client/requests";

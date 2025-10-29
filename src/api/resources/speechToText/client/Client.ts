@@ -3,7 +3,6 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as ElevenLabs from "../../../index";
-import * as fs from "fs";
 import * as serializers from "../../../../serialization/index";
 import { toJson } from "../../../../core/json";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers";
@@ -60,7 +59,6 @@ export class SpeechToText {
      * @example
      *     import { createReadStream } from "fs";
      *     await client.speechToText.convert({
-     *         file: fs.createReadStream("/path/to/your/file"),
      *         enableLogging: true,
      *         modelId: "model_id"
      *     })
@@ -83,7 +81,10 @@ export class SpeechToText {
 
         const _request = await core.newFormData();
         _request.append("model_id", request.modelId);
-        await _request.appendFile("file", request.file);
+        if (request.file != null) {
+            await _request.appendFile("file", request.file);
+        }
+
         if (request.languageCode != null) {
             _request.append("language_code", request.languageCode);
         }

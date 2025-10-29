@@ -3,7 +3,6 @@
 import * as environments from "../../../../../../../../environments";
 import * as core from "../../../../../../../../core";
 import * as ElevenLabs from "../../../../../../../index";
-import * as fs from "fs";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../core/headers";
 import * as serializers from "../../../../../../../../serialization/index";
 import * as errors from "../../../../../../../../errors/index";
@@ -53,9 +52,7 @@ export class Content {
      *
      * @example
      *     import { createReadStream } from "fs";
-     *     await client.studio.projects.content.update("21m00Tcm4TlvDq8ikWAM", {
-     *         fromDocument: fs.createReadStream("/path/to/your/file")
-     *     })
+     *     await client.studio.projects.content.update("21m00Tcm4TlvDq8ikWAM", {})
      */
     public update(
         projectId: string,
@@ -75,7 +72,10 @@ export class Content {
             _request.append("from_url", request.fromUrl);
         }
 
-        await _request.appendFile("from_document", request.fromDocument);
+        if (request.fromDocument != null) {
+            await _request.appendFile("from_document", request.fromDocument);
+        }
+
         if (request.fromContentJson != null) {
             _request.append("from_content_json", request.fromContentJson);
         }

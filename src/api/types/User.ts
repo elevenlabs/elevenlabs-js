@@ -7,8 +7,6 @@ export interface User {
     userId: string;
     /** Details of the user's subscription. */
     subscription: ElevenLabs.SubscriptionResponse;
-    /** Optional additional details about the user's subscription. */
-    subscriptionExtras?: ElevenLabs.SubscriptionExtrasResponseModel;
     /** Whether the user is new. This field is deprecated and will be removed in the future. Use 'created_at' instead. */
     isNewUser: boolean;
     /** The API key of the user. */

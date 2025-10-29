@@ -3,19 +3,19 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { ToolType } from "./ToolType";
+import { ReferencedToolCommonModelType } from "./ReferencedToolCommonModelType";
 
 export const ReferencedToolCommonModel: core.serialization.ObjectSchema<
     serializers.ReferencedToolCommonModel.Raw,
     ElevenLabs.ReferencedToolCommonModel
 > = core.serialization.object({
     id: core.serialization.string(),
-    type: ToolType,
+    type: ReferencedToolCommonModelType,
 });
 
 export declare namespace ReferencedToolCommonModel {
     export interface Raw {
         id: string;
-        type: ToolType.Raw;
+        type: ReferencedToolCommonModelType.Raw;
     }
 }

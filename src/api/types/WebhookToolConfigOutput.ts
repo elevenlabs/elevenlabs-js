@@ -17,6 +17,10 @@ export interface WebhookToolConfigOutput {
     forcePreToolSpeech?: boolean;
     /** Configuration for extracting values from tool responses and assigning them to dynamic variables */
     assignments?: ElevenLabs.DynamicVariableAssignment[];
+    /** Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played. */
+    toolCallSound?: ElevenLabs.ToolCallSoundType;
+    /** Determines when the tool call sound should play. 'auto' only plays when there's pre-tool speech, 'always' plays for every tool call. */
+    toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
     /** The schema for the outgoing webhoook, including parameters and URL specification */
     apiSchema: ElevenLabs.WebhookToolApiSchemaConfigOutput;
     /** Configuration for dynamic variables */

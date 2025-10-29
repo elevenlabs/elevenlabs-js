@@ -276,7 +276,8 @@ export class Conversations {
      *         callStartAfterUnix: 1,
      *         userId: "user_id",
      *         pageSize: 1,
-     *         summaryMode: "exclude"
+     *         summaryMode: "exclude",
+     *         search: "search"
      *     })
      */
     public list(
@@ -299,6 +300,7 @@ export class Conversations {
             userId,
             pageSize,
             summaryMode,
+            search,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
@@ -336,6 +338,10 @@ export class Conversations {
                 summaryMode,
                 { unrecognizedObjectKeys: "strip" },
             );
+        }
+
+        if (search != null) {
+            _queryParams["search"] = search;
         }
 
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(

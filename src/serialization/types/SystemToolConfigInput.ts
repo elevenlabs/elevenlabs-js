@@ -4,6 +4,8 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
+import { ToolCallSoundType } from "./ToolCallSoundType";
+import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { SystemToolConfigInputParams } from "./SystemToolConfigInputParams";
 
 export const SystemToolConfigInput: core.serialization.ObjectSchema<
@@ -16,6 +18,8 @@ export const SystemToolConfigInput: core.serialization.ObjectSchema<
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
     assignments: core.serialization.list(DynamicVariableAssignment).optional(),
+    toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
+    toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     params: SystemToolConfigInputParams,
 });
 
@@ -27,6 +31,8 @@ export declare namespace SystemToolConfigInput {
         disable_interruptions?: boolean | null;
         force_pre_tool_speech?: boolean | null;
         assignments?: DynamicVariableAssignment.Raw[] | null;
+        tool_call_sound?: ToolCallSoundType.Raw | null;
+        tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         params: SystemToolConfigInputParams.Raw;
     }
 }

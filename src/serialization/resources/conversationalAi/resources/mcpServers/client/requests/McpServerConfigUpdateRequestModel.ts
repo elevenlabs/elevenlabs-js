@@ -4,6 +4,8 @@ import * as serializers from "../../../../../../index";
 import * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import { McpApprovalPolicy } from "../../../../../../types/McpApprovalPolicy";
+import { ToolExecutionMode } from "../../../../../../types/ToolExecutionMode";
+import { McpServerConfigUpdateRequestModelRequestHeadersValue } from "../../types/McpServerConfigUpdateRequestModelRequestHeadersValue";
 
 export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
     serializers.conversationalAi.McpServerConfigUpdateRequestModel.Raw,
@@ -12,6 +14,13 @@ export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
     approvalPolicy: core.serialization.property("approval_policy", McpApprovalPolicy.optional()),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
+    requestHeaders: core.serialization.property(
+        "request_headers",
+        core.serialization
+            .record(core.serialization.string(), McpServerConfigUpdateRequestModelRequestHeadersValue.optional())
+            .optional(),
+    ),
 });
 
 export declare namespace McpServerConfigUpdateRequestModel {
@@ -19,5 +28,10 @@ export declare namespace McpServerConfigUpdateRequestModel {
         approval_policy?: McpApprovalPolicy.Raw | null;
         force_pre_tool_speech?: boolean | null;
         disable_interruptions?: boolean | null;
+        execution_mode?: ToolExecutionMode.Raw | null;
+        request_headers?: Record<
+            string,
+            McpServerConfigUpdateRequestModelRequestHeadersValue.Raw | null | undefined
+        > | null;
     }
 }

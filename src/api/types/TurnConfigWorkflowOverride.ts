@@ -7,6 +7,6 @@ export interface TurnConfigWorkflowOverride {
     turnTimeout?: number;
     /** Maximum wait time since the user last spoke before terminating the call */
     silenceEndCallTimeout?: number;
-    /** The mode of turn detection */
-    mode?: ElevenLabs.TurnMode;
+    /** Controls how eager the agent is to respond. Low = less eager (waits longer), Standard = default eagerness, High = more eager (responds sooner) */
+    turnEagerness?: ElevenLabs.TurnEagerness;
 }

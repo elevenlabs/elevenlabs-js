@@ -9,6 +9,7 @@ import { McpServerTransport } from "./McpServerTransport";
 import { McpServerConfigInputUrl } from "./McpServerConfigInputUrl";
 import { McpServerConfigInputSecretToken } from "./McpServerConfigInputSecretToken";
 import { McpServerConfigInputRequestHeadersValue } from "./McpServerConfigInputRequestHeadersValue";
+import { ToolExecutionMode } from "./ToolExecutionMode";
 
 export const McpServerConfigInput: core.serialization.ObjectSchema<
     serializers.McpServerConfigInput.Raw,
@@ -30,6 +31,7 @@ export const McpServerConfigInput: core.serialization.ObjectSchema<
     description: core.serialization.string().optional(),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
 });
 
 export declare namespace McpServerConfigInput {
@@ -44,5 +46,6 @@ export declare namespace McpServerConfigInput {
         description?: string | null;
         force_pre_tool_speech?: boolean | null;
         disable_interruptions?: boolean | null;
+        execution_mode?: ToolExecutionMode.Raw | null;
     }
 }

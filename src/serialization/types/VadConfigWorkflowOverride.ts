@@ -7,15 +7,8 @@ import * as core from "../../core";
 export const VadConfigWorkflowOverride: core.serialization.ObjectSchema<
     serializers.VadConfigWorkflowOverride.Raw,
     ElevenLabs.VadConfigWorkflowOverride
-> = core.serialization.object({
-    backgroundVoiceDetection: core.serialization.property(
-        "background_voice_detection",
-        core.serialization.boolean().optional(),
-    ),
-});
+> = core.serialization.object({});
 
 export declare namespace VadConfigWorkflowOverride {
-    export interface Raw {
-        background_voice_detection?: boolean | null;
-    }
+    export interface Raw {}
 }

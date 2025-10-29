@@ -13,4 +13,11 @@ export interface McpServerConfigUpdateRequestModel {
     forcePreToolSpeech?: boolean;
     /** Whether to disable interruptions for all tools from this MCP server */
     disableInterruptions?: boolean;
+    /** The execution mode for all tools from this MCP server */
+    executionMode?: ElevenLabs.ToolExecutionMode;
+    /** The headers to include in requests to the MCP server */
+    requestHeaders?: Record<
+        string,
+        ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModelRequestHeadersValue | undefined
+    >;
 }

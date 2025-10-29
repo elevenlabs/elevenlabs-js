@@ -224,4 +224,237 @@ export class TextToDialogue {
                 });
         }
     }
+
+    /**
+     * Converts a list of text and voice ID pairs into speech (dialogue) and returns a stream of JSON blobs containing audio as a base64 encoded string and timestamps
+     */
+    public streamWithTimestamps(
+        request: ElevenLabs.BodyTextToDialogueStreamWithTimestamps,
+        requestOptions?: TextToDialogue.RequestOptions,
+    ): core.HttpResponsePromise<
+        core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsAndVoiceSegmentsResponseModel>
+    > {
+        return core.HttpResponsePromise.fromPromise(this.__streamWithTimestamps(request, requestOptions));
+    }
+
+    private async __streamWithTimestamps(
+        request: ElevenLabs.BodyTextToDialogueStreamWithTimestamps,
+        requestOptions?: TextToDialogue.RequestOptions,
+    ): Promise<
+        core.WithRawResponse<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsAndVoiceSegmentsResponseModel>>
+    > {
+        const { outputFormat, ..._body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (outputFormat != null) {
+            _queryParams["output_format"] =
+                serializers.TextToDialogueStreamWithTimestampsRequestOutputFormat.jsonOrThrow(outputFormat, {
+                    unrecognizedObjectKeys: "strip",
+                });
+        }
+
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher<ReadableStream>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/text-to-dialogue/stream/with-timestamps",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            requestType: "json",
+            body: serializers.BodyTextToDialogueStreamWithTimestamps.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            responseType: "sse",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: new core.Stream({
+                    stream: _response.body,
+                    parse: async (data) => {
+                        return serializers.StreamingAudioChunkWithTimestampsAndVoiceSegmentsResponseModel.parseOrThrow(
+                            data,
+                            {
+                                unrecognizedObjectKeys: "passthrough",
+                                allowUnrecognizedUnionMembers: true,
+                                allowUnrecognizedEnumValues: true,
+                                breadcrumbsPrefix: ["response"],
+                            },
+                        );
+                    },
+                    signal: requestOptions?.abortSignal,
+                    eventShape: {
+                        type: "json",
+                        messageTerminator: "\n",
+                    },
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/text-to-dialogue/stream/with-timestamps.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * Generate dialogue from text with precise character-level timing information for audio-text synchronization.
+     *
+     * @param {ElevenLabs.BodyTextToDialogueFullWithTimestamps} request
+     * @param {TextToDialogue.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.textToDialogue.convertWithTimestamps({
+     *         outputFormat: "mp3_22050_32",
+     *         inputs: [{
+     *                 text: "Hello, how are you?",
+     *                 voiceId: "bYTqZQo3Jz7LQtmGTgwi"
+     *             }, {
+     *                 text: "I'm doing well, thank you!",
+     *                 voiceId: "6lCwbsX1yVjD49QmpkTR"
+     *             }]
+     *     })
+     */
+    public convertWithTimestamps(
+        request: ElevenLabs.BodyTextToDialogueFullWithTimestamps,
+        requestOptions?: TextToDialogue.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.AudioWithTimestampsAndVoiceSegmentsResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__convertWithTimestamps(request, requestOptions));
+    }
+
+    private async __convertWithTimestamps(
+        request: ElevenLabs.BodyTextToDialogueFullWithTimestamps,
+        requestOptions?: TextToDialogue.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.AudioWithTimestampsAndVoiceSegmentsResponseModel>> {
+        const { outputFormat, ..._body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (outputFormat != null) {
+            _queryParams["output_format"] =
+                serializers.TextToDialogueConvertWithTimestampsRequestOutputFormat.jsonOrThrow(outputFormat, {
+                    unrecognizedObjectKeys: "strip",
+                });
+        }
+
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/text-to-dialogue/with-timestamps",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            requestType: "json",
+            body: serializers.BodyTextToDialogueFullWithTimestamps.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.AudioWithTimestampsAndVoiceSegmentsResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/text-to-dialogue/with-timestamps.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
 }

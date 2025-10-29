@@ -6,11 +6,9 @@ import * as ElevenLabs from "../../../../index";
  * @example
  *     {
  *         prompt: undefined,
- *         musicPrompt: undefined,
  *         compositionPlan: undefined,
  *         musicLengthMs: undefined,
  *         modelId: undefined,
- *         seed: undefined,
  *         forceInstrumental: undefined,
  *         storeForInpainting: undefined
  *     }
@@ -20,16 +18,12 @@ export interface BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
     outputFormat?: ElevenLabs.MusicComposeDetailedRequestOutputFormat;
     /** A simple text prompt to generate a song from. Cannot be used in conjunction with `composition_plan`. */
     prompt?: string;
-    /** A music prompt. Deprecated. Use `composition_plan` instead. */
-    musicPrompt?: ElevenLabs.MusicPrompt;
     /** A detailed composition plan to guide music generation. Cannot be used in conjunction with `prompt`. */
     compositionPlan?: ElevenLabs.MusicPrompt;
     /** The length of the song to generate in milliseconds. Used only in conjunction with `prompt`. Must be between 3000ms and 300000ms. Optional - if not provided, the model will choose a length based on the prompt. */
     musicLengthMs?: number;
     /** The model to use for the generation. */
     modelId?: "music_v1";
-    /** The seed to use for the generation. */
-    seed?: number;
     /** If true, guarantees that the generated song will be instrumental. If false, the song may or may not be instrumental depending on the `prompt`. Can only be used with `prompt`. */
     forceInstrumental?: boolean;
     /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting API. */

@@ -12,7 +12,8 @@ import * as ElevenLabs from "../../../../../../index";
  *         callStartAfterUnix: 1,
  *         userId: "user_id",
  *         pageSize: 1,
- *         summaryMode: "exclude"
+ *         summaryMode: "exclude",
+ *         search: "search"
  *     }
  */
 export interface ConversationsListRequest {
@@ -32,4 +33,6 @@ export interface ConversationsListRequest {
     pageSize?: number;
     /** Whether to include transcript summaries in the response. */
     summaryMode?: ElevenLabs.conversationalAi.ConversationsListRequestSummaryMode;
+    /** Full-text or fuzzy search over transcript messages */
+    search?: string;
 }
