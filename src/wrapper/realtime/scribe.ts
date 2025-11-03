@@ -88,12 +88,15 @@ export class ScribeRealtime {
         this.options = options;
     }
 
-    private async getWebSocketUri(): Promise<string> {
-        // Get base URL from options, preferring baseUrl, then environment, then default Production
-        const baseUrl =
-            (await core.Supplier.get(this.options.baseUrl)) ??
+    private async getBaseUrl(): Promise<string> {
+        return (await core.Supplier.get(this.options.baseUrl)) ??
             (await core.Supplier.get(this.options.environment)) ??
             environments.ElevenLabsEnvironment.Production;
+    }
+
+    private async getWebSocketUri(): Promise<string> {
+        // Get base URL from options, preferring baseUrl, then environment, then default Production
+        const baseUrl = await this.getBaseUrl();
 
         // Convert HTTP(S) to WS(S)
         const wsUrl = baseUrl.replace(/^https?:\/\//i, (match) =>
@@ -117,12 +120,13 @@ export class ScribeRealtime {
         }
     }
 
-    private async buildWebSocketUri(options: AudioOptions | UrlOptions): Promise<string> {
+    private async buildWebSocketUri(options: AudioOptions | UrlOptions, token: string): Promise<string> {
         const baseUri = await this.getWebSocketUri();
         const params = new URLSearchParams();
 
         // Model ID is required, so no check required
         params.append("model_id", options.modelId);
+        params.append("token", token);
 
         // Add optional parameters if provided, with validation
         if (options.commitStrategy !== undefined) {
@@ -211,12 +215,14 @@ export class ScribeRealtime {
             throw new Error("modelId is required");
         }
 
+        const token = await this.getToken();
+
         // Create connection object first so users can attach event listeners before messages arrive
         const sampleRate = "url" in options ? 16000 : options.sampleRate;
         const connection = new RealtimeConnection(sampleRate);
 
         // Build WebSocket URI with query parameters
-        const uri = await this.buildWebSocketUri(options);
+        const uri = await this.buildWebSocketUri(options, token);
 
         return new Promise((resolve) => {
             const websocket = new WebSocket(uri, {
@@ -293,6 +299,25 @@ export class ScribeRealtime {
         ffmpegProcess.on("close", (code: number | null) => {
             console.log(`ffmpeg process exited with code ${code}`);
         });
+    }
+
+    private async getToken(): Promise<string> {
+        try {
+            const response = await fetch(`${await this.getBaseUrl()}/v1/single-use-token/realtime_scribe`, {
+                method: "POST",
+                headers: {
+                    "xi-api-key": this.options.apiKey as string,
+                },
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to get token: ${response.statusText}`);
+            }
+            const data = await response.json();
+            return data.token;
+        } catch (error) {
+            console.error("Failed to get token:", error);
+            throw new Error("Failed to get token");
+        }
     }
 }
 

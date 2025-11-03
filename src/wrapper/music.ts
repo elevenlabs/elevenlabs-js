@@ -193,7 +193,6 @@ export class Music {
                         const rawJson = JSON.parse(jsonLine);
                         // Convert snake_case keys to camelCase
                         jsonData = this.toCamelCase(rawJson);
-                        console.log("✓ Successfully parsed JSON metadata");
                     } catch (e) {
                         console.warn("Failed to parse JSON:", e);
                     }
