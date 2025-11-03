@@ -103,7 +103,7 @@ export class ScribeRealtime {
             match.toLowerCase() === "https://" ? "wss://" : "ws://"
         );
 
-        return `${wsUrl}/v1/speech-to-text/realtime-beta`;
+        return `${wsUrl}/v1/speech-to-text/realtime`;
     }
 
     private async checkFfmpegInstalled(): Promise<void> {
