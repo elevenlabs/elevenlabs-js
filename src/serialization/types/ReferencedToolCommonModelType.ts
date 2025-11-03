@@ -7,8 +7,8 @@ import * as core from "../../core";
 export const ReferencedToolCommonModelType: core.serialization.Schema<
     serializers.ReferencedToolCommonModelType.Raw,
     ElevenLabs.ReferencedToolCommonModelType
-> = core.serialization.enum_(["system", "webhook", "client", "workflow"]);
+> = core.serialization.enum_(["system", "webhook", "client", "workflow", "api_integration_webhook"]);
 
 export declare namespace ReferencedToolCommonModelType {
-    export type Raw = "system" | "webhook" | "client" | "workflow";
+    export type Raw = "system" | "webhook" | "client" | "workflow" | "api_integration_webhook";
 }

@@ -8,6 +8,8 @@ export interface LiteralJsonSchemaProperty {
     description?: string;
     /** List of allowed string values for string type parameters */
     enum?: string[];
+    /** If true, the value will be populated by the system at runtime. Used by Api Integration Webhook tools for templating. */
+    isSystemProvided?: boolean;
     /** The dynamic variable of the property */
     dynamicVariable?: string;
     /** The constant value of the property */

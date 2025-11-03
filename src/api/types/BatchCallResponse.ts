@@ -4,8 +4,9 @@ import * as ElevenLabs from "../index";
 
 export interface BatchCallResponse {
     id: string;
-    phoneNumberId: string;
+    phoneNumberId?: string;
     phoneProvider?: ElevenLabs.TelephonyProvider;
+    whatsappBusinessAccountId?: string;
     name: string;
     agentId: string;
     createdAtUnix: number;

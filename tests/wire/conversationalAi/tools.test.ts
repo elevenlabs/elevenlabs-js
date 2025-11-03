@@ -13,14 +13,15 @@ describe("Tools", () => {
                 {
                     id: "id",
                     tool_config: {
-                        type: "client",
+                        type: "api_integration_webhook",
                         name: "name",
                         description: "description",
                         assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                         tool_call_sound: undefined,
-                        parameters: undefined,
-                        expects_response: false,
                         dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                        api_integration_id: "api_integration_id",
+                        api_integration_connection_id: "api_integration_connection_id",
+                        api_schema_overrides: undefined,
                     },
                     access_info: {
                         is_creator: true,
@@ -40,7 +41,7 @@ describe("Tools", () => {
                 {
                     id: "id",
                     toolConfig: {
-                        type: "client",
+                        type: "api_integration_webhook",
                         name: "name",
                         description: "description",
                         assignments: [
@@ -51,13 +52,14 @@ describe("Tools", () => {
                             },
                         ],
                         toolCallSound: undefined,
-                        parameters: undefined,
-                        expectsResponse: false,
                         dynamicVariables: {
                             dynamicVariablePlaceholders: {
                                 user_name: "John Doe",
                             },
                         },
+                        apiIntegrationId: "api_integration_id",
+                        apiIntegrationConnectionId: "api_integration_connection_id",
+                        apiSchemaOverrides: undefined,
                     },
                     accessInfo: {
                         isCreator: true,
@@ -77,12 +79,18 @@ describe("Tools", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
-            tool_config: { type: "client", name: "name", description: "description", expects_response: false },
+            tool_config: {
+                type: "api_integration_webhook",
+                name: "name",
+                description: "description",
+                api_integration_id: "api_integration_id",
+                api_integration_connection_id: "api_integration_connection_id",
+            },
         };
         const rawResponseBody = {
             id: "id",
             tool_config: {
-                type: "client",
+                type: "api_integration_webhook",
                 name: "name",
                 description: "description",
                 response_timeout_secs: 1,
@@ -91,23 +99,17 @@ describe("Tools", () => {
                 assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                 tool_call_sound: "typing",
                 tool_call_sound_behavior: "auto",
-                parameters: {
-                    type: "object",
-                    required: ["required"],
-                    description: "description",
-                    properties: {
-                        key: {
-                            type: "string",
-                            description: "My property",
-                            enum: undefined,
-                            dynamic_variable: "Dynamic variable",
-                            constant_value: "Constant value",
-                        },
-                    },
-                },
-                expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                 execution_mode: "immediate",
+                tool_version: "tool_version",
+                api_integration_id: "api_integration_id",
+                api_integration_connection_id: "api_integration_connection_id",
+                api_schema_overrides: {
+                    path_params_schema: {},
+                    query_params_schema: { properties: undefined, required: undefined },
+                    request_body_schema: { description: undefined, properties: undefined, required: undefined },
+                    request_headers: {},
+                },
             },
             access_info: {
                 is_creator: true,
@@ -128,16 +130,17 @@ describe("Tools", () => {
 
         const response = await client.conversationalAi.tools.create({
             toolConfig: {
-                type: "client",
+                type: "api_integration_webhook",
                 name: "name",
                 description: "description",
-                expectsResponse: false,
+                apiIntegrationId: "api_integration_id",
+                apiIntegrationConnectionId: "api_integration_connection_id",
             },
         });
         expect(response).toEqual({
             id: "id",
             toolConfig: {
-                type: "client",
+                type: "api_integration_webhook",
                 name: "name",
                 description: "description",
                 responseTimeoutSecs: 1,
@@ -152,27 +155,28 @@ describe("Tools", () => {
                 ],
                 toolCallSound: "typing",
                 toolCallSoundBehavior: "auto",
-                parameters: {
-                    type: "object",
-                    required: ["required"],
-                    description: "description",
-                    properties: {
-                        key: {
-                            type: "string",
-                            description: "My property",
-                            enum: undefined,
-                            dynamicVariable: "Dynamic variable",
-                            constantValue: "Constant value",
-                        },
-                    },
-                },
-                expectsResponse: false,
                 dynamicVariables: {
                     dynamicVariablePlaceholders: {
                         user_name: "John Doe",
                     },
                 },
                 executionMode: "immediate",
+                toolVersion: "tool_version",
+                apiIntegrationId: "api_integration_id",
+                apiIntegrationConnectionId: "api_integration_connection_id",
+                apiSchemaOverrides: {
+                    pathParamsSchema: {},
+                    queryParamsSchema: {
+                        properties: undefined,
+                        required: undefined,
+                    },
+                    requestBodySchema: {
+                        description: undefined,
+                        properties: undefined,
+                        required: undefined,
+                    },
+                    requestHeaders: {},
+                },
             },
             accessInfo: {
                 isCreator: true,
@@ -194,7 +198,7 @@ describe("Tools", () => {
         const rawResponseBody = {
             id: "id",
             tool_config: {
-                type: "client",
+                type: "api_integration_webhook",
                 name: "name",
                 description: "description",
                 response_timeout_secs: 1,
@@ -203,23 +207,17 @@ describe("Tools", () => {
                 assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                 tool_call_sound: "typing",
                 tool_call_sound_behavior: "auto",
-                parameters: {
-                    type: "object",
-                    required: ["required"],
-                    description: "description",
-                    properties: {
-                        key: {
-                            type: "string",
-                            description: "My property",
-                            enum: undefined,
-                            dynamic_variable: "Dynamic variable",
-                            constant_value: "Constant value",
-                        },
-                    },
-                },
-                expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                 execution_mode: "immediate",
+                tool_version: "tool_version",
+                api_integration_id: "api_integration_id",
+                api_integration_connection_id: "api_integration_connection_id",
+                api_schema_overrides: {
+                    path_params_schema: {},
+                    query_params_schema: { properties: undefined, required: undefined },
+                    request_body_schema: { description: undefined, properties: undefined, required: undefined },
+                    request_headers: {},
+                },
             },
             access_info: {
                 is_creator: true,
@@ -241,7 +239,7 @@ describe("Tools", () => {
         expect(response).toEqual({
             id: "id",
             toolConfig: {
-                type: "client",
+                type: "api_integration_webhook",
                 name: "name",
                 description: "description",
                 responseTimeoutSecs: 1,
@@ -256,27 +254,28 @@ describe("Tools", () => {
                 ],
                 toolCallSound: "typing",
                 toolCallSoundBehavior: "auto",
-                parameters: {
-                    type: "object",
-                    required: ["required"],
-                    description: "description",
-                    properties: {
-                        key: {
-                            type: "string",
-                            description: "My property",
-                            enum: undefined,
-                            dynamicVariable: "Dynamic variable",
-                            constantValue: "Constant value",
-                        },
-                    },
-                },
-                expectsResponse: false,
                 dynamicVariables: {
                     dynamicVariablePlaceholders: {
                         user_name: "John Doe",
                     },
                 },
                 executionMode: "immediate",
+                toolVersion: "tool_version",
+                apiIntegrationId: "api_integration_id",
+                apiIntegrationConnectionId: "api_integration_connection_id",
+                apiSchemaOverrides: {
+                    pathParamsSchema: {},
+                    queryParamsSchema: {
+                        properties: undefined,
+                        required: undefined,
+                    },
+                    requestBodySchema: {
+                        description: undefined,
+                        properties: undefined,
+                        required: undefined,
+                    },
+                    requestHeaders: {},
+                },
             },
             accessInfo: {
                 isCreator: true,
@@ -314,12 +313,18 @@ describe("Tools", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
-            tool_config: { type: "client", name: "name", description: "description", expects_response: false },
+            tool_config: {
+                type: "api_integration_webhook",
+                name: "name",
+                description: "description",
+                api_integration_id: "api_integration_id",
+                api_integration_connection_id: "api_integration_connection_id",
+            },
         };
         const rawResponseBody = {
             id: "id",
             tool_config: {
-                type: "client",
+                type: "api_integration_webhook",
                 name: "name",
                 description: "description",
                 response_timeout_secs: 1,
@@ -328,23 +333,17 @@ describe("Tools", () => {
                 assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                 tool_call_sound: "typing",
                 tool_call_sound_behavior: "auto",
-                parameters: {
-                    type: "object",
-                    required: ["required"],
-                    description: "description",
-                    properties: {
-                        key: {
-                            type: "string",
-                            description: "My property",
-                            enum: undefined,
-                            dynamic_variable: "Dynamic variable",
-                            constant_value: "Constant value",
-                        },
-                    },
-                },
-                expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                 execution_mode: "immediate",
+                tool_version: "tool_version",
+                api_integration_id: "api_integration_id",
+                api_integration_connection_id: "api_integration_connection_id",
+                api_schema_overrides: {
+                    path_params_schema: {},
+                    query_params_schema: { properties: undefined, required: undefined },
+                    request_body_schema: { description: undefined, properties: undefined, required: undefined },
+                    request_headers: {},
+                },
             },
             access_info: {
                 is_creator: true,
@@ -365,16 +364,17 @@ describe("Tools", () => {
 
         const response = await client.conversationalAi.tools.update("tool_id", {
             toolConfig: {
-                type: "client",
+                type: "api_integration_webhook",
                 name: "name",
                 description: "description",
-                expectsResponse: false,
+                apiIntegrationId: "api_integration_id",
+                apiIntegrationConnectionId: "api_integration_connection_id",
             },
         });
         expect(response).toEqual({
             id: "id",
             toolConfig: {
-                type: "client",
+                type: "api_integration_webhook",
                 name: "name",
                 description: "description",
                 responseTimeoutSecs: 1,
@@ -389,27 +389,28 @@ describe("Tools", () => {
                 ],
                 toolCallSound: "typing",
                 toolCallSoundBehavior: "auto",
-                parameters: {
-                    type: "object",
-                    required: ["required"],
-                    description: "description",
-                    properties: {
-                        key: {
-                            type: "string",
-                            description: "My property",
-                            enum: undefined,
-                            dynamicVariable: "Dynamic variable",
-                            constantValue: "Constant value",
-                        },
-                    },
-                },
-                expectsResponse: false,
                 dynamicVariables: {
                     dynamicVariablePlaceholders: {
                         user_name: "John Doe",
                     },
                 },
                 executionMode: "immediate",
+                toolVersion: "tool_version",
+                apiIntegrationId: "api_integration_id",
+                apiIntegrationConnectionId: "api_integration_connection_id",
+                apiSchemaOverrides: {
+                    pathParamsSchema: {},
+                    queryParamsSchema: {
+                        properties: undefined,
+                        required: undefined,
+                    },
+                    requestBodySchema: {
+                        description: undefined,
+                        properties: undefined,
+                        required: undefined,
+                    },
+                    requestHeaders: {},
+                },
             },
             accessInfo: {
                 isCreator: true,

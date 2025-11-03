@@ -4,6 +4,7 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { PendingSubscriptionSwitchResponseModelNextTier } from "./PendingSubscriptionSwitchResponseModelNextTier";
+import { PendingSubscriptionSwitchResponseModelNextBillingPeriod } from "./PendingSubscriptionSwitchResponseModelNextBillingPeriod";
 
 export const PendingSubscriptionSwitchResponseModel: core.serialization.ObjectSchema<
     serializers.PendingSubscriptionSwitchResponseModel.Raw,
@@ -11,6 +12,10 @@ export const PendingSubscriptionSwitchResponseModel: core.serialization.ObjectSc
 > = core.serialization.object({
     kind: core.serialization.stringLiteral("change").optional(),
     nextTier: core.serialization.property("next_tier", PendingSubscriptionSwitchResponseModelNextTier),
+    nextBillingPeriod: core.serialization.property(
+        "next_billing_period",
+        PendingSubscriptionSwitchResponseModelNextBillingPeriod,
+    ),
     timestampSeconds: core.serialization.property("timestamp_seconds", core.serialization.number()),
 });
 
@@ -18,6 +23,7 @@ export declare namespace PendingSubscriptionSwitchResponseModel {
     export interface Raw {
         kind?: "change" | null;
         next_tier: PendingSubscriptionSwitchResponseModelNextTier.Raw;
+        next_billing_period: PendingSubscriptionSwitchResponseModelNextBillingPeriod.Raw;
         timestamp_seconds: number;
     }
 }

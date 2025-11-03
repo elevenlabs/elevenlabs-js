@@ -4,7 +4,9 @@ import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import { PhoneNumberTransferDestination } from "./PhoneNumberTransferDestination";
+import { PhoneNumberDynamicVariableTransferDestination } from "./PhoneNumberDynamicVariableTransferDestination";
 import { SipUriTransferDestination } from "./SipUriTransferDestination";
+import { SipUriDynamicVariableTransferDestination } from "./SipUriDynamicVariableTransferDestination";
 
 export const WorkflowPhoneNumberNodeModelInputTransferDestination: core.serialization.Schema<
     serializers.WorkflowPhoneNumberNodeModelInputTransferDestination.Raw,
@@ -12,7 +14,9 @@ export const WorkflowPhoneNumberNodeModelInputTransferDestination: core.serializ
 > = core.serialization
     .union("type", {
         phone: PhoneNumberTransferDestination,
+        phone_dynamic_variable: PhoneNumberDynamicVariableTransferDestination,
         sip_uri: SipUriTransferDestination,
+        sip_uri_dynamic_variable: SipUriDynamicVariableTransferDestination,
     })
     .transform<ElevenLabs.WorkflowPhoneNumberNodeModelInputTransferDestination>({
         transform: (value) => value,
@@ -22,13 +26,23 @@ export const WorkflowPhoneNumberNodeModelInputTransferDestination: core.serializ
 export declare namespace WorkflowPhoneNumberNodeModelInputTransferDestination {
     export type Raw =
         | WorkflowPhoneNumberNodeModelInputTransferDestination.Phone
-        | WorkflowPhoneNumberNodeModelInputTransferDestination.SipUri;
+        | WorkflowPhoneNumberNodeModelInputTransferDestination.PhoneDynamicVariable
+        | WorkflowPhoneNumberNodeModelInputTransferDestination.SipUri
+        | WorkflowPhoneNumberNodeModelInputTransferDestination.SipUriDynamicVariable;
 
     export interface Phone extends PhoneNumberTransferDestination.Raw {
         type: "phone";
     }
 
+    export interface PhoneDynamicVariable extends PhoneNumberDynamicVariableTransferDestination.Raw {
+        type: "phone_dynamic_variable";
+    }
+
     export interface SipUri extends SipUriTransferDestination.Raw {
         type: "sip_uri";
+    }
+
+    export interface SipUriDynamicVariable extends SipUriDynamicVariableTransferDestination.Raw {
+        type: "sip_uri_dynamic_variable";
     }
 }

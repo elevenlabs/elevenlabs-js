@@ -11,6 +11,7 @@ export const VoiceSegment: core.serialization.ObjectSchema<serializers.VoiceSegm
         endTimeSeconds: core.serialization.property("end_time_seconds", core.serialization.number()),
         characterStartIndex: core.serialization.property("character_start_index", core.serialization.number()),
         characterEndIndex: core.serialization.property("character_end_index", core.serialization.number()),
+        dialogueInputIndex: core.serialization.property("dialogue_input_index", core.serialization.number()),
     });
 
 export declare namespace VoiceSegment {
@@ -20,5 +21,6 @@ export declare namespace VoiceSegment {
         end_time_seconds: number;
         character_start_index: number;
         character_end_index: number;
+        dialogue_input_index: number;
     }
 }

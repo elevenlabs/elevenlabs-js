@@ -6037,10 +6037,11 @@ Add a new tool to the available tools in the workspace.
 ```typescript
 await client.conversationalAi.tools.create({
     toolConfig: {
-        type: "client",
+        type: "api_integration_webhook",
         name: "name",
         description: "description",
-        expectsResponse: false,
+        apiIntegrationId: "api_integration_id",
+        apiIntegrationConnectionId: "api_integration_connection_id",
     },
 });
 ```
@@ -6233,10 +6234,11 @@ Update tool that is available in the workspace.
 ```typescript
 await client.conversationalAi.tools.update("tool_id", {
     toolConfig: {
-        type: "client",
+        type: "api_integration_webhook",
         name: "name",
         description: "description",
-        expectsResponse: false,
+        apiIntegrationId: "api_integration_id",
+        apiIntegrationConnectionId: "api_integration_connection_id",
     },
 });
 ```
@@ -6768,12 +6770,7 @@ Submit a batch call request to schedule calls for multiple recipients.
 await client.conversationalAi.batchCalls.create({
     callName: "call_name",
     agentId: "agent_id",
-    agentPhoneNumberId: "agent_phone_number_id",
-    recipients: [
-        {
-            phoneNumber: "phone_number",
-        },
-    ],
+    recipients: [{}],
 });
 ```
 
@@ -8983,6 +8980,302 @@ await client.conversationalAi.mcpServers.toolApprovals.delete("mcp_server_id", "
 <dd>
 
 **requestOptions:** `ToolApprovals.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi McpServers ToolConfigs
+
+<details><summary><code>client.conversationalAi.mcpServers.toolConfigs.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolConfigs/client/Client.ts">create</a>(mcpServerId, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create configuration overrides for a specific MCP tool.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.toolConfigs.create("mcp_server_id", {
+    toolName: "tool_name",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideCreateRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolConfigs.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.mcpServers.toolConfigs.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolConfigs/client/Client.ts">get</a>(mcpServerId, toolName) -> ElevenLabs.McpToolConfigOverride</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve configuration overrides for a specific MCP tool.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.toolConfigs.get("mcp_server_id", "tool_name");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**toolName:** `string` — Name of the MCP tool to retrieve config overrides for.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolConfigs.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.mcpServers.toolConfigs.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolConfigs/client/Client.ts">delete</a>(mcpServerId, toolName) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove configuration overrides for a specific MCP tool.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.toolConfigs.delete("mcp_server_id", "tool_name");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**toolName:** `string` — Name of the MCP tool to remove config overrides for.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolConfigs.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.mcpServers.toolConfigs.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolConfigs/client/Client.ts">update</a>(mcpServerId, toolName, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update configuration overrides for a specific MCP tool.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "tool_name");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**toolName:** `string` — Name of the MCP tool to update config overrides for.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolConfigs.RequestOptions`
 
 </dd>
 </dl>

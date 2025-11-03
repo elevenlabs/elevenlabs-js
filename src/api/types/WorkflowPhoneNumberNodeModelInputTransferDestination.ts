@@ -4,14 +4,24 @@ import * as ElevenLabs from "../index";
 
 export type WorkflowPhoneNumberNodeModelInputTransferDestination =
     | ElevenLabs.WorkflowPhoneNumberNodeModelInputTransferDestination.Phone
-    | ElevenLabs.WorkflowPhoneNumberNodeModelInputTransferDestination.SipUri;
+    | ElevenLabs.WorkflowPhoneNumberNodeModelInputTransferDestination.PhoneDynamicVariable
+    | ElevenLabs.WorkflowPhoneNumberNodeModelInputTransferDestination.SipUri
+    | ElevenLabs.WorkflowPhoneNumberNodeModelInputTransferDestination.SipUriDynamicVariable;
 
 export namespace WorkflowPhoneNumberNodeModelInputTransferDestination {
     export interface Phone extends ElevenLabs.PhoneNumberTransferDestination {
         type: "phone";
     }
 
+    export interface PhoneDynamicVariable extends ElevenLabs.PhoneNumberDynamicVariableTransferDestination {
+        type: "phone_dynamic_variable";
+    }
+
     export interface SipUri extends ElevenLabs.SipUriTransferDestination {
         type: "sip_uri";
+    }
+
+    export interface SipUriDynamicVariable extends ElevenLabs.SipUriDynamicVariableTransferDestination {
+        type: "sip_uri_dynamic_variable";
     }
 }

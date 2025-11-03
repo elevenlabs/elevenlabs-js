@@ -11,17 +11,22 @@ export const BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost: core.ser
 > = core.serialization.object({
     callName: core.serialization.property("call_name", core.serialization.string()),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
-    agentPhoneNumberId: core.serialization.property("agent_phone_number_id", core.serialization.string()),
     recipients: core.serialization.list(OutboundCallRecipient),
     scheduledTimeUnix: core.serialization.property("scheduled_time_unix", core.serialization.number().optional()),
+    agentPhoneNumberId: core.serialization.property("agent_phone_number_id", core.serialization.string().optional()),
+    agentWhatsappBusinessAccountId: core.serialization.property(
+        "agent_whatsapp_business_account_id",
+        core.serialization.string().optional(),
+    ),
 });
 
 export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
     export interface Raw {
         call_name: string;
         agent_id: string;
-        agent_phone_number_id: string;
         recipients: OutboundCallRecipient.Raw[];
         scheduled_time_unix?: number | null;
+        agent_phone_number_id?: string | null;
+        agent_whatsapp_business_account_id?: string | null;
     }
 }

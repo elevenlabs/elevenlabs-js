@@ -7,16 +7,12 @@ describe("BatchCalls", () => {
     test("create", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {
-            call_name: "call_name",
-            agent_id: "agent_id",
-            agent_phone_number_id: "agent_phone_number_id",
-            recipients: [{ phone_number: "phone_number" }],
-        };
+        const rawRequestBody = { call_name: "call_name", agent_id: "agent_id", recipients: [{}] };
         const rawResponseBody = {
             id: "id",
             phone_number_id: "phone_number_id",
             phone_provider: "twilio",
+            whatsapp_business_account_id: "whatsapp_business_account_id",
             name: "name",
             agent_id: "agent_id",
             created_at_unix: 1,
@@ -39,17 +35,13 @@ describe("BatchCalls", () => {
         const response = await client.conversationalAi.batchCalls.create({
             callName: "call_name",
             agentId: "agent_id",
-            agentPhoneNumberId: "agent_phone_number_id",
-            recipients: [
-                {
-                    phoneNumber: "phone_number",
-                },
-            ],
+            recipients: [{}],
         });
         expect(response).toEqual({
             id: "id",
             phoneNumberId: "phone_number_id",
             phoneProvider: "twilio",
+            whatsappBusinessAccountId: "whatsapp_business_account_id",
             name: "name",
             agentId: "agent_id",
             createdAtUnix: 1,
@@ -72,6 +64,7 @@ describe("BatchCalls", () => {
                     id: "id",
                     phone_number_id: "phone_number_id",
                     phone_provider: "twilio",
+                    whatsapp_business_account_id: "whatsapp_business_account_id",
                     name: "name",
                     agent_id: "agent_id",
                     created_at_unix: 1,
@@ -104,6 +97,7 @@ describe("BatchCalls", () => {
                     id: "id",
                     phoneNumberId: "phone_number_id",
                     phoneProvider: "twilio",
+                    whatsappBusinessAccountId: "whatsapp_business_account_id",
                     name: "name",
                     agentId: "agent_id",
                     createdAtUnix: 1,
@@ -128,6 +122,7 @@ describe("BatchCalls", () => {
             id: "id",
             phone_number_id: "phone_number_id",
             phone_provider: "twilio",
+            whatsapp_business_account_id: "whatsapp_business_account_id",
             name: "name",
             agent_id: "agent_id",
             created_at_unix: 1,
@@ -141,6 +136,7 @@ describe("BatchCalls", () => {
                 {
                     id: "id",
                     phone_number: "phone_number",
+                    whatsapp_user_id: "whatsapp_user_id",
                     status: "pending",
                     created_at_unix: 1,
                     updated_at_unix: 1,
@@ -177,6 +173,7 @@ describe("BatchCalls", () => {
             id: "id",
             phoneNumberId: "phone_number_id",
             phoneProvider: "twilio",
+            whatsappBusinessAccountId: "whatsapp_business_account_id",
             name: "name",
             agentId: "agent_id",
             createdAtUnix: 1,
@@ -190,6 +187,7 @@ describe("BatchCalls", () => {
                 {
                     id: "id",
                     phoneNumber: "phone_number",
+                    whatsappUserId: "whatsapp_user_id",
                     status: "pending",
                     createdAtUnix: 1,
                     updatedAtUnix: 1,
@@ -228,6 +226,7 @@ describe("BatchCalls", () => {
             id: "id",
             phone_number_id: "phone_number_id",
             phone_provider: "twilio",
+            whatsapp_business_account_id: "whatsapp_business_account_id",
             name: "name",
             agent_id: "agent_id",
             created_at_unix: 1,
@@ -251,6 +250,7 @@ describe("BatchCalls", () => {
             id: "id",
             phoneNumberId: "phone_number_id",
             phoneProvider: "twilio",
+            whatsappBusinessAccountId: "whatsapp_business_account_id",
             name: "name",
             agentId: "agent_id",
             createdAtUnix: 1,
@@ -271,6 +271,7 @@ describe("BatchCalls", () => {
             id: "id",
             phone_number_id: "phone_number_id",
             phone_provider: "twilio",
+            whatsapp_business_account_id: "whatsapp_business_account_id",
             name: "name",
             agent_id: "agent_id",
             created_at_unix: 1,
@@ -294,6 +295,7 @@ describe("BatchCalls", () => {
             id: "id",
             phoneNumberId: "phone_number_id",
             phoneProvider: "twilio",
+            whatsappBusinessAccountId: "whatsapp_business_account_id",
             name: "name",
             agentId: "agent_id",
             createdAtUnix: 1,

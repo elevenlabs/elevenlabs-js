@@ -6,11 +6,16 @@ import * as ElevenLabs from "../index";
  * Configuration for the tool
  */
 export type ToolRequestModelToolConfig =
+    | ElevenLabs.ToolRequestModelToolConfig.ApiIntegrationWebhook
     | ElevenLabs.ToolRequestModelToolConfig.Client
     | ElevenLabs.ToolRequestModelToolConfig.System
     | ElevenLabs.ToolRequestModelToolConfig.Webhook;
 
 export namespace ToolRequestModelToolConfig {
+    export interface ApiIntegrationWebhook extends ElevenLabs.ApiIntegrationWebhookToolConfigInput {
+        type: "api_integration_webhook";
+    }
+
     export interface Client extends ElevenLabs.ClientToolConfigInput {
         type: "client";
     }

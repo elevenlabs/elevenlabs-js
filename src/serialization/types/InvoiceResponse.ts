@@ -10,6 +10,8 @@ export const InvoiceResponse: core.serialization.ObjectSchema<
     ElevenLabs.InvoiceResponse
 > = core.serialization.object({
     amountDueCents: core.serialization.property("amount_due_cents", core.serialization.number()),
+    subtotalCents: core.serialization.property("subtotal_cents", core.serialization.number().optional()),
+    taxCents: core.serialization.property("tax_cents", core.serialization.number().optional()),
     discountPercentOff: core.serialization.property("discount_percent_off", core.serialization.number().optional()),
     discountAmountOff: core.serialization.property("discount_amount_off", core.serialization.number().optional()),
     nextPaymentAttemptUnix: core.serialization.property("next_payment_attempt_unix", core.serialization.number()),
@@ -22,6 +24,8 @@ export const InvoiceResponse: core.serialization.ObjectSchema<
 export declare namespace InvoiceResponse {
     export interface Raw {
         amount_due_cents: number;
+        subtotal_cents?: number | null;
+        tax_cents?: number | null;
         discount_percent_off?: number | null;
         discount_amount_off?: number | null;
         next_payment_attempt_unix: number;

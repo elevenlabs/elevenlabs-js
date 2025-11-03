@@ -53,10 +53,7 @@ export class BatchCalls {
      *     await client.conversationalAi.batchCalls.create({
      *         callName: "call_name",
      *         agentId: "agent_id",
-     *         agentPhoneNumberId: "agent_phone_number_id",
-     *         recipients: [{
-     *                 phoneNumber: "phone_number"
-     *             }]
+     *         recipients: [{}]
      *     })
      */
     public create(

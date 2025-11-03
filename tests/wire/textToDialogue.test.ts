@@ -32,6 +32,7 @@ describe("TextToDialogue", () => {
                     end_time_seconds: 0.5,
                     character_start_index: 0,
                     character_end_index: 5,
+                    dialogue_input_index: 0,
                 },
                 {
                     voice_id: "VEDscrYI8uIMttlO2Ztu",
@@ -39,6 +40,7 @@ describe("TextToDialogue", () => {
                     end_time_seconds: 0.7,
                     character_start_index: 5,
                     character_end_index: 7,
+                    dialogue_input_index: 1,
                 },
             ],
         };
@@ -83,6 +85,7 @@ describe("TextToDialogue", () => {
                     endTimeSeconds: 0.5,
                     characterStartIndex: 0,
                     characterEndIndex: 5,
+                    dialogueInputIndex: 0,
                 },
                 {
                     voiceId: "VEDscrYI8uIMttlO2Ztu",
@@ -90,6 +93,7 @@ describe("TextToDialogue", () => {
                     endTimeSeconds: 0.7,
                     characterStartIndex: 5,
                     characterEndIndex: 7,
+                    dialogueInputIndex: 1,
                 },
             ],
         });

@@ -9,6 +9,7 @@ import * as errors from "../../../../../../errors/index";
 import { Tools } from "../resources/tools/client/Client";
 import { ApprovalPolicy } from "../resources/approvalPolicy/client/Client";
 import { ToolApprovals } from "../resources/toolApprovals/client/Client";
+import { ToolConfigs } from "../resources/toolConfigs/client/Client";
 
 export declare namespace McpServers {
     export interface Options {
@@ -42,6 +43,7 @@ export class McpServers {
     protected _tools: Tools | undefined;
     protected _approvalPolicy: ApprovalPolicy | undefined;
     protected _toolApprovals: ToolApprovals | undefined;
+    protected _toolConfigs: ToolConfigs | undefined;
 
     constructor(_options: McpServers.Options = {}) {
         this._options = _options;
@@ -57,6 +59,10 @@ export class McpServers {
 
     public get toolApprovals(): ToolApprovals {
         return (this._toolApprovals ??= new ToolApprovals(this._options));
+    }
+
+    public get toolConfigs(): ToolConfigs {
+        return (this._toolConfigs ??= new ToolConfigs(this._options));
     }
 
     /**

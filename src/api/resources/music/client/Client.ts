@@ -315,4 +315,109 @@ export class Music {
                 });
         }
     }
+
+    /**
+     * Separate a music file into individual stems
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     */
+    public separateStems(
+        request: ElevenLabs.BodyStemSeparationV1MusicStemSeparationPost,
+        requestOptions?: Music.RequestOptions,
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
+        return core.HttpResponsePromise.fromPromise(this.__separateStems(request, requestOptions));
+    }
+
+    private async __separateStems(
+        request: ElevenLabs.BodyStemSeparationV1MusicStemSeparationPost,
+        requestOptions?: Music.RequestOptions,
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (request.outputFormat != null) {
+            _queryParams["output_format"] = serializers.MusicSeparateStemsRequestOutputFormat.jsonOrThrow(
+                request.outputFormat,
+                { unrecognizedObjectKeys: "strip" },
+            );
+        }
+
+        const _request = await core.newFormData();
+        await _request.appendFile("file", request.file);
+        if (request.stemVariationId != null) {
+            _request.append(
+                "stem_variation_id",
+                serializers.MusicSeparateStemsRequestStemVariationId.jsonOrThrow(request.stemVariationId, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
+        }
+
+        const _maybeEncodedRequest = await _request.getRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                ..._maybeEncodedRequest.headers,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher<ReadableStream<Uint8Array>>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/music/stem-separation",
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
+            responseType: "streaming",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ElevenLabsError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ElevenLabsTimeoutError(
+                    "Timeout exceeded when calling POST /v1/music/stem-separation.",
+                );
+            case "unknown":
+                throw new errors.ElevenLabsError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
 }

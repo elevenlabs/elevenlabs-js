@@ -18,8 +18,14 @@ export interface McpServerConfigOutput {
     description?: string;
     /** If true, all tools from this MCP server will require pre-tool execution speech */
     forcePreToolSpeech?: boolean;
-    /** If true, the user will not be able to interrupt the agent while tools from this MCP server are running */
+    /** If true, the user will not be able to interrupt the agent while any tool from this MCP server is running. */
     disableInterruptions?: boolean;
-    /** Determines when and how tools from this MCP server execute: 'immediate' executes the tool right away when requested by the LLM, 'post_tool_speech' waits for the agent to finish speaking before executing, 'async' runs the tool in the background without blocking - best for long-running operations. */
+    /** Predefined tool call sound type to play during tool execution for all tools from this MCP server */
+    toolCallSound?: ElevenLabs.ToolCallSoundType;
+    /** Determines when the tool call sound should play for all tools from this MCP server */
+    toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
+    /** Determines when and how all tools from this MCP server execute: 'immediate' executes the tool right away when requested by the LLM, 'post_tool_speech' waits for the agent to finish speaking before executing, 'async' runs the tool in the background without blocking - best for long-running operations. */
     executionMode?: ElevenLabs.ToolExecutionMode;
+    /** List of per-tool configuration overrides that override the server-level defaults for specific tools */
+    toolConfigOverrides?: ElevenLabs.McpToolConfigOverride[];
 }

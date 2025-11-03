@@ -4,6 +4,8 @@ import * as serializers from "../../../../../../index";
 import * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import { McpApprovalPolicy } from "../../../../../../types/McpApprovalPolicy";
+import { ToolCallSoundType } from "../../../../../../types/ToolCallSoundType";
+import { ToolCallSoundBehavior } from "../../../../../../types/ToolCallSoundBehavior";
 import { ToolExecutionMode } from "../../../../../../types/ToolExecutionMode";
 import { McpServerConfigUpdateRequestModelRequestHeadersValue } from "../../types/McpServerConfigUpdateRequestModelRequestHeadersValue";
 
@@ -14,6 +16,8 @@ export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
     approvalPolicy: core.serialization.property("approval_policy", McpApprovalPolicy.optional()),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
+    toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
     requestHeaders: core.serialization.property(
         "request_headers",
@@ -28,6 +32,8 @@ export declare namespace McpServerConfigUpdateRequestModel {
         approval_policy?: McpApprovalPolicy.Raw | null;
         force_pre_tool_speech?: boolean | null;
         disable_interruptions?: boolean | null;
+        tool_call_sound?: ToolCallSoundType.Raw | null;
+        tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
         request_headers?: Record<
             string,
