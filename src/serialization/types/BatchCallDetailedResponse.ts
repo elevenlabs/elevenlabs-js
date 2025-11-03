@@ -12,8 +12,12 @@ export const BatchCallDetailedResponse: core.serialization.ObjectSchema<
     ElevenLabs.BatchCallDetailedResponse
 > = core.serialization.object({
     id: core.serialization.string(),
-    phoneNumberId: core.serialization.property("phone_number_id", core.serialization.string()),
+    phoneNumberId: core.serialization.property("phone_number_id", core.serialization.string().optional()),
     phoneProvider: core.serialization.property("phone_provider", TelephonyProvider.optional()),
+    whatsappBusinessAccountId: core.serialization.property(
+        "whatsapp_business_account_id",
+        core.serialization.string().optional(),
+    ),
     name: core.serialization.string(),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number()),
@@ -29,8 +33,9 @@ export const BatchCallDetailedResponse: core.serialization.ObjectSchema<
 export declare namespace BatchCallDetailedResponse {
     export interface Raw {
         id: string;
-        phone_number_id: string;
+        phone_number_id?: string | null;
         phone_provider?: TelephonyProvider.Raw | null;
+        whatsapp_business_account_id?: string | null;
         name: string;
         agent_id: string;
         created_at_unix: number;

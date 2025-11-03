@@ -12,7 +12,7 @@ describe("McpServers", () => {
             mcp_servers: [
                 {
                     id: "id",
-                    config: { url: "url", name: "name" },
+                    config: { url: "url", name: "name", tool_call_sound: undefined },
                     access_info: {
                         is_creator: true,
                         creator_name: "John Doe",
@@ -42,6 +42,7 @@ describe("McpServers", () => {
                     config: {
                         url: "url",
                         name: "name",
+                        toolCallSound: undefined,
                     },
                     accessInfo: {
                         isCreator: true,
@@ -84,7 +85,20 @@ describe("McpServers", () => {
                 description: "description",
                 force_pre_tool_speech: true,
                 disable_interruptions: true,
+                tool_call_sound: "typing",
+                tool_call_sound_behavior: "auto",
                 execution_mode: "immediate",
+                tool_config_overrides: [
+                    {
+                        tool_name: "tool_name",
+                        force_pre_tool_speech: undefined,
+                        disable_interruptions: undefined,
+                        tool_call_sound: undefined,
+                        tool_call_sound_behavior: undefined,
+                        execution_mode: undefined,
+                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                    },
+                ],
             },
             access_info: {
                 is_creator: true,
@@ -134,7 +148,26 @@ describe("McpServers", () => {
                 description: "description",
                 forcePreToolSpeech: true,
                 disableInterruptions: true,
+                toolCallSound: "typing",
+                toolCallSoundBehavior: "auto",
                 executionMode: "immediate",
+                toolConfigOverrides: [
+                    {
+                        toolName: "tool_name",
+                        forcePreToolSpeech: undefined,
+                        disableInterruptions: undefined,
+                        toolCallSound: undefined,
+                        toolCallSoundBehavior: undefined,
+                        executionMode: undefined,
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamicVariable: "user_name",
+                                valuePath: "user.name",
+                            },
+                        ],
+                    },
+                ],
             },
             accessInfo: {
                 isCreator: true,
@@ -175,7 +208,20 @@ describe("McpServers", () => {
                 description: "description",
                 force_pre_tool_speech: true,
                 disable_interruptions: true,
+                tool_call_sound: "typing",
+                tool_call_sound_behavior: "auto",
                 execution_mode: "immediate",
+                tool_config_overrides: [
+                    {
+                        tool_name: "tool_name",
+                        force_pre_tool_speech: undefined,
+                        disable_interruptions: undefined,
+                        tool_call_sound: undefined,
+                        tool_call_sound_behavior: undefined,
+                        execution_mode: undefined,
+                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                    },
+                ],
             },
             access_info: {
                 is_creator: true,
@@ -219,7 +265,26 @@ describe("McpServers", () => {
                 description: "description",
                 forcePreToolSpeech: true,
                 disableInterruptions: true,
+                toolCallSound: "typing",
+                toolCallSoundBehavior: "auto",
                 executionMode: "immediate",
+                toolConfigOverrides: [
+                    {
+                        toolName: "tool_name",
+                        forcePreToolSpeech: undefined,
+                        disableInterruptions: undefined,
+                        toolCallSound: undefined,
+                        toolCallSoundBehavior: undefined,
+                        executionMode: undefined,
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamicVariable: "user_name",
+                                valuePath: "user.name",
+                            },
+                        ],
+                    },
+                ],
             },
             accessInfo: {
                 isCreator: true,
@@ -260,7 +325,20 @@ describe("McpServers", () => {
                 description: "description",
                 force_pre_tool_speech: true,
                 disable_interruptions: true,
+                tool_call_sound: "typing",
+                tool_call_sound_behavior: "auto",
                 execution_mode: "immediate",
+                tool_config_overrides: [
+                    {
+                        tool_name: "tool_name",
+                        force_pre_tool_speech: undefined,
+                        disable_interruptions: undefined,
+                        tool_call_sound: undefined,
+                        tool_call_sound_behavior: undefined,
+                        execution_mode: undefined,
+                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                    },
+                ],
             },
             access_info: {
                 is_creator: true,
@@ -305,7 +383,26 @@ describe("McpServers", () => {
                 description: "description",
                 forcePreToolSpeech: true,
                 disableInterruptions: true,
+                toolCallSound: "typing",
+                toolCallSoundBehavior: "auto",
                 executionMode: "immediate",
+                toolConfigOverrides: [
+                    {
+                        toolName: "tool_name",
+                        forcePreToolSpeech: undefined,
+                        disableInterruptions: undefined,
+                        toolCallSound: undefined,
+                        toolCallSoundBehavior: undefined,
+                        executionMode: undefined,
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamicVariable: "user_name",
+                                valuePath: "user.name",
+                            },
+                        ],
+                    },
+                ],
             },
             accessInfo: {
                 isCreator: true,

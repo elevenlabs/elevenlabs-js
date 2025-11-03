@@ -11,4 +11,6 @@ export interface VoiceSegment {
     characterStartIndex: number;
     /** End index in the characters array (exclusive) */
     characterEndIndex: number;
+    /** Line of the dialogue (script) that this segment is a part of. */
+    dialogueInputIndex: number;
 }

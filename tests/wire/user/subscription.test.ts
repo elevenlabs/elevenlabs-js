@@ -31,6 +31,8 @@ describe("Subscription", () => {
             character_refresh_period: "monthly_period",
             next_invoice: {
                 amount_due_cents: 1000,
+                subtotal_cents: 900,
+                tax_cents: 100,
                 discount_percent_off: 1.1,
                 discount_amount_off: 1.1,
                 next_payment_attempt_unix: 1738356858,
@@ -39,6 +41,8 @@ describe("Subscription", () => {
             open_invoices: [
                 {
                     amount_due_cents: 1000,
+                    subtotal_cents: 900,
+                    tax_cents: 100,
                     discount_percent_off: 1.1,
                     discount_amount_off: 1.1,
                     next_payment_attempt_unix: 1738356858,
@@ -46,7 +50,12 @@ describe("Subscription", () => {
                 },
             ],
             has_open_invoices: true,
-            pending_change: { kind: "change", next_tier: "free", timestamp_seconds: 1 },
+            pending_change: {
+                kind: "change",
+                next_tier: "free",
+                next_billing_period: "monthly_period",
+                timestamp_seconds: 1,
+            },
         };
         server
             .mockEndpoint()
@@ -80,6 +89,8 @@ describe("Subscription", () => {
             characterRefreshPeriod: "monthly_period",
             nextInvoice: {
                 amountDueCents: 1000,
+                subtotalCents: 900,
+                taxCents: 100,
                 discountPercentOff: 1.1,
                 discountAmountOff: 1.1,
                 nextPaymentAttemptUnix: 1738356858,
@@ -88,6 +99,8 @@ describe("Subscription", () => {
             openInvoices: [
                 {
                     amountDueCents: 1000,
+                    subtotalCents: 900,
+                    taxCents: 100,
                     discountPercentOff: 1.1,
                     discountAmountOff: 1.1,
                     nextPaymentAttemptUnix: 1738356858,
@@ -98,6 +111,7 @@ describe("Subscription", () => {
             pendingChange: {
                 kind: "change",
                 nextTier: "free",
+                nextBillingPeriod: "monthly_period",
                 timestampSeconds: 1,
             },
         });

@@ -5,6 +5,10 @@ import * as ElevenLabs from "../index";
 export interface InvoiceResponse {
     /** The amount due in cents. */
     amountDueCents: number;
+    /** The subtotal amount in cents before tax (exclusive of tax and discounts). */
+    subtotalCents?: number;
+    /** The tax amount in cents. */
+    taxCents?: number;
     /** The discount applied to the invoice. E.g. [20.0f] for 20% off. */
     discountPercentOff?: number;
     /** The discount applied to the invoice. E.g. [20.0f] for 20% off. */

@@ -22,5 +22,7 @@ export const WorkspaceResourceType = {
     ConvaiCrawlJobs: "convai_crawl_jobs",
     ConvaiCrawlTasks: "convai_crawl_tasks",
     ConvaiWhatsappAccounts: "convai_whatsapp_accounts",
+    Dashboard: "dashboard",
+    DashboardConfiguration: "dashboard_configuration",
 } as const;
 export type WorkspaceResourceType = (typeof WorkspaceResourceType)[keyof typeof WorkspaceResourceType];

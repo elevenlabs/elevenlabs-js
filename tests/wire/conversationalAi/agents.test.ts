@@ -210,8 +210,9 @@ describe("Agents", () => {
                         type: "string",
                         description: "My property",
                         enum: undefined,
-                        dynamic_variable: "Dynamic variable",
-                        constant_value: "Constant value",
+                        is_system_provided: false,
+                        dynamic_variable: "",
+                        constant_value: "",
                     },
                 },
                 overrides: {
@@ -440,7 +441,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -451,11 +452,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
-                                            parameters: undefined,
-                                            expects_response: false,
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            api_integration_id: "api_integration_id",
+                                            api_integration_connection_id: "api_integration_connection_id",
+                                            api_schema_overrides: undefined,
                                         },
                                     ],
                                 },
@@ -528,7 +530,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -539,11 +541,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
-                                            parameters: undefined,
-                                            expects_response: false,
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            api_integration_id: "api_integration_id",
+                                            api_integration_connection_id: "api_integration_connection_id",
+                                            api_schema_overrides: undefined,
                                         },
                                     ],
                                 },
@@ -617,7 +620,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -628,11 +631,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
-                                            parameters: undefined,
-                                            expects_response: false,
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            api_integration_id: "api_integration_id",
+                                            api_integration_connection_id: "api_integration_connection_id",
+                                            api_schema_overrides: undefined,
                                         },
                                     ],
                                 },
@@ -913,8 +917,9 @@ describe("Agents", () => {
                         type: "string",
                         description: "My property",
                         enum: undefined,
-                        dynamicVariable: "Dynamic variable",
-                        constantValue: "Constant value",
+                        isSystemProvided: false,
+                        dynamicVariable: "",
+                        constantValue: "",
                     },
                 },
                 overrides: {
@@ -1268,7 +1273,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -1279,13 +1284,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
-                                            parameters: undefined,
-                                            expectsResponse: false,
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            apiIntegrationId: "api_integration_id",
+                                            apiIntegrationConnectionId: "api_integration_connection_id",
+                                            apiSchemaOverrides: undefined,
                                         },
                                     ],
                                 },
@@ -1379,7 +1385,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -1390,13 +1396,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
-                                            parameters: undefined,
-                                            expectsResponse: false,
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            apiIntegrationId: "api_integration_id",
+                                            apiIntegrationConnectionId: "api_integration_connection_id",
+                                            apiSchemaOverrides: undefined,
                                         },
                                     ],
                                 },
@@ -1498,7 +1505,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -1509,13 +1516,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
-                                            parameters: undefined,
-                                            expectsResponse: false,
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            apiIntegrationId: "api_integration_id",
+                                            apiIntegrationConnectionId: "api_integration_connection_id",
+                                            apiSchemaOverrides: undefined,
                                         },
                                     ],
                                 },
@@ -1808,8 +1816,9 @@ describe("Agents", () => {
                         type: "string",
                         description: "My property",
                         enum: undefined,
-                        dynamic_variable: "Dynamic variable",
-                        constant_value: "Constant value",
+                        is_system_provided: false,
+                        dynamic_variable: "",
+                        constant_value: "",
                     },
                 },
                 overrides: {
@@ -2038,7 +2047,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -2049,11 +2058,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
-                                            parameters: undefined,
-                                            expects_response: false,
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            api_integration_id: "api_integration_id",
+                                            api_integration_connection_id: "api_integration_connection_id",
+                                            api_schema_overrides: undefined,
                                         },
                                     ],
                                 },
@@ -2126,7 +2136,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -2137,11 +2147,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
-                                            parameters: undefined,
-                                            expects_response: false,
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            api_integration_id: "api_integration_id",
+                                            api_integration_connection_id: "api_integration_connection_id",
+                                            api_schema_overrides: undefined,
                                         },
                                     ],
                                 },
@@ -2215,7 +2226,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -2226,11 +2237,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
-                                            parameters: undefined,
-                                            expects_response: false,
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            api_integration_id: "api_integration_id",
+                                            api_integration_connection_id: "api_integration_connection_id",
+                                            api_schema_overrides: undefined,
                                         },
                                     ],
                                 },
@@ -2512,8 +2524,9 @@ describe("Agents", () => {
                         type: "string",
                         description: "My property",
                         enum: undefined,
-                        dynamicVariable: "Dynamic variable",
-                        constantValue: "Constant value",
+                        isSystemProvided: false,
+                        dynamicVariable: "",
+                        constantValue: "",
                     },
                 },
                 overrides: {
@@ -2867,7 +2880,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -2878,13 +2891,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
-                                            parameters: undefined,
-                                            expectsResponse: false,
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            apiIntegrationId: "api_integration_id",
+                                            apiIntegrationConnectionId: "api_integration_connection_id",
+                                            apiSchemaOverrides: undefined,
                                         },
                                     ],
                                 },
@@ -2978,7 +2992,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -2989,13 +3003,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
-                                            parameters: undefined,
-                                            expectsResponse: false,
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            apiIntegrationId: "api_integration_id",
+                                            apiIntegrationConnectionId: "api_integration_connection_id",
+                                            apiSchemaOverrides: undefined,
                                         },
                                     ],
                                 },
@@ -3097,7 +3112,7 @@ describe("Agents", () => {
                                     timezone: undefined,
                                     tools: [
                                         {
-                                            type: "client",
+                                            type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
                                             assignments: [
@@ -3108,13 +3123,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
-                                            parameters: undefined,
-                                            expectsResponse: false,
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            apiIntegrationId: "api_integration_id",
+                                            apiIntegrationConnectionId: "api_integration_connection_id",
+                                            apiSchemaOverrides: undefined,
                                         },
                                     ],
                                 },
@@ -3352,8 +3368,9 @@ describe("Agents", () => {
                             type: "string",
                             description: "My property",
                             enum: undefined,
-                            dynamic_variable: "Dynamic variable",
-                            constant_value: "Constant value",
+                            is_system_provided: false,
+                            dynamic_variable: "",
+                            constant_value: "",
                         },
                         rationale: "rationale",
                     },
@@ -3462,8 +3479,9 @@ describe("Agents", () => {
                             type: "string",
                             description: "My property",
                             enum: undefined,
-                            dynamicVariable: "Dynamic variable",
-                            constantValue: "Constant value",
+                            isSystemProvided: false,
+                            dynamicVariable: "",
+                            constantValue: "",
                         },
                         rationale: "rationale",
                     },

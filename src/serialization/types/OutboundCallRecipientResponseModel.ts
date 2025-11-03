@@ -11,7 +11,8 @@ export const OutboundCallRecipientResponseModel: core.serialization.ObjectSchema
     ElevenLabs.OutboundCallRecipientResponseModel
 > = core.serialization.object({
     id: core.serialization.string(),
-    phoneNumber: core.serialization.property("phone_number", core.serialization.string()),
+    phoneNumber: core.serialization.property("phone_number", core.serialization.string().optional()),
+    whatsappUserId: core.serialization.property("whatsapp_user_id", core.serialization.string().optional()),
     status: BatchCallRecipientStatus,
     createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number()),
     updatedAtUnix: core.serialization.property("updated_at_unix", core.serialization.number()),
@@ -25,7 +26,8 @@ export const OutboundCallRecipientResponseModel: core.serialization.ObjectSchema
 export declare namespace OutboundCallRecipientResponseModel {
     export interface Raw {
         id: string;
-        phone_number: string;
+        phone_number?: string | null;
+        whatsapp_user_id?: string | null;
         status: BatchCallRecipientStatus.Raw;
         created_at_unix: number;
         updated_at_unix: number;

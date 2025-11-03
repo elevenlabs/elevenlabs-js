@@ -4,7 +4,8 @@ import * as ElevenLabs from "../index";
 
 export interface OutboundCallRecipientResponseModel {
     id: string;
-    phoneNumber: string;
+    phoneNumber?: string;
+    whatsappUserId?: string;
     status: ElevenLabs.BatchCallRecipientStatus;
     createdAtUnix: number;
     updatedAtUnix: number;

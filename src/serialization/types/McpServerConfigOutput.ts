@@ -9,7 +9,10 @@ import { McpServerTransport } from "./McpServerTransport";
 import { McpServerConfigOutputUrl } from "./McpServerConfigOutputUrl";
 import { McpServerConfigOutputSecretToken } from "./McpServerConfigOutputSecretToken";
 import { McpServerConfigOutputRequestHeadersValue } from "./McpServerConfigOutputRequestHeadersValue";
+import { ToolCallSoundType } from "./ToolCallSoundType";
+import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolExecutionMode } from "./ToolExecutionMode";
+import { McpToolConfigOverride } from "./McpToolConfigOverride";
 
 export const McpServerConfigOutput: core.serialization.ObjectSchema<
     serializers.McpServerConfigOutput.Raw,
@@ -31,7 +34,13 @@ export const McpServerConfigOutput: core.serialization.ObjectSchema<
     description: core.serialization.string().optional(),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
+    toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
+    toolConfigOverrides: core.serialization.property(
+        "tool_config_overrides",
+        core.serialization.list(McpToolConfigOverride).optional(),
+    ),
 });
 
 export declare namespace McpServerConfigOutput {
@@ -46,6 +55,9 @@ export declare namespace McpServerConfigOutput {
         description?: string | null;
         force_pre_tool_speech?: boolean | null;
         disable_interruptions?: boolean | null;
+        tool_call_sound?: ToolCallSoundType.Raw | null;
+        tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
+        tool_config_overrides?: McpToolConfigOverride.Raw[] | null;
     }
 }

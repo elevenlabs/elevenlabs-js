@@ -4,6 +4,7 @@ import * as ElevenLabs from "../index";
 
 export interface OutboundCallRecipient {
     id?: string;
-    phoneNumber: string;
+    phoneNumber?: string;
+    whatsappUserId?: string;
     conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestInput;
 }

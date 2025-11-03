@@ -3,6 +3,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { ApiIntegrationWebhookToolConfigInput } from "./ApiIntegrationWebhookToolConfigInput";
 import { ClientToolConfigInput } from "./ClientToolConfigInput";
 import { SystemToolConfigInput } from "./SystemToolConfigInput";
 import { WebhookToolConfigInput } from "./WebhookToolConfigInput";
@@ -12,6 +13,7 @@ export const ToolRequestModelToolConfig: core.serialization.Schema<
     ElevenLabs.ToolRequestModelToolConfig
 > = core.serialization
     .union("type", {
+        api_integration_webhook: ApiIntegrationWebhookToolConfigInput,
         client: ClientToolConfigInput,
         system: SystemToolConfigInput,
         webhook: WebhookToolConfigInput,
@@ -23,9 +25,14 @@ export const ToolRequestModelToolConfig: core.serialization.Schema<
 
 export declare namespace ToolRequestModelToolConfig {
     export type Raw =
+        | ToolRequestModelToolConfig.ApiIntegrationWebhook
         | ToolRequestModelToolConfig.Client
         | ToolRequestModelToolConfig.System
         | ToolRequestModelToolConfig.Webhook;
+
+    export interface ApiIntegrationWebhook extends ApiIntegrationWebhookToolConfigInput.Raw {
+        type: "api_integration_webhook";
+    }
 
     export interface Client extends ClientToolConfigInput.Raw {
         type: "client";

@@ -138,10 +138,11 @@ export class Tools {
      * @example
      *     await client.conversationalAi.tools.create({
      *         toolConfig: {
-     *             type: "client",
+     *             type: "api_integration_webhook",
      *             name: "name",
      *             description: "description",
-     *             expectsResponse: false
+     *             apiIntegrationId: "api_integration_id",
+     *             apiIntegrationConnectionId: "api_integration_connection_id"
      *         }
      *     })
      */
@@ -415,10 +416,11 @@ export class Tools {
      * @example
      *     await client.conversationalAi.tools.update("tool_id", {
      *         toolConfig: {
-     *             type: "client",
+     *             type: "api_integration_webhook",
      *             name: "name",
      *             description: "description",
-     *             expectsResponse: false
+     *             apiIntegrationId: "api_integration_id",
+     *             apiIntegrationConnectionId: "api_integration_connection_id"
      *         }
      *     })
      */

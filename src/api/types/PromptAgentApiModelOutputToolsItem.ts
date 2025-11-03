@@ -6,12 +6,17 @@ import * as ElevenLabs from "../index";
  * The type of tool
  */
 export type PromptAgentApiModelOutputToolsItem =
+    | ElevenLabs.PromptAgentApiModelOutputToolsItem.ApiIntegrationWebhook
     | ElevenLabs.PromptAgentApiModelOutputToolsItem.Client
     | ElevenLabs.PromptAgentApiModelOutputToolsItem.Mcp
     | ElevenLabs.PromptAgentApiModelOutputToolsItem.System
     | ElevenLabs.PromptAgentApiModelOutputToolsItem.Webhook;
 
 export namespace PromptAgentApiModelOutputToolsItem {
+    export interface ApiIntegrationWebhook extends ElevenLabs.ApiIntegrationWebhookToolConfigOutput {
+        type: "api_integration_webhook";
+    }
+
     export interface Client extends ElevenLabs.ClientToolConfigOutput {
         type: "client";
     }

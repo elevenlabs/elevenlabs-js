@@ -3,6 +3,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { ApiIntegrationWebhookToolConfigInput } from "./ApiIntegrationWebhookToolConfigInput";
 import { ClientToolConfigInput } from "./ClientToolConfigInput";
 import { SystemToolConfigInput } from "./SystemToolConfigInput";
 import { WebhookToolConfigInput } from "./WebhookToolConfigInput";
@@ -12,6 +13,7 @@ export const PromptAgentApiModelInputToolsItem: core.serialization.Schema<
     ElevenLabs.PromptAgentApiModelInputToolsItem
 > = core.serialization
     .union("type", {
+        api_integration_webhook: ApiIntegrationWebhookToolConfigInput,
         client: ClientToolConfigInput,
         mcp: core.serialization.object({
             value: core.serialization.unknown(),
@@ -26,10 +28,15 @@ export const PromptAgentApiModelInputToolsItem: core.serialization.Schema<
 
 export declare namespace PromptAgentApiModelInputToolsItem {
     export type Raw =
+        | PromptAgentApiModelInputToolsItem.ApiIntegrationWebhook
         | PromptAgentApiModelInputToolsItem.Client
         | PromptAgentApiModelInputToolsItem.Mcp
         | PromptAgentApiModelInputToolsItem.System
         | PromptAgentApiModelInputToolsItem.Webhook;
+
+    export interface ApiIntegrationWebhook extends ApiIntegrationWebhookToolConfigInput.Raw {
+        type: "api_integration_webhook";
+    }
 
     export interface Client extends ClientToolConfigInput.Raw {
         type: "client";

@@ -4,14 +4,24 @@ import * as ElevenLabs from "../index";
 
 export type PhoneNumberTransferTransferDestination =
     | ElevenLabs.PhoneNumberTransferTransferDestination.Phone
-    | ElevenLabs.PhoneNumberTransferTransferDestination.SipUri;
+    | ElevenLabs.PhoneNumberTransferTransferDestination.PhoneDynamicVariable
+    | ElevenLabs.PhoneNumberTransferTransferDestination.SipUri
+    | ElevenLabs.PhoneNumberTransferTransferDestination.SipUriDynamicVariable;
 
 export namespace PhoneNumberTransferTransferDestination {
     export interface Phone extends ElevenLabs.PhoneNumberTransferDestination {
         type: "phone";
     }
 
+    export interface PhoneDynamicVariable extends ElevenLabs.PhoneNumberDynamicVariableTransferDestination {
+        type: "phone_dynamic_variable";
+    }
+
     export interface SipUri extends ElevenLabs.SipUriTransferDestination {
         type: "sip_uri";
+    }
+
+    export interface SipUriDynamicVariable extends ElevenLabs.SipUriDynamicVariableTransferDestination {
+        type: "sip_uri_dynamic_variable";
     }
 }

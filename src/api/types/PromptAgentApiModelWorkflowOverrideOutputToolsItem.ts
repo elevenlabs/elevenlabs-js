@@ -6,12 +6,17 @@ import * as ElevenLabs from "../index";
  * The type of tool
  */
 export type PromptAgentApiModelWorkflowOverrideOutputToolsItem =
+    | ElevenLabs.PromptAgentApiModelWorkflowOverrideOutputToolsItem.ApiIntegrationWebhook
     | ElevenLabs.PromptAgentApiModelWorkflowOverrideOutputToolsItem.Client
     | ElevenLabs.PromptAgentApiModelWorkflowOverrideOutputToolsItem.Mcp
     | ElevenLabs.PromptAgentApiModelWorkflowOverrideOutputToolsItem.System
     | ElevenLabs.PromptAgentApiModelWorkflowOverrideOutputToolsItem.Webhook;
 
 export namespace PromptAgentApiModelWorkflowOverrideOutputToolsItem {
+    export interface ApiIntegrationWebhook extends ElevenLabs.ApiIntegrationWebhookToolConfigOutput {
+        type: "api_integration_webhook";
+    }
+
     export interface Client extends ElevenLabs.ClientToolConfigOutput {
         type: "client";
     }
