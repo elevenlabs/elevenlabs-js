@@ -1,34 +1,64 @@
 import WebSocket from "ws";
 import type { ChildProcess } from "node:child_process";
 import { EventEmitter } from "node:events";
+import type { AudioFormat, CommitStrategy } from "./scribe";
 
-interface InputAudioChunk {
+export interface InputAudioChunk {
     message_type: "input_audio_chunk";
     audio_base_64: string;
     commit: boolean;
     sample_rate: number;
 }
 
-interface SessionStartedMessage {
+export type WordsItemType = "word" | "spacing";
+
+export interface WordsItem {
+    text?: string;
+    start?: number;
+    end?: number;
+    type?: WordsItemType;
+    speaker_id?: string;
+    logprob?: number;
+    characters?: string[];
+}
+
+export interface Config {
+    sample_rate?: number;
+    audio_format?: AudioFormat;
+    language_code?: string;
+    vad_commit_strategy?: CommitStrategy;
+    vad_silence_threshold_secs?: number;
+    vad_threshold?: number;
+    min_speech_duration_ms?: number;
+    min_silence_duration_ms?: number;
+    model_id?: string;
+    disable_logging?: boolean;
+}
+
+export interface SessionStartedMessage {
     message_type: "session_started";
+    session_id: string;
+    config: Config;
 }
 
-interface PartialTranscriptMessage {
+export interface PartialTranscriptMessage {
     message_type: "partial_transcript";
-    transcript: string;
+    text: string;
 }
 
-interface FinalTranscriptMessage {
+export interface FinalTranscriptMessage {
     message_type: "final_transcript";
-    transcript: string;
+    text: string;
 }
 
-interface FinalTranscriptWithTimestampsMessage {
+export interface FinalTranscriptWithTimestampsMessage {
     message_type: "final_transcript_with_timestamps";
-    transcript: string;
+    text: string;
+    language_code?: string;
+    words?: WordsItem[];
 }
 
-type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | FinalTranscriptMessage | FinalTranscriptWithTimestampsMessage;
+export type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | FinalTranscriptMessage | FinalTranscriptWithTimestampsMessage;
 
 /**
  * Events emitted by the RealtimeConnection.
