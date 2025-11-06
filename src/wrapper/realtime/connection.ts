@@ -46,19 +46,19 @@ export interface PartialTranscriptMessage {
     text: string;
 }
 
-export interface FinalTranscriptMessage {
-    message_type: "final_transcript";
+export interface CommittedTranscriptMessage {
+    message_type: "committed_transcript";
     text: string;
 }
 
-export interface FinalTranscriptWithTimestampsMessage {
-    message_type: "final_transcript_with_timestamps";
+export interface CommittedTranscriptWithTimestampsMessage {
+    message_type: "committed_transcript_with_timestamps";
     text: string;
     language_code?: string;
     words?: WordsItem[];
 }
 
-export type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | FinalTranscriptMessage | FinalTranscriptWithTimestampsMessage;
+export type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | CommittedTranscriptMessage | CommittedTranscriptWithTimestampsMessage;
 
 /**
  * Events emitted by the RealtimeConnection.
@@ -68,10 +68,10 @@ export enum RealtimeEvents {
     SESSION_STARTED = "session_started",
     /** Emitted when a partial (interim) transcript is available */
     PARTIAL_TRANSCRIPT = "partial_transcript",
-    /** Emitted when a final transcript is available */
-    FINAL_TRANSCRIPT = "final_transcript",
-    /** Emitted when a final transcript with timestamps is available */
-    FINAL_TRANSCRIPT_WITH_TIMESTAMPS = "final_transcript_with_timestamps",
+    /** Emitted when a committed transcript is available */
+    COMMITTED_TRANSCRIPT = "committed_transcript",
+    /** Emitted when a committed transcript with timestamps is available */
+    COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS = "committed_transcript_with_timestamps",
     /** Emitted when an error occurs */
     ERROR = "error",
     /** Emitted when the WebSocket connection is opened */
@@ -102,7 +102,7 @@ export enum RealtimeEvents {
  *     console.log("Partial:", data.transcript);
  * });
  *
- * connection.on(RealtimeEvents.FINAL_TRANSCRIPT, (data) => {
+ * connection.on(RealtimeEvents.COMMITTED_TRANSCRIPT, (data) => {
  *     console.log("Final:", data.transcript);
  *     connection.close();
  * });
@@ -151,11 +151,11 @@ export class RealtimeConnection {
                 case "partial_transcript":
                     this.eventEmitter.emit(RealtimeEvents.PARTIAL_TRANSCRIPT, data);
                     break;
-                case "final_transcript":
-                    this.eventEmitter.emit(RealtimeEvents.FINAL_TRANSCRIPT, data);
+                case "committed_transcript":
+                    this.eventEmitter.emit(RealtimeEvents.COMMITTED_TRANSCRIPT, data);
                     break;
-                case "final_transcript_with_timestamps":
-                    this.eventEmitter.emit(RealtimeEvents.FINAL_TRANSCRIPT_WITH_TIMESTAMPS, data);
+                case "committed_transcript_with_timestamps":
+                    this.eventEmitter.emit(RealtimeEvents.COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS, data);
                     break;
             }
         });
@@ -194,7 +194,7 @@ export class RealtimeConnection {
      *     console.log("Partial:", data.transcript);
      * });
      *
-     * connection.on(RealtimeEvents.FINAL_TRANSCRIPT, (data) => {
+     * connection.on(RealtimeEvents.COMMITTED_TRANSCRIPT, (data) => {
      *     console.log("Final:", data.transcript);
      * });
      * ```
@@ -262,8 +262,8 @@ export class RealtimeConnection {
     }
 
     /**
-     * Commits the transcription, signaling that all audio has been sent.
-     * This finalizes the transcription and triggers a FINAL_TRANSCRIPT event.
+     * Commits the segment, triggering a COMMITTED_TRANSCRIPT event and clearing the buffer.
+     * It's recommend to commit often when using CommitStrategy.MANUAL to keep latency low.
      *
      * @throws {Error} If the WebSocket connection is not open
      *
@@ -307,7 +307,7 @@ export class RealtimeConnection {
      *
      * @example
      * ```typescript
-     * connection.on(RealtimeEvents.FINAL_TRANSCRIPT, (data) => {
+     * connection.on(RealtimeEvents.COMMITTED_TRANSCRIPT, (data) => {
      *     console.log("Final:", data.transcript);
      *     connection.close();
      * });

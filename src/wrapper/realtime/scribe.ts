@@ -270,8 +270,8 @@ export class ScribeRealtime {
 
         ffmpegProcess.stdout?.on("end", () => {
             if (commitStrategy === CommitStrategy.MANUAL) {
-                // Manual strategy: commit to finalize transcription, then close
-                console.log("Stream ended, sending final commit");
+                // Manual strategy: commit to process segment transcription, then close
+                console.log("Stream ended, committing segment");
                 connection.commit();
             }
             // Close connection since no more audio will be sent

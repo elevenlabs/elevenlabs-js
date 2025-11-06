@@ -5,8 +5,8 @@ export {
     type InputAudioChunk,
     type WordsItem,
     type WordsItemType,
-    type FinalTranscriptMessage,
-    type FinalTranscriptWithTimestampsMessage,
+    type CommittedTranscriptMessage,
+    type CommittedTranscriptWithTimestampsMessage,
     type PartialTranscriptMessage,
     type SessionStartedMessage
 } from "./connection";
