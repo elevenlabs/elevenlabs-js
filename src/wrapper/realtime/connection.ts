@@ -89,7 +89,7 @@ export enum RealtimeEvents {
  * @example
  * ```typescript
  * const connection = await client.speechToText.realtime.connect({
- *     modelId: "scribe_realtime_v2",
+ *     modelId: "scribe_v2_realtime",
  *     audioFormat: AudioFormat.PCM_16000,
  *     sampleRate: 16000,
  * });
