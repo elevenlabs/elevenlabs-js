@@ -100,7 +100,7 @@ export class ScribeRealtime {
             match.toLowerCase() === "https://" ? "wss://" : "ws://"
         );
 
-        return `${wsUrl}/v1/speech-to-text/realtime-beta`;
+        return `${wsUrl}/v1/speech-to-text/realtime`;
     }
 
     private async checkFfmpegInstalled(): Promise<void> {
@@ -177,14 +177,14 @@ export class ScribeRealtime {
      * ```typescript
      * // Manual audio streaming
      * const connection = await client.speechToText.realtime.connect({
-     *     modelId: "scribe_realtime_v2",
+     *     modelId: "scribe_v2_realtime",
      *     audioFormat: AudioFormat.PCM_16000,
      *     sampleRate: 16000,
      * });
      *
      * // Automatic URL streaming (requires ffmpeg)
      * const connection = await client.speechToText.realtime.connect({
-     *     modelId: "scribe_realtime_v2",
+     *     modelId: "scribe_v2_realtime",
      *     url: "https://example.com/stream.mp3",
      * });
      * ```
@@ -270,8 +270,8 @@ export class ScribeRealtime {
 
         ffmpegProcess.stdout?.on("end", () => {
             if (commitStrategy === CommitStrategy.MANUAL) {
-                // Manual strategy: commit to finalize transcription, then close
-                console.log("Stream ended, sending final commit");
+                // Manual strategy: commit to process segment transcription, then close
+                console.log("Stream ended, committing segment");
                 connection.commit();
             }
             // Close connection since no more audio will be sent
