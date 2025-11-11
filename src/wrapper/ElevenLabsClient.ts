@@ -44,7 +44,7 @@ export class ElevenLabsClient extends FernClient {
         if (!this._customMusic) {
             this._customMusic = new Music(this._options);
         }
-        return this._customMusic;
+        return this._customMusic as any;
     }
 
     public get speechToText(): SpeechToText {
