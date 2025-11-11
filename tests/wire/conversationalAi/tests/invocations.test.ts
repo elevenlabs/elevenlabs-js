@@ -13,6 +13,8 @@ describe("Invocations", () => {
             results: [
                 {
                     id: "id",
+                    agent_id: "agent_id",
+                    branch_id: "branch_id",
                     created_at_unix_secs: 1,
                     test_run_count: 1,
                     passed_count: 1,
@@ -52,6 +54,8 @@ describe("Invocations", () => {
             results: [
                 {
                     id: "id",
+                    agentId: "agent_id",
+                    branchId: "branch_id",
                     createdAtUnixSecs: 1,
                     testRunCount: 1,
                     passedCount: 1,
@@ -78,6 +82,7 @@ describe("Invocations", () => {
         const rawResponseBody = {
             id: "id",
             agent_id: "agent_id",
+            branch_id: "branch_id",
             created_at: 1,
             test_runs: [
                 {
@@ -107,6 +112,7 @@ describe("Invocations", () => {
                     },
                     test_invocation_id: "test_invocation_id",
                     agent_id: "agent_id",
+                    branch_id: "branch_id",
                     workflow_node_id: "workflow_node_id",
                     status: "pending",
                     agent_responses: [
@@ -149,6 +155,7 @@ describe("Invocations", () => {
         expect(response).toEqual({
             id: "id",
             agentId: "agent_id",
+            branchId: "branch_id",
             createdAt: 1,
             testRuns: [
                 {
@@ -188,6 +195,7 @@ describe("Invocations", () => {
                     },
                     testInvocationId: "test_invocation_id",
                     agentId: "agent_id",
+                    branchId: "branch_id",
                     workflowNodeId: "workflow_node_id",
                     status: "pending",
                     agentResponses: [

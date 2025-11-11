@@ -142,7 +142,31 @@ export class Tools {
      *             name: "name",
      *             description: "description",
      *             apiIntegrationId: "api_integration_id",
-     *             apiIntegrationConnectionId: "api_integration_connection_id"
+     *             apiIntegrationConnectionId: "api_integration_connection_id",
+     *             baseApiSchema: {
+     *                 url: "https://example.com/agents/{agent_id}",
+     *                 method: "GET",
+     *                 pathParamsSchema: {
+     *                     "agent_id": {
+     *                         type: "string"
+     *                     }
+     *                 },
+     *                 queryParamsSchema: {
+     *                     properties: {
+     *                         "key": {
+     *                             type: "string",
+     *                             description: "My property",
+     *                             isSystemProvided: false,
+     *                             dynamicVariable: "",
+     *                             constantValue: ""
+     *                         }
+     *                     }
+     *                 },
+     *                 requestBodySchema: {},
+     *                 requestHeaders: {
+     *                     "Authorization": "Bearer {api_key}"
+     *                 }
+     *             }
      *         }
      *     })
      */
@@ -420,7 +444,31 @@ export class Tools {
      *             name: "name",
      *             description: "description",
      *             apiIntegrationId: "api_integration_id",
-     *             apiIntegrationConnectionId: "api_integration_connection_id"
+     *             apiIntegrationConnectionId: "api_integration_connection_id",
+     *             baseApiSchema: {
+     *                 url: "https://example.com/agents/{agent_id}",
+     *                 method: "GET",
+     *                 pathParamsSchema: {
+     *                     "agent_id": {
+     *                         type: "string"
+     *                     }
+     *                 },
+     *                 queryParamsSchema: {
+     *                     properties: {
+     *                         "key": {
+     *                             type: "string",
+     *                             description: "My property",
+     *                             isSystemProvided: false,
+     *                             dynamicVariable: "",
+     *                             constantValue: ""
+     *                         }
+     *                     }
+     *                 },
+     *                 requestBodySchema: {},
+     *                 requestHeaders: {
+     *                     "Authorization": "Bearer {api_key}"
+     *                 }
+     *             }
      *         }
      *     })
      */

@@ -15,6 +15,7 @@ export const ResubmitTestsRequestModel: core.serialization.Schema<
         AdhocAgentConfigOverrideForTestRequestModel.optional(),
     ),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
 });
 
 export declare namespace ResubmitTestsRequestModel {
@@ -22,5 +23,6 @@ export declare namespace ResubmitTestsRequestModel {
         test_run_ids: string[];
         agent_config_override?: AdhocAgentConfigOverrideForTestRequestModel.Raw | null;
         agent_id: string;
+        branch_id?: string | null;
     }
 }

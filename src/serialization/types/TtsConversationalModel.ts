@@ -13,6 +13,7 @@ export const TtsConversationalModel: core.serialization.Schema<
     "eleven_flash_v2",
     "eleven_flash_v2_5",
     "eleven_multilingual_v2",
+    "eleven_expressive",
 ]);
 
 export declare namespace TtsConversationalModel {
@@ -21,5 +22,6 @@ export declare namespace TtsConversationalModel {
         | "eleven_turbo_v2_5"
         | "eleven_flash_v2"
         | "eleven_flash_v2_5"
-        | "eleven_multilingual_v2";
+        | "eleven_multilingual_v2"
+        | "eleven_expressive";
 }

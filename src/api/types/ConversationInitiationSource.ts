@@ -15,6 +15,7 @@ export const ConversationInitiationSource = {
     Genesys: "genesys",
     SwiftSdk: "swift_sdk",
     Whatsapp: "whatsapp",
+    FlutterSdk: "flutter_sdk",
 } as const;
 export type ConversationInitiationSource =
     (typeof ConversationInitiationSource)[keyof typeof ConversationInitiationSource];

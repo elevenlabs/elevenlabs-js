@@ -7,4 +7,6 @@ export interface LanguagePresetOutput {
     overrides: ElevenLabs.ConversationConfigClientOverrideOutput;
     /** The translation of the first message */
     firstMessageTranslation?: ElevenLabs.LanguagePresetTranslation;
+    /** The translation of the soft timeout message */
+    softTimeoutTranslation?: ElevenLabs.LanguagePresetTranslation;
 }

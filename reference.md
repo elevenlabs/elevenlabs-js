@@ -4175,6 +4175,8 @@ await client.conversationalAi.conversations.list({
     callSuccessful: "success",
     callStartBeforeUnix: 1,
     callStartAfterUnix: 1,
+    callDurationMinSecs: 1,
+    callDurationMaxSecs: 1,
     userId: "user_id",
     pageSize: 1,
     summaryMode: "exclude",
@@ -6042,6 +6044,30 @@ await client.conversationalAi.tools.create({
         description: "description",
         apiIntegrationId: "api_integration_id",
         apiIntegrationConnectionId: "api_integration_connection_id",
+        baseApiSchema: {
+            url: "https://example.com/agents/{agent_id}",
+            method: "GET",
+            pathParamsSchema: {
+                agent_id: {
+                    type: "string",
+                },
+            },
+            queryParamsSchema: {
+                properties: {
+                    key: {
+                        type: "string",
+                        description: "My property",
+                        isSystemProvided: false,
+                        dynamicVariable: "",
+                        constantValue: "",
+                    },
+                },
+            },
+            requestBodySchema: {},
+            requestHeaders: {
+                Authorization: "Bearer {api_key}",
+            },
+        },
     },
 });
 ```
@@ -6239,6 +6265,30 @@ await client.conversationalAi.tools.update("tool_id", {
         description: "description",
         apiIntegrationId: "api_integration_id",
         apiIntegrationConnectionId: "api_integration_connection_id",
+        baseApiSchema: {
+            url: "https://example.com/agents/{agent_id}",
+            method: "GET",
+            pathParamsSchema: {
+                agent_id: {
+                    type: "string",
+                },
+            },
+            queryParamsSchema: {
+                properties: {
+                    key: {
+                        type: "string",
+                        description: "My property",
+                        isSystemProvided: false,
+                        dynamicVariable: "",
+                        constantValue: "",
+                    },
+                },
+            },
+            requestBodySchema: {},
+            requestHeaders: {
+                Authorization: "Bearer {api_key}",
+            },
+        },
     },
 });
 ```
@@ -7863,7 +7913,7 @@ await client.conversationalAi.conversations.feedback.create("21m00Tcm4TlvDq8ikWA
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost`
+**request:** `ElevenLabs.conversationalAi.conversations.ConversationFeedbackRequestModel`
 
 </dd>
 </dl>

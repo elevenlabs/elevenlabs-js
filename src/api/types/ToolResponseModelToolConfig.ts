@@ -8,22 +8,16 @@ import * as ElevenLabs from "../index";
 export type ToolResponseModelToolConfig =
     | ElevenLabs.ToolResponseModelToolConfig.ApiIntegrationWebhook
     | ElevenLabs.ToolResponseModelToolConfig.Client
-    | ElevenLabs.ToolResponseModelToolConfig.Mcp
     | ElevenLabs.ToolResponseModelToolConfig.System
     | ElevenLabs.ToolResponseModelToolConfig.Webhook;
 
 export namespace ToolResponseModelToolConfig {
-    export interface ApiIntegrationWebhook extends ElevenLabs.ApiIntegrationWebhookToolConfigOutput {
+    export interface ApiIntegrationWebhook extends ElevenLabs.ApiIntegrationWebhookToolConfigExternalOutput {
         type: "api_integration_webhook";
     }
 
     export interface Client extends ElevenLabs.ClientToolConfigOutput {
         type: "client";
-    }
-
-    export interface Mcp {
-        type: "mcp";
-        value?: unknown;
     }
 
     export interface System extends ElevenLabs.SystemToolConfigOutput {

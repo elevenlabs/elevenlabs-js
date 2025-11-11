@@ -3,7 +3,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import { ApiIntegrationWebhookToolConfigOutput } from "./ApiIntegrationWebhookToolConfigOutput";
+import { ApiIntegrationWebhookToolConfigExternalOutput } from "./ApiIntegrationWebhookToolConfigExternalOutput";
 import { ClientToolConfigOutput } from "./ClientToolConfigOutput";
 import { SystemToolConfigOutput } from "./SystemToolConfigOutput";
 import { WebhookToolConfigOutput } from "./WebhookToolConfigOutput";
@@ -13,11 +13,8 @@ export const ToolResponseModelToolConfig: core.serialization.Schema<
     ElevenLabs.ToolResponseModelToolConfig
 > = core.serialization
     .union("type", {
-        api_integration_webhook: ApiIntegrationWebhookToolConfigOutput,
+        api_integration_webhook: ApiIntegrationWebhookToolConfigExternalOutput,
         client: ClientToolConfigOutput,
-        mcp: core.serialization.object({
-            value: core.serialization.unknown(),
-        }),
         system: SystemToolConfigOutput,
         webhook: WebhookToolConfigOutput,
     })
@@ -30,21 +27,15 @@ export declare namespace ToolResponseModelToolConfig {
     export type Raw =
         | ToolResponseModelToolConfig.ApiIntegrationWebhook
         | ToolResponseModelToolConfig.Client
-        | ToolResponseModelToolConfig.Mcp
         | ToolResponseModelToolConfig.System
         | ToolResponseModelToolConfig.Webhook;
 
-    export interface ApiIntegrationWebhook extends ApiIntegrationWebhookToolConfigOutput.Raw {
+    export interface ApiIntegrationWebhook extends ApiIntegrationWebhookToolConfigExternalOutput.Raw {
         type: "api_integration_webhook";
     }
 
     export interface Client extends ClientToolConfigOutput.Raw {
         type: "client";
-    }
-
-    export interface Mcp {
-        type: "mcp";
-        value?: unknown;
     }
 
     export interface System extends SystemToolConfigOutput.Raw {

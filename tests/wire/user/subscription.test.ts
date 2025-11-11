@@ -35,6 +35,7 @@ describe("Subscription", () => {
                 tax_cents: 100,
                 discount_percent_off: 1.1,
                 discount_amount_off: 1.1,
+                discounts: [{ discount_percent_off: 20, discount_amount_off: undefined }],
                 next_payment_attempt_unix: 1738356858,
                 payment_intent_status: "processing",
             },
@@ -45,6 +46,7 @@ describe("Subscription", () => {
                     tax_cents: 100,
                     discount_percent_off: 1.1,
                     discount_amount_off: 1.1,
+                    discounts: [{ discount_percent_off: 20, discount_amount_off: undefined }],
                     next_payment_attempt_unix: 1738356858,
                     payment_intent_status: "processing",
                 },
@@ -93,6 +95,12 @@ describe("Subscription", () => {
                 taxCents: 100,
                 discountPercentOff: 1.1,
                 discountAmountOff: 1.1,
+                discounts: [
+                    {
+                        discountPercentOff: 20,
+                        discountAmountOff: undefined,
+                    },
+                ],
                 nextPaymentAttemptUnix: 1738356858,
                 paymentIntentStatus: "processing",
             },
@@ -103,6 +111,12 @@ describe("Subscription", () => {
                     taxCents: 100,
                     discountPercentOff: 1.1,
                     discountAmountOff: 1.1,
+                    discounts: [
+                        {
+                            discountPercentOff: 20,
+                            discountAmountOff: undefined,
+                        },
+                    ],
                     nextPaymentAttemptUnix: 1738356858,
                     paymentIntentStatus: "processing",
                 },

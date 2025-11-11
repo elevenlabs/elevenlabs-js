@@ -3,6 +3,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { TurnConfigOverride } from "./TurnConfigOverride";
 import { TtsConversationalConfigOverride } from "./TtsConversationalConfigOverride";
 import { ConversationConfigOverride } from "./ConversationConfigOverride";
 import { AgentConfigOverrideInput } from "./AgentConfigOverrideInput";
@@ -11,6 +12,7 @@ export const ConversationConfigClientOverrideInput: core.serialization.ObjectSch
     serializers.ConversationConfigClientOverrideInput.Raw,
     ElevenLabs.ConversationConfigClientOverrideInput
 > = core.serialization.object({
+    turn: TurnConfigOverride.optional(),
     tts: TtsConversationalConfigOverride.optional(),
     conversation: ConversationConfigOverride.optional(),
     agent: AgentConfigOverrideInput.optional(),
@@ -18,6 +20,7 @@ export const ConversationConfigClientOverrideInput: core.serialization.ObjectSch
 
 export declare namespace ConversationConfigClientOverrideInput {
     export interface Raw {
+        turn?: TurnConfigOverride.Raw | null;
         tts?: TtsConversationalConfigOverride.Raw | null;
         conversation?: ConversationConfigOverride.Raw | null;
         agent?: AgentConfigOverrideInput.Raw | null;

@@ -3,22 +3,27 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { SoftTimeoutConfig } from "./SoftTimeoutConfig";
 import { TurnEagerness } from "./TurnEagerness";
 
 export const TurnConfig: core.serialization.ObjectSchema<serializers.TurnConfig.Raw, ElevenLabs.TurnConfig> =
     core.serialization.object({
         turnTimeout: core.serialization.property("turn_timeout", core.serialization.number().optional()),
+        initialWaitTime: core.serialization.property("initial_wait_time", core.serialization.number().optional()),
         silenceEndCallTimeout: core.serialization.property(
             "silence_end_call_timeout",
             core.serialization.number().optional(),
         ),
+        softTimeoutConfig: core.serialization.property("soft_timeout_config", SoftTimeoutConfig.optional()),
         turnEagerness: core.serialization.property("turn_eagerness", TurnEagerness.optional()),
     });
 
 export declare namespace TurnConfig {
     export interface Raw {
         turn_timeout?: number | null;
+        initial_wait_time?: number | null;
         silence_end_call_timeout?: number | null;
+        soft_timeout_config?: SoftTimeoutConfig.Raw | null;
         turn_eagerness?: TurnEagerness.Raw | null;
     }
 }

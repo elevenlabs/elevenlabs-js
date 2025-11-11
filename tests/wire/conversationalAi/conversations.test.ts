@@ -56,6 +56,7 @@ describe("Conversations", () => {
             conversations: [
                 {
                     agent_id: "agent_id",
+                    branch_id: "branch_id",
                     agent_name: "agent_name",
                     conversation_id: "conversation_id",
                     start_time_unix_secs: 1,
@@ -85,6 +86,8 @@ describe("Conversations", () => {
             callSuccessful: "success",
             callStartBeforeUnix: 1,
             callStartAfterUnix: 1,
+            callDurationMinSecs: 1,
+            callDurationMaxSecs: 1,
             userId: "user_id",
             pageSize: 1,
             summaryMode: "exclude",
@@ -94,6 +97,7 @@ describe("Conversations", () => {
             conversations: [
                 {
                     agentId: "agent_id",
+                    branchId: "branch_id",
                     agentName: "agent_name",
                     conversationId: "conversation_id",
                     startTimeUnixSecs: 1,

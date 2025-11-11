@@ -17,6 +17,7 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
     conversationId: core.serialization.property("conversation_id", core.serialization.string()),
     status: GetConversationResponseModelStatus,
     userId: core.serialization.property("user_id", core.serialization.string().optional()),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     transcript: core.serialization.list(ConversationHistoryTranscriptCommonModelOutput),
     metadata: ConversationHistoryMetadataCommonModel,
     analysis: ConversationHistoryAnalysisCommonModel.optional(),
@@ -35,6 +36,7 @@ export declare namespace GetConversationResponseModel {
         conversation_id: string;
         status: GetConversationResponseModelStatus.Raw;
         user_id?: string | null;
+        branch_id?: string | null;
         transcript: ConversationHistoryTranscriptCommonModelOutput.Raw[];
         metadata: ConversationHistoryMetadataCommonModel.Raw;
         analysis?: ConversationHistoryAnalysisCommonModel.Raw | null;

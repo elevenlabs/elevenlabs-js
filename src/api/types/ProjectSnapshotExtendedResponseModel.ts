@@ -16,4 +16,6 @@ export interface ProjectSnapshotExtendedResponseModel {
     /** (Deprecated) */
     zipUpload?: Record<string, unknown>;
     characterAlignments: ElevenLabs.CharacterAlignmentModel[];
+    /** The total duration of the audio in seconds. */
+    audioDurationSecs: number;
 }

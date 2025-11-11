@@ -81,4 +81,6 @@ export interface ProjectExtendedResponse {
     applyTextNormalization: ElevenLabs.ProjectExtendedResponseModelApplyTextNormalization;
     /** Experimental features for the project. */
     experimental?: Record<string, unknown>;
+    /** List of uploaded assets e.g. videos, audios. */
+    assets: ElevenLabs.ProjectExtendedResponseModelAssetsItem[];
 }

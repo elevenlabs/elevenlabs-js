@@ -12,6 +12,7 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.ConversationSummaryResponseModel
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string()),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     agentName: core.serialization.property("agent_name", core.serialization.string().optional()),
     conversationId: core.serialization.property("conversation_id", core.serialization.string()),
     startTimeUnixSecs: core.serialization.property("start_time_unix_secs", core.serialization.number()),
@@ -27,6 +28,7 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
 export declare namespace ConversationSummaryResponseModel {
     export interface Raw {
         agent_id: string;
+        branch_id?: string | null;
         agent_name?: string | null;
         conversation_id: string;
         start_time_unix_secs: number;

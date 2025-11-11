@@ -5,8 +5,12 @@ import * as ElevenLabs from "../index";
 export interface TurnConfigWorkflowOverride {
     /** Maximum wait time for the user's reply before re-engaging the user */
     turnTimeout?: number;
+    /** How long the agent will wait for the user to start the conversation if the first message is empty. If not set, uses the regular turn_timeout. */
+    initialWaitTime?: number;
     /** Maximum wait time since the user last spoke before terminating the call */
     silenceEndCallTimeout?: number;
+    /** Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses. */
+    softTimeoutConfig?: ElevenLabs.SoftTimeoutConfigWorkflowOverride;
     /** Controls how eager the agent is to respond. Low = less eager (waits longer), Standard = default eagerness, High = more eager (responds sooner) */
     turnEagerness?: ElevenLabs.TurnEagerness;
 }

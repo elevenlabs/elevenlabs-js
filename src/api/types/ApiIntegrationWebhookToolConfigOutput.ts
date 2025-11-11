@@ -7,23 +7,23 @@ export interface ApiIntegrationWebhookToolConfigOutput {
     /** Description of when the tool should be used and what it does. */
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. Must be between 5 and 120 seconds (inclusive). */
-    responseTimeoutSecs?: number;
+    responseTimeoutSecs: number;
     /** If true, the user will not be able to interrupt the agent while this tool is running. */
-    disableInterruptions?: boolean;
+    disableInterruptions: boolean;
     /** If true, the agent will speak before the tool call. */
-    forcePreToolSpeech?: boolean;
+    forcePreToolSpeech: boolean;
     /** Configuration for extracting values from tool responses and assigning them to dynamic variables */
-    assignments?: ElevenLabs.DynamicVariableAssignment[];
+    assignments: ElevenLabs.DynamicVariableAssignment[];
     /** Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played. */
     toolCallSound?: ElevenLabs.ToolCallSoundType;
     /** Determines when the tool call sound should play. 'auto' only plays when there's pre-tool speech, 'always' plays for every tool call. */
-    toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
+    toolCallSoundBehavior: ElevenLabs.ToolCallSoundBehavior;
     /** Configuration for dynamic variables */
-    dynamicVariables?: ElevenLabs.DynamicVariablesConfig;
+    dynamicVariables: ElevenLabs.DynamicVariablesConfig;
     /** Determines when and how the tool executes: 'immediate' executes the tool right away when requested by the LLM, 'post_tool_speech' waits for the agent to finish speaking before executing, 'async' runs the tool in the background without blocking - best for long-running operations. */
-    executionMode?: ElevenLabs.ToolExecutionMode;
+    executionMode: ElevenLabs.ToolExecutionMode;
     /** The version of the API integration tool */
-    toolVersion?: string;
+    toolVersion: string;
     apiIntegrationId: string;
     apiIntegrationConnectionId: string;
     /** User overrides applied on top of the base api_schema */

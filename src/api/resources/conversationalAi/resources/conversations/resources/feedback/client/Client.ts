@@ -45,7 +45,7 @@ export class Feedback {
      * Send the feedback for the given conversation
      *
      * @param {string} conversationId - The id of the conversation you're taking the action on.
-     * @param {ElevenLabs.conversationalAi.conversations.BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost} request
+     * @param {ElevenLabs.conversationalAi.conversations.ConversationFeedbackRequestModel} request
      * @param {Feedback.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -57,7 +57,7 @@ export class Feedback {
      */
     public create(
         conversationId: string,
-        request: ElevenLabs.conversationalAi.conversations.BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost,
+        request: ElevenLabs.conversationalAi.conversations.ConversationFeedbackRequestModel = {},
         requestOptions?: Feedback.RequestOptions,
     ): core.HttpResponsePromise<unknown> {
         return core.HttpResponsePromise.fromPromise(this.__create(conversationId, request, requestOptions));
@@ -65,7 +65,7 @@ export class Feedback {
 
     private async __create(
         conversationId: string,
-        request: ElevenLabs.conversationalAi.conversations.BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost,
+        request: ElevenLabs.conversationalAi.conversations.ConversationFeedbackRequestModel = {},
         requestOptions?: Feedback.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -85,10 +85,9 @@ export class Feedback {
             contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
             requestType: "json",
-            body: serializers.conversationalAi.conversations.BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost.jsonOrThrow(
-                request,
-                { unrecognizedObjectKeys: "strip" },
-            ),
+            body: serializers.conversationalAi.conversations.ConversationFeedbackRequestModel.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 240000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

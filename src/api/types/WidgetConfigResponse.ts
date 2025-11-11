@@ -13,6 +13,8 @@ export interface WidgetConfigResponse {
     avatar?: ElevenLabs.WidgetConfigResponseModelAvatar;
     /** The feedback mode of the widget */
     feedbackMode?: ElevenLabs.WidgetFeedbackMode;
+    /** Configuration for feedback collected at the end of the conversation */
+    endFeedback?: ElevenLabs.WidgetEndFeedbackConfig;
     /** The background color of the widget */
     bgColor?: string;
     /** The text color of the widget */

@@ -16,12 +16,38 @@ describe("Tools", () => {
                         type: "api_integration_webhook",
                         name: "name",
                         description: "description",
+                        response_timeout_secs: 1,
+                        disable_interruptions: true,
+                        force_pre_tool_speech: true,
                         assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                         tool_call_sound: undefined,
+                        tool_call_sound_behavior: "auto",
                         dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
+                        execution_mode: "immediate",
+                        tool_version: "tool_version",
                         api_integration_id: "api_integration_id",
                         api_integration_connection_id: "api_integration_connection_id",
                         api_schema_overrides: undefined,
+                        base_api_schema: {
+                            url: "https://example.com/agents/{agent_id}",
+                            method: "GET",
+                            path_params_schema: { agent_id: { type: "string", enum: undefined } },
+                            query_params_schema: {
+                                properties: {
+                                    key: {
+                                        type: "string",
+                                        description: "My property",
+                                        enum: undefined,
+                                        is_system_provided: false,
+                                        dynamic_variable: "",
+                                        constant_value: "",
+                                    },
+                                },
+                            },
+                            request_body_schema: {},
+                            request_headers: { Authorization: "Bearer {api_key}" },
+                            auth_connection: undefined,
+                        },
                     },
                     access_info: {
                         is_creator: true,
@@ -44,6 +70,9 @@ describe("Tools", () => {
                         type: "api_integration_webhook",
                         name: "name",
                         description: "description",
+                        responseTimeoutSecs: 1,
+                        disableInterruptions: true,
+                        forcePreToolSpeech: true,
                         assignments: [
                             {
                                 source: "response",
@@ -52,14 +81,44 @@ describe("Tools", () => {
                             },
                         ],
                         toolCallSound: undefined,
+                        toolCallSoundBehavior: "auto",
                         dynamicVariables: {
                             dynamicVariablePlaceholders: {
                                 user_name: "John Doe",
                             },
                         },
+                        executionMode: "immediate",
+                        toolVersion: "tool_version",
                         apiIntegrationId: "api_integration_id",
                         apiIntegrationConnectionId: "api_integration_connection_id",
                         apiSchemaOverrides: undefined,
+                        baseApiSchema: {
+                            url: "https://example.com/agents/{agent_id}",
+                            method: "GET",
+                            pathParamsSchema: {
+                                agent_id: {
+                                    type: "string",
+                                    enum: undefined,
+                                },
+                            },
+                            queryParamsSchema: {
+                                properties: {
+                                    key: {
+                                        type: "string",
+                                        description: "My property",
+                                        enum: undefined,
+                                        isSystemProvided: false,
+                                        dynamicVariable: "",
+                                        constantValue: "",
+                                    },
+                                },
+                            },
+                            requestBodySchema: {},
+                            requestHeaders: {
+                                Authorization: "Bearer {api_key}",
+                            },
+                            authConnection: undefined,
+                        },
                     },
                     accessInfo: {
                         isCreator: true,
@@ -85,6 +144,24 @@ describe("Tools", () => {
                 description: "description",
                 api_integration_id: "api_integration_id",
                 api_integration_connection_id: "api_integration_connection_id",
+                base_api_schema: {
+                    url: "https://example.com/agents/{agent_id}",
+                    method: "GET",
+                    path_params_schema: { agent_id: { type: "string" } },
+                    query_params_schema: {
+                        properties: {
+                            key: {
+                                type: "string",
+                                description: "My property",
+                                is_system_provided: false,
+                                dynamic_variable: "",
+                                constant_value: "",
+                            },
+                        },
+                    },
+                    request_body_schema: {},
+                    request_headers: { Authorization: "Bearer {api_key}" },
+                },
             },
         };
         const rawResponseBody = {
@@ -109,6 +186,26 @@ describe("Tools", () => {
                     query_params_schema: { properties: undefined, required: undefined },
                     request_body_schema: { description: undefined, properties: undefined, required: undefined },
                     request_headers: {},
+                },
+                base_api_schema: {
+                    url: "https://example.com/agents/{agent_id}",
+                    method: "GET",
+                    path_params_schema: { agent_id: { type: "string", enum: undefined } },
+                    query_params_schema: {
+                        properties: {
+                            key: {
+                                type: "string",
+                                description: "My property",
+                                enum: undefined,
+                                is_system_provided: false,
+                                dynamic_variable: "",
+                                constant_value: "",
+                            },
+                        },
+                    },
+                    request_body_schema: {},
+                    request_headers: { Authorization: "Bearer {api_key}" },
+                    auth_connection: { auth_connection_id: "auth_connection_id" },
                 },
             },
             access_info: {
@@ -135,6 +232,30 @@ describe("Tools", () => {
                 description: "description",
                 apiIntegrationId: "api_integration_id",
                 apiIntegrationConnectionId: "api_integration_connection_id",
+                baseApiSchema: {
+                    url: "https://example.com/agents/{agent_id}",
+                    method: "GET",
+                    pathParamsSchema: {
+                        agent_id: {
+                            type: "string",
+                        },
+                    },
+                    queryParamsSchema: {
+                        properties: {
+                            key: {
+                                type: "string",
+                                description: "My property",
+                                isSystemProvided: false,
+                                dynamicVariable: "",
+                                constantValue: "",
+                            },
+                        },
+                    },
+                    requestBodySchema: {},
+                    requestHeaders: {
+                        Authorization: "Bearer {api_key}",
+                    },
+                },
             },
         });
         expect(response).toEqual({
@@ -177,6 +298,35 @@ describe("Tools", () => {
                     },
                     requestHeaders: {},
                 },
+                baseApiSchema: {
+                    url: "https://example.com/agents/{agent_id}",
+                    method: "GET",
+                    pathParamsSchema: {
+                        agent_id: {
+                            type: "string",
+                            enum: undefined,
+                        },
+                    },
+                    queryParamsSchema: {
+                        properties: {
+                            key: {
+                                type: "string",
+                                description: "My property",
+                                enum: undefined,
+                                isSystemProvided: false,
+                                dynamicVariable: "",
+                                constantValue: "",
+                            },
+                        },
+                    },
+                    requestBodySchema: {},
+                    requestHeaders: {
+                        Authorization: "Bearer {api_key}",
+                    },
+                    authConnection: {
+                        authConnectionId: "auth_connection_id",
+                    },
+                },
             },
             accessInfo: {
                 isCreator: true,
@@ -217,6 +367,26 @@ describe("Tools", () => {
                     query_params_schema: { properties: undefined, required: undefined },
                     request_body_schema: { description: undefined, properties: undefined, required: undefined },
                     request_headers: {},
+                },
+                base_api_schema: {
+                    url: "https://example.com/agents/{agent_id}",
+                    method: "GET",
+                    path_params_schema: { agent_id: { type: "string", enum: undefined } },
+                    query_params_schema: {
+                        properties: {
+                            key: {
+                                type: "string",
+                                description: "My property",
+                                enum: undefined,
+                                is_system_provided: false,
+                                dynamic_variable: "",
+                                constant_value: "",
+                            },
+                        },
+                    },
+                    request_body_schema: {},
+                    request_headers: { Authorization: "Bearer {api_key}" },
+                    auth_connection: { auth_connection_id: "auth_connection_id" },
                 },
             },
             access_info: {
@@ -276,6 +446,35 @@ describe("Tools", () => {
                     },
                     requestHeaders: {},
                 },
+                baseApiSchema: {
+                    url: "https://example.com/agents/{agent_id}",
+                    method: "GET",
+                    pathParamsSchema: {
+                        agent_id: {
+                            type: "string",
+                            enum: undefined,
+                        },
+                    },
+                    queryParamsSchema: {
+                        properties: {
+                            key: {
+                                type: "string",
+                                description: "My property",
+                                enum: undefined,
+                                isSystemProvided: false,
+                                dynamicVariable: "",
+                                constantValue: "",
+                            },
+                        },
+                    },
+                    requestBodySchema: {},
+                    requestHeaders: {
+                        Authorization: "Bearer {api_key}",
+                    },
+                    authConnection: {
+                        authConnectionId: "auth_connection_id",
+                    },
+                },
             },
             accessInfo: {
                 isCreator: true,
@@ -319,6 +518,24 @@ describe("Tools", () => {
                 description: "description",
                 api_integration_id: "api_integration_id",
                 api_integration_connection_id: "api_integration_connection_id",
+                base_api_schema: {
+                    url: "https://example.com/agents/{agent_id}",
+                    method: "GET",
+                    path_params_schema: { agent_id: { type: "string" } },
+                    query_params_schema: {
+                        properties: {
+                            key: {
+                                type: "string",
+                                description: "My property",
+                                is_system_provided: false,
+                                dynamic_variable: "",
+                                constant_value: "",
+                            },
+                        },
+                    },
+                    request_body_schema: {},
+                    request_headers: { Authorization: "Bearer {api_key}" },
+                },
             },
         };
         const rawResponseBody = {
@@ -343,6 +560,26 @@ describe("Tools", () => {
                     query_params_schema: { properties: undefined, required: undefined },
                     request_body_schema: { description: undefined, properties: undefined, required: undefined },
                     request_headers: {},
+                },
+                base_api_schema: {
+                    url: "https://example.com/agents/{agent_id}",
+                    method: "GET",
+                    path_params_schema: { agent_id: { type: "string", enum: undefined } },
+                    query_params_schema: {
+                        properties: {
+                            key: {
+                                type: "string",
+                                description: "My property",
+                                enum: undefined,
+                                is_system_provided: false,
+                                dynamic_variable: "",
+                                constant_value: "",
+                            },
+                        },
+                    },
+                    request_body_schema: {},
+                    request_headers: { Authorization: "Bearer {api_key}" },
+                    auth_connection: { auth_connection_id: "auth_connection_id" },
                 },
             },
             access_info: {
@@ -369,6 +606,30 @@ describe("Tools", () => {
                 description: "description",
                 apiIntegrationId: "api_integration_id",
                 apiIntegrationConnectionId: "api_integration_connection_id",
+                baseApiSchema: {
+                    url: "https://example.com/agents/{agent_id}",
+                    method: "GET",
+                    pathParamsSchema: {
+                        agent_id: {
+                            type: "string",
+                        },
+                    },
+                    queryParamsSchema: {
+                        properties: {
+                            key: {
+                                type: "string",
+                                description: "My property",
+                                isSystemProvided: false,
+                                dynamicVariable: "",
+                                constantValue: "",
+                            },
+                        },
+                    },
+                    requestBodySchema: {},
+                    requestHeaders: {
+                        Authorization: "Bearer {api_key}",
+                    },
+                },
             },
         });
         expect(response).toEqual({
@@ -410,6 +671,35 @@ describe("Tools", () => {
                         required: undefined,
                     },
                     requestHeaders: {},
+                },
+                baseApiSchema: {
+                    url: "https://example.com/agents/{agent_id}",
+                    method: "GET",
+                    pathParamsSchema: {
+                        agent_id: {
+                            type: "string",
+                            enum: undefined,
+                        },
+                    },
+                    queryParamsSchema: {
+                        properties: {
+                            key: {
+                                type: "string",
+                                description: "My property",
+                                enum: undefined,
+                                isSystemProvided: false,
+                                dynamicVariable: "",
+                                constantValue: "",
+                            },
+                        },
+                    },
+                    requestBodySchema: {},
+                    requestHeaders: {
+                        Authorization: "Bearer {api_key}",
+                    },
+                    authConnection: {
+                        authConnectionId: "auth_connection_id",
+                    },
                 },
             },
             accessInfo: {

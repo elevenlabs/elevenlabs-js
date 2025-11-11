@@ -3,7 +3,10 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationHistoryFeedbackCommonModel {
+    type?: ElevenLabs.ConversationFeedbackType;
     overallScore?: ElevenLabs.UserFeedbackScore;
     likes?: number;
     dislikes?: number;
+    rating?: number;
+    comment?: string;
 }

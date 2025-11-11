@@ -65,6 +65,7 @@ describe("Snapshots", () => {
                     character_end_times_seconds: [1.1],
                 },
             ],
+            audio_duration_secs: 123.45,
         };
         server
             .mockEndpoint()
@@ -93,6 +94,7 @@ describe("Snapshots", () => {
                     characterEndTimesSeconds: [1.1],
                 },
             ],
+            audioDurationSecs: 123.45,
         });
     });
 });

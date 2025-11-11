@@ -4,6 +4,7 @@ export const ConversationHistoryTranscriptOtherToolsResultCommonModelType = {
     Client: "client",
     Webhook: "webhook",
     Mcp: "mcp",
+    ApiIntegrationWebhook: "api_integration_webhook",
 } as const;
 export type ConversationHistoryTranscriptOtherToolsResultCommonModelType =
     (typeof ConversationHistoryTranscriptOtherToolsResultCommonModelType)[keyof typeof ConversationHistoryTranscriptOtherToolsResultCommonModelType];
