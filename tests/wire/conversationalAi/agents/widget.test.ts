@@ -16,6 +16,7 @@ describe("Widget", () => {
                 expandable: "never",
                 avatar: { type: "orb", color_1: "#2792dc", color_2: "#9ce6e6" },
                 feedback_mode: "none",
+                end_feedback: { type: "rating" },
                 bg_color: "bg_color",
                 text_color: "text_color",
                 btn_color: "btn_color",
@@ -124,6 +125,9 @@ describe("Widget", () => {
                     color2: "#9ce6e6",
                 },
                 feedbackMode: "none",
+                endFeedback: {
+                    type: "rating",
+                },
                 bgColor: "bg_color",
                 textColor: "text_color",
                 btnColor: "btn_color",

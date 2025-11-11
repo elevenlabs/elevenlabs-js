@@ -3,6 +3,7 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { SoftTimeoutConfigWorkflowOverride } from "./SoftTimeoutConfigWorkflowOverride";
 import { TurnEagerness } from "./TurnEagerness";
 
 export const TurnConfigWorkflowOverride: core.serialization.ObjectSchema<
@@ -10,17 +11,21 @@ export const TurnConfigWorkflowOverride: core.serialization.ObjectSchema<
     ElevenLabs.TurnConfigWorkflowOverride
 > = core.serialization.object({
     turnTimeout: core.serialization.property("turn_timeout", core.serialization.number().optional()),
+    initialWaitTime: core.serialization.property("initial_wait_time", core.serialization.number().optional()),
     silenceEndCallTimeout: core.serialization.property(
         "silence_end_call_timeout",
         core.serialization.number().optional(),
     ),
+    softTimeoutConfig: core.serialization.property("soft_timeout_config", SoftTimeoutConfigWorkflowOverride.optional()),
     turnEagerness: core.serialization.property("turn_eagerness", TurnEagerness.optional()),
 });
 
 export declare namespace TurnConfigWorkflowOverride {
     export interface Raw {
         turn_timeout?: number | null;
+        initial_wait_time?: number | null;
         silence_end_call_timeout?: number | null;
+        soft_timeout_config?: SoftTimeoutConfigWorkflowOverride.Raw | null;
         turn_eagerness?: TurnEagerness.Raw | null;
     }
 }

@@ -17,6 +17,7 @@ export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
     testInfo: core.serialization.property("test_info", UnitTestCommonModel.optional()),
     testInvocationId: core.serialization.property("test_invocation_id", core.serialization.string()),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     workflowNodeId: core.serialization.property("workflow_node_id", core.serialization.string().optional()),
     status: TestRunStatus,
     agentResponses: core.serialization.property(
@@ -36,6 +37,7 @@ export declare namespace UnitTestRunResponseModel {
         test_info?: UnitTestCommonModel.Raw | null;
         test_invocation_id: string;
         agent_id: string;
+        branch_id?: string | null;
         workflow_node_id?: string | null;
         status: TestRunStatus.Raw;
         agent_responses?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;

@@ -16,15 +16,15 @@ export const ApiIntegrationWebhookToolConfigOutput: core.serialization.ObjectSch
 > = core.serialization.object({
     name: core.serialization.string(),
     description: core.serialization.string(),
-    responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
-    disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
-    forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
-    assignments: core.serialization.list(DynamicVariableAssignment).optional(),
+    responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number()),
+    disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean()),
+    forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean()),
+    assignments: core.serialization.list(DynamicVariableAssignment),
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
-    toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
-    dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
-    executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
-    toolVersion: core.serialization.property("tool_version", core.serialization.string().optional()),
+    toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior),
+    dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig),
+    executionMode: core.serialization.property("execution_mode", ToolExecutionMode),
+    toolVersion: core.serialization.property("tool_version", core.serialization.string()),
     apiIntegrationId: core.serialization.property("api_integration_id", core.serialization.string()),
     apiIntegrationConnectionId: core.serialization.property(
         "api_integration_connection_id",
@@ -40,15 +40,15 @@ export declare namespace ApiIntegrationWebhookToolConfigOutput {
     export interface Raw {
         name: string;
         description: string;
-        response_timeout_secs?: number | null;
-        disable_interruptions?: boolean | null;
-        force_pre_tool_speech?: boolean | null;
-        assignments?: DynamicVariableAssignment.Raw[] | null;
+        response_timeout_secs: number;
+        disable_interruptions: boolean;
+        force_pre_tool_speech: boolean;
+        assignments: DynamicVariableAssignment.Raw[];
         tool_call_sound?: ToolCallSoundType.Raw | null;
-        tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
-        dynamic_variables?: DynamicVariablesConfig.Raw | null;
-        execution_mode?: ToolExecutionMode.Raw | null;
-        tool_version?: string | null;
+        tool_call_sound_behavior: ToolCallSoundBehavior.Raw;
+        dynamic_variables: DynamicVariablesConfig.Raw;
+        execution_mode: ToolExecutionMode.Raw;
+        tool_version: string;
         api_integration_id: string;
         api_integration_connection_id: string;
         api_schema_overrides?: ApiIntegrationWebhookOverridesOutput.Raw | null;

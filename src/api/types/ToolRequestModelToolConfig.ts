@@ -12,7 +12,7 @@ export type ToolRequestModelToolConfig =
     | ElevenLabs.ToolRequestModelToolConfig.Webhook;
 
 export namespace ToolRequestModelToolConfig {
-    export interface ApiIntegrationWebhook extends ElevenLabs.ApiIntegrationWebhookToolConfigInput {
+    export interface ApiIntegrationWebhook extends ElevenLabs.ApiIntegrationWebhookToolConfigExternalInput {
         type: "api_integration_webhook";
     }
 

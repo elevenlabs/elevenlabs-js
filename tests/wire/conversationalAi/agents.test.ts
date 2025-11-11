@@ -40,7 +40,13 @@ describe("Agents", () => {
                     user_input_audio_format: "pcm_16000",
                     keywords: ["hello", "world"],
                 },
-                turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
+                turn: {
+                    turn_timeout: 7,
+                    initial_wait_time: 1.1,
+                    silence_end_call_timeout: -1,
+                    soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah give me a second..." },
+                    turn_eagerness: "normal",
+                },
                 tts: {
                     model_id: "eleven_turbo_v2",
                     voice_id: "cjVigY5qzO86Huf0OWal",
@@ -70,6 +76,7 @@ describe("Agents", () => {
                 language_presets: {
                     key: {
                         overrides: {
+                            turn: { soft_timeout_config: { message: "Hhmmmm...yeah give me a second..." } },
                             tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             conversation: undefined,
                             agent: {
@@ -83,6 +90,7 @@ describe("Agents", () => {
                             },
                         },
                         first_message_translation: undefined,
+                        soft_timeout_translation: undefined,
                     },
                 },
                 agent: {
@@ -124,6 +132,7 @@ describe("Agents", () => {
                     expandable: "never",
                     avatar: { type: "orb", color_1: "#2792dc", color_2: "#9ce6e6" },
                     feedback_mode: "none",
+                    end_feedback: {},
                     bg_color: "bg_color",
                     text_color: "text_color",
                     btn_color: "btn_color",
@@ -392,7 +401,16 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
+                            turn: {
+                                turn_timeout: 7,
+                                initial_wait_time: undefined,
+                                silence_end_call_timeout: -1,
+                                soft_timeout_config: {
+                                    timeout_seconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
+                                turn_eagerness: "normal",
+                            },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -444,6 +462,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            response_timeout_secs: 1,
+                                            disable_interruptions: true,
+                                            force_pre_tool_speech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -452,9 +473,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
+                                            tool_call_sound_behavior: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            execution_mode: "immediate",
+                                            tool_version: "tool_version",
                                             api_integration_id: "api_integration_id",
                                             api_integration_connection_id: "api_integration_connection_id",
                                             api_schema_overrides: undefined,
@@ -481,7 +505,16 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
+                            turn: {
+                                turn_timeout: 7,
+                                initial_wait_time: undefined,
+                                silence_end_call_timeout: -1,
+                                soft_timeout_config: {
+                                    timeout_seconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
+                                turn_eagerness: "normal",
+                            },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -533,6 +566,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            response_timeout_secs: 1,
+                                            disable_interruptions: true,
+                                            force_pre_tool_speech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -541,9 +577,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
+                                            tool_call_sound_behavior: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            execution_mode: "immediate",
+                                            tool_version: "tool_version",
                                             api_integration_id: "api_integration_id",
                                             api_integration_connection_id: "api_integration_connection_id",
                                             api_schema_overrides: undefined,
@@ -571,7 +610,16 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
+                            turn: {
+                                turn_timeout: 7,
+                                initial_wait_time: undefined,
+                                silence_end_call_timeout: -1,
+                                soft_timeout_config: {
+                                    timeout_seconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
+                                turn_eagerness: "normal",
+                            },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -623,6 +671,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            response_timeout_secs: 1,
+                                            disable_interruptions: true,
+                                            force_pre_tool_speech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -631,9 +682,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
+                                            tool_call_sound_behavior: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            execution_mode: "immediate",
+                                            tool_version: "tool_version",
                                             api_integration_id: "api_integration_id",
                                             api_integration_connection_id: "api_integration_connection_id",
                                             api_schema_overrides: undefined,
@@ -689,6 +743,8 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            version_id: "version_id",
+            branch_id: "branch_id",
         };
         server
             .mockEndpoint()
@@ -711,7 +767,12 @@ describe("Agents", () => {
                 },
                 turn: {
                     turnTimeout: 7,
+                    initialWaitTime: 1.1,
                     silenceEndCallTimeout: -1,
+                    softTimeoutConfig: {
+                        timeoutSeconds: -1,
+                        message: "Hhmmmm...yeah give me a second...",
+                    },
                     turnEagerness: "normal",
                 },
                 tts: {
@@ -750,6 +811,11 @@ describe("Agents", () => {
                 languagePresets: {
                     key: {
                         overrides: {
+                            turn: {
+                                softTimeoutConfig: {
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
+                            },
                             tts: {
                                 voiceId: "cjVigY5qzO86Huf0OWal",
                                 stability: 0.5,
@@ -768,6 +834,7 @@ describe("Agents", () => {
                             },
                         },
                         firstMessageTranslation: undefined,
+                        softTimeoutTranslation: undefined,
                     },
                 },
                 agent: {
@@ -827,6 +894,7 @@ describe("Agents", () => {
                         color2: "#9ce6e6",
                     },
                     feedbackMode: "none",
+                    endFeedback: {},
                     bgColor: "bg_color",
                     textColor: "text_color",
                     btnColor: "btn_color",
@@ -1213,7 +1281,12 @@ describe("Agents", () => {
                             },
                             turn: {
                                 turnTimeout: 7,
+                                initialWaitTime: undefined,
                                 silenceEndCallTimeout: -1,
+                                softTimeoutConfig: {
+                                    timeoutSeconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
                                 turnEagerness: "normal",
                             },
                             tts: {
@@ -1276,6 +1349,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            responseTimeoutSecs: 1,
+                                            disableInterruptions: true,
+                                            forcePreToolSpeech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -1284,11 +1360,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
+                                            toolCallSoundBehavior: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            executionMode: "immediate",
+                                            toolVersion: "tool_version",
                                             apiIntegrationId: "api_integration_id",
                                             apiIntegrationConnectionId: "api_integration_connection_id",
                                             apiSchemaOverrides: undefined,
@@ -1325,7 +1404,12 @@ describe("Agents", () => {
                             },
                             turn: {
                                 turnTimeout: 7,
+                                initialWaitTime: undefined,
                                 silenceEndCallTimeout: -1,
+                                softTimeoutConfig: {
+                                    timeoutSeconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
                                 turnEagerness: "normal",
                             },
                             tts: {
@@ -1388,6 +1472,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            responseTimeoutSecs: 1,
+                                            disableInterruptions: true,
+                                            forcePreToolSpeech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -1396,11 +1483,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
+                                            toolCallSoundBehavior: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            executionMode: "immediate",
+                                            toolVersion: "tool_version",
                                             apiIntegrationId: "api_integration_id",
                                             apiIntegrationConnectionId: "api_integration_connection_id",
                                             apiSchemaOverrides: undefined,
@@ -1445,7 +1535,12 @@ describe("Agents", () => {
                             },
                             turn: {
                                 turnTimeout: 7,
+                                initialWaitTime: undefined,
                                 silenceEndCallTimeout: -1,
+                                softTimeoutConfig: {
+                                    timeoutSeconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
                                 turnEagerness: "normal",
                             },
                             tts: {
@@ -1508,6 +1603,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            responseTimeoutSecs: 1,
+                                            disableInterruptions: true,
+                                            forcePreToolSpeech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -1516,11 +1614,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
+                                            toolCallSoundBehavior: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            executionMode: "immediate",
+                                            toolVersion: "tool_version",
                                             apiIntegrationId: "api_integration_id",
                                             apiIntegrationConnectionId: "api_integration_connection_id",
                                             apiSchemaOverrides: undefined,
@@ -1614,6 +1715,8 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            versionId: "version_id",
+            branchId: "branch_id",
         });
     });
 
@@ -1646,7 +1749,13 @@ describe("Agents", () => {
                     user_input_audio_format: "pcm_16000",
                     keywords: ["hello", "world"],
                 },
-                turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
+                turn: {
+                    turn_timeout: 7,
+                    initial_wait_time: 1.1,
+                    silence_end_call_timeout: -1,
+                    soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah give me a second..." },
+                    turn_eagerness: "normal",
+                },
                 tts: {
                     model_id: "eleven_turbo_v2",
                     voice_id: "cjVigY5qzO86Huf0OWal",
@@ -1676,6 +1785,7 @@ describe("Agents", () => {
                 language_presets: {
                     key: {
                         overrides: {
+                            turn: { soft_timeout_config: { message: "Hhmmmm...yeah give me a second..." } },
                             tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             conversation: undefined,
                             agent: {
@@ -1689,6 +1799,7 @@ describe("Agents", () => {
                             },
                         },
                         first_message_translation: undefined,
+                        soft_timeout_translation: undefined,
                     },
                 },
                 agent: {
@@ -1730,6 +1841,7 @@ describe("Agents", () => {
                     expandable: "never",
                     avatar: { type: "orb", color_1: "#2792dc", color_2: "#9ce6e6" },
                     feedback_mode: "none",
+                    end_feedback: {},
                     bg_color: "bg_color",
                     text_color: "text_color",
                     btn_color: "btn_color",
@@ -1998,7 +2110,16 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
+                            turn: {
+                                turn_timeout: 7,
+                                initial_wait_time: undefined,
+                                silence_end_call_timeout: -1,
+                                soft_timeout_config: {
+                                    timeout_seconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
+                                turn_eagerness: "normal",
+                            },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -2050,6 +2171,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            response_timeout_secs: 1,
+                                            disable_interruptions: true,
+                                            force_pre_tool_speech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -2058,9 +2182,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
+                                            tool_call_sound_behavior: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            execution_mode: "immediate",
+                                            tool_version: "tool_version",
                                             api_integration_id: "api_integration_id",
                                             api_integration_connection_id: "api_integration_connection_id",
                                             api_schema_overrides: undefined,
@@ -2087,7 +2214,16 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
+                            turn: {
+                                turn_timeout: 7,
+                                initial_wait_time: undefined,
+                                silence_end_call_timeout: -1,
+                                soft_timeout_config: {
+                                    timeout_seconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
+                                turn_eagerness: "normal",
+                            },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -2139,6 +2275,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            response_timeout_secs: 1,
+                                            disable_interruptions: true,
+                                            force_pre_tool_speech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -2147,9 +2286,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
+                                            tool_call_sound_behavior: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            execution_mode: "immediate",
+                                            tool_version: "tool_version",
                                             api_integration_id: "api_integration_id",
                                             api_integration_connection_id: "api_integration_connection_id",
                                             api_schema_overrides: undefined,
@@ -2177,7 +2319,16 @@ describe("Agents", () => {
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
-                            turn: { turn_timeout: 7, silence_end_call_timeout: -1, turn_eagerness: "normal" },
+                            turn: {
+                                turn_timeout: 7,
+                                initial_wait_time: undefined,
+                                silence_end_call_timeout: -1,
+                                soft_timeout_config: {
+                                    timeout_seconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
+                                turn_eagerness: "normal",
+                            },
                             tts: {
                                 model_id: "eleven_turbo_v2",
                                 voice_id: "cjVigY5qzO86Huf0OWal",
@@ -2229,6 +2380,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            response_timeout_secs: 1,
+                                            disable_interruptions: true,
+                                            force_pre_tool_speech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -2237,9 +2391,12 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             tool_call_sound: undefined,
+                                            tool_call_sound_behavior: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
+                                            execution_mode: "immediate",
+                                            tool_version: "tool_version",
                                             api_integration_id: "api_integration_id",
                                             api_integration_connection_id: "api_integration_connection_id",
                                             api_schema_overrides: undefined,
@@ -2295,6 +2452,8 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            version_id: "version_id",
+            branch_id: "branch_id",
         };
         server
             .mockEndpoint()
@@ -2318,7 +2477,12 @@ describe("Agents", () => {
                 },
                 turn: {
                     turnTimeout: 7,
+                    initialWaitTime: 1.1,
                     silenceEndCallTimeout: -1,
+                    softTimeoutConfig: {
+                        timeoutSeconds: -1,
+                        message: "Hhmmmm...yeah give me a second...",
+                    },
                     turnEagerness: "normal",
                 },
                 tts: {
@@ -2357,6 +2521,11 @@ describe("Agents", () => {
                 languagePresets: {
                     key: {
                         overrides: {
+                            turn: {
+                                softTimeoutConfig: {
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
+                            },
                             tts: {
                                 voiceId: "cjVigY5qzO86Huf0OWal",
                                 stability: 0.5,
@@ -2375,6 +2544,7 @@ describe("Agents", () => {
                             },
                         },
                         firstMessageTranslation: undefined,
+                        softTimeoutTranslation: undefined,
                     },
                 },
                 agent: {
@@ -2434,6 +2604,7 @@ describe("Agents", () => {
                         color2: "#9ce6e6",
                     },
                     feedbackMode: "none",
+                    endFeedback: {},
                     bgColor: "bg_color",
                     textColor: "text_color",
                     btnColor: "btn_color",
@@ -2820,7 +2991,12 @@ describe("Agents", () => {
                             },
                             turn: {
                                 turnTimeout: 7,
+                                initialWaitTime: undefined,
                                 silenceEndCallTimeout: -1,
+                                softTimeoutConfig: {
+                                    timeoutSeconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
                                 turnEagerness: "normal",
                             },
                             tts: {
@@ -2883,6 +3059,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            responseTimeoutSecs: 1,
+                                            disableInterruptions: true,
+                                            forcePreToolSpeech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -2891,11 +3070,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
+                                            toolCallSoundBehavior: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            executionMode: "immediate",
+                                            toolVersion: "tool_version",
                                             apiIntegrationId: "api_integration_id",
                                             apiIntegrationConnectionId: "api_integration_connection_id",
                                             apiSchemaOverrides: undefined,
@@ -2932,7 +3114,12 @@ describe("Agents", () => {
                             },
                             turn: {
                                 turnTimeout: 7,
+                                initialWaitTime: undefined,
                                 silenceEndCallTimeout: -1,
+                                softTimeoutConfig: {
+                                    timeoutSeconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
                                 turnEagerness: "normal",
                             },
                             tts: {
@@ -2995,6 +3182,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            responseTimeoutSecs: 1,
+                                            disableInterruptions: true,
+                                            forcePreToolSpeech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -3003,11 +3193,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
+                                            toolCallSoundBehavior: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            executionMode: "immediate",
+                                            toolVersion: "tool_version",
                                             apiIntegrationId: "api_integration_id",
                                             apiIntegrationConnectionId: "api_integration_connection_id",
                                             apiSchemaOverrides: undefined,
@@ -3052,7 +3245,12 @@ describe("Agents", () => {
                             },
                             turn: {
                                 turnTimeout: 7,
+                                initialWaitTime: undefined,
                                 silenceEndCallTimeout: -1,
+                                softTimeoutConfig: {
+                                    timeoutSeconds: -1,
+                                    message: "Hhmmmm...yeah give me a second...",
+                                },
                                 turnEagerness: "normal",
                             },
                             tts: {
@@ -3115,6 +3313,9 @@ describe("Agents", () => {
                                             type: "api_integration_webhook",
                                             name: "name",
                                             description: "description",
+                                            responseTimeoutSecs: 1,
+                                            disableInterruptions: true,
+                                            forcePreToolSpeech: true,
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -3123,11 +3324,14 @@ describe("Agents", () => {
                                                 },
                                             ],
                                             toolCallSound: undefined,
+                                            toolCallSoundBehavior: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
                                                 },
                                             },
+                                            executionMode: "immediate",
+                                            toolVersion: "tool_version",
                                             apiIntegrationId: "api_integration_id",
                                             apiIntegrationConnectionId: "api_integration_connection_id",
                                             apiSchemaOverrides: undefined,
@@ -3221,6 +3425,8 @@ describe("Agents", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            versionId: "version_id",
+            branchId: "branch_id",
         });
     });
 
@@ -3316,7 +3522,7 @@ describe("Agents", () => {
             simulated_conversation: [
                 {
                     role: "user",
-                    agent_metadata: { agent_id: "agent_id", workflow_node_id: undefined },
+                    agent_metadata: { agent_id: "agent_id", branch_id: undefined, workflow_node_id: undefined },
                     message: "message",
                     multivoice_message: {
                         parts: [{ text: "text", voice_label: undefined, time_in_call_secs: undefined }],
@@ -3407,6 +3613,7 @@ describe("Agents", () => {
                     role: "user",
                     agentMetadata: {
                         agentId: "agent_id",
+                        branchId: undefined,
                         workflowNodeId: undefined,
                     },
                     message: "message",
@@ -3536,6 +3743,7 @@ describe("Agents", () => {
         const rawResponseBody = {
             id: "id",
             agent_id: "agent_id",
+            branch_id: "branch_id",
             created_at: 1,
             test_runs: [
                 {
@@ -3565,6 +3773,7 @@ describe("Agents", () => {
                     },
                     test_invocation_id: "test_invocation_id",
                     agent_id: "agent_id",
+                    branch_id: "branch_id",
                     workflow_node_id: "workflow_node_id",
                     status: "pending",
                     agent_responses: [
@@ -3614,6 +3823,7 @@ describe("Agents", () => {
         expect(response).toEqual({
             id: "id",
             agentId: "agent_id",
+            branchId: "branch_id",
             createdAt: 1,
             testRuns: [
                 {
@@ -3653,6 +3863,7 @@ describe("Agents", () => {
                     },
                     testInvocationId: "test_invocation_id",
                     agentId: "agent_id",
+                    branchId: "branch_id",
                     workflowNodeId: "workflow_node_id",
                     status: "pending",
                     agentResponses: [

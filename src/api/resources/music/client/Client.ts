@@ -317,7 +317,7 @@ export class Music {
     }
 
     /**
-     * Separate a music file into individual stems
+     * Separate an audio file into individual stems. This endpoint might have high latency, depending on the length of the audio file.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public separateStems(

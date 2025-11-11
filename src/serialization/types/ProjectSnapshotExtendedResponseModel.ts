@@ -25,6 +25,7 @@ export const ProjectSnapshotExtendedResponseModel: core.serialization.ObjectSche
         "character_alignments",
         core.serialization.list(CharacterAlignmentModel),
     ),
+    audioDurationSecs: core.serialization.property("audio_duration_secs", core.serialization.number()),
 });
 
 export declare namespace ProjectSnapshotExtendedResponseModel {
@@ -36,5 +37,6 @@ export declare namespace ProjectSnapshotExtendedResponseModel {
         audio_upload?: Record<string, unknown> | null;
         zip_upload?: Record<string, unknown> | null;
         character_alignments: CharacterAlignmentModel.Raw[];
+        audio_duration_secs: number;
     }
 }

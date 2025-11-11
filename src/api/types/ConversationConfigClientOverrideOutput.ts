@@ -3,6 +3,8 @@
 import * as ElevenLabs from "../index";
 
 export interface ConversationConfigClientOverrideOutput {
+    /** Configuration for turn detection */
+    turn?: ElevenLabs.TurnConfigOverride;
     /** Configuration for conversational text to speech */
     tts?: ElevenLabs.TtsConversationalConfigOverride;
     /** Configuration for conversational events */

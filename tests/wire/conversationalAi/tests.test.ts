@@ -59,7 +59,7 @@ describe("Tests", () => {
             chat_history: [
                 {
                     role: "user",
-                    agent_metadata: { agent_id: "agent_id", workflow_node_id: undefined },
+                    agent_metadata: { agent_id: "agent_id", branch_id: undefined, workflow_node_id: undefined },
                     message: "message",
                     multivoice_message: {
                         parts: [{ text: "text", voice_label: undefined, time_in_call_secs: undefined }],
@@ -149,6 +149,7 @@ describe("Tests", () => {
                     role: "user",
                     agentMetadata: {
                         agentId: "agent_id",
+                        branchId: undefined,
                         workflowNodeId: undefined,
                     },
                     message: "message",
@@ -278,7 +279,7 @@ describe("Tests", () => {
             chat_history: [
                 {
                     role: "user",
-                    agent_metadata: { agent_id: "agent_id", workflow_node_id: undefined },
+                    agent_metadata: { agent_id: "agent_id", branch_id: undefined, workflow_node_id: undefined },
                     message: "message",
                     multivoice_message: {
                         parts: [{ text: "text", voice_label: undefined, time_in_call_secs: undefined }],
@@ -390,6 +391,7 @@ describe("Tests", () => {
                     role: "user",
                     agentMetadata: {
                         agentId: "agent_id",
+                        branchId: undefined,
                         workflowNodeId: undefined,
                     },
                     message: "message",

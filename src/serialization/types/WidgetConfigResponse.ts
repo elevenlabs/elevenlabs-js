@@ -8,6 +8,7 @@ import { WidgetPlacement } from "./WidgetPlacement";
 import { WidgetExpandable } from "./WidgetExpandable";
 import { WidgetConfigResponseModelAvatar } from "./WidgetConfigResponseModelAvatar";
 import { WidgetFeedbackMode } from "./WidgetFeedbackMode";
+import { WidgetEndFeedbackConfig } from "./WidgetEndFeedbackConfig";
 import { WidgetTextContents } from "./WidgetTextContents";
 import { WidgetStyles } from "./WidgetStyles";
 import { WidgetLanguagePresetResponse } from "./WidgetLanguagePresetResponse";
@@ -21,6 +22,7 @@ export const WidgetConfigResponse: core.serialization.ObjectSchema<
     expandable: WidgetExpandable.optional(),
     avatar: WidgetConfigResponseModelAvatar.optional(),
     feedbackMode: core.serialization.property("feedback_mode", WidgetFeedbackMode.optional()),
+    endFeedback: core.serialization.property("end_feedback", WidgetEndFeedbackConfig.optional()),
     bgColor: core.serialization.property("bg_color", core.serialization.string().optional()),
     textColor: core.serialization.property("text_color", core.serialization.string().optional()),
     btnColor: core.serialization.property("btn_color", core.serialization.string().optional()),
@@ -78,6 +80,7 @@ export declare namespace WidgetConfigResponse {
         expandable?: WidgetExpandable.Raw | null;
         avatar?: WidgetConfigResponseModelAvatar.Raw | null;
         feedback_mode?: WidgetFeedbackMode.Raw | null;
+        end_feedback?: WidgetEndFeedbackConfig.Raw | null;
         bg_color?: string | null;
         text_color?: string | null;
         btn_color?: string | null;

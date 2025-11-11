@@ -7,12 +7,14 @@ import * as core from "../../core";
 export const AgentMetadata: core.serialization.ObjectSchema<serializers.AgentMetadata.Raw, ElevenLabs.AgentMetadata> =
     core.serialization.object({
         agentId: core.serialization.property("agent_id", core.serialization.string()),
+        branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
         workflowNodeId: core.serialization.property("workflow_node_id", core.serialization.string().optional()),
     });
 
 export declare namespace AgentMetadata {
     export interface Raw {
         agent_id: string;
+        branch_id?: string | null;
         workflow_node_id?: string | null;
     }
 }

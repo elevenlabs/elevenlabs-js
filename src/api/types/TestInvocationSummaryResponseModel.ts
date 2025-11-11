@@ -5,6 +5,10 @@ import * as ElevenLabs from "../index";
 export interface TestInvocationSummaryResponseModel {
     /** The ID of the test invocation */
     id: string;
+    /** The ID of the agent this test invocation belongs to */
+    agentId?: string;
+    /** The ID of the branch this test invocation was run on */
+    branchId?: string;
     /** Creation time of the test invocation in unix seconds */
     createdAtUnixSecs: number;
     /** Number of test runs in this invocation */

@@ -4,6 +4,7 @@ import * as ElevenLabs from "../index";
 
 export interface ConversationSummaryResponseModel {
     agentId: string;
+    branchId?: string;
     agentName?: string;
     conversationId: string;
     startTimeUnixSecs: number;

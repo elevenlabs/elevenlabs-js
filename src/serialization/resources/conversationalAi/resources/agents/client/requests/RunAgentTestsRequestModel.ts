@@ -15,11 +15,13 @@ export const RunAgentTestsRequestModel: core.serialization.Schema<
         "agent_config_override",
         AdhocAgentConfigOverrideForTestRequestModel.optional(),
     ),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
 });
 
 export declare namespace RunAgentTestsRequestModel {
     export interface Raw {
         tests: SingleTestRunRequestModel.Raw[];
         agent_config_override?: AdhocAgentConfigOverrideForTestRequestModel.Raw | null;
+        branch_id?: string | null;
     }
 }

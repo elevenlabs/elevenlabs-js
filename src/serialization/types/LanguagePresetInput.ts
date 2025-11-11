@@ -15,11 +15,16 @@ export const LanguagePresetInput: core.serialization.ObjectSchema<
         "first_message_translation",
         LanguagePresetTranslation.optional(),
     ),
+    softTimeoutTranslation: core.serialization.property(
+        "soft_timeout_translation",
+        LanguagePresetTranslation.optional(),
+    ),
 });
 
 export declare namespace LanguagePresetInput {
     export interface Raw {
         overrides: ConversationConfigClientOverrideInput.Raw;
         first_message_translation?: LanguagePresetTranslation.Raw | null;
+        soft_timeout_translation?: LanguagePresetTranslation.Raw | null;
     }
 }

@@ -8,7 +8,7 @@ import * as ElevenLabs from "../../../../../../../../index";
  *         feedback: "like"
  *     }
  */
-export interface BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost {
+export interface ConversationFeedbackRequestModel {
     /** Either 'like' or 'dislike' to indicate the feedback for the conversation. */
-    feedback: ElevenLabs.UserFeedbackScore;
+    feedback?: ElevenLabs.UserFeedbackScore;
 }

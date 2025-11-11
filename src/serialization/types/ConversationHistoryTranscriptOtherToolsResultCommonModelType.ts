@@ -7,8 +7,8 @@ import * as core from "../../core";
 export const ConversationHistoryTranscriptOtherToolsResultCommonModelType: core.serialization.Schema<
     serializers.ConversationHistoryTranscriptOtherToolsResultCommonModelType.Raw,
     ElevenLabs.ConversationHistoryTranscriptOtherToolsResultCommonModelType
-> = core.serialization.enum_(["client", "webhook", "mcp"]);
+> = core.serialization.enum_(["client", "webhook", "mcp", "api_integration_webhook"]);
 
 export declare namespace ConversationHistoryTranscriptOtherToolsResultCommonModelType {
-    export type Raw = "client" | "webhook" | "mcp";
+    export type Raw = "client" | "webhook" | "mcp" | "api_integration_webhook";
 }

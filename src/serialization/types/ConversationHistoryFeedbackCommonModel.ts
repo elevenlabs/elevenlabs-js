@@ -3,21 +3,28 @@
 import * as serializers from "../index";
 import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
+import { ConversationFeedbackType } from "./ConversationFeedbackType";
 import { UserFeedbackScore } from "./UserFeedbackScore";
 
 export const ConversationHistoryFeedbackCommonModel: core.serialization.ObjectSchema<
     serializers.ConversationHistoryFeedbackCommonModel.Raw,
     ElevenLabs.ConversationHistoryFeedbackCommonModel
 > = core.serialization.object({
+    type: ConversationFeedbackType.optional(),
     overallScore: core.serialization.property("overall_score", UserFeedbackScore.optional()),
     likes: core.serialization.number().optional(),
     dislikes: core.serialization.number().optional(),
+    rating: core.serialization.number().optional(),
+    comment: core.serialization.string().optional(),
 });
 
 export declare namespace ConversationHistoryFeedbackCommonModel {
     export interface Raw {
+        type?: ConversationFeedbackType.Raw | null;
         overall_score?: UserFeedbackScore.Raw | null;
         likes?: number | null;
         dislikes?: number | null;
+        rating?: number | null;
+        comment?: string | null;
     }
 }

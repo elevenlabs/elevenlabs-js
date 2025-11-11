@@ -274,6 +274,8 @@ export class Conversations {
      *         callSuccessful: "success",
      *         callStartBeforeUnix: 1,
      *         callStartAfterUnix: 1,
+     *         callDurationMinSecs: 1,
+     *         callDurationMaxSecs: 1,
      *         userId: "user_id",
      *         pageSize: 1,
      *         summaryMode: "exclude",
@@ -297,7 +299,10 @@ export class Conversations {
             callSuccessful,
             callStartBeforeUnix,
             callStartAfterUnix,
+            callDurationMinSecs,
+            callDurationMaxSecs,
             userId,
+            toolNames,
             pageSize,
             summaryMode,
             search,
@@ -325,8 +330,24 @@ export class Conversations {
             _queryParams["call_start_after_unix"] = callStartAfterUnix.toString();
         }
 
+        if (callDurationMinSecs != null) {
+            _queryParams["call_duration_min_secs"] = callDurationMinSecs.toString();
+        }
+
+        if (callDurationMaxSecs != null) {
+            _queryParams["call_duration_max_secs"] = callDurationMaxSecs.toString();
+        }
+
         if (userId != null) {
             _queryParams["user_id"] = userId;
+        }
+
+        if (toolNames != null) {
+            if (Array.isArray(toolNames)) {
+                _queryParams["tool_names"] = toolNames.map((item) => item);
+            } else {
+                _queryParams["tool_names"] = toolNames;
+            }
         }
 
         if (pageSize != null) {
