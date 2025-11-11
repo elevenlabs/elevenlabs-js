@@ -28,8 +28,11 @@ export interface MultipartResponse {
 
 export class Music {
     private _client: GeneratedMusic;
+    private readonly _options: Music.Options;
+    private _compositionPlan: CompositionPlan | undefined;
 
     constructor(options: Music.Options = {}) {
+        this._options = options;
         this._client = new GeneratedMusic(options);
     }
 
@@ -49,6 +52,16 @@ export class Music {
         requestOptions?: Music.RequestOptions,
     ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return this._client.compose(request, requestOptions);
+    }
+
+    // Private method for structural compatibility with generated Music class
+    private __compose(
+        request: ElevenLabs.BodyComposeMusicV1MusicPost = {},
+        requestOptions?: Music.RequestOptions,
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        // This method exists for type compatibility only
+        // The actual implementation is delegated through compose()
+        throw new Error("Internal method - should not be called directly");
     }
 
     /**
@@ -114,7 +127,7 @@ export class Music {
         request: ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost = {},
         requestOptions?: Music.RequestOptions,
     ): core.HttpResponsePromise<MultipartResponse> {
-        return core.HttpResponsePromise.fromPromise(this._composeDetailed(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this._composeDetailed(request, requestOptions)) as any;
     }
 
     private async _composeDetailed(
@@ -136,6 +149,16 @@ export class Music {
 
     }
 
+    // Private method for structural compatibility with generated Music class
+    private __composeDetailed(
+        request: ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost = {},
+        requestOptions?: Music.RequestOptions,
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        // This method exists for type compatibility only
+        // The actual implementation is delegated through composeDetailed()
+        throw new Error("Internal method - should not be called directly");
+    }
+
     /**
      * Stream a composed song from a prompt or a composition plan.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -145,6 +168,37 @@ export class Music {
         requestOptions?: Music.RequestOptions,
     ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return this._client.stream(request, requestOptions);
+    }
+
+    // Private method for structural compatibility with generated Music class
+    private __stream(
+        request: ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost = {},
+        requestOptions?: Music.RequestOptions,
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        // This method exists for type compatibility only
+        // The actual implementation is delegated through stream()
+        throw new Error("Internal method - should not be called directly");
+    }
+
+    /**
+     * Separate a music file into individual stems
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     */
+    public separateStems(
+        request: ElevenLabs.BodyStemSeparationV1MusicStemSeparationPost,
+        requestOptions?: Music.RequestOptions,
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
+        return this._client.separateStems(request, requestOptions);
+    }
+
+    // Private method for structural compatibility with generated Music class
+    private __separateStems(
+        request: ElevenLabs.BodyStemSeparationV1MusicStemSeparationPost,
+        requestOptions?: Music.RequestOptions,
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        // This method exists for type compatibility only
+        // The actual implementation is delegated through separateStems()
+        throw new Error("Internal method - should not be called directly");
     }
 
     /**
