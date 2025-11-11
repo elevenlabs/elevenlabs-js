@@ -4,6 +4,7 @@ import type * as core from "../core";
 import * as errors from "../errors";
 import { WebhooksClient } from "./webhooks";
 import { Music } from "./music";
+import { Music as GeneratedMusic } from "../api/resources/music/client/Client";
 import { SpeechToText } from "./speechToText";
 
 export declare namespace ElevenLabsClient {
@@ -39,12 +40,13 @@ export class ElevenLabsClient extends FernClient {
         return this._customWebhooks;
     }
 
-    // @ts-expect-error - Intentionally overriding with wrapper Music that has enhanced composeDetailed
-    public override get music(): Music {
+    public override get music(): GeneratedMusic {
         if (!this._customMusic) {
             this._customMusic = new Music(this._options);
         }
-        return this._customMusic as any;
+        // Return wrapper Music cast as GeneratedMusic to maintain type compatibility
+        // The wrapper has enhanced composeDetailed that returns MultipartResponse
+        return this._customMusic as any as GeneratedMusic;
     }
 
     public get speechToText(): SpeechToText {

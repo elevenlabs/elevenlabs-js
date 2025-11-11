@@ -28,8 +28,8 @@ export interface MultipartResponse {
 
 export class Music {
     private _client: GeneratedMusic;
-    protected readonly _options: Music.Options;
-    protected _compositionPlan: CompositionPlan | undefined;
+    private readonly _options: Music.Options;
+    private _compositionPlan: CompositionPlan | undefined;
 
     constructor(options: Music.Options = {}) {
         this._options = options;
