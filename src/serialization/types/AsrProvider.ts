@@ -5,8 +5,8 @@ import * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 
 export const AsrProvider: core.serialization.Schema<serializers.AsrProvider.Raw, ElevenLabs.AsrProvider> =
-    core.serialization.stringLiteral("elevenlabs");
+    core.serialization.enum_(["elevenlabs", "scribe_realtime"]);
 
 export declare namespace AsrProvider {
-    export type Raw = "elevenlabs";
+    export type Raw = "elevenlabs" | "scribe_realtime";
 }

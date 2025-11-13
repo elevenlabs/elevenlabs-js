@@ -7368,6 +7368,69 @@ await client.conversationalAi.mcpServers.get("mcp_server_id");
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">delete</a>(mcpServerId) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a specific MCP server configuration from the workspace.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.mcpServers.delete("mcp_server_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcpServerId:** `string` — ID of the MCP Server.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServers.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">update</a>(mcpServerId, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
 <dl>
 <dd>

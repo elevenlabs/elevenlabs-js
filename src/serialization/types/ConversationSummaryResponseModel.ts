@@ -23,6 +23,7 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     transcriptSummary: core.serialization.property("transcript_summary", core.serialization.string().optional()),
     callSummaryTitle: core.serialization.property("call_summary_title", core.serialization.string().optional()),
     direction: ConversationSummaryResponseModelDirection.optional(),
+    rating: core.serialization.number().optional(),
 });
 
 export declare namespace ConversationSummaryResponseModel {
@@ -39,5 +40,6 @@ export declare namespace ConversationSummaryResponseModel {
         transcript_summary?: string | null;
         call_summary_title?: string | null;
         direction?: ConversationSummaryResponseModelDirection.Raw | null;
+        rating?: number | null;
     }
 }

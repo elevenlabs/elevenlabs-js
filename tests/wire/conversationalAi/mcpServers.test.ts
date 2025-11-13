@@ -308,6 +308,25 @@ describe("McpServers", () => {
         });
     });
 
+    test("delete", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/mcp-servers/mcp_server_id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.mcpServers.delete("mcp_server_id");
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
+
     test("update", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });

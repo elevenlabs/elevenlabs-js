@@ -83,4 +83,6 @@ export interface ProjectExtendedResponse {
     experimental?: Record<string, unknown>;
     /** List of uploaded assets e.g. videos, audios. */
     assets: ElevenLabs.ProjectExtendedResponseModelAssetsItem[];
+    /** List of configured project voices. */
+    voices: ElevenLabs.ProjectVoiceResponseModel[];
 }

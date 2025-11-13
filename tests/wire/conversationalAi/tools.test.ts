@@ -205,6 +205,7 @@ describe("Tools", () => {
                     },
                     request_body_schema: {},
                     request_headers: { Authorization: "Bearer {api_key}" },
+                    content_type: "application/json",
                     auth_connection: { auth_connection_id: "auth_connection_id" },
                 },
             },
@@ -323,6 +324,7 @@ describe("Tools", () => {
                     requestHeaders: {
                         Authorization: "Bearer {api_key}",
                     },
+                    contentType: "application/json",
                     authConnection: {
                         authConnectionId: "auth_connection_id",
                     },
@@ -386,6 +388,7 @@ describe("Tools", () => {
                     },
                     request_body_schema: {},
                     request_headers: { Authorization: "Bearer {api_key}" },
+                    content_type: "application/json",
                     auth_connection: { auth_connection_id: "auth_connection_id" },
                 },
             },
@@ -471,6 +474,7 @@ describe("Tools", () => {
                     requestHeaders: {
                         Authorization: "Bearer {api_key}",
                     },
+                    contentType: "application/json",
                     authConnection: {
                         authConnectionId: "auth_connection_id",
                     },
@@ -579,6 +583,7 @@ describe("Tools", () => {
                     },
                     request_body_schema: {},
                     request_headers: { Authorization: "Bearer {api_key}" },
+                    content_type: "application/json",
                     auth_connection: { auth_connection_id: "auth_connection_id" },
                 },
             },
@@ -697,6 +702,7 @@ describe("Tools", () => {
                     requestHeaders: {
                         Authorization: "Bearer {api_key}",
                     },
+                    contentType: "application/json",
                     authConnection: {
                         authConnectionId: "auth_connection_id",
                     },
