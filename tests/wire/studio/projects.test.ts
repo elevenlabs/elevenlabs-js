@@ -283,6 +283,19 @@ describe("Projects", () => {
                     current_snapshot_id: "current_snapshot_id",
                 },
             ],
+            voices: [
+                {
+                    voice_id: "voice_id",
+                    alias: "alias",
+                    stability: 1.1,
+                    similarity_boost: 1.1,
+                    style: 1.1,
+                    is_pinned: true,
+                    use_speaker_boost: true,
+                    volume_gain: 1.1,
+                    speed: 1.1,
+                },
+            ],
         };
         server
             .mockEndpoint()
@@ -455,6 +468,19 @@ describe("Projects", () => {
                     importSpeechProgress: 1.1,
                     speechImported: true,
                     currentSnapshotId: "current_snapshot_id",
+                },
+            ],
+            voices: [
+                {
+                    voiceId: "voice_id",
+                    alias: "alias",
+                    stability: 1.1,
+                    similarityBoost: 1.1,
+                    style: 1.1,
+                    isPinned: true,
+                    useSpeakerBoost: true,
+                    volumeGain: 1.1,
+                    speed: 1.1,
                 },
             ],
         });

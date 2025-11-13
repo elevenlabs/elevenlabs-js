@@ -302,6 +302,8 @@ export class Conversations {
             callDurationMinSecs,
             callDurationMaxSecs,
             userId,
+            evaluationParams,
+            dataCollectionParams,
             toolNames,
             pageSize,
             summaryMode,
@@ -340,6 +342,22 @@ export class Conversations {
 
         if (userId != null) {
             _queryParams["user_id"] = userId;
+        }
+
+        if (evaluationParams != null) {
+            if (Array.isArray(evaluationParams)) {
+                _queryParams["evaluation_params"] = evaluationParams.map((item) => item);
+            } else {
+                _queryParams["evaluation_params"] = evaluationParams;
+            }
+        }
+
+        if (dataCollectionParams != null) {
+            if (Array.isArray(dataCollectionParams)) {
+                _queryParams["data_collection_params"] = dataCollectionParams.map((item) => item);
+            } else {
+                _queryParams["data_collection_params"] = dataCollectionParams;
+            }
         }
 
         if (toolNames != null) {
