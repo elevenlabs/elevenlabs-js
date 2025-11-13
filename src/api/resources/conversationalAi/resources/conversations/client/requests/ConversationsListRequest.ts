@@ -35,6 +35,10 @@ export interface ConversationsListRequest {
     callDurationMaxSecs?: number;
     /** Filter conversations by the user ID who initiated them. */
     userId?: string;
+    /** Evaluation filters. Repeat param. Format: criteria_id:result. Example: eval=value_framing:success */
+    evaluationParams?: string | string[];
+    /** Data collection filters. Repeat param. Format: id:op:value where op is one of eq|neq|gt|gte|lt|lte|in|exists|missing. For in, pipe-delimit values. */
+    dataCollectionParams?: string | string[];
     /** Filter conversations by tool names used during the call. */
     toolNames?: string | string[];
     /** How many conversations to return at maximum. Can not exceed 100, defaults to 30. */

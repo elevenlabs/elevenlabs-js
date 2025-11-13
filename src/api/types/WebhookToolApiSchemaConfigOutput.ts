@@ -18,6 +18,8 @@ export interface WebhookToolApiSchemaConfigOutput {
     requestBodySchema?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
     /** Headers that should be included in the request */
     requestHeaders?: Record<string, ElevenLabs.WebhookToolApiSchemaConfigOutputRequestHeadersValue>;
+    /** Content type for the request body. Only applies to POST/PUT/PATCH requests. */
+    contentType?: ElevenLabs.WebhookToolApiSchemaConfigOutputContentType;
     /** Optional auth connection to use for authentication with this webhook */
     authConnection?: ElevenLabs.AuthConnectionLocator;
 }
