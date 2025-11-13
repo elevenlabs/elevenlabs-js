@@ -17,6 +17,7 @@ import { PronunciationDictionaryVersionResponseModel } from "./PronunciationDict
 import { PronunciationDictionaryLocatorResponseModel } from "./PronunciationDictionaryLocatorResponseModel";
 import { ProjectExtendedResponseModelApplyTextNormalization } from "./ProjectExtendedResponseModelApplyTextNormalization";
 import { ProjectExtendedResponseModelAssetsItem } from "./ProjectExtendedResponseModelAssetsItem";
+import { ProjectVoiceResponseModel } from "./ProjectVoiceResponseModel";
 
 export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     serializers.ProjectExtendedResponse.Raw,
@@ -83,6 +84,7 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     ),
     experimental: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     assets: core.serialization.list(ProjectExtendedResponseModelAssetsItem),
+    voices: core.serialization.list(ProjectVoiceResponseModel),
 });
 
 export declare namespace ProjectExtendedResponse {
@@ -127,5 +129,6 @@ export declare namespace ProjectExtendedResponse {
         apply_text_normalization: ProjectExtendedResponseModelApplyTextNormalization.Raw;
         experimental?: Record<string, unknown> | null;
         assets: ProjectExtendedResponseModelAssetsItem.Raw[];
+        voices: ProjectVoiceResponseModel.Raw[];
     }
 }
