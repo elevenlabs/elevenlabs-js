@@ -55,6 +55,11 @@ interface BaseOptions {
      * Can sometimes improve transcription performance if known beforehand.
      */
     languageCode?: string;
+    /**
+     * Whether to receive a committed_transcript_with_timestamps event which includes word-level timestamps.
+     * @default false
+     */
+    includeTimestamps?: boolean;
 }
 
 export interface AudioOptions extends BaseOptions {
@@ -155,6 +160,10 @@ export class ScribeRealtime {
 
         if (options.languageCode !== undefined) {
             params.append("language_code", options.languageCode);
+        }
+
+        if (options.includeTimestamps !== undefined) {
+            params.append("include_timestamps", options.includeTimestamps.toString());
         }
 
         const queryString = params.toString();
