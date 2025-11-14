@@ -33,6 +33,7 @@ export interface Config {
     min_silence_duration_ms?: number;
     model_id?: string;
     disable_logging?: boolean;
+    include_timestamps?: boolean;
 }
 
 export interface SessionStartedMessage {
@@ -58,7 +59,22 @@ export interface CommittedTranscriptWithTimestampsMessage {
     words?: WordsItem[];
 }
 
-export type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | CommittedTranscriptMessage | CommittedTranscriptWithTimestampsMessage;
+export interface ErrorMessage {
+    message_type: "error";
+    error: string;
+}
+
+export interface AuthErrorMessage {
+    message_type: "auth_error";
+    error: string;
+}
+
+export interface QuotaExceededErrorMessage {
+    message_type: "quota_exceeded";
+    error: string;
+}
+
+export type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | CommittedTranscriptMessage | CommittedTranscriptWithTimestampsMessage | ErrorMessage | AuthErrorMessage | QuotaExceededErrorMessage;
 
 /**
  * Events emitted by the RealtimeConnection.
@@ -74,6 +90,10 @@ export enum RealtimeEvents {
     COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS = "committed_transcript_with_timestamps",
     /** Emitted when an error occurs */
     ERROR = "error",
+    /** Emitted when an auth error occurs */
+    AUTH_ERROR = "auth_error",
+    /** Emitted when a quota exceeded error occurs */
+    QUOTA_EXCEEDED = "quota_exceeded",
     /** Emitted when the WebSocket connection is opened */
     OPEN = "open",
     /** Emitted when the WebSocket connection is closed */
@@ -156,6 +176,15 @@ export class RealtimeConnection {
                     break;
                 case "committed_transcript_with_timestamps":
                     this.eventEmitter.emit(RealtimeEvents.COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS, data);
+                    break;
+                case "error":
+                    this.eventEmitter.emit(RealtimeEvents.ERROR, data);
+                    break;
+                case "auth_error":
+                    this.eventEmitter.emit(RealtimeEvents.AUTH_ERROR, data);
+                    break;
+                case "quota_exceeded":
+                    this.eventEmitter.emit(RealtimeEvents.QUOTA_EXCEEDED, data);
                     break;
             }
         });

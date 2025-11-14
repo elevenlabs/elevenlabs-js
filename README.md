@@ -99,7 +99,7 @@ stream(audioStream);
 ## Retries
 
 This Node SDK is instrumented with automatic retries with exponential backoff. A request will be
-retried as long as the request is deemed retriable and the number of retry attempts has not grown larger
+retried as long as the request is deemed retry-able and the number of retry attempts has not grown larger
 than the configured retry limit (default: 2).
 
 A request is deemed able to retry when any of the following HTTP status codes is returned:
@@ -122,7 +122,7 @@ const response = await elevenlabs.voices.search(
 
 ## Timeouts
 
-The SDK defaults to a 60 second timout. Use the `timeoutInSeconds` option to
+The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to
 configure this behavior.
 
 ```ts
@@ -134,7 +134,7 @@ const response = await elevenlabs.voices.search(
 );
 ```
 
-## Runtime compatiblity
+## Runtime compatibility
 
 The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK
 works in the following runtimes:
