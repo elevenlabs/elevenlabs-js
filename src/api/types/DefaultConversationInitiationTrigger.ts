@@ -3,4 +3,4 @@
 /**
  * Default trigger for standard conversation initiation.
  */
-export interface DefaultConversationInitiationTrigger {}
+export type DefaultConversationInitiationTrigger = {};

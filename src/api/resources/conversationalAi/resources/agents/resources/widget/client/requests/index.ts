@@ -1,1 +1,1 @@
-export { type WidgetGetRequest } from "./WidgetGetRequest";
+export type { WidgetGetRequest } from "./WidgetGetRequest";

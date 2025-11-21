@@ -1,1 +1,1 @@
-export { type AudioGetRequest } from "./AudioGetRequest";
+export type { AudioGetRequest } from "./AudioGetRequest";

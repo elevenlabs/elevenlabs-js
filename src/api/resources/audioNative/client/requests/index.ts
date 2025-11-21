@@ -1,2 +1,2 @@
-export { type BodyCreatesAudioNativeEnabledProjectV1AudioNativePost } from "./BodyCreatesAudioNativeEnabledProjectV1AudioNativePost";
-export { type BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost } from "./BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost";
+export type { BodyCreatesAudioNativeEnabledProjectV1AudioNativePost } from "./BodyCreatesAudioNativeEnabledProjectV1AudioNativePost";
+export type { BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost } from "./BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost";

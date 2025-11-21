@@ -1,1 +1,1 @@
-export { type ConversationFeedbackRequestModel } from "./ConversationFeedbackRequestModel";
+export type { ConversationFeedbackRequestModel } from "./ConversationFeedbackRequestModel";

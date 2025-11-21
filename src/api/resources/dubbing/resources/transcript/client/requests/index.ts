@@ -1,1 +1,1 @@
-export { type TranscriptGetTranscriptForDubRequest } from "./TranscriptGetTranscriptForDubRequest";
+export type { TranscriptGetTranscriptForDubRequest } from "./TranscriptGetTranscriptForDubRequest";

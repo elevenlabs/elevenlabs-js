@@ -4,4 +4,4 @@
  * A model that represents an agent dependent on a knowledge base/tools
  * to which the user has no direct access.
  */
-export interface DependentUnknownAgentIdentifier {}
+export type DependentUnknownAgentIdentifier = {};

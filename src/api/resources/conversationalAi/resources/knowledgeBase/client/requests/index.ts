@@ -1,1 +1,1 @@
-export { type KnowledgeBaseListRequest } from "./KnowledgeBaseListRequest";
+export type { KnowledgeBaseListRequest } from "./KnowledgeBaseListRequest";

@@ -1,1 +1,1 @@
-export { type UpdateMemberRequest } from "./UpdateMemberRequest";
+export type { UpdateMemberRequest } from "./UpdateMemberRequest";

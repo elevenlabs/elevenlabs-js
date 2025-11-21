@@ -3,8 +3,7 @@
 /**
  * @example
  *     {
- *         historyItemIds: ["history_item_ids", "history_item_ids"],
- *         outputFormat: undefined
+ *         historyItemIds: ["history_item_ids", "history_item_ids"]
  *     }
  */
 export interface DownloadHistoryRequest {
