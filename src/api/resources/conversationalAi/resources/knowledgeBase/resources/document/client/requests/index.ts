@@ -1,1 +1,1 @@
-export { type RagIndexRequestModel } from "./RagIndexRequestModel";
+export type { RagIndexRequestModel } from "./RagIndexRequestModel";

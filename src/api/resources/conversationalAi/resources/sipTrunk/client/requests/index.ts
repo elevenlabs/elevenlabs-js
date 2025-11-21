@@ -1,1 +1,1 @@
-export { type BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost } from "./BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost";
+export type { BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost } from "./BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost";

@@ -1,2 +1,2 @@
-export { type McpServerRequestModel } from "./McpServerRequestModel";
-export { type McpServerConfigUpdateRequestModel } from "./McpServerConfigUpdateRequestModel";
+export type { McpServerConfigUpdateRequestModel } from "./McpServerConfigUpdateRequestModel";
+export type { McpServerRequestModel } from "./McpServerRequestModel";

@@ -1,1 +1,1 @@
-export { type McpToolAddApprovalRequestModel } from "./McpToolAddApprovalRequestModel";
+export type { McpToolAddApprovalRequestModel } from "./McpToolAddApprovalRequestModel";

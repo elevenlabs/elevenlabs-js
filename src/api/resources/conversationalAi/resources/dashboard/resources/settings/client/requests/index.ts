@@ -1,1 +1,1 @@
-export { type PatchConvAiDashboardSettingsRequest } from "./PatchConvAiDashboardSettingsRequest";
+export type { PatchConvAiDashboardSettingsRequest } from "./PatchConvAiDashboardSettingsRequest";

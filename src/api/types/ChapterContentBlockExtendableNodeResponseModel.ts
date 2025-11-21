@@ -3,4 +3,4 @@
 /**
  * Not used. Make sure you anticipate new types in the future.
  */
-export interface ChapterContentBlockExtendableNodeResponseModel {}
+export type ChapterContentBlockExtendableNodeResponseModel = {};

@@ -1,1 +1,1 @@
-export { type LlmUsageCalculatorRequestModel } from "./LlmUsageCalculatorRequestModel";
+export type { LlmUsageCalculatorRequestModel } from "./LlmUsageCalculatorRequestModel";

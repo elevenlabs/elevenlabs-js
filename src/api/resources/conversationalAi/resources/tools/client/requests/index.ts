@@ -1,1 +1,1 @@
-export { type ToolsGetDependentAgentsRequest } from "./ToolsGetDependentAgentsRequest";
+export type { ToolsGetDependentAgentsRequest } from "./ToolsGetDependentAgentsRequest";

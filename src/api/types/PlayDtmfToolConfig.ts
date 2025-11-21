@@ -6,4 +6,7 @@
  * This tool can be used to interact with automated phone systems, such as
  * navigating phone menus, entering extensions, or inputting numeric codes.
  */
-export interface PlayDtmfToolConfig {}
+export interface PlayDtmfToolConfig {
+    /** If true, send DTMF tones out-of-band using RFC 4733 (useful for SIP calls only). If false, send DTMF as in-band audio tones (default, works for all call types). */
+    useOutOfBandDtmf?: boolean;
+}

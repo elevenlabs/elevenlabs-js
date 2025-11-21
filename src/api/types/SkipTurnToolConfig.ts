@@ -11,4 +11,4 @@
  * no parameters and performs no side-effects other than informing the backend
  * that the current turn generation is complete.
  */
-export interface SkipTurnToolConfig {}
+export type SkipTurnToolConfig = {};

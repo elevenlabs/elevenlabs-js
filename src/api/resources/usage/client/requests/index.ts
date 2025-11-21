@@ -1,1 +1,1 @@
-export { type UsageGetRequest } from "./UsageGetRequest";
+export type { UsageGetRequest } from "./UsageGetRequest";

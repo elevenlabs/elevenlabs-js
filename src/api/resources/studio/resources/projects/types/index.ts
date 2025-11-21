@@ -1,4 +1,4 @@
-export * from "./ProjectsCreateRequestTargetAudience";
-export * from "./ProjectsCreateRequestFiction";
 export * from "./ProjectsCreateRequestApplyTextNormalization";
+export * from "./ProjectsCreateRequestFiction";
 export * from "./ProjectsCreateRequestSourceType";
+export * from "./ProjectsCreateRequestTargetAudience";

@@ -1,1 +1,1 @@
-export { type BodyGenerateCompositionPlanV1MusicPlanPost } from "./BodyGenerateCompositionPlanV1MusicPlanPost";
+export type { BodyGenerateCompositionPlanV1MusicPlanPost } from "./BodyGenerateCompositionPlanV1MusicPlanPost";
