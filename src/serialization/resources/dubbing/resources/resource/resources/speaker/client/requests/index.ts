@@ -1,1 +1,2 @@
+export { BodyCreateANewSpeakerV1DubbingResourceDubbingIdSpeakerPost } from "./BodyCreateANewSpeakerV1DubbingResourceDubbingIdSpeakerPost";
 export { BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch } from "./BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch";

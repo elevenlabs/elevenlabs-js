@@ -12,6 +12,9 @@ import type * as ElevenLabs from "../../../../../../index";
  *         callStartAfterUnix: 1,
  *         callDurationMinSecs: 1,
  *         callDurationMaxSecs: 1,
+ *         ratingMax: 1,
+ *         ratingMin: 1,
+ *         hasFeedbackComment: true,
  *         userId: "user_id",
  *         pageSize: 1,
  *         summaryMode: "exclude",
@@ -33,6 +36,12 @@ export interface ConversationsListRequest {
     callDurationMinSecs?: number;
     /** Maximum call duration in seconds. */
     callDurationMaxSecs?: number;
+    /** Maximum overall rating (1-5). */
+    ratingMax?: number;
+    /** Minimum overall rating (1-5). */
+    ratingMin?: number;
+    /** Filter conversations with user feedback comments. */
+    hasFeedbackComment?: boolean;
     /** Filter conversations by the user ID who initiated them. */
     userId?: string;
     /** Evaluation filters. Repeat param. Format: criteria_id:result. Example: eval=value_framing:success */

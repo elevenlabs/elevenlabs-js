@@ -4,7 +4,6 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { PydanticPronunciationDictionaryVersionLocator } from "./PydanticPronunciationDictionaryVersionLocator";
-import { SuggestedAudioTag } from "./SuggestedAudioTag";
 import { SupportedVoice } from "./SupportedVoice";
 import { TextNormalisationType } from "./TextNormalisationType";
 import { TtsConversationalModel } from "./TtsConversationalModel";
@@ -20,10 +19,6 @@ export const TtsConversationalConfigWorkflowOverrideInput: core.serialization.Ob
     supportedVoices: core.serialization.property(
         "supported_voices",
         core.serialization.list(SupportedVoice).optional(),
-    ),
-    suggestedAudioTags: core.serialization.property(
-        "suggested_audio_tags",
-        core.serialization.list(SuggestedAudioTag).optional(),
     ),
     agentOutputAudioFormat: core.serialization.property("agent_output_audio_format", TtsOutputFormat.optional()),
     optimizeStreamingLatency: core.serialization.property(
@@ -45,7 +40,6 @@ export declare namespace TtsConversationalConfigWorkflowOverrideInput {
         model_id?: TtsConversationalModel.Raw | null;
         voice_id?: string | null;
         supported_voices?: SupportedVoice.Raw[] | null;
-        suggested_audio_tags?: SuggestedAudioTag.Raw[] | null;
         agent_output_audio_format?: TtsOutputFormat.Raw | null;
         optimize_streaming_latency?: TtsOptimizeStreamingLatency.Raw | null;
         stability?: number | null;

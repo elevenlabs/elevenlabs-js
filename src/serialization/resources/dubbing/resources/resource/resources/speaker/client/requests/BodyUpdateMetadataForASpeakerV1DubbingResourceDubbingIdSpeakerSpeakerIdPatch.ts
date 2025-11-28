@@ -8,12 +8,14 @@ export const BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeak
     serializers.dubbing.resource.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch.Raw,
     ElevenLabs.dubbing.resource.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch
 > = core.serialization.object({
+    speakerName: core.serialization.property("speaker_name", core.serialization.string().optional()),
     voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
     languages: core.serialization.list(core.serialization.string()).optional(),
 });
 
 export declare namespace BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch {
     export interface Raw {
+        speaker_name?: string | null;
         voice_id?: string | null;
         languages?: string[] | null;
     }

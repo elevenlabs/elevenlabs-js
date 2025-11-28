@@ -260,6 +260,9 @@ export class Conversations {
      *         callStartAfterUnix: 1,
      *         callDurationMinSecs: 1,
      *         callDurationMaxSecs: 1,
+     *         ratingMax: 1,
+     *         ratingMin: 1,
+     *         hasFeedbackComment: true,
      *         userId: "user_id",
      *         pageSize: 1,
      *         summaryMode: "exclude",
@@ -285,6 +288,9 @@ export class Conversations {
             callStartAfterUnix,
             callDurationMinSecs,
             callDurationMaxSecs,
+            ratingMax,
+            ratingMin,
+            hasFeedbackComment,
             userId,
             evaluationParams,
             dataCollectionParams,
@@ -322,6 +328,18 @@ export class Conversations {
 
         if (callDurationMaxSecs != null) {
             _queryParams.call_duration_max_secs = callDurationMaxSecs.toString();
+        }
+
+        if (ratingMax != null) {
+            _queryParams.rating_max = ratingMax.toString();
+        }
+
+        if (ratingMin != null) {
+            _queryParams.rating_min = ratingMin.toString();
+        }
+
+        if (hasFeedbackComment != null) {
+            _queryParams.has_feedback_comment = hasFeedbackComment.toString();
         }
 
         if (userId != null) {

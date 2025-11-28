@@ -10,14 +10,7 @@ describe("Transcript", () => {
 
         const rawResponseBody = {
             language: "language",
-            utterances: [
-                {
-                    speaker_id: "speaker_id",
-                    start_s: 1.1,
-                    end_s: 1.1,
-                    words: [{ text: "text", word_type: "word_type" }],
-                },
-            ],
+            utterances: [{ text: "text", speaker_id: "speaker_id", start_s: 1.1, end_s: 1.1, words: [{}] }],
         };
         server
             .mockEndpoint()
@@ -34,15 +27,11 @@ describe("Transcript", () => {
             language: "language",
             utterances: [
                 {
+                    text: "text",
                     speakerId: "speaker_id",
                     startS: 1.1,
                     endS: 1.1,
-                    words: [
-                        {
-                            text: "text",
-                            wordType: "word_type",
-                        },
-                    ],
+                    words: [{}],
                 },
             ],
         });
