@@ -1,1 +1,1 @@
-export { type GroupsSearchRequest } from "./GroupsSearchRequest";
+export type { GroupsSearchRequest } from "./GroupsSearchRequest";

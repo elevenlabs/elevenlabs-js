@@ -1,1 +1,1 @@
-export { type SegmentCreatePayload } from "./SegmentCreatePayload";
+export type { SegmentCreatePayload } from "./SegmentCreatePayload";

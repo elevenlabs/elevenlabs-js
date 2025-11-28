@@ -1,1 +1,1 @@
-export { type BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost } from "./BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost";
+export type { BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost } from "./BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost";

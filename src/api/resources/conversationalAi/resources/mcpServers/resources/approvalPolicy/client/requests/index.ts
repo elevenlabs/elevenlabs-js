@@ -1,1 +1,1 @@
-export { type McpApprovalPolicyUpdateRequestModel } from "./McpApprovalPolicyUpdateRequestModel";
+export type { McpApprovalPolicyUpdateRequestModel } from "./McpApprovalPolicyUpdateRequestModel";

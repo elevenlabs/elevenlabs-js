@@ -1,2 +1,2 @@
-export { PostWorkspaceSecretRequest } from "./PostWorkspaceSecretRequest";
 export { PatchWorkspaceSecretRequest } from "./PatchWorkspaceSecretRequest";
+export { PostWorkspaceSecretRequest } from "./PostWorkspaceSecretRequest";

@@ -1,1 +1,1 @@
-export { type BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost } from "./BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost";
+export type { BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost } from "./BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost";

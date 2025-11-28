@@ -1,34 +1,80 @@
 import WebSocket from "ws";
 import type { ChildProcess } from "node:child_process";
 import { EventEmitter } from "node:events";
+import type { AudioFormat, CommitStrategy } from "./scribe";
 
-interface InputAudioChunk {
+export interface InputAudioChunk {
     message_type: "input_audio_chunk";
     audio_base_64: string;
     commit: boolean;
     sample_rate: number;
 }
 
-interface SessionStartedMessage {
+export type WordsItemType = "word" | "spacing";
+
+export interface WordsItem {
+    text?: string;
+    start?: number;
+    end?: number;
+    type?: WordsItemType;
+    speaker_id?: string;
+    logprob?: number;
+    characters?: string[];
+}
+
+export interface Config {
+    sample_rate?: number;
+    audio_format?: AudioFormat;
+    language_code?: string;
+    vad_commit_strategy?: CommitStrategy;
+    vad_silence_threshold_secs?: number;
+    vad_threshold?: number;
+    min_speech_duration_ms?: number;
+    min_silence_duration_ms?: number;
+    model_id?: string;
+    disable_logging?: boolean;
+    include_timestamps?: boolean;
+}
+
+export interface SessionStartedMessage {
     message_type: "session_started";
+    session_id: string;
+    config: Config;
 }
 
-interface PartialTranscriptMessage {
+export interface PartialTranscriptMessage {
     message_type: "partial_transcript";
-    transcript: string;
+    text: string;
 }
 
-interface FinalTranscriptMessage {
-    message_type: "final_transcript";
-    transcript: string;
+export interface CommittedTranscriptMessage {
+    message_type: "committed_transcript";
+    text: string;
 }
 
-interface FinalTranscriptWithTimestampsMessage {
-    message_type: "final_transcript_with_timestamps";
-    transcript: string;
+export interface CommittedTranscriptWithTimestampsMessage {
+    message_type: "committed_transcript_with_timestamps";
+    text: string;
+    language_code?: string;
+    words?: WordsItem[];
 }
 
-type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | FinalTranscriptMessage | FinalTranscriptWithTimestampsMessage;
+export interface ErrorMessage {
+    message_type: "error";
+    error: string;
+}
+
+export interface AuthErrorMessage {
+    message_type: "auth_error";
+    error: string;
+}
+
+export interface QuotaExceededErrorMessage {
+    message_type: "quota_exceeded";
+    error: string;
+}
+
+export type WebSocketMessage = SessionStartedMessage | PartialTranscriptMessage | CommittedTranscriptMessage | CommittedTranscriptWithTimestampsMessage | ErrorMessage | AuthErrorMessage | QuotaExceededErrorMessage;
 
 /**
  * Events emitted by the RealtimeConnection.
@@ -38,12 +84,16 @@ export enum RealtimeEvents {
     SESSION_STARTED = "session_started",
     /** Emitted when a partial (interim) transcript is available */
     PARTIAL_TRANSCRIPT = "partial_transcript",
-    /** Emitted when a final transcript is available */
-    FINAL_TRANSCRIPT = "final_transcript",
-    /** Emitted when a final transcript with timestamps is available */
-    FINAL_TRANSCRIPT_WITH_TIMESTAMPS = "final_transcript_with_timestamps",
+    /** Emitted when a committed transcript is available */
+    COMMITTED_TRANSCRIPT = "committed_transcript",
+    /** Emitted when a committed transcript with timestamps is available */
+    COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS = "committed_transcript_with_timestamps",
     /** Emitted when an error occurs */
     ERROR = "error",
+    /** Emitted when an auth error occurs */
+    AUTH_ERROR = "auth_error",
+    /** Emitted when a quota exceeded error occurs */
+    QUOTA_EXCEEDED = "quota_exceeded",
     /** Emitted when the WebSocket connection is opened */
     OPEN = "open",
     /** Emitted when the WebSocket connection is closed */
@@ -59,7 +109,7 @@ export enum RealtimeEvents {
  * @example
  * ```typescript
  * const connection = await client.speechToText.realtime.connect({
- *     modelId: "scribe_realtime_v2",
+ *     modelId: "scribe_v2_realtime",
  *     audioFormat: AudioFormat.PCM_16000,
  *     sampleRate: 16000,
  * });
@@ -72,7 +122,7 @@ export enum RealtimeEvents {
  *     console.log("Partial:", data.transcript);
  * });
  *
- * connection.on(RealtimeEvents.FINAL_TRANSCRIPT, (data) => {
+ * connection.on(RealtimeEvents.COMMITTED_TRANSCRIPT, (data) => {
  *     console.log("Final:", data.transcript);
  *     connection.close();
  * });
@@ -121,11 +171,20 @@ export class RealtimeConnection {
                 case "partial_transcript":
                     this.eventEmitter.emit(RealtimeEvents.PARTIAL_TRANSCRIPT, data);
                     break;
-                case "final_transcript":
-                    this.eventEmitter.emit(RealtimeEvents.FINAL_TRANSCRIPT, data);
+                case "committed_transcript":
+                    this.eventEmitter.emit(RealtimeEvents.COMMITTED_TRANSCRIPT, data);
                     break;
-                case "final_transcript_with_timestamps":
-                    this.eventEmitter.emit(RealtimeEvents.FINAL_TRANSCRIPT_WITH_TIMESTAMPS, data);
+                case "committed_transcript_with_timestamps":
+                    this.eventEmitter.emit(RealtimeEvents.COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS, data);
+                    break;
+                case "error":
+                    this.eventEmitter.emit(RealtimeEvents.ERROR, data);
+                    break;
+                case "auth_error":
+                    this.eventEmitter.emit(RealtimeEvents.AUTH_ERROR, data);
+                    break;
+                case "quota_exceeded":
+                    this.eventEmitter.emit(RealtimeEvents.QUOTA_EXCEEDED, data);
                     break;
             }
         });
@@ -164,7 +223,7 @@ export class RealtimeConnection {
      *     console.log("Partial:", data.transcript);
      * });
      *
-     * connection.on(RealtimeEvents.FINAL_TRANSCRIPT, (data) => {
+     * connection.on(RealtimeEvents.COMMITTED_TRANSCRIPT, (data) => {
      *     console.log("Final:", data.transcript);
      * });
      * ```
@@ -232,8 +291,8 @@ export class RealtimeConnection {
     }
 
     /**
-     * Commits the transcription, signaling that all audio has been sent.
-     * This finalizes the transcription and triggers a FINAL_TRANSCRIPT event.
+     * Commits the segment, triggering a COMMITTED_TRANSCRIPT event and clearing the buffer.
+     * It's recommend to commit often when using CommitStrategy.MANUAL to keep latency low.
      *
      * @throws {Error} If the WebSocket connection is not open
      *
@@ -277,7 +336,7 @@ export class RealtimeConnection {
      *
      * @example
      * ```typescript
-     * connection.on(RealtimeEvents.FINAL_TRANSCRIPT, (data) => {
+     * connection.on(RealtimeEvents.COMMITTED_TRANSCRIPT, (data) => {
      *     console.log("Final:", data.transcript);
      *     connection.close();
      * });

@@ -13,6 +13,7 @@ export const ClientEvent = {
     ClientToolCall: "client_tool_call",
     McpToolCall: "mcp_tool_call",
     McpConnectionStatus: "mcp_connection_status",
+    AgentToolRequest: "agent_tool_request",
     AgentToolResponse: "agent_tool_response",
     VadScore: "vad_score",
     AgentChatResponsePart: "agent_chat_response_part",

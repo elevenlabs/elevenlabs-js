@@ -1,2 +1,2 @@
-export { type PronunciationDictionary } from "./PronunciationDictionary";
-export { type RemovePronunciationDictionaryRulesRequest } from "./RemovePronunciationDictionaryRulesRequest";
+export type { PronunciationDictionary } from "./PronunciationDictionary";
+export type { RemovePronunciationDictionaryRulesRequest } from "./RemovePronunciationDictionaryRulesRequest";

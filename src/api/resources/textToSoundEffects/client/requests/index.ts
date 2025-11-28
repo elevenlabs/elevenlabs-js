@@ -1,1 +1,1 @@
-export { type CreateSoundEffectRequest } from "./CreateSoundEffectRequest";
+export type { CreateSoundEffectRequest } from "./CreateSoundEffectRequest";

@@ -1,1 +1,1 @@
-export { BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost } from "./BodySendConversationFeedbackV1ConvaiConversationsConversationIdFeedbackPost";
+export { ConversationFeedbackRequestModel } from "./ConversationFeedbackRequestModel";

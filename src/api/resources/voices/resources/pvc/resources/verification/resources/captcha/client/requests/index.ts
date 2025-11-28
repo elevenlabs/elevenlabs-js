@@ -1,1 +1,1 @@
-export { type BodyVerifyPvcVoiceCaptchaV1VoicesPvcVoiceIdCaptchaPost } from "./BodyVerifyPvcVoiceCaptchaV1VoicesPvcVoiceIdCaptchaPost";
+export type { BodyVerifyPvcVoiceCaptchaV1VoicesPvcVoiceIdCaptchaPost } from "./BodyVerifyPvcVoiceCaptchaV1VoicesPvcVoiceIdCaptchaPost";

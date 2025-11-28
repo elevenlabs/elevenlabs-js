@@ -16,9 +16,17 @@ export const WorkspaceResourceType = {
     ConvaiPhoneNumbers: "convai_phone_numbers",
     ConvaiMcpServers: "convai_mcp_servers",
     ConvaiApiIntegrationConnections: "convai_api_integration_connections",
+    ConvaiApiIntegrationTriggerConnections: "convai_api_integration_trigger_connections",
     ConvaiBatchCalls: "convai_batch_calls",
     ConvaiAgentResponseTests: "convai_agent_response_tests",
     ConvaiTestSuiteInvocations: "convai_test_suite_invocations",
+    ConvaiCrawlJobs: "convai_crawl_jobs",
+    ConvaiCrawlTasks: "convai_crawl_tasks",
     ConvaiWhatsappAccounts: "convai_whatsapp_accounts",
+    ConvaiAgentVersions: "convai_agent_versions",
+    ConvaiAgentBranches: "convai_agent_branches",
+    ConvaiAgentVersionsDeployments: "convai_agent_versions_deployments",
+    Dashboard: "dashboard",
+    DashboardConfiguration: "dashboard_configuration",
 } as const;
 export type WorkspaceResourceType = (typeof WorkspaceResourceType)[keyof typeof WorkspaceResourceType];

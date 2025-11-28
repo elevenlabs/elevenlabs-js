@@ -1,1 +1,1 @@
-export { type UpdatePhoneNumberRequest } from "./UpdatePhoneNumberRequest";
+export type { UpdatePhoneNumberRequest } from "./UpdatePhoneNumberRequest";
