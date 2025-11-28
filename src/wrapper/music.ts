@@ -123,7 +123,9 @@ export class Music {
     ): Promise<WithRawResponse<MultipartResponse>> {
         // Call the base client method to get the stream with raw response
         try {
-            const { data: stream, rawResponse } = await this._client.composeDetailed(request, requestOptions).withRawResponse();
+            const { data: stream, rawResponse } = await this._client
+                .composeDetailed(request, requestOptions)
+                .withRawResponse();
 
             // Parse the stream using the existing parsing method
             const parsedResponse = await this.parseMultipart(stream);
@@ -133,7 +135,6 @@ export class Music {
             const message = error instanceof Error ? error.message : String(error);
             throw new Error(`Failed to parse detailed composition response: ${message}`);
         }
-
     }
 
     /**
@@ -253,8 +254,40 @@ export class Music {
             audioStart++;
         }
 
-        // Audio goes until the end (or until we find another boundary, but usually it's the end)
-        const audioBuffer = Buffer.from(responseBytes.slice(audioStart));
+        // Find the closing boundary to properly terminate the audio data
+        // Multipart responses end with: \r\n--boundary--\r\n or \n--boundary--\n
+        // Try \r\n first (HTTP standard), then fall back to \n
+        const closingBoundaryCRLF = new TextEncoder().encode("\r\n" + boundary + "--");
+        const closingBoundaryLF = new TextEncoder().encode("\n" + boundary + "--");
+        let audioEnd = responseBytes.length;
+
+        // Helper to find boundary pattern in response bytes
+        const findBoundary = (pattern: Uint8Array): number => {
+            for (let i = audioStart; i <= responseBytes.length - pattern.length; i++) {
+                let match = true;
+                for (let j = 0; j < pattern.length; j++) {
+                    if (responseBytes[i + j] !== pattern[j]) {
+                        match = false;
+                        break;
+                    }
+                }
+                if (match) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+
+        // Try CRLF first, then LF
+        let foundAt = findBoundary(closingBoundaryCRLF);
+        if (foundAt === -1) {
+            foundAt = findBoundary(closingBoundaryLF);
+        }
+        if (foundAt !== -1) {
+            audioEnd = foundAt;
+        }
+
+        const audioBuffer = Buffer.from(responseBytes.slice(audioStart, audioEnd));
 
         if (!jsonData) {
             throw new Error("Could not parse JSON data");
