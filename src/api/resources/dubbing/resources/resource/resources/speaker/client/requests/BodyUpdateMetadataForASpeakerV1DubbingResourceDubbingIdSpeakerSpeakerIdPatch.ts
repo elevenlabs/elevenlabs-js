@@ -5,6 +5,8 @@
  *     {}
  */
 export interface BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch {
+    /** Name to attribute to this speaker. */
+    speakerName?: string;
     /** Either the identifier of a voice from the ElevenLabs voice library, or one of ['track-clone', 'clip-clone']. */
     voiceId?: string;
     /** Languages to apply these changes to. If empty, will apply to all languages. */

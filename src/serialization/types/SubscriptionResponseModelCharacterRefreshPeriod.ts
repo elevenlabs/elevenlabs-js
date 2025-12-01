@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const SubscriptionResponseModelCharacterRefreshPeriod: core.serialization.Schema<
     serializers.SubscriptionResponseModelCharacterRefreshPeriod.Raw,
     ElevenLabs.SubscriptionResponseModelCharacterRefreshPeriod
-> = core.serialization.enum_(["monthly_period", "annual_period"]);
+> = core.serialization.enum_(["monthly_period", "3_month_period", "6_month_period", "annual_period"]);
 
 export declare namespace SubscriptionResponseModelCharacterRefreshPeriod {
-    export type Raw = "monthly_period" | "annual_period";
+    export type Raw = "monthly_period" | "3_month_period" | "6_month_period" | "annual_period";
 }

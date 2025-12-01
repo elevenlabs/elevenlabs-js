@@ -38,6 +38,7 @@ export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSc
     batchCall: core.serialization.property("batch_call", ConversationHistoryBatchCallModel.optional()),
     terminationReason: core.serialization.property("termination_reason", core.serialization.string().optional()),
     error: ConversationHistoryErrorCommonModel.optional(),
+    warnings: core.serialization.list(core.serialization.string()).optional(),
     mainLanguage: core.serialization.property("main_language", core.serialization.string().optional()),
     ragUsage: core.serialization.property("rag_usage", ConversationHistoryRagUsageCommonModel.optional()),
     textOnly: core.serialization.property("text_only", core.serialization.boolean().optional()),
@@ -80,6 +81,7 @@ export declare namespace ConversationHistoryMetadataCommonModel {
         batch_call?: ConversationHistoryBatchCallModel.Raw | null;
         termination_reason?: string | null;
         error?: ConversationHistoryErrorCommonModel.Raw | null;
+        warnings?: string[] | null;
         main_language?: string | null;
         rag_usage?: ConversationHistoryRagUsageCommonModel.Raw | null;
         text_only?: boolean | null;

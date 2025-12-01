@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const AgentDefinitionSource: core.serialization.Schema<
     serializers.AgentDefinitionSource.Raw,
     ElevenLabs.AgentDefinitionSource
-> = core.serialization.enum_(["cli", "ui", "api", "unknown"]);
+> = core.serialization.enum_(["cli", "ui", "api", "template", "unknown"]);
 
 export declare namespace AgentDefinitionSource {
-    export type Raw = "cli" | "ui" | "api" | "unknown";
+    export type Raw = "cli" | "ui" | "api" | "template" | "unknown";
 }

@@ -8,6 +8,7 @@ import * as errors from "../../../../errors/index";
 import * as serializers from "../../../../serialization/index";
 import * as ElevenLabs from "../../../index";
 import { Agents } from "../resources/agents/client/Client";
+import { Analytics } from "../resources/analytics/client/Client";
 import { BatchCalls } from "../resources/batchCalls/client/Client";
 import { Conversations } from "../resources/conversations/client/Client";
 import { Dashboard } from "../resources/dashboard/client/Client";
@@ -43,6 +44,7 @@ export class ConversationalAi {
     protected _batchCalls: BatchCalls | undefined;
     protected _sipTrunk: SipTrunk | undefined;
     protected _mcpServers: McpServers | undefined;
+    protected _analytics: Analytics | undefined;
     protected _dashboard: Dashboard | undefined;
 
     constructor(_options: ConversationalAi.Options = {}) {
@@ -99,6 +101,10 @@ export class ConversationalAi {
 
     public get mcpServers(): McpServers {
         return (this._mcpServers ??= new McpServers(this._options));
+    }
+
+    public get analytics(): Analytics {
+        return (this._analytics ??= new Analytics(this._options));
     }
 
     public get dashboard(): Dashboard {

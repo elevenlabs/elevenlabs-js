@@ -2,10 +2,9 @@
 
 import type * as ElevenLabs from "../index";
 
-/**
- * Configuration for a webhook that will be called by an LLM tool.
- */
 export interface WebhookToolApiSchemaConfigOutput {
+    /** Headers that should be included in the request */
+    requestHeaders?: Record<string, ElevenLabs.WebhookToolApiSchemaConfigOutputRequestHeadersValue>;
     /** The URL that the webhook will be sent to. May include path parameters, e.g. https://example.com/agents/{agent_id} */
     url: string;
     /** The HTTP method to use for the webhook */
@@ -16,8 +15,6 @@ export interface WebhookToolApiSchemaConfigOutput {
     queryParamsSchema?: ElevenLabs.QueryParamsJsonSchema;
     /** Schema for the body parameters, if any. Used for POST/PATCH/PUT requests. The schema should be an object which will be sent as the json body */
     requestBodySchema?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
-    /** Headers that should be included in the request */
-    requestHeaders?: Record<string, ElevenLabs.WebhookToolApiSchemaConfigOutputRequestHeadersValue>;
     /** Content type for the request body. Only applies to POST/PUT/PATCH requests. */
     contentType?: ElevenLabs.WebhookToolApiSchemaConfigOutputContentType;
     /** Optional auth connection to use for authentication with this webhook */

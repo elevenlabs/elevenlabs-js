@@ -56,4 +56,73 @@ describe("Webhooks", () => {
             ],
         });
     });
+
+    test("create", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { settings: { auth_type: "hmac", name: "name", webhook_url: "webhook_url" } };
+        const rawResponseBody = { webhook_id: "webhook_id", webhook_secret: "webhook_secret" };
+        server
+            .mockEndpoint()
+            .post("/v1/workspace/webhooks")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.webhooks.create({
+            settings: {
+                authType: "hmac",
+                name: "name",
+                webhookUrl: "webhook_url",
+            },
+        });
+        expect(response).toEqual({
+            webhookId: "webhook_id",
+            webhookSecret: "webhook_secret",
+        });
+    });
+
+    test("delete", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { status: "ok" };
+        server
+            .mockEndpoint()
+            .delete("/v1/workspace/webhooks/G007vmtq9uWYl7SUW9zGS8GZZa1K")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.webhooks.delete("G007vmtq9uWYl7SUW9zGS8GZZa1K");
+        expect(response).toEqual({
+            status: "ok",
+        });
+    });
+
+    test("update", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { is_disabled: true, name: "My Callback Webhook" };
+        const rawResponseBody = { status: "ok" };
+        server
+            .mockEndpoint()
+            .patch("/v1/workspace/webhooks/G007vmtq9uWYl7SUW9zGS8GZZa1K")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.webhooks.update("G007vmtq9uWYl7SUW9zGS8GZZa1K", {
+            isDisabled: true,
+            name: "My Callback Webhook",
+        });
+        expect(response).toEqual({
+            status: "ok",
+        });
+    });
 });

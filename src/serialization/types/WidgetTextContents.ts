@@ -45,6 +45,22 @@ export const WidgetTextContents: core.serialization.ObjectSchema<
     conversationId: core.serialization.property("conversation_id", core.serialization.string().optional()),
     errorOccurred: core.serialization.property("error_occurred", core.serialization.string().optional()),
     copyId: core.serialization.property("copy_id", core.serialization.string().optional()),
+    initiateFeedback: core.serialization.property("initiate_feedback", core.serialization.string().optional()),
+    requestFollowUpFeedback: core.serialization.property(
+        "request_follow_up_feedback",
+        core.serialization.string().optional(),
+    ),
+    thanksForFeedback: core.serialization.property("thanks_for_feedback", core.serialization.string().optional()),
+    thanksForFeedbackDetails: core.serialization.property(
+        "thanks_for_feedback_details",
+        core.serialization.string().optional(),
+    ),
+    followUpFeedbackPlaceholder: core.serialization.property(
+        "follow_up_feedback_placeholder",
+        core.serialization.string().optional(),
+    ),
+    submit: core.serialization.string().optional(),
+    goBack: core.serialization.property("go_back", core.serialization.string().optional()),
 });
 
 export declare namespace WidgetTextContents {
@@ -74,5 +90,12 @@ export declare namespace WidgetTextContents {
         conversation_id?: string | null;
         error_occurred?: string | null;
         copy_id?: string | null;
+        initiate_feedback?: string | null;
+        request_follow_up_feedback?: string | null;
+        thanks_for_feedback?: string | null;
+        thanks_for_feedback_details?: string | null;
+        follow_up_feedback_placeholder?: string | null;
+        submit?: string | null;
+        go_back?: string | null;
     }
 }

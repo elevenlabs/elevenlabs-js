@@ -12,11 +12,13 @@ export const AgentWorkflowResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     edges: core.serialization.record(core.serialization.string(), WorkflowEdgeModelOutput),
     nodes: core.serialization.record(core.serialization.string(), AgentWorkflowResponseModelNodesValue),
+    preventSubagentLoops: core.serialization.property("prevent_subagent_loops", core.serialization.boolean()),
 });
 
 export declare namespace AgentWorkflowResponseModel {
     export interface Raw {
         edges: Record<string, WorkflowEdgeModelOutput.Raw>;
         nodes: Record<string, AgentWorkflowResponseModelNodesValue.Raw>;
+        prevent_subagent_loops: boolean;
     }
 }

@@ -20,9 +20,9 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     name?: string;
     /** URL of the source video/audio file. */
     sourceUrl?: string;
-    /** Source language. */
+    /** Source language. Expects a valid iso639-1 or iso639-3 language code. */
     sourceLang?: string;
-    /** The Target language to dub the content into. */
+    /** The Target language to dub the content into. Expects a valid iso639-1 or iso639-3 language code. */
     targetLang?: string;
     /** [Experimental] An accent to apply when selecting voices from the library and to use to inform translation of the dialect to prefer. */
     targetAccent?: string;

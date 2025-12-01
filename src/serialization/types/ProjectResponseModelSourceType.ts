@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const ProjectResponseModelSourceType: core.serialization.Schema<
     serializers.ProjectResponseModelSourceType.Raw,
     ElevenLabs.ProjectResponseModelSourceType
-> = core.serialization.enum_(["blank", "book", "article", "genfm", "video"]);
+> = core.serialization.enum_(["blank", "book", "article", "genfm", "video", "screenplay"]);
 
 export declare namespace ProjectResponseModelSourceType {
-    export type Raw = "blank" | "book" | "article" | "genfm" | "video";
+    export type Raw = "blank" | "book" | "article" | "genfm" | "video" | "screenplay";
 }

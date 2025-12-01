@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConvAiSecretLocator } from "./ConvAiSecretLocator";
+import { CustomLlmapiType } from "./CustomLlmapiType";
 import { CustomLlmRequestHeadersValue } from "./CustomLlmRequestHeadersValue";
 
 export const CustomLlm: core.serialization.ObjectSchema<serializers.CustomLlm.Raw, ElevenLabs.CustomLlm> =
@@ -16,6 +17,7 @@ export const CustomLlm: core.serialization.ObjectSchema<serializers.CustomLlm.Ra
             core.serialization.record(core.serialization.string(), CustomLlmRequestHeadersValue).optional(),
         ),
         apiVersion: core.serialization.property("api_version", core.serialization.string().optional()),
+        apiType: core.serialization.property("api_type", CustomLlmapiType.optional()),
     });
 
 export declare namespace CustomLlm {
@@ -25,5 +27,6 @@ export declare namespace CustomLlm {
         api_key?: ConvAiSecretLocator.Raw | null;
         request_headers?: Record<string, CustomLlmRequestHeadersValue.Raw> | null;
         api_version?: string | null;
+        api_type?: CustomLlmapiType.Raw | null;
     }
 }

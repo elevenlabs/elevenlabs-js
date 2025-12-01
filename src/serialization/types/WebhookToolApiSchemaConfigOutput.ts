@@ -14,6 +14,12 @@ export const WebhookToolApiSchemaConfigOutput: core.serialization.ObjectSchema<
     serializers.WebhookToolApiSchemaConfigOutput.Raw,
     ElevenLabs.WebhookToolApiSchemaConfigOutput
 > = core.serialization.object({
+    requestHeaders: core.serialization.property(
+        "request_headers",
+        core.serialization
+            .record(core.serialization.string(), WebhookToolApiSchemaConfigOutputRequestHeadersValue)
+            .optional(),
+    ),
     url: core.serialization.string(),
     method: WebhookToolApiSchemaConfigOutputMethod.optional(),
     pathParamsSchema: core.serialization.property(
@@ -25,24 +31,18 @@ export const WebhookToolApiSchemaConfigOutput: core.serialization.ObjectSchema<
         "request_body_schema",
         core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyOutput).optional(),
     ),
-    requestHeaders: core.serialization.property(
-        "request_headers",
-        core.serialization
-            .record(core.serialization.string(), WebhookToolApiSchemaConfigOutputRequestHeadersValue)
-            .optional(),
-    ),
     contentType: core.serialization.property("content_type", WebhookToolApiSchemaConfigOutputContentType.optional()),
     authConnection: core.serialization.property("auth_connection", AuthConnectionLocator.optional()),
 });
 
 export declare namespace WebhookToolApiSchemaConfigOutput {
     export interface Raw {
+        request_headers?: Record<string, WebhookToolApiSchemaConfigOutputRequestHeadersValue.Raw> | null;
         url: string;
         method?: WebhookToolApiSchemaConfigOutputMethod.Raw | null;
         path_params_schema?: Record<string, LiteralJsonSchemaProperty.Raw> | null;
         query_params_schema?: QueryParamsJsonSchema.Raw | null;
         request_body_schema?: serializers.ObjectJsonSchemaPropertyOutput.Raw | null;
-        request_headers?: Record<string, WebhookToolApiSchemaConfigOutputRequestHeadersValue.Raw> | null;
         content_type?: WebhookToolApiSchemaConfigOutputContentType.Raw | null;
         auth_connection?: AuthConnectionLocator.Raw | null;
     }

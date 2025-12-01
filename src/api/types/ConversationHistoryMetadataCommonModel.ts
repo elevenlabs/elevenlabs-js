@@ -15,6 +15,7 @@ export interface ConversationHistoryMetadataCommonModel {
     batchCall?: ElevenLabs.ConversationHistoryBatchCallModel;
     terminationReason?: string;
     error?: ElevenLabs.ConversationHistoryErrorCommonModel;
+    warnings?: string[];
     mainLanguage?: string;
     ragUsage?: ElevenLabs.ConversationHistoryRagUsageCommonModel;
     textOnly?: boolean;

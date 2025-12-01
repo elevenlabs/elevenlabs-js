@@ -9,7 +9,8 @@ export const DubbingTranscriptUtterance: core.serialization.ObjectSchema<
     serializers.DubbingTranscriptUtterance.Raw,
     ElevenLabs.DubbingTranscriptUtterance
 > = core.serialization.object({
-    speakerId: core.serialization.property("speaker_id", core.serialization.string()),
+    text: core.serialization.string().optional(),
+    speakerId: core.serialization.property("speaker_id", core.serialization.string().optional()),
     startS: core.serialization.property("start_s", core.serialization.number().optional()),
     endS: core.serialization.property("end_s", core.serialization.number().optional()),
     words: core.serialization.list(DubbingTranscriptWord).optional(),
@@ -17,7 +18,8 @@ export const DubbingTranscriptUtterance: core.serialization.ObjectSchema<
 
 export declare namespace DubbingTranscriptUtterance {
     export interface Raw {
-        speaker_id: string;
+        text?: string | null;
+        speaker_id?: string | null;
         start_s?: number | null;
         end_s?: number | null;
         words?: DubbingTranscriptWord.Raw[] | null;

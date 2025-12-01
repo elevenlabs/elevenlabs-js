@@ -289,6 +289,12 @@ export class Projects {
             );
         }
 
+        if (request.voiceSettings != null) {
+            for (const _item of request.voiceSettings) {
+                _request.append("voice_settings", _item);
+            }
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

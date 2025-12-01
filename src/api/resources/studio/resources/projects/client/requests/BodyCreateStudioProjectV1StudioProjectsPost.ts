@@ -137,4 +137,6 @@ export interface BodyCreateStudioProjectV1StudioProjectsPost {
     autoAssignVoices?: boolean;
     /** The type of Studio project to create. */
     sourceType?: ElevenLabs.studio.ProjectsCreateRequestSourceType;
+    /** Optional voice settings overrides for the project, encoded as a list of JSON strings. */
+    voiceSettings?: string[];
 }

@@ -51,4 +51,18 @@ export interface WidgetTextContents {
     errorOccurred?: string;
     /** Text and ARIA label used for the copy ID button. */
     copyId?: string;
+    /** Text displayed to prompt the user for feedback. */
+    initiateFeedback?: string;
+    /** Text displayed to request additional feedback details. */
+    requestFollowUpFeedback?: string;
+    /** Text displayed to thank the user for providing feedback. */
+    thanksForFeedback?: string;
+    /** Additional text displayed explaining the value of user feedback. */
+    thanksForFeedbackDetails?: string;
+    /** Placeholder text for the follow-up feedback input field. */
+    followUpFeedbackPlaceholder?: string;
+    /** Text and ARIA label for the submit button. */
+    submit?: string;
+    /** Text and ARIA label for the go back button. */
+    goBack?: string;
 }

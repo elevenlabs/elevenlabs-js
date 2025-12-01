@@ -6,6 +6,7 @@ export const ProjectsCreateRequestSourceType = {
     Article: "article",
     Genfm: "genfm",
     Video: "video",
+    Screenplay: "screenplay",
 } as const;
 export type ProjectsCreateRequestSourceType =
     (typeof ProjectsCreateRequestSourceType)[keyof typeof ProjectsCreateRequestSourceType];
