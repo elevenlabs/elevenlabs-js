@@ -8,7 +8,20 @@ export {
     type CommittedTranscriptMessage,
     type CommittedTranscriptWithTimestampsMessage,
     type PartialTranscriptMessage,
-    type SessionStartedMessage
+    type SessionStartedMessage,
+    type ServerErrorMessage,
+    type AuthErrorMessage,
+    type QuotaExceededErrorMessage,
+    type CommitThrottledErrorMessage,
+    type TranscriberErrorMessage,
+    type UnacceptedTermsErrorMessage,
+    type RateLimitedErrorMessage,
+    type InputErrorMessage,
+    type QueueOverflowErrorMessage,
+    type ResourceExhaustedErrorMessage,
+    type SessionTimeLimitExceededErrorMessage,
+    type ChunkSizeExceededErrorMessage,
+    type InsufficientAudioActivityErrorMessage,
 } from "./connection";
 
 export {
