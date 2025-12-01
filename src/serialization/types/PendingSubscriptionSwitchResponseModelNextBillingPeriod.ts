@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const PendingSubscriptionSwitchResponseModelNextBillingPeriod: core.serialization.Schema<
     serializers.PendingSubscriptionSwitchResponseModelNextBillingPeriod.Raw,
     ElevenLabs.PendingSubscriptionSwitchResponseModelNextBillingPeriod
-> = core.serialization.enum_(["monthly_period", "annual_period"]);
+> = core.serialization.enum_(["monthly_period", "3_month_period", "6_month_period", "annual_period"]);
 
 export declare namespace PendingSubscriptionSwitchResponseModelNextBillingPeriod {
-    export type Raw = "monthly_period" | "annual_period";
+    export type Raw = "monthly_period" | "3_month_period" | "6_month_period" | "annual_period";
 }

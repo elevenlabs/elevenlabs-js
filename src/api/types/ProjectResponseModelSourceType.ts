@@ -6,6 +6,7 @@ export const ProjectResponseModelSourceType = {
     Article: "article",
     Genfm: "genfm",
     Video: "video",
+    Screenplay: "screenplay",
 } as const;
 export type ProjectResponseModelSourceType =
     (typeof ProjectResponseModelSourceType)[keyof typeof ProjectResponseModelSourceType];

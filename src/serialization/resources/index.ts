@@ -38,4 +38,6 @@ export * from "./textToVoice/types";
 export * as voices from "./voices";
 export * from "./voices/client/requests";
 export * from "./voices/types";
+export * as webhooks from "./webhooks";
+export * from "./webhooks/client/requests";
 export * as workspace from "./workspace";

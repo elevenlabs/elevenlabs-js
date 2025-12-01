@@ -51,7 +51,6 @@ describe("Agents", () => {
                     model_id: "eleven_turbo_v2",
                     voice_id: "cjVigY5qzO86Huf0OWal",
                     supported_voices: [{ label: "label", voice_id: "voice_id" }],
-                    suggested_audio_tags: [{ tag: "tag" }],
                     agent_output_audio_format: "pcm_16000",
                     optimize_streaming_latency: 3,
                     stability: 0.5,
@@ -601,6 +600,7 @@ describe("Agents", () => {
                         tools: [{ tool_id: "tool_id" }],
                     },
                 },
+                prevent_subagent_loops: false,
             },
             access_info: {
                 is_creator: true,
@@ -646,11 +646,6 @@ describe("Agents", () => {
                         {
                             label: "label",
                             voiceId: "voice_id",
-                        },
-                    ],
-                    suggestedAudioTags: [
-                        {
-                            tag: "tag",
                         },
                     ],
                     agentOutputAudioFormat: "pcm_16000",
@@ -1436,6 +1431,7 @@ describe("Agents", () => {
                         ],
                     },
                 },
+                preventSubagentLoops: false,
             },
             accessInfo: {
                 isCreator: true,
@@ -1487,7 +1483,6 @@ describe("Agents", () => {
                     model_id: "eleven_turbo_v2",
                     voice_id: "cjVigY5qzO86Huf0OWal",
                     supported_voices: [{ label: "label", voice_id: "voice_id" }],
-                    suggested_audio_tags: [{ tag: "tag" }],
                     agent_output_audio_format: "pcm_16000",
                     optimize_streaming_latency: 3,
                     stability: 0.5,
@@ -2037,6 +2032,7 @@ describe("Agents", () => {
                         tools: [{ tool_id: "tool_id" }],
                     },
                 },
+                prevent_subagent_loops: false,
             },
             access_info: {
                 is_creator: true,
@@ -2083,11 +2079,6 @@ describe("Agents", () => {
                         {
                             label: "label",
                             voiceId: "voice_id",
-                        },
-                    ],
-                    suggestedAudioTags: [
-                        {
-                            tag: "tag",
                         },
                     ],
                     agentOutputAudioFormat: "pcm_16000",
@@ -2873,6 +2864,7 @@ describe("Agents", () => {
                         ],
                     },
                 },
+                preventSubagentLoops: false,
             },
             accessInfo: {
                 isCreator: true,

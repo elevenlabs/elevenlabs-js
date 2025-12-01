@@ -24,6 +24,27 @@ describe("Speaker", () => {
         });
     });
 
+    test("create", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = { version: 1, speaker_id: "speaker_id" };
+        server
+            .mockEndpoint()
+            .post("/v1/dubbing/resource/dubbing_id/speaker")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.dubbing.resource.speaker.create("dubbing_id");
+        expect(response).toEqual({
+            version: 1,
+            speakerId: "speaker_id",
+        });
+    });
+
     test("find_similar_voices", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });

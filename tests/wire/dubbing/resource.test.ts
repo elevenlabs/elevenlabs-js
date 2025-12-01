@@ -203,6 +203,29 @@ describe("Resource", () => {
         });
     });
 
+    test("migrate_segments", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { segment_ids: ["segment_ids"], speaker_id: "speaker_id" };
+        const rawResponseBody = { version: 1 };
+        server
+            .mockEndpoint()
+            .post("/v1/dubbing/resource/dubbing_id/migrate-segments")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.dubbing.resource.migrateSegments("dubbing_id", {
+            segmentIds: ["segment_ids"],
+            speakerId: "speaker_id",
+        });
+        expect(response).toEqual({
+            version: 1,
+        });
+    });
+
     test("transcribe", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
