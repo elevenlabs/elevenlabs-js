@@ -440,7 +440,7 @@ export class RealtimeConnection {
      * @param data.audioBase64 - Base64-encoded audio data
      * @param data.commit - Whether to commit the transcription after this chunk. You likely want to use connection.commit() instead (default: false)
      * @param data.sampleRate - Sample rate of the audio (default: configured sample rate)
-     * @param data.previousText - Send context to the model via base64 encoded audio or text from a previous transcription. Can only be sent alongside the first audio chunk. If sent in a subsequent chunk, an error will be returned.
+     * @param data.previousText - Send text context to the model. Can only be sent alongside the first audio chunk. If sent in a subsequent chunk, an error will be returned.
      * @throws {Error} If the WebSocket connection is not open
      *
      * @example
