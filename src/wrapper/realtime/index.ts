@@ -8,7 +8,7 @@ export {
     type CommittedTranscriptMessage,
     type CommittedTranscriptWithTimestampsMessage,
     type PartialTranscriptMessage,
-    type SessionStartedMessage
+    type SessionStartedMessage,
     type ServerErrorMessage,
     type AuthErrorMessage,
     type QuotaExceededErrorMessage,
