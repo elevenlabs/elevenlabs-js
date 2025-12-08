@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("History", () => {
+describe("HistoryClient", () => {
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             history: [
@@ -130,7 +130,7 @@ describe("History", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             history_item_id: "ja9xsmfGhxYcymxGcOGB",
@@ -236,7 +236,7 @@ describe("History", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
         server

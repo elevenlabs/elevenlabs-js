@@ -7,7 +7,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *     {
  *         isEnabled: true,
  *         name: "Sneaky Fox",
- *         permissions: ["text_to_speech"]
+ *         permissions: "all"
  *     }
  */
 export interface BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatch {

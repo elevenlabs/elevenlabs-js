@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../../src/Client";
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 
-describe("Document", () => {
+describe("DocumentClient", () => {
     test("compute_rag_index", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "e5_mistral_7b_instruct" };
         const rawResponseBody = {
             id: "id",

@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { MusicPrompt } from "./MusicPrompt";
 import { SongMetadata } from "./SongMetadata";
+import { WordTimestamp } from "./WordTimestamp";
 
 export const DetailedMusicResponse: core.serialization.ObjectSchema<
     serializers.DetailedMusicResponse.Raw,
@@ -12,11 +13,13 @@ export const DetailedMusicResponse: core.serialization.ObjectSchema<
 > = core.serialization.object({
     compositionPlan: core.serialization.property("composition_plan", MusicPrompt),
     songMetadata: core.serialization.property("song_metadata", SongMetadata),
+    wordsTimestamps: core.serialization.property("words_timestamps", core.serialization.list(WordTimestamp).optional()),
 });
 
 export declare namespace DetailedMusicResponse {
     export interface Raw {
         composition_plan: MusicPrompt.Raw;
         song_metadata: SongMetadata.Raw;
+        words_timestamps?: WordTimestamp.Raw[] | null;
     }
 }

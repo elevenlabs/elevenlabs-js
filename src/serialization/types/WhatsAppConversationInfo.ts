@@ -3,17 +3,20 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { WhatsAppConversationInfoDirection } from "./WhatsAppConversationInfoDirection";
 
 export const WhatsAppConversationInfo: core.serialization.ObjectSchema<
     serializers.WhatsAppConversationInfo.Raw,
     ElevenLabs.WhatsAppConversationInfo
 > = core.serialization.object({
+    direction: WhatsAppConversationInfoDirection.optional(),
     whatsappBusinessAccountId: core.serialization.property("whatsapp_business_account_id", core.serialization.string()),
     whatsappUserId: core.serialization.property("whatsapp_user_id", core.serialization.string()),
 });
 
 export declare namespace WhatsAppConversationInfo {
     export interface Raw {
+        direction?: WhatsAppConversationInfoDirection.Raw | null;
         whatsapp_business_account_id: string;
         whatsapp_user_id: string;
     }

@@ -6,23 +6,23 @@ import type * as serializers from "../../../index";
 import { PodcastTextSource } from "../../../types/PodcastTextSource";
 import { PodcastUrlSource } from "../../../types/PodcastUrlSource";
 
-export const BodyCreatePodcastV1StudioPodcastsPostSourceItem: core.serialization.Schema<
-    serializers.BodyCreatePodcastV1StudioPodcastsPostSourceItem.Raw,
-    ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSourceItem
+export const BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem: core.serialization.Schema<
+    serializers.BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem.Raw,
+    ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem
 > = core.serialization
     .union("type", {
         text: PodcastTextSource,
         url: PodcastUrlSource,
     })
-    .transform<ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSourceItem>({
+    .transform<ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem>({
         transform: (value) => value,
         untransform: (value) => value,
     });
 
-export declare namespace BodyCreatePodcastV1StudioPodcastsPostSourceItem {
+export declare namespace BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem {
     export type Raw =
-        | BodyCreatePodcastV1StudioPodcastsPostSourceItem.Text
-        | BodyCreatePodcastV1StudioPodcastsPostSourceItem.Url;
+        | BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem.Text
+        | BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem.Url;
 
     export interface Text extends PodcastTextSource.Raw {
         type: "text";

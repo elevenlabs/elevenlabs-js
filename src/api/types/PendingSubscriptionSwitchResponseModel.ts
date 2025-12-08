@@ -7,7 +7,7 @@ export interface PendingSubscriptionSwitchResponseModel {
     /** The tier to change to. */
     nextTier: ElevenLabs.PendingSubscriptionSwitchResponseModelNextTier;
     /** The billing period to change to. */
-    nextBillingPeriod: ElevenLabs.PendingSubscriptionSwitchResponseModelNextBillingPeriod;
+    nextBillingPeriod: ElevenLabs.BillingPeriod;
     /** The timestamp of the change. */
     timestampSeconds: number;
 }

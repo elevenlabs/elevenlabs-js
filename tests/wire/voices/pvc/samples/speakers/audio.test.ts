@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../../../../src/Client";
 import { mockServerPool } from "../../../../../mock-server/MockServerPool";
 
-describe("Audio", () => {
+describe("AudioClient", () => {
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { audio_base_64: "audio_base_64", media_type: "audio/mpeg", duration_secs: 5 };
         server

@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
-describe("McpServers", () => {
+describe("McpServersClient", () => {
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             mcp_servers: [
@@ -68,7 +68,7 @@ describe("McpServers", () => {
 
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { config: { url: "url", name: "name" } };
         const rawResponseBody = {
             id: "id",
@@ -181,7 +181,7 @@ describe("McpServers", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             id: "id",
@@ -288,7 +288,7 @@ describe("McpServers", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -307,7 +307,7 @@ describe("McpServers", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             id: "id",

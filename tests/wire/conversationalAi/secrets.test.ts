@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
-describe("Secrets", () => {
+describe("SecretsClient", () => {
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             secrets: [
@@ -75,7 +75,7 @@ describe("Secrets", () => {
 
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { type: "new", name: "name", value: "value" };
         const rawResponseBody = { type: "stored", secret_id: "secret_id", name: "name" };
         server
@@ -100,7 +100,7 @@ describe("Secrets", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         server.mockEndpoint().delete("/v1/convai/secrets/secret_id").respondWith().statusCode(200).build();
 
@@ -110,7 +110,7 @@ describe("Secrets", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { type: "update", name: "name", value: "value" };
         const rawResponseBody = { type: "stored", secret_id: "secret_id", name: "name" };
         server

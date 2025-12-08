@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
-describe("Rules", () => {
+describe("RulesClient", () => {
     test("add", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { rules: [{ type: "alias", string_to_replace: "Thailand", alias: "tie-land" }] };
         const rawResponseBody = {
             id: "5xM3yVvZQKV0EfqQpLrJ",
@@ -40,7 +40,7 @@ describe("Rules", () => {
 
     test("remove", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { rule_strings: ["rule_strings"] };
         const rawResponseBody = {
             id: "5xM3yVvZQKV0EfqQpLrJ",

@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("PronunciationDictionaries", () => {
+describe("PronunciationDictionariesClient", () => {
     test("create_from_rules", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             rules: [{ type: "alias", string_to_replace: "Thailand", alias: "tie-land" }],
             name: "My Dictionary",
@@ -54,7 +54,7 @@ describe("PronunciationDictionaries", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             id: "5xM3yVvZQKV0EfqQpLrJ",
@@ -91,7 +91,7 @@ describe("PronunciationDictionaries", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             id: "5xM3yVvZQKV0EfqQpLrJ",
@@ -129,7 +129,7 @@ describe("PronunciationDictionaries", () => {
 
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             pronunciation_dictionaries: [

@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
-describe("Agents", () => {
+describe("AgentsClient", () => {
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { conversation_config: {} };
         const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
         server
@@ -28,7 +28,7 @@ describe("Agents", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             agent_id: "agent_7101k5zvyjhmfg983brhmhkd98n6",
@@ -110,7 +110,6 @@ describe("Agents", () => {
                     expandable: "never",
                     avatar: { type: "orb", color_1: "#2792dc", color_2: "#9ce6e6" },
                     feedback_mode: "none",
-                    end_feedback: {},
                     bg_color: "bg_color",
                     text_color: "text_color",
                     btn_color: "btn_color",
@@ -138,8 +137,6 @@ describe("Agents", () => {
                     text_input_enabled: true,
                     default_expanded: true,
                     always_expanded: true,
-                    text_contents: {},
-                    styles: {},
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -163,7 +160,6 @@ describe("Agents", () => {
                         url: "https://example.com/webhook",
                         request_headers: { "Content-Type": "application/json" },
                     },
-                    webhooks: {},
                 },
                 testing: {
                     attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
@@ -345,7 +341,6 @@ describe("Agents", () => {
                                 ],
                             },
                             conversation: { max_duration_seconds: 600, client_events: ["audio", "interruption"] },
-                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -430,7 +425,6 @@ describe("Agents", () => {
                                 ],
                             },
                             conversation: { max_duration_seconds: 600, client_events: ["audio", "interruption"] },
-                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -516,7 +510,6 @@ describe("Agents", () => {
                                 ],
                             },
                             conversation: { max_duration_seconds: 600, client_events: ["audio", "interruption"] },
-                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -742,7 +735,6 @@ describe("Agents", () => {
                         color2: "#9ce6e6",
                     },
                     feedbackMode: "none",
-                    endFeedback: {},
                     bgColor: "bg_color",
                     textColor: "text_color",
                     btnColor: "btn_color",
@@ -770,8 +762,6 @@ describe("Agents", () => {
                     textInputEnabled: true,
                     defaultExpanded: true,
                     alwaysExpanded: true,
-                    textContents: {},
-                    styles: {},
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -799,7 +789,6 @@ describe("Agents", () => {
                             "Content-Type": "application/json",
                         },
                     },
-                    webhooks: {},
                 },
                 testing: {
                     attachedTests: [
@@ -1079,7 +1068,6 @@ describe("Agents", () => {
                                 maxDurationSeconds: 600,
                                 clientEvents: ["audio", "interruption"],
                             },
-                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -1186,7 +1174,6 @@ describe("Agents", () => {
                                 maxDurationSeconds: 600,
                                 clientEvents: ["audio", "interruption"],
                             },
-                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -1301,7 +1288,6 @@ describe("Agents", () => {
                                 maxDurationSeconds: 600,
                                 clientEvents: ["audio", "interruption"],
                             },
-                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -1445,7 +1431,7 @@ describe("Agents", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         server
             .mockEndpoint()
@@ -1460,7 +1446,7 @@ describe("Agents", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             agent_id: "agent_7101k5zvyjhmfg983brhmhkd98n6",
@@ -1542,7 +1528,6 @@ describe("Agents", () => {
                     expandable: "never",
                     avatar: { type: "orb", color_1: "#2792dc", color_2: "#9ce6e6" },
                     feedback_mode: "none",
-                    end_feedback: {},
                     bg_color: "bg_color",
                     text_color: "text_color",
                     btn_color: "btn_color",
@@ -1570,8 +1555,6 @@ describe("Agents", () => {
                     text_input_enabled: true,
                     default_expanded: true,
                     always_expanded: true,
-                    text_contents: {},
-                    styles: {},
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -1595,7 +1578,6 @@ describe("Agents", () => {
                         url: "https://example.com/webhook",
                         request_headers: { "Content-Type": "application/json" },
                     },
-                    webhooks: {},
                 },
                 testing: {
                     attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
@@ -1777,7 +1759,6 @@ describe("Agents", () => {
                                 ],
                             },
                             conversation: { max_duration_seconds: 600, client_events: ["audio", "interruption"] },
-                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -1862,7 +1843,6 @@ describe("Agents", () => {
                                 ],
                             },
                             conversation: { max_duration_seconds: 600, client_events: ["audio", "interruption"] },
-                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -1948,7 +1928,6 @@ describe("Agents", () => {
                                 ],
                             },
                             conversation: { max_duration_seconds: 600, client_events: ["audio", "interruption"] },
-                            vad: {},
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -2175,7 +2154,6 @@ describe("Agents", () => {
                         color2: "#9ce6e6",
                     },
                     feedbackMode: "none",
-                    endFeedback: {},
                     bgColor: "bg_color",
                     textColor: "text_color",
                     btnColor: "btn_color",
@@ -2203,8 +2181,6 @@ describe("Agents", () => {
                     textInputEnabled: true,
                     defaultExpanded: true,
                     alwaysExpanded: true,
-                    textContents: {},
-                    styles: {},
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -2232,7 +2208,6 @@ describe("Agents", () => {
                             "Content-Type": "application/json",
                         },
                     },
-                    webhooks: {},
                 },
                 testing: {
                     attachedTests: [
@@ -2512,7 +2487,6 @@ describe("Agents", () => {
                                 maxDurationSeconds: 600,
                                 clientEvents: ["audio", "interruption"],
                             },
-                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -2619,7 +2593,6 @@ describe("Agents", () => {
                                 maxDurationSeconds: 600,
                                 clientEvents: ["audio", "interruption"],
                             },
-                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -2734,7 +2707,6 @@ describe("Agents", () => {
                                 maxDurationSeconds: 600,
                                 clientEvents: ["audio", "interruption"],
                             },
-                            vad: {},
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
                                 language: "en",
@@ -2878,7 +2850,7 @@ describe("Agents", () => {
 
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             agents: [
@@ -2934,7 +2906,7 @@ describe("Agents", () => {
 
     test("duplicate", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
         server
@@ -2954,7 +2926,7 @@ describe("Agents", () => {
 
     test("simulate_conversation", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             simulation_specification: {
                 simulated_user_config: {
@@ -2991,14 +2963,12 @@ describe("Agents", () => {
                     feedback: { score: "like", time_in_call_secs: 1 },
                     llm_override: "llm_override",
                     time_in_call_secs: 1,
-                    conversation_turn_metrics: {},
                     rag_retrieval_info: {
                         chunks: [{ document_id: "document_id", chunk_id: "chunk_id", vector_distance: 1.1 }],
                         embedding_model: "e5_mistral_7b_instruct",
                         retrieval_query: "retrieval_query",
                         rag_latency_secs: 1.1,
                     },
-                    llm_usage: {},
                     interrupted: true,
                     original_message: "original_message",
                     source_medium: "audio",
@@ -3085,7 +3055,6 @@ describe("Agents", () => {
                     },
                     llmOverride: "llm_override",
                     timeInCallSecs: 1,
-                    conversationTurnMetrics: {},
                     ragRetrievalInfo: {
                         chunks: [
                             {
@@ -3098,7 +3067,6 @@ describe("Agents", () => {
                         retrievalQuery: "retrieval_query",
                         ragLatencySecs: 1.1,
                     },
-                    llmUsage: {},
                     interrupted: true,
                     originalMessage: "original_message",
                     sourceMedium: "audio",
@@ -3134,7 +3102,7 @@ describe("Agents", () => {
 
     test("simulate_conversation_stream", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             simulation_specification: {
                 simulated_user_config: {
@@ -3170,7 +3138,7 @@ describe("Agents", () => {
 
     test("run_tests", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { tests: [{ test_id: "test_id" }] };
         const rawResponseBody = {
             id: "id",

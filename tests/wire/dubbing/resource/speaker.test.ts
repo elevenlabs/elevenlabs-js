@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../../src/Client";
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 
-describe("Speaker", () => {
+describe("SpeakerClient", () => {
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { version: 1 };
         server
@@ -26,7 +26,7 @@ describe("Speaker", () => {
 
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { version: 1, speaker_id: "speaker_id" };
         server
@@ -47,7 +47,7 @@ describe("Speaker", () => {
 
     test("find_similar_voices", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             voices: [

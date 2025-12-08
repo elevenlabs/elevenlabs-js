@@ -6,6 +6,8 @@ import type * as ElevenLabs from "../index";
  * A system tool is a tool that is used to call a system method in the server
  */
 export interface SystemToolConfigInput {
+    /** The type of tool */
+    type?: "system";
     name: string;
     /** Description of when the tool should be used and what it does. Leave empty to use the default description that's optimized for the specific tool type. */
     description?: string;

@@ -3,8 +3,12 @@
 import type * as ElevenLabs from "../index";
 
 export interface GetVoicesV2Response {
+    /** The list of voices matching the query. */
     voices: ElevenLabs.Voice[];
+    /** Indicates whether there are more voices available in subsequent pages. Use this flag (and next_page_token) for reliable pagination instead of relying on total_count. */
     hasMore: boolean;
+    /** The total count of voices matching the query. This value is a live snapshot that reflects the current state of the database and may change between requests as users create, modify, or delete voices. For reliable pagination, use the has_more flag instead of relying on this value. Only request this field when you actually need the total count (e.g., for display purposes), as calculating it incurs a performance cost. */
     totalCount: number;
+    /** Token to retrieve the next page of results. Pass this value to the next request to continue pagination. Null if there are no more results. */
     nextPageToken?: string;
 }

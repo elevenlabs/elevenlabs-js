@@ -25,3 +25,4 @@ export * from "./tests/client/requests";
 export * from "./tests/types";
 export * as twilio from "./twilio";
 export * from "./twilio/client/requests";
+export * from "./twilio/types";

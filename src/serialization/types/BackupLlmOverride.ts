@@ -9,11 +9,13 @@ export const BackupLlmOverride: core.serialization.ObjectSchema<
     serializers.BackupLlmOverride.Raw,
     ElevenLabs.BackupLlmOverride
 > = core.serialization.object({
+    preference: core.serialization.stringLiteral("override").optional(),
     order: core.serialization.list(Llm),
 });
 
 export declare namespace BackupLlmOverride {
     export interface Raw {
+        preference?: "override" | null;
         order: Llm.Raw[];
     }
 }

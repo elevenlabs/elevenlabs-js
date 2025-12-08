@@ -20,8 +20,8 @@ export const DubbingResource: core.serialization.ObjectSchema<
         core.serialization.list(core.serialization.string()),
     ),
     input: DubbingMediaReference,
-    background: DubbingMediaReference,
-    foreground: DubbingMediaReference,
+    background: DubbingMediaReference.optional(),
+    foreground: DubbingMediaReference.optional(),
     speakerTracks: core.serialization.property(
         "speaker_tracks",
         core.serialization.record(core.serialization.string(), SpeakerTrack),
@@ -40,8 +40,8 @@ export declare namespace DubbingResource {
         source_language: string;
         target_languages: string[];
         input: DubbingMediaReference.Raw;
-        background: DubbingMediaReference.Raw;
-        foreground: DubbingMediaReference.Raw;
+        background?: DubbingMediaReference.Raw | null;
+        foreground?: DubbingMediaReference.Raw | null;
         speaker_tracks: Record<string, SpeakerTrack.Raw>;
         speaker_segments: Record<string, SpeakerSegment.Raw>;
         renders: Record<string, Render.Raw>;

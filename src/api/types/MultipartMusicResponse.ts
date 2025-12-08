@@ -6,7 +6,7 @@ import type * as ElevenLabs from "../index";
  * Multipart response structure with JSON metadata and binary audio
  */
 export interface MultipartMusicResponse {
-    /** JSON metadata containing composition plan and song metadata */
+    /** JSON metadata about the generated audio */
     metadata: ElevenLabs.DetailedMusicResponse;
     /** Binary audio data in the requested format */
     audio: string;

@@ -8,4 +8,4 @@ import type * as ElevenLabs from "../../../index";
 export type BodyCreatePodcastV1StudioPodcastsPostSource =
     | ElevenLabs.PodcastTextSource
     | ElevenLabs.PodcastUrlSource
-    | ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSourceItem[];
+    | ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem[];
