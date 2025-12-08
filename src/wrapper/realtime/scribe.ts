@@ -166,6 +166,10 @@ export class ScribeRealtime {
             params.append("include_timestamps", options.includeTimestamps.toString());
         }
 
+        if (options.audioFormat !== undefined) {
+            params.append("audio_format", options.audioFormat);
+        }
+
         const queryString = params.toString();
         return queryString ? `${baseUri}?${queryString}` : baseUri;
     }
