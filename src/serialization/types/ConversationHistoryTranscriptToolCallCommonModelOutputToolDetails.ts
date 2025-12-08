@@ -3,29 +3,37 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetails } from "./ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetails";
 import { ConversationHistoryTranscriptToolCallClientDetails } from "./ConversationHistoryTranscriptToolCallClientDetails";
 import { ConversationHistoryTranscriptToolCallMcpDetails } from "./ConversationHistoryTranscriptToolCallMcpDetails";
 import { ConversationHistoryTranscriptToolCallWebhookDetails } from "./ConversationHistoryTranscriptToolCallWebhookDetails";
 
-export const ConversationHistoryTranscriptToolCallCommonModelToolDetails: core.serialization.Schema<
-    serializers.ConversationHistoryTranscriptToolCallCommonModelToolDetails.Raw,
-    ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelToolDetails
+export const ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails: core.serialization.Schema<
+    serializers.ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails.Raw,
+    ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails
 > = core.serialization
     .union("type", {
+        api_integration_webhook: ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetails,
         client: ConversationHistoryTranscriptToolCallClientDetails,
         mcp: ConversationHistoryTranscriptToolCallMcpDetails,
         webhook: ConversationHistoryTranscriptToolCallWebhookDetails,
     })
-    .transform<ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelToolDetails>({
+    .transform<ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails>({
         transform: (value) => value,
         untransform: (value) => value,
     });
 
-export declare namespace ConversationHistoryTranscriptToolCallCommonModelToolDetails {
+export declare namespace ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails {
     export type Raw =
-        | ConversationHistoryTranscriptToolCallCommonModelToolDetails.Client
-        | ConversationHistoryTranscriptToolCallCommonModelToolDetails.Mcp
-        | ConversationHistoryTranscriptToolCallCommonModelToolDetails.Webhook;
+        | ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails.ApiIntegrationWebhook
+        | ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails.Client
+        | ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails.Mcp
+        | ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails.Webhook;
+
+    export interface ApiIntegrationWebhook
+        extends ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetails.Raw {
+        type: "api_integration_webhook";
+    }
 
     export interface Client extends ConversationHistoryTranscriptToolCallClientDetails.Raw {
         type: "client";

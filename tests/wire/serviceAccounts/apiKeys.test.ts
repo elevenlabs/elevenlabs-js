@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
-describe("ApiKeys", () => {
+describe("ApiKeysClient", () => {
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             "api-keys": [
@@ -51,8 +51,8 @@ describe("ApiKeys", () => {
 
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", permissions: ["text_to_speech"] };
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { name: "name", permissions: "all" };
         const rawResponseBody = { "xi-api-key": "xi-api-key" };
         server
             .mockEndpoint()
@@ -65,7 +65,7 @@ describe("ApiKeys", () => {
 
         const response = await client.serviceAccounts.apiKeys.create("service_account_user_id", {
             name: "name",
-            permissions: ["text_to_speech"],
+            permissions: "all",
         });
         expect(response).toEqual({
             xiApiKey: "xi-api-key",
@@ -74,7 +74,7 @@ describe("ApiKeys", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -93,8 +93,8 @@ describe("ApiKeys", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { is_enabled: true, name: "Sneaky Fox", permissions: ["text_to_speech"] };
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { is_enabled: true, name: "Sneaky Fox", permissions: "all" };
         const rawResponseBody = { key: "value" };
         server
             .mockEndpoint()
@@ -108,7 +108,7 @@ describe("ApiKeys", () => {
         const response = await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_id", {
             isEnabled: true,
             name: "Sneaky Fox",
-            permissions: ["text_to_speech"],
+            permissions: "all",
         });
         expect(response).toEqual({
             key: "value",

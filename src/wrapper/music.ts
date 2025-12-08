@@ -1,6 +1,6 @@
-import { Music as GeneratedMusic } from "../api/resources/music/client/Client";
+import { MusicClient as GeneratedMusic } from "../api/resources/music/client/Client";
+import { CompositionPlanClient } from "../api/resources/music/resources/compositionPlan/client/Client";
 import type * as ElevenLabs from "../api";
-import type { CompositionPlan } from "../api/resources/music/resources/compositionPlan/client/Client";
 import * as core from "../core";
 import type { WithRawResponse } from "../core/fetcher/RawResponse";
 
@@ -19,7 +19,7 @@ export interface SongMetadata {
 
 export interface MultipartResponse {
     json: {
-        compositionPlan: CompositionPlan;
+        compositionPlan: ElevenLabs.MusicPrompt;
         songMetadata: SongMetadata;
     };
     audio: Buffer;
@@ -29,7 +29,7 @@ export interface MultipartResponse {
 export class Music {
     private _client: GeneratedMusic;
     private readonly _options: Music.Options;
-    private _compositionPlan: CompositionPlan | undefined;
+    private _compositionPlan: CompositionPlanClient | undefined;
 
     constructor(options: Music.Options = {}) {
         this._options = options;
@@ -39,7 +39,7 @@ export class Music {
     /**
      * Get the composition plan client
      */
-    public get compositionPlan(): CompositionPlan {
+    public get compositionPlan(): CompositionPlanClient {
         return this._client.compositionPlan;
     }
 
@@ -348,7 +348,7 @@ export class Music {
         }
 
         return {
-            json: jsonData as { compositionPlan: CompositionPlan; songMetadata: SongMetadata },
+            json: jsonData as { compositionPlan: ElevenLabs.MusicPrompt; songMetadata: SongMetadata },
             audio: audioBuffer,
             filename: filename,
         };

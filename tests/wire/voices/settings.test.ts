@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
-describe("Settings", () => {
+describe("SettingsClient", () => {
     test("get_default", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { stability: 1, use_speaker_boost: true, similarity_boost: 1, style: 0, speed: 1 };
         server
@@ -29,7 +29,7 @@ describe("Settings", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { stability: 1, use_speaker_boost: true, similarity_boost: 1, style: 0, speed: 1 };
         server
@@ -52,7 +52,7 @@ describe("Settings", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { stability: 1, use_speaker_boost: true, similarity_boost: 1, style: 0, speed: 1 };
         const rawResponseBody = { status: "ok" };
         server

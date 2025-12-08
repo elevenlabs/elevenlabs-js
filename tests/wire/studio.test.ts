@@ -3,17 +3,17 @@
 import { ElevenLabsClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Studio", () => {
+describe("StudioClient", () => {
     test("create_podcast", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             model_id: "eleven_multilingual_v2",
             mode: {
                 type: "conversation",
                 conversation: { host_voice_id: "aw1NgEzBg83R7vgmiJt6", guest_voice_id: "aw1NgEzBg83R7vgmiJt7" },
             },
-            source: { text: "This is a test podcast." },
+            source: { type: "text", text: "This is a test podcast." },
         };
         const rawResponseBody = {
             project: {
@@ -97,6 +97,7 @@ describe("Studio", () => {
                 },
             },
             source: {
+                type: "text",
                 text: "This is a test podcast.",
             },
         });

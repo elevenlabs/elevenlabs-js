@@ -11,4 +11,6 @@ export interface RagConfig {
     maxDocumentsLength?: number;
     /** Maximum number of RAG document chunks to initially retrieve from the vector store. These are then further filtered by vector distance and total length. */
     maxRetrievedRagChunksCount?: number;
+    /** Custom prompt for rewriting user queries before RAG retrieval. The conversation history will be automatically appended at the end. If not set, the default prompt will be used. */
+    queryRewritePromptOverride?: string;
 }

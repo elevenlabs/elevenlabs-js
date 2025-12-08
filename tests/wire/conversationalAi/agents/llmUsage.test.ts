@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../../src/Client";
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 
-describe("LlmUsage", () => {
+describe("LlmUsageClient", () => {
     test("calculate", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { llm_prices: [{ llm: "gpt-4o-mini", price_per_minute: 1.1 }] };
         server

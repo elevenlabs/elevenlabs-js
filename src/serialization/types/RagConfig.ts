@@ -15,6 +15,10 @@ export const RagConfig: core.serialization.ObjectSchema<serializers.RagConfig.Ra
             "max_retrieved_rag_chunks_count",
             core.serialization.number().optional(),
         ),
+        queryRewritePromptOverride: core.serialization.property(
+            "query_rewrite_prompt_override",
+            core.serialization.string().optional(),
+        ),
     });
 
 export declare namespace RagConfig {
@@ -24,5 +28,6 @@ export declare namespace RagConfig {
         max_vector_distance?: number | null;
         max_documents_length?: number | null;
         max_retrieved_rag_chunks_count?: number | null;
+        query_rewrite_prompt_override?: string | null;
     }
 }

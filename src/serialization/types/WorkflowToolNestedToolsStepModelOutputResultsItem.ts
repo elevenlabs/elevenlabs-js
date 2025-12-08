@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
+import { ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel } from "./ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel";
 import { ConversationHistoryTranscriptOtherToolsResultCommonModel } from "./ConversationHistoryTranscriptOtherToolsResultCommonModel";
 import { ConversationHistoryTranscriptSystemToolResultCommonModel } from "./ConversationHistoryTranscriptSystemToolResultCommonModel";
 
@@ -12,6 +13,7 @@ export const WorkflowToolNestedToolsStepModelOutputResultsItem: core.serializati
 > = core.serialization.undiscriminatedUnion([
     ConversationHistoryTranscriptOtherToolsResultCommonModel,
     ConversationHistoryTranscriptSystemToolResultCommonModel,
+    ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel,
     core.serialization.lazyObject(() => serializers.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput),
 ]);
 
@@ -19,5 +21,6 @@ export declare namespace WorkflowToolNestedToolsStepModelOutputResultsItem {
     export type Raw =
         | ConversationHistoryTranscriptOtherToolsResultCommonModel.Raw
         | ConversationHistoryTranscriptSystemToolResultCommonModel.Raw
+        | ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel.Raw
         | serializers.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput.Raw;
 }

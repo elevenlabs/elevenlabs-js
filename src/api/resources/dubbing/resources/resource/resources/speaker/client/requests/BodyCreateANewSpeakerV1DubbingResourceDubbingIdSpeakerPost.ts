@@ -9,4 +9,10 @@ export interface BodyCreateANewSpeakerV1DubbingResourceDubbingIdSpeakerPost {
     speakerName?: string;
     /** Either the identifier of a voice from the ElevenLabs voice library, or one of ['track-clone', 'clip-clone']. */
     voiceId?: string;
+    /** For models that support it, the voice similarity value to use. This will default to 0.65, with a valid range of [0.0, 1.0]. */
+    voiceStability?: number;
+    /** For models that support it, the voice similarity value to use. This will default to 1.0, with a valid range of [0.0, 1.0]. */
+    voiceSimilarity?: number;
+    /** For models that support it, the voice style value to use. This will default to 1.0, with a valid range of [0.0, 1.0]. */
+    voiceStyle?: number;
 }

@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("TextToSpeech", () => {
+describe("TextToSpeechClient", () => {
     test("convert_with_timestamps", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { text: "This is a test for the API of ElevenLabs." };
         const rawResponseBody = {
             audio_base64: "base64_encoded_audio_string",

@@ -40,9 +40,9 @@ export interface Subscription {
     /** The status of the user's subscription. */
     status: ElevenLabs.SubscriptionStatusType;
     /** The billing period of the user's subscription. */
-    billingPeriod?: ElevenLabs.ExtendedSubscriptionResponseModelBillingPeriod;
+    billingPeriod?: ElevenLabs.BillingPeriod;
     /** The character refresh period of the user's subscription. */
-    characterRefreshPeriod?: ElevenLabs.ExtendedSubscriptionResponseModelCharacterRefreshPeriod;
+    characterRefreshPeriod?: ElevenLabs.CharacterRefreshPeriod;
     /** The next invoice for the user. */
     nextInvoice?: ElevenLabs.InvoiceResponse;
     /** The open invoices for the user. */

@@ -7,8 +7,12 @@ import type * as serializers from "../index";
 export const BackupLlmDefault: core.serialization.ObjectSchema<
     serializers.BackupLlmDefault.Raw,
     ElevenLabs.BackupLlmDefault
-> = core.serialization.object({});
+> = core.serialization.object({
+    preference: core.serialization.stringLiteral("default").optional(),
+});
 
 export declare namespace BackupLlmDefault {
-    export type Raw = {};
+    export interface Raw {
+        preference?: "default" | null;
+    }
 }

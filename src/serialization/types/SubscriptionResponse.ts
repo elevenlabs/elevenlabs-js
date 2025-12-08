@@ -3,8 +3,8 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { SubscriptionResponseModelBillingPeriod } from "./SubscriptionResponseModelBillingPeriod";
-import { SubscriptionResponseModelCharacterRefreshPeriod } from "./SubscriptionResponseModelCharacterRefreshPeriod";
+import { BillingPeriod } from "./BillingPeriod";
+import { CharacterRefreshPeriod } from "./CharacterRefreshPeriod";
 import { SubscriptionResponseModelCurrency } from "./SubscriptionResponseModelCurrency";
 import { SubscriptionStatusType } from "./SubscriptionStatusType";
 
@@ -48,11 +48,8 @@ export const SubscriptionResponse: core.serialization.ObjectSchema<
     ),
     currency: SubscriptionResponseModelCurrency.optional(),
     status: SubscriptionStatusType,
-    billingPeriod: core.serialization.property("billing_period", SubscriptionResponseModelBillingPeriod.optional()),
-    characterRefreshPeriod: core.serialization.property(
-        "character_refresh_period",
-        SubscriptionResponseModelCharacterRefreshPeriod.optional(),
-    ),
+    billingPeriod: core.serialization.property("billing_period", BillingPeriod.optional()),
+    characterRefreshPeriod: core.serialization.property("character_refresh_period", CharacterRefreshPeriod.optional()),
 });
 
 export declare namespace SubscriptionResponse {
@@ -75,7 +72,7 @@ export declare namespace SubscriptionResponse {
         can_use_professional_voice_cloning: boolean;
         currency?: SubscriptionResponseModelCurrency.Raw | null;
         status: SubscriptionStatusType.Raw;
-        billing_period?: SubscriptionResponseModelBillingPeriod.Raw | null;
-        character_refresh_period?: SubscriptionResponseModelCharacterRefreshPeriod.Raw | null;
+        billing_period?: BillingPeriod.Raw | null;
+        character_refresh_period?: CharacterRefreshPeriod.Raw | null;
     }
 }

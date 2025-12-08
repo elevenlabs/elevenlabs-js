@@ -3,8 +3,8 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { ExtendedSubscriptionResponseModelBillingPeriod } from "./ExtendedSubscriptionResponseModelBillingPeriod";
-import { ExtendedSubscriptionResponseModelCharacterRefreshPeriod } from "./ExtendedSubscriptionResponseModelCharacterRefreshPeriod";
+import { BillingPeriod } from "./BillingPeriod";
+import { CharacterRefreshPeriod } from "./CharacterRefreshPeriod";
 import { ExtendedSubscriptionResponseModelCurrency } from "./ExtendedSubscriptionResponseModelCurrency";
 import { ExtendedSubscriptionResponseModelPendingChange } from "./ExtendedSubscriptionResponseModelPendingChange";
 import { InvoiceResponse } from "./InvoiceResponse";
@@ -51,13 +51,10 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
         ),
         currency: ExtendedSubscriptionResponseModelCurrency.optional(),
         status: SubscriptionStatusType,
-        billingPeriod: core.serialization.property(
-            "billing_period",
-            ExtendedSubscriptionResponseModelBillingPeriod.optional(),
-        ),
+        billingPeriod: core.serialization.property("billing_period", BillingPeriod.optional()),
         characterRefreshPeriod: core.serialization.property(
             "character_refresh_period",
-            ExtendedSubscriptionResponseModelCharacterRefreshPeriod.optional(),
+            CharacterRefreshPeriod.optional(),
         ),
         nextInvoice: core.serialization.property("next_invoice", InvoiceResponse.optional()),
         openInvoices: core.serialization.property("open_invoices", core.serialization.list(InvoiceResponse)),
@@ -88,8 +85,8 @@ export declare namespace Subscription {
         can_use_professional_voice_cloning: boolean;
         currency?: ExtendedSubscriptionResponseModelCurrency.Raw | null;
         status: SubscriptionStatusType.Raw;
-        billing_period?: ExtendedSubscriptionResponseModelBillingPeriod.Raw | null;
-        character_refresh_period?: ExtendedSubscriptionResponseModelCharacterRefreshPeriod.Raw | null;
+        billing_period?: BillingPeriod.Raw | null;
+        character_refresh_period?: CharacterRefreshPeriod.Raw | null;
         next_invoice?: InvoiceResponse.Raw | null;
         open_invoices: InvoiceResponse.Raw[];
         has_open_invoices: boolean;

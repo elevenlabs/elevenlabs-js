@@ -1,7 +1,7 @@
 {
-    "cliVersion": "0.107.3",
+    "cliVersion": "2.15.0",
     "generatorName": "fernapi/fern-typescript-sdk",
-    "generatorVersion": "3.29.2",
+    "generatorVersion": "3.36.0",
     "generatorConfig": {
         "defaultTimeoutInSeconds": 240,
         "inlineFileProperties": true,

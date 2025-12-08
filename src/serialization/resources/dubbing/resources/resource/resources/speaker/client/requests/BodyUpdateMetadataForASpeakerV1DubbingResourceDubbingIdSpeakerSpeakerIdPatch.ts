@@ -10,6 +10,9 @@ export const BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeak
 > = core.serialization.object({
     speakerName: core.serialization.property("speaker_name", core.serialization.string().optional()),
     voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
+    voiceStability: core.serialization.property("voice_stability", core.serialization.number().optional()),
+    voiceSimilarity: core.serialization.property("voice_similarity", core.serialization.number().optional()),
+    voiceStyle: core.serialization.property("voice_style", core.serialization.number().optional()),
     languages: core.serialization.list(core.serialization.string()).optional(),
 });
 
@@ -17,6 +20,9 @@ export declare namespace BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingId
     export interface Raw {
         speaker_name?: string | null;
         voice_id?: string | null;
+        voice_stability?: number | null;
+        voice_similarity?: number | null;
+        voice_style?: number | null;
         languages?: string[] | null;
     }
 }

@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
-import { ConversationHistoryTranscriptToolCallCommonModel } from "./ConversationHistoryTranscriptToolCallCommonModel";
+import { ConversationHistoryTranscriptToolCallCommonModelInput } from "./ConversationHistoryTranscriptToolCallCommonModelInput";
 
 export const WorkflowToolNestedToolsStepModelInput: core.serialization.ObjectSchema<
     serializers.WorkflowToolNestedToolsStepModelInput.Raw,
@@ -11,7 +11,7 @@ export const WorkflowToolNestedToolsStepModelInput: core.serialization.ObjectSch
 > = core.serialization.object({
     stepLatencySecs: core.serialization.property("step_latency_secs", core.serialization.number()),
     nodeId: core.serialization.property("node_id", core.serialization.string()),
-    requests: core.serialization.list(ConversationHistoryTranscriptToolCallCommonModel),
+    requests: core.serialization.list(ConversationHistoryTranscriptToolCallCommonModelInput),
     results: core.serialization.list(
         core.serialization.lazy(() => serializers.WorkflowToolNestedToolsStepModelInputResultsItem),
     ),
@@ -22,7 +22,7 @@ export declare namespace WorkflowToolNestedToolsStepModelInput {
     export interface Raw {
         step_latency_secs: number;
         node_id: string;
-        requests: ConversationHistoryTranscriptToolCallCommonModel.Raw[];
+        requests: ConversationHistoryTranscriptToolCallCommonModelInput.Raw[];
         results: serializers.WorkflowToolNestedToolsStepModelInputResultsItem.Raw[];
         is_successful: boolean;
     }

@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../../../src/Client";
 import { mockServerPool } from "../../../../mock-server/MockServerPool";
 
-describe("Captcha", () => {
+describe("CaptchaClient", () => {
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         server.mockEndpoint().get("/v1/voices/pvc/21m00Tcm4TlvDq8ikWAM/captcha").respondWith().statusCode(200).build();
 

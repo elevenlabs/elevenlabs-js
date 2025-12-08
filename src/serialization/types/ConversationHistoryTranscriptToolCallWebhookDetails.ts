@@ -8,6 +8,7 @@ export const ConversationHistoryTranscriptToolCallWebhookDetails: core.serializa
     serializers.ConversationHistoryTranscriptToolCallWebhookDetails.Raw,
     ElevenLabs.ConversationHistoryTranscriptToolCallWebhookDetails
 > = core.serialization.object({
+    type: core.serialization.stringLiteral("webhook").optional(),
     method: core.serialization.string(),
     url: core.serialization.string(),
     headers: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
@@ -24,6 +25,7 @@ export const ConversationHistoryTranscriptToolCallWebhookDetails: core.serializa
 
 export declare namespace ConversationHistoryTranscriptToolCallWebhookDetails {
     export interface Raw {
+        type?: "webhook" | null;
         method: string;
         url: string;
         headers?: Record<string, string> | null;

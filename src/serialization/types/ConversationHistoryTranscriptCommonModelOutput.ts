@@ -8,7 +8,7 @@ import { ConversationHistoryMultivoiceMessageModel } from "./ConversationHistory
 import { ConversationHistoryTranscriptCommonModelOutputRole } from "./ConversationHistoryTranscriptCommonModelOutputRole";
 import { ConversationHistoryTranscriptCommonModelOutputSourceMedium } from "./ConversationHistoryTranscriptCommonModelOutputSourceMedium";
 import { ConversationHistoryTranscriptCommonModelOutputToolResultsItem } from "./ConversationHistoryTranscriptCommonModelOutputToolResultsItem";
-import { ConversationHistoryTranscriptToolCallCommonModel } from "./ConversationHistoryTranscriptToolCallCommonModel";
+import { ConversationHistoryTranscriptToolCallCommonModelOutput } from "./ConversationHistoryTranscriptToolCallCommonModelOutput";
 import { ConversationTurnMetrics } from "./ConversationTurnMetrics";
 import { LlmUsageOutput } from "./LlmUsageOutput";
 import { RagRetrievalInfo } from "./RagRetrievalInfo";
@@ -27,7 +27,7 @@ export const ConversationHistoryTranscriptCommonModelOutput: core.serialization.
     ),
     toolCalls: core.serialization.property(
         "tool_calls",
-        core.serialization.list(ConversationHistoryTranscriptToolCallCommonModel).optional(),
+        core.serialization.list(ConversationHistoryTranscriptToolCallCommonModelOutput).optional(),
     ),
     toolResults: core.serialization.property(
         "tool_results",
@@ -56,7 +56,7 @@ export declare namespace ConversationHistoryTranscriptCommonModelOutput {
         agent_metadata?: AgentMetadata.Raw | null;
         message?: string | null;
         multivoice_message?: ConversationHistoryMultivoiceMessageModel.Raw | null;
-        tool_calls?: ConversationHistoryTranscriptToolCallCommonModel.Raw[] | null;
+        tool_calls?: ConversationHistoryTranscriptToolCallCommonModelOutput.Raw[] | null;
         tool_results?: ConversationHistoryTranscriptCommonModelOutputToolResultsItem.Raw[] | null;
         feedback?: UserFeedback.Raw | null;
         llm_override?: string | null;

@@ -7,7 +7,7 @@ export interface ConversationHistoryTranscriptCommonModelInput {
     agentMetadata?: ElevenLabs.AgentMetadata;
     message?: string;
     multivoiceMessage?: ElevenLabs.ConversationHistoryMultivoiceMessageModel;
-    toolCalls?: ElevenLabs.ConversationHistoryTranscriptToolCallCommonModel[];
+    toolCalls?: ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelInput[];
     toolResults?: ElevenLabs.ConversationHistoryTranscriptCommonModelInputToolResultsItem[];
     feedback?: ElevenLabs.UserFeedback;
     llmOverride?: string;

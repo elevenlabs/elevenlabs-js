@@ -21,4 +21,8 @@ export interface BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
     forceInstrumental?: boolean;
     /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting API. */
     storeForInpainting?: boolean;
+    /** Whether to return the timestamps of the words in the generated song. */
+    withTimestamps?: boolean;
+    /** Whether to sign the generated song with C2PA. Applicable only for mp3 files. */
+    signWithC2Pa?: boolean;
 }
