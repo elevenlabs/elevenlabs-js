@@ -4,7 +4,7 @@ import type * as core from "../core";
 import * as errors from "../errors";
 import { WebhooksClient } from "./webhooks";
 import { Music } from "./music";
-import { Music as GeneratedMusic } from "../api/resources/music/client/Client";
+import { MusicClient as GeneratedMusic } from "../api/resources/music/client/Client";
 import { SpeechToText } from "./speechToText";
 
 export declare namespace ElevenLabsClient {

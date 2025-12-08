@@ -1,4 +1,4 @@
-import type { SpeechToText } from "../../api/resources/speechToText/client/Client";
+import type { SpeechToTextClient } from "../../api/resources/speechToText/client/Client";
 import WebSocket from "ws";
 import { RealtimeConnection } from "./connection";
 import * as core from "../../core";
@@ -87,9 +87,9 @@ export interface UrlOptions extends BaseOptions {
  * It will not work in browsers, Deno, or Cloudflare Workers without modifications.
  */
 export class ScribeRealtime {
-    private options: SpeechToText.Options;
+    private options: SpeechToTextClient.Options;
 
-    constructor(options: SpeechToText.Options = {}) {
+    constructor(options: SpeechToTextClient.Options = {}) {
         this.options = options;
     }
 
@@ -101,7 +101,7 @@ export class ScribeRealtime {
             environments.ElevenLabsEnvironment.Production;
 
         // Convert HTTP(S) to WS(S)
-        const wsUrl = baseUrl.replace(/^https?:\/\//i, (match) =>
+        const wsUrl = baseUrl.replace(/^https?:\/\//i, (match: string) =>
             match.toLowerCase() === "https://" ? "wss://" : "ws://"
         );
 

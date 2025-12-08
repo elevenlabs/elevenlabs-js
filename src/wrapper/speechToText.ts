@@ -1,4 +1,4 @@
-import { SpeechToText as GeneratedSpeechToText } from "../api/resources/speechToText/client/Client";
+import { SpeechToTextClient as GeneratedSpeechToText } from "../api/resources/speechToText/client/Client";
 import { ScribeRealtime } from "./realtime";
 
 export class SpeechToText extends GeneratedSpeechToText {
