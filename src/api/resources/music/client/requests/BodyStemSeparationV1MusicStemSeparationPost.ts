@@ -10,4 +10,6 @@ export interface BodyStemSeparationV1MusicStemSeparationPost {
     file: core.file.Uploadable;
     /** The id of the stem variation to use. */
     stemVariationId?: ElevenLabs.MusicSeparateStemsRequestStemVariationId;
+    /** Whether to sign the generated song with C2PA. Applicable only for mp3 files. */
+    signWithC2Pa?: boolean;
 }

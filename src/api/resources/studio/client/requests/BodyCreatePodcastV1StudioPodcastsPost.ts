@@ -15,6 +15,7 @@ import type * as ElevenLabs from "../../../../index";
  *             }
  *         },
  *         source: {
+ *             type: "text",
  *             text: "This is a test podcast."
  *         }
  *     }

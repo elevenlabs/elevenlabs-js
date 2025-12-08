@@ -14,7 +14,7 @@ export interface InvoiceResponse {
     /** Deprecated. Use [discounts] instead. The discount applied to the invoice. E.g. [20.0f] for 20 cents off. */
     discountAmountOff?: number;
     /** The discounts applied to the invoice. */
-    discounts: ElevenLabs.DiscountResposneModel[];
+    discounts: ElevenLabs.DiscountResponseModel[];
     /** The Unix timestamp of the next payment attempt. */
     nextPaymentAttemptUnix: number;
     /** The status of this invoice's payment intent. None when there is no payment intent. */

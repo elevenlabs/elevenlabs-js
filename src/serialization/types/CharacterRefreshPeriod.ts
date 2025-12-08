@@ -4,11 +4,11 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 
-export const SubscriptionResponseModelCharacterRefreshPeriod: core.serialization.Schema<
-    serializers.SubscriptionResponseModelCharacterRefreshPeriod.Raw,
-    ElevenLabs.SubscriptionResponseModelCharacterRefreshPeriod
+export const CharacterRefreshPeriod: core.serialization.Schema<
+    serializers.CharacterRefreshPeriod.Raw,
+    ElevenLabs.CharacterRefreshPeriod
 > = core.serialization.enum_(["monthly_period", "3_month_period", "6_month_period", "annual_period"]);
 
-export declare namespace SubscriptionResponseModelCharacterRefreshPeriod {
+export declare namespace CharacterRefreshPeriod {
     export type Raw = "monthly_period" | "3_month_period" | "6_month_period" | "annual_period";
 }

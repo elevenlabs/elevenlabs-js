@@ -10,4 +10,6 @@ export interface DetailedMusicResponse {
     compositionPlan: ElevenLabs.MusicPrompt;
     /** The metadata of the generated song */
     songMetadata: ElevenLabs.SongMetadata;
+    /** The timestamps of the words in the generated song */
+    wordsTimestamps?: ElevenLabs.WordTimestamp[];
 }

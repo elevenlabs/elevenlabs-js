@@ -6,7 +6,7 @@ import type * as ElevenLabs from "../../../../../../index";
  * @example
  *     {
  *         name: "name",
- *         permissions: ["text_to_speech"]
+ *         permissions: "all"
  *     }
  */
 export interface BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysPost {

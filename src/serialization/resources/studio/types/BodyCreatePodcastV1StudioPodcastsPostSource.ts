@@ -5,7 +5,7 @@ import * as core from "../../../../core";
 import type * as serializers from "../../../index";
 import { PodcastTextSource } from "../../../types/PodcastTextSource";
 import { PodcastUrlSource } from "../../../types/PodcastUrlSource";
-import { BodyCreatePodcastV1StudioPodcastsPostSourceItem } from "./BodyCreatePodcastV1StudioPodcastsPostSourceItem";
+import { BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem } from "./BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem";
 
 export const BodyCreatePodcastV1StudioPodcastsPostSource: core.serialization.Schema<
     serializers.BodyCreatePodcastV1StudioPodcastsPostSource.Raw,
@@ -13,12 +13,12 @@ export const BodyCreatePodcastV1StudioPodcastsPostSource: core.serialization.Sch
 > = core.serialization.undiscriminatedUnion([
     PodcastTextSource,
     PodcastUrlSource,
-    core.serialization.list(BodyCreatePodcastV1StudioPodcastsPostSourceItem),
+    core.serialization.list(BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem),
 ]);
 
 export declare namespace BodyCreatePodcastV1StudioPodcastsPostSource {
     export type Raw =
         | PodcastTextSource.Raw
         | PodcastUrlSource.Raw
-        | BodyCreatePodcastV1StudioPodcastsPostSourceItem.Raw[];
+        | BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem.Raw[];
 }

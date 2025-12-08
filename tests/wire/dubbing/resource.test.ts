@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
-describe("Resource", () => {
+describe("ResourceClient", () => {
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             id: "id",
@@ -205,7 +205,7 @@ describe("Resource", () => {
 
     test("migrate_segments", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segment_ids: ["segment_ids"], speaker_id: "speaker_id" };
         const rawResponseBody = { version: 1 };
         server
@@ -228,7 +228,7 @@ describe("Resource", () => {
 
     test("transcribe", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
         const rawResponseBody = { version: 1 };
         server
@@ -250,7 +250,7 @@ describe("Resource", () => {
 
     test("translate", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
         const rawResponseBody = { version: 1 };
         server
@@ -272,7 +272,7 @@ describe("Resource", () => {
 
     test("dub", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
         const rawResponseBody = { version: 1 };
         server
@@ -294,19 +294,19 @@ describe("Resource", () => {
 
     test("render", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { render_type: "mp4" };
         const rawResponseBody = { version: 1, render_id: "render_id" };
         server
             .mockEndpoint()
-            .post("/v1/dubbing/resource/dubbing_id/render/language")
+            .post("/v1/dubbing/resource/dubbing_id/render/original")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.dubbing.resource.render("dubbing_id", "language", {
+        const response = await client.dubbing.resource.render("dubbing_id", "original", {
             renderType: "mp4",
         });
         expect(response).toEqual({

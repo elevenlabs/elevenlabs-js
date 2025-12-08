@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../../../src/Client";
 import { mockServerPool } from "../../../../mock-server/MockServerPool";
 
-describe("Segment", () => {
+describe("SegmentClient", () => {
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { start_time: 1.1, end_time: 1.1 };
         const rawResponseBody = { version: 1, new_segment: "new_segment" };
         server

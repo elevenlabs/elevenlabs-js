@@ -3,12 +3,12 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { ConversationHistoryTranscriptToolCallCommonModelToolDetails } from "./ConversationHistoryTranscriptToolCallCommonModelToolDetails";
+import { ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails } from "./ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails";
 import { ToolType } from "./ToolType";
 
-export const ConversationHistoryTranscriptToolCallCommonModel: core.serialization.ObjectSchema<
-    serializers.ConversationHistoryTranscriptToolCallCommonModel.Raw,
-    ElevenLabs.ConversationHistoryTranscriptToolCallCommonModel
+export const ConversationHistoryTranscriptToolCallCommonModelOutput: core.serialization.ObjectSchema<
+    serializers.ConversationHistoryTranscriptToolCallCommonModelOutput.Raw,
+    ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelOutput
 > = core.serialization.object({
     type: ToolType.optional(),
     requestId: core.serialization.property("request_id", core.serialization.string()),
@@ -17,17 +17,17 @@ export const ConversationHistoryTranscriptToolCallCommonModel: core.serializatio
     toolHasBeenCalled: core.serialization.property("tool_has_been_called", core.serialization.boolean()),
     toolDetails: core.serialization.property(
         "tool_details",
-        ConversationHistoryTranscriptToolCallCommonModelToolDetails.optional(),
+        ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails.optional(),
     ),
 });
 
-export declare namespace ConversationHistoryTranscriptToolCallCommonModel {
+export declare namespace ConversationHistoryTranscriptToolCallCommonModelOutput {
     export interface Raw {
         type?: ToolType.Raw | null;
         request_id: string;
         tool_name: string;
         params_as_json: string;
         tool_has_been_called: boolean;
-        tool_details?: ConversationHistoryTranscriptToolCallCommonModelToolDetails.Raw | null;
+        tool_details?: ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails.Raw | null;
     }
 }

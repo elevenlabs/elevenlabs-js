@@ -15,6 +15,8 @@ export const BodyComposeMusicWithADetailedResponseV1MusicDetailedPost: core.seri
     modelId: core.serialization.property("model_id", core.serialization.stringLiteral("music_v1").optional()),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     storeForInpainting: core.serialization.property("store_for_inpainting", core.serialization.boolean().optional()),
+    withTimestamps: core.serialization.property("with_timestamps", core.serialization.boolean().optional()),
+    signWithC2Pa: core.serialization.property("sign_with_c2pa", core.serialization.boolean().optional()),
 });
 
 export declare namespace BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
@@ -25,5 +27,7 @@ export declare namespace BodyComposeMusicWithADetailedResponseV1MusicDetailedPos
         model_id?: "music_v1" | null;
         force_instrumental?: boolean | null;
         store_for_inpainting?: boolean | null;
+        with_timestamps?: boolean | null;
+        sign_with_c2pa?: boolean | null;
     }
 }

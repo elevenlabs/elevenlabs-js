@@ -11,6 +11,11 @@ export class TooEarlyError extends errors.ElevenLabsError {
             body: body,
             rawResponse: rawResponse,
         });
-        Object.setPrototypeOf(this, TooEarlyError.prototype);
+        Object.setPrototypeOf(this, new.target.prototype);
+        if (Error.captureStackTrace) {
+            Error.captureStackTrace(this, this.constructor);
+        }
+
+        this.name = this.constructor.name;
     }
 }

@@ -4,15 +4,15 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 
-export const DiscountResposneModel: core.serialization.ObjectSchema<
-    serializers.DiscountResposneModel.Raw,
-    ElevenLabs.DiscountResposneModel
+export const DiscountResponseModel: core.serialization.ObjectSchema<
+    serializers.DiscountResponseModel.Raw,
+    ElevenLabs.DiscountResponseModel
 > = core.serialization.object({
     discountPercentOff: core.serialization.property("discount_percent_off", core.serialization.number().optional()),
     discountAmountOff: core.serialization.property("discount_amount_off", core.serialization.number().optional()),
 });
 
-export declare namespace DiscountResposneModel {
+export declare namespace DiscountResponseModel {
     export interface Raw {
         discount_percent_off?: number | null;
         discount_amount_off?: number | null;

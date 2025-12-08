@@ -5,4 +5,5 @@ import type * as ElevenLabs from "../index";
 export type ConversationHistoryTranscriptCommonModelOutputToolResultsItem =
     | ElevenLabs.ConversationHistoryTranscriptOtherToolsResultCommonModel
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModel
+    | ElevenLabs.ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel
     | ElevenLabs.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput;

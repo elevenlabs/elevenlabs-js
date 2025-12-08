@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Voices", () => {
+describe("VoicesClient", () => {
     test("get_all", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             voices: [
@@ -34,22 +34,6 @@ describe("Voices", () => {
                         verification_failures: ["verification_failures"],
                         verification_attempts_count: 2,
                         manual_verification_requested: false,
-                        verification_attempts: [
-                            {
-                                text: "Hello, how are you?",
-                                date_unix: 1714204800,
-                                accepted: true,
-                                similarity: 0.95,
-                                levenshtein_distance: 2,
-                                recording: {
-                                    recording_id: "CwhRBWXzGAHq8TQ4Fs17",
-                                    mime_type: "audio/mpeg",
-                                    size_bytes: 1000000,
-                                    upload_date_unix: 1714204800,
-                                    transcription: "Hello, how are you?",
-                                },
-                            },
-                        ],
                         manual_verification: {
                             extra_text: "Please verify the voice is that of a female.",
                             request_time_unix: 1714204800,
@@ -198,22 +182,6 @@ describe("Voices", () => {
                         verificationFailures: ["verification_failures"],
                         verificationAttemptsCount: 2,
                         manualVerificationRequested: false,
-                        verificationAttempts: [
-                            {
-                                text: "Hello, how are you?",
-                                dateUnix: 1714204800,
-                                accepted: true,
-                                similarity: 0.95,
-                                levenshteinDistance: 2,
-                                recording: {
-                                    recordingId: "CwhRBWXzGAHq8TQ4Fs17",
-                                    mimeType: "audio/mpeg",
-                                    sizeBytes: 1000000,
-                                    uploadDateUnix: 1714204800,
-                                    transcription: "Hello, how are you?",
-                                },
-                            },
-                        ],
                         manualVerification: {
                             extraText: "Please verify the voice is that of a female.",
                             requestTimeUnix: 1714204800,
@@ -347,7 +315,7 @@ describe("Voices", () => {
 
     test("search", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             voices: [
@@ -375,22 +343,6 @@ describe("Voices", () => {
                         verification_failures: ["verification_failures"],
                         verification_attempts_count: 2,
                         manual_verification_requested: false,
-                        verification_attempts: [
-                            {
-                                text: "Hello, how are you?",
-                                date_unix: 1714204800,
-                                accepted: true,
-                                similarity: 0.95,
-                                levenshtein_distance: 2,
-                                recording: {
-                                    recording_id: "CwhRBWXzGAHq8TQ4Fs17",
-                                    mime_type: "audio/mpeg",
-                                    size_bytes: 1000000,
-                                    upload_date_unix: 1714204800,
-                                    transcription: "Hello, how are you?",
-                                },
-                            },
-                        ],
                         manual_verification: {
                             extra_text: "Please verify the voice is that of a female.",
                             request_time_unix: 1714204800,
@@ -551,22 +503,6 @@ describe("Voices", () => {
                         verificationFailures: ["verification_failures"],
                         verificationAttemptsCount: 2,
                         manualVerificationRequested: false,
-                        verificationAttempts: [
-                            {
-                                text: "Hello, how are you?",
-                                dateUnix: 1714204800,
-                                accepted: true,
-                                similarity: 0.95,
-                                levenshteinDistance: 2,
-                                recording: {
-                                    recordingId: "CwhRBWXzGAHq8TQ4Fs17",
-                                    mimeType: "audio/mpeg",
-                                    sizeBytes: 1000000,
-                                    uploadDateUnix: 1714204800,
-                                    transcription: "Hello, how are you?",
-                                },
-                            },
-                        ],
                         manualVerification: {
                             extraText: "Please verify the voice is that of a female.",
                             requestTimeUnix: 1714204800,
@@ -703,7 +639,7 @@ describe("Voices", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             voice_id: "21m00Tcm4TlvDq8ikWAM",
@@ -1092,7 +1028,7 @@ describe("Voices", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
         server
@@ -1111,7 +1047,7 @@ describe("Voices", () => {
 
     test("share", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { new_name: "John Smith" };
         const rawResponseBody = { voice_id: "b38kUX8pkfYO2kHyqfFy" };
         server
@@ -1139,7 +1075,7 @@ describe("Voices", () => {
 
     test("get_shared", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             voices: [

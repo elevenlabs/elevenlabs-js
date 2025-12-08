@@ -2,11 +2,11 @@
 
 import type * as ElevenLabs from "../../../index";
 
-export type BodyCreatePodcastV1StudioPodcastsPostSourceItem =
-    | ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSourceItem.Text
-    | ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSourceItem.Url;
+export type BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem =
+    | ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem.Text
+    | ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem.Url;
 
-export namespace BodyCreatePodcastV1StudioPodcastsPostSourceItem {
+export namespace BodyCreatePodcastV1StudioPodcastsPostSourceTwoItem {
     export interface Text extends ElevenLabs.PodcastTextSource {
         type: "text";
     }

@@ -30,3 +30,4 @@ export * as tools from "./tools";
 export * from "./tools/client/requests";
 export * as twilio from "./twilio";
 export * from "./twilio/client/requests";
+export * from "./twilio/types";

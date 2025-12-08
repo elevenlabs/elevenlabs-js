@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { PendingSubscriptionSwitchResponseModelNextBillingPeriod } from "./PendingSubscriptionSwitchResponseModelNextBillingPeriod";
+import { BillingPeriod } from "./BillingPeriod";
 import { PendingSubscriptionSwitchResponseModelNextTier } from "./PendingSubscriptionSwitchResponseModelNextTier";
 
 export const PendingSubscriptionSwitchResponseModel: core.serialization.ObjectSchema<
@@ -12,10 +12,7 @@ export const PendingSubscriptionSwitchResponseModel: core.serialization.ObjectSc
 > = core.serialization.object({
     kind: core.serialization.stringLiteral("change").optional(),
     nextTier: core.serialization.property("next_tier", PendingSubscriptionSwitchResponseModelNextTier),
-    nextBillingPeriod: core.serialization.property(
-        "next_billing_period",
-        PendingSubscriptionSwitchResponseModelNextBillingPeriod,
-    ),
+    nextBillingPeriod: core.serialization.property("next_billing_period", BillingPeriod),
     timestampSeconds: core.serialization.property("timestamp_seconds", core.serialization.number()),
 });
 
@@ -23,7 +20,7 @@ export declare namespace PendingSubscriptionSwitchResponseModel {
     export interface Raw {
         kind?: "change" | null;
         next_tier: PendingSubscriptionSwitchResponseModelNextTier.Raw;
-        next_billing_period: PendingSubscriptionSwitchResponseModelNextBillingPeriod.Raw;
+        next_billing_period: BillingPeriod.Raw;
         timestamp_seconds: number;
     }
 }

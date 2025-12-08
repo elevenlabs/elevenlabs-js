@@ -8,11 +8,13 @@ export const PodcastUrlSource: core.serialization.ObjectSchema<
     serializers.PodcastUrlSource.Raw,
     ElevenLabs.PodcastUrlSource
 > = core.serialization.object({
+    type: core.serialization.stringLiteral("url"),
     url: core.serialization.string(),
 });
 
 export declare namespace PodcastUrlSource {
     export interface Raw {
+        type: "url";
         url: string;
     }
 }

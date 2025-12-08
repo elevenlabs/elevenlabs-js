@@ -19,6 +19,7 @@ export const BodyComposeMusicV1MusicPost: core.serialization.Schema<
         core.serialization.boolean().optional(),
     ),
     storeForInpainting: core.serialization.property("store_for_inpainting", core.serialization.boolean().optional()),
+    signWithC2Pa: core.serialization.property("sign_with_c2pa", core.serialization.boolean().optional()),
 });
 
 export declare namespace BodyComposeMusicV1MusicPost {
@@ -30,5 +31,6 @@ export declare namespace BodyComposeMusicV1MusicPost {
         force_instrumental?: boolean | null;
         respect_sections_durations?: boolean | null;
         store_for_inpainting?: boolean | null;
+        sign_with_c2pa?: boolean | null;
     }
 }

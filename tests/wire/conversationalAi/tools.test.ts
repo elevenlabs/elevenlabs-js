@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
-describe("Tools", () => {
+describe("ToolsClient", () => {
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             tools: [
@@ -19,8 +19,6 @@ describe("Tools", () => {
                         assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                         expects_response: false,
                         dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
-                        tool_call_sound: null,
-                        parameters: null,
                     },
                     access_info: {
                         is_creator: true,
@@ -73,7 +71,7 @@ describe("Tools", () => {
 
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             tool_config: { type: "client", name: "name", description: "description", expects_response: false },
         };
@@ -187,7 +185,7 @@ describe("Tools", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             id: "id",
@@ -291,7 +289,7 @@ describe("Tools", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -310,7 +308,7 @@ describe("Tools", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             tool_config: { type: "client", name: "name", description: "description", expects_response: false },
         };
@@ -424,7 +422,7 @@ describe("Tools", () => {
 
     test("get_dependent_agents", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             agents: [{ type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" }],

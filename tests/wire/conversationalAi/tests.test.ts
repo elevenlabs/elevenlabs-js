@@ -3,10 +3,10 @@
 import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
-describe("Tests", () => {
+describe("TestsClient", () => {
     test("create", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             chat_history: [{ role: "user", time_in_call_secs: 1 }],
             success_condition: "success_condition",
@@ -53,7 +53,7 @@ describe("Tests", () => {
 
     test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             chat_history: [
@@ -82,14 +82,12 @@ describe("Tests", () => {
                     feedback: { score: "like", time_in_call_secs: 1 },
                     llm_override: "llm_override",
                     time_in_call_secs: 1,
-                    conversation_turn_metrics: {},
                     rag_retrieval_info: {
                         chunks: [{ document_id: "document_id", chunk_id: "chunk_id", vector_distance: 1.1 }],
                         embedding_model: "e5_mistral_7b_instruct",
                         retrieval_query: "retrieval_query",
                         rag_latency_secs: 1.1,
                     },
-                    llm_usage: {},
                     interrupted: true,
                     original_message: "original_message",
                     source_medium: "audio",
@@ -161,7 +159,6 @@ describe("Tests", () => {
                     },
                     llmOverride: "llm_override",
                     timeInCallSecs: 1,
-                    conversationTurnMetrics: {},
                     ragRetrievalInfo: {
                         chunks: [
                             {
@@ -174,7 +171,6 @@ describe("Tests", () => {
                         retrievalQuery: "retrieval_query",
                         ragLatencySecs: 1.1,
                     },
-                    llmUsage: {},
                     interrupted: true,
                     originalMessage: "original_message",
                     sourceMedium: "audio",
@@ -230,7 +226,7 @@ describe("Tests", () => {
 
     test("update", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
             chat_history: [{ role: "user", time_in_call_secs: 1 }],
             success_condition: "success_condition",
@@ -265,14 +261,12 @@ describe("Tests", () => {
                     feedback: { score: "like", time_in_call_secs: 1 },
                     llm_override: "llm_override",
                     time_in_call_secs: 1,
-                    conversation_turn_metrics: {},
                     rag_retrieval_info: {
                         chunks: [{ document_id: "document_id", chunk_id: "chunk_id", vector_distance: 1.1 }],
                         embedding_model: "e5_mistral_7b_instruct",
                         retrieval_query: "retrieval_query",
                         rag_latency_secs: 1.1,
                     },
-                    llm_usage: {},
                     interrupted: true,
                     original_message: "original_message",
                     source_medium: "audio",
@@ -366,7 +360,6 @@ describe("Tests", () => {
                     },
                     llmOverride: "llm_override",
                     timeInCallSecs: 1,
-                    conversationTurnMetrics: {},
                     ragRetrievalInfo: {
                         chunks: [
                             {
@@ -379,7 +372,6 @@ describe("Tests", () => {
                         retrievalQuery: "retrieval_query",
                         ragLatencySecs: 1.1,
                     },
-                    llmUsage: {},
                     interrupted: true,
                     originalMessage: "original_message",
                     sourceMedium: "audio",
@@ -435,7 +427,7 @@ describe("Tests", () => {
 
     test("delete", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -454,7 +446,7 @@ describe("Tests", () => {
 
     test("summaries", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { test_ids: ["test_id_1", "test_id_2"] };
         const rawResponseBody = {
             tests: {
@@ -506,7 +498,7 @@ describe("Tests", () => {
 
     test("list", async () => {
         const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ apiKey: "test", environment: server.baseUrl });
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             tests: [

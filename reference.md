@@ -117,7 +117,7 @@ await client.history.list({
 <dl>
 <dd>
 
-**requestOptions:** `History.RequestOptions` 
+**requestOptions:** `HistoryClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -180,7 +180,7 @@ await client.history.get("VW7YKqPnjY4h39yTbx2L");
 <dl>
 <dd>
 
-**requestOptions:** `History.RequestOptions` 
+**requestOptions:** `HistoryClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -243,7 +243,7 @@ await client.history.delete("VW7YKqPnjY4h39yTbx2L");
 <dl>
 <dd>
 
-**requestOptions:** `History.RequestOptions` 
+**requestOptions:** `HistoryClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -306,7 +306,7 @@ await client.history.getAudio("history_item_id");
 <dl>
 <dd>
 
-**requestOptions:** `History.RequestOptions` 
+**requestOptions:** `HistoryClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -371,7 +371,7 @@ await client.history.download({
 <dl>
 <dd>
 
-**requestOptions:** `History.RequestOptions` 
+**requestOptions:** `HistoryClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -437,7 +437,7 @@ await client.textToSoundEffects.convert({
 <dl>
 <dd>
 
-**requestOptions:** `TextToSoundEffects.RequestOptions` 
+**requestOptions:** `TextToSoundEffectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -510,7 +510,7 @@ await client.samples.delete("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
 <dl>
 <dd>
 
-**requestOptions:** `Samples.RequestOptions` 
+**requestOptions:** `SamplesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -586,7 +586,7 @@ await client.textToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
 <dl>
 <dd>
 
-**requestOptions:** `TextToSpeech.RequestOptions` 
+**requestOptions:** `TextToSpeechClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -662,7 +662,7 @@ await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `TextToSpeech.RequestOptions` 
+**requestOptions:** `TextToSpeechClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -737,7 +737,7 @@ await client.textToSpeech.stream("JBFqnCBsd6RMkjVDRZzb", {
 <dl>
 <dd>
 
-**requestOptions:** `TextToSpeech.RequestOptions` 
+**requestOptions:** `TextToSpeechClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -815,7 +815,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**requestOptions:** `TextToSpeech.RequestOptions` 
+**requestOptions:** `TextToSpeechClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -887,7 +887,7 @@ await client.textToDialogue.convert({
 <dl>
 <dd>
 
-**requestOptions:** `TextToDialogue.RequestOptions` 
+**requestOptions:** `TextToDialogueClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -958,7 +958,7 @@ await client.textToDialogue.stream({
 <dl>
 <dd>
 
-**requestOptions:** `TextToDialogue.RequestOptions` 
+**requestOptions:** `TextToDialogueClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1033,7 +1033,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**requestOptions:** `TextToDialogue.RequestOptions` 
+**requestOptions:** `TextToDialogueClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1105,7 +1105,7 @@ await client.textToDialogue.convertWithTimestamps({
 <dl>
 <dd>
 
-**requestOptions:** `TextToDialogue.RequestOptions` 
+**requestOptions:** `TextToDialogueClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1181,7 +1181,7 @@ await client.speechToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
 <dl>
 <dd>
 
-**requestOptions:** `SpeechToSpeech.RequestOptions` 
+**requestOptions:** `SpeechToSpeechClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1256,7 +1256,7 @@ await client.speechToSpeech.stream("JBFqnCBsd6RMkjVDRZzb", {
 <dl>
 <dd>
 
-**requestOptions:** `SpeechToSpeech.RequestOptions` 
+**requestOptions:** `SpeechToSpeechClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1323,7 +1323,7 @@ await client.textToVoice.createPreviews({
 <dl>
 <dd>
 
-**requestOptions:** `TextToVoice.RequestOptions` 
+**requestOptions:** `TextToVoiceClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1390,7 +1390,7 @@ await client.textToVoice.create({
 <dl>
 <dd>
 
-**requestOptions:** `TextToVoice.RequestOptions` 
+**requestOptions:** `TextToVoiceClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1456,7 +1456,7 @@ await client.textToVoice.design({
 <dl>
 <dd>
 
-**requestOptions:** `TextToVoice.RequestOptions` 
+**requestOptions:** `TextToVoiceClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1530,7 +1530,7 @@ await client.textToVoice.remix("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `TextToVoice.RequestOptions` 
+**requestOptions:** `TextToVoiceClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1586,7 +1586,7 @@ await client.user.get();
 <dl>
 <dd>
 
-**requestOptions:** `User.RequestOptions` 
+**requestOptions:** `UserClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1652,7 +1652,7 @@ await client.voices.getAll({
 <dl>
 <dd>
 
-**requestOptions:** `Voices.RequestOptions` 
+**requestOptions:** `VoicesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1726,7 +1726,7 @@ await client.voices.search({
 <dl>
 <dd>
 
-**requestOptions:** `Voices.RequestOptions` 
+**requestOptions:** `VoicesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1799,7 +1799,7 @@ await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Voices.RequestOptions` 
+**requestOptions:** `VoicesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1862,7 +1862,7 @@ await client.voices.delete("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `Voices.RequestOptions` 
+**requestOptions:** `VoicesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -1935,7 +1935,7 @@ await client.voices.update("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Voices.RequestOptions` 
+**requestOptions:** `VoicesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2016,7 +2016,7 @@ await client.voices.share("63e06b7e7cafdc46be4d2e0b3f045940231ae058d508589653d74
 <dl>
 <dd>
 
-**requestOptions:** `Voices.RequestOptions` 
+**requestOptions:** `VoicesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2096,7 +2096,7 @@ await client.voices.getShared({
 <dl>
 <dd>
 
-**requestOptions:** `Voices.RequestOptions` 
+**requestOptions:** `VoicesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2159,7 +2159,7 @@ await client.voices.findSimilarVoices({});
 <dl>
 <dd>
 
-**requestOptions:** `Voices.RequestOptions` 
+**requestOptions:** `VoicesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2210,6 +2210,7 @@ await client.studio.createPodcast({
         }
     },
     source: {
+        type: "text",
         text: "This is a test podcast."
     }
 });
@@ -2236,7 +2237,7 @@ await client.studio.createPodcast({
 <dl>
 <dd>
 
-**requestOptions:** `Studio.RequestOptions` 
+**requestOptions:** `StudioClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2307,7 +2308,7 @@ await client.dubbing.list({
 <dl>
 <dd>
 
-**requestOptions:** `Dubbing.RequestOptions` 
+**requestOptions:** `DubbingClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2370,7 +2371,7 @@ await client.dubbing.create({});
 <dl>
 <dd>
 
-**requestOptions:** `Dubbing.RequestOptions` 
+**requestOptions:** `DubbingClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2433,7 +2434,7 @@ await client.dubbing.get("dubbing_id");
 <dl>
 <dd>
 
-**requestOptions:** `Dubbing.RequestOptions` 
+**requestOptions:** `DubbingClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2496,7 +2497,7 @@ await client.dubbing.delete("dubbing_id");
 <dl>
 <dd>
 
-**requestOptions:** `Dubbing.RequestOptions` 
+**requestOptions:** `DubbingClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2552,7 +2553,7 @@ await client.models.list();
 <dl>
 <dd>
 
-**requestOptions:** `Models.RequestOptions` 
+**requestOptions:** `ModelsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2618,7 +2619,7 @@ await client.audioNative.create({
 <dl>
 <dd>
 
-**requestOptions:** `AudioNative.RequestOptions` 
+**requestOptions:** `AudioNativeClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2681,7 +2682,7 @@ await client.audioNative.getSettings("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `AudioNative.RequestOptions` 
+**requestOptions:** `AudioNativeClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2752,7 +2753,7 @@ await client.audioNative.update("21m00Tcm4TlvDq8ikWAM", {});
 <dl>
 <dd>
 
-**requestOptions:** `AudioNative.RequestOptions` 
+**requestOptions:** `AudioNativeClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2824,7 +2825,7 @@ await client.usage.get({
 <dl>
 <dd>
 
-**requestOptions:** `Usage.RequestOptions` 
+**requestOptions:** `UsageClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2890,7 +2891,7 @@ await client.pronunciationDictionaries.createFromFile({
 <dl>
 <dd>
 
-**requestOptions:** `PronunciationDictionaries.RequestOptions` 
+**requestOptions:** `PronunciationDictionariesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2960,7 +2961,7 @@ await client.pronunciationDictionaries.createFromRules({
 <dl>
 <dd>
 
-**requestOptions:** `PronunciationDictionaries.RequestOptions` 
+**requestOptions:** `PronunciationDictionariesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3023,7 +3024,7 @@ await client.pronunciationDictionaries.get("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `PronunciationDictionaries.RequestOptions` 
+**requestOptions:** `PronunciationDictionariesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3094,7 +3095,7 @@ await client.pronunciationDictionaries.update("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `PronunciationDictionaries.RequestOptions` 
+**requestOptions:** `PronunciationDictionariesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3165,7 +3166,7 @@ await client.pronunciationDictionaries.download("dictionary_id", "version_id");
 <dl>
 <dd>
 
-**requestOptions:** `PronunciationDictionaries.RequestOptions` 
+**requestOptions:** `PronunciationDictionariesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3233,7 +3234,7 @@ await client.pronunciationDictionaries.list({
 <dl>
 <dd>
 
-**requestOptions:** `PronunciationDictionaries.RequestOptions` 
+**requestOptions:** `PronunciationDictionariesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3289,7 +3290,7 @@ await client.serviceAccounts.list();
 <dl>
 <dd>
 
-**requestOptions:** `ServiceAccounts.RequestOptions` 
+**requestOptions:** `ServiceAccountsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3355,7 +3356,7 @@ await client.webhooks.list({
 <dl>
 <dd>
 
-**requestOptions:** `Webhooks.RequestOptions` 
+**requestOptions:** `WebhooksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3424,7 +3425,7 @@ await client.webhooks.create({
 <dl>
 <dd>
 
-**requestOptions:** `Webhooks.RequestOptions` 
+**requestOptions:** `WebhooksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3487,7 +3488,7 @@ await client.webhooks.delete("G007vmtq9uWYl7SUW9zGS8GZZa1K");
 <dl>
 <dd>
 
-**requestOptions:** `Webhooks.RequestOptions` 
+**requestOptions:** `WebhooksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3561,7 +3562,7 @@ await client.webhooks.update("G007vmtq9uWYl7SUW9zGS8GZZa1K", {
 <dl>
 <dd>
 
-**requestOptions:** `Webhooks.RequestOptions` 
+**requestOptions:** `WebhooksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3628,7 +3629,7 @@ await client.speechToText.convert({
 <dl>
 <dd>
 
-**requestOptions:** `SpeechToText.RequestOptions` 
+**requestOptions:** `SpeechToTextClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3695,7 +3696,7 @@ await client.forcedAlignment.create({
 <dl>
 <dd>
 
-**requestOptions:** `ForcedAlignment.RequestOptions` 
+**requestOptions:** `ForcedAlignmentClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3761,7 +3762,7 @@ await client.conversationalAi.addToKnowledgeBase({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationalAi.RequestOptions` 
+**requestOptions:** `ConversationalAiClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3824,7 +3825,7 @@ await client.conversationalAi.getDocumentRagIndexes("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `ConversationalAi.RequestOptions` 
+**requestOptions:** `ConversationalAiClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3895,7 +3896,7 @@ await client.conversationalAi.deleteDocumentRagIndex("21m00Tcm4TlvDq8ikWAM", "21
 <dl>
 <dd>
 
-**requestOptions:** `ConversationalAi.RequestOptions` 
+**requestOptions:** `ConversationalAiClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3950,7 +3951,7 @@ await client.conversationalAi.ragIndexOverview();
 <dl>
 <dd>
 
-**requestOptions:** `ConversationalAi.RequestOptions` 
+**requestOptions:** `ConversationalAiClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4014,7 +4015,7 @@ await client.music.compose();
 <dl>
 <dd>
 
-**requestOptions:** `Music.RequestOptions` 
+**requestOptions:** `MusicClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4077,7 +4078,7 @@ await client.music.composeDetailed();
 <dl>
 <dd>
 
-**requestOptions:** `Music.RequestOptions` 
+**requestOptions:** `MusicClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4140,7 +4141,7 @@ await client.music.stream();
 <dl>
 <dd>
 
-**requestOptions:** `Music.RequestOptions` 
+**requestOptions:** `MusicClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4207,7 +4208,7 @@ await client.conversationalAi.conversations.getSignedUrl({
 <dl>
 <dd>
 
-**requestOptions:** `Conversations.RequestOptions` 
+**requestOptions:** `ConversationsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4273,7 +4274,7 @@ await client.conversationalAi.conversations.getWebrtcToken({
 <dl>
 <dd>
 
-**requestOptions:** `Conversations.RequestOptions` 
+**requestOptions:** `ConversationsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4351,7 +4352,7 @@ await client.conversationalAi.conversations.list({
 <dl>
 <dd>
 
-**requestOptions:** `Conversations.RequestOptions` 
+**requestOptions:** `ConversationsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4414,7 +4415,7 @@ await client.conversationalAi.conversations.get("123");
 <dl>
 <dd>
 
-**requestOptions:** `Conversations.RequestOptions` 
+**requestOptions:** `ConversationsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4477,7 +4478,7 @@ await client.conversationalAi.conversations.delete("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `Conversations.RequestOptions` 
+**requestOptions:** `ConversationsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4545,7 +4546,74 @@ await client.conversationalAi.twilio.outboundCall({
 <dl>
 <dd>
 
-**requestOptions:** `Twilio.RequestOptions` 
+**requestOptions:** `TwilioClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.twilio.<a href="/src/api/resources/conversationalAi/resources/twilio/client/Client.ts">registerCall</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Register a Twilio call and return TwiML to connect the call
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.twilio.registerCall({
+    agentId: "agent_id",
+    fromNumber: "from_number",
+    toNumber: "to_number"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TwilioClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4611,7 +4679,7 @@ await client.conversationalAi.agents.create({
 <dl>
 <dd>
 
-**requestOptions:** `Agents.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4674,7 +4742,7 @@ await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
 <dl>
 <dd>
 
-**requestOptions:** `Agents.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4737,7 +4805,7 @@ await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz"
 <dl>
 <dd>
 
-**requestOptions:** `Agents.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4808,7 +4876,7 @@ await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz"
 <dl>
 <dd>
 
-**requestOptions:** `Agents.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4878,7 +4946,7 @@ await client.conversationalAi.agents.list({
 <dl>
 <dd>
 
-**requestOptions:** `Agents.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4949,7 +5017,7 @@ await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfysz
 <dl>
 <dd>
 
-**requestOptions:** `Agents.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5028,7 +5096,7 @@ await client.conversationalAi.agents.simulateConversation("agent_3701k3ttaq12ewp
 <dl>
 <dd>
 
-**requestOptions:** `Agents.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5107,7 +5175,7 @@ await client.conversationalAi.agents.simulateConversationStream("agent_3701k3tta
 <dl>
 <dd>
 
-**requestOptions:** `Agents.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5182,7 +5250,7 @@ await client.conversationalAi.agents.runTests("agent_3701k3ttaq12ewp8b7qv5rfyszk
 <dl>
 <dd>
 
-**requestOptions:** `Agents.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5261,7 +5329,7 @@ await client.conversationalAi.tests.create({
 <dl>
 <dd>
 
-**requestOptions:** `Tests.RequestOptions` 
+**requestOptions:** `TestsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5324,7 +5392,7 @@ await client.conversationalAi.tests.get("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-**requestOptions:** `Tests.RequestOptions` 
+**requestOptions:** `TestsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5410,7 +5478,7 @@ await client.conversationalAi.tests.update("TeaqRRdTcIfIu2i7BYfT", {
 <dl>
 <dd>
 
-**requestOptions:** `Tests.RequestOptions` 
+**requestOptions:** `TestsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5473,7 +5541,7 @@ await client.conversationalAi.tests.delete("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-**requestOptions:** `Tests.RequestOptions` 
+**requestOptions:** `TestsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5538,7 +5606,7 @@ await client.conversationalAi.tests.summaries({
 <dl>
 <dd>
 
-**requestOptions:** `Tests.RequestOptions` 
+**requestOptions:** `TestsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5605,7 +5673,7 @@ await client.conversationalAi.tests.list({
 <dl>
 <dd>
 
-**requestOptions:** `Tests.RequestOptions` 
+**requestOptions:** `TestsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5661,7 +5729,7 @@ await client.conversationalAi.phoneNumbers.list();
 <dl>
 <dd>
 
-**requestOptions:** `PhoneNumbers.RequestOptions` 
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5730,7 +5798,7 @@ await client.conversationalAi.phoneNumbers.create({
 <dl>
 <dd>
 
-**requestOptions:** `PhoneNumbers.RequestOptions` 
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5793,7 +5861,7 @@ await client.conversationalAi.phoneNumbers.get("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-**requestOptions:** `PhoneNumbers.RequestOptions` 
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5856,7 +5924,7 @@ await client.conversationalAi.phoneNumbers.delete("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-**requestOptions:** `PhoneNumbers.RequestOptions` 
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5927,7 +5995,7 @@ await client.conversationalAi.phoneNumbers.update("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-**requestOptions:** `PhoneNumbers.RequestOptions` 
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -5995,7 +6063,7 @@ await client.conversationalAi.llmUsage.calculate({
 <dl>
 <dd>
 
-**requestOptions:** `LlmUsage.RequestOptions` 
+**requestOptions:** `LlmUsageClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6067,7 +6135,7 @@ await client.conversationalAi.knowledgeBase.list({
 <dl>
 <dd>
 
-**requestOptions:** `KnowledgeBase.RequestOptions` 
+**requestOptions:** `KnowledgeBaseClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6123,7 +6191,7 @@ await client.conversationalAi.tools.list();
 <dl>
 <dd>
 
-**requestOptions:** `Tools.RequestOptions` 
+**requestOptions:** `ToolsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6193,7 +6261,7 @@ await client.conversationalAi.tools.create({
 <dl>
 <dd>
 
-**requestOptions:** `Tools.RequestOptions` 
+**requestOptions:** `ToolsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6256,7 +6324,7 @@ await client.conversationalAi.tools.get("tool_id");
 <dl>
 <dd>
 
-**requestOptions:** `Tools.RequestOptions` 
+**requestOptions:** `ToolsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6319,7 +6387,7 @@ await client.conversationalAi.tools.delete("tool_id");
 <dl>
 <dd>
 
-**requestOptions:** `Tools.RequestOptions` 
+**requestOptions:** `ToolsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6397,7 +6465,7 @@ await client.conversationalAi.tools.update("tool_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Tools.RequestOptions` 
+**requestOptions:** `ToolsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6471,7 +6539,7 @@ await client.conversationalAi.tools.getDependentAgents("tool_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Tools.RequestOptions` 
+**requestOptions:** `ToolsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6527,7 +6595,7 @@ await client.conversationalAi.settings.get();
 <dl>
 <dd>
 
-**requestOptions:** `Settings.RequestOptions` 
+**requestOptions:** `SettingsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6590,7 +6658,7 @@ await client.conversationalAi.settings.update();
 <dl>
 <dd>
 
-**requestOptions:** `Settings.RequestOptions` 
+**requestOptions:** `SettingsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6646,7 +6714,7 @@ await client.conversationalAi.secrets.list();
 <dl>
 <dd>
 
-**requestOptions:** `Secrets.RequestOptions` 
+**requestOptions:** `SecretsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6712,7 +6780,7 @@ await client.conversationalAi.secrets.create({
 <dl>
 <dd>
 
-**requestOptions:** `Secrets.RequestOptions` 
+**requestOptions:** `SecretsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6775,7 +6843,7 @@ await client.conversationalAi.secrets.delete("secret_id");
 <dl>
 <dd>
 
-**requestOptions:** `Secrets.RequestOptions` 
+**requestOptions:** `SecretsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6849,7 +6917,7 @@ await client.conversationalAi.secrets.update("secret_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Secrets.RequestOptions` 
+**requestOptions:** `SecretsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6917,7 +6985,7 @@ await client.conversationalAi.batchCalls.create({
 <dl>
 <dd>
 
-**requestOptions:** `BatchCalls.RequestOptions` 
+**requestOptions:** `BatchCallsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6983,7 +7051,7 @@ await client.conversationalAi.batchCalls.list({
 <dl>
 <dd>
 
-**requestOptions:** `BatchCalls.RequestOptions` 
+**requestOptions:** `BatchCallsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7046,7 +7114,7 @@ await client.conversationalAi.batchCalls.get("batch_id");
 <dl>
 <dd>
 
-**requestOptions:** `BatchCalls.RequestOptions` 
+**requestOptions:** `BatchCallsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7109,7 +7177,7 @@ await client.conversationalAi.batchCalls.cancel("batch_id");
 <dl>
 <dd>
 
-**requestOptions:** `BatchCalls.RequestOptions` 
+**requestOptions:** `BatchCallsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7172,7 +7240,7 @@ await client.conversationalAi.batchCalls.retry("batch_id");
 <dl>
 <dd>
 
-**requestOptions:** `BatchCalls.RequestOptions` 
+**requestOptions:** `BatchCallsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7240,7 +7308,7 @@ await client.conversationalAi.sipTrunk.outboundCall({
 <dl>
 <dd>
 
-**requestOptions:** `SipTrunk.RequestOptions` 
+**requestOptions:** `SipTrunkClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7296,7 +7364,7 @@ await client.conversationalAi.mcpServers.list();
 <dl>
 <dd>
 
-**requestOptions:** `McpServers.RequestOptions` 
+**requestOptions:** `McpServersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7364,7 +7432,7 @@ await client.conversationalAi.mcpServers.create({
 <dl>
 <dd>
 
-**requestOptions:** `McpServers.RequestOptions` 
+**requestOptions:** `McpServersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7427,7 +7495,7 @@ await client.conversationalAi.mcpServers.get("mcp_server_id");
 <dl>
 <dd>
 
-**requestOptions:** `McpServers.RequestOptions` 
+**requestOptions:** `McpServersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7490,7 +7558,7 @@ await client.conversationalAi.mcpServers.delete("mcp_server_id");
 <dl>
 <dd>
 
-**requestOptions:** `McpServers.RequestOptions` 
+**requestOptions:** `McpServersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7561,7 +7629,7 @@ await client.conversationalAi.mcpServers.update("mcp_server_id");
 <dl>
 <dd>
 
-**requestOptions:** `McpServers.RequestOptions` 
+**requestOptions:** `McpServersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7635,7 +7703,7 @@ await client.conversationalAi.agents.widget.get("agent_3701k3ttaq12ewp8b7qv5rfys
 <dl>
 <dd>
 
-**requestOptions:** `Widget.RequestOptions` 
+**requestOptions:** `WidgetClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7699,7 +7767,7 @@ await client.conversationalAi.agents.link.get("agent_3701k3ttaq12ewp8b7qv5rfyszk
 <dl>
 <dd>
 
-**requestOptions:** `Link.RequestOptions` 
+**requestOptions:** `LinkClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7763,7 +7831,7 @@ await client.conversationalAi.agents.knowledgeBase.size("agent_id");
 <dl>
 <dd>
 
-**requestOptions:** `KnowledgeBase.RequestOptions` 
+**requestOptions:** `KnowledgeBaseClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7835,7 +7903,7 @@ await client.conversationalAi.agents.llmUsage.calculate("agent_id");
 <dl>
 <dd>
 
-**requestOptions:** `LlmUsage.RequestOptions` 
+**requestOptions:** `LlmUsageClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7909,7 +7977,7 @@ await client.conversationalAi.agents.widget.avatar.create("agent_3701k3ttaq12ewp
 <dl>
 <dd>
 
-**requestOptions:** `Avatar.RequestOptions` 
+**requestOptions:** `AvatarClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -7975,7 +8043,7 @@ await client.conversationalAi.analytics.liveCount.get({
 <dl>
 <dd>
 
-**requestOptions:** `LiveCount.RequestOptions` 
+**requestOptions:** `LiveCountClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8039,7 +8107,7 @@ await client.conversationalAi.conversations.audio.get("conversation_id");
 <dl>
 <dd>
 
-**requestOptions:** `Audio.RequestOptions` 
+**requestOptions:** `AudioClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8113,7 +8181,7 @@ await client.conversationalAi.conversations.feedback.create("21m00Tcm4TlvDq8ikWA
 <dl>
 <dd>
 
-**requestOptions:** `Feedback.RequestOptions` 
+**requestOptions:** `FeedbackClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8169,7 +8237,7 @@ await client.conversationalAi.dashboard.settings.get();
 <dl>
 <dd>
 
-**requestOptions:** `Settings.RequestOptions` 
+**requestOptions:** `SettingsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8232,7 +8300,7 @@ await client.conversationalAi.dashboard.settings.update();
 <dl>
 <dd>
 
-**requestOptions:** `Settings.RequestOptions` 
+**requestOptions:** `SettingsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8298,7 +8366,7 @@ await client.conversationalAi.knowledgeBase.documents.createFromUrl({
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions` 
+**requestOptions:** `DocumentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8363,7 +8431,7 @@ await client.conversationalAi.knowledgeBase.documents.createFromFile({
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions` 
+**requestOptions:** `DocumentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8428,7 +8496,7 @@ await client.conversationalAi.knowledgeBase.documents.createFromText({
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions` 
+**requestOptions:** `DocumentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8501,7 +8569,7 @@ await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM"
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions` 
+**requestOptions:** `DocumentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8574,7 +8642,7 @@ await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikW
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions` 
+**requestOptions:** `DocumentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8647,7 +8715,7 @@ await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikW
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions` 
+**requestOptions:** `DocumentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8721,7 +8789,7 @@ await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions` 
+**requestOptions:** `DocumentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8784,7 +8852,7 @@ await client.conversationalAi.knowledgeBase.documents.getContent("21m00Tcm4TlvDq
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions` 
+**requestOptions:** `DocumentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8858,7 +8926,7 @@ await client.conversationalAi.knowledgeBase.document.computeRagIndex("21m00Tcm4T
 <dl>
 <dd>
 
-**requestOptions:** `Document.RequestOptions` 
+**requestOptions:** `DocumentClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8930,7 +8998,7 @@ await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8
 <dl>
 <dd>
 
-**requestOptions:** `Chunk.RequestOptions` 
+**requestOptions:** `ChunkClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -8994,7 +9062,7 @@ await client.conversationalAi.mcpServers.tools.list("mcp_server_id");
 <dl>
 <dd>
 
-**requestOptions:** `Tools.RequestOptions` 
+**requestOptions:** `ToolsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9068,7 +9136,7 @@ await client.conversationalAi.mcpServers.approvalPolicy.update("mcp_server_id", 
 <dl>
 <dd>
 
-**requestOptions:** `ApprovalPolicy.RequestOptions` 
+**requestOptions:** `ApprovalPolicyClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9143,7 +9211,7 @@ await client.conversationalAi.mcpServers.toolApprovals.create("mcp_server_id", {
 <dl>
 <dd>
 
-**requestOptions:** `ToolApprovals.RequestOptions` 
+**requestOptions:** `ToolApprovalsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9214,7 +9282,7 @@ await client.conversationalAi.mcpServers.toolApprovals.delete("mcp_server_id", "
 <dl>
 <dd>
 
-**requestOptions:** `ToolApprovals.RequestOptions` 
+**requestOptions:** `ToolApprovalsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9288,7 +9356,7 @@ await client.conversationalAi.mcpServers.toolConfigs.create("mcp_server_id", {
 <dl>
 <dd>
 
-**requestOptions:** `ToolConfigs.RequestOptions` 
+**requestOptions:** `ToolConfigsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9359,7 +9427,7 @@ await client.conversationalAi.mcpServers.toolConfigs.get("mcp_server_id", "tool_
 <dl>
 <dd>
 
-**requestOptions:** `ToolConfigs.RequestOptions` 
+**requestOptions:** `ToolConfigsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9430,7 +9498,7 @@ await client.conversationalAi.mcpServers.toolConfigs.delete("mcp_server_id", "to
 <dl>
 <dd>
 
-**requestOptions:** `ToolConfigs.RequestOptions` 
+**requestOptions:** `ToolConfigsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9509,7 +9577,7 @@ await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "to
 <dl>
 <dd>
 
-**requestOptions:** `ToolConfigs.RequestOptions` 
+**requestOptions:** `ToolConfigsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9577,7 +9645,7 @@ await client.conversationalAi.tests.invocations.list({
 <dl>
 <dd>
 
-**requestOptions:** `Invocations.RequestOptions` 
+**requestOptions:** `InvocationsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9640,7 +9708,7 @@ await client.conversationalAi.tests.invocations.get("test_invocation_id");
 <dl>
 <dd>
 
-**requestOptions:** `Invocations.RequestOptions` 
+**requestOptions:** `InvocationsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9714,7 +9782,7 @@ await client.conversationalAi.tests.invocations.resubmit("test_invocation_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Invocations.RequestOptions` 
+**requestOptions:** `InvocationsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9778,7 +9846,7 @@ await client.dubbing.resource.get("dubbing_id");
 <dl>
 <dd>
 
-**requestOptions:** `Resource.RequestOptions` 
+**requestOptions:** `ResourceClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9852,7 +9920,7 @@ await client.dubbing.resource.migrateSegments("dubbing_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Resource.RequestOptions` 
+**requestOptions:** `ResourceClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9925,7 +9993,7 @@ await client.dubbing.resource.transcribe("dubbing_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Resource.RequestOptions` 
+**requestOptions:** `ResourceClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9998,7 +10066,7 @@ await client.dubbing.resource.translate("dubbing_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Resource.RequestOptions` 
+**requestOptions:** `ResourceClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10071,7 +10139,7 @@ await client.dubbing.resource.dub("dubbing_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Resource.RequestOptions` 
+**requestOptions:** `ResourceClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10110,7 +10178,7 @@ Regenerate the output media for a language using the latest Studio state. Please
 <dd>
 
 ```typescript
-await client.dubbing.resource.render("dubbing_id", "language", {
+await client.dubbing.resource.render("dubbing_id", "original", {
     renderType: "mp4"
 });
 
@@ -10152,7 +10220,7 @@ await client.dubbing.resource.render("dubbing_id", "language", {
 <dl>
 <dd>
 
-**requestOptions:** `Resource.RequestOptions` 
+**requestOptions:** `ResourceClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10224,7 +10292,7 @@ await client.dubbing.audio.get("dubbing_id", "language_code");
 <dl>
 <dd>
 
-**requestOptions:** `Audio.RequestOptions` 
+**requestOptions:** `AudioClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10306,7 +10374,7 @@ await client.dubbing.transcript.getTranscriptForDub("dubbing_id", "language_code
 <dl>
 <dd>
 
-**requestOptions:** `Transcript.RequestOptions` 
+**requestOptions:** `TranscriptClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10378,7 +10446,7 @@ await client.dubbing.resource.language.add("dubbing_id");
 <dl>
 <dd>
 
-**requestOptions:** `Language.RequestOptions` 
+**requestOptions:** `LanguageClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10466,7 +10534,7 @@ await client.dubbing.resource.segment.update("dubbing_id", "segment_id", "langua
 <dl>
 <dd>
 
-**requestOptions:** `Segment.RequestOptions` 
+**requestOptions:** `SegmentClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10537,7 +10605,7 @@ await client.dubbing.resource.segment.delete("dubbing_id", "segment_id");
 <dl>
 <dd>
 
-**requestOptions:** `Segment.RequestOptions` 
+**requestOptions:** `SegmentClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10617,7 +10685,7 @@ await client.dubbing.resource.speaker.update("dubbing_id", "speaker_id");
 <dl>
 <dd>
 
-**requestOptions:** `Speaker.RequestOptions` 
+**requestOptions:** `SpeakerClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10674,7 +10742,7 @@ await client.dubbing.resource.speaker.create("dubbing_id");
 <dl>
 <dd>
 
-**requestOptions:** `Speaker.RequestOptions` 
+**requestOptions:** `SpeakerClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10745,7 +10813,7 @@ await client.dubbing.resource.speaker.findSimilarVoices("dubbing_id", "speaker_i
 <dl>
 <dd>
 
-**requestOptions:** `Speaker.RequestOptions` 
+**requestOptions:** `SpeakerClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10828,7 +10896,7 @@ await client.dubbing.resource.speaker.segment.create("dubbing_id", "speaker_id",
 <dl>
 <dd>
 
-**requestOptions:** `Segment.RequestOptions` 
+**requestOptions:** `SegmentClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10894,7 +10962,7 @@ await client.music.compositionPlan.create({
 <dl>
 <dd>
 
-**requestOptions:** `CompositionPlan.RequestOptions` 
+**requestOptions:** `CompositionPlanClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10972,7 +11040,7 @@ await client.pronunciationDictionaries.rules.add("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Rules.RequestOptions` 
+**requestOptions:** `RulesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11045,7 +11113,7 @@ await client.pronunciationDictionaries.rules.remove("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Rules.RequestOptions` 
+**requestOptions:** `RulesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11109,7 +11177,7 @@ await client.serviceAccounts.apiKeys.list("service_account_user_id");
 <dl>
 <dd>
 
-**requestOptions:** `ApiKeys.RequestOptions` 
+**requestOptions:** `ApiKeysClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11150,7 +11218,7 @@ Create a new API key for a service account
 ```typescript
 await client.serviceAccounts.apiKeys.create("service_account_user_id", {
     name: "name",
-    permissions: ["text_to_speech"]
+    permissions: "all"
 });
 
 ```
@@ -11183,7 +11251,7 @@ await client.serviceAccounts.apiKeys.create("service_account_user_id", {
 <dl>
 <dd>
 
-**requestOptions:** `ApiKeys.RequestOptions` 
+**requestOptions:** `ApiKeysClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11254,7 +11322,7 @@ await client.serviceAccounts.apiKeys.delete("service_account_user_id", "api_key_
 <dl>
 <dd>
 
-**requestOptions:** `ApiKeys.RequestOptions` 
+**requestOptions:** `ApiKeysClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11296,7 +11364,7 @@ Update an existing API key for a service account
 await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_id", {
     isEnabled: true,
     name: "Sneaky Fox",
-    permissions: ["text_to_speech"]
+    permissions: "all"
 });
 
 ```
@@ -11337,7 +11405,7 @@ await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_
 <dl>
 <dd>
 
-**requestOptions:** `ApiKeys.RequestOptions` 
+**requestOptions:** `ApiKeysClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11401,7 +11469,7 @@ await client.speechToText.transcripts.get("transcription_id");
 <dl>
 <dd>
 
-**requestOptions:** `Transcripts.RequestOptions` 
+**requestOptions:** `TranscriptsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11464,7 +11532,7 @@ await client.speechToText.transcripts.delete("transcription_id");
 <dl>
 <dd>
 
-**requestOptions:** `Transcripts.RequestOptions` 
+**requestOptions:** `TranscriptsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11520,7 +11588,7 @@ await client.studio.projects.list();
 <dl>
 <dd>
 
-**requestOptions:** `Projects.RequestOptions` 
+**requestOptions:** `ProjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11585,7 +11653,7 @@ await client.studio.projects.create({
 <dl>
 <dd>
 
-**requestOptions:** `Projects.RequestOptions` 
+**requestOptions:** `ProjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11658,7 +11726,7 @@ await client.studio.projects.get("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Projects.RequestOptions` 
+**requestOptions:** `ProjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11733,7 +11801,7 @@ await client.studio.projects.update("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Projects.RequestOptions` 
+**requestOptions:** `ProjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11796,7 +11864,7 @@ await client.studio.projects.delete("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `Projects.RequestOptions` 
+**requestOptions:** `ProjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11859,7 +11927,7 @@ await client.studio.projects.convert("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `Projects.RequestOptions` 
+**requestOptions:** `ProjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11935,7 +12003,7 @@ await client.studio.projects.pronunciationDictionaries.create("21m00Tcm4TlvDq8ik
 <dl>
 <dd>
 
-**requestOptions:** `PronunciationDictionaries.RequestOptions` 
+**requestOptions:** `PronunciationDictionariesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12007,7 +12075,7 @@ await client.studio.projects.content.update("21m00Tcm4TlvDq8ikWAM", {});
 <dl>
 <dd>
 
-**requestOptions:** `Content.RequestOptions` 
+**requestOptions:** `ContentClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12071,7 +12139,7 @@ await client.studio.projects.snapshots.list("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `Snapshots.RequestOptions` 
+**requestOptions:** `SnapshotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12142,7 +12210,7 @@ await client.studio.projects.snapshots.get("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4Tlv
 <dl>
 <dd>
 
-**requestOptions:** `Snapshots.RequestOptions` 
+**requestOptions:** `SnapshotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12221,7 +12289,7 @@ await client.studio.projects.snapshots.stream("project_id", "project_snapshot_id
 <dl>
 <dd>
 
-**requestOptions:** `Snapshots.RequestOptions` 
+**requestOptions:** `SnapshotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12292,7 +12360,7 @@ await client.studio.projects.snapshots.streamArchive("project_id", "project_snap
 <dl>
 <dd>
 
-**requestOptions:** `Snapshots.RequestOptions` 
+**requestOptions:** `SnapshotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12356,7 +12424,7 @@ await client.studio.projects.chapters.list("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `Chapters.RequestOptions` 
+**requestOptions:** `ChaptersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12429,7 +12497,7 @@ await client.studio.projects.chapters.create("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Chapters.RequestOptions` 
+**requestOptions:** `ChaptersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12500,7 +12568,7 @@ await client.studio.projects.chapters.get("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvD
 <dl>
 <dd>
 
-**requestOptions:** `Chapters.RequestOptions` 
+**requestOptions:** `ChaptersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12579,7 +12647,7 @@ await client.studio.projects.chapters.update("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4T
 <dl>
 <dd>
 
-**requestOptions:** `Chapters.RequestOptions` 
+**requestOptions:** `ChaptersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12650,7 +12718,7 @@ await client.studio.projects.chapters.delete("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4T
 <dl>
 <dd>
 
-**requestOptions:** `Chapters.RequestOptions` 
+**requestOptions:** `ChaptersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12721,7 +12789,7 @@ await client.studio.projects.chapters.convert("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4
 <dl>
 <dd>
 
-**requestOptions:** `Chapters.RequestOptions` 
+**requestOptions:** `ChaptersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12793,7 +12861,7 @@ await client.studio.projects.chapters.snapshots.list("21m00Tcm4TlvDq8ikWAM", "21
 <dl>
 <dd>
 
-**requestOptions:** `Snapshots.RequestOptions` 
+**requestOptions:** `SnapshotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12872,7 +12940,7 @@ await client.studio.projects.chapters.snapshots.get("21m00Tcm4TlvDq8ikWAM", "21m
 <dl>
 <dd>
 
-**requestOptions:** `Snapshots.RequestOptions` 
+**requestOptions:** `SnapshotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12959,7 +13027,7 @@ await client.studio.projects.chapters.snapshots.stream("project_id", "chapter_id
 <dl>
 <dd>
 
-**requestOptions:** `Snapshots.RequestOptions` 
+**requestOptions:** `SnapshotsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13023,7 +13091,7 @@ await client.textToVoice.preview.stream("generated_voice_id");
 <dl>
 <dd>
 
-**requestOptions:** `Preview.RequestOptions` 
+**requestOptions:** `PreviewClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13087,7 +13155,7 @@ await client.tokens.singleUse.create("realtime_scribe");
 <dl>
 <dd>
 
-**requestOptions:** `SingleUse.RequestOptions` 
+**requestOptions:** `SingleUseClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13143,7 +13211,7 @@ await client.user.subscription.get();
 <dl>
 <dd>
 
-**requestOptions:** `Subscription.RequestOptions` 
+**requestOptions:** `SubscriptionClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13199,7 +13267,7 @@ await client.voices.settings.getDefault();
 <dl>
 <dd>
 
-**requestOptions:** `Settings.RequestOptions` 
+**requestOptions:** `SettingsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13262,7 +13330,7 @@ await client.voices.settings.get("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `Settings.RequestOptions` 
+**requestOptions:** `SettingsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13339,7 +13407,7 @@ await client.voices.settings.update("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Settings.RequestOptions` 
+**requestOptions:** `SettingsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13406,7 +13474,7 @@ await client.voices.ivc.create({
 <dl>
 <dd>
 
-**requestOptions:** `Ivc.RequestOptions` 
+**requestOptions:** `IvcClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13473,7 +13541,7 @@ await client.voices.pvc.create({
 <dl>
 <dd>
 
-**requestOptions:** `Pvc.RequestOptions` 
+**requestOptions:** `PvcClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13544,7 +13612,7 @@ await client.voices.pvc.update("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `Pvc.RequestOptions` 
+**requestOptions:** `PvcClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13615,7 +13683,7 @@ await client.voices.pvc.train("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `Pvc.RequestOptions` 
+**requestOptions:** `PvcClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13689,7 +13757,7 @@ await client.voices.pvc.samples.create("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Samples.RequestOptions` 
+**requestOptions:** `SamplesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13768,7 +13836,7 @@ await client.voices.pvc.samples.update("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yT
 <dl>
 <dd>
 
-**requestOptions:** `Samples.RequestOptions` 
+**requestOptions:** `SamplesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13839,7 +13907,7 @@ await client.voices.pvc.samples.delete("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yT
 <dl>
 <dd>
 
-**requestOptions:** `Samples.RequestOptions` 
+**requestOptions:** `SamplesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13913,7 +13981,7 @@ await client.voices.pvc.verification.request("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Verification.RequestOptions` 
+**requestOptions:** `VerificationClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -13995,7 +14063,7 @@ await client.voices.pvc.samples.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h3
 <dl>
 <dd>
 
-**requestOptions:** `Audio.RequestOptions` 
+**requestOptions:** `AudioClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14067,7 +14135,7 @@ await client.voices.pvc.samples.waveform.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY
 <dl>
 <dd>
 
-**requestOptions:** `Waveform.RequestOptions` 
+**requestOptions:** `WaveformClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14139,7 +14207,7 @@ await client.voices.pvc.samples.speakers.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY
 <dl>
 <dd>
 
-**requestOptions:** `Speakers.RequestOptions` 
+**requestOptions:** `SpeakersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14210,7 +14278,7 @@ await client.voices.pvc.samples.speakers.separate("21m00Tcm4TlvDq8ikWAM", "VW7YK
 <dl>
 <dd>
 
-**requestOptions:** `Speakers.RequestOptions` 
+**requestOptions:** `SpeakersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14290,7 +14358,7 @@ await client.voices.pvc.samples.speakers.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7Y
 <dl>
 <dd>
 
-**requestOptions:** `Audio.RequestOptions` 
+**requestOptions:** `AudioClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14354,7 +14422,7 @@ await client.voices.pvc.verification.captcha.get("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `Captcha.RequestOptions` 
+**requestOptions:** `CaptchaClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14427,7 +14495,7 @@ await client.voices.pvc.verification.captcha.verify("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**requestOptions:** `Captcha.RequestOptions` 
+**requestOptions:** `CaptchaClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14499,7 +14567,7 @@ await client.voices.samples.audio.get("voice_id", "sample_id");
 <dl>
 <dd>
 
-**requestOptions:** `Audio.RequestOptions` 
+**requestOptions:** `AudioClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14565,7 +14633,7 @@ await client.workspace.groups.search({
 <dl>
 <dd>
 
-**requestOptions:** `Groups.RequestOptions` 
+**requestOptions:** `GroupsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14631,7 +14699,7 @@ await client.workspace.invites.create({
 <dl>
 <dd>
 
-**requestOptions:** `Invites.RequestOptions` 
+**requestOptions:** `InvitesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14696,7 +14764,7 @@ await client.workspace.invites.createBatch({
 <dl>
 <dd>
 
-**requestOptions:** `Invites.RequestOptions` 
+**requestOptions:** `InvitesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14761,7 +14829,7 @@ await client.workspace.invites.delete({
 <dl>
 <dd>
 
-**requestOptions:** `Invites.RequestOptions` 
+**requestOptions:** `InvitesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14827,7 +14895,7 @@ await client.workspace.members.update({
 <dl>
 <dd>
 
-**requestOptions:** `Members.RequestOptions` 
+**requestOptions:** `MembersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14901,7 +14969,7 @@ await client.workspace.resources.get("resource_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Resources.RequestOptions` 
+**requestOptions:** `ResourcesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -14975,7 +15043,7 @@ await client.workspace.resources.share("resource_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Resources.RequestOptions` 
+**requestOptions:** `ResourcesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -15048,7 +15116,7 @@ await client.workspace.resources.unshare("resource_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Resources.RequestOptions` 
+**requestOptions:** `ResourcesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -15122,7 +15190,7 @@ await client.workspace.groups.members.remove("group_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Members.RequestOptions` 
+**requestOptions:** `MembersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -15195,7 +15263,7 @@ await client.workspace.groups.members.add("group_id", {
 <dl>
 <dd>
 
-**requestOptions:** `Members.RequestOptions` 
+**requestOptions:** `MembersClient.RequestOptions` 
     
 </dd>
 </dl>

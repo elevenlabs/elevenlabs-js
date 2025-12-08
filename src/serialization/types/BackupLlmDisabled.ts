@@ -7,8 +7,12 @@ import type * as serializers from "../index";
 export const BackupLlmDisabled: core.serialization.ObjectSchema<
     serializers.BackupLlmDisabled.Raw,
     ElevenLabs.BackupLlmDisabled
-> = core.serialization.object({});
+> = core.serialization.object({
+    preference: core.serialization.stringLiteral("disabled").optional(),
+});
 
 export declare namespace BackupLlmDisabled {
-    export type Raw = {};
+    export interface Raw {
+        preference?: "disabled" | null;
+    }
 }

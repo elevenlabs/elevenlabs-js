@@ -8,11 +8,13 @@ export const PodcastTextSource: core.serialization.ObjectSchema<
     serializers.PodcastTextSource.Raw,
     ElevenLabs.PodcastTextSource
 > = core.serialization.object({
+    type: core.serialization.stringLiteral("text"),
     text: core.serialization.string(),
 });
 
 export declare namespace PodcastTextSource {
     export interface Raw {
+        type: "text";
         text: string;
     }
 }
