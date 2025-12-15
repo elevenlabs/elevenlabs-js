@@ -20,6 +20,7 @@ describe("BatchCallsClient", () => {
             total_calls_scheduled: 1,
             last_updated_at_unix: 1,
             status: "pending",
+            retry_count: 1,
             agent_name: "agent_name",
         };
         server
@@ -48,6 +49,7 @@ describe("BatchCallsClient", () => {
             totalCallsScheduled: 1,
             lastUpdatedAtUnix: 1,
             status: "pending",
+            retryCount: 1,
             agentName: "agent_name",
         });
     });
@@ -70,6 +72,7 @@ describe("BatchCallsClient", () => {
                     total_calls_scheduled: 1,
                     last_updated_at_unix: 1,
                     status: "pending",
+                    retry_count: 1,
                     agent_name: "agent_name",
                 },
             ],
@@ -102,6 +105,7 @@ describe("BatchCallsClient", () => {
                     totalCallsScheduled: 1,
                     lastUpdatedAtUnix: 1,
                     status: "pending",
+                    retryCount: 1,
                     agentName: "agent_name",
                 },
             ],
@@ -126,6 +130,7 @@ describe("BatchCallsClient", () => {
             total_calls_scheduled: 1,
             last_updated_at_unix: 1,
             status: "pending",
+            retry_count: 1,
             agent_name: "agent_name",
             recipients: [
                 {
@@ -174,6 +179,7 @@ describe("BatchCallsClient", () => {
             totalCallsScheduled: 1,
             lastUpdatedAtUnix: 1,
             status: "pending",
+            retryCount: 1,
             agentName: "agent_name",
             recipients: [
                 {
@@ -228,6 +234,7 @@ describe("BatchCallsClient", () => {
             total_calls_scheduled: 1,
             last_updated_at_unix: 1,
             status: "pending",
+            retry_count: 1,
             agent_name: "agent_name",
         };
         server
@@ -251,6 +258,7 @@ describe("BatchCallsClient", () => {
             totalCallsScheduled: 1,
             lastUpdatedAtUnix: 1,
             status: "pending",
+            retryCount: 1,
             agentName: "agent_name",
         });
     });
@@ -271,6 +279,7 @@ describe("BatchCallsClient", () => {
             total_calls_scheduled: 1,
             last_updated_at_unix: 1,
             status: "pending",
+            retry_count: 1,
             agent_name: "agent_name",
         };
         server
@@ -294,6 +303,7 @@ describe("BatchCallsClient", () => {
             totalCallsScheduled: 1,
             lastUpdatedAtUnix: 1,
             status: "pending",
+            retryCount: 1,
             agentName: "agent_name",
         });
     });

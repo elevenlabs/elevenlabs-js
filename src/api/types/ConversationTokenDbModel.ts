@@ -13,4 +13,6 @@ export interface ConversationTokenDbModel {
     conversationId?: string;
     /** The purpose of the token */
     purpose?: ElevenLabs.ConversationTokenPurpose;
+    /** The user ID of the entity who requested the token */
+    tokenRequesterUserId?: string;
 }

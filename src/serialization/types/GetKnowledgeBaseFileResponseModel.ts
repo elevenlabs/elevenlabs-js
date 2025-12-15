@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
+import { KnowledgeBaseFolderPathSegmentResponseModel } from "./KnowledgeBaseFolderPathSegmentResponseModel";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
 
 export const GetKnowledgeBaseFileResponseModel: core.serialization.ObjectSchema<
@@ -16,6 +17,11 @@ export const GetKnowledgeBaseFileResponseModel: core.serialization.ObjectSchema<
     metadata: KnowledgeBaseDocumentMetadataResponseModel,
     supportedUsages: core.serialization.property("supported_usages", core.serialization.list(DocumentUsageModeEnum)),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
+    folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
+    folderPath: core.serialization.property(
+        "folder_path",
+        core.serialization.list(KnowledgeBaseFolderPathSegmentResponseModel).optional(),
+    ),
     extractedInnerHtml: core.serialization.property("extracted_inner_html", core.serialization.string()),
 });
 
@@ -26,6 +32,8 @@ export declare namespace GetKnowledgeBaseFileResponseModel {
         metadata: KnowledgeBaseDocumentMetadataResponseModel.Raw;
         supported_usages: DocumentUsageModeEnum.Raw[];
         access_info: ResourceAccessInfo.Raw;
+        folder_parent_id?: string | null;
+        folder_path?: KnowledgeBaseFolderPathSegmentResponseModel.Raw[] | null;
         extracted_inner_html: string;
     }
 }

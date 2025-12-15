@@ -66,8 +66,10 @@ describe("DocumentsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
             },
-            extracted_inner_html: "extracted_inner_html",
+            folder_parent_id: "folder_parent_id",
+            folder_path: [{ id: "id", name: "name" }],
             url: "url",
+            extracted_inner_html: "extracted_inner_html",
         };
         server
             .mockEndpoint()
@@ -96,8 +98,15 @@ describe("DocumentsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
             },
-            extractedInnerHtml: "extracted_inner_html",
+            folderParentId: "folder_parent_id",
+            folderPath: [
+                {
+                    id: "id",
+                    name: "name",
+                },
+            ],
             url: "url",
+            extractedInnerHtml: "extracted_inner_html",
         });
     });
 
@@ -138,8 +147,10 @@ describe("DocumentsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
             },
-            extracted_inner_html: "extracted_inner_html",
+            folder_parent_id: "folder_parent_id",
+            folder_path: [{ id: "id", name: "name" }],
             url: "url",
+            extracted_inner_html: "extracted_inner_html",
         };
         server
             .mockEndpoint()
@@ -169,8 +180,15 @@ describe("DocumentsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
             },
-            extractedInnerHtml: "extracted_inner_html",
+            folderParentId: "folder_parent_id",
+            folderPath: [
+                {
+                    id: "id",
+                    name: "name",
+                },
+            ],
             url: "url",
+            extractedInnerHtml: "extracted_inner_html",
         });
     });
 

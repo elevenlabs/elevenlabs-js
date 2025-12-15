@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const KnowledgeBaseDocumentType: core.serialization.Schema<
     serializers.KnowledgeBaseDocumentType.Raw,
     ElevenLabs.KnowledgeBaseDocumentType
-> = core.serialization.enum_(["file", "url", "text"]);
+> = core.serialization.enum_(["file", "url", "text", "folder"]);
 
 export declare namespace KnowledgeBaseDocumentType {
-    export type Raw = "file" | "url" | "text";
+    export type Raw = "file" | "url" | "text" | "folder";
 }

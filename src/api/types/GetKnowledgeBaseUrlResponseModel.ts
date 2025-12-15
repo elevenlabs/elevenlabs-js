@@ -8,6 +8,10 @@ export interface GetKnowledgeBaseUrlResponseModel {
     metadata: ElevenLabs.KnowledgeBaseDocumentMetadataResponseModel;
     supportedUsages: ElevenLabs.DocumentUsageModeEnum[];
     accessInfo: ElevenLabs.ResourceAccessInfo;
-    extractedInnerHtml: string;
+    /** The ID of the parent folder, or null if the document is at the root level. */
+    folderParentId?: string;
+    /** The folder path segments leading to this entity, from root to parent folder. */
+    folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentResponseModel[];
     url: string;
+    extractedInnerHtml: string;
 }

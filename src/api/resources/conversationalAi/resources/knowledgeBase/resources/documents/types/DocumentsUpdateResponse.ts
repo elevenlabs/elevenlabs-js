@@ -5,7 +5,8 @@ import type * as ElevenLabs from "../../../../../../../index";
 export type DocumentsUpdateResponse =
     | ElevenLabs.conversationalAi.knowledgeBase.DocumentsUpdateResponse.Url
     | ElevenLabs.conversationalAi.knowledgeBase.DocumentsUpdateResponse.File_
-    | ElevenLabs.conversationalAi.knowledgeBase.DocumentsUpdateResponse.Text;
+    | ElevenLabs.conversationalAi.knowledgeBase.DocumentsUpdateResponse.Text
+    | ElevenLabs.conversationalAi.knowledgeBase.DocumentsUpdateResponse.Folder;
 
 export namespace DocumentsUpdateResponse {
     export interface Url extends ElevenLabs.GetKnowledgeBaseUrlResponseModel {
@@ -18,5 +19,9 @@ export namespace DocumentsUpdateResponse {
 
     export interface Text extends ElevenLabs.GetKnowledgeBaseTextResponseModel {
         type: "text";
+    }
+
+    export interface Folder extends ElevenLabs.GetKnowledgeBaseFolderResponseModel {
+        type: "folder";
     }
 }

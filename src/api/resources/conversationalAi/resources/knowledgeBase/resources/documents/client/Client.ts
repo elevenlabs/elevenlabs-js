@@ -10,6 +10,7 @@ import * as errors from "../../../../../../../../errors/index";
 import * as serializers from "../../../../../../../../serialization/index";
 import * as ElevenLabs from "../../../../../../../index";
 import { ChunkClient } from "../resources/chunk/client/Client";
+import { SummariesClient } from "../resources/summaries/client/Client";
 
 export declare namespace DocumentsClient {
     export type Options = BaseClientOptions;
@@ -19,10 +20,15 @@ export declare namespace DocumentsClient {
 
 export class DocumentsClient {
     protected readonly _options: NormalizedClientOptions<DocumentsClient.Options>;
+    protected _summaries: SummariesClient | undefined;
     protected _chunk: ChunkClient | undefined;
 
     constructor(options: DocumentsClient.Options = {}) {
         this._options = normalizeClientOptions(options);
+    }
+
+    public get summaries(): SummariesClient {
+        return (this._summaries ??= new SummariesClient(this._options));
     }
 
     public get chunk(): ChunkClient {
@@ -150,6 +156,10 @@ export class DocumentsClient {
         await _request.appendFile("file", request.file);
         if (request.name != null) {
             _request.append("name", request.name);
+        }
+
+        if (request.parentFolderId != null) {
+            _request.append("parent_folder_id", request.parentFolderId);
         }
 
         const _maybeEncodedRequest = await _request.getRequest();

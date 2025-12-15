@@ -21,6 +21,7 @@ export const BatchCallResponse: core.serialization.ObjectSchema<
     totalCallsScheduled: core.serialization.property("total_calls_scheduled", core.serialization.number()),
     lastUpdatedAtUnix: core.serialization.property("last_updated_at_unix", core.serialization.number()),
     status: BatchCallStatus,
+    retryCount: core.serialization.property("retry_count", core.serialization.number().optional()),
     agentName: core.serialization.property("agent_name", core.serialization.string()),
 });
 
@@ -37,6 +38,7 @@ export declare namespace BatchCallResponse {
         total_calls_scheduled: number;
         last_updated_at_unix: number;
         status: BatchCallStatus.Raw;
+        retry_count?: number | null;
         agent_name: string;
     }
 }

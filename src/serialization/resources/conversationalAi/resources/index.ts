@@ -6,6 +6,8 @@ export * as conversations from "./conversations";
 export * from "./conversations/types";
 export * as dashboard from "./dashboard";
 export * as knowledgeBase from "./knowledgeBase";
+export * from "./knowledgeBase/client/requests";
+export * from "./knowledgeBase/types";
 export * as llmUsage from "./llmUsage";
 export * from "./llmUsage/client/requests";
 export * as mcpServers from "./mcpServers";

@@ -4,6 +4,36 @@ import { ElevenLabsClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("ConversationalAiClient", () => {
+    test("rag_index_overview", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            total_used_bytes: 1,
+            total_max_bytes: 1,
+            models: [{ model: "e5_mistral_7b_instruct", used_bytes: 1 }],
+        };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/knowledge-base/rag-index")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.ragIndexOverview();
+        expect(response).toEqual({
+            totalUsedBytes: 1,
+            totalMaxBytes: 1,
+            models: [
+                {
+                    model: "e5_mistral_7b_instruct",
+                    usedBytes: 1,
+                },
+            ],
+        });
+    });
+
     test("get_document_rag_indexes", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
@@ -74,36 +104,6 @@ describe("ConversationalAiClient", () => {
             documentModelIndexUsage: {
                 usedBytes: 1,
             },
-        });
-    });
-
-    test("rag_index_overview", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
-        const rawResponseBody = {
-            total_used_bytes: 1,
-            total_max_bytes: 1,
-            models: [{ model: "e5_mistral_7b_instruct", used_bytes: 1 }],
-        };
-        server
-            .mockEndpoint()
-            .get("/v1/convai/knowledge-base/rag-index")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.conversationalAi.ragIndexOverview();
-        expect(response).toEqual({
-            totalUsedBytes: 1,
-            totalMaxBytes: 1,
-            models: [
-                {
-                    model: "e5_mistral_7b_instruct",
-                    usedBytes: 1,
-                },
-            ],
         });
     });
 });

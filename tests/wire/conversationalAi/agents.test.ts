@@ -79,6 +79,7 @@ describe("AgentsClient", () => {
                 agent: {
                     first_message: "Hello, how can I help you today?",
                     language: "en",
+                    hinglish_mode: true,
                     dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                     disable_first_message_interruptions: false,
                     prompt: {
@@ -135,6 +136,7 @@ describe("AgentsClient", () => {
                     mic_muting_enabled: true,
                     transcript_enabled: true,
                     text_input_enabled: true,
+                    conversation_mode_toggle_enabled: true,
                     default_expanded: true,
                     always_expanded: true,
                     language_selector: false,
@@ -686,6 +688,7 @@ describe("AgentsClient", () => {
                 agent: {
                     firstMessage: "Hello, how can I help you today?",
                     language: "en",
+                    hinglishMode: true,
                     dynamicVariables: {
                         dynamicVariablePlaceholders: {
                             user_name: "John Doe",
@@ -760,6 +763,7 @@ describe("AgentsClient", () => {
                     micMutingEnabled: true,
                     transcriptEnabled: true,
                     textInputEnabled: true,
+                    conversationModeToggleEnabled: true,
                     defaultExpanded: true,
                     alwaysExpanded: true,
                     languageSelector: false,
@@ -1497,6 +1501,7 @@ describe("AgentsClient", () => {
                 agent: {
                     first_message: "Hello, how can I help you today?",
                     language: "en",
+                    hinglish_mode: true,
                     dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                     disable_first_message_interruptions: false,
                     prompt: {
@@ -1553,6 +1558,7 @@ describe("AgentsClient", () => {
                     mic_muting_enabled: true,
                     transcript_enabled: true,
                     text_input_enabled: true,
+                    conversation_mode_toggle_enabled: true,
                     default_expanded: true,
                     always_expanded: true,
                     language_selector: false,
@@ -2105,6 +2111,7 @@ describe("AgentsClient", () => {
                 agent: {
                     firstMessage: "Hello, how can I help you today?",
                     language: "en",
+                    hinglishMode: true,
                     dynamicVariables: {
                         dynamicVariablePlaceholders: {
                             user_name: "John Doe",
@@ -2179,6 +2186,7 @@ describe("AgentsClient", () => {
                     micMutingEnabled: true,
                     transcriptEnabled: true,
                     textInputEnabled: true,
+                    conversationModeToggleEnabled: true,
                     defaultExpanded: true,
                     alwaysExpanded: true,
                     languageSelector: false,

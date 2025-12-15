@@ -7,5 +7,6 @@ export const RagIndexStatus = {
     Succeeded: "succeeded",
     RagLimitExceeded: "rag_limit_exceeded",
     DocumentTooSmall: "document_too_small",
+    CannotIndexFolder: "cannot_index_folder",
 } as const;
 export type RagIndexStatus = (typeof RagIndexStatus)[keyof typeof RagIndexStatus];

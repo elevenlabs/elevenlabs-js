@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { GetKnowledgeBaseSummaryFileResponseModel } from "./GetKnowledgeBaseSummaryFileResponseModel";
+import { GetKnowledgeBaseSummaryFolderResponseModel } from "./GetKnowledgeBaseSummaryFolderResponseModel";
 import { GetKnowledgeBaseSummaryTextResponseModel } from "./GetKnowledgeBaseSummaryTextResponseModel";
 import { GetKnowledgeBaseSummaryUrlResponseModel } from "./GetKnowledgeBaseSummaryUrlResponseModel";
 
@@ -13,6 +14,7 @@ export const GetKnowledgeBaseListResponseModelDocumentsItem: core.serialization.
 > = core.serialization
     .union("type", {
         file: GetKnowledgeBaseSummaryFileResponseModel,
+        folder: GetKnowledgeBaseSummaryFolderResponseModel,
         text: GetKnowledgeBaseSummaryTextResponseModel,
         url: GetKnowledgeBaseSummaryUrlResponseModel,
     })
@@ -24,11 +26,16 @@ export const GetKnowledgeBaseListResponseModelDocumentsItem: core.serialization.
 export declare namespace GetKnowledgeBaseListResponseModelDocumentsItem {
     export type Raw =
         | GetKnowledgeBaseListResponseModelDocumentsItem.File
+        | GetKnowledgeBaseListResponseModelDocumentsItem.Folder
         | GetKnowledgeBaseListResponseModelDocumentsItem.Text
         | GetKnowledgeBaseListResponseModelDocumentsItem.Url;
 
     export interface File extends GetKnowledgeBaseSummaryFileResponseModel.Raw {
         type: "file";
+    }
+
+    export interface Folder extends GetKnowledgeBaseSummaryFolderResponseModel.Raw {
+        type: "folder";
     }
 
     export interface Text extends GetKnowledgeBaseSummaryTextResponseModel.Raw {

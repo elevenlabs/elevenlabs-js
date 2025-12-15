@@ -16,6 +16,7 @@ describe("LinkClient", () => {
                 expiration_time_unix_secs: 1716153600,
                 conversation_id: "conv_J3Pbu5gP6NNKBscdCdwB",
                 purpose: "signed_url",
+                token_requester_user_id: "token_requester_user_id",
             },
         };
         server
@@ -35,6 +36,7 @@ describe("LinkClient", () => {
                 expirationTimeUnixSecs: 1716153600,
                 conversationId: "conv_J3Pbu5gP6NNKBscdCdwB",
                 purpose: "signed_url",
+                tokenRequesterUserId: "token_requester_user_id",
             },
         });
     });

@@ -12,8 +12,16 @@ export const RagIndexStatus: core.serialization.Schema<serializers.RagIndexStatu
         "succeeded",
         "rag_limit_exceeded",
         "document_too_small",
+        "cannot_index_folder",
     ]);
 
 export declare namespace RagIndexStatus {
-    export type Raw = "created" | "processing" | "failed" | "succeeded" | "rag_limit_exceeded" | "document_too_small";
+    export type Raw =
+        | "created"
+        | "processing"
+        | "failed"
+        | "succeeded"
+        | "rag_limit_exceeded"
+        | "document_too_small"
+        | "cannot_index_folder";
 }

@@ -17,6 +17,7 @@ export const GetKnowledgeBaseSummaryFileResponseModel: core.serialization.Object
     metadata: KnowledgeBaseDocumentMetadataResponseModel,
     supportedUsages: core.serialization.property("supported_usages", core.serialization.list(DocumentUsageModeEnum)),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
+    folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
     dependentAgents: core.serialization.property(
         "dependent_agents",
         core.serialization.list(GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem),
@@ -30,6 +31,7 @@ export declare namespace GetKnowledgeBaseSummaryFileResponseModel {
         metadata: KnowledgeBaseDocumentMetadataResponseModel.Raw;
         supported_usages: DocumentUsageModeEnum.Raw[];
         access_info: ResourceAccessInfo.Raw;
+        folder_parent_id?: string | null;
         dependent_agents: GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem.Raw[];
     }
 }

@@ -8,7 +8,10 @@ export const BatchCallWhatsAppParams: core.serialization.ObjectSchema<
     serializers.BatchCallWhatsAppParams.Raw,
     ElevenLabs.BatchCallWhatsAppParams
 > = core.serialization.object({
-    whatsappBusinessAccountId: core.serialization.property("whatsapp_business_account_id", core.serialization.string()),
+    whatsappPhoneNumberId: core.serialization.property(
+        "whatsapp_phone_number_id",
+        core.serialization.string().optional(),
+    ),
     whatsappCallPermissionRequestTemplateName: core.serialization.property(
         "whatsapp_call_permission_request_template_name",
         core.serialization.string(),
@@ -21,7 +24,7 @@ export const BatchCallWhatsAppParams: core.serialization.ObjectSchema<
 
 export declare namespace BatchCallWhatsAppParams {
     export interface Raw {
-        whatsapp_business_account_id: string;
+        whatsapp_phone_number_id?: string | null;
         whatsapp_call_permission_request_template_name: string;
         whatsapp_call_permission_request_template_language_code: string;
     }

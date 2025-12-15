@@ -12,6 +12,7 @@ export const AgentConfigApiModelWorkflowOverrideInput: core.serialization.Object
 > = core.serialization.object({
     firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
     language: core.serialization.string().optional(),
+    hinglishMode: core.serialization.property("hinglish_mode", core.serialization.boolean().optional()),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
         DynamicVariablesConfigWorkflowOverride.optional(),
@@ -27,6 +28,7 @@ export declare namespace AgentConfigApiModelWorkflowOverrideInput {
     export interface Raw {
         first_message?: string | null;
         language?: string | null;
+        hinglish_mode?: boolean | null;
         dynamic_variables?: DynamicVariablesConfigWorkflowOverride.Raw | null;
         disable_first_message_interruptions?: boolean | null;
         prompt?: PromptAgentApiModelWorkflowOverrideInput.Raw | null;

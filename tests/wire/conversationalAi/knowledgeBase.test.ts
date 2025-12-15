@@ -22,6 +22,7 @@ describe("KnowledgeBaseClient", () => {
                         creator_email: "john.doe@example.com",
                         role: "admin",
                     },
+                    folder_parent_id: "folder_parent_id",
                     dependent_agents: [
                         { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
                     ],
@@ -42,6 +43,9 @@ describe("KnowledgeBaseClient", () => {
             pageSize: 1,
             search: "search",
             showOnlyOwnedDocuments: true,
+            parentFolderId: "parent_folder_id",
+            ancestorFolderId: "ancestor_folder_id",
+            foldersFirst: true,
             sortDirection: "asc",
             sortBy: "name",
             useTypesense: true,
@@ -65,6 +69,7 @@ describe("KnowledgeBaseClient", () => {
                         creatorEmail: "john.doe@example.com",
                         role: "admin",
                     },
+                    folderParentId: "folder_parent_id",
                     dependentAgents: [
                         {
                             type: "available",
@@ -78,6 +83,58 @@ describe("KnowledgeBaseClient", () => {
             ],
             nextCursor: "next_cursor",
             hasMore: true,
+        });
+    });
+
+    test("get_or_create_rag_indexes", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            items: [{ document_id: "document_id", create_if_missing: true, model: "e5_mistral_7b_instruct" }],
+        };
+        const rawResponseBody = {
+            key: {
+                status: "success",
+                data: {
+                    id: "id",
+                    model: "e5_mistral_7b_instruct",
+                    status: "created",
+                    progress_percentage: 1.1,
+                    document_model_index_usage: { used_bytes: 1 },
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/knowledge-base/rag-index")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.knowledgeBase.getOrCreateRagIndexes({
+            items: [
+                {
+                    documentId: "document_id",
+                    createIfMissing: true,
+                    model: "e5_mistral_7b_instruct",
+                },
+            ],
+        });
+        expect(response).toEqual({
+            key: {
+                status: "success",
+                data: {
+                    id: "id",
+                    model: "e5_mistral_7b_instruct",
+                    status: "created",
+                    progressPercentage: 1.1,
+                    documentModelIndexUsage: {
+                        usedBytes: 1,
+                    },
+                },
+            },
         });
     });
 });

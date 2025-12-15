@@ -34,6 +34,7 @@ export const WorkspaceResourceType: core.serialization.Schema<
     "convai_agent_versions_deployments",
     "dashboard",
     "dashboard_configuration",
+    "convai_agent_drafts",
 ]);
 
 export declare namespace WorkspaceResourceType {
@@ -63,5 +64,6 @@ export declare namespace WorkspaceResourceType {
         | "convai_agent_branches"
         | "convai_agent_versions_deployments"
         | "dashboard"
-        | "dashboard_configuration";
+        | "dashboard_configuration"
+        | "convai_agent_drafts";
 }

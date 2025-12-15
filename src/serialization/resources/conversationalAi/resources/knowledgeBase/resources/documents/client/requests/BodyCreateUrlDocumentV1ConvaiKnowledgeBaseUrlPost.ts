@@ -10,11 +10,13 @@ export const BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost: core.serializati
 > = core.serialization.object({
     url: core.serialization.string(),
     name: core.serialization.string().optional(),
+    parentFolderId: core.serialization.property("parent_folder_id", core.serialization.string().optional()),
 });
 
 export declare namespace BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost {
     export interface Raw {
         url: string;
         name?: string | null;
+        parent_folder_id?: string | null;
     }
 }
