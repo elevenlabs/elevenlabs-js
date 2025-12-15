@@ -4,5 +4,6 @@ export const KnowledgeBaseDocumentType = {
     File: "file",
     Url: "url",
     Text: "text",
+    Folder: "folder",
 } as const;
 export type KnowledgeBaseDocumentType = (typeof KnowledgeBaseDocumentType)[keyof typeof KnowledgeBaseDocumentType];

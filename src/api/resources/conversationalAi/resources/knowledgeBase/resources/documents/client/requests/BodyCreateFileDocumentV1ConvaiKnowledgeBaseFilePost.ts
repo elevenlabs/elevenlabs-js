@@ -13,4 +13,6 @@ export interface BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost {
     file: core.file.Uploadable;
     /** A custom, human-readable name for the document. */
     name?: string;
+    /** If set, the created document or folder will be placed inside the given folder. */
+    parentFolderId?: string;
 }

@@ -10,14 +10,17 @@ export const WhatsAppConversationInfo: core.serialization.ObjectSchema<
     ElevenLabs.WhatsAppConversationInfo
 > = core.serialization.object({
     direction: WhatsAppConversationInfoDirection.optional(),
-    whatsappBusinessAccountId: core.serialization.property("whatsapp_business_account_id", core.serialization.string()),
+    whatsappPhoneNumberId: core.serialization.property(
+        "whatsapp_phone_number_id",
+        core.serialization.string().optional(),
+    ),
     whatsappUserId: core.serialization.property("whatsapp_user_id", core.serialization.string()),
 });
 
 export declare namespace WhatsAppConversationInfo {
     export interface Raw {
         direction?: WhatsAppConversationInfoDirection.Raw | null;
-        whatsapp_business_account_id: string;
+        whatsapp_phone_number_id?: string | null;
         whatsapp_user_id: string;
     }
 }

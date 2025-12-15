@@ -48,6 +48,9 @@ export class KnowledgeBaseClient {
      *         pageSize: 1,
      *         search: "search",
      *         showOnlyOwnedDocuments: true,
+     *         parentFolderId: "parent_folder_id",
+     *         ancestorFolderId: "ancestor_folder_id",
+     *         foldersFirst: true,
      *         sortDirection: "asc",
      *         sortBy: "name",
      *         useTypesense: true,
@@ -65,8 +68,19 @@ export class KnowledgeBaseClient {
         request: ElevenLabs.conversationalAi.KnowledgeBaseListRequest = {},
         requestOptions?: KnowledgeBaseClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetKnowledgeBaseListResponseModel>> {
-        const { pageSize, search, showOnlyOwnedDocuments, types, sortDirection, sortBy, useTypesense, cursor } =
-            request;
+        const {
+            pageSize,
+            search,
+            showOnlyOwnedDocuments,
+            types,
+            parentFolderId,
+            ancestorFolderId,
+            foldersFirst,
+            sortDirection,
+            sortBy,
+            useTypesense,
+            cursor,
+        } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (pageSize != null) {
             _queryParams.page_size = pageSize.toString();
@@ -90,6 +104,18 @@ export class KnowledgeBaseClient {
                     unrecognizedObjectKeys: "strip",
                 });
             }
+        }
+
+        if (parentFolderId != null) {
+            _queryParams.parent_folder_id = parentFolderId;
+        }
+
+        if (ancestorFolderId != null) {
+            _queryParams.ancestor_folder_id = ancestorFolderId;
+        }
+
+        if (foldersFirst != null) {
+            _queryParams.folders_first = foldersFirst.toString();
         }
 
         if (sortDirection != null) {
@@ -167,5 +193,110 @@ export class KnowledgeBaseClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/convai/knowledge-base");
+    }
+
+    /**
+     * Retrieves and/or creates RAG indexes for multiple knowledge base documents in a single request.
+     *
+     * @param {ElevenLabs.conversationalAi.BodyComputeRagIndexesInBatchV1ConvaiKnowledgeBaseRagIndexPost} request
+     * @param {KnowledgeBaseClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.knowledgeBase.getOrCreateRagIndexes({
+     *         items: [{
+     *                 documentId: "document_id",
+     *                 createIfMissing: true,
+     *                 model: "e5_mistral_7b_instruct"
+     *             }]
+     *     })
+     */
+    public getOrCreateRagIndexes(
+        request: ElevenLabs.conversationalAi.BodyComputeRagIndexesInBatchV1ConvaiKnowledgeBaseRagIndexPost,
+        requestOptions?: KnowledgeBaseClient.RequestOptions,
+    ): core.HttpResponsePromise<
+        Record<string, ElevenLabs.conversationalAi.KnowledgeBaseGetOrCreateRagIndexesResponseValue>
+    > {
+        return core.HttpResponsePromise.fromPromise(this.__getOrCreateRagIndexes(request, requestOptions));
+    }
+
+    private async __getOrCreateRagIndexes(
+        request: ElevenLabs.conversationalAi.BodyComputeRagIndexesInBatchV1ConvaiKnowledgeBaseRagIndexPost,
+        requestOptions?: KnowledgeBaseClient.RequestOptions,
+    ): Promise<
+        core.WithRawResponse<
+            Record<string, ElevenLabs.conversationalAi.KnowledgeBaseGetOrCreateRagIndexesResponseValue>
+        >
+    > {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/knowledge-base/rag-index",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.conversationalAi.BodyComputeRagIndexesInBatchV1ConvaiKnowledgeBaseRagIndexPost.jsonOrThrow(
+                request,
+                { unrecognizedObjectKeys: "strip" },
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.conversationalAi.knowledgeBase.getOrCreateRagIndexes.Response.parseOrThrow(
+                    _response.body,
+                    {
+                        unrecognizedObjectKeys: "passthrough",
+                        allowUnrecognizedUnionMembers: true,
+                        allowUnrecognizedEnumValues: true,
+                        breadcrumbsPrefix: ["response"],
+                    },
+                ),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/knowledge-base/rag-index",
+        );
     }
 }

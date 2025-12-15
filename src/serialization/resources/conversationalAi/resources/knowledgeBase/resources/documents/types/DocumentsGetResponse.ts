@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../../../../../../../api/index";
 import * as core from "../../../../../../../../core";
 import type * as serializers from "../../../../../../../index";
 import { GetKnowledgeBaseFileResponseModel } from "../../../../../../../types/GetKnowledgeBaseFileResponseModel";
+import { GetKnowledgeBaseFolderResponseModel } from "../../../../../../../types/GetKnowledgeBaseFolderResponseModel";
 import { GetKnowledgeBaseTextResponseModel } from "../../../../../../../types/GetKnowledgeBaseTextResponseModel";
 import { GetKnowledgeBaseUrlResponseModel } from "../../../../../../../types/GetKnowledgeBaseUrlResponseModel";
 
@@ -15,6 +16,7 @@ export const DocumentsGetResponse: core.serialization.Schema<
         url: GetKnowledgeBaseUrlResponseModel,
         file: GetKnowledgeBaseFileResponseModel,
         text: GetKnowledgeBaseTextResponseModel,
+        folder: GetKnowledgeBaseFolderResponseModel,
     })
     .transform<ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetResponse>({
         transform: (value) => value,
@@ -22,7 +24,11 @@ export const DocumentsGetResponse: core.serialization.Schema<
     });
 
 export declare namespace DocumentsGetResponse {
-    export type Raw = DocumentsGetResponse.Url | DocumentsGetResponse.File | DocumentsGetResponse.Text;
+    export type Raw =
+        | DocumentsGetResponse.Url
+        | DocumentsGetResponse.File
+        | DocumentsGetResponse.Text
+        | DocumentsGetResponse.Folder;
 
     export interface Url extends GetKnowledgeBaseUrlResponseModel.Raw {
         type: "url";
@@ -34,5 +40,9 @@ export declare namespace DocumentsGetResponse {
 
     export interface Text extends GetKnowledgeBaseTextResponseModel.Raw {
         type: "text";
+    }
+
+    export interface Folder extends GetKnowledgeBaseFolderResponseModel.Raw {
+        type: "folder";
     }
 }

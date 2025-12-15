@@ -65,6 +65,8 @@ export interface WidgetConfig {
     transcriptEnabled?: boolean;
     /** Whether the user should be able to send text messages */
     textInputEnabled?: boolean;
+    /** Whether to enable the conversation mode toggle in the widget */
+    conversationModeToggleEnabled?: boolean;
     /** Whether the widget should be expanded by default */
     defaultExpanded?: boolean;
     /** Whether the widget should always be expanded */

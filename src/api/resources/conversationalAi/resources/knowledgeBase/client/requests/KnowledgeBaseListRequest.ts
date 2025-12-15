@@ -8,6 +8,9 @@ import type * as ElevenLabs from "../../../../../../index";
  *         pageSize: 1,
  *         search: "search",
  *         showOnlyOwnedDocuments: true,
+ *         parentFolderId: "parent_folder_id",
+ *         ancestorFolderId: "ancestor_folder_id",
+ *         foldersFirst: true,
  *         sortDirection: "asc",
  *         sortBy: "name",
  *         useTypesense: true,
@@ -23,6 +26,12 @@ export interface KnowledgeBaseListRequest {
     showOnlyOwnedDocuments?: boolean;
     /** If present, the endpoint will return only documents of the given types. */
     types?: ElevenLabs.KnowledgeBaseDocumentType | ElevenLabs.KnowledgeBaseDocumentType[];
+    /** If set, the endpoint will return only documents that are direct children of the given folder. */
+    parentFolderId?: string;
+    /** If set, the endpoint will return only documents that are descendants of the given folder. */
+    ancestorFolderId?: string;
+    /** Whether folders should be returned first in the list of documents. */
+    foldersFirst?: boolean;
     /** The direction to sort the results */
     sortDirection?: ElevenLabs.SortDirection;
     /** The field to sort the results by */

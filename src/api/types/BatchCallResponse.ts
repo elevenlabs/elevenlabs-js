@@ -14,5 +14,6 @@ export interface BatchCallResponse {
     totalCallsScheduled: number;
     lastUpdatedAtUnix: number;
     status: ElevenLabs.BatchCallStatus;
+    retryCount?: number;
     agentName: string;
 }

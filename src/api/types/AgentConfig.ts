@@ -7,6 +7,8 @@ export interface AgentConfig {
     firstMessage?: string;
     /** Language of the agent - used for ASR and TTS */
     language?: string;
+    /** When enabled and language is Hindi, the agent will respond in Hinglish */
+    hinglishMode?: boolean;
     /** Configuration for dynamic variables */
     dynamicVariables?: ElevenLabs.DynamicVariablesConfig;
     /** If true, the user will not be able to interrupt the agent while the first message is being delivered. */

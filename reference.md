@@ -3774,6 +3774,61 @@ await client.conversationalAi.addToKnowledgeBase({
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">ragIndexOverview</a>() -> ElevenLabs.RagIndexOverviewResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Provides total size and other information of RAG indexes used by knowledgebase documents
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.ragIndexOverview();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationalAiClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getDocumentRagIndexes</a>(documentation_id) -> ElevenLabs.RagDocumentIndexesResponseModel</code></summary>
 <dl>
 <dd>
@@ -3892,61 +3947,6 @@ await client.conversationalAi.deleteDocumentRagIndex("21m00Tcm4TlvDq8ikWAM", "21
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ConversationalAiClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">ragIndexOverview</a>() -> ElevenLabs.RagIndexOverviewResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Provides total size and other information of RAG indexes used by knowledgebase documents
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.ragIndexOverview();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
 
 <dl>
 <dd>
@@ -6107,6 +6107,9 @@ await client.conversationalAi.knowledgeBase.list({
     pageSize: 1,
     search: "search",
     showOnlyOwnedDocuments: true,
+    parentFolderId: "parent_folder_id",
+    ancestorFolderId: "ancestor_folder_id",
+    foldersFirst: true,
     sortDirection: "asc",
     sortBy: "name",
     useTypesense: true,
@@ -6128,6 +6131,75 @@ await client.conversationalAi.knowledgeBase.list({
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.KnowledgeBaseListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeBaseClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.knowledgeBase.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/client/Client.ts">getOrCreateRagIndexes</a>({ ...params }) -> Record<string, ElevenLabs.KnowledgeBaseGetOrCreateRagIndexesResponseValue></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves and/or creates RAG indexes for multiple knowledge base documents in a single request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.getOrCreateRagIndexes({
+    items: [{
+            documentId: "document_id",
+            createIfMissing: true,
+            model: "e5_mistral_7b_instruct"
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BodyComputeRagIndexesInBatchV1ConvaiKnowledgeBaseRagIndexPost` 
     
 </dd>
 </dl>
@@ -8927,6 +8999,70 @@ await client.conversationalAi.knowledgeBase.document.computeRagIndex("21m00Tcm4T
 <dd>
 
 **requestOptions:** `DocumentClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi KnowledgeBase Documents Summaries
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.summaries.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record<string, ElevenLabs.SummariesGetResponseValue></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets multiple knowledge base document summaries by their IDs.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.documents.summaries.get();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.documents.SummariesGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SummariesClient.RequestOptions` 
     
 </dd>
 </dl>

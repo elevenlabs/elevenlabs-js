@@ -8,6 +8,8 @@ export interface GetKnowledgeBaseSummaryUrlResponseModel {
     metadata: ElevenLabs.KnowledgeBaseDocumentMetadataResponseModel;
     supportedUsages: ElevenLabs.DocumentUsageModeEnum[];
     accessInfo: ElevenLabs.ResourceAccessInfo;
+    /** The ID of the parent folder, or null if the document is at the root level. */
+    folderParentId?: string;
     dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryUrlResponseModelDependentAgentsItem[];
     url: string;
 }

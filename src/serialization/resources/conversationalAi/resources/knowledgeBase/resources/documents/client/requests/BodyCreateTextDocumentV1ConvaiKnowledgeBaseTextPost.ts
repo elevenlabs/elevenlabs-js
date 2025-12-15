@@ -10,11 +10,13 @@ export const BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost: core.serializa
 > = core.serialization.object({
     text: core.serialization.string(),
     name: core.serialization.string().optional(),
+    parentFolderId: core.serialization.property("parent_folder_id", core.serialization.string().optional()),
 });
 
 export declare namespace BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost {
     export interface Raw {
         text: string;
         name?: string | null;
+        parent_folder_id?: string | null;
     }
 }
