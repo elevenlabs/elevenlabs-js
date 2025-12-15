@@ -133,6 +133,9 @@ export class ScribeRealtime {
         if (options.commitStrategy !== undefined) {
             params.append("commit_strategy", options.commitStrategy);
         }
+        if (options.audioFormat !== undefined) {
+            params.append("audio_format", options.audioFormat);
+        }
         if (options.vadSilenceThresholdSecs !== undefined) {
             if (options.vadSilenceThresholdSecs <= 0.3 || options.vadSilenceThresholdSecs > 3.0) {
                 throw new Error("vadSilenceThresholdSecs must be between 0.3 and 3.0");
