@@ -21,4 +21,10 @@ export interface GetAgentResponseModel {
     accessInfo?: ElevenLabs.ResourceAccessInfo;
     /** Agent tags used to categorize the agent */
     tags?: string[];
+    /** The ID of the version the agent is on */
+    versionId?: string;
+    /** The ID of the branch the agent is on */
+    branchId?: string;
+    /** The ID of the main branch for this agent */
+    mainBranchId?: string;
 }

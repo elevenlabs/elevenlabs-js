@@ -36,6 +36,10 @@ export const Voice: core.serialization.ObjectSchema<serializers.Voice.Raw, Eleve
             "verified_languages",
             core.serialization.list(VerifiedVoiceLanguageResponseModel).optional(),
         ),
+        collectionIds: core.serialization.property(
+            "collection_ids",
+            core.serialization.list(core.serialization.string()).optional(),
+        ),
         safetyControl: core.serialization.property("safety_control", VoiceResponseModelSafetyControl.optional()),
         voiceVerification: core.serialization.property("voice_verification", VoiceVerificationResponse.optional()),
         permissionOnResource: core.serialization.property(
@@ -64,6 +68,7 @@ export declare namespace Voice {
         sharing?: VoiceSharingResponse.Raw | null;
         high_quality_base_model_ids?: string[] | null;
         verified_languages?: VerifiedVoiceLanguageResponseModel.Raw[] | null;
+        collection_ids?: string[] | null;
         safety_control?: VoiceResponseModelSafetyControl.Raw | null;
         voice_verification?: VoiceVerificationResponse.Raw | null;
         permission_on_resource?: string | null;

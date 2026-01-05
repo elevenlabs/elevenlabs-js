@@ -39,6 +39,9 @@ describe("WidgetClient", () => {
                 show_avatar_when_collapsed: true,
                 disable_banner: true,
                 override_link: "override_link",
+                markdown_link_allowed_hosts: [{ hostname: "hostname" }],
+                markdown_link_include_www: true,
+                markdown_link_allow_http: true,
                 mic_muting_enabled: true,
                 transcript_enabled: true,
                 text_input_enabled: true,
@@ -158,6 +161,13 @@ describe("WidgetClient", () => {
                 showAvatarWhenCollapsed: true,
                 disableBanner: true,
                 overrideLink: "override_link",
+                markdownLinkAllowedHosts: [
+                    {
+                        hostname: "hostname",
+                    },
+                ],
+                markdownLinkIncludeWww: true,
+                markdownLinkAllowHttp: true,
                 micMutingEnabled: true,
                 transcriptEnabled: true,
                 textInputEnabled: true,

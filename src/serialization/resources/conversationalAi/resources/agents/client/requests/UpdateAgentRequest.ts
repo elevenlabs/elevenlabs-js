@@ -16,6 +16,7 @@ export const UpdateAgentRequest: core.serialization.Schema<
     workflow: AgentWorkflowRequestModel.optional(),
     name: core.serialization.string().optional(),
     tags: core.serialization.list(core.serialization.string()).optional(),
+    versionDescription: core.serialization.property("version_description", core.serialization.string().optional()),
 });
 
 export declare namespace UpdateAgentRequest {
@@ -25,5 +26,6 @@ export declare namespace UpdateAgentRequest {
         workflow?: AgentWorkflowRequestModel.Raw | null;
         name?: string | null;
         tags?: string[] | null;
+        version_description?: string | null;
     }
 }

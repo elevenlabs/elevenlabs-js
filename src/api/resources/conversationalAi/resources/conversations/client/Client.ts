@@ -270,6 +270,7 @@ export class ConversationsClient {
             evaluationParams,
             dataCollectionParams,
             toolNames,
+            mainLanguages,
             pageSize,
             summaryMode,
             search,
@@ -342,6 +343,14 @@ export class ConversationsClient {
                 _queryParams.tool_names = toolNames.map((item) => item);
             } else {
                 _queryParams.tool_names = toolNames;
+            }
+        }
+
+        if (mainLanguages != null) {
+            if (Array.isArray(mainLanguages)) {
+                _queryParams.main_languages = mainLanguages.map((item) => item);
+            } else {
+                _queryParams.main_languages = mainLanguages;
             }
         }
 

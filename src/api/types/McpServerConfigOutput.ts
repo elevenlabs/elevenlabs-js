@@ -28,4 +28,6 @@ export interface McpServerConfigOutput {
     executionMode?: ElevenLabs.ToolExecutionMode;
     /** List of per-tool configuration overrides that override the server-level defaults for specific tools */
     toolConfigOverrides?: ElevenLabs.McpToolConfigOverride[];
+    /** Whether to disable HTTP compression for this MCP server. Enable this if the server does not support compressed responses. */
+    disableCompression?: boolean;
 }

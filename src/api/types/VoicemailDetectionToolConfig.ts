@@ -8,6 +8,6 @@
  * is configured, it will be played; otherwise the call will end immediately.
  */
 export interface VoicemailDetectionToolConfig {
-    /** Optional message to leave on voicemail when detected. If not provided, the call will end immediately when voicemail is detected. */
+    /** Optional message to leave on voicemail when detected. If not provided, the call will end immediately when voicemail is detected. Supports dynamic variables (e.g., {{system__time}}, {{system__call_duration_secs}}, {{custom_variable}}). */
     voicemailMessage?: string;
 }

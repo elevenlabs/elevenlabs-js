@@ -611,8 +611,9 @@ export class DocumentsClient {
      *
      * @example
      *     await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8ikWAM", {
-     *         cursor: "cursor",
-     *         pageSize: 1
+     *         dependentType: "direct",
+     *         pageSize: 1,
+     *         cursor: "cursor"
      *     })
      */
     public getAgents(
@@ -628,14 +629,20 @@ export class DocumentsClient {
         request: ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetAgentsRequest = {},
         requestOptions?: DocumentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModel>> {
-        const { cursor, pageSize } = request;
+        const { dependentType, pageSize, cursor } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
+        if (dependentType != null) {
+            _queryParams.dependent_type = serializers.KnowledgeBaseDependentType.jsonOrThrow(dependentType, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         if (pageSize != null) {
             _queryParams.page_size = pageSize.toString();
+        }
+
+        if (cursor != null) {
+            _queryParams.cursor = cursor;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

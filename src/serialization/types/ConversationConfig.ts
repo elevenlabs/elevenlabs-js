@@ -12,6 +12,8 @@ export const ConversationConfig: core.serialization.ObjectSchema<
     textOnly: core.serialization.property("text_only", core.serialization.boolean().optional()),
     maxDurationSeconds: core.serialization.property("max_duration_seconds", core.serialization.number().optional()),
     clientEvents: core.serialization.property("client_events", core.serialization.list(ClientEvent).optional()),
+    monitoringEnabled: core.serialization.property("monitoring_enabled", core.serialization.boolean().optional()),
+    monitoringEvents: core.serialization.property("monitoring_events", core.serialization.list(ClientEvent).optional()),
 });
 
 export declare namespace ConversationConfig {
@@ -19,5 +21,7 @@ export declare namespace ConversationConfig {
         text_only?: boolean | null;
         max_duration_seconds?: number | null;
         client_events?: ClientEvent.Raw[] | null;
+        monitoring_enabled?: boolean | null;
+        monitoring_events?: ClientEvent.Raw[] | null;
     }
 }

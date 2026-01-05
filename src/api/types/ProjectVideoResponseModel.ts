@@ -5,7 +5,7 @@ import type * as ElevenLabs from "../index";
 export interface ProjectVideoResponseModel {
     videoId: string;
     filename: string;
-    signedUrl: string;
+    signedUrl?: string;
     signedPreviewUrl?: string;
     offsetMs: number;
     durationMs: number;
@@ -32,4 +32,5 @@ export interface ProjectVideoResponseModel {
     speechImported?: boolean;
     currentSnapshotId?: string;
     canvasPlacement?: ElevenLabs.CanvasPlacement;
+    trackId?: string;
 }

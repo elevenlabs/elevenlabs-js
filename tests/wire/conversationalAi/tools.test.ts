@@ -425,7 +425,16 @@ describe("ToolsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            agents: [{ type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" }],
+            agents: [
+                {
+                    type: "available",
+                    referenced_resource_ids: ["referenced_resource_ids"],
+                    id: "id",
+                    name: "name",
+                    created_at_unix_secs: 1,
+                    access_level: "admin",
+                },
+            ],
             next_cursor: "next_cursor",
             has_more: true,
         };
@@ -445,6 +454,7 @@ describe("ToolsClient", () => {
             agents: [
                 {
                     type: "available",
+                    referencedResourceIds: ["referenced_resource_ids"],
                     id: "id",
                     name: "name",
                     createdAtUnixSecs: 1,

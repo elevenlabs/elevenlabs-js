@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const TransferTypeEnum: core.serialization.Schema<
     serializers.TransferTypeEnum.Raw,
     ElevenLabs.TransferTypeEnum
-> = core.serialization.enum_(["conference", "sip_refer"]);
+> = core.serialization.enum_(["blind", "conference", "sip_refer"]);
 
 export declare namespace TransferTypeEnum {
-    export type Raw = "conference" | "sip_refer";
+    export type Raw = "blind" | "conference" | "sip_refer";
 }

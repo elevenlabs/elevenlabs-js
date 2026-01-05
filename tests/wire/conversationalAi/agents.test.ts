@@ -59,7 +59,13 @@ describe("AgentsClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                 },
-                conversation: { text_only: true, max_duration_seconds: 600, client_events: ["audio", "interruption"] },
+                conversation: {
+                    text_only: true,
+                    max_duration_seconds: 600,
+                    client_events: ["audio", "interruption"],
+                    monitoring_enabled: true,
+                    monitoring_events: ["conversation_initiation_metadata"],
+                },
                 language_presets: {
                     key: {
                         overrides: {
@@ -133,6 +139,9 @@ describe("AgentsClient", () => {
                     show_avatar_when_collapsed: true,
                     disable_banner: true,
                     override_link: "override_link",
+                    markdown_link_allowed_hosts: [{ hostname: "hostname" }],
+                    markdown_link_include_www: true,
+                    markdown_link_allow_http: true,
                     mic_muting_enabled: true,
                     transcript_enabled: true,
                     text_input_enabled: true,
@@ -571,7 +580,7 @@ describe("AgentsClient", () => {
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
-                        transfer_type: "conference",
+                        transfer_type: "blind",
                     },
                     success_transfer: {
                         type: "standalone_agent",
@@ -604,6 +613,9 @@ describe("AgentsClient", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            version_id: "version_id",
+            branch_id: "branch_id",
+            main_branch_id: "main_branch_id",
         };
         server
             .mockEndpoint()
@@ -659,6 +671,8 @@ describe("AgentsClient", () => {
                     textOnly: true,
                     maxDurationSeconds: 600,
                     clientEvents: ["audio", "interruption"],
+                    monitoringEnabled: true,
+                    monitoringEvents: ["conversation_initiation_metadata"],
                 },
                 languagePresets: {
                     key: {
@@ -760,6 +774,13 @@ describe("AgentsClient", () => {
                     showAvatarWhenCollapsed: true,
                     disableBanner: true,
                     overrideLink: "override_link",
+                    markdownLinkAllowedHosts: [
+                        {
+                            hostname: "hostname",
+                        },
+                    ],
+                    markdownLinkIncludeWww: true,
+                    markdownLinkAllowHttp: true,
                     micMutingEnabled: true,
                     transcriptEnabled: true,
                     textInputEnabled: true,
@@ -1381,7 +1402,7 @@ describe("AgentsClient", () => {
                             type: "phone",
                             phoneNumber: "phone_number",
                         },
-                        transferType: "conference",
+                        transferType: "blind",
                     },
                     success_transfer: {
                         type: "standalone_agent",
@@ -1430,6 +1451,9 @@ describe("AgentsClient", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            versionId: "version_id",
+            branchId: "branch_id",
+            mainBranchId: "main_branch_id",
         });
     });
 
@@ -1481,7 +1505,13 @@ describe("AgentsClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                 },
-                conversation: { text_only: true, max_duration_seconds: 600, client_events: ["audio", "interruption"] },
+                conversation: {
+                    text_only: true,
+                    max_duration_seconds: 600,
+                    client_events: ["audio", "interruption"],
+                    monitoring_enabled: true,
+                    monitoring_events: ["conversation_initiation_metadata"],
+                },
                 language_presets: {
                     key: {
                         overrides: {
@@ -1555,6 +1585,9 @@ describe("AgentsClient", () => {
                     show_avatar_when_collapsed: true,
                     disable_banner: true,
                     override_link: "override_link",
+                    markdown_link_allowed_hosts: [{ hostname: "hostname" }],
+                    markdown_link_include_www: true,
+                    markdown_link_allow_http: true,
                     mic_muting_enabled: true,
                     transcript_enabled: true,
                     text_input_enabled: true,
@@ -1993,7 +2026,7 @@ describe("AgentsClient", () => {
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
-                        transfer_type: "conference",
+                        transfer_type: "blind",
                     },
                     success_transfer: {
                         type: "standalone_agent",
@@ -2026,6 +2059,9 @@ describe("AgentsClient", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            version_id: "version_id",
+            branch_id: "branch_id",
+            main_branch_id: "main_branch_id",
         };
         server
             .mockEndpoint()
@@ -2082,6 +2118,8 @@ describe("AgentsClient", () => {
                     textOnly: true,
                     maxDurationSeconds: 600,
                     clientEvents: ["audio", "interruption"],
+                    monitoringEnabled: true,
+                    monitoringEvents: ["conversation_initiation_metadata"],
                 },
                 languagePresets: {
                     key: {
@@ -2183,6 +2221,13 @@ describe("AgentsClient", () => {
                     showAvatarWhenCollapsed: true,
                     disableBanner: true,
                     overrideLink: "override_link",
+                    markdownLinkAllowedHosts: [
+                        {
+                            hostname: "hostname",
+                        },
+                    ],
+                    markdownLinkIncludeWww: true,
+                    markdownLinkAllowHttp: true,
                     micMutingEnabled: true,
                     transcriptEnabled: true,
                     textInputEnabled: true,
@@ -2804,7 +2849,7 @@ describe("AgentsClient", () => {
                             type: "phone",
                             phoneNumber: "phone_number",
                         },
-                        transferType: "conference",
+                        transferType: "blind",
                     },
                     success_transfer: {
                         type: "standalone_agent",
@@ -2853,6 +2898,9 @@ describe("AgentsClient", () => {
                 role: "admin",
             },
             tags: ["tags"],
+            versionId: "version_id",
+            branchId: "branch_id",
+            mainBranchId: "main_branch_id",
         });
     });
 
@@ -2886,6 +2934,7 @@ describe("AgentsClient", () => {
             pageSize: 1,
             search: "search",
             archived: true,
+            showOnlyOwnedAgents: true,
             sortDirection: "asc",
             sortBy: "name",
             cursor: "cursor",

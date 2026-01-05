@@ -9,6 +9,10 @@ export const DependentAvailableAgentIdentifier: core.serialization.ObjectSchema<
     serializers.DependentAvailableAgentIdentifier.Raw,
     ElevenLabs.DependentAvailableAgentIdentifier
 > = core.serialization.object({
+    referencedResourceIds: core.serialization.property(
+        "referenced_resource_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     id: core.serialization.string(),
     name: core.serialization.string(),
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
@@ -17,6 +21,7 @@ export const DependentAvailableAgentIdentifier: core.serialization.ObjectSchema<
 
 export declare namespace DependentAvailableAgentIdentifier {
     export interface Raw {
+        referenced_resource_ids?: string[] | null;
         id: string;
         name: string;
         created_at_unix_secs: number;

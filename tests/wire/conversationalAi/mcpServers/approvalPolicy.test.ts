@@ -30,6 +30,7 @@ describe("ApprovalPolicyClient", () => {
                         assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
                     },
                 ],
+                disable_compression: true,
             },
             access_info: {
                 is_creator: true,
@@ -38,7 +39,14 @@ describe("ApprovalPolicyClient", () => {
                 role: "admin",
             },
             dependent_agents: [
-                { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
+                {
+                    type: "available",
+                    referenced_resource_ids: ["referenced_resource_ids"],
+                    id: "id",
+                    name: "name",
+                    created_at_unix_secs: 1,
+                    access_level: "admin",
+                },
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
@@ -91,6 +99,7 @@ describe("ApprovalPolicyClient", () => {
                         ],
                     },
                 ],
+                disableCompression: true,
             },
             accessInfo: {
                 isCreator: true,
@@ -101,6 +110,7 @@ describe("ApprovalPolicyClient", () => {
             dependentAgents: [
                 {
                     type: "available",
+                    referencedResourceIds: ["referenced_resource_ids"],
                     id: "id",
                     name: "name",
                     createdAtUnixSecs: 1,

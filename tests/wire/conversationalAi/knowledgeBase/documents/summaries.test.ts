@@ -26,8 +26,22 @@ describe("SummariesClient", () => {
                     },
                     folder_parent_id: "folder_parent_id",
                     dependent_agents: [
-                        { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
-                        { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
+                        {
+                            type: "available",
+                            referenced_resource_ids: ["referenced_resource_ids", "referenced_resource_ids"],
+                            id: "id",
+                            name: "name",
+                            created_at_unix_secs: 1,
+                            access_level: "admin",
+                        },
+                        {
+                            type: "available",
+                            referenced_resource_ids: ["referenced_resource_ids", "referenced_resource_ids"],
+                            id: "id",
+                            name: "name",
+                            created_at_unix_secs: 1,
+                            access_level: "admin",
+                        },
                     ],
                 },
             },
@@ -64,6 +78,7 @@ describe("SummariesClient", () => {
                     dependentAgents: [
                         {
                             type: "available",
+                            referencedResourceIds: ["referenced_resource_ids", "referenced_resource_ids"],
                             id: "id",
                             name: "name",
                             createdAtUnixSecs: 1,
@@ -71,6 +86,7 @@ describe("SummariesClient", () => {
                         },
                         {
                             type: "available",
+                            referencedResourceIds: ["referenced_resource_ids", "referenced_resource_ids"],
                             id: "id",
                             name: "name",
                             createdAtUnixSecs: 1,

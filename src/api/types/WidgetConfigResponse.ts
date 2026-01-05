@@ -59,6 +59,12 @@ export interface WidgetConfigResponse {
     disableBanner?: boolean;
     /** The override link for the widget */
     overrideLink?: string;
+    /** List of allowed hostnames for clickable markdown links. Use { hostname: '*' } to allow any domain. Empty means no links are allowed. */
+    markdownLinkAllowedHosts?: ElevenLabs.AllowlistItem[];
+    /** Whether to automatically include www. variants of allowed hosts */
+    markdownLinkIncludeWww?: boolean;
+    /** Whether to allow http:// in addition to https:// for allowed hosts */
+    markdownLinkAllowHttp?: boolean;
     /** Whether to enable mic muting */
     micMutingEnabled?: boolean;
     /** Whether the widget should show the conversation transcript as it goes on */

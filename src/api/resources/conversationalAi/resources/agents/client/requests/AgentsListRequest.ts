@@ -8,6 +8,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         pageSize: 1,
  *         search: "search",
  *         archived: true,
+ *         showOnlyOwnedAgents: true,
  *         sortDirection: "asc",
  *         sortBy: "name",
  *         cursor: "cursor"
@@ -20,6 +21,8 @@ export interface AgentsListRequest {
     search?: string;
     /** Filter agents by archived status */
     archived?: boolean;
+    /** If set to true, the endpoint will omit any agents that were shared with you by someone else and include only the ones you own */
+    showOnlyOwnedAgents?: boolean;
     /** The direction to sort the results */
     sortDirection?: ElevenLabs.SortDirection;
     /** The field to sort the results by */

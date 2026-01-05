@@ -12,7 +12,7 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     videoId: core.serialization.property("video_id", core.serialization.string()),
     filename: core.serialization.string(),
-    signedUrl: core.serialization.property("signed_url", core.serialization.string()),
+    signedUrl: core.serialization.property("signed_url", core.serialization.string().optional()),
     signedPreviewUrl: core.serialization.property("signed_preview_url", core.serialization.string().optional()),
     offsetMs: core.serialization.property("offset_ms", core.serialization.number()),
     durationMs: core.serialization.property("duration_ms", core.serialization.number()),
@@ -48,13 +48,14 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
     speechImported: core.serialization.property("speech_imported", core.serialization.boolean().optional()),
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
     canvasPlacement: core.serialization.property("canvas_placement", CanvasPlacement.optional()),
+    trackId: core.serialization.property("track_id", core.serialization.string().optional()),
 });
 
 export declare namespace ProjectVideoResponseModel {
     export interface Raw {
         video_id: string;
         filename: string;
-        signed_url: string;
+        signed_url?: string | null;
         signed_preview_url?: string | null;
         offset_ms: number;
         duration_ms: number;
@@ -81,5 +82,6 @@ export declare namespace ProjectVideoResponseModel {
         speech_imported?: boolean | null;
         current_snapshot_id?: string | null;
         canvas_placement?: CanvasPlacement.Raw | null;
+        track_id?: string | null;
     }
 }

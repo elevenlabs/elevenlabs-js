@@ -17,4 +17,6 @@ export interface UpdateAgentRequest {
     name?: string;
     /** Tags to help classify and filter the agent */
     tags?: string[];
+    /** Description for this version when publishing changes (only applicable for versioned agents) */
+    versionDescription?: string;
 }

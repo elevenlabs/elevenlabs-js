@@ -50,6 +50,8 @@ export interface ConversationsListRequest {
     dataCollectionParams?: string | string[];
     /** Filter conversations by tool names used during the call. */
     toolNames?: string | string[];
+    /** Filter conversations by detected main language (language code). */
+    mainLanguages?: string | string[];
     /** How many conversations to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
     /** Whether to include transcript summaries in the response. */

@@ -17,6 +17,7 @@ export const ProjectImageResponseModel: core.serialization.ObjectSchema<
     fileSizeBytes: core.serialization.property("file_size_bytes", core.serialization.number()),
     width: core.serialization.number(),
     height: core.serialization.number(),
+    trackId: core.serialization.property("track_id", core.serialization.string().optional()),
     offsetMs: core.serialization.property("offset_ms", core.serialization.number()),
     durationMs: core.serialization.property("duration_ms", core.serialization.number()),
     order: core.serialization.string(),
@@ -37,6 +38,7 @@ export declare namespace ProjectImageResponseModel {
         file_size_bytes: number;
         width: number;
         height: number;
+        track_id?: string | null;
         offset_ms: number;
         duration_ms: number;
         order: string;

@@ -16,4 +16,5 @@ export interface FeaturesUsageCommonModel {
     voicemailDetection?: ElevenLabs.FeatureStatusCommonModel;
     workflow?: ElevenLabs.WorkflowFeaturesUsageCommonModel;
     agentTesting?: ElevenLabs.TestsFeatureUsageCommonModel;
+    versioning?: ElevenLabs.FeatureStatusCommonModel;
 }

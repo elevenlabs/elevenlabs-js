@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
+import { BatchCallWhatsAppParams } from "../../../../../../types/BatchCallWhatsAppParams";
 import { OutboundCallRecipient } from "../../../../../../types/OutboundCallRecipient";
 
 export const BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost: core.serialization.Schema<
@@ -14,6 +15,7 @@ export const BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost: core.ser
     recipients: core.serialization.list(OutboundCallRecipient),
     scheduledTimeUnix: core.serialization.property("scheduled_time_unix", core.serialization.number().optional()),
     agentPhoneNumberId: core.serialization.property("agent_phone_number_id", core.serialization.string().optional()),
+    whatsappParams: core.serialization.property("whatsapp_params", BatchCallWhatsAppParams.optional()),
 });
 
 export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
@@ -23,5 +25,6 @@ export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPo
         recipients: OutboundCallRecipient.Raw[];
         scheduled_time_unix?: number | null;
         agent_phone_number_id?: string | null;
+        whatsapp_params?: BatchCallWhatsAppParams.Raw | null;
     }
 }

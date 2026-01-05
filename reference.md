@@ -172,7 +172,7 @@ await client.history.get("VW7YKqPnjY4h39yTbx2L");
 <dl>
 <dd>
 
-**history_item_id:** `string` — ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/get-all) endpoint to retrieve a list of history items.
+**history_item_id:** `string` — ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/list) endpoint to retrieve a list of history items.
     
 </dd>
 </dl>
@@ -235,7 +235,7 @@ await client.history.delete("VW7YKqPnjY4h39yTbx2L");
 <dl>
 <dd>
 
-**history_item_id:** `string` — ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/get-all) endpoint to retrieve a list of history items.
+**history_item_id:** `string` — ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/list) endpoint to retrieve a list of history items.
     
 </dd>
 </dl>
@@ -298,7 +298,7 @@ await client.history.getAudio("history_item_id");
 <dl>
 <dd>
 
-**history_item_id:** `string` — ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/get-all) endpoint to retrieve a list of history items.
+**history_item_id:** `string` — ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/list) endpoint to retrieve a list of history items.
     
 </dd>
 </dl>
@@ -4625,6 +4625,76 @@ await client.conversationalAi.twilio.registerCall({
 </dl>
 </details>
 
+## ConversationalAi Whatsapp
+<details><summary><code>client.conversationalAi.whatsapp.<a href="/src/api/resources/conversationalAi/resources/whatsapp/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.WhatsAppOutboundCallResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Make an outbound call via WhatsApp
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.whatsapp.outboundCall({
+    whatsappPhoneNumberId: "whatsapp_phone_number_id",
+    whatsappUserId: "whatsapp_user_id",
+    whatsappCallPermissionRequestTemplateName: "whatsapp_call_permission_request_template_name",
+    whatsappCallPermissionRequestTemplateLanguageCode: "whatsapp_call_permission_request_template_language_code",
+    agentId: "agent_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents
 <details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentResponseModel</code></summary>
 <dl>
@@ -4919,6 +4989,7 @@ await client.conversationalAi.agents.list({
     pageSize: 1,
     search: "search",
     archived: true,
+    showOnlyOwnedAgents: true,
     sortDirection: "asc",
     sortBy: "name",
     cursor: "cursor"
@@ -7713,6 +7784,326 @@ await client.conversationalAi.mcpServers.update("mcp_server_id");
 </dl>
 </details>
 
+## ConversationalAi WhatsappAccounts
+<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">list</a>() -> ElevenLabs.ListWhatsAppAccountsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all WhatsApp accounts
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.whatsappAccounts.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">import</a>({ ...params }) -> ElevenLabs.ImportWhatsAppAccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Import a WhatsApp account
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.whatsappAccounts.import({
+    businessAccountId: "business_account_id",
+    phoneNumberId: "phone_number_id",
+    tokenCode: "token_code"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.ImportWhatsAppAccountRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">get</a>(phone_number_id) -> ElevenLabs.GetWhatsAppAccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a WhatsApp account
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.whatsappAccounts.get("phone_number_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">delete</a>(phone_number_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a WhatsApp account
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.whatsappAccounts.delete("phone_number_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">update</a>(phone_number_id, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a WhatsApp account
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.whatsappAccounts.update("phone_number_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.UpdateWhatsAppAccountRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents Widget
 <details><summary><code>client.conversationalAi.agents.widget.<a href="/src/api/resources/conversationalAi/resources/agents/resources/widget/client/Client.ts">get</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentEmbedResponseModel</code></summary>
 <dl>
@@ -8827,8 +9218,9 @@ Get a list of agents depending on this knowledge base document
 
 ```typescript
 await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8ikWAM", {
-    cursor: "cursor",
-    pageSize: 1
+    dependentType: "direct",
+    pageSize: 1,
+    cursor: "cursor"
 });
 
 ```
@@ -10314,7 +10706,7 @@ Regenerate the output media for a language using the latest Studio state. Please
 <dd>
 
 ```typescript
-await client.dubbing.resource.render("dubbing_id", "original", {
+await client.dubbing.resource.render("dubbing_id", "language", {
     renderType: "mp4"
 });
 
@@ -10340,7 +10732,7 @@ await client.dubbing.resource.render("dubbing_id", "original", {
 <dl>
 <dd>
 
-**language:** `ElevenLabs.ResourceRenderRequestLanguage` — The target language code to render, eg. 'es'. To render the source track use 'original'.
+**language:** `string` — The target language code to render, eg. 'es'. To render the source track use 'original'.
     
 </dd>
 </dl>
