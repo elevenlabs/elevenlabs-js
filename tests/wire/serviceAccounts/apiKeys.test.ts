@@ -53,7 +53,7 @@ describe("ApiKeysClient", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "name", permissions: "all" };
-        const rawResponseBody = { "xi-api-key": "xi-api-key" };
+        const rawResponseBody = { "xi-api-key": "xi-api-key", key_id: "key_id" };
         server
             .mockEndpoint()
             .post("/v1/service-accounts/service_account_user_id/api-keys")
@@ -69,6 +69,7 @@ describe("ApiKeysClient", () => {
         });
         expect(response).toEqual({
             xiApiKey: "xi-api-key",
+            keyId: "key_id",
         });
     });
 

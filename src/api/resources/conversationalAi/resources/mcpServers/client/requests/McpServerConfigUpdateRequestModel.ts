@@ -24,4 +24,6 @@ export interface McpServerConfigUpdateRequestModel {
         string,
         ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModelRequestHeadersValue | undefined
     >;
+    /** Whether to disable HTTP compression for this MCP server */
+    disableCompression?: boolean;
 }

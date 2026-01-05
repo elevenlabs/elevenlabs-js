@@ -29,6 +29,8 @@ export interface Voice {
     highQualityBaseModelIds?: string[];
     /** The verified languages of the voice. */
     verifiedLanguages?: ElevenLabs.VerifiedVoiceLanguageResponseModel[];
+    /** The IDs of collections this voice belongs to. */
+    collectionIds?: string[];
     /** The safety controls of the voice. */
     safetyControl?: ElevenLabs.VoiceResponseModelSafetyControl;
     /** The voice verification of the voice. */

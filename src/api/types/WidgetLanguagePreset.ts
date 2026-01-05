@@ -5,4 +5,12 @@ import type * as ElevenLabs from "../index";
 export interface WidgetLanguagePreset {
     /** The text contents for the selected language */
     textContents?: ElevenLabs.WidgetTextContents;
+    /** The text to display for terms and conditions in this language */
+    termsText?: string;
+    /** The HTML to display for terms and conditions in this language */
+    termsHtml?: string;
+    /** The key to display for terms and conditions in this language */
+    termsKey?: string;
+    /** The translation cache for the terms */
+    termsTranslation?: ElevenLabs.WidgetTermsTranslation;
 }

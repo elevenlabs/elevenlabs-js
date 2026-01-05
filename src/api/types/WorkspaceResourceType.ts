@@ -29,5 +29,8 @@ export const WorkspaceResourceType = {
     Dashboard: "dashboard",
     DashboardConfiguration: "dashboard_configuration",
     ConvaiAgentDrafts: "convai_agent_drafts",
+    ResourceLocators: "resource_locators",
+    Assets: "assets",
+    ContentGenerations: "content_generations",
 } as const;
 export type WorkspaceResourceType = (typeof WorkspaceResourceType)[keyof typeof WorkspaceResourceType];

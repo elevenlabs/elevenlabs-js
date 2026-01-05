@@ -15,6 +15,7 @@ export const VoiceDesignRequest: core.serialization.Schema<
     quality: core.serialization.number().optional(),
     seed: core.serialization.number().optional(),
     guidanceScale: core.serialization.property("guidance_scale", core.serialization.number().optional()),
+    shouldEnhance: core.serialization.property("should_enhance", core.serialization.boolean().optional()),
 });
 
 export declare namespace VoiceDesignRequest {
@@ -26,5 +27,6 @@ export declare namespace VoiceDesignRequest {
         quality?: number | null;
         seed?: number | null;
         guidance_scale?: number | null;
+        should_enhance?: boolean | null;
     }
 }

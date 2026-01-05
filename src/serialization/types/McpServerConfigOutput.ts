@@ -41,6 +41,7 @@ export const McpServerConfigOutput: core.serialization.ObjectSchema<
         "tool_config_overrides",
         core.serialization.list(McpToolConfigOverride).optional(),
     ),
+    disableCompression: core.serialization.property("disable_compression", core.serialization.boolean().optional()),
 });
 
 export declare namespace McpServerConfigOutput {
@@ -59,5 +60,6 @@ export declare namespace McpServerConfigOutput {
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
         tool_config_overrides?: McpToolConfigOverride.Raw[] | null;
+        disable_compression?: boolean | null;
     }
 }

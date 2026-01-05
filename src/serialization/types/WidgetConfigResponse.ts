@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AllowlistItem } from "./AllowlistItem";
 import { EmbedVariant } from "./EmbedVariant";
 import { WidgetConfigResponseModelAvatar } from "./WidgetConfigResponseModelAvatar";
 import { WidgetEndFeedbackConfig } from "./WidgetEndFeedbackConfig";
@@ -51,6 +52,18 @@ export const WidgetConfigResponse: core.serialization.ObjectSchema<
     ),
     disableBanner: core.serialization.property("disable_banner", core.serialization.boolean().optional()),
     overrideLink: core.serialization.property("override_link", core.serialization.string().optional()),
+    markdownLinkAllowedHosts: core.serialization.property(
+        "markdown_link_allowed_hosts",
+        core.serialization.list(AllowlistItem).optional(),
+    ),
+    markdownLinkIncludeWww: core.serialization.property(
+        "markdown_link_include_www",
+        core.serialization.boolean().optional(),
+    ),
+    markdownLinkAllowHttp: core.serialization.property(
+        "markdown_link_allow_http",
+        core.serialization.boolean().optional(),
+    ),
     micMutingEnabled: core.serialization.property("mic_muting_enabled", core.serialization.boolean().optional()),
     transcriptEnabled: core.serialization.property("transcript_enabled", core.serialization.boolean().optional()),
     textInputEnabled: core.serialization.property("text_input_enabled", core.serialization.boolean().optional()),
@@ -107,6 +120,9 @@ export declare namespace WidgetConfigResponse {
         show_avatar_when_collapsed?: boolean | null;
         disable_banner?: boolean | null;
         override_link?: string | null;
+        markdown_link_allowed_hosts?: AllowlistItem.Raw[] | null;
+        markdown_link_include_www?: boolean | null;
+        markdown_link_allow_http?: boolean | null;
         mic_muting_enabled?: boolean | null;
         transcript_enabled?: boolean | null;
         text_input_enabled?: boolean | null;

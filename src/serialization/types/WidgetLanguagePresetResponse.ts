@@ -11,11 +11,17 @@ export const WidgetLanguagePresetResponse: core.serialization.ObjectSchema<
 > = core.serialization.object({
     firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
     textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
+    termsText: core.serialization.property("terms_text", core.serialization.string().optional()),
+    termsHtml: core.serialization.property("terms_html", core.serialization.string().optional()),
+    termsKey: core.serialization.property("terms_key", core.serialization.string().optional()),
 });
 
 export declare namespace WidgetLanguagePresetResponse {
     export interface Raw {
         first_message?: string | null;
         text_contents?: WidgetTextContents.Raw | null;
+        terms_text?: string | null;
+        terms_html?: string | null;
+        terms_key?: string | null;
     }
 }

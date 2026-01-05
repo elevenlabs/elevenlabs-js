@@ -510,20 +510,20 @@ export class ResourceClient {
      * Regenerate the output media for a language using the latest Studio state. Please ensure all segments have been dubbed before rendering, otherwise they will be omitted. Renders are generated asynchronously, and to check the status of all renders please use the 'Get Dubbing Resource' endpoint.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
-     * @param {ElevenLabs.dubbing.ResourceRenderRequestLanguage} language - The target language code to render, eg. 'es'. To render the source track use 'original'.
+     * @param {string} language - The target language code to render, eg. 'es'. To render the source track use 'original'.
      * @param {ElevenLabs.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost} request
      * @param {ResourceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.dubbing.resource.render("dubbing_id", "original", {
+     *     await client.dubbing.resource.render("dubbing_id", "language", {
      *         renderType: "mp4"
      *     })
      */
     public render(
         dubbing_id: string,
-        language: ElevenLabs.dubbing.ResourceRenderRequestLanguage,
+        language: string,
         request: ElevenLabs.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost,
         requestOptions?: ResourceClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.DubbingRenderResponseModel> {
@@ -532,7 +532,7 @@ export class ResourceClient {
 
     private async __render(
         dubbing_id: string,
-        language: ElevenLabs.dubbing.ResourceRenderRequestLanguage,
+        language: string,
         request: ElevenLabs.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost,
         requestOptions?: ResourceClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DubbingRenderResponseModel>> {
@@ -546,7 +546,7 @@ export class ResourceClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ElevenLabsEnvironment.Production,
-                `v1/dubbing/resource/${core.url.encodePathParam(dubbing_id)}/render/${core.url.encodePathParam(serializers.dubbing.ResourceRenderRequestLanguage.jsonOrThrow(language))}`,
+                `v1/dubbing/resource/${core.url.encodePathParam(dubbing_id)}/render/${core.url.encodePathParam(language)}`,
             ),
             method: "POST",
             headers: _headers,

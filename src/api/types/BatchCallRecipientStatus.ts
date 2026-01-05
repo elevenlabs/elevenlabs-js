@@ -2,6 +2,7 @@
 
 export const BatchCallRecipientStatus = {
     Pending: "pending",
+    Dispatched: "dispatched",
     Initiated: "initiated",
     InProgress: "in_progress",
     Completed: "completed",

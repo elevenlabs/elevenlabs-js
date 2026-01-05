@@ -167,7 +167,7 @@ export class HistoryClient {
     /**
      * Retrieves a history item.
      *
-     * @param {string} history_item_id - ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/get-all) endpoint to retrieve a list of history items.
+     * @param {string} history_item_id - ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/list) endpoint to retrieve a list of history items.
      * @param {HistoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -246,7 +246,7 @@ export class HistoryClient {
     /**
      * Delete a history item by its ID
      *
-     * @param {string} history_item_id - ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/get-all) endpoint to retrieve a list of history items.
+     * @param {string} history_item_id - ID of the history item to be used. You can use the [Get generated items](/docs/api-reference/history/list) endpoint to retrieve a list of history items.
      * @param {HistoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}

@@ -16,4 +16,5 @@ export interface BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
     recipients: ElevenLabs.OutboundCallRecipient[];
     scheduledTimeUnix?: number;
     agentPhoneNumberId?: string;
+    whatsappParams?: ElevenLabs.BatchCallWhatsAppParams;
 }

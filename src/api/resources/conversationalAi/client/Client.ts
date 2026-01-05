@@ -24,6 +24,8 @@ import { SipTrunkClient } from "../resources/sipTrunk/client/Client";
 import { TestsClient } from "../resources/tests/client/Client";
 import { ToolsClient } from "../resources/tools/client/Client";
 import { TwilioClient } from "../resources/twilio/client/Client";
+import { WhatsappClient } from "../resources/whatsapp/client/Client";
+import { WhatsappAccountsClient } from "../resources/whatsappAccounts/client/Client";
 
 export declare namespace ConversationalAiClient {
     export type Options = BaseClientOptions;
@@ -35,6 +37,7 @@ export class ConversationalAiClient {
     protected readonly _options: NormalizedClientOptions<ConversationalAiClient.Options>;
     protected _conversations: ConversationsClient | undefined;
     protected _twilio: TwilioClient | undefined;
+    protected _whatsapp: WhatsappClient | undefined;
     protected _agents: AgentsClient | undefined;
     protected _tests: TestsClient | undefined;
     protected _phoneNumbers: PhoneNumbersClient | undefined;
@@ -46,6 +49,7 @@ export class ConversationalAiClient {
     protected _batchCalls: BatchCallsClient | undefined;
     protected _sipTrunk: SipTrunkClient | undefined;
     protected _mcpServers: McpServersClient | undefined;
+    protected _whatsappAccounts: WhatsappAccountsClient | undefined;
     protected _analytics: AnalyticsClient | undefined;
     protected _dashboard: DashboardClient | undefined;
 
@@ -59,6 +63,10 @@ export class ConversationalAiClient {
 
     public get twilio(): TwilioClient {
         return (this._twilio ??= new TwilioClient(this._options));
+    }
+
+    public get whatsapp(): WhatsappClient {
+        return (this._whatsapp ??= new WhatsappClient(this._options));
     }
 
     public get agents(): AgentsClient {
@@ -103,6 +111,10 @@ export class ConversationalAiClient {
 
     public get mcpServers(): McpServersClient {
         return (this._mcpServers ??= new McpServersClient(this._options));
+    }
+
+    public get whatsappAccounts(): WhatsappAccountsClient {
+        return (this._whatsappAccounts ??= new WhatsappAccountsClient(this._options));
     }
 
     public get analytics(): AnalyticsClient {

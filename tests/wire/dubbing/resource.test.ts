@@ -299,14 +299,14 @@ describe("ResourceClient", () => {
         const rawResponseBody = { version: 1, render_id: "render_id" };
         server
             .mockEndpoint()
-            .post("/v1/dubbing/resource/dubbing_id/render/original")
+            .post("/v1/dubbing/resource/dubbing_id/render/language")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.dubbing.resource.render("dubbing_id", "original", {
+        const response = await client.dubbing.resource.render("dubbing_id", "language", {
             renderType: "mp4",
         });
         expect(response).toEqual({

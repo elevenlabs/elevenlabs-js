@@ -9,10 +9,12 @@ export const WorkspaceCreateApiKeyResponseModel: core.serialization.ObjectSchema
     ElevenLabs.WorkspaceCreateApiKeyResponseModel
 > = core.serialization.object({
     xiApiKey: core.serialization.property("xi-api-key", core.serialization.string()),
+    keyId: core.serialization.property("key_id", core.serialization.string()),
 });
 
 export declare namespace WorkspaceCreateApiKeyResponseModel {
     export interface Raw {
         "xi-api-key": string;
+        key_id: string;
     }
 }

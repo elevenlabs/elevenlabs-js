@@ -26,4 +26,6 @@ export interface VoiceDesignRequest {
     seed?: number;
     /** Controls how closely the AI follows the prompt. Lower numbers give the AI more freedom to be creative, while higher numbers force it to stick more to the prompt. High numbers can cause voice to sound artificial or robotic. We recommend to use longer, more detailed prompts at lower Guidance Scale. */
     guidanceScale?: number;
+    /** Whether to enhance the voice description using AI to add more detail and improve voice generation quality. When enabled, the system will automatically expand simple prompts into more detailed voice descriptions. Defaults to False */
+    shouldEnhance?: boolean;
 }

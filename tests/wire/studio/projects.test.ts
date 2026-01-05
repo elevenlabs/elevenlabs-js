@@ -232,6 +232,7 @@ describe("ProjectsClient", () => {
                     import_speech_progress: 1.1,
                     speech_imported: true,
                     current_snapshot_id: "current_snapshot_id",
+                    track_id: "track_id",
                 },
             ],
             voices: [
@@ -354,6 +355,7 @@ describe("ProjectsClient", () => {
                                 "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
                         },
                     ],
+                    collection_ids: ["collection_ids"],
                     safety_control: "NONE",
                     voice_verification: {
                         requires_verification: false,
@@ -559,6 +561,7 @@ describe("ProjectsClient", () => {
                     importSpeechProgress: 1.1,
                     speechImported: true,
                     currentSnapshotId: "current_snapshot_id",
+                    trackId: "track_id",
                 },
             ],
             voices: [
@@ -697,6 +700,7 @@ describe("ProjectsClient", () => {
                                 "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
                         },
                     ],
+                    collectionIds: ["collection_ids"],
                     safetyControl: "NONE",
                     voiceVerification: {
                         requiresVerification: false,

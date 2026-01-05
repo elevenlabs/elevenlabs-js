@@ -7,8 +7,15 @@ import type * as serializers from "../index";
 export const DependentUnknownAgentIdentifier: core.serialization.ObjectSchema<
     serializers.DependentUnknownAgentIdentifier.Raw,
     ElevenLabs.DependentUnknownAgentIdentifier
-> = core.serialization.object({});
+> = core.serialization.object({
+    referencedResourceIds: core.serialization.property(
+        "referenced_resource_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+});
 
 export declare namespace DependentUnknownAgentIdentifier {
-    export type Raw = {};
+    export interface Raw {
+        referenced_resource_ids?: string[] | null;
+    }
 }

@@ -3,6 +3,8 @@
 import type * as ElevenLabs from "../index";
 
 export interface DependentAvailableAgentIdentifier {
+    /** If the agent is a transitive dependent, contains IDs of the resources that the agent depends on directly. */
+    referencedResourceIds?: string[];
     id: string;
     name: string;
     createdAtUnixSecs: number;

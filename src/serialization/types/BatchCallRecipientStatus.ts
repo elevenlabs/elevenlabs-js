@@ -7,8 +7,25 @@ import type * as serializers from "../index";
 export const BatchCallRecipientStatus: core.serialization.Schema<
     serializers.BatchCallRecipientStatus.Raw,
     ElevenLabs.BatchCallRecipientStatus
-> = core.serialization.enum_(["pending", "initiated", "in_progress", "completed", "failed", "cancelled", "voicemail"]);
+> = core.serialization.enum_([
+    "pending",
+    "dispatched",
+    "initiated",
+    "in_progress",
+    "completed",
+    "failed",
+    "cancelled",
+    "voicemail",
+]);
 
 export declare namespace BatchCallRecipientStatus {
-    export type Raw = "pending" | "initiated" | "in_progress" | "completed" | "failed" | "cancelled" | "voicemail";
+    export type Raw =
+        | "pending"
+        | "dispatched"
+        | "initiated"
+        | "in_progress"
+        | "completed"
+        | "failed"
+        | "cancelled"
+        | "voicemail";
 }

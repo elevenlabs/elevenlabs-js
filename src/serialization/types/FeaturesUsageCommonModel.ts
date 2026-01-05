@@ -27,6 +27,7 @@ export const FeaturesUsageCommonModel: core.serialization.ObjectSchema<
     voicemailDetection: core.serialization.property("voicemail_detection", FeatureStatusCommonModel.optional()),
     workflow: WorkflowFeaturesUsageCommonModel.optional(),
     agentTesting: core.serialization.property("agent_testing", TestsFeatureUsageCommonModel.optional()),
+    versioning: FeatureStatusCommonModel.optional(),
 });
 
 export declare namespace FeaturesUsageCommonModel {
@@ -44,5 +45,6 @@ export declare namespace FeaturesUsageCommonModel {
         voicemail_detection?: FeatureStatusCommonModel.Raw | null;
         workflow?: WorkflowFeaturesUsageCommonModel.Raw | null;
         agent_testing?: TestsFeatureUsageCommonModel.Raw | null;
+        versioning?: FeatureStatusCommonModel.Raw | null;
     }
 }

@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { BatchCallStatus } from "./BatchCallStatus";
+import { BatchCallWhatsAppParams } from "./BatchCallWhatsAppParams";
 import { TelephonyProvider } from "./TelephonyProvider";
 
 export const BatchCallResponse: core.serialization.ObjectSchema<
@@ -13,15 +14,17 @@ export const BatchCallResponse: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     phoneNumberId: core.serialization.property("phone_number_id", core.serialization.string().optional()),
     phoneProvider: core.serialization.property("phone_provider", TelephonyProvider.optional()),
+    whatsappParams: core.serialization.property("whatsapp_params", BatchCallWhatsAppParams.optional()),
     name: core.serialization.string(),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number()),
     scheduledTimeUnix: core.serialization.property("scheduled_time_unix", core.serialization.number()),
     totalCallsDispatched: core.serialization.property("total_calls_dispatched", core.serialization.number()),
     totalCallsScheduled: core.serialization.property("total_calls_scheduled", core.serialization.number()),
+    totalCallsFinished: core.serialization.property("total_calls_finished", core.serialization.number()),
     lastUpdatedAtUnix: core.serialization.property("last_updated_at_unix", core.serialization.number()),
     status: BatchCallStatus,
-    retryCount: core.serialization.property("retry_count", core.serialization.number().optional()),
+    retryCount: core.serialization.property("retry_count", core.serialization.number()),
     agentName: core.serialization.property("agent_name", core.serialization.string()),
 });
 
@@ -30,15 +33,17 @@ export declare namespace BatchCallResponse {
         id: string;
         phone_number_id?: string | null;
         phone_provider?: TelephonyProvider.Raw | null;
+        whatsapp_params?: BatchCallWhatsAppParams.Raw | null;
         name: string;
         agent_id: string;
         created_at_unix: number;
         scheduled_time_unix: number;
         total_calls_dispatched: number;
         total_calls_scheduled: number;
+        total_calls_finished: number;
         last_updated_at_unix: number;
         status: BatchCallStatus.Raw;
-        retry_count?: number | null;
+        retry_count: number;
         agent_name: string;
     }
 }

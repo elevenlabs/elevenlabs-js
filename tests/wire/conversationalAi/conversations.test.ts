@@ -57,6 +57,7 @@ describe("ConversationsClient", () => {
                 {
                     agent_id: "agent_id",
                     branch_id: "branch_id",
+                    version_id: "version_id",
                     agent_name: "agent_name",
                     conversation_id: "conversation_id",
                     start_time_unix_secs: 1,
@@ -102,6 +103,7 @@ describe("ConversationsClient", () => {
                 {
                     agentId: "agent_id",
                     branchId: "branch_id",
+                    versionId: "version_id",
                     agentName: "agent_name",
                     conversationId: "conversation_id",
                     startTimeUnixSecs: 1,

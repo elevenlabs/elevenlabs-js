@@ -25,6 +25,7 @@ export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
             .record(core.serialization.string(), McpServerConfigUpdateRequestModelRequestHeadersValue.optional())
             .optional(),
     ),
+    disableCompression: core.serialization.property("disable_compression", core.serialization.boolean().optional()),
 });
 
 export declare namespace McpServerConfigUpdateRequestModel {
@@ -39,5 +40,6 @@ export declare namespace McpServerConfigUpdateRequestModel {
             string,
             McpServerConfigUpdateRequestModelRequestHeadersValue.Raw | null | undefined
         > | null;
+        disable_compression?: boolean | null;
     }
 }

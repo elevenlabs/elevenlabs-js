@@ -9,15 +9,17 @@ export interface BatchCallDetailedResponse {
     id: string;
     phoneNumberId?: string;
     phoneProvider?: ElevenLabs.TelephonyProvider;
+    whatsappParams?: ElevenLabs.BatchCallWhatsAppParams;
     name: string;
     agentId: string;
     createdAtUnix: number;
     scheduledTimeUnix: number;
     totalCallsDispatched: number;
     totalCallsScheduled: number;
+    totalCallsFinished: number;
     lastUpdatedAtUnix: number;
     status: ElevenLabs.BatchCallStatus;
-    retryCount?: number;
+    retryCount: number;
     agentName: string;
     recipients: ElevenLabs.OutboundCallRecipientResponseModel[];
 }

@@ -12,6 +12,7 @@ export const UpdatePhoneNumberRequest: core.serialization.Schema<
     ElevenLabs.conversationalAi.UpdatePhoneNumberRequest
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
+    label: core.serialization.string().optional(),
     inboundTrunkConfig: core.serialization.property(
         "inbound_trunk_config",
         InboundSipTrunkConfigRequestModel.optional(),
@@ -26,6 +27,7 @@ export const UpdatePhoneNumberRequest: core.serialization.Schema<
 export declare namespace UpdatePhoneNumberRequest {
     export interface Raw {
         agent_id?: string | null;
+        label?: string | null;
         inbound_trunk_config?: InboundSipTrunkConfigRequestModel.Raw | null;
         outbound_trunk_config?: OutboundSipTrunkConfigRequestModel.Raw | null;
         livekit_stack?: LivekitStackType.Raw | null;

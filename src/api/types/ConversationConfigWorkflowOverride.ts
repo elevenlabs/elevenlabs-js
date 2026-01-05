@@ -9,4 +9,8 @@ export interface ConversationConfigWorkflowOverride {
     maxDurationSeconds?: number;
     /** The events that will be sent to the client */
     clientEvents?: ElevenLabs.ClientEvent[];
+    /** Enable real-time monitoring of conversations via WebSocket */
+    monitoringEnabled?: boolean;
+    /** The events that will be sent to monitoring connections. */
+    monitoringEvents?: ElevenLabs.ClientEvent[];
 }

@@ -11,6 +11,7 @@ export interface ProjectImageResponseModel {
     fileSizeBytes: number;
     width: number;
     height: number;
+    trackId?: string;
     offsetMs: number;
     durationMs: number;
     order: string;

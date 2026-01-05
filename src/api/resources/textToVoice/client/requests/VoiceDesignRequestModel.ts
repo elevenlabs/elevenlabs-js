@@ -28,6 +28,8 @@ export interface VoiceDesignRequestModel {
     guidanceScale?: number;
     /** Determines whether the Text to Voice previews should be included in the response. If true, only the generated IDs will be returned which can then be streamed via the /v1/text-to-voice/:generated_voice_id/stream endpoint. */
     streamPreviews?: boolean;
+    /** Whether to enhance the voice description using AI to add more detail and improve voice generation quality. When enabled, the system will automatically expand simple prompts into more detailed voice descriptions. Defaults to False */
+    shouldEnhance?: boolean;
     /** The remixing session id. */
     remixingSessionId?: string;
     /** The id of the remixing session iteration where these generations should be attached to. If not provided, a new iteration will be created. */

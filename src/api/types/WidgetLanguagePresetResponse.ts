@@ -6,4 +6,10 @@ export interface WidgetLanguagePresetResponse {
     firstMessage?: string;
     /** The text contents for the selected language */
     textContents?: ElevenLabs.WidgetTextContents;
+    /** The text to display for terms and conditions in this language */
+    termsText?: string;
+    /** The HTML to display for terms and conditions in this language */
+    termsHtml?: string;
+    /** The key to display for terms and conditions in this language */
+    termsKey?: string;
 }

@@ -10,6 +10,7 @@ export interface GetKnowledgeBaseSummaryFolderResponseModel {
     accessInfo: ElevenLabs.ResourceAccessInfo;
     /** The ID of the parent folder, or null if the document is at the root level. */
     folderParentId?: string;
+    /** This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead. */
     dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem[];
     childrenCount: number;
 }
