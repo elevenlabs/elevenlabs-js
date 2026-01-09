@@ -52,6 +52,7 @@ describe("TranscriptsClient", () => {
                 },
             ],
             transcription_id: "transcription_id",
+            entities: [{ text: "text", entity_type: "entity_type", start_char: 1, end_char: 1 }],
         };
         server
             .mockEndpoint()
@@ -124,6 +125,14 @@ describe("TranscriptsClient", () => {
                 },
             ],
             transcriptionId: "transcription_id",
+            entities: [
+                {
+                    text: "text",
+                    entityType: "entity_type",
+                    startChar: 1,
+                    endChar: 1,
+                },
+            ],
         });
     });
 

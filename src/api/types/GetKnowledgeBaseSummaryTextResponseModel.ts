@@ -10,6 +10,8 @@ export interface GetKnowledgeBaseSummaryTextResponseModel {
     accessInfo: ElevenLabs.ResourceAccessInfo;
     /** The ID of the parent folder, or null if the document is at the root level. */
     folderParentId?: string;
+    /** The folder path segments leading to this entity, from root to parent folder. */
+    folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentSummaryResponseModel[];
     /** This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead. */
     dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryTextResponseModelDependentAgentsItem[];
 }

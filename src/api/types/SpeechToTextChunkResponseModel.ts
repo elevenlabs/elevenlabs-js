@@ -20,4 +20,6 @@ export interface SpeechToTextChunkResponseModel {
     additionalFormats?: (ElevenLabs.AdditionalFormatResponseModel | undefined)[];
     /** The transcription ID of the response. */
     transcriptionId?: string;
+    /** List of detected entities with their text, type, and character positions in the transcript. */
+    entities?: ElevenLabs.DetectedEntity[];
 }

@@ -44,7 +44,7 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     dubbingStudio?: boolean;
     /** Instead of using a voice clone in dubbing, use a similar voice from the ElevenLabs Voice Library. Voices used from the library will contribute towards a workspace's custom voices limit, and if there aren't enough available slots the dub will fail. Using this feature requires the caller to have the 'add_voice_from_voice_library' permission on their workspace to access new voices. */
     disableVoiceCloning?: boolean;
-    /** The mode in which to run this Dubbing job. Defaults to automatic, use manual if specifically providing a CSV transcript to use. */
+    /** The mode in which to run this Dubbing job. Defaults to automatic, use manual if specifically providing a CSV transcript to use. Note that manual mode is experimental and production use is strongly discouraged. */
     mode?: ElevenLabs.DubbingCreateRequestMode;
     /** Frames per second to use when parsing a CSV file for dubbing. If not provided, FPS will be inferred from timecodes. */
     csvFps?: number;

@@ -10,11 +10,16 @@ export const SoftTimeoutConfigWorkflowOverride: core.serialization.ObjectSchema<
 > = core.serialization.object({
     timeoutSeconds: core.serialization.property("timeout_seconds", core.serialization.number().optional()),
     message: core.serialization.string().optional(),
+    useLlmGeneratedMessage: core.serialization.property(
+        "use_llm_generated_message",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace SoftTimeoutConfigWorkflowOverride {
     export interface Raw {
         timeout_seconds?: number | null;
         message?: string | null;
+        use_llm_generated_message?: boolean | null;
     }
 }

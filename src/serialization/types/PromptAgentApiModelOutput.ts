@@ -47,6 +47,10 @@ export const PromptAgentApiModelOutput: core.serialization.ObjectSchema<
         "backup_llm_config",
         PromptAgentApiModelOutputBackupLlmConfig.optional(),
     ),
+    cascadeTimeoutSeconds: core.serialization.property(
+        "cascade_timeout_seconds",
+        core.serialization.number().optional(),
+    ),
     tools: core.serialization.list(PromptAgentApiModelOutputToolsItem).optional(),
 });
 
@@ -68,6 +72,7 @@ export declare namespace PromptAgentApiModelOutput {
         rag?: RagConfig.Raw | null;
         timezone?: string | null;
         backup_llm_config?: PromptAgentApiModelOutputBackupLlmConfig.Raw | null;
+        cascade_timeout_seconds?: number | null;
         tools?: PromptAgentApiModelOutputToolsItem.Raw[] | null;
     }
 }

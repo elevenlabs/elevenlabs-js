@@ -53,7 +53,6 @@ export class KnowledgeBaseClient {
      *         foldersFirst: true,
      *         sortDirection: "asc",
      *         sortBy: "name",
-     *         useTypesense: true,
      *         cursor: "cursor"
      *     })
      */
@@ -78,7 +77,6 @@ export class KnowledgeBaseClient {
             foldersFirst,
             sortDirection,
             sortBy,
-            useTypesense,
             cursor,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
@@ -128,10 +126,6 @@ export class KnowledgeBaseClient {
             _queryParams.sort_by = serializers.KnowledgeBaseSortBy.jsonOrThrow(sortBy, {
                 unrecognizedObjectKeys: "strip",
             });
-        }
-
-        if (useTypesense != null) {
-            _queryParams.use_typesense = useTypesense.toString();
         }
 
         if (cursor != null) {

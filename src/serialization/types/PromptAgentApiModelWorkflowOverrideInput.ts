@@ -47,6 +47,10 @@ export const PromptAgentApiModelWorkflowOverrideInput: core.serialization.Object
         "backup_llm_config",
         PromptAgentApiModelWorkflowOverrideInputBackupLlmConfig.optional(),
     ),
+    cascadeTimeoutSeconds: core.serialization.property(
+        "cascade_timeout_seconds",
+        core.serialization.number().optional(),
+    ),
     tools: core.serialization.list(PromptAgentApiModelWorkflowOverrideInputToolsItem).optional(),
 });
 
@@ -68,6 +72,7 @@ export declare namespace PromptAgentApiModelWorkflowOverrideInput {
         rag?: RagConfigWorkflowOverride.Raw | null;
         timezone?: string | null;
         backup_llm_config?: PromptAgentApiModelWorkflowOverrideInputBackupLlmConfig.Raw | null;
+        cascade_timeout_seconds?: number | null;
         tools?: PromptAgentApiModelWorkflowOverrideInputToolsItem.Raw[] | null;
     }
 }
