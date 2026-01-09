@@ -146,6 +146,19 @@ export class SpeechToTextClient {
             );
         }
 
+        if (request.entityDetection != null) {
+            if (Array.isArray(request.entityDetection))
+                for (const _item of request.entityDetection) {
+                    _request.append("entity_detection", typeof _item === "string" ? _item : toJson(_item));
+                }
+        }
+
+        if (request.keyterms != null) {
+            for (const _item of request.keyterms) {
+                _request.append("keyterms", _item);
+            }
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

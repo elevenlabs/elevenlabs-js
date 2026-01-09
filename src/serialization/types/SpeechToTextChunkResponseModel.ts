@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AdditionalFormatResponseModel } from "./AdditionalFormatResponseModel";
+import { DetectedEntity } from "./DetectedEntity";
 import { SpeechToTextWordResponseModel } from "./SpeechToTextWordResponseModel";
 
 export const SpeechToTextChunkResponseModel: core.serialization.ObjectSchema<
@@ -20,6 +21,7 @@ export const SpeechToTextChunkResponseModel: core.serialization.ObjectSchema<
         core.serialization.list(AdditionalFormatResponseModel.optional()).optional(),
     ),
     transcriptionId: core.serialization.property("transcription_id", core.serialization.string().optional()),
+    entities: core.serialization.list(DetectedEntity).optional(),
 });
 
 export declare namespace SpeechToTextChunkResponseModel {
@@ -31,5 +33,6 @@ export declare namespace SpeechToTextChunkResponseModel {
         channel_index?: number | null;
         additional_formats?: (AdditionalFormatResponseModel.Raw | null | undefined)[] | null;
         transcription_id?: string | null;
+        entities?: DetectedEntity.Raw[] | null;
     }
 }

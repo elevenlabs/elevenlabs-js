@@ -1,3 +1,4 @@
+export * from "./SpeechToTextConvertRequestEntityDetection";
 export * from "./SpeechToTextConvertRequestFileFormat";
 export * from "./SpeechToTextConvertRequestTimestampsGranularity";
 export * from "./SpeechToTextConvertRequestWebhookMetadata";

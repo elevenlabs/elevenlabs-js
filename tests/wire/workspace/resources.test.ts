@@ -103,4 +103,27 @@ describe("ResourcesClient", () => {
             key: "value",
         });
     });
+
+    test("copyToWorkspace", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { resource_type: "voice", target_user_id: "target_user_id" };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/v1/workspace/resources/resource_id/copy-to-workspace")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.resources.copyToWorkspace("resource_id", {
+            resourceType: "voice",
+            targetUserId: "target_user_id",
+        });
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
 });

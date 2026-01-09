@@ -13,7 +13,6 @@ import type * as ElevenLabs from "../../../../../../index";
  *         foldersFirst: true,
  *         sortDirection: "asc",
  *         sortBy: "name",
- *         useTypesense: true,
  *         cursor: "cursor"
  *     }
  */
@@ -36,8 +35,6 @@ export interface KnowledgeBaseListRequest {
     sortDirection?: ElevenLabs.SortDirection;
     /** The field to sort the results by */
     sortBy?: ElevenLabs.KnowledgeBaseSortBy;
-    /** If set to true, the endpoint will use typesense DB to search for the documents). */
-    useTypesense?: boolean;
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
 }

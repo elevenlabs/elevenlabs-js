@@ -336,6 +336,7 @@ describe("AgentsClient", () => {
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
                             },
@@ -420,6 +421,7 @@ describe("AgentsClient", () => {
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
                             },
@@ -505,6 +507,7 @@ describe("AgentsClient", () => {
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
                             },
@@ -1072,6 +1075,7 @@ describe("AgentsClient", () => {
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
                             },
@@ -1178,6 +1182,7 @@ describe("AgentsClient", () => {
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
                             },
@@ -1292,6 +1297,7 @@ describe("AgentsClient", () => {
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
                             },
@@ -1782,6 +1788,7 @@ describe("AgentsClient", () => {
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
                             },
@@ -1866,6 +1873,7 @@ describe("AgentsClient", () => {
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
                             },
@@ -1951,6 +1959,7 @@ describe("AgentsClient", () => {
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
                             },
@@ -2519,6 +2528,7 @@ describe("AgentsClient", () => {
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
                             },
@@ -2625,6 +2635,7 @@ describe("AgentsClient", () => {
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
                             },
@@ -2739,6 +2750,7 @@ describe("AgentsClient", () => {
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah give me a second...",
+                                    useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
                             },

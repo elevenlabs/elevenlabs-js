@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem } from "./GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
+import { KnowledgeBaseFolderPathSegmentSummaryResponseModel } from "./KnowledgeBaseFolderPathSegmentSummaryResponseModel";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
 
 export const GetKnowledgeBaseSummaryFolderResponseModel: core.serialization.ObjectSchema<
@@ -18,6 +19,10 @@ export const GetKnowledgeBaseSummaryFolderResponseModel: core.serialization.Obje
     supportedUsages: core.serialization.property("supported_usages", core.serialization.list(DocumentUsageModeEnum)),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
     folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
+    folderPath: core.serialization.property(
+        "folder_path",
+        core.serialization.list(KnowledgeBaseFolderPathSegmentSummaryResponseModel).optional(),
+    ),
     dependentAgents: core.serialization.property(
         "dependent_agents",
         core.serialization.list(GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem),
@@ -33,6 +38,7 @@ export declare namespace GetKnowledgeBaseSummaryFolderResponseModel {
         supported_usages: DocumentUsageModeEnum.Raw[];
         access_info: ResourceAccessInfo.Raw;
         folder_parent_id?: string | null;
+        folder_path?: KnowledgeBaseFolderPathSegmentSummaryResponseModel.Raw[] | null;
         dependent_agents: GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem.Raw[];
         children_count: number;
     }

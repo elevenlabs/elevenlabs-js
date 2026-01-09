@@ -25,6 +25,7 @@ describe("SummariesClient", () => {
                         role: "admin",
                     },
                     folder_parent_id: "folder_parent_id",
+                    folder_path: [{ id: "id" }, { id: "id" }],
                     dependent_agents: [
                         {
                             type: "available",
@@ -75,6 +76,14 @@ describe("SummariesClient", () => {
                         role: "admin",
                     },
                     folderParentId: "folder_parent_id",
+                    folderPath: [
+                        {
+                            id: "id",
+                        },
+                        {
+                            id: "id",
+                        },
+                    ],
                     dependentAgents: [
                         {
                             type: "available",

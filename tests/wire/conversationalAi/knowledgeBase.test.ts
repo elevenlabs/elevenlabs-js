@@ -23,6 +23,7 @@ describe("KnowledgeBaseClient", () => {
                         role: "admin",
                     },
                     folder_parent_id: "folder_parent_id",
+                    folder_path: [{ id: "id" }],
                     dependent_agents: [
                         { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
                     ],
@@ -48,7 +49,6 @@ describe("KnowledgeBaseClient", () => {
             foldersFirst: true,
             sortDirection: "asc",
             sortBy: "name",
-            useTypesense: true,
             cursor: "cursor",
         });
         expect(response).toEqual({
@@ -70,6 +70,11 @@ describe("KnowledgeBaseClient", () => {
                         role: "admin",
                     },
                     folderParentId: "folder_parent_id",
+                    folderPath: [
+                        {
+                            id: "id",
+                        },
+                    ],
                     dependentAgents: [
                         {
                             type: "available",

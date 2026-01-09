@@ -6183,7 +6183,6 @@ await client.conversationalAi.knowledgeBase.list({
     foldersFirst: true,
     sortDirection: "asc",
     sortBy: "name",
-    useTypesense: true,
     cursor: "cursor"
 });
 
@@ -15637,6 +15636,80 @@ await client.workspace.resources.unshare("resource_id", {
 <dd>
 
 **request:** `ElevenLabs.workspace.BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIdUnsharePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ResourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.resources.<a href="/src/api/resources/workspace/resources/resources/client/Client.ts">copyToWorkspace</a>(resource_id, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Copies a workspace resource to another workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.resources.copyToWorkspace("resource_id", {
+    resourceType: "voice",
+    targetUserId: "target_user_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**resource_id:** `string` — The ID of the target resource.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.workspace.BodyCopyWorkspaceResourceToAnotherWorkspaceV1WorkspaceResourcesResourceIdCopyToWorkspacePost` 
     
 </dd>
 </dl>

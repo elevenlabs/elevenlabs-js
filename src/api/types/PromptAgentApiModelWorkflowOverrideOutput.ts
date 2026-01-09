@@ -35,6 +35,8 @@ export interface PromptAgentApiModelWorkflowOverrideOutput {
     timezone?: string;
     /** Configuration for backup LLM cascading. Can be disabled, use system defaults, or specify custom order. */
     backupLlmConfig?: ElevenLabs.PromptAgentApiModelWorkflowOverrideOutputBackupLlmConfig;
+    /** Time in seconds before cascading to backup LLM. Must be between 2 and 15 seconds. */
+    cascadeTimeoutSeconds?: number;
     /** A list of tools that the agent can use over the course of the conversation, use tool_ids instead */
     tools?: ElevenLabs.PromptAgentApiModelWorkflowOverrideOutputToolsItem[];
 }
