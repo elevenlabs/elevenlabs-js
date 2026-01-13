@@ -8,6 +8,7 @@ import { AgentPlatformSettingsResponseModel } from "./AgentPlatformSettingsRespo
 import { AgentWorkflowResponseModel } from "./AgentWorkflowResponseModel";
 import { ConversationalConfig } from "./ConversationalConfig";
 import { GetAgentResponseModelPhoneNumbersItem } from "./GetAgentResponseModelPhoneNumbersItem";
+import { GetWhatsAppAccountResponse } from "./GetWhatsAppAccountResponse";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
 
 export const GetAgentResponseModel: core.serialization.ObjectSchema<
@@ -22,6 +23,10 @@ export const GetAgentResponseModel: core.serialization.ObjectSchema<
     phoneNumbers: core.serialization.property(
         "phone_numbers",
         core.serialization.list(GetAgentResponseModelPhoneNumbersItem).optional(),
+    ),
+    whatsappAccounts: core.serialization.property(
+        "whatsapp_accounts",
+        core.serialization.list(GetWhatsAppAccountResponse).optional(),
     ),
     workflow: AgentWorkflowResponseModel.optional(),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
@@ -39,6 +44,7 @@ export declare namespace GetAgentResponseModel {
         metadata: AgentMetadataResponseModel.Raw;
         platform_settings?: AgentPlatformSettingsResponseModel.Raw | null;
         phone_numbers?: GetAgentResponseModelPhoneNumbersItem.Raw[] | null;
+        whatsapp_accounts?: GetWhatsAppAccountResponse.Raw[] | null;
         workflow?: AgentWorkflowResponseModel.Raw | null;
         access_info?: ResourceAccessInfo.Raw | null;
         tags?: string[] | null;

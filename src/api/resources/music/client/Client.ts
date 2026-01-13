@@ -47,7 +47,7 @@ export class MusicClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.MusicComposeRequestOutputFormat.jsonOrThrow(outputFormat, {
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
                 unrecognizedObjectKeys: "strip",
             });
         }
@@ -123,7 +123,7 @@ export class MusicClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.MusicComposeDetailedRequestOutputFormat.jsonOrThrow(outputFormat, {
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
                 unrecognizedObjectKeys: "strip",
             });
         }
@@ -201,7 +201,7 @@ export class MusicClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.MusicStreamRequestOutputFormat.jsonOrThrow(outputFormat, {
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
                 unrecognizedObjectKeys: "strip",
             });
         }
@@ -278,10 +278,9 @@ export class MusicClient {
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (request.outputFormat != null) {
-            _queryParams.output_format = serializers.MusicSeparateStemsRequestOutputFormat.jsonOrThrow(
-                request.outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(request.outputFormat, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         const _request = await core.newFormData();

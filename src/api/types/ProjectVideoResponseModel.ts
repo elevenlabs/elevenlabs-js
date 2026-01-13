@@ -30,6 +30,7 @@ export interface ProjectVideoResponseModel {
     pendingBlockIds: string[];
     importSpeechProgress?: number;
     speechImported?: boolean;
+    audioTrackReady?: boolean;
     currentSnapshotId?: string;
     canvasPlacement?: ElevenLabs.CanvasPlacement;
     trackId?: string;

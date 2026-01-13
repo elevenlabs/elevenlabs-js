@@ -12,6 +12,7 @@ import * as ElevenLabs from "../../../index";
 import { AudioClient } from "../resources/audio/client/Client";
 import { ResourceClient } from "../resources/resource/client/Client";
 import { TranscriptClient } from "../resources/transcript/client/Client";
+import { TranscriptsClient } from "../resources/transcripts/client/Client";
 
 export declare namespace DubbingClient {
     export type Options = BaseClientOptions;
@@ -24,6 +25,7 @@ export class DubbingClient {
     protected _resource: ResourceClient | undefined;
     protected _audio: AudioClient | undefined;
     protected _transcript: TranscriptClient | undefined;
+    protected _transcripts: TranscriptsClient | undefined;
 
     constructor(options: DubbingClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -39,6 +41,10 @@ export class DubbingClient {
 
     public get transcript(): TranscriptClient {
         return (this._transcript ??= new TranscriptClient(this._options));
+    }
+
+    public get transcripts(): TranscriptsClient {
+        return (this._transcripts ??= new TranscriptsClient(this._options));
     }
 
     /**

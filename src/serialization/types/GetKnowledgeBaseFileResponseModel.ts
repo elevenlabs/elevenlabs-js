@@ -23,6 +23,7 @@ export const GetKnowledgeBaseFileResponseModel: core.serialization.ObjectSchema<
         core.serialization.list(KnowledgeBaseFolderPathSegmentResponseModel).optional(),
     ),
     extractedInnerHtml: core.serialization.property("extracted_inner_html", core.serialization.string()),
+    filename: core.serialization.string(),
 });
 
 export declare namespace GetKnowledgeBaseFileResponseModel {
@@ -35,5 +36,6 @@ export declare namespace GetKnowledgeBaseFileResponseModel {
         folder_parent_id?: string | null;
         folder_path?: KnowledgeBaseFolderPathSegmentResponseModel.Raw[] | null;
         extracted_inner_html: string;
+        filename: string;
     }
 }

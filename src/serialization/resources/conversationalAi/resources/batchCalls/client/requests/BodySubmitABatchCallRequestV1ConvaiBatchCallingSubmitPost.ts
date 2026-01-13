@@ -16,6 +16,7 @@ export const BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost: core.ser
     scheduledTimeUnix: core.serialization.property("scheduled_time_unix", core.serialization.number().optional()),
     agentPhoneNumberId: core.serialization.property("agent_phone_number_id", core.serialization.string().optional()),
     whatsappParams: core.serialization.property("whatsapp_params", BatchCallWhatsAppParams.optional()),
+    timezone: core.serialization.string().optional(),
 });
 
 export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
@@ -26,5 +27,6 @@ export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPo
         scheduled_time_unix?: number | null;
         agent_phone_number_id?: string | null;
         whatsapp_params?: BatchCallWhatsAppParams.Raw | null;
+        timezone?: string | null;
     }
 }

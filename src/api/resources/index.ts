@@ -37,7 +37,6 @@ export * from "./textToDialogue/client/requests";
 export * from "./textToDialogue/types";
 export * as textToSoundEffects from "./textToSoundEffects";
 export * from "./textToSoundEffects/client/requests";
-export * from "./textToSoundEffects/types";
 export * as textToSpeech from "./textToSpeech";
 export * from "./textToSpeech/client/requests";
 export * from "./textToSpeech/types";

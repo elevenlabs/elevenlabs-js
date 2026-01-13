@@ -14,6 +14,7 @@ export interface BatchCallDetailedResponse {
     agentId: string;
     createdAtUnix: number;
     scheduledTimeUnix: number;
+    timezone?: string;
     totalCallsDispatched: number;
     totalCallsScheduled: number;
     totalCallsFinished: number;

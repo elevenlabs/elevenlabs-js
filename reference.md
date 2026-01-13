@@ -4327,7 +4327,8 @@ await client.conversationalAi.conversations.list({
     userId: "user_id",
     pageSize: 1,
     summaryMode: "exclude",
-    search: "search"
+    search: "search",
+    conversationInitiationSource: "unknown"
 });
 
 ```
@@ -9327,6 +9328,69 @@ await client.conversationalAi.knowledgeBase.documents.getContent("21m00Tcm4TlvDq
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getSourceFileUrl</a>(documentation_id) -> ElevenLabs.KnowledgeBaseSourceFileUrlResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a signed URL to download the original source file of a file-type document from the knowledge base
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.documents.getSourceFileUrl("21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentation_id:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DocumentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi KnowledgeBase Document
 <details><summary><code>client.conversationalAi.knowledgeBase.document.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/document/client/Client.ts">computeRagIndex</a>(documentation_id, { ...params }) -> ElevenLabs.RagDocumentIndexResponseModel</code></summary>
 <dl>
@@ -10859,7 +10923,7 @@ Returns transcript for the dub as an SRT or WEBVTT file.
 <dd>
 
 ```typescript
-await client.dubbing.transcript.getTranscriptForDub("dubbing_id", "language_code", {
+await client.dubbing.transcript.getTranscriptForDub("dubbing_id", "source", {
     formatType: "srt"
 });
 
@@ -10885,7 +10949,7 @@ await client.dubbing.transcript.getTranscriptForDub("dubbing_id", "language_code
 <dl>
 <dd>
 
-**language_code:** `string` — ID of the language.
+**language_code:** `string` — ISO-693 language code to retrieve the transcript for. Use 'source' to fetch the transcript of the original media.
     
 </dd>
 </dl>
@@ -10902,6 +10966,86 @@ await client.dubbing.transcript.getTranscriptForDub("dubbing_id", "language_code
 <dd>
 
 **requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Dubbing Transcripts
+<details><summary><code>client.dubbing.transcripts.<a href="/src/api/resources/dubbing/resources/transcripts/client/Client.ts">get</a>(dubbing_id, language_code, format_type) -> ElevenLabs.DubbingTranscriptsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fetch the transcript for one of the languages in a dub.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.transcripts.get("dubbing_id", "source", "srt");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**dubbing_id:** `string` — ID of the dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language_code:** `string` — ISO-693 language code to retrieve the transcript for. Use 'source' to fetch the transcript of the original media.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format_type:** `ElevenLabs.TranscriptsGetRequestFormatType` — Format to return transcript in. For subtitles use either 'srt' or 'webvtt', and for a full transcript use 'json'. The 'json' format is not yet supported for Dubbing Studio.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriptsClient.RequestOptions` 
     
 </dd>
 </dl>

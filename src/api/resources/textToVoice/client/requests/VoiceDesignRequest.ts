@@ -11,7 +11,7 @@ import type * as ElevenLabs from "../../../../index";
  */
 export interface VoiceDesignRequest {
     /** The output format of the generated audio. */
-    outputFormat?: ElevenLabs.TextToVoiceCreatePreviewsRequestOutputFormat;
+    outputFormat?: ElevenLabs.AllowedOutputFormats;
     /** Description to use for the created voice. */
     voiceDescription: string;
     /** Text to generate, text length has to be between 100 and 1000. */

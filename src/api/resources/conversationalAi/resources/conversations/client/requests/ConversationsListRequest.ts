@@ -18,7 +18,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *         userId: "user_id",
  *         pageSize: 1,
  *         summaryMode: "exclude",
- *         search: "search"
+ *         search: "search",
+ *         conversationInitiationSource: "unknown"
  *     }
  */
 export interface ConversationsListRequest {
@@ -58,4 +59,5 @@ export interface ConversationsListRequest {
     summaryMode?: ElevenLabs.conversationalAi.ConversationsListRequestSummaryMode;
     /** Full-text or fuzzy search over transcript messages */
     search?: string;
+    conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
 }

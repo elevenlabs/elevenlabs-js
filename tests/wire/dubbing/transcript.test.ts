@@ -14,13 +14,13 @@ describe("TranscriptClient", () => {
         };
         server
             .mockEndpoint()
-            .get("/v1/dubbing/dubbing_id/transcript/language_code")
+            .get("/v1/dubbing/dubbing_id/transcript/source")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.dubbing.transcript.getTranscriptForDub("dubbing_id", "language_code", {
+        const response = await client.dubbing.transcript.getTranscriptForDub("dubbing_id", "source", {
             formatType: "srt",
         });
         expect(response).toEqual({
