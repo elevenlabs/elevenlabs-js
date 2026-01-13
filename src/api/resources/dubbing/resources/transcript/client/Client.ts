@@ -27,7 +27,7 @@ export class TranscriptClient {
      * Returns transcript for the dub as an SRT or WEBVTT file.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
-     * @param {string} language_code - ID of the language.
+     * @param {string} language_code - ISO-693 language code to retrieve the transcript for. Use 'source' to fetch the transcript of the original media.
      * @param {ElevenLabs.dubbing.TranscriptGetTranscriptForDubRequest} request
      * @param {TranscriptClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -37,7 +37,7 @@ export class TranscriptClient {
      * @throws {@link ElevenLabs.TooEarlyError}
      *
      * @example
-     *     await client.dubbing.transcript.getTranscriptForDub("dubbing_id", "language_code", {
+     *     await client.dubbing.transcript.getTranscriptForDub("dubbing_id", "source", {
      *         formatType: "srt"
      *     })
      */

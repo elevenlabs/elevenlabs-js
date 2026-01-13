@@ -15,6 +15,8 @@ export interface GetAgentResponseModel {
     platformSettings?: ElevenLabs.AgentPlatformSettingsResponseModel;
     /** The phone numbers of the agent */
     phoneNumbers?: ElevenLabs.GetAgentResponseModelPhoneNumbersItem[];
+    /** WhatsApp accounts assigned to the agent */
+    whatsappAccounts?: ElevenLabs.GetWhatsAppAccountResponse[];
     /** The workflow of the agent */
     workflow?: ElevenLabs.AgentWorkflowResponseModel;
     /** The access information of the agent for the user */

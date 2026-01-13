@@ -41,10 +41,9 @@ export class TextToDialogueClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToDialogueConvertRequestOutputFormat.jsonOrThrow(
-                outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -120,7 +119,7 @@ export class TextToDialogueClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToDialogueStreamRequestOutputFormat.jsonOrThrow(outputFormat, {
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
                 unrecognizedObjectKeys: "strip",
             });
         }
@@ -201,10 +200,9 @@ export class TextToDialogueClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToDialogueStreamWithTimestampsRequestOutputFormat.jsonOrThrow(
-                outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -322,10 +320,9 @@ export class TextToDialogueClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToDialogueConvertWithTimestampsRequestOutputFormat.jsonOrThrow(
-                outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

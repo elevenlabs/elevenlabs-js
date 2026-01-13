@@ -57,10 +57,9 @@ export class TextToVoiceClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToVoiceCreatePreviewsRequestOutputFormat.jsonOrThrow(
-                outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -244,7 +243,7 @@ export class TextToVoiceClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToVoiceDesignRequestOutputFormat.jsonOrThrow(outputFormat, {
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
                 unrecognizedObjectKeys: "strip",
             });
         }
@@ -340,7 +339,7 @@ export class TextToVoiceClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToVoiceRemixRequestOutputFormat.jsonOrThrow(outputFormat, {
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
                 unrecognizedObjectKeys: "strip",
             });
         }

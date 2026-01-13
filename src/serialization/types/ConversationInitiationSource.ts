@@ -22,6 +22,7 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "swift_sdk",
     "whatsapp",
     "flutter_sdk",
+    "zendesk_integration",
 ]);
 
 export declare namespace ConversationInitiationSource {
@@ -39,5 +40,6 @@ export declare namespace ConversationInitiationSource {
         | "genesys"
         | "swift_sdk"
         | "whatsapp"
-        | "flutter_sdk";
+        | "flutter_sdk"
+        | "zendesk_integration";
 }

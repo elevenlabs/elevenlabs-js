@@ -41,10 +41,9 @@ export class TextToSoundEffectsClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToSoundEffectsConvertRequestOutputFormat.jsonOrThrow(
-                outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
+            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

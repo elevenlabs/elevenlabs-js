@@ -221,6 +221,17 @@ describe("AgentsClient", () => {
                     livekit_stack: "standard",
                 },
             ],
+            whatsapp_accounts: [
+                {
+                    business_account_id: "business_account_id",
+                    phone_number_id: "phone_number_id",
+                    business_account_name: "business_account_name",
+                    phone_number_name: "phone_number_name",
+                    phone_number: "phone_number",
+                    assigned_agent_id: "assigned_agent_id",
+                    assigned_agent_name: "assigned_agent_name",
+                },
+            ],
             workflow: {
                 edges: {
                     entry_to_tool_a: {
@@ -888,6 +899,17 @@ describe("AgentsClient", () => {
                         hasAuthCredentials: true,
                     },
                     livekitStack: "standard",
+                },
+            ],
+            whatsappAccounts: [
+                {
+                    businessAccountId: "business_account_id",
+                    phoneNumberId: "phone_number_id",
+                    businessAccountName: "business_account_name",
+                    phoneNumberName: "phone_number_name",
+                    phoneNumber: "phone_number",
+                    assignedAgentId: "assigned_agent_id",
+                    assignedAgentName: "assigned_agent_name",
                 },
             ],
             workflow: {
@@ -1673,6 +1695,17 @@ describe("AgentsClient", () => {
                     livekit_stack: "standard",
                 },
             ],
+            whatsapp_accounts: [
+                {
+                    business_account_id: "business_account_id",
+                    phone_number_id: "phone_number_id",
+                    business_account_name: "business_account_name",
+                    phone_number_name: "phone_number_name",
+                    phone_number: "phone_number",
+                    assigned_agent_id: "assigned_agent_id",
+                    assigned_agent_name: "assigned_agent_name",
+                },
+            ],
             workflow: {
                 edges: {
                     entry_to_tool_a: {
@@ -2341,6 +2374,17 @@ describe("AgentsClient", () => {
                         hasAuthCredentials: true,
                     },
                     livekitStack: "standard",
+                },
+            ],
+            whatsappAccounts: [
+                {
+                    businessAccountId: "business_account_id",
+                    phoneNumberId: "phone_number_id",
+                    businessAccountName: "business_account_name",
+                    phoneNumberName: "phone_number_name",
+                    phoneNumber: "phone_number",
+                    assignedAgentId: "assigned_agent_id",
+                    assignedAgentName: "assigned_agent_name",
                 },
             ],
             workflow: {

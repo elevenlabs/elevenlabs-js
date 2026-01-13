@@ -12,7 +12,6 @@ import { ConversationHistoryBatchCallModel } from "./ConversationHistoryBatchCal
 import { ConversationHistoryElevenAssistantCommonModel } from "./ConversationHistoryElevenAssistantCommonModel";
 import { ConversationHistoryErrorCommonModel } from "./ConversationHistoryErrorCommonModel";
 import { ConversationHistoryFeedbackCommonModel } from "./ConversationHistoryFeedbackCommonModel";
-import { ConversationHistoryMetadataCommonModelInitiationTrigger } from "./ConversationHistoryMetadataCommonModelInitiationTrigger";
 import { ConversationHistoryMetadataCommonModelPhoneCall } from "./ConversationHistoryMetadataCommonModelPhoneCall";
 import { ConversationHistoryRagUsageCommonModel } from "./ConversationHistoryRagUsageCommonModel";
 import { ConversationInitiationSource } from "./ConversationInitiationSource";
@@ -57,10 +56,6 @@ export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSc
         core.serialization.string().optional(),
     ),
     timezone: core.serialization.string().optional(),
-    initiationTrigger: core.serialization.property(
-        "initiation_trigger",
-        ConversationHistoryMetadataCommonModelInitiationTrigger.optional(),
-    ),
     asyncMetadata: core.serialization.property("async_metadata", AsyncConversationMetadata.optional()),
     whatsapp: WhatsAppConversationInfo.optional(),
     agentCreatedFrom: core.serialization.property("agent_created_from", AgentDefinitionSource.optional()),
@@ -91,7 +86,6 @@ export declare namespace ConversationHistoryMetadataCommonModel {
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
         conversation_initiation_source_version?: string | null;
         timezone?: string | null;
-        initiation_trigger?: ConversationHistoryMetadataCommonModelInitiationTrigger.Raw | null;
         async_metadata?: AsyncConversationMetadata.Raw | null;
         whatsapp?: WhatsAppConversationInfo.Raw | null;
         agent_created_from?: AgentDefinitionSource.Raw | null;

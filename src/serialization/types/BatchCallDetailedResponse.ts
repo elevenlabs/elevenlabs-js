@@ -20,6 +20,7 @@ export const BatchCallDetailedResponse: core.serialization.ObjectSchema<
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number()),
     scheduledTimeUnix: core.serialization.property("scheduled_time_unix", core.serialization.number()),
+    timezone: core.serialization.string().optional(),
     totalCallsDispatched: core.serialization.property("total_calls_dispatched", core.serialization.number()),
     totalCallsScheduled: core.serialization.property("total_calls_scheduled", core.serialization.number()),
     totalCallsFinished: core.serialization.property("total_calls_finished", core.serialization.number()),
@@ -40,6 +41,7 @@ export declare namespace BatchCallDetailedResponse {
         agent_id: string;
         created_at_unix: number;
         scheduled_time_unix: number;
+        timezone?: string | null;
         total_calls_dispatched: number;
         total_calls_scheduled: number;
         total_calls_finished: number;

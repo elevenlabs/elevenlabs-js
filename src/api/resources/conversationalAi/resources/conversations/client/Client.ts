@@ -241,7 +241,8 @@ export class ConversationsClient {
      *         userId: "user_id",
      *         pageSize: 1,
      *         summaryMode: "exclude",
-     *         search: "search"
+     *         search: "search",
+     *         conversationInitiationSource: "unknown"
      *     })
      */
     public list(
@@ -274,6 +275,7 @@ export class ConversationsClient {
             pageSize,
             summaryMode,
             search,
+            conversationInitiationSource,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
@@ -367,6 +369,13 @@ export class ConversationsClient {
 
         if (search != null) {
             _queryParams.search = search;
+        }
+
+        if (conversationInitiationSource != null) {
+            _queryParams.conversation_initiation_source = serializers.ConversationInitiationSource.jsonOrThrow(
+                conversationInitiationSource,
+                { unrecognizedObjectKeys: "strip" },
+            );
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

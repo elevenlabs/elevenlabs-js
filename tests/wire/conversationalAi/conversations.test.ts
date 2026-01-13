@@ -97,6 +97,7 @@ describe("ConversationsClient", () => {
             pageSize: 1,
             summaryMode: "exclude",
             search: "search",
+            conversationInitiationSource: "unknown",
         });
         expect(response).toEqual({
             conversations: [
