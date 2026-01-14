@@ -12,6 +12,7 @@ export const DubbingMetadataResponse: core.serialization.ObjectSchema<
     dubbingId: core.serialization.property("dubbing_id", core.serialization.string()),
     name: core.serialization.string(),
     status: core.serialization.string(),
+    sourceLanguage: core.serialization.property("source_language", core.serialization.string().optional()),
     targetLanguages: core.serialization.property(
         "target_languages",
         core.serialization.list(core.serialization.string()),
@@ -27,6 +28,7 @@ export declare namespace DubbingMetadataResponse {
         dubbing_id: string;
         name: string;
         status: string;
+        source_language?: string | null;
         target_languages: string[];
         editable?: boolean | null;
         created_at: string;

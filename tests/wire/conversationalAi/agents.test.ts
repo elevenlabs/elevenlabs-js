@@ -46,6 +46,7 @@ describe("AgentsClient", () => {
                     silence_end_call_timeout: -1,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah give me a second..." },
                     turn_eagerness: "normal",
+                    spelling_patience: "auto",
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -350,6 +351,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -435,6 +437,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -521,6 +524,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -659,6 +663,7 @@ describe("AgentsClient", () => {
                         message: "Hhmmmm...yeah give me a second...",
                     },
                     turnEagerness: "normal",
+                    spellingPatience: "auto",
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -1100,6 +1105,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1207,6 +1213,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1322,6 +1329,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1520,6 +1528,7 @@ describe("AgentsClient", () => {
                     silence_end_call_timeout: -1,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah give me a second..." },
                     turn_eagerness: "normal",
+                    spelling_patience: "auto",
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -1824,6 +1833,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -1909,6 +1919,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -1995,6 +2006,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -2134,6 +2146,7 @@ describe("AgentsClient", () => {
                         message: "Hhmmmm...yeah give me a second...",
                     },
                     turnEagerness: "normal",
+                    spellingPatience: "auto",
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -2575,6 +2588,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2682,6 +2696,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2797,6 +2812,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
