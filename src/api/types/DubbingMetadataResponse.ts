@@ -7,16 +7,18 @@ export interface DubbingMetadataResponse {
     dubbingId: string;
     /** The name of the dubbing project. */
     name: string;
-    /** The status of the dubbing project. Either 'dubbed', 'dubbing', 'failed', or 'cloning'. */
+    /** The state this dub is in. */
     status: string;
-    /** The target languages of the dubbing project. */
+    /** Once dubbing has completed, the ISO-639-1 code of the original media's source language. */
+    sourceLanguage?: string;
+    /** The ISO-639-1 code of the languages this media has been dubbed into. */
     targetLanguages: string[];
     /** Whether this dubbing project is editable in Dubbing Studio. */
     editable?: boolean;
     /** Timestamp this dub was created. */
     createdAt: Date;
-    /** The media metadata of the dubbing project. */
+    /** Metadata, such as the length in seconds and content type, of the dubbed content. */
     mediaMetadata?: ElevenLabs.DubbingMediaMetadata;
-    /** Optional error message if the dubbing project failed. */
+    /** Error message indicate, if this dub has failed, what happened. */
     error?: string;
 }

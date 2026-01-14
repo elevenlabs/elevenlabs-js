@@ -13,4 +13,6 @@ export interface TurnConfig {
     softTimeoutConfig?: ElevenLabs.SoftTimeoutConfig;
     /** Controls how eager the agent is to respond. Low = less eager (waits longer), Standard = default eagerness, High = more eager (responds sooner) */
     turnEagerness?: ElevenLabs.TurnEagerness;
+    /** Controls if the agent should be more patient when user is spelling numbers and named entities. Auto = model based, Off = never wait extra */
+    spellingPatience?: ElevenLabs.SpellingPatience;
 }
