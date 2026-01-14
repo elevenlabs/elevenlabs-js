@@ -38,6 +38,7 @@ describe("SubscriptionClient", () => {
                 discounts: [{ discount_percent_off: 20 }],
                 next_payment_attempt_unix: 1738356858,
                 payment_intent_status: "processing",
+                payment_intent_statusses: ["processing", "succeeded"],
             },
             open_invoices: [
                 {
@@ -49,6 +50,7 @@ describe("SubscriptionClient", () => {
                     discounts: [{ discount_percent_off: 20 }],
                     next_payment_attempt_unix: 1738356858,
                     payment_intent_status: "processing",
+                    payment_intent_statusses: ["processing", "succeeded"],
                 },
             ],
             has_open_invoices: true,
@@ -102,6 +104,7 @@ describe("SubscriptionClient", () => {
                 ],
                 nextPaymentAttemptUnix: 1738356858,
                 paymentIntentStatus: "processing",
+                paymentIntentStatusses: ["processing", "succeeded"],
             },
             openInvoices: [
                 {
@@ -117,6 +120,7 @@ describe("SubscriptionClient", () => {
                     ],
                     nextPaymentAttemptUnix: 1738356858,
                     paymentIntentStatus: "processing",
+                    paymentIntentStatusses: ["processing", "succeeded"],
                 },
             ],
             hasOpenInvoices: true,
