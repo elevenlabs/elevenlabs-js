@@ -11,6 +11,6 @@ export interface BodyEditPvcVoiceV1VoicesPvcVoiceIdPost {
     language?: string;
     /** Description to use for the created voice. */
     description?: string;
-    /** Serialized labels dictionary for the voice. */
+    /** Labels for the voice. Keys can be language, accent, gender, or age. */
     labels?: Record<string, string | undefined>;
 }

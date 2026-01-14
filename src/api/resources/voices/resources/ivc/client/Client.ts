@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../Ba
 import { type NormalizedClientOptions, normalizeClientOptions } from "../../../../../../BaseClient";
 import * as core from "../../../../../../core";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers";
+import { toJson } from "../../../../../../core/json";
 import * as environments from "../../../../../../environments";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError";
 import * as errors from "../../../../../../errors/index";
@@ -64,7 +65,15 @@ export class IvcClient {
         }
 
         if (request.labels != null) {
-            _request.append("labels", request.labels);
+            _request.append(
+                "labels",
+                (() => {
+                    const mapped = serializers.voices.IvcCreateRequestLabels.jsonOrThrow(request.labels, {
+                        unrecognizedObjectKeys: "strip",
+                    });
+                    return typeof mapped === "string" ? mapped : toJson(mapped);
+                })(),
+            );
         }
 
         const _maybeEncodedRequest = await _request.getRequest();
