@@ -19,7 +19,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *         pageSize: 1,
  *         summaryMode: "exclude",
  *         search: "search",
- *         conversationInitiationSource: "unknown"
+ *         conversationInitiationSource: "unknown",
+ *         branchId: "branch_id"
  *     }
  */
 export interface ConversationsListRequest {
@@ -60,4 +61,6 @@ export interface ConversationsListRequest {
     /** Full-text or fuzzy search over transcript messages */
     search?: string;
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
+    /** Filter conversations by branch ID. */
+    branchId?: string;
 }

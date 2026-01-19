@@ -46,7 +46,8 @@ export class ConversationsClient {
      * @example
      *     await client.conversationalAi.conversations.getSignedUrl({
      *         agentId: "21m00Tcm4TlvDq8ikWAM",
-     *         includeConversationId: true
+     *         includeConversationId: true,
+     *         branchId: "branch_id"
      *     })
      */
     public getSignedUrl(
@@ -60,11 +61,15 @@ export class ConversationsClient {
         request: ElevenLabs.conversationalAi.ConversationsGetSignedUrlRequest,
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ConversationSignedUrlResponseModel>> {
-        const { agentId, includeConversationId } = request;
+        const { agentId, includeConversationId, branchId } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams.agent_id = agentId;
         if (includeConversationId != null) {
             _queryParams.include_conversation_id = includeConversationId.toString();
+        }
+
+        if (branchId != null) {
+            _queryParams.branch_id = branchId;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -140,7 +145,8 @@ export class ConversationsClient {
      * @example
      *     await client.conversationalAi.conversations.getWebrtcToken({
      *         agentId: "21m00Tcm4TlvDq8ikWAM",
-     *         participantName: "participant_name"
+     *         participantName: "participant_name",
+     *         branchId: "branch_id"
      *     })
      */
     public getWebrtcToken(
@@ -154,11 +160,15 @@ export class ConversationsClient {
         request: ElevenLabs.conversationalAi.ConversationsGetWebrtcTokenRequest,
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.TokenResponseModel>> {
-        const { agentId, participantName } = request;
+        const { agentId, participantName, branchId } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams.agent_id = agentId;
         if (participantName != null) {
             _queryParams.participant_name = participantName;
+        }
+
+        if (branchId != null) {
+            _queryParams.branch_id = branchId;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -242,7 +252,8 @@ export class ConversationsClient {
      *         pageSize: 1,
      *         summaryMode: "exclude",
      *         search: "search",
-     *         conversationInitiationSource: "unknown"
+     *         conversationInitiationSource: "unknown",
+     *         branchId: "branch_id"
      *     })
      */
     public list(
@@ -276,6 +287,7 @@ export class ConversationsClient {
             summaryMode,
             search,
             conversationInitiationSource,
+            branchId,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
@@ -376,6 +388,10 @@ export class ConversationsClient {
                 conversationInitiationSource,
                 { unrecognizedObjectKeys: "strip" },
             );
+        }
+
+        if (branchId != null) {
+            _queryParams.branch_id = branchId;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

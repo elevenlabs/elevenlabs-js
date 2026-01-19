@@ -91,15 +91,7 @@ describe("ToolsClient", () => {
                     type: "object",
                     required: ["required"],
                     description: "description",
-                    properties: {
-                        key: {
-                            type: "string",
-                            description: "My property",
-                            is_system_provided: false,
-                            dynamic_variable: "",
-                            constant_value: "",
-                        },
-                    },
+                    properties: { key: { type: "string", description: "A user-provided message" } },
                 },
                 expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
@@ -155,10 +147,7 @@ describe("ToolsClient", () => {
                     properties: {
                         key: {
                             type: "string",
-                            description: "My property",
-                            isSystemProvided: false,
-                            dynamicVariable: "",
-                            constantValue: "",
+                            description: "A user-provided message",
                         },
                     },
                 },
@@ -203,15 +192,7 @@ describe("ToolsClient", () => {
                     type: "object",
                     required: ["required"],
                     description: "description",
-                    properties: {
-                        key: {
-                            type: "string",
-                            description: "My property",
-                            is_system_provided: false,
-                            dynamic_variable: "",
-                            constant_value: "",
-                        },
-                    },
+                    properties: { key: { type: "string", description: "A user-provided message" } },
                 },
                 expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
@@ -259,10 +240,7 @@ describe("ToolsClient", () => {
                     properties: {
                         key: {
                             type: "string",
-                            description: "My property",
-                            isSystemProvided: false,
-                            dynamicVariable: "",
-                            constantValue: "",
+                            description: "A user-provided message",
                         },
                     },
                 },
@@ -328,15 +306,7 @@ describe("ToolsClient", () => {
                     type: "object",
                     required: ["required"],
                     description: "description",
-                    properties: {
-                        key: {
-                            type: "string",
-                            description: "My property",
-                            is_system_provided: false,
-                            dynamic_variable: "",
-                            constant_value: "",
-                        },
-                    },
+                    properties: { key: { type: "string", description: "A user-provided message" } },
                 },
                 expects_response: false,
                 dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
@@ -392,10 +362,7 @@ describe("ToolsClient", () => {
                     properties: {
                         key: {
                             type: "string",
-                            description: "My property",
-                            isSystemProvided: false,
-                            dynamicVariable: "",
-                            constantValue: "",
+                            description: "A user-provided message",
                         },
                     },
                 },

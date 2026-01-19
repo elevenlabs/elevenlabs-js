@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { CaptionStyleModel } from "./CaptionStyleModel";
 import { ChapterResponse } from "./ChapterResponse";
+import { DirectPublishingReadResponseModel } from "./DirectPublishingReadResponseModel";
 import { ProjectCreationMetaResponseModel } from "./ProjectCreationMetaResponseModel";
 import { ProjectExtendedResponseModelAccessLevel } from "./ProjectExtendedResponseModelAccessLevel";
 import { ProjectExtendedResponseModelApplyTextNormalization } from "./ProjectExtendedResponseModelApplyTextNormalization";
@@ -87,6 +88,7 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     assets: core.serialization.list(ProjectExtendedResponseModelAssetsItem),
     voices: core.serialization.list(ProjectVoiceResponseModel),
     baseVoices: core.serialization.property("base_voices", core.serialization.list(Voice).optional()),
+    publishingRead: core.serialization.property("publishing_read", DirectPublishingReadResponseModel.optional()),
 });
 
 export declare namespace ProjectExtendedResponse {
@@ -133,5 +135,6 @@ export declare namespace ProjectExtendedResponse {
         assets: ProjectExtendedResponseModelAssetsItem.Raw[];
         voices: ProjectVoiceResponseModel.Raw[];
         base_voices?: Voice.Raw[] | null;
+        publishing_read?: DirectPublishingReadResponseModel.Raw | null;
     }
 }

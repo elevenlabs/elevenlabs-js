@@ -5,12 +5,17 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { PositionInput } from "./PositionInput";
 import { TransferTypeEnum } from "./TransferTypeEnum";
+import { WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem } from "./WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem";
 import { WorkflowPhoneNumberNodeModelInputTransferDestination } from "./WorkflowPhoneNumberNodeModelInputTransferDestination";
 
 export const WorkflowPhoneNumberNodeModelInput: core.serialization.ObjectSchema<
     serializers.WorkflowPhoneNumberNodeModelInput.Raw,
     ElevenLabs.WorkflowPhoneNumberNodeModelInput
 > = core.serialization.object({
+    customSipHeaders: core.serialization.property(
+        "custom_sip_headers",
+        core.serialization.list(WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem).optional(),
+    ),
     position: PositionInput.optional(),
     edgeOrder: core.serialization.property(
         "edge_order",
@@ -25,6 +30,7 @@ export const WorkflowPhoneNumberNodeModelInput: core.serialization.ObjectSchema<
 
 export declare namespace WorkflowPhoneNumberNodeModelInput {
     export interface Raw {
+        custom_sip_headers?: WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem.Raw[] | null;
         position?: PositionInput.Raw | null;
         edge_order?: string[] | null;
         transfer_destination: WorkflowPhoneNumberNodeModelInputTransferDestination.Raw;

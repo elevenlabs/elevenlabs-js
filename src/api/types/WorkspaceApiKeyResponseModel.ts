@@ -9,7 +9,8 @@ export interface WorkspaceApiKeyResponseModel {
     serviceAccountUserId: string;
     createdAtUnix?: number;
     isDisabled?: boolean;
-    permissions?: ElevenLabs.WorkspaceApiKeyResponseModelPermissionsItem[];
+    permissions?: ElevenLabs.PermissionType[];
     characterLimit?: number;
     characterCount?: number;
+    hashedXiApiKey: string;
 }

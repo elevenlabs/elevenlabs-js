@@ -3,5 +3,6 @@
 export const DubbingModel = {
     DubbingV2: "dubbing_v2",
     DubbingV3: "dubbing_v3",
+    DubbingE2EV1: "dubbing_e2e_v1",
 } as const;
 export type DubbingModel = (typeof DubbingModel)[keyof typeof DubbingModel];

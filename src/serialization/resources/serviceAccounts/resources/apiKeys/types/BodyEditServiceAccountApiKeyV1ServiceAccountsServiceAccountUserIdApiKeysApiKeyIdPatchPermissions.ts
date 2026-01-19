@@ -3,20 +3,16 @@
 import type * as ElevenLabs from "../../../../../../api/index";
 import * as core from "../../../../../../core";
 import type * as serializers from "../../../../../index";
-import { BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissionsZeroItem } from "./BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissionsZeroItem";
+import { PermissionType } from "../../../../../types/PermissionType";
 
 export const BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissions: core.serialization.Schema<
     serializers.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissions.Raw,
     ElevenLabs.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissions
 > = core.serialization.undiscriminatedUnion([
-    core.serialization.list(
-        BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissionsZeroItem,
-    ),
+    core.serialization.list(PermissionType),
     core.serialization.stringLiteral("all"),
 ]);
 
 export declare namespace BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissions {
-    export type Raw =
-        | BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissionsZeroItem.Raw[]
-        | "all";
+    export type Raw = PermissionType.Raw[] | "all";
 }

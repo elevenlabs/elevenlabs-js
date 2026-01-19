@@ -20,6 +20,7 @@ describe("ApiKeysClient", () => {
                     permissions: ["text_to_speech"],
                     character_limit: 1,
                     character_count: 1,
+                    hashed_xi_api_key: "hashed_xi_api_key",
                 },
             ],
         };
@@ -44,6 +45,7 @@ describe("ApiKeysClient", () => {
                     permissions: ["text_to_speech"],
                     characterLimit: 1,
                     characterCount: 1,
+                    hashedXiApiKey: "hashed_xi_api_key",
                 },
             ],
         });

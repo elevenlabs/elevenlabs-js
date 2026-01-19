@@ -42,7 +42,7 @@ export class SpeechToTextClient {
      *     import { createReadStream } from "fs";
      *     await client.speechToText.convert({
      *         enableLogging: true,
-     *         modelId: "model_id"
+     *         modelId: "scribe_v1"
      *     })
      */
     public convert(
@@ -62,7 +62,12 @@ export class SpeechToTextClient {
         }
 
         const _request = await core.newFormData();
-        _request.append("model_id", request.modelId);
+        _request.append(
+            "model_id",
+            serializers.SpeechToTextConvertRequestModelId.jsonOrThrow(request.modelId, {
+                unrecognizedObjectKeys: "strip",
+            }),
+        );
         if (request.file != null) {
             await _request.appendFile("file", request.file);
         }

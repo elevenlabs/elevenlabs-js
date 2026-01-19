@@ -3,6 +3,8 @@
 import type * as ElevenLabs from "../index";
 
 export interface WorkflowPhoneNumberNodeModelOutput {
+    /** Custom SIP headers to include when transferring the call. Each header can be either a static value or a dynamic variable reference. */
+    customSipHeaders: ElevenLabs.WorkflowPhoneNumberNodeModelOutputCustomSipHeadersItem[];
     /** Position of the node in the workflow. */
     position: ElevenLabs.PositionOutput;
     /** The ids of outgoing edges in the order they should be evaluated. */

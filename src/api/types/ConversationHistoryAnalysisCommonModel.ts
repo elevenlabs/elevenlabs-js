@@ -5,6 +5,8 @@ import type * as ElevenLabs from "../index";
 export interface ConversationHistoryAnalysisCommonModel {
     evaluationCriteriaResults?: Record<string, ElevenLabs.ConversationHistoryEvaluationCriteriaResultCommonModel>;
     dataCollectionResults?: Record<string, ElevenLabs.DataCollectionResultCommonModel>;
+    evaluationCriteriaResultsList?: ElevenLabs.ConversationHistoryEvaluationCriteriaResultCommonModel[];
+    dataCollectionResultsList?: ElevenLabs.DataCollectionResultCommonModel[];
     callSuccessful: ElevenLabs.EvaluationSuccessResult;
     transcriptSummary: string;
     callSummaryTitle?: string;

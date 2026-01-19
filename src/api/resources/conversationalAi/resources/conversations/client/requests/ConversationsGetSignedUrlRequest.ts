@@ -4,7 +4,8 @@
  * @example
  *     {
  *         agentId: "21m00Tcm4TlvDq8ikWAM",
- *         includeConversationId: true
+ *         includeConversationId: true,
+ *         branchId: "branch_id"
  *     }
  */
 export interface ConversationsGetSignedUrlRequest {
@@ -12,4 +13,6 @@ export interface ConversationsGetSignedUrlRequest {
     agentId: string;
     /** Whether to include a conversation_id with the response. If included, the conversation_signature cannot be used again. */
     includeConversationId?: boolean;
+    /** The ID of the branch to use */
+    branchId?: string;
 }

@@ -4,7 +4,8 @@
  * @example
  *     {
  *         agentId: "21m00Tcm4TlvDq8ikWAM",
- *         participantName: "participant_name"
+ *         participantName: "participant_name",
+ *         branchId: "branch_id"
  *     }
  */
 export interface ConversationsGetWebrtcTokenRequest {
@@ -12,4 +13,6 @@ export interface ConversationsGetWebrtcTokenRequest {
     agentId: string;
     /** Optional custom participant name. If not provided, user ID will be used */
     participantName?: string;
+    /** The ID of the branch to use */
+    branchId?: string;
 }
