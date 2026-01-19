@@ -265,6 +265,16 @@ describe("BatchCallsClient", () => {
         });
     });
 
+    test("delete", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        server.mockEndpoint().delete("/v1/convai/batch-calling/batch_id").respondWith().statusCode(200).build();
+
+        const response = await client.conversationalAi.batchCalls.delete("batch_id");
+        expect(response).toEqual(undefined);
+    });
+
     test("cancel", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

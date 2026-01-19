@@ -12,6 +12,7 @@ import * as ElevenLabs from "../../../../../index";
 import { KnowledgeBaseClient } from "../resources/knowledgeBase/client/Client";
 import { LinkClient } from "../resources/link/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
+import { SummariesClient } from "../resources/summaries/client/Client";
 import { WidgetClient } from "../resources/widget/client/Client";
 
 export declare namespace AgentsClient {
@@ -22,6 +23,7 @@ export declare namespace AgentsClient {
 
 export class AgentsClient {
     protected readonly _options: NormalizedClientOptions<AgentsClient.Options>;
+    protected _summaries: SummariesClient | undefined;
     protected _widget: WidgetClient | undefined;
     protected _link: LinkClient | undefined;
     protected _knowledgeBase: KnowledgeBaseClient | undefined;
@@ -29,6 +31,10 @@ export class AgentsClient {
 
     constructor(options: AgentsClient.Options = {}) {
         this._options = normalizeClientOptions(options);
+    }
+
+    public get summaries(): SummariesClient {
+        return (this._summaries ??= new SummariesClient(this._options));
     }
 
     public get widget(): WidgetClient {

@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { KnowledgeBaseFolderPathSegmentSummaryResponseModel } from "./KnowledgeBaseFolderPathSegmentSummaryResponseModel";
 
 export const AddKnowledgeBaseResponseModel: core.serialization.ObjectSchema<
     serializers.AddKnowledgeBaseResponseModel.Raw,
@@ -10,11 +11,16 @@ export const AddKnowledgeBaseResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     id: core.serialization.string(),
     name: core.serialization.string(),
+    folderPath: core.serialization.property(
+        "folder_path",
+        core.serialization.list(KnowledgeBaseFolderPathSegmentSummaryResponseModel).optional(),
+    ),
 });
 
 export declare namespace AddKnowledgeBaseResponseModel {
     export interface Raw {
         id: string;
         name: string;
+        folder_path?: KnowledgeBaseFolderPathSegmentSummaryResponseModel.Raw[] | null;
     }
 }

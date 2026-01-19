@@ -46,6 +46,7 @@ describe("AgentsClient", () => {
                     silence_end_call_timeout: -1,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah give me a second..." },
                     turn_eagerness: "normal",
+                    spelling_patience: "auto",
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -153,15 +154,7 @@ describe("AgentsClient", () => {
                     custom_avatar_path: "https://example.com/avatar.png",
                     language_presets: { key: {} },
                 },
-                data_collection: {
-                    key: {
-                        type: "string",
-                        description: "My property",
-                        is_system_provided: false,
-                        dynamic_variable: "",
-                        constant_value: "",
-                    },
-                },
+                data_collection: { key: { type: "string", description: "A user-provided message" } },
                 overrides: {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
@@ -350,6 +343,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -435,6 +429,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -521,6 +516,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -591,6 +587,7 @@ describe("AgentsClient", () => {
                     success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_phone: {
                         type: "phone_number",
+                        custom_sip_headers: [{ type: "dynamic", key: "key", value: "value" }],
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
@@ -659,6 +656,7 @@ describe("AgentsClient", () => {
                         message: "Hhmmmm...yeah give me a second...",
                     },
                     turnEagerness: "normal",
+                    spellingPatience: "auto",
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -811,10 +809,7 @@ describe("AgentsClient", () => {
                 dataCollection: {
                     key: {
                         type: "string",
-                        description: "My property",
-                        isSystemProvided: false,
-                        dynamicVariable: "",
-                        constantValue: "",
+                        description: "A user-provided message",
                     },
                 },
                 overrides: {
@@ -1100,6 +1095,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1207,6 +1203,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1322,6 +1319,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1421,6 +1419,13 @@ describe("AgentsClient", () => {
                     },
                     success_phone: {
                         type: "phone_number",
+                        customSipHeaders: [
+                            {
+                                type: "dynamic",
+                                key: "key",
+                                value: "value",
+                            },
+                        ],
                         position: {
                             x: 1.1,
                             y: 1.1,
@@ -1520,6 +1525,7 @@ describe("AgentsClient", () => {
                     silence_end_call_timeout: -1,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah give me a second..." },
                     turn_eagerness: "normal",
+                    spelling_patience: "auto",
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -1627,15 +1633,7 @@ describe("AgentsClient", () => {
                     custom_avatar_path: "https://example.com/avatar.png",
                     language_presets: { key: {} },
                 },
-                data_collection: {
-                    key: {
-                        type: "string",
-                        description: "My property",
-                        is_system_provided: false,
-                        dynamic_variable: "",
-                        constant_value: "",
-                    },
-                },
+                data_collection: { key: { type: "string", description: "A user-provided message" } },
                 overrides: {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
@@ -1824,6 +1822,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -1909,6 +1908,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -1995,6 +1995,7 @@ describe("AgentsClient", () => {
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
+                                spelling_patience: "auto",
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -2065,6 +2066,7 @@ describe("AgentsClient", () => {
                     success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_phone: {
                         type: "phone_number",
+                        custom_sip_headers: [{ type: "dynamic", key: "key", value: "value" }],
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
@@ -2134,6 +2136,7 @@ describe("AgentsClient", () => {
                         message: "Hhmmmm...yeah give me a second...",
                     },
                     turnEagerness: "normal",
+                    spellingPatience: "auto",
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -2286,10 +2289,7 @@ describe("AgentsClient", () => {
                 dataCollection: {
                     key: {
                         type: "string",
-                        description: "My property",
-                        isSystemProvided: false,
-                        dynamicVariable: "",
-                        constantValue: "",
+                        description: "A user-provided message",
                     },
                 },
                 overrides: {
@@ -2575,6 +2575,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2682,6 +2683,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2797,6 +2799,7 @@ describe("AgentsClient", () => {
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
+                                spellingPatience: "auto",
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2896,6 +2899,13 @@ describe("AgentsClient", () => {
                     },
                     success_phone: {
                         type: "phone_number",
+                        customSipHeaders: [
+                            {
+                                type: "dynamic",
+                                key: "key",
+                                value: "value",
+                            },
+                        ],
                         position: {
                             x: 1.1,
                             y: 1.1,
@@ -3094,16 +3104,20 @@ describe("AgentsClient", () => {
                 data_collection_results: {
                     key: {
                         data_collection_id: "data_collection_id",
-                        json_schema: {
-                            type: "string",
-                            description: "My property",
-                            is_system_provided: false,
-                            dynamic_variable: "",
-                            constant_value: "",
-                        },
+                        json_schema: { type: "string", description: "A user-provided message" },
                         rationale: "rationale",
                     },
                 },
+                evaluation_criteria_results_list: [
+                    { criteria_id: "criteria_id", result: "success", rationale: "rationale" },
+                ],
+                data_collection_results_list: [
+                    {
+                        data_collection_id: "data_collection_id",
+                        json_schema: { type: "string", description: "A user-provided message" },
+                        rationale: "rationale",
+                    },
+                ],
                 call_successful: "success",
                 transcript_summary: "transcript_summary",
                 call_summary_title: "call_summary_title",
@@ -3198,14 +3212,28 @@ describe("AgentsClient", () => {
                         dataCollectionId: "data_collection_id",
                         jsonSchema: {
                             type: "string",
-                            description: "My property",
-                            isSystemProvided: false,
-                            dynamicVariable: "",
-                            constantValue: "",
+                            description: "A user-provided message",
                         },
                         rationale: "rationale",
                     },
                 },
+                evaluationCriteriaResultsList: [
+                    {
+                        criteriaId: "criteria_id",
+                        result: "success",
+                        rationale: "rationale",
+                    },
+                ],
+                dataCollectionResultsList: [
+                    {
+                        dataCollectionId: "data_collection_id",
+                        jsonSchema: {
+                            type: "string",
+                            description: "A user-provided message",
+                        },
+                        rationale: "rationale",
+                    },
+                ],
                 callSuccessful: "success",
                 transcriptSummary: "transcript_summary",
                 callSummaryTitle: "call_summary_title",

@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { DiscountResponseModel } from "./DiscountResponseModel";
 import { InvoiceResponseModelPaymentIntentStatus } from "./InvoiceResponseModelPaymentIntentStatus";
+import { InvoiceResponseModelPaymentIntentStatussesItem } from "./InvoiceResponseModelPaymentIntentStatussesItem";
 
 export const InvoiceResponse: core.serialization.ObjectSchema<
     serializers.InvoiceResponse.Raw,
@@ -21,6 +22,10 @@ export const InvoiceResponse: core.serialization.ObjectSchema<
         "payment_intent_status",
         InvoiceResponseModelPaymentIntentStatus.optional(),
     ),
+    paymentIntentStatusses: core.serialization.property(
+        "payment_intent_statusses",
+        core.serialization.list(InvoiceResponseModelPaymentIntentStatussesItem),
+    ),
 });
 
 export declare namespace InvoiceResponse {
@@ -33,5 +38,6 @@ export declare namespace InvoiceResponse {
         discounts: DiscountResponseModel.Raw[];
         next_payment_attempt_unix: number;
         payment_intent_status?: InvoiceResponseModelPaymentIntentStatus.Raw | null;
+        payment_intent_statusses: InvoiceResponseModelPaymentIntentStatussesItem.Raw[];
     }
 }

@@ -20,6 +20,7 @@ describe("ConversationsClient", () => {
         const response = await client.conversationalAi.conversations.getSignedUrl({
             agentId: "21m00Tcm4TlvDq8ikWAM",
             includeConversationId: true,
+            branchId: "branch_id",
         });
         expect(response).toEqual({
             signedUrl: "signed_url",
@@ -42,6 +43,7 @@ describe("ConversationsClient", () => {
         const response = await client.conversationalAi.conversations.getWebrtcToken({
             agentId: "21m00Tcm4TlvDq8ikWAM",
             participantName: "participant_name",
+            branchId: "branch_id",
         });
         expect(response).toEqual({
             token: "token",
@@ -98,6 +100,7 @@ describe("ConversationsClient", () => {
             summaryMode: "exclude",
             search: "search",
             conversationInitiationSource: "unknown",
+            branchId: "branch_id",
         });
         expect(response).toEqual({
             conversations: [

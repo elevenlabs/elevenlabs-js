@@ -87,4 +87,6 @@ export interface ProjectExtendedResponse {
     voices: ElevenLabs.ProjectVoiceResponseModel[];
     /** List of voices used by the project. */
     baseVoices?: ElevenLabs.Voice[];
+    /** The ElevenReader data if the book was published. */
+    publishingRead?: ElevenLabs.DirectPublishingReadResponseModel;
 }

@@ -628,7 +628,7 @@ Generate speech from text with precise character-level timing information for au
 await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
     enableLogging: true,
     optimizeStreamingLatency: 1,
-    outputFormat: "mp3_22050_32",
+    outputFormat: "alaw_8000",
     text: "This is a test for the API of ElevenLabs."
 });
 
@@ -3604,7 +3604,7 @@ Transcribe an audio or video file. If webhook is set to true, the request will b
 ```typescript
 await client.speechToText.convert({
     enableLogging: true,
-    modelId: "model_id"
+    modelId: "scribe_v1"
 });
 
 ```
@@ -4183,7 +4183,8 @@ Get a signed url to start a conversation with an agent with an agent that requir
 ```typescript
 await client.conversationalAi.conversations.getSignedUrl({
     agentId: "21m00Tcm4TlvDq8ikWAM",
-    includeConversationId: true
+    includeConversationId: true,
+    branchId: "branch_id"
 });
 
 ```
@@ -4249,7 +4250,8 @@ Get a WebRTC session token for real-time communication.
 ```typescript
 await client.conversationalAi.conversations.getWebrtcToken({
     agentId: "21m00Tcm4TlvDq8ikWAM",
-    participantName: "participant_name"
+    participantName: "participant_name",
+    branchId: "branch_id"
 });
 
 ```
@@ -4328,7 +4330,8 @@ await client.conversationalAi.conversations.list({
     pageSize: 1,
     summaryMode: "exclude",
     search: "search",
-    conversationInitiationSource: "unknown"
+    conversationInitiationSource: "unknown",
+    branchId: "branch_id"
 });
 
 ```
@@ -7269,6 +7272,69 @@ await client.conversationalAi.batchCalls.get("batch_id");
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">delete</a>(batch_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Permanently delete a batch call and all recipient records. Conversations remain in history.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.batchCalls.delete("batch_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**batch_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BatchCallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">cancel</a>(batch_id) -> ElevenLabs.BatchCallResponse</code></summary>
 <dl>
 <dd>
@@ -8093,6 +8159,70 @@ await client.conversationalAi.whatsappAccounts.update("phone_number_id");
 <dd>
 
 **requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Agents Summaries
+<details><summary><code>client.conversationalAi.agents.summaries.<a href="/src/api/resources/conversationalAi/resources/agents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record<string, ElevenLabs.SummariesGetResponseValue></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns summaries for the specified agents.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.summaries.get();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.SummariesGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SummariesClient.RequestOptions` 
     
 </dd>
 </dl>

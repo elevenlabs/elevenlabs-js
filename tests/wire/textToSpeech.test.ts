@@ -33,7 +33,7 @@ describe("TextToSpeechClient", () => {
         const response = await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
             enableLogging: true,
             optimizeStreamingLatency: 1,
-            outputFormat: "mp3_22050_32",
+            outputFormat: "alaw_8000",
             text: "This is a test for the API of ElevenLabs.",
         });
         expect(response).toEqual({

@@ -3,6 +3,8 @@
 import type * as ElevenLabs from "../index";
 
 export interface PhoneNumberTransfer {
+    /** Custom SIP headers to include when transferring the call. Each header can be either a static value or a dynamic variable reference. */
+    customSipHeaders?: ElevenLabs.PhoneNumberTransferCustomSipHeadersItem[];
     transferDestination?: ElevenLabs.PhoneNumberTransferTransferDestination;
     phoneNumber?: string;
     condition: string;

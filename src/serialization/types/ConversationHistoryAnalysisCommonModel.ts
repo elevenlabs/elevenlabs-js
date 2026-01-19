@@ -21,6 +21,14 @@ export const ConversationHistoryAnalysisCommonModel: core.serialization.ObjectSc
         "data_collection_results",
         core.serialization.record(core.serialization.string(), DataCollectionResultCommonModel).optional(),
     ),
+    evaluationCriteriaResultsList: core.serialization.property(
+        "evaluation_criteria_results_list",
+        core.serialization.list(ConversationHistoryEvaluationCriteriaResultCommonModel).optional(),
+    ),
+    dataCollectionResultsList: core.serialization.property(
+        "data_collection_results_list",
+        core.serialization.list(DataCollectionResultCommonModel).optional(),
+    ),
     callSuccessful: core.serialization.property("call_successful", EvaluationSuccessResult),
     transcriptSummary: core.serialization.property("transcript_summary", core.serialization.string()),
     callSummaryTitle: core.serialization.property("call_summary_title", core.serialization.string().optional()),
@@ -30,6 +38,8 @@ export declare namespace ConversationHistoryAnalysisCommonModel {
     export interface Raw {
         evaluation_criteria_results?: Record<string, ConversationHistoryEvaluationCriteriaResultCommonModel.Raw> | null;
         data_collection_results?: Record<string, DataCollectionResultCommonModel.Raw> | null;
+        evaluation_criteria_results_list?: ConversationHistoryEvaluationCriteriaResultCommonModel.Raw[] | null;
+        data_collection_results_list?: DataCollectionResultCommonModel.Raw[] | null;
         call_successful: EvaluationSuccessResult.Raw;
         transcript_summary: string;
         call_summary_title?: string | null;

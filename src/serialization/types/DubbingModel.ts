@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const DubbingModel: core.serialization.Schema<serializers.DubbingModel.Raw, ElevenLabs.DubbingModel> =
-    core.serialization.enum_(["dubbing_v2", "dubbing_v3"]);
+    core.serialization.enum_(["dubbing_v2", "dubbing_v3", "dubbing_e2e_v1"]);
 
 export declare namespace DubbingModel {
-    export type Raw = "dubbing_v2" | "dubbing_v3";
+    export type Raw = "dubbing_v2" | "dubbing_v3" | "dubbing_e2e_v1";
 }

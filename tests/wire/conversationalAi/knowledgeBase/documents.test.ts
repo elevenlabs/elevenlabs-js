@@ -8,7 +8,7 @@ describe("DocumentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { url: "url" };
-        const rawResponseBody = { id: "id", name: "name" };
+        const rawResponseBody = { id: "id", name: "name", folder_path: [{ id: "id" }] };
         server
             .mockEndpoint()
             .post("/v1/convai/knowledge-base/url")
@@ -24,6 +24,11 @@ describe("DocumentsClient", () => {
         expect(response).toEqual({
             id: "id",
             name: "name",
+            folderPath: [
+                {
+                    id: "id",
+                },
+            ],
         });
     });
 
@@ -31,7 +36,7 @@ describe("DocumentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { text: "text" };
-        const rawResponseBody = { id: "id", name: "name" };
+        const rawResponseBody = { id: "id", name: "name", folder_path: [{ id: "id" }] };
         server
             .mockEndpoint()
             .post("/v1/convai/knowledge-base/text")
@@ -47,6 +52,11 @@ describe("DocumentsClient", () => {
         expect(response).toEqual({
             id: "id",
             name: "name",
+            folderPath: [
+                {
+                    id: "id",
+                },
+            ],
         });
     });
 
