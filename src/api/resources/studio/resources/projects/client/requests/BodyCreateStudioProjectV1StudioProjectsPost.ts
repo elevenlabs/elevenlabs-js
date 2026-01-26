@@ -145,4 +145,6 @@ export interface BodyCreateStudioProjectV1StudioProjectsPost {
      *
      */
     voiceSettings?: string[];
+    /** If true, creates a corresponding read for direct publishing in draft state */
+    createPublishingRead?: boolean;
 }

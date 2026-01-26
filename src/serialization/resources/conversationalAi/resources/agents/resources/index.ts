@@ -1,3 +1,9 @@
+export * as branches from "./branches";
+export * from "./branches/client/requests";
+export * as deployments from "./deployments";
+export * from "./deployments/client/requests";
+export * as drafts from "./drafts";
+export * from "./drafts/client/requests";
 export * as llmUsage from "./llmUsage";
 export * from "./llmUsage/client/requests";
 export * as summaries from "./summaries";

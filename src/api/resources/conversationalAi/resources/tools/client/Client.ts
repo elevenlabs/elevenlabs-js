@@ -26,20 +26,70 @@ export class ToolsClient {
     /**
      * Get all available tools in the workspace.
      *
+     * @param {ElevenLabs.conversationalAi.ToolsListRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.tools.list()
+     *     await client.conversationalAi.tools.list({
+     *         search: "search",
+     *         pageSize: 1,
+     *         showOnlyOwnedDocuments: true,
+     *         sortDirection: "asc",
+     *         sortBy: "name",
+     *         cursor: "cursor"
+     *     })
      */
-    public list(requestOptions?: ToolsClient.RequestOptions): core.HttpResponsePromise<ElevenLabs.ToolsResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
+    public list(
+        request: ElevenLabs.conversationalAi.ToolsListRequest = {},
+        requestOptions?: ToolsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.ToolsResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
     private async __list(
+        request: ElevenLabs.conversationalAi.ToolsListRequest = {},
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ToolsResponseModel>> {
+        const { search, pageSize, showOnlyOwnedDocuments, types, sortDirection, sortBy, cursor } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (search != null) {
+            _queryParams.search = search;
+        }
+
+        if (pageSize != null) {
+            _queryParams.page_size = pageSize.toString();
+        }
+
+        if (showOnlyOwnedDocuments != null) {
+            _queryParams.show_only_owned_documents = showOnlyOwnedDocuments.toString();
+        }
+
+        if (types != null) {
+            if (Array.isArray(types)) {
+                _queryParams.types = types.map((item) =>
+                    serializers.ToolTypeFilter.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
+                );
+            } else {
+                _queryParams.types = serializers.ToolTypeFilter.jsonOrThrow(types, { unrecognizedObjectKeys: "strip" });
+            }
+        }
+
+        if (sortDirection != null) {
+            _queryParams.sort_direction = serializers.SortDirection.jsonOrThrow(sortDirection, {
+                unrecognizedObjectKeys: "strip",
+            });
+        }
+
+        if (sortBy != null) {
+            _queryParams.sort_by = serializers.ToolSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" });
+        }
+
+        if (cursor != null) {
+            _queryParams.cursor = cursor;
+        }
+
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -54,7 +104,7 @@ export class ToolsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

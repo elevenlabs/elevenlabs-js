@@ -29,10 +29,19 @@ describe("ToolsClient", () => {
                     usage_stats: { avg_latency_secs: 1.1 },
                 },
             ],
+            next_cursor: "next_cursor",
+            has_more: true,
         };
         server.mockEndpoint().get("/v1/convai/tools").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.conversationalAi.tools.list();
+        const response = await client.conversationalAi.tools.list({
+            search: "search",
+            pageSize: 1,
+            showOnlyOwnedDocuments: true,
+            sortDirection: "asc",
+            sortBy: "name",
+            cursor: "cursor",
+        });
         expect(response).toEqual({
             tools: [
                 {
@@ -66,6 +75,8 @@ describe("ToolsClient", () => {
                     },
                 },
             ],
+            nextCursor: "next_cursor",
+            hasMore: true,
         });
     });
 

@@ -9,6 +9,9 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index";
 import * as serializers from "../../../../../../serialization/index";
 import * as ElevenLabs from "../../../../../index";
+import { BranchesClient } from "../resources/branches/client/Client";
+import { DeploymentsClient } from "../resources/deployments/client/Client";
+import { DraftsClient } from "../resources/drafts/client/Client";
 import { KnowledgeBaseClient } from "../resources/knowledgeBase/client/Client";
 import { LinkClient } from "../resources/link/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
@@ -28,6 +31,9 @@ export class AgentsClient {
     protected _link: LinkClient | undefined;
     protected _knowledgeBase: KnowledgeBaseClient | undefined;
     protected _llmUsage: LlmUsageClient | undefined;
+    protected _branches: BranchesClient | undefined;
+    protected _deployments: DeploymentsClient | undefined;
+    protected _drafts: DraftsClient | undefined;
 
     constructor(options: AgentsClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -51,6 +57,18 @@ export class AgentsClient {
 
     public get llmUsage(): LlmUsageClient {
         return (this._llmUsage ??= new LlmUsageClient(this._options));
+    }
+
+    public get branches(): BranchesClient {
+        return (this._branches ??= new BranchesClient(this._options));
+    }
+
+    public get deployments(): DeploymentsClient {
+        return (this._deployments ??= new DeploymentsClient(this._options));
+    }
+
+    public get drafts(): DraftsClient {
+        return (this._drafts ??= new DraftsClient(this._options));
     }
 
     /**

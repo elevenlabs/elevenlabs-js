@@ -16,6 +16,7 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModel: core.seri
     isError: core.serialization.property("is_error", core.serialization.boolean()),
     toolHasBeenCalled: core.serialization.property("tool_has_been_called", core.serialization.boolean()),
     toolLatencySecs: core.serialization.property("tool_latency_secs", core.serialization.number().optional()),
+    errorType: core.serialization.property("error_type", core.serialization.string().optional()),
     dynamicVariableUpdates: core.serialization.property(
         "dynamic_variable_updates",
         core.serialization.list(DynamicVariableUpdateCommonModel).optional(),
@@ -32,6 +33,7 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
         is_error: boolean;
         tool_has_been_called: boolean;
         tool_latency_secs?: number | null;
+        error_type?: string | null;
         dynamic_variable_updates?: DynamicVariableUpdateCommonModel.Raw[] | null;
         type: "system";
         result?: ConversationHistoryTranscriptSystemToolResultCommonModelResult.Raw | null;

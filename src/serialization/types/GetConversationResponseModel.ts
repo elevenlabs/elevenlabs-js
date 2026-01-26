@@ -14,6 +14,7 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.GetConversationResponseModel
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string()),
+    agentName: core.serialization.property("agent_name", core.serialization.string().optional()),
     conversationId: core.serialization.property("conversation_id", core.serialization.string()),
     status: GetConversationResponseModelStatus,
     userId: core.serialization.property("user_id", core.serialization.string().optional()),
@@ -34,6 +35,7 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
 export declare namespace GetConversationResponseModel {
     export interface Raw {
         agent_id: string;
+        agent_name?: string | null;
         conversation_id: string;
         status: GetConversationResponseModelStatus.Raw;
         user_id?: string | null;

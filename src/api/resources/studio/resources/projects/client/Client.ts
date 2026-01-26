@@ -290,6 +290,10 @@ export class ProjectsClient {
             }
         }
 
+        if (request.createPublishingRead != null) {
+            _request.append("create_publishing_read", request.createPublishingRead.toString());
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

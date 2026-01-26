@@ -1,3 +1,6 @@
+export { BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost } from "./BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost";
+export { BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost } from "./BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost";
 export { BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost } from "./BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost";
 export { BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost } from "./BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost";
+export { BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost } from "./BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost";
 export { BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch } from "./BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch";

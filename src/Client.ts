@@ -166,6 +166,70 @@ export class ElevenLabsClient {
     }
 
     /**
+     * @param {string} agent_id
+     * @param {string} branch_id
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.deleteV1ConvaiAgentsAgentIdBranchesBranchId("agent_id", "branch_id")
+     */
+    public deleteV1ConvaiAgentsAgentIdBranchesBranchId(
+        agent_id: string,
+        branch_id: string,
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__deleteV1ConvaiAgentsAgentIdBranchesBranchId(agent_id, branch_id, requestOptions),
+        );
+    }
+
+    private async __deleteV1ConvaiAgentsAgentIdBranchesBranchId(
+        agent_id: string,
+        branch_id: string,
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${core.url.encodePathParam(agent_id)}/branches/${core.url.encodePathParam(branch_id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: undefined, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ElevenLabsError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "DELETE",
+            "/v1/convai/agents/{agent_id}/branches/{branch_id}",
+        );
+    }
+
+    /**
      * Add a generated voice to the voice library.
      *
      * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.

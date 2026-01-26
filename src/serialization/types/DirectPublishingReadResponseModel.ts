@@ -45,6 +45,10 @@ export const DirectPublishingReadResponseModel: core.serialization.ObjectSchema<
     ean: core.serialization.string().optional(),
     legalTerms: core.serialization.property("legal_terms", ReadLegalTerms.optional()),
     contentGuidelinesTerms: core.serialization.property("content_guidelines_terms", ReadLegalTerms.optional()),
+    lastUpdatedFromProjectUnix: core.serialization.property(
+        "last_updated_from_project_unix",
+        core.serialization.number().optional(),
+    ),
     publishingProjectId: core.serialization.property("publishing_project_id", core.serialization.string().optional()),
     publishingState: core.serialization.property("publishing_state", core.serialization.string().optional()),
     publisherProfileId: core.serialization.property("publisher_profile_id", core.serialization.string().optional()),
@@ -102,6 +106,7 @@ export declare namespace DirectPublishingReadResponseModel {
         ean?: string | null;
         legal_terms?: ReadLegalTerms.Raw | null;
         content_guidelines_terms?: ReadLegalTerms.Raw | null;
+        last_updated_from_project_unix?: number | null;
         publishing_project_id?: string | null;
         publishing_state?: string | null;
         publisher_profile_id?: string | null;

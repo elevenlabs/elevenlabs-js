@@ -182,7 +182,7 @@ describe("BatchCallsClient", () => {
                     conversation_id: "conversation_id",
                     conversation_initiation_client_data: {
                         conversation_config_override: {
-                            turn: { soft_timeout_config: { message: "Hhmmmm...yeah give me a second..." } },
+                            turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
                             tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
@@ -241,7 +241,7 @@ describe("BatchCallsClient", () => {
                         conversationConfigOverride: {
                             turn: {
                                 softTimeoutConfig: {
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                 },
                             },
                             tts: {

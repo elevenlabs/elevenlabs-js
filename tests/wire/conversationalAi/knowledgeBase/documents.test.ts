@@ -60,6 +60,34 @@ describe("DocumentsClient", () => {
         });
     });
 
+    test("create_folder", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { name: "name" };
+        const rawResponseBody = { id: "id", name: "name", folder_path: [{ id: "id" }] };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/knowledge-base/folder")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.knowledgeBase.documents.createFolder({
+            name: "name",
+        });
+        expect(response).toEqual({
+            id: "id",
+            name: "name",
+            folderPath: [
+                {
+                    id: "id",
+                },
+            ],
+        });
+    });
+
     test("get", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
@@ -281,5 +309,41 @@ describe("DocumentsClient", () => {
         expect(response).toEqual({
             signedUrl: "signed_url",
         });
+    });
+
+    test("move", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/move")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .build();
+
+        const response = await client.conversationalAi.knowledgeBase.documents.move("21m00Tcm4TlvDq8ikWAM");
+        expect(response).toEqual(undefined);
+    });
+
+    test("bulk_move", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { document_ids: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"] };
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/knowledge-base/bulk-move")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .build();
+
+        const response = await client.conversationalAi.knowledgeBase.documents.bulkMove({
+            documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"],
+        });
+        expect(response).toEqual(undefined);
     });
 });

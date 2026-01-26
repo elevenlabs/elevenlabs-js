@@ -38,6 +38,6 @@ export interface VoiceDesignRequestModel {
     quality?: number;
     /** Reference audio to use for the voice generation. The audio should be base64 encoded. Only supported when using the  eleven_ttv_v3 model. */
     referenceAudioBase64?: string;
-    /** Controls the balance of prompt versus reference audio when generating voice samples. 0 means almost no prompt influence, 1 means almost no reference audio influence. Only supported when using the eleven_ttv_v3 model and providing reference audio. */
+    /** Controls the balance of prompt versus reference audio when generating voice samples. 0 means almost no prompt influence, 1 means almost no reference audio influence. Only supported when using the eleven_ttv_v3 model. */
     promptStrength?: number;
 }
