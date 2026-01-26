@@ -9,6 +9,7 @@ export interface ConversationHistoryTranscriptWorkflowToolsResultCommonModelInpu
     isError: boolean;
     toolHasBeenCalled: boolean;
     toolLatencySecs?: number;
+    errorType?: string;
     dynamicVariableUpdates?: ElevenLabs.DynamicVariableUpdateCommonModel[];
     type: "workflow";
     result?: ElevenLabs.WorkflowToolResponseModelInput;

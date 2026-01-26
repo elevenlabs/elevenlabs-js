@@ -24,7 +24,7 @@ export class RulesClient {
     }
 
     /**
-     * Add rules to the pronunciation dictionary
+     * Add rules to the pronunciation dictionary. If a rule with the same string_to_replace already exists, it will be replaced.
      *
      * @param {string} pronunciation_dictionary_id - The id of the pronunciation dictionary
      * @param {ElevenLabs.pronunciationDictionaries.PronunciationDictionary} request

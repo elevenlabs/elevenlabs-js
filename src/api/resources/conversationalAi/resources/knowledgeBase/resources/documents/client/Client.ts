@@ -324,6 +324,98 @@ export class DocumentsClient {
     }
 
     /**
+     * Create a folder used for grouping documents together.
+     *
+     * @param {ElevenLabs.conversationalAi.knowledgeBase.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost} request
+     * @param {DocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.knowledgeBase.documents.createFolder({
+     *         name: "name"
+     *     })
+     */
+    public createFolder(
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost,
+        requestOptions?: DocumentsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.AddKnowledgeBaseResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__createFolder(request, requestOptions));
+    }
+
+    private async __createFolder(
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost,
+        requestOptions?: DocumentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.AddKnowledgeBaseResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/knowledge-base/folder",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.conversationalAi.knowledgeBase.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost.jsonOrThrow(
+                request,
+                { unrecognizedObjectKeys: "strip" },
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.AddKnowledgeBaseResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/knowledge-base/folder",
+        );
+    }
+
+    /**
      * Get details about a specific documentation making up the agent's knowledge base
      *
      * @param {string} documentation_id - The id of a document from the knowledge base. This is returned on document addition.
@@ -864,6 +956,175 @@ export class DocumentsClient {
             _response.rawResponse,
             "GET",
             "/v1/convai/knowledge-base/{documentation_id}/source-file-url",
+        );
+    }
+
+    /**
+     * Moves the entity from one folder to another.
+     *
+     * @param {string} document_id - The id of a document from the knowledge base. This is returned on document addition.
+     * @param {ElevenLabs.conversationalAi.knowledgeBase.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost} request
+     * @param {DocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.knowledgeBase.documents.move("21m00Tcm4TlvDq8ikWAM")
+     */
+    public move(
+        document_id: string,
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost = {},
+        requestOptions?: DocumentsClient.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__move(document_id, request, requestOptions));
+    }
+
+    private async __move(
+        document_id: string,
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost = {},
+        requestOptions?: DocumentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/knowledge-base/${core.url.encodePathParam(document_id)}/move`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.conversationalAi.knowledgeBase.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost.jsonOrThrow(
+                request,
+                { unrecognizedObjectKeys: "strip" },
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: undefined, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/knowledge-base/{document_id}/move",
+        );
+    }
+
+    /**
+     * Moves multiple entities from one folder to another.
+     *
+     * @param {ElevenLabs.conversationalAi.knowledgeBase.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost} request
+     * @param {DocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.knowledgeBase.documents.bulkMove({
+     *         documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"]
+     *     })
+     */
+    public bulkMove(
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost,
+        requestOptions?: DocumentsClient.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__bulkMove(request, requestOptions));
+    }
+
+    private async __bulkMove(
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost,
+        requestOptions?: DocumentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/knowledge-base/bulk-move",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.conversationalAi.knowledgeBase.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost.jsonOrThrow(
+                request,
+                { unrecognizedObjectKeys: "strip" },
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: undefined, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/knowledge-base/bulk-move",
         );
     }
 }

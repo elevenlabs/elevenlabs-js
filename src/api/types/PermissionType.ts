@@ -35,5 +35,6 @@ export const PermissionType = {
     PublishVoiceToVoiceLibrary: "publish_voice_to_voice_library",
     ShareVoiceExternally: "share_voice_externally",
     CreateUserApiKey: "create_user_api_key",
+    WorkspaceAnalyticsFullRead: "workspace_analytics_full_read",
 } as const;
 export type PermissionType = (typeof PermissionType)[keyof typeof PermissionType];

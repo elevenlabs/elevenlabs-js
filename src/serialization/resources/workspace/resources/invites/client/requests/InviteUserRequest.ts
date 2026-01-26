@@ -3,24 +3,23 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
-import { BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission } from "../../types/BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission";
+import { SeatType } from "../../../../../../types/SeatType";
 
 export const InviteUserRequest: core.serialization.Schema<
     serializers.workspace.InviteUserRequest.Raw,
     ElevenLabs.workspace.InviteUserRequest
 > = core.serialization.object({
     email: core.serialization.string(),
+    workspacePermission: core.serialization.property("workspace_permission", core.serialization.string().optional()),
+    seatType: core.serialization.property("seat_type", SeatType.optional()),
     groupIds: core.serialization.property("group_ids", core.serialization.list(core.serialization.string()).optional()),
-    workspacePermission: core.serialization.property(
-        "workspace_permission",
-        BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission.optional(),
-    ),
 });
 
 export declare namespace InviteUserRequest {
     export interface Raw {
         email: string;
+        workspace_permission?: string | null;
+        seat_type?: SeatType.Raw | null;
         group_ids?: string[] | null;
-        workspace_permission?: BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission.Raw | null;
     }
 }

@@ -11,8 +11,10 @@ import type * as ElevenLabs from "../../../../../../index";
 export interface InviteUserRequest {
     /** The email of the customer */
     email: string;
+    /** The workspace permission of the user. This is deprecated, use `seat_type` instead. */
+    workspacePermission?: string;
+    /** The seat type of the user */
+    seatType?: ElevenLabs.SeatType;
     /** The group ids of the user */
     groupIds?: string[];
-    /** The workspace permission of the user */
-    workspacePermission?: ElevenLabs.workspace.BodyInviteUserV1WorkspaceInvitesAddPostWorkspacePermission;
 }

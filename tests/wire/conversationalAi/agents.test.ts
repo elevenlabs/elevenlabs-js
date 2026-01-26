@@ -44,7 +44,7 @@ describe("AgentsClient", () => {
                     turn_timeout: 7,
                     initial_wait_time: 1.1,
                     silence_end_call_timeout: -1,
-                    soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah give me a second..." },
+                    soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                     turn_eagerness: "normal",
                     spelling_patience: "auto",
                 },
@@ -70,7 +70,7 @@ describe("AgentsClient", () => {
                 language_presets: {
                     key: {
                         overrides: {
-                            turn: { soft_timeout_config: { message: "Hhmmmm...yeah give me a second..." } },
+                            turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
                             tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
@@ -339,7 +339,7 @@ describe("AgentsClient", () => {
                                 silence_end_call_timeout: -1,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
@@ -425,7 +425,7 @@ describe("AgentsClient", () => {
                                 silence_end_call_timeout: -1,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
@@ -512,7 +512,7 @@ describe("AgentsClient", () => {
                                 silence_end_call_timeout: -1,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
@@ -653,7 +653,7 @@ describe("AgentsClient", () => {
                     silenceEndCallTimeout: -1,
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
-                        message: "Hhmmmm...yeah give me a second...",
+                        message: "Hhmmmm...yeah.",
                     },
                     turnEagerness: "normal",
                     spellingPatience: "auto",
@@ -691,7 +691,7 @@ describe("AgentsClient", () => {
                         overrides: {
                             turn: {
                                 softTimeoutConfig: {
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                 },
                             },
                             tts: {
@@ -1091,7 +1091,7 @@ describe("AgentsClient", () => {
                                 silenceEndCallTimeout: -1,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
@@ -1199,7 +1199,7 @@ describe("AgentsClient", () => {
                                 silenceEndCallTimeout: -1,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
@@ -1315,7 +1315,7 @@ describe("AgentsClient", () => {
                                 silenceEndCallTimeout: -1,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
@@ -1523,7 +1523,7 @@ describe("AgentsClient", () => {
                     turn_timeout: 7,
                     initial_wait_time: 1.1,
                     silence_end_call_timeout: -1,
-                    soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah give me a second..." },
+                    soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                     turn_eagerness: "normal",
                     spelling_patience: "auto",
                 },
@@ -1549,7 +1549,7 @@ describe("AgentsClient", () => {
                 language_presets: {
                     key: {
                         overrides: {
-                            turn: { soft_timeout_config: { message: "Hhmmmm...yeah give me a second..." } },
+                            turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
                             tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
@@ -1818,7 +1818,7 @@ describe("AgentsClient", () => {
                                 silence_end_call_timeout: -1,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
@@ -1904,7 +1904,7 @@ describe("AgentsClient", () => {
                                 silence_end_call_timeout: -1,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
@@ -1991,7 +1991,7 @@ describe("AgentsClient", () => {
                                 silence_end_call_timeout: -1,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
                                 turn_eagerness: "normal",
@@ -2133,7 +2133,7 @@ describe("AgentsClient", () => {
                     silenceEndCallTimeout: -1,
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
-                        message: "Hhmmmm...yeah give me a second...",
+                        message: "Hhmmmm...yeah.",
                     },
                     turnEagerness: "normal",
                     spellingPatience: "auto",
@@ -2171,7 +2171,7 @@ describe("AgentsClient", () => {
                         overrides: {
                             turn: {
                                 softTimeoutConfig: {
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                 },
                             },
                             tts: {
@@ -2571,7 +2571,7 @@ describe("AgentsClient", () => {
                                 silenceEndCallTimeout: -1,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
@@ -2679,7 +2679,7 @@ describe("AgentsClient", () => {
                                 silenceEndCallTimeout: -1,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",
@@ -2795,7 +2795,7 @@ describe("AgentsClient", () => {
                                 silenceEndCallTimeout: -1,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
-                                    message: "Hhmmmm...yeah give me a second...",
+                                    message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
                                 turnEagerness: "normal",

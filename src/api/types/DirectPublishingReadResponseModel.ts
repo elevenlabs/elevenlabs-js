@@ -27,6 +27,7 @@ export interface DirectPublishingReadResponseModel {
     ean?: string;
     legalTerms?: ElevenLabs.ReadLegalTerms;
     contentGuidelinesTerms?: ElevenLabs.ReadLegalTerms;
+    lastUpdatedFromProjectUnix?: number;
     publishingProjectId?: string;
     publishingState?: string;
     publisherProfileId?: string;

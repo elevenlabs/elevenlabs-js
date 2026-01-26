@@ -4,6 +4,21 @@ import { ElevenLabsClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("ElevenLabsClient", () => {
+    test("deleteV1ConvaiAgentsAgentIdBranchesBranchId", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/agents/agent_id/branches/branch_id")
+            .respondWith()
+            .statusCode(200)
+            .build();
+
+        const response = await client.deleteV1ConvaiAgentsAgentIdBranchesBranchId("agent_id", "branch_id");
+        expect(response).toEqual(undefined);
+    });
+
     test("saveAVoicePreview", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

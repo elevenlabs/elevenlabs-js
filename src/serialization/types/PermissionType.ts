@@ -40,6 +40,7 @@ export const PermissionType: core.serialization.Schema<serializers.PermissionTyp
         "publish_voice_to_voice_library",
         "share_voice_externally",
         "create_user_api_key",
+        "workspace_analytics_full_read",
     ]);
 
 export declare namespace PermissionType {
@@ -77,5 +78,6 @@ export declare namespace PermissionType {
         | "create_professional_voice_clone"
         | "publish_voice_to_voice_library"
         | "share_voice_externally"
-        | "create_user_api_key";
+        | "create_user_api_key"
+        | "workspace_analytics_full_read";
 }

@@ -13,6 +13,8 @@ export interface UpdateMemberRequest {
     email: string;
     /** Whether to lock or unlock the user account. */
     isLocked?: boolean;
-    /** Role dictating permissions in the workspace. */
-    workspaceRole?: ElevenLabs.workspace.BodyUpdateMemberV1WorkspaceMembersPostWorkspaceRole;
+    /** The workspace role of the user. This is deprecated, use `workspace_seat_type` instead. */
+    workspaceRole?: ElevenLabs.SeatType;
+    /** The workspace seat type */
+    workspaceSeatType?: ElevenLabs.SeatType;
 }

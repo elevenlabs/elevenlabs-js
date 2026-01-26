@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
-import { BodyUpdateMemberV1WorkspaceMembersPostWorkspaceRole } from "../../types/BodyUpdateMemberV1WorkspaceMembersPostWorkspaceRole";
+import { SeatType } from "../../../../../../types/SeatType";
 
 export const UpdateMemberRequest: core.serialization.Schema<
     serializers.workspace.UpdateMemberRequest.Raw,
@@ -11,16 +11,15 @@ export const UpdateMemberRequest: core.serialization.Schema<
 > = core.serialization.object({
     email: core.serialization.string(),
     isLocked: core.serialization.property("is_locked", core.serialization.boolean().optional()),
-    workspaceRole: core.serialization.property(
-        "workspace_role",
-        BodyUpdateMemberV1WorkspaceMembersPostWorkspaceRole.optional(),
-    ),
+    workspaceRole: core.serialization.property("workspace_role", SeatType.optional()),
+    workspaceSeatType: core.serialization.property("workspace_seat_type", SeatType.optional()),
 });
 
 export declare namespace UpdateMemberRequest {
     export interface Raw {
         email: string;
         is_locked?: boolean | null;
-        workspace_role?: BodyUpdateMemberV1WorkspaceMembersPostWorkspaceRole.Raw | null;
+        workspace_role?: SeatType.Raw | null;
+        workspace_seat_type?: SeatType.Raw | null;
     }
 }

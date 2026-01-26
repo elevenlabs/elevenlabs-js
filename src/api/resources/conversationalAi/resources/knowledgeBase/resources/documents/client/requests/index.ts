@@ -1,6 +1,9 @@
+export type { BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost } from "./BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost";
 export type { BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost } from "./BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost";
+export type { BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost } from "./BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost";
 export type { BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost } from "./BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost";
 export type { BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost } from "./BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost";
+export type { BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost } from "./BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost";
 export type { BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch } from "./BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch";
 export type { DocumentsDeleteRequest } from "./DocumentsDeleteRequest";
 export type { DocumentsGetAgentsRequest } from "./DocumentsGetAgentsRequest";

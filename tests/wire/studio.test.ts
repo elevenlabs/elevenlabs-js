@@ -72,6 +72,7 @@ describe("StudioClient", () => {
                     max_lines_per_section: 1,
                     max_words_per_line: 1,
                 },
+                caption_style_template_overrides: { key: {} },
                 public_share_id: "abc123def456789",
                 aspect_ratio: "16:9",
             },
@@ -179,6 +180,9 @@ describe("StudioClient", () => {
                     autoBreakEnabled: true,
                     maxLinesPerSection: 1,
                     maxWordsPerLine: 1,
+                },
+                captionStyleTemplateOverrides: {
+                    key: {},
                 },
                 publicShareId: "abc123def456789",
                 aspectRatio: "16:9",

@@ -10,10 +10,14 @@ export const ToolsResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.ToolsResponseModel
 > = core.serialization.object({
     tools: core.serialization.list(ToolResponseModel),
+    nextCursor: core.serialization.property("next_cursor", core.serialization.string().optional()),
+    hasMore: core.serialization.property("has_more", core.serialization.boolean()),
 });
 
 export declare namespace ToolsResponseModel {
     export interface Raw {
         tools: ToolResponseModel.Raw[];
+        next_cursor?: string | null;
+        has_more: boolean;
     }
 }

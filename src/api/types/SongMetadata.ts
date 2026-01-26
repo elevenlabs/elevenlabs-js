@@ -11,4 +11,8 @@ export interface SongMetadata {
     languages: string[];
     /** Whether the song is explicit */
     isExplicit?: boolean;
+    /** The BPM of the song */
+    bpm?: number;
+    /** The time signature of the song */
+    timeSignature?: string;
 }
