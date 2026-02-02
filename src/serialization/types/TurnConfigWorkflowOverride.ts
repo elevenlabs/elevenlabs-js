@@ -20,6 +20,7 @@ export const TurnConfigWorkflowOverride: core.serialization.ObjectSchema<
     softTimeoutConfig: core.serialization.property("soft_timeout_config", SoftTimeoutConfigWorkflowOverride.optional()),
     turnEagerness: core.serialization.property("turn_eagerness", TurnEagerness.optional()),
     spellingPatience: core.serialization.property("spelling_patience", SpellingPatience.optional()),
+    speculativeTurn: core.serialization.property("speculative_turn", core.serialization.boolean().optional()),
 });
 
 export declare namespace TurnConfigWorkflowOverride {
@@ -30,5 +31,6 @@ export declare namespace TurnConfigWorkflowOverride {
         soft_timeout_config?: SoftTimeoutConfigWorkflowOverride.Raw | null;
         turn_eagerness?: TurnEagerness.Raw | null;
         spelling_patience?: SpellingPatience.Raw | null;
+        speculative_turn?: boolean | null;
     }
 }

@@ -17,6 +17,8 @@ export interface User {
     isOnboardingCompleted: boolean;
     /** Whether the user's onboarding checklist is completed. */
     isOnboardingChecklistCompleted: boolean;
+    /** Whether to show compliance terms (ToS, Privacy Policy, biometric consent) during onboarding. Set for users signing up from the marketing site. */
+    showComplianceTerms?: boolean;
     /** First name of the user. */
     firstName?: string;
     /** Whether the user's API key is hashed. */

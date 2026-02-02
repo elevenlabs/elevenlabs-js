@@ -15,4 +15,6 @@ export interface TurnConfig {
     turnEagerness?: ElevenLabs.TurnEagerness;
     /** Controls if the agent should be more patient when user is spelling numbers and named entities. Auto = model based, Off = never wait extra */
     spellingPatience?: ElevenLabs.SpellingPatience;
+    /** When enabled, starts generating LLM responses during silence before full turn confidence is reached, reducing perceived latency. May increase LLM costs. */
+    speculativeTurn?: boolean;
 }

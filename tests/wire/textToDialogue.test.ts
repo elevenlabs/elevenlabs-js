@@ -54,7 +54,7 @@ describe("TextToDialogueClient", () => {
             .build();
 
         const response = await client.textToDialogue.convertWithTimestamps({
-            outputFormat: "mp3_22050_32",
+            outputFormat: "alaw_8000",
             inputs: [
                 {
                     text: "Hello, how are you?",

@@ -10,6 +10,7 @@ export interface ConversationHistoryTranscriptSystemToolResultCommonModel {
     toolHasBeenCalled: boolean;
     toolLatencySecs?: number;
     errorType?: string;
+    rawErrorMessage?: string;
     dynamicVariableUpdates?: ElevenLabs.DynamicVariableUpdateCommonModel[];
     type: "system";
     result?: ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelResult;

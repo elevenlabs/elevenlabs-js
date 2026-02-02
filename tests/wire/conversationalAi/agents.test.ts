@@ -47,6 +47,7 @@ describe("AgentsClient", () => {
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                     turn_eagerness: "normal",
                     spelling_patience: "auto",
+                    speculative_turn: false,
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -344,6 +345,7 @@ describe("AgentsClient", () => {
                                 },
                                 turn_eagerness: "normal",
                                 spelling_patience: "auto",
+                                speculative_turn: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -430,6 +432,7 @@ describe("AgentsClient", () => {
                                 },
                                 turn_eagerness: "normal",
                                 spelling_patience: "auto",
+                                speculative_turn: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -517,6 +520,7 @@ describe("AgentsClient", () => {
                                 },
                                 turn_eagerness: "normal",
                                 spelling_patience: "auto",
+                                speculative_turn: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -657,6 +661,7 @@ describe("AgentsClient", () => {
                     },
                     turnEagerness: "normal",
                     spellingPatience: "auto",
+                    speculativeTurn: false,
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -1096,6 +1101,7 @@ describe("AgentsClient", () => {
                                 },
                                 turnEagerness: "normal",
                                 spellingPatience: "auto",
+                                speculativeTurn: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1204,6 +1210,7 @@ describe("AgentsClient", () => {
                                 },
                                 turnEagerness: "normal",
                                 spellingPatience: "auto",
+                                speculativeTurn: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1320,6 +1327,7 @@ describe("AgentsClient", () => {
                                 },
                                 turnEagerness: "normal",
                                 spellingPatience: "auto",
+                                speculativeTurn: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1526,6 +1534,7 @@ describe("AgentsClient", () => {
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                     turn_eagerness: "normal",
                     spelling_patience: "auto",
+                    speculative_turn: false,
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -1823,6 +1832,7 @@ describe("AgentsClient", () => {
                                 },
                                 turn_eagerness: "normal",
                                 spelling_patience: "auto",
+                                speculative_turn: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -1909,6 +1919,7 @@ describe("AgentsClient", () => {
                                 },
                                 turn_eagerness: "normal",
                                 spelling_patience: "auto",
+                                speculative_turn: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -1996,6 +2007,7 @@ describe("AgentsClient", () => {
                                 },
                                 turn_eagerness: "normal",
                                 spelling_patience: "auto",
+                                speculative_turn: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -2137,6 +2149,7 @@ describe("AgentsClient", () => {
                     },
                     turnEagerness: "normal",
                     spellingPatience: "auto",
+                    speculativeTurn: false,
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -2576,6 +2589,7 @@ describe("AgentsClient", () => {
                                 },
                                 turnEagerness: "normal",
                                 spellingPatience: "auto",
+                                speculativeTurn: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2684,6 +2698,7 @@ describe("AgentsClient", () => {
                                 },
                                 turnEagerness: "normal",
                                 spellingPatience: "auto",
+                                speculativeTurn: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2800,6 +2815,7 @@ describe("AgentsClient", () => {
                                 },
                                 turnEagerness: "normal",
                                 spellingPatience: "auto",
+                                speculativeTurn: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",

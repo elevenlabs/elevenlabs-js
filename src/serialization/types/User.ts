@@ -19,6 +19,7 @@ export const User: core.serialization.ObjectSchema<serializers.User.Raw, ElevenL
         "is_onboarding_checklist_completed",
         core.serialization.boolean(),
     ),
+    showComplianceTerms: core.serialization.property("show_compliance_terms", core.serialization.boolean().optional()),
     firstName: core.serialization.property("first_name", core.serialization.string().optional()),
     isApiKeyHashed: core.serialization.property("is_api_key_hashed", core.serialization.boolean().optional()),
     xiApiKeyPreview: core.serialization.property("xi_api_key_preview", core.serialization.string().optional()),
@@ -39,6 +40,7 @@ export declare namespace User {
         can_use_delayed_payment_methods: boolean;
         is_onboarding_completed: boolean;
         is_onboarding_checklist_completed: boolean;
+        show_compliance_terms?: boolean | null;
         first_name?: string | null;
         is_api_key_hashed?: boolean | null;
         xi_api_key_preview?: string | null;

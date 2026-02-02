@@ -19,4 +19,6 @@ export interface UpdateAgentRequest {
     tags?: string[];
     /** Description for this version when publishing changes (only applicable for versioned agents) */
     versionDescription?: string;
+    /** List of procedure refs used for this agent version. */
+    procedureRefs?: ElevenLabs.conversationalAi.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchProcedureRefsItem[];
 }

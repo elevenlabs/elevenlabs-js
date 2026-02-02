@@ -9,12 +9,14 @@ export const BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch: co
     serializers.conversationalAi.agents.BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch.Raw,
     ElevenLabs.conversationalAi.agents.BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch
 > = core.serialization.object({
+    name: core.serialization.string().optional(),
     isArchived: core.serialization.property("is_archived", core.serialization.boolean().optional()),
     protectionStatus: core.serialization.property("protection_status", BranchProtectionStatus.optional()),
 });
 
 export declare namespace BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch {
     export interface Raw {
+        name?: string | null;
         is_archived?: boolean | null;
         protection_status?: BranchProtectionStatus.Raw | null;
     }

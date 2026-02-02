@@ -26,22 +26,38 @@ export class SecretsClient {
     /**
      * Get all workspace secrets for the user
      *
+     * @param {ElevenLabs.conversationalAi.SecretsListRequest} request
      * @param {SecretsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.secrets.list()
+     *     await client.conversationalAi.secrets.list({
+     *         pageSize: 1,
+     *         cursor: "cursor"
+     *     })
      */
     public list(
+        request: ElevenLabs.conversationalAi.SecretsListRequest = {},
         requestOptions?: SecretsClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.GetWorkspaceSecretsResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
     private async __list(
+        request: ElevenLabs.conversationalAi.SecretsListRequest = {},
         requestOptions?: SecretsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetWorkspaceSecretsResponseModel>> {
+        const { pageSize, cursor } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (pageSize != null) {
+            _queryParams.page_size = pageSize.toString();
+        }
+
+        if (cursor != null) {
+            _queryParams.cursor = cursor;
+        }
+
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -56,7 +72,7 @@ export class SecretsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

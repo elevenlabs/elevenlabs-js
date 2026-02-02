@@ -10,6 +10,7 @@ export interface ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCo
     toolHasBeenCalled: boolean;
     toolLatencySecs?: number;
     errorType?: string;
+    rawErrorMessage?: string;
     dynamicVariableUpdates?: ElevenLabs.DynamicVariableUpdateCommonModel[];
     type: "api_integration_webhook";
     integrationId: string;

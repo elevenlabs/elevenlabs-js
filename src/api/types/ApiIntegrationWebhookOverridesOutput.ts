@@ -11,4 +11,6 @@ export interface ApiIntegrationWebhookOverridesOutput {
     queryParamsSchema?: ElevenLabs.QueryOverride;
     requestBodySchema?: ElevenLabs.ObjectOverrideOutput;
     requestHeaders?: Record<string, ElevenLabs.ApiIntegrationWebhookOverridesOutputRequestHeadersValue | undefined>;
+    responseFilterMode?: ElevenLabs.ResponseFilterMode;
+    responseFilters?: string[];
 }

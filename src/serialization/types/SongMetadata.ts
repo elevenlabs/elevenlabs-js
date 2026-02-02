@@ -11,8 +11,6 @@ export const SongMetadata: core.serialization.ObjectSchema<serializers.SongMetad
         genres: core.serialization.list(core.serialization.string()),
         languages: core.serialization.list(core.serialization.string()),
         isExplicit: core.serialization.property("is_explicit", core.serialization.boolean().optional()),
-        bpm: core.serialization.number().optional(),
-        timeSignature: core.serialization.property("time_signature", core.serialization.string().optional()),
     });
 
 export declare namespace SongMetadata {
@@ -22,7 +20,5 @@ export declare namespace SongMetadata {
         genres: string[];
         languages: string[];
         is_explicit?: boolean | null;
-        bpm?: number | null;
-        time_signature?: string | null;
     }
 }

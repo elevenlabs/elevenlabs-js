@@ -36,5 +36,11 @@ export const PermissionType = {
     ShareVoiceExternally: "share_voice_externally",
     CreateUserApiKey: "create_user_api_key",
     WorkspaceAnalyticsFullRead: "workspace_analytics_full_read",
+    WebhooksWrite: "webhooks_write",
+    ServiceAccountWrite: "service_account_write",
+    GroupMembersManage: "group_members_manage",
+    WorkspaceMembersInvite: "workspace_members_invite",
+    WorkspaceMembersRemove: "workspace_members_remove",
+    TermsOfServiceAccept: "terms_of_service_accept",
 } as const;
 export type PermissionType = (typeof PermissionType)[keyof typeof PermissionType];
