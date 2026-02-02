@@ -10,10 +10,14 @@ export const GetWorkspaceSecretsResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.GetWorkspaceSecretsResponseModel
 > = core.serialization.object({
     secrets: core.serialization.list(ConvAiWorkspaceStoredSecretConfig),
+    nextCursor: core.serialization.property("next_cursor", core.serialization.string().optional()),
+    hasMore: core.serialization.property("has_more", core.serialization.boolean().optional()),
 });
 
 export declare namespace GetWorkspaceSecretsResponseModel {
     export interface Raw {
         secrets: ConvAiWorkspaceStoredSecretConfig.Raw[];
+        next_cursor?: string | null;
+        has_more?: boolean | null;
     }
 }

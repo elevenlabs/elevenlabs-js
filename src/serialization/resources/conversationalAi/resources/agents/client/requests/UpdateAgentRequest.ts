@@ -6,6 +6,7 @@ import type * as serializers from "../../../../../../index";
 import { AgentPlatformSettingsRequestModel } from "../../../../../../types/AgentPlatformSettingsRequestModel";
 import { AgentWorkflowRequestModel } from "../../../../../../types/AgentWorkflowRequestModel";
 import { ConversationalConfig } from "../../../../../../types/ConversationalConfig";
+import { BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchProcedureRefsItem } from "../../types/BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchProcedureRefsItem";
 
 export const UpdateAgentRequest: core.serialization.Schema<
     serializers.conversationalAi.UpdateAgentRequest.Raw,
@@ -17,6 +18,10 @@ export const UpdateAgentRequest: core.serialization.Schema<
     name: core.serialization.string().optional(),
     tags: core.serialization.list(core.serialization.string()).optional(),
     versionDescription: core.serialization.property("version_description", core.serialization.string().optional()),
+    procedureRefs: core.serialization.property(
+        "procedure_refs",
+        core.serialization.list(BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchProcedureRefsItem).optional(),
+    ),
 });
 
 export declare namespace UpdateAgentRequest {
@@ -27,5 +32,6 @@ export declare namespace UpdateAgentRequest {
         name?: string | null;
         tags?: string[] | null;
         version_description?: string | null;
+        procedure_refs?: BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchProcedureRefsItem.Raw[] | null;
     }
 }

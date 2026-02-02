@@ -24,7 +24,7 @@ export class MembersClient {
     }
 
     /**
-     * Removes a member from the specified group. This endpoint may only be called by workspace administrators.
+     * Removes a member from the specified group. Requires `group_members_manage` permission.
      *
      * @param {string} group_id - The ID of the target group.
      * @param {ElevenLabs.workspace.groups.BodyDeleteMemberFromUserGroupV1WorkspaceGroupsGroupIdMembersRemovePost} request
@@ -119,7 +119,7 @@ export class MembersClient {
     }
 
     /**
-     * Adds a member of your workspace to the specified group. This endpoint may only be called by workspace administrators.
+     * Adds a member of your workspace to the specified group. Requires `group_members_manage` permission.
      *
      * @param {string} group_id - The ID of the target group.
      * @param {ElevenLabs.workspace.groups.AddMemberToGroupRequest} request

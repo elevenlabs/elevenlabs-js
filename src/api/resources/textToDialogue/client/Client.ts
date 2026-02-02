@@ -41,9 +41,10 @@ export class TextToDialogueClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
+            _queryParams.output_format = serializers.TextToDialogueConvertRequestOutputFormat.jsonOrThrow(
+                outputFormat,
+                { unrecognizedObjectKeys: "strip" },
+            );
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -296,7 +297,7 @@ export class TextToDialogueClient {
      *
      * @example
      *     await client.textToDialogue.convertWithTimestamps({
-     *         outputFormat: "mp3_22050_32",
+     *         outputFormat: "alaw_8000",
      *         inputs: [{
      *                 text: "Hello, how are you?",
      *                 voiceId: "bYTqZQo3Jz7LQtmGTgwi"
@@ -320,9 +321,10 @@ export class TextToDialogueClient {
         const { outputFormat, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
+            _queryParams.output_format = serializers.TextToDialogueConvertWithTimestampsRequestOutputFormat.jsonOrThrow(
+                outputFormat,
+                { unrecognizedObjectKeys: "strip" },
+            );
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

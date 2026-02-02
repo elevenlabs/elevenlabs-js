@@ -10,10 +10,12 @@ export const ConversationTurnMetrics: core.serialization.ObjectSchema<
     ElevenLabs.ConversationTurnMetrics
 > = core.serialization.object({
     metrics: core.serialization.record(core.serialization.string(), MetricRecord).optional(),
+    convaiAsrProvider: core.serialization.property("convai_asr_provider", core.serialization.string().optional()),
 });
 
 export declare namespace ConversationTurnMetrics {
     export interface Raw {
         metrics?: Record<string, MetricRecord.Raw> | null;
+        convai_asr_provider?: string | null;
     }
 }

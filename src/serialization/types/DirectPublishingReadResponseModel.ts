@@ -65,6 +65,10 @@ export const DirectPublishingReadResponseModel: core.serialization.ObjectSchema<
     payoutType: core.serialization.property("payout_type", DirectPublishingReadResponseModelPayoutType.optional()),
     listPrice: core.serialization.property("list_price", core.serialization.number().optional()),
     currency: core.serialization.stringLiteral("usd").optional(),
+    originalAudioProjectExportId: core.serialization.property(
+        "original_audio_project_export_id",
+        core.serialization.string().optional(),
+    ),
     originalAudioDocumentId: core.serialization.property(
         "original_audio_document_id",
         core.serialization.string().optional(),
@@ -120,6 +124,7 @@ export declare namespace DirectPublishingReadResponseModel {
         payout_type?: DirectPublishingReadResponseModelPayoutType.Raw | null;
         list_price?: number | null;
         currency?: "usd" | null;
+        original_audio_project_export_id?: string | null;
         original_audio_document_id?: string | null;
         series_id?: string | null;
         volume?: number | null;

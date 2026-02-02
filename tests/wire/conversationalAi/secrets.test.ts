@@ -37,10 +37,15 @@ describe("SecretsClient", () => {
                     },
                 },
             ],
+            next_cursor: "next_cursor",
+            has_more: true,
         };
         server.mockEndpoint().get("/v1/convai/secrets").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.conversationalAi.secrets.list();
+        const response = await client.conversationalAi.secrets.list({
+            pageSize: 1,
+            cursor: "cursor",
+        });
         expect(response).toEqual({
             secrets: [
                 {
@@ -70,6 +75,8 @@ describe("SecretsClient", () => {
                     },
                 },
             ],
+            nextCursor: "next_cursor",
+            hasMore: true,
         });
     });
 

@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import { ApiIntegrationWebhookOverridesOutputRequestHeadersValue } from "./ApiIntegrationWebhookOverridesOutputRequestHeadersValue";
 import { LiteralOverride } from "./LiteralOverride";
 import { QueryOverride } from "./QueryOverride";
+import { ResponseFilterMode } from "./ResponseFilterMode";
 
 export const ApiIntegrationWebhookOverridesOutput: core.serialization.ObjectSchema<
     serializers.ApiIntegrationWebhookOverridesOutput.Raw,
@@ -26,6 +27,11 @@ export const ApiIntegrationWebhookOverridesOutput: core.serialization.ObjectSche
             .record(core.serialization.string(), ApiIntegrationWebhookOverridesOutputRequestHeadersValue.optional())
             .optional(),
     ),
+    responseFilterMode: core.serialization.property("response_filter_mode", ResponseFilterMode.optional()),
+    responseFilters: core.serialization.property(
+        "response_filters",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace ApiIntegrationWebhookOverridesOutput {
@@ -37,5 +43,7 @@ export declare namespace ApiIntegrationWebhookOverridesOutput {
             string,
             ApiIntegrationWebhookOverridesOutputRequestHeadersValue.Raw | null | undefined
         > | null;
+        response_filter_mode?: ResponseFilterMode.Raw | null;
+        response_filters?: string[] | null;
     }
 }

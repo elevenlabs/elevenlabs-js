@@ -101,6 +101,7 @@ describe("TestsClient", () => {
                 referenced_tool: { id: "id", type: "system" },
                 verify_absence: true,
             },
+            check_any_tool_matches: true,
             dynamic_variables: { key: "value" },
             type: "llm",
             from_conversation_metadata: {
@@ -204,6 +205,7 @@ describe("TestsClient", () => {
                 },
                 verifyAbsence: true,
             },
+            checkAnyToolMatches: true,
             dynamicVariables: {
                 key: "value",
             },
@@ -280,6 +282,7 @@ describe("TestsClient", () => {
                 referenced_tool: { id: "id", type: "system" },
                 verify_absence: true,
             },
+            check_any_tool_matches: true,
             dynamic_variables: { key: "value" },
             type: "llm",
             from_conversation_metadata: {
@@ -405,6 +408,7 @@ describe("TestsClient", () => {
                 },
                 verifyAbsence: true,
             },
+            checkAnyToolMatches: true,
             dynamicVariables: {
                 key: "value",
             },

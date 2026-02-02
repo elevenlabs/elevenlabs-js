@@ -32,6 +32,7 @@ export const GetUnitTestResponseModel: core.serialization.ObjectSchema<
         "tool_call_parameters",
         UnitTestToolCallEvaluationModelOutput.optional(),
     ),
+    checkAnyToolMatches: core.serialization.property("check_any_tool_matches", core.serialization.boolean().optional()),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
         core.serialization
@@ -54,6 +55,7 @@ export declare namespace GetUnitTestResponseModel {
         success_examples: AgentSuccessfulResponseExample.Raw[];
         failure_examples: AgentFailureResponseExample.Raw[];
         tool_call_parameters?: UnitTestToolCallEvaluationModelOutput.Raw | null;
+        check_any_tool_matches?: boolean | null;
         dynamic_variables?: Record<string, GetUnitTestResponseModelDynamicVariablesValue.Raw | null | undefined> | null;
         type?: UnitTestCommonModelType.Raw | null;
         from_conversation_metadata?: TestFromConversationMetadataOutput.Raw | null;

@@ -5,7 +5,7 @@ import type * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         outputFormat: "mp3_22050_32",
+ *         outputFormat: "alaw_8000",
  *         inputs: [{
  *                 text: "Hello, how are you?",
  *                 voiceId: "bYTqZQo3Jz7LQtmGTgwi"
@@ -16,9 +16,9 @@ import type * as ElevenLabs from "../../../../index";
  *     }
  */
 export interface BodyTextToDialogueFullWithTimestamps {
-    /** Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs. */
-    outputFormat?: ElevenLabs.AllowedOutputFormats;
-    /** A list of dialogue inputs, each containing text and a voice ID which will be converted into speech. */
+    /** Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM and WAV formats with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs. */
+    outputFormat?: ElevenLabs.TextToDialogueConvertWithTimestampsRequestOutputFormat;
+    /** A list of dialogue inputs, each containing text and a voice ID which will be converted into speech. The maximum number of unique voice IDs is 10. */
     inputs: ElevenLabs.DialogueInput[];
     /** Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property. */
     modelId?: string;

@@ -1073,7 +1073,7 @@ Generate dialogue from text with precise character-level timing information for 
 
 ```typescript
 await client.textToDialogue.convertWithTimestamps({
-    outputFormat: "mp3_22050_32",
+    outputFormat: "alaw_8000",
     inputs: [{
             text: "Hello, how are you?",
             voiceId: "bYTqZQo3Jz7LQtmGTgwi"
@@ -6832,7 +6832,7 @@ await client.conversationalAi.settings.update();
 </details>
 
 ## ConversationalAi Secrets
-<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">list</a>() -> ElevenLabs.GetWorkspaceSecretsResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetWorkspaceSecretsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -6859,7 +6859,10 @@ Get all workspace secrets for the user
 <dd>
 
 ```typescript
-await client.conversationalAi.secrets.list();
+await client.conversationalAi.secrets.list({
+    pageSize: 1,
+    cursor: "cursor"
+});
 
 ```
 </dd>
@@ -6871,6 +6874,14 @@ await client.conversationalAi.secrets.list();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.SecretsListRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -7866,128 +7877,6 @@ await client.conversationalAi.mcpServers.update("mcp_server_id");
 </details>
 
 ## ConversationalAi WhatsappAccounts
-<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">list</a>() -> ElevenLabs.ListWhatsAppAccountsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-List all WhatsApp accounts
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.whatsappAccounts.list();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">import</a>({ ...params }) -> ElevenLabs.ImportWhatsAppAccountResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Import a WhatsApp account
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.whatsappAccounts.import({
-    businessAccountId: "business_account_id",
-    phoneNumberId: "phone_number_id",
-    tokenCode: "token_code"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.ImportWhatsAppAccountRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">get</a>(phone_number_id) -> ElevenLabs.GetWhatsAppAccountResponse</code></summary>
 <dl>
 <dd>
@@ -8169,6 +8058,61 @@ await client.conversationalAi.whatsappAccounts.update("phone_number_id");
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">list</a>() -> ElevenLabs.ListWhatsAppAccountsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all WhatsApp accounts
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.whatsappAccounts.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
 
 <dl>
 <dd>
@@ -16437,7 +16381,7 @@ await client.workspace.groups.search({
 <dl>
 <dd>
 
-Sends an email invitation to join your workspace to the provided email. If the user doesn't have an account they will be prompted to create one. If the user accepts this invite they will be added as a user to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace administrators. If the user is already in the workspace a 400 error will be returned.
+Sends an email invitation to join your workspace to the provided email. If the user doesn't have an account they will be prompted to create one. If the user accepts this invite they will be added as a user to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace members with the WORKSPACE_MEMBERS_INVITE permission. If the user is already in the workspace a 400 error will be returned.
 </dd>
 </dl>
 </dd>
@@ -16502,7 +16446,7 @@ await client.workspace.invites.create({
 <dl>
 <dd>
 
-Sends email invitations to join your workspace to the provided emails. Requires all email addresses to be part of a verified domain. If the users don't have an account they will be prompted to create one. If the users accept these invites they will be added as users to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace administrators.
+Sends email invitations to join your workspace to the provided emails. Requires all email addresses to be part of a verified domain. If the users don't have an account they will be prompted to create one. If the users accept these invites they will be added as users to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace members with the WORKSPACE_MEMBERS_INVITE permission.
 </dd>
 </dl>
 </dd>
@@ -16567,7 +16511,7 @@ await client.workspace.invites.createBatch({
 <dl>
 <dd>
 
-Invalidates an existing email invitation. The invitation will still show up in the inbox it has been delivered to, but activating it to join the workspace won't work. This endpoint may only be called by workspace administrators.
+Invalidates an existing email invitation. The invitation will still show up in the inbox it has been delivered to, but activating it to join the workspace won't work. This endpoint may only be called by workspace members with the WORKSPACE_MEMBERS_INVITE permission.
 </dd>
 </dl>
 </dd>
@@ -16920,7 +16864,7 @@ await client.workspace.resources.unshare("resource_id", {
 <dl>
 <dd>
 
-Removes a member from the specified group. This endpoint may only be called by workspace administrators.
+Removes a member from the specified group. Requires `group_members_manage` permission.
 </dd>
 </dl>
 </dd>
@@ -16993,7 +16937,7 @@ await client.workspace.groups.members.remove("group_id", {
 <dl>
 <dd>
 
-Adds a member of your workspace to the specified group. This endpoint may only be called by workspace administrators.
+Adds a member of your workspace to the specified group. Requires `group_members_manage` permission.
 </dd>
 </dl>
 </dd>

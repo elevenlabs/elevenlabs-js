@@ -166,6 +166,57 @@ export class ElevenLabsClient {
     }
 
     /**
+     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.postV1ConvaiWhatsappAccounts()
+     */
+    public postV1ConvaiWhatsappAccounts(
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__postV1ConvaiWhatsappAccounts(requestOptions));
+    }
+
+    private async __postV1ConvaiWhatsappAccounts(
+        requestOptions?: ElevenLabsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/whatsapp-accounts",
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: undefined, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ElevenLabsError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/convai/whatsapp-accounts");
+    }
+
+    /**
      * @param {string} agent_id
      * @param {string} branch_id
      * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.

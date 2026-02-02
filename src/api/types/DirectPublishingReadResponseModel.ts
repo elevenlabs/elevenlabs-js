@@ -41,6 +41,7 @@ export interface DirectPublishingReadResponseModel {
     payoutType?: ElevenLabs.DirectPublishingReadResponseModelPayoutType;
     listPrice?: number;
     currency?: "usd";
+    originalAudioProjectExportId?: string;
     originalAudioDocumentId?: string;
     seriesId?: string;
     volume?: number;

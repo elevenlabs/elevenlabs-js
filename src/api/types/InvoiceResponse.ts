@@ -15,7 +15,7 @@ export interface InvoiceResponse {
     discountAmountOff?: number;
     /** The discounts applied to the invoice. */
     discounts: ElevenLabs.DiscountResponseModel[];
-    /** The Unix timestamp of the next payment attempt. */
+    /** The Unix timestamp of the next payment attempt. -1 when there is no next payment attempt. */
     nextPaymentAttemptUnix: number;
     /** Deprecated. Use [payment_intent_statusses] instead. The status of this invoice's first payment intent. None when there is no payment intent. */
     paymentIntentStatus?: ElevenLabs.InvoiceResponseModelPaymentIntentStatus;
