@@ -27,7 +27,14 @@ describe("ToolConfigsClient", () => {
                 tool_config_overrides: [
                     {
                         tool_name: "tool_name",
-                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamic_variable: "user_name",
+                                value_path: "user.name",
+                                sanitize: false,
+                            },
+                        ],
                     },
                 ],
                 disable_compression: true,
@@ -95,6 +102,7 @@ describe("ToolConfigsClient", () => {
                                 source: "response",
                                 dynamicVariable: "user_name",
                                 valuePath: "user.name",
+                                sanitize: false,
                             },
                         ],
                     },
@@ -135,7 +143,9 @@ describe("ToolConfigsClient", () => {
             tool_call_sound: "typing",
             tool_call_sound_behavior: "auto",
             execution_mode: "immediate",
-            assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+            assignments: [
+                { source: "response", dynamic_variable: "user_name", value_path: "user.name", sanitize: false },
+            ],
         };
         server
             .mockEndpoint()
@@ -158,6 +168,7 @@ describe("ToolConfigsClient", () => {
                     source: "response",
                     dynamicVariable: "user_name",
                     valuePath: "user.name",
+                    sanitize: false,
                 },
             ],
         });
@@ -186,7 +197,14 @@ describe("ToolConfigsClient", () => {
                 tool_config_overrides: [
                     {
                         tool_name: "tool_name",
-                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamic_variable: "user_name",
+                                value_path: "user.name",
+                                sanitize: false,
+                            },
+                        ],
                     },
                 ],
                 disable_compression: true,
@@ -251,6 +269,7 @@ describe("ToolConfigsClient", () => {
                                 source: "response",
                                 dynamicVariable: "user_name",
                                 valuePath: "user.name",
+                                sanitize: false,
                             },
                         ],
                     },
@@ -303,7 +322,14 @@ describe("ToolConfigsClient", () => {
                 tool_config_overrides: [
                     {
                         tool_name: "tool_name",
-                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamic_variable: "user_name",
+                                value_path: "user.name",
+                                sanitize: false,
+                            },
+                        ],
                     },
                 ],
                 disable_compression: true,
@@ -369,6 +395,7 @@ describe("ToolConfigsClient", () => {
                                 source: "response",
                                 dynamicVariable: "user_name",
                                 valuePath: "user.name",
+                                sanitize: false,
                             },
                         ],
                     },

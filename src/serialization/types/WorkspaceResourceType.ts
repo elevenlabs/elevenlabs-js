@@ -38,6 +38,7 @@ export const WorkspaceResourceType: core.serialization.Schema<
     "resource_locators",
     "assets",
     "content_generations",
+    "content_templates",
 ]);
 
 export declare namespace WorkspaceResourceType {
@@ -71,5 +72,6 @@ export declare namespace WorkspaceResourceType {
         | "convai_agent_drafts"
         | "resource_locators"
         | "assets"
-        | "content_generations";
+        | "content_generations"
+        | "content_templates";
 }

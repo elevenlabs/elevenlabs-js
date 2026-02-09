@@ -46,6 +46,7 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
     ),
     importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
     speechImported: core.serialization.property("speech_imported", core.serialization.boolean().optional()),
+    dubAudioProgress: core.serialization.property("dub_audio_progress", core.serialization.number().optional()),
     audioTrackReady: core.serialization.property("audio_track_ready", core.serialization.boolean().optional()),
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
     canvasPlacement: core.serialization.property("canvas_placement", CanvasPlacement.optional()),
@@ -81,6 +82,7 @@ export declare namespace ProjectVideoResponseModel {
         pending_block_ids: string[];
         import_speech_progress?: number | null;
         speech_imported?: boolean | null;
+        dub_audio_progress?: number | null;
         audio_track_ready?: boolean | null;
         current_snapshot_id?: string | null;
         canvas_placement?: CanvasPlacement.Raw | null;

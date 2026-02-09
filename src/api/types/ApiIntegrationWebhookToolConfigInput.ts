@@ -18,6 +18,8 @@ export interface ApiIntegrationWebhookToolConfigInput {
     toolCallSound?: ElevenLabs.ToolCallSoundType;
     /** Determines when the tool call sound should play. 'auto' only plays when there's pre-tool speech, 'always' plays for every tool call. */
     toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
+    /** Controls how tool errors are processed before being shared with the agent. 'auto' determines handling based on tool type (summarized for native integrations, hide for others), 'summarized' sends an LLM-generated summary, 'passthrough' sends the raw error, 'hide' does not share the error with the agent. */
+    toolErrorHandlingMode?: ElevenLabs.ToolErrorHandlingMode;
     /** Configuration for dynamic variables */
     dynamicVariables?: ElevenLabs.DynamicVariablesConfig;
     /** Determines when and how the tool executes: 'immediate' executes the tool right away when requested by the LLM, 'post_tool_speech' waits for the agent to finish speaking before executing, 'async' runs the tool in the background without blocking - best for long-running operations. */

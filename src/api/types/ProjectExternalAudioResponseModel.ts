@@ -21,5 +21,6 @@ export interface ProjectExternalAudioResponseModel {
     pendingBlockIds: string[];
     importSpeechProgress?: number;
     speechImported?: boolean;
+    dubAudioProgress?: number;
     currentSnapshotId?: string;
 }

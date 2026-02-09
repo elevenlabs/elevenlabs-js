@@ -7,6 +7,7 @@ import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { SystemToolConfigInputParams } from "./SystemToolConfigInputParams";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
+import { ToolErrorHandlingMode } from "./ToolErrorHandlingMode";
 
 export const SystemToolConfigInput: core.serialization.ObjectSchema<
     serializers.SystemToolConfigInput.Raw,
@@ -21,6 +22,7 @@ export const SystemToolConfigInput: core.serialization.ObjectSchema<
     assignments: core.serialization.list(DynamicVariableAssignment).optional(),
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
+    toolErrorHandlingMode: core.serialization.property("tool_error_handling_mode", ToolErrorHandlingMode.optional()),
     params: SystemToolConfigInputParams,
 });
 
@@ -35,6 +37,7 @@ export declare namespace SystemToolConfigInput {
         assignments?: DynamicVariableAssignment.Raw[] | null;
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
+        tool_error_handling_mode?: ToolErrorHandlingMode.Raw | null;
         params: SystemToolConfigInputParams.Raw;
     }
 }

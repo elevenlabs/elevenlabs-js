@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const TtsModelFamily: core.serialization.Schema<serializers.TtsModelFamily.Raw, ElevenLabs.TtsModelFamily> =
-    core.serialization.enum_(["turbo", "flash", "multilingual"]);
+    core.serialization.enum_(["turbo", "flash", "multilingual", "v3_conversational"]);
 
 export declare namespace TtsModelFamily {
-    export type Raw = "turbo" | "flash" | "multilingual";
+    export type Raw = "turbo" | "flash" | "multilingual" | "v3_conversational";
 }

@@ -53,6 +53,7 @@ describe("AgentsClient", () => {
                     model_id: "eleven_turbo_v2",
                     voice_id: "cjVigY5qzO86Huf0OWal",
                     supported_voices: [{ label: "label", voice_id: "voice_id" }],
+                    suggested_audio_tags: [{ tag: "tag" }],
                     agent_output_audio_format: "pcm_16000",
                     optimize_streaming_latency: 3,
                     stability: 0.5,
@@ -173,6 +174,7 @@ describe("AgentsClient", () => {
                 auth: {
                     enable_auth: true,
                     allowlist: [{ hostname: "https://example.com" }],
+                    require_origin_header: true,
                     shareable_token: "1234567890",
                 },
                 call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
@@ -191,8 +193,6 @@ describe("AgentsClient", () => {
                     provider: "sip_trunk",
                     phone_number: "+1987654321",
                     label: "Sales Team",
-                    supports_inbound: true,
-                    supports_outbound: true,
                     phone_number_id: "phone_456",
                     assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
                     provider_config: {
@@ -387,9 +387,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamic_variable: "user_name",
                                                     value_path: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             tool_call_sound_behavior: "auto",
+                                            tool_error_handling_mode: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
@@ -474,9 +476,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamic_variable: "user_name",
                                                     value_path: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             tool_call_sound_behavior: "auto",
+                                            tool_error_handling_mode: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
@@ -562,9 +566,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamic_variable: "user_name",
                                                     value_path: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             tool_call_sound_behavior: "auto",
+                                            tool_error_handling_mode: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
@@ -670,6 +676,11 @@ describe("AgentsClient", () => {
                         {
                             label: "label",
                             voiceId: "voice_id",
+                        },
+                    ],
+                    suggestedAudioTags: [
+                        {
+                            tag: "tag",
                         },
                     ],
                     agentOutputAudioFormat: "pcm_16000",
@@ -848,6 +859,7 @@ describe("AgentsClient", () => {
                             hostname: "https://example.com",
                         },
                     ],
+                    requireOriginHeader: true,
                     shareableToken: "1234567890",
                 },
                 callLimits: {
@@ -874,8 +886,6 @@ describe("AgentsClient", () => {
                     provider: "sip_trunk",
                     phoneNumber: "+1987654321",
                     label: "Sales Team",
-                    supportsInbound: true,
-                    supportsOutbound: true,
                     phoneNumberId: "phone_456",
                     assignedAgent: {
                         agentId: "F3Pbu5gP6NNKBscdCdwB",
@@ -1157,9 +1167,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamicVariable: "user_name",
                                                     valuePath: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             toolCallSoundBehavior: "auto",
+                                            toolErrorHandlingMode: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
@@ -1266,9 +1278,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamicVariable: "user_name",
                                                     valuePath: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             toolCallSoundBehavior: "auto",
+                                            toolErrorHandlingMode: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
@@ -1383,9 +1397,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamicVariable: "user_name",
                                                     valuePath: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             toolCallSoundBehavior: "auto",
+                                            toolErrorHandlingMode: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
@@ -1540,6 +1556,7 @@ describe("AgentsClient", () => {
                     model_id: "eleven_turbo_v2",
                     voice_id: "cjVigY5qzO86Huf0OWal",
                     supported_voices: [{ label: "label", voice_id: "voice_id" }],
+                    suggested_audio_tags: [{ tag: "tag" }],
                     agent_output_audio_format: "pcm_16000",
                     optimize_streaming_latency: 3,
                     stability: 0.5,
@@ -1660,6 +1677,7 @@ describe("AgentsClient", () => {
                 auth: {
                     enable_auth: true,
                     allowlist: [{ hostname: "https://example.com" }],
+                    require_origin_header: true,
                     shareable_token: "1234567890",
                 },
                 call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
@@ -1678,8 +1696,6 @@ describe("AgentsClient", () => {
                     provider: "sip_trunk",
                     phone_number: "+1987654321",
                     label: "Sales Team",
-                    supports_inbound: true,
-                    supports_outbound: true,
                     phone_number_id: "phone_456",
                     assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
                     provider_config: {
@@ -1874,9 +1890,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamic_variable: "user_name",
                                                     value_path: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             tool_call_sound_behavior: "auto",
+                                            tool_error_handling_mode: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
@@ -1961,9 +1979,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamic_variable: "user_name",
                                                     value_path: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             tool_call_sound_behavior: "auto",
+                                            tool_error_handling_mode: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
@@ -2049,9 +2069,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamic_variable: "user_name",
                                                     value_path: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             tool_call_sound_behavior: "auto",
+                                            tool_error_handling_mode: "auto",
                                             dynamic_variables: {
                                                 dynamic_variable_placeholders: { user_name: "John Doe" },
                                             },
@@ -2158,6 +2180,11 @@ describe("AgentsClient", () => {
                         {
                             label: "label",
                             voiceId: "voice_id",
+                        },
+                    ],
+                    suggestedAudioTags: [
+                        {
+                            tag: "tag",
                         },
                     ],
                     agentOutputAudioFormat: "pcm_16000",
@@ -2336,6 +2363,7 @@ describe("AgentsClient", () => {
                             hostname: "https://example.com",
                         },
                     ],
+                    requireOriginHeader: true,
                     shareableToken: "1234567890",
                 },
                 callLimits: {
@@ -2362,8 +2390,6 @@ describe("AgentsClient", () => {
                     provider: "sip_trunk",
                     phoneNumber: "+1987654321",
                     label: "Sales Team",
-                    supportsInbound: true,
-                    supportsOutbound: true,
                     phoneNumberId: "phone_456",
                     assignedAgent: {
                         agentId: "F3Pbu5gP6NNKBscdCdwB",
@@ -2645,9 +2671,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamicVariable: "user_name",
                                                     valuePath: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             toolCallSoundBehavior: "auto",
+                                            toolErrorHandlingMode: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
@@ -2754,9 +2782,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamicVariable: "user_name",
                                                     valuePath: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             toolCallSoundBehavior: "auto",
+                                            toolErrorHandlingMode: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",
@@ -2871,9 +2901,11 @@ describe("AgentsClient", () => {
                                                     source: "response",
                                                     dynamicVariable: "user_name",
                                                     valuePath: "user.name",
+                                                    sanitize: false,
                                                 },
                                             ],
                                             toolCallSoundBehavior: "auto",
+                                            toolErrorHandlingMode: "auto",
                                             dynamicVariables: {
                                                 dynamicVariablePlaceholders: {
                                                     user_name: "John Doe",

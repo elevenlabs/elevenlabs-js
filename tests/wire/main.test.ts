@@ -4,16 +4,6 @@ import { ElevenLabsClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("ElevenLabsClient", () => {
-    test("postV1ConvaiWhatsappAccounts", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
-        server.mockEndpoint().post("/v1/convai/whatsapp-accounts").respondWith().statusCode(200).build();
-
-        const response = await client.postV1ConvaiWhatsappAccounts();
-        expect(response).toEqual(undefined);
-    });
-
     test("deleteV1ConvaiAgentsAgentIdBranchesBranchId", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

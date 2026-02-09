@@ -39,4 +39,47 @@ describe("WhatsappClient", () => {
             conversationId: "conversation_id",
         });
     });
+
+    test("outbound_message", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            whatsapp_phone_number_id: "whatsapp_phone_number_id",
+            whatsapp_user_id: "whatsapp_user_id",
+            template_name: "template_name",
+            template_language_code: "template_language_code",
+            template_params: [{ type: "body", parameters: [{ text: "text" }] }],
+            agent_id: "agent_id",
+        };
+        const rawResponseBody = { conversation_id: "conversation_id" };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/whatsapp/outbound-message")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.whatsapp.outboundMessage({
+            whatsappPhoneNumberId: "whatsapp_phone_number_id",
+            whatsappUserId: "whatsapp_user_id",
+            templateName: "template_name",
+            templateLanguageCode: "template_language_code",
+            templateParams: [
+                {
+                    type: "body",
+                    parameters: [
+                        {
+                            text: "text",
+                        },
+                    ],
+                },
+            ],
+            agentId: "agent_id",
+        });
+        expect(response).toEqual({
+            conversationId: "conversation_id",
+        });
+    });
 });

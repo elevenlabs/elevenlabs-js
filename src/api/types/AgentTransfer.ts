@@ -6,4 +6,5 @@ export interface AgentTransfer {
     delayMs?: number;
     transferMessage?: string;
     enableTransferredAgentFirstMessage?: boolean;
+    isWorkflowNodeTransfer?: boolean;
 }

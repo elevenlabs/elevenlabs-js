@@ -4699,6 +4699,81 @@ await client.conversationalAi.whatsapp.outboundCall({
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.whatsapp.<a href="/src/api/resources/conversationalAi/resources/whatsapp/client/Client.ts">outboundMessage</a>({ ...params }) -> ElevenLabs.WhatsAppOutboundMessageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Send an outbound message via WhatsApp
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.whatsapp.outboundMessage({
+    whatsappPhoneNumberId: "whatsapp_phone_number_id",
+    whatsappUserId: "whatsapp_user_id",
+    templateName: "template_name",
+    templateLanguageCode: "template_language_code",
+    templateParams: [{
+            type: "body",
+            parameters: [{
+                    text: "text"
+                }]
+        }],
+    agentId: "agent_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents
 <details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentResponseModel</code></summary>
 <dl>
@@ -13643,6 +13718,69 @@ await client.studio.projects.convert("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **project_id:** `string` — The ID of the project to be used. You can use the [List projects](/docs/api-reference/studio/get-projects) endpoint to list all the available projects.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProjectsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.studio.projects.<a href="/src/api/resources/studio/resources/projects/client/Client.ts">getMutedTracks</a>(project_id) -> ElevenLabs.ProjectMutedTracksResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of chapter IDs that have muted tracks in a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.studio.projects.getMutedTracks("21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — The ID of the Studio project.
     
 </dd>
 </dl>

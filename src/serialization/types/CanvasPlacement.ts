@@ -8,8 +8,8 @@ export const CanvasPlacement: core.serialization.ObjectSchema<
     serializers.CanvasPlacement.Raw,
     ElevenLabs.CanvasPlacement
 > = core.serialization.object({
-    x: core.serialization.number().optional(),
-    y: core.serialization.number().optional(),
+    xRelative: core.serialization.property("x_relative", core.serialization.number().optional()),
+    yRelative: core.serialization.property("y_relative", core.serialization.number().optional()),
     scaleX: core.serialization.property("scale_x", core.serialization.number().optional()),
     scaleY: core.serialization.property("scale_y", core.serialization.number().optional()),
     pivotX: core.serialization.property("pivot_x", core.serialization.number().optional()),
@@ -20,8 +20,8 @@ export const CanvasPlacement: core.serialization.ObjectSchema<
 
 export declare namespace CanvasPlacement {
     export interface Raw {
-        x?: number | null;
-        y?: number | null;
+        x_relative?: number | null;
+        y_relative?: number | null;
         scale_x?: number | null;
         scale_y?: number | null;
         pivot_x?: number | null;

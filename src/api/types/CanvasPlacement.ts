@@ -4,8 +4,8 @@
  * Defines asset positioning and transformation on canvas.
  */
 export interface CanvasPlacement {
-    x?: number;
-    y?: number;
+    xRelative?: number;
+    yRelative?: number;
     scaleX?: number;
     scaleY?: number;
     pivotX?: number;

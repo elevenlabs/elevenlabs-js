@@ -17,6 +17,7 @@ export const ConversationInitiationSource = {
     Whatsapp: "whatsapp",
     FlutterSdk: "flutter_sdk",
     ZendeskIntegration: "zendesk_integration",
+    SlackIntegration: "slack_integration",
 } as const;
 export type ConversationInitiationSource =
     (typeof ConversationInitiationSource)[keyof typeof ConversationInitiationSource];

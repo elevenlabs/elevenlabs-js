@@ -23,5 +23,7 @@ export interface SystemToolConfigInput {
     toolCallSound?: ElevenLabs.ToolCallSoundType;
     /** Determines when the tool call sound should play. 'auto' only plays when there's pre-tool speech, 'always' plays for every tool call. */
     toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
+    /** Controls how tool errors are processed before being shared with the agent. 'auto' determines handling based on tool type (summarized for native integrations, hide for others), 'summarized' sends an LLM-generated summary, 'passthrough' sends the raw error, 'hide' does not share the error with the agent. */
+    toolErrorHandlingMode?: ElevenLabs.ToolErrorHandlingMode;
     params: ElevenLabs.SystemToolConfigInputParams;
 }

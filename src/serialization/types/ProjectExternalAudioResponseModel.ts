@@ -34,6 +34,7 @@ export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
     ),
     importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
     speechImported: core.serialization.property("speech_imported", core.serialization.boolean().optional()),
+    dubAudioProgress: core.serialization.property("dub_audio_progress", core.serialization.number().optional()),
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
 });
 
@@ -59,6 +60,7 @@ export declare namespace ProjectExternalAudioResponseModel {
         pending_block_ids: string[];
         import_speech_progress?: number | null;
         speech_imported?: boolean | null;
+        dub_audio_progress?: number | null;
         current_snapshot_id?: string | null;
     }
 }

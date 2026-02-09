@@ -13,8 +13,6 @@ describe("PhoneNumbersClient", () => {
                 provider: "twilio",
                 phone_number: "+1234567890",
                 label: "Customer Support",
-                supports_inbound: true,
-                supports_outbound: true,
                 phone_number_id: "phone_123",
                 assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
             },
@@ -33,8 +31,6 @@ describe("PhoneNumbersClient", () => {
                 provider: "twilio",
                 phoneNumber: "+1234567890",
                 label: "Customer Support",
-                supportsInbound: true,
-                supportsOutbound: true,
                 phoneNumberId: "phone_123",
                 assignedAgent: {
                     agentId: "F3Pbu5gP6NNKBscdCdwB",
@@ -84,8 +80,6 @@ describe("PhoneNumbersClient", () => {
             provider: "twilio",
             phone_number: "+1234567890",
             label: "Customer Support",
-            supports_inbound: true,
-            supports_outbound: true,
             phone_number_id: "phone_123",
             assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
         };
@@ -102,8 +96,6 @@ describe("PhoneNumbersClient", () => {
             provider: "twilio",
             phoneNumber: "+1234567890",
             label: "Customer Support",
-            supportsInbound: true,
-            supportsOutbound: true,
             phoneNumberId: "phone_123",
             assignedAgent: {
                 agentId: "F3Pbu5gP6NNKBscdCdwB",
@@ -139,8 +131,6 @@ describe("PhoneNumbersClient", () => {
             provider: "twilio",
             phone_number: "+1234567890",
             label: "Customer Support",
-            supports_inbound: true,
-            supports_outbound: true,
             phone_number_id: "phone_123",
             assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
         };
@@ -158,8 +148,6 @@ describe("PhoneNumbersClient", () => {
             provider: "twilio",
             phoneNumber: "+1234567890",
             label: "Customer Support",
-            supportsInbound: true,
-            supportsOutbound: true,
             phoneNumberId: "phone_123",
             assignedAgent: {
                 agentId: "F3Pbu5gP6NNKBscdCdwB",

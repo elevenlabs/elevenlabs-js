@@ -9,6 +9,10 @@ export const AuthSettings: core.serialization.ObjectSchema<serializers.AuthSetti
     core.serialization.object({
         enableAuth: core.serialization.property("enable_auth", core.serialization.boolean().optional()),
         allowlist: core.serialization.list(AllowlistItem).optional(),
+        requireOriginHeader: core.serialization.property(
+            "require_origin_header",
+            core.serialization.boolean().optional(),
+        ),
         shareableToken: core.serialization.property("shareable_token", core.serialization.string().optional()),
     });
 
@@ -16,6 +20,7 @@ export declare namespace AuthSettings {
     export interface Raw {
         enable_auth?: boolean | null;
         allowlist?: AllowlistItem.Raw[] | null;
+        require_origin_header?: boolean | null;
         shareable_token?: string | null;
     }
 }

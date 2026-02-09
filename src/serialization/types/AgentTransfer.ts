@@ -14,6 +14,10 @@ export const AgentTransfer: core.serialization.ObjectSchema<serializers.AgentTra
             "enable_transferred_agent_first_message",
             core.serialization.boolean().optional(),
         ),
+        isWorkflowNodeTransfer: core.serialization.property(
+            "is_workflow_node_transfer",
+            core.serialization.boolean().optional(),
+        ),
     });
 
 export declare namespace AgentTransfer {
@@ -23,5 +27,6 @@ export declare namespace AgentTransfer {
         delay_ms?: number | null;
         transfer_message?: string | null;
         enable_transferred_agent_first_message?: boolean | null;
+        is_workflow_node_transfer?: boolean | null;
     }
 }

@@ -15,6 +15,10 @@ export const WhatsAppConversationInfo: core.serialization.ObjectSchema<
         core.serialization.string().optional(),
     ),
     whatsappUserId: core.serialization.property("whatsapp_user_id", core.serialization.string()),
+    awaitingFirstUserMessage: core.serialization.property(
+        "awaiting_first_user_message",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace WhatsAppConversationInfo {
@@ -22,5 +26,6 @@ export declare namespace WhatsAppConversationInfo {
         direction?: WhatsAppConversationInfoDirection.Raw | null;
         whatsapp_phone_number_id?: string | null;
         whatsapp_user_id: string;
+        awaiting_first_user_message?: boolean | null;
     }
 }

@@ -9,4 +9,6 @@ export interface UnitTestToolCallEvaluationModelInput {
     referencedTool?: ElevenLabs.ReferencedToolCommonModel;
     /** Whether to verify that the tool was NOT called. */
     verifyAbsence?: boolean;
+    /** Configuration for testing workflow node transitions. When set, the test will verify the agent transitions to the specified workflow node. */
+    workflowNodeTransition?: ElevenLabs.UnitTestWorkflowNodeTransitionEvaluationNodeId;
 }
