@@ -31,5 +31,6 @@ export * from "./twilio/client/requests";
 export * from "./twilio/types";
 export * as whatsapp from "./whatsapp";
 export * from "./whatsapp/client/requests";
+export * from "./whatsapp/types";
 export * as whatsappAccounts from "./whatsappAccounts";
 export * from "./whatsappAccounts/client/requests";

@@ -32,5 +32,6 @@ export const WorkspaceResourceType = {
     ResourceLocators: "resource_locators",
     Assets: "assets",
     ContentGenerations: "content_generations",
+    ContentTemplates: "content_templates",
 } as const;
 export type WorkspaceResourceType = (typeof WorkspaceResourceType)[keyof typeof WorkspaceResourceType];

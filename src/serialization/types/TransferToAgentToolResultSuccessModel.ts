@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { TransferToAgentToolResultSuccessModelBranchInfo } from "./TransferToAgentToolResultSuccessModelBranchInfo";
 
 export const TransferToAgentToolResultSuccessModel: core.serialization.ObjectSchema<
     serializers.TransferToAgentToolResultSuccessModel.Raw,
@@ -18,6 +19,7 @@ export const TransferToAgentToolResultSuccessModel: core.serialization.ObjectSch
         "enable_transferred_agent_first_message",
         core.serialization.boolean().optional(),
     ),
+    branchInfo: core.serialization.property("branch_info", TransferToAgentToolResultSuccessModelBranchInfo.optional()),
 });
 
 export declare namespace TransferToAgentToolResultSuccessModel {
@@ -29,5 +31,6 @@ export declare namespace TransferToAgentToolResultSuccessModel {
         delay_ms?: number | null;
         transfer_message?: string | null;
         enable_transferred_agent_first_message?: boolean | null;
+        branch_info?: TransferToAgentToolResultSuccessModelBranchInfo.Raw | null;
     }
 }

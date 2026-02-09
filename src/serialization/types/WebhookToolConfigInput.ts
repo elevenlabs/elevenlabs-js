@@ -7,6 +7,7 @@ import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
+import { ToolErrorHandlingMode } from "./ToolErrorHandlingMode";
 import { ToolExecutionMode } from "./ToolExecutionMode";
 import { WebhookToolApiSchemaConfigInput } from "./WebhookToolApiSchemaConfigInput";
 
@@ -22,6 +23,7 @@ export const WebhookToolConfigInput: core.serialization.ObjectSchema<
     assignments: core.serialization.list(DynamicVariableAssignment).optional(),
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
+    toolErrorHandlingMode: core.serialization.property("tool_error_handling_mode", ToolErrorHandlingMode.optional()),
     dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
     apiSchema: core.serialization.property("api_schema", WebhookToolApiSchemaConfigInput),
@@ -37,6 +39,7 @@ export declare namespace WebhookToolConfigInput {
         assignments?: DynamicVariableAssignment.Raw[] | null;
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
+        tool_error_handling_mode?: ToolErrorHandlingMode.Raw | null;
         dynamic_variables?: DynamicVariablesConfig.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
         api_schema: WebhookToolApiSchemaConfigInput.Raw;

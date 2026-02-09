@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ReferencedToolCommonModel } from "./ReferencedToolCommonModel";
 import { UnitTestToolCallParameter } from "./UnitTestToolCallParameter";
+import { UnitTestWorkflowNodeTransitionEvaluationNodeId } from "./UnitTestWorkflowNodeTransitionEvaluationNodeId";
 
 export const UnitTestToolCallEvaluationModelInput: core.serialization.ObjectSchema<
     serializers.UnitTestToolCallEvaluationModelInput.Raw,
@@ -13,6 +14,10 @@ export const UnitTestToolCallEvaluationModelInput: core.serialization.ObjectSche
     parameters: core.serialization.list(UnitTestToolCallParameter).optional(),
     referencedTool: core.serialization.property("referenced_tool", ReferencedToolCommonModel.optional()),
     verifyAbsence: core.serialization.property("verify_absence", core.serialization.boolean().optional()),
+    workflowNodeTransition: core.serialization.property(
+        "workflow_node_transition",
+        UnitTestWorkflowNodeTransitionEvaluationNodeId.optional(),
+    ),
 });
 
 export declare namespace UnitTestToolCallEvaluationModelInput {
@@ -20,5 +25,6 @@ export declare namespace UnitTestToolCallEvaluationModelInput {
         parameters?: UnitTestToolCallParameter.Raw[] | null;
         referenced_tool?: ReferencedToolCommonModel.Raw | null;
         verify_absence?: boolean | null;
+        workflow_node_transition?: UnitTestWorkflowNodeTransitionEvaluationNodeId.Raw | null;
     }
 }

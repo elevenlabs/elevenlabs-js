@@ -100,6 +100,7 @@ describe("TestsClient", () => {
                 parameters: [{ eval: { type: "anything" }, path: "path" }],
                 referenced_tool: { id: "id", type: "system" },
                 verify_absence: true,
+                workflow_node_transition: { type: "node_id", agent_id: "agent_id", target_node_id: "target_node_id" },
             },
             check_any_tool_matches: true,
             dynamic_variables: { key: "value" },
@@ -107,6 +108,7 @@ describe("TestsClient", () => {
             from_conversation_metadata: {
                 conversation_id: "conversation_id",
                 agent_id: "agent_id",
+                branch_id: "branch_id",
                 workflow_node_id: "workflow_node_id",
                 original_agent_reply: [{ role: "user", time_in_call_secs: 1 }],
             },
@@ -204,6 +206,11 @@ describe("TestsClient", () => {
                     type: "system",
                 },
                 verifyAbsence: true,
+                workflowNodeTransition: {
+                    type: "node_id",
+                    agentId: "agent_id",
+                    targetNodeId: "target_node_id",
+                },
             },
             checkAnyToolMatches: true,
             dynamicVariables: {
@@ -213,6 +220,7 @@ describe("TestsClient", () => {
             fromConversationMetadata: {
                 conversationId: "conversation_id",
                 agentId: "agent_id",
+                branchId: "branch_id",
                 workflowNodeId: "workflow_node_id",
                 originalAgentReply: [
                     {
@@ -281,6 +289,7 @@ describe("TestsClient", () => {
                 parameters: [{ eval: { type: "anything" }, path: "path" }],
                 referenced_tool: { id: "id", type: "system" },
                 verify_absence: true,
+                workflow_node_transition: { type: "node_id", agent_id: "agent_id", target_node_id: "target_node_id" },
             },
             check_any_tool_matches: true,
             dynamic_variables: { key: "value" },
@@ -288,6 +297,7 @@ describe("TestsClient", () => {
             from_conversation_metadata: {
                 conversation_id: "conversation_id",
                 agent_id: "agent_id",
+                branch_id: "branch_id",
                 workflow_node_id: "workflow_node_id",
                 original_agent_reply: [{ role: "user", time_in_call_secs: 1 }],
             },
@@ -407,6 +417,11 @@ describe("TestsClient", () => {
                     type: "system",
                 },
                 verifyAbsence: true,
+                workflowNodeTransition: {
+                    type: "node_id",
+                    agentId: "agent_id",
+                    targetNodeId: "target_node_id",
+                },
             },
             checkAnyToolMatches: true,
             dynamicVariables: {
@@ -416,6 +431,7 @@ describe("TestsClient", () => {
             fromConversationMetadata: {
                 conversationId: "conversation_id",
                 agentId: "agent_id",
+                branchId: "branch_id",
                 workflowNodeId: "workflow_node_id",
                 originalAgentReply: [
                     {

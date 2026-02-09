@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const SeatType: core.serialization.Schema<serializers.SeatType.Raw, ElevenLabs.SeatType> =
-    core.serialization.enum_(["workspace_admin", "workspace_member"]);
+    core.serialization.enum_(["workspace_admin", "workspace_member", "workspace_lite_member"]);
 
 export declare namespace SeatType {
-    export type Raw = "workspace_admin" | "workspace_member";
+    export type Raw = "workspace_admin" | "workspace_member" | "workspace_lite_member";
 }

@@ -27,7 +27,14 @@ describe("ApprovalPolicyClient", () => {
                 tool_config_overrides: [
                     {
                         tool_name: "tool_name",
-                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamic_variable: "user_name",
+                                value_path: "user.name",
+                                sanitize: false,
+                            },
+                        ],
                     },
                 ],
                 disable_compression: true,
@@ -95,6 +102,7 @@ describe("ApprovalPolicyClient", () => {
                                 source: "response",
                                 dynamicVariable: "user_name",
                                 valuePath: "user.name",
+                                sanitize: false,
                             },
                         ],
                     },

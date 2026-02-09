@@ -23,6 +23,7 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "whatsapp",
     "flutter_sdk",
     "zendesk_integration",
+    "slack_integration",
 ]);
 
 export declare namespace ConversationInitiationSource {
@@ -41,5 +42,6 @@ export declare namespace ConversationInitiationSource {
         | "swift_sdk"
         | "whatsapp"
         | "flutter_sdk"
-        | "zendesk_integration";
+        | "zendesk_integration"
+        | "slack_integration";
 }

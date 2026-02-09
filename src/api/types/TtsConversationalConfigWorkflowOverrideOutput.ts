@@ -9,6 +9,8 @@ export interface TtsConversationalConfigWorkflowOverrideOutput {
     voiceId?: string;
     /** Additional supported voices for the agent */
     supportedVoices?: ElevenLabs.SupportedVoice[];
+    /** Suggested audio tags to boost expressive speech (for eleven_v3 and eleven_v3_conversational models). The agent can still use other tags not listed here. */
+    suggestedAudioTags?: ElevenLabs.SuggestedAudioTag[];
     /** The audio format to use for TTS */
     agentOutputAudioFormat?: ElevenLabs.TtsOutputFormat;
     /** The optimization for streaming latency */

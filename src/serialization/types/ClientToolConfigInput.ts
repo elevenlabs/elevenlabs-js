@@ -7,6 +7,7 @@ import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
+import { ToolErrorHandlingMode } from "./ToolErrorHandlingMode";
 import { ToolExecutionMode } from "./ToolExecutionMode";
 
 export const ClientToolConfigInput: core.serialization.ObjectSchema<
@@ -21,6 +22,7 @@ export const ClientToolConfigInput: core.serialization.ObjectSchema<
     assignments: core.serialization.list(DynamicVariableAssignment).optional(),
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
+    toolErrorHandlingMode: core.serialization.property("tool_error_handling_mode", ToolErrorHandlingMode.optional()),
     parameters: core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyInput).optional(),
     expectsResponse: core.serialization.property("expects_response", core.serialization.boolean().optional()),
     dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
@@ -37,6 +39,7 @@ export declare namespace ClientToolConfigInput {
         assignments?: DynamicVariableAssignment.Raw[] | null;
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
+        tool_error_handling_mode?: ToolErrorHandlingMode.Raw | null;
         parameters?: serializers.ObjectJsonSchemaPropertyInput.Raw | null;
         expects_response?: boolean | null;
         dynamic_variables?: DynamicVariablesConfig.Raw | null;

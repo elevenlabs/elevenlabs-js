@@ -3,5 +3,6 @@
 export const SeatType = {
     WorkspaceAdmin: "workspace_admin",
     WorkspaceMember: "workspace_member",
+    WorkspaceLiteMember: "workspace_lite_member",
 } as const;
 export type SeatType = (typeof SeatType)[keyof typeof SeatType];

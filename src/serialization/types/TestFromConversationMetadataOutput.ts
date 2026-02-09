@@ -11,6 +11,7 @@ export const TestFromConversationMetadataOutput: core.serialization.ObjectSchema
 > = core.serialization.object({
     conversationId: core.serialization.property("conversation_id", core.serialization.string()),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     workflowNodeId: core.serialization.property("workflow_node_id", core.serialization.string().optional()),
     originalAgentReply: core.serialization.property(
         "original_agent_reply",
@@ -22,6 +23,7 @@ export declare namespace TestFromConversationMetadataOutput {
     export interface Raw {
         conversation_id: string;
         agent_id: string;
+        branch_id?: string | null;
         workflow_node_id?: string | null;
         original_agent_reply?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
     }

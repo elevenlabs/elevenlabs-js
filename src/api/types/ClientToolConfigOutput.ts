@@ -21,6 +21,8 @@ export interface ClientToolConfigOutput {
     toolCallSound?: ElevenLabs.ToolCallSoundType;
     /** Determines when the tool call sound should play. 'auto' only plays when there's pre-tool speech, 'always' plays for every tool call. */
     toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
+    /** Controls how tool errors are processed before being shared with the agent. 'auto' determines handling based on tool type (summarized for native integrations, hide for others), 'summarized' sends an LLM-generated summary, 'passthrough' sends the raw error, 'hide' does not share the error with the agent. */
+    toolErrorHandlingMode?: ElevenLabs.ToolErrorHandlingMode;
     /** Schema for any parameters to pass to the client */
     parameters?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
     /** If true, calling this tool should block the conversation until the client responds with some response which is passed to the llm. If false then we will continue the conversation without waiting for the client to respond, this is useful to show content to a user but not block the conversation */

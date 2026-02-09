@@ -7,6 +7,8 @@ export interface AuthSettings {
     enableAuth?: boolean;
     /** A list of hosts that are allowed to start conversations with the agent */
     allowlist?: ElevenLabs.AllowlistItem[];
+    /** When enabled, connections with no origin header will be rejected. If the allowlist is empty, this option has no effect. */
+    requireOriginHeader?: boolean;
     /** A shareable token that can be used to start a conversation with the agent */
     shareableToken?: string;
 }

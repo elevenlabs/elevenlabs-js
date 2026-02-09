@@ -258,6 +258,7 @@ describe("ProjectsClient", () => {
                     pending_block_ids: ["pending_block_ids"],
                     import_speech_progress: 1.1,
                     speech_imported: true,
+                    dub_audio_progress: 1.1,
                     audio_track_ready: true,
                     current_snapshot_id: "current_snapshot_id",
                     track_id: "track_id",
@@ -701,6 +702,7 @@ describe("ProjectsClient", () => {
                     pendingBlockIds: ["pending_block_ids"],
                     importSpeechProgress: 1.1,
                     speechImported: true,
+                    dubAudioProgress: 1.1,
                     audioTrackReady: true,
                     currentSnapshotId: "current_snapshot_id",
                     trackId: "track_id",
@@ -1173,6 +1175,25 @@ describe("ProjectsClient", () => {
         const response = await client.studio.projects.convert("21m00Tcm4TlvDq8ikWAM");
         expect(response).toEqual({
             status: "ok",
+        });
+    });
+
+    test("get_muted_tracks", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { chapter_ids: ["aw1NgEzBg83R7vgmiJt6"] };
+        server
+            .mockEndpoint()
+            .get("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/muted-tracks")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.studio.projects.getMutedTracks("21m00Tcm4TlvDq8ikWAM");
+        expect(response).toEqual({
+            chapterIds: ["aw1NgEzBg83R7vgmiJt6"],
         });
     });
 });

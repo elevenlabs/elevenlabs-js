@@ -716,4 +716,88 @@ export class ProjectsClient {
             "/v1/studio/projects/{project_id}/convert",
         );
     }
+
+    /**
+     * Returns a list of chapter IDs that have muted tracks in a project.
+     *
+     * @param {string} project_id - The ID of the Studio project.
+     * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.studio.projects.getMutedTracks("21m00Tcm4TlvDq8ikWAM")
+     */
+    public getMutedTracks(
+        project_id: string,
+        requestOptions?: ProjectsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.ProjectMutedTracksResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__getMutedTracks(project_id, requestOptions));
+    }
+
+    private async __getMutedTracks(
+        project_id: string,
+        requestOptions?: ProjectsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.ProjectMutedTracksResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/studio/projects/${core.url.encodePathParam(project_id)}/muted-tracks`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.ProjectMutedTracksResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/studio/projects/{project_id}/muted-tracks",
+        );
+    }
 }

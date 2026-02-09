@@ -11,6 +11,7 @@ export const DynamicVariableAssignment: core.serialization.ObjectSchema<
     source: core.serialization.stringLiteral("response").optional(),
     dynamicVariable: core.serialization.property("dynamic_variable", core.serialization.string()),
     valuePath: core.serialization.property("value_path", core.serialization.string()),
+    sanitize: core.serialization.boolean().optional(),
 });
 
 export declare namespace DynamicVariableAssignment {
@@ -18,5 +19,6 @@ export declare namespace DynamicVariableAssignment {
         source?: "response" | null;
         dynamic_variable: string;
         value_path: string;
+        sanitize?: boolean | null;
     }
 }

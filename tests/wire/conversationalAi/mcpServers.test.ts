@@ -89,7 +89,14 @@ describe("McpServersClient", () => {
                 tool_config_overrides: [
                     {
                         tool_name: "tool_name",
-                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamic_variable: "user_name",
+                                value_path: "user.name",
+                                sanitize: false,
+                            },
+                        ],
                     },
                 ],
                 disable_compression: true,
@@ -160,6 +167,7 @@ describe("McpServersClient", () => {
                                 source: "response",
                                 dynamicVariable: "user_name",
                                 valuePath: "user.name",
+                                sanitize: false,
                             },
                         ],
                     },
@@ -212,7 +220,14 @@ describe("McpServersClient", () => {
                 tool_config_overrides: [
                     {
                         tool_name: "tool_name",
-                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamic_variable: "user_name",
+                                value_path: "user.name",
+                                sanitize: false,
+                            },
+                        ],
                     },
                 ],
                 disable_compression: true,
@@ -277,6 +292,7 @@ describe("McpServersClient", () => {
                                 source: "response",
                                 dynamicVariable: "user_name",
                                 valuePath: "user.name",
+                                sanitize: false,
                             },
                         ],
                     },
@@ -348,7 +364,14 @@ describe("McpServersClient", () => {
                 tool_config_overrides: [
                     {
                         tool_name: "tool_name",
-                        assignments: [{ source: "response", dynamic_variable: "user_name", value_path: "user.name" }],
+                        assignments: [
+                            {
+                                source: "response",
+                                dynamic_variable: "user_name",
+                                value_path: "user.name",
+                                sanitize: false,
+                            },
+                        ],
                     },
                 ],
                 disable_compression: true,
@@ -414,6 +437,7 @@ describe("McpServersClient", () => {
                                 source: "response",
                                 dynamicVariable: "user_name",
                                 valuePath: "user.name",
+                                sanitize: false,
                             },
                         ],
                     },

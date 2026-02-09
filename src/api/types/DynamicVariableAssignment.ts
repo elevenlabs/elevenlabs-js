@@ -10,4 +10,6 @@ export interface DynamicVariableAssignment {
     dynamicVariable: string;
     /** Dot notation path to extract the value from the source (e.g., 'user.name' or 'data.0.id') */
     valuePath: string;
+    /** If true, this assignment's value will be removed from the tool response before sending to the LLM and transcript, but still processed for variable assignment. */
+    sanitize?: boolean;
 }
