@@ -24,6 +24,7 @@ import { SipTrunkClient } from "../resources/sipTrunk/client/Client";
 import { TestsClient } from "../resources/tests/client/Client";
 import { ToolsClient } from "../resources/tools/client/Client";
 import { TwilioClient } from "../resources/twilio/client/Client";
+import { UsersClient } from "../resources/users/client/Client";
 import { WhatsappClient } from "../resources/whatsapp/client/Client";
 import { WhatsappAccountsClient } from "../resources/whatsappAccounts/client/Client";
 
@@ -40,6 +41,7 @@ export class ConversationalAiClient {
     protected _whatsapp: WhatsappClient | undefined;
     protected _agents: AgentsClient | undefined;
     protected _tests: TestsClient | undefined;
+    protected _users: UsersClient | undefined;
     protected _phoneNumbers: PhoneNumbersClient | undefined;
     protected _llmUsage: LlmUsageClient | undefined;
     protected _knowledgeBase: KnowledgeBaseClient | undefined;
@@ -75,6 +77,10 @@ export class ConversationalAiClient {
 
     public get tests(): TestsClient {
         return (this._tests ??= new TestsClient(this._options));
+    }
+
+    public get users(): UsersClient {
+        return (this._users ??= new UsersClient(this._options));
     }
 
     public get phoneNumbers(): PhoneNumbersClient {

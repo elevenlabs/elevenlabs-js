@@ -161,24 +161,40 @@ export class AgentsClient {
      * Retrieve config for an agent
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
+     * @param {ElevenLabs.conversationalAi.AgentsGetRequest} request
      * @param {AgentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz")
+     *     await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+     *         versionId: "version_id",
+     *         branchId: "branch_id"
+     *     })
      */
     public get(
         agent_id: string,
+        request: ElevenLabs.conversationalAi.AgentsGetRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.GetAgentResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__get(agent_id, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(agent_id, request, requestOptions));
     }
 
     private async __get(
         agent_id: string,
+        request: ElevenLabs.conversationalAi.AgentsGetRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
+        const { versionId, branchId } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (versionId != null) {
+            _queryParams.version_id = versionId;
+        }
+
+        if (branchId != null) {
+            _queryParams.branch_id = branchId;
+        }
+
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -193,7 +209,7 @@ export class AgentsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -319,7 +335,9 @@ export class AgentsClient {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz")
+     *     await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+     *         branchId: "branch_id"
+     *     })
      */
     public update(
         agent_id: string,
@@ -334,6 +352,12 @@ export class AgentsClient {
         request: ElevenLabs.conversationalAi.UpdateAgentRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
+        const { branchId, ..._body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (branchId != null) {
+            _queryParams.branch_id = branchId;
+        }
+
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -349,9 +373,9 @@ export class AgentsClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
-            body: serializers.conversationalAi.UpdateAgentRequest.jsonOrThrow(request, {
+            body: serializers.conversationalAi.UpdateAgentRequest.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,

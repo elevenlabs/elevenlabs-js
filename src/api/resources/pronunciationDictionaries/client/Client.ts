@@ -254,14 +254,14 @@ export class PronunciationDictionariesClient {
     public get(
         pronunciation_dictionary_id: string,
         requestOptions?: PronunciationDictionariesClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.GetPronunciationDictionaryMetadataResponse> {
+    ): core.HttpResponsePromise<ElevenLabs.GetPronunciationDictionaryWithRulesResponseModel> {
         return core.HttpResponsePromise.fromPromise(this.__get(pronunciation_dictionary_id, requestOptions));
     }
 
     private async __get(
         pronunciation_dictionary_id: string,
         requestOptions?: PronunciationDictionariesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.GetPronunciationDictionaryMetadataResponse>> {
+    ): Promise<core.WithRawResponse<ElevenLabs.GetPronunciationDictionaryWithRulesResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -285,7 +285,7 @@ export class PronunciationDictionariesClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.GetPronunciationDictionaryMetadataResponse.parseOrThrow(_response.body, {
+                data: serializers.GetPronunciationDictionaryWithRulesResponseModel.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

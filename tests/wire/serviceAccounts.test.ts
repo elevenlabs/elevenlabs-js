@@ -23,6 +23,9 @@ describe("ServiceAccountsClient", () => {
                             hashed_xi_api_key: "hashed_xi_api_key",
                         },
                     ],
+                    default_sharing_groups: [
+                        { group: { name: "name", id: "id", members: ["members"] }, permission_level: "admin" },
+                    ],
                 },
             ],
         };
@@ -48,6 +51,16 @@ describe("ServiceAccountsClient", () => {
                             keyId: "key_id",
                             serviceAccountUserId: "service_account_user_id",
                             hashedXiApiKey: "hashed_xi_api_key",
+                        },
+                    ],
+                    defaultSharingGroups: [
+                        {
+                            group: {
+                                name: "name",
+                                id: "id",
+                                members: ["members"],
+                            },
+                            permissionLevel: "admin",
                         },
                     ],
                 },

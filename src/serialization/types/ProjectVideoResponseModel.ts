@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { CanvasPlacement } from "./CanvasPlacement";
+import { PendingClipTask } from "./PendingClipTask";
 import { ProjectVideoThumbnailSheetResponseModel } from "./ProjectVideoThumbnailSheetResponseModel";
 
 export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
@@ -47,7 +48,9 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
     importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
     speechImported: core.serialization.property("speech_imported", core.serialization.boolean().optional()),
     dubAudioProgress: core.serialization.property("dub_audio_progress", core.serialization.number().optional()),
+    pendingTask: core.serialization.property("pending_task", PendingClipTask.optional()),
     audioTrackReady: core.serialization.property("audio_track_ready", core.serialization.boolean().optional()),
+    exportFormatReady: core.serialization.property("export_format_ready", core.serialization.boolean().optional()),
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
     canvasPlacement: core.serialization.property("canvas_placement", CanvasPlacement.optional()),
     trackId: core.serialization.property("track_id", core.serialization.string().optional()),
@@ -83,7 +86,9 @@ export declare namespace ProjectVideoResponseModel {
         import_speech_progress?: number | null;
         speech_imported?: boolean | null;
         dub_audio_progress?: number | null;
+        pending_task?: PendingClipTask.Raw | null;
         audio_track_ready?: boolean | null;
+        export_format_ready?: boolean | null;
         current_snapshot_id?: string | null;
         canvas_placement?: CanvasPlacement.Raw | null;
         track_id?: string | null;

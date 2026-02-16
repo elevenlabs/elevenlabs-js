@@ -39,6 +39,7 @@ export const PermissionType = {
     WebhooksWrite: "webhooks_write",
     ServiceAccountWrite: "service_account_write",
     GroupMembersManage: "group_members_manage",
+    WorkspaceMembersRead: "workspace_members_read",
     WorkspaceMembersInvite: "workspace_members_invite",
     WorkspaceMembersRemove: "workspace_members_remove",
     TermsOfServiceAccept: "terms_of_service_accept",

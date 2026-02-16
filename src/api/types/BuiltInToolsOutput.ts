@@ -17,4 +17,6 @@ export interface BuiltInToolsOutput {
     playKeypadTouchTone?: ElevenLabs.SystemToolConfigOutput;
     /** The voicemail detection tool */
     voicemailDetection?: ElevenLabs.SystemToolConfigOutput;
+    /** The search documentation tool for RAG */
+    searchDocumentation?: ElevenLabs.SystemToolConfigOutput;
 }

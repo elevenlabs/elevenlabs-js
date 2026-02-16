@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { PhoneNumberTransferCustomSipHeadersItem } from "./PhoneNumberTransferCustomSipHeadersItem";
+import { PhoneNumberTransferPostDialDigits } from "./PhoneNumberTransferPostDialDigits";
 import { PhoneNumberTransferTransferDestination } from "./PhoneNumberTransferTransferDestination";
 import { TransferTypeEnum } from "./TransferTypeEnum";
 
@@ -22,6 +23,7 @@ export const PhoneNumberTransfer: core.serialization.ObjectSchema<
     phoneNumber: core.serialization.property("phone_number", core.serialization.string().optional()),
     condition: core.serialization.string(),
     transferType: core.serialization.property("transfer_type", TransferTypeEnum.optional()),
+    postDialDigits: core.serialization.property("post_dial_digits", PhoneNumberTransferPostDialDigits.optional()),
 });
 
 export declare namespace PhoneNumberTransfer {
@@ -31,5 +33,6 @@ export declare namespace PhoneNumberTransfer {
         phone_number?: string | null;
         condition: string;
         transfer_type?: TransferTypeEnum.Raw | null;
+        post_dial_digits?: PhoneNumberTransferPostDialDigits.Raw | null;
     }
 }

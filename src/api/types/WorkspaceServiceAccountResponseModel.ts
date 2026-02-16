@@ -7,4 +7,5 @@ export interface WorkspaceServiceAccountResponseModel {
     name: string;
     createdAtUnix?: number;
     apiKeys: ElevenLabs.WorkspaceApiKeyResponseModel[];
+    defaultSharingGroups?: ElevenLabs.DefaultSharingGroupResponseModel[];
 }

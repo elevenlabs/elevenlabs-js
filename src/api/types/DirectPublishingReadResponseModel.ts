@@ -35,7 +35,7 @@ export interface DirectPublishingReadResponseModel {
     publisher?: string;
     copyright?: string;
     subtitle?: string;
-    distributionTerritories?: "worldwide"[];
+    distributionTerritories?: string[];
     edition?: string;
     contributors?: ElevenLabs.Contributor[];
     payoutType?: ElevenLabs.DirectPublishingReadResponseModelPayoutType;

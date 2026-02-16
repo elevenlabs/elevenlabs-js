@@ -87,12 +87,7 @@ describe("InvocationsClient", () => {
             test_runs: [
                 {
                     test_run_id: "test_run_id",
-                    test_info: {
-                        chat_history: [{ role: "user", time_in_call_secs: 1 }],
-                        success_condition: "success_condition",
-                        success_examples: [{ response: "response", type: "success" }],
-                        failure_examples: [{ response: "response", type: "failure" }],
-                    },
+                    test_info: { type: "llm" },
                     test_invocation_id: "test_invocation_id",
                     agent_id: "agent_id",
                     branch_id: "branch_id",
@@ -129,25 +124,7 @@ describe("InvocationsClient", () => {
                 {
                     testRunId: "test_run_id",
                     testInfo: {
-                        chatHistory: [
-                            {
-                                role: "user",
-                                timeInCallSecs: 1,
-                            },
-                        ],
-                        successCondition: "success_condition",
-                        successExamples: [
-                            {
-                                response: "response",
-                                type: "success",
-                            },
-                        ],
-                        failureExamples: [
-                            {
-                                response: "response",
-                                type: "failure",
-                            },
-                        ],
+                        type: "llm",
                     },
                     testInvocationId: "test_invocation_id",
                     agentId: "agent_id",

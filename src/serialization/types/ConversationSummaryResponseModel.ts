@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ConversationInitiationSource } from "./ConversationInitiationSource";
 import { ConversationSummaryResponseModelDirection } from "./ConversationSummaryResponseModelDirection";
 import { ConversationSummaryResponseModelStatus } from "./ConversationSummaryResponseModelStatus";
 import { EvaluationSuccessResult } from "./EvaluationSuccessResult";
@@ -23,6 +24,15 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     callSuccessful: core.serialization.property("call_successful", EvaluationSuccessResult),
     transcriptSummary: core.serialization.property("transcript_summary", core.serialization.string().optional()),
     callSummaryTitle: core.serialization.property("call_summary_title", core.serialization.string().optional()),
+    mainLanguage: core.serialization.property("main_language", core.serialization.string().optional()),
+    conversationInitiationSource: core.serialization.property(
+        "conversation_initiation_source",
+        ConversationInitiationSource.optional(),
+    ),
+    toolNames: core.serialization.property(
+        "tool_names",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     direction: ConversationSummaryResponseModelDirection.optional(),
     rating: core.serialization.number().optional(),
 });
@@ -41,6 +51,9 @@ export declare namespace ConversationSummaryResponseModel {
         call_successful: EvaluationSuccessResult.Raw;
         transcript_summary?: string | null;
         call_summary_title?: string | null;
+        main_language?: string | null;
+        conversation_initiation_source?: ConversationInitiationSource.Raw | null;
+        tool_names?: string[] | null;
         direction?: ConversationSummaryResponseModelDirection.Raw | null;
         rating?: number | null;
     }

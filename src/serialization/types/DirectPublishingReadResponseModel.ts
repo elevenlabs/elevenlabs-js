@@ -58,7 +58,7 @@ export const DirectPublishingReadResponseModel: core.serialization.ObjectSchema<
     subtitle: core.serialization.string().optional(),
     distributionTerritories: core.serialization.property(
         "distribution_territories",
-        core.serialization.list(core.serialization.stringLiteral("worldwide")).optional(),
+        core.serialization.list(core.serialization.string()).optional(),
     ),
     edition: core.serialization.string().optional(),
     contributors: core.serialization.list(Contributor).optional(),
@@ -118,7 +118,7 @@ export declare namespace DirectPublishingReadResponseModel {
         publisher?: string | null;
         copyright?: string | null;
         subtitle?: string | null;
-        distribution_territories?: "worldwide"[] | null;
+        distribution_territories?: string[] | null;
         edition?: string | null;
         contributors?: Contributor.Raw[] | null;
         payout_type?: DirectPublishingReadResponseModelPayoutType.Raw | null;

@@ -15,7 +15,6 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     agentName: core.serialization.property("agent_name", core.serialization.string().optional()),
-    conversationId: core.serialization.property("conversation_id", core.serialization.string()),
     status: GetConversationResponseModelStatus,
     userId: core.serialization.property("user_id", core.serialization.string().optional()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
@@ -27,6 +26,7 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
         "conversation_initiation_client_data",
         ConversationInitiationClientDataRequestOutput.optional(),
     ),
+    conversationId: core.serialization.property("conversation_id", core.serialization.string()),
     hasAudio: core.serialization.property("has_audio", core.serialization.boolean()),
     hasUserAudio: core.serialization.property("has_user_audio", core.serialization.boolean()),
     hasResponseAudio: core.serialization.property("has_response_audio", core.serialization.boolean()),
@@ -36,7 +36,6 @@ export declare namespace GetConversationResponseModel {
     export interface Raw {
         agent_id: string;
         agent_name?: string | null;
-        conversation_id: string;
         status: GetConversationResponseModelStatus.Raw;
         user_id?: string | null;
         branch_id?: string | null;
@@ -45,6 +44,7 @@ export declare namespace GetConversationResponseModel {
         metadata: ConversationHistoryMetadataCommonModel.Raw;
         analysis?: ConversationHistoryAnalysisCommonModel.Raw | null;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestOutput.Raw | null;
+        conversation_id: string;
         has_audio: boolean;
         has_user_audio: boolean;
         has_response_audio: boolean;

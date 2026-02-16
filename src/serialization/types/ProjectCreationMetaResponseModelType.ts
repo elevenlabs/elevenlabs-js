@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const ProjectCreationMetaResponseModelType: core.serialization.Schema<
     serializers.ProjectCreationMetaResponseModelType.Raw,
     ElevenLabs.ProjectCreationMetaResponseModelType
-> = core.serialization.enum_(["blank", "generate_podcast", "auto_assign_voices", "dub_video"]);
+> = core.serialization.enum_(["blank", "generate_podcast", "auto_assign_voices", "dub_video", "import_speech"]);
 
 export declare namespace ProjectCreationMetaResponseModelType {
-    export type Raw = "blank" | "generate_podcast" | "auto_assign_voices" | "dub_video";
+    export type Raw = "blank" | "generate_podcast" | "auto_assign_voices" | "dub_video" | "import_speech";
 }

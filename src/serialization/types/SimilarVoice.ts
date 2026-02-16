@@ -3,13 +3,13 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { SimilarVoiceCategory } from "./SimilarVoiceCategory";
+import { VoiceCategory } from "./VoiceCategory";
 
 export const SimilarVoice: core.serialization.ObjectSchema<serializers.SimilarVoice.Raw, ElevenLabs.SimilarVoice> =
     core.serialization.object({
         voiceId: core.serialization.property("voice_id", core.serialization.string()),
         name: core.serialization.string(),
-        category: SimilarVoiceCategory,
+        category: VoiceCategory,
         description: core.serialization.string().optional(),
         previewUrl: core.serialization.property("preview_url", core.serialization.string().optional()),
     });
@@ -18,7 +18,7 @@ export declare namespace SimilarVoice {
     export interface Raw {
         voice_id: string;
         name: string;
-        category: SimilarVoiceCategory.Raw;
+        category: VoiceCategory.Raw;
         description?: string | null;
         preview_url?: string | null;
     }

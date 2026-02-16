@@ -6,6 +6,7 @@ export type SystemToolConfigInputParams =
     | ElevenLabs.SystemToolConfigInputParams.EndCall
     | ElevenLabs.SystemToolConfigInputParams.LanguageDetection
     | ElevenLabs.SystemToolConfigInputParams.PlayKeypadTouchTone
+    | ElevenLabs.SystemToolConfigInputParams.SearchDocumentation
     | ElevenLabs.SystemToolConfigInputParams.SkipTurn
     | ElevenLabs.SystemToolConfigInputParams.TransferToAgent
     | ElevenLabs.SystemToolConfigInputParams.TransferToNumber
@@ -22,6 +23,10 @@ export namespace SystemToolConfigInputParams {
 
     export interface PlayKeypadTouchTone extends ElevenLabs.PlayDtmfToolConfig {
         systemToolType: "play_keypad_touch_tone";
+    }
+
+    export interface SearchDocumentation extends ElevenLabs.SearchDocumentationToolConfigInput {
+        systemToolType: "search_documentation";
     }
 
     export interface SkipTurn extends ElevenLabs.SkipTurnToolConfig {

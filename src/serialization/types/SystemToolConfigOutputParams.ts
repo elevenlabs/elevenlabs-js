@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { EndCallToolConfig } from "./EndCallToolConfig";
 import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
 import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
+import { SearchDocumentationToolConfigOutput } from "./SearchDocumentationToolConfigOutput";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
 import { TransferToAgentToolConfig } from "./TransferToAgentToolConfig";
 import { TransferToNumberToolConfigOutput } from "./TransferToNumberToolConfigOutput";
@@ -19,6 +20,7 @@ export const SystemToolConfigOutputParams: core.serialization.Schema<
         end_call: EndCallToolConfig,
         language_detection: LanguageDetectionToolConfig,
         play_keypad_touch_tone: PlayDtmfToolConfig,
+        search_documentation: SearchDocumentationToolConfigOutput,
         skip_turn: SkipTurnToolConfig,
         transfer_to_agent: TransferToAgentToolConfig,
         transfer_to_number: TransferToNumberToolConfigOutput,
@@ -34,6 +36,7 @@ export declare namespace SystemToolConfigOutputParams {
         | SystemToolConfigOutputParams.EndCall
         | SystemToolConfigOutputParams.LanguageDetection
         | SystemToolConfigOutputParams.PlayKeypadTouchTone
+        | SystemToolConfigOutputParams.SearchDocumentation
         | SystemToolConfigOutputParams.SkipTurn
         | SystemToolConfigOutputParams.TransferToAgent
         | SystemToolConfigOutputParams.TransferToNumber
@@ -49,6 +52,10 @@ export declare namespace SystemToolConfigOutputParams {
 
     export interface PlayKeypadTouchTone extends PlayDtmfToolConfig.Raw {
         system_tool_type: "play_keypad_touch_tone";
+    }
+
+    export interface SearchDocumentation extends SearchDocumentationToolConfigOutput.Raw {
+        system_tool_type: "search_documentation";
     }
 
     export interface SkipTurn extends SkipTurnToolConfig.Raw {

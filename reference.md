@@ -1542,7 +1542,7 @@ await client.textToVoice.remix("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-## user
+## User
 <details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">get</a>() -> ElevenLabs.User</code></summary>
 <dl>
 <dd>
@@ -2765,7 +2765,7 @@ await client.audioNative.update("21m00Tcm4TlvDq8ikWAM", {});
 </dl>
 </details>
 
-## usage
+## Usage
 <details><summary><code>client.usage.<a href="/src/api/resources/usage/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.UsageCharactersResponseModel</code></summary>
 <dl>
 <dd>
@@ -2973,7 +2973,7 @@ await client.pronunciationDictionaries.createFromRules({
 </dl>
 </details>
 
-<details><summary><code>client.pronunciationDictionaries.<a href="/src/api/resources/pronunciationDictionaries/client/Client.ts">get</a>(pronunciation_dictionary_id) -> ElevenLabs.GetPronunciationDictionaryMetadataResponse</code></summary>
+<details><summary><code>client.pronunciationDictionaries.<a href="/src/api/resources/pronunciationDictionaries/client/Client.ts">get</a>(pronunciation_dictionary_id) -> ElevenLabs.GetPronunciationDictionaryWithRulesResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4840,7 +4840,7 @@ await client.conversationalAi.agents.create({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">get</a>(agent_id) -> ElevenLabs.GetAgentResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">get</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4867,7 +4867,10 @@ Retrieve config for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    versionId: "version_id",
+    branchId: "branch_id"
+});
 
 ```
 </dd>
@@ -4884,6 +4887,14 @@ await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
 <dd>
 
 **agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.AgentsGetRequest` 
     
 </dd>
 </dl>
@@ -4993,7 +5004,9 @@ Patches an Agent settings
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    branchId: "branch_id"
+});
 
 ```
 </dd>
@@ -5413,7 +5426,7 @@ await client.conversationalAi.agents.runTests("agent_3701k3ttaq12ewp8b7qv5rfyszk
 </details>
 
 ## ConversationalAi Tests
-<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateUnitTestResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentTestResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5441,19 +5454,7 @@ Creates a new agent response test.
 
 ```typescript
 await client.conversationalAi.tests.create({
-    chatHistory: [{
-            role: "user",
-            timeInCallSecs: 1
-        }],
-    successCondition: "success_condition",
-    successExamples: [{
-            response: "response",
-            type: "success"
-        }],
-    failureExamples: [{
-            response: "response",
-            type: "failure"
-        }],
+    type: "llm",
     name: "name"
 });
 
@@ -5471,7 +5472,7 @@ await client.conversationalAi.tests.create({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.CreateUnitTestRequest` 
+**request:** `ElevenLabs.TestsCreateRequestBody` 
     
 </dd>
 </dl>
@@ -5491,7 +5492,7 @@ await client.conversationalAi.tests.create({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">get</a>(test_id) -> ElevenLabs.GetUnitTestResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">get</a>(test_id) -> ElevenLabs.TestsGetResponse</code></summary>
 <dl>
 <dd>
 
@@ -5554,7 +5555,7 @@ await client.conversationalAi.tests.get("TeaqRRdTcIfIu2i7BYfT");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">update</a>(test_id, { ...params }) -> ElevenLabs.GetUnitTestResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">update</a>(test_id, { ...params }) -> ElevenLabs.TestsUpdateResponse</code></summary>
 <dl>
 <dd>
 
@@ -5582,19 +5583,7 @@ Updates an agent response test by ID.
 
 ```typescript
 await client.conversationalAi.tests.update("TeaqRRdTcIfIu2i7BYfT", {
-    chatHistory: [{
-            role: "user",
-            timeInCallSecs: 1
-        }],
-    successCondition: "success_condition",
-    successExamples: [{
-            response: "response",
-            type: "success"
-        }],
-    failureExamples: [{
-            response: "response",
-            type: "failure"
-        }],
+    type: "llm",
     name: "name"
 });
 
@@ -5620,7 +5609,7 @@ await client.conversationalAi.tests.update("TeaqRRdTcIfIu2i7BYfT", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.UpdateUnitTestRequest` 
+**request:** `ElevenLabs.TestsUpdateRequestBody` 
     
 </dd>
 </dl>
@@ -5824,6 +5813,77 @@ await client.conversationalAi.tests.list({
 <dd>
 
 **requestOptions:** `TestsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Users
+<details><summary><code>client.conversationalAi.users.<a href="/src/api/resources/conversationalAi/resources/users/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetConversationUsersPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get distinct users from conversations with pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.users.list({
+    agentId: "agent_id",
+    callStartBeforeUnix: 1,
+    callStartAfterUnix: 1,
+    search: "search",
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.UsersListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `UsersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10047,7 +10107,7 @@ await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM"
 <dl>
 <dd>
 
-Delete a document from the knowledge base
+Delete a document or folder from the knowledge base.
 </dd>
 </dl>
 </dd>
