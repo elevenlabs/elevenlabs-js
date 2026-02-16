@@ -13,6 +13,9 @@ export const ToolRequestModelToolConfig: core.serialization.Schema<
 > = core.serialization
     .union("type", {
         client: ClientToolConfigInput,
+        mcp: core.serialization.object({
+            value: core.serialization.unknown(),
+        }),
         system: SystemToolConfigInput,
         webhook: WebhookToolConfigInput,
     })
@@ -24,11 +27,17 @@ export const ToolRequestModelToolConfig: core.serialization.Schema<
 export declare namespace ToolRequestModelToolConfig {
     export type Raw =
         | ToolRequestModelToolConfig.Client
+        | ToolRequestModelToolConfig.Mcp
         | ToolRequestModelToolConfig.System
         | ToolRequestModelToolConfig.Webhook;
 
     export interface Client extends ClientToolConfigInput.Raw {
         type: "client";
+    }
+
+    export interface Mcp {
+        type: "mcp";
+        value?: unknown;
     }
 
     export interface System extends SystemToolConfigInput.Raw {

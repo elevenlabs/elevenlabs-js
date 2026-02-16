@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { PendingClipTask } from "./PendingClipTask";
 
 export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
     serializers.ProjectExternalAudioResponseModel.Raw,
@@ -35,6 +36,7 @@ export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
     importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
     speechImported: core.serialization.property("speech_imported", core.serialization.boolean().optional()),
     dubAudioProgress: core.serialization.property("dub_audio_progress", core.serialization.number().optional()),
+    pendingTask: core.serialization.property("pending_task", PendingClipTask.optional()),
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
 });
 
@@ -61,6 +63,7 @@ export declare namespace ProjectExternalAudioResponseModel {
         import_speech_progress?: number | null;
         speech_imported?: boolean | null;
         dub_audio_progress?: number | null;
+        pending_task?: PendingClipTask.Raw | null;
         current_snapshot_id?: string | null;
     }
 }

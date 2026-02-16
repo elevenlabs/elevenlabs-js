@@ -14,5 +14,5 @@ export interface UnitTestSummaryResponseModel {
     /** Last update time of the test in unix seconds */
     lastUpdatedAtUnixSecs: number;
     /** Type of the test */
-    type: ElevenLabs.UnitTestCommonModelType;
+    type: ElevenLabs.TestType;
 }

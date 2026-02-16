@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../index";
 
 export interface UnitTestRunResponseModel {
     testRunId: string;
-    testInfo?: ElevenLabs.UnitTestCommonModel;
+    testInfo?: ElevenLabs.UnitTestRunResponseModelTestInfo;
     testInvocationId: string;
     agentId: string;
     branchId?: string;

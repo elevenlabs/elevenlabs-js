@@ -7,13 +7,7 @@ describe("TestsClient", () => {
     test("create", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {
-            chat_history: [{ role: "user", time_in_call_secs: 1 }],
-            success_condition: "success_condition",
-            success_examples: [{ response: "response", type: "success" }],
-            failure_examples: [{ response: "response", type: "failure" }],
-            name: "name",
-        };
+        const rawRequestBody = { type: "llm", name: "name" };
         const rawResponseBody = { id: "id" };
         server
             .mockEndpoint()
@@ -25,25 +19,7 @@ describe("TestsClient", () => {
             .build();
 
         const response = await client.conversationalAi.tests.create({
-            chatHistory: [
-                {
-                    role: "user",
-                    timeInCallSecs: 1,
-                },
-            ],
-            successCondition: "success_condition",
-            successExamples: [
-                {
-                    response: "response",
-                    type: "success",
-                },
-            ],
-            failureExamples: [
-                {
-                    response: "response",
-                    type: "failure",
-                },
-            ],
+            type: "llm",
             name: "name",
         });
         expect(response).toEqual({
@@ -56,6 +32,15 @@ describe("TestsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
+            type: "llm",
+            from_conversation_metadata: {
+                conversation_id: "conversation_id",
+                agent_id: "agent_id",
+                branch_id: "branch_id",
+                workflow_node_id: "workflow_node_id",
+                original_agent_reply: [{ role: "user", time_in_call_secs: 1 }],
+            },
+            dynamic_variables: { key: "value" },
             chat_history: [
                 {
                     role: "user",
@@ -96,22 +81,6 @@ describe("TestsClient", () => {
             success_condition: "success_condition",
             success_examples: [{ response: "response", type: "success" }],
             failure_examples: [{ response: "response", type: "failure" }],
-            tool_call_parameters: {
-                parameters: [{ eval: { type: "anything" }, path: "path" }],
-                referenced_tool: { id: "id", type: "system" },
-                verify_absence: true,
-                workflow_node_transition: { type: "node_id", agent_id: "agent_id", target_node_id: "target_node_id" },
-            },
-            check_any_tool_matches: true,
-            dynamic_variables: { key: "value" },
-            type: "llm",
-            from_conversation_metadata: {
-                conversation_id: "conversation_id",
-                agent_id: "agent_id",
-                branch_id: "branch_id",
-                workflow_node_id: "workflow_node_id",
-                original_agent_reply: [{ role: "user", time_in_call_secs: 1 }],
-            },
             id: "id",
             name: "name",
         };
@@ -125,6 +94,22 @@ describe("TestsClient", () => {
 
         const response = await client.conversationalAi.tests.get("TeaqRRdTcIfIu2i7BYfT");
         expect(response).toEqual({
+            type: "llm",
+            fromConversationMetadata: {
+                conversationId: "conversation_id",
+                agentId: "agent_id",
+                branchId: "branch_id",
+                workflowNodeId: "workflow_node_id",
+                originalAgentReply: [
+                    {
+                        role: "user",
+                        timeInCallSecs: 1,
+                    },
+                ],
+            },
+            dynamicVariables: {
+                key: "value",
+            },
             chatHistory: [
                 {
                     role: "user",
@@ -192,43 +177,6 @@ describe("TestsClient", () => {
                     type: "failure",
                 },
             ],
-            toolCallParameters: {
-                parameters: [
-                    {
-                        eval: {
-                            type: "anything",
-                        },
-                        path: "path",
-                    },
-                ],
-                referencedTool: {
-                    id: "id",
-                    type: "system",
-                },
-                verifyAbsence: true,
-                workflowNodeTransition: {
-                    type: "node_id",
-                    agentId: "agent_id",
-                    targetNodeId: "target_node_id",
-                },
-            },
-            checkAnyToolMatches: true,
-            dynamicVariables: {
-                key: "value",
-            },
-            type: "llm",
-            fromConversationMetadata: {
-                conversationId: "conversation_id",
-                agentId: "agent_id",
-                branchId: "branch_id",
-                workflowNodeId: "workflow_node_id",
-                originalAgentReply: [
-                    {
-                        role: "user",
-                        timeInCallSecs: 1,
-                    },
-                ],
-            },
             id: "id",
             name: "name",
         });
@@ -237,14 +185,17 @@ describe("TestsClient", () => {
     test("update", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {
-            chat_history: [{ role: "user", time_in_call_secs: 1 }],
-            success_condition: "success_condition",
-            success_examples: [{ response: "response", type: "success" }],
-            failure_examples: [{ response: "response", type: "failure" }],
-            name: "name",
-        };
+        const rawRequestBody = { type: "llm", name: "name" };
         const rawResponseBody = {
+            type: "llm",
+            from_conversation_metadata: {
+                conversation_id: "conversation_id",
+                agent_id: "agent_id",
+                branch_id: "branch_id",
+                workflow_node_id: "workflow_node_id",
+                original_agent_reply: [{ role: "user", time_in_call_secs: 1 }],
+            },
+            dynamic_variables: { key: "value" },
             chat_history: [
                 {
                     role: "user",
@@ -285,22 +236,6 @@ describe("TestsClient", () => {
             success_condition: "success_condition",
             success_examples: [{ response: "response", type: "success" }],
             failure_examples: [{ response: "response", type: "failure" }],
-            tool_call_parameters: {
-                parameters: [{ eval: { type: "anything" }, path: "path" }],
-                referenced_tool: { id: "id", type: "system" },
-                verify_absence: true,
-                workflow_node_transition: { type: "node_id", agent_id: "agent_id", target_node_id: "target_node_id" },
-            },
-            check_any_tool_matches: true,
-            dynamic_variables: { key: "value" },
-            type: "llm",
-            from_conversation_metadata: {
-                conversation_id: "conversation_id",
-                agent_id: "agent_id",
-                branch_id: "branch_id",
-                workflow_node_id: "workflow_node_id",
-                original_agent_reply: [{ role: "user", time_in_call_secs: 1 }],
-            },
             id: "id",
             name: "name",
         };
@@ -314,28 +249,26 @@ describe("TestsClient", () => {
             .build();
 
         const response = await client.conversationalAi.tests.update("TeaqRRdTcIfIu2i7BYfT", {
-            chatHistory: [
-                {
-                    role: "user",
-                    timeInCallSecs: 1,
-                },
-            ],
-            successCondition: "success_condition",
-            successExamples: [
-                {
-                    response: "response",
-                    type: "success",
-                },
-            ],
-            failureExamples: [
-                {
-                    response: "response",
-                    type: "failure",
-                },
-            ],
+            type: "llm",
             name: "name",
         });
         expect(response).toEqual({
+            type: "llm",
+            fromConversationMetadata: {
+                conversationId: "conversation_id",
+                agentId: "agent_id",
+                branchId: "branch_id",
+                workflowNodeId: "workflow_node_id",
+                originalAgentReply: [
+                    {
+                        role: "user",
+                        timeInCallSecs: 1,
+                    },
+                ],
+            },
+            dynamicVariables: {
+                key: "value",
+            },
             chatHistory: [
                 {
                     role: "user",
@@ -403,43 +336,6 @@ describe("TestsClient", () => {
                     type: "failure",
                 },
             ],
-            toolCallParameters: {
-                parameters: [
-                    {
-                        eval: {
-                            type: "anything",
-                        },
-                        path: "path",
-                    },
-                ],
-                referencedTool: {
-                    id: "id",
-                    type: "system",
-                },
-                verifyAbsence: true,
-                workflowNodeTransition: {
-                    type: "node_id",
-                    agentId: "agent_id",
-                    targetNodeId: "target_node_id",
-                },
-            },
-            checkAnyToolMatches: true,
-            dynamicVariables: {
-                key: "value",
-            },
-            type: "llm",
-            fromConversationMetadata: {
-                conversationId: "conversation_id",
-                agentId: "agent_id",
-                branchId: "branch_id",
-                workflowNodeId: "workflow_node_id",
-                originalAgentReply: [
-                    {
-                        role: "user",
-                        timeInCallSecs: 1,
-                    },
-                ],
-            },
             id: "id",
             name: "name",
         });

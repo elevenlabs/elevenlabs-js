@@ -11,4 +11,6 @@ export interface WorkflowPhoneNumberNodeModelOutput {
     edgeOrder: string[];
     transferDestination: ElevenLabs.WorkflowPhoneNumberNodeModelOutputTransferDestination;
     transferType: ElevenLabs.TransferTypeEnum;
+    /** DTMF digits to send after call connects (e.g., 'ww1234' for extension). Can be either a static value or a dynamic variable reference. Use 'w' for 0.5s pause. */
+    postDialDigits?: ElevenLabs.WorkflowPhoneNumberNodeModelOutputPostDialDigits;
 }

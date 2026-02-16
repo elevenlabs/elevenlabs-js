@@ -32,40 +32,28 @@ export class TestsClient {
     /**
      * Creates a new agent response test.
      *
-     * @param {ElevenLabs.conversationalAi.CreateUnitTestRequest} request
+     * @param {ElevenLabs.conversationalAi.TestsCreateRequestBody} request
      * @param {TestsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await client.conversationalAi.tests.create({
-     *         chatHistory: [{
-     *                 role: "user",
-     *                 timeInCallSecs: 1
-     *             }],
-     *         successCondition: "success_condition",
-     *         successExamples: [{
-     *                 response: "response",
-     *                 type: "success"
-     *             }],
-     *         failureExamples: [{
-     *                 response: "response",
-     *                 type: "failure"
-     *             }],
+     *         type: "llm",
      *         name: "name"
      *     })
      */
     public create(
-        request: ElevenLabs.conversationalAi.CreateUnitTestRequest,
+        request: ElevenLabs.conversationalAi.TestsCreateRequestBody,
         requestOptions?: TestsClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.CreateUnitTestResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.CreateAgentTestResponseModel> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
-        request: ElevenLabs.conversationalAi.CreateUnitTestRequest,
+        request: ElevenLabs.conversationalAi.TestsCreateRequestBody,
         requestOptions?: TestsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.CreateUnitTestResponseModel>> {
+    ): Promise<core.WithRawResponse<ElevenLabs.CreateAgentTestResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -83,7 +71,7 @@ export class TestsClient {
             contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
             requestType: "json",
-            body: serializers.conversationalAi.CreateUnitTestRequest.jsonOrThrow(request, {
+            body: serializers.conversationalAi.TestsCreateRequestBody.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -94,7 +82,7 @@ export class TestsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.CreateUnitTestResponseModel.parseOrThrow(_response.body, {
+                data: serializers.CreateAgentTestResponseModel.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -147,14 +135,14 @@ export class TestsClient {
     public get(
         test_id: string,
         requestOptions?: TestsClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.GetUnitTestResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.conversationalAi.TestsGetResponse> {
         return core.HttpResponsePromise.fromPromise(this.__get(test_id, requestOptions));
     }
 
     private async __get(
         test_id: string,
         requestOptions?: TestsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.GetUnitTestResponseModel>> {
+    ): Promise<core.WithRawResponse<ElevenLabs.conversationalAi.TestsGetResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -178,7 +166,7 @@ export class TestsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.GetUnitTestResponseModel.parseOrThrow(_response.body, {
+                data: serializers.conversationalAi.TestsGetResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -221,42 +209,30 @@ export class TestsClient {
      * Updates an agent response test by ID.
      *
      * @param {string} test_id - The id of a chat response test. This is returned on test creation.
-     * @param {ElevenLabs.conversationalAi.UpdateUnitTestRequest} request
+     * @param {ElevenLabs.conversationalAi.TestsUpdateRequestBody} request
      * @param {TestsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
      *     await client.conversationalAi.tests.update("TeaqRRdTcIfIu2i7BYfT", {
-     *         chatHistory: [{
-     *                 role: "user",
-     *                 timeInCallSecs: 1
-     *             }],
-     *         successCondition: "success_condition",
-     *         successExamples: [{
-     *                 response: "response",
-     *                 type: "success"
-     *             }],
-     *         failureExamples: [{
-     *                 response: "response",
-     *                 type: "failure"
-     *             }],
+     *         type: "llm",
      *         name: "name"
      *     })
      */
     public update(
         test_id: string,
-        request: ElevenLabs.conversationalAi.UpdateUnitTestRequest,
+        request: ElevenLabs.conversationalAi.TestsUpdateRequestBody,
         requestOptions?: TestsClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.GetUnitTestResponseModel> {
+    ): core.HttpResponsePromise<ElevenLabs.conversationalAi.TestsUpdateResponse> {
         return core.HttpResponsePromise.fromPromise(this.__update(test_id, request, requestOptions));
     }
 
     private async __update(
         test_id: string,
-        request: ElevenLabs.conversationalAi.UpdateUnitTestRequest,
+        request: ElevenLabs.conversationalAi.TestsUpdateRequestBody,
         requestOptions?: TestsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.GetUnitTestResponseModel>> {
+    ): Promise<core.WithRawResponse<ElevenLabs.conversationalAi.TestsUpdateResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -274,7 +250,7 @@ export class TestsClient {
             contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
             requestType: "json",
-            body: serializers.conversationalAi.UpdateUnitTestRequest.jsonOrThrow(request, {
+            body: serializers.conversationalAi.TestsUpdateRequestBody.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -285,7 +261,7 @@ export class TestsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.GetUnitTestResponseModel.parseOrThrow(_response.body, {
+                data: serializers.conversationalAi.TestsUpdateResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

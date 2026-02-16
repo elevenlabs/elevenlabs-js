@@ -5,6 +5,8 @@ import type * as ElevenLabs from "../index";
 export interface ResourceMetadataResponseModel {
     /** The ID of the resource. */
     resourceId: string;
+    /** The name of the resource, if available. */
+    resourceName?: string;
     /** The type of the resource. */
     resourceType: ElevenLabs.WorkspaceResourceType;
     /** The ID of the user who created the resource. */

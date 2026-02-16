@@ -53,6 +53,7 @@ describe("AgentsClient", () => {
                     model_id: "eleven_turbo_v2",
                     voice_id: "cjVigY5qzO86Huf0OWal",
                     supported_voices: [{ label: "label", voice_id: "voice_id" }],
+                    expressive_mode: true,
                     suggested_audio_tags: [{ tag: "tag" }],
                     agent_output_audio_format: "pcm_16000",
                     optimize_streaming_latency: 3,
@@ -602,6 +603,7 @@ describe("AgentsClient", () => {
                         edge_order: ["edge_order"],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
                         transfer_type: "blind",
+                        post_dial_digits: null,
                     },
                     success_transfer: {
                         type: "standalone_agent",
@@ -646,7 +648,10 @@ describe("AgentsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+        const response = await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+            versionId: "version_id",
+            branchId: "branch_id",
+        });
         expect(response).toEqual({
             agentId: "agent_7101k5zvyjhmfg983brhmhkd98n6",
             name: "My Agent",
@@ -678,6 +683,7 @@ describe("AgentsClient", () => {
                             voiceId: "voice_id",
                         },
                     ],
+                    expressiveMode: true,
                     suggestedAudioTags: [
                         {
                             tag: "tag",
@@ -1556,6 +1562,7 @@ describe("AgentsClient", () => {
                     model_id: "eleven_turbo_v2",
                     voice_id: "cjVigY5qzO86Huf0OWal",
                     supported_voices: [{ label: "label", voice_id: "voice_id" }],
+                    expressive_mode: true,
                     suggested_audio_tags: [{ tag: "tag" }],
                     agent_output_audio_format: "pcm_16000",
                     optimize_streaming_latency: 3,
@@ -2105,6 +2112,7 @@ describe("AgentsClient", () => {
                         edge_order: ["edge_order"],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
                         transfer_type: "blind",
+                        post_dial_digits: null,
                     },
                     success_transfer: {
                         type: "standalone_agent",
@@ -2150,7 +2158,9 @@ describe("AgentsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+        const response = await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+            branchId: "branch_id",
+        });
         expect(response).toEqual({
             agentId: "agent_7101k5zvyjhmfg983brhmhkd98n6",
             name: "My Agent",
@@ -2182,6 +2192,7 @@ describe("AgentsClient", () => {
                             voiceId: "voice_id",
                         },
                     ],
+                    expressiveMode: true,
                     suggestedAudioTags: [
                         {
                             tag: "tag",
@@ -3337,12 +3348,7 @@ describe("AgentsClient", () => {
             test_runs: [
                 {
                     test_run_id: "test_run_id",
-                    test_info: {
-                        chat_history: [{ role: "user", time_in_call_secs: 1 }],
-                        success_condition: "success_condition",
-                        success_examples: [{ response: "response", type: "success" }],
-                        failure_examples: [{ response: "response", type: "failure" }],
-                    },
+                    test_info: { type: "llm" },
                     test_invocation_id: "test_invocation_id",
                     agent_id: "agent_id",
                     branch_id: "branch_id",
@@ -3386,25 +3392,7 @@ describe("AgentsClient", () => {
                 {
                     testRunId: "test_run_id",
                     testInfo: {
-                        chatHistory: [
-                            {
-                                role: "user",
-                                timeInCallSecs: 1,
-                            },
-                        ],
-                        successCondition: "success_condition",
-                        successExamples: [
-                            {
-                                response: "response",
-                                type: "success",
-                            },
-                        ],
-                        failureExamples: [
-                            {
-                                response: "response",
-                                type: "failure",
-                            },
-                        ],
+                        type: "llm",
                     },
                     testInvocationId: "test_invocation_id",
                     agentId: "agent_id",

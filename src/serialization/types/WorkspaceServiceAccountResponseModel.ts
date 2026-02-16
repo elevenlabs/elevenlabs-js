@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { DefaultSharingGroupResponseModel } from "./DefaultSharingGroupResponseModel";
 import { WorkspaceApiKeyResponseModel } from "./WorkspaceApiKeyResponseModel";
 
 export const WorkspaceServiceAccountResponseModel: core.serialization.ObjectSchema<
@@ -13,6 +14,10 @@ export const WorkspaceServiceAccountResponseModel: core.serialization.ObjectSche
     name: core.serialization.string(),
     createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number().optional()),
     apiKeys: core.serialization.property("api-keys", core.serialization.list(WorkspaceApiKeyResponseModel)),
+    defaultSharingGroups: core.serialization.property(
+        "default_sharing_groups",
+        core.serialization.list(DefaultSharingGroupResponseModel).optional(),
+    ),
 });
 
 export declare namespace WorkspaceServiceAccountResponseModel {
@@ -21,5 +26,6 @@ export declare namespace WorkspaceServiceAccountResponseModel {
         name: string;
         created_at_unix?: number | null;
         "api-keys": WorkspaceApiKeyResponseModel.Raw[];
+        default_sharing_groups?: DefaultSharingGroupResponseModel.Raw[] | null;
     }
 }

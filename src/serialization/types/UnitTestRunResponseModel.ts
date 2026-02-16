@@ -7,14 +7,14 @@ import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHi
 import { TestConditionResultCommonModel } from "./TestConditionResultCommonModel";
 import { TestRunMetadata } from "./TestRunMetadata";
 import { TestRunStatus } from "./TestRunStatus";
-import { UnitTestCommonModel } from "./UnitTestCommonModel";
+import { UnitTestRunResponseModelTestInfo } from "./UnitTestRunResponseModelTestInfo";
 
 export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
     serializers.UnitTestRunResponseModel.Raw,
     ElevenLabs.UnitTestRunResponseModel
 > = core.serialization.object({
     testRunId: core.serialization.property("test_run_id", core.serialization.string()),
-    testInfo: core.serialization.property("test_info", UnitTestCommonModel.optional()),
+    testInfo: core.serialization.property("test_info", UnitTestRunResponseModelTestInfo.optional()),
     testInvocationId: core.serialization.property("test_invocation_id", core.serialization.string()),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
@@ -34,7 +34,7 @@ export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
 export declare namespace UnitTestRunResponseModel {
     export interface Raw {
         test_run_id: string;
-        test_info?: UnitTestCommonModel.Raw | null;
+        test_info?: UnitTestRunResponseModelTestInfo.Raw | null;
         test_invocation_id: string;
         agent_id: string;
         branch_id?: string | null;

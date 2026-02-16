@@ -21,6 +21,7 @@ export const TtsConversationalConfigWorkflowOverrideOutput: core.serialization.O
         "supported_voices",
         core.serialization.list(SupportedVoice).optional(),
     ),
+    expressiveMode: core.serialization.property("expressive_mode", core.serialization.boolean().optional()),
     suggestedAudioTags: core.serialization.property(
         "suggested_audio_tags",
         core.serialization.list(SuggestedAudioTag).optional(),
@@ -45,6 +46,7 @@ export declare namespace TtsConversationalConfigWorkflowOverrideOutput {
         model_id?: TtsConversationalModel.Raw | null;
         voice_id?: string | null;
         supported_voices?: SupportedVoice.Raw[] | null;
+        expressive_mode?: boolean | null;
         suggested_audio_tags?: SuggestedAudioTag.Raw[] | null;
         agent_output_audio_format?: TtsOutputFormat.Raw | null;
         optimize_streaming_latency?: TtsOptimizeStreamingLatency.Raw | null;

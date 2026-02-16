@@ -10,6 +10,7 @@ describe("ResourcesClient", () => {
 
         const rawResponseBody = {
             resource_id: "4ZUqyldxf71HqUbcP2Lc",
+            resource_name: "My Custom Voice",
             resource_type: "voice",
             creator_user_id: "5zavrE1kZXv2lFw9BKgEkf0B5Wqo",
             anonymous_access_level_override: "viewer",
@@ -36,6 +37,7 @@ describe("ResourcesClient", () => {
         });
         expect(response).toEqual({
             resourceId: "4ZUqyldxf71HqUbcP2Lc",
+            resourceName: "My Custom Voice",
             resourceType: "voice",
             creatorUserId: "5zavrE1kZXv2lFw9BKgEkf0B5Wqo",
             anonymousAccessLevelOverride: "viewer",

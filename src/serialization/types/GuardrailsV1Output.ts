@@ -4,6 +4,8 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AlignmentGuardrail } from "./AlignmentGuardrail";
+import { ContentGuardrailOutput } from "./ContentGuardrailOutput";
+import { CustomGuardrailOutput } from "./CustomGuardrailOutput";
 import { ModerationGuardrailOutput } from "./ModerationGuardrailOutput";
 
 export const GuardrailsV1Output: core.serialization.ObjectSchema<
@@ -12,13 +14,17 @@ export const GuardrailsV1Output: core.serialization.ObjectSchema<
 > = core.serialization.object({
     version: core.serialization.stringLiteral("1").optional(),
     alignment: AlignmentGuardrail.optional(),
+    content: ContentGuardrailOutput.optional(),
     moderation: ModerationGuardrailOutput.optional(),
+    custom: CustomGuardrailOutput.optional(),
 });
 
 export declare namespace GuardrailsV1Output {
     export interface Raw {
         version?: "1" | null;
         alignment?: AlignmentGuardrail.Raw | null;
+        content?: ContentGuardrailOutput.Raw | null;
         moderation?: ModerationGuardrailOutput.Raw | null;
+        custom?: CustomGuardrailOutput.Raw | null;
     }
 }

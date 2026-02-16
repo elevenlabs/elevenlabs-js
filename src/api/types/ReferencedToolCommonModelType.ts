@@ -7,6 +7,7 @@ export const ReferencedToolCommonModelType = {
     Client: "client",
     Workflow: "workflow",
     ApiIntegrationWebhook: "api_integration_webhook",
+    Mcp: "mcp",
 } as const;
 export type ReferencedToolCommonModelType =
     (typeof ReferencedToolCommonModelType)[keyof typeof ReferencedToolCommonModelType];

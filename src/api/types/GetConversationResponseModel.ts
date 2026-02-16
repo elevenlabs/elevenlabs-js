@@ -5,7 +5,6 @@ import type * as ElevenLabs from "../index";
 export interface GetConversationResponseModel {
     agentId: string;
     agentName?: string;
-    conversationId: string;
     status: ElevenLabs.GetConversationResponseModelStatus;
     userId?: string;
     branchId?: string;
@@ -15,6 +14,7 @@ export interface GetConversationResponseModel {
     metadata: ElevenLabs.ConversationHistoryMetadataCommonModel;
     analysis?: ElevenLabs.ConversationHistoryAnalysisCommonModel;
     conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestOutput;
+    conversationId: string;
     hasAudio: boolean;
     hasUserAudio: boolean;
     hasResponseAudio: boolean;

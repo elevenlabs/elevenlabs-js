@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const TestRunMetadataTestType: core.serialization.Schema<
     serializers.TestRunMetadataTestType.Raw,
     ElevenLabs.TestRunMetadataTestType
-> = core.serialization.enum_(["llm", "tool_call"]);
+> = core.serialization.enum_(["llm", "tool_call", "simulation"]);
 
 export declare namespace TestRunMetadataTestType {
-    export type Raw = "llm" | "tool_call";
+    export type Raw = "llm" | "tool_call" | "simulation";
 }

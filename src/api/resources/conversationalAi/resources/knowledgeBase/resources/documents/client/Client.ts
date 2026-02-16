@@ -511,7 +511,7 @@ export class DocumentsClient {
     }
 
     /**
-     * Delete a document from the knowledge base
+     * Delete a document or folder from the knowledge base.
      *
      * @param {string} documentation_id - The id of a document from the knowledge base. This is returned on document addition.
      * @param {ElevenLabs.conversationalAi.knowledgeBase.DocumentsDeleteRequest} request

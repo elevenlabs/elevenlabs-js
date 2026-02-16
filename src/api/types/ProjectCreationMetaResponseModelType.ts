@@ -6,6 +6,7 @@ export const ProjectCreationMetaResponseModelType = {
     GeneratePodcast: "generate_podcast",
     AutoAssignVoices: "auto_assign_voices",
     DubVideo: "dub_video",
+    ImportSpeech: "import_speech",
 } as const;
 export type ProjectCreationMetaResponseModelType =
     (typeof ProjectCreationMetaResponseModelType)[keyof typeof ProjectCreationMetaResponseModelType];

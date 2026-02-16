@@ -66,6 +66,10 @@ describe("PronunciationDictionariesClient", () => {
             creation_time_unix: 1714156800,
             archived_time_unix: 1,
             description: "This is a test dictionary",
+            rules: [
+                { type: "alias", string_to_replace: "string_to_replace", alias: "alias" },
+                { type: "phoneme", string_to_replace: "string_to_replace", phoneme: "phoneme", alphabet: "alphabet" },
+            ],
         };
         server
             .mockEndpoint()
@@ -86,6 +90,19 @@ describe("PronunciationDictionariesClient", () => {
             creationTimeUnix: 1714156800,
             archivedTimeUnix: 1,
             description: "This is a test dictionary",
+            rules: [
+                {
+                    type: "alias",
+                    stringToReplace: "string_to_replace",
+                    alias: "alias",
+                },
+                {
+                    type: "phoneme",
+                    stringToReplace: "string_to_replace",
+                    phoneme: "phoneme",
+                    alphabet: "alphabet",
+                },
+            ],
         });
     });
 

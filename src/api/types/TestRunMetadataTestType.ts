@@ -3,5 +3,6 @@
 export const TestRunMetadataTestType = {
     Llm: "llm",
     ToolCall: "tool_call",
+    Simulation: "simulation",
 } as const;
 export type TestRunMetadataTestType = (typeof TestRunMetadataTestType)[keyof typeof TestRunMetadataTestType];

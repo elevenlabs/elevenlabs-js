@@ -4,9 +4,13 @@ import type * as ElevenLabs from "../../../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         branchId: "branch_id"
+ *     }
  */
 export interface UpdateAgentRequest {
+    /** The ID of the branch to use */
+    branchId?: string;
     /** Conversation configuration for an agent */
     conversationConfig?: ElevenLabs.ConversationalConfig;
     /** Platform settings for the agent are all settings that aren't related to the conversation orchestration and content. */

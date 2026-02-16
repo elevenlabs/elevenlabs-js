@@ -16,6 +16,7 @@ export const BuiltInToolsInput: core.serialization.ObjectSchema<
     skipTurn: core.serialization.property("skip_turn", SystemToolConfigInput.optional()),
     playKeypadTouchTone: core.serialization.property("play_keypad_touch_tone", SystemToolConfigInput.optional()),
     voicemailDetection: core.serialization.property("voicemail_detection", SystemToolConfigInput.optional()),
+    searchDocumentation: core.serialization.property("search_documentation", SystemToolConfigInput.optional()),
 });
 
 export declare namespace BuiltInToolsInput {
@@ -27,5 +28,6 @@ export declare namespace BuiltInToolsInput {
         skip_turn?: SystemToolConfigInput.Raw | null;
         play_keypad_touch_tone?: SystemToolConfigInput.Raw | null;
         voicemail_detection?: SystemToolConfigInput.Raw | null;
+        search_documentation?: SystemToolConfigInput.Raw | null;
     }
 }

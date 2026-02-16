@@ -7,12 +7,18 @@ import type * as ElevenLabs from "../index";
  */
 export type ToolRequestModelToolConfig =
     | ElevenLabs.ToolRequestModelToolConfig.Client
+    | ElevenLabs.ToolRequestModelToolConfig.Mcp
     | ElevenLabs.ToolRequestModelToolConfig.System
     | ElevenLabs.ToolRequestModelToolConfig.Webhook;
 
 export namespace ToolRequestModelToolConfig {
     export interface Client extends ElevenLabs.ClientToolConfigInput {
         type: "client";
+    }
+
+    export interface Mcp {
+        type: "mcp";
+        value?: unknown;
     }
 
     export interface System extends ElevenLabs.SystemToolConfigInput {

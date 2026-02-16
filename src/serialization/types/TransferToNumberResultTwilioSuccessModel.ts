@@ -14,6 +14,7 @@ export const TransferToNumberResultTwilioSuccessModel: core.serialization.Object
     clientMessage: core.serialization.property("client_message", core.serialization.string().optional()),
     agentMessage: core.serialization.property("agent_message", core.serialization.string()),
     conferenceName: core.serialization.property("conference_name", core.serialization.string()),
+    postDialDigits: core.serialization.property("post_dial_digits", core.serialization.string().optional()),
     note: core.serialization.string().optional(),
 });
 
@@ -25,6 +26,7 @@ export declare namespace TransferToNumberResultTwilioSuccessModel {
         client_message?: string | null;
         agent_message: string;
         conference_name: string;
+        post_dial_digits?: string | null;
         note?: string | null;
     }
 }

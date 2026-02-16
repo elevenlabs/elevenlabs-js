@@ -12,6 +12,7 @@ export const ResourceMetadataResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.ResourceMetadataResponseModel
 > = core.serialization.object({
     resourceId: core.serialization.property("resource_id", core.serialization.string()),
+    resourceName: core.serialization.property("resource_name", core.serialization.string().optional()),
     resourceType: core.serialization.property("resource_type", WorkspaceResourceType),
     creatorUserId: core.serialization.property("creator_user_id", core.serialization.string().optional()),
     anonymousAccessLevelOverride: core.serialization.property(
@@ -28,6 +29,7 @@ export const ResourceMetadataResponseModel: core.serialization.ObjectSchema<
 export declare namespace ResourceMetadataResponseModel {
     export interface Raw {
         resource_id: string;
+        resource_name?: string | null;
         resource_type: WorkspaceResourceType.Raw;
         creator_user_id?: string | null;
         anonymous_access_level_override?: ResourceMetadataResponseModelAnonymousAccessLevelOverride.Raw | null;
