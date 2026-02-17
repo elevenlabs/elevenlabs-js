@@ -24,6 +24,7 @@ export interface MultipartResponse {
     };
     audio: Buffer;
     filename: string;
+    songId?: string;
 }
 
 export class Music {
@@ -143,7 +144,10 @@ export class Music {
             // Parse the stream using the existing parsing method
             const parsedResponse = await this.parseMultipart(stream);
 
-            return { data: parsedResponse, rawResponse };
+            // Extract song-id from response headers (available when store_for_inpainting is true)
+            const songId = rawResponse.headers.get("song-id") ?? undefined;
+
+            return { data: { ...parsedResponse, songId }, rawResponse };
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             throw new Error(`Failed to parse detailed composition response: ${message}`);
