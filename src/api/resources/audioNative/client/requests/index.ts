@@ -1,2 +1,3 @@
 export type { BodyCreatesAudioNativeEnabledProjectV1AudioNativePost } from "./BodyCreatesAudioNativeEnabledProjectV1AudioNativePost";
+export type { BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost } from "./BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost";
 export type { BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost } from "./BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost";

@@ -18,6 +18,7 @@ export const ClientEvent = {
     AgentResponseMetadata: "agent_response_metadata",
     VadScore: "vad_score",
     AgentChatResponsePart: "agent_chat_response_part",
+    ClientError: "client_error",
     InternalTurnProbability: "internal_turn_probability",
     InternalTentativeAgentResponse: "internal_tentative_agent_response",
 } as const;

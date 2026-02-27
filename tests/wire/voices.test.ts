@@ -147,6 +147,7 @@ describe("VoicesClient", () => {
                     is_mixed: false,
                     favorited_at_unix: 1,
                     created_at_unix: 1,
+                    is_bookmarked: true,
                 },
             ],
         };
@@ -310,6 +311,7 @@ describe("VoicesClient", () => {
                     isMixed: false,
                     favoritedAtUnix: 1,
                     createdAtUnix: 1,
+                    isBookmarked: true,
                 },
             ],
         });
@@ -458,6 +460,7 @@ describe("VoicesClient", () => {
                     is_mixed: false,
                     favorited_at_unix: 1,
                     created_at_unix: 1,
+                    is_bookmarked: true,
                 },
             ],
             has_more: true,
@@ -633,6 +636,7 @@ describe("VoicesClient", () => {
                     isMixed: false,
                     favoritedAtUnix: 1,
                     createdAtUnix: 1,
+                    isBookmarked: true,
                 },
             ],
             hasMore: true,
@@ -820,6 +824,7 @@ describe("VoicesClient", () => {
             is_mixed: false,
             favorited_at_unix: 1,
             created_at_unix: 1,
+            is_bookmarked: true,
         };
         server
             .mockEndpoint()
@@ -1029,6 +1034,7 @@ describe("VoicesClient", () => {
             isMixed: false,
             favoritedAtUnix: 1,
             createdAtUnix: 1,
+            isBookmarked: true,
         });
     });
 
@@ -1127,6 +1133,7 @@ describe("VoicesClient", () => {
                     tiktok_username: "tiktok_username",
                     image_url: "image_url",
                     is_added_by_user: true,
+                    is_bookmarked: true,
                 },
             ],
             has_more: false,
@@ -1196,6 +1203,7 @@ describe("VoicesClient", () => {
                     tiktokUsername: "tiktok_username",
                     imageUrl: "image_url",
                     isAddedByUser: true,
+                    isBookmarked: true,
                 },
             ],
             hasMore: false,

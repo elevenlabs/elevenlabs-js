@@ -5,7 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationHistoryAnalysisCommonModel } from "./ConversationHistoryAnalysisCommonModel";
 import { ConversationHistoryMetadataCommonModel } from "./ConversationHistoryMetadataCommonModel";
-import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
+import { ConversationHistoryTranscriptResponseModel } from "./ConversationHistoryTranscriptResponseModel";
 import { ConversationInitiationClientDataRequestOutput } from "./ConversationInitiationClientDataRequestOutput";
 import { GetConversationResponseModelStatus } from "./GetConversationResponseModelStatus";
 
@@ -19,7 +19,6 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
     userId: core.serialization.property("user_id", core.serialization.string().optional()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     versionId: core.serialization.property("version_id", core.serialization.string().optional()),
-    transcript: core.serialization.list(ConversationHistoryTranscriptCommonModelOutput),
     metadata: ConversationHistoryMetadataCommonModel,
     analysis: ConversationHistoryAnalysisCommonModel.optional(),
     conversationInitiationClientData: core.serialization.property(
@@ -30,6 +29,7 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
     hasAudio: core.serialization.property("has_audio", core.serialization.boolean()),
     hasUserAudio: core.serialization.property("has_user_audio", core.serialization.boolean()),
     hasResponseAudio: core.serialization.property("has_response_audio", core.serialization.boolean()),
+    transcript: core.serialization.list(ConversationHistoryTranscriptResponseModel),
 });
 
 export declare namespace GetConversationResponseModel {
@@ -40,7 +40,6 @@ export declare namespace GetConversationResponseModel {
         user_id?: string | null;
         branch_id?: string | null;
         version_id?: string | null;
-        transcript: ConversationHistoryTranscriptCommonModelOutput.Raw[];
         metadata: ConversationHistoryMetadataCommonModel.Raw;
         analysis?: ConversationHistoryAnalysisCommonModel.Raw | null;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestOutput.Raw | null;
@@ -48,5 +47,6 @@ export declare namespace GetConversationResponseModel {
         has_audio: boolean;
         has_user_audio: boolean;
         has_response_audio: boolean;
+        transcript: ConversationHistoryTranscriptResponseModel.Raw[];
     }
 }

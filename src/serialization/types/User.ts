@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { SeatType } from "./SeatType";
 import { SubscriptionResponse } from "./SubscriptionResponse";
 
 export const User: core.serialization.ObjectSchema<serializers.User.Raw, ElevenLabs.User> = core.serialization.object({
@@ -29,6 +30,7 @@ export const User: core.serialization.ObjectSchema<serializers.User.Raw, ElevenL
         core.serialization.string().optional(),
     ),
     createdAt: core.serialization.property("created_at", core.serialization.number()),
+    seatType: core.serialization.property("seat_type", SeatType),
 });
 
 export declare namespace User {
@@ -47,5 +49,6 @@ export declare namespace User {
         referral_link_code?: string | null;
         partnerstack_partner_default_link?: string | null;
         created_at: number;
+        seat_type: SeatType.Raw;
     }
 }

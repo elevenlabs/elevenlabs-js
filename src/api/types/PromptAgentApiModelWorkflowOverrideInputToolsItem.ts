@@ -9,6 +9,7 @@ export type PromptAgentApiModelWorkflowOverrideInputToolsItem =
     | ElevenLabs.PromptAgentApiModelWorkflowOverrideInputToolsItem.ApiIntegrationWebhook
     | ElevenLabs.PromptAgentApiModelWorkflowOverrideInputToolsItem.Client
     | ElevenLabs.PromptAgentApiModelWorkflowOverrideInputToolsItem.Mcp
+    | ElevenLabs.PromptAgentApiModelWorkflowOverrideInputToolsItem.Smb
     | ElevenLabs.PromptAgentApiModelWorkflowOverrideInputToolsItem.System
     | ElevenLabs.PromptAgentApiModelWorkflowOverrideInputToolsItem.Webhook;
 
@@ -23,6 +24,11 @@ export namespace PromptAgentApiModelWorkflowOverrideInputToolsItem {
 
     export interface Mcp {
         type: "mcp";
+        value?: unknown;
+    }
+
+    export interface Smb {
+        type: "smb";
         value?: unknown;
     }
 

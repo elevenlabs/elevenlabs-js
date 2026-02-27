@@ -15,4 +15,6 @@ export interface UpdateResponseUnitTestRequest {
     /** Non-empty list of example responses that should be considered failures */
     failureExamples?: ElevenLabs.AgentFailureResponseExample[];
     name: string;
+    /** The ID of the parent folder. If not provided, the test will be moved to the root level. */
+    parentFolderId?: string;
 }

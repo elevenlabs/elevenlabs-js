@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const EmbeddingModelEnum: core.serialization.Schema<
     serializers.EmbeddingModelEnum.Raw,
     ElevenLabs.EmbeddingModelEnum
-> = core.serialization.enum_(["e5_mistral_7b_instruct", "multilingual_e5_large_instruct"]);
+> = core.serialization.enum_(["e5_mistral_7b_instruct", "multilingual_e5_large_instruct", "qwen3_embedding_4b"]);
 
 export declare namespace EmbeddingModelEnum {
-    export type Raw = "e5_mistral_7b_instruct" | "multilingual_e5_large_instruct";
+    export type Raw = "e5_mistral_7b_instruct" | "multilingual_e5_large_instruct" | "qwen3_embedding_4b";
 }

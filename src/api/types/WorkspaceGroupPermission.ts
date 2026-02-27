@@ -19,6 +19,7 @@ export const WorkspaceGroupPermission = {
     CreateUserApiKey: "create_user_api_key",
     PublishStudioProject: "publish_studio_project",
     Music: "music",
+    ImageVideoGeneration: "image_video_generation",
     ShareVoiceExternally: "share_voice_externally",
     PublishVoiceToVoiceLibrary: "publish_voice_to_voice_library",
     ViewFiatBalance: "view_fiat_balance",

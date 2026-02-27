@@ -61,6 +61,17 @@ export const WidgetTextContents: core.serialization.ObjectSchema<
     ),
     submit: core.serialization.string().optional(),
     goBack: core.serialization.property("go_back", core.serialization.string().optional()),
+    sendMessage: core.serialization.property("send_message", core.serialization.string().optional()),
+    textMode: core.serialization.property("text_mode", core.serialization.string().optional()),
+    voiceMode: core.serialization.property("voice_mode", core.serialization.string().optional()),
+    switchedToTextMode: core.serialization.property("switched_to_text_mode", core.serialization.string().optional()),
+    switchedToVoiceMode: core.serialization.property("switched_to_voice_mode", core.serialization.string().optional()),
+    copy: core.serialization.string().optional(),
+    download: core.serialization.string().optional(),
+    wrap: core.serialization.string().optional(),
+    agentWorking: core.serialization.property("agent_working", core.serialization.string().optional()),
+    agentDone: core.serialization.property("agent_done", core.serialization.string().optional()),
+    agentError: core.serialization.property("agent_error", core.serialization.string().optional()),
 });
 
 export declare namespace WidgetTextContents {
@@ -97,5 +108,16 @@ export declare namespace WidgetTextContents {
         follow_up_feedback_placeholder?: string | null;
         submit?: string | null;
         go_back?: string | null;
+        send_message?: string | null;
+        text_mode?: string | null;
+        voice_mode?: string | null;
+        switched_to_text_mode?: string | null;
+        switched_to_voice_mode?: string | null;
+        copy?: string | null;
+        download?: string | null;
+        wrap?: string | null;
+        agent_working?: string | null;
+        agent_done?: string | null;
+        agent_error?: string | null;
     }
 }

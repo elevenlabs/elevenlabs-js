@@ -17,6 +17,8 @@ export interface BodyStreamComposedMusicV1MusicStreamPost {
     musicLengthMs?: number;
     /** The model to use for the generation. */
     modelId?: "music_v1";
+    /** Random seed to initialize the music generation process. Providing the same seed with the same parameters can help achieve more consistent results, but exact reproducibility is not guaranteed and outputs may change across system updates. Cannot be used in conjunction with prompt. */
+    seed?: number;
     /** If true, guarantees that the generated song will be instrumental. If false, the song may or may not be instrumental depending on the `prompt`. Can only be used with `prompt`. */
     forceInstrumental?: boolean;
     /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting API. */

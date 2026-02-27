@@ -3,29 +3,12 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { VoiceGenerationParameterOptionResponse } from "./VoiceGenerationParameterOptionResponse";
 
-export const VoiceGenerationParameterResponse: core.serialization.ObjectSchema<
+export const VoiceGenerationParameterResponse: core.serialization.Schema<
     serializers.VoiceGenerationParameterResponse.Raw,
     ElevenLabs.VoiceGenerationParameterResponse
-> = core.serialization.object({
-    genders: core.serialization.list(VoiceGenerationParameterOptionResponse),
-    accents: core.serialization.list(VoiceGenerationParameterOptionResponse),
-    ages: core.serialization.list(VoiceGenerationParameterOptionResponse),
-    minimumCharacters: core.serialization.property("minimum_characters", core.serialization.number()),
-    maximumCharacters: core.serialization.property("maximum_characters", core.serialization.number()),
-    minimumAccentStrength: core.serialization.property("minimum_accent_strength", core.serialization.number()),
-    maximumAccentStrength: core.serialization.property("maximum_accent_strength", core.serialization.number()),
-});
+> = core.serialization.unknown();
 
 export declare namespace VoiceGenerationParameterResponse {
-    export interface Raw {
-        genders: VoiceGenerationParameterOptionResponse.Raw[];
-        accents: VoiceGenerationParameterOptionResponse.Raw[];
-        ages: VoiceGenerationParameterOptionResponse.Raw[];
-        minimum_characters: number;
-        maximum_characters: number;
-        minimum_accent_strength: number;
-        maximum_accent_strength: number;
-    }
+    export type Raw = unknown;
 }

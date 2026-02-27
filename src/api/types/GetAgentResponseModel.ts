@@ -29,4 +29,6 @@ export interface GetAgentResponseModel {
     branchId?: string;
     /** The ID of the main branch for this agent */
     mainBranchId?: string;
+    /** Coaching settings for the agent if configured */
+    coachingSettings?: ElevenLabs.GetAgentResponseModelCoachingSettings;
 }

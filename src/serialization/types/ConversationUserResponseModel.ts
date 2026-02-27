@@ -12,8 +12,15 @@ export const ConversationUserResponseModel: core.serialization.ObjectSchema<
     lastContactUnixSecs: core.serialization.property("last_contact_unix_secs", core.serialization.number()),
     firstContactUnixSecs: core.serialization.property("first_contact_unix_secs", core.serialization.number()),
     conversationCount: core.serialization.property("conversation_count", core.serialization.number()),
-    lastAgentId: core.serialization.property("last_agent_id", core.serialization.string().optional()),
-    lastAgentName: core.serialization.property("last_agent_name", core.serialization.string().optional()),
+    lastContactAgentId: core.serialization.property("last_contact_agent_id", core.serialization.string().optional()),
+    lastContactConversationId: core.serialization.property(
+        "last_contact_conversation_id",
+        core.serialization.string().optional(),
+    ),
+    lastContactAgentName: core.serialization.property(
+        "last_contact_agent_name",
+        core.serialization.string().optional(),
+    ),
 });
 
 export declare namespace ConversationUserResponseModel {
@@ -22,7 +29,8 @@ export declare namespace ConversationUserResponseModel {
         last_contact_unix_secs: number;
         first_contact_unix_secs: number;
         conversation_count: number;
-        last_agent_id?: string | null;
-        last_agent_name?: string | null;
+        last_contact_agent_id?: string | null;
+        last_contact_conversation_id?: string | null;
+        last_contact_agent_name?: string | null;
     }
 }

@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
 import { ApiIntegrationWebhookOverridesOutputRequestHeadersValue } from "./ApiIntegrationWebhookOverridesOutputRequestHeadersValue";
+import { ApiIntegrationWebhookOverridesOutputSchemaOverridesValue } from "./ApiIntegrationWebhookOverridesOutputSchemaOverridesValue";
 import { LiteralOverride } from "./LiteralOverride";
 import { QueryOverride } from "./QueryOverride";
 import { ResponseFilterMode } from "./ResponseFilterMode";
@@ -12,6 +13,12 @@ export const ApiIntegrationWebhookOverridesOutput: core.serialization.ObjectSche
     serializers.ApiIntegrationWebhookOverridesOutput.Raw,
     ElevenLabs.ApiIntegrationWebhookOverridesOutput
 > = core.serialization.object({
+    schemaOverrides: core.serialization.property(
+        "schema_overrides",
+        core.serialization
+            .record(core.serialization.string(), ApiIntegrationWebhookOverridesOutputSchemaOverridesValue.optional())
+            .optional(),
+    ),
     pathParamsSchema: core.serialization.property(
         "path_params_schema",
         core.serialization.record(core.serialization.string(), LiteralOverride.optional()).optional(),
@@ -36,6 +43,10 @@ export const ApiIntegrationWebhookOverridesOutput: core.serialization.ObjectSche
 
 export declare namespace ApiIntegrationWebhookOverridesOutput {
     export interface Raw {
+        schema_overrides?: Record<
+            string,
+            ApiIntegrationWebhookOverridesOutputSchemaOverridesValue.Raw | null | undefined
+        > | null;
         path_params_schema?: Record<string, LiteralOverride.Raw | null | undefined> | null;
         query_params_schema?: QueryOverride.Raw | null;
         request_body_schema?: serializers.ObjectOverrideOutput.Raw | null;

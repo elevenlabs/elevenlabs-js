@@ -9,6 +9,8 @@ export const PronunciationDictionaryPhonemeRuleResponseModel: core.serialization
     ElevenLabs.PronunciationDictionaryPhonemeRuleResponseModel
 > = core.serialization.object({
     stringToReplace: core.serialization.property("string_to_replace", core.serialization.string()),
+    caseSensitive: core.serialization.property("case_sensitive", core.serialization.boolean().optional()),
+    wordBoundaries: core.serialization.property("word_boundaries", core.serialization.boolean().optional()),
     phoneme: core.serialization.string(),
     alphabet: core.serialization.string(),
 });
@@ -16,6 +18,8 @@ export const PronunciationDictionaryPhonemeRuleResponseModel: core.serialization
 export declare namespace PronunciationDictionaryPhonemeRuleResponseModel {
     export interface Raw {
         string_to_replace: string;
+        case_sensitive?: boolean | null;
+        word_boundaries?: boolean | null;
         phoneme: string;
         alphabet: string;
     }

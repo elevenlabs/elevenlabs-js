@@ -18,6 +18,9 @@ export const PromptAgentApiModelInputToolsItem: core.serialization.Schema<
         mcp: core.serialization.object({
             value: core.serialization.unknown(),
         }),
+        smb: core.serialization.object({
+            value: core.serialization.unknown(),
+        }),
         system: SystemToolConfigInput,
         webhook: WebhookToolConfigInput,
     })
@@ -31,6 +34,7 @@ export declare namespace PromptAgentApiModelInputToolsItem {
         | PromptAgentApiModelInputToolsItem.ApiIntegrationWebhook
         | PromptAgentApiModelInputToolsItem.Client
         | PromptAgentApiModelInputToolsItem.Mcp
+        | PromptAgentApiModelInputToolsItem.Smb
         | PromptAgentApiModelInputToolsItem.System
         | PromptAgentApiModelInputToolsItem.Webhook;
 
@@ -44,6 +48,11 @@ export declare namespace PromptAgentApiModelInputToolsItem {
 
     export interface Mcp {
         type: "mcp";
+        value?: unknown;
+    }
+
+    export interface Smb {
+        type: "smb";
         value?: unknown;
     }
 

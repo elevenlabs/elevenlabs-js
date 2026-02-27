@@ -51,6 +51,7 @@ export const Voice: core.serialization.ObjectSchema<serializers.Voice.Raw, Eleve
         isMixed: core.serialization.property("is_mixed", core.serialization.boolean().optional()),
         favoritedAtUnix: core.serialization.property("favorited_at_unix", core.serialization.number().optional()),
         createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number().optional()),
+        isBookmarked: core.serialization.property("is_bookmarked", core.serialization.boolean().optional()),
     });
 
 export declare namespace Voice {
@@ -77,5 +78,6 @@ export declare namespace Voice {
         is_mixed?: boolean | null;
         favorited_at_unix?: number | null;
         created_at_unix?: number | null;
+        is_bookmarked?: boolean | null;
     }
 }

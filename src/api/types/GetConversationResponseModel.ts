@@ -10,7 +10,6 @@ export interface GetConversationResponseModel {
     branchId?: string;
     /** The ID of the agent version used for this conversation */
     versionId?: string;
-    transcript: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
     metadata: ElevenLabs.ConversationHistoryMetadataCommonModel;
     analysis?: ElevenLabs.ConversationHistoryAnalysisCommonModel;
     conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestOutput;
@@ -18,4 +17,5 @@ export interface GetConversationResponseModel {
     hasAudio: boolean;
     hasUserAudio: boolean;
     hasResponseAudio: boolean;
+    transcript: ElevenLabs.ConversationHistoryTranscriptResponseModel[];
 }

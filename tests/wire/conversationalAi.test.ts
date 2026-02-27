@@ -43,7 +43,7 @@ describe("ConversationalAiClient", () => {
                 {
                     id: "id",
                     model: "e5_mistral_7b_instruct",
-                    status: "created",
+                    status: "new",
                     progress_percentage: 1.1,
                     document_model_index_usage: { used_bytes: 1 },
                 },
@@ -63,7 +63,7 @@ describe("ConversationalAiClient", () => {
                 {
                     id: "id",
                     model: "e5_mistral_7b_instruct",
-                    status: "created",
+                    status: "new",
                     progressPercentage: 1.1,
                     documentModelIndexUsage: {
                         usedBytes: 1,
@@ -80,7 +80,7 @@ describe("ConversationalAiClient", () => {
         const rawResponseBody = {
             id: "id",
             model: "e5_mistral_7b_instruct",
-            status: "created",
+            status: "new",
             progress_percentage: 1.1,
             document_model_index_usage: { used_bytes: 1 },
         };
@@ -99,7 +99,7 @@ describe("ConversationalAiClient", () => {
         expect(response).toEqual({
             id: "id",
             model: "e5_mistral_7b_instruct",
-            status: "created",
+            status: "new",
             progressPercentage: 1.1,
             documentModelIndexUsage: {
                 usedBytes: 1,

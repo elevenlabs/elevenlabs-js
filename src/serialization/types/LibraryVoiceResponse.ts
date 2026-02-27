@@ -47,6 +47,7 @@ export const LibraryVoiceResponse: core.serialization.ObjectSchema<
     tiktokUsername: core.serialization.property("tiktok_username", core.serialization.string().optional()),
     imageUrl: core.serialization.property("image_url", core.serialization.string().optional()),
     isAddedByUser: core.serialization.property("is_added_by_user", core.serialization.boolean().optional()),
+    isBookmarked: core.serialization.property("is_bookmarked", core.serialization.boolean().optional()),
 });
 
 export declare namespace LibraryVoiceResponse {
@@ -82,5 +83,6 @@ export declare namespace LibraryVoiceResponse {
         tiktok_username?: string | null;
         image_url?: string | null;
         is_added_by_user?: boolean | null;
+        is_bookmarked?: boolean | null;
     }
 }

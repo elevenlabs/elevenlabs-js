@@ -12,4 +12,6 @@ export interface BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch {
     isDisabled: boolean;
     /** The display name of the webhook (used for display purposes only). */
     name: string;
+    /** Whether to enable automatic retries for transient failures (5xx, 429, timeout) */
+    retryEnabled?: boolean;
 }

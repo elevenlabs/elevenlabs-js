@@ -9,12 +9,16 @@ export const PronunciationDictionaryAliasRuleResponseModel: core.serialization.O
     ElevenLabs.PronunciationDictionaryAliasRuleResponseModel
 > = core.serialization.object({
     stringToReplace: core.serialization.property("string_to_replace", core.serialization.string()),
+    caseSensitive: core.serialization.property("case_sensitive", core.serialization.boolean().optional()),
+    wordBoundaries: core.serialization.property("word_boundaries", core.serialization.boolean().optional()),
     alias: core.serialization.string(),
 });
 
 export declare namespace PronunciationDictionaryAliasRuleResponseModel {
     export interface Raw {
         string_to_replace: string;
+        case_sensitive?: boolean | null;
+        word_boundaries?: boolean | null;
         alias: string;
     }
 }

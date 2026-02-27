@@ -37,6 +37,7 @@ export const UpdateResponseUnitTestRequest: core.serialization.ObjectSchema<
         core.serialization.list(AgentFailureResponseExample).optional(),
     ),
     name: core.serialization.string(),
+    parentFolderId: core.serialization.property("parent_folder_id", core.serialization.string().optional()),
 });
 
 export declare namespace UpdateResponseUnitTestRequest {
@@ -51,5 +52,6 @@ export declare namespace UpdateResponseUnitTestRequest {
         success_examples?: AgentSuccessfulResponseExample.Raw[] | null;
         failure_examples?: AgentFailureResponseExample.Raw[] | null;
         name: string;
+        parent_folder_id?: string | null;
     }
 }

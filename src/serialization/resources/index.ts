@@ -1,6 +1,7 @@
 export * as audioIsolation from "./audioIsolation";
 export * from "./audioIsolation/types";
 export * as audioNative from "./audioNative";
+export * from "./audioNative/client/requests";
 export * from "./audioNative/types";
 export * as conversationalAi from "./conversationalAi";
 export * as dubbing from "./dubbing";

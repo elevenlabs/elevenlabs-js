@@ -4,17 +4,11 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 
-export const VoiceGenerationParameterOptionResponse: core.serialization.ObjectSchema<
+export const VoiceGenerationParameterOptionResponse: core.serialization.Schema<
     serializers.VoiceGenerationParameterOptionResponse.Raw,
     ElevenLabs.VoiceGenerationParameterOptionResponse
-> = core.serialization.object({
-    name: core.serialization.string(),
-    code: core.serialization.string(),
-});
+> = core.serialization.unknown();
 
 export declare namespace VoiceGenerationParameterOptionResponse {
-    export interface Raw {
-        name: string;
-        code: string;
-    }
+    export type Raw = unknown;
 }

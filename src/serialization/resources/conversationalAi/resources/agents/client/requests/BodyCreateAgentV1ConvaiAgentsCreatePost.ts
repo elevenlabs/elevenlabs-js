@@ -6,6 +6,7 @@ import type * as serializers from "../../../../../../index";
 import { AgentPlatformSettingsRequestModel } from "../../../../../../types/AgentPlatformSettingsRequestModel";
 import { AgentWorkflowRequestModel } from "../../../../../../types/AgentWorkflowRequestModel";
 import { ConversationalConfig } from "../../../../../../types/ConversationalConfig";
+import { BodyCreateAgentV1ConvaiAgentsCreatePostCoachingSettings } from "../../types/BodyCreateAgentV1ConvaiAgentsCreatePostCoachingSettings";
 
 export const BodyCreateAgentV1ConvaiAgentsCreatePost: core.serialization.Schema<
     serializers.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost.Raw,
@@ -16,6 +17,10 @@ export const BodyCreateAgentV1ConvaiAgentsCreatePost: core.serialization.Schema<
     workflow: AgentWorkflowRequestModel.optional(),
     name: core.serialization.string().optional(),
     tags: core.serialization.list(core.serialization.string()).optional(),
+    coachingSettings: core.serialization.property(
+        "coaching_settings",
+        BodyCreateAgentV1ConvaiAgentsCreatePostCoachingSettings.optional(),
+    ),
 });
 
 export declare namespace BodyCreateAgentV1ConvaiAgentsCreatePost {
@@ -25,5 +30,6 @@ export declare namespace BodyCreateAgentV1ConvaiAgentsCreatePost {
         workflow?: AgentWorkflowRequestModel.Raw | null;
         name?: string | null;
         tags?: string[] | null;
+        coaching_settings?: BodyCreateAgentV1ConvaiAgentsCreatePostCoachingSettings.Raw | null;
     }
 }

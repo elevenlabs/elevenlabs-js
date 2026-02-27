@@ -18,6 +18,9 @@ export const PromptAgentApiModelWorkflowOverrideOutputToolsItem: core.serializat
         mcp: core.serialization.object({
             value: core.serialization.unknown(),
         }),
+        smb: core.serialization.object({
+            value: core.serialization.unknown(),
+        }),
         system: SystemToolConfigOutput,
         webhook: WebhookToolConfigOutput,
     })
@@ -31,6 +34,7 @@ export declare namespace PromptAgentApiModelWorkflowOverrideOutputToolsItem {
         | PromptAgentApiModelWorkflowOverrideOutputToolsItem.ApiIntegrationWebhook
         | PromptAgentApiModelWorkflowOverrideOutputToolsItem.Client
         | PromptAgentApiModelWorkflowOverrideOutputToolsItem.Mcp
+        | PromptAgentApiModelWorkflowOverrideOutputToolsItem.Smb
         | PromptAgentApiModelWorkflowOverrideOutputToolsItem.System
         | PromptAgentApiModelWorkflowOverrideOutputToolsItem.Webhook;
 
@@ -44,6 +48,11 @@ export declare namespace PromptAgentApiModelWorkflowOverrideOutputToolsItem {
 
     export interface Mcp {
         type: "mcp";
+        value?: unknown;
+    }
+
+    export interface Smb {
+        type: "smb";
         value?: unknown;
     }
 

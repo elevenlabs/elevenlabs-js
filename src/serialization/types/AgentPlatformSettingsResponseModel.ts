@@ -10,7 +10,7 @@ import { AuthSettings } from "./AuthSettings";
 import { ConversationInitiationClientDataConfigOutput } from "./ConversationInitiationClientDataConfigOutput";
 import { EvaluationSettings } from "./EvaluationSettings";
 import { LiteralJsonSchemaProperty } from "./LiteralJsonSchemaProperty";
-import { PrivacyConfig } from "./PrivacyConfig";
+import { PrivacyConfigOutput } from "./PrivacyConfigOutput";
 import { SafetyResponseModel } from "./SafetyResponseModel";
 import { WidgetConfig } from "./WidgetConfig";
 
@@ -28,9 +28,10 @@ export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema
     workspaceOverrides: core.serialization.property("workspace_overrides", AgentWorkspaceOverridesOutput.optional()),
     testing: AgentTestingSettings.optional(),
     archived: core.serialization.boolean().optional(),
+    summaryLanguage: core.serialization.property("summary_language", core.serialization.string().optional()),
     auth: AuthSettings.optional(),
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
-    privacy: PrivacyConfig.optional(),
+    privacy: PrivacyConfigOutput.optional(),
     safety: SafetyResponseModel.optional(),
 });
 
@@ -43,9 +44,10 @@ export declare namespace AgentPlatformSettingsResponseModel {
         workspace_overrides?: AgentWorkspaceOverridesOutput.Raw | null;
         testing?: AgentTestingSettings.Raw | null;
         archived?: boolean | null;
+        summary_language?: string | null;
         auth?: AuthSettings.Raw | null;
         call_limits?: AgentCallLimits.Raw | null;
-        privacy?: PrivacyConfig.Raw | null;
+        privacy?: PrivacyConfigOutput.Raw | null;
         safety?: SafetyResponseModel.Raw | null;
     }
 }

@@ -156,6 +156,8 @@ export class PronunciationDictionariesClient {
      *         rules: [{
      *                 type: "alias",
      *                 stringToReplace: "Thailand",
+     *                 caseSensitive: true,
+     *                 wordBoundaries: true,
      *                 alias: "tie-land"
      *             }],
      *         name: "My Dictionary"

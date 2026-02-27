@@ -17,6 +17,7 @@ describe("ApprovalPolicyClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
                 force_pre_tool_speech: true,
@@ -86,6 +87,9 @@ describe("ApprovalPolicyClient", () => {
                 },
                 requestHeaders: {
                     key: "value",
+                },
+                authConnection: {
+                    authConnectionId: "auth_connection_id",
                 },
                 name: "name",
                 description: "description",

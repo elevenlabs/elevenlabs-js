@@ -15,4 +15,6 @@ export interface UpdateSimulationTestRequest {
     /** Maximum number of conversation turns for simulation tests. */
     simulationMaxTurns?: number;
     name: string;
+    /** The ID of the parent folder. If not provided, the test will be moved to the root level. */
+    parentFolderId?: string;
 }

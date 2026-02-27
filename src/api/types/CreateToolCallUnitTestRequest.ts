@@ -13,4 +13,6 @@ export interface CreateToolCallUnitTestRequest {
     /** If set to True this test will pass if any tool call returned by the LLM matches the criteria. Otherwise it will fail if more than one tool is returned by the agent. */
     checkAnyToolMatches?: boolean;
     name: string;
+    /** The ID of the parent folder. If not provided, the test will be created at the root level. */
+    parentFolderId?: string;
 }

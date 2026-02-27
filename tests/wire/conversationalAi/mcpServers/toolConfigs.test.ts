@@ -17,6 +17,7 @@ describe("ToolConfigsClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
                 force_pre_tool_speech: true,
@@ -87,6 +88,9 @@ describe("ToolConfigsClient", () => {
                 requestHeaders: {
                     key: "value",
                 },
+                authConnection: {
+                    authConnectionId: "auth_connection_id",
+                },
                 name: "name",
                 description: "description",
                 forcePreToolSpeech: true,
@@ -146,6 +150,7 @@ describe("ToolConfigsClient", () => {
             assignments: [
                 { source: "response", dynamic_variable: "user_name", value_path: "user.name", sanitize: false },
             ],
+            input_overrides: { key: { source: "constant", constant_value: "constant_value" } },
         };
         server
             .mockEndpoint()
@@ -171,6 +176,12 @@ describe("ToolConfigsClient", () => {
                     sanitize: false,
                 },
             ],
+            inputOverrides: {
+                key: {
+                    source: "constant",
+                    constantValue: "constant_value",
+                },
+            },
         });
     });
 
@@ -187,6 +198,7 @@ describe("ToolConfigsClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
                 force_pre_tool_speech: true,
@@ -254,6 +266,9 @@ describe("ToolConfigsClient", () => {
                 requestHeaders: {
                     key: "value",
                 },
+                authConnection: {
+                    authConnectionId: "auth_connection_id",
+                },
                 name: "name",
                 description: "description",
                 forcePreToolSpeech: true,
@@ -312,6 +327,7 @@ describe("ToolConfigsClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
                 force_pre_tool_speech: true,
@@ -379,6 +395,9 @@ describe("ToolConfigsClient", () => {
                 },
                 requestHeaders: {
                     key: "value",
+                },
+                authConnection: {
+                    authConnectionId: "auth_connection_id",
                 },
                 name: "name",
                 description: "description",

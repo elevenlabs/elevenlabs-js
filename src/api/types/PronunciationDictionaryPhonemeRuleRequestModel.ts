@@ -3,6 +3,10 @@
 export interface PronunciationDictionaryPhonemeRuleRequestModel {
     /** The string to replace. Must be a non-empty string. */
     stringToReplace: string;
+    /** Whether the rule should match case-sensitively. */
+    caseSensitive?: boolean;
+    /** Whether the rule should only match at word boundaries. */
+    wordBoundaries?: boolean;
     /** The phoneme rule. */
     phoneme: string;
     /** The alphabet to use with the phoneme rule. */

@@ -9,10 +9,12 @@ export const BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost: core.serializ
     ElevenLabs.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost
 > = core.serialization.object({
     newName: core.serialization.property("new_name", core.serialization.string()),
+    bookmarked: core.serialization.boolean().optional(),
 });
 
 export declare namespace BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost {
     export interface Raw {
         new_name: string;
+        bookmarked?: boolean | null;
     }
 }

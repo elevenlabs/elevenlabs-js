@@ -4,5 +4,6 @@ export const TestType = {
     Llm: "llm",
     Tool: "tool",
     Simulation: "simulation",
+    Folder: "folder",
 } as const;
 export type TestType = (typeof TestType)[keyof typeof TestType];

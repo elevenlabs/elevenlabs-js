@@ -245,6 +245,15 @@ describe("DocumentsClient", () => {
                     access_level: "admin",
                 },
             ],
+            branches: [
+                {
+                    agent_id: "agent_id",
+                    agent_name: "agent_name",
+                    branch_id: "branch_id",
+                    branch_name: "branch_name",
+                    is_main: true,
+                },
+            ],
             next_cursor: "next_cursor",
             has_more: true,
         };
@@ -270,6 +279,15 @@ describe("DocumentsClient", () => {
                     name: "name",
                     createdAtUnixSecs: 1,
                     accessLevel: "admin",
+                },
+            ],
+            branches: [
+                {
+                    agentId: "agent_id",
+                    agentName: "agent_name",
+                    branchId: "branch_id",
+                    branchName: "branch_name",
+                    isMain: true,
                 },
             ],
             nextCursor: "next_cursor",

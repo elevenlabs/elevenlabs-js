@@ -50,4 +50,34 @@ describe("AudioNativeClient", () => {
             },
         });
     });
+
+    test("update_content_from_url", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { url: "https://elevenlabs.io/blog/the_first_ai_that_can_laugh/" };
+        const rawResponseBody = {
+            project_id: "JBFqnCBsd6RMkjVDRZzb",
+            converting: false,
+            publishing: false,
+            html_snippet: "<div id='audio-native-player'></div>",
+        };
+        server
+            .mockEndpoint()
+            .post("/v1/audio-native/content")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.audioNative.updateContentFromUrl({
+            url: "https://elevenlabs.io/blog/the_first_ai_that_can_laugh/",
+        });
+        expect(response).toEqual({
+            projectId: "JBFqnCBsd6RMkjVDRZzb",
+            converting: false,
+            publishing: false,
+            htmlSnippet: "<div id='audio-native-player'></div>",
+        });
+    });
 });

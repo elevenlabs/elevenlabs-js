@@ -77,6 +77,16 @@ export interface WidgetConfig {
     defaultExpanded?: boolean;
     /** Whether the widget should always be expanded */
     alwaysExpanded?: boolean;
+    /** Whether the widget can be dismissed by the user */
+    dismissible?: boolean;
+    /** Whether to show agent working/done/error status during tool use */
+    showAgentStatus?: boolean;
+    /** Whether to show the conversation ID after disconnection. */
+    showConversationId?: boolean;
+    /** Whether to strip audio markup from messages. */
+    stripAudioTags?: boolean;
+    /** Theme for code block syntax highlighting. Defaults to auto-detection by the widget when not set. */
+    syntaxHighlightTheme?: ElevenLabs.WidgetConfigOutputSyntaxHighlightTheme;
     /** Text contents of the widget */
     textContents?: ElevenLabs.WidgetTextContents;
     /** Styles for the widget */

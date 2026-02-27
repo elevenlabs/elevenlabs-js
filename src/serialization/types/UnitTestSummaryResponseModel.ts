@@ -3,6 +3,8 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AgentTestEntityType } from "./AgentTestEntityType";
+import { AgentTestFolderPathSegmentResponseModel } from "./AgentTestFolderPathSegmentResponseModel";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
 import { TestType } from "./TestType";
 
@@ -16,6 +18,13 @@ export const UnitTestSummaryResponseModel: core.serialization.ObjectSchema<
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
     lastUpdatedAtUnixSecs: core.serialization.property("last_updated_at_unix_secs", core.serialization.number()),
     type: TestType,
+    entityType: core.serialization.property("entity_type", AgentTestEntityType.optional()),
+    folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
+    folderPath: core.serialization.property(
+        "folder_path",
+        core.serialization.list(AgentTestFolderPathSegmentResponseModel).optional(),
+    ),
+    childrenCount: core.serialization.property("children_count", core.serialization.number().optional()),
 });
 
 export declare namespace UnitTestSummaryResponseModel {
@@ -26,5 +35,9 @@ export declare namespace UnitTestSummaryResponseModel {
         created_at_unix_secs: number;
         last_updated_at_unix_secs: number;
         type: TestType.Raw;
+        entity_type?: AgentTestEntityType.Raw | null;
+        folder_parent_id?: string | null;
+        folder_path?: AgentTestFolderPathSegmentResponseModel.Raw[] | null;
+        children_count?: number | null;
     }
 }

@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationHistoryAnalysisCommonModel } from "./ConversationHistoryAnalysisCommonModel";
-import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
+import { ConversationHistoryTranscriptResponseModel } from "./ConversationHistoryTranscriptResponseModel";
 
 export const AgentSimulatedChatTestResponseModel: core.serialization.ObjectSchema<
     serializers.AgentSimulatedChatTestResponseModel.Raw,
@@ -12,14 +12,14 @@ export const AgentSimulatedChatTestResponseModel: core.serialization.ObjectSchem
 > = core.serialization.object({
     simulatedConversation: core.serialization.property(
         "simulated_conversation",
-        core.serialization.list(ConversationHistoryTranscriptCommonModelOutput),
+        core.serialization.list(ConversationHistoryTranscriptResponseModel),
     ),
     analysis: ConversationHistoryAnalysisCommonModel,
 });
 
 export declare namespace AgentSimulatedChatTestResponseModel {
     export interface Raw {
-        simulated_conversation: ConversationHistoryTranscriptCommonModelOutput.Raw[];
+        simulated_conversation: ConversationHistoryTranscriptResponseModel.Raw[];
         analysis: ConversationHistoryAnalysisCommonModel.Raw;
     }
 }

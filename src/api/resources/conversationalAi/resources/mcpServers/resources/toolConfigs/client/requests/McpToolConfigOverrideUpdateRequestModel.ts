@@ -19,4 +19,9 @@ export interface McpToolConfigOverrideUpdateRequestModel {
     executionMode?: ElevenLabs.ToolExecutionMode;
     /** Dynamic variable assignments for this MCP tool */
     assignments?: ElevenLabs.DynamicVariableAssignment[];
+    /** Mapping of json path to input override configuration */
+    inputOverrides?: Record<
+        string,
+        ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModelInputOverridesValue | undefined
+    >;
 }

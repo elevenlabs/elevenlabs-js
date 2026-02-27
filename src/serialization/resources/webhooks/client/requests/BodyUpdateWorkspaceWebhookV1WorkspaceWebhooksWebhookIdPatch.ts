@@ -10,11 +10,13 @@ export const BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch: core.s
 > = core.serialization.object({
     isDisabled: core.serialization.property("is_disabled", core.serialization.boolean()),
     name: core.serialization.string(),
+    retryEnabled: core.serialization.property("retry_enabled", core.serialization.boolean().optional()),
 });
 
 export declare namespace BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch {
     export interface Raw {
         is_disabled: boolean;
         name: string;
+        retry_enabled?: boolean | null;
     }
 }

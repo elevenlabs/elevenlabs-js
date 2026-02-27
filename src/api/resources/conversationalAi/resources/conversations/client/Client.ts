@@ -11,6 +11,8 @@ import * as serializers from "../../../../../../serialization/index";
 import * as ElevenLabs from "../../../../../index";
 import { AudioClient } from "../resources/audio/client/Client";
 import { FeedbackClient } from "../resources/feedback/client/Client";
+import { FilesClient } from "../resources/files/client/Client";
+import { MessagesClient } from "../resources/messages/client/Client";
 
 export declare namespace ConversationsClient {
     export type Options = BaseClientOptions;
@@ -22,6 +24,8 @@ export class ConversationsClient {
     protected readonly _options: NormalizedClientOptions<ConversationsClient.Options>;
     protected _audio: AudioClient | undefined;
     protected _feedback: FeedbackClient | undefined;
+    protected _messages: MessagesClient | undefined;
+    protected _files: FilesClient | undefined;
 
     constructor(options: ConversationsClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -33,6 +37,14 @@ export class ConversationsClient {
 
     public get feedback(): FeedbackClient {
         return (this._feedback ??= new FeedbackClient(this._options));
+    }
+
+    public get messages(): MessagesClient {
+        return (this._messages ??= new MessagesClient(this._options));
+    }
+
+    public get files(): FilesClient {
+        return (this._files ??= new FilesClient(this._options));
     }
 
     /**

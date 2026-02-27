@@ -11,11 +11,12 @@ export interface ProjectVideoResponseModel {
     durationMs: number;
     volumeGainDb: number;
     muted: boolean;
+    fadeInMs?: number;
+    fadeOutMs?: number;
     width: number;
     height: number;
     codec: string;
     order: string;
-    previewJobProgress: number;
     createdAtMs: number;
     updatedAtMs: number;
     error?: string;
@@ -28,13 +29,16 @@ export interface ProjectVideoResponseModel {
     sourceVideoId?: string;
     sourceAssetId?: string;
     pendingBlockIds: string[];
-    importSpeechProgress?: number;
+    pendingExternalAudioIds: string[];
     speechImported?: boolean;
-    dubAudioProgress?: number;
     pendingTask?: ElevenLabs.PendingClipTask;
     audioTrackReady?: boolean;
     exportFormatReady?: boolean;
     currentSnapshotId?: string;
+    sourceContext?: ElevenLabs.GenerationSourceContext;
     canvasPlacement?: ElevenLabs.CanvasPlacement;
+    animation?: ElevenLabs.ClipAnimation;
     trackId?: string;
+    previewJobProgress?: number;
+    importSpeechProgress?: number;
 }

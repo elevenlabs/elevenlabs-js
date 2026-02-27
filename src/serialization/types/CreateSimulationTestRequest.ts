@@ -29,6 +29,7 @@ export const CreateSimulationTestRequest: core.serialization.ObjectSchema<
     simulationScenario: core.serialization.property("simulation_scenario", core.serialization.string().optional()),
     simulationMaxTurns: core.serialization.property("simulation_max_turns", core.serialization.number().optional()),
     name: core.serialization.string(),
+    parentFolderId: core.serialization.property("parent_folder_id", core.serialization.string().optional()),
 });
 
 export declare namespace CreateSimulationTestRequest {
@@ -43,5 +44,6 @@ export declare namespace CreateSimulationTestRequest {
         simulation_scenario?: string | null;
         simulation_max_turns?: number | null;
         name: string;
+        parent_folder_id?: string | null;
     }
 }

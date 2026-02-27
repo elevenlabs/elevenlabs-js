@@ -4,9 +4,9 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentMetadata } from "./AgentMetadata";
+import { ChatSourceMedium } from "./ChatSourceMedium";
 import { ConversationHistoryMultivoiceMessageModel } from "./ConversationHistoryMultivoiceMessageModel";
 import { ConversationHistoryTranscriptCommonModelInputRole } from "./ConversationHistoryTranscriptCommonModelInputRole";
-import { ConversationHistoryTranscriptCommonModelInputSourceMedium } from "./ConversationHistoryTranscriptCommonModelInputSourceMedium";
 import { ConversationHistoryTranscriptCommonModelInputToolResultsItem } from "./ConversationHistoryTranscriptCommonModelInputToolResultsItem";
 import { ConversationHistoryTranscriptToolCallCommonModelInput } from "./ConversationHistoryTranscriptToolCallCommonModelInput";
 import { ConversationTurnMetrics } from "./ConversationTurnMetrics";
@@ -44,10 +44,7 @@ export const ConversationHistoryTranscriptCommonModelInput: core.serialization.O
     llmUsage: core.serialization.property("llm_usage", LlmUsageInput.optional()),
     interrupted: core.serialization.boolean().optional(),
     originalMessage: core.serialization.property("original_message", core.serialization.string().optional()),
-    sourceMedium: core.serialization.property(
-        "source_medium",
-        ConversationHistoryTranscriptCommonModelInputSourceMedium.optional(),
-    ),
+    sourceMedium: core.serialization.property("source_medium", ChatSourceMedium.optional()),
 });
 
 export declare namespace ConversationHistoryTranscriptCommonModelInput {
@@ -66,6 +63,6 @@ export declare namespace ConversationHistoryTranscriptCommonModelInput {
         llm_usage?: LlmUsageInput.Raw | null;
         interrupted?: boolean | null;
         original_message?: string | null;
-        source_medium?: ConversationHistoryTranscriptCommonModelInputSourceMedium.Raw | null;
+        source_medium?: ChatSourceMedium.Raw | null;
     }
 }

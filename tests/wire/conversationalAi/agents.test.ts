@@ -152,6 +152,11 @@ describe("AgentsClient", () => {
                     conversation_mode_toggle_enabled: true,
                     default_expanded: true,
                     always_expanded: true,
+                    dismissible: true,
+                    show_agent_status: true,
+                    show_conversation_id: true,
+                    strip_audio_tags: true,
+                    syntax_highlight_theme: "light",
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -172,6 +177,7 @@ describe("AgentsClient", () => {
                     attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
                 },
                 archived: true,
+                summary_language: "summary_language",
                 auth: {
                     enable_auth: true,
                     allowlist: [{ hostname: "https://example.com" }],
@@ -639,6 +645,7 @@ describe("AgentsClient", () => {
             version_id: "version_id",
             branch_id: "branch_id",
             main_branch_id: "main_branch_id",
+            coaching_settings: { type: "coached", memory_base_id: "memory_base_id" },
         };
         server
             .mockEndpoint()
@@ -821,6 +828,11 @@ describe("AgentsClient", () => {
                     conversationModeToggleEnabled: true,
                     defaultExpanded: true,
                     alwaysExpanded: true,
+                    dismissible: true,
+                    showAgentStatus: true,
+                    showConversationId: true,
+                    stripAudioTags: true,
+                    syntaxHighlightTheme: "light",
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -858,6 +870,7 @@ describe("AgentsClient", () => {
                     ],
                 },
                 archived: true,
+                summaryLanguage: "summary_language",
                 auth: {
                     enableAuth: true,
                     allowlist: [
@@ -1517,6 +1530,10 @@ describe("AgentsClient", () => {
             versionId: "version_id",
             branchId: "branch_id",
             mainBranchId: "main_branch_id",
+            coachingSettings: {
+                type: "coached",
+                memoryBaseId: "memory_base_id",
+            },
         });
     });
 
@@ -1661,6 +1678,11 @@ describe("AgentsClient", () => {
                     conversation_mode_toggle_enabled: true,
                     default_expanded: true,
                     always_expanded: true,
+                    dismissible: true,
+                    show_agent_status: true,
+                    show_conversation_id: true,
+                    strip_audio_tags: true,
+                    syntax_highlight_theme: "light",
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -1681,6 +1703,7 @@ describe("AgentsClient", () => {
                     attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
                 },
                 archived: true,
+                summary_language: "summary_language",
                 auth: {
                     enable_auth: true,
                     allowlist: [{ hostname: "https://example.com" }],
@@ -2148,6 +2171,7 @@ describe("AgentsClient", () => {
             version_id: "version_id",
             branch_id: "branch_id",
             main_branch_id: "main_branch_id",
+            coaching_settings: { type: "coached", memory_base_id: "memory_base_id" },
         };
         server
             .mockEndpoint()
@@ -2330,6 +2354,11 @@ describe("AgentsClient", () => {
                     conversationModeToggleEnabled: true,
                     defaultExpanded: true,
                     alwaysExpanded: true,
+                    dismissible: true,
+                    showAgentStatus: true,
+                    showConversationId: true,
+                    stripAudioTags: true,
+                    syntaxHighlightTheme: "light",
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -2367,6 +2396,7 @@ describe("AgentsClient", () => {
                     ],
                 },
                 archived: true,
+                summaryLanguage: "summary_language",
                 auth: {
                     enableAuth: true,
                     allowlist: [
@@ -3026,6 +3056,10 @@ describe("AgentsClient", () => {
             versionId: "version_id",
             branchId: "branch_id",
             mainBranchId: "main_branch_id",
+            coachingSettings: {
+                type: "coached",
+                memoryBaseId: "memory_base_id",
+            },
         });
     });
 
@@ -3154,6 +3188,12 @@ describe("AgentsClient", () => {
                     interrupted: true,
                     original_message: "original_message",
                     source_medium: "audio",
+                    file_input: {
+                        file_id: "file_id",
+                        original_filename: "original_filename",
+                        mime_type: "mime_type",
+                        file_url: "file_url",
+                    },
                 },
             ],
             analysis: {
@@ -3256,6 +3296,12 @@ describe("AgentsClient", () => {
                     interrupted: true,
                     originalMessage: "original_message",
                     sourceMedium: "audio",
+                    fileInput: {
+                        fileId: "file_id",
+                        originalFilename: "original_filename",
+                        mimeType: "mime_type",
+                        fileUrl: "file_url",
+                    },
                 },
             ],
             analysis: {

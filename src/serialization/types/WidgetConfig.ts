@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { AllowlistItem } from "./AllowlistItem";
 import { EmbedVariant } from "./EmbedVariant";
 import { WidgetConfigOutputAvatar } from "./WidgetConfigOutputAvatar";
+import { WidgetConfigOutputSyntaxHighlightTheme } from "./WidgetConfigOutputSyntaxHighlightTheme";
 import { WidgetEndFeedbackConfig } from "./WidgetEndFeedbackConfig";
 import { WidgetExpandable } from "./WidgetExpandable";
 import { WidgetFeedbackMode } from "./WidgetFeedbackMode";
@@ -71,6 +72,17 @@ export const WidgetConfig: core.serialization.ObjectSchema<serializers.WidgetCon
         ),
         defaultExpanded: core.serialization.property("default_expanded", core.serialization.boolean().optional()),
         alwaysExpanded: core.serialization.property("always_expanded", core.serialization.boolean().optional()),
+        dismissible: core.serialization.boolean().optional(),
+        showAgentStatus: core.serialization.property("show_agent_status", core.serialization.boolean().optional()),
+        showConversationId: core.serialization.property(
+            "show_conversation_id",
+            core.serialization.boolean().optional(),
+        ),
+        stripAudioTags: core.serialization.property("strip_audio_tags", core.serialization.boolean().optional()),
+        syntaxHighlightTheme: core.serialization.property(
+            "syntax_highlight_theme",
+            WidgetConfigOutputSyntaxHighlightTheme.optional(),
+        ),
         textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
         styles: WidgetStyles.optional(),
         languageSelector: core.serialization.property("language_selector", core.serialization.boolean().optional()),
@@ -121,6 +133,11 @@ export declare namespace WidgetConfig {
         conversation_mode_toggle_enabled?: boolean | null;
         default_expanded?: boolean | null;
         always_expanded?: boolean | null;
+        dismissible?: boolean | null;
+        show_agent_status?: boolean | null;
+        show_conversation_id?: boolean | null;
+        strip_audio_tags?: boolean | null;
+        syntax_highlight_theme?: WidgetConfigOutputSyntaxHighlightTheme.Raw | null;
         text_contents?: WidgetTextContents.Raw | null;
         styles?: WidgetStyles.Raw | null;
         language_selector?: boolean | null;

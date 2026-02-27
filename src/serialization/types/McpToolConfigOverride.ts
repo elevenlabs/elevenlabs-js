@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
+import { McpToolConfigOverrideInputOverridesValue } from "./McpToolConfigOverrideInputOverridesValue";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
 import { ToolExecutionMode } from "./ToolExecutionMode";
@@ -19,6 +20,12 @@ export const McpToolConfigOverride: core.serialization.ObjectSchema<
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
     assignments: core.serialization.list(DynamicVariableAssignment).optional(),
+    inputOverrides: core.serialization.property(
+        "input_overrides",
+        core.serialization
+            .record(core.serialization.string(), McpToolConfigOverrideInputOverridesValue.optional())
+            .optional(),
+    ),
 });
 
 export declare namespace McpToolConfigOverride {
@@ -30,5 +37,6 @@ export declare namespace McpToolConfigOverride {
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
         assignments?: DynamicVariableAssignment.Raw[] | null;
+        input_overrides?: Record<string, McpToolConfigOverrideInputOverridesValue.Raw | null | undefined> | null;
     }
 }

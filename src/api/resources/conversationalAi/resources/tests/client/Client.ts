@@ -476,7 +476,10 @@ export class TestsClient {
      *     await client.conversationalAi.tests.list({
      *         cursor: "cursor",
      *         pageSize: 1,
-     *         search: "search"
+     *         search: "search",
+     *         parentFolderId: "parent_folder_id",
+     *         includeFolders: true,
+     *         sortMode: "default"
      *     })
      */
     public list(
@@ -490,7 +493,7 @@ export class TestsClient {
         request: ElevenLabs.conversationalAi.TestsListRequest = {},
         requestOptions?: TestsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetTestsPageResponseModel>> {
-        const { cursor, pageSize, search } = request;
+        const { cursor, pageSize, search, parentFolderId, includeFolders, sortMode } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
             _queryParams.cursor = cursor;
@@ -502,6 +505,20 @@ export class TestsClient {
 
         if (search != null) {
             _queryParams.search = search;
+        }
+
+        if (parentFolderId != null) {
+            _queryParams.parent_folder_id = parentFolderId;
+        }
+
+        if (includeFolders != null) {
+            _queryParams.include_folders = includeFolders.toString();
+        }
+
+        if (sortMode != null) {
+            _queryParams.sort_mode = serializers.conversationalAi.TestsListRequestSortMode.jsonOrThrow(sortMode, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

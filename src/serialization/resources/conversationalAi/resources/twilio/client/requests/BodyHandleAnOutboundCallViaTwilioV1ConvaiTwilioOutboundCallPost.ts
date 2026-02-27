@@ -16,6 +16,10 @@ export const BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost: co
         "conversation_initiation_client_data",
         ConversationInitiationClientDataRequestInput.optional(),
     ),
+    callRecordingEnabled: core.serialization.property(
+        "call_recording_enabled",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost {
@@ -24,5 +28,6 @@ export declare namespace BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutbound
         agent_phone_number_id: string;
         to_number: string;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestInput.Raw | null;
+        call_recording_enabled?: boolean | null;
     }
 }

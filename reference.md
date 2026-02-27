@@ -2765,6 +2765,71 @@ await client.audioNative.update("21m00Tcm4TlvDq8ikWAM", {});
 </dl>
 </details>
 
+<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">updateContentFromUrl</a>({ ...params }) -> ElevenLabs.AudioNativeEditContentResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Finds an AudioNative project matching the provided URL, extracts content from the URL, updates the project content, and queues it for conversion and auto-publishing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioNative.updateContentFromUrl({
+    url: "https://elevenlabs.io/blog/the_first_ai_that_can_laugh/"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioNativeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Usage
 <details><summary><code>client.usage.<a href="/src/api/resources/usage/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.UsageCharactersResponseModel</code></summary>
 <dl>
@@ -2934,6 +2999,8 @@ await client.pronunciationDictionaries.createFromRules({
     rules: [{
             type: "alias",
             stringToReplace: "Thailand",
+            caseSensitive: true,
+            wordBoundaries: true,
             alias: "tie-land"
         }],
     name: "My Dictionary"
@@ -5787,7 +5854,10 @@ Lists all agent response tests with pagination support and optional search filte
 await client.conversationalAi.tests.list({
     cursor: "cursor",
     pageSize: 1,
-    search: "search"
+    search: "search",
+    parentFolderId: "parent_folder_id",
+    includeFolders: true,
+    sortMode: "default"
 });
 
 ```
@@ -6285,6 +6355,62 @@ await client.conversationalAi.llmUsage.calculate({
 </dl>
 </details>
 
+## ConversationalAi Llm
+<details><summary><code>client.conversationalAi.llm.<a href="/src/api/resources/conversationalAi/resources/llm/client/Client.ts">list</a>() -> ElevenLabs.LlmListResponseModelInput</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of available LLM models that can be used with agents, including their capabilities and any deprecation status. The response is filtered based on the data residency of the deployment and any compliance requirements (e.g. HIPAA) of the workspace subscription.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.llm.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `LlmClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi KnowledgeBase
 <details><summary><code>client.conversationalAi.knowledgeBase.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetKnowledgeBaseListResponseModel</code></summary>
 <dl>
@@ -6371,7 +6497,7 @@ await client.conversationalAi.knowledgeBase.list({
 <dl>
 <dd>
 
-Retrieves and/or creates RAG indexes for multiple knowledge base documents in a single request.
+Retrieves and/or creates RAG indexes for multiple knowledge base documents in a single request. Maximum 100 items per request.
 </dd>
 </dl>
 </dd>
@@ -9642,6 +9768,300 @@ await client.conversationalAi.conversations.feedback.create("21m00Tcm4TlvDq8ikWA
 </dl>
 </details>
 
+## ConversationalAi Conversations Messages
+<details><summary><code>client.conversationalAi.conversations.messages.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/messages/client/Client.ts">textSearch</a>({ ...params }) -> ElevenLabs.MessagesSearchResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Search through conversation transcript messages by full-text and fuzzy search
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.messages.textSearch({
+    textQuery: "refund policy",
+    agentId: "agent_id",
+    callSuccessful: "success",
+    callStartBeforeUnix: 1,
+    callStartAfterUnix: 1,
+    callDurationMinSecs: 1,
+    callDurationMaxSecs: 1,
+    ratingMax: 1,
+    ratingMin: 1,
+    hasFeedbackComment: true,
+    userId: "user_id",
+    pageSize: 1,
+    summaryMode: "exclude",
+    conversationInitiationSource: "unknown",
+    branchId: "branch_id",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.MessagesTextSearchRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MessagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.messages.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/messages/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.MessagesSearchResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Search conversation transcripts by semantic similarity to surface relevant messages based on meaning and intent, rather than exact keyword matches
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.messages.search({
+    textQuery: "Customer asking to cancel and get money back",
+    agentId: "agent_id",
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.MessagesSearchRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MessagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Conversations Files
+<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">create</a>(conversation_id, { ...params }) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload an image or PDF file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.files.create("conversation_id", {
+    file: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.BodyUploadFileV1ConvaiConversationsConversationIdFilesPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">delete</a>(conversation_id, file_id) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a file upload from a conversation. Only possible if the file hasn't already been used in the conversation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.files.delete("conversation_id", "file_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Dashboard Settings
 <details><summary><code>client.conversationalAi.dashboard.settings.<a href="/src/api/resources/conversationalAi/resources/dashboard/resources/settings/client/Client.ts">get</a>() -> ElevenLabs.GetConvAiDashboardSettingsResponseModel</code></summary>
 <dl>
@@ -12864,6 +13284,8 @@ await client.pronunciationDictionaries.rules.add("21m00Tcm4TlvDq8ikWAM", {
     rules: [{
             type: "alias",
             stringToReplace: "Thailand",
+            caseSensitive: true,
+            wordBoundaries: true,
             alias: "tie-land"
         }]
 });

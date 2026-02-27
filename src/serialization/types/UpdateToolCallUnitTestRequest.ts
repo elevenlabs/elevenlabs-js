@@ -32,6 +32,7 @@ export const UpdateToolCallUnitTestRequest: core.serialization.ObjectSchema<
     ),
     checkAnyToolMatches: core.serialization.property("check_any_tool_matches", core.serialization.boolean().optional()),
     name: core.serialization.string(),
+    parentFolderId: core.serialization.property("parent_folder_id", core.serialization.string().optional()),
 });
 
 export declare namespace UpdateToolCallUnitTestRequest {
@@ -45,5 +46,6 @@ export declare namespace UpdateToolCallUnitTestRequest {
         tool_call_parameters?: UnitTestToolCallEvaluationModelInput.Raw | null;
         check_any_tool_matches?: boolean | null;
         name: string;
+        parent_folder_id?: string | null;
     }
 }

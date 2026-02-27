@@ -19,6 +19,7 @@ export const WorkspaceGroupResponseModel: core.serialization.ObjectSchema<
         WorkspaceGroupResponseModelGroupUsageLimit.optional(),
     ),
     characterCount: core.serialization.property("character_count", core.serialization.number().optional()),
+    scimExternalId: core.serialization.property("scim_external_id", core.serialization.string().optional()),
 });
 
 export declare namespace WorkspaceGroupResponseModel {
@@ -29,5 +30,6 @@ export declare namespace WorkspaceGroupResponseModel {
         permissions?: WorkspaceGroupPermission.Raw[] | null;
         group_usage_limit?: WorkspaceGroupResponseModelGroupUsageLimit.Raw | null;
         character_count?: number | null;
+        scim_external_id?: string | null;
     }
 }

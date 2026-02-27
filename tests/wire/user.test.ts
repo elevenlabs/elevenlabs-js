@@ -44,6 +44,7 @@ describe("UserClient", () => {
             referral_link_code: "referral_link_code",
             partnerstack_partner_default_link: "partnerstack_partner_default_link",
             created_at: 1753999199,
+            seat_type: "workspace_member",
         };
         server.mockEndpoint().get("/v1/user").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
@@ -84,6 +85,7 @@ describe("UserClient", () => {
             referralLinkCode: "referral_link_code",
             partnerstackPartnerDefaultLink: "partnerstack_partner_default_link",
             createdAt: 1753999199,
+            seatType: "workspace_member",
         });
     });
 });
