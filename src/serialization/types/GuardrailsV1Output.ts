@@ -3,17 +3,19 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { AlignmentGuardrail } from "./AlignmentGuardrail";
 import { ContentGuardrailOutput } from "./ContentGuardrailOutput";
 import { CustomGuardrailOutput } from "./CustomGuardrailOutput";
+import { FocusGuardrail } from "./FocusGuardrail";
 import { ModerationGuardrailOutput } from "./ModerationGuardrailOutput";
+import { PromptInjectionGuardrail } from "./PromptInjectionGuardrail";
 
 export const GuardrailsV1Output: core.serialization.ObjectSchema<
     serializers.GuardrailsV1Output.Raw,
     ElevenLabs.GuardrailsV1Output
 > = core.serialization.object({
     version: core.serialization.stringLiteral("1").optional(),
-    alignment: AlignmentGuardrail.optional(),
+    focus: FocusGuardrail.optional(),
+    promptInjection: core.serialization.property("prompt_injection", PromptInjectionGuardrail.optional()),
     content: ContentGuardrailOutput.optional(),
     moderation: ModerationGuardrailOutput.optional(),
     custom: CustomGuardrailOutput.optional(),
@@ -22,7 +24,8 @@ export const GuardrailsV1Output: core.serialization.ObjectSchema<
 export declare namespace GuardrailsV1Output {
     export interface Raw {
         version?: "1" | null;
-        alignment?: AlignmentGuardrail.Raw | null;
+        focus?: FocusGuardrail.Raw | null;
+        prompt_injection?: PromptInjectionGuardrail.Raw | null;
         content?: ContentGuardrailOutput.Raw | null;
         moderation?: ModerationGuardrailOutput.Raw | null;
         custom?: CustomGuardrailOutput.Raw | null;

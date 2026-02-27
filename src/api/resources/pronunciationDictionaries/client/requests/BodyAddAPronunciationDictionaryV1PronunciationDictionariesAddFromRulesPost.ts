@@ -8,6 +8,8 @@ import type * as ElevenLabs from "../../../../index";
  *         rules: [{
  *                 type: "alias",
  *                 stringToReplace: "Thailand",
+ *                 caseSensitive: true,
+ *                 wordBoundaries: true,
  *                 alias: "tie-land"
  *             }],
  *         name: "My Dictionary"

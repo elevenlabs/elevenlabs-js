@@ -8,7 +8,15 @@ describe("PronunciationDictionariesClient", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {
-            rules: [{ type: "alias", string_to_replace: "Thailand", alias: "tie-land" }],
+            rules: [
+                {
+                    type: "alias",
+                    string_to_replace: "Thailand",
+                    case_sensitive: true,
+                    word_boundaries: true,
+                    alias: "tie-land",
+                },
+            ],
             name: "My Dictionary",
         };
         const rawResponseBody = {
@@ -35,6 +43,8 @@ describe("PronunciationDictionariesClient", () => {
                 {
                     type: "alias",
                     stringToReplace: "Thailand",
+                    caseSensitive: true,
+                    wordBoundaries: true,
                     alias: "tie-land",
                 },
             ],
@@ -67,8 +77,21 @@ describe("PronunciationDictionariesClient", () => {
             archived_time_unix: 1,
             description: "This is a test dictionary",
             rules: [
-                { type: "alias", string_to_replace: "string_to_replace", alias: "alias" },
-                { type: "phoneme", string_to_replace: "string_to_replace", phoneme: "phoneme", alphabet: "alphabet" },
+                {
+                    type: "alias",
+                    string_to_replace: "string_to_replace",
+                    case_sensitive: true,
+                    word_boundaries: true,
+                    alias: "alias",
+                },
+                {
+                    type: "phoneme",
+                    string_to_replace: "string_to_replace",
+                    case_sensitive: true,
+                    word_boundaries: true,
+                    phoneme: "phoneme",
+                    alphabet: "alphabet",
+                },
             ],
         };
         server
@@ -94,11 +117,15 @@ describe("PronunciationDictionariesClient", () => {
                 {
                     type: "alias",
                     stringToReplace: "string_to_replace",
+                    caseSensitive: true,
+                    wordBoundaries: true,
                     alias: "alias",
                 },
                 {
                     type: "phoneme",
                     stringToReplace: "string_to_replace",
+                    caseSensitive: true,
+                    wordBoundaries: true,
                     phoneme: "phoneme",
                     alphabet: "alphabet",
                 },

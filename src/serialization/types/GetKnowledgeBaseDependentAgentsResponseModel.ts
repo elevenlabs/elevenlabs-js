@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { DependentBranchInfo } from "./DependentBranchInfo";
 import { GetKnowledgeBaseDependentAgentsResponseModelAgentsItem } from "./GetKnowledgeBaseDependentAgentsResponseModelAgentsItem";
 
 export const GetKnowledgeBaseDependentAgentsResponseModel: core.serialization.ObjectSchema<
@@ -10,6 +11,7 @@ export const GetKnowledgeBaseDependentAgentsResponseModel: core.serialization.Ob
     ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModel
 > = core.serialization.object({
     agents: core.serialization.list(GetKnowledgeBaseDependentAgentsResponseModelAgentsItem),
+    branches: core.serialization.list(DependentBranchInfo).optional(),
     nextCursor: core.serialization.property("next_cursor", core.serialization.string().optional()),
     hasMore: core.serialization.property("has_more", core.serialization.boolean()),
 });
@@ -17,6 +19,7 @@ export const GetKnowledgeBaseDependentAgentsResponseModel: core.serialization.Ob
 export declare namespace GetKnowledgeBaseDependentAgentsResponseModel {
     export interface Raw {
         agents: GetKnowledgeBaseDependentAgentsResponseModelAgentsItem.Raw[];
+        branches?: DependentBranchInfo.Raw[] | null;
         next_cursor?: string | null;
         has_more: boolean;
     }

@@ -9,6 +9,7 @@ export type PromptAgentApiModelOutputToolsItem =
     | ElevenLabs.PromptAgentApiModelOutputToolsItem.ApiIntegrationWebhook
     | ElevenLabs.PromptAgentApiModelOutputToolsItem.Client
     | ElevenLabs.PromptAgentApiModelOutputToolsItem.Mcp
+    | ElevenLabs.PromptAgentApiModelOutputToolsItem.Smb
     | ElevenLabs.PromptAgentApiModelOutputToolsItem.System
     | ElevenLabs.PromptAgentApiModelOutputToolsItem.Webhook;
 
@@ -23,6 +24,11 @@ export namespace PromptAgentApiModelOutputToolsItem {
 
     export interface Mcp {
         type: "mcp";
+        value?: unknown;
+    }
+
+    export interface Smb {
+        type: "smb";
         value?: unknown;
     }
 

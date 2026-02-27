@@ -79,6 +79,7 @@ describe("McpServersClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
                 force_pre_tool_speech: true,
@@ -152,6 +153,9 @@ describe("McpServersClient", () => {
                 requestHeaders: {
                     key: "value",
                 },
+                authConnection: {
+                    authConnectionId: "auth_connection_id",
+                },
                 name: "name",
                 description: "description",
                 forcePreToolSpeech: true,
@@ -210,6 +214,7 @@ describe("McpServersClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
                 force_pre_tool_speech: true,
@@ -276,6 +281,9 @@ describe("McpServersClient", () => {
                 },
                 requestHeaders: {
                     key: "value",
+                },
+                authConnection: {
+                    authConnectionId: "auth_connection_id",
                 },
                 name: "name",
                 description: "description",
@@ -354,6 +362,7 @@ describe("McpServersClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
                 force_pre_tool_speech: true,
@@ -421,6 +430,9 @@ describe("McpServersClient", () => {
                 },
                 requestHeaders: {
                     key: "value",
+                },
+                authConnection: {
+                    authConnectionId: "auth_connection_id",
                 },
                 name: "name",
                 description: "description",

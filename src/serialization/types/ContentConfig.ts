@@ -12,7 +12,7 @@ export const ContentConfig: core.serialization.ObjectSchema<serializers.ContentC
         harassment: ThresholdGuardrail.optional(),
         selfHarm: core.serialization.property("self_harm", ThresholdGuardrail.optional()),
         profanity: ThresholdGuardrail.optional(),
-        religionAndPolitics: core.serialization.property("religion_and_politics", ThresholdGuardrail.optional()),
+        religionOrPolitics: core.serialization.property("religion_or_politics", ThresholdGuardrail.optional()),
         medicalAndLegalInformation: core.serialization.property(
             "medical_and_legal_information",
             ThresholdGuardrail.optional(),
@@ -26,7 +26,7 @@ export declare namespace ContentConfig {
         harassment?: ThresholdGuardrail.Raw | null;
         self_harm?: ThresholdGuardrail.Raw | null;
         profanity?: ThresholdGuardrail.Raw | null;
-        religion_and_politics?: ThresholdGuardrail.Raw | null;
+        religion_or_politics?: ThresholdGuardrail.Raw | null;
         medical_and_legal_information?: ThresholdGuardrail.Raw | null;
     }
 }

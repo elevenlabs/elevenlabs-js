@@ -8,6 +8,6 @@ export interface ContentConfig {
     harassment?: ElevenLabs.ThresholdGuardrail;
     selfHarm?: ElevenLabs.ThresholdGuardrail;
     profanity?: ElevenLabs.ThresholdGuardrail;
-    religionAndPolitics?: ElevenLabs.ThresholdGuardrail;
+    religionOrPolitics?: ElevenLabs.ThresholdGuardrail;
     medicalAndLegalInformation?: ElevenLabs.ThresholdGuardrail;
 }

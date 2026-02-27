@@ -19,4 +19,9 @@ export namespace ProjectExtendedResponseModelAssetsItem {
     export interface Image extends ElevenLabs.ProjectImageResponseModel {
         type: "image";
     }
+
+    export type Request =
+        | ElevenLabs.ProjectExtendedResponseModelAssetsItem.Video
+        | ElevenLabs.ProjectExtendedResponseModelAssetsItem.Audio
+        | ElevenLabs.ProjectExtendedResponseModelAssetsItem.Image;
 }

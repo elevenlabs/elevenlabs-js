@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { PendingClipTask } from "./PendingClipTask";
+import { ProjectExternalAudioResponseModelSourceContext } from "./ProjectExternalAudioResponseModelSourceContext";
 
 export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
     serializers.ProjectExternalAudioResponseModel.Raw,
@@ -33,11 +34,18 @@ export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
         "pending_block_ids",
         core.serialization.list(core.serialization.string()),
     ),
-    importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
+    pendingExternalAudioIds: core.serialization.property(
+        "pending_external_audio_ids",
+        core.serialization.list(core.serialization.string()),
+    ),
     speechImported: core.serialization.property("speech_imported", core.serialization.boolean().optional()),
-    dubAudioProgress: core.serialization.property("dub_audio_progress", core.serialization.number().optional()),
     pendingTask: core.serialization.property("pending_task", PendingClipTask.optional()),
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
+    sourceContext: core.serialization.property(
+        "source_context",
+        ProjectExternalAudioResponseModelSourceContext.optional(),
+    ),
+    importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
 });
 
 export declare namespace ProjectExternalAudioResponseModel {
@@ -60,10 +68,11 @@ export declare namespace ProjectExternalAudioResponseModel {
         source_external_audio_id?: string | null;
         source_asset_id?: string | null;
         pending_block_ids: string[];
-        import_speech_progress?: number | null;
+        pending_external_audio_ids: string[];
         speech_imported?: boolean | null;
-        dub_audio_progress?: number | null;
         pending_task?: PendingClipTask.Raw | null;
         current_snapshot_id?: string | null;
+        source_context?: ProjectExternalAudioResponseModelSourceContext.Raw | null;
+        import_speech_progress?: number | null;
     }
 }

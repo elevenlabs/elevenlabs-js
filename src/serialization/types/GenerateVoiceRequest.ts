@@ -3,26 +3,12 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostAge } from "./BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostAge";
-import { BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostGender } from "./BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostGender";
 
-export const GenerateVoiceRequest: core.serialization.ObjectSchema<
+export const GenerateVoiceRequest: core.serialization.Schema<
     serializers.GenerateVoiceRequest.Raw,
     ElevenLabs.GenerateVoiceRequest
-> = core.serialization.object({
-    gender: BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostGender,
-    accent: core.serialization.string(),
-    age: BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostAge,
-    accentStrength: core.serialization.property("accent_strength", core.serialization.number()),
-    text: core.serialization.string(),
-});
+> = core.serialization.unknown();
 
 export declare namespace GenerateVoiceRequest {
-    export interface Raw {
-        gender: BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostGender.Raw;
-        accent: string;
-        age: BodyGenerateARandomVoiceV1VoiceGenerationGenerateVoicePostAge.Raw;
-        accent_strength: number;
-        text: string;
-    }
+    export type Raw = unknown;
 }

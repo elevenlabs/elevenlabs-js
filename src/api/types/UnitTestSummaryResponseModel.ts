@@ -13,6 +13,14 @@ export interface UnitTestSummaryResponseModel {
     createdAtUnixSecs: number;
     /** Last update time of the test in unix seconds */
     lastUpdatedAtUnixSecs: number;
-    /** Type of the test */
+    /** Type of the test or entity */
     type: ElevenLabs.TestType;
+    /** The type of entity (test or folder) */
+    entityType?: ElevenLabs.AgentTestEntityType;
+    /** The ID of the parent folder */
+    folderParentId?: string;
+    /** The folder path segments from root to this entity */
+    folderPath?: ElevenLabs.AgentTestFolderPathSegmentResponseModel[];
+    /** Number of direct children (tests and subfolders) for folders only */
+    childrenCount?: number;
 }

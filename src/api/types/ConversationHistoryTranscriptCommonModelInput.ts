@@ -17,5 +17,5 @@ export interface ConversationHistoryTranscriptCommonModelInput {
     llmUsage?: ElevenLabs.LlmUsageInput;
     interrupted?: boolean;
     originalMessage?: string;
-    sourceMedium?: ElevenLabs.ConversationHistoryTranscriptCommonModelInputSourceMedium;
+    sourceMedium?: ElevenLabs.ChatSourceMedium;
 }

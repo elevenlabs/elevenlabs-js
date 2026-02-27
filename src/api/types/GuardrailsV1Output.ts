@@ -4,7 +4,8 @@ import type * as ElevenLabs from "../index";
 
 export interface GuardrailsV1Output {
     version?: "1";
-    alignment?: ElevenLabs.AlignmentGuardrail;
+    focus?: ElevenLabs.FocusGuardrail;
+    promptInjection?: ElevenLabs.PromptInjectionGuardrail;
     content?: ElevenLabs.ContentGuardrailOutput;
     moderation?: ElevenLabs.ModerationGuardrailOutput;
     custom?: ElevenLabs.CustomGuardrailOutput;

@@ -7,6 +7,7 @@ import { DynamicVariableAssignment } from "../../../../../../../../types/Dynamic
 import { ToolCallSoundBehavior } from "../../../../../../../../types/ToolCallSoundBehavior";
 import { ToolCallSoundType } from "../../../../../../../../types/ToolCallSoundType";
 import { ToolExecutionMode } from "../../../../../../../../types/ToolExecutionMode";
+import { McpToolConfigOverrideUpdateRequestModelInputOverridesValue } from "../../types/McpToolConfigOverrideUpdateRequestModelInputOverridesValue";
 
 export const McpToolConfigOverrideUpdateRequestModel: core.serialization.Schema<
     serializers.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel.Raw,
@@ -18,6 +19,12 @@ export const McpToolConfigOverrideUpdateRequestModel: core.serialization.Schema<
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
     assignments: core.serialization.list(DynamicVariableAssignment).optional(),
+    inputOverrides: core.serialization.property(
+        "input_overrides",
+        core.serialization
+            .record(core.serialization.string(), McpToolConfigOverrideUpdateRequestModelInputOverridesValue.optional())
+            .optional(),
+    ),
 });
 
 export declare namespace McpToolConfigOverrideUpdateRequestModel {
@@ -28,5 +35,9 @@ export declare namespace McpToolConfigOverrideUpdateRequestModel {
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
         assignments?: DynamicVariableAssignment.Raw[] | null;
+        input_overrides?: Record<
+            string,
+            McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Raw | null | undefined
+        > | null;
     }
 }

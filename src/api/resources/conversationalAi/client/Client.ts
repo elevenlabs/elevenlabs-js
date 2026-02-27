@@ -15,6 +15,7 @@ import { BatchCallsClient } from "../resources/batchCalls/client/Client";
 import { ConversationsClient } from "../resources/conversations/client/Client";
 import { DashboardClient } from "../resources/dashboard/client/Client";
 import { KnowledgeBaseClient } from "../resources/knowledgeBase/client/Client";
+import { LlmClient } from "../resources/llm/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
 import { McpServersClient } from "../resources/mcpServers/client/Client";
 import { PhoneNumbersClient } from "../resources/phoneNumbers/client/Client";
@@ -44,6 +45,7 @@ export class ConversationalAiClient {
     protected _users: UsersClient | undefined;
     protected _phoneNumbers: PhoneNumbersClient | undefined;
     protected _llmUsage: LlmUsageClient | undefined;
+    protected _llm: LlmClient | undefined;
     protected _knowledgeBase: KnowledgeBaseClient | undefined;
     protected _tools: ToolsClient | undefined;
     protected _settings: SettingsClient | undefined;
@@ -89,6 +91,10 @@ export class ConversationalAiClient {
 
     public get llmUsage(): LlmUsageClient {
         return (this._llmUsage ??= new LlmUsageClient(this._options));
+    }
+
+    public get llm(): LlmClient {
+        return (this._llm ??= new LlmClient(this._options));
     }
 
     public get knowledgeBase(): KnowledgeBaseClient {

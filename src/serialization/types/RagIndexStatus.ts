@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 
 export const RagIndexStatus: core.serialization.Schema<serializers.RagIndexStatus.Raw, ElevenLabs.RagIndexStatus> =
     core.serialization.enum_([
+        "new",
         "created",
         "processing",
         "failed",
@@ -17,6 +18,7 @@ export const RagIndexStatus: core.serialization.Schema<serializers.RagIndexStatu
 
 export declare namespace RagIndexStatus {
     export type Raw =
+        | "new"
         | "created"
         | "processing"
         | "failed"

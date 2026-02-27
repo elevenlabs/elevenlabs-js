@@ -378,6 +378,10 @@ describe("TestsClient", () => {
                     created_at_unix_secs: 1,
                     last_updated_at_unix_secs: 1,
                     type: "llm",
+                    entity_type: "test",
+                    folder_parent_id: "folder_parent_id",
+                    folder_path: [{ id: "id" }],
+                    children_count: 1,
                 },
             },
         };
@@ -407,6 +411,14 @@ describe("TestsClient", () => {
                     createdAtUnixSecs: 1,
                     lastUpdatedAtUnixSecs: 1,
                     type: "llm",
+                    entityType: "test",
+                    folderParentId: "folder_parent_id",
+                    folderPath: [
+                        {
+                            id: "id",
+                        },
+                    ],
+                    childrenCount: 1,
                 },
             },
         });
@@ -430,6 +442,10 @@ describe("TestsClient", () => {
                     created_at_unix_secs: 1,
                     last_updated_at_unix_secs: 1,
                     type: "llm",
+                    entity_type: "test",
+                    folder_parent_id: "folder_parent_id",
+                    folder_path: [{ id: "id" }],
+                    children_count: 1,
                 },
             ],
             next_cursor: "next_cursor",
@@ -447,6 +463,9 @@ describe("TestsClient", () => {
             cursor: "cursor",
             pageSize: 1,
             search: "search",
+            parentFolderId: "parent_folder_id",
+            includeFolders: true,
+            sortMode: "default",
         });
         expect(response).toEqual({
             tests: [
@@ -462,6 +481,14 @@ describe("TestsClient", () => {
                     createdAtUnixSecs: 1,
                     lastUpdatedAtUnixSecs: 1,
                     type: "llm",
+                    entityType: "test",
+                    folderParentId: "folder_parent_id",
+                    folderPath: [
+                        {
+                            id: "id",
+                        },
+                    ],
+                    childrenCount: 1,
                 },
             ],
             nextCursor: "next_cursor",

@@ -26,6 +26,8 @@ export const WorkspaceResourceType = {
     ConvaiAgentVersions: "convai_agent_versions",
     ConvaiAgentBranches: "convai_agent_branches",
     ConvaiAgentVersionsDeployments: "convai_agent_versions_deployments",
+    ConvaiMemoryEntries: "convai_memory_entries",
+    ConvaiCoachingProposals: "convai_coaching_proposals",
     Dashboard: "dashboard",
     DashboardConfiguration: "dashboard_configuration",
     ConvaiAgentDrafts: "convai_agent_drafts",
@@ -33,5 +35,6 @@ export const WorkspaceResourceType = {
     Assets: "assets",
     ContentGenerations: "content_generations",
     ContentTemplates: "content_templates",
+    Songs: "songs",
 } as const;
 export type WorkspaceResourceType = (typeof WorkspaceResourceType)[keyof typeof WorkspaceResourceType];

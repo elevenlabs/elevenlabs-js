@@ -37,6 +37,8 @@ export class RulesClient {
      *         rules: [{
      *                 type: "alias",
      *                 stringToReplace: "Thailand",
+     *                 caseSensitive: true,
+     *                 wordBoundaries: true,
      *                 alias: "tie-land"
      *             }]
      *     })

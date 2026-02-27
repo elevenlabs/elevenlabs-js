@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const TestType: core.serialization.Schema<serializers.TestType.Raw, ElevenLabs.TestType> =
-    core.serialization.enum_(["llm", "tool", "simulation"]);
+    core.serialization.enum_(["llm", "tool", "simulation", "folder"]);
 
 export declare namespace TestType {
-    export type Raw = "llm" | "tool" | "simulation";
+    export type Raw = "llm" | "tool" | "simulation" | "folder";
 }

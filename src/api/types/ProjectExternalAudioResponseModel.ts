@@ -21,9 +21,10 @@ export interface ProjectExternalAudioResponseModel {
     sourceExternalAudioId?: string;
     sourceAssetId?: string;
     pendingBlockIds: string[];
-    importSpeechProgress?: number;
+    pendingExternalAudioIds: string[];
     speechImported?: boolean;
-    dubAudioProgress?: number;
     pendingTask?: ElevenLabs.PendingClipTask;
     currentSnapshotId?: string;
+    sourceContext?: ElevenLabs.ProjectExternalAudioResponseModelSourceContext;
+    importSpeechProgress?: number;
 }

@@ -4,9 +4,9 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentMetadata } from "./AgentMetadata";
+import { ChatSourceMedium } from "./ChatSourceMedium";
 import { ConversationHistoryMultivoiceMessageModel } from "./ConversationHistoryMultivoiceMessageModel";
 import { ConversationHistoryTranscriptCommonModelOutputRole } from "./ConversationHistoryTranscriptCommonModelOutputRole";
-import { ConversationHistoryTranscriptCommonModelOutputSourceMedium } from "./ConversationHistoryTranscriptCommonModelOutputSourceMedium";
 import { ConversationHistoryTranscriptCommonModelOutputToolResultsItem } from "./ConversationHistoryTranscriptCommonModelOutputToolResultsItem";
 import { ConversationHistoryTranscriptToolCallCommonModelOutput } from "./ConversationHistoryTranscriptToolCallCommonModelOutput";
 import { ConversationTurnMetrics } from "./ConversationTurnMetrics";
@@ -44,10 +44,7 @@ export const ConversationHistoryTranscriptCommonModelOutput: core.serialization.
     llmUsage: core.serialization.property("llm_usage", LlmUsageOutput.optional()),
     interrupted: core.serialization.boolean().optional(),
     originalMessage: core.serialization.property("original_message", core.serialization.string().optional()),
-    sourceMedium: core.serialization.property(
-        "source_medium",
-        ConversationHistoryTranscriptCommonModelOutputSourceMedium.optional(),
-    ),
+    sourceMedium: core.serialization.property("source_medium", ChatSourceMedium.optional()),
 });
 
 export declare namespace ConversationHistoryTranscriptCommonModelOutput {
@@ -66,6 +63,6 @@ export declare namespace ConversationHistoryTranscriptCommonModelOutput {
         llm_usage?: LlmUsageOutput.Raw | null;
         interrupted?: boolean | null;
         original_message?: string | null;
-        source_medium?: ConversationHistoryTranscriptCommonModelOutputSourceMedium.Raw | null;
+        source_medium?: ChatSourceMedium.Raw | null;
     }
 }

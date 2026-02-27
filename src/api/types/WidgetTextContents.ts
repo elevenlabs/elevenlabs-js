@@ -65,4 +65,26 @@ export interface WidgetTextContents {
     submit?: string;
     /** Text and ARIA label for the go back button. */
     goBack?: string;
+    /** Text and ARIA label for the send message button. */
+    sendMessage?: string;
+    /** Text and ARIA label for the switch to text mode button. */
+    textMode?: string;
+    /** Text and ARIA label for the switch to voice mode button. */
+    voiceMode?: string;
+    /** Toast notification displayed when switching to text mode. */
+    switchedToTextMode?: string;
+    /** Toast notification displayed when switching to voice mode. */
+    switchedToVoiceMode?: string;
+    /** Text and ARIA label for the copy button. */
+    copy?: string;
+    /** Text and ARIA label for the download button. */
+    download?: string;
+    /** Text and ARIA label for the wrap toggle button. */
+    wrap?: string;
+    /** Status text displayed when the agent is processing a tool call. */
+    agentWorking?: string;
+    /** Status text displayed when the agent finishes processing a tool call. */
+    agentDone?: string;
+    /** Status text displayed when the agent encounters an error during a tool call. */
+    agentError?: string;
 }

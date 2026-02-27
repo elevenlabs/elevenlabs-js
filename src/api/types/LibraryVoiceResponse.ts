@@ -65,4 +65,6 @@ export interface LibraryVoiceResponse {
     imageUrl?: string;
     /** Whether the voice was added by the user. */
     isAddedByUser?: boolean;
+    /** Whether the voice is bookmarked by the current user. Only relevant when is_added_by_user is True. */
+    isBookmarked?: boolean;
 }

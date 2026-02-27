@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { DependentBranchInfo } from "./DependentBranchInfo";
 import { GetToolDependentAgentsResponseModelAgentsItem } from "./GetToolDependentAgentsResponseModelAgentsItem";
 
 export const GetToolDependentAgentsResponseModel: core.serialization.ObjectSchema<
@@ -10,6 +11,7 @@ export const GetToolDependentAgentsResponseModel: core.serialization.ObjectSchem
     ElevenLabs.GetToolDependentAgentsResponseModel
 > = core.serialization.object({
     agents: core.serialization.list(GetToolDependentAgentsResponseModelAgentsItem),
+    branches: core.serialization.list(DependentBranchInfo).optional(),
     nextCursor: core.serialization.property("next_cursor", core.serialization.string().optional()),
     hasMore: core.serialization.property("has_more", core.serialization.boolean()),
 });
@@ -17,6 +19,7 @@ export const GetToolDependentAgentsResponseModel: core.serialization.ObjectSchem
 export declare namespace GetToolDependentAgentsResponseModel {
     export interface Raw {
         agents: GetToolDependentAgentsResponseModelAgentsItem.Raw[];
+        branches?: DependentBranchInfo.Raw[] | null;
         next_cursor?: string | null;
         has_more: boolean;
     }

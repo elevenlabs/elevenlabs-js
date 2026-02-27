@@ -5,6 +5,7 @@ export interface ConversationUserResponseModel {
     lastContactUnixSecs: number;
     firstContactUnixSecs: number;
     conversationCount: number;
-    lastAgentId?: string;
-    lastAgentName?: string;
+    lastContactAgentId?: string;
+    lastContactConversationId?: string;
+    lastContactAgentName?: string;
 }

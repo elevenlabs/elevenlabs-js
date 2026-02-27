@@ -31,4 +31,6 @@ export interface User {
     partnerstackPartnerDefaultLink?: string;
     /** The unix timestamp of the user's creation. 0 if the user was created before the unix timestamp was added. */
     createdAt: number;
+    /** The seat type of the user. */
+    seatType: ElevenLabs.SeatType;
 }

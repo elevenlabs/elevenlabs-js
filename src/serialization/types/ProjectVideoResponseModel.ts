@@ -4,6 +4,8 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { CanvasPlacement } from "./CanvasPlacement";
+import { ClipAnimation } from "./ClipAnimation";
+import { GenerationSourceContext } from "./GenerationSourceContext";
 import { PendingClipTask } from "./PendingClipTask";
 import { ProjectVideoThumbnailSheetResponseModel } from "./ProjectVideoThumbnailSheetResponseModel";
 
@@ -19,11 +21,12 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
     durationMs: core.serialization.property("duration_ms", core.serialization.number()),
     volumeGainDb: core.serialization.property("volume_gain_db", core.serialization.number()),
     muted: core.serialization.boolean(),
+    fadeInMs: core.serialization.property("fade_in_ms", core.serialization.number().optional()),
+    fadeOutMs: core.serialization.property("fade_out_ms", core.serialization.number().optional()),
     width: core.serialization.number(),
     height: core.serialization.number(),
     codec: core.serialization.string(),
     order: core.serialization.string(),
-    previewJobProgress: core.serialization.property("preview_job_progress", core.serialization.number()),
     createdAtMs: core.serialization.property("created_at_ms", core.serialization.number()),
     updatedAtMs: core.serialization.property("updated_at_ms", core.serialization.number()),
     error: core.serialization.string().optional(),
@@ -45,15 +48,21 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
         "pending_block_ids",
         core.serialization.list(core.serialization.string()),
     ),
-    importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
+    pendingExternalAudioIds: core.serialization.property(
+        "pending_external_audio_ids",
+        core.serialization.list(core.serialization.string()),
+    ),
     speechImported: core.serialization.property("speech_imported", core.serialization.boolean().optional()),
-    dubAudioProgress: core.serialization.property("dub_audio_progress", core.serialization.number().optional()),
     pendingTask: core.serialization.property("pending_task", PendingClipTask.optional()),
     audioTrackReady: core.serialization.property("audio_track_ready", core.serialization.boolean().optional()),
     exportFormatReady: core.serialization.property("export_format_ready", core.serialization.boolean().optional()),
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
+    sourceContext: core.serialization.property("source_context", GenerationSourceContext.optional()),
     canvasPlacement: core.serialization.property("canvas_placement", CanvasPlacement.optional()),
+    animation: ClipAnimation.optional(),
     trackId: core.serialization.property("track_id", core.serialization.string().optional()),
+    previewJobProgress: core.serialization.property("preview_job_progress", core.serialization.number().optional()),
+    importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
 });
 
 export declare namespace ProjectVideoResponseModel {
@@ -66,11 +75,12 @@ export declare namespace ProjectVideoResponseModel {
         duration_ms: number;
         volume_gain_db: number;
         muted: boolean;
+        fade_in_ms?: number | null;
+        fade_out_ms?: number | null;
         width: number;
         height: number;
         codec: string;
         order: string;
-        preview_job_progress: number;
         created_at_ms: number;
         updated_at_ms: number;
         error?: string | null;
@@ -83,14 +93,17 @@ export declare namespace ProjectVideoResponseModel {
         source_video_id?: string | null;
         source_asset_id?: string | null;
         pending_block_ids: string[];
-        import_speech_progress?: number | null;
+        pending_external_audio_ids: string[];
         speech_imported?: boolean | null;
-        dub_audio_progress?: number | null;
         pending_task?: PendingClipTask.Raw | null;
         audio_track_ready?: boolean | null;
         export_format_ready?: boolean | null;
         current_snapshot_id?: string | null;
+        source_context?: GenerationSourceContext.Raw | null;
         canvas_placement?: CanvasPlacement.Raw | null;
+        animation?: ClipAnimation.Raw | null;
         track_id?: string | null;
+        preview_job_progress?: number | null;
+        import_speech_progress?: number | null;
     }
 }

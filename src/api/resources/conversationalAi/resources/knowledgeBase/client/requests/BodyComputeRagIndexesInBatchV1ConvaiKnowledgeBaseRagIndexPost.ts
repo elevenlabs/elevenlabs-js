@@ -13,6 +13,6 @@ import type * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface BodyComputeRagIndexesInBatchV1ConvaiKnowledgeBaseRagIndexPost {
-    /** List of requested RAG indexes. */
+    /** List of requested RAG indexes. Minimum 1, maximum 100 items. */
     items: ElevenLabs.GetOrCreateRagIndexRequestModel[];
 }

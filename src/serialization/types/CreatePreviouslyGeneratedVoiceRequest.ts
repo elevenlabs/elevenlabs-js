@@ -4,26 +4,11 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 
-export const CreatePreviouslyGeneratedVoiceRequest: core.serialization.ObjectSchema<
+export const CreatePreviouslyGeneratedVoiceRequest: core.serialization.Schema<
     serializers.CreatePreviouslyGeneratedVoiceRequest.Raw,
     ElevenLabs.CreatePreviouslyGeneratedVoiceRequest
-> = core.serialization.object({
-    voiceName: core.serialization.property("voice_name", core.serialization.string()),
-    voiceDescription: core.serialization.property("voice_description", core.serialization.string()),
-    generatedVoiceId: core.serialization.property("generated_voice_id", core.serialization.string()),
-    playedNotSelectedVoiceIds: core.serialization.property(
-        "played_not_selected_voice_ids",
-        core.serialization.list(core.serialization.string()).optional(),
-    ),
-    labels: core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
-});
+> = core.serialization.unknown();
 
 export declare namespace CreatePreviouslyGeneratedVoiceRequest {
-    export interface Raw {
-        voice_name: string;
-        voice_description: string;
-        generated_voice_id: string;
-        played_not_selected_voice_ids?: string[] | null;
-        labels?: Record<string, string | null | undefined> | null;
-    }
+    export type Raw = unknown;
 }

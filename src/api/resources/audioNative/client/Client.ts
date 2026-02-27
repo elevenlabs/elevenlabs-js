@@ -364,4 +364,90 @@ export class AudioNativeClient {
             "/v1/audio-native/{project_id}/content",
         );
     }
+
+    /**
+     * Finds an AudioNative project matching the provided URL, extracts content from the URL, updates the project content, and queues it for conversion and auto-publishing.
+     *
+     * @param {ElevenLabs.BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost} request
+     * @param {AudioNativeClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.audioNative.updateContentFromUrl({
+     *         url: "https://elevenlabs.io/blog/the_first_ai_that_can_laugh/"
+     *     })
+     */
+    public updateContentFromUrl(
+        request: ElevenLabs.BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost,
+        requestOptions?: AudioNativeClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.AudioNativeEditContentResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__updateContentFromUrl(request, requestOptions));
+    }
+
+    private async __updateContentFromUrl(
+        request: ElevenLabs.BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost,
+        requestOptions?: AudioNativeClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.AudioNativeEditContentResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/audio-native/content",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.AudioNativeEditContentResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/audio-native/content");
+    }
 }

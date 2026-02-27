@@ -14,6 +14,8 @@ export interface McpServerConfigOutput {
     secretToken?: ElevenLabs.McpServerConfigOutputSecretToken;
     /** The headers included in the request */
     requestHeaders?: Record<string, ElevenLabs.McpServerConfigOutputRequestHeadersValue>;
+    /** Optional auth connection to use for authentication with this MCP server */
+    authConnection?: ElevenLabs.AuthConnectionLocator;
     name: string;
     description?: string;
     /** If true, all tools from this MCP server will require pre-tool execution speech */

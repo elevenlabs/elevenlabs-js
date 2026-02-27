@@ -13,6 +13,7 @@ export const BodyStreamComposedMusicV1MusicStreamPost: core.serialization.Schema
     compositionPlan: core.serialization.property("composition_plan", MusicPrompt.optional()),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
     modelId: core.serialization.property("model_id", core.serialization.stringLiteral("music_v1").optional()),
+    seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     storeForInpainting: core.serialization.property("store_for_inpainting", core.serialization.boolean().optional()),
 });
@@ -23,6 +24,7 @@ export declare namespace BodyStreamComposedMusicV1MusicStreamPost {
         composition_plan?: MusicPrompt.Raw | null;
         music_length_ms?: number | null;
         model_id?: "music_v1" | null;
+        seed?: number | null;
         force_instrumental?: boolean | null;
         store_for_inpainting?: boolean | null;
     }

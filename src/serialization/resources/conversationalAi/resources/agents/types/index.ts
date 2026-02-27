@@ -1,1 +1,2 @@
-export * from "./BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchProcedureRefsItem";
+export * from "./BodyCreateAgentV1ConvaiAgentsCreatePostCoachingSettings";
+export * from "./BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchCoachingSettings";

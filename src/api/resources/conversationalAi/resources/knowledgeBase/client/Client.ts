@@ -190,7 +190,7 @@ export class KnowledgeBaseClient {
     }
 
     /**
-     * Retrieves and/or creates RAG indexes for multiple knowledge base documents in a single request.
+     * Retrieves and/or creates RAG indexes for multiple knowledge base documents in a single request. Maximum 100 items per request.
      *
      * @param {ElevenLabs.conversationalAi.BodyComputeRagIndexesInBatchV1ConvaiKnowledgeBaseRagIndexPost} request
      * @param {KnowledgeBaseClient.RequestOptions} requestOptions - Request-specific configuration.

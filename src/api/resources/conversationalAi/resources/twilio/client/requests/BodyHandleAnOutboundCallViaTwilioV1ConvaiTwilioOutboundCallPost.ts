@@ -15,4 +15,6 @@ export interface BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost
     agentPhoneNumberId: string;
     toNumber: string;
     conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestInput;
+    /** Whether let Twilio record the call. */
+    callRecordingEnabled?: boolean;
 }

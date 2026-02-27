@@ -47,4 +47,6 @@ export interface Voice {
     favoritedAtUnix?: number;
     /** The creation time of the voice in Unix time. */
     createdAtUnix?: number;
+    /** Whether the voice is bookmarked by the current user. Only relevant for community (library-copied) voices. */
+    isBookmarked?: boolean;
 }

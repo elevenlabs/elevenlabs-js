@@ -230,6 +230,7 @@ describe("TextToVoiceClient", () => {
             is_mixed: false,
             favorited_at_unix: 1,
             created_at_unix: 1,
+            is_bookmarked: true,
         };
         server
             .mockEndpoint()
@@ -442,6 +443,7 @@ describe("TextToVoiceClient", () => {
             isMixed: false,
             favoritedAtUnix: 1,
             createdAtUnix: 1,
+            isBookmarked: true,
         });
     });
 

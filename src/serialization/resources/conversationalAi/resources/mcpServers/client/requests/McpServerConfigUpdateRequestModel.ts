@@ -3,6 +3,8 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
+import { AuthConnectionLocator } from "../../../../../../types/AuthConnectionLocator";
+import { ConvAiSecretLocator } from "../../../../../../types/ConvAiSecretLocator";
 import { McpApprovalPolicy } from "../../../../../../types/McpApprovalPolicy";
 import { ToolCallSoundBehavior } from "../../../../../../types/ToolCallSoundBehavior";
 import { ToolCallSoundType } from "../../../../../../types/ToolCallSoundType";
@@ -26,6 +28,8 @@ export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
             .optional(),
     ),
     disableCompression: core.serialization.property("disable_compression", core.serialization.boolean().optional()),
+    secretToken: core.serialization.property("secret_token", ConvAiSecretLocator.optional()),
+    authConnection: core.serialization.property("auth_connection", AuthConnectionLocator.optional()),
 });
 
 export declare namespace McpServerConfigUpdateRequestModel {
@@ -41,5 +45,7 @@ export declare namespace McpServerConfigUpdateRequestModel {
             McpServerConfigUpdateRequestModelRequestHeadersValue.Raw | null | undefined
         > | null;
         disable_compression?: boolean | null;
+        secret_token?: ConvAiSecretLocator.Raw | null;
+        auth_connection?: AuthConnectionLocator.Raw | null;
     }
 }

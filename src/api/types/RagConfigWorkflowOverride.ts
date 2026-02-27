@@ -11,6 +11,8 @@ export interface RagConfigWorkflowOverride {
     maxDocumentsLength?: number;
     /** Maximum number of RAG document chunks to initially retrieve from the vector store. These are then further filtered by vector distance and total length. */
     maxRetrievedRagChunksCount?: number;
+    /** Number of candidates evaluated in ANN vector search. Higher number means better results, but higher latency. Minimum recommended value is 100. If disabled, the default value is used. */
+    numCandidates?: number;
     /** Custom prompt for rewriting user queries before RAG retrieval. The conversation history will be automatically appended at the end. If not set, the default prompt will be used. */
     queryRewritePromptOverride?: string;
 }

@@ -17,6 +17,8 @@ export interface BodyComposeMusicV1MusicPost {
     musicLengthMs?: number;
     /** The model to use for the generation. */
     modelId?: "music_v1";
+    /** Random seed to initialize the music generation process. Providing the same seed with the same parameters can help achieve more consistent results, but exact reproducibility is not guaranteed and outputs may change across system updates. Cannot be used in conjunction with prompt. */
+    seed?: number;
     /** If true, guarantees that the generated song will be instrumental. If false, the song may or may not be instrumental depending on the `prompt`. Can only be used with `prompt`. */
     forceInstrumental?: boolean;
     /** Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan`. When set to true, the model will precisely respect each section's `duration_ms` from the plan. When set to false, the model may adjust individual section durations which will generally lead to better generation quality and improved latency, while always preserving the total song duration from the plan. */

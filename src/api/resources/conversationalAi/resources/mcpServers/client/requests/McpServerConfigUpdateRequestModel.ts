@@ -26,4 +26,8 @@ export interface McpServerConfigUpdateRequestModel {
     >;
     /** Whether to disable HTTP compression for this MCP server */
     disableCompression?: boolean;
+    /** Optional secret token for authentication with this MCP server */
+    secretToken?: ElevenLabs.ConvAiSecretLocator;
+    /** Optional auth connection to use for authentication with this MCP server */
+    authConnection?: ElevenLabs.AuthConnectionLocator;
 }

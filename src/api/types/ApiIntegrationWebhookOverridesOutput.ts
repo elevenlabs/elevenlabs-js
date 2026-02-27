@@ -7,6 +7,7 @@ import type * as ElevenLabs from "../index";
  * configuring an API Integration Webhook Tool.
  */
 export interface ApiIntegrationWebhookOverridesOutput {
+    schemaOverrides?: Record<string, ElevenLabs.ApiIntegrationWebhookOverridesOutputSchemaOverridesValue | undefined>;
     pathParamsSchema?: Record<string, ElevenLabs.LiteralOverride | undefined>;
     queryParamsSchema?: ElevenLabs.QueryOverride;
     requestBodySchema?: ElevenLabs.ObjectOverrideOutput;

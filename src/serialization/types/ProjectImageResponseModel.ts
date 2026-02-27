@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { CanvasPlacement } from "./CanvasPlacement";
+import { ClipAnimation } from "./ClipAnimation";
 
 export const ProjectImageResponseModel: core.serialization.ObjectSchema<
     serializers.ProjectImageResponseModel.Raw,
@@ -22,6 +23,7 @@ export const ProjectImageResponseModel: core.serialization.ObjectSchema<
     durationMs: core.serialization.property("duration_ms", core.serialization.number()),
     order: core.serialization.string(),
     canvasPlacement: core.serialization.property("canvas_placement", CanvasPlacement),
+    animation: ClipAnimation.optional(),
     createdAtMs: core.serialization.property("created_at_ms", core.serialization.number()),
     updatedAtMs: core.serialization.property("updated_at_ms", core.serialization.number()),
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
@@ -43,6 +45,7 @@ export declare namespace ProjectImageResponseModel {
         duration_ms: number;
         order: string;
         canvas_placement: CanvasPlacement.Raw;
+        animation?: ClipAnimation.Raw | null;
         created_at_ms: number;
         updated_at_ms: number;
         current_snapshot_id?: string | null;
