@@ -7,7 +7,7 @@ export interface CustomLlm {
     url: string;
     /** The model ID to be used if URL serves multiple models */
     modelId?: string;
-    /** The API key for authentication */
+    /** The API key for authentication. Either a workspace secret reference {'secret_id': '...'} or an environment variable reference {'env_var_label': '...'}. */
     apiKey?: ElevenLabs.ConvAiSecretLocator;
     /** Headers that should be included in the request */
     requestHeaders?: Record<string, ElevenLabs.CustomLlmRequestHeadersValue>;

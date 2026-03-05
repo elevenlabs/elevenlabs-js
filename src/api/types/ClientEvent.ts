@@ -19,6 +19,7 @@ export const ClientEvent = {
     VadScore: "vad_score",
     AgentChatResponsePart: "agent_chat_response_part",
     ClientError: "client_error",
+    GuardrailTriggered: "guardrail_triggered",
     InternalTurnProbability: "internal_turn_probability",
     InternalTentativeAgentResponse: "internal_tentative_agent_response",
 } as const;

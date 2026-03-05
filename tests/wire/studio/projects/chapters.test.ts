@@ -24,6 +24,10 @@ describe("ChaptersClient", () => {
                         characters_converted: 500,
                         paragraphs_converted: 20,
                         paragraphs_unconverted: 10,
+                        voice_statistics: [
+                            { voice_id: "voice123", characters_unconverted: 600, characters_converted: 300 },
+                            { voice_id: "voice456", characters_unconverted: 400, characters_converted: 200 },
+                        ],
                     },
                     last_conversion_error: "Error message",
                 },
@@ -54,6 +58,18 @@ describe("ChaptersClient", () => {
                         charactersConverted: 500,
                         paragraphsConverted: 20,
                         paragraphsUnconverted: 10,
+                        voiceStatistics: [
+                            {
+                                voiceId: "voice123",
+                                charactersUnconverted: 600,
+                                charactersConverted: 300,
+                            },
+                            {
+                                voiceId: "voice456",
+                                charactersUnconverted: 400,
+                                charactersConverted: 200,
+                            },
+                        ],
                     },
                     lastConversionError: "Error message",
                 },
@@ -80,6 +96,7 @@ describe("ChaptersClient", () => {
                     characters_converted: 200,
                     paragraphs_converted: 5,
                     paragraphs_unconverted: 3,
+                    voice_statistics: [{ voice_id: "voice_id", characters_unconverted: 1, characters_converted: 1 }],
                 },
                 last_conversion_error: "last_conversion_error",
                 content: {
@@ -116,6 +133,13 @@ describe("ChaptersClient", () => {
                     charactersConverted: 200,
                     paragraphsConverted: 5,
                     paragraphsUnconverted: 3,
+                    voiceStatistics: [
+                        {
+                            voiceId: "voice_id",
+                            charactersUnconverted: 1,
+                            charactersConverted: 1,
+                        },
+                    ],
                 },
                 lastConversionError: "last_conversion_error",
                 content: {
@@ -154,6 +178,7 @@ describe("ChaptersClient", () => {
                 characters_converted: 200,
                 paragraphs_converted: 5,
                 paragraphs_unconverted: 3,
+                voice_statistics: [{ voice_id: "voice_id", characters_unconverted: 1, characters_converted: 1 }],
             },
             last_conversion_error: "last_conversion_error",
             content: {
@@ -183,6 +208,13 @@ describe("ChaptersClient", () => {
                 charactersConverted: 200,
                 paragraphsConverted: 5,
                 paragraphsUnconverted: 3,
+                voiceStatistics: [
+                    {
+                        voiceId: "voice_id",
+                        charactersUnconverted: 1,
+                        charactersConverted: 1,
+                    },
+                ],
             },
             lastConversionError: "last_conversion_error",
             content: {
@@ -221,6 +253,7 @@ describe("ChaptersClient", () => {
                     characters_converted: 200,
                     paragraphs_converted: 5,
                     paragraphs_unconverted: 3,
+                    voice_statistics: [{ voice_id: "voice_id", characters_unconverted: 1, characters_converted: 1 }],
                 },
                 last_conversion_error: "last_conversion_error",
                 content: {
@@ -255,6 +288,13 @@ describe("ChaptersClient", () => {
                     charactersConverted: 200,
                     paragraphsConverted: 5,
                     paragraphsUnconverted: 3,
+                    voiceStatistics: [
+                        {
+                            voiceId: "voice_id",
+                            charactersUnconverted: 1,
+                            charactersConverted: 1,
+                        },
+                    ],
                 },
                 lastConversionError: "last_conversion_error",
                 content: {

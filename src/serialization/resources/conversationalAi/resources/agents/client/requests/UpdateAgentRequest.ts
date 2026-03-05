@@ -10,7 +10,7 @@ import { BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIdPatchCoachingSettings } 
 
 export const UpdateAgentRequest: core.serialization.Schema<
     serializers.conversationalAi.UpdateAgentRequest.Raw,
-    Omit<ElevenLabs.conversationalAi.UpdateAgentRequest, "branchId">
+    Omit<ElevenLabs.conversationalAi.UpdateAgentRequest, "enableVersioningIfNotEnabled" | "branchId">
 > = core.serialization.object({
     conversationConfig: core.serialization.property("conversation_config", ConversationalConfig.optional()),
     platformSettings: core.serialization.property("platform_settings", AgentPlatformSettingsRequestModel.optional()),

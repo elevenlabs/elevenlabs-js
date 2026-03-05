@@ -12,4 +12,8 @@ export interface CanvasPlacement {
     pivotY?: number;
     skewX?: number;
     skewY?: number;
+    cropTop?: number;
+    cropRight?: number;
+    cropBottom?: number;
+    cropLeft?: number;
 }

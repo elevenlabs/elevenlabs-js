@@ -3,17 +3,20 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { GuardrailExecutionMode } from "./GuardrailExecutionMode";
 import { ModerationConfig } from "./ModerationConfig";
 
 export const ModerationGuardrailOutput: core.serialization.ObjectSchema<
     serializers.ModerationGuardrailOutput.Raw,
     ElevenLabs.ModerationGuardrailOutput
 > = core.serialization.object({
+    executionMode: core.serialization.property("execution_mode", GuardrailExecutionMode.optional()),
     config: ModerationConfig.optional(),
 });
 
 export declare namespace ModerationGuardrailOutput {
     export interface Raw {
+        execution_mode?: GuardrailExecutionMode.Raw | null;
         config?: ModerationConfig.Raw | null;
     }
 }

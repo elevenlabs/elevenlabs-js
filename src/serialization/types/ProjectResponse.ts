@@ -11,6 +11,7 @@ import { ProjectResponseModelFiction } from "./ProjectResponseModelFiction";
 import { ProjectResponseModelSourceType } from "./ProjectResponseModelSourceType";
 import { ProjectResponseModelTargetAudience } from "./ProjectResponseModelTargetAudience";
 import { ProjectState } from "./ProjectState";
+import { StudioAgentSettingsModel } from "./StudioAgentSettingsModel";
 
 export const ProjectResponse: core.serialization.ObjectSchema<
     serializers.ProjectResponse.Raw,
@@ -62,6 +63,7 @@ export const ProjectResponse: core.serialization.ObjectSchema<
     ),
     publicShareId: core.serialization.property("public_share_id", core.serialization.string().optional()),
     aspectRatio: core.serialization.property("aspect_ratio", ProjectResponseModelAspectRatio.optional()),
+    agentSettings: core.serialization.property("agent_settings", StudioAgentSettingsModel.optional()),
 });
 
 export declare namespace ProjectResponse {
@@ -100,5 +102,6 @@ export declare namespace ProjectResponse {
         caption_style_template_overrides?: Record<string, CaptionStyleModel.Raw | null | undefined> | null;
         public_share_id?: string | null;
         aspect_ratio?: ProjectResponseModelAspectRatio.Raw | null;
+        agent_settings?: StudioAgentSettingsModel.Raw | null;
     }
 }

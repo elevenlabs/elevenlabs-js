@@ -71,4 +71,6 @@ export interface ProjectResponse {
     publicShareId?: string;
     /** The aspect ratio of the project. */
     aspectRatio?: ElevenLabs.ProjectResponseModelAspectRatio;
+    /** Agent-related settings for the project */
+    agentSettings?: ElevenLabs.StudioAgentSettingsModel;
 }

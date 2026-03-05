@@ -4,16 +4,19 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ContentConfig } from "./ContentConfig";
+import { GuardrailExecutionMode } from "./GuardrailExecutionMode";
 
 export const ContentGuardrailInput: core.serialization.ObjectSchema<
     serializers.ContentGuardrailInput.Raw,
     ElevenLabs.ContentGuardrailInput
 > = core.serialization.object({
+    executionMode: core.serialization.property("execution_mode", GuardrailExecutionMode.optional()),
     config: ContentConfig.optional(),
 });
 
 export declare namespace ContentGuardrailInput {
     export interface Raw {
+        execution_mode?: GuardrailExecutionMode.Raw | null;
         config?: ContentConfig.Raw | null;
     }
 }

@@ -23,7 +23,7 @@ export interface BodyComposeMusicV1MusicPost {
     forceInstrumental?: boolean;
     /** Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan`. When set to true, the model will precisely respect each section's `duration_ms` from the plan. When set to false, the model may adjust individual section durations which will generally lead to better generation quality and improved latency, while always preserving the total song duration from the plan. */
     respectSectionsDurations?: boolean;
-    /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting API. */
+    /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting feature. */
     storeForInpainting?: boolean;
     /** Whether to sign the generated song with C2PA. Applicable only for mp3 files. */
     signWithC2Pa?: boolean;

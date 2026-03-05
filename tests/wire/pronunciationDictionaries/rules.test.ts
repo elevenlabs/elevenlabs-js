@@ -4,6 +4,52 @@ import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
 describe("RulesClient", () => {
+    test("set", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            rules: [
+                {
+                    type: "alias",
+                    string_to_replace: "Thailand",
+                    case_sensitive: true,
+                    word_boundaries: true,
+                    alias: "tie-land",
+                },
+            ],
+        };
+        const rawResponseBody = {
+            id: "5xM3yVvZQKV0EfqQpLrJ",
+            version_id: "5xM3yVvZQKV0EfqQpLr2",
+            version_rules_num: 5,
+        };
+        server
+            .mockEndpoint()
+            .post("/v1/pronunciation-dictionaries/21m00Tcm4TlvDq8ikWAM/set-rules")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.pronunciationDictionaries.rules.set("21m00Tcm4TlvDq8ikWAM", {
+            rules: [
+                {
+                    type: "alias",
+                    stringToReplace: "Thailand",
+                    caseSensitive: true,
+                    wordBoundaries: true,
+                    alias: "tie-land",
+                },
+            ],
+        });
+        expect(response).toEqual({
+            id: "5xM3yVvZQKV0EfqQpLrJ",
+            versionId: "5xM3yVvZQKV0EfqQpLr2",
+            versionRulesNum: 5,
+        });
+    });
+
     test("add", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

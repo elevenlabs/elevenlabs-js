@@ -71,6 +71,8 @@ export interface ProjectExtendedResponse {
     publicShareId?: string;
     /** The aspect ratio of the project. */
     aspectRatio?: ElevenLabs.ProjectExtendedResponseModelAspectRatio;
+    /** Agent-related settings for the project */
+    agentSettings?: ElevenLabs.StudioAgentSettingsModel;
     /** The quality preset level of the project. */
     qualityPreset: ElevenLabs.ProjectExtendedResponseModelQualityPreset;
     /** List of chapters of the project and their metadata. */

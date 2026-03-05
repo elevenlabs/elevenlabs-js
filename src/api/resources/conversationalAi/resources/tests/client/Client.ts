@@ -493,7 +493,7 @@ export class TestsClient {
         request: ElevenLabs.conversationalAi.TestsListRequest = {},
         requestOptions?: TestsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetTestsPageResponseModel>> {
-        const { cursor, pageSize, search, parentFolderId, includeFolders, sortMode } = request;
+        const { cursor, pageSize, search, parentFolderId, types, includeFolders, sortMode } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
             _queryParams.cursor = cursor;
@@ -509,6 +509,16 @@ export class TestsClient {
 
         if (parentFolderId != null) {
             _queryParams.parent_folder_id = parentFolderId;
+        }
+
+        if (types != null) {
+            if (Array.isArray(types)) {
+                _queryParams.types = types.map((item) =>
+                    serializers.TestType.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
+                );
+            } else {
+                _queryParams.types = serializers.TestType.jsonOrThrow(types, { unrecognizedObjectKeys: "strip" });
+            }
         }
 
         if (includeFolders != null) {

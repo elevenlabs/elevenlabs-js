@@ -3,17 +3,17 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { CustomGuardrailsConfig } from "./CustomGuardrailsConfig";
+import { CustomGuardrailsConfigInput } from "./CustomGuardrailsConfigInput";
 
 export const CustomGuardrailInput: core.serialization.ObjectSchema<
     serializers.CustomGuardrailInput.Raw,
     ElevenLabs.CustomGuardrailInput
 > = core.serialization.object({
-    config: CustomGuardrailsConfig.optional(),
+    config: CustomGuardrailsConfigInput.optional(),
 });
 
 export declare namespace CustomGuardrailInput {
     export interface Raw {
-        config?: CustomGuardrailsConfig.Raw | null;
+        config?: CustomGuardrailsConfigInput.Raw | null;
     }
 }

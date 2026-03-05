@@ -42,7 +42,7 @@ export class SpeechToTextClient {
      *     import { createReadStream } from "fs";
      *     await client.speechToText.convert({
      *         enableLogging: true,
-     *         modelId: "scribe_v1"
+     *         modelId: "scribe_v2"
      *     })
      */
     public convert(

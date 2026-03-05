@@ -9,6 +9,7 @@ export const AgentMetadata: core.serialization.ObjectSchema<serializers.AgentMet
         agentId: core.serialization.property("agent_id", core.serialization.string()),
         branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
         workflowNodeId: core.serialization.property("workflow_node_id", core.serialization.string().optional()),
+        versionId: core.serialization.property("version_id", core.serialization.string().optional()),
     });
 
 export declare namespace AgentMetadata {
@@ -16,5 +17,6 @@ export declare namespace AgentMetadata {
         agent_id: string;
         branch_id?: string | null;
         workflow_node_id?: string | null;
+        version_id?: string | null;
     }
 }

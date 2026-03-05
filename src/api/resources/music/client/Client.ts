@@ -262,6 +262,101 @@ export class MusicClient {
     }
 
     /**
+     * Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature.
+     *
+     * @param {ElevenLabs.BodyUploadMusicV1MusicUploadPost} request
+     * @param {MusicClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     import { createReadStream } from "fs";
+     *     await client.music.upload({
+     *         file: fs.createReadStream("/path/to/your/file")
+     *     })
+     */
+    public upload(
+        request: ElevenLabs.BodyUploadMusicV1MusicUploadPost,
+        requestOptions?: MusicClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.MusicUploadResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__upload(request, requestOptions));
+    }
+
+    private async __upload(
+        request: ElevenLabs.BodyUploadMusicV1MusicUploadPost,
+        requestOptions?: MusicClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.MusicUploadResponse>> {
+        const _request = await core.newFormData();
+        await _request.appendFile("file", request.file);
+        if (request.extractCompositionPlan != null) {
+            _request.append("extract_composition_plan", request.extractCompositionPlan.toString());
+        }
+
+        const _maybeEncodedRequest = await _request.getRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                ..._maybeEncodedRequest.headers,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/music/upload",
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.MusicUploadResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/music/upload");
+    }
+
+    /**
      * Separate an audio file into individual stems. This endpoint might have high latency, depending on the length of the audio file.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */

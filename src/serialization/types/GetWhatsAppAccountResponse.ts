@@ -14,6 +14,7 @@ export const GetWhatsAppAccountResponse: core.serialization.ObjectSchema<
     phoneNumberName: core.serialization.property("phone_number_name", core.serialization.string()),
     phoneNumber: core.serialization.property("phone_number", core.serialization.string()),
     assignedAgentId: core.serialization.property("assigned_agent_id", core.serialization.string().optional()),
+    enableMessaging: core.serialization.property("enable_messaging", core.serialization.boolean().optional()),
     assignedAgentName: core.serialization.property("assigned_agent_name", core.serialization.string().optional()),
 });
 
@@ -25,6 +26,7 @@ export declare namespace GetWhatsAppAccountResponse {
         phone_number_name: string;
         phone_number: string;
         assigned_agent_id?: string | null;
+        enable_messaging?: boolean | null;
         assigned_agent_name?: string | null;
     }
 }

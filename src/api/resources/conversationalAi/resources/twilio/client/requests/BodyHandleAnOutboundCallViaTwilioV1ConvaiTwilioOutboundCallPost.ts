@@ -17,4 +17,5 @@ export interface BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost
     conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestInput;
     /** Whether let Twilio record the call. */
     callRecordingEnabled?: boolean;
+    telephonyCallConfig?: ElevenLabs.TelephonyCallConfig;
 }

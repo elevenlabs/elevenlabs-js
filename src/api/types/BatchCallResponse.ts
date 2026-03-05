@@ -18,5 +18,6 @@ export interface BatchCallResponse {
     lastUpdatedAtUnix: number;
     status: ElevenLabs.BatchCallStatus;
     retryCount: number;
+    telephonyCallConfig: ElevenLabs.TelephonyCallConfig;
     agentName: string;
 }

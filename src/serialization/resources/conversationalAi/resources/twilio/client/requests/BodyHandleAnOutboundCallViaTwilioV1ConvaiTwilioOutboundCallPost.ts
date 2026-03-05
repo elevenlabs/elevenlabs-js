@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
 import { ConversationInitiationClientDataRequestInput } from "../../../../../../types/ConversationInitiationClientDataRequestInput";
+import { TelephonyCallConfig } from "../../../../../../types/TelephonyCallConfig";
 
 export const BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost: core.serialization.Schema<
     serializers.conversationalAi.BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost.Raw,
@@ -20,6 +21,7 @@ export const BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost: co
         "call_recording_enabled",
         core.serialization.boolean().optional(),
     ),
+    telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfig.optional()),
 });
 
 export declare namespace BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost {
@@ -29,5 +31,6 @@ export declare namespace BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutbound
         to_number: string;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestInput.Raw | null;
         call_recording_enabled?: boolean | null;
+        telephony_call_config?: TelephonyCallConfig.Raw | null;
     }
 }

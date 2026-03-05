@@ -8,6 +8,10 @@ export const ListProductsParams: core.serialization.ObjectSchema<
     serializers.ListProductsParams.Raw,
     ElevenLabs.ListProductsParams
 > = core.serialization.object({
+    listKwargs: core.serialization.property(
+        "list_kwargs",
+        core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    ),
     smbToolType: core.serialization.property(
         "smb_tool_type",
         core.serialization.stringLiteral("list_products").optional(),
@@ -16,6 +20,7 @@ export const ListProductsParams: core.serialization.ObjectSchema<
 
 export declare namespace ListProductsParams {
     export interface Raw {
+        list_kwargs?: Record<string, unknown> | null;
         smb_tool_type?: "list_products" | null;
     }
 }

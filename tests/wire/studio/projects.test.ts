@@ -188,6 +188,7 @@ describe("ProjectsClient", () => {
             },
             public_share_id: "abc123def456789",
             aspect_ratio: "16:9",
+            agent_settings: { tool_settings: { key: {} } },
             quality_preset: "standard",
             chapters: [
                 {
@@ -204,6 +205,10 @@ describe("ProjectsClient", () => {
                         characters_converted: 500,
                         paragraphs_converted: 20,
                         paragraphs_unconverted: 10,
+                        voice_statistics: [
+                            { voice_id: "voice123", characters_unconverted: 600, characters_converted: 300 },
+                            { voice_id: "voice456", characters_unconverted: 400, characters_converted: 200 },
+                        ],
                     },
                     last_conversion_error: "Error message",
                 },
@@ -629,6 +634,11 @@ describe("ProjectsClient", () => {
             },
             publicShareId: "abc123def456789",
             aspectRatio: "16:9",
+            agentSettings: {
+                toolSettings: {
+                    key: {},
+                },
+            },
             qualityPreset: "standard",
             chapters: [
                 {
@@ -645,6 +655,18 @@ describe("ProjectsClient", () => {
                         charactersConverted: 500,
                         paragraphsConverted: 20,
                         paragraphsUnconverted: 10,
+                        voiceStatistics: [
+                            {
+                                voiceId: "voice123",
+                                charactersUnconverted: 600,
+                                charactersConverted: 300,
+                            },
+                            {
+                                voiceId: "voice456",
+                                charactersUnconverted: 400,
+                                charactersConverted: 200,
+                            },
+                        ],
                     },
                     lastConversionError: "Error message",
                 },
@@ -1053,6 +1075,7 @@ describe("ProjectsClient", () => {
                 caption_style_template_overrides: { key: {} },
                 public_share_id: "abc123def456789",
                 aspect_ratio: "16:9",
+                agent_settings: { tool_settings: { key: {} } },
             },
         };
         server
@@ -1153,6 +1176,11 @@ describe("ProjectsClient", () => {
                 },
                 publicShareId: "abc123def456789",
                 aspectRatio: "16:9",
+                agentSettings: {
+                    toolSettings: {
+                        key: {},
+                    },
+                },
             },
         });
     });
