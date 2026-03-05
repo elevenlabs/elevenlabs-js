@@ -5,10 +5,13 @@ import type * as ElevenLabs from "../../../../../../index";
 /**
  * @example
  *     {
+ *         enableVersioning: true,
  *         conversationConfig: {}
  *     }
  */
 export interface BodyCreateAgentV1ConvaiAgentsCreatePost {
+    /** Enable versioning for the agent */
+    enableVersioning?: boolean;
     /** Conversation configuration for an agent */
     conversationConfig: ElevenLabs.ConversationalConfig;
     /** Platform settings for the agent are all settings that aren't related to the conversation orchestration and content. */

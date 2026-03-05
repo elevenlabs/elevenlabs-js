@@ -7,13 +7,13 @@ import type * as ElevenLabs from "../../../../index";
  * @example
  *     {
  *         enableLogging: true,
- *         modelId: "scribe_v1"
+ *         modelId: "scribe_v2"
  *     }
  *
  * @example
  *     {
  *         enableLogging: true,
- *         modelId: "scribe_v1"
+ *         modelId: "scribe_v2"
  *     }
  */
 export interface BodySpeechToTextV1SpeechToTextPost {

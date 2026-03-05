@@ -5,6 +5,7 @@ import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
 import { BatchCallWhatsAppParams } from "../../../../../../types/BatchCallWhatsAppParams";
 import { OutboundCallRecipient } from "../../../../../../types/OutboundCallRecipient";
+import { TelephonyCallConfig } from "../../../../../../types/TelephonyCallConfig";
 
 export const BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost: core.serialization.Schema<
     serializers.conversationalAi.BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost.Raw,
@@ -17,6 +18,7 @@ export const BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost: core.ser
     agentPhoneNumberId: core.serialization.property("agent_phone_number_id", core.serialization.string().optional()),
     whatsappParams: core.serialization.property("whatsapp_params", BatchCallWhatsAppParams.optional()),
     timezone: core.serialization.string().optional(),
+    telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfig.optional()),
 });
 
 export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
@@ -28,5 +30,6 @@ export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPo
         agent_phone_number_id?: string | null;
         whatsapp_params?: BatchCallWhatsAppParams.Raw | null;
         timezone?: string | null;
+        telephony_call_config?: TelephonyCallConfig.Raw | null;
     }
 }

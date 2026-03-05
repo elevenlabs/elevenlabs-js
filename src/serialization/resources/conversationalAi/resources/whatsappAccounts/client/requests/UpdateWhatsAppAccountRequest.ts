@@ -9,10 +9,12 @@ export const UpdateWhatsAppAccountRequest: core.serialization.Schema<
     ElevenLabs.conversationalAi.UpdateWhatsAppAccountRequest
 > = core.serialization.object({
     assignedAgentId: core.serialization.property("assigned_agent_id", core.serialization.string().optional()),
+    enableMessaging: core.serialization.property("enable_messaging", core.serialization.boolean().optional()),
 });
 
 export declare namespace UpdateWhatsAppAccountRequest {
     export interface Raw {
         assigned_agent_id?: string | null;
+        enable_messaging?: boolean | null;
     }
 }

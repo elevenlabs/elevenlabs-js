@@ -13,6 +13,6 @@ export interface SongSection {
     durationMs: number;
     /** The lyrics of the section. Max 200 characters per line. */
     lines: string[];
-    /** Optional source to extract the section from. Used for inpainting. Only available to enterprise clients with access to the inpainting API. */
+    /** Optional source to extract the section from. Used for inpainting. Only available to enterprise clients with access to the inpainting feature. */
     sourceFrom?: ElevenLabs.SectionSource;
 }

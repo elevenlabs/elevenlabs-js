@@ -29,6 +29,7 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
+            telephony_call_config: { ringing_timeout_secs: 1 },
             agent_name: "agent_name",
         };
         server
@@ -66,6 +67,9 @@ describe("BatchCallsClient", () => {
             lastUpdatedAtUnix: 1,
             status: "pending",
             retryCount: 1,
+            telephonyCallConfig: {
+                ringingTimeoutSecs: 1,
+            },
             agentName: "agent_name",
         });
     });
@@ -97,6 +101,7 @@ describe("BatchCallsClient", () => {
                     last_updated_at_unix: 1,
                     status: "pending",
                     retry_count: 1,
+                    telephony_call_config: {},
                     agent_name: "agent_name",
                 },
             ],
@@ -137,6 +142,7 @@ describe("BatchCallsClient", () => {
                     lastUpdatedAtUnix: 1,
                     status: "pending",
                     retryCount: 1,
+                    telephonyCallConfig: {},
                     agentName: "agent_name",
                 },
             ],
@@ -170,6 +176,7 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
+            telephony_call_config: { ringing_timeout_secs: 1 },
             agent_name: "agent_name",
             recipients: [
                 {
@@ -227,6 +234,9 @@ describe("BatchCallsClient", () => {
             lastUpdatedAtUnix: 1,
             status: "pending",
             retryCount: 1,
+            telephonyCallConfig: {
+                ringingTimeoutSecs: 1,
+            },
             agentName: "agent_name",
             recipients: [
                 {
@@ -300,6 +310,7 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
+            telephony_call_config: { ringing_timeout_secs: 1 },
             agent_name: "agent_name",
         };
         server
@@ -332,6 +343,9 @@ describe("BatchCallsClient", () => {
             lastUpdatedAtUnix: 1,
             status: "pending",
             retryCount: 1,
+            telephonyCallConfig: {
+                ringingTimeoutSecs: 1,
+            },
             agentName: "agent_name",
         });
     });
@@ -361,6 +375,7 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
+            telephony_call_config: { ringing_timeout_secs: 1 },
             agent_name: "agent_name",
         };
         server
@@ -393,6 +408,9 @@ describe("BatchCallsClient", () => {
             lastUpdatedAtUnix: 1,
             status: "pending",
             retryCount: 1,
+            telephonyCallConfig: {
+                ringingTimeoutSecs: 1,
+            },
             agentName: "agent_name",
         });
     });

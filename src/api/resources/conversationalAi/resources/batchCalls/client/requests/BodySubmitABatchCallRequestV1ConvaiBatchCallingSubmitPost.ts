@@ -18,4 +18,5 @@ export interface BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
     agentPhoneNumberId?: string;
     whatsappParams?: ElevenLabs.BatchCallWhatsAppParams;
     timezone?: string;
+    telephonyCallConfig?: ElevenLabs.TelephonyCallConfig;
 }

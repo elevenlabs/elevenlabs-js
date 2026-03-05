@@ -7,4 +7,5 @@ export interface ObjectJsonSchemaPropertyOutput {
     required?: string[];
     description?: string;
     properties?: Record<string, ElevenLabs.ObjectJsonSchemaPropertyOutputPropertiesValue>;
+    requiredConstraints?: ElevenLabs.RequiredConstraints;
 }

@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
 import { ConversationInitiationClientDataRequestInput } from "../../../../../../types/ConversationInitiationClientDataRequestInput";
+import { TelephonyCallConfig } from "../../../../../../types/TelephonyCallConfig";
 
 export const BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost: core.serialization.Schema<
     serializers.conversationalAi.BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost.Raw,
@@ -16,6 +17,7 @@ export const BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost
         "conversation_initiation_client_data",
         ConversationInitiationClientDataRequestInput.optional(),
     ),
+    telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfig.optional()),
 });
 
 export declare namespace BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost {
@@ -24,5 +26,6 @@ export declare namespace BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutb
         agent_phone_number_id: string;
         to_number: string;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestInput.Raw | null;
+        telephony_call_config?: TelephonyCallConfig.Raw | null;
     }
 }

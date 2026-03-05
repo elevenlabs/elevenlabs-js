@@ -5,10 +5,13 @@ import type * as ElevenLabs from "../../../../../../index";
 /**
  * @example
  *     {
+ *         enableVersioningIfNotEnabled: true,
  *         branchId: "branch_id"
  *     }
  */
 export interface UpdateAgentRequest {
+    /** Enable versioning for the agent, if not already enabled */
+    enableVersioningIfNotEnabled?: boolean;
     /** The ID of the branch to use */
     branchId?: string;
     /** Conversation configuration for an agent */

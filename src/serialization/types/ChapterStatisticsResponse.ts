@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { VoiceStatisticsResponseModel } from "./VoiceStatisticsResponseModel";
 
 export const ChapterStatisticsResponse: core.serialization.ObjectSchema<
     serializers.ChapterStatisticsResponse.Raw,
@@ -12,6 +13,10 @@ export const ChapterStatisticsResponse: core.serialization.ObjectSchema<
     charactersConverted: core.serialization.property("characters_converted", core.serialization.number()),
     paragraphsConverted: core.serialization.property("paragraphs_converted", core.serialization.number()),
     paragraphsUnconverted: core.serialization.property("paragraphs_unconverted", core.serialization.number()),
+    voiceStatistics: core.serialization.property(
+        "voice_statistics",
+        core.serialization.list(VoiceStatisticsResponseModel).optional(),
+    ),
 });
 
 export declare namespace ChapterStatisticsResponse {
@@ -20,5 +25,6 @@ export declare namespace ChapterStatisticsResponse {
         characters_converted: number;
         paragraphs_converted: number;
         paragraphs_unconverted: number;
+        voice_statistics?: VoiceStatisticsResponseModel.Raw[] | null;
     }
 }

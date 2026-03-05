@@ -10,7 +10,7 @@ import { BodyCreateAgentV1ConvaiAgentsCreatePostCoachingSettings } from "../../t
 
 export const BodyCreateAgentV1ConvaiAgentsCreatePost: core.serialization.Schema<
     serializers.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost.Raw,
-    ElevenLabs.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost
+    Omit<ElevenLabs.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost, "enableVersioning">
 > = core.serialization.object({
     conversationConfig: core.serialization.property("conversation_config", ConversationalConfig),
     platformSettings: core.serialization.property("platform_settings", AgentPlatformSettingsRequestModel.optional()),

@@ -3671,7 +3671,7 @@ Transcribe an audio or video file. If webhook is set to true, the request will b
 ```typescript
 await client.speechToText.convert({
     enableLogging: true,
-    modelId: "scribe_v1"
+    modelId: "scribe_v2"
 });
 
 ```
@@ -4201,6 +4201,71 @@ await client.music.stream();
 <dd>
 
 **request:** `ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">upload</a>({ ...params }) -> ElevenLabs.MusicUploadResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.upload({
+    file: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUploadMusicV1MusicUploadPost` 
     
 </dd>
 </dl>
@@ -4870,6 +4935,7 @@ Create an agent from a config object
 
 ```typescript
 await client.conversationalAi.agents.create({
+    enableVersioning: true,
     conversationConfig: {}
 });
 
@@ -5072,6 +5138,7 @@ Patches an Agent settings
 
 ```typescript
 await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    enableVersioningIfNotEnabled: true,
     branchId: "branch_id"
 });
 
@@ -13253,6 +13320,85 @@ await client.music.compositionPlan.create({
 </details>
 
 ## PronunciationDictionaries Rules
+<details><summary><code>client.pronunciationDictionaries.rules.<a href="/src/api/resources/pronunciationDictionaries/resources/rules/client/Client.ts">set</a>(pronunciation_dictionary_id, { ...params }) -> ElevenLabs.PronunciationDictionaryRulesResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replaces all existing rules on the pronunciation dictionary with the provided ones.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.pronunciationDictionaries.rules.set("21m00Tcm4TlvDq8ikWAM", {
+    rules: [{
+            type: "alias",
+            stringToReplace: "Thailand",
+            caseSensitive: true,
+            wordBoundaries: true,
+            alias: "tie-land"
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**pronunciation_dictionary_id:** `string` — The id of the pronunciation dictionary
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.pronunciationDictionaries.BodySetRulesOnThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdSetRulesPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.pronunciationDictionaries.rules.<a href="/src/api/resources/pronunciationDictionaries/resources/rules/client/Client.ts">add</a>(pronunciation_dictionary_id, { ...params }) -> ElevenLabs.PronunciationDictionaryRulesResponseModel</code></summary>
 <dl>
 <dd>

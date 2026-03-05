@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { BatchCallStatus } from "./BatchCallStatus";
 import { BatchCallWhatsAppParams } from "./BatchCallWhatsAppParams";
 import { OutboundCallRecipientResponseModel } from "./OutboundCallRecipientResponseModel";
+import { TelephonyCallConfig } from "./TelephonyCallConfig";
 import { TelephonyProvider } from "./TelephonyProvider";
 
 export const BatchCallDetailedResponse: core.serialization.ObjectSchema<
@@ -27,6 +28,7 @@ export const BatchCallDetailedResponse: core.serialization.ObjectSchema<
     lastUpdatedAtUnix: core.serialization.property("last_updated_at_unix", core.serialization.number()),
     status: BatchCallStatus,
     retryCount: core.serialization.property("retry_count", core.serialization.number()),
+    telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfig),
     agentName: core.serialization.property("agent_name", core.serialization.string()),
     recipients: core.serialization.list(OutboundCallRecipientResponseModel),
 });
@@ -48,6 +50,7 @@ export declare namespace BatchCallDetailedResponse {
         last_updated_at_unix: number;
         status: BatchCallStatus.Raw;
         retry_count: number;
+        telephony_call_config: TelephonyCallConfig.Raw;
         agent_name: string;
         recipients: OutboundCallRecipientResponseModel.Raw[];
     }

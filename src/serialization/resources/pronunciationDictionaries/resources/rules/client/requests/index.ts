@@ -1,2 +1,3 @@
+export { BodySetRulesOnThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdSetRulesPost } from "./BodySetRulesOnThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdSetRulesPost";
 export { PronunciationDictionary } from "./PronunciationDictionary";
 export { RemovePronunciationDictionaryRulesRequest } from "./RemovePronunciationDictionaryRulesRequest";

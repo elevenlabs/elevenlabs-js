@@ -7,5 +7,6 @@ export interface GetWhatsAppAccountResponse {
     phoneNumberName: string;
     phoneNumber: string;
     assignedAgentId?: string;
+    enableMessaging?: boolean;
     assignedAgentName?: string;
 }

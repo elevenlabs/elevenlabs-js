@@ -5,14 +5,14 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { CustomGuardrailConfig } from "./CustomGuardrailConfig";
 
-export const CustomGuardrailsConfig: core.serialization.ObjectSchema<
-    serializers.CustomGuardrailsConfig.Raw,
-    ElevenLabs.CustomGuardrailsConfig
+export const CustomGuardrailsConfigInput: core.serialization.ObjectSchema<
+    serializers.CustomGuardrailsConfigInput.Raw,
+    ElevenLabs.CustomGuardrailsConfigInput
 > = core.serialization.object({
     configs: core.serialization.list(CustomGuardrailConfig).optional(),
 });
 
-export declare namespace CustomGuardrailsConfig {
+export declare namespace CustomGuardrailsConfigInput {
     export interface Raw {
         configs?: CustomGuardrailConfig.Raw[] | null;
     }

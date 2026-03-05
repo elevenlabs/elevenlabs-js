@@ -75,6 +75,7 @@ describe("StudioClient", () => {
                 caption_style_template_overrides: { key: {} },
                 public_share_id: "abc123def456789",
                 aspect_ratio: "16:9",
+                agent_settings: { tool_settings: { key: {} } },
             },
         };
         server
@@ -186,6 +187,11 @@ describe("StudioClient", () => {
                 },
                 publicShareId: "abc123def456789",
                 aspectRatio: "16:9",
+                agentSettings: {
+                    toolSettings: {
+                        key: {},
+                    },
+                },
             },
         });
     });

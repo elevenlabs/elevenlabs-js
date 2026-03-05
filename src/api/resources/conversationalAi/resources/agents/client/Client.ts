@@ -81,6 +81,7 @@ export class AgentsClient {
      *
      * @example
      *     await client.conversationalAi.agents.create({
+     *         enableVersioning: true,
      *         conversationConfig: {}
      *     })
      */
@@ -95,6 +96,12 @@ export class AgentsClient {
         request: ElevenLabs.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost,
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.CreateAgentResponseModel>> {
+        const { enableVersioning, ..._body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (enableVersioning != null) {
+            _queryParams.enable_versioning = enableVersioning.toString();
+        }
+
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -110,9 +117,9 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
-            body: serializers.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost.jsonOrThrow(request, {
+            body: serializers.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -336,6 +343,7 @@ export class AgentsClient {
      *
      * @example
      *     await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+     *         enableVersioningIfNotEnabled: true,
      *         branchId: "branch_id"
      *     })
      */
@@ -352,8 +360,12 @@ export class AgentsClient {
         request: ElevenLabs.conversationalAi.UpdateAgentRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
-        const { branchId, ..._body } = request;
+        const { enableVersioningIfNotEnabled, branchId, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (enableVersioningIfNotEnabled != null) {
+            _queryParams.enable_versioning_if_not_enabled = enableVersioningIfNotEnabled.toString();
+        }
+
         if (branchId != null) {
             _queryParams.branch_id = branchId;
         }

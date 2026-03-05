@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { CustomGuardrailConfigModel } from "./CustomGuardrailConfigModel";
+import { GuardrailExecutionMode } from "./GuardrailExecutionMode";
 
 export const CustomGuardrailConfig: core.serialization.ObjectSchema<
     serializers.CustomGuardrailConfig.Raw,
@@ -12,7 +12,7 @@ export const CustomGuardrailConfig: core.serialization.ObjectSchema<
     isEnabled: core.serialization.property("is_enabled", core.serialization.boolean().optional()),
     name: core.serialization.string(),
     prompt: core.serialization.string(),
-    model: CustomGuardrailConfigModel,
+    executionMode: core.serialization.property("execution_mode", GuardrailExecutionMode.optional()),
 });
 
 export declare namespace CustomGuardrailConfig {
@@ -20,6 +20,6 @@ export declare namespace CustomGuardrailConfig {
         is_enabled?: boolean | null;
         name: string;
         prompt: string;
-        model: CustomGuardrailConfigModel.Raw;
+        execution_mode?: GuardrailExecutionMode.Raw | null;
     }
 }

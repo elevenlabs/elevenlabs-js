@@ -21,7 +21,7 @@ export interface BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
     seed?: number;
     /** If true, guarantees that the generated song will be instrumental. If false, the song may or may not be instrumental depending on the `prompt`. Can only be used with `prompt`. */
     forceInstrumental?: boolean;
-    /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting API. */
+    /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting feature. */
     storeForInpainting?: boolean;
     /** Whether to return the timestamps of the words in the generated song. */
     withTimestamps?: boolean;

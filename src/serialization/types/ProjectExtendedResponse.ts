@@ -19,6 +19,7 @@ import { ProjectState } from "./ProjectState";
 import { ProjectVoiceResponseModel } from "./ProjectVoiceResponseModel";
 import { PronunciationDictionaryLocatorResponseModel } from "./PronunciationDictionaryLocatorResponseModel";
 import { PronunciationDictionaryVersionResponseModel } from "./PronunciationDictionaryVersionResponseModel";
+import { StudioAgentSettingsModel } from "./StudioAgentSettingsModel";
 import { Voice } from "./Voice";
 
 export const ProjectExtendedResponse: core.serialization.ObjectSchema<
@@ -74,6 +75,7 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     ),
     publicShareId: core.serialization.property("public_share_id", core.serialization.string().optional()),
     aspectRatio: core.serialization.property("aspect_ratio", ProjectExtendedResponseModelAspectRatio.optional()),
+    agentSettings: core.serialization.property("agent_settings", StudioAgentSettingsModel.optional()),
     qualityPreset: core.serialization.property("quality_preset", ProjectExtendedResponseModelQualityPreset),
     chapters: core.serialization.list(ChapterResponse),
     pronunciationDictionaryVersions: core.serialization.property(
@@ -131,6 +133,7 @@ export declare namespace ProjectExtendedResponse {
         caption_style_template_overrides?: Record<string, CaptionStyleModel.Raw | null | undefined> | null;
         public_share_id?: string | null;
         aspect_ratio?: ProjectExtendedResponseModelAspectRatio.Raw | null;
+        agent_settings?: StudioAgentSettingsModel.Raw | null;
         quality_preset: ProjectExtendedResponseModelQualityPreset.Raw;
         chapters: ChapterResponse.Raw[];
         pronunciation_dictionary_versions: PronunciationDictionaryVersionResponseModel.Raw[];

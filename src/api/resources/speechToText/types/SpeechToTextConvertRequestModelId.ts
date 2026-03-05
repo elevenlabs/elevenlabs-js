@@ -2,8 +2,8 @@
 
 /** The ID of the model to use for transcription. */
 export const SpeechToTextConvertRequestModelId = {
-    ScribeV1: "scribe_v1",
     ScribeV2: "scribe_v2",
+    ScribeV1: "scribe_v1",
 } as const;
 export type SpeechToTextConvertRequestModelId =
     (typeof SpeechToTextConvertRequestModelId)[keyof typeof SpeechToTextConvertRequestModelId];

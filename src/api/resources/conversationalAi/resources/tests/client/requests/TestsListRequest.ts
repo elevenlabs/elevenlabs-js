@@ -22,7 +22,9 @@ export interface TestsListRequest {
     search?: string;
     /** Filter by parent folder ID. Use 'root' to get items in the root folder. */
     parentFolderId?: string;
-    /** Whether to include folders in the response. Defaults to false. */
+    /** If present, the endpoint will return only tests/folders of the given types. */
+    types?: ElevenLabs.TestType | ElevenLabs.TestType[];
+    /** Deprecated. Use the `types` query param and include `folder` instead. */
     includeFolders?: boolean;
     /** Sort mode for listing tests. Use 'folders_first' to place folders before tests. */
     sortMode?: ElevenLabs.conversationalAi.TestsListRequestSortMode;
