@@ -1,6 +1,6 @@
+import type * as ElevenLabs from "../api";
 import { MusicClient as GeneratedMusic } from "../api/resources/music/client/Client";
 import { CompositionPlanClient } from "../api/resources/music/resources/compositionPlan/client/Client";
-import type * as ElevenLabs from "../api";
 import * as core from "../core";
 import type { WithRawResponse } from "../core/fetcher/RawResponse";
 
@@ -302,15 +302,8 @@ export class Music {
         // Find the start of audio data (after headers and empty line)
         let audioStart = secondBoundary + boundaryBytes.length;
 
-        // Skip past the headers to find the empty line
-        while (audioStart < responseBytes.length - 1) {
-            if (responseBytes[audioStart] === 0x0a && responseBytes[audioStart + 1] === 0x0a) {
-                // Found \n\n - audio starts after this
-                audioStart += 2;
-                break;
-            }
-            audioStart++;
-        }
+        audioStart = this.findAudioStartIndex(responseBytes, audioStart);
+
 
         // Find the closing boundary to properly terminate the audio data
         // Multipart responses end with: \r\n--boundary--\r\n or \n--boundary--\n
@@ -319,27 +312,10 @@ export class Music {
         const closingBoundaryLF = new TextEncoder().encode("\n" + boundary + "--");
         let audioEnd = responseBytes.length;
 
-        // Helper to find boundary pattern in response bytes
-        const findBoundary = (pattern: Uint8Array): number => {
-            for (let i = audioStart; i <= responseBytes.length - pattern.length; i++) {
-                let match = true;
-                for (let j = 0; j < pattern.length; j++) {
-                    if (responseBytes[i + j] !== pattern[j]) {
-                        match = false;
-                        break;
-                    }
-                }
-                if (match) {
-                    return i;
-                }
-            }
-            return -1;
-        };
-
         // Try CRLF first, then LF
-        let foundAt = findBoundary(closingBoundaryCRLF);
+        let foundAt = this.findIndex(responseBytes, audioStart, closingBoundaryCRLF);
         if (foundAt === -1) {
-            foundAt = findBoundary(closingBoundaryLF);
+            foundAt = this.findIndex(responseBytes, audioStart, closingBoundaryLF);
         }
         if (foundAt !== -1) {
             audioEnd = foundAt;
@@ -375,5 +351,35 @@ export class Music {
             );
         }
         return obj;
+    }
+
+    private findIndex(responseBytes: Uint8Array, audioStart: number, pattern: Uint8Array): number {
+        for (let i = audioStart; i <= responseBytes.length - pattern.length; i++) {
+            let match = true;
+            for (let j = 0; j < pattern.length; j++) {
+                if (responseBytes[i + j] !== pattern[j]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private findAudioStartIndex(responseBytes: Uint8Array, startIndex: number): number {        
+        const foundAtCRLF = this.findIndex(responseBytes, startIndex, new TextEncoder().encode("\r\n\r\n"));
+        if (foundAtCRLF !== -1) {
+            return  foundAtCRLF + 4;
+        }
+        
+        const foundAtLF = this.findIndex(responseBytes, startIndex, new TextEncoder().encode("\n\n"));
+        if (foundAtLF !== -1) {
+            return foundAtLF + 2;
+        }
+
+        throw new Error("Could not find body start index");
     }
 }
