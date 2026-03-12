@@ -28,6 +28,10 @@ export const BatchCallResponse: core.serialization.ObjectSchema<
     status: BatchCallStatus,
     retryCount: core.serialization.property("retry_count", core.serialization.number()),
     telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfig),
+    targetConcurrencyLimit: core.serialization.property(
+        "target_concurrency_limit",
+        core.serialization.number().optional(),
+    ),
     agentName: core.serialization.property("agent_name", core.serialization.string()),
 });
 
@@ -49,6 +53,7 @@ export declare namespace BatchCallResponse {
         status: BatchCallStatus.Raw;
         retry_count: number;
         telephony_call_config: TelephonyCallConfig.Raw;
+        target_concurrency_limit?: number | null;
         agent_name: string;
     }
 }

@@ -3,18 +3,21 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
+import { SeatType } from "../../../../../../types/SeatType";
 
 export const BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost: core.serialization.Schema<
     serializers.workspace.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost.Raw,
     ElevenLabs.workspace.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost
 > = core.serialization.object({
     emails: core.serialization.list(core.serialization.string()),
+    seatType: core.serialization.property("seat_type", SeatType.optional()),
     groupIds: core.serialization.property("group_ids", core.serialization.list(core.serialization.string()).optional()),
 });
 
 export declare namespace BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost {
     export interface Raw {
         emails: string[];
+        seat_type?: SeatType.Raw | null;
         group_ids?: string[] | null;
     }
 }

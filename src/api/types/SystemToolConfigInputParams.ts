@@ -3,16 +3,24 @@
 import type * as ElevenLabs from "../index";
 
 export type SystemToolConfigInputParams =
+    | ElevenLabs.SystemToolConfigInputParams.AgentPromptChange
     | ElevenLabs.SystemToolConfigInputParams.EndCall
     | ElevenLabs.SystemToolConfigInputParams.LanguageDetection
+    | ElevenLabs.SystemToolConfigInputParams.MemoryEntryCreate
+    | ElevenLabs.SystemToolConfigInputParams.MemoryEntryDelete
+    | ElevenLabs.SystemToolConfigInputParams.MemoryEntrySearch
+    | ElevenLabs.SystemToolConfigInputParams.MemoryEntryUpdate
     | ElevenLabs.SystemToolConfigInputParams.PlayKeypadTouchTone
-    | ElevenLabs.SystemToolConfigInputParams.SearchDocumentation
     | ElevenLabs.SystemToolConfigInputParams.SkipTurn
     | ElevenLabs.SystemToolConfigInputParams.TransferToAgent
     | ElevenLabs.SystemToolConfigInputParams.TransferToNumber
     | ElevenLabs.SystemToolConfigInputParams.VoicemailDetection;
 
 export namespace SystemToolConfigInputParams {
+    export interface AgentPromptChange extends ElevenLabs.AgentPromptChangeToolConfig {
+        systemToolType: "agent_prompt_change";
+    }
+
     export interface EndCall extends ElevenLabs.EndCallToolConfig {
         systemToolType: "end_call";
     }
@@ -21,12 +29,24 @@ export namespace SystemToolConfigInputParams {
         systemToolType: "language_detection";
     }
 
-    export interface PlayKeypadTouchTone extends ElevenLabs.PlayDtmfToolConfig {
-        systemToolType: "play_keypad_touch_tone";
+    export interface MemoryEntryCreate extends ElevenLabs.MemoryEntryCreateToolConfig {
+        systemToolType: "memory_entry_create";
     }
 
-    export interface SearchDocumentation extends ElevenLabs.SearchDocumentationToolConfigInput {
-        systemToolType: "search_documentation";
+    export interface MemoryEntryDelete extends ElevenLabs.MemoryEntryDeleteToolConfig {
+        systemToolType: "memory_entry_delete";
+    }
+
+    export interface MemoryEntrySearch extends ElevenLabs.MemoryEntrySearchToolConfig {
+        systemToolType: "memory_entry_search";
+    }
+
+    export interface MemoryEntryUpdate extends ElevenLabs.MemoryEntryUpdateToolConfig {
+        systemToolType: "memory_entry_update";
+    }
+
+    export interface PlayKeypadTouchTone extends ElevenLabs.PlayDtmfToolConfig {
+        systemToolType: "play_keypad_touch_tone";
     }
 
     export interface SkipTurn extends ElevenLabs.SkipTurnToolConfig {

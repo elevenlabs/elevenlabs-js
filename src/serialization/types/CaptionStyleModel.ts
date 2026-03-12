@@ -12,6 +12,8 @@ import { CaptionStyleSectionAnimationModel } from "./CaptionStyleSectionAnimatio
 import { CaptionStyleTemplateModel } from "./CaptionStyleTemplateModel";
 import { CaptionStyleVerticalPlacementModel } from "./CaptionStyleVerticalPlacementModel";
 import { CaptionStyleWordAnimationModel } from "./CaptionStyleWordAnimationModel";
+import { StudioTextStyleOutlineModel } from "./StudioTextStyleOutlineModel";
+import { StudioTextStyleShadowModel } from "./StudioTextStyleShadowModel";
 
 export const CaptionStyleModel: core.serialization.ObjectSchema<
     serializers.CaptionStyleModel.Raw,
@@ -24,6 +26,8 @@ export const CaptionStyleModel: core.serialization.ObjectSchema<
     textAlign: core.serialization.property("text_align", CaptionStyleModelTextAlign.optional()),
     textStyle: core.serialization.property("text_style", CaptionStyleModelTextStyle.optional()),
     textWeight: core.serialization.property("text_weight", CaptionStyleModelTextWeight.optional()),
+    textShadow: core.serialization.property("text_shadow", StudioTextStyleShadowModel.optional()),
+    textOutline: core.serialization.property("text_outline", StudioTextStyleOutlineModel.optional()),
     backgroundEnabled: core.serialization.property("background_enabled", core.serialization.boolean().optional()),
     backgroundColor: core.serialization.property("background_color", core.serialization.string().optional()),
     backgroundOpacity: core.serialization.property("background_opacity", core.serialization.number().optional()),
@@ -66,6 +70,8 @@ export declare namespace CaptionStyleModel {
         text_align?: CaptionStyleModelTextAlign.Raw | null;
         text_style?: CaptionStyleModelTextStyle.Raw | null;
         text_weight?: CaptionStyleModelTextWeight.Raw | null;
+        text_shadow?: StudioTextStyleShadowModel.Raw | null;
+        text_outline?: StudioTextStyleOutlineModel.Raw | null;
         background_enabled?: boolean | null;
         background_color?: string | null;
         background_opacity?: number | null;

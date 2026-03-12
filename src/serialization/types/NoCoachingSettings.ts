@@ -8,11 +8,13 @@ export const NoCoachingSettings: core.serialization.ObjectSchema<
     serializers.NoCoachingSettings.Raw,
     ElevenLabs.NoCoachingSettings
 > = core.serialization.object({
+    type: core.serialization.stringLiteral("none").optional(),
     memoryBaseId: core.serialization.property("memory_base_id", core.serialization.string().optional()),
 });
 
 export declare namespace NoCoachingSettings {
     export interface Raw {
+        type?: "none" | null;
         memory_base_id?: string | null;
     }
 }

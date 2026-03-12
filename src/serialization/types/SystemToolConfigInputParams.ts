@@ -3,10 +3,14 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AgentPromptChangeToolConfig } from "./AgentPromptChangeToolConfig";
 import { EndCallToolConfig } from "./EndCallToolConfig";
 import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
+import { MemoryEntryCreateToolConfig } from "./MemoryEntryCreateToolConfig";
+import { MemoryEntryDeleteToolConfig } from "./MemoryEntryDeleteToolConfig";
+import { MemoryEntrySearchToolConfig } from "./MemoryEntrySearchToolConfig";
+import { MemoryEntryUpdateToolConfig } from "./MemoryEntryUpdateToolConfig";
 import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
-import { SearchDocumentationToolConfigInput } from "./SearchDocumentationToolConfigInput";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
 import { TransferToAgentToolConfig } from "./TransferToAgentToolConfig";
 import { TransferToNumberToolConfigInput } from "./TransferToNumberToolConfigInput";
@@ -17,10 +21,14 @@ export const SystemToolConfigInputParams: core.serialization.Schema<
     ElevenLabs.SystemToolConfigInputParams
 > = core.serialization
     .union(core.serialization.discriminant("systemToolType", "system_tool_type"), {
+        agent_prompt_change: AgentPromptChangeToolConfig,
         end_call: EndCallToolConfig,
         language_detection: LanguageDetectionToolConfig,
+        memory_entry_create: MemoryEntryCreateToolConfig,
+        memory_entry_delete: MemoryEntryDeleteToolConfig,
+        memory_entry_search: MemoryEntrySearchToolConfig,
+        memory_entry_update: MemoryEntryUpdateToolConfig,
         play_keypad_touch_tone: PlayDtmfToolConfig,
-        search_documentation: SearchDocumentationToolConfigInput,
         skip_turn: SkipTurnToolConfig,
         transfer_to_agent: TransferToAgentToolConfig,
         transfer_to_number: TransferToNumberToolConfigInput,
@@ -33,14 +41,22 @@ export const SystemToolConfigInputParams: core.serialization.Schema<
 
 export declare namespace SystemToolConfigInputParams {
     export type Raw =
+        | SystemToolConfigInputParams.AgentPromptChange
         | SystemToolConfigInputParams.EndCall
         | SystemToolConfigInputParams.LanguageDetection
+        | SystemToolConfigInputParams.MemoryEntryCreate
+        | SystemToolConfigInputParams.MemoryEntryDelete
+        | SystemToolConfigInputParams.MemoryEntrySearch
+        | SystemToolConfigInputParams.MemoryEntryUpdate
         | SystemToolConfigInputParams.PlayKeypadTouchTone
-        | SystemToolConfigInputParams.SearchDocumentation
         | SystemToolConfigInputParams.SkipTurn
         | SystemToolConfigInputParams.TransferToAgent
         | SystemToolConfigInputParams.TransferToNumber
         | SystemToolConfigInputParams.VoicemailDetection;
+
+    export interface AgentPromptChange extends AgentPromptChangeToolConfig.Raw {
+        system_tool_type: "agent_prompt_change";
+    }
 
     export interface EndCall extends EndCallToolConfig.Raw {
         system_tool_type: "end_call";
@@ -50,12 +66,24 @@ export declare namespace SystemToolConfigInputParams {
         system_tool_type: "language_detection";
     }
 
-    export interface PlayKeypadTouchTone extends PlayDtmfToolConfig.Raw {
-        system_tool_type: "play_keypad_touch_tone";
+    export interface MemoryEntryCreate extends MemoryEntryCreateToolConfig.Raw {
+        system_tool_type: "memory_entry_create";
     }
 
-    export interface SearchDocumentation extends SearchDocumentationToolConfigInput.Raw {
-        system_tool_type: "search_documentation";
+    export interface MemoryEntryDelete extends MemoryEntryDeleteToolConfig.Raw {
+        system_tool_type: "memory_entry_delete";
+    }
+
+    export interface MemoryEntrySearch extends MemoryEntrySearchToolConfig.Raw {
+        system_tool_type: "memory_entry_search";
+    }
+
+    export interface MemoryEntryUpdate extends MemoryEntryUpdateToolConfig.Raw {
+        system_tool_type: "memory_entry_update";
+    }
+
+    export interface PlayKeypadTouchTone extends PlayDtmfToolConfig.Raw {
+        system_tool_type: "play_keypad_touch_tone";
     }
 
     export interface SkipTurn extends SkipTurnToolConfig.Raw {

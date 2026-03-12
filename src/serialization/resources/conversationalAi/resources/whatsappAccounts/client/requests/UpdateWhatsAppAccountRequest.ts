@@ -10,11 +10,16 @@ export const UpdateWhatsAppAccountRequest: core.serialization.Schema<
 > = core.serialization.object({
     assignedAgentId: core.serialization.property("assigned_agent_id", core.serialization.string().optional()),
     enableMessaging: core.serialization.property("enable_messaging", core.serialization.boolean().optional()),
+    enableAudioMessageResponse: core.serialization.property(
+        "enable_audio_message_response",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace UpdateWhatsAppAccountRequest {
     export interface Raw {
         assigned_agent_id?: string | null;
         enable_messaging?: boolean | null;
+        enable_audio_message_response?: boolean | null;
     }
 }

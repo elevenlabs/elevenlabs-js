@@ -36,8 +36,10 @@ export interface ProjectVideoResponseModel {
     exportFormatReady?: boolean;
     currentSnapshotId?: string;
     sourceContext?: ElevenLabs.GenerationSourceContext;
+    analysis?: ElevenLabs.VideoAnalysis;
     canvasPlacement?: ElevenLabs.CanvasPlacement;
     animation?: ElevenLabs.ClipAnimation;
+    playbackSpeed?: number;
     trackId?: string;
     previewJobProgress?: number;
     importSpeechProgress?: number;

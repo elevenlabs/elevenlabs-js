@@ -17,6 +17,8 @@ export interface ChapterWithContentResponseModel {
     state: ElevenLabs.ChapterWithContentResponseModelState;
     /** Whether the chapter has a video. */
     hasVideo?: boolean;
+    /** Whether the chapter has any visual content (video, image, or text clips). */
+    hasVisualContent?: boolean;
     /** List of voice ids used by the chapter */
     voiceIds?: string[];
     /** The statistics of the chapter. */

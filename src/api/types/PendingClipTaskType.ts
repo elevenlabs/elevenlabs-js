@@ -5,5 +5,6 @@ export const PendingClipTaskType = {
     SpeechImport: "speech_import",
     Dubbing: "dubbing",
     VideoToMusic: "video_to_music",
+    MediaGeneration: "media_generation",
 } as const;
 export type PendingClipTaskType = (typeof PendingClipTaskType)[keyof typeof PendingClipTaskType];

@@ -9,10 +9,14 @@ export const BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost: core.s
     ElevenLabs.BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost
 > = core.serialization.object({
     url: core.serialization.string(),
+    author: core.serialization.string().optional(),
+    title: core.serialization.string().optional(),
 });
 
 export declare namespace BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost {
     export interface Raw {
         url: string;
+        author?: string | null;
+        title?: string | null;
     }
 }

@@ -21,6 +21,8 @@ export interface BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
     seed?: number;
     /** If true, guarantees that the generated song will be instrumental. If false, the song may or may not be instrumental depending on the `prompt`. Can only be used with `prompt`. */
     forceInstrumental?: boolean;
+    /** Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan`. When set to true, the model will precisely respect each section's `duration_ms` from the plan. When set to false, the model may adjust individual section durations which will generally lead to better generation quality and improved latency, while always preserving the total song duration from the plan. */
+    respectSectionsDurations?: boolean;
     /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting feature. */
     storeForInpainting?: boolean;
     /** Whether to return the timestamps of the words in the generated song. */

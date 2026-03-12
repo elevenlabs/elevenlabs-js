@@ -5991,10 +5991,12 @@ Get distinct users from conversations with pagination.
 ```typescript
 await client.conversationalAi.users.list({
     agentId: "agent_id",
+    branchId: "branch_id",
     callStartBeforeUnix: 1,
     callStartAfterUnix: 1,
     search: "search",
     pageSize: 1,
+    sortBy: "last_contact_unix_secs",
     cursor: "cursor"
 });
 
@@ -17069,6 +17071,61 @@ await client.voices.samples.audio.get("voice_id", "sample_id");
 </details>
 
 ## Workspace Groups
+<details><summary><code>client.workspace.groups.<a href="/src/api/resources/workspace/resources/groups/client/Client.ts">list</a>() -> Record<string, ElevenLabs.WorkspaceGroupResponseModel></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all groups in the workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.groups.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `GroupsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.workspace.groups.<a href="/src/api/resources/workspace/resources/groups/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.WorkspaceGroupByNameResponseModel[]</code></summary>
 <dl>
 <dd>

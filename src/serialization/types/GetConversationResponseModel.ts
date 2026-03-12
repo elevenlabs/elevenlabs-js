@@ -25,6 +25,7 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
         "conversation_initiation_client_data",
         ConversationInitiationClientDataRequestOutput.optional(),
     ),
+    environment: core.serialization.string().optional(),
     conversationId: core.serialization.property("conversation_id", core.serialization.string()),
     hasAudio: core.serialization.property("has_audio", core.serialization.boolean()),
     hasUserAudio: core.serialization.property("has_user_audio", core.serialization.boolean()),
@@ -43,6 +44,7 @@ export declare namespace GetConversationResponseModel {
         metadata: ConversationHistoryMetadataCommonModel.Raw;
         analysis?: ConversationHistoryAnalysisCommonModel.Raw | null;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestOutput.Raw | null;
+        environment?: string | null;
         conversation_id: string;
         has_audio: boolean;
         has_user_audio: boolean;

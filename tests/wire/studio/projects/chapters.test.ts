@@ -18,6 +18,7 @@ describe("ChaptersClient", () => {
                     can_be_downloaded: true,
                     state: "converting",
                     has_video: true,
+                    has_visual_content: true,
                     voice_ids: ["voice_ids"],
                     statistics: {
                         characters_unconverted: 1000,
@@ -52,6 +53,7 @@ describe("ChaptersClient", () => {
                     canBeDownloaded: true,
                     state: "converting",
                     hasVideo: true,
+                    hasVisualContent: true,
                     voiceIds: ["voice_ids"],
                     statistics: {
                         charactersUnconverted: 1000,
@@ -90,6 +92,7 @@ describe("ChaptersClient", () => {
                 can_be_downloaded: true,
                 state: "default",
                 has_video: true,
+                has_visual_content: true,
                 voice_ids: ["voice_ids"],
                 statistics: {
                     characters_unconverted: 100,
@@ -127,6 +130,7 @@ describe("ChaptersClient", () => {
                 canBeDownloaded: true,
                 state: "default",
                 hasVideo: true,
+                hasVisualContent: true,
                 voiceIds: ["voice_ids"],
                 statistics: {
                     charactersUnconverted: 100,
@@ -172,6 +176,7 @@ describe("ChaptersClient", () => {
             can_be_downloaded: true,
             state: "default",
             has_video: true,
+            has_visual_content: true,
             voice_ids: ["voice_ids"],
             statistics: {
                 characters_unconverted: 100,
@@ -202,6 +207,7 @@ describe("ChaptersClient", () => {
             canBeDownloaded: true,
             state: "default",
             hasVideo: true,
+            hasVisualContent: true,
             voiceIds: ["voice_ids"],
             statistics: {
                 charactersUnconverted: 100,
@@ -247,6 +253,7 @@ describe("ChaptersClient", () => {
                 can_be_downloaded: true,
                 state: "default",
                 has_video: true,
+                has_visual_content: true,
                 voice_ids: ["voice_ids"],
                 statistics: {
                     characters_unconverted: 100,
@@ -282,6 +289,7 @@ describe("ChaptersClient", () => {
                 canBeDownloaded: true,
                 state: "default",
                 hasVideo: true,
+                hasVisualContent: true,
                 voiceIds: ["voice_ids"],
                 statistics: {
                     charactersUnconverted: 100,
