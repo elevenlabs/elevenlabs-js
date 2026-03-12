@@ -232,6 +232,7 @@ describe("AgentsClient", () => {
                     phone_number: "phone_number",
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
+                    enable_audio_message_response: true,
                     assigned_agent_name: "assigned_agent_name",
                 },
             ],
@@ -647,7 +648,6 @@ describe("AgentsClient", () => {
             version_id: "version_id",
             branch_id: "branch_id",
             main_branch_id: "main_branch_id",
-            coaching_settings: { type: "coached", memory_base_id: "memory_base_id" },
         };
         server
             .mockEndpoint()
@@ -941,6 +941,7 @@ describe("AgentsClient", () => {
                     phoneNumber: "phone_number",
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
+                    enableAudioMessageResponse: true,
                     assignedAgentName: "assigned_agent_name",
                 },
             ],
@@ -1533,10 +1534,6 @@ describe("AgentsClient", () => {
             versionId: "version_id",
             branchId: "branch_id",
             mainBranchId: "main_branch_id",
-            coachingSettings: {
-                type: "coached",
-                memoryBaseId: "memory_base_id",
-            },
         });
     });
 
@@ -1760,6 +1757,7 @@ describe("AgentsClient", () => {
                     phone_number: "phone_number",
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
+                    enable_audio_message_response: true,
                     assigned_agent_name: "assigned_agent_name",
                 },
             ],
@@ -2175,7 +2173,6 @@ describe("AgentsClient", () => {
             version_id: "version_id",
             branch_id: "branch_id",
             main_branch_id: "main_branch_id",
-            coaching_settings: { type: "coached", memory_base_id: "memory_base_id" },
         };
         server
             .mockEndpoint()
@@ -2470,6 +2467,7 @@ describe("AgentsClient", () => {
                     phoneNumber: "phone_number",
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
+                    enableAudioMessageResponse: true,
                     assignedAgentName: "assigned_agent_name",
                 },
             ],
@@ -3062,10 +3060,6 @@ describe("AgentsClient", () => {
             versionId: "version_id",
             branchId: "branch_id",
             mainBranchId: "main_branch_id",
-            coachingSettings: {
-                type: "coached",
-                memoryBaseId: "memory_base_id",
-            },
         });
     });
 

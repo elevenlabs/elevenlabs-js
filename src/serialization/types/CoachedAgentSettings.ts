@@ -8,11 +8,13 @@ export const CoachedAgentSettings: core.serialization.ObjectSchema<
     serializers.CoachedAgentSettings.Raw,
     ElevenLabs.CoachedAgentSettings
 > = core.serialization.object({
+    type: core.serialization.stringLiteral("coached").optional(),
     memoryBaseId: core.serialization.property("memory_base_id", core.serialization.string().optional()),
 });
 
 export declare namespace CoachedAgentSettings {
     export interface Raw {
+        type?: "coached" | null;
         memory_base_id?: string | null;
     }
 }

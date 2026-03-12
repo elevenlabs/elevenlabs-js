@@ -18,6 +18,7 @@ export const ConversationInitiationSource = {
     FlutterSdk: "flutter_sdk",
     ZendeskIntegration: "zendesk_integration",
     SlackIntegration: "slack_integration",
+    TemplatePreview: "template_preview",
 } as const;
 export type ConversationInitiationSource =
     (typeof ConversationInitiationSource)[keyof typeof ConversationInitiationSource];

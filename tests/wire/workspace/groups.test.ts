@@ -4,6 +4,43 @@ import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
 describe("GroupsClient", () => {
+    test("list", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            key: {
+                name: "name",
+                id: "id",
+                members: ["members"],
+                permissions: ["text_to_speech"],
+                group_usage_limit: "unlimited",
+                character_count: 1,
+                scim_external_id: "scim_external_id",
+            },
+        };
+        server
+            .mockEndpoint()
+            .get("/v1/workspace/groups")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.groups.list();
+        expect(response).toEqual({
+            key: {
+                name: "name",
+                id: "id",
+                members: ["members"],
+                permissions: ["text_to_speech"],
+                groupUsageLimit: "unlimited",
+                characterCount: 1,
+                scimExternalId: "scim_external_id",
+            },
+        });
+    });
+
     test("search", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

@@ -22,5 +22,4 @@ export interface BodyCreateAgentV1ConvaiAgentsCreatePost {
     name?: string;
     /** Tags to help classify and filter the agent */
     tags?: string[];
-    coachingSettings?: ElevenLabs.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePostCoachingSettings;
 }

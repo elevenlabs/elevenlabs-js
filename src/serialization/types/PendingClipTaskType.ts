@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const PendingClipTaskType: core.serialization.Schema<
     serializers.PendingClipTaskType.Raw,
     ElevenLabs.PendingClipTaskType
-> = core.serialization.enum_(["preprocessing", "speech_import", "dubbing", "video_to_music"]);
+> = core.serialization.enum_(["preprocessing", "speech_import", "dubbing", "video_to_music", "media_generation"]);
 
 export declare namespace PendingClipTaskType {
-    export type Raw = "preprocessing" | "speech_import" | "dubbing" | "video_to_music";
+    export type Raw = "preprocessing" | "speech_import" | "dubbing" | "video_to_music" | "media_generation";
 }

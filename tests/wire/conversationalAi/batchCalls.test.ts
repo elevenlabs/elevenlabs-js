@@ -30,6 +30,7 @@ describe("BatchCallsClient", () => {
             status: "pending",
             retry_count: 1,
             telephony_call_config: { ringing_timeout_secs: 1 },
+            target_concurrency_limit: 1,
             agent_name: "agent_name",
         };
         server
@@ -70,6 +71,7 @@ describe("BatchCallsClient", () => {
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
             },
+            targetConcurrencyLimit: 1,
             agentName: "agent_name",
         });
     });
@@ -102,6 +104,7 @@ describe("BatchCallsClient", () => {
                     status: "pending",
                     retry_count: 1,
                     telephony_call_config: {},
+                    target_concurrency_limit: 1,
                     agent_name: "agent_name",
                 },
             ],
@@ -143,6 +146,7 @@ describe("BatchCallsClient", () => {
                     status: "pending",
                     retryCount: 1,
                     telephonyCallConfig: {},
+                    targetConcurrencyLimit: 1,
                     agentName: "agent_name",
                 },
             ],
@@ -177,6 +181,7 @@ describe("BatchCallsClient", () => {
             status: "pending",
             retry_count: 1,
             telephony_call_config: { ringing_timeout_secs: 1 },
+            target_concurrency_limit: 1,
             agent_name: "agent_name",
             recipients: [
                 {
@@ -237,6 +242,7 @@ describe("BatchCallsClient", () => {
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
             },
+            targetConcurrencyLimit: 1,
             agentName: "agent_name",
             recipients: [
                 {
@@ -311,6 +317,7 @@ describe("BatchCallsClient", () => {
             status: "pending",
             retry_count: 1,
             telephony_call_config: { ringing_timeout_secs: 1 },
+            target_concurrency_limit: 1,
             agent_name: "agent_name",
         };
         server
@@ -346,6 +353,7 @@ describe("BatchCallsClient", () => {
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
             },
+            targetConcurrencyLimit: 1,
             agentName: "agent_name",
         });
     });
@@ -376,6 +384,7 @@ describe("BatchCallsClient", () => {
             status: "pending",
             retry_count: 1,
             telephony_call_config: { ringing_timeout_secs: 1 },
+            target_concurrency_limit: 1,
             agent_name: "agent_name",
         };
         server
@@ -411,6 +420,7 @@ describe("BatchCallsClient", () => {
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
             },
+            targetConcurrencyLimit: 1,
             agentName: "agent_name",
         });
     });

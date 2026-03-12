@@ -27,10 +27,12 @@ describe("UsersClient", () => {
 
         const response = await client.conversationalAi.users.list({
             agentId: "agent_id",
+            branchId: "branch_id",
             callStartBeforeUnix: 1,
             callStartAfterUnix: 1,
             search: "search",
             pageSize: 1,
+            sortBy: "last_contact_unix_secs",
             cursor: "cursor",
         });
         expect(response).toEqual({

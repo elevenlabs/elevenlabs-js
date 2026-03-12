@@ -16,6 +16,7 @@ describe("WhatsappAccountsClient", () => {
             phone_number: "phone_number",
             assigned_agent_id: "assigned_agent_id",
             enable_messaging: true,
+            enable_audio_message_response: true,
             assigned_agent_name: "assigned_agent_name",
         };
         server
@@ -35,6 +36,7 @@ describe("WhatsappAccountsClient", () => {
             phoneNumber: "phone_number",
             assignedAgentId: "assigned_agent_id",
             enableMessaging: true,
+            enableAudioMessageResponse: true,
             assignedAgentName: "assigned_agent_name",
         });
     });
@@ -92,6 +94,7 @@ describe("WhatsappAccountsClient", () => {
                     phone_number: "phone_number",
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
+                    enable_audio_message_response: true,
                     assigned_agent_name: "assigned_agent_name",
                 },
             ],
@@ -115,6 +118,7 @@ describe("WhatsappAccountsClient", () => {
                     phoneNumber: "phone_number",
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
+                    enableAudioMessageResponse: true,
                     assignedAgentName: "assigned_agent_name",
                 },
             ],

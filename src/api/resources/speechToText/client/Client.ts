@@ -158,6 +158,10 @@ export class SpeechToTextClient {
                 }
         }
 
+        if (request.noVerbatim != null) {
+            _request.append("no_verbatim", request.noVerbatim.toString());
+        }
+
         if (request.keyterms != null) {
             for (const _item of request.keyterms) {
                 _request.append("keyterms", _item);
