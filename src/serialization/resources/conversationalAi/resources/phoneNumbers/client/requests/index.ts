@@ -1,0 +1,1 @@
+export { UpdatePhoneNumberRequest } from "./UpdatePhoneNumberRequest";

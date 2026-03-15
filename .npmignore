@@ -1,6 +1,6 @@
 node_modules
 src
-tests
+/tests
 .gitignore
 .github
 .fernignore

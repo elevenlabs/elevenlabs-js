@@ -1,0 +1,1 @@
+export { BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost } from "./BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost";

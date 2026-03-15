@@ -1,0 +1,1 @@
+export { PatchConvAiDashboardSettingsRequest } from "./PatchConvAiDashboardSettingsRequest";

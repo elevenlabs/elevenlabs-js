@@ -1,0 +1,4 @@
+export type { BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost";
+export type { BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost";
+export type { BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch } from "./BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch";
+export type { PronunciationDictionariesListRequest } from "./PronunciationDictionariesListRequest";

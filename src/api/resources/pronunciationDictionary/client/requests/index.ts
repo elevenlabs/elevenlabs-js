@@ -1,4 +1,0 @@
-export { type BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost";
-export { type PronunciationDictionary } from "./PronunciationDictionary";
-export { type BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost } from "./BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdRemoveRulesPost";
-export { type PronunciationDictionaryGetAllRequest } from "./PronunciationDictionaryGetAllRequest";

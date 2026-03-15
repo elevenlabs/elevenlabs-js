@@ -3,8 +3,13 @@
 README.md
 assets/
 
-test/
-jest.config.js
+tests/custom/
 
 src/wrapper
 src/index.ts
+
+.github/workflows
+.npmignore
+
+src/api/resources/conversationalAi/conversation
+tests/wire/conversationalAi/mcpServers/tools.test.ts

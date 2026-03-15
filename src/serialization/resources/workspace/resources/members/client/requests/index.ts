@@ -1,0 +1,1 @@
+export { UpdateMemberRequest } from "./UpdateMemberRequest";

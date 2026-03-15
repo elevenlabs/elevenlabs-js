@@ -1,0 +1,3 @@
+export { BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost } from "./BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost";
+export { BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost } from "./BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost";
+export { BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch } from "./BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch";
