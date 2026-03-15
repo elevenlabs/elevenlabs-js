@@ -41,6 +41,19 @@ yarn add @elevenlabs/elevenlabs-js
     - Supports 32 languages
 
 For more detailed information about these models and others, visit the [ElevenLabs Models documentation](https://elevenlabs.io/docs/models).
+### Main Models
+
+1. **Eleven Multilingual v2** (`eleven_multilingual_v2`)
+   - Excels in stability, language diversity, and accent accuracy
+   - Supports 29 languages
+   - Recommended for most use cases
+
+2. **Eleven Turbo v2.5** (`eleven_turbo_v2_5`)
+   - High quality, lowest latency
+   - Ideal for developer use cases where speed is crucial
+   - Supports 32 languages
+
+For more detailed information about these models and others, visit the [ElevenLabs Models documentation](https://elevenlabs.io/docs/speech-synthesis/models).
 
 ```ts
 import { ElevenLabsClient, play } from "@elevenlabs/elevenlabs-js";
