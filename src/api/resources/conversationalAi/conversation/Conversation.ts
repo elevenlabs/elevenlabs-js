@@ -13,6 +13,7 @@ import {
     ConversationInitiationClientDataEvent,
     UserAudioChunkEvent,
     PongEvent,
+    MultimodalMessageClientToOrchestratorEvent,
 } from "./events";
 import { WebSocketFactory, WebSocketInterface, DefaultWebSocketFactory } from "./interfaces/WebSocketInterface";
 import { ConversationClient } from "./interfaces/ConversationClient";
@@ -165,6 +166,32 @@ export class Conversation extends EventEmitter {
 
         const event: UserActivityClientToOrchestratorEvent = {
             type: ClientToOrchestratorEvent.USER_ACTIVITY,
+        };
+
+        this.ws.send(JSON.stringify(event));
+    }
+
+    /**
+     * Send a multimodal message combining text and a file reference to the agent.
+     *
+     * At least one of `text` or `fileId` must be provided.
+     *
+     * @param options.text Optional text message to include
+     * @param options.fileId Optional ElevenLabs file ID to include
+     */
+    public sendMultimodalMessage(options: { text?: string; fileId?: string }): void {
+        if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
+            throw new Error("Session not started or websocket not connected");
+        }
+
+        if (!options.text && !options.fileId) {
+            throw new Error("At least one of text or fileId must be provided");
+        }
+
+        const event: MultimodalMessageClientToOrchestratorEvent = {
+            type: ClientToOrchestratorEvent.MULTIMODAL_MESSAGE,
+            ...(options.text && { text: { type: ClientToOrchestratorEvent.USER_MESSAGE, text: options.text } }),
+            ...(options.fileId && { file: { type: "file_input", file_id: options.fileId } }),
         };
 
         this.ws.send(JSON.stringify(event));

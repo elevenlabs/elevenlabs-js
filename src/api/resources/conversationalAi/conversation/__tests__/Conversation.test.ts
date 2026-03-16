@@ -206,6 +206,46 @@ describe("Conversation", () => {
             );
         });
 
+        it("should send multimodal message with text and file", () => {
+            conversation.sendMultimodalMessage({ text: "What is in this file?", fileId: "file_abc123" });
+
+            expect(mockWebSocket.send).toHaveBeenCalledWith(
+                JSON.stringify({
+                    type: "multimodal_message",
+                    text: { type: "user_message", text: "What is in this file?" },
+                    file: { type: "file_input", file_id: "file_abc123" },
+                }),
+            );
+        });
+
+        it("should send multimodal message with text only", () => {
+            conversation.sendMultimodalMessage({ text: "Hello" });
+
+            expect(mockWebSocket.send).toHaveBeenCalledWith(
+                JSON.stringify({
+                    type: "multimodal_message",
+                    text: { type: "user_message", text: "Hello" },
+                }),
+            );
+        });
+
+        it("should send multimodal message with file only", () => {
+            conversation.sendMultimodalMessage({ fileId: "file_abc123" });
+
+            expect(mockWebSocket.send).toHaveBeenCalledWith(
+                JSON.stringify({
+                    type: "multimodal_message",
+                    file: { type: "file_input", file_id: "file_abc123" },
+                }),
+            );
+        });
+
+        it("should throw error when sending multimodal message without text or fileId", () => {
+            expect(() => conversation.sendMultimodalMessage({})).toThrow(
+                "At least one of text or fileId must be provided",
+            );
+        });
+
         it("should throw error when sending message without active session", () => {
             conversation.endSession();
 
