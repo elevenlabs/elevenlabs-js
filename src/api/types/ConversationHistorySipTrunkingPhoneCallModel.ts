@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../index";
 
 export interface ConversationHistorySipTrunkingPhoneCallModel {
-    direction: ElevenLabs.ConversationHistorySipTrunkingPhoneCallModelDirection;
+    direction: ElevenLabs.TelephonyDirection;
     phoneNumberId: string;
     agentNumber: string;
     externalNumber: string;

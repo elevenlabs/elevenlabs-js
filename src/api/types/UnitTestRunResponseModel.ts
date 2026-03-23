@@ -16,4 +16,7 @@ export interface UnitTestRunResponseModel {
     conditionResult?: ElevenLabs.TestConditionResultCommonModel;
     lastUpdatedAtUnix?: number;
     metadata?: ElevenLabs.TestRunMetadata;
+    rootFolderId?: string;
+    rootFolderName?: string;
+    environment?: string;
 }

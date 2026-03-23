@@ -178,6 +178,7 @@ describe("AgentsClient", () => {
                     attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
                 },
                 archived: true,
+                guardrails: { version: "1" },
                 summary_language: "summary_language",
                 auth: {
                     enable_auth: true,
@@ -872,6 +873,9 @@ describe("AgentsClient", () => {
                     ],
                 },
                 archived: true,
+                guardrails: {
+                    version: "1",
+                },
                 summaryLanguage: "summary_language",
                 auth: {
                     enableAuth: true,
@@ -1703,6 +1707,7 @@ describe("AgentsClient", () => {
                     attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
                 },
                 archived: true,
+                guardrails: { version: "1" },
                 summary_language: "summary_language",
                 auth: {
                     enable_auth: true,
@@ -2398,6 +2403,9 @@ describe("AgentsClient", () => {
                     ],
                 },
                 archived: true,
+                guardrails: {
+                    version: "1",
+                },
                 summaryLanguage: "summary_language",
                 auth: {
                     enableAuth: true,
@@ -3094,6 +3102,7 @@ describe("AgentsClient", () => {
             search: "search",
             archived: true,
             showOnlyOwnedAgents: true,
+            createdByUserId: "created_by_user_id",
             sortDirection: "asc",
             sortBy: "name",
             cursor: "cursor",
@@ -3391,6 +3400,7 @@ describe("AgentsClient", () => {
             agent_id: "agent_id",
             branch_id: "branch_id",
             created_at: 1,
+            folder_id: "folder_id",
             test_runs: [
                 {
                     test_run_id: "test_run_id",
@@ -3410,6 +3420,9 @@ describe("AgentsClient", () => {
                         test_name: "test_name",
                         ran_by_user_email: "ran_by_user_email",
                     },
+                    root_folder_id: "root_folder_id",
+                    root_folder_name: "root_folder_name",
+                    environment: "environment",
                 },
             ],
         };
@@ -3434,6 +3447,7 @@ describe("AgentsClient", () => {
             agentId: "agent_id",
             branchId: "branch_id",
             createdAt: 1,
+            folderId: "folder_id",
             testRuns: [
                 {
                     testRunId: "test_run_id",
@@ -3462,6 +3476,9 @@ describe("AgentsClient", () => {
                         testName: "test_name",
                         ranByUserEmail: "ran_by_user_email",
                     },
+                    rootFolderId: "root_folder_id",
+                    rootFolderName: "root_folder_name",
+                    environment: "environment",
                 },
             ],
         });

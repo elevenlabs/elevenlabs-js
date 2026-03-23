@@ -18,5 +18,5 @@ export interface WebhookToolApiSchemaConfigOutput {
     /** Content type for the request body. Only applies to POST/PUT/PATCH requests. */
     contentType?: ElevenLabs.WebhookToolApiSchemaConfigOutputContentType;
     /** Optional auth connection to use for authentication with this webhook */
-    authConnection?: ElevenLabs.AuthConnectionLocator;
+    authConnection?: ElevenLabs.WebhookToolApiSchemaConfigOutputAuthConnection;
 }

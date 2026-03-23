@@ -14,4 +14,5 @@ export interface GetKnowledgeBaseUrlResponseModel {
     folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentResponseModel[];
     url: string;
     extractedInnerHtml: string;
+    autoSyncInfo?: ElevenLabs.AutoSyncInfo;
 }

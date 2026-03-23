@@ -48,6 +48,7 @@ export class KnowledgeBaseClient {
      *         pageSize: 1,
      *         search: "search",
      *         showOnlyOwnedDocuments: true,
+     *         createdByUserId: "created_by_user_id",
      *         parentFolderId: "parent_folder_id",
      *         ancestorFolderId: "ancestor_folder_id",
      *         foldersFirst: true,
@@ -71,6 +72,7 @@ export class KnowledgeBaseClient {
             pageSize,
             search,
             showOnlyOwnedDocuments,
+            createdByUserId,
             types,
             parentFolderId,
             ancestorFolderId,
@@ -90,6 +92,10 @@ export class KnowledgeBaseClient {
 
         if (showOnlyOwnedDocuments != null) {
             _queryParams.show_only_owned_documents = showOnlyOwnedDocuments.toString();
+        }
+
+        if (createdByUserId != null) {
+            _queryParams.created_by_user_id = createdByUserId;
         }
 
         if (types != null) {

@@ -49,6 +49,7 @@ describe("HistoryClient", () => {
                         },
                     },
                     dialogue: [{ text: "text", voice_id: "voice_id", voice_name: "voice_name" }],
+                    output_format: "output_format",
                 },
             ],
             last_history_item_id: "ja9xsmfGhxYcymxGcOGB",
@@ -120,6 +121,7 @@ describe("HistoryClient", () => {
                             voiceName: "voice_name",
                         },
                     ],
+                    outputFormat: "output_format",
                 },
             ],
             lastHistoryItemId: "ja9xsmfGhxYcymxGcOGB",
@@ -171,6 +173,7 @@ describe("HistoryClient", () => {
                 },
             },
             dialogue: [{ text: "text", voice_id: "voice_id", voice_name: "voice_name" }],
+            output_format: "output_format",
         };
         server
             .mockEndpoint()
@@ -231,6 +234,7 @@ describe("HistoryClient", () => {
                     voiceName: "voice_name",
                 },
             ],
+            outputFormat: "output_format",
         });
     });
 

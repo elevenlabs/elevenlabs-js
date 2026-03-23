@@ -55,6 +55,8 @@ describe("StudioClient", () => {
                     text_align: "start",
                     text_style: "normal",
                     text_weight: "normal",
+                    text_transform: "none",
+                    text_blend_mode: "normal",
                     text_shadow: {
                         enabled: true,
                         color: "color",
@@ -159,6 +161,8 @@ describe("StudioClient", () => {
                     textAlign: "start",
                     textStyle: "normal",
                     textWeight: "normal",
+                    textTransform: "none",
+                    textBlendMode: "normal",
                     textShadow: {
                         enabled: true,
                         color: "color",

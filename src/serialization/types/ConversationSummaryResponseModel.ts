@@ -4,9 +4,9 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationInitiationSource } from "./ConversationInitiationSource";
-import { ConversationSummaryResponseModelDirection } from "./ConversationSummaryResponseModelDirection";
 import { ConversationSummaryResponseModelStatus } from "./ConversationSummaryResponseModelStatus";
 import { EvaluationSuccessResult } from "./EvaluationSuccessResult";
+import { TelephonyDirection } from "./TelephonyDirection";
 
 export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     serializers.ConversationSummaryResponseModel.Raw,
@@ -21,6 +21,7 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     callDurationSecs: core.serialization.property("call_duration_secs", core.serialization.number()),
     messageCount: core.serialization.property("message_count", core.serialization.number()),
     status: ConversationSummaryResponseModelStatus,
+    terminationReason: core.serialization.property("termination_reason", core.serialization.string().optional()),
     callSuccessful: core.serialization.property("call_successful", EvaluationSuccessResult),
     transcriptSummary: core.serialization.property("transcript_summary", core.serialization.string().optional()),
     callSummaryTitle: core.serialization.property("call_summary_title", core.serialization.string().optional()),
@@ -33,7 +34,7 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
         "tool_names",
         core.serialization.list(core.serialization.string()).optional(),
     ),
-    direction: ConversationSummaryResponseModelDirection.optional(),
+    direction: TelephonyDirection.optional(),
     rating: core.serialization.number().optional(),
 });
 
@@ -48,13 +49,14 @@ export declare namespace ConversationSummaryResponseModel {
         call_duration_secs: number;
         message_count: number;
         status: ConversationSummaryResponseModelStatus.Raw;
+        termination_reason?: string | null;
         call_successful: EvaluationSuccessResult.Raw;
         transcript_summary?: string | null;
         call_summary_title?: string | null;
         main_language?: string | null;
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
         tool_names?: string[] | null;
-        direction?: ConversationSummaryResponseModelDirection.Raw | null;
+        direction?: TelephonyDirection.Raw | null;
         rating?: number | null;
     }
 }

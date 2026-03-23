@@ -6,7 +6,7 @@ import * as path from "node:path";
 import crypto from "node:crypto";
 
 const IN_GITHUB = process.env.GITHUB_ACTIONS !== undefined;
-const DEFAULT_VOICE = "21m00Tcm4TlvDq8ikWAM";
+const DEFAULT_VOICE = "eLDc7xhWxG2FElT3kUTj";
 const DEFAULT_TEXT = "Hello";
 const DEFAULT_MODEL = "eleven_multilingual_v2";
 const DEFAULT_VOICE_FILE = path.join(__dirname, "./fixtures/voice_sample.mp3");

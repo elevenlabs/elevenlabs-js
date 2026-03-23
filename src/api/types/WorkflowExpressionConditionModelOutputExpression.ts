@@ -8,6 +8,7 @@ import type * as ElevenLabs from "../index";
 export type WorkflowExpressionConditionModelOutputExpression =
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.AndOperator
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.BooleanLiteral
+    | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.ConditionalOperator
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.DynamicVariable
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.EqOperator
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.GtOperator
@@ -27,6 +28,10 @@ export namespace WorkflowExpressionConditionModelOutputExpression {
 
     export interface BooleanLiteral extends ElevenLabs.AstBooleanNodeOutput {
         type: "boolean_literal";
+    }
+
+    export interface ConditionalOperator extends ElevenLabs.AstConditionalOperatorNodeOutput {
+        type: "conditional_operator";
     }
 
     export interface DynamicVariable extends ElevenLabs.AstDynamicVariableNodeOutput {

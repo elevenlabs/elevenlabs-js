@@ -45,6 +45,7 @@ describe("ToolsClient", () => {
             search: "search",
             pageSize: 1,
             showOnlyOwnedDocuments: true,
+            createdByUserId: "created_by_user_id",
             sortDirection: "asc",
             sortBy: "name",
             cursor: "cursor",
@@ -307,7 +308,9 @@ describe("ToolsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.tools.delete("tool_id");
+        const response = await client.conversationalAi.tools.delete("tool_id", {
+            force: true,
+        });
         expect(response).toEqual({
             key: "value",
         });

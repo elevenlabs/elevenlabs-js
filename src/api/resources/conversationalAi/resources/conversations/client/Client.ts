@@ -59,7 +59,8 @@ export class ConversationsClient {
      *     await client.conversationalAi.conversations.getSignedUrl({
      *         agentId: "21m00Tcm4TlvDq8ikWAM",
      *         includeConversationId: true,
-     *         branchId: "branch_id"
+     *         branchId: "branch_id",
+     *         environment: "environment"
      *     })
      */
     public getSignedUrl(
@@ -73,7 +74,7 @@ export class ConversationsClient {
         request: ElevenLabs.conversationalAi.ConversationsGetSignedUrlRequest,
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ConversationSignedUrlResponseModel>> {
-        const { agentId, includeConversationId, branchId } = request;
+        const { agentId, includeConversationId, branchId, environment } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams.agent_id = agentId;
         if (includeConversationId != null) {
@@ -82,6 +83,10 @@ export class ConversationsClient {
 
         if (branchId != null) {
             _queryParams.branch_id = branchId;
+        }
+
+        if (environment != null) {
+            _queryParams.environment = environment;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -158,7 +163,8 @@ export class ConversationsClient {
      *     await client.conversationalAi.conversations.getWebrtcToken({
      *         agentId: "21m00Tcm4TlvDq8ikWAM",
      *         participantName: "participant_name",
-     *         branchId: "branch_id"
+     *         branchId: "branch_id",
+     *         environment: "environment"
      *     })
      */
     public getWebrtcToken(
@@ -172,7 +178,7 @@ export class ConversationsClient {
         request: ElevenLabs.conversationalAi.ConversationsGetWebrtcTokenRequest,
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.TokenResponseModel>> {
-        const { agentId, participantName, branchId } = request;
+        const { agentId, participantName, branchId, environment } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams.agent_id = agentId;
         if (participantName != null) {
@@ -181,6 +187,10 @@ export class ConversationsClient {
 
         if (branchId != null) {
             _queryParams.branch_id = branchId;
+        }
+
+        if (environment != null) {
+            _queryParams.environment = environment;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -294,6 +304,8 @@ export class ConversationsClient {
             evaluationParams,
             dataCollectionParams,
             toolNames,
+            toolNamesSuccessful,
+            toolNamesErrored,
             mainLanguages,
             pageSize,
             summaryMode,
@@ -369,6 +381,22 @@ export class ConversationsClient {
                 _queryParams.tool_names = toolNames.map((item) => item);
             } else {
                 _queryParams.tool_names = toolNames;
+            }
+        }
+
+        if (toolNamesSuccessful != null) {
+            if (Array.isArray(toolNamesSuccessful)) {
+                _queryParams.tool_names_successful = toolNamesSuccessful.map((item) => item);
+            } else {
+                _queryParams.tool_names_successful = toolNamesSuccessful;
+            }
+        }
+
+        if (toolNamesErrored != null) {
+            if (Array.isArray(toolNamesErrored)) {
+                _queryParams.tool_names_errored = toolNamesErrored.map((item) => item);
+            } else {
+                _queryParams.tool_names_errored = toolNamesErrored;
             }
         }
 

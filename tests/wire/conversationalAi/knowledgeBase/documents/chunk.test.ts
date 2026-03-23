@@ -20,6 +20,9 @@ describe("ChunkClient", () => {
         const response = await client.conversationalAi.knowledgeBase.documents.chunk.get(
             "21m00Tcm4TlvDq8ikWAM",
             "chunk_id",
+            {
+                embeddingModel: "e5_mistral_7b_instruct",
+            },
         );
         expect(response).toEqual({
             id: "id",

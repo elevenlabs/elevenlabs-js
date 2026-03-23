@@ -5,5 +5,5 @@ import type * as ElevenLabs from "../index";
 export type WorkflowToolNestedToolsStepModelInputResultsItem =
     | ElevenLabs.ConversationHistoryTranscriptOtherToolsResultCommonModel
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInput
-    | ElevenLabs.ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel
+    | ElevenLabs.ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModelInput
     | ElevenLabs.ConversationHistoryTranscriptWorkflowToolsResultCommonModelInput;

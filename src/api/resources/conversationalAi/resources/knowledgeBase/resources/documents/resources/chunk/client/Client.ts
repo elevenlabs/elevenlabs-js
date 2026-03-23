@@ -28,26 +28,39 @@ export class ChunkClient {
      *
      * @param {string} documentation_id - The id of a document from the knowledge base. This is returned on document addition.
      * @param {string} chunk_id - The id of a document RAG chunk from the knowledge base.
+     * @param {ElevenLabs.conversationalAi.knowledgeBase.documents.ChunkGetRequest} request
      * @param {ChunkClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8ikWAM", "chunk_id")
+     *     await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8ikWAM", "chunk_id", {
+     *         embeddingModel: "e5_mistral_7b_instruct"
+     *     })
      */
     public get(
         documentation_id: string,
         chunk_id: string,
+        request: ElevenLabs.conversationalAi.knowledgeBase.documents.ChunkGetRequest = {},
         requestOptions?: ChunkClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.KnowledgeBaseDocumentChunkResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__get(documentation_id, chunk_id, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(documentation_id, chunk_id, request, requestOptions));
     }
 
     private async __get(
         documentation_id: string,
         chunk_id: string,
+        request: ElevenLabs.conversationalAi.knowledgeBase.documents.ChunkGetRequest = {},
         requestOptions?: ChunkClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.KnowledgeBaseDocumentChunkResponseModel>> {
+        const { embeddingModel } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (embeddingModel != null) {
+            _queryParams.embedding_model = serializers.EmbeddingModelEnum.jsonOrThrow(embeddingModel, {
+                unrecognizedObjectKeys: "strip",
+            });
+        }
+
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -62,7 +75,7 @@ export class ChunkClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

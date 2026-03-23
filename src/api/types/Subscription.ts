@@ -51,4 +51,8 @@ export interface Subscription {
     hasOpenInvoices: boolean;
     /** The pending change for the user. */
     pendingChange?: ElevenLabs.ExtendedSubscriptionResponseModelPendingChange;
+    /** True if any workspace owned by this user's auth account has redeemed the starter first-month discount coupon. */
+    hasUsedStarterCouponOnAccount?: boolean;
+    /** True if any workspace owned by this user's auth account has redeemed the creator first-month discount coupon. */
+    hasUsedCreatorCouponOnAccount?: boolean;
 }

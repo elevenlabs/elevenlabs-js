@@ -5,6 +5,7 @@ import type * as ElevenLabs from "../index";
 export type AstOrOperatorNodeInputChildrenItem =
     | ElevenLabs.AstOrOperatorNodeInputChildrenItem.AndOperator
     | ElevenLabs.AstOrOperatorNodeInputChildrenItem.BooleanLiteral
+    | ElevenLabs.AstOrOperatorNodeInputChildrenItem.ConditionalOperator
     | ElevenLabs.AstOrOperatorNodeInputChildrenItem.DynamicVariable
     | ElevenLabs.AstOrOperatorNodeInputChildrenItem.EqOperator
     | ElevenLabs.AstOrOperatorNodeInputChildrenItem.GtOperator
@@ -26,6 +27,10 @@ export namespace AstOrOperatorNodeInputChildrenItem {
         type: "boolean_literal";
     }
 
+    export interface ConditionalOperator extends ElevenLabs.AstConditionalOperatorNodeInput {
+        type: "conditional_operator";
+    }
+
     export interface DynamicVariable extends ElevenLabs.AstDynamicVariableNodeInput {
         type: "dynamic_variable";
     }
@@ -42,8 +47,9 @@ export namespace AstOrOperatorNodeInputChildrenItem {
         type: "gte_operator";
     }
 
-    export interface Llm extends ElevenLabs.AstllmNodeInput {
+    export interface Llm {
         type: "llm";
+        value: ElevenLabs.AstllmNodeInput;
     }
 
     export interface LtOperator extends ElevenLabs.AstLessThanOperatorNodeInput {

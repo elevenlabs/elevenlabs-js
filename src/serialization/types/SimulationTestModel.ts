@@ -28,6 +28,10 @@ export const SimulationTestModel: core.serialization.ObjectSchema<
     successCondition: core.serialization.property("success_condition", core.serialization.string().optional()),
     simulationScenario: core.serialization.property("simulation_scenario", core.serialization.string().optional()),
     simulationMaxTurns: core.serialization.property("simulation_max_turns", core.serialization.number().optional()),
+    simulationEnvironment: core.serialization.property(
+        "simulation_environment",
+        core.serialization.string().optional(),
+    ),
 });
 
 export declare namespace SimulationTestModel {
@@ -38,5 +42,6 @@ export declare namespace SimulationTestModel {
         success_condition?: string | null;
         simulation_scenario?: string | null;
         simulation_max_turns?: number | null;
+        simulation_environment?: string | null;
     }
 }

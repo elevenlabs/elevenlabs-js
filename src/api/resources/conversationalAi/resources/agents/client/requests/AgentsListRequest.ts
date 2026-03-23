@@ -9,6 +9,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         search: "search",
  *         archived: true,
  *         showOnlyOwnedAgents: true,
+ *         createdByUserId: "created_by_user_id",
  *         sortDirection: "asc",
  *         sortBy: "name",
  *         cursor: "cursor"
@@ -21,8 +22,10 @@ export interface AgentsListRequest {
     search?: string;
     /** Filter agents by archived status */
     archived?: boolean;
-    /** If set to true, the endpoint will omit any agents that were shared with you by someone else and include only the ones you own */
+    /** If set to true, the endpoint will omit any agents that were shared with you by someone else and include only the ones you own. Deprecated: use created_by_user_id instead. */
     showOnlyOwnedAgents?: boolean;
+    /** Filter agents by creator user ID. When set, only agents created by this user are returned. Takes precedence over show_only_owned_agents. Use '@me' to refer to the authenticated user. */
+    createdByUserId?: string;
     /** The direction to sort the results */
     sortDirection?: ElevenLabs.SortDirection;
     /** The field to sort the results by */

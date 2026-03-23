@@ -5,6 +5,7 @@ import type * as ElevenLabs from "../index";
 export type AstOrOperatorNodeOutputChildrenItem =
     | ElevenLabs.AstOrOperatorNodeOutputChildrenItem.AndOperator
     | ElevenLabs.AstOrOperatorNodeOutputChildrenItem.BooleanLiteral
+    | ElevenLabs.AstOrOperatorNodeOutputChildrenItem.ConditionalOperator
     | ElevenLabs.AstOrOperatorNodeOutputChildrenItem.DynamicVariable
     | ElevenLabs.AstOrOperatorNodeOutputChildrenItem.EqOperator
     | ElevenLabs.AstOrOperatorNodeOutputChildrenItem.GtOperator
@@ -24,6 +25,10 @@ export namespace AstOrOperatorNodeOutputChildrenItem {
 
     export interface BooleanLiteral extends ElevenLabs.AstBooleanNodeOutput {
         type: "boolean_literal";
+    }
+
+    export interface ConditionalOperator extends ElevenLabs.AstConditionalOperatorNodeOutput {
+        type: "conditional_operator";
     }
 
     export interface DynamicVariable extends ElevenLabs.AstDynamicVariableNodeOutput {

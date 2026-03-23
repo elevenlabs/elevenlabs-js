@@ -16,11 +16,14 @@ export const AstNotEqualsOperatorNodeInputLeft: core.serialization.Schema<
     .union("type", {
         and_operator: core.serialization.lazyObject(() => serializers.AstAndOperatorNodeInput),
         boolean_literal: AstBooleanNodeInput,
+        conditional_operator: core.serialization.lazyObject(() => serializers.AstConditionalOperatorNodeInput),
         dynamic_variable: AstDynamicVariableNodeInput,
         eq_operator: core.serialization.lazyObject(() => serializers.AstEqualsOperatorNodeInput),
         gt_operator: core.serialization.lazyObject(() => serializers.AstGreaterThanOperatorNodeInput),
         gte_operator: core.serialization.lazyObject(() => serializers.AstGreaterThanOrEqualsOperatorNodeInput),
-        llm: AstllmNodeInput,
+        llm: core.serialization.object({
+            value: AstllmNodeInput,
+        }),
         lt_operator: core.serialization.lazyObject(() => serializers.AstLessThanOperatorNodeInput),
         lte_operator: core.serialization.lazyObject(() => serializers.AstLessThanOrEqualsOperatorNodeInput),
         neq_operator: core.serialization.lazyObject(() => serializers.AstNotEqualsOperatorNodeInput),
@@ -37,6 +40,7 @@ export declare namespace AstNotEqualsOperatorNodeInputLeft {
     export type Raw =
         | AstNotEqualsOperatorNodeInputLeft.AndOperator
         | AstNotEqualsOperatorNodeInputLeft.BooleanLiteral
+        | AstNotEqualsOperatorNodeInputLeft.ConditionalOperator
         | AstNotEqualsOperatorNodeInputLeft.DynamicVariable
         | AstNotEqualsOperatorNodeInputLeft.EqOperator
         | AstNotEqualsOperatorNodeInputLeft.GtOperator
@@ -57,6 +61,10 @@ export declare namespace AstNotEqualsOperatorNodeInputLeft {
         type: "boolean_literal";
     }
 
+    export interface ConditionalOperator extends serializers.AstConditionalOperatorNodeInput.Raw {
+        type: "conditional_operator";
+    }
+
     export interface DynamicVariable extends AstDynamicVariableNodeInput.Raw {
         type: "dynamic_variable";
     }
@@ -73,8 +81,9 @@ export declare namespace AstNotEqualsOperatorNodeInputLeft {
         type: "gte_operator";
     }
 
-    export interface Llm extends AstllmNodeInput.Raw {
+    export interface Llm {
         type: "llm";
+        value: AstllmNodeInput.Raw;
     }
 
     export interface LtOperator extends serializers.AstLessThanOperatorNodeInput.Raw {

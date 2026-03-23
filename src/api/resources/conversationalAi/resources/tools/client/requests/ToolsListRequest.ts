@@ -8,6 +8,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         search: "search",
  *         pageSize: 1,
  *         showOnlyOwnedDocuments: true,
+ *         createdByUserId: "created_by_user_id",
  *         sortDirection: "asc",
  *         sortBy: "name",
  *         cursor: "cursor"
@@ -18,8 +19,10 @@ export interface ToolsListRequest {
     search?: string;
     /** How many documents to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
-    /** If set to true, the endpoint will return only tools owned by you (and not shared from somebody else). */
+    /** If set to true, the endpoint will return only tools owned by you (and not shared from somebody else). Deprecated: use created_by_user_id instead. */
     showOnlyOwnedDocuments?: boolean;
+    /** Filter tools by creator user ID. When set, only tools created by this user are returned. Takes precedence over show_only_owned_documents. Use '@me' to refer to the authenticated user. */
+    createdByUserId?: string;
     /** If present, the endpoint will return only tools of the given types. */
     types?: ElevenLabs.ToolTypeFilter | ElevenLabs.ToolTypeFilter[];
     /** The direction to sort the results */

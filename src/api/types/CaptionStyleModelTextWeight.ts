@@ -3,6 +3,7 @@
 export const CaptionStyleModelTextWeight = {
     Normal: "normal",
     Bold: "bold",
+    NineHundred: "900",
 } as const;
 export type CaptionStyleModelTextWeight =
     (typeof CaptionStyleModelTextWeight)[keyof typeof CaptionStyleModelTextWeight];

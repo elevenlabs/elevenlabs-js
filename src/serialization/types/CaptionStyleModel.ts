@@ -6,7 +6,9 @@ import type * as serializers from "../index";
 import { CaptionStyleCharacterAnimationModel } from "./CaptionStyleCharacterAnimationModel";
 import { CaptionStyleHorizontalPlacementModel } from "./CaptionStyleHorizontalPlacementModel";
 import { CaptionStyleModelTextAlign } from "./CaptionStyleModelTextAlign";
+import { CaptionStyleModelTextBlendMode } from "./CaptionStyleModelTextBlendMode";
 import { CaptionStyleModelTextStyle } from "./CaptionStyleModelTextStyle";
+import { CaptionStyleModelTextTransform } from "./CaptionStyleModelTextTransform";
 import { CaptionStyleModelTextWeight } from "./CaptionStyleModelTextWeight";
 import { CaptionStyleSectionAnimationModel } from "./CaptionStyleSectionAnimationModel";
 import { CaptionStyleTemplateModel } from "./CaptionStyleTemplateModel";
@@ -26,6 +28,8 @@ export const CaptionStyleModel: core.serialization.ObjectSchema<
     textAlign: core.serialization.property("text_align", CaptionStyleModelTextAlign.optional()),
     textStyle: core.serialization.property("text_style", CaptionStyleModelTextStyle.optional()),
     textWeight: core.serialization.property("text_weight", CaptionStyleModelTextWeight.optional()),
+    textTransform: core.serialization.property("text_transform", CaptionStyleModelTextTransform.optional()),
+    textBlendMode: core.serialization.property("text_blend_mode", CaptionStyleModelTextBlendMode.optional()),
     textShadow: core.serialization.property("text_shadow", StudioTextStyleShadowModel.optional()),
     textOutline: core.serialization.property("text_outline", StudioTextStyleOutlineModel.optional()),
     backgroundEnabled: core.serialization.property("background_enabled", core.serialization.boolean().optional()),
@@ -70,6 +74,8 @@ export declare namespace CaptionStyleModel {
         text_align?: CaptionStyleModelTextAlign.Raw | null;
         text_style?: CaptionStyleModelTextStyle.Raw | null;
         text_weight?: CaptionStyleModelTextWeight.Raw | null;
+        text_transform?: CaptionStyleModelTextTransform.Raw | null;
+        text_blend_mode?: CaptionStyleModelTextBlendMode.Raw | null;
         text_shadow?: StudioTextStyleShadowModel.Raw | null;
         text_outline?: StudioTextStyleOutlineModel.Raw | null;
         background_enabled?: boolean | null;

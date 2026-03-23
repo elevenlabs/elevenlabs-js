@@ -5,7 +5,8 @@
  *     {
  *         agentId: "21m00Tcm4TlvDq8ikWAM",
  *         participantName: "participant_name",
- *         branchId: "branch_id"
+ *         branchId: "branch_id",
+ *         environment: "environment"
  *     }
  */
 export interface ConversationsGetWebrtcTokenRequest {
@@ -15,4 +16,6 @@ export interface ConversationsGetWebrtcTokenRequest {
     participantName?: string;
     /** The ID of the branch to use */
     branchId?: string;
+    /** The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'. */
+    environment?: string;
 }

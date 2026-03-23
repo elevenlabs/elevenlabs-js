@@ -63,6 +63,14 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
             "pending_change",
             ExtendedSubscriptionResponseModelPendingChange.optional(),
         ),
+        hasUsedStarterCouponOnAccount: core.serialization.property(
+            "has_used_starter_coupon_on_account",
+            core.serialization.boolean().optional(),
+        ),
+        hasUsedCreatorCouponOnAccount: core.serialization.property(
+            "has_used_creator_coupon_on_account",
+            core.serialization.boolean().optional(),
+        ),
     });
 
 export declare namespace Subscription {
@@ -91,5 +99,7 @@ export declare namespace Subscription {
         open_invoices: InvoiceResponse.Raw[];
         has_open_invoices: boolean;
         pending_change?: ExtendedSubscriptionResponseModelPendingChange.Raw | null;
+        has_used_starter_coupon_on_account?: boolean | null;
+        has_used_creator_coupon_on_account?: boolean | null;
     }
 }

@@ -13,4 +13,5 @@ export interface GetKnowledgeBaseFolderResponseModel {
     /** The folder path segments leading to this entity, from root to parent folder. */
     folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentResponseModel[];
     childrenCount: number;
+    autoSyncInfo?: ElevenLabs.AutoSyncInfo;
 }

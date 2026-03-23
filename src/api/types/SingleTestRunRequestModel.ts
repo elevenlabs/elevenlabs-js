@@ -5,4 +5,8 @@ export interface SingleTestRunRequestModel {
     testId: string;
     /** ID of the workflow node to run the test on. If not provided, the test will be run on the agent's default workflow node. */
     workflowNodeId?: string;
+    /** ID of the root folder to run the test on. If not provided, the test will be run on the agent's default folder. */
+    rootFolderId?: string;
+    /** Name of the root folder to run the test on. If not provided, the test will be run on the agent's default folder. */
+    rootFolderName?: string;
 }

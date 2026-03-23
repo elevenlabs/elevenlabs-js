@@ -29,6 +29,9 @@ export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
     conditionResult: core.serialization.property("condition_result", TestConditionResultCommonModel.optional()),
     lastUpdatedAtUnix: core.serialization.property("last_updated_at_unix", core.serialization.number().optional()),
     metadata: TestRunMetadata.optional(),
+    rootFolderId: core.serialization.property("root_folder_id", core.serialization.string().optional()),
+    rootFolderName: core.serialization.property("root_folder_name", core.serialization.string().optional()),
+    environment: core.serialization.string().optional(),
 });
 
 export declare namespace UnitTestRunResponseModel {
@@ -46,5 +49,8 @@ export declare namespace UnitTestRunResponseModel {
         condition_result?: TestConditionResultCommonModel.Raw | null;
         last_updated_at_unix?: number | null;
         metadata?: TestRunMetadata.Raw | null;
+        root_folder_id?: string | null;
+        root_folder_name?: string | null;
+        environment?: string | null;
     }
 }

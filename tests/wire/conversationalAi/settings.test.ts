@@ -16,6 +16,7 @@ describe("SettingsClient", () => {
             webhooks: { post_call_webhook_id: "post_call_webhook_id", events: ["transcript"], send_audio: true },
             can_use_mcp_servers: true,
             rag_retention_period_days: 1,
+            conversation_embedding_retention_days: 1,
             default_livekit_stack: "standard",
         };
         server
@@ -41,6 +42,7 @@ describe("SettingsClient", () => {
             },
             canUseMcpServers: true,
             ragRetentionPeriodDays: 1,
+            conversationEmbeddingRetentionDays: 1,
             defaultLivekitStack: "standard",
         });
     });
@@ -57,6 +59,7 @@ describe("SettingsClient", () => {
             webhooks: { post_call_webhook_id: "post_call_webhook_id", events: ["transcript"], send_audio: true },
             can_use_mcp_servers: true,
             rag_retention_period_days: 1,
+            conversation_embedding_retention_days: 1,
             default_livekit_stack: "standard",
         };
         server
@@ -83,6 +86,7 @@ describe("SettingsClient", () => {
             },
             canUseMcpServers: true,
             ragRetentionPeriodDays: 1,
+            conversationEmbeddingRetentionDays: 1,
             defaultLivekitStack: "standard",
         });
     });

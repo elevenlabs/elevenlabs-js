@@ -13,6 +13,7 @@ export const GetTestSuiteInvocationResponseModel: core.serialization.ObjectSchem
     agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     createdAt: core.serialization.property("created_at", core.serialization.number().optional()),
+    folderId: core.serialization.property("folder_id", core.serialization.string().optional()),
     testRuns: core.serialization.property("test_runs", core.serialization.list(UnitTestRunResponseModel)),
 });
 
@@ -22,6 +23,7 @@ export declare namespace GetTestSuiteInvocationResponseModel {
         agent_id?: string | null;
         branch_id?: string | null;
         created_at?: number | null;
+        folder_id?: string | null;
         test_runs: UnitTestRunResponseModel.Raw[];
     }
 }

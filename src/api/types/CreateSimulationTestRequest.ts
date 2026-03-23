@@ -14,6 +14,8 @@ export interface CreateSimulationTestRequest {
     simulationScenario?: string;
     /** Maximum number of conversation turns for simulation tests. */
     simulationMaxTurns?: number;
+    /** The environment to use when running this simulation test. If not provided, defaults to 'production'. */
+    simulationEnvironment?: string;
     name: string;
     /** The ID of the parent folder. If not provided, the test will be created at the root level. */
     parentFolderId?: string;
