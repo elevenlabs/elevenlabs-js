@@ -10,11 +10,15 @@ export const SingleTestRunRequestModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     testId: core.serialization.property("test_id", core.serialization.string()),
     workflowNodeId: core.serialization.property("workflow_node_id", core.serialization.string().optional()),
+    rootFolderId: core.serialization.property("root_folder_id", core.serialization.string().optional()),
+    rootFolderName: core.serialization.property("root_folder_name", core.serialization.string().optional()),
 });
 
 export declare namespace SingleTestRunRequestModel {
     export interface Raw {
         test_id: string;
         workflow_node_id?: string | null;
+        root_folder_id?: string | null;
+        root_folder_name?: string | null;
     }
 }

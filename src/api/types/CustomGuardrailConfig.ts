@@ -12,4 +12,5 @@ export interface CustomGuardrailConfig {
     /** Instruction describing what to block, e.g. 'don't talk about politics' */
     prompt: string;
     executionMode?: ElevenLabs.GuardrailExecutionMode;
+    triggerAction?: ElevenLabs.CustomGuardrailConfigTriggerAction;
 }

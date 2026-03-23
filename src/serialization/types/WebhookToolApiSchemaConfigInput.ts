@@ -3,9 +3,9 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
-import { AuthConnectionLocator } from "./AuthConnectionLocator";
 import { LiteralJsonSchemaProperty } from "./LiteralJsonSchemaProperty";
 import { QueryParamsJsonSchema } from "./QueryParamsJsonSchema";
+import { WebhookToolApiSchemaConfigInputAuthConnection } from "./WebhookToolApiSchemaConfigInputAuthConnection";
 import { WebhookToolApiSchemaConfigInputContentType } from "./WebhookToolApiSchemaConfigInputContentType";
 import { WebhookToolApiSchemaConfigInputMethod } from "./WebhookToolApiSchemaConfigInputMethod";
 import { WebhookToolApiSchemaConfigInputRequestHeadersValue } from "./WebhookToolApiSchemaConfigInputRequestHeadersValue";
@@ -32,7 +32,10 @@ export const WebhookToolApiSchemaConfigInput: core.serialization.ObjectSchema<
         core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyInput).optional(),
     ),
     contentType: core.serialization.property("content_type", WebhookToolApiSchemaConfigInputContentType.optional()),
-    authConnection: core.serialization.property("auth_connection", AuthConnectionLocator.optional()),
+    authConnection: core.serialization.property(
+        "auth_connection",
+        WebhookToolApiSchemaConfigInputAuthConnection.optional(),
+    ),
 });
 
 export declare namespace WebhookToolApiSchemaConfigInput {
@@ -44,6 +47,6 @@ export declare namespace WebhookToolApiSchemaConfigInput {
         query_params_schema?: QueryParamsJsonSchema.Raw | null;
         request_body_schema?: serializers.ObjectJsonSchemaPropertyInput.Raw | null;
         content_type?: WebhookToolApiSchemaConfigInputContentType.Raw | null;
-        auth_connection?: AuthConnectionLocator.Raw | null;
+        auth_connection?: WebhookToolApiSchemaConfigInputAuthConnection.Raw | null;
     }
 }

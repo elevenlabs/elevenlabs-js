@@ -1,3 +1,5 @@
+export * as authConnections from "./authConnections";
+export * from "./authConnections/types";
 export * as groups from "./groups";
 export * as invites from "./invites";
 export * from "./invites/client/requests";

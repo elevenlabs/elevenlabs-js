@@ -57,6 +57,10 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     entityDetection?: ElevenLabs.SpeechToTextConvertRequestEntityDetection;
     /** If true, the transcription will not have any filler words, false starts and non-speech sounds. Only supported with scribe_v2 model. */
     noVerbatim?: boolean;
-    /** A list of keyterms to bias the transcription towards.           The keyterms are words or phrases you want the model to recognise more accurately.           The number of keyterms cannot exceed 100.           The length of each keyterm must be less than 50 characters.           Keyterms can contain at most 5 words (after normalisation).           For example ["hello", "world", "technical term"].           Usage of this parameter will incur additional costs.  */
+    /** Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned. */
+    entityRedaction?: ElevenLabs.SpeechToTextConvertRequestEntityRedaction;
+    /** How to format redacted entities. 'redacted' replaces with {REDACTED}, 'entity_type' replaces with {ENTITY_TYPE}, 'enumerated_entity_type' replaces with {ENTITY_TYPE_N} where N enumerates each occurrence. Only used when entity_redaction is set. */
+    entityRedactionMode?: string;
+    /** A list of keyterms to bias the transcription towards.           The keyterms are words or phrases you want the model to recognise more accurately.           The number of keyterms cannot exceed 1000.           The length of each keyterm must be less than 50 characters.           Keyterms can contain at most 5 words (after normalisation).           For example ["hello", "world", "technical term"].           Usage of this parameter will incur additional costs.           When more than 100 keyterms are provided, a minimum billable duration of 20 seconds applies per request. */
     keyterms?: string[];
 }

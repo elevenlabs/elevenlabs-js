@@ -32,7 +32,6 @@ export * as tools from "./tools";
 export * from "./tools/client/requests";
 export * as twilio from "./twilio";
 export * from "./twilio/client/requests";
-export * from "./twilio/types";
 export * as users from "./users";
 export * from "./users/client/requests";
 export * as whatsapp from "./whatsapp";

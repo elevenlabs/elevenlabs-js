@@ -17,6 +17,8 @@ export interface AgentPlatformSettingsRequestModel {
     testing?: ElevenLabs.AgentTestingSettings;
     /** Whether the agent is archived */
     archived?: boolean;
+    /** Guardrails configuration for the agent */
+    guardrails?: ElevenLabs.GuardrailsV1Input;
     /** Language for all conversation analysis outputs (summaries, titles, evaluation rationales, data collection rationales). If not set, the language will be inferred from the conversation. Must be one of the supported conversation languages. */
     summaryLanguage?: string;
     /** Settings for authentication */

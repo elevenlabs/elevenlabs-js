@@ -77,6 +77,8 @@ export class MessagesClient {
             evaluationParams,
             dataCollectionParams,
             toolNames,
+            toolNamesSuccessful,
+            toolNamesErrored,
             mainLanguages,
             pageSize,
             summaryMode,
@@ -149,6 +151,22 @@ export class MessagesClient {
                 _queryParams.tool_names = toolNames.map((item) => item);
             } else {
                 _queryParams.tool_names = toolNames;
+            }
+        }
+
+        if (toolNamesSuccessful != null) {
+            if (Array.isArray(toolNamesSuccessful)) {
+                _queryParams.tool_names_successful = toolNamesSuccessful.map((item) => item);
+            } else {
+                _queryParams.tool_names_successful = toolNamesSuccessful;
+            }
+        }
+
+        if (toolNamesErrored != null) {
+            if (Array.isArray(toolNamesErrored)) {
+                _queryParams.tool_names_errored = toolNamesErrored.map((item) => item);
+            } else {
+                _queryParams.tool_names_errored = toolNamesErrored;
             }
         }
 

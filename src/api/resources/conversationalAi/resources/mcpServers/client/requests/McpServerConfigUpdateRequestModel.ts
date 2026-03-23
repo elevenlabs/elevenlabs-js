@@ -29,5 +29,5 @@ export interface McpServerConfigUpdateRequestModel {
     /** Optional secret token for authentication with this MCP server */
     secretToken?: ElevenLabs.ConvAiSecretLocator;
     /** Optional auth connection to use for authentication with this MCP server */
-    authConnection?: ElevenLabs.AuthConnectionLocator;
+    authConnection?: ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModelAuthConnection;
 }

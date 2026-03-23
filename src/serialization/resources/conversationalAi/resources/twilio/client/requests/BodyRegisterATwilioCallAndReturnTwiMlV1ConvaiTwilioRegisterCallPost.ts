@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
 import { ConversationInitiationClientDataRequestInput } from "../../../../../../types/ConversationInitiationClientDataRequestInput";
-import { BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPostDirection } from "../../types/BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPostDirection";
+import { TelephonyDirection } from "../../../../../../types/TelephonyDirection";
 
 export const BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPost: core.serialization.Schema<
     serializers.conversationalAi.BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPost.Raw,
@@ -13,7 +13,7 @@ export const BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPost
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     fromNumber: core.serialization.property("from_number", core.serialization.string()),
     toNumber: core.serialization.property("to_number", core.serialization.string()),
-    direction: BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPostDirection.optional(),
+    direction: TelephonyDirection.optional(),
     conversationInitiationClientData: core.serialization.property(
         "conversation_initiation_client_data",
         ConversationInitiationClientDataRequestInput.optional(),
@@ -25,7 +25,7 @@ export declare namespace BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegi
         agent_id: string;
         from_number: string;
         to_number: string;
-        direction?: BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPostDirection.Raw | null;
+        direction?: TelephonyDirection.Raw | null;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestInput.Raw | null;
     }
 }

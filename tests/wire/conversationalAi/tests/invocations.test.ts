@@ -84,6 +84,7 @@ describe("InvocationsClient", () => {
             agent_id: "agent_id",
             branch_id: "branch_id",
             created_at: 1,
+            folder_id: "folder_id",
             test_runs: [
                 {
                     test_run_id: "test_run_id",
@@ -103,6 +104,9 @@ describe("InvocationsClient", () => {
                         test_name: "test_name",
                         ran_by_user_email: "ran_by_user_email",
                     },
+                    root_folder_id: "root_folder_id",
+                    root_folder_name: "root_folder_name",
+                    environment: "environment",
                 },
             ],
         };
@@ -120,6 +124,7 @@ describe("InvocationsClient", () => {
             agentId: "agent_id",
             branchId: "branch_id",
             createdAt: 1,
+            folderId: "folder_id",
             testRuns: [
                 {
                     testRunId: "test_run_id",
@@ -148,6 +153,9 @@ describe("InvocationsClient", () => {
                         testName: "test_name",
                         ranByUserEmail: "ran_by_user_email",
                     },
+                    rootFolderId: "root_folder_id",
+                    rootFolderName: "root_folder_name",
+                    environment: "environment",
                 },
             ],
         });

@@ -3,11 +3,11 @@
 import type * as ElevenLabs from "../index";
 
 export interface ContentConfig {
-    sexual?: ElevenLabs.ThresholdGuardrail;
-    violence?: ElevenLabs.ThresholdGuardrail;
-    harassment?: ElevenLabs.ThresholdGuardrail;
-    selfHarm?: ElevenLabs.ThresholdGuardrail;
-    profanity?: ElevenLabs.ThresholdGuardrail;
-    religionOrPolitics?: ElevenLabs.ThresholdGuardrail;
-    medicalAndLegalInformation?: ElevenLabs.ThresholdGuardrail;
+    sexual?: ElevenLabs.ContentThresholdGuardrail;
+    violence?: ElevenLabs.ContentThresholdGuardrail;
+    harassment?: ElevenLabs.ContentThresholdGuardrail;
+    selfHarm?: ElevenLabs.ContentThresholdGuardrail;
+    profanity?: ElevenLabs.ContentThresholdGuardrail;
+    religionOrPolitics?: ElevenLabs.ContentThresholdGuardrail;
+    medicalAndLegalInformation?: ElevenLabs.ContentThresholdGuardrail;
 }

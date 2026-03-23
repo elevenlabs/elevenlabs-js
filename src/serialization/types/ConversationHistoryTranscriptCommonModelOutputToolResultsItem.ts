@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
-import { ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel } from "./ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel";
+import { ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModelOutput } from "./ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModelOutput";
 import { ConversationHistoryTranscriptOtherToolsResultCommonModel } from "./ConversationHistoryTranscriptOtherToolsResultCommonModel";
 import { ConversationHistoryTranscriptSystemToolResultCommonModelOutput } from "./ConversationHistoryTranscriptSystemToolResultCommonModelOutput";
 
@@ -13,7 +13,7 @@ export const ConversationHistoryTranscriptCommonModelOutputToolResultsItem: core
 > = core.serialization.undiscriminatedUnion([
     ConversationHistoryTranscriptOtherToolsResultCommonModel,
     ConversationHistoryTranscriptSystemToolResultCommonModelOutput,
-    ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel,
+    ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModelOutput,
     core.serialization.lazyObject(() => serializers.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput),
 ]);
 
@@ -21,6 +21,6 @@ export declare namespace ConversationHistoryTranscriptCommonModelOutputToolResul
     export type Raw =
         | ConversationHistoryTranscriptOtherToolsResultCommonModel.Raw
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutput.Raw
-        | ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel.Raw
+        | ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModelOutput.Raw
         | serializers.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput.Raw;
 }

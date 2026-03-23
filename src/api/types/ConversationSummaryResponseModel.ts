@@ -12,12 +12,13 @@ export interface ConversationSummaryResponseModel {
     callDurationSecs: number;
     messageCount: number;
     status: ElevenLabs.ConversationSummaryResponseModelStatus;
+    terminationReason?: string;
     callSuccessful: ElevenLabs.EvaluationSuccessResult;
     transcriptSummary?: string;
     callSummaryTitle?: string;
     mainLanguage?: string;
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
     toolNames?: string[];
-    direction?: ElevenLabs.ConversationSummaryResponseModelDirection;
+    direction?: ElevenLabs.TelephonyDirection;
     rating?: number;
 }

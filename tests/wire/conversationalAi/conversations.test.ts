@@ -21,6 +21,7 @@ describe("ConversationsClient", () => {
             agentId: "21m00Tcm4TlvDq8ikWAM",
             includeConversationId: true,
             branchId: "branch_id",
+            environment: "environment",
         });
         expect(response).toEqual({
             signedUrl: "signed_url",
@@ -44,6 +45,7 @@ describe("ConversationsClient", () => {
             agentId: "21m00Tcm4TlvDq8ikWAM",
             participantName: "participant_name",
             branchId: "branch_id",
+            environment: "environment",
         });
         expect(response).toEqual({
             token: "token",
@@ -66,6 +68,7 @@ describe("ConversationsClient", () => {
                     call_duration_secs: 1,
                     message_count: 1,
                     status: "initiated",
+                    termination_reason: "termination_reason",
                     call_successful: "success",
                     transcript_summary: "transcript_summary",
                     call_summary_title: "call_summary_title",
@@ -117,6 +120,7 @@ describe("ConversationsClient", () => {
                     callDurationSecs: 1,
                     messageCount: 1,
                     status: "initiated",
+                    terminationReason: "termination_reason",
                     callSuccessful: "success",
                     transcriptSummary: "transcript_summary",
                     callSummaryTitle: "call_summary_title",

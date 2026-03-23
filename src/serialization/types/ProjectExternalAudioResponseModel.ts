@@ -12,7 +12,7 @@ export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     externalAudioId: core.serialization.property("external_audio_id", core.serialization.string()),
     filename: core.serialization.string(),
-    signedUrl: core.serialization.property("signed_url", core.serialization.string()),
+    signedUrl: core.serialization.property("signed_url", core.serialization.string().optional()),
     offsetMs: core.serialization.property("offset_ms", core.serialization.number()),
     durationMs: core.serialization.property("duration_ms", core.serialization.number()),
     startTimeMs: core.serialization.property("start_time_ms", core.serialization.number()),
@@ -40,6 +40,7 @@ export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
     ),
     speechImported: core.serialization.property("speech_imported", core.serialization.boolean().optional()),
     pendingTask: core.serialization.property("pending_task", PendingClipTask.optional()),
+    error: core.serialization.string().optional(),
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
     sourceContext: core.serialization.property(
         "source_context",
@@ -52,7 +53,7 @@ export declare namespace ProjectExternalAudioResponseModel {
     export interface Raw {
         external_audio_id: string;
         filename: string;
-        signed_url: string;
+        signed_url?: string | null;
         offset_ms: number;
         duration_ms: number;
         start_time_ms: number;
@@ -71,6 +72,7 @@ export declare namespace ProjectExternalAudioResponseModel {
         pending_external_audio_ids: string[];
         speech_imported?: boolean | null;
         pending_task?: PendingClipTask.Raw | null;
+        error?: string | null;
         current_snapshot_id?: string | null;
         source_context?: ProjectExternalAudioResponseModelSourceContext.Raw | null;
         import_speech_progress?: number | null;

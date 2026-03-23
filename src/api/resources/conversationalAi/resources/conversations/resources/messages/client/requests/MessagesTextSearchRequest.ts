@@ -52,6 +52,10 @@ export interface MessagesTextSearchRequest {
     dataCollectionParams?: string | string[];
     /** Filter conversations by tool names used during the call. */
     toolNames?: string | string[];
+    /** Filter conversations by tool names that had successful calls. */
+    toolNamesSuccessful?: string | string[];
+    /** Filter conversations by tool names that had errored calls. */
+    toolNamesErrored?: string | string[];
     /** Filter conversations by detected main language (language code). */
     mainLanguages?: string | string[];
     /** Number of results per page. Max 50. */

@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetails } from "./ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetails";
+import { ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetailsInput } from "./ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetailsInput";
 import { ConversationHistoryTranscriptToolCallClientDetails } from "./ConversationHistoryTranscriptToolCallClientDetails";
 import { ConversationHistoryTranscriptToolCallMcpDetails } from "./ConversationHistoryTranscriptToolCallMcpDetails";
 import { ConversationHistoryTranscriptToolCallWebhookDetails } from "./ConversationHistoryTranscriptToolCallWebhookDetails";
@@ -13,7 +13,7 @@ export const ConversationHistoryTranscriptToolCallCommonModelInputToolDetails: c
     ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelInputToolDetails
 > = core.serialization
     .union("type", {
-        api_integration_webhook: ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetails,
+        api_integration_webhook: ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetailsInput,
         client: ConversationHistoryTranscriptToolCallClientDetails,
         mcp: ConversationHistoryTranscriptToolCallMcpDetails,
         webhook: ConversationHistoryTranscriptToolCallWebhookDetails,
@@ -31,7 +31,7 @@ export declare namespace ConversationHistoryTranscriptToolCallCommonModelInputTo
         | ConversationHistoryTranscriptToolCallCommonModelInputToolDetails.Webhook;
 
     export interface ApiIntegrationWebhook
-        extends ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetails.Raw {
+        extends ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetailsInput.Raw {
         type: "api_integration_webhook";
     }
 

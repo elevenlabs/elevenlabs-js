@@ -8,6 +8,7 @@ import type * as ElevenLabs from "../index";
 export type AstLessThanOrEqualsOperatorNodeOutputRight =
     | ElevenLabs.AstLessThanOrEqualsOperatorNodeOutputRight.AndOperator
     | ElevenLabs.AstLessThanOrEqualsOperatorNodeOutputRight.BooleanLiteral
+    | ElevenLabs.AstLessThanOrEqualsOperatorNodeOutputRight.ConditionalOperator
     | ElevenLabs.AstLessThanOrEqualsOperatorNodeOutputRight.DynamicVariable
     | ElevenLabs.AstLessThanOrEqualsOperatorNodeOutputRight.EqOperator
     | ElevenLabs.AstLessThanOrEqualsOperatorNodeOutputRight.GtOperator
@@ -27,6 +28,10 @@ export namespace AstLessThanOrEqualsOperatorNodeOutputRight {
 
     export interface BooleanLiteral extends ElevenLabs.AstBooleanNodeOutput {
         type: "boolean_literal";
+    }
+
+    export interface ConditionalOperator extends ElevenLabs.AstConditionalOperatorNodeOutput {
+        type: "conditional_operator";
     }
 
     export interface DynamicVariable extends ElevenLabs.AstDynamicVariableNodeOutput {

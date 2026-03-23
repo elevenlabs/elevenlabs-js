@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ContentConfig } from "./ContentConfig";
+import { ContentGuardrailOutputTriggerAction } from "./ContentGuardrailOutputTriggerAction";
 import { GuardrailExecutionMode } from "./GuardrailExecutionMode";
 
 export const ContentGuardrailOutput: core.serialization.ObjectSchema<
@@ -12,11 +13,13 @@ export const ContentGuardrailOutput: core.serialization.ObjectSchema<
 > = core.serialization.object({
     executionMode: core.serialization.property("execution_mode", GuardrailExecutionMode.optional()),
     config: ContentConfig.optional(),
+    triggerAction: core.serialization.property("trigger_action", ContentGuardrailOutputTriggerAction.optional()),
 });
 
 export declare namespace ContentGuardrailOutput {
     export interface Raw {
         execution_mode?: GuardrailExecutionMode.Raw | null;
         config?: ContentConfig.Raw | null;
+        trigger_action?: ContentGuardrailOutputTriggerAction.Raw | null;
     }
 }

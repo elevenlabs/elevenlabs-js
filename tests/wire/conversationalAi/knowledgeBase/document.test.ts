@@ -4,6 +4,71 @@ import { ElevenLabsClient } from "../../../../src/Client";
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 
 describe("DocumentClient", () => {
+    test("refresh", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            type: "url",
+            id: "id",
+            name: "name",
+            metadata: { created_at_unix_secs: 1, last_updated_at_unix_secs: 1, size_bytes: 1 },
+            supported_usages: ["prompt"],
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+            },
+            folder_parent_id: "folder_parent_id",
+            folder_path: [{ id: "id", name: "name" }],
+            url: "url",
+            extracted_inner_html: "extracted_inner_html",
+            auto_sync_info: { minimum_frequency_days: 1, auto_remove: true, consec_failures: 1, next_refresh_by: 1 },
+        };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/refresh")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.knowledgeBase.document.refresh("21m00Tcm4TlvDq8ikWAM");
+        expect(response).toEqual({
+            type: "url",
+            id: "id",
+            name: "name",
+            metadata: {
+                createdAtUnixSecs: 1,
+                lastUpdatedAtUnixSecs: 1,
+                sizeBytes: 1,
+            },
+            supportedUsages: ["prompt"],
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+            },
+            folderParentId: "folder_parent_id",
+            folderPath: [
+                {
+                    id: "id",
+                    name: "name",
+                },
+            ],
+            url: "url",
+            extractedInnerHtml: "extracted_inner_html",
+            autoSyncInfo: {
+                minimumFrequencyDays: 1,
+                autoRemove: true,
+                consecFailures: 1,
+                nextRefreshBy: 1,
+            },
+        });
+    });
+
     test("compute_rag_index", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

@@ -38,4 +38,6 @@ export interface SpeechHistoryItemResponse {
     alignments?: ElevenLabs.HistoryAlignmentsResponseModel;
     /** The dialogue (voice and text pairs) used to generate the audio item. If this is set then the top level `text` and `voice_id` fields will be empty. */
     dialogue?: ElevenLabs.DialogueInputResponseModel[];
+    /** The output format the audio was originally generated in. */
+    outputFormat?: string;
 }

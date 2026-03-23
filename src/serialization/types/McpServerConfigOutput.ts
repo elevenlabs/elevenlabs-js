@@ -3,8 +3,8 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { AuthConnectionLocator } from "./AuthConnectionLocator";
 import { McpApprovalPolicy } from "./McpApprovalPolicy";
+import { McpServerConfigOutputAuthConnection } from "./McpServerConfigOutputAuthConnection";
 import { McpServerConfigOutputRequestHeadersValue } from "./McpServerConfigOutputRequestHeadersValue";
 import { McpServerConfigOutputSecretToken } from "./McpServerConfigOutputSecretToken";
 import { McpServerConfigOutputUrl } from "./McpServerConfigOutputUrl";
@@ -31,7 +31,7 @@ export const McpServerConfigOutput: core.serialization.ObjectSchema<
         "request_headers",
         core.serialization.record(core.serialization.string(), McpServerConfigOutputRequestHeadersValue).optional(),
     ),
-    authConnection: core.serialization.property("auth_connection", AuthConnectionLocator.optional()),
+    authConnection: core.serialization.property("auth_connection", McpServerConfigOutputAuthConnection.optional()),
     name: core.serialization.string(),
     description: core.serialization.string().optional(),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
@@ -54,7 +54,7 @@ export declare namespace McpServerConfigOutput {
         url: McpServerConfigOutputUrl.Raw;
         secret_token?: McpServerConfigOutputSecretToken.Raw | null;
         request_headers?: Record<string, McpServerConfigOutputRequestHeadersValue.Raw> | null;
-        auth_connection?: AuthConnectionLocator.Raw | null;
+        auth_connection?: McpServerConfigOutputAuthConnection.Raw | null;
         name: string;
         description?: string | null;
         force_pre_tool_speech?: boolean | null;

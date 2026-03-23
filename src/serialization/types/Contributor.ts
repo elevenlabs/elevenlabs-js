@@ -8,11 +8,15 @@ export const Contributor: core.serialization.ObjectSchema<serializers.Contributo
     core.serialization.object({
         name: core.serialization.string(),
         role: core.serialization.string(),
+        bio: core.serialization.string().optional(),
+        profileId: core.serialization.property("profile_id", core.serialization.string().optional()),
     });
 
 export declare namespace Contributor {
     export interface Raw {
         name: string;
         role: string;
+        bio?: string | null;
+        profile_id?: string | null;
     }
 }

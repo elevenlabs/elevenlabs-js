@@ -60,6 +60,8 @@ describe("SubscriptionClient", () => {
                 next_billing_period: "monthly_period",
                 timestamp_seconds: 1,
             },
+            has_used_starter_coupon_on_account: false,
+            has_used_creator_coupon_on_account: false,
         };
         server
             .mockEndpoint()
@@ -130,6 +132,8 @@ describe("SubscriptionClient", () => {
                 nextBillingPeriod: "monthly_period",
                 timestampSeconds: 1,
             },
+            hasUsedStarterCouponOnAccount: false,
+            hasUsedCreatorCouponOnAccount: false,
         });
     });
 });

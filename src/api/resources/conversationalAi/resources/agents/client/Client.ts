@@ -451,6 +451,7 @@ export class AgentsClient {
      *         search: "search",
      *         archived: true,
      *         showOnlyOwnedAgents: true,
+     *         createdByUserId: "created_by_user_id",
      *         sortDirection: "asc",
      *         sortBy: "name",
      *         cursor: "cursor"
@@ -467,7 +468,8 @@ export class AgentsClient {
         request: ElevenLabs.conversationalAi.AgentsListRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentsPageResponseModel>> {
-        const { pageSize, search, archived, showOnlyOwnedAgents, sortDirection, sortBy, cursor } = request;
+        const { pageSize, search, archived, showOnlyOwnedAgents, createdByUserId, sortDirection, sortBy, cursor } =
+            request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (pageSize != null) {
             _queryParams.page_size = pageSize.toString();
@@ -483,6 +485,10 @@ export class AgentsClient {
 
         if (showOnlyOwnedAgents != null) {
             _queryParams.show_only_owned_agents = showOnlyOwnedAgents.toString();
+        }
+
+        if (createdByUserId != null) {
+            _queryParams.created_by_user_id = createdByUserId;
         }
 
         if (sortDirection != null) {

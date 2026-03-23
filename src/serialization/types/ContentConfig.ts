@@ -3,30 +3,30 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { ThresholdGuardrail } from "./ThresholdGuardrail";
+import { ContentThresholdGuardrail } from "./ContentThresholdGuardrail";
 
 export const ContentConfig: core.serialization.ObjectSchema<serializers.ContentConfig.Raw, ElevenLabs.ContentConfig> =
     core.serialization.object({
-        sexual: ThresholdGuardrail.optional(),
-        violence: ThresholdGuardrail.optional(),
-        harassment: ThresholdGuardrail.optional(),
-        selfHarm: core.serialization.property("self_harm", ThresholdGuardrail.optional()),
-        profanity: ThresholdGuardrail.optional(),
-        religionOrPolitics: core.serialization.property("religion_or_politics", ThresholdGuardrail.optional()),
+        sexual: ContentThresholdGuardrail.optional(),
+        violence: ContentThresholdGuardrail.optional(),
+        harassment: ContentThresholdGuardrail.optional(),
+        selfHarm: core.serialization.property("self_harm", ContentThresholdGuardrail.optional()),
+        profanity: ContentThresholdGuardrail.optional(),
+        religionOrPolitics: core.serialization.property("religion_or_politics", ContentThresholdGuardrail.optional()),
         medicalAndLegalInformation: core.serialization.property(
             "medical_and_legal_information",
-            ThresholdGuardrail.optional(),
+            ContentThresholdGuardrail.optional(),
         ),
     });
 
 export declare namespace ContentConfig {
     export interface Raw {
-        sexual?: ThresholdGuardrail.Raw | null;
-        violence?: ThresholdGuardrail.Raw | null;
-        harassment?: ThresholdGuardrail.Raw | null;
-        self_harm?: ThresholdGuardrail.Raw | null;
-        profanity?: ThresholdGuardrail.Raw | null;
-        religion_or_politics?: ThresholdGuardrail.Raw | null;
-        medical_and_legal_information?: ThresholdGuardrail.Raw | null;
+        sexual?: ContentThresholdGuardrail.Raw | null;
+        violence?: ContentThresholdGuardrail.Raw | null;
+        harassment?: ContentThresholdGuardrail.Raw | null;
+        self_harm?: ContentThresholdGuardrail.Raw | null;
+        profanity?: ContentThresholdGuardrail.Raw | null;
+        religion_or_politics?: ContentThresholdGuardrail.Raw | null;
+        medical_and_legal_information?: ContentThresholdGuardrail.Raw | null;
     }
 }

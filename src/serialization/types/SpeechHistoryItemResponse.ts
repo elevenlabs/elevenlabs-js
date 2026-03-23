@@ -34,6 +34,7 @@ export const SpeechHistoryItemResponse: core.serialization.ObjectSchema<
     source: SpeechHistoryItemResponseModelSource.optional(),
     alignments: HistoryAlignmentsResponseModel.optional(),
     dialogue: core.serialization.list(DialogueInputResponseModel).optional(),
+    outputFormat: core.serialization.property("output_format", core.serialization.string().optional()),
 });
 
 export declare namespace SpeechHistoryItemResponse {
@@ -56,5 +57,6 @@ export declare namespace SpeechHistoryItemResponse {
         source?: SpeechHistoryItemResponseModelSource.Raw | null;
         alignments?: HistoryAlignmentsResponseModel.Raw | null;
         dialogue?: DialogueInputResponseModel.Raw[] | null;
+        output_format?: string | null;
     }
 }

@@ -7,5 +7,6 @@ export interface GetTestSuiteInvocationResponseModel {
     agentId?: string;
     branchId?: string;
     createdAt?: number;
+    folderId?: string;
     testRuns: ElevenLabs.UnitTestRunResponseModel[];
 }

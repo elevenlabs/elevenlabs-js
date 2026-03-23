@@ -14,4 +14,6 @@ export interface SimulationTestModel {
     simulationScenario?: string;
     /** Maximum number of conversation turns for simulation tests. */
     simulationMaxTurns?: number;
+    /** The environment to use when running this simulation test. If not provided, defaults to 'production'. */
+    simulationEnvironment?: string;
 }

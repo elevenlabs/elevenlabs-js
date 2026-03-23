@@ -162,6 +162,17 @@ export class SpeechToTextClient {
             _request.append("no_verbatim", request.noVerbatim.toString());
         }
 
+        if (request.entityRedaction != null) {
+            if (Array.isArray(request.entityRedaction))
+                for (const _item of request.entityRedaction) {
+                    _request.append("entity_redaction", typeof _item === "string" ? _item : toJson(_item));
+                }
+        }
+
+        if (request.entityRedactionMode != null) {
+            _request.append("entity_redaction_mode", request.entityRedactionMode);
+        }
+
         if (request.keyterms != null) {
             for (const _item of request.keyterms) {
                 _request.append("keyterms", _item);

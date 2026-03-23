@@ -16,6 +16,7 @@ export const AstGreaterThanOperatorNodeOutputLeft: core.serialization.Schema<
     .union("type", {
         and_operator: core.serialization.lazyObject(() => serializers.AstAndOperatorNodeOutput),
         boolean_literal: AstBooleanNodeOutput,
+        conditional_operator: core.serialization.lazyObject(() => serializers.AstConditionalOperatorNodeOutput),
         dynamic_variable: AstDynamicVariableNodeOutput,
         eq_operator: core.serialization.lazyObject(() => serializers.AstEqualsOperatorNodeOutput),
         gt_operator: core.serialization.lazyObject(() => serializers.AstGreaterThanOperatorNodeOutput),
@@ -37,6 +38,7 @@ export declare namespace AstGreaterThanOperatorNodeOutputLeft {
     export type Raw =
         | AstGreaterThanOperatorNodeOutputLeft.AndOperator
         | AstGreaterThanOperatorNodeOutputLeft.BooleanLiteral
+        | AstGreaterThanOperatorNodeOutputLeft.ConditionalOperator
         | AstGreaterThanOperatorNodeOutputLeft.DynamicVariable
         | AstGreaterThanOperatorNodeOutputLeft.EqOperator
         | AstGreaterThanOperatorNodeOutputLeft.GtOperator
@@ -55,6 +57,10 @@ export declare namespace AstGreaterThanOperatorNodeOutputLeft {
 
     export interface BooleanLiteral extends AstBooleanNodeOutput.Raw {
         type: "boolean_literal";
+    }
+
+    export interface ConditionalOperator extends serializers.AstConditionalOperatorNodeOutput.Raw {
+        type: "conditional_operator";
     }
 
     export interface DynamicVariable extends AstDynamicVariableNodeOutput.Raw {
