@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AudioAnalysis } from "./AudioAnalysis";
 import { PendingClipTask } from "./PendingClipTask";
 import { ProjectExternalAudioResponseModelSourceContext } from "./ProjectExternalAudioResponseModelSourceContext";
 
@@ -46,6 +47,7 @@ export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
         "source_context",
         ProjectExternalAudioResponseModelSourceContext.optional(),
     ),
+    analysis: AudioAnalysis.optional(),
     importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
 });
 
@@ -75,6 +77,7 @@ export declare namespace ProjectExternalAudioResponseModel {
         error?: string | null;
         current_snapshot_id?: string | null;
         source_context?: ProjectExternalAudioResponseModelSourceContext.Raw | null;
+        analysis?: AudioAnalysis.Raw | null;
         import_speech_progress?: number | null;
     }
 }

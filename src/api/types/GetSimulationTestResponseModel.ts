@@ -16,6 +16,8 @@ export interface GetSimulationTestResponseModel {
     simulationMaxTurns?: number;
     /** The environment to use when running this simulation test. If not provided, defaults to 'production'. */
     simulationEnvironment?: string;
+    /** Configuration for which tools to mock and fallback behavior. */
+    toolMockConfig?: ElevenLabs.SimulationToolMockBehaviorConfig;
     id: string;
     name: string;
 }

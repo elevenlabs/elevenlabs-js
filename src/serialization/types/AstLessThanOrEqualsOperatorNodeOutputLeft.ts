@@ -14,9 +14,11 @@ export const AstLessThanOrEqualsOperatorNodeOutputLeft: core.serialization.Schem
     ElevenLabs.AstLessThanOrEqualsOperatorNodeOutputLeft
 > = core.serialization
     .union("type", {
+        add_operator: core.serialization.lazyObject(() => serializers.AstAdditionOperatorNodeOutput),
         and_operator: core.serialization.lazyObject(() => serializers.AstAndOperatorNodeOutput),
         boolean_literal: AstBooleanNodeOutput,
         conditional_operator: core.serialization.lazyObject(() => serializers.AstConditionalOperatorNodeOutput),
+        div_operator: core.serialization.lazyObject(() => serializers.AstDivisionOperatorNodeOutput),
         dynamic_variable: AstDynamicVariableNodeOutput,
         eq_operator: core.serialization.lazyObject(() => serializers.AstEqualsOperatorNodeOutput),
         gt_operator: core.serialization.lazyObject(() => serializers.AstGreaterThanOperatorNodeOutput),
@@ -24,10 +26,12 @@ export const AstLessThanOrEqualsOperatorNodeOutputLeft: core.serialization.Schem
         llm: AstllmNodeOutput,
         lt_operator: core.serialization.lazyObject(() => serializers.AstLessThanOperatorNodeOutput),
         lte_operator: core.serialization.lazyObject(() => serializers.AstLessThanOrEqualsOperatorNodeOutput),
+        mul_operator: core.serialization.lazyObject(() => serializers.AstMultiplicationOperatorNodeOutput),
         neq_operator: core.serialization.lazyObject(() => serializers.AstNotEqualsOperatorNodeOutput),
         number_literal: AstNumberNodeOutput,
         or_operator: core.serialization.lazyObject(() => serializers.AstOrOperatorNodeOutput),
         string_literal: AstStringNodeOutput,
+        sub_operator: core.serialization.lazyObject(() => serializers.AstSubtractionOperatorNodeOutput),
     })
     .transform<ElevenLabs.AstLessThanOrEqualsOperatorNodeOutputLeft>({
         transform: (value) => value,
@@ -36,9 +40,11 @@ export const AstLessThanOrEqualsOperatorNodeOutputLeft: core.serialization.Schem
 
 export declare namespace AstLessThanOrEqualsOperatorNodeOutputLeft {
     export type Raw =
+        | AstLessThanOrEqualsOperatorNodeOutputLeft.AddOperator
         | AstLessThanOrEqualsOperatorNodeOutputLeft.AndOperator
         | AstLessThanOrEqualsOperatorNodeOutputLeft.BooleanLiteral
         | AstLessThanOrEqualsOperatorNodeOutputLeft.ConditionalOperator
+        | AstLessThanOrEqualsOperatorNodeOutputLeft.DivOperator
         | AstLessThanOrEqualsOperatorNodeOutputLeft.DynamicVariable
         | AstLessThanOrEqualsOperatorNodeOutputLeft.EqOperator
         | AstLessThanOrEqualsOperatorNodeOutputLeft.GtOperator
@@ -46,10 +52,16 @@ export declare namespace AstLessThanOrEqualsOperatorNodeOutputLeft {
         | AstLessThanOrEqualsOperatorNodeOutputLeft.Llm
         | AstLessThanOrEqualsOperatorNodeOutputLeft.LtOperator
         | AstLessThanOrEqualsOperatorNodeOutputLeft.LteOperator
+        | AstLessThanOrEqualsOperatorNodeOutputLeft.MulOperator
         | AstLessThanOrEqualsOperatorNodeOutputLeft.NeqOperator
         | AstLessThanOrEqualsOperatorNodeOutputLeft.NumberLiteral
         | AstLessThanOrEqualsOperatorNodeOutputLeft.OrOperator
-        | AstLessThanOrEqualsOperatorNodeOutputLeft.StringLiteral;
+        | AstLessThanOrEqualsOperatorNodeOutputLeft.StringLiteral
+        | AstLessThanOrEqualsOperatorNodeOutputLeft.SubOperator;
+
+    export interface AddOperator extends serializers.AstAdditionOperatorNodeOutput.Raw {
+        type: "add_operator";
+    }
 
     export interface AndOperator extends serializers.AstAndOperatorNodeOutput.Raw {
         type: "and_operator";
@@ -61,6 +73,10 @@ export declare namespace AstLessThanOrEqualsOperatorNodeOutputLeft {
 
     export interface ConditionalOperator extends serializers.AstConditionalOperatorNodeOutput.Raw {
         type: "conditional_operator";
+    }
+
+    export interface DivOperator extends serializers.AstDivisionOperatorNodeOutput.Raw {
+        type: "div_operator";
     }
 
     export interface DynamicVariable extends AstDynamicVariableNodeOutput.Raw {
@@ -91,6 +107,10 @@ export declare namespace AstLessThanOrEqualsOperatorNodeOutputLeft {
         type: "lte_operator";
     }
 
+    export interface MulOperator extends serializers.AstMultiplicationOperatorNodeOutput.Raw {
+        type: "mul_operator";
+    }
+
     export interface NeqOperator extends serializers.AstNotEqualsOperatorNodeOutput.Raw {
         type: "neq_operator";
     }
@@ -105,5 +125,9 @@ export declare namespace AstLessThanOrEqualsOperatorNodeOutputLeft {
 
     export interface StringLiteral extends AstStringNodeOutput.Raw {
         type: "string_literal";
+    }
+
+    export interface SubOperator extends serializers.AstSubtractionOperatorNodeOutput.Raw {
+        type: "sub_operator";
     }
 }

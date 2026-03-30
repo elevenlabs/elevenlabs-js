@@ -15,4 +15,5 @@ export interface GetKnowledgeBaseSummaryUrlResponseModel {
     /** This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead. */
     dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryUrlResponseModelDependentAgentsItem[];
     url: string;
+    autoSyncInfo?: ElevenLabs.AutoSyncInfo;
 }

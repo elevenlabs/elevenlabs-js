@@ -17,6 +17,7 @@ export interface ProjectImageResponseModel {
     order: string;
     canvasPlacement: ElevenLabs.CanvasPlacement;
     animation?: ElevenLabs.ClipAnimation;
+    opacity?: number;
     createdAtMs: number;
     updatedAtMs: number;
     currentSnapshotId?: string;

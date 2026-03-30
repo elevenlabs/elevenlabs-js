@@ -7,8 +7,12 @@ import type * as serializers from "../index";
 export const DependentUnknownToolIdentifier: core.serialization.ObjectSchema<
     serializers.DependentUnknownToolIdentifier.Raw,
     ElevenLabs.DependentUnknownToolIdentifier
-> = core.serialization.object({});
+> = core.serialization.object({
+    id: core.serialization.string(),
+});
 
 export declare namespace DependentUnknownToolIdentifier {
-    export type Raw = {};
+    export interface Raw {
+        id: string;
+    }
 }

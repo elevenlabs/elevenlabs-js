@@ -34,6 +34,7 @@ describe("ToolsClient", () => {
                         role: "admin",
                     },
                     usage_stats: { avg_latency_secs: 1.1 },
+                    response_mocks: [{ mock_result: "mock_result" }],
                 },
             ],
             next_cursor: "next_cursor",
@@ -82,6 +83,11 @@ describe("ToolsClient", () => {
                     usageStats: {
                         avgLatencySecs: 1.1,
                     },
+                    responseMocks: [
+                        {
+                            mockResult: "mock_result",
+                        },
+                    ],
                 },
             ],
             nextCursor: "next_cursor",
@@ -127,6 +133,9 @@ describe("ToolsClient", () => {
                 role: "admin",
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
+            response_mocks: [
+                { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
+            ],
         };
         server
             .mockEndpoint()
@@ -194,6 +203,19 @@ describe("ToolsClient", () => {
                 totalCalls: 1,
                 avgLatencySecs: 1.1,
             },
+            responseMocks: [
+                {
+                    parameterConditions: [
+                        {
+                            eval: {
+                                type: "anything",
+                            },
+                            path: "path",
+                        },
+                    ],
+                    mockResult: "mock_result",
+                },
+            ],
         });
     });
 
@@ -233,6 +255,9 @@ describe("ToolsClient", () => {
                 role: "admin",
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
+            response_mocks: [
+                { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
+            ],
         };
         server
             .mockEndpoint()
@@ -292,6 +317,19 @@ describe("ToolsClient", () => {
                 totalCalls: 1,
                 avgLatencySecs: 1.1,
             },
+            responseMocks: [
+                {
+                    parameterConditions: [
+                        {
+                            eval: {
+                                type: "anything",
+                            },
+                            path: "path",
+                        },
+                    ],
+                    mockResult: "mock_result",
+                },
+            ],
         });
     });
 
@@ -354,6 +392,9 @@ describe("ToolsClient", () => {
                 role: "admin",
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
+            response_mocks: [
+                { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
+            ],
         };
         server
             .mockEndpoint()
@@ -421,6 +462,19 @@ describe("ToolsClient", () => {
                 totalCalls: 1,
                 avgLatencySecs: 1.1,
             },
+            responseMocks: [
+                {
+                    parameterConditions: [
+                        {
+                            eval: {
+                                type: "anything",
+                            },
+                            path: "path",
+                        },
+                    ],
+                    mockResult: "mock_result",
+                },
+            ],
         });
     });
 

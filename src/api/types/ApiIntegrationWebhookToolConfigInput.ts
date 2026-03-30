@@ -29,5 +29,5 @@ export interface ApiIntegrationWebhookToolConfigInput {
     apiIntegrationId: string;
     apiIntegrationConnectionId: string;
     /** User overrides applied on top of the base api_schema */
-    apiSchemaOverrides?: ElevenLabs.ApiIntegrationWebhookOverridesInput;
+    apiSchemaOverrides?: ElevenLabs.ApiIntegrationWebhookOverrides;
 }

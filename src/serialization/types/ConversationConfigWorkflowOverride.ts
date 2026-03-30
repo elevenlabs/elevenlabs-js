@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ClientEvent } from "./ClientEvent";
+import { FileInputConfigWorkflowOverride } from "./FileInputConfigWorkflowOverride";
 
 export const ConversationConfigWorkflowOverride: core.serialization.ObjectSchema<
     serializers.ConversationConfigWorkflowOverride.Raw,
@@ -12,6 +13,7 @@ export const ConversationConfigWorkflowOverride: core.serialization.ObjectSchema
     textOnly: core.serialization.property("text_only", core.serialization.boolean().optional()),
     maxDurationSeconds: core.serialization.property("max_duration_seconds", core.serialization.number().optional()),
     clientEvents: core.serialization.property("client_events", core.serialization.list(ClientEvent).optional()),
+    fileInput: core.serialization.property("file_input", FileInputConfigWorkflowOverride.optional()),
     monitoringEnabled: core.serialization.property("monitoring_enabled", core.serialization.boolean().optional()),
     monitoringEvents: core.serialization.property("monitoring_events", core.serialization.list(ClientEvent).optional()),
 });
@@ -21,6 +23,7 @@ export declare namespace ConversationConfigWorkflowOverride {
         text_only?: boolean | null;
         max_duration_seconds?: number | null;
         client_events?: ClientEvent.Raw[] | null;
+        file_input?: FileInputConfigWorkflowOverride.Raw | null;
         monitoring_enabled?: boolean | null;
         monitoring_events?: ClientEvent.Raw[] | null;
     }

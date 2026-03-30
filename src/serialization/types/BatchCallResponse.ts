@@ -18,6 +18,8 @@ export const BatchCallResponse: core.serialization.ObjectSchema<
     whatsappParams: core.serialization.property("whatsapp_params", BatchCallWhatsAppParams.optional()),
     name: core.serialization.string(),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
+    environment: core.serialization.string().optional(),
     createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number()),
     scheduledTimeUnix: core.serialization.property("scheduled_time_unix", core.serialization.number()),
     timezone: core.serialization.string().optional(),
@@ -33,6 +35,7 @@ export const BatchCallResponse: core.serialization.ObjectSchema<
         core.serialization.number().optional(),
     ),
     agentName: core.serialization.property("agent_name", core.serialization.string()),
+    branchName: core.serialization.property("branch_name", core.serialization.string().optional()),
 });
 
 export declare namespace BatchCallResponse {
@@ -43,6 +46,8 @@ export declare namespace BatchCallResponse {
         whatsapp_params?: BatchCallWhatsAppParams.Raw | null;
         name: string;
         agent_id: string;
+        branch_id?: string | null;
+        environment?: string | null;
         created_at_unix: number;
         scheduled_time_unix: number;
         timezone?: string | null;
@@ -55,5 +60,6 @@ export declare namespace BatchCallResponse {
         telephony_call_config: TelephonyCallConfig.Raw;
         target_concurrency_limit?: number | null;
         agent_name: string;
+        branch_name?: string | null;
     }
 }

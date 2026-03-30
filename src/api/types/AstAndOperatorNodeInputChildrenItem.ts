@@ -3,9 +3,11 @@
 import type * as ElevenLabs from "../index";
 
 export type AstAndOperatorNodeInputChildrenItem =
+    | ElevenLabs.AstAndOperatorNodeInputChildrenItem.AddOperator
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.AndOperator
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.BooleanLiteral
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.ConditionalOperator
+    | ElevenLabs.AstAndOperatorNodeInputChildrenItem.DivOperator
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.DynamicVariable
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.EqOperator
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.GtOperator
@@ -13,12 +15,18 @@ export type AstAndOperatorNodeInputChildrenItem =
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.Llm
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.LtOperator
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.LteOperator
+    | ElevenLabs.AstAndOperatorNodeInputChildrenItem.MulOperator
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.NeqOperator
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.NumberLiteral
     | ElevenLabs.AstAndOperatorNodeInputChildrenItem.OrOperator
-    | ElevenLabs.AstAndOperatorNodeInputChildrenItem.StringLiteral;
+    | ElevenLabs.AstAndOperatorNodeInputChildrenItem.StringLiteral
+    | ElevenLabs.AstAndOperatorNodeInputChildrenItem.SubOperator;
 
 export namespace AstAndOperatorNodeInputChildrenItem {
+    export interface AddOperator extends ElevenLabs.AstAdditionOperatorNodeInput {
+        type: "add_operator";
+    }
+
     export interface AndOperator extends ElevenLabs.AstAndOperatorNodeInput {
         type: "and_operator";
     }
@@ -29,6 +37,10 @@ export namespace AstAndOperatorNodeInputChildrenItem {
 
     export interface ConditionalOperator extends ElevenLabs.AstConditionalOperatorNodeInput {
         type: "conditional_operator";
+    }
+
+    export interface DivOperator extends ElevenLabs.AstDivisionOperatorNodeInput {
+        type: "div_operator";
     }
 
     export interface DynamicVariable extends ElevenLabs.AstDynamicVariableNodeInput {
@@ -60,6 +72,10 @@ export namespace AstAndOperatorNodeInputChildrenItem {
         type: "lte_operator";
     }
 
+    export interface MulOperator extends ElevenLabs.AstMultiplicationOperatorNodeInput {
+        type: "mul_operator";
+    }
+
     export interface NeqOperator extends ElevenLabs.AstNotEqualsOperatorNodeInput {
         type: "neq_operator";
     }
@@ -74,5 +90,9 @@ export namespace AstAndOperatorNodeInputChildrenItem {
 
     export interface StringLiteral extends ElevenLabs.AstStringNodeInput {
         type: "string_literal";
+    }
+
+    export interface SubOperator extends ElevenLabs.AstSubtractionOperatorNodeInput {
+        type: "sub_operator";
     }
 }

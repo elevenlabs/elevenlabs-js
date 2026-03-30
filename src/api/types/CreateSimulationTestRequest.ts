@@ -16,6 +16,8 @@ export interface CreateSimulationTestRequest {
     simulationMaxTurns?: number;
     /** The environment to use when running this simulation test. If not provided, defaults to 'production'. */
     simulationEnvironment?: string;
+    /** Configuration for which tools to mock and fallback behavior. */
+    toolMockConfig?: ElevenLabs.SimulationToolMockBehaviorConfig;
     name: string;
     /** The ID of the parent folder. If not provided, the test will be created at the root level. */
     parentFolderId?: string;

@@ -7,6 +7,8 @@ export interface AgentConfigOverrideInput {
     firstMessage?: string;
     /** Language of the agent - used for ASR and TTS */
     language?: string;
+    /** If non-empty, the message the agent will send when max conversation duration is reached. */
+    maxConversationDurationMessage?: string;
     /** The prompt for the agent */
     prompt?: ElevenLabs.PromptAgentApiModelOverride;
 }

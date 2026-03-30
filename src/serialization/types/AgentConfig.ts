@@ -16,6 +16,10 @@ export const AgentConfig: core.serialization.ObjectSchema<serializers.AgentConfi
             "disable_first_message_interruptions",
             core.serialization.boolean().optional(),
         ),
+        maxConversationDurationMessage: core.serialization.property(
+            "max_conversation_duration_message",
+            core.serialization.string().optional(),
+        ),
         prompt: PromptAgentApiModelOutput.optional(),
     });
 
@@ -26,6 +30,7 @@ export declare namespace AgentConfig {
         hinglish_mode?: boolean | null;
         dynamic_variables?: DynamicVariablesConfig.Raw | null;
         disable_first_message_interruptions?: boolean | null;
+        max_conversation_duration_message?: string | null;
         prompt?: PromptAgentApiModelOutput.Raw | null;
     }
 }

@@ -28,6 +28,7 @@ export const FeaturesUsageCommonModel: core.serialization.ObjectSchema<
     workflow: WorkflowFeaturesUsageCommonModel.optional(),
     agentTesting: core.serialization.property("agent_testing", TestsFeatureUsageCommonModel.optional()),
     versioning: FeatureStatusCommonModel.optional(),
+    fileInput: core.serialization.property("file_input", FeatureStatusCommonModel.optional()),
 });
 
 export declare namespace FeaturesUsageCommonModel {
@@ -46,5 +47,6 @@ export declare namespace FeaturesUsageCommonModel {
         workflow?: WorkflowFeaturesUsageCommonModel.Raw | null;
         agent_testing?: TestsFeatureUsageCommonModel.Raw | null;
         versioning?: FeatureStatusCommonModel.Raw | null;
+        file_input?: FeatureStatusCommonModel.Raw | null;
     }
 }

@@ -48,6 +48,7 @@ describe("MessagesClient", () => {
             summaryMode: "exclude",
             conversationInitiationSource: "unknown",
             branchId: "branch_id",
+            sortBy: "search_score",
             cursor: "cursor",
         });
         expect(response).toEqual({

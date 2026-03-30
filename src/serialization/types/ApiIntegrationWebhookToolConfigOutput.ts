@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { ApiIntegrationWebhookOverridesOutput } from "./ApiIntegrationWebhookOverridesOutput";
+import { ApiIntegrationWebhookOverrides } from "./ApiIntegrationWebhookOverrides";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
@@ -32,10 +32,7 @@ export const ApiIntegrationWebhookToolConfigOutput: core.serialization.ObjectSch
         "api_integration_connection_id",
         core.serialization.string(),
     ),
-    apiSchemaOverrides: core.serialization.property(
-        "api_schema_overrides",
-        ApiIntegrationWebhookOverridesOutput.optional(),
-    ),
+    apiSchemaOverrides: core.serialization.property("api_schema_overrides", ApiIntegrationWebhookOverrides.optional()),
 });
 
 export declare namespace ApiIntegrationWebhookToolConfigOutput {
@@ -54,6 +51,6 @@ export declare namespace ApiIntegrationWebhookToolConfigOutput {
         tool_version: string;
         api_integration_id: string;
         api_integration_connection_id: string;
-        api_schema_overrides?: ApiIntegrationWebhookOverridesOutput.Raw | null;
+        api_schema_overrides?: ApiIntegrationWebhookOverrides.Raw | null;
     }
 }

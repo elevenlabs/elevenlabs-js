@@ -2249,6 +2249,261 @@ await client.studio.createPodcast({
 </dl>
 </details>
 
+## Music
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">compose</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Compose a song from a prompt or a composition plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.compose();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyComposeMusicV1MusicPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailed</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Compose a song from a prompt or a composition plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.composeDetailed();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">stream</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stream a composed song from a prompt or a composition plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.stream();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">upload</a>({ ...params }) -> ElevenLabs.MusicUploadResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.upload({
+    file: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUploadMusicV1MusicUploadPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Dubbing
 <details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.DubbingMetadataPageResponseModel</code></summary>
 <dl>
@@ -4294,261 +4549,6 @@ await client.environmentVariables.update("env_var_id", {
 <dd>
 
 **requestOptions:** `EnvironmentVariablesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Music
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">compose</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Compose a song from a prompt or a composition plan.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.compose();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyComposeMusicV1MusicPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailed</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Compose a song from a prompt or a composition plan.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.composeDetailed();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">stream</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Stream a composed song from a prompt or a composition plan.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.stream();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">upload</a>({ ...params }) -> ElevenLabs.MusicUploadResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.upload({
-    file: fs.createReadStream("/path/to/your/file")
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyUploadMusicV1MusicUploadPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -9594,11 +9594,21 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        type: "add_operator",
+                        left: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        },
+                        right: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        }
                     }
                 }
             },
@@ -9608,11 +9618,21 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        type: "add_operator",
+                        left: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        },
+                        right: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        }
                     }
                 }
             },
@@ -9622,11 +9642,21 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        type: "add_operator",
+                        left: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        },
+                        right: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        }
                     }
                 }
             },
@@ -9636,11 +9666,21 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        type: "add_operator",
+                        left: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        },
+                        right: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        }
                     }
                 }
             },
@@ -9650,11 +9690,21 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        type: "add_operator",
+                        left: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        },
+                        right: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        }
                     }
                 }
             },
@@ -9664,11 +9714,21 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        type: "add_operator",
+                        left: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        },
+                        right: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        }
                     }
                 }
             },
@@ -9678,11 +9738,21 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        type: "add_operator",
+                        left: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        },
+                        right: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        }
                     }
                 }
             },
@@ -9692,11 +9762,21 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        type: "add_operator",
+                        left: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        },
+                        right: {
+                            type: "and_operator",
+                            children: [{
+                                    type: "boolean_literal",
+                                    value: true
+                                }]
+                        }
                     }
                 }
             }
@@ -10171,6 +10251,7 @@ await client.conversationalAi.conversations.messages.textSearch({
     summaryMode: "exclude",
     conversationInitiationSource: "unknown",
     branchId: "branch_id",
+    sortBy: "search_score",
     cursor: "cursor"
 });
 

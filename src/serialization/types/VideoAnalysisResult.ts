@@ -3,10 +3,10 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AssetTranscription } from "./AssetTranscription";
 import { VideoKeyMoment } from "./VideoKeyMoment";
 import { VideoSegment } from "./VideoSegment";
 import { VideoSubject } from "./VideoSubject";
-import { VideoTranscription } from "./VideoTranscription";
 
 export const VideoAnalysisResult: core.serialization.ObjectSchema<
     serializers.VideoAnalysisResult.Raw,
@@ -19,7 +19,7 @@ export const VideoAnalysisResult: core.serialization.ObjectSchema<
     subjects: core.serialization.list(VideoSubject).optional(),
     segments: core.serialization.list(VideoSegment).optional(),
     keyMoments: core.serialization.property("key_moments", core.serialization.list(VideoKeyMoment).optional()),
-    transcription: VideoTranscription.optional(),
+    transcription: AssetTranscription.optional(),
 });
 
 export declare namespace VideoAnalysisResult {
@@ -31,6 +31,6 @@ export declare namespace VideoAnalysisResult {
         subjects?: VideoSubject.Raw[] | null;
         segments?: VideoSegment.Raw[] | null;
         key_moments?: VideoKeyMoment.Raw[] | null;
-        transcription?: VideoTranscription.Raw | null;
+        transcription?: AssetTranscription.Raw | null;
     }
 }

@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AutoSyncInfo } from "./AutoSyncInfo";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { GetKnowledgeBaseSummaryUrlResponseModelDependentAgentsItem } from "./GetKnowledgeBaseSummaryUrlResponseModelDependentAgentsItem";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
@@ -28,6 +29,7 @@ export const GetKnowledgeBaseSummaryUrlResponseModel: core.serialization.ObjectS
         core.serialization.list(GetKnowledgeBaseSummaryUrlResponseModelDependentAgentsItem),
     ),
     url: core.serialization.string(),
+    autoSyncInfo: core.serialization.property("auto_sync_info", AutoSyncInfo.optional()),
 });
 
 export declare namespace GetKnowledgeBaseSummaryUrlResponseModel {
@@ -41,5 +43,6 @@ export declare namespace GetKnowledgeBaseSummaryUrlResponseModel {
         folder_path?: KnowledgeBaseFolderPathSegmentSummaryResponseModel.Raw[] | null;
         dependent_agents: GetKnowledgeBaseSummaryUrlResponseModelDependentAgentsItem.Raw[];
         url: string;
+        auto_sync_info?: AutoSyncInfo.Raw | null;
     }
 }

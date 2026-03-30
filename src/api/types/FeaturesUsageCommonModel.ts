@@ -17,4 +17,5 @@ export interface FeaturesUsageCommonModel {
     workflow?: ElevenLabs.WorkflowFeaturesUsageCommonModel;
     agentTesting?: ElevenLabs.TestsFeatureUsageCommonModel;
     versioning?: ElevenLabs.FeatureStatusCommonModel;
+    fileInput?: ElevenLabs.FeatureStatusCommonModel;
 }

@@ -18,6 +18,8 @@ export interface BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
     agentPhoneNumberId?: string;
     whatsappParams?: ElevenLabs.BatchCallWhatsAppParams;
     timezone?: string;
+    branchId?: string;
+    environment?: string;
     telephonyCallConfig?: ElevenLabs.TelephonyCallConfig;
     /** Maximum number of simultaneous calls for this batch. When set, dispatch is governed by this limit rather than workspace/agent capacity percentages. */
     targetConcurrencyLimit?: number;

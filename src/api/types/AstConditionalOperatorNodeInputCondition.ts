@@ -6,9 +6,11 @@ import type * as ElevenLabs from "../index";
  * Condition deciding which expression should be selected.
  */
 export type AstConditionalOperatorNodeInputCondition =
+    | ElevenLabs.AstConditionalOperatorNodeInputCondition.AddOperator
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.AndOperator
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.BooleanLiteral
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.ConditionalOperator
+    | ElevenLabs.AstConditionalOperatorNodeInputCondition.DivOperator
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.DynamicVariable
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.EqOperator
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.GtOperator
@@ -16,12 +18,18 @@ export type AstConditionalOperatorNodeInputCondition =
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.Llm
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.LtOperator
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.LteOperator
+    | ElevenLabs.AstConditionalOperatorNodeInputCondition.MulOperator
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.NeqOperator
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.NumberLiteral
     | ElevenLabs.AstConditionalOperatorNodeInputCondition.OrOperator
-    | ElevenLabs.AstConditionalOperatorNodeInputCondition.StringLiteral;
+    | ElevenLabs.AstConditionalOperatorNodeInputCondition.StringLiteral
+    | ElevenLabs.AstConditionalOperatorNodeInputCondition.SubOperator;
 
 export namespace AstConditionalOperatorNodeInputCondition {
+    export interface AddOperator extends ElevenLabs.AstAdditionOperatorNodeInput {
+        type: "add_operator";
+    }
+
     export interface AndOperator extends ElevenLabs.AstAndOperatorNodeInput {
         type: "and_operator";
     }
@@ -32,6 +40,10 @@ export namespace AstConditionalOperatorNodeInputCondition {
 
     export interface ConditionalOperator extends ElevenLabs.AstConditionalOperatorNodeInput {
         type: "conditional_operator";
+    }
+
+    export interface DivOperator extends ElevenLabs.AstDivisionOperatorNodeInput {
+        type: "div_operator";
     }
 
     export interface DynamicVariable extends ElevenLabs.AstDynamicVariableNodeInput {
@@ -63,6 +75,10 @@ export namespace AstConditionalOperatorNodeInputCondition {
         type: "lte_operator";
     }
 
+    export interface MulOperator extends ElevenLabs.AstMultiplicationOperatorNodeInput {
+        type: "mul_operator";
+    }
+
     export interface NeqOperator extends ElevenLabs.AstNotEqualsOperatorNodeInput {
         type: "neq_operator";
     }
@@ -77,5 +93,9 @@ export namespace AstConditionalOperatorNodeInputCondition {
 
     export interface StringLiteral extends ElevenLabs.AstStringNodeInput {
         type: "string_literal";
+    }
+
+    export interface SubOperator extends ElevenLabs.AstSubtractionOperatorNodeInput {
+        type: "sub_operator";
     }
 }
