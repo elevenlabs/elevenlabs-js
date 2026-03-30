@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationHistoryTranscriptCommonModelInput } from "./ConversationHistoryTranscriptCommonModelInput";
+import { SimulationToolMockBehaviorConfig } from "./SimulationToolMockBehaviorConfig";
 import { TestFromConversationMetadataInput } from "./TestFromConversationMetadataInput";
 import { UpdateSimulationTestRequestDynamicVariablesValue } from "./UpdateSimulationTestRequestDynamicVariablesValue";
 
@@ -32,6 +33,7 @@ export const UpdateSimulationTestRequest: core.serialization.ObjectSchema<
         "simulation_environment",
         core.serialization.string().optional(),
     ),
+    toolMockConfig: core.serialization.property("tool_mock_config", SimulationToolMockBehaviorConfig.optional()),
     name: core.serialization.string(),
     parentFolderId: core.serialization.property("parent_folder_id", core.serialization.string().optional()),
 });
@@ -48,6 +50,7 @@ export declare namespace UpdateSimulationTestRequest {
         simulation_scenario?: string | null;
         simulation_max_turns?: number | null;
         simulation_environment?: string | null;
+        tool_mock_config?: SimulationToolMockBehaviorConfig.Raw | null;
         name: string;
         parent_folder_id?: string | null;
     }

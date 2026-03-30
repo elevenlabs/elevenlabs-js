@@ -21,4 +21,6 @@ export interface LlmInfoModelOutput {
     availableReasoningEfforts?: ElevenLabs.LlmReasoningEffort[];
     /** Deprecation information if this model is deprecated or scheduled for deprecation. Null if the model is not affected. */
     deprecationInfo?: ElevenLabs.LlmDeprecationInfoModel;
+    /** The model's benchmark score. Null if no score is available. */
+    modelScore?: number;
 }

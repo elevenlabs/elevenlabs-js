@@ -16,6 +16,12 @@ export interface ApiIntegrationOAuth2AuthCodeResponse {
     expiresAt: string;
     integrationId: string;
     credentialId: string;
+    /** Current health status of the OAuth connection */
+    status?: ElevenLabs.OAuthConnectionStatus;
+    /** Human-readable detail about the current status, e.g. the error message on refresh failure */
+    statusDetail?: string;
+    /** ISO 8601 timestamp of the last status change */
+    statusUpdatedAt?: string;
     id: string;
     usedBy?: ElevenLabs.AuthConnectionDependencies;
 }

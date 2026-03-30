@@ -52,6 +52,7 @@ export class ElevenLabsClient {
     protected _user: UserClient | undefined;
     protected _voices: VoicesClient | undefined;
     protected _studio: StudioClient | undefined;
+    protected _music: MusicClient | undefined;
     protected _dubbing: DubbingClient | undefined;
     protected _models: ModelsClient | undefined;
     protected _audioNative: AudioNativeClient | undefined;
@@ -63,7 +64,6 @@ export class ElevenLabsClient {
     protected _forcedAlignment: ForcedAlignmentClient | undefined;
     protected _conversationalAi: ConversationalAiClient | undefined;
     protected _environmentVariables: EnvironmentVariablesClient | undefined;
-    protected _music: MusicClient | undefined;
     protected _tokens: TokensClient | undefined;
     protected _workspace: WorkspaceClient | undefined;
 
@@ -115,6 +115,10 @@ export class ElevenLabsClient {
         return (this._studio ??= new StudioClient(this._options));
     }
 
+    public get music(): MusicClient {
+        return (this._music ??= new MusicClient(this._options));
+    }
+
     public get dubbing(): DubbingClient {
         return (this._dubbing ??= new DubbingClient(this._options));
     }
@@ -157,10 +161,6 @@ export class ElevenLabsClient {
 
     public get environmentVariables(): EnvironmentVariablesClient {
         return (this._environmentVariables ??= new EnvironmentVariablesClient(this._options));
-    }
-
-    public get music(): MusicClient {
-        return (this._music ??= new MusicClient(this._options));
     }
 
     public get tokens(): TokensClient {

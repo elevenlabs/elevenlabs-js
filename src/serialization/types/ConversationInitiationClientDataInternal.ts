@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { ConversationConfigClientOverrideOutput } from "./ConversationConfigClientOverrideOutput";
 import { ConversationInitiationClientDataInternalDynamicVariablesValue } from "./ConversationInitiationClientDataInternalDynamicVariablesValue";
 import { ConversationInitiationSourceInfo } from "./ConversationInitiationSourceInfo";
+import { OrchestratorToolMockBehaviorConfig } from "./OrchestratorToolMockBehaviorConfig";
 
 export const ConversationInitiationClientDataInternal: core.serialization.ObjectSchema<
     serializers.ConversationInitiationClientDataInternal.Raw,
@@ -21,6 +22,8 @@ export const ConversationInitiationClientDataInternal: core.serialization.Object
     ),
     userId: core.serialization.property("user_id", core.serialization.string().optional()),
     sourceInfo: core.serialization.property("source_info", ConversationInitiationSourceInfo.optional()),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
+    environment: core.serialization.string().optional(),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
         core.serialization
@@ -30,6 +33,7 @@ export const ConversationInitiationClientDataInternal: core.serialization.Object
             )
             .optional(),
     ),
+    toolMockConfig: core.serialization.property("tool_mock_config", OrchestratorToolMockBehaviorConfig.optional()),
 });
 
 export declare namespace ConversationInitiationClientDataInternal {
@@ -38,9 +42,12 @@ export declare namespace ConversationInitiationClientDataInternal {
         custom_llm_extra_body?: Record<string, unknown> | null;
         user_id?: string | null;
         source_info?: ConversationInitiationSourceInfo.Raw | null;
+        branch_id?: string | null;
+        environment?: string | null;
         dynamic_variables?: Record<
             string,
             ConversationInitiationClientDataInternalDynamicVariablesValue.Raw | null | undefined
         > | null;
+        tool_mock_config?: OrchestratorToolMockBehaviorConfig.Raw | null;
     }
 }

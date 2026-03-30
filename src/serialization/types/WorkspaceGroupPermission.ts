@@ -37,6 +37,7 @@ export const WorkspaceGroupPermission: core.serialization.Schema<
     "workspace_members_invite",
     "workspace_members_remove",
     "terms_of_service_accept",
+    "audit_log_read",
 ]);
 
 export declare namespace WorkspaceGroupPermission {
@@ -69,5 +70,6 @@ export declare namespace WorkspaceGroupPermission {
         | "group_members_manage"
         | "workspace_members_invite"
         | "workspace_members_remove"
-        | "terms_of_service_accept";
+        | "terms_of_service_accept"
+        | "audit_log_read";
 }

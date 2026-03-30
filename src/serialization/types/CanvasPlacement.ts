@@ -20,6 +20,8 @@ export const CanvasPlacement: core.serialization.ObjectSchema<
     cropRight: core.serialization.property("crop_right", core.serialization.number().optional()),
     cropBottom: core.serialization.property("crop_bottom", core.serialization.number().optional()),
     cropLeft: core.serialization.property("crop_left", core.serialization.number().optional()),
+    flipX: core.serialization.property("flip_x", core.serialization.boolean().optional()),
+    flipY: core.serialization.property("flip_y", core.serialization.boolean().optional()),
 });
 
 export declare namespace CanvasPlacement {
@@ -36,5 +38,7 @@ export declare namespace CanvasPlacement {
         crop_right?: number | null;
         crop_bottom?: number | null;
         crop_left?: number | null;
+        flip_x?: boolean | null;
+        flip_y?: boolean | null;
     }
 }

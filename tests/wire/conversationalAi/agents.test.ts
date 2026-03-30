@@ -93,6 +93,7 @@ describe("AgentsClient", () => {
                     hinglish_mode: true,
                     dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                     disable_first_message_interruptions: false,
+                    max_conversation_duration_message: "max_conversation_duration_message",
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -249,7 +250,11 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -259,7 +264,11 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "unconditional", label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -269,7 +278,11 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "result", successful: true, label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -279,7 +292,11 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "result", successful: true, label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -289,7 +306,11 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "unconditional", label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -303,7 +324,11 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -317,7 +342,11 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -326,12 +355,20 @@ describe("AgentsClient", () => {
                         target: "success_phone",
                         forward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -753,6 +790,7 @@ describe("AgentsClient", () => {
                         },
                     },
                     disableFirstMessageInterruptions: false,
+                    maxConversationDurationMessage: "max_conversation_duration_message",
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -961,13 +999,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -980,13 +1030,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -1000,13 +1062,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -1020,13 +1094,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -1039,13 +1125,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -1059,13 +1157,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -1079,13 +1189,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -1095,25 +1217,49 @@ describe("AgentsClient", () => {
                         forwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -1622,6 +1768,7 @@ describe("AgentsClient", () => {
                     hinglish_mode: true,
                     dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                     disable_first_message_interruptions: false,
+                    max_conversation_duration_message: "max_conversation_duration_message",
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -1778,7 +1925,11 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -1788,7 +1939,11 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "unconditional", label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -1798,7 +1953,11 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "result", successful: true, label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -1808,7 +1967,11 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "result", successful: true, label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -1818,7 +1981,11 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "unconditional", label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -1832,7 +1999,11 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -1846,7 +2017,11 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -1855,12 +2030,20 @@ describe("AgentsClient", () => {
                         target: "success_phone",
                         forward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: {
+                                type: "add_operator",
+                                left: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                                right: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            },
                             label: null,
                         },
                     },
@@ -2283,6 +2466,7 @@ describe("AgentsClient", () => {
                         },
                     },
                     disableFirstMessageInterruptions: false,
+                    maxConversationDurationMessage: "max_conversation_duration_message",
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -2491,13 +2675,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -2510,13 +2706,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -2530,13 +2738,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -2550,13 +2770,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -2569,13 +2801,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -2589,13 +2833,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -2609,13 +2865,25 @@ describe("AgentsClient", () => {
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -2625,25 +2893,49 @@ describe("AgentsClient", () => {
                         forwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                         backwardCondition: {
                             type: "expression",
                             expression: {
-                                type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                type: "add_operator",
+                                left: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
+                                right: {
+                                    type: "and_operator",
+                                    children: [
+                                        {
+                                            type: "boolean_literal",
+                                            value: true,
+                                        },
+                                    ],
+                                },
                             },
                         },
                     },
@@ -3197,6 +3489,7 @@ describe("AgentsClient", () => {
                     interrupted: true,
                     original_message: "original_message",
                     source_medium: "audio",
+                    source_event_id: 1,
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -3305,6 +3598,7 @@ describe("AgentsClient", () => {
                     interrupted: true,
                     originalMessage: "original_message",
                     sourceMedium: "audio",
+                    sourceEventId: 1,
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",

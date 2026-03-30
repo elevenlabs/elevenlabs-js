@@ -16,6 +16,10 @@ export const AsyncConversationMetadata: core.serialization.ObjectSchema<
     externalId: core.serialization.property("external_id", core.serialization.string()),
     retryCount: core.serialization.property("retry_count", core.serialization.number().optional()),
     lastRetryTimestamp: core.serialization.property("last_retry_timestamp", core.serialization.number().optional()),
+    lastProcessedExternalMessageId: core.serialization.property(
+        "last_processed_external_message_id",
+        core.serialization.string().optional(),
+    ),
 });
 
 export declare namespace AsyncConversationMetadata {
@@ -27,5 +31,6 @@ export declare namespace AsyncConversationMetadata {
         external_id: string;
         retry_count?: number | null;
         last_retry_timestamp?: number | null;
+        last_processed_external_message_id?: string | null;
     }
 }

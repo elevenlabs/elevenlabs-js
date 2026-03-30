@@ -27,5 +27,6 @@ export interface ProjectExternalAudioResponseModel {
     error?: string;
     currentSnapshotId?: string;
     sourceContext?: ElevenLabs.ProjectExternalAudioResponseModelSourceContext;
+    analysis?: ElevenLabs.AudioAnalysis;
     importSpeechProgress?: number;
 }

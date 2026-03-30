@@ -16,4 +16,6 @@ export interface CanvasPlacement {
     cropRight?: number;
     cropBottom?: number;
     cropLeft?: number;
+    flipX?: boolean;
+    flipY?: boolean;
 }

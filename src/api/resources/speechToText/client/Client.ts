@@ -114,8 +114,8 @@ export class SpeechToTextClient {
             );
         }
 
-        if (request.cloudStorageUrl != null) {
-            _request.append("cloud_storage_url", request.cloudStorageUrl);
+        if (request.sourceUrl != null) {
+            _request.append("source_url", request.sourceUrl);
         }
 
         if (request.webhook != null) {
@@ -222,15 +222,7 @@ export class SpeechToTextClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,

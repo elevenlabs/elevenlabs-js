@@ -46,6 +46,7 @@ export const ConversationHistoryTranscriptResponseModel: core.serialization.Obje
     interrupted: core.serialization.boolean().optional(),
     originalMessage: core.serialization.property("original_message", core.serialization.string().optional()),
     sourceMedium: core.serialization.property("source_medium", ChatSourceMedium.optional()),
+    sourceEventId: core.serialization.property("source_event_id", core.serialization.number().optional()),
     fileInput: core.serialization.property(
         "file_input",
         ConversationHistoryTranscriptFileInputResponseModel.optional(),
@@ -69,6 +70,7 @@ export declare namespace ConversationHistoryTranscriptResponseModel {
         interrupted?: boolean | null;
         original_message?: string | null;
         source_medium?: ChatSourceMedium.Raw | null;
+        source_event_id?: number | null;
         file_input?: ConversationHistoryTranscriptFileInputResponseModel.Raw | null;
     }
 }

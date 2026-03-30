@@ -2,10 +2,9 @@
 
 import type * as core from "../../core";
 import * as errors from "../../errors/index";
-import type * as ElevenLabs from "../index";
 
 export class UnprocessableEntityError extends errors.ElevenLabsError {
-    constructor(body: ElevenLabs.HttpValidationError, rawResponse?: core.RawResponse) {
+    constructor(body?: unknown, rawResponse?: core.RawResponse) {
         super({
             message: "UnprocessableEntityError",
             statusCode: 422,

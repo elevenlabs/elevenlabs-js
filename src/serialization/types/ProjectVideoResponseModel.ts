@@ -63,6 +63,7 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
     canvasPlacement: core.serialization.property("canvas_placement", CanvasPlacement.optional()),
     animation: ClipAnimation.optional(),
     playbackSpeed: core.serialization.property("playback_speed", core.serialization.number().optional()),
+    opacity: core.serialization.number().optional(),
     trackId: core.serialization.property("track_id", core.serialization.string().optional()),
     previewJobProgress: core.serialization.property("preview_job_progress", core.serialization.number().optional()),
     importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
@@ -107,6 +108,7 @@ export declare namespace ProjectVideoResponseModel {
         canvas_placement?: CanvasPlacement.Raw | null;
         animation?: ClipAnimation.Raw | null;
         playback_speed?: number | null;
+        opacity?: number | null;
         track_id?: string | null;
         preview_job_progress?: number | null;
         import_speech_progress?: number | null;

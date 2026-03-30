@@ -40,6 +40,7 @@ export interface ProjectVideoResponseModel {
     canvasPlacement?: ElevenLabs.CanvasPlacement;
     animation?: ElevenLabs.ClipAnimation;
     playbackSpeed?: number;
+    opacity?: number;
     trackId?: string;
     previewJobProgress?: number;
     importSpeechProgress?: number;

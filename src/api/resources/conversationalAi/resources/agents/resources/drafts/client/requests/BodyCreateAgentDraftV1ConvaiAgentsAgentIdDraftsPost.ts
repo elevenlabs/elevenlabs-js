@@ -20,11 +20,21 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                     forwardCondition: {
  *                         type: "expression",
  *                         expression: {
- *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             type: "add_operator",
+ *                             left: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             },
+ *                             right: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             }
  *                         }
  *                     }
  *                 },
@@ -34,11 +44,21 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                     forwardCondition: {
  *                         type: "expression",
  *                         expression: {
- *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             type: "add_operator",
+ *                             left: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             },
+ *                             right: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             }
  *                         }
  *                     }
  *                 },
@@ -48,11 +68,21 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                     forwardCondition: {
  *                         type: "expression",
  *                         expression: {
- *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             type: "add_operator",
+ *                             left: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             },
+ *                             right: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             }
  *                         }
  *                     }
  *                 },
@@ -62,11 +92,21 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                     forwardCondition: {
  *                         type: "expression",
  *                         expression: {
- *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             type: "add_operator",
+ *                             left: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             },
+ *                             right: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             }
  *                         }
  *                     }
  *                 },
@@ -76,11 +116,21 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                     forwardCondition: {
  *                         type: "expression",
  *                         expression: {
- *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             type: "add_operator",
+ *                             left: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             },
+ *                             right: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             }
  *                         }
  *                     }
  *                 },
@@ -90,11 +140,21 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                     forwardCondition: {
  *                         type: "expression",
  *                         expression: {
- *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             type: "add_operator",
+ *                             left: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             },
+ *                             right: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             }
  *                         }
  *                     }
  *                 },
@@ -104,11 +164,21 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                     forwardCondition: {
  *                         type: "expression",
  *                         expression: {
- *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             type: "add_operator",
+ *                             left: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             },
+ *                             right: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             }
  *                         }
  *                     }
  *                 },
@@ -118,11 +188,21 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                     forwardCondition: {
  *                         type: "expression",
  *                         expression: {
- *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             type: "add_operator",
+ *                             left: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             },
+ *                             right: {
+ *                                 type: "and_operator",
+ *                                 children: [{
+ *                                         type: "boolean_literal",
+ *                                         value: true
+ *                                     }]
+ *                             }
  *                         }
  *                     }
  *                 }

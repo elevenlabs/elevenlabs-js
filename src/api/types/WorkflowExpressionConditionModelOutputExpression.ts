@@ -6,9 +6,11 @@ import type * as ElevenLabs from "../index";
  * Expression to evaluate.
  */
 export type WorkflowExpressionConditionModelOutputExpression =
+    | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.AddOperator
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.AndOperator
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.BooleanLiteral
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.ConditionalOperator
+    | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.DivOperator
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.DynamicVariable
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.EqOperator
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.GtOperator
@@ -16,12 +18,18 @@ export type WorkflowExpressionConditionModelOutputExpression =
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.Llm
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.LtOperator
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.LteOperator
+    | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.MulOperator
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.NeqOperator
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.NumberLiteral
     | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.OrOperator
-    | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.StringLiteral;
+    | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.StringLiteral
+    | ElevenLabs.WorkflowExpressionConditionModelOutputExpression.SubOperator;
 
 export namespace WorkflowExpressionConditionModelOutputExpression {
+    export interface AddOperator extends ElevenLabs.AstAdditionOperatorNodeOutput {
+        type: "add_operator";
+    }
+
     export interface AndOperator extends ElevenLabs.AstAndOperatorNodeOutput {
         type: "and_operator";
     }
@@ -32,6 +40,10 @@ export namespace WorkflowExpressionConditionModelOutputExpression {
 
     export interface ConditionalOperator extends ElevenLabs.AstConditionalOperatorNodeOutput {
         type: "conditional_operator";
+    }
+
+    export interface DivOperator extends ElevenLabs.AstDivisionOperatorNodeOutput {
+        type: "div_operator";
     }
 
     export interface DynamicVariable extends ElevenLabs.AstDynamicVariableNodeOutput {
@@ -62,6 +74,10 @@ export namespace WorkflowExpressionConditionModelOutputExpression {
         type: "lte_operator";
     }
 
+    export interface MulOperator extends ElevenLabs.AstMultiplicationOperatorNodeOutput {
+        type: "mul_operator";
+    }
+
     export interface NeqOperator extends ElevenLabs.AstNotEqualsOperatorNodeOutput {
         type: "neq_operator";
     }
@@ -76,5 +92,9 @@ export namespace WorkflowExpressionConditionModelOutputExpression {
 
     export interface StringLiteral extends ElevenLabs.AstStringNodeOutput {
         type: "string_literal";
+    }
+
+    export interface SubOperator extends ElevenLabs.AstSubtractionOperatorNodeOutput {
+        type: "sub_operator";
     }
 }

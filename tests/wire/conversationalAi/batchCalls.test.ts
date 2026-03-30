@@ -20,6 +20,8 @@ describe("BatchCallsClient", () => {
             },
             name: "name",
             agent_id: "agent_id",
+            branch_id: "branch_id",
+            environment: "environment",
             created_at_unix: 1,
             scheduled_time_unix: 1,
             timezone: "timezone",
@@ -32,6 +34,7 @@ describe("BatchCallsClient", () => {
             telephony_call_config: { ringing_timeout_secs: 1 },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
+            branch_name: "branch_name",
         };
         server
             .mockEndpoint()
@@ -59,6 +62,8 @@ describe("BatchCallsClient", () => {
             },
             name: "name",
             agentId: "agent_id",
+            branchId: "branch_id",
+            environment: "environment",
             createdAtUnix: 1,
             scheduledTimeUnix: 1,
             timezone: "timezone",
@@ -73,6 +78,7 @@ describe("BatchCallsClient", () => {
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",
+            branchName: "branch_name",
         });
     });
 
@@ -94,6 +100,8 @@ describe("BatchCallsClient", () => {
                     },
                     name: "name",
                     agent_id: "agent_id",
+                    branch_id: "branch_id",
+                    environment: "environment",
                     created_at_unix: 1,
                     scheduled_time_unix: 1,
                     timezone: "timezone",
@@ -106,6 +114,7 @@ describe("BatchCallsClient", () => {
                     telephony_call_config: {},
                     target_concurrency_limit: 1,
                     agent_name: "agent_name",
+                    branch_name: "branch_name",
                 },
             ],
             next_doc: "next_doc",
@@ -136,6 +145,8 @@ describe("BatchCallsClient", () => {
                     },
                     name: "name",
                     agentId: "agent_id",
+                    branchId: "branch_id",
+                    environment: "environment",
                     createdAtUnix: 1,
                     scheduledTimeUnix: 1,
                     timezone: "timezone",
@@ -148,6 +159,7 @@ describe("BatchCallsClient", () => {
                     telephonyCallConfig: {},
                     targetConcurrencyLimit: 1,
                     agentName: "agent_name",
+                    branchName: "branch_name",
                 },
             ],
             nextDoc: "next_doc",
@@ -171,6 +183,8 @@ describe("BatchCallsClient", () => {
             },
             name: "name",
             agent_id: "agent_id",
+            branch_id: "branch_id",
+            environment: "environment",
             created_at_unix: 1,
             scheduled_time_unix: 1,
             timezone: "timezone",
@@ -183,6 +197,7 @@ describe("BatchCallsClient", () => {
             telephony_call_config: { ringing_timeout_secs: 1 },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
+            branch_name: "branch_name",
             recipients: [
                 {
                     id: "id",
@@ -230,6 +245,8 @@ describe("BatchCallsClient", () => {
             },
             name: "name",
             agentId: "agent_id",
+            branchId: "branch_id",
+            environment: "environment",
             createdAtUnix: 1,
             scheduledTimeUnix: 1,
             timezone: "timezone",
@@ -244,6 +261,7 @@ describe("BatchCallsClient", () => {
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",
+            branchName: "branch_name",
             recipients: [
                 {
                     id: "id",
@@ -307,6 +325,8 @@ describe("BatchCallsClient", () => {
             },
             name: "name",
             agent_id: "agent_id",
+            branch_id: "branch_id",
+            environment: "environment",
             created_at_unix: 1,
             scheduled_time_unix: 1,
             timezone: "timezone",
@@ -319,6 +339,7 @@ describe("BatchCallsClient", () => {
             telephony_call_config: { ringing_timeout_secs: 1 },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
+            branch_name: "branch_name",
         };
         server
             .mockEndpoint()
@@ -341,6 +362,8 @@ describe("BatchCallsClient", () => {
             },
             name: "name",
             agentId: "agent_id",
+            branchId: "branch_id",
+            environment: "environment",
             createdAtUnix: 1,
             scheduledTimeUnix: 1,
             timezone: "timezone",
@@ -355,6 +378,7 @@ describe("BatchCallsClient", () => {
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",
+            branchName: "branch_name",
         });
     });
 
@@ -374,6 +398,8 @@ describe("BatchCallsClient", () => {
             },
             name: "name",
             agent_id: "agent_id",
+            branch_id: "branch_id",
+            environment: "environment",
             created_at_unix: 1,
             scheduled_time_unix: 1,
             timezone: "timezone",
@@ -386,6 +412,7 @@ describe("BatchCallsClient", () => {
             telephony_call_config: { ringing_timeout_secs: 1 },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
+            branch_name: "branch_name",
         };
         server
             .mockEndpoint()
@@ -408,6 +435,8 @@ describe("BatchCallsClient", () => {
             },
             name: "name",
             agentId: "agent_id",
+            branchId: "branch_id",
+            environment: "environment",
             createdAtUnix: 1,
             scheduledTimeUnix: 1,
             timezone: "timezone",
@@ -422,6 +451,7 @@ describe("BatchCallsClient", () => {
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",
+            branchName: "branch_name",
         });
     });
 });

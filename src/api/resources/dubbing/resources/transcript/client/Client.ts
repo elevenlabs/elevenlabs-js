@@ -107,15 +107,7 @@ export class TranscriptClient {
                 case 404:
                     throw new ElevenLabs.NotFoundError(_response.error.body, _response.rawResponse);
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 case 425:
                     throw new ElevenLabs.TooEarlyError(_response.error.body, _response.rawResponse);
                 default:

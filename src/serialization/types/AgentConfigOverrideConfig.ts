@@ -11,6 +11,10 @@ export const AgentConfigOverrideConfig: core.serialization.ObjectSchema<
 > = core.serialization.object({
     firstMessage: core.serialization.property("first_message", core.serialization.boolean().optional()),
     language: core.serialization.boolean().optional(),
+    maxConversationDurationMessage: core.serialization.property(
+        "max_conversation_duration_message",
+        core.serialization.boolean().optional(),
+    ),
     prompt: PromptAgentApiModelOverrideConfig.optional(),
 });
 
@@ -18,6 +22,7 @@ export declare namespace AgentConfigOverrideConfig {
     export interface Raw {
         first_message?: boolean | null;
         language?: boolean | null;
+        max_conversation_duration_message?: boolean | null;
         prompt?: PromptAgentApiModelOverrideConfig.Raw | null;
     }
 }

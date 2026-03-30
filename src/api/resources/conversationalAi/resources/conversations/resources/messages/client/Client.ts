@@ -48,6 +48,7 @@ export class MessagesClient {
      *         summaryMode: "exclude",
      *         conversationInitiationSource: "unknown",
      *         branchId: "branch_id",
+     *         sortBy: "search_score",
      *         cursor: "cursor"
      *     })
      */
@@ -84,6 +85,7 @@ export class MessagesClient {
             summaryMode,
             conversationInitiationSource,
             branchId,
+            sortBy,
             cursor,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
@@ -201,6 +203,12 @@ export class MessagesClient {
             _queryParams.branch_id = branchId;
         }
 
+        if (sortBy != null) {
+            _queryParams.sort_by = serializers.MessageSearchSortBy.jsonOrThrow(sortBy, {
+                unrecognizedObjectKeys: "strip",
+            });
+        }
+
         if (cursor != null) {
             _queryParams.cursor = cursor;
         }
@@ -241,15 +249,7 @@ export class MessagesClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -345,15 +345,7 @@ export class MessagesClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
