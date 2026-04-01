@@ -9,6 +9,7 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index";
 import * as serializers from "../../../../../../serialization/index";
 import * as ElevenLabs from "../../../../../index";
+import { AnalysisClient } from "../resources/analysis/client/Client";
 import { AudioClient } from "../resources/audio/client/Client";
 import { FeedbackClient } from "../resources/feedback/client/Client";
 import { FilesClient } from "../resources/files/client/Client";
@@ -26,6 +27,7 @@ export class ConversationsClient {
     protected _feedback: FeedbackClient | undefined;
     protected _messages: MessagesClient | undefined;
     protected _files: FilesClient | undefined;
+    protected _analysis: AnalysisClient | undefined;
 
     constructor(options: ConversationsClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -45,6 +47,10 @@ export class ConversationsClient {
 
     public get files(): FilesClient {
         return (this._files ??= new FilesClient(this._options));
+    }
+
+    public get analysis(): AnalysisClient {
+        return (this._analysis ??= new AnalysisClient(this._options));
     }
 
     /**

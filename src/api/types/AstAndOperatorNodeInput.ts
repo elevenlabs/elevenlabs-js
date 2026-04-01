@@ -4,5 +4,5 @@ import type * as ElevenLabs from "../index";
 
 export interface AstAndOperatorNodeInput {
     /** Child nodes of the logical operator. */
-    children: ElevenLabs.AstAndOperatorNodeInputChildrenItem[];
+    children: ElevenLabs.AstNodeInput[];
 }

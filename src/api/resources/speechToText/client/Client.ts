@@ -114,6 +114,10 @@ export class SpeechToTextClient {
             );
         }
 
+        if (request.cloudStorageUrl != null) {
+            _request.append("cloud_storage_url", request.cloudStorageUrl);
+        }
+
         if (request.sourceUrl != null) {
             _request.append("source_url", request.sourceUrl);
         }
