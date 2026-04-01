@@ -5,6 +5,7 @@ import * as core from "../../../../../../core";
 import type * as serializers from "../../../../../index";
 import { CreateBasicAuthRequest } from "../../../../../types/CreateBasicAuthRequest";
 import { CreateCustomHeaderAuthRequest } from "../../../../../types/CreateCustomHeaderAuthRequest";
+import { CreateMtlsAuthRequest } from "../../../../../types/CreateMtlsAuthRequest";
 import { CreateOAuth2ClientCredsRequest } from "../../../../../types/CreateOAuth2ClientCredsRequest";
 import { CreateOAuth2JwtRequest } from "../../../../../types/CreateOAuth2JwtRequest";
 import { CreatePrivateKeyJwtRequest } from "../../../../../types/CreatePrivateKeyJwtRequest";
@@ -19,6 +20,7 @@ export const AuthConnectionsCreateRequestBody: core.serialization.Schema<
         basic_auth: CreateBasicAuthRequest,
         oauth2_jwt: CreateOAuth2JwtRequest,
         private_key_jwt: CreatePrivateKeyJwtRequest,
+        mtls: CreateMtlsAuthRequest,
     })
     .transform<ElevenLabs.workspace.AuthConnectionsCreateRequestBody>({
         transform: (value) => value,
@@ -31,7 +33,8 @@ export declare namespace AuthConnectionsCreateRequestBody {
         | AuthConnectionsCreateRequestBody.CustomHeaderAuth
         | AuthConnectionsCreateRequestBody.BasicAuth
         | AuthConnectionsCreateRequestBody.Oauth2Jwt
-        | AuthConnectionsCreateRequestBody.PrivateKeyJwt;
+        | AuthConnectionsCreateRequestBody.PrivateKeyJwt
+        | AuthConnectionsCreateRequestBody.Mtls;
 
     export interface Oauth2ClientCredentials extends CreateOAuth2ClientCredsRequest.Raw {
         auth_type: "oauth2_client_credentials";
@@ -51,5 +54,9 @@ export declare namespace AuthConnectionsCreateRequestBody {
 
     export interface PrivateKeyJwt extends CreatePrivateKeyJwtRequest.Raw {
         auth_type: "private_key_jwt";
+    }
+
+    export interface Mtls extends CreateMtlsAuthRequest.Raw {
+        auth_type: "mtls";
     }
 }

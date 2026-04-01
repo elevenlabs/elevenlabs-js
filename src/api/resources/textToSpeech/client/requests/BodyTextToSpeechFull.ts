@@ -52,4 +52,6 @@ export interface BodyTextToSpeechFull {
     applyTextNormalization?: ElevenLabs.BodyTextToSpeechFullApplyTextNormalization;
     /** This parameter controls language text normalization. This helps with proper pronunciation of text in some supported languages. WARNING: This parameter can heavily increase the latency of the request. Currently only supported for Japanese. */
     applyLanguageTextNormalization?: boolean;
+    /** Avatar context when this generation is made from the Avatars video editor. */
+    avatarContext?: ElevenLabs.AvatarContextRequestModel;
 }

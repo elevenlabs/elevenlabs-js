@@ -4,9 +4,9 @@ import type * as ElevenLabs from "../index";
 
 export interface AstConditionalOperatorNodeOutput {
     /** Condition deciding which expression should be selected. */
-    condition: ElevenLabs.AstConditionalOperatorNodeOutputCondition;
+    condition: ElevenLabs.AstNodeOutput;
     /** Expression selected if the condition is true. */
-    trueExpression: ElevenLabs.AstConditionalOperatorNodeOutputTrueExpression;
+    trueExpression: ElevenLabs.AstNodeOutput;
     /** Expression selected if the condition is false. */
-    falseExpression: ElevenLabs.AstConditionalOperatorNodeOutputFalseExpression;
+    falseExpression: ElevenLabs.AstNodeOutput;
 }
