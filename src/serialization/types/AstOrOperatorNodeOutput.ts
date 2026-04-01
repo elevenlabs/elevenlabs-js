@@ -8,11 +8,11 @@ export const AstOrOperatorNodeOutput: core.serialization.ObjectSchema<
     serializers.AstOrOperatorNodeOutput.Raw,
     ElevenLabs.AstOrOperatorNodeOutput
 > = core.serialization.object({
-    children: core.serialization.list(core.serialization.lazy(() => serializers.AstOrOperatorNodeOutputChildrenItem)),
+    children: core.serialization.list(core.serialization.lazy(() => serializers.AstNodeOutput)),
 });
 
 export declare namespace AstOrOperatorNodeOutput {
     export interface Raw {
-        children: serializers.AstOrOperatorNodeOutputChildrenItem.Raw[];
+        children: serializers.AstNodeOutput.Raw[];
     }
 }

@@ -52,10 +52,6 @@ export class ForcedAlignmentClient {
         const _request = await core.newFormData();
         await _request.appendFile("file", request.file);
         _request.append("text", request.text);
-        if (request.enabledSpooledFile != null) {
-            _request.append("enabled_spooled_file", request.enabledSpooledFile.toString());
-        }
-
         const _maybeEncodedRequest = await _request.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

@@ -445,6 +445,9 @@ describe("ProjectsClient", () => {
                     favorited_at_unix: 1,
                     created_at_unix: 1,
                     is_bookmarked: true,
+                    recording_quality: "studio",
+                    labelling_status: "in_review",
+                    recording_quality_reason: "recording_quality_reason",
                 },
             ],
             publishing_read: {
@@ -974,6 +977,9 @@ describe("ProjectsClient", () => {
                     favoritedAtUnix: 1,
                     createdAtUnix: 1,
                     isBookmarked: true,
+                    recordingQuality: "studio",
+                    labellingStatus: "in_review",
+                    recordingQualityReason: "recording_quality_reason",
                 },
             ],
             publishingRead: {

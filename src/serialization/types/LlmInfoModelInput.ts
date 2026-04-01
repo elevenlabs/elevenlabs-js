@@ -26,7 +26,6 @@ export const LlmInfoModelInput: core.serialization.ObjectSchema<
         core.serialization.list(LlmReasoningEffort).optional(),
     ),
     deprecationInfo: core.serialization.property("deprecation_info", LlmDeprecationInfoModel.optional()),
-    modelScore: core.serialization.property("model_score", core.serialization.number().optional()),
 });
 
 export declare namespace LlmInfoModelInput {
@@ -40,6 +39,5 @@ export declare namespace LlmInfoModelInput {
         supports_parallel_tool_calls: boolean;
         available_reasoning_efforts?: LlmReasoningEffort.Raw[] | null;
         deprecation_info?: LlmDeprecationInfoModel.Raw | null;
-        model_score?: number | null;
     }
 }

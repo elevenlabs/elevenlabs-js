@@ -25,6 +25,7 @@ export const FeaturesUsageCommonModel: core.serialization.ObjectSchema<
     ),
     isLivekit: core.serialization.property("is_livekit", core.serialization.boolean().optional()),
     voicemailDetection: core.serialization.property("voicemail_detection", FeatureStatusCommonModel.optional()),
+    dtmfInput: core.serialization.property("dtmf_input", FeatureStatusCommonModel.optional()),
     workflow: WorkflowFeaturesUsageCommonModel.optional(),
     agentTesting: core.serialization.property("agent_testing", TestsFeatureUsageCommonModel.optional()),
     versioning: FeatureStatusCommonModel.optional(),
@@ -44,6 +45,7 @@ export declare namespace FeaturesUsageCommonModel {
         tool_dynamic_variable_updates?: FeatureStatusCommonModel.Raw | null;
         is_livekit?: boolean | null;
         voicemail_detection?: FeatureStatusCommonModel.Raw | null;
+        dtmf_input?: FeatureStatusCommonModel.Raw | null;
         workflow?: WorkflowFeaturesUsageCommonModel.Raw | null;
         agent_testing?: TestsFeatureUsageCommonModel.Raw | null;
         versioning?: FeatureStatusCommonModel.Raw | null;

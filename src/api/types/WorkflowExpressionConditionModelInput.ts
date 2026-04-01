@@ -6,5 +6,5 @@ export interface WorkflowExpressionConditionModelInput {
     /** Optional human-readable label for the condition used throughout the UI. */
     label?: string;
     /** Expression to evaluate. */
-    expression: ElevenLabs.WorkflowExpressionConditionModelInputExpression;
+    expression: ElevenLabs.AstNodeInput;
 }
