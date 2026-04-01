@@ -2,20 +2,19 @@
 
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import type * as serializers from "../index";
-import { WorkflowExpressionConditionModelInputExpression } from "./WorkflowExpressionConditionModelInputExpression";
+import * as serializers from "../index";
 
 export const WorkflowExpressionConditionModelInput: core.serialization.ObjectSchema<
     serializers.WorkflowExpressionConditionModelInput.Raw,
     ElevenLabs.WorkflowExpressionConditionModelInput
 > = core.serialization.object({
     label: core.serialization.string().optional(),
-    expression: WorkflowExpressionConditionModelInputExpression,
+    expression: core.serialization.lazy(() => serializers.AstNodeInput),
 });
 
 export declare namespace WorkflowExpressionConditionModelInput {
     export interface Raw {
         label?: string | null;
-        expression: WorkflowExpressionConditionModelInputExpression.Raw;
+        expression: serializers.AstNodeInput.Raw;
     }
 }

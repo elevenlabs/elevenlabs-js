@@ -9594,21 +9594,8 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "add_operator",
-                        left: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        },
-                        right: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        }
+                        type: "and_operator",
+                        children: []
                     }
                 }
             },
@@ -9618,21 +9605,8 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "add_operator",
-                        left: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        },
-                        right: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        }
+                        type: "and_operator",
+                        children: []
                     }
                 }
             },
@@ -9642,21 +9616,8 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "add_operator",
-                        left: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        },
-                        right: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        }
+                        type: "and_operator",
+                        children: []
                     }
                 }
             },
@@ -9666,21 +9627,8 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "add_operator",
-                        left: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        },
-                        right: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        }
+                        type: "and_operator",
+                        children: []
                     }
                 }
             },
@@ -9690,21 +9638,8 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "add_operator",
-                        left: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        },
-                        right: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        }
+                        type: "and_operator",
+                        children: []
                     }
                 }
             },
@@ -9714,21 +9649,8 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "add_operator",
-                        left: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        },
-                        right: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        }
+                        type: "and_operator",
+                        children: []
                     }
                 }
             },
@@ -9738,21 +9660,8 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "add_operator",
-                        left: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        },
-                        right: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        }
+                        type: "and_operator",
+                        children: []
                     }
                 }
             },
@@ -9762,21 +9671,8 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                 forwardCondition: {
                     type: "expression",
                     expression: {
-                        type: "add_operator",
-                        left: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        },
-                        right: {
-                            type: "and_operator",
-                            children: [{
-                                    type: "boolean_literal",
-                                    value: true
-                                }]
-                        }
+                        type: "and_operator",
+                        children: []
                     }
                 }
             }
@@ -10491,6 +10387,70 @@ await client.conversationalAi.conversations.files.delete("conversation_id", "fil
 <dd>
 
 **requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Conversations Analysis
+<details><summary><code>client.conversationalAi.conversations.analysis.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/analysis/client/Client.ts">run</a>(conversation_id) -> ElevenLabs.GetConversationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Run the analysis for a conversation using the agent's current evaluation criteria and data collection settings.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.analysis.run("conversation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — ID of the conversation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AnalysisClient.RequestOptions` 
     
 </dd>
 </dl>

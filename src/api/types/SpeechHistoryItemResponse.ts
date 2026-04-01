@@ -40,4 +40,6 @@ export interface SpeechHistoryItemResponse {
     dialogue?: ElevenLabs.DialogueInputResponseModel[];
     /** The output format the audio was originally generated in. */
     outputFormat?: string;
+    /** Avatar context if this generation was created from the Avatars video editor. */
+    avatarContext?: ElevenLabs.AvatarContextResponseModel;
 }

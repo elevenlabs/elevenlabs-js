@@ -8,13 +8,13 @@ export const AstDivisionOperatorNodeInput: core.serialization.ObjectSchema<
     serializers.AstDivisionOperatorNodeInput.Raw,
     ElevenLabs.AstDivisionOperatorNodeInput
 > = core.serialization.object({
-    left: core.serialization.lazy(() => serializers.AstDivisionOperatorNodeInputLeft),
-    right: core.serialization.lazy(() => serializers.AstDivisionOperatorNodeInputRight),
+    left: core.serialization.lazy(() => serializers.AstNodeInput),
+    right: core.serialization.lazy(() => serializers.AstNodeInput),
 });
 
 export declare namespace AstDivisionOperatorNodeInput {
     export interface Raw {
-        left: serializers.AstDivisionOperatorNodeInputLeft.Raw;
-        right: serializers.AstDivisionOperatorNodeInputRight.Raw;
+        left: serializers.AstNodeInput.Raw;
+        right: serializers.AstNodeInput.Raw;
     }
 }

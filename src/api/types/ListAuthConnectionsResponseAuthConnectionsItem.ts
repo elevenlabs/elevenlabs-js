@@ -10,6 +10,7 @@ export type ListAuthConnectionsResponseAuthConnectionsItem =
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.BasicAuth
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.BearerAuth
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.CustomHeaderAuth
+    | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.Mtls
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.Oauth2ClientCredentials
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.Oauth2Jwt
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.PrivateKeyJwt
@@ -30,6 +31,10 @@ export namespace ListAuthConnectionsResponseAuthConnectionsItem {
 
     export interface CustomHeaderAuth extends ElevenLabs.CustomHeaderAuthResponse {
         authType: "custom_header_auth";
+    }
+
+    export interface Mtls extends ElevenLabs.MtlsAuthResponse {
+        authType: "mtls";
     }
 
     export interface Oauth2ClientCredentials extends ElevenLabs.OAuth2ClientCredsResponse {

@@ -8,15 +8,15 @@ export const AstConditionalOperatorNodeOutput: core.serialization.ObjectSchema<
     serializers.AstConditionalOperatorNodeOutput.Raw,
     ElevenLabs.AstConditionalOperatorNodeOutput
 > = core.serialization.object({
-    condition: core.serialization.lazy(() => serializers.AstConditionalOperatorNodeOutputCondition),
-    trueExpression: core.serialization.lazy(() => serializers.AstConditionalOperatorNodeOutputTrueExpression),
-    falseExpression: core.serialization.lazy(() => serializers.AstConditionalOperatorNodeOutputFalseExpression),
+    condition: core.serialization.lazy(() => serializers.AstNodeOutput),
+    trueExpression: core.serialization.lazy(() => serializers.AstNodeOutput),
+    falseExpression: core.serialization.lazy(() => serializers.AstNodeOutput),
 });
 
 export declare namespace AstConditionalOperatorNodeOutput {
     export interface Raw {
-        condition: serializers.AstConditionalOperatorNodeOutputCondition.Raw;
-        trueExpression: serializers.AstConditionalOperatorNodeOutputTrueExpression.Raw;
-        falseExpression: serializers.AstConditionalOperatorNodeOutputFalseExpression.Raw;
+        condition: serializers.AstNodeOutput.Raw;
+        trueExpression: serializers.AstNodeOutput.Raw;
+        falseExpression: serializers.AstNodeOutput.Raw;
     }
 }

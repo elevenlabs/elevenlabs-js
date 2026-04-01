@@ -31,4 +31,6 @@ export interface BodyTextToDialogueMultiVoiceV1TextToDialoguePost {
     seed?: number;
     /** This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped. */
     applyTextNormalization?: ElevenLabs.BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization;
+    /** Avatar context when this generation is made from the Avatars video editor. */
+    avatarContext?: ElevenLabs.AvatarContextRequestModel;
 }

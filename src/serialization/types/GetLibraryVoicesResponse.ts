@@ -11,6 +11,7 @@ export const GetLibraryVoicesResponse: core.serialization.ObjectSchema<
 > = core.serialization.object({
     voices: core.serialization.list(LibraryVoiceResponse),
     hasMore: core.serialization.property("has_more", core.serialization.boolean()),
+    totalCount: core.serialization.property("total_count", core.serialization.number().optional()),
     lastSortId: core.serialization.property("last_sort_id", core.serialization.string().optional()),
 });
 
@@ -18,6 +19,7 @@ export declare namespace GetLibraryVoicesResponse {
     export interface Raw {
         voices: LibraryVoiceResponse.Raw[];
         has_more: boolean;
+        total_count?: number | null;
         last_sort_id?: string | null;
     }
 }

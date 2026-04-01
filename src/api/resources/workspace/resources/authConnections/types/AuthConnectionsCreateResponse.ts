@@ -11,6 +11,7 @@ export type AuthConnectionsCreateResponse =
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.BearerAuth
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.Oauth2Jwt
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.PrivateKeyJwt
+    | ElevenLabs.workspace.AuthConnectionsCreateResponse.Mtls
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.CustomHeaderAuth
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.ApiIntegrationOauth2AuthCode
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.WhatsappAuth;
@@ -34,6 +35,10 @@ export namespace AuthConnectionsCreateResponse {
 
     export interface PrivateKeyJwt extends ElevenLabs.PrivateKeyJwtResponse {
         authType: "private_key_jwt";
+    }
+
+    export interface Mtls extends ElevenLabs.MtlsAuthResponse {
+        authType: "mtls";
     }
 
     export interface CustomHeaderAuth extends ElevenLabs.CustomHeaderAuthResponse {
