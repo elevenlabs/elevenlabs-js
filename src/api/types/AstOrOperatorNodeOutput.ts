@@ -4,5 +4,5 @@ import type * as ElevenLabs from "../index";
 
 export interface AstOrOperatorNodeOutput {
     /** Child nodes of the logical operator. */
-    children: ElevenLabs.AstOrOperatorNodeOutputChildrenItem[];
+    children: ElevenLabs.AstNodeOutput[];
 }

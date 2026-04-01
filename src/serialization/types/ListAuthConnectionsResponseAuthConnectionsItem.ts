@@ -7,6 +7,7 @@ import { ApiIntegrationOAuth2AuthCodeResponse } from "./ApiIntegrationOAuth2Auth
 import { BasicAuthResponse } from "./BasicAuthResponse";
 import { BearerAuthResponse } from "./BearerAuthResponse";
 import { CustomHeaderAuthResponse } from "./CustomHeaderAuthResponse";
+import { MtlsAuthResponse } from "./MtlsAuthResponse";
 import { OAuth2ClientCredsResponse } from "./OAuth2ClientCredsResponse";
 import { OAuth2JwtResponse } from "./OAuth2JwtResponse";
 import { PrivateKeyJwtResponse } from "./PrivateKeyJwtResponse";
@@ -21,6 +22,7 @@ export const ListAuthConnectionsResponseAuthConnectionsItem: core.serialization.
         basic_auth: BasicAuthResponse,
         bearer_auth: BearerAuthResponse,
         custom_header_auth: CustomHeaderAuthResponse,
+        mtls: MtlsAuthResponse,
         oauth2_client_credentials: OAuth2ClientCredsResponse,
         oauth2_jwt: OAuth2JwtResponse,
         private_key_jwt: PrivateKeyJwtResponse,
@@ -37,6 +39,7 @@ export declare namespace ListAuthConnectionsResponseAuthConnectionsItem {
         | ListAuthConnectionsResponseAuthConnectionsItem.BasicAuth
         | ListAuthConnectionsResponseAuthConnectionsItem.BearerAuth
         | ListAuthConnectionsResponseAuthConnectionsItem.CustomHeaderAuth
+        | ListAuthConnectionsResponseAuthConnectionsItem.Mtls
         | ListAuthConnectionsResponseAuthConnectionsItem.Oauth2ClientCredentials
         | ListAuthConnectionsResponseAuthConnectionsItem.Oauth2Jwt
         | ListAuthConnectionsResponseAuthConnectionsItem.PrivateKeyJwt
@@ -56,6 +59,10 @@ export declare namespace ListAuthConnectionsResponseAuthConnectionsItem {
 
     export interface CustomHeaderAuth extends CustomHeaderAuthResponse.Raw {
         auth_type: "custom_header_auth";
+    }
+
+    export interface Mtls extends MtlsAuthResponse.Raw {
+        auth_type: "mtls";
     }
 
     export interface Oauth2ClientCredentials extends OAuth2ClientCredsResponse.Raw {

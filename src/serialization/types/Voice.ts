@@ -6,6 +6,8 @@ import type * as serializers from "../index";
 import { FineTuningResponse } from "./FineTuningResponse";
 import { VerifiedVoiceLanguageResponseModel } from "./VerifiedVoiceLanguageResponseModel";
 import { VoiceResponseModelCategory } from "./VoiceResponseModelCategory";
+import { VoiceResponseModelLabellingStatus } from "./VoiceResponseModelLabellingStatus";
+import { VoiceResponseModelRecordingQuality } from "./VoiceResponseModelRecordingQuality";
 import { VoiceResponseModelSafetyControl } from "./VoiceResponseModelSafetyControl";
 import { VoiceSample } from "./VoiceSample";
 import { VoiceSettings } from "./VoiceSettings";
@@ -52,6 +54,15 @@ export const Voice: core.serialization.ObjectSchema<serializers.Voice.Raw, Eleve
         favoritedAtUnix: core.serialization.property("favorited_at_unix", core.serialization.number().optional()),
         createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number().optional()),
         isBookmarked: core.serialization.property("is_bookmarked", core.serialization.boolean().optional()),
+        recordingQuality: core.serialization.property(
+            "recording_quality",
+            VoiceResponseModelRecordingQuality.optional(),
+        ),
+        labellingStatus: core.serialization.property("labelling_status", VoiceResponseModelLabellingStatus.optional()),
+        recordingQualityReason: core.serialization.property(
+            "recording_quality_reason",
+            core.serialization.string().optional(),
+        ),
     });
 
 export declare namespace Voice {
@@ -79,5 +90,8 @@ export declare namespace Voice {
         favorited_at_unix?: number | null;
         created_at_unix?: number | null;
         is_bookmarked?: boolean | null;
+        recording_quality?: VoiceResponseModelRecordingQuality.Raw | null;
+        labelling_status?: VoiceResponseModelLabellingStatus.Raw | null;
+        recording_quality_reason?: string | null;
     }
 }

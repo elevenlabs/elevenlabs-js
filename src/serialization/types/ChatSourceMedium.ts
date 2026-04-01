@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const ChatSourceMedium: core.serialization.Schema<
     serializers.ChatSourceMedium.Raw,
     ElevenLabs.ChatSourceMedium
-> = core.serialization.enum_(["audio", "text", "image", "file"]);
+> = core.serialization.enum_(["audio", "dtmf", "text", "image", "file"]);
 
 export declare namespace ChatSourceMedium {
-    export type Raw = "audio" | "text" | "image" | "file";
+    export type Raw = "audio" | "dtmf" | "text" | "image" | "file";
 }

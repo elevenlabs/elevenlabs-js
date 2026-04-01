@@ -35,7 +35,6 @@ describe("LlmClient", () => {
                             fallback_complete_percentage: 100,
                         },
                     },
-                    model_score: 1.1,
                 },
             ],
             default_deprecation_config: {
@@ -82,7 +81,6 @@ describe("LlmClient", () => {
                             fallbackCompletePercentage: 100,
                         },
                     },
-                    modelScore: 1.1,
                 },
             ],
             defaultDeprecationConfig: {

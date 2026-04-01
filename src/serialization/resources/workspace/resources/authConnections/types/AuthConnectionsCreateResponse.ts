@@ -7,6 +7,7 @@ import { ApiIntegrationOAuth2AuthCodeResponse } from "../../../../../types/ApiIn
 import { BasicAuthResponse } from "../../../../../types/BasicAuthResponse";
 import { BearerAuthResponse } from "../../../../../types/BearerAuthResponse";
 import { CustomHeaderAuthResponse } from "../../../../../types/CustomHeaderAuthResponse";
+import { MtlsAuthResponse } from "../../../../../types/MtlsAuthResponse";
 import { OAuth2ClientCredsResponse } from "../../../../../types/OAuth2ClientCredsResponse";
 import { OAuth2JwtResponse } from "../../../../../types/OAuth2JwtResponse";
 import { PrivateKeyJwtResponse } from "../../../../../types/PrivateKeyJwtResponse";
@@ -22,6 +23,7 @@ export const AuthConnectionsCreateResponse: core.serialization.Schema<
         bearer_auth: BearerAuthResponse,
         oauth2_jwt: OAuth2JwtResponse,
         private_key_jwt: PrivateKeyJwtResponse,
+        mtls: MtlsAuthResponse,
         custom_header_auth: CustomHeaderAuthResponse,
         api_integration_oauth2_auth_code: ApiIntegrationOAuth2AuthCodeResponse,
         whatsapp_auth: WhatsAppAuthResponse,
@@ -38,6 +40,7 @@ export declare namespace AuthConnectionsCreateResponse {
         | AuthConnectionsCreateResponse.BearerAuth
         | AuthConnectionsCreateResponse.Oauth2Jwt
         | AuthConnectionsCreateResponse.PrivateKeyJwt
+        | AuthConnectionsCreateResponse.Mtls
         | AuthConnectionsCreateResponse.CustomHeaderAuth
         | AuthConnectionsCreateResponse.ApiIntegrationOauth2AuthCode
         | AuthConnectionsCreateResponse.WhatsappAuth;
@@ -60,6 +63,10 @@ export declare namespace AuthConnectionsCreateResponse {
 
     export interface PrivateKeyJwt extends PrivateKeyJwtResponse.Raw {
         auth_type: "private_key_jwt";
+    }
+
+    export interface Mtls extends MtlsAuthResponse.Raw {
+        auth_type: "mtls";
     }
 
     export interface CustomHeaderAuth extends CustomHeaderAuthResponse.Raw {

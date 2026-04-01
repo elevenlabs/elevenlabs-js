@@ -148,6 +148,9 @@ describe("VoicesClient", () => {
                     favorited_at_unix: 1,
                     created_at_unix: 1,
                     is_bookmarked: true,
+                    recording_quality: "studio",
+                    labelling_status: "in_review",
+                    recording_quality_reason: "recording_quality_reason",
                 },
             ],
         };
@@ -312,6 +315,9 @@ describe("VoicesClient", () => {
                     favoritedAtUnix: 1,
                     createdAtUnix: 1,
                     isBookmarked: true,
+                    recordingQuality: "studio",
+                    labellingStatus: "in_review",
+                    recordingQualityReason: "recording_quality_reason",
                 },
             ],
         });
@@ -461,6 +467,9 @@ describe("VoicesClient", () => {
                     favorited_at_unix: 1,
                     created_at_unix: 1,
                     is_bookmarked: true,
+                    recording_quality: "studio",
+                    labelling_status: "in_review",
+                    recording_quality_reason: "recording_quality_reason",
                 },
             ],
             has_more: true,
@@ -637,6 +646,9 @@ describe("VoicesClient", () => {
                     favoritedAtUnix: 1,
                     createdAtUnix: 1,
                     isBookmarked: true,
+                    recordingQuality: "studio",
+                    labellingStatus: "in_review",
+                    recordingQualityReason: "recording_quality_reason",
                 },
             ],
             hasMore: true,
@@ -825,6 +837,9 @@ describe("VoicesClient", () => {
             favorited_at_unix: 1,
             created_at_unix: 1,
             is_bookmarked: true,
+            recording_quality: "studio",
+            labelling_status: "in_review",
+            recording_quality_reason: "recording_quality_reason",
         };
         server
             .mockEndpoint()
@@ -1035,6 +1050,9 @@ describe("VoicesClient", () => {
             favoritedAtUnix: 1,
             createdAtUnix: 1,
             isBookmarked: true,
+            recordingQuality: "studio",
+            labellingStatus: "in_review",
+            recordingQualityReason: "recording_quality_reason",
         });
     });
 
@@ -1137,6 +1155,7 @@ describe("VoicesClient", () => {
                 },
             ],
             has_more: false,
+            total_count: 0,
             last_sort_id: "last_sort_id",
         };
         server.mockEndpoint().get("/v1/shared-voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -1207,6 +1226,7 @@ describe("VoicesClient", () => {
                 },
             ],
             hasMore: false,
+            totalCount: 0,
             lastSortId: "last_sort_id",
         });
     });

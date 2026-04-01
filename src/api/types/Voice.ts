@@ -49,4 +49,10 @@ export interface Voice {
     createdAtUnix?: number;
     /** Whether the voice is bookmarked by the current user. Only relevant for community (library-copied) voices. */
     isBookmarked?: boolean;
+    /** The recording quality of the voice as determined by the review pipeline. */
+    recordingQuality?: ElevenLabs.VoiceResponseModelRecordingQuality;
+    /** The review pipeline status of the voice. */
+    labellingStatus?: ElevenLabs.VoiceResponseModelLabellingStatus;
+    /** The reason for the recording quality assessment, as determined by the review pipeline. */
+    recordingQualityReason?: string;
 }

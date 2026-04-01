@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../index";
 
 export interface AstLessThanOrEqualsOperatorNodeOutput {
     /** Left operand of the binary operator. */
-    left: ElevenLabs.AstLessThanOrEqualsOperatorNodeOutputLeft;
+    left: ElevenLabs.AstNodeOutput;
     /** Right operand of the binary operator. */
-    right: ElevenLabs.AstLessThanOrEqualsOperatorNodeOutputRight;
+    right: ElevenLabs.AstNodeOutput;
 }

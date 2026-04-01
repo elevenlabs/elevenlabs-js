@@ -8,13 +8,13 @@ export const AstAdditionOperatorNodeInput: core.serialization.ObjectSchema<
     serializers.AstAdditionOperatorNodeInput.Raw,
     ElevenLabs.AstAdditionOperatorNodeInput
 > = core.serialization.object({
-    left: core.serialization.lazy(() => serializers.AstAdditionOperatorNodeInputLeft),
-    right: core.serialization.lazy(() => serializers.AstAdditionOperatorNodeInputRight),
+    left: core.serialization.lazy(() => serializers.AstNodeInput),
+    right: core.serialization.lazy(() => serializers.AstNodeInput),
 });
 
 export declare namespace AstAdditionOperatorNodeInput {
     export interface Raw {
-        left: serializers.AstAdditionOperatorNodeInputLeft.Raw;
-        right: serializers.AstAdditionOperatorNodeInputRight.Raw;
+        left: serializers.AstNodeInput.Raw;
+        right: serializers.AstNodeInput.Raw;
     }
 }
