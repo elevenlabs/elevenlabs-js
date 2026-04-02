@@ -40,11 +40,10 @@ export type IncomingMessage = InitMessage | UserTranscriptMessage | PingMessage 
 // ---------------------------------------------------------------------------
 
 export interface AgentResponseMessage {
-    agent_response: {
-        content: string;
-        event_id: number;
-        is_final: boolean;
-    };
+    type: "agent_response";
+    content: string;
+    event_id: number | undefined;
+    is_final: boolean;
 }
 
 export interface PongMessage {

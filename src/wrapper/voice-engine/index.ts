@@ -1,8 +1,12 @@
 import { VoiceEngineSession } from "./VoiceEngineSession";
 import { VoiceEngineServer, type VoiceEngineServerOptions } from "./VoiceEngineServer";
+import { VoiceEngineResource } from "./VoiceEngineResource";
+import { VoiceEngineClientWrapper } from "./VoiceEngineClientWrapper";
 
 export { VoiceEngineSession } from "./VoiceEngineSession";
 export { VoiceEngineServer, type VoiceEngineServerOptions } from "./VoiceEngineServer";
+export { VoiceEngineResource } from "./VoiceEngineResource";
+export { VoiceEngineClientWrapper } from "./VoiceEngineClientWrapper";
 export type {
     ConversationMessage,
     InitMessage,
@@ -21,33 +25,36 @@ export type {
 } from "./types";
 
 /**
- * Voice Engine namespace — provides event constants, the `Session` class for
- * wrapping individual WebSocket connections, and the `Server` class for
- * managing a `ws.WebSocketServer`.
+ * Voice Engine namespace — provides event constants and classes for handling
+ * incoming WebSocket connections from the ElevenLabs Voice Engine API.
+ *
+ * For managing voice engine resources (create, get, etc.) and starting a
+ * server bound to a specific engine, use `elevenlabs.voiceEngine` instead.
  *
  * @example
  * ```typescript
- * import { VoiceEngine } from "@elevenlabs/elevenlabs-js";
+ * import { ElevenLabs } from "@elevenlabs/elevenlabs-js";
  *
- * // Low-level: wrap a WebSocket yourself
- * const session = new VoiceEngine.Session(ws);
- * session.on(VoiceEngine.USER_TRANSCRIPT, async (text, { signal }) => {
- *     const response = await llm.generate(text, { signal });
- *     session.sendResponse(response);
- * });
- *
- * // High-level: let VoiceEngine.Server manage the WS server
- * const server = new VoiceEngine.Server({
+ * // Recommended: start a server tied to a specific voice engine
+ * const engine = await elevenlabs.voiceEngine.get("veng_123");
+ * const server = engine.listen({
  *     httpServer,
  *     path: "/voice-engine",
  *     onSession: (session) => {
- *         session.on(VoiceEngine.USER_TRANSCRIPT, async (text, { signal }) => {
- *             const response = await llm.generate(text, { signal });
+ *         session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
+ *             const response = await llm.generate(transcript, { signal });
  *             session.sendResponse(response);
  *         });
  *     },
  * });
  * server.start();
+ *
+ * // Low-level: wrap a WebSocket yourself
+ * const session = new VoiceEngine.Session(ws);
+ * session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
+ *     const response = await llm.generate(transcript, { signal });
+ *     session.sendResponse(response);
+ * });
  * ```
  */
 export namespace VoiceEngine {
@@ -76,4 +83,10 @@ export namespace VoiceEngine {
     export const Server: typeof VoiceEngineServer = VoiceEngineServer;
     export type Server = VoiceEngineServer;
     export type ServerOptions = VoiceEngineServerOptions;
+
+    export const Resource: typeof VoiceEngineResource = VoiceEngineResource;
+    export type Resource = VoiceEngineResource;
+
+    export const Client: typeof VoiceEngineClientWrapper = VoiceEngineClientWrapper;
+    export type Client = VoiceEngineClientWrapper;
 }

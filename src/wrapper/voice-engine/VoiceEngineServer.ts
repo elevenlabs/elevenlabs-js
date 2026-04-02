@@ -1,25 +1,18 @@
-import type { Server as HttpServer } from "node:http";
 import WebSocket from "ws";
 import { VoiceEngineSession } from "./VoiceEngineSession";
 
 export interface VoiceEngineServerOptions {
     /**
-     * An existing HTTP server to attach to. If provided, the WebSocket server
-     * will handle upgrades on this server at the given `path`.
-     */
-    httpServer?: HttpServer;
-
-    /**
-     * If no `httpServer` is provided, the WebSocket server will listen on
-     * this port. Defaults to 3001.
+     * Port to listen on. Defaults to 3001.
      */
     port?: number;
 
     /**
-     * URL path to accept WebSocket upgrades on. Only connections to this
-     * path will be accepted. Defaults to "/".
+     * The ID of the voice engine this server handles connections for.
+     * Populated automatically when created via `engine.listen()`.
+     * Will be used for connection auth in a future release.
      */
-    path?: string;
+    engineId?: string;
 
     /**
      * Called for each new session (one per conversation). Register event
@@ -29,34 +22,26 @@ export interface VoiceEngineServerOptions {
 }
 
 /**
- * Convenience wrapper that creates a `ws.WebSocketServer` and produces
- * `VoiceEngineSession` instances for each incoming connection from the
- * ElevenLabs Voice Engine API.
+ * Standalone WebSocket server that produces `VoiceEngineSession` instances for
+ * each incoming connection from the ElevenLabs Voice Engine API.
  *
- * @example
+ * For integration with an existing HTTP server (e.g. Express, Next.js), manage
+ * the WebSocket upgrade yourself and use `handleConnection` to wrap individual
+ * connections:
+ *
  * ```typescript
- * import { VoiceEngine } from "@elevenlabs/elevenlabs-js";
+ * const wss = new WebSocket.Server({ noServer: true });
  *
- * const server = new VoiceEngine.Server({
- *     httpServer: existingHttpServer,
- *     path: "/voice-engine",
- *     onSession: (session) => {
- *         session.on(VoiceEngine.TRANSCRIPT, async (text, { signal }) => {
- *             const response = await llm.generate(text, { signal });
- *             session.sendResponse(response);
- *         });
- *     },
+ * httpServer.on("upgrade", async (req, socket, head) => {
+ *     if (!await engine.verifyRequest(req)) { socket.destroy(); return; }
+ *     wss.handleUpgrade(req, socket, head, (ws) => wss.emit("connection", ws));
  * });
  *
- * server.start();
- * ```
- *
- * For maximum flexibility, skip this class and wrap connections yourself:
- * ```typescript
- * const wss = new WebSocket.Server({ server: httpServer });
  * wss.on("connection", (ws) => {
  *     const session = new VoiceEngine.Session(ws);
- *     session.on(VoiceEngine.TRANSCRIPT, ...);
+ *     session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
+ *         session.sendResponse(await llm.generate(transcript, { signal }));
+ *     });
  * });
  * ```
  */
@@ -80,40 +65,14 @@ export class VoiceEngineServer {
     }
 
     /**
-     * Start listening for incoming WebSocket connections.
-     *
-     * If an `httpServer` was provided, the WebSocket server attaches to it.
-     * Otherwise a standalone server is created on the configured `port`.
+     * Start the standalone WebSocket server on the configured port.
      */
     start(): void {
         if (this.wss) {
             throw new Error("Server is already started");
         }
 
-        const path = this.options.path ?? "/";
-
-        if (this.options.httpServer) {
-            this.wss = new WebSocket.Server({
-                noServer: true,
-            });
-
-            this.options.httpServer.on("upgrade", (req, socket, head) => {
-                const url = new URL(req.url ?? "/", `http://${req.headers.host}`);
-                if (url.pathname !== path) {
-                    socket.destroy();
-                    return;
-                }
-
-                this.wss!.handleUpgrade(req, socket, head, (ws) => {
-                    this.wss!.emit("connection", ws, req);
-                });
-            });
-        } else {
-            this.wss = new WebSocket.Server({
-                port: this.options.port ?? 3001,
-                path,
-            });
-        }
+        this.wss = new WebSocket.Server({ port: this.options.port ?? 3001 });
 
         this.wss.on("connection", (ws: WebSocket) => {
             this.handleConnection(ws);

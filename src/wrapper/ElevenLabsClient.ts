@@ -6,6 +6,7 @@ import { WebhooksClient } from "./webhooks";
 import { Music } from "./music";
 import { MusicClient as GeneratedMusic } from "../api/resources/music/client/Client";
 import { SpeechToText } from "./speechToText";
+import { VoiceEngineClientWrapper } from "./voice-engine";
 
 export declare namespace ElevenLabsClient {
     interface Options extends FernClient.Options {
@@ -21,6 +22,7 @@ export class ElevenLabsClient extends FernClient {
     private _customWebhooks: WebhooksClient | undefined;
     private _customMusic: Music | undefined;
     private _customSpeechToText: SpeechToText | undefined;
+    private _customVoiceEngine: VoiceEngineClientWrapper | undefined;
 
     constructor(options: ElevenLabsClient.Options = {}) {
         const apiKey = options.apiKey ?? process.env.ELEVENLABS_API_KEY;
@@ -54,5 +56,12 @@ export class ElevenLabsClient extends FernClient {
             this._customSpeechToText = new SpeechToText(this._options);
         }
         return this._customSpeechToText;
+    }
+
+    public get voiceEngine(): VoiceEngineClientWrapper {
+        if (!this._customVoiceEngine) {
+            this._customVoiceEngine = new VoiceEngineClientWrapper(this._options);
+        }
+        return this._customVoiceEngine;
     }
 }
