@@ -85,7 +85,8 @@ export class VoiceEngineSession {
      */
     sendResponse(response: string | AsyncIterable<string>): void {
         if (typeof response === "string") {
-            this.sendAgentResponse(response, true);
+            this.sendAgentResponse(response, false);
+            this.sendAgentResponse("", true);
         } else {
             void this.streamResponse(response);
         }
@@ -191,21 +192,17 @@ export class VoiceEngineSession {
 
     private async streamResponse(stream: AsyncIterable<string>): Promise<void> {
         const eventId = this.currentEventId;
-        let last: string | undefined;
         for await (const chunk of stream) {
             if (this.closed) return;
-            if (last !== undefined) {
-                this.sendAgentResponse(last, false, eventId);
-            }
-            last = chunk;
+            this.sendAgentResponse(chunk, false, eventId);
         }
-        if (last !== undefined && !this.closed) {
-            this.sendAgentResponse(last, true, eventId);
+        if (!this.closed) {
+            this.sendAgentResponse("", true, eventId);
         }
     }
 
     private sendAgentResponse(content: string, isFinal: boolean, eventId?: number): void {
-        this.send({ agent_response: { content, event_id: eventId ?? this.currentEventId, is_final: isFinal } });
+        this.send({ type: "agent_response", content, event_id: eventId ?? this.currentEventId, is_final: isFinal });
     }
 
     private send(msg: Record<string, unknown>): void {

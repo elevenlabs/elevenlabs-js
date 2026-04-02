@@ -201,10 +201,9 @@ describe("VoiceEngineSession", () => {
         ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 5 });
         session.sendResponse("The answer is 42");
 
-        expect(ws.sent).toHaveLength(1);
-        expect(JSON.parse(ws.sent[0])).toEqual({
-            agent_response: { content: "The answer is 42", event_id: 5, is_final: true },
-        });
+        expect(ws.sent).toHaveLength(2);
+        expect(JSON.parse(ws.sent[0])).toEqual({ type: "agent_response", content: "The answer is 42", event_id: 5, is_final: false });
+        expect(JSON.parse(ws.sent[1])).toEqual({ type: "agent_response", content: "", event_id: 5, is_final: true });
     });
 
     it("does not send after close", () => {
@@ -218,7 +217,7 @@ describe("VoiceEngineSession", () => {
     // sendResponse (streaming)
     // -----------------------------------------------------------------------
 
-    it("sends a streaming response with is_final:true only on the last chunk", async () => {
+    it("sends each chunk with is_final:false then an empty terminator with is_final:true", async () => {
         ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 3 });
 
         async function* tokens() {
@@ -230,9 +229,10 @@ describe("VoiceEngineSession", () => {
 
         await new Promise((r) => setTimeout(r, 10));
 
-        expect(ws.sent).toHaveLength(2);
-        expect(JSON.parse(ws.sent[0])).toEqual({ agent_response: { content: "Hello", event_id: 3, is_final: false } });
-        expect(JSON.parse(ws.sent[1])).toEqual({ agent_response: { content: " world", event_id: 3, is_final: true } });
+        expect(ws.sent).toHaveLength(3);
+        expect(JSON.parse(ws.sent[0])).toEqual({ type: "agent_response", content: "Hello", event_id: 3, is_final: false });
+        expect(JSON.parse(ws.sent[1])).toEqual({ type: "agent_response", content: " world", event_id: 3, is_final: false });
+        expect(JSON.parse(ws.sent[2])).toEqual({ type: "agent_response", content: "", event_id: 3, is_final: true });
     });
 
     it("stops streaming if session is closed mid-stream", async () => {
@@ -253,11 +253,12 @@ describe("VoiceEngineSession", () => {
         await new Promise((r) => setTimeout(r, 100));
 
         const sent = ws.sent.map((s) => JSON.parse(s));
-        const chunks = sent.filter((m: Record<string, unknown>) => m.agent_response);
-        // "first" is flushed when "second" arrives; "second" is buffered waiting
-        // for the next yield which is delayed 50ms — session closes before then
-        expect(chunks).toHaveLength(1);
-        expect(chunks[0].agent_response).toEqual({ content: "first", event_id: 7, is_final: false });
+        const chunks = sent.filter((m: Record<string, unknown>) => m.type === "agent_response");
+        // "first" and "second" are sent immediately; session closes before the
+        // 50ms delay resolves, so "third" and the empty terminator are never sent
+        expect(chunks).toHaveLength(2);
+        expect(chunks[0]).toEqual({ type: "agent_response", content: "first", event_id: 7, is_final: false });
+        expect(chunks[1]).toEqual({ type: "agent_response", content: "second", event_id: 7, is_final: false });
     });
 
     // -----------------------------------------------------------------------
@@ -271,13 +272,12 @@ describe("VoiceEngineSession", () => {
         ws.receiveMessage({ type: "user_transcript", user_transcript: transcript2, event_id: 2 });
         session.sendResponse("response to second");
 
-        expect(ws.sent).toHaveLength(2);
-        expect(JSON.parse(ws.sent[0])).toEqual({
-            agent_response: { content: "response to first", event_id: 1, is_final: true },
-        });
-        expect(JSON.parse(ws.sent[1])).toEqual({
-            agent_response: { content: "response to second", event_id: 2, is_final: true },
-        });
+        // Each sendResponse emits a content chunk + empty terminator = 2 messages each
+        expect(ws.sent).toHaveLength(4);
+        expect(JSON.parse(ws.sent[0])).toEqual({ type: "agent_response", content: "response to first", event_id: 1, is_final: false });
+        expect(JSON.parse(ws.sent[1])).toEqual({ type: "agent_response", content: "", event_id: 1, is_final: true });
+        expect(JSON.parse(ws.sent[2])).toEqual({ type: "agent_response", content: "response to second", event_id: 2, is_final: false });
+        expect(JSON.parse(ws.sent[3])).toEqual({ type: "agent_response", content: "", event_id: 2, is_final: true });
     });
 
     // -----------------------------------------------------------------------
