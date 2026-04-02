@@ -1,6 +1,7 @@
 import { EventEmitter } from "node:events";
 import WebSocket from "ws";
 import type {
+    ConversationMessage,
     IncomingMessage,
     TranscriptContext,
     VoiceEngineEventMap,
@@ -37,7 +38,7 @@ export class VoiceEngineSession {
     private emitter = new EventEmitter();
     private currentAbortController: AbortController | null = null;
     private currentEventId: number | undefined;
-    private conversationId: string | undefined;
+    private _conversationId: string | undefined;
     private closed = false;
 
     constructor(ws: WebSocketLike) {
@@ -74,6 +75,44 @@ export class VoiceEngineSession {
     }
 
     // -----------------------------------------------------------------------
+    // Typed event handlers
+    // -----------------------------------------------------------------------
+
+    /** Fired once when the session is initialized with a conversation ID. */
+    onInit(listener: (conversationId: string) => void): this {
+        return this.on("init", listener);
+    }
+
+    /**
+     * Fired each time the Voice Engine API sends a user transcript.
+     *
+     * `transcript` is the full conversation history up to this turn.
+     * `signal` is aborted if a new transcript arrives before you finish
+     * responding — pass it to your LLM call to cancel in-flight requests.
+     */
+    onTranscript(listener: (transcript: ConversationMessage[], context: TranscriptContext) => void): this {
+        return this.on("user_transcript", listener);
+    }
+
+    /** Fired when ElevenLabs sends a clean close message ending the conversation. */
+    onClose(listener: () => void): this {
+        return this.on("close", listener);
+    }
+
+    /**
+     * Fired when the underlying WebSocket drops unexpectedly — network failure,
+     * client disconnect, etc. Unlike `onClose`, this indicates an unclean ending.
+     */
+    onDisconnect(listener: () => void): this {
+        return this.on("disconnected", listener);
+    }
+
+    /** Fired on protocol-level or WebSocket-level errors. */
+    onError(listener: (error: Error) => void): this {
+        return this.on("error", listener);
+    }
+
+    // -----------------------------------------------------------------------
     // Sending responses
     // -----------------------------------------------------------------------
 
@@ -106,14 +145,14 @@ export class VoiceEngineSession {
      * The conversation ID assigned by the Voice Engine API, available after
      * the `init` event.
      */
-    getConversationId(): string | undefined {
-        return this.conversationId;
+    get conversationId(): string | undefined {
+        return this._conversationId;
     }
 
     /**
      * Whether the session is still open.
      */
-    isOpen(): boolean {
+    get isOpen(): boolean {
         return !this.closed && this.ws.readyState === WebSocket.OPEN;
     }
 
@@ -148,7 +187,7 @@ export class VoiceEngineSession {
     private handleMessage(msg: IncomingMessage): void {
         switch (msg.type) {
             case "init": {
-                this.conversationId = msg.conversation_id;
+                this._conversationId = msg.conversation_id;
                 this.emitter.emit("init", msg.conversation_id);
                 break;
             }
