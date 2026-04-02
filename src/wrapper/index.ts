@@ -4,4 +4,4 @@ export { play } from "./play";
 export { stream } from "./stream";
 export { SpeechToText } from "./speechToText";
 export { RealtimeConnection, RealtimeEvents, AudioFormat, CommitStrategy, type AudioOptions, type UrlOptions } from "./realtime";
-export { VoiceEngine, VoiceEngineSession, VoiceEngineServer, VoiceEngineResource, VoiceEngineClientWrapper, type VoiceEngineServerOptions } from "./voice-engine";
+export { VoiceEngine, VoiceEngineSession, VoiceEngineServer, VoiceEngineResource, VoiceEngineAttachment, VoiceEngineClientWrapper, type VoiceEngineServerOptions } from "./voice-engine";

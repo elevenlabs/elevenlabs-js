@@ -1,11 +1,13 @@
 import { VoiceEngineSession } from "./VoiceEngineSession";
 import { VoiceEngineServer, type VoiceEngineServerOptions } from "./VoiceEngineServer";
 import { VoiceEngineResource } from "./VoiceEngineResource";
+import { VoiceEngineAttachment } from "./VoiceEngineAttachment";
 import { VoiceEngineClientWrapper } from "./VoiceEngineClientWrapper";
 
 export { VoiceEngineSession } from "./VoiceEngineSession";
 export { VoiceEngineServer, type VoiceEngineServerOptions } from "./VoiceEngineServer";
 export { VoiceEngineResource } from "./VoiceEngineResource";
+export { VoiceEngineAttachment } from "./VoiceEngineAttachment";
 export { VoiceEngineClientWrapper } from "./VoiceEngineClientWrapper";
 export type {
     ConversationMessage,
@@ -28,32 +30,32 @@ export type {
  * Voice Engine namespace — provides event constants and classes for handling
  * incoming WebSocket connections from the ElevenLabs Voice Engine API.
  *
- * For managing voice engine resources (create, get, etc.) and starting a
- * server bound to a specific engine, use `elevenlabs.voiceEngine` instead.
+ * For managing voice engine resources and attaching to an HTTP server, use
+ * `elevenlabs.voiceEngine` instead.
  *
  * @example
  * ```typescript
- * import { ElevenLabs } from "@elevenlabs/elevenlabs-js";
+ * import { ElevenLabsClient, VoiceEngine } from "@elevenlabs/elevenlabs-js";
  *
- * // Recommended: start a server tied to a specific voice engine
+ * const elevenlabs = new ElevenLabsClient();
  * const engine = await elevenlabs.voiceEngine.get("veng_123");
- * const server = engine.listen({
- *     httpServer,
- *     path: "/voice-engine",
- *     onSession: (session) => {
- *         session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
- *             const response = await llm.generate(transcript, { signal });
- *             session.sendResponse(response);
- *         });
- *     },
- * });
- * server.start();
  *
- * // Low-level: wrap a WebSocket yourself
- * const session = new VoiceEngine.Session(ws);
- * session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
- *     const response = await llm.generate(transcript, { signal });
- *     session.sendResponse(response);
+ * // Recommended: attach to an existing HTTP server
+ * engine.attach(httpServer, "/api/voice-engine/ws", (session) => {
+ *     session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
+ *         session.sendResponse(await llm.generate(transcript, { signal }));
+ *     });
+ * });
+ *
+ * // Low-level escape hatch: manage the WebSocket server yourself
+ * const wss = new WebSocket.Server({ noServer: true });
+ * httpServer.on("upgrade", async (req, socket, head) => {
+ *     if (!await engine.verifyRequest(req)) { socket.destroy(); return; }
+ *     wss.handleUpgrade(req, socket, head, (ws) => wss.emit("connection", ws));
+ * });
+ * wss.on("connection", (ws) => {
+ *     const session = engine.createSession(ws);
+ *     session.on(VoiceEngine.USER_TRANSCRIPT, ...);
  * });
  * ```
  */
@@ -80,9 +82,13 @@ export namespace VoiceEngine {
     export const Session: typeof VoiceEngineSession = VoiceEngineSession;
     export type Session = VoiceEngineSession;
 
+    /** Standalone WebSocket server. Use `engine.attach()` for HTTP server integration. */
     export const Server: typeof VoiceEngineServer = VoiceEngineServer;
     export type Server = VoiceEngineServer;
     export type ServerOptions = VoiceEngineServerOptions;
+
+    export const Attachment: typeof VoiceEngineAttachment = VoiceEngineAttachment;
+    export type Attachment = VoiceEngineAttachment;
 
     export const Resource: typeof VoiceEngineResource = VoiceEngineResource;
     export type Resource = VoiceEngineResource;
