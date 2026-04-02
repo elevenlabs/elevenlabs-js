@@ -1,32 +1,22 @@
-import type { IncomingMessage } from "node:http";
-import type WebSocket from "ws";
+import type { IncomingMessage, Server as HttpServer } from "node:http";
+import WebSocket from "ws";
 import type { BaseClientOptions, NormalizedClientOptions } from "../../BaseClient";
 import { VoiceEngineSession } from "./VoiceEngineSession";
-import { VoiceEngineServer, type VoiceEngineServerOptions } from "./VoiceEngineServer";
+import { VoiceEngineAttachment } from "./VoiceEngineAttachment";
 
 /**
  * Represents a voice engine instance. Returned by `elevenlabs.voiceEngine.get()`.
  *
- * Manage the WebSocket upgrade in your own server, use
- * `engine.verifyRequest(req)` to authenticate incoming connections, then wrap
- * each socket with `engine.createSession(ws)`.
- *
- * For a zero-config standalone server, use `engine.listen({ port, onSession })`.
+ * Use `engine.attach(httpServer, path, onSession)` to integrate with an existing
+ * HTTP server, or drop down to `engine.verifyRequest()` and `engine.createSession()`
+ * for full control.
  *
  * @example
  * ```typescript
  * const engine = await elevenlabs.voiceEngine.get("veng_123");
  *
- * const wss = new WebSocket.Server({ noServer: true });
- *
- * httpServer.on("upgrade", async (req, socket, head) => {
- *     if (!await engine.verifyRequest(req)) { socket.destroy(); return; }
- *     wss.handleUpgrade(req, socket, head, (ws) => wss.emit("connection", ws));
- * });
- *
- * wss.on("connection", (ws) => {
- *     const session = engine.createSession(ws);
- *     session.on("user_transcript", async (transcript, { signal }) => {
+ * engine.attach(httpServer, "/api/voice-engine/ws", (session) => {
+ *     session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
  *         session.sendResponse(await llm.generate(transcript, { signal }));
  *     });
  * });
@@ -44,20 +34,65 @@ export class VoiceEngineResource {
     }
 
     /**
-     * Verify that an incoming HTTP upgrade request is a legitimate connection
-     * from the ElevenLabs Voice Engine API.
+     * Attach to an existing HTTP server and begin accepting Voice Engine
+     * connections at the given path.
      *
-     * Call this inside your WebSocket upgrade handler before accepting the
-     * connection. Always returns `true` for now — signature verification will
-     * be added in a future release.
+     * `onSession` is called once per incoming connection with an isolated
+     * `VoiceEngineSession` — one per conversation, regardless of how many
+     * callers connect simultaneously.
+     *
+     * Handles WebSocket upgrades, path routing, and request verification
+     * automatically. Returns a `VoiceEngineAttachment` whose `.close()` stops
+     * accepting connections without affecting the HTTP server.
      *
      * @example
      * ```typescript
-     * httpServer.on("upgrade", async (req, socket, head) => {
-     *     if (!await engine.verifyRequest(req)) { socket.destroy(); return; }
-     *     wss.handleUpgrade(req, socket, head, (ws) => wss.emit("connection", ws));
+     * engine.attach(httpServer, "/api/voice-engine/ws", (session) => {
+     *     session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
+     *         session.sendResponse(await llm.generate(transcript, { signal }));
+     *     });
      * });
      * ```
+     */
+    attach(
+        httpServer: HttpServer,
+        path: string,
+        onSession: (session: VoiceEngineSession) => void,
+    ): VoiceEngineAttachment {
+        const wss = new WebSocket.Server({ noServer: true });
+        const attachment = new VoiceEngineAttachment(wss);
+
+        httpServer.on("upgrade", async (req, socket, head) => {
+            const url = new URL(req.url ?? "/", `http://${req.headers.host}`);
+            if (url.pathname !== path) {
+                socket.destroy();
+                return;
+            }
+
+            if (!await this.verifyRequest(req)) {
+                socket.destroy();
+                return;
+            }
+
+            wss.handleUpgrade(req, socket, head, (ws) => wss.emit("connection", ws));
+        });
+
+        wss.on("connection", (ws: WebSocket) => {
+            onSession(this.createSession(ws));
+        });
+
+        return attachment;
+    }
+
+    /**
+     * Verify that an incoming HTTP upgrade request is a legitimate connection
+     * from the ElevenLabs Voice Engine API.
+     *
+     * Only needed when managing the WebSocket upgrade yourself. When using
+     * `engine.attach()`, verification is handled automatically.
+     *
+     * Always returns `true` for now — signature verification will be added in
+     * a future release.
      */
     async verifyRequest(_req: IncomingMessage): Promise<boolean> {
         // TODO: verify ElevenLabs request signature
@@ -65,26 +100,12 @@ export class VoiceEngineResource {
     }
 
     /**
-     * Wrap an accepted WebSocket connection in a `VoiceEngineSession`.
+     * Wrap an accepted WebSocket in a `VoiceEngineSession`.
      *
-     * Call this inside your WebSocket server's `connection` handler after
-     * the upgrade has been verified with `engine.verifyRequest(req)`.
+     * Only needed when managing the WebSocket upgrade yourself. When using
+     * `engine.attach()`, sessions are created automatically.
      */
     createSession(ws: WebSocket): VoiceEngineSession {
         return new VoiceEngineSession(ws);
-    }
-
-    /**
-     * Start a standalone WebSocket server bound to this voice engine and begin
-     * accepting connections immediately. Returns the running server so you can
-     * call `.stop()` later.
-     *
-     * For integration with an existing HTTP server, manage the WebSocket
-     * upgrade yourself and use `engine.createSession(ws)` per connection.
-     */
-    listen(options: Omit<VoiceEngineServerOptions, "engineId">): VoiceEngineServer {
-        const server = new VoiceEngineServer({ ...options, engineId: this.engineId });
-        server.start();
-        return server;
     }
 }
