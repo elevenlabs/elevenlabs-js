@@ -58,7 +58,7 @@ describe("VoiceEngineSession", () => {
         ws.receiveMessage({ type: "init", conversation_id: "conv_42" });
 
         expect(handler).toHaveBeenCalledWith("conv_42");
-        expect(session.getConversationId()).toBe("conv_42");
+        expect(session.conversationId).toBe("conv_42");
     });
 
     // -----------------------------------------------------------------------
@@ -149,7 +149,7 @@ describe("VoiceEngineSession", () => {
         ws.close();
 
         expect(handler).toHaveBeenCalledTimes(1);
-        expect(session.isOpen()).toBe(false);
+        expect(session.isOpen).toBe(false);
     });
 
     it("aborts current signal when WebSocket closes", () => {
@@ -287,7 +287,60 @@ describe("VoiceEngineSession", () => {
     it("close() is idempotent", () => {
         session.close();
         session.close();
-        expect(session.isOpen()).toBe(false);
+        expect(session.isOpen).toBe(false);
+    });
+
+    // -----------------------------------------------------------------------
+    // Typed handler methods
+    // -----------------------------------------------------------------------
+
+    it("onInit fires with conversation ID", () => {
+        const handler = jest.fn();
+        session.onInit(handler);
+        ws.receiveMessage({ type: "init", conversation_id: "conv_99" });
+        expect(handler).toHaveBeenCalledWith("conv_99");
+    });
+
+    it("onTranscript fires with transcript and signal", () => {
+        const handler = jest.fn();
+        session.onTranscript(handler);
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 1 });
+        expect(handler).toHaveBeenCalledTimes(1);
+        const [received, context] = handler.mock.calls[0];
+        expect(received).toEqual(transcript);
+        expect(context.signal).toBeInstanceOf(AbortSignal);
+    });
+
+    it("onClose fires on clean close message", () => {
+        const handler = jest.fn();
+        session.onClose(handler);
+        ws.receiveMessage({ type: "close" });
+        expect(handler).toHaveBeenCalledTimes(1);
+    });
+
+    it("onDisconnect fires when WebSocket drops", () => {
+        const handler = jest.fn();
+        session.onDisconnect(handler);
+        ws.close();
+        expect(handler).toHaveBeenCalledTimes(1);
+    });
+
+    it("onError fires on protocol error", () => {
+        const handler = jest.fn();
+        session.onError(handler);
+        ws.receiveMessage({ type: "error", message: "oops" });
+        expect(handler).toHaveBeenCalledTimes(1);
+        expect(handler.mock.calls[0][0]).toBeInstanceOf(Error);
+    });
+
+    it("typed methods are chainable", () => {
+        const result = session
+            .onInit(() => {})
+            .onTranscript(() => {})
+            .onClose(() => {})
+            .onDisconnect(() => {})
+            .onError(() => {});
+        expect(result).toBe(session);
     });
 
     // -----------------------------------------------------------------------
