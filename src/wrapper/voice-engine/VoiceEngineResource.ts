@@ -87,7 +87,7 @@ export class VoiceEngineResource {
 
         wss.on("connection", (ws: WebSocket) => {
             log("creating new session");
-            const session = this.createSession(ws);
+            const session = this.createSession(ws, { debug });
             this.wireHandler(session, handler);
         });
 
@@ -116,8 +116,8 @@ export class VoiceEngineResource {
      * Only needed when managing the WebSocket upgrade yourself. When using
      * `engine.attach()`, sessions are created automatically.
      */
-    createSession(ws: WebSocket): VoiceEngineSession {
-        return new VoiceEngineSession(ws);
+    createSession(ws: WebSocket, options?: { debug?: boolean }): VoiceEngineSession {
+        return new VoiceEngineSession(ws, options);
     }
 
     /** @internal */
