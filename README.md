@@ -118,19 +118,38 @@ const openai = new OpenAI({
 // Retrieve existing voice engine
 const engine = await elevenlabs.voiceEngine.get("veng_123");
 
-engine.attach(httpServer, "/api/voice-engine/ws", (session) => {
-    session.onTranscript(async (transcript, { signal }) => {
+engine.attach(httpServer, "/api/voice-engine/ws", {
+    onInit(conversationId) {
+        console.log("session started:", conversationId);
+    },
+
+    async onTranscript(transcript, signal, session) {
         // Pass the transcript to your LLM — signal auto-aborts if the user interrupts
-        const response = await openai.responses.create({
-            model: "gpt-4o",
-            input: transcript.map((m) => ({ role: m.role === "agent" ? "assistant" : m.role, content: m.content })),
-            stream: true,
-        });
+        const response = await openai.responses.create(
+            {
+                model: "gpt-4o",
+                input: transcript.map((m) => ({ role: m.role === "agent" ? "assistant" : m.role, content: m.content })),
+                stream: true,
+            },
+            { signal },
+        );
 
         // Stream the LLM response directly — the SDK extracts text from
         // OpenAI, Anthropic, and Gemini stream formats automatically
         session.sendResponse(response);
-    });
+    },
+
+    onClose(session) {
+        console.log("session ended:", session.conversationId);
+    },
+
+    onDisconnect(session) {
+        console.log("session disconnected:", session.conversationId);
+    },
+
+    onError(err) {
+        console.error("error:", err);
+    },
 });
 ```
 
@@ -143,11 +162,9 @@ import { VoiceEngine } from "@elevenlabs/elevenlabs-js";
 
 const server = new VoiceEngine.Server({
     port: 3001,
-    onSession: (session) => {
-        session.onTranscript(async (transcript, { signal }) => {
-            const reply = await generateLLMResponse(transcript, { signal });
-            session.sendResponse(reply);
-        });
+    async onTranscript(transcript, signal, session) {
+        const reply = await generateLLMResponse(transcript, { signal });
+        session.sendResponse(reply);
     },
 });
 

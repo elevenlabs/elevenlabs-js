@@ -72,15 +72,15 @@ describe("VoiceEngineSession", () => {
         ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 1 });
 
         expect(handler).toHaveBeenCalledTimes(1);
-        const [received, context] = handler.mock.calls[0];
+        const [received, signal] = handler.mock.calls[0];
         expect(received).toEqual(transcript);
-        expect(context.signal).toBeInstanceOf(AbortSignal);
-        expect(context.signal.aborted).toBe(false);
+        expect(signal).toBeInstanceOf(AbortSignal);
+        expect(signal.aborted).toBe(false);
     });
 
     it("aborts previous transcript signal when a new transcript arrives", () => {
         const signals: AbortSignal[] = [];
-        session.on(VoiceEngine.USER_TRANSCRIPT, (_transcript, { signal }) => {
+        session.on(VoiceEngine.USER_TRANSCRIPT, (_transcript, signal) => {
             signals.push(signal);
         });
 
@@ -112,7 +112,7 @@ describe("VoiceEngineSession", () => {
         session.on(VoiceEngine.CLOSE, closeHandler);
 
         let capturedSignal: AbortSignal | null = null;
-        session.on(VoiceEngine.USER_TRANSCRIPT, (_transcript, { signal }) => {
+        session.on(VoiceEngine.USER_TRANSCRIPT, (_transcript, signal) => {
             capturedSignal = signal;
         });
 
@@ -154,7 +154,7 @@ describe("VoiceEngineSession", () => {
 
     it("aborts current signal when WebSocket closes", () => {
         let capturedSignal: AbortSignal | null = null;
-        session.on(VoiceEngine.USER_TRANSCRIPT, (_transcript, { signal }) => {
+        session.on(VoiceEngine.USER_TRANSCRIPT, (_transcript, signal) => {
             capturedSignal = signal;
         });
 
@@ -410,9 +410,9 @@ describe("VoiceEngineSession", () => {
         session.onTranscript(handler);
         ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 1 });
         expect(handler).toHaveBeenCalledTimes(1);
-        const [received, context] = handler.mock.calls[0];
+        const [received, signal] = handler.mock.calls[0];
         expect(received).toEqual(transcript);
-        expect(context.signal).toBeInstanceOf(AbortSignal);
+        expect(signal).toBeInstanceOf(AbortSignal);
     });
 
     it("onClose fires on clean close message", () => {

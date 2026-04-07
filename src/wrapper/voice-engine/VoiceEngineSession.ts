@@ -3,7 +3,6 @@ import WebSocket from "ws";
 import type {
     ConversationMessage,
     IncomingMessage,
-    TranscriptContext,
     VoiceEngineEventMap,
     VoiceEngineEventName,
     WebSocketLike,
@@ -90,7 +89,7 @@ export class VoiceEngineSession {
      * `signal` is aborted if a new transcript arrives before you finish
      * responding — pass it to your LLM call to cancel in-flight requests.
      */
-    onTranscript(listener: (transcript: ConversationMessage[], context: TranscriptContext) => void): this {
+    onTranscript(listener: (transcript: ConversationMessage[], signal: AbortSignal) => void): this {
         return this.on("user_transcript", listener);
     }
 
@@ -200,10 +199,7 @@ export class VoiceEngineSession {
                 this.currentAbortController = new AbortController();
                 this.currentEventId = msg.event_id;
 
-                const context: TranscriptContext = {
-                    signal: this.currentAbortController.signal,
-                };
-                this.emitter.emit("user_transcript", msg.user_transcript, context);
+                this.emitter.emit("user_transcript", msg.user_transcript, this.currentAbortController.signal);
                 break;
             }
 

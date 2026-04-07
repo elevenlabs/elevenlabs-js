@@ -3,7 +3,6 @@ import WebSocket from "ws";
 import { normalizeClientOptions } from "../../../src/BaseClient";
 import { VoiceEngineResource } from "../../../src/wrapper/voice-engine/VoiceEngineResource";
 import { VoiceEngineAttachment } from "../../../src/wrapper/voice-engine/VoiceEngineAttachment";
-import { VoiceEngineSession } from "../../../src/wrapper/voice-engine/VoiceEngineSession";
 
 const testOptions = normalizeClientOptions({ apiKey: "test-key" });
 
@@ -58,21 +57,26 @@ describe("VoiceEngineResource", () => {
     // attach — routing
     // -----------------------------------------------------------------------
 
-    it("calls onSession for connections on the correct path", async () => {
+    it("calls onTranscript for connections on the correct path", async () => {
         const httpServer = trackHttpServer();
         await new Promise<void>((r) => httpServer.listen(0, r));
         const port = getPort(httpServer);
 
+        const onTranscript = jest.fn();
         const resource = makeResource();
-        const sessionPromise = new Promise<VoiceEngineSession>((resolve) => {
-            trackAttachment(resource.attach(httpServer, "/ve", resolve));
-        });
+        trackAttachment(resource.attach(httpServer, "/ve", { onTranscript }));
 
         const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}/ve`));
         await new Promise<void>((r, e) => { ws.on("open", r); ws.on("error", e); });
 
-        const session = await sessionPromise;
-        expect(session).toBeInstanceOf(VoiceEngineSession);
+        ws.send(JSON.stringify({
+            type: "user_transcript",
+            user_transcript: [{ role: "user", content: "hello" }],
+            event_id: 1,
+        }));
+
+        await new Promise((r) => setTimeout(r, 50));
+        expect(onTranscript).toHaveBeenCalledTimes(1);
     });
 
     it("ignores connections on the wrong path without calling onSession", async () => {
@@ -86,9 +90,9 @@ describe("VoiceEngineResource", () => {
         const upgradeSockets: import("node:stream").Duplex[] = [];
         httpServer.on("upgrade", (_req, socket) => { upgradeSockets.push(socket); });
 
-        const onSession = jest.fn();
+        const onTranscript = jest.fn();
         const resource = makeResource();
-        trackAttachment(resource.attach(httpServer, "/ve", onSession));
+        trackAttachment(resource.attach(httpServer, "/ve", { onTranscript }));
 
         const ws = new WebSocket(`ws://127.0.0.1:${port}/wrong`);
         ws.on("error", () => {});
@@ -97,7 +101,7 @@ describe("VoiceEngineResource", () => {
         // like Next.js HMR can still process it. Give it a moment to confirm
         // onSession is never called.
         await new Promise((r) => setTimeout(r, 100));
-        expect(onSession).not.toHaveBeenCalled();
+        expect(onTranscript).not.toHaveBeenCalled();
 
         ws.terminate();
         for (const s of upgradeSockets) s.destroy();
@@ -114,7 +118,7 @@ describe("VoiceEngineResource", () => {
 
         const resource = makeResource();
         jest.spyOn(resource, "verifyRequest").mockResolvedValue(false);
-        trackAttachment(resource.attach(httpServer, "/ve", () => {}));
+        trackAttachment(resource.attach(httpServer, "/ve", {}));
 
         const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}/ve`));
 
@@ -134,11 +138,11 @@ describe("VoiceEngineResource", () => {
         const port = getPort(httpServer);
 
         const resource = makeResource();
-        trackAttachment(resource.attach(httpServer, "/ve", (session) => {
-            session.on("user_transcript", (transcript) => {
+        trackAttachment(resource.attach(httpServer, "/ve", {
+            onTranscript(transcript, _signal, session) {
                 const last = transcript[transcript.length - 1];
                 session.sendResponse(`echo: ${last.content}`);
-            });
+            },
         }));
 
         const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}/ve`));
@@ -168,7 +172,7 @@ describe("VoiceEngineResource", () => {
         await new Promise<void>((r) => httpServer.listen(0, r));
 
         const resource = makeResource();
-        const attachment = resource.attach(httpServer, "/ve", () => {});
+        const attachment = resource.attach(httpServer, "/ve", {});
         await attachment.close();
 
         expect(httpServer.listening).toBe(true);

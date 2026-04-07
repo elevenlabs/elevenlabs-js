@@ -1,7 +1,8 @@
 import WebSocket from "ws";
+import type { VoiceEngineHandler } from "./types";
 import { VoiceEngineSession } from "./VoiceEngineSession";
 
-export interface VoiceEngineServerOptions {
+export interface VoiceEngineServerOptions extends VoiceEngineHandler {
     /**
      * Port to listen on. Defaults to 3001.
      */
@@ -13,12 +14,6 @@ export interface VoiceEngineServerOptions {
      * Will be used for connection auth in a future release.
      */
     engineId?: string;
-
-    /**
-     * Called for each new session (one per conversation). Register event
-     * listeners on the session inside this callback.
-     */
-    onSession: (session: VoiceEngineSession) => void;
 }
 
 /**
@@ -60,7 +55,7 @@ export class VoiceEngineServer {
      */
     handleConnection(ws: WebSocket): VoiceEngineSession {
         const session = new VoiceEngineSession(ws);
-        this.options.onSession(session);
+        this.wireHandler(session);
         return session;
     }
 
@@ -77,6 +72,15 @@ export class VoiceEngineServer {
         this.wss.on("connection", (ws: WebSocket) => {
             this.handleConnection(ws);
         });
+    }
+
+    private wireHandler(session: VoiceEngineSession): void {
+        const { onInit, onTranscript, onClose, onDisconnect, onError } = this.options;
+        if (onInit) session.on("init", (id) => onInit(id, session));
+        if (onTranscript) session.on("user_transcript", (t, s) => onTranscript(t, s, session));
+        if (onClose) session.on("close", () => onClose(session));
+        if (onDisconnect) session.on("disconnected", () => onDisconnect(session));
+        if (onError) session.on("error", (err) => onError(err, session));
     }
 
     /**
