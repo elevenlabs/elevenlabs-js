@@ -262,6 +262,110 @@ describe("VoiceEngineSession", () => {
     });
 
     // -----------------------------------------------------------------------
+    // sendResponse (LLM stream formats)
+    // -----------------------------------------------------------------------
+
+    it("extracts text from OpenAI Responses API stream events", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 10 });
+
+        async function* openaiResponsesStream() {
+            yield { type: "response.created", response: {} };
+            yield { type: "response.output_text.delta", delta: "Hello" };
+            yield { type: "response.output_text.delta", delta: " world" };
+            yield { type: "response.output_text.done", text: "Hello world" };
+            yield { type: "response.completed", response: {} };
+        }
+
+        session.sendResponse(openaiResponsesStream());
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toHaveLength(3);
+        expect(sent[0]).toEqual({ type: "agent_response", content: "Hello", event_id: 10, is_final: false });
+        expect(sent[1]).toEqual({ type: "agent_response", content: " world", event_id: 10, is_final: false });
+        expect(sent[2]).toEqual({ type: "agent_response", content: "", event_id: 10, is_final: true });
+    });
+
+    it("extracts text from OpenAI Chat Completions API stream events", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 11 });
+
+        async function* openaiChatStream() {
+            yield { choices: [{ delta: { role: "assistant" } }] };
+            yield { choices: [{ delta: { content: "Hi" } }] };
+            yield { choices: [{ delta: { content: " there" } }] };
+            yield { choices: [{ delta: {} }] };
+        }
+
+        session.sendResponse(openaiChatStream());
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toHaveLength(3);
+        expect(sent[0]).toEqual({ type: "agent_response", content: "Hi", event_id: 11, is_final: false });
+        expect(sent[1]).toEqual({ type: "agent_response", content: " there", event_id: 11, is_final: false });
+        expect(sent[2]).toEqual({ type: "agent_response", content: "", event_id: 11, is_final: true });
+    });
+
+    it("extracts text from Anthropic Messages API stream events", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 12 });
+
+        async function* anthropicStream() {
+            yield { type: "message_start", message: {} };
+            yield { type: "content_block_start", content_block: { type: "text", text: "" } };
+            yield { type: "content_block_delta", delta: { type: "text_delta", text: "Good" } };
+            yield { type: "content_block_delta", delta: { type: "text_delta", text: " morning" } };
+            yield { type: "content_block_stop" };
+            yield { type: "message_stop" };
+        }
+
+        session.sendResponse(anthropicStream());
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toHaveLength(3);
+        expect(sent[0]).toEqual({ type: "agent_response", content: "Good", event_id: 12, is_final: false });
+        expect(sent[1]).toEqual({ type: "agent_response", content: " morning", event_id: 12, is_final: false });
+        expect(sent[2]).toEqual({ type: "agent_response", content: "", event_id: 12, is_final: true });
+    });
+
+    it("extracts text from Google Gemini API stream events", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 13 });
+
+        async function* geminiStream() {
+            yield { candidates: [{ content: { parts: [{ text: "Hey" }], role: "model" } }] };
+            yield { candidates: [{ content: { parts: [{ text: " buddy" }], role: "model" } }] };
+        }
+
+        session.sendResponse(geminiStream());
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toHaveLength(3);
+        expect(sent[0]).toEqual({ type: "agent_response", content: "Hey", event_id: 13, is_final: false });
+        expect(sent[1]).toEqual({ type: "agent_response", content: " buddy", event_id: 13, is_final: false });
+        expect(sent[2]).toEqual({ type: "agent_response", content: "", event_id: 13, is_final: true });
+    });
+
+    it("skips unrecognized stream events without breaking", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 14 });
+
+        async function* mixedStream() {
+            yield { type: "unknown_event", data: 123 };
+            yield { type: "response.output_text.delta", delta: "text" };
+            yield 42;
+            yield null;
+        }
+
+        session.sendResponse(mixedStream() as AsyncIterable<unknown>);
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toHaveLength(2);
+        expect(sent[0]).toEqual({ type: "agent_response", content: "text", event_id: 14, is_final: false });
+        expect(sent[1]).toEqual({ type: "agent_response", content: "", event_id: 14, is_final: true });
+    });
+
+    // -----------------------------------------------------------------------
     // event_id tracking across interrupts
     // -----------------------------------------------------------------------
 
