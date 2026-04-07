@@ -20,6 +20,7 @@ export const ClientEvent = {
     AgentChatResponsePart: "agent_chat_response_part",
     ClientError: "client_error",
     GuardrailTriggered: "guardrail_triggered",
+    DtmfRequest: "dtmf_request",
     InternalTurnProbability: "internal_turn_probability",
     InternalTentativeAgentResponse: "internal_tentative_agent_response",
 } as const;

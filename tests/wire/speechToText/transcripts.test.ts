@@ -53,6 +53,7 @@ describe("TranscriptsClient", () => {
             ],
             transcription_id: "transcription_id",
             entities: [{ text: "text", entity_type: "entity_type", start_char: 1, end_char: 1 }],
+            audio_duration_secs: 1.1,
         };
         server
             .mockEndpoint()
@@ -133,6 +134,7 @@ describe("TranscriptsClient", () => {
                     endChar: 1,
                 },
             ],
+            audioDurationSecs: 1.1,
         });
     });
 

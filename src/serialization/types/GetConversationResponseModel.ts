@@ -8,6 +8,7 @@ import { ConversationHistoryMetadataCommonModel } from "./ConversationHistoryMet
 import { ConversationHistoryTranscriptResponseModel } from "./ConversationHistoryTranscriptResponseModel";
 import { ConversationInitiationClientDataRequestOutput } from "./ConversationInitiationClientDataRequestOutput";
 import { GetConversationResponseModelStatus } from "./GetConversationResponseModelStatus";
+import { VisitedAgentRef } from "./VisitedAgentRef";
 
 export const GetConversationResponseModel: core.serialization.ObjectSchema<
     serializers.GetConversationResponseModel.Raw,
@@ -21,6 +22,7 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
     versionId: core.serialization.property("version_id", core.serialization.string().optional()),
     metadata: ConversationHistoryMetadataCommonModel,
     analysis: ConversationHistoryAnalysisCommonModel.optional(),
+    visitedAgents: core.serialization.property("visited_agents", core.serialization.list(VisitedAgentRef).optional()),
     conversationInitiationClientData: core.serialization.property(
         "conversation_initiation_client_data",
         ConversationInitiationClientDataRequestOutput.optional(),
@@ -43,6 +45,7 @@ export declare namespace GetConversationResponseModel {
         version_id?: string | null;
         metadata: ConversationHistoryMetadataCommonModel.Raw;
         analysis?: ConversationHistoryAnalysisCommonModel.Raw | null;
+        visited_agents?: VisitedAgentRef.Raw[] | null;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestOutput.Raw | null;
         environment?: string | null;
         conversation_id: string;

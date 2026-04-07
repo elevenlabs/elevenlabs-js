@@ -4,5 +4,6 @@
 export const ResponseFilterMode = {
     All: "all",
     Allow: "allow",
+    HideAll: "hide_all",
 } as const;
 export type ResponseFilterMode = (typeof ResponseFilterMode)[keyof typeof ResponseFilterMode];

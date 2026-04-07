@@ -10,13 +10,17 @@ export const PromptAgentApiModelOverrideConfig: core.serialization.ObjectSchema<
 > = core.serialization.object({
     prompt: core.serialization.boolean().optional(),
     llm: core.serialization.boolean().optional(),
+    toolIds: core.serialization.property("tool_ids", core.serialization.boolean().optional()),
     nativeMcpServerIds: core.serialization.property("native_mcp_server_ids", core.serialization.boolean().optional()),
+    knowledgeBase: core.serialization.property("knowledge_base", core.serialization.boolean().optional()),
 });
 
 export declare namespace PromptAgentApiModelOverrideConfig {
     export interface Raw {
         prompt?: boolean | null;
         llm?: boolean | null;
+        tool_ids?: boolean | null;
         native_mcp_server_ids?: boolean | null;
+        knowledge_base?: boolean | null;
     }
 }

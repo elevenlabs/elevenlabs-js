@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { PromptAgentApiModelOverride } from "./PromptAgentApiModelOverride";
+import { PromptAgentApiModelOverrideInput } from "./PromptAgentApiModelOverrideInput";
 
 export const AgentConfigOverrideInput: core.serialization.ObjectSchema<
     serializers.AgentConfigOverrideInput.Raw,
@@ -15,7 +15,7 @@ export const AgentConfigOverrideInput: core.serialization.ObjectSchema<
         "max_conversation_duration_message",
         core.serialization.string().optional(),
     ),
-    prompt: PromptAgentApiModelOverride.optional(),
+    prompt: PromptAgentApiModelOverrideInput.optional(),
 });
 
 export declare namespace AgentConfigOverrideInput {
@@ -23,6 +23,6 @@ export declare namespace AgentConfigOverrideInput {
         first_message?: string | null;
         language?: string | null;
         max_conversation_duration_message?: string | null;
-        prompt?: PromptAgentApiModelOverride.Raw | null;
+        prompt?: PromptAgentApiModelOverrideInput.Raw | null;
     }
 }

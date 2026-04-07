@@ -10,4 +10,5 @@ export interface ConversationHistoryAnalysisCommonModel {
     callSuccessful: ElevenLabs.EvaluationSuccessResult;
     transcriptSummary: string;
     callSummaryTitle?: string;
+    scoped?: ElevenLabs.ScopedAnalysisResult[];
 }

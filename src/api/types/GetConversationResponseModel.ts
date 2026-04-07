@@ -12,6 +12,7 @@ export interface GetConversationResponseModel {
     versionId?: string;
     metadata: ElevenLabs.ConversationHistoryMetadataCommonModel;
     analysis?: ElevenLabs.ConversationHistoryAnalysisCommonModel;
+    visitedAgents?: ElevenLabs.VisitedAgentRef[];
     conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestOutput;
     environment?: string;
     conversationId: string;

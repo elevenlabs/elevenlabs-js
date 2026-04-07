@@ -82,6 +82,10 @@ describe("AgentsClient", () => {
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                                     llm: "gemini-2.0-flash-001",
+                                    tool_ids: ["tool_ids"],
+                                    knowledge_base: [
+                                        { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                                    ],
                                 },
                             },
                         },
@@ -114,6 +118,7 @@ describe("AgentsClient", () => {
                             conversation_goal_prompt:
                                 "You are a helpful assistant that can answer questions about the topic of the conversation.",
                             use_knowledge_base: false,
+                            scope: "conversation",
                         },
                     ],
                 },
@@ -165,6 +170,7 @@ describe("AgentsClient", () => {
                     language_presets: { key: {} },
                 },
                 data_collection: { key: { type: "string", description: "A user-provided message" } },
+                data_collection_scopes: { key: "conversation" },
                 overrides: {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
@@ -236,6 +242,7 @@ describe("AgentsClient", () => {
                     enable_messaging: true,
                     enable_audio_message_response: true,
                     assigned_agent_name: "assigned_agent_name",
+                    is_token_expired: true,
                 },
             ],
             workflow: {
@@ -739,6 +746,15 @@ describe("AgentsClient", () => {
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                                     llm: "gemini-2.0-flash-001",
+                                    toolIds: ["tool_ids"],
+                                    knowledgeBase: [
+                                        {
+                                            type: "file",
+                                            name: "My Knowledge Base",
+                                            id: "123",
+                                            usageMode: "auto",
+                                        },
+                                    ],
                                 },
                             },
                         },
@@ -785,6 +801,7 @@ describe("AgentsClient", () => {
                             conversationGoalPrompt:
                                 "You are a helpful assistant that can answer questions about the topic of the conversation.",
                             useKnowledgeBase: false,
+                            scope: "conversation",
                         },
                     ],
                 },
@@ -850,6 +867,9 @@ describe("AgentsClient", () => {
                         type: "string",
                         description: "A user-provided message",
                     },
+                },
+                dataCollectionScopes: {
+                    key: "conversation",
                 },
                 overrides: {
                     customLlmExtraBody: true,
@@ -949,6 +969,7 @@ describe("AgentsClient", () => {
                     enableMessaging: true,
                     enableAudioMessageResponse: true,
                     assignedAgentName: "assigned_agent_name",
+                    isTokenExpired: true,
                 },
             ],
             workflow: {
@@ -1568,6 +1589,10 @@ describe("AgentsClient", () => {
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                                     llm: "gemini-2.0-flash-001",
+                                    tool_ids: ["tool_ids"],
+                                    knowledge_base: [
+                                        { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                                    ],
                                 },
                             },
                         },
@@ -1600,6 +1625,7 @@ describe("AgentsClient", () => {
                             conversation_goal_prompt:
                                 "You are a helpful assistant that can answer questions about the topic of the conversation.",
                             use_knowledge_base: false,
+                            scope: "conversation",
                         },
                     ],
                 },
@@ -1651,6 +1677,7 @@ describe("AgentsClient", () => {
                     language_presets: { key: {} },
                 },
                 data_collection: { key: { type: "string", description: "A user-provided message" } },
+                data_collection_scopes: { key: "conversation" },
                 overrides: {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
@@ -1722,6 +1749,7 @@ describe("AgentsClient", () => {
                     enable_messaging: true,
                     enable_audio_message_response: true,
                     assigned_agent_name: "assigned_agent_name",
+                    is_token_expired: true,
                 },
             ],
             workflow: {
@@ -2226,6 +2254,15 @@ describe("AgentsClient", () => {
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                                     llm: "gemini-2.0-flash-001",
+                                    toolIds: ["tool_ids"],
+                                    knowledgeBase: [
+                                        {
+                                            type: "file",
+                                            name: "My Knowledge Base",
+                                            id: "123",
+                                            usageMode: "auto",
+                                        },
+                                    ],
                                 },
                             },
                         },
@@ -2272,6 +2309,7 @@ describe("AgentsClient", () => {
                             conversationGoalPrompt:
                                 "You are a helpful assistant that can answer questions about the topic of the conversation.",
                             useKnowledgeBase: false,
+                            scope: "conversation",
                         },
                     ],
                 },
@@ -2337,6 +2375,9 @@ describe("AgentsClient", () => {
                         type: "string",
                         description: "A user-provided message",
                     },
+                },
+                dataCollectionScopes: {
+                    key: "conversation",
                 },
                 overrides: {
                     customLlmExtraBody: true,
@@ -2436,6 +2477,7 @@ describe("AgentsClient", () => {
                     enableMessaging: true,
                     enableAudioMessageResponse: true,
                     assignedAgentName: "assigned_agent_name",
+                    isTokenExpired: true,
                 },
             ],
             workflow: {
@@ -3144,6 +3186,7 @@ describe("AgentsClient", () => {
                 call_successful: "success",
                 transcript_summary: "transcript_summary",
                 call_summary_title: "call_summary_title",
+                scoped: [{ scope: "conversation", source_agent_id: "source_agent_id", successful: "success" }],
             },
         };
         server
@@ -3267,6 +3310,13 @@ describe("AgentsClient", () => {
                 callSuccessful: "success",
                 transcriptSummary: "transcript_summary",
                 callSummaryTitle: "call_summary_title",
+                scoped: [
+                    {
+                        scope: "conversation",
+                        sourceAgentId: "source_agent_id",
+                        successful: "success",
+                    },
+                ],
             },
         });
     });
