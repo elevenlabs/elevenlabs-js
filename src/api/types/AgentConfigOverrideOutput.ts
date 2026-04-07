@@ -10,5 +10,5 @@ export interface AgentConfigOverrideOutput {
     /** If non-empty, the message the agent will send when max conversation duration is reached. */
     maxConversationDurationMessage?: string;
     /** The prompt for the agent */
-    prompt?: ElevenLabs.PromptAgentApiModelOverride;
+    prompt?: ElevenLabs.PromptAgentApiModelOverrideOutput;
 }

@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const VoiceResponseModelRecordingQuality: core.serialization.Schema<
     serializers.VoiceResponseModelRecordingQuality.Raw,
     ElevenLabs.VoiceResponseModelRecordingQuality
-> = core.serialization.enum_(["studio", "ok", "bad"]);
+> = core.serialization.enum_(["studio", "good", "ok", "poor", "bad"]);
 
 export declare namespace VoiceResponseModelRecordingQuality {
-    export type Raw = "studio" | "ok" | "bad";
+    export type Raw = "studio" | "good" | "ok" | "poor" | "bad";
 }

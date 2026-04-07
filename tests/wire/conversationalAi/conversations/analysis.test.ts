@@ -112,7 +112,9 @@ describe("AnalysisClient", () => {
                 call_successful: "success",
                 transcript_summary: "transcript_summary",
                 call_summary_title: "call_summary_title",
+                scoped: [{ scope: "conversation", source_agent_id: "source_agent_id", successful: "success" }],
             },
+            visited_agents: [{ agent_id: "agent_id", branch_id: "branch_id" }],
             conversation_initiation_client_data: {
                 conversation_config_override: {
                     turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
@@ -123,6 +125,10 @@ describe("AnalysisClient", () => {
                         prompt: {
                             prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                             llm: "gemini-2.0-flash-001",
+                            tool_ids: ["tool_ids"],
+                            knowledge_base: [
+                                { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                            ],
                         },
                     },
                 },
@@ -327,7 +333,20 @@ describe("AnalysisClient", () => {
                 callSuccessful: "success",
                 transcriptSummary: "transcript_summary",
                 callSummaryTitle: "call_summary_title",
+                scoped: [
+                    {
+                        scope: "conversation",
+                        sourceAgentId: "source_agent_id",
+                        successful: "success",
+                    },
+                ],
             },
+            visitedAgents: [
+                {
+                    agentId: "agent_id",
+                    branchId: "branch_id",
+                },
+            ],
             conversationInitiationClientData: {
                 conversationConfigOverride: {
                     turn: {
@@ -347,6 +366,15 @@ describe("AnalysisClient", () => {
                         prompt: {
                             prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                             llm: "gemini-2.0-flash-001",
+                            toolIds: ["tool_ids"],
+                            knowledgeBase: [
+                                {
+                                    type: "file",
+                                    name: "My Knowledge Base",
+                                    id: "123",
+                                    usageMode: "auto",
+                                },
+                            ],
                         },
                     },
                 },

@@ -4,11 +4,13 @@ import type * as ElevenLabs from "../index";
 
 export interface AgentPlatformSettingsRequestModel {
     /** Settings for evaluation */
-    evaluation?: ElevenLabs.EvaluationSettings;
+    evaluation?: ElevenLabs.EvaluationSettingsInput;
     /** Configuration for the widget */
     widget?: ElevenLabs.WidgetConfig;
     /** Data collection settings */
     dataCollection?: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
+    /** Scope per data collection item ID. Missing keys default to conversation scope. */
+    dataCollectionScopes?: Record<string, ElevenLabs.AnalysisScope>;
     /** Additional overrides for the agent during conversation initiation */
     overrides?: ElevenLabs.ConversationInitiationClientDataConfigInput;
     /** Workspace overrides for the agent */

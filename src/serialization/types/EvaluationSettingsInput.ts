@@ -5,14 +5,14 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { PromptEvaluationCriteria } from "./PromptEvaluationCriteria";
 
-export const EvaluationSettings: core.serialization.ObjectSchema<
-    serializers.EvaluationSettings.Raw,
-    ElevenLabs.EvaluationSettings
+export const EvaluationSettingsInput: core.serialization.ObjectSchema<
+    serializers.EvaluationSettingsInput.Raw,
+    ElevenLabs.EvaluationSettingsInput
 > = core.serialization.object({
     criteria: core.serialization.list(PromptEvaluationCriteria).optional(),
 });
 
-export declare namespace EvaluationSettings {
+export declare namespace EvaluationSettingsInput {
     export interface Raw {
         criteria?: PromptEvaluationCriteria.Raw[] | null;
     }

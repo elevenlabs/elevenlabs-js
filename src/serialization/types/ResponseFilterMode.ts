@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const ResponseFilterMode: core.serialization.Schema<
     serializers.ResponseFilterMode.Raw,
     ElevenLabs.ResponseFilterMode
-> = core.serialization.enum_(["all", "allow"]);
+> = core.serialization.enum_(["all", "allow", "hide_all"]);
 
 export declare namespace ResponseFilterMode {
-    export type Raw = "all" | "allow";
+    export type Raw = "all" | "allow" | "hide_all";
 }

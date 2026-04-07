@@ -11,11 +11,13 @@ export const MultichannelSpeechToTextResponseModel: core.serialization.ObjectSch
 > = core.serialization.object({
     transcripts: core.serialization.list(SpeechToTextChunkResponseModel),
     transcriptionId: core.serialization.property("transcription_id", core.serialization.string().optional()),
+    audioDurationSecs: core.serialization.property("audio_duration_secs", core.serialization.number().optional()),
 });
 
 export declare namespace MultichannelSpeechToTextResponseModel {
     export interface Raw {
         transcripts: SpeechToTextChunkResponseModel.Raw[];
         transcription_id?: string | null;
+        audio_duration_secs?: number | null;
     }
 }

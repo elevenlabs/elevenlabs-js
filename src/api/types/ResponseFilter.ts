@@ -6,7 +6,7 @@ import type * as ElevenLabs from "../index";
  * Configuration for filtering tool responses before they are visible to the agent.
  */
 export interface ResponseFilter {
-    /** Controls how tool responses are filtered. 'all' returns entire response, 'allow' returns only specified paths. */
+    /** Controls how tool responses are filtered. 'all' returns entire response, 'allow' returns only specified paths, 'hide_all' hides the entire response. */
     mode?: ElevenLabs.ResponseFilterMode;
     /** Dot notation paths to include when mode is 'allow' (e.g., ['ticket.id', 'ticket.status']). */
     filters?: string[];

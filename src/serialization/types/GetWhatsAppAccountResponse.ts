@@ -20,6 +20,7 @@ export const GetWhatsAppAccountResponse: core.serialization.ObjectSchema<
         core.serialization.boolean().optional(),
     ),
     assignedAgentName: core.serialization.property("assigned_agent_name", core.serialization.string().optional()),
+    isTokenExpired: core.serialization.property("is_token_expired", core.serialization.boolean().optional()),
 });
 
 export declare namespace GetWhatsAppAccountResponse {
@@ -33,5 +34,6 @@ export declare namespace GetWhatsAppAccountResponse {
         enable_messaging?: boolean | null;
         enable_audio_message_response?: boolean | null;
         assigned_agent_name?: string | null;
+        is_token_expired?: boolean | null;
     }
 }

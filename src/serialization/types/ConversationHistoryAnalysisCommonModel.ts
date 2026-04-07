@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { ConversationHistoryEvaluationCriteriaResultCommonModel } from "./ConversationHistoryEvaluationCriteriaResultCommonModel";
 import { DataCollectionResultCommonModel } from "./DataCollectionResultCommonModel";
 import { EvaluationSuccessResult } from "./EvaluationSuccessResult";
+import { ScopedAnalysisResult } from "./ScopedAnalysisResult";
 
 export const ConversationHistoryAnalysisCommonModel: core.serialization.ObjectSchema<
     serializers.ConversationHistoryAnalysisCommonModel.Raw,
@@ -32,6 +33,7 @@ export const ConversationHistoryAnalysisCommonModel: core.serialization.ObjectSc
     callSuccessful: core.serialization.property("call_successful", EvaluationSuccessResult),
     transcriptSummary: core.serialization.property("transcript_summary", core.serialization.string()),
     callSummaryTitle: core.serialization.property("call_summary_title", core.serialization.string().optional()),
+    scoped: core.serialization.list(ScopedAnalysisResult).optional(),
 });
 
 export declare namespace ConversationHistoryAnalysisCommonModel {
@@ -43,5 +45,6 @@ export declare namespace ConversationHistoryAnalysisCommonModel {
         call_successful: EvaluationSuccessResult.Raw;
         transcript_summary: string;
         call_summary_title?: string | null;
+        scoped?: ScopedAnalysisResult.Raw[] | null;
     }
 }
