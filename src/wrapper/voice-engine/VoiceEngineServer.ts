@@ -54,7 +54,7 @@ export class VoiceEngineServer {
      * connections.
      */
     handleConnection(ws: WebSocket): VoiceEngineSession {
-        const session = new VoiceEngineSession(ws);
+        const session = new VoiceEngineSession(ws, { debug: this.options.debug });
         this.wireHandler(session);
         return session;
     }

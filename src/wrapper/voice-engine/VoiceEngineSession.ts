@@ -38,9 +38,11 @@ export class VoiceEngineSession {
     private currentEventId: number | undefined;
     private _conversationId: string | undefined;
     private closed = false;
+    private log: (...args: unknown[]) => void;
 
-    constructor(ws: WebSocketLike) {
+    constructor(ws: WebSocketLike, options?: { debug?: boolean }) {
         this.ws = ws;
+        this.log = options?.debug ? (...args: unknown[]) => console.log("[VoiceEngine]", ...args) : () => {};
         this.setupWebSocket();
     }
 
@@ -86,9 +88,11 @@ export class VoiceEngineSession {
      */
     sendResponse(response: string | AsyncIterable<unknown>): void {
         if (typeof response === "string") {
+            this.log(`sending string response (${response.length} chars), event_id=${this.currentEventId}`);
             this.sendAgentResponse(response, false);
             this.sendAgentResponse("", true);
         } else {
+            this.log(`starting streamed response, event_id=${this.currentEventId}`);
             void this.streamResponse(response);
         }
     }
@@ -150,15 +154,21 @@ export class VoiceEngineSession {
         switch (msg.type) {
             case "init": {
                 this._conversationId = msg.conversation_id;
+                this.log(`session initialized, conversation_id=${msg.conversation_id}`);
                 this.emitter.emit("init", msg.conversation_id);
                 break;
             }
 
             case "user_transcript": {
                 // Abort any in-flight LLM call from the previous transcript
+                const wasActive = this.currentAbortController !== null;
                 this.abortCurrent();
+                if (wasActive) {
+                    this.log(`interrupted: aborting previous response (event_id=${this.currentEventId}) for new transcript (event_id=${msg.event_id})`);
+                }
                 this.currentAbortController = new AbortController();
                 this.currentEventId = msg.event_id;
+                this.log(`received transcript, event_id=${msg.event_id}, messages=${msg.user_transcript.length}`);
 
                 this.emitter.emit("user_transcript", msg.user_transcript, this.currentAbortController.signal);
                 break;
@@ -190,14 +200,20 @@ export class VoiceEngineSession {
 
     private async streamResponse(stream: AsyncIterable<unknown>): Promise<void> {
         const eventId = this.currentEventId;
+        let chunks = 0;
         for await (const chunk of stream) {
-            if (this.closed) return;
+            if (this.closed) {
+                this.log(`stream stopped: session closed after ${chunks} chunks, event_id=${eventId}`);
+                return;
+            }
             const text = this.extractText(chunk);
             if (text) {
+                chunks++;
                 this.sendAgentResponse(text, false, eventId);
             }
         }
         if (!this.closed) {
+            this.log(`stream complete: ${chunks} chunks sent, event_id=${eventId}`);
             this.sendAgentResponse("", true, eventId);
         }
     }
