@@ -20,9 +20,9 @@ export type {
     AgentResponseMessage,
     PongMessage,
     OutgoingMessage,
-    TranscriptContext,
     VoiceEngineEventMap,
     VoiceEngineEventName,
+    VoiceEngineHandler,
     WebSocketLike,
 } from "./types";
 
@@ -41,10 +41,10 @@ export type {
  * const engine = await elevenlabs.voiceEngine.get("veng_123");
  *
  * // Recommended: attach to an existing HTTP server
- * engine.attach(httpServer, "/api/voice-engine/ws", (session) => {
- *     session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
+ * engine.attach(httpServer, "/api/voice-engine/ws", {
+ *     async onTranscript(transcript, signal, session) {
  *         session.sendResponse(await llm.generate(transcript, { signal }));
- *     });
+ *     },
  * });
  *
  * // Low-level escape hatch: manage the WebSocket server yourself

@@ -1,6 +1,7 @@
 import type { IncomingMessage, Server as HttpServer } from "node:http";
 import WebSocket from "ws";
 import type { BaseClientOptions, NormalizedClientOptions } from "../../BaseClient";
+import type { VoiceEngineHandler } from "./types";
 import { VoiceEngineSession } from "./VoiceEngineSession";
 import { VoiceEngineAttachment } from "./VoiceEngineAttachment";
 
@@ -37,30 +38,26 @@ export class VoiceEngineResource {
      * Attach to an existing HTTP server and begin accepting Voice Engine
      * connections at the given path.
      *
-     * `onSession` is called once per incoming connection with an isolated
-     * `VoiceEngineSession` — one per conversation, regardless of how many
-     * callers connect simultaneously.
-     *
      * Handles WebSocket upgrades, path routing, and request verification
      * automatically. Returns a `VoiceEngineAttachment` whose `.close()` stops
      * accepting connections without affecting the HTTP server.
      *
      * @example
      * ```typescript
-     * engine.attach(httpServer, "/api/voice-engine/ws", (session) => {
-     *     session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
-     *         session.sendResponse(await llm.generate(transcript, { signal }));
-     *     });
+     * engine.attach(httpServer, "/api/voice-engine/ws", {
+     *     async onTranscript(transcript, signal, session) {
+     *         const stream = await openai.responses.create({ model: "gpt-4o", input: transcript, stream: true }, { signal });
+     *         session.sendResponse(stream);
+     *     },
      * });
      * ```
      */
     attach(
         httpServer: HttpServer,
         path: string,
-        onSession: (session: VoiceEngineSession) => void,
-        options?: { debug?: boolean },
+        handler: VoiceEngineHandler,
     ): VoiceEngineAttachment {
-        const debug = options?.debug ?? false;
+        const debug = handler.debug ?? false;
         const log = debug ? (...args: unknown[]) => console.log("[VoiceEngine]", ...args) : () => {};
 
         const wss = new WebSocket.Server({ noServer: true });
@@ -90,7 +87,8 @@ export class VoiceEngineResource {
 
         wss.on("connection", (ws: WebSocket) => {
             log("creating new session");
-            onSession(this.createSession(ws));
+            const session = this.createSession(ws);
+            this.wireHandler(session, handler);
         });
 
         log(`listening for WebSocket upgrades on ${path}`);
@@ -120,5 +118,15 @@ export class VoiceEngineResource {
      */
     createSession(ws: WebSocket): VoiceEngineSession {
         return new VoiceEngineSession(ws);
+    }
+
+    /** @internal */
+    private wireHandler(session: VoiceEngineSession, handler: VoiceEngineHandler): void {
+        const { onInit, onTranscript, onClose, onDisconnect, onError } = handler;
+        if (onInit) session.on("init", (id) => onInit(id, session));
+        if (onTranscript) session.on("user_transcript", (t, s) => onTranscript(t, s, session));
+        if (onClose) session.on("close", () => onClose(session));
+        if (onDisconnect) session.on("disconnected", () => onDisconnect(session));
+        if (onError) session.on("error", (err) => onError(err, session));
     }
 }

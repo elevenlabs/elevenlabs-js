@@ -1,7 +1,6 @@
 import http from "node:http";
 import WebSocket from "ws";
 import { VoiceEngineServer } from "../../../src/wrapper/voice-engine/VoiceEngineServer";
-import { VoiceEngine } from "../../../src/wrapper/voice-engine";
 
 function getPort(server: http.Server): number {
     const addr = server.address();
@@ -53,7 +52,7 @@ describe("VoiceEngineServer", () => {
     // handleConnection
     // -----------------------------------------------------------------------
 
-    it("handleConnection wraps an existing WebSocket and calls onSession", async () => {
+    it("handleConnection wraps an existing WebSocket and calls onInit", async () => {
         const httpServer = trackHttpServer();
         await new Promise<void>((r) => httpServer.listen(0, r));
         const port = getPort(httpServer);
@@ -61,22 +60,22 @@ describe("VoiceEngineServer", () => {
         const rawWss = new WebSocket.Server({ server: httpServer });
         cleanups.push(() => new Promise<void>((r) => rawWss.close(() => r())));
 
-        const onSession = jest.fn();
-        const ve = trackVeServer(new VoiceEngineServer({ onSession }));
+        const onInit = jest.fn();
+        const ve = trackVeServer(new VoiceEngineServer({ onInit }));
 
-        const connectionPromise = new Promise<void>((resolve) => {
-            rawWss.on("connection", (ws) => {
-                const session = ve.handleConnection(ws);
-                expect(session).toBeDefined();
-                resolve();
-            });
+        rawWss.on("connection", (ws) => {
+            const session = ve.handleConnection(ws);
+            expect(session).toBeDefined();
         });
 
         const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}`));
         await new Promise<void>((r, e) => { ws.on("open", r); ws.on("error", e); });
-        await connectionPromise;
 
-        expect(onSession).toHaveBeenCalledTimes(1);
+        ws.send(JSON.stringify({ type: "init", conversation_id: "conv_1" }));
+
+        await new Promise((r) => setTimeout(r, 50));
+        expect(onInit).toHaveBeenCalledTimes(1);
+        expect(onInit).toHaveBeenCalledWith("conv_1", expect.anything());
     });
 
     // -----------------------------------------------------------------------
@@ -93,11 +92,9 @@ describe("VoiceEngineServer", () => {
 
         const ve = trackVeServer(
             new VoiceEngineServer({
-                onSession: (session) => {
-                    session.on(VoiceEngine.USER_TRANSCRIPT, (transcript) => {
-                        const last = transcript[transcript.length - 1];
-                        session.sendResponse(`echo: ${last.content}`);
-                    });
+                onTranscript(transcript, _signal, session) {
+                    const last = transcript[transcript.length - 1];
+                    session.sendResponse(`echo: ${last.content}`);
                 },
             }),
         );
@@ -129,13 +126,13 @@ describe("VoiceEngineServer", () => {
     // -----------------------------------------------------------------------
 
     it("throws if started twice", () => {
-        const ve = trackVeServer(new VoiceEngineServer({ port: 0, onSession: () => {} }));
+        const ve = trackVeServer(new VoiceEngineServer({ port: 0 }));
         ve.start();
         expect(() => ve.start()).toThrow("already started");
     });
 
     it("stop() resolves when no server is running", async () => {
-        const ve = trackVeServer(new VoiceEngineServer({ onSession: () => {} }));
+        const ve = trackVeServer(new VoiceEngineServer({}));
         await expect(ve.stop()).resolves.toBeUndefined();
     });
 });
