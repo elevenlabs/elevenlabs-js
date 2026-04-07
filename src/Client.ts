@@ -4,6 +4,7 @@ import { AudioIsolationClient } from "./api/resources/audioIsolation/client/Clie
 import { AudioNativeClient } from "./api/resources/audioNative/client/Client";
 import { ConversationalAiClient } from "./api/resources/conversationalAi/client/Client";
 import { DubbingClient } from "./api/resources/dubbing/client/Client";
+import { EnvironmentVariablesClient } from "./api/resources/environmentVariables/client/Client";
 import { ForcedAlignmentClient } from "./api/resources/forcedAlignment/client/Client";
 import { HistoryClient } from "./api/resources/history/client/Client";
 import { ModelsClient } from "./api/resources/models/client/Client";
@@ -51,6 +52,7 @@ export class ElevenLabsClient {
     protected _user: UserClient | undefined;
     protected _voices: VoicesClient | undefined;
     protected _studio: StudioClient | undefined;
+    protected _music: MusicClient | undefined;
     protected _dubbing: DubbingClient | undefined;
     protected _models: ModelsClient | undefined;
     protected _audioNative: AudioNativeClient | undefined;
@@ -61,7 +63,7 @@ export class ElevenLabsClient {
     protected _speechToText: SpeechToTextClient | undefined;
     protected _forcedAlignment: ForcedAlignmentClient | undefined;
     protected _conversationalAi: ConversationalAiClient | undefined;
-    protected _music: MusicClient | undefined;
+    protected _environmentVariables: EnvironmentVariablesClient | undefined;
     protected _tokens: TokensClient | undefined;
     protected _workspace: WorkspaceClient | undefined;
 
@@ -113,6 +115,10 @@ export class ElevenLabsClient {
         return (this._studio ??= new StudioClient(this._options));
     }
 
+    public get music(): MusicClient {
+        return (this._music ??= new MusicClient(this._options));
+    }
+
     public get dubbing(): DubbingClient {
         return (this._dubbing ??= new DubbingClient(this._options));
     }
@@ -153,8 +159,8 @@ export class ElevenLabsClient {
         return (this._conversationalAi ??= new ConversationalAiClient(this._options));
     }
 
-    public get music(): MusicClient {
-        return (this._music ??= new MusicClient(this._options));
+    public get environmentVariables(): EnvironmentVariablesClient {
+        return (this._environmentVariables ??= new EnvironmentVariablesClient(this._options));
     }
 
     public get tokens(): TokensClient {
@@ -163,70 +169,6 @@ export class ElevenLabsClient {
 
     public get workspace(): WorkspaceClient {
         return (this._workspace ??= new WorkspaceClient(this._options));
-    }
-
-    /**
-     * @param {string} agent_id
-     * @param {string} branch_id
-     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @example
-     *     await client.deleteV1ConvaiAgentsAgentIdBranchesBranchId("agent_id", "branch_id")
-     */
-    public deleteV1ConvaiAgentsAgentIdBranchesBranchId(
-        agent_id: string,
-        branch_id: string,
-        requestOptions?: ElevenLabsClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__deleteV1ConvaiAgentsAgentIdBranchesBranchId(agent_id, branch_id, requestOptions),
-        );
-    }
-
-    private async __deleteV1ConvaiAgentsAgentIdBranchesBranchId(
-        agent_id: string,
-        branch_id: string,
-        requestOptions?: ElevenLabsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
-            requestOptions?.headers,
-        );
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                `v1/convai/agents/${core.url.encodePathParam(agent_id)}/branches/${core.url.encodePathParam(branch_id)}`,
-            ),
-            method: "DELETE",
-            headers: _headers,
-            queryParameters: requestOptions?.queryParams,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            throw new errors.ElevenLabsError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "DELETE",
-            "/v1/convai/agents/{agent_id}/branches/{branch_id}",
-        );
     }
 
     /**

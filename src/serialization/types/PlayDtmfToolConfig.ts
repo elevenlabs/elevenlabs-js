@@ -9,10 +9,15 @@ export const PlayDtmfToolConfig: core.serialization.ObjectSchema<
     ElevenLabs.PlayDtmfToolConfig
 > = core.serialization.object({
     useOutOfBandDtmf: core.serialization.property("use_out_of_band_dtmf", core.serialization.boolean().optional()),
+    suppressTurnAfterDtmf: core.serialization.property(
+        "suppress_turn_after_dtmf",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace PlayDtmfToolConfig {
     export interface Raw {
         use_out_of_band_dtmf?: boolean | null;
+        suppress_turn_after_dtmf?: boolean | null;
     }
 }

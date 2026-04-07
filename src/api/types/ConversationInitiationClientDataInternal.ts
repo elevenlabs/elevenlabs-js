@@ -8,8 +8,14 @@ export interface ConversationInitiationClientDataInternal {
     /** ID of the end user participating in this conversation (for agent owner's user identification) */
     userId?: string;
     sourceInfo?: ElevenLabs.ConversationInitiationSourceInfo;
+    /** ID of the agent branch to use for this conversation */
+    branchId?: string;
+    /** Environment to use for resolving environment variables */
+    environment?: string;
     dynamicVariables?: Record<
         string,
         ElevenLabs.ConversationInitiationClientDataInternalDynamicVariablesValue | undefined
     >;
+    /** Configuration for which tools to mock and fallback behavior */
+    toolMockConfig?: ElevenLabs.OrchestratorToolMockBehaviorConfig;
 }

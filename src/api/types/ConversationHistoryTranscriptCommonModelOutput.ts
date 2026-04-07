@@ -18,4 +18,5 @@ export interface ConversationHistoryTranscriptCommonModelOutput {
     interrupted?: boolean;
     originalMessage?: string;
     sourceMedium?: ElevenLabs.ChatSourceMedium;
+    sourceEventId?: number;
 }

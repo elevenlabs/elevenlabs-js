@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationHistoryTranscriptCommonModelInput } from "./ConversationHistoryTranscriptCommonModelInput";
 import { CreateSimulationTestRequestDynamicVariablesValue } from "./CreateSimulationTestRequestDynamicVariablesValue";
+import { SimulationToolMockBehaviorConfig } from "./SimulationToolMockBehaviorConfig";
 import { TestFromConversationMetadataInput } from "./TestFromConversationMetadataInput";
 
 export const CreateSimulationTestRequest: core.serialization.ObjectSchema<
@@ -28,6 +29,11 @@ export const CreateSimulationTestRequest: core.serialization.ObjectSchema<
     successCondition: core.serialization.property("success_condition", core.serialization.string().optional()),
     simulationScenario: core.serialization.property("simulation_scenario", core.serialization.string().optional()),
     simulationMaxTurns: core.serialization.property("simulation_max_turns", core.serialization.number().optional()),
+    simulationEnvironment: core.serialization.property(
+        "simulation_environment",
+        core.serialization.string().optional(),
+    ),
+    toolMockConfig: core.serialization.property("tool_mock_config", SimulationToolMockBehaviorConfig.optional()),
     name: core.serialization.string(),
     parentFolderId: core.serialization.property("parent_folder_id", core.serialization.string().optional()),
 });
@@ -43,6 +49,8 @@ export declare namespace CreateSimulationTestRequest {
         success_condition?: string | null;
         simulation_scenario?: string | null;
         simulation_max_turns?: number | null;
+        simulation_environment?: string | null;
+        tool_mock_config?: SimulationToolMockBehaviorConfig.Raw | null;
         name: string;
         parent_folder_id?: string | null;
     }

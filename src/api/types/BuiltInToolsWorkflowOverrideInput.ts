@@ -17,6 +17,4 @@ export interface BuiltInToolsWorkflowOverrideInput {
     playKeypadTouchTone?: ElevenLabs.SystemToolConfigInput;
     /** The voicemail detection tool */
     voicemailDetection?: ElevenLabs.SystemToolConfigInput;
-    /** The search documentation tool for RAG */
-    searchDocumentation?: ElevenLabs.SystemToolConfigInput;
 }

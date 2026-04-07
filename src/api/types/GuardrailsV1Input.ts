@@ -7,6 +7,5 @@ export interface GuardrailsV1Input {
     focus?: ElevenLabs.FocusGuardrail;
     promptInjection?: ElevenLabs.PromptInjectionGuardrail;
     content?: ElevenLabs.ContentGuardrailInput;
-    moderation?: ElevenLabs.ModerationGuardrailInput;
     custom?: ElevenLabs.CustomGuardrailInput;
 }

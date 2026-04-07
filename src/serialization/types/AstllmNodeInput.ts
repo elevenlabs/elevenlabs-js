@@ -3,16 +3,12 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AstllmNodeInputPrompt } from "./AstllmNodeInputPrompt";
+import { AstllmNodeInputValueSchema } from "./AstllmNodeInputValueSchema";
 
-export const AstllmNodeInput: core.serialization.ObjectSchema<
-    serializers.AstllmNodeInput.Raw,
-    ElevenLabs.AstllmNodeInput
-> = core.serialization.object({
-    prompt: core.serialization.string(),
-});
+export const AstllmNodeInput: core.serialization.Schema<serializers.AstllmNodeInput.Raw, ElevenLabs.AstllmNodeInput> =
+    core.serialization.undiscriminatedUnion([AstllmNodeInputValueSchema, AstllmNodeInputPrompt]);
 
 export declare namespace AstllmNodeInput {
-    export interface Raw {
-        prompt: string;
-    }
+    export type Raw = AstllmNodeInputValueSchema.Raw | AstllmNodeInputPrompt.Raw;
 }

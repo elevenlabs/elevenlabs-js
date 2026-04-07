@@ -18,5 +18,6 @@ export interface ConversationHistoryTranscriptResponseModel {
     interrupted?: boolean;
     originalMessage?: string;
     sourceMedium?: ElevenLabs.ChatSourceMedium;
+    sourceEventId?: number;
     fileInput?: ElevenLabs.ConversationHistoryTranscriptFileInputResponseModel;
 }

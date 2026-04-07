@@ -6,7 +6,6 @@ import type * as serializers from "../index";
 import { ContentGuardrailOutput } from "./ContentGuardrailOutput";
 import { CustomGuardrailOutput } from "./CustomGuardrailOutput";
 import { FocusGuardrail } from "./FocusGuardrail";
-import { ModerationGuardrailOutput } from "./ModerationGuardrailOutput";
 import { PromptInjectionGuardrail } from "./PromptInjectionGuardrail";
 
 export const GuardrailsV1Output: core.serialization.ObjectSchema<
@@ -17,7 +16,6 @@ export const GuardrailsV1Output: core.serialization.ObjectSchema<
     focus: FocusGuardrail.optional(),
     promptInjection: core.serialization.property("prompt_injection", PromptInjectionGuardrail.optional()),
     content: ContentGuardrailOutput.optional(),
-    moderation: ModerationGuardrailOutput.optional(),
     custom: CustomGuardrailOutput.optional(),
 });
 
@@ -27,7 +25,6 @@ export declare namespace GuardrailsV1Output {
         focus?: FocusGuardrail.Raw | null;
         prompt_injection?: PromptInjectionGuardrail.Raw | null;
         content?: ContentGuardrailOutput.Raw | null;
-        moderation?: ModerationGuardrailOutput.Raw | null;
         custom?: CustomGuardrailOutput.Raw | null;
     }
 }

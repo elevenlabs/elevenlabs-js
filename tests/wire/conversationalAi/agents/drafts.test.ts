@@ -15,66 +15,42 @@ describe("DraftsClient", () => {
                     entry_to_tool_a: {
                         source: "entry_node",
                         target: "tool_node_a",
-                        forward_condition: {
-                            type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
-                        },
+                        forward_condition: { type: "expression", expression: { type: "and_operator", children: [] } },
                     },
                     start_to_entry: {
                         source: "start_node",
                         target: "entry_node",
-                        forward_condition: {
-                            type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
-                        },
+                        forward_condition: { type: "expression", expression: { type: "and_operator", children: [] } },
                     },
                     tool_a_to_failure: {
                         source: "tool_node_a",
                         target: "failure_node",
-                        forward_condition: {
-                            type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
-                        },
+                        forward_condition: { type: "expression", expression: { type: "and_operator", children: [] } },
                     },
                     tool_a_to_tool_b: {
                         source: "tool_node_a",
                         target: "tool_node_b",
-                        forward_condition: {
-                            type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
-                        },
+                        forward_condition: { type: "expression", expression: { type: "and_operator", children: [] } },
                     },
                     tool_b_to_agent_transfer: {
                         source: "tool_node_b",
                         target: "success_transfer",
-                        forward_condition: {
-                            type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
-                        },
+                        forward_condition: { type: "expression", expression: { type: "and_operator", children: [] } },
                     },
                     tool_b_to_conversation: {
                         source: "tool_node_b",
                         target: "success_conversation",
-                        forward_condition: {
-                            type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
-                        },
+                        forward_condition: { type: "expression", expression: { type: "and_operator", children: [] } },
                     },
                     tool_b_to_end: {
                         source: "tool_node_b",
                         target: "success_end",
-                        forward_condition: {
-                            type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
-                        },
+                        forward_condition: { type: "expression", expression: { type: "and_operator", children: [] } },
                     },
                     tool_b_to_phone: {
                         source: "tool_node_b",
                         target: "success_phone",
-                        forward_condition: {
-                            type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
-                        },
+                        forward_condition: { type: "expression", expression: { type: "and_operator", children: [] } },
                     },
                 },
                 nodes: {
@@ -118,12 +94,7 @@ describe("DraftsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -134,12 +105,7 @@ describe("DraftsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -150,12 +116,7 @@ describe("DraftsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -166,12 +127,7 @@ describe("DraftsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -182,12 +138,7 @@ describe("DraftsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -198,12 +149,7 @@ describe("DraftsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -214,12 +160,7 @@ describe("DraftsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -230,12 +171,7 @@ describe("DraftsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },

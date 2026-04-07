@@ -4,13 +4,19 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConvAiDynamicVariable } from "./ConvAiDynamicVariable";
+import { ConvAiEnvVarLocator } from "./ConvAiEnvVarLocator";
 import { ConvAiSecretLocator } from "./ConvAiSecretLocator";
 
 export const WebhookToolApiSchemaConfigOutputRequestHeadersValue: core.serialization.Schema<
     serializers.WebhookToolApiSchemaConfigOutputRequestHeadersValue.Raw,
     ElevenLabs.WebhookToolApiSchemaConfigOutputRequestHeadersValue
-> = core.serialization.undiscriminatedUnion([core.serialization.string(), ConvAiSecretLocator, ConvAiDynamicVariable]);
+> = core.serialization.undiscriminatedUnion([
+    core.serialization.string(),
+    ConvAiSecretLocator,
+    ConvAiDynamicVariable,
+    ConvAiEnvVarLocator,
+]);
 
 export declare namespace WebhookToolApiSchemaConfigOutputRequestHeadersValue {
-    export type Raw = string | ConvAiSecretLocator.Raw | ConvAiDynamicVariable.Raw;
+    export type Raw = string | ConvAiSecretLocator.Raw | ConvAiDynamicVariable.Raw | ConvAiEnvVarLocator.Raw;
 }

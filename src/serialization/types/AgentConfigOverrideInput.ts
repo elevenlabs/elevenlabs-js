@@ -11,6 +11,10 @@ export const AgentConfigOverrideInput: core.serialization.ObjectSchema<
 > = core.serialization.object({
     firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
     language: core.serialization.string().optional(),
+    maxConversationDurationMessage: core.serialization.property(
+        "max_conversation_duration_message",
+        core.serialization.string().optional(),
+    ),
     prompt: PromptAgentApiModelOverride.optional(),
 });
 
@@ -18,6 +22,7 @@ export declare namespace AgentConfigOverrideInput {
     export interface Raw {
         first_message?: string | null;
         language?: string | null;
+        max_conversation_duration_message?: string | null;
         prompt?: PromptAgentApiModelOverride.Raw | null;
     }
 }

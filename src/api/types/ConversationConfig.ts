@@ -9,6 +9,8 @@ export interface ConversationConfig {
     maxDurationSeconds?: number;
     /** The events that will be sent to the client */
     clientEvents?: ElevenLabs.ClientEvent[];
+    /** Configuration for file input (image/PDF uploads) during conversations. */
+    fileInput?: ElevenLabs.FileInputConfig;
     /** Enable real-time monitoring of conversations via WebSocket */
     monitoringEnabled?: boolean;
     /** The events that will be sent to monitoring connections. */

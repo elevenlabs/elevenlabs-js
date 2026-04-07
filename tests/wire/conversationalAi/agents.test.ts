@@ -93,6 +93,7 @@ describe("AgentsClient", () => {
                     hinglish_mode: true,
                     dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                     disable_first_message_interruptions: false,
+                    max_conversation_duration_message: "max_conversation_duration_message",
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -178,6 +179,7 @@ describe("AgentsClient", () => {
                     attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
                 },
                 archived: true,
+                guardrails: { version: "1" },
                 summary_language: "summary_language",
                 auth: {
                     enable_auth: true,
@@ -232,6 +234,7 @@ describe("AgentsClient", () => {
                     phone_number: "phone_number",
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
+                    enable_audio_message_response: true,
                     assigned_agent_name: "assigned_agent_name",
                 },
             ],
@@ -247,7 +250,7 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -257,7 +260,7 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "unconditional", label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -267,7 +270,7 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "result", successful: true, label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -277,7 +280,7 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "result", successful: true, label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -287,7 +290,7 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "unconditional", label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -301,7 +304,7 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -315,7 +318,7 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -324,12 +327,12 @@ describe("AgentsClient", () => {
                         target: "success_phone",
                         forward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -647,7 +650,6 @@ describe("AgentsClient", () => {
             version_id: "version_id",
             branch_id: "branch_id",
             main_branch_id: "main_branch_id",
-            coaching_settings: { type: "coached", memory_base_id: "memory_base_id" },
         };
         server
             .mockEndpoint()
@@ -752,6 +754,7 @@ describe("AgentsClient", () => {
                         },
                     },
                     disableFirstMessageInterruptions: false,
+                    maxConversationDurationMessage: "max_conversation_duration_message",
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -872,6 +875,9 @@ describe("AgentsClient", () => {
                     ],
                 },
                 archived: true,
+                guardrails: {
+                    version: "1",
+                },
                 summaryLanguage: "summary_language",
                 auth: {
                     enableAuth: true,
@@ -941,6 +947,7 @@ describe("AgentsClient", () => {
                     phoneNumber: "phone_number",
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
+                    enableAudioMessageResponse: true,
                     assignedAgentName: "assigned_agent_name",
                 },
             ],
@@ -957,12 +964,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -976,12 +978,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -996,12 +993,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -1016,12 +1008,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -1035,12 +1022,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -1055,12 +1037,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -1075,12 +1052,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -1091,24 +1063,14 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                         backwardCondition: {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -1533,10 +1495,6 @@ describe("AgentsClient", () => {
             versionId: "version_id",
             branchId: "branch_id",
             mainBranchId: "main_branch_id",
-            coachingSettings: {
-                type: "coached",
-                memoryBaseId: "memory_base_id",
-            },
         });
     });
 
@@ -1621,6 +1579,7 @@ describe("AgentsClient", () => {
                     hinglish_mode: true,
                     dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                     disable_first_message_interruptions: false,
+                    max_conversation_duration_message: "max_conversation_duration_message",
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -1706,6 +1665,7 @@ describe("AgentsClient", () => {
                     attached_tests: [{ test_id: "test_123", workflow_node_id: "node_abc" }, { test_id: "test_456" }],
                 },
                 archived: true,
+                guardrails: { version: "1" },
                 summary_language: "summary_language",
                 auth: {
                     enable_auth: true,
@@ -1760,6 +1720,7 @@ describe("AgentsClient", () => {
                     phone_number: "phone_number",
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
+                    enable_audio_message_response: true,
                     assigned_agent_name: "assigned_agent_name",
                 },
             ],
@@ -1775,7 +1736,7 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -1785,7 +1746,7 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "unconditional", label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -1795,7 +1756,7 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "result", successful: true, label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -1805,7 +1766,7 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "result", successful: true, label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -1815,7 +1776,7 @@ describe("AgentsClient", () => {
                         forward_condition: { type: "unconditional", label: null },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -1829,7 +1790,7 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -1843,7 +1804,7 @@ describe("AgentsClient", () => {
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -1852,12 +1813,12 @@ describe("AgentsClient", () => {
                         target: "success_phone",
                         forward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                         backward_condition: {
                             type: "expression",
-                            expression: { type: "and_operator", children: [{ type: "boolean_literal", value: true }] },
+                            expression: { type: "and_operator", children: [] },
                             label: null,
                         },
                     },
@@ -2175,7 +2136,6 @@ describe("AgentsClient", () => {
             version_id: "version_id",
             branch_id: "branch_id",
             main_branch_id: "main_branch_id",
-            coaching_settings: { type: "coached", memory_base_id: "memory_base_id" },
         };
         server
             .mockEndpoint()
@@ -2281,6 +2241,7 @@ describe("AgentsClient", () => {
                         },
                     },
                     disableFirstMessageInterruptions: false,
+                    maxConversationDurationMessage: "max_conversation_duration_message",
                     prompt: {
                         prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                         llm: "gemini-2.0-flash-001",
@@ -2401,6 +2362,9 @@ describe("AgentsClient", () => {
                     ],
                 },
                 archived: true,
+                guardrails: {
+                    version: "1",
+                },
                 summaryLanguage: "summary_language",
                 auth: {
                     enableAuth: true,
@@ -2470,6 +2434,7 @@ describe("AgentsClient", () => {
                     phoneNumber: "phone_number",
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
+                    enableAudioMessageResponse: true,
                     assignedAgentName: "assigned_agent_name",
                 },
             ],
@@ -2486,12 +2451,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -2505,12 +2465,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -2525,12 +2480,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -2545,12 +2495,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -2564,12 +2509,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -2584,12 +2524,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -2604,12 +2539,7 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -2620,24 +2550,14 @@ describe("AgentsClient", () => {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                         backwardCondition: {
                             type: "expression",
                             expression: {
                                 type: "and_operator",
-                                children: [
-                                    {
-                                        type: "boolean_literal",
-                                        value: true,
-                                    },
-                                ],
+                                children: [],
                             },
                         },
                     },
@@ -3062,10 +2982,6 @@ describe("AgentsClient", () => {
             versionId: "version_id",
             branchId: "branch_id",
             mainBranchId: "main_branch_id",
-            coachingSettings: {
-                type: "coached",
-                memoryBaseId: "memory_base_id",
-            },
         });
     });
 
@@ -3100,6 +3016,7 @@ describe("AgentsClient", () => {
             search: "search",
             archived: true,
             showOnlyOwnedAgents: true,
+            createdByUserId: "created_by_user_id",
             sortDirection: "asc",
             sortBy: "name",
             cursor: "cursor",
@@ -3194,6 +3111,7 @@ describe("AgentsClient", () => {
                     interrupted: true,
                     original_message: "original_message",
                     source_medium: "audio",
+                    source_event_id: 1,
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -3302,6 +3220,7 @@ describe("AgentsClient", () => {
                     interrupted: true,
                     originalMessage: "original_message",
                     sourceMedium: "audio",
+                    sourceEventId: 1,
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",
@@ -3397,6 +3316,7 @@ describe("AgentsClient", () => {
             agent_id: "agent_id",
             branch_id: "branch_id",
             created_at: 1,
+            folder_id: "folder_id",
             test_runs: [
                 {
                     test_run_id: "test_run_id",
@@ -3416,6 +3336,9 @@ describe("AgentsClient", () => {
                         test_name: "test_name",
                         ran_by_user_email: "ran_by_user_email",
                     },
+                    root_folder_id: "root_folder_id",
+                    root_folder_name: "root_folder_name",
+                    environment: "environment",
                 },
             ],
         };
@@ -3440,6 +3363,7 @@ describe("AgentsClient", () => {
             agentId: "agent_id",
             branchId: "branch_id",
             createdAt: 1,
+            folderId: "folder_id",
             testRuns: [
                 {
                     testRunId: "test_run_id",
@@ -3468,6 +3392,9 @@ describe("AgentsClient", () => {
                         testName: "test_name",
                         ranByUserEmail: "ran_by_user_email",
                     },
+                    rootFolderId: "root_folder_id",
+                    rootFolderName: "root_folder_name",
+                    environment: "environment",
                 },
             ],
         });

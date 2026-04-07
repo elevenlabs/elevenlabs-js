@@ -45,6 +45,7 @@ export const ConversationHistoryTranscriptCommonModelInput: core.serialization.O
     interrupted: core.serialization.boolean().optional(),
     originalMessage: core.serialization.property("original_message", core.serialization.string().optional()),
     sourceMedium: core.serialization.property("source_medium", ChatSourceMedium.optional()),
+    sourceEventId: core.serialization.property("source_event_id", core.serialization.number().optional()),
 });
 
 export declare namespace ConversationHistoryTranscriptCommonModelInput {
@@ -64,5 +65,6 @@ export declare namespace ConversationHistoryTranscriptCommonModelInput {
         interrupted?: boolean | null;
         original_message?: string | null;
         source_medium?: ChatSourceMedium.Raw | null;
+        source_event_id?: number | null;
     }
 }

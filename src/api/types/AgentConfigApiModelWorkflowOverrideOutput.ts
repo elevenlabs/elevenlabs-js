@@ -13,6 +13,8 @@ export interface AgentConfigApiModelWorkflowOverrideOutput {
     dynamicVariables?: ElevenLabs.DynamicVariablesConfigWorkflowOverride;
     /** If true, the user will not be able to interrupt the agent while the first message is being delivered. */
     disableFirstMessageInterruptions?: boolean;
+    /** If non-empty, the message the agent will send when max conversation duration is reached. */
+    maxConversationDurationMessage?: string;
     /** The prompt for the agent */
     prompt?: ElevenLabs.PromptAgentApiModelWorkflowOverrideOutput;
 }

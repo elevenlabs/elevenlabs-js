@@ -3,16 +3,19 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { LlmLiteralJsonSchemaProperty } from "./LlmLiteralJsonSchemaProperty";
 
 export const AstllmNodeOutput: core.serialization.ObjectSchema<
     serializers.AstllmNodeOutput.Raw,
     ElevenLabs.AstllmNodeOutput
 > = core.serialization.object({
+    valueSchema: core.serialization.property("value_schema", LlmLiteralJsonSchemaProperty),
     prompt: core.serialization.string(),
 });
 
 export declare namespace AstllmNodeOutput {
     export interface Raw {
+        value_schema: LlmLiteralJsonSchemaProperty.Raw;
         prompt: string;
     }
 }

@@ -8,13 +8,13 @@ export const AstLessThanOperatorNodeOutput: core.serialization.ObjectSchema<
     serializers.AstLessThanOperatorNodeOutput.Raw,
     ElevenLabs.AstLessThanOperatorNodeOutput
 > = core.serialization.object({
-    left: core.serialization.lazy(() => serializers.AstLessThanOperatorNodeOutputLeft),
-    right: core.serialization.lazy(() => serializers.AstLessThanOperatorNodeOutputRight),
+    left: core.serialization.lazy(() => serializers.AstNodeOutput),
+    right: core.serialization.lazy(() => serializers.AstNodeOutput),
 });
 
 export declare namespace AstLessThanOperatorNodeOutput {
     export interface Raw {
-        left: serializers.AstLessThanOperatorNodeOutputLeft.Raw;
-        right: serializers.AstLessThanOperatorNodeOutputRight.Raw;
+        left: serializers.AstNodeOutput.Raw;
+        right: serializers.AstNodeOutput.Raw;
     }
 }

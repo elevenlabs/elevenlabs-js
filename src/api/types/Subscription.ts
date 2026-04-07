@@ -11,7 +11,7 @@ export interface Subscription {
     characterLimit: number;
     /** Maximum number of characters that the character limit can be exceeded by. Managed by the workspace admin. */
     maxCharacterLimitExtension?: number;
-    /** Whether the user can extend their character limit. */
+    /** Whether the workspace is entitled to enter overages (usage-based billing). */
     canExtendCharacterLimit: boolean;
     /** Whether the user is allowed to extend their character limit. */
     allowedToExtendCharacterLimit: boolean;
@@ -51,4 +51,8 @@ export interface Subscription {
     hasOpenInvoices: boolean;
     /** The pending change for the user. */
     pendingChange?: ElevenLabs.ExtendedSubscriptionResponseModelPendingChange;
+    /** True if any workspace owned by this user's auth account has redeemed the starter first-month discount coupon. */
+    hasUsedStarterCouponOnAccount?: boolean;
+    /** True if any workspace owned by this user's auth account has redeemed the creator first-month discount coupon. */
+    hasUsedCreatorCouponOnAccount?: boolean;
 }

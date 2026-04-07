@@ -44,6 +44,7 @@ describe("KnowledgeBaseClient", () => {
             pageSize: 1,
             search: "search",
             showOnlyOwnedDocuments: true,
+            createdByUserId: "created_by_user_id",
             parentFolderId: "parent_folder_id",
             ancestorFolderId: "ancestor_folder_id",
             foldersFirst: true,

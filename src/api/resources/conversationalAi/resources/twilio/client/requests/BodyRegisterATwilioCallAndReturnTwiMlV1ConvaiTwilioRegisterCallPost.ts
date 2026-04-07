@@ -14,6 +14,6 @@ export interface BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCall
     agentId: string;
     fromNumber: string;
     toNumber: string;
-    direction?: ElevenLabs.conversationalAi.BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPostDirection;
+    direction?: ElevenLabs.TelephonyDirection;
     conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestInput;
 }

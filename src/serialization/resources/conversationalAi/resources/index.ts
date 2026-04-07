@@ -1,6 +1,5 @@
 export * as agents from "./agents";
 export * from "./agents/client/requests";
-export * from "./agents/types";
 export * as batchCalls from "./batchCalls";
 export * from "./batchCalls/client/requests";
 export * as conversations from "./conversations";
@@ -28,7 +27,6 @@ export * from "./tests/client/requests";
 export * from "./tests/types";
 export * as twilio from "./twilio";
 export * from "./twilio/client/requests";
-export * from "./twilio/types";
 export * as whatsapp from "./whatsapp";
 export * from "./whatsapp/client/requests";
 export * from "./whatsapp/types";

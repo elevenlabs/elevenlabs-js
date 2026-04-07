@@ -14,6 +14,10 @@ export interface UpdateSimulationTestRequest {
     simulationScenario?: string;
     /** Maximum number of conversation turns for simulation tests. */
     simulationMaxTurns?: number;
+    /** The environment to use when running this simulation test. If not provided, defaults to 'production'. */
+    simulationEnvironment?: string;
+    /** Configuration for which tools to mock and fallback behavior. */
+    toolMockConfig?: ElevenLabs.SimulationToolMockBehaviorConfig;
     name: string;
     /** The ID of the parent folder. If not provided, the test will be moved to the root level. */
     parentFolderId?: string;

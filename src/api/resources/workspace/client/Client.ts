@@ -2,6 +2,7 @@
 
 import type { BaseClientOptions } from "../../../../BaseClient";
 import { type NormalizedClientOptions, normalizeClientOptions } from "../../../../BaseClient";
+import { AuthConnectionsClient } from "../resources/authConnections/client/Client";
 import { GroupsClient } from "../resources/groups/client/Client";
 import { InvitesClient } from "../resources/invites/client/Client";
 import { MembersClient } from "../resources/members/client/Client";
@@ -13,6 +14,7 @@ export declare namespace WorkspaceClient {
 
 export class WorkspaceClient {
     protected readonly _options: NormalizedClientOptions<WorkspaceClient.Options>;
+    protected _authConnections: AuthConnectionsClient | undefined;
     protected _groups: GroupsClient | undefined;
     protected _invites: InvitesClient | undefined;
     protected _members: MembersClient | undefined;
@@ -20,6 +22,10 @@ export class WorkspaceClient {
 
     constructor(options: WorkspaceClient.Options = {}) {
         this._options = normalizeClientOptions(options);
+    }
+
+    public get authConnections(): AuthConnectionsClient {
+        return (this._authConnections ??= new AuthConnectionsClient(this._options));
     }
 
     public get groups(): GroupsClient {

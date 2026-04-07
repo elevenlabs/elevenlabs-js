@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const AgentSortBy: core.serialization.Schema<serializers.AgentSortBy.Raw, ElevenLabs.AgentSortBy> =
-    core.serialization.enum_(["name", "created_at"]);
+    core.serialization.enum_(["name", "created_at", "call_count_7d"]);
 
 export declare namespace AgentSortBy {
-    export type Raw = "name" | "created_at";
+    export type Raw = "name" | "created_at" | "call_count_7d";
 }

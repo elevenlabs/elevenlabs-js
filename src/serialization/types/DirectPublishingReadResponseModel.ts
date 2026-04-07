@@ -29,6 +29,7 @@ export const DirectPublishingReadResponseModel: core.serialization.ObjectSchema<
     description: core.serialization.string().optional(),
     articleImageUrl: core.serialization.property("article_image_url", core.serialization.string().optional()),
     language: core.serialization.string().optional(),
+    locale: core.serialization.string().optional(),
     displayMode: core.serialization.property("display_mode", DirectPublishingReadResponseModelDisplayMode.optional()),
     genre: core.serialization.list(DirectPublishingReadResponseModelGenreItem).optional(),
     fiction: core.serialization.string().optional(),
@@ -97,6 +98,7 @@ export declare namespace DirectPublishingReadResponseModel {
         description?: string | null;
         article_image_url?: string | null;
         language?: string | null;
+        locale?: string | null;
         display_mode?: DirectPublishingReadResponseModelDisplayMode.Raw | null;
         genre?: DirectPublishingReadResponseModelGenreItem.Raw[] | null;
         fiction?: string | null;

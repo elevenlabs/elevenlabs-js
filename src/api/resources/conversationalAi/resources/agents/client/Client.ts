@@ -143,15 +143,7 @@ export class AgentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -238,15 +230,7 @@ export class AgentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -306,15 +290,7 @@ export class AgentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -411,15 +387,7 @@ export class AgentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -451,6 +419,7 @@ export class AgentsClient {
      *         search: "search",
      *         archived: true,
      *         showOnlyOwnedAgents: true,
+     *         createdByUserId: "created_by_user_id",
      *         sortDirection: "asc",
      *         sortBy: "name",
      *         cursor: "cursor"
@@ -467,7 +436,8 @@ export class AgentsClient {
         request: ElevenLabs.conversationalAi.AgentsListRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentsPageResponseModel>> {
-        const { pageSize, search, archived, showOnlyOwnedAgents, sortDirection, sortBy, cursor } = request;
+        const { pageSize, search, archived, showOnlyOwnedAgents, createdByUserId, sortDirection, sortBy, cursor } =
+            request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (pageSize != null) {
             _queryParams.page_size = pageSize.toString();
@@ -483,6 +453,10 @@ export class AgentsClient {
 
         if (showOnlyOwnedAgents != null) {
             _queryParams.show_only_owned_agents = showOnlyOwnedAgents.toString();
+        }
+
+        if (createdByUserId != null) {
+            _queryParams.created_by_user_id = createdByUserId;
         }
 
         if (sortDirection != null) {
@@ -535,15 +509,7 @@ export class AgentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -623,15 +589,7 @@ export class AgentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -724,15 +682,7 @@ export class AgentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -819,15 +769,7 @@ export class AgentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -915,15 +857,7 @@ export class AgentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,

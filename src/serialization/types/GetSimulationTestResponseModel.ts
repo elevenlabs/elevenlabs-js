@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
 import { GetSimulationTestResponseModelDynamicVariablesValue } from "./GetSimulationTestResponseModelDynamicVariablesValue";
+import { SimulationToolMockBehaviorConfig } from "./SimulationToolMockBehaviorConfig";
 import { TestFromConversationMetadataOutput } from "./TestFromConversationMetadataOutput";
 
 export const GetSimulationTestResponseModel: core.serialization.ObjectSchema<
@@ -28,6 +29,11 @@ export const GetSimulationTestResponseModel: core.serialization.ObjectSchema<
     successCondition: core.serialization.property("success_condition", core.serialization.string().optional()),
     simulationScenario: core.serialization.property("simulation_scenario", core.serialization.string().optional()),
     simulationMaxTurns: core.serialization.property("simulation_max_turns", core.serialization.number().optional()),
+    simulationEnvironment: core.serialization.property(
+        "simulation_environment",
+        core.serialization.string().optional(),
+    ),
+    toolMockConfig: core.serialization.property("tool_mock_config", SimulationToolMockBehaviorConfig.optional()),
     id: core.serialization.string(),
     name: core.serialization.string(),
 });
@@ -43,6 +49,8 @@ export declare namespace GetSimulationTestResponseModel {
         success_condition?: string | null;
         simulation_scenario?: string | null;
         simulation_max_turns?: number | null;
+        simulation_environment?: string | null;
+        tool_mock_config?: SimulationToolMockBehaviorConfig.Raw | null;
         id: string;
         name: string;
     }

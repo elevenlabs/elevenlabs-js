@@ -8,4 +8,6 @@ export interface ToolResponseModel {
     toolConfig: ElevenLabs.ToolResponseModelToolConfig;
     accessInfo: ElevenLabs.ResourceAccessInfo;
     usageStats: ElevenLabs.ToolUsageStatsResponseModel;
+    /** Mock responses with optional parameter conditions. Evaluated top-to-bottom; first match wins. */
+    responseMocks?: ElevenLabs.ToolResponseMockConfigOutput[];
 }

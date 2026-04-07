@@ -52,10 +52,6 @@ export class ForcedAlignmentClient {
         const _request = await core.newFormData();
         await _request.appendFile("file", request.file);
         _request.append("text", request.text);
-        if (request.enabledSpooledFile != null) {
-            _request.append("enabled_spooled_file", request.enabledSpooledFile.toString());
-        }
-
         const _maybeEncodedRequest = await _request.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -99,15 +95,7 @@ export class ForcedAlignmentClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,

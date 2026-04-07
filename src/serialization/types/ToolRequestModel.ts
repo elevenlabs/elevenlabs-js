@@ -4,16 +4,22 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ToolRequestModelToolConfig } from "./ToolRequestModelToolConfig";
+import { ToolResponseMockConfigInput } from "./ToolResponseMockConfigInput";
 
 export const ToolRequestModel: core.serialization.ObjectSchema<
     serializers.ToolRequestModel.Raw,
     ElevenLabs.ToolRequestModel
 > = core.serialization.object({
     toolConfig: core.serialization.property("tool_config", ToolRequestModelToolConfig),
+    responseMocks: core.serialization.property(
+        "response_mocks",
+        core.serialization.list(ToolResponseMockConfigInput).optional(),
+    ),
 });
 
 export declare namespace ToolRequestModel {
     export interface Raw {
         tool_config: ToolRequestModelToolConfig.Raw;
+        response_mocks?: ToolResponseMockConfigInput.Raw[] | null;
     }
 }

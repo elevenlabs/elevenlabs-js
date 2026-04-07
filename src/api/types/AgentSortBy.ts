@@ -3,5 +3,6 @@
 export const AgentSortBy = {
     Name: "name",
     CreatedAt: "created_at",
+    CallCount7D: "call_count_7d",
 } as const;
 export type AgentSortBy = (typeof AgentSortBy)[keyof typeof AgentSortBy];

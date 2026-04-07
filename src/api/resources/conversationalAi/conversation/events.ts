@@ -12,6 +12,8 @@ export enum ClientToOrchestratorEvent {
     /** User text message. */
     USER_MESSAGE = "user_message",
     USER_ACTIVITY = "user_activity",
+    /** Multimodal message combining text and a file reference. */
+    MULTIMODAL_MESSAGE = "multimodal_message",
 }
 
 /**
@@ -82,6 +84,23 @@ export interface FeedbackEvent extends BaseClientToOrchestratorEvent {
 }
 
 /**
+ * File component of a multimodal message.
+ */
+export interface MultimodalMessageFile {
+    type: "file_input";
+    file_id: string;
+}
+
+/**
+ * Event for sending multimodal messages combining text and a file reference.
+ */
+export interface MultimodalMessageClientToOrchestratorEvent extends BaseClientToOrchestratorEvent {
+    type: ClientToOrchestratorEvent.MULTIMODAL_MESSAGE;
+    text?: UserMessageClientToOrchestratorEvent;
+    file?: MultimodalMessageFile;
+}
+
+/**
  * Event for sending user audio chunks.
  */
 export interface UserAudioChunkEvent {
@@ -98,4 +117,5 @@ export type ClientToOrchestratorEventUnion =
     | ConversationInitiationClientDataEvent
     | ClientToolResultEvent
     | PongEvent
-    | FeedbackEvent;
+    | FeedbackEvent
+    | MultimodalMessageClientToOrchestratorEvent;

@@ -10,6 +10,10 @@ export interface CaptionStyleModel {
     textAlign?: ElevenLabs.CaptionStyleModelTextAlign;
     textStyle?: ElevenLabs.CaptionStyleModelTextStyle;
     textWeight?: ElevenLabs.CaptionStyleModelTextWeight;
+    textTransform?: ElevenLabs.CaptionStyleModelTextTransform;
+    textBlendMode?: ElevenLabs.CaptionStyleModelTextBlendMode;
+    textShadow?: ElevenLabs.StudioTextStyleShadowModel;
+    textOutline?: ElevenLabs.StudioTextStyleOutlineModel;
     backgroundEnabled?: boolean;
     backgroundColor?: string;
     backgroundOpacity?: number;

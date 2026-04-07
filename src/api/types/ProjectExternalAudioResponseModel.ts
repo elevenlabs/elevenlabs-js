@@ -5,7 +5,7 @@ import type * as ElevenLabs from "../index";
 export interface ProjectExternalAudioResponseModel {
     externalAudioId: string;
     filename: string;
-    signedUrl: string;
+    signedUrl?: string;
     offsetMs: number;
     durationMs: number;
     startTimeMs: number;
@@ -24,7 +24,9 @@ export interface ProjectExternalAudioResponseModel {
     pendingExternalAudioIds: string[];
     speechImported?: boolean;
     pendingTask?: ElevenLabs.PendingClipTask;
+    error?: string;
     currentSnapshotId?: string;
     sourceContext?: ElevenLabs.ProjectExternalAudioResponseModelSourceContext;
+    analysis?: ElevenLabs.AudioAnalysis;
     importSpeechProgress?: number;
 }

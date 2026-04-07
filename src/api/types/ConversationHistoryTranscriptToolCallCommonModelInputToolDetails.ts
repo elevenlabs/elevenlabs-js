@@ -10,7 +10,7 @@ export type ConversationHistoryTranscriptToolCallCommonModelInputToolDetails =
 
 export namespace ConversationHistoryTranscriptToolCallCommonModelInputToolDetails {
     export interface ApiIntegrationWebhook
-        extends ElevenLabs.ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetails {
+        extends ElevenLabs.ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetailsInput {
         type: "api_integration_webhook";
     }
 

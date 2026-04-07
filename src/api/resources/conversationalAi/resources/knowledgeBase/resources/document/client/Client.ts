@@ -24,6 +24,82 @@ export class DocumentClient {
     }
 
     /**
+     * Manually refresh a URL document by re-fetching its content from the source URL.
+     *
+     * @param {string} documentation_id - The id of a document from the knowledge base. This is returned on document addition.
+     * @param {DocumentClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.knowledgeBase.document.refresh("21m00Tcm4TlvDq8ikWAM")
+     */
+    public refresh(
+        documentation_id: string,
+        requestOptions?: DocumentClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.conversationalAi.knowledgeBase.DocumentRefreshResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__refresh(documentation_id, requestOptions));
+    }
+
+    private async __refresh(
+        documentation_id: string,
+        requestOptions?: DocumentClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.conversationalAi.knowledgeBase.DocumentRefreshResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/knowledge-base/${core.url.encodePathParam(documentation_id)}/refresh`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.conversationalAi.knowledgeBase.DocumentRefreshResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/knowledge-base/{documentation_id}/refresh",
+        );
+    }
+
+    /**
      * In case the document is not RAG indexed, it triggers rag indexing task, otherwise it just returns the current status.
      *
      * @param {string} documentation_id - The id of a document from the knowledge base. This is returned on document addition.
@@ -91,15 +167,7 @@ export class DocumentClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,

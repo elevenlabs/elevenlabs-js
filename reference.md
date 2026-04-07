@@ -2249,6 +2249,261 @@ await client.studio.createPodcast({
 </dl>
 </details>
 
+## Music
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">compose</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Compose a song from a prompt or a composition plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.compose();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyComposeMusicV1MusicPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailed</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Compose a song from a prompt or a composition plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.composeDetailed();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">stream</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stream a composed song from a prompt or a composition plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.stream();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">upload</a>({ ...params }) -> ElevenLabs.MusicUploadResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.upload({
+    file: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUploadMusicV1MusicUploadPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Dubbing
 <details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.DubbingMetadataPageResponseModel</code></summary>
 <dl>
@@ -4030,8 +4285,8 @@ await client.conversationalAi.deleteDocumentRagIndex("21m00Tcm4TlvDq8ikWAM", "21
 </dl>
 </details>
 
-## Music
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">compose</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+## EnvironmentVariables
+<details><summary><code>client.environmentVariables.<a href="/src/api/resources/environmentVariables/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.EnvironmentVariablesListResponse</code></summary>
 <dl>
 <dd>
 
@@ -4043,7 +4298,7 @@ await client.conversationalAi.deleteDocumentRagIndex("21m00Tcm4TlvDq8ikWAM", "21
 <dl>
 <dd>
 
-Compose a song from a prompt or a composition plan.
+List all environment variables for the workspace with optional filtering
 </dd>
 </dl>
 </dd>
@@ -4058,197 +4313,12 @@ Compose a song from a prompt or a composition plan.
 <dd>
 
 ```typescript
-await client.music.compose();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyComposeMusicV1MusicPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailed</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Compose a song from a prompt or a composition plan.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.composeDetailed();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">stream</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Stream a composed song from a prompt or a composition plan.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.stream();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">upload</a>({ ...params }) -> ElevenLabs.MusicUploadResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.upload({
-    file: fs.createReadStream("/path/to/your/file")
+await client.environmentVariables.list({
+    cursor: "cursor",
+    pageSize: 1,
+    label: "label",
+    environment: "environment",
+    type: "string"
 });
 
 ```
@@ -4265,7 +4335,7 @@ await client.music.upload({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.BodyUploadMusicV1MusicUploadPost` 
+**request:** `ElevenLabs.EnvironmentVariablesListRequest` 
     
 </dd>
 </dl>
@@ -4273,7 +4343,212 @@ await client.music.upload({
 <dl>
 <dd>
 
-**requestOptions:** `MusicClient.RequestOptions` 
+**requestOptions:** `EnvironmentVariablesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.environmentVariables.<a href="/src/api/resources/environmentVariables/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.EnvironmentVariableResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new environment variable for the workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environmentVariables.create({
+    type: "string",
+    label: "label",
+    values: {
+        "key": "value"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.EnvironmentVariablesCreateRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentVariablesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.environmentVariables.<a href="/src/api/resources/environmentVariables/client/Client.ts">get</a>(env_var_id) -> ElevenLabs.EnvironmentVariableResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific environment variable by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environmentVariables.get("env_var_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**env_var_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentVariablesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.environmentVariables.<a href="/src/api/resources/environmentVariables/client/Client.ts">update</a>(env_var_id, { ...params }) -> ElevenLabs.EnvironmentVariableResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replace an environment variable's values. Use null to remove an environment (except production).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environmentVariables.update("env_var_id", {
+    values: {}
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**env_var_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.UpdateEnvironmentVariableRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentVariablesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4316,7 +4591,8 @@ Get a signed url to start a conversation with an agent with an agent that requir
 await client.conversationalAi.conversations.getSignedUrl({
     agentId: "21m00Tcm4TlvDq8ikWAM",
     includeConversationId: true,
-    branchId: "branch_id"
+    branchId: "branch_id",
+    environment: "environment"
 });
 
 ```
@@ -4383,7 +4659,8 @@ Get a WebRTC session token for real-time communication.
 await client.conversationalAi.conversations.getWebrtcToken({
     agentId: "21m00Tcm4TlvDq8ikWAM",
     participantName: "participant_name",
-    branchId: "branch_id"
+    branchId: "branch_id",
+    environment: "environment"
 });
 
 ```
@@ -5216,6 +5493,7 @@ await client.conversationalAi.agents.list({
     search: "search",
     archived: true,
     showOnlyOwnedAgents: true,
+    createdByUserId: "created_by_user_id",
     sortDirection: "asc",
     sortBy: "name",
     cursor: "cursor"
@@ -5991,10 +6269,12 @@ Get distinct users from conversations with pagination.
 ```typescript
 await client.conversationalAi.users.list({
     agentId: "agent_id",
+    branchId: "branch_id",
     callStartBeforeUnix: 1,
     callStartAfterUnix: 1,
     search: "search",
     pageSize: 1,
+    sortBy: "last_contact_unix_secs",
     cursor: "cursor"
 });
 
@@ -6510,6 +6790,7 @@ await client.conversationalAi.knowledgeBase.list({
     pageSize: 1,
     search: "search",
     showOnlyOwnedDocuments: true,
+    createdByUserId: "created_by_user_id",
     parentFolderId: "parent_folder_id",
     ancestorFolderId: "ancestor_folder_id",
     foldersFirst: true,
@@ -6653,6 +6934,7 @@ await client.conversationalAi.tools.list({
     search: "search",
     pageSize: 1,
     showOnlyOwnedDocuments: true,
+    createdByUserId: "created_by_user_id",
     sortDirection: "asc",
     sortBy: "name",
     cursor: "cursor"
@@ -6825,7 +7107,7 @@ await client.conversationalAi.tools.get("tool_id");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">delete</a>(tool_id) -> unknown</code></summary>
+<details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">delete</a>(tool_id, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -6852,7 +7134,9 @@ Delete tool from the workspace.
 <dd>
 
 ```typescript
-await client.conversationalAi.tools.delete("tool_id");
+await client.conversationalAi.tools.delete("tool_id", {
+    force: true
+});
 
 ```
 </dd>
@@ -6869,6 +7153,14 @@ await client.conversationalAi.tools.delete("tool_id");
 <dd>
 
 **tool_id:** `string` — ID of the requested tool.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.ToolsDeleteRequest` 
     
 </dd>
 </dl>
@@ -9303,10 +9595,7 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                     type: "expression",
                     expression: {
                         type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        children: []
                     }
                 }
             },
@@ -9317,10 +9606,7 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                     type: "expression",
                     expression: {
                         type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        children: []
                     }
                 }
             },
@@ -9331,10 +9617,7 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                     type: "expression",
                     expression: {
                         type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        children: []
                     }
                 }
             },
@@ -9345,10 +9628,7 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                     type: "expression",
                     expression: {
                         type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        children: []
                     }
                 }
             },
@@ -9359,10 +9639,7 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                     type: "expression",
                     expression: {
                         type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        children: []
                     }
                 }
             },
@@ -9373,10 +9650,7 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                     type: "expression",
                     expression: {
                         type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        children: []
                     }
                 }
             },
@@ -9387,10 +9661,7 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                     type: "expression",
                     expression: {
                         type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        children: []
                     }
                 }
             },
@@ -9401,10 +9672,7 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
                     type: "expression",
                     expression: {
                         type: "and_operator",
-                        children: [{
-                                type: "boolean_literal",
-                                value: true
-                            }]
+                        children: []
                     }
                 }
             }
@@ -9879,6 +10147,7 @@ await client.conversationalAi.conversations.messages.textSearch({
     summaryMode: "exclude",
     conversationInitiationSource: "unknown",
     branchId: "branch_id",
+    sortBy: "search_score",
     cursor: "cursor"
 });
 
@@ -10118,6 +10387,70 @@ await client.conversationalAi.conversations.files.delete("conversation_id", "fil
 <dd>
 
 **requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Conversations Analysis
+<details><summary><code>client.conversationalAi.conversations.analysis.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/analysis/client/Client.ts">run</a>(conversation_id) -> ElevenLabs.GetConversationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Run the analysis for a conversation using the agent's current evaluation criteria and data collection settings.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.analysis.run("conversation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — ID of the conversation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AnalysisClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11066,6 +11399,69 @@ await client.conversationalAi.knowledgeBase.documents.bulkMove({
 </details>
 
 ## ConversationalAi KnowledgeBase Document
+<details><summary><code>client.conversationalAi.knowledgeBase.document.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/document/client/Client.ts">refresh</a>(documentation_id) -> ElevenLabs.DocumentRefreshResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Manually refresh a URL document by re-fetching its content from the source URL.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.document.refresh("21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentation_id:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DocumentClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.knowledgeBase.document.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/document/client/Client.ts">computeRagIndex</a>(documentation_id, { ...params }) -> ElevenLabs.RagDocumentIndexResponseModel</code></summary>
 <dl>
 <dd>
@@ -11204,7 +11600,7 @@ await client.conversationalAi.knowledgeBase.documents.summaries.get();
 </details>
 
 ## ConversationalAi KnowledgeBase Documents Chunk
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.chunk.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/resources/chunk/client/Client.ts">get</a>(documentation_id, chunk_id) -> ElevenLabs.KnowledgeBaseDocumentChunkResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.chunk.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/resources/chunk/client/Client.ts">get</a>(documentation_id, chunk_id, { ...params }) -> ElevenLabs.KnowledgeBaseDocumentChunkResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11231,7 +11627,9 @@ Get details about a specific documentation part used by RAG.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8ikWAM", "chunk_id");
+await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8ikWAM", "chunk_id", {
+    embeddingModel: "e5_mistral_7b_instruct"
+});
 
 ```
 </dd>
@@ -11256,6 +11654,14 @@ await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8
 <dd>
 
 **chunk_id:** `string` — The id of a document RAG chunk from the knowledge base.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.documents.ChunkGetRequest` 
     
 </dd>
 </dl>
@@ -17068,7 +17474,251 @@ await client.voices.samples.audio.get("voice_id", "sample_id");
 </dl>
 </details>
 
+## Workspace AuthConnections
+<details><summary><code>client.workspace.authConnections.<a href="/src/api/resources/workspace/resources/authConnections/client/Client.ts">list</a>() -> ElevenLabs.ListAuthConnectionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all auth connections for the workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.authConnections.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.authConnections.<a href="/src/api/resources/workspace/resources/authConnections/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.AuthConnectionsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new OAuth2 auth connection for the workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.authConnections.create({
+    authType: "oauth2_client_credentials",
+    name: "name",
+    provider: "provider",
+    clientId: "client_id",
+    tokenUrl: "token_url",
+    clientSecret: "client_secret"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.AuthConnectionsCreateRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.authConnections.<a href="/src/api/resources/workspace/resources/authConnections/client/Client.ts">delete</a>(auth_connection_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an auth connection
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.authConnections.delete("auth_connection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**auth_connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Workspace Groups
+<details><summary><code>client.workspace.groups.<a href="/src/api/resources/workspace/resources/groups/client/Client.ts">list</a>() -> Record<string, ElevenLabs.WorkspaceGroupResponseModel></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all groups in the workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.groups.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `GroupsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.workspace.groups.<a href="/src/api/resources/workspace/resources/groups/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.WorkspaceGroupByNameResponseModel[]</code></summary>
 <dl>
 <dd>

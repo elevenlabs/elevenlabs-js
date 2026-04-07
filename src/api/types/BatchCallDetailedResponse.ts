@@ -12,6 +12,8 @@ export interface BatchCallDetailedResponse {
     whatsappParams?: ElevenLabs.BatchCallWhatsAppParams;
     name: string;
     agentId: string;
+    branchId?: string;
+    environment?: string;
     createdAtUnix: number;
     scheduledTimeUnix: number;
     timezone?: string;
@@ -22,6 +24,9 @@ export interface BatchCallDetailedResponse {
     status: ElevenLabs.BatchCallStatus;
     retryCount: number;
     telephonyCallConfig: ElevenLabs.TelephonyCallConfig;
+    /** Maximum number of simultaneous calls for this batch. When set, dispatch is governed by this limit rather than workspace/agent capacity percentages. */
+    targetConcurrencyLimit?: number;
     agentName: string;
+    branchName?: string;
     recipients: ElevenLabs.OutboundCallRecipientResponseModel[];
 }

@@ -34,10 +34,12 @@ export class UsersClient {
      * @example
      *     await client.conversationalAi.users.list({
      *         agentId: "agent_id",
+     *         branchId: "branch_id",
      *         callStartBeforeUnix: 1,
      *         callStartAfterUnix: 1,
      *         search: "search",
      *         pageSize: 1,
+     *         sortBy: "last_contact_unix_secs",
      *         cursor: "cursor"
      *     })
      */
@@ -52,10 +54,15 @@ export class UsersClient {
         request: ElevenLabs.conversationalAi.UsersListRequest = {},
         requestOptions?: UsersClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetConversationUsersPageResponseModel>> {
-        const { agentId, callStartBeforeUnix, callStartAfterUnix, search, pageSize, cursor } = request;
+        const { agentId, branchId, callStartBeforeUnix, callStartAfterUnix, search, pageSize, sortBy, cursor } =
+            request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (agentId != null) {
             _queryParams.agent_id = agentId;
+        }
+
+        if (branchId != null) {
+            _queryParams.branch_id = branchId;
         }
 
         if (callStartBeforeUnix != null) {
@@ -72,6 +79,10 @@ export class UsersClient {
 
         if (pageSize != null) {
             _queryParams.page_size = pageSize.toString();
+        }
+
+        if (sortBy != null) {
+            _queryParams.sort_by = serializers.UsersSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" });
         }
 
         if (cursor != null) {
@@ -114,15 +125,7 @@ export class UsersClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,

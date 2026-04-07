@@ -13,4 +13,5 @@ export interface AsyncConversationMetadata {
     externalId: string;
     retryCount?: number;
     lastRetryTimestamp?: number;
+    lastProcessedExternalMessageId?: string;
 }

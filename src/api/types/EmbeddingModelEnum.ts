@@ -3,6 +3,5 @@
 export const EmbeddingModelEnum = {
     E5Mistral7BInstruct: "e5_mistral_7b_instruct",
     MultilingualE5LargeInstruct: "multilingual_e5_large_instruct",
-    Qwen3Embedding4B: "qwen3_embedding_4b",
 } as const;
 export type EmbeddingModelEnum = (typeof EmbeddingModelEnum)[keyof typeof EmbeddingModelEnum];

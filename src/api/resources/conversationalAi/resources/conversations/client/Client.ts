@@ -9,6 +9,7 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index";
 import * as serializers from "../../../../../../serialization/index";
 import * as ElevenLabs from "../../../../../index";
+import { AnalysisClient } from "../resources/analysis/client/Client";
 import { AudioClient } from "../resources/audio/client/Client";
 import { FeedbackClient } from "../resources/feedback/client/Client";
 import { FilesClient } from "../resources/files/client/Client";
@@ -26,6 +27,7 @@ export class ConversationsClient {
     protected _feedback: FeedbackClient | undefined;
     protected _messages: MessagesClient | undefined;
     protected _files: FilesClient | undefined;
+    protected _analysis: AnalysisClient | undefined;
 
     constructor(options: ConversationsClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -47,6 +49,10 @@ export class ConversationsClient {
         return (this._files ??= new FilesClient(this._options));
     }
 
+    public get analysis(): AnalysisClient {
+        return (this._analysis ??= new AnalysisClient(this._options));
+    }
+
     /**
      * Get a signed url to start a conversation with an agent with an agent that requires authorization
      *
@@ -59,7 +65,8 @@ export class ConversationsClient {
      *     await client.conversationalAi.conversations.getSignedUrl({
      *         agentId: "21m00Tcm4TlvDq8ikWAM",
      *         includeConversationId: true,
-     *         branchId: "branch_id"
+     *         branchId: "branch_id",
+     *         environment: "environment"
      *     })
      */
     public getSignedUrl(
@@ -73,7 +80,7 @@ export class ConversationsClient {
         request: ElevenLabs.conversationalAi.ConversationsGetSignedUrlRequest,
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ConversationSignedUrlResponseModel>> {
-        const { agentId, includeConversationId, branchId } = request;
+        const { agentId, includeConversationId, branchId, environment } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams.agent_id = agentId;
         if (includeConversationId != null) {
@@ -82,6 +89,10 @@ export class ConversationsClient {
 
         if (branchId != null) {
             _queryParams.branch_id = branchId;
+        }
+
+        if (environment != null) {
+            _queryParams.environment = environment;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -120,15 +131,7 @@ export class ConversationsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -158,7 +161,8 @@ export class ConversationsClient {
      *     await client.conversationalAi.conversations.getWebrtcToken({
      *         agentId: "21m00Tcm4TlvDq8ikWAM",
      *         participantName: "participant_name",
-     *         branchId: "branch_id"
+     *         branchId: "branch_id",
+     *         environment: "environment"
      *     })
      */
     public getWebrtcToken(
@@ -172,7 +176,7 @@ export class ConversationsClient {
         request: ElevenLabs.conversationalAi.ConversationsGetWebrtcTokenRequest,
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.TokenResponseModel>> {
-        const { agentId, participantName, branchId } = request;
+        const { agentId, participantName, branchId, environment } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams.agent_id = agentId;
         if (participantName != null) {
@@ -181,6 +185,10 @@ export class ConversationsClient {
 
         if (branchId != null) {
             _queryParams.branch_id = branchId;
+        }
+
+        if (environment != null) {
+            _queryParams.environment = environment;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -219,15 +227,7 @@ export class ConversationsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -294,6 +294,8 @@ export class ConversationsClient {
             evaluationParams,
             dataCollectionParams,
             toolNames,
+            toolNamesSuccessful,
+            toolNamesErrored,
             mainLanguages,
             pageSize,
             summaryMode,
@@ -372,6 +374,22 @@ export class ConversationsClient {
             }
         }
 
+        if (toolNamesSuccessful != null) {
+            if (Array.isArray(toolNamesSuccessful)) {
+                _queryParams.tool_names_successful = toolNamesSuccessful.map((item) => item);
+            } else {
+                _queryParams.tool_names_successful = toolNamesSuccessful;
+            }
+        }
+
+        if (toolNamesErrored != null) {
+            if (Array.isArray(toolNamesErrored)) {
+                _queryParams.tool_names_errored = toolNamesErrored.map((item) => item);
+            } else {
+                _queryParams.tool_names_errored = toolNamesErrored;
+            }
+        }
+
         if (mainLanguages != null) {
             if (Array.isArray(mainLanguages)) {
                 _queryParams.main_languages = mainLanguages.map((item) => item);
@@ -442,15 +460,7 @@ export class ConversationsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -521,15 +531,7 @@ export class ConversationsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -597,15 +599,7 @@ export class ConversationsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,

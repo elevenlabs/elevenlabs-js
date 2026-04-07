@@ -7,6 +7,8 @@
  * navigating phone menus, entering extensions, or inputting numeric codes.
  */
 export interface PlayDtmfToolConfig {
-    /** If true, send DTMF tones out-of-band using RFC 4733 (useful for SIP calls only). If false, send DTMF as in-band audio tones (default, works for all call types). */
+    /** If true, send DTMF tones out-of-band using RFC 4733 (useful for SIP calls only). If false, send DTMF as in-band audio tones (works for all call types). */
     useOutOfBandDtmf?: boolean;
+    /** If true, the agent will not generate further speech after playing DTMF tones. This prevents the agent's speech from interfering with IVR systems. */
+    suppressTurnAfterDtmf?: boolean;
 }

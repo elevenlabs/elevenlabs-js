@@ -48,6 +48,7 @@ export class MessagesClient {
      *         summaryMode: "exclude",
      *         conversationInitiationSource: "unknown",
      *         branchId: "branch_id",
+     *         sortBy: "search_score",
      *         cursor: "cursor"
      *     })
      */
@@ -77,11 +78,14 @@ export class MessagesClient {
             evaluationParams,
             dataCollectionParams,
             toolNames,
+            toolNamesSuccessful,
+            toolNamesErrored,
             mainLanguages,
             pageSize,
             summaryMode,
             conversationInitiationSource,
             branchId,
+            sortBy,
             cursor,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
@@ -152,6 +156,22 @@ export class MessagesClient {
             }
         }
 
+        if (toolNamesSuccessful != null) {
+            if (Array.isArray(toolNamesSuccessful)) {
+                _queryParams.tool_names_successful = toolNamesSuccessful.map((item) => item);
+            } else {
+                _queryParams.tool_names_successful = toolNamesSuccessful;
+            }
+        }
+
+        if (toolNamesErrored != null) {
+            if (Array.isArray(toolNamesErrored)) {
+                _queryParams.tool_names_errored = toolNamesErrored.map((item) => item);
+            } else {
+                _queryParams.tool_names_errored = toolNamesErrored;
+            }
+        }
+
         if (mainLanguages != null) {
             if (Array.isArray(mainLanguages)) {
                 _queryParams.main_languages = mainLanguages.map((item) => item);
@@ -181,6 +201,12 @@ export class MessagesClient {
 
         if (branchId != null) {
             _queryParams.branch_id = branchId;
+        }
+
+        if (sortBy != null) {
+            _queryParams.sort_by = serializers.MessageSearchSortBy.jsonOrThrow(sortBy, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         if (cursor != null) {
@@ -223,15 +249,7 @@ export class MessagesClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -327,15 +345,7 @@ export class MessagesClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,

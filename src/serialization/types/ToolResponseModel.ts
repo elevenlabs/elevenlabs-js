@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
+import { ToolResponseMockConfigOutput } from "./ToolResponseMockConfigOutput";
 import { ToolResponseModelToolConfig } from "./ToolResponseModelToolConfig";
 import { ToolUsageStatsResponseModel } from "./ToolUsageStatsResponseModel";
 
@@ -15,6 +16,10 @@ export const ToolResponseModel: core.serialization.ObjectSchema<
     toolConfig: core.serialization.property("tool_config", ToolResponseModelToolConfig),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
     usageStats: core.serialization.property("usage_stats", ToolUsageStatsResponseModel),
+    responseMocks: core.serialization.property(
+        "response_mocks",
+        core.serialization.list(ToolResponseMockConfigOutput).optional(),
+    ),
 });
 
 export declare namespace ToolResponseModel {
@@ -23,5 +28,6 @@ export declare namespace ToolResponseModel {
         tool_config: ToolResponseModelToolConfig.Raw;
         access_info: ResourceAccessInfo.Raw;
         usage_stats: ToolUsageStatsResponseModel.Raw;
+        response_mocks?: ToolResponseMockConfigOutput.Raw[] | null;
     }
 }

@@ -5,7 +5,8 @@
  *     {
  *         agentId: "21m00Tcm4TlvDq8ikWAM",
  *         includeConversationId: true,
- *         branchId: "branch_id"
+ *         branchId: "branch_id",
+ *         environment: "environment"
  *     }
  */
 export interface ConversationsGetSignedUrlRequest {
@@ -15,4 +16,6 @@ export interface ConversationsGetSignedUrlRequest {
     includeConversationId?: boolean;
     /** The ID of the branch to use */
     branchId?: string;
+    /** The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'. */
+    environment?: string;
 }

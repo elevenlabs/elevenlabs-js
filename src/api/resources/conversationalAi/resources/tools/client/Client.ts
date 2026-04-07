@@ -36,6 +36,7 @@ export class ToolsClient {
      *         search: "search",
      *         pageSize: 1,
      *         showOnlyOwnedDocuments: true,
+     *         createdByUserId: "created_by_user_id",
      *         sortDirection: "asc",
      *         sortBy: "name",
      *         cursor: "cursor"
@@ -52,7 +53,8 @@ export class ToolsClient {
         request: ElevenLabs.conversationalAi.ToolsListRequest = {},
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ToolsResponseModel>> {
-        const { search, pageSize, showOnlyOwnedDocuments, types, sortDirection, sortBy, cursor } = request;
+        const { search, pageSize, showOnlyOwnedDocuments, createdByUserId, types, sortDirection, sortBy, cursor } =
+            request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (search != null) {
             _queryParams.search = search;
@@ -64,6 +66,10 @@ export class ToolsClient {
 
         if (showOnlyOwnedDocuments != null) {
             _queryParams.show_only_owned_documents = showOnlyOwnedDocuments.toString();
+        }
+
+        if (createdByUserId != null) {
+            _queryParams.created_by_user_id = createdByUserId;
         }
 
         if (types != null) {
@@ -126,15 +132,7 @@ export class ToolsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -215,15 +213,7 @@ export class ToolsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -294,15 +284,7 @@ export class ToolsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -319,21 +301,35 @@ export class ToolsClient {
      * Delete tool from the workspace.
      *
      * @param {string} tool_id - ID of the requested tool.
+     * @param {ElevenLabs.conversationalAi.ToolsDeleteRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.tools.delete("tool_id")
+     *     await client.conversationalAi.tools.delete("tool_id", {
+     *         force: true
+     *     })
      */
-    public delete(tool_id: string, requestOptions?: ToolsClient.RequestOptions): core.HttpResponsePromise<unknown> {
-        return core.HttpResponsePromise.fromPromise(this.__delete(tool_id, requestOptions));
+    public delete(
+        tool_id: string,
+        request: ElevenLabs.conversationalAi.ToolsDeleteRequest = {},
+        requestOptions?: ToolsClient.RequestOptions,
+    ): core.HttpResponsePromise<unknown> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(tool_id, request, requestOptions));
     }
 
     private async __delete(
         tool_id: string,
+        request: ElevenLabs.conversationalAi.ToolsDeleteRequest = {},
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
+        const { force } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (force != null) {
+            _queryParams.force = force.toString();
+        }
+
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -348,7 +344,7 @@ export class ToolsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -362,15 +358,7 @@ export class ToolsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -454,15 +442,7 @@ export class ToolsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,
@@ -549,15 +529,7 @@ export class ToolsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,

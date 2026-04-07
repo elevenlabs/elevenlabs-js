@@ -21,10 +21,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                         type: "expression",
  *                         expression: {
  *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             children: []
  *                         }
  *                     }
  *                 },
@@ -35,10 +32,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                         type: "expression",
  *                         expression: {
  *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             children: []
  *                         }
  *                     }
  *                 },
@@ -49,10 +43,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                         type: "expression",
  *                         expression: {
  *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             children: []
  *                         }
  *                     }
  *                 },
@@ -63,10 +54,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                         type: "expression",
  *                         expression: {
  *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             children: []
  *                         }
  *                     }
  *                 },
@@ -77,10 +65,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                         type: "expression",
  *                         expression: {
  *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             children: []
  *                         }
  *                     }
  *                 },
@@ -91,10 +76,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                         type: "expression",
  *                         expression: {
  *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             children: []
  *                         }
  *                     }
  *                 },
@@ -105,10 +87,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                         type: "expression",
  *                         expression: {
  *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             children: []
  *                         }
  *                     }
  *                 },
@@ -119,10 +98,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *                         type: "expression",
  *                         expression: {
  *                             type: "and_operator",
- *                             children: [{
- *                                     type: "boolean_literal",
- *                                     value: true
- *                                 }]
+ *                             children: []
  *                         }
  *                     }
  *                 }

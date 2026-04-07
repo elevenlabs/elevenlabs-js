@@ -14,6 +14,7 @@ export interface DirectPublishingReadResponseModel {
     description?: string;
     articleImageUrl?: string;
     language?: string;
+    locale?: string;
     displayMode?: ElevenLabs.DirectPublishingReadResponseModelDisplayMode;
     genre?: ElevenLabs.DirectPublishingReadResponseModelGenreItem[];
     fiction?: string;

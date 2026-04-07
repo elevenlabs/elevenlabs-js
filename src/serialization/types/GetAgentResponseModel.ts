@@ -7,7 +7,6 @@ import { AgentMetadataResponseModel } from "./AgentMetadataResponseModel";
 import { AgentPlatformSettingsResponseModel } from "./AgentPlatformSettingsResponseModel";
 import { AgentWorkflowResponseModel } from "./AgentWorkflowResponseModel";
 import { ConversationalConfig } from "./ConversationalConfig";
-import { GetAgentResponseModelCoachingSettings } from "./GetAgentResponseModelCoachingSettings";
 import { GetAgentResponseModelPhoneNumbersItem } from "./GetAgentResponseModelPhoneNumbersItem";
 import { GetWhatsAppAccountResponse } from "./GetWhatsAppAccountResponse";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
@@ -35,10 +34,6 @@ export const GetAgentResponseModel: core.serialization.ObjectSchema<
     versionId: core.serialization.property("version_id", core.serialization.string().optional()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     mainBranchId: core.serialization.property("main_branch_id", core.serialization.string().optional()),
-    coachingSettings: core.serialization.property(
-        "coaching_settings",
-        GetAgentResponseModelCoachingSettings.optional(),
-    ),
 });
 
 export declare namespace GetAgentResponseModel {
@@ -56,6 +51,5 @@ export declare namespace GetAgentResponseModel {
         version_id?: string | null;
         branch_id?: string | null;
         main_branch_id?: string | null;
-        coaching_settings?: GetAgentResponseModelCoachingSettings.Raw | null;
     }
 }

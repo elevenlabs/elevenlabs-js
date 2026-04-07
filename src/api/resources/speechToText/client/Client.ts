@@ -118,6 +118,10 @@ export class SpeechToTextClient {
             _request.append("cloud_storage_url", request.cloudStorageUrl);
         }
 
+        if (request.sourceUrl != null) {
+            _request.append("source_url", request.sourceUrl);
+        }
+
         if (request.webhook != null) {
             _request.append("webhook", request.webhook.toString());
         }
@@ -156,6 +160,21 @@ export class SpeechToTextClient {
                 for (const _item of request.entityDetection) {
                     _request.append("entity_detection", typeof _item === "string" ? _item : toJson(_item));
                 }
+        }
+
+        if (request.noVerbatim != null) {
+            _request.append("no_verbatim", request.noVerbatim.toString());
+        }
+
+        if (request.entityRedaction != null) {
+            if (Array.isArray(request.entityRedaction))
+                for (const _item of request.entityRedaction) {
+                    _request.append("entity_redaction", typeof _item === "string" ? _item : toJson(_item));
+                }
+        }
+
+        if (request.entityRedactionMode != null) {
+            _request.append("entity_redaction_mode", request.entityRedactionMode);
         }
 
         if (request.keyterms != null) {
@@ -207,15 +226,7 @@ export class SpeechToTextClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.ElevenLabsError({
                         statusCode: _response.error.statusCode,

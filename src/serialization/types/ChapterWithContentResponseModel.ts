@@ -21,6 +21,7 @@ export const ChapterWithContentResponseModel: core.serialization.ObjectSchema<
     canBeDownloaded: core.serialization.property("can_be_downloaded", core.serialization.boolean()),
     state: ChapterWithContentResponseModelState,
     hasVideo: core.serialization.property("has_video", core.serialization.boolean().optional()),
+    hasVisualContent: core.serialization.property("has_visual_content", core.serialization.boolean().optional()),
     voiceIds: core.serialization.property("voice_ids", core.serialization.list(core.serialization.string()).optional()),
     statistics: ChapterStatisticsResponse.optional(),
     lastConversionError: core.serialization.property("last_conversion_error", core.serialization.string().optional()),
@@ -36,6 +37,7 @@ export declare namespace ChapterWithContentResponseModel {
         can_be_downloaded: boolean;
         state: ChapterWithContentResponseModelState.Raw;
         has_video?: boolean | null;
+        has_visual_content?: boolean | null;
         voice_ids?: string[] | null;
         statistics?: ChapterStatisticsResponse.Raw | null;
         last_conversion_error?: string | null;

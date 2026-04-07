@@ -21,6 +21,10 @@ export const PatchConvAiSettingsRequest: core.serialization.Schema<
         "rag_retention_period_days",
         core.serialization.number().optional(),
     ),
+    conversationEmbeddingRetentionDays: core.serialization.property(
+        "conversation_embedding_retention_days",
+        core.serialization.number().optional(),
+    ),
     defaultLivekitStack: core.serialization.property("default_livekit_stack", LivekitStackType.optional()),
 });
 
@@ -30,6 +34,7 @@ export declare namespace PatchConvAiSettingsRequest {
         webhooks?: ConvAiWebhooks.Raw | null;
         can_use_mcp_servers?: boolean | null;
         rag_retention_period_days?: number | null;
+        conversation_embedding_retention_days?: number | null;
         default_livekit_stack?: LivekitStackType.Raw | null;
     }
 }

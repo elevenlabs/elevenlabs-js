@@ -8,6 +8,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         pageSize: 1,
  *         search: "search",
  *         showOnlyOwnedDocuments: true,
+ *         createdByUserId: "created_by_user_id",
  *         parentFolderId: "parent_folder_id",
  *         ancestorFolderId: "ancestor_folder_id",
  *         foldersFirst: true,
@@ -21,8 +22,10 @@ export interface KnowledgeBaseListRequest {
     pageSize?: number;
     /** If specified, the endpoint returns only such knowledge base documents whose names start with this string. */
     search?: string;
-    /** If set to true, the endpoint will return only documents owned by you (and not shared from somebody else). */
+    /** If set to true, the endpoint will return only documents owned by you (and not shared from somebody else). Deprecated: use created_by_user_id instead. */
     showOnlyOwnedDocuments?: boolean;
+    /** Filter documents by creator user ID. When set, only documents created by this user are returned. Takes precedence over show_only_owned_documents. Use '@me' to refer to the authenticated user. */
+    createdByUserId?: string;
     /** If present, the endpoint will return only documents of the given types. */
     types?: ElevenLabs.KnowledgeBaseDocumentType | ElevenLabs.KnowledgeBaseDocumentType[];
     /** If set, the endpoint will return only documents that are direct children of the given folder. */

@@ -21,6 +21,8 @@ export const ConversationInitiationClientDataRequestOutput: core.serialization.O
     ),
     userId: core.serialization.property("user_id", core.serialization.string().optional()),
     sourceInfo: core.serialization.property("source_info", ConversationInitiationSourceInfo.optional()),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
+    environment: core.serialization.string().optional(),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
         core.serialization
@@ -38,6 +40,8 @@ export declare namespace ConversationInitiationClientDataRequestOutput {
         custom_llm_extra_body?: Record<string, unknown> | null;
         user_id?: string | null;
         source_info?: ConversationInitiationSourceInfo.Raw | null;
+        branch_id?: string | null;
+        environment?: string | null;
         dynamic_variables?: Record<
             string,
             ConversationInitiationClientDataRequestOutputDynamicVariablesValue.Raw | null | undefined

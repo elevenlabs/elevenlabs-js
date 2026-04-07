@@ -21,6 +21,10 @@ export const AgentConfigApiModelWorkflowOverrideOutput: core.serialization.Objec
         "disable_first_message_interruptions",
         core.serialization.boolean().optional(),
     ),
+    maxConversationDurationMessage: core.serialization.property(
+        "max_conversation_duration_message",
+        core.serialization.string().optional(),
+    ),
     prompt: PromptAgentApiModelWorkflowOverrideOutput.optional(),
 });
 
@@ -31,6 +35,7 @@ export declare namespace AgentConfigApiModelWorkflowOverrideOutput {
         hinglish_mode?: boolean | null;
         dynamic_variables?: DynamicVariablesConfigWorkflowOverride.Raw | null;
         disable_first_message_interruptions?: boolean | null;
+        max_conversation_duration_message?: string | null;
         prompt?: PromptAgentApiModelWorkflowOverrideOutput.Raw | null;
     }
 }

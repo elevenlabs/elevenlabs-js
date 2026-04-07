@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AvatarContextResponseModel } from "./AvatarContextResponseModel";
 import { DialogueInputResponseModel } from "./DialogueInputResponseModel";
 import { FeedbackItem } from "./FeedbackItem";
 import { HistoryAlignmentsResponseModel } from "./HistoryAlignmentsResponseModel";
@@ -34,6 +35,8 @@ export const SpeechHistoryItemResponse: core.serialization.ObjectSchema<
     source: SpeechHistoryItemResponseModelSource.optional(),
     alignments: HistoryAlignmentsResponseModel.optional(),
     dialogue: core.serialization.list(DialogueInputResponseModel).optional(),
+    outputFormat: core.serialization.property("output_format", core.serialization.string().optional()),
+    avatarContext: core.serialization.property("avatar_context", AvatarContextResponseModel.optional()),
 });
 
 export declare namespace SpeechHistoryItemResponse {
@@ -56,5 +59,7 @@ export declare namespace SpeechHistoryItemResponse {
         source?: SpeechHistoryItemResponseModelSource.Raw | null;
         alignments?: HistoryAlignmentsResponseModel.Raw | null;
         dialogue?: DialogueInputResponseModel.Raw[] | null;
+        output_format?: string | null;
+        avatar_context?: AvatarContextResponseModel.Raw | null;
     }
 }

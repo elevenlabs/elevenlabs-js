@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const CaptionStyleModelTextWeight: core.serialization.Schema<
     serializers.CaptionStyleModelTextWeight.Raw,
     ElevenLabs.CaptionStyleModelTextWeight
-> = core.serialization.enum_(["normal", "bold"]);
+> = core.serialization.enum_(["normal", "bold", "900"]);
 
 export declare namespace CaptionStyleModelTextWeight {
-    export type Raw = "normal" | "bold";
+    export type Raw = "normal" | "bold" | "900";
 }

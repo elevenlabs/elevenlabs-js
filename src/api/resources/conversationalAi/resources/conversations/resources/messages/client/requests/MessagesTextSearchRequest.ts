@@ -20,6 +20,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *         summaryMode: "exclude",
  *         conversationInitiationSource: "unknown",
  *         branchId: "branch_id",
+ *         sortBy: "search_score",
  *         cursor: "cursor"
  *     }
  */
@@ -52,6 +53,10 @@ export interface MessagesTextSearchRequest {
     dataCollectionParams?: string | string[];
     /** Filter conversations by tool names used during the call. */
     toolNames?: string | string[];
+    /** Filter conversations by tool names that had successful calls. */
+    toolNamesSuccessful?: string | string[];
+    /** Filter conversations by tool names that had errored calls. */
+    toolNamesErrored?: string | string[];
     /** Filter conversations by detected main language (language code). */
     mainLanguages?: string | string[];
     /** Number of results per page. Max 50. */
@@ -61,6 +66,8 @@ export interface MessagesTextSearchRequest {
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
     /** Filter conversations by branch ID. */
     branchId?: string;
+    /** Sort order for search results. 'search_score' sorts by search score, 'created_at' sorts by conversation start time. */
+    sortBy?: ElevenLabs.MessageSearchSortBy;
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
 }

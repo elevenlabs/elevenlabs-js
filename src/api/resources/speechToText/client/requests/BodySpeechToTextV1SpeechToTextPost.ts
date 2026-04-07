@@ -21,7 +21,7 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     enableLogging?: boolean;
     /** The ID of the model to use for transcription. */
     modelId: ElevenLabs.SpeechToTextConvertRequestModelId;
-    /** The file to transcribe. All major audio and video formats are supported. Exactly one of the file or cloud_storage_url parameters must be provided. The file size must be less than 3.0GB. */
+    /** The file to transcribe (100ms minimum audio length). All major audio and video formats are supported. Exactly one of the file or cloud_storage_url parameters must be provided. The file size must be less than 3.0GB. */
     file?: core.file.Uploadable | undefined;
     /** An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file. Can sometimes improve transcription performance if known beforehand. Defaults to null, in this case the language is predicted automatically. */
     languageCode?: string;
@@ -41,6 +41,8 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     fileFormat?: ElevenLabs.SpeechToTextConvertRequestFileFormat;
     /** The HTTPS URL of the file to transcribe. Exactly one of the file or cloud_storage_url parameters must be provided. The file must be accessible via HTTPS and the file size must be less than 2GB. Any valid HTTPS URL is accepted, including URLs from cloud storage providers (AWS S3, Google Cloud Storage, Cloudflare R2, etc.), CDNs, or any other HTTPS source. URLs can be pre-signed or include authentication tokens in query parameters. */
     cloudStorageUrl?: string;
+    /** The URL of an audio or video file to transcribe. Supports hosted video or audio files, YouTube video URLs, TikTok video URLs, and other video hosting services. */
+    sourceUrl?: string;
     /** Whether to send the transcription result to configured speech-to-text webhooks.  If set the request will return early without the transcription, which will be delivered later via webhook. */
     webhook?: boolean;
     /** Optional specific webhook ID to send the transcription result to. Only valid when webhook is set to true. If not provided, transcription will be sent to all configured speech-to-text webhooks. */
@@ -55,6 +57,12 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     webhookMetadata?: ElevenLabs.SpeechToTextConvertRequestWebhookMetadata;
     /** Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. Usage of this parameter will incur additional costs. */
     entityDetection?: ElevenLabs.SpeechToTextConvertRequestEntityDetection;
-    /** A list of keyterms to bias the transcription towards.           The keyterms are words or phrases you want the model to recognise more accurately.           The number of keyterms cannot exceed 100.           The length of each keyterm must be less than 50 characters.           Keyterms can contain at most 5 words (after normalisation).           For example ["hello", "world", "technical term"].           Usage of this parameter will incur additional costs.  */
+    /** If true, the transcription will not have any filler words, false starts and non-speech sounds. Only supported with scribe_v2 model. */
+    noVerbatim?: boolean;
+    /** Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned. */
+    entityRedaction?: ElevenLabs.SpeechToTextConvertRequestEntityRedaction;
+    /** How to format redacted entities. 'redacted' replaces with {REDACTED}, 'entity_type' replaces with {ENTITY_TYPE}, 'enumerated_entity_type' replaces with {ENTITY_TYPE_N} where N enumerates each occurrence. Only used when entity_redaction is set. */
+    entityRedactionMode?: string;
+    /** A list of keyterms to bias the transcription towards.           The keyterms are words or phrases you want the model to recognise more accurately.           The number of keyterms cannot exceed 1000.           The length of each keyterm must be less than 50 characters.           Keyterms can contain at most 5 words (after normalisation).           For example ["hello", "world", "technical term"].           Usage of this parameter will incur additional costs.           When more than 100 keyterms are provided, a minimum billable duration of 20 seconds applies per request. */
     keyterms?: string[];
 }

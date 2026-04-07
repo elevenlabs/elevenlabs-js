@@ -18,7 +18,13 @@ export const BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost: core.ser
     agentPhoneNumberId: core.serialization.property("agent_phone_number_id", core.serialization.string().optional()),
     whatsappParams: core.serialization.property("whatsapp_params", BatchCallWhatsAppParams.optional()),
     timezone: core.serialization.string().optional(),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
+    environment: core.serialization.string().optional(),
     telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfig.optional()),
+    targetConcurrencyLimit: core.serialization.property(
+        "target_concurrency_limit",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
@@ -30,6 +36,9 @@ export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPo
         agent_phone_number_id?: string | null;
         whatsapp_params?: BatchCallWhatsAppParams.Raw | null;
         timezone?: string | null;
+        branch_id?: string | null;
+        environment?: string | null;
         telephony_call_config?: TelephonyCallConfig.Raw | null;
+        target_concurrency_limit?: number | null;
     }
 }

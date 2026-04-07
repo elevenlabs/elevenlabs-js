@@ -3,13 +3,13 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { ConversationHistoryTwilioPhoneCallModelDirection } from "./ConversationHistoryTwilioPhoneCallModelDirection";
+import { TelephonyDirection } from "./TelephonyDirection";
 
 export const ConversationHistoryTwilioPhoneCallModel: core.serialization.ObjectSchema<
     serializers.ConversationHistoryTwilioPhoneCallModel.Raw,
     ElevenLabs.ConversationHistoryTwilioPhoneCallModel
 > = core.serialization.object({
-    direction: ConversationHistoryTwilioPhoneCallModelDirection,
+    direction: TelephonyDirection,
     phoneNumberId: core.serialization.property("phone_number_id", core.serialization.string()),
     agentNumber: core.serialization.property("agent_number", core.serialization.string()),
     externalNumber: core.serialization.property("external_number", core.serialization.string()),
@@ -19,7 +19,7 @@ export const ConversationHistoryTwilioPhoneCallModel: core.serialization.ObjectS
 
 export declare namespace ConversationHistoryTwilioPhoneCallModel {
     export interface Raw {
-        direction: ConversationHistoryTwilioPhoneCallModelDirection.Raw;
+        direction: TelephonyDirection.Raw;
         phone_number_id: string;
         agent_number: string;
         external_number: string;

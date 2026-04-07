@@ -15,4 +15,5 @@ export interface GetKnowledgeBaseSummaryFolderResponseModel {
     /** This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead. */
     dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem[];
     childrenCount: number;
+    autoSyncInfo?: ElevenLabs.AutoSyncInfo;
 }
