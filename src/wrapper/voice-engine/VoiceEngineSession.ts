@@ -119,10 +119,12 @@ export class VoiceEngineSession {
     /**
      * Send an LLM response back to the Voice Engine API for TTS synthesis.
      *
-     * Accepts either a complete string or an `AsyncIterable<string>` for
-     * streaming token-by-token responses.
+     * Accepts a complete string, an `AsyncIterable<string>` for streaming
+     * token-by-token responses, or an LLM stream that yields event objects
+     * (e.g. an OpenAI Responses API stream). Event objects are automatically
+     * parsed to extract text deltas.
      */
-    sendResponse(response: string | AsyncIterable<string>): void {
+    sendResponse(response: string | AsyncIterable<unknown>): void {
         if (typeof response === "string") {
             this.sendAgentResponse(response, false);
             this.sendAgentResponse("", true);
@@ -229,15 +231,68 @@ export class VoiceEngineSession {
         }
     }
 
-    private async streamResponse(stream: AsyncIterable<string>): Promise<void> {
+    private async streamResponse(stream: AsyncIterable<unknown>): Promise<void> {
         const eventId = this.currentEventId;
         for await (const chunk of stream) {
             if (this.closed) return;
-            this.sendAgentResponse(chunk, false, eventId);
+            const text = this.extractText(chunk);
+            if (text) {
+                this.sendAgentResponse(text, false, eventId);
+            }
         }
         if (!this.closed) {
             this.sendAgentResponse("", true, eventId);
         }
+    }
+
+    /**
+     * Extract text content from a stream chunk. Handles plain strings and
+     * common LLM stream event formats:
+     *
+     * - OpenAI Responses API (`response.output_text.delta`)
+     * - OpenAI Chat Completions API (`choices[0].delta.content`)
+     * - Anthropic Messages API (`content_block_delta` with `text_delta`)
+     * - Google Gemini API (`candidates[0].content.parts[0].text`)
+     */
+    private extractText(chunk: unknown): string | null {
+        if (typeof chunk === "string") return chunk;
+        if (typeof chunk !== "object" || chunk === null) return null;
+
+        const event = chunk as Record<string, unknown>;
+
+        // OpenAI Responses API: { type: "response.output_text.delta", delta: "text" }
+        if (event.type === "response.output_text.delta" && typeof event.delta === "string") {
+            return event.delta;
+        }
+
+        // OpenAI Chat Completions API: { choices: [{ delta: { content: "text" } }] }
+        if (Array.isArray(event.choices)) {
+            const content = (event.choices[0] as Record<string, unknown>)?.delta;
+            if (typeof content === "object" && content !== null && typeof (content as Record<string, unknown>).content === "string") {
+                return (content as Record<string, unknown>).content as string;
+            }
+        }
+
+        // Anthropic Messages API: { type: "content_block_delta", delta: { type: "text_delta", text: "text" } }
+        if (event.type === "content_block_delta" && typeof event.delta === "object" && event.delta !== null) {
+            const delta = event.delta as Record<string, unknown>;
+            if (delta.type === "text_delta" && typeof delta.text === "string") {
+                return delta.text;
+            }
+        }
+
+        // Google Gemini API: { candidates: [{ content: { parts: [{ text: "text" }] } }] }
+        if (Array.isArray(event.candidates)) {
+            const content = (event.candidates[0] as Record<string, unknown>)?.content;
+            if (typeof content === "object" && content !== null) {
+                const parts = (content as Record<string, unknown>).parts;
+                if (Array.isArray(parts) && typeof (parts[0] as Record<string, unknown>)?.text === "string") {
+                    return (parts[0] as Record<string, unknown>).text as string;
+                }
+            }
+        }
+
+        return null;
     }
 
     private sendAgentResponse(content: string, isFinal: boolean, eventId?: number): void {
