@@ -58,29 +58,42 @@ export class VoiceEngineResource {
         httpServer: HttpServer,
         path: string,
         onSession: (session: VoiceEngineSession) => void,
+        options?: { debug?: boolean },
     ): VoiceEngineAttachment {
+        const debug = options?.debug ?? false;
+        const log = debug ? (...args: unknown[]) => console.log("[VoiceEngine]", ...args) : () => {};
+
         const wss = new WebSocket.Server({ noServer: true });
         const attachment = new VoiceEngineAttachment(wss);
 
         httpServer.on("upgrade", async (req, socket, head) => {
             const url = new URL(req.url ?? "/", `http://${req.headers.host}`);
+            log(`upgrade request: ${req.method} ${url.pathname}`);
+
             if (url.pathname !== path) {
-                socket.destroy();
+                log(`path mismatch: expected ${path}, got ${url.pathname} — skipping`);
                 return;
             }
 
             if (!await this.verifyRequest(req)) {
+                log("verifyRequest rejected the connection — destroying socket");
                 socket.destroy();
                 return;
             }
 
-            wss.handleUpgrade(req, socket, head, (ws) => wss.emit("connection", ws));
+            log("upgrading connection to WebSocket");
+            wss.handleUpgrade(req, socket, head, (ws) => {
+                log("WebSocket connection established");
+                wss.emit("connection", ws);
+            });
         });
 
         wss.on("connection", (ws: WebSocket) => {
+            log("creating new session");
             onSession(this.createSession(ws));
         });
 
+        log(`listening for WebSocket upgrades on ${path}`);
         return attachment;
     }
 
