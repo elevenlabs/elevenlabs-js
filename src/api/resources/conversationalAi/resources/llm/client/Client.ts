@@ -19,7 +19,7 @@ export declare namespace LlmClient {
 export class LlmClient {
     protected readonly _options: NormalizedClientOptions<LlmClient.Options>;
 
-    constructor(options: LlmClient.Options = {}) {
+    constructor(options: LlmClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -2,7 +2,9 @@
 
 export const VoiceResponseModelRecordingQuality = {
     Studio: "studio",
+    Good: "good",
     Ok: "ok",
+    Poor: "poor",
     Bad: "bad",
 } as const;
 export type VoiceResponseModelRecordingQuality =

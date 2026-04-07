@@ -20,7 +20,7 @@ export declare namespace IvcClient {
 export class IvcClient {
     protected readonly _options: NormalizedClientOptions<IvcClient.Options>;
 
-    constructor(options: IvcClient.Options = {}) {
+    constructor(options: IvcClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

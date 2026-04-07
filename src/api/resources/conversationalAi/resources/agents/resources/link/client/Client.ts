@@ -19,7 +19,7 @@ export declare namespace LinkClient {
 export class LinkClient {
     protected readonly _options: NormalizedClientOptions<LinkClient.Options>;
 
-    constructor(options: LinkClient.Options = {}) {
+    constructor(options: LinkClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

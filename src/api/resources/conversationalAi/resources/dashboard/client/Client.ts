@@ -12,7 +12,7 @@ export class DashboardClient {
     protected readonly _options: NormalizedClientOptions<DashboardClient.Options>;
     protected _settings: SettingsClient | undefined;
 
-    constructor(options: DashboardClient.Options = {}) {
+    constructor(options: DashboardClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -19,7 +19,7 @@ export declare namespace SnapshotsClient {
 export class SnapshotsClient {
     protected readonly _options: NormalizedClientOptions<SnapshotsClient.Options>;
 
-    constructor(options: SnapshotsClient.Options = {}) {
+    constructor(options: SnapshotsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -19,7 +19,7 @@ export declare namespace DeploymentsClient {
 export class DeploymentsClient {
     protected readonly _options: NormalizedClientOptions<DeploymentsClient.Options>;
 
-    constructor(options: DeploymentsClient.Options = {}) {
+    constructor(options: DeploymentsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

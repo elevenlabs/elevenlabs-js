@@ -19,7 +19,7 @@ export declare namespace BatchCallsClient {
 export class BatchCallsClient {
     protected readonly _options: NormalizedClientOptions<BatchCallsClient.Options>;
 
-    constructor(options: BatchCallsClient.Options = {}) {
+    constructor(options: BatchCallsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

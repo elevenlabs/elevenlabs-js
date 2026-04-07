@@ -23,7 +23,7 @@ export class PvcClient {
     protected _samples: SamplesClient | undefined;
     protected _verification: VerificationClient | undefined;
 
-    constructor(options: PvcClient.Options = {}) {
+    constructor(options: PvcClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

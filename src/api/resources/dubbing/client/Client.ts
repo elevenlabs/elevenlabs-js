@@ -27,7 +27,7 @@ export class DubbingClient {
     protected _transcript: TranscriptClient | undefined;
     protected _transcripts: TranscriptsClient | undefined;
 
-    constructor(options: DubbingClient.Options = {}) {
+    constructor(options: DubbingClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -19,7 +19,7 @@ export declare namespace HistoryClient {
 export class HistoryClient {
     protected readonly _options: NormalizedClientOptions<HistoryClient.Options>;
 
-    constructor(options: HistoryClient.Options = {}) {
+    constructor(options: HistoryClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

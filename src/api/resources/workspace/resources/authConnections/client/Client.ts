@@ -19,7 +19,7 @@ export declare namespace AuthConnectionsClient {
 export class AuthConnectionsClient {
     protected readonly _options: NormalizedClientOptions<AuthConnectionsClient.Options>;
 
-    constructor(options: AuthConnectionsClient.Options = {}) {
+    constructor(options: AuthConnectionsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

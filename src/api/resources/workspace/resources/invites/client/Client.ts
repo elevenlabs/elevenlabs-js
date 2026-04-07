@@ -19,7 +19,7 @@ export declare namespace InvitesClient {
 export class InvitesClient {
     protected readonly _options: NormalizedClientOptions<InvitesClient.Options>;
 
-    constructor(options: InvitesClient.Options = {}) {
+    constructor(options: InvitesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

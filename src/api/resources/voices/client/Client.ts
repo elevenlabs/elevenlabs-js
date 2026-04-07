@@ -31,7 +31,7 @@ export class VoicesClient {
     protected _pvc: PvcClient | undefined;
     protected _samples: SamplesClient | undefined;
 
-    constructor(options: VoicesClient.Options = {}) {
+    constructor(options: VoicesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

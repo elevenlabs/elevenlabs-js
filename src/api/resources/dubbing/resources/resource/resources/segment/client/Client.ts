@@ -19,7 +19,7 @@ export declare namespace SegmentClient {
 export class SegmentClient {
     protected readonly _options: NormalizedClientOptions<SegmentClient.Options>;
 
-    constructor(options: SegmentClient.Options = {}) {
+    constructor(options: SegmentClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

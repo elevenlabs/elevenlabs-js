@@ -25,7 +25,7 @@ export class ResourceClient {
     protected _segment: SegmentClient | undefined;
     protected _speaker: SpeakerClient | undefined;
 
-    constructor(options: ResourceClient.Options = {}) {
+    constructor(options: ResourceClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

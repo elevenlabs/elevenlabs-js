@@ -21,7 +21,7 @@ export class ChaptersClient {
     protected readonly _options: NormalizedClientOptions<ChaptersClient.Options>;
     protected _snapshots: SnapshotsClient | undefined;
 
-    constructor(options: ChaptersClient.Options = {}) {
+    constructor(options: ChaptersClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

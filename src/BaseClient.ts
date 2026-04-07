@@ -9,7 +9,7 @@ export interface BaseClientOptions {
     /** Specify a custom URL to connect the client to. */
     baseUrl?: core.Supplier<string>;
     /** Override the xi-api-key header */
-    apiKey?: core.Supplier<string | undefined>;
+    apiKey: core.Supplier<string>;
     /** Additional headers to include in requests. */
     headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     /** The default maximum time to wait for a response in seconds. */
@@ -31,7 +31,7 @@ export interface BaseRequestOptions {
     /** A hook to abort the request. */
     abortSignal?: AbortSignal;
     /** Override the xi-api-key header */
-    apiKey?: string | undefined;
+    apiKey?: string;
     /** Additional query string parameters to include in the request. */
     queryParams?: Record<string, unknown>;
     /** Additional headers to include in the request. */
@@ -47,8 +47,8 @@ export function normalizeClientOptions<T extends BaseClientOptions>(options: T):
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-            "X-Fern-SDK-Version": "2.41.1",
-            "User-Agent": "@elevenlabs/elevenlabs-js/2.41.1",
+            "X-Fern-SDK-Version": "2.42.0",
+            "User-Agent": "@elevenlabs/elevenlabs-js/2.42.0",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
             "xi-api-key": options?.apiKey,

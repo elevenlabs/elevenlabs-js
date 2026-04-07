@@ -19,7 +19,7 @@ export declare namespace SummariesClient {
 export class SummariesClient {
     protected readonly _options: NormalizedClientOptions<SummariesClient.Options>;
 
-    constructor(options: SummariesClient.Options = {}) {
+    constructor(options: SummariesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -12,7 +12,7 @@ export class TokensClient {
     protected readonly _options: NormalizedClientOptions<TokensClient.Options>;
     protected _singleUse: SingleUseClient | undefined;
 
-    constructor(options: TokensClient.Options = {}) {
+    constructor(options: TokensClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

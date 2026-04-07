@@ -21,7 +21,7 @@ export class TextToVoiceClient {
     protected readonly _options: NormalizedClientOptions<TextToVoiceClient.Options>;
     protected _preview: PreviewClient | undefined;
 
-    constructor(options: TextToVoiceClient.Options = {}) {
+    constructor(options: TextToVoiceClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -19,7 +19,7 @@ export declare namespace RulesClient {
 export class RulesClient {
     protected readonly _options: NormalizedClientOptions<RulesClient.Options>;
 
-    constructor(options: RulesClient.Options = {}) {
+    constructor(options: RulesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

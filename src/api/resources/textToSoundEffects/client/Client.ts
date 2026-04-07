@@ -19,7 +19,7 @@ export declare namespace TextToSoundEffectsClient {
 export class TextToSoundEffectsClient {
     protected readonly _options: NormalizedClientOptions<TextToSoundEffectsClient.Options>;
 
-    constructor(options: TextToSoundEffectsClient.Options = {}) {
+    constructor(options: TextToSoundEffectsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

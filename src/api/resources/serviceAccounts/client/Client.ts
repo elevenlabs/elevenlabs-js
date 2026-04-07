@@ -21,7 +21,7 @@ export class ServiceAccountsClient {
     protected readonly _options: NormalizedClientOptions<ServiceAccountsClient.Options>;
     protected _apiKeys: ApiKeysClient | undefined;
 
-    constructor(options: ServiceAccountsClient.Options = {}) {
+    constructor(options: ServiceAccountsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

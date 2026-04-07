@@ -19,7 +19,7 @@ export declare namespace LiveCountClient {
 export class LiveCountClient {
     protected readonly _options: NormalizedClientOptions<LiveCountClient.Options>;
 
-    constructor(options: LiveCountClient.Options = {}) {
+    constructor(options: LiveCountClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

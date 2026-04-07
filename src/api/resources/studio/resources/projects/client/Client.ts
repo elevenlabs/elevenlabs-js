@@ -27,7 +27,7 @@ export class ProjectsClient {
     protected _snapshots: SnapshotsClient | undefined;
     protected _chapters: ChaptersClient | undefined;
 
-    constructor(options: ProjectsClient.Options = {}) {
+    constructor(options: ProjectsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

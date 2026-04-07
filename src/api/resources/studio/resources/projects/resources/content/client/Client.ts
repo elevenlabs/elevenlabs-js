@@ -19,7 +19,7 @@ export declare namespace ContentClient {
 export class ContentClient {
     protected readonly _options: NormalizedClientOptions<ContentClient.Options>;
 
-    constructor(options: ContentClient.Options = {}) {
+    constructor(options: ContentClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

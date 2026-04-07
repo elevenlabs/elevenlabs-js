@@ -2200,7 +2200,6 @@ Create and auto-convert a podcast project. Currently, the LLM cost is covered by
 
 ```typescript
 await client.studio.createPodcast({
-    safetyIdentifier: "safety-identifier",
     modelId: "eleven_multilingual_v2",
     mode: {
         type: "conversation",
@@ -4971,7 +4970,7 @@ await client.conversationalAi.twilio.outboundCall({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.twilio.<a href="/src/api/resources/conversationalAi/resources/twilio/client/Client.ts">registerCall</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.conversationalAi.twilio.<a href="/src/api/resources/conversationalAi/resources/twilio/client/Client.ts">registerCall</a>({ ...params }) -> string</code></summary>
 <dl>
 <dd>
 
@@ -5885,6 +5884,71 @@ await client.conversationalAi.tests.create({
 <dd>
 
 **request:** `ElevenLabs.TestsCreateRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TestsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">move</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Moves multiple tests or folders from one folder to another.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.tests.move({
+    entityIds: ["entity_ids"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost` 
     
 </dd>
 </dl>
@@ -11136,7 +11200,7 @@ await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getContent</a>(documentation_id) -> void</code></summary>
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getContent</a>(documentation_id) -> string</code></summary>
 <dl>
 <dd>
 
@@ -11163,7 +11227,7 @@ Get the entire content of a document from the knowledge base
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.getContent("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.knowledgeBase.documents.getContent("documentation_id");
 
 ```
 </dd>
@@ -12249,6 +12313,281 @@ await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "to
 <dd>
 
 **requestOptions:** `ToolConfigsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Tests Folders
+<details><summary><code>client.conversationalAi.tests.folders.<a href="/src/api/resources/conversationalAi/resources/tests/resources/folders/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentTestFolderResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a folder for organizing agent tests.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.tests.folders.create({
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.tests.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FoldersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.tests.folders.<a href="/src/api/resources/conversationalAi/resources/tests/resources/folders/client/Client.ts">get</a>(folder_id) -> ElevenLabs.GetAgentTestFolderResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets an agent test folder by ID, including its folder path.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.tests.folders.get("tfld_7301khxdkycse5f88fzjdtrterzm");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**folder_id:** `string` — The folder ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FoldersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.tests.folders.<a href="/src/api/resources/conversationalAi/resources/tests/resources/folders/client/Client.ts">delete</a>(folder_id, { ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes an agent test folder by ID. Use force=true to delete a non-empty folder and all its contents.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.tests.folders.delete("tfld_7301khxdkycse5f88fzjdtrterzm", {
+    force: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**folder_id:** `string` — The folder ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.tests.FoldersDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FoldersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.tests.folders.<a href="/src/api/resources/conversationalAi/resources/tests/resources/folders/client/Client.ts">update</a>(folder_id, { ...params }) -> ElevenLabs.GetAgentTestFolderResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates an agent test folder. Currently only supports updating the folder name.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.tests.folders.update("tfld_7301khxdkycse5f88fzjdtrterzm", {
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**folder_id:** `string` — The folder ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.tests.BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIdPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FoldersClient.RequestOptions` 
     
 </dd>
 </dl>

@@ -19,7 +19,7 @@ export declare namespace FilesClient {
 export class FilesClient {
     protected readonly _options: NormalizedClientOptions<FilesClient.Options>;
 
-    constructor(options: FilesClient.Options = {}) {
+    constructor(options: FilesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

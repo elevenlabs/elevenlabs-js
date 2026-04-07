@@ -22,7 +22,7 @@ export class SpeechToTextClient {
     protected readonly _options: NormalizedClientOptions<SpeechToTextClient.Options>;
     protected _transcripts: TranscriptsClient | undefined;
 
-    constructor(options: SpeechToTextClient.Options = {}) {
+    constructor(options: SpeechToTextClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

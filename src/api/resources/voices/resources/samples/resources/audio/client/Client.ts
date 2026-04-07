@@ -18,7 +18,7 @@ export declare namespace AudioClient {
 export class AudioClient {
     protected readonly _options: NormalizedClientOptions<AudioClient.Options>;
 
-    constructor(options: AudioClient.Options = {}) {
+    constructor(options: AudioClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

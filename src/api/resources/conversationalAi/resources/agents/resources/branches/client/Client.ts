@@ -19,7 +19,7 @@ export declare namespace BranchesClient {
 export class BranchesClient {
     protected readonly _options: NormalizedClientOptions<BranchesClient.Options>;
 
-    constructor(options: BranchesClient.Options = {}) {
+    constructor(options: BranchesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

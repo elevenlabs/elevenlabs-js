@@ -18,7 +18,7 @@ export declare namespace PreviewClient {
 export class PreviewClient {
     protected readonly _options: NormalizedClientOptions<PreviewClient.Options>;
 
-    constructor(options: PreviewClient.Options = {}) {
+    constructor(options: PreviewClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

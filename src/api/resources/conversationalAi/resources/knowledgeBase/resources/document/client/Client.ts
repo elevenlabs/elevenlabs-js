@@ -19,7 +19,7 @@ export declare namespace DocumentClient {
 export class DocumentClient {
     protected readonly _options: NormalizedClientOptions<DocumentClient.Options>;
 
-    constructor(options: DocumentClient.Options = {}) {
+    constructor(options: DocumentClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

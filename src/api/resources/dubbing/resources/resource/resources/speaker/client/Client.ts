@@ -21,7 +21,7 @@ export class SpeakerClient {
     protected readonly _options: NormalizedClientOptions<SpeakerClient.Options>;
     protected _segment: SegmentClient | undefined;
 
-    constructor(options: SpeakerClient.Options = {}) {
+    constructor(options: SpeakerClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

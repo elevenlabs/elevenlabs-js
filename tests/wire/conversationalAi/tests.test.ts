@@ -27,6 +27,28 @@ describe("TestsClient", () => {
         });
     });
 
+    test("move", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { entity_ids: ["entity_ids"] };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/v1/convai/agent-testing/bulk-move")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.tests.move({
+            entityIds: ["entity_ids"],
+        });
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
+
     test("get", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

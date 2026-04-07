@@ -19,7 +19,7 @@ export declare namespace WhatsappAccountsClient {
 export class WhatsappAccountsClient {
     protected readonly _options: NormalizedClientOptions<WhatsappAccountsClient.Options>;
 
-    constructor(options: WhatsappAccountsClient.Options = {}) {
+    constructor(options: WhatsappAccountsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

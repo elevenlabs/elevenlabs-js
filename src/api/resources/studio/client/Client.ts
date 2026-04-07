@@ -21,7 +21,7 @@ export class StudioClient {
     protected readonly _options: NormalizedClientOptions<StudioClient.Options>;
     protected _projects: ProjectsClient | undefined;
 
-    constructor(options: StudioClient.Options = {}) {
+    constructor(options: StudioClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 
@@ -39,7 +39,6 @@ export class StudioClient {
      *
      * @example
      *     await client.studio.createPodcast({
-     *         safetyIdentifier: "safety-identifier",
      *         modelId: "eleven_multilingual_v2",
      *         mode: {
      *             type: "conversation",

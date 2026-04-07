@@ -20,7 +20,7 @@ export class WorkspaceClient {
     protected _members: MembersClient | undefined;
     protected _resources: ResourcesClient | undefined;
 
-    constructor(options: WorkspaceClient.Options = {}) {
+    constructor(options: WorkspaceClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

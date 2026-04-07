@@ -6,9 +6,10 @@ import type * as serializers from "../index";
 import { AgentCallLimits } from "./AgentCallLimits";
 import { AgentTestingSettings } from "./AgentTestingSettings";
 import { AgentWorkspaceOverridesOutput } from "./AgentWorkspaceOverridesOutput";
+import { AnalysisScope } from "./AnalysisScope";
 import { AuthSettings } from "./AuthSettings";
 import { ConversationInitiationClientDataConfigOutput } from "./ConversationInitiationClientDataConfigOutput";
-import { EvaluationSettings } from "./EvaluationSettings";
+import { EvaluationSettingsOutput } from "./EvaluationSettingsOutput";
 import { GuardrailsV1Output } from "./GuardrailsV1Output";
 import { LiteralJsonSchemaProperty } from "./LiteralJsonSchemaProperty";
 import { PrivacyConfigOutput } from "./PrivacyConfigOutput";
@@ -19,11 +20,15 @@ export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema
     serializers.AgentPlatformSettingsResponseModel.Raw,
     ElevenLabs.AgentPlatformSettingsResponseModel
 > = core.serialization.object({
-    evaluation: EvaluationSettings.optional(),
+    evaluation: EvaluationSettingsOutput.optional(),
     widget: WidgetConfig.optional(),
     dataCollection: core.serialization.property(
         "data_collection",
         core.serialization.record(core.serialization.string(), LiteralJsonSchemaProperty).optional(),
+    ),
+    dataCollectionScopes: core.serialization.property(
+        "data_collection_scopes",
+        core.serialization.record(core.serialization.string(), AnalysisScope).optional(),
     ),
     overrides: ConversationInitiationClientDataConfigOutput.optional(),
     workspaceOverrides: core.serialization.property("workspace_overrides", AgentWorkspaceOverridesOutput.optional()),
@@ -39,9 +44,10 @@ export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema
 
 export declare namespace AgentPlatformSettingsResponseModel {
     export interface Raw {
-        evaluation?: EvaluationSettings.Raw | null;
+        evaluation?: EvaluationSettingsOutput.Raw | null;
         widget?: WidgetConfig.Raw | null;
         data_collection?: Record<string, LiteralJsonSchemaProperty.Raw> | null;
+        data_collection_scopes?: Record<string, AnalysisScope.Raw> | null;
         overrides?: ConversationInitiationClientDataConfigOutput.Raw | null;
         workspace_overrides?: AgentWorkspaceOverridesOutput.Raw | null;
         testing?: AgentTestingSettings.Raw | null;

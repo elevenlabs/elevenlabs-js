@@ -35,7 +35,7 @@ export class AgentsClient {
     protected _deployments: DeploymentsClient | undefined;
     protected _drafts: DraftsClient | undefined;
 
-    constructor(options: AgentsClient.Options = {}) {
+    constructor(options: AgentsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -18,6 +18,7 @@ describe("WhatsappAccountsClient", () => {
             enable_messaging: true,
             enable_audio_message_response: true,
             assigned_agent_name: "assigned_agent_name",
+            is_token_expired: true,
         };
         server
             .mockEndpoint()
@@ -38,6 +39,7 @@ describe("WhatsappAccountsClient", () => {
             enableMessaging: true,
             enableAudioMessageResponse: true,
             assignedAgentName: "assigned_agent_name",
+            isTokenExpired: true,
         });
     });
 
@@ -96,6 +98,7 @@ describe("WhatsappAccountsClient", () => {
                     enable_messaging: true,
                     enable_audio_message_response: true,
                     assigned_agent_name: "assigned_agent_name",
+                    is_token_expired: true,
                 },
             ],
         };
@@ -120,6 +123,7 @@ describe("WhatsappAccountsClient", () => {
                     enableMessaging: true,
                     enableAudioMessageResponse: true,
                     assignedAgentName: "assigned_agent_name",
+                    isTokenExpired: true,
                 },
             ],
         });

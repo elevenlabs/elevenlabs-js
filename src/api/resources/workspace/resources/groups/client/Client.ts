@@ -21,7 +21,7 @@ export class GroupsClient {
     protected readonly _options: NormalizedClientOptions<GroupsClient.Options>;
     protected _members: MembersClient | undefined;
 
-    constructor(options: GroupsClient.Options = {}) {
+    constructor(options: GroupsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

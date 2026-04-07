@@ -19,7 +19,7 @@ export declare namespace AvatarClient {
 export class AvatarClient {
     protected readonly _options: NormalizedClientOptions<AvatarClient.Options>;
 
-    constructor(options: AvatarClient.Options = {}) {
+    constructor(options: AvatarClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

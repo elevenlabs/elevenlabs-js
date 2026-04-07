@@ -19,7 +19,7 @@ export declare namespace KnowledgeBaseClient {
 export class KnowledgeBaseClient {
     protected readonly _options: NormalizedClientOptions<KnowledgeBaseClient.Options>;
 
-    constructor(options: KnowledgeBaseClient.Options = {}) {
+    constructor(options: KnowledgeBaseClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -10,4 +10,6 @@ export interface MultichannelSpeechToTextResponseModel {
     transcripts: ElevenLabs.SpeechToTextChunkResponseModel[];
     /** The transcription ID of the response. */
     transcriptionId?: string;
+    /** The duration of the audio that was transcribed across all channels in seconds. */
+    audioDurationSecs?: number;
 }

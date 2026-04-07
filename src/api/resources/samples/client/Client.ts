@@ -22,7 +22,7 @@ export declare namespace SamplesClient {
 export class SamplesClient {
     protected readonly _options: NormalizedClientOptions<SamplesClient.Options>;
 
-    constructor(options: SamplesClient.Options = {}) {
+    constructor(options: SamplesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

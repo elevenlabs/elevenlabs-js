@@ -10,4 +10,5 @@ export interface GetWhatsAppAccountResponse {
     enableMessaging?: boolean;
     enableAudioMessageResponse?: boolean;
     assignedAgentName?: string;
+    isTokenExpired?: boolean;
 }

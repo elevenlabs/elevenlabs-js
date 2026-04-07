@@ -21,7 +21,7 @@ export class VerificationClient {
     protected readonly _options: NormalizedClientOptions<VerificationClient.Options>;
     protected _captcha: CaptchaClient | undefined;
 
-    constructor(options: VerificationClient.Options = {}) {
+    constructor(options: VerificationClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

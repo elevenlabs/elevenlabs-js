@@ -23,7 +23,7 @@ export class KnowledgeBaseClient {
     protected _documents: DocumentsClient | undefined;
     protected _document: DocumentClient | undefined;
 
-    constructor(options: KnowledgeBaseClient.Options = {}) {
+    constructor(options: KnowledgeBaseClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

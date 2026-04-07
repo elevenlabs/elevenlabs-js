@@ -19,7 +19,7 @@ export declare namespace FeedbackClient {
 export class FeedbackClient {
     protected readonly _options: NormalizedClientOptions<FeedbackClient.Options>;
 
-    constructor(options: FeedbackClient.Options = {}) {
+    constructor(options: FeedbackClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

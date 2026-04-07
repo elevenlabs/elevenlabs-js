@@ -19,7 +19,7 @@ export declare namespace ForcedAlignmentClient {
 export class ForcedAlignmentClient {
     protected readonly _options: NormalizedClientOptions<ForcedAlignmentClient.Options>;
 
-    constructor(options: ForcedAlignmentClient.Options = {}) {
+    constructor(options: ForcedAlignmentClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

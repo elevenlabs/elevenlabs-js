@@ -217,6 +217,10 @@ describe("BatchCallsClient", () => {
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                                     llm: "gemini-2.0-flash-001",
+                                    tool_ids: ["tool_ids"],
+                                    knowledge_base: [
+                                        { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
+                                    ],
                                 },
                             },
                         },
@@ -290,6 +294,15 @@ describe("BatchCallsClient", () => {
                                 prompt: {
                                     prompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
                                     llm: "gemini-2.0-flash-001",
+                                    toolIds: ["tool_ids"],
+                                    knowledgeBase: [
+                                        {
+                                            type: "file",
+                                            name: "My Knowledge Base",
+                                            id: "123",
+                                            usageMode: "auto",
+                                        },
+                                    ],
                                 },
                             },
                         },

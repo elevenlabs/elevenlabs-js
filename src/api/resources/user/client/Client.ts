@@ -21,7 +21,7 @@ export class UserClient {
     protected readonly _options: NormalizedClientOptions<UserClient.Options>;
     protected _subscription: SubscriptionClient | undefined;
 
-    constructor(options: UserClient.Options = {}) {
+    constructor(options: UserClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

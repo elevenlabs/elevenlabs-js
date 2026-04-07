@@ -19,7 +19,7 @@ export declare namespace TextToDialogueClient {
 export class TextToDialogueClient {
     protected readonly _options: NormalizedClientOptions<TextToDialogueClient.Options>;
 
-    constructor(options: TextToDialogueClient.Options = {}) {
+    constructor(options: TextToDialogueClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

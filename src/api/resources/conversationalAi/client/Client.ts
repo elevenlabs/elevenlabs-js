@@ -57,7 +57,7 @@ export class ConversationalAiClient {
     protected _analytics: AnalyticsClient | undefined;
     protected _dashboard: DashboardClient | undefined;
 
-    constructor(options: ConversationalAiClient.Options = {}) {
+    constructor(options: ConversationalAiClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

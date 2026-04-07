@@ -19,7 +19,7 @@ export declare namespace WaveformClient {
 export class WaveformClient {
     protected readonly _options: NormalizedClientOptions<WaveformClient.Options>;
 
-    constructor(options: WaveformClient.Options = {}) {
+    constructor(options: WaveformClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

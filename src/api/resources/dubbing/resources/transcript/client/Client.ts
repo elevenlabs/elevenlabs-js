@@ -19,7 +19,7 @@ export declare namespace TranscriptClient {
 export class TranscriptClient {
     protected readonly _options: NormalizedClientOptions<TranscriptClient.Options>;
 
-    constructor(options: TranscriptClient.Options = {}) {
+    constructor(options: TranscriptClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -19,7 +19,7 @@ export declare namespace CompositionPlanClient {
 export class CompositionPlanClient {
     protected readonly _options: NormalizedClientOptions<CompositionPlanClient.Options>;
 
-    constructor(options: CompositionPlanClient.Options = {}) {
+    constructor(options: CompositionPlanClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

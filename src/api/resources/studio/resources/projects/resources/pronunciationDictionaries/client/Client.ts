@@ -19,7 +19,7 @@ export declare namespace PronunciationDictionariesClient {
 export class PronunciationDictionariesClient {
     protected readonly _options: NormalizedClientOptions<PronunciationDictionariesClient.Options>;
 
-    constructor(options: PronunciationDictionariesClient.Options = {}) {
+    constructor(options: PronunciationDictionariesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -67,7 +67,7 @@ export class ElevenLabsClient {
     protected _tokens: TokensClient | undefined;
     protected _workspace: WorkspaceClient | undefined;
 
-    constructor(options: ElevenLabsClient.Options = {}) {
+    constructor(options: ElevenLabsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

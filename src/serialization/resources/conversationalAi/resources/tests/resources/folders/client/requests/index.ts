@@ -1,0 +1,2 @@
+export { BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost } from "./BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost";
+export { BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIdPatch } from "./BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIdPatch";

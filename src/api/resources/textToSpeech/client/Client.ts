@@ -19,7 +19,7 @@ export declare namespace TextToSpeechClient {
 export class TextToSpeechClient {
     protected readonly _options: NormalizedClientOptions<TextToSpeechClient.Options>;
 
-    constructor(options: TextToSpeechClient.Options = {}) {
+    constructor(options: TextToSpeechClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

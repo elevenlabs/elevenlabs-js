@@ -19,7 +19,7 @@ export declare namespace SipTrunkClient {
 export class SipTrunkClient {
     protected readonly _options: NormalizedClientOptions<SipTrunkClient.Options>;
 
-    constructor(options: SipTrunkClient.Options = {}) {
+    constructor(options: SipTrunkClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

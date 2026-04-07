@@ -12,7 +12,7 @@ export class AnalyticsClient {
     protected readonly _options: NormalizedClientOptions<AnalyticsClient.Options>;
     protected _liveCount: LiveCountClient | undefined;
 
-    constructor(options: AnalyticsClient.Options = {}) {
+    constructor(options: AnalyticsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

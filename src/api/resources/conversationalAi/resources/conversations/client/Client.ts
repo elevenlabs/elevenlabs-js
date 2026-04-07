@@ -29,7 +29,7 @@ export class ConversationsClient {
     protected _files: FilesClient | undefined;
     protected _analysis: AnalysisClient | undefined;
 
-    constructor(options: ConversationsClient.Options = {}) {
+    constructor(options: ConversationsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -19,7 +19,7 @@ export declare namespace AudioIsolationClient {
 export class AudioIsolationClient {
     protected readonly _options: NormalizedClientOptions<AudioIsolationClient.Options>;
 
-    constructor(options: AudioIsolationClient.Options = {}) {
+    constructor(options: AudioIsolationClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

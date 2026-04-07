@@ -19,7 +19,7 @@ export declare namespace AudioNativeClient {
 export class AudioNativeClient {
     protected readonly _options: NormalizedClientOptions<AudioNativeClient.Options>;
 
-    constructor(options: AudioNativeClient.Options = {}) {
+    constructor(options: AudioNativeClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -25,7 +25,7 @@ export class SamplesClient {
     protected _waveform: WaveformClient | undefined;
     protected _speakers: SpeakersClient | undefined;
 
-    constructor(options: SamplesClient.Options = {}) {
+    constructor(options: SamplesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

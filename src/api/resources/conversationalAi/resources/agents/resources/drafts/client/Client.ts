@@ -19,7 +19,7 @@ export declare namespace DraftsClient {
 export class DraftsClient {
     protected readonly _options: NormalizedClientOptions<DraftsClient.Options>;
 
-    constructor(options: DraftsClient.Options = {}) {
+    constructor(options: DraftsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

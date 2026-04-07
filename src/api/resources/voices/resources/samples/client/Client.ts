@@ -12,7 +12,7 @@ export class SamplesClient {
     protected readonly _options: NormalizedClientOptions<SamplesClient.Options>;
     protected _audio: AudioClient | undefined;
 
-    constructor(options: SamplesClient.Options = {}) {
+    constructor(options: SamplesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -19,7 +19,7 @@ export declare namespace MessagesClient {
 export class MessagesClient {
     protected readonly _options: NormalizedClientOptions<MessagesClient.Options>;
 
-    constructor(options: MessagesClient.Options = {}) {
+    constructor(options: MessagesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

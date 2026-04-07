@@ -21,7 +21,7 @@ export class PronunciationDictionariesClient {
     protected readonly _options: NormalizedClientOptions<PronunciationDictionariesClient.Options>;
     protected _rules: RulesClient | undefined;
 
-    constructor(options: PronunciationDictionariesClient.Options = {}) {
+    constructor(options: PronunciationDictionariesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

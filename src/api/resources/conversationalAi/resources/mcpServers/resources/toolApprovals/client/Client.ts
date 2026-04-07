@@ -19,7 +19,7 @@ export declare namespace ToolApprovalsClient {
 export class ToolApprovalsClient {
     protected readonly _options: NormalizedClientOptions<ToolApprovalsClient.Options>;
 
-    constructor(options: ToolApprovalsClient.Options = {}) {
+    constructor(options: ToolApprovalsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

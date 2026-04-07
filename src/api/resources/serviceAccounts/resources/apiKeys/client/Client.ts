@@ -19,7 +19,7 @@ export declare namespace ApiKeysClient {
 export class ApiKeysClient {
     protected readonly _options: NormalizedClientOptions<ApiKeysClient.Options>;
 
-    constructor(options: ApiKeysClient.Options = {}) {
+    constructor(options: ApiKeysClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

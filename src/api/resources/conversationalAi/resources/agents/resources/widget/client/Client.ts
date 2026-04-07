@@ -21,7 +21,7 @@ export class WidgetClient {
     protected readonly _options: NormalizedClientOptions<WidgetClient.Options>;
     protected _avatar: AvatarClient | undefined;
 
-    constructor(options: WidgetClient.Options = {}) {
+    constructor(options: WidgetClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

@@ -22,4 +22,6 @@ export interface SpeechToTextChunkResponseModel {
     transcriptionId?: string;
     /** List of detected entities with their text, type, and character positions in the transcript. */
     entities?: ElevenLabs.DetectedEntity[];
+    /** The duration of the audio that was transcribed in seconds. */
+    audioDurationSecs?: number;
 }

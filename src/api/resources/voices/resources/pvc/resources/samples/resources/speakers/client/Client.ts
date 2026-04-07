@@ -21,7 +21,7 @@ export class SpeakersClient {
     protected readonly _options: NormalizedClientOptions<SpeakersClient.Options>;
     protected _audio: AudioClient | undefined;
 
-    constructor(options: SpeakersClient.Options = {}) {
+    constructor(options: SpeakersClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

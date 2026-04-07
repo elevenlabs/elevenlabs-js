@@ -19,7 +19,7 @@ export declare namespace SingleUseClient {
 export class SingleUseClient {
     protected readonly _options: NormalizedClientOptions<SingleUseClient.Options>;
 
-    constructor(options: SingleUseClient.Options = {}) {
+    constructor(options: SingleUseClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

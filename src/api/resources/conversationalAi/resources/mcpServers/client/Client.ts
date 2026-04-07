@@ -27,7 +27,7 @@ export class McpServersClient {
     protected _toolApprovals: ToolApprovalsClient | undefined;
     protected _toolConfigs: ToolConfigsClient | undefined;
 
-    constructor(options: McpServersClient.Options = {}) {
+    constructor(options: McpServersClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

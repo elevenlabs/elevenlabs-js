@@ -19,7 +19,7 @@ export declare namespace CaptchaClient {
 export class CaptchaClient {
     protected readonly _options: NormalizedClientOptions<CaptchaClient.Options>;
 
-    constructor(options: CaptchaClient.Options = {}) {
+    constructor(options: CaptchaClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

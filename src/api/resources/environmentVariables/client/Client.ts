@@ -19,7 +19,7 @@ export declare namespace EnvironmentVariablesClient {
 export class EnvironmentVariablesClient {
     protected readonly _options: NormalizedClientOptions<EnvironmentVariablesClient.Options>;
 
-    constructor(options: EnvironmentVariablesClient.Options = {}) {
+    constructor(options: EnvironmentVariablesClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

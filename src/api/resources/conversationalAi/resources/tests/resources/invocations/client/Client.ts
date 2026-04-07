@@ -19,7 +19,7 @@ export declare namespace InvocationsClient {
 export class InvocationsClient {
     protected readonly _options: NormalizedClientOptions<InvocationsClient.Options>;
 
-    constructor(options: InvocationsClient.Options = {}) {
+    constructor(options: InvocationsClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

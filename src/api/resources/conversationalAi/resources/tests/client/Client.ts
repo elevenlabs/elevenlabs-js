@@ -9,6 +9,7 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index";
 import * as serializers from "../../../../../../serialization/index";
 import * as ElevenLabs from "../../../../../index";
+import { FoldersClient } from "../resources/folders/client/Client";
 import { InvocationsClient } from "../resources/invocations/client/Client";
 
 export declare namespace TestsClient {
@@ -19,10 +20,15 @@ export declare namespace TestsClient {
 
 export class TestsClient {
     protected readonly _options: NormalizedClientOptions<TestsClient.Options>;
+    protected _folders: FoldersClient | undefined;
     protected _invocations: InvocationsClient | undefined;
 
-    constructor(options: TestsClient.Options = {}) {
+    constructor(options: TestsClient.Options) {
         this._options = normalizeClientOptions(options);
+    }
+
+    public get folders(): FoldersClient {
+        return (this._folders ??= new FoldersClient(this._options));
     }
 
     public get invocations(): InvocationsClient {
@@ -110,6 +116,82 @@ export class TestsClient {
             _response.rawResponse,
             "POST",
             "/v1/convai/agent-testing/create",
+        );
+    }
+
+    /**
+     * Moves multiple tests or folders from one folder to another.
+     *
+     * @param {ElevenLabs.conversationalAi.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost} request
+     * @param {TestsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.tests.move({
+     *         entityIds: ["entity_ids"]
+     *     })
+     */
+    public move(
+        request: ElevenLabs.conversationalAi.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost,
+        requestOptions?: TestsClient.RequestOptions,
+    ): core.HttpResponsePromise<unknown> {
+        return core.HttpResponsePromise.fromPromise(this.__move(request, requestOptions));
+    }
+
+    private async __move(
+        request: ElevenLabs.conversationalAi.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost,
+        requestOptions?: TestsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<unknown>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/agent-testing/bulk-move",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.conversationalAi.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost.jsonOrThrow(
+                request,
+                { unrecognizedObjectKeys: "strip" },
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/agent-testing/bulk-move",
         );
     }
 

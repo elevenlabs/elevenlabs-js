@@ -19,7 +19,7 @@ export declare namespace ChunkClient {
 export class ChunkClient {
     protected readonly _options: NormalizedClientOptions<ChunkClient.Options>;
 
-    constructor(options: ChunkClient.Options = {}) {
+    constructor(options: ChunkClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

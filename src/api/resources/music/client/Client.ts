@@ -21,7 +21,7 @@ export class MusicClient {
     protected readonly _options: NormalizedClientOptions<MusicClient.Options>;
     protected _compositionPlan: CompositionPlanClient | undefined;
 
-    constructor(options: MusicClient.Options = {}) {
+    constructor(options: MusicClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 

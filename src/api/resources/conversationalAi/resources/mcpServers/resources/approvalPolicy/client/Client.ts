@@ -19,7 +19,7 @@ export declare namespace ApprovalPolicyClient {
 export class ApprovalPolicyClient {
     protected readonly _options: NormalizedClientOptions<ApprovalPolicyClient.Options>;
 
-    constructor(options: ApprovalPolicyClient.Options = {}) {
+    constructor(options: ApprovalPolicyClient.Options) {
         this._options = normalizeClientOptions(options);
     }
 
