@@ -1,7 +1,6 @@
 import { EventEmitter } from "node:events";
 import WebSocket from "ws";
 import type {
-    ConversationMessage,
     IncomingMessage,
     VoiceEngineEventMap,
     VoiceEngineEventName,
@@ -71,44 +70,6 @@ export class VoiceEngineSession {
     ): this {
         this.emitter.once(event, listener as (...args: any[]) => void);
         return this;
-    }
-
-    // -----------------------------------------------------------------------
-    // Typed event handlers
-    // -----------------------------------------------------------------------
-
-    /** Fired once when the session is initialized with a conversation ID. */
-    onInit(listener: (conversationId: string) => void): this {
-        return this.on("init", listener);
-    }
-
-    /**
-     * Fired each time the Voice Engine API sends a user transcript.
-     *
-     * `transcript` is the full conversation history up to this turn.
-     * `signal` is aborted if a new transcript arrives before you finish
-     * responding — pass it to your LLM call to cancel in-flight requests.
-     */
-    onTranscript(listener: (transcript: ConversationMessage[], signal: AbortSignal) => void): this {
-        return this.on("user_transcript", listener);
-    }
-
-    /** Fired when ElevenLabs sends a clean close message ending the conversation. */
-    onClose(listener: () => void): this {
-        return this.on("close", listener);
-    }
-
-    /**
-     * Fired when the underlying WebSocket drops unexpectedly — network failure,
-     * client disconnect, etc. Unlike `onClose`, this indicates an unclean ending.
-     */
-    onDisconnect(listener: () => void): this {
-        return this.on("disconnected", listener);
-    }
-
-    /** Fired on protocol-level or WebSocket-level errors. */
-    onError(listener: (error: Error) => void): this {
-        return this.on("error", listener);
     }
 
     // -----------------------------------------------------------------------

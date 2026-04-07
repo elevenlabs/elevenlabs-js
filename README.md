@@ -119,6 +119,8 @@ const openai = new OpenAI({
 const engine = await elevenlabs.voiceEngine.get("veng_123");
 
 engine.attach(httpServer, "/api/voice-engine/ws", {
+    debug: true,
+
     onInit(conversationId) {
         console.log("session started:", conversationId);
     },
