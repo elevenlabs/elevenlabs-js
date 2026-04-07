@@ -5,7 +5,7 @@ import { VoiceEngine } from "../../../src/wrapper/voice-engine";
 import type { ConversationMessage, WebSocketLike } from "../../../src/wrapper/voice-engine/types";
 
 class MockWebSocket extends EventEmitter implements WebSocketLike {
-    readyState = WebSocket.OPEN;
+    readyState: number = WebSocket.OPEN;
     sent: string[] = [];
 
     send(data: string): void {
