@@ -37,7 +37,10 @@ describe("VoiceEngineResource", () => {
 
     function trackHttpServer(): http.Server {
         const server = http.createServer();
-        cleanups.push(() => new Promise<void>((r) => server.close(() => r())));
+        cleanups.push(() => {
+            server.closeAllConnections();
+            return new Promise<void>((r) => server.close(() => r()));
+        });
         return server;
     }
 
@@ -72,20 +75,32 @@ describe("VoiceEngineResource", () => {
         expect(session).toBeInstanceOf(VoiceEngineSession);
     });
 
-    it("rejects connections on the wrong path", async () => {
+    it("ignores connections on the wrong path without calling onSession", async () => {
         const httpServer = trackHttpServer();
         await new Promise<void>((r) => httpServer.listen(0, r));
         const port = getPort(httpServer);
 
+        // Track raw sockets from upgrade requests so we can clean up
+        // connections that are intentionally left open (not destroyed) by
+        // the path-mismatch branch.
+        const upgradeSockets: import("node:stream").Duplex[] = [];
+        httpServer.on("upgrade", (_req, socket) => { upgradeSockets.push(socket); });
+
+        const onSession = jest.fn();
         const resource = makeResource();
-        trackAttachment(resource.attach(httpServer, "/ve", () => {}));
+        trackAttachment(resource.attach(httpServer, "/ve", onSession));
 
-        const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}/wrong`));
+        const ws = new WebSocket(`ws://127.0.0.1:${port}/wrong`);
+        ws.on("error", () => {});
 
-        await new Promise<void>((resolve) => {
-            ws.on("error", () => resolve());
-            ws.on("close", () => resolve());
-        });
+        // The upgrade is silently ignored (not destroyed) so other handlers
+        // like Next.js HMR can still process it. Give it a moment to confirm
+        // onSession is never called.
+        await new Promise((r) => setTimeout(r, 100));
+        expect(onSession).not.toHaveBeenCalled();
+
+        ws.terminate();
+        for (const s of upgradeSockets) s.destroy();
     });
 
     // -----------------------------------------------------------------------
