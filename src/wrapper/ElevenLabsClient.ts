@@ -1,14 +1,13 @@
 import { ElevenLabsClient as FernClient } from "../Client";
-import type * as ElevenLabs from "../api";
 import type * as core from "../core";
-import * as errors from "../errors";
 import { WebhooksClient } from "./webhooks";
 import { Music } from "./music";
 import { MusicClient as GeneratedMusic } from "../api/resources/music/client/Client";
 import { SpeechToText } from "./speechToText";
+import { resolveApiKey } from "./utils";
 
 export declare namespace ElevenLabsClient {
-    interface Options extends FernClient.Options {
+    interface Options extends Omit<FernClient.Options, "apiKey"> {
         /**
          * Your ElevenLabs API Key. Defaults to the environment
          * variable ELEVENLABS_API_KEY.
@@ -23,14 +22,8 @@ export class ElevenLabsClient extends FernClient {
     private _customSpeechToText: SpeechToText | undefined;
 
     constructor(options: ElevenLabsClient.Options = {}) {
-        const apiKey = options.apiKey ?? process.env.ELEVENLABS_API_KEY;
-        if (apiKey == null) {
-            throw new errors.ElevenLabsError({
-                message: "Please pass in your ElevenLabs API Key or export ELEVENLABS_API_KEY in your environment.",
-            });
-        }
-        options.apiKey = apiKey;
-        super(options);
+        const apiKey = resolveApiKey(options.apiKey);
+        super({ ...options, apiKey });
     }
 
     public get webhooks(): WebhooksClient {

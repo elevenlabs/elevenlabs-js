@@ -1,6 +1,7 @@
 import { EventEmitter } from "events";
 import WebSocket from "ws";
 import { ElevenLabsClient } from "../../../../Client";
+import { ElevenLabsClient as ElevenLabsWrapper } from "../../../../wrapper/ElevenLabsClient";
 import { SDK_VERSION } from "../../../../version";
 import { AudioInterface } from "./AudioInterface";
 import { ClientTools } from "./ClientTools";
@@ -64,7 +65,7 @@ export class Conversation extends EventEmitter {
     }) {
         super();
 
-        this.client = options.client || new ElevenLabsClient();
+        this.client = options.client || new ElevenLabsWrapper();
         this.agentId = options.agentId;
         this.requiresAuth = options.requiresAuth;
         this.audioInterface = options.audioInterface;

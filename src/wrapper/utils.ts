@@ -1,3 +1,20 @@
+import type * as core from "../core";
+import { ElevenLabsError } from "../errors/ElevenLabsError";
+
+/**
+ * Resolves the API key from the provided option or the ELEVENLABS_API_KEY environment variable.
+ * Throws if neither is available.
+ */
+export function resolveApiKey(apiKey: core.Supplier<string> | undefined): core.Supplier<string> {
+    const resolved = apiKey ?? process.env.ELEVENLABS_API_KEY;
+    if (resolved == null) {
+        throw new ElevenLabsError({
+            message: "Please pass in your ElevenLabs API Key or export ELEVENLABS_API_KEY in your environment.",
+        });
+    }
+    return resolved;
+}
+
 export function isNode(): boolean {
     return (
         typeof process !== "undefined" &&

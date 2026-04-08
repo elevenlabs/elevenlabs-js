@@ -3,6 +3,7 @@ import WebSocket from "ws";
 import { RealtimeConnection } from "./connection";
 import * as core from "../../core";
 import * as environments from "../../environments";
+import { resolveApiKey } from "../utils";
 
 export enum AudioFormat {
     PCM_8000 = "pcm_8000",
@@ -86,11 +87,15 @@ export interface UrlOptions extends BaseOptions {
  * **Node.js only**: This class uses Node.js-specific APIs (WebSocket from 'ws', child_process).
  * It will not work in browsers, Deno, or Cloudflare Workers without modifications.
  */
+type ScribeRealtimeOptions = Omit<SpeechToTextClient.Options, "apiKey"> & {
+    apiKey?: core.Supplier<string>;
+};
+
 export class ScribeRealtime {
     private options: SpeechToTextClient.Options;
 
-    constructor(options: SpeechToTextClient.Options = {}) {
-        this.options = options;
+    constructor(options: ScribeRealtimeOptions = {}) {
+        this.options = { ...options, apiKey: resolveApiKey(options.apiKey) };
     }
 
     private async getWebSocketUri(): Promise<string> {

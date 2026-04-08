@@ -3,9 +3,12 @@ import { MusicClient as GeneratedMusic } from "../api/resources/music/client/Cli
 import { CompositionPlanClient } from "../api/resources/music/resources/compositionPlan/client/Client";
 import * as core from "../core";
 import type { WithRawResponse } from "../core/fetcher/RawResponse";
+import { resolveApiKey } from "./utils";
 
 export declare namespace Music {
-    interface Options extends GeneratedMusic.Options {}
+    interface Options extends Omit<GeneratedMusic.Options, "apiKey"> {
+        apiKey?: core.Supplier<string>;
+    }
     interface RequestOptions extends GeneratedMusic.RequestOptions {}
 }
 
@@ -33,8 +36,9 @@ export class Music {
     private _compositionPlan: CompositionPlanClient | undefined;
 
     constructor(options: Music.Options = {}) {
-        this._options = options;
-        this._client = new GeneratedMusic(options);
+        const resolvedOptions = { ...options, apiKey: resolveApiKey(options.apiKey) };
+        this._options = resolvedOptions;
+        this._client = new GeneratedMusic(resolvedOptions);
     }
 
     /**
