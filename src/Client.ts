@@ -26,7 +26,7 @@ import { VoicesClient } from "./api/resources/voices/client/Client";
 import { WebhooksClient } from "./api/resources/webhooks/client/Client";
 import { WorkspaceClient } from "./api/resources/workspace/client/Client";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient";
-import { type NormalizedClientOptions, normalizeClientOptions } from "./BaseClient";
+import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "./BaseClient";
 import * as core from "./core";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "./core/headers";
 import * as environments from "./environments";
@@ -40,7 +40,7 @@ export declare namespace ElevenLabsClient {
 }
 
 export class ElevenLabsClient {
-    protected readonly _options: NormalizedClientOptions<ElevenLabsClient.Options>;
+    protected readonly _options: NormalizedClientOptionsWithAuth<ElevenLabsClient.Options>;
     protected _history: HistoryClient | undefined;
     protected _textToSoundEffects: TextToSoundEffectsClient | undefined;
     protected _audioIsolation: AudioIsolationClient | undefined;
@@ -67,8 +67,8 @@ export class ElevenLabsClient {
     protected _tokens: TokensClient | undefined;
     protected _workspace: WorkspaceClient | undefined;
 
-    constructor(options: ElevenLabsClient.Options = {}) {
-        this._options = normalizeClientOptions(options);
+    constructor(options: ElevenLabsClient.Options) {
+        this._options = normalizeClientOptionsWithAuth(options);
     }
 
     public get history(): HistoryClient {
@@ -186,7 +186,9 @@ export class ElevenLabsClient {
     private async __saveAVoicePreview(
         requestOptions?: ElevenLabsClient.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
             requestOptions?.headers,

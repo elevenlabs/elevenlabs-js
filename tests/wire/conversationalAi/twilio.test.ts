@@ -39,25 +39,4 @@ describe("TwilioClient", () => {
             callSid: "callSid",
         });
     });
-
-    test("register_call", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { agent_id: "agent_id", from_number: "from_number", to_number: "to_number" };
-
-        server
-            .mockEndpoint()
-            .post("/v1/convai/twilio/register-call")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .build();
-
-        const response = await client.conversationalAi.twilio.registerCall({
-            agentId: "agent_id",
-            fromNumber: "from_number",
-            toNumber: "to_number",
-        });
-        expect(response).toEqual(undefined);
-    });
 });

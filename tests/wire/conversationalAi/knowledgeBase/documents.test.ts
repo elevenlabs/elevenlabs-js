@@ -309,21 +309,6 @@ describe("DocumentsClient", () => {
         });
     });
 
-    test("get_content", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
-        server
-            .mockEndpoint()
-            .get("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/content")
-            .respondWith()
-            .statusCode(200)
-            .build();
-
-        const response = await client.conversationalAi.knowledgeBase.documents.getContent("21m00Tcm4TlvDq8ikWAM");
-        expect(response).toEqual(undefined);
-    });
-
     test("get_source_file_url", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

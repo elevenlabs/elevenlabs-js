@@ -2200,7 +2200,6 @@ Create and auto-convert a podcast project. Currently, the LLM cost is covered by
 
 ```typescript
 await client.studio.createPodcast({
-    safetyIdentifier: "safety-identifier",
     modelId: "eleven_multilingual_v2",
     mode: {
         type: "conversation",
@@ -4971,7 +4970,7 @@ await client.conversationalAi.twilio.outboundCall({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.twilio.<a href="/src/api/resources/conversationalAi/resources/twilio/client/Client.ts">registerCall</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.conversationalAi.twilio.<a href="/src/api/resources/conversationalAi/resources/twilio/client/Client.ts">registerCall</a>({ ...params }) -> string</code></summary>
 <dl>
 <dd>
 
@@ -11201,7 +11200,7 @@ await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getContent</a>(documentation_id) -> void</code></summary>
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getContent</a>(documentation_id) -> string</code></summary>
 <dl>
 <dd>
 
@@ -11228,7 +11227,7 @@ Get the entire content of a document from the knowledge base
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.getContent("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.knowledgeBase.documents.getContent("documentation_id");
 
 ```
 </dd>
