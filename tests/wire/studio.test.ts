@@ -92,7 +92,6 @@ describe("StudioClient", () => {
         server
             .mockEndpoint()
             .post("/v1/studio/podcasts")
-            .header("safety-identifier", "safety-identifier")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
@@ -100,7 +99,6 @@ describe("StudioClient", () => {
             .build();
 
         const response = await client.studio.createPodcast({
-            safetyIdentifier: "safety-identifier",
             modelId: "eleven_multilingual_v2",
             mode: {
                 type: "conversation",

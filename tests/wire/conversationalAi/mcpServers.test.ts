@@ -12,7 +12,23 @@ describe("McpServersClient", () => {
             mcp_servers: [
                 {
                     id: "id",
-                    config: { url: "url", name: "name" },
+                    config: {
+                        url: "url",
+                        name: "name",
+                        tool_config_overrides: [
+                            {
+                                tool_name: "tool_name",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
                     access_info: {
                         is_creator: true,
                         creator_name: "John Doe",
@@ -42,6 +58,19 @@ describe("McpServersClient", () => {
                     config: {
                         url: "url",
                         name: "name",
+                        toolConfigOverrides: [
+                            {
+                                toolName: "tool_name",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                            },
+                        ],
                     },
                     accessInfo: {
                         isCreator: true,

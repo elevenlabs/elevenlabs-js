@@ -104,7 +104,108 @@ describe("AgentsClient", () => {
                         temperature: 0,
                         max_tokens: -1,
                         tool_ids: ["tool_ids"],
+                        built_in_tools: {
+                            end_call: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            language_detection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            transfer_to_agent: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            transfer_to_number: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            skip_turn: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            play_keypad_touch_tone: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            voicemail_detection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                        },
                         knowledge_base: [{ type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" }],
+                        rag: { max_vector_distance: 0.5, max_retrieved_rag_chunks_count: 5 },
                     },
                 },
             },
@@ -390,6 +491,106 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
+                                    built_in_tools: {
+                                        end_call: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_number: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        skip_turn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        play_keypad_touch_tone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        voicemail_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                    },
                                     knowledge_base: [
                                         { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                                     ],
@@ -479,6 +680,106 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
+                                    built_in_tools: {
+                                        end_call: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_number: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        skip_turn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        play_keypad_touch_tone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        voicemail_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                    },
                                     knowledge_base: [
                                         { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                                     ],
@@ -569,6 +870,106 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
+                                    built_in_tools: {
+                                        end_call: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_number: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        skip_turn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        play_keypad_touch_tone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        voicemail_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                    },
                                     knowledge_base: [
                                         { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                                     ],
@@ -777,6 +1178,120 @@ describe("AgentsClient", () => {
                         temperature: 0,
                         maxTokens: -1,
                         toolIds: ["tool_ids"],
+                        builtInTools: {
+                            endCall: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            languageDetection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            transferToAgent: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            transferToNumber: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            skipTurn: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            playKeypadTouchTone: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            voicemailDetection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                        },
                         knowledgeBase: [
                             {
                                 type: "file",
@@ -785,6 +1300,10 @@ describe("AgentsClient", () => {
                                 usageMode: "auto",
                             },
                         ],
+                        rag: {
+                            maxVectorDistance: 0.5,
+                            maxRetrievedRagChunksCount: 5,
+                        },
                     },
                 },
             },
@@ -1151,6 +1670,120 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
+                                    builtInTools: {
+                                        endCall: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToNumber: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        skipTurn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        playKeypadTouchTone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        voicemailDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                    },
                                     knowledgeBase: [
                                         {
                                             type: "file",
@@ -1262,6 +1895,120 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
+                                    builtInTools: {
+                                        endCall: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToNumber: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        skipTurn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        playKeypadTouchTone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        voicemailDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                    },
                                     knowledgeBase: [
                                         {
                                             type: "file",
@@ -1381,6 +2128,120 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
+                                    builtInTools: {
+                                        endCall: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToNumber: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        skipTurn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        playKeypadTouchTone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        voicemailDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                    },
                                     knowledgeBase: [
                                         {
                                             type: "file",
@@ -1611,7 +2472,108 @@ describe("AgentsClient", () => {
                         temperature: 0,
                         max_tokens: -1,
                         tool_ids: ["tool_ids"],
+                        built_in_tools: {
+                            end_call: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            language_detection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            transfer_to_agent: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            transfer_to_number: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            skip_turn: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            play_keypad_touch_tone: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            voicemail_detection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                        },
                         knowledge_base: [{ type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" }],
+                        rag: { max_vector_distance: 0.5, max_retrieved_rag_chunks_count: 5 },
                     },
                 },
             },
@@ -1897,6 +2859,106 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
+                                    built_in_tools: {
+                                        end_call: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_number: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        skip_turn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        play_keypad_touch_tone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        voicemail_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                    },
                                     knowledge_base: [
                                         { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                                     ],
@@ -1986,6 +3048,106 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
+                                    built_in_tools: {
+                                        end_call: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_number: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        skip_turn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        play_keypad_touch_tone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        voicemail_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                    },
                                     knowledge_base: [
                                         { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                                     ],
@@ -2076,6 +3238,106 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
+                                    built_in_tools: {
+                                        end_call: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_number: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        skip_turn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        play_keypad_touch_tone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        voicemail_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                    },
                                     knowledge_base: [
                                         { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                                     ],
@@ -2285,6 +3547,120 @@ describe("AgentsClient", () => {
                         temperature: 0,
                         maxTokens: -1,
                         toolIds: ["tool_ids"],
+                        builtInTools: {
+                            endCall: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            languageDetection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            transferToAgent: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            transferToNumber: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            skipTurn: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            playKeypadTouchTone: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            voicemailDetection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                        },
                         knowledgeBase: [
                             {
                                 type: "file",
@@ -2293,6 +3669,10 @@ describe("AgentsClient", () => {
                                 usageMode: "auto",
                             },
                         ],
+                        rag: {
+                            maxVectorDistance: 0.5,
+                            maxRetrievedRagChunksCount: 5,
+                        },
                     },
                 },
             },
@@ -2659,6 +4039,120 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
+                                    builtInTools: {
+                                        endCall: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToNumber: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        skipTurn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        playKeypadTouchTone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        voicemailDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                    },
                                     knowledgeBase: [
                                         {
                                             type: "file",
@@ -2770,6 +4264,120 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
+                                    builtInTools: {
+                                        endCall: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToNumber: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        skipTurn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        playKeypadTouchTone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        voicemailDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                    },
                                     knowledgeBase: [
                                         {
                                             type: "file",
@@ -2889,6 +4497,120 @@ describe("AgentsClient", () => {
                                     temperature: 0,
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
+                                    builtInTools: {
+                                        endCall: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToNumber: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        skipTurn: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        playKeypadTouchTone: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        voicemailDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                    },
                                     knowledgeBase: [
                                         {
                                             type: "file",
