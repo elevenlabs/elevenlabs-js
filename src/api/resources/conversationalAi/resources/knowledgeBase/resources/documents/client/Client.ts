@@ -744,19 +744,19 @@ export class DocumentsClient {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.knowledgeBase.documents.getContent("21m00Tcm4TlvDq8ikWAM")
+     *     await client.conversationalAi.knowledgeBase.documents.getContent("documentation_id")
      */
     public getContent(
         documentation_id: string,
         requestOptions?: DocumentsClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    ): core.HttpResponsePromise<string> {
         return core.HttpResponsePromise.fromPromise(this.__getContent(documentation_id, requestOptions));
     }
 
     private async __getContent(
         documentation_id: string,
         requestOptions?: DocumentsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
+    ): Promise<core.WithRawResponse<string>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -772,6 +772,7 @@ export class DocumentsClient {
             method: "GET",
             headers: _headers,
             queryParameters: requestOptions?.queryParams,
+            responseType: "text",
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -779,7 +780,7 @@ export class DocumentsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
+            return { data: _response.body as string, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {

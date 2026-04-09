@@ -331,6 +331,22 @@ describe("ProjectsClient", () => {
                         verification_failures: ["verification_failures"],
                         verification_attempts_count: 2,
                         manual_verification_requested: false,
+                        verification_attempts: [
+                            {
+                                text: "Hello, how are you?",
+                                date_unix: 1714204800,
+                                accepted: true,
+                                similarity: 0.95,
+                                levenshtein_distance: 2,
+                                recording: {
+                                    recording_id: "CwhRBWXzGAHq8TQ4Fs17",
+                                    mime_type: "audio/mpeg",
+                                    size_bytes: 1000000,
+                                    upload_date_unix: 1714204800,
+                                    transcription: "Hello, how are you?",
+                                },
+                            },
+                        ],
                         manual_verification: {
                             extra_text: "Please verify the voice is that of a female.",
                             request_time_unix: 1714204800,
@@ -849,6 +865,22 @@ describe("ProjectsClient", () => {
                         verificationFailures: ["verification_failures"],
                         verificationAttemptsCount: 2,
                         manualVerificationRequested: false,
+                        verificationAttempts: [
+                            {
+                                text: "Hello, how are you?",
+                                dateUnix: 1714204800,
+                                accepted: true,
+                                similarity: 0.95,
+                                levenshteinDistance: 2,
+                                recording: {
+                                    recordingId: "CwhRBWXzGAHq8TQ4Fs17",
+                                    mimeType: "audio/mpeg",
+                                    sizeBytes: 1000000,
+                                    uploadDateUnix: 1714204800,
+                                    transcription: "Hello, how are you?",
+                                },
+                            },
+                        ],
                         manualVerification: {
                             extraText: "Please verify the voice is that of a female.",
                             requestTimeUnix: 1714204800,
