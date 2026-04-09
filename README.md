@@ -130,6 +130,7 @@ engine.attach(httpServer, "/api/voice-engine/ws", {
         const response = await openai.responses.create(
             {
                 model: "gpt-4o",
+                instructions: "You are a helpful agent that assists developers in testing SDKs. Help users explore SDK features, debug integration issues, and validate that SDK methods work as expected.",
                 input: transcript.map((m) => ({ role: m.role === "agent" ? "assistant" : m.role, content: m.content })),
                 stream: true,
             },
