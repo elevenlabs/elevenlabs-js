@@ -107,18 +107,18 @@ There are two ways to set up a Voice Engine server:
 Use this when you already have a web server (Express, Next.js, Fastify, etc.) and want to handle Voice Engine connections on a specific path alongside your existing routes. Configure your voice engine's server URL to point to the path you choose, e.g. `https://myapp.com/api/voice-engine/ws`.
 
 ```ts
-import { ElevenLabsClient, VoiceEngine } from "@elevenlabs/elevenlabs-js";
+import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 import OpenAI from "openai";
 
-const elevenlabs = new ElevenLabsClient();
+const elevenlabs = new ElevenLabsClient({
+    apiKey: process.env.ELEVENLABS_API_KEY,
+});
 const openai = new OpenAI({
-    apiKey: "<your-openai-api-key>",
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Retrieve existing voice engine
-const engine = await elevenlabs.voiceEngine.get("veng_123");
-
-engine.attach(httpServer, "/api/voice-engine/ws", {
+// Attach Voice Engine to existing server
+await elevenlabs.voiceEngine.attach("veng_123", httpServer, "/api/voice-engine/ws", {
     debug: true,
 
     onInit(conversationId) {

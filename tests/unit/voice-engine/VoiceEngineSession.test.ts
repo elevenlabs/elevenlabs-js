@@ -2,7 +2,7 @@ import { EventEmitter } from "node:events";
 import WebSocket from "ws";
 import { VoiceEngineSession } from "../../../src/wrapper/voice-engine/VoiceEngineSession";
 import { VoiceEngine } from "../../../src/wrapper/voice-engine";
-import type { ConversationMessage, WebSocketLike } from "../../../src/wrapper/voice-engine/types";
+import type { TranscriptMessage, WebSocketLike } from "../../../src/wrapper/voice-engine/types";
 
 class MockWebSocket extends EventEmitter implements WebSocketLike {
     readyState: number = WebSocket.OPEN;
@@ -26,12 +26,12 @@ class MockWebSocket extends EventEmitter implements WebSocketLike {
     }
 }
 
-const transcript: ConversationMessage[] = [
+const transcript: TranscriptMessage[] = [
     { role: "agent", content: "how can I help you today?" },
     { role: "user", content: "I need a pizza" },
 ];
 
-const transcript2: ConversationMessage[] = [
+const transcript2: TranscriptMessage[] = [
     { role: "agent", content: "how can I help you today?" },
     { role: "user", content: "I need a pizza" },
     { role: "agent", content: "what size?" },
@@ -206,11 +206,9 @@ describe("VoiceEngineSession", () => {
         expect(JSON.parse(ws.sent[1])).toEqual({ type: "agent_response", content: "", event_id: 5, is_final: true });
     });
 
-    it("does not send after close", () => {
+    it("throws when sending after close", () => {
         session.close();
-        session.sendResponse("too late");
-
-        expect(ws.sent).toHaveLength(0);
+        expect(() => session.sendResponse("too late")).toThrow("session is closed");
     });
 
     // -----------------------------------------------------------------------

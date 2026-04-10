@@ -87,13 +87,18 @@ export class VoiceEngineSession {
      * parsed to extract text deltas.
      */
     sendResponse(response: string | AsyncIterable<unknown>): void {
+        if (this.closed) {
+            throw new Error("Cannot send response: session is closed");
+        }
         if (typeof response === "string") {
             this.log(`sending string response (${response.length} chars), event_id=${this.currentEventId}`);
             this.sendAgentResponse(response, false);
             this.sendAgentResponse("", true);
         } else {
             this.log(`starting streamed response, event_id=${this.currentEventId}`);
-            void this.streamResponse(response);
+            this.streamResponse(response).catch((err) => {
+                this.emitter.emit("error", err instanceof Error ? err : new Error(String(err)));
+            });
         }
     }
 
