@@ -1,7 +1,8 @@
 import type { IncomingMessage, Server as HttpServer } from "node:http";
+import type { Duplex } from "node:stream";
 import WebSocket from "ws";
 import type { BaseClientOptions, NormalizedClientOptions } from "../../BaseClient";
-import type { VoiceEngineHandler } from "./types";
+import type { VoiceEngineCallbacks } from "./types";
 import { VoiceEngineSession } from "./VoiceEngineSession";
 import { VoiceEngineAttachment } from "./VoiceEngineAttachment";
 
@@ -55,15 +56,14 @@ export class VoiceEngineResource {
     attach(
         httpServer: HttpServer,
         path: string,
-        handler: VoiceEngineHandler,
+        handler: VoiceEngineCallbacks,
     ): VoiceEngineAttachment {
         const debug = handler.debug ?? false;
         const log = debug ? (...args: unknown[]) => console.log("[VoiceEngine]", ...args) : () => {};
 
         const wss = new WebSocket.Server({ noServer: true });
-        const attachment = new VoiceEngineAttachment(wss);
 
-        httpServer.on("upgrade", async (req, socket, head) => {
+        const upgradeListener = async (req: IncomingMessage, socket: Duplex, head: Buffer) => {
             const url = new URL(req.url ?? "/", `http://${req.headers.host}`);
             log(`upgrade request: ${req.method} ${url.pathname}`);
 
@@ -83,7 +83,9 @@ export class VoiceEngineResource {
                 log("WebSocket connection established");
                 wss.emit("connection", ws);
             });
-        });
+        };
+
+        httpServer.on("upgrade", upgradeListener);
 
         wss.on("connection", (ws: WebSocket) => {
             log("creating new session");
@@ -92,7 +94,7 @@ export class VoiceEngineResource {
         });
 
         log(`listening for WebSocket upgrades on ${path}`);
-        return attachment;
+        return new VoiceEngineAttachment(wss, httpServer, upgradeListener as (...args: unknown[]) => void);
     }
 
     /**
@@ -121,12 +123,12 @@ export class VoiceEngineResource {
     }
 
     /** @internal */
-    private wireHandler(session: VoiceEngineSession, handler: VoiceEngineHandler): void {
+    private wireHandler(session: VoiceEngineSession, handler: VoiceEngineCallbacks): void {
         const { onInit, onTranscript, onClose, onDisconnect, onError } = handler;
-        if (onInit) session.on("init", (id) => onInit(id, session));
-        if (onTranscript) session.on("user_transcript", (t, s) => onTranscript(t, s, session));
-        if (onClose) session.on("close", () => onClose(session));
-        if (onDisconnect) session.on("disconnected", () => onDisconnect(session));
-        if (onError) session.on("error", (err) => onError(err, session));
+        if (onInit) session.on("init", (id) => onInit.call(session, id, session));
+        if (onTranscript) session.on("user_transcript", (t, s) => onTranscript.call(session, t, s, session));
+        if (onClose) session.on("close", () => onClose.call(session, session));
+        if (onDisconnect) session.on("disconnected", () => onDisconnect.call(session, session));
+        if (onError) session.on("error", (err) => onError.call(session, err, session));
     }
 }

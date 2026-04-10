@@ -10,14 +10,14 @@ export interface InitMessage {
     conversation_id: string;
 }
 
-export interface ConversationMessage {
+export interface TranscriptMessage {
     role: "user" | "agent";
     content: string;
 }
 
 export interface UserTranscriptMessage {
     type: "user_transcript";
-    user_transcript: ConversationMessage[];
+    user_transcript: TranscriptMessage[];
     event_id: number;
 }
 
@@ -58,7 +58,7 @@ export type OutgoingMessage = AgentResponseMessage | PongMessage;
 // ---------------------------------------------------------------------------
 
 export interface VoiceEngineEventMap {
-    user_transcript: [transcript: ConversationMessage[], signal: AbortSignal];
+    user_transcript: [transcript: TranscriptMessage[], signal: AbortSignal];
     init: [conversationId: string];
     close: [];
     error: [error: Error];
@@ -71,7 +71,7 @@ export type VoiceEngineEventName = keyof VoiceEngineEventMap;
 // Handler interface (options-object pattern for attach / Server)
 // ---------------------------------------------------------------------------
 
-export interface VoiceEngineHandler {
+export interface VoiceEngineCallbacks {
     /** Enable debug logging. */
     debug?: boolean;
 
@@ -79,7 +79,7 @@ export interface VoiceEngineHandler {
     onInit?(conversationId: string, session: VoiceEngineSession): void;
 
     /** Fired each time the Voice Engine API sends a user transcript. */
-    onTranscript?(transcript: ConversationMessage[], signal: AbortSignal, session: VoiceEngineSession): void;
+    onTranscript?(transcript: TranscriptMessage[], signal: AbortSignal, session: VoiceEngineSession): void;
 
     /** Fired when ElevenLabs sends a clean close message ending the conversation. */
     onClose?(session: VoiceEngineSession): void;

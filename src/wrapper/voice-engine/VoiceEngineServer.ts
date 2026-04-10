@@ -1,8 +1,8 @@
 import WebSocket from "ws";
-import type { VoiceEngineHandler } from "./types";
+import type { VoiceEngineCallbacks } from "./types";
 import { VoiceEngineSession } from "./VoiceEngineSession";
 
-export interface VoiceEngineServerOptions extends VoiceEngineHandler {
+export interface VoiceEngineServerOptions extends VoiceEngineCallbacks {
     /**
      * Port to listen on. Defaults to 3001.
      */
@@ -76,11 +76,11 @@ export class VoiceEngineServer {
 
     private wireHandler(session: VoiceEngineSession): void {
         const { onInit, onTranscript, onClose, onDisconnect, onError } = this.options;
-        if (onInit) session.on("init", (id) => onInit(id, session));
-        if (onTranscript) session.on("user_transcript", (t, s) => onTranscript(t, s, session));
-        if (onClose) session.on("close", () => onClose(session));
-        if (onDisconnect) session.on("disconnected", () => onDisconnect(session));
-        if (onError) session.on("error", (err) => onError(err, session));
+        if (onInit) session.on("init", (id) => onInit.call(session, id, session));
+        if (onTranscript) session.on("user_transcript", (t, s) => onTranscript.call(session, t, s, session));
+        if (onClose) session.on("close", () => onClose.call(session, session));
+        if (onDisconnect) session.on("disconnected", () => onDisconnect.call(session, session));
+        if (onError) session.on("error", (err) => onError.call(session, err, session));
     }
 
     /**
