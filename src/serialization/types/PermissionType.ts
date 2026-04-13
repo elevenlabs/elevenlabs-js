@@ -50,6 +50,7 @@ export const PermissionType: core.serialization.Schema<serializers.PermissionTyp
         "workspace_members_remove",
         "terms_of_service_accept",
         "audit_log_read",
+        "copy_resources_cross_workspace",
     ]);
 
 export declare namespace PermissionType {
@@ -97,5 +98,6 @@ export declare namespace PermissionType {
         | "workspace_members_invite"
         | "workspace_members_remove"
         | "terms_of_service_accept"
-        | "audit_log_read";
+        | "audit_log_read"
+        | "copy_resources_cross_workspace";
 }

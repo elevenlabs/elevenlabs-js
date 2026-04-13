@@ -143,4 +143,94 @@ describe("KnowledgeBaseClient", () => {
             },
         });
     });
+
+    test("search", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            results: [
+                {
+                    document: {
+                        type: "file",
+                        id: "id",
+                        name: "name",
+                        metadata: { created_at_unix_secs: 1, last_updated_at_unix_secs: 1, size_bytes: 1 },
+                        supported_usages: ["prompt"],
+                        access_info: {
+                            is_creator: true,
+                            creator_name: "John Doe",
+                            creator_email: "john.doe@example.com",
+                            role: "admin",
+                        },
+                        dependent_agents: [
+                            {
+                                type: "available",
+                                id: "id",
+                                name: "name",
+                                created_at_unix_secs: 1,
+                                access_level: "admin",
+                            },
+                        ],
+                    },
+                    search_snippet: [{ value: "value", is_hit: true }],
+                    score: 1.1,
+                },
+            ],
+            next_cursor: "next_cursor",
+        };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/knowledge-base/search")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.knowledgeBase.search({
+            query: "query",
+            pageSize: 1,
+            cursor: "cursor",
+        });
+        expect(response).toEqual({
+            results: [
+                {
+                    document: {
+                        type: "file",
+                        id: "id",
+                        name: "name",
+                        metadata: {
+                            createdAtUnixSecs: 1,
+                            lastUpdatedAtUnixSecs: 1,
+                            sizeBytes: 1,
+                        },
+                        supportedUsages: ["prompt"],
+                        accessInfo: {
+                            isCreator: true,
+                            creatorName: "John Doe",
+                            creatorEmail: "john.doe@example.com",
+                            role: "admin",
+                        },
+                        dependentAgents: [
+                            {
+                                type: "available",
+                                id: "id",
+                                name: "name",
+                                createdAtUnixSecs: 1,
+                                accessLevel: "admin",
+                            },
+                        ],
+                    },
+                    searchSnippet: [
+                        {
+                            value: "value",
+                            isHit: true,
+                        },
+                    ],
+                    score: 1.1,
+                },
+            ],
+            nextCursor: "next_cursor",
+        });
+    });
 });

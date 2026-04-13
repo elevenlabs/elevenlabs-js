@@ -2200,7 +2200,6 @@ Create and auto-convert a podcast project. Currently, the LLM cost is covered by
 
 ```typescript
 await client.studio.createPodcast({
-    safetyIdentifier: "safety-identifier",
     modelId: "eleven_multilingual_v2",
     mode: {
         type: "conversation",
@@ -2451,7 +2450,7 @@ await client.music.stream();
 <dl>
 <dd>
 
-Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature.
+Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature. Price for uploading is the same as the one for song generation. All uploaded content gets inspected for copyright infringement. If copyrighted content is detected, half of the request cost is still charged.
 </dd>
 </dl>
 </dd>
@@ -4971,7 +4970,7 @@ await client.conversationalAi.twilio.outboundCall({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.twilio.<a href="/src/api/resources/conversationalAi/resources/twilio/client/Client.ts">registerCall</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.conversationalAi.twilio.<a href="/src/api/resources/conversationalAi/resources/twilio/client/Client.ts">registerCall</a>({ ...params }) -> string</code></summary>
 <dl>
 <dd>
 
@@ -6967,6 +6966,73 @@ await client.conversationalAi.knowledgeBase.getOrCreateRagIndexes({
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.knowledgeBase.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.KnowledgeBaseContentSearchResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fuzzy text search over knowledge base document content
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.search({
+    query: "query",
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.KnowledgeBaseSearchRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeBaseClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Tools
 <details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ToolsResponseModel</code></summary>
 <dl>
@@ -7546,6 +7612,7 @@ Get all workspace secrets for the user
 ```typescript
 await client.conversationalAi.secrets.list({
     pageSize: 1,
+    dependencyLimit: 1,
     cursor: "cursor"
 });
 
@@ -7767,6 +7834,88 @@ await client.conversationalAi.secrets.update("secret_id", {
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.PatchWorkspaceSecretRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SecretsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">getDependencies</a>(secret_id, resource_type, { ...params }) -> ElevenLabs.GetSecretDependenciesResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get paginated list of resources that depend on a specific secret, filtered by resource type.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.secrets.getDependencies("secret_id", "tools", {
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**secret_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**resource_type:** `ElevenLabs.SecretDependencyResourceType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.SecretsGetDependenciesRequest` 
     
 </dd>
 </dl>
@@ -9239,7 +9388,7 @@ await client.conversationalAi.agents.branches.list("agent_3701k3ttaq12ewp8b7qv5r
 <dl>
 <dd>
 
-Create a new branch from a given version of main branch
+Create a new branch from a given version of any branch
 </dd>
 </dl>
 </dd>
@@ -10463,6 +10612,70 @@ await client.conversationalAi.conversations.files.delete("conversation_id", "fil
 </dl>
 </details>
 
+## ConversationalAi Conversations Topics
+<details><summary><code>client.conversationalAi.conversations.topics.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/topics/client/Client.ts">get</a>(agent_id) -> ElevenLabs.GetAgentTopicsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the latest topic discovery run results for a given agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.topics.get("agent_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the agent
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TopicsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Conversations Analysis
 <details><summary><code>client.conversationalAi.conversations.analysis.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/analysis/client/Client.ts">run</a>(conversation_id) -> ElevenLabs.GetConversationResponseModel</code></summary>
 <dl>
@@ -11201,7 +11414,7 @@ await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getContent</a>(documentation_id) -> void</code></summary>
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getContent</a>(documentation_id) -> string</code></summary>
 <dl>
 <dd>
 
@@ -11228,7 +11441,7 @@ Get the entire content of a document from the knowledge base
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.getContent("21m00Tcm4TlvDq8ikWAM");
+await client.conversationalAi.knowledgeBase.documents.getContent("documentation_id");
 
 ```
 </dd>

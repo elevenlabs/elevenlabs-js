@@ -27,6 +27,7 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gemini-2.5-flash",
     "gemini-3-pro-preview",
     "gemini-3-flash-preview",
+    "gemini-3.1-pro-preview",
     "gemini-3.1-flash-lite-preview",
     "claude-sonnet-4-5",
     "claude-sonnet-4-6",
@@ -40,6 +41,8 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "custom-llm",
     "qwen3-4b",
     "qwen3-30b-a3b",
+    "qwen35-35b-a3b",
+    "qwen35-397b-a17b",
     "gpt-oss-20b",
     "gpt-oss-120b",
     "glm-45-air-fp8",
@@ -106,6 +109,7 @@ export declare namespace Llm {
         | "gemini-2.5-flash"
         | "gemini-3-pro-preview"
         | "gemini-3-flash-preview"
+        | "gemini-3.1-pro-preview"
         | "gemini-3.1-flash-lite-preview"
         | "claude-sonnet-4-5"
         | "claude-sonnet-4-6"
@@ -119,6 +123,8 @@ export declare namespace Llm {
         | "custom-llm"
         | "qwen3-4b"
         | "qwen3-30b-a3b"
+        | "qwen35-35b-a3b"
+        | "qwen35-397b-a17b"
         | "gpt-oss-20b"
         | "gpt-oss-120b"
         | "glm-45-air-fp8"

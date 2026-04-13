@@ -38,12 +38,12 @@ describe("SecretsClient", () => {
                 },
             ],
             next_cursor: "next_cursor",
-            has_more: true,
         };
         server.mockEndpoint().get("/v1/convai/secrets").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.conversationalAi.secrets.list({
             pageSize: 1,
+            dependencyLimit: 1,
             cursor: "cursor",
         });
         expect(response).toEqual({
@@ -76,7 +76,6 @@ describe("SecretsClient", () => {
                 },
             ],
             nextCursor: "next_cursor",
-            hasMore: true,
         });
     });
 
@@ -137,6 +136,42 @@ describe("SecretsClient", () => {
             type: "stored",
             secretId: "secret_id",
             name: "name",
+        });
+    });
+
+    test("get_dependencies", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            dependencies: [
+                { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
+            ],
+            next_cursor: "next_cursor",
+        };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/secrets/secret_id/dependencies/tools")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.secrets.getDependencies("secret_id", "tools", {
+            pageSize: 1,
+            cursor: "cursor",
+        });
+        expect(response).toEqual({
+            dependencies: [
+                {
+                    type: "available",
+                    id: "id",
+                    name: "name",
+                    createdAtUnixSecs: 1,
+                    accessLevel: "admin",
+                },
+            ],
+            nextCursor: "next_cursor",
         });
     });
 });

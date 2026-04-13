@@ -9,10 +9,15 @@ export const ModelRatesResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.ModelRatesResponseModel
 > = core.serialization.object({
     characterCostMultiplier: core.serialization.property("character_cost_multiplier", core.serialization.number()),
+    costDiscountMultiplier: core.serialization.property(
+        "cost_discount_multiplier",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace ModelRatesResponseModel {
     export interface Raw {
         character_cost_multiplier: number;
+        cost_discount_multiplier?: number | null;
     }
 }

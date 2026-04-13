@@ -7,6 +7,7 @@ export interface ConversationHistoryTranscriptOtherToolsResultCommonModel {
     toolName: string;
     resultValue: string;
     isError: boolean;
+    isBlocked?: boolean;
     toolHasBeenCalled: boolean;
     toolLatencySecs?: number;
     errorType?: string;

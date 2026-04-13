@@ -16,12 +16,13 @@ export const DirectPublishingReadResponseModelGenreItem: core.serialization.Sche
     "Dystopia",
     "Business and Economics",
     "Technology",
-    "Detective and Crime",
+    "Christian & Inspirational",
     "Horror",
     "Biography and Memoir",
     "Education and Learning",
     "History",
     "Children's Literature",
+    "Young Adult",
     "Fairy Tales and Folklore",
     "Fan Fiction",
     "General Fiction",
@@ -39,7 +40,6 @@ export const DirectPublishingReadResponseModelGenreItem: core.serialization.Sche
     "Travel",
     "True Crime",
     "Other",
-    "Adult Romance",
 ]);
 
 export declare namespace DirectPublishingReadResponseModelGenreItem {
@@ -52,12 +52,13 @@ export declare namespace DirectPublishingReadResponseModelGenreItem {
         | "Dystopia"
         | "Business and Economics"
         | "Technology"
-        | "Detective and Crime"
+        | "Christian & Inspirational"
         | "Horror"
         | "Biography and Memoir"
         | "Education and Learning"
         | "History"
         | "Children's Literature"
+        | "Young Adult"
         | "Fairy Tales and Folklore"
         | "Fan Fiction"
         | "General Fiction"
@@ -74,6 +75,5 @@ export declare namespace DirectPublishingReadResponseModelGenreItem {
         | "Spirituality and Religion"
         | "Travel"
         | "True Crime"
-        | "Other"
-        | "Adult Romance";
+        | "Other";
 }

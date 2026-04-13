@@ -283,4 +283,107 @@ export class KnowledgeBaseClient {
             "/v1/convai/knowledge-base/rag-index",
         );
     }
+
+    /**
+     * Fuzzy text search over knowledge base document content
+     *
+     * @param {ElevenLabs.conversationalAi.KnowledgeBaseSearchRequest} request
+     * @param {KnowledgeBaseClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.knowledgeBase.search({
+     *         query: "query",
+     *         pageSize: 1,
+     *         cursor: "cursor"
+     *     })
+     */
+    public search(
+        request: ElevenLabs.conversationalAi.KnowledgeBaseSearchRequest,
+        requestOptions?: KnowledgeBaseClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.KnowledgeBaseContentSearchResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__search(request, requestOptions));
+    }
+
+    private async __search(
+        request: ElevenLabs.conversationalAi.KnowledgeBaseSearchRequest,
+        requestOptions?: KnowledgeBaseClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.KnowledgeBaseContentSearchResponseModel>> {
+        const { query, pageSize, types, cursor } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        _queryParams.query = query;
+        if (pageSize != null) {
+            _queryParams.page_size = pageSize.toString();
+        }
+
+        if (types != null) {
+            if (Array.isArray(types)) {
+                _queryParams.types = types.map((item) =>
+                    serializers.KnowledgeBaseDocumentType.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
+                );
+            } else {
+                _queryParams.types = serializers.KnowledgeBaseDocumentType.jsonOrThrow(types, {
+                    unrecognizedObjectKeys: "strip",
+                });
+            }
+        }
+
+        if (cursor != null) {
+            _queryParams.cursor = cursor;
+        }
+
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/knowledge-base/search",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.KnowledgeBaseContentSearchResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/knowledge-base/search",
+        );
+    }
 }

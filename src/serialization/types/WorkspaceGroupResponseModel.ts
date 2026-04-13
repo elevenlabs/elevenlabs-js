@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { WorkspaceGroupPermission } from "./WorkspaceGroupPermission";
+import { WorkspaceGroupResponseModelGroupPvcLimit } from "./WorkspaceGroupResponseModelGroupPvcLimit";
 import { WorkspaceGroupResponseModelGroupUsageLimit } from "./WorkspaceGroupResponseModelGroupUsageLimit";
 
 export const WorkspaceGroupResponseModel: core.serialization.ObjectSchema<
@@ -18,6 +19,7 @@ export const WorkspaceGroupResponseModel: core.serialization.ObjectSchema<
         "group_usage_limit",
         WorkspaceGroupResponseModelGroupUsageLimit.optional(),
     ),
+    groupPvcLimit: core.serialization.property("group_pvc_limit", WorkspaceGroupResponseModelGroupPvcLimit.optional()),
     characterCount: core.serialization.property("character_count", core.serialization.number().optional()),
     scimExternalId: core.serialization.property("scim_external_id", core.serialization.string().optional()),
 });
@@ -29,6 +31,7 @@ export declare namespace WorkspaceGroupResponseModel {
         members: string[];
         permissions?: WorkspaceGroupPermission.Raw[] | null;
         group_usage_limit?: WorkspaceGroupResponseModelGroupUsageLimit.Raw | null;
+        group_pvc_limit?: WorkspaceGroupResponseModelGroupPvcLimit.Raw | null;
         character_count?: number | null;
         scim_external_id?: string | null;
     }

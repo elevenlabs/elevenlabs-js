@@ -34,6 +34,7 @@ export class SecretsClient {
      * @example
      *     await client.conversationalAi.secrets.list({
      *         pageSize: 1,
+     *         dependencyLimit: 1,
      *         cursor: "cursor"
      *     })
      */
@@ -48,10 +49,14 @@ export class SecretsClient {
         request: ElevenLabs.conversationalAi.SecretsListRequest = {},
         requestOptions?: SecretsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetWorkspaceSecretsResponseModel>> {
-        const { pageSize, cursor } = request;
+        const { pageSize, dependencyLimit, cursor } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (pageSize != null) {
             _queryParams.page_size = pageSize.toString();
+        }
+
+        if (dependencyLimit != null) {
+            _queryParams.dependency_limit = dependencyLimit.toString();
         }
 
         if (cursor != null) {
@@ -341,6 +346,103 @@ export class SecretsClient {
             _response.rawResponse,
             "PATCH",
             "/v1/convai/secrets/{secret_id}",
+        );
+    }
+
+    /**
+     * Get paginated list of resources that depend on a specific secret, filtered by resource type.
+     *
+     * @param {string} secret_id
+     * @param {ElevenLabs.SecretDependencyResourceType} resource_type
+     * @param {ElevenLabs.conversationalAi.SecretsGetDependenciesRequest} request
+     * @param {SecretsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.secrets.getDependencies("secret_id", "tools", {
+     *         pageSize: 1,
+     *         cursor: "cursor"
+     *     })
+     */
+    public getDependencies(
+        secret_id: string,
+        resource_type: ElevenLabs.SecretDependencyResourceType,
+        request: ElevenLabs.conversationalAi.SecretsGetDependenciesRequest = {},
+        requestOptions?: SecretsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetSecretDependenciesResponseModel> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__getDependencies(secret_id, resource_type, request, requestOptions),
+        );
+    }
+
+    private async __getDependencies(
+        secret_id: string,
+        resource_type: ElevenLabs.SecretDependencyResourceType,
+        request: ElevenLabs.conversationalAi.SecretsGetDependenciesRequest = {},
+        requestOptions?: SecretsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetSecretDependenciesResponseModel>> {
+        const { pageSize, cursor } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (pageSize != null) {
+            _queryParams.page_size = pageSize.toString();
+        }
+
+        if (cursor != null) {
+            _queryParams.cursor = cursor;
+        }
+
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/secrets/${core.url.encodePathParam(secret_id)}/dependencies/${core.url.encodePathParam(serializers.SecretDependencyResourceType.jsonOrThrow(resource_type))}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetSecretDependenciesResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/secrets/{secret_id}/dependencies/{resource_type}",
         );
     }
 }

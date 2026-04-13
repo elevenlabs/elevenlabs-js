@@ -1,6 +1,7 @@
 # Specify files that shouldn't be modified by Fern
 
 README.md
+AGENTS.md
 assets/
 
 tests/custom/

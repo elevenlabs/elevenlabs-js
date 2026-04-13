@@ -6,6 +6,4 @@ export interface GetWorkspaceSecretsResponseModel {
     secrets: ElevenLabs.ConvAiWorkspaceStoredSecretConfig[];
     /** Cursor for fetching the next page of secrets */
     nextCursor?: string;
-    /** Whether there are more secrets to fetch */
-    hasMore?: boolean;
 }

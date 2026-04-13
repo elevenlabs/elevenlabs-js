@@ -7,4 +7,5 @@
 export interface DependentUnknownAgentIdentifier {
     /** If the agent is a transitive dependent, contains IDs of the resources that the agent depends on directly. */
     referencedResourceIds?: string[];
+    id: string;
 }

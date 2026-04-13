@@ -12,10 +12,12 @@ export const DependentUnknownAgentIdentifier: core.serialization.ObjectSchema<
         "referenced_resource_ids",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    id: core.serialization.string(),
 });
 
 export declare namespace DependentUnknownAgentIdentifier {
     export interface Raw {
         referenced_resource_ids?: string[] | null;
+        id: string;
     }
 }

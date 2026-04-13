@@ -31,5 +31,6 @@ export const WorkspaceGroupPermission = {
     WorkspaceMembersRemove: "workspace_members_remove",
     TermsOfServiceAccept: "terms_of_service_accept",
     AuditLogRead: "audit_log_read",
+    CopyResourcesCrossWorkspace: "copy_resources_cross_workspace",
 } as const;
 export type WorkspaceGroupPermission = (typeof WorkspaceGroupPermission)[keyof typeof WorkspaceGroupPermission];

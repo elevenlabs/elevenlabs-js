@@ -39,7 +39,6 @@ export class StudioClient {
      *
      * @example
      *     await client.studio.createPodcast({
-     *         safetyIdentifier: "safety-identifier",
      *         modelId: "eleven_multilingual_v2",
      *         mode: {
      *             type: "conversation",

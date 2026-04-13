@@ -19,6 +19,10 @@ export const TurnConfig: core.serialization.ObjectSchema<serializers.TurnConfig.
         turnEagerness: core.serialization.property("turn_eagerness", TurnEagerness.optional()),
         spellingPatience: core.serialization.property("spelling_patience", SpellingPatience.optional()),
         speculativeTurn: core.serialization.property("speculative_turn", core.serialization.boolean().optional()),
+        retranscribeOnTurnTimeout: core.serialization.property(
+            "retranscribe_on_turn_timeout",
+            core.serialization.boolean().optional(),
+        ),
     });
 
 export declare namespace TurnConfig {
@@ -30,5 +34,6 @@ export declare namespace TurnConfig {
         turn_eagerness?: TurnEagerness.Raw | null;
         spelling_patience?: SpellingPatience.Raw | null;
         speculative_turn?: boolean | null;
+        retranscribe_on_turn_timeout?: boolean | null;
     }
 }

@@ -4,12 +4,15 @@
  * @example
  *     {
  *         pageSize: 1,
+ *         dependencyLimit: 1,
  *         cursor: "cursor"
  *     }
  */
 export interface SecretsListRequest {
     /** How many documents to return at maximum. Can not exceed 100. If not provided, returns all secrets. */
     pageSize?: number;
+    /** Maximum number of dependent resources (tools, agents, phone numbers) to return per secret. Can not exceed 100. */
+    dependencyLimit?: number;
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
 }

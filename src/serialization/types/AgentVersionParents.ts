@@ -12,6 +12,7 @@ export const AgentVersionParents: core.serialization.ObjectSchema<
     outOfBranchParentId: core.serialization.property("out_of_branch_parent_id", core.serialization.string().optional()),
     mergedIntoBranchId: core.serialization.property("merged_into_branch_id", core.serialization.string().optional()),
     mergedFromBranchId: core.serialization.property("merged_from_branch_id", core.serialization.string().optional()),
+    mergedFromVersionId: core.serialization.property("merged_from_version_id", core.serialization.string().optional()),
 });
 
 export declare namespace AgentVersionParents {
@@ -20,5 +21,6 @@ export declare namespace AgentVersionParents {
         out_of_branch_parent_id?: string | null;
         merged_into_branch_id?: string | null;
         merged_from_branch_id?: string | null;
+        merged_from_version_id?: string | null;
     }
 }
