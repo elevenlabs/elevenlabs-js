@@ -23,6 +23,7 @@ export const AgentBranchSummary: core.serialization.ObjectSchema<
         "current_live_percentage",
         core.serialization.number().optional(),
     ),
+    parentBranchId: core.serialization.property("parent_branch_id", core.serialization.string().optional()),
     draftExists: core.serialization.property("draft_exists", core.serialization.boolean().optional()),
 });
 
@@ -38,6 +39,7 @@ export declare namespace AgentBranchSummary {
         protection_status?: BranchProtectionStatus.Raw | null;
         access_info?: ResourceAccessInfo.Raw | null;
         current_live_percentage?: number | null;
+        parent_branch_id?: string | null;
         draft_exists?: boolean | null;
     }
 }

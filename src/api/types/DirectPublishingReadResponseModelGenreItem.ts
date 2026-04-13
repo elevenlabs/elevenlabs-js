@@ -9,12 +9,13 @@ export const DirectPublishingReadResponseModelGenreItem = {
     Dystopia: "Dystopia",
     BusinessAndEconomics: "Business and Economics",
     Technology: "Technology",
-    DetectiveAndCrime: "Detective and Crime",
+    ChristianInspirational: "Christian & Inspirational",
     Horror: "Horror",
     BiographyAndMemoir: "Biography and Memoir",
     EducationAndLearning: "Education and Learning",
     History: "History",
     ChildrensLiterature: "Children's Literature",
+    YoungAdult: "Young Adult",
     FairyTalesAndFolklore: "Fairy Tales and Folklore",
     FanFiction: "Fan Fiction",
     GeneralFiction: "General Fiction",
@@ -32,7 +33,6 @@ export const DirectPublishingReadResponseModelGenreItem = {
     Travel: "Travel",
     TrueCrime: "True Crime",
     Other: "Other",
-    AdultRomance: "Adult Romance",
 } as const;
 export type DirectPublishingReadResponseModelGenreItem =
     (typeof DirectPublishingReadResponseModelGenreItem)[keyof typeof DirectPublishingReadResponseModelGenreItem];

@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConvAiStoredSecretDependenciesAgentsItem } from "./ConvAiStoredSecretDependenciesAgentsItem";
+import { ConvAiStoredSecretDependenciesMcpServersItem } from "./ConvAiStoredSecretDependenciesMcpServersItem";
 import { ConvAiStoredSecretDependenciesToolsItem } from "./ConvAiStoredSecretDependenciesToolsItem";
 import { DependentPhoneNumberIdentifier } from "./DependentPhoneNumberIdentifier";
 import { SecretDependencyType } from "./SecretDependencyType";
@@ -13,19 +14,30 @@ export const ConvAiStoredSecretDependencies: core.serialization.ObjectSchema<
     ElevenLabs.ConvAiStoredSecretDependencies
 > = core.serialization.object({
     tools: core.serialization.list(ConvAiStoredSecretDependenciesToolsItem),
+    toolsHasMore: core.serialization.property("tools_has_more", core.serialization.boolean().optional()),
     agents: core.serialization.list(ConvAiStoredSecretDependenciesAgentsItem),
-    others: core.serialization.list(SecretDependencyType),
+    agentsHasMore: core.serialization.property("agents_has_more", core.serialization.boolean().optional()),
     phoneNumbers: core.serialization.property(
         "phone_numbers",
         core.serialization.list(DependentPhoneNumberIdentifier).optional(),
     ),
+    phoneNumbersHasMore: core.serialization.property("phone_numbers_has_more", core.serialization.boolean().optional()),
+    mcpServers: core.serialization.property(
+        "mcp_servers",
+        core.serialization.list(ConvAiStoredSecretDependenciesMcpServersItem).optional(),
+    ),
+    others: core.serialization.list(SecretDependencyType),
 });
 
 export declare namespace ConvAiStoredSecretDependencies {
     export interface Raw {
         tools: ConvAiStoredSecretDependenciesToolsItem.Raw[];
+        tools_has_more?: boolean | null;
         agents: ConvAiStoredSecretDependenciesAgentsItem.Raw[];
-        others: SecretDependencyType.Raw[];
+        agents_has_more?: boolean | null;
         phone_numbers?: DependentPhoneNumberIdentifier.Raw[] | null;
+        phone_numbers_has_more?: boolean | null;
+        mcp_servers?: ConvAiStoredSecretDependenciesMcpServersItem.Raw[] | null;
+        others: SecretDependencyType.Raw[];
     }
 }

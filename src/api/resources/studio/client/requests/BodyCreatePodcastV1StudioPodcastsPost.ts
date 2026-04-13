@@ -5,7 +5,6 @@ import type * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
- *         safetyIdentifier: "safety-identifier",
  *         modelId: "eleven_multilingual_v2",
  *         mode: {
  *             type: "conversation",

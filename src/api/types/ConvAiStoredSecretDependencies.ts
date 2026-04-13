@@ -4,7 +4,14 @@ import type * as ElevenLabs from "../index";
 
 export interface ConvAiStoredSecretDependencies {
     tools: ElevenLabs.ConvAiStoredSecretDependenciesToolsItem[];
+    /** Whether there are more tool dependents beyond the returned preview */
+    toolsHasMore?: boolean;
     agents: ElevenLabs.ConvAiStoredSecretDependenciesAgentsItem[];
-    others: ElevenLabs.SecretDependencyType[];
+    /** Whether there are more agent dependents beyond the returned preview */
+    agentsHasMore?: boolean;
     phoneNumbers?: ElevenLabs.DependentPhoneNumberIdentifier[];
+    /** Whether there are more phone number dependents beyond the returned preview */
+    phoneNumbersHasMore?: boolean;
+    mcpServers?: ElevenLabs.ConvAiStoredSecretDependenciesMcpServersItem[];
+    others: ElevenLabs.SecretDependencyType[];
 }

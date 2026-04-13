@@ -12,10 +12,12 @@ export const BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourc
     >
 > = core.serialization.object({
     archiveSourceBranch: core.serialization.property("archive_source_branch", core.serialization.boolean().optional()),
+    force: core.serialization.boolean().optional(),
 });
 
 export declare namespace BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost {
     export interface Raw {
         archive_source_branch?: boolean | null;
+        force?: boolean | null;
     }
 }

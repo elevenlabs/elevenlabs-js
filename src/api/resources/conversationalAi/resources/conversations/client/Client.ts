@@ -14,6 +14,7 @@ import { AudioClient } from "../resources/audio/client/Client";
 import { FeedbackClient } from "../resources/feedback/client/Client";
 import { FilesClient } from "../resources/files/client/Client";
 import { MessagesClient } from "../resources/messages/client/Client";
+import { TopicsClient } from "../resources/topics/client/Client";
 
 export declare namespace ConversationsClient {
     export type Options = BaseClientOptions;
@@ -27,6 +28,7 @@ export class ConversationsClient {
     protected _feedback: FeedbackClient | undefined;
     protected _messages: MessagesClient | undefined;
     protected _files: FilesClient | undefined;
+    protected _topics: TopicsClient | undefined;
     protected _analysis: AnalysisClient | undefined;
 
     constructor(options: ConversationsClient.Options = {}) {
@@ -47,6 +49,10 @@ export class ConversationsClient {
 
     public get files(): FilesClient {
         return (this._files ??= new FilesClient(this._options));
+    }
+
+    public get topics(): TopicsClient {
+        return (this._topics ??= new TopicsClient(this._options));
     }
 
     public get analysis(): AnalysisClient {
@@ -302,6 +308,7 @@ export class ConversationsClient {
             search,
             conversationInitiationSource,
             branchId,
+            topicIds,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
@@ -422,6 +429,14 @@ export class ConversationsClient {
 
         if (branchId != null) {
             _queryParams.branch_id = branchId;
+        }
+
+        if (topicIds != null) {
+            if (Array.isArray(topicIds)) {
+                _queryParams.topic_ids = topicIds.map((item) => item);
+            } else {
+                _queryParams.topic_ids = topicIds;
+            }
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

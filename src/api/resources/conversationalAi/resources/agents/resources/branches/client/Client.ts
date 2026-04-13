@@ -116,7 +116,7 @@ export class BranchesClient {
     }
 
     /**
-     * Create a new branch from a given version of main branch
+     * Create a new branch from a given version of any branch
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {ElevenLabs.conversationalAi.agents.BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost} request

@@ -2,7 +2,6 @@
 
 export const ChatSourceMedium = {
     Audio: "audio",
-    Dtmf: "dtmf",
     Text: "text",
     Image: "image",
     File: "file",

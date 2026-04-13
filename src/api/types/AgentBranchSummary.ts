@@ -15,6 +15,8 @@ export interface AgentBranchSummary {
     accessInfo?: ElevenLabs.ResourceAccessInfo;
     /** Percentage of traffic live on the branch */
     currentLivePercentage?: number;
+    /** ID of the parent branch */
+    parentBranchId?: string;
     /** Whether a draft exists for the branch */
     draftExists?: boolean;
 }

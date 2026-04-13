@@ -67,4 +67,6 @@ export interface ConversationsListRequest {
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
     /** Filter conversations by branch ID. */
     branchId?: string;
+    /** Filter conversations by topic IDs assigned during topic discovery. */
+    topicIds?: string | string[];
 }

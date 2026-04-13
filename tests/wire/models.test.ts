@@ -26,7 +26,7 @@ describe("ModelsClient", () => {
                 max_characters_request_subscribed_user: 5000,
                 maximum_text_length_per_request: 1000000,
                 languages: [{ language_id: "en", name: "English" }],
-                model_rates: { character_cost_multiplier: 1 },
+                model_rates: { character_cost_multiplier: 1, cost_discount_multiplier: 1 },
                 concurrency_group: "standard_eleven_multilingual_v2",
             },
         ];
@@ -58,6 +58,7 @@ describe("ModelsClient", () => {
                 ],
                 modelRates: {
                     characterCostMultiplier: 1,
+                    costDiscountMultiplier: 1,
                 },
                 concurrencyGroup: "standard_eleven_multilingual_v2",
             },

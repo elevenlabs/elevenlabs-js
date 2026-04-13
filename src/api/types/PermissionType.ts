@@ -45,5 +45,6 @@ export const PermissionType = {
     WorkspaceMembersRemove: "workspace_members_remove",
     TermsOfServiceAccept: "terms_of_service_accept",
     AuditLogRead: "audit_log_read",
+    CopyResourcesCrossWorkspace: "copy_resources_cross_workspace",
 } as const;
 export type PermissionType = (typeof PermissionType)[keyof typeof PermissionType];

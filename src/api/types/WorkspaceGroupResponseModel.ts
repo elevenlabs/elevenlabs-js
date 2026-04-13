@@ -8,6 +8,7 @@ export interface WorkspaceGroupResponseModel {
     members: string[];
     permissions?: ElevenLabs.WorkspaceGroupPermission[];
     groupUsageLimit?: ElevenLabs.WorkspaceGroupResponseModelGroupUsageLimit;
+    groupPvcLimit?: ElevenLabs.WorkspaceGroupResponseModelGroupPvcLimit;
     characterCount?: number;
     scimExternalId?: string;
 }

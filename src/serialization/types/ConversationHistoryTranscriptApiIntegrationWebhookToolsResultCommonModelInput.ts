@@ -13,6 +13,7 @@ export const ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommon
     toolName: core.serialization.property("tool_name", core.serialization.string()),
     resultValue: core.serialization.property("result_value", core.serialization.string()),
     isError: core.serialization.property("is_error", core.serialization.boolean()),
+    isBlocked: core.serialization.property("is_blocked", core.serialization.boolean().optional()),
     toolHasBeenCalled: core.serialization.property("tool_has_been_called", core.serialization.boolean()),
     toolLatencySecs: core.serialization.property("tool_latency_secs", core.serialization.number().optional()),
     errorType: core.serialization.property("error_type", core.serialization.string().optional()),
@@ -36,6 +37,7 @@ export declare namespace ConversationHistoryTranscriptApiIntegrationWebhookTools
         tool_name: string;
         result_value: string;
         is_error: boolean;
+        is_blocked?: boolean | null;
         tool_has_been_called: boolean;
         tool_latency_secs?: number | null;
         error_type?: string | null;

@@ -3,4 +3,6 @@
 export interface ModelRatesResponseModel {
     /** The cost multiplier for characters. */
     characterCostMultiplier: number;
+    /** Discount multiplier applied to cost estimates. Defaults to 1.0 (no discount). */
+    costDiscountMultiplier?: number;
 }

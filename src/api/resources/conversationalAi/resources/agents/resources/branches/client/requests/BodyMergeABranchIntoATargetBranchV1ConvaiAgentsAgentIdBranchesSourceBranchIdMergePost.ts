@@ -7,8 +7,10 @@
  *     }
  */
 export interface BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost {
-    /** The ID of the target branch to merge into (must be the main branch). */
+    /** The ID of the target branch to merge into. */
     targetBranchId: string;
     /** Whether to archive the source branch after merging */
     archiveSourceBranch?: boolean;
+    /** Force source branch changes onto the target, overriding timestamp-based conflict resolution */
+    force?: boolean;
 }
