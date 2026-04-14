@@ -1,15 +1,15 @@
 import WebSocket from "ws";
-import type { VoiceEngineCallbacks } from "./types";
-import { VoiceEngineSession } from "./VoiceEngineSession";
+import type { SpeechEngineCallbacks } from "./types";
+import { SpeechEngineSession } from "./SpeechEngineSession";
 
-export interface VoiceEngineServerOptions extends VoiceEngineCallbacks {
+export interface SpeechEngineServerOptions extends SpeechEngineCallbacks {
     /**
      * Port to listen on. Defaults to 3001.
      */
     port?: number;
 
     /**
-     * The ID of the voice engine this server handles connections for.
+     * The ID of the speech engine this server handles connections for.
      * Populated automatically when created via `engine.listen()`.
      * Will be used for connection auth in a future release.
      */
@@ -17,8 +17,8 @@ export interface VoiceEngineServerOptions extends VoiceEngineCallbacks {
 }
 
 /**
- * Standalone WebSocket server that produces `VoiceEngineSession` instances for
- * each incoming connection from the ElevenLabs Voice Engine API.
+ * Standalone WebSocket server that produces `SpeechEngineSession` instances for
+ * each incoming connection from the ElevenLabs Speech Engine API.
  *
  * For integration with an existing HTTP server (e.g. Express, Next.js), manage
  * the WebSocket upgrade yourself and use `handleConnection` to wrap individual
@@ -33,28 +33,28 @@ export interface VoiceEngineServerOptions extends VoiceEngineCallbacks {
  * });
  *
  * wss.on("connection", (ws) => {
- *     const session = new VoiceEngine.Session(ws);
- *     session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
+ *     const session = new SpeechEngine.Session(ws);
+ *     session.on(SpeechEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
  *         session.sendResponse(await llm.generate(transcript, { signal }));
  *     });
  * });
  * ```
  */
-export class VoiceEngineServer {
+export class SpeechEngineServer {
     private wss: WebSocket.Server | null = null;
-    private options: VoiceEngineServerOptions;
+    private options: SpeechEngineServerOptions;
 
-    constructor(options: VoiceEngineServerOptions) {
+    constructor(options: SpeechEngineServerOptions) {
         this.options = options;
     }
 
     /**
-     * Create a `VoiceEngineSession` from an existing WebSocket. Use this
+     * Create a `SpeechEngineSession` from an existing WebSocket. Use this
      * when you manage your own WebSocket server and want to wrap individual
      * connections.
      */
-    handleConnection(ws: WebSocket): VoiceEngineSession {
-        const session = new VoiceEngineSession(ws, { debug: this.options.debug });
+    handleConnection(ws: WebSocket): SpeechEngineSession {
+        const session = new SpeechEngineSession(ws, { debug: this.options.debug });
         this.wireHandler(session);
         return session;
     }
@@ -74,7 +74,7 @@ export class VoiceEngineServer {
         });
     }
 
-    private wireHandler(session: VoiceEngineSession): void {
+    private wireHandler(session: SpeechEngineSession): void {
         const { onInit, onTranscript, onClose, onDisconnect, onError } = this.options;
         if (onInit) session.on("init", (id) => onInit.call(session, id, session));
         if (onTranscript) session.on("user_transcript", (t, s) => onTranscript.call(session, t, s, session));

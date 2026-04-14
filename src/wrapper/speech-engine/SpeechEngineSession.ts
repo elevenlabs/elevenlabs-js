@@ -2,13 +2,13 @@ import { EventEmitter } from "node:events";
 import WebSocket from "ws";
 import type {
     IncomingMessage,
-    VoiceEngineEventMap,
-    VoiceEngineEventName,
+    SpeechEngineEventMap,
+    SpeechEngineEventName,
     WebSocketLike,
 } from "./types";
 
 /**
- * Wraps a WebSocket connection from the ElevenLabs Voice Engine API into a
+ * Wraps a WebSocket connection from the ElevenLabs Speech Engine API into a
  * typed, event-driven session.
  *
  * The ElevenLabs API connects to the developer's server via WebSocket. Each
@@ -19,19 +19,19 @@ import type {
  *
  * @example
  * ```typescript
- * import { VoiceEngine } from "@elevenlabs/elevenlabs-js";
+ * import { SpeechEngine } from "@elevenlabs/elevenlabs-js";
  *
  * wss.on("connection", (ws) => {
- *     const session = new VoiceEngine.Session(ws);
+ *     const session = new SpeechEngine.Session(ws);
  *
- *     session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
+ *     session.on(SpeechEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
  *         const response = await llm.generate(transcript, { signal });
  *         session.sendResponse(response);
  *     });
  * });
  * ```
  */
-export class VoiceEngineSession {
+export class SpeechEngineSession {
     private ws: WebSocketLike;
     private emitter = new EventEmitter();
     private currentAbortController: AbortController | null = null;
@@ -42,7 +42,7 @@ export class VoiceEngineSession {
 
     constructor(ws: WebSocketLike, options?: { debug?: boolean }) {
         this.ws = ws;
-        this.log = options?.debug ? (...args: unknown[]) => console.log("[VoiceEngine]", ...args) : () => {};
+        this.log = options?.debug ? (...args: unknown[]) => console.log("[SpeechEngine]", ...args) : () => {};
         this.setupWebSocket();
     }
 
@@ -50,25 +50,25 @@ export class VoiceEngineSession {
     // Event emitter interface
     // -----------------------------------------------------------------------
 
-    on<E extends VoiceEngineEventName>(
+    on<E extends SpeechEngineEventName>(
         event: E,
-        listener: (...args: VoiceEngineEventMap[E]) => void,
+        listener: (...args: SpeechEngineEventMap[E]) => void,
     ): this {
         this.emitter.on(event, listener as (...args: any[]) => void);
         return this;
     }
 
-    off<E extends VoiceEngineEventName>(
+    off<E extends SpeechEngineEventName>(
         event: E,
-        listener: (...args: VoiceEngineEventMap[E]) => void,
+        listener: (...args: SpeechEngineEventMap[E]) => void,
     ): this {
         this.emitter.off(event, listener as (...args: any[]) => void);
         return this;
     }
 
-    once<E extends VoiceEngineEventName>(
+    once<E extends SpeechEngineEventName>(
         event: E,
-        listener: (...args: VoiceEngineEventMap[E]) => void,
+        listener: (...args: SpeechEngineEventMap[E]) => void,
     ): this {
         this.emitter.once(event, listener as (...args: any[]) => void);
         return this;
@@ -79,7 +79,7 @@ export class VoiceEngineSession {
     // -----------------------------------------------------------------------
 
     /**
-     * Send an LLM response back to the Voice Engine API for TTS synthesis.
+     * Send an LLM response back to the Speech Engine API for TTS synthesis.
      *
      * Accepts a complete string, an `AsyncIterable<string>` for streaming
      * token-by-token responses, or an LLM stream that yields event objects
@@ -113,7 +113,7 @@ export class VoiceEngineSession {
     }
 
     /**
-     * The conversation ID assigned by the Voice Engine API, available after
+     * The conversation ID assigned by the Speech Engine API, available after
      * the `init` event.
      */
     get conversationId(): string | undefined {
