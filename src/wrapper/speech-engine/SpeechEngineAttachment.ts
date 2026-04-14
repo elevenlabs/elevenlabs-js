@@ -2,7 +2,7 @@
  * Returned by `engine.attach()`. Call `.close()` to stop accepting connections
  * without affecting the HTTP server.
  */
-export class VoiceEngineAttachment {
+export class SpeechEngineAttachment {
     private wss: { close(cb?: (err?: Error) => void): void };
     private httpServer: { removeListener(event: string, listener: (...args: unknown[]) => void): void } | null;
     private upgradeListener: ((...args: unknown[]) => void) | null;

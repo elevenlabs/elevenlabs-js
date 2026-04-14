@@ -1,13 +1,13 @@
 import http from "node:http";
 import WebSocket from "ws";
 import { normalizeClientOptions } from "../../../src/BaseClient";
-import { VoiceEngineResource } from "../../../src/wrapper/voice-engine/VoiceEngineResource";
-import { VoiceEngineAttachment } from "../../../src/wrapper/voice-engine/VoiceEngineAttachment";
+import { SpeechEngineResource } from "../../../src/wrapper/speech-engine/SpeechEngineResource";
+import { SpeechEngineAttachment } from "../../../src/wrapper/speech-engine/SpeechEngineAttachment";
 
 const testOptions = normalizeClientOptions({ apiKey: "test-key" });
 
-function makeResource(): VoiceEngineResource {
-    return new VoiceEngineResource("veng_test", testOptions);
+function makeResource(): SpeechEngineResource {
+    return new SpeechEngineResource("seng_test", testOptions);
 }
 
 function getPort(server: http.Server): number {
@@ -25,7 +25,7 @@ async function closeWs(ws: WebSocket): Promise<void> {
     });
 }
 
-describe("VoiceEngineResource", () => {
+describe("SpeechEngineResource", () => {
     const cleanups: Array<() => Promise<void>> = [];
 
     afterEach(async () => {
@@ -43,7 +43,7 @@ describe("VoiceEngineResource", () => {
         return server;
     }
 
-    function trackAttachment(a: VoiceEngineAttachment): VoiceEngineAttachment {
+    function trackAttachment(a: SpeechEngineAttachment): SpeechEngineAttachment {
         cleanups.push(() => a.close().catch(() => {}));
         return a;
     }
@@ -64,9 +64,9 @@ describe("VoiceEngineResource", () => {
 
         const onTranscript = jest.fn();
         const resource = makeResource();
-        trackAttachment(resource.attach(httpServer, "/ve", { onTranscript }));
+        trackAttachment(resource.attach(httpServer, "/se", { onTranscript }));
 
-        const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}/ve`));
+        const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}/se`));
         await new Promise<void>((r, e) => { ws.on("open", r); ws.on("error", e); });
 
         ws.send(JSON.stringify({
@@ -92,7 +92,7 @@ describe("VoiceEngineResource", () => {
 
         const onTranscript = jest.fn();
         const resource = makeResource();
-        trackAttachment(resource.attach(httpServer, "/ve", { onTranscript }));
+        trackAttachment(resource.attach(httpServer, "/se", { onTranscript }));
 
         const ws = new WebSocket(`ws://127.0.0.1:${port}/wrong`);
         ws.on("error", () => {});
@@ -118,9 +118,9 @@ describe("VoiceEngineResource", () => {
 
         const resource = makeResource();
         jest.spyOn(resource, "verifyRequest").mockResolvedValue(false);
-        trackAttachment(resource.attach(httpServer, "/ve", {}));
+        trackAttachment(resource.attach(httpServer, "/se", {}));
 
-        const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}/ve`));
+        const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}/se`));
 
         await new Promise<void>((resolve) => {
             ws.on("error", () => resolve());
@@ -138,14 +138,14 @@ describe("VoiceEngineResource", () => {
         const port = getPort(httpServer);
 
         const resource = makeResource();
-        trackAttachment(resource.attach(httpServer, "/ve", {
+        trackAttachment(resource.attach(httpServer, "/se", {
             onTranscript(transcript, _signal, session) {
                 const last = transcript[transcript.length - 1];
                 session.sendResponse(`echo: ${last.content}`);
             },
         }));
 
-        const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}/ve`));
+        const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}/se`));
         const responsePromise = new Promise<string>((resolve) => {
             ws.on("message", (data) => resolve(data.toString()));
         });
@@ -172,7 +172,7 @@ describe("VoiceEngineResource", () => {
         await new Promise<void>((r) => httpServer.listen(0, r));
 
         const resource = makeResource();
-        const attachment = resource.attach(httpServer, "/ve", {});
+        const attachment = resource.attach(httpServer, "/se", {});
         await attachment.close();
 
         expect(httpServer.listening).toBe(true);

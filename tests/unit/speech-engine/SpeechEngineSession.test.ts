@@ -1,8 +1,8 @@
 import { EventEmitter } from "node:events";
 import WebSocket from "ws";
-import { VoiceEngineSession } from "../../../src/wrapper/voice-engine/VoiceEngineSession";
-import { VoiceEngine } from "../../../src/wrapper/voice-engine";
-import type { TranscriptMessage, WebSocketLike } from "../../../src/wrapper/voice-engine/types";
+import { SpeechEngineSession } from "../../../src/wrapper/speech-engine/SpeechEngineSession";
+import { SpeechEngine } from "../../../src/wrapper/speech-engine";
+import type { TranscriptMessage, WebSocketLike } from "../../../src/wrapper/speech-engine/types";
 
 class MockWebSocket extends EventEmitter implements WebSocketLike {
     readyState: number = WebSocket.OPEN;
@@ -38,13 +38,13 @@ const transcript2: TranscriptMessage[] = [
     { role: "user", content: "large" },
 ];
 
-describe("VoiceEngineSession", () => {
+describe("SpeechEngineSession", () => {
     let ws: MockWebSocket;
-    let session: VoiceEngineSession;
+    let session: SpeechEngineSession;
 
     beforeEach(() => {
         ws = new MockWebSocket();
-        session = new VoiceEngineSession(ws);
+        session = new SpeechEngineSession(ws);
     });
 
     // -----------------------------------------------------------------------
@@ -53,7 +53,7 @@ describe("VoiceEngineSession", () => {
 
     it("emits init with conversation_id", () => {
         const handler = jest.fn();
-        session.on(VoiceEngine.INIT, handler);
+        session.on(SpeechEngine.INIT, handler);
 
         ws.receiveMessage({ type: "init", conversation_id: "conv_42" });
 
@@ -67,7 +67,7 @@ describe("VoiceEngineSession", () => {
 
     it("emits user_transcript with conversation history and abort signal", () => {
         const handler = jest.fn();
-        session.on(VoiceEngine.USER_TRANSCRIPT, handler);
+        session.on(SpeechEngine.USER_TRANSCRIPT, handler);
 
         ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 1 });
 
@@ -80,7 +80,7 @@ describe("VoiceEngineSession", () => {
 
     it("aborts previous transcript signal when a new transcript arrives", () => {
         const signals: AbortSignal[] = [];
-        session.on(VoiceEngine.USER_TRANSCRIPT, (_transcript, signal) => {
+        session.on(SpeechEngine.USER_TRANSCRIPT, (_transcript, signal) => {
             signals.push(signal);
         });
 
@@ -109,10 +109,10 @@ describe("VoiceEngineSession", () => {
 
     it("emits close and aborts current signal on close message", () => {
         const closeHandler = jest.fn();
-        session.on(VoiceEngine.CLOSE, closeHandler);
+        session.on(SpeechEngine.CLOSE, closeHandler);
 
         let capturedSignal: AbortSignal | null = null;
-        session.on(VoiceEngine.USER_TRANSCRIPT, (_transcript, signal) => {
+        session.on(SpeechEngine.USER_TRANSCRIPT, (_transcript, signal) => {
             capturedSignal = signal;
         });
 
@@ -129,7 +129,7 @@ describe("VoiceEngineSession", () => {
 
     it("emits error on protocol error message", () => {
         const handler = jest.fn();
-        session.on(VoiceEngine.ERROR, handler);
+        session.on(SpeechEngine.ERROR, handler);
 
         ws.receiveMessage({ type: "error", message: "something went wrong" });
 
@@ -144,7 +144,7 @@ describe("VoiceEngineSession", () => {
 
     it("emits disconnected when WebSocket closes", () => {
         const handler = jest.fn();
-        session.on(VoiceEngine.DISCONNECTED, handler);
+        session.on(SpeechEngine.DISCONNECTED, handler);
 
         ws.close();
 
@@ -154,7 +154,7 @@ describe("VoiceEngineSession", () => {
 
     it("aborts current signal when WebSocket closes", () => {
         let capturedSignal: AbortSignal | null = null;
-        session.on(VoiceEngine.USER_TRANSCRIPT, (_transcript, signal) => {
+        session.on(SpeechEngine.USER_TRANSCRIPT, (_transcript, signal) => {
             capturedSignal = signal;
         });
 
@@ -166,7 +166,7 @@ describe("VoiceEngineSession", () => {
 
     it("emits error on WebSocket error", () => {
         const handler = jest.fn();
-        session.on(VoiceEngine.ERROR, handler);
+        session.on(SpeechEngine.ERROR, handler);
 
         const err = new Error("connection failed");
         ws.simulateError(err);
@@ -176,7 +176,7 @@ describe("VoiceEngineSession", () => {
 
     it("emits error on malformed JSON", () => {
         const handler = jest.fn();
-        session.on(VoiceEngine.ERROR, handler);
+        session.on(SpeechEngine.ERROR, handler);
 
         ws.emit("message", Buffer.from("not json"));
 
@@ -186,7 +186,7 @@ describe("VoiceEngineSession", () => {
 
     it("silently ignores unknown message types", () => {
         const errorHandler = jest.fn();
-        session.on(VoiceEngine.ERROR, errorHandler);
+        session.on(SpeechEngine.ERROR, errorHandler);
 
         ws.receiveMessage({ type: "unknown_future_event", data: 123 });
 
@@ -396,15 +396,15 @@ describe("VoiceEngineSession", () => {
     // Namespace constants
     // -----------------------------------------------------------------------
 
-    it("VoiceEngine namespace constants match expected event strings", () => {
-        expect(VoiceEngine.INIT).toBe("init");
-        expect(VoiceEngine.USER_TRANSCRIPT).toBe("user_transcript");
-        expect(VoiceEngine.CLOSE).toBe("close");
-        expect(VoiceEngine.ERROR).toBe("error");
-        expect(VoiceEngine.DISCONNECTED).toBe("disconnected");
+    it("SpeechEngine namespace constants match expected event strings", () => {
+        expect(SpeechEngine.INIT).toBe("init");
+        expect(SpeechEngine.USER_TRANSCRIPT).toBe("user_transcript");
+        expect(SpeechEngine.CLOSE).toBe("close");
+        expect(SpeechEngine.ERROR).toBe("error");
+        expect(SpeechEngine.DISCONNECTED).toBe("disconnected");
     });
 
-    it("VoiceEngine.Session is the VoiceEngineSession class", () => {
-        expect(VoiceEngine.Session).toBe(VoiceEngineSession);
+    it("SpeechEngine.Session is the SpeechEngineSession class", () => {
+        expect(SpeechEngine.Session).toBe(SpeechEngineSession);
     });
 });

@@ -1,24 +1,24 @@
 import type { Server as HttpServer } from "node:http";
 import type { BaseClientOptions, NormalizedClientOptions } from "../../BaseClient";
-import type { VoiceEngineCallbacks } from "./types";
-import type { VoiceEngineAttachment } from "./VoiceEngineAttachment";
-import { VoiceEngineResource } from "./VoiceEngineResource";
+import type { SpeechEngineCallbacks } from "./types";
+import type { SpeechEngineAttachment } from "./SpeechEngineAttachment";
+import { SpeechEngineResource } from "./SpeechEngineResource";
 
 /**
- * Client for the Voice Engine resource. Accessible via `elevenlabs.voiceEngine`.
+ * Client for the Speech Engine resource. Accessible via `elevenlabs.speechEngine`.
  *
- * Currently exposes `.get()` to retrieve a `VoiceEngineResource` by ID. CRUD
+ * Currently exposes `.get()` to retrieve a `SpeechEngineResource` by ID. CRUD
  * methods (`create`, `update`, `delete`, `list`) will be added here once the
  * API spec is available and SDK regeneration is complete.
  *
  * @example
  * ```typescript
- * const engine = await elevenlabs.voiceEngine.get("veng_123");
+ * const engine = await elevenlabs.speechEngine.get("seng_123");
  * const server = engine.listen({ httpServer, onSession: (session) => { ... } });
  * server.start();
  * ```
  */
-export class VoiceEngineClientWrapper {
+export class SpeechEngineClientWrapper {
     /** @internal */
     readonly _options: NormalizedClientOptions<BaseClientOptions>;
 
@@ -28,23 +28,23 @@ export class VoiceEngineClientWrapper {
     }
 
     /**
-     * Retrieve a voice engine by ID.
+     * Retrieve a speech engine by ID.
      *
-     * Returns a `VoiceEngineResource` that holds the engine ID and client
+     * Returns a `SpeechEngineResource` that holds the engine ID and client
      * credentials. Once CRUD endpoints are available in the API spec, this
      * method will also fetch and expose the engine's full configuration.
      */
-    async get(engineId: string): Promise<VoiceEngineResource> {
-        return new VoiceEngineResource(engineId, this._options);
+    async get(engineId: string): Promise<SpeechEngineResource> {
+        return new SpeechEngineResource(engineId, this._options);
     }
 
     /**
-     * Shortcut: retrieve a voice engine by ID and immediately attach it to an
+     * Shortcut: retrieve a speech engine by ID and immediately attach it to an
      * HTTP server. Equivalent to calling `get()` followed by `attach()`.
      *
      * @example
      * ```typescript
-     * await elevenlabs.voiceEngine.attach("veng_123", httpServer, "/api/ve/ws", {
+     * await elevenlabs.speechEngine.attach("seng_123", httpServer, "/api/se/ws", {
      *     async onTranscript(transcript, signal, session) {
      *         session.sendResponse(await llm.generate(transcript, { signal }));
      *     },
@@ -55,8 +55,8 @@ export class VoiceEngineClientWrapper {
         engineId: string,
         httpServer: HttpServer,
         path: string,
-        handler: VoiceEngineCallbacks,
-    ): Promise<VoiceEngineAttachment> {
+        handler: SpeechEngineCallbacks,
+    ): Promise<SpeechEngineAttachment> {
         const resource = await this.get(engineId);
         return resource.attach(httpServer, path, handler);
     }

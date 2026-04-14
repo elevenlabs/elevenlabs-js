@@ -1,5 +1,5 @@
 import type WebSocket from "ws";
-import type { VoiceEngineSession } from "./VoiceEngineSession";
+import type { SpeechEngineSession } from "./SpeechEngineSession";
 
 // ---------------------------------------------------------------------------
 // Incoming messages (ElevenLabs API → developer server)
@@ -54,10 +54,10 @@ export interface PongMessage {
 export type OutgoingMessage = AgentResponseMessage | PongMessage;
 
 // ---------------------------------------------------------------------------
-// Event map for VoiceEngineSession
+// Event map for SpeechEngineSession
 // ---------------------------------------------------------------------------
 
-export interface VoiceEngineEventMap {
+export interface SpeechEngineEventMap {
     user_transcript: [transcript: TranscriptMessage[], signal: AbortSignal];
     init: [conversationId: string];
     close: [];
@@ -65,30 +65,30 @@ export interface VoiceEngineEventMap {
     disconnected: [];
 }
 
-export type VoiceEngineEventName = keyof VoiceEngineEventMap;
+export type SpeechEngineEventName = keyof SpeechEngineEventMap;
 
 // ---------------------------------------------------------------------------
 // Handler interface (options-object pattern for attach / Server)
 // ---------------------------------------------------------------------------
 
-export interface VoiceEngineCallbacks {
+export interface SpeechEngineCallbacks {
     /** Enable debug logging. */
     debug?: boolean;
 
     /** Fired once when the session is initialized with a conversation ID. */
-    onInit?(conversationId: string, session: VoiceEngineSession): void;
+    onInit?(conversationId: string, session: SpeechEngineSession): void;
 
-    /** Fired each time the Voice Engine API sends a user transcript. */
-    onTranscript?(transcript: TranscriptMessage[], signal: AbortSignal, session: VoiceEngineSession): void;
+    /** Fired each time the Speech Engine API sends a user transcript. */
+    onTranscript?(transcript: TranscriptMessage[], signal: AbortSignal, session: SpeechEngineSession): void;
 
     /** Fired when ElevenLabs sends a clean close message ending the conversation. */
-    onClose?(session: VoiceEngineSession): void;
+    onClose?(session: SpeechEngineSession): void;
 
     /** Fired when the underlying WebSocket drops unexpectedly. */
-    onDisconnect?(session: VoiceEngineSession): void;
+    onDisconnect?(session: SpeechEngineSession): void;
 
     /** Fired on protocol-level or WebSocket-level errors. */
-    onError?(error: Error, session: VoiceEngineSession): void;
+    onError?(error: Error, session: SpeechEngineSession): void;
 }
 
 // ---------------------------------------------------------------------------

@@ -2,29 +2,29 @@ import type { IncomingMessage, Server as HttpServer } from "node:http";
 import type { Duplex } from "node:stream";
 import WebSocket from "ws";
 import type { BaseClientOptions, NormalizedClientOptions } from "../../BaseClient";
-import type { VoiceEngineCallbacks } from "./types";
-import { VoiceEngineSession } from "./VoiceEngineSession";
-import { VoiceEngineAttachment } from "./VoiceEngineAttachment";
+import type { SpeechEngineCallbacks } from "./types";
+import { SpeechEngineSession } from "./SpeechEngineSession";
+import { SpeechEngineAttachment } from "./SpeechEngineAttachment";
 
 /**
- * Represents a voice engine instance. Returned by `elevenlabs.voiceEngine.get()`.
+ * Represents a speech engine instance. Returned by `elevenlabs.speechEngine.get()`.
  *
- * Use `engine.attach(httpServer, path, onSession)` to integrate with an existing
+ * Use `engine.attach(httpServer, path, callbacks)` to integrate with an existing
  * HTTP server, or drop down to `engine.verifyRequest()` and `engine.createSession()`
  * for full control.
  *
  * @example
  * ```typescript
- * const engine = await elevenlabs.voiceEngine.get("veng_123");
+ * const engine = await elevenlabs.speechEngine.get("seng_123");
  *
- * engine.attach(httpServer, "/api/voice-engine/ws", (session) => {
- *     session.on(VoiceEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
+ * engine.attach(httpServer, "/api/speech-engine/ws", {
+ *     async onTranscript(transcript, signal, session) {
  *         session.sendResponse(await llm.generate(transcript, { signal }));
- *     });
+ *     },
  * });
  * ```
  */
-export class VoiceEngineResource {
+export class SpeechEngineResource {
     readonly engineId: string;
     /** @internal */
     readonly _options: NormalizedClientOptions<BaseClientOptions>;
@@ -36,16 +36,16 @@ export class VoiceEngineResource {
     }
 
     /**
-     * Attach to an existing HTTP server and begin accepting Voice Engine
+     * Attach to an existing HTTP server and begin accepting Speech Engine
      * connections at the given path.
      *
      * Handles WebSocket upgrades, path routing, and request verification
-     * automatically. Returns a `VoiceEngineAttachment` whose `.close()` stops
+     * automatically. Returns a `SpeechEngineAttachment` whose `.close()` stops
      * accepting connections without affecting the HTTP server.
      *
      * @example
      * ```typescript
-     * engine.attach(httpServer, "/api/voice-engine/ws", {
+     * engine.attach(httpServer, "/api/speech-engine/ws", {
      *     async onTranscript(transcript, signal, session) {
      *         const stream = await openai.responses.create({ model: "gpt-4o", input: transcript, stream: true }, { signal });
      *         session.sendResponse(stream);
@@ -56,10 +56,10 @@ export class VoiceEngineResource {
     attach(
         httpServer: HttpServer,
         path: string,
-        handler: VoiceEngineCallbacks,
-    ): VoiceEngineAttachment {
+        handler: SpeechEngineCallbacks,
+    ): SpeechEngineAttachment {
         const debug = handler.debug ?? false;
-        const log = debug ? (...args: unknown[]) => console.log("[VoiceEngine]", ...args) : () => {};
+        const log = debug ? (...args: unknown[]) => console.log("[SpeechEngine]", ...args) : () => {};
 
         const wss = new WebSocket.Server({ noServer: true });
 
@@ -94,12 +94,12 @@ export class VoiceEngineResource {
         });
 
         log(`listening for WebSocket upgrades on ${path}`);
-        return new VoiceEngineAttachment(wss, httpServer, upgradeListener as (...args: unknown[]) => void);
+        return new SpeechEngineAttachment(wss, httpServer, upgradeListener as (...args: unknown[]) => void);
     }
 
     /**
      * Verify that an incoming HTTP upgrade request is a legitimate connection
-     * from the ElevenLabs Voice Engine API.
+     * from the ElevenLabs Speech Engine API.
      *
      * Only needed when managing the WebSocket upgrade yourself. When using
      * `engine.attach()`, verification is handled automatically.
@@ -113,17 +113,17 @@ export class VoiceEngineResource {
     }
 
     /**
-     * Wrap an accepted WebSocket in a `VoiceEngineSession`.
+     * Wrap an accepted WebSocket in a `SpeechEngineSession`.
      *
      * Only needed when managing the WebSocket upgrade yourself. When using
      * `engine.attach()`, sessions are created automatically.
      */
-    createSession(ws: WebSocket, options?: { debug?: boolean }): VoiceEngineSession {
-        return new VoiceEngineSession(ws, options);
+    createSession(ws: WebSocket, options?: { debug?: boolean }): SpeechEngineSession {
+        return new SpeechEngineSession(ws, options);
     }
 
     /** @internal */
-    private wireHandler(session: VoiceEngineSession, handler: VoiceEngineCallbacks): void {
+    private wireHandler(session: SpeechEngineSession, handler: SpeechEngineCallbacks): void {
         const { onInit, onTranscript, onClose, onDisconnect, onError } = handler;
         if (onInit) session.on("init", (id) => onInit.call(session, id, session));
         if (onTranscript) session.on("user_transcript", (t, s) => onTranscript.call(session, t, s, session));
