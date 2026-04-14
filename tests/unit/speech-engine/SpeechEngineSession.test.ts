@@ -1,0 +1,410 @@
+import { EventEmitter } from "node:events";
+import WebSocket from "ws";
+import { SpeechEngineSession } from "../../../src/wrapper/speech-engine/SpeechEngineSession";
+import { SpeechEngine } from "../../../src/wrapper/speech-engine";
+import type { TranscriptMessage, WebSocketLike } from "../../../src/wrapper/speech-engine/types";
+
+class MockWebSocket extends EventEmitter implements WebSocketLike {
+    readyState: number = WebSocket.OPEN;
+    sent: string[] = [];
+
+    send(data: string): void {
+        this.sent.push(data);
+    }
+
+    close(): void {
+        this.readyState = WebSocket.CLOSED;
+        this.emit("close", 1000, Buffer.from(""));
+    }
+
+    receiveMessage(msg: Record<string, unknown>): void {
+        this.emit("message", Buffer.from(JSON.stringify(msg)));
+    }
+
+    simulateError(err: Error): void {
+        this.emit("error", err);
+    }
+}
+
+const transcript: TranscriptMessage[] = [
+    { role: "agent", content: "how can I help you today?" },
+    { role: "user", content: "I need a pizza" },
+];
+
+const transcript2: TranscriptMessage[] = [
+    { role: "agent", content: "how can I help you today?" },
+    { role: "user", content: "I need a pizza" },
+    { role: "agent", content: "what size?" },
+    { role: "user", content: "large" },
+];
+
+describe("SpeechEngineSession", () => {
+    let ws: MockWebSocket;
+    let session: SpeechEngineSession;
+
+    beforeEach(() => {
+        ws = new MockWebSocket();
+        session = new SpeechEngineSession(ws);
+    });
+
+    // -----------------------------------------------------------------------
+    // init event
+    // -----------------------------------------------------------------------
+
+    it("emits init with conversation_id", () => {
+        const handler = jest.fn();
+        session.on(SpeechEngine.INIT, handler);
+
+        ws.receiveMessage({ type: "init", conversation_id: "conv_42" });
+
+        expect(handler).toHaveBeenCalledWith("conv_42");
+        expect(session.conversationId).toBe("conv_42");
+    });
+
+    // -----------------------------------------------------------------------
+    // user_transcript events
+    // -----------------------------------------------------------------------
+
+    it("emits user_transcript with conversation history and abort signal", () => {
+        const handler = jest.fn();
+        session.on(SpeechEngine.USER_TRANSCRIPT, handler);
+
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 1 });
+
+        expect(handler).toHaveBeenCalledTimes(1);
+        const [received, signal] = handler.mock.calls[0];
+        expect(received).toEqual(transcript);
+        expect(signal).toBeInstanceOf(AbortSignal);
+        expect(signal.aborted).toBe(false);
+    });
+
+    it("aborts previous transcript signal when a new transcript arrives", () => {
+        const signals: AbortSignal[] = [];
+        session.on(SpeechEngine.USER_TRANSCRIPT, (_transcript, signal) => {
+            signals.push(signal);
+        });
+
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 1 });
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript2, event_id: 2 });
+
+        expect(signals).toHaveLength(2);
+        expect(signals[0].aborted).toBe(true);
+        expect(signals[1].aborted).toBe(false);
+    });
+
+    // -----------------------------------------------------------------------
+    // ping / pong
+    // -----------------------------------------------------------------------
+
+    it("auto-responds to ping with pong", () => {
+        ws.receiveMessage({ type: "ping" });
+
+        expect(ws.sent).toHaveLength(1);
+        expect(JSON.parse(ws.sent[0])).toEqual({ type: "pong" });
+    });
+
+    // -----------------------------------------------------------------------
+    // close event (user disconnected)
+    // -----------------------------------------------------------------------
+
+    it("emits close and aborts current signal on close message", () => {
+        const closeHandler = jest.fn();
+        session.on(SpeechEngine.CLOSE, closeHandler);
+
+        let capturedSignal: AbortSignal | null = null;
+        session.on(SpeechEngine.USER_TRANSCRIPT, (_transcript, signal) => {
+            capturedSignal = signal;
+        });
+
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 1 });
+        ws.receiveMessage({ type: "close" });
+
+        expect(closeHandler).toHaveBeenCalledTimes(1);
+        expect(capturedSignal!.aborted).toBe(true);
+    });
+
+    // -----------------------------------------------------------------------
+    // error event (protocol-level)
+    // -----------------------------------------------------------------------
+
+    it("emits error on protocol error message", () => {
+        const handler = jest.fn();
+        session.on(SpeechEngine.ERROR, handler);
+
+        ws.receiveMessage({ type: "error", message: "something went wrong" });
+
+        expect(handler).toHaveBeenCalledTimes(1);
+        expect(handler.mock.calls[0][0]).toBeInstanceOf(Error);
+        expect(handler.mock.calls[0][0].message).toBe("something went wrong");
+    });
+
+    // -----------------------------------------------------------------------
+    // WebSocket-level events
+    // -----------------------------------------------------------------------
+
+    it("emits disconnected when WebSocket closes", () => {
+        const handler = jest.fn();
+        session.on(SpeechEngine.DISCONNECTED, handler);
+
+        ws.close();
+
+        expect(handler).toHaveBeenCalledTimes(1);
+        expect(session.isOpen).toBe(false);
+    });
+
+    it("aborts current signal when WebSocket closes", () => {
+        let capturedSignal: AbortSignal | null = null;
+        session.on(SpeechEngine.USER_TRANSCRIPT, (_transcript, signal) => {
+            capturedSignal = signal;
+        });
+
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 1 });
+        ws.close();
+
+        expect(capturedSignal!.aborted).toBe(true);
+    });
+
+    it("emits error on WebSocket error", () => {
+        const handler = jest.fn();
+        session.on(SpeechEngine.ERROR, handler);
+
+        const err = new Error("connection failed");
+        ws.simulateError(err);
+
+        expect(handler).toHaveBeenCalledWith(err);
+    });
+
+    it("emits error on malformed JSON", () => {
+        const handler = jest.fn();
+        session.on(SpeechEngine.ERROR, handler);
+
+        ws.emit("message", Buffer.from("not json"));
+
+        expect(handler).toHaveBeenCalledTimes(1);
+        expect(handler.mock.calls[0][0]).toBeInstanceOf(Error);
+    });
+
+    it("silently ignores unknown message types", () => {
+        const errorHandler = jest.fn();
+        session.on(SpeechEngine.ERROR, errorHandler);
+
+        ws.receiveMessage({ type: "unknown_future_event", data: 123 });
+
+        expect(errorHandler).not.toHaveBeenCalled();
+    });
+
+    // -----------------------------------------------------------------------
+    // sendResponse (string)
+    // -----------------------------------------------------------------------
+
+    it("sends a complete response as agent_response with event_id and is_final", () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 5 });
+        session.sendResponse("The answer is 42");
+
+        expect(ws.sent).toHaveLength(2);
+        expect(JSON.parse(ws.sent[0])).toEqual({ type: "agent_response", content: "The answer is 42", event_id: 5, is_final: false });
+        expect(JSON.parse(ws.sent[1])).toEqual({ type: "agent_response", content: "", event_id: 5, is_final: true });
+    });
+
+    it("throws when sending after close", () => {
+        session.close();
+        expect(() => session.sendResponse("too late")).toThrow("session is closed");
+    });
+
+    // -----------------------------------------------------------------------
+    // sendResponse (streaming)
+    // -----------------------------------------------------------------------
+
+    it("sends each chunk with is_final:false then an empty terminator with is_final:true", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 3 });
+
+        async function* tokens() {
+            yield "Hello";
+            yield " world";
+        }
+
+        session.sendResponse(tokens());
+
+        await new Promise((r) => setTimeout(r, 10));
+
+        expect(ws.sent).toHaveLength(3);
+        expect(JSON.parse(ws.sent[0])).toEqual({ type: "agent_response", content: "Hello", event_id: 3, is_final: false });
+        expect(JSON.parse(ws.sent[1])).toEqual({ type: "agent_response", content: " world", event_id: 3, is_final: false });
+        expect(JSON.parse(ws.sent[2])).toEqual({ type: "agent_response", content: "", event_id: 3, is_final: true });
+    });
+
+    it("stops streaming if session is closed mid-stream", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 7 });
+
+        async function* slowTokens() {
+            yield "first";
+            yield "second";
+            await new Promise((r) => setTimeout(r, 50));
+            yield "third";
+        }
+
+        session.sendResponse(slowTokens());
+
+        // Let the first two synchronous yields resolve
+        await new Promise((r) => setTimeout(r, 10));
+        session.close();
+        await new Promise((r) => setTimeout(r, 100));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        const chunks = sent.filter((m: Record<string, unknown>) => m.type === "agent_response");
+        // "first" and "second" are sent immediately; session closes before the
+        // 50ms delay resolves, so "third" and the empty terminator are never sent
+        expect(chunks).toHaveLength(2);
+        expect(chunks[0]).toEqual({ type: "agent_response", content: "first", event_id: 7, is_final: false });
+        expect(chunks[1]).toEqual({ type: "agent_response", content: "second", event_id: 7, is_final: false });
+    });
+
+    // -----------------------------------------------------------------------
+    // sendResponse (LLM stream formats)
+    // -----------------------------------------------------------------------
+
+    it("extracts text from OpenAI Responses API stream events", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 10 });
+
+        async function* openaiResponsesStream() {
+            yield { type: "response.created", response: {} };
+            yield { type: "response.output_text.delta", delta: "Hello" };
+            yield { type: "response.output_text.delta", delta: " world" };
+            yield { type: "response.output_text.done", text: "Hello world" };
+            yield { type: "response.completed", response: {} };
+        }
+
+        session.sendResponse(openaiResponsesStream());
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toHaveLength(3);
+        expect(sent[0]).toEqual({ type: "agent_response", content: "Hello", event_id: 10, is_final: false });
+        expect(sent[1]).toEqual({ type: "agent_response", content: " world", event_id: 10, is_final: false });
+        expect(sent[2]).toEqual({ type: "agent_response", content: "", event_id: 10, is_final: true });
+    });
+
+    it("extracts text from OpenAI Chat Completions API stream events", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 11 });
+
+        async function* openaiChatStream() {
+            yield { choices: [{ delta: { role: "assistant" } }] };
+            yield { choices: [{ delta: { content: "Hi" } }] };
+            yield { choices: [{ delta: { content: " there" } }] };
+            yield { choices: [{ delta: {} }] };
+        }
+
+        session.sendResponse(openaiChatStream());
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toHaveLength(3);
+        expect(sent[0]).toEqual({ type: "agent_response", content: "Hi", event_id: 11, is_final: false });
+        expect(sent[1]).toEqual({ type: "agent_response", content: " there", event_id: 11, is_final: false });
+        expect(sent[2]).toEqual({ type: "agent_response", content: "", event_id: 11, is_final: true });
+    });
+
+    it("extracts text from Anthropic Messages API stream events", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 12 });
+
+        async function* anthropicStream() {
+            yield { type: "message_start", message: {} };
+            yield { type: "content_block_start", content_block: { type: "text", text: "" } };
+            yield { type: "content_block_delta", delta: { type: "text_delta", text: "Good" } };
+            yield { type: "content_block_delta", delta: { type: "text_delta", text: " morning" } };
+            yield { type: "content_block_stop" };
+            yield { type: "message_stop" };
+        }
+
+        session.sendResponse(anthropicStream());
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toHaveLength(3);
+        expect(sent[0]).toEqual({ type: "agent_response", content: "Good", event_id: 12, is_final: false });
+        expect(sent[1]).toEqual({ type: "agent_response", content: " morning", event_id: 12, is_final: false });
+        expect(sent[2]).toEqual({ type: "agent_response", content: "", event_id: 12, is_final: true });
+    });
+
+    it("extracts text from Google Gemini API stream events", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 13 });
+
+        async function* geminiStream() {
+            yield { candidates: [{ content: { parts: [{ text: "Hey" }], role: "model" } }] };
+            yield { candidates: [{ content: { parts: [{ text: " buddy" }], role: "model" } }] };
+        }
+
+        session.sendResponse(geminiStream());
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toHaveLength(3);
+        expect(sent[0]).toEqual({ type: "agent_response", content: "Hey", event_id: 13, is_final: false });
+        expect(sent[1]).toEqual({ type: "agent_response", content: " buddy", event_id: 13, is_final: false });
+        expect(sent[2]).toEqual({ type: "agent_response", content: "", event_id: 13, is_final: true });
+    });
+
+    it("skips unrecognized stream events without breaking", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 14 });
+
+        async function* mixedStream() {
+            yield { type: "unknown_event", data: 123 };
+            yield { type: "response.output_text.delta", delta: "text" };
+            yield 42;
+            yield null;
+        }
+
+        session.sendResponse(mixedStream() as AsyncIterable<unknown>);
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toHaveLength(2);
+        expect(sent[0]).toEqual({ type: "agent_response", content: "text", event_id: 14, is_final: false });
+        expect(sent[1]).toEqual({ type: "agent_response", content: "", event_id: 14, is_final: true });
+    });
+
+    // -----------------------------------------------------------------------
+    // event_id tracking across interrupts
+    // -----------------------------------------------------------------------
+
+    it("stamps the correct event_id after an interrupt", () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 1 });
+        session.sendResponse("response to first");
+
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript2, event_id: 2 });
+        session.sendResponse("response to second");
+
+        // Each sendResponse emits a content chunk + empty terminator = 2 messages each
+        expect(ws.sent).toHaveLength(4);
+        expect(JSON.parse(ws.sent[0])).toEqual({ type: "agent_response", content: "response to first", event_id: 1, is_final: false });
+        expect(JSON.parse(ws.sent[1])).toEqual({ type: "agent_response", content: "", event_id: 1, is_final: true });
+        expect(JSON.parse(ws.sent[2])).toEqual({ type: "agent_response", content: "response to second", event_id: 2, is_final: false });
+        expect(JSON.parse(ws.sent[3])).toEqual({ type: "agent_response", content: "", event_id: 2, is_final: true });
+    });
+
+    // -----------------------------------------------------------------------
+    // close()
+    // -----------------------------------------------------------------------
+
+    it("close() is idempotent", () => {
+        session.close();
+        session.close();
+        expect(session.isOpen).toBe(false);
+    });
+
+    // -----------------------------------------------------------------------
+    // Namespace constants
+    // -----------------------------------------------------------------------
+
+    it("SpeechEngine namespace constants match expected event strings", () => {
+        expect(SpeechEngine.INIT).toBe("init");
+        expect(SpeechEngine.USER_TRANSCRIPT).toBe("user_transcript");
+        expect(SpeechEngine.CLOSE).toBe("close");
+        expect(SpeechEngine.ERROR).toBe("error");
+        expect(SpeechEngine.DISCONNECTED).toBe("disconnected");
+    });
+
+    it("SpeechEngine.Session is the SpeechEngineSession class", () => {
+        expect(SpeechEngine.Session).toBe(SpeechEngineSession);
+    });
+});
