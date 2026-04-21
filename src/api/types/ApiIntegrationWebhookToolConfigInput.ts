@@ -21,7 +21,7 @@ export interface ApiIntegrationWebhookToolConfigInput {
     /** Controls how tool errors are processed before being shared with the agent. 'auto' determines handling based on tool type (summarized for native integrations, hide for others), 'summarized' sends an LLM-generated summary, 'passthrough' sends the raw error, 'hide' does not share the error with the agent. */
     toolErrorHandlingMode?: ElevenLabs.ToolErrorHandlingMode;
     /** Configuration for dynamic variables */
-    dynamicVariables?: ElevenLabs.DynamicVariablesConfig;
+    dynamicVariables?: ElevenLabs.DynamicVariablesConfigInput;
     /** Determines when and how the tool executes: 'immediate' executes the tool right away when requested by the LLM, 'post_tool_speech' waits for the agent to finish speaking before executing, 'async' runs the tool in the background without blocking - best for long-running operations. */
     executionMode?: ElevenLabs.ToolExecutionMode;
     /** The version of the API integration tool */

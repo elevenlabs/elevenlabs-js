@@ -12,4 +12,6 @@ export interface DynamicVariableAssignment {
     valuePath: string;
     /** If true, this assignment's value will be removed from the tool response before sending to the LLM and transcript, but still processed for variable assignment. */
     sanitize?: boolean;
+    /** If true, non-scalar values (lists, objects) extracted from the tool response are stored as their native type instead of being stringified to JSON. Enable this to use extracted arrays directly as list dynamic variables. */
+    preserveNativeType?: boolean;
 }

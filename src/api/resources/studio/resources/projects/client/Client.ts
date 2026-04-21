@@ -169,9 +169,7 @@ export class ProjectsClient {
         if (request.qualityPreset != null) {
             _request.append(
                 "quality_preset",
-                serializers.studio.ProjectsCreateRequestQualityPreset.jsonOrThrow(request.qualityPreset, {
-                    unrecognizedObjectKeys: "strip",
-                }),
+                serializers.QualityPresetType.jsonOrThrow(request.qualityPreset, { unrecognizedObjectKeys: "strip" }),
             );
         }
 

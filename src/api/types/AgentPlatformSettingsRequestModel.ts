@@ -8,7 +8,7 @@ export interface AgentPlatformSettingsRequestModel {
     /** Configuration for the widget */
     widget?: ElevenLabs.WidgetConfig;
     /** Data collection settings */
-    dataCollection?: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
+    dataCollection?: Record<string, ElevenLabs.AnalysisProperty>;
     /** Scope per data collection item ID. Missing keys default to conversation scope. */
     dataCollectionScopes?: Record<string, ElevenLabs.AnalysisScope>;
     /** Additional overrides for the agent during conversation initiation */
@@ -29,4 +29,6 @@ export interface AgentPlatformSettingsRequestModel {
     callLimits?: ElevenLabs.AgentCallLimits;
     /** Privacy settings for the agent */
     privacy?: ElevenLabs.PrivacyConfigInput;
+    /** Default LLM model for post-call analysis (evaluation and data collection) */
+    analysisLlm?: ElevenLabs.Llm;
 }

@@ -17,6 +17,7 @@ export type AstNodeInput =
     | ElevenLabs.AstNodeInput.LteOperator
     | ElevenLabs.AstNodeInput.MulOperator
     | ElevenLabs.AstNodeInput.NeqOperator
+    | ElevenLabs.AstNodeInput.NullLiteral
     | ElevenLabs.AstNodeInput.NumberLiteral
     | ElevenLabs.AstNodeInput.OrOperator
     | ElevenLabs.AstNodeInput.StringLiteral
@@ -78,6 +79,10 @@ export namespace AstNodeInput {
 
     export interface NeqOperator extends ElevenLabs.AstNotEqualsOperatorNodeInput {
         type: "neq_operator";
+    }
+
+    export interface NullLiteral extends ElevenLabs.AstNullNodeInput {
+        type: "null_literal";
     }
 
     export interface NumberLiteral extends ElevenLabs.AstNumberNodeInput {

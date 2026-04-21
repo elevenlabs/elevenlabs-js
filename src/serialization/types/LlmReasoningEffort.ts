@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const LlmReasoningEffort: core.serialization.Schema<
     serializers.LlmReasoningEffort.Raw,
     ElevenLabs.LlmReasoningEffort
-> = core.serialization.enum_(["none", "minimal", "low", "medium", "high"]);
+> = core.serialization.enum_(["none", "minimal", "low", "medium", "high", "xhigh"]);
 
 export declare namespace LlmReasoningEffort {
-    export type Raw = "none" | "minimal" | "low" | "medium" | "high";
+    export type Raw = "none" | "minimal" | "low" | "medium" | "high" | "xhigh";
 }

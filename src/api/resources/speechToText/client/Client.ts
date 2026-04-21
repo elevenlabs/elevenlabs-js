@@ -166,6 +166,10 @@ export class SpeechToTextClient {
             _request.append("no_verbatim", request.noVerbatim.toString());
         }
 
+        if (request.detectSpeakerRoles != null) {
+            _request.append("detect_speaker_roles", request.detectSpeakerRoles.toString());
+        }
+
         if (request.entityRedaction != null) {
             if (Array.isArray(request.entityRedaction))
                 for (const _item of request.entityRedaction) {

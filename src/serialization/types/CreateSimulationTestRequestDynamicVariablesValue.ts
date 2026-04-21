@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { DynamicVariableContainerValueTypeInput } from "./DynamicVariableContainerValueTypeInput";
 
 export const CreateSimulationTestRequestDynamicVariablesValue: core.serialization.Schema<
     serializers.CreateSimulationTestRequestDynamicVariablesValue.Raw,
@@ -12,8 +13,9 @@ export const CreateSimulationTestRequestDynamicVariablesValue: core.serializatio
     core.serialization.number(),
     core.serialization.number(),
     core.serialization.boolean(),
+    DynamicVariableContainerValueTypeInput,
 ]);
 
 export declare namespace CreateSimulationTestRequestDynamicVariablesValue {
-    export type Raw = string | number | number | boolean;
+    export type Raw = string | number | number | boolean | DynamicVariableContainerValueTypeInput.Raw;
 }

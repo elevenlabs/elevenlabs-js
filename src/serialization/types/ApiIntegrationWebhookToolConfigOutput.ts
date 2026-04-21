@@ -5,7 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ApiIntegrationWebhookOverrides } from "./ApiIntegrationWebhookOverrides";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
-import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
+import { DynamicVariablesConfigOutput } from "./DynamicVariablesConfigOutput";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
 import { ToolErrorHandlingMode } from "./ToolErrorHandlingMode";
@@ -24,7 +24,7 @@ export const ApiIntegrationWebhookToolConfigOutput: core.serialization.ObjectSch
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior),
     toolErrorHandlingMode: core.serialization.property("tool_error_handling_mode", ToolErrorHandlingMode),
-    dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig),
+    dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfigOutput),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode),
     toolVersion: core.serialization.property("tool_version", core.serialization.string()),
     apiIntegrationId: core.serialization.property("api_integration_id", core.serialization.string()),
@@ -46,7 +46,7 @@ export declare namespace ApiIntegrationWebhookToolConfigOutput {
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior: ToolCallSoundBehavior.Raw;
         tool_error_handling_mode: ToolErrorHandlingMode.Raw;
-        dynamic_variables: DynamicVariablesConfig.Raw;
+        dynamic_variables: DynamicVariablesConfigOutput.Raw;
         execution_mode: ToolExecutionMode.Raw;
         tool_version: string;
         api_integration_id: string;

@@ -9,11 +9,13 @@ export interface Subscription {
     characterCount: number;
     /** The maximum number of characters allowed in the current billing period. */
     characterLimit: number;
-    /** Maximum number of characters that the character limit can be exceeded by. Managed by the workspace admin. */
+    /** Deprecated: use `max_credit_limit_extension`. Maximum number of characters that the character limit can be exceeded by. Managed by the workspace admin. */
     maxCharacterLimitExtension?: number;
+    /** Maximum number of credits that the credit limit can be exceeded by. Managed by the workspace admin. `"unlimited"` means no cap, `0` means usage-based billing is disabled. */
+    maxCreditLimitExtension: ElevenLabs.ExtendedSubscriptionResponseModelMaxCreditLimitExtension;
     /** Whether the workspace is entitled to enter overages (usage-based billing). */
     canExtendCharacterLimit: boolean;
-    /** Whether the user is allowed to extend their character limit. */
+    /** Deprecated: use `max_credit_limit_extension != 0`. Whether the user is allowed to extend their character limit. */
     allowedToExtendCharacterLimit: boolean;
     /** The Unix timestamp of the next character count reset. */
     nextCharacterCountResetUnix?: number;

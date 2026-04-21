@@ -24,4 +24,6 @@ export interface McpToolConfigOverrideUpdateRequestModel {
         string,
         ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModelInputOverridesValue | undefined
     >;
+    /** Mock responses with optional parameter conditions. Evaluated top-to-bottom; first match wins. */
+    responseMocks?: ElevenLabs.ToolResponseMockConfigInput[];
 }

@@ -5,5 +5,10 @@ import type * as ElevenLabs from "../index";
 export interface ArrayJsonSchemaPropertyOutput {
     type?: "array";
     description?: string;
-    items: ElevenLabs.ArrayJsonSchemaPropertyOutputItems;
+    /** Schema for array elements. */
+    items?: ElevenLabs.ArrayJsonSchemaPropertyOutputItems;
+    /** When set, the entire array is populated from this dynamic variable at runtime. Mutually exclusive with description (LLM-provided array) and constant_value. */
+    dynamicVariable?: string;
+    /** When set, the entire array uses this constant value at runtime. Mutually exclusive with description (LLM-provided array) and dynamic_variable. */
+    constantValue?: ElevenLabs.ArrayJsonSchemaPropertyOutputConstantValueItem[];
 }

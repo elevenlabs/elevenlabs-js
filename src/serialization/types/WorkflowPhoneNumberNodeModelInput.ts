@@ -17,11 +17,6 @@ export const WorkflowPhoneNumberNodeModelInput: core.serialization.ObjectSchema<
         "custom_sip_headers",
         core.serialization.list(WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem).optional(),
     ),
-    position: PositionInput.optional(),
-    edgeOrder: core.serialization.property(
-        "edge_order",
-        core.serialization.list(core.serialization.string()).optional(),
-    ),
     transferDestination: core.serialization.property(
         "transfer_destination",
         WorkflowPhoneNumberNodeModelInputTransferDestination,
@@ -31,15 +26,20 @@ export const WorkflowPhoneNumberNodeModelInput: core.serialization.ObjectSchema<
         "post_dial_digits",
         WorkflowPhoneNumberNodeModelInputPostDialDigits.optional(),
     ),
+    position: PositionInput.optional(),
+    edgeOrder: core.serialization.property(
+        "edge_order",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace WorkflowPhoneNumberNodeModelInput {
     export interface Raw {
         custom_sip_headers?: WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem.Raw[] | null;
-        position?: PositionInput.Raw | null;
-        edge_order?: string[] | null;
         transfer_destination: WorkflowPhoneNumberNodeModelInputTransferDestination.Raw;
         transfer_type?: TransferTypeEnum.Raw | null;
         post_dial_digits?: WorkflowPhoneNumberNodeModelInputPostDialDigits.Raw | null;
+        position?: PositionInput.Raw | null;
+        edge_order?: string[] | null;
     }
 }

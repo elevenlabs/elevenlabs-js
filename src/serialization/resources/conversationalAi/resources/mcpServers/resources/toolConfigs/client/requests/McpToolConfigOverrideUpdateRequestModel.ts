@@ -7,6 +7,7 @@ import { DynamicVariableAssignment } from "../../../../../../../../types/Dynamic
 import { ToolCallSoundBehavior } from "../../../../../../../../types/ToolCallSoundBehavior";
 import { ToolCallSoundType } from "../../../../../../../../types/ToolCallSoundType";
 import { ToolExecutionMode } from "../../../../../../../../types/ToolExecutionMode";
+import { ToolResponseMockConfigInput } from "../../../../../../../../types/ToolResponseMockConfigInput";
 import { McpToolConfigOverrideUpdateRequestModelInputOverridesValue } from "../../types/McpToolConfigOverrideUpdateRequestModelInputOverridesValue";
 
 export const McpToolConfigOverrideUpdateRequestModel: core.serialization.Schema<
@@ -25,6 +26,10 @@ export const McpToolConfigOverrideUpdateRequestModel: core.serialization.Schema<
             .record(core.serialization.string(), McpToolConfigOverrideUpdateRequestModelInputOverridesValue.optional())
             .optional(),
     ),
+    responseMocks: core.serialization.property(
+        "response_mocks",
+        core.serialization.list(ToolResponseMockConfigInput).optional(),
+    ),
 });
 
 export declare namespace McpToolConfigOverrideUpdateRequestModel {
@@ -39,5 +44,6 @@ export declare namespace McpToolConfigOverrideUpdateRequestModel {
             string,
             McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Raw | null | undefined
         > | null;
+        response_mocks?: ToolResponseMockConfigInput.Raw[] | null;
     }
 }

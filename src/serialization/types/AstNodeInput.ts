@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import { AstBooleanNodeInput } from "./AstBooleanNodeInput";
 import { AstDynamicVariableNodeInput } from "./AstDynamicVariableNodeInput";
 import { AstllmNodeInput } from "./AstllmNodeInput";
+import { AstNullNodeInput } from "./AstNullNodeInput";
 import { AstNumberNodeInput } from "./AstNumberNodeInput";
 import { AstStringNodeInput } from "./AstStringNodeInput";
 
@@ -28,6 +29,7 @@ export const AstNodeInput: core.serialization.Schema<serializers.AstNodeInput.Ra
             lte_operator: core.serialization.lazyObject(() => serializers.AstLessThanOrEqualsOperatorNodeInput),
             mul_operator: core.serialization.lazyObject(() => serializers.AstMultiplicationOperatorNodeInput),
             neq_operator: core.serialization.lazyObject(() => serializers.AstNotEqualsOperatorNodeInput),
+            null_literal: AstNullNodeInput,
             number_literal: AstNumberNodeInput,
             or_operator: core.serialization.lazyObject(() => serializers.AstOrOperatorNodeInput),
             string_literal: AstStringNodeInput,
@@ -54,6 +56,7 @@ export declare namespace AstNodeInput {
         | AstNodeInput.LteOperator
         | AstNodeInput.MulOperator
         | AstNodeInput.NeqOperator
+        | AstNodeInput.NullLiteral
         | AstNodeInput.NumberLiteral
         | AstNodeInput.OrOperator
         | AstNodeInput.StringLiteral
@@ -114,6 +117,10 @@ export declare namespace AstNodeInput {
 
     export interface NeqOperator extends serializers.AstNotEqualsOperatorNodeInput.Raw {
         type: "neq_operator";
+    }
+
+    export interface NullLiteral extends AstNullNodeInput.Raw {
+        type: "null_literal";
     }
 
     export interface NumberLiteral extends AstNumberNodeInput.Raw {

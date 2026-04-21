@@ -6,5 +6,6 @@ export const LlmReasoningEffort = {
     Low: "low",
     Medium: "medium",
     High: "high",
+    Xhigh: "xhigh",
 } as const;
 export type LlmReasoningEffort = (typeof LlmReasoningEffort)[keyof typeof LlmReasoningEffort];

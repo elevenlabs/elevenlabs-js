@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { BillingPeriod } from "./BillingPeriod";
 import { CharacterRefreshPeriod } from "./CharacterRefreshPeriod";
 import { SubscriptionResponseModelCurrency } from "./SubscriptionResponseModelCurrency";
+import { SubscriptionResponseModelMaxCreditLimitExtension } from "./SubscriptionResponseModelMaxCreditLimitExtension";
 import { SubscriptionStatusType } from "./SubscriptionStatusType";
 
 export const SubscriptionResponse: core.serialization.ObjectSchema<
@@ -18,6 +19,10 @@ export const SubscriptionResponse: core.serialization.ObjectSchema<
     maxCharacterLimitExtension: core.serialization.property(
         "max_character_limit_extension",
         core.serialization.number().optional(),
+    ),
+    maxCreditLimitExtension: core.serialization.property(
+        "max_credit_limit_extension",
+        SubscriptionResponseModelMaxCreditLimitExtension,
     ),
     canExtendCharacterLimit: core.serialization.property("can_extend_character_limit", core.serialization.boolean()),
     allowedToExtendCharacterLimit: core.serialization.property(
@@ -58,6 +63,7 @@ export declare namespace SubscriptionResponse {
         character_count: number;
         character_limit: number;
         max_character_limit_extension?: number | null;
+        max_credit_limit_extension: SubscriptionResponseModelMaxCreditLimitExtension.Raw;
         can_extend_character_limit: boolean;
         allowed_to_extend_character_limit: boolean;
         next_character_count_reset_unix?: number | null;

@@ -17,4 +17,6 @@ export interface PromptEvaluationCriteria {
     useKnowledgeBase?: boolean;
     /** The scope of transcript context used when evaluating this criterion. 'conversation' uses the full transcript; 'agent' uses only the portion where the defining agent was active. */
     scope?: ElevenLabs.AnalysisScope;
+    /** LLM model to use for this evaluation criteria. If not set, uses agent's analysis_llm default. */
+    llm?: ElevenLabs.Llm;
 }

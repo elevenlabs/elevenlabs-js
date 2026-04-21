@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
-import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
+import { DynamicVariablesConfigOutput } from "./DynamicVariablesConfigOutput";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
 import { ToolErrorHandlingMode } from "./ToolErrorHandlingMode";
@@ -24,7 +24,7 @@ export const WebhookToolConfigOutput: core.serialization.ObjectSchema<
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     toolErrorHandlingMode: core.serialization.property("tool_error_handling_mode", ToolErrorHandlingMode.optional()),
-    dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
+    dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfigOutput.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
     apiSchema: core.serialization.property("api_schema", WebhookToolApiSchemaConfigOutput),
 });
@@ -40,7 +40,7 @@ export declare namespace WebhookToolConfigOutput {
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         tool_error_handling_mode?: ToolErrorHandlingMode.Raw | null;
-        dynamic_variables?: DynamicVariablesConfig.Raw | null;
+        dynamic_variables?: DynamicVariablesConfigOutput.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
         api_schema: WebhookToolApiSchemaConfigOutput.Raw;
     }

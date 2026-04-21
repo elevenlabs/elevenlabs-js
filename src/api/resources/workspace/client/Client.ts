@@ -7,6 +7,7 @@ import { GroupsClient } from "../resources/groups/client/Client";
 import { InvitesClient } from "../resources/invites/client/Client";
 import { MembersClient } from "../resources/members/client/Client";
 import { ResourcesClient } from "../resources/resources/client/Client";
+import { UsageClient } from "../resources/usage/client/Client";
 
 export declare namespace WorkspaceClient {
     export type Options = BaseClientOptions;
@@ -19,6 +20,7 @@ export class WorkspaceClient {
     protected _invites: InvitesClient | undefined;
     protected _members: MembersClient | undefined;
     protected _resources: ResourcesClient | undefined;
+    protected _usage: UsageClient | undefined;
 
     constructor(options: WorkspaceClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -42,5 +44,9 @@ export class WorkspaceClient {
 
     public get resources(): ResourcesClient {
         return (this._resources ??= new ResourcesClient(this._options));
+    }
+
+    public get usage(): UsageClient {
+        return (this._usage ??= new UsageClient(this._options));
     }
 }

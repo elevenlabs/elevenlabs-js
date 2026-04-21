@@ -521,7 +521,8 @@ export class TestsClient {
      *         search: "search",
      *         parentFolderId: "parent_folder_id",
      *         includeFolders: true,
-     *         sortMode: "default"
+     *         sortMode: "default",
+     *         sharingMode: "all"
      *     })
      */
     public list(
@@ -535,7 +536,7 @@ export class TestsClient {
         request: ElevenLabs.conversationalAi.TestsListRequest = {},
         requestOptions?: TestsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetTestsPageResponseModel>> {
-        const { cursor, pageSize, search, parentFolderId, types, includeFolders, sortMode } = request;
+        const { cursor, pageSize, search, parentFolderId, types, includeFolders, sortMode, sharingMode } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
             _queryParams.cursor = cursor;
@@ -569,6 +570,12 @@ export class TestsClient {
 
         if (sortMode != null) {
             _queryParams.sort_mode = serializers.conversationalAi.TestsListRequestSortMode.jsonOrThrow(sortMode, {
+                unrecognizedObjectKeys: "strip",
+            });
+        }
+
+        if (sharingMode != null) {
+            _queryParams.sharing_mode = serializers.TestSharingMode.jsonOrThrow(sharingMode, {
                 unrecognizedObjectKeys: "strip",
             });
         }

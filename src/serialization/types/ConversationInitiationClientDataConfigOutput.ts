@@ -18,6 +18,10 @@ export const ConversationInitiationClientDataConfigOutput: core.serialization.Ob
         "enable_conversation_initiation_client_data_from_webhook",
         core.serialization.boolean().optional(),
     ),
+    enableStartingWorkflowNodeIdFromClient: core.serialization.property(
+        "enable_starting_workflow_node_id_from_client",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace ConversationInitiationClientDataConfigOutput {
@@ -25,5 +29,6 @@ export declare namespace ConversationInitiationClientDataConfigOutput {
         conversation_config_override?: ConversationConfigClientOverrideConfigOutput.Raw | null;
         custom_llm_extra_body?: boolean | null;
         enable_conversation_initiation_client_data_from_webhook?: boolean | null;
+        enable_starting_workflow_node_id_from_client?: boolean | null;
     }
 }

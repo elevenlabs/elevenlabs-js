@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { DynamicVariablesConfigWorkflowOverride } from "./DynamicVariablesConfigWorkflowOverride";
+import { DynamicVariablesConfigWorkflowOverrideInput } from "./DynamicVariablesConfigWorkflowOverrideInput";
 import { PromptAgentApiModelWorkflowOverrideInput } from "./PromptAgentApiModelWorkflowOverrideInput";
 
 export const AgentConfigApiModelWorkflowOverrideInput: core.serialization.ObjectSchema<
@@ -15,7 +15,7 @@ export const AgentConfigApiModelWorkflowOverrideInput: core.serialization.Object
     hinglishMode: core.serialization.property("hinglish_mode", core.serialization.boolean().optional()),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        DynamicVariablesConfigWorkflowOverride.optional(),
+        DynamicVariablesConfigWorkflowOverrideInput.optional(),
     ),
     disableFirstMessageInterruptions: core.serialization.property(
         "disable_first_message_interruptions",
@@ -33,7 +33,7 @@ export declare namespace AgentConfigApiModelWorkflowOverrideInput {
         first_message?: string | null;
         language?: string | null;
         hinglish_mode?: boolean | null;
-        dynamic_variables?: DynamicVariablesConfigWorkflowOverride.Raw | null;
+        dynamic_variables?: DynamicVariablesConfigWorkflowOverrideInput.Raw | null;
         disable_first_message_interruptions?: boolean | null;
         max_conversation_duration_message?: string | null;
         prompt?: PromptAgentApiModelWorkflowOverrideInput.Raw | null;

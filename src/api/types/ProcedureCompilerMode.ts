@@ -3,5 +3,6 @@
 export const ProcedureCompilerMode = {
     Llm: "llm",
     Deterministic: "deterministic",
+    Append: "append",
 } as const;
 export type ProcedureCompilerMode = (typeof ProcedureCompilerMode)[keyof typeof ProcedureCompilerMode];

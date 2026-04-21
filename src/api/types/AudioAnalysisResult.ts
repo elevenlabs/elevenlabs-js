@@ -9,5 +9,4 @@ export interface AudioAnalysisResult {
     overallPacing?: string;
     segments?: ElevenLabs.AudioSegment[];
     keyMoments?: ElevenLabs.AudioKeyMoment[];
-    transcription?: ElevenLabs.AssetTranscription;
 }

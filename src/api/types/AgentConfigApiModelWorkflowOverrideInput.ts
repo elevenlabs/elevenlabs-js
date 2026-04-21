@@ -10,7 +10,7 @@ export interface AgentConfigApiModelWorkflowOverrideInput {
     /** When enabled and language is Hindi, the agent will respond in Hinglish */
     hinglishMode?: boolean;
     /** Configuration for dynamic variables */
-    dynamicVariables?: ElevenLabs.DynamicVariablesConfigWorkflowOverride;
+    dynamicVariables?: ElevenLabs.DynamicVariablesConfigWorkflowOverrideInput;
     /** If true, the user will not be able to interrupt the agent while the first message is being delivered. */
     disableFirstMessageInterruptions?: boolean;
     /** If non-empty, the message the agent will send when max conversation duration is reached. */

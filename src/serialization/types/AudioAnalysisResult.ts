@@ -3,7 +3,6 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { AssetTranscription } from "./AssetTranscription";
 import { AudioKeyMoment } from "./AudioKeyMoment";
 import { AudioSegment } from "./AudioSegment";
 
@@ -17,7 +16,6 @@ export const AudioAnalysisResult: core.serialization.ObjectSchema<
     overallPacing: core.serialization.property("overall_pacing", core.serialization.string().optional()),
     segments: core.serialization.list(AudioSegment).optional(),
     keyMoments: core.serialization.property("key_moments", core.serialization.list(AudioKeyMoment).optional()),
-    transcription: AssetTranscription.optional(),
 });
 
 export declare namespace AudioAnalysisResult {
@@ -28,6 +26,5 @@ export declare namespace AudioAnalysisResult {
         overall_pacing?: string | null;
         segments?: AudioSegment.Raw[] | null;
         key_moments?: AudioKeyMoment.Raw[] | null;
-        transcription?: AssetTranscription.Raw | null;
     }
 }

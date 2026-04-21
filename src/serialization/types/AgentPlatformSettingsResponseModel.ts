@@ -6,12 +6,13 @@ import type * as serializers from "../index";
 import { AgentCallLimits } from "./AgentCallLimits";
 import { AgentTestingSettings } from "./AgentTestingSettings";
 import { AgentWorkspaceOverridesOutput } from "./AgentWorkspaceOverridesOutput";
+import { AnalysisProperty } from "./AnalysisProperty";
 import { AnalysisScope } from "./AnalysisScope";
 import { AuthSettings } from "./AuthSettings";
 import { ConversationInitiationClientDataConfigOutput } from "./ConversationInitiationClientDataConfigOutput";
 import { EvaluationSettingsOutput } from "./EvaluationSettingsOutput";
 import { GuardrailsV1Output } from "./GuardrailsV1Output";
-import { LiteralJsonSchemaProperty } from "./LiteralJsonSchemaProperty";
+import { Llm } from "./Llm";
 import { PrivacyConfigOutput } from "./PrivacyConfigOutput";
 import { SafetyResponseModel } from "./SafetyResponseModel";
 import { WidgetConfig } from "./WidgetConfig";
@@ -24,7 +25,7 @@ export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema
     widget: WidgetConfig.optional(),
     dataCollection: core.serialization.property(
         "data_collection",
-        core.serialization.record(core.serialization.string(), LiteralJsonSchemaProperty).optional(),
+        core.serialization.record(core.serialization.string(), AnalysisProperty).optional(),
     ),
     dataCollectionScopes: core.serialization.property(
         "data_collection_scopes",
@@ -39,6 +40,7 @@ export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema
     auth: AuthSettings.optional(),
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
     privacy: PrivacyConfigOutput.optional(),
+    analysisLlm: core.serialization.property("analysis_llm", Llm.optional()),
     safety: SafetyResponseModel.optional(),
 });
 
@@ -46,7 +48,7 @@ export declare namespace AgentPlatformSettingsResponseModel {
     export interface Raw {
         evaluation?: EvaluationSettingsOutput.Raw | null;
         widget?: WidgetConfig.Raw | null;
-        data_collection?: Record<string, LiteralJsonSchemaProperty.Raw> | null;
+        data_collection?: Record<string, AnalysisProperty.Raw> | null;
         data_collection_scopes?: Record<string, AnalysisScope.Raw> | null;
         overrides?: ConversationInitiationClientDataConfigOutput.Raw | null;
         workspace_overrides?: AgentWorkspaceOverridesOutput.Raw | null;
@@ -57,6 +59,7 @@ export declare namespace AgentPlatformSettingsResponseModel {
         auth?: AuthSettings.Raw | null;
         call_limits?: AgentCallLimits.Raw | null;
         privacy?: PrivacyConfigOutput.Raw | null;
+        analysis_llm?: Llm.Raw | null;
         safety?: SafetyResponseModel.Raw | null;
     }
 }

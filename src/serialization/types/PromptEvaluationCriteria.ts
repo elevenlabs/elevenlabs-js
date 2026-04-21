@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AnalysisScope } from "./AnalysisScope";
+import { Llm } from "./Llm";
 
 export const PromptEvaluationCriteria: core.serialization.ObjectSchema<
     serializers.PromptEvaluationCriteria.Raw,
@@ -15,6 +16,7 @@ export const PromptEvaluationCriteria: core.serialization.ObjectSchema<
     conversationGoalPrompt: core.serialization.property("conversation_goal_prompt", core.serialization.string()),
     useKnowledgeBase: core.serialization.property("use_knowledge_base", core.serialization.boolean().optional()),
     scope: AnalysisScope.optional(),
+    llm: Llm.optional(),
 });
 
 export declare namespace PromptEvaluationCriteria {
@@ -25,5 +27,6 @@ export declare namespace PromptEvaluationCriteria {
         conversation_goal_prompt: string;
         use_knowledge_base?: boolean | null;
         scope?: AnalysisScope.Raw | null;
+        llm?: Llm.Raw | null;
     }
 }

@@ -44,6 +44,7 @@ describe("SecretsClient", () => {
         const response = await client.conversationalAi.secrets.list({
             pageSize: 1,
             dependencyLimit: 1,
+            search: "search",
             cursor: "cursor",
         });
         expect(response).toEqual({
@@ -101,6 +102,91 @@ describe("SecretsClient", () => {
             type: "stored",
             secretId: "secret_id",
             name: "name",
+        });
+    });
+
+    test("get", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            type: "stored",
+            secret_id: "secret_id",
+            name: "name",
+            used_by: {
+                tools: [{ type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" }],
+                tools_has_more: true,
+                agents: [{ type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" }],
+                agents_has_more: true,
+                phone_numbers: [
+                    {
+                        phone_number_id: "phone_number_id",
+                        phone_number: "phone_number",
+                        label: "label",
+                        provider: "twilio",
+                    },
+                ],
+                phone_numbers_has_more: true,
+                mcp_servers: [
+                    { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
+                ],
+                others: ["conversation_initiation_webhook"],
+            },
+        };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/secrets/secret_id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.secrets.get("secret_id");
+        expect(response).toEqual({
+            type: "stored",
+            secretId: "secret_id",
+            name: "name",
+            usedBy: {
+                tools: [
+                    {
+                        type: "available",
+                        id: "id",
+                        name: "name",
+                        createdAtUnixSecs: 1,
+                        accessLevel: "admin",
+                    },
+                ],
+                toolsHasMore: true,
+                agents: [
+                    {
+                        type: "available",
+                        id: "id",
+                        name: "name",
+                        createdAtUnixSecs: 1,
+                        accessLevel: "admin",
+                    },
+                ],
+                agentsHasMore: true,
+                phoneNumbers: [
+                    {
+                        phoneNumberId: "phone_number_id",
+                        phoneNumber: "phone_number",
+                        label: "label",
+                        provider: "twilio",
+                    },
+                ],
+                phoneNumbersHasMore: true,
+                mcpServers: [
+                    {
+                        type: "available",
+                        id: "id",
+                        name: "name",
+                        createdAtUnixSecs: 1,
+                        accessLevel: "admin",
+                    },
+                ],
+                others: ["conversation_initiation_webhook"],
+            },
         });
     });
 

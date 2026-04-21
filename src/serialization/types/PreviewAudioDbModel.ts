@@ -8,8 +8,8 @@ export const PreviewAudioDbModel: core.serialization.ObjectSchema<
     serializers.PreviewAudioDbModel.Raw,
     ElevenLabs.PreviewAudioDbModel
 > = core.serialization.object({
-    voiceId: core.serialization.property("voice_id", core.serialization.string()),
-    text: core.serialization.string(),
+    voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
+    text: core.serialization.string().optional(),
     audioUrl: core.serialization.property("audio_url", core.serialization.string()),
     hlsManifestUrl: core.serialization.property("hls_manifest_url", core.serialization.string().optional()),
     dashManifestUrl: core.serialization.property("dash_manifest_url", core.serialization.string().optional()),
@@ -19,8 +19,8 @@ export const PreviewAudioDbModel: core.serialization.ObjectSchema<
 
 export declare namespace PreviewAudioDbModel {
     export interface Raw {
-        voice_id: string;
-        text: string;
+        voice_id?: string | null;
+        text?: string | null;
         audio_url: string;
         hls_manifest_url?: string | null;
         dash_manifest_url?: string | null;

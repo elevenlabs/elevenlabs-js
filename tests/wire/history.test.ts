@@ -174,12 +174,6 @@ describe("HistoryClient", () => {
             },
             dialogue: [{ text: "text", voice_id: "voice_id", voice_name: "voice_name" }],
             output_format: "output_format",
-            avatar_context: {
-                avatar_id: "avatar_id",
-                avatar_style_id: "avatar_style_id",
-                avatar_name: "avatar_name",
-                avatar_style_name: "avatar_style_name",
-            },
         };
         server
             .mockEndpoint()
@@ -241,12 +235,6 @@ describe("HistoryClient", () => {
                 },
             ],
             outputFormat: "output_format",
-            avatarContext: {
-                avatarId: "avatar_id",
-                avatarStyleId: "avatar_style_id",
-                avatarName: "avatar_name",
-                avatarStyleName: "avatar_style_name",
-            },
         });
     });
 

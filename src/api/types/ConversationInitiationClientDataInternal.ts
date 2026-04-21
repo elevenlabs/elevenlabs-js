@@ -12,6 +12,8 @@ export interface ConversationInitiationClientDataInternal {
     branchId?: string;
     /** Environment to use for resolving environment variables */
     environment?: string;
+    /** If set, start the workflow at this node id instead of the default entry */
+    startingWorkflowNodeId?: string;
     dynamicVariables?: Record<
         string,
         ElevenLabs.ConversationInitiationClientDataInternalDynamicVariablesValue | undefined

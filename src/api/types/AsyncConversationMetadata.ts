@@ -11,6 +11,7 @@ export interface AsyncConversationMetadata {
     deliveryError?: string;
     externalSystem: string;
     externalId: string;
+    externalLink?: string;
     retryCount?: number;
     lastRetryTimestamp?: number;
     lastProcessedExternalMessageId?: string;
