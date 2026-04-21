@@ -5,12 +5,12 @@ import type * as ElevenLabs from "../index";
 export interface WorkflowPhoneNumberNodeModelOutput {
     /** Custom SIP headers to include when transferring the call. Each header can be either a static value or a dynamic variable reference. */
     customSipHeaders: ElevenLabs.WorkflowPhoneNumberNodeModelOutputCustomSipHeadersItem[];
+    transferDestination: ElevenLabs.WorkflowPhoneNumberNodeModelOutputTransferDestination;
+    transferType: ElevenLabs.TransferTypeEnum;
+    /** DTMF digits to send after call connects (e.g., 'ww1234' for extension). Can be either a static value or a dynamic variable reference. Use 'w' for 0.5s pause. Only supported for Twilio transfers. */
+    postDialDigits?: ElevenLabs.WorkflowPhoneNumberNodeModelOutputPostDialDigits;
     /** Position of the node in the workflow. */
     position: ElevenLabs.PositionOutput;
     /** The ids of outgoing edges in the order they should be evaluated. */
     edgeOrder: string[];
-    transferDestination: ElevenLabs.WorkflowPhoneNumberNodeModelOutputTransferDestination;
-    transferType: ElevenLabs.TransferTypeEnum;
-    /** DTMF digits to send after call connects (e.g., 'ww1234' for extension). Can be either a static value or a dynamic variable reference. Use 'w' for 0.5s pause. */
-    postDialDigits?: ElevenLabs.WorkflowPhoneNumberNodeModelOutputPostDialDigits;
 }

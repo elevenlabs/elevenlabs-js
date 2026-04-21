@@ -3097,7 +3097,7 @@ await client.audioNative.updateContentFromUrl({
 <dl>
 <dd>
 
-Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
+(Deprecated) This endpoint is deprecated. Use /v1/workspace/analytics/query/usage-by-product-over-time instead. Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
 </dd>
 </dl>
 </dd>
@@ -6266,7 +6266,8 @@ await client.conversationalAi.tests.list({
     search: "search",
     parentFolderId: "parent_folder_id",
     includeFolders: true,
-    sortMode: "default"
+    sortMode: "default",
+    sharingMode: "all"
 });
 
 ```
@@ -7613,6 +7614,7 @@ Get all workspace secrets for the user
 await client.conversationalAi.secrets.list({
     pageSize: 1,
     dependencyLimit: 1,
+    search: "search",
     cursor: "cursor"
 });
 
@@ -7697,6 +7699,69 @@ await client.conversationalAi.secrets.create({
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.PostWorkspaceSecretRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SecretsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">get</a>(secret_id) -> ElevenLabs.ConvAiWorkspaceStoredSecretConfig</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a workspace secret by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.secrets.get("secret_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**secret_id:** `string` 
     
 </dd>
 </dl>
@@ -12317,7 +12382,7 @@ await client.conversationalAi.mcpServers.toolConfigs.create("mcp_server_id", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.mcpServers.toolConfigs.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolConfigs/client/Client.ts">get</a>(mcp_server_id, tool_name) -> ElevenLabs.McpToolConfigOverride</code></summary>
+<details><summary><code>client.conversationalAi.mcpServers.toolConfigs.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolConfigs/client/Client.ts">get</a>(mcp_server_id, tool_name) -> ElevenLabs.McpToolConfigOverrideOutput</code></summary>
 <dl>
 <dd>
 
@@ -13007,6 +13072,86 @@ await client.conversationalAi.tests.invocations.resubmit("test_invocation_id", {
 <dd>
 
 **requestOptions:** `InvocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Tools Executions
+<details><summary><code>client.conversationalAi.tools.executions.<a href="/src/api/resources/conversationalAi/resources/tools/resources/executions/client/Client.ts">get</a>(tool_id, { ...params }) -> ElevenLabs.GetToolExecutionsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get paginated list of tool executions for a specific tool.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.tools.executions.get("tool_id", {
+    cursor: "cursor",
+    pageSize: 1,
+    isError: true,
+    agentId: "agent_id",
+    branchId: "branch_id",
+    startTime: 1.1,
+    endTime: 1.1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tool_id:** `string` — ID of the requested tool.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.tools.ExecutionsGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExecutionsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -18809,6 +18954,73 @@ await client.workspace.resources.unshare("resource_id", {
 <dd>
 
 **requestOptions:** `ResourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Workspace Usage
+<details><summary><code>client.workspace.usage.<a href="/src/api/resources/workspace/resources/usage/client/Client.ts">getUsageByProductOverTime</a>({ ...params }) -> ElevenLabs.WorkspaceAnalyticsQueryResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns credit usage broken down by product type over time. Timestamps are Unix milliseconds. The response is a tabular structure with columns, column_types, column_units, and rows.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.usage.getUsageByProductOverTime({
+    startTime: 1,
+    endTime: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.workspace.BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `UsageClient.RequestOptions` 
     
 </dd>
 </dl>

@@ -9,3 +9,6 @@ export * from "./members/client/requests";
 export * as resources from "./resources";
 export * from "./resources/client/requests";
 export * from "./resources/types";
+export * as usage from "./usage";
+export * from "./usage/client/requests";
+export * from "./usage/types";

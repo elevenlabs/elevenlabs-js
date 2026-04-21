@@ -9,6 +9,7 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index";
 import * as serializers from "../../../../../../serialization/index";
 import * as ElevenLabs from "../../../../../index";
+import { ExecutionsClient } from "../resources/executions/client/Client";
 
 export declare namespace ToolsClient {
     export type Options = BaseClientOptions;
@@ -18,9 +19,14 @@ export declare namespace ToolsClient {
 
 export class ToolsClient {
     protected readonly _options: NormalizedClientOptions<ToolsClient.Options>;
+    protected _executions: ExecutionsClient | undefined;
 
     constructor(options: ToolsClient.Options = {}) {
         this._options = normalizeClientOptions(options);
+    }
+
+    public get executions(): ExecutionsClient {
+        return (this._executions ??= new ExecutionsClient(this._options));
     }
 
     /**

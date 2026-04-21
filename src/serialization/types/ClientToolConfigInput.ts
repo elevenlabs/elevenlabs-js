@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
-import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
+import { DynamicVariablesConfigInput } from "./DynamicVariablesConfigInput";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
 import { ToolErrorHandlingMode } from "./ToolErrorHandlingMode";
@@ -25,7 +25,7 @@ export const ClientToolConfigInput: core.serialization.ObjectSchema<
     toolErrorHandlingMode: core.serialization.property("tool_error_handling_mode", ToolErrorHandlingMode.optional()),
     parameters: core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyInput).optional(),
     expectsResponse: core.serialization.property("expects_response", core.serialization.boolean().optional()),
-    dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
+    dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfigInput.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
 });
 
@@ -42,7 +42,7 @@ export declare namespace ClientToolConfigInput {
         tool_error_handling_mode?: ToolErrorHandlingMode.Raw | null;
         parameters?: serializers.ObjectJsonSchemaPropertyInput.Raw | null;
         expects_response?: boolean | null;
-        dynamic_variables?: DynamicVariablesConfig.Raw | null;
+        dynamic_variables?: DynamicVariablesConfigInput.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
     }
 }

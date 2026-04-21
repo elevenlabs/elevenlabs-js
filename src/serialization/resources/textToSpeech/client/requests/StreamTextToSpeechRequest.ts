@@ -3,7 +3,6 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
-import { AvatarContextRequestModel } from "../../../../types/AvatarContextRequestModel";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
 import { VoiceSettings } from "../../../../types/VoiceSettings";
 import { BodyTextToSpeechStreamApplyTextNormalization } from "../../types/BodyTextToSpeechStreamApplyTextNormalization";
@@ -40,7 +39,6 @@ export const StreamTextToSpeechRequest: core.serialization.Schema<
         "apply_language_text_normalization",
         core.serialization.boolean().optional(),
     ),
-    avatarContext: core.serialization.property("avatar_context", AvatarContextRequestModel.optional()),
 });
 
 export declare namespace StreamTextToSpeechRequest {
@@ -58,6 +56,5 @@ export declare namespace StreamTextToSpeechRequest {
         use_pvc_as_ivc?: boolean | null;
         apply_text_normalization?: BodyTextToSpeechStreamApplyTextNormalization.Raw | null;
         apply_language_text_normalization?: boolean | null;
-        avatar_context?: AvatarContextRequestModel.Raw | null;
     }
 }

@@ -35,6 +35,7 @@ export class SecretsClient {
      *     await client.conversationalAi.secrets.list({
      *         pageSize: 1,
      *         dependencyLimit: 1,
+     *         search: "search",
      *         cursor: "cursor"
      *     })
      */
@@ -49,7 +50,7 @@ export class SecretsClient {
         request: ElevenLabs.conversationalAi.SecretsListRequest = {},
         requestOptions?: SecretsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetWorkspaceSecretsResponseModel>> {
-        const { pageSize, dependencyLimit, cursor } = request;
+        const { pageSize, dependencyLimit, search, cursor } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (pageSize != null) {
             _queryParams.page_size = pageSize.toString();
@@ -57,6 +58,10 @@ export class SecretsClient {
 
         if (dependencyLimit != null) {
             _queryParams.dependency_limit = dependencyLimit.toString();
+        }
+
+        if (search != null) {
+            _queryParams.search = search;
         }
 
         if (cursor != null) {
@@ -192,6 +197,82 @@ export class SecretsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/convai/secrets");
+    }
+
+    /**
+     * Get a workspace secret by ID
+     *
+     * @param {string} secret_id
+     * @param {SecretsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.secrets.get("secret_id")
+     */
+    public get(
+        secret_id: string,
+        requestOptions?: SecretsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.ConvAiWorkspaceStoredSecretConfig> {
+        return core.HttpResponsePromise.fromPromise(this.__get(secret_id, requestOptions));
+    }
+
+    private async __get(
+        secret_id: string,
+        requestOptions?: SecretsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.ConvAiWorkspaceStoredSecretConfig>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/secrets/${core.url.encodePathParam(secret_id)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.ConvAiWorkspaceStoredSecretConfig.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/secrets/{secret_id}",
+        );
     }
 
     /**

@@ -34,6 +34,7 @@ describe("ToolConfigsClient", () => {
                                 dynamic_variable: "user_name",
                                 value_path: "user.name",
                                 sanitize: false,
+                                preserve_native_type: false,
                             },
                         ],
                     },
@@ -107,6 +108,7 @@ describe("ToolConfigsClient", () => {
                                 dynamicVariable: "user_name",
                                 valuePath: "user.name",
                                 sanitize: false,
+                                preserveNativeType: false,
                             },
                         ],
                     },
@@ -148,9 +150,18 @@ describe("ToolConfigsClient", () => {
             tool_call_sound_behavior: "auto",
             execution_mode: "immediate",
             assignments: [
-                { source: "response", dynamic_variable: "user_name", value_path: "user.name", sanitize: false },
+                {
+                    source: "response",
+                    dynamic_variable: "user_name",
+                    value_path: "user.name",
+                    sanitize: false,
+                    preserve_native_type: false,
+                },
             ],
             input_overrides: { key: { source: "constant", constant_value: "constant_value" } },
+            response_mocks: [
+                { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
+            ],
         };
         server
             .mockEndpoint()
@@ -174,6 +185,7 @@ describe("ToolConfigsClient", () => {
                     dynamicVariable: "user_name",
                     valuePath: "user.name",
                     sanitize: false,
+                    preserveNativeType: false,
                 },
             ],
             inputOverrides: {
@@ -182,6 +194,19 @@ describe("ToolConfigsClient", () => {
                     constantValue: "constant_value",
                 },
             },
+            responseMocks: [
+                {
+                    parameterConditions: [
+                        {
+                            eval: {
+                                type: "anything",
+                            },
+                            path: "path",
+                        },
+                    ],
+                    mockResult: "mock_result",
+                },
+            ],
         });
     });
 
@@ -215,6 +240,7 @@ describe("ToolConfigsClient", () => {
                                 dynamic_variable: "user_name",
                                 value_path: "user.name",
                                 sanitize: false,
+                                preserve_native_type: false,
                             },
                         ],
                     },
@@ -285,6 +311,7 @@ describe("ToolConfigsClient", () => {
                                 dynamicVariable: "user_name",
                                 valuePath: "user.name",
                                 sanitize: false,
+                                preserveNativeType: false,
                             },
                         ],
                     },
@@ -344,6 +371,7 @@ describe("ToolConfigsClient", () => {
                                 dynamic_variable: "user_name",
                                 value_path: "user.name",
                                 sanitize: false,
+                                preserve_native_type: false,
                             },
                         ],
                     },
@@ -415,6 +443,7 @@ describe("ToolConfigsClient", () => {
                                 dynamicVariable: "user_name",
                                 valuePath: "user.name",
                                 sanitize: false,
+                                preserveNativeType: false,
                             },
                         ],
                     },

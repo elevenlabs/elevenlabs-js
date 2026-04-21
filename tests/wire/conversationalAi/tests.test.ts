@@ -492,6 +492,7 @@ describe("TestsClient", () => {
             parentFolderId: "parent_folder_id",
             includeFolders: true,
             sortMode: "default",
+            sharingMode: "all",
         });
         expect(response).toEqual({
             tests: [

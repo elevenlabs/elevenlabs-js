@@ -12,13 +12,13 @@ import { ProjectExtendedResponseModelApplyTextNormalization } from "./ProjectExt
 import { ProjectExtendedResponseModelAspectRatio } from "./ProjectExtendedResponseModelAspectRatio";
 import { ProjectExtendedResponseModelAssetsItem } from "./ProjectExtendedResponseModelAssetsItem";
 import { ProjectExtendedResponseModelFiction } from "./ProjectExtendedResponseModelFiction";
-import { ProjectExtendedResponseModelQualityPreset } from "./ProjectExtendedResponseModelQualityPreset";
 import { ProjectExtendedResponseModelSourceType } from "./ProjectExtendedResponseModelSourceType";
 import { ProjectExtendedResponseModelTargetAudience } from "./ProjectExtendedResponseModelTargetAudience";
 import { ProjectState } from "./ProjectState";
 import { ProjectVoiceResponseModel } from "./ProjectVoiceResponseModel";
 import { PronunciationDictionaryLocatorResponseModel } from "./PronunciationDictionaryLocatorResponseModel";
 import { PronunciationDictionaryVersionResponseModel } from "./PronunciationDictionaryVersionResponseModel";
+import { QualityPresetType } from "./QualityPresetType";
 import { StudioAgentSettingsModel } from "./StudioAgentSettingsModel";
 import { Voice } from "./Voice";
 
@@ -76,7 +76,7 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     publicShareId: core.serialization.property("public_share_id", core.serialization.string().optional()),
     aspectRatio: core.serialization.property("aspect_ratio", ProjectExtendedResponseModelAspectRatio.optional()),
     agentSettings: core.serialization.property("agent_settings", StudioAgentSettingsModel.optional()),
-    qualityPreset: core.serialization.property("quality_preset", ProjectExtendedResponseModelQualityPreset),
+    qualityPreset: core.serialization.property("quality_preset", QualityPresetType),
     chapters: core.serialization.list(ChapterResponse),
     pronunciationDictionaryVersions: core.serialization.property(
         "pronunciation_dictionary_versions",
@@ -134,7 +134,7 @@ export declare namespace ProjectExtendedResponse {
         public_share_id?: string | null;
         aspect_ratio?: ProjectExtendedResponseModelAspectRatio.Raw | null;
         agent_settings?: StudioAgentSettingsModel.Raw | null;
-        quality_preset: ProjectExtendedResponseModelQualityPreset.Raw;
+        quality_preset: QualityPresetType.Raw;
         chapters: ChapterResponse.Raw[];
         pronunciation_dictionary_versions: PronunciationDictionaryVersionResponseModel.Raw[];
         pronunciation_dictionary_locators: PronunciationDictionaryLocatorResponseModel.Raw[];

@@ -35,7 +35,7 @@ export interface BodyCreatePodcastV1StudioPodcastsPost {
      * 'ultra' - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side.
      * 'ultra_lossless' - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format.
      */
-    qualityPreset?: ElevenLabs.BodyCreatePodcastV1StudioPodcastsPostQualityPreset;
+    qualityPreset?: ElevenLabs.QualityPresetType;
     /**
      * Duration of the generated podcast. Must be one of:
      * short - produces podcasts shorter than 3 minutes.

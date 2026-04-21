@@ -10,7 +10,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *         search: "search",
  *         parentFolderId: "parent_folder_id",
  *         includeFolders: true,
- *         sortMode: "default"
+ *         sortMode: "default",
+ *         sharingMode: "all"
  *     }
  */
 export interface TestsListRequest {
@@ -28,4 +29,6 @@ export interface TestsListRequest {
     includeFolders?: boolean;
     /** Sort mode for listing tests. Use 'folders_first' to place folders before tests. */
     sortMode?: ElevenLabs.conversationalAi.TestsListRequestSortMode;
+    /** Filter test visibility. Use `shared_with_me` to return only tests/folders shared with the current user that they did not create. */
+    sharingMode?: ElevenLabs.TestSharingMode;
 }

@@ -5,6 +5,7 @@
  *     {
  *         pageSize: 1,
  *         dependencyLimit: 1,
+ *         search: "search",
  *         cursor: "cursor"
  *     }
  */
@@ -13,6 +14,8 @@ export interface SecretsListRequest {
     pageSize?: number;
     /** Maximum number of dependent resources (tools, agents, phone numbers) to return per secret. Can not exceed 100. */
     dependencyLimit?: number;
+    /** If specified, returns only secrets whose names start with this string. */
+    search?: string;
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
 }

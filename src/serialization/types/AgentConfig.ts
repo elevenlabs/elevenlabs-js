@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
+import { DynamicVariablesConfigOutput } from "./DynamicVariablesConfigOutput";
 import { PromptAgentApiModelOutput } from "./PromptAgentApiModelOutput";
 
 export const AgentConfig: core.serialization.ObjectSchema<serializers.AgentConfig.Raw, ElevenLabs.AgentConfig> =
@@ -11,7 +11,7 @@ export const AgentConfig: core.serialization.ObjectSchema<serializers.AgentConfi
         firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
         language: core.serialization.string().optional(),
         hinglishMode: core.serialization.property("hinglish_mode", core.serialization.boolean().optional()),
-        dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
+        dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfigOutput.optional()),
         disableFirstMessageInterruptions: core.serialization.property(
             "disable_first_message_interruptions",
             core.serialization.boolean().optional(),
@@ -28,7 +28,7 @@ export declare namespace AgentConfig {
         first_message?: string | null;
         language?: string | null;
         hinglish_mode?: boolean | null;
-        dynamic_variables?: DynamicVariablesConfig.Raw | null;
+        dynamic_variables?: DynamicVariablesConfigOutput.Raw | null;
         disable_first_message_interruptions?: boolean | null;
         max_conversation_duration_message?: string | null;
         prompt?: PromptAgentApiModelOutput.Raw | null;

@@ -28,7 +28,7 @@ export interface ClientToolConfigInput {
     /** If true, calling this tool should block the conversation until the client responds with some response which is passed to the llm. If false then we will continue the conversation without waiting for the client to respond, this is useful to show content to a user but not block the conversation */
     expectsResponse?: boolean;
     /** Configuration for dynamic variables */
-    dynamicVariables?: ElevenLabs.DynamicVariablesConfig;
+    dynamicVariables?: ElevenLabs.DynamicVariablesConfigInput;
     /** Determines when and how the tool executes: 'immediate' executes the tool right away when requested by the LLM, 'post_tool_speech' waits for the agent to finish speaking before executing, 'async' runs the tool in the background without blocking - best for long-running operations. */
     executionMode?: ElevenLabs.ToolExecutionMode;
 }

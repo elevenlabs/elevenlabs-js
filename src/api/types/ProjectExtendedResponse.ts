@@ -74,7 +74,7 @@ export interface ProjectExtendedResponse {
     /** Agent-related settings for the project */
     agentSettings?: ElevenLabs.StudioAgentSettingsModel;
     /** The quality preset level of the project. */
-    qualityPreset: ElevenLabs.ProjectExtendedResponseModelQualityPreset;
+    qualityPreset: ElevenLabs.QualityPresetType;
     /** List of chapters of the project and their metadata. */
     chapters: ElevenLabs.ChapterResponse[];
     /** List of pronunciation dictionary versions of the project and their metadata. */

@@ -3,7 +3,6 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
-import { AvatarContextRequestModel } from "../../../../types/AvatarContextRequestModel";
 import { DialogueInput } from "../../../../types/DialogueInput";
 import { ModelSettingsResponseModel } from "../../../../types/ModelSettingsResponseModel";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
@@ -26,7 +25,6 @@ export const BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost: co
         "apply_text_normalization",
         BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization.optional(),
     ),
-    avatarContext: core.serialization.property("avatar_context", AvatarContextRequestModel.optional()),
 });
 
 export declare namespace BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost {
@@ -38,6 +36,5 @@ export declare namespace BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueSt
         pronunciation_dictionary_locators?: PronunciationDictionaryVersionLocator.Raw[] | null;
         seed?: number | null;
         apply_text_normalization?: BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization.Raw | null;
-        avatar_context?: AvatarContextRequestModel.Raw | null;
     }
 }

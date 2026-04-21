@@ -37,7 +37,7 @@ export interface BodyCreateStudioProjectV1StudioProjectsPost {
      * 'ultra' - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side.
      * 'ultra_lossless' - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format.
      */
-    qualityPreset?: ElevenLabs.studio.ProjectsCreateRequestQualityPreset;
+    qualityPreset?: ElevenLabs.QualityPresetType;
     /** An optional name of the author of the Studio project, this will be added as metadata to the mp3 file on Studio project or chapter download. */
     title?: string;
     /** An optional name of the author of the Studio project, this will be added as metadata to the mp3 file on Studio project or chapter download. */

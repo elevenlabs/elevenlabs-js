@@ -3,10 +3,10 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
+import { QualityPresetType } from "../../../../types/QualityPresetType";
 import { BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization } from "../../types/BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization";
 import { BodyCreatePodcastV1StudioPodcastsPostDurationScale } from "../../types/BodyCreatePodcastV1StudioPodcastsPostDurationScale";
 import { BodyCreatePodcastV1StudioPodcastsPostMode } from "../../types/BodyCreatePodcastV1StudioPodcastsPostMode";
-import { BodyCreatePodcastV1StudioPodcastsPostQualityPreset } from "../../types/BodyCreatePodcastV1StudioPodcastsPostQualityPreset";
 import { BodyCreatePodcastV1StudioPodcastsPostSource } from "../../types/BodyCreatePodcastV1StudioPodcastsPostSource";
 
 export const BodyCreatePodcastV1StudioPodcastsPost: core.serialization.Schema<
@@ -16,10 +16,7 @@ export const BodyCreatePodcastV1StudioPodcastsPost: core.serialization.Schema<
     modelId: core.serialization.property("model_id", core.serialization.string()),
     mode: BodyCreatePodcastV1StudioPodcastsPostMode,
     source: BodyCreatePodcastV1StudioPodcastsPostSource,
-    qualityPreset: core.serialization.property(
-        "quality_preset",
-        BodyCreatePodcastV1StudioPodcastsPostQualityPreset.optional(),
-    ),
+    qualityPreset: core.serialization.property("quality_preset", QualityPresetType.optional()),
     durationScale: core.serialization.property(
         "duration_scale",
         BodyCreatePodcastV1StudioPodcastsPostDurationScale.optional(),
@@ -41,7 +38,7 @@ export declare namespace BodyCreatePodcastV1StudioPodcastsPost {
         model_id: string;
         mode: BodyCreatePodcastV1StudioPodcastsPostMode.Raw;
         source: BodyCreatePodcastV1StudioPodcastsPostSource.Raw;
-        quality_preset?: BodyCreatePodcastV1StudioPodcastsPostQualityPreset.Raw | null;
+        quality_preset?: QualityPresetType.Raw | null;
         duration_scale?: BodyCreatePodcastV1StudioPodcastsPostDurationScale.Raw | null;
         language?: string | null;
         intro?: string | null;

@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const ProcedureCompilerMode: core.serialization.Schema<
     serializers.ProcedureCompilerMode.Raw,
     ElevenLabs.ProcedureCompilerMode
-> = core.serialization.enum_(["llm", "deterministic"]);
+> = core.serialization.enum_(["llm", "deterministic", "append"]);
 
 export declare namespace ProcedureCompilerMode {
-    export type Raw = "llm" | "deterministic";
+    export type Raw = "llm" | "deterministic" | "append";
 }

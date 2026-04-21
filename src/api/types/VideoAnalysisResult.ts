@@ -10,5 +10,4 @@ export interface VideoAnalysisResult {
     subjects?: ElevenLabs.VideoSubject[];
     segments?: ElevenLabs.VideoSegment[];
     keyMoments?: ElevenLabs.VideoKeyMoment[];
-    transcription?: ElevenLabs.AssetTranscription;
 }

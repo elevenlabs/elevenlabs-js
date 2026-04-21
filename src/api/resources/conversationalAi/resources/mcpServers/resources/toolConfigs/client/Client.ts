@@ -129,7 +129,7 @@ export class ToolConfigsClient {
         mcp_server_id: string,
         tool_name: string,
         requestOptions?: ToolConfigsClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.McpToolConfigOverride> {
+    ): core.HttpResponsePromise<ElevenLabs.McpToolConfigOverrideOutput> {
         return core.HttpResponsePromise.fromPromise(this.__get(mcp_server_id, tool_name, requestOptions));
     }
 
@@ -137,7 +137,7 @@ export class ToolConfigsClient {
         mcp_server_id: string,
         tool_name: string,
         requestOptions?: ToolConfigsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.McpToolConfigOverride>> {
+    ): Promise<core.WithRawResponse<ElevenLabs.McpToolConfigOverrideOutput>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -161,7 +161,7 @@ export class ToolConfigsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.McpToolConfigOverride.parseOrThrow(_response.body, {
+                data: serializers.McpToolConfigOverrideOutput.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

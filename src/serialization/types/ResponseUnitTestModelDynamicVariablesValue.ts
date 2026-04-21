@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { DynamicVariableContainerValueTypeOutput } from "./DynamicVariableContainerValueTypeOutput";
 
 export const ResponseUnitTestModelDynamicVariablesValue: core.serialization.Schema<
     serializers.ResponseUnitTestModelDynamicVariablesValue.Raw,
@@ -12,8 +13,9 @@ export const ResponseUnitTestModelDynamicVariablesValue: core.serialization.Sche
     core.serialization.number(),
     core.serialization.number(),
     core.serialization.boolean(),
+    DynamicVariableContainerValueTypeOutput,
 ]);
 
 export declare namespace ResponseUnitTestModelDynamicVariablesValue {
-    export type Raw = string | number | number | boolean;
+    export type Raw = string | number | number | boolean | DynamicVariableContainerValueTypeOutput.Raw;
 }

@@ -12,10 +12,15 @@ export const GetScheduleParams: core.serialization.ObjectSchema<
         "smb_tool_type",
         core.serialization.stringLiteral("get_schedule").optional(),
     ),
+    includeLocationFilter: core.serialization.property(
+        "include_location_filter",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace GetScheduleParams {
     export interface Raw {
         smb_tool_type?: "get_schedule" | null;
+        include_location_filter?: boolean | null;
     }
 }

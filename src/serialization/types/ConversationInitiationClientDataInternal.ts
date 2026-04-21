@@ -24,6 +24,10 @@ export const ConversationInitiationClientDataInternal: core.serialization.Object
     sourceInfo: core.serialization.property("source_info", ConversationInitiationSourceInfo.optional()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     environment: core.serialization.string().optional(),
+    startingWorkflowNodeId: core.serialization.property(
+        "starting_workflow_node_id",
+        core.serialization.string().optional(),
+    ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
         core.serialization
@@ -44,6 +48,7 @@ export declare namespace ConversationInitiationClientDataInternal {
         source_info?: ConversationInitiationSourceInfo.Raw | null;
         branch_id?: string | null;
         environment?: string | null;
+        starting_workflow_node_id?: string | null;
         dynamic_variables?: Record<
             string,
             ConversationInitiationClientDataInternalDynamicVariablesValue.Raw | null | undefined

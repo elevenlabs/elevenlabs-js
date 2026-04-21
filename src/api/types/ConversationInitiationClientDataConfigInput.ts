@@ -9,4 +9,6 @@ export interface ConversationInitiationClientDataConfigInput {
     customLlmExtraBody?: boolean;
     /** Whether to enable conversation initiation client data from webhooks */
     enableConversationInitiationClientDataFromWebhook?: boolean;
+    /** Whether clients may pass starting_workflow_node_id in initiation client data; if false, sending it fails conversation start. */
+    enableStartingWorkflowNodeIdFromClient?: boolean;
 }

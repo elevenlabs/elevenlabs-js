@@ -10,7 +10,7 @@ import { McpServerConfigInputSecretToken } from "./McpServerConfigInputSecretTok
 import { McpServerConfigInputUrl } from "./McpServerConfigInputUrl";
 import { McpServerTransport } from "./McpServerTransport";
 import { McpToolApprovalHash } from "./McpToolApprovalHash";
-import { McpToolConfigOverride } from "./McpToolConfigOverride";
+import { McpToolConfigOverrideInput } from "./McpToolConfigOverrideInput";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
 import { ToolExecutionMode } from "./ToolExecutionMode";
@@ -41,7 +41,7 @@ export const McpServerConfigInput: core.serialization.ObjectSchema<
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
     toolConfigOverrides: core.serialization.property(
         "tool_config_overrides",
-        core.serialization.list(McpToolConfigOverride).optional(),
+        core.serialization.list(McpToolConfigOverrideInput).optional(),
     ),
     disableCompression: core.serialization.property("disable_compression", core.serialization.boolean().optional()),
 });
@@ -62,7 +62,7 @@ export declare namespace McpServerConfigInput {
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
-        tool_config_overrides?: McpToolConfigOverride.Raw[] | null;
+        tool_config_overrides?: McpToolConfigOverrideInput.Raw[] | null;
         disable_compression?: boolean | null;
     }
 }

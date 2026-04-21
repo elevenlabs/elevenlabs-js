@@ -16,23 +16,20 @@ export const PhoneNumberTransfer: core.serialization.ObjectSchema<
         "custom_sip_headers",
         core.serialization.list(PhoneNumberTransferCustomSipHeadersItem).optional(),
     ),
-    transferDestination: core.serialization.property(
-        "transfer_destination",
-        PhoneNumberTransferTransferDestination.optional(),
-    ),
-    phoneNumber: core.serialization.property("phone_number", core.serialization.string().optional()),
-    condition: core.serialization.string(),
+    transferDestination: core.serialization.property("transfer_destination", PhoneNumberTransferTransferDestination),
     transferType: core.serialization.property("transfer_type", TransferTypeEnum.optional()),
     postDialDigits: core.serialization.property("post_dial_digits", PhoneNumberTransferPostDialDigits.optional()),
+    phoneNumber: core.serialization.property("phone_number", core.serialization.string().optional()),
+    condition: core.serialization.string(),
 });
 
 export declare namespace PhoneNumberTransfer {
     export interface Raw {
         custom_sip_headers?: PhoneNumberTransferCustomSipHeadersItem.Raw[] | null;
-        transfer_destination?: PhoneNumberTransferTransferDestination.Raw | null;
-        phone_number?: string | null;
-        condition: string;
+        transfer_destination: PhoneNumberTransferTransferDestination.Raw;
         transfer_type?: TransferTypeEnum.Raw | null;
         post_dial_digits?: PhoneNumberTransferPostDialDigits.Raw | null;
+        phone_number?: string | null;
+        condition: string;
     }
 }
