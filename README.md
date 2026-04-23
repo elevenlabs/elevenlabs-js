@@ -165,6 +165,8 @@ import { SpeechEngine } from "@elevenlabs/elevenlabs-js";
 
 const server = new SpeechEngine.Server({
     port: 3001,
+    engineId: "seng_123",
+    apiKey: process.env.ELEVENLABS_API_KEY,
     async onTranscript(transcript, signal, session) {
         const reply = await generateLLMResponse(transcript, { signal });
         session.sendResponse(reply);
@@ -173,6 +175,8 @@ const server = new SpeechEngine.Server({
 
 server.start();
 ```
+
+Both `SpeechEngine.Server` and `speechEngine.attach()` automatically verify the `X-Elevenlabs-Speech-Engine-Authorization` header on every incoming connection, rejecting any requests that were not signed by ElevenLabs. The API key is read from `apiKey` in the options or the `ELEVENLABS_API_KEY` environment variable.
 
 ### Session events
 

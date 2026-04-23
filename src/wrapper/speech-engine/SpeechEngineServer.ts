@@ -1,6 +1,9 @@
+import { createServer, type Server as HttpServer } from "node:http";
+import type { Duplex } from "node:stream";
 import WebSocket from "ws";
 import type { SpeechEngineCallbacks } from "./types";
 import { SpeechEngineSession } from "./SpeechEngineSession";
+import { verifySpeechEngineJwt } from "./SpeechEngineResource";
 
 export interface SpeechEngineServerOptions extends SpeechEngineCallbacks {
     /**
@@ -9,9 +12,18 @@ export interface SpeechEngineServerOptions extends SpeechEngineCallbacks {
     port?: number;
 
     /**
+     * Your ElevenLabs API key. Used to verify that incoming WebSocket
+     * connections originate from the ElevenLabs API.
+     *
+     * When omitted, the server will reject all connections and throw
+     * an error on start. Pass `{ apiKey: "..." }` or set the
+     * `ELEVENLABS_API_KEY` environment variable.
+     */
+    apiKey?: string;
+
+    /**
      * The ID of the speech engine this server handles connections for.
      * Populated automatically when created via `engine.listen()`.
-     * Will be used for connection auth in a future release.
      */
     engineId?: string;
 }
@@ -20,28 +32,15 @@ export interface SpeechEngineServerOptions extends SpeechEngineCallbacks {
  * Standalone WebSocket server that produces `SpeechEngineSession` instances for
  * each incoming connection from the ElevenLabs Speech Engine API.
  *
- * For integration with an existing HTTP server (e.g. Express, Next.js), manage
- * the WebSocket upgrade yourself and use `handleConnection` to wrap individual
- * connections:
+ * Every incoming connection is verified against the ElevenLabs API using the
+ * configured API key before being accepted.
  *
- * ```typescript
- * const wss = new WebSocket.Server({ noServer: true });
- *
- * httpServer.on("upgrade", async (req, socket, head) => {
- *     if (!await engine.verifyRequest(req)) { socket.destroy(); return; }
- *     wss.handleUpgrade(req, socket, head, (ws) => wss.emit("connection", ws));
- * });
- *
- * wss.on("connection", (ws) => {
- *     const session = new SpeechEngine.Session(ws);
- *     session.on(SpeechEngine.USER_TRANSCRIPT, async (transcript, { signal }) => {
- *         session.sendResponse(await llm.generate(transcript, { signal }));
- *     });
- * });
- * ```
+ * For integration with an existing HTTP server (e.g. Express, Next.js), use
+ * `engine.attach()` instead.
  */
 export class SpeechEngineServer {
     private wss: WebSocket.Server | null = null;
+    private httpServer: HttpServer | null = null;
     private options: SpeechEngineServerOptions;
 
     constructor(options: SpeechEngineServerOptions) {
@@ -67,11 +66,52 @@ export class SpeechEngineServer {
             throw new Error("Server is already started");
         }
 
-        this.wss = new WebSocket.Server({ port: this.options.port ?? 3001 });
+        const apiKey = this.options.apiKey ?? process.env.ELEVENLABS_API_KEY;
+        if (!apiKey) {
+            throw new Error(
+                "SpeechEngine.Server requires an API key to verify incoming connections. " +
+                "Pass { apiKey: \"...\" } or set the ELEVENLABS_API_KEY environment variable.",
+            );
+        }
 
-        this.wss.on("connection", (ws: WebSocket) => {
+        const debug = this.options.debug ?? false;
+        const log = debug ? (...args: unknown[]) => console.log("[SpeechEngine]", ...args) : () => {};
+
+        const httpServer = createServer();
+        const wss = new WebSocket.Server({ noServer: true });
+
+        httpServer.on("upgrade", (req, socket: Duplex, head) => {
+            const headerValue = req.headers["x-elevenlabs-speech-engine-authorization"];
+            const token = Array.isArray(headerValue) ? headerValue[0] : headerValue;
+
+            if (!token) {
+                log("rejected connection — missing X-Elevenlabs-Speech-Engine-Authorization header");
+                socket.destroy();
+                return;
+            }
+
+            try {
+                verifySpeechEngineJwt(token, apiKey, log);
+            } catch (err) {
+                log(`rejected connection — ${err instanceof Error ? err.message : String(err)}`);
+                socket.destroy();
+                return;
+            }
+
+            log("verified connection, upgrading to WebSocket");
+            wss.handleUpgrade(req, socket, head, (ws) => {
+                wss.emit("connection", ws);
+            });
+        });
+
+        wss.on("connection", (ws: WebSocket) => {
             this.handleConnection(ws);
         });
+
+        httpServer.listen(this.options.port ?? 3001);
+
+        this.wss = wss;
+        this.httpServer = httpServer;
     }
 
     private wireHandler(session: SpeechEngineSession): void {
@@ -93,10 +133,18 @@ export class SpeechEngineServer {
                 return;
             }
 
-            this.wss.close((err) => {
+            this.wss.close((wssErr) => {
                 this.wss = null;
-                if (err) reject(err);
-                else resolve();
+                if (this.httpServer) {
+                    this.httpServer.close((httpErr) => {
+                        this.httpServer = null;
+                        if (wssErr || httpErr) reject(wssErr || httpErr);
+                        else resolve();
+                    });
+                } else {
+                    if (wssErr) reject(wssErr);
+                    else resolve();
+                }
             });
         });
     }

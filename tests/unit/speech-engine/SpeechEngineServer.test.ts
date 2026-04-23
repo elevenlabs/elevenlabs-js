@@ -125,8 +125,13 @@ describe("SpeechEngineServer", () => {
     // Lifecycle
     // -----------------------------------------------------------------------
 
-    it("throws if started twice", () => {
+    it("throws if started without an API key", () => {
         const se = trackSeServer(new SpeechEngineServer({ port: 0 }));
+        expect(() => se.start()).toThrow("API key");
+    });
+
+    it("throws if started twice", () => {
+        const se = trackSeServer(new SpeechEngineServer({ port: 0, apiKey: "test-key" }));
         se.start();
         expect(() => se.start()).toThrow("already started");
     });
