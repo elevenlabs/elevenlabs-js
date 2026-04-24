@@ -35,6 +35,8 @@ export interface Config {
     model_id?: string;
     disable_logging?: boolean;
     include_timestamps?: boolean;
+    keyterms?: string[];
+    no_verbatim?: boolean;
 }
 
 export interface SessionStartedMessage {
