@@ -21,6 +21,7 @@ export const ClientEvent = {
     ClientError: "client_error",
     GuardrailTriggered: "guardrail_triggered",
     DtmfRequest: "dtmf_request",
+    AgentResponseComplete: "agent_response_complete",
     InternalTurnProbability: "internal_turn_probability",
     InternalTentativeAgentResponse: "internal_tentative_agent_response",
 } as const;

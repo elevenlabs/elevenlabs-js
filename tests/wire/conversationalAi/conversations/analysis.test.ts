@@ -182,6 +182,7 @@ describe("AnalysisClient", () => {
                     original_message: "original_message",
                     source_medium: "audio",
                     source_event_id: 1,
+                    used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -454,6 +455,7 @@ describe("AnalysisClient", () => {
                     originalMessage: "original_message",
                     sourceMedium: "audio",
                     sourceEventId: 1,
+                    usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",

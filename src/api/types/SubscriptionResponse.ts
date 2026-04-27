@@ -38,7 +38,7 @@ export interface SubscriptionResponse {
     /** Whether the user can use professional voice cloning. */
     canUseProfessionalVoiceCloning: boolean;
     /** The currency of the user's subscription. */
-    currency?: ElevenLabs.SubscriptionResponseModelCurrency;
+    currency?: ElevenLabs.Currency;
     /** The status of the user's subscription. */
     status: ElevenLabs.SubscriptionStatusType;
     /** The billing period of the user's subscription. */

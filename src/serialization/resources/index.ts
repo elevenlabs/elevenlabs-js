@@ -40,6 +40,8 @@ export * from "./textToVoice/client/requests";
 export * from "./textToVoice/types";
 export * as v1SpeechToTextRealtime from "./v1SpeechToTextRealtime";
 export * from "./v1SpeechToTextRealtime/types";
+export * as v1TextToDialogueStreamInput from "./v1TextToDialogueStreamInput";
+export * from "./v1TextToDialogueStreamInput/types";
 export * as v1TextToSpeechVoiceIdMultiStreamInput from "./v1TextToSpeechVoiceIdMultiStreamInput";
 export * from "./v1TextToSpeechVoiceIdMultiStreamInput/types";
 export * as v1TextToSpeechVoiceIdStreamInput from "./v1TextToSpeechVoiceIdStreamInput";

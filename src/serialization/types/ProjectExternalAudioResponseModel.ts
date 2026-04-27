@@ -3,8 +3,11 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AssetTranscription } from "./AssetTranscription";
 import { AudioAnalysis } from "./AudioAnalysis";
+import { PendingBlocksMetadataModel } from "./PendingBlocksMetadataModel";
 import { PendingClipTask } from "./PendingClipTask";
+import { PendingExternalAudiosMetadataModel } from "./PendingExternalAudiosMetadataModel";
 import { ProjectExternalAudioResponseModelSourceContext } from "./ProjectExternalAudioResponseModelSourceContext";
 
 export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
@@ -39,6 +42,14 @@ export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
         "pending_external_audio_ids",
         core.serialization.list(core.serialization.string()),
     ),
+    pendingBlocksMetadata: core.serialization.property(
+        "pending_blocks_metadata",
+        PendingBlocksMetadataModel.optional(),
+    ),
+    pendingExternalAudiosMetadata: core.serialization.property(
+        "pending_external_audios_metadata",
+        PendingExternalAudiosMetadataModel.optional(),
+    ),
     speechImported: core.serialization.property("speech_imported", core.serialization.boolean().optional()),
     pendingTask: core.serialization.property("pending_task", PendingClipTask.optional()),
     error: core.serialization.string().optional(),
@@ -48,6 +59,7 @@ export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
         ProjectExternalAudioResponseModelSourceContext.optional(),
     ),
     analysis: AudioAnalysis.optional(),
+    transcription: AssetTranscription.optional(),
     importSpeechProgress: core.serialization.property("import_speech_progress", core.serialization.number().optional()),
 });
 
@@ -72,12 +84,15 @@ export declare namespace ProjectExternalAudioResponseModel {
         source_asset_id?: string | null;
         pending_block_ids: string[];
         pending_external_audio_ids: string[];
+        pending_blocks_metadata?: PendingBlocksMetadataModel.Raw | null;
+        pending_external_audios_metadata?: PendingExternalAudiosMetadataModel.Raw | null;
         speech_imported?: boolean | null;
         pending_task?: PendingClipTask.Raw | null;
         error?: string | null;
         current_snapshot_id?: string | null;
         source_context?: ProjectExternalAudioResponseModelSourceContext.Raw | null;
         analysis?: AudioAnalysis.Raw | null;
+        transcription?: AssetTranscription.Raw | null;
         import_speech_progress?: number | null;
     }
 }

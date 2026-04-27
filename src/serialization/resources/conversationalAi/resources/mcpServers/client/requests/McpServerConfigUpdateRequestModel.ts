@@ -5,6 +5,7 @@ import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
 import { ConvAiSecretLocator } from "../../../../../../types/ConvAiSecretLocator";
 import { McpApprovalPolicy } from "../../../../../../types/McpApprovalPolicy";
+import { PreToolSpeechMode } from "../../../../../../types/PreToolSpeechMode";
 import { ToolCallSoundBehavior } from "../../../../../../types/ToolCallSoundBehavior";
 import { ToolCallSoundType } from "../../../../../../types/ToolCallSoundType";
 import { ToolExecutionMode } from "../../../../../../types/ToolExecutionMode";
@@ -17,10 +18,12 @@ export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
 > = core.serialization.object({
     approvalPolicy: core.serialization.property("approval_policy", McpApprovalPolicy.optional()),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
+    preToolSpeech: core.serialization.property("pre_tool_speech", PreToolSpeechMode.optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
+    responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
     requestHeaders: core.serialization.property(
         "request_headers",
         core.serialization
@@ -39,10 +42,12 @@ export declare namespace McpServerConfigUpdateRequestModel {
     export interface Raw {
         approval_policy?: McpApprovalPolicy.Raw | null;
         force_pre_tool_speech?: boolean | null;
+        pre_tool_speech?: PreToolSpeechMode.Raw | null;
         disable_interruptions?: boolean | null;
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
+        response_timeout_secs?: number | null;
         request_headers?: Record<
             string,
             McpServerConfigUpdateRequestModelRequestHeadersValue.Raw | null | undefined

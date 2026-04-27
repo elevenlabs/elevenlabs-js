@@ -4,8 +4,8 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationConfigClientOverrideInput } from "./ConversationConfigClientOverrideInput";
-import { ConversationInitiationClientDataRequestInputDynamicVariablesValue } from "./ConversationInitiationClientDataRequestInputDynamicVariablesValue";
 import { ConversationInitiationSourceInfo } from "./ConversationInitiationSourceInfo";
+import { DynamicVariableValueTypeInput } from "./DynamicVariableValueTypeInput";
 
 export const ConversationInitiationClientDataRequestInput: core.serialization.ObjectSchema<
     serializers.ConversationInitiationClientDataRequestInput.Raw,
@@ -29,12 +29,7 @@ export const ConversationInitiationClientDataRequestInput: core.serialization.Ob
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization
-            .record(
-                core.serialization.string(),
-                ConversationInitiationClientDataRequestInputDynamicVariablesValue.optional(),
-            )
-            .optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeInput.optional()).optional(),
     ),
 });
 
@@ -47,9 +42,6 @@ export declare namespace ConversationInitiationClientDataRequestInput {
         branch_id?: string | null;
         environment?: string | null;
         starting_workflow_node_id?: string | null;
-        dynamic_variables?: Record<
-            string,
-            ConversationInitiationClientDataRequestInputDynamicVariablesValue.Raw | null | undefined
-        > | null;
+        dynamic_variables?: Record<string, DynamicVariableValueTypeInput.Raw | null | undefined> | null;
     }
 }

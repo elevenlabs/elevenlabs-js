@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { ApiIntegrationWebhookOverrides } from "./ApiIntegrationWebhookOverrides";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { DynamicVariablesConfigOutput } from "./DynamicVariablesConfigOutput";
+import { PreToolSpeechMode } from "./PreToolSpeechMode";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
 import { ToolErrorHandlingMode } from "./ToolErrorHandlingMode";
@@ -20,6 +21,7 @@ export const ApiIntegrationWebhookToolConfigOutput: core.serialization.ObjectSch
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean()),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean()),
+    preToolSpeech: core.serialization.property("pre_tool_speech", PreToolSpeechMode),
     assignments: core.serialization.list(DynamicVariableAssignment),
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior),
@@ -42,6 +44,7 @@ export declare namespace ApiIntegrationWebhookToolConfigOutput {
         response_timeout_secs: number;
         disable_interruptions: boolean;
         force_pre_tool_speech: boolean;
+        pre_tool_speech: PreToolSpeechMode.Raw;
         assignments: DynamicVariableAssignment.Raw[];
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior: ToolCallSoundBehavior.Raw;

@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { DynamicVariablesConfigWorkflowOverrideOutputDynamicVariablePlaceholdersValue } from "./DynamicVariablesConfigWorkflowOverrideOutputDynamicVariablePlaceholdersValue";
+import { DynamicVariableValueTypeOutput } from "./DynamicVariableValueTypeOutput";
 
 export const DynamicVariablesConfigWorkflowOverrideOutput: core.serialization.ObjectSchema<
     serializers.DynamicVariablesConfigWorkflowOverrideOutput.Raw,
@@ -11,20 +11,12 @@ export const DynamicVariablesConfigWorkflowOverrideOutput: core.serialization.Ob
 > = core.serialization.object({
     dynamicVariablePlaceholders: core.serialization.property(
         "dynamic_variable_placeholders",
-        core.serialization
-            .record(
-                core.serialization.string(),
-                DynamicVariablesConfigWorkflowOverrideOutputDynamicVariablePlaceholdersValue.optional(),
-            )
-            .optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput.optional()).optional(),
     ),
 });
 
 export declare namespace DynamicVariablesConfigWorkflowOverrideOutput {
     export interface Raw {
-        dynamic_variable_placeholders?: Record<
-            string,
-            DynamicVariablesConfigWorkflowOverrideOutputDynamicVariablePlaceholdersValue.Raw | null | undefined
-        > | null;
+        dynamic_variable_placeholders?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
     }
 }

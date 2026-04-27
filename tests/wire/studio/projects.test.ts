@@ -277,6 +277,8 @@ describe("ProjectsClient", () => {
                     asset_preview_signed_url: "asset_preview_signed_url",
                     source_video_id: "source_video_id",
                     source_asset_id: "source_asset_id",
+                    pending_blocks_metadata: { block_ids: ["block_ids"] },
+                    pending_external_audios_metadata: { external_audio_ids: ["external_audio_ids"] },
                     pending_block_ids: ["pending_block_ids"],
                     pending_external_audio_ids: ["pending_external_audio_ids"],
                     speech_imported: true,
@@ -286,6 +288,7 @@ describe("ProjectsClient", () => {
                     current_snapshot_id: "current_snapshot_id",
                     source_context: { generation_id: "generation_id", model_id: "model_id" },
                     analysis: { status: "processing" },
+                    transcription: { status: "processing" },
                     playback_speed: 1.1,
                     opacity: 1.1,
                     track_id: "track_id",
@@ -802,6 +805,12 @@ describe("ProjectsClient", () => {
                     assetPreviewSignedUrl: "asset_preview_signed_url",
                     sourceVideoId: "source_video_id",
                     sourceAssetId: "source_asset_id",
+                    pendingBlocksMetadata: {
+                        blockIds: ["block_ids"],
+                    },
+                    pendingExternalAudiosMetadata: {
+                        externalAudioIds: ["external_audio_ids"],
+                    },
                     pendingBlockIds: ["pending_block_ids"],
                     pendingExternalAudioIds: ["pending_external_audio_ids"],
                     speechImported: true,
@@ -816,6 +825,9 @@ describe("ProjectsClient", () => {
                         modelId: "model_id",
                     },
                     analysis: {
+                        status: "processing",
+                    },
+                    transcription: {
                         status: "processing",
                     },
                     playbackSpeed: 1.1,

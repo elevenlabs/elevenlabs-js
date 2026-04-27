@@ -18,8 +18,10 @@ export interface McpServerConfigOutput {
     authConnection?: ElevenLabs.McpServerConfigOutputAuthConnection;
     name: string;
     description?: string;
-    /** If true, all tools from this MCP server will require pre-tool execution speech */
+    /** DEPRECATED: use `pre_tool_speech` instead. If true, all tools from this MCP server will require pre-tool execution speech. */
     forcePreToolSpeech?: boolean;
+    /** Controls whether the agent speaks before this tool is called. 'auto' (default) decides based on recent tool latency, 'force' always asks the agent to speak, 'off' fully opts out regardless of latency. Applies to every tool from this MCP server unless overridden per tool. */
+    preToolSpeech?: ElevenLabs.PreToolSpeechMode;
     /** If true, the user will not be able to interrupt the agent while any tool from this MCP server is running. */
     disableInterruptions?: boolean;
     /** Predefined tool call sound type to play during tool execution for all tools from this MCP server */
@@ -28,6 +30,8 @@ export interface McpServerConfigOutput {
     toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
     /** Determines when and how all tools from this MCP server execute: 'immediate' executes the tool right away when requested by the LLM, 'post_tool_speech' waits for the agent to finish speaking before executing, 'async' runs the tool in the background without blocking - best for long-running operations. */
     executionMode?: ElevenLabs.ToolExecutionMode;
+    /** The maximum time in seconds to wait for each MCP tool call to complete. Must be between 5 and 120 seconds (inclusive). */
+    responseTimeoutSecs?: number;
     /** List of per-tool configuration overrides that override the server-level defaults for specific tools */
     toolConfigOverrides?: ElevenLabs.McpToolConfigOverrideOutput[];
     /** Whether to disable HTTP compression for this MCP server. Enable this if the server does not support compressed responses. */

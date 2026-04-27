@@ -11,6 +11,7 @@ import { McpServerConfigOutputUrl } from "./McpServerConfigOutputUrl";
 import { McpServerTransport } from "./McpServerTransport";
 import { McpToolApprovalHash } from "./McpToolApprovalHash";
 import { McpToolConfigOverrideOutput } from "./McpToolConfigOverrideOutput";
+import { PreToolSpeechMode } from "./PreToolSpeechMode";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
 import { ToolExecutionMode } from "./ToolExecutionMode";
@@ -35,10 +36,12 @@ export const McpServerConfigOutput: core.serialization.ObjectSchema<
     name: core.serialization.string(),
     description: core.serialization.string().optional(),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
+    preToolSpeech: core.serialization.property("pre_tool_speech", PreToolSpeechMode.optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
+    responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
     toolConfigOverrides: core.serialization.property(
         "tool_config_overrides",
         core.serialization.list(McpToolConfigOverrideOutput).optional(),
@@ -58,10 +61,12 @@ export declare namespace McpServerConfigOutput {
         name: string;
         description?: string | null;
         force_pre_tool_speech?: boolean | null;
+        pre_tool_speech?: PreToolSpeechMode.Raw | null;
         disable_interruptions?: boolean | null;
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
+        response_timeout_secs?: number | null;
         tool_config_overrides?: McpToolConfigOverrideOutput.Raw[] | null;
         disable_compression?: boolean | null;
     }

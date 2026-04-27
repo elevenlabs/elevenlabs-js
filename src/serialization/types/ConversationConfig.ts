@@ -16,6 +16,7 @@ export const ConversationConfig: core.serialization.ObjectSchema<
     fileInput: core.serialization.property("file_input", FileInputConfig.optional()),
     monitoringEnabled: core.serialization.property("monitoring_enabled", core.serialization.boolean().optional()),
     monitoringEvents: core.serialization.property("monitoring_events", core.serialization.list(ClientEvent).optional()),
+    sourceAttribution: core.serialization.property("source_attribution", core.serialization.boolean().optional()),
 });
 
 export declare namespace ConversationConfig {
@@ -26,5 +27,6 @@ export declare namespace ConversationConfig {
         file_input?: FileInputConfig.Raw | null;
         monitoring_enabled?: boolean | null;
         monitoring_events?: ClientEvent.Raw[] | null;
+        source_attribution?: boolean | null;
     }
 }

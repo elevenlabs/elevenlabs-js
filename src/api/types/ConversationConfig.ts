@@ -15,4 +15,6 @@ export interface ConversationConfig {
     monitoringEnabled?: boolean;
     /** The events that will be sent to monitoring connections. */
     monitoringEvents?: ElevenLabs.ClientEvent[];
+    /** When enabled and knowledge base content is present, the LLM is instructed to report which sources it used. */
+    sourceAttribution?: boolean;
 }

@@ -5,8 +5,10 @@ import type * as ElevenLabs from "../index";
 export interface McpToolConfigOverrideOutput {
     /** The name of the MCP tool */
     toolName: string;
-    /** If set, overrides the server's force_pre_tool_speech setting for this tool */
+    /** DEPRECATED: use `pre_tool_speech` instead. If set, overrides the server's force_pre_tool_speech setting for this tool. */
     forcePreToolSpeech?: boolean;
+    /** If set, overrides the server's pre_tool_speech setting for this tool. */
+    preToolSpeech?: ElevenLabs.PreToolSpeechMode;
     /** If set, overrides the server's disable_interruptions setting for this tool */
     disableInterruptions?: boolean;
     /** If set, overrides the server's tool_call_sound setting for this tool */
@@ -15,6 +17,8 @@ export interface McpToolConfigOverrideOutput {
     toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
     /** If set, overrides the server's execution_mode setting for this tool */
     executionMode?: ElevenLabs.ToolExecutionMode;
+    /** If set, overrides the server's response timeout for this MCP tool (seconds). */
+    responseTimeoutSecs?: number;
     /** Dynamic variable assignments for this MCP tool */
     assignments?: ElevenLabs.DynamicVariableAssignment[];
     /** Mapping of json path to input override configuration */

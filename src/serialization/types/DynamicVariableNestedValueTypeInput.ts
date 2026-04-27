@@ -2,24 +2,13 @@
 
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
-import * as serializers from "../index";
+import type * as serializers from "../index";
 
 export const DynamicVariableNestedValueTypeInput: core.serialization.Schema<
     serializers.DynamicVariableNestedValueTypeInput.Raw,
     ElevenLabs.DynamicVariableNestedValueTypeInput
-> = core.serialization.undiscriminatedUnion([
-    core.serialization.string(),
-    core.serialization.number(),
-    core.serialization.number(),
-    core.serialization.boolean(),
-    core.serialization.list(core.serialization.lazy(() => serializers.DynamicVariableNestedValueTypeInput).optional()),
-]);
+> = core.serialization.unknown();
 
 export declare namespace DynamicVariableNestedValueTypeInput {
-    export type Raw =
-        | string
-        | number
-        | number
-        | boolean
-        | (serializers.DynamicVariableNestedValueTypeInput.Raw | null | undefined)[];
+    export type Raw = unknown;
 }

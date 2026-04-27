@@ -15,6 +15,8 @@ export interface WebhookToolApiSchemaConfigOutput {
     queryParamsSchema?: ElevenLabs.QueryParamsJsonSchema;
     /** Schema for the body parameters, if any. Used for POST/PATCH/PUT requests. The schema should be an object which will be sent as the json body */
     requestBodySchema?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
+    /** Schema describing the expected response body structure. For documentation only; not surfaced to the LLM. */
+    responseBodySchema?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
     /** Content type for the request body. Only applies to POST/PUT/PATCH requests. */
     contentType?: ElevenLabs.WebhookToolApiSchemaConfigOutputContentType;
     /** Optional auth connection to use for authentication with this webhook */

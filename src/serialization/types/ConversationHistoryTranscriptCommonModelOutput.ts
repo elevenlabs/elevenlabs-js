@@ -46,6 +46,10 @@ export const ConversationHistoryTranscriptCommonModelOutput: core.serialization.
     originalMessage: core.serialization.property("original_message", core.serialization.string().optional()),
     sourceMedium: core.serialization.property("source_medium", ChatSourceMedium.optional()),
     sourceEventId: core.serialization.property("source_event_id", core.serialization.number().optional()),
+    usedStaticKbDocumentIds: core.serialization.property(
+        "used_static_kb_document_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace ConversationHistoryTranscriptCommonModelOutput {
@@ -66,5 +70,6 @@ export declare namespace ConversationHistoryTranscriptCommonModelOutput {
         original_message?: string | null;
         source_medium?: ChatSourceMedium.Raw | null;
         source_event_id?: number | null;
+        used_static_kb_document_ids?: string[] | null;
     }
 }

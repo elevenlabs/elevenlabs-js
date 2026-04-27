@@ -29,6 +29,8 @@ export interface AgentPlatformSettingsResponseModel {
     callLimits?: ElevenLabs.AgentCallLimits;
     /** Privacy settings for the agent */
     privacy?: ElevenLabs.PrivacyConfigOutput;
+    /** The trust context in which the agent operates. */
+    trustContext?: ElevenLabs.AgentTrustContext;
     /** Default LLM model for post-call analysis (evaluation and data collection) */
     analysisLlm?: ElevenLabs.Llm;
     safety?: ElevenLabs.SafetyResponseModel;

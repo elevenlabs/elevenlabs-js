@@ -3,10 +3,13 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AssetTranscription } from "./AssetTranscription";
 import { CanvasPlacement } from "./CanvasPlacement";
 import { ClipAnimation } from "./ClipAnimation";
 import { GenerationSourceContext } from "./GenerationSourceContext";
+import { PendingBlocksMetadataModel } from "./PendingBlocksMetadataModel";
 import { PendingClipTask } from "./PendingClipTask";
+import { PendingExternalAudiosMetadataModel } from "./PendingExternalAudiosMetadataModel";
 import { ProjectVideoThumbnailSheetResponseModel } from "./ProjectVideoThumbnailSheetResponseModel";
 import { VideoAnalysis } from "./VideoAnalysis";
 
@@ -45,6 +48,14 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
     ),
     sourceVideoId: core.serialization.property("source_video_id", core.serialization.string().optional()),
     sourceAssetId: core.serialization.property("source_asset_id", core.serialization.string().optional()),
+    pendingBlocksMetadata: core.serialization.property(
+        "pending_blocks_metadata",
+        PendingBlocksMetadataModel.optional(),
+    ),
+    pendingExternalAudiosMetadata: core.serialization.property(
+        "pending_external_audios_metadata",
+        PendingExternalAudiosMetadataModel.optional(),
+    ),
     pendingBlockIds: core.serialization.property(
         "pending_block_ids",
         core.serialization.list(core.serialization.string()),
@@ -60,6 +71,7 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
     sourceContext: core.serialization.property("source_context", GenerationSourceContext.optional()),
     analysis: VideoAnalysis.optional(),
+    transcription: AssetTranscription.optional(),
     canvasPlacement: core.serialization.property("canvas_placement", CanvasPlacement.optional()),
     animation: ClipAnimation.optional(),
     playbackSpeed: core.serialization.property("playback_speed", core.serialization.number().optional()),
@@ -96,6 +108,8 @@ export declare namespace ProjectVideoResponseModel {
         asset_preview_signed_url?: string | null;
         source_video_id?: string | null;
         source_asset_id?: string | null;
+        pending_blocks_metadata?: PendingBlocksMetadataModel.Raw | null;
+        pending_external_audios_metadata?: PendingExternalAudiosMetadataModel.Raw | null;
         pending_block_ids: string[];
         pending_external_audio_ids: string[];
         speech_imported?: boolean | null;
@@ -105,6 +119,7 @@ export declare namespace ProjectVideoResponseModel {
         current_snapshot_id?: string | null;
         source_context?: GenerationSourceContext.Raw | null;
         analysis?: VideoAnalysis.Raw | null;
+        transcription?: AssetTranscription.Raw | null;
         canvas_placement?: CanvasPlacement.Raw | null;
         animation?: ClipAnimation.Raw | null;
         playback_speed?: number | null;

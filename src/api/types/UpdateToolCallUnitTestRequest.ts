@@ -6,7 +6,7 @@ export interface UpdateToolCallUnitTestRequest {
     /** Metadata of a conversation this test was created from (if applicable). */
     fromConversationMetadata?: ElevenLabs.TestFromConversationMetadataInput;
     /** Dynamic variables to replace in the agent config during testing */
-    dynamicVariables?: Record<string, ElevenLabs.UpdateToolCallUnitTestRequestDynamicVariablesValue | undefined>;
+    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeInput | undefined>;
     chatHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelInput[];
     /** How to evaluate the agent's tool call (if any). If empty, the tool call is not evaluated. */
     toolCallParameters?: ElevenLabs.UnitTestToolCallEvaluationModelInput;

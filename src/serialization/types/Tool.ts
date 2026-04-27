@@ -3,7 +3,9 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { Icon } from "./Icon";
 import { ToolAnnotations } from "./ToolAnnotations";
+import { ToolExecution } from "./ToolExecution";
 
 export const Tool: core.serialization.ObjectSchema<serializers.Tool.Raw, ElevenLabs.Tool> = core.serialization
     .object({
@@ -12,11 +14,13 @@ export const Tool: core.serialization.ObjectSchema<serializers.Tool.Raw, ElevenL
         description: core.serialization.string().optional(),
         inputSchema: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
         outputSchema: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+        icons: core.serialization.list(Icon).optional(),
         annotations: ToolAnnotations.optional(),
         meta: core.serialization.property(
             "_meta",
             core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
         ),
+        execution: ToolExecution.optional(),
     })
     .passthrough();
 
@@ -27,8 +31,10 @@ export declare namespace Tool {
         description?: string | null;
         inputSchema: Record<string, unknown>;
         outputSchema?: Record<string, unknown> | null;
+        icons?: Icon.Raw[] | null;
         annotations?: ToolAnnotations.Raw | null;
         _meta?: Record<string, unknown> | null;
+        execution?: ToolExecution.Raw | null;
         [key: string]: any;
     }
 }

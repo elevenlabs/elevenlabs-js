@@ -7,4 +7,5 @@ export interface RagRetrievalInfo {
     embeddingModel: ElevenLabs.EmbeddingModelEnum;
     retrievalQuery: string;
     ragLatencySecs: number;
+    usedChunkIds?: string[];
 }

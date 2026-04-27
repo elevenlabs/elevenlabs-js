@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../../../../../../../../api/index";
 import * as core from "../../../../../../../../../core";
 import type * as serializers from "../../../../../../../../index";
 import { DynamicVariableAssignment } from "../../../../../../../../types/DynamicVariableAssignment";
+import { PreToolSpeechMode } from "../../../../../../../../types/PreToolSpeechMode";
 import { ToolCallSoundBehavior } from "../../../../../../../../types/ToolCallSoundBehavior";
 import { ToolCallSoundType } from "../../../../../../../../types/ToolCallSoundType";
 import { ToolExecutionMode } from "../../../../../../../../types/ToolExecutionMode";
@@ -15,10 +16,12 @@ export const McpToolConfigOverrideCreateRequestModel: core.serialization.Schema<
     ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideCreateRequestModel
 > = core.serialization.object({
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
+    preToolSpeech: core.serialization.property("pre_tool_speech", PreToolSpeechMode.optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
+    responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
     assignments: core.serialization.list(DynamicVariableAssignment).optional(),
     inputOverrides: core.serialization.property(
         "input_overrides",
@@ -36,10 +39,12 @@ export const McpToolConfigOverrideCreateRequestModel: core.serialization.Schema<
 export declare namespace McpToolConfigOverrideCreateRequestModel {
     export interface Raw {
         force_pre_tool_speech?: boolean | null;
+        pre_tool_speech?: PreToolSpeechMode.Raw | null;
         disable_interruptions?: boolean | null;
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
+        response_timeout_secs?: number | null;
         assignments?: DynamicVariableAssignment.Raw[] | null;
         input_overrides?: Record<
             string,

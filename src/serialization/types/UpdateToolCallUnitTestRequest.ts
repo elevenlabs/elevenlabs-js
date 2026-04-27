@@ -4,9 +4,9 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationHistoryTranscriptCommonModelInput } from "./ConversationHistoryTranscriptCommonModelInput";
+import { DynamicVariableValueTypeInput } from "./DynamicVariableValueTypeInput";
 import { TestFromConversationMetadataInput } from "./TestFromConversationMetadataInput";
 import { UnitTestToolCallEvaluationModelInput } from "./UnitTestToolCallEvaluationModelInput";
-import { UpdateToolCallUnitTestRequestDynamicVariablesValue } from "./UpdateToolCallUnitTestRequestDynamicVariablesValue";
 
 export const UpdateToolCallUnitTestRequest: core.serialization.ObjectSchema<
     serializers.UpdateToolCallUnitTestRequest.Raw,
@@ -18,9 +18,7 @@ export const UpdateToolCallUnitTestRequest: core.serialization.ObjectSchema<
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization
-            .record(core.serialization.string(), UpdateToolCallUnitTestRequestDynamicVariablesValue.optional())
-            .optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeInput.optional()).optional(),
     ),
     chatHistory: core.serialization.property(
         "chat_history",
@@ -38,10 +36,7 @@ export const UpdateToolCallUnitTestRequest: core.serialization.ObjectSchema<
 export declare namespace UpdateToolCallUnitTestRequest {
     export interface Raw {
         from_conversation_metadata?: TestFromConversationMetadataInput.Raw | null;
-        dynamic_variables?: Record<
-            string,
-            UpdateToolCallUnitTestRequestDynamicVariablesValue.Raw | null | undefined
-        > | null;
+        dynamic_variables?: Record<string, DynamicVariableValueTypeInput.Raw | null | undefined> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelInput.Raw[] | null;
         tool_call_parameters?: UnitTestToolCallEvaluationModelInput.Raw | null;
         check_any_tool_matches?: boolean | null;

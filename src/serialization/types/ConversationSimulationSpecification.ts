@@ -5,7 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentConfig } from "./AgentConfig";
 import { ConversationHistoryTranscriptCommonModelInput } from "./ConversationHistoryTranscriptCommonModelInput";
-import { ConversationSimulationSpecificationDynamicVariablesValue } from "./ConversationSimulationSpecificationDynamicVariablesValue";
+import { DynamicVariableValueTypeInput } from "./DynamicVariableValueTypeInput";
 import { ToolMockConfig } from "./ToolMockConfig";
 
 export const ConversationSimulationSpecification: core.serialization.ObjectSchema<
@@ -23,9 +23,7 @@ export const ConversationSimulationSpecification: core.serialization.ObjectSchem
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization
-            .record(core.serialization.string(), ConversationSimulationSpecificationDynamicVariablesValue.optional())
-            .optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeInput.optional()).optional(),
     ),
 });
 
@@ -34,9 +32,6 @@ export declare namespace ConversationSimulationSpecification {
         simulated_user_config: AgentConfig.Raw;
         tool_mock_config?: Record<string, ToolMockConfig.Raw> | null;
         partial_conversation_history?: ConversationHistoryTranscriptCommonModelInput.Raw[] | null;
-        dynamic_variables?: Record<
-            string,
-            ConversationSimulationSpecificationDynamicVariablesValue.Raw | null | undefined
-        > | null;
+        dynamic_variables?: Record<string, DynamicVariableValueTypeInput.Raw | null | undefined> | null;
     }
 }

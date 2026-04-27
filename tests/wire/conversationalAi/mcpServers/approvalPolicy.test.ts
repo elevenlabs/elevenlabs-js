@@ -20,11 +20,12 @@ describe("ApprovalPolicyClient", () => {
                 auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
-                force_pre_tool_speech: true,
+                pre_tool_speech: "auto",
                 disable_interruptions: true,
                 tool_call_sound: "typing",
                 tool_call_sound_behavior: "auto",
                 execution_mode: "immediate",
+                response_timeout_secs: 1,
                 tool_config_overrides: [
                     {
                         tool_name: "tool_name",
@@ -94,11 +95,12 @@ describe("ApprovalPolicyClient", () => {
                 },
                 name: "name",
                 description: "description",
-                forcePreToolSpeech: true,
+                preToolSpeech: "auto",
                 disableInterruptions: true,
                 toolCallSound: "typing",
                 toolCallSoundBehavior: "auto",
                 executionMode: "immediate",
+                responseTimeoutSecs: 1,
                 toolConfigOverrides: [
                     {
                         toolName: "tool_name",
