@@ -111,7 +111,7 @@ describe("ToolsClient", () => {
                 description: "description",
                 response_timeout_secs: 1,
                 disable_interruptions: true,
-                force_pre_tool_speech: true,
+                pre_tool_speech: "auto",
                 assignments: [
                     {
                         source: "response",
@@ -170,7 +170,7 @@ describe("ToolsClient", () => {
                 description: "description",
                 responseTimeoutSecs: 1,
                 disableInterruptions: true,
-                forcePreToolSpeech: true,
+                preToolSpeech: "auto",
                 assignments: [
                     {
                         source: "response",
@@ -240,7 +240,7 @@ describe("ToolsClient", () => {
                 description: "description",
                 response_timeout_secs: 1,
                 disable_interruptions: true,
-                force_pre_tool_speech: true,
+                pre_tool_speech: "auto",
                 assignments: [
                     {
                         source: "response",
@@ -291,7 +291,7 @@ describe("ToolsClient", () => {
                 description: "description",
                 responseTimeoutSecs: 1,
                 disableInterruptions: true,
-                forcePreToolSpeech: true,
+                preToolSpeech: "auto",
                 assignments: [
                     {
                         source: "response",
@@ -384,7 +384,7 @@ describe("ToolsClient", () => {
                 description: "description",
                 response_timeout_secs: 1,
                 disable_interruptions: true,
-                force_pre_tool_speech: true,
+                pre_tool_speech: "auto",
                 assignments: [
                     {
                         source: "response",
@@ -443,7 +443,7 @@ describe("ToolsClient", () => {
                 description: "description",
                 responseTimeoutSecs: 1,
                 disableInterruptions: true,
-                forcePreToolSpeech: true,
+                preToolSpeech: "auto",
                 assignments: [
                     {
                         source: "response",

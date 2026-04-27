@@ -22,11 +22,14 @@ export interface ProjectExternalAudioResponseModel {
     sourceAssetId?: string;
     pendingBlockIds: string[];
     pendingExternalAudioIds: string[];
+    pendingBlocksMetadata?: ElevenLabs.PendingBlocksMetadataModel;
+    pendingExternalAudiosMetadata?: ElevenLabs.PendingExternalAudiosMetadataModel;
     speechImported?: boolean;
     pendingTask?: ElevenLabs.PendingClipTask;
     error?: string;
     currentSnapshotId?: string;
     sourceContext?: ElevenLabs.ProjectExternalAudioResponseModelSourceContext;
     analysis?: ElevenLabs.AudioAnalysis;
+    transcription?: ElevenLabs.AssetTranscription;
     importSpeechProgress?: number;
 }

@@ -10,7 +10,9 @@ import type * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePost {
+    /** Start of the time range as a Unix timestamp in milliseconds. Must be at least 2020-01-01. */
     startTime: number;
+    /** End of the time range as a Unix timestamp in milliseconds. Must be at least 2020-01-01. */
     endTime: number;
     intervalSeconds?: number;
     groupBy?: ElevenLabs.workspace.BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePostGroupByItem[];

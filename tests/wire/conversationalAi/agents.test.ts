@@ -71,6 +71,7 @@ describe("AgentsClient", () => {
                     client_events: ["audio", "interruption"],
                     monitoring_enabled: true,
                     monitoring_events: ["conversation_initiation_metadata"],
+                    source_attribution: true,
                 },
                 language_presets: {
                     key: {
@@ -320,6 +321,7 @@ describe("AgentsClient", () => {
                     apply_to_existing_conversations: false,
                     zero_retention_mode: false,
                 },
+                trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
@@ -628,6 +630,7 @@ describe("AgentsClient", () => {
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
                                             force_pre_tool_speech: true,
+                                            pre_tool_speech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -826,6 +829,7 @@ describe("AgentsClient", () => {
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
                                             force_pre_tool_speech: true,
+                                            pre_tool_speech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -1025,6 +1029,7 @@ describe("AgentsClient", () => {
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
                                             force_pre_tool_speech: true,
+                                            pre_tool_speech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -1172,6 +1177,7 @@ describe("AgentsClient", () => {
                     clientEvents: ["audio", "interruption"],
                     monitoringEnabled: true,
                     monitoringEvents: ["conversation_initiation_metadata"],
+                    sourceAttribution: true,
                 },
                 languagePresets: {
                     key: {
@@ -1498,6 +1504,7 @@ describe("AgentsClient", () => {
                     applyToExistingConversations: false,
                     zeroRetentionMode: false,
                 },
+                trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
                 safety: {
                     isBlockedIvc: true,
@@ -1866,6 +1873,7 @@ describe("AgentsClient", () => {
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
                                             forcePreToolSpeech: true,
+                                            preToolSpeech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -2100,6 +2108,7 @@ describe("AgentsClient", () => {
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
                                             forcePreToolSpeech: true,
+                                            preToolSpeech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -2342,6 +2351,7 @@ describe("AgentsClient", () => {
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
                                             forcePreToolSpeech: true,
+                                            preToolSpeech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -2524,6 +2534,7 @@ describe("AgentsClient", () => {
                     client_events: ["audio", "interruption"],
                     monitoring_enabled: true,
                     monitoring_events: ["conversation_initiation_metadata"],
+                    source_attribution: true,
                 },
                 language_presets: {
                     key: {
@@ -2773,6 +2784,7 @@ describe("AgentsClient", () => {
                     apply_to_existing_conversations: false,
                     zero_retention_mode: false,
                 },
+                trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
@@ -3081,6 +3093,7 @@ describe("AgentsClient", () => {
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
                                             force_pre_tool_speech: true,
+                                            pre_tool_speech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -3279,6 +3292,7 @@ describe("AgentsClient", () => {
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
                                             force_pre_tool_speech: true,
+                                            pre_tool_speech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -3478,6 +3492,7 @@ describe("AgentsClient", () => {
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
                                             force_pre_tool_speech: true,
+                                            pre_tool_speech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -3626,6 +3641,7 @@ describe("AgentsClient", () => {
                     clientEvents: ["audio", "interruption"],
                     monitoringEnabled: true,
                     monitoringEvents: ["conversation_initiation_metadata"],
+                    sourceAttribution: true,
                 },
                 languagePresets: {
                     key: {
@@ -3952,6 +3968,7 @@ describe("AgentsClient", () => {
                     applyToExistingConversations: false,
                     zeroRetentionMode: false,
                 },
+                trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
                 safety: {
                     isBlockedIvc: true,
@@ -4320,6 +4337,7 @@ describe("AgentsClient", () => {
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
                                             forcePreToolSpeech: true,
+                                            preToolSpeech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -4554,6 +4572,7 @@ describe("AgentsClient", () => {
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
                                             forcePreToolSpeech: true,
+                                            preToolSpeech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -4796,6 +4815,7 @@ describe("AgentsClient", () => {
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
                                             forcePreToolSpeech: true,
+                                            preToolSpeech: "auto",
                                             assignments: [
                                                 {
                                                     source: "response",
@@ -5046,6 +5066,7 @@ describe("AgentsClient", () => {
                     original_message: "original_message",
                     source_medium: "audio",
                     source_event_id: 1,
+                    used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -5156,6 +5177,7 @@ describe("AgentsClient", () => {
                     originalMessage: "original_message",
                     sourceMedium: "audio",
                     sourceEventId: 1,
+                    usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",

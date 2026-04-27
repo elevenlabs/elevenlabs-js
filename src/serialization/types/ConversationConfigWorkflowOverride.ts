@@ -16,6 +16,7 @@ export const ConversationConfigWorkflowOverride: core.serialization.ObjectSchema
     fileInput: core.serialization.property("file_input", FileInputConfigWorkflowOverride.optional()),
     monitoringEnabled: core.serialization.property("monitoring_enabled", core.serialization.boolean().optional()),
     monitoringEvents: core.serialization.property("monitoring_events", core.serialization.list(ClientEvent).optional()),
+    sourceAttribution: core.serialization.property("source_attribution", core.serialization.boolean().optional()),
 });
 
 export declare namespace ConversationConfigWorkflowOverride {
@@ -26,5 +27,6 @@ export declare namespace ConversationConfigWorkflowOverride {
         file_input?: FileInputConfigWorkflowOverride.Raw | null;
         monitoring_enabled?: boolean | null;
         monitoring_events?: ClientEvent.Raw[] | null;
+        source_attribution?: boolean | null;
     }
 }

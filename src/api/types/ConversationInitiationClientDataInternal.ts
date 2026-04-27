@@ -14,10 +14,7 @@ export interface ConversationInitiationClientDataInternal {
     environment?: string;
     /** If set, start the workflow at this node id instead of the default entry */
     startingWorkflowNodeId?: string;
-    dynamicVariables?: Record<
-        string,
-        ElevenLabs.ConversationInitiationClientDataInternalDynamicVariablesValue | undefined
-    >;
+    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeOutput | undefined>;
     /** Configuration for which tools to mock and fallback behavior */
     toolMockConfig?: ElevenLabs.OrchestratorToolMockBehaviorConfig;
 }

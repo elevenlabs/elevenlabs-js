@@ -31,6 +31,10 @@ export const WebhookToolApiSchemaConfigOutput: core.serialization.ObjectSchema<
         "request_body_schema",
         core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyOutput).optional(),
     ),
+    responseBodySchema: core.serialization.property(
+        "response_body_schema",
+        core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyOutput).optional(),
+    ),
     contentType: core.serialization.property("content_type", WebhookToolApiSchemaConfigOutputContentType.optional()),
     authConnection: core.serialization.property(
         "auth_connection",
@@ -46,6 +50,7 @@ export declare namespace WebhookToolApiSchemaConfigOutput {
         path_params_schema?: Record<string, LiteralJsonSchemaProperty.Raw> | null;
         query_params_schema?: QueryParamsJsonSchema.Raw | null;
         request_body_schema?: serializers.ObjectJsonSchemaPropertyOutput.Raw | null;
+        response_body_schema?: serializers.ObjectJsonSchemaPropertyOutput.Raw | null;
         content_type?: WebhookToolApiSchemaConfigOutputContentType.Raw | null;
         auth_connection?: WebhookToolApiSchemaConfigOutputAuthConnection.Raw | null;
     }

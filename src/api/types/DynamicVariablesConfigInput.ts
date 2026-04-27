@@ -4,8 +4,5 @@ import type * as ElevenLabs from "../index";
 
 export interface DynamicVariablesConfigInput {
     /** A dictionary of dynamic variable placeholders and their values */
-    dynamicVariablePlaceholders?: Record<
-        string,
-        ElevenLabs.DynamicVariablesConfigInputDynamicVariablePlaceholdersValue
-    >;
+    dynamicVariablePlaceholders?: Record<string, ElevenLabs.DynamicVariableValueTypeInput | undefined>;
 }

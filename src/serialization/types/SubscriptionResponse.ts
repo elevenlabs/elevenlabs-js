@@ -5,7 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { BillingPeriod } from "./BillingPeriod";
 import { CharacterRefreshPeriod } from "./CharacterRefreshPeriod";
-import { SubscriptionResponseModelCurrency } from "./SubscriptionResponseModelCurrency";
+import { Currency } from "./Currency";
 import { SubscriptionResponseModelMaxCreditLimitExtension } from "./SubscriptionResponseModelMaxCreditLimitExtension";
 import { SubscriptionStatusType } from "./SubscriptionStatusType";
 
@@ -51,7 +51,7 @@ export const SubscriptionResponse: core.serialization.ObjectSchema<
         "can_use_professional_voice_cloning",
         core.serialization.boolean(),
     ),
-    currency: SubscriptionResponseModelCurrency.optional(),
+    currency: Currency.optional(),
     status: SubscriptionStatusType,
     billingPeriod: core.serialization.property("billing_period", BillingPeriod.optional()),
     characterRefreshPeriod: core.serialization.property("character_refresh_period", CharacterRefreshPeriod.optional()),
@@ -76,7 +76,7 @@ export declare namespace SubscriptionResponse {
         can_extend_voice_limit: boolean;
         can_use_instant_voice_cloning: boolean;
         can_use_professional_voice_cloning: boolean;
-        currency?: SubscriptionResponseModelCurrency.Raw | null;
+        currency?: Currency.Raw | null;
         status: SubscriptionStatusType.Raw;
         billing_period?: BillingPeriod.Raw | null;
         character_refresh_period?: CharacterRefreshPeriod.Raw | null;

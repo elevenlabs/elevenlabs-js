@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
-import { GetSimulationTestResponseModelDynamicVariablesValue } from "./GetSimulationTestResponseModelDynamicVariablesValue";
+import { DynamicVariableValueTypeOutput } from "./DynamicVariableValueTypeOutput";
 import { SimulationToolMockBehaviorConfig } from "./SimulationToolMockBehaviorConfig";
 import { TestFromConversationMetadataOutput } from "./TestFromConversationMetadataOutput";
 
@@ -18,9 +18,7 @@ export const GetSimulationTestResponseModel: core.serialization.ObjectSchema<
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization
-            .record(core.serialization.string(), GetSimulationTestResponseModelDynamicVariablesValue.optional())
-            .optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput.optional()).optional(),
     ),
     chatHistory: core.serialization.property(
         "chat_history",
@@ -41,10 +39,7 @@ export const GetSimulationTestResponseModel: core.serialization.ObjectSchema<
 export declare namespace GetSimulationTestResponseModel {
     export interface Raw {
         from_conversation_metadata?: TestFromConversationMetadataOutput.Raw | null;
-        dynamic_variables?: Record<
-            string,
-            GetSimulationTestResponseModelDynamicVariablesValue.Raw | null | undefined
-        > | null;
+        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
         success_condition?: string | null;
         simulation_scenario?: string | null;

@@ -10,6 +10,7 @@ export const SpeechHistoryItemResponseModelSource = {
     PlayApi: "PlayAPI",
     ConvAi: "ConvAI",
     VoiceGeneration: "VoiceGeneration",
+    InVpc: "InVPC",
 } as const;
 export type SpeechHistoryItemResponseModelSource =
     (typeof SpeechHistoryItemResponseModelSource)[keyof typeof SpeechHistoryItemResponseModelSource];

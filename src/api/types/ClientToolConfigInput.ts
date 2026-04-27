@@ -13,8 +13,10 @@ export interface ClientToolConfigInput {
     responseTimeoutSecs?: number;
     /** If true, the user will not be able to interrupt the agent while this tool is running. */
     disableInterruptions?: boolean;
-    /** If true, the agent will speak before the tool call. */
+    /** DEPRECATED: use `pre_tool_speech` instead. If true, the agent will speak before the tool call. */
     forcePreToolSpeech?: boolean;
+    /** Controls whether the agent speaks before this tool is called. 'auto' (default) decides based on recent tool latency, 'force' always asks the agent to speak, 'off' fully opts out regardless of latency. */
+    preToolSpeech?: ElevenLabs.PreToolSpeechMode;
     /** Configuration for extracting values from tool responses and assigning them to dynamic variables */
     assignments?: ElevenLabs.DynamicVariableAssignment[];
     /** Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played. */

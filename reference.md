@@ -450,6 +450,136 @@ await client.textToSoundEffects.convert({
 </details>
 
 ## AudioIsolation
+<details><summary><code>client.audioIsolation.<a href="/src/api/resources/audioIsolation/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetAudioIsolationHistoryResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of all your audio isolation generations.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioIsolation.list({
+    pageSize: 1,
+    page: 1,
+    search: "search"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.AudioIsolationListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioIsolationClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.audioIsolation.<a href="/src/api/resources/audioIsolation/client/Client.ts">delete</a>(history_item_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a specific audio isolation history item and the associated media files.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioIsolation.delete("history_item_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**history_item_id:** `string` — Identifier of the audio isolation history item.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioIsolationClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Samples
 <details><summary><code>client.samples.<a href="/src/api/resources/samples/client/Client.ts">delete</a>(voice_id, sample_id) -> ElevenLabs.DeleteSampleResponse</code></summary>
 <dl>
@@ -18978,7 +19108,7 @@ await client.workspace.resources.unshare("resource_id", {
 <dl>
 <dd>
 
-Returns credit usage broken down by product type over time. Timestamps are Unix milliseconds. The response is a tabular structure with columns, column_types, column_units, and rows.
+Returns credit usage broken down by product type over time. The response is a tabular structure with columns, column_types, column_units, and rows.
 </dd>
 </dl>
 </dd>

@@ -29,4 +29,8 @@ export interface SessionStartedPayloadConfig {
     includeTimestamps?: boolean;
     /** Whether the session will include language detection in the committed transcript. */
     includeLanguageDetection?: boolean;
+    /** List of keyterms the model is biased towards. */
+    keyterms?: string[];
+    /** Whether filler words and disfluencies are removed from the transcript. */
+    noVerbatim?: boolean;
 }

@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentCallLimits } from "./AgentCallLimits";
 import { AgentTestingSettings } from "./AgentTestingSettings";
+import { AgentTrustContext } from "./AgentTrustContext";
 import { AgentWorkspaceOverridesOutput } from "./AgentWorkspaceOverridesOutput";
 import { AnalysisProperty } from "./AnalysisProperty";
 import { AnalysisScope } from "./AnalysisScope";
@@ -40,6 +41,7 @@ export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema
     auth: AuthSettings.optional(),
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
     privacy: PrivacyConfigOutput.optional(),
+    trustContext: core.serialization.property("trust_context", AgentTrustContext.optional()),
     analysisLlm: core.serialization.property("analysis_llm", Llm.optional()),
     safety: SafetyResponseModel.optional(),
 });
@@ -59,6 +61,7 @@ export declare namespace AgentPlatformSettingsResponseModel {
         auth?: AuthSettings.Raw | null;
         call_limits?: AgentCallLimits.Raw | null;
         privacy?: PrivacyConfigOutput.Raw | null;
+        trust_context?: AgentTrustContext.Raw | null;
         analysis_llm?: Llm.Raw | null;
         safety?: SafetyResponseModel.Raw | null;
     }

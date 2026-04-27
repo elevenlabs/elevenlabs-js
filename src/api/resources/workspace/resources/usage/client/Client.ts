@@ -24,7 +24,7 @@ export class UsageClient {
     }
 
     /**
-     * Returns credit usage broken down by product type over time. Timestamps are Unix milliseconds. The response is a tabular structure with columns, column_types, column_units, and rows.
+     * Returns credit usage broken down by product type over time. The response is a tabular structure with columns, column_types, column_units, and rows.
      *
      * @param {ElevenLabs.workspace.BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePost} request
      * @param {UsageClient.RequestOptions} requestOptions - Request-specific configuration.

@@ -9,8 +9,10 @@ import type * as ElevenLabs from "../../../../../../index";
 export interface McpServerConfigUpdateRequestModel {
     /** The approval mode to set for the MCP server */
     approvalPolicy?: ElevenLabs.McpApprovalPolicy;
-    /** If set, overrides the server's force_pre_tool_speech setting for this tool */
+    /** DEPRECATED: use `pre_tool_speech` instead. If set, overrides the server's force_pre_tool_speech setting for this tool. */
     forcePreToolSpeech?: boolean;
+    /** If set, overrides the server's pre_tool_speech setting for this tool. */
+    preToolSpeech?: ElevenLabs.PreToolSpeechMode;
     /** If set, overrides the server's disable_interruptions setting for this tool */
     disableInterruptions?: boolean;
     /** Predefined tool call sound type to play during tool execution for all tools from this MCP server */
@@ -19,6 +21,8 @@ export interface McpServerConfigUpdateRequestModel {
     toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
     /** If set, overrides the server's execution_mode setting for this tool */
     executionMode?: ElevenLabs.ToolExecutionMode;
+    /** The maximum time in seconds to wait for each MCP tool call to complete. */
+    responseTimeoutSecs?: number;
     /** The headers to include in requests to the MCP server */
     requestHeaders?: Record<
         string,

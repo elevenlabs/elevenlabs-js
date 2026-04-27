@@ -14,6 +14,10 @@ export const RagRetrievalInfo: core.serialization.ObjectSchema<
     embeddingModel: core.serialization.property("embedding_model", EmbeddingModelEnum),
     retrievalQuery: core.serialization.property("retrieval_query", core.serialization.string()),
     ragLatencySecs: core.serialization.property("rag_latency_secs", core.serialization.number()),
+    usedChunkIds: core.serialization.property(
+        "used_chunk_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace RagRetrievalInfo {
@@ -22,5 +26,6 @@ export declare namespace RagRetrievalInfo {
         embedding_model: EmbeddingModelEnum.Raw;
         retrieval_query: string;
         rag_latency_secs: number;
+        used_chunk_ids?: string[] | null;
     }
 }

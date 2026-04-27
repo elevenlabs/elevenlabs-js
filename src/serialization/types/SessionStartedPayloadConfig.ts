@@ -34,6 +34,8 @@ export const SessionStartedPayloadConfig: core.serialization.ObjectSchema<
         "include_language_detection",
         core.serialization.boolean().optional(),
     ),
+    keyterms: core.serialization.list(core.serialization.string()).optional(),
+    noVerbatim: core.serialization.property("no_verbatim", core.serialization.boolean().optional()),
 });
 
 export declare namespace SessionStartedPayloadConfig {
@@ -50,5 +52,7 @@ export declare namespace SessionStartedPayloadConfig {
         enable_logging?: boolean | null;
         include_timestamps?: boolean | null;
         include_language_detection?: boolean | null;
+        keyterms?: string[] | null;
+        no_verbatim?: boolean | null;
     }
 }

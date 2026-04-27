@@ -28,6 +28,8 @@ export interface ProjectVideoResponseModel {
     assetPreviewSignedUrl?: string;
     sourceVideoId?: string;
     sourceAssetId?: string;
+    pendingBlocksMetadata?: ElevenLabs.PendingBlocksMetadataModel;
+    pendingExternalAudiosMetadata?: ElevenLabs.PendingExternalAudiosMetadataModel;
     pendingBlockIds: string[];
     pendingExternalAudioIds: string[];
     speechImported?: boolean;
@@ -37,6 +39,7 @@ export interface ProjectVideoResponseModel {
     currentSnapshotId?: string;
     sourceContext?: ElevenLabs.GenerationSourceContext;
     analysis?: ElevenLabs.VideoAnalysis;
+    transcription?: ElevenLabs.AssetTranscription;
     canvasPlacement?: ElevenLabs.CanvasPlacement;
     animation?: ElevenLabs.ClipAnimation;
     playbackSpeed?: number;

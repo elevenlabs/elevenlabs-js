@@ -16,7 +16,6 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gpt-5.1",
     "gpt-5.2",
     "gpt-5.2-chat-latest",
-    "gpt-5.4",
     "gpt-5-mini",
     "gpt-5-nano",
     "gpt-3.5-turbo",
@@ -66,7 +65,6 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gpt-5-2025-08-07",
     "gpt-5.1-2025-11-13",
     "gpt-5.2-2025-12-11",
-    "gpt-5.4-2026-03-05",
     "gpt-5-mini-2025-08-07",
     "gpt-5-nano-2025-08-07",
     "gpt-4.1-2025-04-14",
@@ -98,7 +96,6 @@ export declare namespace Llm {
         | "gpt-5.1"
         | "gpt-5.2"
         | "gpt-5.2-chat-latest"
-        | "gpt-5.4"
         | "gpt-5-mini"
         | "gpt-5-nano"
         | "gpt-3.5-turbo"
@@ -148,7 +145,6 @@ export declare namespace Llm {
         | "gpt-5-2025-08-07"
         | "gpt-5.1-2025-11-13"
         | "gpt-5.2-2025-12-11"
-        | "gpt-5.4-2026-03-05"
         | "gpt-5-mini-2025-08-07"
         | "gpt-5-nano-2025-08-07"
         | "gpt-4.1-2025-04-14"

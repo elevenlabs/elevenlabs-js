@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { DynamicVariablesConfigInputDynamicVariablePlaceholdersValue } from "./DynamicVariablesConfigInputDynamicVariablePlaceholdersValue";
+import { DynamicVariableValueTypeInput } from "./DynamicVariableValueTypeInput";
 
 export const DynamicVariablesConfigInput: core.serialization.ObjectSchema<
     serializers.DynamicVariablesConfigInput.Raw,
@@ -11,17 +11,12 @@ export const DynamicVariablesConfigInput: core.serialization.ObjectSchema<
 > = core.serialization.object({
     dynamicVariablePlaceholders: core.serialization.property(
         "dynamic_variable_placeholders",
-        core.serialization
-            .record(core.serialization.string(), DynamicVariablesConfigInputDynamicVariablePlaceholdersValue)
-            .optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeInput.optional()).optional(),
     ),
 });
 
 export declare namespace DynamicVariablesConfigInput {
     export interface Raw {
-        dynamic_variable_placeholders?: Record<
-            string,
-            DynamicVariablesConfigInputDynamicVariablePlaceholdersValue.Raw
-        > | null;
+        dynamic_variable_placeholders?: Record<string, DynamicVariableValueTypeInput.Raw | null | undefined> | null;
     }
 }

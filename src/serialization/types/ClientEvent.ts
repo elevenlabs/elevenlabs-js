@@ -26,6 +26,7 @@ export const ClientEvent: core.serialization.Schema<serializers.ClientEvent.Raw,
         "client_error",
         "guardrail_triggered",
         "dtmf_request",
+        "agent_response_complete",
         "internal_turn_probability",
         "internal_tentative_agent_response",
     ]);
@@ -52,6 +53,7 @@ export declare namespace ClientEvent {
         | "client_error"
         | "guardrail_triggered"
         | "dtmf_request"
+        | "agent_response_complete"
         | "internal_turn_probability"
         | "internal_tentative_agent_response";
 }

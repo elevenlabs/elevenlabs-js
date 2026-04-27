@@ -6,7 +6,7 @@ export interface ResponseUnitTestModel {
     /** Metadata of a conversation this test was created from (if applicable). */
     fromConversationMetadata?: ElevenLabs.TestFromConversationMetadataOutput;
     /** Dynamic variables to replace in the agent config during testing */
-    dynamicVariables?: Record<string, ElevenLabs.ResponseUnitTestModelDynamicVariablesValue | undefined>;
+    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeOutput | undefined>;
     chatHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
     /** A prompt that evaluates whether the agent's response is successful. Should return True or False. */
     successCondition?: string;

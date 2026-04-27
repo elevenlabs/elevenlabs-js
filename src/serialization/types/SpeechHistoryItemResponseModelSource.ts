@@ -7,8 +7,29 @@ import type * as serializers from "../index";
 export const SpeechHistoryItemResponseModelSource: core.serialization.Schema<
     serializers.SpeechHistoryItemResponseModelSource.Raw,
     ElevenLabs.SpeechHistoryItemResponseModelSource
-> = core.serialization.enum_(["TTS", "STS", "Projects", "PD", "AN", "Dubbing", "PlayAPI", "ConvAI", "VoiceGeneration"]);
+> = core.serialization.enum_([
+    "TTS",
+    "STS",
+    "Projects",
+    "PD",
+    "AN",
+    "Dubbing",
+    "PlayAPI",
+    "ConvAI",
+    "VoiceGeneration",
+    "InVPC",
+]);
 
 export declare namespace SpeechHistoryItemResponseModelSource {
-    export type Raw = "TTS" | "STS" | "Projects" | "PD" | "AN" | "Dubbing" | "PlayAPI" | "ConvAI" | "VoiceGeneration";
+    export type Raw =
+        | "TTS"
+        | "STS"
+        | "Projects"
+        | "PD"
+        | "AN"
+        | "Dubbing"
+        | "PlayAPI"
+        | "ConvAI"
+        | "VoiceGeneration"
+        | "InVPC";
 }
