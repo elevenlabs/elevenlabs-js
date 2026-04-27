@@ -126,8 +126,15 @@ describe("SpeechEngineServer", () => {
     // -----------------------------------------------------------------------
 
     it("throws if started without an API key", () => {
-        const se = trackSeServer(new SpeechEngineServer({ port: 0 }));
-        expect(() => se.start()).toThrow("API key");
+        // Clear the env var so start() doesn't fall back to it (CI sets it).
+        const saved = process.env.ELEVENLABS_API_KEY;
+        delete process.env.ELEVENLABS_API_KEY;
+        try {
+            const se = trackSeServer(new SpeechEngineServer({ port: 0 }));
+            expect(() => se.start()).toThrow("API key");
+        } finally {
+            if (saved !== undefined) process.env.ELEVENLABS_API_KEY = saved;
+        }
     });
 
     it("throws if started twice", () => {
