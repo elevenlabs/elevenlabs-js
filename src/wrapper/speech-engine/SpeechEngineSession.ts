@@ -1,10 +1,11 @@
 import { EventEmitter } from "node:events";
 import WebSocket from "ws";
-import type {
-    IncomingMessage,
-    SpeechEngineEventMap,
-    SpeechEngineEventName,
-    WebSocketLike,
+import {
+    isAbortError,
+    type IncomingMessage,
+    type SpeechEngineEventMap,
+    type SpeechEngineEventName,
+    type WebSocketLike,
 } from "./types";
 
 /**
@@ -90,13 +91,22 @@ export class SpeechEngineSession {
         if (this.closed) {
             throw new Error("Cannot send response: session is closed");
         }
+        if (this.currentEventId === undefined) {
+            console.warn(
+                "[SpeechEngine] sendResponse() called outside of an onTranscript handler. " +
+                "Responses can only be sent in reply to a user transcript. " +
+                "To have the agent speak first, set a first message in your Speech Engine conversation config on the client.",
+            );
+            return;
+        }
         if (typeof response === "string") {
-            this.log(`sending string response (${response.length} chars), event_id=${this.currentEventId}`);
+            this.log(`sending string response: "${response}", event_id=${this.currentEventId}`);
             this.sendAgentResponse(response, false);
             this.sendAgentResponse("", true);
         } else {
             this.log(`starting streamed response, event_id=${this.currentEventId}`);
             this.streamResponse(response).catch((err) => {
+                if (isAbortError(err)) return;
                 this.emitter.emit("error", err instanceof Error ? err : new Error(String(err)));
             });
         }
@@ -165,7 +175,11 @@ export class SpeechEngineSession {
             }
 
             case "user_transcript": {
-                // Abort any in-flight LLM call from the previous transcript
+                if (msg.event_id === this.currentEventId && this.currentAbortController !== null) {
+                    this.log(`skipping duplicate transcript, event_id=${msg.event_id}`);
+                    break;
+                }
+
                 const wasActive = this.currentAbortController !== null;
                 this.abortCurrent();
                 if (wasActive) {

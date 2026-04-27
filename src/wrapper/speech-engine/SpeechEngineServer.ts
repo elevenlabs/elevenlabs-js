@@ -1,7 +1,7 @@
 import { createServer, type Server as HttpServer } from "node:http";
 import type { Duplex } from "node:stream";
 import WebSocket from "ws";
-import type { SpeechEngineCallbacks } from "./types";
+import { isAbortError, type SpeechEngineCallbacks } from "./types";
 import { SpeechEngineSession } from "./SpeechEngineSession";
 import { verifySpeechEngineJwt } from "./SpeechEngineResource";
 
@@ -91,7 +91,7 @@ export class SpeechEngineServer {
             }
 
             try {
-                verifySpeechEngineJwt(token, apiKey, log);
+                verifySpeechEngineJwt(token, apiKey);
             } catch (err) {
                 log(`rejected connection — ${err instanceof Error ? err.message : String(err)}`);
                 socket.destroy();
@@ -117,7 +117,15 @@ export class SpeechEngineServer {
     private wireHandler(session: SpeechEngineSession): void {
         const { onInit, onTranscript, onClose, onDisconnect, onError } = this.options;
         if (onInit) session.on("init", (id) => onInit.call(session, id, session));
-        if (onTranscript) session.on("user_transcript", (t, s) => onTranscript.call(session, t, s, session));
+        if (onTranscript) {
+            session.on("user_transcript", (t, s) => {
+                Promise.resolve(onTranscript.call(session, t, s, session)).catch((err) => {
+                    if (isAbortError(err)) return;
+                    const error = err instanceof Error ? err : new Error(String(err));
+                    if (onError) onError.call(session, error, session);
+                });
+            });
+        }
         if (onClose) session.on("close", () => onClose.call(session, session));
         if (onDisconnect) session.on("disconnected", () => onDisconnect.call(session, session));
         if (onError) session.on("error", (err) => onError.call(session, err, session));

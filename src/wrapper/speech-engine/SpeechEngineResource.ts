@@ -4,7 +4,7 @@ import type { Duplex } from "node:stream";
 import WebSocket from "ws";
 import type { BaseClientOptions, NormalizedClientOptions } from "../../BaseClient";
 import * as core from "../../core";
-import type { SpeechEngineCallbacks } from "./types";
+import { isAbortError, type SpeechEngineCallbacks } from "./types";
 import { SpeechEngineSession } from "./SpeechEngineSession";
 import { SpeechEngineAttachment } from "./SpeechEngineAttachment";
 
@@ -76,7 +76,7 @@ export class SpeechEngineResource {
 
             if (!await this.verifyRequest(req)) {
                 // verifyRequest returned false — get the detailed reason for debug logging
-                const reason = await this.getVerificationFailure(req, log);
+                const reason = await this.getVerificationFailure(req);
                 log(`rejected connection — ${reason}`);
                 socket.destroy();
                 return;
@@ -118,7 +118,6 @@ export class SpeechEngineResource {
     /** @internal Returns `null` when the request is valid, or a human-readable reason when rejected. */
     private async getVerificationFailure(
         req: { headers: Record<string, string | string[] | undefined> },
-        log: (...args: unknown[]) => void = () => {},
     ): Promise<string | null> {
         const apiKey = await core.Supplier.get(this._options.apiKey);
         if (!apiKey) {
@@ -132,7 +131,7 @@ export class SpeechEngineResource {
         }
 
         try {
-            verifySpeechEngineJwt(headerValue, apiKey, log);
+            verifySpeechEngineJwt(headerValue, apiKey);
             return null;
         } catch (err) {
             return err instanceof Error ? err.message : String(err);
@@ -153,7 +152,15 @@ export class SpeechEngineResource {
     private wireHandler(session: SpeechEngineSession, handler: SpeechEngineCallbacks): void {
         const { onInit, onTranscript, onClose, onDisconnect, onError } = handler;
         if (onInit) session.on("init", (id) => onInit.call(session, id, session));
-        if (onTranscript) session.on("user_transcript", (t, s) => onTranscript.call(session, t, s, session));
+        if (onTranscript) {
+            session.on("user_transcript", (t, s) => {
+                Promise.resolve(onTranscript.call(session, t, s, session)).catch((err) => {
+                    if (isAbortError(err)) return;
+                    const error = err instanceof Error ? err : new Error(String(err));
+                    if (onError) onError.call(session, error, session);
+                });
+            });
+        }
         if (onClose) session.on("close", () => onClose.call(session, session));
         if (onDisconnect) session.on("disconnected", () => onDisconnect.call(session, session));
         if (onError) session.on("error", (err) => onError.call(session, err, session));
@@ -177,13 +184,11 @@ function base64UrlDecode(input: string): Buffer {
 export function verifySpeechEngineJwt(
     value: string,
     apiKey: string,
-    log: (...args: unknown[]) => void = () => {},
 ): Record<string, unknown> {
     let token = value.trim();
     if (token.toLowerCase().startsWith("bearer ")) {
         token = token.slice(7).trim();
     }
-    log(`raw token: ${token}`);
 
     const parts = token.split(".");
     if (parts.length !== 3) {
@@ -192,47 +197,29 @@ export function verifySpeechEngineJwt(
 
     const [headerB64, payloadB64, signatureB64] = parts;
 
-    // Decode header and payload for logging (before signature check so we
-    // see them even on verification failure)
-    let jwtHeader: Record<string, unknown> | null = null;
-    try {
-        jwtHeader = JSON.parse(base64UrlDecode(headerB64).toString("utf-8"));
-        log("JWT header:", jwtHeader);
-    } catch {
-        log("JWT header: failed to decode");
-    }
-
     let payload: Record<string, unknown>;
     try {
         payload = JSON.parse(base64UrlDecode(payloadB64).toString("utf-8"));
-        log("JWT payload:", payload);
     } catch {
         throw new Error("Invalid JWT: failed to decode payload");
     }
 
     // SHA-256 hash of the API key, used as the HMAC secret
     const trimmedKey = apiKey.trim();
-    if (trimmedKey.length !== apiKey.length) {
-        log(`API key has whitespace — trimmed from ${apiKey.length} to ${trimmedKey.length} chars`);
-    }
-    const keyPrefix = trimmedKey.length > 8 ? `${trimmedKey.slice(0, 4)}...${trimmedKey.slice(-4)}` : "****";
-    log(`API key: ${keyPrefix} (${trimmedKey.length} chars)`);
-
     const secret = createHash("sha256").update(trimmedKey, "utf-8").digest();
-    log(`secret (sha256 of key): ${secret.toString("hex").slice(0, 16)}...`);
 
-    const signingInput = `${headerB64}.${payloadB64}`;
     const expectedSignature = createHmac("sha256", secret)
-        .update(signingInput)
+        .update(`${headerB64}.${payloadB64}`)
         .digest();
 
     const actualSignature = base64UrlDecode(signatureB64);
 
     if (!expectedSignature.equals(actualSignature)) {
-        log(`expected signature: ${expectedSignature.toString("hex")}`);
-        log(`actual signature:   ${actualSignature.toString("hex")}`);
-        log(`signing input:      ${signingInput}`);
-        throw new Error("Invalid JWT: signature mismatch");
+        const keyPrefix = trimmedKey.length > 8 ? `${trimmedKey.slice(0, 4)}...${trimmedKey.slice(-4)}` : "****";
+        throw new Error(
+            `Invalid JWT: signature mismatch (API key: ${keyPrefix}, ${trimmedKey.length} chars` +
+            `${trimmedKey.length !== apiKey.length ? " — key had trailing whitespace that was trimmed" : ""})`,
+        );
     }
 
     if (payload.iss !== ISSUER) {
