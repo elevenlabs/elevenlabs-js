@@ -215,10 +215,8 @@ export function verifySpeechEngineJwt(
     const actualSignature = base64UrlDecode(signatureB64);
 
     if (!expectedSignature.equals(actualSignature)) {
-        const keyPrefix = trimmedKey.length > 8 ? `${trimmedKey.slice(0, 4)}...${trimmedKey.slice(-4)}` : "****";
         throw new Error(
-            `Invalid JWT: signature mismatch (API key: ${keyPrefix}, ${trimmedKey.length} chars` +
-            `${trimmedKey.length !== apiKey.length ? " — key had trailing whitespace that was trimmed" : ""})`,
+            "Invalid JWT: signature mismatch — make sure the API key used by your Speech Engine server matches the one used to create the engine.",
         );
     }
 

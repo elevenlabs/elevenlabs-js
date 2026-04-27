@@ -92,6 +92,27 @@ describe("SpeechEngineSession", () => {
         expect(signals[1].aborted).toBe(false);
     });
 
+    it("skips duplicate transcripts with the same event_id", () => {
+        let callCount = 0;
+        session.on(SpeechEngine.USER_TRANSCRIPT, () => { callCount++; });
+
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 30 });
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 30 });
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 30 });
+
+        expect(callCount).toBe(1);
+    });
+
+    it("does not deduplicate transcripts without event_id", () => {
+        let callCount = 0;
+        session.on(SpeechEngine.USER_TRANSCRIPT, () => { callCount++; });
+
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: undefined as unknown as number });
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript2, event_id: undefined as unknown as number });
+
+        expect(callCount).toBe(2);
+    });
+
     // -----------------------------------------------------------------------
     // ping / pong
     // -----------------------------------------------------------------------
