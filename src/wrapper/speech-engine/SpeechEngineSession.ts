@@ -37,6 +37,7 @@ export class SpeechEngineSession {
     private emitter = new EventEmitter();
     private currentAbortController: AbortController | null = null;
     private currentEventId: number | undefined;
+    private inTranscriptHandler = false;
     private _conversationId: string | undefined;
     private closed = false;
     private log: (...args: unknown[]) => void;
@@ -87,25 +88,26 @@ export class SpeechEngineSession {
      * (e.g. an OpenAI Responses API stream). Event objects are automatically
      * parsed to extract text deltas.
      */
-    sendResponse(response: string | AsyncIterable<unknown>): void {
+    sendResponse(response: string | AsyncIterable<unknown>): Promise<void> {
         if (this.closed) {
             throw new Error("Cannot send response: session is closed");
         }
-        if (this.currentEventId === undefined) {
+        if (!this.inTranscriptHandler) {
             console.warn(
                 "[SpeechEngine] sendResponse() called outside of an onTranscript handler. " +
                 "Responses can only be sent in reply to a user transcript. " +
                 "To have the agent speak first, set a first message in your Speech Engine conversation config on the client.",
             );
-            return;
+            return Promise.resolve();
         }
         if (typeof response === "string") {
             this.log(`sending string response: "${response}", event_id=${this.currentEventId}`);
             this.sendAgentResponse(response, false);
             this.sendAgentResponse("", true);
+            return Promise.resolve();
         } else {
             this.log(`starting streamed response, event_id=${this.currentEventId}`);
-            this.streamResponse(response).catch((err) => {
+            return this.streamResponse(response).catch((err) => {
                 if (isAbortError(err)) return;
                 this.emitter.emit("error", err instanceof Error ? err : new Error(String(err)));
             });
@@ -118,6 +120,7 @@ export class SpeechEngineSession {
     close(): void {
         if (this.closed) return;
         this.closed = true;
+        this.inTranscriptHandler = false;
         this.abortCurrent();
         this.ws.close();
     }
@@ -156,6 +159,7 @@ export class SpeechEngineSession {
 
         this.ws.on("close", () => {
             this.closed = true;
+            this.inTranscriptHandler = false;
             this.abortCurrent();
             this.emitter.emit("disconnected");
         });
@@ -189,6 +193,7 @@ export class SpeechEngineSession {
                 this.currentEventId = msg.event_id;
                 this.log(`received transcript, event_id=${msg.event_id}, messages=${msg.user_transcript.length}`);
 
+                this.inTranscriptHandler = true;
                 this.emitter.emit("user_transcript", msg.user_transcript, this.currentAbortController.signal);
                 break;
             }
@@ -199,6 +204,7 @@ export class SpeechEngineSession {
             }
 
             case "close": {
+                this.inTranscriptHandler = false;
                 this.abortCurrent();
                 this.emitter.emit("close");
                 break;

@@ -18,7 +18,7 @@ export interface TranscriptMessage {
 export interface UserTranscriptMessage {
     type: "user_transcript";
     user_transcript: TranscriptMessage[];
-    event_id: number;
+    event_id?: number;
 }
 
 export interface PingMessage {
