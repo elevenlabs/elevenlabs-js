@@ -10,5 +10,6 @@ export const AuthorizationMethod = {
     LivekitTokenWebsite: "livekit_token_website",
     GenesysApiKey: "genesys_api_key",
     Whatsapp: "whatsapp",
+    Sms: "sms",
 } as const;
 export type AuthorizationMethod = (typeof AuthorizationMethod)[keyof typeof AuthorizationMethod];

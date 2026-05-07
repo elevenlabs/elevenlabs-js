@@ -10,7 +10,7 @@ export interface ConversationalConfigApiModelWorkflowOverrideOutput {
     /** Configuration for conversational text to speech */
     tts?: ElevenLabs.TtsConversationalConfigWorkflowOverrideOutput;
     /** Configuration for conversational events */
-    conversation?: ElevenLabs.ConversationConfigWorkflowOverride;
+    conversation?: ElevenLabs.ConversationConfigWorkflowOverrideOutput;
     /** Language presets for conversations */
     languagePresets?: Record<string, ElevenLabs.LanguagePresetOutput | undefined>;
     /** Configuration for voice activity detection */

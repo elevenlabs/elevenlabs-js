@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { EndCallToolConfig } from "./EndCallToolConfig";
+import { KnowledgeBaseRagToolConfig } from "./KnowledgeBaseRagToolConfig";
 import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
 import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
@@ -17,6 +18,7 @@ export const SystemToolConfigOutputParams: core.serialization.Schema<
 > = core.serialization
     .union(core.serialization.discriminant("systemToolType", "system_tool_type"), {
         end_call: EndCallToolConfig,
+        knowledge_base_rag: KnowledgeBaseRagToolConfig,
         language_detection: LanguageDetectionToolConfig,
         play_keypad_touch_tone: PlayDtmfToolConfig,
         skip_turn: SkipTurnToolConfig,
@@ -32,6 +34,7 @@ export const SystemToolConfigOutputParams: core.serialization.Schema<
 export declare namespace SystemToolConfigOutputParams {
     export type Raw =
         | SystemToolConfigOutputParams.EndCall
+        | SystemToolConfigOutputParams.KnowledgeBaseRag
         | SystemToolConfigOutputParams.LanguageDetection
         | SystemToolConfigOutputParams.PlayKeypadTouchTone
         | SystemToolConfigOutputParams.SkipTurn
@@ -41,6 +44,10 @@ export declare namespace SystemToolConfigOutputParams {
 
     export interface EndCall extends EndCallToolConfig.Raw {
         system_tool_type: "end_call";
+    }
+
+    export interface KnowledgeBaseRag extends KnowledgeBaseRagToolConfig.Raw {
+        system_tool_type: "knowledge_base_rag";
     }
 
     export interface LanguageDetection extends LanguageDetectionToolConfig.Raw {

@@ -120,7 +120,8 @@ export class BatchCallsClient {
      * @example
      *     await client.conversationalAi.batchCalls.list({
      *         limit: 1,
-     *         lastDoc: "last_doc"
+     *         lastDoc: "last_doc",
+     *         agentId: "agent_id"
      *     })
      */
     public list(
@@ -134,7 +135,7 @@ export class BatchCallsClient {
         request: ElevenLabs.conversationalAi.BatchCallsListRequest = {},
         requestOptions?: BatchCallsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.WorkspaceBatchCallsResponse>> {
-        const { limit, lastDoc } = request;
+        const { limit, lastDoc, agentId } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (limit != null) {
             _queryParams.limit = limit.toString();
@@ -142,6 +143,10 @@ export class BatchCallsClient {
 
         if (lastDoc != null) {
             _queryParams.last_doc = lastDoc;
+        }
+
+        if (agentId != null) {
+            _queryParams.agent_id = agentId;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

@@ -11,4 +11,6 @@ export interface ResourceAccessInfo {
     creatorEmail: string;
     /** The role of the user making the request */
     role: ElevenLabs.ResourceAccessInfoRole;
+    /** The access level for anonymous users. If None, the resource is not shared publicly. */
+    anonymousAccessLevelOverride?: ElevenLabs.ResourceAccessInfoAnonymousAccessLevelOverride;
 }

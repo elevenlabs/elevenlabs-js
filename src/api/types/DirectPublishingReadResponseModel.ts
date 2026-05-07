@@ -53,4 +53,5 @@ export interface DirectPublishingReadResponseModel {
     review?: ElevenLabs.ReviewResponseModel;
     voiceId?: string;
     canUseAssistant?: boolean;
+    isVoiceChangerOn?: boolean;
 }

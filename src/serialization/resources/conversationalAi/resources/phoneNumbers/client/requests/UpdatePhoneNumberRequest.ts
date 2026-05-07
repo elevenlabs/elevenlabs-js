@@ -22,6 +22,7 @@ export const UpdatePhoneNumberRequest: core.serialization.Schema<
         OutboundSipTrunkConfigRequestModel.optional(),
     ),
     livekitStack: core.serialization.property("livekit_stack", LivekitStackType.optional()),
+    storeSipMessages: core.serialization.property("store_sip_messages", core.serialization.boolean().optional()),
 });
 
 export declare namespace UpdatePhoneNumberRequest {
@@ -31,5 +32,6 @@ export declare namespace UpdatePhoneNumberRequest {
         inbound_trunk_config?: InboundSipTrunkConfigRequestModel.Raw | null;
         outbound_trunk_config?: OutboundSipTrunkConfigRequestModel.Raw | null;
         livekit_stack?: LivekitStackType.Raw | null;
+        store_sip_messages?: boolean | null;
     }
 }

@@ -5,6 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { CanvasPlacement } from "./CanvasPlacement";
 import { ClipAnimation } from "./ClipAnimation";
+import { ImageAnalysis } from "./ImageAnalysis";
+import { PendingClipTask } from "./PendingClipTask";
 
 export const ProjectImageResponseModel: core.serialization.ObjectSchema<
     serializers.ProjectImageResponseModel.Raw,
@@ -12,8 +14,8 @@ export const ProjectImageResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     imageId: core.serialization.property("image_id", core.serialization.string()),
     filename: core.serialization.string(),
-    signedUrl: core.serialization.property("signed_url", core.serialization.string()),
-    thumbnailSignedUrl: core.serialization.property("thumbnail_signed_url", core.serialization.string()),
+    signedUrl: core.serialization.property("signed_url", core.serialization.string().optional()),
+    thumbnailSignedUrl: core.serialization.property("thumbnail_signed_url", core.serialization.string().optional()),
     source: core.serialization.stringLiteral("upload").optional(),
     fileSizeBytes: core.serialization.property("file_size_bytes", core.serialization.number()),
     width: core.serialization.number(),
@@ -29,14 +31,21 @@ export const ProjectImageResponseModel: core.serialization.ObjectSchema<
     updatedAtMs: core.serialization.property("updated_at_ms", core.serialization.number()),
     currentSnapshotId: core.serialization.property("current_snapshot_id", core.serialization.string().optional()),
     sourceAssetId: core.serialization.property("source_asset_id", core.serialization.string().optional()),
+    sourcePlatformAssetId: core.serialization.property(
+        "source_platform_asset_id",
+        core.serialization.string().optional(),
+    ),
+    error: core.serialization.string().optional(),
+    pendingTask: core.serialization.property("pending_task", PendingClipTask.optional()),
+    analysis: ImageAnalysis.optional(),
 });
 
 export declare namespace ProjectImageResponseModel {
     export interface Raw {
         image_id: string;
         filename: string;
-        signed_url: string;
-        thumbnail_signed_url: string;
+        signed_url?: string | null;
+        thumbnail_signed_url?: string | null;
         source?: "upload" | null;
         file_size_bytes: number;
         width: number;
@@ -52,5 +61,9 @@ export declare namespace ProjectImageResponseModel {
         updated_at_ms: number;
         current_snapshot_id?: string | null;
         source_asset_id?: string | null;
+        source_platform_asset_id?: string | null;
+        error?: string | null;
+        pending_task?: PendingClipTask.Raw | null;
+        analysis?: ImageAnalysis.Raw | null;
     }
 }

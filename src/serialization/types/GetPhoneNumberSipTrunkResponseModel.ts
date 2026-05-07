@@ -31,6 +31,7 @@ export const GetPhoneNumberSipTrunkResponseModel: core.serialization.ObjectSchem
         GetPhoneNumberInboundSipTrunkConfigResponseModel.optional(),
     ),
     livekitStack: core.serialization.property("livekit_stack", LivekitStackType),
+    storeSipMessages: core.serialization.property("store_sip_messages", core.serialization.boolean().optional()),
 });
 
 export declare namespace GetPhoneNumberSipTrunkResponseModel {
@@ -45,5 +46,6 @@ export declare namespace GetPhoneNumberSipTrunkResponseModel {
         outbound_trunk?: GetPhoneNumberOutboundSipTrunkConfigResponseModel.Raw | null;
         inbound_trunk?: GetPhoneNumberInboundSipTrunkConfigResponseModel.Raw | null;
         livekit_stack: LivekitStackType.Raw;
+        store_sip_messages?: boolean | null;
     }
 }

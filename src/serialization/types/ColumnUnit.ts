@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const ColumnUnit: core.serialization.Schema<serializers.ColumnUnit.Raw, ElevenLabs.ColumnUnit> =
-    core.serialization.enum_(["ms", "s", "min", "duration", "credits", "usd", "eur", "inr", "ratio", "rating"]);
+    core.serialization.enum_(["ms", "s", "min", "duration", "credits", "usd", "eur", "inr", "pln", "ratio", "rating"]);
 
 export declare namespace ColumnUnit {
-    export type Raw = "ms" | "s" | "min" | "duration" | "credits" | "usd" | "eur" | "inr" | "ratio" | "rating";
+    export type Raw = "ms" | "s" | "min" | "duration" | "credits" | "usd" | "eur" | "inr" | "pln" | "ratio" | "rating";
 }

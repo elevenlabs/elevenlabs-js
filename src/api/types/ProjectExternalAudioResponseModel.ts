@@ -9,7 +9,7 @@ export interface ProjectExternalAudioResponseModel {
     offsetMs: number;
     durationMs: number;
     startTimeMs: number;
-    endTimeMs: number;
+    endTimeMs?: number;
     order: string;
     trackId: string;
     createdAtMs: number;
@@ -20,8 +20,7 @@ export interface ProjectExternalAudioResponseModel {
     fadeOutMs?: number;
     sourceExternalAudioId?: string;
     sourceAssetId?: string;
-    pendingBlockIds: string[];
-    pendingExternalAudioIds: string[];
+    sourcePlatformAssetId?: string;
     pendingBlocksMetadata?: ElevenLabs.PendingBlocksMetadataModel;
     pendingExternalAudiosMetadata?: ElevenLabs.PendingExternalAudiosMetadataModel;
     speechImported?: boolean;

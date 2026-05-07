@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../index";
 
 export type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult =
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.EndCallSuccess
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.KnowledgeBaseRagSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.LanguageDetectionSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.PlayDtmfError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.PlayDtmfSuccess
@@ -19,6 +20,10 @@ export type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult
 export namespace ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult {
     export interface EndCallSuccess extends ElevenLabs.EndCallToolResultModel {
         resultType: "end_call_success";
+    }
+
+    export interface KnowledgeBaseRagSuccess extends ElevenLabs.KnowledgeBaseRagToolResultModel {
+        resultType: "knowledge_base_rag_success";
     }
 
     export interface LanguageDetectionSuccess extends ElevenLabs.LanguageDetectionToolResultModel {

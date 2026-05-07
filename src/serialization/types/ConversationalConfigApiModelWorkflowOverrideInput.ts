@@ -5,7 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentConfigApiModelWorkflowOverrideInput } from "./AgentConfigApiModelWorkflowOverrideInput";
 import { AsrConversationalConfigWorkflowOverride } from "./AsrConversationalConfigWorkflowOverride";
-import { ConversationConfigWorkflowOverride } from "./ConversationConfigWorkflowOverride";
+import { ConversationConfigWorkflowOverrideInput } from "./ConversationConfigWorkflowOverrideInput";
 import { LanguagePresetInput } from "./LanguagePresetInput";
 import { TtsConversationalConfigWorkflowOverrideInput } from "./TtsConversationalConfigWorkflowOverrideInput";
 import { TurnConfigWorkflowOverride } from "./TurnConfigWorkflowOverride";
@@ -18,7 +18,7 @@ export const ConversationalConfigApiModelWorkflowOverrideInput: core.serializati
     asr: AsrConversationalConfigWorkflowOverride.optional(),
     turn: TurnConfigWorkflowOverride.optional(),
     tts: TtsConversationalConfigWorkflowOverrideInput.optional(),
-    conversation: ConversationConfigWorkflowOverride.optional(),
+    conversation: ConversationConfigWorkflowOverrideInput.optional(),
     languagePresets: core.serialization.property(
         "language_presets",
         core.serialization.record(core.serialization.string(), LanguagePresetInput.optional()).optional(),
@@ -32,7 +32,7 @@ export declare namespace ConversationalConfigApiModelWorkflowOverrideInput {
         asr?: AsrConversationalConfigWorkflowOverride.Raw | null;
         turn?: TurnConfigWorkflowOverride.Raw | null;
         tts?: TtsConversationalConfigWorkflowOverrideInput.Raw | null;
-        conversation?: ConversationConfigWorkflowOverride.Raw | null;
+        conversation?: ConversationConfigWorkflowOverrideInput.Raw | null;
         language_presets?: Record<string, LanguagePresetInput.Raw | null | undefined> | null;
         vad?: VadConfigWorkflowOverride.Raw | null;
         agent?: AgentConfigApiModelWorkflowOverrideInput.Raw | null;

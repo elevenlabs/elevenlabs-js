@@ -33,6 +33,7 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
     hasUserAudio: core.serialization.property("has_user_audio", core.serialization.boolean()),
     hasResponseAudio: core.serialization.property("has_response_audio", core.serialization.boolean()),
     transcript: core.serialization.list(ConversationHistoryTranscriptResponseModel),
+    tagIds: core.serialization.property("tag_ids", core.serialization.list(core.serialization.string()).optional()),
 });
 
 export declare namespace GetConversationResponseModel {
@@ -53,5 +54,6 @@ export declare namespace GetConversationResponseModel {
         has_user_audio: boolean;
         has_response_audio: boolean;
         transcript: ConversationHistoryTranscriptResponseModel.Raw[];
+        tag_ids?: string[] | null;
     }
 }

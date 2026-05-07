@@ -5,7 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentConfig } from "./AgentConfig";
 import { AsrConversationalConfig } from "./AsrConversationalConfig";
-import { ConversationConfig } from "./ConversationConfig";
+import { ConversationConfigOutput } from "./ConversationConfigOutput";
 import { LanguagePresetOutput } from "./LanguagePresetOutput";
 import { TtsConversationalConfigOutput } from "./TtsConversationalConfigOutput";
 import { TurnConfig } from "./TurnConfig";
@@ -18,7 +18,7 @@ export const ConversationalConfig: core.serialization.ObjectSchema<
     asr: AsrConversationalConfig.optional(),
     turn: TurnConfig.optional(),
     tts: TtsConversationalConfigOutput.optional(),
-    conversation: ConversationConfig.optional(),
+    conversation: ConversationConfigOutput.optional(),
     languagePresets: core.serialization.property(
         "language_presets",
         core.serialization.record(core.serialization.string(), LanguagePresetOutput).optional(),
@@ -32,7 +32,7 @@ export declare namespace ConversationalConfig {
         asr?: AsrConversationalConfig.Raw | null;
         turn?: TurnConfig.Raw | null;
         tts?: TtsConversationalConfigOutput.Raw | null;
-        conversation?: ConversationConfig.Raw | null;
+        conversation?: ConversationConfigOutput.Raw | null;
         language_presets?: Record<string, LanguagePresetOutput.Raw> | null;
         vad?: VadConfig.Raw | null;
         agent?: AgentConfig.Raw | null;

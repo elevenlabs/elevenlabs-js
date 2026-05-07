@@ -13,6 +13,8 @@ import type * as ElevenLabs from "../../../../index";
  *         language: "language",
  *         locale: "locale",
  *         search: "search",
+ *         useCases: ["use_cases"],
+ *         descriptives: ["descriptives"],
  *         featured: true,
  *         minNoticePeriodDays: 1,
  *         includeCustomRates: true,

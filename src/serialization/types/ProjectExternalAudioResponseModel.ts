@@ -20,7 +20,7 @@ export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
     offsetMs: core.serialization.property("offset_ms", core.serialization.number()),
     durationMs: core.serialization.property("duration_ms", core.serialization.number()),
     startTimeMs: core.serialization.property("start_time_ms", core.serialization.number()),
-    endTimeMs: core.serialization.property("end_time_ms", core.serialization.number()),
+    endTimeMs: core.serialization.property("end_time_ms", core.serialization.number().optional()),
     order: core.serialization.string(),
     trackId: core.serialization.property("track_id", core.serialization.string()),
     createdAtMs: core.serialization.property("created_at_ms", core.serialization.number()),
@@ -34,13 +34,9 @@ export const ProjectExternalAudioResponseModel: core.serialization.ObjectSchema<
         core.serialization.string().optional(),
     ),
     sourceAssetId: core.serialization.property("source_asset_id", core.serialization.string().optional()),
-    pendingBlockIds: core.serialization.property(
-        "pending_block_ids",
-        core.serialization.list(core.serialization.string()),
-    ),
-    pendingExternalAudioIds: core.serialization.property(
-        "pending_external_audio_ids",
-        core.serialization.list(core.serialization.string()),
+    sourcePlatformAssetId: core.serialization.property(
+        "source_platform_asset_id",
+        core.serialization.string().optional(),
     ),
     pendingBlocksMetadata: core.serialization.property(
         "pending_blocks_metadata",
@@ -71,7 +67,7 @@ export declare namespace ProjectExternalAudioResponseModel {
         offset_ms: number;
         duration_ms: number;
         start_time_ms: number;
-        end_time_ms: number;
+        end_time_ms?: number | null;
         order: string;
         track_id: string;
         created_at_ms: number;
@@ -82,8 +78,7 @@ export declare namespace ProjectExternalAudioResponseModel {
         fade_out_ms?: number | null;
         source_external_audio_id?: string | null;
         source_asset_id?: string | null;
-        pending_block_ids: string[];
-        pending_external_audio_ids: string[];
+        source_platform_asset_id?: string | null;
         pending_blocks_metadata?: PendingBlocksMetadataModel.Raw | null;
         pending_external_audios_metadata?: PendingExternalAudiosMetadataModel.Raw | null;
         speech_imported?: boolean | null;

@@ -27,6 +27,7 @@ describe("SubscriptionClient", () => {
             can_use_instant_voice_cloning: true,
             can_use_professional_voice_cloning: true,
             currency: "usd",
+            current_overage: { amount: "0", currency: "usd" },
             status: "active",
             billing_period: "monthly_period",
             character_refresh_period: "monthly_period",
@@ -92,6 +93,10 @@ describe("SubscriptionClient", () => {
             canUseInstantVoiceCloning: true,
             canUseProfessionalVoiceCloning: true,
             currency: "usd",
+            currentOverage: {
+                amount: "0",
+                currency: "usd",
+            },
             status: "active",
             billingPeriod: "monthly_period",
             characterRefreshPeriod: "monthly_period",

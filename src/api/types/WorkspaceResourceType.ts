@@ -38,5 +38,6 @@ export const WorkspaceResourceType = {
     Songs: "songs",
     Avatars: "avatars",
     AvatarVideoGenerations: "avatar_video_generations",
+    ResourceCollection: "resource_collection",
 } as const;
 export type WorkspaceResourceType = (typeof WorkspaceResourceType)[keyof typeof WorkspaceResourceType];

@@ -39,6 +39,8 @@ export interface SubscriptionResponse {
     canUseProfessionalVoiceCloning: boolean;
     /** The currency of the user's subscription. */
     currency?: ElevenLabs.Currency;
+    /** The current usage-based overage cost. */
+    currentOverage: ElevenLabs.Price;
     /** The status of the user's subscription. */
     status: ElevenLabs.SubscriptionStatusType;
     /** The billing period of the user's subscription. */

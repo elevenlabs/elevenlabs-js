@@ -16,7 +16,6 @@ export const GenerationSourceContext: core.serialization.ObjectSchema<
     modelProvider: core.serialization.property("model_provider", core.serialization.string().optional()),
     generationSessionId: core.serialization.property("generation_session_id", core.serialization.string().optional()),
     sessionIterationId: core.serialization.property("session_iteration_id", core.serialization.string().optional()),
-    alteredPrompt: core.serialization.property("altered_prompt", core.serialization.string().optional()),
     modelParameters: core.serialization.property(
         "model_parameters",
         core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
@@ -33,7 +32,6 @@ export declare namespace GenerationSourceContext {
         model_provider?: string | null;
         generation_session_id?: string | null;
         session_iteration_id?: string | null;
-        altered_prompt?: string | null;
         model_parameters?: Record<string, unknown> | null;
         extend_video?: ReferenceVideo.Raw | null;
     }

@@ -7,6 +7,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *     {
  *         query: "query",
  *         pageSize: 1,
+ *         types: ["file"],
  *         cursor: "cursor"
  *     }
  */

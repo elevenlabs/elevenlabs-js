@@ -537,6 +537,7 @@ describe("VoicesClient", () => {
             fineTuningState: "fine_tuning_state",
             collectionId: "collection_id",
             includeTotalCount: true,
+            voiceIds: ["voice_ids"],
         });
         expect(response).toEqual({
             voices: [
@@ -1233,6 +1234,8 @@ describe("VoicesClient", () => {
             language: "language",
             locale: "locale",
             search: "search",
+            useCases: ["use_cases"],
+            descriptives: ["descriptives"],
             featured: true,
             minNoticePeriodDays: 1,
             includeCustomRates: true,

@@ -9,6 +9,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         pageSize: 1,
  *         showOnlyOwnedDocuments: true,
  *         createdByUserId: "created_by_user_id",
+ *         types: ["webhook"],
  *         sortDirection: "asc",
  *         sortBy: "name",
  *         cursor: "cursor"

@@ -102,11 +102,20 @@ describe("ConversationsClient", () => {
             ratingMin: 1,
             hasFeedbackComment: true,
             userId: "user_id",
+            evaluationParams: ["evaluation_params"],
+            dataCollectionParams: ["data_collection_params"],
+            toolNames: ["tool_names"],
+            toolNamesSuccessful: ["tool_names_successful"],
+            toolNamesErrored: ["tool_names_errored"],
+            mainLanguages: ["main_languages"],
             pageSize: 1,
             summaryMode: "exclude",
             search: "search",
             conversationInitiationSource: "unknown",
             branchId: "branch_id",
+            topicIds: ["topic_ids"],
+            excludeStatuses: ["initiated"],
+            tagIds: ["tag_ids"],
         });
         expect(response).toEqual({
             conversations: [
@@ -196,6 +205,58 @@ describe("ConversationsClient", () => {
         const response = await client.conversationalAi.conversations.delete("21m00Tcm4TlvDq8ikWAM");
         expect(response).toEqual({
             key: "value",
+        });
+    });
+
+    test("get_sip_messages", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            sip_messages: [
+                {
+                    call_id: "call_id",
+                    phone_numbers: ["phone_numbers"],
+                    local_address: "local_address",
+                    remote_address: "remote_address",
+                    transport: "transport",
+                    raw_message: "raw_message",
+                    error_message: "error_message",
+                    direction: "in",
+                    created_at_unix_micro: 1,
+                },
+            ],
+            next_cursor: "next_cursor",
+            has_more: true,
+        };
+        server
+            .mockEndpoint()
+            .get("/v1/convai/conversations/21m00Tcm4TlvDq8ikWAM/sip-messages")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.conversations.getSipMessages("21m00Tcm4TlvDq8ikWAM", {
+            pageSize: 1,
+            cursor: "cursor",
+        });
+        expect(response).toEqual({
+            sipMessages: [
+                {
+                    callId: "call_id",
+                    phoneNumbers: ["phone_numbers"],
+                    localAddress: "local_address",
+                    remoteAddress: "remote_address",
+                    transport: "transport",
+                    rawMessage: "raw_message",
+                    errorMessage: "error_message",
+                    direction: "in",
+                    createdAtUnixMicro: 1,
+                },
+            ],
+            nextCursor: "next_cursor",
+            hasMore: true,
         });
     });
 });

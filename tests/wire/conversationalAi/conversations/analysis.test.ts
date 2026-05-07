@@ -53,6 +53,7 @@ describe("AnalysisClient", () => {
                     phone_number_id: "phone_number_id",
                     agent_number: "agent_number",
                     external_number: "external_number",
+                    call_id: "call_id",
                     call_sid: "call_sid",
                     sip_header_dynamic_variables: { key: "value" },
                 },
@@ -86,8 +87,15 @@ describe("AnalysisClient", () => {
                     whatsapp_user_id: "whatsapp_user_id",
                     awaiting_first_user_message: true,
                 },
+                sms: {
+                    direction: "inbound",
+                    phone_number_id: "phone_number_id",
+                    sms_user_phone_number: "sms_user_phone_number",
+                    agent_phone_number: "agent_phone_number",
+                },
                 agent_created_from: "cli",
                 agent_last_updated_from: "cli",
+                voice_rewards: [{ voice_id: "voice_id", reward_usd_cents: 1.1 }],
             },
             analysis: {
                 evaluation_criteria_results: {
@@ -189,8 +197,10 @@ describe("AnalysisClient", () => {
                         mime_type: "mime_type",
                         file_url: "file_url",
                     },
+                    contextual_update_info: { context_id: "context_id" },
                 },
             ],
+            tag_ids: ["tag_ids"],
         };
         server
             .mockEndpoint()
@@ -246,6 +256,7 @@ describe("AnalysisClient", () => {
                     phoneNumberId: "phone_number_id",
                     agentNumber: "agent_number",
                     externalNumber: "external_number",
+                    callId: "call_id",
                     callSid: "call_sid",
                     sipHeaderDynamicVariables: {
                         key: "value",
@@ -296,8 +307,20 @@ describe("AnalysisClient", () => {
                     whatsappUserId: "whatsapp_user_id",
                     awaitingFirstUserMessage: true,
                 },
+                sms: {
+                    direction: "inbound",
+                    phoneNumberId: "phone_number_id",
+                    smsUserPhoneNumber: "sms_user_phone_number",
+                    agentPhoneNumber: "agent_phone_number",
+                },
                 agentCreatedFrom: "cli",
                 agentLastUpdatedFrom: "cli",
+                voiceRewards: [
+                    {
+                        voiceId: "voice_id",
+                        rewardUsdCents: 1.1,
+                    },
+                ],
             },
             analysis: {
                 evaluationCriteriaResults: {
@@ -462,8 +485,12 @@ describe("AnalysisClient", () => {
                         mimeType: "mime_type",
                         fileUrl: "file_url",
                     },
+                    contextualUpdateInfo: {
+                        contextId: "context_id",
+                    },
                 },
             ],
+            tagIds: ["tag_ids"],
         });
     });
 });

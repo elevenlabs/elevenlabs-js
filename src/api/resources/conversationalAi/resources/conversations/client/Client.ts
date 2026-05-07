@@ -14,6 +14,7 @@ import { AudioClient } from "../resources/audio/client/Client";
 import { FeedbackClient } from "../resources/feedback/client/Client";
 import { FilesClient } from "../resources/files/client/Client";
 import { MessagesClient } from "../resources/messages/client/Client";
+import { TagsClient } from "../resources/tags/client/Client";
 import { TopicsClient } from "../resources/topics/client/Client";
 
 export declare namespace ConversationsClient {
@@ -27,6 +28,7 @@ export class ConversationsClient {
     protected _audio: AudioClient | undefined;
     protected _feedback: FeedbackClient | undefined;
     protected _messages: MessagesClient | undefined;
+    protected _tags: TagsClient | undefined;
     protected _files: FilesClient | undefined;
     protected _topics: TopicsClient | undefined;
     protected _analysis: AnalysisClient | undefined;
@@ -45,6 +47,10 @@ export class ConversationsClient {
 
     public get messages(): MessagesClient {
         return (this._messages ??= new MessagesClient(this._options));
+    }
+
+    public get tags(): TagsClient {
+        return (this._tags ??= new TagsClient(this._options));
     }
 
     public get files(): FilesClient {
@@ -267,11 +273,20 @@ export class ConversationsClient {
      *         ratingMin: 1,
      *         hasFeedbackComment: true,
      *         userId: "user_id",
+     *         evaluationParams: ["evaluation_params"],
+     *         dataCollectionParams: ["data_collection_params"],
+     *         toolNames: ["tool_names"],
+     *         toolNamesSuccessful: ["tool_names_successful"],
+     *         toolNamesErrored: ["tool_names_errored"],
+     *         mainLanguages: ["main_languages"],
      *         pageSize: 1,
      *         summaryMode: "exclude",
      *         search: "search",
      *         conversationInitiationSource: "unknown",
-     *         branchId: "branch_id"
+     *         branchId: "branch_id",
+     *         topicIds: ["topic_ids"],
+     *         excludeStatuses: ["initiated"],
+     *         tagIds: ["tag_ids"]
      *     })
      */
     public list(
@@ -309,6 +324,8 @@ export class ConversationsClient {
             conversationInitiationSource,
             branchId,
             topicIds,
+            excludeStatuses,
+            tagIds,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
@@ -436,6 +453,30 @@ export class ConversationsClient {
                 _queryParams.topic_ids = topicIds.map((item) => item);
             } else {
                 _queryParams.topic_ids = topicIds;
+            }
+        }
+
+        if (excludeStatuses != null) {
+            if (Array.isArray(excludeStatuses)) {
+                _queryParams.exclude_statuses = excludeStatuses.map((item) =>
+                    serializers.conversationalAi.ConversationsListRequestExcludeStatusesItem.jsonOrThrow(item, {
+                        unrecognizedObjectKeys: "strip",
+                    }),
+                );
+            } else {
+                _queryParams.exclude_statuses =
+                    serializers.conversationalAi.ConversationsListRequestExcludeStatusesItem.jsonOrThrow(
+                        excludeStatuses,
+                        { unrecognizedObjectKeys: "strip" },
+                    );
+            }
+        }
+
+        if (tagIds != null) {
+            if (Array.isArray(tagIds)) {
+                _queryParams.tag_ids = tagIds.map((item) => item);
+            } else {
+                _queryParams.tag_ids = tagIds;
             }
         }
 
@@ -629,6 +670,98 @@ export class ConversationsClient {
             _response.rawResponse,
             "DELETE",
             "/v1/convai/conversations/{conversation_id}",
+        );
+    }
+
+    /**
+     * Get SIP messages associated with a conversation's phone call
+     *
+     * @param {string} conversation_id - The id of the conversation you're taking the action on.
+     * @param {ElevenLabs.conversationalAi.ConversationsGetSipMessagesRequest} request
+     * @param {ConversationsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.conversations.getSipMessages("21m00Tcm4TlvDq8ikWAM", {
+     *         pageSize: 1,
+     *         cursor: "cursor"
+     *     })
+     */
+    public getSipMessages(
+        conversation_id: string,
+        request: ElevenLabs.conversationalAi.ConversationsGetSipMessagesRequest = {},
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetSipLogMessagesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getSipMessages(conversation_id, request, requestOptions));
+    }
+
+    private async __getSipMessages(
+        conversation_id: string,
+        request: ElevenLabs.conversationalAi.ConversationsGetSipMessagesRequest = {},
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetSipLogMessagesResponse>> {
+        const { pageSize, cursor } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (pageSize != null) {
+            _queryParams.page_size = pageSize.toString();
+        }
+
+        if (cursor != null) {
+            _queryParams.cursor = cursor;
+        }
+
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${core.url.encodePathParam(conversation_id)}/sip-messages`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetSipLogMessagesResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/conversations/{conversation_id}/sip-messages",
         );
     }
 }

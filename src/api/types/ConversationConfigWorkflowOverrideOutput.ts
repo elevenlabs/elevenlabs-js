@@ -2,7 +2,7 @@
 
 import type * as ElevenLabs from "../index";
 
-export interface ConversationConfigWorkflowOverride {
+export interface ConversationConfigWorkflowOverrideOutput {
     /** If enabled audio will not be processed and only text will be used, use to avoid audio pricing. */
     textOnly?: boolean;
     /** The maximum duration of a conversation in seconds */

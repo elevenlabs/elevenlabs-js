@@ -83,6 +83,7 @@ export const DirectPublishingReadResponseModel: core.serialization.ObjectSchema<
     review: ReviewResponseModel.optional(),
     voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
     canUseAssistant: core.serialization.property("can_use_assistant", core.serialization.boolean().optional()),
+    isVoiceChangerOn: core.serialization.property("is_voice_changer_on", core.serialization.boolean().optional()),
 });
 
 export declare namespace DirectPublishingReadResponseModel {
@@ -137,5 +138,6 @@ export declare namespace DirectPublishingReadResponseModel {
         review?: ReviewResponseModel.Raw | null;
         voice_id?: string | null;
         can_use_assistant?: boolean | null;
+        is_voice_changer_on?: boolean | null;
     }
 }

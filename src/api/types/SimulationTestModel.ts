@@ -18,4 +18,8 @@ export interface SimulationTestModel {
     simulationEnvironment?: string;
     /** Configuration for which tools to mock and fallback behavior. */
     toolMockConfig?: ElevenLabs.SimulationToolMockBehaviorConfig;
+    /** LLM model to use for evaluating simulation results. Defaults to Claude Sonnet 4.6. */
+    evaluationModel?: ElevenLabs.Llm;
+    /** LLM model for the simulated user. Defaults to Claude Sonnet 4.6. */
+    simulatedUserModel?: ElevenLabs.Llm;
 }

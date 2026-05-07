@@ -9,6 +9,7 @@ export const ColumnUnit = {
     Usd: "usd",
     Eur: "eur",
     Inr: "inr",
+    Pln: "pln",
     Ratio: "ratio",
     Rating: "rating",
 } as const;

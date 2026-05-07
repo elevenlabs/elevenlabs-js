@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const Currency: core.serialization.Schema<serializers.Currency.Raw, ElevenLabs.Currency> =
-    core.serialization.enum_(["usd", "eur", "inr"]);
+    core.serialization.enum_(["usd", "eur", "inr", "pln"]);
 
 export declare namespace Currency {
-    export type Raw = "usd" | "eur" | "inr";
+    export type Raw = "usd" | "eur" | "inr" | "pln";
 }

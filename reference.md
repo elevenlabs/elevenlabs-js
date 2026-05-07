@@ -987,10 +987,10 @@ Converts a list of text and voice ID pairs into speech (dialogue) and returns au
 ```typescript
 await client.textToDialogue.convert({
     inputs: [{
-            text: "Knock knock",
+            text: "[giggling] Knock knock",
             voiceId: "JBFqnCBsd6RMkjVDRZzb"
         }, {
-            text: "Who is there?",
+            text: "[curious] Who is there?",
             voiceId: "Aw4FAjKCGjjNkVhN1Xmq"
         }]
 });
@@ -1058,10 +1058,10 @@ Converts a list of text and voice ID pairs into speech (dialogue) and returns an
 ```typescript
 await client.textToDialogue.stream({
     inputs: [{
-            text: "Knock knock",
+            text: "[giggling] Knock knock",
             voiceId: "JBFqnCBsd6RMkjVDRZzb"
         }, {
-            text: "Who is there?",
+            text: "[curious] Who is there?",
             voiceId: "Aw4FAjKCGjjNkVhN1Xmq"
         }]
 });
@@ -1741,7 +1741,7 @@ await client.user.get();
 <dl>
 <dd>
 
-Returns a list of all available voices for a user.
+Returns a list of all available voices for a user. Stops working once the user's workspace exceeds 500 voices.
 </dd>
 </dl>
 </dd>
@@ -1831,7 +1831,8 @@ await client.voices.search({
     category: "category",
     fineTuningState: "fine_tuning_state",
     collectionId: "collection_id",
-    includeTotalCount: true
+    includeTotalCount: true,
+    voiceIds: ["voice_ids"]
 });
 
 ```
@@ -2194,6 +2195,8 @@ await client.voices.getShared({
     language: "language",
     locale: "locale",
     search: "search",
+    useCases: ["use_cases"],
+    descriptives: ["descriptives"],
     featured: true,
     minNoticePeriodDays: 1,
     includeCustomRates: true,
@@ -4865,11 +4868,20 @@ await client.conversationalAi.conversations.list({
     ratingMin: 1,
     hasFeedbackComment: true,
     userId: "user_id",
+    evaluationParams: ["evaluation_params"],
+    dataCollectionParams: ["data_collection_params"],
+    toolNames: ["tool_names"],
+    toolNamesSuccessful: ["tool_names_successful"],
+    toolNamesErrored: ["tool_names_errored"],
+    mainLanguages: ["main_languages"],
     pageSize: 1,
     summaryMode: "exclude",
     search: "search",
     conversationInitiationSource: "unknown",
-    branchId: "branch_id"
+    branchId: "branch_id",
+    topicIds: ["topic_ids"],
+    excludeStatuses: ["initiated"],
+    tagIds: ["tag_ids"]
 });
 
 ```
@@ -5013,6 +5025,80 @@ await client.conversationalAi.conversations.delete("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **conversation_id:** `string` — The id of the conversation you're taking the action on.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">getSipMessages</a>(conversation_id, { ...params }) -> ElevenLabs.GetSipLogMessagesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get SIP messages associated with a conversation's phone call
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.getSipMessages("21m00Tcm4TlvDq8ikWAM", {
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The id of the conversation you're taking the action on.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.ConversationsGetSipMessagesRequest` 
     
 </dd>
 </dl>
@@ -6395,6 +6481,7 @@ await client.conversationalAi.tests.list({
     pageSize: 1,
     search: "search",
     parentFolderId: "parent_folder_id",
+    types: ["llm"],
     includeFolders: true,
     sortMode: "default",
     sharingMode: "all"
@@ -6829,6 +6916,80 @@ await client.conversationalAi.phoneNumbers.update("TeaqRRdTcIfIu2i7BYfT");
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">getSipMessages</a>(phone_number_id, { ...params }) -> ElevenLabs.GetSipLogMessagesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get SIP messages for a phone number
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.phoneNumbers.getSipMessages("TeaqRRdTcIfIu2i7BYfT", {
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.PhoneNumbersGetSipMessagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi LlmUsage
 <details><summary><code>client.conversationalAi.llmUsage.<a href="/src/api/resources/conversationalAi/resources/llmUsage/client/Client.ts">calculate</a>({ ...params }) -> ElevenLabs.LlmUsageCalculatorResponseModel</code></summary>
 <dl>
@@ -6986,6 +7147,7 @@ await client.conversationalAi.knowledgeBase.list({
     search: "search",
     showOnlyOwnedDocuments: true,
     createdByUserId: "created_by_user_id",
+    types: ["file"],
     parentFolderId: "parent_folder_id",
     ancestorFolderId: "ancestor_folder_id",
     foldersFirst: true,
@@ -7127,6 +7289,7 @@ Fuzzy text search over knowledge base document content
 await client.conversationalAi.knowledgeBase.search({
     query: "query",
     pageSize: 1,
+    types: ["file"],
     cursor: "cursor"
 });
 
@@ -7197,6 +7360,7 @@ await client.conversationalAi.tools.list({
     pageSize: 1,
     showOnlyOwnedDocuments: true,
     createdByUserId: "created_by_user_id",
+    types: ["webhook"],
     sortDirection: "asc",
     sortBy: "name",
     cursor: "cursor"
@@ -8227,7 +8391,8 @@ Get all batch calls for the current workspace.
 ```typescript
 await client.conversationalAi.batchCalls.list({
     limit: 1,
-    lastDoc: "last_doc"
+    lastDoc: "last_doc",
+    agentId: "agent_id"
 });
 
 ```
@@ -9186,7 +9351,9 @@ Returns summaries for the specified agents.
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.summaries.get();
+await client.conversationalAi.agents.summaries.get({
+    agentIds: ["agent_ids"]
+});
 
 ```
 </dd>
@@ -10552,6 +10719,12 @@ await client.conversationalAi.conversations.messages.textSearch({
     ratingMin: 1,
     hasFeedbackComment: true,
     userId: "user_id",
+    evaluationParams: ["evaluation_params"],
+    dataCollectionParams: ["data_collection_params"],
+    toolNames: ["tool_names"],
+    toolNamesSuccessful: ["tool_names_successful"],
+    toolNamesErrored: ["tool_names_errored"],
+    mainLanguages: ["main_languages"],
     pageSize: 1,
     summaryMode: "exclude",
     conversationInitiationSource: "unknown",
@@ -10651,6 +10824,479 @@ await client.conversationalAi.conversations.messages.search({
 <dd>
 
 **requestOptions:** `MessagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Conversations Tags
+<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">assign</a>(conversation_id, { ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Assign one or more conversation tags to a conversation. Tags that are already assigned are ignored. Tags must belong to the same workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.tags.assign("conversation_id", {
+    tagIds: ["tag_ids"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.AssignConversationTagsRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TagsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">unassign</a>(conversation_id, tag_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a single conversation tag from a conversation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.tags.unassign("conversation_id", "tag_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tag_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TagsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetConversationTagsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List conversation tags for the workspace, ordered by most recently created first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.tags.list({
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.TagsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TagsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ConversationTagResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new conversation tag for the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.tags.create({
+    title: "title"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.CreateConversationTagRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TagsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">get</a>(tag_id) -> ElevenLabs.ConversationTagResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a conversation tag by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.tags.get("tag_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tag_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TagsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">delete</a>(tag_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a conversation tag. Restricted to the tag owner or a workspace admin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.tags.delete("tag_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tag_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TagsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">update</a>(tag_id, { ...params }) -> ElevenLabs.ConversationTagResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a conversation tag's title and/or description. Restricted to the tag owner or a workspace admin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.tags.update("tag_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tag_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.PatchConversationTagRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TagsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12036,7 +12682,9 @@ Gets multiple knowledge base document summaries by their IDs.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.summaries.get();
+await client.conversationalAi.knowledgeBase.documents.summaries.get({
+    documentIds: ["21m00Tcm4TlvDq8ikWAM", "31n11Udm5UmwEr9jkXBN"]
+});
 
 ```
 </dd>
@@ -18291,6 +18939,78 @@ await client.voices.samples.audio.get("voice_id", "sample_id");
 <dd>
 
 **requestOptions:** `AudioClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Workspace AuditLogs
+<details><summary><code>client.workspace.auditLogs.<a href="/src/api/resources/workspace/resources/auditLogs/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.WorkspaceAuditLogsPageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the audit log for the workspace. Requires enterprise tier and the audit_log_read permission.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.auditLogs.list({
+    limit: 1,
+    cursor: "cursor",
+    timeFromUnixMs: 1,
+    timeToUnixMs: 1,
+    actorUid: "actor_uid",
+    className: "class_name",
+    activityName: "activity_name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.workspace.AuditLogsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuditLogsClient.RequestOptions` 
     
 </dd>
 </dl>

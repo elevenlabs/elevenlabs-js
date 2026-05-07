@@ -9,4 +9,5 @@ export interface ReviewResponseModel {
     rejectReasons?: ElevenLabs.ReviewResponseModelRejectReasonsItem[];
     scoresBreakdown?: Record<string, number | undefined>;
     rejectedDetails?: string;
+    explanation?: string;
 }

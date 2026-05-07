@@ -32,7 +32,9 @@ export class SummariesClient {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.agents.summaries.get()
+     *     await client.conversationalAi.agents.summaries.get({
+     *         agentIds: ["agent_ids"]
+     *     })
      */
     public get(
         request: ElevenLabs.conversationalAi.agents.SummariesGetRequest = {},

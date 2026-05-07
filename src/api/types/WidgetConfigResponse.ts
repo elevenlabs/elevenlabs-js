@@ -102,4 +102,6 @@ export interface WidgetConfigResponse {
     firstMessage?: string;
     /** Whether to use WebRTC for conversation connections */
     useRtc?: boolean;
+    /** Configuration for file upload in the widget */
+    fileInputConfig?: ElevenLabs.FileInputConfig;
 }

@@ -1,3 +1,5 @@
+export * as auditLogs from "./auditLogs";
+export * from "./auditLogs/client/requests";
 export * as authConnections from "./authConnections";
 export * from "./authConnections/types";
 export * as groups from "./groups";

@@ -49,6 +49,7 @@ export class KnowledgeBaseClient {
      *         search: "search",
      *         showOnlyOwnedDocuments: true,
      *         createdByUserId: "created_by_user_id",
+     *         types: ["file"],
      *         parentFolderId: "parent_folder_id",
      *         ancestorFolderId: "ancestor_folder_id",
      *         foldersFirst: true,
@@ -296,6 +297,7 @@ export class KnowledgeBaseClient {
      *     await client.conversationalAi.knowledgeBase.search({
      *         query: "query",
      *         pageSize: 1,
+     *         types: ["file"],
      *         cursor: "cursor"
      *     })
      */

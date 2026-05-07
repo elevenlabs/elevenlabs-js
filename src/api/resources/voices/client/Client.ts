@@ -52,7 +52,7 @@ export class VoicesClient {
     }
 
     /**
-     * Returns a list of all available voices for a user.
+     * Returns a list of all available voices for a user. Stops working once the user's workspace exceeds 500 voices.
      *
      * @param {ElevenLabs.VoicesGetAllRequest} request
      * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -149,7 +149,8 @@ export class VoicesClient {
      *         category: "category",
      *         fineTuningState: "fine_tuning_state",
      *         collectionId: "collection_id",
-     *         includeTotalCount: true
+     *         includeTotalCount: true,
+     *         voiceIds: ["voice_ids"]
      *     })
      */
     public search(
@@ -646,6 +647,8 @@ export class VoicesClient {
      *         language: "language",
      *         locale: "locale",
      *         search: "search",
+     *         useCases: ["use_cases"],
+     *         descriptives: ["descriptives"],
      *         featured: true,
      *         minNoticePeriodDays: 1,
      *         includeCustomRates: true,

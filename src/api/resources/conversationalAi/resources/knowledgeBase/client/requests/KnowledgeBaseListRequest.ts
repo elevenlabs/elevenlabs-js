@@ -9,6 +9,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         search: "search",
  *         showOnlyOwnedDocuments: true,
  *         createdByUserId: "created_by_user_id",
+ *         types: ["file"],
  *         parentFolderId: "parent_folder_id",
  *         ancestorFolderId: "ancestor_folder_id",
  *         foldersFirst: true,

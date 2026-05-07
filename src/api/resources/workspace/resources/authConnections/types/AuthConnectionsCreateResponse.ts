@@ -14,6 +14,7 @@ export type AuthConnectionsCreateResponse =
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.Mtls
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.CustomHeaderAuth
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.ApiIntegrationOauth2AuthCode
+    | ElevenLabs.workspace.AuthConnectionsCreateResponse.ApiIntegrationOauth2CustomApp
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.WhatsappAuth;
 
 export namespace AuthConnectionsCreateResponse {
@@ -47,6 +48,10 @@ export namespace AuthConnectionsCreateResponse {
 
     export interface ApiIntegrationOauth2AuthCode extends ElevenLabs.ApiIntegrationOAuth2AuthCodeResponse {
         authType: "api_integration_oauth2_auth_code";
+    }
+
+    export interface ApiIntegrationOauth2CustomApp extends ElevenLabs.ApiIntegrationOAuth2CustomAppResponse {
+        authType: "api_integration_oauth2_custom_app";
     }
 
     export interface WhatsappAuth extends ElevenLabs.WhatsAppAuthResponse {
