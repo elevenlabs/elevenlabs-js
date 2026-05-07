@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
 import { DynamicVariableValueTypeOutput } from "./DynamicVariableValueTypeOutput";
+import { Llm } from "./Llm";
 import { SimulationToolMockBehaviorConfig } from "./SimulationToolMockBehaviorConfig";
 import { TestFromConversationMetadataOutput } from "./TestFromConversationMetadataOutput";
 
@@ -32,6 +33,8 @@ export const GetSimulationTestResponseModel: core.serialization.ObjectSchema<
         core.serialization.string().optional(),
     ),
     toolMockConfig: core.serialization.property("tool_mock_config", SimulationToolMockBehaviorConfig.optional()),
+    evaluationModel: core.serialization.property("evaluation_model", Llm.optional()),
+    simulatedUserModel: core.serialization.property("simulated_user_model", Llm.optional()),
     id: core.serialization.string(),
     name: core.serialization.string(),
 });
@@ -46,6 +49,8 @@ export declare namespace GetSimulationTestResponseModel {
         simulation_max_turns?: number | null;
         simulation_environment?: string | null;
         tool_mock_config?: SimulationToolMockBehaviorConfig.Raw | null;
+        evaluation_model?: Llm.Raw | null;
+        simulated_user_model?: Llm.Raw | null;
         id: string;
         name: string;
     }

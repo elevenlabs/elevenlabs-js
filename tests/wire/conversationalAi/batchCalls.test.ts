@@ -131,6 +131,7 @@ describe("BatchCallsClient", () => {
         const response = await client.conversationalAi.batchCalls.list({
             limit: 1,
             lastDoc: "last_doc",
+            agentId: "agent_id",
         });
         expect(response).toEqual({
             batchCalls: [

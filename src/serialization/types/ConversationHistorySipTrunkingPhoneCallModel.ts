@@ -13,6 +13,7 @@ export const ConversationHistorySipTrunkingPhoneCallModel: core.serialization.Ob
     phoneNumberId: core.serialization.property("phone_number_id", core.serialization.string()),
     agentNumber: core.serialization.property("agent_number", core.serialization.string()),
     externalNumber: core.serialization.property("external_number", core.serialization.string()),
+    callId: core.serialization.property("call_id", core.serialization.string().optional()),
     callSid: core.serialization.property("call_sid", core.serialization.string()),
     sipHeaderDynamicVariables: core.serialization.property(
         "sip_header_dynamic_variables",
@@ -26,6 +27,7 @@ export declare namespace ConversationHistorySipTrunkingPhoneCallModel {
         phone_number_id: string;
         agent_number: string;
         external_number: string;
+        call_id?: string | null;
         call_sid: string;
         sip_header_dynamic_variables?: Record<string, string> | null;
     }

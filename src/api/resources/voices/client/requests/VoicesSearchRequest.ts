@@ -12,7 +12,8 @@
  *         category: "category",
  *         fineTuningState: "fine_tuning_state",
  *         collectionId: "collection_id",
- *         includeTotalCount: true
+ *         includeTotalCount: true,
+ *         voiceIds: ["voice_ids"]
  *     }
  */
 export interface VoicesSearchRequest {

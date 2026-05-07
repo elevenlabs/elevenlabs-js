@@ -20,4 +20,6 @@ export interface GetConversationResponseModel {
     hasUserAudio: boolean;
     hasResponseAudio: boolean;
     transcript: ElevenLabs.ConversationHistoryTranscriptResponseModel[];
+    /** Conversation tag ids assigned to this conversation. */
+    tagIds?: string[];
 }

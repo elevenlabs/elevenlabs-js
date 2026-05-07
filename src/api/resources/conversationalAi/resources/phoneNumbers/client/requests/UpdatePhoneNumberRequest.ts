@@ -12,4 +12,5 @@ export interface UpdatePhoneNumberRequest {
     inboundTrunkConfig?: ElevenLabs.InboundSipTrunkConfigRequestModel;
     outboundTrunkConfig?: ElevenLabs.OutboundSipTrunkConfigRequestModel;
     livekitStack?: ElevenLabs.LivekitStackType;
+    storeSipMessages?: boolean;
 }

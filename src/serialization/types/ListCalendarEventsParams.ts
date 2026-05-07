@@ -12,10 +12,12 @@ export const ListCalendarEventsParams: core.serialization.ObjectSchema<
         "smb_tool_type",
         core.serialization.stringLiteral("list_calendar_events").optional(),
     ),
+    includeCancelled: core.serialization.property("include_cancelled", core.serialization.boolean().optional()),
 });
 
 export declare namespace ListCalendarEventsParams {
     export interface Raw {
         smb_tool_type?: "list_calendar_events" | null;
+        include_cancelled?: boolean | null;
     }
 }

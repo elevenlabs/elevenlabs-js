@@ -13,7 +13,12 @@ describe("SettingsClient", () => {
                 url: "https://example.com/webhook",
                 request_headers: { "Content-Type": "application/json" },
             },
-            webhooks: { post_call_webhook_id: "post_call_webhook_id", events: ["transcript"], send_audio: true },
+            webhooks: {
+                post_call_webhook_id: "post_call_webhook_id",
+                events: ["transcript"],
+                transcript_format: "json",
+                send_audio: true,
+            },
             can_use_mcp_servers: true,
             rag_retention_period_days: 1,
             conversation_embedding_retention_days: 1,
@@ -38,6 +43,7 @@ describe("SettingsClient", () => {
             webhooks: {
                 postCallWebhookId: "post_call_webhook_id",
                 events: ["transcript"],
+                transcriptFormat: "json",
                 sendAudio: true,
             },
             canUseMcpServers: true,
@@ -56,7 +62,12 @@ describe("SettingsClient", () => {
                 url: "https://example.com/webhook",
                 request_headers: { "Content-Type": "application/json" },
             },
-            webhooks: { post_call_webhook_id: "post_call_webhook_id", events: ["transcript"], send_audio: true },
+            webhooks: {
+                post_call_webhook_id: "post_call_webhook_id",
+                events: ["transcript"],
+                transcript_format: "json",
+                send_audio: true,
+            },
             can_use_mcp_servers: true,
             rag_retention_period_days: 1,
             conversation_embedding_retention_days: 1,
@@ -82,6 +93,7 @@ describe("SettingsClient", () => {
             webhooks: {
                 postCallWebhookId: "post_call_webhook_id",
                 events: ["transcript"],
+                transcriptFormat: "json",
                 sendAudio: true,
             },
             canUseMcpServers: true,

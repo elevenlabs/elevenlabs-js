@@ -127,6 +127,7 @@ describe("WidgetClient", () => {
                 supports_text_only: true,
                 first_message: "Hello! How can I help you today?",
                 use_rtc: false,
+                file_input_config: { enabled: false, max_files_per_conversation: 10 },
             },
         };
         server
@@ -271,6 +272,10 @@ describe("WidgetClient", () => {
                 supportsTextOnly: true,
                 firstMessage: "Hello! How can I help you today?",
                 useRtc: false,
+                fileInputConfig: {
+                    enabled: false,
+                    maxFilesPerConversation: 10,
+                },
             },
         });
     });

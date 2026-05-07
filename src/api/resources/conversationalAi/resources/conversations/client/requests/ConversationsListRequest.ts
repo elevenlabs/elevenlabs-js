@@ -16,11 +16,20 @@ import type * as ElevenLabs from "../../../../../../index";
  *         ratingMin: 1,
  *         hasFeedbackComment: true,
  *         userId: "user_id",
+ *         evaluationParams: ["evaluation_params"],
+ *         dataCollectionParams: ["data_collection_params"],
+ *         toolNames: ["tool_names"],
+ *         toolNamesSuccessful: ["tool_names_successful"],
+ *         toolNamesErrored: ["tool_names_errored"],
+ *         mainLanguages: ["main_languages"],
  *         pageSize: 1,
  *         summaryMode: "exclude",
  *         search: "search",
  *         conversationInitiationSource: "unknown",
- *         branchId: "branch_id"
+ *         branchId: "branch_id",
+ *         topicIds: ["topic_ids"],
+ *         excludeStatuses: ["initiated"],
+ *         tagIds: ["tag_ids"]
  *     }
  */
 export interface ConversationsListRequest {
@@ -69,4 +78,10 @@ export interface ConversationsListRequest {
     branchId?: string;
     /** Filter conversations by topic IDs assigned during topic discovery. */
     topicIds?: string | string[];
+    /** Exclude conversations with the given statuses. Useful for hiding in-progress / processing conversations from list views. */
+    excludeStatuses?:
+        | ElevenLabs.conversationalAi.ConversationsListRequestExcludeStatusesItem
+        | ElevenLabs.conversationalAi.ConversationsListRequestExcludeStatusesItem[];
+    /** Filter conversations by conversation tag IDs assigned via the conversation-tags endpoints. */
+    tagIds?: string | string[];
 }

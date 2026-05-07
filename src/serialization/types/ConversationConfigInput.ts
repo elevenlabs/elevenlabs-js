@@ -6,9 +6,9 @@ import type * as serializers from "../index";
 import { ClientEvent } from "./ClientEvent";
 import { FileInputConfig } from "./FileInputConfig";
 
-export const ConversationConfig: core.serialization.ObjectSchema<
-    serializers.ConversationConfig.Raw,
-    ElevenLabs.ConversationConfig
+export const ConversationConfigInput: core.serialization.ObjectSchema<
+    serializers.ConversationConfigInput.Raw,
+    ElevenLabs.ConversationConfigInput
 > = core.serialization.object({
     textOnly: core.serialization.property("text_only", core.serialization.boolean().optional()),
     maxDurationSeconds: core.serialization.property("max_duration_seconds", core.serialization.number().optional()),
@@ -19,7 +19,7 @@ export const ConversationConfig: core.serialization.ObjectSchema<
     sourceAttribution: core.serialization.property("source_attribution", core.serialization.boolean().optional()),
 });
 
-export declare namespace ConversationConfig {
+export declare namespace ConversationConfigInput {
     export interface Raw {
         text_only?: boolean | null;
         max_duration_seconds?: number | null;

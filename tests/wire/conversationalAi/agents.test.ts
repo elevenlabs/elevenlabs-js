@@ -350,6 +350,7 @@ describe("AgentsClient", () => {
                         has_auth_credentials: true,
                     },
                     livekit_stack: "standard",
+                    store_sip_messages: true,
                 },
             ],
             whatsapp_accounts: [
@@ -1103,6 +1104,7 @@ describe("AgentsClient", () => {
                 creator_name: "John Doe",
                 creator_email: "john.doe@example.com",
                 role: "admin",
+                anonymous_access_level_override: "admin",
             },
             tags: ["tags"],
             version_id: "version_id",
@@ -1540,6 +1542,7 @@ describe("AgentsClient", () => {
                         hasAuthCredentials: true,
                     },
                     livekitStack: "standard",
+                    storeSipMessages: true,
                 },
             ],
             whatsappAccounts: [
@@ -2467,6 +2470,7 @@ describe("AgentsClient", () => {
                 creatorName: "John Doe",
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
+                anonymousAccessLevelOverride: "admin",
             },
             tags: ["tags"],
             versionId: "version_id",
@@ -2813,6 +2817,7 @@ describe("AgentsClient", () => {
                         has_auth_credentials: true,
                     },
                     livekit_stack: "standard",
+                    store_sip_messages: true,
                 },
             ],
             whatsapp_accounts: [
@@ -3566,6 +3571,7 @@ describe("AgentsClient", () => {
                 creator_name: "John Doe",
                 creator_email: "john.doe@example.com",
                 role: "admin",
+                anonymous_access_level_override: "admin",
             },
             tags: ["tags"],
             version_id: "version_id",
@@ -4004,6 +4010,7 @@ describe("AgentsClient", () => {
                         hasAuthCredentials: true,
                     },
                     livekitStack: "standard",
+                    storeSipMessages: true,
                 },
             ],
             whatsappAccounts: [
@@ -4931,6 +4938,7 @@ describe("AgentsClient", () => {
                 creatorName: "John Doe",
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
+                anonymousAccessLevelOverride: "admin",
             },
             tags: ["tags"],
             versionId: "version_id",
@@ -5073,6 +5081,7 @@ describe("AgentsClient", () => {
                         mime_type: "mime_type",
                         file_url: "file_url",
                     },
+                    contextual_update_info: { context_id: "context_id" },
                 },
             ],
             analysis: {
@@ -5183,6 +5192,9 @@ describe("AgentsClient", () => {
                         originalFilename: "original_filename",
                         mimeType: "mime_type",
                         fileUrl: "file_url",
+                    },
+                    contextualUpdateInfo: {
+                        contextId: "context_id",
                     },
                 },
             ],

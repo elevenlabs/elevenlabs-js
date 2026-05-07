@@ -117,6 +117,7 @@ describe("BranchesClient", () => {
                 creator_name: "John Doe",
                 creator_email: "john.doe@example.com",
                 role: "admin",
+                anonymous_access_level_override: "admin",
             },
             current_live_percentage: 1.1,
             parent_branch: { id: "id", name: "name" },
@@ -164,6 +165,7 @@ describe("BranchesClient", () => {
                 creatorName: "John Doe",
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
+                anonymousAccessLevelOverride: "admin",
             },
             currentLivePercentage: 1.1,
             parentBranch: {
@@ -208,6 +210,7 @@ describe("BranchesClient", () => {
                 creator_name: "John Doe",
                 creator_email: "john.doe@example.com",
                 role: "admin",
+                anonymous_access_level_override: "admin",
             },
             current_live_percentage: 1.1,
             parent_branch: { id: "id", name: "name" },
@@ -258,6 +261,7 @@ describe("BranchesClient", () => {
                 creatorName: "John Doe",
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
+                anonymousAccessLevelOverride: "admin",
             },
             currentLivePercentage: 1.1,
             parentBranch: {

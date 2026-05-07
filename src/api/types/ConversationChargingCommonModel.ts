@@ -12,4 +12,6 @@ export interface ConversationChargingCommonModel {
     callCharge?: number;
     freeMinutesConsumed?: number;
     freeLlmDollarsConsumed?: number;
+    ttsUsage?: ElevenLabs.ConversationTtsUsageModel;
+    asrUsage?: ElevenLabs.ConversationAsrUsageModel;
 }

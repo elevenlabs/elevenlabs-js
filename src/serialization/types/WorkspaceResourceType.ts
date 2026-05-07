@@ -44,6 +44,7 @@ export const WorkspaceResourceType: core.serialization.Schema<
     "songs",
     "avatars",
     "avatar_video_generations",
+    "resource_collection",
 ]);
 
 export declare namespace WorkspaceResourceType {
@@ -83,5 +84,6 @@ export declare namespace WorkspaceResourceType {
         | "content_templates"
         | "songs"
         | "avatars"
-        | "avatar_video_generations";
+        | "avatar_video_generations"
+        | "resource_collection";
 }

@@ -7,4 +7,6 @@ export * from "./files/client/requests";
 export * as messages from "./messages";
 export * from "./messages/client/requests";
 export * from "./messages/types";
+export * as tags from "./tags";
+export * from "./tags/client/requests";
 export * as topics from "./topics";

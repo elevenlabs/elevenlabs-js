@@ -48,6 +48,7 @@ describe("ToolsClient", () => {
             pageSize: 1,
             showOnlyOwnedDocuments: true,
             createdByUserId: "created_by_user_id",
+            types: ["webhook"],
             sortDirection: "asc",
             sortBy: "name",
             cursor: "cursor",
@@ -139,6 +140,7 @@ describe("ToolsClient", () => {
                 creator_name: "John Doe",
                 creator_email: "john.doe@example.com",
                 role: "admin",
+                anonymous_access_level_override: "admin",
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
             response_mocks: [
@@ -207,6 +209,7 @@ describe("ToolsClient", () => {
                 creatorName: "John Doe",
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
+                anonymousAccessLevelOverride: "admin",
             },
             usageStats: {
                 totalCalls: 1,
@@ -268,6 +271,7 @@ describe("ToolsClient", () => {
                 creator_name: "John Doe",
                 creator_email: "john.doe@example.com",
                 role: "admin",
+                anonymous_access_level_override: "admin",
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
             response_mocks: [
@@ -328,6 +332,7 @@ describe("ToolsClient", () => {
                 creatorName: "John Doe",
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
+                anonymousAccessLevelOverride: "admin",
             },
             usageStats: {
                 totalCalls: 1,
@@ -412,6 +417,7 @@ describe("ToolsClient", () => {
                 creator_name: "John Doe",
                 creator_email: "john.doe@example.com",
                 role: "admin",
+                anonymous_access_level_override: "admin",
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
             response_mocks: [
@@ -480,6 +486,7 @@ describe("ToolsClient", () => {
                 creatorName: "John Doe",
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
+                anonymousAccessLevelOverride: "admin",
             },
             usageStats: {
                 totalCalls: 1,

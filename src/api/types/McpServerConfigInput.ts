@@ -30,7 +30,7 @@ export interface McpServerConfigInput {
     toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
     /** Determines when and how all tools from this MCP server execute: 'immediate' executes the tool right away when requested by the LLM, 'post_tool_speech' waits for the agent to finish speaking before executing, 'async' runs the tool in the background without blocking - best for long-running operations. */
     executionMode?: ElevenLabs.ToolExecutionMode;
-    /** The maximum time in seconds to wait for each MCP tool call to complete. Must be between 5 and 120 seconds (inclusive). */
+    /** The maximum time in seconds to wait for each MCP tool call to complete. Must be between 5 and 300 seconds (inclusive). */
     responseTimeoutSecs?: number;
     /** List of per-tool configuration overrides that override the server-level defaults for specific tools */
     toolConfigOverrides?: ElevenLabs.McpToolConfigOverrideInput[];

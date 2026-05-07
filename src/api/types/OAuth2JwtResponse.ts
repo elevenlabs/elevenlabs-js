@@ -26,6 +26,8 @@ export interface OAuth2JwtResponse {
     tokenUrl: string;
     /** OAuth2 scopes to request when exchanging JWT for access token */
     scopes?: string[];
+    /** Token field to extract from the token endpoint response. */
+    tokenResponseField?: ElevenLabs.OAuth2JwtResponseTokenResponseField;
     id: string;
     usedBy?: ElevenLabs.AuthConnectionDependencies;
 }

@@ -10,7 +10,7 @@ export interface ConversationalConfig {
     /** Configuration for conversational text to speech */
     tts?: ElevenLabs.TtsConversationalConfigOutput;
     /** Configuration for conversational events */
-    conversation?: ElevenLabs.ConversationConfig;
+    conversation?: ElevenLabs.ConversationConfigOutput;
     /** Language presets for conversations */
     languagePresets?: Record<string, ElevenLabs.LanguagePresetOutput>;
     /** Configuration for voice activity detection */

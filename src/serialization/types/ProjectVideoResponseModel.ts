@@ -41,13 +41,17 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
         core.serialization.list(ProjectVideoThumbnailSheetResponseModel),
     ),
     startTimeMs: core.serialization.property("start_time_ms", core.serialization.number()),
-    endTimeMs: core.serialization.property("end_time_ms", core.serialization.number()),
+    endTimeMs: core.serialization.property("end_time_ms", core.serialization.number().optional()),
     assetPreviewSignedUrl: core.serialization.property(
         "asset_preview_signed_url",
         core.serialization.string().optional(),
     ),
     sourceVideoId: core.serialization.property("source_video_id", core.serialization.string().optional()),
     sourceAssetId: core.serialization.property("source_asset_id", core.serialization.string().optional()),
+    sourcePlatformAssetId: core.serialization.property(
+        "source_platform_asset_id",
+        core.serialization.string().optional(),
+    ),
     pendingBlocksMetadata: core.serialization.property(
         "pending_blocks_metadata",
         PendingBlocksMetadataModel.optional(),
@@ -55,14 +59,6 @@ export const ProjectVideoResponseModel: core.serialization.ObjectSchema<
     pendingExternalAudiosMetadata: core.serialization.property(
         "pending_external_audios_metadata",
         PendingExternalAudiosMetadataModel.optional(),
-    ),
-    pendingBlockIds: core.serialization.property(
-        "pending_block_ids",
-        core.serialization.list(core.serialization.string()),
-    ),
-    pendingExternalAudioIds: core.serialization.property(
-        "pending_external_audio_ids",
-        core.serialization.list(core.serialization.string()),
     ),
     speechImported: core.serialization.property("speech_imported", core.serialization.boolean().optional()),
     pendingTask: core.serialization.property("pending_task", PendingClipTask.optional()),
@@ -104,14 +100,13 @@ export declare namespace ProjectVideoResponseModel {
         thumbnail_size: number[];
         thumbnail_sheets: ProjectVideoThumbnailSheetResponseModel.Raw[];
         start_time_ms: number;
-        end_time_ms: number;
+        end_time_ms?: number | null;
         asset_preview_signed_url?: string | null;
         source_video_id?: string | null;
         source_asset_id?: string | null;
+        source_platform_asset_id?: string | null;
         pending_blocks_metadata?: PendingBlocksMetadataModel.Raw | null;
         pending_external_audios_metadata?: PendingExternalAudiosMetadataModel.Raw | null;
-        pending_block_ids: string[];
-        pending_external_audio_ids: string[];
         speech_imported?: boolean | null;
         pending_task?: PendingClipTask.Raw | null;
         audio_track_ready?: boolean | null;

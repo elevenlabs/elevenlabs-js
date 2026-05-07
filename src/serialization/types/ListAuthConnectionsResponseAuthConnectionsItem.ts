@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ApiIntegrationOAuth2AuthCodeResponse } from "./ApiIntegrationOAuth2AuthCodeResponse";
+import { ApiIntegrationOAuth2CustomAppResponse } from "./ApiIntegrationOAuth2CustomAppResponse";
 import { BasicAuthResponse } from "./BasicAuthResponse";
 import { BearerAuthResponse } from "./BearerAuthResponse";
 import { CustomHeaderAuthResponse } from "./CustomHeaderAuthResponse";
@@ -19,6 +20,7 @@ export const ListAuthConnectionsResponseAuthConnectionsItem: core.serialization.
 > = core.serialization
     .union(core.serialization.discriminant("authType", "auth_type"), {
         api_integration_oauth2_auth_code: ApiIntegrationOAuth2AuthCodeResponse,
+        api_integration_oauth2_custom_app: ApiIntegrationOAuth2CustomAppResponse,
         basic_auth: BasicAuthResponse,
         bearer_auth: BearerAuthResponse,
         custom_header_auth: CustomHeaderAuthResponse,
@@ -36,6 +38,7 @@ export const ListAuthConnectionsResponseAuthConnectionsItem: core.serialization.
 export declare namespace ListAuthConnectionsResponseAuthConnectionsItem {
     export type Raw =
         | ListAuthConnectionsResponseAuthConnectionsItem.ApiIntegrationOauth2AuthCode
+        | ListAuthConnectionsResponseAuthConnectionsItem.ApiIntegrationOauth2CustomApp
         | ListAuthConnectionsResponseAuthConnectionsItem.BasicAuth
         | ListAuthConnectionsResponseAuthConnectionsItem.BearerAuth
         | ListAuthConnectionsResponseAuthConnectionsItem.CustomHeaderAuth
@@ -47,6 +50,10 @@ export declare namespace ListAuthConnectionsResponseAuthConnectionsItem {
 
     export interface ApiIntegrationOauth2AuthCode extends ApiIntegrationOAuth2AuthCodeResponse.Raw {
         auth_type: "api_integration_oauth2_auth_code";
+    }
+
+    export interface ApiIntegrationOauth2CustomApp extends ApiIntegrationOAuth2CustomAppResponse.Raw {
+        auth_type: "api_integration_oauth2_custom_app";
     }
 
     export interface BasicAuth extends BasicAuthResponse.Raw {

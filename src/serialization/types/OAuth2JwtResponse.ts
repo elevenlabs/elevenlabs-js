@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AuthConnectionDependencies } from "./AuthConnectionDependencies";
 import { OAuth2JwtResponseAlgorithm } from "./OAuth2JwtResponseAlgorithm";
+import { OAuth2JwtResponseTokenResponseField } from "./OAuth2JwtResponseTokenResponseField";
 
 export const OAuth2JwtResponse: core.serialization.ObjectSchema<
     serializers.OAuth2JwtResponse.Raw,
@@ -24,6 +25,10 @@ export const OAuth2JwtResponse: core.serialization.ObjectSchema<
     ),
     tokenUrl: core.serialization.property("token_url", core.serialization.string()),
     scopes: core.serialization.list(core.serialization.string()).optional(),
+    tokenResponseField: core.serialization.property(
+        "token_response_field",
+        OAuth2JwtResponseTokenResponseField.optional(),
+    ),
     id: core.serialization.string(),
     usedBy: core.serialization.property("used_by", AuthConnectionDependencies.optional()),
 });
@@ -41,6 +46,7 @@ export declare namespace OAuth2JwtResponse {
         extra_params?: Record<string, string> | null;
         token_url: string;
         scopes?: string[] | null;
+        token_response_field?: OAuth2JwtResponseTokenResponseField.Raw | null;
         id: string;
         used_by?: AuthConnectionDependencies.Raw | null;
     }

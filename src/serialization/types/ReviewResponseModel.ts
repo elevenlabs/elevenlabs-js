@@ -22,6 +22,7 @@ export const ReviewResponseModel: core.serialization.ObjectSchema<
         core.serialization.record(core.serialization.string(), core.serialization.number().optional()).optional(),
     ),
     rejectedDetails: core.serialization.property("rejected_details", core.serialization.string().optional()),
+    explanation: core.serialization.string().optional(),
 });
 
 export declare namespace ReviewResponseModel {
@@ -32,5 +33,6 @@ export declare namespace ReviewResponseModel {
         reject_reasons?: ReviewResponseModelRejectReasonsItem.Raw[] | null;
         scores_breakdown?: Record<string, number | null | undefined> | null;
         rejected_details?: string | null;
+        explanation?: string | null;
     }
 }

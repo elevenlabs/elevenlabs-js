@@ -18,6 +18,7 @@ describe("GroupsClient", () => {
                 group_pvc_limit: "unlimited",
                 character_count: 1,
                 scim_external_id: "scim_external_id",
+                is_scim_synced: true,
             },
         };
         server
@@ -39,6 +40,7 @@ describe("GroupsClient", () => {
                 groupPvcLimit: "unlimited",
                 characterCount: 1,
                 scimExternalId: "scim_external_id",
+                isScimSynced: true,
             },
         });
     });

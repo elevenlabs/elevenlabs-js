@@ -21,4 +21,5 @@ export interface ConversationHistoryTranscriptResponseModel {
     sourceEventId?: number;
     usedStaticKbDocumentIds?: string[];
     fileInput?: ElevenLabs.ConversationHistoryTranscriptFileInputResponseModel;
+    contextualUpdateInfo?: ElevenLabs.ContextualUpdateInfo;
 }

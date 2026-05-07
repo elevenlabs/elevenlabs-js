@@ -24,14 +24,13 @@ export interface ProjectVideoResponseModel {
     thumbnailSize: number[];
     thumbnailSheets: ElevenLabs.ProjectVideoThumbnailSheetResponseModel[];
     startTimeMs: number;
-    endTimeMs: number;
+    endTimeMs?: number;
     assetPreviewSignedUrl?: string;
     sourceVideoId?: string;
     sourceAssetId?: string;
+    sourcePlatformAssetId?: string;
     pendingBlocksMetadata?: ElevenLabs.PendingBlocksMetadataModel;
     pendingExternalAudiosMetadata?: ElevenLabs.PendingExternalAudiosMetadataModel;
-    pendingBlockIds: string[];
-    pendingExternalAudioIds: string[];
     speechImported?: boolean;
     pendingTask?: ElevenLabs.PendingClipTask;
     audioTrackReady?: boolean;

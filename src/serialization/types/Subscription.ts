@@ -9,6 +9,7 @@ import { Currency } from "./Currency";
 import { ExtendedSubscriptionResponseModelMaxCreditLimitExtension } from "./ExtendedSubscriptionResponseModelMaxCreditLimitExtension";
 import { ExtendedSubscriptionResponseModelPendingChange } from "./ExtendedSubscriptionResponseModelPendingChange";
 import { InvoiceResponse } from "./InvoiceResponse";
+import { Price } from "./Price";
 import { SubscriptionStatusType } from "./SubscriptionStatusType";
 
 export const Subscription: core.serialization.ObjectSchema<serializers.Subscription.Raw, ElevenLabs.Subscription> =
@@ -55,6 +56,7 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
             core.serialization.boolean(),
         ),
         currency: Currency.optional(),
+        currentOverage: core.serialization.property("current_overage", Price),
         status: SubscriptionStatusType,
         billingPeriod: core.serialization.property("billing_period", BillingPeriod.optional()),
         characterRefreshPeriod: core.serialization.property(
@@ -98,6 +100,7 @@ export declare namespace Subscription {
         can_use_instant_voice_cloning: boolean;
         can_use_professional_voice_cloning: boolean;
         currency?: Currency.Raw | null;
+        current_overage: Price.Raw;
         status: SubscriptionStatusType.Raw;
         billing_period?: BillingPeriod.Raw | null;
         character_refresh_period?: CharacterRefreshPeriod.Raw | null;

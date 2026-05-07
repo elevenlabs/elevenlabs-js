@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentMetadata } from "./AgentMetadata";
 import { ChatSourceMedium } from "./ChatSourceMedium";
+import { ContextualUpdateInfo } from "./ContextualUpdateInfo";
 import { ConversationHistoryMultivoiceMessageModel } from "./ConversationHistoryMultivoiceMessageModel";
 import { ConversationHistoryTranscriptFileInputResponseModel } from "./ConversationHistoryTranscriptFileInputResponseModel";
 import { ConversationHistoryTranscriptResponseModelRole } from "./ConversationHistoryTranscriptResponseModelRole";
@@ -55,6 +56,7 @@ export const ConversationHistoryTranscriptResponseModel: core.serialization.Obje
         "file_input",
         ConversationHistoryTranscriptFileInputResponseModel.optional(),
     ),
+    contextualUpdateInfo: core.serialization.property("contextual_update_info", ContextualUpdateInfo.optional()),
 });
 
 export declare namespace ConversationHistoryTranscriptResponseModel {
@@ -77,5 +79,6 @@ export declare namespace ConversationHistoryTranscriptResponseModel {
         source_event_id?: number | null;
         used_static_kb_document_ids?: string[] | null;
         file_input?: ConversationHistoryTranscriptFileInputResponseModel.Raw | null;
+        contextual_update_info?: ContextualUpdateInfo.Raw | null;
     }
 }

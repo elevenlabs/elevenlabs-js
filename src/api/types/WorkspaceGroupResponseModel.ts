@@ -11,4 +11,5 @@ export interface WorkspaceGroupResponseModel {
     groupPvcLimit?: ElevenLabs.WorkspaceGroupResponseModelGroupPvcLimit;
     characterCount?: number;
     scimExternalId?: string;
+    isScimSynced?: boolean;
 }

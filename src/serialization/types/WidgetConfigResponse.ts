@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AllowlistItem } from "./AllowlistItem";
 import { EmbedVariant } from "./EmbedVariant";
+import { FileInputConfig } from "./FileInputConfig";
 import { WidgetConfigResponseModelAvatar } from "./WidgetConfigResponseModelAvatar";
 import { WidgetConfigResponseModelSyntaxHighlightTheme } from "./WidgetConfigResponseModelSyntaxHighlightTheme";
 import { WidgetEndFeedbackConfig } from "./WidgetEndFeedbackConfig";
@@ -97,6 +98,7 @@ export const WidgetConfigResponse: core.serialization.ObjectSchema<
     supportsTextOnly: core.serialization.property("supports_text_only", core.serialization.boolean().optional()),
     firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
     useRtc: core.serialization.property("use_rtc", core.serialization.boolean().optional()),
+    fileInputConfig: core.serialization.property("file_input_config", FileInputConfig.optional()),
 });
 
 export declare namespace WidgetConfigResponse {
@@ -152,5 +154,6 @@ export declare namespace WidgetConfigResponse {
         supports_text_only?: boolean | null;
         first_message?: string | null;
         use_rtc?: boolean | null;
+        file_input_config?: FileInputConfig.Raw | null;
     }
 }

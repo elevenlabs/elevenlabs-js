@@ -6,6 +6,8 @@ export interface ConvAiWebhooks {
     postCallWebhookId?: string;
     /** List of event types to send via webhook. Options: transcript, audio, call_initiation_failure. */
     events?: ElevenLabs.WebhookEventType[];
+    /** Format for transcript webhooks. */
+    transcriptFormat?: ElevenLabs.WebhookTranscriptFormat;
     /** DEPRECATED: Use 'events' field instead. Whether to send audio data with post-call webhooks for ConvAI conversations */
     sendAudio?: boolean;
 }

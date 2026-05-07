@@ -6,10 +6,10 @@ import type * as ElevenLabs from "../../../../index";
  * @example
  *     {
  *         inputs: [{
- *                 text: "Knock knock",
+ *                 text: "[giggling] Knock knock",
  *                 voiceId: "JBFqnCBsd6RMkjVDRZzb"
  *             }, {
- *                 text: "Who is there?",
+ *                 text: "[curious] Who is there?",
  *                 voiceId: "Aw4FAjKCGjjNkVhN1Xmq"
  *             }]
  *     }

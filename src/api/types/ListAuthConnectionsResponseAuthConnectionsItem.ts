@@ -7,6 +7,7 @@ import type * as ElevenLabs from "../index";
  */
 export type ListAuthConnectionsResponseAuthConnectionsItem =
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.ApiIntegrationOauth2AuthCode
+    | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.ApiIntegrationOauth2CustomApp
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.BasicAuth
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.BearerAuth
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.CustomHeaderAuth
@@ -19,6 +20,10 @@ export type ListAuthConnectionsResponseAuthConnectionsItem =
 export namespace ListAuthConnectionsResponseAuthConnectionsItem {
     export interface ApiIntegrationOauth2AuthCode extends ElevenLabs.ApiIntegrationOAuth2AuthCodeResponse {
         authType: "api_integration_oauth2_auth_code";
+    }
+
+    export interface ApiIntegrationOauth2CustomApp extends ElevenLabs.ApiIntegrationOAuth2CustomAppResponse {
+        authType: "api_integration_oauth2_custom_app";
     }
 
     export interface BasicAuth extends ElevenLabs.BasicAuthResponse {

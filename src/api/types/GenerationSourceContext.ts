@@ -10,8 +10,6 @@ export interface GenerationSourceContext {
     modelProvider?: string;
     generationSessionId?: string;
     sessionIterationId?: string;
-    /** Modified/enhanced prompt if different from original */
-    alteredPrompt?: string;
     modelParameters?: Record<string, unknown>;
     extendVideo?: ElevenLabs.ReferenceVideo;
 }

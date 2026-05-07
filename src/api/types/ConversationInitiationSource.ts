@@ -15,6 +15,7 @@ export const ConversationInitiationSource = {
     Genesys: "genesys",
     SwiftSdk: "swift_sdk",
     Whatsapp: "whatsapp",
+    TwilioSms: "twilio_sms",
     FlutterSdk: "flutter_sdk",
     ZendeskIntegration: "zendesk_integration",
     SlackIntegration: "slack_integration",

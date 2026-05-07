@@ -22,4 +22,6 @@ export interface GetPhoneNumberSipTrunkResponseModel {
     inboundTrunk?: ElevenLabs.GetPhoneNumberInboundSipTrunkConfigResponseModel;
     /** Type of Livekit stack used for this number. */
     livekitStack: ElevenLabs.LivekitStackType;
+    /** Whether to store SIP messages for this phone number. */
+    storeSipMessages?: boolean;
 }

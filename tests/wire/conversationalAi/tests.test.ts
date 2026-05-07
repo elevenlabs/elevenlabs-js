@@ -494,6 +494,7 @@ describe("TestsClient", () => {
             pageSize: 1,
             search: "search",
             parentFolderId: "parent_folder_id",
+            types: ["llm"],
             includeFolders: true,
             sortMode: "default",
             sharingMode: "all",

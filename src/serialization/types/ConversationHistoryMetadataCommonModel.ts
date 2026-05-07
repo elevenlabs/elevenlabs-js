@@ -15,7 +15,9 @@ import { ConversationHistoryFeedbackCommonModel } from "./ConversationHistoryFee
 import { ConversationHistoryMetadataCommonModelPhoneCall } from "./ConversationHistoryMetadataCommonModelPhoneCall";
 import { ConversationHistoryRagUsageCommonModel } from "./ConversationHistoryRagUsageCommonModel";
 import { ConversationInitiationSource } from "./ConversationInitiationSource";
+import { ConversationVoiceRewardModel } from "./ConversationVoiceRewardModel";
 import { FeaturesUsageCommonModel } from "./FeaturesUsageCommonModel";
+import { SmsConversationInfo } from "./SmsConversationInfo";
 import { WhatsAppConversationInfo } from "./WhatsAppConversationInfo";
 
 export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSchema<
@@ -58,8 +60,13 @@ export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSc
     timezone: core.serialization.string().optional(),
     asyncMetadata: core.serialization.property("async_metadata", AsyncConversationMetadata.optional()),
     whatsapp: WhatsAppConversationInfo.optional(),
+    sms: SmsConversationInfo.optional(),
     agentCreatedFrom: core.serialization.property("agent_created_from", AgentDefinitionSource.optional()),
     agentLastUpdatedFrom: core.serialization.property("agent_last_updated_from", AgentDefinitionSource.optional()),
+    voiceRewards: core.serialization.property(
+        "voice_rewards",
+        core.serialization.list(ConversationVoiceRewardModel).optional(),
+    ),
 });
 
 export declare namespace ConversationHistoryMetadataCommonModel {
@@ -88,7 +95,9 @@ export declare namespace ConversationHistoryMetadataCommonModel {
         timezone?: string | null;
         async_metadata?: AsyncConversationMetadata.Raw | null;
         whatsapp?: WhatsAppConversationInfo.Raw | null;
+        sms?: SmsConversationInfo.Raw | null;
         agent_created_from?: AgentDefinitionSource.Raw | null;
         agent_last_updated_from?: AgentDefinitionSource.Raw | null;
+        voice_rewards?: ConversationVoiceRewardModel.Raw[] | null;
     }
 }

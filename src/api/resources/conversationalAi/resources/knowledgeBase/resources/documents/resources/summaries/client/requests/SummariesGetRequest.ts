@@ -2,7 +2,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         documentIds: ["21m00Tcm4TlvDq8ikWAM", "31n11Udm5UmwEr9jkXBN"]
+ *     }
  */
 export interface SummariesGetRequest {
     /** The ids of knowledge base documents. */

@@ -7,6 +7,7 @@ export interface ConversationHistorySipTrunkingPhoneCallModel {
     phoneNumberId: string;
     agentNumber: string;
     externalNumber: string;
+    callId?: string;
     callSid: string;
     sipHeaderDynamicVariables?: Record<string, string>;
 }

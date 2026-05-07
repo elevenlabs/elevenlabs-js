@@ -21,6 +21,7 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "genesys",
     "swift_sdk",
     "whatsapp",
+    "twilio_sms",
     "flutter_sdk",
     "zendesk_integration",
     "slack_integration",
@@ -42,6 +43,7 @@ export declare namespace ConversationInitiationSource {
         | "genesys"
         | "swift_sdk"
         | "whatsapp"
+        | "twilio_sms"
         | "flutter_sdk"
         | "zendesk_integration"
         | "slack_integration"

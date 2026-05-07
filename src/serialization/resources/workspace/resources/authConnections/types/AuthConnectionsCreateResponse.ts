@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../../../../../api/index";
 import * as core from "../../../../../../core";
 import type * as serializers from "../../../../../index";
 import { ApiIntegrationOAuth2AuthCodeResponse } from "../../../../../types/ApiIntegrationOAuth2AuthCodeResponse";
+import { ApiIntegrationOAuth2CustomAppResponse } from "../../../../../types/ApiIntegrationOAuth2CustomAppResponse";
 import { BasicAuthResponse } from "../../../../../types/BasicAuthResponse";
 import { BearerAuthResponse } from "../../../../../types/BearerAuthResponse";
 import { CustomHeaderAuthResponse } from "../../../../../types/CustomHeaderAuthResponse";
@@ -26,6 +27,7 @@ export const AuthConnectionsCreateResponse: core.serialization.Schema<
         mtls: MtlsAuthResponse,
         custom_header_auth: CustomHeaderAuthResponse,
         api_integration_oauth2_auth_code: ApiIntegrationOAuth2AuthCodeResponse,
+        api_integration_oauth2_custom_app: ApiIntegrationOAuth2CustomAppResponse,
         whatsapp_auth: WhatsAppAuthResponse,
     })
     .transform<ElevenLabs.workspace.AuthConnectionsCreateResponse>({
@@ -43,6 +45,7 @@ export declare namespace AuthConnectionsCreateResponse {
         | AuthConnectionsCreateResponse.Mtls
         | AuthConnectionsCreateResponse.CustomHeaderAuth
         | AuthConnectionsCreateResponse.ApiIntegrationOauth2AuthCode
+        | AuthConnectionsCreateResponse.ApiIntegrationOauth2CustomApp
         | AuthConnectionsCreateResponse.WhatsappAuth;
 
     export interface Oauth2ClientCredentials extends OAuth2ClientCredsResponse.Raw {
@@ -75,6 +78,10 @@ export declare namespace AuthConnectionsCreateResponse {
 
     export interface ApiIntegrationOauth2AuthCode extends ApiIntegrationOAuth2AuthCodeResponse.Raw {
         auth_type: "api_integration_oauth2_auth_code";
+    }
+
+    export interface ApiIntegrationOauth2CustomApp extends ApiIntegrationOAuth2CustomAppResponse.Raw {
+        auth_type: "api_integration_oauth2_custom_app";
     }
 
     export interface WhatsappAuth extends WhatsAppAuthResponse.Raw {

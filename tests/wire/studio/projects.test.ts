@@ -277,10 +277,9 @@ describe("ProjectsClient", () => {
                     asset_preview_signed_url: "asset_preview_signed_url",
                     source_video_id: "source_video_id",
                     source_asset_id: "source_asset_id",
+                    source_platform_asset_id: "source_platform_asset_id",
                     pending_blocks_metadata: { block_ids: ["block_ids"] },
                     pending_external_audios_metadata: { external_audio_ids: ["external_audio_ids"] },
-                    pending_block_ids: ["pending_block_ids"],
-                    pending_external_audio_ids: ["pending_external_audio_ids"],
                     speech_imported: true,
                     pending_task: { type: "preprocessing" },
                     audio_track_ready: true,
@@ -536,9 +535,11 @@ describe("ProjectsClient", () => {
                     reviewed_by: "reviewed_by",
                     reject_reasons: ["lacks_structure"],
                     rejected_details: "rejected_details",
+                    explanation: "explanation",
                 },
                 voice_id: "voice_id",
                 can_use_assistant: true,
+                is_voice_changer_on: true,
             },
         };
         server
@@ -805,14 +806,13 @@ describe("ProjectsClient", () => {
                     assetPreviewSignedUrl: "asset_preview_signed_url",
                     sourceVideoId: "source_video_id",
                     sourceAssetId: "source_asset_id",
+                    sourcePlatformAssetId: "source_platform_asset_id",
                     pendingBlocksMetadata: {
                         blockIds: ["block_ids"],
                     },
                     pendingExternalAudiosMetadata: {
                         externalAudioIds: ["external_audio_ids"],
                     },
-                    pendingBlockIds: ["pending_block_ids"],
-                    pendingExternalAudioIds: ["pending_external_audio_ids"],
                     speechImported: true,
                     pendingTask: {
                         type: "preprocessing",
@@ -1113,9 +1113,11 @@ describe("ProjectsClient", () => {
                     reviewedBy: "reviewed_by",
                     rejectReasons: ["lacks_structure"],
                     rejectedDetails: "rejected_details",
+                    explanation: "explanation",
                 },
                 voiceId: "voice_id",
                 canUseAssistant: true,
+                isVoiceChangerOn: true,
             },
         });
     });

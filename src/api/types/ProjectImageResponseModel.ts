@@ -5,8 +5,8 @@ import type * as ElevenLabs from "../index";
 export interface ProjectImageResponseModel {
     imageId: string;
     filename: string;
-    signedUrl: string;
-    thumbnailSignedUrl: string;
+    signedUrl?: string;
+    thumbnailSignedUrl?: string;
     source?: "upload";
     fileSizeBytes: number;
     width: number;
@@ -22,4 +22,8 @@ export interface ProjectImageResponseModel {
     updatedAtMs: number;
     currentSnapshotId?: string;
     sourceAssetId?: string;
+    sourcePlatformAssetId?: string;
+    error?: string;
+    pendingTask?: ElevenLabs.PendingClipTask;
+    analysis?: ElevenLabs.ImageAnalysis;
 }

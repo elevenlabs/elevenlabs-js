@@ -45,6 +45,7 @@ describe("KnowledgeBaseClient", () => {
             search: "search",
             showOnlyOwnedDocuments: true,
             createdByUserId: "created_by_user_id",
+            types: ["file"],
             parentFolderId: "parent_folder_id",
             ancestorFolderId: "ancestor_folder_id",
             foldersFirst: true,
@@ -190,6 +191,7 @@ describe("KnowledgeBaseClient", () => {
         const response = await client.conversationalAi.knowledgeBase.search({
             query: "query",
             pageSize: 1,
+            types: ["file"],
             cursor: "cursor",
         });
         expect(response).toEqual({

@@ -12,10 +12,12 @@ export const GetClientAppointmentsParams: core.serialization.ObjectSchema<
         "smb_tool_type",
         core.serialization.stringLiteral("get_client_appointments").optional(),
     ),
+    includeCancelled: core.serialization.property("include_cancelled", core.serialization.boolean().optional()),
 });
 
 export declare namespace GetClientAppointmentsParams {
     export interface Raw {
         smb_tool_type?: "get_client_appointments" | null;
+        include_cancelled?: boolean | null;
     }
 }

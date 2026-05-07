@@ -39,19 +39,22 @@ export class InvocationsClient {
      *     })
      */
     public list(
-        request: ElevenLabs.conversationalAi.tests.InvocationsListRequest,
+        request: ElevenLabs.conversationalAi.tests.InvocationsListRequest = {},
         requestOptions?: InvocationsClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.GetTestInvocationsPageResponseModel> {
         return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
     private async __list(
-        request: ElevenLabs.conversationalAi.tests.InvocationsListRequest,
+        request: ElevenLabs.conversationalAi.tests.InvocationsListRequest = {},
         requestOptions?: InvocationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetTestInvocationsPageResponseModel>> {
         const { agentId, pageSize, cursor } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.agent_id = agentId;
+        if (agentId != null) {
+            _queryParams.agent_id = agentId;
+        }
+
         if (pageSize != null) {
             _queryParams.page_size = pageSize.toString();
         }

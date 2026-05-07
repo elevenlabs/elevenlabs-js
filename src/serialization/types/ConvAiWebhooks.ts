@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { WebhookEventType } from "./WebhookEventType";
+import { WebhookTranscriptFormat } from "./WebhookTranscriptFormat";
 
 export const ConvAiWebhooks: core.serialization.ObjectSchema<
     serializers.ConvAiWebhooks.Raw,
@@ -11,6 +12,7 @@ export const ConvAiWebhooks: core.serialization.ObjectSchema<
 > = core.serialization.object({
     postCallWebhookId: core.serialization.property("post_call_webhook_id", core.serialization.string().optional()),
     events: core.serialization.list(WebhookEventType).optional(),
+    transcriptFormat: core.serialization.property("transcript_format", WebhookTranscriptFormat.optional()),
     sendAudio: core.serialization.property("send_audio", core.serialization.boolean().optional()),
 });
 
@@ -18,6 +20,7 @@ export declare namespace ConvAiWebhooks {
     export interface Raw {
         post_call_webhook_id?: string | null;
         events?: WebhookEventType.Raw[] | null;
+        transcript_format?: WebhookTranscriptFormat.Raw | null;
         send_audio?: boolean | null;
     }
 }
