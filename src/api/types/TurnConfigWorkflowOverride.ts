@@ -9,8 +9,6 @@ export interface TurnConfigWorkflowOverride {
     initialWaitTime?: number;
     /** Maximum wait time since the user last spoke before terminating the call */
     silenceEndCallTimeout?: number;
-    /** Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses. */
-    softTimeoutConfig?: ElevenLabs.SoftTimeoutConfigWorkflowOverride;
     /** Controls how eager the agent is to respond. Low = less eager (waits longer), Standard = default eagerness, High = more eager (responds sooner) */
     turnEagerness?: ElevenLabs.TurnEagerness;
     /** Controls if the agent should be more patient when user is spelling numbers and named entities. Auto = model based, Off = never wait extra */
@@ -19,4 +17,6 @@ export interface TurnConfigWorkflowOverride {
     speculativeTurn?: boolean;
     /** When enabled, if VAD detects no speech, attempts to re-transcribe accumulated audio at turn timeout. Disables silence discount billing for affected turns. */
     retranscribeOnTurnTimeout?: boolean;
+    /** Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses. */
+    softTimeoutConfig?: ElevenLabs.SoftTimeoutConfigWorkflowOverride;
 }

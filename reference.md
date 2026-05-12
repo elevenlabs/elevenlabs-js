@@ -4417,6 +4417,340 @@ await client.conversationalAi.deleteDocumentRagIndex("21m00Tcm4TlvDq8ikWAM", "21
 </dl>
 </details>
 
+## SpeechEngine
+<details><summary><code>client.speechEngine.<a href="/src/api/resources/speechEngine/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ListSpeechEnginesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a paginated list of Speech Engine resources.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechEngine.list({
+    pageSize: 1,
+    search: "search",
+    sortDirection: "asc",
+    sortBy: "name",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.SpeechEngineListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpeechEngineClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.speechEngine.<a href="/src/api/resources/speechEngine/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateSpeechEngineResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new Speech Engine resource
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechEngine.create({
+    speechEngine: {
+        wsUrl: "ws_url"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateSpeechEngineRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpeechEngineClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.speechEngine.<a href="/src/api/resources/speechEngine/client/Client.ts">get</a>(speech_engine_id) -> ElevenLabs.SpeechEngineResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a Speech Engine resource
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechEngine.get("seng_3701k3ttaq12ewp8b7qv5rfyszkz");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**speech_engine_id:** `string` — The speech engine ID (accepts seng_ or agent_ prefix)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpeechEngineClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.speechEngine.<a href="/src/api/resources/speechEngine/client/Client.ts">delete</a>(speech_engine_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a Speech Engine resource
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechEngine.delete("seng_3701k3ttaq12ewp8b7qv5rfyszkz");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**speech_engine_id:** `string` — The speech engine ID (accepts seng_ or agent_ prefix)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpeechEngineClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.speechEngine.<a href="/src/api/resources/speechEngine/client/Client.ts">update</a>(speech_engine_id, { ...params }) -> ElevenLabs.SpeechEngineResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a Speech Engine resource (partial update)
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechEngine.update("seng_3701k3ttaq12ewp8b7qv5rfyszkz");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**speech_engine_id:** `string` — The speech engine ID (accepts seng_ or agent_ prefix)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.UpdateSpeechEngineRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpeechEngineClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## EnvironmentVariables
 <details><summary><code>client.environmentVariables.<a href="/src/api/resources/environmentVariables/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.EnvironmentVariablesListResponse</code></summary>
 <dl>
@@ -4721,7 +5055,7 @@ Get a signed url to start a conversation with an agent with an agent that requir
 
 ```typescript
 await client.conversationalAi.conversations.getSignedUrl({
-    agentId: "21m00Tcm4TlvDq8ikWAM",
+    agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     includeConversationId: true,
     branchId: "branch_id",
     environment: "environment"
@@ -4789,7 +5123,7 @@ Get a WebRTC session token for real-time communication.
 
 ```typescript
 await client.conversationalAi.conversations.getWebrtcToken({
-    agentId: "21m00Tcm4TlvDq8ikWAM",
+    agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     participantName: "participant_name",
     branchId: "branch_id",
     environment: "environment"
@@ -12119,7 +12453,7 @@ await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikW
 <dl>
 <dd>
 
-Update the name of a document
+Update the name and/or content of a document.
 </dd>
 </dl>
 </dd>
@@ -12134,9 +12468,7 @@ Update the name of a document
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikWAM", {
-    name: "name"
-});
+await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikWAM");
 
 ```
 </dd>
@@ -12518,6 +12850,79 @@ await client.conversationalAi.knowledgeBase.documents.bulkMove({
 </details>
 
 ## ConversationalAi KnowledgeBase Document
+<details><summary><code>client.conversationalAi.knowledgeBase.document.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/document/client/Client.ts">updateFile</a>(documentation_id, { ...params }) -> ElevenLabs.DocumentUpdateFileResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the source file of a file document. The document name, content, and metadata are updated to reflect the new file. Any manual content edits will be overwritten.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.document.updateFile("21m00Tcm4TlvDq8ikWAM", {
+    file: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIdUpdateFilePatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DocumentClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.knowledgeBase.document.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/document/client/Client.ts">refresh</a>(documentation_id) -> ElevenLabs.DocumentRefreshResponse</code></summary>
 <dl>
 <dd>
@@ -12791,6 +13196,82 @@ await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8
 <dd>
 
 **requestOptions:** `ChunkClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi KnowledgeBase Documents Chunks
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.chunks.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/resources/chunks/client/Client.ts">list</a>(documentation_id, { ...params }) -> ElevenLabs.KnowledgeBaseDocumentChunksResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all RAG chunks for a specific knowledge base document.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.documents.chunks.list("21m00Tcm4TlvDq8ikWAM", {
+    embeddingModel: "e5_mistral_7b_instruct",
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentation_id:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.documents.ChunksListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChunksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -19871,6 +20352,70 @@ await client.workspace.usage.getUsageByProductOverTime({
 <dd>
 
 **requestOptions:** `UsageClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Workspace Analytics Requests
+<details><summary><code>client.workspace.analytics.requests.<a href="/src/api/resources/workspace/resources/analytics/resources/requests/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.WorkspaceAnalyticsQueryResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of API requests. Supports filtering by time range, column filters, and search terms. At least one of start_time or end_time must be provided. An optional sort parameter controls timestamp ordering. Results are ordered by timestamp. Descending if end_time is used, ascending if start_time is used. The response is a tabular structure with columns, column_types, column_units, and rows.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.analytics.requests.get();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.workspace.analytics.BodyListApiRequestsV1WorkspaceAnalyticsRequestsPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestsClient.RequestOptions` 
     
 </dd>
 </dl>

@@ -75,7 +75,7 @@ export class ConversationsClient {
      *
      * @example
      *     await client.conversationalAi.conversations.getSignedUrl({
-     *         agentId: "21m00Tcm4TlvDq8ikWAM",
+     *         agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
      *         includeConversationId: true,
      *         branchId: "branch_id",
      *         environment: "environment"
@@ -171,7 +171,7 @@ export class ConversationsClient {
      *
      * @example
      *     await client.conversationalAi.conversations.getWebrtcToken({
-     *         agentId: "21m00Tcm4TlvDq8ikWAM",
+     *         agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
      *         participantName: "participant_name",
      *         branchId: "branch_id",
      *         environment: "environment"

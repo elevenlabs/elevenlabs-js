@@ -3,19 +3,19 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { ConversationTokenDbModel } from "./ConversationTokenDbModel";
+import { ConversationTokenResponseModel } from "./ConversationTokenResponseModel";
 
 export const GetAgentLinkResponseModel: core.serialization.ObjectSchema<
     serializers.GetAgentLinkResponseModel.Raw,
     ElevenLabs.GetAgentLinkResponseModel
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string()),
-    token: ConversationTokenDbModel.optional(),
+    token: ConversationTokenResponseModel.optional(),
 });
 
 export declare namespace GetAgentLinkResponseModel {
     export interface Raw {
         agent_id: string;
-        token?: ConversationTokenDbModel.Raw | null;
+        token?: ConversationTokenResponseModel.Raw | null;
     }
 }

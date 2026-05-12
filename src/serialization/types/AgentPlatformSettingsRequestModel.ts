@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AgentAlertingSettings } from "./AgentAlertingSettings";
 import { AgentCallLimits } from "./AgentCallLimits";
 import { AgentTestingSettings } from "./AgentTestingSettings";
 import { AgentTrustContext } from "./AgentTrustContext";
@@ -42,6 +43,7 @@ export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
     privacy: PrivacyConfigInput.optional(),
     trustContext: core.serialization.property("trust_context", AgentTrustContext.optional()),
     analysisLlm: core.serialization.property("analysis_llm", Llm.optional()),
+    alerting: AgentAlertingSettings.optional(),
 });
 
 export declare namespace AgentPlatformSettingsRequestModel {
@@ -61,5 +63,6 @@ export declare namespace AgentPlatformSettingsRequestModel {
         privacy?: PrivacyConfigInput.Raw | null;
         trust_context?: AgentTrustContext.Raw | null;
         analysis_llm?: Llm.Raw | null;
+        alerting?: AgentAlertingSettings.Raw | null;
     }
 }

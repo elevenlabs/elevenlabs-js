@@ -11,6 +11,10 @@ export const BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch: core.s
     isDisabled: core.serialization.property("is_disabled", core.serialization.boolean()),
     name: core.serialization.string(),
     retryEnabled: core.serialization.property("retry_enabled", core.serialization.boolean().optional()),
+    requestHeaders: core.serialization.property(
+        "request_headers",
+        core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
+    ),
 });
 
 export declare namespace BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch {
@@ -18,5 +22,6 @@ export declare namespace BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdP
         is_disabled: boolean;
         name: string;
         retry_enabled?: boolean | null;
+        request_headers?: Record<string, string | null | undefined> | null;
     }
 }

@@ -2,6 +2,7 @@
 
 import type { BaseClientOptions } from "../../../../BaseClient";
 import { type NormalizedClientOptions, normalizeClientOptions } from "../../../../BaseClient";
+import { AnalyticsClient } from "../resources/analytics/client/Client";
 import { AuditLogsClient } from "../resources/auditLogs/client/Client";
 import { AuthConnectionsClient } from "../resources/authConnections/client/Client";
 import { GroupsClient } from "../resources/groups/client/Client";
@@ -23,6 +24,7 @@ export class WorkspaceClient {
     protected _members: MembersClient | undefined;
     protected _resources: ResourcesClient | undefined;
     protected _usage: UsageClient | undefined;
+    protected _analytics: AnalyticsClient | undefined;
 
     constructor(options: WorkspaceClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -54,5 +56,9 @@ export class WorkspaceClient {
 
     public get usage(): UsageClient {
         return (this._usage ??= new UsageClient(this._options));
+    }
+
+    public get analytics(): AnalyticsClient {
+        return (this._analytics ??= new AnalyticsClient(this._options));
     }
 }

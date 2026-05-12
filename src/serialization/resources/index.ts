@@ -20,6 +20,8 @@ export * as pronunciationDictionaries from "./pronunciationDictionaries";
 export * from "./pronunciationDictionaries/client/requests";
 export * from "./pronunciationDictionaries/types";
 export * as serviceAccounts from "./serviceAccounts";
+export * as speechEngine from "./speechEngine";
+export * from "./speechEngine/client/requests";
 export * as speechToSpeech from "./speechToSpeech";
 export * from "./speechToSpeech/types";
 export * as speechToText from "./speechToText";

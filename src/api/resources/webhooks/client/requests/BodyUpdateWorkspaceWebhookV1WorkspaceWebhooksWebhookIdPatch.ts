@@ -14,4 +14,6 @@ export interface BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch {
     name: string;
     /** Whether to enable automatic retries for transient failures (5xx, 429, timeout) */
     retryEnabled?: boolean;
+    /** A list of request headers to include with the webhook delivery (optional) */
+    requestHeaders?: Record<string, string | undefined>;
 }

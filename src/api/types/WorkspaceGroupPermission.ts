@@ -11,6 +11,7 @@ export const WorkspaceGroupPermission = {
     Dubbing: "dubbing",
     AudioNative: "audio_native",
     ConversationalAi: "conversational_ai",
+    ConversationalAiRead: "conversational_ai_read",
     VoiceIsolator: "voice_isolator",
     AiSpeechClassifier: "ai_speech_classifier",
     AddVoiceFromVoiceLibrary: "add_voice_from_voice_library",
@@ -32,5 +33,6 @@ export const WorkspaceGroupPermission = {
     TermsOfServiceAccept: "terms_of_service_accept",
     AuditLogRead: "audit_log_read",
     CopyResourcesCrossWorkspace: "copy_resources_cross_workspace",
+    VoiceDesign: "voice_design",
 } as const;
 export type WorkspaceGroupPermission = (typeof WorkspaceGroupPermission)[keyof typeof WorkspaceGroupPermission];

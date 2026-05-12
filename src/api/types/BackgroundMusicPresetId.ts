@@ -2,6 +2,10 @@
 
 /** Predefined background music preset identifiers. */
 export const BackgroundMusicPresetId = {
+    Office2: "office2",
+    Office1: "office1",
+    Restaurant: "restaurant",
+    City: "city",
     Typing: "typing",
     Elevator1: "elevator1",
     Elevator2: "elevator2",

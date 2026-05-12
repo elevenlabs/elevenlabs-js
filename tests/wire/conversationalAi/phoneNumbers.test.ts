@@ -14,7 +14,12 @@ describe("PhoneNumbersClient", () => {
                 phone_number: "+1234567890",
                 label: "Customer Support",
                 phone_number_id: "phone_123",
-                assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
+                assigned_agent: {
+                    agent_id: "F3Pbu5gP6NNKBscdCdwB",
+                    agent_name: "My Agent",
+                    environment: "environment",
+                    branch_id: "branch_id",
+                },
             },
         ];
         server
@@ -35,6 +40,8 @@ describe("PhoneNumbersClient", () => {
                 assignedAgent: {
                     agentId: "F3Pbu5gP6NNKBscdCdwB",
                     agentName: "My Agent",
+                    environment: "environment",
+                    branchId: "branch_id",
                 },
             },
         ]);
@@ -81,7 +88,12 @@ describe("PhoneNumbersClient", () => {
             phone_number: "+1234567890",
             label: "Customer Support",
             phone_number_id: "phone_123",
-            assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
+            assigned_agent: {
+                agent_id: "F3Pbu5gP6NNKBscdCdwB",
+                agent_name: "My Agent",
+                environment: "environment",
+                branch_id: "branch_id",
+            },
         };
         server
             .mockEndpoint()
@@ -100,6 +112,8 @@ describe("PhoneNumbersClient", () => {
             assignedAgent: {
                 agentId: "F3Pbu5gP6NNKBscdCdwB",
                 agentName: "My Agent",
+                environment: "environment",
+                branchId: "branch_id",
             },
         });
     });
@@ -132,7 +146,12 @@ describe("PhoneNumbersClient", () => {
             phone_number: "+1234567890",
             label: "Customer Support",
             phone_number_id: "phone_123",
-            assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
+            assigned_agent: {
+                agent_id: "F3Pbu5gP6NNKBscdCdwB",
+                agent_name: "My Agent",
+                environment: "environment",
+                branch_id: "branch_id",
+            },
         };
         server
             .mockEndpoint()
@@ -152,6 +171,8 @@ describe("PhoneNumbersClient", () => {
             assignedAgent: {
                 agentId: "F3Pbu5gP6NNKBscdCdwB",
                 agentName: "My Agent",
+                environment: "environment",
+                branchId: "branch_id",
             },
         });
     });

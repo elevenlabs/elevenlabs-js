@@ -10,11 +10,15 @@ export const PhoneNumberAgentInfo: core.serialization.ObjectSchema<
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     agentName: core.serialization.property("agent_name", core.serialization.string()),
+    environment: core.serialization.string().optional(),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
 });
 
 export declare namespace PhoneNumberAgentInfo {
     export interface Raw {
         agent_id: string;
         agent_name: string;
+        environment?: string | null;
+        branch_id?: string | null;
     }
 }

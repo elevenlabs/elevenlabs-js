@@ -1,3 +1,4 @@
+export * as analytics from "./analytics";
 export * as auditLogs from "./auditLogs";
 export * from "./auditLogs/client/requests";
 export * as authConnections from "./authConnections";

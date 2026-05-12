@@ -35,6 +35,7 @@ describe("LlmClient", () => {
                             fallback_complete_percentage: 100,
                         },
                     },
+                    regional_processing_surcharge: { multiplier: 1.1 },
                 },
             ],
             default_deprecation_config: {
@@ -80,6 +81,9 @@ describe("LlmClient", () => {
                             fallbackStartPercentage: 25,
                             fallbackCompletePercentage: 100,
                         },
+                    },
+                    regionalProcessingSurcharge: {
+                        multiplier: 1.1,
                     },
                 },
             ],

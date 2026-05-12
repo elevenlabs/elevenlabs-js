@@ -13,4 +13,5 @@ export interface WorkspaceApiKeyResponseModel {
     characterLimit?: number;
     characterCount?: number;
     hashedXiApiKey: string;
+    allowedIps?: string[];
 }
