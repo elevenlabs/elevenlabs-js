@@ -1,12 +1,11 @@
+import type { MusicClient as GeneratedMusic } from "../api/resources/music/client/Client";
 import { ElevenLabsClient as FernClient } from "../Client";
-import type * as ElevenLabs from "../api";
 import type * as core from "../core";
 import * as errors from "../errors";
-import { WebhooksClient } from "./webhooks";
 import { Music } from "./music";
-import { MusicClient as GeneratedMusic } from "../api/resources/music/client/Client";
-import { SpeechToText } from "./speechToText";
 import { SpeechEngineClientWrapper } from "./speech-engine";
+import { SpeechToText } from "./speechToText";
+import { WebhooksClient } from "./webhooks";
 
 export declare namespace ElevenLabsClient {
     interface Options extends FernClient.Options {
@@ -58,6 +57,7 @@ export class ElevenLabsClient extends FernClient {
         return this._customSpeechToText;
     }
 
+    // @ts-expect-error — SpeechEngineClientWrapper.get() returns SpeechEngineResource, not HttpResponsePromise<SpeechEngineResponse>
     public override get speechEngine(): SpeechEngineClientWrapper {
         if (!this._customSpeechEngine) {
             this._customSpeechEngine = new SpeechEngineClientWrapper(this._options);

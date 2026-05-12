@@ -1,17 +1,16 @@
 import type { Server as HttpServer } from "node:http";
 import { SpeechEngineClient } from "../../api/resources/speechEngine/client/Client";
-import type { SpeechEngineCallbacks } from "./types";
 import type { SpeechEngineAttachment } from "./SpeechEngineAttachment";
 import { SpeechEngineResource } from "./SpeechEngineResource";
+import type { SpeechEngineCallbacks } from "./types";
 
 /**
  * Client for the Speech Engine resource. Accessible via `elevenlabs.speechEngine`.
  *
  * Extends the Fern-generated `SpeechEngineClient` with WebSocket integration
- * methods. CRUD operations (`create`, `get`, `list`, `update`, `delete`) are
- * inherited from the generated client.
- *
- * Use `resource()` to get a `SpeechEngineResource` for WebSocket server setup.
+ * methods. CRUD operations (`create`, `list`, `update`, `delete`) are
+ * inherited from the generated client. `get()` is overridden to return a
+ * `SpeechEngineResource` with WebSocket server setup methods.
  *
  * @example
  * ```typescript
@@ -22,7 +21,7 @@ import { SpeechEngineResource } from "./SpeechEngineResource";
  * });
  *
  * // Attach to an existing HTTP server
- * const engine = elevenlabs.speechEngine.resource(speechEngineId);
+ * const engine = await elevenlabs.speechEngine.get(speechEngineId);
  * engine.attach(httpServer, "/api/speech-engine/ws", {
  *     async onTranscript(transcript, signal, session) {
  *         session.sendResponse(await llm.generate(transcript, { signal }));
@@ -32,21 +31,35 @@ import { SpeechEngineResource } from "./SpeechEngineResource";
  */
 export class SpeechEngineClientWrapper extends SpeechEngineClient {
     /**
-     * Return a `SpeechEngineResource` for WebSocket server integration.
+     * Fetch a Speech Engine by ID and return a `SpeechEngineResource`.
      *
-     * Unlike the inherited `get()` which fetches and returns the full
-     * `SpeechEngineResponse` from the API, this method returns a
+     * Makes an API call to validate the engine exists, then returns a
      * `SpeechEngineResource` with `.attach()`, `.createSession()`, and
      * `.verifyRequest()` methods for setting up a WebSocket server.
+     *
+     * @example
+     * ```typescript
+     * const engine = await elevenlabs.speechEngine.get("seng_123");
+     * engine.attach(httpServer, "/api/speech-engine/ws", {
+     *     async onTranscript(transcript, signal, session) {
+     *         session.sendResponse(await llm.generate(transcript, { signal }));
+     *     },
+     * });
+     * ```
      */
-    resource(engineId: string): SpeechEngineResource {
-        return new SpeechEngineResource(engineId, this._options);
+    // @ts-expect-error — intentionally returns SpeechEngineResource instead of HttpResponsePromise<SpeechEngineResponse>
+    public async get(
+        speechEngineId: string,
+        requestOptions?: SpeechEngineClient.RequestOptions,
+    ): Promise<SpeechEngineResource> {
+        await super.get(speechEngineId, requestOptions);
+        return new SpeechEngineResource(speechEngineId, this._options);
     }
 
     /**
-     * Shortcut: get a `SpeechEngineResource` by ID and immediately attach it
-     * to an HTTP server. Equivalent to calling `resource()` followed by
-     * `attach()`.
+     * Shortcut: attach a Speech Engine to an HTTP server without making an
+     * API call. Equivalent to constructing a `SpeechEngineResource` and calling
+     * `attach()` on it directly.
      *
      * @example
      * ```typescript
@@ -63,6 +76,6 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
         path: string,
         handler: SpeechEngineCallbacks,
     ): SpeechEngineAttachment {
-        return this.resource(engineId).attach(httpServer, path, handler);
+        return new SpeechEngineResource(engineId, this._options).attach(httpServer, path, handler);
     }
 }
