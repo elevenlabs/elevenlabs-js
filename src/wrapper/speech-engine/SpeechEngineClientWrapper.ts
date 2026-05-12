@@ -1,4 +1,6 @@
 import type { Server as HttpServer } from "node:http";
+import type { CreateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/CreateSpeechEngineRequest";
+import type { UpdateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/UpdateSpeechEngineRequest";
 import { SpeechEngineClient } from "../../api/resources/speechEngine/client/Client";
 import type { SpeechEngineAttachment } from "./SpeechEngineAttachment";
 import { SpeechEngineResource } from "./SpeechEngineResource";
@@ -8,20 +10,17 @@ import type { SpeechEngineCallbacks } from "./types";
  * Client for the Speech Engine resource. Accessible via `elevenlabs.speechEngine`.
  *
  * Extends the Fern-generated `SpeechEngineClient` with WebSocket integration
- * methods. CRUD operations (`create`, `list`, `update`, `delete`) are
- * inherited from the generated client. `get()` is overridden to return a
- * `SpeechEngineResource` with WebSocket server setup methods.
+ * methods. `list` and `delete` are inherited from the generated client.
+ * `create`, `get`, and `update` are overridden to return a `SpeechEngineResource`
+ * with WebSocket server setup methods.
  *
  * @example
  * ```typescript
- * // Create a speech engine
- * const { speechEngineId } = await elevenlabs.speechEngine.create({
+ * // Create a speech engine and immediately attach it
+ * const engine = await elevenlabs.speechEngine.create({
  *     name: "My engine",
  *     speechEngine: { wsUrl: "wss://your-server.com/ws" },
  * });
- *
- * // Attach to an existing HTTP server
- * const engine = await elevenlabs.speechEngine.get(speechEngineId);
  * engine.attach(httpServer, "/api/speech-engine/ws", {
  *     async onTranscript(transcript, signal, session) {
  *         session.sendResponse(await llm.generate(transcript, { signal }));
@@ -30,6 +29,35 @@ import type { SpeechEngineCallbacks } from "./types";
  * ```
  */
 export class SpeechEngineClientWrapper extends SpeechEngineClient {
+    /**
+     * Create a Speech Engine and return a `SpeechEngineResource`.
+     *
+     * Makes an API call to create the engine, then returns a
+     * `SpeechEngineResource` with `.attach()`, `.createSession()`, and
+     * `.verifyRequest()` methods for setting up a WebSocket server.
+     *
+     * @example
+     * ```typescript
+     * const engine = await elevenlabs.speechEngine.create({
+     *     name: "My engine",
+     *     speechEngine: { wsUrl: "wss://your-server.com/ws" },
+     * });
+     * engine.attach(httpServer, "/api/speech-engine/ws", {
+     *     async onTranscript(transcript, signal, session) {
+     *         session.sendResponse(await llm.generate(transcript, { signal }));
+     *     },
+     * });
+     * ```
+     */
+    // @ts-expect-error — intentionally returns SpeechEngineResource instead of HttpResponsePromise<CreateSpeechEngineResponse>
+    public async create(
+        request: CreateSpeechEngineRequest,
+        requestOptions?: SpeechEngineClient.RequestOptions,
+    ): Promise<SpeechEngineResource> {
+        const response = await super.create(request, requestOptions);
+        return new SpeechEngineResource(response.speechEngineId, this._options);
+    }
+
     /**
      * Fetch a Speech Engine by ID and return a `SpeechEngineResource`.
      *
@@ -53,6 +81,33 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
         requestOptions?: SpeechEngineClient.RequestOptions,
     ): Promise<SpeechEngineResource> {
         await super.get(speechEngineId, requestOptions);
+        return new SpeechEngineResource(speechEngineId, this._options);
+    }
+
+    /**
+     * Update a Speech Engine and return a `SpeechEngineResource`.
+     *
+     * Makes an API call to update the engine, then returns a
+     * `SpeechEngineResource` with `.attach()`, `.createSession()`, and
+     * `.verifyRequest()` methods for setting up a WebSocket server.
+     *
+     * @example
+     * ```typescript
+     * const engine = await elevenlabs.speechEngine.update("seng_123", { name: "Renamed" });
+     * engine.attach(httpServer, "/api/speech-engine/ws", {
+     *     async onTranscript(transcript, signal, session) {
+     *         session.sendResponse(await llm.generate(transcript, { signal }));
+     *     },
+     * });
+     * ```
+     */
+    // @ts-expect-error — intentionally returns SpeechEngineResource instead of HttpResponsePromise<SpeechEngineResponse>
+    public async update(
+        speechEngineId: string,
+        request: UpdateSpeechEngineRequest = {},
+        requestOptions?: SpeechEngineClient.RequestOptions,
+    ): Promise<SpeechEngineResource> {
+        await super.update(speechEngineId, request, requestOptions);
         return new SpeechEngineResource(speechEngineId, this._options);
     }
 
