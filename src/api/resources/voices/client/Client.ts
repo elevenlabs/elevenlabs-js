@@ -484,6 +484,10 @@ export class VoicesClient {
             );
         }
 
+        if (request.moderateMetadata != null) {
+            _request.append("moderate_metadata", request.moderateMetadata.toString());
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

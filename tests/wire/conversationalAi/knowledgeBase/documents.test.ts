@@ -181,7 +181,7 @@ describe("DocumentsClient", () => {
     test("update", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name" };
+        const rawRequestBody = {};
         const rawResponseBody = {
             type: "url",
             id: "id",
@@ -210,9 +210,7 @@ describe("DocumentsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikWAM", {
-            name: "name",
-        });
+        const response = await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikWAM");
         expect(response).toEqual({
             type: "url",
             id: "id",

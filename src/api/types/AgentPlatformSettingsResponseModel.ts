@@ -33,5 +33,6 @@ export interface AgentPlatformSettingsResponseModel {
     trustContext?: ElevenLabs.AgentTrustContext;
     /** Default LLM model for post-call analysis (evaluation and data collection) */
     analysisLlm?: ElevenLabs.Llm;
+    alerting?: ElevenLabs.AgentAlertingSettings;
     safety?: ElevenLabs.SafetyResponseModel;
 }

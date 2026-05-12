@@ -1,3 +1,4 @@
+export * as analytics from "./analytics";
 export * as authConnections from "./authConnections";
 export * from "./authConnections/types";
 export * as groups from "./groups";

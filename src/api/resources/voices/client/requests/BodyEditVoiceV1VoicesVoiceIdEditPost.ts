@@ -20,4 +20,6 @@ export interface BodyEditVoiceV1VoicesVoiceIdEditPost {
     description?: string;
     /** Labels for the voice. Keys can be language, accent, gender, or age. */
     labels?: ElevenLabs.VoicesUpdateRequestLabels;
+    /** Run synchronous LLM moderation over the voice name and description when they change. Has no effect unless the voice_library_metadata_moderation feature flag is enabled for the user. */
+    moderateMetadata?: boolean;
 }

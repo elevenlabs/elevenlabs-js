@@ -7,8 +7,27 @@ import type * as serializers from "../index";
 export const BackgroundMusicPresetId: core.serialization.Schema<
     serializers.BackgroundMusicPresetId.Raw,
     ElevenLabs.BackgroundMusicPresetId
-> = core.serialization.enum_(["typing", "elevator1", "elevator2", "elevator3", "elevator4"]);
+> = core.serialization.enum_([
+    "office2",
+    "office1",
+    "restaurant",
+    "city",
+    "typing",
+    "elevator1",
+    "elevator2",
+    "elevator3",
+    "elevator4",
+]);
 
 export declare namespace BackgroundMusicPresetId {
-    export type Raw = "typing" | "elevator1" | "elevator2" | "elevator3" | "elevator4";
+    export type Raw =
+        | "office2"
+        | "office1"
+        | "restaurant"
+        | "city"
+        | "typing"
+        | "elevator1"
+        | "elevator2"
+        | "elevator3"
+        | "elevator4";
 }

@@ -21,4 +21,6 @@ export interface LlmInfoModelOutput {
     availableReasoningEfforts?: ElevenLabs.LlmReasoningEffort[];
     /** Deprecation information if this model is deprecated or scheduled for deprecation. Null if the model is not affected. */
     deprecationInfo?: ElevenLabs.LlmDeprecationInfoModel;
+    /** Regional processing surcharge details if this model has additional costs in the current deployment region. Null if no surcharge applies. */
+    regionalProcessingSurcharge?: ElevenLabs.RegionalProcessingSurchargeInfo;
 }

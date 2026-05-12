@@ -12,6 +12,9 @@ export const AgentTopicResponseModel: core.serialization.ObjectSchema<
     label: core.serialization.string(),
     description: core.serialization.string(),
     conversationCount: core.serialization.property("conversation_count", core.serialization.number()),
+    parentTopicId: core.serialization.property("parent_topic_id", core.serialization.string().optional()),
+    x2D: core.serialization.property("x_2d", core.serialization.number().optional()),
+    y2D: core.serialization.property("y_2d", core.serialization.number().optional()),
 });
 
 export declare namespace AgentTopicResponseModel {
@@ -20,5 +23,8 @@ export declare namespace AgentTopicResponseModel {
         label: string;
         description: string;
         conversation_count: number;
+        parent_topic_id?: string | null;
+        x_2d?: number | null;
+        y_2d?: number | null;
     }
 }

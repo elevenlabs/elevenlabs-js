@@ -15,7 +15,6 @@ export const TurnConfig: core.serialization.ObjectSchema<serializers.TurnConfig.
             "silence_end_call_timeout",
             core.serialization.number().optional(),
         ),
-        softTimeoutConfig: core.serialization.property("soft_timeout_config", SoftTimeoutConfig.optional()),
         turnEagerness: core.serialization.property("turn_eagerness", TurnEagerness.optional()),
         spellingPatience: core.serialization.property("spelling_patience", SpellingPatience.optional()),
         speculativeTurn: core.serialization.property("speculative_turn", core.serialization.boolean().optional()),
@@ -23,6 +22,7 @@ export const TurnConfig: core.serialization.ObjectSchema<serializers.TurnConfig.
             "retranscribe_on_turn_timeout",
             core.serialization.boolean().optional(),
         ),
+        softTimeoutConfig: core.serialization.property("soft_timeout_config", SoftTimeoutConfig.optional()),
     });
 
 export declare namespace TurnConfig {
@@ -30,10 +30,10 @@ export declare namespace TurnConfig {
         turn_timeout?: number | null;
         initial_wait_time?: number | null;
         silence_end_call_timeout?: number | null;
-        soft_timeout_config?: SoftTimeoutConfig.Raw | null;
         turn_eagerness?: TurnEagerness.Raw | null;
         spelling_patience?: SpellingPatience.Raw | null;
         speculative_turn?: boolean | null;
         retranscribe_on_turn_timeout?: boolean | null;
+        soft_timeout_config?: SoftTimeoutConfig.Raw | null;
     }
 }

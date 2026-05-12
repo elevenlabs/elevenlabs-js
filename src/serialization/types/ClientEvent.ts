@@ -20,6 +20,7 @@ export const ClientEvent: core.serialization.Schema<serializers.ClientEvent.Raw,
         "mcp_connection_status",
         "agent_tool_request",
         "agent_tool_response",
+        "agent_tool_response_full_payload",
         "agent_response_metadata",
         "vad_score",
         "agent_chat_response_part",
@@ -47,6 +48,7 @@ export declare namespace ClientEvent {
         | "mcp_connection_status"
         | "agent_tool_request"
         | "agent_tool_response"
+        | "agent_tool_response_full_payload"
         | "agent_response_metadata"
         | "vad_score"
         | "agent_chat_response_part"

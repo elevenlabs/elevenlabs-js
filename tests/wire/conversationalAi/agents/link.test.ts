@@ -11,10 +11,10 @@ describe("LinkClient", () => {
         const rawResponseBody = {
             agent_id: "J3Pbu5gP6NNKBscdCdwB",
             token: {
-                agent_id: "agent_J3Pbu5gP6NNKBscdCdwB",
-                conversation_token: "1234567890",
-                expiration_time_unix_secs: 1716153600,
-                conversation_id: "conv_J3Pbu5gP6NNKBscdCdwB",
+                agent_id: "agent_id",
+                conversation_token: "conversation_token",
+                expiration_time_unix_secs: 1,
+                conversation_id: "conversation_id",
                 purpose: "signed_url",
                 token_requester_user_id: "token_requester_user_id",
             },
@@ -31,10 +31,10 @@ describe("LinkClient", () => {
         expect(response).toEqual({
             agentId: "J3Pbu5gP6NNKBscdCdwB",
             token: {
-                agentId: "agent_J3Pbu5gP6NNKBscdCdwB",
-                conversationToken: "1234567890",
-                expirationTimeUnixSecs: 1716153600,
-                conversationId: "conv_J3Pbu5gP6NNKBscdCdwB",
+                agentId: "agent_id",
+                conversationToken: "conversation_token",
+                expirationTimeUnixSecs: 1,
+                conversationId: "conversation_id",
                 purpose: "signed_url",
                 tokenRequesterUserId: "token_requester_user_id",
             },

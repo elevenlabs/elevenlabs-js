@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { Llm } from "./Llm";
 import { LlmDeprecationInfoModel } from "./LlmDeprecationInfoModel";
 import { LlmReasoningEffort } from "./LlmReasoningEffort";
+import { RegionalProcessingSurchargeInfo } from "./RegionalProcessingSurchargeInfo";
 
 export const LlmInfoModelInput: core.serialization.ObjectSchema<
     serializers.LlmInfoModelInput.Raw,
@@ -26,6 +27,10 @@ export const LlmInfoModelInput: core.serialization.ObjectSchema<
         core.serialization.list(LlmReasoningEffort).optional(),
     ),
     deprecationInfo: core.serialization.property("deprecation_info", LlmDeprecationInfoModel.optional()),
+    regionalProcessingSurcharge: core.serialization.property(
+        "regional_processing_surcharge",
+        RegionalProcessingSurchargeInfo.optional(),
+    ),
 });
 
 export declare namespace LlmInfoModelInput {
@@ -39,5 +44,6 @@ export declare namespace LlmInfoModelInput {
         supports_parallel_tool_calls: boolean;
         available_reasoning_efforts?: LlmReasoningEffort.Raw[] | null;
         deprecation_info?: LlmDeprecationInfoModel.Raw | null;
+        regional_processing_surcharge?: RegionalProcessingSurchargeInfo.Raw | null;
     }
 }

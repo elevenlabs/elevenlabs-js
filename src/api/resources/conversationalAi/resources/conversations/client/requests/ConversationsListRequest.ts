@@ -35,7 +35,7 @@ import type * as ElevenLabs from "../../../../../../index";
 export interface ConversationsListRequest {
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
-    /** The id of the agent you're taking the action on. */
+    /** Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource. */
     agentId?: string;
     /** The result of the success evaluation */
     callSuccessful?: ElevenLabs.EvaluationSuccessResult;

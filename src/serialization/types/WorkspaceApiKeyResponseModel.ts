@@ -19,6 +19,10 @@ export const WorkspaceApiKeyResponseModel: core.serialization.ObjectSchema<
     characterLimit: core.serialization.property("character_limit", core.serialization.number().optional()),
     characterCount: core.serialization.property("character_count", core.serialization.number().optional()),
     hashedXiApiKey: core.serialization.property("hashed_xi_api_key", core.serialization.string()),
+    allowedIps: core.serialization.property(
+        "allowed_ips",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace WorkspaceApiKeyResponseModel {
@@ -33,5 +37,6 @@ export declare namespace WorkspaceApiKeyResponseModel {
         character_limit?: number | null;
         character_count?: number | null;
         hashed_xi_api_key: string;
+        allowed_ips?: string[] | null;
     }
 }

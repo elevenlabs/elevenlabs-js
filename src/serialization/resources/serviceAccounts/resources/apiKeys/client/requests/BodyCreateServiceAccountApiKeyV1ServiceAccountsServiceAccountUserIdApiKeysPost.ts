@@ -12,6 +12,10 @@ export const BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserId
     name: core.serialization.string(),
     permissions: BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysPostPermissions,
     characterLimit: core.serialization.property("character_limit", core.serialization.number().optional()),
+    allowedIps: core.serialization.property(
+        "allowed_ips",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysPost {
@@ -19,5 +23,6 @@ export declare namespace BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceA
         name: string;
         permissions: BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysPostPermissions.Raw;
         character_limit?: number | null;
+        allowed_ips?: string[] | null;
     }
 }

@@ -3,14 +3,14 @@
 /**
  * @example
  *     {
- *         agentId: "21m00Tcm4TlvDq8ikWAM",
+ *         agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
  *         includeConversationId: true,
  *         branchId: "branch_id",
  *         environment: "environment"
  *     }
  */
 export interface ConversationsGetSignedUrlRequest {
-    /** The id of the agent you're taking the action on. */
+    /** Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource. */
     agentId: string;
     /** Whether to include a conversation_id with the response. If included, the conversation_signature cannot be used again. */
     includeConversationId?: boolean;

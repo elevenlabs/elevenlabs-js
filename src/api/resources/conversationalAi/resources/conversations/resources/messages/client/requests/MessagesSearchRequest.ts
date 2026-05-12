@@ -12,7 +12,7 @@
 export interface MessagesSearchRequest {
     /** The search query text for semantic similarity matching */
     textQuery: string;
-    /** The id of the agent you're taking the action on. */
+    /** Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource. */
     agentId?: string;
     /** Number of results per page. Max 50. */
     pageSize?: number;

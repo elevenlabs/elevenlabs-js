@@ -24,6 +24,100 @@ export class DocumentClient {
     }
 
     /**
+     * Update the source file of a file document. The document name, content, and metadata are updated to reflect the new file. Any manual content edits will be overwritten.
+     *
+     * @param {string} documentation_id
+     * @param {ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIdUpdateFilePatch} request
+     * @param {DocumentClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     import { createReadStream } from "fs";
+     *     await client.conversationalAi.knowledgeBase.document.updateFile("21m00Tcm4TlvDq8ikWAM", {
+     *         file: fs.createReadStream("/path/to/your/file")
+     *     })
+     */
+    public updateFile(
+        documentation_id: string,
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIdUpdateFilePatch,
+        requestOptions?: DocumentClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.conversationalAi.knowledgeBase.DocumentUpdateFileResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__updateFile(documentation_id, request, requestOptions));
+    }
+
+    private async __updateFile(
+        documentation_id: string,
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIdUpdateFilePatch,
+        requestOptions?: DocumentClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.conversationalAi.knowledgeBase.DocumentUpdateFileResponse>> {
+        const _request = await core.newFormData();
+        await _request.appendFile("file", request.file);
+        const _maybeEncodedRequest = await _request.getRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                ..._maybeEncodedRequest.headers,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/knowledge-base/${core.url.encodePathParam(documentation_id)}/update-file`,
+            ),
+            method: "PATCH",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.conversationalAi.knowledgeBase.DocumentUpdateFileResponse.parseOrThrow(
+                    _response.body,
+                    {
+                        unrecognizedObjectKeys: "passthrough",
+                        allowUnrecognizedUnionMembers: true,
+                        allowUnrecognizedEnumValues: true,
+                        breadcrumbsPrefix: ["response"],
+                    },
+                ),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "PATCH",
+            "/v1/convai/knowledge-base/{documentation_id}/update-file",
+        );
+    }
+
+    /**
      * Manually refresh a URL document by re-fetching its content from the source URL.
      *
      * @param {string} documentation_id - The id of a document from the knowledge base. This is returned on document addition.

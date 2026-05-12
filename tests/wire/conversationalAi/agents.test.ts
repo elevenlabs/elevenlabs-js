@@ -45,11 +45,11 @@ describe("AgentsClient", () => {
                     turn_timeout: 7,
                     initial_wait_time: 1.1,
                     silence_end_call_timeout: -1,
-                    soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                     turn_eagerness: "normal",
                     spelling_patience: "auto",
                     speculative_turn: false,
                     retranscribe_on_turn_timeout: false,
+                    soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -323,6 +323,7 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
+                alerting: { monitor_configs: { key: {} } },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -479,15 +480,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turn_timeout: 7,
                                 silence_end_call_timeout: -1,
+                                turn_eagerness: "normal",
+                                spelling_patience: "auto",
+                                speculative_turn: false,
+                                retranscribe_on_turn_timeout: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
-                                turn_eagerness: "normal",
-                                spelling_patience: "auto",
-                                speculative_turn: false,
-                                retranscribe_on_turn_timeout: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -678,15 +679,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turn_timeout: 7,
                                 silence_end_call_timeout: -1,
+                                turn_eagerness: "normal",
+                                spelling_patience: "auto",
+                                speculative_turn: false,
+                                retranscribe_on_turn_timeout: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
-                                turn_eagerness: "normal",
-                                spelling_patience: "auto",
-                                speculative_turn: false,
-                                retranscribe_on_turn_timeout: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -878,15 +879,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turn_timeout: 7,
                                 silence_end_call_timeout: -1,
+                                turn_eagerness: "normal",
+                                spelling_patience: "auto",
+                                speculative_turn: false,
+                                retranscribe_on_turn_timeout: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
-                                turn_eagerness: "normal",
-                                spelling_patience: "auto",
-                                speculative_turn: false,
-                                retranscribe_on_turn_timeout: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -1137,14 +1138,14 @@ describe("AgentsClient", () => {
                     turnTimeout: 7,
                     initialWaitTime: 1.1,
                     silenceEndCallTimeout: -1,
-                    softTimeoutConfig: {
-                        timeoutSeconds: -1,
-                        message: "Hhmmmm...yeah.",
-                    },
                     turnEagerness: "normal",
                     spellingPatience: "auto",
                     speculativeTurn: false,
                     retranscribeOnTurnTimeout: false,
+                    softTimeoutConfig: {
+                        timeoutSeconds: -1,
+                        message: "Hhmmmm...yeah.",
+                    },
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -1508,6 +1509,11 @@ describe("AgentsClient", () => {
                 },
                 trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
+                alerting: {
+                    monitorConfigs: {
+                        key: {},
+                    },
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -1696,15 +1702,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
+                                turnEagerness: "normal",
+                                spellingPatience: "auto",
+                                speculativeTurn: false,
+                                retranscribeOnTurnTimeout: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
-                                turnEagerness: "normal",
-                                spellingPatience: "auto",
-                                speculativeTurn: false,
-                                retranscribeOnTurnTimeout: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -1931,15 +1937,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
+                                turnEagerness: "normal",
+                                spellingPatience: "auto",
+                                speculativeTurn: false,
+                                retranscribeOnTurnTimeout: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
-                                turnEagerness: "normal",
-                                spellingPatience: "auto",
-                                speculativeTurn: false,
-                                retranscribeOnTurnTimeout: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2174,15 +2180,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
+                                turnEagerness: "normal",
+                                spellingPatience: "auto",
+                                speculativeTurn: false,
+                                retranscribeOnTurnTimeout: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
-                                turnEagerness: "normal",
-                                spellingPatience: "auto",
-                                speculativeTurn: false,
-                                retranscribeOnTurnTimeout: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -2512,11 +2518,11 @@ describe("AgentsClient", () => {
                     turn_timeout: 7,
                     initial_wait_time: 1.1,
                     silence_end_call_timeout: -1,
-                    soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                     turn_eagerness: "normal",
                     spelling_patience: "auto",
                     speculative_turn: false,
                     retranscribe_on_turn_timeout: false,
+                    soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -2790,6 +2796,7 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
+                alerting: { monitor_configs: { key: {} } },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -2946,15 +2953,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turn_timeout: 7,
                                 silence_end_call_timeout: -1,
+                                turn_eagerness: "normal",
+                                spelling_patience: "auto",
+                                speculative_turn: false,
+                                retranscribe_on_turn_timeout: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
-                                turn_eagerness: "normal",
-                                spelling_patience: "auto",
-                                speculative_turn: false,
-                                retranscribe_on_turn_timeout: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -3145,15 +3152,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turn_timeout: 7,
                                 silence_end_call_timeout: -1,
+                                turn_eagerness: "normal",
+                                spelling_patience: "auto",
+                                speculative_turn: false,
+                                retranscribe_on_turn_timeout: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
-                                turn_eagerness: "normal",
-                                spelling_patience: "auto",
-                                speculative_turn: false,
-                                retranscribe_on_turn_timeout: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -3345,15 +3352,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turn_timeout: 7,
                                 silence_end_call_timeout: -1,
+                                turn_eagerness: "normal",
+                                spelling_patience: "auto",
+                                speculative_turn: false,
+                                retranscribe_on_turn_timeout: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     use_llm_generated_message: false,
                                 },
-                                turn_eagerness: "normal",
-                                spelling_patience: "auto",
-                                speculative_turn: false,
-                                retranscribe_on_turn_timeout: false,
                             },
                             tts: {
                                 model_id: "eleven_turbo_v2",
@@ -3605,14 +3612,14 @@ describe("AgentsClient", () => {
                     turnTimeout: 7,
                     initialWaitTime: 1.1,
                     silenceEndCallTimeout: -1,
-                    softTimeoutConfig: {
-                        timeoutSeconds: -1,
-                        message: "Hhmmmm...yeah.",
-                    },
                     turnEagerness: "normal",
                     spellingPatience: "auto",
                     speculativeTurn: false,
                     retranscribeOnTurnTimeout: false,
+                    softTimeoutConfig: {
+                        timeoutSeconds: -1,
+                        message: "Hhmmmm...yeah.",
+                    },
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -3976,6 +3983,11 @@ describe("AgentsClient", () => {
                 },
                 trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
+                alerting: {
+                    monitorConfigs: {
+                        key: {},
+                    },
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -4164,15 +4176,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
+                                turnEagerness: "normal",
+                                spellingPatience: "auto",
+                                speculativeTurn: false,
+                                retranscribeOnTurnTimeout: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
-                                turnEagerness: "normal",
-                                spellingPatience: "auto",
-                                speculativeTurn: false,
-                                retranscribeOnTurnTimeout: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -4399,15 +4411,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
+                                turnEagerness: "normal",
+                                spellingPatience: "auto",
+                                speculativeTurn: false,
+                                retranscribeOnTurnTimeout: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
-                                turnEagerness: "normal",
-                                spellingPatience: "auto",
-                                speculativeTurn: false,
-                                retranscribeOnTurnTimeout: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",
@@ -4642,15 +4654,15 @@ describe("AgentsClient", () => {
                             turn: {
                                 turnTimeout: 7,
                                 silenceEndCallTimeout: -1,
+                                turnEagerness: "normal",
+                                spellingPatience: "auto",
+                                speculativeTurn: false,
+                                retranscribeOnTurnTimeout: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
                                     useLlmGeneratedMessage: false,
                                 },
-                                turnEagerness: "normal",
-                                spellingPatience: "auto",
-                                speculativeTurn: false,
-                                retranscribeOnTurnTimeout: false,
                             },
                             tts: {
                                 modelId: "eleven_turbo_v2",

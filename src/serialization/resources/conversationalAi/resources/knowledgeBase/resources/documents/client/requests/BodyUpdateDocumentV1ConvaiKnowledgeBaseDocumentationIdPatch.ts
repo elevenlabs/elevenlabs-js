@@ -8,11 +8,13 @@ export const BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch: core.s
     serializers.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch.Raw,
     ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch
 > = core.serialization.object({
-    name: core.serialization.string(),
+    name: core.serialization.string().optional(),
+    content: core.serialization.string().optional(),
 });
 
 export declare namespace BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch {
     export interface Raw {
-        name: string;
+        name?: string | null;
+        content?: string | null;
     }
 }

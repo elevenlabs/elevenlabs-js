@@ -2,7 +2,7 @@
 
 import type * as ElevenLabs from "../index";
 
-export interface ConversationTokenDbModel {
+export interface ConversationTokenResponseModel {
     /** The ID of the agent */
     agentId: string;
     /** The token for the agent */
@@ -12,7 +12,7 @@ export interface ConversationTokenDbModel {
     /** The ID of the conversation */
     conversationId?: string;
     /** The purpose of the token */
-    purpose?: ElevenLabs.ConversationTokenPurpose;
+    purpose: ElevenLabs.ConversationTokenPurpose;
     /** The user ID of the entity who requested the token */
     tokenRequesterUserId?: string;
 }

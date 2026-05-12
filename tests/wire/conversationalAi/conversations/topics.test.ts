@@ -9,7 +9,17 @@ describe("TopicsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            topics: [{ topic_id: "topic_id", label: "label", description: "description", conversation_count: 1 }],
+            topics: [
+                {
+                    topic_id: "topic_id",
+                    label: "label",
+                    description: "description",
+                    conversation_count: 1,
+                    parent_topic_id: "parent_topic_id",
+                    x_2d: 1.1,
+                    y_2d: 1.1,
+                },
+            ],
             window_start_unix_secs: 1,
             window_end_unix_secs: 1,
         };
@@ -29,6 +39,9 @@ describe("TopicsClient", () => {
                     label: "label",
                     description: "description",
                     conversationCount: 1,
+                    parentTopicId: "parent_topic_id",
+                    x2D: 1.1,
+                    y2D: 1.1,
                 },
             ],
             windowStartUnixSecs: 1,

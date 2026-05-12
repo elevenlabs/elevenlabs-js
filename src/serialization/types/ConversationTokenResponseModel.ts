@@ -5,9 +5,9 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationTokenPurpose } from "./ConversationTokenPurpose";
 
-export const ConversationTokenDbModel: core.serialization.ObjectSchema<
-    serializers.ConversationTokenDbModel.Raw,
-    ElevenLabs.ConversationTokenDbModel
+export const ConversationTokenResponseModel: core.serialization.ObjectSchema<
+    serializers.ConversationTokenResponseModel.Raw,
+    ElevenLabs.ConversationTokenResponseModel
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     conversationToken: core.serialization.property("conversation_token", core.serialization.string()),
@@ -16,20 +16,20 @@ export const ConversationTokenDbModel: core.serialization.ObjectSchema<
         core.serialization.number().optional(),
     ),
     conversationId: core.serialization.property("conversation_id", core.serialization.string().optional()),
-    purpose: ConversationTokenPurpose.optional(),
+    purpose: ConversationTokenPurpose,
     tokenRequesterUserId: core.serialization.property(
         "token_requester_user_id",
         core.serialization.string().optional(),
     ),
 });
 
-export declare namespace ConversationTokenDbModel {
+export declare namespace ConversationTokenResponseModel {
     export interface Raw {
         agent_id: string;
         conversation_token: string;
         expiration_time_unix_secs?: number | null;
         conversation_id?: string | null;
-        purpose?: ConversationTokenPurpose.Raw | null;
+        purpose: ConversationTokenPurpose.Raw;
         token_requester_user_id?: string | null;
     }
 }

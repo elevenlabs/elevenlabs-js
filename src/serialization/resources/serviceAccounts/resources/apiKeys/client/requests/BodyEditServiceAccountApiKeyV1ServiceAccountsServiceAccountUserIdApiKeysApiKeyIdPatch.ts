@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
+import { BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchAllowedIps } from "../../types/BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchAllowedIps";
 import { BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissions } from "../../types/BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissions";
 
 export const BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatch: core.serialization.Schema<
@@ -13,6 +14,10 @@ export const BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdAp
     name: core.serialization.string(),
     permissions: BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissions,
     characterLimit: core.serialization.property("character_limit", core.serialization.number().optional()),
+    allowedIps: core.serialization.property(
+        "allowed_ips",
+        BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchAllowedIps.optional(),
+    ),
 });
 
 export declare namespace BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatch {
@@ -21,5 +26,6 @@ export declare namespace BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAcc
         name: string;
         permissions: BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissions.Raw;
         character_limit?: number | null;
+        allowed_ips?: BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchAllowedIps.Raw | null;
     }
 }

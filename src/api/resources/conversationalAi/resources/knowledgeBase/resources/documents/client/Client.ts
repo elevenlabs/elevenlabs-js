@@ -10,6 +10,7 @@ import * as errors from "../../../../../../../../errors/index";
 import * as serializers from "../../../../../../../../serialization/index";
 import * as ElevenLabs from "../../../../../../../index";
 import { ChunkClient } from "../resources/chunk/client/Client";
+import { ChunksClient } from "../resources/chunks/client/Client";
 import { SummariesClient } from "../resources/summaries/client/Client";
 
 export declare namespace DocumentsClient {
@@ -22,6 +23,7 @@ export class DocumentsClient {
     protected readonly _options: NormalizedClientOptions<DocumentsClient.Options>;
     protected _summaries: SummariesClient | undefined;
     protected _chunk: ChunkClient | undefined;
+    protected _chunks: ChunksClient | undefined;
 
     constructor(options: DocumentsClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -33,6 +35,10 @@ export class DocumentsClient {
 
     public get chunk(): ChunkClient {
         return (this._chunk ??= new ChunkClient(this._options));
+    }
+
+    public get chunks(): ChunksClient {
+        return (this._chunks ??= new ChunksClient(this._options));
     }
 
     /**
@@ -550,7 +556,7 @@ export class DocumentsClient {
     }
 
     /**
-     * Update the name of a document
+     * Update the name and/or content of a document.
      *
      * @param {string} documentation_id - The id of a document from the knowledge base. This is returned on document addition.
      * @param {ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch} request
@@ -559,13 +565,11 @@ export class DocumentsClient {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikWAM", {
-     *         name: "name"
-     *     })
+     *     await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikWAM")
      */
     public update(
         documentation_id: string,
-        request: ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch,
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch = {},
         requestOptions?: DocumentsClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.conversationalAi.knowledgeBase.DocumentsUpdateResponse> {
         return core.HttpResponsePromise.fromPromise(this.__update(documentation_id, request, requestOptions));
@@ -573,7 +577,7 @@ export class DocumentsClient {
 
     private async __update(
         documentation_id: string,
-        request: ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch,
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch = {},
         requestOptions?: DocumentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.conversationalAi.knowledgeBase.DocumentsUpdateResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

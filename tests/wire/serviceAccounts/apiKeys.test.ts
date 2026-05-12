@@ -21,6 +21,7 @@ describe("ApiKeysClient", () => {
                     character_limit: 1,
                     character_count: 1,
                     hashed_xi_api_key: "hashed_xi_api_key",
+                    allowed_ips: ["allowed_ips"],
                 },
             ],
         };
@@ -46,6 +47,7 @@ describe("ApiKeysClient", () => {
                     characterLimit: 1,
                     characterCount: 1,
                     hashedXiApiKey: "hashed_xi_api_key",
+                    allowedIps: ["allowed_ips"],
                 },
             ],
         });

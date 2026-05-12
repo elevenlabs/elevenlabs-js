@@ -12,6 +12,7 @@ import { MusicClient } from "./api/resources/music/client/Client";
 import { PronunciationDictionariesClient } from "./api/resources/pronunciationDictionaries/client/Client";
 import { SamplesClient } from "./api/resources/samples/client/Client";
 import { ServiceAccountsClient } from "./api/resources/serviceAccounts/client/Client";
+import { SpeechEngineClient } from "./api/resources/speechEngine/client/Client";
 import { SpeechToSpeechClient } from "./api/resources/speechToSpeech/client/Client";
 import { SpeechToTextClient } from "./api/resources/speechToText/client/Client";
 import { StudioClient } from "./api/resources/studio/client/Client";
@@ -63,6 +64,7 @@ export class ElevenLabsClient {
     protected _speechToText: SpeechToTextClient | undefined;
     protected _forcedAlignment: ForcedAlignmentClient | undefined;
     protected _conversationalAi: ConversationalAiClient | undefined;
+    protected _speechEngine: SpeechEngineClient | undefined;
     protected _environmentVariables: EnvironmentVariablesClient | undefined;
     protected _tokens: TokensClient | undefined;
     protected _workspace: WorkspaceClient | undefined;
@@ -157,6 +159,10 @@ export class ElevenLabsClient {
 
     public get conversationalAi(): ConversationalAiClient {
         return (this._conversationalAi ??= new ConversationalAiClient(this._options));
+    }
+
+    public get speechEngine(): SpeechEngineClient {
+        return (this._speechEngine ??= new SpeechEngineClient(this._options));
     }
 
     public get environmentVariables(): EnvironmentVariablesClient {

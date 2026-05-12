@@ -16,6 +16,7 @@ export const ReadMetadataChapterDbModel: core.serialization.ObjectSchema<
     hasSummary: core.serialization.property("has_summary", core.serialization.boolean().optional()),
     durationSeconds: core.serialization.property("duration_seconds", core.serialization.number().optional()),
     fileNumber: core.serialization.property("file_number", core.serialization.string().optional()),
+    isFallbackName: core.serialization.property("is_fallback_name", core.serialization.boolean().optional()),
 });
 
 export declare namespace ReadMetadataChapterDbModel {
@@ -28,5 +29,6 @@ export declare namespace ReadMetadataChapterDbModel {
         has_summary?: boolean | null;
         duration_seconds?: number | null;
         file_number?: string | null;
+        is_fallback_name?: boolean | null;
     }
 }
