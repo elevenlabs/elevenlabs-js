@@ -58,7 +58,7 @@ export class ElevenLabsClient extends FernClient {
         return this._customSpeechToText;
     }
 
-    public get speechEngine(): SpeechEngineClientWrapper {
+    public override get speechEngine(): SpeechEngineClientWrapper {
         if (!this._customSpeechEngine) {
             this._customSpeechEngine = new SpeechEngineClientWrapper(this._options);
         }
