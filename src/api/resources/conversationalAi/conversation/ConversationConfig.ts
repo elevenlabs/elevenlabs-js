@@ -8,6 +8,8 @@ export interface ConversationInitiationData {
     conversationConfigOverride?: Record<string, any>;
     /** Dynamic variables to use in the conversation */
     dynamicVariables?: Record<string, any>;
+    /** The environment to use for the conversation */
+    environment?: string;
 }
 
 /**

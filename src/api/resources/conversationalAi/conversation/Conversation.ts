@@ -243,6 +243,7 @@ export class Conversation extends EventEmitter {
             custom_llm_extra_body: this.config.extraBody,
             conversation_config_override: this.config.conversationConfigOverride,
             dynamic_variables: this.config.dynamicVariables,
+            environment: this.config.environment,
         };
 
         this.ws!.send(JSON.stringify(initEvent));
