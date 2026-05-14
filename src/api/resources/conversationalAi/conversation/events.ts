@@ -54,6 +54,7 @@ export interface ConversationInitiationClientDataEvent extends BaseClientToOrche
     custom_llm_extra_body?: Record<string, any>;
     conversation_config_override?: Record<string, any>;
     dynamic_variables?: Record<string, any>;
+    environment?: string;
 }
 
 /**
