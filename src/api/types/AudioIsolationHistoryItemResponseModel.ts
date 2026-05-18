@@ -11,5 +11,6 @@ export interface AudioIsolationHistoryItemResponseModel {
     sourceVideoUrl?: string;
     supportsVideo: boolean;
     processing: boolean;
+    videoProcessingFailed: boolean;
     previewB64?: string;
 }

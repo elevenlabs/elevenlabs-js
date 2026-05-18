@@ -12,6 +12,7 @@ import { MtlsAuthResponse } from "./MtlsAuthResponse";
 import { OAuth2ClientCredsResponse } from "./OAuth2ClientCredsResponse";
 import { OAuth2JwtResponse } from "./OAuth2JwtResponse";
 import { PrivateKeyJwtResponse } from "./PrivateKeyJwtResponse";
+import { SlackBotAuthResponse } from "./SlackBotAuthResponse";
 import { WhatsAppAuthResponse } from "./WhatsAppAuthResponse";
 
 export const ListAuthConnectionsResponseAuthConnectionsItem: core.serialization.Schema<
@@ -28,6 +29,7 @@ export const ListAuthConnectionsResponseAuthConnectionsItem: core.serialization.
         oauth2_client_credentials: OAuth2ClientCredsResponse,
         oauth2_jwt: OAuth2JwtResponse,
         private_key_jwt: PrivateKeyJwtResponse,
+        slack_bot_auth: SlackBotAuthResponse,
         whatsapp_auth: WhatsAppAuthResponse,
     })
     .transform<ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem>({
@@ -46,6 +48,7 @@ export declare namespace ListAuthConnectionsResponseAuthConnectionsItem {
         | ListAuthConnectionsResponseAuthConnectionsItem.Oauth2ClientCredentials
         | ListAuthConnectionsResponseAuthConnectionsItem.Oauth2Jwt
         | ListAuthConnectionsResponseAuthConnectionsItem.PrivateKeyJwt
+        | ListAuthConnectionsResponseAuthConnectionsItem.SlackBotAuth
         | ListAuthConnectionsResponseAuthConnectionsItem.WhatsappAuth;
 
     export interface ApiIntegrationOauth2AuthCode extends ApiIntegrationOAuth2AuthCodeResponse.Raw {
@@ -82,6 +85,10 @@ export declare namespace ListAuthConnectionsResponseAuthConnectionsItem {
 
     export interface PrivateKeyJwt extends PrivateKeyJwtResponse.Raw {
         auth_type: "private_key_jwt";
+    }
+
+    export interface SlackBotAuth extends SlackBotAuthResponse.Raw {
+        auth_type: "slack_bot_auth";
     }
 
     export interface WhatsappAuth extends WhatsAppAuthResponse.Raw {

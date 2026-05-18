@@ -283,6 +283,7 @@ export class ConversationsClient {
      *         summaryMode: "exclude",
      *         search: "search",
      *         conversationInitiationSource: "unknown",
+     *         textOnly: true,
      *         branchId: "branch_id",
      *         topicIds: ["topic_ids"],
      *         excludeStatuses: ["initiated"],
@@ -322,6 +323,7 @@ export class ConversationsClient {
             summaryMode,
             search,
             conversationInitiationSource,
+            textOnly,
             branchId,
             topicIds,
             excludeStatuses,
@@ -442,6 +444,10 @@ export class ConversationsClient {
                 conversationInitiationSource,
                 { unrecognizedObjectKeys: "strip" },
             );
+        }
+
+        if (textOnly != null) {
+            _queryParams.text_only = textOnly.toString();
         }
 
         if (branchId != null) {

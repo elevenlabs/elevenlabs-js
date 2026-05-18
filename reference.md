@@ -5212,6 +5212,7 @@ await client.conversationalAi.conversations.list({
     summaryMode: "exclude",
     search: "search",
     conversationInitiationSource: "unknown",
+    textOnly: true,
     branchId: "branch_id",
     topicIds: ["topic_ids"],
     excludeStatuses: ["initiated"],
@@ -10378,6 +10379,78 @@ await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5
 </dl>
 </details>
 
+## ConversationalAi Agents Versions
+<details><summary><code>client.conversationalAi.agents.versions.<a href="/src/api/resources/conversationalAi/resources/agents/resources/versions/client/Client.ts">get</a>(agent_id, version_id) -> ElevenLabs.AgentVersionMetadata</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get metadata for a specific agent version
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.versions.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtvrsn_0901k4aafjxxfxt93gd841r7tv5t");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version_id:** `string` — Unique identifier for the version.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VersionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents Deployments
 <details><summary><code>client.conversationalAi.agents.deployments.<a href="/src/api/resources/conversationalAi/resources/agents/resources/deployments/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.AgentDeploymentResponse</code></summary>
 <dl>
@@ -11062,6 +11135,7 @@ await client.conversationalAi.conversations.messages.textSearch({
     pageSize: 1,
     summaryMode: "exclude",
     conversationInitiationSource: "unknown",
+    textOnly: true,
     branchId: "branch_id",
     sortBy: "search_score",
     cursor: "cursor"
@@ -19673,6 +19747,79 @@ await client.workspace.authConnections.delete("auth_connection_id");
 <dd>
 
 **auth_connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.authConnections.<a href="/src/api/resources/workspace/resources/authConnections/client/Client.ts">update</a>(auth_connection_id, { ...params }) -> ElevenLabs.AuthConnectionsUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an auth connection
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.authConnections.update("auth_connection_id", {
+    authType: "oauth2_client_credentials"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**auth_connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.AuthConnectionsUpdateRequestBody` 
     
 </dd>
 </dl>

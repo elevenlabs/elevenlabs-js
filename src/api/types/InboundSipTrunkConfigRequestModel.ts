@@ -13,4 +13,6 @@ export interface InboundSipTrunkConfigRequestModel {
     credentials?: ElevenLabs.SipTrunkCredentialsRequestModel;
     /** Domains of remote SIP servers used to validate TLS certificates. */
     remoteDomains?: string[];
+    /** Map of dynamic variable name to header name for attributes_to_headers */
+    attributesToHeaders?: Record<string, string>;
 }

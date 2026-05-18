@@ -10,10 +10,15 @@ describe("SpeechEngineClient", () => {
 
         const rawResponseBody = {
             speech_engines: [
-                { speech_engine_id: "speech_engine_id", name: "name", created_at_unix_secs: 1, tags: ["tags"] },
+                {
+                    speech_engine_id: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
+                    name: "My Speech Engine",
+                    created_at_unix_secs: 1714000000,
+                    tags: ["production", "v1"],
+                },
             ],
             next_cursor: "next_cursor",
-            has_more: true,
+            has_more: false,
         };
         server.mockEndpoint().get("/v1/speech-engine").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
@@ -27,14 +32,14 @@ describe("SpeechEngineClient", () => {
         expect(response).toEqual({
             speechEngines: [
                 {
-                    speechEngineId: "speech_engine_id",
-                    name: "name",
-                    createdAtUnixSecs: 1,
-                    tags: ["tags"],
+                    speechEngineId: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
+                    name: "My Speech Engine",
+                    createdAtUnixSecs: 1714000000,
+                    tags: ["production", "v1"],
                 },
             ],
             nextCursor: "next_cursor",
-            hasMore: true,
+            hasMore: false,
         });
     });
 
@@ -42,7 +47,7 @@ describe("SpeechEngineClient", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { speech_engine: { ws_url: "ws_url" } };
-        const rawResponseBody = { speech_engine_id: "speech_engine_id" };
+        const rawResponseBody = { speech_engine_id: "seng_3701k3ttaq12ewp8b7qv5rfyszkz" };
         server
             .mockEndpoint()
             .post("/v1/speech-engine")
@@ -58,7 +63,7 @@ describe("SpeechEngineClient", () => {
             },
         });
         expect(response).toEqual({
-            speechEngineId: "speech_engine_id",
+            speechEngineId: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
         });
     });
 
@@ -67,17 +72,17 @@ describe("SpeechEngineClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            speech_engine_id: "speech_engine_id",
-            name: "name",
-            speech_engine: { ws_url: "ws_url", request_headers: { key: "value" } },
+            speech_engine_id: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
+            name: "My Speech Engine",
+            speech_engine: { ws_url: "wss://example.com/transcript", request_headers: { key: "value" } },
             asr: {
                 quality: "high",
                 provider: "elevenlabs",
                 user_input_audio_format: "pcm_16000",
-                keywords: ["hello", "world"],
+                keywords: ["keywords"],
             },
             tts: {
-                model_id: "eleven_turbo_v2",
+                model_id: "eleven_flash_v2",
                 voice_id: "cjVigY5qzO86Huf0OWal",
                 supported_voices: [{ label: "label", voice_id: "voice_id" }],
                 expressive_mode: true,
@@ -96,13 +101,13 @@ describe("SpeechEngineClient", () => {
                 silence_end_call_timeout: -1,
                 turn_eagerness: "normal",
                 spelling_patience: "auto",
-                speculative_turn: false,
-                retranscribe_on_turn_timeout: false,
+                speculative_turn: true,
+                retranscribe_on_turn_timeout: true,
             },
             conversation: {
                 text_only: true,
                 max_duration_seconds: 600,
-                client_events: ["audio", "interruption"],
+                client_events: ["audio", "interruption", "agent_response", "user_transcript"],
                 file_input: { enabled: true, max_files_per_conversation: 1 },
                 monitoring_enabled: true,
                 monitoring_events: ["conversation_initiation_metadata"],
@@ -118,13 +123,13 @@ describe("SpeechEngineClient", () => {
                 conversation_history_redaction: { enabled: true, entities: ["name"] },
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
-            language: "language",
-            tags: ["tags"],
+            language: "en",
+            tags: ["production", "v1"],
             metadata: {
-                created_at_unix_secs: 1,
-                updated_at_unix_secs: 1,
-                created_from: "cli",
-                last_updated_from: "cli",
+                created_at_unix_secs: 1714000000,
+                updated_at_unix_secs: 1714000000,
+                created_from: "api",
+                last_updated_from: "api",
             },
         };
         server
@@ -137,10 +142,10 @@ describe("SpeechEngineClient", () => {
 
         const response = await client.speechEngine.get("seng_3701k3ttaq12ewp8b7qv5rfyszkz");
         expect(response).toEqual({
-            speechEngineId: "speech_engine_id",
-            name: "name",
+            speechEngineId: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
+            name: "My Speech Engine",
             speechEngine: {
-                wsUrl: "ws_url",
+                wsUrl: "wss://example.com/transcript",
                 requestHeaders: {
                     key: "value",
                 },
@@ -149,10 +154,10 @@ describe("SpeechEngineClient", () => {
                 quality: "high",
                 provider: "elevenlabs",
                 userInputAudioFormat: "pcm_16000",
-                keywords: ["hello", "world"],
+                keywords: ["keywords"],
             },
             tts: {
-                modelId: "eleven_turbo_v2",
+                modelId: "eleven_flash_v2",
                 voiceId: "cjVigY5qzO86Huf0OWal",
                 supportedVoices: [
                     {
@@ -184,13 +189,13 @@ describe("SpeechEngineClient", () => {
                 silenceEndCallTimeout: -1,
                 turnEagerness: "normal",
                 spellingPatience: "auto",
-                speculativeTurn: false,
-                retranscribeOnTurnTimeout: false,
+                speculativeTurn: true,
+                retranscribeOnTurnTimeout: true,
             },
             conversation: {
                 textOnly: true,
                 maxDurationSeconds: 600,
-                clientEvents: ["audio", "interruption"],
+                clientEvents: ["audio", "interruption", "agent_response", "user_transcript"],
                 fileInput: {
                     enabled: true,
                     maxFilesPerConversation: 1,
@@ -216,13 +221,13 @@ describe("SpeechEngineClient", () => {
                 dailyLimit: 100000,
                 burstingEnabled: true,
             },
-            language: "language",
-            tags: ["tags"],
+            language: "en",
+            tags: ["production", "v1"],
             metadata: {
-                createdAtUnixSecs: 1,
-                updatedAtUnixSecs: 1,
-                createdFrom: "cli",
-                lastUpdatedFrom: "cli",
+                createdAtUnixSecs: 1714000000,
+                updatedAtUnixSecs: 1714000000,
+                createdFrom: "api",
+                lastUpdatedFrom: "api",
             },
         });
     });
@@ -247,17 +252,17 @@ describe("SpeechEngineClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
-            speech_engine_id: "speech_engine_id",
-            name: "name",
-            speech_engine: { ws_url: "ws_url", request_headers: { key: "value" } },
+            speech_engine_id: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
+            name: "My Speech Engine",
+            speech_engine: { ws_url: "wss://example.com/transcript", request_headers: { key: "value" } },
             asr: {
                 quality: "high",
                 provider: "elevenlabs",
                 user_input_audio_format: "pcm_16000",
-                keywords: ["hello", "world"],
+                keywords: ["keywords"],
             },
             tts: {
-                model_id: "eleven_turbo_v2",
+                model_id: "eleven_flash_v2",
                 voice_id: "cjVigY5qzO86Huf0OWal",
                 supported_voices: [{ label: "label", voice_id: "voice_id" }],
                 expressive_mode: true,
@@ -276,13 +281,13 @@ describe("SpeechEngineClient", () => {
                 silence_end_call_timeout: -1,
                 turn_eagerness: "normal",
                 spelling_patience: "auto",
-                speculative_turn: false,
-                retranscribe_on_turn_timeout: false,
+                speculative_turn: true,
+                retranscribe_on_turn_timeout: true,
             },
             conversation: {
                 text_only: true,
                 max_duration_seconds: 600,
-                client_events: ["audio", "interruption"],
+                client_events: ["audio", "interruption", "agent_response", "user_transcript"],
                 file_input: { enabled: true, max_files_per_conversation: 1 },
                 monitoring_enabled: true,
                 monitoring_events: ["conversation_initiation_metadata"],
@@ -298,13 +303,13 @@ describe("SpeechEngineClient", () => {
                 conversation_history_redaction: { enabled: true, entities: ["name"] },
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
-            language: "language",
-            tags: ["tags"],
+            language: "en",
+            tags: ["production", "v1"],
             metadata: {
-                created_at_unix_secs: 1,
-                updated_at_unix_secs: 1,
-                created_from: "cli",
-                last_updated_from: "cli",
+                created_at_unix_secs: 1714000000,
+                updated_at_unix_secs: 1714000000,
+                created_from: "api",
+                last_updated_from: "api",
             },
         };
         server
@@ -318,10 +323,10 @@ describe("SpeechEngineClient", () => {
 
         const response = await client.speechEngine.update("seng_3701k3ttaq12ewp8b7qv5rfyszkz");
         expect(response).toEqual({
-            speechEngineId: "speech_engine_id",
-            name: "name",
+            speechEngineId: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
+            name: "My Speech Engine",
             speechEngine: {
-                wsUrl: "ws_url",
+                wsUrl: "wss://example.com/transcript",
                 requestHeaders: {
                     key: "value",
                 },
@@ -330,10 +335,10 @@ describe("SpeechEngineClient", () => {
                 quality: "high",
                 provider: "elevenlabs",
                 userInputAudioFormat: "pcm_16000",
-                keywords: ["hello", "world"],
+                keywords: ["keywords"],
             },
             tts: {
-                modelId: "eleven_turbo_v2",
+                modelId: "eleven_flash_v2",
                 voiceId: "cjVigY5qzO86Huf0OWal",
                 supportedVoices: [
                     {
@@ -365,13 +370,13 @@ describe("SpeechEngineClient", () => {
                 silenceEndCallTimeout: -1,
                 turnEagerness: "normal",
                 spellingPatience: "auto",
-                speculativeTurn: false,
-                retranscribeOnTurnTimeout: false,
+                speculativeTurn: true,
+                retranscribeOnTurnTimeout: true,
             },
             conversation: {
                 textOnly: true,
                 maxDurationSeconds: 600,
-                clientEvents: ["audio", "interruption"],
+                clientEvents: ["audio", "interruption", "agent_response", "user_transcript"],
                 fileInput: {
                     enabled: true,
                     maxFilesPerConversation: 1,
@@ -397,13 +402,13 @@ describe("SpeechEngineClient", () => {
                 dailyLimit: 100000,
                 burstingEnabled: true,
             },
-            language: "language",
-            tags: ["tags"],
+            language: "en",
+            tags: ["production", "v1"],
             metadata: {
-                createdAtUnixSecs: 1,
-                updatedAtUnixSecs: 1,
-                createdFrom: "cli",
-                lastUpdatedFrom: "cli",
+                createdAtUnixSecs: 1714000000,
+                updatedAtUnixSecs: 1714000000,
+                createdFrom: "api",
+                lastUpdatedFrom: "api",
             },
         });
     });

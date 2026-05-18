@@ -14,6 +14,10 @@ export const GetPhoneNumberOutboundSipTrunkConfigResponseModel: core.serializati
     transport: SipTrunkTransportEnum,
     mediaEncryption: core.serialization.property("media_encryption", SipMediaEncryptionEnum),
     headers: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    attributesToHeaders: core.serialization.property(
+        "attributes_to_headers",
+        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    ),
     hasAuthCredentials: core.serialization.property("has_auth_credentials", core.serialization.boolean()),
     username: core.serialization.string().optional(),
     hasOutboundTrunk: core.serialization.property("has_outbound_trunk", core.serialization.boolean().optional()),
@@ -25,6 +29,7 @@ export declare namespace GetPhoneNumberOutboundSipTrunkConfigResponseModel {
         transport: SipTrunkTransportEnum.Raw;
         media_encryption: SipMediaEncryptionEnum.Raw;
         headers?: Record<string, string> | null;
+        attributes_to_headers?: Record<string, string> | null;
         has_auth_credentials: boolean;
         username?: string | null;
         has_outbound_trunk?: boolean | null;

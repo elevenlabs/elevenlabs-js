@@ -9,10 +9,15 @@ export const AgentAlertingMonitorConfig: core.serialization.ObjectSchema<
     ElevenLabs.AgentAlertingMonitorConfig
 > = core.serialization.object({
     threshold: core.serialization.number().optional(),
+    autoResolveAfterInactiveMinutes: core.serialization.property(
+        "auto_resolve_after_inactive_minutes",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace AgentAlertingMonitorConfig {
     export interface Raw {
         threshold?: number | null;
+        auto_resolve_after_inactive_minutes?: number | null;
     }
 }

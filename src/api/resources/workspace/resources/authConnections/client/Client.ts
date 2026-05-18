@@ -251,4 +251,90 @@ export class AuthConnectionsClient {
             "/v1/workspace/auth-connections/{auth_connection_id}",
         );
     }
+
+    /**
+     * Update an auth connection
+     *
+     * @param {string} auth_connection_id
+     * @param {ElevenLabs.workspace.AuthConnectionsUpdateRequestBody} request
+     * @param {AuthConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.workspace.authConnections.update("auth_connection_id", {
+     *         authType: "oauth2_client_credentials"
+     *     })
+     */
+    public update(
+        auth_connection_id: string,
+        request: ElevenLabs.workspace.AuthConnectionsUpdateRequestBody,
+        requestOptions?: AuthConnectionsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.workspace.AuthConnectionsUpdateResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__update(auth_connection_id, request, requestOptions));
+    }
+
+    private async __update(
+        auth_connection_id: string,
+        request: ElevenLabs.workspace.AuthConnectionsUpdateRequestBody,
+        requestOptions?: AuthConnectionsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.workspace.AuthConnectionsUpdateResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/workspace/auth-connections/${core.url.encodePathParam(auth_connection_id)}`,
+            ),
+            method: "PATCH",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.workspace.AuthConnectionsUpdateRequestBody.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.workspace.AuthConnectionsUpdateResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "PATCH",
+            "/v1/workspace/auth-connections/{auth_connection_id}",
+        );
+    }
 }

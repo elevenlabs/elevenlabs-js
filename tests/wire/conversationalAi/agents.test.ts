@@ -323,7 +323,7 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
-                alerting: { monitor_configs: { key: {} } },
+                alerting: { monitor_configs: { key: {} }, auto_resolve_after_inactive_minutes: 1 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -1513,6 +1513,7 @@ describe("AgentsClient", () => {
                     monitorConfigs: {
                         key: {},
                     },
+                    autoResolveAfterInactiveMinutes: 1,
                 },
                 safety: {
                     isBlockedIvc: true,
@@ -2796,7 +2797,7 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
-                alerting: { monitor_configs: { key: {} } },
+                alerting: { monitor_configs: { key: {} }, auto_resolve_after_inactive_minutes: 1 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -3987,6 +3988,7 @@ describe("AgentsClient", () => {
                     monitorConfigs: {
                         key: {},
                     },
+                    autoResolveAfterInactiveMinutes: 1,
                 },
                 safety: {
                     isBlockedIvc: true,

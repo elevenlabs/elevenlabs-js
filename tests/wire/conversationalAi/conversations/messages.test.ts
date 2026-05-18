@@ -53,6 +53,7 @@ describe("MessagesClient", () => {
             pageSize: 1,
             summaryMode: "exclude",
             conversationInitiationSource: "unknown",
+            textOnly: true,
             branchId: "branch_id",
             sortBy: "search_score",
             cursor: "cursor",

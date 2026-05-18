@@ -11,6 +11,8 @@ export interface OutboundSipTrunkConfigRequestModel {
     mediaEncryption?: ElevenLabs.SipMediaEncryptionEnum;
     /** SIP X-* headers for INVITE request. These headers are sent as-is and may help identify this call. */
     headers?: Record<string, string>;
+    /** Map of dynamic variable name to header name for attributes_to_headers */
+    attributesToHeaders?: Record<string, string>;
     /** Optional digest authentication credentials (username/password). If not provided, ACL authentication is assumed. */
     credentials?: ElevenLabs.SipTrunkCredentialsRequestModel;
 }
