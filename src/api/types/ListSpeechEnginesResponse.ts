@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../index";
 
 export interface ListSpeechEnginesResponse {
+    /** The speech engines matching the query */
     speechEngines: ElevenLabs.SpeechEngineSummaryResponse[];
     /** Cursor for fetching the next page */
     nextCursor?: string;

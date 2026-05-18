@@ -11,5 +11,6 @@ export * from "./llmUsage/client/requests";
 export * as summaries from "./summaries";
 export * from "./summaries/client/requests";
 export * from "./summaries/types";
+export * as versions from "./versions";
 export * as widget from "./widget";
 export * from "./widget/client/requests";

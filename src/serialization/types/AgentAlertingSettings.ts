@@ -13,10 +13,15 @@ export const AgentAlertingSettings: core.serialization.ObjectSchema<
         "monitor_configs",
         core.serialization.record(core.serialization.string(), AgentAlertingMonitorConfig).optional(),
     ),
+    autoResolveAfterInactiveMinutes: core.serialization.property(
+        "auto_resolve_after_inactive_minutes",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace AgentAlertingSettings {
     export interface Raw {
         monitor_configs?: Record<string, AgentAlertingMonitorConfig.Raw> | null;
+        auto_resolve_after_inactive_minutes?: number | null;
     }
 }

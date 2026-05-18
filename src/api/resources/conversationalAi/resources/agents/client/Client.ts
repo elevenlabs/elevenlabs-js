@@ -16,6 +16,7 @@ import { KnowledgeBaseClient } from "../resources/knowledgeBase/client/Client";
 import { LinkClient } from "../resources/link/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
 import { SummariesClient } from "../resources/summaries/client/Client";
+import { VersionsClient } from "../resources/versions/client/Client";
 import { WidgetClient } from "../resources/widget/client/Client";
 
 export declare namespace AgentsClient {
@@ -32,6 +33,7 @@ export class AgentsClient {
     protected _knowledgeBase: KnowledgeBaseClient | undefined;
     protected _llmUsage: LlmUsageClient | undefined;
     protected _branches: BranchesClient | undefined;
+    protected _versions: VersionsClient | undefined;
     protected _deployments: DeploymentsClient | undefined;
     protected _drafts: DraftsClient | undefined;
 
@@ -61,6 +63,10 @@ export class AgentsClient {
 
     public get branches(): BranchesClient {
         return (this._branches ??= new BranchesClient(this._options));
+    }
+
+    public get versions(): VersionsClient {
+        return (this._versions ??= new VersionsClient(this._options));
     }
 
     public get deployments(): DeploymentsClient {

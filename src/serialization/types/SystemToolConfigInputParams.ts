@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { EndCallToolConfig } from "./EndCallToolConfig";
 import { KnowledgeBaseRagToolConfig } from "./KnowledgeBaseRagToolConfig";
 import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
+import { LoadProcedureToolConfig } from "./LoadProcedureToolConfig";
 import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
 import { TransferToAgentToolConfig } from "./TransferToAgentToolConfig";
@@ -20,6 +21,7 @@ export const SystemToolConfigInputParams: core.serialization.Schema<
         end_call: EndCallToolConfig,
         knowledge_base_rag: KnowledgeBaseRagToolConfig,
         language_detection: LanguageDetectionToolConfig,
+        load_procedure: LoadProcedureToolConfig,
         play_keypad_touch_tone: PlayDtmfToolConfig,
         skip_turn: SkipTurnToolConfig,
         transfer_to_agent: TransferToAgentToolConfig,
@@ -36,6 +38,7 @@ export declare namespace SystemToolConfigInputParams {
         | SystemToolConfigInputParams.EndCall
         | SystemToolConfigInputParams.KnowledgeBaseRag
         | SystemToolConfigInputParams.LanguageDetection
+        | SystemToolConfigInputParams.LoadProcedure
         | SystemToolConfigInputParams.PlayKeypadTouchTone
         | SystemToolConfigInputParams.SkipTurn
         | SystemToolConfigInputParams.TransferToAgent
@@ -52,6 +55,10 @@ export declare namespace SystemToolConfigInputParams {
 
     export interface LanguageDetection extends LanguageDetectionToolConfig.Raw {
         system_tool_type: "language_detection";
+    }
+
+    export interface LoadProcedure extends LoadProcedureToolConfig.Raw {
+        system_tool_type: "load_procedure";
     }
 
     export interface PlayKeypadTouchTone extends PlayDtmfToolConfig.Raw {

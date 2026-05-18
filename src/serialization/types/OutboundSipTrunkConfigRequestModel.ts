@@ -15,6 +15,10 @@ export const OutboundSipTrunkConfigRequestModel: core.serialization.ObjectSchema
     transport: SipTrunkTransportEnum.optional(),
     mediaEncryption: core.serialization.property("media_encryption", SipMediaEncryptionEnum.optional()),
     headers: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    attributesToHeaders: core.serialization.property(
+        "attributes_to_headers",
+        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    ),
     credentials: SipTrunkCredentialsRequestModel.optional(),
 });
 
@@ -24,6 +28,7 @@ export declare namespace OutboundSipTrunkConfigRequestModel {
         transport?: SipTrunkTransportEnum.Raw | null;
         media_encryption?: SipMediaEncryptionEnum.Raw | null;
         headers?: Record<string, string> | null;
+        attributes_to_headers?: Record<string, string> | null;
         credentials?: SipTrunkCredentialsRequestModel.Raw | null;
     }
 }

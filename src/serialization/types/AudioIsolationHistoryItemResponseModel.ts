@@ -18,6 +18,7 @@ export const AudioIsolationHistoryItemResponseModel: core.serialization.ObjectSc
     sourceVideoUrl: core.serialization.property("source_video_url", core.serialization.string().optional()),
     supportsVideo: core.serialization.property("supports_video", core.serialization.boolean()),
     processing: core.serialization.boolean(),
+    videoProcessingFailed: core.serialization.property("video_processing_failed", core.serialization.boolean()),
     previewB64: core.serialization.property("preview_b64", core.serialization.string().optional()),
 });
 
@@ -33,6 +34,7 @@ export declare namespace AudioIsolationHistoryItemResponseModel {
         source_video_url?: string | null;
         supports_video: boolean;
         processing: boolean;
+        video_processing_failed: boolean;
         preview_b64?: string | null;
     }
 }

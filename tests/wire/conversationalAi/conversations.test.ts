@@ -112,6 +112,7 @@ describe("ConversationsClient", () => {
             summaryMode: "exclude",
             search: "search",
             conversationInitiationSource: "unknown",
+            textOnly: true,
             branchId: "branch_id",
             topicIds: ["topic_ids"],
             excludeStatuses: ["initiated"],

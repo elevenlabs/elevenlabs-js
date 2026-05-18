@@ -25,6 +25,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *         pageSize: 1,
  *         summaryMode: "exclude",
  *         conversationInitiationSource: "unknown",
+ *         textOnly: true,
  *         branchId: "branch_id",
  *         sortBy: "search_score",
  *         cursor: "cursor"
@@ -70,6 +71,7 @@ export interface MessagesTextSearchRequest {
     /** Whether to include transcript summaries in the response. */
     summaryMode?: ElevenLabs.conversationalAi.conversations.MessagesTextSearchRequestSummaryMode;
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
+    textOnly?: boolean;
     /** Filter conversations by branch ID. */
     branchId?: string;
     /** Sort order for search results. 'search_score' sorts by search score, 'created_at' sorts by conversation start time. */

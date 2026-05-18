@@ -85,6 +85,7 @@ describe("AuthConnectionsClient", () => {
                 ],
                 integration_connections: [{ id: "id", name: "name" }],
             },
+            custom_headers: { key: "value" },
         };
         server
             .mockEndpoint()
@@ -141,6 +142,9 @@ describe("AuthConnectionsClient", () => {
                     },
                 ],
             },
+            customHeaders: {
+                key: "value",
+            },
         });
     });
 
@@ -160,6 +164,85 @@ describe("AuthConnectionsClient", () => {
         const response = await client.workspace.authConnections.delete("auth_connection_id");
         expect(response).toEqual({
             key: "value",
+        });
+    });
+
+    test("update", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { auth_type: "oauth2_client_credentials" };
+        const rawResponseBody = {
+            auth_type: "oauth2_client_credentials",
+            name: "name",
+            provider: "provider",
+            client_id: "client_id",
+            token_url: "token_url",
+            scopes: ["scopes"],
+            extra_params: { key: "value" },
+            basic_auth_in_header: true,
+            id: "id",
+            used_by: {
+                tools: [{ type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" }],
+                mcp_servers: [
+                    { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
+                ],
+                integration_connections: [{ id: "id", name: "name" }],
+            },
+            custom_headers: { key: "value" },
+        };
+        server
+            .mockEndpoint()
+            .patch("/v1/workspace/auth-connections/auth_connection_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.authConnections.update("auth_connection_id", {
+            authType: "oauth2_client_credentials",
+        });
+        expect(response).toEqual({
+            authType: "oauth2_client_credentials",
+            name: "name",
+            provider: "provider",
+            clientId: "client_id",
+            tokenUrl: "token_url",
+            scopes: ["scopes"],
+            extraParams: {
+                key: "value",
+            },
+            basicAuthInHeader: true,
+            id: "id",
+            usedBy: {
+                tools: [
+                    {
+                        type: "available",
+                        id: "id",
+                        name: "name",
+                        createdAtUnixSecs: 1,
+                        accessLevel: "admin",
+                    },
+                ],
+                mcpServers: [
+                    {
+                        type: "available",
+                        id: "id",
+                        name: "name",
+                        createdAtUnixSecs: 1,
+                        accessLevel: "admin",
+                    },
+                ],
+                integrationConnections: [
+                    {
+                        id: "id",
+                        name: "name",
+                    },
+                ],
+            },
+            customHeaders: {
+                key: "value",
+            },
         });
     });
 });

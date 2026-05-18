@@ -14,6 +14,8 @@ export interface GetPhoneNumberOutboundSipTrunkConfigResponseModel {
     mediaEncryption: ElevenLabs.SipMediaEncryptionEnum;
     /** SIP headers for INVITE request */
     headers?: Record<string, string>;
+    /** Map of dynamic variable name to header name for attributes_to_headers */
+    attributesToHeaders?: Record<string, string>;
     /** Whether authentication credentials are configured */
     hasAuthCredentials: boolean;
     /** SIP trunk username (if available) */

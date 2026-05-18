@@ -26,6 +26,7 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "zendesk_integration",
     "slack_integration",
     "template_preview",
+    "genesys_bot_connector",
 ]);
 
 export declare namespace ConversationInitiationSource {
@@ -47,5 +48,6 @@ export declare namespace ConversationInitiationSource {
         | "flutter_sdk"
         | "zendesk_integration"
         | "slack_integration"
-        | "template_preview";
+        | "template_preview"
+        | "genesys_bot_connector";
 }

@@ -6,6 +6,7 @@ export type SystemToolConfigInputParams =
     | ElevenLabs.SystemToolConfigInputParams.EndCall
     | ElevenLabs.SystemToolConfigInputParams.KnowledgeBaseRag
     | ElevenLabs.SystemToolConfigInputParams.LanguageDetection
+    | ElevenLabs.SystemToolConfigInputParams.LoadProcedure
     | ElevenLabs.SystemToolConfigInputParams.PlayKeypadTouchTone
     | ElevenLabs.SystemToolConfigInputParams.SkipTurn
     | ElevenLabs.SystemToolConfigInputParams.TransferToAgent
@@ -23,6 +24,10 @@ export namespace SystemToolConfigInputParams {
 
     export interface LanguageDetection extends ElevenLabs.LanguageDetectionToolConfig {
         systemToolType: "language_detection";
+    }
+
+    export interface LoadProcedure extends ElevenLabs.LoadProcedureToolConfig {
+        systemToolType: "load_procedure";
     }
 
     export interface PlayKeypadTouchTone extends ElevenLabs.PlayDtmfToolConfig {

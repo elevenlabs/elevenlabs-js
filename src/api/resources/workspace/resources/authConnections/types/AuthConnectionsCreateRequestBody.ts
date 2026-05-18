@@ -9,6 +9,7 @@ export type AuthConnectionsCreateRequestBody =
     | ElevenLabs.workspace.AuthConnectionsCreateRequestBody.Oauth2ClientCredentials
     | ElevenLabs.workspace.AuthConnectionsCreateRequestBody.CustomHeaderAuth
     | ElevenLabs.workspace.AuthConnectionsCreateRequestBody.BasicAuth
+    | ElevenLabs.workspace.AuthConnectionsCreateRequestBody.BearerAuth
     | ElevenLabs.workspace.AuthConnectionsCreateRequestBody.Oauth2Jwt
     | ElevenLabs.workspace.AuthConnectionsCreateRequestBody.PrivateKeyJwt
     | ElevenLabs.workspace.AuthConnectionsCreateRequestBody.Mtls;
@@ -24,6 +25,10 @@ export namespace AuthConnectionsCreateRequestBody {
 
     export interface BasicAuth extends ElevenLabs.CreateBasicAuthRequest {
         authType: "basic_auth";
+    }
+
+    export interface BearerAuth extends ElevenLabs.CreateBearerAuthRequest {
+        authType: "bearer_auth";
     }
 
     export interface Oauth2Jwt extends ElevenLabs.CreateOAuth2JwtRequest {

@@ -26,6 +26,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         summaryMode: "exclude",
  *         search: "search",
  *         conversationInitiationSource: "unknown",
+ *         textOnly: true,
  *         branchId: "branch_id",
  *         topicIds: ["topic_ids"],
  *         excludeStatuses: ["initiated"],
@@ -74,6 +75,7 @@ export interface ConversationsListRequest {
     /** Full-text or fuzzy search over transcript messages */
     search?: string;
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
+    textOnly?: boolean;
     /** Filter conversations by branch ID. */
     branchId?: string;
     /** Filter conversations by topic IDs assigned during topic discovery. */

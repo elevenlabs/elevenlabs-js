@@ -21,6 +21,10 @@ export const OAuth2ClientCredsResponse: core.serialization.ObjectSchema<
     basicAuthInHeader: core.serialization.property("basic_auth_in_header", core.serialization.boolean().optional()),
     id: core.serialization.string(),
     usedBy: core.serialization.property("used_by", AuthConnectionDependencies.optional()),
+    customHeaders: core.serialization.property(
+        "custom_headers",
+        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace OAuth2ClientCredsResponse {
@@ -34,5 +38,6 @@ export declare namespace OAuth2ClientCredsResponse {
         basic_auth_in_header?: boolean | null;
         id: string;
         used_by?: AuthConnectionDependencies.Raw | null;
+        custom_headers?: Record<string, string> | null;
     }
 }

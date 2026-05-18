@@ -53,6 +53,7 @@ export class MessagesClient {
      *         pageSize: 1,
      *         summaryMode: "exclude",
      *         conversationInitiationSource: "unknown",
+     *         textOnly: true,
      *         branchId: "branch_id",
      *         sortBy: "search_score",
      *         cursor: "cursor"
@@ -90,6 +91,7 @@ export class MessagesClient {
             pageSize,
             summaryMode,
             conversationInitiationSource,
+            textOnly,
             branchId,
             sortBy,
             cursor,
@@ -203,6 +205,10 @@ export class MessagesClient {
                 conversationInitiationSource,
                 { unrecognizedObjectKeys: "strip" },
             );
+        }
+
+        if (textOnly != null) {
+            _queryParams.text_only = textOnly.toString();
         }
 
         if (branchId != null) {

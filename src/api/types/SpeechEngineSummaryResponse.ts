@@ -3,8 +3,10 @@
 export interface SpeechEngineSummaryResponse {
     /** The speech engine resource ID */
     speechEngineId: string;
+    /** Human-readable name for the speech engine */
     name: string;
-    /** Creation time in unix seconds */
+    /** Creation time in Unix seconds */
     createdAtUnixSecs: number;
+    /** Arbitrary tags for categorization and filtering */
     tags: string[];
 }

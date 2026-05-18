@@ -5,15 +5,26 @@ import type * as ElevenLabs from "../index";
 export interface SpeechEngineResponse {
     /** The speech engine resource ID */
     speechEngineId: string;
+    /** Human-readable name for the speech engine */
     name: string;
+    /** WebSocket connection settings for the upstream transcript server */
     speechEngine: ElevenLabs.SpeechEngineConfig;
+    /** Automatic speech recognition configuration */
     asr: ElevenLabs.AsrConversationalConfig;
+    /** Text-to-speech output configuration */
     tts: ElevenLabs.TtsConversationalConfigOutput;
+    /** Turn detection configuration */
     turn: ElevenLabs.BaseTurnConfig;
+    /** Conversation-level settings including client events and duration limits */
     conversation: ElevenLabs.ConversationConfigOutput;
+    /** Privacy settings controlling recording, retention, and PII handling */
     privacy: ElevenLabs.PrivacyConfigOutput;
+    /** Concurrency and daily conversation limits for this speech engine */
     callLimits: ElevenLabs.AgentCallLimits;
+    /** ISO language code used by the speech engine (e.g. 'en') */
     language: string;
+    /** Arbitrary tags for categorization and filtering */
     tags: string[];
+    /** Creation and update timestamps with source information */
     metadata: ElevenLabs.AgentMetadataDbModel;
 }

@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../../../../../api/index";
 import * as core from "../../../../../../core";
 import type * as serializers from "../../../../../index";
 import { CreateBasicAuthRequest } from "../../../../../types/CreateBasicAuthRequest";
+import { CreateBearerAuthRequest } from "../../../../../types/CreateBearerAuthRequest";
 import { CreateCustomHeaderAuthRequest } from "../../../../../types/CreateCustomHeaderAuthRequest";
 import { CreateMtlsAuthRequest } from "../../../../../types/CreateMtlsAuthRequest";
 import { CreateOAuth2ClientCredsRequest } from "../../../../../types/CreateOAuth2ClientCredsRequest";
@@ -18,6 +19,7 @@ export const AuthConnectionsCreateRequestBody: core.serialization.Schema<
         oauth2_client_credentials: CreateOAuth2ClientCredsRequest,
         custom_header_auth: CreateCustomHeaderAuthRequest,
         basic_auth: CreateBasicAuthRequest,
+        bearer_auth: CreateBearerAuthRequest,
         oauth2_jwt: CreateOAuth2JwtRequest,
         private_key_jwt: CreatePrivateKeyJwtRequest,
         mtls: CreateMtlsAuthRequest,
@@ -32,6 +34,7 @@ export declare namespace AuthConnectionsCreateRequestBody {
         | AuthConnectionsCreateRequestBody.Oauth2ClientCredentials
         | AuthConnectionsCreateRequestBody.CustomHeaderAuth
         | AuthConnectionsCreateRequestBody.BasicAuth
+        | AuthConnectionsCreateRequestBody.BearerAuth
         | AuthConnectionsCreateRequestBody.Oauth2Jwt
         | AuthConnectionsCreateRequestBody.PrivateKeyJwt
         | AuthConnectionsCreateRequestBody.Mtls;
@@ -46,6 +49,10 @@ export declare namespace AuthConnectionsCreateRequestBody {
 
     export interface BasicAuth extends CreateBasicAuthRequest.Raw {
         auth_type: "basic_auth";
+    }
+
+    export interface BearerAuth extends CreateBearerAuthRequest.Raw {
+        auth_type: "bearer_auth";
     }
 
     export interface Oauth2Jwt extends CreateOAuth2JwtRequest.Raw {

@@ -20,6 +20,7 @@ export const ConversationInitiationSource = {
     ZendeskIntegration: "zendesk_integration",
     SlackIntegration: "slack_integration",
     TemplatePreview: "template_preview",
+    GenesysBotConnector: "genesys_bot_connector",
 } as const;
 export type ConversationInitiationSource =
     (typeof ConversationInitiationSource)[keyof typeof ConversationInitiationSource];
