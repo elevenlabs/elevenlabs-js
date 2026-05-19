@@ -35,6 +35,7 @@ jobs:
         needs: [compile, test]
         if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
         runs-on: ubuntu-latest
+        environment: npm-publish
         permissions:
             id-token: write
         steps:
