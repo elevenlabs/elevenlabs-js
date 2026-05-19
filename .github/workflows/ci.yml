@@ -51,7 +51,7 @@ jobs:
             - name: Publish to npm
               run: |
                   publish() {
-                    npx -y npm@latest publish --dry-run "$@"
+                    npx -y npm@latest publish "$@"
                   }
                   if [[ ${GITHUB_REF} == *alpha* ]]; then
                     publish --access public --tag alpha
