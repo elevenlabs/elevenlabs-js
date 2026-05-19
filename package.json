@@ -22,7 +22,7 @@
     "dependencies": {
         "node-fetch": "^2.7.0",
         "command-exists": "^1.2.9",
-        "ws": "^8.18.3"
+        "ws": "^8.20.1"
     },
     "devDependencies": {
         "@types/node-fetch": "^2.6.12",
