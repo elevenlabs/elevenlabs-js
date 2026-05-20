@@ -10,6 +10,7 @@ import { BaseTurnConfig } from "./BaseTurnConfig";
 import { ConversationConfigOutput } from "./ConversationConfigOutput";
 import { PrivacyConfigOutput } from "./PrivacyConfigOutput";
 import { SpeechEngineConfig } from "./SpeechEngineConfig";
+import { SpeechEngineConversationInitiationClientDataConfig } from "./SpeechEngineConversationInitiationClientDataConfig";
 import { TtsConversationalConfigOutput } from "./TtsConversationalConfigOutput";
 
 export const SpeechEngineResponse: core.serialization.ObjectSchema<
@@ -27,6 +28,7 @@ export const SpeechEngineResponse: core.serialization.ObjectSchema<
     callLimits: core.serialization.property("call_limits", AgentCallLimits),
     language: core.serialization.string(),
     tags: core.serialization.list(core.serialization.string()),
+    overrides: SpeechEngineConversationInitiationClientDataConfig,
     metadata: AgentMetadataDbModel,
 });
 
@@ -43,6 +45,7 @@ export declare namespace SpeechEngineResponse {
         call_limits: AgentCallLimits.Raw;
         language: string;
         tags: string[];
+        overrides: SpeechEngineConversationInitiationClientDataConfig.Raw;
         metadata: AgentMetadataDbModel.Raw;
     }
 }

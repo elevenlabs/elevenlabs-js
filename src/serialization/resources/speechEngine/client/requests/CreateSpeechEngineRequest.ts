@@ -9,6 +9,7 @@ import { BaseTurnConfig } from "../../../../types/BaseTurnConfig";
 import { ConversationConfigInput } from "../../../../types/ConversationConfigInput";
 import { PrivacyConfigInput } from "../../../../types/PrivacyConfigInput";
 import { SpeechEngineConfig } from "../../../../types/SpeechEngineConfig";
+import { SpeechEngineConversationInitiationClientDataConfig } from "../../../../types/SpeechEngineConversationInitiationClientDataConfig";
 import { TtsConversationalConfigInput } from "../../../../types/TtsConversationalConfigInput";
 
 export const CreateSpeechEngineRequest: core.serialization.Schema<
@@ -25,6 +26,7 @@ export const CreateSpeechEngineRequest: core.serialization.Schema<
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
     language: core.serialization.string().optional(),
     tags: core.serialization.list(core.serialization.string()).optional(),
+    overrides: SpeechEngineConversationInitiationClientDataConfig.optional(),
 });
 
 export declare namespace CreateSpeechEngineRequest {
@@ -39,5 +41,6 @@ export declare namespace CreateSpeechEngineRequest {
         call_limits?: AgentCallLimits.Raw | null;
         language?: string | null;
         tags?: string[] | null;
+        overrides?: SpeechEngineConversationInitiationClientDataConfig.Raw | null;
     }
 }

@@ -11,6 +11,10 @@ export const VoiceStatisticsResponseModel: core.serialization.ObjectSchema<
     voiceId: core.serialization.property("voice_id", core.serialization.string()),
     charactersUnconverted: core.serialization.property("characters_unconverted", core.serialization.number()),
     charactersConverted: core.serialization.property("characters_converted", core.serialization.number()),
+    creditsNeededToConvert: core.serialization.property(
+        "credits_needed_to_convert",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace VoiceStatisticsResponseModel {
@@ -18,5 +22,6 @@ export declare namespace VoiceStatisticsResponseModel {
         voice_id: string;
         characters_unconverted: number;
         characters_converted: number;
+        credits_needed_to_convert?: number | null;
     }
 }

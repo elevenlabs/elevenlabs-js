@@ -22,4 +22,6 @@ export interface GetConversationResponseModel {
     transcript: ElevenLabs.ConversationHistoryTranscriptResponseModel[];
     /** Conversation tag ids assigned to this conversation. */
     tagIds?: string[];
+    /** OpenTelemetry trace payload when the request uses format=opentelemetry; otherwise omitted. */
+    otlpTraces?: Record<string, unknown>;
 }

@@ -76,6 +76,7 @@ describe("AgentsClient", () => {
                 language_presets: {
                     key: {
                         overrides: {
+                            asr: { keywords: ["hello", "world"] },
                             turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
                             tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
@@ -323,7 +324,11 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
-                alerting: { monitor_configs: { key: {} }, auto_resolve_after_inactive_minutes: 1 },
+                alerting: {
+                    monitor_configs: { key: {} },
+                    auto_resolve_after_inactive_minutes: 1,
+                    notifiers: [{ url: "url" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -1185,6 +1190,9 @@ describe("AgentsClient", () => {
                 languagePresets: {
                     key: {
                         overrides: {
+                            asr: {
+                                keywords: ["hello", "world"],
+                            },
                             turn: {
                                 softTimeoutConfig: {
                                     message: "Hhmmmm...yeah.",
@@ -1514,6 +1522,11 @@ describe("AgentsClient", () => {
                         key: {},
                     },
                     autoResolveAfterInactiveMinutes: 1,
+                    notifiers: [
+                        {
+                            url: "url",
+                        },
+                    ],
                 },
                 safety: {
                     isBlockedIvc: true,
@@ -2550,6 +2563,7 @@ describe("AgentsClient", () => {
                 language_presets: {
                     key: {
                         overrides: {
+                            asr: { keywords: ["hello", "world"] },
                             turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
                             tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
@@ -2797,7 +2811,11 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
-                alerting: { monitor_configs: { key: {} }, auto_resolve_after_inactive_minutes: 1 },
+                alerting: {
+                    monitor_configs: { key: {} },
+                    auto_resolve_after_inactive_minutes: 1,
+                    notifiers: [{ url: "url" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -3660,6 +3678,9 @@ describe("AgentsClient", () => {
                 languagePresets: {
                     key: {
                         overrides: {
+                            asr: {
+                                keywords: ["hello", "world"],
+                            },
                             turn: {
                                 softTimeoutConfig: {
                                     message: "Hhmmmm...yeah.",
@@ -3989,6 +4010,11 @@ describe("AgentsClient", () => {
                         key: {},
                     },
                     autoResolveAfterInactiveMinutes: 1,
+                    notifiers: [
+                        {
+                            url: "url",
+                        },
+                    ],
                 },
                 safety: {
                     isBlockedIvc: true,

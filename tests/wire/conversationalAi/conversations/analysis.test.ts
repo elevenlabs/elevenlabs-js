@@ -126,6 +126,7 @@ describe("AnalysisClient", () => {
             visited_agents: [{ agent_id: "agent_id", branch_id: "branch_id" }],
             conversation_initiation_client_data: {
                 conversation_config_override: {
+                    asr: { keywords: ["hello", "world"] },
                     turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
                     tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                     agent: {
@@ -201,6 +202,7 @@ describe("AnalysisClient", () => {
                 },
             ],
             tag_ids: ["tag_ids"],
+            otlp_traces: { key: "value" },
         };
         server
             .mockEndpoint()
@@ -376,6 +378,9 @@ describe("AnalysisClient", () => {
             ],
             conversationInitiationClientData: {
                 conversationConfigOverride: {
+                    asr: {
+                        keywords: ["hello", "world"],
+                    },
                     turn: {
                         softTimeoutConfig: {
                             message: "Hhmmmm...yeah.",
@@ -491,6 +496,9 @@ describe("AnalysisClient", () => {
                 },
             ],
             tagIds: ["tag_ids"],
+            otlpTraces: {
+                key: "value",
+            },
         });
     });
 });

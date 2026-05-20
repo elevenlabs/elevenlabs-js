@@ -221,6 +221,7 @@ describe("ProjectsClient", () => {
                         characters_converted: 500,
                         paragraphs_converted: 20,
                         paragraphs_unconverted: 10,
+                        credits_needed_to_convert: 1000,
                         voice_statistics: [
                             { voice_id: "voice123", characters_unconverted: 600, characters_converted: 300 },
                             { voice_id: "voice456", characters_unconverted: 400, characters_converted: 200 },
@@ -733,6 +734,7 @@ describe("ProjectsClient", () => {
                         charactersConverted: 500,
                         paragraphsConverted: 20,
                         paragraphsUnconverted: 10,
+                        creditsNeededToConvert: 1000,
                         voiceStatistics: [
                             {
                                 voiceId: "voice123",
