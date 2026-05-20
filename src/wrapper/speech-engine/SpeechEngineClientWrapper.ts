@@ -49,7 +49,7 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
      * });
      * ```
      */
-    // @ts-expect-error — intentionally returns SpeechEngineResource instead of HttpResponsePromise<CreateSpeechEngineResponse>
+    // @ts-expect-error — intentionally returns SpeechEngineResource instead of HttpResponsePromise<SpeechEngineResponse>
     public async create(
         request: CreateSpeechEngineRequest,
         requestOptions?: SpeechEngineClient.RequestOptions,
