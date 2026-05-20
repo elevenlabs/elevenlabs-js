@@ -67,6 +67,10 @@ export class MusicClient {
             }
         }
 
+        if (request.modelId != null) {
+            _request.append("model_id", request.modelId);
+        }
+
         if (request.signWithC2Pa != null) {
             _request.append("sign_with_c2pa", request.signWithC2Pa.toString());
         }

@@ -210,6 +210,7 @@ describe("BatchCallsClient", () => {
                     conversation_id: "conversation_id",
                     conversation_initiation_client_data: {
                         conversation_config_override: {
+                            asr: { keywords: ["hello", "world"] },
                             turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
                             tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
@@ -278,6 +279,9 @@ describe("BatchCallsClient", () => {
                     conversationId: "conversation_id",
                     conversationInitiationClientData: {
                         conversationConfigOverride: {
+                            asr: {
+                                keywords: ["hello", "world"],
+                            },
                             turn: {
                                 softTimeoutConfig: {
                                     message: "Hhmmmm...yeah.",

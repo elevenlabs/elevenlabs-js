@@ -47,7 +47,68 @@ describe("SpeechEngineClient", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { speech_engine: { ws_url: "ws_url" } };
-        const rawResponseBody = { speech_engine_id: "seng_3701k3ttaq12ewp8b7qv5rfyszkz" };
+        const rawResponseBody = {
+            speech_engine_id: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
+            name: "My Speech Engine",
+            speech_engine: { ws_url: "wss://example.com/transcript", request_headers: { key: "value" } },
+            asr: {
+                quality: "high",
+                provider: "elevenlabs",
+                user_input_audio_format: "pcm_16000",
+                keywords: ["keywords"],
+            },
+            tts: {
+                model_id: "eleven_flash_v2",
+                voice_id: "cjVigY5qzO86Huf0OWal",
+                supported_voices: [{ label: "label", voice_id: "voice_id" }],
+                expressive_mode: true,
+                suggested_audio_tags: [{ tag: "tag" }],
+                agent_output_audio_format: "pcm_16000",
+                optimize_streaming_latency: 3,
+                stability: 0.5,
+                speed: 1,
+                similarity_boost: 0.8,
+                text_normalisation_type: "system_prompt",
+                pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
+            },
+            turn: {
+                turn_timeout: 7,
+                initial_wait_time: 1.1,
+                silence_end_call_timeout: -1,
+                turn_eagerness: "normal",
+                spelling_patience: "auto",
+                speculative_turn: true,
+                retranscribe_on_turn_timeout: true,
+            },
+            conversation: {
+                text_only: true,
+                max_duration_seconds: 600,
+                client_events: ["audio", "interruption", "agent_response", "user_transcript"],
+                file_input: { enabled: true, max_files_per_conversation: 1 },
+                monitoring_enabled: true,
+                monitoring_events: ["conversation_initiation_metadata"],
+                source_attribution: true,
+            },
+            privacy: {
+                record_voice: true,
+                retention_days: -1,
+                delete_transcript_and_pii: false,
+                delete_audio: false,
+                apply_to_existing_conversations: false,
+                zero_retention_mode: false,
+                conversation_history_redaction: { enabled: true, entities: ["name"] },
+            },
+            call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
+            language: "en",
+            tags: ["production", "v1"],
+            overrides: { first_message: false },
+            metadata: {
+                created_at_unix_secs: 1714000000,
+                updated_at_unix_secs: 1714000000,
+                created_from: "api",
+                last_updated_from: "api",
+            },
+        };
         server
             .mockEndpoint()
             .post("/v1/speech-engine")
@@ -64,6 +125,95 @@ describe("SpeechEngineClient", () => {
         });
         expect(response).toEqual({
             speechEngineId: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
+            name: "My Speech Engine",
+            speechEngine: {
+                wsUrl: "wss://example.com/transcript",
+                requestHeaders: {
+                    key: "value",
+                },
+            },
+            asr: {
+                quality: "high",
+                provider: "elevenlabs",
+                userInputAudioFormat: "pcm_16000",
+                keywords: ["keywords"],
+            },
+            tts: {
+                modelId: "eleven_flash_v2",
+                voiceId: "cjVigY5qzO86Huf0OWal",
+                supportedVoices: [
+                    {
+                        label: "label",
+                        voiceId: "voice_id",
+                    },
+                ],
+                expressiveMode: true,
+                suggestedAudioTags: [
+                    {
+                        tag: "tag",
+                    },
+                ],
+                agentOutputAudioFormat: "pcm_16000",
+                optimizeStreamingLatency: 3,
+                stability: 0.5,
+                speed: 1,
+                similarityBoost: 0.8,
+                textNormalisationType: "system_prompt",
+                pronunciationDictionaryLocators: [
+                    {
+                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                    },
+                ],
+            },
+            turn: {
+                turnTimeout: 7,
+                initialWaitTime: 1.1,
+                silenceEndCallTimeout: -1,
+                turnEagerness: "normal",
+                spellingPatience: "auto",
+                speculativeTurn: true,
+                retranscribeOnTurnTimeout: true,
+            },
+            conversation: {
+                textOnly: true,
+                maxDurationSeconds: 600,
+                clientEvents: ["audio", "interruption", "agent_response", "user_transcript"],
+                fileInput: {
+                    enabled: true,
+                    maxFilesPerConversation: 1,
+                },
+                monitoringEnabled: true,
+                monitoringEvents: ["conversation_initiation_metadata"],
+                sourceAttribution: true,
+            },
+            privacy: {
+                recordVoice: true,
+                retentionDays: -1,
+                deleteTranscriptAndPii: false,
+                deleteAudio: false,
+                applyToExistingConversations: false,
+                zeroRetentionMode: false,
+                conversationHistoryRedaction: {
+                    enabled: true,
+                    entities: ["name"],
+                },
+            },
+            callLimits: {
+                agentConcurrencyLimit: -1,
+                dailyLimit: 100000,
+                burstingEnabled: true,
+            },
+            language: "en",
+            tags: ["production", "v1"],
+            overrides: {
+                firstMessage: false,
+            },
+            metadata: {
+                createdAtUnixSecs: 1714000000,
+                updatedAtUnixSecs: 1714000000,
+                createdFrom: "api",
+                lastUpdatedFrom: "api",
+            },
         });
     });
 
@@ -125,6 +275,7 @@ describe("SpeechEngineClient", () => {
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
             language: "en",
             tags: ["production", "v1"],
+            overrides: { first_message: false },
             metadata: {
                 created_at_unix_secs: 1714000000,
                 updated_at_unix_secs: 1714000000,
@@ -223,6 +374,9 @@ describe("SpeechEngineClient", () => {
             },
             language: "en",
             tags: ["production", "v1"],
+            overrides: {
+                firstMessage: false,
+            },
             metadata: {
                 createdAtUnixSecs: 1714000000,
                 updatedAtUnixSecs: 1714000000,
@@ -305,6 +459,7 @@ describe("SpeechEngineClient", () => {
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
             language: "en",
             tags: ["production", "v1"],
+            overrides: { first_message: false },
             metadata: {
                 created_at_unix_secs: 1714000000,
                 updated_at_unix_secs: 1714000000,
@@ -404,6 +559,9 @@ describe("SpeechEngineClient", () => {
             },
             language: "en",
             tags: ["production", "v1"],
+            overrides: {
+                firstMessage: false,
+            },
             metadata: {
                 createdAtUnixSecs: 1714000000,
                 updatedAtUnixSecs: 1714000000,

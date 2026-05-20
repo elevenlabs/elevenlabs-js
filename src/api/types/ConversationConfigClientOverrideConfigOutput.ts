@@ -4,6 +4,8 @@ import type * as ElevenLabs from "../index";
 
 export interface ConversationConfigClientOverrideConfigOutput {
     /** Configures overrides for nested fields. */
+    asr?: ElevenLabs.AsrConversationalConfigOverrideConfig;
+    /** Configures overrides for nested fields. */
     turn?: ElevenLabs.TurnConfigOverrideConfig;
     /** Configures overrides for nested fields. */
     tts?: ElevenLabs.TtsConversationalConfigOverrideConfig;

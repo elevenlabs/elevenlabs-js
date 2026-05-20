@@ -31,4 +31,6 @@ export interface CreateSpeechEngineRequest {
     language?: string;
     /** Tags for categorization */
     tags?: string[];
+    /** Override settings the client may set during conversation initiation */
+    overrides?: ElevenLabs.SpeechEngineConversationInitiationClientDataConfig;
 }

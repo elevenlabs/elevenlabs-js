@@ -47,6 +47,7 @@ export const WorkspaceResourceType: core.serialization.Schema<
     "avatars",
     "avatar_video_generations",
     "resource_collection",
+    "studio_projects",
 ]);
 
 export declare namespace WorkspaceResourceType {
@@ -89,5 +90,6 @@ export declare namespace WorkspaceResourceType {
         | "transcription_tasks"
         | "avatars"
         | "avatar_video_generations"
-        | "resource_collection";
+        | "resource_collection"
+        | "studio_projects";
 }
