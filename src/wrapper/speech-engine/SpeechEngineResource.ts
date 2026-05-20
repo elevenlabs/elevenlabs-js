@@ -4,6 +4,7 @@ import type { Duplex } from "node:stream";
 import WebSocket from "ws";
 import type { BaseClientOptions, NormalizedClientOptions } from "../../BaseClient";
 import * as core from "../../core";
+import type * as ElevenLabs from "../../api/types";
 import { isAbortError, type SpeechEngineCallbacks } from "./types";
 import { SpeechEngineSession } from "./SpeechEngineSession";
 import { SpeechEngineAttachment } from "./SpeechEngineAttachment";
@@ -28,13 +29,50 @@ import { SpeechEngineAttachment } from "./SpeechEngineAttachment";
  */
 export class SpeechEngineResource {
     readonly engineId: string;
+
+    /**
+     * Response fields from the API. These are populated when the resource is
+     * returned from `create()`, `get()`, or `update()`.
+     *
+     * When using the `attach()` shortcut directly, no API call is made so
+     * these fields will be `undefined`.
+     */
+    readonly name: string | undefined;
+    readonly speechEngine: ElevenLabs.SpeechEngineConfig | undefined;
+    readonly asr: ElevenLabs.AsrConversationalConfig | undefined;
+    readonly tts: ElevenLabs.TtsConversationalConfigOutput | undefined;
+    readonly turn: ElevenLabs.BaseTurnConfig | undefined;
+    readonly conversation: ElevenLabs.ConversationConfigOutput | undefined;
+    readonly privacy: ElevenLabs.PrivacyConfigOutput | undefined;
+    readonly callLimits: ElevenLabs.AgentCallLimits | undefined;
+    readonly language: string | undefined;
+    readonly tags: string[] | undefined;
+    readonly overrides: ElevenLabs.SpeechEngineConversationInitiationClientDataConfig | undefined;
+    readonly metadata: ElevenLabs.AgentMetadataDbModel | undefined;
+
     /** @internal */
     readonly _options: NormalizedClientOptions<BaseClientOptions>;
 
     /** @internal */
-    constructor(engineId: string, options: NormalizedClientOptions<BaseClientOptions>) {
+    constructor(
+        engineId: string,
+        options: NormalizedClientOptions<BaseClientOptions>,
+        response?: ElevenLabs.SpeechEngineResponse,
+    ) {
         this.engineId = engineId;
         this._options = options;
+        this.name = response?.name;
+        this.speechEngine = response?.speechEngine;
+        this.asr = response?.asr;
+        this.tts = response?.tts;
+        this.turn = response?.turn;
+        this.conversation = response?.conversation;
+        this.privacy = response?.privacy;
+        this.callLimits = response?.callLimits;
+        this.language = response?.language;
+        this.tags = response?.tags;
+        this.overrides = response?.overrides;
+        this.metadata = response?.metadata;
     }
 
     /**
