@@ -1,6 +1,11 @@
-import { Conversation } from "../Conversation";
-import { MockWebSocketFactory, MockAudioInterface, MockConversationClient, MockWebSocket } from "./MockConversation";
 import { ClientTools } from "../ClientTools";
+import { Conversation } from "../Conversation";
+import {
+    MockAudioInterface,
+    MockConversationClient,
+    type MockWebSocket,
+    MockWebSocketFactory,
+} from "./MockConversation";
 
 export interface TestConversationSetup {
     conversation: Conversation;
@@ -11,11 +16,7 @@ export interface TestConversationSetup {
 }
 
 export function createTestConversation(
-    options: {
-        agentId?: string;
-        requiresAuth?: boolean;
-        config?: any;
-    } = {},
+    options: { agentId?: string; requiresAuth?: boolean; config?: any } = {},
 ): TestConversationSetup {
     const mockWebSocketFactory = new MockWebSocketFactory();
     const mockAudio = new MockAudioInterface();

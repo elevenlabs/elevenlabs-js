@@ -1,8 +1,7 @@
-import { Conversation } from "../Conversation";
+import type { ElevenLabsClient } from "../../../../../Client";
 import { AudioInterface } from "../AudioInterface";
 import { ClientTools } from "../ClientTools";
-import { ElevenLabsClient } from "../../../../../Client";
-import { ConversationInitiationData } from "../ConversationConfig";
+import { Conversation } from "../Conversation";
 
 // Mock WebSocket
 jest.mock("ws", () => {
@@ -36,7 +35,7 @@ class MockAudioInterface extends AudioInterface {
         this.inputCallback = undefined;
     }
 
-    output(audio: Buffer): void {
+    output(_audio: Buffer): void {
         // Mock output
     }
 

@@ -1,7 +1,7 @@
 import type { Server as HttpServer } from "node:http";
+import { SpeechEngineClient } from "../../api/resources/speechEngine/client/Client";
 import type { CreateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/CreateSpeechEngineRequest";
 import type { UpdateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/UpdateSpeechEngineRequest";
-import { SpeechEngineClient } from "../../api/resources/speechEngine/client/Client";
 import type { SpeechEngineAttachment } from "./SpeechEngineAttachment";
 import { SpeechEngineResource } from "./SpeechEngineResource";
 import type { SpeechEngineCallbacks } from "./types";

@@ -1,5 +1,5 @@
-import { isNode, toAsyncIterable } from "./utils";
 import { ElevenLabsError } from "../errors/ElevenLabsError";
+import { isNode, toAsyncIterable } from "./utils";
 
 export async function stream(audio: ReadableStream<Uint8Array>): Promise<void> {
     if (!isNode()) {

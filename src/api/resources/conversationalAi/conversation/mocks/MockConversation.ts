@@ -1,7 +1,7 @@
 import { EventEmitter } from "events";
-import { WebSocketInterface, WebSocketFactory } from "../interfaces/WebSocketInterface";
-import { ConversationClient } from "../interfaces/ConversationClient";
 import { AudioInterface } from "../AudioInterface";
+import type { ConversationClient } from "../interfaces/ConversationClient";
+import type { WebSocketFactory, WebSocketInterface } from "../interfaces/WebSocketInterface";
 
 export class MockWebSocket extends EventEmitter implements WebSocketInterface {
     public readyState: number = 1; // OPEN
@@ -46,7 +46,7 @@ export class MockWebSocket extends EventEmitter implements WebSocketInterface {
 export class MockWebSocketFactory implements WebSocketFactory {
     private mockWebSocket = new MockWebSocket();
 
-    create(url: string, options?: any): WebSocketInterface {
+    create(_url: string, _options?: any): WebSocketInterface {
         return this.mockWebSocket;
     }
 

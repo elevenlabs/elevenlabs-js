@@ -1,6 +1,6 @@
 import type * as ElevenLabs from "../api";
 import { MusicClient as GeneratedMusic } from "../api/resources/music/client/Client";
-import { CompositionPlanClient } from "../api/resources/music/resources/compositionPlan/client/Client";
+import type { CompositionPlanClient } from "../api/resources/music/resources/compositionPlan/client/Client";
 import * as core from "../core";
 import type { WithRawResponse } from "../core/fetcher/RawResponse";
 
@@ -29,11 +29,8 @@ export interface MultipartResponse {
 
 export class Music {
     private _client: GeneratedMusic;
-    private readonly _options: Music.Options;
-    private _compositionPlan: CompositionPlanClient | undefined;
 
     constructor(options: Music.Options = {}) {
-        this._options = options;
         this._client = new GeneratedMusic(options);
     }
 
@@ -53,16 +50,6 @@ export class Music {
         requestOptions?: Music.RequestOptions,
     ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return this._client.compose(request, requestOptions);
-    }
-
-    // Private method for structural compatibility with generated Music class
-    private __compose(
-        request: ElevenLabs.BodyComposeMusicV1MusicPost = {},
-        requestOptions?: Music.RequestOptions,
-    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        // This method exists for type compatibility only
-        // The actual implementation is delegated through compose()
-        throw new Error("Internal method - should not be called directly");
     }
 
     /**
@@ -154,16 +141,6 @@ export class Music {
         }
     }
 
-    // Private method for structural compatibility with generated Music class
-    private __composeDetailed(
-        request: ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost = {},
-        requestOptions?: Music.RequestOptions,
-    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        // This method exists for type compatibility only
-        // The actual implementation is delegated through composeDetailed()
-        throw new Error("Internal method - should not be called directly");
-    }
-
     /**
      * Stream a composed song from a prompt or a composition plan.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -175,16 +152,6 @@ export class Music {
         return this._client.stream(request, requestOptions);
     }
 
-    // Private method for structural compatibility with generated Music class
-    private __stream(
-        request: ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost = {},
-        requestOptions?: Music.RequestOptions,
-    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        // This method exists for type compatibility only
-        // The actual implementation is delegated through stream()
-        throw new Error("Internal method - should not be called directly");
-    }
-
     /**
      * Separate a music file into individual stems
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -194,16 +161,6 @@ export class Music {
         requestOptions?: Music.RequestOptions,
     ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
         return this._client.separateStems(request, requestOptions);
-    }
-
-    // Private method for structural compatibility with generated Music class
-    private __separateStems(
-        request: ElevenLabs.BodyStemSeparationV1MusicStemSeparationPost,
-        requestOptions?: Music.RequestOptions,
-    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        // This method exists for type compatibility only
-        // The actual implementation is delegated through separateStems()
-        throw new Error("Internal method - should not be called directly");
     }
 
     /**
@@ -304,12 +261,11 @@ export class Music {
 
         audioStart = this.findAudioStartIndex(responseBytes, audioStart);
 
-
         // Find the closing boundary to properly terminate the audio data
         // Multipart responses end with: \r\n--boundary--\r\n or \n--boundary--\n
         // Try \r\n first (HTTP standard), then fall back to \n
-        const closingBoundaryCRLF = new TextEncoder().encode("\r\n" + boundary + "--");
-        const closingBoundaryLF = new TextEncoder().encode("\n" + boundary + "--");
+        const closingBoundaryCRLF = new TextEncoder().encode(`\r\n${boundary}--`);
+        const closingBoundaryLF = new TextEncoder().encode(`\n${boundary}--`);
         let audioEnd = responseBytes.length;
 
         // Try CRLF first, then LF
@@ -369,12 +325,12 @@ export class Music {
         return -1;
     }
 
-    private findAudioStartIndex(responseBytes: Uint8Array, startIndex: number): number {        
+    private findAudioStartIndex(responseBytes: Uint8Array, startIndex: number): number {
         const foundAtCRLF = this.findIndex(responseBytes, startIndex, new TextEncoder().encode("\r\n\r\n"));
         if (foundAtCRLF !== -1) {
-            return  foundAtCRLF + 4;
+            return foundAtCRLF + 4;
         }
-        
+
         const foundAtLF = this.findIndex(responseBytes, startIndex, new TextEncoder().encode("\n\n"));
         if (foundAtLF !== -1) {
             return foundAtLF + 2;

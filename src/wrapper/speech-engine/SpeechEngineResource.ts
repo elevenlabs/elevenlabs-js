@@ -1,12 +1,12 @@
 import { createHash, createHmac } from "node:crypto";
-import type { IncomingMessage, Server as HttpServer } from "node:http";
+import type { Server as HttpServer, IncomingMessage } from "node:http";
 import type { Duplex } from "node:stream";
 import WebSocket from "ws";
 import type { BaseClientOptions, NormalizedClientOptions } from "../../BaseClient";
 import * as core from "../../core";
-import { isAbortError, type SpeechEngineCallbacks } from "./types";
-import { SpeechEngineSession } from "./SpeechEngineSession";
 import { SpeechEngineAttachment } from "./SpeechEngineAttachment";
+import { SpeechEngineSession } from "./SpeechEngineSession";
+import { isAbortError, type SpeechEngineCallbacks } from "./types";
 
 /**
  * Represents a speech engine instance. Returned by `elevenlabs.speechEngine.get()`.
@@ -55,11 +55,7 @@ export class SpeechEngineResource {
      * });
      * ```
      */
-    attach(
-        httpServer: HttpServer,
-        path: string,
-        handler: SpeechEngineCallbacks,
-    ): SpeechEngineAttachment {
+    attach(httpServer: HttpServer, path: string, handler: SpeechEngineCallbacks): SpeechEngineAttachment {
         const debug = handler.debug ?? false;
         const log = debug ? (...args: unknown[]) => console.log("[SpeechEngine]", ...args) : () => {};
 
@@ -74,7 +70,7 @@ export class SpeechEngineResource {
                 return;
             }
 
-            if (!await this.verifyRequest(req)) {
+            if (!(await this.verifyRequest(req))) {
                 // verifyRequest returned false — get the detailed reason for debug logging
                 const reason = await this.getVerificationFailure(req);
                 log(`rejected connection — ${reason}`);
@@ -116,9 +112,9 @@ export class SpeechEngineResource {
     }
 
     /** @internal Returns `null` when the request is valid, or a human-readable reason when rejected. */
-    private async getVerificationFailure(
-        req: { headers: Record<string, string | string[] | undefined> },
-    ): Promise<string | null> {
+    private async getVerificationFailure(req: {
+        headers: Record<string, string | string[] | undefined>;
+    }): Promise<string | null> {
         const apiKey = await core.Supplier.get(this._options.apiKey);
         if (!apiKey) {
             return "no API key configured on the client";
@@ -181,10 +177,7 @@ function base64UrlDecode(input: string): Buffer {
 }
 
 /** @internal — exported for testing only */
-export function verifySpeechEngineJwt(
-    value: string,
-    apiKey: string,
-): Record<string, unknown> {
+export function verifySpeechEngineJwt(value: string, apiKey: string): Record<string, unknown> {
     let token = value.trim();
     if (token.toLowerCase().startsWith("bearer ")) {
         token = token.slice(7).trim();
@@ -208,9 +201,7 @@ export function verifySpeechEngineJwt(
     const trimmedKey = apiKey.trim();
     const secret = createHash("sha256").update(trimmedKey, "utf-8").digest();
 
-    const expectedSignature = createHmac("sha256", secret)
-        .update(`${headerB64}.${payloadB64}`)
-        .digest();
+    const expectedSignature = createHmac("sha256", secret).update(`${headerB64}.${payloadB64}`).digest();
 
     const actualSignature = base64UrlDecode(signatureB64);
 

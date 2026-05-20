@@ -1,8 +1,8 @@
-import type { SpeechToTextClient } from "../../api/resources/speechToText/client/Client";
 import WebSocket from "ws";
-import { RealtimeConnection } from "./connection";
+import type { SpeechToTextClient } from "../../api/resources/speechToText/client/Client";
 import * as core from "../../core";
 import * as environments from "../../environments";
+import { RealtimeConnection } from "./connection";
 
 export enum AudioFormat {
     PCM_8000 = "pcm_8000",
@@ -112,7 +112,7 @@ export class ScribeRealtime {
 
         // Convert HTTP(S) to WS(S)
         const wsUrl = baseUrl.replace(/^https?:\/\//i, (match: string) =>
-            match.toLowerCase() === "https://" ? "wss://" : "ws://"
+            match.toLowerCase() === "https://" ? "wss://" : "ws://",
         );
 
         return `${wsUrl}/v1/speech-to-text/realtime`;
@@ -126,8 +126,8 @@ export class ScribeRealtime {
         } catch {
             throw new Error(
                 "ffmpeg is required for URL streaming but was not found. " +
-                "Please install ffmpeg and ensure it is available in your PATH. " +
-                "Visit https://ffmpeg.org/download.html for installation instructions."
+                    "Please install ffmpeg and ensure it is available in your PATH. " +
+                    "Visit https://ffmpeg.org/download.html for installation instructions.",
             );
         }
     }
@@ -277,7 +277,11 @@ export class ScribeRealtime {
         });
     }
 
-    private async streamFromUrl(options: UrlOptions, connection: RealtimeConnection, commitStrategy: CommitStrategy): Promise<void> {
+    private async streamFromUrl(
+        options: UrlOptions,
+        connection: RealtimeConnection,
+        commitStrategy: CommitStrategy,
+    ): Promise<void> {
         // Check if ffmpeg is installed before attempting to use it
         await this.checkFfmpegInstalled();
 
@@ -286,12 +290,17 @@ export class ScribeRealtime {
 
         // Spawn ffmpeg to convert the stream to 16kHz mono PCM
         const ffmpegProcess = spawn("ffmpeg", [
-            "-i", options.url,
-            "-f", "s16le",           // 16-bit PCM, little-endian
-            "-acodec", "pcm_s16le",  // PCM codec
-            "-ar", "16000",          // 16kHz sample rate
-            "-ac", "1",              // mono (1 channel)
-            "pipe:1"                 // output to stdout
+            "-i",
+            options.url,
+            "-f",
+            "s16le", // 16-bit PCM, little-endian
+            "-acodec",
+            "pcm_s16le", // PCM codec
+            "-ar",
+            "16000", // 16kHz sample rate
+            "-ac",
+            "1", // mono (1 channel)
+            "pipe:1", // output to stdout
         ]);
 
         connection.setFfmpegProcess(ffmpegProcess);
@@ -330,4 +339,3 @@ export class ScribeRealtime {
         });
     }
 }
-

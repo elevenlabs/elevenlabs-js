@@ -1,4 +1,4 @@
-import { ClientToolResultEvent, ClientToOrchestratorEvent } from "./events";
+import { ClientToOrchestratorEvent, type ClientToolResultEvent } from "./events";
 
 /**
  * Handles registration and execution of client-side tools that can be called by the agent.
