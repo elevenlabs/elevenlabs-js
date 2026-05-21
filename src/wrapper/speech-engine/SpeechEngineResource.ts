@@ -28,51 +28,32 @@ import { SpeechEngineAttachment } from "./SpeechEngineAttachment";
  * ```
  */
 export class SpeechEngineResource {
-    readonly engineId: string;
+    readonly id: string;
 
     /**
-     * Response fields from the API. These are populated when the resource is
+     * Full configuration returned by the API. Populated when the resource is
      * returned from `create()`, `get()`, or `update()`.
      *
-     * When using the `attach()` shortcut directly, no API call is made so
-     * these fields will be `undefined`.
+     * `undefined` when using the `attach()` shortcut directly, since no API
+     * call is made in that case.
      */
-    readonly name: string | undefined;
-    readonly speechEngine: ElevenLabs.SpeechEngineConfig | undefined;
-    readonly asr: ElevenLabs.AsrConversationalConfig | undefined;
-    readonly tts: ElevenLabs.TtsConversationalConfigOutput | undefined;
-    readonly turn: ElevenLabs.BaseTurnConfig | undefined;
-    readonly conversation: ElevenLabs.ConversationConfigOutput | undefined;
-    readonly privacy: ElevenLabs.PrivacyConfigOutput | undefined;
-    readonly callLimits: ElevenLabs.AgentCallLimits | undefined;
-    readonly language: string | undefined;
-    readonly tags: string[] | undefined;
-    readonly overrides: ElevenLabs.SpeechEngineConversationInitiationClientDataConfig | undefined;
-    readonly metadata: ElevenLabs.AgentMetadataDbModel | undefined;
+    readonly config: Omit<ElevenLabs.SpeechEngineResponse, "speechEngineId"> | undefined;
 
     /** @internal */
     readonly _options: NormalizedClientOptions<BaseClientOptions>;
 
     /** @internal */
     constructor(
-        engineId: string,
+        id: string,
         options: NormalizedClientOptions<BaseClientOptions>,
         response?: ElevenLabs.SpeechEngineResponse,
     ) {
-        this.engineId = engineId;
+        this.id = id;
         this._options = options;
-        this.name = response?.name;
-        this.speechEngine = response?.speechEngine;
-        this.asr = response?.asr;
-        this.tts = response?.tts;
-        this.turn = response?.turn;
-        this.conversation = response?.conversation;
-        this.privacy = response?.privacy;
-        this.callLimits = response?.callLimits;
-        this.language = response?.language;
-        this.tags = response?.tags;
-        this.overrides = response?.overrides;
-        this.metadata = response?.metadata;
+        if (response) {
+            const { speechEngineId: _id, ...config } = response;
+            this.config = config;
+        }
     }
 
     /**
