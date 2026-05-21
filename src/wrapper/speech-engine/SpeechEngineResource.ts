@@ -28,7 +28,7 @@ import { SpeechEngineAttachment } from "./SpeechEngineAttachment";
  * ```
  */
 export class SpeechEngineResource {
-    readonly id: string;
+    readonly engineId: string;
 
     /**
      * Full configuration returned by the API. Populated when the resource is
@@ -44,11 +44,11 @@ export class SpeechEngineResource {
 
     /** @internal */
     constructor(
-        id: string,
+        engineId: string,
         options: NormalizedClientOptions<BaseClientOptions>,
         response?: ElevenLabs.SpeechEngineResponse,
     ) {
-        this.id = id;
+        this.engineId = engineId;
         this._options = options;
         if (response) {
             const { speechEngineId: _id, ...config } = response;
