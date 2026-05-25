@@ -55,7 +55,7 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
         requestOptions?: SpeechEngineClient.RequestOptions,
     ): Promise<SpeechEngineResource> {
         const response = await super.create(request, requestOptions);
-        return new SpeechEngineResource(response.speechEngineId, this._options);
+        return new SpeechEngineResource(response.speechEngineId, this._options, response);
     }
 
     /**
@@ -80,8 +80,8 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
         speechEngineId: string,
         requestOptions?: SpeechEngineClient.RequestOptions,
     ): Promise<SpeechEngineResource> {
-        await super.get(speechEngineId, requestOptions);
-        return new SpeechEngineResource(speechEngineId, this._options);
+        const response = await super.get(speechEngineId, requestOptions);
+        return new SpeechEngineResource(speechEngineId, this._options, response);
     }
 
     /**
@@ -107,8 +107,8 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
         request: UpdateSpeechEngineRequest = {},
         requestOptions?: SpeechEngineClient.RequestOptions,
     ): Promise<SpeechEngineResource> {
-        await super.update(speechEngineId, request, requestOptions);
-        return new SpeechEngineResource(speechEngineId, this._options);
+        const response = await super.update(speechEngineId, request, requestOptions);
+        return new SpeechEngineResource(speechEngineId, this._options, response);
     }
 
     /**
