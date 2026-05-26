@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const TelephonyProvider: core.serialization.Schema<
     serializers.TelephonyProvider.Raw,
     ElevenLabs.TelephonyProvider
-> = core.serialization.enum_(["twilio", "sip_trunk"]);
+> = core.serialization.enum_(["twilio", "sip_trunk", "exotel"]);
 
 export declare namespace TelephonyProvider {
-    export type Raw = "twilio" | "sip_trunk";
+    export type Raw = "twilio" | "sip_trunk" | "exotel";
 }

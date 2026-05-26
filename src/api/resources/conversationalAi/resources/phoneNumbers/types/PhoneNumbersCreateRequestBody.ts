@@ -7,11 +7,16 @@ import type * as ElevenLabs from "../../../../../index";
  */
 export type PhoneNumbersCreateRequestBody =
     | ElevenLabs.conversationalAi.PhoneNumbersCreateRequestBody.Twilio
+    | ElevenLabs.conversationalAi.PhoneNumbersCreateRequestBody.Exotel
     | ElevenLabs.conversationalAi.PhoneNumbersCreateRequestBody.SipTrunk;
 
 export namespace PhoneNumbersCreateRequestBody {
     export interface Twilio extends ElevenLabs.CreateTwilioPhoneNumberRequest {
         provider: "twilio";
+    }
+
+    export interface Exotel extends ElevenLabs.CreateExotelPhoneNumberRequest {
+        provider: "exotel";
     }
 
     export interface SipTrunk extends ElevenLabs.CreateSipTrunkPhoneNumberRequest {

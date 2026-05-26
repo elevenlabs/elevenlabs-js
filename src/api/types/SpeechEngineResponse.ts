@@ -25,6 +25,10 @@ export interface SpeechEngineResponse {
     language: string;
     /** Arbitrary tags for categorization and filtering */
     tags: string[];
+    /** Override settings the client may set during conversation initiation */
+    overrides: ElevenLabs.SpeechEngineConversationInitiationClientDataConfig;
     /** Creation and update timestamps with source information */
     metadata: ElevenLabs.AgentMetadataDbModel;
+    /** The access information of the speech engine for the user */
+    accessInfo?: ElevenLabs.ResourceAccessInfo;
 }

@@ -25,6 +25,7 @@ describe("ChaptersClient", () => {
                         characters_converted: 500,
                         paragraphs_converted: 20,
                         paragraphs_unconverted: 10,
+                        credits_needed_to_convert: 1000,
                         voice_statistics: [
                             { voice_id: "voice123", characters_unconverted: 600, characters_converted: 300 },
                             { voice_id: "voice456", characters_unconverted: 400, characters_converted: 200 },
@@ -60,6 +61,7 @@ describe("ChaptersClient", () => {
                         charactersConverted: 500,
                         paragraphsConverted: 20,
                         paragraphsUnconverted: 10,
+                        creditsNeededToConvert: 1000,
                         voiceStatistics: [
                             {
                                 voiceId: "voice123",
@@ -99,6 +101,7 @@ describe("ChaptersClient", () => {
                     characters_converted: 200,
                     paragraphs_converted: 5,
                     paragraphs_unconverted: 3,
+                    credits_needed_to_convert: 1,
                     voice_statistics: [{ voice_id: "voice_id", characters_unconverted: 1, characters_converted: 1 }],
                 },
                 last_conversion_error: "last_conversion_error",
@@ -137,6 +140,7 @@ describe("ChaptersClient", () => {
                     charactersConverted: 200,
                     paragraphsConverted: 5,
                     paragraphsUnconverted: 3,
+                    creditsNeededToConvert: 1,
                     voiceStatistics: [
                         {
                             voiceId: "voice_id",
@@ -183,6 +187,7 @@ describe("ChaptersClient", () => {
                 characters_converted: 200,
                 paragraphs_converted: 5,
                 paragraphs_unconverted: 3,
+                credits_needed_to_convert: 1,
                 voice_statistics: [{ voice_id: "voice_id", characters_unconverted: 1, characters_converted: 1 }],
             },
             last_conversion_error: "last_conversion_error",
@@ -214,6 +219,7 @@ describe("ChaptersClient", () => {
                 charactersConverted: 200,
                 paragraphsConverted: 5,
                 paragraphsUnconverted: 3,
+                creditsNeededToConvert: 1,
                 voiceStatistics: [
                     {
                         voiceId: "voice_id",
@@ -260,6 +266,7 @@ describe("ChaptersClient", () => {
                     characters_converted: 200,
                     paragraphs_converted: 5,
                     paragraphs_unconverted: 3,
+                    credits_needed_to_convert: 1,
                     voice_statistics: [{ voice_id: "voice_id", characters_unconverted: 1, characters_converted: 1 }],
                 },
                 last_conversion_error: "last_conversion_error",
@@ -296,6 +303,7 @@ describe("ChaptersClient", () => {
                     charactersConverted: 200,
                     paragraphsConverted: 5,
                     paragraphsUnconverted: 3,
+                    creditsNeededToConvert: 1,
                     voiceStatistics: [
                         {
                             voiceId: "voice_id",

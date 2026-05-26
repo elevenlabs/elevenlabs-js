@@ -4,6 +4,7 @@ import type { Duplex } from "node:stream";
 import WebSocket from "ws";
 import type { BaseClientOptions, NormalizedClientOptions } from "../../BaseClient";
 import * as core from "../../core";
+import type * as ElevenLabs from "../../api/types";
 import { isAbortError, type SpeechEngineCallbacks } from "./types";
 import { SpeechEngineSession } from "./SpeechEngineSession";
 import { SpeechEngineAttachment } from "./SpeechEngineAttachment";
@@ -28,13 +29,31 @@ import { SpeechEngineAttachment } from "./SpeechEngineAttachment";
  */
 export class SpeechEngineResource {
     readonly engineId: string;
+
+    /**
+     * Full configuration returned by the API. Populated when the resource is
+     * returned from `create()`, `get()`, or `update()`.
+     *
+     * `undefined` when using the `attach()` shortcut directly, since no API
+     * call is made in that case.
+     */
+    readonly config: Omit<ElevenLabs.SpeechEngineResponse, "speechEngineId"> | undefined;
+
     /** @internal */
     readonly _options: NormalizedClientOptions<BaseClientOptions>;
 
     /** @internal */
-    constructor(engineId: string, options: NormalizedClientOptions<BaseClientOptions>) {
+    constructor(
+        engineId: string,
+        options: NormalizedClientOptions<BaseClientOptions>,
+        response?: ElevenLabs.SpeechEngineResponse,
+    ) {
         this.engineId = engineId;
         this._options = options;
+        if (response) {
+            const { speechEngineId: _id, ...config } = response;
+            this.config = config;
+        }
     }
 
     /**

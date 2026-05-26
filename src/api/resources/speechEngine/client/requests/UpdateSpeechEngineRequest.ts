@@ -17,4 +17,5 @@ export interface UpdateSpeechEngineRequest {
     callLimits?: ElevenLabs.AgentCallLimits;
     language?: string;
     tags?: string[];
+    overrides?: ElevenLabs.SpeechEngineConversationInitiationClientDataConfig;
 }

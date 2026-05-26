@@ -14,6 +14,7 @@ export interface BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOve
     startTime: number;
     /** End of the time range as a Unix timestamp in milliseconds. Must be at least 2020-01-01. */
     endTime: number;
+    /** Bucket size in seconds. Each row in the response covers this many seconds of usage. For example, pass 3600 for hourly buckets or 86400 for daily buckets. */
     intervalSeconds?: number;
     groupBy?: ElevenLabs.workspace.BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePostGroupByItem[];
     filters?: ElevenLabs.ColumnFilter[];

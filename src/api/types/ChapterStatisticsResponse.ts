@@ -11,6 +11,8 @@ export interface ChapterStatisticsResponse {
     paragraphsConverted: number;
     /** The number of unconverted paragraphs. */
     paragraphsUnconverted: number;
+    /** The number of credits needed to convert the remaining paragraphs. */
+    creditsNeededToConvert?: number;
     /** Per-voice breakdown of character counts. */
     voiceStatistics?: ElevenLabs.VoiceStatisticsResponseModel[];
 }

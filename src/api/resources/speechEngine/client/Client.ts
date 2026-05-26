@@ -142,14 +142,14 @@ export class SpeechEngineClient {
     public create(
         request: ElevenLabs.CreateSpeechEngineRequest,
         requestOptions?: SpeechEngineClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.CreateSpeechEngineResponse> {
+    ): core.HttpResponsePromise<ElevenLabs.SpeechEngineResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: ElevenLabs.CreateSpeechEngineRequest,
         requestOptions?: SpeechEngineClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.CreateSpeechEngineResponse>> {
+    ): Promise<core.WithRawResponse<ElevenLabs.SpeechEngineResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -176,7 +176,7 @@ export class SpeechEngineClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.CreateSpeechEngineResponse.parseOrThrow(_response.body, {
+                data: serializers.SpeechEngineResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

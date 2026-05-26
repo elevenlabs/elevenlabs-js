@@ -15,6 +15,9 @@ export const PromptAgentApiModelInputToolsItem: core.serialization.Schema<
     .union("type", {
         api_integration_webhook: ApiIntegrationWebhookToolConfigInput,
         client: ClientToolConfigInput,
+        code: core.serialization.object({
+            value: core.serialization.unknown(),
+        }),
         mcp: core.serialization.object({
             value: core.serialization.unknown(),
         }),
@@ -33,6 +36,7 @@ export declare namespace PromptAgentApiModelInputToolsItem {
     export type Raw =
         | PromptAgentApiModelInputToolsItem.ApiIntegrationWebhook
         | PromptAgentApiModelInputToolsItem.Client
+        | PromptAgentApiModelInputToolsItem.Code
         | PromptAgentApiModelInputToolsItem.Mcp
         | PromptAgentApiModelInputToolsItem.Smb
         | PromptAgentApiModelInputToolsItem.System
@@ -44,6 +48,11 @@ export declare namespace PromptAgentApiModelInputToolsItem {
 
     export interface Client extends ClientToolConfigInput.Raw {
         type: "client";
+    }
+
+    export interface Code {
+        type: "code";
+        value?: unknown;
     }
 
     export interface Mcp {

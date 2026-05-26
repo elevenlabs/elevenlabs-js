@@ -16,6 +16,7 @@ export const RunAgentTestsRequestModel: core.serialization.Schema<
         AdhocAgentConfigOverrideForTestRequestModel.optional(),
     ),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
+    repeatCount: core.serialization.property("repeat_count", core.serialization.number().optional()),
 });
 
 export declare namespace RunAgentTestsRequestModel {
@@ -23,5 +24,6 @@ export declare namespace RunAgentTestsRequestModel {
         tests: SingleTestRunRequestModel.Raw[];
         agent_config_override?: AdhocAgentConfigOverrideForTestRequestModel.Raw | null;
         branch_id?: string | null;
+        repeat_count?: number | null;
     }
 }

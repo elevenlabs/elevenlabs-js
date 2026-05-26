@@ -539,6 +539,7 @@ export class ConversationsClient {
      * Get the details of a particular conversation
      *
      * @param {string} conversation_id - The id of the conversation you're taking the action on.
+     * @param {ElevenLabs.conversationalAi.ConversationsGetRequest} request
      * @param {ConversationsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -548,15 +549,25 @@ export class ConversationsClient {
      */
     public get(
         conversation_id: string,
+        request: ElevenLabs.conversationalAi.ConversationsGetRequest = {},
         requestOptions?: ConversationsClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.GetConversationResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__get(conversation_id, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(conversation_id, request, requestOptions));
     }
 
     private async __get(
         conversation_id: string,
+        request: ElevenLabs.conversationalAi.ConversationsGetRequest = {},
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetConversationResponseModel>> {
+        const { format } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (format != null) {
+            _queryParams.format = serializers.conversationalAi.ConversationsGetRequestFormat.jsonOrThrow(format, {
+                unrecognizedObjectKeys: "strip",
+            });
+        }
+
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -571,7 +582,7 @@ export class ConversationsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

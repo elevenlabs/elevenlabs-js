@@ -92,7 +92,7 @@ export class PhoneNumbersClient {
     }
 
     /**
-     * Import Phone Number from provider configuration (Twilio or SIP trunk)
+     * Import Phone Number from provider configuration (Twilio, Exotel, or SIP trunk)
      *
      * @param {ElevenLabs.conversationalAi.PhoneNumbersCreateRequestBody} request
      * @param {PhoneNumbersClient.RequestOptions} requestOptions - Request-specific configuration.

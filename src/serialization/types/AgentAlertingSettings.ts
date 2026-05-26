@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentAlertingMonitorConfig } from "./AgentAlertingMonitorConfig";
+import { AgentAlertingWebhookNotifier } from "./AgentAlertingWebhookNotifier";
 
 export const AgentAlertingSettings: core.serialization.ObjectSchema<
     serializers.AgentAlertingSettings.Raw,
@@ -17,11 +18,13 @@ export const AgentAlertingSettings: core.serialization.ObjectSchema<
         "auto_resolve_after_inactive_minutes",
         core.serialization.number().optional(),
     ),
+    notifiers: core.serialization.list(AgentAlertingWebhookNotifier).optional(),
 });
 
 export declare namespace AgentAlertingSettings {
     export interface Raw {
         monitor_configs?: Record<string, AgentAlertingMonitorConfig.Raw> | null;
         auto_resolve_after_inactive_minutes?: number | null;
+        notifiers?: AgentAlertingWebhookNotifier.Raw[] | null;
     }
 }

@@ -23,4 +23,6 @@ export interface UnitTestSummaryResponseModel {
     folderPath?: ElevenLabs.AgentTestFolderPathSegmentResponseModel[];
     /** Number of direct children (tests and subfolders) for folders only */
     childrenCount?: number;
+    /** Channel the test simulates the conversation as. Null for folders or default behavior. */
+    conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
 }

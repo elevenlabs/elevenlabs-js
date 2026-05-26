@@ -7,4 +7,6 @@ export interface VoiceStatisticsResponseModel {
     charactersUnconverted: number;
     /** The number of converted characters for this voice. */
     charactersConverted: number;
+    /** The number of credits needed to convert the remaining audio for this voice. */
+    creditsNeededToConvert?: number;
 }

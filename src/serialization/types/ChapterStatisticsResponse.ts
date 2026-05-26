@@ -13,6 +13,10 @@ export const ChapterStatisticsResponse: core.serialization.ObjectSchema<
     charactersConverted: core.serialization.property("characters_converted", core.serialization.number()),
     paragraphsConverted: core.serialization.property("paragraphs_converted", core.serialization.number()),
     paragraphsUnconverted: core.serialization.property("paragraphs_unconverted", core.serialization.number()),
+    creditsNeededToConvert: core.serialization.property(
+        "credits_needed_to_convert",
+        core.serialization.number().optional(),
+    ),
     voiceStatistics: core.serialization.property(
         "voice_statistics",
         core.serialization.list(VoiceStatisticsResponseModel).optional(),
@@ -25,6 +29,7 @@ export declare namespace ChapterStatisticsResponse {
         characters_converted: number;
         paragraphs_converted: number;
         paragraphs_unconverted: number;
+        credits_needed_to_convert?: number | null;
         voice_statistics?: VoiceStatisticsResponseModel.Raw[] | null;
     }
 }

@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ResourceAccessInfo } from "./ResourceAccessInfo";
 
 export const SpeechEngineSummaryResponse: core.serialization.ObjectSchema<
     serializers.SpeechEngineSummaryResponse.Raw,
@@ -12,6 +13,7 @@ export const SpeechEngineSummaryResponse: core.serialization.ObjectSchema<
     name: core.serialization.string(),
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
     tags: core.serialization.list(core.serialization.string()),
+    accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
 });
 
 export declare namespace SpeechEngineSummaryResponse {
@@ -20,5 +22,6 @@ export declare namespace SpeechEngineSummaryResponse {
         name: string;
         created_at_unix_secs: number;
         tags: string[];
+        access_info: ResourceAccessInfo.Raw;
     }
 }

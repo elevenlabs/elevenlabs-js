@@ -3,6 +3,8 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { BucketingStatus } from "./BucketingStatus";
+import { TestRunResultSummary } from "./TestRunResultSummary";
 import { UnitTestRunResponseModel } from "./UnitTestRunResponseModel";
 
 export const GetTestSuiteInvocationResponseModel: core.serialization.ObjectSchema<
@@ -14,6 +16,12 @@ export const GetTestSuiteInvocationResponseModel: core.serialization.ObjectSchem
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     createdAt: core.serialization.property("created_at", core.serialization.number().optional()),
     folderId: core.serialization.property("folder_id", core.serialization.string().optional()),
+    repeatCount: core.serialization.property("repeat_count", core.serialization.number().optional()),
+    bucketingStatus: core.serialization.property("bucketing_status", BucketingStatus.optional()),
+    resultGroups: core.serialization.property(
+        "result_groups",
+        core.serialization.list(TestRunResultSummary).optional(),
+    ),
     testRuns: core.serialization.property("test_runs", core.serialization.list(UnitTestRunResponseModel)),
 });
 
@@ -24,6 +32,9 @@ export declare namespace GetTestSuiteInvocationResponseModel {
         branch_id?: string | null;
         created_at?: number | null;
         folder_id?: string | null;
+        repeat_count?: number | null;
+        bucketing_status?: BucketingStatus.Raw | null;
+        result_groups?: TestRunResultSummary.Raw[] | null;
         test_runs: UnitTestRunResponseModel.Raw[];
     }
 }

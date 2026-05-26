@@ -7,4 +7,6 @@ export interface AgentAlertingSettings {
     monitorConfigs?: Record<string, ElevenLabs.AgentAlertingMonitorConfig>;
     /** How many minutes an alert can stay inactive before it is auto-resolved. */
     autoResolveAfterInactiveMinutes?: number;
+    /** Delivery channels for alert lifecycle notifications. Currently supports webhook notifiers. */
+    notifiers?: ElevenLabs.AgentAlertingWebhookNotifier[];
 }

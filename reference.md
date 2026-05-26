@@ -3230,7 +3230,7 @@ await client.audioNative.updateContentFromUrl({
 <dl>
 <dd>
 
-(Deprecated) This endpoint is deprecated. Use /v1/workspace/analytics/query/usage-by-product-over-time instead. Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
+(Deprecated) This endpoint is deprecated. Use /v1/workspace/analytics/query/usage-by-product-over-time instead, which exposes the bucket size as `interval_seconds` (an integer in seconds) rather than `aggregation_interval`. Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
 </dd>
 </dl>
 </dd>
@@ -4487,7 +4487,7 @@ await client.speechEngine.list({
 </dl>
 </details>
 
-<details><summary><code>client.speechEngine.<a href="/src/api/resources/speechEngine/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateSpeechEngineResponse</code></summary>
+<details><summary><code>client.speechEngine.<a href="/src/api/resources/speechEngine/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.SpeechEngineResponse</code></summary>
 <dl>
 <dd>
 
@@ -5253,7 +5253,7 @@ await client.conversationalAi.conversations.list({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">get</a>(conversation_id) -> ElevenLabs.GetConversationResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">get</a>(conversation_id, { ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5297,6 +5297,14 @@ await client.conversationalAi.conversations.get("123");
 <dd>
 
 **conversation_id:** `string` — The id of the conversation you're taking the action on.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.ConversationsGetRequest` 
     
 </dd>
 </dl>
@@ -5577,6 +5585,74 @@ await client.conversationalAi.twilio.registerCall({
 <dd>
 
 **requestOptions:** `TwilioClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Exotel
+<details><summary><code>client.conversationalAi.exotel.<a href="/src/api/resources/conversationalAi/resources/exotel/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.ExotelOutboundCallResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Handle an outbound call via Exotel Connect API
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.exotel.outboundCall({
+    agentId: "agent_id",
+    agentPhoneNumberId: "agent_phone_number_id",
+    toNumber: "to_number"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExotelClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6997,7 +7073,7 @@ await client.conversationalAi.phoneNumbers.list();
 <dl>
 <dd>
 
-Import Phone Number from provider configuration (Twilio or SIP trunk)
+Import Phone Number from provider configuration (Twilio, Exotel, or SIP trunk)
 </dd>
 </dl>
 </dd>
@@ -15745,6 +15821,775 @@ await client.music.compositionPlan.create({
 <dd>
 
 **requestOptions:** `CompositionPlanClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Productions Orders
+<details><summary><code>client.productions.orders.<a href="/src/api/resources/productions/resources/orders/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ListOrdersResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists Productions orders in the workspace. Supports filtering by status and date range, with pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.list({
+    pageSize: 1,
+    offset: 1,
+    status: ["open"],
+    startDate: new Date("2024-01-15T09:30:00.000Z"),
+    endDate: new Date("2024-01-15T09:30:00.000Z")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.productions.OrdersListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OrdersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.productions.orders.<a href="/src/api/resources/productions/resources/orders/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new Productions order in the workspace. The order starts in the open state and can be configured with items before submission.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.create({
+    sandbox: false
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateOrderRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OrdersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.productions.orders.<a href="/src/api/resources/productions/resources/orders/client/Client.ts">get</a>(order_id) -> ElevenLabs.OrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves full details for a Productions order.
+
+Quote and pricing information may not be available immediately; if you wish to see the quote before submission, you may need to poll the order details until it is ready.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.get("order_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**order_id:** `ElevenLabs.OrderId` — The ID of the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OrdersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.productions.orders.<a href="/src/api/resources/productions/resources/orders/client/Client.ts">update</a>(order_id, { ...params }) -> ElevenLabs.UpdateOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates an open order.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.update("order_id", {
+    request: {
+        name: "Spanish Dubs"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**order_id:** `ElevenLabs.OrderId` — The ID of the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.productions.BodyUpdateOrderV1ProductionsOrdersOrderIdPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OrdersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.productions.orders.<a href="/src/api/resources/productions/resources/orders/client/Client.ts">submit</a>(order_id) -> ElevenLabs.SubmitOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Submits an open order for processing. The order must have at least one item. Once submitted, items can no longer be modified.
+
+Upon submission, the workspace will be charged for the order. The quote is based on information extracted from the uploaded media, such as its duration. The quote may not be available immediately; if you wish to see the quote before submission, you may need to poll the order details until the quote is ready.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.submit("order_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**order_id:** `ElevenLabs.OrderId` — The ID of the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OrdersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Productions Orders Media
+<details><summary><code>client.productions.orders.media.<a href="/src/api/resources/productions/resources/orders/resources/media/client/Client.ts">register</a>(order_id, { ...params }) -> ElevenLabs.RegisterMediaResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Registers a media file with an order, either by uploading it directly or by providing a URL to fetch it from. Exactly one of `media` or `media_url` must be provided. The registered media can then be referenced when adding order items.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.media.register("order_id", {
+    declaredLanguage: "declared_language"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**order_id:** `ElevenLabs.OrderId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.productions.orders.BodyRegisterMediaV1ProductionsOrdersOrderIdMediaPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MediaClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.productions.orders.media.<a href="/src/api/resources/productions/resources/orders/resources/media/client/Client.ts">get</a>(order_id, media_id) -> ElevenLabs.OrderMediaResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves metadata and a time-limited download URL for a previously uploaded media file.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.media.get("order_id", "media_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**order_id:** `ElevenLabs.OrderId` — The ID of the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**media_id:** `ElevenLabs.MediaId` — The ID of the media file.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MediaClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Productions Orders Items
+<details><summary><code>client.productions.orders.items.<a href="/src/api/resources/productions/resources/orders/resources/items/client/Client.ts">upsert</a>(order_id, { ...params }) -> ElevenLabs.UpsertOrderItemResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Adds or updates an order item on an open order. Returns the item ID and the quoted price.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.items.upsert("order_id", {
+    request: {
+        item: {
+            kind: "dub",
+            mediaId: "prodmedia_01jgatk6h0fwxrtbjade61yqhx",
+            sourceLanguage: "en",
+            destinationLanguages: ["hi", "fr-FR", "de"],
+            includeCaptions: true,
+            includeSourceCaptions: false,
+            instructions: "Voices don't need to match the originals, prioritize native-sounding voices",
+            captionsSdh: false
+        }
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**order_id:** `ElevenLabs.OrderId` — The ID of the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.productions.orders.BodyUpsertOrderItemV1ProductionsOrdersOrderIdItemsPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.productions.orders.items.<a href="/src/api/resources/productions/resources/orders/resources/items/client/Client.ts">remove</a>(order_id, item_id) -> ElevenLabs.RemoveOrderItemResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes an order item from an open order.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.items.remove("order_id", "item_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**order_id:** `ElevenLabs.OrderId` — The ID of the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**item_id:** `ElevenLabs.ItemId` — The ID of the order item.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Productions Orders Deliverables
+<details><summary><code>client.productions.orders.deliverables.<a href="/src/api/resources/productions/resources/orders/resources/deliverables/client/Client.ts">list</a>(order_id) -> ElevenLabs.OrderDeliverablesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves the delivered files for a completed order. Returns an empty list if the order is not yet completed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.deliverables.list("order_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**order_id:** `ElevenLabs.OrderId` — The ID of the order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DeliverablesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Productions Orders Languages
+<details><summary><code>client.productions.orders.languages.<a href="/src/api/resources/productions/resources/orders/resources/languages/client/Client.ts">list</a>(order_item_kind) -> ElevenLabs.LanguagesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the available languages for a given order item kind.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productions.orders.languages.list("dub");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**order_item_kind:** `ElevenLabs.OrderItemKind` — The kind of order item.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LanguagesClient.RequestOptions` 
     
 </dd>
 </dl>

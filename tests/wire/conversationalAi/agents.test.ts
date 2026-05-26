@@ -76,6 +76,7 @@ describe("AgentsClient", () => {
                 language_presets: {
                     key: {
                         overrides: {
+                            asr: { keywords: ["hello", "world"] },
                             turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
                             tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
@@ -323,35 +324,20 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
-                alerting: { monitor_configs: { key: {} }, auto_resolve_after_inactive_minutes: 1 },
+                alerting: {
+                    monitor_configs: { key: {} },
+                    auto_resolve_after_inactive_minutes: 1,
+                    notifiers: [{ url: "url" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
                 {
-                    provider: "sip_trunk",
-                    phone_number: "+1987654321",
-                    label: "Sales Team",
-                    phone_number_id: "phone_456",
+                    provider: "exotel",
+                    phone_number: "+919999999999",
+                    label: "Exotel Outbound",
+                    phone_number_id: "phnum_X3Pbu5gP6NNKBscdCdwB",
                     assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
-                    provider_config: {
-                        address: "address",
-                        transport: "auto",
-                        media_encryption: "disabled",
-                        has_auth_credentials: true,
-                    },
-                    outbound_trunk: {
-                        address: "address",
-                        transport: "auto",
-                        media_encryption: "disabled",
-                        has_auth_credentials: true,
-                    },
-                    inbound_trunk: {
-                        allowed_addresses: ["allowed_addresses"],
-                        media_encryption: "disabled",
-                        has_auth_credentials: true,
-                    },
-                    livekit_stack: "standard",
-                    store_sip_messages: true,
                 },
             ],
             whatsapp_accounts: [
@@ -1185,6 +1171,9 @@ describe("AgentsClient", () => {
                 languagePresets: {
                     key: {
                         overrides: {
+                            asr: {
+                                keywords: ["hello", "world"],
+                            },
                             turn: {
                                 softTimeoutConfig: {
                                     message: "Hhmmmm...yeah.",
@@ -1514,6 +1503,11 @@ describe("AgentsClient", () => {
                         key: {},
                     },
                     autoResolveAfterInactiveMinutes: 1,
+                    notifiers: [
+                        {
+                            url: "url",
+                        },
+                    ],
                 },
                 safety: {
                     isBlockedIvc: true,
@@ -1523,33 +1517,14 @@ describe("AgentsClient", () => {
             },
             phoneNumbers: [
                 {
-                    provider: "sip_trunk",
-                    phoneNumber: "+1987654321",
-                    label: "Sales Team",
-                    phoneNumberId: "phone_456",
+                    provider: "exotel",
+                    phoneNumber: "+919999999999",
+                    label: "Exotel Outbound",
+                    phoneNumberId: "phnum_X3Pbu5gP6NNKBscdCdwB",
                     assignedAgent: {
                         agentId: "F3Pbu5gP6NNKBscdCdwB",
                         agentName: "My Agent",
                     },
-                    providerConfig: {
-                        address: "address",
-                        transport: "auto",
-                        mediaEncryption: "disabled",
-                        hasAuthCredentials: true,
-                    },
-                    outboundTrunk: {
-                        address: "address",
-                        transport: "auto",
-                        mediaEncryption: "disabled",
-                        hasAuthCredentials: true,
-                    },
-                    inboundTrunk: {
-                        allowedAddresses: ["allowed_addresses"],
-                        mediaEncryption: "disabled",
-                        hasAuthCredentials: true,
-                    },
-                    livekitStack: "standard",
-                    storeSipMessages: true,
                 },
             ],
             whatsappAccounts: [
@@ -2550,6 +2525,7 @@ describe("AgentsClient", () => {
                 language_presets: {
                     key: {
                         overrides: {
+                            asr: { keywords: ["hello", "world"] },
                             turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
                             tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                             agent: {
@@ -2797,35 +2773,20 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
-                alerting: { monitor_configs: { key: {} }, auto_resolve_after_inactive_minutes: 1 },
+                alerting: {
+                    monitor_configs: { key: {} },
+                    auto_resolve_after_inactive_minutes: 1,
+                    notifiers: [{ url: "url" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
                 {
-                    provider: "sip_trunk",
-                    phone_number: "+1987654321",
-                    label: "Sales Team",
-                    phone_number_id: "phone_456",
+                    provider: "exotel",
+                    phone_number: "+919999999999",
+                    label: "Exotel Outbound",
+                    phone_number_id: "phnum_X3Pbu5gP6NNKBscdCdwB",
                     assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
-                    provider_config: {
-                        address: "address",
-                        transport: "auto",
-                        media_encryption: "disabled",
-                        has_auth_credentials: true,
-                    },
-                    outbound_trunk: {
-                        address: "address",
-                        transport: "auto",
-                        media_encryption: "disabled",
-                        has_auth_credentials: true,
-                    },
-                    inbound_trunk: {
-                        allowed_addresses: ["allowed_addresses"],
-                        media_encryption: "disabled",
-                        has_auth_credentials: true,
-                    },
-                    livekit_stack: "standard",
-                    store_sip_messages: true,
                 },
             ],
             whatsapp_accounts: [
@@ -3660,6 +3621,9 @@ describe("AgentsClient", () => {
                 languagePresets: {
                     key: {
                         overrides: {
+                            asr: {
+                                keywords: ["hello", "world"],
+                            },
                             turn: {
                                 softTimeoutConfig: {
                                     message: "Hhmmmm...yeah.",
@@ -3989,6 +3953,11 @@ describe("AgentsClient", () => {
                         key: {},
                     },
                     autoResolveAfterInactiveMinutes: 1,
+                    notifiers: [
+                        {
+                            url: "url",
+                        },
+                    ],
                 },
                 safety: {
                     isBlockedIvc: true,
@@ -3998,33 +3967,14 @@ describe("AgentsClient", () => {
             },
             phoneNumbers: [
                 {
-                    provider: "sip_trunk",
-                    phoneNumber: "+1987654321",
-                    label: "Sales Team",
-                    phoneNumberId: "phone_456",
+                    provider: "exotel",
+                    phoneNumber: "+919999999999",
+                    label: "Exotel Outbound",
+                    phoneNumberId: "phnum_X3Pbu5gP6NNKBscdCdwB",
                     assignedAgent: {
                         agentId: "F3Pbu5gP6NNKBscdCdwB",
                         agentName: "My Agent",
                     },
-                    providerConfig: {
-                        address: "address",
-                        transport: "auto",
-                        mediaEncryption: "disabled",
-                        hasAuthCredentials: true,
-                    },
-                    outboundTrunk: {
-                        address: "address",
-                        transport: "auto",
-                        mediaEncryption: "disabled",
-                        hasAuthCredentials: true,
-                    },
-                    inboundTrunk: {
-                        allowedAddresses: ["allowed_addresses"],
-                        mediaEncryption: "disabled",
-                        hasAuthCredentials: true,
-                    },
-                    livekitStack: "standard",
-                    storeSipMessages: true,
                 },
             ],
             whatsappAccounts: [
@@ -5307,6 +5257,16 @@ describe("AgentsClient", () => {
             branch_id: "branch_id",
             created_at: 1,
             folder_id: "folder_id",
+            repeat_count: 1,
+            bucketing_status: "pending",
+            result_groups: [
+                {
+                    test_id: "test_id",
+                    test_name: "test_name",
+                    workflow_node_id: "workflow_node_id",
+                    buckets: [{ test_run_ids: ["test_run_ids"], title: "title", reason: "reason", status: "pending" }],
+                },
+            ],
             test_runs: [
                 {
                     test_run_id: "test_run_id",
@@ -5354,6 +5314,23 @@ describe("AgentsClient", () => {
             branchId: "branch_id",
             createdAt: 1,
             folderId: "folder_id",
+            repeatCount: 1,
+            bucketingStatus: "pending",
+            resultGroups: [
+                {
+                    testId: "test_id",
+                    testName: "test_name",
+                    workflowNodeId: "workflow_node_id",
+                    buckets: [
+                        {
+                            testRunIds: ["test_run_ids"],
+                            title: "title",
+                            reason: "reason",
+                            status: "pending",
+                        },
+                    ],
+                },
+            ],
             testRuns: [
                 {
                     testRunId: "test_run_id",

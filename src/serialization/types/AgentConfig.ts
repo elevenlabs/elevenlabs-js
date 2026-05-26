@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { BehaviorOverride } from "./BehaviorOverride";
 import { DynamicVariablesConfigOutput } from "./DynamicVariablesConfigOutput";
 import { PromptAgentApiModelOutput } from "./PromptAgentApiModelOutput";
 
@@ -20,6 +21,10 @@ export const AgentConfig: core.serialization.ObjectSchema<serializers.AgentConfi
             "max_conversation_duration_message",
             core.serialization.string().optional(),
         ),
+        textBehaviorOverrides: core.serialization.property(
+            "text_behavior_overrides",
+            core.serialization.record(core.serialization.string(), BehaviorOverride.optional()).optional(),
+        ),
         prompt: PromptAgentApiModelOutput.optional(),
     });
 
@@ -31,6 +36,7 @@ export declare namespace AgentConfig {
         dynamic_variables?: DynamicVariablesConfigOutput.Raw | null;
         disable_first_message_interruptions?: boolean | null;
         max_conversation_duration_message?: string | null;
+        text_behavior_overrides?: Record<string, BehaviorOverride.Raw | null | undefined> | null;
         prompt?: PromptAgentApiModelOutput.Raw | null;
     }
 }

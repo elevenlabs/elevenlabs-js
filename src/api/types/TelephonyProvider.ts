@@ -3,5 +3,6 @@
 export const TelephonyProvider = {
     Twilio: "twilio",
     SipTrunk: "sip_trunk",
+    Exotel: "exotel",
 } as const;
 export type TelephonyProvider = (typeof TelephonyProvider)[keyof typeof TelephonyProvider];

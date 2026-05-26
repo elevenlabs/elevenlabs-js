@@ -48,14 +48,13 @@ describe("AnalysisClient", () => {
                     free_llm_dollars_consumed: 1.1,
                 },
                 phone_call: {
-                    type: "sip_trunking",
+                    type: "exotel",
                     direction: "inbound",
                     phone_number_id: "phone_number_id",
                     agent_number: "agent_number",
                     external_number: "external_number",
-                    call_id: "call_id",
+                    stream_sid: "stream_sid",
                     call_sid: "call_sid",
-                    sip_header_dynamic_variables: { key: "value" },
                 },
                 batch_call: { batch_call_id: "batch_call_id", batch_call_recipient_id: "batch_call_recipient_id" },
                 termination_reason: "termination_reason",
@@ -126,6 +125,7 @@ describe("AnalysisClient", () => {
             visited_agents: [{ agent_id: "agent_id", branch_id: "branch_id" }],
             conversation_initiation_client_data: {
                 conversation_config_override: {
+                    asr: { keywords: ["hello", "world"] },
                     turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
                     tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
                     agent: {
@@ -201,6 +201,7 @@ describe("AnalysisClient", () => {
                 },
             ],
             tag_ids: ["tag_ids"],
+            otlp_traces: { key: "value" },
         };
         server
             .mockEndpoint()
@@ -251,16 +252,13 @@ describe("AnalysisClient", () => {
                     freeLlmDollarsConsumed: 1.1,
                 },
                 phoneCall: {
-                    type: "sip_trunking",
+                    type: "exotel",
                     direction: "inbound",
                     phoneNumberId: "phone_number_id",
                     agentNumber: "agent_number",
                     externalNumber: "external_number",
-                    callId: "call_id",
+                    streamSid: "stream_sid",
                     callSid: "call_sid",
-                    sipHeaderDynamicVariables: {
-                        key: "value",
-                    },
                 },
                 batchCall: {
                     batchCallId: "batch_call_id",
@@ -376,6 +374,9 @@ describe("AnalysisClient", () => {
             ],
             conversationInitiationClientData: {
                 conversationConfigOverride: {
+                    asr: {
+                        keywords: ["hello", "world"],
+                    },
                     turn: {
                         softTimeoutConfig: {
                             message: "Hhmmmm...yeah.",
@@ -491,6 +492,9 @@ describe("AnalysisClient", () => {
                 },
             ],
             tagIds: ["tag_ids"],
+            otlpTraces: {
+                key: "value",
+            },
         });
     });
 });

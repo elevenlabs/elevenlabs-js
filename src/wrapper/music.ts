@@ -45,6 +45,18 @@ export class Music {
     }
 
     /**
+     * Generate background music from one or more video files.
+     * @throws {@link ElevenLabs.ForbiddenError}
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     */
+    public videoToMusic(
+        request: ElevenLabs.BodyVideoToMusicV1MusicVideoToMusicPost,
+        requestOptions?: Music.RequestOptions,
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
+        return this._client.videoToMusic(request, requestOptions);
+    }
+
+    /**
      * Compose a song from a prompt or a composition plan.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
@@ -183,6 +195,17 @@ export class Music {
         // This method exists for type compatibility only
         // The actual implementation is delegated through stream()
         throw new Error("Internal method - should not be called directly");
+    }
+
+    /**
+     * Upload a music file for inpainting.
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     */
+    public upload(
+        request: ElevenLabs.BodyUploadMusicV1MusicUploadPost,
+        requestOptions?: Music.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.MusicUploadResponse> {
+        return this._client.upload(request, requestOptions);
     }
 
     /**

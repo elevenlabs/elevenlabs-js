@@ -9,6 +9,7 @@ import { ForcedAlignmentClient } from "./api/resources/forcedAlignment/client/Cl
 import { HistoryClient } from "./api/resources/history/client/Client";
 import { ModelsClient } from "./api/resources/models/client/Client";
 import { MusicClient } from "./api/resources/music/client/Client";
+import { ProductionsClient } from "./api/resources/productions/client/Client";
 import { PronunciationDictionariesClient } from "./api/resources/pronunciationDictionaries/client/Client";
 import { SamplesClient } from "./api/resources/samples/client/Client";
 import { ServiceAccountsClient } from "./api/resources/serviceAccounts/client/Client";
@@ -66,6 +67,7 @@ export class ElevenLabsClient {
     protected _conversationalAi: ConversationalAiClient | undefined;
     protected _speechEngine: SpeechEngineClient | undefined;
     protected _environmentVariables: EnvironmentVariablesClient | undefined;
+    protected _productions: ProductionsClient | undefined;
     protected _tokens: TokensClient | undefined;
     protected _workspace: WorkspaceClient | undefined;
 
@@ -167,6 +169,10 @@ export class ElevenLabsClient {
 
     public get environmentVariables(): EnvironmentVariablesClient {
         return (this._environmentVariables ??= new EnvironmentVariablesClient(this._options));
+    }
+
+    public get productions(): ProductionsClient {
+        return (this._productions ??= new ProductionsClient(this._options));
     }
 
     public get tokens(): TokensClient {
