@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentTestEntityType } from "./AgentTestEntityType";
 import { AgentTestFolderPathSegmentResponseModel } from "./AgentTestFolderPathSegmentResponseModel";
+import { ConversationInitiationSource } from "./ConversationInitiationSource";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
 import { TestType } from "./TestType";
 
@@ -25,6 +26,10 @@ export const UnitTestSummaryResponseModel: core.serialization.ObjectSchema<
         core.serialization.list(AgentTestFolderPathSegmentResponseModel).optional(),
     ),
     childrenCount: core.serialization.property("children_count", core.serialization.number().optional()),
+    conversationInitiationSource: core.serialization.property(
+        "conversation_initiation_source",
+        ConversationInitiationSource.optional(),
+    ),
 });
 
 export declare namespace UnitTestSummaryResponseModel {
@@ -39,5 +44,6 @@ export declare namespace UnitTestSummaryResponseModel {
         folder_parent_id?: string | null;
         folder_path?: AgentTestFolderPathSegmentResponseModel.Raw[] | null;
         children_count?: number | null;
+        conversation_initiation_source?: ConversationInitiationSource.Raw | null;
     }
 }

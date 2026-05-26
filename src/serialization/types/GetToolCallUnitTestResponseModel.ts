@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
+import { ConversationInitiationSource } from "./ConversationInitiationSource";
 import { DynamicVariableValueTypeOutput } from "./DynamicVariableValueTypeOutput";
 import { TestFromConversationMetadataOutput } from "./TestFromConversationMetadataOutput";
 import { UnitTestToolCallEvaluationModelOutput } from "./UnitTestToolCallEvaluationModelOutput";
@@ -24,6 +25,10 @@ export const GetToolCallUnitTestResponseModel: core.serialization.ObjectSchema<
         "chat_history",
         core.serialization.list(ConversationHistoryTranscriptCommonModelOutput).optional(),
     ),
+    conversationInitiationSource: core.serialization.property(
+        "conversation_initiation_source",
+        ConversationInitiationSource.optional(),
+    ),
     toolCallParameters: core.serialization.property(
         "tool_call_parameters",
         UnitTestToolCallEvaluationModelOutput.optional(),
@@ -38,6 +43,7 @@ export declare namespace GetToolCallUnitTestResponseModel {
         from_conversation_metadata?: TestFromConversationMetadataOutput.Raw | null;
         dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
+        conversation_initiation_source?: ConversationInitiationSource.Raw | null;
         tool_call_parameters?: UnitTestToolCallEvaluationModelOutput.Raw | null;
         check_any_tool_matches?: boolean | null;
         id: string;

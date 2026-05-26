@@ -14,6 +14,7 @@ export const OrderResponse: core.serialization.ObjectSchema<serializers.OrderRes
         state: OrderState,
         items: core.serialization.list(OrderItemInfo),
         totalAmountUsd: core.serialization.property("total_amount_usd", core.serialization.number().optional()),
+        sandbox: core.serialization.boolean().optional(),
         createdAt: core.serialization.property("created_at", core.serialization.date()),
         submittedAt: core.serialization.property("submitted_at", core.serialization.date().optional()),
         paidAt: core.serialization.property("paid_at", core.serialization.date().optional()),
@@ -28,6 +29,7 @@ export declare namespace OrderResponse {
         state: OrderState.Raw;
         items: OrderItemInfo.Raw[];
         total_amount_usd?: number | null;
+        sandbox?: boolean | null;
         created_at: string;
         submitted_at?: string | null;
         paid_at?: string | null;

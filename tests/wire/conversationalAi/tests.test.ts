@@ -102,6 +102,7 @@ describe("TestsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                 },
             ],
+            conversation_initiation_source: "unknown",
             success_condition: "success_condition",
             success_examples: [{ response: "response", type: "success" }],
             failure_examples: [{ response: "response", type: "failure" }],
@@ -190,6 +191,7 @@ describe("TestsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                 },
             ],
+            conversationInitiationSource: "unknown",
             successCondition: "success_condition",
             successExamples: [
                 {
@@ -261,6 +263,7 @@ describe("TestsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                 },
             ],
+            conversation_initiation_source: "unknown",
             success_condition: "success_condition",
             success_examples: [{ response: "response", type: "success" }],
             failure_examples: [{ response: "response", type: "failure" }],
@@ -353,6 +356,7 @@ describe("TestsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                 },
             ],
+            conversationInitiationSource: "unknown",
             successCondition: "success_condition",
             successExamples: [
                 {
@@ -412,6 +416,7 @@ describe("TestsClient", () => {
                     folder_parent_id: "folder_parent_id",
                     folder_path: [{ id: "id" }],
                     children_count: 1,
+                    conversation_initiation_source: "unknown",
                 },
             },
         };
@@ -449,6 +454,7 @@ describe("TestsClient", () => {
                         },
                     ],
                     childrenCount: 1,
+                    conversationInitiationSource: "unknown",
                 },
             },
         });
@@ -476,6 +482,7 @@ describe("TestsClient", () => {
                     folder_parent_id: "folder_parent_id",
                     folder_path: [{ id: "id" }],
                     children_count: 1,
+                    conversation_initiation_source: "unknown",
                 },
             ],
             next_cursor: "next_cursor",
@@ -521,6 +528,7 @@ describe("TestsClient", () => {
                         },
                     ],
                     childrenCount: 1,
+                    conversationInitiationSource: "unknown",
                 },
             ],
             nextCursor: "next_cursor",

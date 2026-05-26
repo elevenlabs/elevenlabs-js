@@ -17,4 +17,6 @@ export interface RunAgentTestsRequestModel {
     agentConfigOverride?: ElevenLabs.AdhocAgentConfigOverrideForTestRequestModel;
     /** ID of the branch to run the tests on. If not provided, the tests will be run on the agent default configuration. */
     branchId?: string;
+    /** Number of times to run each test. When greater than 1, results are grouped and summarized. */
+    repeatCount?: number;
 }

@@ -13,6 +13,8 @@ export interface OrderResponse {
     items: ElevenLabs.OrderItemInfo[];
     /** The total price for all items in USD. Excluded from response until quotes are available. */
     totalAmountUsd?: number;
+    /** Whether this is a sandbox order that auto-progresses without producer intervention. */
+    sandbox?: boolean;
     /** The timestamp when the order was created. */
     createdAt: Date;
     /** The timestamp when the order was submitted, if applicable. */

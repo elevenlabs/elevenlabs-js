@@ -8,6 +8,8 @@ export interface ToolCallUnitTestModel {
     /** Dynamic variables to replace in the agent config during testing */
     dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeOutput | undefined>;
     chatHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
+    /** Simulate the test as if the conversation originated from this channel. */
+    conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
     /** How to evaluate the agent's tool call (if any). If empty, the tool call is not evaluated. */
     toolCallParameters?: ElevenLabs.UnitTestToolCallEvaluationModelOutput;
     /** If set to True this test will pass if any tool call returned by the LLM matches the criteria. Otherwise it will fail if more than one tool is returned by the agent. */

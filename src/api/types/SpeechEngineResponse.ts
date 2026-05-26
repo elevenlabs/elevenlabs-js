@@ -29,4 +29,6 @@ export interface SpeechEngineResponse {
     overrides: ElevenLabs.SpeechEngineConversationInitiationClientDataConfig;
     /** Creation and update timestamps with source information */
     metadata: ElevenLabs.AgentMetadataDbModel;
+    /** The access information of the speech engine for the user */
+    accessInfo?: ElevenLabs.ResourceAccessInfo;
 }

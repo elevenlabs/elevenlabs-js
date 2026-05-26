@@ -12,6 +12,7 @@ export const ConversationInitiationSource = {
     Widget: "widget",
     SipTrunk: "sip_trunk",
     Twilio: "twilio",
+    Exotel: "exotel",
     Genesys: "genesys",
     SwiftSdk: "swift_sdk",
     Whatsapp: "whatsapp",
@@ -19,6 +20,9 @@ export const ConversationInitiationSource = {
     FlutterSdk: "flutter_sdk",
     ZendeskIntegration: "zendesk_integration",
     SlackIntegration: "slack_integration",
+    TelegramIntegration: "telegram_integration",
+    IntercomIntegration: "intercom_integration",
+    FreshdeskIntegration: "freshdesk_integration",
     TemplatePreview: "template_preview",
     GenesysBotConnector: "genesys_bot_connector",
 } as const;

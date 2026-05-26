@@ -3,10 +3,15 @@
 import type * as ElevenLabs from "../index";
 
 export type GetAgentResponseModelPhoneNumbersItem =
+    | ElevenLabs.GetAgentResponseModelPhoneNumbersItem.Exotel
     | ElevenLabs.GetAgentResponseModelPhoneNumbersItem.SipTrunk
     | ElevenLabs.GetAgentResponseModelPhoneNumbersItem.Twilio;
 
 export namespace GetAgentResponseModelPhoneNumbersItem {
+    export interface Exotel extends ElevenLabs.GetPhoneNumberExotelResponseModel {
+        provider: "exotel";
+    }
+
     export interface SipTrunk extends ElevenLabs.GetPhoneNumberSipTrunkResponseModel {
         provider: "sip_trunk";
     }

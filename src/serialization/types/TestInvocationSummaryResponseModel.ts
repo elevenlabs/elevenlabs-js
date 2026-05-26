@@ -19,6 +19,7 @@ export const TestInvocationSummaryResponseModel: core.serialization.ObjectSchema
     pendingCount: core.serialization.property("pending_count", core.serialization.number()),
     title: core.serialization.string(),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
+    repeatCount: core.serialization.property("repeat_count", core.serialization.number().optional()),
 });
 
 export declare namespace TestInvocationSummaryResponseModel {
@@ -33,5 +34,6 @@ export declare namespace TestInvocationSummaryResponseModel {
         pending_count: number;
         title: string;
         access_info?: ResourceAccessInfo.Raw | null;
+        repeat_count?: number | null;
     }
 }

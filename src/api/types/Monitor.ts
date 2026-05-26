@@ -3,5 +3,6 @@
 export const Monitor = {
     ElevatedConversationFailureRate: "elevated_conversation_failure_rate",
     ElevatedToolFailureRate: "elevated_tool_failure_rate",
+    WebhookErrorSpike: "webhook_error_spike",
 } as const;
 export type Monitor = (typeof Monitor)[keyof typeof Monitor];

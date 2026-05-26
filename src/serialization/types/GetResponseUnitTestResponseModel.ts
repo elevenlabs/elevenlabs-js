@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { AgentFailureResponseExample } from "./AgentFailureResponseExample";
 import { AgentSuccessfulResponseExample } from "./AgentSuccessfulResponseExample";
 import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
+import { ConversationInitiationSource } from "./ConversationInitiationSource";
 import { DynamicVariableValueTypeOutput } from "./DynamicVariableValueTypeOutput";
 import { TestFromConversationMetadataOutput } from "./TestFromConversationMetadataOutput";
 
@@ -25,6 +26,10 @@ export const GetResponseUnitTestResponseModel: core.serialization.ObjectSchema<
         "chat_history",
         core.serialization.list(ConversationHistoryTranscriptCommonModelOutput).optional(),
     ),
+    conversationInitiationSource: core.serialization.property(
+        "conversation_initiation_source",
+        ConversationInitiationSource.optional(),
+    ),
     successCondition: core.serialization.property("success_condition", core.serialization.string().optional()),
     successExamples: core.serialization.property(
         "success_examples",
@@ -43,6 +48,7 @@ export declare namespace GetResponseUnitTestResponseModel {
         from_conversation_metadata?: TestFromConversationMetadataOutput.Raw | null;
         dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
+        conversation_initiation_source?: ConversationInitiationSource.Raw | null;
         success_condition?: string | null;
         success_examples?: AgentSuccessfulResponseExample.Raw[] | null;
         failure_examples?: AgentFailureResponseExample.Raw[] | null;

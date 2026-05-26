@@ -15,6 +15,7 @@ describe("OrdersClient", () => {
                     name: "Spanish Dubs",
                     state: "submitted",
                     total_amount_usd: 11,
+                    sandbox: true,
                     submitted_at: "2025-03-15T10:30:00Z",
                     updated_at: "2025-03-15T10:30:00Z",
                 },
@@ -42,6 +43,7 @@ describe("OrdersClient", () => {
                     name: "Spanish Dubs",
                     state: "submitted",
                     totalAmountUsd: 11,
+                    sandbox: true,
                     submittedAt: new Date("2025-03-15T10:30:00.000Z"),
                     updatedAt: new Date("2025-03-15T10:30:00.000Z"),
                 },
@@ -52,19 +54,23 @@ describe("OrdersClient", () => {
     test("create", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { order_id: "prodorder_01jgatk6h0fwxrtbjade61yqhx" };
+        const rawRequestBody = { sandbox: false };
+        const rawResponseBody = { order_id: "prodorder_01jgatk6h0fwxrtbjade61yqhx", sandbox: false };
         server
             .mockEndpoint()
             .post("/v1/productions/orders")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.productions.orders.create();
+        const response = await client.productions.orders.create({
+            sandbox: false,
+        });
         expect(response).toEqual({
             orderId: "prodorder_01jgatk6h0fwxrtbjade61yqhx",
+            sandbox: false,
         });
     });
 
@@ -93,6 +99,7 @@ describe("OrdersClient", () => {
                 },
             ],
             total_amount_usd: 11,
+            sandbox: false,
             created_at: "2025-03-15T10:00:00Z",
             submitted_at: "2024-01-15T09:30:00Z",
             paid_at: "2024-01-15T09:30:00Z",
@@ -131,6 +138,7 @@ describe("OrdersClient", () => {
                 },
             ],
             totalAmountUsd: 11,
+            sandbox: false,
             createdAt: new Date("2025-03-15T10:00:00.000Z"),
             submittedAt: new Date("2024-01-15T09:30:00.000Z"),
             paidAt: new Date("2024-01-15T09:30:00.000Z"),

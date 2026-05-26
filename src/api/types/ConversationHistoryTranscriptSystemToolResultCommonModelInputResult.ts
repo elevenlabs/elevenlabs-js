@@ -13,6 +13,7 @@ export type ConversationHistoryTranscriptSystemToolResultCommonModelInputResult 
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberError
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberExotelSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberSipSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberTwilioSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.VoicemailDetectionSuccess;
@@ -56,6 +57,10 @@ export namespace ConversationHistoryTranscriptSystemToolResultCommonModelInputRe
 
     export interface TransferToNumberError extends ElevenLabs.TransferToNumberResultErrorModel {
         resultType: "transfer_to_number_error";
+    }
+
+    export interface TransferToNumberExotelSuccess extends ElevenLabs.TransferToNumberResultExotelSuccessModel {
+        resultType: "transfer_to_number_exotel_success";
     }
 
     export interface TransferToNumberSipSuccess extends ElevenLabs.TransferToNumberResultSipSuccessModel {

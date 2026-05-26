@@ -3,10 +3,15 @@
 import type * as ElevenLabs from "../index";
 
 export type ConversationHistoryMetadataCommonModelPhoneCall =
+    | ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall.Exotel
     | ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall.SipTrunking
     | ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall.Twilio;
 
 export namespace ConversationHistoryMetadataCommonModelPhoneCall {
+    export interface Exotel extends ElevenLabs.ConversationHistoryExotelPhoneCallModel {
+        type: "exotel";
+    }
+
     export interface SipTrunking extends ElevenLabs.ConversationHistorySipTrunkingPhoneCallModel {
         type: "sip_trunking";
     }

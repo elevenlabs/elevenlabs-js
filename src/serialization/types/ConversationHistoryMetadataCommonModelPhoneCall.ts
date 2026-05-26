@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ConversationHistoryExotelPhoneCallModel } from "./ConversationHistoryExotelPhoneCallModel";
 import { ConversationHistorySipTrunkingPhoneCallModel } from "./ConversationHistorySipTrunkingPhoneCallModel";
 import { ConversationHistoryTwilioPhoneCallModel } from "./ConversationHistoryTwilioPhoneCallModel";
 
@@ -11,6 +12,7 @@ export const ConversationHistoryMetadataCommonModelPhoneCall: core.serialization
     ElevenLabs.ConversationHistoryMetadataCommonModelPhoneCall
 > = core.serialization
     .union("type", {
+        exotel: ConversationHistoryExotelPhoneCallModel,
         sip_trunking: ConversationHistorySipTrunkingPhoneCallModel,
         twilio: ConversationHistoryTwilioPhoneCallModel,
     })
@@ -21,8 +23,13 @@ export const ConversationHistoryMetadataCommonModelPhoneCall: core.serialization
 
 export declare namespace ConversationHistoryMetadataCommonModelPhoneCall {
     export type Raw =
+        | ConversationHistoryMetadataCommonModelPhoneCall.Exotel
         | ConversationHistoryMetadataCommonModelPhoneCall.SipTrunking
         | ConversationHistoryMetadataCommonModelPhoneCall.Twilio;
+
+    export interface Exotel extends ConversationHistoryExotelPhoneCallModel.Raw {
+        type: "exotel";
+    }
 
     export interface SipTrunking extends ConversationHistorySipTrunkingPhoneCallModel.Raw {
         type: "sip_trunking";

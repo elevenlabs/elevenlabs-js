@@ -7,6 +7,8 @@ export * as conversations from "./conversations";
 export * from "./conversations/client/requests";
 export * from "./conversations/types";
 export * as dashboard from "./dashboard";
+export * as exotel from "./exotel";
+export * from "./exotel/client/requests";
 export * as knowledgeBase from "./knowledgeBase";
 export * from "./knowledgeBase/client/requests";
 export * from "./knowledgeBase/types";

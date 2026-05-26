@@ -10,7 +10,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface UpdateAgentRequest {
-    /** Enable versioning for the agent, if not already enabled */
+    /** Deprecated: all agents are versioned. This parameter is ignored. */
     enableVersioningIfNotEnabled?: boolean;
     /** The ID of the branch to use */
     branchId?: string;

@@ -10,10 +10,12 @@ export const CreateOrderResponse: core.serialization.ObjectSchema<
     ElevenLabs.CreateOrderResponse
 > = core.serialization.object({
     orderId: core.serialization.property("order_id", OrderId),
+    sandbox: core.serialization.boolean().optional(),
 });
 
 export declare namespace CreateOrderResponse {
     export interface Raw {
         order_id: OrderId.Raw;
+        sandbox?: boolean | null;
     }
 }

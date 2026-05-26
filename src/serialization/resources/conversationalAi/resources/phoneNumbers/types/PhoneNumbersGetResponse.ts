@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../../../../../api/index";
 import * as core from "../../../../../../core";
 import type * as serializers from "../../../../../index";
+import { GetPhoneNumberExotelResponseModel } from "../../../../../types/GetPhoneNumberExotelResponseModel";
 import { GetPhoneNumberSipTrunkResponseModel } from "../../../../../types/GetPhoneNumberSipTrunkResponseModel";
 import { GetPhoneNumberTwilioResponseModel } from "../../../../../types/GetPhoneNumberTwilioResponseModel";
 
@@ -12,6 +13,7 @@ export const PhoneNumbersGetResponse: core.serialization.Schema<
 > = core.serialization
     .union("provider", {
         twilio: GetPhoneNumberTwilioResponseModel,
+        exotel: GetPhoneNumberExotelResponseModel,
         sip_trunk: GetPhoneNumberSipTrunkResponseModel,
     })
     .transform<ElevenLabs.conversationalAi.PhoneNumbersGetResponse>({
@@ -20,10 +22,17 @@ export const PhoneNumbersGetResponse: core.serialization.Schema<
     });
 
 export declare namespace PhoneNumbersGetResponse {
-    export type Raw = PhoneNumbersGetResponse.Twilio | PhoneNumbersGetResponse.SipTrunk;
+    export type Raw =
+        | PhoneNumbersGetResponse.Twilio
+        | PhoneNumbersGetResponse.Exotel
+        | PhoneNumbersGetResponse.SipTrunk;
 
     export interface Twilio extends GetPhoneNumberTwilioResponseModel.Raw {
         provider: "twilio";
+    }
+
+    export interface Exotel extends GetPhoneNumberExotelResponseModel.Raw {
+        provider: "exotel";
     }
 
     export interface SipTrunk extends GetPhoneNumberSipTrunkResponseModel.Raw {

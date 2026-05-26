@@ -23,4 +23,6 @@ export interface TestInvocationSummaryResponseModel {
     title: string;
     /** The access information of the test invocation */
     accessInfo?: ElevenLabs.ResourceAccessInfo;
+    /** Number of times each test was repeated in this invocation */
+    repeatCount?: number;
 }

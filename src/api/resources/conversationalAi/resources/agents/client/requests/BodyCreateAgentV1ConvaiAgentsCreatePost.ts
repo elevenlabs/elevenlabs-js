@@ -10,7 +10,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface BodyCreateAgentV1ConvaiAgentsCreatePost {
-    /** Enable versioning for the agent */
+    /** Deprecated: all agents are versioned. This parameter is ignored. */
     enableVersioning?: boolean;
     /** Conversation configuration for an agent */
     conversationConfig: ElevenLabs.ConversationalConfig;
