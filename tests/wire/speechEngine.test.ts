@@ -15,6 +15,12 @@ describe("SpeechEngineClient", () => {
                     name: "My Speech Engine",
                     created_at_unix_secs: 1714000000,
                     tags: ["production", "v1"],
+                    access_info: {
+                        is_creator: true,
+                        creator_name: "John Doe",
+                        creator_email: "john@example.com",
+                        role: "admin",
+                    },
                 },
             ],
             next_cursor: "next_cursor",
@@ -36,6 +42,12 @@ describe("SpeechEngineClient", () => {
                     name: "My Speech Engine",
                     createdAtUnixSecs: 1714000000,
                     tags: ["production", "v1"],
+                    accessInfo: {
+                        isCreator: true,
+                        creatorName: "John Doe",
+                        creatorEmail: "john@example.com",
+                        role: "admin",
+                    },
                 },
             ],
             nextCursor: "next_cursor",
@@ -107,6 +119,13 @@ describe("SpeechEngineClient", () => {
                 updated_at_unix_secs: 1714000000,
                 created_from: "api",
                 last_updated_from: "api",
+            },
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+                anonymous_access_level_override: "admin",
             },
         };
         server
@@ -214,6 +233,13 @@ describe("SpeechEngineClient", () => {
                 createdFrom: "api",
                 lastUpdatedFrom: "api",
             },
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+                anonymousAccessLevelOverride: "admin",
+            },
         });
     });
 
@@ -281,6 +307,13 @@ describe("SpeechEngineClient", () => {
                 updated_at_unix_secs: 1714000000,
                 created_from: "api",
                 last_updated_from: "api",
+            },
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+                anonymous_access_level_override: "admin",
             },
         };
         server
@@ -383,6 +416,13 @@ describe("SpeechEngineClient", () => {
                 createdFrom: "api",
                 lastUpdatedFrom: "api",
             },
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+                anonymousAccessLevelOverride: "admin",
+            },
         });
     });
 
@@ -465,6 +505,13 @@ describe("SpeechEngineClient", () => {
                 updated_at_unix_secs: 1714000000,
                 created_from: "api",
                 last_updated_from: "api",
+            },
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+                anonymous_access_level_override: "admin",
             },
         };
         server
@@ -567,6 +614,13 @@ describe("SpeechEngineClient", () => {
                 updatedAtUnixSecs: 1714000000,
                 createdFrom: "api",
                 lastUpdatedFrom: "api",
+            },
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+                anonymousAccessLevelOverride: "admin",
             },
         });
     });

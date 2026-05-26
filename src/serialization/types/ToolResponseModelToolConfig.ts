@@ -13,6 +13,9 @@ export const ToolResponseModelToolConfig: core.serialization.Schema<
 > = core.serialization
     .union("type", {
         client: ClientToolConfigOutput,
+        code: core.serialization.object({
+            value: core.serialization.unknown(),
+        }),
         mcp: core.serialization.object({
             value: core.serialization.unknown(),
         }),
@@ -27,12 +30,18 @@ export const ToolResponseModelToolConfig: core.serialization.Schema<
 export declare namespace ToolResponseModelToolConfig {
     export type Raw =
         | ToolResponseModelToolConfig.Client
+        | ToolResponseModelToolConfig.Code
         | ToolResponseModelToolConfig.Mcp
         | ToolResponseModelToolConfig.System
         | ToolResponseModelToolConfig.Webhook;
 
     export interface Client extends ClientToolConfigOutput.Raw {
         type: "client";
+    }
+
+    export interface Code {
+        type: "code";
+        value?: unknown;
     }
 
     export interface Mcp {

@@ -5596,6 +5596,74 @@ await client.conversationalAi.twilio.registerCall({
 </dl>
 </details>
 
+## ConversationalAi Exotel
+<details><summary><code>client.conversationalAi.exotel.<a href="/src/api/resources/conversationalAi/resources/exotel/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.ExotelOutboundCallResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Handle an outbound call via Exotel Connect API
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.exotel.outboundCall({
+    agentId: "agent_id",
+    agentPhoneNumberId: "agent_phone_number_id",
+    toNumber: "to_number"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExotelClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Whatsapp
 <details><summary><code>client.conversationalAi.whatsapp.<a href="/src/api/resources/conversationalAi/resources/whatsapp/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.WhatsAppOutboundCallResponse</code></summary>
 <dl>
@@ -7005,7 +7073,7 @@ await client.conversationalAi.phoneNumbers.list();
 <dl>
 <dd>
 
-Import Phone Number from provider configuration (Twilio or SIP trunk)
+Import Phone Number from provider configuration (Twilio, Exotel, or SIP trunk)
 </dd>
 </dl>
 </dd>
@@ -15834,7 +15902,7 @@ await client.productions.orders.list({
 </dl>
 </details>
 
-<details><summary><code>client.productions.orders.<a href="/src/api/resources/productions/resources/orders/client/Client.ts">create</a>() -> ElevenLabs.CreateOrderResponse</code></summary>
+<details><summary><code>client.productions.orders.<a href="/src/api/resources/productions/resources/orders/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -15861,7 +15929,9 @@ Creates a new Productions order in the workspace. The order starts in the open s
 <dd>
 
 ```typescript
-await client.productions.orders.create();
+await client.productions.orders.create({
+    sandbox: false
+});
 
 ```
 </dd>
@@ -15873,6 +15943,14 @@ await client.productions.orders.create();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateOrderRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -16460,7 +16538,7 @@ await client.productions.orders.deliverables.list("order_id");
 </details>
 
 ## Productions Orders Languages
-<details><summary><code>client.productions.orders.languages.<a href="/src/api/resources/productions/resources/orders/resources/languages/client/Client.ts">list</a>(order_item_kind) -> ElevenLabs.RootModelAnnotatedUnionPairedLanguagesResponseSingleLanguagesResponseFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKind</code></summary>
+<details><summary><code>client.productions.orders.languages.<a href="/src/api/resources/productions/resources/orders/resources/languages/client/Client.ts">list</a>(order_item_kind) -> ElevenLabs.LanguagesResponse</code></summary>
 <dl>
 <dd>
 

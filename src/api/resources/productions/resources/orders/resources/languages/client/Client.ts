@@ -37,16 +37,14 @@ export class LanguagesClient {
     public list(
         order_item_kind: ElevenLabs.OrderItemKind,
         requestOptions?: LanguagesClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.RootModelAnnotatedUnionPairedLanguagesResponseSingleLanguagesResponseFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKind> {
+    ): core.HttpResponsePromise<ElevenLabs.LanguagesResponse> {
         return core.HttpResponsePromise.fromPromise(this.__list(order_item_kind, requestOptions));
     }
 
     private async __list(
         order_item_kind: ElevenLabs.OrderItemKind,
         requestOptions?: LanguagesClient.RequestOptions,
-    ): Promise<
-        core.WithRawResponse<ElevenLabs.RootModelAnnotatedUnionPairedLanguagesResponseSingleLanguagesResponseFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKind>
-    > {
+    ): Promise<core.WithRawResponse<ElevenLabs.LanguagesResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -70,15 +68,12 @@ export class LanguagesClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.RootModelAnnotatedUnionPairedLanguagesResponseSingleLanguagesResponseFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKind.parseOrThrow(
-                    _response.body,
-                    {
-                        unrecognizedObjectKeys: "passthrough",
-                        allowUnrecognizedUnionMembers: true,
-                        allowUnrecognizedEnumValues: true,
-                        breadcrumbsPrefix: ["response"],
-                    },
-                ),
+                data: serializers.LanguagesResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }

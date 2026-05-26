@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const ToolTypeFilter: core.serialization.Schema<serializers.ToolTypeFilter.Raw, ElevenLabs.ToolTypeFilter> =
-    core.serialization.enum_(["webhook", "client", "api_integration_webhook"]);
+    core.serialization.enum_(["webhook", "client", "api_integration_webhook", "code"]);
 
 export declare namespace ToolTypeFilter {
-    export type Raw = "webhook" | "client" | "api_integration_webhook";
+    export type Raw = "webhook" | "client" | "api_integration_webhook" | "code";
 }

@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../index";
 
 export interface UpsertOrderItemRequest {
     /** The order item to add or update. */
-    item: ElevenLabs.RootModelAnnotatedUnionDubOrderItemRequestSubtitleOrderItemRequestFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKindInput;
+    item: ElevenLabs.OrderItemRequestInput;
     /** The ID of an existing item to update. Omit to create a new item. */
     itemId?: ElevenLabs.ItemId;
 }

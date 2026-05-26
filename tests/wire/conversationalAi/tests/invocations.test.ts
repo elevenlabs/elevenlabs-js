@@ -27,6 +27,7 @@ describe("InvocationsClient", () => {
                         creator_email: "john.doe@example.com",
                         role: "admin",
                     },
+                    repeat_count: 1,
                 },
             ],
             next_cursor: "next_cursor",
@@ -68,6 +69,7 @@ describe("InvocationsClient", () => {
                         creatorEmail: "john.doe@example.com",
                         role: "admin",
                     },
+                    repeatCount: 1,
                 },
             ],
             nextCursor: "next_cursor",
@@ -85,6 +87,16 @@ describe("InvocationsClient", () => {
             branch_id: "branch_id",
             created_at: 1,
             folder_id: "folder_id",
+            repeat_count: 1,
+            bucketing_status: "pending",
+            result_groups: [
+                {
+                    test_id: "test_id",
+                    test_name: "test_name",
+                    workflow_node_id: "workflow_node_id",
+                    buckets: [{ test_run_ids: ["test_run_ids"], title: "title", reason: "reason", status: "pending" }],
+                },
+            ],
             test_runs: [
                 {
                     test_run_id: "test_run_id",
@@ -125,6 +137,23 @@ describe("InvocationsClient", () => {
             branchId: "branch_id",
             createdAt: 1,
             folderId: "folder_id",
+            repeatCount: 1,
+            bucketingStatus: "pending",
+            resultGroups: [
+                {
+                    testId: "test_id",
+                    testName: "test_name",
+                    workflowNodeId: "workflow_node_id",
+                    buckets: [
+                        {
+                            testRunIds: ["test_run_ids"],
+                            title: "title",
+                            reason: "reason",
+                            status: "pending",
+                        },
+                    ],
+                },
+            ],
             testRuns: [
                 {
                     testRunId: "test_run_id",

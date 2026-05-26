@@ -13,6 +13,7 @@ import { TestToolResultModel } from "./TestToolResultModel";
 import { TransferToAgentToolResultErrorModel } from "./TransferToAgentToolResultErrorModel";
 import { TransferToAgentToolResultSuccessModel } from "./TransferToAgentToolResultSuccessModel";
 import { TransferToNumberResultErrorModel } from "./TransferToNumberResultErrorModel";
+import { TransferToNumberResultExotelSuccessModel } from "./TransferToNumberResultExotelSuccessModel";
 import { TransferToNumberResultSipSuccessModel } from "./TransferToNumberResultSipSuccessModel";
 import { TransferToNumberResultTwilioSuccessModel } from "./TransferToNumberResultTwilioSuccessModel";
 import { VoiceMailDetectionResultSuccessModel } from "./VoiceMailDetectionResultSuccessModel";
@@ -32,6 +33,7 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelInputResult
         transfer_to_agent_error: TransferToAgentToolResultErrorModel,
         transfer_to_agent_success: TransferToAgentToolResultSuccessModel,
         transfer_to_number_error: TransferToNumberResultErrorModel,
+        transfer_to_number_exotel_success: TransferToNumberResultExotelSuccessModel,
         transfer_to_number_sip_success: TransferToNumberResultSipSuccessModel,
         transfer_to_number_twilio_success: TransferToNumberResultTwilioSuccessModel,
         voicemail_detection_success: VoiceMailDetectionResultSuccessModel,
@@ -53,6 +55,7 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentError
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberError
+        | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberExotelSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberSipSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberTwilioSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.VoicemailDetectionSuccess;
@@ -95,6 +98,10 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
 
     export interface TransferToNumberError extends TransferToNumberResultErrorModel.Raw {
         result_type: "transfer_to_number_error";
+    }
+
+    export interface TransferToNumberExotelSuccess extends TransferToNumberResultExotelSuccessModel.Raw {
+        result_type: "transfer_to_number_exotel_success";
     }
 
     export interface TransferToNumberSipSuccess extends TransferToNumberResultSipSuccessModel.Raw {

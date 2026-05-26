@@ -19,6 +19,8 @@ export interface WebhookToolApiSchemaConfigInput {
     responseBodySchema?: ElevenLabs.ObjectJsonSchemaPropertyInput;
     /** Content type for the request body. Only applies to POST/PUT/PATCH requests. */
     contentType?: ElevenLabs.WebhookToolApiSchemaConfigInputContentType;
+    /** URL placeholders resolved from the auth connection (e.g. secrets injected via UrlSecretAuthConnection) rather than from path_params_schema. */
+    authResolvedParams?: string[];
     /** Optional auth connection to use for authentication with this webhook */
     authConnection?: ElevenLabs.WebhookToolApiSchemaConfigInputAuthConnection;
 }

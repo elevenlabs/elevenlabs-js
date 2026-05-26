@@ -5,9 +5,9 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const Monitor: core.serialization.Schema<serializers.Monitor.Raw, ElevenLabs.Monitor> = core.serialization.enum_(
-    ["elevated_conversation_failure_rate", "elevated_tool_failure_rate"],
+    ["elevated_conversation_failure_rate", "elevated_tool_failure_rate", "webhook_error_spike"],
 );
 
 export declare namespace Monitor {
-    export type Raw = "elevated_conversation_failure_rate" | "elevated_tool_failure_rate";
+    export type Raw = "elevated_conversation_failure_rate" | "elevated_tool_failure_rate" | "webhook_error_spike";
 }

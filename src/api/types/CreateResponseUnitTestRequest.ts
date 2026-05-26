@@ -8,6 +8,8 @@ export interface CreateResponseUnitTestRequest {
     /** Dynamic variables to replace in the agent config during testing */
     dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeInput | undefined>;
     chatHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelInput[];
+    /** Simulate the test as if the conversation originated from this channel. */
+    conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
     /** A prompt that evaluates whether the agent's response is successful. Should return True or False. */
     successCondition?: string;
     /** Non-empty list of example responses that should be considered successful */

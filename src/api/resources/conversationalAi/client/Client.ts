@@ -14,6 +14,7 @@ import { AnalyticsClient } from "../resources/analytics/client/Client";
 import { BatchCallsClient } from "../resources/batchCalls/client/Client";
 import { ConversationsClient } from "../resources/conversations/client/Client";
 import { DashboardClient } from "../resources/dashboard/client/Client";
+import { ExotelClient } from "../resources/exotel/client/Client";
 import { KnowledgeBaseClient } from "../resources/knowledgeBase/client/Client";
 import { LlmClient } from "../resources/llm/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
@@ -39,6 +40,7 @@ export class ConversationalAiClient {
     protected readonly _options: NormalizedClientOptions<ConversationalAiClient.Options>;
     protected _conversations: ConversationsClient | undefined;
     protected _twilio: TwilioClient | undefined;
+    protected _exotel: ExotelClient | undefined;
     protected _whatsapp: WhatsappClient | undefined;
     protected _agents: AgentsClient | undefined;
     protected _tests: TestsClient | undefined;
@@ -67,6 +69,10 @@ export class ConversationalAiClient {
 
     public get twilio(): TwilioClient {
         return (this._twilio ??= new TwilioClient(this._options));
+    }
+
+    public get exotel(): ExotelClient {
+        return (this._exotel ??= new ExotelClient(this._options));
     }
 
     public get whatsapp(): WhatsappClient {

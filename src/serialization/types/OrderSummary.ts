@@ -12,6 +12,7 @@ export const OrderSummary: core.serialization.ObjectSchema<serializers.OrderSumm
         name: core.serialization.string(),
         state: OrderState,
         totalAmountUsd: core.serialization.property("total_amount_usd", core.serialization.number().optional()),
+        sandbox: core.serialization.boolean().optional(),
         submittedAt: core.serialization.property("submitted_at", core.serialization.date().optional()),
         updatedAt: core.serialization.property("updated_at", core.serialization.date().optional()),
     });
@@ -22,6 +23,7 @@ export declare namespace OrderSummary {
         name: string;
         state: OrderState.Raw;
         total_amount_usd?: number | null;
+        sandbox?: boolean | null;
         submitted_at?: string | null;
         updated_at?: string | null;
     }

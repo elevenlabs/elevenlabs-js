@@ -4,11 +4,16 @@ import type * as ElevenLabs from "../../../../../index";
 
 export type PhoneNumbersListResponseItem =
     | ElevenLabs.conversationalAi.PhoneNumbersListResponseItem.Twilio
+    | ElevenLabs.conversationalAi.PhoneNumbersListResponseItem.Exotel
     | ElevenLabs.conversationalAi.PhoneNumbersListResponseItem.SipTrunk;
 
 export namespace PhoneNumbersListResponseItem {
     export interface Twilio extends ElevenLabs.GetPhoneNumberTwilioResponseModel {
         provider: "twilio";
+    }
+
+    export interface Exotel extends ElevenLabs.GetPhoneNumberExotelResponseModel {
+        provider: "exotel";
     }
 
     export interface SipTrunk extends ElevenLabs.GetPhoneNumberSipTrunkResponseModel {

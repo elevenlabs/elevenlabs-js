@@ -4,20 +4,20 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ItemId } from "./ItemId";
+import { OrderItemRequestOutput } from "./OrderItemRequestOutput";
 import { QuoteInfo } from "./QuoteInfo";
-import { RootModelAnnotatedUnionDubOrderItemRequestSubtitleOrderItemRequestFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKindOutput } from "./RootModelAnnotatedUnionDubOrderItemRequestSubtitleOrderItemRequestFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKindOutput";
 
 export const OrderItemInfo: core.serialization.ObjectSchema<serializers.OrderItemInfo.Raw, ElevenLabs.OrderItemInfo> =
     core.serialization.object({
         itemId: core.serialization.property("item_id", ItemId),
-        item: RootModelAnnotatedUnionDubOrderItemRequestSubtitleOrderItemRequestFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKindOutput,
+        item: OrderItemRequestOutput,
         quote: QuoteInfo.optional(),
     });
 
 export declare namespace OrderItemInfo {
     export interface Raw {
         item_id: ItemId.Raw;
-        item: RootModelAnnotatedUnionDubOrderItemRequestSubtitleOrderItemRequestFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKindOutput.Raw;
+        item: OrderItemRequestOutput.Raw;
         quote?: QuoteInfo.Raw | null;
     }
 }

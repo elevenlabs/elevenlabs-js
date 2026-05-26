@@ -9,5 +9,6 @@ export const ToolType = {
     ApiIntegrationWebhook: "api_integration_webhook",
     ApiIntegrationMcp: "api_integration_mcp",
     Smb: "smb",
+    Code: "code",
 } as const;
 export type ToolType = (typeof ToolType)[keyof typeof ToolType];

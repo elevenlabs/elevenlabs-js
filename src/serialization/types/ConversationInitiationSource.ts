@@ -18,6 +18,7 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "widget",
     "sip_trunk",
     "twilio",
+    "exotel",
     "genesys",
     "swift_sdk",
     "whatsapp",
@@ -25,6 +26,9 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "flutter_sdk",
     "zendesk_integration",
     "slack_integration",
+    "telegram_integration",
+    "intercom_integration",
+    "freshdesk_integration",
     "template_preview",
     "genesys_bot_connector",
 ]);
@@ -41,6 +45,7 @@ export declare namespace ConversationInitiationSource {
         | "widget"
         | "sip_trunk"
         | "twilio"
+        | "exotel"
         | "genesys"
         | "swift_sdk"
         | "whatsapp"
@@ -48,6 +53,9 @@ export declare namespace ConversationInitiationSource {
         | "flutter_sdk"
         | "zendesk_integration"
         | "slack_integration"
+        | "telegram_integration"
+        | "intercom_integration"
+        | "freshdesk_integration"
         | "template_preview"
         | "genesys_bot_connector";
 }

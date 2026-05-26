@@ -30,6 +30,7 @@ export const Llm = {
     Gemini31ProPreview: "gemini-3.1-pro-preview",
     Gemini31FlashLitePreview: "gemini-3.1-flash-lite-preview",
     Gemini31FlashLite: "gemini-3.1-flash-lite",
+    Gemini35Flash: "gemini-3.5-flash",
     ClaudeSonnet45: "claude-sonnet-4-5",
     ClaudeOpus47: "claude-opus-4-7",
     ClaudeSonnet46: "claude-sonnet-4-6",

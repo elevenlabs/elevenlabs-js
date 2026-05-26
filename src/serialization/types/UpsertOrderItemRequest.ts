@@ -4,19 +4,19 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ItemId } from "./ItemId";
-import { RootModelAnnotatedUnionDubOrderItemRequestSubtitleOrderItemRequestFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKindInput } from "./RootModelAnnotatedUnionDubOrderItemRequestSubtitleOrderItemRequestFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKindInput";
+import { OrderItemRequestInput } from "./OrderItemRequestInput";
 
 export const UpsertOrderItemRequest: core.serialization.ObjectSchema<
     serializers.UpsertOrderItemRequest.Raw,
     ElevenLabs.UpsertOrderItemRequest
 > = core.serialization.object({
-    item: RootModelAnnotatedUnionDubOrderItemRequestSubtitleOrderItemRequestFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKindInput,
+    item: OrderItemRequestInput,
     itemId: core.serialization.property("item_id", ItemId.optional()),
 });
 
 export declare namespace UpsertOrderItemRequest {
     export interface Raw {
-        item: RootModelAnnotatedUnionDubOrderItemRequestSubtitleOrderItemRequestFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKindInput.Raw;
+        item: OrderItemRequestInput.Raw;
         item_id?: ItemId.Raw | null;
     }
 }

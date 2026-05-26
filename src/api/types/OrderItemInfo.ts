@@ -6,7 +6,7 @@ export interface OrderItemInfo {
     /** The ID of the order item. */
     itemId: ElevenLabs.ItemId;
     /** The item configuration details. */
-    item: ElevenLabs.RootModelAnnotatedUnionDubOrderItemRequestSubtitleOrderItemRequestFieldInfoAnnotationNoneTypeRequiredTrueDiscriminatorKindOutput;
+    item: ElevenLabs.OrderItemRequestOutput;
     /** The quoted price for this item. */
     quote?: ElevenLabs.QuoteInfo;
 }

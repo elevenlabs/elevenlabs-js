@@ -157,20 +157,25 @@ export class OrdersClient {
     /**
      * Creates a new Productions order in the workspace. The order starts in the open state and can be configured with items before submission.
      *
+     * @param {ElevenLabs.CreateOrderRequest} request
      * @param {OrdersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.productions.orders.create()
+     *     await client.productions.orders.create({
+     *         sandbox: false
+     *     })
      */
     public create(
+        request?: ElevenLabs.CreateOrderRequest,
         requestOptions?: OrdersClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.CreateOrderResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__create(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
+        request?: ElevenLabs.CreateOrderRequest,
         requestOptions?: OrdersClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.CreateOrderResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -187,7 +192,15 @@ export class OrdersClient {
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body:
+                request != null
+                    ? serializers.productions.orders.create.Request.jsonOrThrow(request, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

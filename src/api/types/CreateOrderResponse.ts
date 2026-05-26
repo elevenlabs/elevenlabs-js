@@ -5,4 +5,6 @@ import type * as ElevenLabs from "../index";
 export interface CreateOrderResponse {
     /** The ID of the newly created order. */
     orderId: ElevenLabs.OrderId;
+    /** Whether this is a sandbox order. */
+    sandbox?: boolean;
 }
