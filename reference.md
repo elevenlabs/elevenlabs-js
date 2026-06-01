@@ -5216,7 +5216,8 @@ await client.conversationalAi.conversations.list({
     branchId: "branch_id",
     topicIds: ["topic_ids"],
     excludeStatuses: ["initiated"],
-    tagIds: ["tag_ids"]
+    tagIds: ["tag_ids"],
+    workflowNodeEnteredId: "workflow_node_entered_id"
 });
 
 ```
@@ -11213,6 +11214,7 @@ await client.conversationalAi.conversations.messages.textSearch({
     conversationInitiationSource: "unknown",
     textOnly: true,
     branchId: "branch_id",
+    topicIds: ["topic_ids"],
     sortBy: "search_score",
     cursor: "cursor"
 });
@@ -21153,7 +21155,7 @@ await client.workspace.resources.get("resource_id", {
 <dl>
 <dd>
 
-Grants a role on a workspace resource to a user or a group. It overrides any existing role this user/service account/group/workspace api key has on the resource. To target a user or service account, pass only the user email. The user must be in your workspace. To target a group, pass only the group id. To target a workspace api key, pass the api key id. The resource will be shared with the service account associated with the api key. You must have admin access to the resource to share it.
+Grants a role (one of 'admin', 'editor', 'commenter', or 'viewer') on a workspace resource to a user, group, or workspace (service account) API key. This overrides any existing role the target has on the resource. To target a user or service account, pass only the user email; the user must be in your workspace. To target a group, pass only the group id. To target a workspace (service account) API key, pass the api key id; the resource will be shared with the service account associated with that key. You must have admin access to the resource to share it.
 </dd>
 </dl>
 </dd>
@@ -21227,7 +21229,7 @@ await client.workspace.resources.share("resource_id", {
 <dl>
 <dd>
 
-Removes any existing role on a workspace resource from a user, service account, group or workspace api key. To target a user or service account, pass only the user email. The user must be in your workspace. To target a group, pass only the group id. To target a workspace api key, pass the api key id. The resource will be unshared from the service account associated with the api key. You must have admin access to the resource to unshare it. You cannot remove permissions from the user who created the resource.
+Removes any existing role on a workspace resource from a user, group, or workspace (service account) API key. To target a user or service account, pass only the user email; the user must be in your workspace. To target a group, pass only the group id. To target a workspace (service account) API key, pass the api key id; the resource will be unshared from the service account associated with that key. You must have admin access to the resource to unshare it. You cannot remove permissions from the user who created the resource.
 </dd>
 </dl>
 </dd>
@@ -21555,6 +21557,72 @@ await client.workspace.groups.members.add("group_id", {
 <dd>
 
 **requestOptions:** `MembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Workspaces ApiKeys
+<details><summary><code>client.workspaces.apiKeys.<a href="/src/api/resources/workspaces/resources/apiKeys/client/Client.ts">revoke</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Revoke the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspaces.apiKeys.revoke({
+    apiKeyName: "self"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.workspaces.ApiKeysRevokeRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ApiKeysClient.RequestOptions` 
     
 </dd>
 </dl>

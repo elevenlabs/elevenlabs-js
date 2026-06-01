@@ -7,8 +7,10 @@ export interface WorkflowStandaloneAgentNodeModelOutput {
     position: ElevenLabs.PositionOutput;
     /** The ids of outgoing edges in the order they should be evaluated. */
     edgeOrder: string[];
-    /** The ID of the agent to transfer the conversation to. */
-    agentId: string;
+    /** The ID of the agent to transfer the conversation to. None means transfer within the current agent. */
+    agentId?: string;
+    /** Optional target node ID in the destination agent's workflow. When set, the transfer starts at this node instead of the default entry node. */
+    nodeId?: string;
     /** Artificial delay in milliseconds applied before transferring the conversation. */
     delayMs: number;
     /** Optional message sent to the user before the transfer is initiated. */

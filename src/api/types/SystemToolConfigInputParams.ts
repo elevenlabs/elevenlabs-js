@@ -26,7 +26,7 @@ export namespace SystemToolConfigInputParams {
         systemToolType: "language_detection";
     }
 
-    export interface LoadProcedure extends ElevenLabs.LoadProcedureToolConfig {
+    export interface LoadProcedure extends ElevenLabs.LoadProcedureToolConfigInput {
         systemToolType: "load_procedure";
     }
 

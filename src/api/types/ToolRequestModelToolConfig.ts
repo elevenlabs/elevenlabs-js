@@ -7,7 +7,6 @@ import type * as ElevenLabs from "../index";
  */
 export type ToolRequestModelToolConfig =
     | ElevenLabs.ToolRequestModelToolConfig.Client
-    | ElevenLabs.ToolRequestModelToolConfig.Code
     | ElevenLabs.ToolRequestModelToolConfig.Mcp
     | ElevenLabs.ToolRequestModelToolConfig.System
     | ElevenLabs.ToolRequestModelToolConfig.Webhook;
@@ -15,11 +14,6 @@ export type ToolRequestModelToolConfig =
 export namespace ToolRequestModelToolConfig {
     export interface Client extends ElevenLabs.ClientToolConfigInput {
         type: "client";
-    }
-
-    export interface Code {
-        type: "code";
-        value?: unknown;
     }
 
     export interface Mcp {

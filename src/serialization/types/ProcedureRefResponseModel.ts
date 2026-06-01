@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ProcedureType } from "./ProcedureType";
 
 export const ProcedureRefResponseModel: core.serialization.ObjectSchema<
     serializers.ProcedureRefResponseModel.Raw,
@@ -11,6 +12,7 @@ export const ProcedureRefResponseModel: core.serialization.ObjectSchema<
     procedureId: core.serialization.property("procedure_id", core.serialization.string()),
     versionId: core.serialization.property("version_id", core.serialization.string().optional()),
     name: core.serialization.string().optional(),
+    type: ProcedureType.optional(),
 });
 
 export declare namespace ProcedureRefResponseModel {
@@ -18,5 +20,6 @@ export declare namespace ProcedureRefResponseModel {
         procedure_id: string;
         version_id?: string | null;
         name?: string | null;
+        type?: ProcedureType.Raw | null;
     }
 }

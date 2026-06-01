@@ -48,6 +48,7 @@ describe("ToolConfigsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             dependent_agents: [
                 {
@@ -124,6 +125,7 @@ describe("ToolConfigsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             dependentAgents: [
                 {
@@ -262,6 +264,7 @@ describe("ToolConfigsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             dependent_agents: [
                 {
@@ -335,6 +338,7 @@ describe("ToolConfigsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             dependentAgents: [
                 {
@@ -397,6 +401,7 @@ describe("ToolConfigsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             dependent_agents: [
                 {
@@ -471,6 +476,7 @@ describe("ToolConfigsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             dependentAgents: [
                 {

@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ResourceAccessInfoAccessSource } from "./ResourceAccessInfoAccessSource";
 import { ResourceAccessInfoAnonymousAccessLevelOverride } from "./ResourceAccessInfoAnonymousAccessLevelOverride";
 import { ResourceAccessInfoRole } from "./ResourceAccessInfoRole";
 
@@ -18,6 +19,7 @@ export const ResourceAccessInfo: core.serialization.ObjectSchema<
         "anonymous_access_level_override",
         ResourceAccessInfoAnonymousAccessLevelOverride.optional(),
     ),
+    accessSource: core.serialization.property("access_source", ResourceAccessInfoAccessSource.optional()),
 });
 
 export declare namespace ResourceAccessInfo {
@@ -27,5 +29,6 @@ export declare namespace ResourceAccessInfo {
         creator_email: string;
         role: ResourceAccessInfoRole.Raw;
         anonymous_access_level_override?: ResourceAccessInfoAnonymousAccessLevelOverride.Raw | null;
+        access_source?: ResourceAccessInfoAccessSource.Raw | null;
     }
 }

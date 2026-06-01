@@ -6,7 +6,8 @@ import type * as serializers from "../index";
 
 export const AgentTransfer: core.serialization.ObjectSchema<serializers.AgentTransfer.Raw, ElevenLabs.AgentTransfer> =
     core.serialization.object({
-        agentId: core.serialization.property("agent_id", core.serialization.string()),
+        agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
+        nodeId: core.serialization.property("node_id", core.serialization.string().optional()),
         condition: core.serialization.string(),
         delayMs: core.serialization.property("delay_ms", core.serialization.number().optional()),
         transferMessage: core.serialization.property("transfer_message", core.serialization.string().optional()),
@@ -22,7 +23,8 @@ export const AgentTransfer: core.serialization.ObjectSchema<serializers.AgentTra
 
 export declare namespace AgentTransfer {
     export interface Raw {
-        agent_id: string;
+        agent_id?: string | null;
+        node_id?: string | null;
         condition: string;
         delay_ms?: number | null;
         transfer_message?: string | null;

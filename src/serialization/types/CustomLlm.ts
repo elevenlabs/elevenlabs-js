@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { CustomLlmApiKey } from "./CustomLlmApiKey";
+import { CustomLlmAuthConnection } from "./CustomLlmAuthConnection";
 import { CustomLlmapiType } from "./CustomLlmapiType";
 import { CustomLlmRequestHeadersValue } from "./CustomLlmRequestHeadersValue";
 
@@ -12,6 +13,7 @@ export const CustomLlm: core.serialization.ObjectSchema<serializers.CustomLlm.Ra
         url: core.serialization.string(),
         modelId: core.serialization.property("model_id", core.serialization.string().optional()),
         apiKey: core.serialization.property("api_key", CustomLlmApiKey.optional()),
+        authConnection: core.serialization.property("auth_connection", CustomLlmAuthConnection.optional()),
         requestHeaders: core.serialization.property(
             "request_headers",
             core.serialization.record(core.serialization.string(), CustomLlmRequestHeadersValue).optional(),
@@ -25,6 +27,7 @@ export declare namespace CustomLlm {
         url: string;
         model_id?: string | null;
         api_key?: CustomLlmApiKey.Raw | null;
+        auth_connection?: CustomLlmAuthConnection.Raw | null;
         request_headers?: Record<string, CustomLlmRequestHeadersValue.Raw> | null;
         api_version?: string | null;
         api_type?: CustomLlmapiType.Raw | null;

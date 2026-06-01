@@ -104,6 +104,7 @@ describe("DocumentsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             folder_parent_id: "folder_parent_id",
             folder_path: [{ id: "id", name: "name" }],
@@ -138,6 +139,7 @@ describe("DocumentsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             folderParentId: "folder_parent_id",
             folderPath: [
@@ -194,6 +196,7 @@ describe("DocumentsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             folder_parent_id: "folder_parent_id",
             folder_path: [{ id: "id", name: "name" }],
@@ -227,6 +230,7 @@ describe("DocumentsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             folderParentId: "folder_parent_id",
             folderPath: [

@@ -265,6 +265,10 @@ export class DubbingClient {
             _request.append("csv_fps", request.csvFps.toString());
         }
 
+        if (request.hcaptchaToken != null) {
+            _request.append("hcaptcha_token", request.hcaptchaToken);
+        }
+
         const _maybeEncodedRequest = await _request.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

@@ -2,6 +2,6 @@
 
 import type * as ElevenLabs from "../index";
 
-export interface LoadProcedureToolConfig {
+export interface LoadProcedureToolConfigOutput {
     procedures?: Record<string, ElevenLabs.ProcedureAtVersion>;
 }

@@ -30,7 +30,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *         branchId: "branch_id",
  *         topicIds: ["topic_ids"],
  *         excludeStatuses: ["initiated"],
- *         tagIds: ["tag_ids"]
+ *         tagIds: ["tag_ids"],
+ *         workflowNodeEnteredId: "workflow_node_entered_id"
  *     }
  */
 export interface ConversationsListRequest {
@@ -86,4 +87,6 @@ export interface ConversationsListRequest {
         | ElevenLabs.conversationalAi.ConversationsListRequestExcludeStatusesItem[];
     /** Filter conversations by conversation tag IDs assigned via the conversation-tags endpoints. */
     tagIds?: string | string[];
+    /** Filter conversations to only those that entered the given node. */
+    workflowNodeEnteredId?: string;
 }

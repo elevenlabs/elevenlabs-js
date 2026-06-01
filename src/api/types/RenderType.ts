@@ -8,5 +8,6 @@ export const RenderType = {
     Aaf: "aaf",
     TracksZip: "tracks_zip",
     ClipsZip: "clips_zip",
+    Zip: "zip",
 } as const;
 export type RenderType = (typeof RenderType)[keyof typeof RenderType];

@@ -21,6 +21,7 @@ describe("KnowledgeBaseClient", () => {
                         creator_name: "John Doe",
                         creator_email: "john.doe@example.com",
                         role: "admin",
+                        access_source: "creator",
                     },
                     folder_parent_id: "folder_parent_id",
                     folder_path: [{ id: "id" }],
@@ -70,6 +71,7 @@ describe("KnowledgeBaseClient", () => {
                         creatorName: "John Doe",
                         creatorEmail: "john.doe@example.com",
                         role: "admin",
+                        accessSource: "creator",
                     },
                     folderParentId: "folder_parent_id",
                     folderPath: [
@@ -163,6 +165,7 @@ describe("KnowledgeBaseClient", () => {
                             creator_name: "John Doe",
                             creator_email: "john.doe@example.com",
                             role: "admin",
+                            access_source: "creator",
                         },
                         dependent_agents: [
                             {
@@ -212,6 +215,7 @@ describe("KnowledgeBaseClient", () => {
                             creatorName: "John Doe",
                             creatorEmail: "john.doe@example.com",
                             role: "admin",
+                            accessSource: "creator",
                         },
                         dependentAgents: [
                             {
