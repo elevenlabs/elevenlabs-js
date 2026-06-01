@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { SearchHighlightSegment } from "./SearchHighlightSegment";
 
 export const MessagesSearchResult: core.serialization.ObjectSchema<
     serializers.MessagesSearchResult.Raw,
@@ -13,6 +14,10 @@ export const MessagesSearchResult: core.serialization.ObjectSchema<
     agentName: core.serialization.property("agent_name", core.serialization.string().optional()),
     transcriptIndex: core.serialization.property("transcript_index", core.serialization.number()),
     chunkText: core.serialization.property("chunk_text", core.serialization.string()),
+    chunkHighlights: core.serialization.property(
+        "chunk_highlights",
+        core.serialization.list(SearchHighlightSegment).optional(),
+    ),
     score: core.serialization.number(),
     conversationStartTimeUnixSecs: core.serialization.property(
         "conversation_start_time_unix_secs",
@@ -27,6 +32,7 @@ export declare namespace MessagesSearchResult {
         agent_name?: string | null;
         transcript_index: number;
         chunk_text: string;
+        chunk_highlights?: SearchHighlightSegment.Raw[] | null;
         score: number;
         conversation_start_time_unix_secs: number;
     }

@@ -17,6 +17,7 @@ describe("MessagesClient", () => {
                     agent_name: "agent_name",
                     transcript_index: 1,
                     chunk_text: "chunk_text",
+                    chunk_highlights: [{ value: "value", is_hit: true }],
                     score: 1.1,
                     conversation_start_time_unix_secs: 1,
                 },
@@ -55,6 +56,7 @@ describe("MessagesClient", () => {
             conversationInitiationSource: "unknown",
             textOnly: true,
             branchId: "branch_id",
+            topicIds: ["topic_ids"],
             sortBy: "search_score",
             cursor: "cursor",
         });
@@ -71,6 +73,12 @@ describe("MessagesClient", () => {
                     agentName: "agent_name",
                     transcriptIndex: 1,
                     chunkText: "chunk_text",
+                    chunkHighlights: [
+                        {
+                            value: "value",
+                            isHit: true,
+                        },
+                    ],
                     score: 1.1,
                     conversationStartTimeUnixSecs: 1,
                 },
@@ -93,6 +101,7 @@ describe("MessagesClient", () => {
                     agent_name: "agent_name",
                     transcript_index: 1,
                     chunk_text: "chunk_text",
+                    chunk_highlights: [{ value: "value", is_hit: true }],
                     score: 1.1,
                     conversation_start_time_unix_secs: 1,
                 },
@@ -127,6 +136,12 @@ describe("MessagesClient", () => {
                     agentName: "agent_name",
                     transcriptIndex: 1,
                     chunkText: "chunk_text",
+                    chunkHighlights: [
+                        {
+                            value: "value",
+                            isHit: true,
+                        },
+                    ],
                     score: 1.1,
                     conversationStartTimeUnixSecs: 1,
                 },

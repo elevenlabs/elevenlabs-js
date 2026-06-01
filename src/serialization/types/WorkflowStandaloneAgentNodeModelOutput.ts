@@ -11,7 +11,8 @@ export const WorkflowStandaloneAgentNodeModelOutput: core.serialization.ObjectSc
 > = core.serialization.object({
     position: PositionOutput,
     edgeOrder: core.serialization.property("edge_order", core.serialization.list(core.serialization.string())),
-    agentId: core.serialization.property("agent_id", core.serialization.string()),
+    agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
+    nodeId: core.serialization.property("node_id", core.serialization.string().optional()),
     delayMs: core.serialization.property("delay_ms", core.serialization.number()),
     transferMessage: core.serialization.property("transfer_message", core.serialization.string().optional()),
     enableTransferredAgentFirstMessage: core.serialization.property(
@@ -24,7 +25,8 @@ export declare namespace WorkflowStandaloneAgentNodeModelOutput {
     export interface Raw {
         position: PositionOutput.Raw;
         edge_order: string[];
-        agent_id: string;
+        agent_id?: string | null;
+        node_id?: string | null;
         delay_ms: number;
         transfer_message?: string | null;
         enable_transferred_agent_first_message: boolean;

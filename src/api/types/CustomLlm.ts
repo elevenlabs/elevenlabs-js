@@ -9,6 +9,8 @@ export interface CustomLlm {
     modelId?: string;
     /** The API key for authentication. Either a workspace secret reference {'secret_id': '...'} or an environment variable reference {'env_var_label': '...'}. */
     apiKey?: ElevenLabs.CustomLlmApiKey;
+    /** Optional workspace auth connection for authentication. Only auth connections that produce an Authorization Bearer token are supported; Basic auth, mTLS, custom header, and URL secret auth connections are not supported. */
+    authConnection?: ElevenLabs.CustomLlmAuthConnection;
     /** Headers that should be included in the request */
     requestHeaders?: Record<string, ElevenLabs.CustomLlmRequestHeadersValue>;
     /** The API version to use for the request */

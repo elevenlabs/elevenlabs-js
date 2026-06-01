@@ -4,5 +4,6 @@ export const MusicGenerationMode = {
     Track: "track",
     Loop: "loop",
     Ambience: "ambience",
+    VideoToMusic: "video_to_music",
 } as const;
 export type MusicGenerationMode = (typeof MusicGenerationMode)[keyof typeof MusicGenerationMode];

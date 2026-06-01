@@ -10,14 +10,14 @@ import type * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePost {
-    /** Role to update the target principal with. */
+    /** Role to grant to the target: one of 'admin', 'editor', 'commenter', or 'viewer'. */
     role: ElevenLabs.workspace.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole;
     /** Resource type of the target resource. */
     resourceType: ElevenLabs.WorkspaceResourceType;
     /** The email of the user or service account. */
     userEmail?: string;
-    /** The ID of the target group. To target the permissions principals have by default on this resource, use the value 'default'. */
+    /** The ID of the target group. Use 'default' to set the resource's baseline role — every workspace member receives this role unless they hold a higher one through a direct user grant, group membership, or workspace (service account) API key. */
     groupId?: string;
-    /** The ID of the target workspace API key. This isn't the same as the key itself that would you pass in the header for authentication. Workspace admins can find this in the workspace settings UI. */
+    /** The ID of the target workspace (service account) API key. This is not the API key string itself that you pass in the header for authentication — it is the key's ID, which workspace admins can find under Developers → Service Accounts. */
     workspaceApiKeyId?: string;
 }

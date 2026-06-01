@@ -35,6 +35,7 @@ describe("McpServersClient", () => {
                         creator_name: "John Doe",
                         creator_email: "john.doe@example.com",
                         role: "admin",
+                        access_source: "creator",
                     },
                     dependent_agents: [
                         { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
@@ -79,6 +80,7 @@ describe("McpServersClient", () => {
                         creatorName: "John Doe",
                         creatorEmail: "john.doe@example.com",
                         role: "admin",
+                        accessSource: "creator",
                     },
                     dependentAgents: [
                         {
@@ -141,6 +143,7 @@ describe("McpServersClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             dependent_agents: [
                 {
@@ -220,6 +223,7 @@ describe("McpServersClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             dependentAgents: [
                 {
@@ -282,6 +286,7 @@ describe("McpServersClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             dependent_agents: [
                 {
@@ -355,6 +360,7 @@ describe("McpServersClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             dependentAgents: [
                 {
@@ -436,6 +442,7 @@ describe("McpServersClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             dependent_agents: [
                 {
@@ -510,6 +517,7 @@ describe("McpServersClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             dependentAgents: [
                 {

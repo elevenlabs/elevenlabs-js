@@ -27,6 +27,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *         conversationInitiationSource: "unknown",
  *         textOnly: true,
  *         branchId: "branch_id",
+ *         topicIds: ["topic_ids"],
  *         sortBy: "search_score",
  *         cursor: "cursor"
  *     }
@@ -74,6 +75,8 @@ export interface MessagesTextSearchRequest {
     textOnly?: boolean;
     /** Filter conversations by branch ID. */
     branchId?: string;
+    /** Filter conversations by topic IDs assigned during topic discovery. */
+    topicIds?: string | string[];
     /** Sort order for search results. 'search_score' sorts by search score, 'created_at' sorts by conversation start time. */
     sortBy?: ElevenLabs.MessageSearchSortBy;
     /** Used for fetching next page. Cursor is returned in the response. */

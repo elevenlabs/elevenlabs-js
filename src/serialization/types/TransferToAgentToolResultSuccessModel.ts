@@ -12,6 +12,7 @@ export const TransferToAgentToolResultSuccessModel: core.serialization.ObjectSch
     status: core.serialization.stringLiteral("success").optional(),
     fromAgent: core.serialization.property("from_agent", core.serialization.string()),
     toAgent: core.serialization.property("to_agent", core.serialization.string()),
+    toNode: core.serialization.property("to_node", core.serialization.string().optional()),
     condition: core.serialization.string(),
     delayMs: core.serialization.property("delay_ms", core.serialization.number().optional()),
     transferMessage: core.serialization.property("transfer_message", core.serialization.string().optional()),
@@ -27,6 +28,7 @@ export declare namespace TransferToAgentToolResultSuccessModel {
         status?: "success" | null;
         from_agent: string;
         to_agent: string;
+        to_node?: string | null;
         condition: string;
         delay_ms?: number | null;
         transfer_message?: string | null;

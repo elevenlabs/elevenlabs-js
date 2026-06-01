@@ -324,11 +324,6 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
-                alerting: {
-                    monitor_configs: { key: {} },
-                    auto_resolve_after_inactive_minutes: 1,
-                    notifiers: [{ url: "url" }],
-                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -1066,9 +1061,10 @@ describe("AgentsClient", () => {
                         type: "standalone_agent",
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
-                        agent_id: "agent_id",
                         delay_ms: 1,
                         enable_transferred_agent_first_message: true,
+                        agent_id: null,
+                        node_id: null,
                         transfer_message: null,
                     },
                     tool_node_a: {
@@ -1092,6 +1088,7 @@ describe("AgentsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             tags: ["tags"],
             version_id: "version_id",
@@ -1498,17 +1495,6 @@ describe("AgentsClient", () => {
                 },
                 trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
-                alerting: {
-                    monitorConfigs: {
-                        key: {},
-                    },
-                    autoResolveAfterInactiveMinutes: 1,
-                    notifiers: [
-                        {
-                            url: "url",
-                        },
-                    ],
-                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -2414,7 +2400,6 @@ describe("AgentsClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
-                        agentId: "agent_id",
                         delayMs: 1,
                         enableTransferredAgentFirstMessage: true,
                     },
@@ -2453,6 +2438,7 @@ describe("AgentsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             tags: ["tags"],
             versionId: "version_id",
@@ -2773,11 +2759,6 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
-                alerting: {
-                    monitor_configs: { key: {} },
-                    auto_resolve_after_inactive_minutes: 1,
-                    notifiers: [{ url: "url" }],
-                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -3515,9 +3496,10 @@ describe("AgentsClient", () => {
                         type: "standalone_agent",
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
-                        agent_id: "agent_id",
                         delay_ms: 1,
                         enable_transferred_agent_first_message: true,
+                        agent_id: null,
+                        node_id: null,
                         transfer_message: null,
                     },
                     tool_node_a: {
@@ -3541,6 +3523,7 @@ describe("AgentsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             tags: ["tags"],
             version_id: "version_id",
@@ -3948,17 +3931,6 @@ describe("AgentsClient", () => {
                 },
                 trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
-                alerting: {
-                    monitorConfigs: {
-                        key: {},
-                    },
-                    autoResolveAfterInactiveMinutes: 1,
-                    notifiers: [
-                        {
-                            url: "url",
-                        },
-                    ],
-                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -4864,7 +4836,6 @@ describe("AgentsClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
-                        agentId: "agent_id",
                         delayMs: 1,
                         enableTransferredAgentFirstMessage: true,
                     },
@@ -4903,6 +4874,7 @@ describe("AgentsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             tags: ["tags"],
             versionId: "version_id",

@@ -117,6 +117,7 @@ describe("ConversationsClient", () => {
             topicIds: ["topic_ids"],
             excludeStatuses: ["initiated"],
             tagIds: ["tag_ids"],
+            workflowNodeEnteredId: "workflow_node_entered_id",
         });
         expect(response).toEqual({
             conversations: [

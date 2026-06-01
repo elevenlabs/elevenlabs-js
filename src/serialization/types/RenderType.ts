@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const RenderType: core.serialization.Schema<serializers.RenderType.Raw, ElevenLabs.RenderType> =
-    core.serialization.enum_(["mp4", "aac", "mp3", "wav", "aaf", "tracks_zip", "clips_zip"]);
+    core.serialization.enum_(["mp4", "aac", "mp3", "wav", "aaf", "tracks_zip", "clips_zip", "zip"]);
 
 export declare namespace RenderType {
-    export type Raw = "mp4" | "aac" | "mp3" | "wav" | "aaf" | "tracks_zip" | "clips_zip";
+    export type Raw = "mp4" | "aac" | "mp3" | "wav" | "aaf" | "tracks_zip" | "clips_zip" | "zip";
 }

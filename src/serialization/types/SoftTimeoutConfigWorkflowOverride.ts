@@ -14,6 +14,10 @@ export const SoftTimeoutConfigWorkflowOverride: core.serialization.ObjectSchema<
         "use_llm_generated_message",
         core.serialization.boolean().optional(),
     ),
+    llmGeneratedMessagePromptOverride: core.serialization.property(
+        "llm_generated_message_prompt_override",
+        core.serialization.string().optional(),
+    ),
 });
 
 export declare namespace SoftTimeoutConfigWorkflowOverride {
@@ -21,5 +25,6 @@ export declare namespace SoftTimeoutConfigWorkflowOverride {
         timeout_seconds?: number | null;
         message?: string | null;
         use_llm_generated_message?: boolean | null;
+        llm_generated_message_prompt_override?: string | null;
     }
 }

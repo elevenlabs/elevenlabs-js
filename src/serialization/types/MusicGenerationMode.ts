@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const MusicGenerationMode: core.serialization.Schema<
     serializers.MusicGenerationMode.Raw,
     ElevenLabs.MusicGenerationMode
-> = core.serialization.enum_(["track", "loop", "ambience"]);
+> = core.serialization.enum_(["track", "loop", "ambience", "video_to_music"]);
 
 export declare namespace MusicGenerationMode {
-    export type Raw = "track" | "loop" | "ambience";
+    export type Raw = "track" | "loop" | "ambience" | "video_to_music";
 }

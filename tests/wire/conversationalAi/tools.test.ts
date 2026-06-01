@@ -33,6 +33,7 @@ describe("ToolsClient", () => {
                         creator_name: "John Doe",
                         creator_email: "john.doe@example.com",
                         role: "admin",
+                        access_source: "creator",
                     },
                     usage_stats: { avg_latency_secs: 1.1 },
                     response_mocks: [{ mock_result: "mock_result" }],
@@ -82,6 +83,7 @@ describe("ToolsClient", () => {
                         creatorName: "John Doe",
                         creatorEmail: "john.doe@example.com",
                         role: "admin",
+                        accessSource: "creator",
                     },
                     usageStats: {
                         avgLatencySecs: 1.1,
@@ -141,6 +143,7 @@ describe("ToolsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
             response_mocks: [
@@ -210,6 +213,7 @@ describe("ToolsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             usageStats: {
                 totalCalls: 1,
@@ -272,6 +276,7 @@ describe("ToolsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
             response_mocks: [
@@ -333,6 +338,7 @@ describe("ToolsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             usageStats: {
                 totalCalls: 1,
@@ -418,6 +424,7 @@ describe("ToolsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
             response_mocks: [
@@ -487,6 +494,7 @@ describe("ToolsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             usageStats: {
                 totalCalls: 1,
