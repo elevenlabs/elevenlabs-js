@@ -48,6 +48,7 @@ describe("ToolApprovalsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             dependent_agents: [
                 {
@@ -125,6 +126,7 @@ describe("ToolApprovalsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             dependentAgents: [
                 {
@@ -187,6 +189,7 @@ describe("ToolApprovalsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
             dependent_agents: [
                 {
@@ -260,6 +263,7 @@ describe("ToolApprovalsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
             dependentAgents: [
                 {

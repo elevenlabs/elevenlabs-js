@@ -48,4 +48,6 @@ export interface BodyDubAVideoOrAnAudioFileV1DubbingPost {
     mode?: ElevenLabs.DubbingCreateRequestMode;
     /** Frames per second to use when parsing a CSV file for dubbing. If not provided, FPS will be inferred from timecodes. */
     csvFps?: number;
+    /** HCaptcha token used to prevent spam, generated on the frontend either automatically or when the client solves the hCaptcha challenge. */
+    hcaptchaToken?: string;
 }

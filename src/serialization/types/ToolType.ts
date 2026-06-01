@@ -14,7 +14,6 @@ export const ToolType: core.serialization.Schema<serializers.ToolType.Raw, Eleve
         "api_integration_webhook",
         "api_integration_mcp",
         "smb",
-        "code",
     ]);
 
 export declare namespace ToolType {
@@ -26,6 +25,5 @@ export declare namespace ToolType {
         | "workflow"
         | "api_integration_webhook"
         | "api_integration_mcp"
-        | "smb"
-        | "code";
+        | "smb";
 }

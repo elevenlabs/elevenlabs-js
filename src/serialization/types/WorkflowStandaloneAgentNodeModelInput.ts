@@ -14,7 +14,8 @@ export const WorkflowStandaloneAgentNodeModelInput: core.serialization.ObjectSch
         "edge_order",
         core.serialization.list(core.serialization.string()).optional(),
     ),
-    agentId: core.serialization.property("agent_id", core.serialization.string()),
+    agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
+    nodeId: core.serialization.property("node_id", core.serialization.string().optional()),
     delayMs: core.serialization.property("delay_ms", core.serialization.number().optional()),
     transferMessage: core.serialization.property("transfer_message", core.serialization.string().optional()),
     enableTransferredAgentFirstMessage: core.serialization.property(
@@ -27,7 +28,8 @@ export declare namespace WorkflowStandaloneAgentNodeModelInput {
     export interface Raw {
         position?: PositionInput.Raw | null;
         edge_order?: string[] | null;
-        agent_id: string;
+        agent_id?: string | null;
+        node_id?: string | null;
         delay_ms?: number | null;
         transfer_message?: string | null;
         enable_transferred_agent_first_message?: boolean | null;

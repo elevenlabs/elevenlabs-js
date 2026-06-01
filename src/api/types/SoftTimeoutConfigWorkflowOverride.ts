@@ -7,4 +7,6 @@ export interface SoftTimeoutConfigWorkflowOverride {
     message?: string;
     /** If enabled, the soft timeout message will be generated dynamically instead of using the static message. */
     useLlmGeneratedMessage?: boolean;
+    /** Custom prompt for generating the soft timeout filler message when use_llm_generated_message is enabled. Recent conversation context is provided as a separate user message. If not set, the default prompt will be used. */
+    llmGeneratedMessagePromptOverride?: string;
 }

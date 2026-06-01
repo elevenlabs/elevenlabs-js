@@ -28,6 +28,7 @@ describe("VersionsClient", () => {
                 creator_email: "john.doe@example.com",
                 role: "admin",
                 anonymous_access_level_override: "admin",
+                access_source: "creator",
             },
         };
         server
@@ -62,6 +63,7 @@ describe("VersionsClient", () => {
                 creatorEmail: "john.doe@example.com",
                 role: "admin",
                 anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
             },
         });
     });

@@ -55,6 +55,7 @@ export class MessagesClient {
      *         conversationInitiationSource: "unknown",
      *         textOnly: true,
      *         branchId: "branch_id",
+     *         topicIds: ["topic_ids"],
      *         sortBy: "search_score",
      *         cursor: "cursor"
      *     })
@@ -93,6 +94,7 @@ export class MessagesClient {
             conversationInitiationSource,
             textOnly,
             branchId,
+            topicIds,
             sortBy,
             cursor,
         } = request;
@@ -213,6 +215,14 @@ export class MessagesClient {
 
         if (branchId != null) {
             _queryParams.branch_id = branchId;
+        }
+
+        if (topicIds != null) {
+            if (Array.isArray(topicIds)) {
+                _queryParams.topic_ids = topicIds.map((item) => item);
+            } else {
+                _queryParams.topic_ids = topicIds;
+            }
         }
 
         if (sortBy != null) {

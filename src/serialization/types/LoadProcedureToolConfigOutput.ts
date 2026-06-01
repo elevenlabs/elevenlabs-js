@@ -5,14 +5,14 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ProcedureAtVersion } from "./ProcedureAtVersion";
 
-export const LoadProcedureToolConfig: core.serialization.ObjectSchema<
-    serializers.LoadProcedureToolConfig.Raw,
-    ElevenLabs.LoadProcedureToolConfig
+export const LoadProcedureToolConfigOutput: core.serialization.ObjectSchema<
+    serializers.LoadProcedureToolConfigOutput.Raw,
+    ElevenLabs.LoadProcedureToolConfigOutput
 > = core.serialization.object({
     procedures: core.serialization.record(core.serialization.string(), ProcedureAtVersion).optional(),
 });
 
-export declare namespace LoadProcedureToolConfig {
+export declare namespace LoadProcedureToolConfigOutput {
     export interface Raw {
         procedures?: Record<string, ProcedureAtVersion.Raw> | null;
     }

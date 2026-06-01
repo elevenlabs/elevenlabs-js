@@ -27,6 +27,7 @@ import { UserClient } from "./api/resources/user/client/Client";
 import { VoicesClient } from "./api/resources/voices/client/Client";
 import { WebhooksClient } from "./api/resources/webhooks/client/Client";
 import { WorkspaceClient } from "./api/resources/workspace/client/Client";
+import { WorkspacesClient } from "./api/resources/workspaces/client/Client";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient";
 import { type NormalizedClientOptions, normalizeClientOptions } from "./BaseClient";
 import * as core from "./core";
@@ -70,6 +71,7 @@ export class ElevenLabsClient {
     protected _productions: ProductionsClient | undefined;
     protected _tokens: TokensClient | undefined;
     protected _workspace: WorkspaceClient | undefined;
+    protected _workspaces: WorkspacesClient | undefined;
 
     constructor(options: ElevenLabsClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -181,6 +183,10 @@ export class ElevenLabsClient {
 
     public get workspace(): WorkspaceClient {
         return (this._workspace ??= new WorkspaceClient(this._options));
+    }
+
+    public get workspaces(): WorkspacesClient {
+        return (this._workspaces ??= new WorkspacesClient(this._options));
     }
 
     /**

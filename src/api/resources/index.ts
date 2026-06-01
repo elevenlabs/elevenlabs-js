@@ -69,3 +69,4 @@ export * from "./voices/types";
 export * as webhooks from "./webhooks";
 export * from "./webhooks/client/requests";
 export * as workspace from "./workspace";
+export * as workspaces from "./workspaces";

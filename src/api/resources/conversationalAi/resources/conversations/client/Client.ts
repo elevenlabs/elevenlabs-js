@@ -287,7 +287,8 @@ export class ConversationsClient {
      *         branchId: "branch_id",
      *         topicIds: ["topic_ids"],
      *         excludeStatuses: ["initiated"],
-     *         tagIds: ["tag_ids"]
+     *         tagIds: ["tag_ids"],
+     *         workflowNodeEnteredId: "workflow_node_entered_id"
      *     })
      */
     public list(
@@ -328,6 +329,7 @@ export class ConversationsClient {
             topicIds,
             excludeStatuses,
             tagIds,
+            workflowNodeEnteredId,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (cursor != null) {
@@ -484,6 +486,10 @@ export class ConversationsClient {
             } else {
                 _queryParams.tag_ids = tagIds;
             }
+        }
+
+        if (workflowNodeEnteredId != null) {
+            _queryParams.workflow_node_entered_id = workflowNodeEnteredId;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

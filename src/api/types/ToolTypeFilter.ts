@@ -4,6 +4,5 @@ export const ToolTypeFilter = {
     Webhook: "webhook",
     Client: "client",
     ApiIntegrationWebhook: "api_integration_webhook",
-    Code: "code",
 } as const;
 export type ToolTypeFilter = (typeof ToolTypeFilter)[keyof typeof ToolTypeFilter];
