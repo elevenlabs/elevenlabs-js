@@ -91,6 +91,7 @@ describe("SpeechEngineClient", () => {
                 spelling_patience: "auto",
                 speculative_turn: true,
                 retranscribe_on_turn_timeout: true,
+                turn_model: "turn_v2",
             },
             conversation: {
                 text_only: true,
@@ -193,6 +194,7 @@ describe("SpeechEngineClient", () => {
                 spellingPatience: "auto",
                 speculativeTurn: true,
                 retranscribeOnTurnTimeout: true,
+                turnModel: "turn_v2",
             },
             conversation: {
                 textOnly: true,
@@ -281,6 +283,7 @@ describe("SpeechEngineClient", () => {
                 spelling_patience: "auto",
                 speculative_turn: true,
                 retranscribe_on_turn_timeout: true,
+                turn_model: "turn_v2",
             },
             conversation: {
                 text_only: true,
@@ -378,6 +381,7 @@ describe("SpeechEngineClient", () => {
                 spellingPatience: "auto",
                 speculativeTurn: true,
                 retranscribeOnTurnTimeout: true,
+                turnModel: "turn_v2",
             },
             conversation: {
                 textOnly: true,
@@ -481,6 +485,7 @@ describe("SpeechEngineClient", () => {
                 spelling_patience: "auto",
                 speculative_turn: true,
                 retranscribe_on_turn_timeout: true,
+                turn_model: "turn_v2",
             },
             conversation: {
                 text_only: true,
@@ -579,6 +584,7 @@ describe("SpeechEngineClient", () => {
                 spellingPatience: "auto",
                 speculativeTurn: true,
                 retranscribeOnTurnTimeout: true,
+                turnModel: "turn_v2",
             },
             conversation: {
                 textOnly: true,

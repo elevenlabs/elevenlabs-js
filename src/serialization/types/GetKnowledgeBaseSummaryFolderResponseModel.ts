@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AutoSyncInfo } from "./AutoSyncInfo";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
+import { ExternalFolderSyncInfo } from "./ExternalFolderSyncInfo";
 import { GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem } from "./GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
 import { KnowledgeBaseFolderPathSegmentSummaryResponseModel } from "./KnowledgeBaseFolderPathSegmentSummaryResponseModel";
@@ -30,6 +31,8 @@ export const GetKnowledgeBaseSummaryFolderResponseModel: core.serialization.Obje
     ),
     childrenCount: core.serialization.property("children_count", core.serialization.number()),
     autoSyncInfo: core.serialization.property("auto_sync_info", AutoSyncInfo.optional()),
+    externalSyncInfo: core.serialization.property("external_sync_info", ExternalFolderSyncInfo.optional()),
+    isFrozen: core.serialization.property("is_frozen", core.serialization.boolean().optional()),
 });
 
 export declare namespace GetKnowledgeBaseSummaryFolderResponseModel {
@@ -44,5 +47,7 @@ export declare namespace GetKnowledgeBaseSummaryFolderResponseModel {
         dependent_agents: GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem.Raw[];
         children_count: number;
         auto_sync_info?: AutoSyncInfo.Raw | null;
+        external_sync_info?: ExternalFolderSyncInfo.Raw | null;
+        is_frozen?: boolean | null;
     }
 }

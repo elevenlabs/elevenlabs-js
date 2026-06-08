@@ -14,4 +14,6 @@ export interface GetKnowledgeBaseFileResponseModel {
     folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentResponseModel[];
     extractedInnerHtml: string;
     filename: string;
+    externalSyncInfo?: ElevenLabs.ExternalFileSyncInfo;
+    isFrozen?: boolean;
 }

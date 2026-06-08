@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
+import { ExternalFileSyncInfo } from "./ExternalFileSyncInfo";
 import { GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem } from "./GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
 import { KnowledgeBaseFolderPathSegmentSummaryResponseModel } from "./KnowledgeBaseFolderPathSegmentSummaryResponseModel";
@@ -27,6 +28,8 @@ export const GetKnowledgeBaseSummaryFileResponseModel: core.serialization.Object
         "dependent_agents",
         core.serialization.list(GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem),
     ),
+    externalSyncInfo: core.serialization.property("external_sync_info", ExternalFileSyncInfo.optional()),
+    isFrozen: core.serialization.property("is_frozen", core.serialization.boolean().optional()),
 });
 
 export declare namespace GetKnowledgeBaseSummaryFileResponseModel {
@@ -39,5 +42,7 @@ export declare namespace GetKnowledgeBaseSummaryFileResponseModel {
         folder_parent_id?: string | null;
         folder_path?: KnowledgeBaseFolderPathSegmentSummaryResponseModel.Raw[] | null;
         dependent_agents: GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem.Raw[];
+        external_sync_info?: ExternalFileSyncInfo.Raw | null;
+        is_frozen?: boolean | null;
     }
 }

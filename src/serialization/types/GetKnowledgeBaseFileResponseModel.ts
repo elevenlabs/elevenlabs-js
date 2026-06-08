@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
+import { ExternalFileSyncInfo } from "./ExternalFileSyncInfo";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
 import { KnowledgeBaseFolderPathSegmentResponseModel } from "./KnowledgeBaseFolderPathSegmentResponseModel";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
@@ -24,6 +25,8 @@ export const GetKnowledgeBaseFileResponseModel: core.serialization.ObjectSchema<
     ),
     extractedInnerHtml: core.serialization.property("extracted_inner_html", core.serialization.string()),
     filename: core.serialization.string(),
+    externalSyncInfo: core.serialization.property("external_sync_info", ExternalFileSyncInfo.optional()),
+    isFrozen: core.serialization.property("is_frozen", core.serialization.boolean().optional()),
 });
 
 export declare namespace GetKnowledgeBaseFileResponseModel {
@@ -37,5 +40,7 @@ export declare namespace GetKnowledgeBaseFileResponseModel {
         folder_path?: KnowledgeBaseFolderPathSegmentResponseModel.Raw[] | null;
         extracted_inner_html: string;
         filename: string;
+        external_sync_info?: ExternalFileSyncInfo.Raw | null;
+        is_frozen?: boolean | null;
     }
 }

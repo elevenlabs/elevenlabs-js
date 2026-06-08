@@ -16,7 +16,8 @@ export type AuthConnectionsCreateResponse =
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.ApiIntegrationOauth2AuthCode
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.ApiIntegrationOauth2CustomApp
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.WhatsappAuth
-    | ElevenLabs.workspace.AuthConnectionsCreateResponse.SlackBotAuth;
+    | ElevenLabs.workspace.AuthConnectionsCreateResponse.SlackBotAuth
+    | ElevenLabs.workspace.AuthConnectionsCreateResponse.UrlSecret;
 
 export namespace AuthConnectionsCreateResponse {
     export interface Oauth2ClientCredentials extends ElevenLabs.OAuth2ClientCredsResponse {
@@ -61,5 +62,9 @@ export namespace AuthConnectionsCreateResponse {
 
     export interface SlackBotAuth extends ElevenLabs.SlackBotAuthResponse {
         authType: "slack_bot_auth";
+    }
+
+    export interface UrlSecret extends ElevenLabs.UrlSecretAuthResponse {
+        authType: "url_secret";
     }
 }

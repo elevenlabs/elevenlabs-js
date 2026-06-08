@@ -2,7 +2,7 @@
 
 import type * as ElevenLabs from "../index";
 
-export interface ProcedureAtVersion {
+export interface ProcedureAtVersionInput {
     /** Procedure ID */
     procedureId: string;
     /** Procedure name */
@@ -10,6 +10,7 @@ export interface ProcedureAtVersion {
     /** Procedure content */
     content: string;
     type?: ElevenLabs.ProcedureType;
+    guardrails?: ElevenLabs.CustomGuardrailConfig[];
     /** Agent ID of the procedure */
     agentId: string;
     /** Version ID of a version of the procedure. None for a procedure never versioned. */

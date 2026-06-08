@@ -6,6 +6,7 @@ import type * as serializers from "../../../../../../../index";
 import { ConstantSchemaOverride } from "../../../../../../../types/ConstantSchemaOverride";
 import { DynamicVariableSchemaOverride } from "../../../../../../../types/DynamicVariableSchemaOverride";
 import { LlmSchemaOverride } from "../../../../../../../types/LlmSchemaOverride";
+import { OmitSchemaOverride } from "../../../../../../../types/OmitSchemaOverride";
 
 export const McpToolConfigOverrideUpdateRequestModelInputOverridesValue: core.serialization.Schema<
     serializers.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Raw,
@@ -15,6 +16,7 @@ export const McpToolConfigOverrideUpdateRequestModelInputOverridesValue: core.se
         constant: ConstantSchemaOverride,
         dynamic_variable: DynamicVariableSchemaOverride,
         llm: LlmSchemaOverride,
+        omit: OmitSchemaOverride,
     })
     .transform<ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModelInputOverridesValue>({
         transform: (value) => value,
@@ -25,7 +27,8 @@ export declare namespace McpToolConfigOverrideUpdateRequestModelInputOverridesVa
     export type Raw =
         | McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Constant
         | McpToolConfigOverrideUpdateRequestModelInputOverridesValue.DynamicVariable
-        | McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Llm;
+        | McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Llm
+        | McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Omit;
 
     export interface Constant extends ConstantSchemaOverride.Raw {
         source: "constant";
@@ -37,5 +40,9 @@ export declare namespace McpToolConfigOverrideUpdateRequestModelInputOverridesVa
 
     export interface Llm extends LlmSchemaOverride.Raw {
         source: "llm";
+    }
+
+    export interface Omit extends OmitSchemaOverride.Raw {
+        source: "omit";
     }
 }

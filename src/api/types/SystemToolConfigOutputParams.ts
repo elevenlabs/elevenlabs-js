@@ -6,9 +6,9 @@ export type SystemToolConfigOutputParams =
     | ElevenLabs.SystemToolConfigOutputParams.EndCall
     | ElevenLabs.SystemToolConfigOutputParams.KnowledgeBaseRag
     | ElevenLabs.SystemToolConfigOutputParams.LanguageDetection
-    | ElevenLabs.SystemToolConfigOutputParams.LoadProcedure
     | ElevenLabs.SystemToolConfigOutputParams.PlayKeypadTouchTone
     | ElevenLabs.SystemToolConfigOutputParams.SkipTurn
+    | ElevenLabs.SystemToolConfigOutputParams.StartProcedure
     | ElevenLabs.SystemToolConfigOutputParams.TransferToAgent
     | ElevenLabs.SystemToolConfigOutputParams.TransferToNumber
     | ElevenLabs.SystemToolConfigOutputParams.VoicemailDetection;
@@ -26,16 +26,16 @@ export namespace SystemToolConfigOutputParams {
         systemToolType: "language_detection";
     }
 
-    export interface LoadProcedure extends ElevenLabs.LoadProcedureToolConfigOutput {
-        systemToolType: "load_procedure";
-    }
-
     export interface PlayKeypadTouchTone extends ElevenLabs.PlayDtmfToolConfig {
         systemToolType: "play_keypad_touch_tone";
     }
 
     export interface SkipTurn extends ElevenLabs.SkipTurnToolConfig {
         systemToolType: "skip_turn";
+    }
+
+    export interface StartProcedure extends ElevenLabs.StartProcedureToolConfigOutput {
+        systemToolType: "start_procedure";
     }
 
     export interface TransferToAgent extends ElevenLabs.TransferToAgentToolConfig {

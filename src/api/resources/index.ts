@@ -29,6 +29,8 @@ export * as samples from "./samples";
 export * as serviceAccounts from "./serviceAccounts";
 export * as speechEngine from "./speechEngine";
 export * from "./speechEngine/client/requests";
+export * as speechEngineUpstream from "./speechEngineUpstream";
+export * from "./speechEngineUpstream/types";
 export * as speechToSpeech from "./speechToSpeech";
 export * from "./speechToSpeech/client/requests";
 export * from "./speechToSpeech/types";

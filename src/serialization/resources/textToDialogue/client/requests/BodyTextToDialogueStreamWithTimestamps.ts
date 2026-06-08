@@ -10,7 +10,7 @@ import { BodyTextToDialogueStreamWithTimestampsApplyTextNormalization } from "..
 
 export const BodyTextToDialogueStreamWithTimestamps: core.serialization.Schema<
     serializers.BodyTextToDialogueStreamWithTimestamps.Raw,
-    Omit<ElevenLabs.BodyTextToDialogueStreamWithTimestamps, "outputFormat">
+    Omit<ElevenLabs.BodyTextToDialogueStreamWithTimestamps, "outputFormat" | "enableLogging">
 > = core.serialization.object({
     inputs: core.serialization.list(DialogueInput),
     modelId: core.serialization.property("model_id", core.serialization.string().optional()),

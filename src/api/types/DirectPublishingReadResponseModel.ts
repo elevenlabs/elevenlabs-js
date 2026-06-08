@@ -22,6 +22,7 @@ export interface DirectPublishingReadResponseModel {
     originalFileType?: string;
     targetAudience?: ElevenLabs.DirectPublishingReadResponseModelTargetAudience;
     matureContent?: boolean;
+    safesearchAdult?: boolean;
     origin?: string;
     publicationDate?: string;
     isbn?: string;

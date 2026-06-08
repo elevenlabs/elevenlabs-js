@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { ConstantSchemaOverride } from "./ConstantSchemaOverride";
 import { DynamicVariableSchemaOverride } from "./DynamicVariableSchemaOverride";
 import { LlmSchemaOverride } from "./LlmSchemaOverride";
+import { OmitSchemaOverride } from "./OmitSchemaOverride";
 
 export const McpToolConfigOverrideInputInputOverridesValue: core.serialization.Schema<
     serializers.McpToolConfigOverrideInputInputOverridesValue.Raw,
@@ -15,6 +16,7 @@ export const McpToolConfigOverrideInputInputOverridesValue: core.serialization.S
         constant: ConstantSchemaOverride,
         dynamic_variable: DynamicVariableSchemaOverride,
         llm: LlmSchemaOverride,
+        omit: OmitSchemaOverride,
     })
     .transform<ElevenLabs.McpToolConfigOverrideInputInputOverridesValue>({
         transform: (value) => value,
@@ -25,7 +27,8 @@ export declare namespace McpToolConfigOverrideInputInputOverridesValue {
     export type Raw =
         | McpToolConfigOverrideInputInputOverridesValue.Constant
         | McpToolConfigOverrideInputInputOverridesValue.DynamicVariable
-        | McpToolConfigOverrideInputInputOverridesValue.Llm;
+        | McpToolConfigOverrideInputInputOverridesValue.Llm
+        | McpToolConfigOverrideInputInputOverridesValue.Omit;
 
     export interface Constant extends ConstantSchemaOverride.Raw {
         source: "constant";
@@ -37,5 +40,9 @@ export declare namespace McpToolConfigOverrideInputInputOverridesValue {
 
     export interface Llm extends LlmSchemaOverride.Raw {
         source: "llm";
+    }
+
+    export interface Omit extends OmitSchemaOverride.Raw {
+        source: "omit";
     }
 }

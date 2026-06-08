@@ -17,6 +17,7 @@ export const AnalysisProperty: core.serialization.ObjectSchema<
     isSystemProvided: core.serialization.property("is_system_provided", core.serialization.boolean().optional()),
     dynamicVariable: core.serialization.property("dynamic_variable", core.serialization.string().optional()),
     constantValue: core.serialization.property("constant_value", AnalysisPropertyConstantValue.optional()),
+    isOmitted: core.serialization.property("is_omitted", core.serialization.boolean().optional()),
     llm: Llm.optional(),
 });
 
@@ -28,6 +29,7 @@ export declare namespace AnalysisProperty {
         is_system_provided?: boolean | null;
         dynamic_variable?: string | null;
         constant_value?: AnalysisPropertyConstantValue.Raw | null;
+        is_omitted?: boolean | null;
         llm?: Llm.Raw | null;
     }
 }

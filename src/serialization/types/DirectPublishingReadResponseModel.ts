@@ -40,6 +40,7 @@ export const DirectPublishingReadResponseModel: core.serialization.ObjectSchema<
         DirectPublishingReadResponseModelTargetAudience.optional(),
     ),
     matureContent: core.serialization.property("mature_content", core.serialization.boolean().optional()),
+    safesearchAdult: core.serialization.property("safesearch_adult", core.serialization.boolean().optional()),
     origin: core.serialization.string().optional(),
     publicationDate: core.serialization.property("publication_date", core.serialization.string().optional()),
     isbn: core.serialization.string().optional(),
@@ -107,6 +108,7 @@ export declare namespace DirectPublishingReadResponseModel {
         original_file_type?: string | null;
         target_audience?: DirectPublishingReadResponseModelTargetAudience.Raw | null;
         mature_content?: boolean | null;
+        safesearch_adult?: boolean | null;
         origin?: string | null;
         publication_date?: string | null;
         isbn?: string | null;

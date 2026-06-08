@@ -1129,6 +1129,7 @@ Converts a list of text and voice ID pairs into speech (dialogue) and returns a 
 ```typescript
 const response = await client.textToDialogue.streamWithTimestamps({
     outputFormat: "mp3_22050_32",
+    enableLogging: true,
     inputs: [{
             text: "Hello, how are you?",
             voiceId: "bYTqZQo3Jz7LQtmGTgwi"
@@ -1204,6 +1205,7 @@ Generate dialogue from text with precise character-level timing information for 
 ```typescript
 await client.textToDialogue.convertWithTimestamps({
     outputFormat: "alaw_8000",
+    enableLogging: true,
     inputs: [{
             text: "Hello, how are you?",
             voiceId: "bYTqZQo3Jz7LQtmGTgwi"
@@ -1729,6 +1731,142 @@ await client.user.get();
 </details>
 
 ## Voices
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">get</a>(voice_id, { ...params }) -> ElevenLabs.Voice</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns metadata about a specific voice.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
+    withSettings: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voice_id:** `string` — ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.VoicesGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">delete</a>(voice_id) -> ElevenLabs.DeleteVoiceResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a voice by its ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.delete("21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voice_id:** `string` — ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetVoicesResponse</code></summary>
 <dl>
 <dd>
@@ -1850,142 +1988,6 @@ await client.voices.search({
 <dd>
 
 **request:** `ElevenLabs.VoicesSearchRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `VoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">get</a>(voice_id, { ...params }) -> ElevenLabs.Voice</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns metadata about a specific voice.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
-    withSettings: true
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**voice_id:** `string` — ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.VoicesGetRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `VoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">delete</a>(voice_id) -> ElevenLabs.DeleteVoiceResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Deletes a voice by its ID.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.delete("21m00Tcm4TlvDq8ikWAM");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**voice_id:** `string` — ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
     
 </dd>
 </dl>
@@ -7174,7 +7176,7 @@ await client.conversationalAi.phoneNumbers.get("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-**phone_number_id:** `string` — The id of an agent. This is returned on agent creation.
+**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
     
 </dd>
 </dl>
@@ -7237,7 +7239,7 @@ await client.conversationalAi.phoneNumbers.delete("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-**phone_number_id:** `string` — The id of an agent. This is returned on agent creation.
+**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
     
 </dd>
 </dl>
@@ -7300,7 +7302,7 @@ await client.conversationalAi.phoneNumbers.update("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-**phone_number_id:** `string` — The id of an agent. This is returned on agent creation.
+**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
     
 </dd>
 </dl>
@@ -7374,7 +7376,7 @@ await client.conversationalAi.phoneNumbers.getSipMessages("TeaqRRdTcIfIu2i7BYfT"
 <dl>
 <dd>
 
-**phone_number_id:** `string` — The id of an agent. This is returned on agent creation.
+**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
     
 </dd>
 </dl>
@@ -21581,7 +21583,7 @@ await client.workspace.groups.members.add("group_id", {
 <dl>
 <dd>
 
-Revoke the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation.
+Revoke the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation. This endpoint requires additional permissions and is not enabled by default. Reach out to your ElevenLabs contact to request access.
 </dd>
 </dl>
 </dd>

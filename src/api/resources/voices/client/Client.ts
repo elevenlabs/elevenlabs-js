@@ -49,6 +49,159 @@ export class VoicesClient {
     }
 
     /**
+     * Returns metadata about a specific voice.
+     *
+     * @param {string} voice_id - ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
+     * @param {ElevenLabs.VoicesGetRequest} request
+     * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
+     *         withSettings: true
+     *     })
+     */
+    public get(
+        voice_id: string,
+        request: ElevenLabs.VoicesGetRequest = {},
+        requestOptions?: VoicesClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.Voice> {
+        return core.HttpResponsePromise.fromPromise(this.__get(voice_id, request, requestOptions));
+    }
+
+    private async __get(
+        voice_id: string,
+        request: ElevenLabs.VoicesGetRequest = {},
+        requestOptions?: VoicesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.Voice>> {
+        const { withSettings } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (withSettings != null) {
+            _queryParams.with_settings = withSettings.toString();
+        }
+
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/voices/${core.url.encodePathParam(voice_id)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.Voice.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/voices/{voice_id}");
+    }
+
+    /**
+     * Deletes a voice by its ID.
+     *
+     * @param {string} voice_id - ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
+     * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.voices.delete("21m00Tcm4TlvDq8ikWAM")
+     */
+    public delete(
+        voice_id: string,
+        requestOptions?: VoicesClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.DeleteVoiceResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(voice_id, requestOptions));
+    }
+
+    private async __delete(
+        voice_id: string,
+        requestOptions?: VoicesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.DeleteVoiceResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/voices/${core.url.encodePathParam(voice_id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.DeleteVoiceResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/v1/voices/{voice_id}");
+    }
+
+    /**
      * Returns a list of all available voices for a user. Stops working once the user's workspace exceeds 500 voices.
      *
      * @param {ElevenLabs.VoicesGetAllRequest} request
@@ -270,159 +423,6 @@ export class VoicesClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v2/voices");
-    }
-
-    /**
-     * Returns metadata about a specific voice.
-     *
-     * @param {string} voice_id - ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
-     * @param {ElevenLabs.VoicesGetRequest} request
-     * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
-     *         withSettings: true
-     *     })
-     */
-    public get(
-        voice_id: string,
-        request: ElevenLabs.VoicesGetRequest = {},
-        requestOptions?: VoicesClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.Voice> {
-        return core.HttpResponsePromise.fromPromise(this.__get(voice_id, request, requestOptions));
-    }
-
-    private async __get(
-        voice_id: string,
-        request: ElevenLabs.VoicesGetRequest = {},
-        requestOptions?: VoicesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.Voice>> {
-        const { withSettings } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (withSettings != null) {
-            _queryParams.with_settings = withSettings.toString();
-        }
-
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
-            requestOptions?.headers,
-        );
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${core.url.encodePathParam(voice_id)}`,
-            ),
-            method: "GET",
-            headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: serializers.Voice.parseOrThrow(_response.body, {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    breadcrumbsPrefix: ["response"],
-                }),
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/voices/{voice_id}");
-    }
-
-    /**
-     * Deletes a voice by its ID.
-     *
-     * @param {string} voice_id - ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
-     * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.voices.delete("21m00Tcm4TlvDq8ikWAM")
-     */
-    public delete(
-        voice_id: string,
-        requestOptions?: VoicesClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.DeleteVoiceResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__delete(voice_id, requestOptions));
-    }
-
-    private async __delete(
-        voice_id: string,
-        requestOptions?: VoicesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.DeleteVoiceResponseModel>> {
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
-            requestOptions?.headers,
-        );
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                `v1/voices/${core.url.encodePathParam(voice_id)}`,
-            ),
-            method: "DELETE",
-            headers: _headers,
-            queryParameters: requestOptions?.queryParams,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: serializers.DeleteVoiceResponseModel.parseOrThrow(_response.body, {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    breadcrumbsPrefix: ["response"],
-                }),
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/v1/voices/{voice_id}");
     }
 
     /**

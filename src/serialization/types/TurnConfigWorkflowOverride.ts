@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { SoftTimeoutConfigWorkflowOverride } from "./SoftTimeoutConfigWorkflowOverride";
 import { SpellingPatience } from "./SpellingPatience";
 import { TurnEagerness } from "./TurnEagerness";
+import { TurnModel } from "./TurnModel";
 
 export const TurnConfigWorkflowOverride: core.serialization.ObjectSchema<
     serializers.TurnConfigWorkflowOverride.Raw,
@@ -24,6 +25,7 @@ export const TurnConfigWorkflowOverride: core.serialization.ObjectSchema<
         "retranscribe_on_turn_timeout",
         core.serialization.boolean().optional(),
     ),
+    turnModel: core.serialization.property("turn_model", TurnModel.optional()),
     softTimeoutConfig: core.serialization.property("soft_timeout_config", SoftTimeoutConfigWorkflowOverride.optional()),
 });
 
@@ -36,6 +38,7 @@ export declare namespace TurnConfigWorkflowOverride {
         spelling_patience?: SpellingPatience.Raw | null;
         speculative_turn?: boolean | null;
         retranscribe_on_turn_timeout?: boolean | null;
+        turn_model?: TurnModel.Raw | null;
         soft_timeout_config?: SoftTimeoutConfigWorkflowOverride.Raw | null;
     }
 }

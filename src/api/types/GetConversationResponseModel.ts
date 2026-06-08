@@ -5,6 +5,7 @@ import type * as ElevenLabs from "../index";
 export interface GetConversationResponseModel {
     agentId: string;
     agentName?: string;
+    conversationProduct?: string;
     status: ElevenLabs.GetConversationResponseModelStatus;
     userId?: string;
     branchId?: string;

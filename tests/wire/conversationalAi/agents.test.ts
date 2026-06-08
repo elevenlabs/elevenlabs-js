@@ -37,7 +37,7 @@ describe("AgentsClient", () => {
             conversation_config: {
                 asr: {
                     quality: "high",
-                    provider: "elevenlabs",
+                    provider: "scribe_realtime",
                     user_input_audio_format: "pcm_16000",
                     keywords: ["hello", "world"],
                 },
@@ -49,6 +49,7 @@ describe("AgentsClient", () => {
                     spelling_patience: "auto",
                     speculative_turn: false,
                     retranscribe_on_turn_timeout: false,
+                    turn_model: "turn_v3",
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
                 tts: {
@@ -454,7 +455,7 @@ describe("AgentsClient", () => {
                         conversation_config: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -465,6 +466,7 @@ describe("AgentsClient", () => {
                                 spelling_patience: "auto",
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
+                                turn_model: "turn_v3",
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -653,7 +655,7 @@ describe("AgentsClient", () => {
                         conversation_config: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -664,6 +666,7 @@ describe("AgentsClient", () => {
                                 spelling_patience: "auto",
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
+                                turn_model: "turn_v3",
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -853,7 +856,7 @@ describe("AgentsClient", () => {
                         conversation_config: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -864,6 +867,7 @@ describe("AgentsClient", () => {
                                 spelling_patience: "auto",
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
+                                turn_model: "turn_v3",
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -1113,7 +1117,7 @@ describe("AgentsClient", () => {
             conversationConfig: {
                 asr: {
                     quality: "high",
-                    provider: "elevenlabs",
+                    provider: "scribe_realtime",
                     userInputAudioFormat: "pcm_16000",
                     keywords: ["hello", "world"],
                 },
@@ -1125,6 +1129,7 @@ describe("AgentsClient", () => {
                     spellingPatience: "auto",
                     speculativeTurn: false,
                     retranscribeOnTurnTimeout: false,
+                    turnModel: "turn_v3",
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
                         message: "Hhmmmm...yeah.",
@@ -1657,7 +1662,7 @@ describe("AgentsClient", () => {
                         conversationConfig: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 userInputAudioFormat: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -1668,6 +1673,7 @@ describe("AgentsClient", () => {
                                 spellingPatience: "auto",
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
+                                turnModel: "turn_v3",
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -1892,7 +1898,7 @@ describe("AgentsClient", () => {
                         conversationConfig: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 userInputAudioFormat: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -1903,6 +1909,7 @@ describe("AgentsClient", () => {
                                 spellingPatience: "auto",
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
+                                turnModel: "turn_v3",
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -2135,7 +2142,7 @@ describe("AgentsClient", () => {
                         conversationConfig: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 userInputAudioFormat: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -2146,6 +2153,7 @@ describe("AgentsClient", () => {
                                 spellingPatience: "auto",
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
+                                turnModel: "turn_v3",
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -2472,7 +2480,7 @@ describe("AgentsClient", () => {
             conversation_config: {
                 asr: {
                     quality: "high",
-                    provider: "elevenlabs",
+                    provider: "scribe_realtime",
                     user_input_audio_format: "pcm_16000",
                     keywords: ["hello", "world"],
                 },
@@ -2484,6 +2492,7 @@ describe("AgentsClient", () => {
                     spelling_patience: "auto",
                     speculative_turn: false,
                     retranscribe_on_turn_timeout: false,
+                    turn_model: "turn_v3",
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
                 tts: {
@@ -2889,7 +2898,7 @@ describe("AgentsClient", () => {
                         conversation_config: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -2900,6 +2909,7 @@ describe("AgentsClient", () => {
                                 spelling_patience: "auto",
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
+                                turn_model: "turn_v3",
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -3088,7 +3098,7 @@ describe("AgentsClient", () => {
                         conversation_config: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -3099,6 +3109,7 @@ describe("AgentsClient", () => {
                                 spelling_patience: "auto",
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
+                                turn_model: "turn_v3",
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -3288,7 +3299,7 @@ describe("AgentsClient", () => {
                         conversation_config: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 user_input_audio_format: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -3299,6 +3310,7 @@ describe("AgentsClient", () => {
                                 spelling_patience: "auto",
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
+                                turn_model: "turn_v3",
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -3549,7 +3561,7 @@ describe("AgentsClient", () => {
             conversationConfig: {
                 asr: {
                     quality: "high",
-                    provider: "elevenlabs",
+                    provider: "scribe_realtime",
                     userInputAudioFormat: "pcm_16000",
                     keywords: ["hello", "world"],
                 },
@@ -3561,6 +3573,7 @@ describe("AgentsClient", () => {
                     spellingPatience: "auto",
                     speculativeTurn: false,
                     retranscribeOnTurnTimeout: false,
+                    turnModel: "turn_v3",
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
                         message: "Hhmmmm...yeah.",
@@ -4093,7 +4106,7 @@ describe("AgentsClient", () => {
                         conversationConfig: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 userInputAudioFormat: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -4104,6 +4117,7 @@ describe("AgentsClient", () => {
                                 spellingPatience: "auto",
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
+                                turnModel: "turn_v3",
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -4328,7 +4342,7 @@ describe("AgentsClient", () => {
                         conversationConfig: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 userInputAudioFormat: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -4339,6 +4353,7 @@ describe("AgentsClient", () => {
                                 spellingPatience: "auto",
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
+                                turnModel: "turn_v3",
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -4571,7 +4586,7 @@ describe("AgentsClient", () => {
                         conversationConfig: {
                             asr: {
                                 quality: "high",
-                                provider: "elevenlabs",
+                                provider: "scribe_realtime",
                                 userInputAudioFormat: "pcm_16000",
                                 keywords: ["hello", "world"],
                             },
@@ -4582,6 +4597,7 @@ describe("AgentsClient", () => {
                                 spellingPatience: "auto",
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
+                                turnModel: "turn_v3",
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",

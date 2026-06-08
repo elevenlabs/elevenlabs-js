@@ -14,4 +14,6 @@ export interface GetKnowledgeBaseSummaryFileResponseModel {
     folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentSummaryResponseModel[];
     /** This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead. */
     dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem[];
+    externalSyncInfo?: ElevenLabs.ExternalFileSyncInfo;
+    isFrozen?: boolean;
 }

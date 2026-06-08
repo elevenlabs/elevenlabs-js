@@ -176,7 +176,7 @@ export class PhoneNumbersClient {
     /**
      * Retrieve Phone Number details by ID
      *
-     * @param {string} phone_number_id - The id of an agent. This is returned on agent creation.
+     * @param {string} phone_number_id - The phone number ID. This is returned when a phone number is imported.
      * @param {PhoneNumbersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -252,7 +252,7 @@ export class PhoneNumbersClient {
     /**
      * Delete Phone Number by ID
      *
-     * @param {string} phone_number_id - The id of an agent. This is returned on agent creation.
+     * @param {string} phone_number_id - The phone number ID. This is returned when a phone number is imported.
      * @param {PhoneNumbersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -320,7 +320,7 @@ export class PhoneNumbersClient {
     /**
      * Update assigned agent of a phone number
      *
-     * @param {string} phone_number_id - The id of an agent. This is returned on agent creation.
+     * @param {string} phone_number_id - The phone number ID. This is returned when a phone number is imported.
      * @param {ElevenLabs.conversationalAi.UpdatePhoneNumberRequest} request
      * @param {PhoneNumbersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -404,7 +404,7 @@ export class PhoneNumbersClient {
     /**
      * Get SIP messages for a phone number
      *
-     * @param {string} phone_number_id - The id of an agent. This is returned on agent creation.
+     * @param {string} phone_number_id - The phone number ID. This is returned when a phone number is imported.
      * @param {ElevenLabs.conversationalAi.PhoneNumbersGetSipMessagesRequest} request
      * @param {PhoneNumbersClient.RequestOptions} requestOptions - Request-specific configuration.
      *

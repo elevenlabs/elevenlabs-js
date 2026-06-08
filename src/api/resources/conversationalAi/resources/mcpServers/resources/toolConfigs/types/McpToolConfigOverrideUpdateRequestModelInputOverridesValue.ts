@@ -5,7 +5,8 @@ import type * as ElevenLabs from "../../../../../../../index";
 export type McpToolConfigOverrideUpdateRequestModelInputOverridesValue =
     | ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Constant
     | ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModelInputOverridesValue.DynamicVariable
-    | ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Llm;
+    | ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Llm
+    | ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModelInputOverridesValue.Omit;
 
 export namespace McpToolConfigOverrideUpdateRequestModelInputOverridesValue {
     export interface Constant extends ElevenLabs.ConstantSchemaOverride {
@@ -18,5 +19,9 @@ export namespace McpToolConfigOverrideUpdateRequestModelInputOverridesValue {
 
     export interface Llm extends ElevenLabs.LlmSchemaOverride {
         source: "llm";
+    }
+
+    export interface Omit extends ElevenLabs.OmitSchemaOverride {
+        source: "omit";
     }
 }
