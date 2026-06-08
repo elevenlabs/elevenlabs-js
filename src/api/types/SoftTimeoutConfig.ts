@@ -6,10 +6,14 @@
 export interface SoftTimeoutConfig {
     /** Time in seconds before showing the predefined message while waiting for LLM response. Set to -1 to disable. */
     timeoutSeconds?: number;
-    /** Message to show when soft timeout is reached while waiting for LLM response */
+    /** Message to show when the first soft timeout is reached while waiting for LLM response */
     message?: string;
+    /** Extra static filler messages for subsequent soft timeouts in the same LLM generation. The first timeout uses `message`. If fewer messages are configured than `max_soft_timeouts_per_generation`, the last configured message is repeated; otherwise a built-in filler is used. */
+    additionalSoftTimeoutMessages?: string[];
     /** If enabled, the soft timeout message will be generated dynamically instead of using the static message. */
     useLlmGeneratedMessage?: boolean;
+    /** Maximum filler messages while waiting for a single LLM response. Fires every timeout_seconds until the LLM streams content or this limit is reached. */
+    maxSoftTimeoutsPerGeneration?: number;
     /** Custom prompt for generating the soft timeout filler message when use_llm_generated_message is enabled. Recent conversation context is provided as a separate user message. If not set, the default prompt will be used. */
     llmGeneratedMessagePromptOverride?: string;
 }

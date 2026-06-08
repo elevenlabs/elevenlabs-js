@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { SpellingPatience } from "./SpellingPatience";
 import { TurnEagerness } from "./TurnEagerness";
+import { TurnModel } from "./TurnModel";
 
 export const BaseTurnConfig: core.serialization.ObjectSchema<
     serializers.BaseTurnConfig.Raw,
@@ -23,6 +24,7 @@ export const BaseTurnConfig: core.serialization.ObjectSchema<
         "retranscribe_on_turn_timeout",
         core.serialization.boolean().optional(),
     ),
+    turnModel: core.serialization.property("turn_model", TurnModel.optional()),
 });
 
 export declare namespace BaseTurnConfig {
@@ -34,5 +36,6 @@ export declare namespace BaseTurnConfig {
         spelling_patience?: SpellingPatience.Raw | null;
         speculative_turn?: boolean | null;
         retranscribe_on_turn_timeout?: boolean | null;
+        turn_model?: TurnModel.Raw | null;
     }
 }

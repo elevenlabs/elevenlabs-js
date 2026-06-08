@@ -11,6 +11,7 @@ describe("AnalysisClient", () => {
         const rawResponseBody = {
             agent_id: "agent_id",
             agent_name: "agent_name",
+            conversation_product: "conversation_product",
             status: "initiated",
             user_id: "user_id",
             branch_id: "branch_id",
@@ -215,6 +216,7 @@ describe("AnalysisClient", () => {
         expect(response).toEqual({
             agentId: "agent_id",
             agentName: "agent_name",
+            conversationProduct: "conversation_product",
             status: "initiated",
             userId: "user_id",
             branchId: "branch_id",

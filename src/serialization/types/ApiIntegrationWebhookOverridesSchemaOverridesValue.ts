@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { ConstantSchemaOverride } from "./ConstantSchemaOverride";
 import { DynamicVariableSchemaOverride } from "./DynamicVariableSchemaOverride";
 import { LlmSchemaOverride } from "./LlmSchemaOverride";
+import { OmitSchemaOverride } from "./OmitSchemaOverride";
 
 export const ApiIntegrationWebhookOverridesSchemaOverridesValue: core.serialization.Schema<
     serializers.ApiIntegrationWebhookOverridesSchemaOverridesValue.Raw,
@@ -15,6 +16,7 @@ export const ApiIntegrationWebhookOverridesSchemaOverridesValue: core.serializat
         constant: ConstantSchemaOverride,
         dynamic_variable: DynamicVariableSchemaOverride,
         llm: LlmSchemaOverride,
+        omit: OmitSchemaOverride,
     })
     .transform<ElevenLabs.ApiIntegrationWebhookOverridesSchemaOverridesValue>({
         transform: (value) => value,
@@ -25,7 +27,8 @@ export declare namespace ApiIntegrationWebhookOverridesSchemaOverridesValue {
     export type Raw =
         | ApiIntegrationWebhookOverridesSchemaOverridesValue.Constant
         | ApiIntegrationWebhookOverridesSchemaOverridesValue.DynamicVariable
-        | ApiIntegrationWebhookOverridesSchemaOverridesValue.Llm;
+        | ApiIntegrationWebhookOverridesSchemaOverridesValue.Llm
+        | ApiIntegrationWebhookOverridesSchemaOverridesValue.Omit;
 
     export interface Constant extends ConstantSchemaOverride.Raw {
         source: "constant";
@@ -37,5 +40,9 @@ export declare namespace ApiIntegrationWebhookOverridesSchemaOverridesValue {
 
     export interface Llm extends LlmSchemaOverride.Raw {
         source: "llm";
+    }
+
+    export interface Omit extends OmitSchemaOverride.Raw {
+        source: "omit";
     }
 }

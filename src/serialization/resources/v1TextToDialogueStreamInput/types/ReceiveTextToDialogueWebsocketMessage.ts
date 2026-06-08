@@ -6,12 +6,14 @@ import type * as serializers from "../../../index";
 import { TextToDialogueWebsocketAudioChunk } from "../../../types/TextToDialogueWebsocketAudioChunk";
 import { TextToDialogueWebsocketError } from "../../../types/TextToDialogueWebsocketError";
 import { TextToDialogueWebsocketFinal } from "../../../types/TextToDialogueWebsocketFinal";
+import { TextToDialogueWebsocketFinalAudioForTurn } from "../../../types/TextToDialogueWebsocketFinalAudioForTurn";
 
 export const ReceiveTextToDialogueWebsocketMessage: core.serialization.Schema<
     serializers.ReceiveTextToDialogueWebsocketMessage.Raw,
     ElevenLabs.ReceiveTextToDialogueWebsocketMessage
 > = core.serialization.undiscriminatedUnion([
     TextToDialogueWebsocketAudioChunk,
+    TextToDialogueWebsocketFinalAudioForTurn,
     TextToDialogueWebsocketFinal,
     TextToDialogueWebsocketError,
 ]);
@@ -19,6 +21,7 @@ export const ReceiveTextToDialogueWebsocketMessage: core.serialization.Schema<
 export declare namespace ReceiveTextToDialogueWebsocketMessage {
     export type Raw =
         | TextToDialogueWebsocketAudioChunk.Raw
+        | TextToDialogueWebsocketFinalAudioForTurn.Raw
         | TextToDialogueWebsocketFinal.Raw
         | TextToDialogueWebsocketError.Raw;
 }

@@ -17,4 +17,5 @@ export interface BaseTurnConfig {
     speculativeTurn?: boolean;
     /** When enabled, if VAD detects no speech, attempts to re-transcribe accumulated audio at turn timeout. Disables silence discount billing for affected turns. */
     retranscribeOnTurnTimeout?: boolean;
+    turnModel?: ElevenLabs.TurnModel;
 }

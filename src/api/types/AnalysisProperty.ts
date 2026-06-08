@@ -10,16 +10,18 @@ import type * as ElevenLabs from "../index";
  */
 export interface AnalysisProperty {
     type: ElevenLabs.AnalysisPropertyType;
-    /** The description of the property. When set, the LLM will provide the value based on this description. Mutually exclusive with dynamic_variable, is_system_provided, and constant_value. */
+    /** The description of the property. When set, the LLM will provide the value based on this description. Mutually exclusive with dynamic_variable, is_system_provided, constant_value, and is_omitted. */
     description?: string;
     /** List of allowed string values for string type parameters */
     enum?: string[];
-    /** If true, the value will be populated by the system at runtime. Used by API Integration Webhook tools for templating. Mutually exclusive with description, dynamic_variable, and constant_value. */
+    /** If true, the value will be populated by the system at runtime. Used by API Integration Webhook tools for templating. Mutually exclusive with description, dynamic_variable, constant_value, and is_omitted. */
     isSystemProvided?: boolean;
-    /** The name of the dynamic variable to use for this property's value. Mutually exclusive with description, is_system_provided, and constant_value. */
+    /** The name of the dynamic variable to use for this property's value. Mutually exclusive with description, is_system_provided, constant_value, and is_omitted. */
     dynamicVariable?: string;
-    /** A constant value to use for this property. Mutually exclusive with description, dynamic_variable, and is_system_provided. */
+    /** A constant value to use for this property. Mutually exclusive with description, dynamic_variable, is_system_provided, and is_omitted. */
     constantValue?: ElevenLabs.AnalysisPropertyConstantValue;
+    /** If true, this parameter will be completely omitted from the request. Only valid for optional parameters. Mutually exclusive with description, dynamic_variable, is_system_provided, and constant_value. */
+    isOmitted?: boolean;
     /** LLM model to use for this analysis item. If not set, uses agent's analysis_llm default. */
     llm?: ElevenLabs.Llm;
 }

@@ -4,11 +4,11 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 
-export const LoadProcedureToolErrorStatus: core.serialization.Schema<
-    serializers.LoadProcedureToolErrorStatus.Raw,
-    ElevenLabs.LoadProcedureToolErrorStatus
+export const StartProcedureToolErrorStatus: core.serialization.Schema<
+    serializers.StartProcedureToolErrorStatus.Raw,
+    ElevenLabs.StartProcedureToolErrorStatus
 > = core.serialization.enum_(["not_found", "invalid_name"]);
 
-export declare namespace LoadProcedureToolErrorStatus {
+export declare namespace StartProcedureToolErrorStatus {
     export type Raw = "not_found" | "invalid_name";
 }

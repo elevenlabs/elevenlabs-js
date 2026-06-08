@@ -16,6 +16,7 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     agentName: core.serialization.property("agent_name", core.serialization.string().optional()),
+    conversationProduct: core.serialization.property("conversation_product", core.serialization.string().optional()),
     status: GetConversationResponseModelStatus,
     userId: core.serialization.property("user_id", core.serialization.string().optional()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
@@ -44,6 +45,7 @@ export declare namespace GetConversationResponseModel {
     export interface Raw {
         agent_id: string;
         agent_name?: string | null;
+        conversation_product?: string | null;
         status: GetConversationResponseModelStatus.Raw;
         user_id?: string | null;
         branch_id?: string | null;

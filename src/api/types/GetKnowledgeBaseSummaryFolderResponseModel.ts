@@ -16,4 +16,6 @@ export interface GetKnowledgeBaseSummaryFolderResponseModel {
     dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem[];
     childrenCount: number;
     autoSyncInfo?: ElevenLabs.AutoSyncInfo;
+    externalSyncInfo?: ElevenLabs.ExternalFolderSyncInfo;
+    isFrozen?: boolean;
 }

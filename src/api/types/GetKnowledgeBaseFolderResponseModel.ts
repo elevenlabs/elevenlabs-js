@@ -14,4 +14,6 @@ export interface GetKnowledgeBaseFolderResponseModel {
     folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentResponseModel[];
     childrenCount: number;
     autoSyncInfo?: ElevenLabs.AutoSyncInfo;
+    externalSyncInfo?: ElevenLabs.ExternalFolderSyncInfo;
+    isFrozen?: boolean;
 }

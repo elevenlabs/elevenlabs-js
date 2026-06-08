@@ -5,7 +5,8 @@ import type * as ElevenLabs from "../index";
 export type McpToolConfigOverrideInputInputOverridesValue =
     | ElevenLabs.McpToolConfigOverrideInputInputOverridesValue.Constant
     | ElevenLabs.McpToolConfigOverrideInputInputOverridesValue.DynamicVariable
-    | ElevenLabs.McpToolConfigOverrideInputInputOverridesValue.Llm;
+    | ElevenLabs.McpToolConfigOverrideInputInputOverridesValue.Llm
+    | ElevenLabs.McpToolConfigOverrideInputInputOverridesValue.Omit;
 
 export namespace McpToolConfigOverrideInputInputOverridesValue {
     export interface Constant extends ElevenLabs.ConstantSchemaOverride {
@@ -18,5 +19,9 @@ export namespace McpToolConfigOverrideInputInputOverridesValue {
 
     export interface Llm extends ElevenLabs.LlmSchemaOverride {
         source: "llm";
+    }
+
+    export interface Omit extends ElevenLabs.OmitSchemaOverride {
+        source: "omit";
     }
 }

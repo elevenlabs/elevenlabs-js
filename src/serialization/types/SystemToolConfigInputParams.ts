@@ -6,9 +6,9 @@ import type * as serializers from "../index";
 import { EndCallToolConfig } from "./EndCallToolConfig";
 import { KnowledgeBaseRagToolConfig } from "./KnowledgeBaseRagToolConfig";
 import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
-import { LoadProcedureToolConfigInput } from "./LoadProcedureToolConfigInput";
 import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
+import { StartProcedureToolConfigInput } from "./StartProcedureToolConfigInput";
 import { TransferToAgentToolConfig } from "./TransferToAgentToolConfig";
 import { TransferToNumberToolConfigInput } from "./TransferToNumberToolConfigInput";
 import { VoicemailDetectionToolConfig } from "./VoicemailDetectionToolConfig";
@@ -21,9 +21,9 @@ export const SystemToolConfigInputParams: core.serialization.Schema<
         end_call: EndCallToolConfig,
         knowledge_base_rag: KnowledgeBaseRagToolConfig,
         language_detection: LanguageDetectionToolConfig,
-        load_procedure: LoadProcedureToolConfigInput,
         play_keypad_touch_tone: PlayDtmfToolConfig,
         skip_turn: SkipTurnToolConfig,
+        start_procedure: StartProcedureToolConfigInput,
         transfer_to_agent: TransferToAgentToolConfig,
         transfer_to_number: TransferToNumberToolConfigInput,
         voicemail_detection: VoicemailDetectionToolConfig,
@@ -38,9 +38,9 @@ export declare namespace SystemToolConfigInputParams {
         | SystemToolConfigInputParams.EndCall
         | SystemToolConfigInputParams.KnowledgeBaseRag
         | SystemToolConfigInputParams.LanguageDetection
-        | SystemToolConfigInputParams.LoadProcedure
         | SystemToolConfigInputParams.PlayKeypadTouchTone
         | SystemToolConfigInputParams.SkipTurn
+        | SystemToolConfigInputParams.StartProcedure
         | SystemToolConfigInputParams.TransferToAgent
         | SystemToolConfigInputParams.TransferToNumber
         | SystemToolConfigInputParams.VoicemailDetection;
@@ -57,16 +57,16 @@ export declare namespace SystemToolConfigInputParams {
         system_tool_type: "language_detection";
     }
 
-    export interface LoadProcedure extends LoadProcedureToolConfigInput.Raw {
-        system_tool_type: "load_procedure";
-    }
-
     export interface PlayKeypadTouchTone extends PlayDtmfToolConfig.Raw {
         system_tool_type: "play_keypad_touch_tone";
     }
 
     export interface SkipTurn extends SkipTurnToolConfig.Raw {
         system_tool_type: "skip_turn";
+    }
+
+    export interface StartProcedure extends StartProcedureToolConfigInput.Raw {
+        system_tool_type: "start_procedure";
     }
 
     export interface TransferToAgent extends TransferToAgentToolConfig.Raw {

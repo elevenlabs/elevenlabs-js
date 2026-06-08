@@ -10,7 +10,7 @@ import { BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization 
 
 export const BodyTextToDialogueMultiVoiceV1TextToDialoguePost: core.serialization.Schema<
     serializers.BodyTextToDialogueMultiVoiceV1TextToDialoguePost.Raw,
-    Omit<ElevenLabs.BodyTextToDialogueMultiVoiceV1TextToDialoguePost, "outputFormat">
+    Omit<ElevenLabs.BodyTextToDialogueMultiVoiceV1TextToDialoguePost, "outputFormat" | "enableLogging">
 > = core.serialization.object({
     inputs: core.serialization.list(DialogueInput),
     modelId: core.serialization.property("model_id", core.serialization.string().optional()),

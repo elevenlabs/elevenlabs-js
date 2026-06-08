@@ -17,6 +17,8 @@ export interface TurnConfigWorkflowOverride {
     speculativeTurn?: boolean;
     /** When enabled, if VAD detects no speech, attempts to re-transcribe accumulated audio at turn timeout. Disables silence discount billing for affected turns. */
     retranscribeOnTurnTimeout?: boolean;
+    /** Version of the turn detection model to use. */
+    turnModel?: ElevenLabs.TurnModel;
     /** Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses. */
     softTimeoutConfig?: ElevenLabs.SoftTimeoutConfigWorkflowOverride;
 }

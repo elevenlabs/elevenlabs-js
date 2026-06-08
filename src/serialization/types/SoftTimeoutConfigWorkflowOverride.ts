@@ -10,9 +10,17 @@ export const SoftTimeoutConfigWorkflowOverride: core.serialization.ObjectSchema<
 > = core.serialization.object({
     timeoutSeconds: core.serialization.property("timeout_seconds", core.serialization.number().optional()),
     message: core.serialization.string().optional(),
+    additionalSoftTimeoutMessages: core.serialization.property(
+        "additional_soft_timeout_messages",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     useLlmGeneratedMessage: core.serialization.property(
         "use_llm_generated_message",
         core.serialization.boolean().optional(),
+    ),
+    maxSoftTimeoutsPerGeneration: core.serialization.property(
+        "max_soft_timeouts_per_generation",
+        core.serialization.number().optional(),
     ),
     llmGeneratedMessagePromptOverride: core.serialization.property(
         "llm_generated_message_prompt_override",
@@ -24,7 +32,9 @@ export declare namespace SoftTimeoutConfigWorkflowOverride {
     export interface Raw {
         timeout_seconds?: number | null;
         message?: string | null;
+        additional_soft_timeout_messages?: string[] | null;
         use_llm_generated_message?: boolean | null;
+        max_soft_timeouts_per_generation?: number | null;
         llm_generated_message_prompt_override?: string | null;
     }
 }

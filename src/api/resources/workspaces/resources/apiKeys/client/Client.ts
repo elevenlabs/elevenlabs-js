@@ -23,7 +23,7 @@ export class ApiKeysClient {
     }
 
     /**
-     * Revoke the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation.
+     * Revoke the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation. This endpoint requires additional permissions and is not enabled by default. Reach out to your ElevenLabs contact to request access.
      *
      * @param {ElevenLabs.workspaces.ApiKeysRevokeRequest} request
      * @param {ApiKeysClient.RequestOptions} requestOptions - Request-specific configuration.

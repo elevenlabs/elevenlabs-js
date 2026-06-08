@@ -23,6 +23,8 @@ export * from "./pronunciationDictionaries/types";
 export * as serviceAccounts from "./serviceAccounts";
 export * as speechEngine from "./speechEngine";
 export * from "./speechEngine/client/requests";
+export * as speechEngineUpstream from "./speechEngineUpstream";
+export * from "./speechEngineUpstream/types";
 export * as speechToSpeech from "./speechToSpeech";
 export * from "./speechToSpeech/types";
 export * as speechToText from "./speechToText";

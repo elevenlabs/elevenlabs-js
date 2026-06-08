@@ -3,26 +3,29 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { CustomGuardrailConfig } from "./CustomGuardrailConfig";
 import { ProcedureType } from "./ProcedureType";
 
-export const ProcedureAtVersion: core.serialization.ObjectSchema<
-    serializers.ProcedureAtVersion.Raw,
-    ElevenLabs.ProcedureAtVersion
+export const ProcedureAtVersionInput: core.serialization.ObjectSchema<
+    serializers.ProcedureAtVersionInput.Raw,
+    ElevenLabs.ProcedureAtVersionInput
 > = core.serialization.object({
     procedureId: core.serialization.property("procedure_id", core.serialization.string()),
     name: core.serialization.string(),
     content: core.serialization.string(),
     type: ProcedureType.optional(),
+    guardrails: core.serialization.list(CustomGuardrailConfig).optional(),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     versionId: core.serialization.property("version_id", core.serialization.string().optional()),
 });
 
-export declare namespace ProcedureAtVersion {
+export declare namespace ProcedureAtVersionInput {
     export interface Raw {
         procedure_id: string;
         name: string;
         content: string;
         type?: ProcedureType.Raw | null;
+        guardrails?: CustomGuardrailConfig.Raw[] | null;
         agent_id: string;
         version_id?: string | null;
     }

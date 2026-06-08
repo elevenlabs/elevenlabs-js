@@ -7,5 +7,6 @@ import type * as ElevenLabs from "../../../index";
  */
 export type ReceiveTextToDialogueWebsocketMessage =
     | ElevenLabs.TextToDialogueWebsocketAudioChunk
+    | ElevenLabs.TextToDialogueWebsocketFinalAudioForTurn
     | ElevenLabs.TextToDialogueWebsocketFinal
     | ElevenLabs.TextToDialogueWebsocketError;

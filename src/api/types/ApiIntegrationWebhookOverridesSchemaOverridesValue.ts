@@ -5,7 +5,8 @@ import type * as ElevenLabs from "../index";
 export type ApiIntegrationWebhookOverridesSchemaOverridesValue =
     | ElevenLabs.ApiIntegrationWebhookOverridesSchemaOverridesValue.Constant
     | ElevenLabs.ApiIntegrationWebhookOverridesSchemaOverridesValue.DynamicVariable
-    | ElevenLabs.ApiIntegrationWebhookOverridesSchemaOverridesValue.Llm;
+    | ElevenLabs.ApiIntegrationWebhookOverridesSchemaOverridesValue.Llm
+    | ElevenLabs.ApiIntegrationWebhookOverridesSchemaOverridesValue.Omit;
 
 export namespace ApiIntegrationWebhookOverridesSchemaOverridesValue {
     export interface Constant extends ElevenLabs.ConstantSchemaOverride {
@@ -18,5 +19,9 @@ export namespace ApiIntegrationWebhookOverridesSchemaOverridesValue {
 
     export interface Llm extends ElevenLabs.LlmSchemaOverride {
         source: "llm";
+    }
+
+    export interface Omit extends ElevenLabs.OmitSchemaOverride {
+        source: "omit";
     }
 }

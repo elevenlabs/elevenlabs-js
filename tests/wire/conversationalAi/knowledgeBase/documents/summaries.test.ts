@@ -29,6 +29,15 @@ describe("SummariesClient", () => {
                     dependent_agents: [
                         { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
                     ],
+                    external_sync_info: {
+                        type: "google_drive",
+                        source_entity_id: "source_entity_id",
+                        integration_connection_id: "integration_connection_id",
+                        source_parent_entity_id: "source_parent_entity_id",
+                        source_mime_type: "source_mime_type",
+                        source_modified_time: "2024-01-15T09:30:00Z",
+                    },
+                    is_frozen: true,
                 },
             },
         };
@@ -78,6 +87,15 @@ describe("SummariesClient", () => {
                             accessLevel: "admin",
                         },
                     ],
+                    externalSyncInfo: {
+                        type: "google_drive",
+                        sourceEntityId: "source_entity_id",
+                        integrationConnectionId: "integration_connection_id",
+                        sourceParentEntityId: "source_parent_entity_id",
+                        sourceMimeType: "source_mime_type",
+                        sourceModifiedTime: new Date("2024-01-15T09:30:00.000Z"),
+                    },
+                    isFrozen: true,
                 },
             },
         });

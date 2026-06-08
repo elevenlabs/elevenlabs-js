@@ -3,18 +3,20 @@
 import type * as ElevenLabs from "../index";
 
 /**
- * Schema property for literal JSON types. IMPORTANT: Only ONE of the following fields can be set: description (LLM provides value), dynamic_variable (value from variable), is_system_provided (system provides value), or constant_value (fixed value). These are mutually exclusive.
+ * Schema property for literal JSON types. IMPORTANT: Only ONE of the following fields can be set: description (LLM provides value), dynamic_variable (value from variable), is_system_provided (system provides value), constant_value (fixed value), or is_omitted (parameter is omitted). These are mutually exclusive.
  */
 export interface LiteralJsonSchemaProperty {
     type: ElevenLabs.LiteralJsonSchemaPropertyType;
-    /** The description of the property. When set, the LLM will provide the value based on this description. Mutually exclusive with dynamic_variable, is_system_provided, and constant_value. */
+    /** The description of the property. When set, the LLM will provide the value based on this description. Mutually exclusive with dynamic_variable, is_system_provided, constant_value, and is_omitted. */
     description?: string;
     /** List of allowed string values for string type parameters */
     enum?: string[];
-    /** If true, the value will be populated by the system at runtime. Used by API Integration Webhook tools for templating. Mutually exclusive with description, dynamic_variable, and constant_value. */
+    /** If true, the value will be populated by the system at runtime. Used by API Integration Webhook tools for templating. Mutually exclusive with description, dynamic_variable, constant_value, and is_omitted. */
     isSystemProvided?: boolean;
-    /** The name of the dynamic variable to use for this property's value. Mutually exclusive with description, is_system_provided, and constant_value. */
+    /** The name of the dynamic variable to use for this property's value. Mutually exclusive with description, is_system_provided, constant_value, and is_omitted. */
     dynamicVariable?: string;
-    /** A constant value to use for this property. Mutually exclusive with description, dynamic_variable, and is_system_provided. */
+    /** A constant value to use for this property. Mutually exclusive with description, dynamic_variable, is_system_provided, and is_omitted. */
     constantValue?: ElevenLabs.LiteralJsonSchemaPropertyConstantValue;
+    /** If true, this parameter will be completely omitted from the request. Only valid for optional parameters. Mutually exclusive with description, dynamic_variable, is_system_provided, and constant_value. */
+    isOmitted?: boolean;
 }

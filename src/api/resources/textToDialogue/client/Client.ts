@@ -38,13 +38,17 @@ export class TextToDialogueClient {
         request: ElevenLabs.BodyTextToDialogueMultiVoiceV1TextToDialoguePost,
         requestOptions?: TextToDialogueClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const { outputFormat, ..._body } = request;
+        const { outputFormat, enableLogging, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
             _queryParams.output_format = serializers.TextToDialogueConvertRequestOutputFormat.jsonOrThrow(
                 outputFormat,
                 { unrecognizedObjectKeys: "strip" },
             );
+        }
+
+        if (enableLogging != null) {
+            _queryParams.enable_logging = enableLogging.toString();
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -109,12 +113,16 @@ export class TextToDialogueClient {
         request: ElevenLabs.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost,
         requestOptions?: TextToDialogueClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const { outputFormat, ..._body } = request;
+        const { outputFormat, enableLogging, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
             _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
                 unrecognizedObjectKeys: "strip",
             });
+        }
+
+        if (enableLogging != null) {
+            _queryParams.enable_logging = enableLogging.toString();
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -182,12 +190,16 @@ export class TextToDialogueClient {
     ): Promise<
         core.WithRawResponse<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsAndVoiceSegmentsResponseModel>>
     > {
-        const { outputFormat, ..._body } = request;
+        const { outputFormat, enableLogging, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
             _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
                 unrecognizedObjectKeys: "strip",
             });
+        }
+
+        if (enableLogging != null) {
+            _queryParams.enable_logging = enableLogging.toString();
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -274,6 +286,7 @@ export class TextToDialogueClient {
      * @example
      *     await client.textToDialogue.convertWithTimestamps({
      *         outputFormat: "alaw_8000",
+     *         enableLogging: true,
      *         inputs: [{
      *                 text: "Hello, how are you?",
      *                 voiceId: "bYTqZQo3Jz7LQtmGTgwi"
@@ -294,13 +307,17 @@ export class TextToDialogueClient {
         request: ElevenLabs.BodyTextToDialogueFullWithTimestamps,
         requestOptions?: TextToDialogueClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AudioWithTimestampsAndVoiceSegmentsResponseModel>> {
-        const { outputFormat, ..._body } = request;
+        const { outputFormat, enableLogging, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (outputFormat != null) {
             _queryParams.output_format = serializers.TextToDialogueConvertWithTimestampsRequestOutputFormat.jsonOrThrow(
                 outputFormat,
                 { unrecognizedObjectKeys: "strip" },
             );
+        }
+
+        if (enableLogging != null) {
+            _queryParams.enable_logging = enableLogging.toString();
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

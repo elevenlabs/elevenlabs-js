@@ -55,6 +55,7 @@ describe("TextToDialogueClient", () => {
 
         const response = await client.textToDialogue.convertWithTimestamps({
             outputFormat: "alaw_8000",
+            enableLogging: true,
             inputs: [
                 {
                     text: "Hello, how are you?",
