@@ -26,6 +26,7 @@ describe("SpeechEngineClient", () => {
             next_cursor: "next_cursor",
             has_more: false,
         };
+
         server.mockEndpoint().get("/v1/speech-engine").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.speechEngine.list({
@@ -130,6 +131,7 @@ describe("SpeechEngineClient", () => {
                 access_source: "creator",
             },
         };
+
         server
             .mockEndpoint()
             .post("/v1/speech-engine")
@@ -322,6 +324,7 @@ describe("SpeechEngineClient", () => {
                 access_source: "creator",
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/speech-engine/seng_3701k3ttaq12ewp8b7qv5rfyszkz")
@@ -524,6 +527,7 @@ describe("SpeechEngineClient", () => {
                 access_source: "creator",
             },
         };
+
         server
             .mockEndpoint()
             .patch("/v1/speech-engine/seng_3701k3ttaq12ewp8b7qv5rfyszkz")

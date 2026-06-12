@@ -57,35 +57,15 @@ export class ExecutionsClient {
         requestOptions?: ExecutionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetToolExecutionsPageResponseModel>> {
         const { cursor, pageSize, isError, agentId, branchId, startTime, endTime } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (isError != null) {
-            _queryParams.is_error = isError.toString();
-        }
-
-        if (agentId != null) {
-            _queryParams.agent_id = agentId;
-        }
-
-        if (branchId != null) {
-            _queryParams.branch_id = branchId;
-        }
-
-        if (startTime != null) {
-            _queryParams.start_time = startTime.toString();
-        }
-
-        if (endTime != null) {
-            _queryParams.end_time = endTime.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            cursor,
+            page_size: pageSize,
+            is_error: isError,
+            agent_id: agentId,
+            branch_id: branchId,
+            start_time: startTime,
+            end_time: endTime,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -100,7 +80,11 @@ export class ExecutionsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

@@ -22,6 +22,7 @@ describe("PhoneNumbersClient", () => {
                 },
             },
         ];
+
         server
             .mockEndpoint()
             .get("/v1/convai/phone-numbers")
@@ -30,7 +31,11 @@ describe("PhoneNumbersClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.phoneNumbers.list();
+        const response = await client.conversationalAi.phoneNumbers.list({
+            provider: "twilio",
+            agentId: "agent_id",
+            branchId: "branch_id",
+        });
         expect(response).toEqual([
             {
                 provider: "twilio",
@@ -58,6 +63,7 @@ describe("PhoneNumbersClient", () => {
             token: "token",
         };
         const rawResponseBody = { phone_number_id: "phone_number_id" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/phone-numbers")
@@ -95,6 +101,7 @@ describe("PhoneNumbersClient", () => {
                 branch_id: "branch_id",
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/phone-numbers/TeaqRRdTcIfIu2i7BYfT")
@@ -123,6 +130,7 @@ describe("PhoneNumbersClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/phone-numbers/TeaqRRdTcIfIu2i7BYfT")
@@ -153,6 +161,7 @@ describe("PhoneNumbersClient", () => {
                 branch_id: "branch_id",
             },
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/phone-numbers/TeaqRRdTcIfIu2i7BYfT")
@@ -198,6 +207,7 @@ describe("PhoneNumbersClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/phone-numbers/TeaqRRdTcIfIu2i7BYfT/sip-messages")

@@ -33,6 +33,7 @@ describe("BranchesClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/branches")
@@ -81,6 +82,7 @@ describe("BranchesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { parent_version_id: "parent_version_id", name: "name", description: "description" };
         const rawResponseBody = { created_branch_id: "created_branch_id", created_version_id: "created_version_id" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/branches")
@@ -143,6 +145,7 @@ describe("BranchesClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/branches/agtbranch_0901k4aafjxxfxt93gd841r7tv5t")
@@ -240,6 +243,7 @@ describe("BranchesClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .patch(
@@ -303,6 +307,7 @@ describe("BranchesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .post(

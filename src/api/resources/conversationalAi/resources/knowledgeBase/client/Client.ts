@@ -82,63 +82,31 @@ export class KnowledgeBaseClient {
             sortBy,
             cursor,
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (search != null) {
-            _queryParams.search = search;
-        }
-
-        if (showOnlyOwnedDocuments != null) {
-            _queryParams.show_only_owned_documents = showOnlyOwnedDocuments.toString();
-        }
-
-        if (createdByUserId != null) {
-            _queryParams.created_by_user_id = createdByUserId;
-        }
-
-        if (types != null) {
-            if (Array.isArray(types)) {
-                _queryParams.types = types.map((item) =>
-                    serializers.KnowledgeBaseDocumentType.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
-                );
-            } else {
-                _queryParams.types = serializers.KnowledgeBaseDocumentType.jsonOrThrow(types, {
-                    unrecognizedObjectKeys: "strip",
-                });
-            }
-        }
-
-        if (parentFolderId != null) {
-            _queryParams.parent_folder_id = parentFolderId;
-        }
-
-        if (ancestorFolderId != null) {
-            _queryParams.ancestor_folder_id = ancestorFolderId;
-        }
-
-        if (foldersFirst != null) {
-            _queryParams.folders_first = foldersFirst.toString();
-        }
-
-        if (sortDirection != null) {
-            _queryParams.sort_direction = serializers.SortDirection.jsonOrThrow(sortDirection, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (sortBy != null) {
-            _queryParams.sort_by = serializers.KnowledgeBaseSortBy.jsonOrThrow(sortBy, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            search,
+            show_only_owned_documents: showOnlyOwnedDocuments,
+            created_by_user_id: createdByUserId,
+            types: Array.isArray(types)
+                ? types.map((item) =>
+                      serializers.KnowledgeBaseDocumentType.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
+                  )
+                : types != null
+                  ? serializers.KnowledgeBaseDocumentType.jsonOrThrow(types, { unrecognizedObjectKeys: "strip" })
+                  : undefined,
+            parent_folder_id: parentFolderId,
+            ancestor_folder_id: ancestorFolderId,
+            folders_first: foldersFirst,
+            sort_direction:
+                sortDirection != null
+                    ? serializers.SortDirection.jsonOrThrow(sortDirection, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            sort_by:
+                sortBy != null
+                    ? serializers.KnowledgeBaseSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -153,7 +121,11 @@ export class KnowledgeBaseClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -237,7 +209,7 @@ export class KnowledgeBaseClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.BodyComputeRagIndexesInBatchV1ConvaiKnowledgeBaseRagIndexPost.jsonOrThrow(
                 request,
@@ -313,28 +285,18 @@ export class KnowledgeBaseClient {
         requestOptions?: KnowledgeBaseClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.KnowledgeBaseContentSearchResponseModel>> {
         const { query, pageSize, types, cursor } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.query = query;
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (types != null) {
-            if (Array.isArray(types)) {
-                _queryParams.types = types.map((item) =>
-                    serializers.KnowledgeBaseDocumentType.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
-                );
-            } else {
-                _queryParams.types = serializers.KnowledgeBaseDocumentType.jsonOrThrow(types, {
-                    unrecognizedObjectKeys: "strip",
-                });
-            }
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            query,
+            page_size: pageSize,
+            types: Array.isArray(types)
+                ? types.map((item) =>
+                      serializers.KnowledgeBaseDocumentType.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
+                  )
+                : types != null
+                  ? serializers.KnowledgeBaseDocumentType.jsonOrThrow(types, { unrecognizedObjectKeys: "strip" })
+                  : undefined,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -349,7 +311,11 @@ export class KnowledgeBaseClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

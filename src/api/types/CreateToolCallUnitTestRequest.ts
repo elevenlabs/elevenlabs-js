@@ -6,7 +6,7 @@ export interface CreateToolCallUnitTestRequest {
     /** Metadata of a conversation this test was created from (if applicable). */
     fromConversationMetadata?: ElevenLabs.TestFromConversationMetadataInput;
     /** Dynamic variables to replace in the agent config during testing */
-    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeInput | undefined>;
+    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeInput>;
     chatHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelInput[];
     /** Simulate the test as if the conversation originated from this channel. */
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;

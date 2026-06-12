@@ -13,13 +13,13 @@ export const UpdateOAuth2ClientCredsRequest: core.serialization.ObjectSchema<
     scopes: core.serialization.list(core.serialization.string()).optional(),
     extraParams: core.serialization.property(
         "extra_params",
-        core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
+        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     ),
     basicAuthInHeader: core.serialization.property("basic_auth_in_header", core.serialization.boolean().optional()),
     clientSecret: core.serialization.property("client_secret", core.serialization.string().optional()),
     customHeaders: core.serialization.property(
         "custom_headers",
-        core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
+        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     ),
 });
 
@@ -28,9 +28,9 @@ export declare namespace UpdateOAuth2ClientCredsRequest {
         provider?: string | null;
         client_id?: string | null;
         scopes?: string[] | null;
-        extra_params?: Record<string, string | null | undefined> | null;
+        extra_params?: Record<string, string | null> | null;
         basic_auth_in_header?: boolean | null;
         client_secret?: string | null;
-        custom_headers?: Record<string, string | null | undefined> | null;
+        custom_headers?: Record<string, string | null> | null;
     }
 }

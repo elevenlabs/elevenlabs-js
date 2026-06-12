@@ -2,6 +2,9 @@
 
 import type * as ElevenLabs from "../index";
 
+/**
+ * Composition plan for the `music_v1` model. Using this field with any other model will result in an error.
+ */
 export interface MusicPrompt {
     /** The styles and musical directions that should be present in the entire song. Use English language for best result. */
     positiveGlobalStyles: string[];

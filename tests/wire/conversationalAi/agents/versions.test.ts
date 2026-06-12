@@ -31,6 +31,7 @@ describe("VersionsClient", () => {
                 access_source: "creator",
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/versions/agtvrsn_0901k4aafjxxfxt93gd841r7tv5t")

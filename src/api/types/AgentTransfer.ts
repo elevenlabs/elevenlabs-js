@@ -8,4 +8,6 @@ export interface AgentTransfer {
     transferMessage?: string;
     enableTransferredAgentFirstMessage?: boolean;
     isWorkflowNodeTransfer?: boolean;
+    /** Defines whether TTS client overrides should be carried over to the transferred agent. */
+    preserveClientTtsOverrides?: boolean;
 }

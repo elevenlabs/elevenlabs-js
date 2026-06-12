@@ -9,6 +9,7 @@ describe("LanguageClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { version: 1 };
+
         server
             .mockEndpoint()
             .post("/v1/dubbing/resource/dubbing_id/language")

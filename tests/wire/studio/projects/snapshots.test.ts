@@ -20,6 +20,7 @@ describe("SnapshotsClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/snapshots")
@@ -67,6 +68,7 @@ describe("SnapshotsClient", () => {
             ],
             audio_duration_secs: 123.45,
         };
+
         server
             .mockEndpoint()
             .get("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/snapshots/21m00Tcm4TlvDq8ikWAM")

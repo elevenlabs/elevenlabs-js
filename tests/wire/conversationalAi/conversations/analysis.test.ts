@@ -204,6 +204,7 @@ describe("AnalysisClient", () => {
             tag_ids: ["tag_ids"],
             otlp_traces: { key: "value" },
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/conversations/conversation_id/analysis/run")

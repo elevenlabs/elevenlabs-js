@@ -12,7 +12,7 @@ export interface BodyComposeMusicV1MusicPost {
     /** A simple text prompt to generate a song from. Cannot be used in conjunction with `composition_plan`. */
     prompt?: string;
     /** A detailed composition plan to guide music generation. Cannot be used in conjunction with `prompt`. */
-    compositionPlan?: ElevenLabs.MusicPrompt;
+    compositionPlan?: ElevenLabs.BodyComposeMusicV1MusicPostCompositionPlan;
     /** The length of the song to generate in milliseconds. Used only in conjunction with `prompt`. Must be between 3000ms and 600000ms. Optional - if not provided, the model will choose a length based on the prompt. */
     musicLengthMs?: number;
     /** The model to use for the generation. */

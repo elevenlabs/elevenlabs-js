@@ -9,6 +9,7 @@ describe("MembersClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { email: "email" };
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .post("/v1/workspace/groups/group_id/members/remove")
@@ -31,6 +32,7 @@ describe("MembersClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { email: "email" };
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .post("/v1/workspace/groups/group_id/members")

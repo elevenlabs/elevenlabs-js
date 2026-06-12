@@ -12,5 +12,7 @@ export interface CustomGuardrailConfig {
     /** Instruction describing what to block, e.g. 'don't talk about politics' */
     prompt: string;
     executionMode?: ElevenLabs.GuardrailExecutionMode;
+    /** LLM model to use for custom guardrail evaluation */
+    model?: ElevenLabs.CustomGuardrailConfigModel;
     triggerAction?: ElevenLabs.CustomGuardrailConfigTriggerAction;
 }

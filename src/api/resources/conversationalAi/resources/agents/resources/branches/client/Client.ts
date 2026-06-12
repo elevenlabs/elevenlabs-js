@@ -52,15 +52,10 @@ export class BranchesClient {
         requestOptions?: BranchesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ListResponseAgentBranchSummary>> {
         const { includeArchived, limit } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (includeArchived != null) {
-            _queryParams.include_archived = includeArchived.toString();
-        }
-
-        if (limit != null) {
-            _queryParams.limit = limit.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            include_archived: includeArchived,
+            limit,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -75,7 +70,11 @@ export class BranchesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -159,7 +158,7 @@ export class BranchesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.agents.BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost.jsonOrThrow(
                 request,
@@ -243,7 +242,7 @@ export class BranchesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -326,7 +325,7 @@ export class BranchesClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.agents.BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch.jsonOrThrow(
                 request,
@@ -402,8 +401,9 @@ export class BranchesClient {
         requestOptions?: BranchesClient.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         const { targetBranchId, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.target_branch_id = targetBranchId;
+        const _queryParams: Record<string, unknown> = {
+            target_branch_id: targetBranchId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -419,7 +419,11 @@ export class BranchesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.conversationalAi.agents.BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost.jsonOrThrow(
                 _body,

@@ -62,6 +62,7 @@ describe("ToolApprovalsClient", () => {
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/mcp-servers/mcp_server_id/tool-approvals")
@@ -203,6 +204,7 @@ describe("ToolApprovalsClient", () => {
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/mcp-servers/mcp_server_id/tool-approvals/tool_name")

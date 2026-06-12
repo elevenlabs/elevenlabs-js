@@ -3,14 +3,17 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
-import { MusicPrompt } from "../../../../types/MusicPrompt";
+import { BodyComposeMusicV1MusicPostCompositionPlan } from "../../types/BodyComposeMusicV1MusicPostCompositionPlan";
 
 export const BodyComposeMusicV1MusicPost: core.serialization.Schema<
     serializers.BodyComposeMusicV1MusicPost.Raw,
     Omit<ElevenLabs.BodyComposeMusicV1MusicPost, "outputFormat">
 > = core.serialization.object({
     prompt: core.serialization.string().optional(),
-    compositionPlan: core.serialization.property("composition_plan", MusicPrompt.optional()),
+    compositionPlan: core.serialization.property(
+        "composition_plan",
+        BodyComposeMusicV1MusicPostCompositionPlan.optional(),
+    ),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
     modelId: core.serialization.property("model_id", core.serialization.stringLiteral("music_v1").optional()),
     seed: core.serialization.number().optional(),
@@ -26,7 +29,7 @@ export const BodyComposeMusicV1MusicPost: core.serialization.Schema<
 export declare namespace BodyComposeMusicV1MusicPost {
     export interface Raw {
         prompt?: string | null;
-        composition_plan?: MusicPrompt.Raw | null;
+        composition_plan?: BodyComposeMusicV1MusicPostCompositionPlan.Raw | null;
         music_length_ms?: number | null;
         model_id?: "music_v1" | null;
         seed?: number | null;

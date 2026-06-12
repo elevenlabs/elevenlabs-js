@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const StartProcedureToolErrorStatus: core.serialization.Schema<
     serializers.StartProcedureToolErrorStatus.Raw,
     ElevenLabs.StartProcedureToolErrorStatus
-> = core.serialization.enum_(["not_found", "invalid_name"]);
+> = core.serialization.enum_(["not_found", "invalid_name", "already_active"]);
 
 export declare namespace StartProcedureToolErrorStatus {
-    export type Raw = "not_found" | "invalid_name";
+    export type Raw = "not_found" | "invalid_name" | "already_active";
 }

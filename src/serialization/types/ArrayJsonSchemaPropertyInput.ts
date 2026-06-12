@@ -17,6 +17,7 @@ export const ArrayJsonSchemaPropertyInput: core.serialization.ObjectSchema<
         "constant_value",
         core.serialization.list(ArrayJsonSchemaPropertyInputConstantValueItem).optional(),
     ),
+    isOmitted: core.serialization.property("is_omitted", core.serialization.boolean().optional()),
 });
 
 export declare namespace ArrayJsonSchemaPropertyInput {
@@ -26,5 +27,6 @@ export declare namespace ArrayJsonSchemaPropertyInput {
         items?: serializers.ArrayJsonSchemaPropertyInputItems.Raw | null;
         dynamic_variable?: string | null;
         constant_value?: ArrayJsonSchemaPropertyInputConstantValueItem.Raw[] | null;
+        is_omitted?: boolean | null;
     }
 }

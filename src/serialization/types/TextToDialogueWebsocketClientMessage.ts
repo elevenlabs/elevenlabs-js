@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { PronunciationDictionaryLocator } from "./PronunciationDictionaryLocator";
 import { TextToDialogueWebsocketVoiceInput } from "./TextToDialogueWebsocketVoiceInput";
+import { TextToDialogueWebsocketVoiceSettings } from "./TextToDialogueWebsocketVoiceSettings";
 
 export const TextToDialogueWebsocketClientMessage: core.serialization.ObjectSchema<
     serializers.TextToDialogueWebsocketClientMessage.Raw,
@@ -18,10 +19,7 @@ export const TextToDialogueWebsocketClientMessage: core.serialization.ObjectSche
     authorization: core.serialization.string().optional(),
     singleUseToken: core.serialization.property("single_use_token", core.serialization.string().optional()),
     voices: core.serialization.list(core.serialization.string()).optional(),
-    voiceSettings: core.serialization.property(
-        "voice_settings",
-        core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
-    ),
+    voiceSettings: core.serialization.property("voice_settings", TextToDialogueWebsocketVoiceSettings.optional()),
     pronunciationDictionaryLocators: core.serialization.property(
         "pronunciation_dictionary_locators",
         core.serialization.list(PronunciationDictionaryLocator).optional(),
@@ -38,7 +36,7 @@ export declare namespace TextToDialogueWebsocketClientMessage {
         authorization?: string | null;
         single_use_token?: string | null;
         voices?: string[] | null;
-        voice_settings?: Record<string, unknown> | null;
+        voice_settings?: TextToDialogueWebsocketVoiceSettings.Raw | null;
         pronunciation_dictionary_locators?: PronunciationDictionaryLocator.Raw[] | null;
     }
 }

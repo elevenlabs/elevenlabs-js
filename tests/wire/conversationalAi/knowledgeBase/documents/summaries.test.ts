@@ -41,6 +41,7 @@ describe("SummariesClient", () => {
                 },
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/knowledge-base/summaries")

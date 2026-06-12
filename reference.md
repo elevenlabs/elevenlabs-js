@@ -54,7 +54,6 @@ await client.saveAVoicePreview();
 </dl>
 </details>
 
-## 
 ## History
 <details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetSpeechHistoryResponse</code></summary>
 <dl>
@@ -255,7 +254,7 @@ await client.history.delete("VW7YKqPnjY4h39yTbx2L");
 </dl>
 </details>
 
-<details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">getAudio</a>(history_item_id) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">getAudio</a>(history_item_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -318,7 +317,7 @@ await client.history.getAudio("history_item_id");
 </dl>
 </details>
 
-<details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">download</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">download</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -384,7 +383,7 @@ await client.history.download({
 </details>
 
 ## TextToSoundEffects
-<details><summary><code>client.textToSoundEffects.<a href="/src/api/resources/textToSoundEffects/client/Client.ts">convert</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.textToSoundEffects.<a href="/src/api/resources/textToSoundEffects/client/Client.ts">convert</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -653,7 +652,7 @@ await client.samples.delete("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L");
 </details>
 
 ## TextToSpeech
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">convert</a>(voice_id, { ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">convert</a>(voice_id, { ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -804,7 +803,7 @@ await client.textToSpeech.convertWithTimestamps("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">stream</a>(voice_id, { ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">stream</a>(voice_id, { ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -879,7 +878,7 @@ await client.textToSpeech.stream("JBFqnCBsd6RMkjVDRZzb", {
 </dl>
 </details>
 
-<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">streamWithTimestamps</a>(voice_id, { ...params }) -> core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponse></code></summary>
+<details><summary><code>client.textToSpeech.<a href="/src/api/resources/textToSpeech/client/Client.ts">streamWithTimestamps</a>(voice_id, { ...params }) -> core.Stream&lt;ElevenLabs.StreamingAudioChunkWithTimestampsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -958,7 +957,7 @@ for await (const item of response) {
 </details>
 
 ## TextToDialogue
-<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">convert</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">convert</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1029,7 +1028,7 @@ await client.textToDialogue.convert({
 </dl>
 </details>
 
-<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">stream</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">stream</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1100,7 +1099,7 @@ await client.textToDialogue.stream({
 </dl>
 </details>
 
-<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">streamWithTimestamps</a>({ ...params }) -> core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsAndVoiceSegmentsResponseModel></code></summary>
+<details><summary><code>client.textToDialogue.<a href="/src/api/resources/textToDialogue/client/Client.ts">streamWithTimestamps</a>({ ...params }) -> core.Stream&lt;ElevenLabs.StreamingAudioChunkWithTimestampsAndVoiceSegmentsResponseModel&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1250,7 +1249,7 @@ await client.textToDialogue.convertWithTimestamps({
 </details>
 
 ## SpeechToSpeech
-<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">convert</a>(voice_id, { ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">convert</a>(voice_id, { ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1325,7 +1324,7 @@ await client.speechToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
 </dl>
 </details>
 
-<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">stream</a>(voice_id, { ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.speechToSpeech.<a href="/src/api/resources/speechToSpeech/client/Client.ts">stream</a>(voice_id, { ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2384,7 +2383,7 @@ await client.studio.createPodcast({
 </details>
 
 ## Music
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">compose</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">compose</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2447,7 +2446,7 @@ await client.music.compose();
 </dl>
 </details>
 
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailed</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailed</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2510,7 +2509,7 @@ await client.music.composeDetailed();
 </dl>
 </details>
 
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">stream</a>({ ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">stream</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3563,7 +3562,7 @@ await client.pronunciationDictionaries.update("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
-<details><summary><code>client.pronunciationDictionaries.<a href="/src/api/resources/pronunciationDictionaries/client/Client.ts">download</a>(dictionary_id, version_id) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.pronunciationDictionaries.<a href="/src/api/resources/pronunciationDictionaries/client/Client.ts">download</a>(dictionary_id, version_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -7009,7 +7008,7 @@ await client.conversationalAi.users.list({
 </details>
 
 ## ConversationalAi PhoneNumbers
-<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">list</a>() -> ElevenLabs.PhoneNumbersListResponseItem[]</code></summary>
+<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.PhoneNumbersListResponseItem[]</code></summary>
 <dl>
 <dd>
 
@@ -7036,7 +7035,11 @@ Retrieve all Phone Numbers
 <dd>
 
 ```typescript
-await client.conversationalAi.phoneNumbers.list();
+await client.conversationalAi.phoneNumbers.list({
+    provider: "twilio",
+    agentId: "agent_id",
+    branchId: "branch_id"
+});
 
 ```
 </dd>
@@ -7048,6 +7051,14 @@ await client.conversationalAi.phoneNumbers.list();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.PhoneNumbersListRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -7604,7 +7615,7 @@ await client.conversationalAi.knowledgeBase.list({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/client/Client.ts">getOrCreateRagIndexes</a>({ ...params }) -> Record<string, ElevenLabs.KnowledgeBaseGetOrCreateRagIndexesResponseValue></code></summary>
+<details><summary><code>client.conversationalAi.knowledgeBase.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/client/Client.ts">getOrCreateRagIndexes</a>({ ...params }) -> Record&lt;string, ElevenLabs.KnowledgeBaseGetOrCreateRagIndexesResponseValue&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9738,7 +9749,7 @@ await client.conversationalAi.whatsappAccounts.list();
 </details>
 
 ## ConversationalAi Agents Summaries
-<details><summary><code>client.conversationalAi.agents.summaries.<a href="/src/api/resources/conversationalAi/resources/agents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record<string, ElevenLabs.SummariesGetResponseValue></code></summary>
+<details><summary><code>client.conversationalAi.agents.summaries.<a href="/src/api/resources/conversationalAi/resources/agents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record&lt;string, ElevenLabs.SummariesGetResponseValue&gt;</code></summary>
 <dl>
 <dd>
 
@@ -11028,7 +11039,7 @@ await client.conversationalAi.analytics.liveCount.get({
 </details>
 
 ## ConversationalAi Conversations Audio
-<details><summary><code>client.conversationalAi.conversations.audio.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/audio/client/Client.ts">get</a>(conversation_id) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.conversationalAi.conversations.audio.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/audio/client/Client.ts">get</a>(conversation_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13214,7 +13225,7 @@ await client.conversationalAi.knowledgeBase.document.computeRagIndex("21m00Tcm4T
 </details>
 
 ## ConversationalAi KnowledgeBase Documents Summaries
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.summaries.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record<string, ElevenLabs.SummariesGetResponseValue></code></summary>
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.summaries.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record&lt;string, ElevenLabs.SummariesGetResponseValue&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15015,7 +15026,7 @@ await client.dubbing.resource.render("dubbing_id", "language", {
 </details>
 
 ## Dubbing Audio
-<details><summary><code>client.dubbing.audio.<a href="/src/api/resources/dubbing/resources/audio/client/Client.ts">get</a>(dubbing_id, language_code) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.dubbing.audio.<a href="/src/api/resources/dubbing/resources/audio/client/Client.ts">get</a>(dubbing_id, language_code) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15771,7 +15782,7 @@ await client.dubbing.resource.speaker.segment.create("dubbing_id", "speaker_id",
 </details>
 
 ## Music CompositionPlan
-<details><summary><code>client.music.compositionPlan.<a href="/src/api/resources/music/resources/compositionPlan/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.MusicPrompt</code></summary>
+<details><summary><code>client.music.compositionPlan.<a href="/src/api/resources/music/resources/compositionPlan/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CompositionPlanCreateResponse</code></summary>
 <dl>
 <dd>
 
@@ -17073,11 +17084,7 @@ Update an existing API key for a service account
 <dd>
 
 ```typescript
-await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_id", {
-    isEnabled: true,
-    name: "Sneaky Fox",
-    permissions: "all"
-});
+await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_id");
 
 ```
 </dd>
@@ -17997,7 +18004,7 @@ await client.studio.projects.snapshots.get("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4Tlv
 </dl>
 </details>
 
-<details><summary><code>client.studio.projects.snapshots.<a href="/src/api/resources/studio/resources/projects/resources/snapshots/client/Client.ts">stream</a>(project_id, project_snapshot_id, { ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.studio.projects.snapshots.<a href="/src/api/resources/studio/resources/projects/resources/snapshots/client/Client.ts">stream</a>(project_id, project_snapshot_id, { ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -18076,7 +18083,7 @@ await client.studio.projects.snapshots.stream("project_id", "project_snapshot_id
 </dl>
 </details>
 
-<details><summary><code>client.studio.projects.snapshots.<a href="/src/api/resources/studio/resources/projects/resources/snapshots/client/Client.ts">streamArchive</a>(project_id, project_snapshot_id) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.studio.projects.snapshots.<a href="/src/api/resources/studio/resources/projects/resources/snapshots/client/Client.ts">streamArchive</a>(project_id, project_snapshot_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -18727,7 +18734,7 @@ await client.studio.projects.chapters.snapshots.get("21m00Tcm4TlvDq8ikWAM", "21m
 </dl>
 </details>
 
-<details><summary><code>client.studio.projects.chapters.snapshots.<a href="/src/api/resources/studio/resources/projects/resources/chapters/resources/snapshots/client/Client.ts">stream</a>(project_id, chapter_id, chapter_snapshot_id, { ...params }) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.studio.projects.chapters.snapshots.<a href="/src/api/resources/studio/resources/projects/resources/chapters/resources/snapshots/client/Client.ts">stream</a>(project_id, chapter_id, chapter_snapshot_id, { ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -18815,7 +18822,7 @@ await client.studio.projects.chapters.snapshots.stream("project_id", "chapter_id
 </details>
 
 ## TextToVoice Preview
-<details><summary><code>client.textToVoice.preview.<a href="/src/api/resources/textToVoice/resources/preview/client/Client.ts">stream</a>(generated_voice_id) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.textToVoice.preview.<a href="/src/api/resources/textToVoice/resources/preview/client/Client.ts">stream</a>(generated_voice_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -20283,7 +20290,7 @@ await client.voices.pvc.verification.captcha.verify("21m00Tcm4TlvDq8ikWAM", {
 </details>
 
 ## Voices Samples Audio
-<details><summary><code>client.voices.samples.audio.<a href="/src/api/resources/voices/resources/samples/resources/audio/client/Client.ts">get</a>(voice_id, sample_id) -> ReadableStream<Uint8Array></code></summary>
+<details><summary><code>client.voices.samples.audio.<a href="/src/api/resources/voices/resources/samples/resources/audio/client/Client.ts">get</a>(voice_id, sample_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -20689,7 +20696,7 @@ await client.workspace.authConnections.update("auth_connection_id", {
 </details>
 
 ## Workspace Groups
-<details><summary><code>client.workspace.groups.<a href="/src/api/resources/workspace/resources/groups/client/Client.ts">list</a>() -> Record<string, ElevenLabs.WorkspaceGroupResponseModel></code></summary>
+<details><summary><code>client.workspace.groups.<a href="/src/api/resources/workspace/resources/groups/client/Client.ts">list</a>() -> Record&lt;string, ElevenLabs.WorkspaceGroupResponseModel&gt;</code></summary>
 <dl>
 <dd>
 
@@ -21571,7 +21578,7 @@ await client.workspace.groups.members.add("group_id", {
 </details>
 
 ## Workspaces ApiKeys
-<details><summary><code>client.workspaces.apiKeys.<a href="/src/api/resources/workspaces/resources/apiKeys/client/Client.ts">revoke</a>({ ...params }) -> unknown</code></summary>
+<details><summary><code>client.workspaces.apiKeys.<a href="/src/api/resources/workspaces/resources/apiKeys/client/Client.ts">disable</a>({ ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -21583,7 +21590,7 @@ await client.workspace.groups.members.add("group_id", {
 <dl>
 <dd>
 
-Revoke the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation. This endpoint requires additional permissions and is not enabled by default. Reach out to your ElevenLabs contact to request access.
+Disable the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation. This endpoint requires additional permissions and is not enabled by default. Reach out to your ElevenLabs contact to request access.
 </dd>
 </dl>
 </dd>
@@ -21598,7 +21605,7 @@ Revoke the API key used to authenticate this request. Requires the query paramet
 <dd>
 
 ```typescript
-await client.workspaces.apiKeys.revoke({
+await client.workspaces.apiKeys.disable({
     apiKeyName: "self"
 });
 
@@ -21616,7 +21623,7 @@ await client.workspaces.apiKeys.revoke({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.workspaces.ApiKeysRevokeRequest` 
+**request:** `ElevenLabs.workspaces.ApiKeysDisableRequest` 
     
 </dd>
 </dl>
@@ -21635,3 +21642,4 @@ await client.workspaces.apiKeys.revoke({
 </dd>
 </dl>
 </details>
+

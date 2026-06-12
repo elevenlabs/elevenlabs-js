@@ -5,10 +5,12 @@ export const ElevenLabsEnvironment = {
     ProductionUs: "https://api.us.elevenlabs.io",
     ProductionEu: "https://api.eu.residency.elevenlabs.io",
     ProductionIndia: "https://api.in.residency.elevenlabs.io",
+    ProductionSingapore: "https://api.sg.residency.elevenlabs.io",
 } as const;
 
 export type ElevenLabsEnvironment =
     | typeof ElevenLabsEnvironment.Production
     | typeof ElevenLabsEnvironment.ProductionUs
     | typeof ElevenLabsEnvironment.ProductionEu
-    | typeof ElevenLabsEnvironment.ProductionIndia;
+    | typeof ElevenLabsEnvironment.ProductionIndia
+    | typeof ElevenLabsEnvironment.ProductionSingapore;

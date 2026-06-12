@@ -11,9 +11,7 @@ export const SegmentCreatePayload: core.serialization.Schema<
     startTime: core.serialization.property("start_time", core.serialization.number()),
     endTime: core.serialization.property("end_time", core.serialization.number()),
     text: core.serialization.string().optional(),
-    translations: core.serialization
-        .record(core.serialization.string(), core.serialization.string().optional())
-        .optional(),
+    translations: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
 });
 
 export declare namespace SegmentCreatePayload {
@@ -21,6 +19,6 @@ export declare namespace SegmentCreatePayload {
         start_time: number;
         end_time: number;
         text?: string | null;
-        translations?: Record<string, string | null | undefined> | null;
+        translations?: Record<string, string | null> | null;
     }
 }

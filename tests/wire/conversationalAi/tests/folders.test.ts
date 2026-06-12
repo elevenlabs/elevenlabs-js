@@ -9,6 +9,7 @@ describe("FoldersClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "name" };
         const rawResponseBody = { id: "id", name: "name" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agent-testing/folders")
@@ -37,6 +38,7 @@ describe("FoldersClient", () => {
             folder_path: [{ id: "id", name: "name" }],
             children_count: 1,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agent-testing/folders/tfld_7301khxdkycse5f88fzjdtrterzm")
@@ -86,6 +88,7 @@ describe("FoldersClient", () => {
             folder_path: [{ id: "id", name: "name" }],
             children_count: 1,
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/agent-testing/folders/tfld_7301khxdkycse5f88fzjdtrterzm")

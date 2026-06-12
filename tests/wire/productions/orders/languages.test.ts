@@ -25,6 +25,7 @@ describe("LanguagesClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/productions/orders/languages/dub")

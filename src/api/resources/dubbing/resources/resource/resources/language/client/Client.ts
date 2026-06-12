@@ -24,6 +24,8 @@ export class LanguageClient {
     }
 
     /**
+     * @deprecated
+     *
      * Adds the given ElevenLab Turbo V2/V2.5 language code to the resource. Does not automatically generate transcripts/translations/audio.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -63,7 +65,7 @@ export class LanguageClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.dubbing.resource.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIdLanguagePost.jsonOrThrow(
                 request,

@@ -23,6 +23,7 @@ describe("UsersClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server.mockEndpoint().get("/v1/convai/users").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.conversationalAi.users.list({

@@ -34,6 +34,7 @@ describe("AuditLogsClient", () => {
             has_more: true,
             next_cursor: "next_cursor",
         };
+
         server
             .mockEndpoint()
             .get("/v1/workspace/audit-logs")

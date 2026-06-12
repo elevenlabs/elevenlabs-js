@@ -3,13 +3,13 @@
 import type * as ElevenLabs from "../index";
 
 export type KnowledgeBaseContentSearchResultDocument =
-    | ElevenLabs.KnowledgeBaseContentSearchResultDocument.File_
+    | ElevenLabs.KnowledgeBaseContentSearchResultDocument.File
     | ElevenLabs.KnowledgeBaseContentSearchResultDocument.Folder
     | ElevenLabs.KnowledgeBaseContentSearchResultDocument.Text
     | ElevenLabs.KnowledgeBaseContentSearchResultDocument.Url;
 
 export namespace KnowledgeBaseContentSearchResultDocument {
-    export interface File_ extends ElevenLabs.GetKnowledgeBaseSummaryFileResponseModel {
+    export interface File extends ElevenLabs.GetKnowledgeBaseSummaryFileResponseModel {
         type: "file";
     }
 

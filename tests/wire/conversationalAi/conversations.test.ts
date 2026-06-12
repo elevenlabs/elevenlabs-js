@@ -9,6 +9,7 @@ describe("ConversationsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { signed_url: "signed_url" };
+
         server
             .mockEndpoint()
             .get("/v1/convai/conversation/get-signed-url")
@@ -33,6 +34,7 @@ describe("ConversationsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { token: "token" };
+
         server
             .mockEndpoint()
             .get("/v1/convai/conversation/token")
@@ -82,6 +84,7 @@ describe("ConversationsClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/conversations")
@@ -161,6 +164,7 @@ describe("ConversationsClient", () => {
             has_user_audio: true,
             has_response_audio: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/conversations/123")
@@ -196,6 +200,7 @@ describe("ConversationsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/conversations/21m00Tcm4TlvDq8ikWAM")
@@ -231,6 +236,7 @@ describe("ConversationsClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/conversations/21m00Tcm4TlvDq8ikWAM/sip-messages")

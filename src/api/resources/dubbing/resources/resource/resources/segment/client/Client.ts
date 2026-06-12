@@ -24,6 +24,8 @@ export class SegmentClient {
     }
 
     /**
+     * @deprecated
+     *
      * Modifies a single segment with new text and/or start/end times. Will update the values for only a specific language of a segment. Does not automatically regenerate the dub.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -71,7 +73,7 @@ export class SegmentClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.dubbing.resource.SegmentUpdatePayload.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -116,6 +118,8 @@ export class SegmentClient {
     }
 
     /**
+     * @deprecated
+     *
      * Deletes a single segment from the dubbing.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -154,7 +158,7 @@ export class SegmentClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

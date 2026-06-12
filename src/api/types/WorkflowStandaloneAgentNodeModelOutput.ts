@@ -17,4 +17,6 @@ export interface WorkflowStandaloneAgentNodeModelOutput {
     transferMessage?: string;
     /** Whether to enable the transferred agent to send its configured first message after the transfer. */
     enableTransferredAgentFirstMessage: boolean;
+    /** Defines whether TTS client overrides should be carried over to the transferred agent. */
+    preserveClientTtsOverrides: boolean;
 }

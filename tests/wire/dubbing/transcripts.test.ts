@@ -14,6 +14,7 @@ describe("TranscriptsClient", () => {
             webvtt: "webvtt",
             json: { language: "language", utterances: [{}] },
         };
+
         server
             .mockEndpoint()
             .get("/v1/dubbing/dubbing_id/transcripts/source/format/srt")

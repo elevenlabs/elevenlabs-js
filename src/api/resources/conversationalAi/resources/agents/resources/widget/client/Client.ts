@@ -57,11 +57,9 @@ export class WidgetClient {
         requestOptions?: WidgetClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentEmbedResponseModel>> {
         const { conversationSignature } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (conversationSignature != null) {
-            _queryParams.conversation_signature = conversationSignature;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            conversation_signature: conversationSignature,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -76,7 +74,11 @@ export class WidgetClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

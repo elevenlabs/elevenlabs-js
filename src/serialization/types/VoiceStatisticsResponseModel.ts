@@ -8,20 +8,22 @@ export const VoiceStatisticsResponseModel: core.serialization.ObjectSchema<
     serializers.VoiceStatisticsResponseModel.Raw,
     ElevenLabs.VoiceStatisticsResponseModel
 > = core.serialization.object({
-    voiceId: core.serialization.property("voice_id", core.serialization.string()),
+    projectVoiceRefId: core.serialization.property("project_voice_ref_id", core.serialization.string()),
     charactersUnconverted: core.serialization.property("characters_unconverted", core.serialization.number()),
     charactersConverted: core.serialization.property("characters_converted", core.serialization.number()),
     creditsNeededToConvert: core.serialization.property(
         "credits_needed_to_convert",
         core.serialization.number().optional(),
     ),
+    voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
 });
 
 export declare namespace VoiceStatisticsResponseModel {
     export interface Raw {
-        voice_id: string;
+        project_voice_ref_id: string;
         characters_unconverted: number;
         characters_converted: number;
         credits_needed_to_convert?: number | null;
+        voice_id?: string | null;
     }
 }

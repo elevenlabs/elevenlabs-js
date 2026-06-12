@@ -24,6 +24,7 @@ export class AudioClient {
 
     /**
      * Returns dub as a streamed MP3 or MP4 file. If this dub has been edited using Dubbing Studio you need to use the resource render endpoint as this endpoint only returns the original automatic dub result.
+     *
      * @throws {@link ElevenLabs.ForbiddenError}
      * @throws {@link ElevenLabs.NotFoundError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -56,7 +57,7 @@ export class AudioClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             responseType: "streaming",
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,

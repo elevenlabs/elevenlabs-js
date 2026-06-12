@@ -46,6 +46,7 @@ describe("LlmClient", () => {
                 fallback_complete_percentage: 100,
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/llm/list")

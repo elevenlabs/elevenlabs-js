@@ -48,6 +48,7 @@ describe("UserClient", () => {
             created_at: 1753999199,
             seat_type: "workspace_member",
         };
+
         server.mockEndpoint().get("/v1/user").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.user.get();

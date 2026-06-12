@@ -48,54 +48,54 @@ export class AudioNativeClient {
         request: ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost,
         requestOptions?: AudioNativeClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AudioNativeCreateProjectResponseModel>> {
-        const _request = await core.newFormData();
-        _request.append("name", request.name);
+        const _body = await core.newFormData();
+        _body.append("name", request.name);
         if (request.image != null) {
-            _request.append("image", request.image);
+            _body.append("image", request.image);
         }
 
         if (request.author != null) {
-            _request.append("author", request.author);
+            _body.append("author", request.author);
         }
 
         if (request.title != null) {
-            _request.append("title", request.title);
+            _body.append("title", request.title);
         }
 
         if (request.small != null) {
-            _request.append("small", request.small.toString());
+            _body.append("small", request.small?.toString());
         }
 
         if (request.textColor != null) {
-            _request.append("text_color", request.textColor);
+            _body.append("text_color", request.textColor);
         }
 
         if (request.backgroundColor != null) {
-            _request.append("background_color", request.backgroundColor);
+            _body.append("background_color", request.backgroundColor);
         }
 
         if (request.sessionization != null) {
-            _request.append("sessionization", request.sessionization.toString());
+            _body.append("sessionization", request.sessionization?.toString());
         }
 
         if (request.voiceId != null) {
-            _request.append("voice_id", request.voiceId);
+            _body.append("voice_id", request.voiceId);
         }
 
         if (request.modelId != null) {
-            _request.append("model_id", request.modelId);
+            _body.append("model_id", request.modelId);
         }
 
         if (request.file != null) {
-            await _request.appendFile("file", request.file);
+            await _body.appendFile("file", request.file);
         }
 
         if (request.autoConvert != null) {
-            _request.append("auto_convert", request.autoConvert.toString());
+            _body.append("auto_convert", request.autoConvert?.toString());
         }
 
         if (request.applyTextNormalization != null) {
-            _request.append(
+            _body.append(
                 "apply_text_normalization",
                 serializers.AudioNativeCreateRequestApplyTextNormalization.jsonOrThrow(request.applyTextNormalization, {
                     unrecognizedObjectKeys: "strip",
@@ -105,11 +105,11 @@ export class AudioNativeClient {
 
         if (request.pronunciationDictionaryLocators != null) {
             for (const _item of request.pronunciationDictionaryLocators) {
-                _request.append("pronunciation_dictionary_locators", _item);
+                _body.append("pronunciation_dictionary_locators", _item);
             }
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -127,7 +127,7 @@ export class AudioNativeClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -201,7 +201,7 @@ export class AudioNativeClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -267,20 +267,20 @@ export class AudioNativeClient {
         request: ElevenLabs.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost,
         requestOptions?: AudioNativeClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AudioNativeEditContentResponseModel>> {
-        const _request = await core.newFormData();
+        const _body = await core.newFormData();
         if (request.file != null) {
-            await _request.appendFile("file", request.file);
+            await _body.appendFile("file", request.file);
         }
 
         if (request.autoConvert != null) {
-            _request.append("auto_convert", request.autoConvert.toString());
+            _body.append("auto_convert", request.autoConvert?.toString());
         }
 
         if (request.autoPublish != null) {
-            _request.append("auto_publish", request.autoPublish.toString());
+            _body.append("auto_publish", request.autoPublish?.toString());
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -298,7 +298,7 @@ export class AudioNativeClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -380,7 +380,7 @@ export class AudioNativeClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

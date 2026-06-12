@@ -27,7 +27,7 @@ export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
     requestHeaders: core.serialization.property(
         "request_headers",
         core.serialization
-            .record(core.serialization.string(), McpServerConfigUpdateRequestModelRequestHeadersValue.optional())
+            .record(core.serialization.string(), McpServerConfigUpdateRequestModelRequestHeadersValue)
             .optional(),
     ),
     disableCompression: core.serialization.property("disable_compression", core.serialization.boolean().optional()),
@@ -48,10 +48,7 @@ export declare namespace McpServerConfigUpdateRequestModel {
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
         response_timeout_secs?: number | null;
-        request_headers?: Record<
-            string,
-            McpServerConfigUpdateRequestModelRequestHeadersValue.Raw | null | undefined
-        > | null;
+        request_headers?: Record<string, McpServerConfigUpdateRequestModelRequestHeadersValue.Raw | null> | null;
         disable_compression?: boolean | null;
         secret_token?: ConvAiSecretLocator.Raw | null;
         auth_connection?: McpServerConfigUpdateRequestModelAuthConnection.Raw | null;

@@ -39,14 +39,14 @@ export class CompositionPlanClient {
     public create(
         request: ElevenLabs.music.BodyGenerateCompositionPlanV1MusicPlanPost,
         requestOptions?: CompositionPlanClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.MusicPrompt> {
+    ): core.HttpResponsePromise<ElevenLabs.music.CompositionPlanCreateResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: ElevenLabs.music.BodyGenerateCompositionPlanV1MusicPlanPost,
         requestOptions?: CompositionPlanClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.MusicPrompt>> {
+    ): Promise<core.WithRawResponse<ElevenLabs.music.CompositionPlanCreateResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -62,7 +62,7 @@ export class CompositionPlanClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.music.BodyGenerateCompositionPlanV1MusicPlanPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -75,7 +75,7 @@ export class CompositionPlanClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.MusicPrompt.parseOrThrow(_response.body, {
+                data: serializers.music.CompositionPlanCreateResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

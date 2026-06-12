@@ -24,6 +24,8 @@ export class SegmentClient {
     }
 
     /**
+     * @deprecated
+     *
      * Creates a new segment in dubbing resource with a start and end time for the speaker in every available language. Does not automatically generate transcripts/translations/audio.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -69,7 +71,7 @@ export class SegmentClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.dubbing.resource.speaker.SegmentCreatePayload.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

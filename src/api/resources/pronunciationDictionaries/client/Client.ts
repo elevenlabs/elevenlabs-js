@@ -54,18 +54,18 @@ export class PronunciationDictionariesClient {
         request: ElevenLabs.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost,
         requestOptions?: PronunciationDictionariesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AddPronunciationDictionaryResponseModel>> {
-        const _request = await core.newFormData();
-        _request.append("name", request.name);
+        const _body = await core.newFormData();
+        _body.append("name", request.name);
         if (request.file != null) {
-            await _request.appendFile("file", request.file);
+            await _body.appendFile("file", request.file);
         }
 
         if (request.description != null) {
-            _request.append("description", request.description);
+            _body.append("description", request.description);
         }
 
         if (request.workspaceAccess != null) {
-            _request.append(
+            _body.append(
                 "workspace_access",
                 serializers.PronunciationDictionariesCreateFromFileRequestWorkspaceAccess.jsonOrThrow(
                     request.workspaceAccess,
@@ -74,7 +74,7 @@ export class PronunciationDictionariesClient {
             );
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -92,7 +92,7 @@ export class PronunciationDictionariesClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -181,7 +181,7 @@ export class PronunciationDictionariesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost.jsonOrThrow(
                 request,
@@ -262,7 +262,7 @@ export class PronunciationDictionariesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -344,7 +344,7 @@ export class PronunciationDictionariesClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch.jsonOrThrow(
                 request,
@@ -391,6 +391,7 @@ export class PronunciationDictionariesClient {
 
     /**
      * Get a PLS file with a pronunciation dictionary version rules
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public download(
@@ -420,7 +421,7 @@ export class PronunciationDictionariesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             responseType: "streaming",
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
@@ -481,25 +482,17 @@ export class PronunciationDictionariesClient {
         requestOptions?: PronunciationDictionariesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetPronunciationDictionariesMetadataResponseModel>> {
         const { cursor, pageSize, sort, sortDirection } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (sort != null) {
-            _queryParams.sort = serializers.PronunciationDictionariesListRequestSort.jsonOrThrow(sort, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (sortDirection != null) {
-            _queryParams.sort_direction = sortDirection;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            cursor,
+            page_size: pageSize,
+            sort:
+                sort != null
+                    ? serializers.PronunciationDictionariesListRequestSort.jsonOrThrow(sort, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            sort_direction: sortDirection,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -514,7 +507,11 @@ export class PronunciationDictionariesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

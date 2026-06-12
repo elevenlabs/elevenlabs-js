@@ -8,6 +8,7 @@ export const ProjectVoiceResponseModel: core.serialization.ObjectSchema<
     serializers.ProjectVoiceResponseModel.Raw,
     ElevenLabs.ProjectVoiceResponseModel
 > = core.serialization.object({
+    projectVoiceRefId: core.serialization.property("project_voice_ref_id", core.serialization.string()),
     voiceId: core.serialization.property("voice_id", core.serialization.string()),
     alias: core.serialization.string(),
     stability: core.serialization.number(),
@@ -21,6 +22,7 @@ export const ProjectVoiceResponseModel: core.serialization.ObjectSchema<
 
 export declare namespace ProjectVoiceResponseModel {
     export interface Raw {
+        project_voice_ref_id: string;
         voice_id: string;
         alias: string;
         stability: number;

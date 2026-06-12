@@ -49,10 +49,10 @@ export class ForcedAlignmentClient {
         request: ElevenLabs.BodyCreateForcedAlignmentV1ForcedAlignmentPost,
         requestOptions?: ForcedAlignmentClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ForcedAlignmentResponseModel>> {
-        const _request = await core.newFormData();
-        await _request.appendFile("file", request.file);
-        _request.append("text", request.text);
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _body = await core.newFormData();
+        await _body.appendFile("file", request.file);
+        _body.append("text", request.text);
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -70,7 +70,7 @@ export class ForcedAlignmentClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

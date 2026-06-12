@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { MediaCodec } from "./MediaCodec";
 import { SipMediaEncryptionEnum } from "./SipMediaEncryptionEnum";
 import { SipTrunkCredentialsRequestModel } from "./SipTrunkCredentialsRequestModel";
 import { SipTrunkTransportEnum } from "./SipTrunkTransportEnum";
@@ -20,6 +21,7 @@ export const OutboundSipTrunkConfigRequestModel: core.serialization.ObjectSchema
         core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     ),
     credentials: SipTrunkCredentialsRequestModel.optional(),
+    enabledCodecs: core.serialization.property("enabled_codecs", core.serialization.list(MediaCodec).optional()),
 });
 
 export declare namespace OutboundSipTrunkConfigRequestModel {
@@ -30,5 +32,6 @@ export declare namespace OutboundSipTrunkConfigRequestModel {
         headers?: Record<string, string> | null;
         attributes_to_headers?: Record<string, string> | null;
         credentials?: SipTrunkCredentialsRequestModel.Raw | null;
+        enabled_codecs?: MediaCodec.Raw[] | null;
     }
 }

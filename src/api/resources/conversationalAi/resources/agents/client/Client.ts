@@ -103,11 +103,9 @@ export class AgentsClient {
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.CreateAgentResponseModel>> {
         const { enableVersioning, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (enableVersioning != null) {
-            _queryParams.enable_versioning = enableVersioning.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            enable_versioning: enableVersioning,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -123,7 +121,11 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -191,15 +193,10 @@ export class AgentsClient {
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
         const { versionId, branchId } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (versionId != null) {
-            _queryParams.version_id = versionId;
-        }
-
-        if (branchId != null) {
-            _queryParams.branch_id = branchId;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            version_id: versionId,
+            branch_id: branchId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -214,7 +211,11 @@ export class AgentsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -282,7 +283,7 @@ export class AgentsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -343,15 +344,10 @@ export class AgentsClient {
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
         const { enableVersioningIfNotEnabled, branchId, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (enableVersioningIfNotEnabled != null) {
-            _queryParams.enable_versioning_if_not_enabled = enableVersioningIfNotEnabled.toString();
-        }
-
-        if (branchId != null) {
-            _queryParams.branch_id = branchId;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            enable_versioning_if_not_enabled: enableVersioningIfNotEnabled,
+            branch_id: branchId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -367,7 +363,11 @@ export class AgentsClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.conversationalAi.UpdateAgentRequest.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -444,41 +444,22 @@ export class AgentsClient {
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentsPageResponseModel>> {
         const { pageSize, search, archived, showOnlyOwnedAgents, createdByUserId, sortDirection, sortBy, cursor } =
             request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (search != null) {
-            _queryParams.search = search;
-        }
-
-        if (archived != null) {
-            _queryParams.archived = archived.toString();
-        }
-
-        if (showOnlyOwnedAgents != null) {
-            _queryParams.show_only_owned_agents = showOnlyOwnedAgents.toString();
-        }
-
-        if (createdByUserId != null) {
-            _queryParams.created_by_user_id = createdByUserId;
-        }
-
-        if (sortDirection != null) {
-            _queryParams.sort_direction = serializers.SortDirection.jsonOrThrow(sortDirection, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (sortBy != null) {
-            _queryParams.sort_by = serializers.AgentSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" });
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            search,
+            archived,
+            show_only_owned_agents: showOnlyOwnedAgents,
+            created_by_user_id: createdByUserId,
+            sort_direction:
+                sortDirection != null
+                    ? serializers.SortDirection.jsonOrThrow(sortDirection, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            sort_by:
+                sortBy != null
+                    ? serializers.AgentSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -493,7 +474,11 @@ export class AgentsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -568,7 +553,7 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.BodyDuplicateAgentV1ConvaiAgentsAgentIdDuplicatePost.jsonOrThrow(
                 request,
@@ -661,7 +646,7 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.BodySimulatesAConversationV1ConvaiAgentsAgentIdSimulateConversationPost.jsonOrThrow(
                 request,
@@ -756,7 +741,7 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost.jsonOrThrow(
                 request,
@@ -837,7 +822,7 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.RunAgentTestsRequestModel.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

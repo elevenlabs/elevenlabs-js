@@ -12,7 +12,7 @@ export interface ConversationalConfigApiModelWorkflowOverrideInput {
     /** Configuration for conversational events */
     conversation?: ElevenLabs.ConversationConfigWorkflowOverrideInput;
     /** Language presets for conversations */
-    languagePresets?: Record<string, ElevenLabs.LanguagePresetInput | undefined>;
+    languagePresets?: Record<string, ElevenLabs.LanguagePresetInput>;
     /** Configuration for voice activity detection */
     vad?: ElevenLabs.VadConfigWorkflowOverride;
     /** Agent specific configuration */

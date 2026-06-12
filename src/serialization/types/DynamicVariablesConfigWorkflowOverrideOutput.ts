@@ -11,12 +11,12 @@ export const DynamicVariablesConfigWorkflowOverrideOutput: core.serialization.Ob
 > = core.serialization.object({
     dynamicVariablePlaceholders: core.serialization.property(
         "dynamic_variable_placeholders",
-        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput.optional()).optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput).optional(),
     ),
 });
 
 export declare namespace DynamicVariablesConfigWorkflowOverrideOutput {
     export interface Raw {
-        dynamic_variable_placeholders?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
+        dynamic_variable_placeholders?: Record<string, DynamicVariableValueTypeOutput.Raw | null> | null;
     }
 }

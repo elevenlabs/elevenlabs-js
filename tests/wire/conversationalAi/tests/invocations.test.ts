@@ -34,6 +34,7 @@ describe("InvocationsClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/test-invocations")
@@ -124,6 +125,7 @@ describe("InvocationsClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/test-invocations/test_invocation_id")
@@ -197,6 +199,7 @@ describe("InvocationsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { test_run_ids: ["test_run_ids"], agent_id: "agent_id" };
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/test-invocations/test_invocation_id/resubmit")

@@ -77,38 +77,29 @@ export class DubbingClient {
         requestOptions?: DubbingClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DubbingMetadataPageResponseModel>> {
         const { cursor, pageSize, dubbingStatus, filterByCreator, orderBy, orderDirection } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (dubbingStatus != null) {
-            _queryParams.dubbing_status = serializers.DubbingListRequestDubbingStatus.jsonOrThrow(dubbingStatus, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (filterByCreator != null) {
-            _queryParams.filter_by_creator = serializers.DubbingListRequestFilterByCreator.jsonOrThrow(
-                filterByCreator,
-                { unrecognizedObjectKeys: "strip" },
-            );
-        }
-
-        if (orderBy != null) {
-            _queryParams.order_by = orderBy;
-        }
-
-        if (orderDirection != null) {
-            _queryParams.order_direction = serializers.DubbingListRequestOrderDirection.jsonOrThrow(orderDirection, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            cursor,
+            page_size: pageSize,
+            dubbing_status:
+                dubbingStatus != null
+                    ? serializers.DubbingListRequestDubbingStatus.jsonOrThrow(dubbingStatus, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            filter_by_creator:
+                filterByCreator != null
+                    ? serializers.DubbingListRequestFilterByCreator.jsonOrThrow(filterByCreator, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            order_by: orderBy != null ? orderBy : undefined,
+            order_direction:
+                orderDirection != null
+                    ? serializers.DubbingListRequestOrderDirection.jsonOrThrow(orderDirection, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -123,7 +114,11 @@ export class DubbingClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -181,91 +176,91 @@ export class DubbingClient {
         request: ElevenLabs.BodyDubAVideoOrAnAudioFileV1DubbingPost,
         requestOptions?: DubbingClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DoDubbingResponse>> {
-        const _request = await core.newFormData();
+        const _body = await core.newFormData();
         if (request.file != null) {
-            await _request.appendFile("file", request.file);
+            await _body.appendFile("file", request.file);
         }
 
         if (request.csvFile != null) {
-            await _request.appendFile("csv_file", request.csvFile);
+            await _body.appendFile("csv_file", request.csvFile);
         }
 
         if (request.foregroundAudioFile != null) {
-            await _request.appendFile("foreground_audio_file", request.foregroundAudioFile);
+            await _body.appendFile("foreground_audio_file", request.foregroundAudioFile);
         }
 
         if (request.backgroundAudioFile != null) {
-            await _request.appendFile("background_audio_file", request.backgroundAudioFile);
+            await _body.appendFile("background_audio_file", request.backgroundAudioFile);
         }
 
         if (request.name != null) {
-            _request.append("name", request.name);
+            _body.append("name", request.name);
         }
 
         if (request.sourceUrl != null) {
-            _request.append("source_url", request.sourceUrl);
+            _body.append("source_url", request.sourceUrl);
         }
 
         if (request.sourceLang != null) {
-            _request.append("source_lang", request.sourceLang);
+            _body.append("source_lang", request.sourceLang);
         }
 
         if (request.targetLang != null) {
-            _request.append("target_lang", request.targetLang);
+            _body.append("target_lang", request.targetLang);
         }
 
         if (request.targetAccent != null) {
-            _request.append("target_accent", request.targetAccent);
+            _body.append("target_accent", request.targetAccent);
         }
 
         if (request.numSpeakers != null) {
-            _request.append("num_speakers", request.numSpeakers.toString());
+            _body.append("num_speakers", request.numSpeakers?.toString());
         }
 
         if (request.watermark != null) {
-            _request.append("watermark", request.watermark.toString());
+            _body.append("watermark", request.watermark?.toString());
         }
 
         if (request.startTime != null) {
-            _request.append("start_time", request.startTime.toString());
+            _body.append("start_time", request.startTime?.toString());
         }
 
         if (request.endTime != null) {
-            _request.append("end_time", request.endTime.toString());
+            _body.append("end_time", request.endTime?.toString());
         }
 
         if (request.highestResolution != null) {
-            _request.append("highest_resolution", request.highestResolution.toString());
+            _body.append("highest_resolution", request.highestResolution?.toString());
         }
 
         if (request.dropBackgroundAudio != null) {
-            _request.append("drop_background_audio", request.dropBackgroundAudio.toString());
+            _body.append("drop_background_audio", request.dropBackgroundAudio?.toString());
         }
 
         if (request.useProfanityFilter != null) {
-            _request.append("use_profanity_filter", request.useProfanityFilter.toString());
+            _body.append("use_profanity_filter", request.useProfanityFilter?.toString());
         }
 
         if (request.dubbingStudio != null) {
-            _request.append("dubbing_studio", request.dubbingStudio.toString());
+            _body.append("dubbing_studio", request.dubbingStudio?.toString());
         }
 
         if (request.disableVoiceCloning != null) {
-            _request.append("disable_voice_cloning", request.disableVoiceCloning.toString());
+            _body.append("disable_voice_cloning", request.disableVoiceCloning?.toString());
         }
 
         if (request.mode != null) {
-            _request.append(
+            _body.append(
                 "mode",
                 serializers.DubbingCreateRequestMode.jsonOrThrow(request.mode, { unrecognizedObjectKeys: "strip" }),
             );
         }
 
         if (request.csvFps != null) {
-            _request.append("csv_fps", request.csvFps.toString());
+            _body.append("csv_fps", request.csvFps?.toString());
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -283,7 +278,7 @@ export class DubbingClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -357,7 +352,7 @@ export class DubbingClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -428,7 +423,7 @@ export class DubbingClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

@@ -29,8 +29,8 @@ export const FineTuningResponse: core.serialization.ObjectSchema<
         core.serialization.boolean().optional(),
     ),
     language: core.serialization.string().optional(),
-    progress: core.serialization.record(core.serialization.string(), core.serialization.number().optional()).optional(),
-    message: core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
+    progress: core.serialization.record(core.serialization.string(), core.serialization.number()).optional(),
+    message: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     datasetDurationSeconds: core.serialization.property(
         "dataset_duration_seconds",
         core.serialization.number().optional(),
@@ -60,8 +60,8 @@ export declare namespace FineTuningResponse {
         verification_attempts_count?: number | null;
         manual_verification_requested?: boolean | null;
         language?: string | null;
-        progress?: Record<string, number | null | undefined> | null;
-        message?: Record<string, string | null | undefined> | null;
+        progress?: Record<string, number | null> | null;
+        message?: Record<string, string | null> | null;
         dataset_duration_seconds?: number | null;
         verification_attempts?: VerificationAttemptResponse.Raw[] | null;
         slice_ids?: string[] | null;

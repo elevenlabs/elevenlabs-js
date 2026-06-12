@@ -30,6 +30,8 @@ export class SpeakerClient {
     }
 
     /**
+     * @deprecated
+     *
      * Amend the metadata associated with a speaker, such as their voice. Both voice cloning and using voices from the ElevenLabs library are supported.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -72,7 +74,7 @@ export class SpeakerClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.dubbing.resource.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch.jsonOrThrow(
                 request,
@@ -118,6 +120,8 @@ export class SpeakerClient {
     }
 
     /**
+     * @deprecated
+     *
      * @param {string} dubbing_id - ID of the dubbing project.
      * @param {ElevenLabs.dubbing.resource.BodyCreateANewSpeakerV1DubbingResourceDubbingIdSpeakerPost} request
      * @param {SpeakerClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -155,7 +159,7 @@ export class SpeakerClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.dubbing.resource.BodyCreateANewSpeakerV1DubbingResourceDubbingIdSpeakerPost.jsonOrThrow(
                 request,
@@ -201,6 +205,8 @@ export class SpeakerClient {
     }
 
     /**
+     * @deprecated
+     *
      * Fetch the top 10 similar voices to a speaker, including the voice IDs, names, descriptions, and, where possible, a sample audio recording.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -239,7 +245,7 @@ export class SpeakerClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

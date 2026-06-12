@@ -68,7 +68,7 @@ export class StudioClient {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "safety-identifier": safetyIdentifier != null ? safetyIdentifier : undefined,
+                "safety-identifier": safetyIdentifier,
                 "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
             }),
             requestOptions?.headers,
@@ -83,7 +83,7 @@ export class StudioClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.BodyCreatePodcastV1StudioPodcastsPost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",

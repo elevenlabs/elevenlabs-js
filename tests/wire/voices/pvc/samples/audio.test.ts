@@ -15,6 +15,7 @@ describe("AudioClient", () => {
             media_type: "audio/mpeg",
             duration_secs: 5,
         };
+
         server
             .mockEndpoint()
             .get("/v1/voices/pvc/21m00Tcm4TlvDq8ikWAM/samples/VW7YKqPnjY4h39yTbx2L/audio")

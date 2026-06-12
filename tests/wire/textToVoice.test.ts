@@ -20,6 +20,7 @@ describe("TextToVoiceClient", () => {
             ],
             text: "text",
         };
+
         server
             .mockEndpoint()
             .post("/v1/text-to-voice/create-previews")
@@ -235,6 +236,7 @@ describe("TextToVoiceClient", () => {
             labelling_status: "in_review",
             recording_quality_reason: "recording_quality_reason",
         };
+
         server
             .mockEndpoint()
             .post("/v1/text-to-voice")
@@ -469,6 +471,7 @@ describe("TextToVoiceClient", () => {
             ],
             text: "text",
         };
+
         server
             .mockEndpoint()
             .post("/v1/text-to-voice/design")
@@ -512,6 +515,7 @@ describe("TextToVoiceClient", () => {
             ],
             text: "text",
         };
+
         server
             .mockEndpoint()
             .post("/v1/text-to-voice/21m00Tcm4TlvDq8ikWAM/remix")

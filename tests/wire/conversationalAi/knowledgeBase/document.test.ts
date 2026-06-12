@@ -28,6 +28,7 @@ describe("DocumentClient", () => {
             extracted_inner_html: "extracted_inner_html",
             auto_sync_info: { minimum_frequency_days: 1, auto_remove: true, consec_failures: 1, next_refresh_by: 1 },
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/refresh")
@@ -84,6 +85,7 @@ describe("DocumentClient", () => {
             progress_percentage: 1.1,
             document_model_index_usage: { used_bytes: 1 },
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/rag-index")

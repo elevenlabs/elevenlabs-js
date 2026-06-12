@@ -11,6 +11,7 @@ export const SpeechHistoryItemResponseModelSource = {
     ConvAi: "ConvAI",
     VoiceGeneration: "VoiceGeneration",
     InVpc: "InVPC",
+    Flows: "Flows",
 } as const;
 export type SpeechHistoryItemResponseModelSource =
     (typeof SpeechHistoryItemResponseModelSource)[keyof typeof SpeechHistoryItemResponseModelSource];

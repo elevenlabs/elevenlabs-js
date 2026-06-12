@@ -9,6 +9,7 @@ describe("UsageClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { time: [1738252091000, 1739404800000], usage: { All: [49, 1053] } };
+
         server
             .mockEndpoint()
             .get("/v1/usage/character-stats")

@@ -80,7 +80,7 @@ export class DocumentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.knowledgeBase.BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost.jsonOrThrow(
                 request,
@@ -150,17 +150,17 @@ export class DocumentsClient {
         request: ElevenLabs.conversationalAi.knowledgeBase.BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost,
         requestOptions?: DocumentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AddKnowledgeBaseResponseModel>> {
-        const _request = await core.newFormData();
-        await _request.appendFile("file", request.file);
+        const _body = await core.newFormData();
+        await _body.appendFile("file", request.file);
         if (request.name != null) {
-            _request.append("name", request.name);
+            _body.append("name", request.name);
         }
 
         if (request.parentFolderId != null) {
-            _request.append("parent_folder_id", request.parentFolderId);
+            _body.append("parent_folder_id", request.parentFolderId);
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -178,7 +178,7 @@ export class DocumentsClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -260,7 +260,7 @@ export class DocumentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.knowledgeBase.BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost.jsonOrThrow(
                 request,
@@ -344,7 +344,7 @@ export class DocumentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.knowledgeBase.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost.jsonOrThrow(
                 request,
@@ -417,11 +417,9 @@ export class DocumentsClient {
         requestOptions?: DocumentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetResponse>> {
         const { agentId } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (agentId != null) {
-            _queryParams.agent_id = agentId;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            agent_id: agentId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -436,7 +434,11 @@ export class DocumentsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -504,11 +506,9 @@ export class DocumentsClient {
         requestOptions?: DocumentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         const { force } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (force != null) {
-            _queryParams.force = force.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            force,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -523,7 +523,11 @@ export class DocumentsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -595,7 +599,7 @@ export class DocumentsClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch.jsonOrThrow(
                 request,
@@ -670,21 +674,16 @@ export class DocumentsClient {
         requestOptions?: DocumentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModel>> {
         const { dependentType, pageSize, cursor } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (dependentType != null) {
-            _queryParams.dependent_type = serializers.KnowledgeBaseDependentType.jsonOrThrow(dependentType, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            dependent_type:
+                dependentType != null
+                    ? serializers.KnowledgeBaseDependentType.jsonOrThrow(dependentType, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            page_size: pageSize,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -699,7 +698,11 @@ export class DocumentsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -775,7 +778,7 @@ export class DocumentsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             responseType: "text",
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
@@ -844,7 +847,7 @@ export class DocumentsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -924,7 +927,7 @@ export class DocumentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.knowledgeBase.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost.jsonOrThrow(
                 request,
@@ -1000,7 +1003,7 @@ export class DocumentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.knowledgeBase.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost.jsonOrThrow(
                 request,

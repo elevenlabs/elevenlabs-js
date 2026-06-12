@@ -3,14 +3,17 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
-import { MusicPrompt } from "../../../../types/MusicPrompt";
+import { BodyStreamComposedMusicV1MusicStreamPostCompositionPlan } from "../../types/BodyStreamComposedMusicV1MusicStreamPostCompositionPlan";
 
 export const BodyStreamComposedMusicV1MusicStreamPost: core.serialization.Schema<
     serializers.BodyStreamComposedMusicV1MusicStreamPost.Raw,
     Omit<ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost, "outputFormat">
 > = core.serialization.object({
     prompt: core.serialization.string().optional(),
-    compositionPlan: core.serialization.property("composition_plan", MusicPrompt.optional()),
+    compositionPlan: core.serialization.property(
+        "composition_plan",
+        BodyStreamComposedMusicV1MusicStreamPostCompositionPlan.optional(),
+    ),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
     modelId: core.serialization.property("model_id", core.serialization.stringLiteral("music_v1").optional()),
     seed: core.serialization.number().optional(),
@@ -21,7 +24,7 @@ export const BodyStreamComposedMusicV1MusicStreamPost: core.serialization.Schema
 export declare namespace BodyStreamComposedMusicV1MusicStreamPost {
     export interface Raw {
         prompt?: string | null;
-        composition_plan?: MusicPrompt.Raw | null;
+        composition_plan?: BodyStreamComposedMusicV1MusicStreamPostCompositionPlan.Raw | null;
         music_length_ms?: number | null;
         model_id?: "music_v1" | null;
         seed?: number | null;

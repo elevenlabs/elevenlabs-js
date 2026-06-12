@@ -52,29 +52,19 @@ export class SpeechEngineClient {
         requestOptions?: SpeechEngineClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ListSpeechEnginesResponse>> {
         const { pageSize, search, sortDirection, sortBy, cursor } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (search != null) {
-            _queryParams.search = search;
-        }
-
-        if (sortDirection != null) {
-            _queryParams.sort_direction = serializers.SortDirection.jsonOrThrow(sortDirection, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (sortBy != null) {
-            _queryParams.sort_by = serializers.AgentSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" });
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            search,
+            sort_direction:
+                sortDirection != null
+                    ? serializers.SortDirection.jsonOrThrow(sortDirection, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            sort_by:
+                sortBy != null
+                    ? serializers.AgentSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -89,7 +79,11 @@ export class SpeechEngineClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -165,7 +159,7 @@ export class SpeechEngineClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.CreateSpeechEngineRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -238,7 +232,7 @@ export class SpeechEngineClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -314,7 +308,7 @@ export class SpeechEngineClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -386,7 +380,7 @@ export class SpeechEngineClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.UpdateSpeechEngineRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,

@@ -9,6 +9,7 @@ describe("FeedbackClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { feedback: "like" };
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/conversations/21m00Tcm4TlvDq8ikWAM/feedback")

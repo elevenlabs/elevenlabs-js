@@ -9,5 +9,7 @@ export interface MusicUploadResponse {
     /** Unique identifier for the uploaded song */
     songId: string;
     /** The composition plan extracted from the uploaded song. Only present if `extract_composition_plan` was True in the request body */
-    compositionPlan?: ElevenLabs.MusicPrompt;
+    compositionPlan?: ElevenLabs.MusicUploadResponseCompositionPlan;
+    /** Word-level timestamps transcribed from the uploaded song. Only present if `with_timestamps` was True in the request body */
+    wordsTimestamps?: ElevenLabs.WordTimestamp[];
 }

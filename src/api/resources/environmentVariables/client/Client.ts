@@ -53,29 +53,18 @@ export class EnvironmentVariablesClient {
         requestOptions?: EnvironmentVariablesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.EnvironmentVariablesListResponse>> {
         const { cursor, pageSize, label, environment, type: type_ } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (label != null) {
-            _queryParams.label = label;
-        }
-
-        if (environment != null) {
-            _queryParams.environment = environment;
-        }
-
-        if (type_ != null) {
-            _queryParams.type = serializers.EnvironmentVariablesListRequestType.jsonOrThrow(type_, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            cursor,
+            page_size: pageSize,
+            label,
+            environment,
+            type:
+                type_ != null
+                    ? serializers.EnvironmentVariablesListRequestType.jsonOrThrow(type_, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -90,7 +79,11 @@ export class EnvironmentVariablesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -177,7 +170,7 @@ export class EnvironmentVariablesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.EnvironmentVariablesCreateRequestBody.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -262,7 +255,7 @@ export class EnvironmentVariablesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -348,7 +341,7 @@ export class EnvironmentVariablesClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.UpdateEnvironmentVariableRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

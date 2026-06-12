@@ -14,4 +14,8 @@ export namespace ChapterContentBlockResponseModelNodesItem {
     export interface Other extends ElevenLabs.ChapterContentBlockExtendableNodeResponseModel {
         type: "_other";
     }
+
+    export type Request =
+        | ElevenLabs.ChapterContentBlockResponseModelNodesItem.TtsNode
+        | ElevenLabs.ChapterContentBlockResponseModelNodesItem.Other;
 }

@@ -64,7 +64,7 @@ export class ExotelClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost.jsonOrThrow(
                 request,

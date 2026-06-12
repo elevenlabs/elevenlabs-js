@@ -13,6 +13,7 @@ describe("ConversationalAiClient", () => {
             total_max_bytes: 1,
             models: [{ model: "e5_mistral_7b_instruct", used_bytes: 1 }],
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/knowledge-base/rag-index")
@@ -49,6 +50,7 @@ describe("ConversationalAiClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/rag-index")
@@ -84,6 +86,7 @@ describe("ConversationalAiClient", () => {
             progress_percentage: 1.1,
             document_model_index_usage: { used_bytes: 1 },
         };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/rag-index/21m00Tcm4TlvDq8ikWAM")

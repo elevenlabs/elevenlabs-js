@@ -23,32 +23,33 @@ export class ApiKeysClient {
     }
 
     /**
-     * Revoke the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation. This endpoint requires additional permissions and is not enabled by default. Reach out to your ElevenLabs contact to request access.
+     * Disable the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation. This endpoint requires additional permissions and is not enabled by default. Reach out to your ElevenLabs contact to request access.
      *
-     * @param {ElevenLabs.workspaces.ApiKeysRevokeRequest} request
+     * @param {ElevenLabs.workspaces.ApiKeysDisableRequest} request
      * @param {ApiKeysClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.workspaces.apiKeys.revoke({
+     *     await client.workspaces.apiKeys.disable({
      *         apiKeyName: "self"
      *     })
      */
-    public revoke(
-        request: ElevenLabs.workspaces.ApiKeysRevokeRequest,
+    public disable(
+        request: ElevenLabs.workspaces.ApiKeysDisableRequest,
         requestOptions?: ApiKeysClient.RequestOptions,
     ): core.HttpResponsePromise<unknown> {
-        return core.HttpResponsePromise.fromPromise(this.__revoke(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__disable(request, requestOptions));
     }
 
-    private async __revoke(
-        request: ElevenLabs.workspaces.ApiKeysRevokeRequest,
+    private async __disable(
+        request: ElevenLabs.workspaces.ApiKeysDisableRequest,
         requestOptions?: ApiKeysClient.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         const { apiKeyName } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.api_key_name = apiKeyName;
+        const _queryParams: Record<string, unknown> = {
+            api_key_name: apiKeyName,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -59,11 +60,15 @@ export class ApiKeysClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ElevenLabsEnvironment.Production,
-                "v1/workspaces/api-keys/revoke",
+                "v1/workspaces/api-keys/disable",
             ),
-            method: "DELETE",
+            method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -90,8 +95,8 @@ export class ApiKeysClient {
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
-            "DELETE",
-            "/v1/workspaces/api-keys/revoke",
+            "POST",
+            "/v1/workspaces/api-keys/disable",
         );
     }
 }

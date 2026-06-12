@@ -13,4 +13,6 @@ export interface BodyUploadMusicV1MusicUploadPost {
     file: core.file.Uploadable;
     /** Whether to generate and return the composition plan for the uploaded song. If True, the response will include the composition_plan but will increase the latency. */
     extractCompositionPlan?: boolean;
+    /** Whether to transcribe the uploaded song and return word-level timestamps. If True, the response will include words_timestamps but will increase the latency. */
+    withTimestamps?: boolean;
 }

@@ -53,18 +53,13 @@ export class ChunksClient {
         requestOptions?: ChunksClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.KnowledgeBaseDocumentChunksResponseModel>> {
         const { embeddingModel, pageSize, cursor } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.embedding_model = serializers.EmbeddingModelEnum.jsonOrThrow(embeddingModel, {
-            unrecognizedObjectKeys: "strip",
-        });
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            embedding_model: serializers.EmbeddingModelEnum.jsonOrThrow(embeddingModel, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            page_size: pageSize,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -79,7 +74,11 @@ export class ChunksClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

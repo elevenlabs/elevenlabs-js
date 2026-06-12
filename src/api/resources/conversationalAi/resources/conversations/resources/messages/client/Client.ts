@@ -98,143 +98,52 @@ export class MessagesClient {
             sortBy,
             cursor,
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.text_query = textQuery;
-        if (agentId != null) {
-            _queryParams.agent_id = agentId;
-        }
-
-        if (callSuccessful != null) {
-            _queryParams.call_successful = serializers.EvaluationSuccessResult.jsonOrThrow(callSuccessful, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (callStartBeforeUnix != null) {
-            _queryParams.call_start_before_unix = callStartBeforeUnix.toString();
-        }
-
-        if (callStartAfterUnix != null) {
-            _queryParams.call_start_after_unix = callStartAfterUnix.toString();
-        }
-
-        if (callDurationMinSecs != null) {
-            _queryParams.call_duration_min_secs = callDurationMinSecs.toString();
-        }
-
-        if (callDurationMaxSecs != null) {
-            _queryParams.call_duration_max_secs = callDurationMaxSecs.toString();
-        }
-
-        if (ratingMax != null) {
-            _queryParams.rating_max = ratingMax.toString();
-        }
-
-        if (ratingMin != null) {
-            _queryParams.rating_min = ratingMin.toString();
-        }
-
-        if (hasFeedbackComment != null) {
-            _queryParams.has_feedback_comment = hasFeedbackComment.toString();
-        }
-
-        if (userId != null) {
-            _queryParams.user_id = userId;
-        }
-
-        if (evaluationParams != null) {
-            if (Array.isArray(evaluationParams)) {
-                _queryParams.evaluation_params = evaluationParams.map((item) => item);
-            } else {
-                _queryParams.evaluation_params = evaluationParams;
-            }
-        }
-
-        if (dataCollectionParams != null) {
-            if (Array.isArray(dataCollectionParams)) {
-                _queryParams.data_collection_params = dataCollectionParams.map((item) => item);
-            } else {
-                _queryParams.data_collection_params = dataCollectionParams;
-            }
-        }
-
-        if (toolNames != null) {
-            if (Array.isArray(toolNames)) {
-                _queryParams.tool_names = toolNames.map((item) => item);
-            } else {
-                _queryParams.tool_names = toolNames;
-            }
-        }
-
-        if (toolNamesSuccessful != null) {
-            if (Array.isArray(toolNamesSuccessful)) {
-                _queryParams.tool_names_successful = toolNamesSuccessful.map((item) => item);
-            } else {
-                _queryParams.tool_names_successful = toolNamesSuccessful;
-            }
-        }
-
-        if (toolNamesErrored != null) {
-            if (Array.isArray(toolNamesErrored)) {
-                _queryParams.tool_names_errored = toolNamesErrored.map((item) => item);
-            } else {
-                _queryParams.tool_names_errored = toolNamesErrored;
-            }
-        }
-
-        if (mainLanguages != null) {
-            if (Array.isArray(mainLanguages)) {
-                _queryParams.main_languages = mainLanguages.map((item) => item);
-            } else {
-                _queryParams.main_languages = mainLanguages;
-            }
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (summaryMode != null) {
-            _queryParams.summary_mode =
-                serializers.conversationalAi.conversations.MessagesTextSearchRequestSummaryMode.jsonOrThrow(
-                    summaryMode,
-                    { unrecognizedObjectKeys: "strip" },
-                );
-        }
-
-        if (conversationInitiationSource != null) {
-            _queryParams.conversation_initiation_source = serializers.ConversationInitiationSource.jsonOrThrow(
-                conversationInitiationSource,
-                { unrecognizedObjectKeys: "strip" },
-            );
-        }
-
-        if (textOnly != null) {
-            _queryParams.text_only = textOnly.toString();
-        }
-
-        if (branchId != null) {
-            _queryParams.branch_id = branchId;
-        }
-
-        if (topicIds != null) {
-            if (Array.isArray(topicIds)) {
-                _queryParams.topic_ids = topicIds.map((item) => item);
-            } else {
-                _queryParams.topic_ids = topicIds;
-            }
-        }
-
-        if (sortBy != null) {
-            _queryParams.sort_by = serializers.MessageSearchSortBy.jsonOrThrow(sortBy, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            text_query: textQuery,
+            agent_id: agentId,
+            call_successful:
+                callSuccessful != null
+                    ? serializers.EvaluationSuccessResult.jsonOrThrow(callSuccessful, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            call_start_before_unix: callStartBeforeUnix,
+            call_start_after_unix: callStartAfterUnix,
+            call_duration_min_secs: callDurationMinSecs,
+            call_duration_max_secs: callDurationMaxSecs,
+            rating_max: ratingMax,
+            rating_min: ratingMin,
+            has_feedback_comment: hasFeedbackComment,
+            user_id: userId,
+            evaluation_params: evaluationParams,
+            data_collection_params: dataCollectionParams,
+            tool_names: toolNames,
+            tool_names_successful: toolNamesSuccessful,
+            tool_names_errored: toolNamesErrored,
+            main_languages: mainLanguages,
+            page_size: pageSize,
+            summary_mode:
+                summaryMode != null
+                    ? serializers.conversationalAi.conversations.MessagesTextSearchRequestSummaryMode.jsonOrThrow(
+                          summaryMode,
+                          { unrecognizedObjectKeys: "strip" },
+                      )
+                    : undefined,
+            conversation_initiation_source:
+                conversationInitiationSource != null
+                    ? serializers.ConversationInitiationSource.jsonOrThrow(conversationInitiationSource, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            text_only: textOnly,
+            branch_id: branchId,
+            topic_ids: topicIds,
+            sort_by:
+                sortBy != null
+                    ? serializers.MessageSearchSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -249,7 +158,11 @@ export class MessagesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -317,20 +230,12 @@ export class MessagesClient {
         requestOptions?: MessagesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.MessagesSearchResponse>> {
         const { textQuery, agentId, pageSize, cursor } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.text_query = textQuery;
-        if (agentId != null) {
-            _queryParams.agent_id = agentId;
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            text_query: textQuery,
+            agent_id: agentId,
+            page_size: pageSize,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -345,7 +250,11 @@ export class MessagesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

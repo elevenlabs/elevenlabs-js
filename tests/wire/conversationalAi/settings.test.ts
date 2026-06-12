@@ -24,6 +24,7 @@ describe("SettingsClient", () => {
             conversation_embedding_retention_days: 1,
             default_livekit_stack: "standard",
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/settings")
@@ -73,6 +74,7 @@ describe("SettingsClient", () => {
             conversation_embedding_retention_days: 1,
             default_livekit_stack: "standard",
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/settings")

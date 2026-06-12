@@ -188,6 +188,7 @@ describe("VoicesClient", () => {
             labelling_status: "in_review",
             recording_quality_reason: "recording_quality_reason",
         };
+
         server
             .mockEndpoint()
             .get("/v1/voices/21m00Tcm4TlvDq8ikWAM")
@@ -408,6 +409,7 @@ describe("VoicesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .delete("/v1/voices/21m00Tcm4TlvDq8ikWAM")
@@ -588,6 +590,7 @@ describe("VoicesClient", () => {
                 },
             ],
         };
+
         server.mockEndpoint().get("/v1/voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.voices.getAll({
@@ -942,6 +945,7 @@ describe("VoicesClient", () => {
             total_count: 1,
             next_page_token: "next_page_token",
         };
+
         server.mockEndpoint().get("/v2/voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.voices.search({
@@ -1145,6 +1149,7 @@ describe("VoicesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { new_name: "John Smith" };
         const rawResponseBody = { voice_id: "b38kUX8pkfYO2kHyqfFy" };
+
         server
             .mockEndpoint()
             .post(
@@ -1223,6 +1228,7 @@ describe("VoicesClient", () => {
             total_count: 0,
             last_sort_id: "last_sort_id",
         };
+
         server.mockEndpoint().get("/v1/shared-voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.voices.getShared({

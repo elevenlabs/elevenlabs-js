@@ -144,6 +144,8 @@ export class ConversationalAiClient {
     }
 
     /**
+     * @deprecated
+     *
      * Upload a file or webpage URL to create a knowledge base document. <br> <Note> After creating the document, update the agent's knowledge base by calling [Update agent](/docs/api-reference/agents/update). </Note>
      *
      * @param {ElevenLabs.BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost} request
@@ -168,25 +170,23 @@ export class ConversationalAiClient {
         request: ElevenLabs.BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost,
         requestOptions?: ConversationalAiClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AddKnowledgeBaseResponseModel>> {
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (request.agentId != null) {
-            _queryParams.agent_id = request.agentId;
-        }
-
-        const _request = await core.newFormData();
+        const _queryParams: Record<string, unknown> = {
+            agent_id: request.agentId,
+        };
+        const _body = await core.newFormData();
         if (request.name != null) {
-            _request.append("name", request.name);
+            _body.append("name", request.name);
         }
 
         if (request.url != null) {
-            _request.append("url", request.url);
+            _body.append("url", request.url);
         }
 
         if (request.file != null) {
-            await _request.appendFile("file", request.file);
+            await _body.appendFile("file", request.file);
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -204,7 +204,11 @@ export class ConversationalAiClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -275,7 +279,7 @@ export class ConversationalAiClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -351,7 +355,7 @@ export class ConversationalAiClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -432,7 +436,7 @@ export class ConversationalAiClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

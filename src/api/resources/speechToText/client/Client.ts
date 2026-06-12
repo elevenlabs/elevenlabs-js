@@ -56,36 +56,34 @@ export class SpeechToTextClient {
         request: ElevenLabs.BodySpeechToTextV1SpeechToTextPost,
         requestOptions?: SpeechToTextClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.SpeechToTextConvertResponse>> {
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (request.enableLogging != null) {
-            _queryParams.enable_logging = request.enableLogging.toString();
-        }
-
-        const _request = await core.newFormData();
-        _request.append(
+        const _queryParams: Record<string, unknown> = {
+            enable_logging: request.enableLogging,
+        };
+        const _body = await core.newFormData();
+        _body.append(
             "model_id",
             serializers.SpeechToTextConvertRequestModelId.jsonOrThrow(request.modelId, {
                 unrecognizedObjectKeys: "strip",
             }),
         );
         if (request.file != null) {
-            await _request.appendFile("file", request.file);
+            await _body.appendFile("file", request.file);
         }
 
         if (request.languageCode != null) {
-            _request.append("language_code", request.languageCode);
+            _body.append("language_code", request.languageCode);
         }
 
         if (request.tagAudioEvents != null) {
-            _request.append("tag_audio_events", request.tagAudioEvents.toString());
+            _body.append("tag_audio_events", request.tagAudioEvents?.toString());
         }
 
         if (request.numSpeakers != null) {
-            _request.append("num_speakers", request.numSpeakers.toString());
+            _body.append("num_speakers", request.numSpeakers?.toString());
         }
 
         if (request.timestampsGranularity != null) {
-            _request.append(
+            _body.append(
                 "timestamps_granularity",
                 serializers.SpeechToTextConvertRequestTimestampsGranularity.jsonOrThrow(request.timestampsGranularity, {
                     unrecognizedObjectKeys: "strip",
@@ -94,19 +92,19 @@ export class SpeechToTextClient {
         }
 
         if (request.diarize != null) {
-            _request.append("diarize", request.diarize.toString());
+            _body.append("diarize", request.diarize?.toString());
         }
 
         if (request.diarizationThreshold != null) {
-            _request.append("diarization_threshold", request.diarizationThreshold.toString());
+            _body.append("diarization_threshold", request.diarizationThreshold?.toString());
         }
 
         if (request.additionalFormats != null) {
-            _request.append("additional_formats", toJson(request.additionalFormats));
+            _body.append("additional_formats", toJson(request.additionalFormats));
         }
 
         if (request.fileFormat != null) {
-            _request.append(
+            _body.append(
                 "file_format",
                 serializers.SpeechToTextConvertRequestFileFormat.jsonOrThrow(request.fileFormat, {
                     unrecognizedObjectKeys: "strip",
@@ -115,35 +113,35 @@ export class SpeechToTextClient {
         }
 
         if (request.cloudStorageUrl != null) {
-            _request.append("cloud_storage_url", request.cloudStorageUrl);
+            _body.append("cloud_storage_url", request.cloudStorageUrl);
         }
 
         if (request.sourceUrl != null) {
-            _request.append("source_url", request.sourceUrl);
+            _body.append("source_url", request.sourceUrl);
         }
 
         if (request.webhook != null) {
-            _request.append("webhook", request.webhook.toString());
+            _body.append("webhook", request.webhook?.toString());
         }
 
         if (request.webhookId != null) {
-            _request.append("webhook_id", request.webhookId);
+            _body.append("webhook_id", request.webhookId);
         }
 
         if (request.temperature != null) {
-            _request.append("temperature", request.temperature.toString());
+            _body.append("temperature", request.temperature?.toString());
         }
 
         if (request.seed != null) {
-            _request.append("seed", request.seed.toString());
+            _body.append("seed", request.seed?.toString());
         }
 
         if (request.useMultiChannel != null) {
-            _request.append("use_multi_channel", request.useMultiChannel.toString());
+            _body.append("use_multi_channel", request.useMultiChannel?.toString());
         }
 
         if (request.webhookMetadata != null) {
-            _request.append(
+            _body.append(
                 "webhook_metadata",
                 (() => {
                     const mapped = serializers.SpeechToTextConvertRequestWebhookMetadata.jsonOrThrow(
@@ -158,36 +156,36 @@ export class SpeechToTextClient {
         if (request.entityDetection != null) {
             if (Array.isArray(request.entityDetection))
                 for (const _item of request.entityDetection) {
-                    _request.append("entity_detection", typeof _item === "string" ? _item : toJson(_item));
+                    _body.append("entity_detection", typeof _item === "string" ? _item : toJson(_item));
                 }
         }
 
         if (request.noVerbatim != null) {
-            _request.append("no_verbatim", request.noVerbatim.toString());
+            _body.append("no_verbatim", request.noVerbatim?.toString());
         }
 
         if (request.detectSpeakerRoles != null) {
-            _request.append("detect_speaker_roles", request.detectSpeakerRoles.toString());
+            _body.append("detect_speaker_roles", request.detectSpeakerRoles?.toString());
         }
 
         if (request.entityRedaction != null) {
             if (Array.isArray(request.entityRedaction))
                 for (const _item of request.entityRedaction) {
-                    _request.append("entity_redaction", typeof _item === "string" ? _item : toJson(_item));
+                    _body.append("entity_redaction", typeof _item === "string" ? _item : toJson(_item));
                 }
         }
 
         if (request.entityRedactionMode != null) {
-            _request.append("entity_redaction_mode", request.entityRedactionMode);
+            _body.append("entity_redaction_mode", request.entityRedactionMode);
         }
 
         if (request.keyterms != null) {
             for (const _item of request.keyterms) {
-                _request.append("keyterms", _item);
+                _body.append("keyterms", _item);
             }
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -205,7 +203,11 @@ export class SpeechToTextClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
