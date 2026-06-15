@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const InteractionBudget: core.serialization.Schema<
     serializers.InteractionBudget.Raw,
     ElevenLabs.InteractionBudget
-> = core.serialization.enum_(["realtime", "async"]);
+> = core.serialization.enum_(["realtime", "5_minutes", "10_minutes", "1_hour"]);
 
 export declare namespace InteractionBudget {
-    export type Raw = "realtime" | "async";
+    export type Raw = "realtime" | "5_minutes" | "10_minutes" | "1_hour";
 }

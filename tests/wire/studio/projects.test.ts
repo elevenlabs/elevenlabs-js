@@ -15,8 +15,8 @@ describe("ProjectsClient", () => {
                     name: "My Project",
                     create_date_unix: 1714204800,
                     created_by_user_id: "Vbtgl3bRdj6lk79rYAgx",
-                    default_title_voice_id: "JBFqnCBsd6RMkjVDRZzb",
-                    default_paragraph_voice_id: "JBFqnCBsd6RMkjVDRZzb",
+                    default_title_voice_ref_id: "JBFqnCBsd6RMkjVDRZzb",
+                    default_paragraph_voice_ref_id: "JBFqnCBsd6RMkjVDRZzb",
                     default_model_id: "eleven_multilingual_v2",
                     last_conversion_date_unix: 1714204800,
                     can_be_downloaded: true,
@@ -46,6 +46,7 @@ describe("ProjectsClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/studio/projects")
@@ -62,8 +63,8 @@ describe("ProjectsClient", () => {
                     name: "My Project",
                     createDateUnix: 1714204800,
                     createdByUserId: "Vbtgl3bRdj6lk79rYAgx",
-                    defaultTitleVoiceId: "JBFqnCBsd6RMkjVDRZzb",
-                    defaultParagraphVoiceId: "JBFqnCBsd6RMkjVDRZzb",
+                    defaultTitleVoiceRefId: "JBFqnCBsd6RMkjVDRZzb",
+                    defaultParagraphVoiceRefId: "JBFqnCBsd6RMkjVDRZzb",
                     defaultModelId: "eleven_multilingual_v2",
                     lastConversionDateUnix: 1714204800,
                     canBeDownloaded: true,
@@ -108,8 +109,8 @@ describe("ProjectsClient", () => {
             name: "My Project",
             create_date_unix: 1714204800,
             created_by_user_id: "Vbtgl3bRdj6lk79rYAgx",
-            default_title_voice_id: "JBFqnCBsd6RMkjVDRZzb",
-            default_paragraph_voice_id: "JBFqnCBsd6RMkjVDRZzb",
+            default_title_voice_ref_id: "JBFqnCBsd6RMkjVDRZzb",
+            default_paragraph_voice_ref_id: "JBFqnCBsd6RMkjVDRZzb",
             default_model_id: "eleven_multilingual_v2",
             last_conversion_date_unix: 1714204800,
             can_be_downloaded: true,
@@ -223,8 +224,16 @@ describe("ProjectsClient", () => {
                         paragraphs_unconverted: 10,
                         credits_needed_to_convert: 1000,
                         voice_statistics: [
-                            { voice_id: "voice123", characters_unconverted: 600, characters_converted: 300 },
-                            { voice_id: "voice456", characters_unconverted: 400, characters_converted: 200 },
+                            {
+                                project_voice_ref_id: "voice123",
+                                characters_unconverted: 600,
+                                characters_converted: 300,
+                            },
+                            {
+                                project_voice_ref_id: "voice456",
+                                characters_unconverted: 400,
+                                characters_converted: 200,
+                            },
                         ],
                     },
                     last_conversion_error: "Error message",
@@ -298,6 +307,7 @@ describe("ProjectsClient", () => {
             ],
             voices: [
                 {
+                    project_voice_ref_id: "project_voice_ref_id",
                     voice_id: "voice_id",
                     alias: "alias",
                     stability: 1.1,
@@ -544,6 +554,7 @@ describe("ProjectsClient", () => {
                 is_voice_changer_on: true,
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM")
@@ -560,8 +571,8 @@ describe("ProjectsClient", () => {
             name: "My Project",
             createDateUnix: 1714204800,
             createdByUserId: "Vbtgl3bRdj6lk79rYAgx",
-            defaultTitleVoiceId: "JBFqnCBsd6RMkjVDRZzb",
-            defaultParagraphVoiceId: "JBFqnCBsd6RMkjVDRZzb",
+            defaultTitleVoiceRefId: "JBFqnCBsd6RMkjVDRZzb",
+            defaultParagraphVoiceRefId: "JBFqnCBsd6RMkjVDRZzb",
             defaultModelId: "eleven_multilingual_v2",
             lastConversionDateUnix: 1714204800,
             canBeDownloaded: true,
@@ -738,12 +749,12 @@ describe("ProjectsClient", () => {
                         creditsNeededToConvert: 1000,
                         voiceStatistics: [
                             {
-                                voiceId: "voice123",
+                                projectVoiceRefId: "voice123",
                                 charactersUnconverted: 600,
                                 charactersConverted: 300,
                             },
                             {
-                                voiceId: "voice456",
+                                projectVoiceRefId: "voice456",
                                 charactersUnconverted: 400,
                                 charactersConverted: 200,
                             },
@@ -842,6 +853,7 @@ describe("ProjectsClient", () => {
             ],
             voices: [
                 {
+                    projectVoiceRefId: "project_voice_ref_id",
                     voiceId: "voice_id",
                     alias: "alias",
                     stability: 1.1,
@@ -1140,8 +1152,8 @@ describe("ProjectsClient", () => {
                 name: "My Project",
                 create_date_unix: 1714204800,
                 created_by_user_id: "Vbtgl3bRdj6lk79rYAgx",
-                default_title_voice_id: "JBFqnCBsd6RMkjVDRZzb",
-                default_paragraph_voice_id: "JBFqnCBsd6RMkjVDRZzb",
+                default_title_voice_ref_id: "JBFqnCBsd6RMkjVDRZzb",
+                default_paragraph_voice_ref_id: "JBFqnCBsd6RMkjVDRZzb",
                 default_model_id: "eleven_multilingual_v2",
                 last_conversion_date_unix: 1714204800,
                 can_be_downloaded: true,
@@ -1208,6 +1220,7 @@ describe("ProjectsClient", () => {
                 agent_settings: { tool_settings: { key: {} } },
             },
         };
+
         server
             .mockEndpoint()
             .post("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM")
@@ -1228,8 +1241,8 @@ describe("ProjectsClient", () => {
                 name: "My Project",
                 createDateUnix: 1714204800,
                 createdByUserId: "Vbtgl3bRdj6lk79rYAgx",
-                defaultTitleVoiceId: "JBFqnCBsd6RMkjVDRZzb",
-                defaultParagraphVoiceId: "JBFqnCBsd6RMkjVDRZzb",
+                defaultTitleVoiceRefId: "JBFqnCBsd6RMkjVDRZzb",
+                defaultParagraphVoiceRefId: "JBFqnCBsd6RMkjVDRZzb",
                 defaultModelId: "eleven_multilingual_v2",
                 lastConversionDateUnix: 1714204800,
                 canBeDownloaded: true,
@@ -1336,6 +1349,7 @@ describe("ProjectsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .delete("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM")
@@ -1355,6 +1369,7 @@ describe("ProjectsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .post("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/convert")
@@ -1374,6 +1389,7 @@ describe("ProjectsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { chapter_ids: ["aw1NgEzBg83R7vgmiJt6"] };
+
         server
             .mockEndpoint()
             .get("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/muted-tracks")

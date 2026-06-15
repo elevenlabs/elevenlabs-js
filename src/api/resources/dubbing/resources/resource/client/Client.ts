@@ -42,6 +42,8 @@ export class ResourceClient {
     }
 
     /**
+     * @deprecated
+     *
      * Given a dubbing ID generated from the '/v1/dubbing' endpoint with studio enabled, returns the dubbing resource.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -77,7 +79,7 @@ export class ResourceClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -118,6 +120,8 @@ export class ResourceClient {
     }
 
     /**
+     * @deprecated
+     *
      * Change the attribution of one or more segments to a different speaker.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -160,7 +164,7 @@ export class ResourceClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.dubbing.BodyMoveSegmentsBetweenSpeakersV1DubbingResourceDubbingIdMigrateSegmentsPost.jsonOrThrow(
                 request,
@@ -206,6 +210,8 @@ export class ResourceClient {
     }
 
     /**
+     * @deprecated
+     *
      * Regenerate the transcriptions for the specified segments. Does not automatically regenerate translations or dubs.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -247,7 +253,7 @@ export class ResourceClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.dubbing.BodyTranscribesSegmentsV1DubbingResourceDubbingIdTranscribePost.jsonOrThrow(
                 request,
@@ -293,6 +299,8 @@ export class ResourceClient {
     }
 
     /**
+     * @deprecated
+     *
      * Regenerate the translations for either the entire resource or the specified segments/languages. Will automatically transcribe missing transcriptions. Will not automatically regenerate the dubs.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -334,7 +342,7 @@ export class ResourceClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.dubbing.BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdTranslatePost.jsonOrThrow(
                 request,
@@ -380,6 +388,8 @@ export class ResourceClient {
     }
 
     /**
+     * @deprecated
+     *
      * Regenerate the dubs for either the entire resource or the specified segments/languages. Will automatically transcribe and translate any missing transcriptions and translations.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -421,7 +431,7 @@ export class ResourceClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.dubbing.BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdDubPost.jsonOrThrow(
                 request,
@@ -467,6 +477,8 @@ export class ResourceClient {
     }
 
     /**
+     * @deprecated
+     *
      * Regenerate the output media for a language using the latest Studio state. Please ensure all segments have been dubbed before rendering, otherwise they will be omitted. Renders are generated asynchronously, and to check the status of all renders please use the 'Get Dubbing Resource' endpoint.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -511,7 +523,7 @@ export class ResourceClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost.jsonOrThrow(
                 request,

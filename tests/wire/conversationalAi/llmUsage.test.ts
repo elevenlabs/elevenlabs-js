@@ -9,6 +9,7 @@ describe("LlmUsageClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { prompt_length: 1, number_of_pages: 1, rag_enabled: true };
         const rawResponseBody = { llm_prices: [{ llm: "gpt-4o-mini", price_per_minute: 1.1 }] };
+
         server
             .mockEndpoint()
             .post("/v1/convai/llm-usage/calculate")

@@ -62,47 +62,26 @@ export class ToolsClient {
     ): Promise<core.WithRawResponse<ElevenLabs.ToolsResponseModel>> {
         const { search, pageSize, showOnlyOwnedDocuments, createdByUserId, types, sortDirection, sortBy, cursor } =
             request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (search != null) {
-            _queryParams.search = search;
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (showOnlyOwnedDocuments != null) {
-            _queryParams.show_only_owned_documents = showOnlyOwnedDocuments.toString();
-        }
-
-        if (createdByUserId != null) {
-            _queryParams.created_by_user_id = createdByUserId;
-        }
-
-        if (types != null) {
-            if (Array.isArray(types)) {
-                _queryParams.types = types.map((item) =>
-                    serializers.ToolTypeFilter.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
-                );
-            } else {
-                _queryParams.types = serializers.ToolTypeFilter.jsonOrThrow(types, { unrecognizedObjectKeys: "strip" });
-            }
-        }
-
-        if (sortDirection != null) {
-            _queryParams.sort_direction = serializers.SortDirection.jsonOrThrow(sortDirection, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (sortBy != null) {
-            _queryParams.sort_by = serializers.ToolSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" });
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            search,
+            page_size: pageSize,
+            show_only_owned_documents: showOnlyOwnedDocuments,
+            created_by_user_id: createdByUserId,
+            types: Array.isArray(types)
+                ? types.map((item) => serializers.ToolTypeFilter.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }))
+                : types != null
+                  ? serializers.ToolTypeFilter.jsonOrThrow(types, { unrecognizedObjectKeys: "strip" })
+                  : undefined,
+            sort_direction:
+                sortDirection != null
+                    ? serializers.SortDirection.jsonOrThrow(sortDirection, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            sort_by:
+                sortBy != null
+                    ? serializers.ToolSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -117,7 +96,11 @@ export class ToolsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -196,7 +179,7 @@ export class ToolsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.ToolRequestModel.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -269,7 +252,7 @@ export class ToolsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -332,11 +315,9 @@ export class ToolsClient {
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         const { force } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (force != null) {
-            _queryParams.force = force.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            force,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -351,7 +332,11 @@ export class ToolsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -425,7 +410,7 @@ export class ToolsClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.ToolRequestModel.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -491,15 +476,10 @@ export class ToolsClient {
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetToolDependentAgentsResponseModel>> {
         const { cursor, pageSize } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            cursor,
+            page_size: pageSize,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -514,7 +494,11 @@ export class ToolsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

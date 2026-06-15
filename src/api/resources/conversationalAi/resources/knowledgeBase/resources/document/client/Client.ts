@@ -51,9 +51,9 @@ export class DocumentClient {
         request: ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIdUpdateFilePatch,
         requestOptions?: DocumentClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.conversationalAi.knowledgeBase.DocumentUpdateFileResponse>> {
-        const _request = await core.newFormData();
-        await _request.appendFile("file", request.file);
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _body = await core.newFormData();
+        await _body.appendFile("file", request.file);
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -71,7 +71,7 @@ export class DocumentClient {
             ),
             method: "PATCH",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -153,7 +153,7 @@ export class DocumentClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -235,7 +235,7 @@ export class DocumentClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.knowledgeBase.RagIndexRequestModel.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

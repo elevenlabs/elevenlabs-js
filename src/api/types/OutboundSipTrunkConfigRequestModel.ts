@@ -15,4 +15,6 @@ export interface OutboundSipTrunkConfigRequestModel {
     attributesToHeaders?: Record<string, string>;
     /** Optional digest authentication credentials (username/password). If not provided, ACL authentication is assumed. */
     credentials?: ElevenLabs.SipTrunkCredentialsRequestModel;
+    /** Media codecs that should be offered in the SDP for outbound calls. If empty, all supported codecs are offered. */
+    enabledCodecs?: ElevenLabs.MediaCodec[];
 }

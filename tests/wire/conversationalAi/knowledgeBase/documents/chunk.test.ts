@@ -9,6 +9,7 @@ describe("ChunkClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { id: "id", name: "name", content: "content" };
+
         server
             .mockEndpoint()
             .get("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/chunk/chunk_id")

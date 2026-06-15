@@ -62,7 +62,7 @@ export class InvitesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.workspace.InviteUserRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -138,7 +138,7 @@ export class InvitesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.workspace.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -221,7 +221,7 @@ export class InvitesClient {
             method: "DELETE",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.workspace.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

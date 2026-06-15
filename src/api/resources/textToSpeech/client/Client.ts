@@ -25,6 +25,7 @@ export class TextToSpeechClient {
 
     /**
      * Converts text into speech using a voice of your choice and returns audio.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public convert(
@@ -41,21 +42,16 @@ export class TextToSpeechClient {
         requestOptions?: TextToSpeechClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (enableLogging != null) {
-            _queryParams.enable_logging = enableLogging.toString();
-        }
-
-        if (optimizeStreamingLatency != null) {
-            _queryParams.optimize_streaming_latency = optimizeStreamingLatency.toString();
-        }
-
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToSpeechConvertRequestOutputFormat.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            enable_logging: enableLogging,
+            optimize_streaming_latency: optimizeStreamingLatency,
+            output_format:
+                outputFormat != null
+                    ? serializers.TextToSpeechConvertRequestOutputFormat.jsonOrThrow(outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -71,7 +67,11 @@ export class TextToSpeechClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.BodyTextToSpeechFull.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
@@ -137,22 +137,16 @@ export class TextToSpeechClient {
         requestOptions?: TextToSpeechClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AudioWithTimestampsResponse>> {
         const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (enableLogging != null) {
-            _queryParams.enable_logging = enableLogging.toString();
-        }
-
-        if (optimizeStreamingLatency != null) {
-            _queryParams.optimize_streaming_latency = optimizeStreamingLatency.toString();
-        }
-
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToSpeechConvertWithTimestampsRequestOutputFormat.jsonOrThrow(
-                outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            enable_logging: enableLogging,
+            optimize_streaming_latency: optimizeStreamingLatency,
+            output_format:
+                outputFormat != null
+                    ? serializers.TextToSpeechConvertWithTimestampsRequestOutputFormat.jsonOrThrow(outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -168,7 +162,11 @@ export class TextToSpeechClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.BodyTextToSpeechFullWithTimestamps.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -214,6 +212,7 @@ export class TextToSpeechClient {
 
     /**
      * Converts text into speech using a voice of your choice and returns audio as an audio stream.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public stream(
@@ -230,21 +229,16 @@ export class TextToSpeechClient {
         requestOptions?: TextToSpeechClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (enableLogging != null) {
-            _queryParams.enable_logging = enableLogging.toString();
-        }
-
-        if (optimizeStreamingLatency != null) {
-            _queryParams.optimize_streaming_latency = optimizeStreamingLatency.toString();
-        }
-
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToSpeechStreamRequestOutputFormat.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            enable_logging: enableLogging,
+            optimize_streaming_latency: optimizeStreamingLatency,
+            output_format:
+                outputFormat != null
+                    ? serializers.TextToSpeechStreamRequestOutputFormat.jsonOrThrow(outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -260,7 +254,11 @@ export class TextToSpeechClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.StreamTextToSpeechRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
@@ -312,22 +310,16 @@ export class TextToSpeechClient {
         requestOptions?: TextToSpeechClient.RequestOptions,
     ): Promise<core.WithRawResponse<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsResponse>>> {
         const { enableLogging, optimizeStreamingLatency, outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (enableLogging != null) {
-            _queryParams.enable_logging = enableLogging.toString();
-        }
-
-        if (optimizeStreamingLatency != null) {
-            _queryParams.optimize_streaming_latency = optimizeStreamingLatency.toString();
-        }
-
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToSpeechStreamWithTimestampsRequestOutputFormat.jsonOrThrow(
-                outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            enable_logging: enableLogging,
+            optimize_streaming_latency: optimizeStreamingLatency,
+            output_format:
+                outputFormat != null
+                    ? serializers.TextToSpeechStreamWithTimestampsRequestOutputFormat.jsonOrThrow(outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -343,12 +335,16 @@ export class TextToSpeechClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.StreamTextToSpeechWithTimestampsRequest.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
             }),
-            responseType: "sse",
+            responseType: "streaming",
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

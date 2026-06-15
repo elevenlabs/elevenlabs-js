@@ -56,6 +56,7 @@ describe("TagsClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server.mockEndpoint().get("/v1/convai/tags").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.conversationalAi.conversations.tags.list({
@@ -90,6 +91,7 @@ describe("TagsClient", () => {
             description: "description",
             created_at_unix_secs: 1,
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/tags")
@@ -124,6 +126,7 @@ describe("TagsClient", () => {
             description: "description",
             created_at_unix_secs: 1,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/tags/tag_id")
@@ -165,6 +168,7 @@ describe("TagsClient", () => {
             description: "description",
             created_at_unix_secs: 1,
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/tags/tag_id")

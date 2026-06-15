@@ -29,8 +29,8 @@ export interface TextToDialogueWebsocketClientMessage {
     singleUseToken?: string;
     /** Voice IDs to load for the session (first message only, required on first message). */
     voices?: string[];
-    /** Optional voice settings object; same shape as `voice_settings` on [Create dialogue](/docs/api-reference/text-to-dialogue/convert). */
-    voiceSettings?: Record<string, unknown>;
+    /** Optional voice settings (first message only). */
+    voiceSettings?: ElevenLabs.TextToDialogueWebsocketVoiceSettings;
     /** Optional pronunciation dictionaries (first message only). */
     pronunciationDictionaryLocators?: ElevenLabs.PronunciationDictionaryLocator[];
 }

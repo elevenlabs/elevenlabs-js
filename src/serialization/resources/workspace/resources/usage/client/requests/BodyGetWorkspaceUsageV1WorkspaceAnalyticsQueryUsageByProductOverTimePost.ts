@@ -20,6 +20,7 @@ export const BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTim
             .optional(),
     ),
     filters: core.serialization.list(ColumnFilter).optional(),
+    timeZone: core.serialization.property("time_zone", core.serialization.string().optional()),
 });
 
 export declare namespace BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePost {
@@ -29,5 +30,6 @@ export declare namespace BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByPr
         interval_seconds?: number | null;
         group_by?: BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePostGroupByItem.Raw[] | null;
         filters?: ColumnFilter.Raw[] | null;
+        time_zone?: string | null;
     }
 }

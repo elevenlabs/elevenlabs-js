@@ -9,6 +9,7 @@ describe("SettingsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { charts: [{ type: "call_success", name: "name" }] };
+
         server
             .mockEndpoint()
             .get("/v1/convai/settings/dashboard")
@@ -33,6 +34,7 @@ describe("SettingsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { charts: [{ type: "call_success", name: "name" }] };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/settings/dashboard")

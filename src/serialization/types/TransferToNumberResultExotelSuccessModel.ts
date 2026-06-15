@@ -11,6 +11,7 @@ export const TransferToNumberResultExotelSuccessModel: core.serialization.Object
     status: core.serialization.stringLiteral("success").optional(),
     transferNumber: core.serialization.property("transfer_number", core.serialization.string()),
     reason: core.serialization.string().optional(),
+    agentMessage: core.serialization.property("agent_message", core.serialization.string().optional()),
     note: core.serialization.string().optional(),
 });
 
@@ -19,6 +20,7 @@ export declare namespace TransferToNumberResultExotelSuccessModel {
         status?: "success" | null;
         transfer_number: string;
         reason?: string | null;
+        agent_message?: string | null;
         note?: string | null;
     }
 }

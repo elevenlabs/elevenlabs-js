@@ -12,6 +12,7 @@ describe("ChunksClient", () => {
             chunks: [{ id: "id", name: "name", content: "content" }],
             next_cursor: "next_cursor",
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/chunks")

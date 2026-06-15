@@ -24,6 +24,7 @@ describe("WebhooksClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/workspace/webhooks")
@@ -62,6 +63,7 @@ describe("WebhooksClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { settings: { auth_type: "hmac", name: "name", webhook_url: "webhook_url" } };
         const rawResponseBody = { webhook_id: "webhook_id", webhook_secret: "webhook_secret" };
+
         server
             .mockEndpoint()
             .post("/v1/workspace/webhooks")
@@ -89,6 +91,7 @@ describe("WebhooksClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .delete("/v1/workspace/webhooks/G007vmtq9uWYl7SUW9zGS8GZZa1K")
@@ -108,6 +111,7 @@ describe("WebhooksClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { is_disabled: true, name: "My Callback Webhook" };
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .patch("/v1/workspace/webhooks/G007vmtq9uWYl7SUW9zGS8GZZa1K")

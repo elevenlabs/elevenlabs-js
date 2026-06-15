@@ -18,7 +18,7 @@ export interface BodyVideoToMusicV1MusicVideoToMusicPost {
     /** Optional list of style tags (e.g. ['upbeat', 'cinematic']). A maximum of 10 tags is allowed. */
     tags?: string[];
     /** The model to use for the generation. */
-    modelId?: "music_v1";
+    modelId?: ElevenLabs.MusicVideoToMusicRequestModelId;
     /** Whether to sign the generated song with C2PA. Applicable only for mp3 files. */
     signWithC2Pa?: boolean;
 }

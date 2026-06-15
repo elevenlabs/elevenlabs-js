@@ -3,5 +3,6 @@
 export const HistoryListRequestSource = {
     Tts: "TTS",
     Sts: "STS",
+    Flows: "Flows",
 } as const;
 export type HistoryListRequestSource = (typeof HistoryListRequestSource)[keyof typeof HistoryListRequestSource];

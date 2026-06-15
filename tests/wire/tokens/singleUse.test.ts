@@ -9,6 +9,7 @@ describe("SingleUseClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { token: "sutkn_1234567890" };
+
         server
             .mockEndpoint()
             .post("/v1/single-use-token/realtime_scribe")

@@ -59,7 +59,7 @@ export class AnalysisClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -96,6 +96,92 @@ export class AnalysisClient {
             _response.rawResponse,
             "POST",
             "/v1/convai/conversations/{conversation_id}/analysis/run",
+        );
+    }
+
+    /**
+     * Rerun a specific evaluation for a conversation.
+     *
+     * @param {string} conversation_id - ID of the conversation
+     * @param {ElevenLabs.conversationalAi.conversations.RunConversationEvaluationsRequest} request
+     * @param {AnalysisClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.conversations.analysis.runEvaluation("conversation_id", {
+     *         evaluationId: "evaluation_id"
+     *     })
+     */
+    public runEvaluation(
+        conversation_id: string,
+        request: ElevenLabs.conversationalAi.conversations.RunConversationEvaluationsRequest,
+        requestOptions?: AnalysisClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetConversationResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__runEvaluation(conversation_id, request, requestOptions));
+    }
+
+    private async __runEvaluation(
+        conversation_id: string,
+        request: ElevenLabs.conversationalAi.conversations.RunConversationEvaluationsRequest,
+        requestOptions?: AnalysisClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetConversationResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${core.url.encodePathParam(conversation_id)}/analysis/evaluations/run`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: serializers.conversationalAi.conversations.RunConversationEvaluationsRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetConversationResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/conversations/{conversation_id}/analysis/evaluations/run",
         );
     }
 }

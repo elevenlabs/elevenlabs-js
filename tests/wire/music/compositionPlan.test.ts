@@ -22,6 +22,7 @@ describe("CompositionPlanClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .post("/v1/music/plan")

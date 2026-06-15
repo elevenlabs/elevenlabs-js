@@ -59,7 +59,7 @@ export class WhatsappAccountsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -135,7 +135,7 @@ export class WhatsappAccountsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -207,7 +207,7 @@ export class WhatsappAccountsClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.UpdateWhatsAppAccountRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -246,22 +246,31 @@ export class WhatsappAccountsClient {
     /**
      * List all WhatsApp accounts
      *
+     * @param {ElevenLabs.conversationalAi.WhatsappAccountsListRequest} request
      * @param {WhatsappAccountsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.whatsappAccounts.list()
+     *     await client.conversationalAi.whatsappAccounts.list({
+     *         agentId: "agent_id"
+     *     })
      */
     public list(
+        request: ElevenLabs.conversationalAi.WhatsappAccountsListRequest = {},
         requestOptions?: WhatsappAccountsClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.ListWhatsAppAccountsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
     private async __list(
+        request: ElevenLabs.conversationalAi.WhatsappAccountsListRequest = {},
         requestOptions?: WhatsappAccountsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ListWhatsAppAccountsResponse>> {
+        const { agentId } = request;
+        const _queryParams: Record<string, unknown> = {
+            agent_id: agentId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -276,7 +285,11 @@ export class WhatsappAccountsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

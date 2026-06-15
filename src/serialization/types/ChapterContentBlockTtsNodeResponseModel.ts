@@ -8,13 +8,15 @@ export const ChapterContentBlockTtsNodeResponseModel: core.serialization.ObjectS
     serializers.ChapterContentBlockTtsNodeResponseModel.Raw,
     ElevenLabs.ChapterContentBlockTtsNodeResponseModel
 > = core.serialization.object({
-    voiceId: core.serialization.property("voice_id", core.serialization.string()),
+    projectVoiceRefId: core.serialization.property("project_voice_ref_id", core.serialization.string()),
     text: core.serialization.string(),
+    voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
 });
 
 export declare namespace ChapterContentBlockTtsNodeResponseModel {
     export interface Raw {
-        voice_id: string;
+        project_voice_ref_id: string;
         text: string;
+        voice_id?: string | null;
     }
 }

@@ -3,13 +3,13 @@
 import type * as ElevenLabs from "../index";
 
 export type KnowledgeBaseSummaryBatchSuccessfulResponseModelData =
-    | ElevenLabs.KnowledgeBaseSummaryBatchSuccessfulResponseModelData.File_
+    | ElevenLabs.KnowledgeBaseSummaryBatchSuccessfulResponseModelData.File
     | ElevenLabs.KnowledgeBaseSummaryBatchSuccessfulResponseModelData.Folder
     | ElevenLabs.KnowledgeBaseSummaryBatchSuccessfulResponseModelData.Text
     | ElevenLabs.KnowledgeBaseSummaryBatchSuccessfulResponseModelData.Url;
 
 export namespace KnowledgeBaseSummaryBatchSuccessfulResponseModelData {
-    export interface File_ extends ElevenLabs.GetKnowledgeBaseSummaryFileResponseModel {
+    export interface File extends ElevenLabs.GetKnowledgeBaseSummaryFileResponseModel {
         type: "file";
     }
 

@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { MediaCodec } from "./MediaCodec";
 import { SipMediaEncryptionEnum } from "./SipMediaEncryptionEnum";
 import { SipTrunkTransportEnum } from "./SipTrunkTransportEnum";
 
@@ -21,6 +22,7 @@ export const GetPhoneNumberOutboundSipTrunkConfigResponseModel: core.serializati
     hasAuthCredentials: core.serialization.property("has_auth_credentials", core.serialization.boolean()),
     username: core.serialization.string().optional(),
     hasOutboundTrunk: core.serialization.property("has_outbound_trunk", core.serialization.boolean().optional()),
+    enabledCodecs: core.serialization.property("enabled_codecs", core.serialization.list(MediaCodec).optional()),
 });
 
 export declare namespace GetPhoneNumberOutboundSipTrunkConfigResponseModel {
@@ -33,5 +35,6 @@ export declare namespace GetPhoneNumberOutboundSipTrunkConfigResponseModel {
         has_auth_credentials: boolean;
         username?: string | null;
         has_outbound_trunk?: boolean | null;
+        enabled_codecs?: MediaCodec.Raw[] | null;
     }
 }

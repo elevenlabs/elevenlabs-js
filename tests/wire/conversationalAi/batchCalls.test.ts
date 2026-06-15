@@ -36,6 +36,7 @@ describe("BatchCallsClient", () => {
             agent_name: "agent_name",
             branch_name: "branch_name",
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/batch-calling/submit")
@@ -120,6 +121,7 @@ describe("BatchCallsClient", () => {
             next_doc: "next_doc",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/batch-calling/workspace")
@@ -230,6 +232,7 @@ describe("BatchCallsClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/batch-calling/batch_id")
@@ -359,6 +362,7 @@ describe("BatchCallsClient", () => {
             agent_name: "agent_name",
             branch_name: "branch_name",
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/batch-calling/batch_id/cancel")
@@ -432,6 +436,7 @@ describe("BatchCallsClient", () => {
             agent_name: "agent_name",
             branch_name: "branch_name",
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/batch-calling/batch_id/retry")

@@ -27,6 +27,7 @@ describe("AudioIsolationClient", () => {
             ],
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/audio-isolation/history")

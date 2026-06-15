@@ -3,16 +3,23 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
-import { MusicPrompt } from "../../../../types/MusicPrompt";
+import { BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan } from "../../types/BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan";
+import { BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId } from "../../types/BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId";
 
 export const BodyComposeMusicWithADetailedResponseV1MusicDetailedPost: core.serialization.Schema<
     serializers.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost.Raw,
     Omit<ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost, "outputFormat">
 > = core.serialization.object({
     prompt: core.serialization.string().optional(),
-    compositionPlan: core.serialization.property("composition_plan", MusicPrompt.optional()),
+    compositionPlan: core.serialization.property(
+        "composition_plan",
+        BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan.optional(),
+    ),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
-    modelId: core.serialization.property("model_id", core.serialization.stringLiteral("music_v1").optional()),
+    modelId: core.serialization.property(
+        "model_id",
+        BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId.optional(),
+    ),
     seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     respectSectionsDurations: core.serialization.property(
@@ -27,9 +34,9 @@ export const BodyComposeMusicWithADetailedResponseV1MusicDetailedPost: core.seri
 export declare namespace BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
     export interface Raw {
         prompt?: string | null;
-        composition_plan?: MusicPrompt.Raw | null;
+        composition_plan?: BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan.Raw | null;
         music_length_ms?: number | null;
-        model_id?: "music_v1" | null;
+        model_id?: BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId.Raw | null;
         seed?: number | null;
         force_instrumental?: boolean | null;
         respect_sections_durations?: boolean | null;

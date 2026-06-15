@@ -54,13 +54,12 @@ export class ChunkClient {
         requestOptions?: ChunkClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.KnowledgeBaseDocumentChunkResponseModel>> {
         const { embeddingModel } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (embeddingModel != null) {
-            _queryParams.embedding_model = serializers.EmbeddingModelEnum.jsonOrThrow(embeddingModel, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            embedding_model:
+                embeddingModel != null
+                    ? serializers.EmbeddingModelEnum.jsonOrThrow(embeddingModel, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -75,7 +74,11 @@ export class ChunkClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

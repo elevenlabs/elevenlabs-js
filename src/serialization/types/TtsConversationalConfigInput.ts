@@ -39,6 +39,7 @@ export const TtsConversationalConfigInput: core.serialization.ObjectSchema<
         "pronunciation_dictionary_locators",
         core.serialization.list(PydanticPronunciationDictionaryVersionLocator).optional(),
     ),
+    enablePhonemeTags: core.serialization.property("enable_phoneme_tags", core.serialization.boolean().optional()),
 });
 
 export declare namespace TtsConversationalConfigInput {
@@ -55,5 +56,6 @@ export declare namespace TtsConversationalConfigInput {
         similarity_boost?: number | null;
         text_normalisation_type?: TextNormalisationType.Raw | null;
         pronunciation_dictionary_locators?: PydanticPronunciationDictionaryVersionLocator.Raw[] | null;
+        enable_phoneme_tags?: boolean | null;
     }
 }

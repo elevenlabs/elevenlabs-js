@@ -29,6 +29,7 @@ describe("ServiceAccountsClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/service-accounts")

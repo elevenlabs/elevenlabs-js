@@ -21,8 +21,8 @@ describe("StudioClient", () => {
                 name: "My Project",
                 create_date_unix: 1714204800,
                 created_by_user_id: "Vbtgl3bRdj6lk79rYAgx",
-                default_title_voice_id: "JBFqnCBsd6RMkjVDRZzb",
-                default_paragraph_voice_id: "JBFqnCBsd6RMkjVDRZzb",
+                default_title_voice_ref_id: "JBFqnCBsd6RMkjVDRZzb",
+                default_paragraph_voice_ref_id: "JBFqnCBsd6RMkjVDRZzb",
                 default_model_id: "eleven_multilingual_v2",
                 last_conversion_date_unix: 1714204800,
                 can_be_downloaded: true,
@@ -89,6 +89,7 @@ describe("StudioClient", () => {
                 agent_settings: { tool_settings: { key: {} } },
             },
         };
+
         server
             .mockEndpoint()
             .post("/v1/studio/podcasts")
@@ -118,8 +119,8 @@ describe("StudioClient", () => {
                 name: "My Project",
                 createDateUnix: 1714204800,
                 createdByUserId: "Vbtgl3bRdj6lk79rYAgx",
-                defaultTitleVoiceId: "JBFqnCBsd6RMkjVDRZzb",
-                defaultParagraphVoiceId: "JBFqnCBsd6RMkjVDRZzb",
+                defaultTitleVoiceRefId: "JBFqnCBsd6RMkjVDRZzb",
+                defaultParagraphVoiceRefId: "JBFqnCBsd6RMkjVDRZzb",
                 defaultModelId: "eleven_multilingual_v2",
                 lastConversionDateUnix: 1714204800,
                 canBeDownloaded: true,

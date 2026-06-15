@@ -15,5 +15,5 @@ export interface CreatePvcVoiceRequest {
     /** Description to use for the created voice. */
     description?: string;
     /** Labels for the voice. Keys can be language, accent, gender, or age. */
-    labels?: Record<string, string | undefined>;
+    labels?: Record<string, string>;
 }

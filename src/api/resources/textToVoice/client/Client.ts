@@ -30,6 +30,8 @@ export class TextToVoiceClient {
     }
 
     /**
+     * @deprecated
+     *
      * Create a voice from a text prompt.
      *
      * @param {ElevenLabs.VoiceDesignRequest} request
@@ -55,13 +57,12 @@ export class TextToVoiceClient {
         requestOptions?: TextToVoiceClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.VoiceDesignPreviewResponse>> {
         const { outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -77,7 +78,11 @@ export class TextToVoiceClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.VoiceDesignRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -160,7 +165,7 @@ export class TextToVoiceClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -225,13 +230,12 @@ export class TextToVoiceClient {
         requestOptions?: TextToVoiceClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.VoiceDesignPreviewResponse>> {
         const { outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -247,7 +251,11 @@ export class TextToVoiceClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.VoiceDesignRequestModel.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -313,13 +321,12 @@ export class TextToVoiceClient {
         requestOptions?: TextToVoiceClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.VoiceDesignPreviewResponse>> {
         const { outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -335,7 +342,11 @@ export class TextToVoiceClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.VoiceRemixRequestModel.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,

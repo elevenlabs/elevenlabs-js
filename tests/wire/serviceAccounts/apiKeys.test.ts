@@ -25,6 +25,7 @@ describe("ApiKeysClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/service-accounts/service_account_user_id/api-keys")
@@ -58,6 +59,7 @@ describe("ApiKeysClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "name", permissions: "all" };
         const rawResponseBody = { "xi-api-key": "xi-api-key", key_id: "key_id" };
+
         server
             .mockEndpoint()
             .post("/v1/service-accounts/service_account_user_id/api-keys")
@@ -82,6 +84,7 @@ describe("ApiKeysClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/service-accounts/service_account_user_id/api-keys/api_key_id")
@@ -99,8 +102,9 @@ describe("ApiKeysClient", () => {
     test("update", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { is_enabled: true, name: "Sneaky Fox", permissions: "all" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .patch("/v1/service-accounts/service_account_user_id/api-keys/api_key_id")
@@ -110,11 +114,7 @@ describe("ApiKeysClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_id", {
-            isEnabled: true,
-            name: "Sneaky Fox",
-            permissions: "all",
-        });
+        const response = await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_id");
         expect(response).toEqual({
             key: "value",
         });

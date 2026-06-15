@@ -130,6 +130,7 @@ describe("WidgetClient", () => {
                 file_input_config: { enabled: false, max_files_per_conversation: 10 },
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/widget")

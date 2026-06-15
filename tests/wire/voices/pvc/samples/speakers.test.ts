@@ -17,6 +17,7 @@ describe("SpeakersClient", () => {
             },
             selected_speaker_ids: ["selected_speaker_ids"],
         };
+
         server
             .mockEndpoint()
             .get("/v1/voices/pvc/21m00Tcm4TlvDq8ikWAM/samples/VW7YKqPnjY4h39yTbx2L/speakers")
@@ -51,6 +52,7 @@ describe("SpeakersClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .post("/v1/voices/pvc/21m00Tcm4TlvDq8ikWAM/samples/VW7YKqPnjY4h39yTbx2L/separate-speakers")

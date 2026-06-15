@@ -27,6 +27,7 @@ describe("AuthConnectionsClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/workspace/auth-connections")
@@ -87,6 +88,7 @@ describe("AuthConnectionsClient", () => {
             },
             custom_headers: { key: "value" },
         };
+
         server
             .mockEndpoint()
             .post("/v1/workspace/auth-connections")
@@ -153,6 +155,7 @@ describe("AuthConnectionsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/workspace/auth-connections/auth_connection_id")
@@ -190,6 +193,7 @@ describe("AuthConnectionsClient", () => {
             },
             custom_headers: { key: "value" },
         };
+
         server
             .mockEndpoint()
             .patch("/v1/workspace/auth-connections/auth_connection_id")

@@ -19,6 +19,7 @@ describe("LinkClient", () => {
                 token_requester_user_id: "token_requester_user_id",
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/link")

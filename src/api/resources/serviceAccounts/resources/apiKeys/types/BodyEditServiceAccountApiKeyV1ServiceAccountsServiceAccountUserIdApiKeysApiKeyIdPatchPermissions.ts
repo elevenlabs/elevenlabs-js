@@ -7,4 +7,5 @@ import type * as ElevenLabs from "../../../../../index";
  */
 export type BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissions =
     | ElevenLabs.PermissionType[]
-    | "all";
+    | "all"
+    | "no_update";

@@ -9,6 +9,7 @@ describe("WaveformClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { sample_id: "DCwhRBWXzGAHq8TQ4Fs18", visual_waveform: [0.1, 0.2, 0.3, 0.4, 0.5] };
+
         server
             .mockEndpoint()
             .get("/v1/voices/pvc/21m00Tcm4TlvDq8ikWAM/samples/VW7YKqPnjY4h39yTbx2L/waveform")

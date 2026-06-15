@@ -27,7 +27,7 @@ export const McpToolConfigOverrideInput: core.serialization.ObjectSchema<
     inputOverrides: core.serialization.property(
         "input_overrides",
         core.serialization
-            .record(core.serialization.string(), McpToolConfigOverrideInputInputOverridesValue.optional())
+            .record(core.serialization.string(), McpToolConfigOverrideInputInputOverridesValue)
             .optional(),
     ),
     responseMocks: core.serialization.property(
@@ -47,7 +47,7 @@ export declare namespace McpToolConfigOverrideInput {
         execution_mode?: ToolExecutionMode.Raw | null;
         response_timeout_secs?: number | null;
         assignments?: DynamicVariableAssignment.Raw[] | null;
-        input_overrides?: Record<string, McpToolConfigOverrideInputInputOverridesValue.Raw | null | undefined> | null;
+        input_overrides?: Record<string, McpToolConfigOverrideInputInputOverridesValue.Raw | null> | null;
         response_mocks?: ToolResponseMockConfigInput.Raw[] | null;
     }
 }

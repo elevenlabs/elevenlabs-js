@@ -12,6 +12,7 @@ describe("TranscriptClient", () => {
             language: "language",
             utterances: [{ text: "text", speaker_id: "speaker_id", start_s: 1.1, end_s: 1.1, words: [{}] }],
         };
+
         server
             .mockEndpoint()
             .get("/v1/dubbing/dubbing_id/transcript/source")

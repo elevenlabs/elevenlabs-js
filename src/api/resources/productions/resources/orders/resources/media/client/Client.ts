@@ -51,25 +51,25 @@ export class MediaClient {
         request: ElevenLabs.productions.orders.BodyRegisterMediaV1ProductionsOrdersOrderIdMediaPost,
         requestOptions?: MediaClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.RegisterMediaResponse>> {
-        const _request = await core.newFormData();
-        _request.append("declared_language", request.declaredLanguage);
+        const _body = await core.newFormData();
+        _body.append("declared_language", request.declaredLanguage);
         if (request.media != null) {
-            await _request.appendFile("media", request.media);
+            await _body.appendFile("media", request.media);
         }
 
         if (request.mediaUrl != null) {
-            _request.append("media_url", request.mediaUrl);
+            _body.append("media_url", request.mediaUrl);
         }
 
         if (request.mediaUrlFilename != null) {
-            _request.append("media_url_filename", request.mediaUrlFilename);
+            _body.append("media_url_filename", request.mediaUrlFilename);
         }
 
         if (request.mediaUrlContentType != null) {
-            _request.append("media_url_content_type", request.mediaUrlContentType);
+            _body.append("media_url_content_type", request.mediaUrlContentType);
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -87,7 +87,7 @@ export class MediaClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -169,7 +169,7 @@ export class MediaClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

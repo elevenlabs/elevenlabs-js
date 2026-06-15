@@ -21,6 +21,7 @@ describe("TextToSpeechClient", () => {
                 character_end_times_seconds: [0.1, 0.2, 0.3, 0.4, 0.5],
             },
         };
+
         server
             .mockEndpoint()
             .post("/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM/with-timestamps")

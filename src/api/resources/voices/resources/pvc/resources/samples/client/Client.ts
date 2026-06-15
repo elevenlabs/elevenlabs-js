@@ -69,16 +69,16 @@ export class SamplesClient {
         request: ElevenLabs.voices.pvc.BodyAddSamplesToPvcVoiceV1VoicesPvcVoiceIdSamplesPost,
         requestOptions?: SamplesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.VoiceSample[]>> {
-        const _request = await core.newFormData();
+        const _body = await core.newFormData();
         for (const _file of request.files) {
-            await _request.appendFile("files", _file);
+            await _body.appendFile("files", _file);
         }
 
         if (request.removeBackgroundNoise != null) {
-            _request.append("remove_background_noise", request.removeBackgroundNoise.toString());
+            _body.append("remove_background_noise", request.removeBackgroundNoise?.toString());
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -96,7 +96,7 @@ export class SamplesClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -182,7 +182,7 @@ export class SamplesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.voices.pvc.BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost.jsonOrThrow(
                 request,
@@ -266,7 +266,7 @@ export class SamplesClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

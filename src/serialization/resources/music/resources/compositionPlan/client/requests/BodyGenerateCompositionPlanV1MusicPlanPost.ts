@@ -3,7 +3,8 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
-import { MusicPrompt } from "../../../../../../types/MusicPrompt";
+import { BodyGenerateCompositionPlanV1MusicPlanPostModelId } from "../../types/BodyGenerateCompositionPlanV1MusicPlanPostModelId";
+import { BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan } from "../../types/BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan";
 
 export const BodyGenerateCompositionPlanV1MusicPlanPost: core.serialization.Schema<
     serializers.music.BodyGenerateCompositionPlanV1MusicPlanPost.Raw,
@@ -11,15 +12,18 @@ export const BodyGenerateCompositionPlanV1MusicPlanPost: core.serialization.Sche
 > = core.serialization.object({
     prompt: core.serialization.string(),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
-    sourceCompositionPlan: core.serialization.property("source_composition_plan", MusicPrompt.optional()),
-    modelId: core.serialization.property("model_id", core.serialization.stringLiteral("music_v1").optional()),
+    sourceCompositionPlan: core.serialization.property(
+        "source_composition_plan",
+        BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan.optional(),
+    ),
+    modelId: core.serialization.property("model_id", BodyGenerateCompositionPlanV1MusicPlanPostModelId.optional()),
 });
 
 export declare namespace BodyGenerateCompositionPlanV1MusicPlanPost {
     export interface Raw {
         prompt: string;
         music_length_ms?: number | null;
-        source_composition_plan?: MusicPrompt.Raw | null;
-        model_id?: "music_v1" | null;
+        source_composition_plan?: BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan.Raw | null;
+        model_id?: BodyGenerateCompositionPlanV1MusicPlanPostModelId.Raw | null;
     }
 }

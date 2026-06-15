@@ -4,8 +4,8 @@ export interface UpdateOAuth2ClientCredsRequest {
     provider?: string;
     clientId?: string;
     scopes?: string[];
-    extraParams?: Record<string, string | undefined>;
+    extraParams?: Record<string, string>;
     basicAuthInHeader?: boolean;
     clientSecret?: string;
-    customHeaders?: Record<string, string | undefined>;
+    customHeaders?: Record<string, string>;
 }

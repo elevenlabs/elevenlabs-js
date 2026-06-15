@@ -11,6 +11,8 @@ import type * as core from "../../../../../core";
 export interface BodyUploadMusicV1MusicUploadPost {
     /** The audio file to upload. */
     file: core.file.Uploadable;
-    /** Whether to generate and return the composition plan for the uploaded song. If True, the response will include the composition_plan but will increase the latency. */
-    extractCompositionPlan?: boolean;
+    /** Whether to generate and return the composition plan for the uploaded song. Pass a model id (`music_v1` or `music_v2`) to control which composition plan format is returned. Passing `true`/`false` is deprecated; `true` defaults to the `music_v1` plan format. Enabling this will increase the latency. */
+    extractCompositionPlan?: string;
+    /** Whether to transcribe the uploaded song and return word-level timestamps. If True, the response will include words_timestamps but will increase the latency. */
+    withTimestamps?: boolean;
 }

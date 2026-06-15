@@ -44,6 +44,7 @@ describe("McpServersClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/mcp-servers")
@@ -157,6 +158,7 @@ describe("McpServersClient", () => {
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/mcp-servers")
@@ -300,6 +302,7 @@ describe("McpServersClient", () => {
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/mcp-servers/mcp_server_id")
@@ -384,6 +387,7 @@ describe("McpServersClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/mcp-servers/mcp_server_id")
@@ -456,6 +460,7 @@ describe("McpServersClient", () => {
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/mcp-servers/mcp_server_id")

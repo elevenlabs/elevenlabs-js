@@ -56,6 +56,7 @@ describe("HistoryClient", () => {
             has_more: true,
             scanned_until: 1714650306,
         };
+
         server.mockEndpoint().get("/v1/history").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.history.list({
@@ -175,6 +176,7 @@ describe("HistoryClient", () => {
             dialogue: [{ text: "text", voice_id: "voice_id", voice_name: "voice_name" }],
             output_format: "output_format",
         };
+
         server
             .mockEndpoint()
             .get("/v1/history/VW7YKqPnjY4h39yTbx2L")
@@ -243,6 +245,7 @@ describe("HistoryClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .delete("/v1/history/VW7YKqPnjY4h39yTbx2L")

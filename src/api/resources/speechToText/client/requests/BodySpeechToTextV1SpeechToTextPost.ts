@@ -9,12 +9,6 @@ import type * as ElevenLabs from "../../../../index";
  *         enableLogging: true,
  *         modelId: "scribe_v2"
  *     }
- *
- * @example
- *     {
- *         enableLogging: true,
- *         modelId: "scribe_v2"
- *     }
  */
 export interface BodySpeechToTextV1SpeechToTextPost {
     /** When enable_logging is set to false zero retention mode will be used for the request. This will mean log and transcript storage features are unavailable for this request. Zero retention mode may only be used by enterprise customers. */
@@ -59,6 +53,8 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     entityDetection?: ElevenLabs.SpeechToTextConvertRequestEntityDetection;
     /** If true, the transcription will not have any filler words, false starts and non-speech sounds. Only supported with scribe_v2 model. */
     noVerbatim?: boolean;
+    /** Whether to use the speaker library for identifying known speakers during diarization. When enabled and diarize is true, detected speakers will be matched against registered speakers in the workspace's speaker library. */
+    useSpeakerLibrary?: boolean;
     /** Whether to detect speaker roles (agent vs customer). Requires diarize=true. Cannot be used with use_multi_channel=true. When enabled, speaker_id values will be 'agent' and 'customer' instead of 'speaker_0', 'speaker_1', etc. Usage incurs an additional 10% surcharge on base transcription cost. */
     detectSpeakerRoles?: boolean;
     /** Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned. Usage of this parameter will incur an additional 30% surcharge on the base transcription cost. */

@@ -62,6 +62,7 @@ describe("ApprovalPolicyClient", () => {
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/mcp-servers/mcp_server_id/approval-policy")

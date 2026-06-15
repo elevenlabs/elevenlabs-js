@@ -9,6 +9,7 @@ describe("SettingsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { stability: 1, use_speaker_boost: true, similarity_boost: 1, style: 0, speed: 1 };
+
         server
             .mockEndpoint()
             .get("/v1/voices/settings/default")
@@ -32,6 +33,7 @@ describe("SettingsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { stability: 1, use_speaker_boost: true, similarity_boost: 1, style: 0, speed: 1 };
+
         server
             .mockEndpoint()
             .get("/v1/voices/21m00Tcm4TlvDq8ikWAM/settings")
@@ -55,6 +57,7 @@ describe("SettingsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { stability: 1, use_speaker_boost: true, similarity_boost: 1, style: 0, speed: 1 };
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .post("/v1/voices/21m00Tcm4TlvDq8ikWAM/settings/edit")

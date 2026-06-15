@@ -9,14 +9,11 @@ export const UpdateEnvironmentVariableRequest: core.serialization.Schema<
     serializers.UpdateEnvironmentVariableRequest.Raw,
     ElevenLabs.UpdateEnvironmentVariableRequest
 > = core.serialization.object({
-    values: core.serialization.record(
-        core.serialization.string(),
-        UpdateEnvironmentVariableRequestValuesValue.optional(),
-    ),
+    values: core.serialization.record(core.serialization.string(), UpdateEnvironmentVariableRequestValuesValue),
 });
 
 export declare namespace UpdateEnvironmentVariableRequest {
     export interface Raw {
-        values: Record<string, UpdateEnvironmentVariableRequestValuesValue.Raw | null | undefined>;
+        values: Record<string, UpdateEnvironmentVariableRequestValuesValue.Raw | null>;
     }
 }

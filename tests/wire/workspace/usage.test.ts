@@ -14,6 +14,7 @@ describe("UsageClient", () => {
             rows: [["rows"]],
             column_units: ["ms"],
         };
+
         server
             .mockEndpoint()
             .post("/v1/workspace/analytics/query/usage-by-product-over-time")

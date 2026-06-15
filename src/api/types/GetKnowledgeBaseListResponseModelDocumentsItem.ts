@@ -3,13 +3,13 @@
 import type * as ElevenLabs from "../index";
 
 export type GetKnowledgeBaseListResponseModelDocumentsItem =
-    | ElevenLabs.GetKnowledgeBaseListResponseModelDocumentsItem.File_
+    | ElevenLabs.GetKnowledgeBaseListResponseModelDocumentsItem.File
     | ElevenLabs.GetKnowledgeBaseListResponseModelDocumentsItem.Folder
     | ElevenLabs.GetKnowledgeBaseListResponseModelDocumentsItem.Text
     | ElevenLabs.GetKnowledgeBaseListResponseModelDocumentsItem.Url;
 
 export namespace GetKnowledgeBaseListResponseModelDocumentsItem {
-    export interface File_ extends ElevenLabs.GetKnowledgeBaseSummaryFileResponseModel {
+    export interface File extends ElevenLabs.GetKnowledgeBaseSummaryFileResponseModel {
         type: "file";
     }
 

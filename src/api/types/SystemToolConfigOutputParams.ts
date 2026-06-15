@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../index";
 
 export type SystemToolConfigOutputParams =
     | ElevenLabs.SystemToolConfigOutputParams.EndCall
+    | ElevenLabs.SystemToolConfigOutputParams.EndProcedure
     | ElevenLabs.SystemToolConfigOutputParams.KnowledgeBaseRag
     | ElevenLabs.SystemToolConfigOutputParams.LanguageDetection
     | ElevenLabs.SystemToolConfigOutputParams.PlayKeypadTouchTone
@@ -16,6 +17,10 @@ export type SystemToolConfigOutputParams =
 export namespace SystemToolConfigOutputParams {
     export interface EndCall extends ElevenLabs.EndCallToolConfig {
         systemToolType: "end_call";
+    }
+
+    export interface EndProcedure extends ElevenLabs.EndProcedureToolConfigOutput {
+        systemToolType: "end_procedure";
     }
 
     export interface KnowledgeBaseRag extends ElevenLabs.KnowledgeBaseRagToolConfig {

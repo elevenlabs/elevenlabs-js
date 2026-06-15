@@ -25,6 +25,7 @@ describe("DubbingClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server.mockEndpoint().get("/v1/dubbing").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.dubbing.list({
@@ -72,6 +73,7 @@ describe("DubbingClient", () => {
             media_metadata: { content_type: "video/mp4", duration: 127.5 },
             error: "error",
         };
+
         server
             .mockEndpoint()
             .get("/v1/dubbing/dubbing_id")
@@ -102,6 +104,7 @@ describe("DubbingClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .delete("/v1/dubbing/dubbing_id")

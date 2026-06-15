@@ -38,17 +38,19 @@ export interface BaseRequestOptions {
     headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
 }
 
-export type NormalizedClientOptions<T extends BaseClientOptions> = T & {
+export type NormalizedClientOptions<T extends BaseClientOptions = BaseClientOptions> = T & {
     logging: core.logging.Logger;
 };
 
-export function normalizeClientOptions<T extends BaseClientOptions>(options: T): NormalizedClientOptions<T> {
+export function normalizeClientOptions<T extends BaseClientOptions = BaseClientOptions>(
+    options: T,
+): NormalizedClientOptions<T> {
     const headers = mergeHeaders(
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-            "X-Fern-SDK-Version": "2.52.0",
-            "User-Agent": "@elevenlabs/elevenlabs-js/2.52.0",
+            "X-Fern-SDK-Version": "2.53.0",
+            "User-Agent": "@elevenlabs/elevenlabs-js/2.53.0",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
             "xi-api-key": options?.apiKey,

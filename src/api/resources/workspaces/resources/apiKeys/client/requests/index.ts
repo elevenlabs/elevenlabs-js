@@ -1,1 +1,1 @@
-export type { ApiKeysRevokeRequest } from "./ApiKeysRevokeRequest";
+export type { ApiKeysDisableRequest } from "./ApiKeysDisableRequest";

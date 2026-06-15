@@ -93,6 +93,7 @@ describe("ResourceClient", () => {
                 },
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/dubbing/resource/dubbing_id")
@@ -208,6 +209,7 @@ describe("ResourceClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segment_ids: ["segment_ids"], speaker_id: "speaker_id" };
         const rawResponseBody = { version: 1 };
+
         server
             .mockEndpoint()
             .post("/v1/dubbing/resource/dubbing_id/migrate-segments")
@@ -231,6 +233,7 @@ describe("ResourceClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
         const rawResponseBody = { version: 1 };
+
         server
             .mockEndpoint()
             .post("/v1/dubbing/resource/dubbing_id/transcribe")
@@ -253,6 +256,7 @@ describe("ResourceClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
         const rawResponseBody = { version: 1 };
+
         server
             .mockEndpoint()
             .post("/v1/dubbing/resource/dubbing_id/translate")
@@ -275,6 +279,7 @@ describe("ResourceClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { segments: ["segments"] };
         const rawResponseBody = { version: 1 };
+
         server
             .mockEndpoint()
             .post("/v1/dubbing/resource/dubbing_id/dub")
@@ -297,6 +302,7 @@ describe("ResourceClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { render_type: "mp4" };
         const rawResponseBody = { version: 1, render_id: "render_id" };
+
         server
             .mockEndpoint()
             .post("/v1/dubbing/resource/dubbing_id/render/language")

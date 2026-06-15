@@ -9,6 +9,7 @@ describe("FilesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { file_id: "file_id" };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/conversations/conversation_id/files/file_id")

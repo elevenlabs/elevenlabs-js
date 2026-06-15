@@ -21,7 +21,7 @@ import type * as ElevenLabs from "../../../../index";
  *         includeLiveModerated: true,
  *         readerAppEnabled: true,
  *         ownerId: "owner_id",
- *         sort: "sort",
+ *         sort: "created_date",
  *         page: 1
  *     }
  */
@@ -58,7 +58,7 @@ export interface VoicesGetSharedRequest {
     readerAppEnabled?: boolean;
     /** Filter voices by public owner ID */
     ownerId?: string;
-    /** Sort criteria */
-    sort?: string;
+    /** Sort criteria. Must be one of: created_date, usage_character_count_1y, trending, cloned_by_count. */
+    sort?: ElevenLabs.VoicesGetSharedRequestSort;
     page?: number;
 }

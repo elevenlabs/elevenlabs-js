@@ -21,6 +21,10 @@ export const TransferToAgentToolResultSuccessModel: core.serialization.ObjectSch
         core.serialization.boolean().optional(),
     ),
     branchInfo: core.serialization.property("branch_info", TransferToAgentToolResultSuccessModelBranchInfo.optional()),
+    preserveClientTtsOverrides: core.serialization.property(
+        "preserve_client_tts_overrides",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace TransferToAgentToolResultSuccessModel {
@@ -34,5 +38,6 @@ export declare namespace TransferToAgentToolResultSuccessModel {
         transfer_message?: string | null;
         enable_transferred_agent_first_message?: boolean | null;
         branch_info?: TransferToAgentToolResultSuccessModelBranchInfo.Raw | null;
+        preserve_client_tts_overrides?: boolean | null;
     }
 }

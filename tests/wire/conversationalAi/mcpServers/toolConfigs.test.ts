@@ -62,6 +62,7 @@ describe("ToolConfigsClient", () => {
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/mcp-servers/mcp_server_id/tool-configs")
@@ -171,6 +172,7 @@ describe("ToolConfigsClient", () => {
                 { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/mcp-servers/mcp_server_id/tool-configs/tool_name")
@@ -278,6 +280,7 @@ describe("ToolConfigsClient", () => {
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/mcp-servers/mcp_server_id/tool-configs/tool_name")
@@ -415,6 +418,7 @@ describe("ToolConfigsClient", () => {
             ],
             metadata: { created_at: 1, owner_user_id: "owner_user_id" },
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/mcp-servers/mcp_server_id/tool-configs/tool_name")

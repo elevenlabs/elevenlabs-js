@@ -2,6 +2,7 @@
 
 export interface SongSourceContext {
     songId: string;
+    chatId?: string;
     title?: string;
     description?: string;
     genres?: string[];

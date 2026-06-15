@@ -65,7 +65,7 @@ export class FeedbackClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.conversations.ConversationFeedbackRequestModel.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

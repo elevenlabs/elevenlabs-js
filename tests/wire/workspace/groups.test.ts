@@ -21,6 +21,7 @@ describe("GroupsClient", () => {
                 is_scim_synced: true,
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/workspace/groups")
@@ -56,6 +57,7 @@ describe("GroupsClient", () => {
                 members_emails: ["john.doe@example.com", "jane.smith@example.com"],
             },
         ];
+
         server
             .mockEndpoint()
             .get("/v1/workspace/groups/search")

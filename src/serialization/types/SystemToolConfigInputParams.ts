@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { EndCallToolConfig } from "./EndCallToolConfig";
+import { EndProcedureToolConfigInput } from "./EndProcedureToolConfigInput";
 import { KnowledgeBaseRagToolConfig } from "./KnowledgeBaseRagToolConfig";
 import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
 import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
@@ -19,6 +20,7 @@ export const SystemToolConfigInputParams: core.serialization.Schema<
 > = core.serialization
     .union(core.serialization.discriminant("systemToolType", "system_tool_type"), {
         end_call: EndCallToolConfig,
+        end_procedure: EndProcedureToolConfigInput,
         knowledge_base_rag: KnowledgeBaseRagToolConfig,
         language_detection: LanguageDetectionToolConfig,
         play_keypad_touch_tone: PlayDtmfToolConfig,
@@ -36,6 +38,7 @@ export const SystemToolConfigInputParams: core.serialization.Schema<
 export declare namespace SystemToolConfigInputParams {
     export type Raw =
         | SystemToolConfigInputParams.EndCall
+        | SystemToolConfigInputParams.EndProcedure
         | SystemToolConfigInputParams.KnowledgeBaseRag
         | SystemToolConfigInputParams.LanguageDetection
         | SystemToolConfigInputParams.PlayKeypadTouchTone
@@ -47,6 +50,10 @@ export declare namespace SystemToolConfigInputParams {
 
     export interface EndCall extends EndCallToolConfig.Raw {
         system_tool_type: "end_call";
+    }
+
+    export interface EndProcedure extends EndProcedureToolConfigInput.Raw {
+        system_tool_type: "end_procedure";
     }
 
     export interface KnowledgeBaseRag extends KnowledgeBaseRagToolConfig.Raw {

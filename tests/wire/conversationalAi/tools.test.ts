@@ -42,6 +42,7 @@ describe("ToolsClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server.mockEndpoint().get("/v1/convai/tools").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.conversationalAi.tools.list({
@@ -150,6 +151,7 @@ describe("ToolsClient", () => {
                 { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
             ],
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/tools")
@@ -283,6 +285,7 @@ describe("ToolsClient", () => {
                 { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/tools/tool_id")
@@ -365,6 +368,7 @@ describe("ToolsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/tools/tool_id")
@@ -431,6 +435,7 @@ describe("ToolsClient", () => {
                 { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
             ],
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/tools/tool_id")
@@ -543,6 +548,7 @@ describe("ToolsClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/tools/tool_id/dependent-agents")

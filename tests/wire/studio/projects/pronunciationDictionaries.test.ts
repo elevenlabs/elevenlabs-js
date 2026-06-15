@@ -11,6 +11,7 @@ describe("PronunciationDictionariesClient", () => {
             pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
         };
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .post("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/pronunciation-dictionaries")

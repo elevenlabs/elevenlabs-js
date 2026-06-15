@@ -68,6 +68,7 @@ describe("DraftsClient", () => {
             name: "name",
         };
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/drafts")
@@ -218,6 +219,7 @@ describe("DraftsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/drafts")

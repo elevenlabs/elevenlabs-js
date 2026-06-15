@@ -27,14 +27,23 @@ describe("ChaptersClient", () => {
                         paragraphs_unconverted: 10,
                         credits_needed_to_convert: 1000,
                         voice_statistics: [
-                            { voice_id: "voice123", characters_unconverted: 600, characters_converted: 300 },
-                            { voice_id: "voice456", characters_unconverted: 400, characters_converted: 200 },
+                            {
+                                project_voice_ref_id: "voice123",
+                                characters_unconverted: 600,
+                                characters_converted: 300,
+                            },
+                            {
+                                project_voice_ref_id: "voice456",
+                                characters_unconverted: 400,
+                                characters_converted: 200,
+                            },
                         ],
                     },
                     last_conversion_error: "Error message",
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/chapters")
@@ -64,12 +73,12 @@ describe("ChaptersClient", () => {
                         creditsNeededToConvert: 1000,
                         voiceStatistics: [
                             {
-                                voiceId: "voice123",
+                                projectVoiceRefId: "voice123",
                                 charactersUnconverted: 600,
                                 charactersConverted: 300,
                             },
                             {
-                                voiceId: "voice456",
+                                projectVoiceRefId: "voice456",
                                 charactersUnconverted: 400,
                                 charactersConverted: 200,
                             },
@@ -102,16 +111,26 @@ describe("ChaptersClient", () => {
                     paragraphs_converted: 5,
                     paragraphs_unconverted: 3,
                     credits_needed_to_convert: 1,
-                    voice_statistics: [{ voice_id: "voice_id", characters_unconverted: 1, characters_converted: 1 }],
+                    voice_statistics: [
+                        {
+                            project_voice_ref_id: "project_voice_ref_id",
+                            characters_unconverted: 1,
+                            characters_converted: 1,
+                        },
+                    ],
                 },
                 last_conversion_error: "last_conversion_error",
                 content: {
                     blocks: [
-                        { block_id: "block_id", nodes: [{ type: "tts_node", voice_id: "voice_id", text: "text" }] },
+                        {
+                            block_id: "block_id",
+                            nodes: [{ type: "tts_node", project_voice_ref_id: "project_voice_ref_id", text: "text" }],
+                        },
                     ],
                 },
             },
         };
+
         server
             .mockEndpoint()
             .post("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/chapters")
@@ -143,7 +162,7 @@ describe("ChaptersClient", () => {
                     creditsNeededToConvert: 1,
                     voiceStatistics: [
                         {
-                            voiceId: "voice_id",
+                            projectVoiceRefId: "project_voice_ref_id",
                             charactersUnconverted: 1,
                             charactersConverted: 1,
                         },
@@ -157,7 +176,7 @@ describe("ChaptersClient", () => {
                             nodes: [
                                 {
                                     type: "tts_node",
-                                    voiceId: "voice_id",
+                                    projectVoiceRefId: "project_voice_ref_id",
                                     text: "text",
                                 },
                             ],
@@ -188,13 +207,25 @@ describe("ChaptersClient", () => {
                 paragraphs_converted: 5,
                 paragraphs_unconverted: 3,
                 credits_needed_to_convert: 1,
-                voice_statistics: [{ voice_id: "voice_id", characters_unconverted: 1, characters_converted: 1 }],
+                voice_statistics: [
+                    {
+                        project_voice_ref_id: "project_voice_ref_id",
+                        characters_unconverted: 1,
+                        characters_converted: 1,
+                    },
+                ],
             },
             last_conversion_error: "last_conversion_error",
             content: {
-                blocks: [{ block_id: "block_id", nodes: [{ type: "tts_node", voice_id: "voice_id", text: "text" }] }],
+                blocks: [
+                    {
+                        block_id: "block_id",
+                        nodes: [{ type: "tts_node", project_voice_ref_id: "project_voice_ref_id", text: "text" }],
+                    },
+                ],
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/chapters/21m00Tcm4TlvDq8ikWAM")
@@ -222,7 +253,7 @@ describe("ChaptersClient", () => {
                 creditsNeededToConvert: 1,
                 voiceStatistics: [
                     {
-                        voiceId: "voice_id",
+                        projectVoiceRefId: "project_voice_ref_id",
                         charactersUnconverted: 1,
                         charactersConverted: 1,
                     },
@@ -236,7 +267,7 @@ describe("ChaptersClient", () => {
                         nodes: [
                             {
                                 type: "tts_node",
-                                voiceId: "voice_id",
+                                projectVoiceRefId: "project_voice_ref_id",
                                 text: "text",
                             },
                         ],
@@ -267,16 +298,26 @@ describe("ChaptersClient", () => {
                     paragraphs_converted: 5,
                     paragraphs_unconverted: 3,
                     credits_needed_to_convert: 1,
-                    voice_statistics: [{ voice_id: "voice_id", characters_unconverted: 1, characters_converted: 1 }],
+                    voice_statistics: [
+                        {
+                            project_voice_ref_id: "project_voice_ref_id",
+                            characters_unconverted: 1,
+                            characters_converted: 1,
+                        },
+                    ],
                 },
                 last_conversion_error: "last_conversion_error",
                 content: {
                     blocks: [
-                        { block_id: "block_id", nodes: [{ type: "tts_node", voice_id: "voice_id", text: "text" }] },
+                        {
+                            block_id: "block_id",
+                            nodes: [{ type: "tts_node", project_voice_ref_id: "project_voice_ref_id", text: "text" }],
+                        },
                     ],
                 },
             },
         };
+
         server
             .mockEndpoint()
             .post("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/chapters/21m00Tcm4TlvDq8ikWAM")
@@ -306,7 +347,7 @@ describe("ChaptersClient", () => {
                     creditsNeededToConvert: 1,
                     voiceStatistics: [
                         {
-                            voiceId: "voice_id",
+                            projectVoiceRefId: "project_voice_ref_id",
                             charactersUnconverted: 1,
                             charactersConverted: 1,
                         },
@@ -320,7 +361,7 @@ describe("ChaptersClient", () => {
                             nodes: [
                                 {
                                     type: "tts_node",
-                                    voiceId: "voice_id",
+                                    projectVoiceRefId: "project_voice_ref_id",
                                     text: "text",
                                 },
                             ],
@@ -336,6 +377,7 @@ describe("ChaptersClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .delete("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/chapters/21m00Tcm4TlvDq8ikWAM")
@@ -355,6 +397,7 @@ describe("ChaptersClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .post("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/chapters/21m00Tcm4TlvDq8ikWAM/convert")

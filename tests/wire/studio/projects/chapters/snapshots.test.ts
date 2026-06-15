@@ -19,6 +19,7 @@ describe("SnapshotsClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/chapters/21m00Tcm4TlvDq8ikWAM/snapshots")
@@ -62,6 +63,7 @@ describe("SnapshotsClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get(

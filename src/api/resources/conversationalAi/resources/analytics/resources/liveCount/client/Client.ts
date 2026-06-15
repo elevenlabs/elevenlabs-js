@@ -48,11 +48,9 @@ export class LiveCountClient {
         requestOptions?: LiveCountClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetLiveCountResponse>> {
         const { agentId } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (agentId != null) {
-            _queryParams.agent_id = agentId;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            agent_id: agentId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -67,7 +65,11 @@ export class LiveCountClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

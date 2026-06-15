@@ -9,6 +9,7 @@ describe("SpeakerClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { version: 1 };
+
         server
             .mockEndpoint()
             .patch("/v1/dubbing/resource/dubbing_id/speaker/speaker_id")
@@ -29,6 +30,7 @@ describe("SpeakerClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { version: 1, speaker_id: "speaker_id" };
+
         server
             .mockEndpoint()
             .post("/v1/dubbing/resource/dubbing_id/speaker")
@@ -60,6 +62,7 @@ describe("SpeakerClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/dubbing/resource/dubbing_id/speaker/speaker_id/similar-voices")

@@ -25,6 +25,7 @@ export class AudioIsolationClient {
 
     /**
      * Removes background noise from audio.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public convert(
@@ -38,10 +39,10 @@ export class AudioIsolationClient {
         request: ElevenLabs.BodyAudioIsolationV1AudioIsolationPost,
         requestOptions?: AudioIsolationClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const _request = await core.newFormData();
-        await _request.appendFile("audio", request.audio);
+        const _body = await core.newFormData();
+        await _body.appendFile("audio", request.audio);
         if (request.fileFormat != null) {
-            _request.append(
+            _body.append(
                 "file_format",
                 serializers.AudioIsolationConvertRequestFileFormat.jsonOrThrow(request.fileFormat, {
                     unrecognizedObjectKeys: "strip",
@@ -50,10 +51,10 @@ export class AudioIsolationClient {
         }
 
         if (request.previewB64 != null) {
-            _request.append("preview_b64", request.previewB64);
+            _body.append("preview_b64", request.previewB64);
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -71,7 +72,7 @@ export class AudioIsolationClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -129,19 +130,11 @@ export class AudioIsolationClient {
         requestOptions?: AudioIsolationClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAudioIsolationHistoryResponseModel>> {
         const { pageSize, page, search } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (page != null) {
-            _queryParams.page = page.toString();
-        }
-
-        if (search != null) {
-            _queryParams.search = search;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            page,
+            search,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -156,7 +149,11 @@ export class AudioIsolationClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -227,7 +224,7 @@ export class AudioIsolationClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -261,6 +258,7 @@ export class AudioIsolationClient {
 
     /**
      * Removes background noise from audio.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public stream(
@@ -274,10 +272,10 @@ export class AudioIsolationClient {
         request: ElevenLabs.BodyAudioIsolationStreamV1AudioIsolationStreamPost,
         requestOptions?: AudioIsolationClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const _request = await core.newFormData();
-        await _request.appendFile("audio", request.audio);
+        const _body = await core.newFormData();
+        await _body.appendFile("audio", request.audio);
         if (request.fileFormat != null) {
-            _request.append(
+            _body.append(
                 "file_format",
                 serializers.AudioIsolationStreamRequestFileFormat.jsonOrThrow(request.fileFormat, {
                     unrecognizedObjectKeys: "strip",
@@ -285,7 +283,7 @@ export class AudioIsolationClient {
             );
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -303,7 +301,7 @@ export class AudioIsolationClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

@@ -9,6 +9,7 @@ describe("TestsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { type: "llm", name: "name" };
         const rawResponseBody = { id: "id" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agent-testing/create")
@@ -32,6 +33,7 @@ describe("TestsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { entity_ids: ["entity_ids"] };
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agent-testing/bulk-move")
@@ -109,6 +111,7 @@ describe("TestsClient", () => {
             id: "id",
             name: "name",
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agent-testing/TeaqRRdTcIfIu2i7BYfT")
@@ -270,6 +273,7 @@ describe("TestsClient", () => {
             id: "id",
             name: "name",
         };
+
         server
             .mockEndpoint()
             .put("/v1/convai/agent-testing/TeaqRRdTcIfIu2i7BYfT")
@@ -380,6 +384,7 @@ describe("TestsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/agent-testing/TeaqRRdTcIfIu2i7BYfT")
@@ -421,6 +426,7 @@ describe("TestsClient", () => {
                 },
             },
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agent-testing/summaries")
@@ -491,6 +497,7 @@ describe("TestsClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agent-testing")

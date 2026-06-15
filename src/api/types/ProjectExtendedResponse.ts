@@ -11,10 +11,10 @@ export interface ProjectExtendedResponse {
     createDateUnix: number;
     /** The user ID who created the project. */
     createdByUserId?: string;
-    /** The default title voice ID. */
-    defaultTitleVoiceId: string;
-    /** The default paragraph voice ID. */
-    defaultParagraphVoiceId: string;
+    /** The default title project voice reference ID. */
+    defaultTitleVoiceRefId: string;
+    /** The default paragraph project voice reference ID. */
+    defaultParagraphVoiceRefId: string;
     /** The default model ID. */
     defaultModelId: string;
     /** The last conversion date of the project. */
@@ -66,7 +66,7 @@ export interface ProjectExtendedResponse {
     /** Global styling to be applied to all captions */
     captionStyle?: ElevenLabs.CaptionStyleModel;
     /** Styling changes that have been made to the provided templates */
-    captionStyleTemplateOverrides?: Record<string, ElevenLabs.CaptionStyleModel | undefined>;
+    captionStyleTemplateOverrides?: Record<string, ElevenLabs.CaptionStyleModel>;
     /** The public share ID of the project. */
     publicShareId?: string;
     /** The aspect ratio of the project. */
@@ -93,4 +93,8 @@ export interface ProjectExtendedResponse {
     baseVoices?: ElevenLabs.Voice[];
     /** The ElevenReader data if the book was published. */
     publishingRead?: ElevenLabs.DirectPublishingReadResponseModel;
+    /** The default title voice ID. */
+    defaultTitleVoiceId?: string;
+    /** The default paragraph voice ID. */
+    defaultParagraphVoiceId?: string;
 }

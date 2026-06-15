@@ -23,6 +23,7 @@ describe("TopicsClient", () => {
             window_start_unix_secs: 1,
             window_end_unix_secs: 1,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agents/agent_id/topics")

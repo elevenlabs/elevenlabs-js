@@ -7,7 +7,7 @@ export interface ReviewResponseModel {
     reviewedAtUnix: number;
     reviewedBy?: string;
     rejectReasons?: ElevenLabs.ReviewResponseModelRejectReasonsItem[];
-    scoresBreakdown?: Record<string, number | undefined>;
+    scoresBreakdown?: Record<string, number>;
     rejectedDetails?: string;
     explanation?: string;
 }

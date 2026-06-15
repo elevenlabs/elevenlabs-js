@@ -76,35 +76,19 @@ export class OrdersClient {
         requestOptions?: OrdersClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ListOrdersResponse>> {
         const { pageSize, offset, status, startDate, endDate } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (offset != null) {
-            _queryParams.offset = offset.toString();
-        }
-
-        if (status != null) {
-            if (Array.isArray(status)) {
-                _queryParams.status = status.map((item) =>
-                    serializers.OrderRequestState.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
-                );
-            } else {
-                _queryParams.status = serializers.OrderRequestState.jsonOrThrow(status, {
-                    unrecognizedObjectKeys: "strip",
-                });
-            }
-        }
-
-        if (startDate != null) {
-            _queryParams.start_date = startDate.toISOString();
-        }
-
-        if (endDate != null) {
-            _queryParams.end_date = endDate.toISOString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            offset,
+            status: Array.isArray(status)
+                ? status.map((item) =>
+                      serializers.OrderRequestState.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
+                  )
+                : status != null
+                  ? serializers.OrderRequestState.jsonOrThrow(status, { unrecognizedObjectKeys: "strip" })
+                  : undefined,
+            start_date: startDate != null ? startDate?.toISOString() : undefined,
+            end_date: endDate != null ? endDate?.toISOString() : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -119,7 +103,11 @@ export class OrdersClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -193,14 +181,11 @@ export class OrdersClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body:
-                request != null
-                    ? serializers.productions.orders.create.Request.jsonOrThrow(request, {
-                          unrecognizedObjectKeys: "strip",
-                      })
-                    : undefined,
+            body: serializers.productions.orders.create.Request.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -273,7 +258,7 @@ export class OrdersClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -357,7 +342,7 @@ export class OrdersClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.productions.BodyUpdateOrderV1ProductionsOrdersOrderIdPatch.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -439,7 +424,7 @@ export class OrdersClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

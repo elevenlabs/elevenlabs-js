@@ -20,7 +20,7 @@ export const SimulationTestModel: core.serialization.ObjectSchema<
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput.optional()).optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput).optional(),
     ),
     chatHistory: core.serialization.property(
         "chat_history",
@@ -45,7 +45,7 @@ export const SimulationTestModel: core.serialization.ObjectSchema<
 export declare namespace SimulationTestModel {
     export interface Raw {
         from_conversation_metadata?: TestFromConversationMetadataOutput.Raw | null;
-        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
+        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
         success_condition?: string | null;
