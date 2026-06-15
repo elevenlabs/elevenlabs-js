@@ -18,6 +18,7 @@ export const SpeechHistoryItemResponseModelSource: core.serialization.Schema<
     "ConvAI",
     "VoiceGeneration",
     "InVPC",
+    "Flows",
 ]);
 
 export declare namespace SpeechHistoryItemResponseModelSource {
@@ -31,5 +32,6 @@ export declare namespace SpeechHistoryItemResponseModelSource {
         | "PlayAPI"
         | "ConvAI"
         | "VoiceGeneration"
-        | "InVPC";
+        | "InVPC"
+        | "Flows";
 }

@@ -16,6 +16,7 @@ describe("WhatsappClient", () => {
             agent_id: "agent_id",
         };
         const rawResponseBody = { success: true, message: "message", conversation_id: "conversation_id" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/whatsapp/outbound-call")
@@ -52,6 +53,7 @@ describe("WhatsappClient", () => {
             agent_id: "agent_id",
         };
         const rawResponseBody = { conversation_id: "conversation_id" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/whatsapp/outbound-message")

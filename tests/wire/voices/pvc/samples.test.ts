@@ -9,6 +9,7 @@ describe("SamplesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { voice_id: "b38kUX8pkfYO2kHyqfFy" };
+
         server
             .mockEndpoint()
             .post("/v1/voices/pvc/21m00Tcm4TlvDq8ikWAM/samples/VW7YKqPnjY4h39yTbx2L")
@@ -29,6 +30,7 @@ describe("SamplesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .delete("/v1/voices/pvc/21m00Tcm4TlvDq8ikWAM/samples/VW7YKqPnjY4h39yTbx2L")

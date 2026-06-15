@@ -9,6 +9,7 @@ describe("KnowledgeBaseClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { number_of_pages: 1.1 };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agent/agent_id/knowledge-base/size")

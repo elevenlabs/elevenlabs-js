@@ -11,8 +11,9 @@ export const BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdAp
 > = core.serialization.undiscriminatedUnion([
     core.serialization.list(PermissionType),
     core.serialization.stringLiteral("all"),
+    core.serialization.stringLiteral("no_update"),
 ]);
 
 export declare namespace BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchPermissions {
-    export type Raw = PermissionType.Raw[] | "all";
+    export type Raw = PermissionType.Raw[] | "all" | "no_update";
 }

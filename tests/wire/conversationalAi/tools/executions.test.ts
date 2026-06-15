@@ -36,6 +36,7 @@ describe("ExecutionsClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/tools/tool_id/executions")

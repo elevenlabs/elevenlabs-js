@@ -9,6 +9,7 @@ export const SongSourceContext: core.serialization.ObjectSchema<
     ElevenLabs.SongSourceContext
 > = core.serialization.object({
     songId: core.serialization.property("song_id", core.serialization.string()),
+    chatId: core.serialization.property("chat_id", core.serialization.string().optional()),
     title: core.serialization.string().optional(),
     description: core.serialization.string().optional(),
     genres: core.serialization.list(core.serialization.string()).optional(),
@@ -24,6 +25,7 @@ export const SongSourceContext: core.serialization.ObjectSchema<
 export declare namespace SongSourceContext {
     export interface Raw {
         song_id: string;
+        chat_id?: string | null;
         title?: string | null;
         description?: string | null;
         genres?: string[] | null;

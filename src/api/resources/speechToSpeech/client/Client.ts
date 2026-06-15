@@ -25,6 +25,7 @@ export class SpeechToSpeechClient {
 
     /**
      * Transform audio from one voice to another. Maintain full control over emotion, timing and delivery.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public convert(
@@ -40,42 +41,36 @@ export class SpeechToSpeechClient {
         request: ElevenLabs.BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost,
         requestOptions?: SpeechToSpeechClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (request.enableLogging != null) {
-            _queryParams.enable_logging = request.enableLogging.toString();
-        }
-
-        if (request.optimizeStreamingLatency != null) {
-            _queryParams.optimize_streaming_latency = request.optimizeStreamingLatency.toString();
-        }
-
-        if (request.outputFormat != null) {
-            _queryParams.output_format = serializers.SpeechToSpeechConvertRequestOutputFormat.jsonOrThrow(
-                request.outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
-        }
-
-        const _request = await core.newFormData();
-        await _request.appendFile("audio", request.audio);
+        const _queryParams: Record<string, unknown> = {
+            enable_logging: request.enableLogging,
+            optimize_streaming_latency: request.optimizeStreamingLatency,
+            output_format:
+                request.outputFormat != null
+                    ? serializers.SpeechToSpeechConvertRequestOutputFormat.jsonOrThrow(request.outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
+        const _body = await core.newFormData();
+        await _body.appendFile("audio", request.audio);
         if (request.modelId != null) {
-            _request.append("model_id", request.modelId);
+            _body.append("model_id", request.modelId);
         }
 
         if (request.voiceSettings != null) {
-            _request.append("voice_settings", request.voiceSettings);
+            _body.append("voice_settings", request.voiceSettings);
         }
 
         if (request.seed != null) {
-            _request.append("seed", request.seed.toString());
+            _body.append("seed", request.seed?.toString());
         }
 
         if (request.removeBackgroundNoise != null) {
-            _request.append("remove_background_noise", request.removeBackgroundNoise.toString());
+            _body.append("remove_background_noise", request.removeBackgroundNoise?.toString());
         }
 
         if (request.fileFormat != null) {
-            _request.append(
+            _body.append(
                 "file_format",
                 serializers.SpeechToSpeechConvertRequestFileFormat.jsonOrThrow(request.fileFormat, {
                     unrecognizedObjectKeys: "strip",
@@ -83,7 +78,7 @@ export class SpeechToSpeechClient {
             );
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -101,7 +96,11 @@ export class SpeechToSpeechClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -139,6 +138,7 @@ export class SpeechToSpeechClient {
 
     /**
      * Stream audio from one voice to another. Maintain full control over emotion, timing and delivery.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public stream(
@@ -154,42 +154,36 @@ export class SpeechToSpeechClient {
         request: ElevenLabs.BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIdStreamPost,
         requestOptions?: SpeechToSpeechClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (request.enableLogging != null) {
-            _queryParams.enable_logging = request.enableLogging.toString();
-        }
-
-        if (request.optimizeStreamingLatency != null) {
-            _queryParams.optimize_streaming_latency = request.optimizeStreamingLatency.toString();
-        }
-
-        if (request.outputFormat != null) {
-            _queryParams.output_format = serializers.SpeechToSpeechStreamRequestOutputFormat.jsonOrThrow(
-                request.outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
-        }
-
-        const _request = await core.newFormData();
-        await _request.appendFile("audio", request.audio);
+        const _queryParams: Record<string, unknown> = {
+            enable_logging: request.enableLogging,
+            optimize_streaming_latency: request.optimizeStreamingLatency,
+            output_format:
+                request.outputFormat != null
+                    ? serializers.SpeechToSpeechStreamRequestOutputFormat.jsonOrThrow(request.outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
+        const _body = await core.newFormData();
+        await _body.appendFile("audio", request.audio);
         if (request.modelId != null) {
-            _request.append("model_id", request.modelId);
+            _body.append("model_id", request.modelId);
         }
 
         if (request.voiceSettings != null) {
-            _request.append("voice_settings", request.voiceSettings);
+            _body.append("voice_settings", request.voiceSettings);
         }
 
         if (request.seed != null) {
-            _request.append("seed", request.seed.toString());
+            _body.append("seed", request.seed?.toString());
         }
 
         if (request.removeBackgroundNoise != null) {
-            _request.append("remove_background_noise", request.removeBackgroundNoise.toString());
+            _body.append("remove_background_noise", request.removeBackgroundNoise?.toString());
         }
 
         if (request.fileFormat != null) {
-            _request.append(
+            _body.append(
                 "file_format",
                 serializers.SpeechToSpeechStreamRequestFileFormat.jsonOrThrow(request.fileFormat, {
                     unrecognizedObjectKeys: "strip",
@@ -197,7 +191,7 @@ export class SpeechToSpeechClient {
             );
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -215,7 +209,11 @@ export class SpeechToSpeechClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

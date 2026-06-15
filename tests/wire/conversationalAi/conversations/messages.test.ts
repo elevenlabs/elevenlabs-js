@@ -25,6 +25,7 @@ describe("MessagesClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/conversations/messages/text-search")
@@ -109,6 +110,7 @@ describe("MessagesClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/conversations/messages/smart-search")

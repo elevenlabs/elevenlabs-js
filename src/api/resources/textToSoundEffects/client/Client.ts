@@ -25,6 +25,7 @@ export class TextToSoundEffectsClient {
 
     /**
      * Turn text into sound effects for your videos, voice-overs or video games using the most advanced sound effects models in the world.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public convert(
@@ -39,13 +40,12 @@ export class TextToSoundEffectsClient {
         requestOptions?: TextToSoundEffectsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -61,7 +61,11 @@ export class TextToSoundEffectsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.CreateSoundEffectRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",

@@ -9,6 +9,7 @@ describe("AgentsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { conversation_config: {} };
         const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agents/create")
@@ -65,6 +66,7 @@ describe("AgentsClient", () => {
                     similarity_boost: 0.8,
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
+                    enable_phoneme_tags: true,
                 },
                 conversation: {
                     text_only: true,
@@ -649,6 +651,7 @@ describe("AgentsClient", () => {
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         label: "label",
+                        entry_behavior: "generate_immediately",
                     },
                     failure_node: {
                         type: "override_agent",
@@ -849,6 +852,7 @@ describe("AgentsClient", () => {
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         label: "label",
+                        entry_behavior: "generate_immediately",
                     },
                     start_node: { type: "start", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_conversation: {
@@ -1050,6 +1054,7 @@ describe("AgentsClient", () => {
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         label: "label",
+                        entry_behavior: "generate_immediately",
                     },
                     success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_phone: {
@@ -1067,6 +1072,7 @@ describe("AgentsClient", () => {
                         edge_order: ["edge_order"],
                         delay_ms: 1,
                         enable_transferred_agent_first_message: true,
+                        preserve_client_tts_overrides: true,
                         agent_id: null,
                         node_id: null,
                         transfer_message: null,
@@ -1099,6 +1105,7 @@ describe("AgentsClient", () => {
             branch_id: "branch_id",
             main_branch_id: "main_branch_id",
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz")
@@ -1161,6 +1168,7 @@ describe("AgentsClient", () => {
                             pronunciationDictionaryId: "pronunciation_dictionary_id",
                         },
                     ],
+                    enablePhonemeTags: true,
                 },
                 conversation: {
                     textOnly: true,
@@ -1892,6 +1900,7 @@ describe("AgentsClient", () => {
                         },
                         edgeOrder: ["edge_order"],
                         label: "label",
+                        entryBehavior: "generate_immediately",
                     },
                     failure_node: {
                         type: "override_agent",
@@ -2128,6 +2137,7 @@ describe("AgentsClient", () => {
                         },
                         edgeOrder: ["edge_order"],
                         label: "label",
+                        entryBehavior: "generate_immediately",
                     },
                     start_node: {
                         type: "start",
@@ -2372,6 +2382,7 @@ describe("AgentsClient", () => {
                         },
                         edgeOrder: ["edge_order"],
                         label: "label",
+                        entryBehavior: "generate_immediately",
                     },
                     success_end: {
                         type: "end",
@@ -2410,6 +2421,7 @@ describe("AgentsClient", () => {
                         edgeOrder: ["edge_order"],
                         delayMs: 1,
                         enableTransferredAgentFirstMessage: true,
+                        preserveClientTtsOverrides: true,
                     },
                     tool_node_a: {
                         type: "tool",
@@ -2508,6 +2520,7 @@ describe("AgentsClient", () => {
                     similarity_boost: 0.8,
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
+                    enable_phoneme_tags: true,
                 },
                 conversation: {
                     text_only: true,
@@ -3092,6 +3105,7 @@ describe("AgentsClient", () => {
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         label: "label",
+                        entry_behavior: "generate_immediately",
                     },
                     failure_node: {
                         type: "override_agent",
@@ -3292,6 +3306,7 @@ describe("AgentsClient", () => {
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         label: "label",
+                        entry_behavior: "generate_immediately",
                     },
                     start_node: { type: "start", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_conversation: {
@@ -3493,6 +3508,7 @@ describe("AgentsClient", () => {
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         label: "label",
+                        entry_behavior: "generate_immediately",
                     },
                     success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_phone: {
@@ -3510,6 +3526,7 @@ describe("AgentsClient", () => {
                         edge_order: ["edge_order"],
                         delay_ms: 1,
                         enable_transferred_agent_first_message: true,
+                        preserve_client_tts_overrides: true,
                         agent_id: null,
                         node_id: null,
                         transfer_message: null,
@@ -3542,6 +3559,7 @@ describe("AgentsClient", () => {
             branch_id: "branch_id",
             main_branch_id: "main_branch_id",
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz")
@@ -3605,6 +3623,7 @@ describe("AgentsClient", () => {
                             pronunciationDictionaryId: "pronunciation_dictionary_id",
                         },
                     ],
+                    enablePhonemeTags: true,
                 },
                 conversation: {
                     textOnly: true,
@@ -4336,6 +4355,7 @@ describe("AgentsClient", () => {
                         },
                         edgeOrder: ["edge_order"],
                         label: "label",
+                        entryBehavior: "generate_immediately",
                     },
                     failure_node: {
                         type: "override_agent",
@@ -4572,6 +4592,7 @@ describe("AgentsClient", () => {
                         },
                         edgeOrder: ["edge_order"],
                         label: "label",
+                        entryBehavior: "generate_immediately",
                     },
                     start_node: {
                         type: "start",
@@ -4816,6 +4837,7 @@ describe("AgentsClient", () => {
                         },
                         edgeOrder: ["edge_order"],
                         label: "label",
+                        entryBehavior: "generate_immediately",
                     },
                     success_end: {
                         type: "end",
@@ -4854,6 +4876,7 @@ describe("AgentsClient", () => {
                         edgeOrder: ["edge_order"],
                         delayMs: 1,
                         enableTransferredAgentFirstMessage: true,
+                        preserveClientTtsOverrides: true,
                     },
                     tool_node_a: {
                         type: "tool",
@@ -4923,6 +4946,7 @@ describe("AgentsClient", () => {
             next_cursor: "123",
             has_more: false,
         };
+
         server.mockEndpoint().get("/v1/convai/agents").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.conversationalAi.agents.list({
@@ -4962,6 +4986,7 @@ describe("AgentsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { agent_id: "J3Pbu5gP6NNKBscdCdwB" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/duplicate")
@@ -5063,6 +5088,7 @@ describe("AgentsClient", () => {
                 scoped: [{ scope: "conversation", source_agent_id: "source_agent_id", successful: "success" }],
             },
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/simulate-conversation")
@@ -5280,6 +5306,7 @@ describe("AgentsClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/run-tests")

@@ -9,6 +9,7 @@ describe("LiveCountClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { count: 42 };
+
         server
             .mockEndpoint()
             .get("/v1/convai/analytics/live-count")

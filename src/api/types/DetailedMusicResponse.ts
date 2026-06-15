@@ -7,7 +7,7 @@ import type * as ElevenLabs from "../index";
  */
 export interface DetailedMusicResponse {
     /** The composition plan used to generate the song */
-    compositionPlan: ElevenLabs.MusicPrompt;
+    compositionPlan: ElevenLabs.DetailedMusicResponseCompositionPlan;
     /** The metadata of the generated song */
     songMetadata: ElevenLabs.SongMetadata;
     /** The timestamps of the words in the generated song */

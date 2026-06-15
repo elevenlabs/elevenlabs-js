@@ -57,16 +57,16 @@ export class VerificationClient {
         request: ElevenLabs.voices.pvc.BodyRequestManualVerificationV1VoicesPvcVoiceIdVerificationPost,
         requestOptions?: VerificationClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.RequestPvcManualVerificationResponseModel>> {
-        const _request = await core.newFormData();
+        const _body = await core.newFormData();
         for (const _file of request.files) {
-            await _request.appendFile("files", _file);
+            await _body.appendFile("files", _file);
         }
 
         if (request.extraText != null) {
-            _request.append("extra_text", request.extraText);
+            _body.append("extra_text", request.extraText);
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -84,7 +84,7 @@ export class VerificationClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

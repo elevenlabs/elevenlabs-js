@@ -3,16 +3,20 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
-import { MusicPrompt } from "../../../../types/MusicPrompt";
+import { BodyStreamComposedMusicV1MusicStreamPostCompositionPlan } from "../../types/BodyStreamComposedMusicV1MusicStreamPostCompositionPlan";
+import { BodyStreamComposedMusicV1MusicStreamPostModelId } from "../../types/BodyStreamComposedMusicV1MusicStreamPostModelId";
 
 export const BodyStreamComposedMusicV1MusicStreamPost: core.serialization.Schema<
     serializers.BodyStreamComposedMusicV1MusicStreamPost.Raw,
     Omit<ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost, "outputFormat">
 > = core.serialization.object({
     prompt: core.serialization.string().optional(),
-    compositionPlan: core.serialization.property("composition_plan", MusicPrompt.optional()),
+    compositionPlan: core.serialization.property(
+        "composition_plan",
+        BodyStreamComposedMusicV1MusicStreamPostCompositionPlan.optional(),
+    ),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
-    modelId: core.serialization.property("model_id", core.serialization.stringLiteral("music_v1").optional()),
+    modelId: core.serialization.property("model_id", BodyStreamComposedMusicV1MusicStreamPostModelId.optional()),
     seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     storeForInpainting: core.serialization.property("store_for_inpainting", core.serialization.boolean().optional()),
@@ -21,9 +25,9 @@ export const BodyStreamComposedMusicV1MusicStreamPost: core.serialization.Schema
 export declare namespace BodyStreamComposedMusicV1MusicStreamPost {
     export interface Raw {
         prompt?: string | null;
-        composition_plan?: MusicPrompt.Raw | null;
+        composition_plan?: BodyStreamComposedMusicV1MusicStreamPostCompositionPlan.Raw | null;
         music_length_ms?: number | null;
-        model_id?: "music_v1" | null;
+        model_id?: BodyStreamComposedMusicV1MusicStreamPostModelId.Raw | null;
         seed?: number | null;
         force_instrumental?: boolean | null;
         store_for_inpainting?: boolean | null;

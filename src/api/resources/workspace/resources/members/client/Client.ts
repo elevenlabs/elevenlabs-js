@@ -62,7 +62,7 @@ export class MembersClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.workspace.UpdateMemberRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,

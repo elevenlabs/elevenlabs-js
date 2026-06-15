@@ -44,6 +44,7 @@ describe("TextToDialogueClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .post("/v1/text-to-dialogue/with-timestamps")

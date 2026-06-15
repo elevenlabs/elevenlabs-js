@@ -3,6 +3,7 @@
 export const StartProcedureToolErrorStatus = {
     NotFound: "not_found",
     InvalidName: "invalid_name",
+    AlreadyActive: "already_active",
 } as const;
 export type StartProcedureToolErrorStatus =
     (typeof StartProcedureToolErrorStatus)[keyof typeof StartProcedureToolErrorStatus];

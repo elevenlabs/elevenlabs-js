@@ -80,7 +80,7 @@ export class ProjectsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -140,59 +140,59 @@ export class ProjectsClient {
         request: ElevenLabs.studio.BodyCreateStudioProjectV1StudioProjectsPost,
         requestOptions?: ProjectsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AddProjectResponseModel>> {
-        const _request = await core.newFormData();
-        _request.append("name", request.name);
+        const _body = await core.newFormData();
+        _body.append("name", request.name);
         if (request.defaultTitleVoiceId != null) {
-            _request.append("default_title_voice_id", request.defaultTitleVoiceId);
+            _body.append("default_title_voice_id", request.defaultTitleVoiceId);
         }
 
         if (request.defaultParagraphVoiceId != null) {
-            _request.append("default_paragraph_voice_id", request.defaultParagraphVoiceId);
+            _body.append("default_paragraph_voice_id", request.defaultParagraphVoiceId);
         }
 
         if (request.defaultModelId != null) {
-            _request.append("default_model_id", request.defaultModelId);
+            _body.append("default_model_id", request.defaultModelId);
         }
 
         if (request.fromUrl != null) {
-            _request.append("from_url", request.fromUrl);
+            _body.append("from_url", request.fromUrl);
         }
 
         if (request.fromDocument != null) {
-            await _request.appendFile("from_document", request.fromDocument);
+            await _body.appendFile("from_document", request.fromDocument);
         }
 
         if (request.fromContentJson != null) {
-            _request.append("from_content_json", request.fromContentJson);
+            _body.append("from_content_json", request.fromContentJson);
         }
 
         if (request.qualityPreset != null) {
-            _request.append(
+            _body.append(
                 "quality_preset",
                 serializers.QualityPresetType.jsonOrThrow(request.qualityPreset, { unrecognizedObjectKeys: "strip" }),
             );
         }
 
         if (request.title != null) {
-            _request.append("title", request.title);
+            _body.append("title", request.title);
         }
 
         if (request.author != null) {
-            _request.append("author", request.author);
+            _body.append("author", request.author);
         }
 
         if (request.description != null) {
-            _request.append("description", request.description);
+            _body.append("description", request.description);
         }
 
         if (request.genres != null) {
             for (const _item of request.genres) {
-                _request.append("genres", _item);
+                _body.append("genres", _item);
             }
         }
 
         if (request.targetAudience != null) {
-            _request.append(
+            _body.append(
                 "target_audience",
                 serializers.studio.ProjectsCreateRequestTargetAudience.jsonOrThrow(request.targetAudience, {
                     unrecognizedObjectKeys: "strip",
@@ -201,45 +201,45 @@ export class ProjectsClient {
         }
 
         if (request.language != null) {
-            _request.append("language", request.language);
+            _body.append("language", request.language);
         }
 
         if (request.contentType != null) {
-            _request.append("content_type", request.contentType);
+            _body.append("content_type", request.contentType);
         }
 
         if (request.originalPublicationDate != null) {
-            _request.append("original_publication_date", request.originalPublicationDate);
+            _body.append("original_publication_date", request.originalPublicationDate);
         }
 
         if (request.matureContent != null) {
-            _request.append("mature_content", request.matureContent.toString());
+            _body.append("mature_content", request.matureContent?.toString());
         }
 
         if (request.isbnNumber != null) {
-            _request.append("isbn_number", request.isbnNumber);
+            _body.append("isbn_number", request.isbnNumber);
         }
 
         if (request.acxVolumeNormalization != null) {
-            _request.append("acx_volume_normalization", request.acxVolumeNormalization.toString());
+            _body.append("acx_volume_normalization", request.acxVolumeNormalization?.toString());
         }
 
         if (request.volumeNormalization != null) {
-            _request.append("volume_normalization", request.volumeNormalization.toString());
+            _body.append("volume_normalization", request.volumeNormalization?.toString());
         }
 
         if (request.pronunciationDictionaryLocators != null) {
             for (const _item of request.pronunciationDictionaryLocators) {
-                _request.append("pronunciation_dictionary_locators", _item);
+                _body.append("pronunciation_dictionary_locators", _item);
             }
         }
 
         if (request.callbackUrl != null) {
-            _request.append("callback_url", request.callbackUrl);
+            _body.append("callback_url", request.callbackUrl);
         }
 
         if (request.fiction != null) {
-            _request.append(
+            _body.append(
                 "fiction",
                 serializers.studio.ProjectsCreateRequestFiction.jsonOrThrow(request.fiction, {
                     unrecognizedObjectKeys: "strip",
@@ -248,7 +248,7 @@ export class ProjectsClient {
         }
 
         if (request.applyTextNormalization != null) {
-            _request.append(
+            _body.append(
                 "apply_text_normalization",
                 serializers.studio.ProjectsCreateRequestApplyTextNormalization.jsonOrThrow(
                     request.applyTextNormalization,
@@ -258,15 +258,15 @@ export class ProjectsClient {
         }
 
         if (request.autoConvert != null) {
-            _request.append("auto_convert", request.autoConvert.toString());
+            _body.append("auto_convert", request.autoConvert?.toString());
         }
 
         if (request.autoAssignVoices != null) {
-            _request.append("auto_assign_voices", request.autoAssignVoices.toString());
+            _body.append("auto_assign_voices", request.autoAssignVoices?.toString());
         }
 
         if (request.sourceType != null) {
-            _request.append(
+            _body.append(
                 "source_type",
                 serializers.studio.ProjectsCreateRequestSourceType.jsonOrThrow(request.sourceType, {
                     unrecognizedObjectKeys: "strip",
@@ -276,15 +276,15 @@ export class ProjectsClient {
 
         if (request.voiceSettings != null) {
             for (const _item of request.voiceSettings) {
-                _request.append("voice_settings", _item);
+                _body.append("voice_settings", _item);
             }
         }
 
         if (request.createPublishingRead != null) {
-            _request.append("create_publishing_read", request.createPublishingRead.toString());
+            _body.append("create_publishing_read", request.createPublishingRead?.toString());
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -302,7 +302,7 @@ export class ProjectsClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -368,11 +368,9 @@ export class ProjectsClient {
         requestOptions?: ProjectsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ProjectExtendedResponse>> {
         const { shareId } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (shareId != null) {
-            _queryParams.share_id = shareId;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            share_id: shareId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -387,7 +385,11 @@ export class ProjectsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -471,7 +473,7 @@ export class ProjectsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.studio.BodyUpdateStudioProjectV1StudioProjectsProjectIdPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -551,7 +553,7 @@ export class ProjectsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -627,7 +629,7 @@ export class ProjectsClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -703,7 +705,7 @@ export class ProjectsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

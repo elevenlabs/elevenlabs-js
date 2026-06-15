@@ -29,6 +29,7 @@ describe("PronunciationDictionariesClient", () => {
             description: "This is a test dictionary",
             permission_on_resource: "admin",
         };
+
         server
             .mockEndpoint()
             .post("/v1/pronunciation-dictionaries/add-from-rules")
@@ -94,6 +95,7 @@ describe("PronunciationDictionariesClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/pronunciation-dictionaries/21m00Tcm4TlvDq8ikWAM")
@@ -148,6 +150,7 @@ describe("PronunciationDictionariesClient", () => {
             archived_time_unix: 1,
             description: "This is a test dictionary",
         };
+
         server
             .mockEndpoint()
             .patch("/v1/pronunciation-dictionaries/21m00Tcm4TlvDq8ikWAM")
@@ -192,6 +195,7 @@ describe("PronunciationDictionariesClient", () => {
             next_cursor: "5xM3yVvZQKV0EfqQpLr2",
             has_more: false,
         };
+
         server
             .mockEndpoint()
             .get("/v1/pronunciation-dictionaries")

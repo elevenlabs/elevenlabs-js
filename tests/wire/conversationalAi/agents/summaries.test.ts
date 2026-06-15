@@ -27,6 +27,7 @@ describe("SummariesClient", () => {
                 },
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/agents/summaries")

@@ -2,6 +2,8 @@
 
 export const InteractionBudget = {
     Realtime: "realtime",
-    Async: "async",
+    FiveMinutes: "5_minutes",
+    TenMinutes: "10_minutes",
+    OneHour: "1_hour",
 } as const;
 export type InteractionBudget = (typeof InteractionBudget)[keyof typeof InteractionBudget];

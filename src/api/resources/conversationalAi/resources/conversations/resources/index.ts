@@ -1,4 +1,5 @@
 export * as analysis from "./analysis";
+export * from "./analysis/client/requests";
 export * as audio from "./audio";
 export * as feedback from "./feedback";
 export * from "./feedback/client/requests";

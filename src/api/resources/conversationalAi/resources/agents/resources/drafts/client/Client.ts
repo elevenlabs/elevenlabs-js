@@ -179,8 +179,9 @@ export class DraftsClient {
         requestOptions?: DraftsClient.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         const { branchId, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.branch_id = branchId;
+        const _queryParams: Record<string, unknown> = {
+            branch_id: branchId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -196,7 +197,11 @@ export class DraftsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.conversationalAi.agents.BodyCreateAgentDraftV1ConvaiAgentsAgentIdDraftsPost.jsonOrThrow(
                 _body,
@@ -261,8 +266,9 @@ export class DraftsClient {
         requestOptions?: DraftsClient.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         const { branchId } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.branch_id = branchId;
+        const _queryParams: Record<string, unknown> = {
+            branch_id: branchId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -277,7 +283,11 @@ export class DraftsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

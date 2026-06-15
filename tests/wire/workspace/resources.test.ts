@@ -24,6 +24,7 @@ describe("ResourcesClient", () => {
                 { name: "mygroup", id: "x1AfvYKAmiqxCnbvZeNXHqqthJaC", type: "group" },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/workspace/resources/resource_id")
@@ -66,6 +67,7 @@ describe("ResourcesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { role: "admin", resource_type: "voice" };
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .post("/v1/workspace/resources/resource_id/share")
@@ -89,6 +91,7 @@ describe("ResourcesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { resource_type: "voice" };
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .post("/v1/workspace/resources/resource_id/unshare")

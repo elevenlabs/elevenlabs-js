@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ConstantSchemaOverrideConstantValueFourItem } from "./ConstantSchemaOverrideConstantValueFourItem";
 
 export const ConstantSchemaOverrideConstantValue: core.serialization.Schema<
     serializers.ConstantSchemaOverrideConstantValue.Raw,
@@ -12,8 +13,9 @@ export const ConstantSchemaOverrideConstantValue: core.serialization.Schema<
     core.serialization.number(),
     core.serialization.number(),
     core.serialization.boolean(),
+    core.serialization.list(ConstantSchemaOverrideConstantValueFourItem),
 ]);
 
 export declare namespace ConstantSchemaOverrideConstantValue {
-    export type Raw = string | number | number | boolean;
+    export type Raw = string | number | number | boolean | ConstantSchemaOverrideConstantValueFourItem.Raw[];
 }

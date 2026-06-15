@@ -42,6 +42,7 @@ describe("KnowledgeBaseClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/knowledge-base")
@@ -131,6 +132,7 @@ describe("KnowledgeBaseClient", () => {
                 },
             },
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/knowledge-base/rag-index")
@@ -201,6 +203,7 @@ describe("KnowledgeBaseClient", () => {
             ],
             next_cursor: "next_cursor",
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/knowledge-base/search")

@@ -56,39 +56,19 @@ export class UsersClient {
     ): Promise<core.WithRawResponse<ElevenLabs.GetConversationUsersPageResponseModel>> {
         const { agentId, branchId, callStartBeforeUnix, callStartAfterUnix, search, pageSize, sortBy, cursor } =
             request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (agentId != null) {
-            _queryParams.agent_id = agentId;
-        }
-
-        if (branchId != null) {
-            _queryParams.branch_id = branchId;
-        }
-
-        if (callStartBeforeUnix != null) {
-            _queryParams.call_start_before_unix = callStartBeforeUnix.toString();
-        }
-
-        if (callStartAfterUnix != null) {
-            _queryParams.call_start_after_unix = callStartAfterUnix.toString();
-        }
-
-        if (search != null) {
-            _queryParams.search = search;
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (sortBy != null) {
-            _queryParams.sort_by = serializers.UsersSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" });
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            agent_id: agentId,
+            branch_id: branchId,
+            call_start_before_unix: callStartBeforeUnix,
+            call_start_after_unix: callStartAfterUnix,
+            search,
+            page_size: pageSize,
+            sort_by:
+                sortBy != null
+                    ? serializers.UsersSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -103,7 +83,11 @@ export class UsersClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

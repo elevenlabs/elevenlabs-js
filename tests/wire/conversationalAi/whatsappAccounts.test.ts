@@ -20,6 +20,7 @@ describe("WhatsappAccountsClient", () => {
             assigned_agent_name: "assigned_agent_name",
             is_token_expired: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/whatsapp-accounts/phone_number_id")
@@ -48,6 +49,7 @@ describe("WhatsappAccountsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/whatsapp-accounts/phone_number_id")
@@ -67,6 +69,7 @@ describe("WhatsappAccountsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/whatsapp-accounts/phone_number_id")
@@ -102,6 +105,7 @@ describe("WhatsappAccountsClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/whatsapp-accounts")
@@ -110,7 +114,9 @@ describe("WhatsappAccountsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.whatsappAccounts.list();
+        const response = await client.conversationalAi.whatsappAccounts.list({
+            agentId: "agent_id",
+        });
         expect(response).toEqual({
             items: [
                 {

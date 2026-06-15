@@ -9,6 +9,7 @@ describe("SegmentClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { start_time: 1.1, end_time: 1.1 };
         const rawResponseBody = { version: 1, new_segment: "new_segment" };
+
         server
             .mockEndpoint()
             .post("/v1/dubbing/resource/dubbing_id/speaker/speaker_id/segment")

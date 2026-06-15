@@ -9,6 +9,7 @@ describe("PvcClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "John Smith", language: "en" };
         const rawResponseBody = { voice_id: "b38kUX8pkfYO2kHyqfFy" };
+
         server
             .mockEndpoint()
             .post("/v1/voices/pvc")
@@ -32,6 +33,7 @@ describe("PvcClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { voice_id: "b38kUX8pkfYO2kHyqfFy" };
+
         server
             .mockEndpoint()
             .post("/v1/voices/pvc/21m00Tcm4TlvDq8ikWAM")
@@ -52,6 +54,7 @@ describe("PvcClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .post("/v1/voices/pvc/21m00Tcm4TlvDq8ikWAM/train")

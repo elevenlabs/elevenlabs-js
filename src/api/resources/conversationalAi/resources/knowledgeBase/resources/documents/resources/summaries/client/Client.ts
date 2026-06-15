@@ -54,15 +54,9 @@ export class SummariesClient {
         >
     > {
         const { documentIds } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (documentIds != null) {
-            if (Array.isArray(documentIds)) {
-                _queryParams.document_ids = documentIds.map((item) => item);
-            } else {
-                _queryParams.document_ids = documentIds;
-            }
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            document_ids: documentIds,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -77,7 +71,11 @@ export class SummariesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

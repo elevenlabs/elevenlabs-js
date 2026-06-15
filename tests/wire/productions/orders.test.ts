@@ -21,6 +21,7 @@ describe("OrdersClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/productions/orders")
@@ -56,6 +57,7 @@ describe("OrdersClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { sandbox: false };
         const rawResponseBody = { order_id: "prodorder_01jgatk6h0fwxrtbjade61yqhx", sandbox: false };
+
         server
             .mockEndpoint()
             .post("/v1/productions/orders")
@@ -106,6 +108,7 @@ describe("OrdersClient", () => {
             accepted_at: "2024-01-15T09:30:00Z",
             completed_at: "2024-01-15T09:30:00Z",
         };
+
         server
             .mockEndpoint()
             .get("/v1/productions/orders/order_id")
@@ -152,6 +155,7 @@ describe("OrdersClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { request: { name: "Spanish Dubs" } };
         const rawResponseBody = { name: "Spanish Dubs" };
+
         server
             .mockEndpoint()
             .patch("/v1/productions/orders/order_id")
@@ -180,6 +184,7 @@ describe("OrdersClient", () => {
             state: "submitted",
             submitted_at: "2025-03-15T10:30:00Z",
         };
+
         server
             .mockEndpoint()
             .post("/v1/productions/orders/order_id/submit")

@@ -30,6 +30,7 @@ describe("ModelsClient", () => {
                 concurrency_group: "standard_eleven_multilingual_v2",
             },
         ];
+
         server.mockEndpoint().get("/v1/models").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.models.list();

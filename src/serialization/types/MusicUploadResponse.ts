@@ -3,19 +3,22 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { MusicPrompt } from "./MusicPrompt";
+import { MusicUploadResponseCompositionPlan } from "./MusicUploadResponseCompositionPlan";
+import { WordTimestamp } from "./WordTimestamp";
 
 export const MusicUploadResponse: core.serialization.ObjectSchema<
     serializers.MusicUploadResponse.Raw,
     ElevenLabs.MusicUploadResponse
 > = core.serialization.object({
     songId: core.serialization.property("song_id", core.serialization.string()),
-    compositionPlan: core.serialization.property("composition_plan", MusicPrompt.optional()),
+    compositionPlan: core.serialization.property("composition_plan", MusicUploadResponseCompositionPlan.optional()),
+    wordsTimestamps: core.serialization.property("words_timestamps", core.serialization.list(WordTimestamp).optional()),
 });
 
 export declare namespace MusicUploadResponse {
     export interface Raw {
         song_id: string;
-        composition_plan?: MusicPrompt.Raw | null;
+        composition_plan?: MusicUploadResponseCompositionPlan.Raw | null;
+        words_timestamps?: WordTimestamp.Raw[] | null;
     }
 }

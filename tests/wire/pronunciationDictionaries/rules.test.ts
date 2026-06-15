@@ -23,6 +23,7 @@ describe("RulesClient", () => {
             version_id: "5xM3yVvZQKV0EfqQpLr2",
             version_rules_num: 5,
         };
+
         server
             .mockEndpoint()
             .post("/v1/pronunciation-dictionaries/21m00Tcm4TlvDq8ikWAM/set-rules")
@@ -69,6 +70,7 @@ describe("RulesClient", () => {
             version_id: "5xM3yVvZQKV0EfqQpLr2",
             version_rules_num: 5,
         };
+
         server
             .mockEndpoint()
             .post("/v1/pronunciation-dictionaries/21m00Tcm4TlvDq8ikWAM/add-rules")
@@ -105,6 +107,7 @@ describe("RulesClient", () => {
             version_id: "5xM3yVvZQKV0EfqQpLr2",
             version_rules_num: 5,
         };
+
         server
             .mockEndpoint()
             .post("/v1/pronunciation-dictionaries/21m00Tcm4TlvDq8ikWAM/remove-rules")

@@ -18,6 +18,7 @@ describe("SipTrunkClient", () => {
             conversation_id: "conversation_id",
             sip_call_id: "sip_call_id",
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/sip-trunk/outbound-call")

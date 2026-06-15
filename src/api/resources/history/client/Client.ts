@@ -66,47 +66,25 @@ export class HistoryClient {
             search,
             source,
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (startAfterHistoryItemId != null) {
-            _queryParams.start_after_history_item_id = startAfterHistoryItemId;
-        }
-
-        if (voiceId != null) {
-            _queryParams.voice_id = voiceId;
-        }
-
-        if (modelId != null) {
-            _queryParams.model_id = modelId;
-        }
-
-        if (dateBeforeUnix != null) {
-            _queryParams.date_before_unix = dateBeforeUnix.toString();
-        }
-
-        if (dateAfterUnix != null) {
-            _queryParams.date_after_unix = dateAfterUnix.toString();
-        }
-
-        if (sortDirection != null) {
-            _queryParams.sort_direction = serializers.HistoryListRequestSortDirection.jsonOrThrow(sortDirection, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (search != null) {
-            _queryParams.search = search;
-        }
-
-        if (source != null) {
-            _queryParams.source = serializers.HistoryListRequestSource.jsonOrThrow(source, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            start_after_history_item_id: startAfterHistoryItemId,
+            voice_id: voiceId,
+            model_id: modelId,
+            date_before_unix: dateBeforeUnix,
+            date_after_unix: dateAfterUnix,
+            sort_direction:
+                sortDirection != null
+                    ? serializers.HistoryListRequestSortDirection.jsonOrThrow(sortDirection, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            search,
+            source:
+                source != null
+                    ? serializers.HistoryListRequestSource.jsonOrThrow(source, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -121,7 +99,11 @@ export class HistoryClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -192,7 +174,7 @@ export class HistoryClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -263,7 +245,7 @@ export class HistoryClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -305,6 +287,7 @@ export class HistoryClient {
 
     /**
      * Returns the audio of an history item.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public getAudio(
@@ -332,7 +315,7 @@ export class HistoryClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             responseType: "streaming",
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
@@ -367,6 +350,7 @@ export class HistoryClient {
 
     /**
      * Download one or more history items. If one history item ID is provided, we will return a single audio file. If more than one history item IDs are provided, we will provide the history items packed into a .zip file.
+     *
      * @throws {@link ElevenLabs.BadRequestError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
@@ -396,7 +380,7 @@ export class HistoryClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.DownloadHistoryRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",

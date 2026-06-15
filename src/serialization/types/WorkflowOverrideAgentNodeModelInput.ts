@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationalConfigApiModelWorkflowOverrideInput } from "./ConversationalConfigApiModelWorkflowOverrideInput";
+import { EntryBehavior } from "./EntryBehavior";
 import { KnowledgeBaseLocator } from "./KnowledgeBaseLocator";
 import { PositionInput } from "./PositionInput";
 
@@ -30,6 +31,7 @@ export const WorkflowOverrideAgentNodeModelInput: core.serialization.ObjectSchem
         core.serialization.list(core.serialization.string()).optional(),
     ),
     label: core.serialization.string(),
+    entryBehavior: core.serialization.property("entry_behavior", EntryBehavior.optional()),
 });
 
 export declare namespace WorkflowOverrideAgentNodeModelInput {
@@ -41,5 +43,6 @@ export declare namespace WorkflowOverrideAgentNodeModelInput {
         position?: PositionInput.Raw | null;
         edge_order?: string[] | null;
         label: string;
+        entry_behavior?: EntryBehavior.Raw | null;
     }
 }

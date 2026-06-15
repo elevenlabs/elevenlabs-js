@@ -39,6 +39,7 @@ describe("SecretsClient", () => {
             ],
             next_cursor: "next_cursor",
         };
+
         server.mockEndpoint().get("/v1/convai/secrets").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.conversationalAi.secrets.list({
@@ -85,6 +86,7 @@ describe("SecretsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { type: "new", name: "name", value: "value" };
         const rawResponseBody = { type: "stored", secret_id: "secret_id", name: "name" };
+
         server
             .mockEndpoint()
             .post("/v1/convai/secrets")
@@ -133,6 +135,7 @@ describe("SecretsClient", () => {
                 others: ["conversation_initiation_webhook"],
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/secrets/secret_id")
@@ -205,6 +208,7 @@ describe("SecretsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { type: "update", name: "name", value: "value" };
         const rawResponseBody = { type: "stored", secret_id: "secret_id", name: "name" };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/secrets/secret_id")
@@ -235,6 +239,7 @@ describe("SecretsClient", () => {
             ],
             next_cursor: "next_cursor",
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/secrets/secret_id/dependencies/tools")

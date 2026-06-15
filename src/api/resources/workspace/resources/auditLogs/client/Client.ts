@@ -54,35 +54,15 @@ export class AuditLogsClient {
         requestOptions?: AuditLogsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.WorkspaceAuditLogsPageResponse>> {
         const { limit, cursor, timeFromUnixMs, timeToUnixMs, actorUid, className, activityName } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (limit != null) {
-            _queryParams.limit = limit.toString();
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
-        if (timeFromUnixMs != null) {
-            _queryParams.time_from_unix_ms = timeFromUnixMs.toString();
-        }
-
-        if (timeToUnixMs != null) {
-            _queryParams.time_to_unix_ms = timeToUnixMs.toString();
-        }
-
-        if (actorUid != null) {
-            _queryParams.actor_uid = actorUid;
-        }
-
-        if (className != null) {
-            _queryParams.class_name = className;
-        }
-
-        if (activityName != null) {
-            _queryParams.activity_name = activityName;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            limit,
+            cursor,
+            time_from_unix_ms: timeFromUnixMs,
+            time_to_unix_ms: timeToUnixMs,
+            actor_uid: actorUid,
+            class_name: className,
+            activity_name: activityName,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -97,7 +77,11 @@ export class AuditLogsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

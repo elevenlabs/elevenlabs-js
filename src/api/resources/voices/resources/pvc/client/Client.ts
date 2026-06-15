@@ -75,7 +75,7 @@ export class PvcClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.voices.CreatePvcVoiceRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -152,7 +152,7 @@ export class PvcClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.voices.BodyEditPvcVoiceV1VoicesPvcVoiceIdPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -231,7 +231,7 @@ export class PvcClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.voices.BodyRunPvcTrainingV1VoicesPvcVoiceIdTrainPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

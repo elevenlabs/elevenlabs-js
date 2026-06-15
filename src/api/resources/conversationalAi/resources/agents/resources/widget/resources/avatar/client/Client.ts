@@ -51,9 +51,9 @@ export class AvatarClient {
         request: ElevenLabs.conversationalAi.agents.widget.BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost,
         requestOptions?: AvatarClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.PostAgentAvatarResponseModel>> {
-        const _request = await core.newFormData();
-        await _request.appendFile("avatar_file", request.avatarFile);
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _body = await core.newFormData();
+        await _body.appendFile("avatar_file", request.avatarFile);
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -71,7 +71,7 @@ export class AvatarClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

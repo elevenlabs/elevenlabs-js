@@ -24,6 +24,8 @@ export class UsageClient {
     }
 
     /**
+     * @deprecated
+     *
      * (Deprecated) This endpoint is deprecated. Use /v1/workspace/analytics/query/usage-by-product-over-time instead, which exposes the bucket size as `interval_seconds` (an integer in seconds) rather than `aggregation_interval`. Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
      *
      * @param {ElevenLabs.UsageGetRequest} request
@@ -62,33 +64,26 @@ export class UsageClient {
             aggregationBucketSize,
             metric,
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.start_unix = startUnix.toString();
-        _queryParams.end_unix = endUnix.toString();
-        if (includeWorkspaceMetrics != null) {
-            _queryParams.include_workspace_metrics = includeWorkspaceMetrics.toString();
-        }
-
-        if (breakdownType != null) {
-            _queryParams.breakdown_type = serializers.BreakdownTypes.jsonOrThrow(breakdownType, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (aggregationInterval != null) {
-            _queryParams.aggregation_interval = serializers.UsageAggregationInterval.jsonOrThrow(aggregationInterval, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (aggregationBucketSize != null) {
-            _queryParams.aggregation_bucket_size = aggregationBucketSize.toString();
-        }
-
-        if (metric != null) {
-            _queryParams.metric = serializers.MetricType.jsonOrThrow(metric, { unrecognizedObjectKeys: "strip" });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            start_unix: startUnix,
+            end_unix: endUnix,
+            include_workspace_metrics: includeWorkspaceMetrics,
+            breakdown_type:
+                breakdownType != null
+                    ? serializers.BreakdownTypes.jsonOrThrow(breakdownType, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            aggregation_interval:
+                aggregationInterval != null
+                    ? serializers.UsageAggregationInterval.jsonOrThrow(aggregationInterval, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            aggregation_bucket_size: aggregationBucketSize,
+            metric:
+                metric != null
+                    ? serializers.MetricType.jsonOrThrow(metric, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -103,7 +98,11 @@ export class UsageClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

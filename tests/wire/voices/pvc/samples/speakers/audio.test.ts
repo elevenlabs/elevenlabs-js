@@ -9,6 +9,7 @@ describe("AudioClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { audio_base_64: "audio_base_64", media_type: "audio/mpeg", duration_secs: 5 };
+
         server
             .mockEndpoint()
             .get("/v1/voices/pvc/21m00Tcm4TlvDq8ikWAM/samples/VW7YKqPnjY4h39yTbx2L/speakers/VW7YKqPnjY4h39yTbx2L/audio")

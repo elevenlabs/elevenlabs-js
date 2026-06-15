@@ -22,4 +22,6 @@ export interface GetPhoneNumberOutboundSipTrunkConfigResponseModel {
     username?: string;
     /** Whether a LiveKit SIP outbound trunk is configured */
     hasOutboundTrunk?: boolean;
+    /** Media codecs that are offered in the SDP for outbound calls. If empty, all supported codecs are offered. */
+    enabledCodecs?: ElevenLabs.MediaCodec[];
 }

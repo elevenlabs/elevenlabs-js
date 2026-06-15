@@ -4,5 +4,6 @@ export interface TransferToNumberResultExotelSuccessModel {
     status?: "success";
     transferNumber: string;
     reason?: string;
+    agentMessage?: string;
     note?: string;
 }

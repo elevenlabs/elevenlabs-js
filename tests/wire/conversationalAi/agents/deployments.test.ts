@@ -18,6 +18,7 @@ describe("DeploymentsClient", () => {
             },
         };
         const rawResponseBody = { traffic_percentage_branch_id_map: { key: 1.1 } };
+
         server
             .mockEndpoint()
             .post("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/deployments")

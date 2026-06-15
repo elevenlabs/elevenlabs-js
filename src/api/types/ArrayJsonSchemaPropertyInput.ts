@@ -7,8 +7,10 @@ export interface ArrayJsonSchemaPropertyInput {
     description?: string;
     /** Schema for array elements. */
     items?: ElevenLabs.ArrayJsonSchemaPropertyInputItems;
-    /** When set, the entire array is populated from this dynamic variable at runtime. Mutually exclusive with description (LLM-provided array) and constant_value. */
+    /** When set, the entire array is populated from this dynamic variable at runtime. Mutually exclusive with description (LLM-provided array), constant_value, and is_omitted. */
     dynamicVariable?: string;
-    /** When set, the entire array uses this constant value at runtime. Mutually exclusive with description (LLM-provided array) and dynamic_variable. */
+    /** When set, the entire array uses this constant value at runtime. Mutually exclusive with description (LLM-provided array), dynamic_variable, and is_omitted. */
     constantValue?: ElevenLabs.ArrayJsonSchemaPropertyInputConstantValueItem[];
+    /** If true, this array parameter will be completely omitted from the request. Only valid for optional parameters. Mutually exclusive with description, dynamic_variable, and constant_value. */
+    isOmitted?: boolean;
 }

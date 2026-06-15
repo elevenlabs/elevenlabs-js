@@ -49,24 +49,24 @@ export class ContentClient {
         request: ElevenLabs.studio.projects.BodyUpdateStudioProjectContentV1StudioProjectsProjectIdContentPost,
         requestOptions?: ContentClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.EditProjectResponseModel>> {
-        const _request = await core.newFormData();
+        const _body = await core.newFormData();
         if (request.fromUrl != null) {
-            _request.append("from_url", request.fromUrl);
+            _body.append("from_url", request.fromUrl);
         }
 
         if (request.fromDocument != null) {
-            await _request.appendFile("from_document", request.fromDocument);
+            await _body.appendFile("from_document", request.fromDocument);
         }
 
         if (request.fromContentJson != null) {
-            _request.append("from_content_json", request.fromContentJson);
+            _body.append("from_content_json", request.fromContentJson);
         }
 
         if (request.autoConvert != null) {
-            _request.append("auto_convert", request.autoConvert.toString());
+            _body.append("auto_convert", request.autoConvert?.toString());
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -84,7 +84,7 @@ export class ContentClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

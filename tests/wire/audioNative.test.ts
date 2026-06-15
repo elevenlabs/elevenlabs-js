@@ -24,6 +24,7 @@ describe("AudioNativeClient", () => {
                 status: "ready",
             },
         };
+
         server
             .mockEndpoint()
             .get("/v1/audio-native/21m00Tcm4TlvDq8ikWAM/settings")
@@ -61,6 +62,7 @@ describe("AudioNativeClient", () => {
             publishing: false,
             html_snippet: "<div id='audio-native-player'></div>",
         };
+
         server
             .mockEndpoint()
             .post("/v1/audio-native/content")

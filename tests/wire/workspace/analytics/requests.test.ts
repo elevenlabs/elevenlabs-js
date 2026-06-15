@@ -14,6 +14,7 @@ describe("RequestsClient", () => {
             rows: [["rows"]],
             column_units: ["ms"],
         };
+
         server
             .mockEndpoint()
             .post("/v1/workspace/analytics/requests")

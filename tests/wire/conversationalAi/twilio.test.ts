@@ -18,6 +18,7 @@ describe("TwilioClient", () => {
             conversation_id: "conversation_id",
             callSid: "callSid",
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/twilio/outbound-call")

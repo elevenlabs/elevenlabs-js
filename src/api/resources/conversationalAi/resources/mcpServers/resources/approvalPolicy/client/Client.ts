@@ -24,6 +24,8 @@ export class ApprovalPolicyClient {
     }
 
     /**
+     * @deprecated
+     *
      * Update the approval policy configuration for an MCP server. DEPRECATED: Use PATCH /mcp-servers/{id} endpoint instead.
      *
      * @param {string} mcp_server_id - ID of the MCP Server.
@@ -65,7 +67,7 @@ export class ApprovalPolicyClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.mcpServers.McpApprovalPolicyUpdateRequestModel.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

@@ -9,6 +9,7 @@ describe("DocumentsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { url: "url" };
         const rawResponseBody = { id: "id", name: "name", folder_path: [{ id: "id" }] };
+
         server
             .mockEndpoint()
             .post("/v1/convai/knowledge-base/url")
@@ -37,6 +38,7 @@ describe("DocumentsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { text: "text" };
         const rawResponseBody = { id: "id", name: "name", folder_path: [{ id: "id" }] };
+
         server
             .mockEndpoint()
             .post("/v1/convai/knowledge-base/text")
@@ -65,6 +67,7 @@ describe("DocumentsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "name" };
         const rawResponseBody = { id: "id", name: "name", folder_path: [{ id: "id" }] };
+
         server
             .mockEndpoint()
             .post("/v1/convai/knowledge-base/folder")
@@ -112,6 +115,7 @@ describe("DocumentsClient", () => {
             extracted_inner_html: "extracted_inner_html",
             auto_sync_info: { minimum_frequency_days: 1, auto_remove: true, consec_failures: 1, next_refresh_by: 1 },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM")
@@ -164,6 +168,7 @@ describe("DocumentsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM")
@@ -204,6 +209,7 @@ describe("DocumentsClient", () => {
             extracted_inner_html: "extracted_inner_html",
             auto_sync_info: { minimum_frequency_days: 1, auto_remove: true, consec_failures: 1, next_refresh_by: 1 },
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM")
@@ -277,6 +283,7 @@ describe("DocumentsClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/dependent-agents")
@@ -320,6 +327,7 @@ describe("DocumentsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { signed_url: "signed_url" };
+
         server
             .mockEndpoint()
             .get("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/source-file-url")

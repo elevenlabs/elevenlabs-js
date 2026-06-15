@@ -24,6 +24,8 @@ export class TranscriptClient {
     }
 
     /**
+     * @deprecated
+     *
      * Returns transcript for the dub as an SRT or WEBVTT file.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -59,14 +61,14 @@ export class TranscriptClient {
         requestOptions?: TranscriptClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.dubbing.TranscriptGetTranscriptForDubResponse>> {
         const { formatType } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (formatType != null) {
-            _queryParams.format_type = serializers.dubbing.TranscriptGetTranscriptForDubRequestFormatType.jsonOrThrow(
-                formatType,
-                { unrecognizedObjectKeys: "strip" },
-            );
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            format_type:
+                formatType != null
+                    ? serializers.dubbing.TranscriptGetTranscriptForDubRequestFormatType.jsonOrThrow(formatType, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -81,7 +83,11 @@ export class TranscriptClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

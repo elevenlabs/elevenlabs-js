@@ -15,6 +15,7 @@ describe("MediaClient", () => {
             language: "en",
             signed_url: "https://storage.googleapis.com/example-bucket/media/example.mp4?X-Goog-Signature=...",
         };
+
         server
             .mockEndpoint()
             .get("/v1/productions/orders/order_id/media/media_id")

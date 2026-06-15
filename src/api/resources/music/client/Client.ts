@@ -31,6 +31,7 @@ export class MusicClient {
 
     /**
      * Generate background music from one or more video files. Videos are combined in order. Optional description and style tags influence the generated music.
+     *
      * @throws {@link ElevenLabs.ForbiddenError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
@@ -45,37 +46,43 @@ export class MusicClient {
         request: ElevenLabs.BodyVideoToMusicV1MusicVideoToMusicPost,
         requestOptions?: MusicClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (request.outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(request.outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        const _request = await core.newFormData();
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                request.outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(request.outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
+        const _body = await core.newFormData();
         for (const _file of request.videos) {
-            await _request.appendFile("videos", _file);
+            await _body.appendFile("videos", _file);
         }
 
         if (request.description != null) {
-            _request.append("description", request.description);
+            _body.append("description", request.description);
         }
 
         if (request.tags != null) {
             for (const _item of request.tags) {
-                _request.append("tags", _item);
+                _body.append("tags", _item);
             }
         }
 
         if (request.modelId != null) {
-            _request.append("model_id", request.modelId);
+            _body.append(
+                "model_id",
+                serializers.MusicVideoToMusicRequestModelId.jsonOrThrow(request.modelId, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
         }
 
         if (request.signWithC2Pa != null) {
-            _request.append("sign_with_c2pa", request.signWithC2Pa.toString());
+            _body.append("sign_with_c2pa", request.signWithC2Pa?.toString());
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -93,7 +100,11 @@ export class MusicClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -128,6 +139,7 @@ export class MusicClient {
 
     /**
      * Compose a song from a prompt or a composition plan.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public compose(
@@ -142,13 +154,12 @@ export class MusicClient {
         requestOptions?: MusicClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -164,7 +175,11 @@ export class MusicClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.BodyComposeMusicV1MusicPost.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
@@ -196,6 +211,7 @@ export class MusicClient {
 
     /**
      * Compose a song from a prompt or a composition plan.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public composeDetailed(
@@ -210,13 +226,12 @@ export class MusicClient {
         requestOptions?: MusicClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -232,7 +247,11 @@ export class MusicClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -266,6 +285,7 @@ export class MusicClient {
 
     /**
      * Stream a composed song from a prompt or a composition plan.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public stream(
@@ -280,13 +300,12 @@ export class MusicClient {
         requestOptions?: MusicClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { outputFormat, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -302,7 +321,11 @@ export class MusicClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.BodyStreamComposedMusicV1MusicStreamPost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -359,13 +382,17 @@ export class MusicClient {
         request: ElevenLabs.BodyUploadMusicV1MusicUploadPost,
         requestOptions?: MusicClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.MusicUploadResponse>> {
-        const _request = await core.newFormData();
-        await _request.appendFile("file", request.file);
+        const _body = await core.newFormData();
+        await _body.appendFile("file", request.file);
         if (request.extractCompositionPlan != null) {
-            _request.append("extract_composition_plan", request.extractCompositionPlan.toString());
+            _body.append("extract_composition_plan", request.extractCompositionPlan);
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        if (request.withTimestamps != null) {
+            _body.append("with_timestamps", request.withTimestamps?.toString());
+        }
+
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -383,7 +410,7 @@ export class MusicClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -423,6 +450,7 @@ export class MusicClient {
 
     /**
      * Separate an audio file into individual stems. This endpoint might have high latency, depending on the length of the audio file.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public separateStems(
@@ -436,17 +464,18 @@ export class MusicClient {
         request: ElevenLabs.BodyStemSeparationV1MusicStemSeparationPost,
         requestOptions?: MusicClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (request.outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(request.outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        const _request = await core.newFormData();
-        await _request.appendFile("file", request.file);
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                request.outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(request.outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+        };
+        const _body = await core.newFormData();
+        await _body.appendFile("file", request.file);
         if (request.stemVariationId != null) {
-            _request.append(
+            _body.append(
                 "stem_variation_id",
                 serializers.MusicSeparateStemsRequestStemVariationId.jsonOrThrow(request.stemVariationId, {
                     unrecognizedObjectKeys: "strip",
@@ -455,10 +484,10 @@ export class MusicClient {
         }
 
         if (request.signWithC2Pa != null) {
-            _request.append("sign_with_c2pa", request.signWithC2Pa.toString());
+            _body.append("sign_with_c2pa", request.signWithC2Pa?.toString());
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -476,7 +505,11 @@ export class MusicClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

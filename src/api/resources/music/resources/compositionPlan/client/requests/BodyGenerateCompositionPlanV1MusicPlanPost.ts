@@ -14,7 +14,7 @@ export interface BodyGenerateCompositionPlanV1MusicPlanPost {
     /** The length of the composition plan to generate in milliseconds. Must be between 3000ms and 600000ms. Optional - if not provided, the model will choose a length based on the prompt. */
     musicLengthMs?: number;
     /** An optional composition plan to use as a source for the new composition plan. */
-    sourceCompositionPlan?: ElevenLabs.MusicPrompt;
+    sourceCompositionPlan?: ElevenLabs.music.BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan;
     /** The model to use for the generation. */
-    modelId?: "music_v1";
+    modelId?: ElevenLabs.music.BodyGenerateCompositionPlanV1MusicPlanPostModelId;
 }

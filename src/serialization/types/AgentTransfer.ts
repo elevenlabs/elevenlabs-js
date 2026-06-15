@@ -19,6 +19,10 @@ export const AgentTransfer: core.serialization.ObjectSchema<serializers.AgentTra
             "is_workflow_node_transfer",
             core.serialization.boolean().optional(),
         ),
+        preserveClientTtsOverrides: core.serialization.property(
+            "preserve_client_tts_overrides",
+            core.serialization.boolean().optional(),
+        ),
     });
 
 export declare namespace AgentTransfer {
@@ -30,5 +34,6 @@ export declare namespace AgentTransfer {
         transfer_message?: string | null;
         enable_transferred_agent_first_message?: boolean | null;
         is_workflow_node_transfer?: boolean | null;
+        preserve_client_tts_overrides?: boolean | null;
     }
 }

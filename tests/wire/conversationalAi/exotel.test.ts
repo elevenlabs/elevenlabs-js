@@ -18,6 +18,7 @@ describe("ExotelClient", () => {
             conversation_id: "conversation_id",
             callSid: "callSid",
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/exotel/outbound-call")

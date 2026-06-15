@@ -12,5 +12,9 @@ export interface CustomGuardrailConfig {
     /** Instruction describing what to block, e.g. 'don't talk about politics' */
     prompt: string;
     executionMode?: ElevenLabs.GuardrailExecutionMode;
+    /** LLM model to use for custom guardrail evaluation */
+    model?: ElevenLabs.CustomGuardrailConfigModel;
+    /** How many recent customer messages to include in the guardrail's history, plus the messages that follow them. Only customer messages count toward the limit. 0 (default) shows none; 1 shows the customer's latest message onward. When > 0, the guardrail prompt can refer to this history as <conversation_history>; the reply under evaluation appears as <agent_message> and may repeat at the end of the history. */
+    historyMessageCount?: number;
     triggerAction?: ElevenLabs.CustomGuardrailConfigTriggerAction;
 }

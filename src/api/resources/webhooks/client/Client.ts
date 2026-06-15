@@ -48,11 +48,9 @@ export class WebhooksClient {
         requestOptions?: WebhooksClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.WorkspaceWebhookListResponseModel>> {
         const { includeUsages } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (includeUsages != null) {
-            _queryParams.include_usages = includeUsages.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            include_usages: includeUsages,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -67,7 +65,11 @@ export class WebhooksClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -145,7 +147,7 @@ export class WebhooksClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.BodyCreateWorkspaceWebhookV1WorkspaceWebhooksPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -220,7 +222,7 @@ export class WebhooksClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -303,7 +305,7 @@ export class WebhooksClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

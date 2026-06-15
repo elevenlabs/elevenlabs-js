@@ -7,8 +7,8 @@ import type * as serializers from "../../../index";
 export const HistoryListRequestSource: core.serialization.Schema<
     serializers.HistoryListRequestSource.Raw,
     ElevenLabs.HistoryListRequestSource
-> = core.serialization.enum_(["TTS", "STS"]);
+> = core.serialization.enum_(["TTS", "STS", "Flows"]);
 
 export declare namespace HistoryListRequestSource {
-    export type Raw = "TTS" | "STS";
+    export type Raw = "TTS" | "STS" | "Flows";
 }

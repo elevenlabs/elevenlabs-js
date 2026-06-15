@@ -9,6 +9,7 @@ describe("InvitesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { email: "john.doe@testmail.com" };
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .post("/v1/workspace/invites/add")
@@ -31,6 +32,7 @@ describe("InvitesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { emails: ["emails"] };
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .post("/v1/workspace/invites/add-bulk")
@@ -53,6 +55,7 @@ describe("InvitesClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { email: "john.doe@testmail.com" };
         const rawResponseBody = { status: "ok" };
+
         server
             .mockEndpoint()
             .delete("/v1/workspace/invites")

@@ -76,11 +76,9 @@ export class VoicesClient {
         requestOptions?: VoicesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.Voice>> {
         const { withSettings } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (withSettings != null) {
-            _queryParams.with_settings = withSettings.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            with_settings: withSettings,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -95,7 +93,11 @@ export class VoicesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -166,7 +168,7 @@ export class VoicesClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -202,6 +204,8 @@ export class VoicesClient {
     }
 
     /**
+     * @deprecated
+     *
      * Returns a list of all available voices for a user. Stops working once the user's workspace exceeds 500 voices.
      *
      * @param {ElevenLabs.VoicesGetAllRequest} request
@@ -226,11 +230,9 @@ export class VoicesClient {
         requestOptions?: VoicesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetVoicesResponse>> {
         const { showLegacy } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (showLegacy != null) {
-            _queryParams.show_legacy = showLegacy.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            show_legacy: showLegacy,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -245,7 +247,11 @@ export class VoicesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -327,55 +333,19 @@ export class VoicesClient {
             includeTotalCount,
             voiceIds,
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (nextPageToken != null) {
-            _queryParams.next_page_token = nextPageToken;
-        }
-
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (search != null) {
-            _queryParams.search = search;
-        }
-
-        if (sort != null) {
-            _queryParams.sort = sort;
-        }
-
-        if (sortDirection != null) {
-            _queryParams.sort_direction = sortDirection;
-        }
-
-        if (voiceType != null) {
-            _queryParams.voice_type = voiceType;
-        }
-
-        if (category != null) {
-            _queryParams.category = category;
-        }
-
-        if (fineTuningState != null) {
-            _queryParams.fine_tuning_state = fineTuningState;
-        }
-
-        if (collectionId != null) {
-            _queryParams.collection_id = collectionId;
-        }
-
-        if (includeTotalCount != null) {
-            _queryParams.include_total_count = includeTotalCount.toString();
-        }
-
-        if (voiceIds != null) {
-            if (Array.isArray(voiceIds)) {
-                _queryParams.voice_ids = voiceIds.map((item) => item);
-            } else {
-                _queryParams.voice_ids = voiceIds;
-            }
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            next_page_token: nextPageToken,
+            page_size: pageSize,
+            search,
+            sort,
+            sort_direction: sortDirection,
+            voice_type: voiceType,
+            category,
+            fine_tuning_state: fineTuningState,
+            collection_id: collectionId,
+            include_total_count: includeTotalCount,
+            voice_ids: voiceIds,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -390,7 +360,11 @@ export class VoicesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -453,24 +427,24 @@ export class VoicesClient {
         request: ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost,
         requestOptions?: VoicesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.EditVoiceResponseModel>> {
-        const _request = await core.newFormData();
-        _request.append("name", request.name);
+        const _body = await core.newFormData();
+        _body.append("name", request.name);
         if (request.files != null) {
             for (const _file of request.files) {
-                await _request.appendFile("files", _file);
+                await _body.appendFile("files", _file);
             }
         }
 
         if (request.removeBackgroundNoise != null) {
-            _request.append("remove_background_noise", request.removeBackgroundNoise.toString());
+            _body.append("remove_background_noise", request.removeBackgroundNoise?.toString());
         }
 
         if (request.description != null) {
-            _request.append("description", request.description);
+            _body.append("description", request.description);
         }
 
         if (request.labels != null) {
-            _request.append(
+            _body.append(
                 "labels",
                 (() => {
                     const mapped = serializers.VoicesUpdateRequestLabels.jsonOrThrow(request.labels, {
@@ -482,10 +456,10 @@ export class VoicesClient {
         }
 
         if (request.moderateMetadata != null) {
-            _request.append("moderate_metadata", request.moderateMetadata.toString());
+            _body.append("moderate_metadata", request.moderateMetadata?.toString());
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -503,7 +477,7 @@ export class VoicesClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -586,7 +560,7 @@ export class VoicesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -656,7 +630,7 @@ export class VoicesClient {
      *         includeLiveModerated: true,
      *         readerAppEnabled: true,
      *         ownerId: "owner_id",
-     *         sort: "sort",
+     *         sort: "created_date",
      *         page: 1
      *     })
      */
@@ -691,89 +665,34 @@ export class VoicesClient {
             sort,
             page,
         } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (category != null) {
-            _queryParams.category = serializers.VoicesGetSharedRequestCategory.jsonOrThrow(category, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (gender != null) {
-            _queryParams.gender = gender;
-        }
-
-        if (age != null) {
-            _queryParams.age = age;
-        }
-
-        if (accent != null) {
-            _queryParams.accent = accent;
-        }
-
-        if (language != null) {
-            _queryParams.language = language;
-        }
-
-        if (locale != null) {
-            _queryParams.locale = locale;
-        }
-
-        if (search != null) {
-            _queryParams.search = search;
-        }
-
-        if (useCases != null) {
-            if (Array.isArray(useCases)) {
-                _queryParams.use_cases = useCases.map((item) => item);
-            } else {
-                _queryParams.use_cases = useCases;
-            }
-        }
-
-        if (descriptives != null) {
-            if (Array.isArray(descriptives)) {
-                _queryParams.descriptives = descriptives.map((item) => item);
-            } else {
-                _queryParams.descriptives = descriptives;
-            }
-        }
-
-        if (featured != null) {
-            _queryParams.featured = featured.toString();
-        }
-
-        if (minNoticePeriodDays != null) {
-            _queryParams.min_notice_period_days = minNoticePeriodDays.toString();
-        }
-
-        if (includeCustomRates != null) {
-            _queryParams.include_custom_rates = includeCustomRates.toString();
-        }
-
-        if (includeLiveModerated != null) {
-            _queryParams.include_live_moderated = includeLiveModerated.toString();
-        }
-
-        if (readerAppEnabled != null) {
-            _queryParams.reader_app_enabled = readerAppEnabled.toString();
-        }
-
-        if (ownerId != null) {
-            _queryParams.owner_id = ownerId;
-        }
-
-        if (sort != null) {
-            _queryParams.sort = sort;
-        }
-
-        if (page != null) {
-            _queryParams.page = page.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            category:
+                category != null
+                    ? serializers.VoicesGetSharedRequestCategory.jsonOrThrow(category, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            gender,
+            age,
+            accent,
+            language,
+            locale,
+            search,
+            use_cases: useCases,
+            descriptives,
+            featured,
+            min_notice_period_days: minNoticePeriodDays,
+            include_custom_rates: includeCustomRates,
+            include_live_moderated: includeLiveModerated,
+            reader_app_enabled: readerAppEnabled,
+            owner_id: ownerId,
+            sort:
+                sort != null
+                    ? serializers.VoicesGetSharedRequestSort.jsonOrThrow(sort, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            page,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -788,7 +707,11 @@ export class VoicesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -846,20 +769,20 @@ export class VoicesClient {
         request: ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost,
         requestOptions?: VoicesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetLibraryVoicesResponse>> {
-        const _request = await core.newFormData();
+        const _body = await core.newFormData();
         if (request.audioFile != null) {
-            await _request.appendFile("audio_file", request.audioFile);
+            await _body.appendFile("audio_file", request.audioFile);
         }
 
         if (request.similarityThreshold != null) {
-            _request.append("similarity_threshold", request.similarityThreshold.toString());
+            _body.append("similarity_threshold", request.similarityThreshold?.toString());
         }
 
         if (request.topK != null) {
-            _request.append("top_k", request.topK.toString());
+            _body.append("top_k", request.topK?.toString());
         }
 
-        const _maybeEncodedRequest = await _request.getRequest();
+        const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -877,7 +800,7 @@ export class VoicesClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

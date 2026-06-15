@@ -26,22 +26,38 @@ export class PhoneNumbersClient {
     /**
      * Retrieve all Phone Numbers
      *
+     * @param {ElevenLabs.conversationalAi.PhoneNumbersListRequest} request
      * @param {PhoneNumbersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.phoneNumbers.list()
+     *     await client.conversationalAi.phoneNumbers.list({
+     *         provider: "twilio",
+     *         agentId: "agent_id",
+     *         branchId: "branch_id"
+     *     })
      */
     public list(
+        request: ElevenLabs.conversationalAi.PhoneNumbersListRequest = {},
         requestOptions?: PhoneNumbersClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.conversationalAi.PhoneNumbersListResponseItem[]> {
-        return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
     private async __list(
+        request: ElevenLabs.conversationalAi.PhoneNumbersListRequest = {},
         requestOptions?: PhoneNumbersClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.conversationalAi.PhoneNumbersListResponseItem[]>> {
+        const { provider, agentId, branchId } = request;
+        const _queryParams: Record<string, unknown> = {
+            provider:
+                provider != null
+                    ? serializers.TelephonyProvider.jsonOrThrow(provider, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            agent_id: agentId,
+            branch_id: branchId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -56,7 +72,11 @@ export class PhoneNumbersClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -134,7 +154,7 @@ export class PhoneNumbersClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.PhoneNumbersCreateRequestBody.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -209,7 +229,7 @@ export class PhoneNumbersClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -285,7 +305,7 @@ export class PhoneNumbersClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -357,7 +377,7 @@ export class PhoneNumbersClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.conversationalAi.UpdatePhoneNumberRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -430,15 +450,10 @@ export class PhoneNumbersClient {
         requestOptions?: PhoneNumbersClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetSipLogMessagesResponse>> {
         const { pageSize, cursor } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (pageSize != null) {
-            _queryParams.page_size = pageSize.toString();
-        }
-
-        if (cursor != null) {
-            _queryParams.cursor = cursor;
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            cursor,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -453,7 +468,11 @@ export class PhoneNumbersClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

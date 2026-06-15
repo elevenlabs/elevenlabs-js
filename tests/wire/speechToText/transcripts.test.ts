@@ -55,6 +55,7 @@ describe("TranscriptsClient", () => {
             entities: [{ text: "text", entity_type: "entity_type", start_char: 1, end_char: 1 }],
             audio_duration_secs: 1.1,
         };
+
         server
             .mockEndpoint()
             .get("/v1/speech-to-text/transcripts/transcription_id")
@@ -143,6 +144,7 @@ describe("TranscriptsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
+
         server
             .mockEndpoint()
             .delete("/v1/speech-to-text/transcripts/transcription_id")

@@ -21,8 +21,11 @@ export const ProjectResponse: core.serialization.ObjectSchema<
     name: core.serialization.string(),
     createDateUnix: core.serialization.property("create_date_unix", core.serialization.number()),
     createdByUserId: core.serialization.property("created_by_user_id", core.serialization.string().optional()),
-    defaultTitleVoiceId: core.serialization.property("default_title_voice_id", core.serialization.string()),
-    defaultParagraphVoiceId: core.serialization.property("default_paragraph_voice_id", core.serialization.string()),
+    defaultTitleVoiceRefId: core.serialization.property("default_title_voice_ref_id", core.serialization.string()),
+    defaultParagraphVoiceRefId: core.serialization.property(
+        "default_paragraph_voice_ref_id",
+        core.serialization.string(),
+    ),
     defaultModelId: core.serialization.property("default_model_id", core.serialization.string()),
     lastConversionDateUnix: core.serialization.property(
         "last_conversion_date_unix",
@@ -59,11 +62,16 @@ export const ProjectResponse: core.serialization.ObjectSchema<
     captionStyle: core.serialization.property("caption_style", CaptionStyleModel.optional()),
     captionStyleTemplateOverrides: core.serialization.property(
         "caption_style_template_overrides",
-        core.serialization.record(core.serialization.string(), CaptionStyleModel.optional()).optional(),
+        core.serialization.record(core.serialization.string(), CaptionStyleModel).optional(),
     ),
     publicShareId: core.serialization.property("public_share_id", core.serialization.string().optional()),
     aspectRatio: core.serialization.property("aspect_ratio", ProjectResponseModelAspectRatio.optional()),
     agentSettings: core.serialization.property("agent_settings", StudioAgentSettingsModel.optional()),
+    defaultTitleVoiceId: core.serialization.property("default_title_voice_id", core.serialization.string().optional()),
+    defaultParagraphVoiceId: core.serialization.property(
+        "default_paragraph_voice_id",
+        core.serialization.string().optional(),
+    ),
 });
 
 export declare namespace ProjectResponse {
@@ -72,8 +80,8 @@ export declare namespace ProjectResponse {
         name: string;
         create_date_unix: number;
         created_by_user_id?: string | null;
-        default_title_voice_id: string;
-        default_paragraph_voice_id: string;
+        default_title_voice_ref_id: string;
+        default_paragraph_voice_ref_id: string;
         default_model_id: string;
         last_conversion_date_unix?: number | null;
         can_be_downloaded: boolean;
@@ -99,9 +107,11 @@ export declare namespace ProjectResponse {
         chapters_enabled?: boolean | null;
         captions_enabled?: boolean | null;
         caption_style?: CaptionStyleModel.Raw | null;
-        caption_style_template_overrides?: Record<string, CaptionStyleModel.Raw | null | undefined> | null;
+        caption_style_template_overrides?: Record<string, CaptionStyleModel.Raw | null> | null;
         public_share_id?: string | null;
         aspect_ratio?: ProjectResponseModelAspectRatio.Raw | null;
         agent_settings?: StudioAgentSettingsModel.Raw | null;
+        default_title_voice_id?: string | null;
+        default_paragraph_voice_id?: string | null;
     }
 }

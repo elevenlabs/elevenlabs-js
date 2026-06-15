@@ -25,6 +25,7 @@ export class TextToDialogueClient {
 
     /**
      * Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public convert(
@@ -39,18 +40,15 @@ export class TextToDialogueClient {
         requestOptions?: TextToDialogueClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { outputFormat, enableLogging, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToDialogueConvertRequestOutputFormat.jsonOrThrow(
-                outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
-        }
-
-        if (enableLogging != null) {
-            _queryParams.enable_logging = enableLogging.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.TextToDialogueConvertRequestOutputFormat.jsonOrThrow(outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            enable_logging: enableLogging,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -66,7 +64,11 @@ export class TextToDialogueClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.BodyTextToDialogueMultiVoiceV1TextToDialoguePost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -100,6 +102,7 @@ export class TextToDialogueClient {
 
     /**
      * Converts a list of text and voice ID pairs into speech (dialogue) and returns an audio stream.
+     *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
     public stream(
@@ -114,17 +117,13 @@ export class TextToDialogueClient {
         requestOptions?: TextToDialogueClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
         const { outputFormat, enableLogging, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (enableLogging != null) {
-            _queryParams.enable_logging = enableLogging.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            enable_logging: enableLogging,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -140,7 +139,11 @@ export class TextToDialogueClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -191,17 +194,13 @@ export class TextToDialogueClient {
         core.WithRawResponse<core.Stream<ElevenLabs.StreamingAudioChunkWithTimestampsAndVoiceSegmentsResponseModel>>
     > {
         const { outputFormat, enableLogging, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, {
-                unrecognizedObjectKeys: "strip",
-            });
-        }
-
-        if (enableLogging != null) {
-            _queryParams.enable_logging = enableLogging.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            enable_logging: enableLogging,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -217,12 +216,16 @@ export class TextToDialogueClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.BodyTextToDialogueStreamWithTimestamps.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
             }),
-            responseType: "sse",
+            responseType: "streaming",
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -308,18 +311,15 @@ export class TextToDialogueClient {
         requestOptions?: TextToDialogueClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.AudioWithTimestampsAndVoiceSegmentsResponseModel>> {
         const { outputFormat, enableLogging, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (outputFormat != null) {
-            _queryParams.output_format = serializers.TextToDialogueConvertWithTimestampsRequestOutputFormat.jsonOrThrow(
-                outputFormat,
-                { unrecognizedObjectKeys: "strip" },
-            );
-        }
-
-        if (enableLogging != null) {
-            _queryParams.enable_logging = enableLogging.toString();
-        }
-
+        const _queryParams: Record<string, unknown> = {
+            output_format:
+                outputFormat != null
+                    ? serializers.TextToDialogueConvertWithTimestampsRequestOutputFormat.jsonOrThrow(outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            enable_logging: enableLogging,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -335,7 +335,11 @@ export class TextToDialogueClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
             body: serializers.BodyTextToDialogueFullWithTimestamps.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",

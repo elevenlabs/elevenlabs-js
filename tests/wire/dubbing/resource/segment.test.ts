@@ -9,6 +9,7 @@ describe("SegmentClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { version: 1 };
+
         server
             .mockEndpoint()
             .patch("/v1/dubbing/resource/dubbing_id/segment/segment_id/language")
@@ -29,6 +30,7 @@ describe("SegmentClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { version: 1 };
+
         server
             .mockEndpoint()
             .delete("/v1/dubbing/resource/dubbing_id/segment/segment_id")

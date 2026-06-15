@@ -51,10 +51,11 @@ export class ResourcesClient {
         requestOptions?: ResourcesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ResourceMetadataResponseModel>> {
         const { resourceType } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.resource_type = serializers.WorkspaceResourceType.jsonOrThrow(resourceType, {
-            unrecognizedObjectKeys: "strip",
-        });
+        const _queryParams: Record<string, unknown> = {
+            resource_type: serializers.WorkspaceResourceType.jsonOrThrow(resourceType, {
+                unrecognizedObjectKeys: "strip",
+            }),
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -69,7 +70,11 @@ export class ResourcesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -152,7 +157,7 @@ export class ResourcesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.workspace.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePost.jsonOrThrow(
                 request,
@@ -231,7 +236,7 @@ export class ResourcesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: serializers.workspace.BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIdUnsharePost.jsonOrThrow(
                 request,

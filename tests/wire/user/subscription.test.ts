@@ -65,6 +65,7 @@ describe("SubscriptionClient", () => {
             has_used_starter_coupon_on_account: false,
             has_used_creator_coupon_on_account: false,
         };
+
         server
             .mockEndpoint()
             .get("/v1/user/subscription")

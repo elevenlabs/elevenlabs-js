@@ -24,6 +24,7 @@ describe("EnvironmentVariablesClient", () => {
             next_cursor: "next_cursor",
             has_more: true,
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/environment-variables")
@@ -73,6 +74,7 @@ describe("EnvironmentVariablesClient", () => {
             workspace_id: "workspace_id",
             values: { key: "value" },
         };
+
         server
             .mockEndpoint()
             .post("/v1/convai/environment-variables")
@@ -117,6 +119,7 @@ describe("EnvironmentVariablesClient", () => {
             workspace_id: "workspace_id",
             values: { key: "value" },
         };
+
         server
             .mockEndpoint()
             .get("/v1/convai/environment-variables/env_var_id")
@@ -154,6 +157,7 @@ describe("EnvironmentVariablesClient", () => {
             workspace_id: "workspace_id",
             values: { key: "value" },
         };
+
         server
             .mockEndpoint()
             .patch("/v1/convai/environment-variables/env_var_id")

@@ -13,7 +13,7 @@ export const SpeakerSeparationResponseModel: core.serialization.ObjectSchema<
     voiceId: core.serialization.property("voice_id", core.serialization.string()),
     sampleId: core.serialization.property("sample_id", core.serialization.string()),
     status: SpeakerSeparationResponseModelStatus,
-    speakers: core.serialization.record(core.serialization.string(), SpeakerResponseModel.optional()).optional(),
+    speakers: core.serialization.record(core.serialization.string(), SpeakerResponseModel).optional(),
     selectedSpeakerIds: core.serialization.property(
         "selected_speaker_ids",
         core.serialization.list(core.serialization.string()).optional(),
@@ -25,7 +25,7 @@ export declare namespace SpeakerSeparationResponseModel {
         voice_id: string;
         sample_id: string;
         status: SpeakerSeparationResponseModelStatus.Raw;
-        speakers?: Record<string, SpeakerResponseModel.Raw | null | undefined> | null;
+        speakers?: Record<string, SpeakerResponseModel.Raw | null> | null;
         selected_speaker_ids?: string[] | null;
     }
 }

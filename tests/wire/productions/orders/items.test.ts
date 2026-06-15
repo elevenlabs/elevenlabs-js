@@ -22,6 +22,7 @@ describe("ItemsClient", () => {
             },
         };
         const rawResponseBody = { item_id: "proditem_01jgd3qhejfs7rm6swknz2ytjb", quote: { amount_usd: 11 } };
+
         server
             .mockEndpoint()
             .post("/v1/productions/orders/order_id/items")
@@ -58,6 +59,7 @@ describe("ItemsClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = { success: true };
+
         server
             .mockEndpoint()
             .delete("/v1/productions/orders/order_id/items/item_id")
