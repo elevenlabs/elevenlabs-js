@@ -11,12 +11,12 @@ export const DynamicVariablesConfigOutput: core.serialization.ObjectSchema<
 > = core.serialization.object({
     dynamicVariablePlaceholders: core.serialization.property(
         "dynamic_variable_placeholders",
-        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput).optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput.optional()).optional(),
     ),
 });
 
 export declare namespace DynamicVariablesConfigOutput {
     export interface Raw {
-        dynamic_variable_placeholders?: Record<string, DynamicVariableValueTypeOutput.Raw | null> | null;
+        dynamic_variable_placeholders?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
     }
 }

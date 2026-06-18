@@ -49,8 +49,8 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
-            "X-Fern-SDK-Version": "2.53.0",
-            "User-Agent": "@elevenlabs/elevenlabs-js/2.53.0",
+            "X-Fern-SDK-Version": "2.53.1",
+            "User-Agent": "@elevenlabs/elevenlabs-js/2.53.1",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
             "xi-api-key": options?.apiKey,
