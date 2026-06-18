@@ -17,3 +17,14 @@ tests/wire/conversationalAi/mcpServers/tools.test.ts
 .fern/replay.lock
 .fern/replay.yml
 .gitattributes
+
+# Hotfix: Fern generator 3.71.4 dropped `| undefined` from map value types.
+# Ignored until the upstream generator fix lands. See PR for context.
+src/api/types/DynamicVariablesConfigInput.ts
+src/api/types/DynamicVariablesConfigOutput.ts
+src/api/types/DynamicVariablesConfigWorkflowOverrideInput.ts
+src/api/types/DynamicVariablesConfigWorkflowOverrideOutput.ts
+src/serialization/types/DynamicVariablesConfigInput.ts
+src/serialization/types/DynamicVariablesConfigOutput.ts
+src/serialization/types/DynamicVariablesConfigWorkflowOverrideInput.ts
+src/serialization/types/DynamicVariablesConfigWorkflowOverrideOutput.ts
