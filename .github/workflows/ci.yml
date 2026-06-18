@@ -8,10 +8,10 @@ jobs:
 
         steps:
             - name: Checkout repo
-              uses: actions/checkout@v3
+              uses: actions/checkout@v5
 
             - name: Set up node
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v5
 
             - name: Compile
               run: yarn && yarn build
@@ -21,10 +21,10 @@ jobs:
 
         steps:
             - name: Checkout repo
-              uses: actions/checkout@v3
+              uses: actions/checkout@v5
 
             - name: Set up node
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v5
 
             - name: Compile
               run: yarn && yarn test
@@ -40,9 +40,9 @@ jobs:
             id-token: write
         steps:
             - name: Checkout repo
-              uses: actions/checkout@v3
+              uses: actions/checkout@v5
             - name: Set up node
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v5
             - name: Install dependencies
               run: yarn install
             - name: Build
