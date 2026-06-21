@@ -11,9 +11,6 @@ import { AudioInterface } from "./AudioInterface";
  */
 export class DefaultAudioInterface extends AudioInterface {
     private static readonly INPUT_FRAMES_PER_BUFFER = 4000; // 250ms @ 16kHz
-    private static readonly OUTPUT_FRAMES_PER_BUFFER = 1000; // 62.5ms @ 16kHz
-    private static readonly SAMPLE_RATE = 16000;
-    private static readonly CHANNELS = 1;
 
     private inputCallback?: (audio: Buffer) => void;
     private outputQueue: Buffer[] = [];

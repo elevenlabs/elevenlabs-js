@@ -1,6 +1,6 @@
-import WebSocket from "ws";
 import type { ChildProcess } from "node:child_process";
 import { EventEmitter } from "node:events";
+import WebSocket from "ws";
 import type { AudioFormat, CommitStrategy } from "./scribe";
 
 export interface InputAudioChunk {
@@ -259,7 +259,7 @@ export interface RealtimeEventMap {
  *
  * // Commit and close
  * connection.commit();
-  * ```
+ * ```
  */
 export class RealtimeConnection {
     private websocket: WebSocket | null = null;
@@ -406,10 +406,7 @@ export class RealtimeConnection {
      * });
      * ```
      */
-    public on<E extends RealtimeEvents>(
-        event: E,
-        listener: (data: RealtimeEventMap[E]) => void
-    ): void {
+    public on<E extends RealtimeEvents>(event: E, listener: (data: RealtimeEventMap[E]) => void): void {
         this.eventEmitter.on(event, listener);
     }
 
@@ -428,10 +425,7 @@ export class RealtimeConnection {
      * connection.off(RealtimeEvents.PARTIAL_TRANSCRIPT, handler);
      * ```
      */
-    public off<E extends RealtimeEvents>(
-        event: E,
-        listener: (data: RealtimeEventMap[E]) => void
-    ): void {
+    public off<E extends RealtimeEvents>(event: E, listener: (data: RealtimeEventMap[E]) => void): void {
         this.eventEmitter.off(event, listener);
     }
 
@@ -541,4 +535,3 @@ export class RealtimeConnection {
         }
     }
 }
-

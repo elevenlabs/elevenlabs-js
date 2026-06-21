@@ -30,8 +30,8 @@ export const DISCONNECTED = "disconnected" as const;
 
 // -- Re-exported classes ------------------------------------------------------
 
-export { SpeechEngineSession as Session } from "./SpeechEngineSession";
-export { SpeechEngineServer as Server, type SpeechEngineServerOptions as ServerOptions } from "./SpeechEngineServer";
 export { SpeechEngineAttachment as Attachment } from "./SpeechEngineAttachment";
-export { SpeechEngineResource as Resource } from "./SpeechEngineResource";
 export { SpeechEngineClientWrapper as Client } from "./SpeechEngineClientWrapper";
+export { SpeechEngineResource as Resource } from "./SpeechEngineResource";
+export { SpeechEngineServer as Server, type SpeechEngineServerOptions as ServerOptions } from "./SpeechEngineServer";
+export { SpeechEngineSession as Session } from "./SpeechEngineSession";

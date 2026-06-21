@@ -1,6 +1,6 @@
-import { SpeechToTextClient as GeneratedSpeechToText } from "../api/resources/speechToText/client/Client";
-import type { SpeechToTextClient } from "../api/resources/speechToText/client/Client";
 import type * as ElevenLabs from "../api";
+import type { SpeechToTextClient } from "../api/resources/speechToText/client/Client";
+import { SpeechToTextClient as GeneratedSpeechToText } from "../api/resources/speechToText/client/Client";
 import type * as core from "../core";
 import { ScribeRealtime } from "./realtime";
 

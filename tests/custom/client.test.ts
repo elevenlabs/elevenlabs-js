@@ -1,9 +1,9 @@
-import { describe, it } from "@jest/globals";
-import { ElevenLabsClient, play, stream } from "../../src";
-import { Readable } from "node:stream";
+import crypto from "node:crypto";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import crypto from "node:crypto";
+import { Readable } from "node:stream";
+import { describe, it } from "@jest/globals";
+import { ElevenLabsClient, play } from "../../src";
 
 const IN_GITHUB = process.env.GITHUB_ACTIONS !== undefined;
 const DEFAULT_VOICE = "eLDc7xhWxG2FElT3kUTj";

@@ -2,21 +2,25 @@ import { EventEmitter } from "events";
 import WebSocket from "ws";
 import { ElevenLabsClient } from "../../../../Client";
 import { SDK_VERSION } from "../../../../version";
-import { AudioInterface } from "./AudioInterface";
+import type { AudioInterface } from "./AudioInterface";
 import { ClientTools } from "./ClientTools";
-import { ConversationInitiationData } from "./ConversationConfig";
+import type { ConversationInitiationData } from "./ConversationConfig";
 import {
     ClientToOrchestratorEvent,
-    UserMessageClientToOrchestratorEvent,
-    UserActivityClientToOrchestratorEvent,
-    ContextualUpdateClientToOrchestratorEvent,
-    ConversationInitiationClientDataEvent,
-    UserAudioChunkEvent,
-    PongEvent,
-    MultimodalMessageClientToOrchestratorEvent,
+    type ContextualUpdateClientToOrchestratorEvent,
+    type ConversationInitiationClientDataEvent,
+    type MultimodalMessageClientToOrchestratorEvent,
+    type PongEvent,
+    type UserActivityClientToOrchestratorEvent,
+    type UserAudioChunkEvent,
+    type UserMessageClientToOrchestratorEvent,
 } from "./events";
-import { WebSocketFactory, WebSocketInterface, DefaultWebSocketFactory } from "./interfaces/WebSocketInterface";
-import { ConversationClient } from "./interfaces/ConversationClient";
+import type { ConversationClient } from "./interfaces/ConversationClient";
+import {
+    DefaultWebSocketFactory,
+    type WebSocketFactory,
+    type WebSocketInterface,
+} from "./interfaces/WebSocketInterface";
 
 /**
  * Conversational AI session for Node.js.
@@ -246,7 +250,7 @@ export class Conversation extends EventEmitter {
             environment: this.config.environment,
         };
 
-        this.ws!.send(JSON.stringify(initEvent));
+        this.ws?.send(JSON.stringify(initEvent));
 
         // Set up audio input callback
         this.inputCallback = (audio: Buffer) => {
@@ -258,7 +262,7 @@ export class Conversation extends EventEmitter {
                 const audioEvent: UserAudioChunkEvent = {
                     user_audio_chunk: audio.toString("base64"),
                 };
-                this.ws!.send(JSON.stringify(audioEvent));
+                this.ws?.send(JSON.stringify(audioEvent));
             } catch (error) {
                 console.error("Error sending user audio chunk:", error);
                 this.endSession();
@@ -291,22 +295,24 @@ export class Conversation extends EventEmitter {
         const messageType = message.type;
 
         switch (messageType) {
-            case "conversation_initiation_metadata":
+            case "conversation_initiation_metadata": {
                 const event = message.conversation_initiation_metadata_event;
                 if (!this.conversationId) {
                     this.conversationId = event.conversation_id;
                     this.emit("conversation_started", this.conversationId);
                 }
                 break;
+            }
 
-            case "audio":
+            case "audio": {
                 const audioEvent = message.audio_event;
-                if (parseInt(audioEvent.event_id) <= this.lastInterruptId) {
+                if (parseInt(audioEvent.event_id, 10) <= this.lastInterruptId) {
                     return;
                 }
                 const audio = Buffer.from(audioEvent.audio_base_64, "base64");
                 this.audioInterface.output(audio);
                 break;
+            }
 
             case "agent_response":
                 if (this.callbackAgentResponse) {
@@ -332,26 +338,28 @@ export class Conversation extends EventEmitter {
                 }
                 break;
 
-            case "interruption":
+            case "interruption": {
                 const interruptionEvent = message.interruption_event;
-                this.lastInterruptId = parseInt(interruptionEvent.event_id);
+                this.lastInterruptId = parseInt(interruptionEvent.event_id, 10);
                 this.audioInterface.interrupt();
                 break;
+            }
 
-            case "ping":
+            case "ping": {
                 const pingEvent = message.ping_event;
                 const pongEvent: PongEvent = {
                     type: ClientToOrchestratorEvent.PONG,
                     event_id: pingEvent.event_id,
                 };
-                this.ws!.send(JSON.stringify(pongEvent));
+                this.ws?.send(JSON.stringify(pongEvent));
 
                 if (this.callbackLatencyMeasurement && pingEvent.ping_ms) {
-                    this.callbackLatencyMeasurement(parseInt(pingEvent.ping_ms));
+                    this.callbackLatencyMeasurement(parseInt(pingEvent.ping_ms, 10));
                 }
                 break;
+            }
 
-            case "client_tool_call":
+            case "client_tool_call": {
                 const toolCall = message.client_tool_call;
                 const toolName = toolCall.tool_name;
                 const parameters = {
@@ -365,6 +373,7 @@ export class Conversation extends EventEmitter {
                     }
                 });
                 break;
+            }
 
             default:
                 // Ignore unknown message types
