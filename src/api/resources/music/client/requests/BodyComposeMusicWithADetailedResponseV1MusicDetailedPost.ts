@@ -7,8 +7,8 @@ import type * as ElevenLabs from "../../../../index";
  *     {}
  */
 export interface BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
-    /** Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs. */
-    outputFormat?: ElevenLabs.AllowedOutputFormats;
+    /** Output format of the generated audio. Formatted as codec_sample_rate_bitrate. Use "auto" (the default) to let the API pick the best format for the selected model: mp3_44100_128 for v1 models and mp3_48000_192 for v2 models. */
+    outputFormat?: ElevenLabs.MusicComposeDetailedRequestOutputFormat;
     /** A simple text prompt to generate a song from. Cannot be used in conjunction with `composition_plan`. */
     prompt?: string;
     /** A detailed composition plan to guide music generation. Cannot be used in conjunction with `prompt`. */
@@ -21,9 +21,9 @@ export interface BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
     seed?: number;
     /** If true, guarantees that the generated song will be instrumental. If false, the song may or may not be instrumental depending on the `prompt`. Can only be used with `prompt`. */
     forceInstrumental?: boolean;
-    /** Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan`. When set to true, the model will precisely respect each section's `duration_ms` from the plan. When set to false, the model may adjust individual section durations which will generally lead to better generation quality and improved latency, while always preserving the total song duration from the plan. */
+    /** Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan` and only applies to `music_v1`; for `music_v2` section durations are always enforced and this is ignored. When false for `music_v1`, the model may adjust individual section durations for better quality and latency, while preserving the total song duration from the plan. */
     respectSectionsDurations?: boolean;
-    /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting feature. */
+    /** Whether to store the generated song for inpainting. */
     storeForInpainting?: boolean;
     /** Whether to return the timestamps of the words in the generated song. */
     withTimestamps?: boolean;

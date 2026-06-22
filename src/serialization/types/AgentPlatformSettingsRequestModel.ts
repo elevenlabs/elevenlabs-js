@@ -15,6 +15,7 @@ import { EvaluationSettingsInput } from "./EvaluationSettingsInput";
 import { GuardrailsV1Input } from "./GuardrailsV1Input";
 import { Llm } from "./Llm";
 import { PrivacyConfigInput } from "./PrivacyConfigInput";
+import { TopicDiscoverySettings } from "./TopicDiscoverySettings";
 import { WidgetConfig } from "./WidgetConfig";
 
 export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
@@ -42,6 +43,7 @@ export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
     privacy: PrivacyConfigInput.optional(),
     trustContext: core.serialization.property("trust_context", AgentTrustContext.optional()),
     analysisLlm: core.serialization.property("analysis_llm", Llm.optional()),
+    topicDiscovery: core.serialization.property("topic_discovery", TopicDiscoverySettings.optional()),
 });
 
 export declare namespace AgentPlatformSettingsRequestModel {
@@ -61,5 +63,6 @@ export declare namespace AgentPlatformSettingsRequestModel {
         privacy?: PrivacyConfigInput.Raw | null;
         trust_context?: AgentTrustContext.Raw | null;
         analysis_llm?: Llm.Raw | null;
+        topic_discovery?: TopicDiscoverySettings.Raw | null;
     }
 }

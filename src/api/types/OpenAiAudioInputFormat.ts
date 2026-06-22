@@ -3,6 +3,6 @@
 import type * as ElevenLabs from "../index";
 
 export interface OpenAiAudioInputFormat {
-    type?: ElevenLabs.AudioFormat;
+    type?: ElevenLabs.OpenAiAudioFormat;
     rate?: number;
 }

@@ -18,4 +18,6 @@ export interface BaseTurnConfig {
     /** When enabled, if VAD detects no speech, attempts to re-transcribe accumulated audio at turn timeout. Disables silence discount billing for affected turns. */
     retranscribeOnTurnTimeout?: boolean;
     turnModel?: ElevenLabs.TurnModel;
+    /** List of terms that should not trigger an interruption when spoken by the user (e.g. 'gotcha', 'understood'). Uses case-insensitive exact matching. */
+    interruptionIgnoreTerms?: string[];
 }

@@ -2,7 +2,4 @@
 
 import type * as ElevenLabs from "../../../index";
 
-/**
- * A detailed composition plan to guide music generation. Cannot be used in conjunction with `prompt`.
- */
 export type BodyComposeMusicV1MusicPostCompositionPlan = ElevenLabs.MusicPrompt | ElevenLabs.CompositionPlan;

@@ -116,11 +116,13 @@ describe("ConversationsClient", () => {
             search: "search",
             conversationInitiationSource: "unknown",
             textOnly: true,
+            conversationProductType: "agents",
             branchId: "branch_id",
             topicIds: ["topic_ids"],
             excludeStatuses: ["initiated"],
             tagIds: ["tag_ids"],
             workflowNodeEnteredId: "workflow_node_entered_id",
+            terminationReasons: ["termination_reasons"],
         });
         expect(response).toEqual({
             conversations: [

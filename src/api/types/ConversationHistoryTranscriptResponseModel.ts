@@ -20,6 +20,7 @@ export interface ConversationHistoryTranscriptResponseModel {
     sourceMedium?: ElevenLabs.ChatSourceMedium;
     sourceEventId?: number;
     usedStaticKbDocumentIds?: string[];
+    userIdentifier?: string;
     fileInput?: ElevenLabs.ConversationHistoryTranscriptFileInputResponseModel;
     contextualUpdateInfo?: ElevenLabs.ContextualUpdateInfo;
 }

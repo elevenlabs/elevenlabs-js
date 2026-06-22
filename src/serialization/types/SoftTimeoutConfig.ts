@@ -18,6 +18,7 @@ export const SoftTimeoutConfig: core.serialization.ObjectSchema<
         "use_llm_generated_message",
         core.serialization.boolean().optional(),
     ),
+    randomizeFillers: core.serialization.property("randomize_fillers", core.serialization.boolean().optional()),
     maxSoftTimeoutsPerGeneration: core.serialization.property(
         "max_soft_timeouts_per_generation",
         core.serialization.number().optional(),
@@ -34,6 +35,7 @@ export declare namespace SoftTimeoutConfig {
         message?: string | null;
         additional_soft_timeout_messages?: string[] | null;
         use_llm_generated_message?: boolean | null;
+        randomize_fillers?: boolean | null;
         max_soft_timeouts_per_generation?: number | null;
         llm_generated_message_prompt_override?: string | null;
     }

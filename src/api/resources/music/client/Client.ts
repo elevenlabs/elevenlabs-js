@@ -157,7 +157,9 @@ export class MusicClient {
         const _queryParams: Record<string, unknown> = {
             output_format:
                 outputFormat != null
-                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    ? serializers.MusicComposeRequestOutputFormat.jsonOrThrow(outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
                     : undefined,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -229,7 +231,9 @@ export class MusicClient {
         const _queryParams: Record<string, unknown> = {
             output_format:
                 outputFormat != null
-                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    ? serializers.MusicComposeDetailedRequestOutputFormat.jsonOrThrow(outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
                     : undefined,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -303,7 +307,9 @@ export class MusicClient {
         const _queryParams: Record<string, unknown> = {
             output_format:
                 outputFormat != null
-                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    ? serializers.MusicStreamRequestOutputFormat.jsonOrThrow(outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
                     : undefined,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -358,7 +364,7 @@ export class MusicClient {
     }
 
     /**
-     * Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature. Price for uploading is the same as the one for song generation. All uploaded content gets inspected for copyright infringement. If copyrighted content is detected, half of the request cost is still charged.
+     * Upload a music file to be later used for inpainting. Price for uploading is the same as the one for song generation. All uploaded content gets inspected for copyright infringement. If copyrighted content is detected, half of the request cost is still charged.
      *
      * @param {ElevenLabs.BodyUploadMusicV1MusicUploadPost} request
      * @param {MusicClient.RequestOptions} requestOptions - Request-specific configuration.

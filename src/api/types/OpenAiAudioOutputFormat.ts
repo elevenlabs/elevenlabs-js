@@ -3,5 +3,5 @@
 import type * as ElevenLabs from "../index";
 
 export interface OpenAiAudioOutputFormat {
-    type?: ElevenLabs.AudioFormat;
+    type?: ElevenLabs.OpenAiAudioFormat;
 }

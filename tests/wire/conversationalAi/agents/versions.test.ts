@@ -21,6 +21,7 @@ describe("VersionsClient", () => {
                 merged_into_branch_id: "merged_into_branch_id",
                 merged_from_branch_id: "merged_from_branch_id",
                 merged_from_version_id: "merged_from_version_id",
+                rebased_from_version_id: "rebased_from_version_id",
             },
             access_info: {
                 is_creator: true,
@@ -57,6 +58,7 @@ describe("VersionsClient", () => {
                 mergedIntoBranchId: "merged_into_branch_id",
                 mergedFromBranchId: "merged_from_branch_id",
                 mergedFromVersionId: "merged_from_version_id",
+                rebasedFromVersionId: "rebased_from_version_id",
             },
             accessInfo: {
                 isCreator: true,

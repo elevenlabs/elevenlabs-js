@@ -54,6 +54,7 @@ export class MessagesClient {
      *         summaryMode: "exclude",
      *         conversationInitiationSource: "unknown",
      *         textOnly: true,
+     *         conversationProductType: "agents",
      *         branchId: "branch_id",
      *         topicIds: ["topic_ids"],
      *         sortBy: "search_score",
@@ -93,6 +94,7 @@ export class MessagesClient {
             summaryMode,
             conversationInitiationSource,
             textOnly,
+            conversationProductType,
             branchId,
             topicIds,
             sortBy,
@@ -136,6 +138,12 @@ export class MessagesClient {
                       })
                     : undefined,
             text_only: textOnly,
+            conversation_product_type:
+                conversationProductType != null
+                    ? serializers.ConversationProduct.jsonOrThrow(conversationProductType, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
             branch_id: branchId,
             topic_ids: topicIds,
             sort_by:

@@ -94,6 +94,7 @@ describe("SpeechEngineClient", () => {
                 speculative_turn: true,
                 retranscribe_on_turn_timeout: true,
                 turn_model: "turn_v2",
+                interruption_ignore_terms: ["interruption_ignore_terms"],
             },
             conversation: {
                 text_only: true,
@@ -102,6 +103,7 @@ describe("SpeechEngineClient", () => {
                 file_input: { enabled: true, max_files_per_conversation: 1 },
                 monitoring_enabled: true,
                 monitoring_events: ["conversation_initiation_metadata"],
+                background_sound: { source_type: "preset", source_id: "office2", volume: 1.1, crossfade_loop: true },
                 source_attribution: true,
             },
             privacy: {
@@ -199,6 +201,7 @@ describe("SpeechEngineClient", () => {
                 speculativeTurn: true,
                 retranscribeOnTurnTimeout: true,
                 turnModel: "turn_v2",
+                interruptionIgnoreTerms: ["interruption_ignore_terms"],
             },
             conversation: {
                 textOnly: true,
@@ -210,6 +213,12 @@ describe("SpeechEngineClient", () => {
                 },
                 monitoringEnabled: true,
                 monitoringEvents: ["conversation_initiation_metadata"],
+                backgroundSound: {
+                    sourceType: "preset",
+                    sourceId: "office2",
+                    volume: 1.1,
+                    crossfadeLoop: true,
+                },
                 sourceAttribution: true,
             },
             privacy: {
@@ -289,6 +298,7 @@ describe("SpeechEngineClient", () => {
                 speculative_turn: true,
                 retranscribe_on_turn_timeout: true,
                 turn_model: "turn_v2",
+                interruption_ignore_terms: ["interruption_ignore_terms"],
             },
             conversation: {
                 text_only: true,
@@ -297,6 +307,7 @@ describe("SpeechEngineClient", () => {
                 file_input: { enabled: true, max_files_per_conversation: 1 },
                 monitoring_enabled: true,
                 monitoring_events: ["conversation_initiation_metadata"],
+                background_sound: { source_type: "preset", source_id: "office2", volume: 1.1, crossfade_loop: true },
                 source_attribution: true,
             },
             privacy: {
@@ -389,6 +400,7 @@ describe("SpeechEngineClient", () => {
                 speculativeTurn: true,
                 retranscribeOnTurnTimeout: true,
                 turnModel: "turn_v2",
+                interruptionIgnoreTerms: ["interruption_ignore_terms"],
             },
             conversation: {
                 textOnly: true,
@@ -400,6 +412,12 @@ describe("SpeechEngineClient", () => {
                 },
                 monitoringEnabled: true,
                 monitoringEvents: ["conversation_initiation_metadata"],
+                backgroundSound: {
+                    sourceType: "preset",
+                    sourceId: "office2",
+                    volume: 1.1,
+                    crossfadeLoop: true,
+                },
                 sourceAttribution: true,
             },
             privacy: {
@@ -494,6 +512,7 @@ describe("SpeechEngineClient", () => {
                 speculative_turn: true,
                 retranscribe_on_turn_timeout: true,
                 turn_model: "turn_v2",
+                interruption_ignore_terms: ["interruption_ignore_terms"],
             },
             conversation: {
                 text_only: true,
@@ -502,6 +521,7 @@ describe("SpeechEngineClient", () => {
                 file_input: { enabled: true, max_files_per_conversation: 1 },
                 monitoring_enabled: true,
                 monitoring_events: ["conversation_initiation_metadata"],
+                background_sound: { source_type: "preset", source_id: "office2", volume: 1.1, crossfade_loop: true },
                 source_attribution: true,
             },
             privacy: {
@@ -595,6 +615,7 @@ describe("SpeechEngineClient", () => {
                 speculativeTurn: true,
                 retranscribeOnTurnTimeout: true,
                 turnModel: "turn_v2",
+                interruptionIgnoreTerms: ["interruption_ignore_terms"],
             },
             conversation: {
                 textOnly: true,
@@ -606,6 +627,12 @@ describe("SpeechEngineClient", () => {
                 },
                 monitoringEnabled: true,
                 monitoringEvents: ["conversation_initiation_metadata"],
+                backgroundSound: {
+                    sourceType: "preset",
+                    sourceId: "office2",
+                    volume: 1.1,
+                    crossfadeLoop: true,
+                },
                 sourceAttribution: true,
             },
             privacy: {
