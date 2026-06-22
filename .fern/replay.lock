@@ -30,14 +30,20 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-typescript-sdk: 3.71.4
-current_generation: 1efa29310047ae0da58846785a41722a6e7db756
+  - commit_sha: b44528a817517b3848dad39c433e9efcc96cd798
+    tree_hash: 3b5c58dcbc17c578575f68fb4be7e94459622db6
+    timestamp: 2026-06-22T13:19:23.964Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.71.4
+current_generation: b44528a817517b3848dad39c433e9efcc96cd798
 patches:
   - id: patch-f50f1558
     content_hash: sha256:5a09c3db02b795ab544221e13bf2681e7f9bb43c07e8cd96ac063a405dc3a2c6
     original_commit: f50f1558f741e331dd3949ded57771c012ef27ab
     original_message: Add missing methods and test (#399)
     original_author: Paul Asjes <paul.asjes@elevenlabs.io>
-    base_generation: 1efa29310047ae0da58846785a41722a6e7db756
+    base_generation: b44528a817517b3848dad39c433e9efcc96cd798
     files:
       - tests/unit/wrapper/music.test.ts
     patch_content: |
@@ -88,3 +94,179 @@ patches:
             });
         });
     user_owned: true
+  - id: patch-5e8b62bb
+    content_hash: sha256:df36a21a22d422702ab3257fdac64e0036dfc9c5c1e2f5ecca6845b8a79d261b
+    original_commit: 5e8b62bbdffe9a99d3772e7fa78f51e047ece96e
+    original_message: Restore optional values in DynamicVariablesConfig records (2.53.1) (#411)
+    original_author: Paul Asjes <paul.asjes@elevenlabs.io>
+    base_generation: d4eea0709bf4a9f1f99ce9d2e47b6682473a6d63
+    files:
+      - package.json
+      - src/BaseClient.ts
+      - src/version.ts
+    patch_content: |
+      diff --git a/package.json b/package.json
+      index 9874694e..fd1ba9d8 100644
+      --- a/package.json
+      +++ b/package.json
+      @@ -1,6 +1,6 @@
+       {
+           "name": "@elevenlabs/elevenlabs-js",
+      -    "version": "2.53.0",
+      +    "version": "2.53.1",
+           "private": false,
+           "repository": {
+               "type": "git",
+      diff --git a/src/BaseClient.ts b/src/BaseClient.ts
+      index 06344fd1..78308afb 100644
+      --- a/src/BaseClient.ts
+      +++ b/src/BaseClient.ts
+      @@ -49,8 +49,8 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
+               {
+                   "X-Fern-Language": "JavaScript",
+                   "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+      -            "X-Fern-SDK-Version": "2.53.0",
+      -            "User-Agent": "@elevenlabs/elevenlabs-js/2.53.0",
+      +            "X-Fern-SDK-Version": "2.53.1",
+      +            "User-Agent": "@elevenlabs/elevenlabs-js/2.53.1",
+                   "X-Fern-Runtime": core.RUNTIME.type,
+                   "X-Fern-Runtime-Version": core.RUNTIME.version,
+                   "xi-api-key": options?.apiKey,
+      diff --git a/src/version.ts b/src/version.ts
+      index daf0f200..a4fa5475 100644
+      --- a/src/version.ts
+      +++ b/src/version.ts
+      @@ -1 +1 @@
+      -export const SDK_VERSION = "2.53.0";
+      +export const SDK_VERSION = "2.53.1";
+    theirs_snapshot:
+      package.json: |
+        {
+            "name": "@elevenlabs/elevenlabs-js",
+            "version": "2.53.1",
+            "private": false,
+            "repository": {
+                "type": "git",
+                "url": "git+https://github.com/elevenlabs/elevenlabs-js.git"
+            },
+            "license": "MIT",
+            "main": "./index.js",
+            "types": "./index.d.ts",
+            "scripts": {
+                "format": "biome format --write --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+                "format:check": "biome format --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+                "lint": "biome lint --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+                "lint:fix": "biome lint --fix --unsafe --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+                "check": "biome check --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+                "check:fix": "biome check --fix --unsafe --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+                "build": "tsc",
+                "prepack": "cp -rv dist/. .",
+                "test": "jest --config jest.config.mjs",
+                "test:unit": "jest --selectProjects unit",
+                "test:wire": "jest --selectProjects wire"
+            },
+            "dependencies": {
+                "node-fetch": "^2.7.0",
+                "command-exists": "^1.2.9",
+                "ws": "^8.18.3"
+            },
+            "devDependencies": {
+                "@types/node-fetch": "^2.6.12",
+                "webpack": "^5.105.4",
+                "ts-loader": "^9.5.4",
+                "jest": "^29.7.0",
+                "@jest/globals": "^29.7.0",
+                "@types/jest": "^29.5.5",
+                "ts-jest": "^29.1.1",
+                "jest-environment-jsdom": "^29.7.0",
+                "msw": "2.11.2",
+                "@types/node": "^20.0.0",
+                "typescript": "~5.9.3",
+                "@biomejs/biome": "2.4.10",
+                "@types/command-exists": "^1.2.3",
+                "@types/ws": "^8.18.1"
+            },
+            "browser": {
+                "fs": false,
+                "os": false,
+                "path": false,
+                "stream": false,
+                "crypto": false,
+                "command-exists": false
+            },
+            "packageManager": "yarn@1.22.22",
+            "engines": {
+                "node": ">=18.0.0"
+            },
+            "sideEffects": false
+        }
+      src/BaseClient.ts: |
+        // This file was auto-generated by Fern from our API Definition.
+
+        import * as core from "./core";
+        import { mergeHeaders } from "./core/headers";
+        import type * as environments from "./environments";
+
+        export interface BaseClientOptions {
+            environment?: core.Supplier<environments.ElevenLabsEnvironment | string>;
+            /** Specify a custom URL to connect the client to. */
+            baseUrl?: core.Supplier<string>;
+            /** Override the xi-api-key header */
+            apiKey?: core.Supplier<string | undefined>;
+            /** Additional headers to include in requests. */
+            headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
+            /** The default maximum time to wait for a response in seconds. */
+            timeoutInSeconds?: number;
+            /** The default number of times to retry the request. Defaults to 2. */
+            maxRetries?: number;
+            /** Provide a custom fetch implementation. Useful for platforms that don't have a built-in fetch or need a custom implementation. */
+            fetch?: typeof fetch;
+            fetcher?: core.FetchFunction;
+            /** Configure logging for the client. */
+            logging?: core.logging.LogConfig | core.logging.Logger;
+        }
+
+        export interface BaseRequestOptions {
+            /** The maximum time to wait for a response in seconds. */
+            timeoutInSeconds?: number;
+            /** The number of times to retry the request. Defaults to 2. */
+            maxRetries?: number;
+            /** A hook to abort the request. */
+            abortSignal?: AbortSignal;
+            /** Override the xi-api-key header */
+            apiKey?: string | undefined;
+            /** Additional query string parameters to include in the request. */
+            queryParams?: Record<string, unknown>;
+            /** Additional headers to include in the request. */
+            headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
+        }
+
+        export type NormalizedClientOptions<T extends BaseClientOptions = BaseClientOptions> = T & {
+            logging: core.logging.Logger;
+        };
+
+        export function normalizeClientOptions<T extends BaseClientOptions = BaseClientOptions>(
+            options: T,
+        ): NormalizedClientOptions<T> {
+            const headers = mergeHeaders(
+                {
+                    "X-Fern-Language": "JavaScript",
+                    "X-Fern-SDK-Name": "@elevenlabs/elevenlabs-js",
+                    "X-Fern-SDK-Version": "2.53.1",
+                    "User-Agent": "@elevenlabs/elevenlabs-js/2.53.1",
+                    "X-Fern-Runtime": core.RUNTIME.type,
+                    "X-Fern-Runtime-Version": core.RUNTIME.version,
+                    "xi-api-key": options?.apiKey,
+                },
+                options?.headers,
+            );
+
+            return {
+                ...options,
+                logging: core.logging.createLogger(options?.logging),
+                headers,
+            } as NormalizedClientOptions<T>;
+        }
+      src/version.ts: |
+        export const SDK_VERSION = "2.53.1";
+    status: unresolved
