@@ -6,7 +6,7 @@ export interface ResponseUnitTestModel {
     /** Metadata of a conversation this test was created from (if applicable). */
     fromConversationMetadata?: ElevenLabs.TestFromConversationMetadataOutput;
     /** Dynamic variables to replace in the agent config during testing */
-    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeOutput>;
+    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeOutput | undefined>;
     chatHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
     /** Simulate the test as if the conversation originated from this channel. */
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;

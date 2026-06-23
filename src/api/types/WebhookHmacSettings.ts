@@ -11,5 +11,5 @@ export interface WebhookHmacSettings {
     /** The HTTPS callback URL that will be called when this webhook is triggered */
     webhookUrl: string;
     /** Optional custom request headers to include with each webhook delivery */
-    requestHeaders?: Record<string, string>;
+    requestHeaders?: Record<string, string | undefined>;
 }

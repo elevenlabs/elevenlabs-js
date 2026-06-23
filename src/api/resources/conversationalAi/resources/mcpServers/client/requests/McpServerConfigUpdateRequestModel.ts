@@ -24,7 +24,10 @@ export interface McpServerConfigUpdateRequestModel {
     /** The maximum time in seconds to wait for each MCP tool call to complete. */
     responseTimeoutSecs?: number;
     /** The headers to include in requests to the MCP server */
-    requestHeaders?: Record<string, ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModelRequestHeadersValue>;
+    requestHeaders?: Record<
+        string,
+        ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModelRequestHeadersValue | undefined
+    >;
     /** Whether to disable HTTP compression for this MCP server */
     disableCompression?: boolean;
     /** Optional secret token for authentication with this MCP server */

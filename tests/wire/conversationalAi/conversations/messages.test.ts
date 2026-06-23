@@ -56,6 +56,7 @@ describe("MessagesClient", () => {
             summaryMode: "exclude",
             conversationInitiationSource: "unknown",
             textOnly: true,
+            conversationProductType: "agents",
             branchId: "branch_id",
             topicIds: ["topic_ids"],
             sortBy: "search_score",

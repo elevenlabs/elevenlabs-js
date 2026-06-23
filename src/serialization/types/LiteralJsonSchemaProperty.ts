@@ -15,6 +15,10 @@ export const LiteralJsonSchemaProperty: core.serialization.ObjectSchema<
     enum: core.serialization.list(core.serialization.string()).optional(),
     isSystemProvided: core.serialization.property("is_system_provided", core.serialization.boolean().optional()),
     dynamicVariable: core.serialization.property("dynamic_variable", core.serialization.string().optional()),
+    allowedValuesDynamicVariable: core.serialization.property(
+        "allowed_values_dynamic_variable",
+        core.serialization.string().optional(),
+    ),
     constantValue: core.serialization.property("constant_value", LiteralJsonSchemaPropertyConstantValue.optional()),
     isOmitted: core.serialization.property("is_omitted", core.serialization.boolean().optional()),
 });
@@ -26,6 +30,7 @@ export declare namespace LiteralJsonSchemaProperty {
         enum?: string[] | null;
         is_system_provided?: boolean | null;
         dynamic_variable?: string | null;
+        allowed_values_dynamic_variable?: string | null;
         constant_value?: LiteralJsonSchemaPropertyConstantValue.Raw | null;
         is_omitted?: boolean | null;
     }

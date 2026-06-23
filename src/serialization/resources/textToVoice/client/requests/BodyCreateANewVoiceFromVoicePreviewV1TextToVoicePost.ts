@@ -11,7 +11,7 @@ export const BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost: core.serializ
     voiceName: core.serialization.property("voice_name", core.serialization.string()),
     voiceDescription: core.serialization.property("voice_description", core.serialization.string()),
     generatedVoiceId: core.serialization.property("generated_voice_id", core.serialization.string()),
-    labels: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    labels: core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
     playedNotSelectedVoiceIds: core.serialization.property(
         "played_not_selected_voice_ids",
         core.serialization.list(core.serialization.string()).optional(),
@@ -23,7 +23,7 @@ export declare namespace BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost {
         voice_name: string;
         voice_description: string;
         generated_voice_id: string;
-        labels?: Record<string, string | null> | null;
+        labels?: Record<string, string | null | undefined> | null;
         played_not_selected_voice_ids?: string[] | null;
     }
 }

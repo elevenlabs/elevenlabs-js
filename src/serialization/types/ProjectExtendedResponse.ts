@@ -74,7 +74,7 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     captionStyle: core.serialization.property("caption_style", CaptionStyleModel.optional()),
     captionStyleTemplateOverrides: core.serialization.property(
         "caption_style_template_overrides",
-        core.serialization.record(core.serialization.string(), CaptionStyleModel).optional(),
+        core.serialization.record(core.serialization.string(), CaptionStyleModel.optional()).optional(),
     ),
     publicShareId: core.serialization.property("public_share_id", core.serialization.string().optional()),
     aspectRatio: core.serialization.property("aspect_ratio", ProjectExtendedResponseModelAspectRatio.optional()),
@@ -138,7 +138,7 @@ export declare namespace ProjectExtendedResponse {
         chapters_enabled?: boolean | null;
         captions_enabled?: boolean | null;
         caption_style?: CaptionStyleModel.Raw | null;
-        caption_style_template_overrides?: Record<string, CaptionStyleModel.Raw | null> | null;
+        caption_style_template_overrides?: Record<string, CaptionStyleModel.Raw | null | undefined> | null;
         public_share_id?: string | null;
         aspect_ratio?: ProjectExtendedResponseModelAspectRatio.Raw | null;
         agent_settings?: StudioAgentSettingsModel.Raw | null;

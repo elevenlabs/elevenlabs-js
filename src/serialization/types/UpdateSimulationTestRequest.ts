@@ -20,7 +20,7 @@ export const UpdateSimulationTestRequest: core.serialization.ObjectSchema<
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeInput).optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeInput.optional()).optional(),
     ),
     chatHistory: core.serialization.property(
         "chat_history",
@@ -31,6 +31,10 @@ export const UpdateSimulationTestRequest: core.serialization.ObjectSchema<
         ConversationInitiationSource.optional(),
     ),
     successCondition: core.serialization.property("success_condition", core.serialization.string().optional()),
+    successConditions: core.serialization.property(
+        "success_conditions",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     simulationScenario: core.serialization.property("simulation_scenario", core.serialization.string().optional()),
     simulationMaxTurns: core.serialization.property("simulation_max_turns", core.serialization.number().optional()),
     simulationEnvironment: core.serialization.property(
@@ -47,10 +51,11 @@ export const UpdateSimulationTestRequest: core.serialization.ObjectSchema<
 export declare namespace UpdateSimulationTestRequest {
     export interface Raw {
         from_conversation_metadata?: TestFromConversationMetadataInput.Raw | null;
-        dynamic_variables?: Record<string, DynamicVariableValueTypeInput.Raw | null> | null;
+        dynamic_variables?: Record<string, DynamicVariableValueTypeInput.Raw | null | undefined> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelInput.Raw[] | null;
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
         success_condition?: string | null;
+        success_conditions?: string[] | null;
         simulation_scenario?: string | null;
         simulation_max_turns?: number | null;
         simulation_environment?: string | null;

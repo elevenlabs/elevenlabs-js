@@ -2,4 +2,4 @@
 
 import type * as ElevenLabs from "../index";
 
-export type CompositionPlanChunksItem = ElevenLabs.GenerationChunk | ElevenLabs.AudioRefChunk;
+export type CompositionPlanChunksItem = ElevenLabs.GenerationChunkInput | ElevenLabs.AudioRefChunk;

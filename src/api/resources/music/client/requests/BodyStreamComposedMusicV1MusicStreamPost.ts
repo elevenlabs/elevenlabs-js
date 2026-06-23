@@ -7,8 +7,8 @@ import type * as ElevenLabs from "../../../../index";
  *     {}
  */
 export interface BodyStreamComposedMusicV1MusicStreamPost {
-    /** Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs. */
-    outputFormat?: ElevenLabs.AllowedOutputFormats;
+    /** Output format of the generated audio. Formatted as codec_sample_rate_bitrate. Use "auto" (the default) to let the API pick the best format for the selected model: mp3_44100_128 for v1 models and mp3_48000_192 for v2 models. */
+    outputFormat?: ElevenLabs.MusicStreamRequestOutputFormat;
     /** A simple text prompt to generate a song from. Cannot be used in conjunction with `composition_plan`. */
     prompt?: string;
     /** A detailed composition plan to guide music generation. Cannot be used in conjunction with `prompt`. */
@@ -21,6 +21,6 @@ export interface BodyStreamComposedMusicV1MusicStreamPost {
     seed?: number;
     /** If true, guarantees that the generated song will be instrumental. If false, the song may or may not be instrumental depending on the `prompt`. Can only be used with `prompt`. */
     forceInstrumental?: boolean;
-    /** Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting feature. */
+    /** Whether to store the generated song for inpainting. */
     storeForInpainting?: boolean;
 }

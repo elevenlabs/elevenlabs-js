@@ -12,4 +12,5 @@ export interface WorkspaceGroupResponseModel {
     characterCount?: number;
     scimExternalId?: string;
     isScimSynced?: boolean;
+    scimFrozen?: boolean;
 }

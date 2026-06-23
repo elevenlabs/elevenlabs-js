@@ -16,7 +16,7 @@ export interface AgentConfig {
     /** If non-empty, the message the agent will send when max conversation duration is reached. */
     maxConversationDurationMessage?: string;
     /** Per-channel response behavior overrides for text conversations. Built-in channel defaults apply when unset. */
-    textBehaviorOverrides?: Record<string, ElevenLabs.BehaviorOverride>;
+    textBehaviorOverrides?: Record<string, ElevenLabs.BehaviorOverride | undefined>;
     /** The prompt for the agent */
     prompt?: ElevenLabs.PromptAgentApiModelOutput;
 }

@@ -16,6 +16,7 @@ import { GuardrailsV1Output } from "./GuardrailsV1Output";
 import { Llm } from "./Llm";
 import { PrivacyConfigOutput } from "./PrivacyConfigOutput";
 import { SafetyResponseModel } from "./SafetyResponseModel";
+import { TopicDiscoverySettings } from "./TopicDiscoverySettings";
 import { WidgetConfig } from "./WidgetConfig";
 
 export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema<
@@ -43,6 +44,7 @@ export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema
     privacy: PrivacyConfigOutput.optional(),
     trustContext: core.serialization.property("trust_context", AgentTrustContext.optional()),
     analysisLlm: core.serialization.property("analysis_llm", Llm.optional()),
+    topicDiscovery: core.serialization.property("topic_discovery", TopicDiscoverySettings.optional()),
     safety: SafetyResponseModel.optional(),
 });
 
@@ -63,6 +65,7 @@ export declare namespace AgentPlatformSettingsResponseModel {
         privacy?: PrivacyConfigOutput.Raw | null;
         trust_context?: AgentTrustContext.Raw | null;
         analysis_llm?: Llm.Raw | null;
+        topic_discovery?: TopicDiscoverySettings.Raw | null;
         safety?: SafetyResponseModel.Raw | null;
     }
 }

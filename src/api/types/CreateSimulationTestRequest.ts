@@ -6,12 +6,14 @@ export interface CreateSimulationTestRequest {
     /** Metadata of a conversation this test was created from (if applicable). */
     fromConversationMetadata?: ElevenLabs.TestFromConversationMetadataInput;
     /** Dynamic variables to replace in the agent config during testing */
-    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeInput>;
+    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeInput | undefined>;
     chatHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelInput[];
     /** Simulate the test as if the conversation originated from this channel. */
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
-    /** A prompt that evaluates whether the agent's response is successful. Should return True or False. */
+    /** Deprecated legacy single success criterion. Use success_conditions instead. At least one of success_condition or success_conditions is required. */
     successCondition?: string;
+    /** List of prompts that evaluate whether the simulation was successful. If provided, all criteria are evaluated and merged into a final result. Capped at the maximum number of evaluation criteria. */
+    successConditions?: string[];
     /** Description of the simulation scenario and user persona for simulation tests. */
     simulationScenario?: string;
     /** Maximum number of conversation turns for simulation tests. */

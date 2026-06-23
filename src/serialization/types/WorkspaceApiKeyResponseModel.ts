@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { LockReason } from "./LockReason";
 import { PermissionType } from "./PermissionType";
 
 export const WorkspaceApiKeyResponseModel: core.serialization.ObjectSchema<
@@ -16,12 +17,17 @@ export const WorkspaceApiKeyResponseModel: core.serialization.ObjectSchema<
     createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number().optional()),
     isDisabled: core.serialization.property("is_disabled", core.serialization.boolean().optional()),
     permissions: core.serialization.list(PermissionType).optional(),
+    disableReason: core.serialization.property("disable_reason", LockReason.optional()),
     characterLimit: core.serialization.property("character_limit", core.serialization.number().optional()),
     characterCount: core.serialization.property("character_count", core.serialization.number().optional()),
     hashedXiApiKey: core.serialization.property("hashed_xi_api_key", core.serialization.string()),
     allowedIps: core.serialization.property(
         "allowed_ips",
         core.serialization.list(core.serialization.string()).optional(),
+    ),
+    thirdPartyDisableAllowed: core.serialization.property(
+        "third_party_disable_allowed",
+        core.serialization.boolean().optional(),
     ),
 });
 
@@ -34,9 +40,11 @@ export declare namespace WorkspaceApiKeyResponseModel {
         created_at_unix?: number | null;
         is_disabled?: boolean | null;
         permissions?: PermissionType.Raw[] | null;
+        disable_reason?: LockReason.Raw | null;
         character_limit?: number | null;
         character_count?: number | null;
         hashed_xi_api_key: string;
         allowed_ips?: string[] | null;
+        third_party_disable_allowed?: boolean | null;
     }
 }

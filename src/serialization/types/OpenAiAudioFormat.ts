@@ -4,9 +4,11 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 
-export const AudioFormat: core.serialization.Schema<serializers.AudioFormat.Raw, ElevenLabs.AudioFormat> =
-    core.serialization.enum_(["audio/pcm", "audio/pcmu", "audio/pcma"]);
+export const OpenAiAudioFormat: core.serialization.Schema<
+    serializers.OpenAiAudioFormat.Raw,
+    ElevenLabs.OpenAiAudioFormat
+> = core.serialization.enum_(["audio/pcm", "audio/pcmu", "audio/pcma"]);
 
-export declare namespace AudioFormat {
+export declare namespace OpenAiAudioFormat {
     export type Raw = "audio/pcm" | "audio/pcmu" | "audio/pcma";
 }

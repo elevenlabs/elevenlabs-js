@@ -192,6 +192,7 @@ describe("AnalysisClient", () => {
                     source_medium: "audio",
                     source_event_id: 1,
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
+                    user_identifier: "user_identifier",
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -483,6 +484,7 @@ describe("AnalysisClient", () => {
                     sourceMedium: "audio",
                     sourceEventId: 1,
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
+                    userIdentifier: "user_identifier",
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",
@@ -689,6 +691,7 @@ describe("AnalysisClient", () => {
                     source_medium: "audio",
                     source_event_id: 1,
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
+                    user_identifier: "user_identifier",
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -983,6 +986,7 @@ describe("AnalysisClient", () => {
                     sourceMedium: "audio",
                     sourceEventId: 1,
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
+                    userIdentifier: "user_identifier",
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",

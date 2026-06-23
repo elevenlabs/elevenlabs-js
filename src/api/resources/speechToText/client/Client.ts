@@ -31,7 +31,7 @@ export class SpeechToTextClient {
     }
 
     /**
-     * Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned. Otherwise, returns a single transcript. The optional webhook_metadata parameter allows you to attach custom data that will be included in webhook responses for request correlation and tracking.
+     * Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned; set multichannel_output_style='combined' to instead receive a single transcript with all channels merged and sorted by time. Otherwise, returns a single transcript. The optional webhook_metadata parameter allows you to attach custom data that will be included in webhook responses for request correlation and tracking.
      *
      * @param {ElevenLabs.BodySpeechToTextV1SpeechToTextPost} request
      * @param {SpeechToTextClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -140,6 +140,16 @@ export class SpeechToTextClient {
             _body.append("use_multi_channel", request.useMultiChannel?.toString());
         }
 
+        if (request.multichannelOutputStyle != null) {
+            _body.append(
+                "multichannel_output_style",
+                serializers.SpeechToTextConvertRequestMultichannelOutputStyle.jsonOrThrow(
+                    request.multichannelOutputStyle,
+                    { unrecognizedObjectKeys: "strip" },
+                ),
+            );
+        }
+
         if (request.webhookMetadata != null) {
             _body.append(
                 "webhook_metadata",
@@ -207,11 +217,7 @@ export class SpeechToTextClient {
             ),
             method: "POST",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

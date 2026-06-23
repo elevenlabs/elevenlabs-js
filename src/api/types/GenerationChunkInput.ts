@@ -2,7 +2,7 @@
 
 import type * as ElevenLabs from "../index";
 
-export interface GenerationChunk {
+export interface GenerationChunkInput {
     /** The text config to be generated for this chunk. Can contain section name in square brackets, e.g. [Verse 1], lyrics lines, and inline directions in curly braces, e.g. {scratching}. */
     text: string;
     /** The duration of the chunk in milliseconds. Must be between 3000ms and 120000ms. */
@@ -12,9 +12,9 @@ export interface GenerationChunk {
     /** The styles and musical directions that should not be present in this chunk. Use English language for best results. Leaving empty is a good default, only use this field if you want to explicitly avoid a particular style or direction. */
     negativeStyles?: string[];
     /** How much the model adheres to the context of its surrounding chunks. Low adherence means the model can deviate from the context and be more creative. High adherence means the model will be more consistent with the context. */
-    contextAdherence?: ElevenLabs.GenerationChunkContextAdherence;
+    contextAdherence?: ElevenLabs.GenerationChunkInputContextAdherence;
     /** The audio reference to condition the generation on. The first chunk is the most important as it will influence the generation of all subsequent chunks. Thus, if you want to apply conditioning to the entire song, start conditioning from the first chunk. */
     conditioningRef?: ElevenLabs.AudioRefChunk;
     /** How strongly the model adheres to the conditioning reference. Low strength means the model will be more creative and deviate from the reference. High strength means the model will be more consistent with the reference. */
-    conditionStrength?: ElevenLabs.GenerationChunkConditionStrength;
+    conditionStrength?: ElevenLabs.GenerationChunkInputConditionStrength;
 }

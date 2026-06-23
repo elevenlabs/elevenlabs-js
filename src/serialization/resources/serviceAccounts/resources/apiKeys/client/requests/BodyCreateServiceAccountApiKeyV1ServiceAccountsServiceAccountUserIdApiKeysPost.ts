@@ -16,6 +16,10 @@ export const BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserId
         "allowed_ips",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    thirdPartyDisableAllowed: core.serialization.property(
+        "third_party_disable_allowed",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysPost {
@@ -24,5 +28,6 @@ export declare namespace BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceA
         permissions: BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysPostPermissions.Raw;
         character_limit?: number | null;
         allowed_ips?: string[] | null;
+        third_party_disable_allowed?: boolean | null;
     }
 }

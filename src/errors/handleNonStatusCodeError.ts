@@ -22,14 +22,11 @@ export function handleNonStatusCodeError(
                 rawResponse: rawResponse,
             });
         case "timeout":
-            throw new errors.ElevenLabsTimeoutError(`Timeout exceeded when calling ${method} ${path}.`, {
-                cause: error.cause,
-            });
+            throw new errors.ElevenLabsTimeoutError(`Timeout exceeded when calling ${method} ${path}.`);
         case "unknown":
             throw new errors.ElevenLabsError({
                 message: error.errorMessage,
                 rawResponse: rawResponse,
-                cause: error.cause,
             });
         default:
             throw new errors.ElevenLabsError({

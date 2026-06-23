@@ -27,11 +27,13 @@ import type * as ElevenLabs from "../../../../../../index";
  *         search: "search",
  *         conversationInitiationSource: "unknown",
  *         textOnly: true,
+ *         conversationProductType: "agents",
  *         branchId: "branch_id",
  *         topicIds: ["topic_ids"],
  *         excludeStatuses: ["initiated"],
  *         tagIds: ["tag_ids"],
- *         workflowNodeEnteredId: "workflow_node_entered_id"
+ *         workflowNodeEnteredId: "workflow_node_entered_id",
+ *         terminationReasons: ["termination_reasons"]
  *     }
  */
 export interface ConversationsListRequest {
@@ -77,6 +79,8 @@ export interface ConversationsListRequest {
     search?: string;
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
     textOnly?: boolean;
+    /** Restrict results to a single conversation product surface. */
+    conversationProductType?: ElevenLabs.ConversationProduct;
     /** Filter conversations by branch ID. */
     branchId?: string;
     /** Filter conversations by topic IDs assigned during topic discovery. */
@@ -89,4 +93,6 @@ export interface ConversationsListRequest {
     tagIds?: string | string[];
     /** Filter conversations to only those that entered the given node. */
     workflowNodeEnteredId?: string;
+    /** Filter conversations by their stored termination_reason (metadata.termination_reason). Repeat param to match any of several. */
+    terminationReasons?: string | string[];
 }

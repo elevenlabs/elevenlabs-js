@@ -330,4 +330,29 @@ describe("BranchesClient", () => {
             key: "value",
         });
     });
+
+    test("rebase", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post(
+                "/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/branches/agtbrch_8901k4t9z5defmb8vh3e9361y7nj/rebase",
+            )
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.agents.branches.rebase(
+            "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
+            "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
+        );
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
 });

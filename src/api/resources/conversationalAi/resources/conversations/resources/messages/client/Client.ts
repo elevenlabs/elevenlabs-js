@@ -54,6 +54,7 @@ export class MessagesClient {
      *         summaryMode: "exclude",
      *         conversationInitiationSource: "unknown",
      *         textOnly: true,
+     *         conversationProductType: "agents",
      *         branchId: "branch_id",
      *         topicIds: ["topic_ids"],
      *         sortBy: "search_score",
@@ -93,6 +94,7 @@ export class MessagesClient {
             summaryMode,
             conversationInitiationSource,
             textOnly,
+            conversationProductType,
             branchId,
             topicIds,
             sortBy,
@@ -136,6 +138,12 @@ export class MessagesClient {
                       })
                     : undefined,
             text_only: textOnly,
+            conversation_product_type:
+                conversationProductType != null
+                    ? serializers.ConversationProduct.jsonOrThrow(conversationProductType, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
             branch_id: branchId,
             topic_ids: topicIds,
             sort_by:
@@ -158,11 +166,7 @@ export class MessagesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -250,11 +254,7 @@ export class MessagesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

@@ -19,6 +19,8 @@ export interface TurnConfigWorkflowOverride {
     retranscribeOnTurnTimeout?: boolean;
     /** Version of the turn detection model to use. */
     turnModel?: ElevenLabs.TurnModel;
+    /** List of terms that should not trigger an interruption when spoken by the user (e.g. 'gotcha', 'understood'). Uses case-insensitive exact matching. */
+    interruptionIgnoreTerms?: string[];
     /** Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses. */
     softTimeoutConfig?: ElevenLabs.SoftTimeoutConfigWorkflowOverride;
 }

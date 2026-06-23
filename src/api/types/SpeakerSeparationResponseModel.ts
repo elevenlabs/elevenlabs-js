@@ -10,7 +10,7 @@ export interface SpeakerSeparationResponseModel {
     /** The status of the speaker separation. */
     status: ElevenLabs.SpeakerSeparationResponseModelStatus;
     /** The speakers of the sample. */
-    speakers?: Record<string, ElevenLabs.SpeakerResponseModel>;
+    speakers?: Record<string, ElevenLabs.SpeakerResponseModel | undefined>;
     /** The IDs of the selected speakers. */
     selectedSpeakerIds?: string[];
 }

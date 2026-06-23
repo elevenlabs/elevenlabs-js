@@ -4,12 +4,12 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AudioRefChunk } from "./AudioRefChunk";
-import { GenerationChunkConditionStrength } from "./GenerationChunkConditionStrength";
-import { GenerationChunkContextAdherence } from "./GenerationChunkContextAdherence";
+import { GenerationChunkOutputConditionStrength } from "./GenerationChunkOutputConditionStrength";
+import { GenerationChunkOutputContextAdherence } from "./GenerationChunkOutputContextAdherence";
 
-export const GenerationChunk: core.serialization.ObjectSchema<
-    serializers.GenerationChunk.Raw,
-    ElevenLabs.GenerationChunk
+export const GenerationChunkOutput: core.serialization.ObjectSchema<
+    serializers.GenerationChunkOutput.Raw,
+    ElevenLabs.GenerationChunkOutput
 > = core.serialization.object({
     text: core.serialization.string(),
     durationMs: core.serialization.property("duration_ms", core.serialization.number()),
@@ -21,19 +21,25 @@ export const GenerationChunk: core.serialization.ObjectSchema<
         "negative_styles",
         core.serialization.list(core.serialization.string()).optional(),
     ),
-    contextAdherence: core.serialization.property("context_adherence", GenerationChunkContextAdherence.optional()),
+    contextAdherence: core.serialization.property(
+        "context_adherence",
+        GenerationChunkOutputContextAdherence.optional(),
+    ),
     conditioningRef: core.serialization.property("conditioning_ref", AudioRefChunk.optional()),
-    conditionStrength: core.serialization.property("condition_strength", GenerationChunkConditionStrength.optional()),
+    conditionStrength: core.serialization.property(
+        "condition_strength",
+        GenerationChunkOutputConditionStrength.optional(),
+    ),
 });
 
-export declare namespace GenerationChunk {
+export declare namespace GenerationChunkOutput {
     export interface Raw {
         text: string;
         duration_ms: number;
         positive_styles: string[];
         negative_styles?: string[] | null;
-        context_adherence?: GenerationChunkContextAdherence.Raw | null;
+        context_adherence?: GenerationChunkOutputContextAdherence.Raw | null;
         conditioning_ref?: AudioRefChunk.Raw | null;
-        condition_strength?: GenerationChunkConditionStrength.Raw | null;
+        condition_strength?: GenerationChunkOutputConditionStrength.Raw | null;
     }
 }

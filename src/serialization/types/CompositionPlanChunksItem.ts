@@ -4,13 +4,13 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AudioRefChunk } from "./AudioRefChunk";
-import { GenerationChunk } from "./GenerationChunk";
+import { GenerationChunkInput } from "./GenerationChunkInput";
 
 export const CompositionPlanChunksItem: core.serialization.Schema<
     serializers.CompositionPlanChunksItem.Raw,
     ElevenLabs.CompositionPlanChunksItem
-> = core.serialization.undiscriminatedUnion([GenerationChunk, AudioRefChunk]);
+> = core.serialization.undiscriminatedUnion([GenerationChunkInput, AudioRefChunk]);
 
 export declare namespace CompositionPlanChunksItem {
-    export type Raw = GenerationChunk.Raw | AudioRefChunk.Raw;
+    export type Raw = GenerationChunkInput.Raw | AudioRefChunk.Raw;
 }

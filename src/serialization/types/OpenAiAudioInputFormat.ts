@@ -3,19 +3,19 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { AudioFormat } from "./AudioFormat";
+import { OpenAiAudioFormat } from "./OpenAiAudioFormat";
 
 export const OpenAiAudioInputFormat: core.serialization.ObjectSchema<
     serializers.OpenAiAudioInputFormat.Raw,
     ElevenLabs.OpenAiAudioInputFormat
 > = core.serialization.object({
-    type: AudioFormat.optional(),
+    type: OpenAiAudioFormat.optional(),
     rate: core.serialization.number().optional(),
 });
 
 export declare namespace OpenAiAudioInputFormat {
     export interface Raw {
-        type?: AudioFormat.Raw | null;
+        type?: OpenAiAudioFormat.Raw | null;
         rate?: number | null;
     }
 }

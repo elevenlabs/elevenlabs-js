@@ -67,7 +67,7 @@ export class ApprovalPolicyClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.conversationalAi.mcpServers.McpApprovalPolicyUpdateRequestModel.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
