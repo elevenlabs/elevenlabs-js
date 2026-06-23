@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { BackgroundSoundConfig } from "./BackgroundSoundConfig";
 import { ClientEvent } from "./ClientEvent";
 import { FileInputConfig } from "./FileInputConfig";
 
@@ -16,6 +17,7 @@ export const ConversationConfigInput: core.serialization.ObjectSchema<
     fileInput: core.serialization.property("file_input", FileInputConfig.optional()),
     monitoringEnabled: core.serialization.property("monitoring_enabled", core.serialization.boolean().optional()),
     monitoringEvents: core.serialization.property("monitoring_events", core.serialization.list(ClientEvent).optional()),
+    backgroundSound: core.serialization.property("background_sound", BackgroundSoundConfig.optional()),
     sourceAttribution: core.serialization.property("source_attribution", core.serialization.boolean().optional()),
 });
 
@@ -27,6 +29,7 @@ export declare namespace ConversationConfigInput {
         file_input?: FileInputConfig.Raw | null;
         monitoring_enabled?: boolean | null;
         monitoring_events?: ClientEvent.Raw[] | null;
+        background_sound?: BackgroundSoundConfig.Raw | null;
         source_attribution?: boolean | null;
     }
 }

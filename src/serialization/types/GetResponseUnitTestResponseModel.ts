@@ -20,7 +20,7 @@ export const GetResponseUnitTestResponseModel: core.serialization.ObjectSchema<
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput).optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput.optional()).optional(),
     ),
     chatHistory: core.serialization.property(
         "chat_history",
@@ -46,7 +46,7 @@ export const GetResponseUnitTestResponseModel: core.serialization.ObjectSchema<
 export declare namespace GetResponseUnitTestResponseModel {
     export interface Raw {
         from_conversation_metadata?: TestFromConversationMetadataOutput.Raw | null;
-        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null> | null;
+        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
         success_condition?: string | null;

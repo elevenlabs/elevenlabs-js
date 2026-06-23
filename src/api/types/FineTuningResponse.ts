@@ -16,9 +16,9 @@ export interface FineTuningResponse {
     /** The language of the fine-tuning process. */
     language?: string;
     /** The progress of the fine-tuning process. */
-    progress?: Record<string, number>;
+    progress?: Record<string, number | undefined>;
     /** The message of the fine-tuning process. */
-    message?: Record<string, string>;
+    message?: Record<string, string | undefined>;
     /** The duration of the dataset in seconds. */
     datasetDurationSeconds?: number;
     /** The number of verification attempts. */

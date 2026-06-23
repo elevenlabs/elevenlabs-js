@@ -67,11 +67,7 @@ export class TextToSpeechClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.BodyTextToSpeechFull.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
@@ -162,11 +158,7 @@ export class TextToSpeechClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.BodyTextToSpeechFullWithTimestamps.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -254,11 +246,7 @@ export class TextToSpeechClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.StreamTextToSpeechRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             responseType: "streaming",
@@ -335,11 +323,7 @@ export class TextToSpeechClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.StreamTextToSpeechWithTimestampsRequest.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",

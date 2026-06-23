@@ -6,4 +6,5 @@ export interface AgentVersionParents {
     mergedIntoBranchId?: string;
     mergedFromBranchId?: string;
     mergedFromVersionId?: string;
+    rebasedFromVersionId?: string;
 }

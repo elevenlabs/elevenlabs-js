@@ -19,6 +19,7 @@ describe("GroupsClient", () => {
                 character_count: 1,
                 scim_external_id: "scim_external_id",
                 is_scim_synced: true,
+                scim_frozen: true,
             },
         };
 
@@ -42,6 +43,7 @@ describe("GroupsClient", () => {
                 characterCount: 1,
                 scimExternalId: "scim_external_id",
                 isScimSynced: true,
+                scimFrozen: true,
             },
         });
     });

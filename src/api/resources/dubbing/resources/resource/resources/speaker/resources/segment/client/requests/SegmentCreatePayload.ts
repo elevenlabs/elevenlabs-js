@@ -11,5 +11,5 @@ export interface SegmentCreatePayload {
     startTime: number;
     endTime: number;
     text?: string;
-    translations?: Record<string, string>;
+    translations?: Record<string, string | undefined>;
 }

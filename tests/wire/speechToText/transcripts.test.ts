@@ -21,6 +21,7 @@ describe("TranscriptsClient", () => {
                     speaker_id: "speaker_1",
                     logprob: -0.124,
                     characters: [{ text: "H", start: 0, end: 0.1 }],
+                    channel_index: 1,
                 },
                 {
                     text: " ",
@@ -30,6 +31,7 @@ describe("TranscriptsClient", () => {
                     speaker_id: "speaker_1",
                     logprob: 0,
                     characters: [{ text: "H", start: 0, end: 0.1 }],
+                    channel_index: 1,
                 },
                 {
                     text: "world!",
@@ -39,6 +41,7 @@ describe("TranscriptsClient", () => {
                     speaker_id: "speaker_1",
                     logprob: -0.089,
                     characters: [{ text: "H", start: 0, end: 0.1 }],
+                    channel_index: 1,
                 },
             ],
             channel_index: 1,
@@ -84,6 +87,7 @@ describe("TranscriptsClient", () => {
                             end: 0.1,
                         },
                     ],
+                    channelIndex: 1,
                 },
                 {
                     text: " ",
@@ -99,6 +103,7 @@ describe("TranscriptsClient", () => {
                             end: 0.1,
                         },
                     ],
+                    channelIndex: 1,
                 },
                 {
                     text: "world!",
@@ -114,6 +119,7 @@ describe("TranscriptsClient", () => {
                             end: 0.1,
                         },
                     ],
+                    channelIndex: 1,
                 },
             ],
             channelIndex: 1,

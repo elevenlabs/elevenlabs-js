@@ -22,7 +22,7 @@ export interface McpToolConfigOverrideInput {
     /** Dynamic variable assignments for this MCP tool */
     assignments?: ElevenLabs.DynamicVariableAssignment[];
     /** Mapping of json path to input override configuration */
-    inputOverrides?: Record<string, ElevenLabs.McpToolConfigOverrideInputInputOverridesValue>;
+    inputOverrides?: Record<string, ElevenLabs.McpToolConfigOverrideInputInputOverridesValue | undefined>;
     /** Mock responses with optional parameter conditions. Evaluated top-to-bottom; first match wins. */
     responseMocks?: ElevenLabs.ToolResponseMockConfigInput[];
 }

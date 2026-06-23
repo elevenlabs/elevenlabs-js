@@ -32,7 +32,10 @@ describe("TopicsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.conversations.topics.get("agent_id");
+        const response = await client.conversationalAi.conversations.topics.get("agent_id", {
+            fromUnixSecs: 1,
+            toUnixSecs: 1,
+        });
         expect(response).toEqual({
             topics: [
                 {

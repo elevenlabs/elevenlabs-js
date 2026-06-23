@@ -66,7 +66,7 @@ export interface ProjectResponse {
     /** Global styling to be applied to all captions */
     captionStyle?: ElevenLabs.CaptionStyleModel;
     /** Styling changes that have been made to the provided templates */
-    captionStyleTemplateOverrides?: Record<string, ElevenLabs.CaptionStyleModel>;
+    captionStyleTemplateOverrides?: Record<string, ElevenLabs.CaptionStyleModel | undefined>;
     /** The public share ID of the project. */
     publicShareId?: string;
     /** The aspect ratio of the project. */

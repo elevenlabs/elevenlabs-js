@@ -20,4 +20,6 @@ export interface SpeechToTextWordResponseModel {
     logprob: number;
     /** The characters that make up the word and their timing information. */
     characters?: ElevenLabs.SpeechToTextCharacterResponseModel[];
+    /** The channel this word was spoken on (for multichannel audio). Null for single-channel transcriptions. */
+    channelIndex?: number;
 }

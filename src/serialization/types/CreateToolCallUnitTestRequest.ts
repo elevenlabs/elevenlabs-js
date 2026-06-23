@@ -19,7 +19,7 @@ export const CreateToolCallUnitTestRequest: core.serialization.ObjectSchema<
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeInput).optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeInput.optional()).optional(),
     ),
     chatHistory: core.serialization.property(
         "chat_history",
@@ -41,7 +41,7 @@ export const CreateToolCallUnitTestRequest: core.serialization.ObjectSchema<
 export declare namespace CreateToolCallUnitTestRequest {
     export interface Raw {
         from_conversation_metadata?: TestFromConversationMetadataInput.Raw | null;
-        dynamic_variables?: Record<string, DynamicVariableValueTypeInput.Raw | null> | null;
+        dynamic_variables?: Record<string, DynamicVariableValueTypeInput.Raw | null | undefined> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelInput.Raw[] | null;
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
         tool_call_parameters?: UnitTestToolCallEvaluationModelInput.Raw | null;

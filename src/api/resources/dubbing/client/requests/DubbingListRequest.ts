@@ -8,6 +8,10 @@ import type * as ElevenLabs from "../../../../index";
  *         cursor: "cursor",
  *         pageSize: 1,
  *         dubbingStatus: "dubbing",
+ *         dubbingStatuses: ["queued"],
+ *         dubbingModels: ["dubbing_v1"],
+ *         targetLanguageCodes: ["target_language_codes"],
+ *         creationSources: ["flow_node"],
  *         filterByCreator: "personal",
  *         orderBy: "created_at",
  *         orderDirection: "DESCENDING"
@@ -20,10 +24,22 @@ export interface DubbingListRequest {
     pageSize?: number;
     /** What state the dub is currently in. */
     dubbingStatus?: ElevenLabs.DubbingListRequestDubbingStatus;
+    /** Filter by dubbing status. */
+    dubbingStatuses?:
+        | ElevenLabs.DubbingListRequestDubbingStatusesItem
+        | ElevenLabs.DubbingListRequestDubbingStatusesItem[];
+    /** Filter by dubbing model generation. */
+    dubbingModels?: ElevenLabs.DubbingListRequestDubbingModelsItem | ElevenLabs.DubbingListRequestDubbingModelsItem[];
+    /** Filter by target language code. */
+    targetLanguageCodes?: string | string[];
+    /** Filter by dubbing creation source. */
+    creationSources?:
+        | ElevenLabs.DubbingListRequestCreationSourcesItem
+        | ElevenLabs.DubbingListRequestCreationSourcesItem[];
     /** Filters who created the resources being listed, whether it was the user running the request or someone else that shared the resource with them. */
     filterByCreator?: ElevenLabs.DubbingListRequestFilterByCreator;
     /** The field to use for ordering results from this query. */
-    orderBy?: "created_at";
+    orderBy?: ElevenLabs.DubbingListRequestOrderBy;
     /** The order direction to use for results from this query. */
     orderDirection?: ElevenLabs.DubbingListRequestOrderDirection;
 }

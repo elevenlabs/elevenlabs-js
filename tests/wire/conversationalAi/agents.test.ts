@@ -51,6 +51,7 @@ describe("AgentsClient", () => {
                     speculative_turn: false,
                     retranscribe_on_turn_timeout: false,
                     turn_model: "turn_v3",
+                    interruption_ignore_terms: ["interruption_ignore_terms"],
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
                 tts: {
@@ -469,6 +470,7 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -670,6 +672,7 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -872,6 +875,7 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -1137,6 +1141,7 @@ describe("AgentsClient", () => {
                     speculativeTurn: false,
                     retranscribeOnTurnTimeout: false,
                     turnModel: "turn_v3",
+                    interruptionIgnoreTerms: ["interruption_ignore_terms"],
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
                         message: "Hhmmmm...yeah.",
@@ -1682,6 +1687,7 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -1919,6 +1925,7 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -2164,6 +2171,7 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -2505,6 +2513,7 @@ describe("AgentsClient", () => {
                     speculative_turn: false,
                     retranscribe_on_turn_timeout: false,
                     turn_model: "turn_v3",
+                    interruption_ignore_terms: ["interruption_ignore_terms"],
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
                 tts: {
@@ -2923,6 +2932,7 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -3124,6 +3134,7 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -3326,6 +3337,7 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -3592,6 +3604,7 @@ describe("AgentsClient", () => {
                     speculativeTurn: false,
                     retranscribeOnTurnTimeout: false,
                     turnModel: "turn_v3",
+                    interruptionIgnoreTerms: ["interruption_ignore_terms"],
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
                         message: "Hhmmmm...yeah.",
@@ -4137,6 +4150,7 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -4374,6 +4388,7 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -4619,6 +4634,7 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -5052,6 +5068,7 @@ describe("AgentsClient", () => {
                     source_medium: "audio",
                     source_event_id: 1,
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
+                    user_identifier: "user_identifier",
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -5165,6 +5182,7 @@ describe("AgentsClient", () => {
                     sourceMedium: "audio",
                     sourceEventId: 1,
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
+                    userIdentifier: "user_identifier",
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",

@@ -29,7 +29,7 @@ export const ConversationInitiationClientDataRequestOutput: core.serialization.O
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput).optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput.optional()).optional(),
     ),
 });
 
@@ -42,6 +42,6 @@ export declare namespace ConversationInitiationClientDataRequestOutput {
         branch_id?: string | null;
         environment?: string | null;
         starting_workflow_node_id?: string | null;
-        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null> | null;
+        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
     }
 }

@@ -10,5 +10,5 @@ export interface ConversationSimulationSpecification {
     toolMockConfig?: Record<string, ElevenLabs.ToolMockConfig>;
     /** A partial conversation history to start the simulation from. If empty, simulation starts fresh. */
     partialConversationHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelInput[];
-    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeInput>;
+    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeInput | undefined>;
 }

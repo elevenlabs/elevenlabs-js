@@ -14,5 +14,5 @@ export interface ConversationInitiationClientDataRequestOutput {
     environment?: string;
     /** If set, start the workflow at this node id instead of the default entry */
     startingWorkflowNodeId?: string;
-    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeOutput>;
+    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableValueTypeOutput | undefined>;
 }

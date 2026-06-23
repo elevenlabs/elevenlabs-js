@@ -4,5 +4,8 @@ export * from "./BodyComposeMusicWithADetailedResponseV1MusicDetailedPostComposi
 export * from "./BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId";
 export * from "./BodyStreamComposedMusicV1MusicStreamPostCompositionPlan";
 export * from "./BodyStreamComposedMusicV1MusicStreamPostModelId";
+export * from "./MusicComposeDetailedRequestOutputFormat";
+export * from "./MusicComposeRequestOutputFormat";
 export * from "./MusicSeparateStemsRequestStemVariationId";
+export * from "./MusicStreamRequestOutputFormat";
 export * from "./MusicVideoToMusicRequestModelId";

@@ -19,7 +19,7 @@ export const UpdateOAuth2JwtRequest: core.serialization.ObjectSchema<
     expirationSeconds: core.serialization.property("expiration_seconds", core.serialization.number().optional()),
     extraParams: core.serialization.property(
         "extra_params",
-        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+        core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
     ),
     scopes: core.serialization.list(core.serialization.string()).optional(),
     tokenResponseField: core.serialization.property(
@@ -38,7 +38,7 @@ export declare namespace UpdateOAuth2JwtRequest {
         audience?: string | null;
         subject?: string | null;
         expiration_seconds?: number | null;
-        extra_params?: Record<string, string | null> | null;
+        extra_params?: Record<string, string | null | undefined> | null;
         scopes?: string[] | null;
         token_response_field?: UpdateOAuth2JwtRequestTokenResponseField.Raw | null;
         secret_key?: string | null;

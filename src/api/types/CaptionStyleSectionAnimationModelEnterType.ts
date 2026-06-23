@@ -4,6 +4,9 @@ export const CaptionStyleSectionAnimationModelEnterType = {
     None: "none",
     Fade: "fade",
     Scale: "scale",
+    Pop: "pop",
+    SlideUp: "slide_up",
+    SlideDown: "slide_down",
 } as const;
 export type CaptionStyleSectionAnimationModelEnterType =
     (typeof CaptionStyleSectionAnimationModelEnterType)[keyof typeof CaptionStyleSectionAnimationModelEnterType];

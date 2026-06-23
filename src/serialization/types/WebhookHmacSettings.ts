@@ -13,7 +13,7 @@ export const WebhookHmacSettings: core.serialization.ObjectSchema<
     webhookUrl: core.serialization.property("webhook_url", core.serialization.string()),
     requestHeaders: core.serialization.property(
         "request_headers",
-        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+        core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
     ),
 });
 
@@ -22,6 +22,6 @@ export declare namespace WebhookHmacSettings {
         auth_type: "hmac";
         name: string;
         webhook_url: string;
-        request_headers?: Record<string, string | null> | null;
+        request_headers?: Record<string, string | null | undefined> | null;
     }
 }

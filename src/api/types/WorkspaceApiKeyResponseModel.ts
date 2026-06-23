@@ -10,10 +10,12 @@ export interface WorkspaceApiKeyResponseModel {
     createdAtUnix?: number;
     isDisabled?: boolean;
     permissions?: ElevenLabs.PermissionType[];
+    disableReason?: ElevenLabs.LockReason;
     /** Maximum number of credits allowed in the current billing period. */
     characterLimit?: number;
     /** Credits already used in the current billing period. */
     characterCount?: number;
     hashedXiApiKey: string;
     allowedIps?: string[];
+    thirdPartyDisableAllowed?: boolean;
 }

@@ -1730,6 +1730,71 @@ await client.user.get();
 </details>
 
 ## Voices
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetVoicesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of all available voices for a user. Stops working once the user's workspace exceeds 500 voices.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.getAll({
+    showLegacy: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.VoicesGetAllRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">get</a>(voice_id, { ...params }) -> ElevenLabs.Voice</code></summary>
 <dl>
 <dd>
@@ -1847,71 +1912,6 @@ await client.voices.delete("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **voice_id:** `string` — ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `VoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetVoicesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a list of all available voices for a user. Stops working once the user's workspace exceeds 500 voices.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.getAll({
-    showLegacy: true
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.VoicesGetAllRequest` 
     
 </dd>
 </dl>
@@ -2584,7 +2584,7 @@ await client.music.stream();
 <dl>
 <dd>
 
-Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature. Price for uploading is the same as the one for song generation. All uploaded content gets inspected for copyright infringement. If copyrighted content is detected, half of the request cost is still charged.
+Upload a music file to be later used for inpainting. Price for uploading is the same as the one for song generation. All uploaded content gets inspected for copyright infringement. If copyrighted content is detected, half of the request cost is still charged.
 </dd>
 </dl>
 </dd>
@@ -2669,6 +2669,10 @@ await client.dubbing.list({
     cursor: "cursor",
     pageSize: 1,
     dubbingStatus: "dubbing",
+    dubbingStatuses: ["queued"],
+    dubbingModels: ["dubbing_v1"],
+    targetLanguageCodes: ["target_language_codes"],
+    creationSources: ["flow_node"],
     filterByCreator: "personal",
     orderBy: "created_at",
     orderDirection: "DESCENDING"
@@ -4042,7 +4046,7 @@ await client.webhooks.update("G007vmtq9uWYl7SUW9zGS8GZZa1K", {
 <dl>
 <dd>
 
-Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned. Otherwise, returns a single transcript. The optional webhook_metadata parameter allows you to attach custom data that will be included in webhook responses for request correlation and tracking.
+Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned; set multichannel_output_style='combined' to instead receive a single transcript with all channels merged and sorted by time. Otherwise, returns a single transcript. The optional webhook_metadata parameter allows you to attach custom data that will be included in webhook responses for request correlation and tracking.
 </dd>
 </dl>
 </dd>
@@ -5214,11 +5218,13 @@ await client.conversationalAi.conversations.list({
     search: "search",
     conversationInitiationSource: "unknown",
     textOnly: true,
+    conversationProductType: "agents",
     branchId: "branch_id",
     topicIds: ["topic_ids"],
     excludeStatuses: ["initiated"],
     tagIds: ["tag_ids"],
-    workflowNodeEnteredId: "workflow_node_entered_id"
+    workflowNodeEnteredId: "workflow_node_entered_id",
+    terminationReasons: ["termination_reasons"]
 });
 
 ```
@@ -10479,6 +10485,77 @@ await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">rebase</a>(agent_id, branch_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Rebase a branch onto the latest main branch, incorporating main's changes while preserving the branch's own changes.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Unique identifier for the source branch to merge from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BranchesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents Versions
 <details><summary><code>client.conversationalAi.agents.versions.<a href="/src/api/resources/conversationalAi/resources/agents/resources/versions/client/Client.ts">get</a>(agent_id, version_id) -> ElevenLabs.AgentVersionMetadata</code></summary>
 <dl>
@@ -11236,6 +11313,7 @@ await client.conversationalAi.conversations.messages.textSearch({
     summaryMode: "exclude",
     conversationInitiationSource: "unknown",
     textOnly: true,
+    conversationProductType: "agents",
     branchId: "branch_id",
     topicIds: ["topic_ids"],
     sortBy: "search_score",
@@ -11963,7 +12041,7 @@ await client.conversationalAi.conversations.files.delete("conversation_id", "fil
 </details>
 
 ## ConversationalAi Conversations Topics
-<details><summary><code>client.conversationalAi.conversations.topics.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/topics/client/Client.ts">get</a>(agent_id) -> ElevenLabs.GetAgentTopicsResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.conversations.topics.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/topics/client/Client.ts">get</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentTopicsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11990,7 +12068,10 @@ Returns the latest topic discovery run results for a given agent.
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.topics.get("agent_id");
+await client.conversationalAi.conversations.topics.get("agent_id", {
+    fromUnixSecs: 1,
+    toUnixSecs: 1
+});
 
 ```
 </dd>
@@ -12007,6 +12088,14 @@ await client.conversationalAi.conversations.topics.get("agent_id");
 <dd>
 
 **agent_id:** `string` — ID of the agent
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.TopicsGetRequest` 
     
 </dd>
 </dl>

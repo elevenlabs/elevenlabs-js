@@ -28,7 +28,7 @@ export const AgentConfigApiModelWorkflowOverrideInput: core.serialization.Object
     ),
     textBehaviorOverrides: core.serialization.property(
         "text_behavior_overrides",
-        core.serialization.record(core.serialization.string(), BehaviorOverride).optional(),
+        core.serialization.record(core.serialization.string(), BehaviorOverride.optional()).optional(),
     ),
     prompt: PromptAgentApiModelWorkflowOverrideInput.optional(),
 });
@@ -41,7 +41,7 @@ export declare namespace AgentConfigApiModelWorkflowOverrideInput {
         dynamic_variables?: DynamicVariablesConfigWorkflowOverrideInput.Raw | null;
         disable_first_message_interruptions?: boolean | null;
         max_conversation_duration_message?: string | null;
-        text_behavior_overrides?: Record<string, BehaviorOverride.Raw | null> | null;
+        text_behavior_overrides?: Record<string, BehaviorOverride.Raw | null | undefined> | null;
         prompt?: PromptAgentApiModelWorkflowOverrideInput.Raw | null;
     }
 }

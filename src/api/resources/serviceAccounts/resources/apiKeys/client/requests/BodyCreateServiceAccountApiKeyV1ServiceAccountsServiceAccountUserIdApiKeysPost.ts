@@ -17,4 +17,6 @@ export interface BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUs
     characterLimit?: number;
     /** List of IP addresses or CIDR ranges allowed to use this API key. Each entry may be a CIDR range (e.g. '10.0.0.0/24') or a bare IP address (normalized to /32 or /128). On create, omit or pass null to allow all IPs. On update, omit to leave the whitelist unchanged, or pass "clear" to remove it. */
     allowedIps?: string[];
+    /** Whether the holder of this key may disable it via the self-disable endpoint. On create, omit or pass null to use the workspace's default (enabled for non-Enterprise plans, disabled for Enterprise plans). On update, omit to leave it unchanged, or pass "clear" to reset it to the workspace default. Only honored for workspaces with self-disable access enabled. */
+    thirdPartyDisableAllowed?: boolean;
 }
