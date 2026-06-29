@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../../../../../api/index";
 import * as core from "../../../../../../core";
 import type * as serializers from "../../../../../index";
 import { UpdateBasicAuthRequest } from "../../../../../types/UpdateBasicAuthRequest";
+import { UpdateBearerAuthRequest } from "../../../../../types/UpdateBearerAuthRequest";
 import { UpdateOAuth2ClientCredsRequest } from "../../../../../types/UpdateOAuth2ClientCredsRequest";
 import { UpdateOAuth2JwtRequest } from "../../../../../types/UpdateOAuth2JwtRequest";
 
@@ -14,6 +15,7 @@ export const AuthConnectionsUpdateRequestBody: core.serialization.Schema<
     .union(core.serialization.discriminant("authType", "auth_type"), {
         oauth2_client_credentials: UpdateOAuth2ClientCredsRequest,
         basic_auth: UpdateBasicAuthRequest,
+        bearer_auth: UpdateBearerAuthRequest,
         oauth2_jwt: UpdateOAuth2JwtRequest,
     })
     .transform<ElevenLabs.workspace.AuthConnectionsUpdateRequestBody>({
@@ -25,6 +27,7 @@ export declare namespace AuthConnectionsUpdateRequestBody {
     export type Raw =
         | AuthConnectionsUpdateRequestBody.Oauth2ClientCredentials
         | AuthConnectionsUpdateRequestBody.BasicAuth
+        | AuthConnectionsUpdateRequestBody.BearerAuth
         | AuthConnectionsUpdateRequestBody.Oauth2Jwt;
 
     export interface Oauth2ClientCredentials extends UpdateOAuth2ClientCredsRequest.Raw {
@@ -33,6 +36,10 @@ export declare namespace AuthConnectionsUpdateRequestBody {
 
     export interface BasicAuth extends UpdateBasicAuthRequest.Raw {
         auth_type: "basic_auth";
+    }
+
+    export interface BearerAuth extends UpdateBearerAuthRequest.Raw {
+        auth_type: "bearer_auth";
     }
 
     export interface Oauth2Jwt extends UpdateOAuth2JwtRequest.Raw {

@@ -5,7 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ApiIntegrationOAuth2AuthCodeResponseScopeSeparator } from "./ApiIntegrationOAuth2AuthCodeResponseScopeSeparator";
 import { AuthConnectionDependencies } from "./AuthConnectionDependencies";
-import { OAuthConnectionStatus } from "./OAuthConnectionStatus";
+import { AuthConnectionStatus } from "./AuthConnectionStatus";
 
 export const ApiIntegrationOAuth2AuthCodeResponse: core.serialization.ObjectSchema<
     serializers.ApiIntegrationOAuth2AuthCodeResponse.Raw,
@@ -22,11 +22,11 @@ export const ApiIntegrationOAuth2AuthCodeResponse: core.serialization.ObjectSche
     expiresAt: core.serialization.property("expires_at", core.serialization.string()),
     integrationId: core.serialization.property("integration_id", core.serialization.string()),
     credentialId: core.serialization.property("credential_id", core.serialization.string()),
-    status: OAuthConnectionStatus.optional(),
-    statusDetail: core.serialization.property("status_detail", core.serialization.string().optional()),
-    statusUpdatedAt: core.serialization.property("status_updated_at", core.serialization.string().optional()),
     id: core.serialization.string(),
     usedBy: core.serialization.property("used_by", AuthConnectionDependencies.optional()),
+    status: AuthConnectionStatus.optional(),
+    statusDetail: core.serialization.property("status_detail", core.serialization.string().optional()),
+    statusUpdatedAt: core.serialization.property("status_updated_at", core.serialization.string().optional()),
 });
 
 export declare namespace ApiIntegrationOAuth2AuthCodeResponse {
@@ -39,10 +39,10 @@ export declare namespace ApiIntegrationOAuth2AuthCodeResponse {
         expires_at: string;
         integration_id: string;
         credential_id: string;
-        status?: OAuthConnectionStatus.Raw | null;
-        status_detail?: string | null;
-        status_updated_at?: string | null;
         id: string;
         used_by?: AuthConnectionDependencies.Raw | null;
+        status?: AuthConnectionStatus.Raw | null;
+        status_detail?: string | null;
+        status_updated_at?: string | null;
     }
 }

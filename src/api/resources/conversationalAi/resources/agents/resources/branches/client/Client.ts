@@ -9,6 +9,8 @@ import { handleNonStatusCodeError } from "../../../../../../../../errors/handleN
 import * as errors from "../../../../../../../../errors/index";
 import * as serializers from "../../../../../../../../serialization/index";
 import * as ElevenLabs from "../../../../../../../index";
+import { MergeClient } from "../resources/merge/client/Client";
+import { RebaseClient } from "../resources/rebase/client/Client";
 
 export declare namespace BranchesClient {
     export type Options = BaseClientOptions;
@@ -18,9 +20,19 @@ export declare namespace BranchesClient {
 
 export class BranchesClient {
     protected readonly _options: NormalizedClientOptions<BranchesClient.Options>;
+    protected _merge: MergeClient | undefined;
+    protected _rebase: RebaseClient | undefined;
 
     constructor(options: BranchesClient.Options = {}) {
         this._options = normalizeClientOptions(options);
+    }
+
+    public get merge(): MergeClient {
+        return (this._merge ??= new MergeClient(this._options));
+    }
+
+    public get rebase(): RebaseClient {
+        return (this._rebase ??= new RebaseClient(this._options));
     }
 
     /**

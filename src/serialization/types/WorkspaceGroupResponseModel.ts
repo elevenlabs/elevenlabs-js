@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ScimGroupResponseModel } from "./ScimGroupResponseModel";
 import { WorkspaceGroupPermission } from "./WorkspaceGroupPermission";
 import { WorkspaceGroupResponseModelGroupPvcLimit } from "./WorkspaceGroupResponseModelGroupPvcLimit";
 import { WorkspaceGroupResponseModelGroupUsageLimit } from "./WorkspaceGroupResponseModelGroupUsageLimit";
@@ -23,6 +24,7 @@ export const WorkspaceGroupResponseModel: core.serialization.ObjectSchema<
     characterCount: core.serialization.property("character_count", core.serialization.number().optional()),
     scimExternalId: core.serialization.property("scim_external_id", core.serialization.string().optional()),
     isScimSynced: core.serialization.property("is_scim_synced", core.serialization.boolean().optional()),
+    scimGroup: core.serialization.property("scim_group", ScimGroupResponseModel.optional()),
     scimFrozen: core.serialization.property("scim_frozen", core.serialization.boolean().optional()),
 });
 
@@ -37,6 +39,7 @@ export declare namespace WorkspaceGroupResponseModel {
         character_count?: number | null;
         scim_external_id?: string | null;
         is_scim_synced?: boolean | null;
+        scim_group?: ScimGroupResponseModel.Raw | null;
         scim_frozen?: boolean | null;
     }
 }

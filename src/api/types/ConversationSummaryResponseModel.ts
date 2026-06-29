@@ -21,4 +21,5 @@ export interface ConversationSummaryResponseModel {
     toolNames?: string[];
     direction?: ElevenLabs.TelephonyDirection;
     rating?: number;
+    sentimentAnalysis?: ElevenLabs.ConversationSentimentAnalysis;
 }

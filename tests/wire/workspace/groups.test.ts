@@ -19,6 +19,13 @@ describe("GroupsClient", () => {
                 character_count: 1,
                 scim_external_id: "scim_external_id",
                 is_scim_synced: true,
+                scim_group: {
+                    scim_external_id: "scim_external_id",
+                    display_name: "display_name",
+                    created_at_unix: 1,
+                    updated_at_unix: 1,
+                    seat_type: "workspace_admin",
+                },
                 scim_frozen: true,
             },
         };
@@ -43,6 +50,13 @@ describe("GroupsClient", () => {
                 characterCount: 1,
                 scimExternalId: "scim_external_id",
                 isScimSynced: true,
+                scimGroup: {
+                    scimExternalId: "scim_external_id",
+                    displayName: "display_name",
+                    createdAtUnix: 1,
+                    updatedAtUnix: 1,
+                    seatType: "workspace_admin",
+                },
                 scimFrozen: true,
             },
         });

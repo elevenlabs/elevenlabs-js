@@ -11,6 +11,8 @@ export interface CreateExotelPhoneNumberRequest {
     supportsInbound?: boolean;
     /** This field is deprecated and will be removed in the future. Whether this phone number supports outbound calls */
     supportsOutbound?: boolean;
+    /** Agent ID to assign the phone number to */
+    agentId?: string;
     /** Exotel Account SID */
     accountSid: string;
     /** Exotel API Key */

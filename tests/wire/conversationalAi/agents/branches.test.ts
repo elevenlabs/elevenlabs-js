@@ -30,6 +30,7 @@ describe("BranchesClient", () => {
                     current_live_percentage: 1.1,
                     parent_branch_id: "parent_branch_id",
                     draft_exists: true,
+                    calls_7d: 1,
                 },
             ],
         };
@@ -72,6 +73,7 @@ describe("BranchesClient", () => {
                     currentLivePercentage: 1.1,
                     parentBranchId: "parent_branch_id",
                     draftExists: true,
+                    calls7D: 1,
                 },
             ],
         });

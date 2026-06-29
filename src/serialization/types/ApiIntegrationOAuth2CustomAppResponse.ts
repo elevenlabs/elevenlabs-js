@@ -5,7 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ApiIntegrationOAuth2CustomAppResponseScopeSeparator } from "./ApiIntegrationOAuth2CustomAppResponseScopeSeparator";
 import { AuthConnectionDependencies } from "./AuthConnectionDependencies";
-import { OAuthConnectionStatus } from "./OAuthConnectionStatus";
+import { AuthConnectionStatus } from "./AuthConnectionStatus";
 
 export const ApiIntegrationOAuth2CustomAppResponse: core.serialization.ObjectSchema<
     serializers.ApiIntegrationOAuth2CustomAppResponse.Raw,
@@ -22,12 +22,12 @@ export const ApiIntegrationOAuth2CustomAppResponse: core.serialization.ObjectSch
     expiresAt: core.serialization.property("expires_at", core.serialization.string()),
     integrationId: core.serialization.property("integration_id", core.serialization.string()),
     credentialId: core.serialization.property("credential_id", core.serialization.string()),
-    status: OAuthConnectionStatus.optional(),
-    statusDetail: core.serialization.property("status_detail", core.serialization.string().optional()),
-    statusUpdatedAt: core.serialization.property("status_updated_at", core.serialization.string().optional()),
     clientId: core.serialization.property("client_id", core.serialization.string()),
     id: core.serialization.string(),
     usedBy: core.serialization.property("used_by", AuthConnectionDependencies.optional()),
+    status: AuthConnectionStatus.optional(),
+    statusDetail: core.serialization.property("status_detail", core.serialization.string().optional()),
+    statusUpdatedAt: core.serialization.property("status_updated_at", core.serialization.string().optional()),
 });
 
 export declare namespace ApiIntegrationOAuth2CustomAppResponse {
@@ -40,11 +40,11 @@ export declare namespace ApiIntegrationOAuth2CustomAppResponse {
         expires_at: string;
         integration_id: string;
         credential_id: string;
-        status?: OAuthConnectionStatus.Raw | null;
-        status_detail?: string | null;
-        status_updated_at?: string | null;
         client_id: string;
         id: string;
         used_by?: AuthConnectionDependencies.Raw | null;
+        status?: AuthConnectionStatus.Raw | null;
+        status_detail?: string | null;
+        status_updated_at?: string | null;
     }
 }

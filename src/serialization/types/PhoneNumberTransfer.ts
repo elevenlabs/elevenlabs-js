@@ -7,6 +7,7 @@ import { PhoneNumberTransferCustomSipHeadersItem } from "./PhoneNumberTransferCu
 import { PhoneNumberTransferPostDialDigits } from "./PhoneNumberTransferPostDialDigits";
 import { PhoneNumberTransferTransferDestination } from "./PhoneNumberTransferTransferDestination";
 import { TransferTypeEnum } from "./TransferTypeEnum";
+import { UuiTransferConfig } from "./UuiTransferConfig";
 
 export const PhoneNumberTransfer: core.serialization.ObjectSchema<
     serializers.PhoneNumberTransfer.Raw,
@@ -18,6 +19,7 @@ export const PhoneNumberTransfer: core.serialization.ObjectSchema<
     ),
     transferDestination: core.serialization.property("transfer_destination", PhoneNumberTransferTransferDestination),
     transferType: core.serialization.property("transfer_type", TransferTypeEnum.optional()),
+    uui: UuiTransferConfig.optional(),
     postDialDigits: core.serialization.property("post_dial_digits", PhoneNumberTransferPostDialDigits.optional()),
     phoneNumber: core.serialization.property("phone_number", core.serialization.string().optional()),
     condition: core.serialization.string(),
@@ -28,6 +30,7 @@ export declare namespace PhoneNumberTransfer {
         custom_sip_headers?: PhoneNumberTransferCustomSipHeadersItem.Raw[] | null;
         transfer_destination: PhoneNumberTransferTransferDestination.Raw;
         transfer_type?: TransferTypeEnum.Raw | null;
+        uui?: UuiTransferConfig.Raw | null;
         post_dial_digits?: PhoneNumberTransferPostDialDigits.Raw | null;
         phone_number?: string | null;
         condition: string;

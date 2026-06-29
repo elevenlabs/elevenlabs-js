@@ -3705,6 +3705,70 @@ await client.pronunciationDictionaries.list({
 </dl>
 </details>
 
+## Workspace
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">setThirdPartyDisablingPolicy</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Set the workspace-wide Third-Party Disabling policy. When set, it forces, for every API key in the workspace, whether the holder of a key (potentially a third party who found it) may disable it via the self-disable endpoint or when it leaks publicly — overriding each key's own setting. Pass `true` to allow it for all keys, `false` to forbid it for all keys, or `null` to clear the override so per-key values and the plan default apply again. Workspace admins only; requires self-disable access.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.setThirdPartyDisablingPolicy();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodySetWorkspaceThirdPartyDisablingPolicyV1WorkspacesApiKeysThirdPartyDisablingPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkspaceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ServiceAccounts
 <details><summary><code>client.serviceAccounts.<a href="/src/api/resources/serviceAccounts/client/Client.ts">list</a>() -> ElevenLabs.WorkspaceServiceAccountListResponseModel</code></summary>
 <dl>
@@ -10974,6 +11038,161 @@ await client.conversationalAi.agents.drafts.delete("agent_3701k3ttaq12ewp8b7qv5r
 <dd>
 
 **requestOptions:** `DraftsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Agents Branches Merge
+<details><summary><code>client.conversationalAi.agents.branches.merge.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/resources/merge/client/Client.ts">preview</a>(agent_id, source_branch_id, { ...params }) -> ElevenLabs.MergePreviewResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the result of merging the source branch into the target branch without performing the merge. Useful for showing an accurate diff before confirming.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.branches.merge.preview("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+    targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
+    force: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source_branch_id:** `string` — Unique identifier for the source branch to merge from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.branches.MergePreviewRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MergeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Agents Branches Rebase
+<details><summary><code>client.conversationalAi.agents.branches.rebase.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/resources/rebase/client/Client.ts">preview</a>(agent_id, branch_id) -> ElevenLabs.MergePreviewResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the result of rebasing the branch onto main without performing the rebase. Useful for showing an accurate diff before confirming.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.branches.rebase.preview("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Unique identifier for the source branch to merge from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RebaseClient.RequestOptions` 
     
 </dd>
 </dl>

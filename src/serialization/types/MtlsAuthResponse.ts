@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AuthConnectionDependencies } from "./AuthConnectionDependencies";
+import { AuthConnectionStatus } from "./AuthConnectionStatus";
 
 export const MtlsAuthResponse: core.serialization.ObjectSchema<
     serializers.MtlsAuthResponse.Raw,
@@ -13,6 +14,9 @@ export const MtlsAuthResponse: core.serialization.ObjectSchema<
     provider: core.serialization.string(),
     id: core.serialization.string(),
     usedBy: core.serialization.property("used_by", AuthConnectionDependencies.optional()),
+    status: AuthConnectionStatus.optional(),
+    statusDetail: core.serialization.property("status_detail", core.serialization.string().optional()),
+    statusUpdatedAt: core.serialization.property("status_updated_at", core.serialization.string().optional()),
 });
 
 export declare namespace MtlsAuthResponse {
@@ -21,5 +25,8 @@ export declare namespace MtlsAuthResponse {
         provider: string;
         id: string;
         used_by?: AuthConnectionDependencies.Raw | null;
+        status?: AuthConnectionStatus.Raw | null;
+        status_detail?: string | null;
+        status_updated_at?: string | null;
     }
 }
