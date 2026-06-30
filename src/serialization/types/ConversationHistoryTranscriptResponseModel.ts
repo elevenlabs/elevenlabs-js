@@ -11,6 +11,7 @@ import { ConversationHistoryTranscriptFileInputResponseModel } from "./Conversat
 import { ConversationHistoryTranscriptResponseModelRole } from "./ConversationHistoryTranscriptResponseModelRole";
 import { ConversationHistoryTranscriptResponseModelToolResultsItem } from "./ConversationHistoryTranscriptResponseModelToolResultsItem";
 import { ConversationHistoryTranscriptToolCallCommonModelOutput } from "./ConversationHistoryTranscriptToolCallCommonModelOutput";
+import { ConversationReasoningModel } from "./ConversationReasoningModel";
 import { ConversationTurnMetrics } from "./ConversationTurnMetrics";
 import { LlmUsageOutput } from "./LlmUsageOutput";
 import { RagRetrievalInfo } from "./RagRetrievalInfo";
@@ -46,6 +47,7 @@ export const ConversationHistoryTranscriptResponseModel: core.serialization.Obje
     llmUsage: core.serialization.property("llm_usage", LlmUsageOutput.optional()),
     interrupted: core.serialization.boolean().optional(),
     originalMessage: core.serialization.property("original_message", core.serialization.string().optional()),
+    reasoning: core.serialization.list(ConversationReasoningModel).optional(),
     sourceMedium: core.serialization.property("source_medium", ChatSourceMedium.optional()),
     sourceEventId: core.serialization.property("source_event_id", core.serialization.number().optional()),
     usedStaticKbDocumentIds: core.serialization.property(
@@ -58,6 +60,7 @@ export const ConversationHistoryTranscriptResponseModel: core.serialization.Obje
         ConversationHistoryTranscriptFileInputResponseModel.optional(),
     ),
     contextualUpdateInfo: core.serialization.property("contextual_update_info", ContextualUpdateInfo.optional()),
+    reasoned: core.serialization.boolean().optional(),
 });
 
 export declare namespace ConversationHistoryTranscriptResponseModel {
@@ -76,11 +79,13 @@ export declare namespace ConversationHistoryTranscriptResponseModel {
         llm_usage?: LlmUsageOutput.Raw | null;
         interrupted?: boolean | null;
         original_message?: string | null;
+        reasoning?: ConversationReasoningModel.Raw[] | null;
         source_medium?: ChatSourceMedium.Raw | null;
         source_event_id?: number | null;
         used_static_kb_document_ids?: string[] | null;
         user_identifier?: string | null;
         file_input?: ConversationHistoryTranscriptFileInputResponseModel.Raw | null;
         contextual_update_info?: ContextualUpdateInfo.Raw | null;
+        reasoned?: boolean | null;
     }
 }

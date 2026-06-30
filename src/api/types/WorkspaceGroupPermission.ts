@@ -14,6 +14,7 @@ export const WorkspaceGroupPermission = {
     ConversationalAiRead: "conversational_ai_read",
     VoiceIsolator: "voice_isolator",
     AiSpeechClassifier: "ai_speech_classifier",
+    SynthidDetector: "synthid_detector",
     AddVoiceFromVoiceLibrary: "add_voice_from_voice_library",
     CreateInstantVoiceClone: "create_instant_voice_clone",
     CreateProfessionalVoiceClone: "create_professional_voice_clone",
@@ -32,6 +33,7 @@ export const WorkspaceGroupPermission = {
     WorkspaceMembersRemove: "workspace_members_remove",
     TermsOfServiceAccept: "terms_of_service_accept",
     AuditLogRead: "audit_log_read",
+    ConversationPrivacyManage: "conversation_privacy_manage",
     CopyResourcesCrossWorkspace: "copy_resources_cross_workspace",
     VoiceDesign: "voice_design",
 } as const;

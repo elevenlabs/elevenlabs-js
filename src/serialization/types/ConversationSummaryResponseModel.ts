@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationInitiationSource } from "./ConversationInitiationSource";
+import { ConversationSentimentAnalysis } from "./ConversationSentimentAnalysis";
 import { ConversationSummaryResponseModelStatus } from "./ConversationSummaryResponseModelStatus";
 import { EvaluationSuccessResult } from "./EvaluationSuccessResult";
 import { TelephonyDirection } from "./TelephonyDirection";
@@ -23,6 +24,7 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     status: ConversationSummaryResponseModelStatus,
     terminationReason: core.serialization.property("termination_reason", core.serialization.string().optional()),
     callSuccessful: core.serialization.property("call_successful", EvaluationSuccessResult),
+    callSuccessScore: core.serialization.property("call_success_score", core.serialization.number().optional()),
     transcriptSummary: core.serialization.property("transcript_summary", core.serialization.string().optional()),
     callSummaryTitle: core.serialization.property("call_summary_title", core.serialization.string().optional()),
     mainLanguage: core.serialization.property("main_language", core.serialization.string().optional()),
@@ -36,6 +38,7 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     ),
     direction: TelephonyDirection.optional(),
     rating: core.serialization.number().optional(),
+    sentimentAnalysis: core.serialization.property("sentiment_analysis", ConversationSentimentAnalysis.optional()),
 });
 
 export declare namespace ConversationSummaryResponseModel {
@@ -51,6 +54,7 @@ export declare namespace ConversationSummaryResponseModel {
         status: ConversationSummaryResponseModelStatus.Raw;
         termination_reason?: string | null;
         call_successful: EvaluationSuccessResult.Raw;
+        call_success_score?: number | null;
         transcript_summary?: string | null;
         call_summary_title?: string | null;
         main_language?: string | null;
@@ -58,5 +62,6 @@ export declare namespace ConversationSummaryResponseModel {
         tool_names?: string[] | null;
         direction?: TelephonyDirection.Raw | null;
         rating?: number | null;
+        sentiment_analysis?: ConversationSentimentAnalysis.Raw | null;
     }
 }

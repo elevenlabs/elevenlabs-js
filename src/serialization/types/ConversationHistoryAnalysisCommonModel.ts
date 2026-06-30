@@ -31,6 +31,7 @@ export const ConversationHistoryAnalysisCommonModel: core.serialization.ObjectSc
         core.serialization.list(DataCollectionResultCommonModel).optional(),
     ),
     callSuccessful: core.serialization.property("call_successful", EvaluationSuccessResult),
+    callSuccessScore: core.serialization.property("call_success_score", core.serialization.number().optional()),
     transcriptSummary: core.serialization.property("transcript_summary", core.serialization.string()),
     callSummaryTitle: core.serialization.property("call_summary_title", core.serialization.string().optional()),
     scoped: core.serialization.list(ScopedAnalysisResult).optional(),
@@ -43,6 +44,7 @@ export declare namespace ConversationHistoryAnalysisCommonModel {
         evaluation_criteria_results_list?: ConversationHistoryEvaluationCriteriaResultCommonModel.Raw[] | null;
         data_collection_results_list?: DataCollectionResultCommonModel.Raw[] | null;
         call_successful: EvaluationSuccessResult.Raw;
+        call_success_score?: number | null;
         transcript_summary: string;
         call_summary_title?: string | null;
         scoped?: ScopedAnalysisResult.Raw[] | null;

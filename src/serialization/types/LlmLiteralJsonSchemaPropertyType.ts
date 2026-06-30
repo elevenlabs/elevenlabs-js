@@ -7,8 +7,14 @@ import type * as serializers from "../index";
 export const LlmLiteralJsonSchemaPropertyType: core.serialization.Schema<
     serializers.LlmLiteralJsonSchemaPropertyType.Raw,
     ElevenLabs.LlmLiteralJsonSchemaPropertyType
-> = core.serialization.enum_(["boolean", "string", "integer", "number"]);
+> = core.serialization.undiscriminatedUnion([
+    core.serialization.stringLiteral("boolean"),
+    core.serialization.stringLiteral("string"),
+    core.serialization.stringLiteral("integer"),
+    core.serialization.stringLiteral("number"),
+    core.serialization.list(core.serialization.string()),
+]);
 
 export declare namespace LlmLiteralJsonSchemaPropertyType {
-    export type Raw = "boolean" | "string" | "integer" | "number";
+    export type Raw = "boolean" | "string" | "integer" | "number" | string[];
 }

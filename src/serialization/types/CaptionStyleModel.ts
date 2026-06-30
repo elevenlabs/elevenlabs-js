@@ -35,6 +35,11 @@ export const CaptionStyleModel: core.serialization.ObjectSchema<
     backgroundEnabled: core.serialization.property("background_enabled", core.serialization.boolean().optional()),
     backgroundColor: core.serialization.property("background_color", core.serialization.string().optional()),
     backgroundOpacity: core.serialization.property("background_opacity", core.serialization.number().optional()),
+    backgroundBlur: core.serialization.property("background_blur", core.serialization.number().optional()),
+    backgroundBorderRadius: core.serialization.property(
+        "background_border_radius",
+        core.serialization.number().optional(),
+    ),
     wordHighlightsEnabled: core.serialization.property(
         "word_highlights_enabled",
         core.serialization.boolean().optional(),
@@ -48,6 +53,11 @@ export const CaptionStyleModel: core.serialization.ObjectSchema<
         "word_highlights_opacity",
         core.serialization.number().optional(),
     ),
+    wordHighlightsBorderRadius: core.serialization.property(
+        "word_highlights_border_radius",
+        core.serialization.number().optional(),
+    ),
+    wordHighlightsBlur: core.serialization.property("word_highlights_blur", core.serialization.number().optional()),
     sectionAnimation: core.serialization.property("section_animation", CaptionStyleSectionAnimationModel.optional()),
     wordAnimation: core.serialization.property("word_animation", CaptionStyleWordAnimationModel.optional()),
     characterAnimation: core.serialization.property(
@@ -81,10 +91,14 @@ export declare namespace CaptionStyleModel {
         background_enabled?: boolean | null;
         background_color?: string | null;
         background_opacity?: number | null;
+        background_blur?: number | null;
+        background_border_radius?: number | null;
         word_highlights_enabled?: boolean | null;
         word_highlights_color?: string | null;
         word_highlights_background_color?: string | null;
         word_highlights_opacity?: number | null;
+        word_highlights_border_radius?: number | null;
+        word_highlights_blur?: number | null;
         section_animation?: CaptionStyleSectionAnimationModel.Raw | null;
         word_animation?: CaptionStyleWordAnimationModel.Raw | null;
         character_animation?: CaptionStyleCharacterAnimationModel.Raw | null;

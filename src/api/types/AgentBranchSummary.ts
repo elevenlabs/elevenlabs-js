@@ -19,4 +19,6 @@ export interface AgentBranchSummary {
     parentBranchId?: string;
     /** Whether a draft exists for the branch */
     draftExists?: boolean;
+    /** Number of calls in the last 7 days */
+    calls7D?: number;
 }

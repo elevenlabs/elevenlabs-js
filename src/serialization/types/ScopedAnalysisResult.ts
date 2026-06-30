@@ -26,6 +26,7 @@ export const ScopedAnalysisResult: core.serialization.ObjectSchema<
         core.serialization.record(core.serialization.string(), DataCollectionResultCommonModel).optional(),
     ),
     successful: EvaluationSuccessResult,
+    successScore: core.serialization.property("success_score", core.serialization.number().optional()),
 });
 
 export declare namespace ScopedAnalysisResult {
@@ -36,5 +37,6 @@ export declare namespace ScopedAnalysisResult {
         evaluation_criteria_results?: Record<string, ConversationHistoryEvaluationCriteriaResultCommonModel.Raw> | null;
         data_collection_results?: Record<string, DataCollectionResultCommonModel.Raw> | null;
         successful: EvaluationSuccessResult.Raw;
+        success_score?: number | null;
     }
 }

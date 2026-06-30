@@ -11,6 +11,8 @@ export interface PromptAgentApiModelOutput {
     reasoningEffort?: ElevenLabs.LlmReasoningEffort;
     /** Max number of tokens used for thinking. Use 0 to turn off if supported by the model. */
     thinkingBudget?: number;
+    /** Enable model reasoning summaries. When disabled, we do not request summaries from provider if possible for faster TTFB. Not ZRM compatible. */
+    enableReasoningSummary?: boolean;
     /** The temperature for the LLM. Defaults to 0. Set to null to omit the parameter from the LLM request entirely (useful for custom LLMs that reject the temperature field). */
     temperature?: number;
     /** If greater than 0, maximum number of tokens the LLM can predict */

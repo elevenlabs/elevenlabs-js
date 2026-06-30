@@ -61,6 +61,7 @@ export class ElevenLabsClient {
     protected _audioNative: AudioNativeClient | undefined;
     protected _usage: UsageClient | undefined;
     protected _pronunciationDictionaries: PronunciationDictionariesClient | undefined;
+    protected _workspace: WorkspaceClient | undefined;
     protected _serviceAccounts: ServiceAccountsClient | undefined;
     protected _webhooks: WebhooksClient | undefined;
     protected _speechToText: SpeechToTextClient | undefined;
@@ -70,7 +71,6 @@ export class ElevenLabsClient {
     protected _environmentVariables: EnvironmentVariablesClient | undefined;
     protected _productions: ProductionsClient | undefined;
     protected _tokens: TokensClient | undefined;
-    protected _workspace: WorkspaceClient | undefined;
     protected _workspaces: WorkspacesClient | undefined;
 
     constructor(options: ElevenLabsClient.Options = {}) {
@@ -145,6 +145,10 @@ export class ElevenLabsClient {
         return (this._pronunciationDictionaries ??= new PronunciationDictionariesClient(this._options));
     }
 
+    public get workspace(): WorkspaceClient {
+        return (this._workspace ??= new WorkspaceClient(this._options));
+    }
+
     public get serviceAccounts(): ServiceAccountsClient {
         return (this._serviceAccounts ??= new ServiceAccountsClient(this._options));
     }
@@ -179,10 +183,6 @@ export class ElevenLabsClient {
 
     public get tokens(): TokensClient {
         return (this._tokens ??= new TokensClient(this._options));
-    }
-
-    public get workspace(): WorkspaceClient {
-        return (this._workspace ??= new WorkspaceClient(this._options));
     }
 
     public get workspaces(): WorkspacesClient {

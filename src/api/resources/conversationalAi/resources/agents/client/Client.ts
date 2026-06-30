@@ -583,7 +583,9 @@ export class AgentsClient {
     }
 
     /**
-     * Run a conversation between the agent and a simulated user.
+     * @deprecated
+     *
+     * Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user.
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {ElevenLabs.conversationalAi.BodySimulatesAConversationV1ConvaiAgentsAgentIdSimulateConversationPost} request
@@ -676,7 +678,9 @@ export class AgentsClient {
     }
 
     /**
-     * Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
+     * @deprecated
+     *
+     * Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {ElevenLabs.conversationalAi.BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost} request

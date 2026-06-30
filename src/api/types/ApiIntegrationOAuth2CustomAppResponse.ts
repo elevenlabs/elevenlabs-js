@@ -16,14 +16,11 @@ export interface ApiIntegrationOAuth2CustomAppResponse {
     expiresAt: string;
     integrationId: string;
     credentialId: string;
-    /** Current health status of the OAuth connection */
-    status?: ElevenLabs.OAuthConnectionStatus;
-    /** Human-readable detail about the current status, e.g. the error message on refresh failure */
-    statusDetail?: string;
-    /** ISO 8601 timestamp of the last status change */
-    statusUpdatedAt?: string;
     /** OAuth client ID (rendered from template if credential uses templated credentials, None for legacy connections) */
     clientId: string;
     id: string;
     usedBy?: ElevenLabs.AuthConnectionDependencies;
+    status?: ElevenLabs.AuthConnectionStatus;
+    statusDetail?: string;
+    statusUpdatedAt?: string;
 }

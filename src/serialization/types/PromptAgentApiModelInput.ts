@@ -20,6 +20,10 @@ export const PromptAgentApiModelInput: core.serialization.ObjectSchema<
     llm: Llm.optional(),
     reasoningEffort: core.serialization.property("reasoning_effort", LlmReasoningEffort.optional()),
     thinkingBudget: core.serialization.property("thinking_budget", core.serialization.number().optional()),
+    enableReasoningSummary: core.serialization.property(
+        "enable_reasoning_summary",
+        core.serialization.boolean().optional(),
+    ),
     temperature: core.serialization.number().optional(),
     maxTokens: core.serialization.property("max_tokens", core.serialization.number().optional()),
     toolIds: core.serialization.property("tool_ids", core.serialization.list(core.serialization.string()).optional()),
@@ -60,6 +64,7 @@ export declare namespace PromptAgentApiModelInput {
         llm?: Llm.Raw | null;
         reasoning_effort?: LlmReasoningEffort.Raw | null;
         thinking_budget?: number | null;
+        enable_reasoning_summary?: boolean | null;
         temperature?: number | null;
         max_tokens?: number | null;
         tool_ids?: string[] | null;

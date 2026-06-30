@@ -30,4 +30,7 @@ export interface OAuth2JwtResponse {
     tokenResponseField?: ElevenLabs.OAuth2JwtResponseTokenResponseField;
     id: string;
     usedBy?: ElevenLabs.AuthConnectionDependencies;
+    status?: ElevenLabs.AuthConnectionStatus;
+    statusDetail?: string;
+    statusUpdatedAt?: string;
 }

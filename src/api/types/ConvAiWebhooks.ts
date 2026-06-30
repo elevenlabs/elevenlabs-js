@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../index";
 
 export interface ConvAiWebhooks {
     postCallWebhookId?: string;
-    /** List of event types to send via webhook. Options: transcript, audio, call_initiation_failure. */
+    /** List of event types to send via webhook. Options: transcript, audio, call_initiation_failure, unredacted_transcript, unredacted_audio. */
     events?: ElevenLabs.WebhookEventType[];
     /** Format for transcript webhooks. */
     transcriptFormat?: ElevenLabs.WebhookTranscriptFormat;

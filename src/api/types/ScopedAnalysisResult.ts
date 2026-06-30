@@ -11,4 +11,5 @@ export interface ScopedAnalysisResult {
     evaluationCriteriaResults?: Record<string, ElevenLabs.ConversationHistoryEvaluationCriteriaResultCommonModel>;
     dataCollectionResults?: Record<string, ElevenLabs.DataCollectionResultCommonModel>;
     successful: ElevenLabs.EvaluationSuccessResult;
+    successScore?: number;
 }

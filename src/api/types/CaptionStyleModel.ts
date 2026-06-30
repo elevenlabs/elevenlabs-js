@@ -17,10 +17,14 @@ export interface CaptionStyleModel {
     backgroundEnabled?: boolean;
     backgroundColor?: string;
     backgroundOpacity?: number;
+    backgroundBlur?: number;
+    backgroundBorderRadius?: number;
     wordHighlightsEnabled?: boolean;
     wordHighlightsColor?: string;
     wordHighlightsBackgroundColor?: string;
     wordHighlightsOpacity?: number;
+    wordHighlightsBorderRadius?: number;
+    wordHighlightsBlur?: number;
     sectionAnimation?: ElevenLabs.CaptionStyleSectionAnimationModel;
     wordAnimation?: ElevenLabs.CaptionStyleWordAnimationModel;
     characterAnimation?: ElevenLabs.CaptionStyleCharacterAnimationModel;
