@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { CriteriaScoringMode } from "./CriteriaScoringMode";
 import { EvaluationSuccessResult } from "./EvaluationSuccessResult";
 
 export const ConversationHistoryEvaluationCriteriaResultCommonModel: core.serialization.ObjectSchema<
@@ -12,6 +13,9 @@ export const ConversationHistoryEvaluationCriteriaResultCommonModel: core.serial
     criteriaId: core.serialization.property("criteria_id", core.serialization.string()),
     result: EvaluationSuccessResult,
     rationale: core.serialization.string(),
+    scoringMode: core.serialization.property("scoring_mode", CriteriaScoringMode.optional()),
+    score: core.serialization.number().optional(),
+    maxScore: core.serialization.property("max_score", core.serialization.number().optional()),
 });
 
 export declare namespace ConversationHistoryEvaluationCriteriaResultCommonModel {
@@ -19,5 +23,8 @@ export declare namespace ConversationHistoryEvaluationCriteriaResultCommonModel 
         criteria_id: string;
         result: EvaluationSuccessResult.Raw;
         rationale: string;
+        scoring_mode?: CriteriaScoringMode.Raw | null;
+        score?: number | null;
+        max_score?: number | null;
     }
 }

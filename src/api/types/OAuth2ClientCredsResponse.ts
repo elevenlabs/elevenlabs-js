@@ -16,6 +16,9 @@ export interface OAuth2ClientCredsResponse {
     basicAuthInHeader?: boolean;
     id: string;
     usedBy?: ElevenLabs.AuthConnectionDependencies;
+    status?: ElevenLabs.AuthConnectionStatus;
+    statusDetail?: string;
+    statusUpdatedAt?: string;
     /** Custom headers configured for OAuth2 token requests */
     customHeaders?: Record<string, string>;
 }

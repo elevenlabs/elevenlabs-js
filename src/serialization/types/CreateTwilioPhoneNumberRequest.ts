@@ -13,6 +13,7 @@ export const CreateTwilioPhoneNumberRequest: core.serialization.ObjectSchema<
     label: core.serialization.string(),
     supportsInbound: core.serialization.property("supports_inbound", core.serialization.boolean().optional()),
     supportsOutbound: core.serialization.property("supports_outbound", core.serialization.boolean().optional()),
+    agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
     sid: core.serialization.string(),
     token: core.serialization.string(),
     regionConfig: core.serialization.property("region_config", RegionConfigRequest.optional()),
@@ -24,6 +25,7 @@ export declare namespace CreateTwilioPhoneNumberRequest {
         label: string;
         supports_inbound?: boolean | null;
         supports_outbound?: boolean | null;
+        agent_id?: string | null;
         sid: string;
         token: string;
         region_config?: RegionConfigRequest.Raw | null;

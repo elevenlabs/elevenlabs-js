@@ -7,8 +7,14 @@ import type * as serializers from "../index";
 export const WebhookEventType: core.serialization.Schema<
     serializers.WebhookEventType.Raw,
     ElevenLabs.WebhookEventType
-> = core.serialization.enum_(["transcript", "audio", "call_initiation_failure"]);
+> = core.serialization.enum_([
+    "transcript",
+    "audio",
+    "call_initiation_failure",
+    "unredacted_transcript",
+    "unredacted_audio",
+]);
 
 export declare namespace WebhookEventType {
-    export type Raw = "transcript" | "audio" | "call_initiation_failure";
+    export type Raw = "transcript" | "audio" | "call_initiation_failure" | "unredacted_transcript" | "unredacted_audio";
 }

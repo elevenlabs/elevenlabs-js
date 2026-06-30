@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AuthConnectionDependencies } from "./AuthConnectionDependencies";
+import { AuthConnectionStatus } from "./AuthConnectionStatus";
 import { OAuth2JwtResponseAlgorithm } from "./OAuth2JwtResponseAlgorithm";
 import { OAuth2JwtResponseTokenResponseField } from "./OAuth2JwtResponseTokenResponseField";
 
@@ -31,6 +32,9 @@ export const OAuth2JwtResponse: core.serialization.ObjectSchema<
     ),
     id: core.serialization.string(),
     usedBy: core.serialization.property("used_by", AuthConnectionDependencies.optional()),
+    status: AuthConnectionStatus.optional(),
+    statusDetail: core.serialization.property("status_detail", core.serialization.string().optional()),
+    statusUpdatedAt: core.serialization.property("status_updated_at", core.serialization.string().optional()),
 });
 
 export declare namespace OAuth2JwtResponse {
@@ -49,5 +53,8 @@ export declare namespace OAuth2JwtResponse {
         token_response_field?: OAuth2JwtResponseTokenResponseField.Raw | null;
         id: string;
         used_by?: AuthConnectionDependencies.Raw | null;
+        status?: AuthConnectionStatus.Raw | null;
+        status_detail?: string | null;
+        status_updated_at?: string | null;
     }
 }

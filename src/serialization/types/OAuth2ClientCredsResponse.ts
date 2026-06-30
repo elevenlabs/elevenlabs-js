@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AuthConnectionDependencies } from "./AuthConnectionDependencies";
+import { AuthConnectionStatus } from "./AuthConnectionStatus";
 
 export const OAuth2ClientCredsResponse: core.serialization.ObjectSchema<
     serializers.OAuth2ClientCredsResponse.Raw,
@@ -21,6 +22,9 @@ export const OAuth2ClientCredsResponse: core.serialization.ObjectSchema<
     basicAuthInHeader: core.serialization.property("basic_auth_in_header", core.serialization.boolean().optional()),
     id: core.serialization.string(),
     usedBy: core.serialization.property("used_by", AuthConnectionDependencies.optional()),
+    status: AuthConnectionStatus.optional(),
+    statusDetail: core.serialization.property("status_detail", core.serialization.string().optional()),
+    statusUpdatedAt: core.serialization.property("status_updated_at", core.serialization.string().optional()),
     customHeaders: core.serialization.property(
         "custom_headers",
         core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
@@ -38,6 +42,9 @@ export declare namespace OAuth2ClientCredsResponse {
         basic_auth_in_header?: boolean | null;
         id: string;
         used_by?: AuthConnectionDependencies.Raw | null;
+        status?: AuthConnectionStatus.Raw | null;
+        status_detail?: string | null;
+        status_updated_at?: string | null;
         custom_headers?: Record<string, string> | null;
     }
 }

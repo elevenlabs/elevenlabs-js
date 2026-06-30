@@ -11,4 +11,7 @@ export interface BasicAuthResponse {
     username: string;
     id: string;
     usedBy?: ElevenLabs.AuthConnectionDependencies;
+    status?: ElevenLabs.AuthConnectionStatus;
+    statusDetail?: string;
+    statusUpdatedAt?: string;
 }

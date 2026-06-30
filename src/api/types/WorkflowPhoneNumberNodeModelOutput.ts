@@ -7,6 +7,8 @@ export interface WorkflowPhoneNumberNodeModelOutput {
     customSipHeaders: ElevenLabs.WorkflowPhoneNumberNodeModelOutputCustomSipHeadersItem[];
     transferDestination: ElevenLabs.WorkflowPhoneNumberNodeModelOutputTransferDestination;
     transferType: ElevenLabs.TransferTypeEnum;
+    /** User-to-User Information (RFC 7433) to attach to SIP REFER transfers. Carries call context such as CRM identifiers or escalation reason across the transfer boundary. */
+    uui?: ElevenLabs.UuiTransferConfig;
     /** DTMF digits to send after call connects (e.g., 'ww1234' for extension). Can be either a static value or a dynamic variable reference. Use 'w' for 0.5s pause. Only supported for Twilio transfers. */
     postDialDigits?: ElevenLabs.WorkflowPhoneNumberNodeModelOutputPostDialDigits;
     /** Position of the node in the workflow. */

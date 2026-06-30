@@ -8,6 +8,7 @@ export interface ConversationHistoryAnalysisCommonModel {
     evaluationCriteriaResultsList?: ElevenLabs.ConversationHistoryEvaluationCriteriaResultCommonModel[];
     dataCollectionResultsList?: ElevenLabs.DataCollectionResultCommonModel[];
     callSuccessful: ElevenLabs.EvaluationSuccessResult;
+    callSuccessScore?: number;
     transcriptSummary: string;
     callSummaryTitle?: string;
     scoped?: ElevenLabs.ScopedAnalysisResult[];

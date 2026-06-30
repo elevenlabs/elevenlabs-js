@@ -17,6 +17,8 @@ export interface WebhookToolApiSchemaConfigOutput {
     requestBodySchema?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
     /** Schema describing the expected response body structure. For documentation only; not surfaced to the LLM. */
     responseBodySchema?: ElevenLabs.ObjectJsonSchemaPropertyOutput;
+    /** Optional allow-list filter applied to the response before the LLM sees it, so large responses don't pollute the context. Defaults to the full response. */
+    responseFilter?: ElevenLabs.ResponseFilter;
     /** Content type for the request body. Only applies to POST/PUT/PATCH requests. */
     contentType?: ElevenLabs.WebhookToolApiSchemaConfigOutputContentType;
     /** URL placeholders resolved from the auth connection (e.g. secrets injected via UrlSecretAuthConnection) rather than from path_params_schema. */

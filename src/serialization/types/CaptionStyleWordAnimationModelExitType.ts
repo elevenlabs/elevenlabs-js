@@ -7,8 +7,27 @@ import type * as serializers from "../index";
 export const CaptionStyleWordAnimationModelExitType: core.serialization.Schema<
     serializers.CaptionStyleWordAnimationModelExitType.Raw,
     ElevenLabs.CaptionStyleWordAnimationModelExitType
-> = core.serialization.enum_(["none", "fade", "scale", "pop", "slide_up", "slide_down"]);
+> = core.serialization.enum_([
+    "none",
+    "fade",
+    "scale",
+    "pop",
+    "slide_up",
+    "slide_down",
+    "slam",
+    "scale_down",
+    "slide_in",
+]);
 
 export declare namespace CaptionStyleWordAnimationModelExitType {
-    export type Raw = "none" | "fade" | "scale" | "pop" | "slide_up" | "slide_down";
+    export type Raw =
+        | "none"
+        | "fade"
+        | "scale"
+        | "pop"
+        | "slide_up"
+        | "slide_down"
+        | "slam"
+        | "scale_down"
+        | "slide_in";
 }

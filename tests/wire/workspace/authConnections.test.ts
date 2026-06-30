@@ -20,10 +20,10 @@ describe("AuthConnectionsClient", () => {
                     expires_at: "expires_at",
                     integration_id: "integration_id",
                     credential_id: "credential_id",
+                    id: "id",
                     status: "active",
                     status_detail: "status_detail",
                     status_updated_at: "status_updated_at",
-                    id: "id",
                 },
             ],
         };
@@ -49,10 +49,10 @@ describe("AuthConnectionsClient", () => {
                     expiresAt: "expires_at",
                     integrationId: "integration_id",
                     credentialId: "credential_id",
+                    id: "id",
                     status: "active",
                     statusDetail: "status_detail",
                     statusUpdatedAt: "status_updated_at",
-                    id: "id",
                 },
             ],
         });
@@ -86,6 +86,9 @@ describe("AuthConnectionsClient", () => {
                 ],
                 integration_connections: [{ id: "id", name: "name" }],
             },
+            status: "active",
+            status_detail: "status_detail",
+            status_updated_at: "status_updated_at",
             custom_headers: { key: "value" },
         };
 
@@ -144,6 +147,9 @@ describe("AuthConnectionsClient", () => {
                     },
                 ],
             },
+            status: "active",
+            statusDetail: "status_detail",
+            statusUpdatedAt: "status_updated_at",
             customHeaders: {
                 key: "value",
             },
@@ -191,6 +197,9 @@ describe("AuthConnectionsClient", () => {
                 ],
                 integration_connections: [{ id: "id", name: "name" }],
             },
+            status: "active",
+            status_detail: "status_detail",
+            status_updated_at: "status_updated_at",
             custom_headers: { key: "value" },
         };
 
@@ -244,6 +253,9 @@ describe("AuthConnectionsClient", () => {
                     },
                 ],
             },
+            status: "active",
+            statusDetail: "status_detail",
+            statusUpdatedAt: "status_updated_at",
             customHeaders: {
                 key: "value",
             },

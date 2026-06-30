@@ -4,5 +4,7 @@ export const WebhookEventType = {
     Transcript: "transcript",
     Audio: "audio",
     CallInitiationFailure: "call_initiation_failure",
+    UnredactedTranscript: "unredacted_transcript",
+    UnredactedAudio: "unredacted_audio",
 } as const;
 export type WebhookEventType = (typeof WebhookEventType)[keyof typeof WebhookEventType];

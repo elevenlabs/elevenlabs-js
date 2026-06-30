@@ -12,4 +12,7 @@ export interface CustomHeaderAuthResponse {
     headerName: string;
     id: string;
     usedBy?: ElevenLabs.AuthConnectionDependencies;
+    status?: ElevenLabs.AuthConnectionStatus;
+    statusDetail?: string;
+    statusUpdatedAt?: string;
 }

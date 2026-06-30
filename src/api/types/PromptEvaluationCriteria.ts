@@ -19,4 +19,10 @@ export interface PromptEvaluationCriteria {
     scope?: ElevenLabs.AnalysisScope;
     /** LLM model to use for this evaluation criteria. If not set, uses agent's analysis_llm default. */
     llm?: ElevenLabs.Llm;
+    /** How this criterion is scored. 'binary' resolves to success/failure/unknown. 'numeric_uniform' returns a number on the [0, max_score] scale which is normalized into the aggregate conversation success percentage. */
+    scoringMode?: ElevenLabs.CriteriaScoringMode;
+    /** Maximum value of the numeric score scale (minimum is always 0). Only used when scoring_mode is 'numeric_uniform'. */
+    maxScore?: number;
+    /** Optional free-text instructions describing how to assign values on the numeric scale. Only used when scoring_mode is 'numeric_uniform'. */
+    scoreInstructions?: string;
 }

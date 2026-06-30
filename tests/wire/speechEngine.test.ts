@@ -95,6 +95,7 @@ describe("SpeechEngineClient", () => {
                 retranscribe_on_turn_timeout: true,
                 turn_model: "turn_v2",
                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                transcribe_on_disabled_interruptions: true,
             },
             conversation: {
                 text_only: true,
@@ -202,6 +203,7 @@ describe("SpeechEngineClient", () => {
                 retranscribeOnTurnTimeout: true,
                 turnModel: "turn_v2",
                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                transcribeOnDisabledInterruptions: true,
             },
             conversation: {
                 textOnly: true,
@@ -299,6 +301,7 @@ describe("SpeechEngineClient", () => {
                 retranscribe_on_turn_timeout: true,
                 turn_model: "turn_v2",
                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                transcribe_on_disabled_interruptions: true,
             },
             conversation: {
                 text_only: true,
@@ -401,6 +404,7 @@ describe("SpeechEngineClient", () => {
                 retranscribeOnTurnTimeout: true,
                 turnModel: "turn_v2",
                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                transcribeOnDisabledInterruptions: true,
             },
             conversation: {
                 textOnly: true,
@@ -513,6 +517,7 @@ describe("SpeechEngineClient", () => {
                 retranscribe_on_turn_timeout: true,
                 turn_model: "turn_v2",
                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                transcribe_on_disabled_interruptions: true,
             },
             conversation: {
                 text_only: true,
@@ -616,6 +621,7 @@ describe("SpeechEngineClient", () => {
                 retranscribeOnTurnTimeout: true,
                 turnModel: "turn_v2",
                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                transcribeOnDisabledInterruptions: true,
             },
             conversation: {
                 textOnly: true,

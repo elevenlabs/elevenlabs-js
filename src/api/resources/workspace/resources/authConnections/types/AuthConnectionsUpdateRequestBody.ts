@@ -8,6 +8,7 @@ import type * as ElevenLabs from "../../../../../index";
 export type AuthConnectionsUpdateRequestBody =
     | ElevenLabs.workspace.AuthConnectionsUpdateRequestBody.Oauth2ClientCredentials
     | ElevenLabs.workspace.AuthConnectionsUpdateRequestBody.BasicAuth
+    | ElevenLabs.workspace.AuthConnectionsUpdateRequestBody.BearerAuth
     | ElevenLabs.workspace.AuthConnectionsUpdateRequestBody.Oauth2Jwt;
 
 export namespace AuthConnectionsUpdateRequestBody {
@@ -17,6 +18,10 @@ export namespace AuthConnectionsUpdateRequestBody {
 
     export interface BasicAuth extends ElevenLabs.UpdateBasicAuthRequest {
         authType: "basic_auth";
+    }
+
+    export interface BearerAuth extends ElevenLabs.UpdateBearerAuthRequest {
+        authType: "bearer_auth";
     }
 
     export interface Oauth2Jwt extends ElevenLabs.UpdateOAuth2JwtRequest {

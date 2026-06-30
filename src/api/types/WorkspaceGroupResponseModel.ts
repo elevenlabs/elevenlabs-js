@@ -12,5 +12,6 @@ export interface WorkspaceGroupResponseModel {
     characterCount?: number;
     scimExternalId?: string;
     isScimSynced?: boolean;
+    scimGroup?: ElevenLabs.ScimGroupResponseModel;
     scimFrozen?: boolean;
 }

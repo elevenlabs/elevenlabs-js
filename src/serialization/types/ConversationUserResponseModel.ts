@@ -3,6 +3,8 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { FrustratedConversationRef } from "./FrustratedConversationRef";
+import { SentimentAggregate } from "./SentimentAggregate";
 
 export const ConversationUserResponseModel: core.serialization.ObjectSchema<
     serializers.ConversationUserResponseModel.Raw,
@@ -18,6 +20,11 @@ export const ConversationUserResponseModel: core.serialization.ObjectSchema<
         "last_contact_agent_name",
         core.serialization.string().optional(),
     ),
+    sentiment: SentimentAggregate,
+    mostFrustratedConversations: core.serialization.property(
+        "most_frustrated_conversations",
+        core.serialization.list(FrustratedConversationRef).optional(),
+    ),
 });
 
 export declare namespace ConversationUserResponseModel {
@@ -29,5 +36,7 @@ export declare namespace ConversationUserResponseModel {
         last_contact_agent_id?: string | null;
         last_contact_conversation_id: string;
         last_contact_agent_name?: string | null;
+        sentiment: SentimentAggregate.Raw;
+        most_frustrated_conversations?: FrustratedConversationRef.Raw[] | null;
     }
 }
