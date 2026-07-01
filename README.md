@@ -178,6 +178,23 @@ server.start();
 
 Both `SpeechEngine.Server` and `speechEngine.attach()` automatically verify the `X-Elevenlabs-Speech-Engine-Authorization` header on every incoming connection, rejecting any requests that were not signed by ElevenLabs. The API key is read from `apiKey` in the options or the `ELEVENLABS_API_KEY` environment variable.
 
+#### Disabling authentication
+
+If you're running behind an infrastructure layer that already restricts incoming traffic to ElevenLabs (typically an IP allowlist scoped to [ElevenLabs' egress ranges](https://elevenlabs.io/docs/overview/capabilities/speech-engine#ip-allowlisting)), you can skip JWT verification by passing `disableAuth: true`:
+
+```ts
+// Standalone — no apiKey required when disableAuth is true
+new SpeechEngine.Server({ port: 3001, disableAuth: true, onTranscript }).start();
+
+// Or on attach
+elevenlabs.speechEngine.attach("seng_123", httpServer, "/api/speech-engine/ws", {
+    disableAuth: true,
+    onTranscript,
+});
+```
+
+When auth is disabled the server accepts any client that can reach it and logs a `console.warn` on startup. **Only use this if you have an IP allowlist or equivalent network-level restriction in front of the server** — without one, anyone on the internet can open a session and consume your compute and downstream LLM quota.
+
 ### Session events
 
 | Event | Method | Description |

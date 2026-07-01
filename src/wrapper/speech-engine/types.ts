@@ -75,6 +75,18 @@ export interface SpeechEngineCallbacks {
     /** Enable debug logging. */
     debug?: boolean;
 
+    /**
+     * Disable verification of the `X-Elevenlabs-Speech-Engine-Authorization`
+     * JWT on incoming connections. When `true`, any client that can reach the
+     * server will be accepted.
+     *
+     * **Insecure.** Only enable this if you are protecting the server through
+     * another layer — typically an IP allowlist restricting traffic to
+     * ElevenLabs' egress ranges. Without that, anyone on the internet can
+     * open a session and consume your compute and downstream LLM quota.
+     */
+    disableAuth?: boolean;
+
     /** Fired once when the session is initialized with a conversation ID. */
     onInit?(conversationId: string, session: SpeechEngineSession): void;
 

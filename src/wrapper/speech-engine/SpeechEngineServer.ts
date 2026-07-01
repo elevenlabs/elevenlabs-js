@@ -66,39 +66,57 @@ export class SpeechEngineServer {
             throw new Error("Server is already started");
         }
 
+        const disableAuth = this.options.disableAuth ?? false;
         const apiKey = this.options.apiKey ?? process.env.ELEVENLABS_API_KEY;
-        if (!apiKey) {
+        if (!apiKey && !disableAuth) {
             throw new Error(
                 "SpeechEngine.Server requires an API key to verify incoming connections. " +
-                "Pass { apiKey: \"...\" } or set the ELEVENLABS_API_KEY environment variable.",
+                "Pass { apiKey: \"...\" } or set the ELEVENLABS_API_KEY environment variable. " +
+                "To run without authentication, pass { disableAuth: true } — but only behind an IP allowlist.",
             );
         }
 
         const debug = this.options.debug ?? false;
         const log = debug ? (...args: unknown[]) => console.log("[SpeechEngine]", ...args) : () => {};
 
+        if (disableAuth) {
+            console.warn(
+                "[SpeechEngine] authentication is disabled — incoming connections will NOT be verified. " +
+                "Make sure the server is protected by an IP allowlist restricting traffic to ElevenLabs.",
+            );
+        }
+
         const httpServer = createServer();
         const wss = new WebSocket.Server({ noServer: true });
 
+        const verifyToken = disableAuth
+            ? null
+            : (token: string) => verifySpeechEngineJwt(token, apiKey as string);
+
         httpServer.on("upgrade", (req, socket: Duplex, head) => {
-            const headerValue = req.headers["x-elevenlabs-speech-engine-authorization"];
-            const token = Array.isArray(headerValue) ? headerValue[0] : headerValue;
+            if (verifyToken) {
+                const headerValue = req.headers["x-elevenlabs-speech-engine-authorization"];
+                const token = Array.isArray(headerValue) ? headerValue[0] : headerValue;
 
-            if (!token) {
-                log("rejected connection — missing X-Elevenlabs-Speech-Engine-Authorization header");
-                socket.destroy();
-                return;
+                if (!token) {
+                    log("rejected connection — missing X-Elevenlabs-Speech-Engine-Authorization header");
+                    socket.destroy();
+                    return;
+                }
+
+                try {
+                    verifyToken(token);
+                } catch (err) {
+                    log(`rejected connection — ${err instanceof Error ? err.message : String(err)}`);
+                    socket.destroy();
+                    return;
+                }
+
+                log("verified connection, upgrading to WebSocket");
+            } else {
+                log("auth disabled, upgrading connection without verification");
             }
 
-            try {
-                verifySpeechEngineJwt(token, apiKey);
-            } catch (err) {
-                log(`rejected connection — ${err instanceof Error ? err.message : String(err)}`);
-                socket.destroy();
-                return;
-            }
-
-            log("verified connection, upgrading to WebSocket");
             wss.handleUpgrade(req, socket, head, (ws) => {
                 wss.emit("connection", ws);
             });
