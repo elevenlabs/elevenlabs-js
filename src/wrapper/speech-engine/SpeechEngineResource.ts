@@ -80,7 +80,15 @@ export class SpeechEngineResource {
         handler: SpeechEngineCallbacks,
     ): SpeechEngineAttachment {
         const debug = handler.debug ?? false;
+        const disableAuth = handler.disableAuth ?? false;
         const log = debug ? (...args: unknown[]) => console.log("[SpeechEngine]", ...args) : () => {};
+
+        if (disableAuth) {
+            console.warn(
+                "[SpeechEngine] authentication is disabled on attach() — incoming connections will NOT be verified. " +
+                "Make sure the server is protected by an IP allowlist restricting traffic to ElevenLabs.",
+            );
+        }
 
         const wss = new WebSocket.Server({ noServer: true });
 
@@ -93,15 +101,18 @@ export class SpeechEngineResource {
                 return;
             }
 
-            if (!await this.verifyRequest(req)) {
+            if (disableAuth) {
+                log("auth disabled, upgrading connection without verification");
+            } else if (!await this.verifyRequest(req)) {
                 // verifyRequest returned false — get the detailed reason for debug logging
                 const reason = await this.getVerificationFailure(req);
                 log(`rejected connection — ${reason}`);
                 socket.destroy();
                 return;
+            } else {
+                log("upgrading connection to WebSocket");
             }
 
-            log("upgrading connection to WebSocket");
             wss.handleUpgrade(req, socket, head, (ws) => {
                 log("WebSocket connection established");
                 wss.emit("connection", ws);
