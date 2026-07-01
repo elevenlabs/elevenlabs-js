@@ -86,7 +86,7 @@ export class SpeechEngineResource {
         if (disableAuth) {
             console.warn(
                 "[SpeechEngine] authentication is disabled on attach() — incoming connections will NOT be verified. " +
-                "Make sure the server is protected by an IP allowlist restricting traffic to ElevenLabs.",
+                "Make sure the server is protected by either IP allowlist restricting traffic to ElevenLabs or using custom header values.",
             );
         }
 
