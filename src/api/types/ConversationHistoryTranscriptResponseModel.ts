@@ -17,9 +17,12 @@ export interface ConversationHistoryTranscriptResponseModel {
     llmUsage?: ElevenLabs.LlmUsageOutput;
     interrupted?: boolean;
     originalMessage?: string;
+    reasoning?: ElevenLabs.ConversationReasoningModel[];
     sourceMedium?: ElevenLabs.ChatSourceMedium;
     sourceEventId?: number;
     usedStaticKbDocumentIds?: string[];
+    userIdentifier?: string;
     fileInput?: ElevenLabs.ConversationHistoryTranscriptFileInputResponseModel;
     contextualUpdateInfo?: ElevenLabs.ContextualUpdateInfo;
+    reasoned?: boolean;
 }

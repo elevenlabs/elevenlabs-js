@@ -71,7 +71,7 @@ export class RulesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.pronunciationDictionaries.BodySetRulesOnThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdSetRulesPost.jsonOrThrow(
                 request,
@@ -164,7 +164,7 @@ export class RulesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.pronunciationDictionaries.PronunciationDictionary.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
@@ -252,7 +252,7 @@ export class RulesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.pronunciationDictionaries.RemovePronunciationDictionaryRulesRequest.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

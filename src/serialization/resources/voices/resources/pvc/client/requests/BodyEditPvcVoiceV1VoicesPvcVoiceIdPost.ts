@@ -11,7 +11,7 @@ export const BodyEditPvcVoiceV1VoicesPvcVoiceIdPost: core.serialization.Schema<
     name: core.serialization.string().optional(),
     language: core.serialization.string().optional(),
     description: core.serialization.string().optional(),
-    labels: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    labels: core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
 });
 
 export declare namespace BodyEditPvcVoiceV1VoicesPvcVoiceIdPost {
@@ -19,6 +19,6 @@ export declare namespace BodyEditPvcVoiceV1VoicesPvcVoiceIdPost {
         name?: string | null;
         language?: string | null;
         description?: string | null;
-        labels?: Record<string, string | null> | null;
+        labels?: Record<string, string | null | undefined> | null;
     }
 }

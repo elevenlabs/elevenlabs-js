@@ -7,9 +7,9 @@ export interface ProcedureAtVersionOutput {
     procedureId: string;
     /** Procedure name */
     name: string;
+    type?: ElevenLabs.ProcedureType;
     /** Procedure content */
     content: string;
-    type?: ElevenLabs.ProcedureType;
     guardrails?: ElevenLabs.CustomGuardrailConfig[];
     /** Agent ID of the procedure */
     agentId: string;

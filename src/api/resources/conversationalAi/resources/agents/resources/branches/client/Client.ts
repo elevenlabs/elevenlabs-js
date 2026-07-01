@@ -70,11 +70,7 @@ export class BranchesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -158,7 +154,7 @@ export class BranchesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.conversationalAi.agents.BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost.jsonOrThrow(
                 request,
@@ -242,7 +238,7 @@ export class BranchesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -325,7 +321,7 @@ export class BranchesClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.conversationalAi.agents.BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch.jsonOrThrow(
                 request,
@@ -367,6 +363,98 @@ export class BranchesClient {
             _response.rawResponse,
             "PATCH",
             "/v1/convai/agents/{agent_id}/branches/{branch_id}",
+        );
+    }
+
+    /**
+     * Returns the result of merging the source branch into the target branch without performing the merge. Useful for showing an accurate diff before confirming.
+     *
+     * @param {string} agent_id - The id of an agent. This is returned on agent creation.
+     * @param {string} source_branch_id - Unique identifier for the source branch to merge from.
+     * @param {ElevenLabs.conversationalAi.agents.BranchesPreviewMergeRequest} request
+     * @param {BranchesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+     *         targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
+     *         force: true
+     *     })
+     */
+    public previewMerge(
+        agent_id: string,
+        source_branch_id: string,
+        request: ElevenLabs.conversationalAi.agents.BranchesPreviewMergeRequest,
+        requestOptions?: BranchesClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.MergePreviewResponseModel> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__previewMerge(agent_id, source_branch_id, request, requestOptions),
+        );
+    }
+
+    private async __previewMerge(
+        agent_id: string,
+        source_branch_id: string,
+        request: ElevenLabs.conversationalAi.agents.BranchesPreviewMergeRequest,
+        requestOptions?: BranchesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.MergePreviewResponseModel>> {
+        const { targetBranchId, force } = request;
+        const _queryParams: Record<string, unknown> = {
+            target_branch_id: targetBranchId,
+            force,
+        };
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${core.url.encodePathParam(agent_id)}/branches/${core.url.encodePathParam(source_branch_id)}/merge-preview`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.MergePreviewResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/agents/{agent_id}/branches/{source_branch_id}/merge-preview",
         );
     }
 
@@ -419,11 +507,7 @@ export class BranchesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.conversationalAi.agents.BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost.jsonOrThrow(
                 _body,
@@ -457,6 +541,156 @@ export class BranchesClient {
             _response.rawResponse,
             "POST",
             "/v1/convai/agents/{agent_id}/branches/{source_branch_id}/merge",
+        );
+    }
+
+    /**
+     * Returns the result of rebasing the branch onto main without performing the rebase. Useful for showing an accurate diff before confirming.
+     *
+     * @param {string} agent_id - The id of an agent. This is returned on agent creation.
+     * @param {string} branch_id - Unique identifier for the source branch to merge from.
+     * @param {BranchesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj")
+     */
+    public previewRebase(
+        agent_id: string,
+        branch_id: string,
+        requestOptions?: BranchesClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.MergePreviewResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__previewRebase(agent_id, branch_id, requestOptions));
+    }
+
+    private async __previewRebase(
+        agent_id: string,
+        branch_id: string,
+        requestOptions?: BranchesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.MergePreviewResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${core.url.encodePathParam(agent_id)}/branches/${core.url.encodePathParam(branch_id)}/rebase-preview`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.MergePreviewResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/agents/{agent_id}/branches/{branch_id}/rebase-preview",
+        );
+    }
+
+    /**
+     * Rebase a branch onto the latest main branch, incorporating main's changes while preserving the branch's own changes.
+     *
+     * @param {string} agent_id - The id of an agent. This is returned on agent creation.
+     * @param {string} branch_id - Unique identifier for the source branch to merge from.
+     * @param {BranchesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj")
+     */
+    public rebase(
+        agent_id: string,
+        branch_id: string,
+        requestOptions?: BranchesClient.RequestOptions,
+    ): core.HttpResponsePromise<unknown> {
+        return core.HttpResponsePromise.fromPromise(this.__rebase(agent_id, branch_id, requestOptions));
+    }
+
+    private async __rebase(
+        agent_id: string,
+        branch_id: string,
+        requestOptions?: BranchesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<unknown>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${core.url.encodePathParam(agent_id)}/branches/${core.url.encodePathParam(branch_id)}/rebase`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/agents/{agent_id}/branches/{branch_id}/rebase",
         );
     }
 }

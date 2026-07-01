@@ -15,6 +15,8 @@ export interface ConversationConfigInput {
     monitoringEnabled?: boolean;
     /** The events that will be sent to monitoring connections. */
     monitoringEvents?: ElevenLabs.ClientEvent[];
+    /** Configuration for background sound during conversations. */
+    backgroundSound?: ElevenLabs.BackgroundSoundConfig;
     /** When enabled and knowledge base content is present, the LLM is instructed to report which sources it used. */
     sourceAttribution?: boolean;
 }

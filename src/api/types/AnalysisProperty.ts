@@ -18,6 +18,8 @@ export interface AnalysisProperty {
     isSystemProvided?: boolean;
     /** The name of the dynamic variable to use for this property's value. Mutually exclusive with description, is_system_provided, constant_value, and is_omitted. */
     dynamicVariable?: string;
+    /** When set, the LLM provides the value but the runtime rejects any value not present in the list held by this dynamic variable. Use to let the LLM pick from a server-verified set (e.g. the IDs the current user is allowed to access). Requires description; mutually exclusive with dynamic_variable, is_system_provided, constant_value, and is_omitted. */
+    allowedValuesDynamicVariable?: string;
     /** A constant value to use for this property. Mutually exclusive with description, dynamic_variable, is_system_provided, and is_omitted. */
     constantValue?: ElevenLabs.AnalysisPropertyConstantValue;
     /** If true, this parameter will be completely omitted from the request. Only valid for optional parameters. Mutually exclusive with description, dynamic_variable, is_system_provided, and constant_value. */

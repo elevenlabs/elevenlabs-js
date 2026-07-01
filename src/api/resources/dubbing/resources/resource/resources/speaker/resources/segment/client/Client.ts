@@ -71,7 +71,7 @@ export class SegmentClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.dubbing.resource.speaker.SegmentCreatePayload.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

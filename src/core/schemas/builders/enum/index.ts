@@ -1,1 +1,1 @@
-export { enum_, forwardCompatibleEnum_ } from "./enum";
+export { enum_ } from "./enum";

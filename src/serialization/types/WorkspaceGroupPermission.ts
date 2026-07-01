@@ -21,6 +21,7 @@ export const WorkspaceGroupPermission: core.serialization.Schema<
     "conversational_ai_read",
     "voice_isolator",
     "ai_speech_classifier",
+    "synthid_detector",
     "add_voice_from_voice_library",
     "create_instant_voice_clone",
     "create_professional_voice_clone",
@@ -39,6 +40,7 @@ export const WorkspaceGroupPermission: core.serialization.Schema<
     "workspace_members_remove",
     "terms_of_service_accept",
     "audit_log_read",
+    "conversation_privacy_manage",
     "copy_resources_cross_workspace",
     "voice_design",
 ]);
@@ -58,6 +60,7 @@ export declare namespace WorkspaceGroupPermission {
         | "conversational_ai_read"
         | "voice_isolator"
         | "ai_speech_classifier"
+        | "synthid_detector"
         | "add_voice_from_voice_library"
         | "create_instant_voice_clone"
         | "create_professional_voice_clone"
@@ -76,6 +79,7 @@ export declare namespace WorkspaceGroupPermission {
         | "workspace_members_remove"
         | "terms_of_service_accept"
         | "audit_log_read"
+        | "conversation_privacy_manage"
         | "copy_resources_cross_workspace"
         | "voice_design";
 }

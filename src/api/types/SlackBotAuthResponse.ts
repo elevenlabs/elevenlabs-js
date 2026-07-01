@@ -10,4 +10,7 @@ export interface SlackBotAuthResponse {
     provider?: "Slack";
     id: string;
     usedBy?: ElevenLabs.AuthConnectionDependencies;
+    status?: ElevenLabs.AuthConnectionStatus;
+    statusDetail?: string;
+    statusUpdatedAt?: string;
 }

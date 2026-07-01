@@ -113,11 +113,7 @@ export class ConversationsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -205,11 +201,7 @@ export class ConversationsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -276,11 +268,13 @@ export class ConversationsClient {
      *         search: "search",
      *         conversationInitiationSource: "unknown",
      *         textOnly: true,
+     *         conversationProductType: "agents",
      *         branchId: "branch_id",
      *         topicIds: ["topic_ids"],
      *         excludeStatuses: ["initiated"],
      *         tagIds: ["tag_ids"],
-     *         workflowNodeEnteredId: "workflow_node_entered_id"
+     *         workflowNodeEnteredId: "workflow_node_entered_id",
+     *         terminationReasons: ["termination_reasons"]
      *     })
      */
     public list(
@@ -317,11 +311,13 @@ export class ConversationsClient {
             search,
             conversationInitiationSource,
             textOnly,
+            conversationProductType,
             branchId,
             topicIds,
             excludeStatuses,
             tagIds,
             workflowNodeEnteredId,
+            terminationReasons,
         } = request;
         const _queryParams: Record<string, unknown> = {
             cursor,
@@ -361,6 +357,12 @@ export class ConversationsClient {
                       })
                     : undefined,
             text_only: textOnly,
+            conversation_product_type:
+                conversationProductType != null
+                    ? serializers.ConversationProduct.jsonOrThrow(conversationProductType, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
             branch_id: branchId,
             topic_ids: topicIds,
             exclude_statuses: Array.isArray(excludeStatuses)
@@ -377,6 +379,7 @@ export class ConversationsClient {
                   : undefined,
             tag_ids: tagIds,
             workflow_node_entered_id: workflowNodeEnteredId,
+            termination_reasons: terminationReasons,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -392,11 +395,7 @@ export class ConversationsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -479,11 +478,7 @@ export class ConversationsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -559,7 +554,7 @@ export class ConversationsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -638,11 +633,7 @@ export class ConversationsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

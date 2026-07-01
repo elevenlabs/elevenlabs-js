@@ -12,8 +12,8 @@ export const ProcedureAtVersionOutput: core.serialization.ObjectSchema<
 > = core.serialization.object({
     procedureId: core.serialization.property("procedure_id", core.serialization.string()),
     name: core.serialization.string(),
-    content: core.serialization.string(),
     type: ProcedureType.optional(),
+    content: core.serialization.string(),
     guardrails: core.serialization.list(CustomGuardrailConfig).optional(),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     versionId: core.serialization.property("version_id", core.serialization.string().optional()),
@@ -23,8 +23,8 @@ export declare namespace ProcedureAtVersionOutput {
     export interface Raw {
         procedure_id: string;
         name: string;
-        content: string;
         type?: ProcedureType.Raw | null;
+        content: string;
         guardrails?: CustomGuardrailConfig.Raw[] | null;
         agent_id: string;
         version_id?: string | null;

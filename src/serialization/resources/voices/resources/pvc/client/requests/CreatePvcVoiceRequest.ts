@@ -11,7 +11,7 @@ export const CreatePvcVoiceRequest: core.serialization.Schema<
     name: core.serialization.string(),
     language: core.serialization.string(),
     description: core.serialization.string().optional(),
-    labels: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    labels: core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
 });
 
 export declare namespace CreatePvcVoiceRequest {
@@ -19,6 +19,6 @@ export declare namespace CreatePvcVoiceRequest {
         name: string;
         language: string;
         description?: string | null;
-        labels?: Record<string, string | null> | null;
+        labels?: Record<string, string | null | undefined> | null;
     }
 }

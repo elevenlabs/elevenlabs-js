@@ -121,11 +121,7 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -211,11 +207,7 @@ export class AgentsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -283,7 +275,7 @@ export class AgentsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -363,11 +355,7 @@ export class AgentsClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.conversationalAi.UpdateAgentRequest.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -474,11 +462,7 @@ export class AgentsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -553,7 +537,7 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.conversationalAi.BodyDuplicateAgentV1ConvaiAgentsAgentIdDuplicatePost.jsonOrThrow(
                 request,
@@ -599,7 +583,9 @@ export class AgentsClient {
     }
 
     /**
-     * Run a conversation between the agent and a simulated user.
+     * @deprecated
+     *
+     * Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user.
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {ElevenLabs.conversationalAi.BodySimulatesAConversationV1ConvaiAgentsAgentIdSimulateConversationPost} request
@@ -646,7 +632,7 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.conversationalAi.BodySimulatesAConversationV1ConvaiAgentsAgentIdSimulateConversationPost.jsonOrThrow(
                 request,
@@ -692,7 +678,9 @@ export class AgentsClient {
     }
 
     /**
-     * Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
+     * @deprecated
+     *
+     * Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {ElevenLabs.conversationalAi.BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost} request
@@ -741,7 +729,7 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.conversationalAi.BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost.jsonOrThrow(
                 request,
@@ -822,7 +810,7 @@ export class AgentsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.conversationalAi.RunAgentTestsRequestModel.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

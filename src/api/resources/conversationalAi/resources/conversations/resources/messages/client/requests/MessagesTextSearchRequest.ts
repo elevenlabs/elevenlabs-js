@@ -26,6 +26,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *         summaryMode: "exclude",
  *         conversationInitiationSource: "unknown",
  *         textOnly: true,
+ *         conversationProductType: "agents",
  *         branchId: "branch_id",
  *         topicIds: ["topic_ids"],
  *         sortBy: "search_score",
@@ -73,6 +74,8 @@ export interface MessagesTextSearchRequest {
     summaryMode?: ElevenLabs.conversationalAi.conversations.MessagesTextSearchRequestSummaryMode;
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
     textOnly?: boolean;
+    /** Restrict results to a single conversation product surface. */
+    conversationProductType?: ElevenLabs.ConversationProduct;
     /** Filter conversations by branch ID. */
     branchId?: string;
     /** Filter conversations by topic IDs assigned during topic discovery. */

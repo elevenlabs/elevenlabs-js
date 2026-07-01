@@ -1730,6 +1730,71 @@ await client.user.get();
 </details>
 
 ## Voices
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetVoicesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of all available voices for a user. Stops working once the user's workspace exceeds 500 voices.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.getAll({
+    showLegacy: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.VoicesGetAllRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">get</a>(voice_id, { ...params }) -> ElevenLabs.Voice</code></summary>
 <dl>
 <dd>
@@ -1847,71 +1912,6 @@ await client.voices.delete("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **voice_id:** `string` — ID of the voice to be used. You can use the [Get voices](/docs/api-reference/voices/search) endpoint list all the available voices.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `VoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetVoicesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a list of all available voices for a user. Stops working once the user's workspace exceeds 500 voices.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.getAll({
-    showLegacy: true
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.VoicesGetAllRequest` 
     
 </dd>
 </dl>
@@ -2584,7 +2584,7 @@ await client.music.stream();
 <dl>
 <dd>
 
-Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature. Price for uploading is the same as the one for song generation. All uploaded content gets inspected for copyright infringement. If copyrighted content is detected, half of the request cost is still charged.
+Upload a music file to be later used for inpainting. Price for uploading is the same as the one for song generation. All uploaded content gets inspected for copyright infringement. If copyrighted content is detected, half of the request cost is still charged.
 </dd>
 </dl>
 </dd>
@@ -2669,6 +2669,10 @@ await client.dubbing.list({
     cursor: "cursor",
     pageSize: 1,
     dubbingStatus: "dubbing",
+    dubbingStatuses: ["queued"],
+    dubbingModels: ["dubbing_v1"],
+    targetLanguageCodes: ["target_language_codes"],
+    creationSources: ["flow_node"],
     filterByCreator: "personal",
     orderBy: "created_at",
     orderDirection: "DESCENDING"
@@ -3701,6 +3705,70 @@ await client.pronunciationDictionaries.list({
 </dl>
 </details>
 
+## Workspace
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">setThirdPartyDisablingPolicy</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Set the workspace-wide Third-Party Disabling policy. When set, it forces, for every API key in the workspace, whether the holder of a key (potentially a third party who found it) may disable it via the self-disable endpoint or when it leaks publicly — overriding each key's own setting. Pass `true` to allow it for all keys, `false` to forbid it for all keys, or `null` to clear the override so per-key values and the plan default apply again. Workspace admins only; requires self-disable access.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.setThirdPartyDisablingPolicy();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodySetWorkspaceThirdPartyDisablingPolicyV1WorkspacesApiKeysThirdPartyDisablingPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkspaceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ServiceAccounts
 <details><summary><code>client.serviceAccounts.<a href="/src/api/resources/serviceAccounts/client/Client.ts">list</a>() -> ElevenLabs.WorkspaceServiceAccountListResponseModel</code></summary>
 <dl>
@@ -4042,7 +4110,7 @@ await client.webhooks.update("G007vmtq9uWYl7SUW9zGS8GZZa1K", {
 <dl>
 <dd>
 
-Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned. Otherwise, returns a single transcript. The optional webhook_metadata parameter allows you to attach custom data that will be included in webhook responses for request correlation and tracking.
+Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned; set multichannel_output_style='combined' to instead receive a single transcript with all channels merged and sorted by time. Otherwise, returns a single transcript. The optional webhook_metadata parameter allows you to attach custom data that will be included in webhook responses for request correlation and tracking.
 </dd>
 </dl>
 </dd>
@@ -5214,11 +5282,13 @@ await client.conversationalAi.conversations.list({
     search: "search",
     conversationInitiationSource: "unknown",
     textOnly: true,
+    conversationProductType: "agents",
     branchId: "branch_id",
     topicIds: ["topic_ids"],
     excludeStatuses: ["initiated"],
     tagIds: ["tag_ids"],
-    workflowNodeEnteredId: "workflow_node_entered_id"
+    workflowNodeEnteredId: "workflow_node_entered_id",
+    terminationReasons: ["termination_reasons"]
 });
 
 ```
@@ -6244,7 +6314,7 @@ await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfysz
 <dl>
 <dd>
 
-Run a conversation between the agent and a simulated user.
+Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user.
 </dd>
 </dl>
 </dd>
@@ -6323,7 +6393,7 @@ await client.conversationalAi.agents.simulateConversation("agent_3701k3ttaq12ewp
 <dl>
 <dd>
 
-Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
+Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
 </dd>
 </dl>
 </dd>
@@ -10398,6 +10468,88 @@ await client.conversationalAi.agents.branches.update("agent_3701k3ttaq12ewp8b7qv
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">previewMerge</a>(agent_id, source_branch_id, { ...params }) -> ElevenLabs.MergePreviewResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the result of merging the source branch into the target branch without performing the merge. Useful for showing an accurate diff before confirming.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+    targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
+    force: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source_branch_id:** `string` — Unique identifier for the source branch to merge from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BranchesPreviewMergeRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BranchesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">merge</a>(agent_id, source_branch_id, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
@@ -10460,6 +10612,148 @@ await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.agents.BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BranchesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">previewRebase</a>(agent_id, branch_id) -> ElevenLabs.MergePreviewResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the result of rebasing the branch onto main without performing the rebase. Useful for showing an accurate diff before confirming.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Unique identifier for the source branch to merge from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BranchesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">rebase</a>(agent_id, branch_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Rebase a branch onto the latest main branch, incorporating main's changes while preserving the branch's own changes.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Unique identifier for the source branch to merge from.
     
 </dd>
 </dl>
@@ -11236,6 +11530,7 @@ await client.conversationalAi.conversations.messages.textSearch({
     summaryMode: "exclude",
     conversationInitiationSource: "unknown",
     textOnly: true,
+    conversationProductType: "agents",
     branchId: "branch_id",
     topicIds: ["topic_ids"],
     sortBy: "search_score",
@@ -11963,7 +12258,7 @@ await client.conversationalAi.conversations.files.delete("conversation_id", "fil
 </details>
 
 ## ConversationalAi Conversations Topics
-<details><summary><code>client.conversationalAi.conversations.topics.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/topics/client/Client.ts">get</a>(agent_id) -> ElevenLabs.GetAgentTopicsResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.conversations.topics.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/topics/client/Client.ts">get</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentTopicsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11990,7 +12285,10 @@ Returns the latest topic discovery run results for a given agent.
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.topics.get("agent_id");
+await client.conversationalAi.conversations.topics.get("agent_id", {
+    fromUnixSecs: 1,
+    toUnixSecs: 1
+});
 
 ```
 </dd>
@@ -12007,6 +12305,14 @@ await client.conversationalAi.conversations.topics.get("agent_id");
 <dd>
 
 **agent_id:** `string` — ID of the agent
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.TopicsGetRequest` 
     
 </dd>
 </dl>

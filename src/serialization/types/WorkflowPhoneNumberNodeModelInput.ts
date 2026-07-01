@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { PositionInput } from "./PositionInput";
 import { TransferTypeEnum } from "./TransferTypeEnum";
+import { UuiTransferConfig } from "./UuiTransferConfig";
 import { WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem } from "./WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem";
 import { WorkflowPhoneNumberNodeModelInputPostDialDigits } from "./WorkflowPhoneNumberNodeModelInputPostDialDigits";
 import { WorkflowPhoneNumberNodeModelInputTransferDestination } from "./WorkflowPhoneNumberNodeModelInputTransferDestination";
@@ -22,6 +23,7 @@ export const WorkflowPhoneNumberNodeModelInput: core.serialization.ObjectSchema<
         WorkflowPhoneNumberNodeModelInputTransferDestination,
     ),
     transferType: core.serialization.property("transfer_type", TransferTypeEnum.optional()),
+    uui: UuiTransferConfig.optional(),
     postDialDigits: core.serialization.property(
         "post_dial_digits",
         WorkflowPhoneNumberNodeModelInputPostDialDigits.optional(),
@@ -38,6 +40,7 @@ export declare namespace WorkflowPhoneNumberNodeModelInput {
         custom_sip_headers?: WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem.Raw[] | null;
         transfer_destination: WorkflowPhoneNumberNodeModelInputTransferDestination.Raw;
         transfer_type?: TransferTypeEnum.Raw | null;
+        uui?: UuiTransferConfig.Raw | null;
         post_dial_digits?: WorkflowPhoneNumberNodeModelInputPostDialDigits.Raw | null;
         position?: PositionInput.Raw | null;
         edge_order?: string[] | null;

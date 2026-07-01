@@ -30,7 +30,7 @@ export const ConversationInitiationClientDataInternal: core.serialization.Object
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput).optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput.optional()).optional(),
     ),
     toolMockConfig: core.serialization.property("tool_mock_config", OrchestratorToolMockBehaviorConfig.optional()),
 });
@@ -44,7 +44,7 @@ export declare namespace ConversationInitiationClientDataInternal {
         branch_id?: string | null;
         environment?: string | null;
         starting_workflow_node_id?: string | null;
-        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null> | null;
+        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
         tool_mock_config?: OrchestratorToolMockBehaviorConfig.Raw | null;
     }
 }

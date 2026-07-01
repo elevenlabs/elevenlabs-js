@@ -13,6 +13,7 @@ export const CreateExotelPhoneNumberRequest: core.serialization.ObjectSchema<
     label: core.serialization.string(),
     supportsInbound: core.serialization.property("supports_inbound", core.serialization.boolean().optional()),
     supportsOutbound: core.serialization.property("supports_outbound", core.serialization.boolean().optional()),
+    agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
     accountSid: core.serialization.property("account_sid", core.serialization.string()),
     apiKey: core.serialization.property("api_key", core.serialization.string()),
     apiToken: core.serialization.property("api_token", core.serialization.string()),
@@ -27,6 +28,7 @@ export declare namespace CreateExotelPhoneNumberRequest {
         label: string;
         supports_inbound?: boolean | null;
         supports_outbound?: boolean | null;
+        agent_id?: string | null;
         account_sid: string;
         api_key: string;
         api_token: string;

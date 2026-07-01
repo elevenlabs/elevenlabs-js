@@ -60,6 +60,10 @@ export class DubbingClient {
      *         cursor: "cursor",
      *         pageSize: 1,
      *         dubbingStatus: "dubbing",
+     *         dubbingStatuses: ["queued"],
+     *         dubbingModels: ["dubbing_v1"],
+     *         targetLanguageCodes: ["target_language_codes"],
+     *         creationSources: ["flow_node"],
      *         filterByCreator: "personal",
      *         orderBy: "created_at",
      *         orderDirection: "DESCENDING"
@@ -76,7 +80,18 @@ export class DubbingClient {
         request: ElevenLabs.DubbingListRequest = {},
         requestOptions?: DubbingClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DubbingMetadataPageResponseModel>> {
-        const { cursor, pageSize, dubbingStatus, filterByCreator, orderBy, orderDirection } = request;
+        const {
+            cursor,
+            pageSize,
+            dubbingStatus,
+            dubbingStatuses,
+            dubbingModels,
+            targetLanguageCodes,
+            creationSources,
+            filterByCreator,
+            orderBy,
+            orderDirection,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             cursor,
             page_size: pageSize,
@@ -86,13 +101,50 @@ export class DubbingClient {
                           unrecognizedObjectKeys: "strip",
                       })
                     : undefined,
+            dubbing_statuses: Array.isArray(dubbingStatuses)
+                ? dubbingStatuses.map((item) =>
+                      serializers.DubbingListRequestDubbingStatusesItem.jsonOrThrow(item, {
+                          unrecognizedObjectKeys: "strip",
+                      }),
+                  )
+                : dubbingStatuses != null
+                  ? serializers.DubbingListRequestDubbingStatusesItem.jsonOrThrow(dubbingStatuses, {
+                        unrecognizedObjectKeys: "strip",
+                    })
+                  : undefined,
+            dubbing_models: Array.isArray(dubbingModels)
+                ? dubbingModels.map((item) =>
+                      serializers.DubbingListRequestDubbingModelsItem.jsonOrThrow(item, {
+                          unrecognizedObjectKeys: "strip",
+                      }),
+                  )
+                : dubbingModels != null
+                  ? serializers.DubbingListRequestDubbingModelsItem.jsonOrThrow(dubbingModels, {
+                        unrecognizedObjectKeys: "strip",
+                    })
+                  : undefined,
+            target_language_codes: targetLanguageCodes,
+            creation_sources: Array.isArray(creationSources)
+                ? creationSources.map((item) =>
+                      serializers.DubbingListRequestCreationSourcesItem.jsonOrThrow(item, {
+                          unrecognizedObjectKeys: "strip",
+                      }),
+                  )
+                : creationSources != null
+                  ? serializers.DubbingListRequestCreationSourcesItem.jsonOrThrow(creationSources, {
+                        unrecognizedObjectKeys: "strip",
+                    })
+                  : undefined,
             filter_by_creator:
                 filterByCreator != null
                     ? serializers.DubbingListRequestFilterByCreator.jsonOrThrow(filterByCreator, {
                           unrecognizedObjectKeys: "strip",
                       })
                     : undefined,
-            order_by: orderBy != null ? orderBy : undefined,
+            order_by:
+                orderBy != null
+                    ? serializers.DubbingListRequestOrderBy.jsonOrThrow(orderBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
             order_direction:
                 orderDirection != null
                     ? serializers.DubbingListRequestOrderDirection.jsonOrThrow(orderDirection, {
@@ -114,11 +166,7 @@ export class DubbingClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -278,7 +326,7 @@ export class DubbingClient {
             ),
             method: "POST",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -352,7 +400,7 @@ export class DubbingClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -423,7 +471,7 @@ export class DubbingClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

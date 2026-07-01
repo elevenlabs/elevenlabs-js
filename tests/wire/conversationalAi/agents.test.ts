@@ -51,6 +51,8 @@ describe("AgentsClient", () => {
                     speculative_turn: false,
                     retranscribe_on_turn_timeout: false,
                     turn_model: "turn_v3",
+                    interruption_ignore_terms: ["interruption_ignore_terms"],
+                    transcribe_on_disabled_interruptions: false,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
                 tts: {
@@ -227,12 +229,13 @@ describe("AgentsClient", () => {
                 evaluation: {
                     criteria: [
                         {
-                            id: "1234567890",
-                            name: "Customer satisfaction check",
-                            conversation_goal_prompt:
-                                "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                            id: "criterion_binary_001",
+                            name: "Issue resolved",
+                            conversation_goal_prompt: "Determine whether the agent fully resolved the user's issue.",
                             use_knowledge_base: false,
                             scope: "conversation",
+                            scoring_mode: "binary",
+                            max_score: 100,
                         },
                     ],
                 },
@@ -454,6 +457,8 @@ describe("AgentsClient", () => {
                 nodes: {
                     entry_node: {
                         type: "override_agent",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
                         conversation_config: {
                             asr: {
                                 quality: "high",
@@ -469,6 +474,8 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
+                                transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -648,13 +655,13 @@ describe("AgentsClient", () => {
                             { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                         ],
                         additional_tool_ids: ["additional_tool_ids"],
-                        position: { x: 1.1, y: 1.1 },
-                        edge_order: ["edge_order"],
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
                     failure_node: {
                         type: "override_agent",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
                         conversation_config: {
                             asr: {
                                 quality: "high",
@@ -670,6 +677,8 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
+                                transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -849,14 +858,14 @@ describe("AgentsClient", () => {
                             { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                         ],
                         additional_tool_ids: ["additional_tool_ids"],
-                        position: { x: 1.1, y: 1.1 },
-                        edge_order: ["edge_order"],
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
                     start_node: { type: "start", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_conversation: {
                         type: "override_agent",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
                         conversation_config: {
                             asr: {
                                 quality: "high",
@@ -872,6 +881,8 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
+                                transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -1051,8 +1062,6 @@ describe("AgentsClient", () => {
                             { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                         ],
                         additional_tool_ids: ["additional_tool_ids"],
-                        position: { x: 1.1, y: 1.1 },
-                        edge_order: ["edge_order"],
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
@@ -1064,6 +1073,7 @@ describe("AgentsClient", () => {
                         transfer_type: "blind",
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
+                        uui: null,
                         post_dial_digits: null,
                     },
                     success_transfer: {
@@ -1137,6 +1147,8 @@ describe("AgentsClient", () => {
                     speculativeTurn: false,
                     retranscribeOnTurnTimeout: false,
                     turnModel: "turn_v3",
+                    interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                    transcribeOnDisabledInterruptions: false,
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
                         message: "Hhmmmm...yeah.",
@@ -1376,12 +1388,13 @@ describe("AgentsClient", () => {
                 evaluation: {
                     criteria: [
                         {
-                            id: "1234567890",
-                            name: "Customer satisfaction check",
-                            conversationGoalPrompt:
-                                "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                            id: "criterion_binary_001",
+                            name: "Issue resolved",
+                            conversationGoalPrompt: "Determine whether the agent fully resolved the user's issue.",
                             useKnowledgeBase: false,
                             scope: "conversation",
+                            scoringMode: "binary",
+                            maxScore: 100,
                         },
                     ],
                 },
@@ -1667,6 +1680,11 @@ describe("AgentsClient", () => {
                 nodes: {
                     entry_node: {
                         type: "override_agent",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
                         conversationConfig: {
                             asr: {
                                 quality: "high",
@@ -1682,6 +1700,8 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -1894,16 +1914,16 @@ describe("AgentsClient", () => {
                             },
                         ],
                         additionalToolIds: ["additional_tool_ids"],
-                        position: {
-                            x: 1.1,
-                            y: 1.1,
-                        },
-                        edgeOrder: ["edge_order"],
                         label: "label",
                         entryBehavior: "generate_immediately",
                     },
                     failure_node: {
                         type: "override_agent",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
                         conversationConfig: {
                             asr: {
                                 quality: "high",
@@ -1919,6 +1939,8 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -2131,11 +2153,6 @@ describe("AgentsClient", () => {
                             },
                         ],
                         additionalToolIds: ["additional_tool_ids"],
-                        position: {
-                            x: 1.1,
-                            y: 1.1,
-                        },
-                        edgeOrder: ["edge_order"],
                         label: "label",
                         entryBehavior: "generate_immediately",
                     },
@@ -2149,6 +2166,11 @@ describe("AgentsClient", () => {
                     },
                     success_conversation: {
                         type: "override_agent",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
                         conversationConfig: {
                             asr: {
                                 quality: "high",
@@ -2164,6 +2186,8 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -2376,11 +2400,6 @@ describe("AgentsClient", () => {
                             },
                         ],
                         additionalToolIds: ["additional_tool_ids"],
-                        position: {
-                            x: 1.1,
-                            y: 1.1,
-                        },
-                        edgeOrder: ["edge_order"],
                         label: "label",
                         entryBehavior: "generate_immediately",
                     },
@@ -2505,6 +2524,8 @@ describe("AgentsClient", () => {
                     speculative_turn: false,
                     retranscribe_on_turn_timeout: false,
                     turn_model: "turn_v3",
+                    interruption_ignore_terms: ["interruption_ignore_terms"],
+                    transcribe_on_disabled_interruptions: false,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
                 tts: {
@@ -2681,12 +2702,13 @@ describe("AgentsClient", () => {
                 evaluation: {
                     criteria: [
                         {
-                            id: "1234567890",
-                            name: "Customer satisfaction check",
-                            conversation_goal_prompt:
-                                "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                            id: "criterion_binary_001",
+                            name: "Issue resolved",
+                            conversation_goal_prompt: "Determine whether the agent fully resolved the user's issue.",
                             use_knowledge_base: false,
                             scope: "conversation",
+                            scoring_mode: "binary",
+                            max_score: 100,
                         },
                     ],
                 },
@@ -2908,6 +2930,8 @@ describe("AgentsClient", () => {
                 nodes: {
                     entry_node: {
                         type: "override_agent",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
                         conversation_config: {
                             asr: {
                                 quality: "high",
@@ -2923,6 +2947,8 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
+                                transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -3102,13 +3128,13 @@ describe("AgentsClient", () => {
                             { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                         ],
                         additional_tool_ids: ["additional_tool_ids"],
-                        position: { x: 1.1, y: 1.1 },
-                        edge_order: ["edge_order"],
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
                     failure_node: {
                         type: "override_agent",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
                         conversation_config: {
                             asr: {
                                 quality: "high",
@@ -3124,6 +3150,8 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
+                                transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -3303,14 +3331,14 @@ describe("AgentsClient", () => {
                             { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                         ],
                         additional_tool_ids: ["additional_tool_ids"],
-                        position: { x: 1.1, y: 1.1 },
-                        edge_order: ["edge_order"],
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
                     start_node: { type: "start", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_conversation: {
                         type: "override_agent",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
                         conversation_config: {
                             asr: {
                                 quality: "high",
@@ -3326,6 +3354,8 @@ describe("AgentsClient", () => {
                                 speculative_turn: false,
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
+                                interruption_ignore_terms: ["interruption_ignore_terms"],
+                                transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -3505,8 +3535,6 @@ describe("AgentsClient", () => {
                             { type: "file", name: "My Knowledge Base", id: "123", usage_mode: "auto" },
                         ],
                         additional_tool_ids: ["additional_tool_ids"],
-                        position: { x: 1.1, y: 1.1 },
-                        edge_order: ["edge_order"],
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
@@ -3518,6 +3546,7 @@ describe("AgentsClient", () => {
                         transfer_type: "blind",
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
+                        uui: null,
                         post_dial_digits: null,
                     },
                     success_transfer: {
@@ -3592,6 +3621,8 @@ describe("AgentsClient", () => {
                     speculativeTurn: false,
                     retranscribeOnTurnTimeout: false,
                     turnModel: "turn_v3",
+                    interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                    transcribeOnDisabledInterruptions: false,
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
                         message: "Hhmmmm...yeah.",
@@ -3831,12 +3862,13 @@ describe("AgentsClient", () => {
                 evaluation: {
                     criteria: [
                         {
-                            id: "1234567890",
-                            name: "Customer satisfaction check",
-                            conversationGoalPrompt:
-                                "You are a helpful assistant that can answer questions about the topic of the conversation.",
+                            id: "criterion_binary_001",
+                            name: "Issue resolved",
+                            conversationGoalPrompt: "Determine whether the agent fully resolved the user's issue.",
                             useKnowledgeBase: false,
                             scope: "conversation",
+                            scoringMode: "binary",
+                            maxScore: 100,
                         },
                     ],
                 },
@@ -4122,6 +4154,11 @@ describe("AgentsClient", () => {
                 nodes: {
                     entry_node: {
                         type: "override_agent",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
                         conversationConfig: {
                             asr: {
                                 quality: "high",
@@ -4137,6 +4174,8 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -4349,16 +4388,16 @@ describe("AgentsClient", () => {
                             },
                         ],
                         additionalToolIds: ["additional_tool_ids"],
-                        position: {
-                            x: 1.1,
-                            y: 1.1,
-                        },
-                        edgeOrder: ["edge_order"],
                         label: "label",
                         entryBehavior: "generate_immediately",
                     },
                     failure_node: {
                         type: "override_agent",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
                         conversationConfig: {
                             asr: {
                                 quality: "high",
@@ -4374,6 +4413,8 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -4586,11 +4627,6 @@ describe("AgentsClient", () => {
                             },
                         ],
                         additionalToolIds: ["additional_tool_ids"],
-                        position: {
-                            x: 1.1,
-                            y: 1.1,
-                        },
-                        edgeOrder: ["edge_order"],
                         label: "label",
                         entryBehavior: "generate_immediately",
                     },
@@ -4604,6 +4640,11 @@ describe("AgentsClient", () => {
                     },
                     success_conversation: {
                         type: "override_agent",
+                        position: {
+                            x: 1.1,
+                            y: 1.1,
+                        },
+                        edgeOrder: ["edge_order"],
                         conversationConfig: {
                             asr: {
                                 quality: "high",
@@ -4619,6 +4660,8 @@ describe("AgentsClient", () => {
                                 speculativeTurn: false,
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
+                                interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
                                     message: "Hhmmmm...yeah.",
@@ -4831,11 +4874,6 @@ describe("AgentsClient", () => {
                             },
                         ],
                         additionalToolIds: ["additional_tool_ids"],
-                        position: {
-                            x: 1.1,
-                            y: 1.1,
-                        },
-                        edgeOrder: ["edge_order"],
                         label: "label",
                         entryBehavior: "generate_immediately",
                     },
@@ -5049,9 +5087,11 @@ describe("AgentsClient", () => {
                     },
                     interrupted: true,
                     original_message: "original_message",
+                    reasoning: [{}],
                     source_medium: "audio",
                     source_event_id: 1,
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
+                    user_identifier: "user_identifier",
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -5059,6 +5099,7 @@ describe("AgentsClient", () => {
                         file_url: "file_url",
                     },
                     contextual_update_info: { context_id: "context_id" },
+                    reasoned: true,
                 },
             ],
             analysis: {
@@ -5083,6 +5124,7 @@ describe("AgentsClient", () => {
                     },
                 ],
                 call_successful: "success",
+                call_success_score: 1.1,
                 transcript_summary: "transcript_summary",
                 call_summary_title: "call_summary_title",
                 scoped: [{ scope: "conversation", source_agent_id: "source_agent_id", successful: "success" }],
@@ -5162,9 +5204,11 @@ describe("AgentsClient", () => {
                     },
                     interrupted: true,
                     originalMessage: "original_message",
+                    reasoning: [{}],
                     sourceMedium: "audio",
                     sourceEventId: 1,
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
+                    userIdentifier: "user_identifier",
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",
@@ -5174,6 +5218,7 @@ describe("AgentsClient", () => {
                     contextualUpdateInfo: {
                         contextId: "context_id",
                     },
+                    reasoned: true,
                 },
             ],
             analysis: {
@@ -5212,6 +5257,7 @@ describe("AgentsClient", () => {
                     },
                 ],
                 callSuccessful: "success",
+                callSuccessScore: 1.1,
                 transcriptSummary: "transcript_summary",
                 callSummaryTitle: "call_summary_title",
                 scoped: [

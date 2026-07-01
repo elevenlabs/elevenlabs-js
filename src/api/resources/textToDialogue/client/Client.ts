@@ -64,11 +64,7 @@ export class TextToDialogueClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.BodyTextToDialogueMultiVoiceV1TextToDialoguePost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -139,11 +135,7 @@ export class TextToDialogueClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -216,11 +208,7 @@ export class TextToDialogueClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.BodyTextToDialogueStreamWithTimestamps.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
@@ -335,11 +323,7 @@ export class TextToDialogueClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
             body: serializers.BodyTextToDialogueFullWithTimestamps.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",

@@ -5,6 +5,7 @@ import * as core from "../../core";
 import * as serializers from "../index";
 import { LiteralJsonSchemaProperty } from "./LiteralJsonSchemaProperty";
 import { QueryParamsJsonSchema } from "./QueryParamsJsonSchema";
+import { ResponseFilter } from "./ResponseFilter";
 import { WebhookToolApiSchemaConfigOutputAuthConnection } from "./WebhookToolApiSchemaConfigOutputAuthConnection";
 import { WebhookToolApiSchemaConfigOutputContentType } from "./WebhookToolApiSchemaConfigOutputContentType";
 import { WebhookToolApiSchemaConfigOutputMethod } from "./WebhookToolApiSchemaConfigOutputMethod";
@@ -35,6 +36,7 @@ export const WebhookToolApiSchemaConfigOutput: core.serialization.ObjectSchema<
         "response_body_schema",
         core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyOutput).optional(),
     ),
+    responseFilter: core.serialization.property("response_filter", ResponseFilter.optional()),
     contentType: core.serialization.property("content_type", WebhookToolApiSchemaConfigOutputContentType.optional()),
     authResolvedParams: core.serialization.property(
         "auth_resolved_params",
@@ -55,6 +57,7 @@ export declare namespace WebhookToolApiSchemaConfigOutput {
         query_params_schema?: QueryParamsJsonSchema.Raw | null;
         request_body_schema?: serializers.ObjectJsonSchemaPropertyOutput.Raw | null;
         response_body_schema?: serializers.ObjectJsonSchemaPropertyOutput.Raw | null;
+        response_filter?: ResponseFilter.Raw | null;
         content_type?: WebhookToolApiSchemaConfigOutputContentType.Raw | null;
         auth_resolved_params?: string[] | null;
         auth_connection?: WebhookToolApiSchemaConfigOutputAuthConnection.Raw | null;

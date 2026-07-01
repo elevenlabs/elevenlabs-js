@@ -62,7 +62,7 @@ export class CompositionPlanClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: serializers.music.BodyGenerateCompositionPlanV1MusicPlanPost.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",

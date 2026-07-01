@@ -25,6 +25,14 @@ export const BaseTurnConfig: core.serialization.ObjectSchema<
         core.serialization.boolean().optional(),
     ),
     turnModel: core.serialization.property("turn_model", TurnModel.optional()),
+    interruptionIgnoreTerms: core.serialization.property(
+        "interruption_ignore_terms",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    transcribeOnDisabledInterruptions: core.serialization.property(
+        "transcribe_on_disabled_interruptions",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace BaseTurnConfig {
@@ -37,5 +45,7 @@ export declare namespace BaseTurnConfig {
         speculative_turn?: boolean | null;
         retranscribe_on_turn_timeout?: boolean | null;
         turn_model?: TurnModel.Raw | null;
+        interruption_ignore_terms?: string[] | null;
+        transcribe_on_disabled_interruptions?: boolean | null;
     }
 }

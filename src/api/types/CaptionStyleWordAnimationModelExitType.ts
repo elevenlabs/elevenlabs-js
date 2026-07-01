@@ -4,6 +4,12 @@ export const CaptionStyleWordAnimationModelExitType = {
     None: "none",
     Fade: "fade",
     Scale: "scale",
+    Pop: "pop",
+    SlideUp: "slide_up",
+    SlideDown: "slide_down",
+    Slam: "slam",
+    ScaleDown: "scale_down",
+    SlideIn: "slide_in",
 } as const;
 export type CaptionStyleWordAnimationModelExitType =
     (typeof CaptionStyleWordAnimationModelExitType)[keyof typeof CaptionStyleWordAnimationModelExitType];

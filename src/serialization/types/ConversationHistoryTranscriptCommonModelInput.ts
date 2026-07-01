@@ -9,6 +9,7 @@ import { ConversationHistoryMultivoiceMessageModel } from "./ConversationHistory
 import { ConversationHistoryTranscriptCommonModelInputRole } from "./ConversationHistoryTranscriptCommonModelInputRole";
 import { ConversationHistoryTranscriptCommonModelInputToolResultsItem } from "./ConversationHistoryTranscriptCommonModelInputToolResultsItem";
 import { ConversationHistoryTranscriptToolCallCommonModelInput } from "./ConversationHistoryTranscriptToolCallCommonModelInput";
+import { ConversationReasoningModel } from "./ConversationReasoningModel";
 import { ConversationTurnMetrics } from "./ConversationTurnMetrics";
 import { LlmUsageInput } from "./LlmUsageInput";
 import { RagRetrievalInfo } from "./RagRetrievalInfo";
@@ -44,12 +45,14 @@ export const ConversationHistoryTranscriptCommonModelInput: core.serialization.O
     llmUsage: core.serialization.property("llm_usage", LlmUsageInput.optional()),
     interrupted: core.serialization.boolean().optional(),
     originalMessage: core.serialization.property("original_message", core.serialization.string().optional()),
+    reasoning: core.serialization.list(ConversationReasoningModel).optional(),
     sourceMedium: core.serialization.property("source_medium", ChatSourceMedium.optional()),
     sourceEventId: core.serialization.property("source_event_id", core.serialization.number().optional()),
     usedStaticKbDocumentIds: core.serialization.property(
         "used_static_kb_document_ids",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    userIdentifier: core.serialization.property("user_identifier", core.serialization.string().optional()),
 });
 
 export declare namespace ConversationHistoryTranscriptCommonModelInput {
@@ -68,8 +71,10 @@ export declare namespace ConversationHistoryTranscriptCommonModelInput {
         llm_usage?: LlmUsageInput.Raw | null;
         interrupted?: boolean | null;
         original_message?: string | null;
+        reasoning?: ConversationReasoningModel.Raw[] | null;
         source_medium?: ChatSourceMedium.Raw | null;
         source_event_id?: number | null;
         used_static_kb_document_ids?: string[] | null;
+        user_identifier?: string | null;
     }
 }

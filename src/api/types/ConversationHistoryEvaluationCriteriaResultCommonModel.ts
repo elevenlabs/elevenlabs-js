@@ -6,4 +6,7 @@ export interface ConversationHistoryEvaluationCriteriaResultCommonModel {
     criteriaId: string;
     result: ElevenLabs.EvaluationSuccessResult;
     rationale: string;
+    scoringMode?: ElevenLabs.CriteriaScoringMode;
+    score?: number;
+    maxScore?: number;
 }

@@ -17,6 +17,7 @@ export const SpeechToTextWordResponseModel: core.serialization.ObjectSchema<
     speakerId: core.serialization.property("speaker_id", core.serialization.string().optional()),
     logprob: core.serialization.number(),
     characters: core.serialization.list(SpeechToTextCharacterResponseModel).optional(),
+    channelIndex: core.serialization.property("channel_index", core.serialization.number().optional()),
 });
 
 export declare namespace SpeechToTextWordResponseModel {
@@ -28,5 +29,6 @@ export declare namespace SpeechToTextWordResponseModel {
         speaker_id?: string | null;
         logprob: number;
         characters?: SpeechToTextCharacterResponseModel.Raw[] | null;
+        channel_index?: number | null;
     }
 }

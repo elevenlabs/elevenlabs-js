@@ -14,6 +14,7 @@ export interface ConversationSummaryResponseModel {
     status: ElevenLabs.ConversationSummaryResponseModelStatus;
     terminationReason?: string;
     callSuccessful: ElevenLabs.EvaluationSuccessResult;
+    callSuccessScore?: number;
     transcriptSummary?: string;
     callSummaryTitle?: string;
     mainLanguage?: string;
@@ -21,4 +22,5 @@ export interface ConversationSummaryResponseModel {
     toolNames?: string[];
     direction?: ElevenLabs.TelephonyDirection;
     rating?: number;
+    sentimentAnalysis?: ElevenLabs.ConversationSentimentAnalysis;
 }

@@ -11,3 +11,4 @@ export * from "./messages/types";
 export * as tags from "./tags";
 export * from "./tags/client/requests";
 export * as topics from "./topics";
+export * from "./topics/client/requests";

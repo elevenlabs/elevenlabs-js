@@ -12,6 +12,8 @@ export const WorkflowOverrideAgentNodeModelOutput: core.serialization.ObjectSche
     serializers.WorkflowOverrideAgentNodeModelOutput.Raw,
     ElevenLabs.WorkflowOverrideAgentNodeModelOutput
 > = core.serialization.object({
+    position: PositionOutput,
+    edgeOrder: core.serialization.property("edge_order", core.serialization.list(core.serialization.string())),
     conversationConfig: core.serialization.property(
         "conversation_config",
         ConversationalConfigApiModelWorkflowOverrideOutput,
@@ -25,20 +27,18 @@ export const WorkflowOverrideAgentNodeModelOutput: core.serialization.ObjectSche
         "additional_tool_ids",
         core.serialization.list(core.serialization.string()),
     ),
-    position: PositionOutput,
-    edgeOrder: core.serialization.property("edge_order", core.serialization.list(core.serialization.string())),
     label: core.serialization.string(),
     entryBehavior: core.serialization.property("entry_behavior", EntryBehavior),
 });
 
 export declare namespace WorkflowOverrideAgentNodeModelOutput {
     export interface Raw {
+        position: PositionOutput.Raw;
+        edge_order: string[];
         conversation_config: ConversationalConfigApiModelWorkflowOverrideOutput.Raw;
         additional_prompt: string;
         additional_knowledge_base: KnowledgeBaseLocator.Raw[];
         additional_tool_ids: string[];
-        position: PositionOutput.Raw;
-        edge_order: string[];
         label: string;
         entry_behavior: EntryBehavior.Raw;
     }
