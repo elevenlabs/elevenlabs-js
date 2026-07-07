@@ -177,6 +177,27 @@ export class Music {
     }
 
     /**
+     * Stream a song and its detailed metadata using Server-Sent Events (SSE).
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     */
+    public composeDetailedStream(
+        request: ElevenLabs.BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost = {},
+        requestOptions?: Music.RequestOptions,
+    ): core.HttpResponsePromise<core.Stream<string>> {
+        return this._client.composeDetailedStream(request, requestOptions);
+    }
+
+    // Private method for structural compatibility with generated Music class
+    private __composeDetailedStream(
+        request: ElevenLabs.BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost = {},
+        requestOptions?: Music.RequestOptions,
+    ): Promise<core.WithRawResponse<core.Stream<string>>> {
+        // This method exists for type compatibility only
+        // The actual implementation is delegated through composeDetailedStream()
+        throw new Error("Internal method - should not be called directly");
+    }
+
+    /**
      * Stream a composed song from a prompt or a composition plan.
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      */
