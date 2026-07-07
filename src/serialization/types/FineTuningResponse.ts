@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { FineTuningResponseModelStateValue } from "./FineTuningResponseModelStateValue";
+import { FineTuningResponseStateValue } from "./FineTuningResponseStateValue";
 import { ManualVerificationResponse } from "./ManualVerificationResponse";
 import { VerificationAttemptResponse } from "./VerificationAttemptResponse";
 
@@ -15,7 +15,7 @@ export const FineTuningResponse: core.serialization.ObjectSchema<
         "is_allowed_to_fine_tune",
         core.serialization.boolean().optional(),
     ),
-    state: core.serialization.record(core.serialization.string(), FineTuningResponseModelStateValue).optional(),
+    state: core.serialization.record(core.serialization.string(), FineTuningResponseStateValue).optional(),
     verificationFailures: core.serialization.property(
         "verification_failures",
         core.serialization.list(core.serialization.string()).optional(),
@@ -55,7 +55,7 @@ export const FineTuningResponse: core.serialization.ObjectSchema<
 export declare namespace FineTuningResponse {
     export interface Raw {
         is_allowed_to_fine_tune?: boolean | null;
-        state?: Record<string, FineTuningResponseModelStateValue.Raw> | null;
+        state?: Record<string, FineTuningResponseStateValue.Raw> | null;
         verification_failures?: string[] | null;
         verification_attempts_count?: number | null;
         manual_verification_requested?: boolean | null;

@@ -29,6 +29,10 @@ export const BaseTurnConfig: core.serialization.ObjectSchema<
         "interruption_ignore_terms",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    interruptionIgnoreTermLanguages: core.serialization.property(
+        "interruption_ignore_term_languages",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     transcribeOnDisabledInterruptions: core.serialization.property(
         "transcribe_on_disabled_interruptions",
         core.serialization.boolean().optional(),
@@ -46,6 +50,7 @@ export declare namespace BaseTurnConfig {
         retranscribe_on_turn_timeout?: boolean | null;
         turn_model?: TurnModel.Raw | null;
         interruption_ignore_terms?: string[] | null;
+        interruption_ignore_term_languages?: string[] | null;
         transcribe_on_disabled_interruptions?: boolean | null;
     }
 }

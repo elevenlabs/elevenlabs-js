@@ -7,13 +7,13 @@ import { CaptionStyleModel } from "./CaptionStyleModel";
 import { ChapterResponse } from "./ChapterResponse";
 import { DirectPublishingReadResponseModel } from "./DirectPublishingReadResponseModel";
 import { ProjectCreationMetaResponseModel } from "./ProjectCreationMetaResponseModel";
-import { ProjectExtendedResponseModelAccessLevel } from "./ProjectExtendedResponseModelAccessLevel";
-import { ProjectExtendedResponseModelApplyTextNormalization } from "./ProjectExtendedResponseModelApplyTextNormalization";
-import { ProjectExtendedResponseModelAspectRatio } from "./ProjectExtendedResponseModelAspectRatio";
-import { ProjectExtendedResponseModelAssetsItem } from "./ProjectExtendedResponseModelAssetsItem";
-import { ProjectExtendedResponseModelFiction } from "./ProjectExtendedResponseModelFiction";
-import { ProjectExtendedResponseModelSourceType } from "./ProjectExtendedResponseModelSourceType";
-import { ProjectExtendedResponseModelTargetAudience } from "./ProjectExtendedResponseModelTargetAudience";
+import { ProjectExtendedResponseAccessLevel } from "./ProjectExtendedResponseAccessLevel";
+import { ProjectExtendedResponseApplyTextNormalization } from "./ProjectExtendedResponseApplyTextNormalization";
+import { ProjectExtendedResponseAspectRatio } from "./ProjectExtendedResponseAspectRatio";
+import { ProjectExtendedResponseAssetsItem } from "./ProjectExtendedResponseAssetsItem";
+import { ProjectExtendedResponseFiction } from "./ProjectExtendedResponseFiction";
+import { ProjectExtendedResponseSourceType } from "./ProjectExtendedResponseSourceType";
+import { ProjectExtendedResponseTargetAudience } from "./ProjectExtendedResponseTargetAudience";
 import { ProjectState } from "./ProjectState";
 import { ProjectVoiceResponseModel } from "./ProjectVoiceResponseModel";
 import { PronunciationDictionaryLocatorResponseModel } from "./PronunciationDictionaryLocatorResponseModel";
@@ -46,10 +46,7 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     description: core.serialization.string().optional(),
     genres: core.serialization.list(core.serialization.string()).optional(),
     coverImageUrl: core.serialization.property("cover_image_url", core.serialization.string().optional()),
-    targetAudience: core.serialization.property(
-        "target_audience",
-        ProjectExtendedResponseModelTargetAudience.optional(),
-    ),
+    targetAudience: core.serialization.property("target_audience", ProjectExtendedResponseTargetAudience.optional()),
     language: core.serialization.string().optional(),
     contentType: core.serialization.property("content_type", core.serialization.string().optional()),
     originalPublicationDate: core.serialization.property(
@@ -60,15 +57,15 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     isbnNumber: core.serialization.property("isbn_number", core.serialization.string().optional()),
     volumeNormalization: core.serialization.property("volume_normalization", core.serialization.boolean()),
     state: ProjectState,
-    accessLevel: core.serialization.property("access_level", ProjectExtendedResponseModelAccessLevel),
-    fiction: ProjectExtendedResponseModelFiction.optional(),
+    accessLevel: core.serialization.property("access_level", ProjectExtendedResponseAccessLevel),
+    fiction: ProjectExtendedResponseFiction.optional(),
     qualityCheckOn: core.serialization.property("quality_check_on", core.serialization.boolean()),
     qualityCheckOnWhenBulkConvert: core.serialization.property(
         "quality_check_on_when_bulk_convert",
         core.serialization.boolean(),
     ),
     creationMeta: core.serialization.property("creation_meta", ProjectCreationMetaResponseModel.optional()),
-    sourceType: core.serialization.property("source_type", ProjectExtendedResponseModelSourceType.optional()),
+    sourceType: core.serialization.property("source_type", ProjectExtendedResponseSourceType.optional()),
     chaptersEnabled: core.serialization.property("chapters_enabled", core.serialization.boolean().optional()),
     captionsEnabled: core.serialization.property("captions_enabled", core.serialization.boolean().optional()),
     captionStyle: core.serialization.property("caption_style", CaptionStyleModel.optional()),
@@ -77,7 +74,7 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
         core.serialization.record(core.serialization.string(), CaptionStyleModel.optional()).optional(),
     ),
     publicShareId: core.serialization.property("public_share_id", core.serialization.string().optional()),
-    aspectRatio: core.serialization.property("aspect_ratio", ProjectExtendedResponseModelAspectRatio.optional()),
+    aspectRatio: core.serialization.property("aspect_ratio", ProjectExtendedResponseAspectRatio.optional()),
     agentSettings: core.serialization.property("agent_settings", StudioAgentSettingsModel.optional()),
     qualityPreset: core.serialization.property("quality_preset", QualityPresetType),
     chapters: core.serialization.list(ChapterResponse),
@@ -91,10 +88,10 @@ export const ProjectExtendedResponse: core.serialization.ObjectSchema<
     ),
     applyTextNormalization: core.serialization.property(
         "apply_text_normalization",
-        ProjectExtendedResponseModelApplyTextNormalization,
+        ProjectExtendedResponseApplyTextNormalization,
     ),
     experimental: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
-    assets: core.serialization.list(ProjectExtendedResponseModelAssetsItem),
+    assets: core.serialization.list(ProjectExtendedResponseAssetsItem),
     voices: core.serialization.list(ProjectVoiceResponseModel),
     baseVoices: core.serialization.property("base_voices", core.serialization.list(Voice).optional()),
     publishingRead: core.serialization.property("publishing_read", DirectPublishingReadResponseModel.optional()),
@@ -121,7 +118,7 @@ export declare namespace ProjectExtendedResponse {
         description?: string | null;
         genres?: string[] | null;
         cover_image_url?: string | null;
-        target_audience?: ProjectExtendedResponseModelTargetAudience.Raw | null;
+        target_audience?: ProjectExtendedResponseTargetAudience.Raw | null;
         language?: string | null;
         content_type?: string | null;
         original_publication_date?: string | null;
@@ -129,26 +126,26 @@ export declare namespace ProjectExtendedResponse {
         isbn_number?: string | null;
         volume_normalization: boolean;
         state: ProjectState.Raw;
-        access_level: ProjectExtendedResponseModelAccessLevel.Raw;
-        fiction?: ProjectExtendedResponseModelFiction.Raw | null;
+        access_level: ProjectExtendedResponseAccessLevel.Raw;
+        fiction?: ProjectExtendedResponseFiction.Raw | null;
         quality_check_on: boolean;
         quality_check_on_when_bulk_convert: boolean;
         creation_meta?: ProjectCreationMetaResponseModel.Raw | null;
-        source_type?: ProjectExtendedResponseModelSourceType.Raw | null;
+        source_type?: ProjectExtendedResponseSourceType.Raw | null;
         chapters_enabled?: boolean | null;
         captions_enabled?: boolean | null;
         caption_style?: CaptionStyleModel.Raw | null;
         caption_style_template_overrides?: Record<string, CaptionStyleModel.Raw | null | undefined> | null;
         public_share_id?: string | null;
-        aspect_ratio?: ProjectExtendedResponseModelAspectRatio.Raw | null;
+        aspect_ratio?: ProjectExtendedResponseAspectRatio.Raw | null;
         agent_settings?: StudioAgentSettingsModel.Raw | null;
         quality_preset: QualityPresetType.Raw;
         chapters: ChapterResponse.Raw[];
         pronunciation_dictionary_versions: PronunciationDictionaryVersionResponseModel.Raw[];
         pronunciation_dictionary_locators: PronunciationDictionaryLocatorResponseModel.Raw[];
-        apply_text_normalization: ProjectExtendedResponseModelApplyTextNormalization.Raw;
+        apply_text_normalization: ProjectExtendedResponseApplyTextNormalization.Raw;
         experimental?: Record<string, unknown> | null;
-        assets: ProjectExtendedResponseModelAssetsItem.Raw[];
+        assets: ProjectExtendedResponseAssetsItem.Raw[];
         voices: ProjectVoiceResponseModel.Raw[];
         base_voices?: Voice.Raw[] | null;
         publishing_read?: DirectPublishingReadResponseModel.Raw | null;

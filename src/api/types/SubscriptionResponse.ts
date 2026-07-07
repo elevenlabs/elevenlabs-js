@@ -12,7 +12,7 @@ export interface SubscriptionResponse {
     /** Deprecated: use `max_credit_limit_extension`. Maximum number of characters that the character limit can be exceeded by. Managed by the workspace admin. */
     maxCharacterLimitExtension?: number;
     /** Maximum number of credits that the credit limit can be exceeded by. Managed by the workspace admin. `"unlimited"` means no cap, `0` means usage-based billing is disabled. */
-    maxCreditLimitExtension: ElevenLabs.SubscriptionResponseModelMaxCreditLimitExtension;
+    maxCreditLimitExtension: ElevenLabs.SubscriptionResponseMaxCreditLimitExtension;
     /** Whether the workspace is entitled to enter overages (usage-based billing). */
     canExtendCharacterLimit: boolean;
     /** Deprecated: use `max_credit_limit_extension != 0`. Whether the user is allowed to extend their character limit. */
@@ -21,8 +21,10 @@ export interface SubscriptionResponse {
     nextCharacterCountResetUnix?: number;
     /** The number of voice slots used by the user. */
     voiceSlotsUsed: number;
-    /** The number of professional voice slots used by the workspace/user if single seat. */
+    /** The number of professional voice slots used. For consolidated billing this is the group-wide count across all workspaces in the group; see professional_voice_slots_used_in_workspace for the current workspace only. */
     professionalVoiceSlotsUsed: number;
+    /** The number of professional voice slots used in the current workspace. For consolidated billing, professional_voice_slots_used counts across all workspaces in the group, while this counts only the current workspace. */
+    professionalVoiceSlotsUsedInWorkspace: number;
     /** The maximum number of voice slots allowed for the user. */
     voiceLimit: number;
     /** The maximum number of voice add/edits allowed for the user. */

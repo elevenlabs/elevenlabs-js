@@ -9,8 +9,10 @@ export interface McpToolConfigOverrideOutput {
     forcePreToolSpeech?: boolean;
     /** If set, overrides the server's pre_tool_speech setting for this tool. */
     preToolSpeech?: ElevenLabs.PreToolSpeechMode;
-    /** If set, overrides the server's disable_interruptions setting for this tool */
+    /** DEPRECATED: use `interruption_mode` instead. If set, overrides the server's disable_interruptions setting for this tool. */
     disableInterruptions?: boolean;
+    /** If set, overrides the server's interruption_mode setting for this tool. */
+    interruptionMode?: ElevenLabs.ToolInterruptionMode;
     /** If set, overrides the server's tool_call_sound setting for this tool */
     toolCallSound?: ElevenLabs.ToolCallSoundType;
     /** If set, overrides the server's tool_call_sound_behavior setting for this tool */

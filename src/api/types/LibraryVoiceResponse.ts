@@ -22,7 +22,7 @@ export interface LibraryVoiceResponse {
     /** The use case of the voice. */
     useCase: string;
     /** The category of the voice. */
-    category: ElevenLabs.LibraryVoiceResponseModelCategory;
+    category: ElevenLabs.LibraryVoiceResponseCategory;
     /** The language of the voice. */
     language?: string;
     /** The locale of the voice. */

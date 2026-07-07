@@ -16,6 +16,9 @@ export declare namespace SpeechEngineClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * Low-latency, real-time speech generation endpoints.
+ */
 export class SpeechEngineClient {
     protected readonly _options: NormalizedClientOptions<SpeechEngineClient.Options>;
 

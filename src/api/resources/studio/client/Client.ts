@@ -17,6 +17,9 @@ export declare namespace StudioClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * Access, create and convert Studio Projects programmatically. Only specifically whitelisted accounts can access the Studio API. If you need access please contact our sales team.
+ */
 export class StudioClient {
     protected readonly _options: NormalizedClientOptions<StudioClient.Options>;
     protected _projects: ProjectsClient | undefined;

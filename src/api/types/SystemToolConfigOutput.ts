@@ -13,8 +13,10 @@ export interface SystemToolConfigOutput {
     description?: string;
     /** The maximum time in seconds to wait for the tool call to complete. */
     responseTimeoutSecs?: number;
-    /** If true, the user will not be able to interrupt the agent while this tool is running. */
+    /** DEPRECATED: use `interruption_mode` instead. If true, the user will not be able to interrupt the agent while this tool is running. */
     disableInterruptions?: boolean;
+    /** Controls whether the user can interrupt the agent around this tool call. 'allow' (default) lets the user interrupt at any time, 'disable_during_tool' suppresses interruptions only while the tool is running, 'disable_during_tool_and_turn' suppresses interruptions while the tool runs and for the agent response that follows it. */
+    interruptionMode?: ElevenLabs.ToolInterruptionMode;
     /** DEPRECATED: use `pre_tool_speech` instead. If true, the agent will speak before the tool call. */
     forcePreToolSpeech?: boolean;
     /** Controls whether the agent speaks before this tool is called. 'auto' (default) decides based on recent tool latency, 'force' always asks the agent to speak, 'off' fully opts out regardless of latency. */

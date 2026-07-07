@@ -45,6 +45,8 @@ describe("AnalysisClient", () => {
                     llm_price: 1.1,
                     llm_charge: 1,
                     call_charge: 1,
+                    platform_charge: 1,
+                    platform_price: 1.1,
                     free_minutes_consumed: 1.1,
                     free_llm_dollars_consumed: 1.1,
                 },
@@ -96,6 +98,7 @@ describe("AnalysisClient", () => {
                 agent_created_from: "cli",
                 agent_last_updated_from: "cli",
                 voice_rewards: [{ voice_id: "voice_id", reward_usd_cents: 1.1 }],
+                cost_fiat: 1.1,
             },
             analysis: {
                 evaluation_criteria_results: {
@@ -255,6 +258,8 @@ describe("AnalysisClient", () => {
                     llmPrice: 1.1,
                     llmCharge: 1,
                     callCharge: 1,
+                    platformCharge: 1,
+                    platformPrice: 1.1,
                     freeMinutesConsumed: 1.1,
                     freeLlmDollarsConsumed: 1.1,
                 },
@@ -326,6 +331,7 @@ describe("AnalysisClient", () => {
                         rewardUsdCents: 1.1,
                     },
                 ],
+                costFiat: 1.1,
             },
             analysis: {
                 evaluationCriteriaResults: {
@@ -550,6 +556,8 @@ describe("AnalysisClient", () => {
                     llm_price: 1.1,
                     llm_charge: 1,
                     call_charge: 1,
+                    platform_charge: 1,
+                    platform_price: 1.1,
                     free_minutes_consumed: 1.1,
                     free_llm_dollars_consumed: 1.1,
                 },
@@ -601,6 +609,7 @@ describe("AnalysisClient", () => {
                 agent_created_from: "cli",
                 agent_last_updated_from: "cli",
                 voice_rewards: [{ voice_id: "voice_id", reward_usd_cents: 1.1 }],
+                cost_fiat: 1.1,
             },
             analysis: {
                 evaluation_criteria_results: {
@@ -763,6 +772,8 @@ describe("AnalysisClient", () => {
                     llmPrice: 1.1,
                     llmCharge: 1,
                     callCharge: 1,
+                    platformCharge: 1,
+                    platformPrice: 1.1,
                     freeMinutesConsumed: 1.1,
                     freeLlmDollarsConsumed: 1.1,
                 },
@@ -834,6 +845,7 @@ describe("AnalysisClient", () => {
                         rewardUsdCents: 1.1,
                     },
                 ],
+                costFiat: 1.1,
             },
             analysis: {
                 evaluationCriteriaResults: {

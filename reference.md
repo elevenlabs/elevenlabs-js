@@ -2509,6 +2509,74 @@ await client.music.composeDetailed();
 </dl>
 </details>
 
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailedStream</a>({ ...params }) -> core.Stream&lt;string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stream a song and its detailed metadata using Server-Sent Events (SSE).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.music.composeDetailedStream({
+    outputFormat: "auto"
+});
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">stream</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
@@ -2637,7 +2705,7 @@ await client.music.upload({
 </dl>
 </details>
 
-## Dubbing
+## dubbing
 <details><summary><code>client.dubbing.<a href="/src/api/resources/dubbing/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.DubbingMetadataPageResponseModel</code></summary>
 <dl>
 <dd>
@@ -3718,7 +3786,7 @@ await client.pronunciationDictionaries.list({
 <dl>
 <dd>
 
-Set the workspace-wide Third-Party Disabling policy. When set, it forces, for every API key in the workspace, whether the holder of a key (potentially a third party who found it) may disable it via the self-disable endpoint or when it leaks publicly — overriding each key's own setting. Pass `true` to allow it for all keys, `false` to forbid it for all keys, or `null` to clear the override so per-key values and the plan default apply again. Workspace admins only; requires self-disable access.
+Set the workspace-wide Third-Party Disabling policy. When set, it forces, for every API key in the workspace, whether the holder of a key (potentially a third party who found it) may disable it via the self-disable endpoint or when it leaks publicly — overriding each key's own setting. Pass `true` to allow it for all keys, `false` to forbid it for all keys, or `null` to clear the override so per-key values and the plan default apply again. Workspace admins only.
 </dd>
 </dl>
 </dd>
@@ -4486,7 +4554,7 @@ await client.conversationalAi.deleteDocumentRagIndex("21m00Tcm4TlvDq8ikWAM", "21
 </dl>
 </details>
 
-## SpeechEngine
+## Speech Engine
 <details><summary><code>client.speechEngine.<a href="/src/api/resources/speechEngine/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ListSpeechEnginesResponse</code></summary>
 <dl>
 <dd>
@@ -6286,6 +6354,61 @@ await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfysz
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">getDefaultInterruptionIgnoreTerms</a>() -> ElevenLabs.DefaultInterruptionIgnoreTermsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the curated per-language default interruption ignore terms used to seed an agent's turn configuration.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.getDefaultInterruptionIgnoreTerms();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
 
 <dl>
 <dd>
@@ -14976,6 +15099,265 @@ await client.conversationalAi.tools.executions.get("tool_id", {
 </dl>
 </details>
 
+## Dubbing Project
+<details><summary><code>client.dubbing.project.<a href="/src/api/resources/dubbing/resources/project/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.DubbingProjectListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace's dubbing projects (cursor-paginated).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.list({
+    pageSize: 20
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.ProjectListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProjectClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.<a href="/src/api/resources/dubbing/resources/project/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.DubbingProjectResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a dubbing project from an uploaded file or a source URL.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.create({
+    sourceUrl: "https://example.com/promo.mp4",
+    sourceLanguage: "en",
+    reference: "Q3 marketing video"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.BodyCreateDubbingProjectV1DubbingProjectPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProjectClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.<a href="/src/api/resources/dubbing/resources/project/client/Client.ts">get</a>(project_id) -> ElevenLabs.DubbingProjectResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Full project detail, including its language target ids.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project to fetch.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProjectClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.<a href="/src/api/resources/dubbing/resources/project/client/Client.ts">delete</a>(project_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a project and its language targets.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.delete("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProjectClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Dubbing Resource
 <details><summary><code>client.dubbing.resource.<a href="/src/api/resources/dubbing/resources/resource/client/Client.ts">get</a>(dubbing_id) -> ElevenLabs.DubbingResource</code></summary>
 <dl>
@@ -15648,6 +16030,820 @@ await client.dubbing.transcripts.get("dubbing_id", "source", "srt");
 </dl>
 </details>
 
+## Dubbing Project Language
+<details><summary><code>client.dubbing.project.language.<a href="/src/api/resources/dubbing/resources/project/resources/language/client/Client.ts">list</a>(project_id, { ...params }) -> ElevenLabs.DubbingLanguageListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List a project's language targets (cursor-paginated).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.language.list("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", {
+    pageSize: 20
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the parent dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.project.LanguageListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LanguageClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.language.<a href="/src/api/resources/dubbing/resources/project/resources/language/client/Client.ts">create</a>(project_id, { ...params }) -> ElevenLabs.DubbingLanguageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Queue a language target for a project (starts once the project is ready).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.language.create("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", {
+    targetLanguage: "es",
+    modelId: "dubbing_v2"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the parent dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.project.BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LanguageClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.language.<a href="/src/api/resources/dubbing/resources/project/resources/language/client/Client.ts">get</a>(project_id, language_id) -> ElevenLabs.DubbingLanguageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Full language-target detail.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.language.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", "lang_1001kwkyxp0je6ktn4knsfrasx5s");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the parent dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language_id:** `string` — Identifier of the language target to fetch.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LanguageClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.language.<a href="/src/api/resources/dubbing/resources/project/resources/language/client/Client.ts">delete</a>(project_id, language_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a language target.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.language.delete("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", "lang_1001kwkyxp0je6ktn4knsfrasx5s");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the parent dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language_id:** `string` — Identifier of the language target to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LanguageClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Dubbing Project Transcript
+<details><summary><code>client.dubbing.project.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/transcript/client/Client.ts">get</a>(project_id) -> ElevenLabs.DubbingSourceTranscriptResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The project's source transcript, as editable segments.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.transcript.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/transcript/client/Client.ts">deleteSegment</a>(project_id, segment_id) -> ElevenLabs.DubbingTranscriptRevisionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a source segment from the transcript.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.transcript.deleteSegment("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", "0199a3f0-1c2d-7abc-8def-0123456789ab");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**segment_id:** `string` — Identifier of the segment to remove.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/transcript/client/Client.ts">updateSegment</a>(project_id, segment_id, { ...params }) -> ElevenLabs.DubbingSourceSegmentUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Edit a source segment's text, speaker, or timing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.transcript.updateSegment("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", "0199a3f0-1c2d-7abc-8def-0123456789ab", {
+    text: "Welcome to our latest product demo."
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**segment_id:** `string` — Identifier of the segment to edit.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.project.DubbingSegmentUpdateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/transcript/client/Client.ts">createSegment</a>(project_id, { ...params }) -> ElevenLabs.DubbingSourceSegmentUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a new source segment to the transcript.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.transcript.createSegment("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", {
+    text: "Thanks for watching.",
+    speakerId: "default_speaker",
+    startS: 42,
+    endS: 44
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.project.DubbingSegmentCreateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Dubbing Project Language Transcript
+<details><summary><code>client.dubbing.project.language.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/language/resources/transcript/client/Client.ts">get</a>(project_id, language_id) -> ElevenLabs.DubbingTargetTranscriptResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+A language target's transcript: source segments with their translations.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.language.transcript.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", "lang_1001kwkyxp0je6ktn4knsfrasx5s");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language_id:** `string` — Identifier of the language target.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.language.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/language/resources/transcript/client/Client.ts">updateSegment</a>(project_id, language_id, segment_id, { ...params }) -> ElevenLabs.DubbingTargetSegmentUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Edit a segment's translation for a language target.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.language.transcript.updateSegment("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", "lang_1001kwkyxp0je6ktn4knsfrasx5s", "0199a3f0-1c2d-7abc-8def-0123456789ab", {
+    translation: "Bienvenido a nuestra \u00FAltima demostraci\u00F3n de producto."
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language_id:** `string` — Identifier of the language target.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**segment_id:** `string` — Identifier of the segment to edit.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.project.language.DubbingTargetSegmentUpdateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.language.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/language/resources/transcript/client/Client.ts">regenerate</a>(project_id, language_id) -> ElevenLabs.DubbingLanguageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Re-dub a target from its edited transcript (charged like a generation).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.language.transcript.regenerate("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", "lang_1001kwkyxp0je6ktn4knsfrasx5s");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language_id:** `string` — Identifier of the language target.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Dubbing Resource Language
 <details><summary><code>client.dubbing.resource.language.<a href="/src/api/resources/dubbing/resources/resource/resources/language/client/Client.ts">add</a>(dubbing_id, { ...params }) -> ElevenLabs.LanguageAddedResponse</code></summary>
 <dl>
@@ -15962,6 +17158,20 @@ await client.dubbing.resource.speaker.update("dubbing_id", "speaker_id");
 <details><summary><code>client.dubbing.resource.speaker.<a href="/src/api/resources/dubbing/resources/resource/resources/speaker/client/Client.ts">create</a>(dubbing_id, { ...params }) -> ElevenLabs.SpeakerCreatedResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new speaker in a dubbing resource. The speaker is added to every available language and can optionally be associated with an ElevenLabs voice and voice settings.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -21979,7 +23189,7 @@ await client.workspace.groups.members.add("group_id", {
 <dl>
 <dd>
 
-Disable the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation. This endpoint requires additional permissions and is not enabled by default. Reach out to your ElevenLabs contact to request access.
+Disable the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation.
 </dd>
 </dl>
 </dd>

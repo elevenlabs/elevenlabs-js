@@ -72,7 +72,7 @@ export class SpeechToSpeechClient {
         if (request.fileFormat != null) {
             _body.append(
                 "file_format",
-                serializers.SpeechToSpeechConvertRequestFileFormat.jsonOrThrow(request.fileFormat, {
+                serializers.SpeechToSpeechRequestFileFormat.jsonOrThrow(request.fileFormat, {
                     unrecognizedObjectKeys: "strip",
                 }),
             );

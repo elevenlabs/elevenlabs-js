@@ -20,5 +20,5 @@ export interface BodyAddVoiceV1VoicesAddPost {
     /** A description of the voice. */
     description?: string;
     /** Labels for the voice. Keys can be language, accent, gender, or age. */
-    labels?: ElevenLabs.voices.IvcCreateRequestLabels;
+    labels?: ElevenLabs.voices.AddVoiceRequestLabels;
 }

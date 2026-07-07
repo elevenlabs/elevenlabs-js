@@ -23,8 +23,10 @@ export const ConversationInitiationSource = {
     TelegramIntegration: "telegram_integration",
     IntercomIntegration: "intercom_integration",
     FreshdeskIntegration: "freshdesk_integration",
+    SalesforceIntegration: "salesforce_integration",
     TemplatePreview: "template_preview",
     GenesysBotConnector: "genesys_bot_connector",
+    SubagentTool: "subagent_tool",
 } as const;
 export type ConversationInitiationSource =
     (typeof ConversationInitiationSource)[keyof typeof ConversationInitiationSource];

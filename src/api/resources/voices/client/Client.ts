@@ -435,7 +435,7 @@ export class VoicesClient {
             _body.append(
                 "labels",
                 (() => {
-                    const mapped = serializers.VoicesUpdateRequestLabels.jsonOrThrow(request.labels, {
+                    const mapped = serializers.EditVoiceRequestLabels.jsonOrThrow(request.labels, {
                         unrecognizedObjectKeys: "strip",
                     });
                     return typeof mapped === "string" ? mapped : toJson(mapped);

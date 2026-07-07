@@ -22,6 +22,7 @@ export const WorkspaceResourceType = {
     ConvaiTestSuiteInvocations: "convai_test_suite_invocations",
     ConvaiCrawlJobs: "convai_crawl_jobs",
     ConvaiCrawlTasks: "convai_crawl_tasks",
+    ConvaiKbExternalSyncJobs: "convai_kb_external_sync_jobs",
     ConvaiWhatsappAccounts: "convai_whatsapp_accounts",
     ConvaiAgentVersions: "convai_agent_versions",
     ConvaiAgentBranches: "convai_agent_branches",

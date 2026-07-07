@@ -12,7 +12,7 @@ export interface GetPronunciationDictionaryMetadataResponse {
     /** The name of the pronunciation dictionary. */
     name: string;
     /** The permission on the resource of the pronunciation dictionary. */
-    permissionOnResource?: ElevenLabs.GetPronunciationDictionaryMetadataResponseModelPermissionOnResource;
+    permissionOnResource?: ElevenLabs.GetPronunciationDictionaryMetadataResponsePermissionOnResource;
     /** The user ID of the creator of the pronunciation dictionary. */
     createdBy: string;
     /** The creation time of the pronunciation dictionary in Unix timestamp. */

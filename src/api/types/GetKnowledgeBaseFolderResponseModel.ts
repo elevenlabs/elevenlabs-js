@@ -16,4 +16,6 @@ export interface GetKnowledgeBaseFolderResponseModel {
     autoSyncInfo?: ElevenLabs.AutoSyncInfo;
     externalSyncInfo?: ElevenLabs.ExternalFolderSyncInfo;
     isFrozen?: boolean;
+    /** Most recent (in-flight or terminal) external sync job for this folder, if any. Used by clients to render sync progress. */
+    activeSyncJob?: ElevenLabs.KbExternalSyncJob;
 }

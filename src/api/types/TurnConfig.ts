@@ -20,6 +20,8 @@ export interface TurnConfig {
     turnModel?: ElevenLabs.TurnModel;
     /** List of terms that should not trigger an interruption when spoken by the user (e.g. 'gotcha', 'understood'). Uses case-insensitive exact matching. */
     interruptionIgnoreTerms?: string[];
+    /** Language codes for which preset ignore-term categories have been activated. Stored explicitly so display is not inferred from term overlap. */
+    interruptionIgnoreTermLanguages?: string[];
     /** When interruptions are disabled, still transcribe what the user says so it can carry into the next turn. When off, user speech during a non-interruptible turn is ignored and won't trigger a turn. */
     transcribeOnDisabledInterruptions?: boolean;
     /** Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses. */

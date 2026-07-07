@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { LibraryVoiceResponseModelCategory } from "./LibraryVoiceResponseModelCategory";
+import { LibraryVoiceResponseCategory } from "./LibraryVoiceResponseCategory";
 import { VerifiedVoiceLanguageResponseModel } from "./VerifiedVoiceLanguageResponseModel";
 
 export const LibraryVoiceResponse: core.serialization.ObjectSchema<
@@ -19,7 +19,7 @@ export const LibraryVoiceResponse: core.serialization.ObjectSchema<
     age: core.serialization.string(),
     descriptive: core.serialization.string(),
     useCase: core.serialization.property("use_case", core.serialization.string()),
-    category: LibraryVoiceResponseModelCategory,
+    category: LibraryVoiceResponseCategory,
     language: core.serialization.string().optional(),
     locale: core.serialization.string().optional(),
     description: core.serialization.string().optional(),
@@ -61,7 +61,7 @@ export declare namespace LibraryVoiceResponse {
         age: string;
         descriptive: string;
         use_case: string;
-        category: LibraryVoiceResponseModelCategory.Raw;
+        category: LibraryVoiceResponseCategory.Raw;
         language?: string | null;
         locale?: string | null;
         description?: string | null;

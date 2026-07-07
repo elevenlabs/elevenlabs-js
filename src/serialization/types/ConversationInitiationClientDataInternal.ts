@@ -5,7 +5,6 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationConfigClientOverrideOutput } from "./ConversationConfigClientOverrideOutput";
 import { ConversationInitiationSourceInfo } from "./ConversationInitiationSourceInfo";
-import { DynamicVariableValueTypeOutput } from "./DynamicVariableValueTypeOutput";
 import { OrchestratorToolMockBehaviorConfig } from "./OrchestratorToolMockBehaviorConfig";
 
 export const ConversationInitiationClientDataInternal: core.serialization.ObjectSchema<
@@ -30,7 +29,7 @@ export const ConversationInitiationClientDataInternal: core.serialization.Object
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput.optional()).optional(),
+        core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     ),
     toolMockConfig: core.serialization.property("tool_mock_config", OrchestratorToolMockBehaviorConfig.optional()),
 });
@@ -44,7 +43,7 @@ export declare namespace ConversationInitiationClientDataInternal {
         branch_id?: string | null;
         environment?: string | null;
         starting_workflow_node_id?: string | null;
-        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
+        dynamic_variables?: Record<string, unknown> | null;
         tool_mock_config?: OrchestratorToolMockBehaviorConfig.Raw | null;
     }
 }

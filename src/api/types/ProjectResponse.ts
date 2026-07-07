@@ -32,7 +32,7 @@ export interface ProjectResponse {
     /** The cover image URL of the project. */
     coverImageUrl?: string;
     /** The target audience of the project. */
-    targetAudience?: ElevenLabs.ProjectResponseModelTargetAudience;
+    targetAudience?: ElevenLabs.ProjectResponseTargetAudience;
     /** Two-letter language code (ISO 639-1) of the language of the project. */
     language?: string;
     /** The content type of the project, e.g. 'Novel' or 'Short Story' */
@@ -48,9 +48,9 @@ export interface ProjectResponse {
     /** The state of the project. */
     state: ElevenLabs.ProjectState;
     /** The access level of the project. */
-    accessLevel: ElevenLabs.ProjectResponseModelAccessLevel;
+    accessLevel: ElevenLabs.ProjectResponseAccessLevel;
     /** Whether the project is fiction. */
-    fiction?: ElevenLabs.ProjectResponseModelFiction;
+    fiction?: ElevenLabs.ProjectResponseFiction;
     /** Whether quality check is enabled for this project. */
     qualityCheckOn: boolean;
     /** Whether quality check is enabled on the project when bulk converting. */
@@ -58,7 +58,7 @@ export interface ProjectResponse {
     /** The creation meta of the project. */
     creationMeta?: ElevenLabs.ProjectCreationMetaResponseModel;
     /** The source type of the project. */
-    sourceType?: ElevenLabs.ProjectResponseModelSourceType;
+    sourceType?: ElevenLabs.ProjectResponseSourceType;
     /** Whether chapters are enabled for the project. */
     chaptersEnabled?: boolean;
     /** Whether captions are enabled for the project. */
@@ -70,7 +70,7 @@ export interface ProjectResponse {
     /** The public share ID of the project. */
     publicShareId?: string;
     /** The aspect ratio of the project. */
-    aspectRatio?: ElevenLabs.ProjectResponseModelAspectRatio;
+    aspectRatio?: ElevenLabs.ProjectResponseAspectRatio;
     /** Agent-related settings for the project */
     agentSettings?: ElevenLabs.StudioAgentSettingsModel;
     /** The default title voice ID. */

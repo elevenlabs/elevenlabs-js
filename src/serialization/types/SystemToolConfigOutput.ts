@@ -9,6 +9,7 @@ import { SystemToolConfigOutputParams } from "./SystemToolConfigOutputParams";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
 import { ToolErrorHandlingMode } from "./ToolErrorHandlingMode";
+import { ToolInterruptionMode } from "./ToolInterruptionMode";
 
 export const SystemToolConfigOutput: core.serialization.ObjectSchema<
     serializers.SystemToolConfigOutput.Raw,
@@ -19,6 +20,7 @@ export const SystemToolConfigOutput: core.serialization.ObjectSchema<
     description: core.serialization.string().optional(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    interruptionMode: core.serialization.property("interruption_mode", ToolInterruptionMode.optional()),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
     preToolSpeech: core.serialization.property("pre_tool_speech", PreToolSpeechMode.optional()),
     assignments: core.serialization.list(DynamicVariableAssignment).optional(),
@@ -35,6 +37,7 @@ export declare namespace SystemToolConfigOutput {
         description?: string | null;
         response_timeout_secs?: number | null;
         disable_interruptions?: boolean | null;
+        interruption_mode?: ToolInterruptionMode.Raw | null;
         force_pre_tool_speech?: boolean | null;
         pre_tool_speech?: PreToolSpeechMode.Raw | null;
         assignments?: DynamicVariableAssignment.Raw[] | null;

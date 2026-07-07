@@ -5,10 +5,10 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { FineTuningResponse } from "./FineTuningResponse";
 import { VerifiedVoiceLanguageResponseModel } from "./VerifiedVoiceLanguageResponseModel";
-import { VoiceResponseModelCategory } from "./VoiceResponseModelCategory";
-import { VoiceResponseModelLabellingStatus } from "./VoiceResponseModelLabellingStatus";
-import { VoiceResponseModelRecordingQuality } from "./VoiceResponseModelRecordingQuality";
-import { VoiceResponseModelSafetyControl } from "./VoiceResponseModelSafetyControl";
+import { VoiceCategory } from "./VoiceCategory";
+import { VoiceLabellingStatus } from "./VoiceLabellingStatus";
+import { VoiceRecordingQuality } from "./VoiceRecordingQuality";
+import { VoiceSafetyControl } from "./VoiceSafetyControl";
 import { VoiceSample } from "./VoiceSample";
 import { VoiceSettings } from "./VoiceSettings";
 import { VoiceSharingResponse } from "./VoiceSharingResponse";
@@ -19,7 +19,7 @@ export const Voice: core.serialization.ObjectSchema<serializers.Voice.Raw, Eleve
         voiceId: core.serialization.property("voice_id", core.serialization.string()),
         name: core.serialization.string().optional(),
         samples: core.serialization.list(VoiceSample).optional(),
-        category: VoiceResponseModelCategory.optional(),
+        category: VoiceCategory.optional(),
         fineTuning: core.serialization.property("fine_tuning", FineTuningResponse.optional()),
         labels: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
         description: core.serialization.string().optional(),
@@ -42,7 +42,7 @@ export const Voice: core.serialization.ObjectSchema<serializers.Voice.Raw, Eleve
             "collection_ids",
             core.serialization.list(core.serialization.string()).optional(),
         ),
-        safetyControl: core.serialization.property("safety_control", VoiceResponseModelSafetyControl.optional()),
+        safetyControl: core.serialization.property("safety_control", VoiceSafetyControl.optional()),
         voiceVerification: core.serialization.property("voice_verification", VoiceVerificationResponse.optional()),
         permissionOnResource: core.serialization.property(
             "permission_on_resource",
@@ -54,11 +54,8 @@ export const Voice: core.serialization.ObjectSchema<serializers.Voice.Raw, Eleve
         favoritedAtUnix: core.serialization.property("favorited_at_unix", core.serialization.number().optional()),
         createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number().optional()),
         isBookmarked: core.serialization.property("is_bookmarked", core.serialization.boolean().optional()),
-        recordingQuality: core.serialization.property(
-            "recording_quality",
-            VoiceResponseModelRecordingQuality.optional(),
-        ),
-        labellingStatus: core.serialization.property("labelling_status", VoiceResponseModelLabellingStatus.optional()),
+        recordingQuality: core.serialization.property("recording_quality", VoiceRecordingQuality.optional()),
+        labellingStatus: core.serialization.property("labelling_status", VoiceLabellingStatus.optional()),
         recordingQualityReason: core.serialization.property(
             "recording_quality_reason",
             core.serialization.string().optional(),
@@ -70,7 +67,7 @@ export declare namespace Voice {
         voice_id: string;
         name?: string | null;
         samples?: VoiceSample.Raw[] | null;
-        category?: VoiceResponseModelCategory.Raw | null;
+        category?: VoiceCategory.Raw | null;
         fine_tuning?: FineTuningResponse.Raw | null;
         labels?: Record<string, string> | null;
         description?: string | null;
@@ -81,7 +78,7 @@ export declare namespace Voice {
         high_quality_base_model_ids?: string[] | null;
         verified_languages?: VerifiedVoiceLanguageResponseModel.Raw[] | null;
         collection_ids?: string[] | null;
-        safety_control?: VoiceResponseModelSafetyControl.Raw | null;
+        safety_control?: VoiceSafetyControl.Raw | null;
         voice_verification?: VoiceVerificationResponse.Raw | null;
         permission_on_resource?: string | null;
         is_owner?: boolean | null;
@@ -90,8 +87,8 @@ export declare namespace Voice {
         favorited_at_unix?: number | null;
         created_at_unix?: number | null;
         is_bookmarked?: boolean | null;
-        recording_quality?: VoiceResponseModelRecordingQuality.Raw | null;
-        labelling_status?: VoiceResponseModelLabellingStatus.Raw | null;
+        recording_quality?: VoiceRecordingQuality.Raw | null;
+        labelling_status?: VoiceLabellingStatus.Raw | null;
         recording_quality_reason?: string | null;
     }
 }

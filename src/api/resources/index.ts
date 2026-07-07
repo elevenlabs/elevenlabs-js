@@ -55,8 +55,6 @@ export * as tokens from "./tokens";
 export * as usage from "./usage";
 export * from "./usage/client/requests";
 export * as user from "./user";
-export * as v1RealtimeTranslation from "./v1RealtimeTranslation";
-export * from "./v1RealtimeTranslation/types";
 export * as v1SpeechToTextRealtime from "./v1SpeechToTextRealtime";
 export * from "./v1SpeechToTextRealtime/types";
 export * as v1TextToDialogueStreamInput from "./v1TextToDialogueStreamInput";
@@ -65,6 +63,8 @@ export * as v1TextToSpeechVoiceIdMultiStreamInput from "./v1TextToSpeechVoiceIdM
 export * from "./v1TextToSpeechVoiceIdMultiStreamInput/types";
 export * as v1TextToSpeechVoiceIdStreamInput from "./v1TextToSpeechVoiceIdStreamInput";
 export * from "./v1TextToSpeechVoiceIdStreamInput/types";
+export * as v1TranslateRealtime from "./v1TranslateRealtime";
+export * from "./v1TranslateRealtime/types";
 export * as voices from "./voices";
 export * from "./voices/client/requests";
 export * from "./voices/types";

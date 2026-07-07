@@ -31,4 +31,6 @@ export interface ConversationHistoryMetadataCommonModel {
     agentCreatedFrom?: ElevenLabs.AgentDefinitionSource;
     agentLastUpdatedFrom?: ElevenLabs.AgentDefinitionSource;
     voiceRewards?: ElevenLabs.ConversationVoiceRewardModel[];
+    /** Total fiat cost of the conversation in USD, i.e. the sum of the LLM price and the non-LLM platform price (the fiat analogue of ``cost``). ``None`` when neither is set (e.g. conversations that predate fiat cost tracking). */
+    costFiat?: number;
 }

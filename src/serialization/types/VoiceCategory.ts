@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const VoiceCategory: core.serialization.Schema<serializers.VoiceCategory.Raw, ElevenLabs.VoiceCategory> =
-    core.serialization.enum_(["premade", "cloned", "generated", "professional", "famous"]);
+    core.serialization.enum_(["generated", "cloned", "premade", "professional", "famous", "high_quality"]);
 
 export declare namespace VoiceCategory {
-    export type Raw = "premade" | "cloned" | "generated" | "professional" | "famous";
+    export type Raw = "generated" | "cloned" | "premade" | "professional" | "famous" | "high_quality";
 }

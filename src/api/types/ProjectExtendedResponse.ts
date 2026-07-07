@@ -32,7 +32,7 @@ export interface ProjectExtendedResponse {
     /** The cover image URL of the project. */
     coverImageUrl?: string;
     /** The target audience of the project. */
-    targetAudience?: ElevenLabs.ProjectExtendedResponseModelTargetAudience;
+    targetAudience?: ElevenLabs.ProjectExtendedResponseTargetAudience;
     /** Two-letter language code (ISO 639-1) of the language of the project. */
     language?: string;
     /** The content type of the project, e.g. 'Novel' or 'Short Story' */
@@ -48,9 +48,9 @@ export interface ProjectExtendedResponse {
     /** The state of the project. */
     state: ElevenLabs.ProjectState;
     /** The access level of the project. */
-    accessLevel: ElevenLabs.ProjectExtendedResponseModelAccessLevel;
+    accessLevel: ElevenLabs.ProjectExtendedResponseAccessLevel;
     /** Whether the project is fiction. */
-    fiction?: ElevenLabs.ProjectExtendedResponseModelFiction;
+    fiction?: ElevenLabs.ProjectExtendedResponseFiction;
     /** Whether quality check is enabled for this project. */
     qualityCheckOn: boolean;
     /** Whether quality check is enabled on the project when bulk converting. */
@@ -58,7 +58,7 @@ export interface ProjectExtendedResponse {
     /** The creation meta of the project. */
     creationMeta?: ElevenLabs.ProjectCreationMetaResponseModel;
     /** The source type of the project. */
-    sourceType?: ElevenLabs.ProjectExtendedResponseModelSourceType;
+    sourceType?: ElevenLabs.ProjectExtendedResponseSourceType;
     /** Whether chapters are enabled for the project. */
     chaptersEnabled?: boolean;
     /** Whether captions are enabled for the project. */
@@ -70,7 +70,7 @@ export interface ProjectExtendedResponse {
     /** The public share ID of the project. */
     publicShareId?: string;
     /** The aspect ratio of the project. */
-    aspectRatio?: ElevenLabs.ProjectExtendedResponseModelAspectRatio;
+    aspectRatio?: ElevenLabs.ProjectExtendedResponseAspectRatio;
     /** Agent-related settings for the project */
     agentSettings?: ElevenLabs.StudioAgentSettingsModel;
     /** The quality preset level of the project. */
@@ -82,11 +82,11 @@ export interface ProjectExtendedResponse {
     /** List of pronunciation dictionary locators. */
     pronunciationDictionaryLocators: ElevenLabs.PronunciationDictionaryLocatorResponseModel[];
     /** Whether text normalization is applied to the project. */
-    applyTextNormalization: ElevenLabs.ProjectExtendedResponseModelApplyTextNormalization;
+    applyTextNormalization: ElevenLabs.ProjectExtendedResponseApplyTextNormalization;
     /** Experimental features for the project. */
     experimental?: Record<string, unknown>;
     /** List of uploaded assets e.g. videos, audios. */
-    assets: ElevenLabs.ProjectExtendedResponseModelAssetsItem[];
+    assets: ElevenLabs.ProjectExtendedResponseAssetsItem[];
     /** List of configured project voices. */
     voices: ElevenLabs.ProjectVoiceResponseModel[];
     /** List of voices used by the project. */
