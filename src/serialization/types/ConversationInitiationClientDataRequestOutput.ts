@@ -5,7 +5,6 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationConfigClientOverrideOutput } from "./ConversationConfigClientOverrideOutput";
 import { ConversationInitiationSourceInfo } from "./ConversationInitiationSourceInfo";
-import { DynamicVariableValueTypeOutput } from "./DynamicVariableValueTypeOutput";
 
 export const ConversationInitiationClientDataRequestOutput: core.serialization.ObjectSchema<
     serializers.ConversationInitiationClientDataRequestOutput.Raw,
@@ -29,7 +28,7 @@ export const ConversationInitiationClientDataRequestOutput: core.serialization.O
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization.record(core.serialization.string(), DynamicVariableValueTypeOutput.optional()).optional(),
+        core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     ),
 });
 
@@ -42,6 +41,6 @@ export declare namespace ConversationInitiationClientDataRequestOutput {
         branch_id?: string | null;
         environment?: string | null;
         starting_workflow_node_id?: string | null;
-        dynamic_variables?: Record<string, DynamicVariableValueTypeOutput.Raw | null | undefined> | null;
+        dynamic_variables?: Record<string, unknown> | null;
     }
 }

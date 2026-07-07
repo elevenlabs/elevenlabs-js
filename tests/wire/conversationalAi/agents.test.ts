@@ -52,6 +52,7 @@ describe("AgentsClient", () => {
                     retranscribe_on_turn_timeout: false,
                     turn_model: "turn_v3",
                     interruption_ignore_terms: ["interruption_ignore_terms"],
+                    interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                     transcribe_on_disabled_interruptions: false,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
@@ -103,7 +104,6 @@ describe("AgentsClient", () => {
                     first_message: "Hello, how can I help you today?",
                     language: "en",
                     hinglish_mode: true,
-                    dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                     disable_first_message_interruptions: false,
                     max_conversation_duration_message: "max_conversation_duration_message",
                     prompt: {
@@ -475,6 +475,7 @@ describe("AgentsClient", () => {
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                                interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -623,6 +624,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
+                                            interruption_mode: "allow",
                                             force_pre_tool_speech: true,
                                             pre_tool_speech: "auto",
                                             assignments: [
@@ -678,6 +680,7 @@ describe("AgentsClient", () => {
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                                interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -826,6 +829,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
+                                            interruption_mode: "allow",
                                             force_pre_tool_speech: true,
                                             pre_tool_speech: "auto",
                                             assignments: [
@@ -882,6 +886,7 @@ describe("AgentsClient", () => {
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                                interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -1030,6 +1035,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
+                                            interruption_mode: "allow",
                                             force_pre_tool_speech: true,
                                             pre_tool_speech: "auto",
                                             assignments: [
@@ -1148,6 +1154,7 @@ describe("AgentsClient", () => {
                     retranscribeOnTurnTimeout: false,
                     turnModel: "turn_v3",
                     interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                    interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                     transcribeOnDisabledInterruptions: false,
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
@@ -1231,11 +1238,6 @@ describe("AgentsClient", () => {
                     firstMessage: "Hello, how can I help you today?",
                     language: "en",
                     hinglishMode: true,
-                    dynamicVariables: {
-                        dynamicVariablePlaceholders: {
-                            user_name: "John Doe",
-                        },
-                    },
                     disableFirstMessageInterruptions: false,
                     maxConversationDurationMessage: "max_conversation_duration_message",
                     prompt: {
@@ -1701,6 +1703,7 @@ describe("AgentsClient", () => {
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -1877,6 +1880,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
+                                            interruptionMode: "allow",
                                             forcePreToolSpeech: true,
                                             preToolSpeech: "auto",
                                             assignments: [
@@ -1940,6 +1944,7 @@ describe("AgentsClient", () => {
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -2116,6 +2121,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
+                                            interruptionMode: "allow",
                                             forcePreToolSpeech: true,
                                             preToolSpeech: "auto",
                                             assignments: [
@@ -2187,6 +2193,7 @@ describe("AgentsClient", () => {
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -2363,6 +2370,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
+                                            interruptionMode: "allow",
                                             forcePreToolSpeech: true,
                                             preToolSpeech: "auto",
                                             assignments: [
@@ -2525,6 +2533,7 @@ describe("AgentsClient", () => {
                     retranscribe_on_turn_timeout: false,
                     turn_model: "turn_v3",
                     interruption_ignore_terms: ["interruption_ignore_terms"],
+                    interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                     transcribe_on_disabled_interruptions: false,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
@@ -2576,7 +2585,6 @@ describe("AgentsClient", () => {
                     first_message: "Hello, how can I help you today?",
                     language: "en",
                     hinglish_mode: true,
-                    dynamic_variables: { dynamic_variable_placeholders: { user_name: "John Doe" } },
                     disable_first_message_interruptions: false,
                     max_conversation_duration_message: "max_conversation_duration_message",
                     prompt: {
@@ -2948,6 +2956,7 @@ describe("AgentsClient", () => {
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                                interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -3096,6 +3105,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
+                                            interruption_mode: "allow",
                                             force_pre_tool_speech: true,
                                             pre_tool_speech: "auto",
                                             assignments: [
@@ -3151,6 +3161,7 @@ describe("AgentsClient", () => {
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                                interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -3299,6 +3310,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
+                                            interruption_mode: "allow",
                                             force_pre_tool_speech: true,
                                             pre_tool_speech: "auto",
                                             assignments: [
@@ -3355,6 +3367,7 @@ describe("AgentsClient", () => {
                                 retranscribe_on_turn_timeout: false,
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                                interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -3503,6 +3516,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             response_timeout_secs: 1,
                                             disable_interruptions: true,
+                                            interruption_mode: "allow",
                                             force_pre_tool_speech: true,
                                             pre_tool_speech: "auto",
                                             assignments: [
@@ -3622,6 +3636,7 @@ describe("AgentsClient", () => {
                     retranscribeOnTurnTimeout: false,
                     turnModel: "turn_v3",
                     interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                    interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                     transcribeOnDisabledInterruptions: false,
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
@@ -3705,11 +3720,6 @@ describe("AgentsClient", () => {
                     firstMessage: "Hello, how can I help you today?",
                     language: "en",
                     hinglishMode: true,
-                    dynamicVariables: {
-                        dynamicVariablePlaceholders: {
-                            user_name: "John Doe",
-                        },
-                    },
                     disableFirstMessageInterruptions: false,
                     maxConversationDurationMessage: "max_conversation_duration_message",
                     prompt: {
@@ -4175,6 +4185,7 @@ describe("AgentsClient", () => {
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -4351,6 +4362,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
+                                            interruptionMode: "allow",
                                             forcePreToolSpeech: true,
                                             preToolSpeech: "auto",
                                             assignments: [
@@ -4414,6 +4426,7 @@ describe("AgentsClient", () => {
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -4590,6 +4603,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
+                                            interruptionMode: "allow",
                                             forcePreToolSpeech: true,
                                             preToolSpeech: "auto",
                                             assignments: [
@@ -4661,6 +4675,7 @@ describe("AgentsClient", () => {
                                 retranscribeOnTurnTimeout: false,
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                                interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -4837,6 +4852,7 @@ describe("AgentsClient", () => {
                                             description: "description",
                                             responseTimeoutSecs: 1,
                                             disableInterruptions: true,
+                                            interruptionMode: "allow",
                                             forcePreToolSpeech: true,
                                             preToolSpeech: "auto",
                                             assignments: [
@@ -5037,6 +5053,38 @@ describe("AgentsClient", () => {
         const response = await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
         expect(response).toEqual({
             agentId: "J3Pbu5gP6NNKBscdCdwB",
+        });
+    });
+
+    test("get_default_interruption_ignore_terms", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            terms_by_language: {
+                key: { acknowledgements: ["acknowledgements"], openers: ["openers"], confirmations: ["confirmations"] },
+            },
+            max_terms: 1,
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/convai/agents/defaults/interruption-ignore-terms")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.agents.getDefaultInterruptionIgnoreTerms();
+        expect(response).toEqual({
+            termsByLanguage: {
+                key: {
+                    acknowledgements: ["acknowledgements"],
+                    openers: ["openers"],
+                    confirmations: ["confirmations"],
+                },
+            },
+            maxTerms: 1,
         });
     });
 

@@ -67,10 +67,9 @@ export class PronunciationDictionariesClient {
         if (request.workspaceAccess != null) {
             _body.append(
                 "workspace_access",
-                serializers.PronunciationDictionariesCreateFromFileRequestWorkspaceAccess.jsonOrThrow(
-                    request.workspaceAccess,
-                    { unrecognizedObjectKeys: "strip" },
-                ),
+                serializers.AddPronunciationDictionaryRequestWorkspaceAccess.jsonOrThrow(request.workspaceAccess, {
+                    unrecognizedObjectKeys: "strip",
+                }),
             );
         }
 

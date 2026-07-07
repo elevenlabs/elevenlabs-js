@@ -10,6 +10,7 @@ import * as errors from "../../../../errors/index";
 import * as serializers from "../../../../serialization/index";
 import * as ElevenLabs from "../../../index";
 import { AudioClient } from "../resources/audio/client/Client";
+import { ProjectClient } from "../resources/project/client/Client";
 import { ResourceClient } from "../resources/resource/client/Client";
 import { TranscriptClient } from "../resources/transcript/client/Client";
 import { TranscriptsClient } from "../resources/transcripts/client/Client";
@@ -20,8 +21,12 @@ export declare namespace DubbingClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * Dub audio and video content into other languages while preserving the original speaker's voice.
+ */
 export class DubbingClient {
     protected readonly _options: NormalizedClientOptions<DubbingClient.Options>;
+    protected _project: ProjectClient | undefined;
     protected _resource: ResourceClient | undefined;
     protected _audio: AudioClient | undefined;
     protected _transcript: TranscriptClient | undefined;
@@ -29,6 +34,10 @@ export class DubbingClient {
 
     constructor(options: DubbingClient.Options = {}) {
         this._options = normalizeClientOptions(options);
+    }
+
+    public get project(): ProjectClient {
+        return (this._project ??= new ProjectClient(this._options));
     }
 
     public get resource(): ResourceClient {
@@ -300,7 +309,7 @@ export class DubbingClient {
         if (request.mode != null) {
             _body.append(
                 "mode",
-                serializers.DubbingCreateRequestMode.jsonOrThrow(request.mode, { unrecognizedObjectKeys: "strip" }),
+                serializers.DubRequestMode.jsonOrThrow(request.mode, { unrecognizedObjectKeys: "strip" }),
             );
         }
 

@@ -8,6 +8,7 @@ import { EndProcedureToolConfigOutput } from "./EndProcedureToolConfigOutput";
 import { KnowledgeBaseRagToolConfig } from "./KnowledgeBaseRagToolConfig";
 import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
 import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
+import { RunSubagentToolConfigOutput } from "./RunSubagentToolConfigOutput";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
 import { StartProcedureToolConfigOutput } from "./StartProcedureToolConfigOutput";
 import { TransferToAgentToolConfig } from "./TransferToAgentToolConfig";
@@ -24,6 +25,7 @@ export const SystemToolConfigOutputParams: core.serialization.Schema<
         knowledge_base_rag: KnowledgeBaseRagToolConfig,
         language_detection: LanguageDetectionToolConfig,
         play_keypad_touch_tone: PlayDtmfToolConfig,
+        run_subagent: RunSubagentToolConfigOutput,
         skip_turn: SkipTurnToolConfig,
         start_procedure: StartProcedureToolConfigOutput,
         transfer_to_agent: TransferToAgentToolConfig,
@@ -42,6 +44,7 @@ export declare namespace SystemToolConfigOutputParams {
         | SystemToolConfigOutputParams.KnowledgeBaseRag
         | SystemToolConfigOutputParams.LanguageDetection
         | SystemToolConfigOutputParams.PlayKeypadTouchTone
+        | SystemToolConfigOutputParams.RunSubagent
         | SystemToolConfigOutputParams.SkipTurn
         | SystemToolConfigOutputParams.StartProcedure
         | SystemToolConfigOutputParams.TransferToAgent
@@ -66,6 +69,10 @@ export declare namespace SystemToolConfigOutputParams {
 
     export interface PlayKeypadTouchTone extends PlayDtmfToolConfig.Raw {
         system_tool_type: "play_keypad_touch_tone";
+    }
+
+    export interface RunSubagent extends RunSubagentToolConfigOutput.Raw {
+        system_tool_type: "run_subagent";
     }
 
     export interface SkipTurn extends SkipTurnToolConfig.Raw {

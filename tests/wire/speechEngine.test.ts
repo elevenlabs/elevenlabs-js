@@ -95,6 +95,7 @@ describe("SpeechEngineClient", () => {
                 retranscribe_on_turn_timeout: true,
                 turn_model: "turn_v2",
                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                 transcribe_on_disabled_interruptions: true,
             },
             conversation: {
@@ -203,6 +204,7 @@ describe("SpeechEngineClient", () => {
                 retranscribeOnTurnTimeout: true,
                 turnModel: "turn_v2",
                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                 transcribeOnDisabledInterruptions: true,
             },
             conversation: {
@@ -301,6 +303,7 @@ describe("SpeechEngineClient", () => {
                 retranscribe_on_turn_timeout: true,
                 turn_model: "turn_v2",
                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                 transcribe_on_disabled_interruptions: true,
             },
             conversation: {
@@ -404,6 +407,7 @@ describe("SpeechEngineClient", () => {
                 retranscribeOnTurnTimeout: true,
                 turnModel: "turn_v2",
                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                 transcribeOnDisabledInterruptions: true,
             },
             conversation: {
@@ -517,6 +521,7 @@ describe("SpeechEngineClient", () => {
                 retranscribe_on_turn_timeout: true,
                 turn_model: "turn_v2",
                 interruption_ignore_terms: ["interruption_ignore_terms"],
+                interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
                 transcribe_on_disabled_interruptions: true,
             },
             conversation: {
@@ -621,6 +626,7 @@ describe("SpeechEngineClient", () => {
                 retranscribeOnTurnTimeout: true,
                 turnModel: "turn_v2",
                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
                 transcribeOnDisabledInterruptions: true,
             },
             conversation: {

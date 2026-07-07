@@ -4,12 +4,13 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
-import { DynamicVariablesConfigInput } from "./DynamicVariablesConfigInput";
+import { DynamicVariablesConfig } from "./DynamicVariablesConfig";
 import { PreToolSpeechMode } from "./PreToolSpeechMode";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
 import { ToolCallSoundType } from "./ToolCallSoundType";
 import { ToolErrorHandlingMode } from "./ToolErrorHandlingMode";
 import { ToolExecutionMode } from "./ToolExecutionMode";
+import { ToolInterruptionMode } from "./ToolInterruptionMode";
 
 export const ClientToolConfigInput: core.serialization.ObjectSchema<
     serializers.ClientToolConfigInput.Raw,
@@ -19,6 +20,7 @@ export const ClientToolConfigInput: core.serialization.ObjectSchema<
     description: core.serialization.string(),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    interruptionMode: core.serialization.property("interruption_mode", ToolInterruptionMode.optional()),
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
     preToolSpeech: core.serialization.property("pre_tool_speech", PreToolSpeechMode.optional()),
     assignments: core.serialization.list(DynamicVariableAssignment).optional(),
@@ -27,7 +29,7 @@ export const ClientToolConfigInput: core.serialization.ObjectSchema<
     toolErrorHandlingMode: core.serialization.property("tool_error_handling_mode", ToolErrorHandlingMode.optional()),
     parameters: core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyInput).optional(),
     expectsResponse: core.serialization.property("expects_response", core.serialization.boolean().optional()),
-    dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfigInput.optional()),
+    dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
 });
 
@@ -37,6 +39,7 @@ export declare namespace ClientToolConfigInput {
         description: string;
         response_timeout_secs?: number | null;
         disable_interruptions?: boolean | null;
+        interruption_mode?: ToolInterruptionMode.Raw | null;
         force_pre_tool_speech?: boolean | null;
         pre_tool_speech?: PreToolSpeechMode.Raw | null;
         assignments?: DynamicVariableAssignment.Raw[] | null;
@@ -45,7 +48,7 @@ export declare namespace ClientToolConfigInput {
         tool_error_handling_mode?: ToolErrorHandlingMode.Raw | null;
         parameters?: serializers.ObjectJsonSchemaPropertyInput.Raw | null;
         expects_response?: boolean | null;
-        dynamic_variables?: DynamicVariablesConfigInput.Raw | null;
+        dynamic_variables?: DynamicVariablesConfig.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
     }
 }

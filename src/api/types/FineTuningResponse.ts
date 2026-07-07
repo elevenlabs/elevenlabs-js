@@ -6,7 +6,7 @@ export interface FineTuningResponse {
     /** Whether the user is allowed to fine-tune the voice. */
     isAllowedToFineTune?: boolean;
     /** The state of the fine-tuning process for each model. */
-    state?: Record<string, ElevenLabs.FineTuningResponseModelStateValue>;
+    state?: Record<string, ElevenLabs.FineTuningResponseStateValue>;
     /** List of verification failures in the fine-tuning process. */
     verificationFailures?: string[];
     /** The number of verification attempts in the fine-tuning process. */

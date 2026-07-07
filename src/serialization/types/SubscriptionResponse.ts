@@ -7,7 +7,7 @@ import { BillingPeriod } from "./BillingPeriod";
 import { CharacterRefreshPeriod } from "./CharacterRefreshPeriod";
 import { Currency } from "./Currency";
 import { Price } from "./Price";
-import { SubscriptionResponseModelMaxCreditLimitExtension } from "./SubscriptionResponseModelMaxCreditLimitExtension";
+import { SubscriptionResponseMaxCreditLimitExtension } from "./SubscriptionResponseMaxCreditLimitExtension";
 import { SubscriptionStatusType } from "./SubscriptionStatusType";
 
 export const SubscriptionResponse: core.serialization.ObjectSchema<
@@ -23,7 +23,7 @@ export const SubscriptionResponse: core.serialization.ObjectSchema<
     ),
     maxCreditLimitExtension: core.serialization.property(
         "max_credit_limit_extension",
-        SubscriptionResponseModelMaxCreditLimitExtension,
+        SubscriptionResponseMaxCreditLimitExtension,
     ),
     canExtendCharacterLimit: core.serialization.property("can_extend_character_limit", core.serialization.boolean()),
     allowedToExtendCharacterLimit: core.serialization.property(
@@ -37,6 +37,10 @@ export const SubscriptionResponse: core.serialization.ObjectSchema<
     voiceSlotsUsed: core.serialization.property("voice_slots_used", core.serialization.number()),
     professionalVoiceSlotsUsed: core.serialization.property(
         "professional_voice_slots_used",
+        core.serialization.number(),
+    ),
+    professionalVoiceSlotsUsedInWorkspace: core.serialization.property(
+        "professional_voice_slots_used_in_workspace",
         core.serialization.number(),
     ),
     voiceLimit: core.serialization.property("voice_limit", core.serialization.number()),
@@ -65,12 +69,13 @@ export declare namespace SubscriptionResponse {
         character_count: number;
         character_limit: number;
         max_character_limit_extension?: number | null;
-        max_credit_limit_extension: SubscriptionResponseModelMaxCreditLimitExtension.Raw;
+        max_credit_limit_extension: SubscriptionResponseMaxCreditLimitExtension.Raw;
         can_extend_character_limit: boolean;
         allowed_to_extend_character_limit: boolean;
         next_character_count_reset_unix?: number | null;
         voice_slots_used: number;
         professional_voice_slots_used: number;
+        professional_voice_slots_used_in_workspace: number;
         voice_limit: number;
         max_voice_add_edits?: number | null;
         voice_add_edit_counter: number;

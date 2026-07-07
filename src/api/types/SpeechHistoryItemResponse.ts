@@ -14,7 +14,7 @@ export interface SpeechHistoryItemResponse {
     /** The name of the voice. */
     voiceName?: string;
     /** The category of the voice. Either 'premade', 'cloned', 'generated' or 'professional'. */
-    voiceCategory?: ElevenLabs.SpeechHistoryItemResponseModelVoiceCategory;
+    voiceCategory?: ElevenLabs.SpeechHistoryItemResponseVoiceCategory;
     /** The text used to generate the audio item. */
     text?: string;
     /** Unix timestamp of when the item was created. */
@@ -33,7 +33,7 @@ export interface SpeechHistoryItemResponse {
     /** The ID of the share link. */
     shareLinkId?: string;
     /** The source of the history item. Either TTS (text to speech), STS (speech to text), AN (audio native), Projects, Dubbing, PlayAPI, PD (pronunciation dictionary) or ConvAI (Agents Platform). */
-    source?: ElevenLabs.SpeechHistoryItemResponseModelSource;
+    source?: ElevenLabs.SpeechHistoryItemResponseSource;
     /** The alignments of the history item. */
     alignments?: ElevenLabs.HistoryAlignmentsResponseModel;
     /** The dialogue (voice and text pairs) used to generate the audio item. If this is set then the top level `text` and `voice_id` fields will be empty. */

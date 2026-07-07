@@ -22,8 +22,10 @@ export interface McpServerConfigInput {
     forcePreToolSpeech?: boolean;
     /** Controls whether the agent speaks before this tool is called. 'auto' (default) decides based on recent tool latency, 'force' always asks the agent to speak, 'off' fully opts out regardless of latency. Applies to every tool from this MCP server unless overridden per tool. */
     preToolSpeech?: ElevenLabs.PreToolSpeechMode;
-    /** If true, the user will not be able to interrupt the agent while any tool from this MCP server is running. */
+    /** DEPRECATED: use `interruption_mode` instead. If true, the user will not be able to interrupt the agent while any tool from this MCP server is running. */
     disableInterruptions?: boolean;
+    /** Controls whether the user can interrupt the agent around this tool call. 'allow' (default) lets the user interrupt at any time, 'disable_during_tool' suppresses interruptions only while the tool is running, 'disable_during_tool_and_turn' suppresses interruptions while the tool runs and for the agent response that follows it. Applies to every tool from this MCP server unless overridden per tool. */
+    interruptionMode?: ElevenLabs.ToolInterruptionMode;
     /** Predefined tool call sound type to play during tool execution for all tools from this MCP server */
     toolCallSound?: ElevenLabs.ToolCallSoundType;
     /** Determines when the tool call sound should play for all tools from this MCP server */

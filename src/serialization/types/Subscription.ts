@@ -6,10 +6,10 @@ import type * as serializers from "../index";
 import { BillingPeriod } from "./BillingPeriod";
 import { CharacterRefreshPeriod } from "./CharacterRefreshPeriod";
 import { Currency } from "./Currency";
-import { ExtendedSubscriptionResponseModelMaxCreditLimitExtension } from "./ExtendedSubscriptionResponseModelMaxCreditLimitExtension";
-import { ExtendedSubscriptionResponseModelPendingChange } from "./ExtendedSubscriptionResponseModelPendingChange";
 import { InvoiceResponse } from "./InvoiceResponse";
 import { Price } from "./Price";
+import { SubscriptionMaxCreditLimitExtension } from "./SubscriptionMaxCreditLimitExtension";
+import { SubscriptionPendingChange } from "./SubscriptionPendingChange";
 import { SubscriptionStatusType } from "./SubscriptionStatusType";
 
 export const Subscription: core.serialization.ObjectSchema<serializers.Subscription.Raw, ElevenLabs.Subscription> =
@@ -23,7 +23,7 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
         ),
         maxCreditLimitExtension: core.serialization.property(
             "max_credit_limit_extension",
-            ExtendedSubscriptionResponseModelMaxCreditLimitExtension,
+            SubscriptionMaxCreditLimitExtension,
         ),
         canExtendCharacterLimit: core.serialization.property(
             "can_extend_character_limit",
@@ -40,6 +40,10 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
         voiceSlotsUsed: core.serialization.property("voice_slots_used", core.serialization.number()),
         professionalVoiceSlotsUsed: core.serialization.property(
             "professional_voice_slots_used",
+            core.serialization.number(),
+        ),
+        professionalVoiceSlotsUsedInWorkspace: core.serialization.property(
+            "professional_voice_slots_used_in_workspace",
             core.serialization.number(),
         ),
         voiceLimit: core.serialization.property("voice_limit", core.serialization.number()),
@@ -66,10 +70,7 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
         nextInvoice: core.serialization.property("next_invoice", InvoiceResponse.optional()),
         openInvoices: core.serialization.property("open_invoices", core.serialization.list(InvoiceResponse)),
         hasOpenInvoices: core.serialization.property("has_open_invoices", core.serialization.boolean()),
-        pendingChange: core.serialization.property(
-            "pending_change",
-            ExtendedSubscriptionResponseModelPendingChange.optional(),
-        ),
+        pendingChange: core.serialization.property("pending_change", SubscriptionPendingChange.optional()),
         hasUsedStarterCouponOnAccount: core.serialization.property(
             "has_used_starter_coupon_on_account",
             core.serialization.boolean().optional(),
@@ -86,12 +87,13 @@ export declare namespace Subscription {
         character_count: number;
         character_limit: number;
         max_character_limit_extension?: number | null;
-        max_credit_limit_extension: ExtendedSubscriptionResponseModelMaxCreditLimitExtension.Raw;
+        max_credit_limit_extension: SubscriptionMaxCreditLimitExtension.Raw;
         can_extend_character_limit: boolean;
         allowed_to_extend_character_limit: boolean;
         next_character_count_reset_unix?: number | null;
         voice_slots_used: number;
         professional_voice_slots_used: number;
+        professional_voice_slots_used_in_workspace: number;
         voice_limit: number;
         max_voice_add_edits?: number | null;
         voice_add_edit_counter: number;
@@ -107,7 +109,7 @@ export declare namespace Subscription {
         next_invoice?: InvoiceResponse.Raw | null;
         open_invoices: InvoiceResponse.Raw[];
         has_open_invoices: boolean;
-        pending_change?: ExtendedSubscriptionResponseModelPendingChange.Raw | null;
+        pending_change?: SubscriptionPendingChange.Raw | null;
         has_used_starter_coupon_on_account?: boolean | null;
         has_used_creator_coupon_on_account?: boolean | null;
     }

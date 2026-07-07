@@ -10,7 +10,7 @@ export interface Voice {
     /** List of samples associated with the voice. */
     samples?: ElevenLabs.VoiceSample[];
     /** The category of the voice. */
-    category?: ElevenLabs.VoiceResponseModelCategory;
+    category?: ElevenLabs.VoiceCategory;
     /** Fine-tuning information for the voice. */
     fineTuning?: ElevenLabs.FineTuningResponse;
     /** Labels associated with the voice. */
@@ -32,7 +32,7 @@ export interface Voice {
     /** The IDs of collections this voice belongs to. */
     collectionIds?: string[];
     /** The safety controls of the voice. */
-    safetyControl?: ElevenLabs.VoiceResponseModelSafetyControl;
+    safetyControl?: ElevenLabs.VoiceSafetyControl;
     /** The voice verification of the voice. */
     voiceVerification?: ElevenLabs.VoiceVerificationResponse;
     /** The permission on the resource of the voice. */
@@ -50,9 +50,9 @@ export interface Voice {
     /** Whether the voice is bookmarked by the current user. Only relevant for community (library-copied) voices. */
     isBookmarked?: boolean;
     /** The recording quality of the voice as determined by the review pipeline. */
-    recordingQuality?: ElevenLabs.VoiceResponseModelRecordingQuality;
+    recordingQuality?: ElevenLabs.VoiceRecordingQuality;
     /** The review pipeline status of the voice. */
-    labellingStatus?: ElevenLabs.VoiceResponseModelLabellingStatus;
+    labellingStatus?: ElevenLabs.VoiceLabellingStatus;
     /** The reason for the recording quality assessment, as determined by the review pipeline. */
     recordingQualityReason?: string;
 }

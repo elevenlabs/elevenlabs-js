@@ -8,6 +8,8 @@ import { KnowledgeBaseRagToolResultModel } from "./KnowledgeBaseRagToolResultMod
 import { LanguageDetectionToolResultModel } from "./LanguageDetectionToolResultModel";
 import { PlayDtmfResultErrorModel } from "./PlayDtmfResultErrorModel";
 import { PlayDtmfResultSuccessModel } from "./PlayDtmfResultSuccessModel";
+import { RunSubagentToolResultErrorModel } from "./RunSubagentToolResultErrorModel";
+import { RunSubagentToolResultSuccessModel } from "./RunSubagentToolResultSuccessModel";
 import { SkipTurnToolResponseModel } from "./SkipTurnToolResponseModel";
 import { TestToolResultModel } from "./TestToolResultModel";
 import { TransferToAgentToolResultErrorModel } from "./TransferToAgentToolResultErrorModel";
@@ -28,6 +30,8 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelOutputResul
         language_detection_success: LanguageDetectionToolResultModel,
         play_dtmf_error: PlayDtmfResultErrorModel,
         play_dtmf_success: PlayDtmfResultSuccessModel,
+        run_subagent_error: RunSubagentToolResultErrorModel,
+        run_subagent_success: RunSubagentToolResultSuccessModel,
         skip_turn_success: SkipTurnToolResponseModel,
         testing_tool_result: TestToolResultModel,
         transfer_to_agent_error: TransferToAgentToolResultErrorModel,
@@ -50,6 +54,8 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.LanguageDetectionSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.PlayDtmfError
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.PlayDtmfSuccess
+        | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.RunSubagentError
+        | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.RunSubagentSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.SkipTurnSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TestingToolResult
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToAgentError
@@ -78,6 +84,14 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
 
     export interface PlayDtmfSuccess extends PlayDtmfResultSuccessModel.Raw {
         result_type: "play_dtmf_success";
+    }
+
+    export interface RunSubagentError extends RunSubagentToolResultErrorModel.Raw {
+        result_type: "run_subagent_error";
+    }
+
+    export interface RunSubagentSuccess extends RunSubagentToolResultSuccessModel.Raw {
+        result_type: "run_subagent_success";
     }
 
     export interface SkipTurnSuccess extends SkipTurnToolResponseModel.Raw {

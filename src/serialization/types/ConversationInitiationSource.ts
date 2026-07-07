@@ -29,8 +29,10 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "telegram_integration",
     "intercom_integration",
     "freshdesk_integration",
+    "salesforce_integration",
     "template_preview",
     "genesys_bot_connector",
+    "subagent_tool",
 ]);
 
 export declare namespace ConversationInitiationSource {
@@ -56,6 +58,8 @@ export declare namespace ConversationInitiationSource {
         | "telegram_integration"
         | "intercom_integration"
         | "freshdesk_integration"
+        | "salesforce_integration"
         | "template_preview"
-        | "genesys_bot_connector";
+        | "genesys_bot_connector"
+        | "subagent_tool";
 }

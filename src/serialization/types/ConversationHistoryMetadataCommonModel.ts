@@ -67,6 +67,7 @@ export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSc
         "voice_rewards",
         core.serialization.list(ConversationVoiceRewardModel).optional(),
     ),
+    costFiat: core.serialization.property("cost_fiat", core.serialization.number().optional()),
 });
 
 export declare namespace ConversationHistoryMetadataCommonModel {
@@ -99,5 +100,6 @@ export declare namespace ConversationHistoryMetadataCommonModel {
         agent_created_from?: AgentDefinitionSource.Raw | null;
         agent_last_updated_from?: AgentDefinitionSource.Raw | null;
         voice_rewards?: ConversationVoiceRewardModel.Raw[] | null;
+        cost_fiat?: number | null;
     }
 }

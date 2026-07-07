@@ -122,6 +122,8 @@ export class SpeakerClient {
     /**
      * @deprecated
      *
+     * Creates a new speaker in a dubbing resource. The speaker is added to every available language and can optionally be associated with an ElevenLabs voice and voice settings.
+     *
      * @param {string} dubbing_id - ID of the dubbing project.
      * @param {ElevenLabs.dubbing.resource.BodyCreateANewSpeakerV1DubbingResourceDubbingIdSpeakerPost} request
      * @param {SpeakerClient.RequestOptions} requestOptions - Request-specific configuration.

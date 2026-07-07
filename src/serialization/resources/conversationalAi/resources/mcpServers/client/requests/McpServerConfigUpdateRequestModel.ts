@@ -9,6 +9,7 @@ import { PreToolSpeechMode } from "../../../../../../types/PreToolSpeechMode";
 import { ToolCallSoundBehavior } from "../../../../../../types/ToolCallSoundBehavior";
 import { ToolCallSoundType } from "../../../../../../types/ToolCallSoundType";
 import { ToolExecutionMode } from "../../../../../../types/ToolExecutionMode";
+import { ToolInterruptionMode } from "../../../../../../types/ToolInterruptionMode";
 import { McpServerConfigUpdateRequestModelAuthConnection } from "../../types/McpServerConfigUpdateRequestModelAuthConnection";
 import { McpServerConfigUpdateRequestModelRequestHeadersValue } from "../../types/McpServerConfigUpdateRequestModelRequestHeadersValue";
 
@@ -20,6 +21,7 @@ export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
     preToolSpeech: core.serialization.property("pre_tool_speech", PreToolSpeechMode.optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
+    interruptionMode: core.serialization.property("interruption_mode", ToolInterruptionMode.optional()),
     toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
@@ -44,6 +46,7 @@ export declare namespace McpServerConfigUpdateRequestModel {
         force_pre_tool_speech?: boolean | null;
         pre_tool_speech?: PreToolSpeechMode.Raw | null;
         disable_interruptions?: boolean | null;
+        interruption_mode?: ToolInterruptionMode.Raw | null;
         tool_call_sound?: ToolCallSoundType.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;

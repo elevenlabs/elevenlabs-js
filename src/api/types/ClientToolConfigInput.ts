@@ -11,8 +11,10 @@ export interface ClientToolConfigInput {
     description: string;
     /** The maximum time in seconds to wait for the tool call to complete. Must be between 1 and 120 seconds (inclusive). */
     responseTimeoutSecs?: number;
-    /** If true, the user will not be able to interrupt the agent while this tool is running. */
+    /** DEPRECATED: use `interruption_mode` instead. If true, the user will not be able to interrupt the agent while this tool is running. */
     disableInterruptions?: boolean;
+    /** Controls whether the user can interrupt the agent around this tool call. 'allow' (default) lets the user interrupt at any time, 'disable_during_tool' suppresses interruptions only while the tool is running, 'disable_during_tool_and_turn' suppresses interruptions while the tool runs and for the agent response that follows it. */
+    interruptionMode?: ElevenLabs.ToolInterruptionMode;
     /** DEPRECATED: use `pre_tool_speech` instead. If true, the agent will speak before the tool call. */
     forcePreToolSpeech?: boolean;
     /** Controls whether the agent speaks before this tool is called. 'auto' (default) decides based on recent tool latency, 'force' always asks the agent to speak, 'off' fully opts out regardless of latency. */
@@ -30,7 +32,7 @@ export interface ClientToolConfigInput {
     /** If true, calling this tool should block the conversation until the client responds with some response which is passed to the llm. If false then we will continue the conversation without waiting for the client to respond, this is useful to show content to a user but not block the conversation */
     expectsResponse?: boolean;
     /** Configuration for dynamic variables */
-    dynamicVariables?: ElevenLabs.DynamicVariablesConfigInput;
+    dynamicVariables?: ElevenLabs.DynamicVariablesConfig;
     /** Determines when and how the tool executes: 'immediate' executes the tool right away when requested by the LLM, 'post_tool_speech' waits for the agent to finish speaking before executing, 'async' runs the tool in the background without blocking - best for long-running operations. */
     executionMode?: ElevenLabs.ToolExecutionMode;
 }

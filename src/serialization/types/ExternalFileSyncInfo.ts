@@ -3,13 +3,13 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { ExternalSyncType } from "./ExternalSyncType";
+import { ExternalSyncProvider } from "./ExternalSyncProvider";
 
 export const ExternalFileSyncInfo: core.serialization.ObjectSchema<
     serializers.ExternalFileSyncInfo.Raw,
     ElevenLabs.ExternalFileSyncInfo
 > = core.serialization.object({
-    type: ExternalSyncType,
+    type: ExternalSyncProvider,
     sourceEntityId: core.serialization.property("source_entity_id", core.serialization.string()),
     integrationConnectionId: core.serialization.property("integration_connection_id", core.serialization.string()),
     sourceParentEntityId: core.serialization.property("source_parent_entity_id", core.serialization.string()),
@@ -20,7 +20,7 @@ export const ExternalFileSyncInfo: core.serialization.ObjectSchema<
 
 export declare namespace ExternalFileSyncInfo {
     export interface Raw {
-        type: ExternalSyncType.Raw;
+        type: ExternalSyncProvider.Raw;
         source_entity_id: string;
         integration_connection_id: string;
         source_parent_entity_id: string;

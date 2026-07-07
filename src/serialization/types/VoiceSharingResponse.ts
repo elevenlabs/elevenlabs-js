@@ -6,7 +6,7 @@ import type * as serializers from "../index";
 import { ReaderResourceResponseModel } from "./ReaderResourceResponseModel";
 import { ReviewStatus } from "./ReviewStatus";
 import { VoiceSharingModerationCheckResponseModel } from "./VoiceSharingModerationCheckResponseModel";
-import { VoiceSharingResponseModelCategory } from "./VoiceSharingResponseModelCategory";
+import { VoiceSharingResponseCategory } from "./VoiceSharingResponseCategory";
 import { VoiceSharingState } from "./VoiceSharingState";
 
 export const VoiceSharingResponse: core.serialization.ObjectSchema<
@@ -37,7 +37,7 @@ export const VoiceSharingResponse: core.serialization.ObjectSchema<
     disableAtUnix: core.serialization.property("disable_at_unix", core.serialization.number().optional()),
     voiceMixingAllowed: core.serialization.property("voice_mixing_allowed", core.serialization.boolean().optional()),
     featured: core.serialization.boolean().optional(),
-    category: VoiceSharingResponseModelCategory.optional(),
+    category: VoiceSharingResponseCategory.optional(),
     readerAppEnabled: core.serialization.property("reader_app_enabled", core.serialization.boolean().optional()),
     imageUrl: core.serialization.property("image_url", core.serialization.string().optional()),
     banReason: core.serialization.property("ban_reason", core.serialization.string().optional()),
@@ -80,7 +80,7 @@ export declare namespace VoiceSharingResponse {
         disable_at_unix?: number | null;
         voice_mixing_allowed?: boolean | null;
         featured?: boolean | null;
-        category?: VoiceSharingResponseModelCategory.Raw | null;
+        category?: VoiceSharingResponseCategory.Raw | null;
         reader_app_enabled?: boolean | null;
         image_url?: string | null;
         ban_reason?: string | null;

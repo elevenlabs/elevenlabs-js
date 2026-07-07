@@ -38,5 +38,5 @@ export interface BodySpeechToSpeechV1SpeechToSpeechVoiceIdPost {
     /** If set, will remove the background noise from your audio input using our audio isolation model. Only applies to Voice Changer. */
     removeBackgroundNoise?: boolean;
     /** The format of input audio. Options are 'pcm_s16le_16' or 'other' For `pcm_s16le_16`, the input audio must be 16-bit PCM at a 16kHz sample rate, single channel (mono), and little-endian byte order. Latency will be lower than with passing an encoded waveform. */
-    fileFormat?: ElevenLabs.SpeechToSpeechConvertRequestFileFormat;
+    fileFormat?: ElevenLabs.SpeechToSpeechRequestFileFormat;
 }

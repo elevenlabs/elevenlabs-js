@@ -10,7 +10,7 @@ export interface WidgetConfigResponse {
     /** Whether the widget is expandable */
     expandable?: ElevenLabs.WidgetExpandable;
     /** The avatar of the widget */
-    avatar?: ElevenLabs.WidgetConfigResponseModelAvatar;
+    avatar?: ElevenLabs.WidgetConfigResponseAvatar;
     /** The feedback mode of the widget */
     feedbackMode?: ElevenLabs.WidgetFeedbackMode;
     /** Configuration for feedback collected at the end of the conversation */
@@ -86,7 +86,7 @@ export interface WidgetConfigResponse {
     /** Whether to strip audio markup from messages. */
     stripAudioTags?: boolean;
     /** Theme for code block syntax highlighting. Defaults to auto-detection by the widget when not set. */
-    syntaxHighlightTheme?: ElevenLabs.WidgetConfigResponseModelSyntaxHighlightTheme;
+    syntaxHighlightTheme?: ElevenLabs.WidgetConfigResponseSyntaxHighlightTheme;
     /** Text contents of the widget */
     textContents?: ElevenLabs.WidgetTextContents;
     /** Styles for the widget */

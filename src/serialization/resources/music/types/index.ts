@@ -4,7 +4,10 @@ export * from "./BodyComposeMusicWithADetailedResponseV1MusicDetailedPostComposi
 export * from "./BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId";
 export * from "./BodyStreamComposedMusicV1MusicStreamPostCompositionPlan";
 export * from "./BodyStreamComposedMusicV1MusicStreamPostModelId";
+export * from "./BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostCompositionPlan";
+export * from "./BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostModelId";
 export * from "./MusicComposeDetailedRequestOutputFormat";
+export * from "./MusicComposeDetailedStreamRequestOutputFormat";
 export * from "./MusicComposeRequestOutputFormat";
 export * from "./MusicSeparateStemsRequestStemVariationId";
 export * from "./MusicStreamRequestOutputFormat";

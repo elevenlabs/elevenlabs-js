@@ -23,7 +23,7 @@ export class ApiKeysClient {
     }
 
     /**
-     * Disable the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation. This endpoint requires additional permissions and is not enabled by default. Reach out to your ElevenLabs contact to request access.
+     * Disable the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation.
      *
      * @param {ElevenLabs.workspaces.ApiKeysDisableRequest} request
      * @param {ApiKeysClient.RequestOptions} requestOptions - Request-specific configuration.

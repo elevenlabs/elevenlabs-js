@@ -68,7 +68,7 @@ export class IvcClient {
             _body.append(
                 "labels",
                 (() => {
-                    const mapped = serializers.voices.IvcCreateRequestLabels.jsonOrThrow(request.labels, {
+                    const mapped = serializers.voices.AddVoiceRequestLabels.jsonOrThrow(request.labels, {
                         unrecognizedObjectKeys: "strip",
                     });
                     return typeof mapped === "string" ? mapped : toJson(mapped);

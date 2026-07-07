@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AllowlistItem } from "./AllowlistItem";
 import { EmbedVariant } from "./EmbedVariant";
-import { WidgetConfigOutputAvatar } from "./WidgetConfigOutputAvatar";
-import { WidgetConfigOutputSyntaxHighlightTheme } from "./WidgetConfigOutputSyntaxHighlightTheme";
+import { WidgetConfigAvatar } from "./WidgetConfigAvatar";
+import { WidgetConfigSyntaxHighlightTheme } from "./WidgetConfigSyntaxHighlightTheme";
 import { WidgetEndFeedbackConfig } from "./WidgetEndFeedbackConfig";
 import { WidgetExpandable } from "./WidgetExpandable";
 import { WidgetFeedbackMode } from "./WidgetFeedbackMode";
@@ -20,7 +20,7 @@ export const WidgetConfig: core.serialization.ObjectSchema<serializers.WidgetCon
         variant: EmbedVariant.optional(),
         placement: WidgetPlacement.optional(),
         expandable: WidgetExpandable.optional(),
-        avatar: WidgetConfigOutputAvatar.optional(),
+        avatar: WidgetConfigAvatar.optional(),
         feedbackMode: core.serialization.property("feedback_mode", WidgetFeedbackMode.optional()),
         endFeedback: core.serialization.property("end_feedback", WidgetEndFeedbackConfig.optional()),
         bgColor: core.serialization.property("bg_color", core.serialization.string().optional()),
@@ -81,7 +81,7 @@ export const WidgetConfig: core.serialization.ObjectSchema<serializers.WidgetCon
         stripAudioTags: core.serialization.property("strip_audio_tags", core.serialization.boolean().optional()),
         syntaxHighlightTheme: core.serialization.property(
             "syntax_highlight_theme",
-            WidgetConfigOutputSyntaxHighlightTheme.optional(),
+            WidgetConfigSyntaxHighlightTheme.optional(),
         ),
         textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
         styles: WidgetStyles.optional(),
@@ -99,7 +99,7 @@ export declare namespace WidgetConfig {
         variant?: EmbedVariant.Raw | null;
         placement?: WidgetPlacement.Raw | null;
         expandable?: WidgetExpandable.Raw | null;
-        avatar?: WidgetConfigOutputAvatar.Raw | null;
+        avatar?: WidgetConfigAvatar.Raw | null;
         feedback_mode?: WidgetFeedbackMode.Raw | null;
         end_feedback?: WidgetEndFeedbackConfig.Raw | null;
         bg_color?: string | null;
@@ -137,7 +137,7 @@ export declare namespace WidgetConfig {
         show_agent_status?: boolean | null;
         show_conversation_id?: boolean | null;
         strip_audio_tags?: boolean | null;
-        syntax_highlight_theme?: WidgetConfigOutputSyntaxHighlightTheme.Raw | null;
+        syntax_highlight_theme?: WidgetConfigSyntaxHighlightTheme.Raw | null;
         text_contents?: WidgetTextContents.Raw | null;
         styles?: WidgetStyles.Raw | null;
         language_selector?: boolean | null;

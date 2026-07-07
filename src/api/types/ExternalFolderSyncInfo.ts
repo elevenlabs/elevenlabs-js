@@ -7,7 +7,7 @@ import type * as ElevenLabs from "../index";
  */
 export interface ExternalFolderSyncInfo {
     /** Provider identifier */
-    type: ElevenLabs.ExternalSyncType;
+    type: ElevenLabs.ExternalSyncProvider;
     /** Entity ID in the external system */
     sourceEntityId: string;
     /** Integration connection instance ID */

@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { ConversationAsrUsageModel } from "./ConversationAsrUsageModel";
 import { ConversationTtsUsageModel } from "./ConversationTtsUsageModel";
 import { LlmCategoryUsage } from "./LlmCategoryUsage";
+import { PlatformUsage } from "./PlatformUsage";
 
 export const ConversationChargingCommonModel: core.serialization.ObjectSchema<
     serializers.ConversationChargingCommonModel.Raw,
@@ -18,6 +19,9 @@ export const ConversationChargingCommonModel: core.serialization.ObjectSchema<
     llmPrice: core.serialization.property("llm_price", core.serialization.number().optional()),
     llmCharge: core.serialization.property("llm_charge", core.serialization.number().optional()),
     callCharge: core.serialization.property("call_charge", core.serialization.number().optional()),
+    platformCharge: core.serialization.property("platform_charge", core.serialization.number().optional()),
+    platformUsage: core.serialization.property("platform_usage", PlatformUsage.optional()),
+    platformPrice: core.serialization.property("platform_price", core.serialization.number().optional()),
     freeMinutesConsumed: core.serialization.property("free_minutes_consumed", core.serialization.number().optional()),
     freeLlmDollarsConsumed: core.serialization.property(
         "free_llm_dollars_consumed",
@@ -36,6 +40,9 @@ export declare namespace ConversationChargingCommonModel {
         llm_price?: number | null;
         llm_charge?: number | null;
         call_charge?: number | null;
+        platform_charge?: number | null;
+        platform_usage?: PlatformUsage.Raw | null;
+        platform_price?: number | null;
         free_minutes_consumed?: number | null;
         free_llm_dollars_consumed?: number | null;
         tts_usage?: ConversationTtsUsageModel.Raw | null;

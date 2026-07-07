@@ -8,6 +8,8 @@ export type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.LanguageDetectionSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.PlayDtmfError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.PlayDtmfSuccess
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.RunSubagentError
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.RunSubagentSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.SkipTurnSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TestingToolResult
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToAgentError
@@ -37,6 +39,14 @@ export namespace ConversationHistoryTranscriptSystemToolResultCommonModelOutputR
 
     export interface PlayDtmfSuccess extends ElevenLabs.PlayDtmfResultSuccessModel {
         resultType: "play_dtmf_success";
+    }
+
+    export interface RunSubagentError extends ElevenLabs.RunSubagentToolResultErrorModel {
+        resultType: "run_subagent_error";
+    }
+
+    export interface RunSubagentSuccess extends ElevenLabs.RunSubagentToolResultSuccessModel {
+        resultType: "run_subagent_success";
     }
 
     export interface SkipTurnSuccess extends ElevenLabs.SkipTurnToolResponseModel {

@@ -1,4 +1,7 @@
 export * as audio from "./audio";
+export * as project from "./project";
+export * from "./project/client/requests";
+export * from "./project/types";
 export * as resource from "./resource";
 export * from "./resource/client/requests";
 export * as transcript from "./transcript";

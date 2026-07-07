@@ -4,8 +4,8 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { DiscountResponseModel } from "./DiscountResponseModel";
-import { InvoiceResponseModelPaymentIntentStatus } from "./InvoiceResponseModelPaymentIntentStatus";
-import { InvoiceResponseModelPaymentIntentStatussesItem } from "./InvoiceResponseModelPaymentIntentStatussesItem";
+import { InvoiceResponsePaymentIntentStatus } from "./InvoiceResponsePaymentIntentStatus";
+import { InvoiceResponsePaymentIntentStatussesItem } from "./InvoiceResponsePaymentIntentStatussesItem";
 
 export const InvoiceResponse: core.serialization.ObjectSchema<
     serializers.InvoiceResponse.Raw,
@@ -20,11 +20,11 @@ export const InvoiceResponse: core.serialization.ObjectSchema<
     nextPaymentAttemptUnix: core.serialization.property("next_payment_attempt_unix", core.serialization.number()),
     paymentIntentStatus: core.serialization.property(
         "payment_intent_status",
-        InvoiceResponseModelPaymentIntentStatus.optional(),
+        InvoiceResponsePaymentIntentStatus.optional(),
     ),
     paymentIntentStatusses: core.serialization.property(
         "payment_intent_statusses",
-        core.serialization.list(InvoiceResponseModelPaymentIntentStatussesItem),
+        core.serialization.list(InvoiceResponsePaymentIntentStatussesItem),
     ),
 });
 
@@ -37,7 +37,7 @@ export declare namespace InvoiceResponse {
         discount_amount_off?: number | null;
         discounts: DiscountResponseModel.Raw[];
         next_payment_attempt_unix: number;
-        payment_intent_status?: InvoiceResponseModelPaymentIntentStatus.Raw | null;
-        payment_intent_statusses: InvoiceResponseModelPaymentIntentStatussesItem.Raw[];
+        payment_intent_status?: InvoiceResponsePaymentIntentStatus.Raw | null;
+        payment_intent_statusses: InvoiceResponsePaymentIntentStatussesItem.Raw[];
     }
 }

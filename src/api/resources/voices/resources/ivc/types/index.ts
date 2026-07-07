@@ -1,1 +1,1 @@
-export * from "./IvcCreateRequestLabels";
+export * from "./AddVoiceRequestLabels";

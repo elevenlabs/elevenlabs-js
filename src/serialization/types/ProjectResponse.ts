@@ -5,11 +5,11 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { CaptionStyleModel } from "./CaptionStyleModel";
 import { ProjectCreationMetaResponseModel } from "./ProjectCreationMetaResponseModel";
-import { ProjectResponseModelAccessLevel } from "./ProjectResponseModelAccessLevel";
-import { ProjectResponseModelAspectRatio } from "./ProjectResponseModelAspectRatio";
-import { ProjectResponseModelFiction } from "./ProjectResponseModelFiction";
-import { ProjectResponseModelSourceType } from "./ProjectResponseModelSourceType";
-import { ProjectResponseModelTargetAudience } from "./ProjectResponseModelTargetAudience";
+import { ProjectResponseAccessLevel } from "./ProjectResponseAccessLevel";
+import { ProjectResponseAspectRatio } from "./ProjectResponseAspectRatio";
+import { ProjectResponseFiction } from "./ProjectResponseFiction";
+import { ProjectResponseSourceType } from "./ProjectResponseSourceType";
+import { ProjectResponseTargetAudience } from "./ProjectResponseTargetAudience";
 import { ProjectState } from "./ProjectState";
 import { StudioAgentSettingsModel } from "./StudioAgentSettingsModel";
 
@@ -37,7 +37,7 @@ export const ProjectResponse: core.serialization.ObjectSchema<
     description: core.serialization.string().optional(),
     genres: core.serialization.list(core.serialization.string()).optional(),
     coverImageUrl: core.serialization.property("cover_image_url", core.serialization.string().optional()),
-    targetAudience: core.serialization.property("target_audience", ProjectResponseModelTargetAudience.optional()),
+    targetAudience: core.serialization.property("target_audience", ProjectResponseTargetAudience.optional()),
     language: core.serialization.string().optional(),
     contentType: core.serialization.property("content_type", core.serialization.string().optional()),
     originalPublicationDate: core.serialization.property(
@@ -48,15 +48,15 @@ export const ProjectResponse: core.serialization.ObjectSchema<
     isbnNumber: core.serialization.property("isbn_number", core.serialization.string().optional()),
     volumeNormalization: core.serialization.property("volume_normalization", core.serialization.boolean()),
     state: ProjectState,
-    accessLevel: core.serialization.property("access_level", ProjectResponseModelAccessLevel),
-    fiction: ProjectResponseModelFiction.optional(),
+    accessLevel: core.serialization.property("access_level", ProjectResponseAccessLevel),
+    fiction: ProjectResponseFiction.optional(),
     qualityCheckOn: core.serialization.property("quality_check_on", core.serialization.boolean()),
     qualityCheckOnWhenBulkConvert: core.serialization.property(
         "quality_check_on_when_bulk_convert",
         core.serialization.boolean(),
     ),
     creationMeta: core.serialization.property("creation_meta", ProjectCreationMetaResponseModel.optional()),
-    sourceType: core.serialization.property("source_type", ProjectResponseModelSourceType.optional()),
+    sourceType: core.serialization.property("source_type", ProjectResponseSourceType.optional()),
     chaptersEnabled: core.serialization.property("chapters_enabled", core.serialization.boolean().optional()),
     captionsEnabled: core.serialization.property("captions_enabled", core.serialization.boolean().optional()),
     captionStyle: core.serialization.property("caption_style", CaptionStyleModel.optional()),
@@ -65,7 +65,7 @@ export const ProjectResponse: core.serialization.ObjectSchema<
         core.serialization.record(core.serialization.string(), CaptionStyleModel.optional()).optional(),
     ),
     publicShareId: core.serialization.property("public_share_id", core.serialization.string().optional()),
-    aspectRatio: core.serialization.property("aspect_ratio", ProjectResponseModelAspectRatio.optional()),
+    aspectRatio: core.serialization.property("aspect_ratio", ProjectResponseAspectRatio.optional()),
     agentSettings: core.serialization.property("agent_settings", StudioAgentSettingsModel.optional()),
     defaultTitleVoiceId: core.serialization.property("default_title_voice_id", core.serialization.string().optional()),
     defaultParagraphVoiceId: core.serialization.property(
@@ -90,7 +90,7 @@ export declare namespace ProjectResponse {
         description?: string | null;
         genres?: string[] | null;
         cover_image_url?: string | null;
-        target_audience?: ProjectResponseModelTargetAudience.Raw | null;
+        target_audience?: ProjectResponseTargetAudience.Raw | null;
         language?: string | null;
         content_type?: string | null;
         original_publication_date?: string | null;
@@ -98,18 +98,18 @@ export declare namespace ProjectResponse {
         isbn_number?: string | null;
         volume_normalization: boolean;
         state: ProjectState.Raw;
-        access_level: ProjectResponseModelAccessLevel.Raw;
-        fiction?: ProjectResponseModelFiction.Raw | null;
+        access_level: ProjectResponseAccessLevel.Raw;
+        fiction?: ProjectResponseFiction.Raw | null;
         quality_check_on: boolean;
         quality_check_on_when_bulk_convert: boolean;
         creation_meta?: ProjectCreationMetaResponseModel.Raw | null;
-        source_type?: ProjectResponseModelSourceType.Raw | null;
+        source_type?: ProjectResponseSourceType.Raw | null;
         chapters_enabled?: boolean | null;
         captions_enabled?: boolean | null;
         caption_style?: CaptionStyleModel.Raw | null;
         caption_style_template_overrides?: Record<string, CaptionStyleModel.Raw | null | undefined> | null;
         public_share_id?: string | null;
-        aspect_ratio?: ProjectResponseModelAspectRatio.Raw | null;
+        aspect_ratio?: ProjectResponseAspectRatio.Raw | null;
         agent_settings?: StudioAgentSettingsModel.Raw | null;
         default_title_voice_id?: string | null;
         default_paragraph_voice_id?: string | null;

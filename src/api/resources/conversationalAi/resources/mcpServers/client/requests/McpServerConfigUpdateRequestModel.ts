@@ -13,8 +13,10 @@ export interface McpServerConfigUpdateRequestModel {
     forcePreToolSpeech?: boolean;
     /** If set, overrides the server's pre_tool_speech setting for this tool. */
     preToolSpeech?: ElevenLabs.PreToolSpeechMode;
-    /** If set, overrides the server's disable_interruptions setting for this tool */
+    /** DEPRECATED: use `interruption_mode` instead. If set, overrides the server's disable_interruptions setting for this tool. */
     disableInterruptions?: boolean;
+    /** If set, overrides the server's interruption_mode setting for this tool. */
+    interruptionMode?: ElevenLabs.ToolInterruptionMode;
     /** Predefined tool call sound type to play during tool execution for all tools from this MCP server */
     toolCallSound?: ElevenLabs.ToolCallSoundType;
     /** Determines when the tool call sound should play for all tools from this MCP server */

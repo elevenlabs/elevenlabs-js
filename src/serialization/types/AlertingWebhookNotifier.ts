@@ -3,6 +3,8 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AlertingWebhookHeader } from "./AlertingWebhookHeader";
+import { AlertingWebhookMethod } from "./AlertingWebhookMethod";
 
 export const AlertingWebhookNotifier: core.serialization.ObjectSchema<
     serializers.AlertingWebhookNotifier.Raw,
@@ -10,11 +12,15 @@ export const AlertingWebhookNotifier: core.serialization.ObjectSchema<
 > = core.serialization.object({
     type: core.serialization.stringLiteral("webhook").optional(),
     url: core.serialization.string(),
+    method: AlertingWebhookMethod.optional(),
+    headers: core.serialization.list(AlertingWebhookHeader).optional(),
 });
 
 export declare namespace AlertingWebhookNotifier {
     export interface Raw {
         type?: "webhook" | null;
         url: string;
+        method?: AlertingWebhookMethod.Raw | null;
+        headers?: AlertingWebhookHeader.Raw[] | null;
     }
 }

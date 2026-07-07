@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { AutoSyncInfo } from "./AutoSyncInfo";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { ExternalFolderSyncInfo } from "./ExternalFolderSyncInfo";
+import { KbExternalSyncJob } from "./KbExternalSyncJob";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
 import { KnowledgeBaseFolderPathSegmentResponseModel } from "./KnowledgeBaseFolderPathSegmentResponseModel";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
@@ -28,6 +29,7 @@ export const GetKnowledgeBaseFolderResponseModel: core.serialization.ObjectSchem
     autoSyncInfo: core.serialization.property("auto_sync_info", AutoSyncInfo.optional()),
     externalSyncInfo: core.serialization.property("external_sync_info", ExternalFolderSyncInfo.optional()),
     isFrozen: core.serialization.property("is_frozen", core.serialization.boolean().optional()),
+    activeSyncJob: core.serialization.property("active_sync_job", KbExternalSyncJob.optional()),
 });
 
 export declare namespace GetKnowledgeBaseFolderResponseModel {
@@ -43,5 +45,6 @@ export declare namespace GetKnowledgeBaseFolderResponseModel {
         auto_sync_info?: AutoSyncInfo.Raw | null;
         external_sync_info?: ExternalFolderSyncInfo.Raw | null;
         is_frozen?: boolean | null;
+        active_sync_job?: KbExternalSyncJob.Raw | null;
     }
 }

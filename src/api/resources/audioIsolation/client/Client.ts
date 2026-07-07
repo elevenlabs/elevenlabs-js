@@ -44,7 +44,7 @@ export class AudioIsolationClient {
         if (request.fileFormat != null) {
             _body.append(
                 "file_format",
-                serializers.AudioIsolationConvertRequestFileFormat.jsonOrThrow(request.fileFormat, {
+                serializers.AudioIsolationRequestFileFormat.jsonOrThrow(request.fileFormat, {
                     unrecognizedObjectKeys: "strip",
                 }),
             );

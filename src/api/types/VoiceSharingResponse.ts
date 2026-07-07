@@ -34,7 +34,7 @@ export interface VoiceSharingResponse {
     /** Whether the voice is featured. */
     featured?: boolean;
     /** The category of the voice. */
-    category?: ElevenLabs.VoiceSharingResponseModelCategory;
+    category?: ElevenLabs.VoiceSharingResponseCategory;
     /** Whether the reader app is enabled. */
     readerAppEnabled?: boolean;
     /** The image URL of the voice. */

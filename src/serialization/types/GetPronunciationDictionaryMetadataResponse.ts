@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { GetPronunciationDictionaryMetadataResponseModelPermissionOnResource } from "./GetPronunciationDictionaryMetadataResponseModelPermissionOnResource";
+import { GetPronunciationDictionaryMetadataResponsePermissionOnResource } from "./GetPronunciationDictionaryMetadataResponsePermissionOnResource";
 
 export const GetPronunciationDictionaryMetadataResponse: core.serialization.ObjectSchema<
     serializers.GetPronunciationDictionaryMetadataResponse.Raw,
@@ -15,7 +15,7 @@ export const GetPronunciationDictionaryMetadataResponse: core.serialization.Obje
     name: core.serialization.string(),
     permissionOnResource: core.serialization.property(
         "permission_on_resource",
-        GetPronunciationDictionaryMetadataResponseModelPermissionOnResource.optional(),
+        GetPronunciationDictionaryMetadataResponsePermissionOnResource.optional(),
     ),
     createdBy: core.serialization.property("created_by", core.serialization.string()),
     creationTimeUnix: core.serialization.property("creation_time_unix", core.serialization.number()),
@@ -29,7 +29,7 @@ export declare namespace GetPronunciationDictionaryMetadataResponse {
         latest_version_id: string;
         latest_version_rules_num: number;
         name: string;
-        permission_on_resource?: GetPronunciationDictionaryMetadataResponseModelPermissionOnResource.Raw | null;
+        permission_on_resource?: GetPronunciationDictionaryMetadataResponsePermissionOnResource.Raw | null;
         created_by: string;
         creation_time_unix: number;
         archived_time_unix?: number | null;
