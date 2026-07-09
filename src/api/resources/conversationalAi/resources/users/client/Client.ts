@@ -40,6 +40,7 @@ export class UsersClient {
      *         search: "search",
      *         pageSize: 1,
      *         sortBy: "last_contact_unix_secs",
+     *         sortDirection: "asc",
      *         cursor: "cursor"
      *     })
      */
@@ -54,8 +55,17 @@ export class UsersClient {
         request: ElevenLabs.conversationalAi.UsersListRequest = {},
         requestOptions?: UsersClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetConversationUsersPageResponseModel>> {
-        const { agentId, branchId, callStartBeforeUnix, callStartAfterUnix, search, pageSize, sortBy, cursor } =
-            request;
+        const {
+            agentId,
+            branchId,
+            callStartBeforeUnix,
+            callStartAfterUnix,
+            search,
+            pageSize,
+            sortBy,
+            sortDirection,
+            cursor,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             agent_id: agentId,
             branch_id: branchId,
@@ -66,6 +76,10 @@ export class UsersClient {
             sort_by:
                 sortBy != null
                     ? serializers.UsersSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            sort_direction:
+                sortDirection != null
+                    ? serializers.SortDirection.jsonOrThrow(sortDirection, { unrecognizedObjectKeys: "strip" })
                     : undefined,
             cursor,
         };

@@ -16,6 +16,7 @@ export interface ConversationHistoryTranscriptResponseModel {
     ragRetrievalInfo?: ElevenLabs.RagRetrievalInfo;
     llmUsage?: ElevenLabs.LlmUsageOutput;
     interrupted?: boolean;
+    ignoredAsBackchannel?: boolean;
     originalMessage?: string;
     reasoning?: ElevenLabs.ConversationReasoningModel[];
     sourceMedium?: ElevenLabs.ChatSourceMedium;

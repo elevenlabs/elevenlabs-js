@@ -6,3 +6,4 @@ export * as toolConfigs from "./toolConfigs";
 export * from "./toolConfigs/client/requests";
 export * from "./toolConfigs/types";
 export * as tools from "./tools";
+export * from "./tools/client/requests";

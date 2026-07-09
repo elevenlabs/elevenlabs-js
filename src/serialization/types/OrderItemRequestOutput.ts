@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { DubOrderItemRequest } from "./DubOrderItemRequest";
 import { SubtitleOrderItemRequest } from "./SubtitleOrderItemRequest";
+import { TranscriptionOrderItemRequest } from "./TranscriptionOrderItemRequest";
 
 export const OrderItemRequestOutput: core.serialization.Schema<
     serializers.OrderItemRequestOutput.Raw,
@@ -13,6 +14,7 @@ export const OrderItemRequestOutput: core.serialization.Schema<
     .union("kind", {
         dub: DubOrderItemRequest,
         subtitles: SubtitleOrderItemRequest,
+        transcription: TranscriptionOrderItemRequest,
     })
     .transform<ElevenLabs.OrderItemRequestOutput>({
         transform: (value) => value,
@@ -20,7 +22,10 @@ export const OrderItemRequestOutput: core.serialization.Schema<
     });
 
 export declare namespace OrderItemRequestOutput {
-    export type Raw = OrderItemRequestOutput.Dub | OrderItemRequestOutput.Subtitles;
+    export type Raw =
+        | OrderItemRequestOutput.Dub
+        | OrderItemRequestOutput.Subtitles
+        | OrderItemRequestOutput.Transcription;
 
     export interface Dub extends DubOrderItemRequest.Raw {
         kind: "dub";
@@ -28,5 +33,9 @@ export declare namespace OrderItemRequestOutput {
 
     export interface Subtitles extends SubtitleOrderItemRequest.Raw {
         kind: "subtitles";
+    }
+
+    export interface Transcription extends TranscriptionOrderItemRequest.Raw {
+        kind: "transcription";
     }
 }

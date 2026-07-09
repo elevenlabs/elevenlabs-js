@@ -29,6 +29,8 @@ export const WorkspaceGroupPermission: core.serialization.Schema<
     "publish_studio_project",
     "music",
     "image_video_generation",
+    "flows",
+    "templates",
     "share_voice_externally",
     "publish_voice_to_voice_library",
     "view_fiat_balance",
@@ -68,6 +70,8 @@ export declare namespace WorkspaceGroupPermission {
         | "publish_studio_project"
         | "music"
         | "image_video_generation"
+        | "flows"
+        | "templates"
         | "share_voice_externally"
         | "publish_voice_to_voice_library"
         | "view_fiat_balance"

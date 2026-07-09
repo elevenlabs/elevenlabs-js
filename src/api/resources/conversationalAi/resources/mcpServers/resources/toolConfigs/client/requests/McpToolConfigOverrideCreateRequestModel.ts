@@ -5,10 +5,13 @@ import type * as ElevenLabs from "../../../../../../../../index";
 /**
  * @example
  *     {
+ *         environment: "environment",
  *         toolName: "tool_name"
  *     }
  */
 export interface McpToolConfigOverrideCreateRequestModel {
+    /** Environment whose values are used when the MCP server URL, headers, or auth connection reference environment variables. Mirrors the environment a conversation would run in; defaults to production. */
+    environment?: string;
     /** DEPRECATED: use `pre_tool_speech` instead. If set, overrides the server's force_pre_tool_speech setting for this tool. */
     forcePreToolSpeech?: boolean;
     /** If set, overrides the server's pre_tool_speech setting for this tool. */
@@ -17,8 +20,8 @@ export interface McpToolConfigOverrideCreateRequestModel {
     disableInterruptions?: boolean;
     /** If set, overrides the server's interruption_mode setting for this tool. */
     interruptionMode?: ElevenLabs.ToolInterruptionMode;
-    /** If set, overrides the server's tool_call_sound setting for this tool */
-    toolCallSound?: ElevenLabs.ToolCallSoundType;
+    /** Overrides the server's tool_call_sound setting for this tool. A sound name plays that sound; 'off' overrides to no sound (silence); null means do not override (inherit the server default). */
+    toolCallSound?: ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideCreateRequestModelToolCallSound;
     /** If set, overrides the server's tool_call_sound_behavior setting for this tool */
     toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
     /** If set, overrides the server's execution_mode setting for this tool */

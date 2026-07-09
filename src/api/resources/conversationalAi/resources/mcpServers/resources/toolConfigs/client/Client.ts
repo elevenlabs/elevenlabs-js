@@ -35,6 +35,7 @@ export class ToolConfigsClient {
      *
      * @example
      *     await client.conversationalAi.mcpServers.toolConfigs.create("mcp_server_id", {
+     *         environment: "environment",
      *         toolName: "tool_name"
      *     })
      */
@@ -51,6 +52,10 @@ export class ToolConfigsClient {
         request: ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideCreateRequestModel,
         requestOptions?: ToolConfigsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.McpServerResponseModel>> {
+        const { environment, ..._body } = request;
+        const _queryParams: Record<string, unknown> = {
+            environment,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -66,9 +71,9 @@ export class ToolConfigsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
-            body: serializers.conversationalAi.mcpServers.McpToolConfigOverrideCreateRequestModel.jsonOrThrow(request, {
+            body: serializers.conversationalAi.mcpServers.McpToolConfigOverrideCreateRequestModel.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -285,7 +290,9 @@ export class ToolConfigsClient {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "tool_name")
+     *     await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "tool_name", {
+     *         environment: "environment"
+     *     })
      */
     public update(
         mcp_server_id: string,
@@ -302,6 +309,10 @@ export class ToolConfigsClient {
         request: ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel = {},
         requestOptions?: ToolConfigsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.McpServerResponseModel>> {
+        const { environment, ..._body } = request;
+        const _queryParams: Record<string, unknown> = {
+            environment,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -317,9 +328,9 @@ export class ToolConfigsClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             requestType: "json",
-            body: serializers.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel.jsonOrThrow(request, {
+            body: serializers.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
             }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,

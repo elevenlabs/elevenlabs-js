@@ -3,5 +3,6 @@
 export const OrderItemKind = {
     Dub: "dub",
     Subtitles: "subtitles",
+    Transcription: "transcription",
 } as const;
 export type OrderItemKind = (typeof OrderItemKind)[keyof typeof OrderItemKind];

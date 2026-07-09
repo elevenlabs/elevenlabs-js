@@ -1,59 +1,4 @@
 # Reference
-<details><summary><code>client.<a href="/src/Client.ts">saveAVoicePreview</a>() -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Add a generated voice to the voice library.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.saveAVoicePreview();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `ElevenLabsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## History
 <details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetSpeechHistoryResponse</code></summary>
 <dl>
@@ -6370,61 +6315,6 @@ await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfysz
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">getDefaultInterruptionIgnoreTerms</a>() -> ElevenLabs.DefaultInterruptionIgnoreTermsResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get the curated per-language default interruption ignore terms used to seed an agent's turn configuration.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.getDefaultInterruptionIgnoreTerms();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">simulateConversation</a>(agent_id, { ...params }) -> ElevenLabs.AgentSimulatedChatTestResponseModel</code></summary>
 <dl>
 <dd>
@@ -7163,6 +7053,7 @@ await client.conversationalAi.users.list({
     search: "search",
     pageSize: 1,
     sortBy: "last_contact_unix_secs",
+    sortDirection: "asc",
     cursor: "cursor"
 });
 
@@ -8088,7 +7979,7 @@ await client.conversationalAi.tools.create({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">get</a>(tool_id) -> ElevenLabs.ToolResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">get</a>(tool_id, { ...params }) -> ElevenLabs.ToolResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -8115,7 +8006,9 @@ Get tool that is available in the workspace.
 <dd>
 
 ```typescript
-await client.conversationalAi.tools.get("tool_id");
+await client.conversationalAi.tools.get("tool_id", {
+    environment: "environment"
+});
 
 ```
 </dd>
@@ -8132,6 +8025,14 @@ await client.conversationalAi.tools.get("tool_id");
 <dd>
 
 **tool_id:** `string` — ID of the requested tool.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.ToolsGetRequest` 
     
 </dd>
 </dl>
@@ -13961,7 +13862,7 @@ await client.conversationalAi.knowledgeBase.documents.chunks.list("21m00Tcm4TlvD
 </details>
 
 ## ConversationalAi McpServers Tools
-<details><summary><code>client.conversationalAi.mcpServers.tools.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/tools/client/Client.ts">list</a>(mcp_server_id) -> ElevenLabs.ListMcpToolsResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.mcpServers.tools.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/tools/client/Client.ts">list</a>(mcp_server_id, { ...params }) -> ElevenLabs.ListMcpToolsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13988,7 +13889,9 @@ Retrieve all tools available for a specific MCP server configuration.
 <dd>
 
 ```typescript
-await client.conversationalAi.mcpServers.tools.list("mcp_server_id");
+await client.conversationalAi.mcpServers.tools.list("mcp_server_id", {
+    environment: "environment"
+});
 
 ```
 </dd>
@@ -14005,6 +13908,14 @@ await client.conversationalAi.mcpServers.tools.list("mcp_server_id");
 <dd>
 
 **mcp_server_id:** `string` — ID of the MCP Server.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.mcpServers.ToolsListRequest` 
     
 </dd>
 </dl>
@@ -14273,6 +14184,7 @@ Create configuration overrides for a specific MCP tool.
 
 ```typescript
 await client.conversationalAi.mcpServers.toolConfigs.create("mcp_server_id", {
+    environment: "environment",
     toolName: "tool_name"
 });
 
@@ -14487,7 +14399,9 @@ Update configuration overrides for a specific MCP tool.
 <dd>
 
 ```typescript
-await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "tool_name");
+await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "tool_name", {
+    environment: "environment"
+});
 
 ```
 </dd>

@@ -589,6 +589,7 @@ describe("BranchesClient", () => {
                 archived: true,
                 guardrails: { version: "1" },
                 summary_language: "summary_language",
+                auto_translate_transcript_to_app_language: true,
                 auth: {
                     enable_auth: true,
                     allowlist: [{ hostname: "https://example.com" }],
@@ -1782,6 +1783,7 @@ describe("BranchesClient", () => {
                     version: "1",
                 },
                 summaryLanguage: "summary_language",
+                autoTranslateTranscriptToAppLanguage: true,
                 auth: {
                     enableAuth: true,
                     allowlist: [
@@ -3094,6 +3096,7 @@ describe("BranchesClient", () => {
                 archived: true,
                 guardrails: { version: "1" },
                 summary_language: "summary_language",
+                auto_translate_transcript_to_app_language: true,
                 auth: {
                     enable_auth: true,
                     allowlist: [{ hostname: "https://example.com" }],
@@ -4283,6 +4286,7 @@ describe("BranchesClient", () => {
                     version: "1",
                 },
                 summaryLanguage: "summary_language",
+                autoTranslateTranscriptToAppLanguage: true,
                 auth: {
                     enableAuth: true,
                     allowlist: [

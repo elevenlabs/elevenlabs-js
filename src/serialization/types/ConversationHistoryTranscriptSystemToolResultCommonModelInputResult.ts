@@ -13,7 +13,7 @@ import { RunSubagentToolResultSuccessModel } from "./RunSubagentToolResultSucces
 import { SkipTurnToolResponseModel } from "./SkipTurnToolResponseModel";
 import { TestToolResultModel } from "./TestToolResultModel";
 import { TransferToAgentToolResultErrorModel } from "./TransferToAgentToolResultErrorModel";
-import { TransferToAgentToolResultSuccessModel } from "./TransferToAgentToolResultSuccessModel";
+import { TransferToAgentToolResultSuccessModelInput } from "./TransferToAgentToolResultSuccessModelInput";
 import { TransferToNumberResultErrorModel } from "./TransferToNumberResultErrorModel";
 import { TransferToNumberResultExotelSuccessModel } from "./TransferToNumberResultExotelSuccessModel";
 import { TransferToNumberResultSipSuccessModel } from "./TransferToNumberResultSipSuccessModel";
@@ -35,7 +35,7 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelInputResult
         skip_turn_success: SkipTurnToolResponseModel,
         testing_tool_result: TestToolResultModel,
         transfer_to_agent_error: TransferToAgentToolResultErrorModel,
-        transfer_to_agent_success: TransferToAgentToolResultSuccessModel,
+        transfer_to_agent_success: TransferToAgentToolResultSuccessModelInput,
         transfer_to_number_error: TransferToNumberResultErrorModel,
         transfer_to_number_exotel_success: TransferToNumberResultExotelSuccessModel,
         transfer_to_number_sip_success: TransferToNumberResultSipSuccessModel,
@@ -106,7 +106,7 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
         result_type: "transfer_to_agent_error";
     }
 
-    export interface TransferToAgentSuccess extends TransferToAgentToolResultSuccessModel.Raw {
+    export interface TransferToAgentSuccess extends TransferToAgentToolResultSuccessModelInput.Raw {
         result_type: "transfer_to_agent_success";
     }
 

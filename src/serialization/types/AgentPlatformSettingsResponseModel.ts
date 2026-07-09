@@ -16,6 +16,7 @@ import { GuardrailsV1Output } from "./GuardrailsV1Output";
 import { Llm } from "./Llm";
 import { PrivacyConfigOutput } from "./PrivacyConfigOutput";
 import { SafetyResponseModel } from "./SafetyResponseModel";
+import { SentimentAnalysisSettings } from "./SentimentAnalysisSettings";
 import { TopicDiscoverySettings } from "./TopicDiscoverySettings";
 import { WidgetConfig } from "./WidgetConfig";
 
@@ -39,12 +40,17 @@ export const AgentPlatformSettingsResponseModel: core.serialization.ObjectSchema
     archived: core.serialization.boolean().optional(),
     guardrails: GuardrailsV1Output.optional(),
     summaryLanguage: core.serialization.property("summary_language", core.serialization.string().optional()),
+    autoTranslateTranscriptToAppLanguage: core.serialization.property(
+        "auto_translate_transcript_to_app_language",
+        core.serialization.boolean().optional(),
+    ),
     auth: AuthSettings.optional(),
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
     privacy: PrivacyConfigOutput.optional(),
     trustContext: core.serialization.property("trust_context", AgentTrustContext.optional()),
     analysisLlm: core.serialization.property("analysis_llm", Llm.optional()),
     topicDiscovery: core.serialization.property("topic_discovery", TopicDiscoverySettings.optional()),
+    sentimentAnalysis: core.serialization.property("sentiment_analysis", SentimentAnalysisSettings.optional()),
     safety: SafetyResponseModel.optional(),
 });
 
@@ -60,12 +66,14 @@ export declare namespace AgentPlatformSettingsResponseModel {
         archived?: boolean | null;
         guardrails?: GuardrailsV1Output.Raw | null;
         summary_language?: string | null;
+        auto_translate_transcript_to_app_language?: boolean | null;
         auth?: AuthSettings.Raw | null;
         call_limits?: AgentCallLimits.Raw | null;
         privacy?: PrivacyConfigOutput.Raw | null;
         trust_context?: AgentTrustContext.Raw | null;
         analysis_llm?: Llm.Raw | null;
         topic_discovery?: TopicDiscoverySettings.Raw | null;
+        sentiment_analysis?: SentimentAnalysisSettings.Raw | null;
         safety?: SafetyResponseModel.Raw | null;
     }
 }

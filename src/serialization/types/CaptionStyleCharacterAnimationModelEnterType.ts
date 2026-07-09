@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const CaptionStyleCharacterAnimationModelEnterType: core.serialization.Schema<
     serializers.CaptionStyleCharacterAnimationModelEnterType.Raw,
     ElevenLabs.CaptionStyleCharacterAnimationModelEnterType
-> = core.serialization.enum_(["none", "fade"]);
+> = core.serialization.enum_(["none", "fade", "typewriter"]);
 
 export declare namespace CaptionStyleCharacterAnimationModelEnterType {
-    export type Raw = "none" | "fade";
+    export type Raw = "none" | "fade" | "typewriter";
 }

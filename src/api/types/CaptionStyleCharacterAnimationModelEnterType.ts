@@ -3,6 +3,7 @@
 export const CaptionStyleCharacterAnimationModelEnterType = {
     None: "none",
     Fade: "fade",
+    Typewriter: "typewriter",
 } as const;
 export type CaptionStyleCharacterAnimationModelEnterType =
     (typeof CaptionStyleCharacterAnimationModelEnterType)[keyof typeof CaptionStyleCharacterAnimationModelEnterType];

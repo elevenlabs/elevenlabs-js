@@ -13,8 +13,8 @@ export interface McpToolConfigOverrideOutput {
     disableInterruptions?: boolean;
     /** If set, overrides the server's interruption_mode setting for this tool. */
     interruptionMode?: ElevenLabs.ToolInterruptionMode;
-    /** If set, overrides the server's tool_call_sound setting for this tool */
-    toolCallSound?: ElevenLabs.ToolCallSoundType;
+    /** Overrides the server's tool_call_sound setting for this tool. A sound name plays that sound; 'off' overrides to no sound (silence); null means do not override (inherit the server default). */
+    toolCallSound?: ElevenLabs.McpToolConfigOverrideOutputToolCallSound;
     /** If set, overrides the server's tool_call_sound_behavior setting for this tool */
     toolCallSoundBehavior?: ElevenLabs.ToolCallSoundBehavior;
     /** If set, overrides the server's execution_mode setting for this tool */

@@ -15,7 +15,7 @@ export interface TtsConversationalConfigInput {
     suggestedAudioTags?: ElevenLabs.SuggestedAudioTag[];
     /** The audio format to use for TTS */
     agentOutputAudioFormat?: ElevenLabs.TtsOutputFormat;
-    /** The optimization for streaming latency */
+    /** Deprecated: this field is a no-op and is ignored. */
     optimizeStreamingLatency?: ElevenLabs.TtsOptimizeStreamingLatency;
     /** The stability of generated speech */
     stability?: number;

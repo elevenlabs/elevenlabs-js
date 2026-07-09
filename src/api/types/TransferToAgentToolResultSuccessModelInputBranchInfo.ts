@@ -2,11 +2,11 @@
 
 import type * as ElevenLabs from "../index";
 
-export type TransferToAgentToolResultSuccessModelBranchInfo =
-    | ElevenLabs.TransferToAgentToolResultSuccessModelBranchInfo.DefaultingToMain
-    | ElevenLabs.TransferToAgentToolResultSuccessModelBranchInfo.TrafficSplit;
+export type TransferToAgentToolResultSuccessModelInputBranchInfo =
+    | ElevenLabs.TransferToAgentToolResultSuccessModelInputBranchInfo.DefaultingToMain
+    | ElevenLabs.TransferToAgentToolResultSuccessModelInputBranchInfo.TrafficSplit;
 
-export namespace TransferToAgentToolResultSuccessModelBranchInfo {
+export namespace TransferToAgentToolResultSuccessModelInputBranchInfo {
     export interface DefaultingToMain extends ElevenLabs.TransferBranchInfoDefaultingToMain {
         branchReason: "defaulting_to_main";
     }

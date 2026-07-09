@@ -46,6 +46,10 @@ export const ConversationHistoryTranscriptResponseModel: core.serialization.Obje
     ragRetrievalInfo: core.serialization.property("rag_retrieval_info", RagRetrievalInfo.optional()),
     llmUsage: core.serialization.property("llm_usage", LlmUsageOutput.optional()),
     interrupted: core.serialization.boolean().optional(),
+    ignoredAsBackchannel: core.serialization.property(
+        "ignored_as_backchannel",
+        core.serialization.boolean().optional(),
+    ),
     originalMessage: core.serialization.property("original_message", core.serialization.string().optional()),
     reasoning: core.serialization.list(ConversationReasoningModel).optional(),
     sourceMedium: core.serialization.property("source_medium", ChatSourceMedium.optional()),
@@ -78,6 +82,7 @@ export declare namespace ConversationHistoryTranscriptResponseModel {
         rag_retrieval_info?: RagRetrievalInfo.Raw | null;
         llm_usage?: LlmUsageOutput.Raw | null;
         interrupted?: boolean | null;
+        ignored_as_backchannel?: boolean | null;
         original_message?: string | null;
         reasoning?: ConversationReasoningModel.Raw[] | null;
         source_medium?: ChatSourceMedium.Raw | null;

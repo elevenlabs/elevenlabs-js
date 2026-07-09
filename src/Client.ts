@@ -31,10 +31,6 @@ import { WorkspacesClient } from "./api/resources/workspaces/client/Client";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient";
 import { type NormalizedClientOptions, normalizeClientOptions } from "./BaseClient";
 import * as core from "./core";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "./core/headers";
-import * as environments from "./environments";
-import { handleNonStatusCodeError } from "./errors/handleNonStatusCodeError";
-import * as errors from "./errors/index";
 
 export declare namespace ElevenLabsClient {
     export type Options = BaseClientOptions;
@@ -187,62 +183,6 @@ export class ElevenLabsClient {
 
     public get workspaces(): WorkspacesClient {
         return (this._workspaces ??= new WorkspacesClient(this._options));
-    }
-
-    /**
-     * Add a generated voice to the voice library.
-     *
-     * @param {ElevenLabsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @example
-     *     await client.saveAVoicePreview()
-     */
-    public saveAVoicePreview(requestOptions?: ElevenLabsClient.RequestOptions): core.HttpResponsePromise<void> {
-        return core.HttpResponsePromise.fromPromise(this.__saveAVoicePreview(requestOptions));
-    }
-
-    private async __saveAVoicePreview(
-        requestOptions?: ElevenLabsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
-            requestOptions?.headers,
-        );
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                "v1/text-to-voice/create-voice-from-preview",
-            ),
-            method: "POST",
-            headers: _headers,
-            queryParameters: requestOptions?.queryParams,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: undefined, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            throw new errors.ElevenLabsError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/v1/text-to-voice/create-voice-from-preview",
-        );
     }
 
     /**

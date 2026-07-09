@@ -61,7 +61,7 @@ export namespace ConversationHistoryTranscriptSystemToolResultCommonModelOutputR
         resultType: "transfer_to_agent_error";
     }
 
-    export interface TransferToAgentSuccess extends ElevenLabs.TransferToAgentToolResultSuccessModel {
+    export interface TransferToAgentSuccess extends ElevenLabs.TransferToAgentToolResultSuccessModelOutput {
         resultType: "transfer_to_agent_success";
     }
 

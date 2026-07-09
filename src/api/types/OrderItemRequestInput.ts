@@ -2,7 +2,10 @@
 
 import type * as ElevenLabs from "../index";
 
-export type OrderItemRequestInput = ElevenLabs.OrderItemRequestInput.Dub | ElevenLabs.OrderItemRequestInput.Subtitles;
+export type OrderItemRequestInput =
+    | ElevenLabs.OrderItemRequestInput.Dub
+    | ElevenLabs.OrderItemRequestInput.Subtitles
+    | ElevenLabs.OrderItemRequestInput.Transcription;
 
 export namespace OrderItemRequestInput {
     export interface Dub extends ElevenLabs.DubOrderItemRequest {
@@ -11,5 +14,9 @@ export namespace OrderItemRequestInput {
 
     export interface Subtitles extends ElevenLabs.SubtitleOrderItemRequest {
         kind: "subtitles";
+    }
+
+    export interface Transcription extends ElevenLabs.TranscriptionOrderItemRequest {
+        kind: "transcription";
     }
 }

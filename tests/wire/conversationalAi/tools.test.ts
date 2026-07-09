@@ -294,7 +294,9 @@ describe("ToolsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.tools.get("tool_id");
+        const response = await client.conversationalAi.tools.get("tool_id", {
+            environment: "environment",
+        });
         expect(response).toEqual({
             id: "id",
             toolConfig: {

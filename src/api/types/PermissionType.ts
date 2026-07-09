@@ -30,6 +30,8 @@ export const PermissionType = {
     ConvaiWrite: "convai_write",
     MusicGeneration: "music_generation",
     ImageVideoGeneration: "image_video_generation",
+    Flows: "flows",
+    Templates: "templates",
     AddVoiceFromVoiceLibrary: "add_voice_from_voice_library",
     CreateInstantVoiceClone: "create_instant_voice_clone",
     CreateProfessionalVoiceClone: "create_professional_voice_clone",

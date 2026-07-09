@@ -73,6 +73,7 @@ describe("ToolConfigsClient", () => {
             .build();
 
         const response = await client.conversationalAi.mcpServers.toolConfigs.create("mcp_server_id", {
+            environment: "environment",
             toolName: "tool_name",
         });
         expect(response).toEqual({
@@ -430,7 +431,9 @@ describe("ToolConfigsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "tool_name");
+        const response = await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "tool_name", {
+            environment: "environment",
+        });
         expect(response).toEqual({
             id: "id",
             config: {

@@ -8,6 +8,7 @@ export const WorkspaceAnalyticsQueryResponseModelColumnTypesItem = {
     Bool: "Bool",
     Json: "JSON",
     Map: "Map",
+    Array: "Array",
 } as const;
 export type WorkspaceAnalyticsQueryResponseModelColumnTypesItem =
     (typeof WorkspaceAnalyticsQueryResponseModelColumnTypesItem)[keyof typeof WorkspaceAnalyticsQueryResponseModelColumnTypesItem];

@@ -216,24 +216,33 @@ export class ToolsClient {
      * Get tool that is available in the workspace.
      *
      * @param {string} tool_id - ID of the requested tool.
+     * @param {ElevenLabs.conversationalAi.ToolsGetRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.tools.get("tool_id")
+     *     await client.conversationalAi.tools.get("tool_id", {
+     *         environment: "environment"
+     *     })
      */
     public get(
         tool_id: string,
+        request: ElevenLabs.conversationalAi.ToolsGetRequest = {},
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.ToolResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__get(tool_id, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(tool_id, request, requestOptions));
     }
 
     private async __get(
         tool_id: string,
+        request: ElevenLabs.conversationalAi.ToolsGetRequest = {},
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ToolResponseModel>> {
+        const { environment } = request;
+        const _queryParams: Record<string, unknown> = {
+            environment,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -248,7 +257,7 @@ export class ToolsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

@@ -17,6 +17,7 @@ export const CreateTwilioPhoneNumberRequest: core.serialization.ObjectSchema<
     sid: core.serialization.string(),
     token: core.serialization.string(),
     regionConfig: core.serialization.property("region_config", RegionConfigRequest.optional()),
+    enableSms: core.serialization.property("enable_sms", core.serialization.boolean().optional()),
 });
 
 export declare namespace CreateTwilioPhoneNumberRequest {
@@ -29,5 +30,6 @@ export declare namespace CreateTwilioPhoneNumberRequest {
         sid: string;
         token: string;
         region_config?: RegionConfigRequest.Raw | null;
+        enable_sms?: boolean | null;
     }
 }

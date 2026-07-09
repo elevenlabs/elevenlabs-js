@@ -22,6 +22,8 @@ export const WorkspaceGroupPermission = {
     PublishStudioProject: "publish_studio_project",
     Music: "music",
     ImageVideoGeneration: "image_video_generation",
+    Flows: "flows",
+    Templates: "templates",
     ShareVoiceExternally: "share_voice_externally",
     PublishVoiceToVoiceLibrary: "publish_voice_to_voice_library",
     ViewFiatBalance: "view_fiat_balance",

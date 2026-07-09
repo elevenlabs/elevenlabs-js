@@ -27,24 +27,33 @@ export class ToolsClient {
      * Retrieve all tools available for a specific MCP server configuration.
      *
      * @param {string} mcp_server_id - ID of the MCP Server.
+     * @param {ElevenLabs.conversationalAi.mcpServers.ToolsListRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.mcpServers.tools.list("mcp_server_id")
+     *     await client.conversationalAi.mcpServers.tools.list("mcp_server_id", {
+     *         environment: "environment"
+     *     })
      */
     public list(
         mcp_server_id: string,
+        request: ElevenLabs.conversationalAi.mcpServers.ToolsListRequest = {},
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.ListMcpToolsResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__list(mcp_server_id, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__list(mcp_server_id, request, requestOptions));
     }
 
     private async __list(
         mcp_server_id: string,
+        request: ElevenLabs.conversationalAi.mcpServers.ToolsListRequest = {},
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ListMcpToolsResponseModel>> {
+        const { environment } = request;
+        const _queryParams: Record<string, unknown> = {
+            environment,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
@@ -59,7 +68,7 @@ export class ToolsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

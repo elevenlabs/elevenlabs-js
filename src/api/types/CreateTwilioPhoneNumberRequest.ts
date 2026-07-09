@@ -19,4 +19,6 @@ export interface CreateTwilioPhoneNumberRequest {
     token: string;
     /** Twilio Additional Region Configuration */
     regionConfig?: ElevenLabs.RegionConfigRequest;
+    /** Route inbound SMS to ElevenLabs. On by default; set to false to skip SMS configuration for numbers that don't support it. */
+    enableSms?: boolean;
 }

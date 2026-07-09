@@ -80,6 +80,7 @@ describe("StudioClient", () => {
                     section_animation: { enter_type: "none", exit_type: "none" },
                     word_animation: { enter_type: "none", exit_type: "none" },
                     character_animation: { enter_type: "none", exit_type: "none" },
+                    cursor_enabled: true,
                     width_pct: 1.1,
                     horizontal_placement: { align: "left", translate_pct: 1.1 },
                     vertical_placement: { align: "top", translate_pct: 1.1 },
@@ -203,6 +204,7 @@ describe("StudioClient", () => {
                         enterType: "none",
                         exitType: "none",
                     },
+                    cursorEnabled: true,
                     widthPct: 1.1,
                     horizontalPlacement: {
                         align: "left",
