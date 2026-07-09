@@ -64,6 +64,7 @@ export const CaptionStyleModel: core.serialization.ObjectSchema<
         "character_animation",
         CaptionStyleCharacterAnimationModel.optional(),
     ),
+    cursorEnabled: core.serialization.property("cursor_enabled", core.serialization.boolean().optional()),
     widthPct: core.serialization.property("width_pct", core.serialization.number().optional()),
     horizontalPlacement: core.serialization.property(
         "horizontal_placement",
@@ -102,6 +103,7 @@ export declare namespace CaptionStyleModel {
         section_animation?: CaptionStyleSectionAnimationModel.Raw | null;
         word_animation?: CaptionStyleWordAnimationModel.Raw | null;
         character_animation?: CaptionStyleCharacterAnimationModel.Raw | null;
+        cursor_enabled?: boolean | null;
         width_pct?: number | null;
         horizontal_placement?: CaptionStyleHorizontalPlacementModel.Raw | null;
         vertical_placement?: CaptionStyleVerticalPlacementModel.Raw | null;

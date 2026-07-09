@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const OrderItemKind: core.serialization.Schema<serializers.OrderItemKind.Raw, ElevenLabs.OrderItemKind> =
-    core.serialization.enum_(["dub", "subtitles"]);
+    core.serialization.enum_(["dub", "subtitles", "transcription"]);
 
 export declare namespace OrderItemKind {
-    export type Raw = "dub" | "subtitles";
+    export type Raw = "dub" | "subtitles" | "transcription";
 }

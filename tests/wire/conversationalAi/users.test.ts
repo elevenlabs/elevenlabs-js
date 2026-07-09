@@ -18,7 +18,16 @@ describe("UsersClient", () => {
                     last_contact_agent_id: "last_contact_agent_id",
                     last_contact_conversation_id: "last_contact_conversation_id",
                     last_contact_agent_name: "last_contact_agent_name",
-                    sentiment: { scored_conversation_count: 1, positive_count: 1, neutral_count: 1, negative_count: 1 },
+                    sentiment: {
+                        scored_conversation_count: 1,
+                        positive_count: 1,
+                        neutral_count: 1,
+                        negative_count: 1,
+                        recent_scored_conversation_count: 1,
+                        recent_positive_count: 1,
+                        recent_neutral_count: 1,
+                        recent_negative_count: 1,
+                    },
                     most_frustrated_conversations: [
                         {
                             conversation_id: "conversation_id",
@@ -45,6 +54,7 @@ describe("UsersClient", () => {
             search: "search",
             pageSize: 1,
             sortBy: "last_contact_unix_secs",
+            sortDirection: "asc",
             cursor: "cursor",
         });
         expect(response).toEqual({
@@ -62,6 +72,10 @@ describe("UsersClient", () => {
                         positiveCount: 1,
                         neutralCount: 1,
                         negativeCount: 1,
+                        recentScoredConversationCount: 1,
+                        recentPositiveCount: 1,
+                        recentNeutralCount: 1,
+                        recentNegativeCount: 1,
                     },
                     mostFrustratedConversations: [
                         {

@@ -23,6 +23,8 @@ export interface AgentPlatformSettingsRequestModel {
     guardrails?: ElevenLabs.GuardrailsV1Input;
     /** Language for all conversation analysis outputs (summaries, titles, evaluation rationales, data collection rationales). If not set, the language will be inferred from the conversation. Must be one of the supported conversation languages. */
     summaryLanguage?: string;
+    /** When enabled, a conversation transcript is automatically translated to the viewer's application language when they open the transcript page. If not set or false, transcripts are shown in their original language unless the viewer manually selects a translation. */
+    autoTranslateTranscriptToAppLanguage?: boolean;
     /** Settings for authentication */
     auth?: ElevenLabs.AuthSettings;
     /** Call limits for the agent */
@@ -35,4 +37,6 @@ export interface AgentPlatformSettingsRequestModel {
     analysisLlm?: ElevenLabs.Llm;
     /** Per-agent topic discovery configuration */
     topicDiscovery?: ElevenLabs.TopicDiscoverySettings;
+    /** Per-agent post-call sentiment analysis configuration */
+    sentimentAnalysis?: ElevenLabs.SentimentAnalysisSettings;
 }

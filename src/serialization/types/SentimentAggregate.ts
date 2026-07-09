@@ -20,6 +20,21 @@ export const SentimentAggregate: core.serialization.ObjectSchema<
         "average_frustration_score",
         core.serialization.number().optional(),
     ),
+    recentScoredConversationCount: core.serialization.property(
+        "recent_scored_conversation_count",
+        core.serialization.number(),
+    ),
+    recentPositiveCount: core.serialization.property("recent_positive_count", core.serialization.number()),
+    recentNeutralCount: core.serialization.property("recent_neutral_count", core.serialization.number()),
+    recentNegativeCount: core.serialization.property("recent_negative_count", core.serialization.number()),
+    recentAverageSentimentScore: core.serialization.property(
+        "recent_average_sentiment_score",
+        core.serialization.number().optional(),
+    ),
+    recentAverageFrustrationScore: core.serialization.property(
+        "recent_average_frustration_score",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace SentimentAggregate {
@@ -30,5 +45,11 @@ export declare namespace SentimentAggregate {
         negative_count: number;
         average_sentiment_score?: number | null;
         average_frustration_score?: number | null;
+        recent_scored_conversation_count: number;
+        recent_positive_count: number;
+        recent_neutral_count: number;
+        recent_negative_count: number;
+        recent_average_sentiment_score?: number | null;
+        recent_average_frustration_score?: number | null;
     }
 }

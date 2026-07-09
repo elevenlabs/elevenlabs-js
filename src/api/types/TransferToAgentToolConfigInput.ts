@@ -2,6 +2,6 @@
 
 import type * as ElevenLabs from "../index";
 
-export interface TransferToAgentToolConfig {
-    transfers: ElevenLabs.AgentTransfer[];
+export interface TransferToAgentToolConfigInput {
+    transfers: ElevenLabs.AgentTransferInput[];
 }

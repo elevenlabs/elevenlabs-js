@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const UsersSortBy: core.serialization.Schema<serializers.UsersSortBy.Raw, ElevenLabs.UsersSortBy> =
-    core.serialization.enum_(["last_contact_unix_secs", "conversation_count"]);
+    core.serialization.enum_(["last_contact_unix_secs", "conversation_count", "average_sentiment_score"]);
 
 export declare namespace UsersSortBy {
-    export type Raw = "last_contact_unix_secs" | "conversation_count";
+    export type Raw = "last_contact_unix_secs" | "conversation_count" | "average_sentiment_score";
 }

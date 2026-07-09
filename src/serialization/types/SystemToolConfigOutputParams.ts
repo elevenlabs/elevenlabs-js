@@ -11,7 +11,7 @@ import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
 import { RunSubagentToolConfigOutput } from "./RunSubagentToolConfigOutput";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
 import { StartProcedureToolConfigOutput } from "./StartProcedureToolConfigOutput";
-import { TransferToAgentToolConfig } from "./TransferToAgentToolConfig";
+import { TransferToAgentToolConfigOutput } from "./TransferToAgentToolConfigOutput";
 import { TransferToNumberToolConfigOutput } from "./TransferToNumberToolConfigOutput";
 import { VoicemailDetectionToolConfig } from "./VoicemailDetectionToolConfig";
 
@@ -28,7 +28,7 @@ export const SystemToolConfigOutputParams: core.serialization.Schema<
         run_subagent: RunSubagentToolConfigOutput,
         skip_turn: SkipTurnToolConfig,
         start_procedure: StartProcedureToolConfigOutput,
-        transfer_to_agent: TransferToAgentToolConfig,
+        transfer_to_agent: TransferToAgentToolConfigOutput,
         transfer_to_number: TransferToNumberToolConfigOutput,
         voicemail_detection: VoicemailDetectionToolConfig,
     })
@@ -83,7 +83,7 @@ export declare namespace SystemToolConfigOutputParams {
         system_tool_type: "start_procedure";
     }
 
-    export interface TransferToAgent extends TransferToAgentToolConfig.Raw {
+    export interface TransferToAgent extends TransferToAgentToolConfigOutput.Raw {
         system_tool_type: "transfer_to_agent";
     }
 

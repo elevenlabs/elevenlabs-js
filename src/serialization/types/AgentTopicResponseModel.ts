@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { TopicMetricsAggregate } from "./TopicMetricsAggregate";
 
 export const AgentTopicResponseModel: core.serialization.ObjectSchema<
     serializers.AgentTopicResponseModel.Raw,
@@ -15,6 +16,7 @@ export const AgentTopicResponseModel: core.serialization.ObjectSchema<
     parentTopicId: core.serialization.property("parent_topic_id", core.serialization.string().optional()),
     x2D: core.serialization.property("x_2d", core.serialization.number().optional()),
     y2D: core.serialization.property("y_2d", core.serialization.number().optional()),
+    metrics: TopicMetricsAggregate.optional(),
 });
 
 export declare namespace AgentTopicResponseModel {
@@ -26,5 +28,6 @@ export declare namespace AgentTopicResponseModel {
         parent_topic_id?: string | null;
         x_2d?: number | null;
         y_2d?: number | null;
+        metrics?: TopicMetricsAggregate.Raw | null;
     }
 }

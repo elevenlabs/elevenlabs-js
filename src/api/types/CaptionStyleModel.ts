@@ -28,6 +28,7 @@ export interface CaptionStyleModel {
     sectionAnimation?: ElevenLabs.CaptionStyleSectionAnimationModel;
     wordAnimation?: ElevenLabs.CaptionStyleWordAnimationModel;
     characterAnimation?: ElevenLabs.CaptionStyleCharacterAnimationModel;
+    cursorEnabled?: boolean;
     widthPct?: number;
     horizontalPlacement?: ElevenLabs.CaptionStyleHorizontalPlacementModel;
     verticalPlacement?: ElevenLabs.CaptionStyleVerticalPlacementModel;

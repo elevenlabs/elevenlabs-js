@@ -3,5 +3,6 @@
 export const UsersSortBy = {
     LastContactUnixSecs: "last_contact_unix_secs",
     ConversationCount: "conversation_count",
+    AverageSentimentScore: "average_sentiment_score",
 } as const;
 export type UsersSortBy = (typeof UsersSortBy)[keyof typeof UsersSortBy];

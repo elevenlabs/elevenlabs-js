@@ -12,6 +12,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         search: "search",
  *         pageSize: 1,
  *         sortBy: "last_contact_unix_secs",
+ *         sortDirection: "asc",
  *         cursor: "cursor"
  *     }
  */
@@ -30,6 +31,8 @@ export interface UsersListRequest {
     pageSize?: number;
     /** The field to sort the results by. Defaults to last_contact_unix_secs. */
     sortBy?: ElevenLabs.UsersSortBy;
+    /** The direction to sort the results */
+    sortDirection?: ElevenLabs.SortDirection;
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
 }

@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const WorkspaceAnalyticsQueryResponseModelColumnTypesItem: core.serialization.Schema<
     serializers.WorkspaceAnalyticsQueryResponseModelColumnTypesItem.Raw,
     ElevenLabs.WorkspaceAnalyticsQueryResponseModelColumnTypesItem
-> = core.serialization.enum_(["String", "Float", "DateTime", "Int", "Bool", "JSON", "Map"]);
+> = core.serialization.enum_(["String", "Float", "DateTime", "Int", "Bool", "JSON", "Map", "Array"]);
 
 export declare namespace WorkspaceAnalyticsQueryResponseModelColumnTypesItem {
-    export type Raw = "String" | "Float" | "DateTime" | "Int" | "Bool" | "JSON" | "Map";
+    export type Raw = "String" | "Float" | "DateTime" | "Int" | "Bool" | "JSON" | "Map" | "Array";
 }

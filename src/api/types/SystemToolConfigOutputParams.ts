@@ -48,7 +48,7 @@ export namespace SystemToolConfigOutputParams {
         systemToolType: "start_procedure";
     }
 
-    export interface TransferToAgent extends ElevenLabs.TransferToAgentToolConfig {
+    export interface TransferToAgent extends ElevenLabs.TransferToAgentToolConfigOutput {
         systemToolType: "transfer_to_agent";
     }
 

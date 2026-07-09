@@ -6,23 +6,23 @@ import type * as serializers from "../index";
 import { TransferBranchInfoDefaultingToMain } from "./TransferBranchInfoDefaultingToMain";
 import { TransferBranchInfoTrafficSplit } from "./TransferBranchInfoTrafficSplit";
 
-export const TransferToAgentToolResultSuccessModelBranchInfo: core.serialization.Schema<
-    serializers.TransferToAgentToolResultSuccessModelBranchInfo.Raw,
-    ElevenLabs.TransferToAgentToolResultSuccessModelBranchInfo
+export const TransferToAgentToolResultSuccessModelOutputBranchInfo: core.serialization.Schema<
+    serializers.TransferToAgentToolResultSuccessModelOutputBranchInfo.Raw,
+    ElevenLabs.TransferToAgentToolResultSuccessModelOutputBranchInfo
 > = core.serialization
     .union(core.serialization.discriminant("branchReason", "branch_reason"), {
         defaulting_to_main: TransferBranchInfoDefaultingToMain,
         traffic_split: TransferBranchInfoTrafficSplit,
     })
-    .transform<ElevenLabs.TransferToAgentToolResultSuccessModelBranchInfo>({
+    .transform<ElevenLabs.TransferToAgentToolResultSuccessModelOutputBranchInfo>({
         transform: (value) => value,
         untransform: (value) => value,
     });
 
-export declare namespace TransferToAgentToolResultSuccessModelBranchInfo {
+export declare namespace TransferToAgentToolResultSuccessModelOutputBranchInfo {
     export type Raw =
-        | TransferToAgentToolResultSuccessModelBranchInfo.DefaultingToMain
-        | TransferToAgentToolResultSuccessModelBranchInfo.TrafficSplit;
+        | TransferToAgentToolResultSuccessModelOutputBranchInfo.DefaultingToMain
+        | TransferToAgentToolResultSuccessModelOutputBranchInfo.TrafficSplit;
 
     export interface DefaultingToMain extends TransferBranchInfoDefaultingToMain.Raw {
         branch_reason: "defaulting_to_main";

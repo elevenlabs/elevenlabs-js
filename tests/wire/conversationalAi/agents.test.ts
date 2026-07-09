@@ -313,6 +313,7 @@ describe("AgentsClient", () => {
                 archived: true,
                 guardrails: { version: "1" },
                 summary_language: "summary_language",
+                auto_translate_transcript_to_app_language: true,
                 auth: {
                     enable_auth: true,
                     allowlist: [{ hostname: "https://example.com" }],
@@ -1498,6 +1499,7 @@ describe("AgentsClient", () => {
                     version: "1",
                 },
                 summaryLanguage: "summary_language",
+                autoTranslateTranscriptToAppLanguage: true,
                 auth: {
                     enableAuth: true,
                     allowlist: [
@@ -2794,6 +2796,7 @@ describe("AgentsClient", () => {
                 archived: true,
                 guardrails: { version: "1" },
                 summary_language: "summary_language",
+                auto_translate_transcript_to_app_language: true,
                 auth: {
                     enable_auth: true,
                     allowlist: [{ hostname: "https://example.com" }],
@@ -3980,6 +3983,7 @@ describe("AgentsClient", () => {
                     version: "1",
                 },
                 summaryLanguage: "summary_language",
+                autoTranslateTranscriptToAppLanguage: true,
                 auth: {
                     enableAuth: true,
                     allowlist: [
@@ -5056,38 +5060,6 @@ describe("AgentsClient", () => {
         });
     });
 
-    test("get_default_interruption_ignore_terms", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
-        const rawResponseBody = {
-            terms_by_language: {
-                key: { acknowledgements: ["acknowledgements"], openers: ["openers"], confirmations: ["confirmations"] },
-            },
-            max_terms: 1,
-        };
-
-        server
-            .mockEndpoint()
-            .get("/v1/convai/agents/defaults/interruption-ignore-terms")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.conversationalAi.agents.getDefaultInterruptionIgnoreTerms();
-        expect(response).toEqual({
-            termsByLanguage: {
-                key: {
-                    acknowledgements: ["acknowledgements"],
-                    openers: ["openers"],
-                    confirmations: ["confirmations"],
-                },
-            },
-            maxTerms: 1,
-        });
-    });
-
     test("simulate_conversation", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
@@ -5134,6 +5106,7 @@ describe("AgentsClient", () => {
                         rag_latency_secs: 1.1,
                     },
                     interrupted: true,
+                    ignored_as_backchannel: true,
                     original_message: "original_message",
                     reasoning: [{}],
                     source_medium: "audio",
@@ -5251,6 +5224,7 @@ describe("AgentsClient", () => {
                         ragLatencySecs: 1.1,
                     },
                     interrupted: true,
+                    ignoredAsBackchannel: true,
                     originalMessage: "original_message",
                     reasoning: [{}],
                     sourceMedium: "audio",

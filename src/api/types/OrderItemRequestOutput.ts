@@ -4,7 +4,8 @@ import type * as ElevenLabs from "../index";
 
 export type OrderItemRequestOutput =
     | ElevenLabs.OrderItemRequestOutput.Dub
-    | ElevenLabs.OrderItemRequestOutput.Subtitles;
+    | ElevenLabs.OrderItemRequestOutput.Subtitles
+    | ElevenLabs.OrderItemRequestOutput.Transcription;
 
 export namespace OrderItemRequestOutput {
     export interface Dub extends ElevenLabs.DubOrderItemRequest {
@@ -13,5 +14,9 @@ export namespace OrderItemRequestOutput {
 
     export interface Subtitles extends ElevenLabs.SubtitleOrderItemRequest {
         kind: "subtitles";
+    }
+
+    export interface Transcription extends ElevenLabs.TranscriptionOrderItemRequest {
+        kind: "transcription";
     }
 }

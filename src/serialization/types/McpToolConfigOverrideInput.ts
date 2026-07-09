@@ -5,9 +5,9 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { DynamicVariableAssignment } from "./DynamicVariableAssignment";
 import { McpToolConfigOverrideInputInputOverridesValue } from "./McpToolConfigOverrideInputInputOverridesValue";
+import { McpToolConfigOverrideInputToolCallSound } from "./McpToolConfigOverrideInputToolCallSound";
 import { PreToolSpeechMode } from "./PreToolSpeechMode";
 import { ToolCallSoundBehavior } from "./ToolCallSoundBehavior";
-import { ToolCallSoundType } from "./ToolCallSoundType";
 import { ToolExecutionMode } from "./ToolExecutionMode";
 import { ToolInterruptionMode } from "./ToolInterruptionMode";
 import { ToolResponseMockConfigInput } from "./ToolResponseMockConfigInput";
@@ -21,7 +21,7 @@ export const McpToolConfigOverrideInput: core.serialization.ObjectSchema<
     preToolSpeech: core.serialization.property("pre_tool_speech", PreToolSpeechMode.optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
     interruptionMode: core.serialization.property("interruption_mode", ToolInterruptionMode.optional()),
-    toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
+    toolCallSound: core.serialization.property("tool_call_sound", McpToolConfigOverrideInputToolCallSound.optional()),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
@@ -45,7 +45,7 @@ export declare namespace McpToolConfigOverrideInput {
         pre_tool_speech?: PreToolSpeechMode.Raw | null;
         disable_interruptions?: boolean | null;
         interruption_mode?: ToolInterruptionMode.Raw | null;
-        tool_call_sound?: ToolCallSoundType.Raw | null;
+        tool_call_sound?: McpToolConfigOverrideInputToolCallSound.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
         response_timeout_secs?: number | null;

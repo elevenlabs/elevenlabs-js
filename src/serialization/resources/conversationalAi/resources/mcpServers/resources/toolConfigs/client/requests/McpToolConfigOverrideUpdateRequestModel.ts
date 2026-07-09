@@ -6,21 +6,24 @@ import type * as serializers from "../../../../../../../../index";
 import { DynamicVariableAssignment } from "../../../../../../../../types/DynamicVariableAssignment";
 import { PreToolSpeechMode } from "../../../../../../../../types/PreToolSpeechMode";
 import { ToolCallSoundBehavior } from "../../../../../../../../types/ToolCallSoundBehavior";
-import { ToolCallSoundType } from "../../../../../../../../types/ToolCallSoundType";
 import { ToolExecutionMode } from "../../../../../../../../types/ToolExecutionMode";
 import { ToolInterruptionMode } from "../../../../../../../../types/ToolInterruptionMode";
 import { ToolResponseMockConfigInput } from "../../../../../../../../types/ToolResponseMockConfigInput";
 import { McpToolConfigOverrideUpdateRequestModelInputOverridesValue } from "../../types/McpToolConfigOverrideUpdateRequestModelInputOverridesValue";
+import { McpToolConfigOverrideUpdateRequestModelToolCallSound } from "../../types/McpToolConfigOverrideUpdateRequestModelToolCallSound";
 
 export const McpToolConfigOverrideUpdateRequestModel: core.serialization.Schema<
     serializers.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel.Raw,
-    ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel
+    Omit<ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel, "environment">
 > = core.serialization.object({
     forcePreToolSpeech: core.serialization.property("force_pre_tool_speech", core.serialization.boolean().optional()),
     preToolSpeech: core.serialization.property("pre_tool_speech", PreToolSpeechMode.optional()),
     disableInterruptions: core.serialization.property("disable_interruptions", core.serialization.boolean().optional()),
     interruptionMode: core.serialization.property("interruption_mode", ToolInterruptionMode.optional()),
-    toolCallSound: core.serialization.property("tool_call_sound", ToolCallSoundType.optional()),
+    toolCallSound: core.serialization.property(
+        "tool_call_sound",
+        McpToolConfigOverrideUpdateRequestModelToolCallSound.optional(),
+    ),
     toolCallSoundBehavior: core.serialization.property("tool_call_sound_behavior", ToolCallSoundBehavior.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
     responseTimeoutSecs: core.serialization.property("response_timeout_secs", core.serialization.number().optional()),
@@ -43,7 +46,7 @@ export declare namespace McpToolConfigOverrideUpdateRequestModel {
         pre_tool_speech?: PreToolSpeechMode.Raw | null;
         disable_interruptions?: boolean | null;
         interruption_mode?: ToolInterruptionMode.Raw | null;
-        tool_call_sound?: ToolCallSoundType.Raw | null;
+        tool_call_sound?: McpToolConfigOverrideUpdateRequestModelToolCallSound.Raw | null;
         tool_call_sound_behavior?: ToolCallSoundBehavior.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
         response_timeout_secs?: number | null;

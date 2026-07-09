@@ -2,7 +2,7 @@
 
 import type * as ElevenLabs from "../index";
 
-export interface TransferToAgentToolResultSuccessModel {
+export interface TransferToAgentToolResultSuccessModelInput {
     status?: "success";
     fromAgent: string;
     toAgent: string;
@@ -11,6 +11,6 @@ export interface TransferToAgentToolResultSuccessModel {
     delayMs?: number;
     transferMessage?: string;
     enableTransferredAgentFirstMessage?: boolean;
-    branchInfo?: ElevenLabs.TransferToAgentToolResultSuccessModelBranchInfo;
+    branchInfo?: ElevenLabs.TransferToAgentToolResultSuccessModelInputBranchInfo;
     preserveClientTtsOverrides?: boolean;
 }

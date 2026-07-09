@@ -15,6 +15,7 @@ import { EvaluationSettingsInput } from "./EvaluationSettingsInput";
 import { GuardrailsV1Input } from "./GuardrailsV1Input";
 import { Llm } from "./Llm";
 import { PrivacyConfigInput } from "./PrivacyConfigInput";
+import { SentimentAnalysisSettings } from "./SentimentAnalysisSettings";
 import { TopicDiscoverySettings } from "./TopicDiscoverySettings";
 import { WidgetConfig } from "./WidgetConfig";
 
@@ -38,12 +39,17 @@ export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
     archived: core.serialization.boolean().optional(),
     guardrails: GuardrailsV1Input.optional(),
     summaryLanguage: core.serialization.property("summary_language", core.serialization.string().optional()),
+    autoTranslateTranscriptToAppLanguage: core.serialization.property(
+        "auto_translate_transcript_to_app_language",
+        core.serialization.boolean().optional(),
+    ),
     auth: AuthSettings.optional(),
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
     privacy: PrivacyConfigInput.optional(),
     trustContext: core.serialization.property("trust_context", AgentTrustContext.optional()),
     analysisLlm: core.serialization.property("analysis_llm", Llm.optional()),
     topicDiscovery: core.serialization.property("topic_discovery", TopicDiscoverySettings.optional()),
+    sentimentAnalysis: core.serialization.property("sentiment_analysis", SentimentAnalysisSettings.optional()),
 });
 
 export declare namespace AgentPlatformSettingsRequestModel {
@@ -58,11 +64,13 @@ export declare namespace AgentPlatformSettingsRequestModel {
         archived?: boolean | null;
         guardrails?: GuardrailsV1Input.Raw | null;
         summary_language?: string | null;
+        auto_translate_transcript_to_app_language?: boolean | null;
         auth?: AuthSettings.Raw | null;
         call_limits?: AgentCallLimits.Raw | null;
         privacy?: PrivacyConfigInput.Raw | null;
         trust_context?: AgentTrustContext.Raw | null;
         analysis_llm?: Llm.Raw | null;
         topic_discovery?: TopicDiscoverySettings.Raw | null;
+        sentiment_analysis?: SentimentAnalysisSettings.Raw | null;
     }
 }

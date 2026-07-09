@@ -3,16 +3,13 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { TransferToAgentToolResultSuccessModelBranchInfo } from "./TransferToAgentToolResultSuccessModelBranchInfo";
 
-export const TransferToAgentToolResultSuccessModel: core.serialization.ObjectSchema<
-    serializers.TransferToAgentToolResultSuccessModel.Raw,
-    ElevenLabs.TransferToAgentToolResultSuccessModel
+export const AgentTransferInput: core.serialization.ObjectSchema<
+    serializers.AgentTransferInput.Raw,
+    ElevenLabs.AgentTransferInput
 > = core.serialization.object({
-    status: core.serialization.stringLiteral("success").optional(),
-    fromAgent: core.serialization.property("from_agent", core.serialization.string()),
-    toAgent: core.serialization.property("to_agent", core.serialization.string()),
-    toNode: core.serialization.property("to_node", core.serialization.string().optional()),
+    agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
+    nodeId: core.serialization.property("node_id", core.serialization.string().optional()),
     condition: core.serialization.string(),
     delayMs: core.serialization.property("delay_ms", core.serialization.number().optional()),
     transferMessage: core.serialization.property("transfer_message", core.serialization.string().optional()),
@@ -20,24 +17,25 @@ export const TransferToAgentToolResultSuccessModel: core.serialization.ObjectSch
         "enable_transferred_agent_first_message",
         core.serialization.boolean().optional(),
     ),
-    branchInfo: core.serialization.property("branch_info", TransferToAgentToolResultSuccessModelBranchInfo.optional()),
+    isWorkflowNodeTransfer: core.serialization.property(
+        "is_workflow_node_transfer",
+        core.serialization.boolean().optional(),
+    ),
     preserveClientTtsOverrides: core.serialization.property(
         "preserve_client_tts_overrides",
         core.serialization.boolean().optional(),
     ),
 });
 
-export declare namespace TransferToAgentToolResultSuccessModel {
+export declare namespace AgentTransferInput {
     export interface Raw {
-        status?: "success" | null;
-        from_agent: string;
-        to_agent: string;
-        to_node?: string | null;
+        agent_id?: string | null;
+        node_id?: string | null;
         condition: string;
         delay_ms?: number | null;
         transfer_message?: string | null;
         enable_transferred_agent_first_message?: boolean | null;
-        branch_info?: TransferToAgentToolResultSuccessModelBranchInfo.Raw | null;
+        is_workflow_node_transfer?: boolean | null;
         preserve_client_tts_overrides?: boolean | null;
     }
 }

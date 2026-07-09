@@ -7,4 +7,10 @@ export interface SentimentAggregate {
     negativeCount: number;
     averageSentimentScore?: number;
     averageFrustrationScore?: number;
+    recentScoredConversationCount: number;
+    recentPositiveCount: number;
+    recentNeutralCount: number;
+    recentNegativeCount: number;
+    recentAverageSentimentScore?: number;
+    recentAverageFrustrationScore?: number;
 }
