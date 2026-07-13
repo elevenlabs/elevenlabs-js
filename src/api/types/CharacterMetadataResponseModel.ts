@@ -5,6 +5,7 @@ import type * as ElevenLabs from "../index";
 export interface CharacterMetadataResponseModel {
     description?: string;
     sampleMessage?: string;
+    voiceCreationPromptSuggestion?: string;
     gender?: ElevenLabs.CharacterGender;
     age?: ElevenLabs.CharacterAge;
     accent?: string;

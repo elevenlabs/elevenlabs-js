@@ -4,6 +4,42 @@ import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
 describe("MembersClient", () => {
+    test("list", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = [
+            {
+                user_id: "user_id",
+                email: "email",
+                first_name: "first_name",
+                seat_type: "workspace_admin",
+                is_owner: true,
+                is_locked: true,
+            },
+        ];
+
+        server
+            .mockEndpoint()
+            .get("/v1/workspace/members")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.members.list();
+        expect(response).toEqual([
+            {
+                userId: "user_id",
+                email: "email",
+                firstName: "first_name",
+                seatType: "workspace_admin",
+                isOwner: true,
+                isLocked: true,
+            },
+        ]);
+    });
+
     test("update", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

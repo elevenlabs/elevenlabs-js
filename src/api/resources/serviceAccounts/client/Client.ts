@@ -96,4 +96,82 @@ export class ServiceAccountsClient {
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/service-accounts");
     }
+
+    /**
+     * Create a new service account in the workspace. By default, a workspace can have up to 20 service accounts. Enterprise customers may request an increase to this limit, up to 100.
+     *
+     * @param {ElevenLabs.BodyCreateServiceAccountV1ServiceAccountsPost} request
+     * @param {ServiceAccountsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.serviceAccounts.create({
+     *         name: "name"
+     *     })
+     */
+    public create(
+        request: ElevenLabs.BodyCreateServiceAccountV1ServiceAccountsPost,
+        requestOptions?: ServiceAccountsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.WorkspaceCreateServiceAccountResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
+    }
+
+    private async __create(
+        request: ElevenLabs.BodyCreateServiceAccountV1ServiceAccountsPost,
+        requestOptions?: ServiceAccountsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.WorkspaceCreateServiceAccountResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/service-accounts",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.BodyCreateServiceAccountV1ServiceAccountsPost.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.WorkspaceCreateServiceAccountResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/service-accounts");
+    }
 }

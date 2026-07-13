@@ -159,6 +159,7 @@ describe("AnalysisClient", () => {
             has_audio: true,
             has_user_audio: true,
             has_response_audio: true,
+            has_auxiliary_audio: true,
             transcript: [
                 {
                     role: "user",
@@ -441,6 +442,7 @@ describe("AnalysisClient", () => {
             hasAudio: true,
             hasUserAudio: true,
             hasResponseAudio: true,
+            hasAuxiliaryAudio: true,
             transcript: [
                 {
                     role: "user",
@@ -672,6 +674,7 @@ describe("AnalysisClient", () => {
             has_audio: true,
             has_user_audio: true,
             has_response_audio: true,
+            has_auxiliary_audio: true,
             transcript: [
                 {
                     role: "user",
@@ -957,6 +960,7 @@ describe("AnalysisClient", () => {
             hasAudio: true,
             hasUserAudio: true,
             hasResponseAudio: true,
+            hasAuxiliaryAudio: true,
             transcript: [
                 {
                     role: "user",
