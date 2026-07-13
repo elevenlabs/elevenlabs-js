@@ -183,6 +183,7 @@ describe("ConversationsClient", () => {
             has_audio: true,
             has_user_audio: true,
             has_response_audio: true,
+            has_auxiliary_audio: true,
         };
 
         server
@@ -212,6 +213,7 @@ describe("ConversationsClient", () => {
             hasAudio: true,
             hasUserAudio: true,
             hasResponseAudio: true,
+            hasAuxiliaryAudio: true,
         });
     });
 

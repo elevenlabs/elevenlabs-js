@@ -12,6 +12,7 @@ export const BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost: core.serializ
     emails: core.serialization.list(core.serialization.string()),
     seatType: core.serialization.property("seat_type", SeatType.optional()),
     groupIds: core.serialization.property("group_ids", core.serialization.list(core.serialization.string()).optional()),
+    usageLimit: core.serialization.property("usage_limit", core.serialization.number().optional()),
 });
 
 export declare namespace BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost {
@@ -19,5 +20,6 @@ export declare namespace BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost {
         emails: string[];
         seat_type?: SeatType.Raw | null;
         group_ids?: string[] | null;
+        usage_limit?: number | null;
     }
 }

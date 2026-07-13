@@ -17,4 +17,6 @@ export interface InviteUserRequest {
     seatType?: ElevenLabs.SeatType;
     /** The group ids of the user */
     groupIds?: string[];
+    /** Monthly credit usage limit for the invitee. Omit or set to null for no custom cap. */
+    usageLimit?: number;
 }

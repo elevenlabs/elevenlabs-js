@@ -68,4 +68,27 @@ describe("ServiceAccountsClient", () => {
             ],
         });
     });
+
+    test("create", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { name: "name" };
+        const rawResponseBody = { "service-account-user-id": "service-account-user-id" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/service-accounts")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.serviceAccounts.create({
+            name: "name",
+        });
+        expect(response).toEqual({
+            serviceAccountUserId: "service-account-user-id",
+        });
+    });
 });

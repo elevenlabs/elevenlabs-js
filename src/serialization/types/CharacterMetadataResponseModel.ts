@@ -12,6 +12,10 @@ export const CharacterMetadataResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     description: core.serialization.string().optional(),
     sampleMessage: core.serialization.property("sample_message", core.serialization.string().optional()),
+    voiceCreationPromptSuggestion: core.serialization.property(
+        "voice_creation_prompt_suggestion",
+        core.serialization.string().optional(),
+    ),
     gender: CharacterGender.optional(),
     age: CharacterAge.optional(),
     accent: core.serialization.string().optional(),
@@ -21,6 +25,7 @@ export declare namespace CharacterMetadataResponseModel {
     export interface Raw {
         description?: string | null;
         sample_message?: string | null;
+        voice_creation_prompt_suggestion?: string | null;
         gender?: CharacterGender.Raw | null;
         age?: CharacterAge.Raw | null;
         accent?: string | null;
