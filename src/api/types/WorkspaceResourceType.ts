@@ -43,5 +43,6 @@ export const WorkspaceResourceType = {
     AvatarVideoGenerations: "avatar_video_generations",
     ResourceCollection: "resource_collection",
     StudioProjects: "studio_projects",
+    ConvaiAnalysisItems: "convai_analysis_items",
 } as const;
 export type WorkspaceResourceType = (typeof WorkspaceResourceType)[keyof typeof WorkspaceResourceType];

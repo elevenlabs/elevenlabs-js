@@ -3,25 +3,16 @@
 import type * as ElevenLabs from "../../../../api/index";
 import * as core from "../../../../core";
 import type * as serializers from "../../../index";
-import { TextToDialogueWebsocketAudioChunk } from "../../../types/TextToDialogueWebsocketAudioChunk";
-import { TextToDialogueWebsocketError } from "../../../types/TextToDialogueWebsocketError";
-import { TextToDialogueWebsocketFinal } from "../../../types/TextToDialogueWebsocketFinal";
-import { TextToDialogueWebsocketFinalAudioForTurn } from "../../../types/TextToDialogueWebsocketFinalAudioForTurn";
+import { AudioChunk } from "../../../types/AudioChunk";
+import { Error_ } from "../../../types/Error_";
+import { Final } from "../../../types/Final";
+import { FinalAudioForTurn } from "../../../types/FinalAudioForTurn";
 
 export const ReceiveTextToDialogueWebsocketMessage: core.serialization.Schema<
     serializers.ReceiveTextToDialogueWebsocketMessage.Raw,
     ElevenLabs.ReceiveTextToDialogueWebsocketMessage
-> = core.serialization.undiscriminatedUnion([
-    TextToDialogueWebsocketAudioChunk,
-    TextToDialogueWebsocketFinalAudioForTurn,
-    TextToDialogueWebsocketFinal,
-    TextToDialogueWebsocketError,
-]);
+> = core.serialization.undiscriminatedUnion([AudioChunk, FinalAudioForTurn, Final, Error_]);
 
 export declare namespace ReceiveTextToDialogueWebsocketMessage {
-    export type Raw =
-        | TextToDialogueWebsocketAudioChunk.Raw
-        | TextToDialogueWebsocketFinalAudioForTurn.Raw
-        | TextToDialogueWebsocketFinal.Raw
-        | TextToDialogueWebsocketError.Raw;
+    export type Raw = AudioChunk.Raw | FinalAudioForTurn.Raw | Final.Raw | Error_.Raw;
 }

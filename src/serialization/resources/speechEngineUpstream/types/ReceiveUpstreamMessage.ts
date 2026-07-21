@@ -3,28 +3,17 @@
 import type * as ElevenLabs from "../../../../api/index";
 import * as core from "../../../../core";
 import type * as serializers from "../../../index";
-import { ClosePayload } from "../../../types/ClosePayload";
-import { ErrorPayload } from "../../../types/ErrorPayload";
-import { InitPayload } from "../../../types/InitPayload";
-import { PingPayload } from "../../../types/PingPayload";
-import { UserTranscriptPayload } from "../../../types/UserTranscriptPayload";
+import { Close } from "../../../types/Close";
+import { Init } from "../../../types/Init";
+import { Ping } from "../../../types/Ping";
+import { SpeechEngineError } from "../../../types/SpeechEngineError";
+import { UserTranscript } from "../../../types/UserTranscript";
 
 export const ReceiveUpstreamMessage: core.serialization.Schema<
     serializers.ReceiveUpstreamMessage.Raw,
     ElevenLabs.ReceiveUpstreamMessage
-> = core.serialization.undiscriminatedUnion([
-    InitPayload,
-    UserTranscriptPayload,
-    PingPayload,
-    ClosePayload,
-    ErrorPayload,
-]);
+> = core.serialization.undiscriminatedUnion([Init, UserTranscript, Ping, Close, SpeechEngineError]);
 
 export declare namespace ReceiveUpstreamMessage {
-    export type Raw =
-        | InitPayload.Raw
-        | UserTranscriptPayload.Raw
-        | PingPayload.Raw
-        | ClosePayload.Raw
-        | ErrorPayload.Raw;
+    export type Raw = Init.Raw | UserTranscript.Raw | Ping.Raw | Close.Raw | SpeechEngineError.Raw;
 }

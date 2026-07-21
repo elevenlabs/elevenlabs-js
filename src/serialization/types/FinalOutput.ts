@@ -6,11 +6,11 @@ import type * as serializers from "../index";
 
 export const FinalOutput: core.serialization.ObjectSchema<serializers.FinalOutput.Raw, ElevenLabs.FinalOutput> =
     core.serialization.object({
-        isFinal: core.serialization.booleanLiteral(true).optional(),
+        isFinal: core.serialization.property("is_final", core.serialization.booleanLiteral(true).optional()),
     });
 
 export declare namespace FinalOutput {
     export interface Raw {
-        isFinal?: true | null;
+        is_final?: true | null;
     }
 }

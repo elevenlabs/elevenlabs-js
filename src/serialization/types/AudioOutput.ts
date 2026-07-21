@@ -3,20 +3,25 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { Alignment } from "./Alignment";
-import { NormalizedAlignment } from "./NormalizedAlignment";
+import { AudioOutputAlignment } from "./AudioOutputAlignment";
+import { AudioOutputNormalizedAlignment } from "./AudioOutputNormalizedAlignment";
 
 export const AudioOutput: core.serialization.ObjectSchema<serializers.AudioOutput.Raw, ElevenLabs.AudioOutput> =
     core.serialization.object({
         audio: core.serialization.string(),
-        normalizedAlignment: NormalizedAlignment.optional(),
-        alignment: Alignment.optional(),
+        isFinal: core.serialization.property("is_final", core.serialization.boolean().optional()),
+        normalizedAlignment: core.serialization.property(
+            "normalized_alignment",
+            AudioOutputNormalizedAlignment.optional(),
+        ),
+        alignment: AudioOutputAlignment.optional(),
     });
 
 export declare namespace AudioOutput {
     export interface Raw {
         audio: string;
-        normalizedAlignment?: NormalizedAlignment.Raw | null;
-        alignment?: Alignment.Raw | null;
+        is_final?: boolean | null;
+        normalized_alignment?: AudioOutputNormalizedAlignment.Raw | null;
+        alignment?: AudioOutputAlignment.Raw | null;
     }
 }

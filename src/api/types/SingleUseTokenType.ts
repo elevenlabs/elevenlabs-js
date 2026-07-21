@@ -2,6 +2,7 @@
 
 export const SingleUseTokenType = {
     RealtimeScribe: "realtime_scribe",
+    BatchScribe: "batch_scribe",
     TtsWebsocket: "tts_websocket",
 } as const;
 export type SingleUseTokenType = (typeof SingleUseTokenType)[keyof typeof SingleUseTokenType];

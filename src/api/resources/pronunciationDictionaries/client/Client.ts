@@ -466,7 +466,8 @@ export class PronunciationDictionariesClient {
      *         cursor: "cursor",
      *         pageSize: 1,
      *         sort: "creation_time_unix",
-     *         sortDirection: "sort_direction"
+     *         sortDirection: "sort_direction",
+     *         includeArchived: false
      *     })
      */
     public list(
@@ -480,7 +481,7 @@ export class PronunciationDictionariesClient {
         request: ElevenLabs.PronunciationDictionariesListRequest = {},
         requestOptions?: PronunciationDictionariesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetPronunciationDictionariesMetadataResponseModel>> {
-        const { cursor, pageSize, sort, sortDirection } = request;
+        const { cursor, pageSize, sort, sortDirection, includeArchived } = request;
         const _queryParams: Record<string, unknown> = {
             cursor,
             page_size: pageSize,
@@ -491,6 +492,7 @@ export class PronunciationDictionariesClient {
                       })
                     : undefined,
             sort_direction: sortDirection,
+            include_archived: includeArchived,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

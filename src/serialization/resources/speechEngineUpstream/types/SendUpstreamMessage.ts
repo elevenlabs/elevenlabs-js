@@ -3,14 +3,14 @@
 import type * as ElevenLabs from "../../../../api/index";
 import * as core from "../../../../core";
 import type * as serializers from "../../../index";
-import { AgentResponsePayload } from "../../../types/AgentResponsePayload";
-import { PongPayload } from "../../../types/PongPayload";
+import { AgentResponse } from "../../../types/AgentResponse";
+import { Pong } from "../../../types/Pong";
 
 export const SendUpstreamMessage: core.serialization.Schema<
     serializers.SendUpstreamMessage.Raw,
     ElevenLabs.SendUpstreamMessage
-> = core.serialization.undiscriminatedUnion([AgentResponsePayload, PongPayload]);
+> = core.serialization.undiscriminatedUnion([AgentResponse, Pong]);
 
 export declare namespace SendUpstreamMessage {
-    export type Raw = AgentResponsePayload.Raw | PongPayload.Raw;
+    export type Raw = AgentResponse.Raw | Pong.Raw;
 }

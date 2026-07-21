@@ -8,4 +8,5 @@ export interface UpdateWhatsAppAccountRequest {
     assignedAgentId?: string;
     enableMessaging?: boolean;
     enableAudioMessageResponse?: boolean;
+    enableTypingIndicator?: boolean;
 }

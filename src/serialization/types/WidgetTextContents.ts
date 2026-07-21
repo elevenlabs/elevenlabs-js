@@ -72,6 +72,13 @@ export const WidgetTextContents: core.serialization.ObjectSchema<
     agentWorking: core.serialization.property("agent_working", core.serialization.string().optional()),
     agentDone: core.serialization.property("agent_done", core.serialization.string().optional()),
     agentError: core.serialization.property("agent_error", core.serialization.string().optional()),
+    attachFile: core.serialization.property("attach_file", core.serialization.string().optional()),
+    removeFile: core.serialization.property("remove_file", core.serialization.string().optional()),
+    fileUploadError: core.serialization.property("file_upload_error", core.serialization.string().optional()),
+    fileTypeUnsupported: core.serialization.property("file_type_unsupported", core.serialization.string().optional()),
+    fileTooLarge: core.serialization.property("file_too_large", core.serialization.string().optional()),
+    fileLimitReached: core.serialization.property("file_limit_reached", core.serialization.string().optional()),
+    typingIndicator: core.serialization.property("typing_indicator", core.serialization.string().optional()),
 });
 
 export declare namespace WidgetTextContents {
@@ -119,5 +126,12 @@ export declare namespace WidgetTextContents {
         agent_working?: string | null;
         agent_done?: string | null;
         agent_error?: string | null;
+        attach_file?: string | null;
+        remove_file?: string | null;
+        file_upload_error?: string | null;
+        file_type_unsupported?: string | null;
+        file_too_large?: string | null;
+        file_limit_reached?: string | null;
+        typing_indicator?: string | null;
     }
 }

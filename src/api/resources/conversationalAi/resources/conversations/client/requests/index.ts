@@ -3,3 +3,4 @@ export type { ConversationsGetSignedUrlRequest } from "./ConversationsGetSignedU
 export type { ConversationsGetSipMessagesRequest } from "./ConversationsGetSipMessagesRequest";
 export type { ConversationsGetWebrtcTokenRequest } from "./ConversationsGetWebrtcTokenRequest";
 export type { ConversationsListRequest } from "./ConversationsListRequest";
+export type { ConversationsResolveRequest } from "./ConversationsResolveRequest";

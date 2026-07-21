@@ -3,20 +3,23 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { GenerationConfig } from "./GenerationConfig";
-import { PronunciationDictionaryLocator } from "./PronunciationDictionaryLocator";
-import { RealtimeVoiceSettings } from "./RealtimeVoiceSettings";
+import { InitializeConnectionMultiGenerationConfig } from "./InitializeConnectionMultiGenerationConfig";
+import { InitializeConnectionMultiPronunciationDictionaryLocatorsItem } from "./InitializeConnectionMultiPronunciationDictionaryLocatorsItem";
+import { InitializeConnectionMultiVoiceSettings } from "./InitializeConnectionMultiVoiceSettings";
 
 export const InitializeConnectionMulti: core.serialization.ObjectSchema<
     serializers.InitializeConnectionMulti.Raw,
     ElevenLabs.InitializeConnectionMulti
 > = core.serialization.object({
     text: core.serialization.stringLiteral(" "),
-    voiceSettings: core.serialization.property("voice_settings", RealtimeVoiceSettings.optional()),
-    generationConfig: core.serialization.property("generation_config", GenerationConfig.optional()),
+    voiceSettings: core.serialization.property("voice_settings", InitializeConnectionMultiVoiceSettings.optional()),
+    generationConfig: core.serialization.property(
+        "generation_config",
+        InitializeConnectionMultiGenerationConfig.optional(),
+    ),
     pronunciationDictionaryLocators: core.serialization.property(
         "pronunciation_dictionary_locators",
-        core.serialization.list(PronunciationDictionaryLocator).optional(),
+        core.serialization.list(InitializeConnectionMultiPronunciationDictionaryLocatorsItem).optional(),
     ),
     xiApiKey: core.serialization.property("xi_api_key", core.serialization.string().optional()),
     authorization: core.serialization.string().optional(),
@@ -26,9 +29,9 @@ export const InitializeConnectionMulti: core.serialization.ObjectSchema<
 export declare namespace InitializeConnectionMulti {
     export interface Raw {
         text: " ";
-        voice_settings?: RealtimeVoiceSettings.Raw | null;
-        generation_config?: GenerationConfig.Raw | null;
-        pronunciation_dictionary_locators?: PronunciationDictionaryLocator.Raw[] | null;
+        voice_settings?: InitializeConnectionMultiVoiceSettings.Raw | null;
+        generation_config?: InitializeConnectionMultiGenerationConfig.Raw | null;
+        pronunciation_dictionary_locators?: InitializeConnectionMultiPronunciationDictionaryLocatorsItem.Raw[] | null;
         xi_api_key?: string | null;
         authorization?: string | null;
         context_id?: string | null;

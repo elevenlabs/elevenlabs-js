@@ -24,7 +24,7 @@ export class HistoryClient {
     }
 
     /**
-     * Returns a list of your generated audio.
+     * Returns a list of your generated audio (e.g. text to speech, speech to speech, Studio, dubbing). Music and SFX generations are not included and cannot currently be retrieved via the API.
      *
      * @param {ElevenLabs.HistoryListRequest} request
      * @param {HistoryClient.RequestOptions} requestOptions - Request-specific configuration.

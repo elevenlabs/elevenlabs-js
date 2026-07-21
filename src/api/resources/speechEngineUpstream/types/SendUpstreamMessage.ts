@@ -3,6 +3,6 @@
 import type * as ElevenLabs from "../../../index";
 
 /**
- * Send messages from your server to the Speech Engine API
+ * Defines the message types your speech engine server sends to ElevenLabs
  */
-export type SendUpstreamMessage = ElevenLabs.AgentResponsePayload | ElevenLabs.PongPayload;
+export type SendUpstreamMessage = ElevenLabs.AgentResponse | ElevenLabs.Pong;

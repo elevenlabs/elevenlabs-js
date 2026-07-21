@@ -8,6 +8,7 @@ export const TtsConversationalConfigOverrideConfig: core.serialization.ObjectSch
     serializers.TtsConversationalConfigOverrideConfig.Raw,
     ElevenLabs.TtsConversationalConfigOverrideConfig
 > = core.serialization.object({
+    modelId: core.serialization.property("model_id", core.serialization.boolean().optional()),
     voiceId: core.serialization.property("voice_id", core.serialization.boolean().optional()),
     stability: core.serialization.boolean().optional(),
     speed: core.serialization.boolean().optional(),
@@ -16,6 +17,7 @@ export const TtsConversationalConfigOverrideConfig: core.serialization.ObjectSch
 
 export declare namespace TtsConversationalConfigOverrideConfig {
     export interface Raw {
+        model_id?: boolean | null;
         voice_id?: boolean | null;
         stability?: boolean | null;
         speed?: boolean | null;

@@ -3,23 +3,26 @@
 import type * as ElevenLabs from "../../../index";
 
 /**
- * Receive transcription results from the WebSocket
+ * Defines the message types that can be received by the client from the server
  */
 export type ReceiveTranscription =
-    | ElevenLabs.SessionStartedPayload
-    | ElevenLabs.PartialTranscriptPayload
-    | ElevenLabs.CommittedTranscriptPayload
-    | ElevenLabs.CommittedTranscriptWithTimestampsPayload
-    | ElevenLabs.ScribeErrorPayload
-    | ElevenLabs.ScribeAuthErrorPayload
-    | ElevenLabs.ScribeQuotaExceededErrorPayload
-    | ElevenLabs.ScribeThrottledErrorPayload
-    | ElevenLabs.ScribeUnacceptedTermsErrorPayload
-    | ElevenLabs.ScribeRateLimitedErrorPayload
-    | ElevenLabs.ScribeQueueOverflowErrorPayload
-    | ElevenLabs.ScribeResourceExhaustedErrorPayload
-    | ElevenLabs.ScribeSessionTimeLimitExceededErrorPayload
-    | ElevenLabs.ScribeInputErrorPayload
-    | ElevenLabs.ScribeChunkSizeExceededErrorPayload
-    | ElevenLabs.ScribeInsufficientAudioActivityErrorPayload
-    | ElevenLabs.ScribeTranscriberErrorPayload;
+    | ElevenLabs.SessionStarted
+    | ElevenLabs.PartialTranscript
+    | ElevenLabs.FinalTranscript
+    | ElevenLabs.FinalTranscriptWithTimestamps
+    | ElevenLabs.CommittedTranscript
+    | ElevenLabs.CommittedTranscriptWithTimestamps
+    | ElevenLabs.CommittedTranscriptEntities
+    | ElevenLabs.ScribeError
+    | ElevenLabs.ScribeAuthError
+    | ElevenLabs.ScribeQuotaExceededError
+    | ElevenLabs.ScribeThrottledError
+    | ElevenLabs.ScribeUnacceptedTermsError
+    | ElevenLabs.ScribeRateLimitedError
+    | ElevenLabs.ScribeQueueOverflowError
+    | ElevenLabs.ScribeResourceExhaustedError
+    | ElevenLabs.ScribeSessionTimeLimitExceededError
+    | ElevenLabs.ScribeInputError
+    | ElevenLabs.ScribeChunkSizeExceededError
+    | ElevenLabs.ScribeInsufficientAudioActivityError
+    | ElevenLabs.ScribeTranscriberError;

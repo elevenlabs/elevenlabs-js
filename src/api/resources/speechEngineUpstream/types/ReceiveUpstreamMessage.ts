@@ -3,11 +3,11 @@
 import type * as ElevenLabs from "../../../index";
 
 /**
- * Receive messages sent by ElevenLabs to your server
+ * Defines the message types ElevenLabs sends to your speech engine server
  */
 export type ReceiveUpstreamMessage =
-    | ElevenLabs.InitPayload
-    | ElevenLabs.UserTranscriptPayload
-    | ElevenLabs.PingPayload
-    | ElevenLabs.ClosePayload
-    | ElevenLabs.ErrorPayload;
+    | ElevenLabs.Init
+    | ElevenLabs.UserTranscript
+    | ElevenLabs.Ping
+    | ElevenLabs.Close
+    | ElevenLabs.SpeechEngineError;

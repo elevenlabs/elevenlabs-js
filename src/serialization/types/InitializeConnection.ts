@@ -3,32 +3,32 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { GenerationConfig } from "./GenerationConfig";
-import { PronunciationDictionaryLocator } from "./PronunciationDictionaryLocator";
-import { RealtimeVoiceSettings } from "./RealtimeVoiceSettings";
+import { InitializeConnectionGenerationConfig } from "./InitializeConnectionGenerationConfig";
+import { InitializeConnectionPronunciationDictionaryLocatorsItem } from "./InitializeConnectionPronunciationDictionaryLocatorsItem";
+import { InitializeConnectionVoiceSettings } from "./InitializeConnectionVoiceSettings";
 
 export const InitializeConnection: core.serialization.ObjectSchema<
     serializers.InitializeConnection.Raw,
     ElevenLabs.InitializeConnection
 > = core.serialization.object({
     text: core.serialization.stringLiteral(" "),
-    voiceSettings: core.serialization.property("voice_settings", RealtimeVoiceSettings.optional()),
-    generationConfig: core.serialization.property("generation_config", GenerationConfig.optional()),
+    voiceSettings: core.serialization.property("voice_settings", InitializeConnectionVoiceSettings.optional()),
+    generationConfig: core.serialization.property("generation_config", InitializeConnectionGenerationConfig.optional()),
     pronunciationDictionaryLocators: core.serialization.property(
         "pronunciation_dictionary_locators",
-        core.serialization.list(PronunciationDictionaryLocator).optional(),
+        core.serialization.list(InitializeConnectionPronunciationDictionaryLocatorsItem).optional(),
     ),
-    xiApiKey: core.serialization.property("xi-api-key", core.serialization.string().optional()),
+    xiApiKey: core.serialization.property("xi_api_key", core.serialization.string().optional()),
     authorization: core.serialization.string().optional(),
 });
 
 export declare namespace InitializeConnection {
     export interface Raw {
         text: " ";
-        voice_settings?: RealtimeVoiceSettings.Raw | null;
-        generation_config?: GenerationConfig.Raw | null;
-        pronunciation_dictionary_locators?: PronunciationDictionaryLocator.Raw[] | null;
-        "xi-api-key"?: string | null;
+        voice_settings?: InitializeConnectionVoiceSettings.Raw | null;
+        generation_config?: InitializeConnectionGenerationConfig.Raw | null;
+        pronunciation_dictionary_locators?: InitializeConnectionPronunciationDictionaryLocatorsItem.Raw[] | null;
+        xi_api_key?: string | null;
         authorization?: string | null;
     }
 }

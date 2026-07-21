@@ -16,6 +16,8 @@ export const BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTim
     VoiceMultiplier: "voice_multiplier",
     HashedXiApiKey: "hashed_xi_api_key",
     BillingGroupId: "billing_group_id",
+    Surface: "surface",
+    Actor: "actor",
 } as const;
 export type BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePostGroupByItem =
     (typeof BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePostGroupByItem)[keyof typeof BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePostGroupByItem];

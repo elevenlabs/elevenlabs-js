@@ -23,6 +23,8 @@ export const BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTim
     "voice_multiplier",
     "hashed_xi_api_key",
     "billing_group_id",
+    "surface",
+    "actor",
 ]);
 
 export declare namespace BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePostGroupByItem {
@@ -41,5 +43,7 @@ export declare namespace BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByPr
         | "request_queue_type"
         | "voice_multiplier"
         | "hashed_xi_api_key"
-        | "billing_group_id";
+        | "billing_group_id"
+        | "surface"
+        | "actor";
 }

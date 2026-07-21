@@ -19,6 +19,8 @@ export interface WorkspaceWebhookResponseModel {
     authType: ElevenLabs.WebhookAuthMethodType;
     /** The list of products that are currently configured to trigger this webhook. */
     usage?: ElevenLabs.WorkspaceWebhookUsageResponseModel[];
+    /** The workspace-level events this webhook is currently subscribed to. Only populated when usages are requested. */
+    events?: ElevenLabs.WorkspaceWebhookEventType[];
     /** The most recent error code returned from the callback URL. */
     mostRecentFailureErrorCode?: number;
     /** The most recent time the webhook failed, failures are any non-200 codes returned by the callback URL. */

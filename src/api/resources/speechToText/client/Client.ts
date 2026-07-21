@@ -41,6 +41,7 @@ export class SpeechToTextClient {
      * @example
      *     import { createReadStream } from "fs";
      *     await client.speechToText.convert({
+     *         token: "token",
      *         enableLogging: true,
      *         modelId: "scribe_v2"
      *     })
@@ -57,6 +58,7 @@ export class SpeechToTextClient {
         requestOptions?: SpeechToTextClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.SpeechToTextConvertResponse>> {
         const _queryParams: Record<string, unknown> = {
+            token: request.token,
             enable_logging: request.enableLogging,
         };
         const _body = await core.newFormData();

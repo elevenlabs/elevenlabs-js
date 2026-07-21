@@ -3,64 +3,73 @@
 import type * as ElevenLabs from "../../../../api/index";
 import * as core from "../../../../core";
 import type * as serializers from "../../../index";
-import { CommittedTranscriptPayload } from "../../../types/CommittedTranscriptPayload";
-import { CommittedTranscriptWithTimestampsPayload } from "../../../types/CommittedTranscriptWithTimestampsPayload";
-import { PartialTranscriptPayload } from "../../../types/PartialTranscriptPayload";
-import { ScribeAuthErrorPayload } from "../../../types/ScribeAuthErrorPayload";
-import { ScribeChunkSizeExceededErrorPayload } from "../../../types/ScribeChunkSizeExceededErrorPayload";
-import { ScribeErrorPayload } from "../../../types/ScribeErrorPayload";
-import { ScribeInputErrorPayload } from "../../../types/ScribeInputErrorPayload";
-import { ScribeInsufficientAudioActivityErrorPayload } from "../../../types/ScribeInsufficientAudioActivityErrorPayload";
-import { ScribeQueueOverflowErrorPayload } from "../../../types/ScribeQueueOverflowErrorPayload";
-import { ScribeQuotaExceededErrorPayload } from "../../../types/ScribeQuotaExceededErrorPayload";
-import { ScribeRateLimitedErrorPayload } from "../../../types/ScribeRateLimitedErrorPayload";
-import { ScribeResourceExhaustedErrorPayload } from "../../../types/ScribeResourceExhaustedErrorPayload";
-import { ScribeSessionTimeLimitExceededErrorPayload } from "../../../types/ScribeSessionTimeLimitExceededErrorPayload";
-import { ScribeThrottledErrorPayload } from "../../../types/ScribeThrottledErrorPayload";
-import { ScribeTranscriberErrorPayload } from "../../../types/ScribeTranscriberErrorPayload";
-import { ScribeUnacceptedTermsErrorPayload } from "../../../types/ScribeUnacceptedTermsErrorPayload";
-import { SessionStartedPayload } from "../../../types/SessionStartedPayload";
+import { CommittedTranscript } from "../../../types/CommittedTranscript";
+import { CommittedTranscriptEntities } from "../../../types/CommittedTranscriptEntities";
+import { CommittedTranscriptWithTimestamps } from "../../../types/CommittedTranscriptWithTimestamps";
+import { FinalTranscript } from "../../../types/FinalTranscript";
+import { FinalTranscriptWithTimestamps } from "../../../types/FinalTranscriptWithTimestamps";
+import { PartialTranscript } from "../../../types/PartialTranscript";
+import { ScribeAuthError } from "../../../types/ScribeAuthError";
+import { ScribeChunkSizeExceededError } from "../../../types/ScribeChunkSizeExceededError";
+import { ScribeError } from "../../../types/ScribeError";
+import { ScribeInputError } from "../../../types/ScribeInputError";
+import { ScribeInsufficientAudioActivityError } from "../../../types/ScribeInsufficientAudioActivityError";
+import { ScribeQueueOverflowError } from "../../../types/ScribeQueueOverflowError";
+import { ScribeQuotaExceededError } from "../../../types/ScribeQuotaExceededError";
+import { ScribeRateLimitedError } from "../../../types/ScribeRateLimitedError";
+import { ScribeResourceExhaustedError } from "../../../types/ScribeResourceExhaustedError";
+import { ScribeSessionTimeLimitExceededError } from "../../../types/ScribeSessionTimeLimitExceededError";
+import { ScribeThrottledError } from "../../../types/ScribeThrottledError";
+import { ScribeTranscriberError } from "../../../types/ScribeTranscriberError";
+import { ScribeUnacceptedTermsError } from "../../../types/ScribeUnacceptedTermsError";
+import { SessionStarted } from "../../../types/SessionStarted";
 
 export const ReceiveTranscription: core.serialization.Schema<
     serializers.ReceiveTranscription.Raw,
     ElevenLabs.ReceiveTranscription
 > = core.serialization.undiscriminatedUnion([
-    SessionStartedPayload,
-    PartialTranscriptPayload,
-    CommittedTranscriptPayload,
-    CommittedTranscriptWithTimestampsPayload,
-    ScribeErrorPayload,
-    ScribeAuthErrorPayload,
-    ScribeQuotaExceededErrorPayload,
-    ScribeThrottledErrorPayload,
-    ScribeUnacceptedTermsErrorPayload,
-    ScribeRateLimitedErrorPayload,
-    ScribeQueueOverflowErrorPayload,
-    ScribeResourceExhaustedErrorPayload,
-    ScribeSessionTimeLimitExceededErrorPayload,
-    ScribeInputErrorPayload,
-    ScribeChunkSizeExceededErrorPayload,
-    ScribeInsufficientAudioActivityErrorPayload,
-    ScribeTranscriberErrorPayload,
+    SessionStarted,
+    PartialTranscript,
+    FinalTranscript,
+    FinalTranscriptWithTimestamps,
+    CommittedTranscript,
+    CommittedTranscriptWithTimestamps,
+    CommittedTranscriptEntities,
+    ScribeError,
+    ScribeAuthError,
+    ScribeQuotaExceededError,
+    ScribeThrottledError,
+    ScribeUnacceptedTermsError,
+    ScribeRateLimitedError,
+    ScribeQueueOverflowError,
+    ScribeResourceExhaustedError,
+    ScribeSessionTimeLimitExceededError,
+    ScribeInputError,
+    ScribeChunkSizeExceededError,
+    ScribeInsufficientAudioActivityError,
+    ScribeTranscriberError,
 ]);
 
 export declare namespace ReceiveTranscription {
     export type Raw =
-        | SessionStartedPayload.Raw
-        | PartialTranscriptPayload.Raw
-        | CommittedTranscriptPayload.Raw
-        | CommittedTranscriptWithTimestampsPayload.Raw
-        | ScribeErrorPayload.Raw
-        | ScribeAuthErrorPayload.Raw
-        | ScribeQuotaExceededErrorPayload.Raw
-        | ScribeThrottledErrorPayload.Raw
-        | ScribeUnacceptedTermsErrorPayload.Raw
-        | ScribeRateLimitedErrorPayload.Raw
-        | ScribeQueueOverflowErrorPayload.Raw
-        | ScribeResourceExhaustedErrorPayload.Raw
-        | ScribeSessionTimeLimitExceededErrorPayload.Raw
-        | ScribeInputErrorPayload.Raw
-        | ScribeChunkSizeExceededErrorPayload.Raw
-        | ScribeInsufficientAudioActivityErrorPayload.Raw
-        | ScribeTranscriberErrorPayload.Raw;
+        | SessionStarted.Raw
+        | PartialTranscript.Raw
+        | FinalTranscript.Raw
+        | FinalTranscriptWithTimestamps.Raw
+        | CommittedTranscript.Raw
+        | CommittedTranscriptWithTimestamps.Raw
+        | CommittedTranscriptEntities.Raw
+        | ScribeError.Raw
+        | ScribeAuthError.Raw
+        | ScribeQuotaExceededError.Raw
+        | ScribeThrottledError.Raw
+        | ScribeUnacceptedTermsError.Raw
+        | ScribeRateLimitedError.Raw
+        | ScribeQueueOverflowError.Raw
+        | ScribeResourceExhaustedError.Raw
+        | ScribeSessionTimeLimitExceededError.Raw
+        | ScribeInputError.Raw
+        | ScribeChunkSizeExceededError.Raw
+        | ScribeInsufficientAudioActivityError.Raw
+        | ScribeTranscriberError.Raw;
 }

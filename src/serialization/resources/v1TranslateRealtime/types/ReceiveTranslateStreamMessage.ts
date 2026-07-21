@@ -3,34 +3,34 @@
 import type * as ElevenLabs from "../../../../api/index";
 import * as core from "../../../../core";
 import type * as serializers from "../../../index";
-import { TranslateAudioPayload } from "../../../types/TranslateAudioPayload";
-import { TranslateErrorPayload } from "../../../types/TranslateErrorPayload";
-import { TranslateFinalTranscriptPayload } from "../../../types/TranslateFinalTranscriptPayload";
-import { TranslatePartialTranscriptPayload } from "../../../types/TranslatePartialTranscriptPayload";
-import { TranslateSessionStartedPayload } from "../../../types/TranslateSessionStartedPayload";
-import { TranslateStatusPayload } from "../../../types/TranslateStatusPayload";
-import { TranslateTranslationPayload } from "../../../types/TranslateTranslationPayload";
+import { TranslateAudio } from "../../../types/TranslateAudio";
+import { TranslateError } from "../../../types/TranslateError";
+import { TranslateFinalTranscript } from "../../../types/TranslateFinalTranscript";
+import { TranslatePartialTranscript } from "../../../types/TranslatePartialTranscript";
+import { TranslateSessionStarted } from "../../../types/TranslateSessionStarted";
+import { TranslateStatus } from "../../../types/TranslateStatus";
+import { TranslateTranslation } from "../../../types/TranslateTranslation";
 
 export const ReceiveTranslateStreamMessage: core.serialization.Schema<
     serializers.ReceiveTranslateStreamMessage.Raw,
     ElevenLabs.ReceiveTranslateStreamMessage
 > = core.serialization.undiscriminatedUnion([
-    TranslateSessionStartedPayload,
-    TranslateStatusPayload,
-    TranslatePartialTranscriptPayload,
-    TranslateFinalTranscriptPayload,
-    TranslateTranslationPayload,
-    TranslateAudioPayload,
-    TranslateErrorPayload,
+    TranslateSessionStarted,
+    TranslateStatus,
+    TranslatePartialTranscript,
+    TranslateFinalTranscript,
+    TranslateTranslation,
+    TranslateAudio,
+    TranslateError,
 ]);
 
 export declare namespace ReceiveTranslateStreamMessage {
     export type Raw =
-        | TranslateSessionStartedPayload.Raw
-        | TranslateStatusPayload.Raw
-        | TranslatePartialTranscriptPayload.Raw
-        | TranslateFinalTranscriptPayload.Raw
-        | TranslateTranslationPayload.Raw
-        | TranslateAudioPayload.Raw
-        | TranslateErrorPayload.Raw;
+        | TranslateSessionStarted.Raw
+        | TranslateStatus.Raw
+        | TranslatePartialTranscript.Raw
+        | TranslateFinalTranscript.Raw
+        | TranslateTranslation.Raw
+        | TranslateAudio.Raw
+        | TranslateError.Raw;
 }

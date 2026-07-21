@@ -2,14 +2,10 @@
 
 import type * as ElevenLabs from "../index";
 
-/**
- * Server payload containing an audio chunk for a specific context.
- */
 export interface AudioOutputMulti {
-    /** Base64 encoded audio chunk. */
     audio: string;
-    normalizedAlignment?: ElevenLabs.NormalizedAlignment;
-    alignment?: ElevenLabs.Alignment;
-    /** The contextId for which this audio is. */
+    isFinal?: boolean;
+    normalizedAlignment?: ElevenLabs.AudioOutputMultiNormalizedAlignment;
+    alignment?: ElevenLabs.AudioOutputMultiAlignment;
     contextId?: string;
 }

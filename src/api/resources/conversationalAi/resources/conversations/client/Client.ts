@@ -431,6 +431,90 @@ export class ConversationsClient {
     }
 
     /**
+     * Resolve a conversation URL (a Slack message URL or a Zendesk ticket URL) to the deterministic conversation ID for the given agent, then confirm the conversation exists.
+     *
+     * @param {ElevenLabs.conversationalAi.ConversationsResolveRequest} request
+     * @param {ConversationsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.conversationalAi.conversations.resolve({
+     *         agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
+     *         reference: "https://your-domain.zendesk.com/agent/tickets/12345"
+     *     })
+     */
+    public resolve(
+        request: ElevenLabs.conversationalAi.ConversationsResolveRequest,
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetConversationResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__resolve(request, requestOptions));
+    }
+
+    private async __resolve(
+        request: ElevenLabs.conversationalAi.ConversationsResolveRequest,
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetConversationResponseModel>> {
+        const { agentId, reference } = request;
+        const _queryParams: Record<string, unknown> = {
+            agent_id: agentId,
+            reference,
+        };
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/conversations/resolve",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetConversationResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/conversations/resolve",
+        );
+    }
+
+    /**
      * Get the details of a particular conversation
      *
      * @param {string} conversation_id - The id of the conversation you're taking the action on.
@@ -440,7 +524,9 @@ export class ConversationsClient {
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      *
      * @example
-     *     await client.conversationalAi.conversations.get("123")
+     *     await client.conversationalAi.conversations.get("21m00Tcm4TlvDq8ikWAM", {
+     *         format: "json"
+     *     })
      */
     public get(
         conversation_id: string,

@@ -12,7 +12,7 @@
 <dl>
 <dd>
 
-Returns a list of your generated audio.
+Returns a list of your generated audio (e.g. text to speech, speech to speech, Studio, dubbing). Music and SFX generations are not included and cannot currently be retrieved via the API.
 </dd>
 </dl>
 </dd>
@@ -1876,6 +1876,79 @@ await client.voices.delete("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">update</a>(voice_id, { ...params }) -> ElevenLabs.EditVoiceResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Edit a voice created by you.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.update("21m00Tcm4TlvDq8ikWAM", {
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voice_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.GetVoicesV2Response</code></summary>
 <dl>
 <dd>
@@ -1932,79 +2005,6 @@ await client.voices.search({
 <dd>
 
 **request:** `ElevenLabs.VoicesSearchRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `VoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">update</a>(voice_id, { ...params }) -> ElevenLabs.EditVoiceResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Edit a voice created by you.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.update("21m00Tcm4TlvDq8ikWAM", {
-    name: "name"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**voice_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost` 
     
 </dd>
 </dl>
@@ -3681,7 +3681,8 @@ await client.pronunciationDictionaries.list({
     cursor: "cursor",
     pageSize: 1,
     sort: "creation_time_unix",
-    sortDirection: "sort_direction"
+    sortDirection: "sort_direction",
+    includeArchived: false
 });
 
 ```
@@ -4204,6 +4205,7 @@ Transcribe an audio or video file. If webhook is set to true, the request will b
 
 ```typescript
 await client.speechToText.convert({
+    token: "token",
     enableLogging: true,
     modelId: "scribe_v2"
 });
@@ -5403,6 +5405,72 @@ await client.conversationalAi.conversations.list({
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">resolve</a>({ ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Resolve a conversation URL (a Slack message URL or a Zendesk ticket URL) to the deterministic conversation ID for the given agent, then confirm the conversation exists.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.resolve({
+    agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
+    reference: "https://your-domain.zendesk.com/agent/tickets/12345"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.ConversationsResolveRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">get</a>(conversation_id, { ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
 <dl>
 <dd>
@@ -5430,7 +5498,9 @@ Get the details of a particular conversation
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.get("123");
+await client.conversationalAi.conversations.get("21m00Tcm4TlvDq8ikWAM", {
+    format: "json"
+});
 
 ```
 </dd>

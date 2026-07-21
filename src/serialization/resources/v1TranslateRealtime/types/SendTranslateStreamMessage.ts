@@ -3,14 +3,14 @@
 import type * as ElevenLabs from "../../../../api/index";
 import * as core from "../../../../core";
 import type * as serializers from "../../../index";
-import { TranslateEndOfStreamPayload } from "../../../types/TranslateEndOfStreamPayload";
-import { TranslateInputAudioChunkPayload } from "../../../types/TranslateInputAudioChunkPayload";
+import { TranslateEndOfStream } from "../../../types/TranslateEndOfStream";
+import { TranslateInputAudioChunk } from "../../../types/TranslateInputAudioChunk";
 
 export const SendTranslateStreamMessage: core.serialization.Schema<
     serializers.SendTranslateStreamMessage.Raw,
     ElevenLabs.SendTranslateStreamMessage
-> = core.serialization.undiscriminatedUnion([TranslateInputAudioChunkPayload, TranslateEndOfStreamPayload]);
+> = core.serialization.undiscriminatedUnion([TranslateInputAudioChunk, TranslateEndOfStream]);
 
 export declare namespace SendTranslateStreamMessage {
-    export type Raw = TranslateInputAudioChunkPayload.Raw | TranslateEndOfStreamPayload.Raw;
+    export type Raw = TranslateInputAudioChunk.Raw | TranslateEndOfStream.Raw;
 }

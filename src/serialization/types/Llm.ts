@@ -37,7 +37,9 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gemini-3.5-flash",
     "claude-sonnet-4-5",
     "claude-opus-4-7",
+    "claude-opus-4-8",
     "claude-sonnet-4-6",
+    "claude-sonnet-5",
     "claude-sonnet-4",
     "claude-haiku-4-5",
     "claude-3-7-sonnet",
@@ -130,7 +132,9 @@ export declare namespace Llm {
         | "gemini-3.5-flash"
         | "claude-sonnet-4-5"
         | "claude-opus-4-7"
+        | "claude-opus-4-8"
         | "claude-sonnet-4-6"
+        | "claude-sonnet-5"
         | "claude-sonnet-4"
         | "claude-haiku-4-5"
         | "claude-3-7-sonnet"

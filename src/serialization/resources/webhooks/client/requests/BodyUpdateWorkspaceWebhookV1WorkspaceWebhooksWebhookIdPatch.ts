@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
+import { WorkspaceWebhookEventType } from "../../../../types/WorkspaceWebhookEventType";
 
 export const BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch: core.serialization.Schema<
     serializers.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch.Raw,
@@ -15,6 +16,7 @@ export const BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch: core.s
         "request_headers",
         core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
     ),
+    events: core.serialization.list(WorkspaceWebhookEventType).optional(),
 });
 
 export declare namespace BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch {
@@ -23,5 +25,6 @@ export declare namespace BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdP
         name: string;
         retry_enabled?: boolean | null;
         request_headers?: Record<string, string | null | undefined> | null;
+        events?: WorkspaceWebhookEventType.Raw[] | null;
     }
 }

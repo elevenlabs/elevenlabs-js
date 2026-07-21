@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ContentFormat } from "./ContentFormat";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
 import { KnowledgeBaseFolderPathSegmentResponseModel } from "./KnowledgeBaseFolderPathSegmentResponseModel";
@@ -23,6 +24,7 @@ export const GetKnowledgeBaseTextResponseModel: core.serialization.ObjectSchema<
         core.serialization.list(KnowledgeBaseFolderPathSegmentResponseModel).optional(),
     ),
     extractedInnerHtml: core.serialization.property("extracted_inner_html", core.serialization.string()),
+    contentFormat: core.serialization.property("content_format", ContentFormat.optional()),
 });
 
 export declare namespace GetKnowledgeBaseTextResponseModel {
@@ -35,5 +37,6 @@ export declare namespace GetKnowledgeBaseTextResponseModel {
         folder_parent_id?: string | null;
         folder_path?: KnowledgeBaseFolderPathSegmentResponseModel.Raw[] | null;
         extracted_inner_html: string;
+        content_format?: ContentFormat.Raw | null;
     }
 }

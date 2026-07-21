@@ -3,13 +3,13 @@
 import type * as ElevenLabs from "../../../index";
 
 /**
- * Receive translation results from the WebSocket
+ * Defines the message types that can be received by the client from the server
  */
 export type ReceiveTranslateStreamMessage =
-    | ElevenLabs.TranslateSessionStartedPayload
-    | ElevenLabs.TranslateStatusPayload
-    | ElevenLabs.TranslatePartialTranscriptPayload
-    | ElevenLabs.TranslateFinalTranscriptPayload
-    | ElevenLabs.TranslateTranslationPayload
-    | ElevenLabs.TranslateAudioPayload
-    | ElevenLabs.TranslateErrorPayload;
+    | ElevenLabs.TranslateSessionStarted
+    | ElevenLabs.TranslateStatus
+    | ElevenLabs.TranslatePartialTranscript
+    | ElevenLabs.TranslateFinalTranscript
+    | ElevenLabs.TranslateTranslation
+    | ElevenLabs.TranslateAudio
+    | ElevenLabs.TranslateError;

@@ -3,10 +3,10 @@
 import type * as ElevenLabs from "../../../index";
 
 /**
- * Receive JSON audio chunks, per-context final markers, or an error payload from the multi-context Text to Dialogue WebSocket.
+ * Defines the message types that can be received by the client from the server
  */
 export type ReceiveTextToDialogueWebsocketMessageMulti =
-    | ElevenLabs.TextToDialogueWebsocketAudioChunkMulti
-    | ElevenLabs.TextToDialogueWebsocketFinalAudioForTurnMulti
-    | ElevenLabs.TextToDialogueWebsocketFinalMulti
-    | ElevenLabs.TextToDialogueWebsocketError;
+    | ElevenLabs.AudioChunkMulti
+    | ElevenLabs.FinalAudioForTurnMulti
+    | ElevenLabs.FinalMulti
+    | ElevenLabs.Error_;

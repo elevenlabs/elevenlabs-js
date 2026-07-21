@@ -8,13 +8,13 @@ export const FinalOutputMulti: core.serialization.ObjectSchema<
     serializers.FinalOutputMulti.Raw,
     ElevenLabs.FinalOutputMulti
 > = core.serialization.object({
-    isFinal: core.serialization.booleanLiteral(true),
-    contextId: core.serialization.string().optional(),
+    isFinal: core.serialization.property("is_final", core.serialization.booleanLiteral(true).optional()),
+    contextId: core.serialization.property("context_id", core.serialization.string().optional()),
 });
 
 export declare namespace FinalOutputMulti {
     export interface Raw {
-        isFinal: true;
-        contextId?: string | null;
+        is_final?: true | null;
+        context_id?: string | null;
     }
 }

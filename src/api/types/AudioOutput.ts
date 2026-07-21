@@ -3,11 +3,8 @@
 import type * as ElevenLabs from "../index";
 
 export interface AudioOutput {
-    /**
-     * A generated partial audio chunk, encoded using the selected output_format, by default this
-     * is MP3 encoded as a base64 string.
-     */
     audio: string;
-    normalizedAlignment?: ElevenLabs.NormalizedAlignment;
-    alignment?: ElevenLabs.Alignment;
+    isFinal?: boolean;
+    normalizedAlignment?: ElevenLabs.AudioOutputNormalizedAlignment;
+    alignment?: ElevenLabs.AudioOutputAlignment;
 }

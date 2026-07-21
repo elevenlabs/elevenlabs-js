@@ -3,30 +3,32 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
-import { ArrayJsonSchemaPropertyInputConstantValueItem } from "./ArrayJsonSchemaPropertyInputConstantValueItem";
+import { ArrayJsonSchemaPropertyInputPropertyKind } from "./ArrayJsonSchemaPropertyInputPropertyKind";
 
 export const ArrayJsonSchemaPropertyInput: core.serialization.ObjectSchema<
     serializers.ArrayJsonSchemaPropertyInput.Raw,
     ElevenLabs.ArrayJsonSchemaPropertyInput
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("array").optional(),
+    propertyKind: core.serialization.property("property_kind", ArrayJsonSchemaPropertyInputPropertyKind.optional()),
     description: core.serialization.string().optional(),
-    items: core.serialization.lazy(() => serializers.ArrayJsonSchemaPropertyInputItems).optional(),
     dynamicVariable: core.serialization.property("dynamic_variable", core.serialization.string().optional()),
     constantValue: core.serialization.property(
         "constant_value",
-        core.serialization.list(ArrayJsonSchemaPropertyInputConstantValueItem).optional(),
+        core.serialization.list(core.serialization.unknown()).optional(),
     ),
     isOmitted: core.serialization.property("is_omitted", core.serialization.boolean().optional()),
+    type: core.serialization.stringLiteral("array").optional(),
+    items: core.serialization.lazy(() => serializers.ArrayJsonSchemaPropertyInputItems).optional(),
 });
 
 export declare namespace ArrayJsonSchemaPropertyInput {
     export interface Raw {
-        type?: "array" | null;
+        property_kind?: ArrayJsonSchemaPropertyInputPropertyKind.Raw | null;
         description?: string | null;
-        items?: serializers.ArrayJsonSchemaPropertyInputItems.Raw | null;
         dynamic_variable?: string | null;
-        constant_value?: ArrayJsonSchemaPropertyInputConstantValueItem.Raw[] | null;
+        constant_value?: unknown[] | null;
         is_omitted?: boolean | null;
+        type?: "array" | null;
+        items?: serializers.ArrayJsonSchemaPropertyInputItems.Raw | null;
     }
 }

@@ -84,7 +84,13 @@ describe("AgentsClient", () => {
                         overrides: {
                             asr: { keywords: ["hello", "world"] },
                             turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
-                            tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
+                            tts: {
+                                model_id: "eleven_turbo_v2",
+                                voice_id: "cjVigY5qzO86Huf0OWal",
+                                stability: 0.5,
+                                speed: 1,
+                                similarity_boost: 0.8,
+                            },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -352,6 +358,7 @@ describe("AgentsClient", () => {
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
                     enable_audio_message_response: true,
+                    enable_typing_indicator: true,
                     assigned_agent_name: "assigned_agent_name",
                     is_token_expired: true,
                 },
@@ -1210,6 +1217,7 @@ describe("AgentsClient", () => {
                                 },
                             },
                             tts: {
+                                modelId: "eleven_turbo_v2",
                                 voiceId: "cjVigY5qzO86Huf0OWal",
                                 stability: 0.5,
                                 speed: 1,
@@ -1553,6 +1561,7 @@ describe("AgentsClient", () => {
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
                     enableAudioMessageResponse: true,
+                    enableTypingIndicator: true,
                     assignedAgentName: "assigned_agent_name",
                     isTokenExpired: true,
                 },
@@ -2567,7 +2576,13 @@ describe("AgentsClient", () => {
                         overrides: {
                             asr: { keywords: ["hello", "world"] },
                             turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
-                            tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
+                            tts: {
+                                model_id: "eleven_turbo_v2",
+                                voice_id: "cjVigY5qzO86Huf0OWal",
+                                stability: 0.5,
+                                speed: 1,
+                                similarity_boost: 0.8,
+                            },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -2835,6 +2850,7 @@ describe("AgentsClient", () => {
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
                     enable_audio_message_response: true,
+                    enable_typing_indicator: true,
                     assigned_agent_name: "assigned_agent_name",
                     is_token_expired: true,
                 },
@@ -3694,6 +3710,7 @@ describe("AgentsClient", () => {
                                 },
                             },
                             tts: {
+                                modelId: "eleven_turbo_v2",
                                 voiceId: "cjVigY5qzO86Huf0OWal",
                                 stability: 0.5,
                                 speed: 1,
@@ -4037,6 +4054,7 @@ describe("AgentsClient", () => {
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
                     enableAudioMessageResponse: true,
+                    enableTypingIndicator: true,
                     assignedAgentName: "assigned_agent_name",
                     isTokenExpired: true,
                 },

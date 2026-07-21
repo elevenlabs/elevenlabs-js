@@ -3,8 +3,8 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { GenerationConfig } from "./GenerationConfig";
-import { RealtimeVoiceSettings } from "./RealtimeVoiceSettings";
+import { SendTextGenerationConfig } from "./SendTextGenerationConfig";
+import { SendTextVoiceSettings } from "./SendTextVoiceSettings";
 
 export const SendText: core.serialization.ObjectSchema<serializers.SendText.Raw, ElevenLabs.SendText> =
     core.serialization.object({
@@ -13,8 +13,8 @@ export const SendText: core.serialization.ObjectSchema<serializers.SendText.Raw,
             "try_trigger_generation",
             core.serialization.boolean().optional(),
         ),
-        voiceSettings: core.serialization.property("voice_settings", RealtimeVoiceSettings.optional()),
-        generatorConfig: core.serialization.property("generator_config", GenerationConfig.optional()),
+        voiceSettings: core.serialization.property("voice_settings", SendTextVoiceSettings.optional()),
+        generationConfig: core.serialization.property("generation_config", SendTextGenerationConfig.optional()),
         flush: core.serialization.boolean().optional(),
     });
 
@@ -22,8 +22,8 @@ export declare namespace SendText {
     export interface Raw {
         text: string;
         try_trigger_generation?: boolean | null;
-        voice_settings?: RealtimeVoiceSettings.Raw | null;
-        generator_config?: GenerationConfig.Raw | null;
+        voice_settings?: SendTextVoiceSettings.Raw | null;
+        generation_config?: SendTextGenerationConfig.Raw | null;
         flush?: boolean | null;
     }
 }
