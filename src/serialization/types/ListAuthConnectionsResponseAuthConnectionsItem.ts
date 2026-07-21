@@ -12,6 +12,7 @@ import { MtlsAuthResponse } from "./MtlsAuthResponse";
 import { OAuth2ClientCredsResponse } from "./OAuth2ClientCredsResponse";
 import { OAuth2JwtResponse } from "./OAuth2JwtResponse";
 import { PrivateKeyJwtResponse } from "./PrivateKeyJwtResponse";
+import { RefreshTokenAuthResponse } from "./RefreshTokenAuthResponse";
 import { SlackBotAuthResponse } from "./SlackBotAuthResponse";
 import { UrlSecretAuthResponse } from "./UrlSecretAuthResponse";
 import { WhatsAppAuthResponse } from "./WhatsAppAuthResponse";
@@ -30,6 +31,7 @@ export const ListAuthConnectionsResponseAuthConnectionsItem: core.serialization.
         oauth2_client_credentials: OAuth2ClientCredsResponse,
         oauth2_jwt: OAuth2JwtResponse,
         private_key_jwt: PrivateKeyJwtResponse,
+        refresh_token_auth: RefreshTokenAuthResponse,
         slack_bot_auth: SlackBotAuthResponse,
         url_secret: UrlSecretAuthResponse,
         whatsapp_auth: WhatsAppAuthResponse,
@@ -50,6 +52,7 @@ export declare namespace ListAuthConnectionsResponseAuthConnectionsItem {
         | ListAuthConnectionsResponseAuthConnectionsItem.Oauth2ClientCredentials
         | ListAuthConnectionsResponseAuthConnectionsItem.Oauth2Jwt
         | ListAuthConnectionsResponseAuthConnectionsItem.PrivateKeyJwt
+        | ListAuthConnectionsResponseAuthConnectionsItem.RefreshTokenAuth
         | ListAuthConnectionsResponseAuthConnectionsItem.SlackBotAuth
         | ListAuthConnectionsResponseAuthConnectionsItem.UrlSecret
         | ListAuthConnectionsResponseAuthConnectionsItem.WhatsappAuth;
@@ -88,6 +91,10 @@ export declare namespace ListAuthConnectionsResponseAuthConnectionsItem {
 
     export interface PrivateKeyJwt extends PrivateKeyJwtResponse.Raw {
         auth_type: "private_key_jwt";
+    }
+
+    export interface RefreshTokenAuth extends RefreshTokenAuthResponse.Raw {
+        auth_type: "refresh_token_auth";
     }
 
     export interface SlackBotAuth extends SlackBotAuthResponse.Raw {

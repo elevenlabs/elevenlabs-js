@@ -3,6 +3,6 @@
 import type * as ElevenLabs from "../../../index";
 
 /**
- * Receive messages from the WebSocket
+ * Defines the message types that can be received by the client from the server
  */
 export type ReceiveMessage = ElevenLabs.AudioOutput | ElevenLabs.FinalOutput;

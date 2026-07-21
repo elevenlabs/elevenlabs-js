@@ -9,10 +9,15 @@ export const TelephonyCallConfig: core.serialization.ObjectSchema<
     ElevenLabs.TelephonyCallConfig
 > = core.serialization.object({
     ringingTimeoutSecs: core.serialization.property("ringing_timeout_secs", core.serialization.number().optional()),
+    twilioCallRecordingEnabled: core.serialization.property(
+        "twilio_call_recording_enabled",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace TelephonyCallConfig {
     export interface Raw {
         ringing_timeout_secs?: number | null;
+        twilio_call_recording_enabled?: boolean | null;
     }
 }

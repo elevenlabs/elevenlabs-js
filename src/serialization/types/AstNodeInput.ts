@@ -5,7 +5,7 @@ import * as core from "../../core";
 import * as serializers from "../index";
 import { AstBooleanNodeInput } from "./AstBooleanNodeInput";
 import { AstDynamicVariableNodeInput } from "./AstDynamicVariableNodeInput";
-import { AstllmNodeInput } from "./AstllmNodeInput";
+import { AstNodeInputLlm } from "./AstNodeInputLlm";
 import { AstNullNodeInput } from "./AstNullNodeInput";
 import { AstNumberNodeInput } from "./AstNumberNodeInput";
 import { AstStringNodeInput } from "./AstStringNodeInput";
@@ -22,9 +22,7 @@ export const AstNodeInput: core.serialization.Schema<serializers.AstNodeInput.Ra
             eq_operator: core.serialization.lazyObject(() => serializers.AstEqualsOperatorNodeInput),
             gt_operator: core.serialization.lazyObject(() => serializers.AstGreaterThanOperatorNodeInput),
             gte_operator: core.serialization.lazyObject(() => serializers.AstGreaterThanOrEqualsOperatorNodeInput),
-            llm: core.serialization.object({
-                value: AstllmNodeInput,
-            }),
+            llm: AstNodeInputLlm,
             lt_operator: core.serialization.lazyObject(() => serializers.AstLessThanOperatorNodeInput),
             lte_operator: core.serialization.lazyObject(() => serializers.AstLessThanOrEqualsOperatorNodeInput),
             mul_operator: core.serialization.lazyObject(() => serializers.AstMultiplicationOperatorNodeInput),
@@ -98,9 +96,8 @@ export declare namespace AstNodeInput {
         type: "gte_operator";
     }
 
-    export interface Llm {
+    export interface Llm extends AstNodeInputLlm.Raw {
         type: "llm";
-        value: AstllmNodeInput.Raw;
     }
 
     export interface LtOperator extends serializers.AstLessThanOperatorNodeInput.Raw {

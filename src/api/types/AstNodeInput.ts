@@ -60,9 +60,8 @@ export namespace AstNodeInput {
         type: "gte_operator";
     }
 
-    export interface Llm {
+    export interface Llm extends ElevenLabs.AstNodeInputLlm {
         type: "llm";
-        value: ElevenLabs.AstllmNodeInput;
     }
 
     export interface LtOperator extends ElevenLabs.AstLessThanOperatorNodeInput {

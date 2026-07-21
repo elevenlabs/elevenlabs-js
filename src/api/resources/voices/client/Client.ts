@@ -5,6 +5,7 @@ import { type NormalizedClientOptions, normalizeClientOptions } from "../../../.
 import * as core from "../../../../core";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers";
 import { toJson } from "../../../../core/json";
+import { mergeAdditionalBodyParameters } from "../../../../core/requestBody";
 import * as environments from "../../../../environments";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError";
 import * as errors from "../../../../errors/index";
@@ -57,6 +58,8 @@ export class VoicesClient {
      * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.voices.getAll({
@@ -92,7 +95,11 @@ export class VoicesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -135,6 +142,8 @@ export class VoicesClient {
      * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
@@ -172,7 +181,11 @@ export class VoicesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -214,6 +227,8 @@ export class VoicesClient {
      * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.voices.delete("21m00Tcm4TlvDq8ikWAM")
@@ -243,7 +258,7 @@ export class VoicesClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -279,115 +294,6 @@ export class VoicesClient {
     }
 
     /**
-     * Gets a list of all available voices for a user with search, filtering and pagination.
-     *
-     * @param {ElevenLabs.VoicesSearchRequest} request
-     * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.voices.search({
-     *         nextPageToken: "next_page_token",
-     *         pageSize: 1,
-     *         search: "search",
-     *         sort: "sort",
-     *         sortDirection: "sort_direction",
-     *         voiceType: "voice_type",
-     *         category: "category",
-     *         fineTuningState: "fine_tuning_state",
-     *         collectionId: "collection_id",
-     *         includeTotalCount: true,
-     *         voiceIds: ["voice_ids"]
-     *     })
-     */
-    public search(
-        request: ElevenLabs.VoicesSearchRequest = {},
-        requestOptions?: VoicesClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.GetVoicesV2Response> {
-        return core.HttpResponsePromise.fromPromise(this.__search(request, requestOptions));
-    }
-
-    private async __search(
-        request: ElevenLabs.VoicesSearchRequest = {},
-        requestOptions?: VoicesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.GetVoicesV2Response>> {
-        const {
-            nextPageToken,
-            pageSize,
-            search,
-            sort,
-            sortDirection,
-            voiceType,
-            category,
-            fineTuningState,
-            collectionId,
-            includeTotalCount,
-            voiceIds,
-        } = request;
-        const _queryParams: Record<string, unknown> = {
-            next_page_token: nextPageToken,
-            page_size: pageSize,
-            search,
-            sort,
-            sort_direction: sortDirection,
-            voice_type: voiceType,
-            category,
-            fine_tuning_state: fineTuningState,
-            collection_id: collectionId,
-            include_total_count: includeTotalCount,
-            voice_ids: voiceIds,
-        };
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
-            requestOptions?.headers,
-        );
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                "v2/voices",
-            ),
-            method: "GET",
-            headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: serializers.GetVoicesV2Response.parseOrThrow(_response.body, {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    breadcrumbsPrefix: ["response"],
-                }),
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v2/voices");
-    }
-
-    /**
      * Edit a voice created by you.
      *
      * @param {string} voice_id
@@ -395,6 +301,8 @@ export class VoicesClient {
      * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     import { createReadStream } from "fs";
@@ -465,7 +373,7 @@ export class VoicesClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -504,6 +412,121 @@ export class VoicesClient {
     }
 
     /**
+     * Gets a list of all available voices for a user with search, filtering and pagination.
+     *
+     * @param {ElevenLabs.VoicesSearchRequest} request
+     * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.voices.search({
+     *         nextPageToken: "next_page_token",
+     *         pageSize: 1,
+     *         search: "search",
+     *         sort: "sort",
+     *         sortDirection: "sort_direction",
+     *         voiceType: "voice_type",
+     *         category: "category",
+     *         fineTuningState: "fine_tuning_state",
+     *         collectionId: "collection_id",
+     *         includeTotalCount: true,
+     *         voiceIds: ["voice_ids"]
+     *     })
+     */
+    public search(
+        request: ElevenLabs.VoicesSearchRequest = {},
+        requestOptions?: VoicesClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetVoicesV2Response> {
+        return core.HttpResponsePromise.fromPromise(this.__search(request, requestOptions));
+    }
+
+    private async __search(
+        request: ElevenLabs.VoicesSearchRequest = {},
+        requestOptions?: VoicesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetVoicesV2Response>> {
+        const {
+            nextPageToken,
+            pageSize,
+            search,
+            sort,
+            sortDirection,
+            voiceType,
+            category,
+            fineTuningState,
+            collectionId,
+            includeTotalCount,
+            voiceIds,
+        } = request;
+        const _queryParams: Record<string, unknown> = {
+            next_page_token: nextPageToken,
+            page_size: pageSize,
+            search,
+            sort,
+            sort_direction: sortDirection,
+            voice_type: voiceType,
+            category,
+            fine_tuning_state: fineTuningState,
+            collection_id: collectionId,
+            include_total_count: includeTotalCount,
+            voice_ids: voiceIds,
+        };
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v2/voices",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetVoicesV2Response.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v2/voices");
+    }
+
+    /**
      * Add a shared voice to your collection of Voices
      *
      * @param {string} public_user_id - Public user ID used to publicly identify ElevenLabs users.
@@ -512,6 +535,8 @@ export class VoicesClient {
      * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.voices.share("63e06b7e7cafdc46be4d2e0b3f045940231ae058d508589653d74d1265a574ca", "21m00Tcm4TlvDq8ikWAM", {
@@ -548,11 +573,14 @@ export class VoicesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: serializers.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            body: mergeAdditionalBodyParameters(
+                serializers.BodyAddSharedVoiceV1VoicesAddPublicUserIdVoiceIdPost.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -599,6 +627,8 @@ export class VoicesClient {
      * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.voices.getShared({
@@ -695,7 +725,11 @@ export class VoicesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -737,6 +771,8 @@ export class VoicesClient {
      * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     import { createReadStream } from "fs";
@@ -784,7 +820,7 @@ export class VoicesClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

@@ -13,6 +13,7 @@ export interface GetKnowledgeBaseFileResponseModel {
     /** The folder path segments leading to this entity, from root to parent folder. */
     folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentResponseModel[];
     extractedInnerHtml: string;
+    contentFormat?: ElevenLabs.ContentFormat;
     filename: string;
     externalSyncInfo?: ElevenLabs.ExternalFileSyncInfo;
     isFrozen?: boolean;

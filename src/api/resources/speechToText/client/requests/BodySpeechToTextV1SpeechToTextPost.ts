@@ -6,11 +6,14 @@ import type * as ElevenLabs from "../../../../index";
 /**
  * @example
  *     {
+ *         token: "token",
  *         enableLogging: true,
  *         modelId: "scribe_v2"
  *     }
  */
 export interface BodySpeechToTextV1SpeechToTextPost {
+    /** A single-use authentication token created via POST /v1/single-use-token/batch_scribe. This token can only be used once and expires after 15 minutes. Alternative to API key or bearer token authentication for frontend clients. */
+    token?: string;
     /** When enable_logging is set to false zero retention mode will be used for the request. This will mean log and transcript storage features are unavailable for this request. Zero retention mode may only be used by enterprise customers. */
     enableLogging?: boolean;
     /** The ID of the model to use for transcription. */

@@ -28,8 +28,6 @@ export interface SpeechHistoryItemResponse {
     state?: unknown;
     /** The settings of the history item. */
     settings?: Record<string, unknown>;
-    /** Feedback associated with the generated item. Returns null if no feedback has been provided. */
-    feedback?: ElevenLabs.FeedbackItem;
     /** The ID of the share link. */
     shareLinkId?: string;
     /** The source of the history item. Either TTS (text to speech), STS (speech to text), AN (audio native), Projects, Dubbing, PlayAPI, PD (pronunciation dictionary) or ConvAI (Agents Platform). */

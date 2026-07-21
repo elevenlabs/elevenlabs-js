@@ -129,9 +129,12 @@ describe("ToolsClient", () => {
                 tool_call_sound_behavior: "auto",
                 tool_error_handling_mode: "auto",
                 parameters: {
+                    description: "description",
+                    dynamic_variable: "dynamic_variable",
+                    constant_value: { key: "value" },
+                    is_omitted: true,
                     type: "object",
                     required: ["required"],
-                    description: "description",
                     properties: { key: { type: "string", description: "A user-provided message" } },
                 },
                 expects_response: false,
@@ -191,9 +194,14 @@ describe("ToolsClient", () => {
                 toolCallSoundBehavior: "auto",
                 toolErrorHandlingMode: "auto",
                 parameters: {
+                    description: "description",
+                    dynamicVariable: "dynamic_variable",
+                    constantValue: {
+                        key: "value",
+                    },
+                    isOmitted: true,
                     type: "object",
                     required: ["required"],
-                    description: "description",
                     properties: {
                         key: {
                             type: "string",
@@ -263,9 +271,12 @@ describe("ToolsClient", () => {
                 tool_call_sound_behavior: "auto",
                 tool_error_handling_mode: "auto",
                 parameters: {
+                    description: "description",
+                    dynamic_variable: "dynamic_variable",
+                    constant_value: { key: "value" },
+                    is_omitted: true,
                     type: "object",
                     required: ["required"],
-                    description: "description",
                     properties: { key: { type: "string", description: "A user-provided message" } },
                 },
                 expects_response: false,
@@ -319,9 +330,14 @@ describe("ToolsClient", () => {
                 toolCallSoundBehavior: "auto",
                 toolErrorHandlingMode: "auto",
                 parameters: {
+                    description: "description",
+                    dynamicVariable: "dynamic_variable",
+                    constantValue: {
+                        key: "value",
+                    },
+                    isOmitted: true,
                     type: "object",
                     required: ["required"],
-                    description: "description",
                     properties: {
                         key: {
                             type: "string",
@@ -415,9 +431,12 @@ describe("ToolsClient", () => {
                 tool_call_sound_behavior: "auto",
                 tool_error_handling_mode: "auto",
                 parameters: {
+                    description: "description",
+                    dynamic_variable: "dynamic_variable",
+                    constant_value: { key: "value" },
+                    is_omitted: true,
                     type: "object",
                     required: ["required"],
-                    description: "description",
                     properties: { key: { type: "string", description: "A user-provided message" } },
                 },
                 expects_response: false,
@@ -477,9 +496,14 @@ describe("ToolsClient", () => {
                 toolCallSoundBehavior: "auto",
                 toolErrorHandlingMode: "auto",
                 parameters: {
+                    description: "description",
+                    dynamicVariable: "dynamic_variable",
+                    constantValue: {
+                        key: "value",
+                    },
+                    isOmitted: true,
                     type: "object",
                     required: ["required"],
-                    description: "description",
                     properties: {
                         key: {
                             type: "string",

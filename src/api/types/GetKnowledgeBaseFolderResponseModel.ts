@@ -13,6 +13,8 @@ export interface GetKnowledgeBaseFolderResponseModel {
     /** The folder path segments leading to this entity, from root to parent folder. */
     folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentResponseModel[];
     childrenCount: number;
+    /** Number of non-folder documents anywhere in this folder's subtree (recursive). Counting stops past 1000; */
+    documentCount: number;
     autoSyncInfo?: ElevenLabs.AutoSyncInfo;
     externalSyncInfo?: ElevenLabs.ExternalFolderSyncInfo;
     isFrozen?: boolean;

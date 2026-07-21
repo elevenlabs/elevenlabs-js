@@ -17,4 +17,6 @@ export interface CustomGuardrailConfig {
     /** How much recent history the guardrail sees before the reply it evaluates, counted in user messages (the agent replies between them are included too). The guardrail always gets a single <conversation_history> transcript ending in the evaluated reply, marked 'AGENT [current reply]:'. 0 (default) adds no prior history (just that line); 1 adds the latest user message onward. */
     historyMessageCount?: number;
     triggerAction?: ElevenLabs.CustomGuardrailConfigTriggerAction;
+    /** Evaluate once against the complete non-TTS response instead of cumulative partials. Requires blocking mode. */
+    evaluateFullResponseOnly?: boolean;
 }

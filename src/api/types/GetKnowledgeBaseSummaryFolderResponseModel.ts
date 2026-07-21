@@ -15,6 +15,8 @@ export interface GetKnowledgeBaseSummaryFolderResponseModel {
     /** This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead. */
     dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem[];
     childrenCount: number;
+    /** Number of non-folder documents anywhere in this folder's subtree (recursive). Counting stops past 1000; */
+    documentCount: number;
     autoSyncInfo?: ElevenLabs.AutoSyncInfo;
     externalSyncInfo?: ElevenLabs.ExternalFolderSyncInfo;
     isFrozen?: boolean;

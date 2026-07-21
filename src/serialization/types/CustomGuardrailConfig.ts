@@ -18,6 +18,10 @@ export const CustomGuardrailConfig: core.serialization.ObjectSchema<
     model: CustomGuardrailConfigModel.optional(),
     historyMessageCount: core.serialization.property("history_message_count", core.serialization.number().optional()),
     triggerAction: core.serialization.property("trigger_action", CustomGuardrailConfigTriggerAction.optional()),
+    evaluateFullResponseOnly: core.serialization.property(
+        "evaluate_full_response_only",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace CustomGuardrailConfig {
@@ -29,5 +33,6 @@ export declare namespace CustomGuardrailConfig {
         model?: CustomGuardrailConfigModel.Raw | null;
         history_message_count?: number | null;
         trigger_action?: CustomGuardrailConfigTriggerAction.Raw | null;
+        evaluate_full_response_only?: boolean | null;
     }
 }
