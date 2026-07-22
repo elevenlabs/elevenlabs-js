@@ -3,30 +3,29 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
-import { ArrayJsonSchemaPropertyOutputConstantValueItem } from "./ArrayJsonSchemaPropertyOutputConstantValueItem";
 
 export const ArrayJsonSchemaPropertyOutput: core.serialization.ObjectSchema<
     serializers.ArrayJsonSchemaPropertyOutput.Raw,
     ElevenLabs.ArrayJsonSchemaPropertyOutput
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("array").optional(),
     description: core.serialization.string().optional(),
-    items: core.serialization.lazy(() => serializers.ArrayJsonSchemaPropertyOutputItems).optional(),
     dynamicVariable: core.serialization.property("dynamic_variable", core.serialization.string().optional()),
     constantValue: core.serialization.property(
         "constant_value",
-        core.serialization.list(ArrayJsonSchemaPropertyOutputConstantValueItem).optional(),
+        core.serialization.list(core.serialization.unknown()).optional(),
     ),
     isOmitted: core.serialization.property("is_omitted", core.serialization.boolean().optional()),
+    type: core.serialization.stringLiteral("array").optional(),
+    items: core.serialization.lazy(() => serializers.ArrayJsonSchemaPropertyOutputItems).optional(),
 });
 
 export declare namespace ArrayJsonSchemaPropertyOutput {
     export interface Raw {
-        type?: "array" | null;
         description?: string | null;
-        items?: serializers.ArrayJsonSchemaPropertyOutputItems.Raw | null;
         dynamic_variable?: string | null;
-        constant_value?: ArrayJsonSchemaPropertyOutputConstantValueItem.Raw[] | null;
+        constant_value?: unknown[] | null;
         is_omitted?: boolean | null;
+        type?: "array" | null;
+        items?: serializers.ArrayJsonSchemaPropertyOutputItems.Raw | null;
     }
 }

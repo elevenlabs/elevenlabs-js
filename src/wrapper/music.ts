@@ -1,6 +1,7 @@
 import type * as ElevenLabs from "../api";
 import { MusicClient as GeneratedMusic } from "../api/resources/music/client/Client";
 import { CompositionPlanClient } from "../api/resources/music/resources/compositionPlan/client/Client";
+import { FinetunesClient } from "../api/resources/music/resources/finetunes/client/Client";
 import * as core from "../core";
 import type { WithRawResponse } from "../core/fetcher/RawResponse";
 
@@ -31,6 +32,7 @@ export class Music {
     private _client: GeneratedMusic;
     private readonly _options: Music.Options;
     private _compositionPlan: CompositionPlanClient | undefined;
+    private _finetunes: FinetunesClient | undefined;
 
     constructor(options: Music.Options = {}) {
         this._options = options;
@@ -42,6 +44,13 @@ export class Music {
      */
     public get compositionPlan(): CompositionPlanClient {
         return this._client.compositionPlan;
+    }
+
+    /**
+     * Get the finetunes client
+     */
+    public get finetunes(): FinetunesClient {
+        return this._client.finetunes;
     }
 
     /**

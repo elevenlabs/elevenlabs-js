@@ -24,6 +24,11 @@ export class FormDataWrapper {
     }
 
     public async appendFile(key: string, value: Uploadable): Promise<void> {
+        if (value == null) {
+            throw new Error(
+                `File upload for "${key}" received ${value === null ? "null" : "undefined"}. The generated code should not call appendFile with null/undefined — check that optional file fields are guarded before this call.`,
+            );
+        }
         const { data, filename, contentType } = await toMultipartDataPart(value);
         const blob = await convertToBlob(data, contentType);
         if (filename) {
@@ -109,7 +114,7 @@ async function streamToBuffer(stream: unknown): Promise<Buffer> {
 async function convertToBlob(value: unknown, contentType?: string): Promise<Blob> {
     if (isStreamLike(value) || isReadableStream(value)) {
         const buffer = await streamToBuffer(value);
-        return new Blob([buffer], { type: contentType });
+        return new Blob([buffer as BlobPart], { type: contentType });
     }
 
     if (value instanceof Blob) {
@@ -117,7 +122,7 @@ async function convertToBlob(value: unknown, contentType?: string): Promise<Blob
     }
 
     if (isBuffer(value)) {
-        return new Blob([value], { type: contentType });
+        return new Blob([value as BlobPart], { type: contentType });
     }
 
     if (value instanceof ArrayBuffer) {
@@ -125,7 +130,7 @@ async function convertToBlob(value: unknown, contentType?: string): Promise<Blob
     }
 
     if (isArrayBufferView(value)) {
-        return new Blob([value], { type: contentType });
+        return new Blob([value as BlobPart], { type: contentType });
     }
 
     if (typeof value === "string") {

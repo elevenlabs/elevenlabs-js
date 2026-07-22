@@ -8,7 +8,8 @@ import type * as ElevenLabs from "../../../../index";
  *         cursor: "cursor",
  *         pageSize: 1,
  *         sort: "creation_time_unix",
- *         sortDirection: "sort_direction"
+ *         sortDirection: "sort_direction",
+ *         includeArchived: false
  *     }
  */
 export interface PronunciationDictionariesListRequest {
@@ -20,4 +21,6 @@ export interface PronunciationDictionariesListRequest {
     sort?: ElevenLabs.PronunciationDictionariesListRequestSort;
     /** Which direction to sort the voices in. 'ascending' or 'descending'. */
     sortDirection?: string;
+    /** Whether to include archived pronunciation dictionaries in the response. */
+    includeArchived?: boolean;
 }

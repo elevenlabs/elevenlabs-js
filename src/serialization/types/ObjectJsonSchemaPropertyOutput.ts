@@ -9,9 +9,15 @@ export const ObjectJsonSchemaPropertyOutput: core.serialization.ObjectSchema<
     serializers.ObjectJsonSchemaPropertyOutput.Raw,
     ElevenLabs.ObjectJsonSchemaPropertyOutput
 > = core.serialization.object({
+    description: core.serialization.string().optional(),
+    dynamicVariable: core.serialization.property("dynamic_variable", core.serialization.string().optional()),
+    constantValue: core.serialization.property(
+        "constant_value",
+        core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    ),
+    isOmitted: core.serialization.property("is_omitted", core.serialization.boolean().optional()),
     type: core.serialization.stringLiteral("object").optional(),
     required: core.serialization.list(core.serialization.string()).optional(),
-    description: core.serialization.string().optional(),
     properties: core.serialization
         .record(
             core.serialization.string(),
@@ -23,9 +29,12 @@ export const ObjectJsonSchemaPropertyOutput: core.serialization.ObjectSchema<
 
 export declare namespace ObjectJsonSchemaPropertyOutput {
     export interface Raw {
+        description?: string | null;
+        dynamic_variable?: string | null;
+        constant_value?: Record<string, unknown> | null;
+        is_omitted?: boolean | null;
         type?: "object" | null;
         required?: string[] | null;
-        description?: string | null;
         properties?: Record<string, serializers.ObjectJsonSchemaPropertyOutputPropertiesValue.Raw> | null;
         required_constraints?: RequiredConstraints.Raw | null;
     }

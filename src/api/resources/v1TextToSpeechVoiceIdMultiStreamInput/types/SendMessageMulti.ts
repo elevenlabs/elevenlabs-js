@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../../index";
 
 /**
- * Send messages to the multi-context WebSocket.
+ * Defines the message types that can be sent from client to server
  */
 export type SendMessageMulti =
     | ElevenLabs.InitializeConnectionMulti

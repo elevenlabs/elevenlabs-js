@@ -9,17 +9,17 @@ describe("AnalysisClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            agent_id: "agent_id",
-            agent_name: "agent_name",
+            agent_id: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
+            agent_name: "My agent",
             conversation_product: "conversation_product",
-            status: "initiated",
+            status: "processing",
             user_id: "user_id",
             branch_id: "branch_id",
-            version_id: "version_id",
+            version_id: "agtvrsn_5xM3yVvZQKV0EfqQpLr2",
             metadata: {
-                start_time_unix_secs: 1,
+                start_time_unix_secs: 1714423232,
                 accepted_time_unix_secs: 1,
-                call_duration_secs: 1,
+                call_duration_secs: 10,
                 cost: 1,
                 deletion_settings: {
                     deletion_time_unix_secs: 1,
@@ -132,7 +132,13 @@ describe("AnalysisClient", () => {
                 conversation_config_override: {
                     asr: { keywords: ["hello", "world"] },
                     turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
-                    tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
+                    tts: {
+                        model_id: "eleven_turbo_v2",
+                        voice_id: "cjVigY5qzO86Huf0OWal",
+                        stability: 0.5,
+                        speed: 1,
+                        similarity_boost: 0.8,
+                    },
                     agent: {
                         first_message: "Hello, how can I help you today?",
                         language: "en",
@@ -154,8 +160,8 @@ describe("AnalysisClient", () => {
                 starting_workflow_node_id: "starting_workflow_node_id",
                 dynamic_variables: { key: "value" },
             },
-            environment: "environment",
-            conversation_id: "conversation_id",
+            environment: "production",
+            conversation_id: "conv_7401k5m9x2p8ec3rqv6dtnhb0fzw",
             has_audio: true,
             has_user_audio: true,
             has_response_audio: true,
@@ -164,7 +170,7 @@ describe("AnalysisClient", () => {
                 {
                     role: "user",
                     agent_metadata: { agent_id: "agent_id" },
-                    message: "message",
+                    message: "Hello, how are you?",
                     multivoice_message: { parts: [{ text: "text" }] },
                     tool_calls: [
                         {
@@ -185,7 +191,7 @@ describe("AnalysisClient", () => {
                     ],
                     feedback: { score: "like", time_in_call_secs: 1 },
                     llm_override: "llm_override",
-                    time_in_call_secs: 1,
+                    time_in_call_secs: 10,
                     rag_retrieval_info: {
                         chunks: [{ document_id: "document_id", chunk_id: "chunk_id", vector_distance: 1.1 }],
                         embedding_model: "e5_mistral_7b_instruct",
@@ -224,17 +230,17 @@ describe("AnalysisClient", () => {
 
         const response = await client.conversationalAi.conversations.analysis.run("conversation_id");
         expect(response).toEqual({
-            agentId: "agent_id",
-            agentName: "agent_name",
+            agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
+            agentName: "My agent",
             conversationProduct: "conversation_product",
-            status: "initiated",
+            status: "processing",
             userId: "user_id",
             branchId: "branch_id",
-            versionId: "version_id",
+            versionId: "agtvrsn_5xM3yVvZQKV0EfqQpLr2",
             metadata: {
-                startTimeUnixSecs: 1,
+                startTimeUnixSecs: 1714423232,
                 acceptedTimeUnixSecs: 1,
-                callDurationSecs: 1,
+                callDurationSecs: 10,
                 cost: 1,
                 deletionSettings: {
                     deletionTimeUnixSecs: 1,
@@ -399,6 +405,7 @@ describe("AnalysisClient", () => {
                         },
                     },
                     tts: {
+                        modelId: "eleven_turbo_v2",
                         voiceId: "cjVigY5qzO86Huf0OWal",
                         stability: 0.5,
                         speed: 1,
@@ -437,8 +444,8 @@ describe("AnalysisClient", () => {
                     key: "value",
                 },
             },
-            environment: "environment",
-            conversationId: "conversation_id",
+            environment: "production",
+            conversationId: "conv_7401k5m9x2p8ec3rqv6dtnhb0fzw",
             hasAudio: true,
             hasUserAudio: true,
             hasResponseAudio: true,
@@ -449,7 +456,7 @@ describe("AnalysisClient", () => {
                     agentMetadata: {
                         agentId: "agent_id",
                     },
-                    message: "message",
+                    message: "Hello, how are you?",
                     multivoiceMessage: {
                         parts: [
                             {
@@ -479,7 +486,7 @@ describe("AnalysisClient", () => {
                         timeInCallSecs: 1,
                     },
                     llmOverride: "llm_override",
-                    timeInCallSecs: 1,
+                    timeInCallSecs: 10,
                     ragRetrievalInfo: {
                         chunks: [
                             {
@@ -524,17 +531,17 @@ describe("AnalysisClient", () => {
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { evaluation_id: "evaluation_id" };
         const rawResponseBody = {
-            agent_id: "agent_id",
-            agent_name: "agent_name",
+            agent_id: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
+            agent_name: "My agent",
             conversation_product: "conversation_product",
-            status: "initiated",
+            status: "processing",
             user_id: "user_id",
             branch_id: "branch_id",
-            version_id: "version_id",
+            version_id: "agtvrsn_5xM3yVvZQKV0EfqQpLr2",
             metadata: {
-                start_time_unix_secs: 1,
+                start_time_unix_secs: 1714423232,
                 accepted_time_unix_secs: 1,
-                call_duration_secs: 1,
+                call_duration_secs: 10,
                 cost: 1,
                 deletion_settings: {
                     deletion_time_unix_secs: 1,
@@ -647,7 +654,13 @@ describe("AnalysisClient", () => {
                 conversation_config_override: {
                     asr: { keywords: ["hello", "world"] },
                     turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
-                    tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
+                    tts: {
+                        model_id: "eleven_turbo_v2",
+                        voice_id: "cjVigY5qzO86Huf0OWal",
+                        stability: 0.5,
+                        speed: 1,
+                        similarity_boost: 0.8,
+                    },
                     agent: {
                         first_message: "Hello, how can I help you today?",
                         language: "en",
@@ -669,8 +682,8 @@ describe("AnalysisClient", () => {
                 starting_workflow_node_id: "starting_workflow_node_id",
                 dynamic_variables: { key: "value" },
             },
-            environment: "environment",
-            conversation_id: "conversation_id",
+            environment: "production",
+            conversation_id: "conv_7401k5m9x2p8ec3rqv6dtnhb0fzw",
             has_audio: true,
             has_user_audio: true,
             has_response_audio: true,
@@ -679,7 +692,7 @@ describe("AnalysisClient", () => {
                 {
                     role: "user",
                     agent_metadata: { agent_id: "agent_id" },
-                    message: "message",
+                    message: "Hello, how are you?",
                     multivoice_message: { parts: [{ text: "text" }] },
                     tool_calls: [
                         {
@@ -700,7 +713,7 @@ describe("AnalysisClient", () => {
                     ],
                     feedback: { score: "like", time_in_call_secs: 1 },
                     llm_override: "llm_override",
-                    time_in_call_secs: 1,
+                    time_in_call_secs: 10,
                     rag_retrieval_info: {
                         chunks: [{ document_id: "document_id", chunk_id: "chunk_id", vector_distance: 1.1 }],
                         embedding_model: "e5_mistral_7b_instruct",
@@ -742,17 +755,17 @@ describe("AnalysisClient", () => {
             evaluationId: "evaluation_id",
         });
         expect(response).toEqual({
-            agentId: "agent_id",
-            agentName: "agent_name",
+            agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
+            agentName: "My agent",
             conversationProduct: "conversation_product",
-            status: "initiated",
+            status: "processing",
             userId: "user_id",
             branchId: "branch_id",
-            versionId: "version_id",
+            versionId: "agtvrsn_5xM3yVvZQKV0EfqQpLr2",
             metadata: {
-                startTimeUnixSecs: 1,
+                startTimeUnixSecs: 1714423232,
                 acceptedTimeUnixSecs: 1,
-                callDurationSecs: 1,
+                callDurationSecs: 10,
                 cost: 1,
                 deletionSettings: {
                     deletionTimeUnixSecs: 1,
@@ -917,6 +930,7 @@ describe("AnalysisClient", () => {
                         },
                     },
                     tts: {
+                        modelId: "eleven_turbo_v2",
                         voiceId: "cjVigY5qzO86Huf0OWal",
                         stability: 0.5,
                         speed: 1,
@@ -955,8 +969,8 @@ describe("AnalysisClient", () => {
                     key: "value",
                 },
             },
-            environment: "environment",
-            conversationId: "conversation_id",
+            environment: "production",
+            conversationId: "conv_7401k5m9x2p8ec3rqv6dtnhb0fzw",
             hasAudio: true,
             hasUserAudio: true,
             hasResponseAudio: true,
@@ -967,7 +981,7 @@ describe("AnalysisClient", () => {
                     agentMetadata: {
                         agentId: "agent_id",
                     },
-                    message: "message",
+                    message: "Hello, how are you?",
                     multivoiceMessage: {
                         parts: [
                             {
@@ -997,7 +1011,7 @@ describe("AnalysisClient", () => {
                         timeInCallSecs: 1,
                     },
                     llmOverride: "llm_override",
-                    timeInCallSecs: 1,
+                    timeInCallSecs: 10,
                     ragRetrievalInfo: {
                         chunks: [
                             {

@@ -17,6 +17,7 @@ describe("WhatsappAccountsClient", () => {
             assigned_agent_id: "assigned_agent_id",
             enable_messaging: true,
             enable_audio_message_response: true,
+            enable_typing_indicator: true,
             assigned_agent_name: "assigned_agent_name",
             is_token_expired: true,
         };
@@ -39,6 +40,7 @@ describe("WhatsappAccountsClient", () => {
             assignedAgentId: "assigned_agent_id",
             enableMessaging: true,
             enableAudioMessageResponse: true,
+            enableTypingIndicator: true,
             assignedAgentName: "assigned_agent_name",
             isTokenExpired: true,
         });
@@ -100,6 +102,7 @@ describe("WhatsappAccountsClient", () => {
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
                     enable_audio_message_response: true,
+                    enable_typing_indicator: true,
                     assigned_agent_name: "assigned_agent_name",
                     is_token_expired: true,
                 },
@@ -128,6 +131,7 @@ describe("WhatsappAccountsClient", () => {
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
                     enableAudioMessageResponse: true,
+                    enableTypingIndicator: true,
                     assignedAgentName: "assigned_agent_name",
                     isTokenExpired: true,
                 },

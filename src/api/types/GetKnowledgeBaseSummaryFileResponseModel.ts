@@ -15,5 +15,7 @@ export interface GetKnowledgeBaseSummaryFileResponseModel {
     /** This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead. */
     dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem[];
     externalSyncInfo?: ElevenLabs.ExternalFileSyncInfo;
+    autoSyncInfo?: ElevenLabs.AutoSyncInfo;
+    refreshStatus?: ElevenLabs.FileRefreshStatus;
     isFrozen?: boolean;
 }

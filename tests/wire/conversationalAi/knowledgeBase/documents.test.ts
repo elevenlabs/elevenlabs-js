@@ -113,6 +113,7 @@ describe("DocumentsClient", () => {
             folder_path: [{ id: "id", name: "name" }],
             url: "url",
             extracted_inner_html: "extracted_inner_html",
+            content_format: "html",
             auto_sync_info: { minimum_frequency_days: 1, auto_remove: true, consec_failures: 1, next_refresh_by: 1 },
         };
 
@@ -154,6 +155,7 @@ describe("DocumentsClient", () => {
             ],
             url: "url",
             extractedInnerHtml: "extracted_inner_html",
+            contentFormat: "html",
             autoSyncInfo: {
                 minimumFrequencyDays: 1,
                 autoRemove: true,
@@ -207,6 +209,7 @@ describe("DocumentsClient", () => {
             folder_path: [{ id: "id", name: "name" }],
             url: "url",
             extracted_inner_html: "extracted_inner_html",
+            content_format: "html",
             auto_sync_info: { minimum_frequency_days: 1, auto_remove: true, consec_failures: 1, next_refresh_by: 1 },
         };
 
@@ -247,6 +250,7 @@ describe("DocumentsClient", () => {
             ],
             url: "url",
             extractedInnerHtml: "extracted_inner_html",
+            contentFormat: "html",
             autoSyncInfo: {
                 minimumFrequencyDays: 1,
                 autoRemove: true,

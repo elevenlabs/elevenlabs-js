@@ -4,7 +4,9 @@ import type * as ElevenLabs from "../../../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         format: "json"
+ *     }
  */
 export interface ConversationsGetRequest {
     /** Response format. Defaults to 'json'. Set to 'opentelemetry' for an OTLP-compatible trace payload using the same structure as the post-call webhook. */

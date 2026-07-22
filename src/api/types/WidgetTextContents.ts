@@ -87,4 +87,18 @@ export interface WidgetTextContents {
     agentDone?: string;
     /** Status text displayed when the agent encounters an error during a tool call. */
     agentError?: string;
+    /** Text and ARIA label for the attach file button. */
+    attachFile?: string;
+    /** ARIA label for the remove file button. */
+    removeFile?: string;
+    /** Error message displayed when a file fails to upload. */
+    fileUploadError?: string;
+    /** Error message displayed when an unsupported file type is selected. Followed by the list of accepted types. */
+    fileTypeUnsupported?: string;
+    /** Error message displayed when a file exceeds the maximum size limit. */
+    fileTooLarge?: string;
+    /** Error message displayed when the maximum number of files for a conversation is reached. */
+    fileLimitReached?: string;
+    /** Status text displayed while the agent is typing. */
+    typingIndicator?: string;
 }

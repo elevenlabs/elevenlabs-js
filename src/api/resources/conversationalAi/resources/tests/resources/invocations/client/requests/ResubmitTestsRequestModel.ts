@@ -16,6 +16,6 @@ export interface ResubmitTestsRequestModel {
     agentConfigOverride?: ElevenLabs.AdhocAgentConfigOverrideForTestRequestModel;
     /** Agent ID to resubmit tests for */
     agentId: string;
-    /** ID of the branch to run the tests on. If not provided, the tests will be run on the agent default configuration. */
+    /** ID of the branch to run the tests on. If not provided, the tests will be run on the agent's main branch. */
     branchId?: string;
 }

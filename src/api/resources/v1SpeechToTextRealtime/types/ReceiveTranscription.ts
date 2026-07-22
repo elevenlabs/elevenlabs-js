@@ -3,13 +3,16 @@
 import type * as ElevenLabs from "../../../index";
 
 /**
- * Receive transcription results from the WebSocket
+ * Defines the message types that can be received by the client from the server
  */
 export type ReceiveTranscription =
     | ElevenLabs.SessionStartedPayload
     | ElevenLabs.PartialTranscriptPayload
+    | ElevenLabs.FinalTranscript
+    | ElevenLabs.FinalTranscriptWithTimestamps
     | ElevenLabs.CommittedTranscriptPayload
     | ElevenLabs.CommittedTranscriptWithTimestampsPayload
+    | ElevenLabs.CommittedTranscriptEntitiesPayload
     | ElevenLabs.ScribeErrorPayload
     | ElevenLabs.ScribeAuthErrorPayload
     | ElevenLabs.ScribeQuotaExceededErrorPayload

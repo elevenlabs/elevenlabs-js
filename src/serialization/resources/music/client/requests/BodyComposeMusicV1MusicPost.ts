@@ -19,6 +19,8 @@ export const BodyComposeMusicV1MusicPost: core.serialization.Schema<
     modelId: core.serialization.property("model_id", BodyComposeMusicV1MusicPostModelId.optional()),
     seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
+    finetuneId: core.serialization.property("finetune_id", core.serialization.string().optional()),
+    finetuneStrength: core.serialization.property("finetune_strength", core.serialization.number().optional()),
     respectSectionsDurations: core.serialization.property(
         "respect_sections_durations",
         core.serialization.boolean().optional(),
@@ -35,6 +37,8 @@ export declare namespace BodyComposeMusicV1MusicPost {
         model_id?: BodyComposeMusicV1MusicPostModelId.Raw | null;
         seed?: number | null;
         force_instrumental?: boolean | null;
+        finetune_id?: string | null;
+        finetune_strength?: number | null;
         respect_sections_durations?: boolean | null;
         store_for_inpainting?: boolean | null;
         sign_with_c2pa?: boolean | null;

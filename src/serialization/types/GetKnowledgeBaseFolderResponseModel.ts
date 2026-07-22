@@ -26,6 +26,7 @@ export const GetKnowledgeBaseFolderResponseModel: core.serialization.ObjectSchem
         core.serialization.list(KnowledgeBaseFolderPathSegmentResponseModel).optional(),
     ),
     childrenCount: core.serialization.property("children_count", core.serialization.number()),
+    documentCount: core.serialization.property("document_count", core.serialization.number()),
     autoSyncInfo: core.serialization.property("auto_sync_info", AutoSyncInfo.optional()),
     externalSyncInfo: core.serialization.property("external_sync_info", ExternalFolderSyncInfo.optional()),
     isFrozen: core.serialization.property("is_frozen", core.serialization.boolean().optional()),
@@ -42,6 +43,7 @@ export declare namespace GetKnowledgeBaseFolderResponseModel {
         folder_parent_id?: string | null;
         folder_path?: KnowledgeBaseFolderPathSegmentResponseModel.Raw[] | null;
         children_count: number;
+        document_count: number;
         auto_sync_info?: AutoSyncInfo.Raw | null;
         external_sync_info?: ExternalFolderSyncInfo.Raw | null;
         is_frozen?: boolean | null;

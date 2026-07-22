@@ -3,8 +3,11 @@
 import type * as ElevenLabs from "../../../../api/index";
 import * as core from "../../../../core";
 import type * as serializers from "../../../index";
+import { CommittedTranscriptEntitiesPayload } from "../../../types/CommittedTranscriptEntitiesPayload";
 import { CommittedTranscriptPayload } from "../../../types/CommittedTranscriptPayload";
 import { CommittedTranscriptWithTimestampsPayload } from "../../../types/CommittedTranscriptWithTimestampsPayload";
+import { FinalTranscript } from "../../../types/FinalTranscript";
+import { FinalTranscriptWithTimestamps } from "../../../types/FinalTranscriptWithTimestamps";
 import { PartialTranscriptPayload } from "../../../types/PartialTranscriptPayload";
 import { ScribeAuthErrorPayload } from "../../../types/ScribeAuthErrorPayload";
 import { ScribeChunkSizeExceededErrorPayload } from "../../../types/ScribeChunkSizeExceededErrorPayload";
@@ -27,8 +30,11 @@ export const ReceiveTranscription: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([
     SessionStartedPayload,
     PartialTranscriptPayload,
+    FinalTranscript,
+    FinalTranscriptWithTimestamps,
     CommittedTranscriptPayload,
     CommittedTranscriptWithTimestampsPayload,
+    CommittedTranscriptEntitiesPayload,
     ScribeErrorPayload,
     ScribeAuthErrorPayload,
     ScribeQuotaExceededErrorPayload,
@@ -48,8 +54,11 @@ export declare namespace ReceiveTranscription {
     export type Raw =
         | SessionStartedPayload.Raw
         | PartialTranscriptPayload.Raw
+        | FinalTranscript.Raw
+        | FinalTranscriptWithTimestamps.Raw
         | CommittedTranscriptPayload.Raw
         | CommittedTranscriptWithTimestampsPayload.Raw
+        | CommittedTranscriptEntitiesPayload.Raw
         | ScribeErrorPayload.Raw
         | ScribeAuthErrorPayload.Raw
         | ScribeQuotaExceededErrorPayload.Raw

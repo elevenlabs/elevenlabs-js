@@ -3,6 +3,6 @@
 import type * as ElevenLabs from "../../../index";
 
 /**
- * Send messages to the WebSocket
+ * Defines the message types that can be sent from client to server
  */
 export type SendMessage = ElevenLabs.InitializeConnection | ElevenLabs.SendText | ElevenLabs.CloseConnection;

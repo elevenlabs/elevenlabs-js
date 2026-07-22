@@ -9,6 +9,7 @@ export interface GetWhatsAppAccountResponse {
     assignedAgentId?: string;
     enableMessaging?: boolean;
     enableAudioMessageResponse?: boolean;
+    enableTypingIndicator?: boolean;
     assignedAgentName?: string;
     isTokenExpired?: boolean;
 }

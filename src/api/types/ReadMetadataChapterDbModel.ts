@@ -10,4 +10,5 @@ export interface ReadMetadataChapterDbModel {
     durationSeconds?: number;
     fileNumber?: string;
     isFallbackName?: boolean;
+    chapterId?: string;
 }

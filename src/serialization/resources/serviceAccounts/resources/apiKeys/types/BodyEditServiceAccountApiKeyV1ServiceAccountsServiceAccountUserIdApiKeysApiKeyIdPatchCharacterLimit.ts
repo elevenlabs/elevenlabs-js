@@ -9,9 +9,10 @@ export const BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdAp
     ElevenLabs.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchCharacterLimit
 > = core.serialization.undiscriminatedUnion([
     core.serialization.number(),
+    core.serialization.stringLiteral("clear"),
     core.serialization.stringLiteral("no_update"),
 ]);
 
 export declare namespace BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchCharacterLimit {
-    export type Raw = number | "no_update";
+    export type Raw = number | "clear" | "no_update";
 }
