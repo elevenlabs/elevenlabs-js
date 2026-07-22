@@ -72,7 +72,7 @@ describe("ElevenLabs API Tests", () => {
 
             const transcription = await client.speechToText.convert({
                 file: audioBlob,
-                modelId: "scribe_v1",
+                modelId: "scribe_v2",
             });
             if ("text" in transcription) {
                 expect(typeof transcription.text).toBe("string");
