@@ -12,7 +12,7 @@
 <dl>
 <dd>
 
-Returns a list of your generated audio.
+Returns a list of your generated audio (e.g. text to speech, speech to speech, Studio, dubbing). Music and SFX generations are not included and cannot currently be retrieved via the API.
 </dd>
 </dl>
 </dd>
@@ -1876,6 +1876,79 @@ await client.voices.delete("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">update</a>(voice_id, { ...params }) -> ElevenLabs.EditVoiceResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Edit a voice created by you.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.update("21m00Tcm4TlvDq8ikWAM", {
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voice_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.GetVoicesV2Response</code></summary>
 <dl>
 <dd>
@@ -1932,79 +2005,6 @@ await client.voices.search({
 <dd>
 
 **request:** `ElevenLabs.VoicesSearchRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `VoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">update</a>(voice_id, { ...params }) -> ElevenLabs.EditVoiceResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Edit a voice created by you.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.update("21m00Tcm4TlvDq8ikWAM", {
-    name: "name"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**voice_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyEditVoiceV1VoicesVoiceIdEditPost` 
     
 </dd>
 </dl>
@@ -3681,7 +3681,8 @@ await client.pronunciationDictionaries.list({
     cursor: "cursor",
     pageSize: 1,
     sort: "creation_time_unix",
-    sortDirection: "sort_direction"
+    sortDirection: "sort_direction",
+    includeArchived: false
 });
 
 ```
@@ -4204,6 +4205,7 @@ Transcribe an audio or video file. If webhook is set to true, the request will b
 
 ```typescript
 await client.speechToText.convert({
+    token: "token",
     enableLogging: true,
     modelId: "scribe_v2"
 });
@@ -5403,6 +5405,72 @@ await client.conversationalAi.conversations.list({
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">resolve</a>({ ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Resolve a conversation URL (a Slack message URL or a Zendesk ticket URL) to the deterministic conversation ID for the given agent, then confirm the conversation exists.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.resolve({
+    agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
+    reference: "https://your-domain.zendesk.com/agent/tickets/12345"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.ConversationsResolveRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">get</a>(conversation_id, { ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
 <dl>
 <dd>
@@ -5430,7 +5498,9 @@ Get the details of a particular conversation
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.get("123");
+await client.conversationalAi.conversations.get("21m00Tcm4TlvDq8ikWAM", {
+    format: "json"
+});
 
 ```
 </dd>
@@ -17414,6 +17484,340 @@ await client.music.compositionPlan.create({
 <dd>
 
 **requestOptions:** `CompositionPlanClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Music Finetunes
+<details><summary><code>client.music.finetunes.<a href="/src/api/resources/music/resources/finetunes/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.MusicFinetunePageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List music finetunes accessible to you (your own, workspace-shared, and ElevenLabs-curated), with optional filtering, sorting, and cursor pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.finetunes.list({
+    cursor: "cursor",
+    pageSize: 1,
+    visibility: "private",
+    createdBy: "self",
+    sort: "created_at",
+    sortDirection: "asc"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.music.FinetunesListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinetunesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.finetunes.<a href="/src/api/resources/music/resources/finetunes/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.MusicFinetuneResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new music finetune
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.finetunes.create({
+    name: "name",
+    primaryGenre: "primary_genre"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.music.BodyCreateMusicFinetuneV1MusicFinetunesPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinetunesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.finetunes.<a href="/src/api/resources/music/resources/finetunes/client/Client.ts">get</a>(finetune_id) -> ElevenLabs.MusicFinetuneResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a music finetune.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.finetunes.get("finetune_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**finetune_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinetunesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.finetunes.<a href="/src/api/resources/music/resources/finetunes/client/Client.ts">delete</a>(finetune_id) -> ElevenLabs.MusicFinetuneResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a music finetune
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.finetunes.delete("finetune_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**finetune_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinetunesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.finetunes.<a href="/src/api/resources/music/resources/finetunes/client/Client.ts">update</a>(finetune_id, { ...params }) -> ElevenLabs.MusicFinetuneResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a music finetune.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.finetunes.update("finetune_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**finetune_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.music.UpdateMusicFinetuneRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinetunesClient.RequestOptions` 
     
 </dd>
 </dl>

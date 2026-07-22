@@ -12,6 +12,7 @@ import { MtlsAuthResponse } from "../../../../../types/MtlsAuthResponse";
 import { OAuth2ClientCredsResponse } from "../../../../../types/OAuth2ClientCredsResponse";
 import { OAuth2JwtResponse } from "../../../../../types/OAuth2JwtResponse";
 import { PrivateKeyJwtResponse } from "../../../../../types/PrivateKeyJwtResponse";
+import { RefreshTokenAuthResponse } from "../../../../../types/RefreshTokenAuthResponse";
 import { SlackBotAuthResponse } from "../../../../../types/SlackBotAuthResponse";
 import { UrlSecretAuthResponse } from "../../../../../types/UrlSecretAuthResponse";
 import { WhatsAppAuthResponse } from "../../../../../types/WhatsAppAuthResponse";
@@ -22,6 +23,7 @@ export const AuthConnectionsCreateResponse: core.serialization.Schema<
 > = core.serialization
     .union(core.serialization.discriminant("authType", "auth_type"), {
         oauth2_client_credentials: OAuth2ClientCredsResponse,
+        refresh_token_auth: RefreshTokenAuthResponse,
         basic_auth: BasicAuthResponse,
         bearer_auth: BearerAuthResponse,
         oauth2_jwt: OAuth2JwtResponse,
@@ -42,6 +44,7 @@ export const AuthConnectionsCreateResponse: core.serialization.Schema<
 export declare namespace AuthConnectionsCreateResponse {
     export type Raw =
         | AuthConnectionsCreateResponse.Oauth2ClientCredentials
+        | AuthConnectionsCreateResponse.RefreshTokenAuth
         | AuthConnectionsCreateResponse.BasicAuth
         | AuthConnectionsCreateResponse.BearerAuth
         | AuthConnectionsCreateResponse.Oauth2Jwt
@@ -56,6 +59,10 @@ export declare namespace AuthConnectionsCreateResponse {
 
     export interface Oauth2ClientCredentials extends OAuth2ClientCredsResponse.Raw {
         auth_type: "oauth2_client_credentials";
+    }
+
+    export interface RefreshTokenAuth extends RefreshTokenAuthResponse.Raw {
+        auth_type: "refresh_token_auth";
     }
 
     export interface BasicAuth extends BasicAuthResponse.Raw {

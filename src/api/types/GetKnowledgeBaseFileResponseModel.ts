@@ -13,7 +13,11 @@ export interface GetKnowledgeBaseFileResponseModel {
     /** The folder path segments leading to this entity, from root to parent folder. */
     folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentResponseModel[];
     extractedInnerHtml: string;
+    contentFormat?: ElevenLabs.ContentFormat;
     filename: string;
     externalSyncInfo?: ElevenLabs.ExternalFileSyncInfo;
+    autoSyncInfo?: ElevenLabs.AutoSyncInfo;
+    /** In-flight or last refresh state for an externally-synced file. Used by clients to render sync progress and disable re-sync while a refresh is queued or processing. */
+    refreshStatus?: ElevenLabs.FileRefreshStatus;
     isFrozen?: boolean;
 }

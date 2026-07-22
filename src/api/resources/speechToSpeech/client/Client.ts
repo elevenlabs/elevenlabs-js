@@ -27,6 +27,8 @@ export class SpeechToSpeechClient {
      * Transform audio from one voice to another. Maintain full control over emotion, timing and delivery.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      */
     public convert(
         voice_id: string,
@@ -96,7 +98,11 @@ export class SpeechToSpeechClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,
@@ -136,6 +142,8 @@ export class SpeechToSpeechClient {
      * Stream audio from one voice to another. Maintain full control over emotion, timing and delivery.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      */
     public stream(
         voice_id: string,
@@ -205,7 +213,11 @@ export class SpeechToSpeechClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

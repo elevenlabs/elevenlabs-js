@@ -6,5 +6,6 @@ export const WebhookUsageType = {
     VoiceLibraryRemovalNotices: "Voice Library Removal Notices",
     SpeechToText: "Speech to Text",
     AgentQaEvaluations: "Agent QA Evaluations",
+    ConvAiAlerting: "ConvAI Alerting",
 } as const;
 export type WebhookUsageType = (typeof WebhookUsageType)[keyof typeof WebhookUsageType];

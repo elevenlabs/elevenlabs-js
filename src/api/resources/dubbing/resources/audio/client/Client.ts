@@ -29,6 +29,8 @@ export class AudioClient {
      * @throws {@link ElevenLabs.NotFoundError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      * @throws {@link ElevenLabs.TooEarlyError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      */
     public get(
         dubbing_id: string,
@@ -57,7 +59,7 @@ export class AudioClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             responseType: "streaming",
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,

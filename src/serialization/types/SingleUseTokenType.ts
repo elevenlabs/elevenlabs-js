@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const SingleUseTokenType: core.serialization.Schema<
     serializers.SingleUseTokenType.Raw,
     ElevenLabs.SingleUseTokenType
-> = core.serialization.enum_(["realtime_scribe", "tts_websocket"]);
+> = core.serialization.enum_(["realtime_scribe", "batch_scribe", "tts_websocket"]);
 
 export declare namespace SingleUseTokenType {
-    export type Raw = "realtime_scribe" | "tts_websocket";
+    export type Raw = "realtime_scribe" | "batch_scribe" | "tts_websocket";
 }

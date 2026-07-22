@@ -2,6 +2,11 @@
 
 import type * as ElevenLabs from "../index";
 
+/**
+ * Customer-facing view of alerting settings. Unlike AdminAlertingSettingsResponse,
+ * it has no internal_notifiers field: those are ElevenLabs-internal delivery
+ * channels whose URLs must never be returned outside the admin API.
+ */
 export interface AlertingSettingsResponse {
     monitorConfigs?: Record<string, ElevenLabs.AlertingMonitorConfig>;
     autoResolveAfterInactiveMinutes?: number;

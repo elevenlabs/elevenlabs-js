@@ -3,11 +3,13 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { TtsConversationalModel } from "./TtsConversationalModel";
 
 export const TtsConversationalConfigOverride: core.serialization.ObjectSchema<
     serializers.TtsConversationalConfigOverride.Raw,
     ElevenLabs.TtsConversationalConfigOverride
 > = core.serialization.object({
+    modelId: core.serialization.property("model_id", TtsConversationalModel.optional()),
     voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
     stability: core.serialization.number().optional(),
     speed: core.serialization.number().optional(),
@@ -16,6 +18,7 @@ export const TtsConversationalConfigOverride: core.serialization.ObjectSchema<
 
 export declare namespace TtsConversationalConfigOverride {
     export interface Raw {
+        model_id?: TtsConversationalModel.Raw | null;
         voice_id?: string | null;
         stability?: number | null;
         speed?: number | null;

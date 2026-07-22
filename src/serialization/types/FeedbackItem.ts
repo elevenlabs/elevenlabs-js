@@ -4,27 +4,9 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 
-export const FeedbackItem: core.serialization.ObjectSchema<serializers.FeedbackItem.Raw, ElevenLabs.FeedbackItem> =
-    core.serialization.object({
-        thumbsUp: core.serialization.property("thumbs_up", core.serialization.boolean()),
-        feedback: core.serialization.string(),
-        emotions: core.serialization.boolean(),
-        inaccurateClone: core.serialization.property("inaccurate_clone", core.serialization.boolean()),
-        glitches: core.serialization.boolean(),
-        audioQuality: core.serialization.property("audio_quality", core.serialization.boolean()),
-        other: core.serialization.boolean(),
-        reviewStatus: core.serialization.property("review_status", core.serialization.string().optional()),
-    });
+export const FeedbackItem: core.serialization.Schema<serializers.FeedbackItem.Raw, ElevenLabs.FeedbackItem> =
+    core.serialization.unknown();
 
 export declare namespace FeedbackItem {
-    export interface Raw {
-        thumbs_up: boolean;
-        feedback: string;
-        emotions: boolean;
-        inaccurate_clone: boolean;
-        glitches: boolean;
-        audio_quality: boolean;
-        other: boolean;
-        review_status?: string | null;
-    }
+    export type Raw = unknown;
 }

@@ -31,7 +31,7 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
-            telephony_call_config: { ringing_timeout_secs: 1 },
+            telephony_call_config: { ringing_timeout_secs: 1, twilio_call_recording_enabled: true },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
             branch_name: "branch_name",
@@ -76,6 +76,7 @@ describe("BatchCallsClient", () => {
             retryCount: 1,
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
+                twilioCallRecordingEnabled: true,
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",
@@ -197,7 +198,7 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
-            telephony_call_config: { ringing_timeout_secs: 1 },
+            telephony_call_config: { ringing_timeout_secs: 1, twilio_call_recording_enabled: true },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
             branch_name: "branch_name",
@@ -214,7 +215,13 @@ describe("BatchCallsClient", () => {
                         conversation_config_override: {
                             asr: { keywords: ["hello", "world"] },
                             turn: { soft_timeout_config: { message: "Hhmmmm...yeah." } },
-                            tts: { voice_id: "cjVigY5qzO86Huf0OWal", stability: 0.5, speed: 1, similarity_boost: 0.8 },
+                            tts: {
+                                model_id: "eleven_turbo_v2",
+                                voice_id: "cjVigY5qzO86Huf0OWal",
+                                stability: 0.5,
+                                speed: 1,
+                                similarity_boost: 0.8,
+                            },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -267,6 +274,7 @@ describe("BatchCallsClient", () => {
             retryCount: 1,
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
+                twilioCallRecordingEnabled: true,
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",
@@ -291,6 +299,7 @@ describe("BatchCallsClient", () => {
                                 },
                             },
                             tts: {
+                                modelId: "eleven_turbo_v2",
                                 voiceId: "cjVigY5qzO86Huf0OWal",
                                 stability: 0.5,
                                 speed: 1,
@@ -357,7 +366,7 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
-            telephony_call_config: { ringing_timeout_secs: 1 },
+            telephony_call_config: { ringing_timeout_secs: 1, twilio_call_recording_enabled: true },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
             branch_name: "branch_name",
@@ -397,6 +406,7 @@ describe("BatchCallsClient", () => {
             retryCount: 1,
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
+                twilioCallRecordingEnabled: true,
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",
@@ -431,7 +441,7 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
-            telephony_call_config: { ringing_timeout_secs: 1 },
+            telephony_call_config: { ringing_timeout_secs: 1, twilio_call_recording_enabled: true },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
             branch_name: "branch_name",
@@ -471,6 +481,7 @@ describe("BatchCallsClient", () => {
             retryCount: 1,
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
+                twilioCallRecordingEnabled: true,
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",

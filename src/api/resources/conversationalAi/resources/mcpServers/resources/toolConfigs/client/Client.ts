@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../..
 import { type NormalizedClientOptions, normalizeClientOptions } from "../../../../../../../../BaseClient";
 import * as core from "../../../../../../../../core";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../core/headers";
+import { mergeAdditionalBodyParameters } from "../../../../../../../../core/requestBody";
 import * as environments from "../../../../../../../../environments";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError";
 import * as errors from "../../../../../../../../errors/index";
@@ -32,6 +33,8 @@ export class ToolConfigsClient {
      *
      * @throws {@link ElevenLabs.ConflictError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.conversationalAi.mcpServers.toolConfigs.create("mcp_server_id", {
@@ -71,11 +74,18 @@ export class ToolConfigsClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
-            body: serializers.conversationalAi.mcpServers.McpToolConfigOverrideCreateRequestModel.jsonOrThrow(_body, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.mcpServers.McpToolConfigOverrideCreateRequestModel.jsonOrThrow(_body, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -126,6 +136,8 @@ export class ToolConfigsClient {
      *
      * @throws {@link ElevenLabs.NotFoundError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.conversationalAi.mcpServers.toolConfigs.get("mcp_server_id", "tool_name")
@@ -157,7 +169,7 @@ export class ToolConfigsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -207,6 +219,8 @@ export class ToolConfigsClient {
      * @param {ToolConfigsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.conversationalAi.mcpServers.toolConfigs.delete("mcp_server_id", "tool_name")
@@ -238,7 +252,7 @@ export class ToolConfigsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -288,6 +302,8 @@ export class ToolConfigsClient {
      *
      * @throws {@link ElevenLabs.NotFoundError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "tool_name", {
@@ -328,11 +344,18 @@ export class ToolConfigsClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "json",
-            body: serializers.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel.jsonOrThrow(_body, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel.jsonOrThrow(_body, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

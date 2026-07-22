@@ -3,8 +3,10 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AutoSyncInfo } from "./AutoSyncInfo";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { ExternalFileSyncInfo } from "./ExternalFileSyncInfo";
+import { FileRefreshStatus } from "./FileRefreshStatus";
 import { GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem } from "./GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
 import { KnowledgeBaseFolderPathSegmentSummaryResponseModel } from "./KnowledgeBaseFolderPathSegmentSummaryResponseModel";
@@ -29,6 +31,8 @@ export const GetKnowledgeBaseSummaryFileResponseModel: core.serialization.Object
         core.serialization.list(GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem),
     ),
     externalSyncInfo: core.serialization.property("external_sync_info", ExternalFileSyncInfo.optional()),
+    autoSyncInfo: core.serialization.property("auto_sync_info", AutoSyncInfo.optional()),
+    refreshStatus: core.serialization.property("refresh_status", FileRefreshStatus.optional()),
     isFrozen: core.serialization.property("is_frozen", core.serialization.boolean().optional()),
 });
 
@@ -43,6 +47,8 @@ export declare namespace GetKnowledgeBaseSummaryFileResponseModel {
         folder_path?: KnowledgeBaseFolderPathSegmentSummaryResponseModel.Raw[] | null;
         dependent_agents: GetKnowledgeBaseSummaryFileResponseModelDependentAgentsItem.Raw[];
         external_sync_info?: ExternalFileSyncInfo.Raw | null;
+        auto_sync_info?: AutoSyncInfo.Raw | null;
+        refresh_status?: FileRefreshStatus.Raw | null;
         is_frozen?: boolean | null;
     }
 }

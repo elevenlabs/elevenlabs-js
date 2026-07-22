@@ -7,6 +7,7 @@ import type * as ElevenLabs from "../../../../../index";
  */
 export type AuthConnectionsCreateResponse =
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.Oauth2ClientCredentials
+    | ElevenLabs.workspace.AuthConnectionsCreateResponse.RefreshTokenAuth
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.BasicAuth
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.BearerAuth
     | ElevenLabs.workspace.AuthConnectionsCreateResponse.Oauth2Jwt
@@ -22,6 +23,10 @@ export type AuthConnectionsCreateResponse =
 export namespace AuthConnectionsCreateResponse {
     export interface Oauth2ClientCredentials extends ElevenLabs.OAuth2ClientCredsResponse {
         authType: "oauth2_client_credentials";
+    }
+
+    export interface RefreshTokenAuth extends ElevenLabs.RefreshTokenAuthResponse {
+        authType: "refresh_token_auth";
     }
 
     export interface BasicAuth extends ElevenLabs.BasicAuthResponse {

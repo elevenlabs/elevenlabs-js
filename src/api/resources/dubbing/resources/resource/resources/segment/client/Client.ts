@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../..
 import { type NormalizedClientOptions, normalizeClientOptions } from "../../../../../../../../BaseClient";
 import * as core from "../../../../../../../../core";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../core/headers";
+import { mergeAdditionalBodyParameters } from "../../../../../../../../core/requestBody";
 import * as environments from "../../../../../../../../environments";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError";
 import * as errors from "../../../../../../../../errors/index";
@@ -35,6 +36,8 @@ export class SegmentClient {
      * @param {SegmentClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.dubbing.resource.segment.update("dubbing_id", "segment_id", "language")
@@ -73,11 +76,14 @@ export class SegmentClient {
             method: "PATCH",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: serializers.dubbing.resource.SegmentUpdatePayload.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
-            }),
+            body: mergeAdditionalBodyParameters(
+                serializers.dubbing.resource.SegmentUpdatePayload.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -127,6 +133,8 @@ export class SegmentClient {
      * @param {SegmentClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     await client.dubbing.resource.segment.delete("dubbing_id", "segment_id")
@@ -158,7 +166,7 @@ export class SegmentClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

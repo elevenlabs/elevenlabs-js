@@ -16,6 +16,6 @@ export class UnauthorizedError extends errors.ElevenLabsError {
             Error.captureStackTrace(this, this.constructor);
         }
 
-        this.name = this.constructor.name;
+        this.name = "UnauthorizedError";
     }
 }

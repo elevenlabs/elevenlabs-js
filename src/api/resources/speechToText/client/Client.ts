@@ -37,10 +37,13 @@ export class SpeechToTextClient {
      * @param {SpeechToTextClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
      *     import { createReadStream } from "fs";
      *     await client.speechToText.convert({
+     *         token: "token",
      *         enableLogging: true,
      *         modelId: "scribe_v2"
      *     })
@@ -57,6 +60,7 @@ export class SpeechToTextClient {
         requestOptions?: SpeechToTextClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.SpeechToTextConvertResponse>> {
         const _queryParams: Record<string, unknown> = {
+            token: request.token,
             enable_logging: request.enableLogging,
         };
         const _body = await core.newFormData();
@@ -217,7 +221,11 @@ export class SpeechToTextClient {
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

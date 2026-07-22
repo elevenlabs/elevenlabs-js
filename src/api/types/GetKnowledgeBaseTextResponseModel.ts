@@ -13,4 +13,5 @@ export interface GetKnowledgeBaseTextResponseModel {
     /** The folder path segments leading to this entity, from root to parent folder. */
     folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentResponseModel[];
     extractedInnerHtml: string;
+    contentFormat?: ElevenLabs.ContentFormat;
 }

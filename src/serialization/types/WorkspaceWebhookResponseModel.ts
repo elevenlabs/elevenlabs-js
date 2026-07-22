@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { WebhookAuthMethodType } from "./WebhookAuthMethodType";
+import { WorkspaceWebhookEventType } from "./WorkspaceWebhookEventType";
 import { WorkspaceWebhookUsageResponseModel } from "./WorkspaceWebhookUsageResponseModel";
 
 export const WorkspaceWebhookResponseModel: core.serialization.ObjectSchema<
@@ -18,6 +19,7 @@ export const WorkspaceWebhookResponseModel: core.serialization.ObjectSchema<
     createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number()),
     authType: core.serialization.property("auth_type", WebhookAuthMethodType),
     usage: core.serialization.list(WorkspaceWebhookUsageResponseModel).optional(),
+    events: core.serialization.list(WorkspaceWebhookEventType).optional(),
     mostRecentFailureErrorCode: core.serialization.property(
         "most_recent_failure_error_code",
         core.serialization.number().optional(),
@@ -38,6 +40,7 @@ export declare namespace WorkspaceWebhookResponseModel {
         created_at_unix: number;
         auth_type: WebhookAuthMethodType.Raw;
         usage?: WorkspaceWebhookUsageResponseModel.Raw[] | null;
+        events?: WorkspaceWebhookEventType.Raw[] | null;
         most_recent_failure_error_code?: number | null;
         most_recent_failure_timestamp?: number | null;
     }

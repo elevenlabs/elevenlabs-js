@@ -20,6 +20,9 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gpt-5.4-mini",
     "gpt-5.4-nano",
     "gpt-5.5",
+    "gpt-5.6-sol",
+    "gpt-5.6-terra",
+    "gpt-5.6-luna",
     "gpt-5-mini",
     "gpt-5-nano",
     "gpt-3.5-turbo",
@@ -37,7 +40,9 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gemini-3.5-flash",
     "claude-sonnet-4-5",
     "claude-opus-4-7",
+    "claude-opus-4-8",
     "claude-sonnet-4-6",
+    "claude-sonnet-5",
     "claude-sonnet-4",
     "claude-haiku-4-5",
     "claude-3-7-sonnet",
@@ -113,6 +118,9 @@ export declare namespace Llm {
         | "gpt-5.4-mini"
         | "gpt-5.4-nano"
         | "gpt-5.5"
+        | "gpt-5.6-sol"
+        | "gpt-5.6-terra"
+        | "gpt-5.6-luna"
         | "gpt-5-mini"
         | "gpt-5-nano"
         | "gpt-3.5-turbo"
@@ -130,7 +138,9 @@ export declare namespace Llm {
         | "gemini-3.5-flash"
         | "claude-sonnet-4-5"
         | "claude-opus-4-7"
+        | "claude-opus-4-8"
         | "claude-sonnet-4-6"
+        | "claude-sonnet-5"
         | "claude-sonnet-4"
         | "claude-haiku-4-5"
         | "claude-3-7-sonnet"

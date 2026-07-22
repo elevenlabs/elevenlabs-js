@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../../index";
 
 /**
- * Send audio data to the WebSocket
+ * Defines the message types that can be sent from client to server
  */
 export type SendTranslateStreamMessage =
     | ElevenLabs.TranslateInputAudioChunkPayload

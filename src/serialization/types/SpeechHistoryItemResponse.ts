@@ -4,7 +4,6 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { DialogueInputResponseModel } from "./DialogueInputResponseModel";
-import { FeedbackItem } from "./FeedbackItem";
 import { HistoryAlignmentsResponseModel } from "./HistoryAlignmentsResponseModel";
 import { SpeechHistoryItemResponseSource } from "./SpeechHistoryItemResponseSource";
 import { SpeechHistoryItemResponseVoiceCategory } from "./SpeechHistoryItemResponseVoiceCategory";
@@ -26,7 +25,6 @@ export const SpeechHistoryItemResponse: core.serialization.ObjectSchema<
     contentType: core.serialization.property("content_type", core.serialization.string()),
     state: core.serialization.unknown(),
     settings: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
-    feedback: FeedbackItem.optional(),
     shareLinkId: core.serialization.property("share_link_id", core.serialization.string().optional()),
     source: SpeechHistoryItemResponseSource.optional(),
     alignments: HistoryAlignmentsResponseModel.optional(),
@@ -49,7 +47,6 @@ export declare namespace SpeechHistoryItemResponse {
         content_type: string;
         state?: unknown;
         settings?: Record<string, unknown> | null;
-        feedback?: FeedbackItem.Raw | null;
         share_link_id?: string | null;
         source?: SpeechHistoryItemResponseSource.Raw | null;
         alignments?: HistoryAlignmentsResponseModel.Raw | null;

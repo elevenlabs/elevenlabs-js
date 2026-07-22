@@ -15,6 +15,7 @@ export type ListAuthConnectionsResponseAuthConnectionsItem =
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.Oauth2ClientCredentials
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.Oauth2Jwt
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.PrivateKeyJwt
+    | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.RefreshTokenAuth
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.SlackBotAuth
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.UrlSecret
     | ElevenLabs.ListAuthConnectionsResponseAuthConnectionsItem.WhatsappAuth;
@@ -54,6 +55,10 @@ export namespace ListAuthConnectionsResponseAuthConnectionsItem {
 
     export interface PrivateKeyJwt extends ElevenLabs.PrivateKeyJwtResponse {
         authType: "private_key_jwt";
+    }
+
+    export interface RefreshTokenAuth extends ElevenLabs.RefreshTokenAuthResponse {
+        authType: "refresh_token_auth";
     }
 
     export interface SlackBotAuth extends ElevenLabs.SlackBotAuthResponse {

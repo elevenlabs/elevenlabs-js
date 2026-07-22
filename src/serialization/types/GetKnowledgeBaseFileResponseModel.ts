@@ -3,8 +3,11 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AutoSyncInfo } from "./AutoSyncInfo";
+import { ContentFormat } from "./ContentFormat";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { ExternalFileSyncInfo } from "./ExternalFileSyncInfo";
+import { FileRefreshStatus } from "./FileRefreshStatus";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
 import { KnowledgeBaseFolderPathSegmentResponseModel } from "./KnowledgeBaseFolderPathSegmentResponseModel";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
@@ -24,8 +27,11 @@ export const GetKnowledgeBaseFileResponseModel: core.serialization.ObjectSchema<
         core.serialization.list(KnowledgeBaseFolderPathSegmentResponseModel).optional(),
     ),
     extractedInnerHtml: core.serialization.property("extracted_inner_html", core.serialization.string()),
+    contentFormat: core.serialization.property("content_format", ContentFormat.optional()),
     filename: core.serialization.string(),
     externalSyncInfo: core.serialization.property("external_sync_info", ExternalFileSyncInfo.optional()),
+    autoSyncInfo: core.serialization.property("auto_sync_info", AutoSyncInfo.optional()),
+    refreshStatus: core.serialization.property("refresh_status", FileRefreshStatus.optional()),
     isFrozen: core.serialization.property("is_frozen", core.serialization.boolean().optional()),
 });
 
@@ -39,8 +45,11 @@ export declare namespace GetKnowledgeBaseFileResponseModel {
         folder_parent_id?: string | null;
         folder_path?: KnowledgeBaseFolderPathSegmentResponseModel.Raw[] | null;
         extracted_inner_html: string;
+        content_format?: ContentFormat.Raw | null;
         filename: string;
         external_sync_info?: ExternalFileSyncInfo.Raw | null;
+        auto_sync_info?: AutoSyncInfo.Raw | null;
+        refresh_status?: FileRefreshStatus.Raw | null;
         is_frozen?: boolean | null;
     }
 }

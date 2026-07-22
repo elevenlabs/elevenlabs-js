@@ -3,9 +3,16 @@
 import type * as ElevenLabs from "../index";
 
 export interface ObjectJsonSchemaPropertyInput {
+    propertyKind?: ElevenLabs.ObjectJsonSchemaPropertyInputPropertyKind;
+    description?: string;
+    /** When set, the entire parameter is populated from this dynamic variable at runtime. Mutually exclusive with description (LLM-provided value), constant_value, and is_omitted. */
+    dynamicVariable?: string;
+    /** When set, the entire object uses this constant JSON value at runtime. Mutually exclusive with description (LLM-provided object), dynamic_variable, and is_omitted. */
+    constantValue?: Record<string, unknown>;
+    /** If true, this parameter will be completely omitted from the request. Only valid for optional parameters. Mutually exclusive with description, dynamic_variable, and constant_value. */
+    isOmitted?: boolean;
     type?: "object";
     required?: string[];
-    description?: string;
     properties?: Record<string, ElevenLabs.ObjectJsonSchemaPropertyInputPropertiesValue>;
     requiredConstraints?: ElevenLabs.RequiredConstraints;
 }

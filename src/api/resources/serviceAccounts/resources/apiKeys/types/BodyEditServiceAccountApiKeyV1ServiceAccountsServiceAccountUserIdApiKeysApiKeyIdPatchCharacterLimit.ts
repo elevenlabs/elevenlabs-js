@@ -5,4 +5,5 @@
  */
 export type BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchCharacterLimit =
     | number
+    | "clear"
     | "no_update";

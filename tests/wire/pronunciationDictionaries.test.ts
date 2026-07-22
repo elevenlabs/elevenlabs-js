@@ -209,6 +209,7 @@ describe("PronunciationDictionariesClient", () => {
             pageSize: 1,
             sort: "creation_time_unix",
             sortDirection: "sort_direction",
+            includeArchived: false,
         });
         expect(response).toEqual({
             pronunciationDictionaries: [

@@ -14,6 +14,10 @@ export const UpdateWhatsAppAccountRequest: core.serialization.Schema<
         "enable_audio_message_response",
         core.serialization.boolean().optional(),
     ),
+    enableTypingIndicator: core.serialization.property(
+        "enable_typing_indicator",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace UpdateWhatsAppAccountRequest {
@@ -21,5 +25,6 @@ export declare namespace UpdateWhatsAppAccountRequest {
         assigned_agent_id?: string | null;
         enable_messaging?: boolean | null;
         enable_audio_message_response?: boolean | null;
+        enable_typing_indicator?: boolean | null;
     }
 }

@@ -3,15 +3,23 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
+import { ObjectJsonSchemaPropertyInputPropertyKind } from "./ObjectJsonSchemaPropertyInputPropertyKind";
 import { RequiredConstraints } from "./RequiredConstraints";
 
 export const ObjectJsonSchemaPropertyInput: core.serialization.ObjectSchema<
     serializers.ObjectJsonSchemaPropertyInput.Raw,
     ElevenLabs.ObjectJsonSchemaPropertyInput
 > = core.serialization.object({
+    propertyKind: core.serialization.property("property_kind", ObjectJsonSchemaPropertyInputPropertyKind.optional()),
+    description: core.serialization.string().optional(),
+    dynamicVariable: core.serialization.property("dynamic_variable", core.serialization.string().optional()),
+    constantValue: core.serialization.property(
+        "constant_value",
+        core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    ),
+    isOmitted: core.serialization.property("is_omitted", core.serialization.boolean().optional()),
     type: core.serialization.stringLiteral("object").optional(),
     required: core.serialization.list(core.serialization.string()).optional(),
-    description: core.serialization.string().optional(),
     properties: core.serialization
         .record(
             core.serialization.string(),
@@ -23,9 +31,13 @@ export const ObjectJsonSchemaPropertyInput: core.serialization.ObjectSchema<
 
 export declare namespace ObjectJsonSchemaPropertyInput {
     export interface Raw {
+        property_kind?: ObjectJsonSchemaPropertyInputPropertyKind.Raw | null;
+        description?: string | null;
+        dynamic_variable?: string | null;
+        constant_value?: Record<string, unknown> | null;
+        is_omitted?: boolean | null;
         type?: "object" | null;
         required?: string[] | null;
-        description?: string | null;
         properties?: Record<string, serializers.ObjectJsonSchemaPropertyInputPropertiesValue.Raw> | null;
         required_constraints?: RequiredConstraints.Raw | null;
     }

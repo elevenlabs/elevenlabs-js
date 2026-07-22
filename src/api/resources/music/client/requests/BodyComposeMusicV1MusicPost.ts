@@ -21,6 +21,10 @@ export interface BodyComposeMusicV1MusicPost {
     seed?: number;
     /** If true, guarantees that the generated song will be instrumental. If false, the song may or may not be instrumental depending on the `prompt`. Can only be used with `prompt`. */
     forceInstrumental?: boolean;
+    /** The ID of the finetune to use for the generation */
+    finetuneId?: string;
+    /** How strongly the finetune influences the generation. Defaults to 1.0 (full strength). Lower values soften the influence of the finetune, leaving more room for prompt-level steering. Only meaningful when `finetune_id` is also provided. */
+    finetuneStrength?: number;
     /** Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan` and only applies to `music_v1`; for `music_v2` section durations are always enforced and this is ignored. When false for `music_v1`, the model may adjust individual section durations for better quality and latency, while preserving the total song duration from the plan. */
     respectSectionsDurations?: boolean;
     /** Whether to store the generated song for inpainting. */
