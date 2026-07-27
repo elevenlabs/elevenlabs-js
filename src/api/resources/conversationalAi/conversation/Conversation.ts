@@ -39,6 +39,11 @@ export class Conversation extends EventEmitter {
     private callbackUserTranscript?: (transcript: string) => void;
     private callbackLatencyMeasurement?: (latencyMs: number) => void;
     private callbackMessageReceived?: (message: any) => void;
+    private callbackAgentReasoningResponsePart?: (
+        text: string,
+        type: "start" | "delta" | "stop",
+        eventId: number,
+    ) => void;
 
     // Internal state
     private ws?: WebSocketInterface;
@@ -61,6 +66,11 @@ export class Conversation extends EventEmitter {
         callbackUserTranscript?: (transcript: string) => void;
         callbackLatencyMeasurement?: (latencyMs: number) => void;
         callbackMessageReceived?: (message: any) => void;
+        callbackAgentReasoningResponsePart?: (
+            text: string,
+            type: "start" | "delta" | "stop",
+            eventId: number,
+        ) => void;
     }) {
         super();
 
@@ -78,6 +88,7 @@ export class Conversation extends EventEmitter {
         this.callbackUserTranscript = options.callbackUserTranscript;
         this.callbackLatencyMeasurement = options.callbackLatencyMeasurement;
         this.callbackMessageReceived = options.callbackMessageReceived;
+        this.callbackAgentReasoningResponsePart = options.callbackAgentReasoningResponsePart;
     }
 
     /**
@@ -364,6 +375,17 @@ export class Conversation extends EventEmitter {
                         this.ws.send(JSON.stringify(response));
                     }
                 });
+                break;
+
+            case "agent_reasoning_response_part":
+                if (this.callbackAgentReasoningResponsePart) {
+                    const reasoningEvent = message.reasoning_response_part;
+                    this.callbackAgentReasoningResponsePart(
+                        reasoningEvent.text,
+                        reasoningEvent.type,
+                        parseInt(reasoningEvent.event_id, 10),
+                    );
+                }
                 break;
 
             default:
