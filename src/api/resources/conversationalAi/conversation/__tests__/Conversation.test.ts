@@ -357,6 +357,45 @@ describe("Conversation", () => {
                 }),
             );
         });
+
+        it("should handle agent reasoning response part", async () => {
+            const agentReasoningCallback = jest.fn();
+
+            conversation = new Conversation({
+                client: mockClient,
+                agentId: "test-agent-id",
+                requiresAuth: false,
+                audioInterface: mockAudioInterface,
+                callbackAgentReasoningResponsePart: agentReasoningCallback,
+            });
+
+            mockWebSocket.on.mockImplementation((event: string, callback: Function) => {
+                if (event === "open") {
+                    setTimeout(() => callback(), 0);
+                } else if (event === "message") {
+                    messageHandler = callback as (data: any) => void;
+                }
+            });
+
+            await conversation.startSession();
+
+            const message = {
+                type: "agent_reasoning_response_part",
+                reasoning_response_part: {
+                    text: "Let me think about this...",
+                    type: "delta",
+                    event_id: "42",
+                },
+            };
+
+            messageHandler(Buffer.from(JSON.stringify(message)));
+
+            expect(agentReasoningCallback).toHaveBeenCalledWith(
+                "Let me think about this...",
+                "delta",
+                42,
+            );
+        });
     });
 
     describe("client tools integration", () => {
