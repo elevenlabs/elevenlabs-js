@@ -59,6 +59,7 @@ export const ConversationHistoryTranscriptResponseModel: core.serialization.Obje
         core.serialization.list(core.serialization.string()).optional(),
     ),
     userIdentifier: core.serialization.property("user_identifier", core.serialization.string().optional()),
+    id: core.serialization.string().optional(),
     fileInput: core.serialization.property(
         "file_input",
         ConversationHistoryTranscriptFileInputResponseModel.optional(),
@@ -89,6 +90,7 @@ export declare namespace ConversationHistoryTranscriptResponseModel {
         source_event_id?: number | null;
         used_static_kb_document_ids?: string[] | null;
         user_identifier?: string | null;
+        id?: string | null;
         file_input?: ConversationHistoryTranscriptFileInputResponseModel.Raw | null;
         contextual_update_info?: ContextualUpdateInfo.Raw | null;
         reasoned?: boolean | null;

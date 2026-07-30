@@ -9,6 +9,7 @@ export const FileInputConfig: core.serialization.ObjectSchema<
     ElevenLabs.FileInputConfig
 > = core.serialization.object({
     enabled: core.serialization.boolean().optional(),
+    maxFilesInMemory: core.serialization.property("max_files_in_memory", core.serialization.number().optional()),
     maxFilesPerConversation: core.serialization.property(
         "max_files_per_conversation",
         core.serialization.number().optional(),
@@ -18,6 +19,7 @@ export const FileInputConfig: core.serialization.ObjectSchema<
 export declare namespace FileInputConfig {
     export interface Raw {
         enabled?: boolean | null;
+        max_files_in_memory?: number | null;
         max_files_per_conversation?: number | null;
     }
 }

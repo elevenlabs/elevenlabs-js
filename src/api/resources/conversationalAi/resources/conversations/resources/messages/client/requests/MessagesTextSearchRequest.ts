@@ -7,6 +7,8 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *     {
  *         textQuery: "refund policy",
  *         agentId: "agent_id",
+ *         visitedAgentIds: ["visited_agent_ids"],
+ *         visitedAgentBranchIds: ["visited_agent_branch_ids"],
  *         callSuccessful: "success",
  *         callStartBeforeUnix: 1,
  *         callStartAfterUnix: 1,
@@ -22,12 +24,15 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *         toolNamesSuccessful: ["tool_names_successful"],
  *         toolNamesErrored: ["tool_names_errored"],
  *         mainLanguages: ["main_languages"],
+ *         excludeStatuses: ["initiated"],
+ *         terminationReasons: ["termination_reasons"],
  *         pageSize: 1,
  *         summaryMode: "exclude",
  *         conversationInitiationSource: "unknown",
  *         textOnly: true,
  *         conversationProductType: "agents",
  *         branchId: "branch_id",
+ *         versionId: "version_id",
  *         topicIds: ["topic_ids"],
  *         sortBy: "search_score",
  *         cursor: "cursor"
@@ -38,6 +43,10 @@ export interface MessagesTextSearchRequest {
     textQuery: string;
     /** Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource. */
     agentId?: string;
+    /** Filter conversations where any of these agents participated. Can not exceed 50 values. */
+    visitedAgentIds?: string | string[];
+    /** Filter conversations where any of these agent branches participated. Can not exceed 50 values. */
+    visitedAgentBranchIds?: string | string[];
     /** The result of the success evaluation */
     callSuccessful?: ElevenLabs.EvaluationSuccessResult;
     /** Unix timestamp (in seconds) to filter conversations up to this start date. */
@@ -68,6 +77,12 @@ export interface MessagesTextSearchRequest {
     toolNamesErrored?: string | string[];
     /** Filter conversations by detected main language (language code). */
     mainLanguages?: string | string[];
+    /** Exclude conversations with the given statuses. Useful for hiding in-progress / processing conversations from list views. */
+    excludeStatuses?:
+        | ElevenLabs.conversationalAi.conversations.MessagesTextSearchRequestExcludeStatusesItem
+        | ElevenLabs.conversationalAi.conversations.MessagesTextSearchRequestExcludeStatusesItem[];
+    /** Filter conversations by their stored termination_reason (metadata.termination_reason). Repeat param to match any of several. */
+    terminationReasons?: string | string[];
     /** Number of results per page. Max 50. */
     pageSize?: number;
     /** Whether to include transcript summaries in the response. */
@@ -78,6 +93,8 @@ export interface MessagesTextSearchRequest {
     conversationProductType?: ElevenLabs.ConversationProduct;
     /** Filter conversations by branch ID. */
     branchId?: string;
+    /** Filter conversations by version ID. */
+    versionId?: string;
     /** Filter conversations by topic IDs assigned during topic discovery. */
     topicIds?: string | string[];
     /** Sort order for search results. 'search_score' sorts by search score, 'created_at' sorts by conversation start time. */

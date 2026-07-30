@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const ProjectCreationMetaResponseModelStatus: core.serialization.Schema<
     serializers.ProjectCreationMetaResponseModelStatus.Raw,
     ElevenLabs.ProjectCreationMetaResponseModelStatus
-> = core.serialization.enum_(["pending", "creating", "finished", "failed"]);
+> = core.serialization.enum_(["draft", "pending", "creating", "finished", "failed"]);
 
 export declare namespace ProjectCreationMetaResponseModelStatus {
-    export type Raw = "pending" | "creating" | "finished" | "failed";
+    export type Raw = "draft" | "pending" | "creating" | "finished" | "failed";
 }

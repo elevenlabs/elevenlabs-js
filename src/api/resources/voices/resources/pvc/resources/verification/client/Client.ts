@@ -72,7 +72,7 @@ export class VerificationClient {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
                 ..._maybeEncodedRequest.headers,
             }),
             requestOptions?.headers,

@@ -10,7 +10,7 @@ import { Llm } from "./Llm";
 import { LlmReasoningEffort } from "./LlmReasoningEffort";
 import { PromptAgentApiModelWorkflowOverrideInputBackupLlmConfig } from "./PromptAgentApiModelWorkflowOverrideInputBackupLlmConfig";
 import { PromptAgentApiModelWorkflowOverrideInputToolsItem } from "./PromptAgentApiModelWorkflowOverrideInputToolsItem";
-import { RagConfigWorkflowOverride } from "./RagConfigWorkflowOverride";
+import { RagConfigWorkflowOverrideInput } from "./RagConfigWorkflowOverrideInput";
 
 export const PromptAgentApiModelWorkflowOverrideInput: core.serialization.ObjectSchema<
     serializers.PromptAgentApiModelWorkflowOverrideInput.Raw,
@@ -45,7 +45,7 @@ export const PromptAgentApiModelWorkflowOverrideInput: core.serialization.Object
         "ignore_default_personality",
         core.serialization.boolean().optional(),
     ),
-    rag: RagConfigWorkflowOverride.optional(),
+    rag: RagConfigWorkflowOverrideInput.optional(),
     timezone: core.serialization.string().optional(),
     backupLlmConfig: core.serialization.property(
         "backup_llm_config",
@@ -74,7 +74,7 @@ export declare namespace PromptAgentApiModelWorkflowOverrideInput {
         knowledge_base?: KnowledgeBaseLocator.Raw[] | null;
         custom_llm?: CustomLlm.Raw | null;
         ignore_default_personality?: boolean | null;
-        rag?: RagConfigWorkflowOverride.Raw | null;
+        rag?: RagConfigWorkflowOverrideInput.Raw | null;
         timezone?: string | null;
         backup_llm_config?: PromptAgentApiModelWorkflowOverrideInputBackupLlmConfig.Raw | null;
         cascade_timeout_seconds?: number | null;

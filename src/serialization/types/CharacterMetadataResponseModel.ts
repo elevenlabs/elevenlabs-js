@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { CharacterAge } from "./CharacterAge";
 import { CharacterGender } from "./CharacterGender";
+import { CharacterRole } from "./CharacterRole";
 
 export const CharacterMetadataResponseModel: core.serialization.ObjectSchema<
     serializers.CharacterMetadataResponseModel.Raw,
@@ -19,6 +20,7 @@ export const CharacterMetadataResponseModel: core.serialization.ObjectSchema<
     gender: CharacterGender.optional(),
     age: CharacterAge.optional(),
     accent: core.serialization.string().optional(),
+    role: CharacterRole.optional(),
 });
 
 export declare namespace CharacterMetadataResponseModel {
@@ -29,5 +31,6 @@ export declare namespace CharacterMetadataResponseModel {
         gender?: CharacterGender.Raw | null;
         age?: CharacterAge.Raw | null;
         accent?: string | null;
+        role?: CharacterRole.Raw | null;
     }
 }

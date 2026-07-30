@@ -3,5 +3,6 @@
 export const CustomLlmapiType = {
     ChatCompletions: "chat_completions",
     Responses: "responses",
+    Websocket: "websocket",
 } as const;
 export type CustomLlmapiType = (typeof CustomLlmapiType)[keyof typeof CustomLlmapiType];

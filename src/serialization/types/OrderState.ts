@@ -5,8 +5,27 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const OrderState: core.serialization.Schema<serializers.OrderState.Raw, ElevenLabs.OrderState> =
-    core.serialization.enum_(["open", "submitted", "paid", "accepted", "rejected", "done"]);
+    core.serialization.enum_([
+        "open",
+        "submitted",
+        "paid",
+        "accepted",
+        "rejected",
+        "done",
+        "cancelling",
+        "cancelled",
+        "expired",
+    ]);
 
 export declare namespace OrderState {
-    export type Raw = "open" | "submitted" | "paid" | "accepted" | "rejected" | "done";
+    export type Raw =
+        | "open"
+        | "submitted"
+        | "paid"
+        | "accepted"
+        | "rejected"
+        | "done"
+        | "cancelling"
+        | "cancelled"
+        | "expired";
 }

@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { EndCallToolResultModel } from "./EndCallToolResultModel";
 import { KnowledgeBaseRagToolResultModel } from "./KnowledgeBaseRagToolResultModel";
+import { KnowledgeBaseToolResultModel } from "./KnowledgeBaseToolResultModel";
 import { LanguageDetectionToolResultModel } from "./LanguageDetectionToolResultModel";
 import { PlayDtmfResultErrorModel } from "./PlayDtmfResultErrorModel";
 import { PlayDtmfResultSuccessModel } from "./PlayDtmfResultSuccessModel";
@@ -27,6 +28,7 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelInputResult
     .union(core.serialization.discriminant("resultType", "result_type"), {
         end_call_success: EndCallToolResultModel,
         knowledge_base_rag_success: KnowledgeBaseRagToolResultModel,
+        knowledge_base_success: KnowledgeBaseToolResultModel,
         language_detection_success: LanguageDetectionToolResultModel,
         play_dtmf_error: PlayDtmfResultErrorModel,
         play_dtmf_success: PlayDtmfResultSuccessModel,
@@ -51,6 +53,7 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
     export type Raw =
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.EndCallSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.KnowledgeBaseRagSuccess
+        | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.KnowledgeBaseSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.LanguageDetectionSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.PlayDtmfError
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.PlayDtmfSuccess
@@ -72,6 +75,10 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
 
     export interface KnowledgeBaseRagSuccess extends KnowledgeBaseRagToolResultModel.Raw {
         result_type: "knowledge_base_rag_success";
+    }
+
+    export interface KnowledgeBaseSuccess extends KnowledgeBaseToolResultModel.Raw {
+        result_type: "knowledge_base_success";
     }
 
     export interface LanguageDetectionSuccess extends LanguageDetectionToolResultModel.Raw {

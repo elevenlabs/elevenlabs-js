@@ -33,7 +33,7 @@ describe("ConversationsClient", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { token: "token" };
+        const rawResponseBody = { token: "token", conversation_id: "conversation_id" };
 
         server
             .mockEndpoint()
@@ -51,6 +51,7 @@ describe("ConversationsClient", () => {
         });
         expect(response).toEqual({
             token: "token",
+            conversationId: "conversation_id",
         });
     });
 
@@ -88,6 +89,8 @@ describe("ConversationsClient", () => {
                         max_user_frustration_score: 1.1,
                         num_scored_user_turns: 1,
                     },
+                    data_collection_results: { key: "value" },
+                    tag_ids: ["tag_ids"],
                 },
             ],
             next_cursor: "next_cursor",
@@ -105,6 +108,8 @@ describe("ConversationsClient", () => {
         const response = await client.conversationalAi.conversations.list({
             cursor: "cursor",
             agentId: "agent_id",
+            visitedAgentIds: ["visited_agent_ids"],
+            visitedAgentBranchIds: ["visited_agent_branch_ids"],
             callSuccessful: "success",
             callStartBeforeUnix: 1,
             callStartAfterUnix: 1,
@@ -116,6 +121,8 @@ describe("ConversationsClient", () => {
             userId: "user_id",
             evaluationParams: ["evaluation_params"],
             dataCollectionParams: ["data_collection_params"],
+            dataCollectionIds: ["data_collection_ids"],
+            evaluationCriteriaIds: ["evaluation_criteria_ids"],
             toolNames: ["tool_names"],
             toolNamesSuccessful: ["tool_names_successful"],
             toolNamesErrored: ["tool_names_errored"],
@@ -127,6 +134,7 @@ describe("ConversationsClient", () => {
             textOnly: true,
             conversationProductType: "agents",
             branchId: "branch_id",
+            versionId: "version_id",
             topicIds: ["topic_ids"],
             excludeStatuses: ["initiated"],
             tagIds: ["tag_ids"],
@@ -163,6 +171,10 @@ describe("ConversationsClient", () => {
                         maxUserFrustrationScore: 1.1,
                         numScoredUserTurns: 1,
                     },
+                    dataCollectionResults: {
+                        key: "value",
+                    },
+                    tagIds: ["tag_ids"],
                 },
             ],
             nextCursor: "next_cursor",
@@ -372,6 +384,7 @@ describe("ConversationsClient", () => {
                     source_event_id: 1,
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
+                    id: "id",
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -676,6 +689,7 @@ describe("ConversationsClient", () => {
                     sourceEventId: 1,
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
+                    id: "id",
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",
@@ -897,6 +911,7 @@ describe("ConversationsClient", () => {
                     source_event_id: 1,
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
+                    id: "id",
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -1200,6 +1215,7 @@ describe("ConversationsClient", () => {
                     sourceEventId: 1,
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
+                    id: "id",
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",

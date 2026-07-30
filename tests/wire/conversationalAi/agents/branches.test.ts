@@ -578,6 +578,10 @@ describe("BranchesClient", () => {
                     },
                 },
                 data_collection_scopes: { key: "conversation" },
+                analysis_items: {
+                    evaluation_criteria: [{ source: "system", analysis_item_id: "__system_eval_criteria_sentiment" }],
+                    data_collection: [{ source: "system", analysis_item_id: "__system_data_collection_topic" }],
+                },
                 overrides: {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
@@ -1761,6 +1765,20 @@ describe("BranchesClient", () => {
                 },
                 dataCollectionScopes: {
                     key: "conversation",
+                },
+                analysisItems: {
+                    evaluationCriteria: [
+                        {
+                            source: "system",
+                            analysisItemId: "__system_eval_criteria_sentiment",
+                        },
+                    ],
+                    dataCollection: [
+                        {
+                            source: "system",
+                            analysisItemId: "__system_data_collection_topic",
+                        },
+                    ],
                 },
                 overrides: {
                     customLlmExtraBody: true,
@@ -3094,6 +3112,10 @@ describe("BranchesClient", () => {
                     },
                 },
                 data_collection_scopes: { key: "conversation" },
+                analysis_items: {
+                    evaluation_criteria: [{ source: "system", analysis_item_id: "__system_eval_criteria_sentiment" }],
+                    data_collection: [{ source: "system", analysis_item_id: "__system_data_collection_topic" }],
+                },
                 overrides: {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
@@ -4273,6 +4295,20 @@ describe("BranchesClient", () => {
                 },
                 dataCollectionScopes: {
                     key: "conversation",
+                },
+                analysisItems: {
+                    evaluationCriteria: [
+                        {
+                            source: "system",
+                            analysisItemId: "__system_eval_criteria_sentiment",
+                        },
+                    ],
+                    dataCollection: [
+                        {
+                            source: "system",
+                            analysisItemId: "__system_data_collection_topic",
+                        },
+                    ],
                 },
                 overrides: {
                     customLlmExtraBody: true,

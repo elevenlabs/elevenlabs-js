@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ProjectCreationMetaResponseModelStatus } from "./ProjectCreationMetaResponseModelStatus";
-import { ProjectCreationMetaResponseModelType } from "./ProjectCreationMetaResponseModelType";
+import { ProjectCreationMetaType } from "./ProjectCreationMetaType";
 
 export const ProjectCreationMetaResponseModel: core.serialization.ObjectSchema<
     serializers.ProjectCreationMetaResponseModel.Raw,
@@ -12,13 +12,13 @@ export const ProjectCreationMetaResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     creationProgress: core.serialization.property("creation_progress", core.serialization.number()),
     status: ProjectCreationMetaResponseModelStatus,
-    type: ProjectCreationMetaResponseModelType,
+    type: ProjectCreationMetaType,
 });
 
 export declare namespace ProjectCreationMetaResponseModel {
     export interface Raw {
         creation_progress: number;
         status: ProjectCreationMetaResponseModelStatus.Raw;
-        type: ProjectCreationMetaResponseModelType.Raw;
+        type: ProjectCreationMetaType.Raw;
     }
 }

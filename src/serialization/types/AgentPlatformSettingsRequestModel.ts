@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AgentAnalysisItemsInput } from "./AgentAnalysisItemsInput";
 import { AgentCallLimits } from "./AgentCallLimits";
 import { AgentTestingSettings } from "./AgentTestingSettings";
 import { AgentTrustContext } from "./AgentTrustContext";
@@ -33,6 +34,7 @@ export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
         "data_collection_scopes",
         core.serialization.record(core.serialization.string(), AnalysisScope).optional(),
     ),
+    analysisItems: core.serialization.property("analysis_items", AgentAnalysisItemsInput.optional()),
     overrides: ConversationInitiationClientDataConfigInput.optional(),
     workspaceOverrides: core.serialization.property("workspace_overrides", AgentWorkspaceOverridesInput.optional()),
     testing: AgentTestingSettings.optional(),
@@ -58,6 +60,7 @@ export declare namespace AgentPlatformSettingsRequestModel {
         widget?: WidgetConfig.Raw | null;
         data_collection?: Record<string, AnalysisProperty.Raw> | null;
         data_collection_scopes?: Record<string, AnalysisScope.Raw> | null;
+        analysis_items?: AgentAnalysisItemsInput.Raw | null;
         overrides?: ConversationInitiationClientDataConfigInput.Raw | null;
         workspace_overrides?: AgentWorkspaceOverridesInput.Raw | null;
         testing?: AgentTestingSettings.Raw | null;

@@ -326,6 +326,74 @@ describe("DocumentsClient", () => {
         });
     });
 
+    test("get_bulk_agents", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { document_ids: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"] };
+        const rawResponseBody = {
+            agents: [
+                {
+                    type: "available",
+                    referenced_resource_ids: ["referenced_resource_ids"],
+                    id: "id",
+                    name: "name",
+                    created_at_unix_secs: 1,
+                    access_level: "admin",
+                },
+            ],
+            branches: [
+                {
+                    agent_id: "agent_id",
+                    agent_name: "agent_name",
+                    branch_id: "branch_id",
+                    branch_name: "branch_name",
+                    is_main: true,
+                },
+            ],
+            next_cursor: "next_cursor",
+            has_more: true,
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/knowledge-base/dependent-agents")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.knowledgeBase.documents.getBulkAgents({
+            dependentType: "direct",
+            pageSize: 1,
+            cursor: "cursor",
+            documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"],
+        });
+        expect(response).toEqual({
+            agents: [
+                {
+                    type: "available",
+                    referencedResourceIds: ["referenced_resource_ids"],
+                    id: "id",
+                    name: "name",
+                    createdAtUnixSecs: 1,
+                    accessLevel: "admin",
+                },
+            ],
+            branches: [
+                {
+                    agentId: "agent_id",
+                    agentName: "agent_name",
+                    branchId: "branch_id",
+                    branchName: "branch_name",
+                    isMain: true,
+                },
+            ],
+            nextCursor: "next_cursor",
+            hasMore: true,
+        });
+    });
+
     test("get_source_file_url", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
@@ -380,5 +448,33 @@ describe("DocumentsClient", () => {
             documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"],
         });
         expect(response).toEqual(undefined);
+    });
+
+    test("bulk_delete", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { document_ids: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"] };
+        const rawResponseBody = { key: { status: "success", data: { id: "id" } } };
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/knowledge-base/bulk-delete")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.knowledgeBase.documents.bulkDelete({
+            documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"],
+        });
+        expect(response).toEqual({
+            key: {
+                status: "success",
+                data: {
+                    id: "id",
+                },
+            },
+        });
     });
 });

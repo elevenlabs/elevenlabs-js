@@ -14,11 +14,13 @@ export const ToolResponseMockConfigOutput: core.serialization.ObjectSchema<
         core.serialization.list(UnitTestToolCallParameter).optional(),
     ),
     mockResult: core.serialization.property("mock_result", core.serialization.string()),
+    isError: core.serialization.property("is_error", core.serialization.boolean().optional()),
 });
 
 export declare namespace ToolResponseMockConfigOutput {
     export interface Raw {
         parameter_conditions?: UnitTestToolCallParameter.Raw[] | null;
         mock_result: string;
+        is_error?: boolean | null;
     }
 }

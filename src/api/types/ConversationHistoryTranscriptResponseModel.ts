@@ -23,6 +23,7 @@ export interface ConversationHistoryTranscriptResponseModel {
     sourceEventId?: number;
     usedStaticKbDocumentIds?: string[];
     userIdentifier?: string;
+    id?: string;
     fileInput?: ElevenLabs.ConversationHistoryTranscriptFileInputResponseModel;
     contextualUpdateInfo?: ElevenLabs.ContextualUpdateInfo;
     reasoned?: boolean;

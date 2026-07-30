@@ -2,7 +2,7 @@
 
 export const CharacterAge = {
     Young: "young",
-    MiddleAged: "middle-aged",
+    MiddleAged: "middle_aged",
     Old: "old",
 } as const;
 export type CharacterAge = (typeof CharacterAge)[keyof typeof CharacterAge];

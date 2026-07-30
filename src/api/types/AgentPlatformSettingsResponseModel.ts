@@ -11,6 +11,8 @@ export interface AgentPlatformSettingsResponseModel {
     dataCollection?: Record<string, ElevenLabs.AnalysisProperty>;
     /** Scope per data collection item ID. Missing keys default to conversation scope. */
     dataCollectionScopes?: Record<string, ElevenLabs.AnalysisScope>;
+    /** Evaluation + data-collection items attached by reference. None means the agent has not been migrated onto analysis items yet (distinct from an empty, migrated set); reads fall back to the legacy evaluation/data_collection fields in that case. */
+    analysisItems?: ElevenLabs.AgentAnalysisItemsOutput;
     /** Additional overrides for the agent during conversation initiation */
     overrides?: ElevenLabs.ConversationInitiationClientDataConfigOutput;
     /** Workspace overrides for the agent */

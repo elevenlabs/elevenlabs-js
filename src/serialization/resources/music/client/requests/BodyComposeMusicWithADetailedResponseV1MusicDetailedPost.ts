@@ -23,7 +23,6 @@ export const BodyComposeMusicWithADetailedResponseV1MusicDetailedPost: core.seri
     seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     finetuneId: core.serialization.property("finetune_id", core.serialization.string().optional()),
-    finetuneStrength: core.serialization.property("finetune_strength", core.serialization.number().optional()),
     respectSectionsDurations: core.serialization.property(
         "respect_sections_durations",
         core.serialization.boolean().optional(),
@@ -42,7 +41,6 @@ export declare namespace BodyComposeMusicWithADetailedResponseV1MusicDetailedPos
         seed?: number | null;
         force_instrumental?: boolean | null;
         finetune_id?: string | null;
-        finetune_strength?: number | null;
         respect_sections_durations?: boolean | null;
         store_for_inpainting?: boolean | null;
         with_timestamps?: boolean | null;

@@ -9,4 +9,5 @@ export interface CharacterMetadataResponseModel {
     gender?: ElevenLabs.CharacterGender;
     age?: ElevenLabs.CharacterAge;
     accent?: string;
+    role?: ElevenLabs.CharacterRole;
 }

@@ -10,7 +10,7 @@ import { Llm } from "./Llm";
 import { LlmReasoningEffort } from "./LlmReasoningEffort";
 import { PromptAgentApiModelOutputBackupLlmConfig } from "./PromptAgentApiModelOutputBackupLlmConfig";
 import { PromptAgentApiModelOutputToolsItem } from "./PromptAgentApiModelOutputToolsItem";
-import { RagConfig } from "./RagConfig";
+import { RagConfigOutput } from "./RagConfigOutput";
 
 export const PromptAgentApiModelOutput: core.serialization.ObjectSchema<
     serializers.PromptAgentApiModelOutput.Raw,
@@ -45,7 +45,7 @@ export const PromptAgentApiModelOutput: core.serialization.ObjectSchema<
         "ignore_default_personality",
         core.serialization.boolean().optional(),
     ),
-    rag: RagConfig.optional(),
+    rag: RagConfigOutput.optional(),
     timezone: core.serialization.string().optional(),
     backupLlmConfig: core.serialization.property(
         "backup_llm_config",
@@ -74,7 +74,7 @@ export declare namespace PromptAgentApiModelOutput {
         knowledge_base?: KnowledgeBaseLocator.Raw[] | null;
         custom_llm?: CustomLlm.Raw | null;
         ignore_default_personality?: boolean | null;
-        rag?: RagConfig.Raw | null;
+        rag?: RagConfigOutput.Raw | null;
         timezone?: string | null;
         backup_llm_config?: PromptAgentApiModelOutputBackupLlmConfig.Raw | null;
         cascade_timeout_seconds?: number | null;

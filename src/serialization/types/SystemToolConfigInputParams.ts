@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { EndCallToolConfig } from "./EndCallToolConfig";
 import { EndProcedureToolConfigInput } from "./EndProcedureToolConfigInput";
 import { KnowledgeBaseRagToolConfig } from "./KnowledgeBaseRagToolConfig";
+import { KnowledgeBaseToolConfig } from "./KnowledgeBaseToolConfig";
 import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
 import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
 import { RunSubagentToolConfigInput } from "./RunSubagentToolConfigInput";
@@ -22,6 +23,7 @@ export const SystemToolConfigInputParams: core.serialization.Schema<
     .union(core.serialization.discriminant("systemToolType", "system_tool_type"), {
         end_call: EndCallToolConfig,
         end_procedure: EndProcedureToolConfigInput,
+        knowledge_base: KnowledgeBaseToolConfig,
         knowledge_base_rag: KnowledgeBaseRagToolConfig,
         language_detection: LanguageDetectionToolConfig,
         play_keypad_touch_tone: PlayDtmfToolConfig,
@@ -41,6 +43,7 @@ export declare namespace SystemToolConfigInputParams {
     export type Raw =
         | SystemToolConfigInputParams.EndCall
         | SystemToolConfigInputParams.EndProcedure
+        | SystemToolConfigInputParams.KnowledgeBase
         | SystemToolConfigInputParams.KnowledgeBaseRag
         | SystemToolConfigInputParams.LanguageDetection
         | SystemToolConfigInputParams.PlayKeypadTouchTone
@@ -57,6 +60,10 @@ export declare namespace SystemToolConfigInputParams {
 
     export interface EndProcedure extends EndProcedureToolConfigInput.Raw {
         system_tool_type: "end_procedure";
+    }
+
+    export interface KnowledgeBase extends KnowledgeBaseToolConfig.Raw {
+        system_tool_type: "knowledge_base";
     }
 
     export interface KnowledgeBaseRag extends KnowledgeBaseRagToolConfig.Raw {

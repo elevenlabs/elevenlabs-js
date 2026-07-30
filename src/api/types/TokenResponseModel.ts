@@ -2,4 +2,5 @@
 
 export interface TokenResponseModel {
     token: string;
+    conversationId: string;
 }

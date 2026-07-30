@@ -9,6 +9,7 @@ export const FileInputConfigWorkflowOverride: core.serialization.ObjectSchema<
     ElevenLabs.FileInputConfigWorkflowOverride
 > = core.serialization.object({
     enabled: core.serialization.boolean().optional(),
+    maxFilesInMemory: core.serialization.property("max_files_in_memory", core.serialization.number().optional()),
     maxFilesPerConversation: core.serialization.property(
         "max_files_per_conversation",
         core.serialization.number().optional(),
@@ -18,6 +19,7 @@ export const FileInputConfigWorkflowOverride: core.serialization.ObjectSchema<
 export declare namespace FileInputConfigWorkflowOverride {
     export interface Raw {
         enabled?: boolean | null;
+        max_files_in_memory?: number | null;
         max_files_per_conversation?: number | null;
     }
 }

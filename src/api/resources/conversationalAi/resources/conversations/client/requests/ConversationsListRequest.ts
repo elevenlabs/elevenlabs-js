@@ -7,6 +7,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *     {
  *         cursor: "cursor",
  *         agentId: "agent_id",
+ *         visitedAgentIds: ["visited_agent_ids"],
+ *         visitedAgentBranchIds: ["visited_agent_branch_ids"],
  *         callSuccessful: "success",
  *         callStartBeforeUnix: 1,
  *         callStartAfterUnix: 1,
@@ -18,6 +20,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *         userId: "user_id",
  *         evaluationParams: ["evaluation_params"],
  *         dataCollectionParams: ["data_collection_params"],
+ *         dataCollectionIds: ["data_collection_ids"],
+ *         evaluationCriteriaIds: ["evaluation_criteria_ids"],
  *         toolNames: ["tool_names"],
  *         toolNamesSuccessful: ["tool_names_successful"],
  *         toolNamesErrored: ["tool_names_errored"],
@@ -29,6 +33,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         textOnly: true,
  *         conversationProductType: "agents",
  *         branchId: "branch_id",
+ *         versionId: "version_id",
  *         topicIds: ["topic_ids"],
  *         excludeStatuses: ["initiated"],
  *         tagIds: ["tag_ids"],
@@ -41,6 +46,10 @@ export interface ConversationsListRequest {
     cursor?: string;
     /** Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource. */
     agentId?: string;
+    /** Filter conversations where any of these agents participated. Can not exceed 50 values. */
+    visitedAgentIds?: string | string[];
+    /** Filter conversations where any of these agent branches participated. Can not exceed 50 values. */
+    visitedAgentBranchIds?: string | string[];
     /** The result of the success evaluation */
     callSuccessful?: ElevenLabs.EvaluationSuccessResult;
     /** Unix timestamp (in seconds) to filter conversations up to this start date. */
@@ -63,6 +72,10 @@ export interface ConversationsListRequest {
     evaluationParams?: string | string[];
     /** Data collection filters. Repeat param. Format: id:op:value where op is one of eq|neq|gt|gte|lt|lte|in|exists|missing. For in, pipe-delimit values. */
     dataCollectionParams?: string | string[];
+    /** Data collection field IDs to include in each conversation summary. Repeat param. When omitted, data_collection_results is not returned. */
+    dataCollectionIds?: string | string[];
+    /** Evaluation criteria IDs to include in each conversation summary. Repeat param. When omitted, evaluation_criteria_results is not returned. */
+    evaluationCriteriaIds?: string | string[];
     /** Filter conversations by tool names used during the call. */
     toolNames?: string | string[];
     /** Filter conversations by tool names that had successful calls. */
@@ -83,6 +96,8 @@ export interface ConversationsListRequest {
     conversationProductType?: ElevenLabs.ConversationProduct;
     /** Filter conversations by branch ID. */
     branchId?: string;
+    /** Filter conversations by version ID. */
+    versionId?: string;
     /** Filter conversations by topic IDs assigned during topic discovery. */
     topicIds?: string | string[];
     /** Exclude conversations with the given statuses. Useful for hiding in-progress / processing conversations from list views. */

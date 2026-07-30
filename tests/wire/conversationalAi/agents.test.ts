@@ -302,6 +302,10 @@ describe("AgentsClient", () => {
                     },
                 },
                 data_collection_scopes: { key: "conversation" },
+                analysis_items: {
+                    evaluation_criteria: [{ source: "system", analysis_item_id: "__system_eval_criteria_sentiment" }],
+                    data_collection: [{ source: "system", analysis_item_id: "__system_data_collection_topic" }],
+                },
                 overrides: {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
@@ -1477,6 +1481,20 @@ describe("AgentsClient", () => {
                 },
                 dataCollectionScopes: {
                     key: "conversation",
+                },
+                analysisItems: {
+                    evaluationCriteria: [
+                        {
+                            source: "system",
+                            analysisItemId: "__system_eval_criteria_sentiment",
+                        },
+                    ],
+                    dataCollection: [
+                        {
+                            source: "system",
+                            analysisItemId: "__system_data_collection_topic",
+                        },
+                    ],
                 },
                 overrides: {
                     customLlmExtraBody: true,
@@ -2794,6 +2812,10 @@ describe("AgentsClient", () => {
                     },
                 },
                 data_collection_scopes: { key: "conversation" },
+                analysis_items: {
+                    evaluation_criteria: [{ source: "system", analysis_item_id: "__system_eval_criteria_sentiment" }],
+                    data_collection: [{ source: "system", analysis_item_id: "__system_data_collection_topic" }],
+                },
                 overrides: {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
@@ -3971,6 +3993,20 @@ describe("AgentsClient", () => {
                 dataCollectionScopes: {
                     key: "conversation",
                 },
+                analysisItems: {
+                    evaluationCriteria: [
+                        {
+                            source: "system",
+                            analysisItemId: "__system_eval_criteria_sentiment",
+                        },
+                    ],
+                    dataCollection: [
+                        {
+                            source: "system",
+                            analysisItemId: "__system_data_collection_topic",
+                        },
+                    ],
+                },
                 overrides: {
                     customLlmExtraBody: true,
                     enableConversationInitiationClientDataFromWebhook: true,
@@ -5131,6 +5167,7 @@ describe("AgentsClient", () => {
                     source_event_id: 1,
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
+                    id: "id",
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -5249,6 +5286,7 @@ describe("AgentsClient", () => {
                     sourceEventId: 1,
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
+                    id: "id",
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",

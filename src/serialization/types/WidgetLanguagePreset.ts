@@ -5,12 +5,17 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { WidgetTermsTranslation } from "./WidgetTermsTranslation";
 import { WidgetTextContents } from "./WidgetTextContents";
+import { WidgetTextContentsTranslation } from "./WidgetTextContentsTranslation";
 
 export const WidgetLanguagePreset: core.serialization.ObjectSchema<
     serializers.WidgetLanguagePreset.Raw,
     ElevenLabs.WidgetLanguagePreset
 > = core.serialization.object({
     textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
+    textContentsTranslation: core.serialization.property(
+        "text_contents_translation",
+        WidgetTextContentsTranslation.optional(),
+    ),
     termsText: core.serialization.property("terms_text", core.serialization.string().optional()),
     termsHtml: core.serialization.property("terms_html", core.serialization.string().optional()),
     termsKey: core.serialization.property("terms_key", core.serialization.string().optional()),
@@ -20,6 +25,7 @@ export const WidgetLanguagePreset: core.serialization.ObjectSchema<
 export declare namespace WidgetLanguagePreset {
     export interface Raw {
         text_contents?: WidgetTextContents.Raw | null;
+        text_contents_translation?: WidgetTextContentsTranslation.Raw | null;
         terms_text?: string | null;
         terms_html?: string | null;
         terms_key?: string | null;

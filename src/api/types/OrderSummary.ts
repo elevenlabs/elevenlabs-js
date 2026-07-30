@@ -17,4 +17,6 @@ export interface OrderSummary {
     submittedAt?: Date;
     /** The timestamp when the order was last modified, if applicable. */
     updatedAt?: Date;
+    /** The reason the order was cancelled, if applicable. */
+    cancelReason?: string;
 }

@@ -8,5 +8,5 @@ export interface ProjectCreationMetaResponseModel {
     /** The status of the project creation action. */
     status: ElevenLabs.ProjectCreationMetaResponseModelStatus;
     /** The type of the project creation action. */
-    type: ElevenLabs.ProjectCreationMetaResponseModelType;
+    type: ElevenLabs.ProjectCreationMetaType;
 }

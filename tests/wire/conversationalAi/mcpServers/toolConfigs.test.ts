@@ -171,7 +171,11 @@ describe("ToolConfigsClient", () => {
             ],
             input_overrides: { key: { source: "constant", constant_value: "constant_value" } },
             response_mocks: [
-                { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
+                {
+                    parameter_conditions: [{ eval: { type: "anything" }, path: "path" }],
+                    mock_result: "mock_result",
+                    is_error: true,
+                },
             ],
         };
 
@@ -220,6 +224,7 @@ describe("ToolConfigsClient", () => {
                         },
                     ],
                     mockResult: "mock_result",
+                    isError: true,
                 },
             ],
         });

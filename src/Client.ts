@@ -51,7 +51,6 @@ export class ElevenLabsClient {
     protected _user: UserClient | undefined;
     protected _voices: VoicesClient | undefined;
     protected _studio: StudioClient | undefined;
-    protected _music: MusicClient | undefined;
     protected _dubbing: DubbingClient | undefined;
     protected _models: ModelsClient | undefined;
     protected _audioNative: AudioNativeClient | undefined;
@@ -60,6 +59,7 @@ export class ElevenLabsClient {
     protected _workspace: WorkspaceClient | undefined;
     protected _serviceAccounts: ServiceAccountsClient | undefined;
     protected _webhooks: WebhooksClient | undefined;
+    protected _music: MusicClient | undefined;
     protected _speechToText: SpeechToTextClient | undefined;
     protected _forcedAlignment: ForcedAlignmentClient | undefined;
     protected _conversationalAi: ConversationalAiClient | undefined;
@@ -117,10 +117,6 @@ export class ElevenLabsClient {
         return (this._studio ??= new StudioClient(this._options));
     }
 
-    public get music(): MusicClient {
-        return (this._music ??= new MusicClient(this._options));
-    }
-
     public get dubbing(): DubbingClient {
         return (this._dubbing ??= new DubbingClient(this._options));
     }
@@ -151,6 +147,10 @@ export class ElevenLabsClient {
 
     public get webhooks(): WebhooksClient {
         return (this._webhooks ??= new WebhooksClient(this._options));
+    }
+
+    public get music(): MusicClient {
+        return (this._music ??= new MusicClient(this._options));
     }
 
     public get speechToText(): SpeechToTextClient {

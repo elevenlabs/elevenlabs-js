@@ -17,4 +17,6 @@ export interface ConversationInitiationClientDataInternal {
     dynamicVariables?: Record<string, unknown>;
     /** Configuration for which tools to mock and fallback behavior */
     toolMockConfig?: ElevenLabs.OrchestratorToolMockBehaviorConfig;
+    /** Per-tool response mock overrides keyed by resolved tool name, applied ahead of the tool's shared mocks. Used for test-specific mocks. */
+    toolMockOverrides?: Record<string, ElevenLabs.ToolResponseMockConfigOutput[]>;
 }

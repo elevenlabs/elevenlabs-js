@@ -2,6 +2,7 @@
 
 /** The status of the project creation action. */
 export const ProjectCreationMetaResponseModelStatus = {
+    Draft: "draft",
     Pending: "pending",
     Creating: "creating",
     Finished: "finished",

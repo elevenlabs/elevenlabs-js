@@ -22,6 +22,8 @@ export interface SimulationTestModel {
     simulationEnvironment?: string;
     /** Configuration for which tools to mock and fallback behavior. */
     toolMockConfig?: ElevenLabs.SimulationToolMockBehaviorConfig;
+    /** Test-specific response mocks, keyed by tool ID. Applied ahead of the tool's shared mocks and only within this test. Only take effect for tools that are mocked (see tool_mock_config). */
+    toolMockOverrides?: Record<string, ElevenLabs.ToolResponseMockConfigOutput[]>;
     /** LLM model to use for evaluating simulation results. Defaults to Claude Sonnet 4.6. */
     evaluationModel?: ElevenLabs.Llm;
     /** LLM model for the simulated user. Defaults to Claude Sonnet 4.6. */

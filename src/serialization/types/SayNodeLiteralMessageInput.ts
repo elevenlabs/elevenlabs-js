@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { TranslatedString } from "./TranslatedString";
 
 export const SayNodeLiteralMessageInput: core.serialization.ObjectSchema<
     serializers.SayNodeLiteralMessageInput.Raw,
@@ -10,11 +11,16 @@ export const SayNodeLiteralMessageInput: core.serialization.ObjectSchema<
 > = core.serialization.object({
     type: core.serialization.stringLiteral("literal").optional(),
     text: core.serialization.string(),
+    textTranslations: core.serialization.property(
+        "text_translations",
+        core.serialization.record(core.serialization.string(), TranslatedString).optional(),
+    ),
 });
 
 export declare namespace SayNodeLiteralMessageInput {
     export interface Raw {
         type?: "literal" | null;
         text: string;
+        text_translations?: Record<string, TranslatedString.Raw> | null;
     }
 }

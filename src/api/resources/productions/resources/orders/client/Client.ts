@@ -83,18 +83,18 @@ export class OrdersClient {
             page_size: pageSize,
             offset,
             status: Array.isArray(status)
-                ? status.map((item) =>
-                      serializers.OrderRequestState.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
-                  )
+                ? status.map((item) => serializers.OrderState.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }))
                 : status != null
-                  ? serializers.OrderRequestState.jsonOrThrow(status, { unrecognizedObjectKeys: "strip" })
+                  ? serializers.OrderState.jsonOrThrow(status, { unrecognizedObjectKeys: "strip" })
                   : undefined,
             start_date: startDate != null ? startDate?.toISOString() : undefined,
             end_date: endDate != null ? endDate?.toISOString() : undefined,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -173,7 +173,9 @@ export class OrdersClient {
     ): Promise<core.WithRawResponse<ElevenLabs.CreateOrderResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -254,7 +256,9 @@ export class OrdersClient {
     ): Promise<core.WithRawResponse<ElevenLabs.OrderResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -339,7 +343,9 @@ export class OrdersClient {
     ): Promise<core.WithRawResponse<ElevenLabs.UpdateOrderResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -427,7 +433,9 @@ export class OrdersClient {
     ): Promise<core.WithRawResponse<ElevenLabs.SubmitOrderResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
