@@ -9,10 +9,12 @@ export const AgentKnowledgeBaseRagQueryRequestModel: core.serialization.ObjectSc
     ElevenLabs.AgentKnowledgeBaseRagQueryRequestModel
 > = core.serialization.object({
     query: core.serialization.string(),
+    useAgentDefaults: core.serialization.property("use_agent_defaults", core.serialization.boolean().optional()),
 });
 
 export declare namespace AgentKnowledgeBaseRagQueryRequestModel {
     export interface Raw {
         query: string;
+        use_agent_defaults?: boolean | null;
     }
 }

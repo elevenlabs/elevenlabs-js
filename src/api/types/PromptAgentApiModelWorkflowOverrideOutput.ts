@@ -32,7 +32,7 @@ export interface PromptAgentApiModelWorkflowOverrideOutput {
     /** Whether to remove the default personality lines from the system prompt */
     ignoreDefaultPersonality?: boolean;
     /** Configuration for RAG */
-    rag?: ElevenLabs.RagConfigWorkflowOverride;
+    rag?: ElevenLabs.RagConfigWorkflowOverrideOutput;
     /** Timezone for displaying current time in system prompt. If set, the current time will be included in the system prompt using this timezone. Must be a valid timezone name (e.g., 'America/New_York', 'Europe/London', 'UTC'). Recommended for accurate time-aware responses; without this, the agent has no knowledge of the current date/time unless you provide it via dynamic variables or tools, which can lead to incorrect or hallucinated time references. */
     timezone?: string;
     /** Configuration for backup LLM cascading. Can be disabled, use system defaults, or specify custom order. */

@@ -8,4 +8,6 @@ export interface KnowledgeBaseRagToolResultModel {
     chunkCount?: number;
     /** Human-readable status for the LLM about the search results */
     message?: string;
+    /** Retrieved chunks; populated only in the rag-result-in-tool-result mode */
+    chunks?: ElevenLabs.KnowledgeBaseRagChunkModel[];
 }

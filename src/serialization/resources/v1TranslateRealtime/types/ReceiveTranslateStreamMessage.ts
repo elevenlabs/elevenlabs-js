@@ -3,12 +3,19 @@
 import type * as ElevenLabs from "../../../../api/index";
 import * as core from "../../../../core";
 import type * as serializers from "../../../index";
+import { TranslateAudioOutputError } from "../../../types/TranslateAudioOutputError";
 import { TranslateAudioPayload } from "../../../types/TranslateAudioPayload";
+import { TranslateAuthError } from "../../../types/TranslateAuthError";
 import { TranslateErrorPayload } from "../../../types/TranslateErrorPayload";
 import { TranslateFinalTranscriptPayload } from "../../../types/TranslateFinalTranscriptPayload";
+import { TranslateInputError } from "../../../types/TranslateInputError";
 import { TranslatePartialTranscriptPayload } from "../../../types/TranslatePartialTranscriptPayload";
+import { TranslateQueueOverflowError } from "../../../types/TranslateQueueOverflowError";
+import { TranslateRateLimitedError } from "../../../types/TranslateRateLimitedError";
 import { TranslateSessionStartedPayload } from "../../../types/TranslateSessionStartedPayload";
 import { TranslateStatusPayload } from "../../../types/TranslateStatusPayload";
+import { TranslateTranscriberError } from "../../../types/TranslateTranscriberError";
+import { TranslateTranslationError } from "../../../types/TranslateTranslationError";
 import { TranslateTranslationPayload } from "../../../types/TranslateTranslationPayload";
 
 export const ReceiveTranslateStreamMessage: core.serialization.Schema<
@@ -22,6 +29,13 @@ export const ReceiveTranslateStreamMessage: core.serialization.Schema<
     TranslateTranslationPayload,
     TranslateAudioPayload,
     TranslateErrorPayload,
+    TranslateAuthError,
+    TranslateRateLimitedError,
+    TranslateQueueOverflowError,
+    TranslateInputError,
+    TranslateTranscriberError,
+    TranslateTranslationError,
+    TranslateAudioOutputError,
 ]);
 
 export declare namespace ReceiveTranslateStreamMessage {
@@ -32,5 +46,12 @@ export declare namespace ReceiveTranslateStreamMessage {
         | TranslateFinalTranscriptPayload.Raw
         | TranslateTranslationPayload.Raw
         | TranslateAudioPayload.Raw
-        | TranslateErrorPayload.Raw;
+        | TranslateErrorPayload.Raw
+        | TranslateAuthError.Raw
+        | TranslateRateLimitedError.Raw
+        | TranslateQueueOverflowError.Raw
+        | TranslateInputError.Raw
+        | TranslateTranscriberError.Raw
+        | TranslateTranslationError.Raw
+        | TranslateAudioOutputError.Raw;
 }

@@ -151,7 +151,11 @@ describe("ToolsClient", () => {
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
             response_mocks: [
-                { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
+                {
+                    parameter_conditions: [{ eval: { type: "anything" }, path: "path" }],
+                    mock_result: "mock_result",
+                    is_error: true,
+                },
             ],
         };
 
@@ -240,6 +244,7 @@ describe("ToolsClient", () => {
                         },
                     ],
                     mockResult: "mock_result",
+                    isError: true,
                 },
             ],
         });
@@ -293,7 +298,11 @@ describe("ToolsClient", () => {
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
             response_mocks: [
-                { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
+                {
+                    parameter_conditions: [{ eval: { type: "anything" }, path: "path" }],
+                    mock_result: "mock_result",
+                    is_error: true,
+                },
             ],
         };
 
@@ -376,6 +385,7 @@ describe("ToolsClient", () => {
                         },
                     ],
                     mockResult: "mock_result",
+                    isError: true,
                 },
             ],
         });
@@ -453,7 +463,11 @@ describe("ToolsClient", () => {
             },
             usage_stats: { total_calls: 1, avg_latency_secs: 1.1 },
             response_mocks: [
-                { parameter_conditions: [{ eval: { type: "anything" }, path: "path" }], mock_result: "mock_result" },
+                {
+                    parameter_conditions: [{ eval: { type: "anything" }, path: "path" }],
+                    mock_result: "mock_result",
+                    is_error: true,
+                },
             ],
         };
 
@@ -542,6 +556,7 @@ describe("ToolsClient", () => {
                         },
                     ],
                     mockResult: "mock_result",
+                    isError: true,
                 },
             ],
         });

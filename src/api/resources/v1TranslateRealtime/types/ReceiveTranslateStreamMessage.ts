@@ -12,4 +12,11 @@ export type ReceiveTranslateStreamMessage =
     | ElevenLabs.TranslateFinalTranscriptPayload
     | ElevenLabs.TranslateTranslationPayload
     | ElevenLabs.TranslateAudioPayload
-    | ElevenLabs.TranslateErrorPayload;
+    | ElevenLabs.TranslateErrorPayload
+    | ElevenLabs.TranslateAuthError
+    | ElevenLabs.TranslateRateLimitedError
+    | ElevenLabs.TranslateQueueOverflowError
+    | ElevenLabs.TranslateInputError
+    | ElevenLabs.TranslateTranscriberError
+    | ElevenLabs.TranslateTranslationError
+    | ElevenLabs.TranslateAudioOutputError;

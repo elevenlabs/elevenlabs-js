@@ -23,7 +23,6 @@ export const BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPo
     seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     finetuneId: core.serialization.property("finetune_id", core.serialization.string().optional()),
-    finetuneStrength: core.serialization.property("finetune_strength", core.serialization.number().optional()),
     storeForInpainting: core.serialization.property("store_for_inpainting", core.serialization.boolean().optional()),
     withTimestamps: core.serialization.property("with_timestamps", core.serialization.boolean().optional()),
 });
@@ -37,7 +36,6 @@ export declare namespace BodyStreamComposedMusicWithADetailedResponseV1MusicDeta
         seed?: number | null;
         force_instrumental?: boolean | null;
         finetune_id?: string | null;
-        finetune_strength?: number | null;
         store_for_inpainting?: boolean | null;
         with_timestamps?: boolean | null;
     }

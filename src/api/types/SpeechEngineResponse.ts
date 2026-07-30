@@ -15,6 +15,8 @@ export interface SpeechEngineResponse {
     tts: ElevenLabs.TtsConversationalConfigOutput;
     /** Turn detection configuration */
     turn: ElevenLabs.BaseTurnConfig;
+    /** Configuration for voice activity detection */
+    vad: ElevenLabs.VadConfig;
     /** Conversation-level settings including client events and duration limits */
     conversation: ElevenLabs.ConversationConfigOutput;
     /** Privacy settings controlling recording, retention, and PII handling */

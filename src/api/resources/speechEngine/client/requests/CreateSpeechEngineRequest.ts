@@ -21,6 +21,8 @@ export interface CreateSpeechEngineRequest {
     tts?: ElevenLabs.TtsConversationalConfigInput;
     /** Turn detection configuration */
     turn?: ElevenLabs.BaseTurnConfig;
+    /** Configuration for voice activity detection */
+    vad?: ElevenLabs.VadConfig;
     /** Conversation configuration (client events, etc.) */
     conversation?: ElevenLabs.ConversationConfigInput;
     /** Privacy settings (recording, retention, zero retention mode) */

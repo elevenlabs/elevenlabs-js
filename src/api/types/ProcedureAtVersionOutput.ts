@@ -8,6 +8,16 @@ export interface ProcedureAtVersionOutput {
     /** Procedure name */
     name: string;
     type?: ElevenLabs.ProcedureType;
+    /** When the agent should use this procedure. Empty string means this is a sub-procedure that should only start when another procedure references it. */
+    trigger?: string;
+    /** Tool IDs referenced in the procedure content */
+    referencedToolIds?: string[];
+    /** Knowledge base IDs referenced in the procedure content */
+    referencedKbIds?: string[];
+    /** Procedure IDs referenced in the procedure content */
+    referencedProcedureIds?: string[];
+    /** Dynamic variable names used in the procedure content */
+    referencedDynamicVariables?: string[];
     /** Procedure content */
     content: string;
     guardrails?: ElevenLabs.CustomGuardrailConfig[];

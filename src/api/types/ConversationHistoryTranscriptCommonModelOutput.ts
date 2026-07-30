@@ -23,4 +23,5 @@ export interface ConversationHistoryTranscriptCommonModelOutput {
     sourceEventId?: number;
     usedStaticKbDocumentIds?: string[];
     userIdentifier?: string;
+    id?: string;
 }

@@ -11,6 +11,7 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index";
 import * as serializers from "../../../../serialization/index";
 import * as ElevenLabs from "../../../index";
+import { AccentsClient } from "../resources/accents/client/Client";
 import { IvcClient } from "../resources/ivc/client/Client";
 import { PvcClient } from "../resources/pvc/client/Client";
 import { SamplesClient } from "../resources/samples/client/Client";
@@ -25,6 +26,7 @@ export declare namespace VoicesClient {
 export class VoicesClient {
     protected readonly _options: NormalizedClientOptions<VoicesClient.Options>;
     protected _settings: SettingsClient | undefined;
+    protected _accents: AccentsClient | undefined;
     protected _ivc: IvcClient | undefined;
     protected _pvc: PvcClient | undefined;
     protected _samples: SamplesClient | undefined;
@@ -35,6 +37,10 @@ export class VoicesClient {
 
     public get settings(): SettingsClient {
         return (this._settings ??= new SettingsClient(this._options));
+    }
+
+    public get accents(): AccentsClient {
+        return (this._accents ??= new AccentsClient(this._options));
     }
 
     public get ivc(): IvcClient {
@@ -83,7 +89,9 @@ export class VoicesClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -169,7 +177,9 @@ export class VoicesClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -246,7 +256,9 @@ export class VoicesClient {
     ): Promise<core.WithRawResponse<ElevenLabs.DeleteVoiceResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -359,7 +371,7 @@ export class VoicesClient {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
                 ..._maybeEncodedRequest.headers,
             }),
             requestOptions?.headers,
@@ -475,7 +487,9 @@ export class VoicesClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -527,6 +541,101 @@ export class VoicesClient {
     }
 
     /**
+     * Replicates an Instant Voice Clone or Voice Design voice to a workspace in a different data residency. The target workspace must belong to the same consolidated billing group. The user must have VOICES_WRITE in the source workspace, and be an admin on the source voice. Human users (i.e. not service accounts) must also have VOICES_WRITE in the target workspace. This endpoint is available on the central environment only.
+     *
+     * @param {string} voice_id - Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+     * @param {ElevenLabs.ReplicateVoiceToIsolatedEnvironmentRequestModel} request
+     * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.voices.replicateToIsolatedEnvironment("21m00Tcm4TlvDq8ikWAM", {
+     *         targetWorkspaceId: "target_workspace_id"
+     *     })
+     */
+    public replicateToIsolatedEnvironment(
+        voice_id: string,
+        request: ElevenLabs.ReplicateVoiceToIsolatedEnvironmentRequestModel,
+        requestOptions?: VoicesClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.ReplicateVoiceToIsolatedEnvironmentResponseModel> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__replicateToIsolatedEnvironment(voice_id, request, requestOptions),
+        );
+    }
+
+    private async __replicateToIsolatedEnvironment(
+        voice_id: string,
+        request: ElevenLabs.ReplicateVoiceToIsolatedEnvironmentRequestModel,
+        requestOptions?: VoicesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.ReplicateVoiceToIsolatedEnvironmentResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/voices/${core.url.encodePathParam(voice_id)}/replicate-to-isolated-environment`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.ReplicateVoiceToIsolatedEnvironmentRequestModel.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.ReplicateVoiceToIsolatedEnvironmentResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/voices/{voice_id}/replicate-to-isolated-environment",
+        );
+    }
+
+    /**
      * Add a shared voice to your collection of Voices
      *
      * @param {string} public_user_id - Public user ID used to publicly identify ElevenLabs users.
@@ -560,7 +669,9 @@ export class VoicesClient {
     ): Promise<core.WithRawResponse<ElevenLabs.AddVoiceResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -713,7 +824,9 @@ export class VoicesClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -806,7 +919,7 @@ export class VoicesClient {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
                 ..._maybeEncodedRequest.headers,
             }),
             requestOptions?.headers,

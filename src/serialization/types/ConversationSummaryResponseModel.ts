@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { ConversationInitiationSource } from "./ConversationInitiationSource";
 import { ConversationSentimentAnalysis } from "./ConversationSentimentAnalysis";
 import { ConversationSummaryResponseModelStatus } from "./ConversationSummaryResponseModelStatus";
+import { EvaluationCriteriaSummaryResult } from "./EvaluationCriteriaSummaryResult";
 import { EvaluationSuccessResult } from "./EvaluationSuccessResult";
 import { TelephonyDirection } from "./TelephonyDirection";
 
@@ -39,6 +40,15 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     direction: TelephonyDirection.optional(),
     rating: core.serialization.number().optional(),
     sentimentAnalysis: core.serialization.property("sentiment_analysis", ConversationSentimentAnalysis.optional()),
+    dataCollectionResults: core.serialization.property(
+        "data_collection_results",
+        core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    ),
+    evaluationCriteriaResults: core.serialization.property(
+        "evaluation_criteria_results",
+        core.serialization.record(core.serialization.string(), EvaluationCriteriaSummaryResult.optional()).optional(),
+    ),
+    tagIds: core.serialization.property("tag_ids", core.serialization.list(core.serialization.string()).optional()),
 });
 
 export declare namespace ConversationSummaryResponseModel {
@@ -63,5 +73,8 @@ export declare namespace ConversationSummaryResponseModel {
         direction?: TelephonyDirection.Raw | null;
         rating?: number | null;
         sentiment_analysis?: ConversationSentimentAnalysis.Raw | null;
+        data_collection_results?: Record<string, unknown> | null;
+        evaluation_criteria_results?: Record<string, EvaluationCriteriaSummaryResult.Raw | null | undefined> | null;
+        tag_ids?: string[] | null;
     }
 }

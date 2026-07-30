@@ -1144,6 +1144,29 @@ describe("VoicesClient", () => {
         });
     });
 
+    test("replicate_to_isolated_environment", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { target_workspace_id: "target_workspace_id" };
+        const rawResponseBody = { voice_id: "21m00Tcm4TlvDq8ikWAM" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/voices/21m00Tcm4TlvDq8ikWAM/replicate-to-isolated-environment")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.voices.replicateToIsolatedEnvironment("21m00Tcm4TlvDq8ikWAM", {
+            targetWorkspaceId: "target_workspace_id",
+        });
+        expect(response).toEqual({
+            voiceId: "21m00Tcm4TlvDq8ikWAM",
+        });
+    });
+
     test("share", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

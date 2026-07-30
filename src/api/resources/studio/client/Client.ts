@@ -75,7 +75,7 @@ export class StudioClient {
             this._options?.headers,
             mergeOnlyDefinedHeaders({
                 "safety-identifier": safetyIdentifier,
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
             }),
             requestOptions?.headers,
         );

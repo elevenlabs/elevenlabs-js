@@ -134,7 +134,7 @@ describe("WidgetClient", () => {
                 supports_text_only: true,
                 first_message: "Hello! How can I help you today?",
                 use_rtc: false,
-                file_input_config: { enabled: false, max_files_per_conversation: 10 },
+                file_input_config: { enabled: false, max_files_in_memory: 10, max_files_per_conversation: 10 },
             },
         };
 
@@ -289,6 +289,7 @@ describe("WidgetClient", () => {
                 useRtc: false,
                 fileInputConfig: {
                     enabled: false,
+                    maxFilesInMemory: 10,
                     maxFilesPerConversation: 10,
                 },
             },

@@ -15,6 +15,7 @@ export const OrderSummary: core.serialization.ObjectSchema<serializers.OrderSumm
         sandbox: core.serialization.boolean().optional(),
         submittedAt: core.serialization.property("submitted_at", core.serialization.date().optional()),
         updatedAt: core.serialization.property("updated_at", core.serialization.date().optional()),
+        cancelReason: core.serialization.property("cancel_reason", core.serialization.string().optional()),
     });
 
 export declare namespace OrderSummary {
@@ -26,5 +27,6 @@ export declare namespace OrderSummary {
         sandbox?: boolean | null;
         submitted_at?: string | null;
         updated_at?: string | null;
+        cancel_reason?: string | null;
     }
 }

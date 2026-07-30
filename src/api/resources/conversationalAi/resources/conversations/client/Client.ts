@@ -103,7 +103,9 @@ export class ConversationsClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -197,7 +199,9 @@ export class ConversationsClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -262,6 +266,8 @@ export class ConversationsClient {
      *     await client.conversationalAi.conversations.list({
      *         cursor: "cursor",
      *         agentId: "agent_id",
+     *         visitedAgentIds: ["visited_agent_ids"],
+     *         visitedAgentBranchIds: ["visited_agent_branch_ids"],
      *         callSuccessful: "success",
      *         callStartBeforeUnix: 1,
      *         callStartAfterUnix: 1,
@@ -273,6 +279,8 @@ export class ConversationsClient {
      *         userId: "user_id",
      *         evaluationParams: ["evaluation_params"],
      *         dataCollectionParams: ["data_collection_params"],
+     *         dataCollectionIds: ["data_collection_ids"],
+     *         evaluationCriteriaIds: ["evaluation_criteria_ids"],
      *         toolNames: ["tool_names"],
      *         toolNamesSuccessful: ["tool_names_successful"],
      *         toolNamesErrored: ["tool_names_errored"],
@@ -284,6 +292,7 @@ export class ConversationsClient {
      *         textOnly: true,
      *         conversationProductType: "agents",
      *         branchId: "branch_id",
+     *         versionId: "version_id",
      *         topicIds: ["topic_ids"],
      *         excludeStatuses: ["initiated"],
      *         tagIds: ["tag_ids"],
@@ -305,6 +314,8 @@ export class ConversationsClient {
         const {
             cursor,
             agentId,
+            visitedAgentIds,
+            visitedAgentBranchIds,
             callSuccessful,
             callStartBeforeUnix,
             callStartAfterUnix,
@@ -316,6 +327,8 @@ export class ConversationsClient {
             userId,
             evaluationParams,
             dataCollectionParams,
+            dataCollectionIds,
+            evaluationCriteriaIds,
             toolNames,
             toolNamesSuccessful,
             toolNamesErrored,
@@ -327,6 +340,7 @@ export class ConversationsClient {
             textOnly,
             conversationProductType,
             branchId,
+            versionId,
             topicIds,
             excludeStatuses,
             tagIds,
@@ -336,6 +350,8 @@ export class ConversationsClient {
         const _queryParams: Record<string, unknown> = {
             cursor,
             agent_id: agentId,
+            visited_agent_ids: visitedAgentIds,
+            visited_agent_branch_ids: visitedAgentBranchIds,
             call_successful:
                 callSuccessful != null
                     ? serializers.EvaluationSuccessResult.jsonOrThrow(callSuccessful, {
@@ -352,6 +368,8 @@ export class ConversationsClient {
             user_id: userId,
             evaluation_params: evaluationParams,
             data_collection_params: dataCollectionParams,
+            data_collection_ids: dataCollectionIds,
+            evaluation_criteria_ids: evaluationCriteriaIds,
             tool_names: toolNames,
             tool_names_successful: toolNamesSuccessful,
             tool_names_errored: toolNamesErrored,
@@ -378,6 +396,7 @@ export class ConversationsClient {
                       })
                     : undefined,
             branch_id: branchId,
+            version_id: versionId,
             topic_ids: topicIds,
             exclude_statuses: Array.isArray(excludeStatuses)
                 ? excludeStatuses.map((item) =>
@@ -397,7 +416,9 @@ export class ConversationsClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -482,7 +503,9 @@ export class ConversationsClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -578,7 +601,9 @@ export class ConversationsClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -660,7 +685,9 @@ export class ConversationsClient {
     ): Promise<core.WithRawResponse<unknown>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -741,7 +768,9 @@ export class ConversationsClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({

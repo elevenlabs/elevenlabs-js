@@ -13,6 +13,7 @@ import { ResourceAccessInfo } from "./ResourceAccessInfo";
 import { SpeechEngineConfig } from "./SpeechEngineConfig";
 import { SpeechEngineConversationInitiationClientDataConfig } from "./SpeechEngineConversationInitiationClientDataConfig";
 import { TtsConversationalConfigOutput } from "./TtsConversationalConfigOutput";
+import { VadConfig } from "./VadConfig";
 
 export const SpeechEngineResponse: core.serialization.ObjectSchema<
     serializers.SpeechEngineResponse.Raw,
@@ -24,6 +25,7 @@ export const SpeechEngineResponse: core.serialization.ObjectSchema<
     asr: AsrConversationalConfig,
     tts: TtsConversationalConfigOutput,
     turn: BaseTurnConfig,
+    vad: VadConfig,
     conversation: ConversationConfigOutput,
     privacy: PrivacyConfigOutput,
     callLimits: core.serialization.property("call_limits", AgentCallLimits),
@@ -42,6 +44,7 @@ export declare namespace SpeechEngineResponse {
         asr: AsrConversationalConfig.Raw;
         tts: TtsConversationalConfigOutput.Raw;
         turn: BaseTurnConfig.Raw;
+        vad: VadConfig.Raw;
         conversation: ConversationConfigOutput.Raw;
         privacy: PrivacyConfigOutput.Raw;
         call_limits: AgentCallLimits.Raw;

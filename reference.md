@@ -2024,6 +2024,79 @@ await client.voices.search({
 </dl>
 </details>
 
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">replicateToIsolatedEnvironment</a>(voice_id, { ...params }) -> ElevenLabs.ReplicateVoiceToIsolatedEnvironmentResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replicates an Instant Voice Clone or Voice Design voice to a workspace in a different data residency. The target workspace must belong to the same consolidated billing group. The user must have VOICES_WRITE in the source workspace, and be an admin on the source voice. Human users (i.e. not service accounts) must also have VOICES_WRITE in the target workspace. This endpoint is available on the central environment only.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.replicateToIsolatedEnvironment("21m00Tcm4TlvDq8ikWAM", {
+    targetWorkspaceId: "target_workspace_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**voice_id:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ReplicateVoiceToIsolatedEnvironmentRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">share</a>(public_user_id, voice_id, { ...params }) -> ElevenLabs.AddVoiceResponseModel</code></summary>
 <dl>
 <dd>
@@ -2316,329 +2389,6 @@ await client.studio.createPodcast({
 <dd>
 
 **requestOptions:** `StudioClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Music
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">compose</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Compose a song from a prompt or a composition plan.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.compose();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyComposeMusicV1MusicPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailed</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Compose a song from a prompt or a composition plan.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.composeDetailed();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailedStream</a>({ ...params }) -> core.Stream&lt;string&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Stream a song and its detailed metadata using Server-Sent Events (SSE).
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const response = await client.music.composeDetailedStream({
-    outputFormat: "auto"
-});
-for await (const item of response) {
-    console.log(item);
-}
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">stream</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Stream a composed song from a prompt or a composition plan.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.stream();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">upload</a>({ ...params }) -> ElevenLabs.MusicUploadResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Upload a music file to be later used for inpainting. Price for uploading is the same as the one for song generation. All uploaded content gets inspected for copyright infringement. If copyrighted content is detected, half of the request cost is still charged.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.music.upload({
-    file: fs.createReadStream("/path/to/your/file")
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyUploadMusicV1MusicUploadPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MusicClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4176,6 +3926,329 @@ await client.webhooks.update("G007vmtq9uWYl7SUW9zGS8GZZa1K", {
 </dl>
 </details>
 
+## Music
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">compose</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Compose a song from a prompt or a composition plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.compose();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyComposeMusicV1MusicPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailed</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Compose a song from a prompt or a composition plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.composeDetailed();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">composeDetailedStream</a>({ ...params }) -> core.Stream&lt;string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stream a song and its detailed metadata using Server-Sent Events (SSE).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.music.composeDetailedStream({
+    outputFormat: "auto"
+});
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">stream</a>({ ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stream a composed song from a prompt or a composition plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.stream();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.music.<a href="/src/api/resources/music/client/Client.ts">upload</a>({ ...params }) -> ElevenLabs.MusicUploadResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload a music file to be later used for inpainting. Price for uploading is the same as the one for song generation. All uploaded content gets inspected for copyright infringement. If copyrighted content is detected, half of the request cost is still charged.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.music.upload({
+    file: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUploadMusicV1MusicUploadPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MusicClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## SpeechToText
 <details><summary><code>client.speechToText.<a href="/src/api/resources/speechToText/client/Client.ts">convert</a>({ ...params }) -> ElevenLabs.SpeechToTextConvertResponse</code></summary>
 <dl>
@@ -5342,6 +5415,8 @@ Get all conversations of agents that user owns. With option to restrict to a spe
 await client.conversationalAi.conversations.list({
     cursor: "cursor",
     agentId: "agent_id",
+    visitedAgentIds: ["visited_agent_ids"],
+    visitedAgentBranchIds: ["visited_agent_branch_ids"],
     callSuccessful: "success",
     callStartBeforeUnix: 1,
     callStartAfterUnix: 1,
@@ -5353,6 +5428,8 @@ await client.conversationalAi.conversations.list({
     userId: "user_id",
     evaluationParams: ["evaluation_params"],
     dataCollectionParams: ["data_collection_params"],
+    dataCollectionIds: ["data_collection_ids"],
+    evaluationCriteriaIds: ["evaluation_criteria_ids"],
     toolNames: ["tool_names"],
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
@@ -5364,6 +5441,7 @@ await client.conversationalAi.conversations.list({
     textOnly: true,
     conversationProductType: "agents",
     branchId: "branch_id",
+    versionId: "version_id",
     topicIds: ["topic_ids"],
     excludeStatuses: ["initiated"],
     tagIds: ["tag_ids"],
@@ -7027,7 +7105,7 @@ await client.conversationalAi.tests.delete("TeaqRRdTcIfIu2i7BYfT");
 <dl>
 <dd>
 
-Gets multiple agent response tests by their IDs. Returns a dictionary mapping test IDs to test summaries.
+Gets agent response test summaries for the requested test IDs.
 </dd>
 </dl>
 </dd>
@@ -8949,6 +9027,69 @@ await client.conversationalAi.secrets.getDependencies("secret_id", "tools", {
 </details>
 
 ## ConversationalAi BatchCalls
+<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">export</a>(batch_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download all recipients and conversation results for a terminal batch call as CSV.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.batchCalls.export("batch_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**batch_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BatchCallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.BatchCallResponse</code></summary>
 <dl>
 <dd>
@@ -11361,6 +11502,646 @@ await client.conversationalAi.agents.drafts.delete("agent_3701k3ttaq12ewp8b7qv5r
 </dl>
 </details>
 
+## ConversationalAi Agents Procedures
+<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">list</a>(agent_id, branch_id) -> ElevenLabs.ListProceduresResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the agent's procedures on a branch with their procedure_id, version_id, name, type, trigger, and has_draft. has_draft is true when a procedure has unpublished draft changes on this branch; its name/type/trigger then reflect that draft. Does not return procedure content -- use Get Procedure to read a procedure's body.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">create</a>(agent_id, branch_id, { ...params }) -> ElevenLabs.CreateProcedureResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new procedure for the agent on a branch.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.procedures.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateProcedureRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">compile</a>(agent_id, branch_id) -> ElevenLabs.CompileProceduresResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Compile procedure drafts into a workflow.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.procedures.compile("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">get</a>(agent_id, branch_id, procedure_id, { ...params }) -> ElevenLabs.ProcedureAtVersionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a procedure at a specific version or the current branch HEAD.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.procedures.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3", {
+    versionId: "version_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` — The procedure ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.ProceduresGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">remove</a>(agent_id, branch_id, procedure_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a procedure from the agent's draft working set.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.procedures.remove("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` — The procedure ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Agents Procedures Drafts
+<details><summary><code>client.conversationalAi.agents.procedures.drafts.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/resources/drafts/client/Client.ts">get</a>(agent_id, branch_id, procedure_id) -> ElevenLabs.ProcedureDraftResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get user's draft for a procedure
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.procedures.drafts.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` — The procedure ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DraftsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.procedures.drafts.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/resources/drafts/client/Client.ts">delete</a>(agent_id, branch_id, procedure_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete user's draft for a procedure, resetting to the committed version
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.procedures.drafts.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` — The procedure ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DraftsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.procedures.drafts.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/resources/drafts/client/Client.ts">update</a>(agent_id, branch_id, procedure_id, { ...params }) -> ElevenLabs.ProcedureDraftResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create or update user's draft for a procedure
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.procedures.drafts.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3", {
+    name: "name",
+    content: "content",
+    type: "free_form"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` — The procedure ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.procedures.UpdateProcedureDraftRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DraftsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents Widget Avatar
 <details><summary><code>client.conversationalAi.agents.widget.avatar.<a href="/src/api/resources/conversationalAi/resources/agents/resources/widget/resources/avatar/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.PostAgentAvatarResponseModel</code></summary>
 <dl>
@@ -11670,6 +12451,8 @@ Search through conversation transcript messages by full-text and fuzzy search
 await client.conversationalAi.conversations.messages.textSearch({
     textQuery: "refund policy",
     agentId: "agent_id",
+    visitedAgentIds: ["visited_agent_ids"],
+    visitedAgentBranchIds: ["visited_agent_branch_ids"],
     callSuccessful: "success",
     callStartBeforeUnix: 1,
     callStartAfterUnix: 1,
@@ -11685,12 +12468,15 @@ await client.conversationalAi.conversations.messages.textSearch({
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
     mainLanguages: ["main_languages"],
+    excludeStatuses: ["initiated"],
+    terminationReasons: ["termination_reasons"],
     pageSize: 1,
     summaryMode: "exclude",
     conversationInitiationSource: "unknown",
     textOnly: true,
     conversationProductType: "agents",
     branchId: "branch_id",
+    versionId: "version_id",
     topicIds: ["topic_ids"],
     sortBy: "search_score",
     cursor: "cursor"
@@ -13300,6 +14086,74 @@ await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getBulkAgents</a>({ ...params }) -> ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a list of agents depending on any of the given knowledge base documents.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.documents.getBulkAgents({
+    dependentType: "direct",
+    pageSize: 1,
+    cursor: "cursor",
+    documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DocumentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getContent</a>(documentation_id) -> string</code></summary>
 <dl>
 <dd>
@@ -13551,6 +14405,330 @@ await client.conversationalAi.knowledgeBase.documents.bulkMove({
 <dd>
 
 **requestOptions:** `DocumentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">bulkDelete</a>({ ...params }) -> Record&lt;string, ElevenLabs.DocumentsBulkDeleteResponseValue&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete multiple documents or folders from the knowledge base. Each id succeeds or fails independently.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.documents.bulkDelete({
+    documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DocumentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi KnowledgeBase CrawlJobs
+<details><summary><code>client.conversationalAi.knowledgeBase.crawlJobs.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ListCrawlJobsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a list of ongoing and recent crawl jobs for the user.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.crawlJobs.list({
+    includeJobIds: ["include_job_ids"],
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.CrawlJobsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CrawlJobsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.knowledgeBase.crawlJobs.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateCrawlJobResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a crawl job to crawl the given URL with specified depth and page limits.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.crawlJobs.create({
+    url: "url"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CrawlJobsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.knowledgeBase.crawlJobs.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">get</a>(crawl_job_id) -> ElevenLabs.GetCrawlJobResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get details about a specific crawl job including status and progress.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.crawlJobs.get("crawl_job_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**crawl_job_id:** `string` — The id of the crawl job to retrieve
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CrawlJobsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.knowledgeBase.crawlJobs.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">cancel</a>(crawl_job_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancel a crawl job and delete all associated documents and folders.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.crawlJobs.cancel("crawl_job_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**crawl_job_id:** `string` — The id of the crawl job to retrieve
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CrawlJobsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -21172,6 +22350,73 @@ await client.voices.settings.update("21m00Tcm4TlvDq8ikWAM", {
 <dd>
 
 **requestOptions:** `SettingsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Voices Accents
+<details><summary><code>client.voices.accents.<a href="/src/api/resources/voices/resources/accents/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.GetVoiceAccentsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets the list of available accents in the shared voice library.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.accents.get({
+    language: "language",
+    modelId: "model_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.AccentsGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AccentsClient.RequestOptions` 
     
 </dd>
 </dl>

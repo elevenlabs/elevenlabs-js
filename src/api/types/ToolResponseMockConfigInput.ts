@@ -7,4 +7,6 @@ export interface ToolResponseMockConfigInput {
     parameterConditions?: ElevenLabs.UnitTestToolCallParameter[];
     /** The return value the LLM sees when this mock is active. */
     mockResult: string;
+    /** If true, the mock result is surfaced to the LLM as a tool error rather than a successful result. */
+    isError?: boolean;
 }

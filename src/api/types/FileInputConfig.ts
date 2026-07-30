@@ -3,6 +3,8 @@
 export interface FileInputConfig {
     /** When enabled, users may attach images or PDFs in chat when the LLM supports multimodal input. */
     enabled?: boolean;
-    /** Maximum number of files that can be uploaded per conversation. */
+    /** Number of most-recent files kept in memory during a conversation. Older files are summarized and their bytes freed. */
+    maxFilesInMemory?: number;
+    /** Total files a user can upload in one conversation. Uploads are billed per file. Use -1 for no limit, or a value >= max_files_in_memory. */
     maxFilesPerConversation?: number;
 }

@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { ConversationConfigClientOverrideOutput } from "./ConversationConfigClientOverrideOutput";
 import { ConversationInitiationSourceInfo } from "./ConversationInitiationSourceInfo";
 import { OrchestratorToolMockBehaviorConfig } from "./OrchestratorToolMockBehaviorConfig";
+import { ToolResponseMockConfigOutput } from "./ToolResponseMockConfigOutput";
 
 export const ConversationInitiationClientDataInternal: core.serialization.ObjectSchema<
     serializers.ConversationInitiationClientDataInternal.Raw,
@@ -32,6 +33,12 @@ export const ConversationInitiationClientDataInternal: core.serialization.Object
         core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     ),
     toolMockConfig: core.serialization.property("tool_mock_config", OrchestratorToolMockBehaviorConfig.optional()),
+    toolMockOverrides: core.serialization.property(
+        "tool_mock_overrides",
+        core.serialization
+            .record(core.serialization.string(), core.serialization.list(ToolResponseMockConfigOutput))
+            .optional(),
+    ),
 });
 
 export declare namespace ConversationInitiationClientDataInternal {
@@ -45,5 +52,6 @@ export declare namespace ConversationInitiationClientDataInternal {
         starting_workflow_node_id?: string | null;
         dynamic_variables?: Record<string, unknown> | null;
         tool_mock_config?: OrchestratorToolMockBehaviorConfig.Raw | null;
+        tool_mock_overrides?: Record<string, ToolResponseMockConfigOutput.Raw[]> | null;
     }
 }

@@ -7,5 +7,8 @@ export const OrderState = {
     Accepted: "accepted",
     Rejected: "rejected",
     Done: "done",
+    Cancelling: "cancelling",
+    Cancelled: "cancelled",
+    Expired: "expired",
 } as const;
 export type OrderState = (typeof OrderState)[keyof typeof OrderState];

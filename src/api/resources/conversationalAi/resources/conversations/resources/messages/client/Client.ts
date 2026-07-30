@@ -37,6 +37,8 @@ export class MessagesClient {
      *     await client.conversationalAi.conversations.messages.textSearch({
      *         textQuery: "refund policy",
      *         agentId: "agent_id",
+     *         visitedAgentIds: ["visited_agent_ids"],
+     *         visitedAgentBranchIds: ["visited_agent_branch_ids"],
      *         callSuccessful: "success",
      *         callStartBeforeUnix: 1,
      *         callStartAfterUnix: 1,
@@ -52,12 +54,15 @@ export class MessagesClient {
      *         toolNamesSuccessful: ["tool_names_successful"],
      *         toolNamesErrored: ["tool_names_errored"],
      *         mainLanguages: ["main_languages"],
+     *         excludeStatuses: ["initiated"],
+     *         terminationReasons: ["termination_reasons"],
      *         pageSize: 1,
      *         summaryMode: "exclude",
      *         conversationInitiationSource: "unknown",
      *         textOnly: true,
      *         conversationProductType: "agents",
      *         branchId: "branch_id",
+     *         versionId: "version_id",
      *         topicIds: ["topic_ids"],
      *         sortBy: "search_score",
      *         cursor: "cursor"
@@ -77,6 +82,8 @@ export class MessagesClient {
         const {
             textQuery,
             agentId,
+            visitedAgentIds,
+            visitedAgentBranchIds,
             callSuccessful,
             callStartBeforeUnix,
             callStartAfterUnix,
@@ -92,12 +99,15 @@ export class MessagesClient {
             toolNamesSuccessful,
             toolNamesErrored,
             mainLanguages,
+            excludeStatuses,
+            terminationReasons,
             pageSize,
             summaryMode,
             conversationInitiationSource,
             textOnly,
             conversationProductType,
             branchId,
+            versionId,
             topicIds,
             sortBy,
             cursor,
@@ -105,6 +115,8 @@ export class MessagesClient {
         const _queryParams: Record<string, unknown> = {
             text_query: textQuery,
             agent_id: agentId,
+            visited_agent_ids: visitedAgentIds,
+            visited_agent_branch_ids: visitedAgentBranchIds,
             call_successful:
                 callSuccessful != null
                     ? serializers.EvaluationSuccessResult.jsonOrThrow(callSuccessful, {
@@ -125,6 +137,20 @@ export class MessagesClient {
             tool_names_successful: toolNamesSuccessful,
             tool_names_errored: toolNamesErrored,
             main_languages: mainLanguages,
+            exclude_statuses: Array.isArray(excludeStatuses)
+                ? excludeStatuses.map((item) =>
+                      serializers.conversationalAi.conversations.MessagesTextSearchRequestExcludeStatusesItem.jsonOrThrow(
+                          item,
+                          { unrecognizedObjectKeys: "strip" },
+                      ),
+                  )
+                : excludeStatuses != null
+                  ? serializers.conversationalAi.conversations.MessagesTextSearchRequestExcludeStatusesItem.jsonOrThrow(
+                        excludeStatuses,
+                        { unrecognizedObjectKeys: "strip" },
+                    )
+                  : undefined,
+            termination_reasons: terminationReasons,
             page_size: pageSize,
             summary_mode:
                 summaryMode != null
@@ -147,6 +173,7 @@ export class MessagesClient {
                       })
                     : undefined,
             branch_id: branchId,
+            version_id: versionId,
             topic_ids: topicIds,
             sort_by:
                 sortBy != null
@@ -156,7 +183,9 @@ export class MessagesClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -250,7 +279,9 @@ export class MessagesClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({

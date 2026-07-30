@@ -9,10 +9,12 @@ export const TokenResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.TokenResponseModel
 > = core.serialization.object({
     token: core.serialization.string(),
+    conversationId: core.serialization.property("conversation_id", core.serialization.string()),
 });
 
 export declare namespace TokenResponseModel {
     export interface Raw {
         token: string;
+        conversation_id: string;
     }
 }

@@ -6,5 +6,6 @@ export * as drafts from "./drafts";
 export * from "./drafts/client/requests";
 export * as llmUsage from "./llmUsage";
 export * from "./llmUsage/client/requests";
+export * as procedures from "./procedures";
 export * as summaries from "./summaries";
 export * from "./summaries/types";

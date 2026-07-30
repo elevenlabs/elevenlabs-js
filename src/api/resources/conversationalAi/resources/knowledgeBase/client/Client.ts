@@ -10,6 +10,7 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index";
 import * as serializers from "../../../../../../serialization/index";
 import * as ElevenLabs from "../../../../../index";
+import { CrawlJobsClient } from "../resources/crawlJobs/client/Client";
 import { DocumentClient } from "../resources/document/client/Client";
 import { DocumentsClient } from "../resources/documents/client/Client";
 
@@ -22,6 +23,7 @@ export declare namespace KnowledgeBaseClient {
 export class KnowledgeBaseClient {
     protected readonly _options: NormalizedClientOptions<KnowledgeBaseClient.Options>;
     protected _documents: DocumentsClient | undefined;
+    protected _crawlJobs: CrawlJobsClient | undefined;
     protected _document: DocumentClient | undefined;
 
     constructor(options: KnowledgeBaseClient.Options = {}) {
@@ -30,6 +32,10 @@ export class KnowledgeBaseClient {
 
     public get documents(): DocumentsClient {
         return (this._documents ??= new DocumentsClient(this._options));
+    }
+
+    public get crawlJobs(): CrawlJobsClient {
+        return (this._crawlJobs ??= new CrawlJobsClient(this._options));
     }
 
     public get document(): DocumentClient {
@@ -112,7 +118,9 @@ export class KnowledgeBaseClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -201,7 +209,9 @@ export class KnowledgeBaseClient {
     > {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -309,7 +319,9 @@ export class KnowledgeBaseClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({

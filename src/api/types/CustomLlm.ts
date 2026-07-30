@@ -15,6 +15,6 @@ export interface CustomLlm {
     requestHeaders?: Record<string, ElevenLabs.CustomLlmRequestHeadersValue>;
     /** The API version to use for the request */
     apiVersion?: string;
-    /** The API type to use (chat_completions or responses) */
+    /** The API type to use (chat_completions, responses or websocket) */
     apiType?: ElevenLabs.CustomLlmapiType;
 }

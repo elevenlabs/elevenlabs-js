@@ -57,6 +57,7 @@ export const ConversationHistoryTranscriptCommonModelInput: core.serialization.O
         core.serialization.list(core.serialization.string()).optional(),
     ),
     userIdentifier: core.serialization.property("user_identifier", core.serialization.string().optional()),
+    id: core.serialization.string().optional(),
 });
 
 export declare namespace ConversationHistoryTranscriptCommonModelInput {
@@ -81,5 +82,6 @@ export declare namespace ConversationHistoryTranscriptCommonModelInput {
         source_event_id?: number | null;
         used_static_kb_document_ids?: string[] | null;
         user_identifier?: string | null;
+        id?: string | null;
     }
 }

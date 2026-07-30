@@ -11,6 +11,7 @@ import { PrivacyConfigInput } from "../../../../types/PrivacyConfigInput";
 import { SpeechEngineConfig } from "../../../../types/SpeechEngineConfig";
 import { SpeechEngineConversationInitiationClientDataConfig } from "../../../../types/SpeechEngineConversationInitiationClientDataConfig";
 import { TtsConversationalConfigInput } from "../../../../types/TtsConversationalConfigInput";
+import { VadConfig } from "../../../../types/VadConfig";
 
 export const CreateSpeechEngineRequest: core.serialization.Schema<
     serializers.CreateSpeechEngineRequest.Raw,
@@ -21,6 +22,7 @@ export const CreateSpeechEngineRequest: core.serialization.Schema<
     asr: AsrConversationalConfig.optional(),
     tts: TtsConversationalConfigInput.optional(),
     turn: BaseTurnConfig.optional(),
+    vad: VadConfig.optional(),
     conversation: ConversationConfigInput.optional(),
     privacy: PrivacyConfigInput.optional(),
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
@@ -36,6 +38,7 @@ export declare namespace CreateSpeechEngineRequest {
         asr?: AsrConversationalConfig.Raw | null;
         tts?: TtsConversationalConfigInput.Raw | null;
         turn?: BaseTurnConfig.Raw | null;
+        vad?: VadConfig.Raw | null;
         conversation?: ConversationConfigInput.Raw | null;
         privacy?: PrivacyConfigInput.Raw | null;
         call_limits?: AgentCallLimits.Raw | null;

@@ -12,6 +12,10 @@ export const CharacterResponseModel: core.serialization.ObjectSchema<
     characterId: core.serialization.property("character_id", core.serialization.string()),
     name: core.serialization.string(),
     metadata: CharacterMetadataResponseModel.optional(),
+    recommendedVoiceIds: core.serialization.property(
+        "recommended_voice_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace CharacterResponseModel {
@@ -19,5 +23,6 @@ export declare namespace CharacterResponseModel {
         character_id: string;
         name: string;
         metadata?: CharacterMetadataResponseModel.Raw | null;
+        recommended_voice_ids?: string[] | null;
     }
 }

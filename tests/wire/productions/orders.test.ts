@@ -18,6 +18,7 @@ describe("OrdersClient", () => {
                     sandbox: true,
                     submitted_at: "2025-03-15T10:30:00Z",
                     updated_at: "2025-03-15T10:30:00Z",
+                    cancel_reason: "cancel_reason",
                 },
             ],
         };
@@ -47,6 +48,7 @@ describe("OrdersClient", () => {
                     sandbox: true,
                     submittedAt: new Date("2025-03-15T10:30:00.000Z"),
                     updatedAt: new Date("2025-03-15T10:30:00.000Z"),
+                    cancelReason: "cancel_reason",
                 },
             ],
         });
@@ -107,6 +109,7 @@ describe("OrdersClient", () => {
             paid_at: "2024-01-15T09:30:00Z",
             accepted_at: "2024-01-15T09:30:00Z",
             completed_at: "2024-01-15T09:30:00Z",
+            cancel_reason: "cancel_reason",
         };
 
         server
@@ -147,6 +150,7 @@ describe("OrdersClient", () => {
             paidAt: new Date("2024-01-15T09:30:00.000Z"),
             acceptedAt: new Date("2024-01-15T09:30:00.000Z"),
             completedAt: new Date("2024-01-15T09:30:00.000Z"),
+            cancelReason: "cancel_reason",
         });
     });
 

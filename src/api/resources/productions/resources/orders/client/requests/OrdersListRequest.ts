@@ -18,7 +18,7 @@ export interface OrdersListRequest {
     /** Number of orders to skip for pagination. */
     offset?: number;
     /** Filter orders by one or more statuses. */
-    status?: ElevenLabs.OrderRequestState | ElevenLabs.OrderRequestState[];
+    status?: ElevenLabs.OrderState | ElevenLabs.OrderState[];
     /** Filter orders created on or after this date. */
     startDate?: Date;
     /** Filter orders created on or before this date. */

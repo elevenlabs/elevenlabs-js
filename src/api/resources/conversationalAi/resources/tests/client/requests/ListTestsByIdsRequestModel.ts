@@ -7,6 +7,6 @@
  *     }
  */
 export interface ListTestsByIdsRequestModel {
-    /** List of test IDs to fetch. No duplicates allowed. */
+    /** List of test IDs to fetch. No duplicates allowed. Prefer at most 1000 IDs per request. */
     testIds: string[];
 }

@@ -25,8 +25,6 @@ export interface BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStre
     forceInstrumental?: boolean;
     /** The ID of the finetune to use for the generation */
     finetuneId?: string;
-    /** How strongly the finetune influences the generation. Defaults to 1.0 (full strength). Lower values soften the influence of the finetune, leaving more room for prompt-level steering. Only meaningful when `finetune_id` is also provided. */
-    finetuneStrength?: number;
     /** Whether to store the generated song for inpainting. */
     storeForInpainting?: boolean;
     /** Whether to return the timestamps of the words in the generated song. */

@@ -8,6 +8,7 @@ import { ConversationInitiationSource } from "./ConversationInitiationSource";
 import { Llm } from "./Llm";
 import { SimulationToolMockBehaviorConfig } from "./SimulationToolMockBehaviorConfig";
 import { TestFromConversationMetadataOutput } from "./TestFromConversationMetadataOutput";
+import { ToolResponseMockConfigOutput } from "./ToolResponseMockConfigOutput";
 
 export const SimulationTestModel: core.serialization.ObjectSchema<
     serializers.SimulationTestModel.Raw,
@@ -41,6 +42,12 @@ export const SimulationTestModel: core.serialization.ObjectSchema<
         core.serialization.string().optional(),
     ),
     toolMockConfig: core.serialization.property("tool_mock_config", SimulationToolMockBehaviorConfig.optional()),
+    toolMockOverrides: core.serialization.property(
+        "tool_mock_overrides",
+        core.serialization
+            .record(core.serialization.string(), core.serialization.list(ToolResponseMockConfigOutput))
+            .optional(),
+    ),
     evaluationModel: core.serialization.property("evaluation_model", Llm.optional()),
     simulatedUserModel: core.serialization.property("simulated_user_model", Llm.optional()),
 });
@@ -57,6 +64,7 @@ export declare namespace SimulationTestModel {
         simulation_max_turns?: number | null;
         simulation_environment?: string | null;
         tool_mock_config?: SimulationToolMockBehaviorConfig.Raw | null;
+        tool_mock_overrides?: Record<string, ToolResponseMockConfigOutput.Raw[]> | null;
         evaluation_model?: Llm.Raw | null;
         simulated_user_model?: Llm.Raw | null;
     }

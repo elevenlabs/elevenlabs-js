@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const CharacterAge: core.serialization.Schema<serializers.CharacterAge.Raw, ElevenLabs.CharacterAge> =
-    core.serialization.enum_(["young", "middle-aged", "old"]);
+    core.serialization.enum_(["young", "middle_aged", "old"]);
 
 export declare namespace CharacterAge {
-    export type Raw = "young" | "middle-aged" | "old";
+    export type Raw = "young" | "middle_aged" | "old";
 }

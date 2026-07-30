@@ -25,4 +25,6 @@ export interface OrderResponse {
     acceptedAt?: Date;
     /** The timestamp when the order was completed, if applicable. */
     completedAt?: Date;
+    /** The reason the order was cancelled, if applicable. */
+    cancelReason?: string;
 }

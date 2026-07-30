@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const CustomLlmapiType: core.serialization.Schema<
     serializers.CustomLlmapiType.Raw,
     ElevenLabs.CustomLlmapiType
-> = core.serialization.enum_(["chat_completions", "responses"]);
+> = core.serialization.enum_(["chat_completions", "responses", "websocket"]);
 
 export declare namespace CustomLlmapiType {
-    export type Raw = "chat_completions" | "responses";
+    export type Raw = "chat_completions" | "responses" | "websocket";
 }

@@ -13,6 +13,23 @@ export const ProcedureRefResponseModel: core.serialization.ObjectSchema<
     versionId: core.serialization.property("version_id", core.serialization.string().optional()),
     name: core.serialization.string().optional(),
     type: ProcedureType.optional(),
+    trigger: core.serialization.string().optional(),
+    referencedToolIds: core.serialization.property(
+        "referenced_tool_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    referencedKbIds: core.serialization.property(
+        "referenced_kb_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    referencedProcedureIds: core.serialization.property(
+        "referenced_procedure_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    referencedDynamicVariables: core.serialization.property(
+        "referenced_dynamic_variables",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace ProcedureRefResponseModel {
@@ -21,5 +38,10 @@ export declare namespace ProcedureRefResponseModel {
         version_id?: string | null;
         name?: string | null;
         type?: ProcedureType.Raw | null;
+        trigger?: string | null;
+        referenced_tool_ids?: string[] | null;
+        referenced_kb_ids?: string[] | null;
+        referenced_procedure_ids?: string[] | null;
+        referenced_dynamic_variables?: string[] | null;
     }
 }

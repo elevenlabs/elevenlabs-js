@@ -6,4 +6,5 @@ export interface CharacterResponseModel {
     characterId: string;
     name: string;
     metadata?: ElevenLabs.CharacterMetadataResponseModel;
+    recommendedVoiceIds?: string[];
 }

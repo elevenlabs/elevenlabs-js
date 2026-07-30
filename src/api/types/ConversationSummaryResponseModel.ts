@@ -23,4 +23,8 @@ export interface ConversationSummaryResponseModel {
     direction?: ElevenLabs.TelephonyDirection;
     rating?: number;
     sentimentAnalysis?: ElevenLabs.ConversationSentimentAnalysis;
+    dataCollectionResults?: Record<string, unknown>;
+    evaluationCriteriaResults?: Record<string, ElevenLabs.EvaluationCriteriaSummaryResult | undefined>;
+    /** Conversation tag ids assigned to this conversation. */
+    tagIds?: string[];
 }

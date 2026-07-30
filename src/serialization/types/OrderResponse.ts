@@ -20,6 +20,7 @@ export const OrderResponse: core.serialization.ObjectSchema<serializers.OrderRes
         paidAt: core.serialization.property("paid_at", core.serialization.date().optional()),
         acceptedAt: core.serialization.property("accepted_at", core.serialization.date().optional()),
         completedAt: core.serialization.property("completed_at", core.serialization.date().optional()),
+        cancelReason: core.serialization.property("cancel_reason", core.serialization.string().optional()),
     });
 
 export declare namespace OrderResponse {
@@ -35,5 +36,6 @@ export declare namespace OrderResponse {
         paid_at?: string | null;
         accepted_at?: string | null;
         completed_at?: string | null;
+        cancel_reason?: string | null;
     }
 }

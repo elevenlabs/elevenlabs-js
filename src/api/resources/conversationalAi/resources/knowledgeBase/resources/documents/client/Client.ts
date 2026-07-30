@@ -70,7 +70,9 @@ export class DocumentsClient {
     ): Promise<core.WithRawResponse<ElevenLabs.AddKnowledgeBaseResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -172,7 +174,7 @@ export class DocumentsClient {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
                 ..._maybeEncodedRequest.headers,
             }),
             requestOptions?.headers,
@@ -257,7 +259,9 @@ export class DocumentsClient {
     ): Promise<core.WithRawResponse<ElevenLabs.AddKnowledgeBaseResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -346,7 +350,9 @@ export class DocumentsClient {
     ): Promise<core.WithRawResponse<ElevenLabs.AddKnowledgeBaseResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -442,7 +448,9 @@ export class DocumentsClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -533,7 +541,9 @@ export class DocumentsClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -610,7 +620,9 @@ export class DocumentsClient {
     ): Promise<core.WithRawResponse<ElevenLabs.conversationalAi.knowledgeBase.DocumentsUpdateResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -715,7 +727,9 @@ export class DocumentsClient {
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -772,6 +786,115 @@ export class DocumentsClient {
     }
 
     /**
+     * Get a list of agents depending on any of the given knowledge base documents.
+     *
+     * @param {ElevenLabs.conversationalAi.knowledgeBase.BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost} request
+     * @param {DocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.knowledgeBase.documents.getBulkAgents({
+     *         dependentType: "direct",
+     *         pageSize: 1,
+     *         cursor: "cursor",
+     *         documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"]
+     *     })
+     */
+    public getBulkAgents(
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost,
+        requestOptions?: DocumentsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__getBulkAgents(request, requestOptions));
+    }
+
+    private async __getBulkAgents(
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost,
+        requestOptions?: DocumentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModel>> {
+        const { dependentType, pageSize, cursor, ..._body } = request;
+        const _queryParams: Record<string, unknown> = {
+            dependent_type:
+                dependentType != null
+                    ? serializers.KnowledgeBaseDependentType.jsonOrThrow(dependentType, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            page_size: pageSize,
+            cursor,
+        };
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/knowledge-base/dependent-agents",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.knowledgeBase.BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost.jsonOrThrow(
+                    _body,
+                    { unrecognizedObjectKeys: "strip" },
+                ),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetKnowledgeBaseDependentAgentsResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/knowledge-base/dependent-agents",
+        );
+    }
+
+    /**
      * Get the entire content of a document from the knowledge base
      *
      * @param {string} documentation_id - The id of a document from the knowledge base. This is returned on document addition.
@@ -797,7 +920,9 @@ export class DocumentsClient {
     ): Promise<core.WithRawResponse<string>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -868,7 +993,9 @@ export class DocumentsClient {
     ): Promise<core.WithRawResponse<ElevenLabs.KnowledgeBaseSourceFileUrlResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -949,7 +1076,9 @@ export class DocumentsClient {
     ): Promise<core.WithRawResponse<void>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -1030,7 +1159,9 @@ export class DocumentsClient {
     ): Promise<core.WithRawResponse<void>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -1080,6 +1211,104 @@ export class DocumentsClient {
             _response.rawResponse,
             "POST",
             "/v1/convai/knowledge-base/bulk-move",
+        );
+    }
+
+    /**
+     * Delete multiple documents or folders from the knowledge base. Each id succeeds or fails independently.
+     *
+     * @param {ElevenLabs.conversationalAi.knowledgeBase.BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost} request
+     * @param {DocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.knowledgeBase.documents.bulkDelete({
+     *         documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"]
+     *     })
+     */
+    public bulkDelete(
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost,
+        requestOptions?: DocumentsClient.RequestOptions,
+    ): core.HttpResponsePromise<
+        Record<string, ElevenLabs.conversationalAi.knowledgeBase.DocumentsBulkDeleteResponseValue>
+    > {
+        return core.HttpResponsePromise.fromPromise(this.__bulkDelete(request, requestOptions));
+    }
+
+    private async __bulkDelete(
+        request: ElevenLabs.conversationalAi.knowledgeBase.BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost,
+        requestOptions?: DocumentsClient.RequestOptions,
+    ): Promise<
+        core.WithRawResponse<Record<string, ElevenLabs.conversationalAi.knowledgeBase.DocumentsBulkDeleteResponseValue>>
+    > {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/knowledge-base/bulk-delete",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.knowledgeBase.BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost.jsonOrThrow(
+                    request,
+                    { unrecognizedObjectKeys: "strip" },
+                ),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.conversationalAi.knowledgeBase.documents.bulkDelete.Response.parseOrThrow(
+                    _response.body,
+                    {
+                        unrecognizedObjectKeys: "passthrough",
+                        allowUnrecognizedUnionMembers: true,
+                        allowUnrecognizedEnumValues: true,
+                        breadcrumbsPrefix: ["response"],
+                    },
+                ),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/knowledge-base/bulk-delete",
         );
     }
 }

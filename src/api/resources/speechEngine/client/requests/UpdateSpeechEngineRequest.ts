@@ -12,6 +12,7 @@ export interface UpdateSpeechEngineRequest {
     asr?: ElevenLabs.AsrConversationalConfig;
     tts?: ElevenLabs.TtsConversationalConfigInput;
     turn?: ElevenLabs.BaseTurnConfig;
+    vad?: ElevenLabs.VadConfig;
     conversation?: ElevenLabs.ConversationConfigInput;
     privacy?: ElevenLabs.PrivacyConfigInput;
     callLimits?: ElevenLabs.AgentCallLimits;

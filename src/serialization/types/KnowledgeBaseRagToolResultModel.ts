@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { KnowledgeBaseRagChunkModel } from "./KnowledgeBaseRagChunkModel";
 import { KnowledgeBaseRagToolStatus } from "./KnowledgeBaseRagToolStatus";
 
 export const KnowledgeBaseRagToolResultModel: core.serialization.ObjectSchema<
@@ -12,6 +13,7 @@ export const KnowledgeBaseRagToolResultModel: core.serialization.ObjectSchema<
     status: KnowledgeBaseRagToolStatus.optional(),
     chunkCount: core.serialization.property("chunk_count", core.serialization.number().optional()),
     message: core.serialization.string().optional(),
+    chunks: core.serialization.list(KnowledgeBaseRagChunkModel).optional(),
 });
 
 export declare namespace KnowledgeBaseRagToolResultModel {
@@ -19,5 +21,6 @@ export declare namespace KnowledgeBaseRagToolResultModel {
         status?: KnowledgeBaseRagToolStatus.Raw | null;
         chunk_count?: number | null;
         message?: string | null;
+        chunks?: KnowledgeBaseRagChunkModel.Raw[] | null;
     }
 }

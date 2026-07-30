@@ -13,6 +13,23 @@ export const ProcedureAtVersionOutput: core.serialization.ObjectSchema<
     procedureId: core.serialization.property("procedure_id", core.serialization.string()),
     name: core.serialization.string(),
     type: ProcedureType.optional(),
+    trigger: core.serialization.string().optional(),
+    referencedToolIds: core.serialization.property(
+        "referenced_tool_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    referencedKbIds: core.serialization.property(
+        "referenced_kb_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    referencedProcedureIds: core.serialization.property(
+        "referenced_procedure_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    referencedDynamicVariables: core.serialization.property(
+        "referenced_dynamic_variables",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     content: core.serialization.string(),
     guardrails: core.serialization.list(CustomGuardrailConfig).optional(),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
@@ -24,6 +41,11 @@ export declare namespace ProcedureAtVersionOutput {
         procedure_id: string;
         name: string;
         type?: ProcedureType.Raw | null;
+        trigger?: string | null;
+        referenced_tool_ids?: string[] | null;
+        referenced_kb_ids?: string[] | null;
+        referenced_procedure_ids?: string[] | null;
+        referenced_dynamic_variables?: string[] | null;
         content: string;
         guardrails?: CustomGuardrailConfig.Raw[] | null;
         agent_id: string;

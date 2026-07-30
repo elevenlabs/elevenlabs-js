@@ -116,7 +116,7 @@ export class AudioNativeClient {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
                 ..._maybeEncodedRequest.headers,
             }),
             requestOptions?.headers,
@@ -194,7 +194,9 @@ export class AudioNativeClient {
     ): Promise<core.WithRawResponse<ElevenLabs.GetAudioNativeProjectSettingsResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -291,7 +293,7 @@ export class AudioNativeClient {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
                 ..._maybeEncodedRequest.headers,
             }),
             requestOptions?.headers,
@@ -376,7 +378,9 @@ export class AudioNativeClient {
     ): Promise<core.WithRawResponse<ElevenLabs.AudioNativeEditContentResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey }),
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
