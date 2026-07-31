@@ -2,14 +2,16 @@ import { describe, it, expect, jest, beforeEach } from "@jest/globals";
 
 // Mock `ws` before importing ScribeRealtime so it never opens a real socket.
 let capturedUrl: string | undefined;
+let capturedOptions: { headers?: Record<string, string> } | undefined;
 jest.mock("ws", () => {
     return {
         __esModule: true,
         default: class FakeWebSocket {
             static OPEN = 1;
             readyState = 0;
-            constructor(url: string) {
+            constructor(url: string, options?: { headers?: Record<string, string> }) {
                 capturedUrl = url;
+                capturedOptions = options;
             }
             on() {}
             send() {}
@@ -18,170 +20,238 @@ jest.mock("ws", () => {
     };
 });
 
-import { ScribeRealtime, AudioFormat } from "../../src/wrapper/realtime/scribe";
+import { ScribeRealtime, AudioFormat, CommitStrategy } from "../../src/wrapper/realtime/scribe";
 
 const TEST_API_KEY = "test_api_key";
 const TEST_MODEL_ID = "scribe_v2_realtime";
 
-async function connectAndGetUrl(
-    overrides: Record<string, unknown> = {},
-    clientOptions: { apiKey?: string } = { apiKey: TEST_API_KEY }
-): Promise<URL> {
-    const scribe = new ScribeRealtime(clientOptions);
-    capturedUrl = undefined;
+/** The options every connect() call needs, so tests only state what they exercise. */
+const REQUIRED_OPTIONS = {
+    modelId: TEST_MODEL_ID,
+    audioFormat: AudioFormat.PCM_16000,
+    sampleRate: 16000,
+};
 
-    const connection = await scribe.connect({
-        modelId: TEST_MODEL_ID,
-        audioFormat: AudioFormat.PCM_16000,
-        sampleRate: 16000,
-        ...overrides,
-    });
+async function connect(
+    overrides: Record<string, unknown> = {},
+    clientOptions: { apiKey?: string; baseUrl?: string } = { apiKey: TEST_API_KEY }
+): Promise<{ url: URL; headers: Record<string, string> }> {
+    capturedUrl = undefined;
+    capturedOptions = undefined;
+
+    const scribe = new ScribeRealtime(clientOptions);
+    const connection = await scribe.connect({ ...REQUIRED_OPTIONS, ...overrides });
     connection.close();
 
     if (!capturedUrl) {
         throw new Error("WebSocket was never constructed");
     }
-    return new URL(capturedUrl);
+    return { url: new URL(capturedUrl), headers: capturedOptions?.headers ?? {} };
 }
 
-describe("ScribeRealtime URI building", () => {
+/**
+ * Every query parameter on the URL, sorted so assertions don't depend on the
+ * order the builder happens to append in.
+ */
+function queryParams(url: URL): Array<[string, string]> {
+    return [...url.searchParams.entries()].sort(([keyA, valueA], [keyB, valueB]) =>
+        keyA === keyB ? valueA.localeCompare(valueB) : keyA.localeCompare(keyB)
+    );
+}
+
+describe("ScribeRealtime handshake URL", () => {
+    beforeEach(() => {
+        capturedUrl = undefined;
+        capturedOptions = undefined;
+    });
+
+    it("targets the realtime endpoint, upgrading the scheme to websocket", async () => {
+        const secure = await connect({}, { apiKey: TEST_API_KEY });
+        expect(secure.url.protocol).toBe("wss:");
+        expect(secure.url.pathname).toBe("/v1/speech-to-text/realtime");
+
+        const insecure = await connect({}, { apiKey: TEST_API_KEY, baseUrl: "http://localhost:8080" });
+        expect(insecure.url.protocol).toBe("ws:");
+        expect(insecure.url.host).toBe("localhost:8080");
+        expect(insecure.url.pathname).toBe("/v1/speech-to-text/realtime");
+    });
+
+    // Asserting the exhaustive parameter set is what catches a parameter being
+    // appended twice, or leaking in when the caller never asked for it.
+    it("sends nothing beyond the required parameters when no options are set", async () => {
+        const { url } = await connect();
+
+        expect(queryParams(url)).toEqual([
+            ["audio_format", "pcm_16000"],
+            ["model_id", TEST_MODEL_ID],
+        ]);
+    });
+
+    // Likewise exhaustive: a renamed, miscased, dropped or duplicated parameter
+    // fails here rather than silently reaching the server.
+    it("serializes every supported option to its documented parameter name", async () => {
+        const { url } = await connect({
+            commitStrategy: CommitStrategy.VAD,
+            vadSilenceThresholdSecs: 1.5,
+            vadThreshold: 0.4,
+            minSpeechDurationMs: 100,
+            minSilenceDurationMs: 200,
+            languageCode: "en",
+            secondaryLanguages: ["nl", "de"],
+            includeTimestamps: false,
+            includeLanguageDetection: true,
+            keyterms: ["ElevenLabs", "Scribe"],
+            noVerbatim: true,
+            entityDetection: ["pii", "email_address"],
+            filterBackgroundAudio: true,
+            enableLogging: false,
+            token: "sutkn_1234567890",
+        });
+
+        expect(queryParams(url)).toEqual([
+            ["audio_format", "pcm_16000"],
+            ["commit_strategy", "vad"],
+            ["enable_logging", "false"],
+            ["entity_detection", "email_address"],
+            ["entity_detection", "pii"],
+            ["filter_background_audio", "true"],
+            ["include_language_detection", "true"],
+            ["include_timestamps", "false"],
+            ["keyterms", "ElevenLabs"],
+            ["keyterms", "Scribe"],
+            ["language_code", "en"],
+            ["min_silence_duration_ms", "200"],
+            ["min_speech_duration_ms", "100"],
+            ["model_id", TEST_MODEL_ID],
+            ["no_verbatim", "true"],
+            ["secondary_languages", "de"],
+            ["secondary_languages", "nl"],
+            ["token", "sutkn_1234567890"],
+            ["vad_silence_threshold_secs", "1.5"],
+            ["vad_threshold", "0.4"],
+        ]);
+    });
+
+    // `false` is a meaningful value here: dropping it would silently re-enable
+    // logging, or leave the server on a different default than the caller asked for.
+    it("transmits booleans that are explicitly false rather than dropping them", async () => {
+        const { url } = await connect({
+            includeTimestamps: false,
+            includeLanguageDetection: false,
+            noVerbatim: false,
+            filterBackgroundAudio: false,
+            enableLogging: false,
+        });
+
+        expect(url.searchParams.get("include_timestamps")).toBe("false");
+        expect(url.searchParams.get("include_language_detection")).toBe("false");
+        expect(url.searchParams.get("no_verbatim")).toBe("false");
+        expect(url.searchParams.get("filter_background_audio")).toBe("false");
+        expect(url.searchParams.get("enable_logging")).toBe("false");
+    });
+
+    // The endpoint reads these as repeated parameters; joining them would make
+    // each list arrive as one nonsense value.
+    it("repeats list-valued parameters in order instead of joining them", async () => {
+        const { url } = await connect({
+            keyterms: ["beta", "alpha"],
+            secondaryLanguages: ["nl", "de"],
+            entityDetection: ["pii", "email_address"],
+        });
+
+        expect(url.searchParams.getAll("keyterms")).toEqual(["beta", "alpha"]);
+        expect(url.searchParams.getAll("secondary_languages")).toEqual(["nl", "de"]);
+        expect(url.searchParams.getAll("entity_detection")).toEqual(["pii", "email_address"]);
+        for (const value of url.searchParams.values()) {
+            expect(value).not.toContain(",");
+        }
+    });
+
+    it("accepts a bare string for entityDetection as well as a list", async () => {
+        const { url } = await connect({ entityDetection: "all" });
+
+        expect(url.searchParams.getAll("entity_detection")).toEqual(["all"]);
+    });
+});
+
+describe("ScribeRealtime option validation", () => {
     beforeEach(() => {
         capturedUrl = undefined;
     });
 
-    it("includes keyterms as repeated query params", async () => {
-        const url = await connectAndGetUrl({
-            keyterms: ["ElevenLabs", "Scribe"],
-        });
-
-        const keyterms = url.searchParams.getAll("keyterms");
-        expect(keyterms).toEqual(["ElevenLabs", "Scribe"]);
-    });
-
-    it("includes no_verbatim=true when noVerbatim is true", async () => {
-        const url = await connectAndGetUrl({ noVerbatim: true });
-
-        expect(url.searchParams.get("no_verbatim")).toBe("true");
-    });
-
-    it("includes no_verbatim=false when noVerbatim is false", async () => {
-        const url = await connectAndGetUrl({ noVerbatim: false });
-
-        expect(url.searchParams.get("no_verbatim")).toBe("false");
-    });
-
-    it("omits keyterms and no_verbatim when not specified", async () => {
-        const url = await connectAndGetUrl();
-
-        expect(url.searchParams.has("keyterms")).toBe(false);
-        expect(url.searchParams.has("no_verbatim")).toBe(false);
-    });
-
-    it("appends audio_format exactly once", async () => {
-        const url = await connectAndGetUrl();
-
-        expect(url.searchParams.getAll("audio_format")).toEqual(["pcm_16000"]);
-    });
-
-    it("includes secondary_languages as repeated query params", async () => {
-        const url = await connectAndGetUrl({ secondaryLanguages: ["en", "nl"] });
-
-        expect(url.searchParams.getAll("secondary_languages")).toEqual(["en", "nl"]);
-    });
-
-    it("includes include_language_detection", async () => {
-        const url = await connectAndGetUrl({ includeLanguageDetection: true });
-
-        expect(url.searchParams.get("include_language_detection")).toBe("true");
-    });
-
-    it("includes filter_background_audio", async () => {
-        const url = await connectAndGetUrl({ filterBackgroundAudio: true });
-
-        expect(url.searchParams.get("filter_background_audio")).toBe("true");
-    });
-
-    it("includes enable_logging=false for zero retention mode", async () => {
-        const url = await connectAndGetUrl({ enableLogging: false });
-
-        expect(url.searchParams.get("enable_logging")).toBe("false");
-    });
-
-    it("includes entity_detection when given a single value", async () => {
-        const url = await connectAndGetUrl({ entityDetection: "all" });
-
-        expect(url.searchParams.getAll("entity_detection")).toEqual(["all"]);
-    });
-
-    it("includes entity_detection as repeated query params when given a list", async () => {
-        const url = await connectAndGetUrl({
-            entityDetection: ["pii", "email_address"],
-        });
-
-        expect(url.searchParams.getAll("entity_detection")).toEqual([
-            "pii",
-            "email_address",
-        ]);
-    });
-
-    it("omits the new params when not specified", async () => {
-        const url = await connectAndGetUrl();
-
-        expect(url.searchParams.has("secondary_languages")).toBe(false);
-        expect(url.searchParams.has("include_language_detection")).toBe(false);
-        expect(url.searchParams.has("filter_background_audio")).toBe(false);
-        expect(url.searchParams.has("enable_logging")).toBe(false);
-        expect(url.searchParams.has("entity_detection")).toBe(false);
-        expect(url.searchParams.has("token")).toBe(false);
-    });
-
     it("rejects filterBackgroundAudio combined with includeTimestamps", async () => {
-        await expect(
-            connectAndGetUrl({ filterBackgroundAudio: true, includeTimestamps: true })
-        ).rejects.toThrow(/cannot be combined with includeTimestamps/);
+        await expect(connect({ filterBackgroundAudio: true, includeTimestamps: true })).rejects.toThrow(
+            /cannot be combined with includeTimestamps/
+        );
     });
 
-    it("accepts the inclusive bounds of the VAD parameters", async () => {
-        const url = await connectAndGetUrl({
-            vadSilenceThresholdSecs: 0.3,
-            minSpeechDurationMs: 50,
-            minSilenceDurationMs: 50,
-        });
+    it.each([
+        ["vadSilenceThresholdSecs", 0.3, 3.0],
+        ["vadThreshold", 0.1, 0.9],
+        ["minSpeechDurationMs", 50, 2000],
+        ["minSilenceDurationMs", 50, 2000],
+    ])("treats the %s bounds as inclusive", async (option, min, max) => {
+        await expect(connect({ [option]: min })).resolves.toBeDefined();
+        await expect(connect({ [option]: max })).resolves.toBeDefined();
 
-        expect(url.searchParams.get("vad_silence_threshold_secs")).toBe("0.3");
-        expect(url.searchParams.get("min_speech_duration_ms")).toBe("50");
-        expect(url.searchParams.get("min_silence_duration_ms")).toBe("50");
+        await expect(connect({ [option]: min - 0.05 })).rejects.toThrow(option);
+        await expect(connect({ [option]: max + 0.05 })).rejects.toThrow(option);
     });
 
-    it("rejects keyterms beyond the documented limits", async () => {
+    it("rejects more keyterms than the endpoint accepts", async () => {
         await expect(
-            connectAndGetUrl({ keyterms: Array.from({ length: 51 }, (_, i) => `k${i}`) })
+            connect({ keyterms: Array.from({ length: 51 }, (_, index) => `keyterm-${index}`) })
         ).rejects.toThrow(/cannot exceed 50/);
 
         await expect(
-            connectAndGetUrl({ keyterms: ["a".repeat(21)] })
-        ).rejects.toThrow(/at most 20 characters/);
+            connect({ keyterms: Array.from({ length: 50 }, (_, index) => `keyterm-${index}`) })
+        ).resolves.toBeDefined();
+    });
+
+    it("rejects a keyterm longer than the endpoint accepts", async () => {
+        await expect(connect({ keyterms: ["a".repeat(21)] })).rejects.toThrow(/at most 20 characters/);
+        await expect(connect({ keyterms: ["a".repeat(20)] })).resolves.toBeDefined();
     });
 });
 
 describe("ScribeRealtime authentication", () => {
     beforeEach(() => {
         capturedUrl = undefined;
+        capturedOptions = undefined;
     });
 
-    it("passes a single use token as a query param", async () => {
-        const url = await connectAndGetUrl({ token: "sutkn_1234567890" });
+    it("authenticates with the api key header when no token is given", async () => {
+        const { url, headers } = await connect();
 
+        expect(headers).toStrictEqual({ "xi-api-key": TEST_API_KEY });
+        expect(url.searchParams.has("token")).toBe(false);
+    });
+
+    // The point of a token is connecting without an api key at all, so the
+    // credential header must not be required to build the request.
+    it("omits the api key header when authenticating with a token alone", async () => {
+        const { url, headers } = await connect({ token: "sutkn_1234567890" }, {});
+
+        expect(headers).toStrictEqual({});
         expect(url.searchParams.get("token")).toBe("sutkn_1234567890");
     });
 
-    it("connects with a token and no API key", async () => {
-        const url = await connectAndGetUrl({ token: "sutkn_1234567890" }, {});
+    it("keeps the api key header when a token is supplied alongside one", async () => {
+        const { url, headers } = await connect({ token: "sutkn_1234567890" });
 
+        expect(headers).toStrictEqual({ "xi-api-key": TEST_API_KEY });
         expect(url.searchParams.get("token")).toBe("sutkn_1234567890");
     });
 
-    it("still requires an API key when no token is given", async () => {
-        await expect(connectAndGetUrl({}, {})).rejects.toThrow("API key is required");
+    it("resolves an api key supplied as a function or promise", async () => {
+        const fromFunction = await connect({}, { apiKey: (() => TEST_API_KEY) as never });
+        expect(fromFunction.headers).toStrictEqual({ "xi-api-key": TEST_API_KEY });
+
+        const fromPromise = await connect({}, { apiKey: Promise.resolve(TEST_API_KEY) as never });
+        expect(fromPromise.headers).toStrictEqual({ "xi-api-key": TEST_API_KEY });
+    });
+
+    it("refuses to connect without either credential", async () => {
+        await expect(connect({}, {})).rejects.toThrow("API key is required");
     });
 });
