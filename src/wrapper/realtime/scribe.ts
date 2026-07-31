@@ -19,6 +19,21 @@ export enum CommitStrategy {
     VAD = "vad",
 }
 
+/**
+ * Entity categories accepted by {@link BaseOptions.entityDetection}.
+ * `"all"` enables every supported entity type.
+ */
+export type EntityDetectionCategory = "all" | "pii" | "phi" | "pci" | "other" | "offensive_language";
+
+/**
+ * A value accepted by {@link BaseOptions.entityDetection}: either one of the
+ * {@link EntityDetectionCategory} values, or a specific entity type such as
+ * `"email_address"` or `"credit_card"`.
+ */
+// The `string & {}` union member keeps autocomplete for the known categories
+// while still accepting any specific entity type the API supports.
+export type EntityDetectionOption = EntityDetectionCategory | (string & {});
+
 interface BaseOptions {
     /**
      * Strategy for committing transcriptions.
@@ -56,10 +71,22 @@ interface BaseOptions {
      */
     languageCode?: string;
     /**
+     * Additional ISO-639-1 or ISO-639-3 language codes that may be present in the audio.
+     * Providing them makes language identification more reliable by only focusing on a
+     * certain set of languages. Each code is validated the same way as languageCode.
+     */
+    secondaryLanguages?: string[];
+    /**
      * Whether to receive a committed_transcript_with_timestamps event which includes word-level timestamps.
      * @default false
      */
     includeTimestamps?: boolean;
+    /**
+     * Whether to receive language detection in a delayed final transcript message.
+     * When enabled, an additional message with the detected language_code is sent after each commit.
+     * @default false
+     */
+    includeLanguageDetection?: boolean;
     /**
      * List of keyterms to bias the model towards.
      * Maximum 50 keyterms, each up to 20 characters.
@@ -70,6 +97,37 @@ interface BaseOptions {
      * @default false
      */
     noVerbatim?: boolean;
+    /**
+     * Detect entities on committed transcripts. Accepts `"all"`, a single entity type or
+     * category, or a list of types/categories. Detected entities are delivered in a separate
+     * committed_transcript_entities event with their text, type, and character positions.
+     */
+    entityDetection?: EntityDetectionOption | EntityDetectionOption[];
+    /**
+     * Enable background speech filtering to reduce false activations from nearby conversations
+     * and ambient noise. When enabled without an explicit vadThreshold, the server applies a
+     * lower default threshold.
+     *
+     * @remarks
+     * Cannot be combined with includeTimestamps.
+     * @default false
+     */
+    filterBackgroundAudio?: boolean;
+    /**
+     * When set to false, zero retention mode is used for the request. History features are
+     * unavailable for the request. Zero retention mode may only be used by enterprise customers.
+     * @default true
+     */
+    enableLogging?: boolean;
+    /**
+     * A single-use token used to authenticate the session instead of an API key.
+     * Useful for connecting from a client, where an API key should not be exposed.
+     * When provided, the `xi-api-key` header is omitted and no API key is required.
+     *
+     * @remarks
+     * Generate one with `client.tokens.singleUse.create()`.
+     */
+    token?: string;
 }
 
 export interface AudioOptions extends BaseOptions {
@@ -147,7 +205,7 @@ export class ScribeRealtime {
             params.append("audio_format", options.audioFormat);
         }
         if (options.vadSilenceThresholdSecs !== undefined) {
-            if (options.vadSilenceThresholdSecs <= 0.3 || options.vadSilenceThresholdSecs > 3.0) {
+            if (options.vadSilenceThresholdSecs < 0.3 || options.vadSilenceThresholdSecs > 3.0) {
                 throw new Error("vadSilenceThresholdSecs must be between 0.3 and 3.0");
             }
             params.append("vad_silence_threshold_secs", options.vadSilenceThresholdSecs.toString());
@@ -159,13 +217,13 @@ export class ScribeRealtime {
             params.append("vad_threshold", options.vadThreshold.toString());
         }
         if (options.minSpeechDurationMs !== undefined) {
-            if (options.minSpeechDurationMs <= 50 || options.minSpeechDurationMs > 2000) {
+            if (options.minSpeechDurationMs < 50 || options.minSpeechDurationMs > 2000) {
                 throw new Error("minSpeechDurationMs must be between 50 and 2000");
             }
             params.append("min_speech_duration_ms", options.minSpeechDurationMs.toString());
         }
         if (options.minSilenceDurationMs !== undefined) {
-            if (options.minSilenceDurationMs <= 50 || options.minSilenceDurationMs > 2000) {
+            if (options.minSilenceDurationMs < 50 || options.minSilenceDurationMs > 2000) {
                 throw new Error("minSilenceDurationMs must be between 50 and 2000");
             }
             params.append("min_silence_duration_ms", options.minSilenceDurationMs.toString());
@@ -175,11 +233,38 @@ export class ScribeRealtime {
             params.append("language_code", options.languageCode);
         }
 
+        if (options.secondaryLanguages !== undefined) {
+            for (const language of options.secondaryLanguages) {
+                params.append("secondary_languages", language);
+            }
+        }
+
+        // The server rejects this combination, because dropping low-activity frames
+        // shifts the timeline the timestamps are computed against.
+        if (options.filterBackgroundAudio && options.includeTimestamps) {
+            throw new Error("filterBackgroundAudio cannot be combined with includeTimestamps");
+        }
+
         if (options.includeTimestamps !== undefined) {
             params.append("include_timestamps", options.includeTimestamps.toString());
         }
 
+        if (options.includeLanguageDetection !== undefined) {
+            params.append("include_language_detection", options.includeLanguageDetection.toString());
+        }
+
         if (options.keyterms !== undefined) {
+            if (options.keyterms.length > 50) {
+                throw new Error(
+                    `keyterms cannot exceed 50 entries, received ${options.keyterms.length}`
+                );
+            }
+            const tooLong = options.keyterms.find((term) => term.length > 20);
+            if (tooLong !== undefined) {
+                throw new Error(
+                    `Each keyterm must be at most 20 characters, '${tooLong}' is ${tooLong.length}`
+                );
+            }
             for (const term of options.keyterms) {
                 params.append("keyterms", term);
             }
@@ -188,8 +273,25 @@ export class ScribeRealtime {
             params.append("no_verbatim", options.noVerbatim ? "true" : "false");
         }
 
-        if (options.audioFormat !== undefined) {
-            params.append("audio_format", options.audioFormat);
+        if (options.entityDetection !== undefined) {
+            const entityDetection = Array.isArray(options.entityDetection)
+                ? options.entityDetection
+                : [options.entityDetection];
+            for (const entity of entityDetection) {
+                params.append("entity_detection", entity);
+            }
+        }
+
+        if (options.filterBackgroundAudio !== undefined) {
+            params.append("filter_background_audio", options.filterBackgroundAudio.toString());
+        }
+
+        if (options.enableLogging !== undefined) {
+            params.append("enable_logging", options.enableLogging.toString());
+        }
+
+        if (options.token !== undefined) {
+            params.append("token", options.token);
         }
 
         const queryString = params.toString();
@@ -222,11 +324,23 @@ export class ScribeRealtime {
      *     modelId: "scribe_v2_realtime",
      *     url: "https://example.com/stream.mp3",
      * });
+     *
+     * // Authenticating with a single-use token instead of an API key
+     * const connection = await client.speechToText.realtime.connect({
+     *     modelId: "scribe_v2_realtime",
+     *     audioFormat: AudioFormat.PCM_16000,
+     *     sampleRate: 16000,
+     *     token: singleUseToken,
+     * });
      * ```
      */
     public async connect(options: AudioOptions | UrlOptions): Promise<RealtimeConnection> {
+        // A single-use token authenticates the session on its own, so an API key is
+        // only required when no token was supplied.
+        const usingToken = options.token !== undefined;
+
         let apiKey = this.options.apiKey;
-        if (!apiKey) {
+        if (!apiKey && !usingToken) {
             throw new Error("API key is required");
         }
 
@@ -238,7 +352,7 @@ export class ScribeRealtime {
             apiKey = await apiKey;
         }
 
-        if (!apiKey) {
+        if (!apiKey && !usingToken) {
             throw new Error("API key is required");
         }
 
@@ -255,9 +369,7 @@ export class ScribeRealtime {
 
         return new Promise((resolve) => {
             const websocket = new WebSocket(uri, {
-                headers: {
-                    "xi-api-key": apiKey as string,
-                },
+                headers: apiKey ? { "xi-api-key": apiKey as string } : {},
             });
 
             // Attach websocket to connection immediately so error handlers are registered

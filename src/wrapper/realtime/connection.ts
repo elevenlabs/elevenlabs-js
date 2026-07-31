@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 import type { ChildProcess } from "node:child_process";
 import { EventEmitter } from "node:events";
-import type { AudioFormat, CommitStrategy } from "./scribe";
+import type { AudioFormat } from "./scribe";
 
 export interface InputAudioChunk {
     message_type: "input_audio_chunk";
@@ -23,20 +23,45 @@ export interface WordsItem {
     characters?: string[];
 }
 
+/**
+ * The session configuration echoed back by the server in the session_started message.
+ */
 export interface Config {
     sample_rate?: number;
     audio_format?: AudioFormat;
-    language_code?: string;
-    vad_commit_strategy?: CommitStrategy;
+    language_code?: string | null;
+    secondary_languages?: string[];
+    timestamps_granularity?: "word" | "character";
+    /** True when the session commits automatically via VAD rather than manually. */
+    vad_commit_strategy?: boolean;
     vad_silence_threshold_secs?: number;
     vad_threshold?: number;
     min_speech_duration_ms?: number;
     min_silence_duration_ms?: number;
+    max_tokens_to_recompute?: number;
     model_id?: string;
     disable_logging?: boolean;
     include_timestamps?: boolean;
+    include_language_detection?: boolean;
+    filter_background_audio?: boolean;
     keyterms?: string[];
     no_verbatim?: boolean;
+    /** The entity types being detected, or null when detection is disabled. */
+    entity_detection?: string[] | null;
+}
+
+/**
+ * An entity detected within a committed transcript.
+ */
+export interface DetectedEntity {
+    /** The text that was identified as an entity. */
+    text: string;
+    /** The type of entity detected (e.g. 'credit_card', 'email_address', 'person_name'). */
+    entity_type: string;
+    /** Start character position in the transcript text. */
+    start_char: number;
+    /** End character position in the transcript text. */
+    end_char: number;
 }
 
 export interface SessionStartedMessage {
@@ -50,6 +75,26 @@ export interface PartialTranscriptMessage {
     text: string;
 }
 
+/**
+ * A final transcript for a segment, sent once speech has settled.
+ * Unlike a partial transcript this will not change, but the segment is not yet committed.
+ */
+export interface FinalTranscriptMessage {
+    message_type: "final_transcript";
+    text: string;
+}
+
+/**
+ * A delayed final transcript with word-level timestamps and/or the detected language.
+ * Only sent when includeTimestamps or includeLanguageDetection is enabled.
+ */
+export interface FinalTranscriptWithTimestampsMessage {
+    message_type: "final_transcript_with_timestamps";
+    text: string;
+    language_code?: string | null;
+    words?: WordsItem[] | null;
+}
+
 export interface CommittedTranscriptMessage {
     message_type: "committed_transcript";
     text: string;
@@ -58,8 +103,20 @@ export interface CommittedTranscriptMessage {
 export interface CommittedTranscriptWithTimestampsMessage {
     message_type: "committed_transcript_with_timestamps";
     text: string;
-    language_code?: string;
-    words?: WordsItem[];
+    language_code?: string | null;
+    words?: WordsItem[] | null;
+}
+
+/**
+ * Entities detected in a committed transcript.
+ * Only sent when the entityDetection option is set.
+ */
+export interface CommittedTranscriptEntitiesMessage {
+    message_type: "committed_transcript_entities";
+    /** The committed transcript text the entities were detected in. */
+    text: string;
+    /** Detected entities. Empty when none were found. */
+    entities: DetectedEntity[];
 }
 
 export interface ErrorMessage {
@@ -88,7 +145,17 @@ export interface TranscriberErrorMessage {
 }
 
 export interface UnacceptedTermsErrorMessage {
-    message_type: "unaccepted_terms_error";
+    // The server sends "unaccepted_terms"; "unaccepted_terms_error" is kept for
+    // backwards compatibility with the name this SDK originally matched on.
+    message_type: "unaccepted_terms" | "unaccepted_terms_error";
+    error: string;
+}
+
+/**
+ * Sent when the connection parameters were rejected. The session is closed afterwards.
+ */
+export interface InvalidRequestErrorMessage {
+    message_type: "invalid_request";
     error: string;
 }
 
@@ -139,6 +206,7 @@ export type ServerErrorMessage =
     | UnacceptedTermsErrorMessage
     | RateLimitedErrorMessage
     | InputErrorMessage
+    | InvalidRequestErrorMessage
     | QueueOverflowErrorMessage
     | ResourceExhaustedErrorMessage
     | SessionTimeLimitExceededErrorMessage
@@ -148,8 +216,11 @@ export type ServerErrorMessage =
 export type WebSocketMessage =
     | SessionStartedMessage
     | PartialTranscriptMessage
+    | FinalTranscriptMessage
+    | FinalTranscriptWithTimestampsMessage
     | CommittedTranscriptMessage
     | CommittedTranscriptWithTimestampsMessage
+    | CommittedTranscriptEntitiesMessage
     | ServerErrorMessage;
 
 /**
@@ -166,10 +237,16 @@ export enum RealtimeEvents {
     SESSION_STARTED = "session_started",
     /** Emitted when a partial (interim) transcript is available */
     PARTIAL_TRANSCRIPT = "partial_transcript",
+    /** Emitted when a final transcript for a segment is available, before it is committed */
+    FINAL_TRANSCRIPT = "final_transcript",
+    /** Emitted when a delayed final transcript with timestamps and/or detected language is available */
+    FINAL_TRANSCRIPT_WITH_TIMESTAMPS = "final_transcript_with_timestamps",
     /** Emitted when a committed transcript is available */
     COMMITTED_TRANSCRIPT = "committed_transcript",
     /** Emitted when a committed transcript with timestamps is available */
     COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS = "committed_transcript_with_timestamps",
+    /** Emitted when entities detected in a committed transcript are available */
+    COMMITTED_TRANSCRIPT_ENTITIES = "committed_transcript_entities",
     /** Emitted when an error occurs - can be any error message from the server or a native WebSocket error */
     ERROR = "error",
     /** Emitted when an auth error occurs */
@@ -190,6 +267,8 @@ export enum RealtimeEvents {
     RATE_LIMITED = "rate_limited",
     /** Emitted when a input error occurs */
     INPUT_ERROR = "input_error",
+    /** Emitted when the connection parameters were rejected by the server */
+    INVALID_REQUEST = "invalid_request",
     /** Emitted when a queue overflow error occurs */
     QUEUE_OVERFLOW = "queue_overflow",
     /** Emitted when a resource exhausted error occurs */
@@ -208,8 +287,11 @@ export enum RealtimeEvents {
 export interface RealtimeEventMap {
     [RealtimeEvents.SESSION_STARTED]: SessionStartedMessage;
     [RealtimeEvents.PARTIAL_TRANSCRIPT]: PartialTranscriptMessage;
+    [RealtimeEvents.FINAL_TRANSCRIPT]: FinalTranscriptMessage;
+    [RealtimeEvents.FINAL_TRANSCRIPT_WITH_TIMESTAMPS]: FinalTranscriptWithTimestampsMessage;
     [RealtimeEvents.COMMITTED_TRANSCRIPT]: CommittedTranscriptMessage;
     [RealtimeEvents.COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS]: CommittedTranscriptWithTimestampsMessage;
+    [RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES]: CommittedTranscriptEntitiesMessage;
     [RealtimeEvents.ERROR]: RealtimeErrorPayload;
     [RealtimeEvents.AUTH_ERROR]: AuthErrorMessage;
     [RealtimeEvents.QUOTA_EXCEEDED]: QuotaExceededErrorMessage;
@@ -220,6 +302,7 @@ export interface RealtimeEventMap {
     [RealtimeEvents.UNACCEPTED_TERMS_ERROR]: UnacceptedTermsErrorMessage;
     [RealtimeEvents.RATE_LIMITED]: RateLimitedErrorMessage;
     [RealtimeEvents.INPUT_ERROR]: InputErrorMessage;
+    [RealtimeEvents.INVALID_REQUEST]: InvalidRequestErrorMessage;
     [RealtimeEvents.QUEUE_OVERFLOW]: QueueOverflowErrorMessage;
     [RealtimeEvents.RESOURCE_EXHAUSTED]: ResourceExhaustedErrorMessage;
     [RealtimeEvents.SESSION_TIME_LIMIT_EXCEEDED]: SessionTimeLimitExceededErrorMessage;
@@ -298,11 +381,20 @@ export class RealtimeConnection {
                 case "partial_transcript":
                     this.eventEmitter.emit(RealtimeEvents.PARTIAL_TRANSCRIPT, data);
                     break;
+                case "final_transcript":
+                    this.eventEmitter.emit(RealtimeEvents.FINAL_TRANSCRIPT, data);
+                    break;
+                case "final_transcript_with_timestamps":
+                    this.eventEmitter.emit(RealtimeEvents.FINAL_TRANSCRIPT_WITH_TIMESTAMPS, data);
+                    break;
                 case "committed_transcript":
                     this.eventEmitter.emit(RealtimeEvents.COMMITTED_TRANSCRIPT, data);
                     break;
                 case "committed_transcript_with_timestamps":
                     this.eventEmitter.emit(RealtimeEvents.COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS, data);
+                    break;
+                case "committed_transcript_entities":
+                    this.eventEmitter.emit(RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES, data);
                     break;
                 case "error":
                     this.eventEmitter.emit(RealtimeEvents.ERROR, data);
@@ -323,6 +415,7 @@ export class RealtimeConnection {
                     this.eventEmitter.emit(RealtimeEvents.TRANSCRIBER_ERROR, data);
                     this.eventEmitter.emit(RealtimeEvents.ERROR, data);
                     break;
+                case "unaccepted_terms":
                 case "unaccepted_terms_error":
                     this.eventEmitter.emit(RealtimeEvents.UNACCEPTED_TERMS_ERROR, data);
                     this.eventEmitter.emit(RealtimeEvents.ERROR, data);
@@ -333,6 +426,10 @@ export class RealtimeConnection {
                     break;
                 case "input_error":
                     this.eventEmitter.emit(RealtimeEvents.INPUT_ERROR, data);
+                    this.eventEmitter.emit(RealtimeEvents.ERROR, data);
+                    break;
+                case "invalid_request":
+                    this.eventEmitter.emit(RealtimeEvents.INVALID_REQUEST, data);
                     this.eventEmitter.emit(RealtimeEvents.ERROR, data);
                     break;
                 case "queue_overflow":
