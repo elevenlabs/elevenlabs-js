@@ -27,40 +27,33 @@ export interface WordsItem {
  * The session configuration echoed back by the server in the session_started message.
  */
 export interface Config {
+    /** Sample rate of the audio in Hz. */
     sample_rate?: number;
     audio_format?: AudioFormat;
+    /** Language code in ISO 639-1 or ISO 639-3 format. */
     language_code?: string | null;
-    secondary_languages?: string[];
-    timestamps_granularity?: "word" | "character";
-    /**
-     * The commit strategy the session was started with, as documented for the
-     * session_started payload.
-     */
+    /** Strategy for committing transcriptions. */
     commit_strategy?: CommitStrategy;
-    /**
-     * True when the session commits automatically via VAD rather than manually.
-     *
-     * @remarks
-     * The server currently collapses the `commit_strategy` handshake parameter into
-     * this boolean when it echoes the session config back, so this is the field
-     * present on the wire today. Prefer {@link Config.commit_strategy} and treat
-     * both as optional.
-     */
-    vad_commit_strategy?: boolean;
+    /** Silence threshold in seconds. */
     vad_silence_threshold_secs?: number;
+    /** Threshold for voice activity detection. */
     vad_threshold?: number;
+    /** Minimum speech duration in milliseconds. */
     min_speech_duration_ms?: number;
+    /** Minimum silence duration in milliseconds. */
     min_silence_duration_ms?: number;
-    max_tokens_to_recompute?: number;
+    /** ID of the model used for transcription. */
     model_id?: string;
-    disable_logging?: boolean;
+    /** False when the session runs in zero retention mode. */
+    enable_logging?: boolean;
+    /** Whether the session includes word-level timestamps in the committed transcript. */
     include_timestamps?: boolean;
+    /** Whether the session includes language detection in the committed transcript. */
     include_language_detection?: boolean;
-    filter_background_audio?: boolean;
+    /** List of keyterms the model is biased towards. */
     keyterms?: string[];
+    /** Whether filler words and disfluencies are removed from the transcript. */
     no_verbatim?: boolean;
-    /** The entity types being detected, or null when detection is disabled. */
-    entity_detection?: string[] | null;
 }
 
 /**
@@ -104,8 +97,8 @@ export interface FinalTranscriptMessage {
 export interface FinalTranscriptWithTimestampsMessage {
     message_type: "final_transcript_with_timestamps";
     text: string;
-    language_code?: string | null;
-    words?: WordsItem[] | null;
+    language_code?: string;
+    words?: WordsItem[];
 }
 
 export interface CommittedTranscriptMessage {
@@ -158,9 +151,7 @@ export interface TranscriberErrorMessage {
 }
 
 export interface UnacceptedTermsErrorMessage {
-    // The server sends "unaccepted_terms"; "unaccepted_terms_error" is kept for
-    // backwards compatibility with the name this SDK originally matched on.
-    message_type: "unaccepted_terms" | "unaccepted_terms_error";
+    message_type: "unaccepted_terms";
     error: string;
 }
 
@@ -429,7 +420,8 @@ export class RealtimeConnection {
                     this.eventEmitter.emit(RealtimeEvents.ERROR, data);
                     break;
                 case "unaccepted_terms":
-                case "unaccepted_terms_error":
+                    // The event name keeps its original spelling so existing
+                    // subscribers are unaffected.
                     this.eventEmitter.emit(RealtimeEvents.UNACCEPTED_TERMS_ERROR, data);
                     this.eventEmitter.emit(RealtimeEvents.ERROR, data);
                     break;
