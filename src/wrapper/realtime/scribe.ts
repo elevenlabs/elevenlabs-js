@@ -122,9 +122,12 @@ interface BaseOptions {
     /**
      * A single-use token used to authenticate the session instead of an API key.
      * Useful for connecting from a client, where an API key should not be exposed.
-     * When provided, the `xi-api-key` header is omitted and no API key is required.
      *
      * @remarks
+     * The token takes precedence over any configured API key: when one is
+     * provided the `xi-api-key` header is not sent, so the key is never
+     * transmitted for a session it would not be used to authenticate.
+     *
      * Generate one with `client.tokens.singleUse.create()`.
      */
     token?: string;
@@ -335,11 +338,12 @@ export class ScribeRealtime {
      * ```
      */
     public async connect(options: AudioOptions | UrlOptions): Promise<RealtimeConnection> {
-        // A single-use token authenticates the session on its own, so an API key is
-        // only required when no token was supplied.
+        // A single-use token authenticates the session on its own and takes
+        // precedence server-side, so an API key is neither required nor sent
+        // alongside one.
         const usingToken = options.token !== undefined;
 
-        let apiKey = this.options.apiKey;
+        let apiKey = usingToken ? undefined : this.options.apiKey;
         if (!apiKey && !usingToken) {
             throw new Error("API key is required");
         }

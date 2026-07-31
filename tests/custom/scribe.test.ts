@@ -236,10 +236,12 @@ describe("ScribeRealtime authentication", () => {
         expect(url.searchParams.get("token")).toBe("sutkn_1234567890");
     });
 
-    it("keeps the api key header when a token is supplied alongside one", async () => {
+    // The server authenticates the token and never falls back to the key, so
+    // sending it would transmit a long-lived credential that cannot be used.
+    it("does not send the api key when a token is supplied alongside one", async () => {
         const { url, headers } = await connect({ token: "sutkn_1234567890" });
 
-        expect(headers).toStrictEqual({ "xi-api-key": TEST_API_KEY });
+        expect(headers).toStrictEqual({});
         expect(url.searchParams.get("token")).toBe("sutkn_1234567890");
     });
 
