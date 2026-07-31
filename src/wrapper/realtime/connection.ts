@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 import type { ChildProcess } from "node:child_process";
 import { EventEmitter } from "node:events";
-import type { AudioFormat } from "./scribe";
+import type { AudioFormat, CommitStrategy } from "./scribe";
 
 export interface InputAudioChunk {
     message_type: "input_audio_chunk";
@@ -32,7 +32,20 @@ export interface Config {
     language_code?: string | null;
     secondary_languages?: string[];
     timestamps_granularity?: "word" | "character";
-    /** True when the session commits automatically via VAD rather than manually. */
+    /**
+     * The commit strategy the session was started with, as documented for the
+     * session_started payload.
+     */
+    commit_strategy?: CommitStrategy;
+    /**
+     * True when the session commits automatically via VAD rather than manually.
+     *
+     * @remarks
+     * The server currently collapses the `commit_strategy` handshake parameter into
+     * this boolean when it echoes the session config back, so this is the field
+     * present on the wire today. Prefer {@link Config.commit_strategy} and treat
+     * both as optional.
+     */
     vad_commit_strategy?: boolean;
     vad_silence_threshold_secs?: number;
     vad_threshold?: number;
