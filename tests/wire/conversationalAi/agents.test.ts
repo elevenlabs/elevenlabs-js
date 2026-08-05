@@ -287,6 +287,7 @@ describe("AgentsClient", () => {
                     show_conversation_id: true,
                     strip_audio_tags: true,
                     syntax_highlight_theme: "light",
+                    show_resize_button: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -1463,6 +1464,7 @@ describe("AgentsClient", () => {
                     showConversationId: true,
                     stripAudioTags: true,
                     syntaxHighlightTheme: "light",
+                    showResizeButton: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -2797,6 +2799,7 @@ describe("AgentsClient", () => {
                     show_conversation_id: true,
                     strip_audio_tags: true,
                     syntax_highlight_theme: "light",
+                    show_resize_button: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -3974,6 +3977,7 @@ describe("AgentsClient", () => {
                     showConversationId: true,
                     stripAudioTags: true,
                     syntaxHighlightTheme: "light",
+                    showResizeButton: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -5168,6 +5172,7 @@ describe("AgentsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    triggered_guardrails: [{ guardrail_type: "custom" }],
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -5287,6 +5292,11 @@ describe("AgentsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    triggeredGuardrails: [
+                        {
+                            guardrailType: "custom",
+                        },
+                    ],
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",

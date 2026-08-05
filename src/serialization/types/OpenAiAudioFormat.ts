@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const OpenAiAudioFormat: core.serialization.Schema<
     serializers.OpenAiAudioFormat.Raw,
     ElevenLabs.OpenAiAudioFormat
-> = core.serialization.enum_(["audio/pcm", "audio/pcmu", "audio/pcma"]);
+> = core.serialization.unknown();
 
 export declare namespace OpenAiAudioFormat {
-    export type Raw = "audio/pcm" | "audio/pcmu" | "audio/pcma";
+    export type Raw = unknown;
 }

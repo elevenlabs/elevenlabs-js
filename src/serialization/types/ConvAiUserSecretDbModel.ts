@@ -8,17 +8,17 @@ export const ConvAiUserSecretDbModel: core.serialization.ObjectSchema<
     serializers.ConvAiUserSecretDbModel.Raw,
     ElevenLabs.ConvAiUserSecretDbModel
 > = core.serialization.object({
-    id: core.serialization.string(),
     name: core.serialization.string(),
     encryptedValue: core.serialization.property("encrypted_value", core.serialization.string()),
     nonce: core.serialization.string(),
+    id: core.serialization.string(),
 });
 
 export declare namespace ConvAiUserSecretDbModel {
     export interface Raw {
-        id: string;
         name: string;
         encrypted_value: string;
         nonce: string;
+        id: string;
     }
 }

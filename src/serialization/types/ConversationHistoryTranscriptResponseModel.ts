@@ -15,6 +15,7 @@ import { ConversationReasoningModel } from "./ConversationReasoningModel";
 import { ConversationTurnMetrics } from "./ConversationTurnMetrics";
 import { LlmUsageOutput } from "./LlmUsageOutput";
 import { RagRetrievalInfo } from "./RagRetrievalInfo";
+import { TriggeredGuardrailCommonModel } from "./TriggeredGuardrailCommonModel";
 import { UserFeedback } from "./UserFeedback";
 
 export const ConversationHistoryTranscriptResponseModel: core.serialization.ObjectSchema<
@@ -60,6 +61,10 @@ export const ConversationHistoryTranscriptResponseModel: core.serialization.Obje
     ),
     userIdentifier: core.serialization.property("user_identifier", core.serialization.string().optional()),
     id: core.serialization.string().optional(),
+    triggeredGuardrails: core.serialization.property(
+        "triggered_guardrails",
+        core.serialization.list(TriggeredGuardrailCommonModel).optional(),
+    ),
     fileInput: core.serialization.property(
         "file_input",
         ConversationHistoryTranscriptFileInputResponseModel.optional(),
@@ -91,6 +96,7 @@ export declare namespace ConversationHistoryTranscriptResponseModel {
         used_static_kb_document_ids?: string[] | null;
         user_identifier?: string | null;
         id?: string | null;
+        triggered_guardrails?: TriggeredGuardrailCommonModel.Raw[] | null;
         file_input?: ConversationHistoryTranscriptFileInputResponseModel.Raw | null;
         contextual_update_info?: ContextualUpdateInfo.Raw | null;
         reasoned?: boolean | null;

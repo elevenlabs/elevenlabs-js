@@ -5442,6 +5442,7 @@ await client.conversationalAi.conversations.list({
     conversationProductType: "agents",
     branchId: "branch_id",
     versionId: "version_id",
+    parentConversationId: "parent_conversation_id",
     topicIds: ["topic_ids"],
     excludeStatuses: ["initiated"],
     tagIds: ["tag_ids"],

@@ -8,4 +8,6 @@ export interface DtmfInputConfig {
     dtmfInputTimeout?: number;
     /** If true, pressing # immediately completes DTMF input */
     hashTerminator?: boolean;
+    /** If true, replace the caller's DTMF (keypad) entries with a redaction marker in the transcript, conversation log and analysis. Digits the agent repeats back or passes to a tool are not affected. */
+    redactInput?: boolean;
 }

@@ -85,6 +85,7 @@ export const WidgetConfig: core.serialization.ObjectSchema<serializers.WidgetCon
         ),
         textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
         styles: WidgetStyles.optional(),
+        showResizeButton: core.serialization.property("show_resize_button", core.serialization.boolean().optional()),
         languageSelector: core.serialization.property("language_selector", core.serialization.boolean().optional()),
         supportsTextOnly: core.serialization.property("supports_text_only", core.serialization.boolean().optional()),
         customAvatarPath: core.serialization.property("custom_avatar_path", core.serialization.string().optional()),
@@ -140,6 +141,7 @@ export declare namespace WidgetConfig {
         syntax_highlight_theme?: WidgetConfigSyntaxHighlightTheme.Raw | null;
         text_contents?: WidgetTextContents.Raw | null;
         styles?: WidgetStyles.Raw | null;
+        show_resize_button?: boolean | null;
         language_selector?: boolean | null;
         supports_text_only?: boolean | null;
         custom_avatar_path?: string | null;

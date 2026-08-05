@@ -13,6 +13,7 @@ import { ConversationReasoningModel } from "./ConversationReasoningModel";
 import { ConversationTurnMetrics } from "./ConversationTurnMetrics";
 import { LlmUsageInput } from "./LlmUsageInput";
 import { RagRetrievalInfo } from "./RagRetrievalInfo";
+import { TriggeredGuardrailCommonModel } from "./TriggeredGuardrailCommonModel";
 import { UserFeedback } from "./UserFeedback";
 
 export const ConversationHistoryTranscriptCommonModelInput: core.serialization.ObjectSchema<
@@ -58,6 +59,10 @@ export const ConversationHistoryTranscriptCommonModelInput: core.serialization.O
     ),
     userIdentifier: core.serialization.property("user_identifier", core.serialization.string().optional()),
     id: core.serialization.string().optional(),
+    triggeredGuardrails: core.serialization.property(
+        "triggered_guardrails",
+        core.serialization.list(TriggeredGuardrailCommonModel).optional(),
+    ),
 });
 
 export declare namespace ConversationHistoryTranscriptCommonModelInput {
@@ -83,5 +88,6 @@ export declare namespace ConversationHistoryTranscriptCommonModelInput {
         used_static_kb_document_ids?: string[] | null;
         user_identifier?: string | null;
         id?: string | null;
+        triggered_guardrails?: TriggeredGuardrailCommonModel.Raw[] | null;
     }
 }

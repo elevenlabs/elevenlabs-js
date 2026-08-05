@@ -34,6 +34,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         conversationProductType: "agents",
  *         branchId: "branch_id",
  *         versionId: "version_id",
+ *         parentConversationId: "parent_conversation_id",
  *         topicIds: ["topic_ids"],
  *         excludeStatuses: ["initiated"],
  *         tagIds: ["tag_ids"],
@@ -98,6 +99,8 @@ export interface ConversationsListRequest {
     branchId?: string;
     /** Filter conversations by version ID. */
     versionId?: string;
+    /** Filter conversations by parent conversation ID for subagent conversations. */
+    parentConversationId?: string;
     /** Filter conversations by topic IDs assigned during topic discovery. */
     topicIds?: string | string[];
     /** Exclude conversations with the given statuses. Useful for hiding in-progress / processing conversations from list views. */
