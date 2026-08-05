@@ -3,14 +3,13 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { DummyToolResultModel } from "./DummyToolResultModel";
 import { EndCallToolResultModel } from "./EndCallToolResultModel";
 import { KnowledgeBaseRagToolResultModel } from "./KnowledgeBaseRagToolResultModel";
 import { KnowledgeBaseToolResultModel } from "./KnowledgeBaseToolResultModel";
 import { LanguageDetectionToolResultModel } from "./LanguageDetectionToolResultModel";
 import { PlayDtmfResultErrorModel } from "./PlayDtmfResultErrorModel";
 import { PlayDtmfResultSuccessModel } from "./PlayDtmfResultSuccessModel";
-import { RunSubagentToolResultErrorModel } from "./RunSubagentToolResultErrorModel";
-import { RunSubagentToolResultSuccessModel } from "./RunSubagentToolResultSuccessModel";
 import { SkipTurnToolResponseModel } from "./SkipTurnToolResponseModel";
 import { TestToolResultModel } from "./TestToolResultModel";
 import { TransferToAgentToolResultErrorModel } from "./TransferToAgentToolResultErrorModel";
@@ -26,14 +25,13 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelInputResult
     ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult
 > = core.serialization
     .union(core.serialization.discriminant("resultType", "result_type"), {
+        dummy: DummyToolResultModel,
         end_call_success: EndCallToolResultModel,
         knowledge_base_rag_success: KnowledgeBaseRagToolResultModel,
         knowledge_base_success: KnowledgeBaseToolResultModel,
         language_detection_success: LanguageDetectionToolResultModel,
         play_dtmf_error: PlayDtmfResultErrorModel,
         play_dtmf_success: PlayDtmfResultSuccessModel,
-        run_subagent_error: RunSubagentToolResultErrorModel,
-        run_subagent_success: RunSubagentToolResultSuccessModel,
         skip_turn_success: SkipTurnToolResponseModel,
         testing_tool_result: TestToolResultModel,
         transfer_to_agent_error: TransferToAgentToolResultErrorModel,
@@ -51,14 +49,13 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelInputResult
 
 export declare namespace ConversationHistoryTranscriptSystemToolResultCommonModelInputResult {
     export type Raw =
+        | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.Dummy
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.EndCallSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.KnowledgeBaseRagSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.KnowledgeBaseSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.LanguageDetectionSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.PlayDtmfError
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.PlayDtmfSuccess
-        | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.RunSubagentError
-        | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.RunSubagentSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.SkipTurnSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TestingToolResult
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentError
@@ -68,6 +65,10 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberSipSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberTwilioSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.VoicemailDetectionSuccess;
+
+    export interface Dummy extends DummyToolResultModel.Raw {
+        result_type: "dummy";
+    }
 
     export interface EndCallSuccess extends EndCallToolResultModel.Raw {
         result_type: "end_call_success";
@@ -91,14 +92,6 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
 
     export interface PlayDtmfSuccess extends PlayDtmfResultSuccessModel.Raw {
         result_type: "play_dtmf_success";
-    }
-
-    export interface RunSubagentError extends RunSubagentToolResultErrorModel.Raw {
-        result_type: "run_subagent_error";
-    }
-
-    export interface RunSubagentSuccess extends RunSubagentToolResultSuccessModel.Raw {
-        result_type: "run_subagent_success";
     }
 
     export interface SkipTurnSuccess extends SkipTurnToolResponseModel.Raw {

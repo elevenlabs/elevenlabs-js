@@ -293,6 +293,7 @@ export class ConversationsClient {
      *         conversationProductType: "agents",
      *         branchId: "branch_id",
      *         versionId: "version_id",
+     *         parentConversationId: "parent_conversation_id",
      *         topicIds: ["topic_ids"],
      *         excludeStatuses: ["initiated"],
      *         tagIds: ["tag_ids"],
@@ -341,6 +342,7 @@ export class ConversationsClient {
             conversationProductType,
             branchId,
             versionId,
+            parentConversationId,
             topicIds,
             excludeStatuses,
             tagIds,
@@ -397,6 +399,7 @@ export class ConversationsClient {
                     : undefined,
             branch_id: branchId,
             version_id: versionId,
+            parent_conversation_id: parentConversationId,
             topic_ids: topicIds,
             exclude_statuses: Array.isArray(excludeStatuses)
                 ? excludeStatuses.map((item) =>

@@ -10,11 +10,13 @@ export const DtmfInputConfig: core.serialization.ObjectSchema<
 > = core.serialization.object({
     dtmfInputTimeout: core.serialization.property("dtmf_input_timeout", core.serialization.number().optional()),
     hashTerminator: core.serialization.property("hash_terminator", core.serialization.boolean().optional()),
+    redactInput: core.serialization.property("redact_input", core.serialization.boolean().optional()),
 });
 
 export declare namespace DtmfInputConfig {
     export interface Raw {
         dtmf_input_timeout?: number | null;
         hash_terminator?: boolean | null;
+        redact_input?: boolean | null;
     }
 }

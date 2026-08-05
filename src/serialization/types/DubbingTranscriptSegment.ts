@@ -13,6 +13,7 @@ export const DubbingTranscriptSegment: core.serialization.ObjectSchema<
     speakerId: core.serialization.property("speaker_id", core.serialization.string()),
     startS: core.serialization.property("start_s", core.serialization.number()),
     endS: core.serialization.property("end_s", core.serialization.number()),
+    externalId: core.serialization.property("external_id", core.serialization.string().optional()),
 });
 
 export declare namespace DubbingTranscriptSegment {
@@ -22,5 +23,6 @@ export declare namespace DubbingTranscriptSegment {
         speaker_id: string;
         start_s: number;
         end_s: number;
+        external_id?: string | null;
     }
 }

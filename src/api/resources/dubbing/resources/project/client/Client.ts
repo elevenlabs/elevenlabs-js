@@ -188,6 +188,10 @@ export class ProjectClient {
             _body.append("target_language", request.targetLanguage);
         }
 
+        if (request.transcript != null) {
+            await _body.appendFile("transcript", request.transcript);
+        }
+
         const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

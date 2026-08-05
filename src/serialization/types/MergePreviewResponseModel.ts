@@ -7,6 +7,7 @@ import { AgentMetadataResponseModel } from "./AgentMetadataResponseModel";
 import { AgentPlatformSettingsResponseModel } from "./AgentPlatformSettingsResponseModel";
 import { AgentWorkflowResponseModel } from "./AgentWorkflowResponseModel";
 import { ConversationalConfig } from "./ConversationalConfig";
+import { FieldConflict } from "./FieldConflict";
 import { GetWhatsAppAccountResponse } from "./GetWhatsAppAccountResponse";
 import { MergePreviewResponseModelPhoneNumbersItem } from "./MergePreviewResponseModelPhoneNumbersItem";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
@@ -38,6 +39,7 @@ export const MergePreviewResponseModel: core.serialization.ObjectSchema<
         "overridden_fields",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    conflicts: core.serialization.list(FieldConflict).optional(),
     sourceIdenticalToTarget: core.serialization.property(
         "source_identical_to_target",
         core.serialization.boolean().optional(),
@@ -60,6 +62,7 @@ export declare namespace MergePreviewResponseModel {
         branch_id?: string | null;
         main_branch_id?: string | null;
         overridden_fields?: string[] | null;
+        conflicts?: FieldConflict.Raw[] | null;
         source_identical_to_target?: boolean | null;
     }
 }

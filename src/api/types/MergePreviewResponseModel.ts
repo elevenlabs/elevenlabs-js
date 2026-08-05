@@ -31,6 +31,8 @@ export interface MergePreviewResponseModel {
     mainBranchId?: string;
     /** Dot-paths of config fields where both branches modified the same field relative to their common ancestor (conflicts). Present regardless of which side wins the conflict. */
     overriddenFields?: string[];
+    /** Structured view of the same conflicts as overridden_fields, each carrying the value on the base (common ancestor), source branch, and target branch so the divergence can be presented and resolved field-by-field. */
+    conflicts?: ElevenLabs.FieldConflict[];
     /** True when the merge/rebase would be a no-op, i.e. the merged result is identical to the source branch tip. The rebase endpoint rejects in this case. */
     sourceIdenticalToTarget?: boolean;
 }

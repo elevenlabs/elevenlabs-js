@@ -3,14 +3,13 @@
 import type * as ElevenLabs from "../index";
 
 export type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult =
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.Dummy
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.EndCallSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.KnowledgeBaseRagSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.KnowledgeBaseSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.LanguageDetectionSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.PlayDtmfError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.PlayDtmfSuccess
-    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.RunSubagentError
-    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.RunSubagentSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.SkipTurnSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TestingToolResult
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToAgentError
@@ -22,6 +21,10 @@ export type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.VoicemailDetectionSuccess;
 
 export namespace ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult {
+    export interface Dummy extends ElevenLabs.DummyToolResultModel {
+        resultType: "dummy";
+    }
+
     export interface EndCallSuccess extends ElevenLabs.EndCallToolResultModel {
         resultType: "end_call_success";
     }
@@ -44,14 +47,6 @@ export namespace ConversationHistoryTranscriptSystemToolResultCommonModelOutputR
 
     export interface PlayDtmfSuccess extends ElevenLabs.PlayDtmfResultSuccessModel {
         resultType: "play_dtmf_success";
-    }
-
-    export interface RunSubagentError extends ElevenLabs.RunSubagentToolResultErrorModel {
-        resultType: "run_subagent_error";
-    }
-
-    export interface RunSubagentSuccess extends ElevenLabs.RunSubagentToolResultSuccessModel {
-        resultType: "run_subagent_success";
     }
 
     export interface SkipTurnSuccess extends ElevenLabs.SkipTurnToolResponseModel {

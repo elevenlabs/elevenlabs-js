@@ -24,6 +24,7 @@ export interface ConversationHistoryTranscriptResponseModel {
     usedStaticKbDocumentIds?: string[];
     userIdentifier?: string;
     id?: string;
+    triggeredGuardrails?: ElevenLabs.TriggeredGuardrailCommonModel[];
     fileInput?: ElevenLabs.ConversationHistoryTranscriptFileInputResponseModel;
     contextualUpdateInfo?: ElevenLabs.ContextualUpdateInfo;
     reasoned?: boolean;

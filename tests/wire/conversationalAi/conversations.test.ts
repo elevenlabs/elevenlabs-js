@@ -135,6 +135,7 @@ describe("ConversationsClient", () => {
             conversationProductType: "agents",
             branchId: "branch_id",
             versionId: "version_id",
+            parentConversationId: "parent_conversation_id",
             topicIds: ["topic_ids"],
             excludeStatuses: ["initiated"],
             tagIds: ["tag_ids"],
@@ -227,6 +228,7 @@ describe("ConversationsClient", () => {
                     platform_price: 1.1,
                     free_minutes_consumed: 1.1,
                     free_llm_dollars_consumed: 1.1,
+                    analysis: { total: {} },
                 },
                 phone_call: {
                     type: "exotel",
@@ -385,6 +387,7 @@ describe("ConversationsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    triggered_guardrails: [{ guardrail_type: "custom" }],
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -452,6 +455,9 @@ describe("ConversationsClient", () => {
                     platformPrice: 1.1,
                     freeMinutesConsumed: 1.1,
                     freeLlmDollarsConsumed: 1.1,
+                    analysis: {
+                        total: {},
+                    },
                 },
                 phoneCall: {
                     type: "exotel",
@@ -690,6 +696,11 @@ describe("ConversationsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    triggeredGuardrails: [
+                        {
+                            guardrailType: "custom",
+                        },
+                    ],
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",
@@ -754,6 +765,7 @@ describe("ConversationsClient", () => {
                     platform_price: 1.1,
                     free_minutes_consumed: 1.1,
                     free_llm_dollars_consumed: 1.1,
+                    analysis: { total: {} },
                 },
                 phone_call: {
                     type: "exotel",
@@ -912,6 +924,7 @@ describe("ConversationsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    triggered_guardrails: [{ guardrail_type: "custom" }],
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -978,6 +991,9 @@ describe("ConversationsClient", () => {
                     platformPrice: 1.1,
                     freeMinutesConsumed: 1.1,
                     freeLlmDollarsConsumed: 1.1,
+                    analysis: {
+                        total: {},
+                    },
                 },
                 phoneCall: {
                     type: "exotel",
@@ -1216,6 +1232,11 @@ describe("ConversationsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    triggeredGuardrails: [
+                        {
+                            guardrailType: "custom",
+                        },
+                    ],
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",
