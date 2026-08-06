@@ -17,6 +17,7 @@ describe("ToolConfigsClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                request_meta: { key: "value" },
                 auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
@@ -92,6 +93,9 @@ describe("ToolConfigsClient", () => {
                     secretId: "secret_id",
                 },
                 requestHeaders: {
+                    key: "value",
+                },
+                requestMeta: {
                     key: "value",
                 },
                 authConnection: {
@@ -243,6 +247,7 @@ describe("ToolConfigsClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                request_meta: { key: "value" },
                 auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
@@ -316,6 +321,9 @@ describe("ToolConfigsClient", () => {
                 requestHeaders: {
                     key: "value",
                 },
+                requestMeta: {
+                    key: "value",
+                },
                 authConnection: {
                     authConnectionId: "auth_connection_id",
                 },
@@ -381,6 +389,7 @@ describe("ToolConfigsClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                request_meta: { key: "value" },
                 auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
@@ -455,6 +464,9 @@ describe("ToolConfigsClient", () => {
                     secretId: "secret_id",
                 },
                 requestHeaders: {
+                    key: "value",
+                },
+                requestMeta: {
                     key: "value",
                 },
                 authConnection: {

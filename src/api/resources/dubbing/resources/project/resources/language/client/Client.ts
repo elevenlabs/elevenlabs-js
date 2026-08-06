@@ -138,8 +138,7 @@ export class LanguageClient {
      *
      * @example
      *     await client.dubbing.project.language.create("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", {
-     *         targetLanguage: "es",
-     *         modelId: "dubbing_v2"
+     *         targetLanguage: "es"
      *     })
      */
     public create(

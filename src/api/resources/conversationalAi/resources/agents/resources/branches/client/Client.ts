@@ -38,7 +38,8 @@ export class BranchesClient {
      * @example
      *     await client.conversationalAi.agents.branches.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
      *         includeArchived: true,
-     *         limit: 1
+     *         limit: 1,
+     *         includeCommitStatus: true
      *     })
      */
     public list(
@@ -54,10 +55,11 @@ export class BranchesClient {
         request: ElevenLabs.conversationalAi.agents.BranchesListRequest = {},
         requestOptions?: BranchesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ListResponseAgentBranchSummary>> {
-        const { includeArchived, limit } = request;
+        const { includeArchived, limit, includeCommitStatus } = request;
         const _queryParams: Record<string, unknown> = {
             include_archived: includeArchived,
             limit,
+            include_commit_status: includeCommitStatus,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

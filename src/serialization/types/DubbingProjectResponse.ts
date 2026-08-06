@@ -3,8 +3,10 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { DubbingError } from "./DubbingError";
 import { DubbingProjectResponseStatus } from "./DubbingProjectResponseStatus";
 import { DubbingSourceMediaInfo } from "./DubbingSourceMediaInfo";
+import { VoicesNotPermittedWarning } from "./VoicesNotPermittedWarning";
 
 export const DubbingProjectResponse: core.serialization.ObjectSchema<
     serializers.DubbingProjectResponse.Raw,
@@ -20,7 +22,13 @@ export const DubbingProjectResponse: core.serialization.ObjectSchema<
         "language_ids",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    webhookIds: core.serialization.property(
+        "webhook_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     revision: core.serialization.number(),
+    error: DubbingError.optional(),
+    warnings: core.serialization.list(VoicesNotPermittedWarning).optional(),
     createdAt: core.serialization.property("created_at", core.serialization.date()),
     updatedAt: core.serialization.property("updated_at", core.serialization.date()),
 });
@@ -34,7 +42,10 @@ export declare namespace DubbingProjectResponse {
         model_id?: string | null;
         media?: DubbingSourceMediaInfo.Raw | null;
         language_ids?: string[] | null;
+        webhook_ids?: string[] | null;
         revision: number;
+        error?: DubbingError.Raw | null;
+        warnings?: VoicesNotPermittedWarning.Raw[] | null;
         created_at: string;
         updated_at: string;
     }

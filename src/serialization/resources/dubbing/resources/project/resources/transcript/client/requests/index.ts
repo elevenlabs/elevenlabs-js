@@ -1,2 +1,2 @@
+export { DubbingBulkSegmentUpdateRequest } from "./DubbingBulkSegmentUpdateRequest";
 export { DubbingSegmentCreateRequest } from "./DubbingSegmentCreateRequest";
-export { DubbingSegmentUpdateRequest } from "./DubbingSegmentUpdateRequest";

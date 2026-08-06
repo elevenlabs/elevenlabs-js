@@ -5,15 +5,12 @@ import type * as ElevenLabs from "../../../../../../../../index";
 /**
  * @example
  *     {
- *         targetLanguage: "es",
- *         modelId: "dubbing_v2"
+ *         targetLanguage: "es"
  *     }
  */
 export interface BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost {
     /** BCP-47 language tag to dub the project into (e.g. 'fr', 'es-MX'); must be a language the dubbing model supports. A region-qualified tag must be one of the supported dialects. */
     targetLanguage: string;
-    /** Dubbing model id for this target; omit to use the project default. */
-    modelId?: "dubbing_v2";
     /** Voice settings applied to the whole language (e.g. cloning strength). */
     voiceSettings?: ElevenLabs.VoiceSettings;
     /** Optional translations to use instead of machine translation. A map from each source segment's external_id (or its id, if you supplied none) to the translated text; every source segment must be covered exactly once. At most 20000 entries, totalling at most 4 MiB of text. */

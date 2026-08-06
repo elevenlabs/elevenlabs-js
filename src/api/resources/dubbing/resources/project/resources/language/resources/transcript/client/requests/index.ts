@@ -1,1 +1,1 @@
-export type { DubbingTargetSegmentUpdateRequest } from "./DubbingTargetSegmentUpdateRequest";
+export type { DubbingBulkTargetSegmentUpdateRequest } from "./DubbingBulkTargetSegmentUpdateRequest";

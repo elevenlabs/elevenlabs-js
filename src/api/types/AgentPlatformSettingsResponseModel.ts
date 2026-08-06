@@ -41,5 +41,7 @@ export interface AgentPlatformSettingsResponseModel {
     topicDiscovery?: ElevenLabs.TopicDiscoverySettings;
     /** Per-agent post-call sentiment analysis configuration */
     sentimentAnalysis?: ElevenLabs.SentimentAnalysisSettings;
+    /** Agent-level alerting configuration overriding workspace settings. */
+    alerting?: ElevenLabs.AlertingSettingsResponse;
     safety?: ElevenLabs.SafetyResponseModel;
 }

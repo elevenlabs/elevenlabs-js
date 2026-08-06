@@ -18,10 +18,11 @@ describe("LanguageClient", () => {
                     model_id: "dubbing_v2",
                     outputs: {
                         lossless_audio:
-                            "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.wav?X-Goog-Signature=...",
+                            "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.flac?X-Goog-Signature=...",
                     },
                     revision: 3,
                     output_revision: 3,
+                    warnings: [],
                     created_at: "2026-07-03T10:16:00Z",
                     updated_at: "2026-07-03T10:20:45Z",
                 },
@@ -49,10 +50,11 @@ describe("LanguageClient", () => {
                     modelId: "dubbing_v2",
                     outputs: {
                         losslessAudio:
-                            "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.wav?X-Goog-Signature=...",
+                            "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.flac?X-Goog-Signature=...",
                     },
                     revision: 3,
                     outputRevision: 3,
+                    warnings: [],
                     createdAt: new Date("2026-07-03T10:16:00.000Z"),
                     updatedAt: new Date("2026-07-03T10:20:45.000Z"),
                 },
@@ -63,7 +65,7 @@ describe("LanguageClient", () => {
     test("create", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { target_language: "es", model_id: "dubbing_v2" };
+        const rawRequestBody = { target_language: "es" };
         const rawResponseBody = {
             language_id: "lang_1001kwkyxp0je6ktn4knsfrasx5s",
             project_id: "proj_1601kwkyxp0hfzvtmyxwqxx6mcy3",
@@ -71,6 +73,7 @@ describe("LanguageClient", () => {
             status: "queued",
             model_id: "dubbing_v2",
             revision: 0,
+            warnings: [],
             created_at: "2026-07-03T10:16:00Z",
             updated_at: "2026-07-03T10:16:00Z",
         };
@@ -86,7 +89,6 @@ describe("LanguageClient", () => {
 
         const response = await client.dubbing.project.language.create("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", {
             targetLanguage: "es",
-            modelId: "dubbing_v2",
         });
         expect(response).toEqual({
             languageId: "lang_1001kwkyxp0je6ktn4knsfrasx5s",
@@ -95,6 +97,7 @@ describe("LanguageClient", () => {
             status: "queued",
             modelId: "dubbing_v2",
             revision: 0,
+            warnings: [],
             createdAt: new Date("2026-07-03T10:16:00.000Z"),
             updatedAt: new Date("2026-07-03T10:16:00.000Z"),
         });
@@ -112,10 +115,11 @@ describe("LanguageClient", () => {
             model_id: "dubbing_v2",
             outputs: {
                 lossless_audio:
-                    "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.wav?X-Goog-Signature=...",
+                    "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.flac?X-Goog-Signature=...",
             },
             revision: 3,
             output_revision: 3,
+            warnings: [],
             created_at: "2026-07-03T10:16:00Z",
             updated_at: "2026-07-03T10:20:45Z",
         };
@@ -140,10 +144,11 @@ describe("LanguageClient", () => {
             modelId: "dubbing_v2",
             outputs: {
                 losslessAudio:
-                    "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.wav?X-Goog-Signature=...",
+                    "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.flac?X-Goog-Signature=...",
             },
             revision: 3,
             outputRevision: 3,
+            warnings: [],
             createdAt: new Date("2026-07-03T10:16:00.000Z"),
             updatedAt: new Date("2026-07-03T10:20:45.000Z"),
         });

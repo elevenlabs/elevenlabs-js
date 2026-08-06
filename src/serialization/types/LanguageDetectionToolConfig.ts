@@ -7,8 +7,15 @@ import type * as serializers from "../index";
 export const LanguageDetectionToolConfig: core.serialization.ObjectSchema<
     serializers.LanguageDetectionToolConfig.Raw,
     ElevenLabs.LanguageDetectionToolConfig
-> = core.serialization.object({});
+> = core.serialization.object({
+    onlyAtConversationStart: core.serialization.property(
+        "only_at_conversation_start",
+        core.serialization.boolean().optional(),
+    ),
+});
 
 export declare namespace LanguageDetectionToolConfig {
-    export type Raw = {};
+    export interface Raw {
+        only_at_conversation_start?: boolean | null;
+    }
 }

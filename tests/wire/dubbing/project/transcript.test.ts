@@ -116,6 +116,75 @@ describe("TranscriptClient", () => {
         });
     });
 
+    test("update_segments", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            segments: {
+                "0199a3f0-1c2d-7abc-8def-0123456789ab": { text: "Welcome to our latest product demo." },
+                "0199a3f0-3e4f-7abc-8def-0123456789cd": { speaker_id: "narrator" },
+            },
+        };
+        const rawResponseBody = {
+            segments: [
+                {
+                    id: "0199a3f0-1c2d-7abc-8def-0123456789ab",
+                    text: "Welcome to our latest product demo.",
+                    speaker_id: "default_speaker",
+                    start_s: 0,
+                    end_s: 2.5,
+                },
+                {
+                    id: "0199a3f0-3e4f-7abc-8def-0123456789cd",
+                    text: "Let's get started.",
+                    speaker_id: "narrator",
+                    start_s: 2.5,
+                    end_s: 4,
+                },
+            ],
+            revision: 5,
+        };
+
+        server
+            .mockEndpoint()
+            .patch("/v1/dubbing/project/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/transcript/segments")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.dubbing.project.transcript.updateSegments("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", {
+            segments: {
+                "0199a3f0-1c2d-7abc-8def-0123456789ab": {
+                    text: "Welcome to our latest product demo.",
+                },
+                "0199a3f0-3e4f-7abc-8def-0123456789cd": {
+                    speakerId: "narrator",
+                },
+            },
+        });
+        expect(response).toEqual({
+            segments: [
+                {
+                    id: "0199a3f0-1c2d-7abc-8def-0123456789ab",
+                    text: "Welcome to our latest product demo.",
+                    speakerId: "default_speaker",
+                    startS: 0,
+                    endS: 2.5,
+                },
+                {
+                    id: "0199a3f0-3e4f-7abc-8def-0123456789cd",
+                    text: "Let's get started.",
+                    speakerId: "narrator",
+                    startS: 2.5,
+                    endS: 4,
+                },
+            ],
+            revision: 5,
+        });
+    });
+
     test("create_segment", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

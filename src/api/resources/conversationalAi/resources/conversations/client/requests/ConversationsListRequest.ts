@@ -39,7 +39,9 @@ import type * as ElevenLabs from "../../../../../../index";
  *         excludeStatuses: ["initiated"],
  *         tagIds: ["tag_ids"],
  *         workflowNodeEnteredId: "workflow_node_entered_id",
- *         terminationReasons: ["termination_reasons"]
+ *         terminationReasons: ["termination_reasons"],
+ *         guardrailTypes: ["custom"],
+ *         customGuardrailNames: ["custom_guardrail_names"]
  *     }
  */
 export interface ConversationsListRequest {
@@ -113,4 +115,8 @@ export interface ConversationsListRequest {
     workflowNodeEnteredId?: string;
     /** Filter conversations by their stored termination_reason (metadata.termination_reason). Repeat param to match any of several. */
     terminationReasons?: string | string[];
+    /** Filter to conversations where a guardrail of any of these types triggered (metadata.triggered_guardrails.guardrail_type). Repeat param to match any of several. */
+    guardrailTypes?: ElevenLabs.GuardrailType | ElevenLabs.GuardrailType[];
+    /** Filter to conversations where a custom guardrail with any of these names triggered (metadata.triggered_guardrails.guardrail_name). Only custom guardrails carry a name. Repeat param to match any of several. */
+    customGuardrailNames?: string | string[];
 }
