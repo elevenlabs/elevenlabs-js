@@ -30,7 +30,7 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v6
         with:
-          node-version: lts/*
+          node-version: lts/Krypton
 
       - name: Build head
         run: |
