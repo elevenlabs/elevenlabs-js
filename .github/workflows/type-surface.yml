@@ -53,8 +53,8 @@ jobs:
           yarn build
 
       - name: Check type surface
-        # TODO: switch to @main once elevenlabs/elevenlabs-dx#2566 merges.
-        uses: elevenlabs/elevenlabs-dx/.github/actions/dts-breaking-changes@kh/dx-1319-dts-breaking-changes
+        # TODO: switch to @main once elevenlabs/packages#917 merges.
+        uses: elevenlabs/packages/.github/actions/dts-breaking-changes@kh/dx-1319-dts-breaking-changes
         with:
           old-dir: ${{ runner.temp }}/base/dist
           new-dir: dist
