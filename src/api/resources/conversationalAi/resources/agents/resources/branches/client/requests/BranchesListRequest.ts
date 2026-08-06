@@ -4,7 +4,8 @@
  * @example
  *     {
  *         includeArchived: true,
- *         limit: 1
+ *         limit: 1,
+ *         includeCommitStatus: true
  *     }
  */
 export interface BranchesListRequest {
@@ -12,4 +13,6 @@ export interface BranchesListRequest {
     includeArchived?: boolean;
     /** How many results at most should be returned */
     limit?: number;
+    /** Whether to compute how far each branch has diverged from main (commits_ahead/commits_behind). This walks the version DAG of every branch, so it is slow on agents with long histories and is off by default, leaving those fields null. */
+    includeCommitStatus?: boolean;
 }

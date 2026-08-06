@@ -3,9 +3,11 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { DubbingError } from "./DubbingError";
 import { DubbingLanguageOutputs } from "./DubbingLanguageOutputs";
 import { DubbingLanguageResponseStatus } from "./DubbingLanguageResponseStatus";
 import { VoiceSettings } from "./VoiceSettings";
+import { VoicesNotPermittedWarning } from "./VoicesNotPermittedWarning";
 
 export const DubbingLanguageResponse: core.serialization.ObjectSchema<
     serializers.DubbingLanguageResponse.Raw,
@@ -20,6 +22,8 @@ export const DubbingLanguageResponse: core.serialization.ObjectSchema<
     outputs: DubbingLanguageOutputs.optional(),
     revision: core.serialization.number(),
     outputRevision: core.serialization.property("output_revision", core.serialization.number().optional()),
+    error: DubbingError.optional(),
+    warnings: core.serialization.list(VoicesNotPermittedWarning).optional(),
     createdAt: core.serialization.property("created_at", core.serialization.date()),
     updatedAt: core.serialization.property("updated_at", core.serialization.date()),
 });
@@ -35,6 +39,8 @@ export declare namespace DubbingLanguageResponse {
         outputs?: DubbingLanguageOutputs.Raw | null;
         revision: number;
         output_revision?: number | null;
+        error?: DubbingError.Raw | null;
+        warnings?: VoicesNotPermittedWarning.Raw[] | null;
         created_at: string;
         updated_at: string;
     }

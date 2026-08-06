@@ -21,4 +21,10 @@ export interface AgentBranchSummary {
     draftExists?: boolean;
     /** Number of calls in the last 7 days */
     calls7D?: number;
+    /** Number of commits on this branch not yet on main, relative to their common ancestor. Null if it could not be computed (e.g. no common ancestor, or the branch history exceeds the comparison budget). */
+    commitsAhead?: number;
+    /** Number of commits on main not yet incorporated into this branch, relative to their common ancestor. Null if it could not be computed (e.g. no common ancestor, or the branch history exceeds the comparison budget). */
+    commitsBehind?: number;
+    /** ID of the branch this branch's tip version was merged into, if any */
+    mergedIntoBranchId?: string;
 }

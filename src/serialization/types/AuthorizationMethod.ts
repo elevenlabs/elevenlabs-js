@@ -16,6 +16,7 @@ export const AuthorizationMethod: core.serialization.Schema<
     "livekit_token",
     "livekit_token_website",
     "genesys_api_key",
+    "audiocodes_api_key",
     "whatsapp",
     "sms",
 ]);
@@ -30,6 +31,7 @@ export declare namespace AuthorizationMethod {
         | "livekit_token"
         | "livekit_token_website"
         | "genesys_api_key"
+        | "audiocodes_api_key"
         | "whatsapp"
         | "sms";
 }

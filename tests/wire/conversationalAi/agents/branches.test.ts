@@ -31,6 +31,9 @@ describe("BranchesClient", () => {
                     parent_branch_id: "parent_branch_id",
                     draft_exists: true,
                     calls_7d: 1,
+                    commits_ahead: 1,
+                    commits_behind: 1,
+                    merged_into_branch_id: "merged_into_branch_id",
                 },
             ],
         };
@@ -46,6 +49,7 @@ describe("BranchesClient", () => {
         const response = await client.conversationalAi.agents.branches.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
             includeArchived: true,
             limit: 1,
+            includeCommitStatus: true,
         });
         expect(response).toEqual({
             meta: {
@@ -74,6 +78,9 @@ describe("BranchesClient", () => {
                     parentBranchId: "parent_branch_id",
                     draftExists: true,
                     calls7D: 1,
+                    commitsAhead: 1,
+                    commitsBehind: 1,
+                    mergedIntoBranchId: "merged_into_branch_id",
                 },
             ],
         });
@@ -618,6 +625,11 @@ describe("BranchesClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
+                alerting: {
+                    monitor_configs: { key: {} },
+                    auto_resolve_after_inactive_minutes: 1,
+                    notifiers: [{ webhook_id: "webhook_id" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -1846,6 +1858,17 @@ describe("BranchesClient", () => {
                 },
                 trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
+                alerting: {
+                    monitorConfigs: {
+                        key: {},
+                    },
+                    autoResolveAfterInactiveMinutes: 1,
+                    notifiers: [
+                        {
+                            webhookId: "webhook_id",
+                        },
+                    ],
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -3178,6 +3201,11 @@ describe("BranchesClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
+                alerting: {
+                    monitor_configs: { key: {} },
+                    auto_resolve_after_inactive_minutes: 1,
+                    notifiers: [{ webhook_id: "webhook_id" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -4402,6 +4430,17 @@ describe("BranchesClient", () => {
                 },
                 trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
+                alerting: {
+                    monitorConfigs: {
+                        key: {},
+                    },
+                    autoResolveAfterInactiveMinutes: 1,
+                    notifiers: [
+                        {
+                            webhookId: "webhook_id",
+                        },
+                    ],
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,

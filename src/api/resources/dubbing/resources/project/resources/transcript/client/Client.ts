@@ -105,7 +105,7 @@ export class TranscriptClient {
     }
 
     /**
-     * Remove a source segment from the transcript.
+     * Enterprise only. Remove a source segment from the transcript.
      *
      * @param {string} project_id - Identifier of the dubbing project.
      * @param {string} segment_id - Identifier of the segment to remove.
@@ -188,11 +188,11 @@ export class TranscriptClient {
     }
 
     /**
-     * Edit a source segment's text, speaker, or timing.
+     * Enterprise only. Edit a source segment's text, speaker, or timing.
      *
      * @param {string} project_id - Identifier of the dubbing project.
      * @param {string} segment_id - Identifier of the segment to edit.
-     * @param {ElevenLabs.dubbing.project.DubbingSegmentUpdateRequest} request
+     * @param {ElevenLabs.DubbingSegmentUpdateRequest} request
      * @param {TranscriptClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -207,7 +207,7 @@ export class TranscriptClient {
     public updateSegment(
         project_id: string,
         segment_id: string,
-        request: ElevenLabs.dubbing.project.DubbingSegmentUpdateRequest = {},
+        request: ElevenLabs.DubbingSegmentUpdateRequest,
         requestOptions?: TranscriptClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.DubbingSourceSegmentUpdateResponse> {
         return core.HttpResponsePromise.fromPromise(
@@ -218,7 +218,7 @@ export class TranscriptClient {
     private async __updateSegment(
         project_id: string,
         segment_id: string,
-        request: ElevenLabs.dubbing.project.DubbingSegmentUpdateRequest = {},
+        request: ElevenLabs.DubbingSegmentUpdateRequest,
         requestOptions?: TranscriptClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.DubbingSourceSegmentUpdateResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -241,9 +241,7 @@ export class TranscriptClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.dubbing.project.DubbingSegmentUpdateRequest.jsonOrThrow(request, {
-                    unrecognizedObjectKeys: "strip",
-                }),
+                serializers.DubbingSegmentUpdateRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
                 requestOptions?.additionalBodyParameters,
             ),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
@@ -286,7 +284,107 @@ export class TranscriptClient {
     }
 
     /**
-     * Add a new source segment to the transcript.
+     * Enterprise only. Edit several source segments' text, speaker, or timing in one atomic request.
+     *
+     * @param {string} project_id - Identifier of the dubbing project.
+     * @param {ElevenLabs.dubbing.project.DubbingBulkSegmentUpdateRequest} request
+     * @param {TranscriptClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.dubbing.project.transcript.updateSegments("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", {
+     *         segments: {
+     *             "0199a3f0-1c2d-7abc-8def-0123456789ab": {
+     *                 text: "Welcome to our latest product demo."
+     *             },
+     *             "0199a3f0-3e4f-7abc-8def-0123456789cd": {
+     *                 speakerId: "narrator"
+     *             }
+     *         }
+     *     })
+     */
+    public updateSegments(
+        project_id: string,
+        request: ElevenLabs.dubbing.project.DubbingBulkSegmentUpdateRequest,
+        requestOptions?: TranscriptClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.DubbingBulkSourceSegmentUpdateResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__updateSegments(project_id, request, requestOptions));
+    }
+
+    private async __updateSegments(
+        project_id: string,
+        request: ElevenLabs.dubbing.project.DubbingBulkSegmentUpdateRequest,
+        requestOptions?: TranscriptClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.DubbingBulkSourceSegmentUpdateResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/dubbing/project/${core.url.encodePathParam(project_id)}/transcript/segments`,
+            ),
+            method: "PATCH",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.dubbing.project.DubbingBulkSegmentUpdateRequest.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.DubbingBulkSourceSegmentUpdateResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "PATCH",
+            "/v1/dubbing/project/{project_id}/transcript/segments",
+        );
+    }
+
+    /**
+     * Enterprise only. Add a new source segment to the transcript.
      *
      * @param {string} project_id - Identifier of the dubbing project.
      * @param {ElevenLabs.dubbing.project.DubbingSegmentCreateRequest} request

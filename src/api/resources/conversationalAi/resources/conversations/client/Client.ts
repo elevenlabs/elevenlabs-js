@@ -298,7 +298,9 @@ export class ConversationsClient {
      *         excludeStatuses: ["initiated"],
      *         tagIds: ["tag_ids"],
      *         workflowNodeEnteredId: "workflow_node_entered_id",
-     *         terminationReasons: ["termination_reasons"]
+     *         terminationReasons: ["termination_reasons"],
+     *         guardrailTypes: ["custom"],
+     *         customGuardrailNames: ["custom_guardrail_names"]
      *     })
      */
     public list(
@@ -348,6 +350,8 @@ export class ConversationsClient {
             tagIds,
             workflowNodeEnteredId,
             terminationReasons,
+            guardrailTypes,
+            customGuardrailNames,
         } = request;
         const _queryParams: Record<string, unknown> = {
             cursor,
@@ -416,6 +420,14 @@ export class ConversationsClient {
             tag_ids: tagIds,
             workflow_node_entered_id: workflowNodeEnteredId,
             termination_reasons: terminationReasons,
+            guardrail_types: Array.isArray(guardrailTypes)
+                ? guardrailTypes.map((item) =>
+                      serializers.GuardrailType.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
+                  )
+                : guardrailTypes != null
+                  ? serializers.GuardrailType.jsonOrThrow(guardrailTypes, { unrecognizedObjectKeys: "strip" })
+                  : undefined,
+            custom_guardrail_names: customGuardrailNames,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

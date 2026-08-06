@@ -141,6 +141,8 @@ describe("ConversationsClient", () => {
             tagIds: ["tag_ids"],
             workflowNodeEnteredId: "workflow_node_entered_id",
             terminationReasons: ["termination_reasons"],
+            guardrailTypes: ["custom"],
+            customGuardrailNames: ["custom_guardrail_names"],
         });
         expect(response).toEqual({
             conversations: [

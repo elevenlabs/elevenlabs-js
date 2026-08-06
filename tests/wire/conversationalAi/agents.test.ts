@@ -342,6 +342,11 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
+                alerting: {
+                    monitor_configs: { key: {} },
+                    auto_resolve_after_inactive_minutes: 1,
+                    notifiers: [{ webhook_id: "webhook_id" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -1553,6 +1558,17 @@ describe("AgentsClient", () => {
                 },
                 trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
+                alerting: {
+                    monitorConfigs: {
+                        key: {},
+                    },
+                    autoResolveAfterInactiveMinutes: 1,
+                    notifiers: [
+                        {
+                            webhookId: "webhook_id",
+                        },
+                    ],
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -2854,6 +2870,11 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
+                alerting: {
+                    monitor_configs: { key: {} },
+                    auto_resolve_after_inactive_minutes: 1,
+                    notifiers: [{ webhook_id: "webhook_id" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -4066,6 +4087,17 @@ describe("AgentsClient", () => {
                 },
                 trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
+                alerting: {
+                    monitorConfigs: {
+                        key: {},
+                    },
+                    autoResolveAfterInactiveMinutes: 1,
+                    notifiers: [
+                        {
+                            webhookId: "webhook_id",
+                        },
+                    ],
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,

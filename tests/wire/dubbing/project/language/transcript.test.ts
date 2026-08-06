@@ -103,20 +103,96 @@ describe("TranscriptClient", () => {
         });
     });
 
+    test("update_segments", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            segments: {
+                "0199a3f0-1c2d-7abc-8def-0123456789ab": {
+                    translation: "Bienvenido a nuestra última demostración de producto.",
+                },
+                "0199a3f0-3e4f-7abc-8def-0123456789cd": { translation: "Empecemos." },
+            },
+        };
+        const rawResponseBody = {
+            segments: [
+                {
+                    id: "0199a3f0-1c2d-7abc-8def-0123456789ab",
+                    speaker_id: "default_speaker",
+                    start_s: 0,
+                    end_s: 2.5,
+                    source_text: "Welcome to our product demo.",
+                    translation: "Bienvenido a nuestra última demostración de producto.",
+                },
+                {
+                    id: "0199a3f0-3e4f-7abc-8def-0123456789cd",
+                    speaker_id: "narrator",
+                    start_s: 2.5,
+                    end_s: 4,
+                    source_text: "Let's get started.",
+                    translation: "Empecemos.",
+                },
+            ],
+            revision: 5,
+        };
+
+        server
+            .mockEndpoint()
+            .patch(
+                "/v1/dubbing/project/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/language/lang_1001kwkyxp0je6ktn4knsfrasx5s/transcript/segments",
+            )
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.dubbing.project.language.transcript.updateSegments(
+            "proj_1601kwkyxp0hfzvtmyxwqxx6mcy3",
+            "lang_1001kwkyxp0je6ktn4knsfrasx5s",
+            {
+                segments: {
+                    "0199a3f0-1c2d-7abc-8def-0123456789ab": {
+                        translation: "Bienvenido a nuestra \u00FAltima demostraci\u00F3n de producto.",
+                    },
+                    "0199a3f0-3e4f-7abc-8def-0123456789cd": {
+                        translation: "Empecemos.",
+                    },
+                },
+            },
+        );
+        expect(response).toEqual({
+            segments: [
+                {
+                    id: "0199a3f0-1c2d-7abc-8def-0123456789ab",
+                    speakerId: "default_speaker",
+                    startS: 0,
+                    endS: 2.5,
+                    sourceText: "Welcome to our product demo.",
+                    translation: "Bienvenido a nuestra \u00FAltima demostraci\u00F3n de producto.",
+                },
+                {
+                    id: "0199a3f0-3e4f-7abc-8def-0123456789cd",
+                    speakerId: "narrator",
+                    startS: 2.5,
+                    endS: 4,
+                    sourceText: "Let's get started.",
+                    translation: "Empecemos.",
+                },
+            ],
+            revision: 5,
+        });
+    });
+
     test("regenerate", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            language_id: "lang_1001kwkyxp0je6ktn4knsfrasx5s",
-            project_id: "proj_1601kwkyxp0hfzvtmyxwqxx6mcy3",
-            target_language: "es",
-            status: "queued",
-            model_id: "dubbing_v2",
-            revision: 4,
-            output_revision: 3,
-            created_at: "2026-07-03T10:16:00Z",
-            updated_at: "2026-07-03T10:25:10Z",
+            regenerated_segment_ids: ["0199a3f0-1c2d-7abc-8def-0123456789ab", "0199a3f0-3e4f-7abc-8def-0123456789cd"],
+            regenerated_seconds: 4,
+            charged_seconds: 0,
+            free_regeneration_seconds_remaining: 38,
         };
 
         server
@@ -134,15 +210,10 @@ describe("TranscriptClient", () => {
             "lang_1001kwkyxp0je6ktn4knsfrasx5s",
         );
         expect(response).toEqual({
-            languageId: "lang_1001kwkyxp0je6ktn4knsfrasx5s",
-            projectId: "proj_1601kwkyxp0hfzvtmyxwqxx6mcy3",
-            targetLanguage: "es",
-            status: "queued",
-            modelId: "dubbing_v2",
-            revision: 4,
-            outputRevision: 3,
-            createdAt: new Date("2026-07-03T10:16:00.000Z"),
-            updatedAt: new Date("2026-07-03T10:25:10.000Z"),
+            regeneratedSegmentIds: ["0199a3f0-1c2d-7abc-8def-0123456789ab", "0199a3f0-3e4f-7abc-8def-0123456789cd"],
+            regeneratedSeconds: 4,
+            chargedSeconds: 0,
+            freeRegenerationSecondsRemaining: 38,
         });
     });
 });

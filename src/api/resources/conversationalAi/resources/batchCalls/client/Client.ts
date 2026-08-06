@@ -25,73 +25,6 @@ export class BatchCallsClient {
     }
 
     /**
-     * Download all recipients and conversation results for a terminal batch call as CSV.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     * @throws {@link errors.ElevenLabsError}
-     * @throws {@link errors.ElevenLabsTimeoutError}
-     */
-    public export(
-        batch_id: string,
-        requestOptions?: BatchCallsClient.RequestOptions,
-    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
-        return core.HttpResponsePromise.fromPromise(this.__export(batch_id, requestOptions));
-    }
-
-    private async __export(
-        batch_id: string,
-        requestOptions?: BatchCallsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await (this._options.fetcher ?? core.fetcher)<ReadableStream<Uint8Array>>({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                `v1/convai/batch-calling/${core.url.encodePathParam(batch_id)}/export`,
-            ),
-            method: "GET",
-            headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            responseType: "streaming",
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "GET",
-            "/v1/convai/batch-calling/{batch_id}/export",
-        );
-    }
-
-    /**
      * Submit a batch call request to schedule calls for multiple recipients.
      *
      * @param {ElevenLabs.conversationalAi.BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost} request
@@ -584,6 +517,73 @@ export class BatchCallsClient {
             _response.rawResponse,
             "POST",
             "/v1/convai/batch-calling/{batch_id}/retry",
+        );
+    }
+
+    /**
+     * Download all recipients and conversation results for a terminal batch call as CSV.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     */
+    public export(
+        batch_id: string,
+        requestOptions?: BatchCallsClient.RequestOptions,
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
+        return core.HttpResponsePromise.fromPromise(this.__export(batch_id, requestOptions));
+    }
+
+    private async __export(
+        batch_id: string,
+        requestOptions?: BatchCallsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)<ReadableStream<Uint8Array>>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/batch-calling/${core.url.encodePathParam(batch_id)}/export`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            responseType: "streaming",
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/batch-calling/{batch_id}/export",
         );
     }
 }

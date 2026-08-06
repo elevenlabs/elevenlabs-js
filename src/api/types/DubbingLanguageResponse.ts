@@ -21,6 +21,10 @@ export interface DubbingLanguageResponse {
     revision: number;
     /** The `revision` the current dubbed output was generated from; equal to `revision` when up to date, less than it when 'stale'. Null until a generation has completed. */
     outputRevision?: number;
+    /** Why this language failed; null unless `status` is 'failed', and also null for the few languages that failed before failure reporting was introduced. A code of 'project_failed' means the parent project failed, so read the project for the underlying cause. */
+    error?: ElevenLabs.DubbingError;
+    /** Non-fatal conditions raised while dubbing this language, empty when there are none. Reflects the latest generation. Conditions raised while preparing the source are reported on the project instead. */
+    warnings?: ElevenLabs.VoicesNotPermittedWarning[];
     /** When the language target was created. */
     createdAt: Date;
     /** When the language target was last updated. */

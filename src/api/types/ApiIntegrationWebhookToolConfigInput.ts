@@ -6,7 +6,7 @@ export interface ApiIntegrationWebhookToolConfigInput {
     name: string;
     /** Description of when the tool should be used and what it does. */
     description: string;
-    /** The maximum time in seconds to wait for the tool call to complete. Must be between 5 and 120 seconds (inclusive). */
+    /** The maximum time in seconds to wait for the tool call to complete. Must be between 5 and 300 seconds (inclusive). */
     responseTimeoutSecs?: number;
     /** DEPRECATED: use `interruption_mode` instead. If true, the user will not be able to interrupt the agent while this tool is running. */
     disableInterruptions?: boolean;

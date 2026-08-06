@@ -14,6 +14,8 @@ export interface McpServerConfigInput {
     secretToken?: ElevenLabs.McpServerConfigInputSecretToken;
     /** The headers included in the request */
     requestHeaders?: Record<string, ElevenLabs.McpServerConfigInputRequestHeadersValue>;
+    /** Entries sent in the MCP `_meta` field of tools/call requests. Values may be JSON scalars, or references to a workspace secret, dynamic variable, or environment variable resolved per call. */
+    requestMeta?: Record<string, ElevenLabs.McpServerConfigInputRequestMetaValue>;
     /** Optional auth connection to use for authentication with this MCP server */
     authConnection?: ElevenLabs.McpServerConfigInputAuthConnection;
     name: string;
