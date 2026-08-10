@@ -179,12 +179,6 @@ describe("ScribeRealtime option validation", () => {
         capturedUrl = undefined;
     });
 
-    it("rejects filterBackgroundAudio combined with includeTimestamps", async () => {
-        await expect(connect({ filterBackgroundAudio: true, includeTimestamps: true })).rejects.toThrow(
-            /cannot be combined with includeTimestamps/
-        );
-    });
-
     it.each([
         ["vadSilenceThresholdSecs", 0.3, 3.0],
         ["vadThreshold", 0.1, 0.9],
@@ -198,20 +192,6 @@ describe("ScribeRealtime option validation", () => {
         await expect(connect({ [option]: max + 0.05 })).rejects.toThrow(option);
     });
 
-    it("rejects more keyterms than the endpoint accepts", async () => {
-        await expect(
-            connect({ keyterms: Array.from({ length: 51 }, (_, index) => `keyterm-${index}`) })
-        ).rejects.toThrow(/cannot exceed 50/);
-
-        await expect(
-            connect({ keyterms: Array.from({ length: 50 }, (_, index) => `keyterm-${index}`) })
-        ).resolves.toBeDefined();
-    });
-
-    it("rejects a keyterm longer than the endpoint accepts", async () => {
-        await expect(connect({ keyterms: ["a".repeat(21)] })).rejects.toThrow(/at most 20 characters/);
-        await expect(connect({ keyterms: ["a".repeat(20)] })).resolves.toBeDefined();
-    });
 });
 
 describe("ScribeRealtime authentication", () => {

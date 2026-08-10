@@ -242,12 +242,6 @@ export class ScribeRealtime {
             }
         }
 
-        // The server rejects this combination, because dropping low-activity frames
-        // shifts the timeline the timestamps are computed against.
-        if (options.filterBackgroundAudio && options.includeTimestamps) {
-            throw new Error("filterBackgroundAudio cannot be combined with includeTimestamps");
-        }
-
         if (options.includeTimestamps !== undefined) {
             params.append("include_timestamps", options.includeTimestamps.toString());
         }
@@ -257,17 +251,6 @@ export class ScribeRealtime {
         }
 
         if (options.keyterms !== undefined) {
-            if (options.keyterms.length > 50) {
-                throw new Error(
-                    `keyterms cannot exceed 50 entries, received ${options.keyterms.length}`
-                );
-            }
-            const tooLong = options.keyterms.find((term) => term.length > 20);
-            if (tooLong !== undefined) {
-                throw new Error(
-                    `Each keyterm must be at most 20 characters, '${tooLong}' is ${tooLong.length}`
-                );
-            }
             for (const term of options.keyterms) {
                 params.append("keyterms", term);
             }
