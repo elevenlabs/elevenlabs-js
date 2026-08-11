@@ -6,6 +6,7 @@
 export interface AnalysisRunningTotal {
     price?: number;
     charge?: number;
+    runs?: number;
     pricePerFeature?: Record<string, number>;
     chargePerFeature?: Record<string, number>;
 }

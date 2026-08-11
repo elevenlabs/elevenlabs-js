@@ -49,7 +49,7 @@ describe("AnalysisClient", () => {
                     platform_price: 1.1,
                     free_minutes_consumed: 1.1,
                     free_llm_dollars_consumed: 1.1,
-                    analysis: { total: {} },
+                    analysis: { total: {}, last_run: {} },
                 },
                 phone_call: {
                     type: "exotel",
@@ -139,7 +139,11 @@ describe("AnalysisClient", () => {
                         stability: 0.5,
                         speed: 1,
                         similarity_boost: 0.8,
+                        pronunciation_dictionary_locators: [
+                            { pronunciation_dictionary_id: "pronunciation_dictionary_id" },
+                        ],
                     },
+                    conversation: { max_duration_seconds: 600 },
                     agent: {
                         first_message: "Hello, how can I help you today?",
                         language: "en",
@@ -192,6 +196,7 @@ describe("AnalysisClient", () => {
                     ],
                     feedback: { score: "like", time_in_call_secs: 1 },
                     llm_override: "llm_override",
+                    producing_llm: "producing_llm",
                     time_in_call_secs: 10,
                     rag_retrieval_info: {
                         chunks: [{ document_id: "document_id", chunk_id: "chunk_id", vector_distance: 1.1 }],
@@ -275,6 +280,7 @@ describe("AnalysisClient", () => {
                     freeLlmDollarsConsumed: 1.1,
                     analysis: {
                         total: {},
+                        lastRun: {},
                     },
                 },
                 phoneCall: {
@@ -416,6 +422,14 @@ describe("AnalysisClient", () => {
                         stability: 0.5,
                         speed: 1,
                         similarityBoost: 0.8,
+                        pronunciationDictionaryLocators: [
+                            {
+                                pronunciationDictionaryId: "pronunciation_dictionary_id",
+                            },
+                        ],
+                    },
+                    conversation: {
+                        maxDurationSeconds: 600,
                     },
                     agent: {
                         firstMessage: "Hello, how can I help you today?",
@@ -492,6 +506,7 @@ describe("AnalysisClient", () => {
                         timeInCallSecs: 1,
                     },
                     llmOverride: "llm_override",
+                    producingLlm: "producing_llm",
                     timeInCallSecs: 10,
                     ragRetrievalInfo: {
                         chunks: [
@@ -583,7 +598,7 @@ describe("AnalysisClient", () => {
                     platform_price: 1.1,
                     free_minutes_consumed: 1.1,
                     free_llm_dollars_consumed: 1.1,
-                    analysis: { total: {} },
+                    analysis: { total: {}, last_run: {} },
                 },
                 phone_call: {
                     type: "exotel",
@@ -673,7 +688,11 @@ describe("AnalysisClient", () => {
                         stability: 0.5,
                         speed: 1,
                         similarity_boost: 0.8,
+                        pronunciation_dictionary_locators: [
+                            { pronunciation_dictionary_id: "pronunciation_dictionary_id" },
+                        ],
                     },
+                    conversation: { max_duration_seconds: 600 },
                     agent: {
                         first_message: "Hello, how can I help you today?",
                         language: "en",
@@ -726,6 +745,7 @@ describe("AnalysisClient", () => {
                     ],
                     feedback: { score: "like", time_in_call_secs: 1 },
                     llm_override: "llm_override",
+                    producing_llm: "producing_llm",
                     time_in_call_secs: 10,
                     rag_retrieval_info: {
                         chunks: [{ document_id: "document_id", chunk_id: "chunk_id", vector_distance: 1.1 }],
@@ -812,6 +832,7 @@ describe("AnalysisClient", () => {
                     freeLlmDollarsConsumed: 1.1,
                     analysis: {
                         total: {},
+                        lastRun: {},
                     },
                 },
                 phoneCall: {
@@ -953,6 +974,14 @@ describe("AnalysisClient", () => {
                         stability: 0.5,
                         speed: 1,
                         similarityBoost: 0.8,
+                        pronunciationDictionaryLocators: [
+                            {
+                                pronunciationDictionaryId: "pronunciation_dictionary_id",
+                            },
+                        ],
+                    },
+                    conversation: {
+                        maxDurationSeconds: 600,
                     },
                     agent: {
                         firstMessage: "Hello, how can I help you today?",
@@ -1029,6 +1058,7 @@ describe("AnalysisClient", () => {
                         timeInCallSecs: 1,
                     },
                     llmOverride: "llm_override",
+                    producingLlm: "producing_llm",
                     timeInCallSecs: 10,
                     ragRetrievalInfo: {
                         chunks: [

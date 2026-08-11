@@ -90,6 +90,7 @@ describe("TestsClient", () => {
                     ],
                     feedback: { score: "like", time_in_call_secs: 1 },
                     llm_override: "llm_override",
+                    producing_llm: "producing_llm",
                     time_in_call_secs: 1,
                     rag_retrieval_info: {
                         chunks: [{ document_id: "document_id", chunk_id: "chunk_id", vector_distance: 1.1 }],
@@ -179,6 +180,7 @@ describe("TestsClient", () => {
                         timeInCallSecs: 1,
                     },
                     llmOverride: "llm_override",
+                    producingLlm: "producing_llm",
                     timeInCallSecs: 1,
                     ragRetrievalInfo: {
                         chunks: [
@@ -266,6 +268,7 @@ describe("TestsClient", () => {
                     ],
                     feedback: { score: "like", time_in_call_secs: 1 },
                     llm_override: "llm_override",
+                    producing_llm: "producing_llm",
                     time_in_call_secs: 1,
                     rag_retrieval_info: {
                         chunks: [{ document_id: "document_id", chunk_id: "chunk_id", vector_distance: 1.1 }],
@@ -359,6 +362,7 @@ describe("TestsClient", () => {
                         timeInCallSecs: 1,
                     },
                     llmOverride: "llm_override",
+                    producingLlm: "producing_llm",
                     timeInCallSecs: 1,
                     ragRetrievalInfo: {
                         chunks: [

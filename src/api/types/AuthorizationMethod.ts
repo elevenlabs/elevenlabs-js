@@ -9,6 +9,7 @@ export const AuthorizationMethod = {
     LivekitToken: "livekit_token",
     LivekitTokenWebsite: "livekit_token_website",
     GenesysApiKey: "genesys_api_key",
+    AvayaApiKey: "avaya_api_key",
     AudiocodesApiKey: "audiocodes_api_key",
     Whatsapp: "whatsapp",
     Sms: "sms",

@@ -37,6 +37,7 @@ export const ConversationHistoryTranscriptCommonModelInput: core.serialization.O
     ),
     feedback: UserFeedback.optional(),
     llmOverride: core.serialization.property("llm_override", core.serialization.string().optional()),
+    producingLlm: core.serialization.property("producing_llm", core.serialization.string().optional()),
     timeInCallSecs: core.serialization.property("time_in_call_secs", core.serialization.number()),
     conversationTurnMetrics: core.serialization.property(
         "conversation_turn_metrics",
@@ -75,6 +76,7 @@ export declare namespace ConversationHistoryTranscriptCommonModelInput {
         tool_results?: ConversationHistoryTranscriptCommonModelInputToolResultsItem.Raw[] | null;
         feedback?: UserFeedback.Raw | null;
         llm_override?: string | null;
+        producing_llm?: string | null;
         time_in_call_secs: number;
         conversation_turn_metrics?: ConversationTurnMetrics.Raw | null;
         rag_retrieval_info?: RagRetrievalInfo.Raw | null;

@@ -9,10 +9,12 @@ export const ConversationConfigOverride: core.serialization.ObjectSchema<
     ElevenLabs.ConversationConfigOverride
 > = core.serialization.object({
     textOnly: core.serialization.property("text_only", core.serialization.boolean().optional()),
+    maxDurationSeconds: core.serialization.property("max_duration_seconds", core.serialization.number().optional()),
 });
 
 export declare namespace ConversationConfigOverride {
     export interface Raw {
         text_only?: boolean | null;
+        max_duration_seconds?: number | null;
     }
 }

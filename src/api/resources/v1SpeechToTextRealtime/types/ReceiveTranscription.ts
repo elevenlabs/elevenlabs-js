@@ -23,6 +23,7 @@ export type ReceiveTranscription =
     | ElevenLabs.ScribeResourceExhaustedErrorPayload
     | ElevenLabs.ScribeSessionTimeLimitExceededErrorPayload
     | ElevenLabs.ScribeInputErrorPayload
+    | ElevenLabs.ScribeInvalidRequestError
     | ElevenLabs.ScribeChunkSizeExceededErrorPayload
     | ElevenLabs.ScribeInsufficientAudioActivityErrorPayload
     | ElevenLabs.ScribeTranscriberErrorPayload;

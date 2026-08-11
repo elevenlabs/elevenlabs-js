@@ -10,6 +10,7 @@ export const AnalysisRunningTotal: core.serialization.ObjectSchema<
 > = core.serialization.object({
     price: core.serialization.number().optional(),
     charge: core.serialization.number().optional(),
+    runs: core.serialization.number().optional(),
     pricePerFeature: core.serialization.property(
         "price_per_feature",
         core.serialization.record(core.serialization.string(), core.serialization.number()).optional(),
@@ -24,6 +25,7 @@ export declare namespace AnalysisRunningTotal {
     export interface Raw {
         price?: number | null;
         charge?: number | null;
+        runs?: number | null;
         price_per_feature?: Record<string, number> | null;
         charge_per_feature?: Record<string, number> | null;
     }
