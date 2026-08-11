@@ -2,11 +2,18 @@ export {
     RealtimeConnection,
     RealtimeEvents,
     type Config,
+    type DetectedEntity,
     type InputAudioChunk,
     type WordsItem,
     type WordsItemType,
+    type FinalTranscriptWordsItem,
+    type FinalTranscriptWordsItemType,
+    type TranscriptCharacter,
     type CommittedTranscriptMessage,
     type CommittedTranscriptWithTimestampsMessage,
+    type CommittedTranscriptEntitiesMessage,
+    type FinalTranscriptMessage,
+    type FinalTranscriptWithTimestampsMessage,
     type PartialTranscriptMessage,
     type SessionStartedMessage,
     type ServerErrorMessage,
@@ -17,6 +24,7 @@ export {
     type UnacceptedTermsErrorMessage,
     type RateLimitedErrorMessage,
     type InputErrorMessage,
+    type InvalidRequestErrorMessage,
     type QueueOverflowErrorMessage,
     type ResourceExhaustedErrorMessage,
     type SessionTimeLimitExceededErrorMessage,
@@ -29,6 +37,8 @@ export {
     AudioFormat,
     CommitStrategy,
     type AudioOptions,
-    type UrlOptions
+    type UrlOptions,
+    type EntityDetectionCategory,
+    type EntityDetectionOption
 } from "./scribe";
 
