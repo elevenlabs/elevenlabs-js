@@ -165,6 +165,14 @@ export interface InputErrorMessage {
     error: string;
 }
 
+/**
+ * The connection parameters were rejected; the session is closed afterwards.
+ */
+export interface InvalidRequestErrorMessage {
+    message_type: "invalid_request";
+    error: string;
+}
+
 export interface QueueOverflowErrorMessage {
     message_type: "queue_overflow";
     error: string;
@@ -202,6 +210,7 @@ export type ServerErrorMessage =
     | UnacceptedTermsErrorMessage
     | RateLimitedErrorMessage
     | InputErrorMessage
+    | InvalidRequestErrorMessage
     | QueueOverflowErrorMessage
     | ResourceExhaustedErrorMessage
     | SessionTimeLimitExceededErrorMessage
@@ -262,6 +271,8 @@ export enum RealtimeEvents {
     RATE_LIMITED = "rate_limited",
     /** Emitted when a input error occurs */
     INPUT_ERROR = "input_error",
+    /** Emitted when the connection parameters were rejected by the server */
+    INVALID_REQUEST = "invalid_request",
     /** Emitted when a queue overflow error occurs */
     QUEUE_OVERFLOW = "queue_overflow",
     /** Emitted when a resource exhausted error occurs */
@@ -295,6 +306,7 @@ export interface RealtimeEventMap {
     [RealtimeEvents.UNACCEPTED_TERMS_ERROR]: UnacceptedTermsErrorMessage;
     [RealtimeEvents.RATE_LIMITED]: RateLimitedErrorMessage;
     [RealtimeEvents.INPUT_ERROR]: InputErrorMessage;
+    [RealtimeEvents.INVALID_REQUEST]: InvalidRequestErrorMessage;
     [RealtimeEvents.QUEUE_OVERFLOW]: QueueOverflowErrorMessage;
     [RealtimeEvents.RESOURCE_EXHAUSTED]: ResourceExhaustedErrorMessage;
     [RealtimeEvents.SESSION_TIME_LIMIT_EXCEEDED]: SessionTimeLimitExceededErrorMessage;
@@ -419,6 +431,10 @@ export class RealtimeConnection {
                     break;
                 case "input_error":
                     this.eventEmitter.emit(RealtimeEvents.INPUT_ERROR, data);
+                    this.eventEmitter.emit(RealtimeEvents.ERROR, data);
+                    break;
+                case "invalid_request":
+                    this.eventEmitter.emit(RealtimeEvents.INVALID_REQUEST, data);
                     this.eventEmitter.emit(RealtimeEvents.ERROR, data);
                     break;
                 case "queue_overflow":

@@ -21,6 +21,7 @@ jest.mock("ws", () => {
 });
 
 import { ScribeRealtime, AudioFormat, CommitStrategy } from "../../src/wrapper/realtime/scribe";
+import { RealtimeConnection, RealtimeEvents } from "../../src/wrapper/realtime/connection";
 
 const TEST_API_KEY = "test_api_key";
 const TEST_MODEL_ID = "scribe_v2_realtime";
@@ -235,5 +236,94 @@ describe("ScribeRealtime authentication", () => {
 
     it("refuses to connect without either credential", async () => {
         await expect(connect({}, {})).rejects.toThrow("API key is required");
+    });
+});
+
+/** A socket that records its handlers so tests can push server messages through. */
+class FakeSocket {
+    readyState = 1;
+    private handlers: Record<string, (arg: unknown) => void> = {};
+    on(event: string, handler: (arg: unknown) => void): void {
+        this.handlers[event] = handler;
+    }
+    deliver(message: unknown): void {
+        this.handlers.message?.(JSON.stringify(message));
+    }
+    send(): void {}
+    close(): void {}
+}
+
+describe("RealtimeConnection message dispatch", () => {
+    /** Subscribes to `events` and returns what each one received. */
+    function listen(events: RealtimeEvents[]): {
+        socket: FakeSocket;
+        received: Record<string, unknown[]>;
+    } {
+        const socket = new FakeSocket();
+        const connection = new RealtimeConnection(16000);
+        connection.setWebSocket(socket as never);
+
+        const received: Record<string, unknown[]> = {};
+        for (const event of events) {
+            received[event] = [];
+            connection.on(event, (data) => received[event].push(data));
+        }
+        return { socket, received };
+    }
+
+    it.each([
+        RealtimeEvents.FINAL_TRANSCRIPT,
+        RealtimeEvents.FINAL_TRANSCRIPT_WITH_TIMESTAMPS,
+        RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES,
+    ])("routes %s to its listener", (event) => {
+        const { socket, received } = listen([event]);
+        const payload = { message_type: event, text: "hello" };
+
+        socket.deliver(payload);
+
+        expect(received[event]).toEqual([payload]);
+    });
+
+    // Parameter rejections arrive as a message before the socket closes; dropping
+    // it leaves the caller with a closed connection and no reason why.
+    it("routes invalid_request to both its listener and the generic error event", () => {
+        const { socket, received } = listen([RealtimeEvents.INVALID_REQUEST, RealtimeEvents.ERROR]);
+        const payload = {
+            message_type: "invalid_request",
+            error: "Number of keyterms cannot exceed 50. You provided 51 keyterms.",
+        };
+
+        socket.deliver(payload);
+
+        expect(received[RealtimeEvents.INVALID_REQUEST]).toEqual([payload]);
+        expect(received[RealtimeEvents.ERROR]).toEqual([payload]);
+    });
+
+    it("routes unaccepted_terms under the event name the SDK exposes", () => {
+        const { socket, received } = listen([
+            RealtimeEvents.UNACCEPTED_TERMS_ERROR,
+            RealtimeEvents.ERROR,
+        ]);
+        const payload = { message_type: "unaccepted_terms", error: "terms not accepted" };
+
+        socket.deliver(payload);
+
+        expect(received[RealtimeEvents.UNACCEPTED_TERMS_ERROR]).toEqual([payload]);
+        expect(received[RealtimeEvents.ERROR]).toEqual([payload]);
+    });
+
+    it("passes detected entities through unchanged", () => {
+        const { socket, received } = listen([RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES]);
+        const payload = {
+            message_type: "committed_transcript_entities",
+            text: "call me at 555-0100",
+            entities: [
+                { text: "555-0100", entity_type: "phone_number", start_char: 11, end_char: 19 },
+            ],
+        };
+
+        socket.deliver(payload);
+
+        expect(received[RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES]).toEqual([payload]);
     });
 });

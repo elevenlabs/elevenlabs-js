@@ -21,6 +21,7 @@ export {
     type UnacceptedTermsErrorMessage,
     type RateLimitedErrorMessage,
     type InputErrorMessage,
+    type InvalidRequestErrorMessage,
     type QueueOverflowErrorMessage,
     type ResourceExhaustedErrorMessage,
     type SessionTimeLimitExceededErrorMessage,
