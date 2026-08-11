@@ -22,7 +22,6 @@ jest.mock("ws", () => {
 
 import { ScribeRealtime, AudioFormat, CommitStrategy } from "../../src/wrapper/realtime/scribe";
 import { RealtimeConnection, RealtimeEvents } from "../../src/wrapper/realtime/connection";
-
 const TEST_API_KEY = "test_api_key";
 const TEST_MODEL_ID = "scribe_v2_realtime";
 

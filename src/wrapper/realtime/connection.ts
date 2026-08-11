@@ -13,6 +13,9 @@ export interface InputAudioChunk {
 
 export type WordsItemType = "word" | "spacing";
 
+/**
+ * Word-level detail on a committed transcript.
+ */
 export interface WordsItem {
     text?: string;
     start?: number;
@@ -21,6 +24,52 @@ export interface WordsItem {
     speaker_id?: string;
     logprob?: number;
     characters?: string[];
+}
+
+/**
+ * `"audio_event"` covers non-word sounds such as laughter or footsteps.
+ */
+export type FinalTranscriptWordsItemType = "word" | "spacing" | "audio_event";
+
+/**
+ * A character within a word, with its own timing.
+ */
+export interface TranscriptCharacter {
+    /** The character that was transcribed. */
+    text: string;
+    /** The start time of the character in seconds. */
+    start?: number;
+    /** The end time of the character in seconds. */
+    end?: number;
+}
+
+/**
+ * Word-level detail on a final transcript.
+ *
+ * @remarks
+ * This is a richer shape than {@link WordsItem}, which describes committed
+ * transcripts: characters carry their own timings, `type` can be an audio
+ * event, and the originating channel is reported.
+ */
+export interface FinalTranscriptWordsItem {
+    /** The word or sound that was transcribed. */
+    text?: string;
+    /** The start time of the word or sound in seconds. */
+    start?: number;
+    /** The end time of the word or sound in seconds. */
+    end?: number;
+    type?: FinalTranscriptWordsItemType;
+    /** Unique identifier for the speaker of this word. */
+    speaker_id?: string;
+    /**
+     * The log of the probability with which this word was predicted, in the
+     * range [-infinity, 0]. Higher values indicate higher confidence.
+     */
+    logprob?: number;
+    /** The characters that make up the word, and their timing information. */
+    characters?: TranscriptCharacter[];
+    /** The channel this word was spoken on. Null for single-channel transcriptions. */
+    channel_index?: number | null;
 }
 
 /**
@@ -98,7 +147,7 @@ export interface FinalTranscriptWithTimestampsMessage {
     message_type: "final_transcript_with_timestamps";
     text: string;
     language_code?: string;
-    words?: WordsItem[];
+    words?: FinalTranscriptWordsItem[];
 }
 
 export interface CommittedTranscriptMessage {
