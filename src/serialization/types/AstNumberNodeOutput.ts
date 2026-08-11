@@ -3,16 +3,17 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AstNumberNodeOutputValue } from "./AstNumberNodeOutputValue";
 
 export const AstNumberNodeOutput: core.serialization.ObjectSchema<
     serializers.AstNumberNodeOutput.Raw,
     ElevenLabs.AstNumberNodeOutput
 > = core.serialization.object({
-    value: core.serialization.number(),
+    value: AstNumberNodeOutputValue,
 });
 
 export declare namespace AstNumberNodeOutput {
     export interface Raw {
-        value: number;
+        value: AstNumberNodeOutputValue.Raw;
     }
 }

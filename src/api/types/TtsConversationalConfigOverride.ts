@@ -13,4 +13,6 @@ export interface TtsConversationalConfigOverride {
     speed?: number;
     /** The similarity boost for generated speech */
     similarityBoost?: number;
+    /** The pronunciation dictionary locators */
+    pronunciationDictionaryLocators?: ElevenLabs.PydanticPronunciationDictionaryVersionLocator[];
 }

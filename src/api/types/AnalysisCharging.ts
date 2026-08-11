@@ -4,11 +4,9 @@ import type * as ElevenLabs from "../index";
 
 /**
  * Cost of running post-call analysis on this conversation.
- *
- * Present once analysis has incurred a cost. `last_run` is null when the
- * most recent pass incurred none.
+ * Present once an analysis pass has run, billed or not.
  */
 export interface AnalysisCharging {
     total: ElevenLabs.AnalysisRunningTotal;
-    lastRun?: ElevenLabs.AnalysisRunSnapshot;
+    lastRun: ElevenLabs.AnalysisRunSnapshot;
 }

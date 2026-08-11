@@ -14,6 +14,7 @@ export const ConversationInitiationSource = {
     Twilio: "twilio",
     Exotel: "exotel",
     Genesys: "genesys",
+    Avaya: "avaya",
     Audiocodes: "audiocodes",
     SwiftSdk: "swift_sdk",
     Whatsapp: "whatsapp",

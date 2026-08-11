@@ -11,6 +11,7 @@ export interface ConversationHistoryTranscriptResponseModel {
     toolResults?: ElevenLabs.ConversationHistoryTranscriptResponseModelToolResultsItem[];
     feedback?: ElevenLabs.UserFeedback;
     llmOverride?: string;
+    producingLlm?: string;
     timeInCallSecs: number;
     conversationTurnMetrics?: ElevenLabs.ConversationTurnMetrics;
     ragRetrievalInfo?: ElevenLabs.RagRetrievalInfo;

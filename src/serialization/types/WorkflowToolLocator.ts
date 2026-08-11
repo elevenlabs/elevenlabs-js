@@ -3,16 +3,24 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { WorkflowToolLocatorSchemaOverridesValue } from "./WorkflowToolLocatorSchemaOverridesValue";
 
 export const WorkflowToolLocator: core.serialization.ObjectSchema<
     serializers.WorkflowToolLocator.Raw,
     ElevenLabs.WorkflowToolLocator
 > = core.serialization.object({
     toolId: core.serialization.property("tool_id", core.serialization.string()),
+    schemaOverrides: core.serialization.property(
+        "schema_overrides",
+        core.serialization
+            .record(core.serialization.string(), WorkflowToolLocatorSchemaOverridesValue.optional())
+            .optional(),
+    ),
 });
 
 export declare namespace WorkflowToolLocator {
     export interface Raw {
         tool_id: string;
+        schema_overrides?: Record<string, WorkflowToolLocatorSchemaOverridesValue.Raw | null | undefined> | null;
     }
 }

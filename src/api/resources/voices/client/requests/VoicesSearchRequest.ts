@@ -12,6 +12,15 @@
  *         category: "category",
  *         fineTuningState: "fine_tuning_state",
  *         collectionId: "collection_id",
+ *         gender: "gender",
+ *         age: "age",
+ *         language: ["language"],
+ *         accent: "accent",
+ *         useCases: ["use_cases"],
+ *         minNoticePeriodDays: 1,
+ *         includeCustomRates: true,
+ *         includeLiveModerated: true,
+ *         highQuality: true,
  *         includeTotalCount: true,
  *         voiceIds: ["voice_ids"]
  *     }
@@ -35,6 +44,24 @@ export interface VoicesSearchRequest {
     fineTuningState?: string;
     /** Collection ID to filter voices by. */
     collectionId?: string;
+    /** Gender used for filtering, based on the voice's 'gender' label. */
+    gender?: string;
+    /** Age used for filtering, based on the voice's 'age' label. */
+    age?: string;
+    /** Languages used for filtering, based on the voice's 'language' label. Voices matching any of the given languages are returned. */
+    language?: string | string[];
+    /** Accent used for filtering, based on the voice's 'accent' label. */
+    accent?: string;
+    /** Use cases used for filtering, based on the voice's 'use_case' label. Voices matching any of the given use cases are returned. */
+    useCases?: string | string[];
+    /** Filter to voices whose sharing notice period is at least the given number of days. */
+    minNoticePeriodDays?: number;
+    /** Whether to include voices that have a custom sharing rate. Defaults to including them. */
+    includeCustomRates?: boolean;
+    /** Whether to include voices that have live moderation enabled. Defaults to including them. */
+    includeLiveModerated?: boolean;
+    /** When true, only return studio-quality voices (those whose category is 'high_quality'). */
+    highQuality?: boolean;
     /** Whether to include the total count of voices found in the response. NOTE: The total_count value is a live snapshot and may change between requests as users create, modify, or delete voices. For pagination, rely on the has_more flag instead. Only enable this when you actually need the total count (e.g., for display purposes), as it incurs a performance cost. */
     includeTotalCount?: boolean;
     /** Voice IDs to lookup by. Maximum 100 voice IDs. */

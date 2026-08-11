@@ -373,7 +373,11 @@ describe("BranchesClient", () => {
                                 stability: 0.5,
                                 speed: 1,
                                 similarity_boost: 0.8,
+                                pronunciation_dictionary_locators: [
+                                    { pronunciation_dictionary_id: "pronunciation_dictionary_id" },
+                                ],
                             },
+                            conversation: { max_duration_seconds: 600 },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -1532,6 +1536,14 @@ describe("BranchesClient", () => {
                                 stability: 0.5,
                                 speed: 1,
                                 similarityBoost: 0.8,
+                                pronunciationDictionaryLocators: [
+                                    {
+                                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                maxDurationSeconds: 600,
                             },
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",
@@ -2949,7 +2961,11 @@ describe("BranchesClient", () => {
                                 stability: 0.5,
                                 speed: 1,
                                 similarity_boost: 0.8,
+                                pronunciation_dictionary_locators: [
+                                    { pronunciation_dictionary_id: "pronunciation_dictionary_id" },
+                                ],
                             },
+                            conversation: { max_duration_seconds: 600 },
                             agent: {
                                 first_message: "Hello, how can I help you today?",
                                 language: "en",
@@ -4104,6 +4120,14 @@ describe("BranchesClient", () => {
                                 stability: 0.5,
                                 speed: 1,
                                 similarityBoost: 0.8,
+                                pronunciationDictionaryLocators: [
+                                    {
+                                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                                    },
+                                ],
+                            },
+                            conversation: {
+                                maxDurationSeconds: 600,
                             },
                             agent: {
                                 firstMessage: "Hello, how can I help you today?",

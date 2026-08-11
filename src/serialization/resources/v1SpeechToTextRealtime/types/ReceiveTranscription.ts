@@ -14,6 +14,7 @@ import { ScribeChunkSizeExceededErrorPayload } from "../../../types/ScribeChunkS
 import { ScribeErrorPayload } from "../../../types/ScribeErrorPayload";
 import { ScribeInputErrorPayload } from "../../../types/ScribeInputErrorPayload";
 import { ScribeInsufficientAudioActivityErrorPayload } from "../../../types/ScribeInsufficientAudioActivityErrorPayload";
+import { ScribeInvalidRequestError } from "../../../types/ScribeInvalidRequestError";
 import { ScribeQueueOverflowErrorPayload } from "../../../types/ScribeQueueOverflowErrorPayload";
 import { ScribeQuotaExceededErrorPayload } from "../../../types/ScribeQuotaExceededErrorPayload";
 import { ScribeRateLimitedErrorPayload } from "../../../types/ScribeRateLimitedErrorPayload";
@@ -45,6 +46,7 @@ export const ReceiveTranscription: core.serialization.Schema<
     ScribeResourceExhaustedErrorPayload,
     ScribeSessionTimeLimitExceededErrorPayload,
     ScribeInputErrorPayload,
+    ScribeInvalidRequestError,
     ScribeChunkSizeExceededErrorPayload,
     ScribeInsufficientAudioActivityErrorPayload,
     ScribeTranscriberErrorPayload,
@@ -69,6 +71,7 @@ export declare namespace ReceiveTranscription {
         | ScribeResourceExhaustedErrorPayload.Raw
         | ScribeSessionTimeLimitExceededErrorPayload.Raw
         | ScribeInputErrorPayload.Raw
+        | ScribeInvalidRequestError.Raw
         | ScribeChunkSizeExceededErrorPayload.Raw
         | ScribeInsufficientAudioActivityErrorPayload.Raw
         | ScribeTranscriberErrorPayload.Raw;

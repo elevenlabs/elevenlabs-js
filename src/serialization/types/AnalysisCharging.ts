@@ -11,12 +11,12 @@ export const AnalysisCharging: core.serialization.ObjectSchema<
     ElevenLabs.AnalysisCharging
 > = core.serialization.object({
     total: AnalysisRunningTotal,
-    lastRun: core.serialization.property("last_run", AnalysisRunSnapshot.optional()),
+    lastRun: core.serialization.property("last_run", AnalysisRunSnapshot),
 });
 
 export declare namespace AnalysisCharging {
     export interface Raw {
         total: AnalysisRunningTotal.Raw;
-        last_run?: AnalysisRunSnapshot.Raw | null;
+        last_run: AnalysisRunSnapshot.Raw;
     }
 }

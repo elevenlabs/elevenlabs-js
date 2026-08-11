@@ -1986,6 +1986,15 @@ await client.voices.search({
     category: "category",
     fineTuningState: "fine_tuning_state",
     collectionId: "collection_id",
+    gender: "gender",
+    age: "age",
+    language: ["language"],
+    accent: "accent",
+    useCases: ["use_cases"],
+    minNoticePeriodDays: 1,
+    includeCustomRates: true,
+    includeLiveModerated: true,
+    highQuality: true,
     includeTotalCount: true,
     voiceIds: ["voice_ids"]
 });

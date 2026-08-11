@@ -3,6 +3,8 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ContentFormat } from "./ContentFormat";
+import { KnowledgeBaseDocumentType } from "./KnowledgeBaseDocumentType";
 
 export const AgentKnowledgeBaseRagChunkResponseModel: core.serialization.ObjectSchema<
     serializers.AgentKnowledgeBaseRagChunkResponseModel.Raw,
@@ -13,6 +15,8 @@ export const AgentKnowledgeBaseRagChunkResponseModel: core.serialization.ObjectS
     chunkId: core.serialization.property("chunk_id", core.serialization.string()),
     text: core.serialization.string(),
     vectorDistance: core.serialization.property("vector_distance", core.serialization.number().optional()),
+    contentFormat: core.serialization.property("content_format", ContentFormat),
+    documentType: core.serialization.property("document_type", KnowledgeBaseDocumentType),
 });
 
 export declare namespace AgentKnowledgeBaseRagChunkResponseModel {
@@ -22,5 +26,7 @@ export declare namespace AgentKnowledgeBaseRagChunkResponseModel {
         chunk_id: string;
         text: string;
         vector_distance?: number | null;
+        content_format: ContentFormat.Raw;
+        document_type: KnowledgeBaseDocumentType.Raw;
     }
 }
