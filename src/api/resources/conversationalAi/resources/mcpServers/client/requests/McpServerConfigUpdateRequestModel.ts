@@ -30,6 +30,11 @@ export interface McpServerConfigUpdateRequestModel {
         string,
         ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModelRequestHeadersValue | undefined
     >;
+    /** Entries sent in the MCP `_meta` field of tools/call requests. Values may be JSON scalars, or references to a workspace secret, dynamic variable, or environment variable resolved per call. */
+    requestMeta?: Record<
+        string,
+        ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModelRequestMetaValue | undefined
+    >;
     /** Whether to disable HTTP compression for this MCP server */
     disableCompression?: boolean;
     /** Optional secret token for authentication with this MCP server */

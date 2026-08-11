@@ -15,6 +15,7 @@ export const WebhookUsageType: core.serialization.Schema<
     "Agent QA Evaluations",
     "ConvAI Alerting",
     "Flows",
+    "Dubbing",
 ]);
 
 export declare namespace WebhookUsageType {
@@ -25,5 +26,6 @@ export declare namespace WebhookUsageType {
         | "Speech to Text"
         | "Agent QA Evaluations"
         | "ConvAI Alerting"
-        | "Flows";
+        | "Flows"
+        | "Dubbing";
 }

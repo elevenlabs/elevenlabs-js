@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../Ba
 import { type NormalizedClientOptions, normalizeClientOptions } from "../../../../../../BaseClient";
 import * as core from "../../../../../../core";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers";
+import { toJson } from "../../../../../../core/json";
 import * as environments from "../../../../../../environments";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError";
 import * as errors from "../../../../../../errors/index";
@@ -175,7 +176,15 @@ export class ProjectClient {
         }
 
         if (request.modelId != null) {
-            _body.append("model_id", request.modelId);
+            _body.append(
+                "model_id",
+                (() => {
+                    const mapped = serializers.dubbing.ProjectCreateRequestModelId.jsonOrThrow(request.modelId, {
+                        unrecognizedObjectKeys: "strip",
+                    });
+                    return typeof mapped === "string" ? mapped : toJson(mapped);
+                })(),
+            );
         }
 
         if (request.keyterms != null) {
@@ -184,8 +193,18 @@ export class ProjectClient {
             }
         }
 
+        if (request.webhookIds != null) {
+            for (const _item of request.webhookIds) {
+                _body.append("webhook_ids", _item);
+            }
+        }
+
         if (request.targetLanguage != null) {
             _body.append("target_language", request.targetLanguage);
+        }
+
+        if (request.transcript != null) {
+            await _body.appendFile("transcript", request.transcript);
         }
 
         const _maybeEncodedRequest = await _body.getRequest();

@@ -18,7 +18,16 @@ describe("ProjectClient", () => {
                     model_id: "dubbing_v2",
                     media: { filename: "promo.mp4", duration_s: 42.5, has_video: true, mime_type: "video/mp4" },
                     language_ids: ["lang_1001kwkyxp0je6ktn4knsfrasx5s"],
+                    webhook_ids: [],
                     revision: 3,
+                    warnings: [
+                        {
+                            type: "voices_not_permitted",
+                            speaker_ids: ["speaker_1"],
+                            message:
+                                "Voice cloning was not permitted for speaker speaker_1, so a replacement voice was used.",
+                        },
+                    ],
                     created_at: "2026-07-03T10:15:30Z",
                     updated_at: "2026-07-03T10:17:12Z",
                 },
@@ -51,7 +60,16 @@ describe("ProjectClient", () => {
                         mimeType: "video/mp4",
                     },
                     languageIds: ["lang_1001kwkyxp0je6ktn4knsfrasx5s"],
+                    webhookIds: [],
                     revision: 3,
+                    warnings: [
+                        {
+                            type: "voices_not_permitted",
+                            speakerIds: ["speaker_1"],
+                            message:
+                                "Voice cloning was not permitted for speaker speaker_1, so a replacement voice was used.",
+                        },
+                    ],
                     createdAt: new Date("2026-07-03T10:15:30.000Z"),
                     updatedAt: new Date("2026-07-03T10:17:12.000Z"),
                 },
@@ -71,7 +89,15 @@ describe("ProjectClient", () => {
             model_id: "dubbing_v2",
             media: { filename: "promo.mp4", duration_s: 42.5, has_video: true, mime_type: "video/mp4" },
             language_ids: ["lang_1001kwkyxp0je6ktn4knsfrasx5s"],
+            webhook_ids: [],
             revision: 3,
+            warnings: [
+                {
+                    type: "voices_not_permitted",
+                    speaker_ids: ["speaker_1"],
+                    message: "Voice cloning was not permitted for speaker speaker_1, so a replacement voice was used.",
+                },
+            ],
             created_at: "2026-07-03T10:15:30Z",
             updated_at: "2026-07-03T10:17:12Z",
         };
@@ -98,7 +124,15 @@ describe("ProjectClient", () => {
                 mimeType: "video/mp4",
             },
             languageIds: ["lang_1001kwkyxp0je6ktn4knsfrasx5s"],
+            webhookIds: [],
             revision: 3,
+            warnings: [
+                {
+                    type: "voices_not_permitted",
+                    speakerIds: ["speaker_1"],
+                    message: "Voice cloning was not permitted for speaker speaker_1, so a replacement voice was used.",
+                },
+            ],
             createdAt: new Date("2026-07-03T10:15:30.000Z"),
             updatedAt: new Date("2026-07-03T10:17:12.000Z"),
         });

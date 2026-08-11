@@ -24,9 +24,9 @@ export interface UpdateSimulationTestRequest {
     toolMockConfig?: ElevenLabs.SimulationToolMockBehaviorConfig;
     /** Test-specific response mocks, keyed by tool ID. Applied ahead of the tool's shared mocks and only within this test. Only take effect for tools that are mocked (see tool_mock_config). */
     toolMockOverrides?: Record<string, ElevenLabs.ToolResponseMockConfigInput[]>;
-    /** LLM model to use for evaluating simulation results. Defaults to Claude Sonnet 4.6. */
+    /** LLM model to use for evaluating simulation results. */
     evaluationModel?: ElevenLabs.Llm;
-    /** LLM model for the simulated user. Defaults to Claude Sonnet 4.6. */
+    /** LLM model for the simulated user. */
     simulatedUserModel?: ElevenLabs.Llm;
     name: string;
     /** The ID of the parent folder. If not provided, the test will be moved to the root level. */

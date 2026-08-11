@@ -14,4 +14,6 @@ export interface DubbingTranscriptSegment {
     startS: number;
     /** End time of the segment, in seconds. */
     endS: number;
+    /** The caller-supplied external id for this segment, if one was provided. */
+    externalId?: string;
 }

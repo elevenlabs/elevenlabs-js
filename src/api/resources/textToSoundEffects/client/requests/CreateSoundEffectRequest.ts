@@ -20,5 +20,5 @@ export interface CreateSoundEffectRequest {
     /** A higher prompt influence makes your generation follow the prompt more closely while also making generations less variable. Must be a value between 0 and 1. Defaults to 0.3. */
     promptInfluence?: number;
     /** The model ID to use for the sound generation. */
-    modelId?: string;
+    modelId?: ElevenLabs.SfxModelId;
 }

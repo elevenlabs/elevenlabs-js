@@ -10,14 +10,16 @@ export const BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePos
     ElevenLabs.dubbing.project.BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost
 > = core.serialization.object({
     targetLanguage: core.serialization.property("target_language", core.serialization.string()),
-    modelId: core.serialization.property("model_id", core.serialization.stringLiteral("dubbing_v2").optional()),
     voiceSettings: core.serialization.property("voice_settings", VoiceSettings.optional()),
+    translations: core.serialization
+        .record(core.serialization.string(), core.serialization.string().optional())
+        .optional(),
 });
 
 export declare namespace BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost {
     export interface Raw {
         target_language: string;
-        model_id?: "dubbing_v2" | null;
         voice_settings?: VoiceSettings.Raw | null;
+        translations?: Record<string, string | null | undefined> | null;
     }
 }

@@ -91,6 +91,8 @@ export interface WidgetConfigResponse {
     textContents?: ElevenLabs.WidgetTextContents;
     /** Styles for the widget */
     styles?: ElevenLabs.WidgetStyles;
+    /** Whether to show the resize button */
+    showResizeButton?: boolean;
     language: string;
     supportedLanguageOverrides?: string[];
     /** Language presets for the widget */

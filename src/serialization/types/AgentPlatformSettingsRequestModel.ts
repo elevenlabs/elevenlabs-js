@@ -8,6 +8,7 @@ import { AgentCallLimits } from "./AgentCallLimits";
 import { AgentTestingSettings } from "./AgentTestingSettings";
 import { AgentTrustContext } from "./AgentTrustContext";
 import { AgentWorkspaceOverridesInput } from "./AgentWorkspaceOverridesInput";
+import { AlertingSettings } from "./AlertingSettings";
 import { AnalysisProperty } from "./AnalysisProperty";
 import { AnalysisScope } from "./AnalysisScope";
 import { AuthSettings } from "./AuthSettings";
@@ -52,6 +53,7 @@ export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
     analysisLlm: core.serialization.property("analysis_llm", Llm.optional()),
     topicDiscovery: core.serialization.property("topic_discovery", TopicDiscoverySettings.optional()),
     sentimentAnalysis: core.serialization.property("sentiment_analysis", SentimentAnalysisSettings.optional()),
+    alerting: AlertingSettings.optional(),
 });
 
 export declare namespace AgentPlatformSettingsRequestModel {
@@ -75,5 +77,6 @@ export declare namespace AgentPlatformSettingsRequestModel {
         analysis_llm?: Llm.Raw | null;
         topic_discovery?: TopicDiscoverySettings.Raw | null;
         sentiment_analysis?: SentimentAnalysisSettings.Raw | null;
+        alerting?: AlertingSettings.Raw | null;
     }
 }

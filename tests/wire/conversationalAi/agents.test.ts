@@ -287,6 +287,7 @@ describe("AgentsClient", () => {
                     show_conversation_id: true,
                     strip_audio_tags: true,
                     syntax_highlight_theme: "light",
+                    show_resize_button: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -341,6 +342,11 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
+                alerting: {
+                    monitor_configs: { key: {} },
+                    auto_resolve_after_inactive_minutes: 1,
+                    notifiers: [{ webhook_id: "webhook_id" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -1463,6 +1469,7 @@ describe("AgentsClient", () => {
                     showConversationId: true,
                     stripAudioTags: true,
                     syntaxHighlightTheme: "light",
+                    showResizeButton: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -1551,6 +1558,17 @@ describe("AgentsClient", () => {
                 },
                 trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
+                alerting: {
+                    monitorConfigs: {
+                        key: {},
+                    },
+                    autoResolveAfterInactiveMinutes: 1,
+                    notifiers: [
+                        {
+                            webhookId: "webhook_id",
+                        },
+                    ],
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -2797,6 +2815,7 @@ describe("AgentsClient", () => {
                     show_conversation_id: true,
                     strip_audio_tags: true,
                     syntax_highlight_theme: "light",
+                    show_resize_button: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -2851,6 +2870,11 @@ describe("AgentsClient", () => {
                 },
                 trust_context: "unknown",
                 analysis_llm: "gpt-4o-mini",
+                alerting: {
+                    monitor_configs: { key: {} },
+                    auto_resolve_after_inactive_minutes: 1,
+                    notifiers: [{ webhook_id: "webhook_id" }],
+                },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
             phone_numbers: [
@@ -3974,6 +3998,7 @@ describe("AgentsClient", () => {
                     showConversationId: true,
                     stripAudioTags: true,
                     syntaxHighlightTheme: "light",
+                    showResizeButton: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -4062,6 +4087,17 @@ describe("AgentsClient", () => {
                 },
                 trustContext: "unknown",
                 analysisLlm: "gpt-4o-mini",
+                alerting: {
+                    monitorConfigs: {
+                        key: {},
+                    },
+                    autoResolveAfterInactiveMinutes: 1,
+                    notifiers: [
+                        {
+                            webhookId: "webhook_id",
+                        },
+                    ],
+                },
                 safety: {
                     isBlockedIvc: true,
                     isBlockedNonIvc: true,
@@ -5168,6 +5204,7 @@ describe("AgentsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    triggered_guardrails: [{ guardrail_type: "custom" }],
                     file_input: {
                         file_id: "file_id",
                         original_filename: "original_filename",
@@ -5287,6 +5324,11 @@ describe("AgentsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    triggeredGuardrails: [
+                        {
+                            guardrailType: "custom",
+                        },
+                    ],
                     fileInput: {
                         fileId: "file_id",
                         originalFilename: "original_filename",

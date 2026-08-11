@@ -17,6 +17,7 @@ describe("ToolApprovalsClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                request_meta: { key: "value" },
                 auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
@@ -94,6 +95,9 @@ describe("ToolApprovalsClient", () => {
                 requestHeaders: {
                     key: "value",
                 },
+                requestMeta: {
+                    key: "value",
+                },
                 authConnection: {
                     authConnectionId: "auth_connection_id",
                 },
@@ -159,6 +163,7 @@ describe("ToolApprovalsClient", () => {
                 url: "url",
                 secret_token: { secret_id: "secret_id" },
                 request_headers: { key: "value" },
+                request_meta: { key: "value" },
                 auth_connection: { auth_connection_id: "auth_connection_id" },
                 name: "name",
                 description: "description",
@@ -230,6 +235,9 @@ describe("ToolApprovalsClient", () => {
                     secretId: "secret_id",
                 },
                 requestHeaders: {
+                    key: "value",
+                },
+                requestMeta: {
                     key: "value",
                 },
                 authConnection: {

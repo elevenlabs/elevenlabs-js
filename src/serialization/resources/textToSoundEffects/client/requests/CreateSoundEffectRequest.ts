@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
+import { SfxModelId } from "../../../../types/SfxModelId";
 
 export const CreateSoundEffectRequest: core.serialization.Schema<
     serializers.CreateSoundEffectRequest.Raw,
@@ -12,7 +13,7 @@ export const CreateSoundEffectRequest: core.serialization.Schema<
     loop: core.serialization.boolean().optional(),
     durationSeconds: core.serialization.property("duration_seconds", core.serialization.number().optional()),
     promptInfluence: core.serialization.property("prompt_influence", core.serialization.number().optional()),
-    modelId: core.serialization.property("model_id", core.serialization.string().optional()),
+    modelId: core.serialization.property("model_id", SfxModelId.optional()),
 });
 
 export declare namespace CreateSoundEffectRequest {
@@ -21,6 +22,6 @@ export declare namespace CreateSoundEffectRequest {
         loop?: boolean | null;
         duration_seconds?: number | null;
         prompt_influence?: number | null;
-        model_id?: string | null;
+        model_id?: SfxModelId.Raw | null;
     }
 }

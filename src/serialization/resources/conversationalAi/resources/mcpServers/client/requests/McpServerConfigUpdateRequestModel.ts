@@ -12,6 +12,7 @@ import { ToolExecutionMode } from "../../../../../../types/ToolExecutionMode";
 import { ToolInterruptionMode } from "../../../../../../types/ToolInterruptionMode";
 import { McpServerConfigUpdateRequestModelAuthConnection } from "../../types/McpServerConfigUpdateRequestModelAuthConnection";
 import { McpServerConfigUpdateRequestModelRequestHeadersValue } from "../../types/McpServerConfigUpdateRequestModelRequestHeadersValue";
+import { McpServerConfigUpdateRequestModelRequestMetaValue } from "../../types/McpServerConfigUpdateRequestModelRequestMetaValue";
 
 export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
     serializers.conversationalAi.McpServerConfigUpdateRequestModel.Raw,
@@ -30,6 +31,12 @@ export const McpServerConfigUpdateRequestModel: core.serialization.Schema<
         "request_headers",
         core.serialization
             .record(core.serialization.string(), McpServerConfigUpdateRequestModelRequestHeadersValue.optional())
+            .optional(),
+    ),
+    requestMeta: core.serialization.property(
+        "request_meta",
+        core.serialization
+            .record(core.serialization.string(), McpServerConfigUpdateRequestModelRequestMetaValue.optional())
             .optional(),
     ),
     disableCompression: core.serialization.property("disable_compression", core.serialization.boolean().optional()),
@@ -55,6 +62,7 @@ export declare namespace McpServerConfigUpdateRequestModel {
             string,
             McpServerConfigUpdateRequestModelRequestHeadersValue.Raw | null | undefined
         > | null;
+        request_meta?: Record<string, McpServerConfigUpdateRequestModelRequestMetaValue.Raw | null | undefined> | null;
         disable_compression?: boolean | null;
         secret_token?: ConvAiSecretLocator.Raw | null;
         auth_connection?: McpServerConfigUpdateRequestModelAuthConnection.Raw | null;

@@ -17,8 +17,14 @@ export interface DubbingProjectResponse {
     media?: ElevenLabs.DubbingSourceMediaInfo;
     /** Identifiers of the language targets created under this project. */
     languageIds?: string[];
+    /** Workspace webhooks notified when this project becomes ready or fails, and when any of its languages completes or fails. */
+    webhookIds?: string[];
     /** Monotonic counter incremented whenever the source transcript is edited (segment add/edit/delete). */
     revision: number;
+    /** Why the project failed; null unless `status` is 'failed'. Also null for the few projects that failed before failure reporting was introduced. */
+    error?: ElevenLabs.DubbingError;
+    /** Non-fatal conditions raised while preparing the source, empty when there are none. Reflects the latest preparation. Conditions raised while dubbing a particular language are reported on that language instead. */
+    warnings?: ElevenLabs.VoicesNotPermittedWarning[];
     /** When the project was created. */
     createdAt: Date;
     /** When the project was last updated. */

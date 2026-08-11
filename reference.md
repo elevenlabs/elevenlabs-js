@@ -5442,11 +5442,14 @@ await client.conversationalAi.conversations.list({
     conversationProductType: "agents",
     branchId: "branch_id",
     versionId: "version_id",
+    parentConversationId: "parent_conversation_id",
     topicIds: ["topic_ids"],
     excludeStatuses: ["initiated"],
     tagIds: ["tag_ids"],
     workflowNodeEnteredId: "workflow_node_entered_id",
-    terminationReasons: ["termination_reasons"]
+    terminationReasons: ["termination_reasons"],
+    guardrailTypes: ["custom"],
+    customGuardrailNames: ["custom_guardrail_names"]
 });
 
 ```
@@ -9027,69 +9030,6 @@ await client.conversationalAi.secrets.getDependencies("secret_id", "tools", {
 </details>
 
 ## ConversationalAi BatchCalls
-<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">export</a>(batch_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Download all recipients and conversation results for a terminal batch call as CSV.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.batchCalls.export("batch_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**batch_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BatchCallsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.BatchCallResponse</code></summary>
 <dl>
 <dd>
@@ -9441,6 +9381,69 @@ Retry a batch call, calling failed and no-response recipients again.
 
 ```typescript
 await client.conversationalAi.batchCalls.retry("batch_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**batch_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BatchCallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">export</a>(batch_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download all recipients and conversation results for a terminal batch call as CSV.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.batchCalls.export("batch_id");
 
 ```
 </dd>
@@ -10498,7 +10501,8 @@ Returns a list of branches an agent has
 ```typescript
 await client.conversationalAi.agents.branches.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     includeArchived: true,
-    limit: 1
+    limit: 1,
+    includeCommitStatus: true
 });
 
 ```
@@ -17359,8 +17363,7 @@ Queue a language target for a project (starts once the project is ready).
 
 ```typescript
 await client.dubbing.project.language.create("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", {
-    targetLanguage: "es",
-    modelId: "dubbing_v2"
+    targetLanguage: "es"
 });
 
 ```
@@ -17623,7 +17626,7 @@ await client.dubbing.project.transcript.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3")
 <dl>
 <dd>
 
-Remove a source segment from the transcript.
+Enterprise only. Remove a source segment from the transcript.
 </dd>
 </dl>
 </dd>
@@ -17694,7 +17697,7 @@ await client.dubbing.project.transcript.deleteSegment("proj_1601kwkyxp0hfzvtmyxw
 <dl>
 <dd>
 
-Edit a source segment's text, speaker, or timing.
+Enterprise only. Edit a source segment's text, speaker, or timing.
 </dd>
 </dl>
 </dd>
@@ -17743,7 +17746,87 @@ await client.dubbing.project.transcript.updateSegment("proj_1601kwkyxp0hfzvtmyxw
 <dl>
 <dd>
 
-**request:** `ElevenLabs.dubbing.project.DubbingSegmentUpdateRequest` 
+**request:** `ElevenLabs.DubbingSegmentUpdateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/transcript/client/Client.ts">updateSegments</a>(project_id, { ...params }) -> ElevenLabs.DubbingBulkSourceSegmentUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Enterprise only. Edit several source segments' text, speaker, or timing in one atomic request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.transcript.updateSegments("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", {
+    segments: {
+        "0199a3f0-1c2d-7abc-8def-0123456789ab": {
+            text: "Welcome to our latest product demo."
+        },
+        "0199a3f0-3e4f-7abc-8def-0123456789cd": {
+            speakerId: "narrator"
+        }
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.project.DubbingBulkSegmentUpdateRequest` 
     
 </dd>
 </dl>
@@ -17775,7 +17858,7 @@ await client.dubbing.project.transcript.updateSegment("proj_1601kwkyxp0hfzvtmyxw
 <dl>
 <dd>
 
-Add a new source segment to the transcript.
+Enterprise only. Add a new source segment to the transcript.
 </dd>
 </dl>
 </dd>
@@ -17923,7 +18006,7 @@ await client.dubbing.project.language.transcript.get("proj_1601kwkyxp0hfzvtmyxwq
 <dl>
 <dd>
 
-Edit a segment's translation for a language target.
+Enterprise only. Edit a segment's translation for a language target.
 </dd>
 </dl>
 </dd>
@@ -17980,7 +18063,7 @@ await client.dubbing.project.language.transcript.updateSegment("proj_1601kwkyxp0
 <dl>
 <dd>
 
-**request:** `ElevenLabs.dubbing.project.language.DubbingTargetSegmentUpdateRequest` 
+**request:** `ElevenLabs.DubbingTargetSegmentUpdateRequest` 
     
 </dd>
 </dl>
@@ -18000,7 +18083,7 @@ await client.dubbing.project.language.transcript.updateSegment("proj_1601kwkyxp0
 </dl>
 </details>
 
-<details><summary><code>client.dubbing.project.language.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/language/resources/transcript/client/Client.ts">regenerate</a>(project_id, language_id) -> ElevenLabs.DubbingLanguageResponse</code></summary>
+<details><summary><code>client.dubbing.project.language.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/language/resources/transcript/client/Client.ts">updateSegments</a>(project_id, language_id, { ...params }) -> ElevenLabs.DubbingBulkTargetSegmentUpdateResponse</code></summary>
 <dl>
 <dd>
 
@@ -18012,7 +18095,95 @@ await client.dubbing.project.language.transcript.updateSegment("proj_1601kwkyxp0
 <dl>
 <dd>
 
-Re-dub a target from its edited transcript (charged like a generation).
+Enterprise only. Edit several segments' translations for a language target in one atomic request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.dubbing.project.language.transcript.updateSegments("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", "lang_1001kwkyxp0je6ktn4knsfrasx5s", {
+    segments: {
+        "0199a3f0-1c2d-7abc-8def-0123456789ab": {
+            translation: "Bienvenido a nuestra \u00FAltima demostraci\u00F3n de producto."
+        },
+        "0199a3f0-3e4f-7abc-8def-0123456789cd": {
+            translation: "Empecemos."
+        }
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — Identifier of the dubbing project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language_id:** `string` — Identifier of the language target.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.dubbing.project.language.DubbingBulkTargetSegmentUpdateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.project.language.transcript.<a href="/src/api/resources/dubbing/resources/project/resources/language/resources/transcript/client/Client.ts">regenerate</a>(project_id, language_id) -> ElevenLabs.DubbingRegenerateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Enterprise only. Re-dub a target from its edited transcript, re-synthesizing only the edited regions (charged like a generation). Conflicts when the target has no edits to apply -- nothing is dispatched and nothing is charged.
 </dd>
 </dl>
 </dd>

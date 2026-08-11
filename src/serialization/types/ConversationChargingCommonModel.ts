@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AnalysisCharging } from "./AnalysisCharging";
 import { ConversationAsrUsageModel } from "./ConversationAsrUsageModel";
 import { ConversationTtsUsageModel } from "./ConversationTtsUsageModel";
 import { LlmCategoryUsage } from "./LlmCategoryUsage";
@@ -29,6 +30,7 @@ export const ConversationChargingCommonModel: core.serialization.ObjectSchema<
     ),
     ttsUsage: core.serialization.property("tts_usage", ConversationTtsUsageModel.optional()),
     asrUsage: core.serialization.property("asr_usage", ConversationAsrUsageModel.optional()),
+    analysis: AnalysisCharging.optional(),
 });
 
 export declare namespace ConversationChargingCommonModel {
@@ -47,5 +49,6 @@ export declare namespace ConversationChargingCommonModel {
         free_llm_dollars_consumed?: number | null;
         tts_usage?: ConversationTtsUsageModel.Raw | null;
         asr_usage?: ConversationAsrUsageModel.Raw | null;
+        analysis?: AnalysisCharging.Raw | null;
     }
 }

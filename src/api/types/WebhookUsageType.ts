@@ -8,5 +8,6 @@ export const WebhookUsageType = {
     AgentQaEvaluations: "Agent QA Evaluations",
     ConvAiAlerting: "ConvAI Alerting",
     Flows: "Flows",
+    Dubbing: "Dubbing",
 } as const;
 export type WebhookUsageType = (typeof WebhookUsageType)[keyof typeof WebhookUsageType];

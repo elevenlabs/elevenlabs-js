@@ -20,6 +20,7 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "twilio",
     "exotel",
     "genesys",
+    "audiocodes",
     "swift_sdk",
     "whatsapp",
     "twilio_sms",
@@ -49,6 +50,7 @@ export declare namespace ConversationInitiationSource {
         | "twilio"
         | "exotel"
         | "genesys"
+        | "audiocodes"
         | "swift_sdk"
         | "whatsapp"
         | "twilio_sms"

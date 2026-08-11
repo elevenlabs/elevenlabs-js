@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { McpApprovalPolicy } from "./McpApprovalPolicy";
 import { McpServerConfigInputAuthConnection } from "./McpServerConfigInputAuthConnection";
 import { McpServerConfigInputRequestHeadersValue } from "./McpServerConfigInputRequestHeadersValue";
+import { McpServerConfigInputRequestMetaValue } from "./McpServerConfigInputRequestMetaValue";
 import { McpServerConfigInputSecretToken } from "./McpServerConfigInputSecretToken";
 import { McpServerConfigInputUrl } from "./McpServerConfigInputUrl";
 import { McpServerTransport } from "./McpServerTransport";
@@ -33,6 +34,10 @@ export const McpServerConfigInput: core.serialization.ObjectSchema<
         "request_headers",
         core.serialization.record(core.serialization.string(), McpServerConfigInputRequestHeadersValue).optional(),
     ),
+    requestMeta: core.serialization.property(
+        "request_meta",
+        core.serialization.record(core.serialization.string(), McpServerConfigInputRequestMetaValue).optional(),
+    ),
     authConnection: core.serialization.property("auth_connection", McpServerConfigInputAuthConnection.optional()),
     name: core.serialization.string(),
     description: core.serialization.string().optional(),
@@ -59,6 +64,7 @@ export declare namespace McpServerConfigInput {
         url: McpServerConfigInputUrl.Raw;
         secret_token?: McpServerConfigInputSecretToken.Raw | null;
         request_headers?: Record<string, McpServerConfigInputRequestHeadersValue.Raw> | null;
+        request_meta?: Record<string, McpServerConfigInputRequestMetaValue.Raw> | null;
         auth_connection?: McpServerConfigInputAuthConnection.Raw | null;
         name: string;
         description?: string | null;
