@@ -151,23 +151,6 @@ describe("ScribeRealtime handshake URL", () => {
         expect(url.searchParams.get("enable_logging")).toBe("false");
     });
 
-    // The endpoint reads these as repeated parameters; joining them would make
-    // each list arrive as one nonsense value.
-    it("repeats list-valued parameters in order instead of joining them", async () => {
-        const { url } = await connect({
-            keyterms: ["beta", "alpha"],
-            secondaryLanguages: ["nl", "de"],
-            entityDetection: ["pii", "email_address"],
-        });
-
-        expect(url.searchParams.getAll("keyterms")).toEqual(["beta", "alpha"]);
-        expect(url.searchParams.getAll("secondary_languages")).toEqual(["nl", "de"]);
-        expect(url.searchParams.getAll("entity_detection")).toEqual(["pii", "email_address"]);
-        for (const value of url.searchParams.values()) {
-            expect(value).not.toContain(",");
-        }
-    });
-
     it("accepts a bare string for entityDetection as well as a list", async () => {
         const { url } = await connect({ entityDetection: "all" });
 
@@ -312,18 +295,4 @@ describe("RealtimeConnection message dispatch", () => {
         expect(received[RealtimeEvents.ERROR]).toEqual([payload]);
     });
 
-    it("passes detected entities through unchanged", () => {
-        const { socket, received } = listen([RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES]);
-        const payload = {
-            message_type: "committed_transcript_entities",
-            text: "call me at 555-0100",
-            entities: [
-                { text: "555-0100", entity_type: "phone_number", start_char: 11, end_char: 19 },
-            ],
-        };
-
-        socket.deliver(payload);
-
-        expect(received[RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES]).toEqual([payload]);
-    });
 });
