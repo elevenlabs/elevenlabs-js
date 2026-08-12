@@ -1,7 +1,7 @@
 import { EventEmitter } from "node:events";
 import WebSocket from "ws";
-import { SpeechEngineSession } from "../../../src/wrapper/speech-engine/SpeechEngineSession";
 import { SpeechEngine } from "../../../src/wrapper/speech-engine";
+import { SpeechEngineSession } from "../../../src/wrapper/speech-engine/SpeechEngineSession";
 import type { TranscriptMessage, WebSocketLike } from "../../../src/wrapper/speech-engine/types";
 
 class MockWebSocket extends EventEmitter implements WebSocketLike {
@@ -94,7 +94,9 @@ describe("SpeechEngineSession", () => {
 
     it("skips duplicate transcripts with the same event_id", () => {
         let callCount = 0;
-        session.on(SpeechEngine.USER_TRANSCRIPT, () => { callCount++; });
+        session.on(SpeechEngine.USER_TRANSCRIPT, () => {
+            callCount++;
+        });
 
         ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 30 });
         ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 30 });
@@ -105,10 +107,20 @@ describe("SpeechEngineSession", () => {
 
     it("does not deduplicate transcripts without event_id", () => {
         let callCount = 0;
-        session.on(SpeechEngine.USER_TRANSCRIPT, () => { callCount++; });
+        session.on(SpeechEngine.USER_TRANSCRIPT, () => {
+            callCount++;
+        });
 
-        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: undefined as unknown as number });
-        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript2, event_id: undefined as unknown as number });
+        ws.receiveMessage({
+            type: "user_transcript",
+            user_transcript: transcript,
+            event_id: undefined as unknown as number,
+        });
+        ws.receiveMessage({
+            type: "user_transcript",
+            user_transcript: transcript2,
+            event_id: undefined as unknown as number,
+        });
 
         expect(callCount).toBe(2);
     });
@@ -141,7 +153,7 @@ describe("SpeechEngineSession", () => {
         ws.receiveMessage({ type: "close" });
 
         expect(closeHandler).toHaveBeenCalledTimes(1);
-        expect(capturedSignal!.aborted).toBe(true);
+        expect(capturedSignal?.aborted).toBe(true);
     });
 
     // -----------------------------------------------------------------------
@@ -182,7 +194,7 @@ describe("SpeechEngineSession", () => {
         ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 1 });
         ws.close();
 
-        expect(capturedSignal!.aborted).toBe(true);
+        expect(capturedSignal?.aborted).toBe(true);
     });
 
     it("emits error on WebSocket error", () => {
@@ -223,7 +235,12 @@ describe("SpeechEngineSession", () => {
         session.sendResponse("The answer is 42");
 
         expect(ws.sent).toHaveLength(2);
-        expect(JSON.parse(ws.sent[0])).toEqual({ type: "agent_response", content: "The answer is 42", event_id: 5, is_final: false });
+        expect(JSON.parse(ws.sent[0])).toEqual({
+            type: "agent_response",
+            content: "The answer is 42",
+            event_id: 5,
+            is_final: false,
+        });
         expect(JSON.parse(ws.sent[1])).toEqual({ type: "agent_response", content: "", event_id: 5, is_final: true });
     });
 
@@ -249,8 +266,18 @@ describe("SpeechEngineSession", () => {
         await new Promise((r) => setTimeout(r, 10));
 
         expect(ws.sent).toHaveLength(3);
-        expect(JSON.parse(ws.sent[0])).toEqual({ type: "agent_response", content: "Hello", event_id: 3, is_final: false });
-        expect(JSON.parse(ws.sent[1])).toEqual({ type: "agent_response", content: " world", event_id: 3, is_final: false });
+        expect(JSON.parse(ws.sent[0])).toEqual({
+            type: "agent_response",
+            content: "Hello",
+            event_id: 3,
+            is_final: false,
+        });
+        expect(JSON.parse(ws.sent[1])).toEqual({
+            type: "agent_response",
+            content: " world",
+            event_id: 3,
+            is_final: false,
+        });
         expect(JSON.parse(ws.sent[2])).toEqual({ type: "agent_response", content: "", event_id: 3, is_final: true });
     });
 
@@ -397,9 +424,19 @@ describe("SpeechEngineSession", () => {
 
         // Each sendResponse emits a content chunk + empty terminator = 2 messages each
         expect(ws.sent).toHaveLength(4);
-        expect(JSON.parse(ws.sent[0])).toEqual({ type: "agent_response", content: "response to first", event_id: 1, is_final: false });
+        expect(JSON.parse(ws.sent[0])).toEqual({
+            type: "agent_response",
+            content: "response to first",
+            event_id: 1,
+            is_final: false,
+        });
         expect(JSON.parse(ws.sent[1])).toEqual({ type: "agent_response", content: "", event_id: 1, is_final: true });
-        expect(JSON.parse(ws.sent[2])).toEqual({ type: "agent_response", content: "response to second", event_id: 2, is_final: false });
+        expect(JSON.parse(ws.sent[2])).toEqual({
+            type: "agent_response",
+            content: "response to second",
+            event_id: 2,
+            is_final: false,
+        });
         expect(JSON.parse(ws.sent[3])).toEqual({ type: "agent_response", content: "", event_id: 2, is_final: true });
     });
 
