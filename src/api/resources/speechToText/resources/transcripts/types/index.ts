@@ -1,1 +1,1 @@
-export * from "./TranscriptsGetResponse";
+export * from "./GetTranscriptsResponse.js";

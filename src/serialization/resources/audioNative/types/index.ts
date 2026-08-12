@@ -1,1 +1,1 @@
-export * from "./AudioNativeCreateRequestApplyTextNormalization";
+export * from "./CreateAudioNativeRequestApplyTextNormalization.js";

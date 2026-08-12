@@ -1,1 +1,0 @@
-export { UpdateProcedureDraftRequestModel } from "./UpdateProcedureDraftRequestModel";

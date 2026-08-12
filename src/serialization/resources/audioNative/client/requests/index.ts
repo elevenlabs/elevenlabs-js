@@ -1,1 +1,1 @@
-export { BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost } from "./BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost";
+export { BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost } from "./BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost.js";

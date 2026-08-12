@@ -1,1 +1,1 @@
-export * from "./AddVoiceRequestLabels";
+export * from "./AddVoiceRequestLabels.js";

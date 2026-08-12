@@ -1,1 +1,1 @@
-export { BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost } from "./BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost";
+export { BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost } from "./BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost.js";

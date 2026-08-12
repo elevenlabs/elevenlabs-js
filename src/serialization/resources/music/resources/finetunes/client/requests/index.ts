@@ -1,1 +1,1 @@
-export { UpdateMusicFinetuneRequestModel } from "./UpdateMusicFinetuneRequestModel";
+export { UpdateMusicFinetuneRequestModel } from "./UpdateMusicFinetuneRequestModel.js";

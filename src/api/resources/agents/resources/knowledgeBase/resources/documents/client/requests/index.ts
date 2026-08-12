@@ -1,0 +1,12 @@
+export type { BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost } from "./BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost.js";
+export type { BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost } from "./BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost.js";
+export type { BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost } from "./BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost.js";
+export type { BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost } from "./BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost.js";
+export type { BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost } from "./BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost.js";
+export type { BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost } from "./BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost.js";
+export type { BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost } from "./BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost.js";
+export type { BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost } from "./BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost.js";
+export type { BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch } from "./BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch.js";
+export type { DeleteDocumentsRequest } from "./DeleteDocumentsRequest.js";
+export type { GetAgentsDocumentsRequest } from "./GetAgentsDocumentsRequest.js";
+export type { GetDocumentsRequest } from "./GetDocumentsRequest.js";

@@ -1,1 +1,1 @@
-export type { ApiKeysDisableRequest } from "./ApiKeysDisableRequest";
+export type { DisableApiKeysRequest } from "./DisableApiKeysRequest.js";

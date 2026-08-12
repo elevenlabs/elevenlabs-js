@@ -1,5 +1,5 @@
-import { fromJson } from "../json";
-import { RUNTIME } from "../runtime";
+import { fromJson } from "../json.js";
+import { RUNTIME } from "../runtime/index.js";
 
 export declare namespace Stream {
     interface Args {

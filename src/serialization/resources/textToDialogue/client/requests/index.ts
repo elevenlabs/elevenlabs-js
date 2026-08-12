@@ -1,4 +1,4 @@
-export { BodyTextToDialogueFullWithTimestamps } from "./BodyTextToDialogueFullWithTimestamps";
-export { BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost } from "./BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost";
-export { BodyTextToDialogueMultiVoiceV1TextToDialoguePost } from "./BodyTextToDialogueMultiVoiceV1TextToDialoguePost";
-export { BodyTextToDialogueStreamWithTimestamps } from "./BodyTextToDialogueStreamWithTimestamps";
+export { BodyTextToDialogueFullWithTimestamps } from "./BodyTextToDialogueFullWithTimestamps.js";
+export { BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost } from "./BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost.js";
+export { BodyTextToDialogueMultiVoiceV1TextToDialoguePost } from "./BodyTextToDialogueMultiVoiceV1TextToDialoguePost.js";
+export { BodyTextToDialogueStreamWithTimestamps } from "./BodyTextToDialogueStreamWithTimestamps.js";

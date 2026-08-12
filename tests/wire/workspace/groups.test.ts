@@ -17,7 +17,6 @@ describe("GroupsClient", () => {
                 group_usage_limit: "unlimited",
                 group_pvc_limit: "unlimited",
                 character_count: 1,
-                scim_external_id: "scim_external_id",
                 is_scim_synced: true,
                 scim_group: {
                     scim_external_id: "scim_external_id",
@@ -48,7 +47,6 @@ describe("GroupsClient", () => {
                 groupUsageLimit: "unlimited",
                 groupPvcLimit: "unlimited",
                 characterCount: 1,
-                scimExternalId: "scim_external_id",
                 isScimSynced: true,
                 scimGroup: {
                     scimExternalId: "scim_external_id",

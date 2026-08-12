@@ -1,2 +1,2 @@
-export * as transcripts from "./transcripts";
-export * from "./transcripts/types";
+export * as transcripts from "./transcripts/index.js";
+export * from "./transcripts/types/index.js";

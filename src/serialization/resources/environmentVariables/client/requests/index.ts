@@ -1,1 +1,1 @@
-export { UpdateEnvironmentVariableRequest } from "./UpdateEnvironmentVariableRequest";
+export { UpdateEnvironmentVariableRequest } from "./UpdateEnvironmentVariableRequest.js";

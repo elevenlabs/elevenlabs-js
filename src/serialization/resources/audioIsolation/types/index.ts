@@ -1,2 +1,2 @@
-export * from "./AudioIsolationRequestFileFormat";
-export * from "./AudioIsolationStreamRequestFileFormat";
+export * from "./AudioIsolationRequestFileFormat.js";
+export * from "./AudioIsolationStreamRequestFileFormat.js";

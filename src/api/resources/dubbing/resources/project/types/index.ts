@@ -1,2 +1,2 @@
-export * from "./ProjectCreateRequestModelId";
-export * from "./ProjectListRequestSortDirection";
+export * from "./CreateProjectRequestModelId.js";
+export * from "./ListProjectRequestSortDirection.js";

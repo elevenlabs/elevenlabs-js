@@ -1,1 +1,1 @@
-export { BodyGenerateCompositionPlanV1MusicPlanPost } from "./BodyGenerateCompositionPlanV1MusicPlanPost";
+export { BodyGenerateCompositionPlanV1MusicPlanPost } from "./BodyGenerateCompositionPlanV1MusicPlanPost.js";

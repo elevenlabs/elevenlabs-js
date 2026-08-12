@@ -1,1 +1,1 @@
-export * from "./TranscriptsGetRequestFormatType";
+export * from "./GetTranscriptsRequestFormatType.js";

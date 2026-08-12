@@ -1,1 +1,0 @@
-export { UpdateWhatsAppAccountRequest } from "./UpdateWhatsAppAccountRequest";

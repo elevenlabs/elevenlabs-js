@@ -1,3 +1,3 @@
-export * from "./BodyGenerateCompositionPlanV1MusicPlanPostModelId";
-export * from "./BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan";
-export * from "./CompositionPlanCreateResponse";
+export * from "./BodyGenerateCompositionPlanV1MusicPlanPostModelId.js";
+export * from "./BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan.js";
+export * from "./CreateCompositionPlanResponse.js";

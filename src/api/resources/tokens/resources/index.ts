@@ -1,1 +1,1 @@
-export * as singleUse from "./singleUse";
+export * as singleUse from "./singleUse/index.js";

@@ -1,2 +1,0 @@
-export type { BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost } from "./BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost";
-export type { BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost } from "./BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost";

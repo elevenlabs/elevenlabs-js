@@ -1,6 +1,6 @@
-export * as chapters from "./chapters";
-export * from "./chapters/client/requests";
-export * as pronunciationDictionaries from "./pronunciationDictionaries";
-export * from "./pronunciationDictionaries/client/requests";
-export * as snapshots from "./snapshots";
-export * from "./snapshots/client/requests";
+export * from "./chapters/client/requests/index.js";
+export * as chapters from "./chapters/index.js";
+export * from "./pronunciationDictionaries/client/requests/index.js";
+export * as pronunciationDictionaries from "./pronunciationDictionaries/index.js";
+export * from "./snapshots/client/requests/index.js";
+export * as snapshots from "./snapshots/index.js";

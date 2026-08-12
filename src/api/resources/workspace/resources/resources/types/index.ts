@@ -1,1 +1,1 @@
-export * from "./BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole";
+export * from "./BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIdSharePostRole.js";

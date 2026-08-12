@@ -1,1 +1,1 @@
-export { UpdateMemberRequest } from "./UpdateMemberRequest";
+export { UpdateMemberRequest } from "./UpdateMemberRequest.js";

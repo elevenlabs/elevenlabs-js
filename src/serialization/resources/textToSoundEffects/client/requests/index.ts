@@ -1,1 +1,1 @@
-export { CreateSoundEffectRequest } from "./CreateSoundEffectRequest";
+export { CreateSoundEffectRequest } from "./CreateSoundEffectRequest.js";

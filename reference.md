@@ -53,7 +53,7 @@ await client.history.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.HistoryListRequest` 
+**request:** `ElevenLabs.ListHistoryRequest` 
     
 </dd>
 </dl>
@@ -441,7 +441,7 @@ await client.audioIsolation.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.AudioIsolationListRequest` 
+**request:** `ElevenLabs.ListAudioIsolationRequest` 
     
 </dd>
 </dl>
@@ -1345,72 +1345,6 @@ await client.speechToSpeech.stream("JBFqnCBsd6RMkjVDRZzb", {
 </details>
 
 ## TextToVoice
-<details><summary><code>client.textToVoice.<a href="/src/api/resources/textToVoice/client/Client.ts">createPreviews</a>({ ...params }) -> ElevenLabs.VoiceDesignPreviewResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create a voice from a text prompt.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.textToVoice.createPreviews({
-    outputFormat: "mp3_22050_32",
-    voiceDescription: "A sassy squeaky mouse"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.VoiceDesignRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TextToVoiceClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.textToVoice.<a href="/src/api/resources/textToVoice/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.Voice</code></summary>
 <dl>
 <dd>
@@ -1675,71 +1609,6 @@ await client.user.get();
 </details>
 
 ## Voices
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getAll</a>({ ...params }) -> ElevenLabs.GetVoicesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a list of all available voices for a user. Stops working once the user's workspace exceeds 500 voices.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.getAll({
-    showLegacy: true
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.VoicesGetAllRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `VoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">get</a>(voice_id, { ...params }) -> ElevenLabs.Voice</code></summary>
 <dl>
 <dd>
@@ -1793,7 +1662,7 @@ await client.voices.get("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.VoicesGetRequest` 
+**request:** `ElevenLabs.GetVoicesRequest` 
     
 </dd>
 </dl>
@@ -2013,7 +1882,7 @@ await client.voices.search({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.VoicesSearchRequest` 
+**request:** `ElevenLabs.SearchVoicesRequest` 
     
 </dd>
 </dl>
@@ -2249,7 +2118,7 @@ await client.voices.getShared({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.VoicesGetSharedRequest` 
+**request:** `ElevenLabs.GetSharedVoicesRequest` 
     
 </dd>
 </dl>
@@ -2464,7 +2333,7 @@ await client.dubbing.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.DubbingListRequest` 
+**request:** `ElevenLabs.ListDubbingRequest` 
     
 </dd>
 </dl>
@@ -2994,78 +2863,6 @@ await client.audioNative.updateContentFromUrl({
 </dl>
 </details>
 
-## Usage
-<details><summary><code>client.usage.<a href="/src/api/resources/usage/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.UsageCharactersResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-(Deprecated) This endpoint is deprecated. Use /v1/workspace/analytics/query/usage-by-product-over-time instead, which exposes the bucket size as `interval_seconds` (an integer in seconds) rather than `aggregation_interval`. Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.usage.get({
-    startUnix: 1,
-    endUnix: 1,
-    includeWorkspaceMetrics: true,
-    breakdownType: "none",
-    aggregationInterval: "hour",
-    aggregationBucketSize: 1,
-    metric: "credits"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.UsageGetRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `UsageClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## PronunciationDictionaries
 <details><summary><code>client.pronunciationDictionaries.<a href="/src/api/resources/pronunciationDictionaries/client/Client.ts">createFromFile</a>({ ...params }) -> ElevenLabs.AddPronunciationDictionaryResponseModel</code></summary>
 <dl>
@@ -3458,7 +3255,7 @@ await client.pronunciationDictionaries.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.PronunciationDictionariesListRequest` 
+**request:** `ElevenLabs.ListPronunciationDictionariesRequest` 
     
 </dd>
 </dl>
@@ -3709,7 +3506,7 @@ await client.webhooks.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.WebhooksListRequest` 
+**request:** `ElevenLabs.ListWebhooksRequest` 
     
 </dd>
 </dl>
@@ -4259,7 +4056,7 @@ await client.music.upload({
 </details>
 
 ## SpeechToText
-<details><summary><code>client.speechToText.<a href="/src/api/resources/speechToText/client/Client.ts">convert</a>({ ...params }) -> ElevenLabs.SpeechToTextConvertResponse</code></summary>
+<details><summary><code>client.speechToText.<a href="/src/api/resources/speechToText/client/Client.ts">convert</a>({ ...params }) -> ElevenLabs.ConvertSpeechToTextResponse</code></summary>
 <dl>
 <dd>
 
@@ -4393,8 +4190,8 @@ await client.forcedAlignment.create({
 </dl>
 </details>
 
-## ConversationalAi
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">addToKnowledgeBase</a>({ ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
+## Agents
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4406,7 +4203,7 @@ await client.forcedAlignment.create({
 <dl>
 <dd>
 
-Upload a file or webpage URL to create a knowledge base document. <br> <Note> After creating the document, update the agent's knowledge base by calling [Update agent](/docs/api-reference/agents/update). </Note>
+Create an agent from a config object
 </dd>
 </dl>
 </dd>
@@ -4421,8 +4218,9 @@ Upload a file or webpage URL to create a knowledge base document. <br> <Note> Af
 <dd>
 
 ```typescript
-await client.conversationalAi.addToKnowledgeBase({
-    agentId: "agent_id"
+await client.agents.create({
+    enableVersioning: true,
+    conversationConfig: {}
 });
 
 ```
@@ -4439,7 +4237,7 @@ await client.conversationalAi.addToKnowledgeBase({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost` 
+**request:** `ElevenLabs.BodyCreateAgentV1ConvaiAgentsCreatePost` 
     
 </dd>
 </dl>
@@ -4447,7 +4245,7 @@ await client.conversationalAi.addToKnowledgeBase({
 <dl>
 <dd>
 
-**requestOptions:** `ConversationalAiClient.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4459,7 +4257,436 @@ await client.conversationalAi.addToKnowledgeBase({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">ragIndexOverview</a>() -> ElevenLabs.RagIndexOverviewResponseModel</code></summary>
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">get</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve config for an agent
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    versionId: "version_id",
+    branchId: "branch_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.GetAgentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">delete</a>(agent_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an agent
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">update</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Patches an Agent settings
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    enableVersioningIfNotEnabled: true,
+    branchId: "branch_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.UpdateAgentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetAgentsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of your agents and their metadata.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.list({
+    pageSize: 1,
+    search: "search",
+    archived: true,
+    showOnlyOwnedAgents: true,
+    createdByUserId: "created_by_user_id",
+    sortDirection: "asc",
+    sortBy: "name",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ListAgentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">duplicate</a>(agent_id, { ...params }) -> ElevenLabs.CreateAgentResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new agent by duplicating an existing one
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyDuplicateAgentV1ConvaiAgentsAgentIdDuplicatePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">runTests</a>(agent_id, { ...params }) -> ElevenLabs.GetTestSuiteInvocationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Run selected tests on the agent with provided configuration. If the agent configuration is provided, it will be used to override default agent configuration.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.runTests("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    tests: [{
+            testId: "test_id"
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.RunAgentTestsRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">ragIndexOverview</a>() -> ElevenLabs.RagIndexOverviewResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4486,7 +4713,7 @@ Provides total size and other information of RAG indexes used by knowledgebase d
 <dd>
 
 ```typescript
-await client.conversationalAi.ragIndexOverview();
+await client.agents.ragIndexOverview();
 
 ```
 </dd>
@@ -4502,7 +4729,7 @@ await client.conversationalAi.ragIndexOverview();
 <dl>
 <dd>
 
-**requestOptions:** `ConversationalAiClient.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4514,7 +4741,7 @@ await client.conversationalAi.ragIndexOverview();
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">getDocumentRagIndexes</a>(documentation_id) -> ElevenLabs.RagDocumentIndexesResponseModel</code></summary>
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">getDocumentRagIndexes</a>(documentation_id) -> ElevenLabs.RagDocumentIndexesResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4541,7 +4768,7 @@ Provides information about all RAG indexes of the specified knowledgebase docume
 <dd>
 
 ```typescript
-await client.conversationalAi.getDocumentRagIndexes("21m00Tcm4TlvDq8ikWAM");
+await client.agents.getDocumentRagIndexes("21m00Tcm4TlvDq8ikWAM");
 
 ```
 </dd>
@@ -4565,7 +4792,7 @@ await client.conversationalAi.getDocumentRagIndexes("21m00Tcm4TlvDq8ikWAM");
 <dl>
 <dd>
 
-**requestOptions:** `ConversationalAiClient.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4577,7 +4804,7 @@ await client.conversationalAi.getDocumentRagIndexes("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.<a href="/src/api/resources/conversationalAi/client/Client.ts">deleteDocumentRagIndex</a>(documentation_id, rag_index_id) -> ElevenLabs.RagDocumentIndexResponseModel</code></summary>
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">deleteDocumentRagIndex</a>(documentation_id, rag_index_id) -> ElevenLabs.RagDocumentIndexResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -4604,7 +4831,7 @@ Delete RAG index for the knowledgebase document.
 <dd>
 
 ```typescript
-await client.conversationalAi.deleteDocumentRagIndex("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
+await client.agents.deleteDocumentRagIndex("21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM");
 
 ```
 </dd>
@@ -4636,7 +4863,7 @@ await client.conversationalAi.deleteDocumentRagIndex("21m00Tcm4TlvDq8ikWAM", "21
 <dl>
 <dd>
 
-**requestOptions:** `ConversationalAiClient.RequestOptions` 
+**requestOptions:** `AgentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4698,7 +4925,7 @@ await client.speechEngine.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.SpeechEngineListRequest` 
+**request:** `ElevenLabs.ListSpeechEngineRequest` 
     
 </dd>
 </dl>
@@ -5032,7 +5259,7 @@ await client.environmentVariables.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.EnvironmentVariablesListRequest` 
+**request:** `ElevenLabs.ListEnvironmentVariablesRequest` 
     
 </dd>
 </dl>
@@ -5101,7 +5328,7 @@ await client.environmentVariables.create({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.EnvironmentVariablesCreateRequestBody` 
+**request:** `ElevenLabs.CreateEnvironmentVariablesRequestBody` 
     
 </dd>
 </dl>
@@ -5257,8 +5484,8 @@ await client.environmentVariables.update("env_var_id", {
 </dl>
 </details>
 
-## ConversationalAi Conversations
-<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">getSignedUrl</a>({ ...params }) -> ElevenLabs.ConversationSignedUrlResponseModel</code></summary>
+## Agents Conversations
+<details><summary><code>client.agents.conversations.<a href="/src/api/resources/agents/resources/conversations/client/Client.ts">getSignedUrl</a>({ ...params }) -> ElevenLabs.ConversationSignedUrlResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5285,7 +5512,7 @@ Get a signed url to start a conversation with an agent with an agent that requir
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.getSignedUrl({
+await client.agents.conversations.getSignedUrl({
     agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     includeConversationId: true,
     branchId: "branch_id",
@@ -5306,7 +5533,7 @@ await client.conversationalAi.conversations.getSignedUrl({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.ConversationsGetSignedUrlRequest` 
+**request:** `ElevenLabs.agents.GetSignedUrlConversationsRequest` 
     
 </dd>
 </dl>
@@ -5326,7 +5553,7 @@ await client.conversationalAi.conversations.getSignedUrl({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">getWebrtcToken</a>({ ...params }) -> ElevenLabs.TokenResponseModel</code></summary>
+<details><summary><code>client.agents.conversations.<a href="/src/api/resources/agents/resources/conversations/client/Client.ts">getWebrtcToken</a>({ ...params }) -> ElevenLabs.TokenResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5353,7 +5580,7 @@ Get a WebRTC session token for real-time communication.
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.getWebrtcToken({
+await client.agents.conversations.getWebrtcToken({
     agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     participantName: "participant_name",
     branchId: "branch_id",
@@ -5374,7 +5601,7 @@ await client.conversationalAi.conversations.getWebrtcToken({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.ConversationsGetWebrtcTokenRequest` 
+**request:** `ElevenLabs.agents.GetWebrtcTokenConversationsRequest` 
     
 </dd>
 </dl>
@@ -5394,7 +5621,7 @@ await client.conversationalAi.conversations.getWebrtcToken({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetConversationsPageResponseModel</code></summary>
+<details><summary><code>client.agents.conversations.<a href="/src/api/resources/agents/resources/conversations/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetConversationsPageResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5421,7 +5648,7 @@ Get all conversations of agents that user owns. With option to restrict to a spe
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.list({
+await client.agents.conversations.list({
     cursor: "cursor",
     agentId: "agent_id",
     visitedAgentIds: ["visited_agent_ids"],
@@ -5475,7 +5702,7 @@ await client.conversationalAi.conversations.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.ConversationsListRequest` 
+**request:** `ElevenLabs.agents.ListConversationsRequest` 
     
 </dd>
 </dl>
@@ -5495,7 +5722,7 @@ await client.conversationalAi.conversations.list({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">resolve</a>({ ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
+<details><summary><code>client.agents.conversations.<a href="/src/api/resources/agents/resources/conversations/client/Client.ts">resolve</a>({ ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5522,7 +5749,7 @@ Resolve a conversation URL (a Slack message URL or a Zendesk ticket URL) to the 
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.resolve({
+await client.agents.conversations.resolve({
     agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     reference: "https://your-domain.zendesk.com/agent/tickets/12345"
 });
@@ -5541,7 +5768,7 @@ await client.conversationalAi.conversations.resolve({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.ConversationsResolveRequest` 
+**request:** `ElevenLabs.agents.ResolveConversationsRequest` 
     
 </dd>
 </dl>
@@ -5561,7 +5788,7 @@ await client.conversationalAi.conversations.resolve({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">get</a>(conversation_id, { ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
+<details><summary><code>client.agents.conversations.<a href="/src/api/resources/agents/resources/conversations/client/Client.ts">get</a>(conversation_id, { ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -5588,7 +5815,7 @@ Get the details of a particular conversation
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.get("21m00Tcm4TlvDq8ikWAM", {
+await client.agents.conversations.get("21m00Tcm4TlvDq8ikWAM", {
     format: "json"
 });
 
@@ -5614,7 +5841,7 @@ await client.conversationalAi.conversations.get("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.ConversationsGetRequest` 
+**request:** `ElevenLabs.agents.GetConversationsRequest` 
     
 </dd>
 </dl>
@@ -5634,7 +5861,7 @@ await client.conversationalAi.conversations.get("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">delete</a>(conversation_id) -> unknown</code></summary>
+<details><summary><code>client.agents.conversations.<a href="/src/api/resources/agents/resources/conversations/client/Client.ts">delete</a>(conversation_id) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -5661,7 +5888,7 @@ Delete a particular conversation
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.delete("21m00Tcm4TlvDq8ikWAM");
+await client.agents.conversations.delete("21m00Tcm4TlvDq8ikWAM");
 
 ```
 </dd>
@@ -5697,7 +5924,7 @@ await client.conversationalAi.conversations.delete("21m00Tcm4TlvDq8ikWAM");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">getSipMessages</a>(conversation_id, { ...params }) -> ElevenLabs.GetSipLogMessagesResponse</code></summary>
+<details><summary><code>client.agents.conversations.<a href="/src/api/resources/agents/resources/conversations/client/Client.ts">getSipMessages</a>(conversation_id, { ...params }) -> ElevenLabs.GetSipLogMessagesResponse</code></summary>
 <dl>
 <dd>
 
@@ -5724,7 +5951,7 @@ Get SIP messages associated with a conversation's phone call
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.getSipMessages("21m00Tcm4TlvDq8ikWAM", {
+await client.agents.conversations.getSipMessages("21m00Tcm4TlvDq8ikWAM", {
     pageSize: 1,
     cursor: "cursor"
 });
@@ -5751,7 +5978,7 @@ await client.conversationalAi.conversations.getSipMessages("21m00Tcm4TlvDq8ikWAM
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.ConversationsGetSipMessagesRequest` 
+**request:** `ElevenLabs.agents.GetSipMessagesConversationsRequest` 
     
 </dd>
 </dl>
@@ -5771,8 +5998,8 @@ await client.conversationalAi.conversations.getSipMessages("21m00Tcm4TlvDq8ikWAM
 </dl>
 </details>
 
-## ConversationalAi Twilio
-<details><summary><code>client.conversationalAi.twilio.<a href="/src/api/resources/conversationalAi/resources/twilio/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.TwilioOutboundCallResponse</code></summary>
+## Agents Twilio
+<details><summary><code>client.agents.twilio.<a href="/src/api/resources/agents/resources/twilio/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.TwilioOutboundCallResponse</code></summary>
 <dl>
 <dd>
 
@@ -5799,7 +6026,7 @@ Handle an outbound call via Twilio
 <dd>
 
 ```typescript
-await client.conversationalAi.twilio.outboundCall({
+await client.agents.twilio.outboundCall({
     agentId: "agent_id",
     agentPhoneNumberId: "agent_phone_number_id",
     toNumber: "to_number"
@@ -5819,7 +6046,7 @@ await client.conversationalAi.twilio.outboundCall({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost` 
+**request:** `ElevenLabs.agents.BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost` 
     
 </dd>
 </dl>
@@ -5839,7 +6066,7 @@ await client.conversationalAi.twilio.outboundCall({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.twilio.<a href="/src/api/resources/conversationalAi/resources/twilio/client/Client.ts">registerCall</a>({ ...params }) -> string</code></summary>
+<details><summary><code>client.agents.twilio.<a href="/src/api/resources/agents/resources/twilio/client/Client.ts">registerCall</a>({ ...params }) -> string</code></summary>
 <dl>
 <dd>
 
@@ -5866,7 +6093,7 @@ Register a Twilio call and return TwiML to connect the call
 <dd>
 
 ```typescript
-await client.conversationalAi.twilio.registerCall({
+await client.agents.twilio.registerCall({
     agentId: "agent_id",
     fromNumber: "from_number",
     toNumber: "to_number"
@@ -5886,7 +6113,7 @@ await client.conversationalAi.twilio.registerCall({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPost` 
+**request:** `ElevenLabs.agents.BodyRegisterATwilioCallAndReturnTwiMlV1ConvaiTwilioRegisterCallPost` 
     
 </dd>
 </dl>
@@ -5906,8 +6133,8 @@ await client.conversationalAi.twilio.registerCall({
 </dl>
 </details>
 
-## ConversationalAi Exotel
-<details><summary><code>client.conversationalAi.exotel.<a href="/src/api/resources/conversationalAi/resources/exotel/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.ExotelOutboundCallResponse</code></summary>
+## Agents Exotel
+<details><summary><code>client.agents.exotel.<a href="/src/api/resources/agents/resources/exotel/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.ExotelOutboundCallResponse</code></summary>
 <dl>
 <dd>
 
@@ -5934,7 +6161,7 @@ Handle an outbound call via Exotel Connect API
 <dd>
 
 ```typescript
-await client.conversationalAi.exotel.outboundCall({
+await client.agents.exotel.outboundCall({
     agentId: "agent_id",
     agentPhoneNumberId: "agent_phone_number_id",
     toNumber: "to_number"
@@ -5954,7 +6181,7 @@ await client.conversationalAi.exotel.outboundCall({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost` 
+**request:** `ElevenLabs.agents.BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost` 
     
 </dd>
 </dl>
@@ -5974,8 +6201,8 @@ await client.conversationalAi.exotel.outboundCall({
 </dl>
 </details>
 
-## ConversationalAi Whatsapp
-<details><summary><code>client.conversationalAi.whatsapp.<a href="/src/api/resources/conversationalAi/resources/whatsapp/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.WhatsAppOutboundCallResponse</code></summary>
+## Agents Whatsapp
+<details><summary><code>client.agents.whatsapp.<a href="/src/api/resources/agents/resources/whatsapp/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.WhatsAppOutboundCallResponse</code></summary>
 <dl>
 <dd>
 
@@ -6002,7 +6229,7 @@ Make an outbound call via WhatsApp
 <dd>
 
 ```typescript
-await client.conversationalAi.whatsapp.outboundCall({
+await client.agents.whatsapp.outboundCall({
     whatsappPhoneNumberId: "whatsapp_phone_number_id",
     whatsappUserId: "whatsapp_user_id",
     whatsappCallPermissionRequestTemplateName: "whatsapp_call_permission_request_template_name",
@@ -6024,7 +6251,7 @@ await client.conversationalAi.whatsapp.outboundCall({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost` 
+**request:** `ElevenLabs.agents.BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost` 
     
 </dd>
 </dl>
@@ -6044,7 +6271,7 @@ await client.conversationalAi.whatsapp.outboundCall({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.whatsapp.<a href="/src/api/resources/conversationalAi/resources/whatsapp/client/Client.ts">outboundMessage</a>({ ...params }) -> ElevenLabs.WhatsAppOutboundMessageResponse</code></summary>
+<details><summary><code>client.agents.whatsapp.<a href="/src/api/resources/agents/resources/whatsapp/client/Client.ts">outboundMessage</a>({ ...params }) -> ElevenLabs.WhatsAppOutboundMessageResponse</code></summary>
 <dl>
 <dd>
 
@@ -6071,7 +6298,7 @@ Send an outbound message via WhatsApp
 <dd>
 
 ```typescript
-await client.conversationalAi.whatsapp.outboundMessage({
+await client.agents.whatsapp.outboundMessage({
     whatsappPhoneNumberId: "whatsapp_phone_number_id",
     whatsappUserId: "whatsapp_user_id",
     templateName: "template_name",
@@ -6099,7 +6326,7 @@ await client.conversationalAi.whatsapp.outboundMessage({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost` 
+**request:** `ElevenLabs.agents.BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost` 
     
 </dd>
 </dl>
@@ -6119,4029 +6346,8 @@ await client.conversationalAi.whatsapp.outboundMessage({
 </dl>
 </details>
 
-## ConversationalAi Agents
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create an agent from a config object
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.create({
-    enableVersioning: true,
-    conversationConfig: {}
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.BodyCreateAgentV1ConvaiAgentsCreatePost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">get</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve config for an agent
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-    versionId: "version_id",
-    branchId: "branch_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `string` — The id of an agent. This is returned on agent creation.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.AgentsGetRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">delete</a>(agent_id) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete an agent
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `string` — The id of an agent. This is returned on agent creation.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">update</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Patches an Agent settings
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-    enableVersioningIfNotEnabled: true,
-    branchId: "branch_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `string` — The id of an agent. This is returned on agent creation.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.UpdateAgentRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetAgentsPageResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a list of your agents and their metadata.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.list({
-    pageSize: 1,
-    search: "search",
-    archived: true,
-    showOnlyOwnedAgents: true,
-    createdByUserId: "created_by_user_id",
-    sortDirection: "asc",
-    sortBy: "name",
-    cursor: "cursor"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.AgentsListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">duplicate</a>(agent_id, { ...params }) -> ElevenLabs.CreateAgentResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create a new agent by duplicating an existing one
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `string` — The id of an agent. This is returned on agent creation.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.BodyDuplicateAgentV1ConvaiAgentsAgentIdDuplicatePost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">simulateConversation</a>(agent_id, { ...params }) -> ElevenLabs.AgentSimulatedChatTestResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.simulateConversation("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-    simulationSpecification: {
-        simulatedUserConfig: {
-            firstMessage: "Hello, how can I help you today?",
-            language: "en",
-            disableFirstMessageInterruptions: false
-        }
-    }
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `string` — The id of an agent. This is returned on agent creation.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.BodySimulatesAConversationV1ConvaiAgentsAgentIdSimulateConversationPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">simulateConversationStream</a>(agent_id, { ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.simulateConversationStream("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-    simulationSpecification: {
-        simulatedUserConfig: {
-            firstMessage: "Hello, how can I help you today?",
-            language: "en",
-            disableFirstMessageInterruptions: false
-        }
-    }
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `string` — The id of an agent. This is returned on agent creation.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">runTests</a>(agent_id, { ...params }) -> ElevenLabs.GetTestSuiteInvocationResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Run selected tests on the agent with provided configuration. If the agent configuration is provided, it will be used to override default agent configuration.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.runTests("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-    tests: [{
-            testId: "test_id"
-        }]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `string` — The id of an agent. This is returned on agent creation.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.RunAgentTestsRequestModel` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi Tests
-<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentTestResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Creates a new agent response test.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tests.create({
-    type: "llm",
-    name: "name"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.TestsCreateRequestBody` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TestsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">move</a>({ ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Moves multiple tests or folders from one folder to another.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tests.move({
-    entityIds: ["entity_ids"]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TestsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">get</a>(test_id) -> ElevenLabs.TestsGetResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Gets an agent response test by ID.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tests.get("TeaqRRdTcIfIu2i7BYfT");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**test_id:** `string` — The id of a chat response test. This is returned on test creation.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TestsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">update</a>(test_id, { ...params }) -> ElevenLabs.TestsUpdateResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Updates an agent response test by ID.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tests.update("TeaqRRdTcIfIu2i7BYfT", {
-    type: "llm",
-    name: "name"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**test_id:** `string` — The id of a chat response test. This is returned on test creation.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.TestsUpdateRequestBody` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TestsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">delete</a>(test_id) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Deletes an agent response test by ID.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tests.delete("TeaqRRdTcIfIu2i7BYfT");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**test_id:** `string` — The id of a chat response test. This is returned on test creation.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TestsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">summaries</a>({ ...params }) -> ElevenLabs.GetTestsSummariesByIdsResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Gets agent response test summaries for the requested test IDs.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tests.summaries({
-    testIds: ["test_id_1", "test_id_2"]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.ListTestsByIdsRequestModel` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TestsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tests.<a href="/src/api/resources/conversationalAi/resources/tests/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetTestsPageResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists all agent response tests with pagination support and optional search filtering.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tests.list({
-    cursor: "cursor",
-    pageSize: 1,
-    search: "search",
-    parentFolderId: "parent_folder_id",
-    types: ["llm"],
-    includeFolders: true,
-    sortMode: "default",
-    sharingMode: "all"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.TestsListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TestsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi Users
-<details><summary><code>client.conversationalAi.users.<a href="/src/api/resources/conversationalAi/resources/users/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetConversationUsersPageResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get distinct users from conversations with pagination.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.users.list({
-    agentId: "agent_id",
-    branchId: "branch_id",
-    callStartBeforeUnix: 1,
-    callStartAfterUnix: 1,
-    search: "search",
-    pageSize: 1,
-    sortBy: "last_contact_unix_secs",
-    sortDirection: "asc",
-    cursor: "cursor"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.UsersListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `UsersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi PhoneNumbers
-<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.PhoneNumbersListResponseItem[]</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve all Phone Numbers
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.phoneNumbers.list({
-    provider: "twilio",
-    agentId: "agent_id",
-    branchId: "branch_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.PhoneNumbersListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PhoneNumbersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreatePhoneNumberResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Import Phone Number from provider configuration (Twilio, Exotel, or SIP trunk)
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.phoneNumbers.create({
-    provider: "twilio",
-    phoneNumber: "phone_number",
-    label: "label",
-    sid: "sid",
-    token: "token"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.PhoneNumbersCreateRequestBody` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PhoneNumbersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">get</a>(phone_number_id) -> ElevenLabs.PhoneNumbersGetResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve Phone Number details by ID
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.phoneNumbers.get("TeaqRRdTcIfIu2i7BYfT");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PhoneNumbersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">delete</a>(phone_number_id) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete Phone Number by ID
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.phoneNumbers.delete("TeaqRRdTcIfIu2i7BYfT");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PhoneNumbersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">update</a>(phone_number_id, { ...params }) -> ElevenLabs.PhoneNumbersUpdateResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update assigned agent of a phone number
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.phoneNumbers.update("TeaqRRdTcIfIu2i7BYfT");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.UpdatePhoneNumberRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PhoneNumbersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">getSipMessages</a>(phone_number_id, { ...params }) -> ElevenLabs.GetSipLogMessagesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get SIP messages for a phone number
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.phoneNumbers.getSipMessages("TeaqRRdTcIfIu2i7BYfT", {
-    pageSize: 1,
-    cursor: "cursor"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.PhoneNumbersGetSipMessagesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PhoneNumbersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi LlmUsage
-<details><summary><code>client.conversationalAi.llmUsage.<a href="/src/api/resources/conversationalAi/resources/llmUsage/client/Client.ts">calculate</a>({ ...params }) -> ElevenLabs.LlmUsageCalculatorResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a list of LLM models and the expected cost for using them based on the provided values.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.llmUsage.calculate({
-    promptLength: 1,
-    numberOfPages: 1,
-    ragEnabled: true
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.LlmUsageCalculatorPublicRequestModel` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `LlmUsageClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi Llm
-<details><summary><code>client.conversationalAi.llm.<a href="/src/api/resources/conversationalAi/resources/llm/client/Client.ts">list</a>() -> ElevenLabs.LlmListResponseModelInput</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a list of available LLM models that can be used with agents, including their capabilities and any deprecation status. The response is filtered based on the data residency of the deployment and any compliance requirements (e.g. HIPAA) of the workspace subscription.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.llm.list();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `LlmClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi KnowledgeBase
-<details><summary><code>client.conversationalAi.knowledgeBase.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetKnowledgeBaseListResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get a list of available knowledge base documents
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.knowledgeBase.list({
-    pageSize: 1,
-    search: "search",
-    showOnlyOwnedDocuments: true,
-    createdByUserId: "created_by_user_id",
-    types: ["file"],
-    parentFolderId: "parent_folder_id",
-    ancestorFolderId: "ancestor_folder_id",
-    foldersFirst: true,
-    sortDirection: "asc",
-    sortBy: "name",
-    cursor: "cursor"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.KnowledgeBaseListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `KnowledgeBaseClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.knowledgeBase.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/client/Client.ts">getOrCreateRagIndexes</a>({ ...params }) -> Record&lt;string, ElevenLabs.KnowledgeBaseGetOrCreateRagIndexesResponseValue&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieves and/or creates RAG indexes for multiple knowledge base documents in a single request. Maximum 100 items per request.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.knowledgeBase.getOrCreateRagIndexes({
-    items: [{
-            documentId: "document_id",
-            createIfMissing: true,
-            model: "e5_mistral_7b_instruct"
-        }]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.BodyComputeRagIndexesInBatchV1ConvaiKnowledgeBaseRagIndexPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `KnowledgeBaseClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.knowledgeBase.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.KnowledgeBaseContentSearchResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Fuzzy text search over knowledge base document content
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.knowledgeBase.search({
-    query: "query",
-    pageSize: 1,
-    types: ["file"],
-    cursor: "cursor"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.KnowledgeBaseSearchRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `KnowledgeBaseClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi Tools
-<details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ToolsResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get all available tools in the workspace.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tools.list({
-    search: "search",
-    pageSize: 1,
-    showOnlyOwnedDocuments: true,
-    createdByUserId: "created_by_user_id",
-    types: ["webhook"],
-    sortDirection: "asc",
-    sortBy: "name",
-    cursor: "cursor"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.ToolsListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ToolsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ToolResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Add a new tool to the available tools in the workspace.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tools.create({
-    toolConfig: {
-        type: "client",
-        name: "name",
-        description: "description",
-        expectsResponse: false
-    }
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.ToolRequestModel` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ToolsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">get</a>(tool_id, { ...params }) -> ElevenLabs.ToolResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get tool that is available in the workspace.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tools.get("tool_id", {
-    environment: "environment"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**tool_id:** `string` — ID of the requested tool.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.ToolsGetRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ToolsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">delete</a>(tool_id, { ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete tool from the workspace.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tools.delete("tool_id", {
-    force: true
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**tool_id:** `string` — ID of the requested tool.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.ToolsDeleteRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ToolsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">update</a>(tool_id, { ...params }) -> ElevenLabs.ToolResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update tool that is available in the workspace.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tools.update("tool_id", {
-    toolConfig: {
-        type: "client",
-        name: "name",
-        description: "description",
-        expectsResponse: false
-    }
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**tool_id:** `string` — ID of the requested tool.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.ToolRequestModel` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ToolsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.tools.<a href="/src/api/resources/conversationalAi/resources/tools/client/Client.ts">getDependentAgents</a>(tool_id, { ...params }) -> ElevenLabs.GetToolDependentAgentsResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get a list of agents depending on this tool
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.tools.getDependentAgents("tool_id", {
-    cursor: "cursor",
-    pageSize: 1
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**tool_id:** `string` — ID of the requested tool.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.ToolsGetDependentAgentsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ToolsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi Settings
-<details><summary><code>client.conversationalAi.settings.<a href="/src/api/resources/conversationalAi/resources/settings/client/Client.ts">get</a>() -> ElevenLabs.GetConvAiSettingsResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve Convai settings for the workspace
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.settings.get();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `SettingsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.settings.<a href="/src/api/resources/conversationalAi/resources/settings/client/Client.ts">update</a>({ ...params }) -> ElevenLabs.GetConvAiSettingsResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update Convai settings for the workspace
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.settings.update();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.PatchConvAiSettingsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SettingsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi Secrets
-<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetWorkspaceSecretsResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get all workspace secrets for the user
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.secrets.list({
-    pageSize: 1,
-    dependencyLimit: 1,
-    search: "search",
-    cursor: "cursor"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.SecretsListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SecretsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.PostWorkspaceSecretResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create a new secret for the workspace
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.secrets.create({
-    name: "name",
-    value: "value"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.PostWorkspaceSecretRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SecretsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">get</a>(secret_id) -> ElevenLabs.ConvAiWorkspaceStoredSecretConfig</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get a workspace secret by ID
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.secrets.get("secret_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**secret_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SecretsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">delete</a>(secret_id) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete a workspace secret if it's not in use
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.secrets.delete("secret_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**secret_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SecretsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">update</a>(secret_id, { ...params }) -> ElevenLabs.PostWorkspaceSecretResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update an existing secret for the workspace
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.secrets.update("secret_id", {
-    name: "name",
-    value: "value"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**secret_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.PatchWorkspaceSecretRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SecretsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.secrets.<a href="/src/api/resources/conversationalAi/resources/secrets/client/Client.ts">getDependencies</a>(secret_id, resource_type, { ...params }) -> ElevenLabs.GetSecretDependenciesResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get paginated list of resources that depend on a specific secret, filtered by resource type.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.secrets.getDependencies("secret_id", "tools", {
-    pageSize: 1,
-    cursor: "cursor"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**secret_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**resource_type:** `ElevenLabs.SecretDependencyResourceType` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.SecretsGetDependenciesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SecretsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi BatchCalls
-<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.BatchCallResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Submit a batch call request to schedule calls for multiple recipients.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.batchCalls.create({
-    callName: "call_name",
-    agentId: "agent_id",
-    recipients: [{}]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BatchCallsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.WorkspaceBatchCallsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get all batch calls for the current workspace.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.batchCalls.list({
-    limit: 1,
-    lastDoc: "last_doc",
-    agentId: "agent_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.BatchCallsListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BatchCallsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">get</a>(batch_id) -> ElevenLabs.BatchCallDetailedResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get detailed information about a batch call including all recipients.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.batchCalls.get("batch_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**batch_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BatchCallsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">delete</a>(batch_id) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Permanently delete a batch call and all recipient records. Conversations remain in history.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.batchCalls.delete("batch_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**batch_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BatchCallsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">cancel</a>(batch_id) -> ElevenLabs.BatchCallResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Cancel a running batch call and set all recipients to cancelled status.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.batchCalls.cancel("batch_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**batch_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BatchCallsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">retry</a>(batch_id) -> ElevenLabs.BatchCallResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retry a batch call, calling failed and no-response recipients again.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.batchCalls.retry("batch_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**batch_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BatchCallsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">export</a>(batch_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Download all recipients and conversation results for a terminal batch call as CSV.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.batchCalls.export("batch_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**batch_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `BatchCallsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi SipTrunk
-<details><summary><code>client.conversationalAi.sipTrunk.<a href="/src/api/resources/conversationalAi/resources/sipTrunk/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.SipTrunkOutboundCallResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Handle an outbound call via SIP trunk
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.sipTrunk.outboundCall({
-    agentId: "agent_id",
-    agentPhoneNumberId: "agent_phone_number_id",
-    toNumber: "to_number"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SipTrunkClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi McpServers
-<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">list</a>() -> ElevenLabs.McpServersResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve all MCP server configurations available in the workspace.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.mcpServers.list();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `McpServersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create a new MCP server configuration in the workspace.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.mcpServers.create({
-    config: {
-        url: "url",
-        name: "name"
-    }
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.McpServerRequestModel` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `McpServersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">get</a>(mcp_server_id) -> ElevenLabs.McpServerResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve a specific MCP server configuration from the workspace.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.mcpServers.get("mcp_server_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**mcp_server_id:** `string` — ID of the MCP Server.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `McpServersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">delete</a>(mcp_server_id) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete a specific MCP server configuration from the workspace.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.mcpServers.delete("mcp_server_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**mcp_server_id:** `string` — ID of the MCP Server.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `McpServersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.mcpServers.<a href="/src/api/resources/conversationalAi/resources/mcpServers/client/Client.ts">update</a>(mcp_server_id, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update the configuration settings for an MCP server.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.mcpServers.update("mcp_server_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**mcp_server_id:** `string` — ID of the MCP Server.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.McpServerConfigUpdateRequestModel` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `McpServersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi WhatsappAccounts
-<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">get</a>(phone_number_id) -> ElevenLabs.GetWhatsAppAccountResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get a WhatsApp account
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.whatsappAccounts.get("phone_number_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**phone_number_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">delete</a>(phone_number_id) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete a WhatsApp account
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.whatsappAccounts.delete("phone_number_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**phone_number_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">update</a>(phone_number_id, { ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update a WhatsApp account
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.whatsappAccounts.update("phone_number_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**phone_number_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.UpdateWhatsAppAccountRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.whatsappAccounts.<a href="/src/api/resources/conversationalAi/resources/whatsappAccounts/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ListWhatsAppAccountsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-List all WhatsApp accounts
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.whatsappAccounts.list({
-    agentId: "agent_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.WhatsappAccountsListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi Agents Summaries
-<details><summary><code>client.conversationalAi.agents.summaries.<a href="/src/api/resources/conversationalAi/resources/agents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record&lt;string, ElevenLabs.SummariesGetResponseValue&gt;</code></summary>
+## Agents Summaries
+<details><summary><code>client.agents.summaries.<a href="/src/api/resources/agents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record&lt;string, ElevenLabs.GetSummariesResponseValue&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10168,7 +6374,7 @@ Returns summaries for the specified agents.
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.summaries.get({
+await client.agents.summaries.get({
     agentIds: ["agent_ids"]
 });
 
@@ -10186,7 +6392,7 @@ await client.conversationalAi.agents.summaries.get({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.SummariesGetRequest` 
+**request:** `ElevenLabs.agents.GetSummariesRequest` 
     
 </dd>
 </dl>
@@ -10206,8 +6412,8 @@ await client.conversationalAi.agents.summaries.get({
 </dl>
 </details>
 
-## ConversationalAi Agents Widget
-<details><summary><code>client.conversationalAi.agents.widget.<a href="/src/api/resources/conversationalAi/resources/agents/resources/widget/client/Client.ts">get</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentEmbedResponseModel</code></summary>
+## Agents Widget
+<details><summary><code>client.agents.widget.<a href="/src/api/resources/agents/resources/widget/client/Client.ts">get</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentEmbedResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -10234,7 +6440,7 @@ Retrieve the widget configuration for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.widget.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+await client.agents.widget.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     conversationSignature: "conversation_signature"
 });
 
@@ -10260,7 +6466,7 @@ await client.conversationalAi.agents.widget.get("agent_3701k3ttaq12ewp8b7qv5rfys
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.WidgetGetRequest` 
+**request:** `ElevenLabs.agents.GetWidgetRequest` 
     
 </dd>
 </dl>
@@ -10280,8 +6486,8 @@ await client.conversationalAi.agents.widget.get("agent_3701k3ttaq12ewp8b7qv5rfys
 </dl>
 </details>
 
-## ConversationalAi Agents Link
-<details><summary><code>client.conversationalAi.agents.link.<a href="/src/api/resources/conversationalAi/resources/agents/resources/link/client/Client.ts">get</a>(agent_id) -> ElevenLabs.GetAgentLinkResponseModel</code></summary>
+## Agents Link
+<details><summary><code>client.agents.link.<a href="/src/api/resources/agents/resources/link/client/Client.ts">get</a>(agent_id) -> ElevenLabs.GetAgentLinkResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -10308,7 +6514,7 @@ Get the current link used to share the agent with others
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.link.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+await client.agents.link.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
 
 ```
 </dd>
@@ -10344,8 +6550,8 @@ await client.conversationalAi.agents.link.get("agent_3701k3ttaq12ewp8b7qv5rfyszk
 </dl>
 </details>
 
-## ConversationalAi Agents KnowledgeBase
-<details><summary><code>client.conversationalAi.agents.knowledgeBase.<a href="/src/api/resources/conversationalAi/resources/agents/resources/knowledgeBase/client/Client.ts">size</a>(agent_id) -> ElevenLabs.GetAgentKnowledgebaseSizeResponseModel</code></summary>
+## Agents KnowledgeBase
+<details><summary><code>client.agents.knowledgeBase.<a href="/src/api/resources/agents/resources/knowledgeBase/client/Client.ts">size</a>(agent_id) -> ElevenLabs.GetAgentKnowledgebaseSizeResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -10372,7 +6578,7 @@ Returns the number of pages in the agent's knowledge base.
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.knowledgeBase.size("agent_id");
+await client.agents.knowledgeBase.size("agent_id");
 
 ```
 </dd>
@@ -10408,8 +6614,7 @@ await client.conversationalAi.agents.knowledgeBase.size("agent_id");
 </dl>
 </details>
 
-## ConversationalAi Agents LlmUsage
-<details><summary><code>client.conversationalAi.agents.llmUsage.<a href="/src/api/resources/conversationalAi/resources/agents/resources/llmUsage/client/Client.ts">calculate</a>(agent_id, { ...params }) -> ElevenLabs.LlmUsageCalculatorResponseModel</code></summary>
+<details><summary><code>client.agents.knowledgeBase.<a href="/src/api/resources/agents/resources/knowledgeBase/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetKnowledgeBaseListResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -10421,7 +6626,7 @@ await client.conversationalAi.agents.knowledgeBase.size("agent_id");
 <dl>
 <dd>
 
-Calculates expected number of LLM tokens needed for the specified agent.
+Get a list of available knowledge base documents
 </dd>
 </dl>
 </dd>
@@ -10436,7 +6641,19 @@ Calculates expected number of LLM tokens needed for the specified agent.
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.llmUsage.calculate("agent_id");
+await client.agents.knowledgeBase.list({
+    pageSize: 1,
+    search: "search",
+    showOnlyOwnedDocuments: true,
+    createdByUserId: "created_by_user_id",
+    types: ["file"],
+    parentFolderId: "parent_folder_id",
+    ancestorFolderId: "ancestor_folder_id",
+    foldersFirst: true,
+    sortDirection: "asc",
+    sortBy: "name",
+    cursor: "cursor"
+});
 
 ```
 </dd>
@@ -10452,7 +6669,7 @@ await client.conversationalAi.agents.llmUsage.calculate("agent_id");
 <dl>
 <dd>
 
-**agent_id:** `string` 
+**request:** `ElevenLabs.agents.ListKnowledgeBaseRequest` 
     
 </dd>
 </dl>
@@ -10460,7 +6677,1155 @@ await client.conversationalAi.agents.llmUsage.calculate("agent_id");
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.LlmUsageCalculatorRequestModel` 
+**requestOptions:** `KnowledgeBaseClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.knowledgeBase.<a href="/src/api/resources/agents/resources/knowledgeBase/client/Client.ts">getOrCreateRagIndexes</a>({ ...params }) -> Record&lt;string, ElevenLabs.GetOrCreateRagIndexesKnowledgeBaseResponseValue&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves and/or creates RAG indexes for multiple knowledge base documents in a single request. Maximum 100 items per request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.knowledgeBase.getOrCreateRagIndexes({
+    items: [{
+            documentId: "document_id",
+            createIfMissing: true,
+            model: "e5_mistral_7b_instruct"
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.BodyComputeRagIndexesInBatchV1ConvaiKnowledgeBaseRagIndexPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeBaseClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.knowledgeBase.<a href="/src/api/resources/agents/resources/knowledgeBase/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.KnowledgeBaseContentSearchResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fuzzy text search over knowledge base document content
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.knowledgeBase.search({
+    query: "query",
+    pageSize: 1,
+    types: ["file"],
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.SearchKnowledgeBaseRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeBaseClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents Tests
+<details><summary><code>client.agents.tests.<a href="/src/api/resources/agents/resources/tests/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentTestResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new agent response test.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tests.create({
+    type: "llm",
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateTestsRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TestsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tests.<a href="/src/api/resources/agents/resources/tests/client/Client.ts">move</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Moves multiple tests or folders from one folder to another.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tests.move({
+    entityIds: ["entity_ids"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TestsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tests.<a href="/src/api/resources/agents/resources/tests/client/Client.ts">get</a>(test_id) -> ElevenLabs.GetTestsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets an agent response test by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tests.get("TeaqRRdTcIfIu2i7BYfT");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**test_id:** `string` — The id of a chat response test. This is returned on test creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TestsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tests.<a href="/src/api/resources/agents/resources/tests/client/Client.ts">update</a>(test_id, { ...params }) -> ElevenLabs.UpdateTestsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates an agent response test by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tests.update("TeaqRRdTcIfIu2i7BYfT", {
+    type: "llm",
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**test_id:** `string` — The id of a chat response test. This is returned on test creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.UpdateTestsRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TestsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tests.<a href="/src/api/resources/agents/resources/tests/client/Client.ts">delete</a>(test_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes an agent response test by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tests.delete("TeaqRRdTcIfIu2i7BYfT");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**test_id:** `string` — The id of a chat response test. This is returned on test creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TestsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tests.<a href="/src/api/resources/agents/resources/tests/client/Client.ts">summaries</a>({ ...params }) -> ElevenLabs.GetTestsSummariesByIdsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets agent response test summaries for the requested test IDs.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tests.summaries({
+    testIds: ["test_id_1", "test_id_2"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListTestsByIdsRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TestsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tests.<a href="/src/api/resources/agents/resources/tests/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetTestsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists all agent response tests with pagination support and optional search filtering.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tests.list({
+    cursor: "cursor",
+    pageSize: 1,
+    search: "search",
+    parentFolderId: "parent_folder_id",
+    types: ["llm"],
+    includeFolders: true,
+    sortMode: "default",
+    sharingMode: "all"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListTestsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TestsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents Users
+<details><summary><code>client.agents.users.<a href="/src/api/resources/agents/resources/users/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetConversationUsersPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get distinct users from conversations with pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.users.list({
+    agentId: "agent_id",
+    branchId: "branch_id",
+    callStartBeforeUnix: 1,
+    callStartAfterUnix: 1,
+    search: "search",
+    pageSize: 1,
+    sortBy: "last_contact_unix_secs",
+    sortDirection: "asc",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListUsersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `UsersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents PhoneNumbers
+<details><summary><code>client.agents.phoneNumbers.<a href="/src/api/resources/agents/resources/phoneNumbers/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ListPhoneNumbersResponseItem[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve all Phone Numbers
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.phoneNumbers.list({
+    provider: "twilio",
+    agentId: "agent_id",
+    branchId: "branch_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListPhoneNumbersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.phoneNumbers.<a href="/src/api/resources/agents/resources/phoneNumbers/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreatePhoneNumberResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Import Phone Number from provider configuration (Twilio, Exotel, or SIP trunk)
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.phoneNumbers.create({
+    provider: "twilio",
+    phoneNumber: "phone_number",
+    label: "label",
+    sid: "sid",
+    token: "token"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreatePhoneNumbersRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.phoneNumbers.<a href="/src/api/resources/agents/resources/phoneNumbers/client/Client.ts">get</a>(phone_number_id) -> ElevenLabs.GetPhoneNumbersResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve Phone Number details by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.phoneNumbers.get("TeaqRRdTcIfIu2i7BYfT");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.phoneNumbers.<a href="/src/api/resources/agents/resources/phoneNumbers/client/Client.ts">delete</a>(phone_number_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete Phone Number by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.phoneNumbers.delete("TeaqRRdTcIfIu2i7BYfT");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.phoneNumbers.<a href="/src/api/resources/agents/resources/phoneNumbers/client/Client.ts">update</a>(phone_number_id, { ...params }) -> ElevenLabs.UpdatePhoneNumbersResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update assigned agent of a phone number
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.phoneNumbers.update("TeaqRRdTcIfIu2i7BYfT");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.UpdatePhoneNumberRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.phoneNumbers.<a href="/src/api/resources/agents/resources/phoneNumbers/client/Client.ts">getSipMessages</a>(phone_number_id, { ...params }) -> ElevenLabs.GetSipLogMessagesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get SIP messages for a phone number
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.phoneNumbers.getSipMessages("TeaqRRdTcIfIu2i7BYfT", {
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` — The phone number ID. This is returned when a phone number is imported.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.GetSipMessagesPhoneNumbersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents LlmUsage
+<details><summary><code>client.agents.llmUsage.<a href="/src/api/resources/agents/resources/llmUsage/client/Client.ts">calculate</a>({ ...params }) -> ElevenLabs.LlmUsageCalculatorResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of LLM models and the expected cost for using them based on the provided values.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.llmUsage.calculate({
+    promptLength: 1,
+    numberOfPages: 1,
+    ragEnabled: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.LlmUsageCalculatorPublicRequestModel` 
     
 </dd>
 </dl>
@@ -10480,8 +7845,2143 @@ await client.conversationalAi.agents.llmUsage.calculate("agent_id");
 </dl>
 </details>
 
-## ConversationalAi Agents Branches
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">list</a>(agent_id, { ...params }) -> ElevenLabs.ListResponseAgentBranchSummary</code></summary>
+## Agents Llm
+<details><summary><code>client.agents.llm.<a href="/src/api/resources/agents/resources/llm/client/Client.ts">list</a>() -> ElevenLabs.LlmListResponseModelInput</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of available LLM models that can be used with agents, including their capabilities and any deprecation status. The response is filtered based on the data residency of the deployment and any compliance requirements (e.g. HIPAA) of the workspace subscription.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.llm.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `LlmClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents Tools
+<details><summary><code>client.agents.tools.<a href="/src/api/resources/agents/resources/tools/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ToolsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all available tools in the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tools.list({
+    search: "search",
+    pageSize: 1,
+    showOnlyOwnedDocuments: true,
+    createdByUserId: "created_by_user_id",
+    types: ["webhook"],
+    sortDirection: "asc",
+    sortBy: "name",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListToolsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tools.<a href="/src/api/resources/agents/resources/tools/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ToolResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a new tool to the available tools in the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tools.create({
+    toolConfig: {
+        type: "client",
+        name: "name",
+        description: "description",
+        expectsResponse: false
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ToolRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tools.<a href="/src/api/resources/agents/resources/tools/client/Client.ts">get</a>(tool_id, { ...params }) -> ElevenLabs.ToolResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get tool that is available in the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tools.get("tool_id", {
+    environment: "environment"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tool_id:** `string` — ID of the requested tool.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.GetToolsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tools.<a href="/src/api/resources/agents/resources/tools/client/Client.ts">delete</a>(tool_id, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete tool from the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tools.delete("tool_id", {
+    force: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tool_id:** `string` — ID of the requested tool.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.DeleteToolsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tools.<a href="/src/api/resources/agents/resources/tools/client/Client.ts">update</a>(tool_id, { ...params }) -> ElevenLabs.ToolResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update tool that is available in the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tools.update("tool_id", {
+    toolConfig: {
+        type: "client",
+        name: "name",
+        description: "description",
+        expectsResponse: false
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tool_id:** `string` — ID of the requested tool.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ToolRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.tools.<a href="/src/api/resources/agents/resources/tools/client/Client.ts">getDependentAgents</a>(tool_id, { ...params }) -> ElevenLabs.GetToolDependentAgentsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a list of agents depending on this tool
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.tools.getDependentAgents("tool_id", {
+    cursor: "cursor",
+    pageSize: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tool_id:** `string` — ID of the requested tool.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.GetDependentAgentsToolsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents Settings
+<details><summary><code>client.agents.settings.<a href="/src/api/resources/agents/resources/settings/client/Client.ts">get</a>() -> ElevenLabs.GetConvAiSettingsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve Convai settings for the workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.settings.get();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `SettingsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.settings.<a href="/src/api/resources/agents/resources/settings/client/Client.ts">update</a>({ ...params }) -> ElevenLabs.GetConvAiSettingsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update Convai settings for the workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.settings.update();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.PatchConvAiSettingsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SettingsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents Secrets
+<details><summary><code>client.agents.secrets.<a href="/src/api/resources/agents/resources/secrets/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetWorkspaceSecretsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all workspace secrets for the user
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.secrets.list({
+    pageSize: 1,
+    dependencyLimit: 1,
+    search: "search",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListSecretsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SecretsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.secrets.<a href="/src/api/resources/agents/resources/secrets/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.PostWorkspaceSecretResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new secret for the workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.secrets.create({
+    name: "name",
+    value: "value"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.PostWorkspaceSecretRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SecretsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.secrets.<a href="/src/api/resources/agents/resources/secrets/client/Client.ts">get</a>(secret_id) -> ElevenLabs.ConvAiWorkspaceStoredSecretConfig</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a workspace secret by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.secrets.get("secret_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**secret_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SecretsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.secrets.<a href="/src/api/resources/agents/resources/secrets/client/Client.ts">delete</a>(secret_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a workspace secret if it's not in use
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.secrets.delete("secret_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**secret_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SecretsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.secrets.<a href="/src/api/resources/agents/resources/secrets/client/Client.ts">update</a>(secret_id, { ...params }) -> ElevenLabs.PostWorkspaceSecretResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing secret for the workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.secrets.update("secret_id", {
+    name: "name",
+    value: "value"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**secret_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.PatchWorkspaceSecretRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SecretsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.secrets.<a href="/src/api/resources/agents/resources/secrets/client/Client.ts">getDependencies</a>(secret_id, resource_type, { ...params }) -> ElevenLabs.GetSecretDependenciesResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get paginated list of resources that depend on a specific secret, filtered by resource type.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.secrets.getDependencies("secret_id", "tools", {
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**secret_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**resource_type:** `ElevenLabs.SecretDependencyResourceType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.GetDependenciesSecretsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SecretsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents BatchCalls
+<details><summary><code>client.agents.batchCalls.<a href="/src/api/resources/agents/resources/batchCalls/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.BatchCallResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Submit a batch call request to schedule calls for multiple recipients.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.batchCalls.create({
+    callName: "call_name",
+    agentId: "agent_id",
+    recipients: [{}]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BatchCallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.batchCalls.<a href="/src/api/resources/agents/resources/batchCalls/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.WorkspaceBatchCallsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all batch calls for the current workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.batchCalls.list({
+    limit: 1,
+    lastDoc: "last_doc",
+    agentId: "agent_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListBatchCallsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BatchCallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.batchCalls.<a href="/src/api/resources/agents/resources/batchCalls/client/Client.ts">get</a>(batch_id) -> ElevenLabs.BatchCallDetailedResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get detailed information about a batch call including all recipients.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.batchCalls.get("batch_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**batch_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BatchCallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.batchCalls.<a href="/src/api/resources/agents/resources/batchCalls/client/Client.ts">delete</a>(batch_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Permanently delete a batch call and all recipient records. Conversations remain in history.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.batchCalls.delete("batch_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**batch_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BatchCallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.batchCalls.<a href="/src/api/resources/agents/resources/batchCalls/client/Client.ts">cancel</a>(batch_id) -> ElevenLabs.BatchCallResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancel a running batch call and set all recipients to cancelled status.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.batchCalls.cancel("batch_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**batch_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BatchCallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.batchCalls.<a href="/src/api/resources/agents/resources/batchCalls/client/Client.ts">retry</a>(batch_id) -> ElevenLabs.BatchCallResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retry a batch call, calling failed and no-response recipients again.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.batchCalls.retry("batch_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**batch_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BatchCallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.batchCalls.<a href="/src/api/resources/agents/resources/batchCalls/client/Client.ts">export</a>(batch_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download all recipients and conversation results for a terminal batch call as CSV.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.batchCalls.export("batch_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**batch_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BatchCallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents SipTrunk
+<details><summary><code>client.agents.sipTrunk.<a href="/src/api/resources/agents/resources/sipTrunk/client/Client.ts">outboundCall</a>({ ...params }) -> ElevenLabs.SipTrunkOutboundCallResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Handle an outbound call via SIP trunk
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.sipTrunk.outboundCall({
+    agentId: "agent_id",
+    agentPhoneNumberId: "agent_phone_number_id",
+    toNumber: "to_number"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.BodyHandleAnOutboundCallViaSipTrunkV1ConvaiSipTrunkOutboundCallPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SipTrunkClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents McpServers
+<details><summary><code>client.agents.mcpServers.<a href="/src/api/resources/agents/resources/mcpServers/client/Client.ts">list</a>() -> ElevenLabs.McpServersResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve all MCP server configurations available in the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.mcpServers.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.mcpServers.<a href="/src/api/resources/agents/resources/mcpServers/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new MCP server configuration in the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.mcpServers.create({
+    config: {
+        url: "url",
+        name: "name"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.McpServerRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.mcpServers.<a href="/src/api/resources/agents/resources/mcpServers/client/Client.ts">get</a>(mcp_server_id) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a specific MCP server configuration from the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.mcpServers.get("mcp_server_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcp_server_id:** `string` — ID of the MCP Server.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.mcpServers.<a href="/src/api/resources/agents/resources/mcpServers/client/Client.ts">delete</a>(mcp_server_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a specific MCP server configuration from the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.mcpServers.delete("mcp_server_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcp_server_id:** `string` — ID of the MCP Server.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.mcpServers.<a href="/src/api/resources/agents/resources/mcpServers/client/Client.ts">update</a>(mcp_server_id, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the configuration settings for an MCP server.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.mcpServers.update("mcp_server_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**mcp_server_id:** `string` — ID of the MCP Server.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.McpServerConfigUpdateRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `McpServersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents WhatsappAccounts
+<details><summary><code>client.agents.whatsappAccounts.<a href="/src/api/resources/agents/resources/whatsappAccounts/client/Client.ts">get</a>(phone_number_id) -> ElevenLabs.GetWhatsAppAccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a WhatsApp account
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.whatsappAccounts.get("phone_number_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.whatsappAccounts.<a href="/src/api/resources/agents/resources/whatsappAccounts/client/Client.ts">delete</a>(phone_number_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a WhatsApp account
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.whatsappAccounts.delete("phone_number_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.whatsappAccounts.<a href="/src/api/resources/agents/resources/whatsappAccounts/client/Client.ts">update</a>(phone_number_id, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a WhatsApp account
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.whatsappAccounts.update("phone_number_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_number_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.UpdateWhatsAppAccountRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.whatsappAccounts.<a href="/src/api/resources/agents/resources/whatsappAccounts/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ListWhatsAppAccountsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all WhatsApp accounts
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.whatsappAccounts.list({
+    agentId: "agent_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListWhatsappAccountsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents Branches
+<details><summary><code>client.agents.branches.<a href="/src/api/resources/agents/resources/branches/client/Client.ts">list</a>(agent_id, { ...params }) -> ElevenLabs.ListResponseAgentBranchSummary</code></summary>
 <dl>
 <dd>
 
@@ -10508,7 +10008,7 @@ Returns a list of branches an agent has
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+await client.agents.branches.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     includeArchived: true,
     limit: 1,
     includeCommitStatus: true
@@ -10536,7 +10036,7 @@ await client.conversationalAi.agents.branches.list("agent_3701k3ttaq12ewp8b7qv5r
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.BranchesListRequest` 
+**request:** `ElevenLabs.agents.ListBranchesRequest` 
     
 </dd>
 </dl>
@@ -10556,7 +10056,7 @@ await client.conversationalAi.agents.branches.list("agent_3701k3ttaq12ewp8b7qv5r
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.CreateAgentBranchResponseModel</code></summary>
+<details><summary><code>client.agents.branches.<a href="/src/api/resources/agents/resources/branches/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.CreateAgentBranchResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -10583,7 +10083,7 @@ Create a new branch from a given version of any branch
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+await client.agents.branches.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     parentVersionId: "parent_version_id",
     name: "name",
     description: "description"
@@ -10611,7 +10111,7 @@ await client.conversationalAi.agents.branches.create("agent_3701k3ttaq12ewp8b7qv
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost` 
+**request:** `ElevenLabs.agents.BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost` 
     
 </dd>
 </dl>
@@ -10631,7 +10131,7 @@ await client.conversationalAi.agents.branches.create("agent_3701k3ttaq12ewp8b7qv
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">get</a>(agent_id, branch_id) -> ElevenLabs.AgentBranchResponse</code></summary>
+<details><summary><code>client.agents.branches.<a href="/src/api/resources/agents/resources/branches/client/Client.ts">get</a>(agent_id, branch_id) -> ElevenLabs.AgentBranchResponse</code></summary>
 <dl>
 <dd>
 
@@ -10658,7 +10158,7 @@ Get information about a single agent branch
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
+await client.agents.branches.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
 
 ```
 </dd>
@@ -10702,7 +10202,7 @@ await client.conversationalAi.agents.branches.get("agent_3701k3ttaq12ewp8b7qv5rf
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">update</a>(agent_id, branch_id, { ...params }) -> ElevenLabs.AgentBranchResponse</code></summary>
+<details><summary><code>client.agents.branches.<a href="/src/api/resources/agents/resources/branches/client/Client.ts">update</a>(agent_id, branch_id, { ...params }) -> ElevenLabs.AgentBranchResponse</code></summary>
 <dl>
 <dd>
 
@@ -10729,7 +10229,7 @@ Update agent branch properties such as archiving status and protection level
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
+await client.agents.branches.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
 
 ```
 </dd>
@@ -10761,7 +10261,7 @@ await client.conversationalAi.agents.branches.update("agent_3701k3ttaq12ewp8b7qv
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch` 
+**request:** `ElevenLabs.agents.BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch` 
     
 </dd>
 </dl>
@@ -10781,7 +10281,7 @@ await client.conversationalAi.agents.branches.update("agent_3701k3ttaq12ewp8b7qv
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">previewMerge</a>(agent_id, source_branch_id, { ...params }) -> ElevenLabs.MergePreviewResponseModel</code></summary>
+<details><summary><code>client.agents.branches.<a href="/src/api/resources/agents/resources/branches/client/Client.ts">previewMerge</a>(agent_id, source_branch_id, { ...params }) -> ElevenLabs.MergePreviewResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -10808,7 +10308,7 @@ Returns the result of merging the source branch into the target branch without p
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+await client.agents.branches.previewMerge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
     targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
     force: true
 });
@@ -10843,7 +10343,7 @@ await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ew
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.BranchesPreviewMergeRequest` 
+**request:** `ElevenLabs.agents.PreviewMergeBranchesRequest` 
     
 </dd>
 </dl>
@@ -10863,7 +10363,7 @@ await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ew
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">merge</a>(agent_id, source_branch_id, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.agents.branches.<a href="/src/api/resources/agents/resources/branches/client/Client.ts">merge</a>(agent_id, source_branch_id, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -10890,7 +10390,7 @@ Merge a branch into a target branch
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+await client.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
     targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj"
 });
 
@@ -10924,7 +10424,7 @@ await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost` 
+**request:** `ElevenLabs.agents.BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost` 
     
 </dd>
 </dl>
@@ -10944,7 +10444,7 @@ await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">previewRebase</a>(agent_id, branch_id) -> ElevenLabs.MergePreviewResponseModel</code></summary>
+<details><summary><code>client.agents.branches.<a href="/src/api/resources/agents/resources/branches/client/Client.ts">previewRebase</a>(agent_id, branch_id) -> ElevenLabs.MergePreviewResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -10971,7 +10471,7 @@ Returns the result of rebasing the branch onto main without performing the rebas
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+await client.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
 
 ```
 </dd>
@@ -11015,7 +10515,7 @@ await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12e
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">rebase</a>(agent_id, branch_id) -> unknown</code></summary>
+<details><summary><code>client.agents.branches.<a href="/src/api/resources/agents/resources/branches/client/Client.ts">rebase</a>(agent_id, branch_id) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -11042,7 +10542,7 @@ Rebase a branch onto the latest main branch, incorporating main's changes while 
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+await client.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
 
 ```
 </dd>
@@ -11086,8 +10586,8 @@ await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv
 </dl>
 </details>
 
-## ConversationalAi Agents Versions
-<details><summary><code>client.conversationalAi.agents.versions.<a href="/src/api/resources/conversationalAi/resources/agents/resources/versions/client/Client.ts">get</a>(agent_id, version_id) -> ElevenLabs.AgentVersionMetadata</code></summary>
+## Agents Versions
+<details><summary><code>client.agents.versions.<a href="/src/api/resources/agents/resources/versions/client/Client.ts">get</a>(agent_id, version_id) -> ElevenLabs.AgentVersionMetadata</code></summary>
 <dl>
 <dd>
 
@@ -11114,7 +10614,7 @@ Get metadata for a specific agent version
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.versions.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtvrsn_0901k4aafjxxfxt93gd841r7tv5t");
+await client.agents.versions.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtvrsn_0901k4aafjxxfxt93gd841r7tv5t");
 
 ```
 </dd>
@@ -11158,8 +10658,8 @@ await client.conversationalAi.agents.versions.get("agent_3701k3ttaq12ewp8b7qv5rf
 </dl>
 </details>
 
-## ConversationalAi Agents Deployments
-<details><summary><code>client.conversationalAi.agents.deployments.<a href="/src/api/resources/conversationalAi/resources/agents/resources/deployments/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.AgentDeploymentResponse</code></summary>
+## Agents Deployments
+<details><summary><code>client.agents.deployments.<a href="/src/api/resources/agents/resources/deployments/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.AgentDeploymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -11186,7 +10686,7 @@ Create a new deployment for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.deployments.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+await client.agents.deployments.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     deploymentRequest: {
         requests: [{
                 branchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
@@ -11220,7 +10720,7 @@ await client.conversationalAi.agents.deployments.create("agent_3701k3ttaq12ewp8b
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.BodyCreateOrUpdateDeploymentsV1ConvaiAgentsAgentIdDeploymentsPost` 
+**request:** `ElevenLabs.agents.BodyCreateOrUpdateDeploymentsV1ConvaiAgentsAgentIdDeploymentsPost` 
     
 </dd>
 </dl>
@@ -11240,8 +10740,8 @@ await client.conversationalAi.agents.deployments.create("agent_3701k3ttaq12ewp8b
 </dl>
 </details>
 
-## ConversationalAi Agents Drafts
-<details><summary><code>client.conversationalAi.agents.drafts.<a href="/src/api/resources/conversationalAi/resources/agents/resources/drafts/client/Client.ts">create</a>(agent_id, { ...params }) -> unknown</code></summary>
+## Agents Drafts
+<details><summary><code>client.agents.drafts.<a href="/src/api/resources/agents/resources/drafts/client/Client.ts">create</a>(agent_id, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -11268,7 +10768,7 @@ Create a new draft for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+await client.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     branchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
     conversationConfig: {
         "key": "value"
@@ -11422,7 +10922,7 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.BodyCreateAgentDraftV1ConvaiAgentsAgentIdDraftsPost` 
+**request:** `ElevenLabs.agents.BodyCreateAgentDraftV1ConvaiAgentsAgentIdDraftsPost` 
     
 </dd>
 </dl>
@@ -11442,7 +10942,7 @@ await client.conversationalAi.agents.drafts.create("agent_3701k3ttaq12ewp8b7qv5r
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.drafts.<a href="/src/api/resources/conversationalAi/resources/agents/resources/drafts/client/Client.ts">delete</a>(agent_id, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.agents.drafts.<a href="/src/api/resources/agents/resources/drafts/client/Client.ts">delete</a>(agent_id, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -11469,7 +10969,7 @@ Delete a draft for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.drafts.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+await client.agents.drafts.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     branchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj"
 });
 
@@ -11495,7 +10995,7 @@ await client.conversationalAi.agents.drafts.delete("agent_3701k3ttaq12ewp8b7qv5r
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.DraftsDeleteRequest` 
+**request:** `ElevenLabs.agents.DeleteDraftsRequest` 
     
 </dd>
 </dl>
@@ -11515,8 +11015,8 @@ await client.conversationalAi.agents.drafts.delete("agent_3701k3ttaq12ewp8b7qv5r
 </dl>
 </details>
 
-## ConversationalAi Agents Procedures
-<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">list</a>(agent_id, branch_id) -> ElevenLabs.ListProceduresResponseModel</code></summary>
+## Agents Procedures
+<details><summary><code>client.agents.procedures.<a href="/src/api/resources/agents/resources/procedures/client/Client.ts">list</a>(agent_id, branch_id) -> ElevenLabs.ListProceduresResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11543,7 +11043,7 @@ List the agent's procedures on a branch with their procedure_id, version_id, nam
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
+await client.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
 
 ```
 </dd>
@@ -11587,7 +11087,7 @@ await client.conversationalAi.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">create</a>(agent_id, branch_id, { ...params }) -> ElevenLabs.CreateProcedureResponseModel</code></summary>
+<details><summary><code>client.agents.procedures.<a href="/src/api/resources/agents/resources/procedures/client/Client.ts">create</a>(agent_id, branch_id, { ...params }) -> ElevenLabs.CreateProcedureResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11614,7 +11114,7 @@ Create a new procedure for the agent on a branch.
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.procedures.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
+await client.agents.procedures.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
 
 ```
 </dd>
@@ -11666,7 +11166,7 @@ await client.conversationalAi.agents.procedures.create("agent_3701k3ttaq12ewp8b7
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">compile</a>(agent_id, branch_id) -> ElevenLabs.CompileProceduresResponseModel</code></summary>
+<details><summary><code>client.agents.procedures.<a href="/src/api/resources/agents/resources/procedures/client/Client.ts">compile</a>(agent_id, branch_id) -> ElevenLabs.CompileProceduresResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11693,7 +11193,7 @@ Compile procedure drafts into a workflow.
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.procedures.compile("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
+await client.agents.procedures.compile("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
 
 ```
 </dd>
@@ -11737,7 +11237,7 @@ await client.conversationalAi.agents.procedures.compile("agent_3701k3ttaq12ewp8b
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">get</a>(agent_id, branch_id, procedure_id, { ...params }) -> ElevenLabs.ProcedureAtVersionResponseModel</code></summary>
+<details><summary><code>client.agents.procedures.<a href="/src/api/resources/agents/resources/procedures/client/Client.ts">get</a>(agent_id, branch_id, procedure_id, { ...params }) -> ElevenLabs.ProcedureAtVersionResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11764,7 +11264,7 @@ Retrieve a procedure at a specific version or the current branch HEAD.
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.procedures.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3", {
+await client.agents.procedures.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3", {
     versionId: "version_id"
 });
 
@@ -11806,7 +11306,7 @@ await client.conversationalAi.agents.procedures.get("agent_3701k3ttaq12ewp8b7qv5
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.ProceduresGetRequest` 
+**request:** `ElevenLabs.agents.GetProceduresRequest` 
     
 </dd>
 </dl>
@@ -11826,7 +11326,7 @@ await client.conversationalAi.agents.procedures.get("agent_3701k3ttaq12ewp8b7qv5
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">remove</a>(agent_id, branch_id, procedure_id) -> unknown</code></summary>
+<details><summary><code>client.agents.procedures.<a href="/src/api/resources/agents/resources/procedures/client/Client.ts">remove</a>(agent_id, branch_id, procedure_id) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -11853,7 +11353,7 @@ Remove a procedure from the agent's draft working set.
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.procedures.remove("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3");
+await client.agents.procedures.remove("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3");
 
 ```
 </dd>
@@ -11905,8 +11405,8 @@ await client.conversationalAi.agents.procedures.remove("agent_3701k3ttaq12ewp8b7
 </dl>
 </details>
 
-## ConversationalAi Agents Procedures Drafts
-<details><summary><code>client.conversationalAi.agents.procedures.drafts.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/resources/drafts/client/Client.ts">get</a>(agent_id, branch_id, procedure_id) -> ElevenLabs.ProcedureDraftResponseModel</code></summary>
+## Agents Agents LlmUsage
+<details><summary><code>client.agents.agents.llmUsage.<a href="/src/api/resources/agents/resources/agents/resources/llmUsage/client/Client.ts">calculate</a>(agent_id, { ...params }) -> ElevenLabs.LlmUsageCalculatorResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11918,7 +11418,7 @@ await client.conversationalAi.agents.procedures.remove("agent_3701k3ttaq12ewp8b7
 <dl>
 <dd>
 
-Get user's draft for a procedure
+Calculates expected number of LLM tokens needed for the specified agent.
 </dd>
 </dl>
 </dd>
@@ -11933,259 +11433,7 @@ Get user's draft for a procedure
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.procedures.drafts.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `string` — Agent ID to get the procedure draft from
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**branch_id:** `string` — Branch ID to get the procedure draft from
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**procedure_id:** `string` — The procedure ID
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DraftsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.agents.procedures.drafts.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/resources/drafts/client/Client.ts">delete</a>(agent_id, branch_id, procedure_id) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete user's draft for a procedure, resetting to the committed version
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.procedures.drafts.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `string` — Agent ID to get the procedure draft from
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**branch_id:** `string` — Branch ID to get the procedure draft from
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**procedure_id:** `string` — The procedure ID
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DraftsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.agents.procedures.drafts.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/resources/drafts/client/Client.ts">update</a>(agent_id, branch_id, procedure_id, { ...params }) -> ElevenLabs.ProcedureDraftResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create or update user's draft for a procedure
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.procedures.drafts.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3", {
-    name: "name",
-    content: "content",
-    type: "free_form"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `string` — Agent ID to get the procedure draft from
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**branch_id:** `string` — Branch ID to get the procedure draft from
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**procedure_id:** `string` — The procedure ID
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.agents.procedures.UpdateProcedureDraftRequestModel` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DraftsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi Agents Widget Avatar
-<details><summary><code>client.conversationalAi.agents.widget.avatar.<a href="/src/api/resources/conversationalAi/resources/agents/resources/widget/resources/avatar/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.PostAgentAvatarResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Sets the avatar for an agent displayed in the widget
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.agents.widget.avatar.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-    avatarFile: fs.createReadStream("/path/to/your/file")
-});
+await client.agents.agents.llmUsage.calculate("agent_id");
 
 ```
 </dd>
@@ -12209,7 +11457,7 @@ await client.conversationalAi.agents.widget.avatar.create("agent_3701k3ttaq12ewp
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.widget.BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost` 
+**request:** `ElevenLabs.agents.agents.LlmUsageCalculatorRequestModel` 
     
 </dd>
 </dl>
@@ -12217,7 +11465,7 @@ await client.conversationalAi.agents.widget.avatar.create("agent_3701k3ttaq12ewp
 <dl>
 <dd>
 
-**requestOptions:** `AvatarClient.RequestOptions` 
+**requestOptions:** `LlmUsageClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12229,8 +11477,8 @@ await client.conversationalAi.agents.widget.avatar.create("agent_3701k3ttaq12ewp
 </dl>
 </details>
 
-## ConversationalAi Analytics LiveCount
-<details><summary><code>client.conversationalAi.analytics.liveCount.<a href="/src/api/resources/conversationalAi/resources/analytics/resources/liveCount/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.GetLiveCountResponse</code></summary>
+## Agents Analytics LiveCount
+<details><summary><code>client.agents.analytics.liveCount.<a href="/src/api/resources/agents/resources/analytics/resources/liveCount/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.GetLiveCountResponse</code></summary>
 <dl>
 <dd>
 
@@ -12257,7 +11505,7 @@ Get the live count of the ongoing conversations.
 <dd>
 
 ```typescript
-await client.conversationalAi.analytics.liveCount.get({
+await client.agents.analytics.liveCount.get({
     agentId: "agent_id"
 });
 
@@ -12275,7 +11523,7 @@ await client.conversationalAi.analytics.liveCount.get({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.analytics.LiveCountGetRequest` 
+**request:** `ElevenLabs.agents.analytics.GetLiveCountRequest` 
     
 </dd>
 </dl>
@@ -12295,8 +11543,8 @@ await client.conversationalAi.analytics.liveCount.get({
 </dl>
 </details>
 
-## ConversationalAi Conversations Audio
-<details><summary><code>client.conversationalAi.conversations.audio.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/audio/client/Client.ts">get</a>(conversation_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+## Agents Conversations Audio
+<details><summary><code>client.agents.conversations.audio.<a href="/src/api/resources/agents/resources/conversations/resources/audio/client/Client.ts">get</a>(conversation_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12323,7 +11571,7 @@ Get the audio recording of a particular conversation
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.audio.get("conversation_id");
+await client.agents.conversations.audio.get("conversation_id");
 
 ```
 </dd>
@@ -12359,8 +11607,8 @@ await client.conversationalAi.conversations.audio.get("conversation_id");
 </dl>
 </details>
 
-## ConversationalAi Conversations Feedback
-<details><summary><code>client.conversationalAi.conversations.feedback.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/feedback/client/Client.ts">create</a>(conversation_id, { ...params }) -> unknown</code></summary>
+## Agents Conversations Feedback
+<details><summary><code>client.agents.conversations.feedback.<a href="/src/api/resources/agents/resources/conversations/resources/feedback/client/Client.ts">create</a>(conversation_id, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -12387,7 +11635,7 @@ Send the feedback for the given conversation
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.feedback.create("21m00Tcm4TlvDq8ikWAM", {
+await client.agents.conversations.feedback.create("21m00Tcm4TlvDq8ikWAM", {
     feedback: "like"
 });
 
@@ -12413,7 +11661,7 @@ await client.conversationalAi.conversations.feedback.create("21m00Tcm4TlvDq8ikWA
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.ConversationFeedbackRequestModel` 
+**request:** `ElevenLabs.agents.conversations.ConversationFeedbackRequestModel` 
     
 </dd>
 </dl>
@@ -12433,8 +11681,8 @@ await client.conversationalAi.conversations.feedback.create("21m00Tcm4TlvDq8ikWA
 </dl>
 </details>
 
-## ConversationalAi Conversations Messages
-<details><summary><code>client.conversationalAi.conversations.messages.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/messages/client/Client.ts">textSearch</a>({ ...params }) -> ElevenLabs.MessagesSearchResponse</code></summary>
+## Agents Conversations Messages
+<details><summary><code>client.agents.conversations.messages.<a href="/src/api/resources/agents/resources/conversations/resources/messages/client/Client.ts">textSearch</a>({ ...params }) -> ElevenLabs.MessagesSearchResponse</code></summary>
 <dl>
 <dd>
 
@@ -12461,7 +11709,7 @@ Search through conversation transcript messages by full-text and fuzzy search
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.messages.textSearch({
+await client.agents.conversations.messages.textSearch({
     textQuery: "refund policy",
     agentId: "agent_id",
     visitedAgentIds: ["visited_agent_ids"],
@@ -12509,7 +11757,7 @@ await client.conversationalAi.conversations.messages.textSearch({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.MessagesTextSearchRequest` 
+**request:** `ElevenLabs.agents.conversations.TextSearchMessagesRequest` 
     
 </dd>
 </dl>
@@ -12529,7 +11777,7 @@ await client.conversationalAi.conversations.messages.textSearch({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.messages.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/messages/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.MessagesSearchResponse</code></summary>
+<details><summary><code>client.agents.conversations.messages.<a href="/src/api/resources/agents/resources/conversations/resources/messages/client/Client.ts">search</a>({ ...params }) -> ElevenLabs.MessagesSearchResponse</code></summary>
 <dl>
 <dd>
 
@@ -12556,7 +11804,7 @@ Search conversation transcripts by semantic similarity to surface relevant messa
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.messages.search({
+await client.agents.conversations.messages.search({
     textQuery: "Customer asking to cancel and get money back",
     agentId: "agent_id",
     pageSize: 1,
@@ -12577,7 +11825,7 @@ await client.conversationalAi.conversations.messages.search({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.MessagesSearchRequest` 
+**request:** `ElevenLabs.agents.conversations.SearchMessagesRequest` 
     
 </dd>
 </dl>
@@ -12597,8 +11845,8 @@ await client.conversationalAi.conversations.messages.search({
 </dl>
 </details>
 
-## ConversationalAi Conversations Tags
-<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">assign</a>(conversation_id, { ...params }) -> void</code></summary>
+## Agents Conversations Tags
+<details><summary><code>client.agents.conversations.tags.<a href="/src/api/resources/agents/resources/conversations/resources/tags/client/Client.ts">assign</a>(conversation_id, { ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -12625,7 +11873,7 @@ Assign one or more conversation tags to a conversation. Tags that are already as
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.tags.assign("conversation_id", {
+await client.agents.conversations.tags.assign("conversation_id", {
     tagIds: ["tag_ids"]
 });
 
@@ -12651,7 +11899,7 @@ await client.conversationalAi.conversations.tags.assign("conversation_id", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.AssignConversationTagsRequestModel` 
+**request:** `ElevenLabs.agents.conversations.AssignConversationTagsRequestModel` 
     
 </dd>
 </dl>
@@ -12671,7 +11919,7 @@ await client.conversationalAi.conversations.tags.assign("conversation_id", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">unassign</a>(conversation_id, tag_id) -> void</code></summary>
+<details><summary><code>client.agents.conversations.tags.<a href="/src/api/resources/agents/resources/conversations/resources/tags/client/Client.ts">unassign</a>(conversation_id, tag_id) -> void</code></summary>
 <dl>
 <dd>
 
@@ -12698,7 +11946,7 @@ Remove a single conversation tag from a conversation.
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.tags.unassign("conversation_id", "tag_id");
+await client.agents.conversations.tags.unassign("conversation_id", "tag_id");
 
 ```
 </dd>
@@ -12742,7 +11990,7 @@ await client.conversationalAi.conversations.tags.unassign("conversation_id", "ta
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetConversationTagsPageResponseModel</code></summary>
+<details><summary><code>client.agents.conversations.tags.<a href="/src/api/resources/agents/resources/conversations/resources/tags/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetConversationTagsPageResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -12769,7 +12017,7 @@ List conversation tags for the workspace, ordered by most recently created first
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.tags.list({
+await client.agents.conversations.tags.list({
     pageSize: 1,
     cursor: "cursor"
 });
@@ -12788,7 +12036,7 @@ await client.conversationalAi.conversations.tags.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.TagsListRequest` 
+**request:** `ElevenLabs.agents.conversations.ListTagsRequest` 
     
 </dd>
 </dl>
@@ -12808,7 +12056,7 @@ await client.conversationalAi.conversations.tags.list({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ConversationTagResponseModel</code></summary>
+<details><summary><code>client.agents.conversations.tags.<a href="/src/api/resources/agents/resources/conversations/resources/tags/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ConversationTagResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -12835,7 +12083,7 @@ Create a new conversation tag for the workspace.
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.tags.create({
+await client.agents.conversations.tags.create({
     title: "title"
 });
 
@@ -12853,7 +12101,7 @@ await client.conversationalAi.conversations.tags.create({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.CreateConversationTagRequestModel` 
+**request:** `ElevenLabs.agents.conversations.CreateConversationTagRequestModel` 
     
 </dd>
 </dl>
@@ -12873,7 +12121,7 @@ await client.conversationalAi.conversations.tags.create({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">get</a>(tag_id) -> ElevenLabs.ConversationTagResponseModel</code></summary>
+<details><summary><code>client.agents.conversations.tags.<a href="/src/api/resources/agents/resources/conversations/resources/tags/client/Client.ts">get</a>(tag_id) -> ElevenLabs.ConversationTagResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -12900,7 +12148,7 @@ Get a conversation tag by ID.
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.tags.get("tag_id");
+await client.agents.conversations.tags.get("tag_id");
 
 ```
 </dd>
@@ -12936,7 +12184,7 @@ await client.conversationalAi.conversations.tags.get("tag_id");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">delete</a>(tag_id) -> void</code></summary>
+<details><summary><code>client.agents.conversations.tags.<a href="/src/api/resources/agents/resources/conversations/resources/tags/client/Client.ts">delete</a>(tag_id) -> void</code></summary>
 <dl>
 <dd>
 
@@ -12963,7 +12211,7 @@ Delete a conversation tag. Restricted to the tag owner or a workspace admin.
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.tags.delete("tag_id");
+await client.agents.conversations.tags.delete("tag_id");
 
 ```
 </dd>
@@ -12999,7 +12247,7 @@ await client.conversationalAi.conversations.tags.delete("tag_id");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.tags.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/tags/client/Client.ts">update</a>(tag_id, { ...params }) -> ElevenLabs.ConversationTagResponseModel</code></summary>
+<details><summary><code>client.agents.conversations.tags.<a href="/src/api/resources/agents/resources/conversations/resources/tags/client/Client.ts">update</a>(tag_id, { ...params }) -> ElevenLabs.ConversationTagResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13026,7 +12274,7 @@ Update a conversation tag's title and/or description. Restricted to the tag owne
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.tags.update("tag_id");
+await client.agents.conversations.tags.update("tag_id");
 
 ```
 </dd>
@@ -13050,7 +12298,7 @@ await client.conversationalAi.conversations.tags.update("tag_id");
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.PatchConversationTagRequestModel` 
+**request:** `ElevenLabs.agents.conversations.PatchConversationTagRequestModel` 
     
 </dd>
 </dl>
@@ -13070,8 +12318,8 @@ await client.conversationalAi.conversations.tags.update("tag_id");
 </dl>
 </details>
 
-## ConversationalAi Conversations Files
-<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">create</a>(conversation_id, { ...params }) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
+## Agents Conversations Files
+<details><summary><code>client.agents.conversations.files.<a href="/src/api/resources/agents/resources/conversations/resources/files/client/Client.ts">create</a>(conversation_id, { ...params }) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13098,7 +12346,7 @@ Upload an image or PDF file for a conversation. Returns a unique file ID that ca
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.files.create("conversation_id", {
+await client.agents.conversations.files.create("conversation_id", {
     file: fs.createReadStream("/path/to/your/file")
 });
 
@@ -13124,7 +12372,7 @@ await client.conversationalAi.conversations.files.create("conversation_id", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.BodyUploadFileV1ConvaiConversationsConversationIdFilesPost` 
+**request:** `ElevenLabs.agents.conversations.BodyUploadFileV1ConvaiConversationsConversationIdFilesPost` 
     
 </dd>
 </dl>
@@ -13144,7 +12392,7 @@ await client.conversationalAi.conversations.files.create("conversation_id", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">delete</a>(conversation_id, file_id) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
+<details><summary><code>client.agents.conversations.files.<a href="/src/api/resources/agents/resources/conversations/resources/files/client/Client.ts">delete</a>(conversation_id, file_id) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13171,7 +12419,7 @@ Remove a file upload from a conversation. Only possible if the file hasn't alrea
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.files.delete("conversation_id", "file_id");
+await client.agents.conversations.files.delete("conversation_id", "file_id");
 
 ```
 </dd>
@@ -13215,8 +12463,8 @@ await client.conversationalAi.conversations.files.delete("conversation_id", "fil
 </dl>
 </details>
 
-## ConversationalAi Conversations Topics
-<details><summary><code>client.conversationalAi.conversations.topics.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/topics/client/Client.ts">get</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentTopicsResponseModel</code></summary>
+## Agents Conversations Topics
+<details><summary><code>client.agents.conversations.topics.<a href="/src/api/resources/agents/resources/conversations/resources/topics/client/Client.ts">get</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentTopicsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13243,7 +12491,7 @@ Returns the latest topic discovery run results for a given agent.
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.topics.get("agent_id", {
+await client.agents.conversations.topics.get("agent_id", {
     fromUnixSecs: 1,
     toUnixSecs: 1
 });
@@ -13270,7 +12518,7 @@ await client.conversationalAi.conversations.topics.get("agent_id", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.TopicsGetRequest` 
+**request:** `ElevenLabs.agents.conversations.GetTopicsRequest` 
     
 </dd>
 </dl>
@@ -13290,8 +12538,8 @@ await client.conversationalAi.conversations.topics.get("agent_id", {
 </dl>
 </details>
 
-## ConversationalAi Conversations Analysis
-<details><summary><code>client.conversationalAi.conversations.analysis.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/analysis/client/Client.ts">run</a>(conversation_id) -> ElevenLabs.GetConversationResponseModel</code></summary>
+## Agents Conversations Analysis
+<details><summary><code>client.agents.conversations.analysis.<a href="/src/api/resources/agents/resources/conversations/resources/analysis/client/Client.ts">run</a>(conversation_id) -> ElevenLabs.GetConversationResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13318,7 +12566,7 @@ Run the analysis for a conversation using the agent's current evaluation criteri
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.analysis.run("conversation_id");
+await client.agents.conversations.analysis.run("conversation_id");
 
 ```
 </dd>
@@ -13354,7 +12602,7 @@ await client.conversationalAi.conversations.analysis.run("conversation_id");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.conversations.analysis.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/analysis/client/Client.ts">runEvaluation</a>(conversation_id, { ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
+<details><summary><code>client.agents.conversations.analysis.<a href="/src/api/resources/agents/resources/conversations/resources/analysis/client/Client.ts">runEvaluation</a>(conversation_id, { ...params }) -> ElevenLabs.GetConversationResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13381,7 +12629,7 @@ Rerun a specific evaluation for a conversation.
 <dd>
 
 ```typescript
-await client.conversationalAi.conversations.analysis.runEvaluation("conversation_id", {
+await client.agents.conversations.analysis.runEvaluation("conversation_id", {
     evaluationId: "evaluation_id"
 });
 
@@ -13407,7 +12655,7 @@ await client.conversationalAi.conversations.analysis.runEvaluation("conversation
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.conversations.RunConversationEvaluationsRequest` 
+**request:** `ElevenLabs.agents.conversations.RunConversationEvaluationsRequest` 
     
 </dd>
 </dl>
@@ -13427,8 +12675,8 @@ await client.conversationalAi.conversations.analysis.runEvaluation("conversation
 </dl>
 </details>
 
-## ConversationalAi Dashboard Settings
-<details><summary><code>client.conversationalAi.dashboard.settings.<a href="/src/api/resources/conversationalAi/resources/dashboard/resources/settings/client/Client.ts">get</a>() -> ElevenLabs.GetConvAiDashboardSettingsResponseModel</code></summary>
+## Agents Dashboard Settings
+<details><summary><code>client.agents.dashboard.settings.<a href="/src/api/resources/agents/resources/dashboard/resources/settings/client/Client.ts">get</a>() -> ElevenLabs.GetConvAiDashboardSettingsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13455,7 +12703,7 @@ Retrieve Convai dashboard settings for the workspace
 <dd>
 
 ```typescript
-await client.conversationalAi.dashboard.settings.get();
+await client.agents.dashboard.settings.get();
 
 ```
 </dd>
@@ -13483,7 +12731,7 @@ await client.conversationalAi.dashboard.settings.get();
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.dashboard.settings.<a href="/src/api/resources/conversationalAi/resources/dashboard/resources/settings/client/Client.ts">update</a>({ ...params }) -> ElevenLabs.GetConvAiDashboardSettingsResponseModel</code></summary>
+<details><summary><code>client.agents.dashboard.settings.<a href="/src/api/resources/agents/resources/dashboard/resources/settings/client/Client.ts">update</a>({ ...params }) -> ElevenLabs.GetConvAiDashboardSettingsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13510,7 +12758,7 @@ Update Convai dashboard settings for the workspace
 <dd>
 
 ```typescript
-await client.conversationalAi.dashboard.settings.update();
+await client.agents.dashboard.settings.update();
 
 ```
 </dd>
@@ -13526,7 +12774,7 @@ await client.conversationalAi.dashboard.settings.update();
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.dashboard.PatchConvAiDashboardSettingsRequest` 
+**request:** `ElevenLabs.agents.dashboard.PatchConvAiDashboardSettingsRequest` 
     
 </dd>
 </dl>
@@ -13546,8 +12794,8 @@ await client.conversationalAi.dashboard.settings.update();
 </dl>
 </details>
 
-## ConversationalAi KnowledgeBase Documents
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">createFromUrl</a>({ ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
+## Agents KnowledgeBase Documents
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">createFromUrl</a>({ ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13574,7 +12822,7 @@ Create a knowledge base document generated by scraping the given webpage.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.createFromUrl({
+await client.agents.knowledgeBase.documents.createFromUrl({
     url: "url"
 });
 
@@ -13592,7 +12840,7 @@ await client.conversationalAi.knowledgeBase.documents.createFromUrl({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost` 
     
 </dd>
 </dl>
@@ -13612,7 +12860,7 @@ await client.conversationalAi.knowledgeBase.documents.createFromUrl({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">createFromFile</a>({ ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">createFromFile</a>({ ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13639,7 +12887,7 @@ Create a knowledge base document generated form the uploaded file.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.createFromFile({
+await client.agents.knowledgeBase.documents.createFromFile({
     file: fs.createReadStream("/path/to/your/file")
 });
 
@@ -13657,7 +12905,7 @@ await client.conversationalAi.knowledgeBase.documents.createFromFile({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost` 
     
 </dd>
 </dl>
@@ -13677,7 +12925,7 @@ await client.conversationalAi.knowledgeBase.documents.createFromFile({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">createFromText</a>({ ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">createFromText</a>({ ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13704,7 +12952,7 @@ Create a knowledge base document containing the provided text.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.createFromText({
+await client.agents.knowledgeBase.documents.createFromText({
     text: "text"
 });
 
@@ -13722,7 +12970,7 @@ await client.conversationalAi.knowledgeBase.documents.createFromText({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost` 
     
 </dd>
 </dl>
@@ -13742,7 +12990,7 @@ await client.conversationalAi.knowledgeBase.documents.createFromText({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">createFolder</a>({ ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">createFolder</a>({ ...params }) -> ElevenLabs.AddKnowledgeBaseResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -13769,7 +13017,7 @@ Create a folder used for grouping documents together.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.createFolder({
+await client.agents.knowledgeBase.documents.createFolder({
     name: "name"
 });
 
@@ -13787,7 +13035,7 @@ await client.conversationalAi.knowledgeBase.documents.createFolder({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost` 
     
 </dd>
 </dl>
@@ -13807,7 +13055,7 @@ await client.conversationalAi.knowledgeBase.documents.createFolder({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">get</a>(documentation_id, { ...params }) -> ElevenLabs.DocumentsGetResponse</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">get</a>(documentation_id, { ...params }) -> ElevenLabs.GetDocumentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -13834,7 +13082,7 @@ Get details about a specific documentation making up the agent's knowledge base
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM", {
+await client.agents.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM", {
     agentId: "agent_id"
 });
 
@@ -13860,7 +13108,7 @@ await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM"
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetRequest` 
+**request:** `ElevenLabs.agents.knowledgeBase.GetDocumentsRequest` 
     
 </dd>
 </dl>
@@ -13880,7 +13128,7 @@ await client.conversationalAi.knowledgeBase.documents.get("21m00Tcm4TlvDq8ikWAM"
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">delete</a>(documentation_id, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">delete</a>(documentation_id, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -13907,7 +13155,7 @@ Delete a document or folder from the knowledge base.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikWAM", {
+await client.agents.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikWAM", {
     force: true
 });
 
@@ -13933,7 +13181,7 @@ await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikW
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.DocumentsDeleteRequest` 
+**request:** `ElevenLabs.agents.knowledgeBase.DeleteDocumentsRequest` 
     
 </dd>
 </dl>
@@ -13953,7 +13201,7 @@ await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikW
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">update</a>(documentation_id, { ...params }) -> ElevenLabs.DocumentsUpdateResponse</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">update</a>(documentation_id, { ...params }) -> ElevenLabs.UpdateDocumentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -13980,7 +13228,7 @@ Update the name and/or content of a document.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikWAM");
+await client.agents.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikWAM");
 
 ```
 </dd>
@@ -14004,7 +13252,7 @@ await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikW
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch` 
     
 </dd>
 </dl>
@@ -14024,7 +13272,7 @@ await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikW
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getAgents</a>(documentation_id, { ...params }) -> ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModel</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">getAgents</a>(documentation_id, { ...params }) -> ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -14051,7 +13299,7 @@ Get a list of agents depending on this knowledge base document
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8ikWAM", {
+await client.agents.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8ikWAM", {
     dependentType: "direct",
     pageSize: 1,
     cursor: "cursor"
@@ -14079,7 +13327,7 @@ await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.DocumentsGetAgentsRequest` 
+**request:** `ElevenLabs.agents.knowledgeBase.GetAgentsDocumentsRequest` 
     
 </dd>
 </dl>
@@ -14099,7 +13347,7 @@ await client.conversationalAi.knowledgeBase.documents.getAgents("21m00Tcm4TlvDq8
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getBulkAgents</a>({ ...params }) -> ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModel</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">getBulkAgents</a>({ ...params }) -> ElevenLabs.GetKnowledgeBaseDependentAgentsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -14126,7 +13374,7 @@ Get a list of agents depending on any of the given knowledge base documents.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.getBulkAgents({
+await client.agents.knowledgeBase.documents.getBulkAgents({
     dependentType: "direct",
     pageSize: 1,
     cursor: "cursor",
@@ -14147,7 +13395,7 @@ await client.conversationalAi.knowledgeBase.documents.getBulkAgents({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost` 
     
 </dd>
 </dl>
@@ -14167,7 +13415,7 @@ await client.conversationalAi.knowledgeBase.documents.getBulkAgents({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getContent</a>(documentation_id) -> string</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">getContent</a>(documentation_id) -> string</code></summary>
 <dl>
 <dd>
 
@@ -14194,7 +13442,7 @@ Get the entire content of a document from the knowledge base
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.getContent("documentation_id");
+await client.agents.knowledgeBase.documents.getContent("documentation_id");
 
 ```
 </dd>
@@ -14230,7 +13478,7 @@ await client.conversationalAi.knowledgeBase.documents.getContent("documentation_
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getSourceFileUrl</a>(documentation_id) -> ElevenLabs.KnowledgeBaseSourceFileUrlResponseModel</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">getSourceFileUrl</a>(documentation_id) -> ElevenLabs.KnowledgeBaseSourceFileUrlResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -14257,7 +13505,7 @@ Get a signed URL to download the original source file of a file-type document fr
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.getSourceFileUrl("21m00Tcm4TlvDq8ikWAM");
+await client.agents.knowledgeBase.documents.getSourceFileUrl("21m00Tcm4TlvDq8ikWAM");
 
 ```
 </dd>
@@ -14293,7 +13541,7 @@ await client.conversationalAi.knowledgeBase.documents.getSourceFileUrl("21m00Tcm
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">move</a>(document_id, { ...params }) -> void</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">move</a>(document_id, { ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -14320,7 +13568,7 @@ Moves the entity from one folder to another.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.move("21m00Tcm4TlvDq8ikWAM");
+await client.agents.knowledgeBase.documents.move("21m00Tcm4TlvDq8ikWAM");
 
 ```
 </dd>
@@ -14344,7 +13592,7 @@ await client.conversationalAi.knowledgeBase.documents.move("21m00Tcm4TlvDq8ikWAM
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost` 
     
 </dd>
 </dl>
@@ -14364,7 +13612,7 @@ await client.conversationalAi.knowledgeBase.documents.move("21m00Tcm4TlvDq8ikWAM
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">bulkMove</a>({ ...params }) -> void</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">bulkMove</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -14391,7 +13639,7 @@ Moves multiple entities from one folder to another.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.bulkMove({
+await client.agents.knowledgeBase.documents.bulkMove({
     documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"]
 });
 
@@ -14409,7 +13657,7 @@ await client.conversationalAi.knowledgeBase.documents.bulkMove({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost` 
     
 </dd>
 </dl>
@@ -14429,7 +13677,7 @@ await client.conversationalAi.knowledgeBase.documents.bulkMove({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">bulkDelete</a>({ ...params }) -> Record&lt;string, ElevenLabs.DocumentsBulkDeleteResponseValue&gt;</code></summary>
+<details><summary><code>client.agents.knowledgeBase.documents.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/client/Client.ts">bulkDelete</a>({ ...params }) -> Record&lt;string, ElevenLabs.BulkDeleteDocumentsResponseValue&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14456,7 +13704,7 @@ Delete multiple documents or folders from the knowledge base. Each id succeeds o
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.bulkDelete({
+await client.agents.knowledgeBase.documents.bulkDelete({
     documentIds: ["21m00Tcm4TlvDq8ikWAM", "31m00Tcm4TlvDq8ikWBM"]
 });
 
@@ -14474,7 +13722,7 @@ await client.conversationalAi.knowledgeBase.documents.bulkDelete({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost` 
     
 </dd>
 </dl>
@@ -14494,8 +13742,8 @@ await client.conversationalAi.knowledgeBase.documents.bulkDelete({
 </dl>
 </details>
 
-## ConversationalAi KnowledgeBase CrawlJobs
-<details><summary><code>client.conversationalAi.knowledgeBase.crawlJobs.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ListCrawlJobsResponseModel</code></summary>
+## Agents KnowledgeBase CrawlJobs
+<details><summary><code>client.agents.knowledgeBase.crawlJobs.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ListCrawlJobsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -14522,7 +13770,7 @@ Get a list of ongoing and recent crawl jobs for the user.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.crawlJobs.list({
+await client.agents.knowledgeBase.crawlJobs.list({
     includeJobIds: ["include_job_ids"],
     pageSize: 1,
     cursor: "cursor"
@@ -14542,7 +13790,7 @@ await client.conversationalAi.knowledgeBase.crawlJobs.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.CrawlJobsListRequest` 
+**request:** `ElevenLabs.agents.knowledgeBase.ListCrawlJobsRequest` 
     
 </dd>
 </dl>
@@ -14562,7 +13810,7 @@ await client.conversationalAi.knowledgeBase.crawlJobs.list({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.crawlJobs.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateCrawlJobResponseModel</code></summary>
+<details><summary><code>client.agents.knowledgeBase.crawlJobs.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateCrawlJobResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -14589,7 +13837,7 @@ Create a crawl job to crawl the given URL with specified depth and page limits.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.crawlJobs.create({
+await client.agents.knowledgeBase.crawlJobs.create({
     url: "url"
 });
 
@@ -14607,7 +13855,7 @@ await client.conversationalAi.knowledgeBase.crawlJobs.create({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost` 
     
 </dd>
 </dl>
@@ -14627,7 +13875,7 @@ await client.conversationalAi.knowledgeBase.crawlJobs.create({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.crawlJobs.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">get</a>(crawl_job_id) -> ElevenLabs.GetCrawlJobResponseModel</code></summary>
+<details><summary><code>client.agents.knowledgeBase.crawlJobs.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">get</a>(crawl_job_id) -> ElevenLabs.GetCrawlJobResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -14654,7 +13902,7 @@ Get details about a specific crawl job including status and progress.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.crawlJobs.get("crawl_job_id");
+await client.agents.knowledgeBase.crawlJobs.get("crawl_job_id");
 
 ```
 </dd>
@@ -14690,7 +13938,7 @@ await client.conversationalAi.knowledgeBase.crawlJobs.get("crawl_job_id");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.crawlJobs.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">cancel</a>(crawl_job_id) -> unknown</code></summary>
+<details><summary><code>client.agents.knowledgeBase.crawlJobs.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/crawlJobs/client/Client.ts">cancel</a>(crawl_job_id) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -14717,7 +13965,7 @@ Cancel a crawl job and delete all associated documents and folders.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.crawlJobs.cancel("crawl_job_id");
+await client.agents.knowledgeBase.crawlJobs.cancel("crawl_job_id");
 
 ```
 </dd>
@@ -14753,8 +14001,8 @@ await client.conversationalAi.knowledgeBase.crawlJobs.cancel("crawl_job_id");
 </dl>
 </details>
 
-## ConversationalAi KnowledgeBase Document
-<details><summary><code>client.conversationalAi.knowledgeBase.document.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/document/client/Client.ts">updateFile</a>(documentation_id, { ...params }) -> ElevenLabs.DocumentUpdateFileResponse</code></summary>
+## Agents KnowledgeBase Document
+<details><summary><code>client.agents.knowledgeBase.document.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/document/client/Client.ts">updateFile</a>(documentation_id, { ...params }) -> ElevenLabs.UpdateFileDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -14781,7 +14029,7 @@ Update the source file of a file document. The document name, content, and metad
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.document.updateFile("21m00Tcm4TlvDq8ikWAM", {
+await client.agents.knowledgeBase.document.updateFile("21m00Tcm4TlvDq8ikWAM", {
     file: fs.createReadStream("/path/to/your/file")
 });
 
@@ -14807,7 +14055,7 @@ await client.conversationalAi.knowledgeBase.document.updateFile("21m00Tcm4TlvDq8
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIdUpdateFilePatch` 
+**request:** `ElevenLabs.agents.knowledgeBase.BodyUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIdUpdateFilePatch` 
     
 </dd>
 </dl>
@@ -14827,7 +14075,7 @@ await client.conversationalAi.knowledgeBase.document.updateFile("21m00Tcm4TlvDq8
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.document.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/document/client/Client.ts">refresh</a>(documentation_id) -> ElevenLabs.DocumentRefreshResponse</code></summary>
+<details><summary><code>client.agents.knowledgeBase.document.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/document/client/Client.ts">refresh</a>(documentation_id) -> ElevenLabs.RefreshDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -14854,7 +14102,7 @@ Manually refresh a URL document by re-fetching its content from the source URL.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.document.refresh("21m00Tcm4TlvDq8ikWAM");
+await client.agents.knowledgeBase.document.refresh("21m00Tcm4TlvDq8ikWAM");
 
 ```
 </dd>
@@ -14890,7 +14138,7 @@ await client.conversationalAi.knowledgeBase.document.refresh("21m00Tcm4TlvDq8ikW
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.knowledgeBase.document.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/document/client/Client.ts">computeRagIndex</a>(documentation_id, { ...params }) -> ElevenLabs.RagDocumentIndexResponseModel</code></summary>
+<details><summary><code>client.agents.knowledgeBase.document.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/document/client/Client.ts">computeRagIndex</a>(documentation_id, { ...params }) -> ElevenLabs.RagDocumentIndexResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -14917,7 +14165,7 @@ In case the document is not RAG indexed, it triggers rag indexing task, otherwis
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.document.computeRagIndex("21m00Tcm4TlvDq8ikWAM", {
+await client.agents.knowledgeBase.document.computeRagIndex("21m00Tcm4TlvDq8ikWAM", {
     model: "e5_mistral_7b_instruct"
 });
 
@@ -14943,7 +14191,7 @@ await client.conversationalAi.knowledgeBase.document.computeRagIndex("21m00Tcm4T
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.RagIndexRequestModel` 
+**request:** `ElevenLabs.agents.knowledgeBase.RagIndexRequestModel` 
     
 </dd>
 </dl>
@@ -14963,8 +14211,8 @@ await client.conversationalAi.knowledgeBase.document.computeRagIndex("21m00Tcm4T
 </dl>
 </details>
 
-## ConversationalAi KnowledgeBase Documents Summaries
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.summaries.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record&lt;string, ElevenLabs.SummariesGetResponseValue&gt;</code></summary>
+## Agents KnowledgeBase Documents Summaries
+<details><summary><code>client.agents.knowledgeBase.documents.summaries.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record&lt;string, ElevenLabs.GetSummariesResponseValue&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14991,7 +14239,7 @@ Gets multiple knowledge base document summaries by their IDs.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.summaries.get({
+await client.agents.knowledgeBase.documents.summaries.get({
     documentIds: ["21m00Tcm4TlvDq8ikWAM", "31n11Udm5UmwEr9jkXBN"]
 });
 
@@ -15009,7 +14257,7 @@ await client.conversationalAi.knowledgeBase.documents.summaries.get({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.documents.SummariesGetRequest` 
+**request:** `ElevenLabs.agents.knowledgeBase.documents.GetSummariesRequest` 
     
 </dd>
 </dl>
@@ -15029,8 +14277,8 @@ await client.conversationalAi.knowledgeBase.documents.summaries.get({
 </dl>
 </details>
 
-## ConversationalAi KnowledgeBase Documents Chunk
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.chunk.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/resources/chunk/client/Client.ts">get</a>(documentation_id, chunk_id, { ...params }) -> ElevenLabs.KnowledgeBaseDocumentChunkResponseModel</code></summary>
+## Agents KnowledgeBase Documents Chunk
+<details><summary><code>client.agents.knowledgeBase.documents.chunk.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/resources/chunk/client/Client.ts">get</a>(documentation_id, chunk_id, { ...params }) -> ElevenLabs.KnowledgeBaseDocumentChunkResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -15057,7 +14305,7 @@ Get details about a specific documentation part used by RAG.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8ikWAM", "chunk_id", {
+await client.agents.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8ikWAM", "chunk_id", {
     embeddingModel: "e5_mistral_7b_instruct"
 });
 
@@ -15091,7 +14339,7 @@ await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.documents.ChunkGetRequest` 
+**request:** `ElevenLabs.agents.knowledgeBase.documents.GetChunkRequest` 
     
 </dd>
 </dl>
@@ -15111,8 +14359,8 @@ await client.conversationalAi.knowledgeBase.documents.chunk.get("21m00Tcm4TlvDq8
 </dl>
 </details>
 
-## ConversationalAi KnowledgeBase Documents Chunks
-<details><summary><code>client.conversationalAi.knowledgeBase.documents.chunks.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/resources/chunks/client/Client.ts">list</a>(documentation_id, { ...params }) -> ElevenLabs.KnowledgeBaseDocumentChunksResponseModel</code></summary>
+## Agents KnowledgeBase Documents Chunks
+<details><summary><code>client.agents.knowledgeBase.documents.chunks.<a href="/src/api/resources/agents/resources/knowledgeBase/resources/documents/resources/chunks/client/Client.ts">list</a>(documentation_id, { ...params }) -> ElevenLabs.KnowledgeBaseDocumentChunksResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -15139,7 +14387,7 @@ Get all RAG chunks for a specific knowledge base document.
 <dd>
 
 ```typescript
-await client.conversationalAi.knowledgeBase.documents.chunks.list("21m00Tcm4TlvDq8ikWAM", {
+await client.agents.knowledgeBase.documents.chunks.list("21m00Tcm4TlvDq8ikWAM", {
     embeddingModel: "e5_mistral_7b_instruct",
     pageSize: 1,
     cursor: "cursor"
@@ -15167,7 +14415,7 @@ await client.conversationalAi.knowledgeBase.documents.chunks.list("21m00Tcm4TlvD
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.knowledgeBase.documents.ChunksListRequest` 
+**request:** `ElevenLabs.agents.knowledgeBase.documents.ListChunksRequest` 
     
 </dd>
 </dl>
@@ -15187,8 +14435,8 @@ await client.conversationalAi.knowledgeBase.documents.chunks.list("21m00Tcm4TlvD
 </dl>
 </details>
 
-## ConversationalAi McpServers Tools
-<details><summary><code>client.conversationalAi.mcpServers.tools.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/tools/client/Client.ts">list</a>(mcp_server_id, { ...params }) -> ElevenLabs.ListMcpToolsResponseModel</code></summary>
+## Agents McpServers Tools
+<details><summary><code>client.agents.mcpServers.tools.<a href="/src/api/resources/agents/resources/mcpServers/resources/tools/client/Client.ts">list</a>(mcp_server_id, { ...params }) -> ElevenLabs.ListMcpToolsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -15215,7 +14463,7 @@ Retrieve all tools available for a specific MCP server configuration.
 <dd>
 
 ```typescript
-await client.conversationalAi.mcpServers.tools.list("mcp_server_id", {
+await client.agents.mcpServers.tools.list("mcp_server_id", {
     environment: "environment"
 });
 
@@ -15241,7 +14489,7 @@ await client.conversationalAi.mcpServers.tools.list("mcp_server_id", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.mcpServers.ToolsListRequest` 
+**request:** `ElevenLabs.agents.mcpServers.ListToolsRequest` 
     
 </dd>
 </dl>
@@ -15261,82 +14509,8 @@ await client.conversationalAi.mcpServers.tools.list("mcp_server_id", {
 </dl>
 </details>
 
-## ConversationalAi McpServers ApprovalPolicy
-<details><summary><code>client.conversationalAi.mcpServers.approvalPolicy.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/approvalPolicy/client/Client.ts">update</a>(mcp_server_id, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update the approval policy configuration for an MCP server. DEPRECATED: Use PATCH /mcp-servers/{id} endpoint instead.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.mcpServers.approvalPolicy.update("mcp_server_id", {
-    approvalPolicy: "auto_approve_all"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**mcp_server_id:** `string` — ID of the MCP Server.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.mcpServers.McpApprovalPolicyUpdateRequestModel` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ApprovalPolicyClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi McpServers ToolApprovals
-<details><summary><code>client.conversationalAi.mcpServers.toolApprovals.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolApprovals/client/Client.ts">create</a>(mcp_server_id, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+## Agents McpServers ToolApprovals
+<details><summary><code>client.agents.mcpServers.toolApprovals.<a href="/src/api/resources/agents/resources/mcpServers/resources/toolApprovals/client/Client.ts">create</a>(mcp_server_id, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -15363,7 +14537,7 @@ Add approval for a specific MCP tool when using per-tool approval mode.
 <dd>
 
 ```typescript
-await client.conversationalAi.mcpServers.toolApprovals.create("mcp_server_id", {
+await client.agents.mcpServers.toolApprovals.create("mcp_server_id", {
     toolName: "tool_name",
     toolDescription: "tool_description"
 });
@@ -15390,7 +14564,7 @@ await client.conversationalAi.mcpServers.toolApprovals.create("mcp_server_id", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.mcpServers.McpToolAddApprovalRequestModel` 
+**request:** `ElevenLabs.agents.mcpServers.McpToolAddApprovalRequestModel` 
     
 </dd>
 </dl>
@@ -15410,7 +14584,7 @@ await client.conversationalAi.mcpServers.toolApprovals.create("mcp_server_id", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.mcpServers.toolApprovals.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolApprovals/client/Client.ts">delete</a>(mcp_server_id, tool_name) -> ElevenLabs.McpServerResponseModel</code></summary>
+<details><summary><code>client.agents.mcpServers.toolApprovals.<a href="/src/api/resources/agents/resources/mcpServers/resources/toolApprovals/client/Client.ts">delete</a>(mcp_server_id, tool_name) -> ElevenLabs.McpServerResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -15437,7 +14611,7 @@ Remove approval for a specific MCP tool when using per-tool approval mode.
 <dd>
 
 ```typescript
-await client.conversationalAi.mcpServers.toolApprovals.delete("mcp_server_id", "tool_name");
+await client.agents.mcpServers.toolApprovals.delete("mcp_server_id", "tool_name");
 
 ```
 </dd>
@@ -15481,8 +14655,8 @@ await client.conversationalAi.mcpServers.toolApprovals.delete("mcp_server_id", "
 </dl>
 </details>
 
-## ConversationalAi McpServers ToolConfigs
-<details><summary><code>client.conversationalAi.mcpServers.toolConfigs.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolConfigs/client/Client.ts">create</a>(mcp_server_id, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+## Agents McpServers ToolConfigs
+<details><summary><code>client.agents.mcpServers.toolConfigs.<a href="/src/api/resources/agents/resources/mcpServers/resources/toolConfigs/client/Client.ts">create</a>(mcp_server_id, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -15509,7 +14683,7 @@ Create configuration overrides for a specific MCP tool.
 <dd>
 
 ```typescript
-await client.conversationalAi.mcpServers.toolConfigs.create("mcp_server_id", {
+await client.agents.mcpServers.toolConfigs.create("mcp_server_id", {
     environment: "environment",
     toolName: "tool_name"
 });
@@ -15536,7 +14710,7 @@ await client.conversationalAi.mcpServers.toolConfigs.create("mcp_server_id", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideCreateRequestModel` 
+**request:** `ElevenLabs.agents.mcpServers.McpToolConfigOverrideCreateRequestModel` 
     
 </dd>
 </dl>
@@ -15556,7 +14730,7 @@ await client.conversationalAi.mcpServers.toolConfigs.create("mcp_server_id", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.mcpServers.toolConfigs.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolConfigs/client/Client.ts">get</a>(mcp_server_id, tool_name) -> ElevenLabs.McpToolConfigOverrideOutput</code></summary>
+<details><summary><code>client.agents.mcpServers.toolConfigs.<a href="/src/api/resources/agents/resources/mcpServers/resources/toolConfigs/client/Client.ts">get</a>(mcp_server_id, tool_name) -> ElevenLabs.McpToolConfigOverrideOutput</code></summary>
 <dl>
 <dd>
 
@@ -15583,7 +14757,7 @@ Retrieve configuration overrides for a specific MCP tool.
 <dd>
 
 ```typescript
-await client.conversationalAi.mcpServers.toolConfigs.get("mcp_server_id", "tool_name");
+await client.agents.mcpServers.toolConfigs.get("mcp_server_id", "tool_name");
 
 ```
 </dd>
@@ -15627,7 +14801,7 @@ await client.conversationalAi.mcpServers.toolConfigs.get("mcp_server_id", "tool_
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.mcpServers.toolConfigs.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolConfigs/client/Client.ts">delete</a>(mcp_server_id, tool_name) -> ElevenLabs.McpServerResponseModel</code></summary>
+<details><summary><code>client.agents.mcpServers.toolConfigs.<a href="/src/api/resources/agents/resources/mcpServers/resources/toolConfigs/client/Client.ts">delete</a>(mcp_server_id, tool_name) -> ElevenLabs.McpServerResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -15654,7 +14828,7 @@ Remove configuration overrides for a specific MCP tool.
 <dd>
 
 ```typescript
-await client.conversationalAi.mcpServers.toolConfigs.delete("mcp_server_id", "tool_name");
+await client.agents.mcpServers.toolConfigs.delete("mcp_server_id", "tool_name");
 
 ```
 </dd>
@@ -15698,7 +14872,7 @@ await client.conversationalAi.mcpServers.toolConfigs.delete("mcp_server_id", "to
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.mcpServers.toolConfigs.<a href="/src/api/resources/conversationalAi/resources/mcpServers/resources/toolConfigs/client/Client.ts">update</a>(mcp_server_id, tool_name, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
+<details><summary><code>client.agents.mcpServers.toolConfigs.<a href="/src/api/resources/agents/resources/mcpServers/resources/toolConfigs/client/Client.ts">update</a>(mcp_server_id, tool_name, { ...params }) -> ElevenLabs.McpServerResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -15725,7 +14899,7 @@ Update configuration overrides for a specific MCP tool.
 <dd>
 
 ```typescript
-await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "tool_name", {
+await client.agents.mcpServers.toolConfigs.update("mcp_server_id", "tool_name", {
     environment: "environment"
 });
 
@@ -15759,7 +14933,7 @@ await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "to
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.mcpServers.McpToolConfigOverrideUpdateRequestModel` 
+**request:** `ElevenLabs.agents.mcpServers.McpToolConfigOverrideUpdateRequestModel` 
     
 </dd>
 </dl>
@@ -15779,8 +14953,258 @@ await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "to
 </dl>
 </details>
 
-## ConversationalAi Tests Folders
-<details><summary><code>client.conversationalAi.tests.folders.<a href="/src/api/resources/conversationalAi/resources/tests/resources/folders/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentTestFolderResponseModel</code></summary>
+## Agents Procedures Drafts
+<details><summary><code>client.agents.procedures.drafts.<a href="/src/api/resources/agents/resources/procedures/resources/drafts/client/Client.ts">get</a>(agent_id, branch_id, procedure_id) -> ElevenLabs.ProcedureDraftResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get user's draft for a procedure
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.procedures.drafts.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` — The procedure ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DraftsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.procedures.drafts.<a href="/src/api/resources/agents/resources/procedures/resources/drafts/client/Client.ts">delete</a>(agent_id, branch_id, procedure_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete user's draft for a procedure, resetting to the committed version
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.procedures.drafts.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` — The procedure ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DraftsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.procedures.drafts.<a href="/src/api/resources/agents/resources/procedures/resources/drafts/client/Client.ts">update</a>(agent_id, branch_id, procedure_id, { ...params }) -> ElevenLabs.ProcedureDraftResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create or update user's draft for a procedure
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.procedures.drafts.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3", {
+    name: "name",
+    content: "content",
+    type: "free_form"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — Agent ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` — The procedure ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.procedures.UpdateProcedureDraftRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DraftsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents Tests Folders
+<details><summary><code>client.agents.tests.folders.<a href="/src/api/resources/agents/resources/tests/resources/folders/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentTestFolderResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -15807,7 +15231,7 @@ Creates a folder for organizing agent tests.
 <dd>
 
 ```typescript
-await client.conversationalAi.tests.folders.create({
+await client.agents.tests.folders.create({
     name: "name"
 });
 
@@ -15825,7 +15249,7 @@ await client.conversationalAi.tests.folders.create({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.tests.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost` 
+**request:** `ElevenLabs.agents.tests.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost` 
     
 </dd>
 </dl>
@@ -15845,7 +15269,7 @@ await client.conversationalAi.tests.folders.create({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.tests.folders.<a href="/src/api/resources/conversationalAi/resources/tests/resources/folders/client/Client.ts">get</a>(folder_id) -> ElevenLabs.GetAgentTestFolderResponseModel</code></summary>
+<details><summary><code>client.agents.tests.folders.<a href="/src/api/resources/agents/resources/tests/resources/folders/client/Client.ts">get</a>(folder_id) -> ElevenLabs.GetAgentTestFolderResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -15872,7 +15296,7 @@ Gets an agent test folder by ID, including its folder path.
 <dd>
 
 ```typescript
-await client.conversationalAi.tests.folders.get("tfld_7301khxdkycse5f88fzjdtrterzm");
+await client.agents.tests.folders.get("tfld_7301khxdkycse5f88fzjdtrterzm");
 
 ```
 </dd>
@@ -15908,7 +15332,7 @@ await client.conversationalAi.tests.folders.get("tfld_7301khxdkycse5f88fzjdtrter
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.tests.folders.<a href="/src/api/resources/conversationalAi/resources/tests/resources/folders/client/Client.ts">delete</a>(folder_id, { ...params }) -> void</code></summary>
+<details><summary><code>client.agents.tests.folders.<a href="/src/api/resources/agents/resources/tests/resources/folders/client/Client.ts">delete</a>(folder_id, { ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -15935,7 +15359,7 @@ Deletes an agent test folder by ID. Use force=true to delete a non-empty folder 
 <dd>
 
 ```typescript
-await client.conversationalAi.tests.folders.delete("tfld_7301khxdkycse5f88fzjdtrterzm", {
+await client.agents.tests.folders.delete("tfld_7301khxdkycse5f88fzjdtrterzm", {
     force: true
 });
 
@@ -15961,7 +15385,7 @@ await client.conversationalAi.tests.folders.delete("tfld_7301khxdkycse5f88fzjdtr
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.tests.FoldersDeleteRequest` 
+**request:** `ElevenLabs.agents.tests.DeleteFoldersRequest` 
     
 </dd>
 </dl>
@@ -15981,7 +15405,7 @@ await client.conversationalAi.tests.folders.delete("tfld_7301khxdkycse5f88fzjdtr
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.tests.folders.<a href="/src/api/resources/conversationalAi/resources/tests/resources/folders/client/Client.ts">update</a>(folder_id, { ...params }) -> ElevenLabs.GetAgentTestFolderResponseModel</code></summary>
+<details><summary><code>client.agents.tests.folders.<a href="/src/api/resources/agents/resources/tests/resources/folders/client/Client.ts">update</a>(folder_id, { ...params }) -> ElevenLabs.GetAgentTestFolderResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -16008,7 +15432,7 @@ Updates an agent test folder. Currently only supports updating the folder name.
 <dd>
 
 ```typescript
-await client.conversationalAi.tests.folders.update("tfld_7301khxdkycse5f88fzjdtrterzm", {
+await client.agents.tests.folders.update("tfld_7301khxdkycse5f88fzjdtrterzm", {
     name: "name"
 });
 
@@ -16034,7 +15458,7 @@ await client.conversationalAi.tests.folders.update("tfld_7301khxdkycse5f88fzjdtr
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.tests.BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIdPatch` 
+**request:** `ElevenLabs.agents.tests.BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIdPatch` 
     
 </dd>
 </dl>
@@ -16054,8 +15478,8 @@ await client.conversationalAi.tests.folders.update("tfld_7301khxdkycse5f88fzjdtr
 </dl>
 </details>
 
-## ConversationalAi Tests Invocations
-<details><summary><code>client.conversationalAi.tests.invocations.<a href="/src/api/resources/conversationalAi/resources/tests/resources/invocations/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetTestInvocationsPageResponseModel</code></summary>
+## Agents Tests Invocations
+<details><summary><code>client.agents.tests.invocations.<a href="/src/api/resources/agents/resources/tests/resources/invocations/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetTestInvocationsPageResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -16082,7 +15506,7 @@ Lists all test invocations with pagination support and optional search filtering
 <dd>
 
 ```typescript
-await client.conversationalAi.tests.invocations.list({
+await client.agents.tests.invocations.list({
     agentId: "agent_id",
     pageSize: 1,
     cursor: "cursor"
@@ -16102,7 +15526,7 @@ await client.conversationalAi.tests.invocations.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.tests.InvocationsListRequest` 
+**request:** `ElevenLabs.agents.tests.ListInvocationsRequest` 
     
 </dd>
 </dl>
@@ -16122,7 +15546,7 @@ await client.conversationalAi.tests.invocations.list({
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.tests.invocations.<a href="/src/api/resources/conversationalAi/resources/tests/resources/invocations/client/Client.ts">get</a>(test_invocation_id) -> ElevenLabs.GetTestSuiteInvocationResponseModel</code></summary>
+<details><summary><code>client.agents.tests.invocations.<a href="/src/api/resources/agents/resources/tests/resources/invocations/client/Client.ts">get</a>(test_invocation_id) -> ElevenLabs.GetTestSuiteInvocationResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -16149,7 +15573,7 @@ Gets a test invocation by ID.
 <dd>
 
 ```typescript
-await client.conversationalAi.tests.invocations.get("test_invocation_id");
+await client.agents.tests.invocations.get("test_invocation_id");
 
 ```
 </dd>
@@ -16185,7 +15609,7 @@ await client.conversationalAi.tests.invocations.get("test_invocation_id");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.tests.invocations.<a href="/src/api/resources/conversationalAi/resources/tests/resources/invocations/client/Client.ts">resubmit</a>(test_invocation_id, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.agents.tests.invocations.<a href="/src/api/resources/agents/resources/tests/resources/invocations/client/Client.ts">resubmit</a>(test_invocation_id, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -16212,7 +15636,7 @@ Resubmits specific test runs from a test invocation.
 <dd>
 
 ```typescript
-await client.conversationalAi.tests.invocations.resubmit("test_invocation_id", {
+await client.agents.tests.invocations.resubmit("test_invocation_id", {
     testRunIds: ["test_run_ids"],
     agentId: "agent_id"
 });
@@ -16239,7 +15663,7 @@ await client.conversationalAi.tests.invocations.resubmit("test_invocation_id", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.tests.ResubmitTestsRequestModel` 
+**request:** `ElevenLabs.agents.tests.ResubmitTestsRequestModel` 
     
 </dd>
 </dl>
@@ -16259,8 +15683,8 @@ await client.conversationalAi.tests.invocations.resubmit("test_invocation_id", {
 </dl>
 </details>
 
-## ConversationalAi Tools Executions
-<details><summary><code>client.conversationalAi.tools.executions.<a href="/src/api/resources/conversationalAi/resources/tools/resources/executions/client/Client.ts">get</a>(tool_id, { ...params }) -> ElevenLabs.GetToolExecutionsPageResponseModel</code></summary>
+## Agents Tools Executions
+<details><summary><code>client.agents.tools.executions.<a href="/src/api/resources/agents/resources/tools/resources/executions/client/Client.ts">get</a>(tool_id, { ...params }) -> ElevenLabs.GetToolExecutionsPageResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -16287,7 +15711,7 @@ Get paginated list of tool executions for a specific tool.
 <dd>
 
 ```typescript
-await client.conversationalAi.tools.executions.get("tool_id", {
+await client.agents.tools.executions.get("tool_id", {
     cursor: "cursor",
     pageSize: 1,
     isError: true,
@@ -16319,7 +15743,7 @@ await client.conversationalAi.tools.executions.get("tool_id", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.tools.ExecutionsGetRequest` 
+**request:** `ElevenLabs.agents.tools.GetExecutionsRequest` 
     
 </dd>
 </dl>
@@ -16328,6 +15752,80 @@ await client.conversationalAi.tools.executions.get("tool_id", {
 <dd>
 
 **requestOptions:** `ExecutionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents Widget Avatar
+<details><summary><code>client.agents.widget.avatar.<a href="/src/api/resources/agents/resources/widget/resources/avatar/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.PostAgentAvatarResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sets the avatar for an agent displayed in the widget
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.widget.avatar.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    avatarFile: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.widget.BodyPostAgentAvatarV1ConvaiAgentsAgentIdAvatarPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AvatarClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -16385,7 +15883,7 @@ await client.dubbing.project.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.dubbing.ProjectListRequest` 
+**request:** `ElevenLabs.dubbing.ListProjectRequest` 
     
 </dd>
 </dl>
@@ -16598,444 +16096,6 @@ await client.dubbing.project.delete("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3");
 </dl>
 </details>
 
-## Dubbing Resource
-<details><summary><code>client.dubbing.resource.<a href="/src/api/resources/dubbing/resources/resource/client/Client.ts">get</a>(dubbing_id) -> ElevenLabs.DubbingResource</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Given a dubbing ID generated from the '/v1/dubbing' endpoint with studio enabled, returns the dubbing resource.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.get("dubbing_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ResourceClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.dubbing.resource.<a href="/src/api/resources/dubbing/resources/resource/client/Client.ts">migrateSegments</a>(dubbing_id, { ...params }) -> ElevenLabs.SegmentMigrationResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Change the attribution of one or more segments to a different speaker.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.migrateSegments("dubbing_id", {
-    segmentIds: ["segment_ids"],
-    speakerId: "speaker_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.BodyMoveSegmentsBetweenSpeakersV1DubbingResourceDubbingIdMigrateSegmentsPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ResourceClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.dubbing.resource.<a href="/src/api/resources/dubbing/resources/resource/client/Client.ts">transcribe</a>(dubbing_id, { ...params }) -> ElevenLabs.SegmentTranscriptionResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Regenerate the transcriptions for the specified segments. Does not automatically regenerate translations or dubs.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.transcribe("dubbing_id", {
-    segments: ["segments"]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.BodyTranscribesSegmentsV1DubbingResourceDubbingIdTranscribePost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ResourceClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.dubbing.resource.<a href="/src/api/resources/dubbing/resources/resource/client/Client.ts">translate</a>(dubbing_id, { ...params }) -> ElevenLabs.SegmentTranslationResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Regenerate the translations for either the entire resource or the specified segments/languages. Will automatically transcribe missing transcriptions. Will not automatically regenerate the dubs.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.translate("dubbing_id", {
-    segments: ["segments"]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdTranslatePost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ResourceClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.dubbing.resource.<a href="/src/api/resources/dubbing/resources/resource/client/Client.ts">dub</a>(dubbing_id, { ...params }) -> ElevenLabs.SegmentDubResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Regenerate the dubs for either the entire resource or the specified segments/languages. Will automatically transcribe and translate any missing transcriptions and translations.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.dub("dubbing_id", {
-    segments: ["segments"]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIdDubPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ResourceClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.dubbing.resource.<a href="/src/api/resources/dubbing/resources/resource/client/Client.ts">render</a>(dubbing_id, language, { ...params }) -> ElevenLabs.DubbingRenderResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Regenerate the output media for a language using the latest Studio state. Please ensure all segments have been dubbed before rendering, otherwise they will be omitted. Renders are generated asynchronously, and to check the status of all renders please use the 'Get Dubbing Resource' endpoint.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.render("dubbing_id", "language", {
-    renderType: "mp4"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**language:** `string` — The target language code to render, eg. 'es'. To render the source track use 'original'.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIdRenderLanguagePost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ResourceClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Dubbing Audio
 <details><summary><code>client.dubbing.audio.<a href="/src/api/resources/dubbing/resources/audio/client/Client.ts">get</a>(dubbing_id, language_code) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
@@ -17108,88 +16168,6 @@ await client.dubbing.audio.get("dubbing_id", "language_code");
 </dl>
 </details>
 
-## Dubbing Transcript
-<details><summary><code>client.dubbing.transcript.<a href="/src/api/resources/dubbing/resources/transcript/client/Client.ts">getTranscriptForDub</a>(dubbing_id, language_code, { ...params }) -> ElevenLabs.TranscriptGetTranscriptForDubResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns transcript for the dub as an SRT or WEBVTT file.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.transcript.getTranscriptForDub("dubbing_id", "source", {
-    formatType: "srt"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**language_code:** `string` — ISO-693 language code to retrieve the transcript for. Use 'source' to fetch the transcript of the original media.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.TranscriptGetTranscriptForDubRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TranscriptClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Dubbing Transcripts
 <details><summary><code>client.dubbing.transcripts.<a href="/src/api/resources/dubbing/resources/transcripts/client/Client.ts">get</a>(dubbing_id, language_code, format_type) -> ElevenLabs.DubbingTranscriptsResponseModel</code></summary>
 <dl>
@@ -17250,7 +16228,7 @@ await client.dubbing.transcripts.get("dubbing_id", "source", "srt");
 <dl>
 <dd>
 
-**format_type:** `ElevenLabs.TranscriptsGetRequestFormatType` — Format to return transcript in. For subtitles use either 'srt' or 'webvtt', and for a full transcript use 'json'. The 'json' format is not yet supported for Dubbing Studio.
+**format_type:** `ElevenLabs.GetTranscriptsRequestFormatType` — Format to return transcript in. For subtitles use either 'srt' or 'webvtt', and for a full transcript use 'json'. The 'json' format is not yet supported for Dubbing Studio.
     
 </dd>
 </dl>
@@ -17324,7 +16302,7 @@ await client.dubbing.project.language.list("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", 
 <dl>
 <dd>
 
-**request:** `ElevenLabs.dubbing.project.LanguageListRequest` 
+**request:** `ElevenLabs.dubbing.project.ListLanguageRequest` 
     
 </dd>
 </dl>
@@ -18251,544 +17229,8 @@ await client.dubbing.project.language.transcript.regenerate("proj_1601kwkyxp0hfz
 </dl>
 </details>
 
-## Dubbing Resource Language
-<details><summary><code>client.dubbing.resource.language.<a href="/src/api/resources/dubbing/resources/resource/resources/language/client/Client.ts">add</a>(dubbing_id, { ...params }) -> ElevenLabs.LanguageAddedResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Adds the given ElevenLab Turbo V2/V2.5 language code to the resource. Does not automatically generate transcripts/translations/audio.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.language.add("dubbing_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.resource.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIdLanguagePost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `LanguageClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Dubbing Resource Segment
-<details><summary><code>client.dubbing.resource.segment.<a href="/src/api/resources/dubbing/resources/resource/resources/segment/client/Client.ts">update</a>(dubbing_id, segment_id, language, { ...params }) -> ElevenLabs.SegmentUpdateResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Modifies a single segment with new text and/or start/end times. Will update the values for only a specific language of a segment. Does not automatically regenerate the dub.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.segment.update("dubbing_id", "segment_id", "language");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**segment_id:** `string` — ID of the segment
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**language:** `string` — ID of the language.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.resource.SegmentUpdatePayload` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SegmentClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.dubbing.resource.segment.<a href="/src/api/resources/dubbing/resources/resource/resources/segment/client/Client.ts">delete</a>(dubbing_id, segment_id) -> ElevenLabs.SegmentDeleteResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Deletes a single segment from the dubbing.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.segment.delete("dubbing_id", "segment_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**segment_id:** `string` — ID of the segment
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SegmentClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Dubbing Resource Speaker
-<details><summary><code>client.dubbing.resource.speaker.<a href="/src/api/resources/dubbing/resources/resource/resources/speaker/client/Client.ts">update</a>(dubbing_id, speaker_id, { ...params }) -> ElevenLabs.SpeakerUpdatedResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Amend the metadata associated with a speaker, such as their voice. Both voice cloning and using voices from the ElevenLabs library are supported.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.speaker.update("dubbing_id", "speaker_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**speaker_id:** `string` — ID of the speaker.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.resource.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SpeakerClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.dubbing.resource.speaker.<a href="/src/api/resources/dubbing/resources/resource/resources/speaker/client/Client.ts">create</a>(dubbing_id, { ...params }) -> ElevenLabs.SpeakerCreatedResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Creates a new speaker in a dubbing resource. The speaker is added to every available language and can optionally be associated with an ElevenLabs voice and voice settings.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.speaker.create("dubbing_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.resource.BodyCreateANewSpeakerV1DubbingResourceDubbingIdSpeakerPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SpeakerClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.dubbing.resource.speaker.<a href="/src/api/resources/dubbing/resources/resource/resources/speaker/client/Client.ts">findSimilarVoices</a>(dubbing_id, speaker_id) -> ElevenLabs.SimilarVoicesForSpeakerResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Fetch the top 10 similar voices to a speaker, including the voice IDs, names, descriptions, and, where possible, a sample audio recording.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.speaker.findSimilarVoices("dubbing_id", "speaker_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**speaker_id:** `string` — ID of the speaker.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SpeakerClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Dubbing Resource Speaker Segment
-<details><summary><code>client.dubbing.resource.speaker.segment.<a href="/src/api/resources/dubbing/resources/resource/resources/speaker/resources/segment/client/Client.ts">create</a>(dubbing_id, speaker_id, { ...params }) -> ElevenLabs.SegmentCreateResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Creates a new segment in dubbing resource with a start and end time for the speaker in every available language. Does not automatically generate transcripts/translations/audio.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.dubbing.resource.speaker.segment.create("dubbing_id", "speaker_id", {
-    startTime: 1.1,
-    endTime: 1.1
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**dubbing_id:** `string` — ID of the dubbing project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**speaker_id:** `string` — ID of the speaker.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.dubbing.resource.speaker.SegmentCreatePayload` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SegmentClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Music CompositionPlan
-<details><summary><code>client.music.compositionPlan.<a href="/src/api/resources/music/resources/compositionPlan/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CompositionPlanCreateResponse</code></summary>
+<details><summary><code>client.music.compositionPlan.<a href="/src/api/resources/music/resources/compositionPlan/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateCompositionPlanResponse</code></summary>
 <dl>
 <dd>
 
@@ -18904,7 +17346,7 @@ await client.music.finetunes.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.music.FinetunesListRequest` 
+**request:** `ElevenLabs.music.ListFinetunesRequest` 
     
 </dd>
 </dl>
@@ -19237,7 +17679,7 @@ await client.productions.orders.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.productions.OrdersListRequest` 
+**request:** `ElevenLabs.productions.ListOrdersRequest` 
     
 </dd>
 </dl>
@@ -20477,7 +18919,7 @@ await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_
 </details>
 
 ## SpeechToText Transcripts
-<details><summary><code>client.speechToText.transcripts.<a href="/src/api/resources/speechToText/resources/transcripts/client/Client.ts">get</a>(transcription_id) -> ElevenLabs.TranscriptsGetResponse</code></summary>
+<details><summary><code>client.speechToText.transcripts.<a href="/src/api/resources/speechToText/resources/transcripts/client/Client.ts">get</a>(transcription_id) -> ElevenLabs.GetTranscriptsResponse</code></summary>
 <dl>
 <dd>
 
@@ -20777,7 +19219,7 @@ await client.studio.projects.get("21m00Tcm4TlvDq8ikWAM", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.studio.ProjectsGetRequest` 
+**request:** `ElevenLabs.studio.GetProjectsRequest` 
     
 </dd>
 </dl>
@@ -22588,7 +21030,7 @@ await client.voices.accents.get({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.voices.AccentsGetRequest` 
+**request:** `ElevenLabs.voices.GetAccentsRequest` 
     
 </dd>
 </dl>
@@ -23244,7 +21686,7 @@ await client.voices.pvc.samples.audio.get("21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h3
 <dl>
 <dd>
 
-**request:** `ElevenLabs.voices.pvc.samples.AudioGetRequest` 
+**request:** `ElevenLabs.voices.pvc.samples.GetAudioRequest` 
     
 </dd>
 </dl>
@@ -23820,7 +22262,7 @@ await client.workspace.auditLogs.list({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.workspace.AuditLogsListRequest` 
+**request:** `ElevenLabs.workspace.ListAuditLogsRequest` 
     
 </dd>
 </dl>
@@ -23896,7 +22338,7 @@ await client.workspace.authConnections.list();
 </dl>
 </details>
 
-<details><summary><code>client.workspace.authConnections.<a href="/src/api/resources/workspace/resources/authConnections/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.AuthConnectionsCreateResponse</code></summary>
+<details><summary><code>client.workspace.authConnections.<a href="/src/api/resources/workspace/resources/authConnections/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAuthConnectionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -23946,7 +22388,7 @@ await client.workspace.authConnections.create({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.AuthConnectionsCreateRequestBody` 
+**request:** `ElevenLabs.CreateAuthConnectionsRequestBody` 
     
 </dd>
 </dl>
@@ -24029,7 +22471,7 @@ await client.workspace.authConnections.delete("auth_connection_id");
 </dl>
 </details>
 
-<details><summary><code>client.workspace.authConnections.<a href="/src/api/resources/workspace/resources/authConnections/client/Client.ts">update</a>(auth_connection_id, { ...params }) -> ElevenLabs.AuthConnectionsUpdateResponse</code></summary>
+<details><summary><code>client.workspace.authConnections.<a href="/src/api/resources/workspace/resources/authConnections/client/Client.ts">update</a>(auth_connection_id, { ...params }) -> ElevenLabs.UpdateAuthConnectionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -24082,7 +22524,7 @@ await client.workspace.authConnections.update("auth_connection_id", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.AuthConnectionsUpdateRequestBody` 
+**request:** `ElevenLabs.UpdateAuthConnectionsRequestBody` 
     
 </dd>
 </dl>
@@ -24203,7 +22645,7 @@ await client.workspace.groups.search({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.workspace.GroupsSearchRequest` 
+**request:** `ElevenLabs.workspace.SearchGroupsRequest` 
     
 </dd>
 </dl>
@@ -24594,7 +23036,7 @@ await client.workspace.resources.get("resource_id", {
 <dl>
 <dd>
 
-**request:** `ElevenLabs.workspace.ResourcesGetRequest` 
+**request:** `ElevenLabs.workspace.GetResourcesRequest` 
     
 </dd>
 </dl>
@@ -25085,7 +23527,7 @@ await client.workspaces.apiKeys.disable({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.workspaces.ApiKeysDisableRequest` 
+**request:** `ElevenLabs.workspaces.DisableApiKeysRequest` 
     
 </dd>
 </dl>

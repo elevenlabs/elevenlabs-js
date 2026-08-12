@@ -1,1 +1,0 @@
-export type { BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost } from "./BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost";
