@@ -3,15 +3,15 @@
 import * as core from "../../../../core/index.js";
 import { fromJson } from "../../../../core/json.js";
 import * as serializers from "../../../../serialization/index.js";
-import { TextToDialogueClientMessage } from "../../../../serialization/types/TextToDialogueClientMessage.js";
+import { TextToDialogueMultiClientMessage } from "../../../../serialization/types/TextToDialogueMultiClientMessage.js";
 import type * as ElevenLabs from "../../../index.js";
 
-export declare namespace TextToDialogueSocket {
+export declare namespace TextToDialogueMultiContextSocket {
     export interface Args {
         socket: core.ReconnectingWebSocket;
     }
 
-    export type Response = ElevenLabs.ReceiveTextToDialogueWebsocketMessage;
+    export type Response = ElevenLabs.ReceiveTextToDialogueWebsocketMessageMulti;
     type EventHandlers = {
         open?: () => void;
         message?: (message: Response) => void;
@@ -20,16 +20,16 @@ export declare namespace TextToDialogueSocket {
     };
 }
 
-export class TextToDialogueSocket {
+export class TextToDialogueMultiContextSocket {
     public readonly socket: core.ReconnectingWebSocket;
-    protected readonly eventHandlers: TextToDialogueSocket.EventHandlers = {};
+    protected readonly eventHandlers: TextToDialogueMultiContextSocket.EventHandlers = {};
     private handleOpen: () => void = () => {
         this.eventHandlers.open?.();
     };
     private handleMessage: (event: { data: string }) => void = (event) => {
         const data = fromJson(event.data);
 
-        const parsedResponse = serializers.TextToDialogueSocketResponse.parse(data, {
+        const parsedResponse = serializers.TextToDialogueMultiContextSocketResponse.parse(data, {
             unrecognizedObjectKeys: "passthrough",
             allowUnrecognizedUnionMembers: true,
             allowUnrecognizedEnumValues: true,
@@ -49,7 +49,7 @@ export class TextToDialogueSocket {
         this.eventHandlers.error?.(new Error(message));
     };
 
-    constructor(args: TextToDialogueSocket.Args) {
+    constructor(args: TextToDialogueMultiContextSocket.Args) {
         this.socket = args.socket;
         this.socket.addEventListener("open", this.handleOpen);
         this.socket.addEventListener("message", this.handleMessage);
@@ -72,16 +72,16 @@ export class TextToDialogueSocket {
      * });
      * ```
      */
-    public on<T extends keyof TextToDialogueSocket.EventHandlers>(
+    public on<T extends keyof TextToDialogueMultiContextSocket.EventHandlers>(
         event: T,
-        callback: TextToDialogueSocket.EventHandlers[T],
+        callback: TextToDialogueMultiContextSocket.EventHandlers[T],
     ): void {
         this.eventHandlers[event] = callback;
     }
 
-    public sendPublish(message: ElevenLabs.TextToDialogueClientMessage): void {
+    public sendPublish(message: ElevenLabs.TextToDialogueMultiClientMessage): void {
         this.assertSocketIsOpen();
-        const jsonPayload = TextToDialogueClientMessage.jsonOrThrow(message, {
+        const jsonPayload = TextToDialogueMultiClientMessage.jsonOrThrow(message, {
             unrecognizedObjectKeys: "passthrough",
             allowUnrecognizedUnionMembers: true,
             allowUnrecognizedEnumValues: true,
@@ -91,7 +91,7 @@ export class TextToDialogueSocket {
     }
 
     /** Connect to the websocket and register event handlers. */
-    public connect(): TextToDialogueSocket {
+    public connect(): TextToDialogueMultiContextSocket {
         this.socket.reconnect();
 
         this.socket.addEventListener("open", this.handleOpen);

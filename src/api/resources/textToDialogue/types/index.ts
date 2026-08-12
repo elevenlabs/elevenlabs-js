@@ -5,4 +5,3 @@ export * from "./BodyTextToDialogueStreamWithTimestampsApplyTextNormalization.js
 export * from "./ConvertTextToDialogueRequestOutputFormat.js";
 export * from "./ConvertWithTimestampsTextToDialogueRequestOutputFormat.js";
 export * from "./ReceiveTextToDialogueWebsocketMessage.js";
-export * from "./ReceiveTextToDialogueWebsocketMessageMulti.js";

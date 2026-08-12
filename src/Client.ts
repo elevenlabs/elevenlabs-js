@@ -18,8 +18,10 @@ import { SpeechToSpeechClient } from "./api/resources/speechToSpeech/client/Clie
 import { SpeechToTextClient } from "./api/resources/speechToText/client/Client.js";
 import { StudioClient } from "./api/resources/studio/client/Client.js";
 import { TextToDialogueClient } from "./api/resources/textToDialogue/client/Client.js";
+import { TextToDialogueMultiContextClient } from "./api/resources/textToDialogueMultiContext/client/Client.js";
 import { TextToSoundEffectsClient } from "./api/resources/textToSoundEffects/client/Client.js";
 import { TextToSpeechClient } from "./api/resources/textToSpeech/client/Client.js";
+import { TextToSpeechMultiContextClient } from "./api/resources/textToSpeechMultiContext/client/Client.js";
 import { TextToVoiceClient } from "./api/resources/textToVoice/client/Client.js";
 import { TokensClient } from "./api/resources/tokens/client/Client.js";
 import { TranslateClient } from "./api/resources/translate/client/Client.js";
@@ -64,6 +66,8 @@ export class ElevenLabsClient {
     protected _agents: AgentsClient | undefined;
     protected _speechEngine: SpeechEngineClient | undefined;
     protected _environmentVariables: EnvironmentVariablesClient | undefined;
+    protected _textToDialogueMultiContext: TextToDialogueMultiContextClient | undefined;
+    protected _textToSpeechMultiContext: TextToSpeechMultiContextClient | undefined;
     protected _translate: TranslateClient | undefined;
     protected _productions: ProductionsClient | undefined;
     protected _tokens: TokensClient | undefined;
@@ -167,6 +171,14 @@ export class ElevenLabsClient {
 
     public get environmentVariables(): EnvironmentVariablesClient {
         return (this._environmentVariables ??= new EnvironmentVariablesClient(this._options));
+    }
+
+    public get textToDialogueMultiContext(): TextToDialogueMultiContextClient {
+        return (this._textToDialogueMultiContext ??= new TextToDialogueMultiContextClient(this._options));
+    }
+
+    public get textToSpeechMultiContext(): TextToSpeechMultiContextClient {
+        return (this._textToSpeechMultiContext ??= new TextToSpeechMultiContextClient(this._options));
     }
 
     public get translate(): TranslateClient {

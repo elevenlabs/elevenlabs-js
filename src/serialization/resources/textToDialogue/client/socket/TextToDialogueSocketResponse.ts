@@ -3,13 +3,13 @@
 import type * as ElevenLabs from "../../../../../api/index.js";
 import * as core from "../../../../../core/index.js";
 import type * as serializers from "../../../../index.js";
-import { ReceiveTextToDialogueWebsocketMessageMulti } from "../../types/ReceiveTextToDialogueWebsocketMessageMulti.js";
+import { ReceiveTextToDialogueWebsocketMessage } from "../../types/ReceiveTextToDialogueWebsocketMessage.js";
 
 export const TextToDialogueSocketResponse: core.serialization.Schema<
     serializers.TextToDialogueSocketResponse.Raw,
-    ElevenLabs.ReceiveTextToDialogueWebsocketMessageMulti
-> = core.serialization.undiscriminatedUnion([ReceiveTextToDialogueWebsocketMessageMulti]);
+    ElevenLabs.ReceiveTextToDialogueWebsocketMessage
+> = core.serialization.undiscriminatedUnion([ReceiveTextToDialogueWebsocketMessage]);
 
 export declare namespace TextToDialogueSocketResponse {
-    export type Raw = ReceiveTextToDialogueWebsocketMessageMulti.Raw;
+    export type Raw = ReceiveTextToDialogueWebsocketMessage.Raw;
 }

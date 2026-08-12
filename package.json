@@ -298,6 +298,28 @@
             },
             "default": "./dist/cjs/api/resources/environmentVariables/exports.js"
         },
+        "./textToDialogueMultiContext": {
+            "import": {
+                "types": "./dist/esm/api/resources/textToDialogueMultiContext/exports.d.mts",
+                "default": "./dist/esm/api/resources/textToDialogueMultiContext/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/textToDialogueMultiContext/exports.d.ts",
+                "default": "./dist/cjs/api/resources/textToDialogueMultiContext/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/textToDialogueMultiContext/exports.js"
+        },
+        "./textToSpeechMultiContext": {
+            "import": {
+                "types": "./dist/esm/api/resources/textToSpeechMultiContext/exports.d.mts",
+                "default": "./dist/esm/api/resources/textToSpeechMultiContext/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/textToSpeechMultiContext/exports.d.ts",
+                "default": "./dist/cjs/api/resources/textToSpeechMultiContext/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/textToSpeechMultiContext/exports.js"
+        },
         "./translate": {
             "import": {
                 "types": "./dist/esm/api/resources/translate/exports.d.mts",

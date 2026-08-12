@@ -6,6 +6,8 @@ assets/
 
 tests/custom/
 
+.agents/
+
 src/wrapper
 src/index.ts
 

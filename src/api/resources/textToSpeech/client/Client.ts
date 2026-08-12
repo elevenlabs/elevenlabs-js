@@ -464,7 +464,7 @@ export class TextToSpeechClient {
         );
     }
 
-    public async multi_stream(args: TextToSpeechClient.ConnectArgs): Promise<TextToSpeechSocket> {
+    public async realtime(args: TextToSpeechClient.ConnectArgs): Promise<TextToSpeechSocket> {
         const {
             voiceId,
             authorization,
@@ -507,7 +507,7 @@ export class TextToSpeechClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ElevenLabsEnvironment.Production,
-                `/v1/text-to-speech/${core.url.encodePathParam(voiceId)}/multi-stream-input`,
+                `/v1/text-to-speech/${core.url.encodePathParam(voiceId)}/stream-input`,
             ),
             protocols: protocols ?? [],
             queryParameters: { ..._queryParams, ...queryParams },

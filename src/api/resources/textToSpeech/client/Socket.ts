@@ -3,7 +3,7 @@
 import * as core from "../../../../core/index.js";
 import { fromJson } from "../../../../core/json.js";
 import * as serializers from "../../../../serialization/index.js";
-import { SendMessageMulti } from "../../../../serialization/resources/textToSpeech/types/SendMessageMulti.js";
+import { SendMessage } from "../../../../serialization/resources/textToSpeech/types/SendMessage.js";
 import type * as ElevenLabs from "../../../index.js";
 
 export declare namespace TextToSpeechSocket {
@@ -11,7 +11,7 @@ export declare namespace TextToSpeechSocket {
         socket: core.ReconnectingWebSocket;
     }
 
-    export type Response = ElevenLabs.ReceiveMessageMulti;
+    export type Response = ElevenLabs.ReceiveMessage;
     type EventHandlers = {
         open?: () => void;
         message?: (message: Response) => void;
@@ -79,9 +79,9 @@ export class TextToSpeechSocket {
         this.eventHandlers[event] = callback;
     }
 
-    public sendPublish(message: ElevenLabs.SendMessageMulti): void {
+    public sendPublish(message: ElevenLabs.SendMessage): void {
         this.assertSocketIsOpen();
-        const jsonPayload = SendMessageMulti.jsonOrThrow(message, {
+        const jsonPayload = SendMessage.jsonOrThrow(message, {
             unrecognizedObjectKeys: "passthrough",
             allowUnrecognizedUnionMembers: true,
             allowUnrecognizedEnumValues: true,

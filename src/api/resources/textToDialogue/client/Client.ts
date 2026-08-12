@@ -447,7 +447,7 @@ export class TextToDialogueClient {
         );
     }
 
-    public async multi_stream(args: TextToDialogueClient.ConnectArgs = {}): Promise<TextToDialogueSocket> {
+    public async realtime(args: TextToDialogueClient.ConnectArgs = {}): Promise<TextToDialogueSocket> {
         const {
             modelId,
             outputFormat,
@@ -479,7 +479,7 @@ export class TextToDialogueClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ElevenLabsEnvironment.Production,
-                "/v1/text-to-dialogue/multi-stream-input",
+                "/v1/text-to-dialogue/stream-input",
             ),
             protocols: protocols ?? [],
             queryParameters: { ..._queryParams, ...queryParams },

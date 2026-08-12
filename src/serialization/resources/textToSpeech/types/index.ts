@@ -5,8 +5,6 @@ export * from "./BodyTextToSpeechStreamWithTimestampsApplyTextNormalization.js";
 export * from "./ConvertTextToSpeechRequestOutputFormat.js";
 export * from "./ConvertWithTimestampsTextToSpeechRequestOutputFormat.js";
 export * from "./ReceiveMessage.js";
-export * from "./ReceiveMessageMulti.js";
 export * from "./SendMessage.js";
-export * from "./SendMessageMulti.js";
 export * from "./StreamTextToSpeechRequestOutputFormat.js";
 export * from "./StreamWithTimestampsTextToSpeechRequestOutputFormat.js";

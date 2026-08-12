@@ -3,13 +3,13 @@
 import type * as ElevenLabs from "../../../../../api/index.js";
 import * as core from "../../../../../core/index.js";
 import type * as serializers from "../../../../index.js";
-import { ReceiveMessageMulti } from "../../types/ReceiveMessageMulti.js";
+import { ReceiveMessage } from "../../types/ReceiveMessage.js";
 
 export const TextToSpeechSocketResponse: core.serialization.Schema<
     serializers.TextToSpeechSocketResponse.Raw,
-    ElevenLabs.ReceiveMessageMulti
-> = core.serialization.undiscriminatedUnion([ReceiveMessageMulti]);
+    ElevenLabs.ReceiveMessage
+> = core.serialization.undiscriminatedUnion([ReceiveMessage]);
 
 export declare namespace TextToSpeechSocketResponse {
-    export type Raw = ReceiveMessageMulti.Raw;
+    export type Raw = ReceiveMessage.Raw;
 }
