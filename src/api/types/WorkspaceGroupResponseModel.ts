@@ -10,7 +10,6 @@ export interface WorkspaceGroupResponseModel {
     groupUsageLimit?: ElevenLabs.WorkspaceGroupResponseModelGroupUsageLimit;
     groupPvcLimit?: ElevenLabs.WorkspaceGroupResponseModelGroupPvcLimit;
     characterCount?: number;
-    scimExternalId?: string;
     isScimSynced?: boolean;
     scimGroup?: ElevenLabs.ScimGroupResponseModel;
     scimFrozen?: boolean;

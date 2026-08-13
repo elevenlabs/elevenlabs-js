@@ -32,6 +32,10 @@ export const TurnConfig: core.serialization.ObjectSchema<serializers.TurnConfig.
             "interruption_ignore_term_languages",
             core.serialization.list(core.serialization.string()).optional(),
         ),
+        mergeWithDefaultIgnoreTerms: core.serialization.property(
+            "merge_with_default_ignore_terms",
+            core.serialization.boolean().optional(),
+        ),
         transcribeOnDisabledInterruptions: core.serialization.property(
             "transcribe_on_disabled_interruptions",
             core.serialization.boolean().optional(),
@@ -51,6 +55,7 @@ export declare namespace TurnConfig {
         turn_model?: TurnModel.Raw | null;
         interruption_ignore_terms?: string[] | null;
         interruption_ignore_term_languages?: string[] | null;
+        merge_with_default_ignore_terms?: boolean | null;
         transcribe_on_disabled_interruptions?: boolean | null;
         soft_timeout_config?: SoftTimeoutConfig.Raw | null;
     }
