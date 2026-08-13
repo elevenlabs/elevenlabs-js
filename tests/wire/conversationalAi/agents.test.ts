@@ -53,6 +53,7 @@ describe("AgentsClient", () => {
                     turn_model: "turn_v3",
                     interruption_ignore_terms: ["interruption_ignore_terms"],
                     interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
+                    merge_with_default_ignore_terms: false,
                     transcribe_on_disabled_interruptions: false,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
@@ -498,6 +499,7 @@ describe("AgentsClient", () => {
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
                                 interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
+                                merge_with_default_ignore_terms: false,
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -703,6 +705,7 @@ describe("AgentsClient", () => {
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
                                 interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
+                                merge_with_default_ignore_terms: false,
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -909,6 +912,7 @@ describe("AgentsClient", () => {
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
                                 interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
+                                merge_with_default_ignore_terms: false,
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -1177,6 +1181,7 @@ describe("AgentsClient", () => {
                     turnModel: "turn_v3",
                     interruptionIgnoreTerms: ["interruption_ignore_terms"],
                     interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
+                    mergeWithDefaultIgnoreTerms: false,
                     transcribeOnDisabledInterruptions: false,
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
@@ -1763,6 +1768,7 @@ describe("AgentsClient", () => {
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
+                                mergeWithDefaultIgnoreTerms: false,
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -2004,6 +2010,7 @@ describe("AgentsClient", () => {
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
+                                mergeWithDefaultIgnoreTerms: false,
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -2253,6 +2260,7 @@ describe("AgentsClient", () => {
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
+                                mergeWithDefaultIgnoreTerms: false,
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -2593,6 +2601,7 @@ describe("AgentsClient", () => {
                     turn_model: "turn_v3",
                     interruption_ignore_terms: ["interruption_ignore_terms"],
                     interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
+                    merge_with_default_ignore_terms: false,
                     transcribe_on_disabled_interruptions: false,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
                 },
@@ -3038,6 +3047,7 @@ describe("AgentsClient", () => {
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
                                 interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
+                                merge_with_default_ignore_terms: false,
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -3243,6 +3253,7 @@ describe("AgentsClient", () => {
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
                                 interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
+                                merge_with_default_ignore_terms: false,
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -3449,6 +3460,7 @@ describe("AgentsClient", () => {
                                 turn_model: "turn_v3",
                                 interruption_ignore_terms: ["interruption_ignore_terms"],
                                 interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
+                                merge_with_default_ignore_terms: false,
                                 transcribe_on_disabled_interruptions: false,
                                 soft_timeout_config: {
                                     timeout_seconds: -1,
@@ -3718,6 +3730,7 @@ describe("AgentsClient", () => {
                     turnModel: "turn_v3",
                     interruptionIgnoreTerms: ["interruption_ignore_terms"],
                     interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
+                    mergeWithDefaultIgnoreTerms: false,
                     transcribeOnDisabledInterruptions: false,
                     softTimeoutConfig: {
                         timeoutSeconds: -1,
@@ -4304,6 +4317,7 @@ describe("AgentsClient", () => {
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
+                                mergeWithDefaultIgnoreTerms: false,
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -4545,6 +4559,7 @@ describe("AgentsClient", () => {
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
+                                mergeWithDefaultIgnoreTerms: false,
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,
@@ -4794,6 +4809,7 @@ describe("AgentsClient", () => {
                                 turnModel: "turn_v3",
                                 interruptionIgnoreTerms: ["interruption_ignore_terms"],
                                 interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
+                                mergeWithDefaultIgnoreTerms: false,
                                 transcribeOnDisabledInterruptions: false,
                                 softTimeoutConfig: {
                                     timeoutSeconds: -1,

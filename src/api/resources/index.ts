@@ -1,3 +1,5 @@
+export * as assets from "./assets";
+export * from "./assets/client/requests";
 export * as audioIsolation from "./audioIsolation";
 export * from "./audioIsolation/client/requests";
 export * from "./audioIsolation/types";
@@ -12,6 +14,7 @@ export * from "./dubbing/types";
 export * as environmentVariables from "./environmentVariables";
 export * from "./environmentVariables/client/requests";
 export * from "./environmentVariables/types";
+export * as flows from "./flows";
 export * as forcedAlignment from "./forcedAlignment";
 export * from "./forcedAlignment/client/requests";
 export * as history from "./history";
