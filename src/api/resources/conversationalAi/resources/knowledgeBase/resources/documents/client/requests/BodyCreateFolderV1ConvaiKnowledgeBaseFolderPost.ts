@@ -15,4 +15,6 @@ export interface BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost {
     enableAutoSync?: boolean;
     /** Whether to automatically remove the document if the URL becomes unavailable. Only applicable when auto-sync is enabled. */
     autoRemove?: boolean;
+    /** Minimum frequency (in days) at which the underlying eligible documents are refreshed. The actual interval may be shorter, never longer. Defaults to 7, tightened to the parent folder's frequency if that is stricter. Only applicable when auto-sync is enabled. */
+    minimumFrequencyDays?: number;
 }

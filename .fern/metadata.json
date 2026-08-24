@@ -1,7 +1,7 @@
 {
-    "cliVersion": "5.94.0",
+    "cliVersion": "5.98.3",
     "generatorName": "fernapi/fern-typescript-sdk",
-    "generatorVersion": "3.84.0",
+    "generatorVersion": "3.88.2",
     "generatorConfig": {
         "defaultTimeoutInSeconds": 240,
         "inlineFileProperties": true,
@@ -36,10 +36,10 @@
             }
         }
     },
-    "originGitCommit": "a8603230f03871b97493f4be44e4db2a227254bf",
+    "originGitCommit": "9b89c2c52dabc4671899c8123bf702c3dd695888",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
-    "requestedVersion": "2.64.0",
+    "requestedVersion": "2.65.0",
     "ciProvider": "github",
-    "sdkVersion": "2.64.0"
+    "sdkVersion": "2.65.0"
 }

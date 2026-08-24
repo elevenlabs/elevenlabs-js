@@ -11,4 +11,6 @@ export interface ConversationInitiationClientDataConfigInput {
     enableConversationInitiationClientDataFromWebhook?: boolean;
     /** Whether clients may pass starting_workflow_node_id in initiation client data; if false, sending it fails conversation start. */
     enableStartingWorkflowNodeIdFromClient?: boolean;
+    /** Whether clients may pass procedure_ids in initiation client data to select which of the agent's procedures are available for the conversation; if false, sending it fails conversation start. */
+    enableProcedureIdsFromClient?: boolean;
 }

@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AlertingMonitorConfig } from "./AlertingMonitorConfig";
-import { AlertingWebhookNotifierResponse } from "./AlertingWebhookNotifierResponse";
+import { AlertingSettingsResponseNotifiersItem } from "./AlertingSettingsResponseNotifiersItem";
 
 export const AlertingSettingsResponse: core.serialization.ObjectSchema<
     serializers.AlertingSettingsResponse.Raw,
@@ -18,13 +18,13 @@ export const AlertingSettingsResponse: core.serialization.ObjectSchema<
         "auto_resolve_after_inactive_minutes",
         core.serialization.number().optional(),
     ),
-    notifiers: core.serialization.list(AlertingWebhookNotifierResponse).optional(),
+    notifiers: core.serialization.list(AlertingSettingsResponseNotifiersItem).optional(),
 });
 
 export declare namespace AlertingSettingsResponse {
     export interface Raw {
         monitor_configs?: Record<string, AlertingMonitorConfig.Raw> | null;
         auto_resolve_after_inactive_minutes?: number | null;
-        notifiers?: AlertingWebhookNotifierResponse.Raw[] | null;
+        notifiers?: AlertingSettingsResponseNotifiersItem.Raw[] | null;
     }
 }

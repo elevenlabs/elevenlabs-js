@@ -1,4 +1,630 @@
 # Reference
+<details><summary><code>client.<a href="/src/Client.ts">listAgentConversationTicketsRoute</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentConversationTicketsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List an agent's conversation triage tickets, ordered by most recently created first. These are tickets about the agent's own performance on a conversation (for triage with Architect), not tickets an agent opens for end users.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.listAgentConversationTicketsRoute("agent_id", {
+    pageSize: 1,
+    conversationId: "conversation_id",
+    status: "open",
+    sources: ["qa"],
+    ownerUserId: "owner_user_id",
+    assigneeUserId: "assignee_user_id",
+    issueType: "knowledge_gap",
+    label: "label",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ListAgentConversationTicketsRouteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.<a href="/src/Client.ts">createManualAgentTicketRoute</a>(agent_id, { ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Manually raise a follow-up ticket against an agent, not tied to any conversation (for example a task like 'add the KB about X'). The comment is shown as the ticket title. Requires viewer access to the agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.createManualAgentTicketRoute("agent_id", {
+    qaComment: "qa_comment"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateManualTicketRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.<a href="/src/Client.ts">getAssignableUsersRoute</a>(agent_id) -> ElevenLabs.AssignableUserResponseModel[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+All non-service-account workspace members, each flagged with whether they currently have at least viewer access to the agent. Members without access are included (not filtered out) so the UI can offer them as an assignee and prompt to grant access first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.getAssignableUsersRoute("agent_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.<a href="/src/Client.ts">getAgentConversationTicketRoute</a>(agentqa_ticket_id) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get an agent conversation ticket by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.getAgentConversationTicketRoute("agentqa_ticket_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.<a href="/src/Client.ts">deleteAgentConversationTicketRoute</a>(agentqa_ticket_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an agent conversation ticket. Restricted to the ticket creator or a workspace admin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.deleteAgentConversationTicketRoute("agentqa_ticket_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.<a href="/src/Client.ts">updateAgentConversationTicketRoute</a>(agentqa_ticket_id, { ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a ticket's comment, status, and/or assignee. Requires editor access to the ticket's agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.updateAgentConversationTicketRoute("agentqa_ticket_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.PatchAgentConversationTicketRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.<a href="/src/Client.ts">createAgentConversationTicketRoute</a>({ ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Raise a ticket about an agent's performance on a conversation, for triage with Architect. Provide an overall comment and/or turn-level comments describing what went wrong.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.createAgentConversationTicketRoute({
+    conversationId: "conversation_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateAgentConversationTicketRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.<a href="/src/Client.ts">addTicketCommentRoute</a>(agentqa_ticket_id, { ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Append a comment discussing how to resolve the ticket. Requires viewer access to the ticket's agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.addTicketCommentRoute("agentqa_ticket_id", {
+    comment: "comment"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.AddTicketCommentRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.<a href="/src/Client.ts">addTurnCommentRoute</a>(agentqa_ticket_id, { ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Append a turn-level comment to a ticket. Requires viewer access to the ticket's agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.addTurnCommentRoute("agentqa_ticket_id", {
+    turnIndex: 1,
+    comment: "comment"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.AddTurnCommentRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ElevenLabsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## History
 <details><summary><code>client.history.<a href="/src/api/resources/history/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.GetSpeechHistoryResponse</code></summary>
 <dl>
@@ -2187,6 +2813,69 @@ await client.voices.share("63e06b7e7cafdc46be4d2e0b3f045940231ae058d508589653d74
 </dl>
 </details>
 
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">findSimilarVoices</a>({ ...params }) -> ElevenLabs.GetLibraryVoicesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of shared voices similar to the provided audio sample. If neither similarity_threshold nor top_k is provided, we will apply default values.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.findSimilarVoices({});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getShared</a>({ ...params }) -> ElevenLabs.GetLibraryVoicesResponse</code></summary>
 <dl>
 <dd>
@@ -2250,69 +2939,6 @@ await client.voices.getShared({
 <dd>
 
 **request:** `ElevenLabs.VoicesGetSharedRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `VoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">findSimilarVoices</a>({ ...params }) -> ElevenLabs.GetLibraryVoicesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a list of shared voices similar to the provided audio sample. If neither similarity_threshold nor top_k is provided, we will apply default values.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.findSimilarVoices({});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost` 
     
 </dd>
 </dl>
@@ -5549,7 +6175,8 @@ await client.conversationalAi.conversations.getSignedUrl({
     agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     includeConversationId: true,
     branchId: "branch_id",
-    environment: "environment"
+    environment: "environment",
+    debugEventsRequest: true
 });
 
 ```
@@ -5617,7 +6244,8 @@ await client.conversationalAi.conversations.getWebrtcToken({
     agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     participantName: "participant_name",
     branchId: "branch_id",
-    environment: "environment"
+    environment: "environment",
+    debugEventsRequest: true
 });
 
 ```
@@ -5686,6 +6314,7 @@ await client.conversationalAi.conversations.list({
     agentId: "agent_id",
     visitedAgentIds: ["visited_agent_ids"],
     visitedAgentBranchIds: ["visited_agent_branch_ids"],
+    triggeredProcedureIds: ["triggered_procedure_ids"],
     callSuccessful: "success",
     callStartBeforeUnix: 1,
     callStartAfterUnix: 1,
@@ -5702,6 +6331,7 @@ await client.conversationalAi.conversations.list({
     toolNames: ["tool_names"],
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
+    includeInvalidToolCalls: true,
     mainLanguages: ["main_languages"],
     pageSize: 1,
     summaryMode: "exclude",
@@ -5718,7 +6348,8 @@ await client.conversationalAi.conversations.list({
     workflowNodeEnteredId: "workflow_node_entered_id",
     terminationReasons: ["termination_reasons"],
     guardrailTypes: ["custom"],
-    customGuardrailNames: ["custom_guardrail_names"]
+    customGuardrailNames: ["custom_guardrail_names"],
+    sortDirection: "asc"
 });
 
 ```
@@ -5938,6 +6569,79 @@ await client.conversationalAi.conversations.delete("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **conversation_id:** `string` — The id of the conversation you're taking the action on.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">getSummary</a>(conversation_id, { ...params }) -> ElevenLabs.GetConversationSummaryResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a lightweight summary of a conversation: its title, the generated transcript summary, whether the call was successful, and — only when the conversation is short — the plain chat messages. Tool calls, tool results, and contextual updates are omitted so the response stays small. Use this instead of the full conversation endpoint when you only need the gist (e.g. an agent reading many conversations); use GET /v1/convai/conversations/{conversation_id} when you need the full transcript with tool calls and contextual updates.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.getSummary("21m00Tcm4TlvDq8ikWAM", {
+    maxMessages: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The id of the conversation you're taking the action on.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.ConversationsGetSummaryRequest` 
     
 </dd>
 </dl>
@@ -11776,7 +12480,7 @@ await client.conversationalAi.agents.drafts.delete("agent_3701k3ttaq12ewp8b7qv5r
 </details>
 
 ## ConversationalAi Agents Procedures
-<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">list</a>(agent_id, branch_id) -> ElevenLabs.ListProceduresResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">list</a>(agent_id, branch_id, { ...params }) -> ElevenLabs.ListProceduresResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11803,7 +12507,9 @@ List the agent's procedures on a branch with their procedure_id, version_id, nam
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
+await client.conversationalAi.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", {
+    agentVersionId: "agent_version_id"
+});
 
 ```
 </dd>
@@ -11828,6 +12534,14 @@ await client.conversationalAi.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv
 <dd>
 
 **branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.ProceduresListRequest` 
     
 </dd>
 </dl>
@@ -12025,7 +12739,8 @@ Retrieve a procedure at a specific version or the current branch HEAD.
 
 ```typescript
 await client.conversationalAi.agents.procedures.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3", {
-    versionId: "version_id"
+    versionId: "version_id",
+    agentVersionId: "agent_version_id"
 });
 
 ```
@@ -12098,7 +12813,7 @@ await client.conversationalAi.agents.procedures.get("agent_3701k3ttaq12ewp8b7qv5
 <dl>
 <dd>
 
-Remove a procedure from the agent's draft working set.
+Remove a procedure from the agent's draft working set. Removing a folder cascades to its entire subtree, rejected if any procedure outside the subtree hands off into it.
 </dd>
 </dl>
 </dd>
@@ -12518,7 +13233,8 @@ Get the live count of the ongoing conversations.
 
 ```typescript
 await client.conversationalAi.analytics.liveCount.get({
-    agentId: "agent_id"
+    agentId: "agent_id",
+    agentIds: ["agent_ids"]
 });
 
 ```
@@ -12726,6 +13442,7 @@ await client.conversationalAi.conversations.messages.textSearch({
     agentId: "agent_id",
     visitedAgentIds: ["visited_agent_ids"],
     visitedAgentBranchIds: ["visited_agent_branch_ids"],
+    triggeredProcedureIds: ["triggered_procedure_ids"],
     callSuccessful: "success",
     callStartBeforeUnix: 1,
     callStartAfterUnix: 1,
@@ -12740,6 +13457,7 @@ await client.conversationalAi.conversations.messages.textSearch({
     toolNames: ["tool_names"],
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
+    includeInvalidToolCalls: true,
     mainLanguages: ["main_languages"],
     excludeStatuses: ["initiated"],
     terminationReasons: ["termination_reasons"],
@@ -13504,8 +14222,13 @@ Returns the latest topic discovery run results for a given agent.
 
 ```typescript
 await client.conversationalAi.conversations.topics.get("agent_id", {
+    pageSize: 1,
+    sortBy: "conversations",
+    sortDirection: "asc",
     fromUnixSecs: 1,
-    toUnixSecs: 1
+    toUnixSecs: 1,
+    includeEvaluationCriteria: true,
+    cursor: "cursor"
 });
 
 ```

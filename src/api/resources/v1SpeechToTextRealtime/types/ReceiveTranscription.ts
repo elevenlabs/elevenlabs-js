@@ -13,6 +13,7 @@ export type ReceiveTranscription =
     | ElevenLabs.CommittedTranscriptPayload
     | ElevenLabs.CommittedTranscriptWithTimestampsPayload
     | ElevenLabs.CommittedTranscriptEntitiesPayload
+    | ElevenLabs.ScribeWarning
     | ElevenLabs.ScribeErrorPayload
     | ElevenLabs.ScribeAuthErrorPayload
     | ElevenLabs.ScribeQuotaExceededErrorPayload

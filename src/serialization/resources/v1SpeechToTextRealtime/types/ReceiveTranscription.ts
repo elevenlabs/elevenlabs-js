@@ -23,6 +23,7 @@ import { ScribeSessionTimeLimitExceededErrorPayload } from "../../../types/Scrib
 import { ScribeThrottledErrorPayload } from "../../../types/ScribeThrottledErrorPayload";
 import { ScribeTranscriberErrorPayload } from "../../../types/ScribeTranscriberErrorPayload";
 import { ScribeUnacceptedTermsErrorPayload } from "../../../types/ScribeUnacceptedTermsErrorPayload";
+import { ScribeWarning } from "../../../types/ScribeWarning";
 import { SessionStartedPayload } from "../../../types/SessionStartedPayload";
 
 export const ReceiveTranscription: core.serialization.Schema<
@@ -36,6 +37,7 @@ export const ReceiveTranscription: core.serialization.Schema<
     CommittedTranscriptPayload,
     CommittedTranscriptWithTimestampsPayload,
     CommittedTranscriptEntitiesPayload,
+    ScribeWarning,
     ScribeErrorPayload,
     ScribeAuthErrorPayload,
     ScribeQuotaExceededErrorPayload,
@@ -61,6 +63,7 @@ export declare namespace ReceiveTranscription {
         | CommittedTranscriptPayload.Raw
         | CommittedTranscriptWithTimestampsPayload.Raw
         | CommittedTranscriptEntitiesPayload.Raw
+        | ScribeWarning.Raw
         | ScribeErrorPayload.Raw
         | ScribeAuthErrorPayload.Raw
         | ScribeQuotaExceededErrorPayload.Raw

@@ -18,10 +18,14 @@ describe("TopicsClient", () => {
                     parent_topic_id: "parent_topic_id",
                     x_2d: 1.1,
                     y_2d: 1.1,
+                    success_rate: 1.1,
                 },
             ],
             window_start_unix_secs: 1,
             window_end_unix_secs: 1,
+            aggregated_run_count: 1,
+            has_more: true,
+            next_cursor: "next_cursor",
         };
 
         server
@@ -33,8 +37,13 @@ describe("TopicsClient", () => {
             .build();
 
         const response = await client.conversationalAi.conversations.topics.get("agent_id", {
+            pageSize: 1,
+            sortBy: "conversations",
+            sortDirection: "asc",
             fromUnixSecs: 1,
             toUnixSecs: 1,
+            includeEvaluationCriteria: true,
+            cursor: "cursor",
         });
         expect(response).toEqual({
             topics: [
@@ -46,10 +55,14 @@ describe("TopicsClient", () => {
                     parentTopicId: "parent_topic_id",
                     x2D: 1.1,
                     y2D: 1.1,
+                    successRate: 1.1,
                 },
             ],
             windowStartUnixSecs: 1,
             windowEndUnixSecs: 1,
+            aggregatedRunCount: 1,
+            hasMore: true,
+            nextCursor: "next_cursor",
         });
     });
 });

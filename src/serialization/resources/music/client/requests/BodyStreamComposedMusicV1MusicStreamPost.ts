@@ -3,8 +3,8 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
+import { MusicModelId } from "../../../../types/MusicModelId";
 import { BodyStreamComposedMusicV1MusicStreamPostCompositionPlan } from "../../types/BodyStreamComposedMusicV1MusicStreamPostCompositionPlan";
-import { BodyStreamComposedMusicV1MusicStreamPostModelId } from "../../types/BodyStreamComposedMusicV1MusicStreamPostModelId";
 
 export const BodyStreamComposedMusicV1MusicStreamPost: core.serialization.Schema<
     serializers.BodyStreamComposedMusicV1MusicStreamPost.Raw,
@@ -16,7 +16,7 @@ export const BodyStreamComposedMusicV1MusicStreamPost: core.serialization.Schema
         BodyStreamComposedMusicV1MusicStreamPostCompositionPlan.optional(),
     ),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
-    modelId: core.serialization.property("model_id", BodyStreamComposedMusicV1MusicStreamPostModelId.optional()),
+    modelId: core.serialization.property("model_id", MusicModelId.optional()),
     seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     finetuneId: core.serialization.property("finetune_id", core.serialization.string().optional()),
@@ -28,7 +28,7 @@ export declare namespace BodyStreamComposedMusicV1MusicStreamPost {
         prompt?: string | null;
         composition_plan?: BodyStreamComposedMusicV1MusicStreamPostCompositionPlan.Raw | null;
         music_length_ms?: number | null;
-        model_id?: BodyStreamComposedMusicV1MusicStreamPostModelId.Raw | null;
+        model_id?: MusicModelId.Raw | null;
         seed?: number | null;
         force_instrumental?: boolean | null;
         finetune_id?: string | null;

@@ -16,7 +16,7 @@ import type * as ElevenLabs from "../../../../../../index";
 export interface FinetunesListRequest {
     /** Used for fetching the next page. Cursor is returned in the response. */
     cursor?: string;
-    /** How many finetunes to return. Max 100, default 50. */
+    /** How many finetunes to return. Max 150, default 50. */
     pageSize?: number;
     /** Filter by visibility. 'private' returns private finetunes; 'workspace' returns workspace-shared finetunes; 'public' returns public finetunes, which are currently ElevenLabs curated finetunes. Omit to return all accessible finetunes. */
     visibility?: ElevenLabs.FinetuneVisibility;
