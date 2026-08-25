@@ -99,6 +99,7 @@ export interface MultimodalMessageClientToOrchestratorEvent extends BaseClientTo
     type: ClientToOrchestratorEvent.MULTIMODAL_MESSAGE;
     text?: UserMessageClientToOrchestratorEvent;
     file?: MultimodalMessageFile;
+    files?: MultimodalMessageFile[];
 }
 
 /**

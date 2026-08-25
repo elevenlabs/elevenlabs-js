@@ -214,6 +214,7 @@ describe("Conversation", () => {
                     type: "multimodal_message",
                     text: { type: "user_message", text: "What is in this file?" },
                     file: { type: "file_input", file_id: "file_abc123" },
+                    files: [{ type: "file_input", file_id: "file_abc123" }],
                 }),
             );
         });
@@ -236,13 +237,29 @@ describe("Conversation", () => {
                 JSON.stringify({
                     type: "multimodal_message",
                     file: { type: "file_input", file_id: "file_abc123" },
+                    files: [{ type: "file_input", file_id: "file_abc123" }],
                 }),
             );
         });
 
-        it("should throw error when sending multimodal message without text or fileId", () => {
+        it("should send multimodal message with fileIds and dual-send file", () => {
+            conversation.sendMultimodalMessage({ fileIds: ["file_a", "file_b"] });
+
+            expect(mockWebSocket.send).toHaveBeenCalledWith(
+                JSON.stringify({
+                    type: "multimodal_message",
+                    file: { type: "file_input", file_id: "file_a" },
+                    files: [
+                        { type: "file_input", file_id: "file_a" },
+                        { type: "file_input", file_id: "file_b" },
+                    ],
+                }),
+            );
+        });
+
+        it("should throw error when sending multimodal message without text, fileId, or fileIds", () => {
             expect(() => conversation.sendMultimodalMessage({})).toThrow(
-                "At least one of text or fileId must be provided",
+                "At least one of text, fileId, or fileIds must be provided",
             );
         });
 
