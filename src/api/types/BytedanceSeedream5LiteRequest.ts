@@ -4,6 +4,9 @@ import type * as ElevenLabs from "../index";
 
 /**
  * Request body for the ByteDance Seedream 5.0 Lite image model.
+ *
+ * ByteDance models are disabled by default and require explicit approval
+ * before use. Contact support to request access.
  */
 export interface BytedanceSeedream5LiteRequest {
     /** Include to send the generation's result to the workspace's configured flows webhooks once it completes or fails. The webhook payload matches the terminal response of the corresponding GET endpoint. */

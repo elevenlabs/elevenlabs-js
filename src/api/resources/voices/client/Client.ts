@@ -759,6 +759,100 @@ export class VoicesClient {
     }
 
     /**
+     * Returns a list of shared voices similar to the provided audio sample. If neither similarity_threshold nor top_k is provided, we will apply default values.
+     *
+     * @param {ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost} request
+     * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     import { createReadStream } from "fs";
+     *     await client.voices.findSimilarVoices({})
+     */
+    public findSimilarVoices(
+        request: ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost,
+        requestOptions?: VoicesClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetLibraryVoicesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__findSimilarVoices(request, requestOptions));
+    }
+
+    private async __findSimilarVoices(
+        request: ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost,
+        requestOptions?: VoicesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetLibraryVoicesResponse>> {
+        const _body = await core.newFormData();
+        if (request.audioFile != null) {
+            await _body.appendFile("audio_file", request.audioFile);
+        }
+
+        if (request.similarityThreshold != null) {
+            _body.append("similarity_threshold", request.similarityThreshold?.toString());
+        }
+
+        if (request.topK != null) {
+            _body.append("top_k", request.topK?.toString());
+        }
+
+        const _maybeEncodedRequest = await _body.getRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+                ..._maybeEncodedRequest.headers,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/similar-voices",
+            ),
+            method: "POST",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetLibraryVoicesResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/similar-voices");
+    }
+
+    /**
      * Retrieves a list of shared voices.
      *
      * @param {ElevenLabs.VoicesGetSharedRequest} request
@@ -902,99 +996,5 @@ export class VoicesClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/shared-voices");
-    }
-
-    /**
-     * Returns a list of shared voices similar to the provided audio sample. If neither similarity_threshold nor top_k is provided, we will apply default values.
-     *
-     * @param {ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost} request
-     * @param {VoicesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     * @throws {@link errors.ElevenLabsError}
-     * @throws {@link errors.ElevenLabsTimeoutError}
-     *
-     * @example
-     *     import { createReadStream } from "fs";
-     *     await client.voices.findSimilarVoices({})
-     */
-    public findSimilarVoices(
-        request: ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost,
-        requestOptions?: VoicesClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.GetLibraryVoicesResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__findSimilarVoices(request, requestOptions));
-    }
-
-    private async __findSimilarVoices(
-        request: ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost,
-        requestOptions?: VoicesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.GetLibraryVoicesResponse>> {
-        const _body = await core.newFormData();
-        if (request.audioFile != null) {
-            await _body.appendFile("audio_file", request.audioFile);
-        }
-
-        if (request.similarityThreshold != null) {
-            _body.append("similarity_threshold", request.similarityThreshold?.toString());
-        }
-
-        if (request.topK != null) {
-            _body.append("top_k", request.topK?.toString());
-        }
-
-        const _maybeEncodedRequest = await _body.getRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
-                ..._maybeEncodedRequest.headers,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                "v1/similar-voices",
-            ),
-            method: "POST",
-            headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "file",
-            duplex: _maybeEncodedRequest.duplex,
-            body: _maybeEncodedRequest.body,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: serializers.GetLibraryVoicesResponse.parseOrThrow(_response.body, {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    breadcrumbsPrefix: ["response"],
-                }),
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/similar-voices");
     }
 }

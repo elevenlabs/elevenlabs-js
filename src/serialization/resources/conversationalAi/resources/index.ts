@@ -27,6 +27,8 @@ export * from "./sipTrunk/client/requests";
 export * as tests from "./tests";
 export * from "./tests/client/requests";
 export * from "./tests/types";
+export * as triageTickets from "./triageTickets";
+export * from "./triageTickets/client/requests";
 export * as twilio from "./twilio";
 export * from "./twilio/client/requests";
 export * as whatsapp from "./whatsapp";

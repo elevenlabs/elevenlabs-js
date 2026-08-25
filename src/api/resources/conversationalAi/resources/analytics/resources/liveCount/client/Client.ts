@@ -35,7 +35,8 @@ export class LiveCountClient {
      *
      * @example
      *     await client.conversationalAi.analytics.liveCount.get({
-     *         agentId: "agent_id"
+     *         agentId: "agent_id",
+     *         agentIds: ["agent_ids"]
      *     })
      */
     public get(
@@ -49,9 +50,10 @@ export class LiveCountClient {
         request: ElevenLabs.conversationalAi.analytics.LiveCountGetRequest = {},
         requestOptions?: LiveCountClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetLiveCountResponse>> {
-        const { agentId } = request;
+        const { agentId, agentIds } = request;
         const _queryParams: Record<string, unknown> = {
             agent_id: agentId,
+            agent_ids: agentIds,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

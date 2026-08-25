@@ -4,6 +4,7 @@
 export const PendingSubscriptionSwitchResponseModelNextTier = {
     Free: "free",
     Starter: "starter",
+    Go: "go",
     Creator: "creator",
     Pro: "pro",
     GrowingBusiness: "growing_business",

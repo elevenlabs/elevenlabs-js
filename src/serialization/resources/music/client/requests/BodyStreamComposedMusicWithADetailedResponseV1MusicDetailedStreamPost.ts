@@ -3,8 +3,8 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
+import { MusicModelId } from "../../../../types/MusicModelId";
 import { BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostCompositionPlan } from "../../types/BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostCompositionPlan";
-import { BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostModelId } from "../../types/BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostModelId";
 
 export const BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost: core.serialization.Schema<
     serializers.BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost.Raw,
@@ -16,10 +16,7 @@ export const BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPo
         BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostCompositionPlan.optional(),
     ),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
-    modelId: core.serialization.property(
-        "model_id",
-        BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostModelId.optional(),
-    ),
+    modelId: core.serialization.property("model_id", MusicModelId.optional()),
     seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     finetuneId: core.serialization.property("finetune_id", core.serialization.string().optional()),
@@ -32,7 +29,7 @@ export declare namespace BodyStreamComposedMusicWithADetailedResponseV1MusicDeta
         prompt?: string | null;
         composition_plan?: BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostCompositionPlan.Raw | null;
         music_length_ms?: number | null;
-        model_id?: BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostModelId.Raw | null;
+        model_id?: MusicModelId.Raw | null;
         seed?: number | null;
         force_instrumental?: boolean | null;
         finetune_id?: string | null;

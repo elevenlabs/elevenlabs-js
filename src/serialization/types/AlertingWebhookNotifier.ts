@@ -8,13 +8,11 @@ export const AlertingWebhookNotifier: core.serialization.ObjectSchema<
     serializers.AlertingWebhookNotifier.Raw,
     ElevenLabs.AlertingWebhookNotifier
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("webhook").optional(),
     webhookId: core.serialization.property("webhook_id", core.serialization.string()),
 });
 
 export declare namespace AlertingWebhookNotifier {
     export interface Raw {
-        type?: "webhook" | null;
         webhook_id: string;
     }
 }

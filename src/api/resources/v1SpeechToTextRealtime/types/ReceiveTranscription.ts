@@ -8,11 +8,10 @@ import type * as ElevenLabs from "../../../index";
 export type ReceiveTranscription =
     | ElevenLabs.SessionStartedPayload
     | ElevenLabs.PartialTranscriptPayload
-    | ElevenLabs.FinalTranscript
-    | ElevenLabs.FinalTranscriptWithTimestamps
     | ElevenLabs.CommittedTranscriptPayload
     | ElevenLabs.CommittedTranscriptWithTimestampsPayload
     | ElevenLabs.CommittedTranscriptEntitiesPayload
+    | ElevenLabs.ScribeWarning
     | ElevenLabs.ScribeErrorPayload
     | ElevenLabs.ScribeAuthErrorPayload
     | ElevenLabs.ScribeQuotaExceededErrorPayload

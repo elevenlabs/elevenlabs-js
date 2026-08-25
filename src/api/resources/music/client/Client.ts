@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClie
 import { type NormalizedClientOptions, normalizeClientOptions } from "../../../../BaseClient";
 import * as core from "../../../../core";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers";
+import { toJson } from "../../../../core/json";
 import { mergeAdditionalBodyParameters } from "../../../../core/requestBody";
 import * as environments from "../../../../environments";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError";
@@ -81,9 +82,7 @@ export class MusicClient {
         if (request.modelId != null) {
             _body.append(
                 "model_id",
-                serializers.MusicVideoToMusicRequestModelId.jsonOrThrow(request.modelId, {
-                    unrecognizedObjectKeys: "strip",
-                }),
+                serializers.MusicModelId.jsonOrThrow(request.modelId, { unrecognizedObjectKeys: "strip" }),
             );
         }
 
@@ -520,7 +519,16 @@ export class MusicClient {
         const _body = await core.newFormData();
         await _body.appendFile("file", request.file);
         if (request.extractCompositionPlan != null) {
-            _body.append("extract_composition_plan", request.extractCompositionPlan);
+            _body.append(
+                "extract_composition_plan",
+                (() => {
+                    const mapped = serializers.MusicUploadRequestExtractCompositionPlan.jsonOrThrow(
+                        request.extractCompositionPlan,
+                        { unrecognizedObjectKeys: "strip" },
+                    );
+                    return typeof mapped === "string" ? mapped : toJson(mapped);
+                })(),
+            );
         }
 
         if (request.withTimestamps != null) {

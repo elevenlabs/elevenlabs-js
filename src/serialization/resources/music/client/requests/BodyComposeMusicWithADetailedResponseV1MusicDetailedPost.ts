@@ -3,8 +3,8 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
+import { MusicModelId } from "../../../../types/MusicModelId";
 import { BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan } from "../../types/BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan";
-import { BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId } from "../../types/BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId";
 
 export const BodyComposeMusicWithADetailedResponseV1MusicDetailedPost: core.serialization.Schema<
     serializers.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost.Raw,
@@ -16,10 +16,7 @@ export const BodyComposeMusicWithADetailedResponseV1MusicDetailedPost: core.seri
         BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan.optional(),
     ),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
-    modelId: core.serialization.property(
-        "model_id",
-        BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId.optional(),
-    ),
+    modelId: core.serialization.property("model_id", MusicModelId.optional()),
     seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     finetuneId: core.serialization.property("finetune_id", core.serialization.string().optional()),
@@ -37,7 +34,7 @@ export declare namespace BodyComposeMusicWithADetailedResponseV1MusicDetailedPos
         prompt?: string | null;
         composition_plan?: BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan.Raw | null;
         music_length_ms?: number | null;
-        model_id?: BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId.Raw | null;
+        model_id?: MusicModelId.Raw | null;
         seed?: number | null;
         force_instrumental?: boolean | null;
         finetune_id?: string | null;

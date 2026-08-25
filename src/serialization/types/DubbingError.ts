@@ -6,15 +6,13 @@ import type * as serializers from "../index";
 
 export const DubbingError: core.serialization.ObjectSchema<serializers.DubbingError.Raw, ElevenLabs.DubbingError> =
     core.serialization.object({
-        code: core.serialization.string(),
-        message: core.serialization.string(),
-        retryable: core.serialization.boolean(),
+        messageType: core.serialization.property("message_type", core.serialization.stringLiteral("error")),
+        error: core.serialization.string(),
     });
 
 export declare namespace DubbingError {
     export interface Raw {
-        code: string;
-        message: string;
-        retryable: boolean;
+        message_type: "error";
+        error: string;
     }
 }

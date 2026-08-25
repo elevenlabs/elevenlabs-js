@@ -10,6 +10,7 @@ export const TtsConversationalConfigOverrideConfig: core.serialization.ObjectSch
 > = core.serialization.object({
     modelId: core.serialization.property("model_id", core.serialization.boolean().optional()),
     voiceId: core.serialization.property("voice_id", core.serialization.boolean().optional()),
+    supportedVoices: core.serialization.property("supported_voices", core.serialization.boolean().optional()),
     stability: core.serialization.boolean().optional(),
     speed: core.serialization.boolean().optional(),
     similarityBoost: core.serialization.property("similarity_boost", core.serialization.boolean().optional()),
@@ -23,6 +24,7 @@ export declare namespace TtsConversationalConfigOverrideConfig {
     export interface Raw {
         model_id?: boolean | null;
         voice_id?: boolean | null;
+        supported_voices?: boolean | null;
         stability?: boolean | null;
         speed?: boolean | null;
         similarity_boost?: boolean | null;

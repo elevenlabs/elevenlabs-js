@@ -10,6 +10,8 @@ export interface GetToolCallUnitTestResponseModel {
     chatHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
     /** Simulate the test as if the conversation originated from this channel. */
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
+    /** The environment to resolve environment-specific variable values against when running this test (URL, headers, auth connections). If not provided, defaults to 'production'. For simulation tests, simulation_environment takes precedence when set. */
+    environment?: string;
     /** How to evaluate the agent's tool call (if any). If empty, the tool call is not evaluated. */
     toolCallParameters?: ElevenLabs.UnitTestToolCallEvaluationModelOutput;
     /** If set to True this test will pass if any tool call returned by the LLM matches the criteria. Otherwise it will fail if more than one tool is returned by the agent. */

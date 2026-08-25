@@ -6,6 +6,7 @@ import type * as serializers from "../../../../../../index";
 import { AgentPlatformSettingsRequestModel } from "../../../../../../types/AgentPlatformSettingsRequestModel";
 import { AgentWorkflowRequestModel } from "../../../../../../types/AgentWorkflowRequestModel";
 import { ConversationalConfig } from "../../../../../../types/ConversationalConfig";
+import { ProcedureVersionRef } from "../../../../../../types/ProcedureVersionRef";
 
 export const UpdateAgentRequest: core.serialization.Schema<
     serializers.conversationalAi.UpdateAgentRequest.Raw,
@@ -17,6 +18,7 @@ export const UpdateAgentRequest: core.serialization.Schema<
     name: core.serialization.string().optional(),
     tags: core.serialization.list(core.serialization.string()).optional(),
     versionDescription: core.serialization.property("version_description", core.serialization.string().optional()),
+    procedures: core.serialization.record(core.serialization.string(), ProcedureVersionRef.optional()).optional(),
 });
 
 export declare namespace UpdateAgentRequest {
@@ -27,5 +29,6 @@ export declare namespace UpdateAgentRequest {
         name?: string | null;
         tags?: string[] | null;
         version_description?: string | null;
+        procedures?: Record<string, ProcedureVersionRef.Raw | null | undefined> | null;
     }
 }
