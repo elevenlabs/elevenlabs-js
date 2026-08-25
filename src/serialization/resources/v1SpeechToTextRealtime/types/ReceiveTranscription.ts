@@ -6,8 +6,6 @@ import type * as serializers from "../../../index";
 import { CommittedTranscriptEntitiesPayload } from "../../../types/CommittedTranscriptEntitiesPayload";
 import { CommittedTranscriptPayload } from "../../../types/CommittedTranscriptPayload";
 import { CommittedTranscriptWithTimestampsPayload } from "../../../types/CommittedTranscriptWithTimestampsPayload";
-import { FinalTranscript } from "../../../types/FinalTranscript";
-import { FinalTranscriptWithTimestamps } from "../../../types/FinalTranscriptWithTimestamps";
 import { PartialTranscriptPayload } from "../../../types/PartialTranscriptPayload";
 import { ScribeAuthErrorPayload } from "../../../types/ScribeAuthErrorPayload";
 import { ScribeChunkSizeExceededErrorPayload } from "../../../types/ScribeChunkSizeExceededErrorPayload";
@@ -23,6 +21,7 @@ import { ScribeSessionTimeLimitExceededErrorPayload } from "../../../types/Scrib
 import { ScribeThrottledErrorPayload } from "../../../types/ScribeThrottledErrorPayload";
 import { ScribeTranscriberErrorPayload } from "../../../types/ScribeTranscriberErrorPayload";
 import { ScribeUnacceptedTermsErrorPayload } from "../../../types/ScribeUnacceptedTermsErrorPayload";
+import { ScribeWarning } from "../../../types/ScribeWarning";
 import { SessionStartedPayload } from "../../../types/SessionStartedPayload";
 
 export const ReceiveTranscription: core.serialization.Schema<
@@ -31,11 +30,10 @@ export const ReceiveTranscription: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([
     SessionStartedPayload,
     PartialTranscriptPayload,
-    FinalTranscript,
-    FinalTranscriptWithTimestamps,
     CommittedTranscriptPayload,
     CommittedTranscriptWithTimestampsPayload,
     CommittedTranscriptEntitiesPayload,
+    ScribeWarning,
     ScribeErrorPayload,
     ScribeAuthErrorPayload,
     ScribeQuotaExceededErrorPayload,
@@ -56,11 +54,10 @@ export declare namespace ReceiveTranscription {
     export type Raw =
         | SessionStartedPayload.Raw
         | PartialTranscriptPayload.Raw
-        | FinalTranscript.Raw
-        | FinalTranscriptWithTimestamps.Raw
         | CommittedTranscriptPayload.Raw
         | CommittedTranscriptWithTimestampsPayload.Raw
         | CommittedTranscriptEntitiesPayload.Raw
+        | ScribeWarning.Raw
         | ScribeErrorPayload.Raw
         | ScribeAuthErrorPayload.Raw
         | ScribeQuotaExceededErrorPayload.Raw

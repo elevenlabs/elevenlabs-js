@@ -10,6 +10,8 @@ export interface GetSimulationTestResponseModel {
     chatHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
     /** Simulate the test as if the conversation originated from this channel. */
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
+    /** The environment to resolve environment-specific variable values against when running this test (URL, headers, auth connections). If not provided, defaults to 'production'. For simulation tests, simulation_environment takes precedence when set. */
+    environment?: string;
     /** Deprecated legacy single success criterion. Use success_conditions instead. At least one of success_condition or success_conditions is required. */
     successCondition?: string;
     /** List of prompts that evaluate whether the simulation was successful. If provided, all criteria are evaluated and merged into a final result. Capped at the maximum number of evaluation criteria. */

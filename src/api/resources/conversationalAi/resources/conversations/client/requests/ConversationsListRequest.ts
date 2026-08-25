@@ -9,6 +9,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         agentId: "agent_id",
  *         visitedAgentIds: ["visited_agent_ids"],
  *         visitedAgentBranchIds: ["visited_agent_branch_ids"],
+ *         triggeredProcedureIds: ["triggered_procedure_ids"],
  *         callSuccessful: "success",
  *         callStartBeforeUnix: 1,
  *         callStartAfterUnix: 1,
@@ -25,6 +26,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         toolNames: ["tool_names"],
  *         toolNamesSuccessful: ["tool_names_successful"],
  *         toolNamesErrored: ["tool_names_errored"],
+ *         includeInvalidToolCalls: true,
  *         mainLanguages: ["main_languages"],
  *         pageSize: 1,
  *         summaryMode: "exclude",
@@ -41,7 +43,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *         workflowNodeEnteredId: "workflow_node_entered_id",
  *         terminationReasons: ["termination_reasons"],
  *         guardrailTypes: ["custom"],
- *         customGuardrailNames: ["custom_guardrail_names"]
+ *         customGuardrailNames: ["custom_guardrail_names"],
+ *         sortDirection: "asc"
  *     }
  */
 export interface ConversationsListRequest {
@@ -53,8 +56,10 @@ export interface ConversationsListRequest {
     visitedAgentIds?: string | string[];
     /** Filter conversations where any of these agent branches participated. Can not exceed 50 values. */
     visitedAgentBranchIds?: string | string[];
+    /** Filter conversations where any of these procedures were triggered. Can not exceed 50 values. */
+    triggeredProcedureIds?: string | string[];
     /** The result of the success evaluation */
-    callSuccessful?: ElevenLabs.EvaluationSuccessResult;
+    callSuccessful?: ElevenLabs.EvaluationResultFilter;
     /** Unix timestamp (in seconds) to filter conversations up to this start date. */
     callStartBeforeUnix?: number;
     /** Unix timestamp (in seconds) to filter conversations after to this start date. */
@@ -85,6 +90,8 @@ export interface ConversationsListRequest {
     toolNamesSuccessful?: string | string[];
     /** Filter conversations by tool names that had errored calls. */
     toolNamesErrored?: string | string[];
+    /** Also match tool calls that never ran. */
+    includeInvalidToolCalls?: boolean;
     /** Filter conversations by detected main language (language code). */
     mainLanguages?: string | string[];
     /** How many conversations to return at maximum. Can not exceed 100, defaults to 30. */
@@ -119,4 +126,6 @@ export interface ConversationsListRequest {
     guardrailTypes?: ElevenLabs.GuardrailType | ElevenLabs.GuardrailType[];
     /** Filter to conversations where a custom guardrail with any of these names triggered (metadata.triggered_guardrails.guardrail_name). Only custom guardrails carry a name. Repeat param to match any of several. */
     customGuardrailNames?: string | string[];
+    /** The direction to sort conversations by call start time. Defaults to descending (newest first). */
+    sortDirection?: ElevenLabs.SortDirection;
 }

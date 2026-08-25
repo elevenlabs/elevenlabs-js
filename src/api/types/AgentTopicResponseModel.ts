@@ -11,4 +11,6 @@ export interface AgentTopicResponseModel {
     x2D?: number;
     y2D?: number;
     metrics?: ElevenLabs.TopicMetricsAggregate;
+    /** Success rate across the topic's evaluation criteria, weighted by scored conversations. Returned regardless of include_evaluation_criteria. */
+    successRate?: number;
 }

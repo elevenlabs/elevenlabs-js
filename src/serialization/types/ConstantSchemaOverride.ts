@@ -9,11 +9,11 @@ export const ConstantSchemaOverride: core.serialization.ObjectSchema<
     serializers.ConstantSchemaOverride.Raw,
     ElevenLabs.ConstantSchemaOverride
 > = core.serialization.object({
-    constantValue: core.serialization.property("constant_value", ConstantSchemaOverrideConstantValue),
+    constantValue: core.serialization.property("constant_value", ConstantSchemaOverrideConstantValue.optional()),
 });
 
 export declare namespace ConstantSchemaOverride {
     export interface Raw {
-        constant_value: ConstantSchemaOverrideConstantValue.Raw;
+        constant_value?: ConstantSchemaOverrideConstantValue.Raw | null;
     }
 }

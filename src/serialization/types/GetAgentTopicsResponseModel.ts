@@ -12,6 +12,9 @@ export const GetAgentTopicsResponseModel: core.serialization.ObjectSchema<
     topics: core.serialization.list(AgentTopicResponseModel),
     windowStartUnixSecs: core.serialization.property("window_start_unix_secs", core.serialization.number()),
     windowEndUnixSecs: core.serialization.property("window_end_unix_secs", core.serialization.number()),
+    aggregatedRunCount: core.serialization.property("aggregated_run_count", core.serialization.number().optional()),
+    hasMore: core.serialization.property("has_more", core.serialization.boolean().optional()),
+    nextCursor: core.serialization.property("next_cursor", core.serialization.string().optional()),
 });
 
 export declare namespace GetAgentTopicsResponseModel {
@@ -19,5 +22,8 @@ export declare namespace GetAgentTopicsResponseModel {
         topics: AgentTopicResponseModel.Raw[];
         window_start_unix_secs: number;
         window_end_unix_secs: number;
+        aggregated_run_count?: number | null;
+        has_more?: boolean | null;
+        next_cursor?: string | null;
     }
 }

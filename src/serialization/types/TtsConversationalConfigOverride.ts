@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { PydanticPronunciationDictionaryVersionLocator } from "./PydanticPronunciationDictionaryVersionLocator";
+import { SupportedVoice } from "./SupportedVoice";
 import { TtsConversationalModel } from "./TtsConversationalModel";
 
 export const TtsConversationalConfigOverride: core.serialization.ObjectSchema<
@@ -12,6 +13,10 @@ export const TtsConversationalConfigOverride: core.serialization.ObjectSchema<
 > = core.serialization.object({
     modelId: core.serialization.property("model_id", TtsConversationalModel.optional()),
     voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
+    supportedVoices: core.serialization.property(
+        "supported_voices",
+        core.serialization.list(SupportedVoice).optional(),
+    ),
     stability: core.serialization.number().optional(),
     speed: core.serialization.number().optional(),
     similarityBoost: core.serialization.property("similarity_boost", core.serialization.number().optional()),
@@ -25,6 +30,7 @@ export declare namespace TtsConversationalConfigOverride {
     export interface Raw {
         model_id?: TtsConversationalModel.Raw | null;
         voice_id?: string | null;
+        supported_voices?: SupportedVoice.Raw[] | null;
         stability?: number | null;
         speed?: number | null;
         similarity_boost?: number | null;

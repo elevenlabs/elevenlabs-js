@@ -190,9 +190,7 @@ export class FinetunesClient {
         if (request.modelId != null) {
             _body.append(
                 "model_id",
-                serializers.music.FinetunesCreateRequestModelId.jsonOrThrow(request.modelId, {
-                    unrecognizedObjectKeys: "strip",
-                }),
+                serializers.MusicModelId.jsonOrThrow(request.modelId, { unrecognizedObjectKeys: "strip" }),
             );
         }
 

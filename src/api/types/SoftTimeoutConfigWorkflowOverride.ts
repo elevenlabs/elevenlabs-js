@@ -15,4 +15,6 @@ export interface SoftTimeoutConfigWorkflowOverride {
     maxSoftTimeoutsPerGeneration?: number;
     /** Custom prompt for generating the soft timeout filler message when use_llm_generated_message is enabled. Recent conversation context is provided as a separate user message. If not set, the default prompt will be used. Supports dynamic variables (e.g., {{system__time}}, {{custom_variable}}). */
     llmGeneratedMessagePromptOverride?: string;
+    /** When true, soft timeout fillers are suppressed until the conversation has at least one real user message. Prevents fillers during the agent's opening turn (e.g. workflow generate-immediately / tool calls before the user speaks). */
+    disableUntilFirstUserMessage?: boolean;
 }

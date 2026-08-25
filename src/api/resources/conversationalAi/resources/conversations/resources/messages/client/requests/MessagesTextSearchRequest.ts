@@ -9,6 +9,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *         agentId: "agent_id",
  *         visitedAgentIds: ["visited_agent_ids"],
  *         visitedAgentBranchIds: ["visited_agent_branch_ids"],
+ *         triggeredProcedureIds: ["triggered_procedure_ids"],
  *         callSuccessful: "success",
  *         callStartBeforeUnix: 1,
  *         callStartAfterUnix: 1,
@@ -23,6 +24,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *         toolNames: ["tool_names"],
  *         toolNamesSuccessful: ["tool_names_successful"],
  *         toolNamesErrored: ["tool_names_errored"],
+ *         includeInvalidToolCalls: true,
  *         mainLanguages: ["main_languages"],
  *         excludeStatuses: ["initiated"],
  *         terminationReasons: ["termination_reasons"],
@@ -47,8 +49,10 @@ export interface MessagesTextSearchRequest {
     visitedAgentIds?: string | string[];
     /** Filter conversations where any of these agent branches participated. Can not exceed 50 values. */
     visitedAgentBranchIds?: string | string[];
+    /** Filter conversations where any of these procedures were triggered. Can not exceed 50 values. */
+    triggeredProcedureIds?: string | string[];
     /** The result of the success evaluation */
-    callSuccessful?: ElevenLabs.EvaluationSuccessResult;
+    callSuccessful?: ElevenLabs.EvaluationResultFilter;
     /** Unix timestamp (in seconds) to filter conversations up to this start date. */
     callStartBeforeUnix?: number;
     /** Unix timestamp (in seconds) to filter conversations after to this start date. */
@@ -75,6 +79,8 @@ export interface MessagesTextSearchRequest {
     toolNamesSuccessful?: string | string[];
     /** Filter conversations by tool names that had errored calls. */
     toolNamesErrored?: string | string[];
+    /** Also match tool calls that never ran. */
+    includeInvalidToolCalls?: boolean;
     /** Filter conversations by detected main language (language code). */
     mainLanguages?: string | string[];
     /** Exclude conversations with the given statuses. Useful for hiding in-progress / processing conversations from list views. */

@@ -3,12 +3,12 @@
 import type * as ElevenLabs from "../index";
 
 export interface BuiltInToolsWorkflowOverrideInput {
+    /** The transfer to agent tool */
+    transferToAgent?: ElevenLabs.SystemToolConfigInput;
     /** The end call tool */
     endCall?: ElevenLabs.SystemToolConfigInput;
     /** The language detection tool */
     languageDetection?: ElevenLabs.SystemToolConfigInput;
-    /** The transfer to agent tool */
-    transferToAgent?: ElevenLabs.SystemToolConfigInput;
     /** The transfer to number tool */
     transferToNumber?: ElevenLabs.SystemToolConfigInput;
     /** The skip turn tool */

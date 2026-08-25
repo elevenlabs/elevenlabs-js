@@ -25,6 +25,7 @@ import { SettingsClient } from "../resources/settings/client/Client";
 import { SipTrunkClient } from "../resources/sipTrunk/client/Client";
 import { TestsClient } from "../resources/tests/client/Client";
 import { ToolsClient } from "../resources/tools/client/Client";
+import { TriageTicketsClient } from "../resources/triageTickets/client/Client";
 import { TwilioClient } from "../resources/twilio/client/Client";
 import { UsersClient } from "../resources/users/client/Client";
 import { WhatsappClient } from "../resources/whatsapp/client/Client";
@@ -45,6 +46,7 @@ export class ConversationalAiClient {
     protected _agents: AgentsClient | undefined;
     protected _tests: TestsClient | undefined;
     protected _users: UsersClient | undefined;
+    protected _triageTickets: TriageTicketsClient | undefined;
     protected _phoneNumbers: PhoneNumbersClient | undefined;
     protected _llmUsage: LlmUsageClient | undefined;
     protected _llm: LlmClient | undefined;
@@ -89,6 +91,10 @@ export class ConversationalAiClient {
 
     public get users(): UsersClient {
         return (this._users ??= new UsersClient(this._options));
+    }
+
+    public get triageTickets(): TriageTicketsClient {
+        return (this._triageTickets ??= new TriageTicketsClient(this._options));
     }
 
     public get phoneNumbers(): PhoneNumbersClient {

@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
-import { BodyGenerateCompositionPlanV1MusicPlanPostModelId } from "../../types/BodyGenerateCompositionPlanV1MusicPlanPostModelId";
+import { MusicModelId } from "../../../../../../types/MusicModelId";
 import { BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan } from "../../types/BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan";
 
 export const BodyGenerateCompositionPlanV1MusicPlanPost: core.serialization.Schema<
@@ -16,7 +16,7 @@ export const BodyGenerateCompositionPlanV1MusicPlanPost: core.serialization.Sche
         "source_composition_plan",
         BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan.optional(),
     ),
-    modelId: core.serialization.property("model_id", BodyGenerateCompositionPlanV1MusicPlanPostModelId.optional()),
+    modelId: core.serialization.property("model_id", MusicModelId.optional()),
 });
 
 export declare namespace BodyGenerateCompositionPlanV1MusicPlanPost {
@@ -24,6 +24,6 @@ export declare namespace BodyGenerateCompositionPlanV1MusicPlanPost {
         prompt: string;
         music_length_ms?: number | null;
         source_composition_plan?: BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan.Raw | null;
-        model_id?: BodyGenerateCompositionPlanV1MusicPlanPostModelId.Raw | null;
+        model_id?: MusicModelId.Raw | null;
     }
 }

@@ -59,6 +59,8 @@ export * as tokens from "./tokens";
 export * as usage from "./usage";
 export * from "./usage/client/requests";
 export * as user from "./user";
+export * as v1DubbingRealtime from "./v1DubbingRealtime";
+export * from "./v1DubbingRealtime/types";
 export * as v1SpeechToTextRealtime from "./v1SpeechToTextRealtime";
 export * from "./v1SpeechToTextRealtime/types";
 export * as v1TextToDialogueMultiStreamInput from "./v1TextToDialogueMultiStreamInput";
