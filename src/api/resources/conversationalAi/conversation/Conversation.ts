@@ -172,26 +172,34 @@ export class Conversation extends EventEmitter {
     }
 
     /**
-     * Send a multimodal message combining text and a file reference to the agent.
+     * Send a multimodal message combining text and file references to the agent.
      *
-     * At least one of `text` or `fileId` must be provided.
+     * At least one of `text`, `fileId`, or `fileIds` must be provided.
      *
      * @param options.text Optional text message to include
-     * @param options.fileId Optional ElevenLabs file ID to include
+     * @param options.fileId @deprecated Use `fileIds`.
+     * @param options.fileIds Optional ElevenLabs file IDs to include
      */
-    public sendMultimodalMessage(options: { text?: string; fileId?: string }): void {
+    public sendMultimodalMessage(options: {
+        text?: string;
+        /** @deprecated Use `fileIds`. */
+        fileId?: string;
+        fileIds?: string[];
+    }): void {
         if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
             throw new Error("Session not started or websocket not connected");
         }
 
-        if (!options.text && !options.fileId) {
-            throw new Error("At least one of text or fileId must be provided");
+        const fileIds = options.fileIds?.length ? options.fileIds : options.fileId ? [options.fileId] : [];
+        if (!options.text && fileIds.length === 0) {
+            throw new Error("At least one of text, fileId, or fileIds must be provided");
         }
 
+        const files = fileIds.map((file_id) => ({ type: "file_input" as const, file_id }));
         const event: MultimodalMessageClientToOrchestratorEvent = {
             type: ClientToOrchestratorEvent.MULTIMODAL_MESSAGE,
             ...(options.text && { text: { type: ClientToOrchestratorEvent.USER_MESSAGE, text: options.text } }),
-            ...(options.fileId && { file: { type: "file_input", file_id: options.fileId } }),
+            ...(files.length && { file: files[0], files }),
         };
 
         this.ws.send(JSON.stringify(event));
