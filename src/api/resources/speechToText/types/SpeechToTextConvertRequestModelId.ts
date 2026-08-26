@@ -6,4 +6,5 @@ export const SpeechToTextConvertRequestModelId = {
     ScribeV1: "scribe_v1",
 } as const;
 export type SpeechToTextConvertRequestModelId =
-    (typeof SpeechToTextConvertRequestModelId)[keyof typeof SpeechToTextConvertRequestModelId];
+    | (typeof SpeechToTextConvertRequestModelId)[keyof typeof SpeechToTextConvertRequestModelId]
+    | (string & {});
