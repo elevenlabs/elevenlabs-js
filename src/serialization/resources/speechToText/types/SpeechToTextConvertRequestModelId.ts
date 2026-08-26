@@ -7,8 +7,8 @@ import type * as serializers from "../../../index";
 export const SpeechToTextConvertRequestModelId: core.serialization.Schema<
     serializers.SpeechToTextConvertRequestModelId.Raw,
     ElevenLabs.SpeechToTextConvertRequestModelId
-> = core.serialization.enum_(["scribe_v2", "scribe_v1"]);
+> = core.serialization.string();
 
 export declare namespace SpeechToTextConvertRequestModelId {
-    export type Raw = "scribe_v2" | "scribe_v1";
+    export type Raw = string;
 }
