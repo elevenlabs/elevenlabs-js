@@ -34,6 +34,9 @@ describe("ProceduresClient", () => {
         const response = await client.agents.procedures.list(
             "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
             "agtbranch_0901k4aafjxxfxt93gd841r7tv5t",
+            {
+                agentVersionId: "agent_version_id",
+            },
         );
         expect(response).toEqual({
             procedures: [
@@ -181,6 +184,7 @@ describe("ProceduresClient", () => {
             "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3",
             {
                 versionId: "version_id",
+                agentVersionId: "agent_version_id",
             },
         );
         expect(response).toEqual({

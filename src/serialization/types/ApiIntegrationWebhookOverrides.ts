@@ -17,16 +17,16 @@ export const ApiIntegrationWebhookOverrides: core.serialization.ObjectSchema<
             .record(core.serialization.string(), ApiIntegrationWebhookOverridesSchemaOverridesValue.optional())
             .optional(),
     ),
+    responseFilterMode: core.serialization.property("response_filter_mode", ResponseFilterMode.optional()),
+    responseFilters: core.serialization.property(
+        "response_filters",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     requestHeaders: core.serialization.property(
         "request_headers",
         core.serialization
             .record(core.serialization.string(), ApiIntegrationWebhookOverridesRequestHeadersValue.optional())
             .optional(),
-    ),
-    responseFilterMode: core.serialization.property("response_filter_mode", ResponseFilterMode.optional()),
-    responseFilters: core.serialization.property(
-        "response_filters",
-        core.serialization.list(core.serialization.string()).optional(),
     ),
 });
 
@@ -36,11 +36,11 @@ export declare namespace ApiIntegrationWebhookOverrides {
             string,
             ApiIntegrationWebhookOverridesSchemaOverridesValue.Raw | null | undefined
         > | null;
+        response_filter_mode?: ResponseFilterMode.Raw | null;
+        response_filters?: string[] | null;
         request_headers?: Record<
             string,
             ApiIntegrationWebhookOverridesRequestHeadersValue.Raw | null | undefined
         > | null;
-        response_filter_mode?: ResponseFilterMode.Raw | null;
-        response_filters?: string[] | null;
     }
 }

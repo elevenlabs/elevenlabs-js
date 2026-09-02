@@ -85,6 +85,10 @@ export const DirectPublishingReadResponseModel: core.serialization.ObjectSchema<
     voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
     canUseAssistant: core.serialization.property("can_use_assistant", core.serialization.boolean().optional()),
     isVoiceChangerOn: core.serialization.property("is_voice_changer_on", core.serialization.boolean().optional()),
+    restrictedToUserEmailDomains: core.serialization.property(
+        "restricted_to_user_email_domains",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace DirectPublishingReadResponseModel {
@@ -141,5 +145,6 @@ export declare namespace DirectPublishingReadResponseModel {
         voice_id?: string | null;
         can_use_assistant?: boolean | null;
         is_voice_changer_on?: boolean | null;
+        restricted_to_user_email_domains?: string[] | null;
     }
 }

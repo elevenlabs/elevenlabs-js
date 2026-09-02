@@ -3,6 +3,16 @@
 export interface AlertingMonitorConfig {
     /** Failure rate threshold at which this monitor can notify. */
     threshold?: number;
+    /** Relative increase over the trailing baseline at which this monitor can notify (0.2 = 20% above baseline, 0 = any failure). */
+    relativeIncreaseThreshold?: number;
+    /** Minimum failures in the window before this monitor can fire. */
+    minFailureCount?: number;
+    /** Minimum trailing buckets with traffic before spike detection can fire. */
+    minHistoryBucketCount?: number;
+    /** Minimum samples in the window before this monitor can fire. */
+    minSampleCount?: number;
+    /** How many suspect buckets within the lookback window are required to promote a suspect to an alert. */
+    suspectTriggerThreshold?: number;
     /** How many minutes an alert can stay inactive before it is auto-resolved. */
     autoResolveAfterInactiveMinutes?: number;
 }

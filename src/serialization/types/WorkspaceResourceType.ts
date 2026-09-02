@@ -33,6 +33,7 @@ export const WorkspaceResourceType: core.serialization.Schema<
     "convai_agent_versions",
     "convai_agent_branches",
     "convai_agent_versions_deployments",
+    "convai_agent_experiments",
     "convai_memory_entries",
     "convai_coaching_proposals",
     "convai_templates",
@@ -43,6 +44,7 @@ export const WorkspaceResourceType: core.serialization.Schema<
     "assets",
     "content_generations",
     "content_templates",
+    "content_skills",
     "songs",
     "transcription_tasks",
     "avatars",
@@ -79,6 +81,7 @@ export declare namespace WorkspaceResourceType {
         | "convai_agent_versions"
         | "convai_agent_branches"
         | "convai_agent_versions_deployments"
+        | "convai_agent_experiments"
         | "convai_memory_entries"
         | "convai_coaching_proposals"
         | "convai_templates"
@@ -89,6 +92,7 @@ export declare namespace WorkspaceResourceType {
         | "assets"
         | "content_generations"
         | "content_templates"
+        | "content_skills"
         | "songs"
         | "transcription_tasks"
         | "avatars"

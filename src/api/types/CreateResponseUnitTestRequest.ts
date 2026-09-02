@@ -10,6 +10,8 @@ export interface CreateResponseUnitTestRequest {
     chatHistory?: ElevenLabs.ConversationHistoryTranscriptCommonModelInput[];
     /** Simulate the test as if the conversation originated from this channel. */
     conversationInitiationSource?: ElevenLabs.ConversationInitiationSource;
+    /** The environment to resolve environment-specific variable values against when running this test (URL, headers, auth connections). If not provided, defaults to 'production'. For simulation tests, simulation_environment takes precedence when set. */
+    environment?: string;
     /** A prompt that evaluates whether the agent's response is successful. Should return True or False. */
     successCondition?: string;
     /** Non-empty list of example responses that should be considered successful */

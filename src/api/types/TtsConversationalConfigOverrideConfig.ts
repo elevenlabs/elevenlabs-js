@@ -5,6 +5,8 @@ export interface TtsConversationalConfigOverrideConfig {
     modelId?: boolean;
     /** Whether to allow overriding the voice_id field. */
     voiceId?: boolean;
+    /** Whether to allow overriding the supported_voices field. */
+    supportedVoices?: boolean;
     /** Whether to allow overriding the stability field. */
     stability?: boolean;
     /** Whether to allow overriding the speed field. */

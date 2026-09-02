@@ -30,6 +30,7 @@ export const GetSimulationTestResponseModel: core.serialization.ObjectSchema<
         "conversation_initiation_source",
         ConversationInitiationSource.optional(),
     ),
+    environment: core.serialization.string().optional(),
     successCondition: core.serialization.property("success_condition", core.serialization.string().optional()),
     successConditions: core.serialization.property(
         "success_conditions",
@@ -60,6 +61,7 @@ export declare namespace GetSimulationTestResponseModel {
         dynamic_variables?: Record<string, unknown> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
+        environment?: string | null;
         success_condition?: string | null;
         success_conditions?: string[] | null;
         simulation_scenario?: string | null;

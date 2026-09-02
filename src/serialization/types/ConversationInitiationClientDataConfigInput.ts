@@ -22,6 +22,10 @@ export const ConversationInitiationClientDataConfigInput: core.serialization.Obj
         "enable_starting_workflow_node_id_from_client",
         core.serialization.boolean().optional(),
     ),
+    enableProcedureIdsFromClient: core.serialization.property(
+        "enable_procedure_ids_from_client",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace ConversationInitiationClientDataConfigInput {
@@ -30,5 +34,6 @@ export declare namespace ConversationInitiationClientDataConfigInput {
         custom_llm_extra_body?: boolean | null;
         enable_conversation_initiation_client_data_from_webhook?: boolean | null;
         enable_starting_workflow_node_id_from_client?: boolean | null;
+        enable_procedure_ids_from_client?: boolean | null;
     }
 }

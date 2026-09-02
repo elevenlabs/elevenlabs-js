@@ -27,6 +27,10 @@ export const SoftTimeoutConfig: core.serialization.ObjectSchema<
         "llm_generated_message_prompt_override",
         core.serialization.string().optional(),
     ),
+    disableUntilFirstUserMessage: core.serialization.property(
+        "disable_until_first_user_message",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace SoftTimeoutConfig {
@@ -38,5 +42,6 @@ export declare namespace SoftTimeoutConfig {
         randomize_fillers?: boolean | null;
         max_soft_timeouts_per_generation?: number | null;
         llm_generated_message_prompt_override?: string | null;
+        disable_until_first_user_message?: boolean | null;
     }
 }

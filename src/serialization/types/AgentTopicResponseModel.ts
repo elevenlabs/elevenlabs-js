@@ -17,6 +17,7 @@ export const AgentTopicResponseModel: core.serialization.ObjectSchema<
     x2D: core.serialization.property("x_2d", core.serialization.number().optional()),
     y2D: core.serialization.property("y_2d", core.serialization.number().optional()),
     metrics: TopicMetricsAggregate.optional(),
+    successRate: core.serialization.property("success_rate", core.serialization.number().optional()),
 });
 
 export declare namespace AgentTopicResponseModel {
@@ -29,5 +30,6 @@ export declare namespace AgentTopicResponseModel {
         x_2d?: number | null;
         y_2d?: number | null;
         metrics?: TopicMetricsAggregate.Raw | null;
+        success_rate?: number | null;
     }
 }

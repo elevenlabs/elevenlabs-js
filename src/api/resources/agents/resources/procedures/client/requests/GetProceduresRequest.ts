@@ -3,10 +3,13 @@
 /**
  * @example
  *     {
- *         versionId: "version_id"
+ *         versionId: "version_id",
+ *         agentVersionId: "agent_version_id"
  *     }
  */
 export interface GetProceduresRequest {
     /** The version ID to retrieve. If omitted, returns the version at branch HEAD. */
     versionId?: string;
+    /** The agent version ID to retrieve the procedure for. */
+    agentVersionId?: string;
 }

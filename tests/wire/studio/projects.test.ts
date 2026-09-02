@@ -562,6 +562,7 @@ describe("ProjectsClient", () => {
                 voice_id: "voice_id",
                 can_use_assistant: true,
                 is_voice_changer_on: true,
+                restricted_to_user_email_domains: ["restricted_to_user_email_domains"],
             },
         };
 
@@ -1154,6 +1155,7 @@ describe("ProjectsClient", () => {
                 voiceId: "voice_id",
                 canUseAssistant: true,
                 isVoiceChangerOn: true,
+                restrictedToUserEmailDomains: ["restricted_to_user_email_domains"],
             },
         });
     });

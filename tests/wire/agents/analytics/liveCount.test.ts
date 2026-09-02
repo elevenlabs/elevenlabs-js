@@ -20,6 +20,7 @@ describe("LiveCountClient", () => {
 
         const response = await client.agents.analytics.liveCount.get({
             agentId: "agent_id",
+            agentIds: ["agent_ids"],
         });
         expect(response).toEqual({
             count: 42,
