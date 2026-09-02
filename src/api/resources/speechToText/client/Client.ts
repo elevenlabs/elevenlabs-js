@@ -45,7 +45,7 @@ export class SpeechToTextClient {
      *     await client.speechToText.convert({
      *         token: "token",
      *         enableLogging: true,
-     *         modelId: "scribe_v2"
+     *         modelId: "model_id"
      *     })
      */
     public convert(
@@ -64,12 +64,7 @@ export class SpeechToTextClient {
             enable_logging: request.enableLogging,
         };
         const _body = await core.newFormData();
-        _body.append(
-            "model_id",
-            serializers.SpeechToTextConvertRequestModelId.jsonOrThrow(request.modelId, {
-                unrecognizedObjectKeys: "strip",
-            }),
-        );
+        _body.append("model_id", request.modelId);
         if (request.file != null) {
             await _body.appendFile("file", request.file);
         }

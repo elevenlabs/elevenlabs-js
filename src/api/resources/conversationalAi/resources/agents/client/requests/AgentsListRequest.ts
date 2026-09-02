@@ -10,6 +10,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         archived: true,
  *         showOnlyOwnedAgents: true,
  *         createdByUserId: "created_by_user_id",
+ *         tags: ["tags"],
  *         sortDirection: "asc",
  *         sortBy: "name",
  *         cursor: "cursor"
@@ -26,6 +27,8 @@ export interface AgentsListRequest {
     showOnlyOwnedAgents?: boolean;
     /** Filter agents by creator user ID. When set, only agents created by this user are returned. Takes precedence over show_only_owned_agents. Use '@me' to refer to the authenticated user. */
     createdByUserId?: string;
+    /** Filter agents by tag. Repeat the parameter to match any of several tags. */
+    tags?: string | string[];
     /** The direction to sort the results */
     sortDirection?: ElevenLabs.SortDirection;
     /** The field to sort the results by */

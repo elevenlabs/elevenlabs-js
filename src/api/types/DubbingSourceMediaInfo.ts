@@ -6,10 +6,10 @@
 export interface DubbingSourceMediaInfo {
     /** Original filename of the uploaded source media (null for URL sources). */
     filename?: string;
-    /** Duration of the source media in seconds. */
+    /** Duration of the source media, in seconds. */
     durationS?: number;
     /** Whether the source media contains a video stream. */
     hasVideo?: boolean;
-    /** MIME type of the uploaded source media. */
+    /** MIME type of the uploaded source media (null for URL sources). */
     mimeType?: string;
 }

@@ -60,7 +60,11 @@ describe("AnalysisClient", () => {
                     stream_sid: "stream_sid",
                     call_sid: "call_sid",
                 },
-                batch_call: { batch_call_id: "batch_call_id", batch_call_recipient_id: "batch_call_recipient_id" },
+                batch_call: {
+                    batch_call_id: "batch_call_id",
+                    batch_call_recipient_id: "batch_call_recipient_id",
+                    campaign: { campaign_id: "campaign_id", campaign_lead_id: "campaign_lead_id" },
+                },
                 termination_reason: "termination_reason",
                 error: { code: 1, reason: "reason" },
                 warnings: ["warnings"],
@@ -221,6 +225,14 @@ describe("AnalysisClient", () => {
                         mime_type: "mime_type",
                         file_url: "file_url",
                     },
+                    file_inputs: [
+                        {
+                            file_id: "file_id",
+                            original_filename: "original_filename",
+                            mime_type: "mime_type",
+                            file_url: "file_url",
+                        },
+                    ],
                     contextual_update_info: { context_id: "context_id" },
                     reasoned: true,
                 },
@@ -296,6 +308,10 @@ describe("AnalysisClient", () => {
                 batchCall: {
                     batchCallId: "batch_call_id",
                     batchCallRecipientId: "batch_call_recipient_id",
+                    campaign: {
+                        campaignId: "campaign_id",
+                        campaignLeadId: "campaign_lead_id",
+                    },
                 },
                 terminationReason: "termination_reason",
                 error: {
@@ -542,6 +558,14 @@ describe("AnalysisClient", () => {
                         mimeType: "mime_type",
                         fileUrl: "file_url",
                     },
+                    fileInputs: [
+                        {
+                            fileId: "file_id",
+                            originalFilename: "original_filename",
+                            mimeType: "mime_type",
+                            fileUrl: "file_url",
+                        },
+                    ],
                     contextualUpdateInfo: {
                         contextId: "context_id",
                     },
@@ -611,7 +635,11 @@ describe("AnalysisClient", () => {
                     stream_sid: "stream_sid",
                     call_sid: "call_sid",
                 },
-                batch_call: { batch_call_id: "batch_call_id", batch_call_recipient_id: "batch_call_recipient_id" },
+                batch_call: {
+                    batch_call_id: "batch_call_id",
+                    batch_call_recipient_id: "batch_call_recipient_id",
+                    campaign: { campaign_id: "campaign_id", campaign_lead_id: "campaign_lead_id" },
+                },
                 termination_reason: "termination_reason",
                 error: { code: 1, reason: "reason" },
                 warnings: ["warnings"],
@@ -772,6 +800,14 @@ describe("AnalysisClient", () => {
                         mime_type: "mime_type",
                         file_url: "file_url",
                     },
+                    file_inputs: [
+                        {
+                            file_id: "file_id",
+                            original_filename: "original_filename",
+                            mime_type: "mime_type",
+                            file_url: "file_url",
+                        },
+                    ],
                     contextual_update_info: { context_id: "context_id" },
                     reasoned: true,
                 },
@@ -850,6 +886,10 @@ describe("AnalysisClient", () => {
                 batchCall: {
                     batchCallId: "batch_call_id",
                     batchCallRecipientId: "batch_call_recipient_id",
+                    campaign: {
+                        campaignId: "campaign_id",
+                        campaignLeadId: "campaign_lead_id",
+                    },
                 },
                 terminationReason: "termination_reason",
                 error: {
@@ -1096,6 +1136,14 @@ describe("AnalysisClient", () => {
                         mimeType: "mime_type",
                         fileUrl: "file_url",
                     },
+                    fileInputs: [
+                        {
+                            fileId: "file_id",
+                            originalFilename: "original_filename",
+                            mimeType: "mime_type",
+                            fileUrl: "file_url",
+                        },
+                    ],
                     contextualUpdateInfo: {
                         contextId: "context_id",
                     },

@@ -16,4 +16,6 @@ export interface BodyUploadMusicV1MusicUploadPost {
     extractCompositionPlan?: ElevenLabs.MusicUploadRequestExtractCompositionPlan;
     /** Whether to transcribe the uploaded song and return word-level timestamps. If True, the response will include words_timestamps but will increase the latency. */
     withTimestamps?: boolean;
+    /** Whether to return the visual waveform of the uploaded song. */
+    withWaveformVisual?: boolean;
 }

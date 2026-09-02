@@ -12,4 +12,6 @@ export interface MusicUploadResponse {
     compositionPlan?: ElevenLabs.MusicUploadResponseCompositionPlan;
     /** Word-level timestamps transcribed from the uploaded song. Only present if `with_timestamps` was True in the request body */
     wordsTimestamps?: ElevenLabs.WordTimestamp[];
+    /** A low-resolution waveform of the uploaded song, for showing a preview of it. Holds 4 values per second of audio, from -1000 to 1000. Stereo is mixed down to a single channel. Only present if `with_waveform_visual` was True in the request body. */
+    waveformVisual?: number[];
 }

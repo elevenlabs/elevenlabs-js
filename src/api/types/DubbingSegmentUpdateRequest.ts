@@ -6,7 +6,7 @@
 export interface DubbingSegmentUpdateRequest {
     /** New text for the segment. */
     text?: string;
-    /** New speaker id for the segment. */
+    /** New speaker ID for the segment. */
     speakerId?: string;
     /** New start time, in seconds. */
     startS?: number;

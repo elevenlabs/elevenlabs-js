@@ -8,7 +8,7 @@ import type * as ElevenLabs from "../../../../index";
  *     {
  *         token: "token",
  *         enableLogging: true,
- *         modelId: "scribe_v2"
+ *         modelId: "model_id"
  *     }
  */
 export interface BodySpeechToTextV1SpeechToTextPost {
@@ -17,7 +17,7 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     /** When enable_logging is set to false zero retention mode will be used for the request. This will mean log and transcript storage features are unavailable for this request. Zero retention mode may only be used by enterprise customers. */
     enableLogging?: boolean;
     /** The ID of the model to use for transcription. */
-    modelId: ElevenLabs.SpeechToTextConvertRequestModelId;
+    modelId: string;
     /** The file to transcribe (100ms minimum audio length). All major audio and video formats are supported. Exactly one of the file or cloud_storage_url parameters must be provided. The file size must be less than 5.0GB. */
     file?: core.file.Uploadable | undefined;
     /** An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file. Can sometimes improve transcription performance if known beforehand. Defaults to null, in this case the language is predicted automatically. */

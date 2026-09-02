@@ -7,10 +7,10 @@
  *     }
  */
 export interface LanguageListRequest {
-    /** Pagination cursor from a previous response's next_cursor. */
+    /** Pass the `next_cursor` from a previous response to fetch the page after it. Omit for the first page. */
     cursor?: string;
-    /** Number of language targets per page (max 100). */
+    /** Number of language targets per page. Clamped to between 1 and 100 rather than rejected, so a larger value returns a full page. */
     pageSize?: number;
-    /** Filter to targets in this status (queued, processing, completed, stale, failed). */
+    /** Filter to targets in this status: `queued`, `processing`, `completed`, `stale`, or `failed`. Omit to return every status. */
     status?: string;
 }

@@ -9,12 +9,12 @@ import type * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface ProjectListRequest {
-    /** Pagination cursor from a previous response's next_cursor. */
+    /** Pass the `next_cursor` from a previous response to fetch the page after it. Omit for the first page. */
     cursor?: string;
-    /** Number of projects per page (max 100). */
+    /** Number of projects per page. Clamped to between 1 and 100 rather than rejected, so a larger value returns a full page. */
     pageSize?: number;
-    /** Filter to projects in this status (preparing, ready, failed). */
+    /** Filter to projects in this status: `queued`, `preparing`, `ready`, or `failed`. Omit to return every status. */
     status?: string;
-    /** Sort by creation time (default 'DESCENDING'). */
+    /** Sort by creation time; newest first by default. */
     sortDirection?: ElevenLabs.dubbing.ProjectListRequestSortDirection;
 }

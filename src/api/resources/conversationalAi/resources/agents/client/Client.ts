@@ -455,6 +455,7 @@ export class AgentsClient {
      *         archived: true,
      *         showOnlyOwnedAgents: true,
      *         createdByUserId: "created_by_user_id",
+     *         tags: ["tags"],
      *         sortDirection: "asc",
      *         sortBy: "name",
      *         cursor: "cursor"
@@ -471,14 +472,24 @@ export class AgentsClient {
         request: ElevenLabs.conversationalAi.AgentsListRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentsPageResponseModel>> {
-        const { pageSize, search, archived, showOnlyOwnedAgents, createdByUserId, sortDirection, sortBy, cursor } =
-            request;
+        const {
+            pageSize,
+            search,
+            archived,
+            showOnlyOwnedAgents,
+            createdByUserId,
+            tags,
+            sortDirection,
+            sortBy,
+            cursor,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             page_size: pageSize,
             search,
             archived,
             show_only_owned_agents: showOnlyOwnedAgents,
             created_by_user_id: createdByUserId,
+            tags,
             sort_direction:
                 sortDirection != null
                     ? serializers.SortDirection.jsonOrThrow(sortDirection, { unrecognizedObjectKeys: "strip" })

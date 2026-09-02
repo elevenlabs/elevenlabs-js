@@ -13,6 +13,10 @@ export const MusicUploadResponse: core.serialization.ObjectSchema<
     songId: core.serialization.property("song_id", core.serialization.string()),
     compositionPlan: core.serialization.property("composition_plan", MusicUploadResponseCompositionPlan.optional()),
     wordsTimestamps: core.serialization.property("words_timestamps", core.serialization.list(WordTimestamp).optional()),
+    waveformVisual: core.serialization.property(
+        "waveform_visual",
+        core.serialization.list(core.serialization.number()).optional(),
+    ),
 });
 
 export declare namespace MusicUploadResponse {
@@ -20,5 +24,6 @@ export declare namespace MusicUploadResponse {
         song_id: string;
         composition_plan?: MusicUploadResponseCompositionPlan.Raw | null;
         words_timestamps?: WordTimestamp.Raw[] | null;
+        waveform_visual?: number[] | null;
     }
 }

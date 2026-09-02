@@ -4289,7 +4289,7 @@ Transcribe an audio or video file. If webhook is set to true, the request will b
 await client.speechToText.convert({
     token: "token",
     enableLogging: true,
-    modelId: "scribe_v2"
+    modelId: "model_id"
 });
 
 ```
@@ -6768,6 +6768,7 @@ await client.conversationalAi.agents.list({
     archived: true,
     showOnlyOwnedAgents: true,
     createdByUserId: "created_by_user_id",
+    tags: ["tags"],
     sortDirection: "asc",
     sortBy: "name",
     cursor: "cursor"
@@ -7809,6 +7810,139 @@ await client.conversationalAi.triageTickets.createManual("agent_id", {
 </dl>
 </details>
 
+<details><summary><code>client.conversationalAi.triageTickets.<a href="/src/api/resources/conversationalAi/resources/triageTickets/client/Client.ts">listForWorkspace</a>({ ...params }) -> ElevenLabs.GetAgentConversationTicketsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List conversation triage tickets across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, tickets assigned to the caller); for a single agent's tickets, use the per-agent endpoint instead. Tickets for agents the caller cannot access are omitted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.triageTickets.listForWorkspace({
+    pageSize: 1,
+    status: "open",
+    assigneeUserId: "assignee_user_id",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.TriageTicketsListForWorkspaceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.triageTickets.<a href="/src/api/resources/conversationalAi/resources/triageTickets/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Raise a ticket about an agent's performance on a conversation, for triage with Architect. Provide an overall comment and/or turn-level comments describing what went wrong.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.triageTickets.create({
+    conversationId: "conversation_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.CreateAgentConversationTicketRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.triageTickets.<a href="/src/api/resources/conversationalAi/resources/triageTickets/client/Client.ts">listAssignableUsers</a>(agent_id) -> ElevenLabs.AssignableUserResponseModel[]</code></summary>
 <dl>
 <dd>
@@ -8050,71 +8184,6 @@ await client.conversationalAi.triageTickets.update("agentqa_ticket_id");
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.PatchAgentConversationTicketRequestModel` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TriageTicketsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.triageTickets.<a href="/src/api/resources/conversationalAi/resources/triageTickets/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Raise a ticket about an agent's performance on a conversation, for triage with Architect. Provide an overall comment and/or turn-level comments describing what went wrong.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.triageTickets.create({
-    conversationId: "conversation_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.CreateAgentConversationTicketRequestModel` 
     
 </dd>
 </dl>
@@ -8758,7 +8827,7 @@ await client.conversationalAi.llmUsage.calculate({
 </details>
 
 ## ConversationalAi Llm
-<details><summary><code>client.conversationalAi.llm.<a href="/src/api/resources/conversationalAi/resources/llm/client/Client.ts">list</a>() -> ElevenLabs.LlmListResponseModelInput</code></summary>
+<details><summary><code>client.conversationalAi.llm.<a href="/src/api/resources/conversationalAi/resources/llm/client/Client.ts">list</a>() -> ElevenLabs.LlmListResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -17336,7 +17405,7 @@ await client.conversationalAi.tools.executions.get("tool_id", {
 <dl>
 <dd>
 
-List the workspace's dubbing projects (cursor-paginated).
+List the dubbing projects in your workspace that you can access, newest first, cursor-paginated. Listed projects carry no `language_ids`; fetch a project, or list its language targets, to see them.
 </dd>
 </dl>
 </dd>
@@ -17401,7 +17470,11 @@ await client.dubbing.project.list({
 <dl>
 <dd>
 
-Create a dubbing project from an uploaded file or a source URL.
+Create a dubbing project from an uploaded file (`file`) or a source URL (`source_url`).
+
+Returns as soon as the project record exists, before the source has been fetched: the project starts `queued` and reaches `ready` once its source has been transcribed. Creating a project does not dub anything — add a language target to it for each language you want, or pass `target_language` to queue the first one here.
+
+Preparation can take minutes on a long source, so we recommend passing `webhook_ids` to be notified when the project turns `ready` or `failed`, rather than polling for it.
 </dd>
 </dl>
 </dd>
@@ -17468,7 +17541,7 @@ await client.dubbing.project.create({
 <dl>
 <dd>
 
-Full project detail, including its language target ids.
+Full project detail, including the IDs of every language target under it. To follow a project to `ready`, we recommend a `webhook_ids` subscription rather than polling this endpoint.
 </dd>
 </dl>
 </dd>
@@ -17531,7 +17604,7 @@ await client.dubbing.project.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3");
 <dl>
 <dd>
 
-Delete a project and its language targets.
+Delete a project, every language target under it, and their stored media and outputs. This cannot be undone, and a dub already running is still billed.
 </dd>
 </dl>
 </dd>
@@ -18267,7 +18340,7 @@ await client.dubbing.transcripts.get("dubbing_id", "source", "srt");
 <dl>
 <dd>
 
-List a project's language targets (cursor-paginated).
+List a project's language targets, cursor-paginated, each with signed output URLs once it has produced an output.
 </dd>
 </dl>
 </dd>
@@ -18340,7 +18413,11 @@ await client.dubbing.project.language.list("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", 
 <dl>
 <dd>
 
-Queue a language target for a project (starts once the project is ready).
+Add a language to dub a project into, and queue the dub.
+
+This is the call that produces dubbed audio, and it is billed per generation. The target is created `queued` and starts as soon as the project is `ready`, so it can be added at any point after the project is created. It inherits the project's dubbing model and cannot pick another.
+
+A project created with `webhook_ids` sends a `dubbing_language_completed` event carrying the output download URLs, so we recommend subscribing rather than polling this target to completion.
 </dd>
 </dl>
 </dd>
@@ -18413,7 +18490,7 @@ await client.dubbing.project.language.create("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3"
 <dl>
 <dd>
 
-Full language-target detail.
+Full language-target detail. Once the target reports `completed`, `outputs` carries the signed download URLs. To learn when that happens, we recommend the project's `webhook_ids` subscription rather than polling this endpoint; fetch here when a delivered URL has expired, or to reconcile after an edit.
 </dd>
 </dl>
 </dd>
@@ -18484,7 +18561,7 @@ await client.dubbing.project.language.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", "
 <dl>
 <dd>
 
-Delete a language target.
+Delete a language target and its outputs, leaving the project and its other languages intact. This cannot be undone, and a dub already running is still billed.
 </dd>
 </dl>
 </dd>
@@ -18556,7 +18633,7 @@ await client.dubbing.project.language.delete("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3"
 <dl>
 <dd>
 
-The project's source transcript, as editable segments.
+The project's source transcript, as editable segments. Available once the project is `ready`.
 </dd>
 </dl>
 </dd>
@@ -18619,7 +18696,7 @@ await client.dubbing.project.transcript.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3")
 <dl>
 <dd>
 
-Enterprise only. Remove a source segment from the transcript.
+Enterprise only. Remove a source segment from the transcript so it is no longer dubbed. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
 </dd>
 </dl>
 </dd>
@@ -18690,7 +18767,7 @@ await client.dubbing.project.transcript.deleteSegment("proj_1601kwkyxp0hfzvtmyxw
 <dl>
 <dd>
 
-Enterprise only. Edit a source segment's text, speaker, or timing.
+Enterprise only. Edit a source segment's text, speaker, or timing. Omitted fields are left unchanged. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
 </dd>
 </dl>
 </dd>
@@ -18771,7 +18848,7 @@ await client.dubbing.project.transcript.updateSegment("proj_1601kwkyxp0hfzvtmyxw
 <dl>
 <dd>
 
-Enterprise only. Edit several source segments' text, speaker, or timing in one atomic request.
+Enterprise only. Edit several source segments' text, speaker, or timing in one atomic request: every edit applies or none does. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
 </dd>
 </dl>
 </dd>
@@ -18851,7 +18928,7 @@ await client.dubbing.project.transcript.updateSegments("proj_1601kwkyxp0hfzvtmyx
 <dl>
 <dd>
 
-Enterprise only. Add a new source segment to the transcript.
+Enterprise only. Add a new source segment to the transcript. Its span must lie within the source media, last between 0.1 and 25 seconds, and not overlap another segment by the same speaker. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
 </dd>
 </dl>
 </dd>
@@ -18928,7 +19005,7 @@ await client.dubbing.project.transcript.createSegment("proj_1601kwkyxp0hfzvtmyxw
 <dl>
 <dd>
 
-A language target's transcript: source segments with their translations.
+A language target's transcript: source segments with their translations. Available once the target has produced an output. Returns a conflict while the target is still on its first dub, since it has no translations to return yet.
 </dd>
 </dl>
 </dd>
@@ -18999,7 +19076,7 @@ await client.dubbing.project.language.transcript.get("proj_1601kwkyxp0hfzvtmyxwq
 <dl>
 <dd>
 
-Enterprise only. Edit a segment's translation for a language target.
+Enterprise only. Edit a segment's translation for a language target. Omitted fields are left unchanged; an explicit null clears the field. Bumps the target's `revision` and marks it `stale` if it had already completed. The source transcript and the project's other languages are untouched, and no audio changes until you regenerate the target.
 </dd>
 </dl>
 </dd>
@@ -19088,7 +19165,7 @@ await client.dubbing.project.language.transcript.updateSegment("proj_1601kwkyxp0
 <dl>
 <dd>
 
-Enterprise only. Edit several segments' translations for a language target in one atomic request.
+Enterprise only. Edit several segments' translations for a language target in one atomic request: every edit applies or none does. Bumps the target's `revision` and marks it `stale` if it had already completed. The source transcript and the project's other languages are untouched, and no audio changes until you regenerate the target.
 </dd>
 </dl>
 </dd>
@@ -19176,7 +19253,7 @@ await client.dubbing.project.language.transcript.updateSegments("proj_1601kwkyxp
 <dl>
 <dd>
 
-Enterprise only. Re-dub a target from its edited transcript, re-synthesizing only the edited regions (charged like a generation). Conflicts when the target has no edits to apply -- nothing is dispatched and nothing is charged.
+Enterprise only. Re-dub a target from its edited transcript, re-synthesizing only the edited regions (charged like a generation, less the free-regeneration allowance). Accepted asynchronously: the target returns to `processing` and sends a `dubbing_language_completed` event to the project's `webhook_ids` when the re-dub lands, carrying the new output URLs. Returns a conflict when the target has no edits to apply — nothing is dispatched and nothing is charged.
 </dd>
 </dl>
 </dd>

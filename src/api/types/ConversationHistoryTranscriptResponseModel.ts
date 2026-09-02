@@ -26,7 +26,10 @@ export interface ConversationHistoryTranscriptResponseModel {
     userIdentifier?: string;
     id?: string;
     triggeredGuardrails?: ElevenLabs.TriggeredGuardrailCommonModel[];
+    /** Deprecated: the first attachment on this turn. Use `file_inputs` to see every attachment. */
     fileInput?: ElevenLabs.ConversationHistoryTranscriptFileInputResponseModel;
+    /** All files attached to this turn, in the order the user attached them. */
+    fileInputs?: ElevenLabs.ConversationHistoryTranscriptFileInputResponseModel[];
     contextualUpdateInfo?: ElevenLabs.ContextualUpdateInfo;
     reasoned?: boolean;
 }

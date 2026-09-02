@@ -9,12 +9,25 @@ export const AgentConversationTicketIssueType: core.serialization.Schema<
     ElevenLabs.AgentConversationTicketIssueType
 > = core.serialization.enum_([
     "knowledge_gap",
+    "incorrect_information",
+    "documentation_gap",
     "product_feedback",
+    "platform_bug",
     "tool_issue",
     "missing_tool",
     "unnecessary_escalation",
+    "wrong_action",
 ]);
 
 export declare namespace AgentConversationTicketIssueType {
-    export type Raw = "knowledge_gap" | "product_feedback" | "tool_issue" | "missing_tool" | "unnecessary_escalation";
+    export type Raw =
+        | "knowledge_gap"
+        | "incorrect_information"
+        | "documentation_gap"
+        | "product_feedback"
+        | "platform_bug"
+        | "tool_issue"
+        | "missing_tool"
+        | "unnecessary_escalation"
+        | "wrong_action";
 }
