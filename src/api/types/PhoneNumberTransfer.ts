@@ -7,6 +7,8 @@ export interface PhoneNumberTransfer {
     customSipHeaders?: ElevenLabs.PhoneNumberTransferCustomSipHeadersItem[];
     transferDestination: ElevenLabs.PhoneNumberTransferTransferDestination;
     transferType?: ElevenLabs.TransferTypeEnum;
+    /** When True, a ringing tone is played on the original call leg while a SIP REFER transfer completes. The tone is carried over RTP to the SIP peer executing the REFER, so disable this if the receiving system (e.g. an SBC or contact center) should not hear it. When disabled the caller hears silence until the transfer completes. SIP REFER transfers only. */
+    sipReferPlayDialtone?: boolean;
     /** User-to-User Information (RFC 7433) to attach to SIP REFER transfers. Carries call context such as CRM identifiers or escalation reason across the transfer boundary. */
     uui?: ElevenLabs.UuiTransferConfig;
     /** DTMF digits to send after call connects (e.g., 'ww1234' for extension). Can be either a static value or a dynamic variable reference. Use 'w' for 0.5s pause. Only supported for Twilio transfers. */

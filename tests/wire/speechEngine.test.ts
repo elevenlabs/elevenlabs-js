@@ -84,6 +84,14 @@ describe("SpeechEngineClient", () => {
                 text_normalisation_type: "system_prompt",
                 pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                 enable_phoneme_tags: true,
+                audio_effects: {
+                    filter_preset_id: "filter_preset_id",
+                    distance: 1.1,
+                    environment_id: "environment_id",
+                    background_noise_id: "background_noise_id",
+                    send_level: 1.1,
+                    seed: 1,
+                },
             },
             turn: {
                 turn_timeout: 7,
@@ -107,6 +115,7 @@ describe("SpeechEngineClient", () => {
                 file_input: { enabled: true, max_files_in_memory: 1, max_files_per_conversation: 1 },
                 monitoring_enabled: true,
                 monitoring_events: ["conversation_initiation_metadata"],
+                dtmf_input_settings: { dtmf_input_timeout: 1.1, hash_terminator: true, redact_input: true },
                 background_sound: { source_type: "preset", source_id: "office2", volume: 1.1, crossfade_loop: true },
                 source_attribution: true,
             },
@@ -195,6 +204,14 @@ describe("SpeechEngineClient", () => {
                     },
                 ],
                 enablePhonemeTags: true,
+                audioEffects: {
+                    filterPresetId: "filter_preset_id",
+                    distance: 1.1,
+                    environmentId: "environment_id",
+                    backgroundNoiseId: "background_noise_id",
+                    sendLevel: 1.1,
+                    seed: 1,
+                },
             },
             turn: {
                 turnTimeout: 7,
@@ -222,6 +239,11 @@ describe("SpeechEngineClient", () => {
                 },
                 monitoringEnabled: true,
                 monitoringEvents: ["conversation_initiation_metadata"],
+                dtmfInputSettings: {
+                    dtmfInputTimeout: 1.1,
+                    hashTerminator: true,
+                    redactInput: true,
+                },
                 backgroundSound: {
                     sourceType: "preset",
                     sourceId: "office2",
@@ -297,6 +319,14 @@ describe("SpeechEngineClient", () => {
                 text_normalisation_type: "system_prompt",
                 pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                 enable_phoneme_tags: true,
+                audio_effects: {
+                    filter_preset_id: "filter_preset_id",
+                    distance: 1.1,
+                    environment_id: "environment_id",
+                    background_noise_id: "background_noise_id",
+                    send_level: 1.1,
+                    seed: 1,
+                },
             },
             turn: {
                 turn_timeout: 7,
@@ -320,6 +350,7 @@ describe("SpeechEngineClient", () => {
                 file_input: { enabled: true, max_files_in_memory: 1, max_files_per_conversation: 1 },
                 monitoring_enabled: true,
                 monitoring_events: ["conversation_initiation_metadata"],
+                dtmf_input_settings: { dtmf_input_timeout: 1.1, hash_terminator: true, redact_input: true },
                 background_sound: { source_type: "preset", source_id: "office2", volume: 1.1, crossfade_loop: true },
                 source_attribution: true,
             },
@@ -403,6 +434,14 @@ describe("SpeechEngineClient", () => {
                     },
                 ],
                 enablePhonemeTags: true,
+                audioEffects: {
+                    filterPresetId: "filter_preset_id",
+                    distance: 1.1,
+                    environmentId: "environment_id",
+                    backgroundNoiseId: "background_noise_id",
+                    sendLevel: 1.1,
+                    seed: 1,
+                },
             },
             turn: {
                 turnTimeout: 7,
@@ -430,6 +469,11 @@ describe("SpeechEngineClient", () => {
                 },
                 monitoringEnabled: true,
                 monitoringEvents: ["conversation_initiation_metadata"],
+                dtmfInputSettings: {
+                    dtmfInputTimeout: 1.1,
+                    hashTerminator: true,
+                    redactInput: true,
+                },
                 backgroundSound: {
                     sourceType: "preset",
                     sourceId: "office2",
@@ -520,6 +564,14 @@ describe("SpeechEngineClient", () => {
                 text_normalisation_type: "system_prompt",
                 pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                 enable_phoneme_tags: true,
+                audio_effects: {
+                    filter_preset_id: "filter_preset_id",
+                    distance: 1.1,
+                    environment_id: "environment_id",
+                    background_noise_id: "background_noise_id",
+                    send_level: 1.1,
+                    seed: 1,
+                },
             },
             turn: {
                 turn_timeout: 7,
@@ -543,6 +595,7 @@ describe("SpeechEngineClient", () => {
                 file_input: { enabled: true, max_files_in_memory: 1, max_files_per_conversation: 1 },
                 monitoring_enabled: true,
                 monitoring_events: ["conversation_initiation_metadata"],
+                dtmf_input_settings: { dtmf_input_timeout: 1.1, hash_terminator: true, redact_input: true },
                 background_sound: { source_type: "preset", source_id: "office2", volume: 1.1, crossfade_loop: true },
                 source_attribution: true,
             },
@@ -627,6 +680,14 @@ describe("SpeechEngineClient", () => {
                     },
                 ],
                 enablePhonemeTags: true,
+                audioEffects: {
+                    filterPresetId: "filter_preset_id",
+                    distance: 1.1,
+                    environmentId: "environment_id",
+                    backgroundNoiseId: "background_noise_id",
+                    sendLevel: 1.1,
+                    seed: 1,
+                },
             },
             turn: {
                 turnTimeout: 7,
@@ -654,6 +715,11 @@ describe("SpeechEngineClient", () => {
                 },
                 monitoringEnabled: true,
                 monitoringEvents: ["conversation_initiation_metadata"],
+                dtmfInputSettings: {
+                    dtmfInputTimeout: 1.1,
+                    hashTerminator: true,
+                    redactInput: true,
+                },
                 backgroundSound: {
                     sourceType: "preset",
                     sourceId: "office2",

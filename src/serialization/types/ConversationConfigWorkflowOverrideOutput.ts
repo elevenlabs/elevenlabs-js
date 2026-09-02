@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { BackgroundSoundConfigWorkflowOverride } from "./BackgroundSoundConfigWorkflowOverride";
 import { ClientEvent } from "./ClientEvent";
+import { DtmfInputConfig } from "./DtmfInputConfig";
 import { FileInputConfigWorkflowOverride } from "./FileInputConfigWorkflowOverride";
 
 export const ConversationConfigWorkflowOverrideOutput: core.serialization.ObjectSchema<
@@ -17,6 +18,7 @@ export const ConversationConfigWorkflowOverrideOutput: core.serialization.Object
     fileInput: core.serialization.property("file_input", FileInputConfigWorkflowOverride.optional()),
     monitoringEnabled: core.serialization.property("monitoring_enabled", core.serialization.boolean().optional()),
     monitoringEvents: core.serialization.property("monitoring_events", core.serialization.list(ClientEvent).optional()),
+    dtmfInputSettings: core.serialization.property("dtmf_input_settings", DtmfInputConfig.optional()),
     backgroundSound: core.serialization.property("background_sound", BackgroundSoundConfigWorkflowOverride.optional()),
     sourceAttribution: core.serialization.property("source_attribution", core.serialization.boolean().optional()),
 });
@@ -29,6 +31,7 @@ export declare namespace ConversationConfigWorkflowOverrideOutput {
         file_input?: FileInputConfigWorkflowOverride.Raw | null;
         monitoring_enabled?: boolean | null;
         monitoring_events?: ClientEvent.Raw[] | null;
+        dtmf_input_settings?: DtmfInputConfig.Raw | null;
         background_sound?: BackgroundSoundConfigWorkflowOverride.Raw | null;
         source_attribution?: boolean | null;
     }

@@ -31,6 +31,11 @@ export const WebhookToolConfigOutput: core.serialization.ObjectSchema<
     dynamicVariables: core.serialization.property("dynamic_variables", DynamicVariablesConfig.optional()),
     executionMode: core.serialization.property("execution_mode", ToolExecutionMode.optional()),
     apiSchema: core.serialization.property("api_schema", WebhookToolApiSchemaConfigOutput),
+    followRedirects: core.serialization.property("follow_redirects", core.serialization.boolean().optional()),
+    followRedirectsAllowedDomains: core.serialization.property(
+        "follow_redirects_allowed_domains",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace WebhookToolConfigOutput {
@@ -49,5 +54,7 @@ export declare namespace WebhookToolConfigOutput {
         dynamic_variables?: DynamicVariablesConfig.Raw | null;
         execution_mode?: ToolExecutionMode.Raw | null;
         api_schema: WebhookToolApiSchemaConfigOutput.Raw;
+        follow_redirects?: boolean | null;
+        follow_redirects_allowed_domains?: string[] | null;
     }
 }

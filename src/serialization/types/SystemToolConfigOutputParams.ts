@@ -4,14 +4,14 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { EndCallToolConfig } from "./EndCallToolConfig";
-import { EndProcedureToolConfigOutput } from "./EndProcedureToolConfigOutput";
+import { EndProcedureToolConfig } from "./EndProcedureToolConfig";
 import { KnowledgeBaseRagToolConfig } from "./KnowledgeBaseRagToolConfig";
 import { KnowledgeBaseToolConfig } from "./KnowledgeBaseToolConfig";
 import { LanguageDetectionToolConfig } from "./LanguageDetectionToolConfig";
 import { PlayDtmfToolConfig } from "./PlayDtmfToolConfig";
 import { RunSubagentToolConfigOutput } from "./RunSubagentToolConfigOutput";
 import { SkipTurnToolConfig } from "./SkipTurnToolConfig";
-import { StartProcedureToolConfigOutput } from "./StartProcedureToolConfigOutput";
+import { StartProcedureToolConfig } from "./StartProcedureToolConfig";
 import { TransferToAgentToolConfigOutput } from "./TransferToAgentToolConfigOutput";
 import { TransferToNumberToolConfigOutput } from "./TransferToNumberToolConfigOutput";
 import { VoicemailDetectionToolConfig } from "./VoicemailDetectionToolConfig";
@@ -22,14 +22,14 @@ export const SystemToolConfigOutputParams: core.serialization.Schema<
 > = core.serialization
     .union(core.serialization.discriminant("systemToolType", "system_tool_type"), {
         end_call: EndCallToolConfig,
-        end_procedure: EndProcedureToolConfigOutput,
+        end_procedure: EndProcedureToolConfig,
         knowledge_base: KnowledgeBaseToolConfig,
         knowledge_base_rag: KnowledgeBaseRagToolConfig,
         language_detection: LanguageDetectionToolConfig,
         play_keypad_touch_tone: PlayDtmfToolConfig,
         run_subagent: RunSubagentToolConfigOutput,
         skip_turn: SkipTurnToolConfig,
-        start_procedure: StartProcedureToolConfigOutput,
+        start_procedure: StartProcedureToolConfig,
         transfer_to_agent: TransferToAgentToolConfigOutput,
         transfer_to_number: TransferToNumberToolConfigOutput,
         voicemail_detection: VoicemailDetectionToolConfig,
@@ -58,7 +58,7 @@ export declare namespace SystemToolConfigOutputParams {
         system_tool_type: "end_call";
     }
 
-    export interface EndProcedure extends EndProcedureToolConfigOutput.Raw {
+    export interface EndProcedure extends EndProcedureToolConfig.Raw {
         system_tool_type: "end_procedure";
     }
 
@@ -86,7 +86,7 @@ export declare namespace SystemToolConfigOutputParams {
         system_tool_type: "skip_turn";
     }
 
-    export interface StartProcedure extends StartProcedureToolConfigOutput.Raw {
+    export interface StartProcedure extends StartProcedureToolConfig.Raw {
         system_tool_type: "start_procedure";
     }
 

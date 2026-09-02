@@ -37,7 +37,7 @@ export class ProjectClient {
     }
 
     /**
-     * List the workspace's dubbing projects (cursor-paginated).
+     * List the dubbing projects in your workspace that you can access, newest first, cursor-paginated. Listed projects carry no `language_ids`; fetch a project, or list its language targets, to see them.
      *
      * @param {ElevenLabs.dubbing.ProjectListRequest} request
      * @param {ProjectClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -130,7 +130,11 @@ export class ProjectClient {
     }
 
     /**
-     * Create a dubbing project from an uploaded file or a source URL.
+     * Create a dubbing project from an uploaded file (`file`) or a source URL (`source_url`).
+     *
+     * Returns as soon as the project record exists, before the source has been fetched: the project starts `queued` and reaches `ready` once its source has been transcribed. Creating a project does not dub anything — add a language target to it for each language you want, or pass `target_language` to queue the first one here.
+     *
+     * Preparation can take minutes on a long source, so we recommend passing `webhook_ids` to be notified when the project turns `ready` or `failed`, rather than polling for it.
      *
      * @param {ElevenLabs.dubbing.BodyCreateDubbingProjectV1DubbingProjectPost} request
      * @param {ProjectClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -264,7 +268,7 @@ export class ProjectClient {
     }
 
     /**
-     * Full project detail, including its language target ids.
+     * Full project detail, including the IDs of every language target under it. To follow a project to `ready`, we recommend a `webhook_ids` subscription rather than polling this endpoint.
      *
      * @param {string} project_id - Identifier of the dubbing project to fetch.
      * @param {ProjectClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -344,7 +348,7 @@ export class ProjectClient {
     }
 
     /**
-     * Delete a project and its language targets.
+     * Delete a project, every language target under it, and their stored media and outputs. This cannot be undone, and a dub already running is still billed.
      *
      * @param {string} project_id - Identifier of the dubbing project to delete.
      * @param {ProjectClient.RequestOptions} requestOptions - Request-specific configuration.

@@ -535,6 +535,10 @@ export class MusicClient {
             _body.append("with_timestamps", request.withTimestamps?.toString());
         }
 
+        if (request.withWaveformVisual != null) {
+            _body.append("with_waveform_visual", request.withWaveformVisual?.toString());
+        }
+
         const _maybeEncodedRequest = await _body.getRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

@@ -29,4 +29,6 @@ export interface BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStre
     storeForInpainting?: boolean;
     /** Whether to return the timestamps of the words in the generated song. */
     withTimestamps?: boolean;
+    /** Whether to return the visual waveform of the generated song. */
+    withWaveformVisual?: boolean;
 }

@@ -16,6 +16,6 @@ import type * as ElevenLabs from "../../../../../../../../../../index";
  *     }
  */
 export interface DubbingBulkTargetSegmentUpdateRequest {
-    /** Map of segment id to the translation edit to apply to that segment. */
+    /** Map of segment ID to the translation edit to apply to that segment. At least one entry and at most 500. */
     segments: Record<string, ElevenLabs.DubbingTargetSegmentUpdateRequest>;
 }

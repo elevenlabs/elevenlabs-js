@@ -29,6 +29,8 @@ export interface BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
     storeForInpainting?: boolean;
     /** Whether to return the timestamps of the words in the generated song. */
     withTimestamps?: boolean;
+    /** Whether to return the visual waveform of the generated song. */
+    withWaveformVisual?: boolean;
     /** Whether to sign the generated song with C2PA. Applicable only for mp3 files. */
     signWithC2Pa?: boolean;
 }

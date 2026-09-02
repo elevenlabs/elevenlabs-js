@@ -354,6 +354,7 @@ describe("BranchesClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
+                    audio_effects: { distance: 1.1, send_level: 1.1 },
                 },
                 conversation: {
                     text_only: true,
@@ -1387,6 +1388,7 @@ describe("BranchesClient", () => {
                         custom_sip_headers: [{ type: "dynamic", key: "key", value: "value" }],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
                         transfer_type: "blind",
+                        sip_refer_play_dialtone: true,
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         uui: null,
@@ -1516,6 +1518,10 @@ describe("BranchesClient", () => {
                         },
                     ],
                     enablePhonemeTags: true,
+                    audioEffects: {
+                        distance: 1.1,
+                        sendLevel: 1.1,
+                    },
                 },
                 conversation: {
                     textOnly: true,
@@ -2803,6 +2809,7 @@ describe("BranchesClient", () => {
                             phoneNumber: "phone_number",
                         },
                         transferType: "blind",
+                        sipReferPlayDialtone: true,
                         position: {
                             x: 1.1,
                             y: 1.1,
@@ -2953,6 +2960,7 @@ describe("BranchesClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
+                    audio_effects: { distance: 1.1, send_level: 1.1 },
                 },
                 conversation: {
                     text_only: true,
@@ -3986,6 +3994,7 @@ describe("BranchesClient", () => {
                         custom_sip_headers: [{ type: "dynamic", key: "key", value: "value" }],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
                         transfer_type: "blind",
+                        sip_refer_play_dialtone: true,
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         uui: null,
@@ -4111,6 +4120,10 @@ describe("BranchesClient", () => {
                         },
                     ],
                     enablePhonemeTags: true,
+                    audioEffects: {
+                        distance: 1.1,
+                        sendLevel: 1.1,
+                    },
                 },
                 conversation: {
                     textOnly: true,
@@ -5398,6 +5411,7 @@ describe("BranchesClient", () => {
                             phoneNumber: "phone_number",
                         },
                         transferType: "blind",
+                        sipReferPlayDialtone: true,
                         position: {
                             x: 1.1,
                             y: 1.1,

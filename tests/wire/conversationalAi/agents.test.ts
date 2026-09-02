@@ -71,6 +71,7 @@ describe("AgentsClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
+                    audio_effects: { distance: 1.1, send_level: 1.1 },
                 },
                 conversation: {
                     text_only: true,
@@ -1104,6 +1105,7 @@ describe("AgentsClient", () => {
                         custom_sip_headers: [{ type: "dynamic", key: "key", value: "value" }],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
                         transfer_type: "blind",
+                        sip_refer_play_dialtone: true,
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         uui: null,
@@ -1216,6 +1218,10 @@ describe("AgentsClient", () => {
                         },
                     ],
                     enablePhonemeTags: true,
+                    audioEffects: {
+                        distance: 1.1,
+                        sendLevel: 1.1,
+                    },
                 },
                 conversation: {
                     textOnly: true,
@@ -2503,6 +2509,7 @@ describe("AgentsClient", () => {
                             phoneNumber: "phone_number",
                         },
                         transferType: "blind",
+                        sipReferPlayDialtone: true,
                         position: {
                             x: 1.1,
                             y: 1.1,
@@ -2622,6 +2629,7 @@ describe("AgentsClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
+                    audio_effects: { distance: 1.1, send_level: 1.1 },
                 },
                 conversation: {
                     text_only: true,
@@ -3655,6 +3663,7 @@ describe("AgentsClient", () => {
                         custom_sip_headers: [{ type: "dynamic", key: "key", value: "value" }],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
                         transfer_type: "blind",
+                        sip_refer_play_dialtone: true,
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
                         uui: null,
@@ -3768,6 +3777,10 @@ describe("AgentsClient", () => {
                         },
                     ],
                     enablePhonemeTags: true,
+                    audioEffects: {
+                        distance: 1.1,
+                        sendLevel: 1.1,
+                    },
                 },
                 conversation: {
                     textOnly: true,
@@ -5055,6 +5068,7 @@ describe("AgentsClient", () => {
                             phoneNumber: "phone_number",
                         },
                         transferType: "blind",
+                        sipReferPlayDialtone: true,
                         position: {
                             x: 1.1,
                             y: 1.1,
@@ -5149,6 +5163,7 @@ describe("AgentsClient", () => {
             archived: true,
             showOnlyOwnedAgents: true,
             createdByUserId: "created_by_user_id",
+            tags: ["tags"],
             sortDirection: "asc",
             sortBy: "name",
             cursor: "cursor",
@@ -5258,6 +5273,14 @@ describe("AgentsClient", () => {
                         mime_type: "mime_type",
                         file_url: "file_url",
                     },
+                    file_inputs: [
+                        {
+                            file_id: "file_id",
+                            original_filename: "original_filename",
+                            mime_type: "mime_type",
+                            file_url: "file_url",
+                        },
+                    ],
                     contextual_update_info: { context_id: "context_id" },
                     reasoned: true,
                 },
@@ -5383,6 +5406,14 @@ describe("AgentsClient", () => {
                         mimeType: "mime_type",
                         fileUrl: "file_url",
                     },
+                    fileInputs: [
+                        {
+                            fileId: "file_id",
+                            originalFilename: "original_filename",
+                            mimeType: "mime_type",
+                            fileUrl: "file_url",
+                        },
+                    ],
                     contextualUpdateInfo: {
                         contextId: "context_id",
                     },

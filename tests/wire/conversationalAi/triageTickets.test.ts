@@ -167,6 +167,164 @@ describe("TriageTicketsClient", () => {
         });
     });
 
+    test("list_for_workspace", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            agent_conversation_tickets: [
+                {
+                    agentqa_ticket_id: "agentqa_ticket_id",
+                    workspace_id: "workspace_id",
+                    owner_user_id: "owner_user_id",
+                    agent_id: "agent_id",
+                    needs_clustering: true,
+                    issue_type: "knowledge_gap",
+                    labels: ["labels"],
+                    conversation_ids: ["conversation_ids"],
+                    first_seen_unix_secs: 1,
+                    last_seen_unix_secs: 1,
+                    qa_comment: "qa_comment",
+                    ticket_comments: [{ comment: "comment", created_at_unix_secs: 1 }],
+                    turn_comments: [{ turn_index: 1, comment: "comment", created_at_unix_secs: 1 }],
+                    status: "open",
+                    source: "qa",
+                    assignee_user_id: "assignee_user_id",
+                    created_at_unix_secs: 1,
+                    updated_at_unix_secs: 1,
+                },
+            ],
+            next_cursor: "next_cursor",
+            has_more: true,
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/convai/triage-tickets")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.triageTickets.listForWorkspace({
+            pageSize: 1,
+            status: "open",
+            assigneeUserId: "assignee_user_id",
+            cursor: "cursor",
+        });
+        expect(response).toEqual({
+            agentConversationTickets: [
+                {
+                    agentqaTicketId: "agentqa_ticket_id",
+                    workspaceId: "workspace_id",
+                    ownerUserId: "owner_user_id",
+                    agentId: "agent_id",
+                    needsClustering: true,
+                    issueType: "knowledge_gap",
+                    labels: ["labels"],
+                    conversationIds: ["conversation_ids"],
+                    firstSeenUnixSecs: 1,
+                    lastSeenUnixSecs: 1,
+                    qaComment: "qa_comment",
+                    ticketComments: [
+                        {
+                            comment: "comment",
+                            createdAtUnixSecs: 1,
+                        },
+                    ],
+                    turnComments: [
+                        {
+                            turnIndex: 1,
+                            comment: "comment",
+                            createdAtUnixSecs: 1,
+                        },
+                    ],
+                    status: "open",
+                    source: "qa",
+                    assigneeUserId: "assignee_user_id",
+                    createdAtUnixSecs: 1,
+                    updatedAtUnixSecs: 1,
+                },
+            ],
+            nextCursor: "next_cursor",
+            hasMore: true,
+        });
+    });
+
+    test("create", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { conversation_id: "conversation_id" };
+        const rawResponseBody = {
+            agentqa_ticket_id: "agentqa_ticket_id",
+            workspace_id: "workspace_id",
+            owner_user_id: "owner_user_id",
+            agent_id: "agent_id",
+            needs_clustering: true,
+            issue_type: "knowledge_gap",
+            labels: ["labels"],
+            conversation_ids: ["conversation_ids"],
+            first_seen_unix_secs: 1,
+            last_seen_unix_secs: 1,
+            qa_comment: "qa_comment",
+            ticket_comments: [{ comment: "comment", created_at_unix_secs: 1, owner_user_id: "owner_user_id" }],
+            turn_comments: [
+                { turn_index: 1, comment: "comment", created_at_unix_secs: 1, owner_user_id: "owner_user_id" },
+            ],
+            status: "open",
+            source: "qa",
+            assignee_user_id: "assignee_user_id",
+            created_at_unix_secs: 1,
+            updated_at_unix_secs: 1,
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/triage-tickets")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.triageTickets.create({
+            conversationId: "conversation_id",
+        });
+        expect(response).toEqual({
+            agentqaTicketId: "agentqa_ticket_id",
+            workspaceId: "workspace_id",
+            ownerUserId: "owner_user_id",
+            agentId: "agent_id",
+            needsClustering: true,
+            issueType: "knowledge_gap",
+            labels: ["labels"],
+            conversationIds: ["conversation_ids"],
+            firstSeenUnixSecs: 1,
+            lastSeenUnixSecs: 1,
+            qaComment: "qa_comment",
+            ticketComments: [
+                {
+                    comment: "comment",
+                    createdAtUnixSecs: 1,
+                    ownerUserId: "owner_user_id",
+                },
+            ],
+            turnComments: [
+                {
+                    turnIndex: 1,
+                    comment: "comment",
+                    createdAtUnixSecs: 1,
+                    ownerUserId: "owner_user_id",
+                },
+            ],
+            status: "open",
+            source: "qa",
+            assigneeUserId: "assignee_user_id",
+            createdAtUnixSecs: 1,
+            updatedAtUnixSecs: 1,
+        });
+    });
+
     test("list_assignable_users", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
@@ -324,80 +482,6 @@ describe("TriageTicketsClient", () => {
             .build();
 
         const response = await client.conversationalAi.triageTickets.update("agentqa_ticket_id");
-        expect(response).toEqual({
-            agentqaTicketId: "agentqa_ticket_id",
-            workspaceId: "workspace_id",
-            ownerUserId: "owner_user_id",
-            agentId: "agent_id",
-            needsClustering: true,
-            issueType: "knowledge_gap",
-            labels: ["labels"],
-            conversationIds: ["conversation_ids"],
-            firstSeenUnixSecs: 1,
-            lastSeenUnixSecs: 1,
-            qaComment: "qa_comment",
-            ticketComments: [
-                {
-                    comment: "comment",
-                    createdAtUnixSecs: 1,
-                    ownerUserId: "owner_user_id",
-                },
-            ],
-            turnComments: [
-                {
-                    turnIndex: 1,
-                    comment: "comment",
-                    createdAtUnixSecs: 1,
-                    ownerUserId: "owner_user_id",
-                },
-            ],
-            status: "open",
-            source: "qa",
-            assigneeUserId: "assignee_user_id",
-            createdAtUnixSecs: 1,
-            updatedAtUnixSecs: 1,
-        });
-    });
-
-    test("create", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { conversation_id: "conversation_id" };
-        const rawResponseBody = {
-            agentqa_ticket_id: "agentqa_ticket_id",
-            workspace_id: "workspace_id",
-            owner_user_id: "owner_user_id",
-            agent_id: "agent_id",
-            needs_clustering: true,
-            issue_type: "knowledge_gap",
-            labels: ["labels"],
-            conversation_ids: ["conversation_ids"],
-            first_seen_unix_secs: 1,
-            last_seen_unix_secs: 1,
-            qa_comment: "qa_comment",
-            ticket_comments: [{ comment: "comment", created_at_unix_secs: 1, owner_user_id: "owner_user_id" }],
-            turn_comments: [
-                { turn_index: 1, comment: "comment", created_at_unix_secs: 1, owner_user_id: "owner_user_id" },
-            ],
-            status: "open",
-            source: "qa",
-            assignee_user_id: "assignee_user_id",
-            created_at_unix_secs: 1,
-            updated_at_unix_secs: 1,
-        };
-
-        server
-            .mockEndpoint()
-            .post("/v1/convai/triage-tickets")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.conversationalAi.triageTickets.create({
-            conversationId: "conversation_id",
-        });
         expect(response).toEqual({
             agentqaTicketId: "agentqa_ticket_id",
             workspaceId: "workspace_id",

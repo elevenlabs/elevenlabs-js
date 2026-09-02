@@ -29,4 +29,6 @@ export interface TtsConversationalConfigOutput {
     pronunciationDictionaryLocators?: ElevenLabs.PydanticPronunciationDictionaryVersionLocator[];
     /** Opt-in to SSML phoneme tag handling for V3 models. When enabled, phoneme tags (inline and from pronunciation dictionaries) are parsed into inline IPA before being sent to the model. */
     enablePhonemeTags?: boolean;
+    /** Optional TTS effects spec: filter preset, distance (proximity EQ), and environment (convolution reverb). */
+    audioEffects?: ElevenLabs.EffectsSpecOutput;
 }
