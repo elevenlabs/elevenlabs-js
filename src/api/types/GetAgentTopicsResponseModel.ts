@@ -6,8 +6,4 @@ export interface GetAgentTopicsResponseModel {
     topics: ElevenLabs.AgentTopicResponseModel[];
     windowStartUnixSecs: number;
     windowEndUnixSecs: number;
-    /** Number of daily topic-discovery runs the returned metrics were summed over. */
-    aggregatedRunCount?: number;
-    hasMore?: boolean;
-    nextCursor?: string;
 }

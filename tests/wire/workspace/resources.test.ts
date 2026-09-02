@@ -17,7 +17,6 @@ describe("ResourcesClient", () => {
             role_to_group_ids: {
                 admin: ["5zavrE1kZXv2lFw9BKgEkf0B5Wqo"],
                 editor: ["8ruQDGM2R4w1mFbHI5aROCUjIpJZ"],
-                role_01jd7yq2k8f0abcd1234wxyz: ["9mQrTx4vNb2wKpLs6ZyE1cHgUdFa"],
                 viewer: ["role_to_group_ids"],
             },
             share_options: [
@@ -46,7 +45,6 @@ describe("ResourcesClient", () => {
             roleToGroupIds: {
                 admin: ["5zavrE1kZXv2lFw9BKgEkf0B5Wqo"],
                 editor: ["8ruQDGM2R4w1mFbHI5aROCUjIpJZ"],
-                role_01jd7yq2k8f0abcd1234wxyz: ["9mQrTx4vNb2wKpLs6ZyE1cHgUdFa"],
                 viewer: ["role_to_group_ids"],
             },
             shareOptions: [

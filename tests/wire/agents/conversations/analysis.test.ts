@@ -163,7 +163,6 @@ describe("AnalysisClient", () => {
                 branch_id: "branch_id",
                 environment: "environment",
                 starting_workflow_node_id: "starting_workflow_node_id",
-                procedure_ids: ["procedure_ids"],
                 dynamic_variables: { key: "value" },
             },
             environment: "production",
@@ -461,7 +460,6 @@ describe("AnalysisClient", () => {
                 branchId: "branch_id",
                 environment: "environment",
                 startingWorkflowNodeId: "starting_workflow_node_id",
-                procedureIds: ["procedure_ids"],
                 dynamicVariables: {
                     key: "value",
                 },
@@ -714,7 +712,6 @@ describe("AnalysisClient", () => {
                 branch_id: "branch_id",
                 environment: "environment",
                 starting_workflow_node_id: "starting_workflow_node_id",
-                procedure_ids: ["procedure_ids"],
                 dynamic_variables: { key: "value" },
             },
             environment: "production",
@@ -1015,7 +1012,6 @@ describe("AnalysisClient", () => {
                 branchId: "branch_id",
                 environment: "environment",
                 startingWorkflowNodeId: "starting_workflow_node_id",
-                procedureIds: ["procedure_ids"],
                 dynamicVariables: {
                     key: "value",
                 },

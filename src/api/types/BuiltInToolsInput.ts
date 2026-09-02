@@ -2,19 +2,13 @@
 
 import type * as ElevenLabs from "../index.js";
 
-/**
- * System tools a conversational agent can be given.
- *
- * Deliberately not named ConversationalBuiltInTools: BuiltInToolsInput and
- * BuiltInToolsOutput are part of the public API spec and the generated SDKs.
- */
 export interface BuiltInToolsInput {
-    /** The transfer to agent tool */
-    transferToAgent?: ElevenLabs.SystemToolConfigInput;
     /** The end call tool */
     endCall?: ElevenLabs.SystemToolConfigInput;
     /** The language detection tool */
     languageDetection?: ElevenLabs.SystemToolConfigInput;
+    /** The transfer to agent tool */
+    transferToAgent?: ElevenLabs.SystemToolConfigInput;
     /** The transfer to number tool */
     transferToNumber?: ElevenLabs.SystemToolConfigInput;
     /** The skip turn tool */

@@ -26,10 +26,6 @@ export const ConversationInitiationClientDataRequestInput: core.serialization.Ob
         "starting_workflow_node_id",
         core.serialization.string().optional(),
     ),
-    procedureIds: core.serialization.property(
-        "procedure_ids",
-        core.serialization.list(core.serialization.string()).optional(),
-    ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
         core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
@@ -45,7 +41,6 @@ export declare namespace ConversationInitiationClientDataRequestInput {
         branch_id?: string | null;
         environment?: string | null;
         starting_workflow_node_id?: string | null;
-        procedure_ids?: string[] | null;
         dynamic_variables?: Record<string, unknown> | null;
     }
 }

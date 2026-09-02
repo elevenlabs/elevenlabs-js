@@ -3,13 +3,10 @@
 /**
  * @example
  *     {
- *         agentId: "agent_id",
- *         agentIds: ["agent_ids"]
+ *         agentId: "agent_id"
  *     }
  */
 export interface GetLiveCountRequest {
     /** The id of an agent to restrict the analytics to. */
     agentId?: string;
-    /** Restrict analytics to the union of the given agents. Takes precedence over `agent_id` when both are supplied. */
-    agentIds?: string | string[];
 }

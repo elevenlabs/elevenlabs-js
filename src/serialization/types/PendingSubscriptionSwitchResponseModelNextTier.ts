@@ -10,7 +10,6 @@ export const PendingSubscriptionSwitchResponseModelNextTier: core.serialization.
 > = core.serialization.enum_([
     "free",
     "starter",
-    "go",
     "creator",
     "pro",
     "growing_business",
@@ -25,7 +24,6 @@ export declare namespace PendingSubscriptionSwitchResponseModelNextTier {
     export type Raw =
         | "free"
         | "starter"
-        | "go"
         | "creator"
         | "pro"
         | "growing_business"

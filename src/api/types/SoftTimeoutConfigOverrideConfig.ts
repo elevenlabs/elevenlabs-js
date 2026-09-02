@@ -3,6 +3,4 @@
 export interface SoftTimeoutConfigOverrideConfig {
     /** Whether to allow overriding the message field. */
     message?: boolean;
-    /** Whether to allow overriding the additional_soft_timeout_messages field. */
-    additionalSoftTimeoutMessages?: boolean;
 }

@@ -29,7 +29,6 @@ export const ResponseUnitTestModel: core.serialization.ObjectSchema<
         "conversation_initiation_source",
         ConversationInitiationSource.optional(),
     ),
-    environment: core.serialization.string().optional(),
     successCondition: core.serialization.property("success_condition", core.serialization.string().optional()),
     successExamples: core.serialization.property(
         "success_examples",
@@ -47,7 +46,6 @@ export declare namespace ResponseUnitTestModel {
         dynamic_variables?: Record<string, unknown> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
-        environment?: string | null;
         success_condition?: string | null;
         success_examples?: AgentSuccessfulResponseExample.Raw[] | null;
         failure_examples?: AgentFailureResponseExample.Raw[] | null;

@@ -111,7 +111,6 @@ describe("TestsClient", () => {
                 },
             ],
             conversation_initiation_source: "unknown",
-            environment: "environment",
             success_condition: "success_condition",
             success_examples: [{ response: "response", type: "success" }],
             failure_examples: [{ response: "response", type: "failure" }],
@@ -212,7 +211,6 @@ describe("TestsClient", () => {
                 },
             ],
             conversationInitiationSource: "unknown",
-            environment: "environment",
             successCondition: "success_condition",
             successExamples: [
                 {
@@ -291,7 +289,6 @@ describe("TestsClient", () => {
                 },
             ],
             conversation_initiation_source: "unknown",
-            environment: "environment",
             success_condition: "success_condition",
             success_examples: [{ response: "response", type: "success" }],
             failure_examples: [{ response: "response", type: "failure" }],
@@ -396,7 +393,6 @@ describe("TestsClient", () => {
                 },
             ],
             conversationInitiationSource: "unknown",
-            environment: "environment",
             successCondition: "success_condition",
             successExamples: [
                 {

@@ -10,6 +10,7 @@ export const User: core.serialization.ObjectSchema<serializers.User.Raw, ElevenL
     userId: core.serialization.property("user_id", core.serialization.string()),
     subscription: SubscriptionResponse,
     isNewUser: core.serialization.property("is_new_user", core.serialization.boolean()),
+    xiApiKey: core.serialization.property("xi_api_key", core.serialization.string().optional()),
     canUseDelayedPaymentMethods: core.serialization.property(
         "can_use_delayed_payment_methods",
         core.serialization.boolean(),
@@ -37,6 +38,7 @@ export declare namespace User {
         user_id: string;
         subscription: SubscriptionResponse.Raw;
         is_new_user: boolean;
+        xi_api_key?: string | null;
         can_use_delayed_payment_methods: boolean;
         is_onboarding_completed: boolean;
         is_onboarding_checklist_completed: boolean;

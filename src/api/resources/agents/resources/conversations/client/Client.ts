@@ -80,8 +80,7 @@ export class ConversationsClient {
      *         agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
      *         includeConversationId: true,
      *         branchId: "branch_id",
-     *         environment: "environment",
-     *         debugEventsRequest: true
+     *         environment: "environment"
      *     })
      */
     public getSignedUrl(
@@ -95,13 +94,12 @@ export class ConversationsClient {
         request: ElevenLabs.agents.GetSignedUrlConversationsRequest,
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ConversationSignedUrlResponseModel>> {
-        const { agentId, includeConversationId, branchId, environment, debugEventsRequest } = request;
+        const { agentId, includeConversationId, branchId, environment } = request;
         const _queryParams: Record<string, unknown> = {
             agent_id: agentId,
             include_conversation_id: includeConversationId,
             branch_id: branchId,
             environment,
-            debug_events_request: debugEventsRequest,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -178,8 +176,7 @@ export class ConversationsClient {
      *         agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
      *         participantName: "participant_name",
      *         branchId: "branch_id",
-     *         environment: "environment",
-     *         debugEventsRequest: true
+     *         environment: "environment"
      *     })
      */
     public getWebrtcToken(
@@ -193,13 +190,12 @@ export class ConversationsClient {
         request: ElevenLabs.agents.GetWebrtcTokenConversationsRequest,
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.TokenResponseModel>> {
-        const { agentId, participantName, branchId, environment, debugEventsRequest } = request;
+        const { agentId, participantName, branchId, environment } = request;
         const _queryParams: Record<string, unknown> = {
             agent_id: agentId,
             participant_name: participantName,
             branch_id: branchId,
             environment,
-            debug_events_request: debugEventsRequest,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -272,7 +268,6 @@ export class ConversationsClient {
      *         agentId: "agent_id",
      *         visitedAgentIds: ["visited_agent_ids"],
      *         visitedAgentBranchIds: ["visited_agent_branch_ids"],
-     *         triggeredProcedureIds: ["triggered_procedure_ids"],
      *         callSuccessful: "success",
      *         callStartBeforeUnix: 1,
      *         callStartAfterUnix: 1,
@@ -289,7 +284,6 @@ export class ConversationsClient {
      *         toolNames: ["tool_names"],
      *         toolNamesSuccessful: ["tool_names_successful"],
      *         toolNamesErrored: ["tool_names_errored"],
-     *         includeInvalidToolCalls: true,
      *         mainLanguages: ["main_languages"],
      *         pageSize: 1,
      *         summaryMode: "exclude",
@@ -306,8 +300,7 @@ export class ConversationsClient {
      *         workflowNodeEnteredId: "workflow_node_entered_id",
      *         terminationReasons: ["termination_reasons"],
      *         guardrailTypes: ["custom"],
-     *         customGuardrailNames: ["custom_guardrail_names"],
-     *         sortDirection: "asc"
+     *         customGuardrailNames: ["custom_guardrail_names"]
      *     })
      */
     public list(
@@ -326,7 +319,6 @@ export class ConversationsClient {
             agentId,
             visitedAgentIds,
             visitedAgentBranchIds,
-            triggeredProcedureIds,
             callSuccessful,
             callStartBeforeUnix,
             callStartAfterUnix,
@@ -343,7 +335,6 @@ export class ConversationsClient {
             toolNames,
             toolNamesSuccessful,
             toolNamesErrored,
-            includeInvalidToolCalls,
             mainLanguages,
             pageSize,
             summaryMode,
@@ -361,17 +352,15 @@ export class ConversationsClient {
             terminationReasons,
             guardrailTypes,
             customGuardrailNames,
-            sortDirection,
         } = request;
         const _queryParams: Record<string, unknown> = {
             cursor,
             agent_id: agentId,
             visited_agent_ids: visitedAgentIds,
             visited_agent_branch_ids: visitedAgentBranchIds,
-            triggered_procedure_ids: triggeredProcedureIds,
             call_successful:
                 callSuccessful != null
-                    ? serializers.EvaluationResultFilter.jsonOrThrow(callSuccessful, {
+                    ? serializers.EvaluationSuccessResult.jsonOrThrow(callSuccessful, {
                           unrecognizedObjectKeys: "strip",
                           omitUndefined: true,
                       })
@@ -391,7 +380,6 @@ export class ConversationsClient {
             tool_names: toolNames,
             tool_names_successful: toolNamesSuccessful,
             tool_names_errored: toolNamesErrored,
-            include_invalid_tool_calls: includeInvalidToolCalls,
             main_languages: mainLanguages,
             page_size: pageSize,
             summary_mode:
@@ -451,10 +439,6 @@ export class ConversationsClient {
                     })
                   : undefined,
             custom_guardrail_names: customGuardrailNames,
-            sort_direction:
-                sortDirection != null
-                    ? serializers.SortDirection.jsonOrThrow(sortDirection, { unrecognizedObjectKeys: "strip" })
-                    : undefined,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -771,99 +755,6 @@ export class ConversationsClient {
             _response.rawResponse,
             "DELETE",
             "/v1/convai/conversations/{conversation_id}",
-        );
-    }
-
-    /**
-     * Get a lightweight summary of a conversation: its title, the generated transcript summary, whether the call was successful, and — only when the conversation is short — the plain chat messages. Tool calls, tool results, and contextual updates are omitted so the response stays small. Use this instead of the full conversation endpoint when you only need the gist (e.g. an agent reading many conversations); use GET /v1/convai/conversations/{conversation_id} when you need the full transcript with tool calls and contextual updates.
-     *
-     * @param {string} conversation_id - The id of the conversation you're taking the action on.
-     * @param {ElevenLabs.conversationalAi.ConversationsGetSummaryRequest} request
-     * @param {ConversationsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     * @throws {@link errors.ElevenLabsError}
-     * @throws {@link errors.ElevenLabsTimeoutError}
-     *
-     * @example
-     *     await client.conversationalAi.conversations.getSummary("21m00Tcm4TlvDq8ikWAM", {
-     *         maxMessages: 1
-     *     })
-     */
-    public getSummary(
-        conversation_id: string,
-        request: ElevenLabs.conversationalAi.ConversationsGetSummaryRequest = {},
-        requestOptions?: ConversationsClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.GetConversationSummaryResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__getSummary(conversation_id, request, requestOptions));
-    }
-
-    private async __getSummary(
-        conversation_id: string,
-        request: ElevenLabs.conversationalAi.ConversationsGetSummaryRequest = {},
-        requestOptions?: ConversationsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.GetConversationSummaryResponseModel>> {
-        const { maxMessages } = request;
-        const _queryParams: Record<string, unknown> = {
-            max_messages: maxMessages,
-        };
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                `v1/convai/conversations/${core.url.encodePathParam(conversation_id)}/summary`,
-            ),
-            method: "GET",
-            headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: serializers.GetConversationSummaryResponseModel.parseOrThrow(_response.body, {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    breadcrumbsPrefix: ["response"],
-                }),
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "GET",
-            "/v1/convai/conversations/{conversation_id}/summary",
         );
     }
 

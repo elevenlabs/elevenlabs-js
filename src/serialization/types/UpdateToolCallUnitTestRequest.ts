@@ -28,7 +28,6 @@ export const UpdateToolCallUnitTestRequest: core.serialization.ObjectSchema<
         "conversation_initiation_source",
         ConversationInitiationSource.optional(),
     ),
-    environment: core.serialization.string().optional(),
     toolCallParameters: core.serialization.property(
         "tool_call_parameters",
         UnitTestToolCallEvaluationModelInput.optional(),
@@ -44,7 +43,6 @@ export declare namespace UpdateToolCallUnitTestRequest {
         dynamic_variables?: Record<string, unknown> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelInput.Raw[] | null;
         conversation_initiation_source?: ConversationInitiationSource.Raw | null;
-        environment?: string | null;
         tool_call_parameters?: UnitTestToolCallEvaluationModelInput.Raw | null;
         check_any_tool_matches?: boolean | null;
         name: string;

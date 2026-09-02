@@ -23,7 +23,6 @@ describe("ConversationsClient", () => {
             includeConversationId: true,
             branchId: "branch_id",
             environment: "environment",
-            debugEventsRequest: true,
         });
         expect(response).toEqual({
             signedUrl: "signed_url",
@@ -49,7 +48,6 @@ describe("ConversationsClient", () => {
             participantName: "participant_name",
             branchId: "branch_id",
             environment: "environment",
-            debugEventsRequest: true,
         });
         expect(response).toEqual({
             token: "token",
@@ -112,7 +110,6 @@ describe("ConversationsClient", () => {
             agentId: "agent_id",
             visitedAgentIds: ["visited_agent_ids"],
             visitedAgentBranchIds: ["visited_agent_branch_ids"],
-            triggeredProcedureIds: ["triggered_procedure_ids"],
             callSuccessful: "success",
             callStartBeforeUnix: 1,
             callStartAfterUnix: 1,
@@ -129,7 +126,6 @@ describe("ConversationsClient", () => {
             toolNames: ["tool_names"],
             toolNamesSuccessful: ["tool_names_successful"],
             toolNamesErrored: ["tool_names_errored"],
-            includeInvalidToolCalls: true,
             mainLanguages: ["main_languages"],
             pageSize: 1,
             summaryMode: "exclude",
@@ -147,7 +143,6 @@ describe("ConversationsClient", () => {
             terminationReasons: ["termination_reasons"],
             guardrailTypes: ["custom"],
             customGuardrailNames: ["custom_guardrail_names"],
-            sortDirection: "asc",
         });
         expect(response).toEqual({
             conversations: [
@@ -349,7 +344,6 @@ describe("ConversationsClient", () => {
                 branch_id: "branch_id",
                 environment: "environment",
                 starting_workflow_node_id: "starting_workflow_node_id",
-                procedure_ids: ["procedure_ids"],
                 dynamic_variables: { key: "value" },
             },
             environment: "production",
@@ -650,7 +644,6 @@ describe("ConversationsClient", () => {
                 branchId: "branch_id",
                 environment: "environment",
                 startingWorkflowNodeId: "starting_workflow_node_id",
-                procedureIds: ["procedure_ids"],
                 dynamicVariables: {
                     key: "value",
                 },
@@ -903,7 +896,6 @@ describe("ConversationsClient", () => {
                 branch_id: "branch_id",
                 environment: "environment",
                 starting_workflow_node_id: "starting_workflow_node_id",
-                procedure_ids: ["procedure_ids"],
                 dynamic_variables: { key: "value" },
             },
             environment: "production",
@@ -1203,7 +1195,6 @@ describe("ConversationsClient", () => {
                 branchId: "branch_id",
                 environment: "environment",
                 startingWorkflowNodeId: "starting_workflow_node_id",
-                procedureIds: ["procedure_ids"],
                 dynamicVariables: {
                     key: "value",
                 },
@@ -1314,53 +1305,6 @@ describe("ConversationsClient", () => {
         const response = await client.agents.conversations.delete("21m00Tcm4TlvDq8ikWAM");
         expect(response).toEqual({
             key: "value",
-        });
-    });
-
-    test("get_summary", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
-        const rawResponseBody = {
-            conversation_id: "conversation_id",
-            agent_id: "agent_id",
-            status: "initiated",
-            call_summary_title: "call_summary_title",
-            transcript_summary: "transcript_summary",
-            call_successful: "success",
-            message_count: 1,
-            messages: [{ role: "user", message: "message" }],
-            messages_omitted: true,
-            note: "note",
-        };
-
-        server
-            .mockEndpoint()
-            .get("/v1/convai/conversations/21m00Tcm4TlvDq8ikWAM/summary")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.conversationalAi.conversations.getSummary("21m00Tcm4TlvDq8ikWAM", {
-            maxMessages: 1,
-        });
-        expect(response).toEqual({
-            conversationId: "conversation_id",
-            agentId: "agent_id",
-            status: "initiated",
-            callSummaryTitle: "call_summary_title",
-            transcriptSummary: "transcript_summary",
-            callSuccessful: "success",
-            messageCount: 1,
-            messages: [
-                {
-                    role: "user",
-                    message: "message",
-                },
-            ],
-            messagesOmitted: true,
-            note: "note",
         });
     });
 

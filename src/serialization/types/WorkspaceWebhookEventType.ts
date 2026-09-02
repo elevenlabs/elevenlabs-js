@@ -7,8 +7,8 @@ import type * as serializers from "../index.js";
 export const WorkspaceWebhookEventType: core.serialization.Schema<
     serializers.WorkspaceWebhookEventType.Raw,
     ElevenLabs.WorkspaceWebhookEventType
-> = core.serialization.enum_(["voice_library_removal_notice", "speech_to_text", "agent_qa", "flows"]);
+> = core.serialization.enum_(["voice_library_removal_notice", "speech_to_text", "agent_qa"]);
 
 export declare namespace WorkspaceWebhookEventType {
-    export type Raw = "voice_library_removal_notice" | "speech_to_text" | "agent_qa" | "flows";
+    export type Raw = "voice_library_removal_notice" | "speech_to_text" | "agent_qa";
 }

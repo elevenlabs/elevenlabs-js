@@ -9,20 +9,6 @@ export const AlertingMonitorConfig: core.serialization.ObjectSchema<
     ElevenLabs.AlertingMonitorConfig
 > = core.serialization.object({
     threshold: core.serialization.number().optional(),
-    relativeIncreaseThreshold: core.serialization.property(
-        "relative_increase_threshold",
-        core.serialization.number().optional(),
-    ),
-    minFailureCount: core.serialization.property("min_failure_count", core.serialization.number().optional()),
-    minHistoryBucketCount: core.serialization.property(
-        "min_history_bucket_count",
-        core.serialization.number().optional(),
-    ),
-    minSampleCount: core.serialization.property("min_sample_count", core.serialization.number().optional()),
-    suspectTriggerThreshold: core.serialization.property(
-        "suspect_trigger_threshold",
-        core.serialization.number().optional(),
-    ),
     autoResolveAfterInactiveMinutes: core.serialization.property(
         "auto_resolve_after_inactive_minutes",
         core.serialization.number().optional(),
@@ -32,11 +18,6 @@ export const AlertingMonitorConfig: core.serialization.ObjectSchema<
 export declare namespace AlertingMonitorConfig {
     export interface Raw {
         threshold?: number | null;
-        relative_increase_threshold?: number | null;
-        min_failure_count?: number | null;
-        min_history_bucket_count?: number | null;
-        min_sample_count?: number | null;
-        suspect_trigger_threshold?: number | null;
         auto_resolve_after_inactive_minutes?: number | null;
     }
 }

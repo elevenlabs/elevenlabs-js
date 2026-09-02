@@ -9,15 +9,10 @@ export const SoftTimeoutConfigOverrideConfig: core.serialization.ObjectSchema<
     ElevenLabs.SoftTimeoutConfigOverrideConfig
 > = core.serialization.object({
     message: core.serialization.boolean().optional(),
-    additionalSoftTimeoutMessages: core.serialization.property(
-        "additional_soft_timeout_messages",
-        core.serialization.boolean().optional(),
-    ),
 });
 
 export declare namespace SoftTimeoutConfigOverrideConfig {
     export interface Raw {
         message?: boolean | null;
-        additional_soft_timeout_messages?: boolean | null;
     }
 }

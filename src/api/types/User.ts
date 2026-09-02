@@ -9,6 +9,8 @@ export interface User {
     subscription: ElevenLabs.SubscriptionResponse;
     /** Whether the user is new. This field is deprecated and will be removed in the future. Use 'created_at' instead. */
     isNewUser: boolean;
+    /** The API key of the user. */
+    xiApiKey?: string;
     /** This field is deprecated and will be removed in a future major version. Instead use subscription.trust_on_invoice_creation. */
     canUseDelayedPaymentMethods: boolean;
     /** Whether the user's onboarding is completed. */

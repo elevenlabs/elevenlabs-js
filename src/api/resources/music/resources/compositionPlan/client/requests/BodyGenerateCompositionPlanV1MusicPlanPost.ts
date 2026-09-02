@@ -16,5 +16,5 @@ export interface BodyGenerateCompositionPlanV1MusicPlanPost {
     /** An optional composition plan to use as a source for the new composition plan. */
     sourceCompositionPlan?: ElevenLabs.music.BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan;
     /** The model to use for the generation. */
-    modelId?: ElevenLabs.MusicModelId;
+    modelId?: ElevenLabs.music.BodyGenerateCompositionPlanV1MusicPlanPostModelId;
 }

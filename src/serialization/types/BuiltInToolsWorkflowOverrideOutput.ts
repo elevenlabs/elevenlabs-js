@@ -9,9 +9,9 @@ export const BuiltInToolsWorkflowOverrideOutput: core.serialization.ObjectSchema
     serializers.BuiltInToolsWorkflowOverrideOutput.Raw,
     ElevenLabs.BuiltInToolsWorkflowOverrideOutput
 > = core.serialization.object({
-    transferToAgent: core.serialization.property("transfer_to_agent", SystemToolConfigOutput.optional()),
     endCall: core.serialization.property("end_call", SystemToolConfigOutput.optional()),
     languageDetection: core.serialization.property("language_detection", SystemToolConfigOutput.optional()),
+    transferToAgent: core.serialization.property("transfer_to_agent", SystemToolConfigOutput.optional()),
     transferToNumber: core.serialization.property("transfer_to_number", SystemToolConfigOutput.optional()),
     skipTurn: core.serialization.property("skip_turn", SystemToolConfigOutput.optional()),
     playKeypadTouchTone: core.serialization.property("play_keypad_touch_tone", SystemToolConfigOutput.optional()),
@@ -20,9 +20,9 @@ export const BuiltInToolsWorkflowOverrideOutput: core.serialization.ObjectSchema
 
 export declare namespace BuiltInToolsWorkflowOverrideOutput {
     export interface Raw {
-        transfer_to_agent?: SystemToolConfigOutput.Raw | null;
         end_call?: SystemToolConfigOutput.Raw | null;
         language_detection?: SystemToolConfigOutput.Raw | null;
+        transfer_to_agent?: SystemToolConfigOutput.Raw | null;
         transfer_to_number?: SystemToolConfigOutput.Raw | null;
         skip_turn?: SystemToolConfigOutput.Raw | null;
         play_keypad_touch_tone?: SystemToolConfigOutput.Raw | null;

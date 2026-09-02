@@ -19,7 +19,7 @@ export interface TestInvocationSummaryResponseModel {
     failedCount: number;
     /** Number of test runs that are pending */
     pendingCount: number;
-    /** Title of the test invocation - the folder name for folder runs, otherwise the single test name or count of tests */
+    /** Title of the test invocation - either the single test name or count of tests */
     title: string;
     /** The access information of the test invocation */
     accessInfo?: ElevenLabs.ResourceAccessInfo;

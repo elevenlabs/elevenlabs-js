@@ -39,7 +39,6 @@ export class MessagesClient {
      *         agentId: "agent_id",
      *         visitedAgentIds: ["visited_agent_ids"],
      *         visitedAgentBranchIds: ["visited_agent_branch_ids"],
-     *         triggeredProcedureIds: ["triggered_procedure_ids"],
      *         callSuccessful: "success",
      *         callStartBeforeUnix: 1,
      *         callStartAfterUnix: 1,
@@ -54,7 +53,6 @@ export class MessagesClient {
      *         toolNames: ["tool_names"],
      *         toolNamesSuccessful: ["tool_names_successful"],
      *         toolNamesErrored: ["tool_names_errored"],
-     *         includeInvalidToolCalls: true,
      *         mainLanguages: ["main_languages"],
      *         excludeStatuses: ["initiated"],
      *         terminationReasons: ["termination_reasons"],
@@ -86,7 +84,6 @@ export class MessagesClient {
             agentId,
             visitedAgentIds,
             visitedAgentBranchIds,
-            triggeredProcedureIds,
             callSuccessful,
             callStartBeforeUnix,
             callStartAfterUnix,
@@ -101,7 +98,6 @@ export class MessagesClient {
             toolNames,
             toolNamesSuccessful,
             toolNamesErrored,
-            includeInvalidToolCalls,
             mainLanguages,
             excludeStatuses,
             terminationReasons,
@@ -121,10 +117,9 @@ export class MessagesClient {
             agent_id: agentId,
             visited_agent_ids: visitedAgentIds,
             visited_agent_branch_ids: visitedAgentBranchIds,
-            triggered_procedure_ids: triggeredProcedureIds,
             call_successful:
                 callSuccessful != null
-                    ? serializers.EvaluationResultFilter.jsonOrThrow(callSuccessful, {
+                    ? serializers.EvaluationSuccessResult.jsonOrThrow(callSuccessful, {
                           unrecognizedObjectKeys: "strip",
                           omitUndefined: true,
                       })
@@ -142,7 +137,6 @@ export class MessagesClient {
             tool_names: toolNames,
             tool_names_successful: toolNamesSuccessful,
             tool_names_errored: toolNamesErrored,
-            include_invalid_tool_calls: includeInvalidToolCalls,
             main_languages: mainLanguages,
             exclude_statuses: Array.isArray(excludeStatuses)
                 ? excludeStatuses.map((item) =>

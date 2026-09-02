@@ -407,21 +407,6 @@ describe("BranchesClient", () => {
                         max_tokens: -1,
                         tool_ids: ["tool_ids"],
                         built_in_tools: {
-                            transfer_to_agent: {
-                                type: "system",
-                                name: "end_call",
-                                description: "",
-                                assignments: [
-                                    {
-                                        source: "response",
-                                        dynamic_variable: "user_name",
-                                        value_path: "user.name",
-                                        sanitize: false,
-                                        preserve_native_type: false,
-                                    },
-                                ],
-                                params: { system_tool_type: "end_call" },
-                            },
                             end_call: {
                                 type: "system",
                                 name: "end_call",
@@ -438,6 +423,21 @@ describe("BranchesClient", () => {
                                 params: { system_tool_type: "end_call" },
                             },
                             language_detection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                        preserve_native_type: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            transfer_to_agent: {
                                 type: "system",
                                 name: "end_call",
                                 description: "",
@@ -599,7 +599,6 @@ describe("BranchesClient", () => {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
                     enable_starting_workflow_node_id_from_client: true,
-                    enable_procedure_ids_from_client: true,
                 },
                 workspace_overrides: {
                     conversation_initiation_client_data_webhook: {
@@ -634,7 +633,7 @@ describe("BranchesClient", () => {
                 alerting: {
                     monitor_configs: { key: {} },
                     auto_resolve_after_inactive_minutes: 1,
-                    notifiers: [{ type: "integration", connection_id: "connection_id" }],
+                    notifiers: [{ webhook_id: "webhook_id" }],
                 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
@@ -816,21 +815,6 @@ describe("BranchesClient", () => {
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
                                     built_in_tools: {
-                                        transfer_to_agent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamic_variable: "user_name",
-                                                    value_path: "user.name",
-                                                    sanitize: false,
-                                                    preserve_native_type: false,
-                                                },
-                                            ],
-                                            params: { system_tool_type: "end_call" },
-                                        },
                                         end_call: {
                                             type: "system",
                                             name: "end_call",
@@ -847,6 +831,21 @@ describe("BranchesClient", () => {
                                             params: { system_tool_type: "end_call" },
                                         },
                                         language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                    preserve_native_type: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -1022,21 +1021,6 @@ describe("BranchesClient", () => {
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
                                     built_in_tools: {
-                                        transfer_to_agent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamic_variable: "user_name",
-                                                    value_path: "user.name",
-                                                    sanitize: false,
-                                                    preserve_native_type: false,
-                                                },
-                                            ],
-                                            params: { system_tool_type: "end_call" },
-                                        },
                                         end_call: {
                                             type: "system",
                                             name: "end_call",
@@ -1053,6 +1037,21 @@ describe("BranchesClient", () => {
                                             params: { system_tool_type: "end_call" },
                                         },
                                         language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                    preserve_native_type: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -1229,21 +1228,6 @@ describe("BranchesClient", () => {
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
                                     built_in_tools: {
-                                        transfer_to_agent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamic_variable: "user_name",
-                                                    value_path: "user.name",
-                                                    sanitize: false,
-                                                    preserve_native_type: false,
-                                                },
-                                            ],
-                                            params: { system_tool_type: "end_call" },
-                                        },
                                         end_call: {
                                             type: "system",
                                             name: "end_call",
@@ -1260,6 +1244,21 @@ describe("BranchesClient", () => {
                                             params: { system_tool_type: "end_call" },
                                         },
                                         language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                    preserve_native_type: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -1584,23 +1583,6 @@ describe("BranchesClient", () => {
                         maxTokens: -1,
                         toolIds: ["tool_ids"],
                         builtInTools: {
-                            transferToAgent: {
-                                type: "system",
-                                name: "end_call",
-                                description: "",
-                                assignments: [
-                                    {
-                                        source: "response",
-                                        dynamicVariable: "user_name",
-                                        valuePath: "user.name",
-                                        sanitize: false,
-                                        preserveNativeType: false,
-                                    },
-                                ],
-                                params: {
-                                    systemToolType: "end_call",
-                                },
-                            },
                             endCall: {
                                 type: "system",
                                 name: "end_call",
@@ -1619,6 +1601,23 @@ describe("BranchesClient", () => {
                                 },
                             },
                             languageDetection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                        preserveNativeType: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            transferToAgent: {
                                 type: "system",
                                 name: "end_call",
                                 description: "",
@@ -1825,7 +1824,6 @@ describe("BranchesClient", () => {
                     customLlmExtraBody: true,
                     enableConversationInitiationClientDataFromWebhook: true,
                     enableStartingWorkflowNodeIdFromClient: true,
-                    enableProcedureIdsFromClient: true,
                 },
                 workspaceOverrides: {
                     conversationInitiationClientDataWebhook: {
@@ -1884,8 +1882,7 @@ describe("BranchesClient", () => {
                     autoResolveAfterInactiveMinutes: 1,
                     notifiers: [
                         {
-                            type: "integration",
-                            connectionId: "connection_id",
+                            webhookId: "webhook_id",
                         },
                     ],
                 },
@@ -2113,23 +2110,6 @@ describe("BranchesClient", () => {
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
                                     builtInTools: {
-                                        transferToAgent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamicVariable: "user_name",
-                                                    valuePath: "user.name",
-                                                    sanitize: false,
-                                                    preserveNativeType: false,
-                                                },
-                                            ],
-                                            params: {
-                                                systemToolType: "end_call",
-                                            },
-                                        },
                                         endCall: {
                                             type: "system",
                                             name: "end_call",
@@ -2148,6 +2128,23 @@ describe("BranchesClient", () => {
                                             },
                                         },
                                         languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                    preserveNativeType: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -2355,23 +2352,6 @@ describe("BranchesClient", () => {
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
                                     builtInTools: {
-                                        transferToAgent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamicVariable: "user_name",
-                                                    valuePath: "user.name",
-                                                    sanitize: false,
-                                                    preserveNativeType: false,
-                                                },
-                                            ],
-                                            params: {
-                                                systemToolType: "end_call",
-                                            },
-                                        },
                                         endCall: {
                                             type: "system",
                                             name: "end_call",
@@ -2390,6 +2370,23 @@ describe("BranchesClient", () => {
                                             },
                                         },
                                         languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                    preserveNativeType: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -2605,23 +2602,6 @@ describe("BranchesClient", () => {
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
                                     builtInTools: {
-                                        transferToAgent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamicVariable: "user_name",
-                                                    valuePath: "user.name",
-                                                    sanitize: false,
-                                                    preserveNativeType: false,
-                                                },
-                                            ],
-                                            params: {
-                                                systemToolType: "end_call",
-                                            },
-                                        },
                                         endCall: {
                                             type: "system",
                                             name: "end_call",
@@ -2640,6 +2620,23 @@ describe("BranchesClient", () => {
                                             },
                                         },
                                         languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                    preserveNativeType: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -3006,21 +3003,6 @@ describe("BranchesClient", () => {
                         max_tokens: -1,
                         tool_ids: ["tool_ids"],
                         built_in_tools: {
-                            transfer_to_agent: {
-                                type: "system",
-                                name: "end_call",
-                                description: "",
-                                assignments: [
-                                    {
-                                        source: "response",
-                                        dynamic_variable: "user_name",
-                                        value_path: "user.name",
-                                        sanitize: false,
-                                        preserve_native_type: false,
-                                    },
-                                ],
-                                params: { system_tool_type: "end_call" },
-                            },
                             end_call: {
                                 type: "system",
                                 name: "end_call",
@@ -3037,6 +3019,21 @@ describe("BranchesClient", () => {
                                 params: { system_tool_type: "end_call" },
                             },
                             language_detection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamic_variable: "user_name",
+                                        value_path: "user.name",
+                                        sanitize: false,
+                                        preserve_native_type: false,
+                                    },
+                                ],
+                                params: { system_tool_type: "end_call" },
+                            },
+                            transfer_to_agent: {
                                 type: "system",
                                 name: "end_call",
                                 description: "",
@@ -3198,7 +3195,6 @@ describe("BranchesClient", () => {
                     custom_llm_extra_body: true,
                     enable_conversation_initiation_client_data_from_webhook: true,
                     enable_starting_workflow_node_id_from_client: true,
-                    enable_procedure_ids_from_client: true,
                 },
                 workspace_overrides: {
                     conversation_initiation_client_data_webhook: {
@@ -3233,7 +3229,7 @@ describe("BranchesClient", () => {
                 alerting: {
                     monitor_configs: { key: {} },
                     auto_resolve_after_inactive_minutes: 1,
-                    notifiers: [{ type: "integration", connection_id: "connection_id" }],
+                    notifiers: [{ webhook_id: "webhook_id" }],
                 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
@@ -3415,21 +3411,6 @@ describe("BranchesClient", () => {
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
                                     built_in_tools: {
-                                        transfer_to_agent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamic_variable: "user_name",
-                                                    value_path: "user.name",
-                                                    sanitize: false,
-                                                    preserve_native_type: false,
-                                                },
-                                            ],
-                                            params: { system_tool_type: "end_call" },
-                                        },
                                         end_call: {
                                             type: "system",
                                             name: "end_call",
@@ -3446,6 +3427,21 @@ describe("BranchesClient", () => {
                                             params: { system_tool_type: "end_call" },
                                         },
                                         language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                    preserve_native_type: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -3621,21 +3617,6 @@ describe("BranchesClient", () => {
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
                                     built_in_tools: {
-                                        transfer_to_agent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamic_variable: "user_name",
-                                                    value_path: "user.name",
-                                                    sanitize: false,
-                                                    preserve_native_type: false,
-                                                },
-                                            ],
-                                            params: { system_tool_type: "end_call" },
-                                        },
                                         end_call: {
                                             type: "system",
                                             name: "end_call",
@@ -3652,6 +3633,21 @@ describe("BranchesClient", () => {
                                             params: { system_tool_type: "end_call" },
                                         },
                                         language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                    preserve_native_type: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -3828,21 +3824,6 @@ describe("BranchesClient", () => {
                                     max_tokens: -1,
                                     tool_ids: ["tool_ids"],
                                     built_in_tools: {
-                                        transfer_to_agent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamic_variable: "user_name",
-                                                    value_path: "user.name",
-                                                    sanitize: false,
-                                                    preserve_native_type: false,
-                                                },
-                                            ],
-                                            params: { system_tool_type: "end_call" },
-                                        },
                                         end_call: {
                                             type: "system",
                                             name: "end_call",
@@ -3859,6 +3840,21 @@ describe("BranchesClient", () => {
                                             params: { system_tool_type: "end_call" },
                                         },
                                         language_detection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamic_variable: "user_name",
+                                                    value_path: "user.name",
+                                                    sanitize: false,
+                                                    preserve_native_type: false,
+                                                },
+                                            ],
+                                            params: { system_tool_type: "end_call" },
+                                        },
+                                        transfer_to_agent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -4179,23 +4175,6 @@ describe("BranchesClient", () => {
                         maxTokens: -1,
                         toolIds: ["tool_ids"],
                         builtInTools: {
-                            transferToAgent: {
-                                type: "system",
-                                name: "end_call",
-                                description: "",
-                                assignments: [
-                                    {
-                                        source: "response",
-                                        dynamicVariable: "user_name",
-                                        valuePath: "user.name",
-                                        sanitize: false,
-                                        preserveNativeType: false,
-                                    },
-                                ],
-                                params: {
-                                    systemToolType: "end_call",
-                                },
-                            },
                             endCall: {
                                 type: "system",
                                 name: "end_call",
@@ -4214,6 +4193,23 @@ describe("BranchesClient", () => {
                                 },
                             },
                             languageDetection: {
+                                type: "system",
+                                name: "end_call",
+                                description: "",
+                                assignments: [
+                                    {
+                                        source: "response",
+                                        dynamicVariable: "user_name",
+                                        valuePath: "user.name",
+                                        sanitize: false,
+                                        preserveNativeType: false,
+                                    },
+                                ],
+                                params: {
+                                    systemToolType: "end_call",
+                                },
+                            },
+                            transferToAgent: {
                                 type: "system",
                                 name: "end_call",
                                 description: "",
@@ -4420,7 +4416,6 @@ describe("BranchesClient", () => {
                     customLlmExtraBody: true,
                     enableConversationInitiationClientDataFromWebhook: true,
                     enableStartingWorkflowNodeIdFromClient: true,
-                    enableProcedureIdsFromClient: true,
                 },
                 workspaceOverrides: {
                     conversationInitiationClientDataWebhook: {
@@ -4479,8 +4474,7 @@ describe("BranchesClient", () => {
                     autoResolveAfterInactiveMinutes: 1,
                     notifiers: [
                         {
-                            type: "integration",
-                            connectionId: "connection_id",
+                            webhookId: "webhook_id",
                         },
                     ],
                 },
@@ -4708,23 +4702,6 @@ describe("BranchesClient", () => {
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
                                     builtInTools: {
-                                        transferToAgent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamicVariable: "user_name",
-                                                    valuePath: "user.name",
-                                                    sanitize: false,
-                                                    preserveNativeType: false,
-                                                },
-                                            ],
-                                            params: {
-                                                systemToolType: "end_call",
-                                            },
-                                        },
                                         endCall: {
                                             type: "system",
                                             name: "end_call",
@@ -4743,6 +4720,23 @@ describe("BranchesClient", () => {
                                             },
                                         },
                                         languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                    preserveNativeType: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -4950,23 +4944,6 @@ describe("BranchesClient", () => {
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
                                     builtInTools: {
-                                        transferToAgent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamicVariable: "user_name",
-                                                    valuePath: "user.name",
-                                                    sanitize: false,
-                                                    preserveNativeType: false,
-                                                },
-                                            ],
-                                            params: {
-                                                systemToolType: "end_call",
-                                            },
-                                        },
                                         endCall: {
                                             type: "system",
                                             name: "end_call",
@@ -4985,6 +4962,23 @@ describe("BranchesClient", () => {
                                             },
                                         },
                                         languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                    preserveNativeType: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",
@@ -5200,23 +5194,6 @@ describe("BranchesClient", () => {
                                     maxTokens: -1,
                                     toolIds: ["tool_ids"],
                                     builtInTools: {
-                                        transferToAgent: {
-                                            type: "system",
-                                            name: "end_call",
-                                            description: "",
-                                            assignments: [
-                                                {
-                                                    source: "response",
-                                                    dynamicVariable: "user_name",
-                                                    valuePath: "user.name",
-                                                    sanitize: false,
-                                                    preserveNativeType: false,
-                                                },
-                                            ],
-                                            params: {
-                                                systemToolType: "end_call",
-                                            },
-                                        },
                                         endCall: {
                                             type: "system",
                                             name: "end_call",
@@ -5235,6 +5212,23 @@ describe("BranchesClient", () => {
                                             },
                                         },
                                         languageDetection: {
+                                            type: "system",
+                                            name: "end_call",
+                                            description: "",
+                                            assignments: [
+                                                {
+                                                    source: "response",
+                                                    dynamicVariable: "user_name",
+                                                    valuePath: "user.name",
+                                                    sanitize: false,
+                                                    preserveNativeType: false,
+                                                },
+                                            ],
+                                            params: {
+                                                systemToolType: "end_call",
+                                            },
+                                        },
+                                        transferToAgent: {
                                             type: "system",
                                             name: "end_call",
                                             description: "",

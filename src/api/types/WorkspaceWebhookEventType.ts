@@ -4,6 +4,5 @@ export const WorkspaceWebhookEventType = {
     VoiceLibraryRemovalNotice: "voice_library_removal_notice",
     SpeechToText: "speech_to_text",
     AgentQa: "agent_qa",
-    Flows: "flows",
 } as const;
 export type WorkspaceWebhookEventType = (typeof WorkspaceWebhookEventType)[keyof typeof WorkspaceWebhookEventType];

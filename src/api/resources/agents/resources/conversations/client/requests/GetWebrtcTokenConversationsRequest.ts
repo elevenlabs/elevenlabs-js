@@ -6,8 +6,7 @@
  *         agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
  *         participantName: "participant_name",
  *         branchId: "branch_id",
- *         environment: "environment",
- *         debugEventsRequest: true
+ *         environment: "environment"
  *     }
  */
 export interface GetWebrtcTokenConversationsRequest {
@@ -19,6 +18,4 @@ export interface GetWebrtcTokenConversationsRequest {
     branchId?: string;
     /** The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'. */
     environment?: string;
-    /** Whether to enable debug events. Only available for users with editor access to the agent. */
-    debugEventsRequest?: boolean;
 }
