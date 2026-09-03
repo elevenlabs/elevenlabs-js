@@ -1,1 +1,1 @@
-export type { GroupsSearchRequest } from "./GroupsSearchRequest";
+export type { SearchGroupsRequest } from "./SearchGroupsRequest.js";

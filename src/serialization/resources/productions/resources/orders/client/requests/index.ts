@@ -1,1 +1,1 @@
-export { BodyUpdateOrderV1ProductionsOrdersOrderIdPatch } from "./BodyUpdateOrderV1ProductionsOrdersOrderIdPatch";
+export { BodyUpdateOrderV1ProductionsOrdersOrderIdPatch } from "./BodyUpdateOrderV1ProductionsOrdersOrderIdPatch.js";

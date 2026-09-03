@@ -1,2 +1,2 @@
-export * from "./HistoryListRequestSortDirection";
-export * from "./HistoryListRequestSource";
+export * from "./ListHistoryRequestSortDirection.js";
+export * from "./ListHistoryRequestSource.js";

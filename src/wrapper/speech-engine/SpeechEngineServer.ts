@@ -1,9 +1,10 @@
 import { createServer, type Server as HttpServer } from "node:http";
 import type { Duplex } from "node:stream";
-import WebSocket from "ws";
-import { isAbortError, type SpeechEngineCallbacks } from "./types";
-import { SpeechEngineSession } from "./SpeechEngineSession";
+import type WebSocket from "ws";
+import { WebSocketServer } from "ws";
 import { verifySpeechEngineJwt } from "./SpeechEngineResource";
+import { SpeechEngineSession } from "./SpeechEngineSession";
+import { isAbortError, type SpeechEngineCallbacks } from "./types";
 
 export interface SpeechEngineServerOptions extends SpeechEngineCallbacks {
     /**
@@ -22,8 +23,7 @@ export interface SpeechEngineServerOptions extends SpeechEngineCallbacks {
     apiKey?: string;
 
     /**
-     * The ID of the speech engine this server handles connections for.
-     * Populated automatically when created via `engine.listen()`.
+     * The ID of the speech engine this server handles connections for, when known.
      */
     engineId?: string;
 }
@@ -39,7 +39,7 @@ export interface SpeechEngineServerOptions extends SpeechEngineCallbacks {
  * `engine.attach()` instead.
  */
 export class SpeechEngineServer {
-    private wss: WebSocket.Server | null = null;
+    private wss: WebSocketServer | null = null;
     private httpServer: HttpServer | null = null;
     private options: SpeechEngineServerOptions;
 
@@ -71,8 +71,8 @@ export class SpeechEngineServer {
         if (!apiKey && !disableAuth) {
             throw new Error(
                 "SpeechEngine.Server requires an API key to verify incoming connections. " +
-                "Pass { apiKey: \"...\" } or set the ELEVENLABS_API_KEY environment variable. " +
-                "To run without authentication, pass { disableAuth: true } — but only behind an IP allowlist.",
+                    'Pass { apiKey: "..." } or set the ELEVENLABS_API_KEY environment variable. ' +
+                    "To run without authentication, pass { disableAuth: true } — but only behind an IP allowlist.",
             );
         }
 
@@ -82,16 +82,14 @@ export class SpeechEngineServer {
         if (disableAuth) {
             console.warn(
                 "[SpeechEngine] authentication is disabled — incoming connections will NOT be verified. " +
-                "Make sure the server is protected by an IP allowlist restricting traffic to ElevenLabs.",
+                    "Make sure the server is protected by an IP allowlist restricting traffic to ElevenLabs.",
             );
         }
 
         const httpServer = createServer();
-        const wss = new WebSocket.Server({ noServer: true });
+        const wss = new WebSocketServer({ noServer: true });
 
-        const verifyToken = disableAuth
-            ? null
-            : (token: string) => verifySpeechEngineJwt(token, apiKey as string);
+        const verifyToken = disableAuth ? null : (token: string) => verifySpeechEngineJwt(token, apiKey as string);
 
         httpServer.on("upgrade", (req, socket: Duplex, head) => {
             if (verifyToken) {

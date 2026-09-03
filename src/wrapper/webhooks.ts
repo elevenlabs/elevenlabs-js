@@ -1,6 +1,6 @@
 import { webcrypto as nodeWebcrypto } from "crypto";
-import { ElevenLabsError } from "../errors";
 import { WebhooksClient as Webhooks } from "../api/resources/webhooks/client/Client";
+import { ElevenLabsError } from "../errors";
 
 const crypto = globalThis.crypto ?? nodeWebcrypto;
 

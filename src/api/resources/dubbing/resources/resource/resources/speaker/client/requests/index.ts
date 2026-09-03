@@ -1,2 +1,0 @@
-export type { BodyCreateANewSpeakerV1DubbingResourceDubbingIdSpeakerPost } from "./BodyCreateANewSpeakerV1DubbingResourceDubbingIdSpeakerPost";
-export type { BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch } from "./BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIdSpeakerSpeakerIdPatch";

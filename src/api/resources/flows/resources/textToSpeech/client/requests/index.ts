@@ -1,1 +1,1 @@
-export type { TextToSpeechListRequest } from "./TextToSpeechListRequest";
+export type { ListTextToSpeechRequest } from "./ListTextToSpeechRequest.js";

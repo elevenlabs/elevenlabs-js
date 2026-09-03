@@ -1,2 +1,2 @@
-export type { AssetsListRequest } from "./AssetsListRequest";
-export type { BodyUploadAssetV1AssetsPost } from "./BodyUploadAssetV1AssetsPost";
+export type { BodyUploadAssetV1AssetsPost } from "./BodyUploadAssetV1AssetsPost.js";
+export type { ListAssetsRequest } from "./ListAssetsRequest.js";

@@ -1,0 +1,2 @@
+export { BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost } from "./BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost.js";
+export { BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost } from "./BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost.js";

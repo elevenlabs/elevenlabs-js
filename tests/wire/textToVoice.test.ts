@@ -4,50 +4,6 @@ import { ElevenLabsClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("TextToVoiceClient", () => {
-    test("create_previews", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { voice_description: "A sassy squeaky mouse" };
-        const rawResponseBody = {
-            previews: [
-                {
-                    audio_base_64: "audio_base_64",
-                    generated_voice_id: "generated_voice_id",
-                    media_type: "media_type",
-                    duration_secs: 1.1,
-                    language: "language",
-                },
-            ],
-            text: "text",
-        };
-
-        server
-            .mockEndpoint()
-            .post("/v1/text-to-voice/create-previews")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.textToVoice.createPreviews({
-            outputFormat: "mp3_22050_32",
-            voiceDescription: "A sassy squeaky mouse",
-        });
-        expect(response).toEqual({
-            previews: [
-                {
-                    audioBase64: "audio_base_64",
-                    generatedVoiceId: "generated_voice_id",
-                    mediaType: "media_type",
-                    durationSecs: 1.1,
-                    language: "language",
-                },
-            ],
-            text: "text",
-        });
-    });
-
     test("create", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

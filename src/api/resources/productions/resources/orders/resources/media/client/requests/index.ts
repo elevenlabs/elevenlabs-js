@@ -1,1 +1,1 @@
-export type { BodyRegisterMediaV1ProductionsOrdersOrderIdMediaPost } from "./BodyRegisterMediaV1ProductionsOrdersOrderIdMediaPost";
+export type { BodyRegisterMediaV1ProductionsOrdersOrderIdMediaPost } from "./BodyRegisterMediaV1ProductionsOrdersOrderIdMediaPost.js";

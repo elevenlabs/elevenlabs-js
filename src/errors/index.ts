@@ -1,2 +1,2 @@
-export { ElevenLabsError } from "./ElevenLabsError";
-export { ElevenLabsTimeoutError } from "./ElevenLabsTimeoutError";
+export { ElevenLabsError } from "./ElevenLabsError.js";
+export { ElevenLabsTimeoutError } from "./ElevenLabsTimeoutError.js";

@@ -1,3 +1,4 @@
+import type { Server as HttpServer } from "node:http";
 import type WebSocket from "ws";
 import type { SpeechEngineSession } from "./SpeechEngineSession";
 
@@ -101,6 +102,19 @@ export interface SpeechEngineCallbacks {
 
     /** Fired on protocol-level or WebSocket-level errors. */
     onError?(error: Error, session: SpeechEngineSession): void;
+}
+
+/**
+ * Options for `engine.attach()` / `elevenlabs.speechEngine.attach()`: the HTTP
+ * server and path to accept Speech Engine connections on, plus the session
+ * callbacks. Mirrors the `ws` library's `{ server, path }` options shape.
+ */
+export interface SpeechEngineAttachOptions extends SpeechEngineCallbacks {
+    /** HTTP server to handle WebSocket upgrades on. */
+    server: HttpServer;
+
+    /** URL path to accept Speech Engine connections at, e.g. "/api/speech-engine/ws". */
+    path: string;
 }
 
 // ---------------------------------------------------------------------------

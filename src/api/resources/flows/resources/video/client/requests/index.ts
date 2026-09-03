@@ -1,1 +1,1 @@
-export type { VideoListRequest } from "./VideoListRequest";
+export type { ListVideoRequest } from "./ListVideoRequest.js";

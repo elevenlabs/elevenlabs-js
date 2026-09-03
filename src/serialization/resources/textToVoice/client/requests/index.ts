@@ -1,4 +1,3 @@
-export { BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost } from "./BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost";
-export { VoiceDesignRequest } from "./VoiceDesignRequest";
-export { VoiceDesignRequestModel } from "./VoiceDesignRequestModel";
-export { VoiceRemixRequestModel } from "./VoiceRemixRequestModel";
+export { BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost } from "./BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost.js";
+export { VoiceDesignRequestModel } from "./VoiceDesignRequestModel.js";
+export { VoiceRemixRequestModel } from "./VoiceRemixRequestModel.js";

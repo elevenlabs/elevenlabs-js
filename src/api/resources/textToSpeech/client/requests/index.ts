@@ -1,4 +1,4 @@
-export type { BodyTextToSpeechFull } from "./BodyTextToSpeechFull";
-export type { BodyTextToSpeechFullWithTimestamps } from "./BodyTextToSpeechFullWithTimestamps";
-export type { StreamTextToSpeechRequest } from "./StreamTextToSpeechRequest";
-export type { StreamTextToSpeechWithTimestampsRequest } from "./StreamTextToSpeechWithTimestampsRequest";
+export type { BodyTextToSpeechFull } from "./BodyTextToSpeechFull.js";
+export type { BodyTextToSpeechFullWithTimestamps } from "./BodyTextToSpeechFullWithTimestamps.js";
+export type { StreamTextToSpeechRequest } from "./StreamTextToSpeechRequest.js";
+export type { StreamTextToSpeechWithTimestampsRequest } from "./StreamTextToSpeechWithTimestampsRequest.js";

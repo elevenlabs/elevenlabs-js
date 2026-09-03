@@ -1,0 +1,8 @@
+export { BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost } from "./BodyBulkDeleteKnowledgeBaseDocumentsV1ConvaiKnowledgeBaseBulkDeletePost.js";
+export { BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost } from "./BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost.js";
+export { BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost } from "./BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost.js";
+export { BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost } from "./BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost.js";
+export { BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost } from "./BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost.js";
+export { BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost } from "./BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost.js";
+export { BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost } from "./BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost.js";
+export { BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch } from "./BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch.js";

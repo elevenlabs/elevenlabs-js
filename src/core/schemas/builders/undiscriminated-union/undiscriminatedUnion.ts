@@ -5,10 +5,10 @@ import {
     type SchemaOptions,
     SchemaType,
     type ValidationError,
-} from "../../Schema";
-import { maybeSkipValidation } from "../../utils/maybeSkipValidation";
-import { getSchemaUtils } from "../schema-utils/index";
-import type { inferParsedUnidiscriminatedUnionSchema, inferRawUnidiscriminatedUnionSchema } from "./types";
+} from "../../Schema.js";
+import { maybeSkipValidation } from "../../utils/maybeSkipValidation.js";
+import { getSchemaUtils } from "../schema-utils/index.js";
+import type { inferParsedUnidiscriminatedUnionSchema, inferRawUnidiscriminatedUnionSchema } from "./types.js";
 
 export function undiscriminatedUnion<Schemas extends [Schema<any, any>, ...Schema<any, any>[]]>(
     schemas: Schemas,

@@ -1,1 +1,1 @@
-export * from "./core/exports";
+export * from "./core/exports.js";

@@ -1,3 +1,3 @@
-export * as requests from "./requests";
-export * from "./requests/client/requests";
-export * from "./requests/types";
+export * from "./requests/client/requests/index.js";
+export * as requests from "./requests/index.js";
+export * from "./requests/types/index.js";

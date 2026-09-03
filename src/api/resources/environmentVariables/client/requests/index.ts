@@ -1,2 +1,2 @@
-export type { EnvironmentVariablesListRequest } from "./EnvironmentVariablesListRequest";
-export type { UpdateEnvironmentVariableRequest } from "./UpdateEnvironmentVariableRequest";
+export type { ListEnvironmentVariablesRequest } from "./ListEnvironmentVariablesRequest.js";
+export type { UpdateEnvironmentVariableRequest } from "./UpdateEnvironmentVariableRequest.js";

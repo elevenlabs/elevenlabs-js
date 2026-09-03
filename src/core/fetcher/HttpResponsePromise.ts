@@ -1,4 +1,4 @@
-import type { WithRawResponse } from "./RawResponse";
+import type { WithRawResponse } from "./RawResponse.js";
 
 /**
  * A promise that returns the parsed response and lets you retrieve the raw response too.

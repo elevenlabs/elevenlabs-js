@@ -1,26 +1,29 @@
 import { createHash, createHmac } from "node:crypto";
-import type { IncomingMessage, Server as HttpServer } from "node:http";
+import type { IncomingMessage } from "node:http";
 import type { Duplex } from "node:stream";
-import WebSocket from "ws";
+import type WebSocket from "ws";
+import { WebSocketServer } from "ws";
+import type * as ElevenLabs from "../../api/types";
 import type { BaseClientOptions, NormalizedClientOptions } from "../../BaseClient";
 import * as core from "../../core";
-import type * as ElevenLabs from "../../api/types";
-import { isAbortError, type SpeechEngineCallbacks } from "./types";
-import { SpeechEngineSession } from "./SpeechEngineSession";
 import { SpeechEngineAttachment } from "./SpeechEngineAttachment";
+import { SpeechEngineSession } from "./SpeechEngineSession";
+import { isAbortError, type SpeechEngineAttachOptions, type SpeechEngineCallbacks } from "./types";
 
 /**
  * Represents a speech engine instance. Returned by `elevenlabs.speechEngine.get()`.
  *
- * Use `engine.attach(httpServer, path, callbacks)` to integrate with an existing
- * HTTP server, or drop down to `engine.verifyRequest()` and `engine.createSession()`
- * for full control.
+ * Use `engine.attach({ server, path, ...callbacks })` to integrate with an
+ * existing HTTP server, or drop down to `engine.verifyRequest()` and
+ * `engine.createSession()` for full control.
  *
  * @example
  * ```typescript
  * const engine = await elevenlabs.speechEngine.get("seng_123");
  *
- * engine.attach(httpServer, "/api/speech-engine/ws", {
+ * engine.attach({
+ *     server: httpServer,
+ *     path: "/api/speech-engine/ws",
  *     async onTranscript(transcript, signal, session) {
  *         session.sendResponse(await llm.generate(transcript, { signal }));
  *     },
@@ -66,7 +69,9 @@ export class SpeechEngineResource {
      *
      * @example
      * ```typescript
-     * engine.attach(httpServer, "/api/speech-engine/ws", {
+     * engine.attach({
+     *     server: httpServer,
+     *     path: "/api/speech-engine/ws",
      *     async onTranscript(transcript, signal, session) {
      *         const stream = await openai.responses.create({ model: "gpt-4o", input: transcript, stream: true }, { signal });
      *         session.sendResponse(stream);
@@ -74,11 +79,8 @@ export class SpeechEngineResource {
      * });
      * ```
      */
-    attach(
-        httpServer: HttpServer,
-        path: string,
-        handler: SpeechEngineCallbacks,
-    ): SpeechEngineAttachment {
+    attach(options: SpeechEngineAttachOptions): SpeechEngineAttachment {
+        const { server: httpServer, path, ...handler } = options;
         const debug = handler.debug ?? false;
         const disableAuth = handler.disableAuth ?? false;
         const log = debug ? (...args: unknown[]) => console.log("[SpeechEngine]", ...args) : () => {};
@@ -86,11 +88,11 @@ export class SpeechEngineResource {
         if (disableAuth) {
             console.warn(
                 "[SpeechEngine] authentication is disabled on attach() — incoming connections will NOT be verified. " +
-                "Make sure the server is protected by either IP allowlist restricting traffic to ElevenLabs or using custom header values.",
+                    "Make sure the server is protected by either IP allowlist restricting traffic to ElevenLabs or using custom header values.",
             );
         }
 
-        const wss = new WebSocket.Server({ noServer: true });
+        const wss = new WebSocketServer({ noServer: true });
 
         const upgradeListener = async (req: IncomingMessage, socket: Duplex, head: Buffer) => {
             const url = new URL(req.url ?? "/", `http://${req.headers.host}`);
@@ -103,7 +105,7 @@ export class SpeechEngineResource {
 
             if (disableAuth) {
                 log("auth disabled, upgrading connection without verification");
-            } else if (!await this.verifyRequest(req)) {
+            } else if (!(await this.verifyRequest(req))) {
                 // verifyRequest returned false — get the detailed reason for debug logging
                 const reason = await this.getVerificationFailure(req);
                 log(`rejected connection — ${reason}`);
@@ -146,9 +148,9 @@ export class SpeechEngineResource {
     }
 
     /** @internal Returns `null` when the request is valid, or a human-readable reason when rejected. */
-    private async getVerificationFailure(
-        req: { headers: Record<string, string | string[] | undefined> },
-    ): Promise<string | null> {
+    private async getVerificationFailure(req: {
+        headers: Record<string, string | string[] | undefined>;
+    }): Promise<string | null> {
         const apiKey = await core.Supplier.get(this._options.apiKey);
         if (!apiKey) {
             return "no API key configured on the client";
@@ -211,10 +213,7 @@ function base64UrlDecode(input: string): Buffer {
 }
 
 /** @internal — exported for testing only */
-export function verifySpeechEngineJwt(
-    value: string,
-    apiKey: string,
-): Record<string, unknown> {
+export function verifySpeechEngineJwt(value: string, apiKey: string): Record<string, unknown> {
     let token = value.trim();
     if (token.toLowerCase().startsWith("bearer ")) {
         token = token.slice(7).trim();
@@ -238,9 +237,7 @@ export function verifySpeechEngineJwt(
     const trimmedKey = apiKey.trim();
     const secret = createHash("sha256").update(trimmedKey, "utf-8").digest();
 
-    const expectedSignature = createHmac("sha256", secret)
-        .update(`${headerB64}.${payloadB64}`)
-        .digest();
+    const expectedSignature = createHmac("sha256", secret).update(`${headerB64}.${payloadB64}`).digest();
 
     const actualSignature = base64UrlDecode(signatureB64);
 

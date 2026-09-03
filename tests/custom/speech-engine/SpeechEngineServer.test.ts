@@ -69,7 +69,10 @@ describe("SpeechEngineServer", () => {
         });
 
         const ws = trackClientWs(new WebSocket(`ws://127.0.0.1:${port}`));
-        await new Promise<void>((r, e) => { ws.on("open", r); ws.on("error", e); });
+        await new Promise<void>((r, e) => {
+            ws.on("open", r);
+            ws.on("error", e);
+        });
 
         ws.send(JSON.stringify({ type: "init", conversation_id: "conv_1" }));
 
@@ -107,7 +110,10 @@ describe("SpeechEngineServer", () => {
             ws.on("message", (data) => resolve(data.toString()));
         });
 
-        await new Promise<void>((r, e) => { ws.on("open", r); ws.on("error", e); });
+        await new Promise<void>((r, e) => {
+            ws.on("open", r);
+            ws.on("error", e);
+        });
 
         ws.send(
             JSON.stringify({

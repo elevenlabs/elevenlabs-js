@@ -1,4 +1,4 @@
-import { toQueryString } from "../url/qs";
+import { toQueryString } from "../url/qs.js";
 
 export function encodeAsFormParameter(value: unknown): Record<string, string> {
     const stringified = toQueryString(value, { encode: false });

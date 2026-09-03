@@ -1,1 +1,1 @@
-export { BodyUpdateStudioProjectV1StudioProjectsProjectIdPost } from "./BodyUpdateStudioProjectV1StudioProjectsProjectIdPost";
+export { BodyUpdateStudioProjectV1StudioProjectsProjectIdPost } from "./BodyUpdateStudioProjectV1StudioProjectsProjectIdPost.js";

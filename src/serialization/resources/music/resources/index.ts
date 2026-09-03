@@ -1,6 +1,6 @@
-export * as compositionPlan from "./compositionPlan";
-export * from "./compositionPlan/client/requests";
-export * from "./compositionPlan/types";
-export * as finetunes from "./finetunes";
-export * from "./finetunes/client/requests";
-export * from "./finetunes/types";
+export * from "./compositionPlan/client/requests/index.js";
+export * as compositionPlan from "./compositionPlan/index.js";
+export * from "./compositionPlan/types/index.js";
+export * from "./finetunes/client/requests/index.js";
+export * as finetunes from "./finetunes/index.js";
+export * from "./finetunes/types/index.js";

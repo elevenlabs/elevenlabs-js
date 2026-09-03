@@ -1,10 +1,9 @@
-import type { Server as HttpServer } from "node:http";
+import { SpeechEngineClient } from "../../api/resources/speechEngine/client/Client";
 import type { CreateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/CreateSpeechEngineRequest";
 import type { UpdateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/UpdateSpeechEngineRequest";
-import { SpeechEngineClient } from "../../api/resources/speechEngine/client/Client";
 import type { SpeechEngineAttachment } from "./SpeechEngineAttachment";
 import { SpeechEngineResource } from "./SpeechEngineResource";
-import type { SpeechEngineCallbacks } from "./types";
+import type { SpeechEngineAttachOptions } from "./types";
 
 /**
  * Client for the Speech Engine resource. Accessible via `elevenlabs.speechEngine`.
@@ -21,7 +20,9 @@ import type { SpeechEngineCallbacks } from "./types";
  *     name: "My engine",
  *     speechEngine: { wsUrl: "wss://your-server.com/ws" },
  * });
- * engine.attach(httpServer, "/api/speech-engine/ws", {
+ * engine.attach({
+ *     server: httpServer,
+ *     path: "/api/speech-engine/ws",
  *     async onTranscript(transcript, signal, session) {
  *         session.sendResponse(await llm.generate(transcript, { signal }));
  *     },
@@ -42,7 +43,9 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
      *     name: "My engine",
      *     speechEngine: { wsUrl: "wss://your-server.com/ws" },
      * });
-     * engine.attach(httpServer, "/api/speech-engine/ws", {
+     * engine.attach({
+     *     server: httpServer,
+     *     path: "/api/speech-engine/ws",
      *     async onTranscript(transcript, signal, session) {
      *         session.sendResponse(await llm.generate(transcript, { signal }));
      *     },
@@ -68,7 +71,9 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
      * @example
      * ```typescript
      * const engine = await elevenlabs.speechEngine.get("seng_123");
-     * engine.attach(httpServer, "/api/speech-engine/ws", {
+     * engine.attach({
+     *     server: httpServer,
+     *     path: "/api/speech-engine/ws",
      *     async onTranscript(transcript, signal, session) {
      *         session.sendResponse(await llm.generate(transcript, { signal }));
      *     },
@@ -94,7 +99,9 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
      * @example
      * ```typescript
      * const engine = await elevenlabs.speechEngine.update("seng_123", { name: "Renamed" });
-     * engine.attach(httpServer, "/api/speech-engine/ws", {
+     * engine.attach({
+     *     server: httpServer,
+     *     path: "/api/speech-engine/ws",
      *     async onTranscript(transcript, signal, session) {
      *         session.sendResponse(await llm.generate(transcript, { signal }));
      *     },
@@ -118,19 +125,16 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
      *
      * @example
      * ```typescript
-     * elevenlabs.speechEngine.attach("seng_123", httpServer, "/api/se/ws", {
+     * elevenlabs.speechEngine.attach("seng_123", {
+     *     server: httpServer,
+     *     path: "/api/se/ws",
      *     async onTranscript(transcript, signal, session) {
      *         session.sendResponse(await llm.generate(transcript, { signal }));
      *     },
      * });
      * ```
      */
-    attach(
-        engineId: string,
-        httpServer: HttpServer,
-        path: string,
-        handler: SpeechEngineCallbacks,
-    ): SpeechEngineAttachment {
-        return new SpeechEngineResource(engineId, this._options).attach(httpServer, path, handler);
+    attach(engineId: string, options: SpeechEngineAttachOptions): SpeechEngineAttachment {
+        return new SpeechEngineResource(engineId, this._options).attach(options);
     }
 }

@@ -1,1 +1,0 @@
-export { PatchConvAiSettingsRequest } from "./PatchConvAiSettingsRequest";

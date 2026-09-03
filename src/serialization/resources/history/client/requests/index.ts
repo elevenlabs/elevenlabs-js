@@ -1,1 +1,1 @@
-export { DownloadHistoryRequest } from "./DownloadHistoryRequest";
+export { DownloadHistoryRequest } from "./DownloadHistoryRequest.js";

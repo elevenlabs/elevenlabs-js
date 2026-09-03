@@ -10,5 +10,6 @@ export const OrderState = {
     Cancelling: "cancelling",
     Cancelled: "cancelled",
     Expired: "expired",
+    Merged: "merged",
 } as const;
 export type OrderState = (typeof OrderState)[keyof typeof OrderState];

@@ -1,2 +1,2 @@
-export type { BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost } from "./BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost";
-export type { LanguageListRequest } from "./LanguageListRequest";
+export type { BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost } from "./BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost.js";
+export type { ListLanguageRequest } from "./ListLanguageRequest.js";

@@ -4,7 +4,7 @@
  * One segment of a source transcript.
  */
 export interface DubbingTranscriptSegment {
-    /** Stable identifier of the segment. */
+    /** Stable identifier of the segment, used to address it in edit requests. */
     id: string;
     /** The transcribed text of the segment. */
     text: string;
@@ -14,6 +14,6 @@ export interface DubbingTranscriptSegment {
     startS: number;
     /** End time of the segment, in seconds. */
     endS: number;
-    /** The caller-supplied external id for this segment, if one was provided. */
+    /** The caller-supplied external ID for this segment, if one was provided. */
     externalId?: string;
 }

@@ -1,4 +1,4 @@
-export * as ivc from "./ivc";
-export * from "./ivc/types";
-export * as pvc from "./pvc";
-export * from "./pvc/client/requests";
+export * as ivc from "./ivc/index.js";
+export * from "./ivc/types/index.js";
+export * from "./pvc/client/requests/index.js";
+export * as pvc from "./pvc/index.js";

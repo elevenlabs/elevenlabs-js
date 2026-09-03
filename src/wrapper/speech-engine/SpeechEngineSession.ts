@@ -1,8 +1,8 @@
 import { EventEmitter } from "node:events";
 import WebSocket from "ws";
 import {
-    isAbortError,
     type IncomingMessage,
+    isAbortError,
     type SpeechEngineEventMap,
     type SpeechEngineEventName,
     type WebSocketLike,
@@ -52,26 +52,17 @@ export class SpeechEngineSession {
     // Event emitter interface
     // -----------------------------------------------------------------------
 
-    on<E extends SpeechEngineEventName>(
-        event: E,
-        listener: (...args: SpeechEngineEventMap[E]) => void,
-    ): this {
+    on<E extends SpeechEngineEventName>(event: E, listener: (...args: SpeechEngineEventMap[E]) => void): this {
         this.emitter.on(event, listener as (...args: any[]) => void);
         return this;
     }
 
-    off<E extends SpeechEngineEventName>(
-        event: E,
-        listener: (...args: SpeechEngineEventMap[E]) => void,
-    ): this {
+    off<E extends SpeechEngineEventName>(event: E, listener: (...args: SpeechEngineEventMap[E]) => void): this {
         this.emitter.off(event, listener as (...args: any[]) => void);
         return this;
     }
 
-    once<E extends SpeechEngineEventName>(
-        event: E,
-        listener: (...args: SpeechEngineEventMap[E]) => void,
-    ): this {
+    once<E extends SpeechEngineEventName>(event: E, listener: (...args: SpeechEngineEventMap[E]) => void): this {
         this.emitter.once(event, listener as (...args: any[]) => void);
         return this;
     }
@@ -95,8 +86,8 @@ export class SpeechEngineSession {
         if (!this.inTranscriptHandler) {
             console.warn(
                 "[SpeechEngine] sendResponse() called outside of an onTranscript handler. " +
-                "Responses can only be sent in reply to a user transcript. " +
-                "To have the agent speak first, set a first message in your Speech Engine conversation config on the client.",
+                    "Responses can only be sent in reply to a user transcript. " +
+                    "To have the agent speak first, set a first message in your Speech Engine conversation config on the client.",
             );
             return Promise.resolve();
         }
@@ -150,10 +141,7 @@ export class SpeechEngineSession {
                 const msg = JSON.parse(data.toString()) as IncomingMessage;
                 this.handleMessage(msg);
             } catch (err) {
-                this.emitter.emit(
-                    "error",
-                    err instanceof Error ? err : new Error(String(err)),
-                );
+                this.emitter.emit("error", err instanceof Error ? err : new Error(String(err)));
             }
         });
 
@@ -179,7 +167,11 @@ export class SpeechEngineSession {
             }
 
             case "user_transcript": {
-                if (msg.event_id !== undefined && msg.event_id === this.currentEventId && this.currentAbortController !== null) {
+                if (
+                    msg.event_id !== undefined &&
+                    msg.event_id === this.currentEventId &&
+                    this.currentAbortController !== null
+                ) {
                     this.log(`skipping duplicate transcript, event_id=${msg.event_id}`);
                     break;
                 }
@@ -187,7 +179,9 @@ export class SpeechEngineSession {
                 const wasActive = this.currentAbortController !== null;
                 this.abortCurrent();
                 if (wasActive) {
-                    this.log(`interrupted: aborting previous response (event_id=${this.currentEventId}) for new transcript (event_id=${msg.event_id})`);
+                    this.log(
+                        `interrupted: aborting previous response (event_id=${this.currentEventId}) for new transcript (event_id=${msg.event_id})`,
+                    );
                 }
                 this.currentAbortController = new AbortController();
                 this.currentEventId = msg.event_id;
@@ -266,7 +260,11 @@ export class SpeechEngineSession {
         // OpenAI Chat Completions API: { choices: [{ delta: { content: "text" } }] }
         if (Array.isArray(event.choices)) {
             const content = (event.choices[0] as Record<string, unknown>)?.delta;
-            if (typeof content === "object" && content !== null && typeof (content as Record<string, unknown>).content === "string") {
+            if (
+                typeof content === "object" &&
+                content !== null &&
+                typeof (content as Record<string, unknown>).content === "string"
+            ) {
                 return (content as Record<string, unknown>).content as string;
             }
         }

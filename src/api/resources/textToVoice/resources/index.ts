@@ -1,1 +1,1 @@
-export * as preview from "./preview";
+export * as preview from "./preview/index.js";

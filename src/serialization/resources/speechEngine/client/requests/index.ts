@@ -1,2 +1,2 @@
-export { CreateSpeechEngineRequest } from "./CreateSpeechEngineRequest";
-export { UpdateSpeechEngineRequest } from "./UpdateSpeechEngineRequest";
+export { CreateSpeechEngineRequest } from "./CreateSpeechEngineRequest.js";
+export { UpdateSpeechEngineRequest } from "./UpdateSpeechEngineRequest.js";

@@ -1,1 +1,1 @@
-export type { AccentsGetRequest } from "./AccentsGetRequest";
+export type { GetAccentsRequest } from "./GetAccentsRequest.js";

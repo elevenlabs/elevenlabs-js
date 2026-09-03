@@ -1,4 +1,4 @@
-export type { BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost";
-export type { BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost";
-export type { BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch } from "./BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch";
-export type { PronunciationDictionariesListRequest } from "./PronunciationDictionariesListRequest";
+export type { BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost.js";
+export type { BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost } from "./BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost.js";
+export type { BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch } from "./BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdPatch.js";
+export type { ListPronunciationDictionariesRequest } from "./ListPronunciationDictionariesRequest.js";

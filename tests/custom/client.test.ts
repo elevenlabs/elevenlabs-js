@@ -1,9 +1,9 @@
-import { describe, it } from "@jest/globals";
-import { ElevenLabsClient, play, stream } from "../../src";
-import { Readable } from "node:stream";
+import crypto from "node:crypto";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import crypto from "node:crypto";
+import { Readable } from "node:stream";
+import { describe, it } from "@jest/globals";
+import { ElevenLabsClient, play } from "../../src";
 
 const IN_GITHUB = process.env.GITHUB_ACTIONS !== undefined;
 const DEFAULT_VOICE = "eLDc7xhWxG2FElT3kUTj";
@@ -135,7 +135,7 @@ describe("ElevenLabs API Tests", () => {
     });
 
     describe("textToVoice", () => {
-        it("createPreviews", async () => {
+        it("design", async () => {
             const client = new ElevenLabsClient();
 
             const description =
@@ -143,7 +143,7 @@ describe("ElevenLabs API Tests", () => {
             const sampleText =
                 "This is a test message that needs to be at least one hundred characters long to meet the API requirements. Here it is.";
 
-            const previews = await client.textToVoice.createPreviews({
+            const previews = await client.textToVoice.design({
                 voiceDescription: description,
                 text: sampleText,
             });

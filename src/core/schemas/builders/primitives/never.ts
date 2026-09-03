@@ -1,5 +1,5 @@
-import { type Schema, SchemaType } from "../../Schema";
-import { createIdentitySchemaCreator } from "../../utils/createIdentitySchemaCreator";
+import { type Schema, SchemaType } from "../../Schema.js";
+import { createIdentitySchemaCreator } from "../../utils/createIdentitySchemaCreator.js";
 
 export const never: () => Schema<never, never> = createIdentitySchemaCreator<never>(
     SchemaType.NEVER,
