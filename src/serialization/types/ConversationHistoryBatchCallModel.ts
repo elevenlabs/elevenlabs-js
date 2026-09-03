@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { BatchCallingCampaignInformation } from "./BatchCallingCampaignInformation.js";
 
 export const ConversationHistoryBatchCallModel: core.serialization.ObjectSchema<
     serializers.ConversationHistoryBatchCallModel.Raw,
@@ -10,11 +11,13 @@ export const ConversationHistoryBatchCallModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     batchCallId: core.serialization.property("batch_call_id", core.serialization.string()),
     batchCallRecipientId: core.serialization.property("batch_call_recipient_id", core.serialization.string()),
+    campaign: BatchCallingCampaignInformation.optional(),
 });
 
 export declare namespace ConversationHistoryBatchCallModel {
     export interface Raw {
         batch_call_id: string;
         batch_call_recipient_id: string;
+        campaign?: BatchCallingCampaignInformation.Raw | null;
     }
 }

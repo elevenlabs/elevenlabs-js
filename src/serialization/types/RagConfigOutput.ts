@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { EmbeddingModelEnum } from "./EmbeddingModelEnum.js";
+import { KnowledgeBaseToolInfo } from "./KnowledgeBaseToolInfo.js";
 
 export const RagConfigOutput: core.serialization.ObjectSchema<
     serializers.RagConfigOutput.Raw,
@@ -22,6 +23,7 @@ export const RagConfigOutput: core.serialization.ObjectSchema<
         "query_rewrite_prompt_override",
         core.serialization.string().optional(),
     ),
+    knowledgeBaseToolInfo: core.serialization.property("knowledge_base_tool_info", KnowledgeBaseToolInfo.optional()),
 });
 
 export declare namespace RagConfigOutput {
@@ -33,5 +35,6 @@ export declare namespace RagConfigOutput {
         max_retrieved_rag_chunks_count?: number | null;
         num_candidates?: number | null;
         query_rewrite_prompt_override?: string | null;
+        knowledge_base_tool_info?: KnowledgeBaseToolInfo.Raw | null;
     }
 }

@@ -21,7 +21,7 @@ export namespace SystemToolConfigInputParams {
         systemToolType: "end_call";
     }
 
-    export interface EndProcedure extends ElevenLabs.EndProcedureToolConfigInput {
+    export interface EndProcedure extends ElevenLabs.EndProcedureToolConfig {
         systemToolType: "end_procedure";
     }
 
@@ -49,7 +49,7 @@ export namespace SystemToolConfigInputParams {
         systemToolType: "skip_turn";
     }
 
-    export interface StartProcedure extends ElevenLabs.StartProcedureToolConfigInput {
+    export interface StartProcedure extends ElevenLabs.StartProcedureToolConfig {
         systemToolType: "start_procedure";
     }
 

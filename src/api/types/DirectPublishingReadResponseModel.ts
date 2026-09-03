@@ -55,4 +55,5 @@ export interface DirectPublishingReadResponseModel {
     voiceId?: string;
     canUseAssistant?: boolean;
     isVoiceChangerOn?: boolean;
+    restrictedToUserEmailDomains?: string[];
 }

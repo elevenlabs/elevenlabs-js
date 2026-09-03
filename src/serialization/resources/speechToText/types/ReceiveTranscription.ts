@@ -6,8 +6,6 @@ import type * as serializers from "../../../index.js";
 import { CommittedTranscript } from "../../../types/CommittedTranscript.js";
 import { CommittedTranscriptEntities } from "../../../types/CommittedTranscriptEntities.js";
 import { CommittedTranscriptWithTimestamps } from "../../../types/CommittedTranscriptWithTimestamps.js";
-import { FinalTranscript } from "../../../types/FinalTranscript.js";
-import { FinalTranscriptWithTimestamps } from "../../../types/FinalTranscriptWithTimestamps.js";
 import { PartialTranscript } from "../../../types/PartialTranscript.js";
 import { ScribeAuthError } from "../../../types/ScribeAuthError.js";
 import { ScribeChunkSizeExceededError } from "../../../types/ScribeChunkSizeExceededError.js";
@@ -23,6 +21,7 @@ import { ScribeSessionTimeLimitExceededError } from "../../../types/ScribeSessio
 import { ScribeThrottledError } from "../../../types/ScribeThrottledError.js";
 import { ScribeTranscriberError } from "../../../types/ScribeTranscriberError.js";
 import { ScribeUnacceptedTermsError } from "../../../types/ScribeUnacceptedTermsError.js";
+import { ScribeWarning } from "../../../types/ScribeWarning.js";
 import { SessionStarted } from "../../../types/SessionStarted.js";
 
 export const ReceiveTranscription: core.serialization.Schema<
@@ -31,11 +30,10 @@ export const ReceiveTranscription: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([
     SessionStarted,
     PartialTranscript,
-    FinalTranscript,
-    FinalTranscriptWithTimestamps,
     CommittedTranscript,
     CommittedTranscriptWithTimestamps,
     CommittedTranscriptEntities,
+    ScribeWarning,
     ScribeError,
     ScribeAuthError,
     ScribeQuotaExceededError,
@@ -56,11 +54,10 @@ export declare namespace ReceiveTranscription {
     export type Raw =
         | SessionStarted.Raw
         | PartialTranscript.Raw
-        | FinalTranscript.Raw
-        | FinalTranscriptWithTimestamps.Raw
         | CommittedTranscript.Raw
         | CommittedTranscriptWithTimestamps.Raw
         | CommittedTranscriptEntities.Raw
+        | ScribeWarning.Raw
         | ScribeError.Raw
         | ScribeAuthError.Raw
         | ScribeQuotaExceededError.Raw

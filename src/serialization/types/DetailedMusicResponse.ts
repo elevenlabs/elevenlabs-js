@@ -14,6 +14,10 @@ export const DetailedMusicResponse: core.serialization.ObjectSchema<
     compositionPlan: core.serialization.property("composition_plan", DetailedMusicResponseCompositionPlan),
     songMetadata: core.serialization.property("song_metadata", SongMetadata),
     wordsTimestamps: core.serialization.property("words_timestamps", core.serialization.list(WordTimestamp).optional()),
+    waveformVisual: core.serialization.property(
+        "waveform_visual",
+        core.serialization.list(core.serialization.number()).optional(),
+    ),
 });
 
 export declare namespace DetailedMusicResponse {
@@ -21,5 +25,6 @@ export declare namespace DetailedMusicResponse {
         composition_plan: DetailedMusicResponseCompositionPlan.Raw;
         song_metadata: SongMetadata.Raw;
         words_timestamps?: WordTimestamp.Raw[] | null;
+        waveform_visual?: number[] | null;
     }
 }

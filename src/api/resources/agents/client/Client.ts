@@ -32,6 +32,7 @@ import { SipTrunkClient } from "../resources/sipTrunk/client/Client.js";
 import { SummariesClient } from "../resources/summaries/client/Client.js";
 import { TestsClient } from "../resources/tests/client/Client.js";
 import { ToolsClient } from "../resources/tools/client/Client.js";
+import { TriageTicketsClient } from "../resources/triageTickets/client/Client.js";
 import { TwilioClient } from "../resources/twilio/client/Client.js";
 import { UsersClient } from "../resources/users/client/Client.js";
 import { VersionsClient } from "../resources/versions/client/Client.js";
@@ -57,6 +58,7 @@ export class AgentsClient {
     protected _knowledgeBase: KnowledgeBaseClient | undefined;
     protected _tests: TestsClient | undefined;
     protected _users: UsersClient | undefined;
+    protected _triageTickets: TriageTicketsClient | undefined;
     protected _phoneNumbers: PhoneNumbersClient | undefined;
     protected _llmUsage: LlmUsageClient | undefined;
     protected _llm: LlmClient | undefined;
@@ -118,6 +120,10 @@ export class AgentsClient {
 
     public get users(): UsersClient {
         return (this._users ??= new UsersClient(this._options));
+    }
+
+    public get triageTickets(): TriageTicketsClient {
+        return (this._triageTickets ??= new TriageTicketsClient(this._options));
     }
 
     public get phoneNumbers(): PhoneNumbersClient {
@@ -567,6 +573,7 @@ export class AgentsClient {
      *         archived: true,
      *         showOnlyOwnedAgents: true,
      *         createdByUserId: "created_by_user_id",
+     *         tags: ["tags"],
      *         sortDirection: "asc",
      *         sortBy: "name",
      *         cursor: "cursor"
@@ -583,14 +590,24 @@ export class AgentsClient {
         request: ElevenLabs.ListAgentsRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentsPageResponseModel>> {
-        const { pageSize, search, archived, showOnlyOwnedAgents, createdByUserId, sortDirection, sortBy, cursor } =
-            request;
+        const {
+            pageSize,
+            search,
+            archived,
+            showOnlyOwnedAgents,
+            createdByUserId,
+            tags,
+            sortDirection,
+            sortBy,
+            cursor,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             page_size: pageSize,
             search,
             archived,
             show_only_owned_agents: showOnlyOwnedAgents,
             created_by_user_id: createdByUserId,
+            tags,
             sort_direction:
                 sortDirection != null
                     ? serializers.SortDirection.jsonOrThrow(sortDirection, {

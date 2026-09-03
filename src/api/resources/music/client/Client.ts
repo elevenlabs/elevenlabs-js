@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClie
 import { type NormalizedClientOptions, normalizeClientOptions } from "../../../../BaseClient.js";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
 import * as core from "../../../../core/index.js";
+import { toJson } from "../../../../core/json.js";
 import { mergeAdditionalBodyParameters } from "../../../../core/requestBody.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
@@ -82,7 +83,7 @@ export class MusicClient {
         if (request.modelId != null) {
             _body.append(
                 "model_id",
-                serializers.VideoToMusicMusicRequestModelId.jsonOrThrow(request.modelId, {
+                serializers.MusicModelId.jsonOrThrow(request.modelId, {
                     unrecognizedObjectKeys: "strip",
                     omitUndefined: true,
                 }),
@@ -532,11 +533,24 @@ export class MusicClient {
         const _body = await core.newFormData();
         await _body.appendFile("file", request.file);
         if (request.extractCompositionPlan != null) {
-            _body.append("extract_composition_plan", request.extractCompositionPlan);
+            _body.append(
+                "extract_composition_plan",
+                (() => {
+                    const mapped = serializers.UploadMusicRequestExtractCompositionPlan.jsonOrThrow(
+                        request.extractCompositionPlan,
+                        { unrecognizedObjectKeys: "strip", omitUndefined: true },
+                    );
+                    return typeof mapped === "string" ? mapped : toJson(mapped);
+                })(),
+            );
         }
 
         if (request.withTimestamps != null) {
             _body.append("with_timestamps", request.withTimestamps?.toString());
+        }
+
+        if (request.withWaveformVisual != null) {
+            _body.append("with_waveform_visual", request.withWaveformVisual?.toString());
         }
 
         const _maybeEncodedRequest = await _body.getRequest();

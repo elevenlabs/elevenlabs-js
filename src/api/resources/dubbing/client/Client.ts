@@ -12,11 +12,37 @@ import * as ElevenLabs from "../../../index.js";
 import { AudioClient } from "../resources/audio/client/Client.js";
 import { ProjectClient } from "../resources/project/client/Client.js";
 import { TranscriptsClient } from "../resources/transcripts/client/Client.js";
+import { DubbingSocket } from "./Socket.js";
 
 export declare namespace DubbingClient {
     export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
+
+    export interface ConnectArgs {
+        authorization?: string;
+        targetLanguage: string;
+        sourceLanguage?: string;
+        inputFormat?: string;
+        inputNumChannels?: string;
+        outputFormat?: string;
+        clientSessionId?: string;
+        enableZrm?: string;
+        /** WebSocket subprotocols to use for the connection. */
+        protocols?: string | string[];
+        /** Additional query parameters to send with the websocket connect request. */
+        queryParams?: Record<string, unknown>;
+        /** Arbitrary headers to send with the websocket connect request. */
+        headers?: Record<string, string>;
+        /** Enable debug mode on the websocket. Defaults to false. */
+        debug?: boolean;
+        /** Number of reconnect attempts. Defaults to 30. */
+        reconnectAttempts?: number;
+        /** The timeout for establishing the WebSocket connection in seconds. */
+        connectionTimeoutInSeconds?: number;
+        /** A signal to abort the WebSocket connection. */
+        abortSignal?: AbortSignal;
+    }
 }
 
 /**
@@ -534,5 +560,54 @@ export class DubbingClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/v1/dubbing/{dubbing_id}");
+    }
+
+    public async realtime(args: DubbingClient.ConnectArgs): Promise<DubbingSocket> {
+        const {
+            authorization,
+            targetLanguage,
+            sourceLanguage,
+            inputFormat,
+            inputNumChannels,
+            outputFormat,
+            clientSessionId,
+            enableZrm,
+            protocols,
+            queryParams,
+            headers,
+            debug,
+            reconnectAttempts,
+            connectionTimeoutInSeconds,
+            abortSignal,
+        } = args;
+        const _queryParams: Record<string, unknown> = {
+            authorization,
+            target_language: targetLanguage,
+            source_language: sourceLanguage,
+            input_format: inputFormat,
+            input_num_channels: inputNumChannels,
+            output_format: outputFormat,
+            client_session_id: clientSessionId,
+            enable_zrm: enableZrm,
+        };
+        const _headers: Record<string, unknown> = mergeHeaders(this._options?.headers, headers);
+        const socket = new core.ReconnectingWebSocket({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "/v1/dubbing/realtime",
+            ),
+            protocols: protocols ?? [],
+            queryParameters: { ..._queryParams, ...queryParams },
+            headers: _headers,
+            options: {
+                debug: debug ?? false,
+                maxRetries: reconnectAttempts ?? 30,
+                connectionTimeout: connectionTimeoutInSeconds != null ? connectionTimeoutInSeconds * 1000 : undefined,
+            },
+            abortSignal: abortSignal,
+        });
+        return new DubbingSocket({ socket });
     }
 }

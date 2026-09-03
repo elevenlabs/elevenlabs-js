@@ -23,6 +23,7 @@ describe("ConversationsClient", () => {
             includeConversationId: true,
             branchId: "branch_id",
             environment: "environment",
+            debugEventsRequest: true,
         });
         expect(response).toEqual({
             signedUrl: "signed_url",
@@ -48,6 +49,7 @@ describe("ConversationsClient", () => {
             participantName: "participant_name",
             branchId: "branch_id",
             environment: "environment",
+            debugEventsRequest: true,
         });
         expect(response).toEqual({
             token: "token",
@@ -110,6 +112,7 @@ describe("ConversationsClient", () => {
             agentId: "agent_id",
             visitedAgentIds: ["visited_agent_ids"],
             visitedAgentBranchIds: ["visited_agent_branch_ids"],
+            triggeredProcedureIds: ["triggered_procedure_ids"],
             callSuccessful: "success",
             callStartBeforeUnix: 1,
             callStartAfterUnix: 1,
@@ -126,6 +129,7 @@ describe("ConversationsClient", () => {
             toolNames: ["tool_names"],
             toolNamesSuccessful: ["tool_names_successful"],
             toolNamesErrored: ["tool_names_errored"],
+            includeInvalidToolCalls: true,
             mainLanguages: ["main_languages"],
             pageSize: 1,
             summaryMode: "exclude",
@@ -143,6 +147,7 @@ describe("ConversationsClient", () => {
             terminationReasons: ["termination_reasons"],
             guardrailTypes: ["custom"],
             customGuardrailNames: ["custom_guardrail_names"],
+            sortDirection: "asc",
         });
         expect(response).toEqual({
             conversations: [
@@ -241,7 +246,11 @@ describe("ConversationsClient", () => {
                     stream_sid: "stream_sid",
                     call_sid: "call_sid",
                 },
-                batch_call: { batch_call_id: "batch_call_id", batch_call_recipient_id: "batch_call_recipient_id" },
+                batch_call: {
+                    batch_call_id: "batch_call_id",
+                    batch_call_recipient_id: "batch_call_recipient_id",
+                    campaign: { campaign_id: "campaign_id", campaign_lead_id: "campaign_lead_id" },
+                },
                 termination_reason: "termination_reason",
                 error: { code: 1, reason: "reason" },
                 warnings: ["warnings"],
@@ -344,6 +353,7 @@ describe("ConversationsClient", () => {
                 branch_id: "branch_id",
                 environment: "environment",
                 starting_workflow_node_id: "starting_workflow_node_id",
+                procedure_ids: ["procedure_ids"],
                 dynamic_variables: { key: "value" },
             },
             environment: "production",
@@ -401,6 +411,14 @@ describe("ConversationsClient", () => {
                         mime_type: "mime_type",
                         file_url: "file_url",
                     },
+                    file_inputs: [
+                        {
+                            file_id: "file_id",
+                            original_filename: "original_filename",
+                            mime_type: "mime_type",
+                            file_url: "file_url",
+                        },
+                    ],
                     contextual_update_info: { context_id: "context_id" },
                     reasoned: true,
                 },
@@ -479,6 +497,10 @@ describe("ConversationsClient", () => {
                 batchCall: {
                     batchCallId: "batch_call_id",
                     batchCallRecipientId: "batch_call_recipient_id",
+                    campaign: {
+                        campaignId: "campaign_id",
+                        campaignLeadId: "campaign_lead_id",
+                    },
                 },
                 terminationReason: "termination_reason",
                 error: {
@@ -644,6 +666,7 @@ describe("ConversationsClient", () => {
                 branchId: "branch_id",
                 environment: "environment",
                 startingWorkflowNodeId: "starting_workflow_node_id",
+                procedureIds: ["procedure_ids"],
                 dynamicVariables: {
                     key: "value",
                 },
@@ -724,6 +747,14 @@ describe("ConversationsClient", () => {
                         mimeType: "mime_type",
                         fileUrl: "file_url",
                     },
+                    fileInputs: [
+                        {
+                            fileId: "file_id",
+                            originalFilename: "original_filename",
+                            mimeType: "mime_type",
+                            fileUrl: "file_url",
+                        },
+                    ],
                     contextualUpdateInfo: {
                         contextId: "context_id",
                     },
@@ -793,7 +824,11 @@ describe("ConversationsClient", () => {
                     stream_sid: "stream_sid",
                     call_sid: "call_sid",
                 },
-                batch_call: { batch_call_id: "batch_call_id", batch_call_recipient_id: "batch_call_recipient_id" },
+                batch_call: {
+                    batch_call_id: "batch_call_id",
+                    batch_call_recipient_id: "batch_call_recipient_id",
+                    campaign: { campaign_id: "campaign_id", campaign_lead_id: "campaign_lead_id" },
+                },
                 termination_reason: "termination_reason",
                 error: { code: 1, reason: "reason" },
                 warnings: ["warnings"],
@@ -896,6 +931,7 @@ describe("ConversationsClient", () => {
                 branch_id: "branch_id",
                 environment: "environment",
                 starting_workflow_node_id: "starting_workflow_node_id",
+                procedure_ids: ["procedure_ids"],
                 dynamic_variables: { key: "value" },
             },
             environment: "production",
@@ -953,6 +989,14 @@ describe("ConversationsClient", () => {
                         mime_type: "mime_type",
                         file_url: "file_url",
                     },
+                    file_inputs: [
+                        {
+                            file_id: "file_id",
+                            original_filename: "original_filename",
+                            mime_type: "mime_type",
+                            file_url: "file_url",
+                        },
+                    ],
                     contextual_update_info: { context_id: "context_id" },
                     reasoned: true,
                 },
@@ -1030,6 +1074,10 @@ describe("ConversationsClient", () => {
                 batchCall: {
                     batchCallId: "batch_call_id",
                     batchCallRecipientId: "batch_call_recipient_id",
+                    campaign: {
+                        campaignId: "campaign_id",
+                        campaignLeadId: "campaign_lead_id",
+                    },
                 },
                 terminationReason: "termination_reason",
                 error: {
@@ -1195,6 +1243,7 @@ describe("ConversationsClient", () => {
                 branchId: "branch_id",
                 environment: "environment",
                 startingWorkflowNodeId: "starting_workflow_node_id",
+                procedureIds: ["procedure_ids"],
                 dynamicVariables: {
                     key: "value",
                 },
@@ -1275,6 +1324,14 @@ describe("ConversationsClient", () => {
                         mimeType: "mime_type",
                         fileUrl: "file_url",
                     },
+                    fileInputs: [
+                        {
+                            fileId: "file_id",
+                            originalFilename: "original_filename",
+                            mimeType: "mime_type",
+                            fileUrl: "file_url",
+                        },
+                    ],
                     contextualUpdateInfo: {
                         contextId: "context_id",
                     },
@@ -1305,6 +1362,53 @@ describe("ConversationsClient", () => {
         const response = await client.agents.conversations.delete("21m00Tcm4TlvDq8ikWAM");
         expect(response).toEqual({
             key: "value",
+        });
+    });
+
+    test("get_summary", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            conversation_id: "conversation_id",
+            agent_id: "agent_id",
+            status: "initiated",
+            call_summary_title: "call_summary_title",
+            transcript_summary: "transcript_summary",
+            call_successful: "success",
+            message_count: 1,
+            messages: [{ role: "user", message: "message" }],
+            messages_omitted: true,
+            note: "note",
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/convai/conversations/21m00Tcm4TlvDq8ikWAM/summary")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.agents.conversations.getSummary("21m00Tcm4TlvDq8ikWAM", {
+            maxMessages: 1,
+        });
+        expect(response).toEqual({
+            conversationId: "conversation_id",
+            agentId: "agent_id",
+            status: "initiated",
+            callSummaryTitle: "call_summary_title",
+            transcriptSummary: "transcript_summary",
+            callSuccessful: "success",
+            messageCount: 1,
+            messages: [
+                {
+                    role: "user",
+                    message: "message",
+                },
+            ],
+            messagesOmitted: true,
+            note: "note",
         });
     });
 

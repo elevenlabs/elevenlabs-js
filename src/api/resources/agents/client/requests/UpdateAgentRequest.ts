@@ -26,4 +26,6 @@ export interface UpdateAgentRequest {
     tags?: string[];
     /** Description for this version when publishing changes (only applicable for versioned agents) */
     versionDescription?: string;
+    /** Procedure versions to publish, keyed by procedure_id. When provided, this map replaces the procedures from the current draft or branch tip. When omitted or null, unpublished procedure edits are used if present; otherwise, the branch tip's procedures are retained. Pass an empty object to remove all procedures. */
+    procedures?: Record<string, ElevenLabs.ProcedureVersionRef | undefined>;
 }

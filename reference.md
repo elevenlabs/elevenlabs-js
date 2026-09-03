@@ -2056,6 +2056,69 @@ await client.voices.share("63e06b7e7cafdc46be4d2e0b3f045940231ae058d508589653d74
 </dl>
 </details>
 
+<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">findSimilarVoices</a>({ ...params }) -> ElevenLabs.GetLibraryVoicesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of shared voices similar to the provided audio sample. If neither similarity_threshold nor top_k is provided, we will apply default values.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.findSimilarVoices({});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">getShared</a>({ ...params }) -> ElevenLabs.GetLibraryVoicesResponse</code></summary>
 <dl>
 <dd>
@@ -2119,69 +2182,6 @@ await client.voices.getShared({
 <dd>
 
 **request:** `ElevenLabs.GetSharedVoicesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `VoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.voices.<a href="/src/api/resources/voices/client/Client.ts">findSimilarVoices</a>({ ...params }) -> ElevenLabs.GetLibraryVoicesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a list of shared voices similar to the provided audio sample. If neither similarity_threshold nor top_k is provided, we will apply default values.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.voices.findSimilarVoices({});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost` 
     
 </dd>
 </dl>
@@ -4501,6 +4501,7 @@ await client.agents.list({
     archived: true,
     showOnlyOwnedAgents: true,
     createdByUserId: "created_by_user_id",
+    tags: ["tags"],
     sortDirection: "asc",
     sortBy: "name",
     cursor: "cursor"
@@ -5484,6 +5485,266 @@ await client.environmentVariables.update("env_var_id", {
 </dl>
 </details>
 
+## Assets
+<details><summary><code>client.assets.<a href="/src/api/resources/assets/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.AssetListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List assets in the workspace, most recently created first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.assets.list({
+    pageSize: 1,
+    cursor: "cursor",
+    search: "search"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ListAssetsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.assets.<a href="/src/api/resources/assets/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.AssetResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload a new asset.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.assets.create({
+    asset: fs.createReadStream("/path/to/your/file"),
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUploadAssetV1AssetsPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.assets.<a href="/src/api/resources/assets/client/Client.ts">get</a>(asset_id) -> ElevenLabs.AssetResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a single asset by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.assets.get("5xM2KqOnZyce22SPZ9d4");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asset_id:** `string` — ID of the asset.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.assets.<a href="/src/api/resources/assets/client/Client.ts">delete</a>(asset_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an asset by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.assets.delete("5xM2KqOnZyce22SPZ9d4");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asset_id:** `string` — ID of the asset.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Agents Conversations
 <details><summary><code>client.agents.conversations.<a href="/src/api/resources/agents/resources/conversations/client/Client.ts">getSignedUrl</a>({ ...params }) -> ElevenLabs.ConversationSignedUrlResponseModel</code></summary>
 <dl>
@@ -5516,7 +5777,8 @@ await client.agents.conversations.getSignedUrl({
     agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     includeConversationId: true,
     branchId: "branch_id",
-    environment: "environment"
+    environment: "environment",
+    debugEventsRequest: true
 });
 
 ```
@@ -5584,7 +5846,8 @@ await client.agents.conversations.getWebrtcToken({
     agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     participantName: "participant_name",
     branchId: "branch_id",
-    environment: "environment"
+    environment: "environment",
+    debugEventsRequest: true
 });
 
 ```
@@ -5653,6 +5916,7 @@ await client.agents.conversations.list({
     agentId: "agent_id",
     visitedAgentIds: ["visited_agent_ids"],
     visitedAgentBranchIds: ["visited_agent_branch_ids"],
+    triggeredProcedureIds: ["triggered_procedure_ids"],
     callSuccessful: "success",
     callStartBeforeUnix: 1,
     callStartAfterUnix: 1,
@@ -5669,6 +5933,7 @@ await client.agents.conversations.list({
     toolNames: ["tool_names"],
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
+    includeInvalidToolCalls: true,
     mainLanguages: ["main_languages"],
     pageSize: 1,
     summaryMode: "exclude",
@@ -5685,7 +5950,8 @@ await client.agents.conversations.list({
     workflowNodeEnteredId: "workflow_node_entered_id",
     terminationReasons: ["termination_reasons"],
     guardrailTypes: ["custom"],
-    customGuardrailNames: ["custom_guardrail_names"]
+    customGuardrailNames: ["custom_guardrail_names"],
+    sortDirection: "asc"
 });
 
 ```
@@ -5905,6 +6171,79 @@ await client.agents.conversations.delete("21m00Tcm4TlvDq8ikWAM");
 <dd>
 
 **conversation_id:** `string` — The id of the conversation you're taking the action on.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.conversations.<a href="/src/api/resources/agents/resources/conversations/client/Client.ts">getSummary</a>(conversation_id, { ...params }) -> ElevenLabs.GetConversationSummaryResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a lightweight summary of a conversation: its title, the generated transcript summary, whether the call was successful, and — only when the conversation is short — the plain chat messages. Tool calls, tool results, and contextual updates are omitted so the response stays small. Use this instead of the full conversation endpoint when you only need the gist (e.g. an agent reading many conversations); use GET /v1/convai/conversations/{conversation_id} when you need the full transcript with tool calls and contextual updates.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.conversations.getSummary("21m00Tcm4TlvDq8ikWAM", {
+    maxMessages: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The id of the conversation you're taking the action on.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.GetSummaryConversationsRequest` 
     
 </dd>
 </dl>
@@ -7369,6 +7708,701 @@ await client.agents.users.list({
 </dl>
 </details>
 
+## Agents TriageTickets
+<details><summary><code>client.agents.triageTickets.<a href="/src/api/resources/agents/resources/triageTickets/client/Client.ts">list</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentConversationTicketsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List an agent's conversation triage tickets, ordered by most recently created first. These are tickets about the agent's own performance on a conversation (for triage with Architect), not tickets an agent opens for end users.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.triageTickets.list("agent_id", {
+    pageSize: 1,
+    conversationId: "conversation_id",
+    status: "open",
+    sources: ["qa"],
+    ownerUserId: "owner_user_id",
+    assigneeUserId: "assignee_user_id",
+    issueType: "knowledge_gap",
+    label: "label",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListTriageTicketsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.triageTickets.<a href="/src/api/resources/agents/resources/triageTickets/client/Client.ts">createManual</a>(agent_id, { ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Manually raise a follow-up ticket against an agent, not tied to any conversation (for example a task like 'add the KB about X'). The comment is shown as the ticket title. Requires viewer access to the agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.triageTickets.createManual("agent_id", {
+    qaComment: "qa_comment"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.CreateManualTicketRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.triageTickets.<a href="/src/api/resources/agents/resources/triageTickets/client/Client.ts">listForWorkspace</a>({ ...params }) -> ElevenLabs.GetAgentConversationTicketsPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List conversation triage tickets across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, tickets assigned to the caller); for a single agent's tickets, use the per-agent endpoint instead. Tickets for agents the caller cannot access are omitted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.triageTickets.listForWorkspace({
+    pageSize: 1,
+    status: "open",
+    assigneeUserId: "assignee_user_id",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListForWorkspaceTriageTicketsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.triageTickets.<a href="/src/api/resources/agents/resources/triageTickets/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Raise a ticket about an agent's performance on a conversation, for triage with Architect. Provide an overall comment and/or turn-level comments describing what went wrong.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.triageTickets.create({
+    conversationId: "conversation_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.CreateAgentConversationTicketRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.triageTickets.<a href="/src/api/resources/agents/resources/triageTickets/client/Client.ts">listAssignableUsers</a>(agent_id) -> ElevenLabs.AssignableUserResponseModel[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+All non-service-account workspace members, each flagged with whether they currently have at least viewer access to the agent. Members without access are included (not filtered out) so the UI can offer them as an assignee and prompt to grant access first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.triageTickets.listAssignableUsers("agent_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.triageTickets.<a href="/src/api/resources/agents/resources/triageTickets/client/Client.ts">get</a>(agentqa_ticket_id) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get an agent conversation ticket by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.triageTickets.get("agentqa_ticket_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.triageTickets.<a href="/src/api/resources/agents/resources/triageTickets/client/Client.ts">delete</a>(agentqa_ticket_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an agent conversation ticket. Restricted to the ticket creator or a workspace admin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.triageTickets.delete("agentqa_ticket_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.triageTickets.<a href="/src/api/resources/agents/resources/triageTickets/client/Client.ts">update</a>(agentqa_ticket_id, { ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a ticket's comment, status, and/or assignee. Requires editor access to the ticket's agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.triageTickets.update("agentqa_ticket_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.PatchAgentConversationTicketRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.triageTickets.<a href="/src/api/resources/agents/resources/triageTickets/client/Client.ts">addComment</a>(agentqa_ticket_id, { ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Append a comment discussing how to resolve the ticket. Requires viewer access to the ticket's agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.triageTickets.addComment("agentqa_ticket_id", {
+    comment: "comment"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.AddTicketCommentRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.triageTickets.<a href="/src/api/resources/agents/resources/triageTickets/client/Client.ts">addTurnComment</a>(agentqa_ticket_id, { ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Append a turn-level comment to a ticket. Requires viewer access to the ticket's agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.triageTickets.addTurnComment("agentqa_ticket_id", {
+    turnIndex: 1,
+    comment: "comment"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.AddTurnCommentRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Agents PhoneNumbers
 <details><summary><code>client.agents.phoneNumbers.<a href="/src/api/resources/agents/resources/phoneNumbers/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ListPhoneNumbersResponseItem[]</code></summary>
 <dl>
@@ -7846,7 +8880,7 @@ await client.agents.llmUsage.calculate({
 </details>
 
 ## Agents Llm
-<details><summary><code>client.agents.llm.<a href="/src/api/resources/agents/resources/llm/client/Client.ts">list</a>() -> ElevenLabs.LlmListResponseModelInput</code></summary>
+<details><summary><code>client.agents.llm.<a href="/src/api/resources/agents/resources/llm/client/Client.ts">list</a>() -> ElevenLabs.LlmListResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11016,7 +12050,7 @@ await client.agents.drafts.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
 </details>
 
 ## Agents Procedures
-<details><summary><code>client.agents.procedures.<a href="/src/api/resources/agents/resources/procedures/client/Client.ts">list</a>(agent_id, branch_id) -> ElevenLabs.ListProceduresResponseModel</code></summary>
+<details><summary><code>client.agents.procedures.<a href="/src/api/resources/agents/resources/procedures/client/Client.ts">list</a>(agent_id, branch_id, { ...params }) -> ElevenLabs.ListProceduresResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -11043,7 +12077,9 @@ List the agent's procedures on a branch with their procedure_id, version_id, nam
 <dd>
 
 ```typescript
-await client.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t");
+await client.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", {
+    agentVersionId: "agent_version_id"
+});
 
 ```
 </dd>
@@ -11068,6 +12104,14 @@ await client.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbr
 <dd>
 
 **branch_id:** `string` — Branch ID to get the procedure draft from
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.agents.ListProceduresRequest` 
     
 </dd>
 </dl>
@@ -11265,7 +12309,8 @@ Retrieve a procedure at a specific version or the current branch HEAD.
 
 ```typescript
 await client.agents.procedures.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3", {
-    versionId: "version_id"
+    versionId: "version_id",
+    agentVersionId: "agent_version_id"
 });
 
 ```
@@ -11338,7 +12383,7 @@ await client.agents.procedures.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbra
 <dl>
 <dd>
 
-Remove a procedure from the agent's draft working set.
+Remove a procedure from the agent's draft working set. Removing a folder cascades to its entire subtree, rejected if any procedure outside the subtree hands off into it.
 </dd>
 </dl>
 </dd>
@@ -11506,7 +12551,8 @@ Get the live count of the ongoing conversations.
 
 ```typescript
 await client.agents.analytics.liveCount.get({
-    agentId: "agent_id"
+    agentId: "agent_id",
+    agentIds: ["agent_ids"]
 });
 
 ```
@@ -11714,6 +12760,7 @@ await client.agents.conversations.messages.textSearch({
     agentId: "agent_id",
     visitedAgentIds: ["visited_agent_ids"],
     visitedAgentBranchIds: ["visited_agent_branch_ids"],
+    triggeredProcedureIds: ["triggered_procedure_ids"],
     callSuccessful: "success",
     callStartBeforeUnix: 1,
     callStartAfterUnix: 1,
@@ -11728,6 +12775,7 @@ await client.agents.conversations.messages.textSearch({
     toolNames: ["tool_names"],
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
+    includeInvalidToolCalls: true,
     mainLanguages: ["main_languages"],
     excludeStatuses: ["initiated"],
     terminationReasons: ["termination_reasons"],
@@ -12492,8 +13540,13 @@ Returns the latest topic discovery run results for a given agent.
 
 ```typescript
 await client.agents.conversations.topics.get("agent_id", {
+    pageSize: 1,
+    sortBy: "conversations",
+    sortDirection: "asc",
     fromUnixSecs: 1,
-    toUnixSecs: 1
+    toUnixSecs: 1,
+    includeEvaluationCriteria: true,
+    cursor: "cursor"
 });
 
 ```
@@ -15850,7 +16903,7 @@ await client.agents.widget.avatar.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
 <dl>
 <dd>
 
-List the workspace's dubbing projects (cursor-paginated).
+List the dubbing projects in your workspace that you can access, newest first, cursor-paginated. Listed projects carry no `language_ids`; fetch a project, or list its language targets, to see them.
 </dd>
 </dl>
 </dd>
@@ -15915,7 +16968,11 @@ await client.dubbing.project.list({
 <dl>
 <dd>
 
-Create a dubbing project from an uploaded file or a source URL.
+Create a dubbing project from an uploaded file (`file`) or a source URL (`source_url`).
+
+Returns as soon as the project record exists, before the source has been fetched: the project starts `queued` and reaches `ready` once its source has been transcribed. Creating a project does not dub anything — add a language target to it for each language you want, or pass `target_language` to queue the first one here.
+
+Preparation can take minutes on a long source, so we recommend passing `webhook_ids` to be notified when the project turns `ready` or `failed`, rather than polling for it.
 </dd>
 </dl>
 </dd>
@@ -15982,7 +17039,7 @@ await client.dubbing.project.create({
 <dl>
 <dd>
 
-Full project detail, including its language target ids.
+Full project detail, including the IDs of every language target under it. To follow a project to `ready`, we recommend a `webhook_ids` subscription rather than polling this endpoint.
 </dd>
 </dl>
 </dd>
@@ -16045,7 +17102,7 @@ await client.dubbing.project.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3");
 <dl>
 <dd>
 
-Delete a project and its language targets.
+Delete a project, every language target under it, and their stored media and outputs. This cannot be undone, and a dub already running is still billed.
 </dd>
 </dl>
 </dd>
@@ -16261,7 +17318,7 @@ await client.dubbing.transcripts.get("dubbing_id", "source", "srt");
 <dl>
 <dd>
 
-List a project's language targets (cursor-paginated).
+List a project's language targets, cursor-paginated, each with signed output URLs once it has produced an output.
 </dd>
 </dl>
 </dd>
@@ -16334,7 +17391,11 @@ await client.dubbing.project.language.list("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", 
 <dl>
 <dd>
 
-Queue a language target for a project (starts once the project is ready).
+Add a language to dub a project into, and queue the dub.
+
+This is the call that produces dubbed audio, and it is billed per generation. The target is created `queued` and starts as soon as the project is `ready`, so it can be added at any point after the project is created. It inherits the project's dubbing model and cannot pick another.
+
+A project created with `webhook_ids` sends a `dubbing_language_completed` event carrying the output download URLs, so we recommend subscribing rather than polling this target to completion.
 </dd>
 </dl>
 </dd>
@@ -16407,7 +17468,7 @@ await client.dubbing.project.language.create("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3"
 <dl>
 <dd>
 
-Full language-target detail.
+Full language-target detail. Once the target reports `completed`, `outputs` carries the signed download URLs. To learn when that happens, we recommend the project's `webhook_ids` subscription rather than polling this endpoint; fetch here when a delivered URL has expired, or to reconcile after an edit.
 </dd>
 </dl>
 </dd>
@@ -16478,7 +17539,7 @@ await client.dubbing.project.language.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3", "
 <dl>
 <dd>
 
-Delete a language target.
+Delete a language target and its outputs, leaving the project and its other languages intact. This cannot be undone, and a dub already running is still billed.
 </dd>
 </dl>
 </dd>
@@ -16550,7 +17611,7 @@ await client.dubbing.project.language.delete("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3"
 <dl>
 <dd>
 
-The project's source transcript, as editable segments.
+The project's source transcript, as editable segments. Available once the project is `ready`.
 </dd>
 </dl>
 </dd>
@@ -16613,7 +17674,7 @@ await client.dubbing.project.transcript.get("proj_1601kwkyxp0hfzvtmyxwqxx6mcy3")
 <dl>
 <dd>
 
-Enterprise only. Remove a source segment from the transcript.
+Enterprise only. Remove a source segment from the transcript so it is no longer dubbed. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
 </dd>
 </dl>
 </dd>
@@ -16684,7 +17745,7 @@ await client.dubbing.project.transcript.deleteSegment("proj_1601kwkyxp0hfzvtmyxw
 <dl>
 <dd>
 
-Enterprise only. Edit a source segment's text, speaker, or timing.
+Enterprise only. Edit a source segment's text, speaker, or timing. Omitted fields are left unchanged. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
 </dd>
 </dl>
 </dd>
@@ -16765,7 +17826,7 @@ await client.dubbing.project.transcript.updateSegment("proj_1601kwkyxp0hfzvtmyxw
 <dl>
 <dd>
 
-Enterprise only. Edit several source segments' text, speaker, or timing in one atomic request.
+Enterprise only. Edit several source segments' text, speaker, or timing in one atomic request: every edit applies or none does. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
 </dd>
 </dl>
 </dd>
@@ -16845,7 +17906,7 @@ await client.dubbing.project.transcript.updateSegments("proj_1601kwkyxp0hfzvtmyx
 <dl>
 <dd>
 
-Enterprise only. Add a new source segment to the transcript.
+Enterprise only. Add a new source segment to the transcript. Its span must lie within the source media, last between 0.1 and 25 seconds, and not overlap another segment by the same speaker. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
 </dd>
 </dl>
 </dd>
@@ -16922,7 +17983,7 @@ await client.dubbing.project.transcript.createSegment("proj_1601kwkyxp0hfzvtmyxw
 <dl>
 <dd>
 
-A language target's transcript: source segments with their translations.
+A language target's transcript: source segments with their translations. Available once the target has produced an output. Returns a conflict while the target is still on its first dub, since it has no translations to return yet.
 </dd>
 </dl>
 </dd>
@@ -16993,7 +18054,7 @@ await client.dubbing.project.language.transcript.get("proj_1601kwkyxp0hfzvtmyxwq
 <dl>
 <dd>
 
-Enterprise only. Edit a segment's translation for a language target.
+Enterprise only. Edit a segment's translation for a language target. Omitted fields are left unchanged; an explicit null clears the field. Bumps the target's `revision` and marks it `stale` if it had already completed. The source transcript and the project's other languages are untouched, and no audio changes until you regenerate the target.
 </dd>
 </dl>
 </dd>
@@ -17082,7 +18143,7 @@ await client.dubbing.project.language.transcript.updateSegment("proj_1601kwkyxp0
 <dl>
 <dd>
 
-Enterprise only. Edit several segments' translations for a language target in one atomic request.
+Enterprise only. Edit several segments' translations for a language target in one atomic request: every edit applies or none does. Bumps the target's `revision` and marks it `stale` if it had already completed. The source transcript and the project's other languages are untouched, and no audio changes until you regenerate the target.
 </dd>
 </dl>
 </dd>
@@ -17170,7 +18231,7 @@ await client.dubbing.project.language.transcript.updateSegments("proj_1601kwkyxp
 <dl>
 <dd>
 
-Enterprise only. Re-dub a target from its edited transcript, re-synthesizing only the edited regions (charged like a generation). Conflicts when the target has no edits to apply -- nothing is dispatched and nothing is charged.
+Enterprise only. Re-dub a target from its edited transcript, re-synthesizing only the edited regions (charged like a generation, less the free-regeneration allowance). Accepted asynchronously: the target returns to `processing` and sends a `dubbing_language_completed` event to the project's `webhook_ids` when the re-dub lands, carrying the new output URLs. Returns a conflict when the target has no edits to apply — nothing is dispatched and nothing is charged.
 </dd>
 </dl>
 </dd>
@@ -17218,6 +18279,601 @@ await client.dubbing.project.language.transcript.regenerate("proj_1601kwkyxp0hfz
 <dd>
 
 **requestOptions:** `TranscriptClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Flows Video
+<details><summary><code>client.flows.video.<a href="/src/api/resources/flows/resources/video/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.MediaGenerationListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the video generations created through this API, newest first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.flows.video.list({
+    cursor: "cursor",
+    pageSize: 1,
+    status: "pending",
+    modelId: "model_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.flows.ListVideoRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VideoClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.flows.video.<a href="/src/api/resources/flows/resources/video/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.MediaGenerationCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start a video generation with the selected model.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.flows.video.create({
+    modelId: "bytedance-seedance-v2",
+    prompt: "A corgi rides a tiny surfboard across a sunlit wave at golden hour, cinematic"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.VideoGenerationRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VideoClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.flows.video.<a href="/src/api/resources/flows/resources/video/client/Client.ts">get</a>(generation_id) -> ElevenLabs.MediaGenerationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the status of a video generation, and retrieve its output URL once completed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.flows.video.get("generation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**generation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VideoClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Flows Image
+<details><summary><code>client.flows.image.<a href="/src/api/resources/flows/resources/image/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.MediaGenerationListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the image generations created through this API, newest first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.flows.image.list({
+    cursor: "cursor",
+    pageSize: 1,
+    status: "pending",
+    modelId: "model_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.flows.ListImageRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImageClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.flows.image.<a href="/src/api/resources/flows/resources/image/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.MediaGenerationCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start an image generation with the selected model.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.flows.image.create({
+    modelId: "bytedance-seedream-5-lite",
+    prompt: "A corgi in a tiny lifeguard chair on a sunlit beach at golden hour, photorealistic"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.ImageGenerationRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImageClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.flows.image.<a href="/src/api/resources/flows/resources/image/client/Client.ts">get</a>(generation_id) -> ElevenLabs.MediaGenerationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the status of an image generation, and retrieve its output URL once completed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.flows.image.get("generation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**generation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImageClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Flows TextToSpeech
+<details><summary><code>client.flows.textToSpeech.<a href="/src/api/resources/flows/resources/textToSpeech/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.MediaGenerationListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the speech generations created through this API, newest first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.flows.textToSpeech.list({
+    cursor: "cursor",
+    pageSize: 1,
+    status: "pending",
+    modelId: "model_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.flows.ListTextToSpeechRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TextToSpeechClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.flows.textToSpeech.<a href="/src/api/resources/flows/resources/textToSpeech/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.MediaGenerationCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start a speech generation with the selected model. Charged per character via text-to-speech billing. Use this over `/v1/text-to-speech` for the asynchronous generation lifecycle or for models not offered there; for direct, synchronous speech synthesis, prefer `/v1/text-to-speech`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.flows.textToSpeech.create({
+    modelId: "eleven_flash_v2_5",
+    text: "The first move is what sets everything in motion.",
+    voice: "JBFqnCBsd6RMkjVDRZzb"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.TextToSpeechGenerationRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TextToSpeechClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.flows.textToSpeech.<a href="/src/api/resources/flows/resources/textToSpeech/client/Client.ts">get</a>(generation_id) -> ElevenLabs.MediaGenerationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the status of a speech generation, and retrieve its output URL once completed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.flows.textToSpeech.get("generation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**generation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TextToSpeechClient.RequestOptions` 
     
 </dd>
 </dl>

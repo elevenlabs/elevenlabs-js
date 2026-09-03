@@ -23,6 +23,7 @@ export const WorkflowPhoneNumberNodeModelOutput: core.serialization.ObjectSchema
         WorkflowPhoneNumberNodeModelOutputTransferDestination,
     ),
     transferType: core.serialization.property("transfer_type", TransferTypeEnum),
+    sipReferPlayDialtone: core.serialization.property("sip_refer_play_dialtone", core.serialization.boolean()),
     uui: UuiTransferConfig.optional(),
     postDialDigits: core.serialization.property(
         "post_dial_digits",
@@ -37,6 +38,7 @@ export declare namespace WorkflowPhoneNumberNodeModelOutput {
         custom_sip_headers: WorkflowPhoneNumberNodeModelOutputCustomSipHeadersItem.Raw[];
         transfer_destination: WorkflowPhoneNumberNodeModelOutputTransferDestination.Raw;
         transfer_type: TransferTypeEnum.Raw;
+        sip_refer_play_dialtone: boolean;
         uui?: UuiTransferConfig.Raw | null;
         post_dial_digits?: WorkflowPhoneNumberNodeModelOutputPostDialDigits.Raw | null;
         position: PositionOutput.Raw;

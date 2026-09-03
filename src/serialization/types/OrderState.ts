@@ -15,6 +15,7 @@ export const OrderState: core.serialization.Schema<serializers.OrderState.Raw, E
         "cancelling",
         "cancelled",
         "expired",
+        "merged",
     ]);
 
 export declare namespace OrderState {
@@ -27,5 +28,6 @@ export declare namespace OrderState {
         | "done"
         | "cancelling"
         | "cancelled"
-        | "expired";
+        | "expired"
+        | "merged";
 }

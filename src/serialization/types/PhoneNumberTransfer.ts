@@ -19,6 +19,10 @@ export const PhoneNumberTransfer: core.serialization.ObjectSchema<
     ),
     transferDestination: core.serialization.property("transfer_destination", PhoneNumberTransferTransferDestination),
     transferType: core.serialization.property("transfer_type", TransferTypeEnum.optional()),
+    sipReferPlayDialtone: core.serialization.property(
+        "sip_refer_play_dialtone",
+        core.serialization.boolean().optional(),
+    ),
     uui: UuiTransferConfig.optional(),
     postDialDigits: core.serialization.property("post_dial_digits", PhoneNumberTransferPostDialDigits.optional()),
     phoneNumber: core.serialization.property("phone_number", core.serialization.string().optional()),
@@ -30,6 +34,7 @@ export declare namespace PhoneNumberTransfer {
         custom_sip_headers?: PhoneNumberTransferCustomSipHeadersItem.Raw[] | null;
         transfer_destination: PhoneNumberTransferTransferDestination.Raw;
         transfer_type?: TransferTypeEnum.Raw | null;
+        sip_refer_play_dialtone?: boolean | null;
         uui?: UuiTransferConfig.Raw | null;
         post_dial_digits?: PhoneNumberTransferPostDialDigits.Raw | null;
         phone_number?: string | null;

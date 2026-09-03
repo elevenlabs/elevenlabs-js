@@ -35,6 +35,7 @@ export class ProceduresClient {
      *
      * @param {string} agent_id - Agent ID to get the procedure draft from
      * @param {string} branch_id - Branch ID to get the procedure draft from
+     * @param {ElevenLabs.agents.ListProceduresRequest} request
      * @param {ProceduresClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -42,21 +43,29 @@ export class ProceduresClient {
      * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
-     *     await client.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t")
+     *     await client.agents.procedures.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", {
+     *         agentVersionId: "agent_version_id"
+     *     })
      */
     public list(
         agent_id: string,
         branch_id: string,
+        request: ElevenLabs.agents.ListProceduresRequest = {},
         requestOptions?: ProceduresClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.ListProceduresResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__list(agent_id, branch_id, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__list(agent_id, branch_id, request, requestOptions));
     }
 
     private async __list(
         agent_id: string,
         branch_id: string,
+        request: ElevenLabs.agents.ListProceduresRequest = {},
         requestOptions?: ProceduresClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ListProceduresResponseModel>> {
+        const { agentVersionId } = request;
+        const _queryParams: Record<string, unknown> = {
+            agent_version_id: agentVersionId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -73,7 +82,11 @@ export class ProceduresClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -309,7 +322,8 @@ export class ProceduresClient {
      *
      * @example
      *     await client.agents.procedures.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3", {
-     *         versionId: "version_id"
+     *         versionId: "version_id",
+     *         agentVersionId: "agent_version_id"
      *     })
      */
     public get(
@@ -331,9 +345,10 @@ export class ProceduresClient {
         request: ElevenLabs.agents.GetProceduresRequest = {},
         requestOptions?: ProceduresClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ProcedureAtVersionResponseModel>> {
-        const { versionId } = request;
+        const { versionId, agentVersionId } = request;
         const _queryParams: Record<string, unknown> = {
             version_id: versionId,
+            agent_version_id: agentVersionId,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -396,7 +411,7 @@ export class ProceduresClient {
     }
 
     /**
-     * Remove a procedure from the agent's draft working set.
+     * Remove a procedure from the agent's draft working set. Removing a folder cascades to its entire subtree, rejected if any procedure outside the subtree hands off into it.
      *
      * @param {string} agent_id - Agent ID to get the procedure draft from
      * @param {string} branch_id - Branch ID to get the procedure draft from

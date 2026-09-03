@@ -99,13 +99,7 @@ export class SpeechToTextClient {
             enable_logging: request.enableLogging,
         };
         const _body = await core.newFormData();
-        _body.append(
-            "model_id",
-            serializers.ConvertSpeechToTextRequestModelId.jsonOrThrow(request.modelId, {
-                unrecognizedObjectKeys: "strip",
-                omitUndefined: true,
-            }),
-        );
+        _body.append("model_id", request.modelId);
         if (request.file != null) {
             await _body.appendFile("file", request.file);
         }

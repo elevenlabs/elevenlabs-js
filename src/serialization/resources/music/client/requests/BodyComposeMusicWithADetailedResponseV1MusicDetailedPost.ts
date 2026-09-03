@@ -3,8 +3,8 @@
 import type * as ElevenLabs from "../../../../../api/index.js";
 import * as core from "../../../../../core/index.js";
 import type * as serializers from "../../../../index.js";
+import { MusicModelId } from "../../../../types/MusicModelId.js";
 import { BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan } from "../../types/BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan.js";
-import { BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId } from "../../types/BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId.js";
 
 export const BodyComposeMusicWithADetailedResponseV1MusicDetailedPost: core.serialization.Schema<
     serializers.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost.Raw,
@@ -16,10 +16,7 @@ export const BodyComposeMusicWithADetailedResponseV1MusicDetailedPost: core.seri
         BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan.optional(),
     ),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
-    modelId: core.serialization.property(
-        "model_id",
-        BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId.optional(),
-    ),
+    modelId: core.serialization.property("model_id", MusicModelId.optional()),
     seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     finetuneId: core.serialization.property("finetune_id", core.serialization.string().optional()),
@@ -29,6 +26,7 @@ export const BodyComposeMusicWithADetailedResponseV1MusicDetailedPost: core.seri
     ),
     storeForInpainting: core.serialization.property("store_for_inpainting", core.serialization.boolean().optional()),
     withTimestamps: core.serialization.property("with_timestamps", core.serialization.boolean().optional()),
+    withWaveformVisual: core.serialization.property("with_waveform_visual", core.serialization.boolean().optional()),
     signWithC2Pa: core.serialization.property("sign_with_c2pa", core.serialization.boolean().optional()),
 });
 
@@ -37,13 +35,14 @@ export declare namespace BodyComposeMusicWithADetailedResponseV1MusicDetailedPos
         prompt?: string | null;
         composition_plan?: BodyComposeMusicWithADetailedResponseV1MusicDetailedPostCompositionPlan.Raw | null;
         music_length_ms?: number | null;
-        model_id?: BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelId.Raw | null;
+        model_id?: MusicModelId.Raw | null;
         seed?: number | null;
         force_instrumental?: boolean | null;
         finetune_id?: string | null;
         respect_sections_durations?: boolean | null;
         store_for_inpainting?: boolean | null;
         with_timestamps?: boolean | null;
+        with_waveform_visual?: boolean | null;
         sign_with_c2pa?: boolean | null;
     }
 }

@@ -4,12 +4,14 @@
 export const PendingSubscriptionSwitchResponseModelNextTier = {
     Free: "free",
     Starter: "starter",
+    Go: "go",
     Creator: "creator",
     Pro: "pro",
     GrowingBusiness: "growing_business",
     Scale20240810: "scale_2024_08_10",
     GrantTier120250723: "grant_tier_1_2025_07_23",
     GrantTier220250723: "grant_tier_2_2025_07_23",
+    Grant: "grant",
     Trial: "trial",
     Enterprise: "enterprise",
 } as const;

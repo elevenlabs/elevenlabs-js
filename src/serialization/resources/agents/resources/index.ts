@@ -35,6 +35,8 @@ export * from "./summaries/types/index.js";
 export * from "./tests/client/requests/index.js";
 export * as tests from "./tests/index.js";
 export * from "./tests/types/index.js";
+export * from "./triageTickets/client/requests/index.js";
+export * as triageTickets from "./triageTickets/index.js";
 export * from "./twilio/client/requests/index.js";
 export * as twilio from "./twilio/index.js";
 export * from "./whatsapp/client/requests/index.js";

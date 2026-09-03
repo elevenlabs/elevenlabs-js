@@ -201,7 +201,7 @@ export class FinetunesClient {
         if (request.modelId != null) {
             _body.append(
                 "model_id",
-                serializers.music.CreateFinetunesRequestModelId.jsonOrThrow(request.modelId, {
+                serializers.MusicModelId.jsonOrThrow(request.modelId, {
                     unrecognizedObjectKeys: "strip",
                     omitUndefined: true,
                 }),

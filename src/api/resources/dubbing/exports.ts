@@ -2,4 +2,5 @@
 
 export { DubbingClient } from "./client/Client.js";
 export * from "./client/index.js";
+export { DubbingSocket } from "./client/Socket.js";
 export * from "./resources/index.js";

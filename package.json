@@ -1,6 +1,6 @@
 {
     "name": "@elevenlabs/elevenlabs-js",
-    "version": "3.0.0-alpha.0",
+    "version": "3.0.0-alpha.1",
     "private": false,
     "repository": {
         "type": "git",
@@ -298,6 +298,17 @@
             },
             "default": "./dist/cjs/api/resources/environmentVariables/exports.js"
         },
+        "./assets": {
+            "import": {
+                "types": "./dist/esm/api/resources/assets/exports.d.mts",
+                "default": "./dist/esm/api/resources/assets/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/assets/exports.d.ts",
+                "default": "./dist/cjs/api/resources/assets/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/assets/exports.js"
+        },
         "./textToDialogueMultiContext": {
             "import": {
                 "types": "./dist/esm/api/resources/textToDialogueMultiContext/exports.d.mts",
@@ -440,6 +451,17 @@
                 "default": "./dist/cjs/api/resources/agents/resources/users/exports.js"
             },
             "default": "./dist/cjs/api/resources/agents/resources/users/exports.js"
+        },
+        "./agents/triageTickets": {
+            "import": {
+                "types": "./dist/esm/api/resources/agents/resources/triageTickets/exports.d.mts",
+                "default": "./dist/esm/api/resources/agents/resources/triageTickets/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/agents/resources/triageTickets/exports.d.ts",
+                "default": "./dist/cjs/api/resources/agents/resources/triageTickets/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/agents/resources/triageTickets/exports.js"
         },
         "./agents/phoneNumbers": {
             "import": {
@@ -968,6 +990,50 @@
                 "default": "./dist/cjs/api/resources/dubbing/resources/project/resources/language/resources/transcript/exports.js"
             },
             "default": "./dist/cjs/api/resources/dubbing/resources/project/resources/language/resources/transcript/exports.js"
+        },
+        "./flows": {
+            "import": {
+                "types": "./dist/esm/api/resources/flows/exports.d.mts",
+                "default": "./dist/esm/api/resources/flows/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/flows/exports.d.ts",
+                "default": "./dist/cjs/api/resources/flows/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/flows/exports.js"
+        },
+        "./flows/video": {
+            "import": {
+                "types": "./dist/esm/api/resources/flows/resources/video/exports.d.mts",
+                "default": "./dist/esm/api/resources/flows/resources/video/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/flows/resources/video/exports.d.ts",
+                "default": "./dist/cjs/api/resources/flows/resources/video/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/flows/resources/video/exports.js"
+        },
+        "./flows/image": {
+            "import": {
+                "types": "./dist/esm/api/resources/flows/resources/image/exports.d.mts",
+                "default": "./dist/esm/api/resources/flows/resources/image/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/flows/resources/image/exports.d.ts",
+                "default": "./dist/cjs/api/resources/flows/resources/image/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/flows/resources/image/exports.js"
+        },
+        "./flows/textToSpeech": {
+            "import": {
+                "types": "./dist/esm/api/resources/flows/resources/textToSpeech/exports.d.mts",
+                "default": "./dist/esm/api/resources/flows/resources/textToSpeech/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/flows/resources/textToSpeech/exports.d.ts",
+                "default": "./dist/cjs/api/resources/flows/resources/textToSpeech/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/flows/resources/textToSpeech/exports.js"
         },
         "./music/compositionPlan": {
             "import": {
@@ -1522,7 +1588,8 @@
         "path": false,
         "stream": false,
         "crypto": false,
-        "command-exists": false
+        "command-exists": false,
+        "ws": false
     },
     "packageManager": "yarn@1.22.22",
     "engines": {

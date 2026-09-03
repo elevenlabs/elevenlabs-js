@@ -5,23 +5,23 @@ import type * as ElevenLabs from "../index.js";
 export interface DubbingProjectResponse {
     /** Unique identifier of the dubbing project. */
     projectId: string;
-    /** Lifecycle status of the project: 'preparing'/'processing' while it transcribes, 'ready' once transcription is done, or 'failed'. */
+    /** Lifecycle status of the project: `queued` before the source is picked up, `preparing` while it is transcribed, `ready` once transcription is done and language targets can start, or `failed`. A project is never reported as `processing` — that value belongs to language targets. */
     status: ElevenLabs.DubbingProjectResponseStatus;
-    /** Optional free-form string the customer can provide to identify the project on their end. */
+    /** The free-form string you supplied as `reference` when creating the project, or null if you supplied none. */
     reference?: string;
     /** BCP-47 language tag of the source media (null if auto-detected). */
     sourceLanguage?: string;
-    /** Default dubbing model id applied to this project's language targets. */
+    /** Dubbing model every language target of this project is dubbed with. Fixed at create time and not selectable per language. */
     modelId?: string;
-    /** Source media metadata; null until the project is ready. */
+    /** Source media metadata, populated once the source has been fetched and decoded (shortly after create, before the project is `ready`); null until then. */
     media?: ElevenLabs.DubbingSourceMediaInfo;
-    /** Identifiers of the language targets created under this project. */
+    /** Identifiers of the language targets under this project. Populated when a single project is fetched, and on create when `target_language` creates one. Always empty in list responses — list the project's language targets instead. */
     languageIds?: string[];
-    /** Workspace webhooks notified when this project becomes ready or fails, and when any of its languages completes or fails. */
+    /** IDs of the workspace webhooks notified as this project and its languages reach `ready`, `completed`, or `failed`. */
     webhookIds?: string[];
     /** Monotonic counter incremented whenever the source transcript is edited (segment add/edit/delete). */
     revision: number;
-    /** Why the project failed; null unless `status` is 'failed'. Also null for the few projects that failed before failure reporting was introduced. */
+    /** Why the project failed; null unless `status` is `failed`. Also null for the few projects that failed before failure reporting was introduced. */
     error?: ElevenLabs.DubbingError;
     /** Non-fatal conditions raised while preparing the source, empty when there are none. Reflects the latest preparation. Conditions raised while dubbing a particular language are reported on that language instead. */
     warnings?: ElevenLabs.VoicesNotPermittedWarning[];

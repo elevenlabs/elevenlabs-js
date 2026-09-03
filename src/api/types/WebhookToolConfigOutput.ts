@@ -33,4 +33,8 @@ export interface WebhookToolConfigOutput {
     executionMode?: ElevenLabs.ToolExecutionMode;
     /** The schema for the outgoing webhoook, including parameters and URL specification */
     apiSchema: ElevenLabs.WebhookToolApiSchemaConfigOutput;
+    /** Whether to resolve a redirect from the endpoint and return the final response. One redirect is followed, as a GET without the request body; nothing configured on this tool (headers, authentication, client certificate) is sent to the redirect target. Both the endpoint and the redirect target must use HTTPS. Not supported for API integration tools. */
+    followRedirects?: boolean;
+    /** Domains a redirect may point at, e.g. 'test.example.com'. Required when following redirects, and a target outside the list is refused. */
+    followRedirectsAllowedDomains?: string[];
 }

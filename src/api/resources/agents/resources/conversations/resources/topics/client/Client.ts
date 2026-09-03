@@ -36,8 +36,13 @@ export class TopicsClient {
      *
      * @example
      *     await client.agents.conversations.topics.get("agent_id", {
+     *         pageSize: 1,
+     *         sortBy: "conversations",
+     *         sortDirection: "asc",
      *         fromUnixSecs: 1,
-     *         toUnixSecs: 1
+     *         toUnixSecs: 1,
+     *         includeEvaluationCriteria: true,
+     *         cursor: "cursor"
      *     })
      */
     public get(
@@ -53,10 +58,28 @@ export class TopicsClient {
         request: ElevenLabs.agents.conversations.GetTopicsRequest = {},
         requestOptions?: TopicsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentTopicsResponseModel>> {
-        const { fromUnixSecs, toUnixSecs } = request;
+        const { pageSize, sortBy, sortDirection, fromUnixSecs, toUnixSecs, includeEvaluationCriteria, cursor } =
+            request;
         const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            sort_by:
+                sortBy != null
+                    ? serializers.TopicSortBy.jsonOrThrow(sortBy, {
+                          unrecognizedObjectKeys: "strip",
+                          omitUndefined: true,
+                      })
+                    : undefined,
+            sort_direction:
+                sortDirection != null
+                    ? serializers.SortDirection.jsonOrThrow(sortDirection, {
+                          unrecognizedObjectKeys: "strip",
+                          omitUndefined: true,
+                      })
+                    : undefined,
             from_unix_secs: fromUnixSecs,
             to_unix_secs: toUnixSecs,
+            include_evaluation_criteria: includeEvaluationCriteria,
+            cursor,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

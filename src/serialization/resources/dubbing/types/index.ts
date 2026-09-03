@@ -6,3 +6,5 @@ export * from "./ListDubbingRequestDubbingStatusesItem.js";
 export * from "./ListDubbingRequestFilterByCreator.js";
 export * from "./ListDubbingRequestOrderBy.js";
 export * from "./ListDubbingRequestOrderDirection.js";
+export * from "./ReceiveDubbingStreamMessage.js";
+export * from "./SendDubbingStreamMessage.js";

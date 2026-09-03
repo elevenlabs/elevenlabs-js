@@ -1,5 +1,7 @@
 export * from "./agents/client/requests/index.js";
 export * as agents from "./agents/index.js";
+export * from "./assets/client/requests/index.js";
+export * as assets from "./assets/index.js";
 export * from "./audioIsolation/client/requests/index.js";
 export * as audioIsolation from "./audioIsolation/index.js";
 export * from "./audioIsolation/types/index.js";
@@ -12,6 +14,7 @@ export * from "./dubbing/types/index.js";
 export * from "./environmentVariables/client/requests/index.js";
 export * as environmentVariables from "./environmentVariables/index.js";
 export * from "./environmentVariables/types/index.js";
+export * as flows from "./flows/index.js";
 export * from "./forcedAlignment/client/requests/index.js";
 export * as forcedAlignment from "./forcedAlignment/index.js";
 export * from "./history/client/requests/index.js";

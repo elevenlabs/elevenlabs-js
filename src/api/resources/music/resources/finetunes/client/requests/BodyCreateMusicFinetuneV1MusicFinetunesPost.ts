@@ -22,5 +22,5 @@ export interface BodyCreateMusicFinetuneV1MusicFinetunesPost {
     /** Finetune visibility. Only 'private' and 'workspace' can be set. */
     visibility?: ElevenLabs.music.CreateFinetunesRequestVisibility;
     /** The model to create a finetune for. */
-    modelId?: ElevenLabs.music.CreateFinetunesRequestModelId;
+    modelId?: ElevenLabs.MusicModelId;
 }

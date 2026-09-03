@@ -7,6 +7,8 @@ export interface TtsConversationalConfigOverride {
     modelId?: ElevenLabs.TtsConversationalModel;
     /** The voice ID to use for TTS */
     voiceId?: string;
+    /** Additional supported voices for the agent */
+    supportedVoices?: ElevenLabs.SupportedVoice[];
     /** The stability of generated speech */
     stability?: number;
     /** The speed of generated speech */

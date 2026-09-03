@@ -31,7 +31,7 @@ export class LanguageClient {
     }
 
     /**
-     * List a project's language targets (cursor-paginated).
+     * List a project's language targets, cursor-paginated, each with signed output URLs once it has produced an output.
      *
      * @param {string} project_id - Identifier of the parent dubbing project.
      * @param {ElevenLabs.dubbing.project.ListLanguageRequest} request
@@ -126,7 +126,11 @@ export class LanguageClient {
     }
 
     /**
-     * Queue a language target for a project (starts once the project is ready).
+     * Add a language to dub a project into, and queue the dub.
+     *
+     * This is the call that produces dubbed audio, and it is billed per generation. The target is created `queued` and starts as soon as the project is `ready`, so it can be added at any point after the project is created. It inherits the project's dubbing model and cannot pick another.
+     *
+     * A project created with `webhook_ids` sends a `dubbing_language_completed` event carrying the output download URLs, so we recommend subscribing rather than polling this target to completion.
      *
      * @param {string} project_id - Identifier of the parent dubbing project.
      * @param {ElevenLabs.dubbing.project.BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost} request
@@ -220,7 +224,7 @@ export class LanguageClient {
     }
 
     /**
-     * Full language-target detail.
+     * Full language-target detail. Once the target reports `completed`, `outputs` carries the signed download URLs. To learn when that happens, we recommend the project's `webhook_ids` subscription rather than polling this endpoint; fetch here when a delivered URL has expired, or to reconcile after an edit.
      *
      * @param {string} project_id - Identifier of the parent dubbing project.
      * @param {string} language_id - Identifier of the language target to fetch.
@@ -303,7 +307,7 @@ export class LanguageClient {
     }
 
     /**
-     * Delete a language target.
+     * Delete a language target and its outputs, leaving the project and its other languages intact. This cannot be undone, and a dub already running is still billed.
      *
      * @param {string} project_id - Identifier of the parent dubbing project.
      * @param {string} language_id - Identifier of the language target to delete.

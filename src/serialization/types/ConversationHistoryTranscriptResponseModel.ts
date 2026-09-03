@@ -70,6 +70,10 @@ export const ConversationHistoryTranscriptResponseModel: core.serialization.Obje
         "file_input",
         ConversationHistoryTranscriptFileInputResponseModel.optional(),
     ),
+    fileInputs: core.serialization.property(
+        "file_inputs",
+        core.serialization.list(ConversationHistoryTranscriptFileInputResponseModel).optional(),
+    ),
     contextualUpdateInfo: core.serialization.property("contextual_update_info", ContextualUpdateInfo.optional()),
     reasoned: core.serialization.boolean().optional(),
 });
@@ -100,6 +104,7 @@ export declare namespace ConversationHistoryTranscriptResponseModel {
         id?: string | null;
         triggered_guardrails?: TriggeredGuardrailCommonModel.Raw[] | null;
         file_input?: ConversationHistoryTranscriptFileInputResponseModel.Raw | null;
+        file_inputs?: ConversationHistoryTranscriptFileInputResponseModel.Raw[] | null;
         contextual_update_info?: ContextualUpdateInfo.Raw | null;
         reasoned?: boolean | null;
     }

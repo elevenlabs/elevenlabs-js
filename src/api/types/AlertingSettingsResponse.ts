@@ -10,5 +10,5 @@ import type * as ElevenLabs from "../index.js";
 export interface AlertingSettingsResponse {
     monitorConfigs?: Record<string, ElevenLabs.AlertingMonitorConfig>;
     autoResolveAfterInactiveMinutes?: number;
-    notifiers?: ElevenLabs.AlertingWebhookNotifierResponse[];
+    notifiers?: ElevenLabs.AlertingSettingsResponseNotifiersItem[];
 }

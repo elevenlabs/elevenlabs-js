@@ -8,11 +8,10 @@ import type * as ElevenLabs from "../../../index.js";
 export type ReceiveTranscription =
     | ElevenLabs.SessionStarted
     | ElevenLabs.PartialTranscript
-    | ElevenLabs.FinalTranscript
-    | ElevenLabs.FinalTranscriptWithTimestamps
     | ElevenLabs.CommittedTranscript
     | ElevenLabs.CommittedTranscriptWithTimestamps
     | ElevenLabs.CommittedTranscriptEntities
+    | ElevenLabs.ScribeWarning
     | ElevenLabs.ScribeError
     | ElevenLabs.ScribeAuthError
     | ElevenLabs.ScribeQuotaExceededError

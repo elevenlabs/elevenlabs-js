@@ -3,8 +3,8 @@
 import type * as ElevenLabs from "../../../../../api/index.js";
 import * as core from "../../../../../core/index.js";
 import type * as serializers from "../../../../index.js";
+import { MusicModelId } from "../../../../types/MusicModelId.js";
 import { BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostCompositionPlan } from "../../types/BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostCompositionPlan.js";
-import { BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostModelId } from "../../types/BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostModelId.js";
 
 export const BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost: core.serialization.Schema<
     serializers.BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost.Raw,
@@ -16,15 +16,13 @@ export const BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPo
         BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostCompositionPlan.optional(),
     ),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),
-    modelId: core.serialization.property(
-        "model_id",
-        BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostModelId.optional(),
-    ),
+    modelId: core.serialization.property("model_id", MusicModelId.optional()),
     seed: core.serialization.number().optional(),
     forceInstrumental: core.serialization.property("force_instrumental", core.serialization.boolean().optional()),
     finetuneId: core.serialization.property("finetune_id", core.serialization.string().optional()),
     storeForInpainting: core.serialization.property("store_for_inpainting", core.serialization.boolean().optional()),
     withTimestamps: core.serialization.property("with_timestamps", core.serialization.boolean().optional()),
+    withWaveformVisual: core.serialization.property("with_waveform_visual", core.serialization.boolean().optional()),
 });
 
 export declare namespace BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost {
@@ -32,11 +30,12 @@ export declare namespace BodyStreamComposedMusicWithADetailedResponseV1MusicDeta
         prompt?: string | null;
         composition_plan?: BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostCompositionPlan.Raw | null;
         music_length_ms?: number | null;
-        model_id?: BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPostModelId.Raw | null;
+        model_id?: MusicModelId.Raw | null;
         seed?: number | null;
         force_instrumental?: boolean | null;
         finetune_id?: string | null;
         store_for_inpainting?: boolean | null;
         with_timestamps?: boolean | null;
+        with_waveform_visual?: boolean | null;
     }
 }

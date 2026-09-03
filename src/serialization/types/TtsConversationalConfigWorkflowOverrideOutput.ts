@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { EffectsSpecOutput } from "./EffectsSpecOutput.js";
 import { PydanticPronunciationDictionaryVersionLocator } from "./PydanticPronunciationDictionaryVersionLocator.js";
 import { SuggestedAudioTag } from "./SuggestedAudioTag.js";
 import { SupportedVoice } from "./SupportedVoice.js";
@@ -40,6 +41,7 @@ export const TtsConversationalConfigWorkflowOverrideOutput: core.serialization.O
         core.serialization.list(PydanticPronunciationDictionaryVersionLocator).optional(),
     ),
     enablePhonemeTags: core.serialization.property("enable_phoneme_tags", core.serialization.boolean().optional()),
+    audioEffects: core.serialization.property("audio_effects", EffectsSpecOutput.optional()),
 });
 
 export declare namespace TtsConversationalConfigWorkflowOverrideOutput {
@@ -57,5 +59,6 @@ export declare namespace TtsConversationalConfigWorkflowOverrideOutput {
         text_normalisation_type?: TextNormalisationType.Raw | null;
         pronunciation_dictionary_locators?: PydanticPronunciationDictionaryVersionLocator.Raw[] | null;
         enable_phoneme_tags?: boolean | null;
+        audio_effects?: EffectsSpecOutput.Raw | null;
     }
 }

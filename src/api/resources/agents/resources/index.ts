@@ -43,6 +43,8 @@ export * as tests from "./tests/index.js";
 export * from "./tests/types/index.js";
 export * from "./tools/client/requests/index.js";
 export * as tools from "./tools/index.js";
+export * from "./triageTickets/client/requests/index.js";
+export * as triageTickets from "./triageTickets/index.js";
 export * from "./twilio/client/requests/index.js";
 export * as twilio from "./twilio/index.js";
 export * from "./users/client/requests/index.js";

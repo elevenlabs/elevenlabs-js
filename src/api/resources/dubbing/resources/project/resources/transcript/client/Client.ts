@@ -25,7 +25,7 @@ export class TranscriptClient {
     }
 
     /**
-     * The project's source transcript, as editable segments.
+     * The project's source transcript, as editable segments. Available once the project is `ready`.
      *
      * @param {string} project_id - Identifier of the dubbing project.
      * @param {TranscriptClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -105,7 +105,7 @@ export class TranscriptClient {
     }
 
     /**
-     * Enterprise only. Remove a source segment from the transcript.
+     * Enterprise only. Remove a source segment from the transcript so it is no longer dubbed. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
      *
      * @param {string} project_id - Identifier of the dubbing project.
      * @param {string} segment_id - Identifier of the segment to remove.
@@ -188,7 +188,7 @@ export class TranscriptClient {
     }
 
     /**
-     * Enterprise only. Edit a source segment's text, speaker, or timing.
+     * Enterprise only. Edit a source segment's text, speaker, or timing. Omitted fields are left unchanged. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
      *
      * @param {string} project_id - Identifier of the dubbing project.
      * @param {string} segment_id - Identifier of the segment to edit.
@@ -287,7 +287,7 @@ export class TranscriptClient {
     }
 
     /**
-     * Enterprise only. Edit several source segments' text, speaker, or timing in one atomic request.
+     * Enterprise only. Edit several source segments' text, speaker, or timing in one atomic request: every edit applies or none does. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
      *
      * @param {string} project_id - Identifier of the dubbing project.
      * @param {ElevenLabs.dubbing.project.DubbingBulkSegmentUpdateRequest} request
@@ -388,7 +388,7 @@ export class TranscriptClient {
     }
 
     /**
-     * Enterprise only. Add a new source segment to the transcript.
+     * Enterprise only. Add a new source segment to the transcript. Its span must lie within the source media, last between 0.1 and 25 seconds, and not overlap another segment by the same speaker. Bumps the project's `revision`, discards the affected translations in every language target, and marks any target that had already completed `stale`. No audio changes until you regenerate a target.
      *
      * @param {string} project_id - Identifier of the dubbing project.
      * @param {ElevenLabs.dubbing.project.DubbingSegmentCreateRequest} request

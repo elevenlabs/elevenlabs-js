@@ -4,6 +4,6 @@
  * Signed, time-limited download URLs for a language target's outputs.
  */
 export interface DubbingLanguageOutputs {
-    /** Signed URL of the dubbed lossless audio track. */
+    /** Signed URL for the dubbed lossless audio track, in FLAC. The link expires one hour after it is issued; re-read the language target for a fresh one. */
     losslessAudio?: string;
 }

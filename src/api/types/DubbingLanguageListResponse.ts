@@ -5,6 +5,6 @@ import type * as ElevenLabs from "../index.js";
 export interface DubbingLanguageListResponse {
     /** The page of language targets for the project. */
     languages: ElevenLabs.DubbingLanguageResponse[];
-    /** Cursor for the next page, or null when there are no more results. */
+    /** Opaque cursor to pass back as `cursor` for the next page, or null when there are no more results. */
     nextCursor?: string;
 }

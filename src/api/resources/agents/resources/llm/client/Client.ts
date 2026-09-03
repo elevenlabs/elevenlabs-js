@@ -35,15 +35,13 @@ export class LlmClient {
      * @example
      *     await client.agents.llm.list()
      */
-    public list(
-        requestOptions?: LlmClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.LlmListResponseModelInput> {
+    public list(requestOptions?: LlmClient.RequestOptions): core.HttpResponsePromise<ElevenLabs.LlmListResponseModel> {
         return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
     }
 
     private async __list(
         requestOptions?: LlmClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.LlmListResponseModelInput>> {
+    ): Promise<core.WithRawResponse<ElevenLabs.LlmListResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -69,7 +67,7 @@ export class LlmClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.LlmListResponseModelInput.parseOrThrow(_response.body, {
+                data: serializers.LlmListResponseModel.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
