@@ -1,4 +1,4 @@
-import { toQueryString } from "./qs";
+import { toQueryString } from "./qs.js";
 
 /**
  * Creates a fluent builder for constructing URL query strings.

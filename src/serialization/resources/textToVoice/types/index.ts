@@ -1,1 +1,1 @@
-export * from "./VoiceDesignRequestModelModelId";
+export * from "./VoiceDesignRequestModelModelId.js";

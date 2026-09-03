@@ -1,2 +1,2 @@
-export * as orders from "./orders";
-export * from "./orders/client/requests";
+export * from "./orders/client/requests/index.js";
+export * as orders from "./orders/index.js";

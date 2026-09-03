@@ -1,1 +1,1 @@
-export type { BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePost } from "./BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePost";
+export type { BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePost } from "./BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePost.js";

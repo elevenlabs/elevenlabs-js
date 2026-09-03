@@ -1,1 +1,1 @@
-export * as audio from "./audio";
+export * as audio from "./audio/index.js";

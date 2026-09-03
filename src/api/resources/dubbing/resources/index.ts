@@ -1,11 +1,6 @@
-export * as audio from "./audio";
-export * as project from "./project";
-export * from "./project/client/requests";
-export * from "./project/types";
-export * as resource from "./resource";
-export * from "./resource/client/requests";
-export * as transcript from "./transcript";
-export * from "./transcript/client/requests";
-export * from "./transcript/types";
-export * as transcripts from "./transcripts";
-export * from "./transcripts/types";
+export * as audio from "./audio/index.js";
+export * from "./project/client/requests/index.js";
+export * as project from "./project/index.js";
+export * from "./project/types/index.js";
+export * as transcripts from "./transcripts/index.js";
+export * from "./transcripts/types/index.js";

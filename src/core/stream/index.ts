@@ -1,2 +1,2 @@
-export type { ServerSentEvent } from "./Stream";
-export { Stream } from "./Stream";
+export type { ServerSentEvent } from "./Stream.js";
+export { Stream } from "./Stream.js";

@@ -1,9 +1,9 @@
-import { type MaybeValid, type Schema, SchemaType, type ValidationError } from "../../Schema";
-import { getErrorMessageForIncorrectType } from "../../utils/getErrorMessageForIncorrectType";
-import { isPlainObject } from "../../utils/isPlainObject";
-import { maybeSkipValidation } from "../../utils/maybeSkipValidation";
-import { getSchemaUtils } from "../schema-utils/index";
-import type { BasePartialRecordSchema, BaseRecordSchema, PartialRecordSchema, RecordSchema } from "./types";
+import { type MaybeValid, type Schema, SchemaType, type ValidationError } from "../../Schema.js";
+import { getErrorMessageForIncorrectType } from "../../utils/getErrorMessageForIncorrectType.js";
+import { isPlainObject } from "../../utils/isPlainObject.js";
+import { maybeSkipValidation } from "../../utils/maybeSkipValidation.js";
+import { getSchemaUtils } from "../schema-utils/index.js";
+import type { BasePartialRecordSchema, BaseRecordSchema, PartialRecordSchema, RecordSchema } from "./types.js";
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const _hasOwn = Object.prototype.hasOwnProperty;

@@ -1,3 +1,3 @@
-export type { AudioIsolationListRequest } from "./AudioIsolationListRequest";
-export type { BodyAudioIsolationStreamV1AudioIsolationStreamPost } from "./BodyAudioIsolationStreamV1AudioIsolationStreamPost";
-export type { BodyAudioIsolationV1AudioIsolationPost } from "./BodyAudioIsolationV1AudioIsolationPost";
+export type { BodyAudioIsolationStreamV1AudioIsolationStreamPost } from "./BodyAudioIsolationStreamV1AudioIsolationStreamPost.js";
+export type { BodyAudioIsolationV1AudioIsolationPost } from "./BodyAudioIsolationV1AudioIsolationPost.js";
+export type { ListAudioIsolationRequest } from "./ListAudioIsolationRequest.js";

@@ -1,2 +1,2 @@
-export * from "./BodySetRulesOnThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdSetRulesPostRulesItem";
-export * from "./PronunciationDictionaryRule";
+export * from "./BodySetRulesOnThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdSetRulesPostRulesItem.js";
+export * from "./PronunciationDictionaryRule.js";

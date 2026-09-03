@@ -1,2 +1,2 @@
-export * as list from "./list";
-export * as search from "./search";
+export * as list from "./list.js";
+export * as search from "./search.js";

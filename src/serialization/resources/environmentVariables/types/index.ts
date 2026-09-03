@@ -1,3 +1,3 @@
-export * from "./EnvironmentVariablesCreateRequestBody";
-export * from "./EnvironmentVariablesListRequestType";
-export * from "./UpdateEnvironmentVariableRequestValuesValue";
+export * from "./CreateEnvironmentVariablesRequestBody.js";
+export * from "./ListEnvironmentVariablesRequestType.js";
+export * from "./UpdateEnvironmentVariableRequestValuesValue.js";

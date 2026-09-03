@@ -1,1 +1,1 @@
-export type { Uploadable } from "./types";
+export type { Uploadable } from "./types.js";

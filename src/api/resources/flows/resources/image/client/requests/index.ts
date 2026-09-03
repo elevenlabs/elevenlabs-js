@@ -1,1 +1,1 @@
-export type { ImageListRequest } from "./ImageListRequest";
+export type { ListImageRequest } from "./ListImageRequest.js";

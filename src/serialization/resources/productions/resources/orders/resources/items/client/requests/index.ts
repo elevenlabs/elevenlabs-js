@@ -1,1 +1,1 @@
-export { BodyUpsertOrderItemV1ProductionsOrdersOrderIdItemsPost } from "./BodyUpsertOrderItemV1ProductionsOrdersOrderIdItemsPost";
+export { BodyUpsertOrderItemV1ProductionsOrdersOrderIdItemsPost } from "./BodyUpsertOrderItemV1ProductionsOrdersOrderIdItemsPost.js";

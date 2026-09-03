@@ -1,2 +1,2 @@
-export type { DubbingBulkSegmentUpdateRequest } from "./DubbingBulkSegmentUpdateRequest";
-export type { DubbingSegmentCreateRequest } from "./DubbingSegmentCreateRequest";
+export type { DubbingBulkSegmentUpdateRequest } from "./DubbingBulkSegmentUpdateRequest.js";
+export type { DubbingSegmentCreateRequest } from "./DubbingSegmentCreateRequest.js";

@@ -1,1 +1,1 @@
-export * from "./TextToSpeechListRequestStatus";
+export * from "./ListTextToSpeechRequestStatus.js";

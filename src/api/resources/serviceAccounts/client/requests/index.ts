@@ -1,1 +1,1 @@
-export type { BodyCreateServiceAccountV1ServiceAccountsPost } from "./BodyCreateServiceAccountV1ServiceAccountsPost";
+export type { BodyCreateServiceAccountV1ServiceAccountsPost } from "./BodyCreateServiceAccountV1ServiceAccountsPost.js";

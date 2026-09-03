@@ -1,1 +1,1 @@
-export { BodyListApiRequestsV1WorkspaceAnalyticsRequestsPost } from "./BodyListApiRequestsV1WorkspaceAnalyticsRequestsPost";
+export { BodyListApiRequestsV1WorkspaceAnalyticsRequestsPost } from "./BodyListApiRequestsV1WorkspaceAnalyticsRequestsPost.js";

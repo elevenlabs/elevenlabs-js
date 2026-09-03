@@ -1,1 +1,1 @@
-export { BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost } from "./BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost";
+export { BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost } from "./BodyUpdatePvcVoiceSampleV1VoicesPvcVoiceIdSamplesSampleIdPost.js";

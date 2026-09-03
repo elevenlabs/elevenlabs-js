@@ -1,4 +1,4 @@
-import type { ValidationError } from "../../Schema";
+import type { ValidationError } from "../../Schema.js";
 
 export function stringifyValidationError(error: ValidationError): string {
     if (error.path.length === 0) {
