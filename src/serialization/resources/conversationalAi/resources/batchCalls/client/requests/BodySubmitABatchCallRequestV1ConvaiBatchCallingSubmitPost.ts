@@ -5,7 +5,7 @@ import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
 import { BatchCallWhatsAppParams } from "../../../../../../types/BatchCallWhatsAppParams";
 import { OutboundCallRecipient } from "../../../../../../types/OutboundCallRecipient";
-import { TelephonyCallConfig } from "../../../../../../types/TelephonyCallConfig";
+import { TelephonyCallConfigInput } from "../../../../../../types/TelephonyCallConfigInput";
 
 export const BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost: core.serialization.Schema<
     serializers.conversationalAi.BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost.Raw,
@@ -20,7 +20,7 @@ export const BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost: core.ser
     timezone: core.serialization.string().optional(),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     environment: core.serialization.string().optional(),
-    telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfig.optional()),
+    telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfigInput.optional()),
     targetConcurrencyLimit: core.serialization.property(
         "target_concurrency_limit",
         core.serialization.number().optional(),
@@ -38,7 +38,7 @@ export declare namespace BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPo
         timezone?: string | null;
         branch_id?: string | null;
         environment?: string | null;
-        telephony_call_config?: TelephonyCallConfig.Raw | null;
+        telephony_call_config?: TelephonyCallConfigInput.Raw | null;
         target_concurrency_limit?: number | null;
     }
 }

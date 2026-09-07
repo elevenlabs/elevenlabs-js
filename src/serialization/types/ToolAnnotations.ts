@@ -7,15 +7,13 @@ import type * as serializers from "../index";
 export const ToolAnnotations: core.serialization.ObjectSchema<
     serializers.ToolAnnotations.Raw,
     ElevenLabs.ToolAnnotations
-> = core.serialization
-    .object({
-        title: core.serialization.string().optional(),
-        readOnlyHint: core.serialization.boolean().optional(),
-        destructiveHint: core.serialization.boolean().optional(),
-        idempotentHint: core.serialization.boolean().optional(),
-        openWorldHint: core.serialization.boolean().optional(),
-    })
-    .passthrough();
+> = core.serialization.object({
+    title: core.serialization.string().optional(),
+    readOnlyHint: core.serialization.boolean().optional(),
+    destructiveHint: core.serialization.boolean().optional(),
+    idempotentHint: core.serialization.boolean().optional(),
+    openWorldHint: core.serialization.boolean().optional(),
+});
 
 export declare namespace ToolAnnotations {
     export interface Raw {
@@ -24,6 +22,5 @@ export declare namespace ToolAnnotations {
         destructiveHint?: boolean | null;
         idempotentHint?: boolean | null;
         openWorldHint?: boolean | null;
-        [key: string]: any;
     }
 }

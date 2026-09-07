@@ -5,7 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { BatchCallStatus } from "./BatchCallStatus";
 import { BatchCallWhatsAppParams } from "./BatchCallWhatsAppParams";
-import { TelephonyCallConfig } from "./TelephonyCallConfig";
+import { TelephonyCallConfigOutput } from "./TelephonyCallConfigOutput";
 import { TelephonyProvider } from "./TelephonyProvider";
 
 export const BatchCallResponse: core.serialization.ObjectSchema<
@@ -29,7 +29,7 @@ export const BatchCallResponse: core.serialization.ObjectSchema<
     lastUpdatedAtUnix: core.serialization.property("last_updated_at_unix", core.serialization.number()),
     status: BatchCallStatus,
     retryCount: core.serialization.property("retry_count", core.serialization.number()),
-    telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfig),
+    telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfigOutput),
     targetConcurrencyLimit: core.serialization.property(
         "target_concurrency_limit",
         core.serialization.number().optional(),
@@ -57,7 +57,7 @@ export declare namespace BatchCallResponse {
         last_updated_at_unix: number;
         status: BatchCallStatus.Raw;
         retry_count: number;
-        telephony_call_config: TelephonyCallConfig.Raw;
+        telephony_call_config: TelephonyCallConfigOutput.Raw;
         target_concurrency_limit?: number | null;
         agent_name: string;
         branch_name?: string | null;

@@ -13,6 +13,7 @@ describe("SpeechEngineClient", () => {
                 {
                     speech_engine_id: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
                     name: "My Speech Engine",
+                    voice_id: "UCaNsl8F6Xh4GALkVMLS",
                     created_at_unix_secs: 1714000000,
                     tags: ["production", "v1"],
                     access_info: {
@@ -41,6 +42,7 @@ describe("SpeechEngineClient", () => {
                 {
                     speechEngineId: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
                     name: "My Speech Engine",
+                    voiceId: "UCaNsl8F6Xh4GALkVMLS",
                     createdAtUnixSecs: 1714000000,
                     tags: ["production", "v1"],
                     accessInfo: {

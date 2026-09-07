@@ -16,6 +16,4 @@ export interface ToolAnnotations {
     destructiveHint?: boolean;
     idempotentHint?: boolean;
     openWorldHint?: boolean;
-    /** Accepts any additional properties */
-    [key: string]: any;
 }

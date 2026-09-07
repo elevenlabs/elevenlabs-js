@@ -10,6 +10,7 @@ export const DataCollectionResultCommonModel: core.serialization.ObjectSchema<
     ElevenLabs.DataCollectionResultCommonModel
 > = core.serialization.object({
     dataCollectionId: core.serialization.property("data_collection_id", core.serialization.string()),
+    name: core.serialization.string().optional(),
     value: core.serialization.unknown().optional(),
     jsonSchema: core.serialization.property("json_schema", LiteralJsonSchemaProperty.optional()),
     rationale: core.serialization.string(),
@@ -18,6 +19,7 @@ export const DataCollectionResultCommonModel: core.serialization.ObjectSchema<
 export declare namespace DataCollectionResultCommonModel {
     export interface Raw {
         data_collection_id: string;
+        name?: string | null;
         value?: unknown | null;
         json_schema?: LiteralJsonSchemaProperty.Raw | null;
         rationale: string;

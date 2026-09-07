@@ -19,6 +19,10 @@ export interface AgentBranchSummary {
     parentBranchId?: string;
     /** Whether a draft exists for the branch */
     draftExists?: boolean;
+    /** Unix seconds when the caller's draft on this branch was first created, or null when they have no draft. A draft created before last_committed_at was written against a config the branch has since moved past, so it may not reflect the current one. */
+    draftCreatedAt?: number;
+    /** Whether the caller's draft on this branch was created before the branch's last commit, meaning it was written against a config the branch has since moved past and may not reflect the current one. */
+    draftIsBehindTip?: boolean;
     /** Number of calls in the last 7 days */
     calls7D?: number;
     /** Number of commits on this branch not yet on main, relative to their common ancestor. Null if it could not be computed (e.g. no common ancestor, or the branch history exceeds the comparison budget). */

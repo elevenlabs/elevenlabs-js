@@ -25,6 +25,8 @@ export const AgentBranchSummary: core.serialization.ObjectSchema<
     ),
     parentBranchId: core.serialization.property("parent_branch_id", core.serialization.string().optional()),
     draftExists: core.serialization.property("draft_exists", core.serialization.boolean().optional()),
+    draftCreatedAt: core.serialization.property("draft_created_at", core.serialization.number().optional()),
+    draftIsBehindTip: core.serialization.property("draft_is_behind_tip", core.serialization.boolean().optional()),
     calls7D: core.serialization.property("calls_7d", core.serialization.number().optional()),
     commitsAhead: core.serialization.property("commits_ahead", core.serialization.number().optional()),
     commitsBehind: core.serialization.property("commits_behind", core.serialization.number().optional()),
@@ -45,6 +47,8 @@ export declare namespace AgentBranchSummary {
         current_live_percentage?: number | null;
         parent_branch_id?: string | null;
         draft_exists?: boolean | null;
+        draft_created_at?: number | null;
+        draft_is_behind_tip?: boolean | null;
         calls_7d?: number | null;
         commits_ahead?: number | null;
         commits_behind?: number | null;

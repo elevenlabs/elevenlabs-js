@@ -4,11 +4,11 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 
-export const StudioClipReferenceClipType: core.serialization.Schema<
-    serializers.StudioClipReferenceClipType.Raw,
-    ElevenLabs.StudioClipReferenceClipType
+export const StudioClipLocatorClipType: core.serialization.Schema<
+    serializers.StudioClipLocatorClipType.Raw,
+    ElevenLabs.StudioClipLocatorClipType
 > = core.serialization.enum_(["video", "image", "external_audio", "tts_node"]);
 
-export declare namespace StudioClipReferenceClipType {
+export declare namespace StudioClipLocatorClipType {
     export type Raw = "video" | "image" | "external_audio" | "tts_node";
 }

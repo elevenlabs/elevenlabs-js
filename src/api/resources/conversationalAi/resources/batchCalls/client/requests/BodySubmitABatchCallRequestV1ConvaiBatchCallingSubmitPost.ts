@@ -20,7 +20,7 @@ export interface BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost {
     timezone?: string;
     branchId?: string;
     environment?: string;
-    telephonyCallConfig?: ElevenLabs.TelephonyCallConfig;
+    telephonyCallConfig?: ElevenLabs.TelephonyCallConfigInput;
     /** Maximum number of simultaneous calls for this batch. When set, dispatch is governed by this limit rather than workspace/agent capacity percentages. */
     targetConcurrencyLimit?: number;
 }

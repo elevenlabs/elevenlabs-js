@@ -2,10 +2,13 @@
 
 import type * as ElevenLabs from "../index";
 
-export interface StudioClipReference {
+/**
+ * Coordinates of a clip inside a Studio project: the payload of a studio_clip reference.
+ */
+export interface StudioClipLocator {
     projectId: string;
     chapterId: string;
-    clipType: ElevenLabs.StudioClipReferenceClipType;
+    clipType: ElevenLabs.StudioClipLocatorClipType;
     clipId: string;
     blockId?: string;
     previewUrl?: string;

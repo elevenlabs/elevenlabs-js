@@ -31,7 +31,11 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
-            telephony_call_config: { ringing_timeout_secs: 1, twilio_call_recording_enabled: true },
+            telephony_call_config: {
+                ringing_timeout_secs: 1,
+                twilio_call_recording_enabled: true,
+                twilio_machine_detection: { mode: "enable" },
+            },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
             branch_name: "branch_name",
@@ -77,6 +81,9 @@ describe("BatchCallsClient", () => {
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
                 twilioCallRecordingEnabled: true,
+                twilioMachineDetection: {
+                    mode: "enable",
+                },
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",
@@ -198,7 +205,11 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
-            telephony_call_config: { ringing_timeout_secs: 1, twilio_call_recording_enabled: true },
+            telephony_call_config: {
+                ringing_timeout_secs: 1,
+                twilio_call_recording_enabled: true,
+                twilio_machine_detection: { mode: "enable" },
+            },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
             branch_name: "branch_name",
@@ -279,6 +290,9 @@ describe("BatchCallsClient", () => {
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
                 twilioCallRecordingEnabled: true,
+                twilioMachineDetection: {
+                    mode: "enable",
+                },
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",
@@ -378,7 +392,11 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
-            telephony_call_config: { ringing_timeout_secs: 1, twilio_call_recording_enabled: true },
+            telephony_call_config: {
+                ringing_timeout_secs: 1,
+                twilio_call_recording_enabled: true,
+                twilio_machine_detection: { mode: "enable" },
+            },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
             branch_name: "branch_name",
@@ -419,6 +437,9 @@ describe("BatchCallsClient", () => {
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
                 twilioCallRecordingEnabled: true,
+                twilioMachineDetection: {
+                    mode: "enable",
+                },
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",
@@ -453,7 +474,11 @@ describe("BatchCallsClient", () => {
             last_updated_at_unix: 1,
             status: "pending",
             retry_count: 1,
-            telephony_call_config: { ringing_timeout_secs: 1, twilio_call_recording_enabled: true },
+            telephony_call_config: {
+                ringing_timeout_secs: 1,
+                twilio_call_recording_enabled: true,
+                twilio_machine_detection: { mode: "enable" },
+            },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
             branch_name: "branch_name",
@@ -494,6 +519,9 @@ describe("BatchCallsClient", () => {
             telephonyCallConfig: {
                 ringingTimeoutSecs: 1,
                 twilioCallRecordingEnabled: true,
+                twilioMachineDetection: {
+                    mode: "enable",
+                },
             },
             targetConcurrencyLimit: 1,
             agentName: "agent_name",

@@ -3,10 +3,8 @@
 import type * as ElevenLabs from "../index";
 
 /**
- * Execution-related properties for a tool.
+ * Execution-related properties for a tool (2025-11-25 only).
  */
 export interface ToolExecution {
     taskSupport?: ElevenLabs.ToolExecutionTaskSupport;
-    /** Accepts any additional properties */
-    [key: string]: any;
 }

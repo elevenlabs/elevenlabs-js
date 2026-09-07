@@ -14,6 +14,7 @@ describe("SummariesClient", () => {
                 data: {
                     agent_id: "J3Pbu5gP6NNKBscdCdwB",
                     name: "My Agent",
+                    voice_id: "UCaNsl8F6Xh4GALkVMLS",
                     tags: ["Customer Support", "Technical Help", "Eleven"],
                     created_at_unix_secs: 1716153600,
                     access_info: {
@@ -45,6 +46,7 @@ describe("SummariesClient", () => {
                 data: {
                     agentId: "J3Pbu5gP6NNKBscdCdwB",
                     name: "My Agent",
+                    voiceId: "UCaNsl8F6Xh4GALkVMLS",
                     tags: ["Customer Support", "Technical Help", "Eleven"],
                     createdAtUnixSecs: 1716153600,
                     accessInfo: {

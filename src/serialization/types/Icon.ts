@@ -3,20 +3,20 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { IconTheme } from "./IconTheme";
 
-export const Icon: core.serialization.ObjectSchema<serializers.Icon.Raw, ElevenLabs.Icon> = core.serialization
-    .object({
-        src: core.serialization.string(),
-        mimeType: core.serialization.string().optional(),
-        sizes: core.serialization.list(core.serialization.string()).optional(),
-    })
-    .passthrough();
+export const Icon: core.serialization.ObjectSchema<serializers.Icon.Raw, ElevenLabs.Icon> = core.serialization.object({
+    src: core.serialization.string(),
+    mimeType: core.serialization.string().optional(),
+    sizes: core.serialization.list(core.serialization.string()).optional(),
+    theme: IconTheme.optional(),
+});
 
 export declare namespace Icon {
     export interface Raw {
         src: string;
         mimeType?: string | null;
         sizes?: string[] | null;
-        [key: string]: any;
+        theme?: IconTheme.Raw | null;
     }
 }

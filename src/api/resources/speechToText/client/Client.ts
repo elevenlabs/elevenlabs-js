@@ -45,7 +45,7 @@ export class SpeechToTextClient {
      *     await client.speechToText.convert({
      *         token: "token",
      *         enableLogging: true,
-     *         modelId: "model_id"
+     *         modelId: "scribe_v2"
      *     })
      */
     public convert(

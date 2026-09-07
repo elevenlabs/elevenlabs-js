@@ -7,6 +7,8 @@ export interface AgentKnowledgeBaseRagChunkResponseModel {
     documentId: string;
     /** Name of the source knowledge base document. */
     documentName: string;
+    /** Tracked source URL for URL documents, or null for other document types. */
+    sourceUrl?: string;
     /** ID of the retrieved chunk. */
     chunkId: string;
     /** Text content of the retrieved chunk. */

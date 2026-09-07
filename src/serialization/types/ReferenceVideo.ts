@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { StudioClipReference } from "./StudioClipReference";
+import { StudioClipLocator } from "./StudioClipLocator";
 
 export const ReferenceVideo: core.serialization.ObjectSchema<
     serializers.ReferenceVideo.Raw,
@@ -12,7 +12,7 @@ export const ReferenceVideo: core.serialization.ObjectSchema<
     generationId: core.serialization.property("generation_id", core.serialization.string().optional()),
     contentAssetId: core.serialization.property("content_asset_id", core.serialization.string().optional()),
     templateNodeId: core.serialization.property("template_node_id", core.serialization.string().optional()),
-    studioClip: core.serialization.property("studio_clip", StudioClipReference.optional()),
+    studioClip: core.serialization.property("studio_clip", StudioClipLocator.optional()),
 });
 
 export declare namespace ReferenceVideo {
@@ -20,6 +20,6 @@ export declare namespace ReferenceVideo {
         generation_id?: string | null;
         content_asset_id?: string | null;
         template_node_id?: string | null;
-        studio_clip?: StudioClipReference.Raw | null;
+        studio_clip?: StudioClipLocator.Raw | null;
     }
 }
