@@ -13,10 +13,12 @@ export interface CreateTwilioPhoneNumberRequest {
     supportsOutbound?: boolean;
     /** Agent ID to assign the phone number to */
     agentId?: string;
-    /** Twilio Account SID */
+    /** Twilio Account SID (starts with `AC`) or API Key SID (starts with `SK`) */
     sid: string;
-    /** Twilio Auth Token */
+    /** Secret paired with `sid`: the Account Auth Token for an Account SID, or the API Key Secret for an API Key SID */
     token: string;
+    /** Twilio Account Auth Token, required for API Key imports to validate inbound webhook signatures */
+    accountAuthToken?: string;
     /** Twilio Additional Region Configuration */
     regionConfig?: ElevenLabs.RegionConfigRequest;
     /** Route inbound SMS to ElevenLabs. On by default; set to false to skip SMS configuration for numbers that don't support it. */

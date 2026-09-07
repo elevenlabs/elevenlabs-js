@@ -16,6 +16,7 @@ export const CreateTwilioPhoneNumberRequest: core.serialization.ObjectSchema<
     agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
     sid: core.serialization.string(),
     token: core.serialization.string(),
+    accountAuthToken: core.serialization.property("account_auth_token", core.serialization.string().optional()),
     regionConfig: core.serialization.property("region_config", RegionConfigRequest.optional()),
     enableSms: core.serialization.property("enable_sms", core.serialization.boolean().optional()),
 });
@@ -29,6 +30,7 @@ export declare namespace CreateTwilioPhoneNumberRequest {
         agent_id?: string | null;
         sid: string;
         token: string;
+        account_auth_token?: string | null;
         region_config?: RegionConfigRequest.Raw | null;
         enable_sms?: boolean | null;
     }

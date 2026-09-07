@@ -2,7 +2,7 @@
 
 import type * as ElevenLabs from "../index";
 
-export interface QueryParamsJsonSchema {
+export interface QueryParamsJsonSchemaInput {
     properties: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
     required?: string[];
 }

@@ -12,6 +12,7 @@ export const AgentKnowledgeBaseRagChunkResponseModel: core.serialization.ObjectS
 > = core.serialization.object({
     documentId: core.serialization.property("document_id", core.serialization.string()),
     documentName: core.serialization.property("document_name", core.serialization.string()),
+    sourceUrl: core.serialization.property("source_url", core.serialization.string().optional()),
     chunkId: core.serialization.property("chunk_id", core.serialization.string()),
     text: core.serialization.string(),
     vectorDistance: core.serialization.property("vector_distance", core.serialization.number().optional()),
@@ -23,6 +24,7 @@ export declare namespace AgentKnowledgeBaseRagChunkResponseModel {
     export interface Raw {
         document_id: string;
         document_name: string;
+        source_url?: string | null;
         chunk_id: string;
         text: string;
         vector_distance?: number | null;

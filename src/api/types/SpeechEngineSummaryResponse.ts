@@ -7,6 +7,8 @@ export interface SpeechEngineSummaryResponse {
     speechEngineId: string;
     /** Human-readable name for the speech engine */
     name: string;
+    /** Voice ID assigned to this speech engine */
+    voiceId: string;
     /** Creation time in Unix seconds */
     createdAtUnixSecs: number;
     /** Arbitrary tags for categorization and filtering */

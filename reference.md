@@ -4289,7 +4289,7 @@ Transcribe an audio or video file. If webhook is set to true, the request will b
 await client.speechToText.convert({
     token: "token",
     enableLogging: true,
-    modelId: "model_id"
+    modelId: "scribe_v2"
 });
 
 ```
@@ -5700,6 +5700,7 @@ await client.conversationalAi.conversations.list({
     userId: "user_id",
     evaluationParams: ["evaluation_params"],
     dataCollectionParams: ["data_collection_params"],
+    dynamicVariableParams: ["dynamic_variable_params"],
     dataCollectionIds: ["data_collection_ids"],
     evaluationCriteriaIds: ["evaluation_criteria_ids"],
     toolNames: ["tool_names"],
@@ -13524,6 +13525,7 @@ await client.conversationalAi.conversations.messages.textSearch({
     userId: "user_id",
     evaluationParams: ["evaluation_params"],
     dataCollectionParams: ["data_collection_params"],
+    dynamicVariableParams: ["dynamic_variable_params"],
     toolNames: ["tool_names"],
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
@@ -17472,7 +17474,9 @@ await client.dubbing.project.list({
 
 Create a dubbing project from an uploaded file (`file`) or a source URL (`source_url`).
 
-Returns as soon as the project record exists, before the source has been fetched: the project starts `queued` and reaches `ready` once its source has been transcribed. Creating a project does not dub anything — add a language target to it for each language you want, or pass `target_language` to queue the first one here.
+Returns as soon as the project record exists, before the source has been fetched: the project starts `queued` and reaches `ready` once its source has been transcribed. Add a language target to it for each language you want, or pass `target_language` to queue the first one here.
+
+Creating a project incurs a minimum charge of one language: you are charged for at least one language's dubbing when the project is created, before any output exists. This charge prepays the first language target — the first target you add, or the one queued via `target_language`, consumes it — and each additional language is charged separately.
 
 Preparation can take minutes on a long source, so we recommend passing `webhook_ids` to be notified when the project turns `ready` or `failed`, rather than polling for it.
 </dd>

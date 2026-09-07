@@ -11,10 +11,17 @@ export const WebhookEventType: core.serialization.Schema<
     "transcript",
     "audio",
     "call_initiation_failure",
+    "answering_machine_detection",
     "unredacted_transcript",
     "unredacted_audio",
 ]);
 
 export declare namespace WebhookEventType {
-    export type Raw = "transcript" | "audio" | "call_initiation_failure" | "unredacted_transcript" | "unredacted_audio";
+    export type Raw =
+        | "transcript"
+        | "audio"
+        | "call_initiation_failure"
+        | "answering_machine_detection"
+        | "unredacted_transcript"
+        | "unredacted_audio";
 }

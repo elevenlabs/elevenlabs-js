@@ -11,6 +11,7 @@ export const AgentSummaryResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     name: core.serialization.string(),
+    voiceId: core.serialization.property("voice_id", core.serialization.string()),
     tags: core.serialization.list(core.serialization.string()),
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
@@ -25,6 +26,7 @@ export declare namespace AgentSummaryResponseModel {
     export interface Raw {
         agent_id: string;
         name: string;
+        voice_id: string;
         tags: string[];
         created_at_unix_secs: number;
         access_info: ResourceAccessInfo.Raw;

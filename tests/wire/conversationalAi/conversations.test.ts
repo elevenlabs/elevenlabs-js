@@ -124,6 +124,7 @@ describe("ConversationsClient", () => {
             userId: "user_id",
             evaluationParams: ["evaluation_params"],
             dataCollectionParams: ["data_collection_params"],
+            dynamicVariableParams: ["dynamic_variable_params"],
             dataCollectionIds: ["data_collection_ids"],
             evaluationCriteriaIds: ["evaluation_criteria_ids"],
             toolNames: ["tool_names"],

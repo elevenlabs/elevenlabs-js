@@ -15,5 +15,5 @@ export interface BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost
     agentPhoneNumberId: string;
     toNumber: string;
     conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestInput;
-    telephonyCallConfig?: ElevenLabs.TelephonyCallConfig;
+    telephonyCallConfig?: ElevenLabs.TelephonyCallConfigInput;
 }

@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { LockReason } from "./LockReason";
 import { PermissionType } from "./PermissionType";
+import { PlatformLimits } from "./PlatformLimits";
 
 export const WorkspaceApiKeyResponseModel: core.serialization.ObjectSchema<
     serializers.WorkspaceApiKeyResponseModel.Raw,
@@ -29,6 +30,7 @@ export const WorkspaceApiKeyResponseModel: core.serialization.ObjectSchema<
         "third_party_disable_allowed",
         core.serialization.boolean().optional(),
     ),
+    platformLimits: core.serialization.property("platform_limits", PlatformLimits.optional()),
 });
 
 export declare namespace WorkspaceApiKeyResponseModel {
@@ -46,5 +48,6 @@ export declare namespace WorkspaceApiKeyResponseModel {
         hashed_xi_api_key: string;
         allowed_ips?: string[] | null;
         third_party_disable_allowed?: boolean | null;
+        platform_limits?: PlatformLimits.Raw | null;
     }
 }

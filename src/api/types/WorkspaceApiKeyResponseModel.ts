@@ -18,4 +18,6 @@ export interface WorkspaceApiKeyResponseModel {
     hashedXiApiKey: string;
     allowedIps?: string[];
     thirdPartyDisableAllowed?: boolean;
+    /** Per-API-key concurrency limits (TTS/dubbing/music). Enterprise-only. */
+    platformLimits?: ElevenLabs.PlatformLimits;
 }

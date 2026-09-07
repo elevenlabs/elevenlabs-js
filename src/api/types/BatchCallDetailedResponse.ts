@@ -23,7 +23,7 @@ export interface BatchCallDetailedResponse {
     lastUpdatedAtUnix: number;
     status: ElevenLabs.BatchCallStatus;
     retryCount: number;
-    telephonyCallConfig: ElevenLabs.TelephonyCallConfig;
+    telephonyCallConfig: ElevenLabs.TelephonyCallConfigOutput;
     /** Maximum number of simultaneous calls for this batch. When set, dispatch is governed by this limit rather than workspace/agent capacity percentages. */
     targetConcurrencyLimit?: number;
     agentName: string;

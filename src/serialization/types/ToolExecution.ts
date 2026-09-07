@@ -6,15 +6,12 @@ import type * as serializers from "../index";
 import { ToolExecutionTaskSupport } from "./ToolExecutionTaskSupport";
 
 export const ToolExecution: core.serialization.ObjectSchema<serializers.ToolExecution.Raw, ElevenLabs.ToolExecution> =
-    core.serialization
-        .object({
-            taskSupport: ToolExecutionTaskSupport.optional(),
-        })
-        .passthrough();
+    core.serialization.object({
+        taskSupport: ToolExecutionTaskSupport.optional(),
+    });
 
 export declare namespace ToolExecution {
     export interface Raw {
         taskSupport?: ToolExecutionTaskSupport.Raw | null;
-        [key: string]: any;
     }
 }

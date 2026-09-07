@@ -18,12 +18,16 @@ export interface AnalysisProperty {
     isSystemProvided?: boolean;
     /** The name of the dynamic variable to use for this property's value. Mutually exclusive with description, is_system_provided, constant_value, and is_omitted. */
     dynamicVariable?: string;
-    /** When set, the LLM provides the value but the runtime rejects any value not present in the list held by this dynamic variable. Use to let the LLM pick from a server-verified set (e.g. the IDs the current user is allowed to access). Requires description; mutually exclusive with dynamic_variable, is_system_provided, constant_value, and is_omitted. */
+    /** Server-side rejection guard for an LLM-provided value: the runtime rejects any value outside the permitted set this object names, and the set is not advertised to the LLM as an enum. Only supported when the value source is `description`; combining it with dynamic_variable, is_system_provided, constant_value, or is_omitted is rejected. */
+    allowedValues?: ElevenLabs.AllowedValues;
+    /** DEPRECATED: use `allowed_values` instead. When set, the LLM provides the value but the runtime rejects any value not present in the list held by this dynamic variable (must be a JSON array such as ["ws_alpha", "ws_beta"]). Use to let the LLM pick from a server-verified set (e.g. the IDs the current user is allowed to access). Requires description; mutually exclusive with dynamic_variable, is_system_provided, constant_value, and is_omitted. */
     allowedValuesDynamicVariable?: string;
     /** A constant value to use for this property. Mutually exclusive with description, dynamic_variable, is_system_provided, and is_omitted. */
     constantValue?: ElevenLabs.AnalysisPropertyConstantValue;
     /** If true, this parameter will be completely omitted from the request. Only valid for optional parameters. Mutually exclusive with description, dynamic_variable, is_system_provided, and constant_value. */
     isOmitted?: boolean;
+    /** The name of this data collection item. */
+    name?: string;
     /** LLM model to use for this analysis item. If not set, uses agent's analysis_llm default. */
     llm?: ElevenLabs.Llm;
 }

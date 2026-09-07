@@ -21,6 +21,7 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *         userId: "user_id",
  *         evaluationParams: ["evaluation_params"],
  *         dataCollectionParams: ["data_collection_params"],
+ *         dynamicVariableParams: ["dynamic_variable_params"],
  *         toolNames: ["tool_names"],
  *         toolNamesSuccessful: ["tool_names_successful"],
  *         toolNamesErrored: ["tool_names_errored"],
@@ -73,6 +74,8 @@ export interface MessagesTextSearchRequest {
     evaluationParams?: string | string[];
     /** Data collection filters. Repeat param. Format: id:op:value where op is one of eq|neq|gt|gte|lt|lte|in|exists|missing. For in, pipe-delimit values. */
     dataCollectionParams?: string | string[];
+    /** Dynamic variable filters. Repeat param. Format: name:op:value where op is one of eq|gt|gte|lt|lte. Comparison operators require a numeric value. Names containing ':' cannot be expressed. */
+    dynamicVariableParams?: string | string[];
     /** Filter conversations by tool names used during the call. */
     toolNames?: string | string[];
     /** Filter conversations by tool names that had successful calls. */

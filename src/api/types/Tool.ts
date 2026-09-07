@@ -10,11 +10,9 @@ export interface Tool {
     title?: string;
     description?: string;
     inputSchema: Record<string, unknown>;
+    execution?: ElevenLabs.ToolExecution;
     outputSchema?: Record<string, unknown>;
     icons?: ElevenLabs.Icon[];
     annotations?: ElevenLabs.ToolAnnotations;
     meta?: Record<string, unknown>;
-    execution?: ElevenLabs.ToolExecution;
-    /** Accepts any additional properties */
-    [key: string]: any;
 }

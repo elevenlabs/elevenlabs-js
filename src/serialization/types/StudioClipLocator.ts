@@ -3,25 +3,25 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { StudioClipReferenceClipType } from "./StudioClipReferenceClipType";
+import { StudioClipLocatorClipType } from "./StudioClipLocatorClipType";
 
-export const StudioClipReference: core.serialization.ObjectSchema<
-    serializers.StudioClipReference.Raw,
-    ElevenLabs.StudioClipReference
+export const StudioClipLocator: core.serialization.ObjectSchema<
+    serializers.StudioClipLocator.Raw,
+    ElevenLabs.StudioClipLocator
 > = core.serialization.object({
     projectId: core.serialization.property("project_id", core.serialization.string()),
     chapterId: core.serialization.property("chapter_id", core.serialization.string()),
-    clipType: core.serialization.property("clip_type", StudioClipReferenceClipType),
+    clipType: core.serialization.property("clip_type", StudioClipLocatorClipType),
     clipId: core.serialization.property("clip_id", core.serialization.string()),
     blockId: core.serialization.property("block_id", core.serialization.string().optional()),
     previewUrl: core.serialization.property("preview_url", core.serialization.string().optional()),
 });
 
-export declare namespace StudioClipReference {
+export declare namespace StudioClipLocator {
     export interface Raw {
         project_id: string;
         chapter_id: string;
-        clip_type: StudioClipReferenceClipType.Raw;
+        clip_type: StudioClipLocatorClipType.Raw;
         clip_id: string;
         block_id?: string | null;
         preview_url?: string | null;

@@ -5,15 +5,15 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { LiteralJsonSchemaProperty } from "./LiteralJsonSchemaProperty";
 
-export const QueryParamsJsonSchema: core.serialization.ObjectSchema<
-    serializers.QueryParamsJsonSchema.Raw,
-    ElevenLabs.QueryParamsJsonSchema
+export const QueryParamsJsonSchemaInput: core.serialization.ObjectSchema<
+    serializers.QueryParamsJsonSchemaInput.Raw,
+    ElevenLabs.QueryParamsJsonSchemaInput
 > = core.serialization.object({
     properties: core.serialization.record(core.serialization.string(), LiteralJsonSchemaProperty),
     required: core.serialization.list(core.serialization.string()).optional(),
 });
 
-export declare namespace QueryParamsJsonSchema {
+export declare namespace QueryParamsJsonSchemaInput {
     export interface Raw {
         properties: Record<string, LiteralJsonSchemaProperty.Raw>;
         required?: string[] | null;

@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
 import { ConversationInitiationClientDataRequestInput } from "../../../../../../types/ConversationInitiationClientDataRequestInput";
-import { TelephonyCallConfig } from "../../../../../../types/TelephonyCallConfig";
+import { TelephonyCallConfigInput } from "../../../../../../types/TelephonyCallConfigInput";
 
 export const BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost: core.serialization.Schema<
     serializers.conversationalAi.BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost.Raw,
@@ -17,7 +17,7 @@ export const BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost: co
         "conversation_initiation_client_data",
         ConversationInitiationClientDataRequestInput.optional(),
     ),
-    telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfig.optional()),
+    telephonyCallConfig: core.serialization.property("telephony_call_config", TelephonyCallConfigInput.optional()),
 });
 
 export declare namespace BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost {
@@ -26,6 +26,6 @@ export declare namespace BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutbound
         agent_phone_number_id: string;
         to_number: string;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestInput.Raw | null;
-        telephony_call_config?: TelephonyCallConfig.Raw | null;
+        telephony_call_config?: TelephonyCallConfigInput.Raw | null;
     }
 }

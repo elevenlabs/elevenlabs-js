@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import * as serializers from "../index";
 import { LiteralJsonSchemaProperty } from "./LiteralJsonSchemaProperty";
-import { QueryParamsJsonSchema } from "./QueryParamsJsonSchema";
+import { QueryParamsJsonSchemaOutput } from "./QueryParamsJsonSchemaOutput";
 import { ResponseFilter } from "./ResponseFilter";
 import { WebhookToolApiSchemaConfigOutputAuthConnection } from "./WebhookToolApiSchemaConfigOutputAuthConnection";
 import { WebhookToolApiSchemaConfigOutputContentType } from "./WebhookToolApiSchemaConfigOutputContentType";
@@ -27,7 +27,7 @@ export const WebhookToolApiSchemaConfigOutput: core.serialization.ObjectSchema<
         "path_params_schema",
         core.serialization.record(core.serialization.string(), LiteralJsonSchemaProperty).optional(),
     ),
-    queryParamsSchema: core.serialization.property("query_params_schema", QueryParamsJsonSchema.optional()),
+    queryParamsSchema: core.serialization.property("query_params_schema", QueryParamsJsonSchemaOutput.optional()),
     requestBodySchema: core.serialization.property(
         "request_body_schema",
         core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyOutput).optional(),
@@ -54,7 +54,7 @@ export declare namespace WebhookToolApiSchemaConfigOutput {
         url: string;
         method?: WebhookToolApiSchemaConfigOutputMethod.Raw | null;
         path_params_schema?: Record<string, LiteralJsonSchemaProperty.Raw> | null;
-        query_params_schema?: QueryParamsJsonSchema.Raw | null;
+        query_params_schema?: QueryParamsJsonSchemaOutput.Raw | null;
         request_body_schema?: serializers.ObjectJsonSchemaPropertyOutput.Raw | null;
         response_body_schema?: serializers.ObjectJsonSchemaPropertyOutput.Raw | null;
         response_filter?: ResponseFilter.Raw | null;

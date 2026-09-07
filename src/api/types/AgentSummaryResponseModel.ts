@@ -7,6 +7,8 @@ export interface AgentSummaryResponseModel {
     agentId: string;
     /** The name of the agent */
     name: string;
+    /** Voice ID assigned to this agent */
+    voiceId: string;
     /** Agent tags used to categorize the agent */
     tags: string[];
     /** The creation time of the agent in unix seconds */

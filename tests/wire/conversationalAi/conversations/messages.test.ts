@@ -51,6 +51,7 @@ describe("MessagesClient", () => {
             userId: "user_id",
             evaluationParams: ["evaluation_params"],
             dataCollectionParams: ["data_collection_params"],
+            dynamicVariableParams: ["dynamic_variable_params"],
             toolNames: ["tool_names"],
             toolNamesSuccessful: ["tool_names_successful"],
             toolNamesErrored: ["tool_names_errored"],

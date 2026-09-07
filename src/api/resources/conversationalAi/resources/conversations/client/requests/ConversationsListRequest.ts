@@ -21,6 +21,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         userId: "user_id",
  *         evaluationParams: ["evaluation_params"],
  *         dataCollectionParams: ["data_collection_params"],
+ *         dynamicVariableParams: ["dynamic_variable_params"],
  *         dataCollectionIds: ["data_collection_ids"],
  *         evaluationCriteriaIds: ["evaluation_criteria_ids"],
  *         toolNames: ["tool_names"],
@@ -80,6 +81,8 @@ export interface ConversationsListRequest {
     evaluationParams?: string | string[];
     /** Data collection filters. Repeat param. Format: id:op:value where op is one of eq|neq|gt|gte|lt|lte|in|exists|missing. For in, pipe-delimit values. */
     dataCollectionParams?: string | string[];
+    /** Dynamic variable filters. Repeat param. Format: name:op:value where op is one of eq|gt|gte|lt|lte. Comparison operators require a numeric value. Names containing ':' cannot be expressed. */
+    dynamicVariableParams?: string | string[];
     /** Data collection field IDs to include in each conversation summary. Repeat param. When omitted, data_collection_results is not returned. */
     dataCollectionIds?: string | string[];
     /** Evaluation criteria IDs to include in each conversation summary. Repeat param. When omitted, evaluation_criteria_results is not returned. */

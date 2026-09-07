@@ -3,21 +3,27 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { TwilioMachineDetectionConfig } from "./TwilioMachineDetectionConfig";
 
-export const TelephonyCallConfig: core.serialization.ObjectSchema<
-    serializers.TelephonyCallConfig.Raw,
-    ElevenLabs.TelephonyCallConfig
+export const TelephonyCallConfigInput: core.serialization.ObjectSchema<
+    serializers.TelephonyCallConfigInput.Raw,
+    ElevenLabs.TelephonyCallConfigInput
 > = core.serialization.object({
     ringingTimeoutSecs: core.serialization.property("ringing_timeout_secs", core.serialization.number().optional()),
     twilioCallRecordingEnabled: core.serialization.property(
         "twilio_call_recording_enabled",
         core.serialization.boolean().optional(),
     ),
+    twilioMachineDetection: core.serialization.property(
+        "twilio_machine_detection",
+        TwilioMachineDetectionConfig.optional(),
+    ),
 });
 
-export declare namespace TelephonyCallConfig {
+export declare namespace TelephonyCallConfigInput {
     export interface Raw {
         ringing_timeout_secs?: number | null;
         twilio_call_recording_enabled?: boolean | null;
+        twilio_machine_detection?: TwilioMachineDetectionConfig.Raw | null;
     }
 }

@@ -8,7 +8,7 @@ import type * as ElevenLabs from "../../../../index";
  *     {
  *         token: "token",
  *         enableLogging: true,
- *         modelId: "model_id"
+ *         modelId: "scribe_v2"
  *     }
  */
 export interface BodySpeechToTextV1SpeechToTextPost {
