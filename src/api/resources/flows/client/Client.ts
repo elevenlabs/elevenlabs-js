@@ -3,6 +3,7 @@
 import type { BaseClientOptions } from "../../../../BaseClient";
 import { type NormalizedClientOptions, normalizeClientOptions } from "../../../../BaseClient";
 import { ImageClient } from "../resources/image/client/Client";
+import { TemplatesClient } from "../resources/templates/client/Client";
 import { TextToSpeechClient } from "../resources/textToSpeech/client/Client";
 import { VideoClient } from "../resources/video/client/Client";
 
@@ -15,6 +16,7 @@ export class FlowsClient {
     protected _video: VideoClient | undefined;
     protected _image: ImageClient | undefined;
     protected _textToSpeech: TextToSpeechClient | undefined;
+    protected _templates: TemplatesClient | undefined;
 
     constructor(options: FlowsClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -30,5 +32,9 @@ export class FlowsClient {
 
     public get textToSpeech(): TextToSpeechClient {
         return (this._textToSpeech ??= new TextToSpeechClient(this._options));
+    }
+
+    public get templates(): TemplatesClient {
+        return (this._templates ??= new TemplatesClient(this._options));
     }
 }
