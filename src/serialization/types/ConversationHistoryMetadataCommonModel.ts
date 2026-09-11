@@ -30,6 +30,7 @@ export const ConversationHistoryMetadataCommonModel: core.serialization.ObjectSc
         core.serialization.number().optional(),
     ),
     callDurationSecs: core.serialization.property("call_duration_secs", core.serialization.number()),
+    queueWaitSecs: core.serialization.property("queue_wait_secs", core.serialization.number().optional()),
     cost: core.serialization.number().optional(),
     deletionSettings: core.serialization.property("deletion_settings", ConversationDeletionSettings.optional()),
     feedback: ConversationHistoryFeedbackCommonModel.optional(),
@@ -75,6 +76,7 @@ export declare namespace ConversationHistoryMetadataCommonModel {
         start_time_unix_secs: number;
         accepted_time_unix_secs?: number | null;
         call_duration_secs: number;
+        queue_wait_secs?: number | null;
         cost?: number | null;
         deletion_settings?: ConversationDeletionSettings.Raw | null;
         feedback?: ConversationHistoryFeedbackCommonModel.Raw | null;

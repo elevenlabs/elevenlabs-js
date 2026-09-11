@@ -23,7 +23,7 @@ export interface BodyComposeMusicV1MusicPost {
     forceInstrumental?: boolean;
     /** The ID of the finetune to use for the generation */
     finetuneId?: string;
-    /** Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan` and only applies to `music_v1`; for `music_v2` section durations are always enforced and this is ignored. When false for `music_v1`, the model may adjust individual section durations for better quality and latency, while preserving the total song duration from the plan. */
+    /** Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan` and only applies to `music_v1`; for `music_v2` and `music_v2_5` section durations are always enforced and this is ignored. When false for `music_v1`, the model may adjust individual section durations for better quality and latency, while preserving the total song duration from the plan. */
     respectSectionsDurations?: boolean;
     /** Whether to store the generated song for inpainting. */
     storeForInpainting?: boolean;

@@ -14,6 +14,7 @@ describe("DraftsClient", () => {
             content: "# Customer Support Procedure\n\n1. Greet the customer...",
             type: "free_form",
             trigger: "When the customer asks for support",
+            folder_parent_id: "folder_parent_id",
         };
 
         server
@@ -37,6 +38,7 @@ describe("DraftsClient", () => {
             content: "# Customer Support Procedure\n\n1. Greet the customer...",
             type: "free_form",
             trigger: "When the customer asks for support",
+            folderParentId: "folder_parent_id",
         });
     });
 
@@ -76,6 +78,7 @@ describe("DraftsClient", () => {
             content: "# Customer Support Procedure\n\n1. Greet the customer...",
             type: "free_form",
             trigger: "When the customer asks for support",
+            folder_parent_id: "folder_parent_id",
         };
 
         server
@@ -105,6 +108,7 @@ describe("DraftsClient", () => {
             content: "# Customer Support Procedure\n\n1. Greet the customer...",
             type: "free_form",
             trigger: "When the customer asks for support",
+            folderParentId: "folder_parent_id",
         });
     });
 });

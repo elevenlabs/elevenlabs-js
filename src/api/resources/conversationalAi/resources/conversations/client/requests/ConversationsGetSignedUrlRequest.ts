@@ -6,6 +6,7 @@
  *         agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
  *         includeConversationId: true,
  *         branchId: "branch_id",
+ *         versionId: "version_id",
  *         environment: "environment",
  *         debugEventsRequest: true
  *     }
@@ -17,6 +18,8 @@ export interface ConversationsGetSignedUrlRequest {
     includeConversationId?: boolean;
     /** The ID of the branch to use */
     branchId?: string;
+    /** The ID of the version to use */
+    versionId?: string;
     /** The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'. */
     environment?: string;
     /** Whether to enable debug events. Only available for users with editor access to the agent. */

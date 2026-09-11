@@ -6,6 +6,8 @@ export interface ConversationHistoryMetadataCommonModel {
     startTimeUnixSecs: number;
     acceptedTimeUnixSecs?: number;
     callDurationSecs: number;
+    /** Seconds the caller was held in the concurrency wait queue. Excluded from call_duration_secs and from billed time. None when the conversation was never queued. */
+    queueWaitSecs?: number;
     cost?: number;
     deletionSettings?: ElevenLabs.ConversationDeletionSettings;
     feedback?: ElevenLabs.ConversationHistoryFeedbackCommonModel;

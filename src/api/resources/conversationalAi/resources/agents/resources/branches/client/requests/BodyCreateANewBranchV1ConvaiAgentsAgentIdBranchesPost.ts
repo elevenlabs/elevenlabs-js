@@ -23,4 +23,6 @@ export interface BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost {
     platformSettings?: Record<string, unknown>;
     /** Updated workflow definition */
     workflow?: ElevenLabs.AgentWorkflowRequestModel;
+    /** When true, the new branch uses the caller's draft procedure set instead of the branch tip. Requires parent_version_id to be the branch tip. */
+    includeDraft?: boolean;
 }

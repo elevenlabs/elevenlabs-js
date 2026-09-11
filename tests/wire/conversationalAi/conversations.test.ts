@@ -22,6 +22,7 @@ describe("ConversationsClient", () => {
             agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
             includeConversationId: true,
             branchId: "branch_id",
+            versionId: "version_id",
             environment: "environment",
             debugEventsRequest: true,
         });
@@ -48,6 +49,7 @@ describe("ConversationsClient", () => {
             agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
             participantName: "participant_name",
             branchId: "branch_id",
+            versionId: "version_id",
             environment: "environment",
             debugEventsRequest: true,
         });
@@ -207,6 +209,7 @@ describe("ConversationsClient", () => {
                 start_time_unix_secs: 1714423232,
                 accepted_time_unix_secs: 1,
                 call_duration_secs: 10,
+                queue_wait_secs: 1.1,
                 cost: 1,
                 deletion_settings: {
                     deletion_time_unix_secs: 1,
@@ -452,6 +455,7 @@ describe("ConversationsClient", () => {
                 startTimeUnixSecs: 1714423232,
                 acceptedTimeUnixSecs: 1,
                 callDurationSecs: 10,
+                queueWaitSecs: 1.1,
                 cost: 1,
                 deletionSettings: {
                     deletionTimeUnixSecs: 1,
@@ -785,6 +789,7 @@ describe("ConversationsClient", () => {
                 start_time_unix_secs: 1714423232,
                 accepted_time_unix_secs: 1,
                 call_duration_secs: 10,
+                queue_wait_secs: 1.1,
                 cost: 1,
                 deletion_settings: {
                     deletion_time_unix_secs: 1,
@@ -1029,6 +1034,7 @@ describe("ConversationsClient", () => {
                 startTimeUnixSecs: 1714423232,
                 acceptedTimeUnixSecs: 1,
                 callDurationSecs: 10,
+                queueWaitSecs: 1.1,
                 cost: 1,
                 deletionSettings: {
                     deletionTimeUnixSecs: 1,

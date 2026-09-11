@@ -4,6 +4,8 @@ export * as deployments from "./deployments";
 export * from "./deployments/client/requests";
 export * as drafts from "./drafts";
 export * from "./drafts/client/requests";
+export * as holdAudio from "./holdAudio";
+export * from "./holdAudio/client/requests";
 export * as knowledgeBase from "./knowledgeBase";
 export * as link from "./link";
 export * as llmUsage from "./llmUsage";

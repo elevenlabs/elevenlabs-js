@@ -7,6 +7,6 @@ export interface AgentQueueingConfig {
     enabled?: boolean;
     /** Maximum time a caller can wait in the queue before being rejected */
     waitTimeoutSeconds?: number;
-    /** Custom hold audio played to queued callers; when unset, callers hear the default hold tone. Set via the hold-audio upload route, not writable through agent PATCH. */
+    /** Custom hold audio played to queued callers; when unset, callers hear the default hold tone. Read-only: set it by uploading a file through the agent hold-audio endpoint. */
     holdAudio?: ElevenLabs.AgentHoldAudioConfig;
 }

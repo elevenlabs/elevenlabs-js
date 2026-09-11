@@ -29,4 +29,8 @@ export interface GetAgentResponseModel {
     branchId?: string;
     /** The ID of the main branch for this agent */
     mainBranchId?: string;
+    /** Procedures keyed by procedure_id. */
+    procedures?: Record<string, ElevenLabs.ProcedureRefResponseModel>;
+    /** URL of the default hold tone played to queued callers when no custom hold audio is uploaded, so the dashboard can preview it. */
+    defaultHoldAudioUrl?: string;
 }

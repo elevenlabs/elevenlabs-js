@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../index";
 
 /**
- * Composition plan for the `music_v2` model. Using this field with any other model will result in an error.
+ * Composition plan for the `music_v2` and `music_v2_5` models. Using this field with any other model will result in an error.
  */
 export interface CompositionPlan {
     /** The chunks that make up the generation. */

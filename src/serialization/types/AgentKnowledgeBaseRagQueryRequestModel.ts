@@ -10,11 +10,18 @@ export const AgentKnowledgeBaseRagQueryRequestModel: core.serialization.ObjectSc
 > = core.serialization.object({
     query: core.serialization.string(),
     useAgentDefaults: core.serialization.property("use_agent_defaults", core.serialization.boolean().optional()),
+    maxDocumentsLength: core.serialization.property("max_documents_length", core.serialization.number().optional()),
+    maxRetrievedRagChunksCount: core.serialization.property(
+        "max_retrieved_rag_chunks_count",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace AgentKnowledgeBaseRagQueryRequestModel {
     export interface Raw {
         query: string;
         use_agent_defaults?: boolean | null;
+        max_documents_length?: number | null;
+        max_retrieved_rag_chunks_count?: number | null;
     }
 }

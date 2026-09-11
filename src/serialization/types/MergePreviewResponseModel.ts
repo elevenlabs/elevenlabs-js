@@ -10,6 +10,7 @@ import { ConversationalConfig } from "./ConversationalConfig";
 import { FieldConflict } from "./FieldConflict";
 import { GetWhatsAppAccountResponse } from "./GetWhatsAppAccountResponse";
 import { MergePreviewResponseModelPhoneNumbersItem } from "./MergePreviewResponseModelPhoneNumbersItem";
+import { ProcedureRefResponseModel } from "./ProcedureRefResponseModel";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
 
 export const MergePreviewResponseModel: core.serialization.ObjectSchema<
@@ -35,6 +36,8 @@ export const MergePreviewResponseModel: core.serialization.ObjectSchema<
     versionId: core.serialization.property("version_id", core.serialization.string().optional()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     mainBranchId: core.serialization.property("main_branch_id", core.serialization.string().optional()),
+    procedures: core.serialization.record(core.serialization.string(), ProcedureRefResponseModel).optional(),
+    defaultHoldAudioUrl: core.serialization.property("default_hold_audio_url", core.serialization.string().optional()),
     overriddenFields: core.serialization.property(
         "overridden_fields",
         core.serialization.list(core.serialization.string()).optional(),
@@ -61,6 +64,8 @@ export declare namespace MergePreviewResponseModel {
         version_id?: string | null;
         branch_id?: string | null;
         main_branch_id?: string | null;
+        procedures?: Record<string, ProcedureRefResponseModel.Raw> | null;
+        default_hold_audio_url?: string | null;
         overridden_fields?: string[] | null;
         conflicts?: FieldConflict.Raw[] | null;
         source_identical_to_target?: boolean | null;

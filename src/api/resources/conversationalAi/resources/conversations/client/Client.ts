@@ -80,6 +80,7 @@ export class ConversationsClient {
      *         agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
      *         includeConversationId: true,
      *         branchId: "branch_id",
+     *         versionId: "version_id",
      *         environment: "environment",
      *         debugEventsRequest: true
      *     })
@@ -95,11 +96,12 @@ export class ConversationsClient {
         request: ElevenLabs.conversationalAi.ConversationsGetSignedUrlRequest,
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ConversationSignedUrlResponseModel>> {
-        const { agentId, includeConversationId, branchId, environment, debugEventsRequest } = request;
+        const { agentId, includeConversationId, branchId, versionId, environment, debugEventsRequest } = request;
         const _queryParams: Record<string, unknown> = {
             agent_id: agentId,
             include_conversation_id: includeConversationId,
             branch_id: branchId,
+            version_id: versionId,
             environment,
             debug_events_request: debugEventsRequest,
         };
@@ -178,6 +180,7 @@ export class ConversationsClient {
      *         agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
      *         participantName: "participant_name",
      *         branchId: "branch_id",
+     *         versionId: "version_id",
      *         environment: "environment",
      *         debugEventsRequest: true
      *     })
@@ -193,11 +196,12 @@ export class ConversationsClient {
         request: ElevenLabs.conversationalAi.ConversationsGetWebrtcTokenRequest,
         requestOptions?: ConversationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.TokenResponseModel>> {
-        const { agentId, participantName, branchId, environment, debugEventsRequest } = request;
+        const { agentId, participantName, branchId, versionId, environment, debugEventsRequest } = request;
         const _queryParams: Record<string, unknown> = {
             agent_id: agentId,
             participant_name: participantName,
             branch_id: branchId,
+            version_id: versionId,
             environment,
             debug_events_request: debugEventsRequest,
         };

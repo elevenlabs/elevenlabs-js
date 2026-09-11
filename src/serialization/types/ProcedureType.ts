@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const ProcedureType: core.serialization.Schema<serializers.ProcedureType.Raw, ElevenLabs.ProcedureType> =
-    core.serialization.enum_(["free_form", "deterministic"]);
+    core.serialization.enum_(["free_form", "deterministic", "folder"]);
 
 export declare namespace ProcedureType {
-    export type Raw = "free_form" | "deterministic";
+    export type Raw = "free_form" | "deterministic" | "folder";
 }

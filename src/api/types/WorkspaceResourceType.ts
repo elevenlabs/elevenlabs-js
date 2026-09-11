@@ -29,7 +29,6 @@ export const WorkspaceResourceType = {
     ConvaiAgentVersionsDeployments: "convai_agent_versions_deployments",
     ConvaiAgentExperiments: "convai_agent_experiments",
     ConvaiMemoryEntries: "convai_memory_entries",
-    ConvaiCoachingProposals: "convai_coaching_proposals",
     ConvaiTemplates: "convai_templates",
     Dashboard: "dashboard",
     DashboardConfiguration: "dashboard_configuration",

@@ -5,12 +5,16 @@ import type * as ElevenLabs from "../index";
 export type ConversationHistoryTranscriptSystemToolResultCommonModelInputResult =
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.Dummy
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.EndCallSuccess
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.EndProcedureError
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.EndProcedureSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.KnowledgeBaseRagSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.KnowledgeBaseSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.LanguageDetectionSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.PlayDtmfError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.PlayDtmfSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.SkipTurnSuccess
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.StartProcedureError
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.StartProcedureSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TestingToolResult
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentSuccess
@@ -27,6 +31,14 @@ export namespace ConversationHistoryTranscriptSystemToolResultCommonModelInputRe
 
     export interface EndCallSuccess extends ElevenLabs.EndCallToolResultModel {
         resultType: "end_call_success";
+    }
+
+    export interface EndProcedureError extends ElevenLabs.EndProcedureToolResultErrorModel {
+        resultType: "end_procedure_error";
+    }
+
+    export interface EndProcedureSuccess extends ElevenLabs.EndProcedureToolResultSuccessModel {
+        resultType: "end_procedure_success";
     }
 
     export interface KnowledgeBaseRagSuccess extends ElevenLabs.KnowledgeBaseRagToolResultModel {
@@ -51,6 +63,14 @@ export namespace ConversationHistoryTranscriptSystemToolResultCommonModelInputRe
 
     export interface SkipTurnSuccess extends ElevenLabs.SkipTurnToolResponseModel {
         resultType: "skip_turn_success";
+    }
+
+    export interface StartProcedureError extends ElevenLabs.StartProcedureToolResultErrorModel {
+        resultType: "start_procedure_error";
+    }
+
+    export interface StartProcedureSuccess extends ElevenLabs.StartProcedureToolResultSuccessModel {
+        resultType: "start_procedure_success";
     }
 
     export interface TestingToolResult extends ElevenLabs.TestToolResultModel {

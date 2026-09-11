@@ -6,6 +6,8 @@ export interface GetTestSuiteInvocationResponseModel {
     id: string;
     agentId?: string;
     branchId?: string;
+    versionId?: string;
+    ranAgainstDraft?: boolean;
     createdAt?: number;
     folderId?: string;
     repeatCount?: number;

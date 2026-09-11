@@ -13,6 +13,7 @@ import * as ElevenLabs from "../../../../../index";
 import { BranchesClient } from "../resources/branches/client/Client";
 import { DeploymentsClient } from "../resources/deployments/client/Client";
 import { DraftsClient } from "../resources/drafts/client/Client";
+import { HoldAudioClient } from "../resources/holdAudio/client/Client";
 import { KnowledgeBaseClient } from "../resources/knowledgeBase/client/Client";
 import { LinkClient } from "../resources/link/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
@@ -32,6 +33,7 @@ export class AgentsClient {
     protected _summaries: SummariesClient | undefined;
     protected _widget: WidgetClient | undefined;
     protected _link: LinkClient | undefined;
+    protected _holdAudio: HoldAudioClient | undefined;
     protected _knowledgeBase: KnowledgeBaseClient | undefined;
     protected _llmUsage: LlmUsageClient | undefined;
     protected _branches: BranchesClient | undefined;
@@ -54,6 +56,10 @@ export class AgentsClient {
 
     public get link(): LinkClient {
         return (this._link ??= new LinkClient(this._options));
+    }
+
+    public get holdAudio(): HoldAudioClient {
+        return (this._holdAudio ??= new HoldAudioClient(this._options));
     }
 
     public get knowledgeBase(): KnowledgeBaseClient {

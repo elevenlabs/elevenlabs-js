@@ -5,12 +5,16 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { DummyToolResultModel } from "./DummyToolResultModel";
 import { EndCallToolResultModel } from "./EndCallToolResultModel";
+import { EndProcedureToolResultErrorModel } from "./EndProcedureToolResultErrorModel";
+import { EndProcedureToolResultSuccessModel } from "./EndProcedureToolResultSuccessModel";
 import { KnowledgeBaseRagToolResultModel } from "./KnowledgeBaseRagToolResultModel";
 import { KnowledgeBaseToolResultModel } from "./KnowledgeBaseToolResultModel";
 import { LanguageDetectionToolResultModel } from "./LanguageDetectionToolResultModel";
 import { PlayDtmfResultErrorModel } from "./PlayDtmfResultErrorModel";
 import { PlayDtmfResultSuccessModel } from "./PlayDtmfResultSuccessModel";
 import { SkipTurnToolResponseModel } from "./SkipTurnToolResponseModel";
+import { StartProcedureToolResultErrorModel } from "./StartProcedureToolResultErrorModel";
+import { StartProcedureToolResultSuccessModel } from "./StartProcedureToolResultSuccessModel";
 import { TestToolResultModel } from "./TestToolResultModel";
 import { TransferToAgentToolResultErrorModel } from "./TransferToAgentToolResultErrorModel";
 import { TransferToAgentToolResultSuccessModelOutput } from "./TransferToAgentToolResultSuccessModelOutput";
@@ -27,12 +31,16 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelOutputResul
     .union(core.serialization.discriminant("resultType", "result_type"), {
         dummy: DummyToolResultModel,
         end_call_success: EndCallToolResultModel,
+        end_procedure_error: EndProcedureToolResultErrorModel,
+        end_procedure_success: EndProcedureToolResultSuccessModel,
         knowledge_base_rag_success: KnowledgeBaseRagToolResultModel,
         knowledge_base_success: KnowledgeBaseToolResultModel,
         language_detection_success: LanguageDetectionToolResultModel,
         play_dtmf_error: PlayDtmfResultErrorModel,
         play_dtmf_success: PlayDtmfResultSuccessModel,
         skip_turn_success: SkipTurnToolResponseModel,
+        start_procedure_error: StartProcedureToolResultErrorModel,
+        start_procedure_success: StartProcedureToolResultSuccessModel,
         testing_tool_result: TestToolResultModel,
         transfer_to_agent_error: TransferToAgentToolResultErrorModel,
         transfer_to_agent_success: TransferToAgentToolResultSuccessModelOutput,
@@ -51,12 +59,16 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
     export type Raw =
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.Dummy
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.EndCallSuccess
+        | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.EndProcedureError
+        | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.EndProcedureSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.KnowledgeBaseRagSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.KnowledgeBaseSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.LanguageDetectionSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.PlayDtmfError
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.PlayDtmfSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.SkipTurnSuccess
+        | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.StartProcedureError
+        | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.StartProcedureSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TestingToolResult
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToAgentError
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToAgentSuccess
@@ -72,6 +84,14 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
 
     export interface EndCallSuccess extends EndCallToolResultModel.Raw {
         result_type: "end_call_success";
+    }
+
+    export interface EndProcedureError extends EndProcedureToolResultErrorModel.Raw {
+        result_type: "end_procedure_error";
+    }
+
+    export interface EndProcedureSuccess extends EndProcedureToolResultSuccessModel.Raw {
+        result_type: "end_procedure_success";
     }
 
     export interface KnowledgeBaseRagSuccess extends KnowledgeBaseRagToolResultModel.Raw {
@@ -96,6 +116,14 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
 
     export interface SkipTurnSuccess extends SkipTurnToolResponseModel.Raw {
         result_type: "skip_turn_success";
+    }
+
+    export interface StartProcedureError extends StartProcedureToolResultErrorModel.Raw {
+        result_type: "start_procedure_error";
+    }
+
+    export interface StartProcedureSuccess extends StartProcedureToolResultSuccessModel.Raw {
+        result_type: "start_procedure_success";
     }
 
     export interface TestingToolResult extends TestToolResultModel.Raw {

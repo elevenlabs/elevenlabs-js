@@ -15,6 +15,7 @@ export const ProcedureAtVersionResponseModel: core.serialization.ObjectSchema<
     content: core.serialization.string(),
     type: ProcedureType.optional(),
     trigger: core.serialization.string().optional(),
+    folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
 });
 
 export declare namespace ProcedureAtVersionResponseModel {
@@ -25,5 +26,6 @@ export declare namespace ProcedureAtVersionResponseModel {
         content: string;
         type?: ProcedureType.Raw | null;
         trigger?: string | null;
+        folder_parent_id?: string | null;
     }
 }

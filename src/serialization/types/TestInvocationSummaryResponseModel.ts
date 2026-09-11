@@ -12,6 +12,12 @@ export const TestInvocationSummaryResponseModel: core.serialization.ObjectSchema
     id: core.serialization.string(),
     agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
+    versionId: core.serialization.property("version_id", core.serialization.string().optional()),
+    ranAgainstDraft: core.serialization.property("ran_against_draft", core.serialization.boolean().optional()),
+    runsDivergedFromVersion: core.serialization.property(
+        "runs_diverged_from_version",
+        core.serialization.boolean().optional(),
+    ),
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
     testRunCount: core.serialization.property("test_run_count", core.serialization.number()),
     passedCount: core.serialization.property("passed_count", core.serialization.number()),
@@ -27,6 +33,9 @@ export declare namespace TestInvocationSummaryResponseModel {
         id: string;
         agent_id?: string | null;
         branch_id?: string | null;
+        version_id?: string | null;
+        ran_against_draft?: boolean | null;
+        runs_diverged_from_version?: boolean | null;
         created_at_unix_secs: number;
         test_run_count: number;
         passed_count: number;

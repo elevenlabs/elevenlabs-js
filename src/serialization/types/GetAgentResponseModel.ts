@@ -9,6 +9,7 @@ import { AgentWorkflowResponseModel } from "./AgentWorkflowResponseModel";
 import { ConversationalConfig } from "./ConversationalConfig";
 import { GetAgentResponseModelPhoneNumbersItem } from "./GetAgentResponseModelPhoneNumbersItem";
 import { GetWhatsAppAccountResponse } from "./GetWhatsAppAccountResponse";
+import { ProcedureRefResponseModel } from "./ProcedureRefResponseModel";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
 
 export const GetAgentResponseModel: core.serialization.ObjectSchema<
@@ -34,6 +35,8 @@ export const GetAgentResponseModel: core.serialization.ObjectSchema<
     versionId: core.serialization.property("version_id", core.serialization.string().optional()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     mainBranchId: core.serialization.property("main_branch_id", core.serialization.string().optional()),
+    procedures: core.serialization.record(core.serialization.string(), ProcedureRefResponseModel).optional(),
+    defaultHoldAudioUrl: core.serialization.property("default_hold_audio_url", core.serialization.string().optional()),
 });
 
 export declare namespace GetAgentResponseModel {
@@ -51,5 +54,7 @@ export declare namespace GetAgentResponseModel {
         version_id?: string | null;
         branch_id?: string | null;
         main_branch_id?: string | null;
+        procedures?: Record<string, ProcedureRefResponseModel.Raw> | null;
+        default_hold_audio_url?: string | null;
     }
 }

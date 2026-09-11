@@ -15,4 +15,14 @@ export interface ProcedureListItemResponseModel {
     trigger?: string;
     /** True when the procedure has unpublished draft changes on this branch (a newly created or edited procedure not yet published). When true, the name, type, and trigger reflect that draft. */
     hasDraft: boolean;
+    /** Tool IDs referenced in the procedure content */
+    referencedToolIds?: string[];
+    /** Knowledge base IDs referenced in the procedure content */
+    referencedKbIds?: string[];
+    /** Procedure IDs referenced in the procedure content */
+    referencedProcedureIds?: string[];
+    /** Dynamic variable names used in the procedure content */
+    referencedDynamicVariables?: string[];
+    /** Procedure ID of the folder this procedure is placed in. None means root. */
+    folderParentId?: string;
 }

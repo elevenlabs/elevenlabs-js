@@ -17,6 +17,11 @@ describe("ProceduresClient", () => {
                     type: "free_form",
                     trigger: "When the customer asks for support",
                     has_draft: false,
+                    referenced_tool_ids: ["tool_123"],
+                    referenced_kb_ids: ["kb_123"],
+                    referenced_procedure_ids: ["agtprc_other"],
+                    referenced_dynamic_variables: ["customer_id"],
+                    folder_parent_id: "folder_parent_id",
                 },
             ],
         };
@@ -47,6 +52,11 @@ describe("ProceduresClient", () => {
                     type: "free_form",
                     trigger: "When the customer asks for support",
                     hasDraft: false,
+                    referencedToolIds: ["tool_123"],
+                    referencedKbIds: ["kb_123"],
+                    referencedProcedureIds: ["agtprc_other"],
+                    referencedDynamicVariables: ["customer_id"],
+                    folderParentId: "folder_parent_id",
                 },
             ],
         });
@@ -166,6 +176,7 @@ describe("ProceduresClient", () => {
             content: "# Customer Support Procedure\n\n1. Greet the customer...",
             type: "free_form",
             trigger: "When the customer asks for support",
+            folder_parent_id: "folder_parent_id",
         };
 
         server
@@ -194,6 +205,7 @@ describe("ProceduresClient", () => {
             content: "# Customer Support Procedure\n\n1. Greet the customer...",
             type: "free_form",
             trigger: "When the customer asks for support",
+            folderParentId: "folder_parent_id",
         });
     });
 

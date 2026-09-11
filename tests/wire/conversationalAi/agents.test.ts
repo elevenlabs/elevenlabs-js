@@ -339,6 +339,17 @@ describe("AgentsClient", () => {
                     shareable_token: "1234567890",
                 },
                 call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
+                queueing_config: {
+                    enabled: true,
+                    wait_timeout_seconds: 1,
+                    hold_audio: {
+                        audio_path: "audio_path",
+                        audio_url: "audio_url",
+                        original_filename: "original_filename",
+                        duration_secs: 1.1,
+                        size_bytes: 1,
+                    },
+                },
                 privacy: {
                     record_voice: true,
                     retention_days: -1,
@@ -1149,6 +1160,21 @@ describe("AgentsClient", () => {
             version_id: "version_id",
             branch_id: "branch_id",
             main_branch_id: "main_branch_id",
+            procedures: {
+                key: {
+                    procedure_id: "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3",
+                    version_id: "agtprcv_7rbqxer9o12cyxi55ckw6sgz1dl4",
+                    name: "Customer Support Procedure",
+                    type: "free_form",
+                    trigger: "When the customer asks for support",
+                    referenced_tool_ids: ["tool_123"],
+                    referenced_kb_ids: ["kb_123"],
+                    referenced_procedure_ids: ["agtprc_other"],
+                    referenced_dynamic_variables: ["customer_id"],
+                    folder_parent_id: "folder_parent_id",
+                },
+            },
+            default_hold_audio_url: "default_hold_audio_url",
         };
 
         server
@@ -1572,6 +1598,17 @@ describe("AgentsClient", () => {
                     agentConcurrencyLimit: -1,
                     dailyLimit: 100000,
                     burstingEnabled: true,
+                },
+                queueingConfig: {
+                    enabled: true,
+                    waitTimeoutSeconds: 1,
+                    holdAudio: {
+                        audioPath: "audio_path",
+                        audioUrl: "audio_url",
+                        originalFilename: "original_filename",
+                        durationSecs: 1.1,
+                        sizeBytes: 1,
+                    },
                 },
                 privacy: {
                     recordVoice: true,
@@ -2568,6 +2605,21 @@ describe("AgentsClient", () => {
             versionId: "version_id",
             branchId: "branch_id",
             mainBranchId: "main_branch_id",
+            procedures: {
+                key: {
+                    procedureId: "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3",
+                    versionId: "agtprcv_7rbqxer9o12cyxi55ckw6sgz1dl4",
+                    name: "Customer Support Procedure",
+                    type: "free_form",
+                    trigger: "When the customer asks for support",
+                    referencedToolIds: ["tool_123"],
+                    referencedKbIds: ["kb_123"],
+                    referencedProcedureIds: ["agtprc_other"],
+                    referencedDynamicVariables: ["customer_id"],
+                    folderParentId: "folder_parent_id",
+                },
+            },
+            defaultHoldAudioUrl: "default_hold_audio_url",
         });
     });
 
@@ -2897,6 +2949,17 @@ describe("AgentsClient", () => {
                     shareable_token: "1234567890",
                 },
                 call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
+                queueing_config: {
+                    enabled: true,
+                    wait_timeout_seconds: 1,
+                    hold_audio: {
+                        audio_path: "audio_path",
+                        audio_url: "audio_url",
+                        original_filename: "original_filename",
+                        duration_secs: 1.1,
+                        size_bytes: 1,
+                    },
+                },
                 privacy: {
                     record_voice: true,
                     retention_days: -1,
@@ -3707,6 +3770,21 @@ describe("AgentsClient", () => {
             version_id: "version_id",
             branch_id: "branch_id",
             main_branch_id: "main_branch_id",
+            procedures: {
+                key: {
+                    procedure_id: "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3",
+                    version_id: "agtprcv_7rbqxer9o12cyxi55ckw6sgz1dl4",
+                    name: "Customer Support Procedure",
+                    type: "free_form",
+                    trigger: "When the customer asks for support",
+                    referenced_tool_ids: ["tool_123"],
+                    referenced_kb_ids: ["kb_123"],
+                    referenced_procedure_ids: ["agtprc_other"],
+                    referenced_dynamic_variables: ["customer_id"],
+                    folder_parent_id: "folder_parent_id",
+                },
+            },
+            default_hold_audio_url: "default_hold_audio_url",
         };
 
         server
@@ -4132,6 +4210,17 @@ describe("AgentsClient", () => {
                     dailyLimit: 100000,
                     burstingEnabled: true,
                 },
+                queueingConfig: {
+                    enabled: true,
+                    waitTimeoutSeconds: 1,
+                    holdAudio: {
+                        audioPath: "audio_path",
+                        audioUrl: "audio_url",
+                        originalFilename: "original_filename",
+                        durationSecs: 1.1,
+                        sizeBytes: 1,
+                    },
+                },
                 privacy: {
                     recordVoice: true,
                     retentionDays: -1,
@@ -5127,6 +5216,21 @@ describe("AgentsClient", () => {
             versionId: "version_id",
             branchId: "branch_id",
             mainBranchId: "main_branch_id",
+            procedures: {
+                key: {
+                    procedureId: "agtprc_6qbpwdq8n01bxhk44bgjy6f10ck3",
+                    versionId: "agtprcv_7rbqxer9o12cyxi55ckw6sgz1dl4",
+                    name: "Customer Support Procedure",
+                    type: "free_form",
+                    trigger: "When the customer asks for support",
+                    referencedToolIds: ["tool_123"],
+                    referencedKbIds: ["kb_123"],
+                    referencedProcedureIds: ["agtprc_other"],
+                    referencedDynamicVariables: ["customer_id"],
+                    folderParentId: "folder_parent_id",
+                },
+            },
+            defaultHoldAudioUrl: "default_hold_audio_url",
         });
     });
 
@@ -5516,6 +5620,8 @@ describe("AgentsClient", () => {
             id: "id",
             agent_id: "agent_id",
             branch_id: "branch_id",
+            version_id: "version_id",
+            ran_against_draft: true,
             created_at: 1,
             folder_id: "folder_id",
             repeat_count: 1,
@@ -5535,6 +5641,8 @@ describe("AgentsClient", () => {
                     test_invocation_id: "test_invocation_id",
                     agent_id: "agent_id",
                     branch_id: "branch_id",
+                    version_id: "version_id",
+                    ran_against_draft: true,
                     workflow_node_id: "workflow_node_id",
                     status: "pending",
                     agent_responses: [{ role: "user", time_in_call_secs: 1 }],
@@ -5574,6 +5682,8 @@ describe("AgentsClient", () => {
             id: "id",
             agentId: "agent_id",
             branchId: "branch_id",
+            versionId: "version_id",
+            ranAgainstDraft: true,
             createdAt: 1,
             folderId: "folder_id",
             repeatCount: 1,
@@ -5602,6 +5712,8 @@ describe("AgentsClient", () => {
                     testInvocationId: "test_invocation_id",
                     agentId: "agent_id",
                     branchId: "branch_id",
+                    versionId: "version_id",
+                    ranAgainstDraft: true,
                     workflowNodeId: "workflow_node_id",
                     status: "pending",
                     agentResponses: [

@@ -8,6 +8,8 @@ export interface UnitTestRunResponseModel {
     testInvocationId: string;
     agentId: string;
     branchId?: string;
+    versionId?: string;
+    ranAgainstDraft?: boolean;
     workflowNodeId?: string;
     status: ElevenLabs.TestRunStatus;
     agentResponses?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];

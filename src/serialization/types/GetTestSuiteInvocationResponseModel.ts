@@ -14,6 +14,8 @@ export const GetTestSuiteInvocationResponseModel: core.serialization.ObjectSchem
     id: core.serialization.string(),
     agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
+    versionId: core.serialization.property("version_id", core.serialization.string().optional()),
+    ranAgainstDraft: core.serialization.property("ran_against_draft", core.serialization.boolean().optional()),
     createdAt: core.serialization.property("created_at", core.serialization.number().optional()),
     folderId: core.serialization.property("folder_id", core.serialization.string().optional()),
     repeatCount: core.serialization.property("repeat_count", core.serialization.number().optional()),
@@ -30,6 +32,8 @@ export declare namespace GetTestSuiteInvocationResponseModel {
         id: string;
         agent_id?: string | null;
         branch_id?: string | null;
+        version_id?: string | null;
+        ran_against_draft?: boolean | null;
         created_at?: number | null;
         folder_id?: string | null;
         repeat_count?: number | null;

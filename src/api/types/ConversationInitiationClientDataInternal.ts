@@ -16,7 +16,7 @@ export interface ConversationInitiationClientDataInternal {
     startingWorkflowNodeId?: string;
     /** If set, only these procedures are available to the starting agent. Each ID must be attached to that agent; unknown IDs fail conversation start. An empty list disables all of that agent's procedures. Not applied after an agent transfer. Requires enable_procedure_ids_from_client. */
     procedureIds?: string[];
-    dynamicVariables?: Record<string, unknown>;
+    dynamicVariables?: Record<string, ElevenLabs.DynamicVariableInternalValueType>;
     /** Configuration for which tools to mock and fallback behavior */
     toolMockConfig?: ElevenLabs.OrchestratorToolMockBehaviorConfig;
     /** Per-tool response mock overrides keyed by resolved tool name, applied ahead of the tool's shared mocks. Used for test-specific mocks. */
