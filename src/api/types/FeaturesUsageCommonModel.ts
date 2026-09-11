@@ -19,4 +19,6 @@ export interface FeaturesUsageCommonModel {
     agentTesting?: ElevenLabs.TestsFeatureUsageCommonModel;
     versioning?: ElevenLabs.FeatureStatusCommonModel;
     fileInput?: ElevenLabs.FeatureStatusCommonModel;
+    freeformProcedure?: ElevenLabs.FeatureStatusCommonModel;
+    structuredProcedure?: ElevenLabs.FeatureStatusCommonModel;
 }

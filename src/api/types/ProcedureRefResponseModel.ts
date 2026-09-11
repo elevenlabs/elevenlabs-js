@@ -21,4 +21,6 @@ export interface ProcedureRefResponseModel {
     referencedProcedureIds?: string[];
     /** Dynamic variable names used in the procedure content */
     referencedDynamicVariables?: string[];
+    /** Procedure ID of the folder this procedure is placed in. None means root. */
+    folderParentId?: string;
 }

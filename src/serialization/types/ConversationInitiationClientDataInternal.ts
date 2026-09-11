@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationConfigClientOverrideOutput } from "./ConversationConfigClientOverrideOutput";
 import { ConversationInitiationSourceInfo } from "./ConversationInitiationSourceInfo";
+import { DynamicVariableInternalValueType } from "./DynamicVariableInternalValueType";
 import { OrchestratorToolMockBehaviorConfig } from "./OrchestratorToolMockBehaviorConfig";
 import { ToolResponseMockConfigOutput } from "./ToolResponseMockConfigOutput";
 
@@ -34,7 +35,7 @@ export const ConversationInitiationClientDataInternal: core.serialization.Object
     ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
-        core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+        core.serialization.record(core.serialization.string(), DynamicVariableInternalValueType).optional(),
     ),
     toolMockConfig: core.serialization.property("tool_mock_config", OrchestratorToolMockBehaviorConfig.optional()),
     toolMockOverrides: core.serialization.property(
@@ -55,7 +56,7 @@ export declare namespace ConversationInitiationClientDataInternal {
         environment?: string | null;
         starting_workflow_node_id?: string | null;
         procedure_ids?: string[] | null;
-        dynamic_variables?: Record<string, unknown> | null;
+        dynamic_variables?: Record<string, DynamicVariableInternalValueType.Raw> | null;
         tool_mock_config?: OrchestratorToolMockBehaviorConfig.Raw | null;
         tool_mock_overrides?: Record<string, ToolResponseMockConfigOutput.Raw[]> | null;
     }

@@ -20,7 +20,7 @@ export interface TestsListRequest {
     cursor?: string;
     /** How many Tests to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
-    /** Search query to filter tests by name. */
+    /** Search query to filter tests and folders by name. */
     search?: string;
     /** Filter by parent folder ID. Use 'root' to get items in the root folder. */
     parentFolderId?: string;

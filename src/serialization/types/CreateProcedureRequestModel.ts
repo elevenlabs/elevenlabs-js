@@ -13,6 +13,7 @@ export const CreateProcedureRequestModel: core.serialization.ObjectSchema<
     content: core.serialization.string().optional(),
     type: ProcedureType.optional(),
     trigger: core.serialization.string().optional(),
+    folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
 });
 
 export declare namespace CreateProcedureRequestModel {
@@ -21,5 +22,6 @@ export declare namespace CreateProcedureRequestModel {
         content?: string | null;
         type?: ProcedureType.Raw | null;
         trigger?: string | null;
+        folder_parent_id?: string | null;
     }
 }

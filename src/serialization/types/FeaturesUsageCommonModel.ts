@@ -30,6 +30,8 @@ export const FeaturesUsageCommonModel: core.serialization.ObjectSchema<
     agentTesting: core.serialization.property("agent_testing", TestsFeatureUsageCommonModel.optional()),
     versioning: FeatureStatusCommonModel.optional(),
     fileInput: core.serialization.property("file_input", FeatureStatusCommonModel.optional()),
+    freeformProcedure: core.serialization.property("freeform_procedure", FeatureStatusCommonModel.optional()),
+    structuredProcedure: core.serialization.property("structured_procedure", FeatureStatusCommonModel.optional()),
 });
 
 export declare namespace FeaturesUsageCommonModel {
@@ -50,5 +52,7 @@ export declare namespace FeaturesUsageCommonModel {
         agent_testing?: TestsFeatureUsageCommonModel.Raw | null;
         versioning?: FeatureStatusCommonModel.Raw | null;
         file_input?: FeatureStatusCommonModel.Raw | null;
+        freeform_procedure?: FeatureStatusCommonModel.Raw | null;
+        structured_procedure?: FeatureStatusCommonModel.Raw | null;
     }
 }

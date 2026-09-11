@@ -21,6 +21,7 @@ export const BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost: core.seriali
         core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     ),
     workflow: AgentWorkflowRequestModel.optional(),
+    includeDraft: core.serialization.property("include_draft", core.serialization.boolean().optional()),
 });
 
 export declare namespace BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost {
@@ -31,5 +32,6 @@ export declare namespace BodyCreateANewBranchV1ConvaiAgentsAgentIdBranchesPost {
         conversation_config?: Record<string, unknown> | null;
         platform_settings?: Record<string, unknown> | null;
         workflow?: AgentWorkflowRequestModel.Raw | null;
+        include_draft?: boolean | null;
     }
 }

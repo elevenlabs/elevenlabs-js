@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentAnalysisItemsInput } from "./AgentAnalysisItemsInput";
 import { AgentCallLimits } from "./AgentCallLimits";
+import { AgentQueueingConfig } from "./AgentQueueingConfig";
 import { AgentTestingSettings } from "./AgentTestingSettings";
 import { AgentTrustContext } from "./AgentTrustContext";
 import { AgentWorkspaceOverridesInput } from "./AgentWorkspaceOverridesInput";
@@ -48,6 +49,7 @@ export const AgentPlatformSettingsRequestModel: core.serialization.ObjectSchema<
     ),
     auth: AuthSettings.optional(),
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
+    queueingConfig: core.serialization.property("queueing_config", AgentQueueingConfig.optional()),
     privacy: PrivacyConfigInput.optional(),
     trustContext: core.serialization.property("trust_context", AgentTrustContext.optional()),
     analysisLlm: core.serialization.property("analysis_llm", Llm.optional()),
@@ -72,6 +74,7 @@ export declare namespace AgentPlatformSettingsRequestModel {
         auto_translate_transcript_to_app_language?: boolean | null;
         auth?: AuthSettings.Raw | null;
         call_limits?: AgentCallLimits.Raw | null;
+        queueing_config?: AgentQueueingConfig.Raw | null;
         privacy?: PrivacyConfigInput.Raw | null;
         trust_context?: AgentTrustContext.Raw | null;
         analysis_llm?: Llm.Raw | null;

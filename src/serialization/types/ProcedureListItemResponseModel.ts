@@ -15,6 +15,23 @@ export const ProcedureListItemResponseModel: core.serialization.ObjectSchema<
     type: ProcedureType.optional(),
     trigger: core.serialization.string().optional(),
     hasDraft: core.serialization.property("has_draft", core.serialization.boolean()),
+    referencedToolIds: core.serialization.property(
+        "referenced_tool_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    referencedKbIds: core.serialization.property(
+        "referenced_kb_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    referencedProcedureIds: core.serialization.property(
+        "referenced_procedure_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    referencedDynamicVariables: core.serialization.property(
+        "referenced_dynamic_variables",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
 });
 
 export declare namespace ProcedureListItemResponseModel {
@@ -25,5 +42,10 @@ export declare namespace ProcedureListItemResponseModel {
         type?: ProcedureType.Raw | null;
         trigger?: string | null;
         has_draft: boolean;
+        referenced_tool_ids?: string[] | null;
+        referenced_kb_ids?: string[] | null;
+        referenced_procedure_ids?: string[] | null;
+        referenced_dynamic_variables?: string[] | null;
+        folder_parent_id?: string | null;
     }
 }

@@ -18,6 +18,8 @@ export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
     testInvocationId: core.serialization.property("test_invocation_id", core.serialization.string()),
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
+    versionId: core.serialization.property("version_id", core.serialization.string().optional()),
+    ranAgainstDraft: core.serialization.property("ran_against_draft", core.serialization.boolean().optional()),
     workflowNodeId: core.serialization.property("workflow_node_id", core.serialization.string().optional()),
     status: TestRunStatus,
     agentResponses: core.serialization.property(
@@ -41,6 +43,8 @@ export declare namespace UnitTestRunResponseModel {
         test_invocation_id: string;
         agent_id: string;
         branch_id?: string | null;
+        version_id?: string | null;
+        ran_against_draft?: boolean | null;
         workflow_node_id?: string | null;
         status: TestRunStatus.Raw;
         agent_responses?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;

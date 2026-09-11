@@ -5,5 +5,6 @@ export const MusicModelId = {
      * Deprecated: Deprecated. */
     MusicV1: "music_v1",
     MusicV2: "music_v2",
+    MusicV25: "music_v2_5",
 } as const;
 export type MusicModelId = (typeof MusicModelId)[keyof typeof MusicModelId];

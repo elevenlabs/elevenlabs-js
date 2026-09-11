@@ -5549,6 +5549,7 @@ await client.conversationalAi.conversations.getSignedUrl({
     agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     includeConversationId: true,
     branchId: "branch_id",
+    versionId: "version_id",
     environment: "environment",
     debugEventsRequest: true
 });
@@ -5618,6 +5619,7 @@ await client.conversationalAi.conversations.getWebrtcToken({
     agentId: "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
     participantName: "participant_name",
     branchId: "branch_id",
+    versionId: "version_id",
     environment: "environment",
     debugEventsRequest: true
 });
@@ -11379,6 +11381,143 @@ await client.conversationalAi.agents.link.get("agent_3701k3ttaq12ewp8b7qv5rfyszk
 </dl>
 </details>
 
+## ConversationalAi Agents HoldAudio
+<details><summary><code>client.conversationalAi.agents.holdAudio.<a href="/src/api/resources/conversationalAi/resources/agents/resources/holdAudio/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.PostAgentHoldAudioResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sets the custom hold audio played on loop to callers waiting in the agent's concurrency wait queue. Replaces any previously uploaded clip.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.holdAudio.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    holdAudioFile: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BodyPostAgentHoldAudioV1ConvaiAgentsAgentIdHoldAudioPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HoldAudioClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.holdAudio.<a href="/src/api/resources/conversationalAi/resources/agents/resources/holdAudio/client/Client.ts">delete</a>(agent_id) -> ElevenLabs.DeleteAgentHoldAudioResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes the agent's custom hold audio; queued callers hear the default hold tone again.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.holdAudio.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HoldAudioClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents KnowledgeBase
 <details><summary><code>client.conversationalAi.agents.knowledgeBase.<a href="/src/api/resources/conversationalAi/resources/agents/resources/knowledgeBase/client/Client.ts">size</a>(agent_id) -> ElevenLabs.GetAgentKnowledgebaseSizeResponseModel</code></summary>
 <dl>
@@ -12563,7 +12702,7 @@ await client.conversationalAi.agents.drafts.delete("agent_3701k3ttaq12ewp8b7qv5r
 <dl>
 <dd>
 
-List the agent's procedures on a branch with their procedure_id, version_id, name, type, trigger, and has_draft. has_draft is true when a procedure has unpublished draft changes on this branch; its name/type/trigger then reflect that draft. Does not return procedure content -- use Get Procedure to read a procedure's body.
+List the procedures attached to this agent branch. By default, unpublished drafts take precedence over the latest committed version. Pass agent_version_id to list a published snapshot instead. has_draft is true when a procedure has unpublished draft changes on this branch. Procedure content is not included; use Get Procedure to read a procedure's body.
 </dd>
 </dl>
 </dd>
@@ -17140,6 +17279,7 @@ Lists all test invocations with pagination support and optional search filtering
 await client.conversationalAi.tests.invocations.list({
     agentId: "agent_id",
     pageSize: 1,
+    search: "search",
     cursor: "cursor"
 });
 

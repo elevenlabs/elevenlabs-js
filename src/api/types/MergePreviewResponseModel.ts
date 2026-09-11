@@ -29,6 +29,10 @@ export interface MergePreviewResponseModel {
     branchId?: string;
     /** The ID of the main branch for this agent */
     mainBranchId?: string;
+    /** Procedures keyed by procedure_id. */
+    procedures?: Record<string, ElevenLabs.ProcedureRefResponseModel>;
+    /** URL of the default hold tone played to queued callers when no custom hold audio is uploaded, so the dashboard can preview it. */
+    defaultHoldAudioUrl?: string;
     /** Dot-paths of config fields where both branches modified the same field relative to their common ancestor (conflicts). Present regardless of which side wins the conflict. */
     overriddenFields?: string[];
     /** Structured view of the same conflicts as overridden_fields, each carrying the value on the base (common ancestor), source branch, and target branch so the divergence can be presented and resolved field-by-field. */

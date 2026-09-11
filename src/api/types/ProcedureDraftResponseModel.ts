@@ -13,4 +13,6 @@ export interface ProcedureDraftResponseModel {
     type?: ElevenLabs.ProcedureType;
     /** When the agent should use this procedure. Empty string means this is a sub-procedure that should only start when another procedure references it. */
     trigger?: string;
+    /** Procedure ID of the folder this procedure is placed in. None means root. */
+    folderParentId?: string;
 }

@@ -12,7 +12,7 @@ import type * as ElevenLabs from "../../../../index";
 export interface BodyUploadMusicV1MusicUploadPost {
     /** The audio file to upload. */
     file: core.file.Uploadable;
-    /** Whether to generate and return the composition plan for the uploaded song. Pass a model id (`music_v1` or `music_v2`) to control which composition plan format is returned. Passing `true`/`false` is deprecated; `true` defaults to the `music_v1` plan format. Enabling this will increase the latency. */
+    /** Whether to generate and return the composition plan for the uploaded song. Pass a model id (`music_v1`, `music_v2` or `music_v2_5`) to control which composition plan format is returned. Passing `true`/`false` is deprecated; `true` defaults to the `music_v1` plan format. Enabling this will increase the latency. */
     extractCompositionPlan?: ElevenLabs.MusicUploadRequestExtractCompositionPlan;
     /** Whether to transcribe the uploaded song and return word-level timestamps. If True, the response will include words_timestamps but will increase the latency. */
     withTimestamps?: boolean;

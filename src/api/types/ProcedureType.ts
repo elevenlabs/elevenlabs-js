@@ -3,5 +3,6 @@
 export const ProcedureType = {
     FreeForm: "free_form",
     Deterministic: "deterministic",
+    Folder: "folder",
 } as const;
 export type ProcedureType = (typeof ProcedureType)[keyof typeof ProcedureType];

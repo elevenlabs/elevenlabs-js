@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const MusicModelId: core.serialization.Schema<serializers.MusicModelId.Raw, ElevenLabs.MusicModelId> =
-    core.serialization.enum_(["music_v1", "music_v2"]);
+    core.serialization.enum_(["music_v1", "music_v2", "music_v2_5"]);
 
 export declare namespace MusicModelId {
-    export type Raw = "music_v1" | "music_v2";
+    export type Raw = "music_v1" | "music_v2" | "music_v2_5";
 }

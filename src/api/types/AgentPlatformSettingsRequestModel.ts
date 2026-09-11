@@ -31,6 +31,8 @@ export interface AgentPlatformSettingsRequestModel {
     auth?: ElevenLabs.AuthSettings;
     /** Call limits for the agent */
     callLimits?: ElevenLabs.AgentCallLimits;
+    /** Concurrency wait-queue config for the agent */
+    queueingConfig?: ElevenLabs.AgentQueueingConfig;
     /** Privacy settings for the agent */
     privacy?: ElevenLabs.PrivacyConfigInput;
     /** The trust context in which the agent operates. */
