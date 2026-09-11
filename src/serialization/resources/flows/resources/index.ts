@@ -1,5 +1,6 @@
 export * as image from "./image";
 export * from "./image/types";
+export * as templates from "./templates";
 export * as textToSpeech from "./textToSpeech";
 export * from "./textToSpeech/types";
 export * as video from "./video";
