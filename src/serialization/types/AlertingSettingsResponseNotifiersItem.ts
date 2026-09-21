@@ -11,7 +11,9 @@ export const AlertingSettingsResponseNotifiersItem: core.serialization.Schema<
     ElevenLabs.AlertingSettingsResponseNotifiersItem
 > = core.serialization
     .union("type", {
-        integration: AlertingIntegrationNotifierResponse,
+        integration: core.serialization.object({
+            value: AlertingIntegrationNotifierResponse,
+        }),
         webhook: AlertingWebhookNotifierResponse,
     })
     .transform<ElevenLabs.AlertingSettingsResponseNotifiersItem>({
@@ -22,8 +24,9 @@ export const AlertingSettingsResponseNotifiersItem: core.serialization.Schema<
 export declare namespace AlertingSettingsResponseNotifiersItem {
     export type Raw = AlertingSettingsResponseNotifiersItem.Integration | AlertingSettingsResponseNotifiersItem.Webhook;
 
-    export interface Integration extends AlertingIntegrationNotifierResponse.Raw {
+    export interface Integration {
         type: "integration";
+        value: AlertingIntegrationNotifierResponse.Raw;
     }
 
     export interface Webhook extends AlertingWebhookNotifierResponse.Raw {

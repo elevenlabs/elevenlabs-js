@@ -12,6 +12,8 @@ import { Gemini31FlashLiteImageRequest } from "./Gemini31FlashLiteImageRequest";
 import { GptImage1Request } from "./GptImage1Request";
 import { GptImage2Request } from "./GptImage2Request";
 import { GptImage15Request } from "./GptImage15Request";
+import { GptImage25FlareRequest } from "./GptImage25FlareRequest";
+import { GptImage25SunburstRequest } from "./GptImage25SunburstRequest";
 
 export const ImageGenerationRequest: core.serialization.Schema<
     serializers.ImageGenerationRequest.Raw,
@@ -27,6 +29,8 @@ export const ImageGenerationRequest: core.serialization.Schema<
         "gpt-image-1": GptImage1Request,
         "gpt-image-1.5": GptImage15Request,
         "gpt-image-2": GptImage2Request,
+        "gpt-image-2.5-flare": GptImage25FlareRequest,
+        "gpt-image-2.5-sunburst": GptImage25SunburstRequest,
     })
     .transform<ElevenLabs.ImageGenerationRequest>({
         transform: (value) => value,
@@ -43,7 +47,9 @@ export declare namespace ImageGenerationRequest {
         | ImageGenerationRequest.Gemini31FlashLiteImage
         | ImageGenerationRequest.GptImage1
         | ImageGenerationRequest.GptImage15
-        | ImageGenerationRequest.GptImage2;
+        | ImageGenerationRequest.GptImage2
+        | ImageGenerationRequest.GptImage25Flare
+        | ImageGenerationRequest.GptImage25Sunburst;
 
     export interface BytedanceSeedream5Lite extends BytedanceSeedream5LiteRequest.Raw {
         model_id: "bytedance-seedream-5-lite";
@@ -79,5 +85,13 @@ export declare namespace ImageGenerationRequest {
 
     export interface GptImage2 extends GptImage2Request.Raw {
         model_id: "gpt-image-2";
+    }
+
+    export interface GptImage25Flare extends GptImage25FlareRequest.Raw {
+        model_id: "gpt-image-2.5-flare";
+    }
+
+    export interface GptImage25Sunburst extends GptImage25SunburstRequest.Raw {
+        model_id: "gpt-image-2.5-sunburst";
     }
 }

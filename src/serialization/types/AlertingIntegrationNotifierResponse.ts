@@ -3,16 +3,30 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AlertingPagerDutyNotifierResponse } from "./AlertingPagerDutyNotifierResponse";
+import { AlertingSlackNotifierResponse } from "./AlertingSlackNotifierResponse";
 
-export const AlertingIntegrationNotifierResponse: core.serialization.ObjectSchema<
+export const AlertingIntegrationNotifierResponse: core.serialization.Schema<
     serializers.AlertingIntegrationNotifierResponse.Raw,
     ElevenLabs.AlertingIntegrationNotifierResponse
-> = core.serialization.object({
-    connectionId: core.serialization.property("connection_id", core.serialization.string()),
-});
+> = core.serialization
+    .union(core.serialization.discriminant("integrationType", "integration_type"), {
+        pagerduty: AlertingPagerDutyNotifierResponse,
+        slack: AlertingSlackNotifierResponse,
+    })
+    .transform<ElevenLabs.AlertingIntegrationNotifierResponse>({
+        transform: (value) => value,
+        untransform: (value) => value,
+    });
 
 export declare namespace AlertingIntegrationNotifierResponse {
-    export interface Raw {
-        connection_id: string;
+    export type Raw = AlertingIntegrationNotifierResponse.Pagerduty | AlertingIntegrationNotifierResponse.Slack;
+
+    export interface Pagerduty extends AlertingPagerDutyNotifierResponse.Raw {
+        integration_type: "pagerduty";
+    }
+
+    export interface Slack extends AlertingSlackNotifierResponse.Raw {
+        integration_type: "slack";
     }
 }

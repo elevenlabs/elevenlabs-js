@@ -408,9 +408,8 @@ export class BranchesClient {
      * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
-     *     await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
-     *         targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
-     *         force: true
+     *     await client.conversationalAi.agents.branches.previewMerge("agent_id", "source_branch_id", {
+     *         targetBranchId: "target_branch_id"
      *     })
      */
     public previewMerge(
@@ -604,7 +603,7 @@ export class BranchesClient {
      * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
-     *     await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj")
+     *     await client.conversationalAi.agents.branches.previewRebase("agent_id", "branch_id")
      */
     public previewRebase(
         agent_id: string,

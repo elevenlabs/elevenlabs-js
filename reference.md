@@ -6554,10 +6554,7 @@ Retrieve config for an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-    versionId: "version_id",
-    branchId: "branch_id"
-});
+await client.conversationalAi.agents.get("agent_id");
 
 ```
 </dd>
@@ -6691,10 +6688,7 @@ Patches an Agent settings
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-    enableVersioningIfNotEnabled: true,
-    branchId: "branch_id"
-});
+await client.conversationalAi.agents.update("agent_id");
 
 ```
 </dd>
@@ -8668,6 +8662,81 @@ await client.conversationalAi.phoneNumbers.update("TeaqRRdTcIfIu2i7BYfT");
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.UpdatePhoneNumberRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.phoneNumbers.<a href="/src/api/resources/conversationalAi/resources/phoneNumbers/client/Client.ts">listV2</a>({ ...params }) -> ElevenLabs.GetPhoneNumbersPageResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a page of Phone Numbers
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.phoneNumbers.listV2({
+    pageSize: 1,
+    search: "search",
+    label: "label",
+    phoneNumber: "phone_number",
+    provider: "twilio",
+    supportsOutbound: true,
+    agentId: "agent_id",
+    branchId: "branch_id",
+    sortBy: "label",
+    sortDirection: "asc",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.PhoneNumbersListV2Request` 
     
 </dd>
 </dl>
@@ -11982,9 +12051,8 @@ Returns the result of merging the source branch into the target branch without p
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
-    targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
-    force: true
+await client.conversationalAi.agents.branches.previewMerge("agent_id", "source_branch_id", {
+    targetBranchId: "target_branch_id"
 });
 
 ```
@@ -12145,7 +12213,7 @@ Returns the result of rebasing the branch onto main without performing the rebas
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+await client.conversationalAi.agents.branches.previewRebase("agent_id", "branch_id");
 
 ```
 </dd>

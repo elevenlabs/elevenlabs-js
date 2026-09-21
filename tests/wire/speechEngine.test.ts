@@ -132,6 +132,7 @@ describe("SpeechEngineClient", () => {
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
             language: "en",
+            cascade_timeout_seconds: 4,
             tags: ["production", "v1"],
             overrides: { first_message: false },
             metadata: {
@@ -272,6 +273,7 @@ describe("SpeechEngineClient", () => {
                 burstingEnabled: true,
             },
             language: "en",
+            cascadeTimeoutSeconds: 4,
             tags: ["production", "v1"],
             overrides: {
                 firstMessage: false,
@@ -367,6 +369,7 @@ describe("SpeechEngineClient", () => {
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
             language: "en",
+            cascade_timeout_seconds: 4,
             tags: ["production", "v1"],
             overrides: { first_message: false },
             metadata: {
@@ -502,6 +505,7 @@ describe("SpeechEngineClient", () => {
                 burstingEnabled: true,
             },
             language: "en",
+            cascadeTimeoutSeconds: 4,
             tags: ["production", "v1"],
             overrides: {
                 firstMessage: false,
@@ -612,6 +616,7 @@ describe("SpeechEngineClient", () => {
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
             language: "en",
+            cascade_timeout_seconds: 4,
             tags: ["production", "v1"],
             overrides: { first_message: false },
             metadata: {
@@ -748,6 +753,7 @@ describe("SpeechEngineClient", () => {
                 burstingEnabled: true,
             },
             language: "en",
+            cascadeTimeoutSeconds: 4,
             tags: ["production", "v1"],
             overrides: {
                 firstMessage: false,

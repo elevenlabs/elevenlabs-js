@@ -4,10 +4,7 @@ import type * as ElevenLabs from "../../../../../../index";
 
 /**
  * @example
- *     {
- *         enableVersioningIfNotEnabled: true,
- *         branchId: "branch_id"
- *     }
+ *     {}
  */
 export interface UpdateAgentRequest {
     /** Deprecated: all agents are versioned. This parameter is ignored. */

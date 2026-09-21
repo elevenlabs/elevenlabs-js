@@ -196,10 +196,7 @@ export class AgentsClient {
      * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
-     *     await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-     *         versionId: "version_id",
-     *         branchId: "branch_id"
-     *     })
+     *     await client.conversationalAi.agents.get("agent_id")
      */
     public get(
         agent_id: string,
@@ -355,10 +352,7 @@ export class AgentsClient {
      * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
-     *     await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
-     *         enableVersioningIfNotEnabled: true,
-     *         branchId: "branch_id"
-     *     })
+     *     await client.conversationalAi.agents.update("agent_id")
      */
     public update(
         agent_id: string,

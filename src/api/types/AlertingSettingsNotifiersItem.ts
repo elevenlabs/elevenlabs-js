@@ -7,8 +7,9 @@ export type AlertingSettingsNotifiersItem =
     | ElevenLabs.AlertingSettingsNotifiersItem.Webhook;
 
 export namespace AlertingSettingsNotifiersItem {
-    export interface Integration extends ElevenLabs.AlertingIntegrationNotifier {
+    export interface Integration {
         type: "integration";
+        value: ElevenLabs.AlertingIntegrationNotifier;
     }
 
     export interface Webhook extends ElevenLabs.AlertingWebhookNotifier {

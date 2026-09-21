@@ -79,9 +79,9 @@ export interface ConversationsListRequest {
     userId?: string;
     /** Evaluation filters. Repeat param. Format: criteria_id:result. Example: eval=value_framing:success */
     evaluationParams?: string | string[];
-    /** Data collection filters. Repeat param. Format: id:op:value where op is one of eq|gt|gte|lt|lte|missing. */
+    /** Data collection filters. Repeat param. Format: id:op:value where op is one of eq|gt|gte|lt|lte. An empty value matches conversations where the field was not collected. */
     dataCollectionParams?: string | string[];
-    /** Dynamic variable filters. Repeat param. Format: name:op:value where op is one of eq|gt|gte|lt|lte. Comparison operators require a numeric value. Names containing ':' cannot be expressed. */
+    /** Dynamic variable filters. Repeat param. Format: name:op:value where op is one of eq|gt|gte|lt|lte. Comparison operators require a numeric value. An empty value matches conversations where the variable was not set. Names containing ':' cannot be expressed. */
     dynamicVariableParams?: string | string[];
     /** Data collection field IDs to include in each conversation summary. Repeat param. When omitted, data_collection_results is not returned. */
     dataCollectionIds?: string | string[];

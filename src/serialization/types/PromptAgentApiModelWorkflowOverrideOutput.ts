@@ -28,6 +28,10 @@ export const PromptAgentApiModelWorkflowOverrideOutput: core.serialization.Objec
     maxTokens: core.serialization.property("max_tokens", core.serialization.number().optional()),
     toolIds: core.serialization.property("tool_ids", core.serialization.list(core.serialization.string()).optional()),
     builtInTools: core.serialization.property("built_in_tools", BuiltInToolsWorkflowOverrideOutput.optional()),
+    enableParallelToolCalls: core.serialization.property(
+        "enable_parallel_tool_calls",
+        core.serialization.boolean().optional(),
+    ),
     mcpServerIds: core.serialization.property(
         "mcp_server_ids",
         core.serialization.list(core.serialization.string()).optional(),
@@ -69,6 +73,7 @@ export declare namespace PromptAgentApiModelWorkflowOverrideOutput {
         max_tokens?: number | null;
         tool_ids?: string[] | null;
         built_in_tools?: BuiltInToolsWorkflowOverrideOutput.Raw | null;
+        enable_parallel_tool_calls?: boolean | null;
         mcp_server_ids?: string[] | null;
         native_mcp_server_ids?: string[] | null;
         knowledge_base?: KnowledgeBaseLocator.Raw[] | null;

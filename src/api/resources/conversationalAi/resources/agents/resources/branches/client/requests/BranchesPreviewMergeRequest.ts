@@ -3,8 +3,7 @@
 /**
  * @example
  *     {
- *         targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
- *         force: true
+ *         targetBranchId: "target_branch_id"
  *     }
  */
 export interface BranchesPreviewMergeRequest {

@@ -12,6 +12,7 @@ export const WorkspaceResourceType: core.serialization.Schema<
     "voice_collection",
     "pronunciation_dictionary",
     "dubbing",
+    "dubbing_project",
     "project",
     "convai_agents",
     "convai_knowledge_base_documents",
@@ -59,6 +60,7 @@ export declare namespace WorkspaceResourceType {
         | "voice_collection"
         | "pronunciation_dictionary"
         | "dubbing"
+        | "dubbing_project"
         | "project"
         | "convai_agents"
         | "convai_knowledge_base_documents"

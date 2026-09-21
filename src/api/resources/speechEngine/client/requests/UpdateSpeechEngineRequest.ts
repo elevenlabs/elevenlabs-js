@@ -17,6 +17,8 @@ export interface UpdateSpeechEngineRequest {
     privacy?: ElevenLabs.PrivacyConfigInput;
     callLimits?: ElevenLabs.AgentCallLimits;
     language?: string;
+    /** Time in seconds to wait for the upstream speech engine endpoint to respond before the attempt is abandoned and retried. Must be between 2 and 15 seconds. */
+    cascadeTimeoutSeconds?: number;
     tags?: string[];
     overrides?: ElevenLabs.SpeechEngineConversationInitiationClientDataConfig;
 }
