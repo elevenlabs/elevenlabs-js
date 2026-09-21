@@ -104,6 +104,16 @@ interface BaseOptions {
      */
     entityDetection?: EntityDetectionOption | EntityDetectionOption[];
     /**
+     * Natural-language instruction applied to each committed transcript (max 2000 characters).
+     * The edited text is delivered in a separate edited_transcript event containing the
+     * committed text and the edited text.
+     *
+     * @remarks
+     * Cannot be combined with entityDetection. Adds a 30% premium to the base transcription
+     * cost, billed for at least 10 seconds of audio per committed transcript.
+     */
+    transcriptEdit?: string;
+    /**
      * Enable background speech filtering to reduce false activations from nearby conversations
      * and ambient noise. When enabled without an explicit vadThreshold, the server applies a
      * lower default threshold.
@@ -266,6 +276,10 @@ export class ScribeRealtime {
             for (const entity of entityDetection) {
                 params.append("entity_detection", entity);
             }
+        }
+
+        if (options.transcriptEdit !== undefined) {
+            params.append("transcript_edit", options.transcriptEdit);
         }
 
         if (options.filterBackgroundAudio !== undefined) {

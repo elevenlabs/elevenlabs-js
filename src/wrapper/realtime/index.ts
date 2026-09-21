@@ -12,6 +12,7 @@ export {
     type CommittedTranscriptMessage,
     type CommittedTranscriptWithTimestampsMessage,
     type CommittedTranscriptEntitiesMessage,
+    type EditedTranscriptMessage,
     type FinalTranscriptMessage,
     type FinalTranscriptWithTimestampsMessage,
     type PartialTranscriptMessage,

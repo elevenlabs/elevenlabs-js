@@ -174,6 +174,18 @@ export interface CommittedTranscriptEntitiesMessage {
     entities: DetectedEntity[];
 }
 
+/**
+ * The edited version of a committed transcript.
+ * Only sent when the transcriptEdit option is set.
+ */
+export interface EditedTranscriptMessage {
+    message_type: "edited_transcript";
+    /** The committed transcript text the edit instruction was applied to. */
+    text: string;
+    /** The edited transcript text. If no edits were made it will be identical to the `text` field. */
+    edited_text: string;
+}
+
 export interface ErrorMessage {
     message_type: "error";
     error: string;
@@ -274,6 +286,7 @@ export type WebSocketMessage =
     | CommittedTranscriptMessage
     | CommittedTranscriptWithTimestampsMessage
     | CommittedTranscriptEntitiesMessage
+    | EditedTranscriptMessage
     | ServerErrorMessage;
 
 /**
@@ -300,6 +313,8 @@ export enum RealtimeEvents {
     COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS = "committed_transcript_with_timestamps",
     /** Emitted when entities detected in a committed transcript are available */
     COMMITTED_TRANSCRIPT_ENTITIES = "committed_transcript_entities",
+    /** Emitted when the edited version of a committed transcript is available */
+    EDITED_TRANSCRIPT = "edited_transcript",
     /** Emitted when an error occurs - can be any error message from the server or a native WebSocket error */
     ERROR = "error",
     /** Emitted when an auth error occurs */
@@ -345,6 +360,7 @@ export interface RealtimeEventMap {
     [RealtimeEvents.COMMITTED_TRANSCRIPT]: CommittedTranscriptMessage;
     [RealtimeEvents.COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS]: CommittedTranscriptWithTimestampsMessage;
     [RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES]: CommittedTranscriptEntitiesMessage;
+    [RealtimeEvents.EDITED_TRANSCRIPT]: EditedTranscriptMessage;
     [RealtimeEvents.ERROR]: RealtimeErrorPayload;
     [RealtimeEvents.AUTH_ERROR]: AuthErrorMessage;
     [RealtimeEvents.QUOTA_EXCEEDED]: QuotaExceededErrorMessage;
@@ -448,6 +464,9 @@ export class RealtimeConnection {
                     break;
                 case "committed_transcript_entities":
                     this.eventEmitter.emit(RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES, data);
+                    break;
+                case "edited_transcript":
+                    this.eventEmitter.emit(RealtimeEvents.EDITED_TRANSCRIPT, data);
                     break;
                 case "error":
                     this.eventEmitter.emit(RealtimeEvents.ERROR, data);

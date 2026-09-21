@@ -106,6 +106,7 @@ describe("ScribeRealtime handshake URL", () => {
             filterBackgroundAudio: true,
             enableLogging: false,
             token: "sutkn_1234567890",
+            transcriptEdit: "Write all dates in ISO 8601 format (YYYY-MM-DD)",
         });
 
         expect(queryParams(url)).toEqual([
@@ -127,6 +128,7 @@ describe("ScribeRealtime handshake URL", () => {
             ["secondary_languages", "de"],
             ["secondary_languages", "nl"],
             ["token", "sutkn_1234567890"],
+            ["transcript_edit", "Write all dates in ISO 8601 format (YYYY-MM-DD)"],
             ["vad_silence_threshold_secs", "1.5"],
             ["vad_threshold", "0.4"],
         ]);
@@ -264,6 +266,19 @@ describe("RealtimeConnection message dispatch", () => {
         socket.deliver(payload);
 
         expect(received[event]).toEqual([payload]);
+    });
+
+    it("routes edited_transcript with both the committed and the edited text", () => {
+        const { socket, received } = listen([RealtimeEvents.EDITED_TRANSCRIPT]);
+        const payload = {
+            message_type: "edited_transcript",
+            text: "our next meeting is on the twelfth of July twenty twenty-six",
+            edited_text: "our next meeting is on 2026-07-12",
+        };
+
+        socket.deliver(payload);
+
+        expect(received[RealtimeEvents.EDITED_TRANSCRIPT]).toEqual([payload]);
     });
 
     // Parameter rejections arrive as a message before the socket closes; dropping
