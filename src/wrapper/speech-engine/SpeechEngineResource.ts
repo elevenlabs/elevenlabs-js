@@ -206,6 +206,18 @@ export class SpeechEngineResource {
 const ISSUER = "https://api.elevenlabs.io/convai/speech-engine";
 const SUBJECT = "convai_speech_engine_upstream";
 const LEEWAY_SECONDS = 60;
+const RESIDENCY_KEY_SUFFIX = /_residency_[a-z0-9]+$/;
+
+/**
+ * Normalize an API key before hashing it into the HMAC secret.
+ *
+ * The API signs Speech Engine JWTs with the SHA-256 of the *base* key, so a
+ * data-residency key such as `sk_..._residency_in` must have its
+ * `_residency_<region>` suffix removed before it is hashed here.
+ */
+function normalizeApiKeyForSigning(apiKey: string): string {
+    return apiKey.trim().replace(RESIDENCY_KEY_SUFFIX, "");
+}
 
 function base64UrlDecode(input: string): Buffer {
     const padded = input.replace(/-/g, "+").replace(/_/g, "/");
@@ -233,9 +245,8 @@ export function verifySpeechEngineJwt(value: string, apiKey: string): Record<str
         throw new Error("Invalid JWT: failed to decode payload");
     }
 
-    // SHA-256 hash of the API key, used as the HMAC secret
-    const trimmedKey = apiKey.trim();
-    const secret = createHash("sha256").update(trimmedKey, "utf-8").digest();
+    // SHA-256 hash of the (residency-suffix-stripped) API key, used as the HMAC secret
+    const secret = createHash("sha256").update(normalizeApiKeyForSigning(apiKey), "utf-8").digest();
 
     const expectedSignature = createHmac("sha256", secret).update(`${headerB64}.${payloadB64}`).digest();
 
