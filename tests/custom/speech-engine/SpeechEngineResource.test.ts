@@ -285,6 +285,18 @@ describe("SpeechEngineResource", () => {
             expect(() => verifySpeechEngineJwt(token, TEST_API_KEY)).toThrow("signature mismatch");
         });
 
+        it("strips a data-residency suffix from the API key before hashing", () => {
+            // The API signs with the base key; the server may be configured with the full residency key.
+            const token = createTestJwt(validPayload(), "sk_abc123");
+            const result = verifySpeechEngineJwt(token, "sk_abc123_residency_in");
+            expect(result.iss).toBe(JWT_ISSUER);
+        });
+
+        it("rejects a residency key whose base key does not match", () => {
+            const token = createTestJwt(validPayload(), "sk_other");
+            expect(() => verifySpeechEngineJwt(token, "sk_abc123_residency_eu")).toThrow("signature mismatch");
+        });
+
         it("rejects a token with wrong issuer", () => {
             const token = createTestJwt(validPayload({ iss: "https://evil.com" }));
             expect(() => verifySpeechEngineJwt(token, TEST_API_KEY)).toThrow("expected issuer");
