@@ -11,11 +11,13 @@ export const LlmUsageCalculatorLlmResponseModel: core.serialization.ObjectSchema
 > = core.serialization.object({
     llm: Llm,
     pricePerMinute: core.serialization.property("price_per_minute", core.serialization.number()),
+    pricePerMessage: core.serialization.property("price_per_message", core.serialization.number()),
 });
 
 export declare namespace LlmUsageCalculatorLlmResponseModel {
     export interface Raw {
         llm: Llm.Raw;
         price_per_minute: number;
+        price_per_message: number;
     }
 }

@@ -6,6 +6,7 @@ export const WorkspaceResourceType = {
     VoiceCollection: "voice_collection",
     PronunciationDictionary: "pronunciation_dictionary",
     Dubbing: "dubbing",
+    DubbingProject: "dubbing_project",
     Project: "project",
     ConvaiAgents: "convai_agents",
     ConvaiKnowledgeBaseDocuments: "convai_knowledge_base_documents",

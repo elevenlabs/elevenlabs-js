@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../index";
 
 export interface AttachedSystemDataCollectionRef {
     /** Id of the referenced built-in system data-collection item. */
-    analysisItemId: "__system_data_collection_topic";
+    analysisItemId: ElevenLabs.SystemDataCollectionId;
     /** Transcript context ('conversation' or 'agent') used when running this item. */
     scope?: ElevenLabs.AnalysisScope;
 }

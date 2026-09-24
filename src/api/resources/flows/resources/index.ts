@@ -1,6 +1,8 @@
 export * as image from "./image";
 export * from "./image/client/requests";
 export * from "./image/types";
+export * as templates from "./templates";
+export * from "./templates/client/requests";
 export * as textToSpeech from "./textToSpeech";
 export * from "./textToSpeech/client/requests";
 export * from "./textToSpeech/types";

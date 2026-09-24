@@ -9,7 +9,7 @@
 export interface BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost {
     /** URL to a page of documentation that the agent will have access to in order to interact with users. */
     url: string;
-    /** Maximum depth for crawling (1-5), defaults to 3. */
+    /** Deprecated - this field is a no-op and will be removed in a future version. */
     maxDepth?: number;
     /** Maximum number of pages to crawl (1-10,000), defaults to 1000. */
     maxPages?: number;
@@ -23,6 +23,8 @@ export interface BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost {
     enableAutoSync?: boolean;
     /** Whether to automatically remove the document if the URL becomes unavailable. Only applicable when auto-sync is enabled. */
     autoRemove?: boolean;
+    /** Automatically discover and add new pages linked from already-crawled pages during auto-sync. Requires enable_auto_sync=true. */
+    autoDiscover?: boolean;
     /** Minimum frequency (in days) at which the underlying eligible documents are refreshed. The actual interval may be shorter, never longer. Defaults to 7, tightened to the parent folder's frequency if that is stricter. Only applicable when auto-sync is enabled. */
     minimumFrequencyDays?: number;
 }

@@ -25,6 +25,8 @@ export interface SpeechEngineResponse {
     callLimits: ElevenLabs.AgentCallLimits;
     /** ISO language code used by the speech engine (e.g. 'en') */
     language: string;
+    /** Time in seconds to wait for the upstream speech engine endpoint to respond before the attempt is abandoned and retried. Must be between 2 and 15 seconds. */
+    cascadeTimeoutSeconds: number;
     /** Arbitrary tags for categorization and filtering */
     tags: string[];
     /** Override settings the client may set during conversation initiation */

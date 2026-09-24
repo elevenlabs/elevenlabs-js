@@ -163,7 +163,7 @@ export class MusicClient {
         request: ElevenLabs.BodyComposeMusicV1MusicPost = {},
         requestOptions?: MusicClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const { outputFormat, ..._body } = request;
+        const { outputFormat, enableLogging, ..._body } = request;
         const _queryParams: Record<string, unknown> = {
             output_format:
                 outputFormat != null
@@ -171,6 +171,7 @@ export class MusicClient {
                           unrecognizedObjectKeys: "strip",
                       })
                     : undefined,
+            enable_logging: enableLogging,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -244,7 +245,7 @@ export class MusicClient {
         request: ElevenLabs.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost = {},
         requestOptions?: MusicClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const { outputFormat, ..._body } = request;
+        const { outputFormat, enableLogging, ..._body } = request;
         const _queryParams: Record<string, unknown> = {
             output_format:
                 outputFormat != null
@@ -252,6 +253,7 @@ export class MusicClient {
                           unrecognizedObjectKeys: "strip",
                       })
                     : undefined,
+            enable_logging: enableLogging,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -323,7 +325,7 @@ export class MusicClient {
         request: ElevenLabs.BodyStreamComposedMusicWithADetailedResponseV1MusicDetailedStreamPost = {},
         requestOptions?: MusicClient.RequestOptions,
     ): Promise<core.WithRawResponse<core.Stream<string>>> {
-        const { outputFormat, ..._body } = request;
+        const { outputFormat, enableLogging, ..._body } = request;
         const _queryParams: Record<string, unknown> = {
             output_format:
                 outputFormat != null
@@ -331,6 +333,7 @@ export class MusicClient {
                           unrecognizedObjectKeys: "strip",
                       })
                     : undefined,
+            enable_logging: enableLogging,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -424,7 +427,7 @@ export class MusicClient {
         request: ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost = {},
         requestOptions?: MusicClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const { outputFormat, ..._body } = request;
+        const { outputFormat, enableLogging, ..._body } = request;
         const _queryParams: Record<string, unknown> = {
             output_format:
                 outputFormat != null
@@ -432,6 +435,7 @@ export class MusicClient {
                           unrecognizedObjectKeys: "strip",
                       })
                     : undefined,
+            enable_logging: enableLogging,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -620,6 +624,7 @@ export class MusicClient {
                           unrecognizedObjectKeys: "strip",
                       })
                     : undefined,
+            enable_logging: request.enableLogging,
         };
         const _body = await core.newFormData();
         await _body.appendFile("file", request.file);

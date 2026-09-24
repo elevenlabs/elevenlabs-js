@@ -38,6 +38,7 @@ export class TextToVoiceClient {
      * @param {ElevenLabs.VoiceDesignRequest} request
      * @param {TextToVoiceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link ElevenLabs.ConflictError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      * @throws {@link errors.ElevenLabsError}
      * @throws {@link errors.ElevenLabsTimeoutError}
@@ -113,6 +114,8 @@ export class TextToVoiceClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 409:
+                    throw new ElevenLabs.ConflictError(_response.error.body, _response.rawResponse);
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
@@ -138,6 +141,7 @@ export class TextToVoiceClient {
      * @param {ElevenLabs.BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost} request
      * @param {TextToVoiceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link ElevenLabs.ConflictError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      * @throws {@link errors.ElevenLabsError}
      * @throws {@link errors.ElevenLabsTimeoutError}
@@ -205,6 +209,8 @@ export class TextToVoiceClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 409:
+                    throw new ElevenLabs.ConflictError(_response.error.body, _response.rawResponse);
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
@@ -225,6 +231,7 @@ export class TextToVoiceClient {
      * @param {ElevenLabs.VoiceDesignRequestModel} request
      * @param {TextToVoiceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link ElevenLabs.ConflictError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      * @throws {@link errors.ElevenLabsError}
      * @throws {@link errors.ElevenLabsTimeoutError}
@@ -300,6 +307,8 @@ export class TextToVoiceClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 409:
+                    throw new ElevenLabs.ConflictError(_response.error.body, _response.rawResponse);
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
@@ -321,6 +330,7 @@ export class TextToVoiceClient {
      * @param {ElevenLabs.VoiceRemixRequestModel} request
      * @param {TextToVoiceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link ElevenLabs.ConflictError}
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      * @throws {@link errors.ElevenLabsError}
      * @throws {@link errors.ElevenLabsTimeoutError}
@@ -398,6 +408,8 @@ export class TextToVoiceClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 409:
+                    throw new ElevenLabs.ConflictError(_response.error.body, _response.rawResponse);
                 case 422:
                     throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:

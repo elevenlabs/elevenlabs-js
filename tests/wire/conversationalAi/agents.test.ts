@@ -363,7 +363,7 @@ describe("AgentsClient", () => {
                 alerting: {
                     monitor_configs: { key: {} },
                     auto_resolve_after_inactive_minutes: 1,
-                    notifiers: [{ type: "integration", connection_id: "connection_id" }],
+                    notifiers: [{ type: "webhook", webhook_id: "webhook_id" }],
                 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
@@ -383,6 +383,7 @@ describe("AgentsClient", () => {
                     business_account_name: "business_account_name",
                     phone_number_name: "phone_number_name",
                     phone_number: "phone_number",
+                    account_type: "cloud_api",
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
                     enable_audio_message_response: true,
@@ -1627,8 +1628,8 @@ describe("AgentsClient", () => {
                     autoResolveAfterInactiveMinutes: 1,
                     notifiers: [
                         {
-                            type: "integration",
-                            connectionId: "connection_id",
+                            type: "webhook",
+                            webhookId: "webhook_id",
                         },
                     ],
                 },
@@ -1657,6 +1658,7 @@ describe("AgentsClient", () => {
                     businessAccountName: "business_account_name",
                     phoneNumberName: "phone_number_name",
                     phoneNumber: "phone_number",
+                    accountType: "cloud_api",
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
                     enableAudioMessageResponse: true,
@@ -2973,7 +2975,7 @@ describe("AgentsClient", () => {
                 alerting: {
                     monitor_configs: { key: {} },
                     auto_resolve_after_inactive_minutes: 1,
-                    notifiers: [{ type: "integration", connection_id: "connection_id" }],
+                    notifiers: [{ type: "webhook", webhook_id: "webhook_id" }],
                 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
@@ -2993,6 +2995,7 @@ describe("AgentsClient", () => {
                     business_account_name: "business_account_name",
                     phone_number_name: "phone_number_name",
                     phone_number: "phone_number",
+                    account_type: "cloud_api",
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
                     enable_audio_message_response: true,
@@ -4238,8 +4241,8 @@ describe("AgentsClient", () => {
                     autoResolveAfterInactiveMinutes: 1,
                     notifiers: [
                         {
-                            type: "integration",
-                            connectionId: "connection_id",
+                            type: "webhook",
+                            webhookId: "webhook_id",
                         },
                     ],
                 },
@@ -4268,6 +4271,7 @@ describe("AgentsClient", () => {
                     businessAccountName: "business_account_name",
                     phoneNumberName: "phone_number_name",
                     phoneNumber: "phone_number",
+                    accountType: "cloud_api",
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
                     enableAudioMessageResponse: true,
@@ -5658,6 +5662,7 @@ describe("AgentsClient", () => {
                     root_folder_id: "root_folder_id",
                     root_folder_name: "root_folder_name",
                     environment: "environment",
+                    credits_used: 1,
                 },
             ],
         };
@@ -5736,6 +5741,7 @@ describe("AgentsClient", () => {
                     rootFolderId: "root_folder_id",
                     rootFolderName: "root_folder_name",
                     environment: "environment",
+                    creditsUsed: 1,
                 },
             ],
         });

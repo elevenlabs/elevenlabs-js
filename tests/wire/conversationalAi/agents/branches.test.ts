@@ -650,7 +650,7 @@ describe("BranchesClient", () => {
                 alerting: {
                     monitor_configs: { key: {} },
                     auto_resolve_after_inactive_minutes: 1,
-                    notifiers: [{ type: "integration", connection_id: "connection_id" }],
+                    notifiers: [{ type: "webhook", webhook_id: "webhook_id" }],
                 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
@@ -670,6 +670,7 @@ describe("BranchesClient", () => {
                     business_account_name: "business_account_name",
                     phone_number_name: "phone_number_name",
                     phone_number: "phone_number",
+                    account_type: "cloud_api",
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
                     enable_audio_message_response: true,
@@ -1931,8 +1932,8 @@ describe("BranchesClient", () => {
                     autoResolveAfterInactiveMinutes: 1,
                     notifiers: [
                         {
-                            type: "integration",
-                            connectionId: "connection_id",
+                            type: "webhook",
+                            webhookId: "webhook_id",
                         },
                     ],
                 },
@@ -1961,6 +1962,7 @@ describe("BranchesClient", () => {
                     businessAccountName: "business_account_name",
                     phoneNumberName: "phone_number_name",
                     phoneNumber: "phone_number",
+                    accountType: "cloud_api",
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
                     enableAudioMessageResponse: true,
@@ -3308,7 +3310,7 @@ describe("BranchesClient", () => {
                 alerting: {
                     monitor_configs: { key: {} },
                     auto_resolve_after_inactive_minutes: 1,
-                    notifiers: [{ type: "integration", connection_id: "connection_id" }],
+                    notifiers: [{ type: "webhook", webhook_id: "webhook_id" }],
                 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
             },
@@ -3328,6 +3330,7 @@ describe("BranchesClient", () => {
                     business_account_name: "business_account_name",
                     phone_number_name: "phone_number_name",
                     phone_number: "phone_number",
+                    account_type: "cloud_api",
                     assigned_agent_id: "assigned_agent_id",
                     enable_messaging: true,
                     enable_audio_message_response: true,
@@ -4585,8 +4588,8 @@ describe("BranchesClient", () => {
                     autoResolveAfterInactiveMinutes: 1,
                     notifiers: [
                         {
-                            type: "integration",
-                            connectionId: "connection_id",
+                            type: "webhook",
+                            webhookId: "webhook_id",
                         },
                     ],
                 },
@@ -4615,6 +4618,7 @@ describe("BranchesClient", () => {
                     businessAccountName: "business_account_name",
                     phoneNumberName: "phone_number_name",
                     phoneNumber: "phone_number",
+                    accountType: "cloud_api",
                     assignedAgentId: "assigned_agent_id",
                     enableMessaging: true,
                     enableAudioMessageResponse: true,

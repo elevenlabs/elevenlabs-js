@@ -4,11 +4,11 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 
-export const AttachedSystemEvaluationRefAnalysisItemId: core.serialization.Schema<
-    serializers.AttachedSystemEvaluationRefAnalysisItemId.Raw,
-    ElevenLabs.AttachedSystemEvaluationRefAnalysisItemId
+export const SystemEvaluationId: core.serialization.Schema<
+    serializers.SystemEvaluationId.Raw,
+    ElevenLabs.SystemEvaluationId
 > = core.serialization.enum_(["__system_eval_criteria_sentiment", "__system_eval_criteria_frustration"]);
 
-export declare namespace AttachedSystemEvaluationRefAnalysisItemId {
+export declare namespace SystemEvaluationId {
     export type Raw = "__system_eval_criteria_sentiment" | "__system_eval_criteria_frustration";
 }

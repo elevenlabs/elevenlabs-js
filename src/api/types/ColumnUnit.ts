@@ -10,6 +10,7 @@ export const ColumnUnit = {
     Eur: "eur",
     Inr: "inr",
     Pln: "pln",
+    Gbp: "gbp",
     Ratio: "ratio",
     Rating: "rating",
 } as const;

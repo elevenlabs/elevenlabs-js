@@ -8,7 +8,7 @@ import { BodyStreamComposedMusicV1MusicStreamPostCompositionPlan } from "../../t
 
 export const BodyStreamComposedMusicV1MusicStreamPost: core.serialization.Schema<
     serializers.BodyStreamComposedMusicV1MusicStreamPost.Raw,
-    Omit<ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost, "outputFormat">
+    Omit<ElevenLabs.BodyStreamComposedMusicV1MusicStreamPost, "outputFormat" | "enableLogging">
 > = core.serialization.object({
     prompt: core.serialization.string().optional(),
     compositionPlan: core.serialization.property(

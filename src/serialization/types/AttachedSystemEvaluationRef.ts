@@ -4,20 +4,20 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AnalysisScope } from "./AnalysisScope";
-import { AttachedSystemEvaluationRefAnalysisItemId } from "./AttachedSystemEvaluationRefAnalysisItemId";
+import { SystemEvaluationId } from "./SystemEvaluationId";
 
 export const AttachedSystemEvaluationRef: core.serialization.ObjectSchema<
     serializers.AttachedSystemEvaluationRef.Raw,
     ElevenLabs.AttachedSystemEvaluationRef
 > = core.serialization.object({
-    analysisItemId: core.serialization.property("analysis_item_id", AttachedSystemEvaluationRefAnalysisItemId),
+    analysisItemId: core.serialization.property("analysis_item_id", SystemEvaluationId),
     scope: AnalysisScope.optional(),
     weight: core.serialization.number().optional(),
 });
 
 export declare namespace AttachedSystemEvaluationRef {
     export interface Raw {
-        analysis_item_id: AttachedSystemEvaluationRefAnalysisItemId.Raw;
+        analysis_item_id: SystemEvaluationId.Raw;
         scope?: AnalysisScope.Raw | null;
         weight?: number | null;
     }

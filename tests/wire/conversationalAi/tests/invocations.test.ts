@@ -133,6 +133,7 @@ describe("InvocationsClient", () => {
                     root_folder_id: "root_folder_id",
                     root_folder_name: "root_folder_name",
                     environment: "environment",
+                    credits_used: 1,
                 },
             ],
         };
@@ -204,6 +205,7 @@ describe("InvocationsClient", () => {
                     rootFolderId: "root_folder_id",
                     rootFolderName: "root_folder_name",
                     environment: "environment",
+                    creditsUsed: 1,
                 },
             ],
         });

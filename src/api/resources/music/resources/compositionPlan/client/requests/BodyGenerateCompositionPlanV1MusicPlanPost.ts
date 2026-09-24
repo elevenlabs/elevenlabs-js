@@ -5,10 +5,13 @@ import type * as ElevenLabs from "../../../../../../index";
 /**
  * @example
  *     {
+ *         enableLogging: true,
  *         prompt: "prompt"
  *     }
  */
 export interface BodyGenerateCompositionPlanV1MusicPlanPost {
+    /** When enable_logging is set to false zero retention mode will be used for the request. Zero retention mode may only be used by enterprise customers. */
+    enableLogging?: boolean;
     /** A simple text prompt to compose a plan from. */
     prompt: string;
     /** The length of the composition plan to generate in milliseconds. Must be between 3000ms and 600000ms. Optional - if not provided, the model will choose a length based on the prompt. */

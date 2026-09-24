@@ -27,6 +27,10 @@ export const CreateSpeechEngineRequest: core.serialization.Schema<
     privacy: PrivacyConfigInput.optional(),
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
     language: core.serialization.string().optional(),
+    cascadeTimeoutSeconds: core.serialization.property(
+        "cascade_timeout_seconds",
+        core.serialization.number().optional(),
+    ),
     tags: core.serialization.list(core.serialization.string()).optional(),
     overrides: SpeechEngineConversationInitiationClientDataConfig.optional(),
 });
@@ -43,6 +47,7 @@ export declare namespace CreateSpeechEngineRequest {
         privacy?: PrivacyConfigInput.Raw | null;
         call_limits?: AgentCallLimits.Raw | null;
         language?: string | null;
+        cascade_timeout_seconds?: number | null;
         tags?: string[] | null;
         overrides?: SpeechEngineConversationInitiationClientDataConfig.Raw | null;
     }

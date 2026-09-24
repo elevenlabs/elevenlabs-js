@@ -20,6 +20,15 @@ export const BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserId
         "third_party_disable_allowed",
         core.serialization.boolean().optional(),
     ),
+    ttsConcurrencyLimit: core.serialization.property("tts_concurrency_limit", core.serialization.number().optional()),
+    dubbingConcurrencyLimit: core.serialization.property(
+        "dubbing_concurrency_limit",
+        core.serialization.number().optional(),
+    ),
+    musicConcurrencyLimit: core.serialization.property(
+        "music_concurrency_limit",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysPost {
@@ -29,5 +38,8 @@ export declare namespace BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceA
         character_limit?: number | null;
         allowed_ips?: string[] | null;
         third_party_disable_allowed?: boolean | null;
+        tts_concurrency_limit?: number | null;
+        dubbing_concurrency_limit?: number | null;
+        music_concurrency_limit?: number | null;
     }
 }

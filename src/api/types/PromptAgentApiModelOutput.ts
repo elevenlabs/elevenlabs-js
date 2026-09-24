@@ -21,6 +21,8 @@ export interface PromptAgentApiModelOutput {
     toolIds?: string[];
     /** Built-in system tools to be used by the agent */
     builtInTools?: ElevenLabs.BuiltInToolsOutput;
+    /** Enable parallel tool calling. When enabled, the agent can execute multiple tools in parallel within a single turn. Not supported by all models. */
+    enableParallelToolCalls?: boolean;
     /** A list of MCP server ids to be used by the agent */
     mcpServerIds?: string[];
     /** A list of Native MCP server ids to be used by the agent */

@@ -186,6 +186,63 @@ describe("PhoneNumbersClient", () => {
         });
     });
 
+    test("list_v2", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            phone_numbers: [
+                {
+                    provider: "exotel",
+                    phone_number: "+919999999999",
+                    label: "Exotel Outbound",
+                    phone_number_id: "phnum_X3Pbu5gP6NNKBscdCdwB",
+                    assigned_agent: { agent_id: "F3Pbu5gP6NNKBscdCdwB", agent_name: "My Agent" },
+                },
+            ],
+            next_cursor: "next_cursor",
+            has_more: true,
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/convai/v2/phone-numbers")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.phoneNumbers.listV2({
+            pageSize: 1,
+            search: "search",
+            label: "label",
+            phoneNumber: "phone_number",
+            provider: "twilio",
+            supportsOutbound: true,
+            agentId: "agent_id",
+            branchId: "branch_id",
+            sortBy: "label",
+            sortDirection: "asc",
+            cursor: "cursor",
+        });
+        expect(response).toEqual({
+            phoneNumbers: [
+                {
+                    provider: "exotel",
+                    phoneNumber: "+919999999999",
+                    label: "Exotel Outbound",
+                    phoneNumberId: "phnum_X3Pbu5gP6NNKBscdCdwB",
+                    assignedAgent: {
+                        agentId: "F3Pbu5gP6NNKBscdCdwB",
+                        agentName: "My Agent",
+                    },
+                },
+            ],
+            nextCursor: "next_cursor",
+            hasMore: true,
+        });
+    });
+
     test("get_sip_messages", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

@@ -5,5 +5,6 @@ export const Currency = {
     Eur: "eur",
     Inr: "inr",
     Pln: "pln",
+    Gbp: "gbp",
 } as const;
 export type Currency = (typeof Currency)[keyof typeof Currency];

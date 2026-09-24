@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ConversationChargingCommonModel } from "./ConversationChargingCommonModel";
 import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
 import { TestConditionResultCommonModel } from "./TestConditionResultCommonModel";
 import { TestRunMetadata } from "./TestRunMetadata";
@@ -34,6 +35,8 @@ export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
     rootFolderId: core.serialization.property("root_folder_id", core.serialization.string().optional()),
     rootFolderName: core.serialization.property("root_folder_name", core.serialization.string().optional()),
     environment: core.serialization.string().optional(),
+    creditsUsed: core.serialization.property("credits_used", core.serialization.number().optional()),
+    charging: ConversationChargingCommonModel.optional(),
 });
 
 export declare namespace UnitTestRunResponseModel {
@@ -56,5 +59,7 @@ export declare namespace UnitTestRunResponseModel {
         root_folder_id?: string | null;
         root_folder_name?: string | null;
         environment?: string | null;
+        credits_used?: number | null;
+        charging?: ConversationChargingCommonModel.Raw | null;
     }
 }

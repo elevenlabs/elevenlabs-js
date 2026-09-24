@@ -5,6 +5,7 @@
  *     {
  *         textQuery: "Customer asking to cancel and get money back",
  *         agentId: "agent_id",
+ *         branchId: "branch_id",
  *         pageSize: 1,
  *         cursor: "cursor"
  *     }
@@ -14,6 +15,8 @@ export interface MessagesSearchRequest {
     textQuery: string;
     /** Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource. */
     agentId?: string;
+    /** Filter conversations by branch ID. */
+    branchId?: string;
     /** Number of results per page. Max 50. */
     pageSize?: number;
     /** Used for fetching next page. Cursor is returned in the response. */

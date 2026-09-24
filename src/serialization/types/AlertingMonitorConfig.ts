@@ -8,6 +8,7 @@ export const AlertingMonitorConfig: core.serialization.ObjectSchema<
     serializers.AlertingMonitorConfig.Raw,
     ElevenLabs.AlertingMonitorConfig
 > = core.serialization.object({
+    enabled: core.serialization.boolean().optional(),
     threshold: core.serialization.number().optional(),
     relativeIncreaseThreshold: core.serialization.property(
         "relative_increase_threshold",
@@ -31,6 +32,7 @@ export const AlertingMonitorConfig: core.serialization.ObjectSchema<
 
 export declare namespace AlertingMonitorConfig {
     export interface Raw {
+        enabled?: boolean | null;
         threshold?: number | null;
         relative_increase_threshold?: number | null;
         min_failure_count?: number | null;

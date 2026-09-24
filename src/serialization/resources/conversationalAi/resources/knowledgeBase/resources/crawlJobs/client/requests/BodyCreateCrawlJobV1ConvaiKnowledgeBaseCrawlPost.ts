@@ -19,6 +19,7 @@ export const BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost: core.serializatio
     parentFolderId: core.serialization.property("parent_folder_id", core.serialization.string().optional()),
     enableAutoSync: core.serialization.property("enable_auto_sync", core.serialization.boolean().optional()),
     autoRemove: core.serialization.property("auto_remove", core.serialization.boolean().optional()),
+    autoDiscover: core.serialization.property("auto_discover", core.serialization.boolean().optional()),
     minimumFrequencyDays: core.serialization.property("minimum_frequency_days", core.serialization.number().optional()),
 });
 
@@ -32,6 +33,7 @@ export declare namespace BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost {
         parent_folder_id?: string | null;
         enable_auto_sync?: boolean | null;
         auto_remove?: boolean | null;
+        auto_discover?: boolean | null;
         minimum_frequency_days?: number | null;
     }
 }

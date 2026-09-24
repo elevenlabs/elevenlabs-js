@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { WhatsAppAccountType } from "./WhatsAppAccountType";
 
 export const GetWhatsAppAccountResponse: core.serialization.ObjectSchema<
     serializers.GetWhatsAppAccountResponse.Raw,
@@ -13,6 +14,7 @@ export const GetWhatsAppAccountResponse: core.serialization.ObjectSchema<
     businessAccountName: core.serialization.property("business_account_name", core.serialization.string()),
     phoneNumberName: core.serialization.property("phone_number_name", core.serialization.string()),
     phoneNumber: core.serialization.property("phone_number", core.serialization.string()),
+    accountType: core.serialization.property("account_type", WhatsAppAccountType.optional()),
     assignedAgentId: core.serialization.property("assigned_agent_id", core.serialization.string().optional()),
     enableMessaging: core.serialization.property("enable_messaging", core.serialization.boolean().optional()),
     enableAudioMessageResponse: core.serialization.property(
@@ -34,6 +36,7 @@ export declare namespace GetWhatsAppAccountResponse {
         business_account_name: string;
         phone_number_name: string;
         phone_number: string;
+        account_type?: WhatsAppAccountType.Raw | null;
         assigned_agent_id?: string | null;
         enable_messaging?: boolean | null;
         enable_audio_message_response?: boolean | null;

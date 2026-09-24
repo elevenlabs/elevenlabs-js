@@ -3,16 +3,24 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { AlertingIntegrationNotifierResponseIntegrationType } from "./AlertingIntegrationNotifierResponseIntegrationType";
 
 export const AlertingIntegrationNotifierResponse: core.serialization.ObjectSchema<
     serializers.AlertingIntegrationNotifierResponse.Raw,
     ElevenLabs.AlertingIntegrationNotifierResponse
 > = core.serialization.object({
+    integrationType: core.serialization.property(
+        "integration_type",
+        AlertingIntegrationNotifierResponseIntegrationType.optional(),
+    ),
     connectionId: core.serialization.property("connection_id", core.serialization.string()),
+    channelId: core.serialization.property("channel_id", core.serialization.string().optional()),
 });
 
 export declare namespace AlertingIntegrationNotifierResponse {
     export interface Raw {
+        integration_type?: AlertingIntegrationNotifierResponseIntegrationType.Raw | null;
         connection_id: string;
+        channel_id?: string | null;
     }
 }
