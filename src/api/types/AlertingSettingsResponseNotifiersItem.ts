@@ -3,15 +3,15 @@
 import type * as ElevenLabs from "../index";
 
 export type AlertingSettingsResponseNotifiersItem =
-    | ElevenLabs.AlertingSettingsResponseNotifiersItem.Integration
-    | ElevenLabs.AlertingSettingsResponseNotifiersItem.Webhook;
+    | ElevenLabs.AlertingSettingsResponseNotifiersItem.Webhook
+    | ElevenLabs.AlertingSettingsResponseNotifiersItem.Integration;
 
 export namespace AlertingSettingsResponseNotifiersItem {
-    export interface Integration extends ElevenLabs.AlertingIntegrationNotifierResponse {
-        type: "integration";
-    }
-
     export interface Webhook extends ElevenLabs.AlertingWebhookNotifierResponse {
         type: "webhook";
+    }
+
+    export interface Integration extends ElevenLabs.AlertingIntegrationNotifierResponse {
+        type: "integration";
     }
 }

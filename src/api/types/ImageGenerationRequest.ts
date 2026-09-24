@@ -11,7 +11,9 @@ export type ImageGenerationRequest =
     | ElevenLabs.ImageGenerationRequest.Gemini31FlashLiteImage
     | ElevenLabs.ImageGenerationRequest.GptImage1
     | ElevenLabs.ImageGenerationRequest.GptImage15
-    | ElevenLabs.ImageGenerationRequest.GptImage2;
+    | ElevenLabs.ImageGenerationRequest.GptImage2
+    | ElevenLabs.ImageGenerationRequest.GptImage25Flare
+    | ElevenLabs.ImageGenerationRequest.GptImage25Sunburst;
 
 export namespace ImageGenerationRequest {
     export interface BytedanceSeedream5Lite extends ElevenLabs.BytedanceSeedream5LiteRequest {
@@ -48,5 +50,13 @@ export namespace ImageGenerationRequest {
 
     export interface GptImage2 extends ElevenLabs.GptImage2Request {
         modelId: "gpt-image-2";
+    }
+
+    export interface GptImage25Flare extends ElevenLabs.GptImage25FlareRequest {
+        modelId: "gpt-image-2.5-flare";
+    }
+
+    export interface GptImage25Sunburst extends ElevenLabs.GptImage25SunburstRequest {
+        modelId: "gpt-image-2.5-sunburst";
     }
 }

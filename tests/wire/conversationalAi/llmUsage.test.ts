@@ -8,7 +8,7 @@ describe("LlmUsageClient", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { prompt_length: 1, number_of_pages: 1, rag_enabled: true };
-        const rawResponseBody = { llm_prices: [{ llm: "gpt-4o-mini", price_per_minute: 1.1 }] };
+        const rawResponseBody = { llm_prices: [{ llm: "gpt-4o-mini", price_per_minute: 1.1, price_per_message: 1.1 }] };
 
         server
             .mockEndpoint()
@@ -29,6 +29,7 @@ describe("LlmUsageClient", () => {
                 {
                     llm: "gpt-4o-mini",
                     pricePerMinute: 1.1,
+                    pricePerMessage: 1.1,
                 },
             ],
         });

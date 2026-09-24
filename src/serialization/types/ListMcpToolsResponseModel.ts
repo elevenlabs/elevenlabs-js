@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { McpToolApprovalStatus } from "./McpToolApprovalStatus";
 import { Tool } from "./Tool";
 
 export const ListMcpToolsResponseModel: core.serialization.ObjectSchema<
@@ -11,6 +12,10 @@ export const ListMcpToolsResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     success: core.serialization.boolean(),
     tools: core.serialization.list(Tool),
+    toolApprovalStatuses: core.serialization.property(
+        "tool_approval_statuses",
+        core.serialization.list(McpToolApprovalStatus).optional(),
+    ),
     errorMessage: core.serialization.property("error_message", core.serialization.string().optional()),
 });
 
@@ -18,6 +23,7 @@ export declare namespace ListMcpToolsResponseModel {
     export interface Raw {
         success: boolean;
         tools: Tool.Raw[];
+        tool_approval_statuses?: McpToolApprovalStatus.Raw[] | null;
         error_message?: string | null;
     }
 }

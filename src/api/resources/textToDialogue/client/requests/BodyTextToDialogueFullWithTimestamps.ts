@@ -28,11 +28,19 @@ export interface BodyTextToDialogueFullWithTimestamps {
     /** Language code (ISO 639-1) used to enforce a language for the model and text normalization. If the model does not support the provided language code, it will be ignored. This parameter is not supported for multilingual_v2 models. */
     languageCode?: string;
     /** Settings controlling the dialogue generation. */
-    settings?: ElevenLabs.ModelSettingsResponseModel;
+    settings?: ElevenLabs.ToDialogueSettingsResponseModel;
     /** A list of pronunciation dictionary locators (id, version_id) to be applied to the text. They will be applied in order. You may have up to 3 locators per request */
     pronunciationDictionaryLocators?: ElevenLabs.PronunciationDictionaryVersionLocator[];
     /** If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be integer between 0 and 4294967295. */
     seed?: number;
     /** This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped. */
     applyTextNormalization?: ElevenLabs.BodyTextToDialogueFullWithTimestampsApplyTextNormalization;
+    /** A list of request_ids of dialogue generations that came before this one. Used to condition the model for continuity when splitting a large task into multiple requests. A maximum of 3 request_ids can be sent. The last request_id is the audio which is closest to the current request. Not supported by every model. */
+    previousRequestIds?: string[];
+    /** A list of request_ids of dialogue generations that come after this one. Useful for maintaining continuity when regenerating a clip in the middle of a sequence. A maximum of 3 request_ids can be sent. The first request_id is the audio which is closest to the current request. Not supported by every model. */
+    nextRequestIds?: string[];
+    /** The text that comes immediately before this generation, used to condition the model for prosodic continuity. A maximum of 100 characters can be sent. Not supported by every model. */
+    previousText?: string;
+    /** The text that comes immediately after this generation, used to condition the model for prosodic continuity. A maximum of 100 characters can be sent. Not supported by every model. */
+    futureText?: string;
 }

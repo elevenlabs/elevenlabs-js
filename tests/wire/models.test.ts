@@ -22,8 +22,6 @@ describe("ModelsClient", () => {
                 description:
                     "Our state of the art multilingual speech synthesis model, able to generate life-like speech in 29 languages.",
                 requires_alpha_access: false,
-                max_characters_request_free_user: 2500,
-                max_characters_request_subscribed_user: 5000,
                 maximum_text_length_per_request: 1000000,
                 languages: [{ language_id: "en", name: "English" }],
                 model_rates: { character_cost_multiplier: 1, cost_discount_multiplier: 1 },
@@ -48,8 +46,6 @@ describe("ModelsClient", () => {
                 description:
                     "Our state of the art multilingual speech synthesis model, able to generate life-like speech in 29 languages.",
                 requiresAlphaAccess: false,
-                maxCharactersRequestFreeUser: 2500,
-                maxCharactersRequestSubscribedUser: 5000,
                 maximumTextLengthPerRequest: 1000000,
                 languages: [
                     {

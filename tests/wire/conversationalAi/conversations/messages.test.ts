@@ -131,6 +131,7 @@ describe("MessagesClient", () => {
         const response = await client.conversationalAi.conversations.messages.search({
             textQuery: "Customer asking to cancel and get money back",
             agentId: "agent_id",
+            branchId: "branch_id",
             pageSize: 1,
             cursor: "cursor",
         });

@@ -449,6 +449,132 @@ export class PhoneNumbersClient {
     }
 
     /**
+     * Retrieve a page of Phone Numbers
+     *
+     * @param {ElevenLabs.conversationalAi.PhoneNumbersListV2Request} request
+     * @param {PhoneNumbersClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.phoneNumbers.listV2({
+     *         pageSize: 1,
+     *         search: "search",
+     *         label: "label",
+     *         phoneNumber: "phone_number",
+     *         provider: "twilio",
+     *         supportsOutbound: true,
+     *         agentId: "agent_id",
+     *         branchId: "branch_id",
+     *         sortBy: "label",
+     *         sortDirection: "asc",
+     *         cursor: "cursor"
+     *     })
+     */
+    public listV2(
+        request: ElevenLabs.conversationalAi.PhoneNumbersListV2Request = {},
+        requestOptions?: PhoneNumbersClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.GetPhoneNumbersPageResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__listV2(request, requestOptions));
+    }
+
+    private async __listV2(
+        request: ElevenLabs.conversationalAi.PhoneNumbersListV2Request = {},
+        requestOptions?: PhoneNumbersClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.GetPhoneNumbersPageResponseModel>> {
+        const {
+            pageSize,
+            search,
+            label,
+            phoneNumber,
+            provider,
+            supportsOutbound,
+            agentId,
+            branchId,
+            sortBy,
+            sortDirection,
+            cursor,
+        } = request;
+        const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            search,
+            label,
+            phone_number: phoneNumber,
+            provider:
+                provider != null
+                    ? serializers.TelephonyProvider.jsonOrThrow(provider, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            supports_outbound: supportsOutbound,
+            agent_id: agentId,
+            branch_id: branchId,
+            sort_by:
+                sortBy != null
+                    ? serializers.PhoneNumberSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            sort_direction:
+                sortDirection != null
+                    ? serializers.SortDirection.jsonOrThrow(sortDirection, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            cursor,
+        };
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/v2/phone-numbers",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetPhoneNumbersPageResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/convai/v2/phone-numbers");
+    }
+
+    /**
      * Get SIP messages for a phone number
      *
      * @param {string} phone_number_id - The phone number ID. This is returned when a phone number is imported.

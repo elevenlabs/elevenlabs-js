@@ -19,4 +19,10 @@ export interface BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUser
     allowedIps?: ElevenLabs.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchAllowedIps;
     /** Whether the holder of this key may disable it via the self-disable endpoint. On create, omit or pass null to use the workspace's default (enabled for non-Enterprise plans, disabled for Enterprise plans). On update, omit to leave it unchanged, or pass "clear" to reset it to the workspace default. Only honored for workspaces with self-disable access enabled. */
     thirdPartyDisableAllowed?: ElevenLabs.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchThirdPartyDisableAllowed;
+    /** Maximum concurrent text-to-speech/speech-to-speech requests for this API key. Only available for enterprise customers. */
+    ttsConcurrencyLimit?: ElevenLabs.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchTtsConcurrencyLimit;
+    /** Maximum concurrent dubbing requests for this API key. Only available for enterprise customers. */
+    dubbingConcurrencyLimit?: ElevenLabs.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchDubbingConcurrencyLimit;
+    /** Maximum concurrent music generation requests for this API key. Only available for enterprise customers. */
+    musicConcurrencyLimit?: ElevenLabs.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatchMusicConcurrencyLimit;
 }

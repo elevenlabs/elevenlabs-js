@@ -25,11 +25,11 @@ export interface Model {
     description?: string;
     /** Whether the model requires alpha access. */
     requiresAlphaAccess?: boolean;
-    /** The maximum number of characters that can be requested by a free user. */
+    /** Deprecated. Not enforced; use `maximum_text_length_per_request` instead. */
     maxCharactersRequestFreeUser?: number;
-    /** The maximum number of characters that can be requested by a subscribed user. */
+    /** Deprecated. Not enforced; use `maximum_text_length_per_request` instead. */
     maxCharactersRequestSubscribedUser?: number;
-    /** The maximum length of text that can be requested for this model. */
+    /** The maximum number of input text characters accepted per request for this model. Longer requests are rejected. */
     maximumTextLengthPerRequest?: number;
     /** The languages supported by the model. */
     languages?: ElevenLabs.LanguageResponse[];

@@ -6,8 +6,11 @@ export interface GetCrawlJobResponseModel {
     type?: ElevenLabs.CrawlType;
     seedUrl: string;
     pattern?: string;
-    maxDepth: number;
+    /** Deprecated - this field is a no-op and will be removed in a future version. */
+    maxDepth?: number;
     maxPages: number;
+    /** Whether to automatically discover and enqueue additional pages found while crawling. */
+    autoDiscover?: boolean;
     status?: ElevenLabs.CrawlStatus;
     pagesIdentified?: number;
     pagesScraped?: number;

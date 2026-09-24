@@ -9,12 +9,12 @@ export const ToDialogueSettingsResponseModel: core.serialization.ObjectSchema<
     ElevenLabs.ToDialogueSettingsResponseModel
 > = core.serialization.object({
     stability: core.serialization.number().optional(),
-    speed: core.serialization.number().optional(),
+    similarity: core.serialization.number().optional(),
 });
 
 export declare namespace ToDialogueSettingsResponseModel {
     export interface Raw {
         stability?: number | null;
-        speed?: number | null;
+        similarity?: number | null;
     }
 }

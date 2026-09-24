@@ -264,6 +264,7 @@ export class MessagesClient {
      *     await client.conversationalAi.conversations.messages.search({
      *         textQuery: "Customer asking to cancel and get money back",
      *         agentId: "agent_id",
+     *         branchId: "branch_id",
      *         pageSize: 1,
      *         cursor: "cursor"
      *     })
@@ -279,10 +280,11 @@ export class MessagesClient {
         request: ElevenLabs.conversationalAi.conversations.MessagesSearchRequest,
         requestOptions?: MessagesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.MessagesSearchResponse>> {
-        const { textQuery, agentId, pageSize, cursor } = request;
+        const { textQuery, agentId, branchId, pageSize, cursor } = request;
         const _queryParams: Record<string, unknown> = {
             text_query: textQuery,
             agent_id: agentId,
+            branch_id: branchId,
             page_size: pageSize,
             cursor,
         };

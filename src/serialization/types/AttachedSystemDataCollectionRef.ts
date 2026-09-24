@@ -4,21 +4,19 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AnalysisScope } from "./AnalysisScope";
+import { SystemDataCollectionId } from "./SystemDataCollectionId";
 
 export const AttachedSystemDataCollectionRef: core.serialization.ObjectSchema<
     serializers.AttachedSystemDataCollectionRef.Raw,
     ElevenLabs.AttachedSystemDataCollectionRef
 > = core.serialization.object({
-    analysisItemId: core.serialization.property(
-        "analysis_item_id",
-        core.serialization.stringLiteral("__system_data_collection_topic"),
-    ),
+    analysisItemId: core.serialization.property("analysis_item_id", SystemDataCollectionId),
     scope: AnalysisScope.optional(),
 });
 
 export declare namespace AttachedSystemDataCollectionRef {
     export interface Raw {
-        analysis_item_id: "__system_data_collection_topic";
+        analysis_item_id: SystemDataCollectionId.Raw;
         scope?: AnalysisScope.Raw | null;
     }
 }

@@ -30,6 +30,7 @@ export const SpeechEngineResponse: core.serialization.ObjectSchema<
     privacy: PrivacyConfigOutput,
     callLimits: core.serialization.property("call_limits", AgentCallLimits),
     language: core.serialization.string(),
+    cascadeTimeoutSeconds: core.serialization.property("cascade_timeout_seconds", core.serialization.number()),
     tags: core.serialization.list(core.serialization.string()),
     overrides: SpeechEngineConversationInitiationClientDataConfig,
     metadata: AgentMetadataDbModel,
@@ -49,6 +50,7 @@ export declare namespace SpeechEngineResponse {
         privacy: PrivacyConfigOutput.Raw;
         call_limits: AgentCallLimits.Raw;
         language: string;
+        cascade_timeout_seconds: number;
         tags: string[];
         overrides: SpeechEngineConversationInitiationClientDataConfig.Raw;
         metadata: AgentMetadataDbModel.Raw;

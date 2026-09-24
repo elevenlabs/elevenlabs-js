@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../index";
 
 export interface AttachedSystemEvaluationRef {
     /** Id of the referenced built-in system evaluation. */
-    analysisItemId: ElevenLabs.AttachedSystemEvaluationRefAnalysisItemId;
+    analysisItemId: ElevenLabs.SystemEvaluationId;
     /** Transcript context ('conversation' or 'agent') used when running this item. */
     scope?: ElevenLabs.AnalysisScope;
     /** Optional relative weight for aggregate scoring. */

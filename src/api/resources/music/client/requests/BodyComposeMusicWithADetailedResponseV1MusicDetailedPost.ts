@@ -9,6 +9,8 @@ import type * as ElevenLabs from "../../../../index";
 export interface BodyComposeMusicWithADetailedResponseV1MusicDetailedPost {
     /** Output format of the generated audio. Formatted as codec_sample_rate_bitrate. Use "auto" (the default) to let the API pick the best format for the selected model: mp3_44100_128 for v1 models and mp3_48000_192 for v2 models. */
     outputFormat?: ElevenLabs.MusicComposeDetailedRequestOutputFormat;
+    /** When enable_logging is set to false zero retention mode will be used for the request. Zero retention mode may only be used by enterprise customers. */
+    enableLogging?: boolean;
     /** A simple text prompt to generate a song from. Cannot be used in conjunction with `composition_plan`. */
     prompt?: string;
     /** A detailed composition plan to guide music generation. Cannot be used in conjunction with `prompt`. */

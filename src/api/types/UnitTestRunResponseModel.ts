@@ -21,4 +21,8 @@ export interface UnitTestRunResponseModel {
     rootFolderId?: string;
     rootFolderName?: string;
     environment?: string;
+    /** Credits billed for this test run. None for runs created before cost tracking. */
+    creditsUsed?: number;
+    /** Finalized billing and provider-usage breakdown for this test run. */
+    charging?: ElevenLabs.ConversationChargingCommonModel;
 }

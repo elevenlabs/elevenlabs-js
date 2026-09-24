@@ -4,8 +4,8 @@ import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
 import { DialogueInput } from "../../../../types/DialogueInput";
-import { ModelSettingsResponseModel } from "../../../../types/ModelSettingsResponseModel";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
+import { ToDialogueSettingsResponseModel } from "../../../../types/ToDialogueSettingsResponseModel";
 import { BodyTextToDialogueFullWithTimestampsApplyTextNormalization } from "../../types/BodyTextToDialogueFullWithTimestampsApplyTextNormalization";
 
 export const BodyTextToDialogueFullWithTimestamps: core.serialization.Schema<
@@ -15,7 +15,7 @@ export const BodyTextToDialogueFullWithTimestamps: core.serialization.Schema<
     inputs: core.serialization.list(DialogueInput),
     modelId: core.serialization.property("model_id", core.serialization.string().optional()),
     languageCode: core.serialization.property("language_code", core.serialization.string().optional()),
-    settings: ModelSettingsResponseModel.optional(),
+    settings: ToDialogueSettingsResponseModel.optional(),
     pronunciationDictionaryLocators: core.serialization.property(
         "pronunciation_dictionary_locators",
         core.serialization.list(PronunciationDictionaryVersionLocator).optional(),
@@ -25,6 +25,16 @@ export const BodyTextToDialogueFullWithTimestamps: core.serialization.Schema<
         "apply_text_normalization",
         BodyTextToDialogueFullWithTimestampsApplyTextNormalization.optional(),
     ),
+    previousRequestIds: core.serialization.property(
+        "previous_request_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    nextRequestIds: core.serialization.property(
+        "next_request_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    previousText: core.serialization.property("previous_text", core.serialization.string().optional()),
+    futureText: core.serialization.property("future_text", core.serialization.string().optional()),
 });
 
 export declare namespace BodyTextToDialogueFullWithTimestamps {
@@ -32,9 +42,13 @@ export declare namespace BodyTextToDialogueFullWithTimestamps {
         inputs: DialogueInput.Raw[];
         model_id?: string | null;
         language_code?: string | null;
-        settings?: ModelSettingsResponseModel.Raw | null;
+        settings?: ToDialogueSettingsResponseModel.Raw | null;
         pronunciation_dictionary_locators?: PronunciationDictionaryVersionLocator.Raw[] | null;
         seed?: number | null;
         apply_text_normalization?: BodyTextToDialogueFullWithTimestampsApplyTextNormalization.Raw | null;
+        previous_request_ids?: string[] | null;
+        next_request_ids?: string[] | null;
+        previous_text?: string | null;
+        future_text?: string | null;
     }
 }

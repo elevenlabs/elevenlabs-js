@@ -3,5 +3,6 @@
 export interface ToDialogueSettingsResponseModel {
     /** Determines how stable the voice is and the randomness between each generation. Lower values introduce broader emotional range for the voice. Higher values can result in a monotonous voice with limited emotion. */
     stability?: number;
-    speed?: number;
+    /** Determines how strongly the model is guided while generating. Higher values make the model adhere more closely to the voice, at the cost of variation. Not supported by every model. */
+    similarity?: number;
 }

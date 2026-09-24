@@ -4,8 +4,8 @@ import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
 import { DialogueInput } from "../../../../types/DialogueInput";
-import { ModelSettingsResponseModel } from "../../../../types/ModelSettingsResponseModel";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
+import { ToDialogueSettingsResponseModel } from "../../../../types/ToDialogueSettingsResponseModel";
 import { BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization } from "../../types/BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization";
 
 export const BodyTextToDialogueMultiVoiceV1TextToDialoguePost: core.serialization.Schema<
@@ -15,7 +15,9 @@ export const BodyTextToDialogueMultiVoiceV1TextToDialoguePost: core.serializatio
     inputs: core.serialization.list(DialogueInput),
     modelId: core.serialization.property("model_id", core.serialization.string().optional()),
     languageCode: core.serialization.property("language_code", core.serialization.string().optional()),
-    settings: ModelSettingsResponseModel.optional(),
+    settings: ToDialogueSettingsResponseModel.optional(),
+    previousText: core.serialization.property("previous_text", core.serialization.string().optional()),
+    futureText: core.serialization.property("future_text", core.serialization.string().optional()),
     pronunciationDictionaryLocators: core.serialization.property(
         "pronunciation_dictionary_locators",
         core.serialization.list(PronunciationDictionaryVersionLocator).optional(),
@@ -25,6 +27,14 @@ export const BodyTextToDialogueMultiVoiceV1TextToDialoguePost: core.serializatio
         "apply_text_normalization",
         BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization.optional(),
     ),
+    previousRequestIds: core.serialization.property(
+        "previous_request_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
+    nextRequestIds: core.serialization.property(
+        "next_request_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace BodyTextToDialogueMultiVoiceV1TextToDialoguePost {
@@ -32,9 +42,13 @@ export declare namespace BodyTextToDialogueMultiVoiceV1TextToDialoguePost {
         inputs: DialogueInput.Raw[];
         model_id?: string | null;
         language_code?: string | null;
-        settings?: ModelSettingsResponseModel.Raw | null;
+        settings?: ToDialogueSettingsResponseModel.Raw | null;
+        previous_text?: string | null;
+        future_text?: string | null;
         pronunciation_dictionary_locators?: PronunciationDictionaryVersionLocator.Raw[] | null;
         seed?: number | null;
         apply_text_normalization?: BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization.Raw | null;
+        previous_request_ids?: string[] | null;
+        next_request_ids?: string[] | null;
     }
 }

@@ -10,6 +10,8 @@ export interface ListMcpToolsResponseModel {
     success: boolean;
     /** A list of tools available on the MCP server. */
     tools: ElevenLabs.Tool[];
+    /** Derived approval states for currently discovered tools. Populated only for persisted MCP servers using per-tool approval; otherwise empty. */
+    toolApprovalStatuses?: ElevenLabs.McpToolApprovalStatus[];
     /** Error message if the operation was not successful. */
     errorMessage?: string;
 }

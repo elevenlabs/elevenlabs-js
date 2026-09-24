@@ -11,7 +11,7 @@ import type * as ElevenLabs from "../../../../../../index";
 export interface CreateAgentConversationTicketRequestModel {
     /** Conversation this ticket is about. */
     conversationId: string;
-    /** The QA finding covering the whole conversation. */
+    /** The issue this ticket is about, covering the whole conversation rather than a single turn. */
     qaComment?: string;
     /** Optional turn-level comments on what went wrong. */
     turnComments?: ElevenLabs.TurnCommentRequestModel[];

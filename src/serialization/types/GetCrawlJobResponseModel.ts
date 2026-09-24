@@ -13,8 +13,9 @@ export const GetCrawlJobResponseModel: core.serialization.ObjectSchema<
     type: CrawlType.optional(),
     seedUrl: core.serialization.property("seed_url", core.serialization.string()),
     pattern: core.serialization.string().optional(),
-    maxDepth: core.serialization.property("max_depth", core.serialization.number()),
+    maxDepth: core.serialization.property("max_depth", core.serialization.number().optional()),
     maxPages: core.serialization.property("max_pages", core.serialization.number()),
+    autoDiscover: core.serialization.property("auto_discover", core.serialization.boolean().optional()),
     status: CrawlStatus.optional(),
     pagesIdentified: core.serialization.property("pages_identified", core.serialization.number().optional()),
     pagesScraped: core.serialization.property("pages_scraped", core.serialization.number().optional()),
@@ -31,8 +32,9 @@ export declare namespace GetCrawlJobResponseModel {
         type?: CrawlType.Raw | null;
         seed_url: string;
         pattern?: string | null;
-        max_depth: number;
+        max_depth?: number | null;
         max_pages: number;
+        auto_discover?: boolean | null;
         status?: CrawlStatus.Raw | null;
         pages_identified?: number | null;
         pages_scraped?: number | null;
