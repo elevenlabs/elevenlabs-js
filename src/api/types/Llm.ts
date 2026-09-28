@@ -64,6 +64,7 @@ export const Llm = {
     GptOss120B: "gpt-oss-120b",
     Glm45AirFp8: "glm-45-air-fp8",
     Glm52: "glm-52",
+    DeepseekV41Flash: "deepseek-v41-flash",
     Gemini25FlashPreview092025: "gemini-2.5-flash-preview-09-2025",
     Gemini25FlashLitePreview092025: "gemini-2.5-flash-lite-preview-09-2025",
     Gemini25FlashPreview0520: "gemini-2.5-flash-preview-05-20",

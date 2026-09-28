@@ -73,6 +73,10 @@ export class SpeechToTextClient {
             _body.append("language_code", request.languageCode);
         }
 
+        if (request.transcriptEdit != null) {
+            _body.append("transcript_edit", request.transcriptEdit);
+        }
+
         if (request.tagAudioEvents != null) {
             _body.append("tag_audio_events", request.tagAudioEvents?.toString());
         }

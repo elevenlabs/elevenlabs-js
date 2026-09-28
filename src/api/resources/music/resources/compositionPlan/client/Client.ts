@@ -36,7 +36,6 @@ export class CompositionPlanClient {
      *
      * @example
      *     await client.music.compositionPlan.create({
-     *         enableLogging: true,
      *         prompt: "prompt"
      *     })
      */
@@ -51,10 +50,6 @@ export class CompositionPlanClient {
         request: ElevenLabs.music.BodyGenerateCompositionPlanV1MusicPlanPost,
         requestOptions?: CompositionPlanClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.music.CompositionPlanCreateResponse>> {
-        const { enableLogging, ..._body } = request;
-        const _queryParams: Record<string, unknown> = {
-            enable_logging: enableLogging,
-        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -72,14 +67,10 @@ export class CompositionPlanClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.music.BodyGenerateCompositionPlanV1MusicPlanPost.jsonOrThrow(_body, {
+                serializers.music.BodyGenerateCompositionPlanV1MusicPlanPost.jsonOrThrow(request, {
                     unrecognizedObjectKeys: "strip",
                 }),
                 requestOptions?.additionalBodyParameters,

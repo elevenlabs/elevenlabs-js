@@ -37,6 +37,8 @@ export interface BodyTextToDialogueMultiVoiceV1TextToDialoguePost {
     seed?: number;
     /** This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped. */
     applyTextNormalization?: ElevenLabs.BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalization;
+    /** Whether to use the IVC version of a professional voice. This may improve expressiveness and reduce latency. */
+    usePvcAsIvc?: boolean;
     /** A list of request_ids of dialogue generations that came before this one. Used to condition the model for continuity when splitting a large task into multiple requests. A maximum of 3 request_ids can be sent. The last request_id is the audio which is closest to the current request. Not supported by every model. */
     previousRequestIds?: string[];
     /** A list of request_ids of dialogue generations that come after this one. Useful for maintaining continuity when regenerating a clip in the middle of a sequence. A maximum of 3 request_ids can be sent. The first request_id is the audio which is closest to the current request. Not supported by every model. */

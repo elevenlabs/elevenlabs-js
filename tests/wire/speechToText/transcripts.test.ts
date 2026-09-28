@@ -57,6 +57,7 @@ describe("TranscriptsClient", () => {
             transcription_id: "transcription_id",
             entities: [{ text: "text", entity_type: "entity_type", start_char: 1, end_char: 1 }],
             audio_duration_secs: 1.1,
+            edited_transcript: { kind: "error", error_type: "edit_failed", message: "message" },
         };
 
         server
@@ -142,6 +143,11 @@ describe("TranscriptsClient", () => {
                 },
             ],
             audioDurationSecs: 1.1,
+            editedTranscript: {
+                kind: "error",
+                errorType: "edit_failed",
+                message: "message",
+            },
         });
     });
 

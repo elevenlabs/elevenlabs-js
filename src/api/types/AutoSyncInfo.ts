@@ -5,6 +5,8 @@ export interface AutoSyncInfo {
     minimumFrequencyDays?: number;
     /** Whether to remove the document if the URL becomes unavailable */
     autoRemove?: boolean;
+    /** Whether new pages discovered during a refresh are crawled and added. Set from the owning crawl job at creation; the crawl job remains the source of truth for the discovery logic. */
+    autoDiscover?: boolean;
     /** Number of consecutive sync failures */
     consecFailures?: number;
     /** Unix timestamp for the next scheduled sync or None (in case of folders) */

@@ -4,6 +4,7 @@
  * @example
  *     {
  *         agentId: "agent_id",
+ *         branchId: "branch_id",
  *         pageSize: 1,
  *         search: "search",
  *         cursor: "cursor"
@@ -12,6 +13,8 @@
 export interface InvocationsListRequest {
     /** Filter by agent ID */
     agentId?: string;
+    /** Filter by branch ID */
+    branchId?: string;
     /** How many Tests to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
     /** Search query to filter tests and folders by name. */

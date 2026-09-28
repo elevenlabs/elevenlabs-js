@@ -32,6 +32,8 @@ describe("InvocationsClient", () => {
                         access_source: "creator",
                     },
                     repeat_count: 1,
+                    credits_used: 1,
+                    total_price: 1.1,
                 },
             ],
             next_cursor: "next_cursor",
@@ -48,6 +50,7 @@ describe("InvocationsClient", () => {
 
         const response = await client.conversationalAi.tests.invocations.list({
             agentId: "agent_id",
+            branchId: "branch_id",
             pageSize: 1,
             search: "search",
             cursor: "cursor",
@@ -80,6 +83,8 @@ describe("InvocationsClient", () => {
                         accessSource: "creator",
                     },
                     repeatCount: 1,
+                    creditsUsed: 1,
+                    totalPrice: 1.1,
                 },
             ],
             nextCursor: "next_cursor",

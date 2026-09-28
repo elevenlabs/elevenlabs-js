@@ -11,6 +11,7 @@ export const AutoSyncInfo: core.serialization.ObjectSchema<serializers.AutoSyncI
             core.serialization.number().optional(),
         ),
         autoRemove: core.serialization.property("auto_remove", core.serialization.boolean().optional()),
+        autoDiscover: core.serialization.property("auto_discover", core.serialization.boolean().optional()),
         consecFailures: core.serialization.property("consec_failures", core.serialization.number().optional()),
         nextRefreshBy: core.serialization.property("next_refresh_by", core.serialization.number().optional()),
     });
@@ -19,6 +20,7 @@ export declare namespace AutoSyncInfo {
     export interface Raw {
         minimum_frequency_days?: number | null;
         auto_remove?: boolean | null;
+        auto_discover?: boolean | null;
         consec_failures?: number | null;
         next_refresh_by?: number | null;
     }

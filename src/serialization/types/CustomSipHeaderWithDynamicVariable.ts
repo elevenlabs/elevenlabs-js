@@ -8,13 +8,13 @@ export const CustomSipHeaderWithDynamicVariable: core.serialization.ObjectSchema
     serializers.CustomSipHeaderWithDynamicVariable.Raw,
     ElevenLabs.CustomSipHeaderWithDynamicVariable
 > = core.serialization.object({
-    key: core.serialization.string(),
     value: core.serialization.string(),
+    key: core.serialization.string(),
 });
 
 export declare namespace CustomSipHeaderWithDynamicVariable {
     export interface Raw {
-        key: string;
         value: string;
+        key: string;
     }
 }

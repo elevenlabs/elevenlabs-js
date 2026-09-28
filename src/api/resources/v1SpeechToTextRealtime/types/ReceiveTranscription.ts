@@ -11,6 +11,7 @@ export type ReceiveTranscription =
     | ElevenLabs.CommittedTranscriptPayload
     | ElevenLabs.CommittedTranscriptWithTimestampsPayload
     | ElevenLabs.CommittedTranscriptEntitiesPayload
+    | ElevenLabs.EditedTranscript
     | ElevenLabs.ScribeWarning
     | ElevenLabs.ScribeErrorPayload
     | ElevenLabs.ScribeAuthErrorPayload

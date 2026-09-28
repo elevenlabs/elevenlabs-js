@@ -4090,8 +4090,7 @@ Stream a song and its detailed metadata using Server-Sent Events (SSE).
 
 ```typescript
 const response = await client.music.composeDetailedStream({
-    outputFormat: "auto",
-    enableLogging: true
+    outputFormat: "auto"
 });
 for await (const item of response) {
     console.log(item);
@@ -17355,6 +17354,7 @@ Lists all test invocations with pagination support and optional search filtering
 ```typescript
 await client.conversationalAi.tests.invocations.list({
     agentId: "agent_id",
+    branchId: "branch_id",
     pageSize: 1,
     search: "search",
     cursor: "cursor"
@@ -21065,7 +21065,6 @@ Create a composition plan for music generation. Usage of this endpoint does not 
 
 ```typescript
 await client.music.compositionPlan.create({
-    enableLogging: true,
     prompt: "prompt"
 });
 

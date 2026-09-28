@@ -6,6 +6,7 @@ import type * as serializers from "../../../index";
 import { CommittedTranscriptEntitiesPayload } from "../../../types/CommittedTranscriptEntitiesPayload";
 import { CommittedTranscriptPayload } from "../../../types/CommittedTranscriptPayload";
 import { CommittedTranscriptWithTimestampsPayload } from "../../../types/CommittedTranscriptWithTimestampsPayload";
+import { EditedTranscript } from "../../../types/EditedTranscript";
 import { PartialTranscriptPayload } from "../../../types/PartialTranscriptPayload";
 import { ScribeAuthErrorPayload } from "../../../types/ScribeAuthErrorPayload";
 import { ScribeChunkSizeExceededErrorPayload } from "../../../types/ScribeChunkSizeExceededErrorPayload";
@@ -33,6 +34,7 @@ export const ReceiveTranscription: core.serialization.Schema<
     CommittedTranscriptPayload,
     CommittedTranscriptWithTimestampsPayload,
     CommittedTranscriptEntitiesPayload,
+    EditedTranscript,
     ScribeWarning,
     ScribeErrorPayload,
     ScribeAuthErrorPayload,
@@ -57,6 +59,7 @@ export declare namespace ReceiveTranscription {
         | CommittedTranscriptPayload.Raw
         | CommittedTranscriptWithTimestampsPayload.Raw
         | CommittedTranscriptEntitiesPayload.Raw
+        | EditedTranscript.Raw
         | ScribeWarning.Raw
         | ScribeErrorPayload.Raw
         | ScribeAuthErrorPayload.Raw
