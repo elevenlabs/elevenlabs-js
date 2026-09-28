@@ -25,6 +25,7 @@ export const BodyTextToDialogueStreamWithTimestamps: core.serialization.Schema<
         "apply_text_normalization",
         BodyTextToDialogueStreamWithTimestampsApplyTextNormalization.optional(),
     ),
+    usePvcAsIvc: core.serialization.property("use_pvc_as_ivc", core.serialization.boolean().optional()),
     previousRequestIds: core.serialization.property(
         "previous_request_ids",
         core.serialization.list(core.serialization.string()).optional(),
@@ -46,6 +47,7 @@ export declare namespace BodyTextToDialogueStreamWithTimestamps {
         pronunciation_dictionary_locators?: PronunciationDictionaryVersionLocator.Raw[] | null;
         seed?: number | null;
         apply_text_normalization?: BodyTextToDialogueStreamWithTimestampsApplyTextNormalization.Raw | null;
+        use_pvc_as_ivc?: boolean | null;
         previous_request_ids?: string[] | null;
         next_request_ids?: string[] | null;
         previous_text?: string | null;

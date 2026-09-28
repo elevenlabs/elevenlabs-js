@@ -31,4 +31,8 @@ export interface TestInvocationSummaryResponseModel {
     accessInfo?: ElevenLabs.ResourceAccessInfo;
     /** Number of times each test was repeated in this invocation */
     repeatCount?: number;
+    /** Total credits billed across test runs in this invocation. None when no run has cost data. */
+    creditsUsed?: number;
+    /** Total USD price across test runs in this invocation. None when no run has price data. */
+    totalPrice?: number;
 }

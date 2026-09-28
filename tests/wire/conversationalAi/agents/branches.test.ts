@@ -1401,7 +1401,7 @@ describe("BranchesClient", () => {
                     success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_phone: {
                         type: "phone_number",
-                        custom_sip_headers: [{ type: "dynamic", key: "key", value: "value" }],
+                        custom_sip_headers: [{ type: "dynamic", value: "value", key: "key" }],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
                         transfer_type: "blind",
                         sip_refer_play_dialtone: true,
@@ -2843,8 +2843,8 @@ describe("BranchesClient", () => {
                         customSipHeaders: [
                             {
                                 type: "dynamic",
-                                key: "key",
                                 value: "value",
+                                key: "key",
                             },
                         ],
                         transferDestination: {
@@ -4061,7 +4061,7 @@ describe("BranchesClient", () => {
                     success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_phone: {
                         type: "phone_number",
-                        custom_sip_headers: [{ type: "dynamic", key: "key", value: "value" }],
+                        custom_sip_headers: [{ type: "dynamic", value: "value", key: "key" }],
                         transfer_destination: { type: "phone", phone_number: "phone_number" },
                         transfer_type: "blind",
                         sip_refer_play_dialtone: true,
@@ -5499,8 +5499,8 @@ describe("BranchesClient", () => {
                         customSipHeaders: [
                             {
                                 type: "dynamic",
-                                key: "key",
                                 value: "value",
+                                key: "key",
                             },
                         ],
                         transferDestination: {

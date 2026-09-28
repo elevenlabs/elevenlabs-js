@@ -6,8 +6,8 @@
  * Value is not validated here since it will be substituted with actual value later.
  */
 export interface CustomSipHeaderWithDynamicVariable {
-    /** The SIP header name (e.g., 'X-Customer-ID') */
-    key: string;
     /** The dynamic variable name to resolve */
     value: string;
+    /** The SIP header name (e.g., 'X-Customer-ID') */
+    key: string;
 }

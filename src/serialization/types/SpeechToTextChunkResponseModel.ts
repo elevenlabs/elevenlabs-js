@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { AdditionalFormatResponseModel } from "./AdditionalFormatResponseModel";
 import { DetectedEntity } from "./DetectedEntity";
+import { SpeechToTextChunkResponseModelEditedTranscript } from "./SpeechToTextChunkResponseModelEditedTranscript";
 import { SpeechToTextWordResponseModel } from "./SpeechToTextWordResponseModel";
 
 export const SpeechToTextChunkResponseModel: core.serialization.ObjectSchema<
@@ -23,6 +24,10 @@ export const SpeechToTextChunkResponseModel: core.serialization.ObjectSchema<
     transcriptionId: core.serialization.property("transcription_id", core.serialization.string().optional()),
     entities: core.serialization.list(DetectedEntity).optional(),
     audioDurationSecs: core.serialization.property("audio_duration_secs", core.serialization.number().optional()),
+    editedTranscript: core.serialization.property(
+        "edited_transcript",
+        SpeechToTextChunkResponseModelEditedTranscript.optional(),
+    ),
 });
 
 export declare namespace SpeechToTextChunkResponseModel {
@@ -36,5 +41,6 @@ export declare namespace SpeechToTextChunkResponseModel {
         transcription_id?: string | null;
         entities?: DetectedEntity.Raw[] | null;
         audio_duration_secs?: number | null;
+        edited_transcript?: SpeechToTextChunkResponseModelEditedTranscript.Raw | null;
     }
 }

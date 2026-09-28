@@ -26,6 +26,8 @@ export const TestInvocationSummaryResponseModel: core.serialization.ObjectSchema
     title: core.serialization.string(),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
     repeatCount: core.serialization.property("repeat_count", core.serialization.number().optional()),
+    creditsUsed: core.serialization.property("credits_used", core.serialization.number().optional()),
+    totalPrice: core.serialization.property("total_price", core.serialization.number().optional()),
 });
 
 export declare namespace TestInvocationSummaryResponseModel {
@@ -44,5 +46,7 @@ export declare namespace TestInvocationSummaryResponseModel {
         title: string;
         access_info?: ResourceAccessInfo.Raw | null;
         repeat_count?: number | null;
+        credits_used?: number | null;
+        total_price?: number | null;
     }
 }
