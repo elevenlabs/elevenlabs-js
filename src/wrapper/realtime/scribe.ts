@@ -384,7 +384,9 @@ export class ScribeRealtime {
                 // If UrlOptions, start streaming from URL with ffmpeg
                 if ("url" in options) {
                     const commitStrategy = options.commitStrategy ?? CommitStrategy.MANUAL;
-                    this.streamFromUrl(options as UrlOptions, connection, commitStrategy);
+                    this.streamFromUrl(options as UrlOptions, connection, commitStrategy).catch((error: unknown) => {
+                        connection.fail(error instanceof Error ? error : new Error(String(error)));
+                    });
                 }
             });
         });
