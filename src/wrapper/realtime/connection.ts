@@ -103,6 +103,8 @@ export interface Config {
     keyterms?: string[];
     /** Whether filler words and disfluencies are removed from the transcript. */
     no_verbatim?: boolean;
+    /** Keepalive interval in milliseconds, or null when keepalives are disabled. */
+    keepalive_interval_ms?: number | null;
 }
 
 /**
