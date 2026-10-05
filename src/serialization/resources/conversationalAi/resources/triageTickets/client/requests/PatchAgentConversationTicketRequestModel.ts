@@ -3,19 +3,24 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
+import { AgentConversationTicketPriority } from "../../../../../../types/AgentConversationTicketPriority";
 import { AgentConversationTicketStatus } from "../../../../../../types/AgentConversationTicketStatus";
 
 export const PatchAgentConversationTicketRequestModel: core.serialization.Schema<
     serializers.conversationalAi.PatchAgentConversationTicketRequestModel.Raw,
     ElevenLabs.conversationalAi.PatchAgentConversationTicketRequestModel
 > = core.serialization.object({
+    title: core.serialization.string().optional(),
     status: AgentConversationTicketStatus.optional(),
     assigneeUserId: core.serialization.property("assignee_user_id", core.serialization.string().optional()),
+    priority: AgentConversationTicketPriority.optional(),
 });
 
 export declare namespace PatchAgentConversationTicketRequestModel {
     export interface Raw {
+        title?: string | null;
         status?: AgentConversationTicketStatus.Raw | null;
         assignee_user_id?: string | null;
+        priority?: AgentConversationTicketPriority.Raw | null;
     }
 }

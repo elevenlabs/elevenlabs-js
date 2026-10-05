@@ -4982,6 +4982,77 @@ await client.speechEngine.update("seng_3701k3ttaq12ewp8b7qv5rfyszkz");
 </dl>
 </details>
 
+<details><summary><code>client.speechEngine.<a href="/src/api/resources/speechEngine/client/Client.ts">duplicate</a>(speech_engine_id, { ...params }) -> ElevenLabs.SpeechEngineResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new Speech Engine resource by duplicating an existing one
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.speechEngine.duplicate("seng_3701k3ttaq12ewp8b7qv5rfyszkz");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**speech_engine_id:** `string` — The speech engine ID (accepts seng_ or agent_ prefix)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.DuplicateSpeechEngineRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpeechEngineClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## EnvironmentVariables
 <details><summary><code>client.environmentVariables.<a href="/src/api/resources/environmentVariables/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.EnvironmentVariablesListResponse</code></summary>
 <dl>
@@ -6894,7 +6965,7 @@ await client.conversationalAi.agents.duplicate("agent_3701k3ttaq12ewp8b7qv5rfysz
 <dl>
 <dd>
 
-Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user.
+Deprecated. This endpoint will be removed on 31 Oct 2026. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user.
 </dd>
 </dl>
 </dd>
@@ -6973,7 +7044,7 @@ await client.conversationalAi.agents.simulateConversation("agent_3701k3ttaq12ewp
 <dl>
 <dd>
 
-Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
+Deprecated. This endpoint will be removed on 31 Oct 2026. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
 </dd>
 </dl>
 </dd>
@@ -7671,7 +7742,7 @@ await client.conversationalAi.users.list({
 <dl>
 <dd>
 
-List an agent's conversation triage tickets, ordered by most recently created first. These are tickets about the agent's own performance on a conversation (for triage with Architect), not tickets an agent opens for end users.
+List an agent's conversation triage tickets, ordered by most recently created first unless sorted by priority. These are tickets about the agent's own performance on a conversation (for triage with Architect), not tickets an agent opens for end users.
 </dd>
 </dl>
 </dd>
@@ -7691,6 +7762,8 @@ await client.conversationalAi.triageTickets.list("agent_id", {
     conversationId: "conversation_id",
     status: "open",
     sources: ["qa"],
+    priorities: ["low"],
+    sortBy: "created_at",
     ownerUserId: "owner_user_id",
     assigneeUserId: "assignee_user_id",
     issueType: "knowledge_gap",
@@ -7752,7 +7825,7 @@ await client.conversationalAi.triageTickets.list("agent_id", {
 <dl>
 <dd>
 
-Manually raise a follow-up ticket against an agent, not tied to any conversation (for example a task like 'add the KB about X'). The comment is shown as the ticket title. Requires viewer access to the agent.
+Manually raise a follow-up ticket against an agent, not tied to any conversation (for example a task like 'add the KB about X'). Without a title, one is derived from the comment. Requires viewer access to the agent.
 </dd>
 </dl>
 </dd>
@@ -8147,7 +8220,7 @@ await client.conversationalAi.triageTickets.delete("agentqa_ticket_id");
 <dl>
 <dd>
 
-Update a ticket's comment, status, and/or assignee. Requires editor access to the ticket's agent.
+Update a ticket's title, comment, status, priority, and/or assignee. Requires editor access to the ticket's agent.
 </dd>
 </dl>
 </dd>
@@ -10537,7 +10610,7 @@ await client.conversationalAi.batchCalls.retry("batch_id");
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">export</a>(batch_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<details><summary><code>client.conversationalAi.batchCalls.<a href="/src/api/resources/conversationalAi/resources/batchCalls/client/Client.ts">export</a>(batch_id, { ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10581,6 +10654,14 @@ await client.conversationalAi.batchCalls.export("batch_id");
 <dd>
 
 **batch_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.BatchCallsExportRequest` 
     
 </dd>
 </dl>
@@ -12408,6 +12489,80 @@ await client.conversationalAi.agents.versions.get("agent_3701k3ttaq12ewp8b7qv5rf
 </details>
 
 ## ConversationalAi Agents Deployments
+<details><summary><code>client.conversationalAi.agents.deployments.<a href="/src/api/resources/conversationalAi/resources/agents/resources/deployments/client/Client.ts">list</a>(agent_id, { ...params }) -> ElevenLabs.ListResponseAgentDeploymentHistoryItem</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the traffic split history of an agent, newest first
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.deployments.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    page: 1,
+    pageSize: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.DeploymentsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DeploymentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.conversationalAi.agents.deployments.<a href="/src/api/resources/conversationalAi/resources/agents/resources/deployments/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.AgentDeploymentResponse</code></summary>
 <dl>
 <dd>
@@ -12764,6 +12919,551 @@ await client.conversationalAi.agents.drafts.delete("agent_3701k3ttaq12ewp8b7qv5r
 </dl>
 </details>
 
+## ConversationalAi Agents MergeProposals
+<details><summary><code>client.conversationalAi.agents.mergeProposals.<a href="/src/api/resources/conversationalAi/resources/agents/resources/mergeProposals/client/Client.ts">list</a>(agent_id, { ...params }) -> ElevenLabs.PaginatedResultAgentMergeProposalResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the proposals for an agent, newest first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.mergeProposals.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    status: "open",
+    sourceBranchId: "source_branch_id",
+    targetBranchId: "target_branch_id",
+    search: "search",
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.MergeProposalsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MergeProposalsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.mergeProposals.<a href="/src/api/resources/conversationalAi/resources/agents/resources/mergeProposals/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.CreateAgentMergeProposalResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Record a request to merge a source branch into a target branch. Anyone with edit access can open one; merging it later is gated on write access to the target branch, so this is how a change reaches a protected branch the author cannot merge into themselves.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.mergeProposals.create("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    sourceBranchId: "source_branch_id",
+    targetBranchId: "target_branch_id",
+    title: "title"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BodyCreateAMergeProposalV1ConvaiAgentsAgentIdMergeProposalsPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MergeProposalsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.mergeProposals.<a href="/src/api/resources/conversationalAi/resources/agents/resources/mergeProposals/client/Client.ts">get</a>(agent_id, merge_proposal_id) -> ElevenLabs.AgentMergeProposalResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a single merge_proposal.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.mergeProposals.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtmprop_8901k4t9z5defmb8vh3e9361y7nj");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merge_proposal_id:** `string` — Unique identifier for the merge_proposal.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MergeProposalsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.mergeProposals.<a href="/src/api/resources/conversationalAi/resources/agents/resources/mergeProposals/client/Client.ts">update</a>(agent_id, merge_proposal_id, { ...params }) -> ElevenLabs.AgentMergeProposalResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Edit an open merge_proposal's title or description, or close it. The author closing it is recorded as withdrawn; anyone else as rejected.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.mergeProposals.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtmprop_8901k4t9z5defmb8vh3e9361y7nj");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merge_proposal_id:** `string` — Unique identifier for the merge_proposal.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BodyUpdateAMergeProposalV1ConvaiAgentsAgentIdMergeProposalsMergeProposalIdPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MergeProposalsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.mergeProposals.<a href="/src/api/resources/conversationalAi/resources/agents/resources/mergeProposals/client/Client.ts">submitReview</a>(agent_id, merge_proposal_id, { ...params }) -> ElevenLabs.AgentMergeProposalResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Approve a merge_proposal or request changes on it. A user's latest review replaces their previous one. Non-admins need an approval from another user before the merge is allowed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.mergeProposals.submitReview("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtmprop_8901k4t9z5defmb8vh3e9361y7nj", {
+    state: "approved"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merge_proposal_id:** `string` — Unique identifier for the merge_proposal.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BodyReviewAMergeProposalV1ConvaiAgentsAgentIdMergeProposalsMergeProposalIdReviewsPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MergeProposalsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.mergeProposals.<a href="/src/api/resources/conversationalAi/resources/agents/resources/mergeProposals/client/Client.ts">addComment</a>(agent_id, merge_proposal_id, { ...params }) -> ElevenLabs.AgentMergeProposalResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Leave a comment on a merge_proposal without recording a review verdict. Unlike reviews, comments accumulate and can still be added once the merge_proposal is merged or closed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.mergeProposals.addComment("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtmprop_8901k4t9z5defmb8vh3e9361y7nj", {
+    body: "body"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merge_proposal_id:** `string` — Unique identifier for the merge_proposal.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BodyCommentOnAMergeProposalV1ConvaiAgentsAgentIdMergeProposalsMergeProposalIdCommentsPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MergeProposalsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.agents.mergeProposals.<a href="/src/api/resources/conversationalAi/resources/agents/resources/mergeProposals/client/Client.ts">merge</a>(agent_id, merge_proposal_id, { ...params }) -> ElevenLabs.AgentMergeProposalResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Execute the merge. The caller must have write access to the target branch (admins only, for a protected branch), so this is where a reviewer approves and merges a request opened by someone who could not.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.mergeProposals.merge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtmprop_8901k4t9z5defmb8vh3e9361y7nj");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merge_proposal_id:** `string` — Unique identifier for the merge_proposal.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BodyMergeAMergeProposalV1ConvaiAgentsAgentIdMergeProposalsMergeProposalIdMergePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MergeProposalsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents Procedures
 <details><summary><code>client.conversationalAi.agents.procedures.<a href="/src/api/resources/conversationalAi/resources/agents/resources/procedures/client/Client.ts">list</a>(agent_id, branch_id, { ...params }) -> ElevenLabs.ListProceduresResponseModel</code></summary>
 <dl>
@@ -12937,7 +13637,7 @@ await client.conversationalAi.agents.procedures.create("agent_3701k3ttaq12ewp8b7
 <dl>
 <dd>
 
-Compile procedure drafts into a workflow.
+Legacy. Do not use. Saving an agent draft (`POST /v1/convai/agents/{agent_id}/drafts`) and publishing an agent (`PATCH /v1/convai/agents/{agent_id}`) compile structured procedures into workflow nodes and edges, save the compiled workflow with the draft or version, and return validation errors, so a separate compile call is no longer needed. This endpoint remains available for the time being so existing callers do not break, as a dry-run that compiles the current procedure drafts into a workflow without persisting anything. It will eventually be deprecated.
 </dd>
 </dl>
 </dd>
@@ -17422,6 +18122,69 @@ Gets a test invocation by ID.
 
 ```typescript
 await client.conversationalAi.tests.invocations.get("test_invocation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**test_invocation_id:** `string` — The id of a test invocation. This is returned when tests are run.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InvocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.tests.invocations.<a href="/src/api/resources/conversationalAi/resources/tests/resources/invocations/client/Client.ts">cancel</a>(test_invocation_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancels all pending runs in a test invocation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.tests.invocations.cancel("test_invocation_id");
 
 ```
 </dd>

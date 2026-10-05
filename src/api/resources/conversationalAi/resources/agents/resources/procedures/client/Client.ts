@@ -221,7 +221,7 @@ export class ProceduresClient {
     }
 
     /**
-     * Compile procedure drafts into a workflow.
+     * Legacy. Do not use. Saving an agent draft (`POST /v1/convai/agents/{agent_id}/drafts`) and publishing an agent (`PATCH /v1/convai/agents/{agent_id}`) compile structured procedures into workflow nodes and edges, save the compiled workflow with the draft or version, and return validation errors, so a separate compile call is no longer needed. This endpoint remains available for the time being so existing callers do not break, as a dry-run that compiles the current procedure drafts into a workflow without persisting anything. It will eventually be deprecated.
      *
      * @param {string} agent_id - Agent ID to get the procedure draft from
      * @param {string} branch_id - Branch ID to get the procedure draft from

@@ -11,6 +11,7 @@ export interface GetTestSuiteInvocationResponseModel {
     createdAt?: number;
     folderId?: string;
     repeatCount?: number;
+    cancelled?: boolean;
     /** None when repeat_count==1 (no bucketing). Otherwise tracks bucketing lifecycle. */
     bucketingStatus?: ElevenLabs.BucketingStatus;
     resultGroups?: ElevenLabs.TestRunResultSummary[];

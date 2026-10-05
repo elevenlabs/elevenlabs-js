@@ -25,12 +25,16 @@ export interface TestInvocationSummaryResponseModel {
     failedCount: number;
     /** Number of test runs that are pending */
     pendingCount: number;
+    /** Number of test runs that were cancelled */
+    cancelledCount: number;
     /** Title of the test invocation - the folder name for folder runs, otherwise the single test name or count of tests */
     title: string;
     /** The access information of the test invocation */
     accessInfo?: ElevenLabs.ResourceAccessInfo;
     /** Number of times each test was repeated in this invocation */
     repeatCount?: number;
+    /** Whether this test invocation was cancelled */
+    cancelled?: boolean;
     /** Total credits billed across test runs in this invocation. None when no run has cost data. */
     creditsUsed?: number;
     /** Total USD price across test runs in this invocation. None when no run has price data. */

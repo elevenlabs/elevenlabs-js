@@ -7,8 +7,12 @@ import type * as serializers from "../index";
 export const SkipTurnToolConfig: core.serialization.ObjectSchema<
     serializers.SkipTurnToolConfig.Raw,
     ElevenLabs.SkipTurnToolConfig
-> = core.serialization.object({});
+> = core.serialization.object({
+    waitTimeoutSecs: core.serialization.property("wait_timeout_secs", core.serialization.number().optional()),
+});
 
 export declare namespace SkipTurnToolConfig {
-    export type Raw = {};
+    export interface Raw {
+        wait_timeout_secs?: number | null;
+    }
 }

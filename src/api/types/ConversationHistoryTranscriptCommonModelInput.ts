@@ -18,6 +18,7 @@ export interface ConversationHistoryTranscriptCommonModelInput {
     llmUsage?: ElevenLabs.LlmUsageInput;
     interrupted?: boolean;
     ignoredAsBackchannel?: boolean;
+    platformEvent?: ElevenLabs.TranscriptPlatformEvent;
     originalMessage?: string;
     reasoning?: ElevenLabs.ConversationReasoningModel[];
     sourceMedium?: ElevenLabs.ChatSourceMedium;

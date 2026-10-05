@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const TestRunStatus: core.serialization.Schema<serializers.TestRunStatus.Raw, ElevenLabs.TestRunStatus> =
-    core.serialization.enum_(["pending", "passed", "failed"]);
+    core.serialization.enum_(["pending", "passed", "failed", "cancelled"]);
 
 export declare namespace TestRunStatus {
-    export type Raw = "pending" | "passed" | "failed";
+    export type Raw = "pending" | "passed" | "failed" | "cancelled";
 }

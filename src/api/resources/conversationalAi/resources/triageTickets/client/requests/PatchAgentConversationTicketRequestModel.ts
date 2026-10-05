@@ -7,8 +7,12 @@ import type * as ElevenLabs from "../../../../../../index";
  *     {}
  */
 export interface PatchAgentConversationTicketRequestModel {
+    /** If provided, updates the ticket title. Omit to leave unchanged. */
+    title?: string;
     /** If provided, updates the ticket status. Omit to leave unchanged. */
     status?: ElevenLabs.AgentConversationTicketStatus;
     /** If provided, updates who is responsible for resolving this ticket. Must be a workspace member with at least viewer access to the agent. Pass null to unassign. Omit to leave unchanged. */
     assigneeUserId?: string;
+    /** If provided, updates how urgently the ticket needs attention. Pass null to clear it. Omit to leave unchanged. */
+    priority?: ElevenLabs.AgentConversationTicketPriority;
 }

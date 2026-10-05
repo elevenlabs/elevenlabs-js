@@ -23,6 +23,7 @@ export const WorkflowStandaloneAgentNodeModelOutput: core.serialization.ObjectSc
         "preserve_client_tts_overrides",
         core.serialization.boolean(),
     ),
+    preserveVoiceSettings: core.serialization.property("preserve_voice_settings", core.serialization.boolean()),
 });
 
 export declare namespace WorkflowStandaloneAgentNodeModelOutput {
@@ -35,5 +36,6 @@ export declare namespace WorkflowStandaloneAgentNodeModelOutput {
         transfer_message?: string | null;
         enable_transferred_agent_first_message: boolean;
         preserve_client_tts_overrides: boolean;
+        preserve_voice_settings: boolean;
     }
 }

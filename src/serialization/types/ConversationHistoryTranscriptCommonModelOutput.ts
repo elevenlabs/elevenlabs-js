@@ -13,6 +13,7 @@ import { ConversationReasoningModel } from "./ConversationReasoningModel";
 import { ConversationTurnMetrics } from "./ConversationTurnMetrics";
 import { LlmUsageOutput } from "./LlmUsageOutput";
 import { RagRetrievalInfo } from "./RagRetrievalInfo";
+import { TranscriptPlatformEvent } from "./TranscriptPlatformEvent";
 import { TriggeredGuardrailCommonModel } from "./TriggeredGuardrailCommonModel";
 import { UserFeedback } from "./UserFeedback";
 
@@ -50,6 +51,7 @@ export const ConversationHistoryTranscriptCommonModelOutput: core.serialization.
         "ignored_as_backchannel",
         core.serialization.boolean().optional(),
     ),
+    platformEvent: core.serialization.property("platform_event", TranscriptPlatformEvent.optional()),
     originalMessage: core.serialization.property("original_message", core.serialization.string().optional()),
     reasoning: core.serialization.list(ConversationReasoningModel).optional(),
     sourceMedium: core.serialization.property("source_medium", ChatSourceMedium.optional()),
@@ -83,6 +85,7 @@ export declare namespace ConversationHistoryTranscriptCommonModelOutput {
         llm_usage?: LlmUsageOutput.Raw | null;
         interrupted?: boolean | null;
         ignored_as_backchannel?: boolean | null;
+        platform_event?: TranscriptPlatformEvent.Raw | null;
         original_message?: string | null;
         reasoning?: ConversationReasoningModel.Raw[] | null;
         source_medium?: ChatSourceMedium.Raw | null;

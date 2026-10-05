@@ -8,4 +8,5 @@ export interface WorkflowFeaturesUsageCommonModel {
     standaloneAgentNode?: ElevenLabs.FeatureStatusCommonModel;
     phoneNumberNode?: ElevenLabs.FeatureStatusCommonModel;
     endNode?: ElevenLabs.FeatureStatusCommonModel;
+    overrideAgentNode?: ElevenLabs.FeatureStatusCommonModel;
 }

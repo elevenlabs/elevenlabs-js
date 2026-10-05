@@ -25,6 +25,10 @@ export const AgentTransferOutput: core.serialization.ObjectSchema<
         "preserve_client_tts_overrides",
         core.serialization.boolean().optional(),
     ),
+    preserveVoiceSettings: core.serialization.property(
+        "preserve_voice_settings",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace AgentTransferOutput {
@@ -37,5 +41,6 @@ export declare namespace AgentTransferOutput {
         enable_transferred_agent_first_message?: boolean | null;
         is_workflow_node_transfer?: boolean | null;
         preserve_client_tts_overrides?: boolean | null;
+        preserve_voice_settings?: boolean | null;
     }
 }

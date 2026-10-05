@@ -17,6 +17,7 @@ import { HoldAudioClient } from "../resources/holdAudio/client/Client";
 import { KnowledgeBaseClient } from "../resources/knowledgeBase/client/Client";
 import { LinkClient } from "../resources/link/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
+import { MergeProposalsClient } from "../resources/mergeProposals/client/Client";
 import { ProceduresClient } from "../resources/procedures/client/Client";
 import { SummariesClient } from "../resources/summaries/client/Client";
 import { VersionsClient } from "../resources/versions/client/Client";
@@ -40,6 +41,7 @@ export class AgentsClient {
     protected _versions: VersionsClient | undefined;
     protected _deployments: DeploymentsClient | undefined;
     protected _drafts: DraftsClient | undefined;
+    protected _mergeProposals: MergeProposalsClient | undefined;
     protected _procedures: ProceduresClient | undefined;
 
     constructor(options: AgentsClient.Options = {}) {
@@ -84,6 +86,10 @@ export class AgentsClient {
 
     public get drafts(): DraftsClient {
         return (this._drafts ??= new DraftsClient(this._options));
+    }
+
+    public get mergeProposals(): MergeProposalsClient {
+        return (this._mergeProposals ??= new MergeProposalsClient(this._options));
     }
 
     public get procedures(): ProceduresClient {
@@ -655,7 +661,7 @@ export class AgentsClient {
     /**
      * @deprecated
      *
-     * Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user.
+     * Deprecated. This endpoint will be removed on 31 Oct 2026. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user.
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {ElevenLabs.conversationalAi.BodySimulatesAConversationV1ConvaiAgentsAgentIdSimulateConversationPost} request
@@ -757,7 +763,7 @@ export class AgentsClient {
     /**
      * @deprecated
      *
-     * Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
+     * Deprecated. This endpoint will be removed on 31 Oct 2026. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {ElevenLabs.conversationalAi.BodySimulatesAConversationStreamV1ConvaiAgentsAgentIdSimulateConversationStreamPost} request

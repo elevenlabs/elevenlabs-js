@@ -11,8 +11,12 @@ import type * as ElevenLabs from "../../../../../../index";
 export interface CreateAgentConversationTicketRequestModel {
     /** Conversation this ticket is about. */
     conversationId: string;
+    /** One-line headline shown in the triage list. Defaults to one derived from the comments, falling back to the conversation's summary title. Ignored when the comment is added to the conversation's open ticket. */
+    title?: string;
     /** The issue this ticket is about, covering the whole conversation rather than a single turn. */
     qaComment?: string;
     /** Optional turn-level comments on what went wrong. */
     turnComments?: ElevenLabs.TurnCommentRequestModel[];
+    /** How urgently the ticket needs attention. If the conversation already has an open ticket, it is raised to this priority when lower. */
+    priority?: ElevenLabs.AgentConversationTicketPriority;
 }

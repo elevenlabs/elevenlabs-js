@@ -28,6 +28,10 @@ export const TransferToAgentToolResultSuccessModelOutput: core.serialization.Obj
         "preserve_client_tts_overrides",
         core.serialization.boolean().optional(),
     ),
+    preserveVoiceSettings: core.serialization.property(
+        "preserve_voice_settings",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace TransferToAgentToolResultSuccessModelOutput {
@@ -42,5 +46,6 @@ export declare namespace TransferToAgentToolResultSuccessModelOutput {
         enable_transferred_agent_first_message?: boolean | null;
         branch_info?: TransferToAgentToolResultSuccessModelOutputBranchInfo.Raw | null;
         preserve_client_tts_overrides?: boolean | null;
+        preserve_voice_settings?: boolean | null;
     }
 }

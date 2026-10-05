@@ -19,6 +19,7 @@ export const GetTestSuiteInvocationResponseModel: core.serialization.ObjectSchem
     createdAt: core.serialization.property("created_at", core.serialization.number().optional()),
     folderId: core.serialization.property("folder_id", core.serialization.string().optional()),
     repeatCount: core.serialization.property("repeat_count", core.serialization.number().optional()),
+    cancelled: core.serialization.boolean().optional(),
     bucketingStatus: core.serialization.property("bucketing_status", BucketingStatus.optional()),
     resultGroups: core.serialization.property(
         "result_groups",
@@ -37,6 +38,7 @@ export declare namespace GetTestSuiteInvocationResponseModel {
         created_at?: number | null;
         folder_id?: string | null;
         repeat_count?: number | null;
+        cancelled?: boolean | null;
         bucketing_status?: BucketingStatus.Raw | null;
         result_groups?: TestRunResultSummary.Raw[] | null;
         test_runs: UnitTestRunResponseModel.Raw[];

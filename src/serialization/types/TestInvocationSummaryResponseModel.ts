@@ -23,9 +23,11 @@ export const TestInvocationSummaryResponseModel: core.serialization.ObjectSchema
     passedCount: core.serialization.property("passed_count", core.serialization.number()),
     failedCount: core.serialization.property("failed_count", core.serialization.number()),
     pendingCount: core.serialization.property("pending_count", core.serialization.number()),
+    cancelledCount: core.serialization.property("cancelled_count", core.serialization.number()),
     title: core.serialization.string(),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
     repeatCount: core.serialization.property("repeat_count", core.serialization.number().optional()),
+    cancelled: core.serialization.boolean().optional(),
     creditsUsed: core.serialization.property("credits_used", core.serialization.number().optional()),
     totalPrice: core.serialization.property("total_price", core.serialization.number().optional()),
 });
@@ -43,9 +45,11 @@ export declare namespace TestInvocationSummaryResponseModel {
         passed_count: number;
         failed_count: number;
         pending_count: number;
+        cancelled_count: number;
         title: string;
         access_info?: ResourceAccessInfo.Raw | null;
         repeat_count?: number | null;
+        cancelled?: boolean | null;
         credits_used?: number | null;
         total_price?: number | null;
     }

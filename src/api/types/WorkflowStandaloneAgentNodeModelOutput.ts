@@ -19,4 +19,6 @@ export interface WorkflowStandaloneAgentNodeModelOutput {
     enableTransferredAgentFirstMessage: boolean;
     /** Defines whether TTS client overrides should be carried over to the transferred agent. */
     preserveClientTtsOverrides: boolean;
+    /** Defines whether the base voice, TTS model and voice settings should be carried over to the transferred agent. */
+    preserveVoiceSettings: boolean;
 }

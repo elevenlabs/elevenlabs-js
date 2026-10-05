@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
+import { AgentConversationTicketPriority } from "../../../../../../types/AgentConversationTicketPriority";
 import { TurnCommentRequestModel } from "../../../../../../types/TurnCommentRequestModel";
 
 export const CreateAgentConversationTicketRequestModel: core.serialization.Schema<
@@ -10,17 +11,21 @@ export const CreateAgentConversationTicketRequestModel: core.serialization.Schem
     ElevenLabs.conversationalAi.CreateAgentConversationTicketRequestModel
 > = core.serialization.object({
     conversationId: core.serialization.property("conversation_id", core.serialization.string()),
+    title: core.serialization.string().optional(),
     qaComment: core.serialization.property("qa_comment", core.serialization.string().optional()),
     turnComments: core.serialization.property(
         "turn_comments",
         core.serialization.list(TurnCommentRequestModel).optional(),
     ),
+    priority: AgentConversationTicketPriority.optional(),
 });
 
 export declare namespace CreateAgentConversationTicketRequestModel {
     export interface Raw {
         conversation_id: string;
+        title?: string | null;
         qa_comment?: string | null;
         turn_comments?: TurnCommentRequestModel.Raw[] | null;
+        priority?: AgentConversationTicketPriority.Raw | null;
     }
 }

@@ -4,6 +4,7 @@ export const AgentConversationTicketStatus = {
     Open: "open",
     InProgress: "in_progress",
     Resolved: "resolved",
+    Cancelled: "cancelled",
     Merged: "merged",
 } as const;
 export type AgentConversationTicketStatus =

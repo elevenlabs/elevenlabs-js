@@ -7,12 +7,14 @@ import { AgentFailureResponseExample } from "./AgentFailureResponseExample";
 import { AgentSuccessfulResponseExample } from "./AgentSuccessfulResponseExample";
 import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
 import { ConversationInitiationSource } from "./ConversationInitiationSource";
+import { ResourceAccessInfo } from "./ResourceAccessInfo";
 import { TestFromConversationMetadataOutput } from "./TestFromConversationMetadataOutput";
 
 export const GetResponseUnitTestResponseModel: core.serialization.ObjectSchema<
     serializers.GetResponseUnitTestResponseModel.Raw,
     ElevenLabs.GetResponseUnitTestResponseModel
 > = core.serialization.object({
+    accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
     fromConversationMetadata: core.serialization.property(
         "from_conversation_metadata",
         TestFromConversationMetadataOutput.optional(),
@@ -45,6 +47,7 @@ export const GetResponseUnitTestResponseModel: core.serialization.ObjectSchema<
 
 export declare namespace GetResponseUnitTestResponseModel {
     export interface Raw {
+        access_info?: ResourceAccessInfo.Raw | null;
         from_conversation_metadata?: TestFromConversationMetadataOutput.Raw | null;
         dynamic_variables?: Record<string, unknown> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;

@@ -4,5 +4,6 @@ export const TestRunStatus = {
     Pending: "pending",
     Passed: "passed",
     Failed: "failed",
+    Cancelled: "cancelled",
 } as const;
 export type TestRunStatus = (typeof TestRunStatus)[keyof typeof TestRunStatus];

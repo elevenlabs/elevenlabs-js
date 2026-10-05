@@ -11,4 +11,6 @@ export interface AgentVersionMetadata {
     timeCommittedSecs: number;
     parents: ElevenLabs.AgentVersionParents;
     accessInfo?: ElevenLabs.ResourceAccessInfo;
+    /** For a merge into the main branch, the people who published the merged changes on the source branch (access_info is whoever ran the merge). Null when not recorded. */
+    mergedAuthors?: ElevenLabs.ResourceAccessInfo[];
 }

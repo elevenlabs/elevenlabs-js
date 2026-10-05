@@ -4,6 +4,69 @@ import { ElevenLabsClient } from "../../../../src/Client";
 import { mockServerPool } from "../../../mock-server/MockServerPool";
 
 describe("DeploymentsClient", () => {
+    test("list", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            meta: { total: 1, page: 1, page_size: 1 },
+            results: [
+                {
+                    id: "id",
+                    traffic_percentage_branch_id_map: { key: 1.1 },
+                    deployed_at_unix_secs: 1,
+                    is_active: true,
+                    source: "manual",
+                    access_info: {
+                        is_creator: true,
+                        creator_name: "John Doe",
+                        creator_email: "john.doe@example.com",
+                        role: "admin",
+                        access_source: "creator",
+                    },
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/deployments")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.agents.deployments.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+            page: 1,
+            pageSize: 1,
+        });
+        expect(response).toEqual({
+            meta: {
+                total: 1,
+                page: 1,
+                pageSize: 1,
+            },
+            results: [
+                {
+                    id: "id",
+                    trafficPercentageBranchIdMap: {
+                        key: 1.1,
+                    },
+                    deployedAtUnixSecs: 1,
+                    isActive: true,
+                    source: "manual",
+                    accessInfo: {
+                        isCreator: true,
+                        creatorName: "John Doe",
+                        creatorEmail: "john.doe@example.com",
+                        role: "admin",
+                        accessSource: "creator",
+                    },
+                },
+            ],
+        });
+    });
+
     test("create", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

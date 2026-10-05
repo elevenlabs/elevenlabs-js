@@ -57,6 +57,14 @@ describe("TestsClient", () => {
 
         const rawResponseBody = {
             type: "llm",
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+                anonymous_access_level_override: "admin",
+                access_source: "creator",
+            },
             from_conversation_metadata: {
                 conversation_id: "conversation_id",
                 agent_id: "agent_id",
@@ -100,6 +108,7 @@ describe("TestsClient", () => {
                     },
                     interrupted: true,
                     ignored_as_backchannel: true,
+                    platform_event: "user_turn_timeout",
                     original_message: "original_message",
                     reasoning: [{}],
                     source_medium: "audio",
@@ -130,6 +139,14 @@ describe("TestsClient", () => {
         const response = await client.conversationalAi.tests.get("TeaqRRdTcIfIu2i7BYfT");
         expect(response).toEqual({
             type: "llm",
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+                anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
+            },
             fromConversationMetadata: {
                 conversationId: "conversation_id",
                 agentId: "agent_id",
@@ -197,6 +214,7 @@ describe("TestsClient", () => {
                     },
                     interrupted: true,
                     ignoredAsBackchannel: true,
+                    platformEvent: "user_turn_timeout",
                     originalMessage: "original_message",
                     reasoning: [{}],
                     sourceMedium: "audio",
@@ -237,6 +255,14 @@ describe("TestsClient", () => {
         const rawRequestBody = { type: "llm", name: "name" };
         const rawResponseBody = {
             type: "llm",
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+                anonymous_access_level_override: "admin",
+                access_source: "creator",
+            },
             from_conversation_metadata: {
                 conversation_id: "conversation_id",
                 agent_id: "agent_id",
@@ -280,6 +306,7 @@ describe("TestsClient", () => {
                     },
                     interrupted: true,
                     ignored_as_backchannel: true,
+                    platform_event: "user_turn_timeout",
                     original_message: "original_message",
                     reasoning: [{}],
                     source_medium: "audio",
@@ -314,6 +341,14 @@ describe("TestsClient", () => {
         });
         expect(response).toEqual({
             type: "llm",
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+                anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
+            },
             fromConversationMetadata: {
                 conversationId: "conversation_id",
                 agentId: "agent_id",
@@ -381,6 +416,7 @@ describe("TestsClient", () => {
                     },
                     interrupted: true,
                     ignoredAsBackchannel: true,
+                    platformEvent: "user_turn_timeout",
                     originalMessage: "original_message",
                     reasoning: [{}],
                     sourceMedium: "audio",

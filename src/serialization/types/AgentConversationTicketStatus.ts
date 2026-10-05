@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const AgentConversationTicketStatus: core.serialization.Schema<
     serializers.AgentConversationTicketStatus.Raw,
     ElevenLabs.AgentConversationTicketStatus
-> = core.serialization.enum_(["open", "in_progress", "resolved", "merged"]);
+> = core.serialization.enum_(["open", "in_progress", "resolved", "cancelled", "merged"]);
 
 export declare namespace AgentConversationTicketStatus {
-    export type Raw = "open" | "in_progress" | "resolved" | "merged";
+    export type Raw = "open" | "in_progress" | "resolved" | "cancelled" | "merged";
 }

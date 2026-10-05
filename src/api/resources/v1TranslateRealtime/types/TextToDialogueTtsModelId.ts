@@ -4,5 +4,6 @@
 export const TextToDialogueTtsModelId = {
     ElevenFlashV25: "eleven_flash_v2_5",
     ElevenV3: "eleven_v3",
+    ElevenV4Turbo: "eleven_v4_turbo",
 } as const;
 export type TextToDialogueTtsModelId = (typeof TextToDialogueTtsModelId)[keyof typeof TextToDialogueTtsModelId];

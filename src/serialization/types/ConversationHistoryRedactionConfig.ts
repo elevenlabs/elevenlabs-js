@@ -11,11 +11,16 @@ export const ConversationHistoryRedactionConfig: core.serialization.ObjectSchema
 > = core.serialization.object({
     enabled: core.serialization.boolean().optional(),
     entities: core.serialization.list(ConfigEntityType).optional(),
+    excludedDataCollectionIds: core.serialization.property(
+        "excluded_data_collection_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace ConversationHistoryRedactionConfig {
     export interface Raw {
         enabled?: boolean | null;
         entities?: ConfigEntityType.Raw[] | null;
+        excluded_data_collection_ids?: string[] | null;
     }
 }

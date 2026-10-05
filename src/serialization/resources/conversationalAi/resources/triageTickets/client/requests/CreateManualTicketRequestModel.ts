@@ -3,16 +3,21 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
+import { AgentConversationTicketPriority } from "../../../../../../types/AgentConversationTicketPriority";
 
 export const CreateManualTicketRequestModel: core.serialization.Schema<
     serializers.conversationalAi.CreateManualTicketRequestModel.Raw,
     ElevenLabs.conversationalAi.CreateManualTicketRequestModel
 > = core.serialization.object({
+    title: core.serialization.string().optional(),
     qaComment: core.serialization.property("qa_comment", core.serialization.string()),
+    priority: AgentConversationTicketPriority.optional(),
 });
 
 export declare namespace CreateManualTicketRequestModel {
     export interface Raw {
+        title?: string | null;
         qa_comment: string;
+        priority?: AgentConversationTicketPriority.Raw | null;
     }
 }

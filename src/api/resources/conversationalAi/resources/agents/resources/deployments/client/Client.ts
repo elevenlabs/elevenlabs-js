@@ -25,6 +25,101 @@ export class DeploymentsClient {
     }
 
     /**
+     * List the traffic split history of an agent, newest first
+     *
+     * @param {string} agent_id - The id of an agent. This is returned on agent creation.
+     * @param {ElevenLabs.conversationalAi.agents.DeploymentsListRequest} request
+     * @param {DeploymentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.agents.deployments.list("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+     *         page: 1,
+     *         pageSize: 1
+     *     })
+     */
+    public list(
+        agent_id: string,
+        request: ElevenLabs.conversationalAi.agents.DeploymentsListRequest = {},
+        requestOptions?: DeploymentsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.ListResponseAgentDeploymentHistoryItem> {
+        return core.HttpResponsePromise.fromPromise(this.__list(agent_id, request, requestOptions));
+    }
+
+    private async __list(
+        agent_id: string,
+        request: ElevenLabs.conversationalAi.agents.DeploymentsListRequest = {},
+        requestOptions?: DeploymentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.ListResponseAgentDeploymentHistoryItem>> {
+        const { page, pageSize } = request;
+        const _queryParams: Record<string, unknown> = {
+            page,
+            page_size: pageSize,
+        };
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/agents/${core.url.encodePathParam(agent_id)}/deployments`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.ListResponseAgentDeploymentHistoryItem.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/agents/{agent_id}/deployments",
+        );
+    }
+
+    /**
      * Create a new deployment for an agent
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.

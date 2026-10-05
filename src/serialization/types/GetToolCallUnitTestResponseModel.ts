@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
 import { ConversationInitiationSource } from "./ConversationInitiationSource";
+import { ResourceAccessInfo } from "./ResourceAccessInfo";
 import { TestFromConversationMetadataOutput } from "./TestFromConversationMetadataOutput";
 import { UnitTestToolCallEvaluationModelOutput } from "./UnitTestToolCallEvaluationModelOutput";
 
@@ -12,6 +13,7 @@ export const GetToolCallUnitTestResponseModel: core.serialization.ObjectSchema<
     serializers.GetToolCallUnitTestResponseModel.Raw,
     ElevenLabs.GetToolCallUnitTestResponseModel
 > = core.serialization.object({
+    accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
     fromConversationMetadata: core.serialization.property(
         "from_conversation_metadata",
         TestFromConversationMetadataOutput.optional(),
@@ -40,6 +42,7 @@ export const GetToolCallUnitTestResponseModel: core.serialization.ObjectSchema<
 
 export declare namespace GetToolCallUnitTestResponseModel {
     export interface Raw {
+        access_info?: ResourceAccessInfo.Raw | null;
         from_conversation_metadata?: TestFromConversationMetadataOutput.Raw | null;
         dynamic_variables?: Record<string, unknown> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;

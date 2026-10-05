@@ -529,15 +529,21 @@ export class BatchCallsClient {
      */
     public export(
         batch_id: string,
+        request: ElevenLabs.conversationalAi.BatchCallsExportRequest = {},
         requestOptions?: BatchCallsClient.RequestOptions,
     ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
-        return core.HttpResponsePromise.fromPromise(this.__export(batch_id, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__export(batch_id, request, requestOptions));
     }
 
     private async __export(
         batch_id: string,
+        request: ElevenLabs.conversationalAi.BatchCallsExportRequest = {},
         requestOptions?: BatchCallsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        const { limit } = request;
+        const _queryParams: Record<string, unknown> = {
+            limit,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -554,7 +560,11 @@ export class BatchCallsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             responseType: "streaming",
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,

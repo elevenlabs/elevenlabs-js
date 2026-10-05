@@ -8,6 +8,8 @@ export interface ConvAiWebhooks {
     events?: ElevenLabs.WebhookEventType[];
     /** Format for transcript webhooks. */
     transcriptFormat?: ElevenLabs.WebhookTranscriptFormat;
+    /** When true, JSON post-call transcription webhooks omit the turn-by-turn transcript. Analysis, metadata, and other conversation fields are still sent. Ignored for OpenTelemetry transcript format. */
+    excludeTranscript?: boolean;
     /** DEPRECATED: Use 'events' field instead. Whether to send audio data with post-call webhooks for ConvAI conversations */
     sendAudio?: boolean;
 }
