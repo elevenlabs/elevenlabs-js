@@ -13,4 +13,5 @@ export interface TransferToAgentToolResultSuccessModelInput {
     enableTransferredAgentFirstMessage?: boolean;
     branchInfo?: ElevenLabs.TransferToAgentToolResultSuccessModelInputBranchInfo;
     preserveClientTtsOverrides?: boolean;
+    preserveVoiceSettings?: boolean;
 }

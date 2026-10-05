@@ -23,6 +23,7 @@ describe("InvocationsClient", () => {
                     passed_count: 1,
                     failed_count: 1,
                     pending_count: 1,
+                    cancelled_count: 1,
                     title: "title",
                     access_info: {
                         is_creator: true,
@@ -32,6 +33,7 @@ describe("InvocationsClient", () => {
                         access_source: "creator",
                     },
                     repeat_count: 1,
+                    cancelled: true,
                     credits_used: 1,
                     total_price: 1.1,
                 },
@@ -74,6 +76,7 @@ describe("InvocationsClient", () => {
                     passedCount: 1,
                     failedCount: 1,
                     pendingCount: 1,
+                    cancelledCount: 1,
                     title: "title",
                     accessInfo: {
                         isCreator: true,
@@ -83,6 +86,7 @@ describe("InvocationsClient", () => {
                         accessSource: "creator",
                     },
                     repeatCount: 1,
+                    cancelled: true,
                     creditsUsed: 1,
                     totalPrice: 1.1,
                 },
@@ -105,6 +109,7 @@ describe("InvocationsClient", () => {
             created_at: 1,
             folder_id: "folder_id",
             repeat_count: 1,
+            cancelled: true,
             bucketing_status: "pending",
             result_groups: [
                 {
@@ -161,6 +166,7 @@ describe("InvocationsClient", () => {
             createdAt: 1,
             folderId: "folder_id",
             repeatCount: 1,
+            cancelled: true,
             bucketingStatus: "pending",
             resultGroups: [
                 {
@@ -214,6 +220,21 @@ describe("InvocationsClient", () => {
                 },
             ],
         });
+    });
+
+    test("cancel", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/test-invocations/test_invocation_id/cancel")
+            .respondWith()
+            .statusCode(200)
+            .build();
+
+        const response = await client.conversationalAi.tests.invocations.cancel("test_invocation_id");
+        expect(response).toEqual(undefined);
     });
 
     test("resubmit", async () => {

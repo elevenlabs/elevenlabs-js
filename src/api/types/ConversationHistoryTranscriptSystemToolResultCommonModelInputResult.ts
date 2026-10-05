@@ -18,6 +18,7 @@ export type ConversationHistoryTranscriptSystemToolResultCommonModelInputResult 
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TestingToolResult
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentSuccess
+    | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberAmazonConnectSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberError
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberExotelSuccess
     | ElevenLabs.ConversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberSipSuccess
@@ -83,6 +84,11 @@ export namespace ConversationHistoryTranscriptSystemToolResultCommonModelInputRe
 
     export interface TransferToAgentSuccess extends ElevenLabs.TransferToAgentToolResultSuccessModelInput {
         resultType: "transfer_to_agent_success";
+    }
+
+    export interface TransferToNumberAmazonConnectSuccess
+        extends ElevenLabs.TransferToNumberResultAmazonConnectSuccessModel {
+        resultType: "transfer_to_number_amazon_connect_success";
     }
 
     export interface TransferToNumberError extends ElevenLabs.TransferToNumberResultErrorModel {

@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHistoryTranscriptCommonModelOutput";
 import { ConversationInitiationSource } from "./ConversationInitiationSource";
 import { Llm } from "./Llm";
+import { ResourceAccessInfo } from "./ResourceAccessInfo";
 import { SimulationToolMockBehaviorConfig } from "./SimulationToolMockBehaviorConfig";
 import { TestFromConversationMetadataOutput } from "./TestFromConversationMetadataOutput";
 import { ToolResponseMockConfigOutput } from "./ToolResponseMockConfigOutput";
@@ -14,6 +15,7 @@ export const GetSimulationTestResponseModel: core.serialization.ObjectSchema<
     serializers.GetSimulationTestResponseModel.Raw,
     ElevenLabs.GetSimulationTestResponseModel
 > = core.serialization.object({
+    accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
     fromConversationMetadata: core.serialization.property(
         "from_conversation_metadata",
         TestFromConversationMetadataOutput.optional(),
@@ -57,6 +59,7 @@ export const GetSimulationTestResponseModel: core.serialization.ObjectSchema<
 
 export declare namespace GetSimulationTestResponseModel {
     export interface Raw {
+        access_info?: ResourceAccessInfo.Raw | null;
         from_conversation_metadata?: TestFromConversationMetadataOutput.Raw | null;
         dynamic_variables?: Record<string, unknown> | null;
         chat_history?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;

@@ -1130,6 +1130,7 @@ describe("AgentsClient", () => {
                         delay_ms: 1,
                         enable_transferred_agent_first_message: true,
                         preserve_client_tts_overrides: true,
+                        preserve_voice_settings: true,
                         agent_id: null,
                         node_id: null,
                         transfer_message: null,
@@ -2565,6 +2566,7 @@ describe("AgentsClient", () => {
                         delayMs: 1,
                         enableTransferredAgentFirstMessage: true,
                         preserveClientTtsOverrides: true,
+                        preserveVoiceSettings: true,
                     },
                     tool_node_a: {
                         type: "tool",
@@ -3742,6 +3744,7 @@ describe("AgentsClient", () => {
                         delay_ms: 1,
                         enable_transferred_agent_first_message: true,
                         preserve_client_tts_overrides: true,
+                        preserve_voice_settings: true,
                         agent_id: null,
                         node_id: null,
                         transfer_message: null,
@@ -5178,6 +5181,7 @@ describe("AgentsClient", () => {
                         delayMs: 1,
                         enableTransferredAgentFirstMessage: true,
                         preserveClientTtsOverrides: true,
+                        preserveVoiceSettings: true,
                     },
                     tool_node_a: {
                         type: "tool",
@@ -5369,6 +5373,7 @@ describe("AgentsClient", () => {
                     },
                     interrupted: true,
                     ignored_as_backchannel: true,
+                    platform_event: "user_turn_timeout",
                     original_message: "original_message",
                     reasoning: [{}],
                     source_medium: "audio",
@@ -5498,6 +5503,7 @@ describe("AgentsClient", () => {
                     },
                     interrupted: true,
                     ignoredAsBackchannel: true,
+                    platformEvent: "user_turn_timeout",
                     originalMessage: "original_message",
                     reasoning: [{}],
                     sourceMedium: "audio",
@@ -5629,6 +5635,7 @@ describe("AgentsClient", () => {
             created_at: 1,
             folder_id: "folder_id",
             repeat_count: 1,
+            cancelled: true,
             bucketing_status: "pending",
             result_groups: [
                 {
@@ -5692,6 +5699,7 @@ describe("AgentsClient", () => {
             createdAt: 1,
             folderId: "folder_id",
             repeatCount: 1,
+            cancelled: true,
             bucketingStatus: "pending",
             resultGroups: [
                 {

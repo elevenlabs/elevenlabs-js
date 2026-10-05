@@ -11,5 +11,7 @@ export const TtsConversationalModel = {
     ElevenFlashV25: "eleven_flash_v2_5",
     ElevenMultilingualV2: "eleven_multilingual_v2",
     ElevenV3Conversational: "eleven_v3_conversational",
+    ElevenV4: "eleven_v4",
+    ElevenV4Turbo: "eleven_v4_turbo",
 } as const;
 export type TtsConversationalModel = (typeof TtsConversationalModel)[keyof typeof TtsConversationalModel];

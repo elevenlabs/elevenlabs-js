@@ -13,6 +13,7 @@ export const ConvAiWebhooks: core.serialization.ObjectSchema<
     postCallWebhookId: core.serialization.property("post_call_webhook_id", core.serialization.string().optional()),
     events: core.serialization.list(WebhookEventType).optional(),
     transcriptFormat: core.serialization.property("transcript_format", WebhookTranscriptFormat.optional()),
+    excludeTranscript: core.serialization.property("exclude_transcript", core.serialization.boolean().optional()),
     sendAudio: core.serialization.property("send_audio", core.serialization.boolean().optional()),
 });
 
@@ -21,6 +22,7 @@ export declare namespace ConvAiWebhooks {
         post_call_webhook_id?: string | null;
         events?: WebhookEventType.Raw[] | null;
         transcript_format?: WebhookTranscriptFormat.Raw | null;
+        exclude_transcript?: boolean | null;
         send_audio?: boolean | null;
     }
 }

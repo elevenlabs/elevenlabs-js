@@ -65,6 +65,7 @@ describe("SubscriptionClient", () => {
             },
             has_used_starter_coupon_on_account: false,
             has_used_creator_coupon_on_account: false,
+            is_eligible_for_starter_promo: false,
         };
 
         server
@@ -144,6 +145,7 @@ describe("SubscriptionClient", () => {
             },
             hasUsedStarterCouponOnAccount: false,
             hasUsedCreatorCouponOnAccount: false,
+            isEligibleForStarterPromo: false,
         });
     });
 });

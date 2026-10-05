@@ -8,6 +8,8 @@ export interface AgentConversationTicketResponseModel {
     ownerUserId: string;
     agentId: string;
     needsClustering: boolean;
+    /** One-line headline for the ticket. None only on tickets created before titles existed. */
+    title?: string;
     issueType?: ElevenLabs.AgentConversationTicketIssueType;
     labels: string[];
     conversationIds: string[];
@@ -17,6 +19,8 @@ export interface AgentConversationTicketResponseModel {
     ticketComments: ElevenLabs.TicketCommentResponseModel[];
     turnComments: ElevenLabs.TurnCommentResponseModel[];
     status: ElevenLabs.AgentConversationTicketStatus;
+    priority?: ElevenLabs.AgentConversationTicketPriority;
+    priorityChanges: ElevenLabs.TicketPriorityChangeResponseModel[];
     source: ElevenLabs.AgentConversationTicketSource;
     assigneeUserId?: string;
     createdAtUnixSecs: number;

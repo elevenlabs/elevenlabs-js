@@ -61,4 +61,6 @@ export interface Subscription {
     hasUsedStarterCouponOnAccount?: boolean;
     /** True if any workspace owned by this user's auth account has redeemed the creator first-month discount coupon. */
     hasUsedCreatorCouponOnAccount?: boolean;
+    /** True if this user's auth account qualifies for the Starter first-month promo, using the same check as checkout. The starter_discount feature flag still decides whether the promo is offered. */
+    isEligibleForStarterPromo?: boolean;
 }

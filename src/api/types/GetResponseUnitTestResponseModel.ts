@@ -3,6 +3,8 @@
 import type * as ElevenLabs from "../index";
 
 export interface GetResponseUnitTestResponseModel {
+    /** The access information for the requesting user on this test. */
+    accessInfo?: ElevenLabs.ResourceAccessInfo;
     /** Metadata of a conversation this test was created from (if applicable). */
     fromConversationMetadata?: ElevenLabs.TestFromConversationMetadataOutput;
     /** Dynamic variables to replace in the agent config during testing */

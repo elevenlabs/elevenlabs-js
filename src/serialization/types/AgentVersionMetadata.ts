@@ -18,6 +18,10 @@ export const AgentVersionMetadata: core.serialization.ObjectSchema<
     timeCommittedSecs: core.serialization.property("time_committed_secs", core.serialization.number()),
     parents: AgentVersionParents,
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
+    mergedAuthors: core.serialization.property(
+        "merged_authors",
+        core.serialization.list(ResourceAccessInfo).optional(),
+    ),
 });
 
 export declare namespace AgentVersionMetadata {
@@ -30,5 +34,6 @@ export declare namespace AgentVersionMetadata {
         time_committed_secs: number;
         parents: AgentVersionParents.Raw;
         access_info?: ResourceAccessInfo.Raw | null;
+        merged_authors?: ResourceAccessInfo.Raw[] | null;
     }
 }

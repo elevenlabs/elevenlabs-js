@@ -155,6 +155,15 @@ describe("BranchesClient", () => {
                         role: "admin",
                         access_source: "creator",
                     },
+                    merged_authors: [
+                        {
+                            is_creator: true,
+                            creator_name: "John Doe",
+                            creator_email: "john.doe@example.com",
+                            role: "admin",
+                            access_source: "creator",
+                        },
+                    ],
                 },
             ],
         };
@@ -209,6 +218,15 @@ describe("BranchesClient", () => {
                         role: "admin",
                         accessSource: "creator",
                     },
+                    mergedAuthors: [
+                        {
+                            isCreator: true,
+                            creatorName: "John Doe",
+                            creatorEmail: "john.doe@example.com",
+                            role: "admin",
+                            accessSource: "creator",
+                        },
+                    ],
                 },
             ],
         });
@@ -253,6 +271,15 @@ describe("BranchesClient", () => {
                         role: "admin",
                         access_source: "creator",
                     },
+                    merged_authors: [
+                        {
+                            is_creator: true,
+                            creator_name: "John Doe",
+                            creator_email: "john.doe@example.com",
+                            role: "admin",
+                            access_source: "creator",
+                        },
+                    ],
                 },
             ],
         };
@@ -310,6 +337,15 @@ describe("BranchesClient", () => {
                         role: "admin",
                         accessSource: "creator",
                     },
+                    mergedAuthors: [
+                        {
+                            isCreator: true,
+                            creatorName: "John Doe",
+                            creatorEmail: "john.doe@example.com",
+                            role: "admin",
+                            accessSource: "creator",
+                        },
+                    ],
                 },
             ],
         });
@@ -1417,6 +1453,7 @@ describe("BranchesClient", () => {
                         delay_ms: 1,
                         enable_transferred_agent_first_message: true,
                         preserve_client_tts_overrides: true,
+                        preserve_voice_settings: true,
                         agent_id: null,
                         node_id: null,
                         transfer_message: null,
@@ -2869,6 +2906,7 @@ describe("BranchesClient", () => {
                         delayMs: 1,
                         enableTransferredAgentFirstMessage: true,
                         preserveClientTtsOverrides: true,
+                        preserveVoiceSettings: true,
                     },
                     tool_node_a: {
                         type: "tool",
@@ -4077,6 +4115,7 @@ describe("BranchesClient", () => {
                         delay_ms: 1,
                         enable_transferred_agent_first_message: true,
                         preserve_client_tts_overrides: true,
+                        preserve_voice_settings: true,
                         agent_id: null,
                         node_id: null,
                         transfer_message: null,
@@ -5525,6 +5564,7 @@ describe("BranchesClient", () => {
                         delayMs: 1,
                         enableTransferredAgentFirstMessage: true,
                         preserveClientTtsOverrides: true,
+                        preserveVoiceSettings: true,
                     },
                     tool_node_a: {
                         type: "tool",

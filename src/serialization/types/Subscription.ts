@@ -79,6 +79,10 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
             "has_used_creator_coupon_on_account",
             core.serialization.boolean().optional(),
         ),
+        isEligibleForStarterPromo: core.serialization.property(
+            "is_eligible_for_starter_promo",
+            core.serialization.boolean().optional(),
+        ),
     });
 
 export declare namespace Subscription {
@@ -112,5 +116,6 @@ export declare namespace Subscription {
         pending_change?: SubscriptionPendingChange.Raw | null;
         has_used_starter_coupon_on_account?: boolean | null;
         has_used_creator_coupon_on_account?: boolean | null;
+        is_eligible_for_starter_promo?: boolean | null;
     }
 }

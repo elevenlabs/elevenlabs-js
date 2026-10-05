@@ -5,5 +5,6 @@ export const AsrProvider = {
      * Deprecated: Use scribe_realtime instead. */
     Elevenlabs: "elevenlabs",
     ScribeRealtime: "scribe_realtime",
+    ScribeV2Turbo: "scribe_v2_turbo",
 } as const;
 export type AsrProvider = (typeof AsrProvider)[keyof typeof AsrProvider];

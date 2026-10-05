@@ -7,8 +7,8 @@ import type * as serializers from "../../../index";
 export const TextToDialogueTtsModelId: core.serialization.Schema<
     serializers.TextToDialogueTtsModelId.Raw,
     ElevenLabs.TextToDialogueTtsModelId
-> = core.serialization.enum_(["eleven_flash_v2_5", "eleven_v3"]);
+> = core.serialization.enum_(["eleven_flash_v2_5", "eleven_v3", "eleven_v4_turbo"]);
 
 export declare namespace TextToDialogueTtsModelId {
-    export type Raw = "eleven_flash_v2_5" | "eleven_v3";
+    export type Raw = "eleven_flash_v2_5" | "eleven_v3" | "eleven_v4_turbo";
 }

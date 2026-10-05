@@ -9,6 +9,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *         conversationId: "conversation_id",
  *         status: "open",
  *         sources: ["qa"],
+ *         priorities: ["low"],
+ *         sortBy: "created_at",
  *         ownerUserId: "owner_user_id",
  *         assigneeUserId: "assignee_user_id",
  *         issueType: "knowledge_gap",
@@ -25,6 +27,10 @@ export interface TriageTicketsListRequest {
     status?: ElevenLabs.AgentConversationTicketStatus;
     /** Filter tickets by how they were raised (qa, agent, manual). Repeat the parameter to filter by multiple sources. */
     sources?: ElevenLabs.AgentConversationTicketSource | ElevenLabs.AgentConversationTicketSource[];
+    /** Filter tickets by priority. Repeat the parameter to filter by multiple priorities. */
+    priorities?: ElevenLabs.AgentConversationTicketPriority | ElevenLabs.AgentConversationTicketPriority[];
+    /** Order by most recently created, or by priority (most urgent first, then most recently created). */
+    sortBy?: ElevenLabs.AgentConversationTicketSortBy;
     /** Filter tickets by creator. Use 'agent' for agent-raised tickets. */
     ownerUserId?: string;
     /** Filter tickets by assignee. Use 'unassigned' for tickets with no assignee. */

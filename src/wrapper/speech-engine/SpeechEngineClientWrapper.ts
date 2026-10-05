@@ -2,6 +2,7 @@ import type { Server as HttpServer } from "node:http";
 import type { CreateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/CreateSpeechEngineRequest";
 import type { UpdateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/UpdateSpeechEngineRequest";
 import { SpeechEngineClient } from "../../api/resources/speechEngine/client/Client";
+import type { DuplicateSpeechEngineRequest } from "../../api/types/DuplicateSpeechEngineRequest";
 import type { SpeechEngineAttachment } from "./SpeechEngineAttachment";
 import { SpeechEngineResource } from "./SpeechEngineResource";
 import type { SpeechEngineCallbacks } from "./types";
@@ -11,7 +12,7 @@ import type { SpeechEngineCallbacks } from "./types";
  *
  * Extends the Fern-generated `SpeechEngineClient` with WebSocket integration
  * methods. `list` and `delete` are inherited from the generated client.
- * `create`, `get`, and `update` are overridden to return a `SpeechEngineResource`
+ * `create`, `get`, `update`, and `duplicate` are overridden to return a `SpeechEngineResource`
  * with WebSocket server setup methods.
  *
  * @example
@@ -109,6 +110,16 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
     ): Promise<SpeechEngineResource> {
         const response = await super.update(speechEngineId, request, requestOptions);
         return new SpeechEngineResource(speechEngineId, this._options, response);
+    }
+
+    // @ts-expect-error — intentionally returns SpeechEngineResource instead of HttpResponsePromise<SpeechEngineResponse>
+    public async duplicate(
+        speechEngineId: string,
+        request?: DuplicateSpeechEngineRequest,
+        requestOptions?: SpeechEngineClient.RequestOptions,
+    ): Promise<SpeechEngineResource> {
+        const response = await super.duplicate(speechEngineId, request, requestOptions);
+        return new SpeechEngineResource(response.speechEngineId, this._options, response);
     }
 
     /**

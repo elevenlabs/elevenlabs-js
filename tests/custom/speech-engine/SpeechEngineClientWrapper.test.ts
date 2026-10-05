@@ -46,4 +46,18 @@ describe("SpeechEngineClientWrapper", () => {
             expect(result.engineId).toBe("seng_abc");
         });
     });
+
+    describe("duplicate", () => {
+        it("returns a SpeechEngineResource with the copy's ID from the API response", async () => {
+            const wrapper = new SpeechEngineClientWrapper(TEST_OPTIONS);
+            jest.spyOn(SpeechEngineClient.prototype, "duplicate").mockResolvedValue({
+                speechEngineId: "seng_copy",
+            } as any);
+
+            const result = await wrapper.duplicate("seng_abc", { name: "Copy" });
+
+            expect(result).toBeInstanceOf(SpeechEngineResource);
+            expect(result.engineId).toBe("seng_copy");
+        });
+    });
 });

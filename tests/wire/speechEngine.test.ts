@@ -128,7 +128,11 @@ describe("SpeechEngineClient", () => {
                 delete_audio: false,
                 apply_to_existing_conversations: false,
                 zero_retention_mode: false,
-                conversation_history_redaction: { enabled: true, entities: ["name"] },
+                conversation_history_redaction: {
+                    enabled: true,
+                    entities: ["name"],
+                    excluded_data_collection_ids: ["excluded_data_collection_ids"],
+                },
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
             language: "en",
@@ -265,6 +269,7 @@ describe("SpeechEngineClient", () => {
                 conversationHistoryRedaction: {
                     enabled: true,
                     entities: ["name"],
+                    excludedDataCollectionIds: ["excluded_data_collection_ids"],
                 },
             },
             callLimits: {
@@ -365,7 +370,11 @@ describe("SpeechEngineClient", () => {
                 delete_audio: false,
                 apply_to_existing_conversations: false,
                 zero_retention_mode: false,
-                conversation_history_redaction: { enabled: true, entities: ["name"] },
+                conversation_history_redaction: {
+                    enabled: true,
+                    entities: ["name"],
+                    excluded_data_collection_ids: ["excluded_data_collection_ids"],
+                },
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
             language: "en",
@@ -497,6 +506,7 @@ describe("SpeechEngineClient", () => {
                 conversationHistoryRedaction: {
                     enabled: true,
                     entities: ["name"],
+                    excludedDataCollectionIds: ["excluded_data_collection_ids"],
                 },
             },
             callLimits: {
@@ -612,7 +622,11 @@ describe("SpeechEngineClient", () => {
                 delete_audio: false,
                 apply_to_existing_conversations: false,
                 zero_retention_mode: false,
-                conversation_history_redaction: { enabled: true, entities: ["name"] },
+                conversation_history_redaction: {
+                    enabled: true,
+                    entities: ["name"],
+                    excluded_data_collection_ids: ["excluded_data_collection_ids"],
+                },
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
             language: "en",
@@ -745,6 +759,244 @@ describe("SpeechEngineClient", () => {
                 conversationHistoryRedaction: {
                     enabled: true,
                     entities: ["name"],
+                    excludedDataCollectionIds: ["excluded_data_collection_ids"],
+                },
+            },
+            callLimits: {
+                agentConcurrencyLimit: -1,
+                dailyLimit: 100000,
+                burstingEnabled: true,
+            },
+            language: "en",
+            cascadeTimeoutSeconds: 4,
+            tags: ["production", "v1"],
+            overrides: {
+                firstMessage: false,
+            },
+            metadata: {
+                createdAtUnixSecs: 1714000000,
+                updatedAtUnixSecs: 1714000000,
+                createdFrom: "api",
+                lastUpdatedFrom: "api",
+            },
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+                anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
+            },
+        });
+    });
+
+    test("duplicate", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            speech_engine_id: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
+            name: "My Speech Engine",
+            speech_engine: { ws_url: "wss://example.com/transcript", request_headers: { key: "value" } },
+            asr: {
+                quality: "high",
+                provider: "elevenlabs",
+                user_input_audio_format: "pcm_16000",
+                keywords: ["keywords"],
+            },
+            tts: {
+                model_id: "eleven_flash_v2",
+                voice_id: "cjVigY5qzO86Huf0OWal",
+                supported_voices: [{ label: "label", voice_id: "voice_id" }],
+                expressive_mode: true,
+                suggested_audio_tags: [{ tag: "tag" }],
+                agent_output_audio_format: "pcm_16000",
+                optimize_streaming_latency: 3,
+                stability: 0.5,
+                speed: 1,
+                similarity_boost: 0.8,
+                text_normalisation_type: "system_prompt",
+                pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
+                enable_phoneme_tags: true,
+                audio_effects: {
+                    filter_preset_id: "filter_preset_id",
+                    distance: 1.1,
+                    environment_id: "environment_id",
+                    background_noise_id: "background_noise_id",
+                    send_level: 1.1,
+                    seed: 1,
+                },
+            },
+            turn: {
+                turn_timeout: 7,
+                initial_wait_time: 1.1,
+                silence_end_call_timeout: -1,
+                turn_eagerness: "normal",
+                spelling_patience: "auto",
+                speculative_turn: true,
+                retranscribe_on_turn_timeout: true,
+                turn_model: "turn_v2",
+                interruption_ignore_terms: ["interruption_ignore_terms"],
+                interruption_ignore_term_languages: ["interruption_ignore_term_languages"],
+                merge_with_default_ignore_terms: true,
+                transcribe_on_disabled_interruptions: true,
+            },
+            vad: {},
+            conversation: {
+                text_only: true,
+                max_duration_seconds: 600,
+                client_events: ["audio", "interruption", "agent_response", "user_transcript"],
+                file_input: { enabled: true, max_files_in_memory: 1, max_files_per_conversation: 1 },
+                monitoring_enabled: true,
+                monitoring_events: ["conversation_initiation_metadata"],
+                dtmf_input_settings: { dtmf_input_timeout: 1.1, hash_terminator: true, redact_input: true },
+                background_sound: { source_type: "preset", source_id: "office2", volume: 1.1, crossfade_loop: true },
+                source_attribution: true,
+            },
+            privacy: {
+                record_voice: true,
+                retention_days: -1,
+                delete_transcript_and_pii: false,
+                delete_audio: false,
+                apply_to_existing_conversations: false,
+                zero_retention_mode: false,
+                conversation_history_redaction: {
+                    enabled: true,
+                    entities: ["name"],
+                    excluded_data_collection_ids: ["excluded_data_collection_ids"],
+                },
+            },
+            call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
+            language: "en",
+            cascade_timeout_seconds: 4,
+            tags: ["production", "v1"],
+            overrides: { first_message: false },
+            metadata: {
+                created_at_unix_secs: 1714000000,
+                updated_at_unix_secs: 1714000000,
+                created_from: "api",
+                last_updated_from: "api",
+            },
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+                anonymous_access_level_override: "admin",
+                access_source: "creator",
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/speech-engine/seng_3701k3ttaq12ewp8b7qv5rfyszkz/duplicate")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.speechEngine.duplicate("seng_3701k3ttaq12ewp8b7qv5rfyszkz");
+        expect(response).toEqual({
+            speechEngineId: "seng_3701k3ttaq12ewp8b7qv5rfyszkz",
+            name: "My Speech Engine",
+            speechEngine: {
+                wsUrl: "wss://example.com/transcript",
+                requestHeaders: {
+                    key: "value",
+                },
+            },
+            asr: {
+                quality: "high",
+                provider: "elevenlabs",
+                userInputAudioFormat: "pcm_16000",
+                keywords: ["keywords"],
+            },
+            tts: {
+                modelId: "eleven_flash_v2",
+                voiceId: "cjVigY5qzO86Huf0OWal",
+                supportedVoices: [
+                    {
+                        label: "label",
+                        voiceId: "voice_id",
+                    },
+                ],
+                expressiveMode: true,
+                suggestedAudioTags: [
+                    {
+                        tag: "tag",
+                    },
+                ],
+                agentOutputAudioFormat: "pcm_16000",
+                optimizeStreamingLatency: 3,
+                stability: 0.5,
+                speed: 1,
+                similarityBoost: 0.8,
+                textNormalisationType: "system_prompt",
+                pronunciationDictionaryLocators: [
+                    {
+                        pronunciationDictionaryId: "pronunciation_dictionary_id",
+                    },
+                ],
+                enablePhonemeTags: true,
+                audioEffects: {
+                    filterPresetId: "filter_preset_id",
+                    distance: 1.1,
+                    environmentId: "environment_id",
+                    backgroundNoiseId: "background_noise_id",
+                    sendLevel: 1.1,
+                    seed: 1,
+                },
+            },
+            turn: {
+                turnTimeout: 7,
+                initialWaitTime: 1.1,
+                silenceEndCallTimeout: -1,
+                turnEagerness: "normal",
+                spellingPatience: "auto",
+                speculativeTurn: true,
+                retranscribeOnTurnTimeout: true,
+                turnModel: "turn_v2",
+                interruptionIgnoreTerms: ["interruption_ignore_terms"],
+                interruptionIgnoreTermLanguages: ["interruption_ignore_term_languages"],
+                mergeWithDefaultIgnoreTerms: true,
+                transcribeOnDisabledInterruptions: true,
+            },
+            vad: {},
+            conversation: {
+                textOnly: true,
+                maxDurationSeconds: 600,
+                clientEvents: ["audio", "interruption", "agent_response", "user_transcript"],
+                fileInput: {
+                    enabled: true,
+                    maxFilesInMemory: 1,
+                    maxFilesPerConversation: 1,
+                },
+                monitoringEnabled: true,
+                monitoringEvents: ["conversation_initiation_metadata"],
+                dtmfInputSettings: {
+                    dtmfInputTimeout: 1.1,
+                    hashTerminator: true,
+                    redactInput: true,
+                },
+                backgroundSound: {
+                    sourceType: "preset",
+                    sourceId: "office2",
+                    volume: 1.1,
+                    crossfadeLoop: true,
+                },
+                sourceAttribution: true,
+            },
+            privacy: {
+                recordVoice: true,
+                retentionDays: -1,
+                deleteTranscriptAndPii: false,
+                deleteAudio: false,
+                applyToExistingConversations: false,
+                zeroRetentionMode: false,
+                conversationHistoryRedaction: {
+                    enabled: true,
+                    entities: ["name"],
+                    excludedDataCollectionIds: ["excluded_data_collection_ids"],
                 },
             },
             callLimits: {

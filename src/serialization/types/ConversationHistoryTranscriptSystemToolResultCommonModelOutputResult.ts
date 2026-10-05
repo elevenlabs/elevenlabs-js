@@ -18,6 +18,7 @@ import { StartProcedureToolResultSuccessModel } from "./StartProcedureToolResult
 import { TestToolResultModel } from "./TestToolResultModel";
 import { TransferToAgentToolResultErrorModel } from "./TransferToAgentToolResultErrorModel";
 import { TransferToAgentToolResultSuccessModelOutput } from "./TransferToAgentToolResultSuccessModelOutput";
+import { TransferToNumberResultAmazonConnectSuccessModel } from "./TransferToNumberResultAmazonConnectSuccessModel";
 import { TransferToNumberResultErrorModel } from "./TransferToNumberResultErrorModel";
 import { TransferToNumberResultExotelSuccessModel } from "./TransferToNumberResultExotelSuccessModel";
 import { TransferToNumberResultSipSuccessModel } from "./TransferToNumberResultSipSuccessModel";
@@ -44,6 +45,7 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelOutputResul
         testing_tool_result: TestToolResultModel,
         transfer_to_agent_error: TransferToAgentToolResultErrorModel,
         transfer_to_agent_success: TransferToAgentToolResultSuccessModelOutput,
+        transfer_to_number_amazon_connect_success: TransferToNumberResultAmazonConnectSuccessModel,
         transfer_to_number_error: TransferToNumberResultErrorModel,
         transfer_to_number_exotel_success: TransferToNumberResultExotelSuccessModel,
         transfer_to_number_sip_success: TransferToNumberResultSipSuccessModel,
@@ -72,6 +74,7 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TestingToolResult
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToAgentError
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToAgentSuccess
+        | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToNumberAmazonConnectSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToNumberError
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToNumberExotelSuccess
         | ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToNumberSipSuccess
@@ -136,6 +139,10 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
 
     export interface TransferToAgentSuccess extends TransferToAgentToolResultSuccessModelOutput.Raw {
         result_type: "transfer_to_agent_success";
+    }
+
+    export interface TransferToNumberAmazonConnectSuccess extends TransferToNumberResultAmazonConnectSuccessModel.Raw {
+        result_type: "transfer_to_number_amazon_connect_success";
     }
 
     export interface TransferToNumberError extends TransferToNumberResultErrorModel.Raw {

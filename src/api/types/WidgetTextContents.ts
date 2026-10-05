@@ -33,6 +33,10 @@ export interface WidgetTextContents {
     connectingStatus?: string;
     /** Status displayed when the agent is chatting (text only) */
     chattingStatus?: string;
+    /** Status displayed while waiting in the queue for an available agent. */
+    queueWaitingStatus?: string;
+    /** Short status displayed while waiting for an available agent. */
+    queueWaitingStatusShort?: string;
     /** ARIA label for the text message input. */
     inputLabel?: string;
     /** Placeholder text for the text message input. */
@@ -49,6 +53,8 @@ export interface WidgetTextContents {
     conversationId?: string;
     /** Text label used when an error occurs. */
     errorOccurred?: string;
+    /** Error message displayed when the queue wait times out. */
+    queueTimedOut?: string;
     /** Text and ARIA label used for the copy ID button. */
     copyId?: string;
     /** Text displayed to prompt the user for feedback. */
@@ -101,4 +107,6 @@ export interface WidgetTextContents {
     fileLimitReached?: string;
     /** Status text displayed while the agent is typing. */
     typingIndicator?: string;
+    /** Fallback message displayed when rich content cannot be rendered. */
+    richContentUnavailable?: string;
 }

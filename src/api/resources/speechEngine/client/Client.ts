@@ -451,4 +451,93 @@ export class SpeechEngineClient {
             "/v1/speech-engine/{speech_engine_id}",
         );
     }
+
+    /**
+     * Create a new Speech Engine resource by duplicating an existing one
+     *
+     * @param {string} speech_engine_id - The speech engine ID (accepts seng_ or agent_ prefix)
+     * @param {ElevenLabs.DuplicateSpeechEngineRequest} request
+     * @param {SpeechEngineClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.speechEngine.duplicate("seng_3701k3ttaq12ewp8b7qv5rfyszkz")
+     */
+    public duplicate(
+        speech_engine_id: string,
+        request?: ElevenLabs.DuplicateSpeechEngineRequest,
+        requestOptions?: SpeechEngineClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.SpeechEngineResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__duplicate(speech_engine_id, request, requestOptions));
+    }
+
+    private async __duplicate(
+        speech_engine_id: string,
+        request?: ElevenLabs.DuplicateSpeechEngineRequest,
+        requestOptions?: SpeechEngineClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.SpeechEngineResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/speech-engine/${core.url.encodePathParam(speech_engine_id)}/duplicate`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.speechEngine.duplicate.Request.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.SpeechEngineResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/speech-engine/{speech_engine_id}/duplicate",
+        );
+    }
 }

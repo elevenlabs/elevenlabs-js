@@ -31,6 +31,16 @@ describe("VersionsClient", () => {
                 anonymous_access_level_override: "admin",
                 access_source: "creator",
             },
+            merged_authors: [
+                {
+                    is_creator: true,
+                    creator_name: "John Doe",
+                    creator_email: "john.doe@example.com",
+                    role: "admin",
+                    anonymous_access_level_override: "admin",
+                    access_source: "creator",
+                },
+            ],
         };
 
         server
@@ -68,6 +78,16 @@ describe("VersionsClient", () => {
                 anonymousAccessLevelOverride: "admin",
                 accessSource: "creator",
             },
+            mergedAuthors: [
+                {
+                    isCreator: true,
+                    creatorName: "John Doe",
+                    creatorEmail: "john.doe@example.com",
+                    role: "admin",
+                    anonymousAccessLevelOverride: "admin",
+                    accessSource: "creator",
+                },
+            ],
         });
     });
 });

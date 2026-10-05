@@ -7,5 +7,7 @@ export const TtsModelFamily = {
     Flash: "flash",
     Multilingual: "multilingual",
     V3Conversational: "v3_conversational",
+    V4: "v4",
+    V4Turbo: "v4_turbo",
 } as const;
 export type TtsModelFamily = (typeof TtsModelFamily)[keyof typeof TtsModelFamily];

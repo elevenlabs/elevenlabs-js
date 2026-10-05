@@ -14,6 +14,7 @@ export const WorkflowFeaturesUsageCommonModel: core.serialization.ObjectSchema<
     standaloneAgentNode: core.serialization.property("standalone_agent_node", FeatureStatusCommonModel.optional()),
     phoneNumberNode: core.serialization.property("phone_number_node", FeatureStatusCommonModel.optional()),
     endNode: core.serialization.property("end_node", FeatureStatusCommonModel.optional()),
+    overrideAgentNode: core.serialization.property("override_agent_node", FeatureStatusCommonModel.optional()),
 });
 
 export declare namespace WorkflowFeaturesUsageCommonModel {
@@ -23,5 +24,6 @@ export declare namespace WorkflowFeaturesUsageCommonModel {
         standalone_agent_node?: FeatureStatusCommonModel.Raw | null;
         phone_number_node?: FeatureStatusCommonModel.Raw | null;
         end_node?: FeatureStatusCommonModel.Raw | null;
+        override_agent_node?: FeatureStatusCommonModel.Raw | null;
     }
 }

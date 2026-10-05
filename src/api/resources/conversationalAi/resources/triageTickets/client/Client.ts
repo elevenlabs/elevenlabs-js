@@ -25,7 +25,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * List an agent's conversation triage tickets, ordered by most recently created first. These are tickets about the agent's own performance on a conversation (for triage with Architect), not tickets an agent opens for end users.
+     * List an agent's conversation triage tickets, ordered by most recently created first unless sorted by priority. These are tickets about the agent's own performance on a conversation (for triage with Architect), not tickets an agent opens for end users.
      *
      * @param {string} agent_id
      * @param {ElevenLabs.conversationalAi.TriageTicketsListRequest} request
@@ -41,6 +41,8 @@ export class TriageTicketsClient {
      *         conversationId: "conversation_id",
      *         status: "open",
      *         sources: ["qa"],
+     *         priorities: ["low"],
+     *         sortBy: "created_at",
      *         ownerUserId: "owner_user_id",
      *         assigneeUserId: "assignee_user_id",
      *         issueType: "knowledge_gap",
@@ -61,8 +63,19 @@ export class TriageTicketsClient {
         request: ElevenLabs.conversationalAi.TriageTicketsListRequest = {},
         requestOptions?: TriageTicketsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentConversationTicketsPageResponseModel>> {
-        const { pageSize, conversationId, status, sources, ownerUserId, assigneeUserId, issueType, label, cursor } =
-            request;
+        const {
+            pageSize,
+            conversationId,
+            status,
+            sources,
+            priorities,
+            sortBy,
+            ownerUserId,
+            assigneeUserId,
+            issueType,
+            label,
+            cursor,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             page_size: pageSize,
             conversation_id: conversationId,
@@ -77,6 +90,21 @@ export class TriageTicketsClient {
                 : sources != null
                   ? serializers.AgentConversationTicketSource.jsonOrThrow(sources, { unrecognizedObjectKeys: "strip" })
                   : undefined,
+            priorities: Array.isArray(priorities)
+                ? priorities.map((item) =>
+                      serializers.AgentConversationTicketPriority.jsonOrThrow(item, {
+                          unrecognizedObjectKeys: "strip",
+                      }),
+                  )
+                : priorities != null
+                  ? serializers.AgentConversationTicketPriority.jsonOrThrow(priorities, {
+                        unrecognizedObjectKeys: "strip",
+                    })
+                  : undefined,
+            sort_by:
+                sortBy != null
+                    ? serializers.AgentConversationTicketSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
             owner_user_id: ownerUserId,
             assignee_user_id: assigneeUserId,
             issue_type:
@@ -149,7 +177,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * Manually raise a follow-up ticket against an agent, not tied to any conversation (for example a task like 'add the KB about X'). The comment is shown as the ticket title. Requires viewer access to the agent.
+     * Manually raise a follow-up ticket against an agent, not tied to any conversation (for example a task like 'add the KB about X'). Without a title, one is derived from the comment. Requires viewer access to the agent.
      *
      * @param {string} agent_id
      * @param {ElevenLabs.conversationalAi.CreateManualTicketRequestModel} request
@@ -656,7 +684,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * Update a ticket's comment, status, and/or assignee. Requires editor access to the ticket's agent.
+     * Update a ticket's title, comment, status, priority, and/or assignee. Requires editor access to the ticket's agent.
      *
      * @param {string} agentqa_ticket_id
      * @param {ElevenLabs.conversationalAi.PatchAgentConversationTicketRequestModel} request

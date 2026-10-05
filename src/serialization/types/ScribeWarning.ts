@@ -6,13 +6,16 @@ import type * as serializers from "../index";
 
 export const ScribeWarning: core.serialization.ObjectSchema<serializers.ScribeWarning.Raw, ElevenLabs.ScribeWarning> =
     core.serialization.object({
-        messageType: core.serialization.property("message_type", core.serialization.string().optional()),
+        messageType: core.serialization.property(
+            "message_type",
+            core.serialization.stringLiteral("warning").optional(),
+        ),
         warning: core.serialization.string(),
     });
 
 export declare namespace ScribeWarning {
     export interface Raw {
-        message_type?: string | null;
+        message_type?: "warning" | null;
         warning: string;
     }
 }

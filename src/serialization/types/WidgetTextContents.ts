@@ -24,6 +24,11 @@ export const WidgetTextContents: core.serialization.ObjectSchema<
     speakingStatus: core.serialization.property("speaking_status", core.serialization.string().optional()),
     connectingStatus: core.serialization.property("connecting_status", core.serialization.string().optional()),
     chattingStatus: core.serialization.property("chatting_status", core.serialization.string().optional()),
+    queueWaitingStatus: core.serialization.property("queue_waiting_status", core.serialization.string().optional()),
+    queueWaitingStatusShort: core.serialization.property(
+        "queue_waiting_status_short",
+        core.serialization.string().optional(),
+    ),
     inputLabel: core.serialization.property("input_label", core.serialization.string().optional()),
     inputPlaceholder: core.serialization.property("input_placeholder", core.serialization.string().optional()),
     inputPlaceholderTextOnly: core.serialization.property(
@@ -44,6 +49,7 @@ export const WidgetTextContents: core.serialization.ObjectSchema<
     ),
     conversationId: core.serialization.property("conversation_id", core.serialization.string().optional()),
     errorOccurred: core.serialization.property("error_occurred", core.serialization.string().optional()),
+    queueTimedOut: core.serialization.property("queue_timed_out", core.serialization.string().optional()),
     copyId: core.serialization.property("copy_id", core.serialization.string().optional()),
     initiateFeedback: core.serialization.property("initiate_feedback", core.serialization.string().optional()),
     requestFollowUpFeedback: core.serialization.property(
@@ -79,6 +85,10 @@ export const WidgetTextContents: core.serialization.ObjectSchema<
     fileTooLarge: core.serialization.property("file_too_large", core.serialization.string().optional()),
     fileLimitReached: core.serialization.property("file_limit_reached", core.serialization.string().optional()),
     typingIndicator: core.serialization.property("typing_indicator", core.serialization.string().optional()),
+    richContentUnavailable: core.serialization.property(
+        "rich_content_unavailable",
+        core.serialization.string().optional(),
+    ),
 });
 
 export declare namespace WidgetTextContents {
@@ -99,6 +109,8 @@ export declare namespace WidgetTextContents {
         speaking_status?: string | null;
         connecting_status?: string | null;
         chatting_status?: string | null;
+        queue_waiting_status?: string | null;
+        queue_waiting_status_short?: string | null;
         input_label?: string | null;
         input_placeholder?: string | null;
         input_placeholder_text_only?: string | null;
@@ -107,6 +119,7 @@ export declare namespace WidgetTextContents {
         agent_ended_conversation?: string | null;
         conversation_id?: string | null;
         error_occurred?: string | null;
+        queue_timed_out?: string | null;
         copy_id?: string | null;
         initiate_feedback?: string | null;
         request_follow_up_feedback?: string | null;
@@ -133,5 +146,6 @@ export declare namespace WidgetTextContents {
         file_too_large?: string | null;
         file_limit_reached?: string | null;
         typing_indicator?: string | null;
+        rich_content_unavailable?: string | null;
     }
 }
