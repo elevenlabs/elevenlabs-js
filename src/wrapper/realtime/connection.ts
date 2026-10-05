@@ -547,6 +547,23 @@ export class RealtimeConnection {
     }
 
     /**
+     * @internal
+     * Used internally by ScribeRealtime to surface a failure that happens after
+     * connect() has already resolved, such as ffmpeg being unavailable for URL
+     * streaming. Emits the ERROR event when a listener is attached (an unhandled
+     * "error" event would throw), logs otherwise, and closes the connection
+     * because no audio will arrive.
+     */
+    public fail(error: Error): void {
+        if (this.eventEmitter.listenerCount(RealtimeEvents.ERROR) > 0) {
+            this.eventEmitter.emit(RealtimeEvents.ERROR, error);
+        } else {
+            console.error(error);
+        }
+        this.close();
+    }
+
+    /**
      * Attaches an event listener for the specified event.
      *
      * @param event - The event to listen for (use RealtimeEvents enum)
