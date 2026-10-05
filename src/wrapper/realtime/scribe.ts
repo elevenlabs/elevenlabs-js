@@ -124,6 +124,17 @@ interface BaseOptions {
      */
     filterBackgroundAudio?: boolean;
     /**
+     * Opt-in keepalive interval in milliseconds (500-10000). While the streamed audio contains no
+     * speech, the server sends a partial_transcript about this often (empty text, or the latest
+     * partial text if the segment is not committed yet) so clients with a read timeout don't drop
+     * the connection during long pauses.
+     *
+     * @remarks
+     * Audio must keep streaming (silence is fine); keepalives are not sent if audio stops.
+     * Disabled by default.
+     */
+    keepaliveIntervalMs?: number;
+    /**
      * When set to false, zero retention mode is used for the request. History features are
      * unavailable for the request. Zero retention mode may only be used by enterprise customers.
      * @default true
@@ -284,6 +295,10 @@ export class ScribeRealtime {
 
         if (options.filterBackgroundAudio !== undefined) {
             params.append("filter_background_audio", options.filterBackgroundAudio.toString());
+        }
+
+        if (options.keepaliveIntervalMs !== undefined) {
+            params.append("keepalive_interval_ms", options.keepaliveIntervalMs.toString());
         }
 
         if (options.enableLogging !== undefined) {
