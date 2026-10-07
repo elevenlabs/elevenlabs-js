@@ -187,7 +187,7 @@ export class FlowsImageClient extends GeneratedImageClient {
      *
      * @example
      *     const generation = await client.flows.image.createAndWait({
-     *         modelId: "bytedance/seedream-5-lite",
+     *         modelId: "bytedance-seedream-5-lite",
      *         prompt: "A corgi in a tiny lifeguard chair on a sunlit beach at golden hour, photorealistic",
      *     });
      */
