@@ -2,6 +2,7 @@ import type { MusicClient as GeneratedMusic } from "../api/resources/music/clien
 import { ElevenLabsClient as FernClient } from "../Client";
 import type * as core from "../core";
 import * as errors from "../errors";
+import { Flows } from "./flows";
 import { Music } from "./music";
 import { SpeechEngineClientWrapper } from "./speech-engine";
 import { SpeechToText } from "./speechToText";
@@ -22,6 +23,7 @@ export class ElevenLabsClient extends FernClient {
     private _customMusic: Music | undefined;
     private _customSpeechToText: SpeechToText | undefined;
     private _customSpeechEngine: SpeechEngineClientWrapper | undefined;
+    private _customFlows: Flows | undefined;
 
     constructor(options: ElevenLabsClient.Options = {}) {
         const apiKey = options.apiKey ?? process.env.ELEVENLABS_API_KEY;
@@ -63,5 +65,12 @@ export class ElevenLabsClient extends FernClient {
             this._customSpeechEngine = new SpeechEngineClientWrapper(this._options);
         }
         return this._customSpeechEngine;
+    }
+
+    public override get flows(): Flows {
+        if (!this._customFlows) {
+            this._customFlows = new Flows(this._options);
+        }
+        return this._customFlows;
     }
 }
