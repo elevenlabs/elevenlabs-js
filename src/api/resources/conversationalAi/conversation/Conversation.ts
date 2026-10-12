@@ -17,6 +17,71 @@ import {
 } from "./events";
 import { WebSocketFactory, WebSocketInterface, DefaultWebSocketFactory } from "./interfaces/WebSocketInterface";
 import { ConversationClient } from "./interfaces/ConversationClient";
+import { RealtimeAudioConverter } from "./RealtimeAudio";
+import { NativeServerEvent, RealtimeOutgoingEvent, RealtimeProtocolTranslator } from "./RealtimeProtocol";
+import {
+    RealtimeConnectionError,
+    RealtimeEffectiveSession,
+    RealtimeHandshake,
+    RealtimeSessionOptions,
+    handshakeCloseError,
+    initiationMetadataEvent,
+    parseServerEvent,
+    realtimeSubprotocols,
+    validateRealtimeOptions,
+} from "./RealtimeSession";
+
+/** How the conversation connects. `"websocket-realtime"` is experimental. */
+export type ConversationConnectionType = "websocket" | "websocket-realtime";
+
+interface BaseConversationOptions {
+    webSocketFactory?: WebSocketFactory;
+    audioInterface: AudioInterface;
+    clientTools?: ClientTools;
+    callbackAgentResponse?: (response: string) => void;
+    callbackAgentResponseCorrection?: (original: string, corrected: string) => void;
+    callbackUserTranscript?: (transcript: string) => void;
+    callbackLatencyMeasurement?: (latencyMs: number) => void;
+    callbackMessageReceived?: (message: any) => void;
+}
+
+/** Connects to a saved agent. */
+export interface AgentConversationOptions extends BaseConversationOptions {
+    connectionType?: "websocket";
+    client?: ElevenLabsClient;
+    conversationClient?: ConversationClient;
+    agentId: string;
+    requiresAuth: boolean;
+    config?: ConversationInitiationData;
+}
+
+/**
+ * Connects to the OpenAI-compatible `/v1/convai/realtime` endpoint, configured through `realtime`
+ * instead of a saved agent. Contextual updates and multimodal messages are not supported.
+ * @experimental
+ */
+export interface RealtimeConversationOptions extends BaseConversationOptions {
+    connectionType: "websocket-realtime";
+    /** Short-lived secret minted with `POST /v1/convai/realtime/client_secrets`. */
+    clientSecret: string;
+    realtime?: RealtimeSessionOptions;
+    /** Requests text-only responses. */
+    textOnly?: boolean;
+    /** @default "wss://api.elevenlabs.io" */
+    origin?: string;
+    client?: never;
+    conversationClient?: never;
+    agentId?: never;
+    requiresAuth?: never;
+    config?: never;
+}
+
+export type ConversationOptions = AgentConversationOptions | RealtimeConversationOptions;
+
+const DEFAULT_WSS_ORIGIN = "wss://api.elevenlabs.io";
+const REALTIME_HANDSHAKE_TIMEOUT_MS = 10000;
+const MAX_PAYLOAD = 16 * 1024 * 1024;
+const REALTIME_UNSUPPORTED_OPTIONS = ["client", "conversationClient", "agentId", "requiresAuth", "config"] as const;
 
 /**
  * Conversational AI session for Node.js.
@@ -24,14 +89,23 @@ import { ConversationClient } from "./interfaces/ConversationClient";
  * BETA: This API is subject to change without regard to backwards compatibility.
  */
 export class Conversation extends EventEmitter {
-    private client: ElevenLabsClient;
+    private client?: ElevenLabsClient;
     private agentId: string;
     private requiresAuth: boolean;
     private audioInterface: AudioInterface;
     private clientTools: ClientTools;
     private config: ConversationInitiationData;
     private webSocketFactory: WebSocketFactory;
-    private conversationClient: ConversationClient;
+    private conversationClient?: ConversationClient;
+    private connectionType: ConversationConnectionType;
+    private realtimeConfig?: {
+        clientSecret: string;
+        options: RealtimeSessionOptions;
+        textOnly: boolean;
+        origin: string;
+    };
+    private realtimeTranslator?: RealtimeProtocolTranslator;
+    private realtimeAudio?: RealtimeAudioConverter;
 
     // Callback functions
     private callbackAgentResponse?: (response: string) => void;
@@ -47,30 +121,38 @@ export class Conversation extends EventEmitter {
     private lastInterruptId: number = 0;
     private inputCallback?: (audio: Buffer) => void;
 
-    constructor(options: {
-        client?: ElevenLabsClient;
-        conversationClient?: ConversationClient;
-        webSocketFactory?: WebSocketFactory;
-        agentId: string;
-        requiresAuth: boolean;
-        audioInterface: AudioInterface;
-        config?: ConversationInitiationData;
-        clientTools?: ClientTools;
-        callbackAgentResponse?: (response: string) => void;
-        callbackAgentResponseCorrection?: (original: string, corrected: string) => void;
-        callbackUserTranscript?: (transcript: string) => void;
-        callbackLatencyMeasurement?: (latencyMs: number) => void;
-        callbackMessageReceived?: (message: any) => void;
-    }) {
+    constructor(options: ConversationOptions) {
         super();
 
-        this.client = options.client || new ElevenLabsClient();
-        this.agentId = options.agentId;
-        this.requiresAuth = options.requiresAuth;
+        this.connectionType = options.connectionType ?? "websocket";
+        if (options.connectionType === "websocket-realtime") {
+            assertRealtimeOptionsSupported(options);
+            this.agentId = "";
+            this.requiresAuth = false;
+            this.realtimeConfig = {
+                clientSecret: options.clientSecret,
+                options: options.realtime ?? {},
+                textOnly: options.textOnly ?? false,
+                origin: options.origin ?? DEFAULT_WSS_ORIGIN,
+            };
+        } else if (this.connectionType === "websocket") {
+            const agentOptions = options as AgentConversationOptions;
+            this.client = agentOptions.client || new ElevenLabsClient();
+            this.agentId = agentOptions.agentId;
+            this.requiresAuth = agentOptions.requiresAuth;
+            this.conversationClient = agentOptions.conversationClient || this.client;
+        } else {
+            throw new Error(
+                `Unsupported connectionType "${this.connectionType}". Use "websocket" or "websocket-realtime".`,
+            );
+        }
         this.audioInterface = options.audioInterface;
         this.clientTools = options.clientTools || new ClientTools();
-        this.config = options.config || { extraBody: {}, conversationConfigOverride: {}, dynamicVariables: {} };
-        this.conversationClient = options.conversationClient || this.client;
+        this.config = (options.config as ConversationInitiationData | undefined) || {
+            extraBody: {},
+            conversationConfigOverride: {},
+            dynamicVariables: {},
+        };
         this.webSocketFactory = options.webSocketFactory || new DefaultWebSocketFactory();
 
         this.callbackAgentResponse = options.callbackAgentResponse;
@@ -88,6 +170,10 @@ export class Conversation extends EventEmitter {
     public async startSession(): Promise<void> {
         if (this.ws) {
             throw new Error("Session already started");
+        }
+
+        if (this.realtimeConfig) {
+            return this._startRealtimeSession(this.realtimeConfig);
         }
 
         const wsUrl = this.requiresAuth ? await this._getSignedUrl() : this._getWssUrl();
@@ -151,7 +237,7 @@ export class Conversation extends EventEmitter {
             text,
         };
 
-        this.ws.send(JSON.stringify(event));
+        this._sendEvent(event);
     }
 
     /**
@@ -168,7 +254,7 @@ export class Conversation extends EventEmitter {
             type: ClientToOrchestratorEvent.USER_ACTIVITY,
         };
 
-        this.ws.send(JSON.stringify(event));
+        this._sendEvent(event);
     }
 
     /**
@@ -179,6 +265,7 @@ export class Conversation extends EventEmitter {
      * @param options.text Optional text message to include
      * @param options.fileId @deprecated Use `fileIds`.
      * @param options.fileIds Optional ElevenLabs file IDs to include
+     * @throws {RealtimeUnsupportedFeatureError} For websocket-realtime connections.
      */
     public sendMultimodalMessage(options: {
         text?: string;
@@ -202,7 +289,7 @@ export class Conversation extends EventEmitter {
             ...(files.length && { file: files[0], files }),
         };
 
-        this.ws.send(JSON.stringify(event));
+        this._sendEvent(event);
     }
 
     /**
@@ -212,6 +299,7 @@ export class Conversation extends EventEmitter {
      * to update the conversation state without directly prompting the agent.
      *
      * @param text The contextual information to send to the conversation
+     * @throws {RealtimeUnsupportedFeatureError} For websocket-realtime connections.
      */
     public sendContextualUpdate(text: string): void {
         if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
@@ -223,7 +311,7 @@ export class Conversation extends EventEmitter {
             text,
         };
 
-        this.ws.send(JSON.stringify(event));
+        this._sendEvent(event);
     }
 
     /**
@@ -255,31 +343,135 @@ export class Conversation extends EventEmitter {
         };
 
         this.ws!.send(JSON.stringify(initEvent));
+        this._startAudio();
+    }
 
-        // Set up audio input callback
+    private _startAudio(): void {
         this.inputCallback = (audio: Buffer) => {
             if (this.shouldStop || !this.ws || this.ws.readyState !== WebSocket.OPEN) {
                 return;
             }
 
             try {
+                const wireAudio = this.realtimeAudio ? this.realtimeAudio.encodeInput(audio) : audio;
+                if (wireAudio.length === 0) {
+                    return;
+                }
                 const audioEvent: UserAudioChunkEvent = {
-                    user_audio_chunk: audio.toString("base64"),
+                    user_audio_chunk: wireAudio.toString("base64"),
                 };
-                this.ws!.send(JSON.stringify(audioEvent));
+                this._sendEvent(audioEvent);
             } catch (error) {
                 console.error("Error sending user audio chunk:", error);
                 this.endSession();
             }
         };
 
-        // Start audio interface
         this.audioInterface.start(this.inputCallback);
         this.emit("session_started");
     }
 
+    private _startRealtimeSession(config: NonNullable<Conversation["realtimeConfig"]>): Promise<void> {
+        const url = `${config.origin}/v1/convai/realtime?source=js_sdk&version=${SDK_VERSION}`;
+        const ws = this.webSocketFactory.create(
+            url,
+            { perMessageDeflate: false, maxPayload: MAX_PAYLOAD },
+            realtimeSubprotocols(config.clientSecret),
+        );
+        this.ws = ws;
+        const handshake = new RealtimeHandshake(config.options, config.textOnly);
+
+        return new Promise((resolve, reject) => {
+            let settled = false;
+            let failed = false;
+            const timeout = setTimeout(
+                () => fail(new RealtimeConnectionError("Timed out waiting for the Realtime session to be configured.")),
+                REALTIME_HANDSHAKE_TIMEOUT_MS,
+            );
+            const fail = (error: unknown) => {
+                if (settled) return;
+                settled = true;
+                failed = true;
+                clearTimeout(timeout);
+                if (this.ws === ws) this.ws = undefined;
+                ws.close();
+                reject(error);
+            };
+
+            ws.on("message", (data: WebSocket.Data) => {
+                if (settled) {
+                    if (!failed) this._onWebSocketMessage(data);
+                    return;
+                }
+                try {
+                    const reply = handshake.handleMessage(data.toString());
+                    if (reply) ws.send(JSON.stringify(reply));
+                    if (handshake.session) {
+                        settled = true;
+                        clearTimeout(timeout);
+                        this._beginRealtimeSession(handshake.session);
+                        resolve();
+                    }
+                } catch (error) {
+                    fail(error);
+                }
+            });
+
+            ws.on("error", (error: Error) => {
+                if (!settled) {
+                    fail(error);
+                    return;
+                }
+                if (!failed) this.emit("error", error);
+            });
+
+            ws.on("close", (code: number, reason: Buffer) => {
+                if (!settled) {
+                    fail(handshakeCloseError(code, reason.toString() || undefined));
+                    return;
+                }
+                if (!failed) this._onWebSocketClose(code, reason);
+            });
+        });
+    }
+
+    private _beginRealtimeSession(session: RealtimeEffectiveSession): void {
+        this.realtimeTranslator = new RealtimeProtocolTranslator({
+            outputFormat: session.outputFormat,
+            interruptOnSpeech: session.interruptOnSpeech,
+            emit: (event: NativeServerEvent) => this._handleMessage(event),
+            send: (event) => this.ws?.send(JSON.stringify(event)),
+        });
+        this.realtimeAudio = new RealtimeAudioConverter(session.inputFormat, session.outputFormat);
+        this._handleMessage(initiationMetadataEvent(session));
+        this._startAudio();
+    }
+
+    /** Sends a native client event, translating it for websocket-realtime connections. */
+    private _sendEvent(event: RealtimeOutgoingEvent): void {
+        if (this.realtimeTranslator) {
+            this.realtimeTranslator.handleOutgoingEvent(event);
+            return;
+        }
+        this.ws!.send(JSON.stringify(event));
+    }
+
     private _onWebSocketMessage(data: WebSocket.Data): void {
         if (this.shouldStop) {
+            return;
+        }
+
+        if (this.realtimeTranslator) {
+            const event = parseServerEvent(data.toString());
+            if (!event) {
+                console.error("Error parsing WebSocket message:", data.toString());
+                return;
+            }
+            try {
+                this.realtimeTranslator.handleServerEvent(event);
+            } catch (error) {
+                console.error("Error handling WebSocket message:", error);
+            }
             return;
         }
 
@@ -313,7 +505,7 @@ export class Conversation extends EventEmitter {
                     return;
                 }
                 const audio = Buffer.from(audioEvent.audio_base_64, "base64");
-                this.audioInterface.output(audio);
+                this.audioInterface.output(this.realtimeAudio ? this.realtimeAudio.decodeOutput(audio) : audio);
                 break;
 
             case "agent_response":
@@ -369,7 +561,7 @@ export class Conversation extends EventEmitter {
 
                 this.clientTools.executeToolAsync(toolName, parameters, (response) => {
                     if (!this.shouldStop && this.ws && this.ws.readyState === WebSocket.OPEN) {
-                        this.ws.send(JSON.stringify(response));
+                        this._sendEvent(response);
                     }
                 });
                 break;
@@ -391,11 +583,31 @@ export class Conversation extends EventEmitter {
     }
 
     private async _getSignedUrl(): Promise<string> {
-        const response = await this.conversationClient.conversationalAi.conversations.getSignedUrl({
+        const response = await this.conversationClient!.conversationalAi.conversations.getSignedUrl({
             agentId: this.agentId,
         });
         const signedUrl = response.signedUrl;
         const separator = signedUrl.includes("?") ? "&" : "?";
         return `${signedUrl}${separator}source=js_sdk&version=${SDK_VERSION}`;
     }
+}
+
+function assertRealtimeOptionsSupported(options: RealtimeConversationOptions): void {
+    if (!options.clientSecret) {
+        throw new Error(
+            "websocket-realtime connections require a clientSecret, minted with POST /v1/convai/realtime/client_secrets.",
+        );
+    }
+    const record = options as unknown as Record<string, unknown>;
+    const unsupported = REALTIME_UNSUPPORTED_OPTIONS.filter(
+        (key) =>
+            record[key] !== undefined && record[key] !== null && !(key === "requiresAuth" && record[key] === false),
+    );
+    if (unsupported.length > 0) {
+        throw new Error(
+            `websocket-realtime connections do not support: ${unsupported.join(", ")}. ` +
+                "The Realtime endpoint does not load a saved agent; configure the session through the realtime option instead.",
+        );
+    }
+    validateRealtimeOptions(options.realtime ?? {});
 }
