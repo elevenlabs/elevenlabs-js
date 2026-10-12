@@ -45,8 +45,12 @@ export class MockWebSocket extends EventEmitter implements WebSocketInterface {
 
 export class MockWebSocketFactory implements WebSocketFactory {
     private mockWebSocket = new MockWebSocket();
+    public lastUrl?: string;
+    public lastProtocols?: string[];
 
-    create(url: string, options?: any): WebSocketInterface {
+    create(url: string, options?: any, protocols?: string[]): WebSocketInterface {
+        this.lastUrl = url;
+        this.lastProtocols = protocols;
         return this.mockWebSocket;
     }
 
