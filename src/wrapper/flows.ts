@@ -9,7 +9,9 @@ import type { BaseRequestOptions } from "../BaseClient";
 import type * as core from "../core";
 import { ElevenLabsError } from "../errors";
 
-const DEFAULT_MIN_POLL_INTERVAL_SECONDS = 1;
+// Matches the server's shortest `Retry-After` (3s for image, audio and text), so the SDK polls no faster
+// than the server would pace it when the header is missing.
+const DEFAULT_MIN_POLL_INTERVAL_SECONDS = 3;
 const JITTER_FACTOR = 0.2; // 20% positive jitter, matching the fetcher's retry jitter
 
 export declare namespace FlowsWait {
@@ -34,7 +36,7 @@ export declare namespace FlowsWait {
         waitTimeoutInSeconds?: number;
         /**
          * The shortest wait between status checks, in seconds. Also used when the server
-         * sends no `Retry-After` header. Defaults to 1.
+         * sends no `Retry-After` header. Defaults to 3.
          */
         minPollIntervalInSeconds?: number;
     }

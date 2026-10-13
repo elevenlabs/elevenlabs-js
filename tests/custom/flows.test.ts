@@ -91,7 +91,7 @@ describe("flows createAndWait", () => {
         const result = await client.flows.video.createAndWait({ modelId: "bytedance-seedance-v2", prompt: "a corgi" });
 
         expect(result.status).toBe("failed");
-        expect(sleeps).toEqual([1000]);
+        expect(sleeps).toEqual([3000]);
         expect(seen[1]).toEqual({ method: "GET", path: "/v1/flows/video/gen_1" });
     });
 
@@ -122,14 +122,14 @@ describe("flows createAndWait", () => {
 
     it("waits for a template run", async () => {
         const { client, seen } = makeClient([
-            { body: run("pending"), headers: { "Retry-After": "2" } },
+            { body: run("pending"), headers: { "Retry-After": "5" } },
             { body: run("completed") },
         ]);
 
         const result = await client.flows.templates.runs.createAndWait("tpl_1", { inputs: {} });
 
         expect(result.status).toBe("completed");
-        expect(sleeps).toEqual([2000]);
+        expect(sleeps).toEqual([5000]);
         expect(seen).toEqual([
             { method: "POST", path: "/v1/flows/templates/tpl_1/runs" },
             { method: "GET", path: "/v1/flows/templates/tpl_1/runs/run_1" },
