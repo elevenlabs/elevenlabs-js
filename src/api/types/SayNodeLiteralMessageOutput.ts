@@ -3,9 +3,8 @@
 import type * as ElevenLabs from "../index";
 
 export interface SayNodeLiteralMessageOutput {
-    type: "literal";
-    /** Literal text message to be spoken by the agent. */
+    /** Exact text spoken by the agent. Supports `{{variable_name}}` dynamic variable placeholders. */
     text: string;
-    /** Translations for the text field */
+    /** Translations of `text`, keyed by language code. When the conversation language has an entry, its value is spoken instead of `text`. */
     textTranslations: Record<string, ElevenLabs.TranslatedString>;
 }

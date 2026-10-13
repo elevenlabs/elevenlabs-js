@@ -43,4 +43,6 @@ export interface BodyTextToDialogueMultiVoiceV1TextToDialoguePost {
     previousRequestIds?: string[];
     /** A list of request_ids of dialogue generations that come after this one. Useful for maintaining continuity when regenerating a clip in the middle of a sequence. A maximum of 3 request_ids can be sent. The first request_id is the audio which is closest to the current request. Not supported by every model. */
     nextRequestIds?: string[];
+    /** Audio effects applied to the generated audio. Unknown IDs return 404 with `param` naming the field. Reverb (`environment_id` with `send_level` above 0) and a non-zero `pan` produce stereo audio and are rejected with 400 for `ulaw_*`, `alaw_*`, and `pcm_*` output formats. Effects don't change the cost of the request. */
+    audioEffects?: ElevenLabs.EffectsSpecInput;
 }

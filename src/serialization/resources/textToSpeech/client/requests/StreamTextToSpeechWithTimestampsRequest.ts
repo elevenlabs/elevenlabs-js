@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
+import { EffectsSpecInput } from "../../../../types/EffectsSpecInput";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
 import { VoiceSettings } from "../../../../types/VoiceSettings";
 import { BodyTextToSpeechStreamWithTimestampsApplyTextNormalization } from "../../types/BodyTextToSpeechStreamWithTimestampsApplyTextNormalization";
@@ -42,6 +43,7 @@ export const StreamTextToSpeechWithTimestampsRequest: core.serialization.Schema<
         "apply_language_text_normalization",
         core.serialization.boolean().optional(),
     ),
+    audioEffects: core.serialization.property("audio_effects", EffectsSpecInput.optional()),
 });
 
 export declare namespace StreamTextToSpeechWithTimestampsRequest {
@@ -59,5 +61,6 @@ export declare namespace StreamTextToSpeechWithTimestampsRequest {
         use_pvc_as_ivc?: boolean | null;
         apply_text_normalization?: BodyTextToSpeechStreamWithTimestampsApplyTextNormalization.Raw | null;
         apply_language_text_normalization?: boolean | null;
+        audio_effects?: EffectsSpecInput.Raw | null;
     }
 }

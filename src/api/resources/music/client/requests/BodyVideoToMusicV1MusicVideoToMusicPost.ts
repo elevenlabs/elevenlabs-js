@@ -13,7 +13,7 @@ export interface BodyVideoToMusicV1MusicVideoToMusicPost {
      *
      */
     videos: core.file.Uploadable[];
-    /** Optional text description of the music you want. A maximum of 1000 characters is allowed. */
+    /** Optional text description of the music you want. A maximum of 4100 characters is allowed. */
     description?: string;
     /** Optional list of style tags (e.g. ['upbeat', 'cinematic']). A maximum of 10 tags is allowed. */
     tags?: string[];

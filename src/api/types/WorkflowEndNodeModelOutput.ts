@@ -7,4 +7,6 @@ export interface WorkflowEndNodeModelOutput {
     position: ElevenLabs.PositionOutput;
     /** The ids of outgoing edges in the order they should be evaluated. */
     edgeOrder: string[];
+    /** Whether reaching this End node ends the conversation as a success or a failure. */
+    outcome: ElevenLabs.WorkflowEndNodeOutcome;
 }

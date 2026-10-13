@@ -71,7 +71,7 @@ describe("AgentsClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
-                    audio_effects: { distance: 1.1, send_level: 1.1 },
+                    audio_effects: { distance: 1.1, send_level: 1.1, pan: 1.1 },
                 },
                 conversation: {
                     text_only: true,
@@ -294,6 +294,7 @@ describe("AgentsClient", () => {
                     strip_audio_tags: true,
                     syntax_highlight_theme: "light",
                     show_resize_button: true,
+                    end_confirmation_enabled: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -1111,7 +1112,12 @@ describe("AgentsClient", () => {
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
-                    success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
+                    success_end: {
+                        type: "end",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        outcome: "success",
+                    },
                     success_phone: {
                         type: "phone_number",
                         custom_sip_headers: [{ type: "dynamic", value: "value", key: "key" }],
@@ -1132,6 +1138,7 @@ describe("AgentsClient", () => {
                         preserve_client_tts_overrides: true,
                         preserve_voice_settings: true,
                         agent_id: null,
+                        branch_id: null,
                         node_id: null,
                         transfer_message: null,
                     },
@@ -1249,6 +1256,7 @@ describe("AgentsClient", () => {
                     audioEffects: {
                         distance: 1.1,
                         sendLevel: 1.1,
+                        pan: 1.1,
                     },
                 },
                 conversation: {
@@ -1522,6 +1530,7 @@ describe("AgentsClient", () => {
                     stripAudioTags: true,
                     syntaxHighlightTheme: "light",
                     showResizeButton: true,
+                    endConfirmationEnabled: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -2534,6 +2543,7 @@ describe("AgentsClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
+                        outcome: "success",
                     },
                     success_phone: {
                         type: "phone_number",
@@ -2685,7 +2695,7 @@ describe("AgentsClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
-                    audio_effects: { distance: 1.1, send_level: 1.1 },
+                    audio_effects: { distance: 1.1, send_level: 1.1, pan: 1.1 },
                 },
                 conversation: {
                     text_only: true,
@@ -2908,6 +2918,7 @@ describe("AgentsClient", () => {
                     strip_audio_tags: true,
                     syntax_highlight_theme: "light",
                     show_resize_button: true,
+                    end_confirmation_enabled: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -3725,7 +3736,12 @@ describe("AgentsClient", () => {
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
-                    success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
+                    success_end: {
+                        type: "end",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        outcome: "success",
+                    },
                     success_phone: {
                         type: "phone_number",
                         custom_sip_headers: [{ type: "dynamic", value: "value", key: "key" }],
@@ -3746,6 +3762,7 @@ describe("AgentsClient", () => {
                         preserve_client_tts_overrides: true,
                         preserve_voice_settings: true,
                         agent_id: null,
+                        branch_id: null,
                         node_id: null,
                         transfer_message: null,
                     },
@@ -3864,6 +3881,7 @@ describe("AgentsClient", () => {
                     audioEffects: {
                         distance: 1.1,
                         sendLevel: 1.1,
+                        pan: 1.1,
                     },
                 },
                 conversation: {
@@ -4137,6 +4155,7 @@ describe("AgentsClient", () => {
                     stripAudioTags: true,
                     syntaxHighlightTheme: "light",
                     showResizeButton: true,
+                    endConfirmationEnabled: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -5149,6 +5168,7 @@ describe("AgentsClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
+                        outcome: "success",
                     },
                     success_phone: {
                         type: "phone_number",

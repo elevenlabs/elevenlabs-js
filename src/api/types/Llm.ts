@@ -52,6 +52,7 @@ export const Llm = {
     ClaudeSonnet55: "claude-sonnet-5-5",
     ClaudeSonnet4: "claude-sonnet-4",
     ClaudeHaiku45: "claude-haiku-4-5",
+    ClaudeHaiku55: "claude-haiku-5-5",
     Claude37Sonnet: "claude-3-7-sonnet",
     Claude35Sonnet: "claude-3-5-sonnet",
     Claude35SonnetV1: "claude-3-5-sonnet-v1",

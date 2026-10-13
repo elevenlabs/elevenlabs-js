@@ -12,6 +12,7 @@ export const BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch: co
     name: core.serialization.string().optional(),
     isArchived: core.serialization.property("is_archived", core.serialization.boolean().optional()),
     protectionStatus: core.serialization.property("protection_status", BranchProtectionStatus.optional()),
+    autoRebase: core.serialization.property("auto_rebase", core.serialization.boolean().optional()),
 });
 
 export declare namespace BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch {
@@ -19,5 +20,6 @@ export declare namespace BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranc
         name?: string | null;
         is_archived?: boolean | null;
         protection_status?: BranchProtectionStatus.Raw | null;
+        auto_rebase?: boolean | null;
     }
 }

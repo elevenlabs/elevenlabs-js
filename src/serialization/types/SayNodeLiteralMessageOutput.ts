@@ -9,7 +9,6 @@ export const SayNodeLiteralMessageOutput: core.serialization.ObjectSchema<
     serializers.SayNodeLiteralMessageOutput.Raw,
     ElevenLabs.SayNodeLiteralMessageOutput
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("literal"),
     text: core.serialization.string(),
     textTranslations: core.serialization.property(
         "text_translations",
@@ -19,7 +18,6 @@ export const SayNodeLiteralMessageOutput: core.serialization.ObjectSchema<
 
 export declare namespace SayNodeLiteralMessageOutput {
     export interface Raw {
-        type: "literal";
         text: string;
         text_translations: Record<string, TranslatedString.Raw>;
     }

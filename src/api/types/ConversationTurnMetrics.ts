@@ -7,4 +7,5 @@ export interface ConversationTurnMetrics {
     convaiAsrProvider?: string;
     convaiTtsModel?: string;
     convaiTtsCascade?: string;
+    voiceId?: string;
 }

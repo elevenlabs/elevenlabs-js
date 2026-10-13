@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
 import { DialogueInput } from "../../../../types/DialogueInput";
+import { EffectsSpecInput } from "../../../../types/EffectsSpecInput";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
 import { ToDialogueSettingsResponseModel } from "../../../../types/ToDialogueSettingsResponseModel";
 import { BodyTextToDialogueFullWithTimestampsApplyTextNormalization } from "../../types/BodyTextToDialogueFullWithTimestampsApplyTextNormalization";
@@ -36,6 +37,7 @@ export const BodyTextToDialogueFullWithTimestamps: core.serialization.Schema<
     ),
     previousText: core.serialization.property("previous_text", core.serialization.string().optional()),
     futureText: core.serialization.property("future_text", core.serialization.string().optional()),
+    audioEffects: core.serialization.property("audio_effects", EffectsSpecInput.optional()),
 });
 
 export declare namespace BodyTextToDialogueFullWithTimestamps {
@@ -52,5 +54,6 @@ export declare namespace BodyTextToDialogueFullWithTimestamps {
         next_request_ids?: string[] | null;
         previous_text?: string | null;
         future_text?: string | null;
+        audio_effects?: EffectsSpecInput.Raw | null;
     }
 }

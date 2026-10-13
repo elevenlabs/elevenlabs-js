@@ -13,4 +13,6 @@ export interface BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch
     isArchived?: boolean;
     /** The protection level for the branch */
     protectionStatus?: ElevenLabs.BranchProtectionStatus;
+    /** When true, rebase this branch onto main automatically after each new main version. Cannot be enabled on the main branch. */
+    autoRebase?: boolean;
 }

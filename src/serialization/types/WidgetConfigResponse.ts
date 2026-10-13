@@ -86,6 +86,10 @@ export const WidgetConfigResponse: core.serialization.ObjectSchema<
     textContents: core.serialization.property("text_contents", WidgetTextContents.optional()),
     styles: WidgetStyles.optional(),
     showResizeButton: core.serialization.property("show_resize_button", core.serialization.boolean().optional()),
+    endConfirmationEnabled: core.serialization.property(
+        "end_confirmation_enabled",
+        core.serialization.boolean().optional(),
+    ),
     language: core.serialization.string(),
     supportedLanguageOverrides: core.serialization.property(
         "supported_language_overrides",
@@ -149,6 +153,7 @@ export declare namespace WidgetConfigResponse {
         text_contents?: WidgetTextContents.Raw | null;
         styles?: WidgetStyles.Raw | null;
         show_resize_button?: boolean | null;
+        end_confirmation_enabled?: boolean | null;
         language: string;
         supported_language_overrides?: string[] | null;
         language_presets?: Record<string, WidgetLanguagePresetResponse.Raw> | null;

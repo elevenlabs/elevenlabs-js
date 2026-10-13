@@ -524,6 +524,62 @@ await client.audioIsolation.delete("history_item_id");
 </dl>
 </details>
 
+## AudioEffects
+<details><summary><code>client.audioEffects.<a href="/src/api/resources/audioEffects/client/Client.ts">getCatalog</a>() -> ElevenLabs.AudioEffectsCatalogResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the filter presets, reverb environments, and background noises that `audio_effects` can reference in Text to Speech, Text to Dialogue, and agent configurations.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioEffects.getCatalog();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioEffectsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Samples
 <details><summary><code>client.samples.<a href="/src/api/resources/samples/client/Client.ts">delete</a>(voice_id, sample_id) -> ElevenLabs.DeleteSampleResponse</code></summary>
 <dl>
@@ -6894,7 +6950,7 @@ await client.conversationalAi.agents.list({
 <dl>
 <dd>
 
-Create a new agent by duplicating an existing one
+Create a new agent by duplicating an existing one. The new agent gets a copy of every unarchived branch of the source agent, each with the same name and description and starting from the latest version on that branch. Version history, drafts, archived branches and traffic deployments are not copied, so the new agent routes all traffic to its main branch.
 </dd>
 </dl>
 </dd>
@@ -7618,7 +7674,8 @@ await client.conversationalAi.tests.list({
     types: ["llm"],
     includeFolders: true,
     sortMode: "default",
-    sharingMode: "all"
+    sharingMode: "all",
+    createdByUserId: "created_by_user_id"
 });
 
 ```
@@ -7768,6 +7825,8 @@ await client.conversationalAi.triageTickets.list("agent_id", {
     assigneeUserId: "assignee_user_id",
     issueType: "knowledge_gap",
     label: "label",
+    mergedIntoTicketId: "merged_into_ticket_id",
+    search: "search",
     cursor: "cursor"
 });
 
@@ -7898,7 +7957,7 @@ await client.conversationalAi.triageTickets.createManual("agent_id", {
 <dl>
 <dd>
 
-List conversation triage tickets across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, tickets assigned to the caller); for a single agent's tickets, use the per-agent endpoint instead. Tickets for agents the caller cannot access are omitted.
+List conversation triage tickets across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, tickets assigned to the caller). Supports the same filters, sorting and search as the per-agent endpoint. Tickets for agents the caller cannot access are omitted.
 </dd>
 </dl>
 </dd>
@@ -7915,8 +7974,17 @@ List conversation triage tickets across every agent in the workspace, ordered by
 ```typescript
 await client.conversationalAi.triageTickets.listForWorkspace({
     pageSize: 1,
+    agentId: "agent_id",
     status: "open",
+    sources: ["qa"],
+    priorities: ["low"],
+    sortBy: "created_at",
+    ownerUserId: "owner_user_id",
     assigneeUserId: "assignee_user_id",
+    issueType: "knowledge_gap",
+    label: "label",
+    mergedIntoTicketId: "merged_into_ticket_id",
+    search: "search",
     cursor: "cursor"
 });
 
@@ -8333,6 +8401,79 @@ await client.conversationalAi.triageTickets.addComment("agentqa_ticket_id", {
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.AddTicketCommentRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.triageTickets.<a href="/src/api/resources/conversationalAi/resources/triageTickets/client/Client.ts">merge</a>(agentqa_ticket_id, { ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Merge other open tickets of the same agent into this pending, in-progress, or resolved one. Their conversations move onto this ticket, its priority is raised to the highest among them, and they are kept with status 'merged'. Requires viewer access to the ticket's agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.triageTickets.merge("agentqa_ticket_id", {
+    sourceTicketIds: ["source_ticket_ids"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.MergeAgentConversationTicketsRequestModel` 
     
 </dd>
 </dl>
@@ -9282,6 +9423,7 @@ await client.conversationalAi.tools.list({
     types: ["webhook"],
     sortDirection: "asc",
     sortBy: "name",
+    usedByAgentId: "used_by_agent_id",
     cursor: "cursor"
 });
 
@@ -12044,7 +12186,7 @@ await client.conversationalAi.agents.branches.get("agent_3701k3ttaq12ewp8b7qv5rf
 <dl>
 <dd>
 
-Update agent branch properties such as archiving status and protection level
+Update agent branch properties such as archiving status, protection level, and auto-rebase onto main
 </dd>
 </dl>
 </dd>
@@ -18055,6 +18197,10 @@ Lists all test invocations with pagination support and optional search filtering
 await client.conversationalAi.tests.invocations.list({
     agentId: "agent_id",
     branchId: "branch_id",
+    testId: "test_id",
+    startTime: 1,
+    endTime: 1,
+    versionId: "version_id",
     pageSize: 1,
     search: "search",
     cursor: "cursor"
@@ -25357,6 +25503,467 @@ await client.user.subscription.get();
 </dl>
 </details>
 
+## Voices Collections
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">list</a>() -> ElevenLabs.GetUserVoiceCollectionsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns all the voice collections the user has access to, sorted by title.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.UserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new voice collection. The caller becomes its admin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.create({
+    title: "title",
+    icon: "icon"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.BodyCreateVoiceCollectionV1VoicesCollectionsPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">get</a>(collection_id) -> ElevenLabs.UserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a voice collection the user has access to.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.get("collection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string` — Collection ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">delete</a>(collection_id) -> ElevenLabs.DeleteUserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a voice collection. The voices in it are not deleted. Requires admin access to the collection.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.delete("collection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string` — Collection ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">update</a>(collection_id, { ...params }) -> ElevenLabs.UserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the title and icon of a voice collection. Fields that are omitted are left unchanged. Requires editor access to the collection.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.update("collection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string` — Collection ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.BodyUpdateVoiceCollectionV1VoicesCollectionsCollectionIdPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">addVoice</a>(collection_id, voice_id) -> ElevenLabs.AddVoiceToUserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Adds a voice to a voice collection. Adding a voice that is already in the collection succeeds without changes. Requires editor access to the collection.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.addVoice("collection_id", "21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string` — Collection ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**voice_id:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">removeVoice</a>(collection_id, voice_id) -> ElevenLabs.RemoveVoiceFromUserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes a voice from a voice collection. The voice itself is not deleted. Requires editor access to the collection.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.removeVoice("collection_id", "21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string` — Collection ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**voice_id:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Voices Settings
 <details><summary><code>client.voices.settings.<a href="/src/api/resources/voices/resources/settings/client/Client.ts">getDefault</a>() -> ElevenLabs.VoiceSettings</code></summary>
 <dl>
@@ -27786,7 +28393,7 @@ await client.workspace.resources.unshare("resource_id", {
 <dl>
 <dd>
 
-Returns credit usage broken down by product type over time. The response is a tabular structure with columns, column_types, column_units, and rows.
+Returns credit usage broken down by product type over time. The response is a tabular structure with columns, column_types, column_units, and rows. Some id columns also get a display-name column, such as user_label or voice_name, appended after the existing columns.
 </dd>
 </dl>
 </dd>

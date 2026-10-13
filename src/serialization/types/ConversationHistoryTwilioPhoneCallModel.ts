@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { CallResult } from "./CallResult";
 import { TelephonyDirection } from "./TelephonyDirection";
 
 export const ConversationHistoryTwilioPhoneCallModel: core.serialization.ObjectSchema<
@@ -13,6 +14,7 @@ export const ConversationHistoryTwilioPhoneCallModel: core.serialization.ObjectS
     phoneNumberId: core.serialization.property("phone_number_id", core.serialization.string()),
     agentNumber: core.serialization.property("agent_number", core.serialization.string()),
     externalNumber: core.serialization.property("external_number", core.serialization.string()),
+    callResult: core.serialization.property("call_result", CallResult.optional()),
     streamSid: core.serialization.property("stream_sid", core.serialization.string()),
     callSid: core.serialization.property("call_sid", core.serialization.string()),
 });
@@ -23,6 +25,7 @@ export declare namespace ConversationHistoryTwilioPhoneCallModel {
         phone_number_id: string;
         agent_number: string;
         external_number: string;
+        call_result?: CallResult.Raw | null;
         stream_sid: string;
         call_sid: string;
     }

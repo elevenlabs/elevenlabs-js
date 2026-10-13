@@ -28,10 +28,13 @@ describe("TriageTicketsClient", () => {
                     status: "open",
                     priority: "low",
                     priority_changes: [{ changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+                    status_changes: [{ status: "open", changed_at_unix_secs: 1 }],
+                    merged_into_ticket_id: "merged_into_ticket_id",
                     source: "qa",
                     assignee_user_id: "assignee_user_id",
                     created_at_unix_secs: 1,
                     updated_at_unix_secs: 1,
+                    search_match: { field: "title", snippet: "snippet", highlight_start: 1, highlight_end: 1 },
                 },
             ],
             next_cursor: "next_cursor",
@@ -57,6 +60,8 @@ describe("TriageTicketsClient", () => {
             assigneeUserId: "assignee_user_id",
             issueType: "knowledge_gap",
             label: "label",
+            mergedIntoTicketId: "merged_into_ticket_id",
+            search: "search",
             cursor: "cursor",
         });
         expect(response).toEqual({
@@ -95,10 +100,23 @@ describe("TriageTicketsClient", () => {
                             changedAtUnixSecs: 1,
                         },
                     ],
+                    statusChanges: [
+                        {
+                            status: "open",
+                            changedAtUnixSecs: 1,
+                        },
+                    ],
+                    mergedIntoTicketId: "merged_into_ticket_id",
                     source: "qa",
                     assigneeUserId: "assignee_user_id",
                     createdAtUnixSecs: 1,
                     updatedAtUnixSecs: 1,
+                    searchMatch: {
+                        field: "title",
+                        snippet: "snippet",
+                        highlightStart: 1,
+                        highlightEnd: 1,
+                    },
                 },
             ],
             nextCursor: "next_cursor",
@@ -130,10 +148,13 @@ describe("TriageTicketsClient", () => {
             status: "open",
             priority: "low",
             priority_changes: [{ priority: "low", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            status_changes: [{ status: "open", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            merged_into_ticket_id: "merged_into_ticket_id",
             source: "qa",
             assignee_user_id: "assignee_user_id",
             created_at_unix_secs: 1,
             updated_at_unix_secs: 1,
+            search_match: { field: "title", snippet: "snippet", highlight_start: 1, highlight_end: 1, turn_index: 1 },
         };
 
         server
@@ -185,10 +206,25 @@ describe("TriageTicketsClient", () => {
                     changedAtUnixSecs: 1,
                 },
             ],
+            statusChanges: [
+                {
+                    status: "open",
+                    changedByUserId: "changed_by_user_id",
+                    changedAtUnixSecs: 1,
+                },
+            ],
+            mergedIntoTicketId: "merged_into_ticket_id",
             source: "qa",
             assigneeUserId: "assignee_user_id",
             createdAtUnixSecs: 1,
             updatedAtUnixSecs: 1,
+            searchMatch: {
+                field: "title",
+                snippet: "snippet",
+                highlightStart: 1,
+                highlightEnd: 1,
+                turnIndex: 1,
+            },
         });
     });
 
@@ -216,10 +252,13 @@ describe("TriageTicketsClient", () => {
                     status: "open",
                     priority: "low",
                     priority_changes: [{ changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+                    status_changes: [{ status: "open", changed_at_unix_secs: 1 }],
+                    merged_into_ticket_id: "merged_into_ticket_id",
                     source: "qa",
                     assignee_user_id: "assignee_user_id",
                     created_at_unix_secs: 1,
                     updated_at_unix_secs: 1,
+                    search_match: { field: "title", snippet: "snippet", highlight_start: 1, highlight_end: 1 },
                 },
             ],
             next_cursor: "next_cursor",
@@ -236,8 +275,17 @@ describe("TriageTicketsClient", () => {
 
         const response = await client.conversationalAi.triageTickets.listForWorkspace({
             pageSize: 1,
+            agentId: "agent_id",
             status: "open",
+            sources: ["qa"],
+            priorities: ["low"],
+            sortBy: "created_at",
+            ownerUserId: "owner_user_id",
             assigneeUserId: "assignee_user_id",
+            issueType: "knowledge_gap",
+            label: "label",
+            mergedIntoTicketId: "merged_into_ticket_id",
+            search: "search",
             cursor: "cursor",
         });
         expect(response).toEqual({
@@ -276,10 +324,23 @@ describe("TriageTicketsClient", () => {
                             changedAtUnixSecs: 1,
                         },
                     ],
+                    statusChanges: [
+                        {
+                            status: "open",
+                            changedAtUnixSecs: 1,
+                        },
+                    ],
+                    mergedIntoTicketId: "merged_into_ticket_id",
                     source: "qa",
                     assigneeUserId: "assignee_user_id",
                     createdAtUnixSecs: 1,
                     updatedAtUnixSecs: 1,
+                    searchMatch: {
+                        field: "title",
+                        snippet: "snippet",
+                        highlightStart: 1,
+                        highlightEnd: 1,
+                    },
                 },
             ],
             nextCursor: "next_cursor",
@@ -311,10 +372,13 @@ describe("TriageTicketsClient", () => {
             status: "open",
             priority: "low",
             priority_changes: [{ priority: "low", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            status_changes: [{ status: "open", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            merged_into_ticket_id: "merged_into_ticket_id",
             source: "qa",
             assignee_user_id: "assignee_user_id",
             created_at_unix_secs: 1,
             updated_at_unix_secs: 1,
+            search_match: { field: "title", snippet: "snippet", highlight_start: 1, highlight_end: 1, turn_index: 1 },
         };
 
         server
@@ -366,10 +430,25 @@ describe("TriageTicketsClient", () => {
                     changedAtUnixSecs: 1,
                 },
             ],
+            statusChanges: [
+                {
+                    status: "open",
+                    changedByUserId: "changed_by_user_id",
+                    changedAtUnixSecs: 1,
+                },
+            ],
+            mergedIntoTicketId: "merged_into_ticket_id",
             source: "qa",
             assigneeUserId: "assignee_user_id",
             createdAtUnixSecs: 1,
             updatedAtUnixSecs: 1,
+            searchMatch: {
+                field: "title",
+                snippet: "snippet",
+                highlightStart: 1,
+                highlightEnd: 1,
+                turnIndex: 1,
+            },
         });
     });
 
@@ -431,10 +510,13 @@ describe("TriageTicketsClient", () => {
             status: "open",
             priority: "low",
             priority_changes: [{ priority: "low", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            status_changes: [{ status: "open", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            merged_into_ticket_id: "merged_into_ticket_id",
             source: "qa",
             assignee_user_id: "assignee_user_id",
             created_at_unix_secs: 1,
             updated_at_unix_secs: 1,
+            search_match: { field: "title", snippet: "snippet", highlight_start: 1, highlight_end: 1, turn_index: 1 },
         };
 
         server
@@ -483,10 +565,25 @@ describe("TriageTicketsClient", () => {
                     changedAtUnixSecs: 1,
                 },
             ],
+            statusChanges: [
+                {
+                    status: "open",
+                    changedByUserId: "changed_by_user_id",
+                    changedAtUnixSecs: 1,
+                },
+            ],
+            mergedIntoTicketId: "merged_into_ticket_id",
             source: "qa",
             assigneeUserId: "assignee_user_id",
             createdAtUnixSecs: 1,
             updatedAtUnixSecs: 1,
+            searchMatch: {
+                field: "title",
+                snippet: "snippet",
+                highlightStart: 1,
+                highlightEnd: 1,
+                turnIndex: 1,
+            },
         });
     });
 
@@ -529,10 +626,13 @@ describe("TriageTicketsClient", () => {
             status: "open",
             priority: "low",
             priority_changes: [{ priority: "low", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            status_changes: [{ status: "open", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            merged_into_ticket_id: "merged_into_ticket_id",
             source: "qa",
             assignee_user_id: "assignee_user_id",
             created_at_unix_secs: 1,
             updated_at_unix_secs: 1,
+            search_match: { field: "title", snippet: "snippet", highlight_start: 1, highlight_end: 1, turn_index: 1 },
         };
 
         server
@@ -582,10 +682,25 @@ describe("TriageTicketsClient", () => {
                     changedAtUnixSecs: 1,
                 },
             ],
+            statusChanges: [
+                {
+                    status: "open",
+                    changedByUserId: "changed_by_user_id",
+                    changedAtUnixSecs: 1,
+                },
+            ],
+            mergedIntoTicketId: "merged_into_ticket_id",
             source: "qa",
             assigneeUserId: "assignee_user_id",
             createdAtUnixSecs: 1,
             updatedAtUnixSecs: 1,
+            searchMatch: {
+                field: "title",
+                snippet: "snippet",
+                highlightStart: 1,
+                highlightEnd: 1,
+                turnIndex: 1,
+            },
         });
     });
 
@@ -613,10 +728,13 @@ describe("TriageTicketsClient", () => {
             status: "open",
             priority: "low",
             priority_changes: [{ priority: "low", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            status_changes: [{ status: "open", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            merged_into_ticket_id: "merged_into_ticket_id",
             source: "qa",
             assignee_user_id: "assignee_user_id",
             created_at_unix_secs: 1,
             updated_at_unix_secs: 1,
+            search_match: { field: "title", snippet: "snippet", highlight_start: 1, highlight_end: 1, turn_index: 1 },
         };
 
         server
@@ -668,10 +786,129 @@ describe("TriageTicketsClient", () => {
                     changedAtUnixSecs: 1,
                 },
             ],
+            statusChanges: [
+                {
+                    status: "open",
+                    changedByUserId: "changed_by_user_id",
+                    changedAtUnixSecs: 1,
+                },
+            ],
+            mergedIntoTicketId: "merged_into_ticket_id",
             source: "qa",
             assigneeUserId: "assignee_user_id",
             createdAtUnixSecs: 1,
             updatedAtUnixSecs: 1,
+            searchMatch: {
+                field: "title",
+                snippet: "snippet",
+                highlightStart: 1,
+                highlightEnd: 1,
+                turnIndex: 1,
+            },
+        });
+    });
+
+    test("merge", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { source_ticket_ids: ["source_ticket_ids"] };
+        const rawResponseBody = {
+            agentqa_ticket_id: "agentqa_ticket_id",
+            workspace_id: "workspace_id",
+            owner_user_id: "owner_user_id",
+            agent_id: "agent_id",
+            needs_clustering: true,
+            title: "title",
+            issue_type: "knowledge_gap",
+            labels: ["labels"],
+            conversation_ids: ["conversation_ids"],
+            first_seen_unix_secs: 1,
+            last_seen_unix_secs: 1,
+            qa_comment: "qa_comment",
+            ticket_comments: [{ comment: "comment", created_at_unix_secs: 1, owner_user_id: "owner_user_id" }],
+            turn_comments: [
+                { turn_index: 1, comment: "comment", created_at_unix_secs: 1, owner_user_id: "owner_user_id" },
+            ],
+            status: "open",
+            priority: "low",
+            priority_changes: [{ priority: "low", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            status_changes: [{ status: "open", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            merged_into_ticket_id: "merged_into_ticket_id",
+            source: "qa",
+            assignee_user_id: "assignee_user_id",
+            created_at_unix_secs: 1,
+            updated_at_unix_secs: 1,
+            search_match: { field: "title", snippet: "snippet", highlight_start: 1, highlight_end: 1, turn_index: 1 },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/triage-tickets/agentqa_ticket_id/merge")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.triageTickets.merge("agentqa_ticket_id", {
+            sourceTicketIds: ["source_ticket_ids"],
+        });
+        expect(response).toEqual({
+            agentqaTicketId: "agentqa_ticket_id",
+            workspaceId: "workspace_id",
+            ownerUserId: "owner_user_id",
+            agentId: "agent_id",
+            needsClustering: true,
+            title: "title",
+            issueType: "knowledge_gap",
+            labels: ["labels"],
+            conversationIds: ["conversation_ids"],
+            firstSeenUnixSecs: 1,
+            lastSeenUnixSecs: 1,
+            qaComment: "qa_comment",
+            ticketComments: [
+                {
+                    comment: "comment",
+                    createdAtUnixSecs: 1,
+                    ownerUserId: "owner_user_id",
+                },
+            ],
+            turnComments: [
+                {
+                    turnIndex: 1,
+                    comment: "comment",
+                    createdAtUnixSecs: 1,
+                    ownerUserId: "owner_user_id",
+                },
+            ],
+            status: "open",
+            priority: "low",
+            priorityChanges: [
+                {
+                    priority: "low",
+                    changedByUserId: "changed_by_user_id",
+                    changedAtUnixSecs: 1,
+                },
+            ],
+            statusChanges: [
+                {
+                    status: "open",
+                    changedByUserId: "changed_by_user_id",
+                    changedAtUnixSecs: 1,
+                },
+            ],
+            mergedIntoTicketId: "merged_into_ticket_id",
+            source: "qa",
+            assigneeUserId: "assignee_user_id",
+            createdAtUnixSecs: 1,
+            updatedAtUnixSecs: 1,
+            searchMatch: {
+                field: "title",
+                snippet: "snippet",
+                highlightStart: 1,
+                highlightEnd: 1,
+                turnIndex: 1,
+            },
         });
     });
 
@@ -699,10 +936,13 @@ describe("TriageTicketsClient", () => {
             status: "open",
             priority: "low",
             priority_changes: [{ priority: "low", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            status_changes: [{ status: "open", changed_by_user_id: "changed_by_user_id", changed_at_unix_secs: 1 }],
+            merged_into_ticket_id: "merged_into_ticket_id",
             source: "qa",
             assignee_user_id: "assignee_user_id",
             created_at_unix_secs: 1,
             updated_at_unix_secs: 1,
+            search_match: { field: "title", snippet: "snippet", highlight_start: 1, highlight_end: 1, turn_index: 1 },
         };
 
         server
@@ -755,10 +995,25 @@ describe("TriageTicketsClient", () => {
                     changedAtUnixSecs: 1,
                 },
             ],
+            statusChanges: [
+                {
+                    status: "open",
+                    changedByUserId: "changed_by_user_id",
+                    changedAtUnixSecs: 1,
+                },
+            ],
+            mergedIntoTicketId: "merged_into_ticket_id",
             source: "qa",
             assigneeUserId: "assignee_user_id",
             createdAtUnixSecs: 1,
             updatedAtUnixSecs: 1,
+            searchMatch: {
+                field: "title",
+                snippet: "snippet",
+                highlightStart: 1,
+                highlightEnd: 1,
+                turnIndex: 1,
+            },
         });
     });
 });

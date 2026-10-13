@@ -47,6 +47,8 @@ export class TriageTicketsClient {
      *         assigneeUserId: "assignee_user_id",
      *         issueType: "knowledge_gap",
      *         label: "label",
+     *         mergedIntoTicketId: "merged_into_ticket_id",
+     *         search: "search",
      *         cursor: "cursor"
      *     })
      */
@@ -74,6 +76,8 @@ export class TriageTicketsClient {
             assigneeUserId,
             issueType,
             label,
+            mergedIntoTicketId,
+            search,
             cursor,
         } = request;
         const _queryParams: Record<string, unknown> = {
@@ -114,6 +118,8 @@ export class TriageTicketsClient {
                       })
                     : undefined,
             label,
+            merged_into_ticket_id: mergedIntoTicketId,
+            search,
             cursor,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -270,7 +276,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * List conversation triage tickets across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, tickets assigned to the caller); for a single agent's tickets, use the per-agent endpoint instead. Tickets for agents the caller cannot access are omitted.
+     * List conversation triage tickets across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, tickets assigned to the caller). Supports the same filters, sorting and search as the per-agent endpoint. Tickets for agents the caller cannot access are omitted.
      *
      * @param {ElevenLabs.conversationalAi.TriageTicketsListForWorkspaceRequest} request
      * @param {TriageTicketsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -282,8 +288,17 @@ export class TriageTicketsClient {
      * @example
      *     await client.conversationalAi.triageTickets.listForWorkspace({
      *         pageSize: 1,
+     *         agentId: "agent_id",
      *         status: "open",
+     *         sources: ["qa"],
+     *         priorities: ["low"],
+     *         sortBy: "created_at",
+     *         ownerUserId: "owner_user_id",
      *         assigneeUserId: "assignee_user_id",
+     *         issueType: "knowledge_gap",
+     *         label: "label",
+     *         mergedIntoTicketId: "merged_into_ticket_id",
+     *         search: "search",
      *         cursor: "cursor"
      *     })
      */
@@ -298,14 +313,61 @@ export class TriageTicketsClient {
         request: ElevenLabs.conversationalAi.TriageTicketsListForWorkspaceRequest = {},
         requestOptions?: TriageTicketsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentConversationTicketsPageResponseModel>> {
-        const { pageSize, status, assigneeUserId, cursor } = request;
+        const {
+            pageSize,
+            agentId,
+            status,
+            sources,
+            priorities,
+            sortBy,
+            ownerUserId,
+            assigneeUserId,
+            issueType,
+            label,
+            mergedIntoTicketId,
+            search,
+            cursor,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             page_size: pageSize,
+            agent_id: agentId,
             status:
                 status != null
                     ? serializers.AgentConversationTicketStatus.jsonOrThrow(status, { unrecognizedObjectKeys: "strip" })
                     : undefined,
+            sources: Array.isArray(sources)
+                ? sources.map((item) =>
+                      serializers.AgentConversationTicketSource.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
+                  )
+                : sources != null
+                  ? serializers.AgentConversationTicketSource.jsonOrThrow(sources, { unrecognizedObjectKeys: "strip" })
+                  : undefined,
+            priorities: Array.isArray(priorities)
+                ? priorities.map((item) =>
+                      serializers.AgentConversationTicketPriority.jsonOrThrow(item, {
+                          unrecognizedObjectKeys: "strip",
+                      }),
+                  )
+                : priorities != null
+                  ? serializers.AgentConversationTicketPriority.jsonOrThrow(priorities, {
+                        unrecognizedObjectKeys: "strip",
+                    })
+                  : undefined,
+            sort_by:
+                sortBy != null
+                    ? serializers.AgentConversationTicketSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            owner_user_id: ownerUserId,
             assignee_user_id: assigneeUserId,
+            issue_type:
+                issueType != null
+                    ? serializers.AgentConversationTicketIssueType.jsonOrThrow(issueType, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            label,
+            merged_into_ticket_id: mergedIntoTicketId,
+            search,
             cursor,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -864,6 +926,99 @@ export class TriageTicketsClient {
             _response.rawResponse,
             "POST",
             "/v1/convai/triage-tickets/{agentqa_ticket_id}/comments",
+        );
+    }
+
+    /**
+     * Merge other open tickets of the same agent into this pending, in-progress, or resolved one. Their conversations move onto this ticket, its priority is raised to the highest among them, and they are kept with status 'merged'. Requires viewer access to the ticket's agent.
+     *
+     * @param {string} agentqa_ticket_id
+     * @param {ElevenLabs.conversationalAi.MergeAgentConversationTicketsRequestModel} request
+     * @param {TriageTicketsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.triageTickets.merge("agentqa_ticket_id", {
+     *         sourceTicketIds: ["source_ticket_ids"]
+     *     })
+     */
+    public merge(
+        agentqa_ticket_id: string,
+        request: ElevenLabs.conversationalAi.MergeAgentConversationTicketsRequestModel,
+        requestOptions?: TriageTicketsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.AgentConversationTicketResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__merge(agentqa_ticket_id, request, requestOptions));
+    }
+
+    private async __merge(
+        agentqa_ticket_id: string,
+        request: ElevenLabs.conversationalAi.MergeAgentConversationTicketsRequestModel,
+        requestOptions?: TriageTicketsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.AgentConversationTicketResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/triage-tickets/${core.url.encodePathParam(agentqa_ticket_id)}/merge`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.MergeAgentConversationTicketsRequestModel.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.AgentConversationTicketResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/triage-tickets/{agentqa_ticket_id}/merge",
         );
     }
 

@@ -5,6 +5,10 @@
  *     {
  *         agentId: "agent_id",
  *         branchId: "branch_id",
+ *         testId: "test_id",
+ *         startTime: 1,
+ *         endTime: 1,
+ *         versionId: "version_id",
  *         pageSize: 1,
  *         search: "search",
  *         cursor: "cursor"
@@ -15,6 +19,14 @@ export interface InvocationsListRequest {
     agentId?: string;
     /** Filter by branch ID */
     branchId?: string;
+    /** Filter to invocations that include a run of this test id */
+    testId?: string;
+    /** Inclusive lower bound on created_at, in unix seconds */
+    startTime?: number;
+    /** Inclusive upper bound on created_at, in unix seconds */
+    endTime?: number;
+    /** Filter by the agent version the tests ran against */
+    versionId?: string;
     /** How many Tests to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
     /** Search query to filter tests and folders by name. */

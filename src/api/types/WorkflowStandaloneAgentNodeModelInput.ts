@@ -9,6 +9,8 @@ export interface WorkflowStandaloneAgentNodeModelInput {
     edgeOrder?: string[];
     /** The ID of the agent to transfer the conversation to. None means transfer within the current agent. */
     agentId?: string;
+    /** Optional branch ID for the target agent. None follows the target agent's traffic deployment, or uses its main branch when node_id is set. */
+    branchId?: string;
     /** Optional target node ID in the destination agent's workflow. When set, the transfer starts at this node instead of the default entry node. */
     nodeId?: string;
     /** Artificial delay in milliseconds applied before transferring the conversation. */

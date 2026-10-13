@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { TransferBranchInfoConfigured } from "./TransferBranchInfoConfigured";
 import { TransferBranchInfoDefaultingToMain } from "./TransferBranchInfoDefaultingToMain";
 import { TransferBranchInfoTrafficSplit } from "./TransferBranchInfoTrafficSplit";
 
@@ -11,6 +12,7 @@ export const TransferToAgentToolResultSuccessModelInputBranchInfo: core.serializ
     ElevenLabs.TransferToAgentToolResultSuccessModelInputBranchInfo
 > = core.serialization
     .union(core.serialization.discriminant("branchReason", "branch_reason"), {
+        configured: TransferBranchInfoConfigured,
         defaulting_to_main: TransferBranchInfoDefaultingToMain,
         traffic_split: TransferBranchInfoTrafficSplit,
     })
@@ -21,8 +23,13 @@ export const TransferToAgentToolResultSuccessModelInputBranchInfo: core.serializ
 
 export declare namespace TransferToAgentToolResultSuccessModelInputBranchInfo {
     export type Raw =
+        | TransferToAgentToolResultSuccessModelInputBranchInfo.Configured
         | TransferToAgentToolResultSuccessModelInputBranchInfo.DefaultingToMain
         | TransferToAgentToolResultSuccessModelInputBranchInfo.TrafficSplit;
+
+    export interface Configured extends TransferBranchInfoConfigured.Raw {
+        branch_reason: "configured";
+    }
 
     export interface DefaultingToMain extends TransferBranchInfoDefaultingToMain.Raw {
         branch_reason: "defaulting_to_main";

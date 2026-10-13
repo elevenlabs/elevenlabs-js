@@ -132,6 +132,7 @@ describe("WidgetClient", () => {
                     dropdown_sheet_radius: 1.1,
                 },
                 show_resize_button: true,
+                end_confirmation_enabled: true,
                 language: "en",
                 supported_language_overrides: ["es", "fr"],
                 language_presets: { key: {} },
@@ -288,6 +289,7 @@ describe("WidgetClient", () => {
                     dropdownSheetRadius: 1.1,
                 },
                 showResizeButton: true,
+                endConfirmationEnabled: true,
                 language: "en",
                 supportedLanguageOverrides: ["es", "fr"],
                 languagePresets: {

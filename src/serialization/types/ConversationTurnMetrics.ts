@@ -13,6 +13,7 @@ export const ConversationTurnMetrics: core.serialization.ObjectSchema<
     convaiAsrProvider: core.serialization.property("convai_asr_provider", core.serialization.string().optional()),
     convaiTtsModel: core.serialization.property("convai_tts_model", core.serialization.string().optional()),
     convaiTtsCascade: core.serialization.property("convai_tts_cascade", core.serialization.string().optional()),
+    voiceId: core.serialization.property("voice_id", core.serialization.string().optional()),
 });
 
 export declare namespace ConversationTurnMetrics {
@@ -21,5 +22,6 @@ export declare namespace ConversationTurnMetrics {
         convai_asr_provider?: string | null;
         convai_tts_model?: string | null;
         convai_tts_cascade?: string | null;
+        voice_id?: string | null;
     }
 }

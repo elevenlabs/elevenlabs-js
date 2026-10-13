@@ -8,6 +8,7 @@ import { SubscriptionResponse } from "./SubscriptionResponse";
 
 export const User: core.serialization.ObjectSchema<serializers.User.Raw, ElevenLabs.User> = core.serialization.object({
     userId: core.serialization.property("user_id", core.serialization.string()),
+    workspaceId: core.serialization.property("workspace_id", core.serialization.string()),
     subscription: SubscriptionResponse,
     isNewUser: core.serialization.property("is_new_user", core.serialization.boolean()),
     canUseDelayedPaymentMethods: core.serialization.property(
@@ -35,6 +36,7 @@ export const User: core.serialization.ObjectSchema<serializers.User.Raw, ElevenL
 export declare namespace User {
     export interface Raw {
         user_id: string;
+        workspace_id: string;
         subscription: SubscriptionResponse.Raw;
         is_new_user: boolean;
         can_use_delayed_payment_methods: boolean;
