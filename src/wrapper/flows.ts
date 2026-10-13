@@ -16,6 +16,14 @@ export declare namespace FlowsWait {
     /**
      * Options for `createAndWait`. Everything besides the wait options below is passed
      * through as request options to the create call and every status check.
+     *
+     * Between status checks `createAndWait` waits for the number of seconds in the server's
+     * `Retry-After` header, never less than `minPollIntervalInSeconds`. A `failed` result is
+     * returned, not thrown, so check `status`. It is meant for scripts and quickstarts: in
+     * production, set `webhook` on the `create` request and handle the webhook event instead
+     * of holding a process open.
+     *
+     * Throws `FlowsWaitTimeoutError` if `waitTimeoutInSeconds` runs out first.
      */
     interface Options extends BaseRequestOptions {
         /**
@@ -176,13 +184,8 @@ async function createGenerationAndWait<Request>(
 export class FlowsImageClient extends GeneratedImageClient {
     /**
      * Start an image generation and wait until it is `completed` or `failed`, then return the final generation.
-     *
-     * Between status checks this waits for the number of seconds in the server's `Retry-After` header,
-     * never less than `minPollIntervalInSeconds`. This is meant for scripts and quickstarts: in production,
-     * set `webhook` on the request passed to `create` and handle the webhook event instead of holding a process open.
-     *
-     * A `failed` generation is returned, not thrown; check `status` on the result.
-     *
+     * A `failed` generation is returned, not thrown. In production, use a `webhook` instead;
+     * see {@link FlowsWait.Options} for polling, timeouts and webhooks.
      * @throws {FlowsWaitTimeoutError} when `waitTimeoutInSeconds` elapses first.
      *
      * @example
@@ -202,13 +205,8 @@ export class FlowsImageClient extends GeneratedImageClient {
 export class FlowsVideoClient extends GeneratedVideoClient {
     /**
      * Start a video generation and wait until it is `completed` or `failed`, then return the final generation.
-     *
-     * Between status checks this waits for the number of seconds in the server's `Retry-After` header,
-     * never less than `minPollIntervalInSeconds`. This is meant for scripts and quickstarts: in production,
-     * set `webhook` on the request passed to `create` and handle the webhook event instead of holding a process open.
-     *
-     * A `failed` generation is returned, not thrown; check `status` on the result.
-     *
+     * A `failed` generation is returned, not thrown. In production, use a `webhook` instead;
+     * see {@link FlowsWait.Options} for polling, timeouts and webhooks.
      * @throws {FlowsWaitTimeoutError} when `waitTimeoutInSeconds` elapses first.
      */
     public createAndWait(
@@ -222,13 +220,8 @@ export class FlowsVideoClient extends GeneratedVideoClient {
 export class FlowsTextToSpeechClient extends GeneratedTextToSpeechClient {
     /**
      * Start a text-to-speech generation and wait until it is `completed` or `failed`, then return the final generation.
-     *
-     * Between status checks this waits for the number of seconds in the server's `Retry-After` header,
-     * never less than `minPollIntervalInSeconds`. This is meant for scripts and quickstarts: in production,
-     * set `webhook` on the request passed to `create` and handle the webhook event instead of holding a process open.
-     *
-     * A `failed` generation is returned, not thrown; check `status` on the result.
-     *
+     * A `failed` generation is returned, not thrown. In production, use a `webhook` instead;
+     * see {@link FlowsWait.Options} for polling, timeouts and webhooks.
      * @throws {FlowsWaitTimeoutError} when `waitTimeoutInSeconds` elapses first.
      */
     public createAndWait(
@@ -242,14 +235,9 @@ export class FlowsTextToSpeechClient extends GeneratedTextToSpeechClient {
 export class FlowsTemplateRunsClient extends GeneratedRunsClient {
     /**
      * Start a run of a flows template and wait until its `status` is `completed` or `failed`, then return the final run.
-     *
-     * Between status checks this waits for the number of seconds in the server's `Retry-After` header,
-     * never less than `minPollIntervalInSeconds`. This is meant for scripts and quickstarts: in production,
-     * pass `webhook` to `create` and handle the `flows_template_run` webhook instead of holding a process open.
-     *
-     * A `failed` run is returned, not thrown; check `status` on the result and on each output.
-     *
-     * @throws {FlowsWaitTimeoutError} when `waitTimeoutInSeconds` elapses first. It carries `id` and `templateId`.
+     * A `failed` run is returned, not thrown; each output also has its own `status`. In production,
+     * handle the `flows_template_run` webhook instead; see {@link FlowsWait.Options} for polling and timeouts.
+     * @throws {FlowsWaitTimeoutError} when `waitTimeoutInSeconds` elapses first.
      *
      * @example
      *     const run = await client.flows.templates.runs.createAndWait("template_id", {
