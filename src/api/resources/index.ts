@@ -1,5 +1,6 @@
 export * as assets from "./assets";
 export * from "./assets/client/requests";
+export * as audioEffects from "./audioEffects";
 export * as audioIsolation from "./audioIsolation";
 export * from "./audioIsolation/client/requests";
 export * from "./audioIsolation/types";
@@ -71,8 +72,8 @@ export * as v1TextToSpeechVoiceIdMultiStreamInput from "./v1TextToSpeechVoiceIdM
 export * from "./v1TextToSpeechVoiceIdMultiStreamInput/types";
 export * as v1TextToSpeechVoiceIdStreamInput from "./v1TextToSpeechVoiceIdStreamInput";
 export * from "./v1TextToSpeechVoiceIdStreamInput/types";
-export * as v1TranslateRealtime from "./v1TranslateRealtime";
-export * from "./v1TranslateRealtime/types";
+export * as v1TranslationRealtime from "./v1TranslationRealtime";
+export * from "./v1TranslationRealtime/types";
 export * as voices from "./voices";
 export * from "./voices/client/requests";
 export * from "./voices/types";

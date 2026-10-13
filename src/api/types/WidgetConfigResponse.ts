@@ -93,6 +93,8 @@ export interface WidgetConfigResponse {
     styles?: ElevenLabs.WidgetStyles;
     /** Whether to show the resize button */
     showResizeButton?: boolean;
+    /** Whether to ask the user to confirm before ending a chat or call */
+    endConfirmationEnabled?: boolean;
     language: string;
     supportedLanguageOverrides?: string[];
     /** Language presets for the widget */

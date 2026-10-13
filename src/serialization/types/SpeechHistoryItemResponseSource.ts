@@ -19,6 +19,7 @@ export const SpeechHistoryItemResponseSource: core.serialization.Schema<
     "VoiceGeneration",
     "InVPC",
     "Flows",
+    "VoicePreview",
 ]);
 
 export declare namespace SpeechHistoryItemResponseSource {
@@ -33,5 +34,6 @@ export declare namespace SpeechHistoryItemResponseSource {
         | "ConvAI"
         | "VoiceGeneration"
         | "InVPC"
-        | "Flows";
+        | "Flows"
+        | "VoicePreview";
 }

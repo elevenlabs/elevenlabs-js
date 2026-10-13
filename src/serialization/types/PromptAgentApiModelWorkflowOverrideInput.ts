@@ -27,6 +27,7 @@ export const PromptAgentApiModelWorkflowOverrideInput: core.serialization.Object
     temperature: core.serialization.number().optional(),
     maxTokens: core.serialization.property("max_tokens", core.serialization.number().optional()),
     toolIds: core.serialization.property("tool_ids", core.serialization.list(core.serialization.string()).optional()),
+    toolIdsStrict: core.serialization.property("tool_ids_strict", core.serialization.boolean().optional()),
     builtInTools: core.serialization.property("built_in_tools", BuiltInToolsWorkflowOverrideInput.optional()),
     enableParallelToolCalls: core.serialization.property(
         "enable_parallel_tool_calls",
@@ -72,6 +73,7 @@ export declare namespace PromptAgentApiModelWorkflowOverrideInput {
         temperature?: number | null;
         max_tokens?: number | null;
         tool_ids?: string[] | null;
+        tool_ids_strict?: boolean | null;
         built_in_tools?: BuiltInToolsWorkflowOverrideInput.Raw | null;
         enable_parallel_tool_calls?: boolean | null;
         mcp_server_ids?: string[] | null;

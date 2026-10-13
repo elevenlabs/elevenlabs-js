@@ -8,6 +8,8 @@ export const PermissionType = {
     ModelsWrite: "models_write",
     VoicesRead: "voices_read",
     VoicesWrite: "voices_write",
+    VoiceCollectionsRead: "voice_collections_read",
+    VoiceCollectionsWrite: "voice_collections_write",
     SpeechHistoryRead: "speech_history_read",
     SpeechHistoryWrite: "speech_history_write",
     SoundGeneration: "sound_generation",

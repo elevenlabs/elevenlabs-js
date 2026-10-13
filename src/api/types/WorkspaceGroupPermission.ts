@@ -36,6 +36,7 @@ export const WorkspaceGroupPermission = {
     TermsOfServiceAccept: "terms_of_service_accept",
     AuditLogRead: "audit_log_read",
     ConversationPrivacyManage: "conversation_privacy_manage",
+    AllResourcesAccess: "all_resources_access",
     CopyResourcesCrossWorkspace: "copy_resources_cross_workspace",
     VoiceDesign: "voice_design",
 } as const;

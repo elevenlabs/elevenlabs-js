@@ -13,6 +13,8 @@ export const PermissionType: core.serialization.Schema<serializers.PermissionTyp
         "models_write",
         "voices_read",
         "voices_write",
+        "voice_collections_read",
+        "voice_collections_write",
         "speech_history_read",
         "speech_history_write",
         "sound_generation",
@@ -66,6 +68,8 @@ export declare namespace PermissionType {
         | "models_write"
         | "voices_read"
         | "voices_write"
+        | "voice_collections_read"
+        | "voice_collections_write"
         | "speech_history_read"
         | "speech_history_write"
         | "sound_generation"

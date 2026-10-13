@@ -13,6 +13,10 @@ export const UpdateMemberRequest: core.serialization.Schema<
     isLocked: core.serialization.property("is_locked", core.serialization.boolean().optional()),
     workspaceRole: core.serialization.property("workspace_role", SeatType.optional()),
     workspaceSeatType: core.serialization.property("workspace_seat_type", SeatType.optional()),
+    allowDowngradeToBasicSeat: core.serialization.property(
+        "allow_downgrade_to_basic_seat",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace UpdateMemberRequest {
@@ -21,5 +25,6 @@ export declare namespace UpdateMemberRequest {
         is_locked?: boolean | null;
         workspace_role?: SeatType.Raw | null;
         workspace_seat_type?: SeatType.Raw | null;
+        allow_downgrade_to_basic_seat?: boolean | null;
     }
 }

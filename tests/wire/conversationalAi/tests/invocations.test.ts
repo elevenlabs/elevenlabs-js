@@ -53,6 +53,10 @@ describe("InvocationsClient", () => {
         const response = await client.conversationalAi.tests.invocations.list({
             agentId: "agent_id",
             branchId: "branch_id",
+            testId: "test_id",
+            startTime: 1,
+            endTime: 1,
+            versionId: "version_id",
             pageSize: 1,
             search: "search",
             cursor: "cursor",

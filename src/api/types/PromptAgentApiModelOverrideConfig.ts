@@ -7,6 +7,8 @@ export interface PromptAgentApiModelOverrideConfig {
     llm?: boolean;
     /** Whether to allow overriding the tool_ids field. */
     toolIds?: boolean;
+    /** Whether to allow overriding the tool_ids_strict field. */
+    toolIdsStrict?: boolean;
     /** Whether to allow overriding the native_mcp_server_ids field. */
     nativeMcpServerIds?: boolean;
     /** Whether to allow overriding the knowledge_base field. */

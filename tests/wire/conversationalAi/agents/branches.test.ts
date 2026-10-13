@@ -20,6 +20,7 @@ describe("BranchesClient", () => {
                     last_committed_at: 1,
                     is_archived: true,
                     protection_status: "writer_perms_required",
+                    auto_rebase: true,
                     access_info: {
                         is_creator: true,
                         creator_name: "John Doe",
@@ -69,6 +70,7 @@ describe("BranchesClient", () => {
                     lastCommittedAt: 1,
                     isArchived: true,
                     protectionStatus: "writer_perms_required",
+                    autoRebase: true,
                     accessInfo: {
                         isCreator: true,
                         creatorName: "John Doe",
@@ -129,6 +131,7 @@ describe("BranchesClient", () => {
             last_committed_at: 1,
             is_archived: true,
             protection_status: "writer_perms_required",
+            auto_rebase: true,
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -189,6 +192,7 @@ describe("BranchesClient", () => {
             lastCommittedAt: 1,
             isArchived: true,
             protectionStatus: "writer_perms_required",
+            autoRebase: true,
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -245,6 +249,7 @@ describe("BranchesClient", () => {
             last_committed_at: 1,
             is_archived: true,
             protection_status: "writer_perms_required",
+            auto_rebase: true,
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -308,6 +313,7 @@ describe("BranchesClient", () => {
             lastCommittedAt: 1,
             isArchived: true,
             protectionStatus: "writer_perms_required",
+            autoRebase: true,
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -394,7 +400,7 @@ describe("BranchesClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
-                    audio_effects: { distance: 1.1, send_level: 1.1 },
+                    audio_effects: { distance: 1.1, send_level: 1.1, pan: 1.1 },
                 },
                 conversation: {
                     text_only: true,
@@ -617,6 +623,7 @@ describe("BranchesClient", () => {
                     strip_audio_tags: true,
                     syntax_highlight_theme: "light",
                     show_resize_button: true,
+                    end_confirmation_enabled: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -1434,7 +1441,12 @@ describe("BranchesClient", () => {
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
-                    success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
+                    success_end: {
+                        type: "end",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        outcome: "success",
+                    },
                     success_phone: {
                         type: "phone_number",
                         custom_sip_headers: [{ type: "dynamic", value: "value", key: "key" }],
@@ -1455,6 +1467,7 @@ describe("BranchesClient", () => {
                         preserve_client_tts_overrides: true,
                         preserve_voice_settings: true,
                         agent_id: null,
+                        branch_id: null,
                         node_id: null,
                         transfer_message: null,
                     },
@@ -1589,6 +1602,7 @@ describe("BranchesClient", () => {
                     audioEffects: {
                         distance: 1.1,
                         sendLevel: 1.1,
+                        pan: 1.1,
                     },
                 },
                 conversation: {
@@ -1862,6 +1876,7 @@ describe("BranchesClient", () => {
                     stripAudioTags: true,
                     syntaxHighlightTheme: "light",
                     showResizeButton: true,
+                    endConfirmationEnabled: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -2874,6 +2889,7 @@ describe("BranchesClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
+                        outcome: "success",
                     },
                     success_phone: {
                         type: "phone_number",
@@ -3056,7 +3072,7 @@ describe("BranchesClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
-                    audio_effects: { distance: 1.1, send_level: 1.1 },
+                    audio_effects: { distance: 1.1, send_level: 1.1, pan: 1.1 },
                 },
                 conversation: {
                     text_only: true,
@@ -3279,6 +3295,7 @@ describe("BranchesClient", () => {
                     strip_audio_tags: true,
                     syntax_highlight_theme: "light",
                     show_resize_button: true,
+                    end_confirmation_enabled: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -4096,7 +4113,12 @@ describe("BranchesClient", () => {
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
-                    success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
+                    success_end: {
+                        type: "end",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        outcome: "success",
+                    },
                     success_phone: {
                         type: "phone_number",
                         custom_sip_headers: [{ type: "dynamic", value: "value", key: "key" }],
@@ -4117,6 +4139,7 @@ describe("BranchesClient", () => {
                         preserve_client_tts_overrides: true,
                         preserve_voice_settings: true,
                         agent_id: null,
+                        branch_id: null,
                         node_id: null,
                         transfer_message: null,
                     },
@@ -4247,6 +4270,7 @@ describe("BranchesClient", () => {
                     audioEffects: {
                         distance: 1.1,
                         sendLevel: 1.1,
+                        pan: 1.1,
                     },
                 },
                 conversation: {
@@ -4520,6 +4544,7 @@ describe("BranchesClient", () => {
                     stripAudioTags: true,
                     syntaxHighlightTheme: "light",
                     showResizeButton: true,
+                    endConfirmationEnabled: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -5532,6 +5557,7 @@ describe("BranchesClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
+                        outcome: "success",
                     },
                     success_phone: {
                         type: "phone_number",

@@ -9,6 +9,7 @@ export const AgentTransferOutput: core.serialization.ObjectSchema<
     ElevenLabs.AgentTransferOutput
 > = core.serialization.object({
     agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     nodeId: core.serialization.property("node_id", core.serialization.string().optional()),
     condition: core.serialization.string(),
     delayMs: core.serialization.property("delay_ms", core.serialization.number().optional()),
@@ -34,6 +35,7 @@ export const AgentTransferOutput: core.serialization.ObjectSchema<
 export declare namespace AgentTransferOutput {
     export interface Raw {
         agent_id?: string | null;
+        branch_id?: string | null;
         node_id?: string | null;
         condition: string;
         delay_ms?: number | null;

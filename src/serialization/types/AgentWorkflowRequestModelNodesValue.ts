@@ -6,9 +6,11 @@ import type * as serializers from "../index";
 import { WorkflowEndNodeModelInput } from "./WorkflowEndNodeModelInput";
 import { WorkflowOverrideAgentNodeModelInput } from "./WorkflowOverrideAgentNodeModelInput";
 import { WorkflowPhoneNumberNodeModelInput } from "./WorkflowPhoneNumberNodeModelInput";
+import { WorkflowSayNodeModelInput } from "./WorkflowSayNodeModelInput";
 import { WorkflowStandaloneAgentNodeModelInput } from "./WorkflowStandaloneAgentNodeModelInput";
 import { WorkflowStartNodeModelInput } from "./WorkflowStartNodeModelInput";
 import { WorkflowToolNodeModelInput } from "./WorkflowToolNodeModelInput";
+import { WorkflowUpdateStateNodeModelInput } from "./WorkflowUpdateStateNodeModelInput";
 
 export const AgentWorkflowRequestModelNodesValue: core.serialization.Schema<
     serializers.AgentWorkflowRequestModelNodesValue.Raw,
@@ -21,6 +23,8 @@ export const AgentWorkflowRequestModelNodesValue: core.serialization.Schema<
         standalone_agent: WorkflowStandaloneAgentNodeModelInput,
         start: WorkflowStartNodeModelInput,
         tool: WorkflowToolNodeModelInput,
+        say: WorkflowSayNodeModelInput,
+        update_state: WorkflowUpdateStateNodeModelInput,
     })
     .transform<ElevenLabs.AgentWorkflowRequestModelNodesValue>({
         transform: (value) => value,
@@ -34,7 +38,9 @@ export declare namespace AgentWorkflowRequestModelNodesValue {
         | AgentWorkflowRequestModelNodesValue.PhoneNumber
         | AgentWorkflowRequestModelNodesValue.StandaloneAgent
         | AgentWorkflowRequestModelNodesValue.Start
-        | AgentWorkflowRequestModelNodesValue.Tool;
+        | AgentWorkflowRequestModelNodesValue.Tool
+        | AgentWorkflowRequestModelNodesValue.Say
+        | AgentWorkflowRequestModelNodesValue.UpdateState;
 
     export interface End extends WorkflowEndNodeModelInput.Raw {
         type: "end";
@@ -58,5 +64,13 @@ export declare namespace AgentWorkflowRequestModelNodesValue {
 
     export interface Tool extends WorkflowToolNodeModelInput.Raw {
         type: "tool";
+    }
+
+    export interface Say extends WorkflowSayNodeModelInput.Raw {
+        type: "say";
+    }
+
+    export interface UpdateState extends WorkflowUpdateStateNodeModelInput.Raw {
+        type: "update_state";
     }
 }

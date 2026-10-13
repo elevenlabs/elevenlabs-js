@@ -587,6 +587,7 @@ describe("TestsClient", () => {
             includeFolders: true,
             sortMode: "default",
             sharingMode: "all",
+            createdByUserId: "created_by_user_id",
         });
         expect(response).toEqual({
             tests: [

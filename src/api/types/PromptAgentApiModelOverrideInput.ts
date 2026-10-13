@@ -9,6 +9,8 @@ export interface PromptAgentApiModelOverrideInput {
     llm?: ElevenLabs.Llm;
     /** A list of IDs of tools used by the agent */
     toolIds?: string[];
+    /** Only applies as a conversation override, allowed whenever tool_ids may be overridden. When true, the overridden tool_ids is the full list of tools allowed in the conversation, including tools on workflow nodes. Ignored when set on the agent. */
+    toolIdsStrict?: boolean;
     /** A list of Native MCP server ids to be used by the agent */
     nativeMcpServerIds?: string[];
     /** A list of knowledge bases to be used by the agent */

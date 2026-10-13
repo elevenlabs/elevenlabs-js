@@ -562,7 +562,8 @@ export class TestsClient {
      *         types: ["llm"],
      *         includeFolders: true,
      *         sortMode: "default",
-     *         sharingMode: "all"
+     *         sharingMode: "all",
+     *         createdByUserId: "created_by_user_id"
      *     })
      */
     public list(
@@ -576,7 +577,17 @@ export class TestsClient {
         request: ElevenLabs.conversationalAi.TestsListRequest = {},
         requestOptions?: TestsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetTestsPageResponseModel>> {
-        const { cursor, pageSize, search, parentFolderId, types, includeFolders, sortMode, sharingMode } = request;
+        const {
+            cursor,
+            pageSize,
+            search,
+            parentFolderId,
+            types,
+            includeFolders,
+            sortMode,
+            sharingMode,
+            createdByUserId,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             cursor,
             page_size: pageSize,
@@ -598,6 +609,7 @@ export class TestsClient {
                 sharingMode != null
                     ? serializers.TestSharingMode.jsonOrThrow(sharingMode, { unrecognizedObjectKeys: "strip" })
                     : undefined,
+            created_by_user_id: createdByUserId,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

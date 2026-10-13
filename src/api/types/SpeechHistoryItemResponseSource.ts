@@ -12,6 +12,7 @@ export const SpeechHistoryItemResponseSource = {
     VoiceGeneration: "VoiceGeneration",
     InVpc: "InVPC",
     Flows: "Flows",
+    VoicePreview: "VoicePreview",
 } as const;
 export type SpeechHistoryItemResponseSource =
     (typeof SpeechHistoryItemResponseSource)[keyof typeof SpeechHistoryItemResponseSource];

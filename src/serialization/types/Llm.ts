@@ -56,6 +56,7 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "claude-sonnet-5-5",
     "claude-sonnet-4",
     "claude-haiku-4-5",
+    "claude-haiku-5-5",
     "claude-3-7-sonnet",
     "claude-3-5-sonnet",
     "claude-3-5-sonnet-v1",
@@ -167,6 +168,7 @@ export declare namespace Llm {
         | "claude-sonnet-5-5"
         | "claude-sonnet-4"
         | "claude-haiku-4-5"
+        | "claude-haiku-5-5"
         | "claude-3-7-sonnet"
         | "claude-3-5-sonnet"
         | "claude-3-5-sonnet-v1"

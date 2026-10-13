@@ -6,18 +6,45 @@ import type * as ElevenLabs from "../../../../../../index";
  * @example
  *     {
  *         pageSize: 1,
+ *         agentId: "agent_id",
  *         status: "open",
+ *         sources: ["qa"],
+ *         priorities: ["low"],
+ *         sortBy: "created_at",
+ *         ownerUserId: "owner_user_id",
  *         assigneeUserId: "assignee_user_id",
+ *         issueType: "knowledge_gap",
+ *         label: "label",
+ *         mergedIntoTicketId: "merged_into_ticket_id",
+ *         search: "search",
  *         cursor: "cursor"
  *     }
  */
 export interface TriageTicketsListForWorkspaceRequest {
     /** How many agent conversation tickets to return. Can not exceed 100. */
     pageSize?: number;
+    /** Only tickets for this agent. */
+    agentId?: string;
     /** Filter tickets by status. */
     status?: ElevenLabs.AgentConversationTicketStatus;
+    /** Filter tickets by how they were raised (qa, agent, manual). Repeat the parameter to filter by multiple sources. */
+    sources?: ElevenLabs.AgentConversationTicketSource | ElevenLabs.AgentConversationTicketSource[];
+    /** Filter tickets by priority. Repeat the parameter to filter by multiple priorities. */
+    priorities?: ElevenLabs.AgentConversationTicketPriority | ElevenLabs.AgentConversationTicketPriority[];
+    /** Order by most recently created, or by priority (most urgent first, then most recently created). */
+    sortBy?: ElevenLabs.AgentConversationTicketSortBy;
+    /** Filter tickets by creator. Use 'agent' for agent-raised tickets. */
+    ownerUserId?: string;
     /** Filter tickets by assignee. Use 'unassigned' for tickets with no assignee. */
     assigneeUserId?: string;
+    /** Filter clusters by issue type. */
+    issueType?: ElevenLabs.AgentConversationTicketIssueType;
+    /** Filter tickets by an exact label. */
+    label?: string;
+    /** Filter tickets merged into this ticket. */
+    mergedIntoTicketId?: string;
+    /** Case-insensitive free-text search across the ticket's title, description, comments, and turn comments. */
+    search?: string;
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
 }

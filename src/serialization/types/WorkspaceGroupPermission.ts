@@ -43,6 +43,7 @@ export const WorkspaceGroupPermission: core.serialization.Schema<
     "terms_of_service_accept",
     "audit_log_read",
     "conversation_privacy_manage",
+    "all_resources_access",
     "copy_resources_cross_workspace",
     "voice_design",
 ]);
@@ -84,6 +85,7 @@ export declare namespace WorkspaceGroupPermission {
         | "terms_of_service_accept"
         | "audit_log_read"
         | "conversation_privacy_manage"
+        | "all_resources_access"
         | "copy_resources_cross_workspace"
         | "voice_design";
 }

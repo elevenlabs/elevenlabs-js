@@ -4,11 +4,11 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 
-export const GenerationChunkOutputConditionStrength: core.serialization.Schema<
-    serializers.GenerationChunkOutputConditionStrength.Raw,
-    ElevenLabs.GenerationChunkOutputConditionStrength
+export const ConditionStrength: core.serialization.Schema<
+    serializers.ConditionStrength.Raw,
+    ElevenLabs.ConditionStrength
 > = core.serialization.enum_(["low", "medium", "high", "xhigh"]);
 
-export declare namespace GenerationChunkOutputConditionStrength {
+export declare namespace ConditionStrength {
     export type Raw = "low" | "medium" | "high" | "xhigh";
 }

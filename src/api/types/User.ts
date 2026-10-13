@@ -5,6 +5,8 @@ import type * as ElevenLabs from "../index";
 export interface User {
     /** The unique identifier of the user. */
     userId: string;
+    /** The unique identifier of the workspace this user's API key belongs to. */
+    workspaceId: string;
     /** Details of the user's subscription. */
     subscription: ElevenLabs.SubscriptionResponse;
     /** Whether the user is new. This field is deprecated and will be removed in the future. Use 'created_at' instead. */

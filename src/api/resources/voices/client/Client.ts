@@ -12,6 +12,7 @@ import * as errors from "../../../../errors/index";
 import * as serializers from "../../../../serialization/index";
 import * as ElevenLabs from "../../../index";
 import { AccentsClient } from "../resources/accents/client/Client";
+import { CollectionsClient } from "../resources/collections/client/Client";
 import { IvcClient } from "../resources/ivc/client/Client";
 import { PvcClient } from "../resources/pvc/client/Client";
 import { SamplesClient } from "../resources/samples/client/Client";
@@ -25,6 +26,7 @@ export declare namespace VoicesClient {
 
 export class VoicesClient {
     protected readonly _options: NormalizedClientOptions<VoicesClient.Options>;
+    protected _collections: CollectionsClient | undefined;
     protected _settings: SettingsClient | undefined;
     protected _accents: AccentsClient | undefined;
     protected _ivc: IvcClient | undefined;
@@ -33,6 +35,10 @@ export class VoicesClient {
 
     constructor(options: VoicesClient.Options = {}) {
         this._options = normalizeClientOptions(options);
+    }
+
+    public get collections(): CollectionsClient {
+        return (this._collections ??= new CollectionsClient(this._options));
     }
 
     public get settings(): SettingsClient {

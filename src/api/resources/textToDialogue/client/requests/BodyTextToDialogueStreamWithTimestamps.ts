@@ -45,4 +45,6 @@ export interface BodyTextToDialogueStreamWithTimestamps {
     previousText?: string;
     /** The text that comes immediately after this generation, used to condition the model for prosodic continuity. A maximum of 100 characters can be sent. Not supported by every model. */
     futureText?: string;
+    /** Audio effects applied to the generated audio. Unknown IDs return 404 with `param` naming the field. Reverb (`environment_id` with `send_level` above 0) and a non-zero `pan` produce stereo audio and are rejected with 400 for `ulaw_*`, `alaw_*`, and `pcm_*` output formats. Effects don't change the cost of the request. */
+    audioEffects?: ElevenLabs.EffectsSpecInput;
 }

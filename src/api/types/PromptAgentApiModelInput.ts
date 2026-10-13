@@ -19,6 +19,8 @@ export interface PromptAgentApiModelInput {
     maxTokens?: number;
     /** A list of IDs of tools used by the agent */
     toolIds?: string[];
+    /** Only applies as a conversation override, allowed whenever tool_ids may be overridden. When true, the overridden tool_ids is the full list of tools allowed in the conversation, including tools on workflow nodes. Ignored when set on the agent. */
+    toolIdsStrict?: boolean;
     /** Built-in system tools to be used by the agent */
     builtInTools?: ElevenLabs.BuiltInToolsInput;
     /** Enable parallel tool calling. When enabled, the agent can execute multiple tools in parallel within a single turn. Not supported by all models. */
