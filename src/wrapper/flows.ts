@@ -12,6 +12,8 @@ import { ElevenLabsError } from "../errors";
 // Matches the server's shortest `Retry-After` (3s for image, audio and text), so the SDK polls no faster
 // than the server would pace it when the header is missing.
 const DEFAULT_MIN_POLL_INTERVAL_SECONDS = 3;
+// Below this, a missing server hint would turn the wait into a tight loop of status checks.
+const SMALLEST_MIN_POLL_INTERVAL_SECONDS = 0.5;
 const JITTER_FACTOR = 0.2; // 20% positive jitter, matching the fetcher's retry jitter
 
 export declare namespace FlowsWait {
@@ -36,7 +38,7 @@ export declare namespace FlowsWait {
         waitTimeoutInSeconds?: number;
         /**
          * The shortest wait between status checks, in seconds. Also used when the server
-         * sends no `Retry-After` header. Defaults to 3.
+         * sends no `Retry-After` header. Defaults to 3; must be at least 0.5.
          */
         minPollIntervalInSeconds?: number;
     }
@@ -85,8 +87,9 @@ function parseRetryAfterSeconds(headers: Headers): number | undefined {
     if (/^\s*\d+\s*$/.test(retryAfter)) {
         return parseInt(retryAfter, 10);
     }
-    const retryAfterDate = new Date(retryAfter);
-    if (!Number.isNaN(retryAfterDate.getTime())) {
+    // An HTTP date always names the weekday; this keeps values like "-5" from parsing as a year.
+    const retryAfterDate = /[a-z]/i.test(retryAfter) ? new Date(retryAfter) : undefined;
+    if (retryAfterDate != null && !Number.isNaN(retryAfterDate.getTime())) {
         return Math.max((retryAfterDate.getTime() - Date.now()) / 1000, 0);
     }
     return undefined;
@@ -114,12 +117,17 @@ function splitOptions(options: FlowsWait.Options | undefined): {
     waitTimeoutInSeconds: number | undefined;
     minPollIntervalInSeconds: number;
 } {
-    const { waitTimeoutInSeconds, minPollIntervalInSeconds, ...requestOptions } = options ?? {};
-    return {
-        requestOptions,
+    const {
         waitTimeoutInSeconds,
-        minPollIntervalInSeconds: minPollIntervalInSeconds ?? DEFAULT_MIN_POLL_INTERVAL_SECONDS,
-    };
+        minPollIntervalInSeconds = DEFAULT_MIN_POLL_INTERVAL_SECONDS,
+        ...requestOptions
+    } = options ?? {};
+    if (!(minPollIntervalInSeconds >= SMALLEST_MIN_POLL_INTERVAL_SECONDS)) {
+        throw new RangeError(
+            `minPollIntervalInSeconds must be at least ${SMALLEST_MIN_POLL_INTERVAL_SECONDS}, got ${minPollIntervalInSeconds}`,
+        );
+    }
+    return { requestOptions, waitTimeoutInSeconds, minPollIntervalInSeconds };
 }
 
 async function waitUntilTerminal<T extends { id: string; status: string }>(args: {
@@ -155,6 +163,11 @@ async function waitUntilTerminal<T extends { id: string; status: string }>(args:
     return response as T;
 }
 
+/** What `createAndWait` returns for a generation: always `completed` or `failed`, never in progress. */
+export type TerminalMediaGenerationResponse =
+    | ElevenLabs.MediaGenerationResponse.Completed
+    | ElevenLabs.MediaGenerationResponse.Failed;
+
 type GenerationClient<Request> = {
     create(
         request: Request,
@@ -170,17 +183,18 @@ async function createGenerationAndWait<Request>(
     client: GenerationClient<Request>,
     request: Request,
     options: FlowsWait.Options | undefined,
-): Promise<ElevenLabs.MediaGenerationResponse> {
+): Promise<TerminalMediaGenerationResponse> {
     const { requestOptions, waitTimeoutInSeconds, minPollIntervalInSeconds } = splitOptions(options);
     const startedAt = Date.now();
     const first = await client.create(request, requestOptions).withRawResponse();
-    return waitUntilTerminal({
+    const generation = await waitUntilTerminal({
         first,
         get: (id) => client.get(id, requestOptions),
         startedAt,
         waitTimeoutInSeconds,
         minPollIntervalInSeconds,
     });
+    return generation as TerminalMediaGenerationResponse;
 }
 
 export class FlowsImageClient extends GeneratedImageClient {
@@ -199,7 +213,7 @@ export class FlowsImageClient extends GeneratedImageClient {
     public createAndWait(
         request: ElevenLabs.ImageGenerationRequest,
         options?: FlowsWait.Options,
-    ): Promise<ElevenLabs.MediaGenerationResponse> {
+    ): Promise<TerminalMediaGenerationResponse> {
         return createGenerationAndWait(this, request, options);
     }
 }
@@ -214,7 +228,7 @@ export class FlowsVideoClient extends GeneratedVideoClient {
     public createAndWait(
         request: ElevenLabs.VideoGenerationRequest,
         options?: FlowsWait.Options,
-    ): Promise<ElevenLabs.MediaGenerationResponse> {
+    ): Promise<TerminalMediaGenerationResponse> {
         return createGenerationAndWait(this, request, options);
     }
 }
@@ -229,7 +243,7 @@ export class FlowsTextToSpeechClient extends GeneratedTextToSpeechClient {
     public createAndWait(
         request: ElevenLabs.TextToSpeechGenerationRequest,
         options?: FlowsWait.Options,
-    ): Promise<ElevenLabs.MediaGenerationResponse> {
+    ): Promise<TerminalMediaGenerationResponse> {
         return createGenerationAndWait(this, request, options);
     }
 }

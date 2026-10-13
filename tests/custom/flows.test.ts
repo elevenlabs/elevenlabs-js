@@ -57,6 +57,7 @@ describe("flows createAndWait", () => {
         expect(pollDelayMs(new Headers(), 2)).toBe(2000);
         expect(pollDelayMs(new Headers({ "Retry-After": "0" }), 2)).toBe(2000);
         expect(pollDelayMs(new Headers({ "Retry-After": "garbage" }), 2)).toBe(2000);
+        expect(pollDelayMs(new Headers({ "Retry-After": "-5" }), 2)).toBe(2000);
         jest.spyOn(Math, "random").mockReturnValue(0.5);
         expect(pollDelayMs(new Headers({ "Retry-After": "10" }), 1)).toBe(11000);
     });
@@ -144,6 +145,18 @@ describe("flows createAndWait", () => {
         expect(result.status).toBe("completed");
         expect(sleeps).toEqual([]);
         expect(seen).toHaveLength(1);
+    });
+
+    it("rejects a minPollIntervalInSeconds below 0.5 before any request", async () => {
+        const { client, seen } = makeClient([]);
+
+        await expect(
+            client.flows.image.createAndWait(
+                { modelId: "bytedance-seedream-5-lite", prompt: "a corgi" },
+                { minPollIntervalInSeconds: 0 },
+            ),
+        ).rejects.toThrow(RangeError);
+        expect(seen).toEqual([]);
     });
 
     it("carries templateId on a template run timeout", async () => {
