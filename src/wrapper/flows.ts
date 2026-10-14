@@ -32,8 +32,8 @@ export declare namespace FlowsWait {
     interface Options extends BaseRequestOptions {
         /**
          * Seconds to wait in total before throwing `FlowsWaitTimeoutError`, which carries the
-         * generation or run id so you can resume with `get`. Waits indefinitely when omitted;
-         * must be finite and at least 0 when set.
+         * generation or run id so you can resume with `get`. Waits indefinitely when omitted
+         * or `Infinity`; must be at least 0 when set.
          * Not to be confused with `timeoutInSeconds`, which limits each HTTP request.
          */
         waitTimeoutInSeconds?: number;
@@ -132,8 +132,9 @@ function splitOptions(options: FlowsWait.Options | undefined): {
             `minPollIntervalInSeconds must be at least ${SMALLEST_MIN_POLL_INTERVAL_SECONDS}, got ${minPollIntervalInSeconds}`,
         );
     }
-    if (waitTimeoutInSeconds != null && !(Number.isFinite(waitTimeoutInSeconds) && waitTimeoutInSeconds >= 0)) {
-        throw new RangeError(`waitTimeoutInSeconds must be a finite number of at least 0, got ${waitTimeoutInSeconds}`);
+    // Infinity is allowed and means the same as omitting it; NaN would make every sleep ~1ms.
+    if (waitTimeoutInSeconds != null && !(waitTimeoutInSeconds >= 0)) {
+        throw new RangeError(`waitTimeoutInSeconds must be at least 0, got ${waitTimeoutInSeconds}`);
     }
     return { requestOptions, waitTimeoutInSeconds, minPollIntervalInSeconds };
 }

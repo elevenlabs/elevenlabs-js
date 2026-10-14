@@ -166,7 +166,6 @@ describe("flows createAndWait", () => {
         { minPollIntervalInSeconds: Number.POSITIVE_INFINITY },
         { minPollIntervalInSeconds: Number.NaN },
         { waitTimeoutInSeconds: Number.NaN },
-        { waitTimeoutInSeconds: Number.POSITIVE_INFINITY },
         { waitTimeoutInSeconds: -1 },
     ])("rejects non-finite or negative wait options %p before any request", async (options) => {
         const { client, seen } = makeClient([]);
@@ -175,6 +174,21 @@ describe("flows createAndWait", () => {
             client.flows.image.createAndWait({ modelId: "bytedance-seedream-5-lite", prompt: "a corgi" }, options),
         ).rejects.toThrow(RangeError);
         expect(seen).toEqual([]);
+    });
+
+    it("treats an infinite waitTimeoutInSeconds as no timeout", async () => {
+        const { client } = makeClient([
+            { body: { id: "gen_1", status: "pending" }, headers: { "Retry-After": "5" } },
+            { body: COMPLETED_IMAGE },
+        ]);
+
+        const result = await client.flows.image.createAndWait(
+            { modelId: "bytedance-seedream-5-lite", prompt: "a corgi" },
+            { waitTimeoutInSeconds: Number.POSITIVE_INFINITY },
+        );
+
+        expect(result.status).toBe("completed");
+        expect(sleeps).toEqual([5000]);
     });
 
     it("carries templateId on a template run timeout", async () => {
