@@ -32,13 +32,14 @@ export declare namespace FlowsWait {
     interface Options extends BaseRequestOptions {
         /**
          * Seconds to wait in total before throwing `FlowsWaitTimeoutError`, which carries the
-         * generation or run id so you can resume with `get`. Waits indefinitely when omitted.
+         * generation or run id so you can resume with `get`. Waits indefinitely when omitted;
+         * must be finite and at least 0 when set.
          * Not to be confused with `timeoutInSeconds`, which limits each HTTP request.
          */
         waitTimeoutInSeconds?: number;
         /**
          * The shortest wait between status checks, in seconds. Also used when the server
-         * sends no `Retry-After` header. Defaults to 3; must be at least 0.5.
+         * sends no `Retry-After` header. Defaults to 3; must be finite and at least 0.5.
          */
         minPollIntervalInSeconds?: number;
     }
@@ -61,9 +62,12 @@ export class FlowsWaitTimeoutError extends ElevenLabsError {
         waitTimeoutInSeconds: number;
         lastResponse: { status: string };
     }) {
-        const kind = args.templateId != null ? "Template run" : "Generation";
+        const still = `is still ${args.lastResponse.status} after ${args.waitTimeoutInSeconds}s`;
         super({
-            message: `${kind} ${args.id} is still ${args.lastResponse.status} after ${args.waitTimeoutInSeconds}s; call \`get\` with this id to keep waiting`,
+            message:
+                args.templateId != null
+                    ? `Template run ${args.id} of template ${args.templateId} ${still}; call \`runs.get\` with \`templateId\` and \`id\` to keep waiting`
+                    : `Generation ${args.id} ${still}; call \`get\` with \`id\` to keep waiting`,
         });
         Object.setPrototypeOf(this, new.target.prototype);
         this.name = "FlowsWaitTimeoutError";
@@ -122,10 +126,14 @@ function splitOptions(options: FlowsWait.Options | undefined): {
         minPollIntervalInSeconds = DEFAULT_MIN_POLL_INTERVAL_SECONDS,
         ...requestOptions
     } = options ?? {};
-    if (!(minPollIntervalInSeconds >= SMALLEST_MIN_POLL_INTERVAL_SECONDS)) {
+    // `Number.isFinite` also rejects NaN and Infinity, which would make every sleep collapse to ~1ms.
+    if (!Number.isFinite(minPollIntervalInSeconds) || minPollIntervalInSeconds < SMALLEST_MIN_POLL_INTERVAL_SECONDS) {
         throw new RangeError(
             `minPollIntervalInSeconds must be at least ${SMALLEST_MIN_POLL_INTERVAL_SECONDS}, got ${minPollIntervalInSeconds}`,
         );
+    }
+    if (waitTimeoutInSeconds != null && !(Number.isFinite(waitTimeoutInSeconds) && waitTimeoutInSeconds >= 0)) {
+        throw new RangeError(`waitTimeoutInSeconds must be a finite number of at least 0, got ${waitTimeoutInSeconds}`);
     }
     return { requestOptions, waitTimeoutInSeconds, minPollIntervalInSeconds };
 }

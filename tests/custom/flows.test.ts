@@ -58,6 +58,9 @@ describe("flows createAndWait", () => {
         expect(pollDelayMs(new Headers({ "Retry-After": "0" }), 2)).toBe(2000);
         expect(pollDelayMs(new Headers({ "Retry-After": "garbage" }), 2)).toBe(2000);
         expect(pollDelayMs(new Headers({ "Retry-After": "-5" }), 2)).toBe(2000);
+        jest.spyOn(Date, "now").mockReturnValue(Date.parse("Wed, 21 Oct 2026 07:28:00 GMT"));
+        expect(pollDelayMs(new Headers({ "Retry-After": "Wed, 21 Oct 2026 07:28:08 GMT" }), 2)).toBe(8000);
+        expect(pollDelayMs(new Headers({ "Retry-After": "Wed, 21 Oct 2026 07:27:00 GMT" }), 2)).toBe(2000);
         jest.spyOn(Math, "random").mockReturnValue(0.5);
         expect(pollDelayMs(new Headers({ "Retry-After": "10" }), 1)).toBe(11000);
     });
@@ -159,6 +162,21 @@ describe("flows createAndWait", () => {
         expect(seen).toEqual([]);
     });
 
+    it.each([
+        { minPollIntervalInSeconds: Number.POSITIVE_INFINITY },
+        { minPollIntervalInSeconds: Number.NaN },
+        { waitTimeoutInSeconds: Number.NaN },
+        { waitTimeoutInSeconds: Number.POSITIVE_INFINITY },
+        { waitTimeoutInSeconds: -1 },
+    ])("rejects non-finite or negative wait options %p before any request", async (options) => {
+        const { client, seen } = makeClient([]);
+
+        await expect(
+            client.flows.image.createAndWait({ modelId: "bytedance-seedream-5-lite", prompt: "a corgi" }, options),
+        ).rejects.toThrow(RangeError);
+        expect(seen).toEqual([]);
+    });
+
     it("carries templateId on a template run timeout", async () => {
         const { client } = makeClient([{ body: run("pending") }]);
 
@@ -169,5 +187,6 @@ describe("flows createAndWait", () => {
         expect(error).toBeInstanceOf(FlowsWaitTimeoutError);
         expect((error as FlowsWaitTimeoutError).id).toBe("run_1");
         expect((error as FlowsWaitTimeoutError).templateId).toBe("tpl_1");
+        expect((error as FlowsWaitTimeoutError).message).toContain("templateId");
     });
 });
