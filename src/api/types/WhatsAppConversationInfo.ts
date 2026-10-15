@@ -7,4 +7,5 @@ export interface WhatsAppConversationInfo {
     whatsappPhoneNumberId?: string;
     whatsappUserId: string;
     awaitingFirstUserMessage?: boolean;
+    recipient?: ElevenLabs.WhatsAppRecipient;
 }

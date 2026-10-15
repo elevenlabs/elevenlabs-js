@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { WhatsAppConversationInfoDirection } from "./WhatsAppConversationInfoDirection";
+import { WhatsAppRecipient } from "./WhatsAppRecipient";
 
 export const WhatsAppConversationInfo: core.serialization.ObjectSchema<
     serializers.WhatsAppConversationInfo.Raw,
@@ -19,6 +20,7 @@ export const WhatsAppConversationInfo: core.serialization.ObjectSchema<
         "awaiting_first_user_message",
         core.serialization.boolean().optional(),
     ),
+    recipient: WhatsAppRecipient.optional(),
 });
 
 export declare namespace WhatsAppConversationInfo {
@@ -27,5 +29,6 @@ export declare namespace WhatsAppConversationInfo {
         whatsapp_phone_number_id?: string | null;
         whatsapp_user_id: string;
         awaiting_first_user_message?: boolean | null;
+        recipient?: WhatsAppRecipient.Raw | null;
     }
 }

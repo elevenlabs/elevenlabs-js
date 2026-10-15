@@ -10,13 +10,16 @@ import { TranslateErrorPayload } from "../../../types/TranslateErrorPayload";
 import { TranslateFinalTranscriptPayload } from "../../../types/TranslateFinalTranscriptPayload";
 import { TranslateInputError } from "../../../types/TranslateInputError";
 import { TranslatePartialTranscriptPayload } from "../../../types/TranslatePartialTranscriptPayload";
+import { TranslatePaymentIssueError } from "../../../types/TranslatePaymentIssueError";
 import { TranslateQueueOverflowError } from "../../../types/TranslateQueueOverflowError";
+import { TranslateQuotaExceededError } from "../../../types/TranslateQuotaExceededError";
 import { TranslateRateLimitedError } from "../../../types/TranslateRateLimitedError";
 import { TranslateSessionStartedPayload } from "../../../types/TranslateSessionStartedPayload";
 import { TranslateStatusPayload } from "../../../types/TranslateStatusPayload";
 import { TranslateTranscriberError } from "../../../types/TranslateTranscriberError";
 import { TranslateTranslationError } from "../../../types/TranslateTranslationError";
 import { TranslateTranslationPayload } from "../../../types/TranslateTranslationPayload";
+import { TranslateUnacceptedTermsError } from "../../../types/TranslateUnacceptedTermsError";
 
 export const ReceiveTranslateStreamMessage: core.serialization.Schema<
     serializers.ReceiveTranslateStreamMessage.Raw,
@@ -36,6 +39,9 @@ export const ReceiveTranslateStreamMessage: core.serialization.Schema<
     TranslateTranscriberError,
     TranslateTranslationError,
     TranslateAudioOutputError,
+    TranslateQuotaExceededError,
+    TranslatePaymentIssueError,
+    TranslateUnacceptedTermsError,
 ]);
 
 export declare namespace ReceiveTranslateStreamMessage {
@@ -53,5 +59,8 @@ export declare namespace ReceiveTranslateStreamMessage {
         | TranslateInputError.Raw
         | TranslateTranscriberError.Raw
         | TranslateTranslationError.Raw
-        | TranslateAudioOutputError.Raw;
+        | TranslateAudioOutputError.Raw
+        | TranslateQuotaExceededError.Raw
+        | TranslatePaymentIssueError.Raw
+        | TranslateUnacceptedTermsError.Raw;
 }

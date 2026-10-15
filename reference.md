@@ -15190,7 +15190,7 @@ await client.conversationalAi.conversations.tags.update("tag_id");
 <dl>
 <dd>
 
-Upload an image or PDF file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
+Upload an image, PDF, or text file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
 </dd>
 </dl>
 </dd>
