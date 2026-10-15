@@ -86,6 +86,18 @@ export class MusicClient {
             );
         }
 
+        if (request.addSfx != null) {
+            _body.append("add_sfx", request.addSfx?.toString());
+        }
+
+        if (request.separateTracks != null) {
+            _body.append("separate_tracks", request.separateTracks?.toString());
+        }
+
+        if (request.useAudioAsReference != null) {
+            _body.append("use_audio_as_reference", request.useAudioAsReference?.toString());
+        }
+
         if (request.signWithC2Pa != null) {
             _body.append("sign_with_c2pa", request.signWithC2Pa?.toString());
         }

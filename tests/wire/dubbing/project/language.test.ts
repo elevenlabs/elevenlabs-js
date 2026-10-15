@@ -19,6 +19,8 @@ describe("LanguageClient", () => {
                     outputs: {
                         lossless_audio:
                             "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.flac?X-Goog-Signature=...",
+                        subtitles:
+                            "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/subtitles.vtt?X-Goog-Signature=...",
                     },
                     revision: 3,
                     output_revision: 3,
@@ -51,6 +53,8 @@ describe("LanguageClient", () => {
                     outputs: {
                         losslessAudio:
                             "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.flac?X-Goog-Signature=...",
+                        subtitles:
+                            "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/subtitles.vtt?X-Goog-Signature=...",
                     },
                     revision: 3,
                     outputRevision: 3,
@@ -116,6 +120,8 @@ describe("LanguageClient", () => {
             outputs: {
                 lossless_audio:
                     "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.flac?X-Goog-Signature=...",
+                subtitles:
+                    "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/subtitles.vtt?X-Goog-Signature=...",
             },
             revision: 3,
             output_revision: 3,
@@ -145,6 +151,8 @@ describe("LanguageClient", () => {
             outputs: {
                 losslessAudio:
                     "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/output.flac?X-Goog-Signature=...",
+                subtitles:
+                    "https://storage.googleapis.com/eleven-dubbing/proj_1601kwkyxp0hfzvtmyxwqxx6mcy3/lang_1001kwkyxp0je6ktn4knsfrasx5s/subtitles.vtt?X-Goog-Signature=...",
             },
             revision: 3,
             outputRevision: 3,

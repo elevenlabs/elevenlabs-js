@@ -19,6 +19,12 @@ export interface BodyVideoToMusicV1MusicVideoToMusicPost {
     tags?: string[];
     /** The model to use for the generation. */
     modelId?: ElevenLabs.MusicModelId;
+    /** When true, incorporate SFX cues from the video. */
+    addSfx?: boolean;
+    /** When true, return a ZIP with separate music and SFX audio tracks instead of a single mixed file. Use this for more flexibility to layer the tracks. */
+    separateTracks?: boolean;
+    /** When true, analyze the video's audio track and use its genres, BPM, instrumentation, mood, and arc as reference characteristics for music generation. */
+    useAudioAsReference?: boolean;
     /** Whether to sign the generated song with C2PA. Applicable only for mp3 files. */
     signWithC2Pa?: boolean;
 }
