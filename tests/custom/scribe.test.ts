@@ -3,17 +3,34 @@ import { describe, it, expect, jest, beforeEach } from "@jest/globals";
 // Mock `ws` before importing ScribeRealtime so it never opens a real socket.
 let capturedUrl: string | undefined;
 let capturedOptions: { headers?: Record<string, string> } | undefined;
+let capturedSocket: { listeners: Record<string, Array<(...args: unknown[]) => void>> } | undefined;
+
+// No ffmpeg on the machine: `which ffmpeg` fails.
+jest.mock("node:child_process", () => ({
+    __esModule: true,
+    execSync: () => {
+        throw new Error("not found");
+    },
+    spawn: () => {
+        throw new Error("spawn must not be reached without ffmpeg");
+    },
+}));
+
 jest.mock("ws", () => {
     return {
         __esModule: true,
         default: class FakeWebSocket {
             static OPEN = 1;
             readyState = 0;
+            listeners: Record<string, Array<(...args: unknown[]) => void>> = {};
             constructor(url: string, options?: { headers?: Record<string, string> }) {
                 capturedUrl = url;
                 capturedOptions = options;
+                capturedSocket = this;
             }
-            on() {}
+            on(event: string, listener: (...args: unknown[]) => void) {
+                (this.listeners[event] ??= []).push(listener);
+            }
             send() {}
             close() {}
         },
@@ -309,4 +326,33 @@ describe("RealtimeConnection message dispatch", () => {
         expect(received[RealtimeEvents.ERROR]).toEqual([payload]);
     });
 
+});
+
+describe("ScribeRealtime URL streaming without ffmpeg", () => {
+    it("reports the missing ffmpeg as an error event instead of an unhandled rejection", async () => {
+        const unhandled: unknown[] = [];
+        const onUnhandled = (reason: unknown) => {
+            unhandled.push(reason);
+        };
+        process.on("unhandledRejection", onUnhandled);
+
+        try {
+            const scribe = new ScribeRealtime({ apiKey: TEST_API_KEY });
+            const connection = await scribe.connect({ modelId: TEST_MODEL_ID, url: "https://example.com/a.mp3" });
+            const errors: unknown[] = [];
+            connection.on(RealtimeEvents.ERROR, (error) => errors.push(error));
+
+            for (const listener of capturedSocket?.listeners.open ?? []) {
+                listener();
+            }
+            // Let the rejected promise (if any) reach the unhandledRejection hook.
+            await new Promise((resolve) => setTimeout(resolve, 50));
+
+            expect(unhandled).toEqual([]);
+            expect(errors).toHaveLength(1);
+            expect((errors[0] as Error).message).toContain("ffmpeg is required for URL streaming");
+        } finally {
+            process.off("unhandledRejection", onUnhandled);
+        }
+    });
 });
