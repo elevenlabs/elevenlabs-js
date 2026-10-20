@@ -18,6 +18,4 @@ export interface EffectsSpecInput {
     sendLevel?: number;
     /** Stereo position of the voice, from -1 (hard left) through 0 (center) to 1 (hard right). Only the voice is panned; reverb and background noise stay centered. */
     pan?: number;
-    /** Has no effect. */
-    seed?: number;
 }

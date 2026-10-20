@@ -5,8 +5,21 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const ReviewStatus: core.serialization.Schema<serializers.ReviewStatus.Raw, ElevenLabs.ReviewStatus> =
-    core.serialization.enum_(["not_requested", "pending", "declined", "allowed", "allowed_with_changes"]);
+    core.serialization.enum_([
+        "not_requested",
+        "pending",
+        "declined",
+        "declined_resubmittable",
+        "allowed",
+        "allowed_with_changes",
+    ]);
 
 export declare namespace ReviewStatus {
-    export type Raw = "not_requested" | "pending" | "declined" | "allowed" | "allowed_with_changes";
+    export type Raw =
+        | "not_requested"
+        | "pending"
+        | "declined"
+        | "declined_resubmittable"
+        | "allowed"
+        | "allowed_with_changes";
 }

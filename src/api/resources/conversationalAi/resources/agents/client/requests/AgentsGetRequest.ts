@@ -4,7 +4,8 @@
  * @example
  *     {
  *         versionId: "version_id",
- *         branchId: "branch_id"
+ *         branchId: "branch_id",
+ *         includeProcedureGeneratedWorkflowElements: true
  *     }
  */
 export interface AgentsGetRequest {
@@ -12,4 +13,6 @@ export interface AgentsGetRequest {
     versionId?: string;
     /** The ID of the branch to use */
     branchId?: string;
+    /** Whether to include the workflow nodes and edges generated from structured procedures. When false, the workflow contains only authored elements. */
+    includeProcedureGeneratedWorkflowElements?: boolean;
 }

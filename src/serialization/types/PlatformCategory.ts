@@ -7,8 +7,29 @@ import type * as serializers from "../index";
 export const PlatformCategory: core.serialization.Schema<
     serializers.PlatformCategory.Raw,
     ElevenLabs.PlatformCategory
-> = core.serialization.enum_(["voice", "silence", "burst", "asr", "text_message", "reception", "other"]);
+> = core.serialization.enum_([
+    "voice",
+    "silence",
+    "burst",
+    "asr",
+    "text_message",
+    "reception",
+    "v3_addon",
+    "v4_addon",
+    "rag_addon",
+    "other",
+]);
 
 export declare namespace PlatformCategory {
-    export type Raw = "voice" | "silence" | "burst" | "asr" | "text_message" | "reception" | "other";
+    export type Raw =
+        | "voice"
+        | "silence"
+        | "burst"
+        | "asr"
+        | "text_message"
+        | "reception"
+        | "v3_addon"
+        | "v4_addon"
+        | "rag_addon"
+        | "other";
 }

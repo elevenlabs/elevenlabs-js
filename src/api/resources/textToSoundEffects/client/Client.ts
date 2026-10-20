@@ -42,12 +42,15 @@ export class TextToSoundEffectsClient {
         request: ElevenLabs.CreateSoundEffectRequest,
         requestOptions?: TextToSoundEffectsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
-        const { outputFormat, ..._body } = request;
+        const { outputFormat, enableLogging, ..._body } = request;
         const _queryParams: Record<string, unknown> = {
             output_format:
                 outputFormat != null
-                    ? serializers.AllowedOutputFormats.jsonOrThrow(outputFormat, { unrecognizedObjectKeys: "strip" })
+                    ? serializers.TextToSoundEffectsConvertRequestOutputFormat.jsonOrThrow(outputFormat, {
+                          unrecognizedObjectKeys: "strip",
+                      })
                     : undefined,
+            enable_logging: enableLogging,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

@@ -3,4 +3,6 @@
 export interface TestToolResultModel {
     status?: "success";
     reason?: string;
+    toAgent?: string;
+    toNode?: string;
 }

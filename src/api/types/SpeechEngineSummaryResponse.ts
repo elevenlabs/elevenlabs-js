@@ -11,6 +11,8 @@ export interface SpeechEngineSummaryResponse {
     voiceId: string;
     /** Creation time in Unix seconds */
     createdAtUnixSecs: number;
+    /** Last update time in Unix seconds */
+    updatedAtUnixSecs: number;
     /** Arbitrary tags for categorization and filtering */
     tags: string[];
     /** The access information of the speech engine for the user */

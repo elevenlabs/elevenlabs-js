@@ -5,25 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const ToolType: core.serialization.Schema<serializers.ToolType.Raw, ElevenLabs.ToolType> =
-    core.serialization.enum_([
-        "system",
-        "webhook",
-        "client",
-        "mcp",
-        "workflow",
-        "api_integration_webhook",
-        "api_integration_mcp",
-        "smb",
-    ]);
+    core.serialization.enum_(["system", "webhook", "client", "mcp", "workflow", "api_integration_webhook", "smb"]);
 
 export declare namespace ToolType {
-    export type Raw =
-        | "system"
-        | "webhook"
-        | "client"
-        | "mcp"
-        | "workflow"
-        | "api_integration_webhook"
-        | "api_integration_mcp"
-        | "smb";
+    export type Raw = "system" | "webhook" | "client" | "mcp" | "workflow" | "api_integration_webhook" | "smb";
 }

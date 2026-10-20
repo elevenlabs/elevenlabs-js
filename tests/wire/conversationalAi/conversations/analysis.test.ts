@@ -95,6 +95,7 @@ describe("AnalysisClient", () => {
                     whatsapp_phone_number_id: "whatsapp_phone_number_id",
                     whatsapp_user_id: "whatsapp_user_id",
                     awaiting_first_user_message: true,
+                    call_permission_request: { state: "blocked" },
                 },
                 sms: {
                     direction: "inbound",
@@ -358,6 +359,9 @@ describe("AnalysisClient", () => {
                     whatsappPhoneNumberId: "whatsapp_phone_number_id",
                     whatsappUserId: "whatsapp_user_id",
                     awaitingFirstUserMessage: true,
+                    callPermissionRequest: {
+                        state: "blocked",
+                    },
                 },
                 sms: {
                     direction: "inbound",
@@ -676,6 +680,7 @@ describe("AnalysisClient", () => {
                     whatsapp_phone_number_id: "whatsapp_phone_number_id",
                     whatsapp_user_id: "whatsapp_user_id",
                     awaiting_first_user_message: true,
+                    call_permission_request: { state: "blocked" },
                 },
                 sms: {
                     direction: "inbound",
@@ -942,6 +947,9 @@ describe("AnalysisClient", () => {
                     whatsappPhoneNumberId: "whatsapp_phone_number_id",
                     whatsappUserId: "whatsapp_user_id",
                     awaitingFirstUserMessage: true,
+                    callPermissionRequest: {
+                        state: "blocked",
+                    },
                 },
                 sms: {
                     direction: "inbound",

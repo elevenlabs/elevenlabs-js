@@ -9,6 +9,9 @@ export interface WorkspaceGroupResponseModel {
     permissions?: ElevenLabs.WorkspaceGroupPermission[];
     groupUsageLimit?: ElevenLabs.WorkspaceGroupResponseModelGroupUsageLimit;
     groupPvcLimit?: ElevenLabs.WorkspaceGroupResponseModelGroupPvcLimit;
+    groupConcurrencyLimit?: ElevenLabs.WorkspaceGroupResponseModelGroupConcurrencyLimit;
+    groupDubbingConcurrencyLimit?: ElevenLabs.WorkspaceGroupResponseModelGroupDubbingConcurrencyLimit;
+    groupMusicConcurrencyLimit?: ElevenLabs.WorkspaceGroupResponseModelGroupMusicConcurrencyLimit;
     characterCount?: number;
     isScimSynced?: boolean;
     scimGroup?: ElevenLabs.ScimGroupResponseModel;

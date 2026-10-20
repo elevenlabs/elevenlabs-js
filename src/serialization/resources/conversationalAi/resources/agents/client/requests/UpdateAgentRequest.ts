@@ -10,7 +10,10 @@ import { ProcedureVersionRef } from "../../../../../../types/ProcedureVersionRef
 
 export const UpdateAgentRequest: core.serialization.Schema<
     serializers.conversationalAi.UpdateAgentRequest.Raw,
-    Omit<ElevenLabs.conversationalAi.UpdateAgentRequest, "enableVersioningIfNotEnabled" | "branchId">
+    Omit<
+        ElevenLabs.conversationalAi.UpdateAgentRequest,
+        "enableVersioningIfNotEnabled" | "branchId" | "includeProcedureGeneratedWorkflowElements"
+    >
 > = core.serialization.object({
     conversationConfig: core.serialization.property("conversation_config", ConversationalConfig.optional()),
     platformSettings: core.serialization.property("platform_settings", AgentPlatformSettingsRequestModel.optional()),

@@ -6,6 +6,8 @@ export interface ConversationHistoryTranscriptToolCallCommonModelInput {
     type?: ElevenLabs.ToolType;
     requestId: string;
     toolName: string;
+    /** ID of the called tool. Not set for tools without an ID, such as system tools. */
+    toolId?: string;
     paramsAsJson: string;
     toolHasBeenCalled: boolean;
     toolDetails?: ElevenLabs.ConversationHistoryTranscriptToolCallCommonModelInputToolDetails;

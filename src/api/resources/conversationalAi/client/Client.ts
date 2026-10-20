@@ -20,6 +20,7 @@ import { LlmClient } from "../resources/llm/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
 import { McpServersClient } from "../resources/mcpServers/client/Client";
 import { PhoneNumbersClient } from "../resources/phoneNumbers/client/Client";
+import { RealtimeClient } from "../resources/realtime/client/Client";
 import { SecretsClient } from "../resources/secrets/client/Client";
 import { SettingsClient } from "../resources/settings/client/Client";
 import { SipTrunkClient } from "../resources/sipTrunk/client/Client";
@@ -58,6 +59,7 @@ export class ConversationalAiClient {
     protected _sipTrunk: SipTrunkClient | undefined;
     protected _mcpServers: McpServersClient | undefined;
     protected _whatsappAccounts: WhatsappAccountsClient | undefined;
+    protected _realtime: RealtimeClient | undefined;
     protected _analytics: AnalyticsClient | undefined;
     protected _dashboard: DashboardClient | undefined;
 
@@ -139,6 +141,10 @@ export class ConversationalAiClient {
 
     public get whatsappAccounts(): WhatsappAccountsClient {
         return (this._whatsappAccounts ??= new WhatsappAccountsClient(this._options));
+    }
+
+    public get realtime(): RealtimeClient {
+        return (this._realtime ??= new RealtimeClient(this._options));
     }
 
     public get analytics(): AnalyticsClient {

@@ -14,7 +14,6 @@ export const EffectsSpecOutput: core.serialization.ObjectSchema<
     backgroundNoiseId: core.serialization.property("background_noise_id", core.serialization.string().optional()),
     sendLevel: core.serialization.property("send_level", core.serialization.number()),
     pan: core.serialization.number(),
-    seed: core.serialization.number().optional(),
 });
 
 export declare namespace EffectsSpecOutput {
@@ -25,6 +24,5 @@ export declare namespace EffectsSpecOutput {
         background_noise_id?: string | null;
         send_level: number;
         pan: number;
-        seed?: number | null;
     }
 }

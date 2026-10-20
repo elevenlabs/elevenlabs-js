@@ -4146,7 +4146,8 @@ Stream a song and its detailed metadata using Server-Sent Events (SSE).
 
 ```typescript
 const response = await client.music.composeDetailedStream({
-    outputFormat: "auto"
+    outputFormat: "auto",
+    enableLogging: true
 });
 for await (const item of response) {
     console.log(item);
@@ -5323,7 +5324,7 @@ await client.environmentVariables.get("env_var_id");
 <dl>
 <dd>
 
-Replace an environment variable's values. Use null to remove an environment (except production).
+Replace an environment variable's values. Use null to remove its value for an environment (except production); delete an environment with DELETE /v1/convai/environments/{environment}.
 </dd>
 </dl>
 </dd>
@@ -5373,6 +5374,190 @@ await client.environmentVariables.update("env_var_id", {
 <dd>
 
 **requestOptions:** `EnvironmentVariablesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Environments
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">list</a>() -> ElevenLabs.EnvironmentsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace environments, including 'production'.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environments.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.EnvironmentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a workspace environment. Variables without a value for it fall back to their production value.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environments.create({
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateEnvironmentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">delete</a>(environment) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a workspace environment and remove its values from all environment variables. 'production' cannot be deleted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environments.delete("environment");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**environment:** `string` — Name of the environment to delete, e.g. 'staging'.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6683,7 +6868,8 @@ Retrieve config for an agent
 ```typescript
 await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     versionId: "version_id",
-    branchId: "branch_id"
+    branchId: "branch_id",
+    includeProcedureGeneratedWorkflowElements: true
 });
 
 ```
@@ -6728,7 +6914,7 @@ await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">delete</a>(agent_id) -> void</code></summary>
+<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">delete</a>(agent_id, { ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -6755,7 +6941,9 @@ Delete an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    force: true
+});
 
 ```
 </dd>
@@ -6772,6 +6960,14 @@ await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz"
 <dd>
 
 **agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.AgentsDeleteRequest` 
     
 </dd>
 </dl>
@@ -6820,7 +7016,8 @@ Patches an Agent settings
 ```typescript
 await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     enableVersioningIfNotEnabled: true,
-    branchId: "branch_id"
+    branchId: "branch_id",
+    includeProcedureGeneratedWorkflowElements: true
 });
 
 ```
@@ -11475,6 +11672,70 @@ await client.conversationalAi.whatsappAccounts.list({
 </dl>
 </details>
 
+## ConversationalAi Realtime
+<details><summary><code>client.conversationalAi.realtime.<a href="/src/api/resources/conversationalAi/resources/realtime/client/Client.ts">createClientSecret</a>({ ...params }) -> ElevenLabs.ClientSecretResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create an ephemeral client secret for authenticating browser-based Realtime API sessions.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.realtime.createClientSecret();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateClientSecretRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RealtimeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents Summaries
 <details><summary><code>client.conversationalAi.agents.summaries.<a href="/src/api/resources/conversationalAi/resources/agents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record&lt;string, ElevenLabs.SummariesGetResponseValue&gt;</code></summary>
 <dl>
@@ -12186,7 +12447,7 @@ await client.conversationalAi.agents.branches.get("agent_3701k3ttaq12ewp8b7qv5rf
 <dl>
 <dd>
 
-Update agent branch properties such as archiving status, protection level, and auto-rebase onto main
+Update agent branch properties such as name, description, archiving status, protection level, and auto-rebase onto main
 </dd>
 </dl>
 </dd>
@@ -12282,7 +12543,8 @@ Returns the result of merging the source branch into the target branch without p
 ```typescript
 await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
     targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
-    force: true
+    force: true,
+    includeProcedureGeneratedWorkflowElements: true
 });
 
 ```
@@ -12416,7 +12678,7 @@ await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">previewRebase</a>(agent_id, branch_id) -> ElevenLabs.MergePreviewResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">previewRebase</a>(agent_id, branch_id, { ...params }) -> ElevenLabs.MergePreviewResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -12428,7 +12690,7 @@ await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5
 <dl>
 <dd>
 
-Returns the result of rebasing the branch onto main without performing the rebase. Useful for showing an accurate diff before confirming.
+Returns the result of pulling changes from a source branch (defaults to main) into the given branch without performing it, preserving the given branch's own changes. Useful for showing an accurate diff before confirming.
 </dd>
 </dl>
 </dd>
@@ -12443,7 +12705,10 @@ Returns the result of rebasing the branch onto main without performing the rebas
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+    sourceBranchId: "source_branch_id",
+    includeProcedureGeneratedWorkflowElements: true
+});
 
 ```
 </dd>
@@ -12468,6 +12733,14 @@ await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12e
 <dd>
 
 **branch_id:** `string` — Unique identifier for the source branch to merge from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BranchesPreviewRebaseRequest` 
     
 </dd>
 </dl>
@@ -12487,7 +12760,7 @@ await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12e
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">rebase</a>(agent_id, branch_id) -> unknown</code></summary>
+<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">rebase</a>(agent_id, branch_id, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -12499,7 +12772,7 @@ await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12e
 <dl>
 <dd>
 
-Rebase a branch onto the latest main branch, incorporating main's changes while preserving the branch's own changes.
+Pull changes from a source branch (defaults to main) into this branch as a new version, preserving this branch's own changes on conflicts.
 </dd>
 </dl>
 </dd>
@@ -12514,7 +12787,9 @@ Rebase a branch onto the latest main branch, incorporating main's changes while 
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+    sourceBranchId: "source_branch_id"
+});
 
 ```
 </dd>
@@ -12539,6 +12814,14 @@ await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv
 <dd>
 
 **branch_id:** `string` — Unique identifier for the source branch to merge from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BranchesRebaseRequest` 
     
 </dd>
 </dl>
@@ -21974,6 +22257,7 @@ Create a composition plan for music generation. Usage of this endpoint does not 
 
 ```typescript
 await client.music.compositionPlan.create({
+    enableLogging: true,
     prompt: "prompt"
 });
 
@@ -23615,6 +23899,77 @@ await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_
 <dd>
 
 **request:** `ElevenLabs.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ApiKeysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.serviceAccounts.apiKeys.<a href="/src/api/resources/serviceAccounts/resources/apiKeys/client/Client.ts">disable</a>(service_account_user_id, api_key_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Disable an existing API key for a service account without changing its other settings. This stays available after a workspace downgrades off a plan that includes service accounts. Turning the key back on still requires that plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.serviceAccounts.apiKeys.disable("service_account_user_id", "api_key_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_account_user_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**api_key_id:** `string` 
     
 </dd>
 </dl>

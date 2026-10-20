@@ -9,6 +9,8 @@ import type * as ElevenLabs from "../../../../../../../../index";
 export interface BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch {
     /** New name for the branch. Must be unique within the agent. */
     name?: string;
+    /** New description for the branch. Pass an empty string to clear it. */
+    description?: string;
     /** Whether the branch should be archived */
     isArchived?: boolean;
     /** The protection level for the branch */
