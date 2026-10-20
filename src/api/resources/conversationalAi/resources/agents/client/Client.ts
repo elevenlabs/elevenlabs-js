@@ -204,7 +204,8 @@ export class AgentsClient {
      * @example
      *     await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
      *         versionId: "version_id",
-     *         branchId: "branch_id"
+     *         branchId: "branch_id",
+     *         includeProcedureGeneratedWorkflowElements: true
      *     })
      */
     public get(
@@ -220,10 +221,11 @@ export class AgentsClient {
         request: ElevenLabs.conversationalAi.AgentsGetRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
-        const { versionId, branchId } = request;
+        const { versionId, branchId, includeProcedureGeneratedWorkflowElements } = request;
         const _queryParams: Record<string, unknown> = {
             version_id: versionId,
             branch_id: branchId,
+            include_procedure_generated_workflow_elements: includeProcedureGeneratedWorkflowElements,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -284,6 +286,7 @@ export class AgentsClient {
      * Delete an agent
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
+     * @param {ElevenLabs.conversationalAi.AgentsDeleteRequest} request
      * @param {AgentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -291,16 +294,27 @@ export class AgentsClient {
      * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
-     *     await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz")
+     *     await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+     *         force: true
+     *     })
      */
-    public delete(agent_id: string, requestOptions?: AgentsClient.RequestOptions): core.HttpResponsePromise<void> {
-        return core.HttpResponsePromise.fromPromise(this.__delete(agent_id, requestOptions));
+    public delete(
+        agent_id: string,
+        request: ElevenLabs.conversationalAi.AgentsDeleteRequest = {},
+        requestOptions?: AgentsClient.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(agent_id, request, requestOptions));
     }
 
     private async __delete(
         agent_id: string,
+        request: ElevenLabs.conversationalAi.AgentsDeleteRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
+        const { force } = request;
+        const _queryParams: Record<string, unknown> = {
+            force,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -317,7 +331,11 @@ export class AgentsClient {
             ),
             method: "DELETE",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -363,7 +381,8 @@ export class AgentsClient {
      * @example
      *     await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
      *         enableVersioningIfNotEnabled: true,
-     *         branchId: "branch_id"
+     *         branchId: "branch_id",
+     *         includeProcedureGeneratedWorkflowElements: true
      *     })
      */
     public update(
@@ -379,10 +398,11 @@ export class AgentsClient {
         request: ElevenLabs.conversationalAi.UpdateAgentRequest = {},
         requestOptions?: AgentsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetAgentResponseModel>> {
-        const { enableVersioningIfNotEnabled, branchId, ..._body } = request;
+        const { enableVersioningIfNotEnabled, branchId, includeProcedureGeneratedWorkflowElements, ..._body } = request;
         const _queryParams: Record<string, unknown> = {
             enable_versioning_if_not_enabled: enableVersioningIfNotEnabled,
             branch_id: branchId,
+            include_procedure_generated_workflow_elements: includeProcedureGeneratedWorkflowElements,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

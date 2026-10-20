@@ -3,3 +3,5 @@ export type { BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSour
 export type { BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch } from "./BodyUpdateAgentBranchV1ConvaiAgentsAgentIdBranchesBranchIdPatch";
 export type { BranchesListRequest } from "./BranchesListRequest";
 export type { BranchesPreviewMergeRequest } from "./BranchesPreviewMergeRequest";
+export type { BranchesPreviewRebaseRequest } from "./BranchesPreviewRebaseRequest";
+export type { BranchesRebaseRequest } from "./BranchesRebaseRequest";

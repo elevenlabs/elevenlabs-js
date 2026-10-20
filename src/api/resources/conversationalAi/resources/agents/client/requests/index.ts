@@ -1,3 +1,4 @@
+export type { AgentsDeleteRequest } from "./AgentsDeleteRequest";
 export type { AgentsGetRequest } from "./AgentsGetRequest";
 export type { AgentsListRequest } from "./AgentsListRequest";
 export type { BodyCreateAgentV1ConvaiAgentsCreatePost } from "./BodyCreateAgentV1ConvaiAgentsCreatePost";

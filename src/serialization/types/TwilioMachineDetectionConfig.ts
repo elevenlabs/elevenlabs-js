@@ -4,16 +4,19 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { TwilioMachineDetectionMode } from "./TwilioMachineDetectionMode";
+import { TwilioMachineDetectionRule } from "./TwilioMachineDetectionRule";
 
 export const TwilioMachineDetectionConfig: core.serialization.ObjectSchema<
     serializers.TwilioMachineDetectionConfig.Raw,
     ElevenLabs.TwilioMachineDetectionConfig
 > = core.serialization.object({
     mode: TwilioMachineDetectionMode.optional(),
+    actions: core.serialization.list(TwilioMachineDetectionRule).optional(),
 });
 
 export declare namespace TwilioMachineDetectionConfig {
     export interface Raw {
         mode?: TwilioMachineDetectionMode.Raw | null;
+        actions?: TwilioMachineDetectionRule.Raw[] | null;
     }
 }

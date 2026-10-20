@@ -13,6 +13,8 @@ export interface AgentSummaryResponseModel {
     tags: string[];
     /** The creation time of the agent in unix seconds */
     createdAtUnixSecs: number;
+    /** The last time the agent's main branch or agent-level settings were updated, in unix seconds */
+    updatedAtUnixSecs: number;
     /** The access information of the agent */
     accessInfo: ElevenLabs.ResourceAccessInfo;
     /** The time of the most recent call in unix seconds, null if no calls have been made */

@@ -1542,6 +1542,7 @@ describe("BranchesClient", () => {
             {
                 targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
                 force: true,
+                includeProcedureGeneratedWorkflowElements: true,
             },
         );
         expect(response).toEqual({
@@ -4211,6 +4212,10 @@ describe("BranchesClient", () => {
         const response = await client.conversationalAi.agents.branches.previewRebase(
             "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
             "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
+            {
+                sourceBranchId: "source_branch_id",
+                includeProcedureGeneratedWorkflowElements: true,
+            },
         );
         expect(response).toEqual({
             agentId: "agent_7101k5zvyjhmfg983brhmhkd98n6",
@@ -5687,6 +5692,9 @@ describe("BranchesClient", () => {
         const response = await client.conversationalAi.agents.branches.rebase(
             "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
             "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
+            {
+                sourceBranchId: "source_branch_id",
+            },
         );
         expect(response).toEqual({
             key: "value",

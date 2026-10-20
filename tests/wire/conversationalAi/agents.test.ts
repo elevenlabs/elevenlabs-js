@@ -1197,6 +1197,7 @@ describe("AgentsClient", () => {
         const response = await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
             versionId: "version_id",
             branchId: "branch_id",
+            includeProcedureGeneratedWorkflowElements: true,
         });
         expect(response).toEqual({
             agentId: "agent_7101k5zvyjhmfg983brhmhkd98n6",
@@ -2648,7 +2649,9 @@ describe("AgentsClient", () => {
             .statusCode(200)
             .build();
 
-        const response = await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+        const response = await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+            force: true,
+        });
         expect(response).toEqual(undefined);
     });
 
@@ -3822,6 +3825,7 @@ describe("AgentsClient", () => {
         const response = await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
             enableVersioningIfNotEnabled: true,
             branchId: "branch_id",
+            includeProcedureGeneratedWorkflowElements: true,
         });
         expect(response).toEqual({
             agentId: "agent_7101k5zvyjhmfg983brhmhkd98n6",
@@ -5274,6 +5278,7 @@ describe("AgentsClient", () => {
                     voice_id: "UCaNsl8F6Xh4GALkVMLS",
                     tags: ["Customer Support", "Technical Help", "Eleven"],
                     created_at_unix_secs: 1716153600,
+                    updated_at_unix_secs: 1716240000,
                     access_info: {
                         is_creator: true,
                         creator_name: "John Doe",
@@ -5309,6 +5314,7 @@ describe("AgentsClient", () => {
                     voiceId: "UCaNsl8F6Xh4GALkVMLS",
                     tags: ["Customer Support", "Technical Help", "Eleven"],
                     createdAtUnixSecs: 1716153600,
+                    updatedAtUnixSecs: 1716240000,
                     accessInfo: {
                         isCreator: true,
                         creatorName: "John Doe",

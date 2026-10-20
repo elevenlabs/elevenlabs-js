@@ -6,6 +6,7 @@ import { AudioIsolationClient } from "./api/resources/audioIsolation/client/Clie
 import { AudioNativeClient } from "./api/resources/audioNative/client/Client";
 import { ConversationalAiClient } from "./api/resources/conversationalAi/client/Client";
 import { DubbingClient } from "./api/resources/dubbing/client/Client";
+import { EnvironmentsClient } from "./api/resources/environments/client/Client";
 import { EnvironmentVariablesClient } from "./api/resources/environmentVariables/client/Client";
 import { FlowsClient } from "./api/resources/flows/client/Client";
 import { ForcedAlignmentClient } from "./api/resources/forcedAlignment/client/Client";
@@ -69,6 +70,7 @@ export class ElevenLabsClient {
     protected _conversationalAi: ConversationalAiClient | undefined;
     protected _speechEngine: SpeechEngineClient | undefined;
     protected _environmentVariables: EnvironmentVariablesClient | undefined;
+    protected _environments: EnvironmentsClient | undefined;
     protected _assets: AssetsClient | undefined;
     protected _flows: FlowsClient | undefined;
     protected _productions: ProductionsClient | undefined;
@@ -181,6 +183,10 @@ export class ElevenLabsClient {
 
     public get environmentVariables(): EnvironmentVariablesClient {
         return (this._environmentVariables ??= new EnvironmentVariablesClient(this._options));
+    }
+
+    public get environments(): EnvironmentsClient {
+        return (this._environments ??= new EnvironmentsClient(this._options));
     }
 
     public get assets(): AssetsClient {

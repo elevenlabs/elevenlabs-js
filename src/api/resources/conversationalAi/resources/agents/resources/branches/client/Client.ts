@@ -301,7 +301,7 @@ export class BranchesClient {
     }
 
     /**
-     * Update agent branch properties such as archiving status, protection level, and auto-rebase onto main
+     * Update agent branch properties such as name, description, archiving status, protection level, and auto-rebase onto main
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {string} branch_id - Unique identifier for the branch.
@@ -410,7 +410,8 @@ export class BranchesClient {
      * @example
      *     await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
      *         targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
-     *         force: true
+     *         force: true,
+     *         includeProcedureGeneratedWorkflowElements: true
      *     })
      */
     public previewMerge(
@@ -430,10 +431,11 @@ export class BranchesClient {
         request: ElevenLabs.conversationalAi.agents.BranchesPreviewMergeRequest,
         requestOptions?: BranchesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.MergePreviewResponseModel>> {
-        const { targetBranchId, force } = request;
+        const { targetBranchId, force, includeProcedureGeneratedWorkflowElements } = request;
         const _queryParams: Record<string, unknown> = {
             target_branch_id: targetBranchId,
             force,
+            include_procedure_generated_workflow_elements: includeProcedureGeneratedWorkflowElements,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
@@ -593,10 +595,11 @@ export class BranchesClient {
     }
 
     /**
-     * Returns the result of rebasing the branch onto main without performing the rebase. Useful for showing an accurate diff before confirming.
+     * Returns the result of pulling changes from a source branch (defaults to main) into the given branch without performing it, preserving the given branch's own changes. Useful for showing an accurate diff before confirming.
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {string} branch_id - Unique identifier for the source branch to merge from.
+     * @param {ElevenLabs.conversationalAi.agents.BranchesPreviewRebaseRequest} request
      * @param {BranchesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -604,21 +607,31 @@ export class BranchesClient {
      * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
-     *     await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj")
+     *     await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+     *         sourceBranchId: "source_branch_id",
+     *         includeProcedureGeneratedWorkflowElements: true
+     *     })
      */
     public previewRebase(
         agent_id: string,
         branch_id: string,
+        request: ElevenLabs.conversationalAi.agents.BranchesPreviewRebaseRequest = {},
         requestOptions?: BranchesClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.MergePreviewResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__previewRebase(agent_id, branch_id, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__previewRebase(agent_id, branch_id, request, requestOptions));
     }
 
     private async __previewRebase(
         agent_id: string,
         branch_id: string,
+        request: ElevenLabs.conversationalAi.agents.BranchesPreviewRebaseRequest = {},
         requestOptions?: BranchesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.MergePreviewResponseModel>> {
+        const { sourceBranchId, includeProcedureGeneratedWorkflowElements } = request;
+        const _queryParams: Record<string, unknown> = {
+            source_branch_id: sourceBranchId,
+            include_procedure_generated_workflow_elements: includeProcedureGeneratedWorkflowElements,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -635,7 +648,11 @@ export class BranchesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -676,10 +693,11 @@ export class BranchesClient {
     }
 
     /**
-     * Rebase a branch onto the latest main branch, incorporating main's changes while preserving the branch's own changes.
+     * Pull changes from a source branch (defaults to main) into this branch as a new version, preserving this branch's own changes on conflicts.
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {string} branch_id - Unique identifier for the source branch to merge from.
+     * @param {ElevenLabs.conversationalAi.agents.BranchesRebaseRequest} request
      * @param {BranchesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -687,21 +705,29 @@ export class BranchesClient {
      * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
-     *     await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj")
+     *     await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+     *         sourceBranchId: "source_branch_id"
+     *     })
      */
     public rebase(
         agent_id: string,
         branch_id: string,
+        request: ElevenLabs.conversationalAi.agents.BranchesRebaseRequest = {},
         requestOptions?: BranchesClient.RequestOptions,
     ): core.HttpResponsePromise<unknown> {
-        return core.HttpResponsePromise.fromPromise(this.__rebase(agent_id, branch_id, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__rebase(agent_id, branch_id, request, requestOptions));
     }
 
     private async __rebase(
         agent_id: string,
         branch_id: string,
+        request: ElevenLabs.conversationalAi.agents.BranchesRebaseRequest = {},
         requestOptions?: BranchesClient.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
+        const { sourceBranchId } = request;
+        const _queryParams: Record<string, unknown> = {
+            source_branch_id: sourceBranchId,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -718,7 +744,11 @@ export class BranchesClient {
             ),
             method: "POST",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

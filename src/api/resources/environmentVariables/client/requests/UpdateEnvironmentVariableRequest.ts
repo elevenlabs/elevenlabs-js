@@ -9,6 +9,6 @@ import type * as ElevenLabs from "../../../../index";
  *     }
  */
 export interface UpdateEnvironmentVariableRequest {
-    /** Values to replace. Set to null to remove an environment (except 'production'). */
+    /** Values to replace. Set to null to remove the value for an environment (except 'production'). */
     values: Record<string, ElevenLabs.UpdateEnvironmentVariableRequestValuesValue | undefined>;
 }

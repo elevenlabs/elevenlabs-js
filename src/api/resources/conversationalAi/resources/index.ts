@@ -21,6 +21,7 @@ export * from "./mcpServers/types";
 export * as phoneNumbers from "./phoneNumbers";
 export * from "./phoneNumbers/client/requests";
 export * from "./phoneNumbers/types";
+export * as realtime from "./realtime";
 export * as secrets from "./secrets";
 export * from "./secrets/client/requests";
 export * as settings from "./settings";

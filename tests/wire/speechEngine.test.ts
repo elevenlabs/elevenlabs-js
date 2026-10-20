@@ -15,6 +15,7 @@ describe("SpeechEngineClient", () => {
                     name: "My Speech Engine",
                     voice_id: "UCaNsl8F6Xh4GALkVMLS",
                     created_at_unix_secs: 1714000000,
+                    updated_at_unix_secs: 1714086400,
                     tags: ["production", "v1"],
                     access_info: {
                         is_creator: true,
@@ -44,6 +45,7 @@ describe("SpeechEngineClient", () => {
                     name: "My Speech Engine",
                     voiceId: "UCaNsl8F6Xh4GALkVMLS",
                     createdAtUnixSecs: 1714000000,
+                    updatedAtUnixSecs: 1714086400,
                     tags: ["production", "v1"],
                     accessInfo: {
                         isCreator: true,
@@ -93,7 +95,6 @@ describe("SpeechEngineClient", () => {
                     background_noise_id: "background_noise_id",
                     send_level: 1.1,
                     pan: 1.1,
-                    seed: 1,
                 },
             },
             turn: {
@@ -219,7 +220,6 @@ describe("SpeechEngineClient", () => {
                     backgroundNoiseId: "background_noise_id",
                     sendLevel: 1.1,
                     pan: 1.1,
-                    seed: 1,
                 },
             },
             turn: {
@@ -337,7 +337,6 @@ describe("SpeechEngineClient", () => {
                     background_noise_id: "background_noise_id",
                     send_level: 1.1,
                     pan: 1.1,
-                    seed: 1,
                 },
             },
             turn: {
@@ -458,7 +457,6 @@ describe("SpeechEngineClient", () => {
                     backgroundNoiseId: "background_noise_id",
                     sendLevel: 1.1,
                     pan: 1.1,
-                    seed: 1,
                 },
             },
             turn: {
@@ -591,7 +589,6 @@ describe("SpeechEngineClient", () => {
                     background_noise_id: "background_noise_id",
                     send_level: 1.1,
                     pan: 1.1,
-                    seed: 1,
                 },
             },
             turn: {
@@ -713,7 +710,6 @@ describe("SpeechEngineClient", () => {
                     backgroundNoiseId: "background_noise_id",
                     sendLevel: 1.1,
                     pan: 1.1,
-                    seed: 1,
                 },
             },
             turn: {
@@ -831,7 +827,6 @@ describe("SpeechEngineClient", () => {
                     background_noise_id: "background_noise_id",
                     send_level: 1.1,
                     pan: 1.1,
-                    seed: 1,
                 },
             },
             turn: {
@@ -952,7 +947,6 @@ describe("SpeechEngineClient", () => {
                     backgroundNoiseId: "background_noise_id",
                     sendLevel: 1.1,
                     pan: 1.1,
-                    seed: 1,
                 },
             },
             turn: {

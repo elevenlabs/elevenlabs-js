@@ -12,10 +12,15 @@ export const CreateStaffParams: core.serialization.ObjectSchema<
         "smb_tool_type",
         core.serialization.stringLiteral("create_staff").optional(),
     ),
+    perResourceTimezones: core.serialization.property(
+        "per_resource_timezones",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace CreateStaffParams {
     export interface Raw {
         smb_tool_type?: "create_staff" | null;
+        per_resource_timezones?: boolean | null;
     }
 }

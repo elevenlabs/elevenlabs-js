@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { WhatsAppCallPermissionRequest } from "./WhatsAppCallPermissionRequest";
 import { WhatsAppConversationInfoDirection } from "./WhatsAppConversationInfoDirection";
 import { WhatsAppRecipient } from "./WhatsAppRecipient";
 
@@ -21,6 +22,10 @@ export const WhatsAppConversationInfo: core.serialization.ObjectSchema<
         core.serialization.boolean().optional(),
     ),
     recipient: WhatsAppRecipient.optional(),
+    callPermissionRequest: core.serialization.property(
+        "call_permission_request",
+        WhatsAppCallPermissionRequest.optional(),
+    ),
 });
 
 export declare namespace WhatsAppConversationInfo {
@@ -30,5 +35,6 @@ export declare namespace WhatsAppConversationInfo {
         whatsapp_user_id: string;
         awaiting_first_user_message?: boolean | null;
         recipient?: WhatsAppRecipient.Raw | null;
+        call_permission_request?: WhatsAppCallPermissionRequest.Raw | null;
     }
 }
