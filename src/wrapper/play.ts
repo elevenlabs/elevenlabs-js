@@ -10,6 +10,7 @@ export async function play(audio: AsyncIterable<Uint8Array>): Promise<void> {
 
     const { spawn } = await import("node:child_process");
     const { Readable } = await import("node:stream");
+    const { pipeline } = await import("node:stream/promises");
     const commandExists = (await import("command-exists")).default;
 
     if (!commandExists.sync("ffplay")) {
@@ -23,8 +24,6 @@ export async function play(audio: AsyncIterable<Uint8Array>): Promise<void> {
     const ffplay = spawn("ffplay", ["-autoexit", "-", "-nodisp"], {
         stdio: ["pipe", "ignore", "pipe"],
     });
-
-    Readable.from(audio).pipe(ffplay.stdin);
 
     const errorChunks: Buffer[] = [];
     ffplay.stderr.on("data", (chunk) => {
@@ -46,6 +45,10 @@ export async function play(audio: AsyncIterable<Uint8Array>): Promise<void> {
         });
         ffplay.on("error", (err) => {
             reject(new ElevenLabsError({ message: `Failed to start ffplay: ${err.message}` }));
+        });
+        pipeline(Readable.from(audio), ffplay.stdin).catch((error) => {
+            ffplay.kill();
+            reject(error);
         });
     });
 }
