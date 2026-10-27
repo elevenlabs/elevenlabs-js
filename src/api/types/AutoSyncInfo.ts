@@ -5,8 +5,6 @@ export interface AutoSyncInfo {
     minimumFrequencyDays?: number;
     /** Whether to remove the document if the URL becomes unavailable */
     autoRemove?: boolean;
-    /** Deprecated. This field no longer has any effect and will be removed in a future release. */
-    autoDiscover?: boolean;
     /** Number of consecutive sync failures */
     consecFailures?: number;
     /** Unix timestamp for the next scheduled sync or None (in case of folders) */

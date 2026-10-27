@@ -3534,7 +3534,7 @@ await client.pronunciationDictionaries.list({
 </dl>
 </details>
 
-## Workspace
+## workspace
 <details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">setThirdPartyDisablingPolicy</a>({ ...params }) -> unknown</code></summary>
 <dl>
 <dd>
@@ -5277,6 +5277,69 @@ Get a specific environment variable by ID
 
 ```typescript
 await client.environmentVariables.get("env_var_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**env_var_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentVariablesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.environmentVariables.<a href="/src/api/resources/environmentVariables/client/Client.ts">delete</a>(env_var_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an environment variable and its values in all environments. WARNING: Agents are not checked. A variable that an agent still uses (custom LLM, webhooks or cloud storage export, on any branch or version) is deleted anyway, and that agent's conversations then fail. The delete is only rejected while tools, MCP servers or the workspace conversation initiation webhook use the variable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environmentVariables.delete("env_var_id");
 
 ```
 </dd>
@@ -7147,7 +7210,7 @@ await client.conversationalAi.agents.list({
 <dl>
 <dd>
 
-Create a new agent by duplicating an existing one. The new agent gets a copy of every unarchived branch of the source agent, each with the same name and description and starting from the latest version on that branch. Version history, drafts, archived branches and traffic deployments are not copied, so the new agent routes all traffic to its main branch.
+Create a new agent by duplicating an existing one. The new agent gets a copy of every unarchived branch of the source agent, each with the same name and description and starting from the latest version on that branch. The live traffic split is copied onto the new branches, with any share held by a branch that was not copied moved to main. Version history, drafts, archived branches, past traffic splits and experiments are not copied.
 </dd>
 </dl>
 </dd>
@@ -8485,7 +8548,7 @@ await client.conversationalAi.triageTickets.delete("agentqa_ticket_id");
 <dl>
 <dd>
 
-Update a ticket's title, comment, status, priority, and/or assignee. Requires editor access to the ticket's agent.
+Update a ticket's title, comment, status, priority, and/or assignee. Requires viewer access to the ticket's agent.
 </dd>
 </dl>
 </dd>
@@ -12821,7 +12884,7 @@ await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv
 <dl>
 <dd>
 
-**request:** `ElevenLabs.conversationalAi.agents.BranchesRebaseRequest` 
+**request:** `ElevenLabs.conversationalAi.agents.BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost` 
     
 </dd>
 </dl>
@@ -18567,6 +18630,77 @@ await client.conversationalAi.tests.invocations.get("test_invocation_id");
 <dd>
 
 **test_invocation_id:** `string` — The id of a test invocation. This is returned when tests are run.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InvocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.tests.invocations.<a href="/src/api/resources/conversationalAi/resources/tests/resources/invocations/client/Client.ts">update</a>(test_invocation_id, { ...params }) -> ElevenLabs.GetTestSuiteInvocationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the user-provided name of a test invocation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.tests.invocations.update("test_invocation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**test_invocation_id:** `string` — The id of a test invocation. This is returned when tests are run.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.tests.UpdateTestSuiteInvocationRequestModel` 
     
 </dd>
 </dl>

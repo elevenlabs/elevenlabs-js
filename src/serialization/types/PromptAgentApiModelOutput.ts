@@ -8,6 +8,7 @@ import { CustomLlm } from "./CustomLlm";
 import { KnowledgeBaseLocator } from "./KnowledgeBaseLocator";
 import { Llm } from "./Llm";
 import { LlmReasoningEffort } from "./LlmReasoningEffort";
+import { LlmServiceTier } from "./LlmServiceTier";
 import { PromptAgentApiModelOutputBackupLlmConfig } from "./PromptAgentApiModelOutputBackupLlmConfig";
 import { PromptAgentApiModelOutputToolsItem } from "./PromptAgentApiModelOutputToolsItem";
 import { RagConfigOutput } from "./RagConfigOutput";
@@ -19,6 +20,7 @@ export const PromptAgentApiModelOutput: core.serialization.ObjectSchema<
     prompt: core.serialization.string().optional(),
     llm: Llm.optional(),
     reasoningEffort: core.serialization.property("reasoning_effort", LlmReasoningEffort.optional()),
+    serviceTier: core.serialization.property("service_tier", LlmServiceTier.optional()),
     thinkingBudget: core.serialization.property("thinking_budget", core.serialization.number().optional()),
     enableReasoningSummary: core.serialization.property(
         "enable_reasoning_summary",
@@ -68,6 +70,7 @@ export declare namespace PromptAgentApiModelOutput {
         prompt?: string | null;
         llm?: Llm.Raw | null;
         reasoning_effort?: LlmReasoningEffort.Raw | null;
+        service_tier?: LlmServiceTier.Raw | null;
         thinking_budget?: number | null;
         enable_reasoning_summary?: boolean | null;
         temperature?: number | null;

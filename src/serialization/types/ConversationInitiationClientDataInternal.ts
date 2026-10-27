@@ -33,6 +33,10 @@ export const ConversationInitiationClientDataInternal: core.serialization.Object
         "procedure_ids",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    startProcedureIds: core.serialization.property(
+        "start_procedure_ids",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     dynamicVariables: core.serialization.property(
         "dynamic_variables",
         core.serialization.record(core.serialization.string(), DynamicVariableInternalValueType).optional(),
@@ -56,6 +60,7 @@ export declare namespace ConversationInitiationClientDataInternal {
         environment?: string | null;
         starting_workflow_node_id?: string | null;
         procedure_ids?: string[] | null;
+        start_procedure_ids?: string[] | null;
         dynamic_variables?: Record<string, DynamicVariableInternalValueType.Raw> | null;
         tool_mock_config?: OrchestratorToolMockBehaviorConfig.Raw | null;
         tool_mock_overrides?: Record<string, ToolResponseMockConfigOutput.Raw[]> | null;

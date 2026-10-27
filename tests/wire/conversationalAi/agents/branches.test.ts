@@ -624,6 +624,7 @@ describe("BranchesClient", () => {
                     syntax_highlight_theme: "light",
                     show_resize_button: true,
                     end_confirmation_enabled: true,
+                    mobile_fullscreen: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -1878,6 +1879,7 @@ describe("BranchesClient", () => {
                     syntaxHighlightTheme: "light",
                     showResizeButton: true,
                     endConfirmationEnabled: true,
+                    mobileFullscreen: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -3297,6 +3299,7 @@ describe("BranchesClient", () => {
                     syntax_highlight_theme: "light",
                     show_resize_button: true,
                     end_confirmation_enabled: true,
+                    mobile_fullscreen: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -4550,6 +4553,7 @@ describe("BranchesClient", () => {
                     syntaxHighlightTheme: "light",
                     showResizeButton: true,
                     endConfirmationEnabled: true,
+                    mobileFullscreen: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -5676,7 +5680,7 @@ describe("BranchesClient", () => {
     test("rebase", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -5684,6 +5688,7 @@ describe("BranchesClient", () => {
             .post(
                 "/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/branches/agtbrch_8901k4t9z5defmb8vh3e9361y7nj/rebase",
             )
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)

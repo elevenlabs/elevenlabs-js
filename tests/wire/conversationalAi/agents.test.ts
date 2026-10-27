@@ -295,6 +295,7 @@ describe("AgentsClient", () => {
                     syntax_highlight_theme: "light",
                     show_resize_button: true,
                     end_confirmation_enabled: true,
+                    mobile_fullscreen: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -1532,6 +1533,7 @@ describe("AgentsClient", () => {
                     syntaxHighlightTheme: "light",
                     showResizeButton: true,
                     endConfirmationEnabled: true,
+                    mobileFullscreen: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -2922,6 +2924,7 @@ describe("AgentsClient", () => {
                     syntax_highlight_theme: "light",
                     show_resize_button: true,
                     end_confirmation_enabled: true,
+                    mobile_fullscreen: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -4160,6 +4163,7 @@ describe("AgentsClient", () => {
                     syntaxHighlightTheme: "light",
                     showResizeButton: true,
                     endConfirmationEnabled: true,
+                    mobileFullscreen: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -5654,6 +5658,7 @@ describe("AgentsClient", () => {
         const rawRequestBody = { tests: [{ test_id: "test_id" }] };
         const rawResponseBody = {
             id: "id",
+            name: "name",
             agent_id: "agent_id",
             branch_id: "branch_id",
             version_id: "version_id",
@@ -5718,6 +5723,7 @@ describe("AgentsClient", () => {
         });
         expect(response).toEqual({
             id: "id",
+            name: "name",
             agentId: "agent_id",
             branchId: "branch_id",
             versionId: "version_id",

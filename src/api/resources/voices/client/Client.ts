@@ -24,6 +24,9 @@ export declare namespace VoicesClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * Access to voices created either by you or ElevenLabs.
+ */
 export class VoicesClient {
     protected readonly _options: NormalizedClientOptions<VoicesClient.Options>;
     protected _collections: CollectionsClient | undefined;

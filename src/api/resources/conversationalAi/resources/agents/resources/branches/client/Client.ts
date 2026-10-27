@@ -697,7 +697,7 @@ export class BranchesClient {
      *
      * @param {string} agent_id - The id of an agent. This is returned on agent creation.
      * @param {string} branch_id - Unique identifier for the source branch to merge from.
-     * @param {ElevenLabs.conversationalAi.agents.BranchesRebaseRequest} request
+     * @param {ElevenLabs.conversationalAi.agents.BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost} request
      * @param {BranchesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -712,7 +712,7 @@ export class BranchesClient {
     public rebase(
         agent_id: string,
         branch_id: string,
-        request: ElevenLabs.conversationalAi.agents.BranchesRebaseRequest = {},
+        request: ElevenLabs.conversationalAi.agents.BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost = {},
         requestOptions?: BranchesClient.RequestOptions,
     ): core.HttpResponsePromise<unknown> {
         return core.HttpResponsePromise.fromPromise(this.__rebase(agent_id, branch_id, request, requestOptions));
@@ -721,10 +721,10 @@ export class BranchesClient {
     private async __rebase(
         agent_id: string,
         branch_id: string,
-        request: ElevenLabs.conversationalAi.agents.BranchesRebaseRequest = {},
+        request: ElevenLabs.conversationalAi.agents.BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost = {},
         requestOptions?: BranchesClient.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
-        const { sourceBranchId } = request;
+        const { sourceBranchId, ..._body } = request;
         const _queryParams: Record<string, unknown> = {
             source_branch_id: sourceBranchId,
         };
@@ -744,11 +744,20 @@ export class BranchesClient {
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryString: core.url
                 .queryBuilder()
                 .addMany(_queryParams)
                 .mergeAdditional(requestOptions?.queryParams)
                 .build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.agents.BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost.jsonOrThrow(
+                    _body,
+                    { unrecognizedObjectKeys: "strip" },
+                ),
+                requestOptions?.additionalBodyParameters,
+            ),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

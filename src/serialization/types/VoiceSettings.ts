@@ -11,6 +11,7 @@ export const VoiceSettings: core.serialization.ObjectSchema<serializers.VoiceSet
         similarityBoost: core.serialization.property("similarity_boost", core.serialization.number().optional()),
         style: core.serialization.number().optional(),
         speed: core.serialization.number().optional(),
+        cloneStrength: core.serialization.property("clone_strength", core.serialization.number().optional()),
     });
 
 export declare namespace VoiceSettings {
@@ -20,5 +21,6 @@ export declare namespace VoiceSettings {
         similarity_boost?: number | null;
         style?: number | null;
         speed?: number | null;
+        clone_strength?: number | null;
     }
 }

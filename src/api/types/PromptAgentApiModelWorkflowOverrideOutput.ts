@@ -9,6 +9,8 @@ export interface PromptAgentApiModelWorkflowOverrideOutput {
     llm?: ElevenLabs.Llm;
     /** Reasoning effort of the model. Only available for some models. */
     reasoningEffort?: ElevenLabs.LlmReasoningEffort;
+    /** Service tier of the model, trading a per-token price premium for higher token throughput. Only available for some models. */
+    serviceTier?: ElevenLabs.LlmServiceTier;
     /** Max number of tokens used for thinking. Use 0 to turn off if supported by the model. */
     thinkingBudget?: number;
     /** Enable model reasoning summaries. When disabled, we do not request summaries from provider if possible for faster TTFB. Not ZRM compatible. */

@@ -10,11 +10,13 @@ export const ToDialogueSettingsResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     stability: core.serialization.number().optional(),
     similarity: core.serialization.number().optional(),
+    cloneStrength: core.serialization.property("clone_strength", core.serialization.number().optional()),
 });
 
 export declare namespace ToDialogueSettingsResponseModel {
     export interface Raw {
         stability?: number | null;
         similarity?: number | null;
+        clone_strength?: number | null;
     }
 }

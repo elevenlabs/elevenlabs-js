@@ -6,7 +6,7 @@
  *         sourceBranchId: "source_branch_id"
  *     }
  */
-export interface BranchesRebaseRequest {
+export interface BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost {
     /** The ID of the branch to pull changes from. Defaults to the agent's main branch. */
     sourceBranchId?: string;
 }

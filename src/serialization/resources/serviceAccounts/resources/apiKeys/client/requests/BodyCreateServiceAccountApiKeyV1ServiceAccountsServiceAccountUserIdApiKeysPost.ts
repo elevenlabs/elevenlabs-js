@@ -29,6 +29,7 @@ export const BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserId
         "music_concurrency_limit",
         core.serialization.number().optional(),
     ),
+    expiresAtUnix: core.serialization.property("expires_at_unix", core.serialization.number().optional()),
 });
 
 export declare namespace BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysPost {
@@ -41,5 +42,6 @@ export declare namespace BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceA
         tts_concurrency_limit?: number | null;
         dubbing_concurrency_limit?: number | null;
         music_concurrency_limit?: number | null;
+        expires_at_unix?: number | null;
     }
 }

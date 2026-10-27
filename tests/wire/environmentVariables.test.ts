@@ -143,6 +143,21 @@ describe("EnvironmentVariablesClient", () => {
         });
     });
 
+    test("delete", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/environment-variables/env_var_id")
+            .respondWith()
+            .statusCode(200)
+            .build();
+
+        const response = await client.environmentVariables.delete("env_var_id");
+        expect(response).toEqual(undefined);
+    });
+
     test("update", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
