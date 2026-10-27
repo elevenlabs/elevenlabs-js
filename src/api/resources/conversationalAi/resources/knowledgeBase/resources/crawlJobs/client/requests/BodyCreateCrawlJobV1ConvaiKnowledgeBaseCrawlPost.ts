@@ -15,6 +15,8 @@ export interface BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost {
     maxPages?: number;
     /** If set, only URLs that match this pattern are included. */
     pattern?: string;
+    /** If set, URLs that match any of these patterns are skipped, even if they match `pattern`. */
+    excludePatterns?: string[];
     /** List of URLs to crawl from sitemap (optional, overrides automatic URL discovery). */
     sitemapUrls?: string[];
     /** If set, the created document or folder will be placed inside the given folder. */

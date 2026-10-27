@@ -6,6 +6,8 @@ export interface GetCrawlJobResponseModel {
     type?: ElevenLabs.CrawlType;
     seedUrl: string;
     pattern?: string;
+    /** URLs matching any of these patterns are skipped, even if they match `pattern`. */
+    excludePatterns?: string[];
     maxPages: number;
     /** Whether to automatically discover and enqueue additional pages found while crawling. */
     autoDiscover?: boolean;

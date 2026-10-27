@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../../../../../../api/index";
 import * as core from "../../../../../../../core";
 import type * as serializers from "../../../../../../index";
+import { LlmServiceTier } from "../../../../../../types/LlmServiceTier";
 
 export const LlmUsageCalculatorPublicRequestModel: core.serialization.Schema<
     serializers.conversationalAi.LlmUsageCalculatorPublicRequestModel.Raw,
@@ -11,6 +12,7 @@ export const LlmUsageCalculatorPublicRequestModel: core.serialization.Schema<
     promptLength: core.serialization.property("prompt_length", core.serialization.number()),
     numberOfPages: core.serialization.property("number_of_pages", core.serialization.number()),
     ragEnabled: core.serialization.property("rag_enabled", core.serialization.boolean()),
+    serviceTier: core.serialization.property("service_tier", LlmServiceTier.optional()),
 });
 
 export declare namespace LlmUsageCalculatorPublicRequestModel {
@@ -18,5 +20,6 @@ export declare namespace LlmUsageCalculatorPublicRequestModel {
         prompt_length: number;
         number_of_pages: number;
         rag_enabled: boolean;
+        service_tier?: LlmServiceTier.Raw | null;
     }
 }

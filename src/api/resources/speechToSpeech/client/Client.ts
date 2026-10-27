@@ -94,7 +94,7 @@ export class SpeechToSpeechClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ElevenLabsEnvironment.Production,
-                `v1/speech-to-speech/${core.url.encodePathParam(voice_id)}`,
+                `v1/voice-changer/${core.url.encodePathParam(voice_id)}`,
             ),
             method: "POST",
             headers: _headers,
@@ -130,12 +130,7 @@ export class SpeechToSpeechClient {
             }
         }
 
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/v1/speech-to-speech/{voice_id}",
-        );
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/voice-changer/{voice_id}");
     }
 
     /**
@@ -209,7 +204,7 @@ export class SpeechToSpeechClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ElevenLabsEnvironment.Production,
-                `v1/speech-to-speech/${core.url.encodePathParam(voice_id)}/stream`,
+                `v1/voice-changer/${core.url.encodePathParam(voice_id)}/stream`,
             ),
             method: "POST",
             headers: _headers,
@@ -249,7 +244,7 @@ export class SpeechToSpeechClient {
             _response.error,
             _response.rawResponse,
             "POST",
-            "/v1/speech-to-speech/{voice_id}/stream",
+            "/v1/voice-changer/{voice_id}/stream",
         );
     }
 }

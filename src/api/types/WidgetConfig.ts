@@ -95,6 +95,8 @@ export interface WidgetConfig {
     showResizeButton?: boolean;
     /** Whether to ask the user to confirm before ending a chat or call */
     endConfirmationEnabled?: boolean;
+    /** Whether the widget opens fullscreen on mobile */
+    mobileFullscreen?: boolean;
     /** Whether to show the language selector */
     languageSelector?: boolean;
     /** Whether the widget can switch to text only mode */

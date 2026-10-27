@@ -5,8 +5,8 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const SfxModelId: core.serialization.Schema<serializers.SfxModelId.Raw, ElevenLabs.SfxModelId> =
-    core.serialization.stringLiteral("eleven_text_to_sound_v2");
+    core.serialization.enum_(["eleven_text_to_sound_v2", "eleven_text_to_sound_v3"]);
 
 export declare namespace SfxModelId {
-    export type Raw = "eleven_text_to_sound_v2";
+    export type Raw = "eleven_text_to_sound_v2" | "eleven_text_to_sound_v3";
 }

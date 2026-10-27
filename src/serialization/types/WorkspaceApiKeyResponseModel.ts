@@ -31,6 +31,7 @@ export const WorkspaceApiKeyResponseModel: core.serialization.ObjectSchema<
         core.serialization.boolean().optional(),
     ),
     platformLimits: core.serialization.property("platform_limits", PlatformLimits.optional()),
+    expiresAtUnix: core.serialization.property("expires_at_unix", core.serialization.number().optional()),
 });
 
 export declare namespace WorkspaceApiKeyResponseModel {
@@ -49,5 +50,6 @@ export declare namespace WorkspaceApiKeyResponseModel {
         allowed_ips?: string[] | null;
         third_party_disable_allowed?: boolean | null;
         platform_limits?: PlatformLimits.Raw | null;
+        expires_at_unix?: number | null;
     }
 }

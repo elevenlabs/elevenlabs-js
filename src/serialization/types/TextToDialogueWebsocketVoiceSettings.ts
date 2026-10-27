@@ -9,10 +9,12 @@ export const TextToDialogueWebsocketVoiceSettings: core.serialization.ObjectSche
     ElevenLabs.TextToDialogueWebsocketVoiceSettings
 > = core.serialization.object({
     stability: core.serialization.number().optional(),
+    cloneStrength: core.serialization.property("clone_strength", core.serialization.number().optional()),
 });
 
 export declare namespace TextToDialogueWebsocketVoiceSettings {
     export interface Raw {
         stability?: number | null;
+        clone_strength?: number | null;
     }
 }

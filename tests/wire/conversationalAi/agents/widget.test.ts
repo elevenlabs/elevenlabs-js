@@ -133,6 +133,7 @@ describe("WidgetClient", () => {
                 },
                 show_resize_button: true,
                 end_confirmation_enabled: true,
+                mobile_fullscreen: true,
                 language: "en",
                 supported_language_overrides: ["es", "fr"],
                 language_presets: { key: {} },
@@ -290,6 +291,7 @@ describe("WidgetClient", () => {
                 },
                 showResizeButton: true,
                 endConfirmationEnabled: true,
+                mobileFullscreen: true,
                 language: "en",
                 supportedLanguageOverrides: ["es", "fr"],
                 languagePresets: {

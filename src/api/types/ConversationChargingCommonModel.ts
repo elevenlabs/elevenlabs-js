@@ -18,4 +18,6 @@ export interface ConversationChargingCommonModel {
     ttsUsage?: ElevenLabs.ConversationTtsUsageModel;
     asrUsage?: ElevenLabs.ConversationAsrUsageModel;
     analysis?: ElevenLabs.AnalysisCharging;
+    /** Credits charged as the voice actor reward for the Voice Library voices this conversation used. It is not included in `cost`. */
+    voiceSurchargeCharge?: number;
 }

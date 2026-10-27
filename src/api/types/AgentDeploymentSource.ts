@@ -3,5 +3,6 @@
 export const AgentDeploymentSource = {
     Manual: "manual",
     BranchMerge: "branch_merge",
+    Duplicate: "duplicate",
 } as const;
 export type AgentDeploymentSource = (typeof AgentDeploymentSource)[keyof typeof AgentDeploymentSource];

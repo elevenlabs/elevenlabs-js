@@ -12,6 +12,10 @@ export const BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost: core.serializatio
     maxDepth: core.serialization.property("max_depth", core.serialization.number().optional()),
     maxPages: core.serialization.property("max_pages", core.serialization.number().optional()),
     pattern: core.serialization.string().optional(),
+    excludePatterns: core.serialization.property(
+        "exclude_patterns",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     sitemapUrls: core.serialization.property(
         "sitemap_urls",
         core.serialization.list(core.serialization.string()).optional(),
@@ -29,6 +33,7 @@ export declare namespace BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost {
         max_depth?: number | null;
         max_pages?: number | null;
         pattern?: string | null;
+        exclude_patterns?: string[] | null;
         sitemap_urls?: string[] | null;
         parent_folder_id?: string | null;
         enable_auto_sync?: boolean | null;

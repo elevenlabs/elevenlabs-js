@@ -25,4 +25,6 @@ export interface BodyCreateServiceAccountApiKeyV1ServiceAccountsServiceAccountUs
     dubbingConcurrencyLimit?: number;
     /** Maximum concurrent music generation requests for this API key. Only available for enterprise customers. */
     musicConcurrencyLimit?: number;
+    /** Unix timestamp (in seconds) after which this API key stops working. When set, it must be at least 15 minutes and at most 90 days in the future. On create, omit or pass null for a key that never expires. On update, omit to leave it unchanged, or pass "clear" to remove the expiry (never expires). */
+    expiresAtUnix?: number;
 }

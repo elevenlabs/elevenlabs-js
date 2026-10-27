@@ -13,6 +13,7 @@ describe("InvocationsClient", () => {
             results: [
                 {
                     id: "id",
+                    name: "name",
                     agent_id: "agent_id",
                     branch_id: "branch_id",
                     version_id: "version_id",
@@ -70,6 +71,7 @@ describe("InvocationsClient", () => {
             results: [
                 {
                     id: "id",
+                    name: "name",
                     agentId: "agent_id",
                     branchId: "branch_id",
                     versionId: "version_id",
@@ -106,6 +108,7 @@ describe("InvocationsClient", () => {
 
         const rawResponseBody = {
             id: "id",
+            name: "name",
             agent_id: "agent_id",
             branch_id: "branch_id",
             version_id: "version_id",
@@ -163,6 +166,136 @@ describe("InvocationsClient", () => {
         const response = await client.conversationalAi.tests.invocations.get("test_invocation_id");
         expect(response).toEqual({
             id: "id",
+            name: "name",
+            agentId: "agent_id",
+            branchId: "branch_id",
+            versionId: "version_id",
+            ranAgainstDraft: true,
+            createdAt: 1,
+            folderId: "folder_id",
+            repeatCount: 1,
+            cancelled: true,
+            bucketingStatus: "pending",
+            resultGroups: [
+                {
+                    testId: "test_id",
+                    testName: "test_name",
+                    workflowNodeId: "workflow_node_id",
+                    buckets: [
+                        {
+                            testRunIds: ["test_run_ids"],
+                            title: "title",
+                            reason: "reason",
+                            status: "pending",
+                        },
+                    ],
+                },
+            ],
+            testRuns: [
+                {
+                    testRunId: "test_run_id",
+                    testInfo: {
+                        type: "llm",
+                    },
+                    testInvocationId: "test_invocation_id",
+                    agentId: "agent_id",
+                    branchId: "branch_id",
+                    versionId: "version_id",
+                    ranAgainstDraft: true,
+                    workflowNodeId: "workflow_node_id",
+                    status: "pending",
+                    agentResponses: [
+                        {
+                            role: "user",
+                            timeInCallSecs: 1,
+                        },
+                    ],
+                    testId: "test_id",
+                    testName: "test_name",
+                    conditionResult: {
+                        result: "success",
+                    },
+                    lastUpdatedAtUnix: 1,
+                    metadata: {
+                        workspaceId: "workspace_id",
+                        testName: "test_name",
+                        ranByUserEmail: "ran_by_user_email",
+                    },
+                    rootFolderId: "root_folder_id",
+                    rootFolderName: "root_folder_name",
+                    environment: "environment",
+                    creditsUsed: 1,
+                },
+            ],
+        });
+    });
+
+    test("update", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = {
+            id: "id",
+            name: "name",
+            agent_id: "agent_id",
+            branch_id: "branch_id",
+            version_id: "version_id",
+            ran_against_draft: true,
+            created_at: 1,
+            folder_id: "folder_id",
+            repeat_count: 1,
+            cancelled: true,
+            bucketing_status: "pending",
+            result_groups: [
+                {
+                    test_id: "test_id",
+                    test_name: "test_name",
+                    workflow_node_id: "workflow_node_id",
+                    buckets: [{ test_run_ids: ["test_run_ids"], title: "title", reason: "reason", status: "pending" }],
+                },
+            ],
+            test_runs: [
+                {
+                    test_run_id: "test_run_id",
+                    test_info: { type: "llm" },
+                    test_invocation_id: "test_invocation_id",
+                    agent_id: "agent_id",
+                    branch_id: "branch_id",
+                    version_id: "version_id",
+                    ran_against_draft: true,
+                    workflow_node_id: "workflow_node_id",
+                    status: "pending",
+                    agent_responses: [{ role: "user", time_in_call_secs: 1 }],
+                    test_id: "test_id",
+                    test_name: "test_name",
+                    condition_result: { result: "success" },
+                    last_updated_at_unix: 1,
+                    metadata: {
+                        workspace_id: "workspace_id",
+                        test_name: "test_name",
+                        ran_by_user_email: "ran_by_user_email",
+                    },
+                    root_folder_id: "root_folder_id",
+                    root_folder_name: "root_folder_name",
+                    environment: "environment",
+                    credits_used: 1,
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .patch("/v1/convai/test-invocations/test_invocation_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.tests.invocations.update("test_invocation_id");
+        expect(response).toEqual({
+            id: "id",
+            name: "name",
             agentId: "agent_id",
             branchId: "branch_id",
             versionId: "version_id",

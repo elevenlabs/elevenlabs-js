@@ -24,6 +24,7 @@ describe("ApiKeysClient", () => {
                     hashed_xi_api_key: "hashed_xi_api_key",
                     allowed_ips: ["allowed_ips"],
                     third_party_disable_allowed: true,
+                    expires_at_unix: 1,
                 },
             ],
         };
@@ -53,6 +54,7 @@ describe("ApiKeysClient", () => {
                     hashedXiApiKey: "hashed_xi_api_key",
                     allowedIps: ["allowed_ips"],
                     thirdPartyDisableAllowed: true,
+                    expiresAtUnix: 1,
                 },
             ],
         });

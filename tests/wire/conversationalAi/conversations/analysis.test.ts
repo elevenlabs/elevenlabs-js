@@ -51,6 +51,7 @@ describe("AnalysisClient", () => {
                     free_minutes_consumed: 1.1,
                     free_llm_dollars_consumed: 1.1,
                     analysis: { total: {}, last_run: {} },
+                    voice_surcharge_charge: 1,
                 },
                 phone_call: {
                     type: "exotel",
@@ -171,6 +172,7 @@ describe("AnalysisClient", () => {
                 environment: "environment",
                 starting_workflow_node_id: "starting_workflow_node_id",
                 procedure_ids: ["procedure_ids"],
+                start_procedure_ids: ["start_procedure_ids"],
                 dynamic_variables: { key: "value" },
             },
             environment: "production",
@@ -300,6 +302,7 @@ describe("AnalysisClient", () => {
                         total: {},
                         lastRun: {},
                     },
+                    voiceSurchargeCharge: 1,
                 },
                 phoneCall: {
                     type: "exotel",
@@ -487,6 +490,7 @@ describe("AnalysisClient", () => {
                 environment: "environment",
                 startingWorkflowNodeId: "starting_workflow_node_id",
                 procedureIds: ["procedure_ids"],
+                startProcedureIds: ["start_procedure_ids"],
                 dynamicVariables: {
                     key: "value",
                 },
@@ -636,6 +640,7 @@ describe("AnalysisClient", () => {
                     free_minutes_consumed: 1.1,
                     free_llm_dollars_consumed: 1.1,
                     analysis: { total: {}, last_run: {} },
+                    voice_surcharge_charge: 1,
                 },
                 phone_call: {
                     type: "exotel",
@@ -756,6 +761,7 @@ describe("AnalysisClient", () => {
                 environment: "environment",
                 starting_workflow_node_id: "starting_workflow_node_id",
                 procedure_ids: ["procedure_ids"],
+                start_procedure_ids: ["start_procedure_ids"],
                 dynamic_variables: { key: "value" },
             },
             environment: "production",
@@ -888,6 +894,7 @@ describe("AnalysisClient", () => {
                         total: {},
                         lastRun: {},
                     },
+                    voiceSurchargeCharge: 1,
                 },
                 phoneCall: {
                     type: "exotel",
@@ -1075,6 +1082,7 @@ describe("AnalysisClient", () => {
                 environment: "environment",
                 startingWorkflowNodeId: "starting_workflow_node_id",
                 procedureIds: ["procedure_ids"],
+                startProcedureIds: ["start_procedure_ids"],
                 dynamicVariables: {
                     key: "value",
                 },

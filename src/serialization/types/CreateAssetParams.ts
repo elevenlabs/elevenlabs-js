@@ -12,10 +12,15 @@ export const CreateAssetParams: core.serialization.ObjectSchema<
         "smb_tool_type",
         core.serialization.stringLiteral("create_asset").optional(),
     ),
+    perResourceTimezones: core.serialization.property(
+        "per_resource_timezones",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace CreateAssetParams {
     export interface Raw {
         smb_tool_type?: "create_asset" | null;
+        per_resource_timezones?: boolean | null;
     }
 }

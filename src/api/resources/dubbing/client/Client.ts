@@ -57,6 +57,8 @@ export class DubbingClient {
     }
 
     /**
+     * @deprecated
+     *
      * List the dubs you have access to.
      *
      * @param {ElevenLabs.DubbingListRequest} request
@@ -219,6 +221,8 @@ export class DubbingClient {
     }
 
     /**
+     * @deprecated
+     *
      * Dubs a provided audio or video file into given language.
      *
      * @param {ElevenLabs.BodyDubAVideoOrAnAudioFileV1DubbingPost} request
@@ -384,6 +388,8 @@ export class DubbingClient {
     }
 
     /**
+     * @deprecated
+     *
      * Returns metadata about a dubbing project, including whether it's still in progress or not
      *
      * @param {string} dubbing_id - ID of the dubbing project.
@@ -459,6 +465,8 @@ export class DubbingClient {
     }
 
     /**
+     * @deprecated
+     *
      * Deletes a dubbing project.
      *
      * @param {string} dubbing_id - ID of the dubbing project.
