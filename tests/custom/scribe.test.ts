@@ -103,6 +103,8 @@ describe("ScribeRealtime handshake URL", () => {
             keyterms: ["ElevenLabs", "Scribe"],
             noVerbatim: true,
             entityDetection: ["pii", "email_address"],
+            entityRedaction: ["pci", "name"],
+            entityRedactionMode: "entity_type",
             filterBackgroundAudio: true,
             enableLogging: false,
             token: "sutkn_1234567890",
@@ -115,6 +117,9 @@ describe("ScribeRealtime handshake URL", () => {
             ["enable_logging", "false"],
             ["entity_detection", "email_address"],
             ["entity_detection", "pii"],
+            ["entity_redaction", "name"],
+            ["entity_redaction", "pci"],
+            ["entity_redaction_mode", "entity_type"],
             ["filter_background_audio", "true"],
             ["include_language_detection", "true"],
             ["include_timestamps", "false"],
@@ -156,6 +161,12 @@ describe("ScribeRealtime handshake URL", () => {
         const { url } = await connect({ entityDetection: "all" });
 
         expect(url.searchParams.getAll("entity_detection")).toEqual(["all"]);
+    });
+
+    it("accepts a bare string for entityRedaction as well as a list", async () => {
+        const { url } = await connect({ entityRedaction: "all" });
+
+        expect(url.searchParams.getAll("entity_redaction")).toEqual(["all"]);
     });
 });
 
@@ -279,6 +290,19 @@ describe("RealtimeConnection message dispatch", () => {
         socket.deliver(payload);
 
         expect(received[RealtimeEvents.EDITED_TRANSCRIPT]).toEqual([payload]);
+    });
+
+    it("routes redacted_transcript with both the committed and the redacted text", () => {
+        const { socket, received } = listen([RealtimeEvents.REDACTED_TRANSCRIPT]);
+        const payload = {
+            message_type: "redacted_transcript",
+            text: "my name is John Smith and my card number is 4242 4242 4242 4242",
+            redacted_text: "my name is {NAME_0} and my card number is {CREDIT_CARD_0}",
+        };
+
+        socket.deliver(payload);
+
+        expect(received[RealtimeEvents.REDACTED_TRANSCRIPT]).toEqual([payload]);
     });
 
     // Parameter rejections arrive as a message before the socket closes; dropping
