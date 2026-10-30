@@ -186,6 +186,18 @@ export interface EditedTranscriptMessage {
     edited_text: string;
 }
 
+/**
+ * The redacted version of a committed transcript.
+ * Only sent when the entityRedaction option is set.
+ */
+export interface RedactedTranscriptMessage {
+    message_type: "redacted_transcript";
+    /** The committed transcript text the entities were redacted from. */
+    text: string;
+    /** The committed transcript text with each redacted entity replaced by a marker such as `{NAME_0}`. */
+    redacted_text: string;
+}
+
 export interface ErrorMessage {
     message_type: "error";
     error: string;
@@ -287,6 +299,7 @@ export type WebSocketMessage =
     | CommittedTranscriptWithTimestampsMessage
     | CommittedTranscriptEntitiesMessage
     | EditedTranscriptMessage
+    | RedactedTranscriptMessage
     | ServerErrorMessage;
 
 /**
@@ -315,6 +328,8 @@ export enum RealtimeEvents {
     COMMITTED_TRANSCRIPT_ENTITIES = "committed_transcript_entities",
     /** Emitted when the edited version of a committed transcript is available */
     EDITED_TRANSCRIPT = "edited_transcript",
+    /** Emitted when the redacted version of a committed transcript is available */
+    REDACTED_TRANSCRIPT = "redacted_transcript",
     /** Emitted when an error occurs - can be any error message from the server or a native WebSocket error */
     ERROR = "error",
     /** Emitted when an auth error occurs */
@@ -361,6 +376,7 @@ export interface RealtimeEventMap {
     [RealtimeEvents.COMMITTED_TRANSCRIPT_WITH_TIMESTAMPS]: CommittedTranscriptWithTimestampsMessage;
     [RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES]: CommittedTranscriptEntitiesMessage;
     [RealtimeEvents.EDITED_TRANSCRIPT]: EditedTranscriptMessage;
+    [RealtimeEvents.REDACTED_TRANSCRIPT]: RedactedTranscriptMessage;
     [RealtimeEvents.ERROR]: RealtimeErrorPayload;
     [RealtimeEvents.AUTH_ERROR]: AuthErrorMessage;
     [RealtimeEvents.QUOTA_EXCEEDED]: QuotaExceededErrorMessage;
@@ -467,6 +483,9 @@ export class RealtimeConnection {
                     break;
                 case "edited_transcript":
                     this.eventEmitter.emit(RealtimeEvents.EDITED_TRANSCRIPT, data);
+                    break;
+                case "redacted_transcript":
+                    this.eventEmitter.emit(RealtimeEvents.REDACTED_TRANSCRIPT, data);
                     break;
                 case "error":
                     this.eventEmitter.emit(RealtimeEvents.ERROR, data);

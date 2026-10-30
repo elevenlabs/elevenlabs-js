@@ -13,6 +13,7 @@ export {
     type CommittedTranscriptWithTimestampsMessage,
     type CommittedTranscriptEntitiesMessage,
     type EditedTranscriptMessage,
+    type RedactedTranscriptMessage,
     type FinalTranscriptMessage,
     type FinalTranscriptWithTimestampsMessage,
     type PartialTranscriptMessage,
@@ -40,6 +41,7 @@ export {
     type AudioOptions,
     type UrlOptions,
     type EntityDetectionCategory,
-    type EntityDetectionOption
+    type EntityDetectionOption,
+    type EntityRedactionMode
 } from "./scribe";
 
