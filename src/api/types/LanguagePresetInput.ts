@@ -9,4 +9,6 @@ export interface LanguagePresetInput {
     firstMessageTranslation?: ElevenLabs.LanguagePresetTranslation;
     /** The translation of the soft timeout message */
     softTimeoutTranslation?: ElevenLabs.LanguagePresetTranslation;
+    /** The translation of the noisy environment message */
+    noisyEnvironmentMessageTranslation?: ElevenLabs.LanguagePresetTranslation;
 }

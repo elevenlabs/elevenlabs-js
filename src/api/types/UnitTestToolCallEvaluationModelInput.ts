@@ -11,4 +11,6 @@ export interface UnitTestToolCallEvaluationModelInput {
     verifyAbsence?: boolean;
     /** Configuration for testing workflow node transitions. When set, the test will verify the agent transitions to the specified workflow node. */
     workflowNodeTransition?: ElevenLabs.UnitTestWorkflowNodeTransitionEvaluationNodeId;
+    /** Evaluate guardrails triggered by the generated agent turn. */
+    guardrailTrigger?: ElevenLabs.UnitTestGuardrailTriggerEvaluationModel;
 }

@@ -1,0 +1,1 @@
+export { BodySmbUpdateAgentInfo } from "./BodySmbUpdateAgentInfo";

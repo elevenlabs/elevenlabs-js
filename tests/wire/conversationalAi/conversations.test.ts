@@ -74,6 +74,8 @@ describe("ConversationsClient", () => {
                     start_time_unix_secs: 1,
                     call_duration_secs: 1,
                     message_count: 1,
+                    user_message_count: 1,
+                    agent_message_count: 1,
                     status: "initiated",
                     termination_reason: "termination_reason",
                     call_successful: "success",
@@ -163,6 +165,8 @@ describe("ConversationsClient", () => {
                     startTimeUnixSecs: 1,
                     callDurationSecs: 1,
                     messageCount: 1,
+                    userMessageCount: 1,
+                    agentMessageCount: 1,
                     status: "initiated",
                     terminationReason: "termination_reason",
                     callSuccessful: "success",
@@ -286,6 +290,8 @@ describe("ConversationsClient", () => {
                     whatsapp_user_id: "whatsapp_user_id",
                     awaiting_first_user_message: true,
                     call_permission_request: { state: "blocked" },
+                    call_result: "answered",
+                    opening_message: { template_name: "template_name", sent_at_unix: 1 },
                 },
                 sms: {
                     direction: "inbound",
@@ -325,6 +331,8 @@ describe("ConversationsClient", () => {
                 call_summary_title: "call_summary_title",
                 scoped: [{ scope: "conversation", source_agent_id: "source_agent_id", successful: "success" }],
             },
+            user_message_count: 1,
+            agent_message_count: 1,
             visited_agents: [{ agent_id: "agent_id", branch_id: "branch_id" }],
             conversation_initiation_client_data: {
                 conversation_config_override: {
@@ -557,6 +565,11 @@ describe("ConversationsClient", () => {
                     callPermissionRequest: {
                         state: "blocked",
                     },
+                    callResult: "answered",
+                    openingMessage: {
+                        templateName: "template_name",
+                        sentAtUnix: 1,
+                    },
                 },
                 sms: {
                     direction: "inbound",
@@ -621,6 +634,8 @@ describe("ConversationsClient", () => {
                     },
                 ],
             },
+            userMessageCount: 1,
+            agentMessageCount: 1,
             visitedAgents: [
                 {
                     agentId: "agent_id",
@@ -878,6 +893,8 @@ describe("ConversationsClient", () => {
                     whatsapp_user_id: "whatsapp_user_id",
                     awaiting_first_user_message: true,
                     call_permission_request: { state: "blocked" },
+                    call_result: "answered",
+                    opening_message: { template_name: "template_name", sent_at_unix: 1 },
                 },
                 sms: {
                     direction: "inbound",
@@ -917,6 +934,8 @@ describe("ConversationsClient", () => {
                 call_summary_title: "call_summary_title",
                 scoped: [{ scope: "conversation", source_agent_id: "source_agent_id", successful: "success" }],
             },
+            user_message_count: 1,
+            agent_message_count: 1,
             visited_agents: [{ agent_id: "agent_id", branch_id: "branch_id" }],
             conversation_initiation_client_data: {
                 conversation_config_override: {
@@ -1148,6 +1167,11 @@ describe("ConversationsClient", () => {
                     callPermissionRequest: {
                         state: "blocked",
                     },
+                    callResult: "answered",
+                    openingMessage: {
+                        templateName: "template_name",
+                        sentAtUnix: 1,
+                    },
                 },
                 sms: {
                     direction: "inbound",
@@ -1212,6 +1236,8 @@ describe("ConversationsClient", () => {
                     },
                 ],
             },
+            userMessageCount: 1,
+            agentMessageCount: 1,
             visitedAgents: [
                 {
                     agentId: "agent_id",

@@ -15,6 +15,7 @@ import { ModelsClient } from "./api/resources/models/client/Client";
 import { MusicClient } from "./api/resources/music/client/Client";
 import { ProductionsClient } from "./api/resources/productions/client/Client";
 import { PronunciationDictionariesClient } from "./api/resources/pronunciationDictionaries/client/Client";
+import { ReceptionClient } from "./api/resources/reception/client/Client";
 import { SamplesClient } from "./api/resources/samples/client/Client";
 import { ServiceAccountsClient } from "./api/resources/serviceAccounts/client/Client";
 import { SpeechEngineClient } from "./api/resources/speechEngine/client/Client";
@@ -74,6 +75,7 @@ export class ElevenLabsClient {
     protected _assets: AssetsClient | undefined;
     protected _flows: FlowsClient | undefined;
     protected _productions: ProductionsClient | undefined;
+    protected _reception: ReceptionClient | undefined;
     protected _tokens: TokensClient | undefined;
     protected _workspaces: WorkspacesClient | undefined;
 
@@ -199,6 +201,10 @@ export class ElevenLabsClient {
 
     public get productions(): ProductionsClient {
         return (this._productions ??= new ProductionsClient(this._options));
+    }
+
+    public get reception(): ReceptionClient {
+        return (this._reception ??= new ReceptionClient(this._options));
     }
 
     public get tokens(): TokensClient {

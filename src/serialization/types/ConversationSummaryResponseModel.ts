@@ -22,6 +22,8 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     startTimeUnixSecs: core.serialization.property("start_time_unix_secs", core.serialization.number()),
     callDurationSecs: core.serialization.property("call_duration_secs", core.serialization.number()),
     messageCount: core.serialization.property("message_count", core.serialization.number()),
+    userMessageCount: core.serialization.property("user_message_count", core.serialization.number().optional()),
+    agentMessageCount: core.serialization.property("agent_message_count", core.serialization.number().optional()),
     status: ConversationSummaryResponseModelStatus,
     terminationReason: core.serialization.property("termination_reason", core.serialization.string().optional()),
     callSuccessful: core.serialization.property("call_successful", EvaluationSuccessResult),
@@ -61,6 +63,8 @@ export declare namespace ConversationSummaryResponseModel {
         start_time_unix_secs: number;
         call_duration_secs: number;
         message_count: number;
+        user_message_count?: number | null;
+        agent_message_count?: number | null;
         status: ConversationSummaryResponseModelStatus.Raw;
         termination_reason?: string | null;
         call_successful: EvaluationSuccessResult.Raw;

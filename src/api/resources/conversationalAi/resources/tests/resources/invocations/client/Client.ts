@@ -38,6 +38,7 @@ export class InvocationsClient {
      *     await client.conversationalAi.tests.invocations.list({
      *         agentId: "agent_id",
      *         branchId: "branch_id",
+     *         createdByUserId: "created_by_user_id",
      *         testId: "test_id",
      *         startTime: 1,
      *         endTime: 1,
@@ -58,10 +59,12 @@ export class InvocationsClient {
         request: ElevenLabs.conversationalAi.tests.InvocationsListRequest = {},
         requestOptions?: InvocationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetTestInvocationsPageResponseModel>> {
-        const { agentId, branchId, testId, startTime, endTime, versionId, pageSize, search, cursor } = request;
+        const { agentId, branchId, createdByUserId, testId, startTime, endTime, versionId, pageSize, search, cursor } =
+            request;
         const _queryParams: Record<string, unknown> = {
             agent_id: agentId,
             branch_id: branchId,
+            created_by_user_id: createdByUserId,
             test_id: testId,
             start_time: startTime,
             end_time: endTime,

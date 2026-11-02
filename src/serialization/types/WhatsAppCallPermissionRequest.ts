@@ -11,11 +11,17 @@ export const WhatsAppCallPermissionRequest: core.serialization.ObjectSchema<
 > = core.serialization.object({
     state: WhatsAppCallPermissionRequestState,
     requestedAtUnix: core.serialization.property("requested_at_unix", core.serialization.number().optional()),
+    respondedAtUnix: core.serialization.property("responded_at_unix", core.serialization.number().optional()),
+    permanent: core.serialization.boolean().optional(),
+    grantedByUserCall: core.serialization.property("granted_by_user_call", core.serialization.boolean().optional()),
 });
 
 export declare namespace WhatsAppCallPermissionRequest {
     export interface Raw {
         state: WhatsAppCallPermissionRequestState.Raw;
         requested_at_unix?: number | null;
+        responded_at_unix?: number | null;
+        permanent?: boolean | null;
+        granted_by_user_call?: boolean | null;
     }
 }

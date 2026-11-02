@@ -16423,7 +16423,7 @@ await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikW
 <dl>
 <dd>
 
-Update the name and/or content of a document.
+Update the name, content and/or auto-sync settings of a document.
 </dd>
 </dl>
 </dd>
@@ -18543,6 +18543,7 @@ Lists all test invocations with pagination support and optional search filtering
 await client.conversationalAi.tests.invocations.list({
     agentId: "agent_id",
     branchId: "branch_id",
+    createdByUserId: "created_by_user_id",
     testId: "test_id",
     startTime: 1,
     endTime: 1,
@@ -23753,6 +23754,3920 @@ await client.pronunciationDictionaries.rules.remove("21m00Tcm4TlvDq8ikWAM", {
 <dd>
 
 **requestOptions:** `RulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Services
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.SmbServiceDbModel[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all services for the current workspace with optional filters
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.list({
+    staffId: "staff_id",
+    assetId: "asset_id",
+    isActive: true,
+    kind: "classic"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ServicesListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.SmbServiceDbModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new service
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.create({
+    request: {
+        name: "name"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbCreateService` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">get</a>(service_id, { ...params }) -> ElevenLabs.SmbServiceDbModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific service by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.get("service_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ServicesGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">update</a>(service_id, { ...params }) -> ElevenLabs.ServiceUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing service. Only the fields sent are changed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.update("service_id", {
+    request: {}
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbUpdateService` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">delete</a>(service_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a service
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.delete("service_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ServicesDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">confirmUpdate</a>(service_id, { ...params }) -> ElevenLabs.ServiceUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Save a service update after user confirmed price impact. Optionally reprice future events.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.confirmUpdate("service_id", {
+    reprice: true,
+    request: {}
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbConfirmServiceUpdate` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Staff
+<details><summary><code>client.reception.staff.<a href="/src/api/resources/reception/resources/staff/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.SmbStaffResourceDbModel[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all staff for the current workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.staff.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.StaffListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StaffClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.staff.<a href="/src/api/resources/reception/resources/staff/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.SmbStaffResourceDbModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new staff member
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.staff.create({
+    request: {
+        name: "name"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbCreateStaffMember` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StaffClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.staff.<a href="/src/api/resources/reception/resources/staff/client/Client.ts">get</a>(staff_id, { ...params }) -> ElevenLabs.SmbStaffResourceDbModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific staff member by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.staff.get("staff_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**staff_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.StaffGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StaffClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.staff.<a href="/src/api/resources/reception/resources/staff/client/Client.ts">update</a>(staff_id, { ...params }) -> ElevenLabs.SmbStaffResourceDbModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing staff member. Only the fields sent are changed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.staff.update("staff_id", {
+    request: {}
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**staff_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbUpdateStaffMember` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StaffClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.staff.<a href="/src/api/resources/reception/resources/staff/client/Client.ts">delete</a>(staff_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a staff member
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.staff.delete("staff_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**staff_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.StaffDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StaffClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Receptionists
+<details><summary><code>client.reception.receptionists.<a href="/src/api/resources/reception/resources/receptionists/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.SmbCustomerFacingAgentResponse[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List every customer-facing receptionist for the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionistsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ReceptionistsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.<a href="/src/api/resources/reception/resources/receptionists/client/Client.ts">update</a>(agent_id, { ...params }) -> ElevenLabs.SmbCustomerFacingAgentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a receptionist's display name, config and/or widget appearance.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.update("agent_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.SmbUpdateCustomerFacingAgentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ReceptionistsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.<a href="/src/api/resources/reception/resources/receptionists/client/Client.ts">activate</a>(agent_id, { ...params }) -> ElevenLabs.SmbCustomerFacingAgentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Re-activate a deactivated receptionist. Subject to the workspace's tier cap; raises ``quota_exceeded`` if no active slot is free.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.activate("agent_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionistsActivateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ReceptionistsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception PhoneNumbers
+<details><summary><code>client.reception.phoneNumbers.<a href="/src/api/resources/reception/resources/phoneNumbers/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.SmbPhoneAssignmentDbModel[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace's phone numbers and the receptionist each one rings. A number with no `customer_facing_agent_id` is held by the workspace but not attached to a receptionist yet.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.phoneNumbers.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.PhoneNumbersListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.phoneNumbers.<a href="/src/api/resources/reception/resources/phoneNumbers/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.SmbPhoneAssignmentDbModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Give a receptionist a phone number. A number the workspace already holds but has not attached is used first. Otherwise, in the US and Canada, a number with one of the requested `area_codes` is taken from the pool or bought, falling back to any number in the business's country. In countries that require paperwork, the number is issued right away but takes public calls only once the workspace's own registration is approved (see `accepts_public_calls`). Counts toward the plan's phone number limit, and free plans can take only a few new numbers a day. Returns 404 when no number is available and 403 `telephony_managed_by_reseller` when the reseller supplies the workspace's numbers from its own Twilio account and none is free.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.phoneNumbers.create({
+    customerFacingAgentId: "customer_facing_agent_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.CreatePhoneAssignmentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.phoneNumbers.<a href="/src/api/resources/reception/resources/phoneNumbers/client/Client.ts">delete</a>(phone_assignment_id, { ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a phone number from the workspace. A pool number goes back to the pool it came from. A number the business brought from its own Twilio account, or one issued in a country that requires paperwork, is released at Twilio and cannot be recovered. Returns 403 `telephony_managed_by_reseller` when the reseller supplies the workspace's numbers from its own Twilio account.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.phoneNumbers.delete("phone_assignment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_assignment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.PhoneNumbersDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.phoneNumbers.<a href="/src/api/resources/reception/resources/phoneNumbers/client/Client.ts">update</a>(phone_assignment_id, { ...params }) -> ElevenLabs.SmbPhoneAssignmentDbModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Move a phone number to a different receptionist in the same workspace, which answers its calls from then on. Returns 409 `phone_number_not_attached` for a number no receptionist answers yet (attach it with `POST /v1/smb/phone-numbers/assignments`), and 403 `telephony_managed_by_reseller` when the reseller supplies the workspace's numbers from its own Twilio account.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.phoneNumbers.update("phone_assignment_id", {
+    customerFacingAgentId: "customer_facing_agent_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_assignment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReassignPhoneRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Holidays
+<details><summary><code>client.reception.holidays.<a href="/src/api/resources/reception/resources/holidays/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.HolidayResponseModel[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all holidays/time-off entries for the current workspace with optional filters
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.holidays.list({
+    startUnix: 1,
+    endUnix: 1,
+    timeOffType: "staff",
+    resourceId: "resource_id",
+    locationId: "location_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.HolidaysListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HolidaysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.holidays.<a href="/src/api/resources/reception/resources/holidays/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.HolidayResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new holiday
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.holidays.create({
+    request: {
+        name: "name",
+        startDate: {
+            year: 1,
+            month: 1,
+            day: 1
+        },
+        endDate: {
+            year: 1,
+            month: 1,
+            day: 1
+        },
+        timeOffType: "staff"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbCreateHoliday` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HolidaysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.holidays.<a href="/src/api/resources/reception/resources/holidays/client/Client.ts">get</a>(holiday_id, { ...params }) -> ElevenLabs.HolidayResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific holiday by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.holidays.get("holiday_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**holiday_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.HolidaysGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HolidaysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.holidays.<a href="/src/api/resources/reception/resources/holidays/client/Client.ts">update</a>(holiday_id, { ...params }) -> ElevenLabs.HolidayResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing holiday. Only the fields sent are changed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.holidays.update("holiday_id", {
+    request: {}
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**holiday_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbUpdateHoliday` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HolidaysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.holidays.<a href="/src/api/resources/reception/resources/holidays/client/Client.ts">delete</a>(holiday_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a holiday
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.holidays.delete("holiday_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**holiday_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.HolidaysDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HolidaysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Locations
+<details><summary><code>client.reception.locations.<a href="/src/api/resources/reception/resources/locations/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.LocationResponse[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all business locations.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.locations.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.LocationsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.locations.<a href="/src/api/resources/reception/resources/locations/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.LocationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a new business location.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.locations.create({
+    request: {
+        name: "name"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbCreateLocation` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.locations.<a href="/src/api/resources/reception/resources/locations/client/Client.ts">get</a>(location_id, { ...params }) -> ElevenLabs.LocationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a single location by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.locations.get("location_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**location_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.LocationsGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.locations.<a href="/src/api/resources/reception/resources/locations/client/Client.ts">update</a>(location_id, { ...params }) -> ElevenLabs.LocationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing location. Only the fields sent are changed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.locations.update("location_id", {
+    request: {}
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**location_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbUpdateLocation` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.locations.<a href="/src/api/resources/reception/resources/locations/client/Client.ts">delete</a>(location_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a location.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.locations.delete("location_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**location_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.LocationsDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception BusinessProfile
+<details><summary><code>client.reception.businessProfile.<a href="/src/api/resources/reception/resources/businessProfile/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.SmbAgentInfoResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all agent-affecting configuration with current workspace time
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.businessProfile.get();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BusinessProfileGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessProfileClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.businessProfile.<a href="/src/api/resources/reception/resources/businessProfile/client/Client.ts">update</a>({ ...params }) -> ElevenLabs.SmbAgentInfoResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update all agent-affecting configuration (triggers agent regeneration)
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.businessProfile.update({
+    request: {}
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbUpdateAgentInfo` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessProfileClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception KnowledgeSources
+<details><summary><code>client.reception.knowledgeSources.<a href="/src/api/resources/reception/resources/knowledgeSources/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.SmbKnowledgeSourceDbModel[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all knowledge sources for the current workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.knowledgeSources.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.KnowledgeSourcesListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeSourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.knowledgeSources.<a href="/src/api/resources/reception/resources/knowledgeSources/client/Client.ts">upload</a>({ ...params }) -> ElevenLabs.SmbKnowledgeSourceDbModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload a file as a knowledge source
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.knowledgeSources.upload({
+    file: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbUploadKnowledgeSource` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeSourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.knowledgeSources.<a href="/src/api/resources/reception/resources/knowledgeSources/client/Client.ts">get</a>(source_id, { ...params }) -> ElevenLabs.SmbKnowledgeSourceDbModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific knowledge source by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.knowledgeSources.get("source_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**source_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.KnowledgeSourcesGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeSourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.knowledgeSources.<a href="/src/api/resources/reception/resources/knowledgeSources/client/Client.ts">delete</a>(source_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a knowledge source
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.knowledgeSources.delete("source_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**source_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.KnowledgeSourcesDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeSourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.knowledgeSources.<a href="/src/api/resources/reception/resources/knowledgeSources/client/Client.ts">addUrl</a>({ ...params }) -> ElevenLabs.SmbKnowledgeSourceDbModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a URL as a knowledge source
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.knowledgeSources.addUrl({
+    request: {
+        url: "url"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbAddUrlSource` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeSourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Workspaces
+<details><summary><code>client.reception.workspaces.<a href="/src/api/resources/reception/resources/workspaces/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ResellerWorkspacesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List workspaces attributed to the caller's reseller, with cursor-based pagination
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.workspaces.list({
+    cursor: "cursor",
+    pageSize: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.WorkspacesListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkspacesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.workspaces.<a href="/src/api/resources/reception/resources/workspaces/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ProvisionResellerWorkspaceResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.workspaces.create({
+    businessName: "business_name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ProvisionResellerWorkspaceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkspacesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Subscriptions
+<details><summary><code>client.reception.subscriptions.<a href="/src/api/resources/reception/resources/subscriptions/client/Client.ts">assign</a>(workspace_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Subscribe a reseller-attributed workspace to one of the reseller's tiers
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.subscriptions.assign("workspace_id", {
+    tierId: "tier_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.AssignResellerTierRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.subscriptions.<a href="/src/api/resources/reception/resources/subscriptions/client/Client.ts">unassign</a>(workspace_id) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+End a reseller-attributed workspace's subscription at the end of the current billing period
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.subscriptions.unassign("workspace_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.subscriptions.<a href="/src/api/resources/reception/resources/subscriptions/client/Client.ts">change</a>(workspace_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Move a reseller-attributed workspace between the reseller's tiers. Upgrades apply immediately; downgrades and lateral moves take effect at the end of the billing period.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.subscriptions.change("workspace_id", {
+    tierId: "tier_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.AssignResellerTierRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.subscriptions.<a href="/src/api/resources/reception/resources/subscriptions/client/Client.ts">restore</a>(workspace_id) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Undo a pending unassignment so the subscription renews normally
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.subscriptions.restore("workspace_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.subscriptions.<a href="/src/api/resources/reception/resources/subscriptions/client/Client.ts">cancelPendingDowngrade</a>(workspace_id) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Drop a scheduled downgrade, leaving the workspace on its current tier
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.subscriptions.cancelPendingDowngrade("workspace_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Tiers
+<details><summary><code>client.reception.tiers.<a href="/src/api/resources/reception/resources/tiers/client/Client.ts">list</a>() -> ElevenLabs.ResellerTierResponse[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The reseller's live tier ladder, lowest rank first. The first entry is the trial. Without tier management the rest are the builtin tiers. Retired tiers are omitted
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.tiers.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `TiersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Billing
+<details><summary><code>client.reception.billing.<a href="/src/api/resources/reception/resources/billing/client/Client.ts">listInvoices</a>({ ...params }) -> ElevenLabs.ResellerInvoicesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the invoices charged to the reseller's card, newest first, one per workspace invoice
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.billing.listInvoices({
+    cursor: "cursor",
+    pageSize: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BillingListInvoicesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BillingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.billing.<a href="/src/api/resources/reception/resources/billing/client/Client.ts">getInvoice</a>(invoice_id) -> ElevenLabs.ResellerInvoiceDetail</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get one invoice charged to the reseller's card, broken down into the workspace invoice's lines
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.billing.getInvoice("invoice_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoice_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BillingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.billing.<a href="/src/api/resources/reception/resources/billing/client/Client.ts">listUpcomingPayments</a>() -> ElevenLabs.ResellerUpcomingPaymentsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the next workspace renewals the reseller's card will be charged for, soonest first
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.billing.listUpcomingPayments();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `BillingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Receptionists Rules
+<details><summary><code>client.reception.receptionists.rules.<a href="/src/api/resources/reception/resources/receptionists/resources/rules/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.AgentRule</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a behavioral rule to the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.rules.create("agent_id", {
+    request: {
+        title: "title",
+        description: "description"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.BodySmbAddAgentRule` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.rules.<a href="/src/api/resources/reception/resources/receptionists/resources/rules/client/Client.ts">update</a>(agent_id, rule_id, { ...params }) -> ElevenLabs.AgentRule</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replace an existing rule on the named receptionist. Send every field: an omitted `priority` resets to `strict`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.rules.update("agent_id", "rule_id", {
+    request: {
+        title: "title",
+        description: "description"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rule_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.BodySmbUpdateAgentRule` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.rules.<a href="/src/api/resources/reception/resources/receptionists/resources/rules/client/Client.ts">delete</a>(agent_id, rule_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a rule from the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.rules.delete("agent_id", "rule_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rule_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.RulesDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Receptionists Procedures
+<details><summary><code>client.reception.receptionists.procedures.<a href="/src/api/resources/reception/resources/receptionists/resources/procedures/client/Client.ts">list</a>(agent_id, { ...params }) -> ElevenLabs.SmbProcedure[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the procedures (SOPs) the named receptionist can run on calls.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.procedures.list("agent_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.ProceduresListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.procedures.<a href="/src/api/resources/reception/resources/receptionists/resources/procedures/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.SmbProcedure</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a procedure (SOP) to the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.procedures.create("agent_id", {
+    request: {
+        name: "name",
+        trigger: "trigger"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.BodySmbAddAgentProcedure` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.procedures.<a href="/src/api/resources/reception/resources/receptionists/resources/procedures/client/Client.ts">update</a>(agent_id, procedure_id, { ...params }) -> ElevenLabs.SmbProcedure</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replace an existing procedure on the named receptionist. Send every field: an omitted `body` resets to empty.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.procedures.update("agent_id", "procedure_id", {
+    request: {
+        name: "name",
+        trigger: "trigger"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.BodySmbUpdateAgentProcedure` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.procedures.<a href="/src/api/resources/reception/resources/receptionists/resources/procedures/client/Client.ts">delete</a>(agent_id, procedure_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a procedure from the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.procedures.delete("agent_id", "procedure_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.ProceduresDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Receptionists TransferRules
+<details><summary><code>client.reception.receptionists.transferRules.<a href="/src/api/resources/reception/resources/receptionists/resources/transferRules/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.SmbTransferRule</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a phone forwarding rule to the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.transferRules.create("agent_id", {
+    request: {
+        label: "label",
+        phoneNumber: "phone_number",
+        condition: "condition"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.BodySmbAddTransferRule` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TransferRulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.transferRules.<a href="/src/api/resources/reception/resources/receptionists/resources/transferRules/client/Client.ts">update</a>(agent_id, rule_id, { ...params }) -> ElevenLabs.SmbTransferRule</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replace an existing transfer rule on the named receptionist. Send every field: an omitted `post_dial_digits` clears it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.transferRules.update("agent_id", "rule_id", {
+    request: {
+        label: "label",
+        phoneNumber: "phone_number",
+        condition: "condition"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rule_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.BodySmbUpdateTransferRule` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TransferRulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.transferRules.<a href="/src/api/resources/reception/resources/receptionists/resources/transferRules/client/Client.ts">delete</a>(agent_id, rule_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a transfer rule from the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.transferRules.delete("agent_id", "rule_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rule_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.TransferRulesDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TransferRulesClient.RequestOptions` 
     
 </dd>
 </dl>

@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ReferencedToolCommonModel } from "./ReferencedToolCommonModel";
+import { UnitTestGuardrailTriggerEvaluationModel } from "./UnitTestGuardrailTriggerEvaluationModel";
 import { UnitTestToolCallParameter } from "./UnitTestToolCallParameter";
 import { UnitTestWorkflowNodeTransitionEvaluationNodeId } from "./UnitTestWorkflowNodeTransitionEvaluationNodeId";
 
@@ -18,6 +19,10 @@ export const UnitTestToolCallEvaluationModelInput: core.serialization.ObjectSche
         "workflow_node_transition",
         UnitTestWorkflowNodeTransitionEvaluationNodeId.optional(),
     ),
+    guardrailTrigger: core.serialization.property(
+        "guardrail_trigger",
+        UnitTestGuardrailTriggerEvaluationModel.optional(),
+    ),
 });
 
 export declare namespace UnitTestToolCallEvaluationModelInput {
@@ -26,5 +31,6 @@ export declare namespace UnitTestToolCallEvaluationModelInput {
         referenced_tool?: ReferencedToolCommonModel.Raw | null;
         verify_absence?: boolean | null;
         workflow_node_transition?: UnitTestWorkflowNodeTransitionEvaluationNodeId.Raw | null;
+        guardrail_trigger?: UnitTestGuardrailTriggerEvaluationModel.Raw | null;
     }
 }

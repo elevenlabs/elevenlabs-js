@@ -13,6 +13,10 @@ export interface GetConversationResponseModel {
     versionId?: string;
     metadata: ElevenLabs.ConversationHistoryMetadataCommonModel;
     analysis?: ElevenLabs.ConversationHistoryAnalysisCommonModel;
+    /** Number of user transcript turns with text; tool-only turns are not counted. `null` for older conversations before this field whose transcript was deleted. */
+    userMessageCount?: number;
+    /** Number of agent transcript turns with text; tool-only turns are not counted. `null` for older conversations before this field whose transcript was deleted. */
+    agentMessageCount?: number;
     visitedAgents?: ElevenLabs.VisitedAgentRef[];
     conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestOutput;
     environment?: string;

@@ -5,4 +5,6 @@ import type * as ElevenLabs from "../index";
 export interface TurnConfigOverrideConfig {
     /** Configures overrides for nested fields. */
     softTimeoutConfig?: ElevenLabs.SoftTimeoutConfigOverrideConfig;
+    /** Whether to allow overriding the noisy_environment_message field. */
+    noisyEnvironmentMessage?: boolean;
 }

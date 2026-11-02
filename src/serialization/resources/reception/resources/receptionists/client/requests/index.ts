@@ -1,0 +1,1 @@
+export { SmbUpdateCustomerFacingAgentRequest } from "./SmbUpdateCustomerFacingAgentRequest";

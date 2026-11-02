@@ -29,4 +29,6 @@ export interface TurnConfigWorkflowOverride {
     transcribeOnDisabledInterruptions?: boolean;
     /** Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses. */
     softTimeoutConfig?: ElevenLabs.SoftTimeoutConfigWorkflowOverride;
+    /** What the agent says when it detects a noisy environment. */
+    noisyEnvironmentMessage?: string;
 }
