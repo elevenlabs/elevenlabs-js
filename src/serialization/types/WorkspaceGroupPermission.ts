@@ -19,6 +19,7 @@ export const WorkspaceGroupPermission: core.serialization.Schema<
     "audio_native",
     "conversational_ai",
     "conversational_ai_read",
+    "architect",
     "voice_isolator",
     "ai_speech_classifier",
     "synthid_detector",
@@ -61,6 +62,7 @@ export declare namespace WorkspaceGroupPermission {
         | "audio_native"
         | "conversational_ai"
         | "conversational_ai_read"
+        | "architect"
         | "voice_isolator"
         | "ai_speech_classifier"
         | "synthid_detector"

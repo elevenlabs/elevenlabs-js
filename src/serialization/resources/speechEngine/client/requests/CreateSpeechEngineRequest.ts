@@ -8,6 +8,7 @@ import { AsrConversationalConfig } from "../../../../types/AsrConversationalConf
 import { BaseTurnConfig } from "../../../../types/BaseTurnConfig";
 import { ConversationConfigInput } from "../../../../types/ConversationConfigInput";
 import { PrivacyConfigInput } from "../../../../types/PrivacyConfigInput";
+import { SpeechEngineAuthConfig } from "../../../../types/SpeechEngineAuthConfig";
 import { SpeechEngineConfig } from "../../../../types/SpeechEngineConfig";
 import { SpeechEngineConversationInitiationClientDataConfig } from "../../../../types/SpeechEngineConversationInitiationClientDataConfig";
 import { TtsConversationalConfigInput } from "../../../../types/TtsConversationalConfigInput";
@@ -26,6 +27,7 @@ export const CreateSpeechEngineRequest: core.serialization.Schema<
     conversation: ConversationConfigInput.optional(),
     privacy: PrivacyConfigInput.optional(),
     callLimits: core.serialization.property("call_limits", AgentCallLimits.optional()),
+    auth: SpeechEngineAuthConfig.optional(),
     language: core.serialization.string().optional(),
     cascadeTimeoutSeconds: core.serialization.property(
         "cascade_timeout_seconds",
@@ -46,6 +48,7 @@ export declare namespace CreateSpeechEngineRequest {
         conversation?: ConversationConfigInput.Raw | null;
         privacy?: PrivacyConfigInput.Raw | null;
         call_limits?: AgentCallLimits.Raw | null;
+        auth?: SpeechEngineAuthConfig.Raw | null;
         language?: string | null;
         cascade_timeout_seconds?: number | null;
         tags?: string[] | null;

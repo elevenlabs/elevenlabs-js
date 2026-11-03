@@ -91,6 +91,10 @@ export const WidgetConfigResponse: core.serialization.ObjectSchema<
         core.serialization.boolean().optional(),
     ),
     mobileFullscreen: core.serialization.property("mobile_fullscreen", core.serialization.boolean().optional()),
+    transcriptSpeechSyncEnabled: core.serialization.property(
+        "transcript_speech_sync_enabled",
+        core.serialization.boolean().optional(),
+    ),
     language: core.serialization.string(),
     supportedLanguageOverrides: core.serialization.property(
         "supported_language_overrides",
@@ -156,6 +160,7 @@ export declare namespace WidgetConfigResponse {
         show_resize_button?: boolean | null;
         end_confirmation_enabled?: boolean | null;
         mobile_fullscreen?: boolean | null;
+        transcript_speech_sync_enabled?: boolean | null;
         language: string;
         supported_language_overrides?: string[] | null;
         language_presets?: Record<string, WidgetLanguagePresetResponse.Raw> | null;

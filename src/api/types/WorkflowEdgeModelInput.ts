@@ -11,4 +11,6 @@ export interface WorkflowEdgeModelInput {
     forwardCondition?: ElevenLabs.WorkflowEdgeModelInputForwardCondition;
     /** Condition that must be met for the edge to be traversed in the backward direction (target to source). */
     backwardCondition?: ElevenLabs.WorkflowEdgeModelInputBackwardCondition;
+    /** Points the edge is routed through between its source and target, in order. Layout only, no effect on execution. */
+    reroutes?: ElevenLabs.PositionInput[];
 }

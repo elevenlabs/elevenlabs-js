@@ -12,6 +12,7 @@ export const WorkspaceGroupPermission = {
     AudioNative: "audio_native",
     ConversationalAi: "conversational_ai",
     ConversationalAiRead: "conversational_ai_read",
+    Architect: "architect",
     VoiceIsolator: "voice_isolator",
     AiSpeechClassifier: "ai_speech_classifier",
     SynthidDetector: "synthid_detector",

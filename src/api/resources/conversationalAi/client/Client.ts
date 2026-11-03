@@ -10,6 +10,7 @@ import * as errors from "../../../../errors/index";
 import * as serializers from "../../../../serialization/index";
 import * as ElevenLabs from "../../../index";
 import { AgentsClient } from "../resources/agents/client/Client";
+import { AnalysisItemsClient } from "../resources/analysisItems/client/Client";
 import { AnalyticsClient } from "../resources/analytics/client/Client";
 import { BatchCallsClient } from "../resources/batchCalls/client/Client";
 import { ConversationsClient } from "../resources/conversations/client/Client";
@@ -53,6 +54,7 @@ export class ConversationalAiClient {
     protected _llm: LlmClient | undefined;
     protected _knowledgeBase: KnowledgeBaseClient | undefined;
     protected _tools: ToolsClient | undefined;
+    protected _analysisItems: AnalysisItemsClient | undefined;
     protected _settings: SettingsClient | undefined;
     protected _secrets: SecretsClient | undefined;
     protected _batchCalls: BatchCallsClient | undefined;
@@ -117,6 +119,10 @@ export class ConversationalAiClient {
 
     public get tools(): ToolsClient {
         return (this._tools ??= new ToolsClient(this._options));
+    }
+
+    public get analysisItems(): AnalysisItemsClient {
+        return (this._analysisItems ??= new AnalysisItemsClient(this._options));
     }
 
     public get settings(): SettingsClient {

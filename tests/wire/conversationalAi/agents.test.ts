@@ -56,6 +56,8 @@ describe("AgentsClient", () => {
                     merge_with_default_ignore_terms: false,
                     transcribe_on_disabled_interruptions: false,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
+                    noisy_environment_detection: true,
+                    noisy_environment_message: "noisy_environment_message",
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -296,6 +298,7 @@ describe("AgentsClient", () => {
                     show_resize_button: true,
                     end_confirmation_enabled: true,
                     mobile_fullscreen: true,
+                    transcript_speech_sync_enabled: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -409,6 +412,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     start_to_entry: {
                         source: "start_node",
@@ -419,6 +423,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_a_to_failure: {
                         source: "tool_node_a",
@@ -429,6 +434,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_a_to_tool_b: {
                         source: "tool_node_a",
@@ -439,6 +445,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_agent_transfer: {
                         source: "tool_node_b",
@@ -449,6 +456,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_conversation: {
                         source: "tool_node_b",
@@ -463,6 +471,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_end: {
                         source: "tool_node_b",
@@ -477,6 +486,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_phone: {
                         source: "tool_node_b",
@@ -491,6 +501,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                 },
                 nodes: {
@@ -1227,6 +1238,8 @@ describe("AgentsClient", () => {
                         timeoutSeconds: -1,
                         message: "Hhmmmm...yeah.",
                     },
+                    noisyEnvironmentDetection: true,
+                    noisyEnvironmentMessage: "noisy_environment_message",
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -1534,6 +1547,7 @@ describe("AgentsClient", () => {
                     showResizeButton: true,
                     endConfirmationEnabled: true,
                     mobileFullscreen: true,
+                    transcriptSpeechSyncEnabled: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -1696,6 +1710,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     start_to_entry: {
                         source: "start_node",
@@ -1710,6 +1730,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_a_to_failure: {
                         source: "tool_node_a",
@@ -1725,6 +1751,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_a_to_tool_b: {
                         source: "tool_node_a",
@@ -1740,6 +1772,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_agent_transfer: {
                         source: "tool_node_b",
@@ -1754,6 +1792,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_conversation: {
                         source: "tool_node_b",
@@ -1769,6 +1813,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_end: {
                         source: "tool_node_b",
@@ -1784,6 +1834,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_phone: {
                         source: "tool_node_b",
@@ -1802,6 +1858,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                 },
                 nodes: {
@@ -2685,6 +2747,8 @@ describe("AgentsClient", () => {
                     merge_with_default_ignore_terms: false,
                     transcribe_on_disabled_interruptions: false,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
+                    noisy_environment_detection: true,
+                    noisy_environment_message: "noisy_environment_message",
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -2925,6 +2989,7 @@ describe("AgentsClient", () => {
                     show_resize_button: true,
                     end_confirmation_enabled: true,
                     mobile_fullscreen: true,
+                    transcript_speech_sync_enabled: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -3038,6 +3103,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     start_to_entry: {
                         source: "start_node",
@@ -3048,6 +3114,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_a_to_failure: {
                         source: "tool_node_a",
@@ -3058,6 +3125,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_a_to_tool_b: {
                         source: "tool_node_a",
@@ -3068,6 +3136,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_agent_transfer: {
                         source: "tool_node_b",
@@ -3078,6 +3147,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_conversation: {
                         source: "tool_node_b",
@@ -3092,6 +3162,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_end: {
                         source: "tool_node_b",
@@ -3106,6 +3177,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_phone: {
                         source: "tool_node_b",
@@ -3120,6 +3192,7 @@ describe("AgentsClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                 },
                 nodes: {
@@ -3857,6 +3930,8 @@ describe("AgentsClient", () => {
                         timeoutSeconds: -1,
                         message: "Hhmmmm...yeah.",
                     },
+                    noisyEnvironmentDetection: true,
+                    noisyEnvironmentMessage: "noisy_environment_message",
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -4164,6 +4239,7 @@ describe("AgentsClient", () => {
                     showResizeButton: true,
                     endConfirmationEnabled: true,
                     mobileFullscreen: true,
+                    transcriptSpeechSyncEnabled: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -4326,6 +4402,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     start_to_entry: {
                         source: "start_node",
@@ -4340,6 +4422,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_a_to_failure: {
                         source: "tool_node_a",
@@ -4355,6 +4443,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_a_to_tool_b: {
                         source: "tool_node_a",
@@ -4370,6 +4464,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_agent_transfer: {
                         source: "tool_node_b",
@@ -4384,6 +4484,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_conversation: {
                         source: "tool_node_b",
@@ -4399,6 +4505,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_end: {
                         source: "tool_node_b",
@@ -4414,6 +4526,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_phone: {
                         source: "tool_node_b",
@@ -4432,6 +4550,12 @@ describe("AgentsClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                 },
                 nodes: {

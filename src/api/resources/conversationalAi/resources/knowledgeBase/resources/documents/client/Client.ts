@@ -592,7 +592,7 @@ export class DocumentsClient {
     }
 
     /**
-     * Update the name and/or content of a document.
+     * Update the name, content and/or auto-sync settings of a document.
      *
      * @param {string} documentation_id - The id of a document from the knowledge base. This is returned on document addition.
      * @param {ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch} request

@@ -9,4 +9,12 @@ export interface BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch {
     name?: string;
     /** Updated content for the document. Only supported for text documents, URL documents with auto-sync disabled, and file documents that are not synced from an external source. */
     content?: string;
+    /** Whether the document or folder is refreshed automatically. Only applicable to URL documents, folders, and externally-synced files. Leave unset to keep the current value. */
+    enableAutoSync?: boolean;
+    /** Whether to automatically remove the document once its source is no longer available. Only applicable when auto-sync is enabled. Leave unset to keep the current value. */
+    autoRemove?: boolean;
+    /** Minimum frequency (in days) at which the document is refreshed. The actual interval may be shorter, never longer. Only applicable when auto-sync is enabled. Leave unset to keep the current value. */
+    minimumFrequencyDays?: number;
+    /** Folders only. When true, items already in the folder are only tightened to stay at least as strict as the folder, and keep any setting that is stricter than the folder's. When false, they are set to exactly the folder's auto-sync settings. Ignored for externally synced folders, whose contents always follow the folder's schedule. */
+    tightenOnly?: boolean;
 }

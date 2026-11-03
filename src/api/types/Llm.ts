@@ -23,6 +23,7 @@ export const Llm = {
     Gpt6Sol: "gpt-6-sol",
     Gpt6Luna: "gpt-6-luna",
     Gpt61Sol: "gpt-6.1-sol",
+    Gpt61Terra: "gpt-6.1-terra",
     Gpt5Mini: "gpt-5-mini",
     Gpt5Nano: "gpt-5-nano",
     Gpt35Turbo: "gpt-3.5-turbo",

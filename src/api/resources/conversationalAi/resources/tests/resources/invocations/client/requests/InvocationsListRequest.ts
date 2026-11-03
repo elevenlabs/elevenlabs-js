@@ -5,6 +5,7 @@
  *     {
  *         agentId: "agent_id",
  *         branchId: "branch_id",
+ *         createdByUserId: "created_by_user_id",
  *         testId: "test_id",
  *         startTime: 1,
  *         endTime: 1,
@@ -19,6 +20,8 @@ export interface InvocationsListRequest {
     agentId?: string;
     /** Filter by branch ID */
     branchId?: string;
+    /** Filter by test run creator user ID */
+    createdByUserId?: string;
     /** Filter to invocations that include a run of this test id */
     testId?: string;
     /** Inclusive lower bound on created_at, in unix seconds */

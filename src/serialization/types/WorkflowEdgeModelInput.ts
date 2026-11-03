@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { PositionInput } from "./PositionInput";
 import { WorkflowEdgeModelInputBackwardCondition } from "./WorkflowEdgeModelInputBackwardCondition";
 import { WorkflowEdgeModelInputForwardCondition } from "./WorkflowEdgeModelInputForwardCondition";
 
@@ -20,6 +21,7 @@ export const WorkflowEdgeModelInput: core.serialization.ObjectSchema<
         "backward_condition",
         WorkflowEdgeModelInputBackwardCondition.optional(),
     ),
+    reroutes: core.serialization.list(PositionInput).optional(),
 });
 
 export declare namespace WorkflowEdgeModelInput {
@@ -28,5 +30,6 @@ export declare namespace WorkflowEdgeModelInput {
         target: string;
         forward_condition?: WorkflowEdgeModelInputForwardCondition.Raw | null;
         backward_condition?: WorkflowEdgeModelInputBackwardCondition.Raw | null;
+        reroutes?: PositionInput.Raw[] | null;
     }
 }

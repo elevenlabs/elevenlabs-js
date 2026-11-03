@@ -97,6 +97,8 @@ export interface WidgetConfigResponse {
     endConfirmationEnabled?: boolean;
     /** Whether the widget opens fullscreen on mobile */
     mobileFullscreen?: boolean;
+    /** Whether voice call transcripts are revealed as the agent speaks */
+    transcriptSpeechSyncEnabled?: boolean;
     language: string;
     supportedLanguageOverrides?: string[];
     /** Language presets for the widget */
