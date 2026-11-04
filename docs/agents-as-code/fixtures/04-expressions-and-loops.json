@@ -166,7 +166,10 @@
           "type": "lt_operator",
           "left": {
             "type": "llm",
-            "prompt": "How satisfied is the caller, from 1 to 10?"
+            "value_schema": {
+              "type": "number",
+              "description": "How satisfied is the caller, from 1 to 10?"
+            }
           },
           "right": {
             "type": "number_literal",
@@ -182,8 +185,11 @@
         "forward_condition": {
           "expression": {
             "left": {
-              "prompt": "How satisfied is the caller, from 1 to 10?",
-              "type": "llm"
+              "type": "llm",
+              "value_schema": {
+                "description": "How satisfied is the caller, from 1 to 10?",
+                "type": "number"
+              }
             },
             "right": {
               "type": "number_literal",

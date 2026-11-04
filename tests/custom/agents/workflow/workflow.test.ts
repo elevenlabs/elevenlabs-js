@@ -97,6 +97,38 @@ describe("build()", () => {
         expect(model.nodes?.b?.position).toEqual({ x: 300, y: 200 });
     });
 
+    it("counts a node reached only through a backward condition as reachable", () => {
+        const always = { type: "unconditional" };
+        const wf = Workflow.fromJSON({
+            nodes: {
+                start: { type: "start", edge_order: ["start__a"], position: { x: 0, y: 0 } },
+                a: {
+                    type: "override_agent",
+                    label: "a",
+                    additional_prompt: "A",
+                    edge_order: [],
+                    position: { x: 300, y: 0 },
+                },
+                b: {
+                    type: "override_agent",
+                    label: "b",
+                    additional_prompt: "B",
+                    edge_order: ["b__a"],
+                    position: { x: 600, y: 0 },
+                },
+            },
+            edges: {
+                start__a: { source: "start", target: "a", forward_condition: always },
+                b__a: { source: "b", target: "a", forward_condition: always, backward_condition: always },
+            },
+        });
+        const warnings: WorkflowIssue[] = [];
+
+        wf.build({ onWarning: (issue) => warnings.push(issue) });
+
+        expect(warnings).toEqual([]);
+    });
+
     it("places a new node on a free row instead of on top of a loaded node", () => {
         const at = (x: number, y: number) => ({ position: { x, y } });
         const edge = (source: string, target: string) => ({
@@ -160,6 +192,19 @@ describe("Expr", () => {
         expect(wireCondition(Condition.expr(refund, { label: "Large refund" }))).toEqual(
             fixture.expected.edges.triage__refund.forward_condition,
         );
+    });
+
+    it("builds the satisfaction rule from the fixture: an LLM-extracted number", () => {
+        const satisfied = Expr.llm("How satisfied is the caller, from 1 to 10?", { type: "number" }).lt(5);
+
+        expect(wireCondition(Condition.expr(satisfied))).toEqual(fixture.expected.edges.faq__end.forward_condition);
+    });
+
+    it("extracts a boolean by default", () => {
+        expect(Expr.llm("Did the caller agree?").toModel()).toEqual({
+            type: "llm",
+            valueSchema: { type: "boolean", description: "Did the caller agree?" },
+        });
     });
 
     it("maps lt and lte to distinct operators", () => {
@@ -264,6 +309,18 @@ describe("onResult()", () => {
         const lookup = wf.build().nodes?.lookup as ElevenLabs.WorkflowToolNodeModelInput;
 
         expect(lookup.edgeOrder).toEqual(["lookup__triage"]);
+    });
+
+    it("puts the success edge first even when failure is listed first", () => {
+        const wf = new Workflow();
+        wf.tool("lookup", ["tool_get_order"]).onResult({
+            failure: (failed) => failed.end({ id: "failed" }),
+            success: (ok) => ok.end(),
+        });
+
+        const lookup = wf.build().nodes?.lookup as ElevenLabs.WorkflowToolNodeModelInput;
+
+        expect(lookup.edgeOrder).toEqual(["lookup__end", "lookup__failed"]);
     });
 
     it("fails the build when used on a node that isn't a tool", () => {

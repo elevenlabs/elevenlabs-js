@@ -92,9 +92,16 @@ export function depthsFrom(graph: WorkflowGraph): Map<string, number> {
     while (queue.length > 0) {
         const id = queue.shift() as string;
         for (const edge of graph.edges) {
-            if (edge.source === id && !depths.has(edge.target) && graph.nodes.has(edge.target)) {
-                depths.set(edge.target, (depths.get(id) as number) + 1);
-                queue.push(edge.target);
+            // A backward condition lets the conversation travel the edge from target to source.
+            const next =
+                edge.source === id
+                    ? edge.target
+                    : edge.target === id && edge.backwardCondition !== undefined
+                      ? edge.source
+                      : undefined;
+            if (next !== undefined && !depths.has(next) && graph.nodes.has(next)) {
+                depths.set(next, (depths.get(id) as number) + 1);
+                queue.push(next);
             }
         }
     }

@@ -4,6 +4,7 @@ import {
     type ConditionInput,
     Destination,
     Expr,
+    type ResultBranches,
     Workflow,
     type WorkflowChain,
     type WorkflowNode,
@@ -103,12 +104,16 @@ function run(wf: Workflow, ops: FixtureOp[], first: WorkflowChain): WorkflowNode
             continue;
         }
         if (op.op === "onResult") {
-            const { success, failure } = op;
             const node = op.at === undefined ? (previous as WorkflowNode) : wf.node(op.at);
-            node.onResult({
-                ...(success !== undefined && { success: (branch) => run(wf, success, branch) }),
-                ...(failure !== undefined && { failure: (branch) => run(wf, failure, branch) }),
-            });
+            // Keep the fixture's key order, so a failure-first fixture reaches the builder failure-first.
+            const branches: ResultBranches = {};
+            for (const key of Object.keys(op)) {
+                if (key === "success" || key === "failure") {
+                    const ops = op[key] as FixtureOp[];
+                    branches[key] = (branch) => run(wf, ops, branch);
+                }
+            }
+            node.onResult(branches);
             continue;
         }
         if (op.op === "insertBetween") {

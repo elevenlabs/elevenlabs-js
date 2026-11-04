@@ -1,5 +1,13 @@
 import type * as ElevenLabs from "../../../api/index";
 
+/** Options for {@link Expr.llm}. */
+export interface LlmValueOptions {
+    /** The type of value the LLM extracts. Defaults to `"boolean"`. */
+    type?: "boolean" | "string" | "integer" | "number";
+    /** Allowed values, for `"string"` values. */
+    enum?: string[];
+}
+
 /** A value accepted wherever an expression is expected. Plain values become literals. */
 export type ExprInput = Expr | string | number | boolean | null;
 
@@ -36,9 +44,21 @@ export class Expr {
         }
     }
 
-    /** A value the LLM extracts from the conversation, described by `prompt`. */
-    static llm(prompt: string): Expr {
-        return new Expr({ type: "llm", prompt });
+    /**
+     * A value the LLM extracts from the conversation, described by `description`.
+     *
+     * @example
+     * Expr.llm("How satisfied is the caller, from 1 to 10?", { type: "number" }).lt(5)
+     */
+    static llm(description: string, options: LlmValueOptions = {}): Expr {
+        return new Expr({
+            type: "llm",
+            valueSchema: {
+                type: options.type ?? "boolean",
+                description,
+                ...(options.enum !== undefined && { enum: options.enum }),
+            },
+        });
     }
 
     /** True when every expression is true. */
