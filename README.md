@@ -266,6 +266,12 @@ await writeFile("workflows/support.json", wf.toJSONString());
 const stored = Workflow.fromJSON(await readFile("workflows/support.json", "utf8"));
 ```
 
+A workflow loaded from the API or a file can contain node types that are newer than your SDK version. They round-trip through `fromJSON()` and `toJSONString()` unchanged, but `agents.update()` rejects them, and `build()` warns about each one. Upgrade the SDK, or send the wire format directly:
+
+```typescript
+await client.conversationalAi.agents.update("agent_id", {}, { additionalBodyParameters: { workflow: wf.toJSON() } });
+```
+
 ## Retries
 
 This Node SDK is instrumented with automatic retries with exponential backoff. A request will be

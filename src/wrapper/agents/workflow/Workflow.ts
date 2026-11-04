@@ -3,6 +3,7 @@ import * as serializers from "../../../serialization/index";
 import { Condition, type ConditionInput } from "./Condition";
 import { type WorkflowIssue, WorkflowValidationError } from "./errors";
 import { layout } from "./layout";
+import { serializerKnowsNodeType } from "./nodeTypes";
 import { validate } from "./validate";
 import { WorkflowGraph } from "./WorkflowGraph";
 import { branch, type EdgeOrigin, type WhenOptions, WorkflowBranch, WorkflowChain, WorkflowNode } from "./WorkflowNode";
@@ -22,23 +23,6 @@ const SERIALIZER_OPTIONS = {
     allowUnrecognizedUnionMembers: true,
     allowUnrecognizedEnumValues: true,
 } as const;
-
-const knownNodeTypes = new Map<string, boolean>();
-
-/**
- * Whether this SDK version's generated serializer models a node type. Asked of the serializer rather than listed
- * here, so a regeneration that adds a node type is picked up without a change to the builder. An unknown type is
- * reported against the `type` key; a known one only fails on its other required fields.
- */
-function serializerKnowsNodeType(type: string): boolean {
-    let known = knownNodeTypes.get(type);
-    if (known === undefined) {
-        const result = serializers.AgentWorkflowRequestModelNodesValue.parse({ type });
-        known = result.ok || !result.errors.some((error) => error.path.join(".") === "type");
-        knownNodeTypes.set(type, known);
-    }
-    return known;
-}
 
 /**
  * An agent workflow, written as code. The workflow itself is the start node: calling a verb on it branches
@@ -223,6 +207,7 @@ export class Workflow extends WorkflowChain {
                 ...(edge.backwardCondition !== undefined && {
                     backwardCondition: edge.backwardCondition as ElevenLabs.WorkflowEdgeModelInputBackwardCondition,
                 }),
+                ...(edge.reroutes !== undefined && { reroutes: edge.reroutes }),
             };
         });
 

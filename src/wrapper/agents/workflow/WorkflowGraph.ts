@@ -12,6 +12,8 @@ export interface GraphEdge {
     target: string;
     forwardCondition?: ConditionModel;
     backwardCondition?: ConditionModel;
+    /** Editor bend points, kept for loaded edges. */
+    reroutes?: ElevenLabs.PositionInput[];
 }
 
 export interface NodeOptions {
@@ -143,7 +145,13 @@ export class WorkflowGraph {
         if (destination !== undefined) {
             if (next.type === "phone_number" || next.type === "standalone_agent") {
                 const dest = destination.toModel();
-                next = dest.type === next.type ? { ...next, ...dest } : { ...dest, position: next.position };
+                if (dest.type !== next.type) {
+                    next = { ...dest, position: next.position };
+                } else {
+                    // A new agent destination starts at that agent's default entry point, not the old one's node or branch.
+                    const { agentId: _, nodeId: __, branchId: ___, ...settings } = next;
+                    next = { ...(next.type === "standalone_agent" ? settings : next), ...dest };
+                }
             } else {
                 this._invalidOption(id, "destination", next.type as string);
             }

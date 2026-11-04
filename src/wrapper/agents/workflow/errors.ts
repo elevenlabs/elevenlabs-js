@@ -9,7 +9,8 @@ export type WorkflowIssueCode =
     | "result_edge_needs_tool"
     | "cannot_remove_start"
     | "missing_insert_result"
-    | "unreachable_node";
+    | "unreachable_node"
+    | "unknown_node_type";
 
 export interface WorkflowIssue {
     code: WorkflowIssueCode;

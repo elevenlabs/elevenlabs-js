@@ -1,4 +1,5 @@
 import type { WorkflowIssue } from "./errors";
+import { serializerKnowsNodeType } from "./nodeTypes";
 import type { WorkflowGraph } from "./WorkflowGraph";
 
 /** Checks that need the finished graph. Problems found while chaining are already in `graph.issues`. */
@@ -52,6 +53,20 @@ export function validate(graph: WorkflowGraph): WorkflowIssue[] {
                 severity: "error",
                 message: `Edge ${name} uses onSuccess()/onFailure(), which only applies to tool nodes`,
                 nodeId: edge.source,
+            });
+        }
+    }
+
+    for (const [id, model] of graph.nodes) {
+        if (!serializerKnowsNodeType(model.type)) {
+            issues.push({
+                code: "unknown_node_type",
+                severity: "warning",
+                message:
+                    `Node "${id}" has type "${model.type}", which this SDK version doesn't know, so agents.create() and ` +
+                    "agents.update() will reject build()'s output. Upgrade the SDK, or send toJSON() through " +
+                    "requestOptions.additionalBodyParameters: { workflow: wf.toJSON() }",
+                nodeId: id,
             });
         }
     }

@@ -61,7 +61,7 @@ Option keys are canonical names. Nested values use the SDK's generated types.
 | agent transfer | `delayMs`, `transferMessage`, `enableTransferredAgentFirstMessage`, `preserveClientTtsOverrides`, `preserveVoiceSettings` |
 | end | `id` |
 
-`WorkflowNode.update(options)` accepts the options for the node's own kind. It also accepts `prompt` (converse), `toolIds` (converse or tool) and `destination` (transfer). Setting a `destination` of the other transfer kind changes the node's type and keeps only its position. A key that doesn't apply to the node's kind records an `invalid_option` error.
+`WorkflowNode.update(options)` accepts the options for the node's own kind. It also accepts `prompt` (converse), `toolIds` (converse or tool) and `destination` (transfer). Setting a `destination` of the other transfer kind changes the node's type and keeps only its position. Setting a new agent destination on an agent transfer clears the old `node_id` and `branch_id` unless the new destination sets them, so the transfer starts at the new agent's default entry point; its transfer settings are kept. A key that doesn't apply to the node's kind records an `invalid_option` error.
 
 ### Value types
 
@@ -93,13 +93,14 @@ These rules make every SDK emit byte-identical JSON for the same program.
 
 - **Edge ids.** Edges loaded from an existing workflow keep their ids. A new edge gets `{source}__{target}`; if that id is taken, it gets `__2`, `__3` and so on, assigned in edge-list order.
 - **Edge list order.** Edges are kept in creation order. When loading, they are ordered by walking the nodes in document order, each node's `edge_order` in turn, followed by any edges not listed in an `edge_order`. `insertBetween` puts the first new hop where the replaced edge was.
+- **Loaded edges.** Edges kept from a loaded workflow are written back with their `reroutes` (editor bend points). Edges `insertBetween` creates in place of a removed one start without them.
 - **`edge_order`.** For each node, the ids of its outgoing edges in edge-list order. Every node gets one, even if it is empty.
 - **Positions.** A node that has a `position` keeps it. Otherwise:
   1. Run a breadth-first search from the start node, following edges in edge-list order. A node's column is its BFS depth.
   2. Unreachable nodes go in the column after the deepest one, in insertion order.
-  3. Auto-placed nodes are numbered per column in visiting order, which gives each one its row.
+  3. Auto-placed nodes are numbered per column in visiting order, which gives each one its row. A row whose grid position (`x`, `y` as in step 4) is already taken by a node with a position, loaded or placed earlier, is skipped.
   4. The position is `x = column × 300`, `y = row × 200`. The start node, if it has no position, is placed at `(0, 0)`.
-- **Node types without a verb.** Node types the builder has no verb for are kept exactly as loaded, whether the SDK's generated types model them (such as `say`) or not (newer API node types). Only their `edge_order` is recomputed. Decide which serialization a node needs from the generated types, not from the builder's own list of verbs, so a regeneration that adds a node type doesn't break round-trips.
+- **Node types without a verb.** Node types the builder has no verb for are kept exactly as loaded, whether the SDK's generated types model them (such as `say`) or not (newer API node types). Only their `edge_order` is recomputed. Their guarantee covers JSON export and loading: `toJSON()` / `fromJSON()` round-trip them. An SDK whose request serializer rejects a node type it doesn't know records an `unknown_node_type` warning for each such node, and documents a way to send `toJSON()`'s output directly. Decide which serialization a node needs from the generated types, not from the builder's own list of verbs, so a regeneration that adds a node type doesn't break round-trips.
 
 ## Validation
 
@@ -118,6 +119,7 @@ These rules make every SDK emit byte-identical JSON for the same program.
 | `cannot_remove_start` | error | `remove` is called on the start node |
 | `missing_insert_result` | error | An `insertBetween` callback doesn't return a node |
 | `unreachable_node` | warning | A node can't be reached from start |
+| `unknown_node_type` | warning | A node's type isn't in this SDK version's generated types, so the SDK's create/update request would reject `build()`'s output |
 
 ## `insertBetween(sourceId, targetId, insert)`
 

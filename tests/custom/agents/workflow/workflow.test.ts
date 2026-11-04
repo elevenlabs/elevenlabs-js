@@ -96,6 +96,40 @@ describe("build()", () => {
         expect(model.nodes?.end?.position).toEqual({ x: 300, y: 0 });
         expect(model.nodes?.b?.position).toEqual({ x: 300, y: 200 });
     });
+
+    it("places a new node on a free row instead of on top of a loaded node", () => {
+        const at = (x: number, y: number) => ({ position: { x, y } });
+        const edge = (source: string, target: string) => ({
+            source,
+            target,
+            forward_condition: { type: "llm", condition: target },
+        });
+        const wf = Workflow.fromJSON({
+            nodes: {
+                start: { type: "start", ...at(0, 0), edge_order: ["start__a"] },
+                a: { type: "override_agent", label: "a", ...at(300, 0), edge_order: ["a__b", "a__c"] },
+                b: { type: "override_agent", label: "b", ...at(600, 0) },
+                c: { type: "override_agent", label: "c", ...at(600, 200) },
+            },
+            edges: { start__a: edge("start", "a"), a__b: edge("a", "b"), a__c: edge("a", "c") },
+        });
+
+        wf.node("a").when("d").converse("d", "D");
+
+        expect(wf.build().nodes?.d?.position).toEqual({ x: 600, y: 400 });
+    });
+
+    it("warns that agents.update() will reject a node type this SDK version doesn't know", () => {
+        const fixture = JSON.parse(
+            readFileSync(join(__dirname, "../../../../docs/agents-as-code/fixtures/06-round-trip.json"), "utf8"),
+        );
+        const warnings: WorkflowIssue[] = [];
+
+        Workflow.fromJSON(fixture.from).build({ onWarning: (issue) => warnings.push(issue) });
+
+        // "say" is in the generated types, so only the made-up type is flagged.
+        expect(warnings.map((w) => [w.code, w.nodeId])).toEqual([["unknown_node_type", "survey"]]);
+    });
 });
 
 describe("Expr", () => {
@@ -182,6 +216,31 @@ describe("update()", () => {
             position: { x: 300, y: 0 },
             edgeOrder: [],
         });
+    });
+
+    it("points an agent transfer at the new agent's default entry, not the old agent's node or branch", () => {
+        const wf = Workflow.fromJSON({
+            nodes: {
+                start: { type: "start", edge_order: ["start__t"] },
+                t: {
+                    type: "standalone_agent",
+                    agent_id: "agent_a",
+                    node_id: "qualify",
+                    branch_id: "branch_beta",
+                    transfer_message: "One moment",
+                },
+            },
+            edges: { start__t: { source: "start", target: "t", forward_condition: { type: "unconditional" } } },
+        });
+
+        wf.node("t").update({ destination: Destination.agent("agent_b") });
+
+        const {
+            position: _,
+            edgeOrder: __,
+            ...t
+        } = wf.build().nodes?.t as ElevenLabs.WorkflowStandaloneAgentNodeModelInput;
+        expect(t).toEqual({ type: "standalone_agent", agentId: "agent_b", transferMessage: "One moment" });
     });
 
     it("rejects options that belong to another node kind", () => {

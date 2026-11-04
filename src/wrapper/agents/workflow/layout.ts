@@ -7,8 +7,8 @@ export const ROW_HEIGHT = 200;
 
 /**
  * Positions for the workflow editor. Nodes that already have a position keep it. The rest go in
- * column = breadth-first depth from the start node, row = order of discovery within that column.
- * Unreachable nodes go in the column after the deepest one.
+ * column = breadth-first depth from the start node, row = order of discovery within that column, skipping rows
+ * where a positioned node already sits. Unreachable nodes go in the column after the deepest one.
  */
 export function layout(graph: WorkflowGraph): Map<string, ElevenLabs.PositionInput> {
     const depths = depthsFrom(graph);
@@ -16,6 +16,12 @@ export function layout(graph: WorkflowGraph): Map<string, ElevenLabs.PositionInp
     const order = [...depths.keys(), ...[...graph.nodes.keys()].filter((id) => !depths.has(id))];
     const rows = new Map<number, number>();
     const positions = new Map<string, ElevenLabs.PositionInput>();
+    const occupied = new Set<string>();
+    for (const model of graph.nodes.values()) {
+        if (model.position !== undefined) {
+            occupied.add(`${model.position.x},${model.position.y}`);
+        }
+    }
 
     for (const id of order) {
         const existing = graph.nodes.get(id)?.position;
@@ -24,8 +30,12 @@ export function layout(graph: WorkflowGraph): Map<string, ElevenLabs.PositionInp
             continue;
         }
         const column = depths.get(id) ?? lastColumn;
-        const row = rows.get(column) ?? 0;
+        let row = rows.get(column) ?? 0;
+        while (occupied.has(`${column * COLUMN_WIDTH},${row * ROW_HEIGHT}`)) {
+            row++;
+        }
         rows.set(column, row + 1);
+        occupied.add(`${column * COLUMN_WIDTH},${row * ROW_HEIGHT}`);
         positions.set(id, { x: column * COLUMN_WIDTH, y: row * ROW_HEIGHT });
     }
     return positions;
