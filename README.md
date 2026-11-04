@@ -216,7 +216,7 @@ Build an agent [workflow](https://elevenlabs.io/docs/eleven-agents/customization
 | `transfer(id, destination, options?)` | A transfer to a phone number, SIP URI or another agent |
 | `end(options?)` | The end of the conversation (shared `"end"` node unless you pass an `id`) |
 
-`when(condition)` opens a conditional branch. A string is an LLM condition; an `Expr` is an expression over dynamic variables. `link(node)` connects to a node that already exists, for merges and loops.
+`when(condition)` opens a conditional branch. A string is an LLM condition; an `Expr` is an expression over dynamic variables. `goTo(node)` moves the conversation to a node that already exists, for merges and loops.
 
 ```typescript
 import { ElevenLabsClient, Workflow, Destination, Expr } from "@elevenlabs/elevenlabs-js";
@@ -228,7 +228,7 @@ const identify = triage.when("Caller wants to check an order").agent("identify",
 
 const lookup = identify.when("Caller gave an order number").tool("lookup_order", ["tool_get_order"]);
 lookup.onSuccess().agent("resolve", "Explain the order status").when("Caller is satisfied").end();
-lookup.onFailure().link(identify);
+lookup.onFailure().goTo(identify);
 
 triage.when(Expr.variable("tier").eq("gold")).transfer("vip", Destination.agent("agent_vip"));
 triage.when("Caller wants a human").transfer("human", Destination.phone("+15551234567"));

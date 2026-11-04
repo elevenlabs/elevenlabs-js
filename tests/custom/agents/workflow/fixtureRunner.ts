@@ -20,7 +20,7 @@ type RawDestination =
     | { agent: string; nodeId?: string };
 
 export interface FixtureOp {
-    op: "agent" | "tool" | "transfer" | "end" | "link" | "update" | "remove" | "insertBetween";
+    op: "agent" | "tool" | "transfer" | "end" | "goTo" | "update" | "remove" | "insertBetween";
     at?: string;
     when?: RawCondition;
     back?: RawCondition;
@@ -128,8 +128,8 @@ function run(wf: Workflow, ops: FixtureOp[], first: WorkflowChain): WorkflowNode
             case "end":
                 result = at.end(options(op));
                 break;
-            case "link":
-                result = at.link(op.target as string, op.back === undefined ? {} : { back: condition(op.back) });
+            case "goTo":
+                result = at.goTo(op.target as string, op.back === undefined ? {} : { back: condition(op.back) });
                 break;
         }
         previous = result as WorkflowNode;

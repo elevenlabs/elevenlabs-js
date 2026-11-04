@@ -1,6 +1,6 @@
 {
   "name": "tool-routing",
-  "description": "A tool node routed with onSuccess/onFailure, schema overrides, and a failure branch that links back to an existing node.",
+  "description": "A tool node routed with onSuccess/onFailure, schema overrides, and a failure branch that goes back to an existing node.",
   "ops": [
     {
       "op": "agent",
@@ -34,7 +34,7 @@
       "prompt": "Explain the order status"
     },
     {
-      "op": "link",
+      "op": "goTo",
       "at": "lookup_order",
       "onFailure": true,
       "target": "identify"

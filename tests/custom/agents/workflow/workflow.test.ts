@@ -20,7 +20,7 @@ function supportLine(): Workflow {
     const identify = triage.when("Caller wants to check an order").agent("identify", "Ask for the order number");
     const lookup = identify.when("Caller gave an order number").tool("lookup_order", ["tool_get_order"]);
     const resolve = lookup.onSuccess().agent("resolve", "Explain the order status");
-    lookup.onFailure().link(identify);
+    lookup.onFailure().goTo(identify);
     triage.when(Expr.variable("tier").eq("gold")).transfer("vip", Destination.agent("agent_vip"));
     resolve.when("Caller is satisfied").end();
     return wf;
@@ -63,16 +63,16 @@ describe("build()", () => {
         const a = wf.agent("a", "A");
         // None of these throw: chaining only records problems, so all of them surface together.
         wf.agent("a", "duplicate id");
-        a.link("missing");
+        a.goTo("missing");
         a.onSuccess().end();
 
         expect(buildErrors(wf)).toEqual(["duplicate_node_id", "result_edge_needs_tool", "unknown_node"]);
         expect(() => wf.build()).toThrow(/Node id "a" is used by more than one node[\s\S]*unknown node "missing"/);
     });
 
-    it("lets a link target a node that is only created later", () => {
+    it("lets goTo target a node that is only created later", () => {
         const wf = new Workflow();
-        wf.agent("a", "A").when("Skip ahead").link("b");
+        wf.agent("a", "A").when("Skip ahead").goTo("b");
         wf.node("a").when("Normal path").agent("b", "B");
 
         expect(buildErrors(wf)).toEqual([]);

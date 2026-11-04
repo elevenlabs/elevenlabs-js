@@ -99,7 +99,7 @@ export class Workflow extends WorkflowChain {
         return branch(this._graph, this._graph.startId, condition, options);
     }
 
-    /** A handle to an existing node, for editing or linking to it. */
+    /** A handle to an existing node, for editing it or going to it. */
     node(id: string): WorkflowNode {
         if (!this._graph.nodes.has(id)) {
             this._graph.issues.push({
@@ -181,9 +181,9 @@ export class Workflow extends WorkflowChain {
                 nodeId: sourceId,
             });
         } else if (last.type === "tool") {
-            last.onSuccess().link(targetId);
+            last.onSuccess().goTo(targetId);
         } else {
-            last.link(targetId);
+            last.goTo(targetId);
         }
         return this;
     }

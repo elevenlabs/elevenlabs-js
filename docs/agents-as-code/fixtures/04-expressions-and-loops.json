@@ -1,6 +1,6 @@
 {
   "name": "expressions-and-loops",
-  "description": "Expression conditions covering every operator, an edge label, a two-way edge via `back`, and link with `back`.",
+  "description": "Expression conditions covering every operator, an edge label, a two-way edge via `back`, and goTo with `back`.",
   "ops": [
     {
       "op": "agent",
@@ -135,7 +135,7 @@
       }
     },
     {
-      "op": "link",
+      "op": "goTo",
       "at": "refund",
       "when": {
         "expr": {
@@ -153,7 +153,7 @@
       "target": "triage"
     },
     {
-      "op": "link",
+      "op": "goTo",
       "at": "vip",
       "target": "faq",
       "back": "Caller wants VIP service again"

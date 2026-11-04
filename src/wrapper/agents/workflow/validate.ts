@@ -22,7 +22,7 @@ export function validate(graph: WorkflowGraph): WorkflowIssue[] {
             issues.push({
                 code: "edge_into_start",
                 severity: "error",
-                message: `Edge ${name} points into the start node; link to the first node after it instead`,
+                message: `Edge ${name} points into the start node; go to the first node after it instead`,
                 nodeId: edge.source,
             });
         }

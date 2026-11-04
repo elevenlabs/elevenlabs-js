@@ -35,7 +35,7 @@ Node verbs exist on `Workflow`, `WorkflowNode` and `WorkflowBranch`. Each verb a
 | `tool(id, toolIds, options?)` | `tool`. Creates one `{tool_id}` locator per id, with `schemaOverrides[toolId]` if given. |
 | `transfer(id, destination, options?)` | `phone_number` for phone or SIP destinations; `standalone_agent` for agent destinations. |
 | `end(options?)` | `end`. `options.id` defaults to `"end"`. When the id already belongs to an end node, that node is reused. |
-| `link(target, options?)` | No new node. Adds an edge to `target` (a handle or an id), which may be created later. `options.back` sets the backward condition. |
+| `goTo(target, options?)` | No new node. Moves the conversation to `target` with a new edge to it. `target` is a handle or an id, and may be created later. `options.back` sets the backward condition. |
 
 ### Routing
 
@@ -45,7 +45,7 @@ Node verbs exist on `Workflow`, `WorkflowNode` and `WorkflowBranch`. Each verb a
 | `onSuccess(options?)` / `onFailure(options?)` | `WorkflowNode` | `{type: "result", successful: true/false}`. `options.label` is optional. |
 | A verb with no routing call | | `{type: "unconditional"}` |
 
-A `WorkflowBranch` (returned by `when` / `onSuccess` / `onFailure`) only has the node verbs and `link`.
+A `WorkflowBranch` (returned by `when` / `onSuccess` / `onFailure`) only has the node verbs and `goTo`.
 
 ### Node options
 
@@ -79,7 +79,7 @@ JS, Python, Ruby and PHP accept these implicitly. Rust uses `From<&str>` / `From
 
 ## Portability rules
 
-1. **No reserved words.** Use `fromAgent`, not `from` (Python). Use `link`, not `goto` (Java). Use `allOf` / `anyOf` / `ifElse`, not `and` / `or` / `if` (Python, Ruby). Kotlin callers need backticks around `when`; the Java SDK may add a `branch` alias for it.
+1. **No reserved words.** Use `fromAgent`, not `from` (Python). Use `goTo`, not `goto` (reserved in Java and PHP; PHP 7+ accepts the case-insensitive match `goTo` as a method name). Use `allOf` / `anyOf` / `ifElse`, not `and` / `or` / `if` (Python, Ruby). Kotlin callers need backticks around `when`; the Java SDK may add a `branch` alias for it.
 2. **No `then` method.** JS treats any object with a `then` method as a promise.
 3. **Positional parameters have one fixed type each.** Everything optional goes in a trailing options object, struct or kwargs.
 4. **Chaining never fails.** All problems are recorded and reported together by `build()`, which throws or returns `(model, error)` / `Result` depending on the language. Duplicate ids, unknown targets and bad options all surface there.
@@ -150,7 +150,7 @@ Each op calls one builder method:
 
 | Field | Meaning |
 |---|---|
-| `op` | `agent`, `tool`, `transfer`, `end`, `link`, `update`, `remove` or `insertBetween` |
+| `op` | `agent`, `tool`, `transfer`, `end`, `goTo`, `update`, `remove` or `insertBetween` |
 | `at` | Where the op applies. A node id, or `"$start"` for the workflow. Without it, the op continues from the previous op's result, or from the workflow / insert branch for the first op. |
 | `when` + `back` | Call `when(condition, {back})` first. A condition is a string (LLM), `{"llm": text, "label"?}` or `{"expr": <wire AST>, "label"?}`. |
 | `onSuccess` / `onFailure` | `true` calls the matching method first. |

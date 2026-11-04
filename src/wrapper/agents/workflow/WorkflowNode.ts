@@ -14,7 +14,7 @@ export interface WhenOptions {
     back?: ConditionInput;
 }
 
-export interface LinkOptions {
+export interface GoToOptions {
     /** Condition for coming back along this edge, from the target to this node. */
     back?: ConditionInput;
 }
@@ -72,8 +72,11 @@ export abstract class WorkflowChain {
         return this._connect(id);
     }
 
-    /** Connects to a node that already exists (or will by the time you call `build()`). */
-    link(target: WorkflowNode | string, options: LinkOptions = {}): WorkflowNode {
+    /**
+     * Moves the conversation to a node that already exists (or will by the time you call `build()`), for merges
+     * and loops.
+     */
+    goTo(target: WorkflowNode | string, options: GoToOptions = {}): WorkflowNode {
         return this._connect(typeof target === "string" ? target : target.id, options.back);
     }
 
