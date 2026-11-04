@@ -1,0 +1,280 @@
+import { readFileSync } from "fs";
+import { join } from "path";
+import type * as ElevenLabs from "../../../../src/api/index";
+import * as serializers from "../../../../src/serialization/index";
+import {
+    Condition,
+    Destination,
+    Expr,
+    Workflow,
+    type WorkflowIssue,
+    WorkflowValidationError,
+} from "../../../../src/wrapper/agents/workflow";
+
+// Behaviour the shared fixtures (fixtures.test.ts) can't cover: the JS-facing model from build(), the Expr
+// builder, fromAgent() on SDK-shaped responses, and rules with no fixture yet.
+
+function supportLine(): Workflow {
+    const wf = new Workflow({ preventSubagentLoops: true });
+    const triage = wf.agent("triage", "Greet the caller", { label: "Triage" });
+    const identify = triage.when("Caller wants to check an order").agent("identify", "Ask for the order number");
+    const lookup = identify.when("Caller gave an order number").tool("lookup_order", ["tool_get_order"]);
+    const resolve = lookup.onSuccess().agent("resolve", "Explain the order status");
+    lookup.onFailure().link(identify);
+    triage.when(Expr.variable("tier").eq("gold")).transfer("vip", Destination.agent("agent_vip"));
+    resolve.when("Caller is satisfied").end();
+    return wf;
+}
+
+function buildErrors(wf: Workflow): string[] {
+    try {
+        wf.build();
+    } catch (err) {
+        if (err instanceof WorkflowValidationError) {
+            return err.issues.map((issue) => issue.code).sort();
+        }
+        throw err;
+    }
+    return [];
+}
+
+describe("build()", () => {
+    it("produces a workflow the agents.update request serializer accepts without stripping anything", () => {
+        // agents.update() serializes its body with this schema; "fail" rejects any field the API doesn't know.
+        const body = serializers.conversationalAi.UpdateAgentRequest.jsonOrThrow(
+            { workflow: supportLine().build() },
+            { unrecognizedObjectKeys: "fail" },
+        );
+
+        expect(Object.keys(body.workflow?.nodes ?? {})).toEqual([
+            "start",
+            "triage",
+            "identify",
+            "lookup_order",
+            "resolve",
+            "vip",
+            "end",
+        ]);
+        expect(body.workflow?.prevent_subagent_loops).toBe(true);
+    });
+
+    it("reports every problem in one error instead of failing on the first", () => {
+        const wf = new Workflow();
+        const a = wf.agent("a", "A");
+        // None of these throw: chaining only records problems, so all of them surface together.
+        wf.agent("a", "duplicate id");
+        a.link("missing");
+        a.onSuccess().end();
+
+        expect(buildErrors(wf)).toEqual(["duplicate_node_id", "result_edge_needs_tool", "unknown_node"]);
+        expect(() => wf.build()).toThrow(/Node id "a" is used by more than one node[\s\S]*unknown node "missing"/);
+    });
+
+    it("lets a link target a node that is only created later", () => {
+        const wf = new Workflow();
+        wf.agent("a", "A").when("Skip ahead").link("b");
+        wf.node("a").when("Normal path").agent("b", "B");
+
+        expect(buildErrors(wf)).toEqual([]);
+        expect(wf.build().nodes?.a?.edgeOrder).toEqual(["a__b", "a__b__2"]);
+    });
+
+    it("builds despite unreachable nodes, reporting them as warnings", () => {
+        const wf = new Workflow();
+        wf.agent("a", "A").end();
+        wf.node("a").when("never").agent("b", "B");
+        wf.remove("a");
+        const warnings: WorkflowIssue[] = [];
+
+        const model = wf.build({ onWarning: (issue) => warnings.push(issue) });
+
+        expect(warnings.map((w) => [w.code, w.nodeId])).toEqual([
+            ["unreachable_node", "end"],
+            ["unreachable_node", "b"],
+        ]);
+        // Unreachable nodes share the column after the deepest reachable one, in insertion order.
+        expect(model.nodes?.end?.position).toEqual({ x: 300, y: 0 });
+        expect(model.nodes?.b?.position).toEqual({ x: 300, y: 200 });
+    });
+});
+
+describe("Expr", () => {
+    // The fixtures load these ASTs as data, so this is the only check that the Expr builder produces them.
+    const fixture = JSON.parse(
+        readFileSync(join(__dirname, "../../../../docs/agents-as-code/fixtures/04-expressions-and-loops.json"), "utf8"),
+    );
+    const wireCondition = (condition: Condition): unknown =>
+        serializers.WorkflowEdgeModelInputForwardCondition.jsonOrThrow(condition.toModel());
+
+    it("builds the VIP rule from the fixture: allOf/anyOf, comparisons and plain-value literals", () => {
+        const vip = Expr.anyOf(
+            Expr.variable("tier").eq("gold"),
+            Expr.allOf(Expr.variable("orders").gte(10), Expr.variable("churn_risk").neq(false)),
+        );
+
+        expect(wireCondition(Condition.expr(vip))).toEqual(fixture.expected.edges.triage__vip.forward_condition);
+    });
+
+    it("builds the refund rule from the fixture: arithmetic, ifElse and null", () => {
+        const threshold = Expr.ifElse(
+            Expr.variable("region").eq(null),
+            500,
+            Expr.literal(1000).sub(Expr.variable("discount").div(Expr.literal(1).add(1))),
+        );
+        const refund = Expr.variable("unit_price").mul(Expr.variable("quantity")).gt(threshold);
+
+        expect(wireCondition(Condition.expr(refund, { label: "Large refund" }))).toEqual(
+            fixture.expected.edges.triage__refund.forward_condition,
+        );
+    });
+
+    it("maps lt and lte to distinct operators", () => {
+        expect(Expr.variable("x").lt(3).toModel().type).toBe("lt_operator");
+        expect(Expr.variable("x").lte(3).toModel().type).toBe("lte_operator");
+    });
+
+    it("is accepted directly by when() as an expression condition", () => {
+        const wf = new Workflow();
+        wf.agent("a", "A").when(Expr.variable("n").gt(1)).end();
+
+        expect(wf.build().edges?.a__end?.forwardCondition?.type).toBe("expression");
+    });
+});
+
+describe("update()", () => {
+    it("keeps schema overrides for tools that stay when a tool node's tools change", () => {
+        const override: ElevenLabs.WorkflowToolLocatorSchemaOverridesValue = {
+            source: "dynamic_variable",
+            dynamicVariable: "order_id",
+        };
+        const wf = new Workflow();
+        wf.tool("lookup", ["tool_order", "tool_customer"], {
+            schemaOverrides: { tool_order: { "path_params.order_id": override } },
+        });
+
+        wf.node("lookup").update({ toolIds: ["tool_order", "tool_loyalty"] });
+
+        expect(wf.build().nodes?.lookup).toMatchObject({
+            tools: [
+                { toolId: "tool_order", schemaOverrides: { "path_params.order_id": override } },
+                { toolId: "tool_loyalty" },
+            ],
+        });
+    });
+
+    it("rejects schema overrides for a tool the node doesn't run", () => {
+        const wf = new Workflow();
+        wf.tool("lookup", ["tool_order"], { schemaOverrides: { tool_typo: {} } });
+
+        expect(buildErrors(wf)).toEqual(["invalid_option"]);
+    });
+
+    it("turns a phone transfer into an agent transfer, dropping phone-only settings", () => {
+        const wf = new Workflow();
+        wf.transfer("t", Destination.phone("+15551234567"), { transferType: "blind" });
+
+        wf.node("t").update({ destination: Destination.agent("agent_x"), transferMessage: "Hold on" });
+
+        expect(wf.build().nodes?.t).toEqual({
+            type: "standalone_agent",
+            agentId: "agent_x",
+            transferMessage: "Hold on",
+            position: { x: 300, y: 0 },
+            edgeOrder: [],
+        });
+    });
+
+    it("rejects options that belong to another node kind", () => {
+        const wf = new Workflow();
+        wf.agent("a", "A");
+        wf.node("a").update({ transferMessage: "agent transfers only", destination: Destination.phone("+1") });
+
+        expect(buildErrors(wf)).toEqual(["invalid_option", "invalid_option"]);
+    });
+});
+
+describe("insertBetween()", () => {
+    it("fails the build when the callback doesn't return the last inserted node", () => {
+        const wf = new Workflow();
+        wf.agent("a", "A").when("next").agent("b", "B");
+
+        wf.insertBetween("a", "b", () => undefined);
+
+        expect(() => wf.build()).toThrow(/must return the last inserted node/);
+    });
+
+    it("keeps the replaced edge's condition and its slot in the source's edge order", () => {
+        const wf = new Workflow();
+        const a = wf.agent("a", "A");
+        a.when("first").agent("b", "B");
+        a.when("second").end();
+
+        wf.insertBetween("a", "b", (from) => from.agent("verify", "Verify"));
+        const model = wf.build();
+
+        expect(model.nodes?.a?.edgeOrder).toEqual(["a__verify", "a__end"]);
+        expect(model.edges?.a__verify?.forwardCondition).toEqual({ type: "llm", condition: "first" });
+        expect(model.edges?.verify__b?.forwardCondition).toEqual({ type: "unconditional" });
+    });
+});
+
+describe("loading existing workflows", () => {
+    const agent = {
+        agentId: "agent_1",
+        workflow: {
+            preventSubagentLoops: false,
+            nodes: {
+                s: { type: "start", position: { x: 5, y: 5 }, edgeOrder: ["n__end"] },
+                n: {
+                    type: "override_agent",
+                    label: "N",
+                    additionalPrompt: "Hi",
+                    position: { x: 5, y: 205 },
+                    edgeOrder: [],
+                },
+            },
+            // An editor-assigned id that happens to match the builder's naming scheme for a different edge.
+            edges: { n__end: { source: "s", target: "n", forwardCondition: { type: "unconditional" } } },
+        },
+    } as unknown as ElevenLabs.GetAgentResponseModel;
+
+    it("fromAgent() keeps ids and positions, and never reuses a loaded edge id for a new edge", () => {
+        const wf = Workflow.fromAgent(agent);
+        wf.node("n").when("Done").end();
+        const model = wf.build();
+
+        expect(wf.startId).toBe("s");
+        expect(model.nodes?.s).toEqual({ type: "start", position: { x: 5, y: 5 }, edgeOrder: ["n__end"] });
+        expect(model.edges?.n__end?.target).toBe("n");
+        expect(model.nodes?.n?.edgeOrder).toEqual(["n__end__2"]);
+        expect(model.edges?.n__end__2?.target).toBe("end");
+    });
+
+    it("fromAgent() gives an empty workflow for an agent that has none", () => {
+        const wf = Workflow.fromAgent({ agentId: "a" } as ElevenLabs.GetAgentResponseModel);
+
+        expect(wf.nodeIds).toEqual(["start"]);
+        expect(buildErrors(wf)).toEqual([]);
+    });
+
+    it("toJSONString() writes snake_case JSON that fromJSON() reads back unchanged", () => {
+        const json = supportLine().toJSONString();
+
+        expect(json).toContain('"additional_prompt": "Greet the caller"');
+        expect(json).not.toContain("additionalPrompt");
+        expect(Workflow.fromJSON(json).toJSONString()).toBe(json);
+    });
+
+    it("fromJSON() reads the workflow out of a CLI agent config file", () => {
+        const workflow = supportLine().toJSON();
+        const cliConfig = {
+            name: "Support",
+            conversation_config: { agent: { prompt: { prompt: "You are a support agent." } } },
+            platform_settings: {},
+            tags: ["support"],
+            workflow,
+        };
+
+        expect(Workflow.fromJSON(JSON.stringify(cliConfig)).toJSON()).toEqual(workflow);
+    });
+});

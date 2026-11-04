@@ -1,0 +1,189 @@
+{
+  "name": "round-trip",
+  "description": "Loading a stored workflow and writing it back without changes produces the same document, including a node type this SDK version doesn't model (kept as-is).",
+  "from": {
+    "prevent_subagent_loops": true,
+    "nodes": {
+      "start": {
+        "type": "start",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "edge_order": [
+          "start__greet"
+        ]
+      },
+      "greet": {
+        "type": "override_agent",
+        "label": "Greet",
+        "additional_prompt": "Greet the caller",
+        "additional_tool_ids": [
+          "tool_a"
+        ],
+        "entry_behavior": "auto",
+        "position": {
+          "x": 300,
+          "y": 0
+        },
+        "edge_order": [
+          "greet__announce",
+          "greet__end"
+        ]
+      },
+      "announce": {
+        "type": "say",
+        "label": "Announce",
+        "message": {
+          "type": "literal",
+          "text": "This call may be recorded."
+        },
+        "position": {
+          "x": 600,
+          "y": 0
+        },
+        "edge_order": [
+          "announce__end"
+        ]
+      },
+      "end": {
+        "type": "end",
+        "position": {
+          "x": 900,
+          "y": 0
+        },
+        "edge_order": []
+      }
+    },
+    "edges": {
+      "start__greet": {
+        "source": "start",
+        "target": "greet",
+        "forward_condition": {
+          "type": "unconditional"
+        }
+      },
+      "greet__announce": {
+        "source": "greet",
+        "target": "announce",
+        "forward_condition": {
+          "type": "llm",
+          "condition": "Caller is new",
+          "label": "New caller"
+        },
+        "backward_condition": {
+          "type": "llm",
+          "condition": "Caller has another question"
+        }
+      },
+      "greet__end": {
+        "source": "greet",
+        "target": "end",
+        "forward_condition": {
+          "type": "llm",
+          "condition": "Caller is done"
+        }
+      },
+      "announce__end": {
+        "source": "announce",
+        "target": "end",
+        "forward_condition": {
+          "type": "unconditional"
+        }
+      }
+    }
+  },
+  "ops": [],
+  "expected": {
+    "edges": {
+      "announce__end": {
+        "forward_condition": {
+          "type": "unconditional"
+        },
+        "source": "announce",
+        "target": "end"
+      },
+      "greet__announce": {
+        "backward_condition": {
+          "condition": "Caller has another question",
+          "type": "llm"
+        },
+        "forward_condition": {
+          "condition": "Caller is new",
+          "label": "New caller",
+          "type": "llm"
+        },
+        "source": "greet",
+        "target": "announce"
+      },
+      "greet__end": {
+        "forward_condition": {
+          "condition": "Caller is done",
+          "type": "llm"
+        },
+        "source": "greet",
+        "target": "end"
+      },
+      "start__greet": {
+        "forward_condition": {
+          "type": "unconditional"
+        },
+        "source": "start",
+        "target": "greet"
+      }
+    },
+    "nodes": {
+      "announce": {
+        "edge_order": [
+          "announce__end"
+        ],
+        "label": "Announce",
+        "message": {
+          "text": "This call may be recorded.",
+          "type": "literal"
+        },
+        "position": {
+          "x": 600,
+          "y": 0
+        },
+        "type": "say"
+      },
+      "end": {
+        "edge_order": [],
+        "position": {
+          "x": 900,
+          "y": 0
+        },
+        "type": "end"
+      },
+      "greet": {
+        "additional_prompt": "Greet the caller",
+        "additional_tool_ids": [
+          "tool_a"
+        ],
+        "edge_order": [
+          "greet__announce",
+          "greet__end"
+        ],
+        "entry_behavior": "auto",
+        "label": "Greet",
+        "position": {
+          "x": 300,
+          "y": 0
+        },
+        "type": "override_agent"
+      },
+      "start": {
+        "edge_order": [
+          "start__greet"
+        ],
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "type": "start"
+      }
+    },
+    "prevent_subagent_loops": true
+  }
+}

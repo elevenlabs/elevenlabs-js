@@ -6,4 +6,4 @@ src
 .fernignore
 .prettierrc.yml
 tsconfig.json
-yarn.lock
+yarn.lock/docs

@@ -205,6 +205,64 @@ When auth is disabled the server accepts any client that can reach it and logs a
 | `disconnected` | `onDisconnect` | WebSocket dropped unexpectedly |
 | `error` | `onError` | Protocol or WebSocket error |
 
+## Agent workflows as code
+
+Build an agent [workflow](https://elevenlabs.io/docs/eleven-agents/customization/agent-workflows) with chained methods instead of a hand-written graph of nodes and edges. The `Workflow` object stands for the start node. Each verb adds a node and returns it, so flows read top to bottom:
+
+| Verb | Adds |
+|---|---|
+| `agent(id, prompt, options?)` | A subagent that adds `prompt` to the agent's instructions |
+| `tool(id, toolIds, options?)` | A node that runs tools; route on the result with `onSuccess()` / `onFailure()` |
+| `transfer(id, destination, options?)` | A transfer to a phone number, SIP URI or another agent |
+| `end(options?)` | The end of the conversation (shared `"end"` node unless you pass an `id`) |
+
+`when(condition)` opens a conditional branch. A string is an LLM condition; an `Expr` is an expression over dynamic variables. `link(node)` connects to a node that already exists, for merges and loops.
+
+```typescript
+import { ElevenLabsClient, Workflow, Destination, Expr } from "@elevenlabs/elevenlabs-js";
+
+const wf = new Workflow();
+
+const triage = wf.agent("triage", "Greet the caller and find out why they're calling");
+const identify = triage.when("Caller wants to check an order").agent("identify", "Ask for the order number");
+
+const lookup = identify.when("Caller gave an order number").tool("lookup_order", ["tool_get_order"]);
+lookup.onSuccess().agent("resolve", "Explain the order status").when("Caller is satisfied").end();
+lookup.onFailure().link(identify);
+
+triage.when(Expr.variable("tier").eq("gold")).transfer("vip", Destination.agent("agent_vip"));
+triage.when("Caller wants a human").transfer("human", Destination.phone("+15551234567"));
+
+const client = new ElevenLabsClient();
+await client.conversationalAi.agents.update("agent_id", { workflow: wf.build() });
+```
+
+`build()` checks the whole graph and throws one `WorkflowValidationError` that lists every problem it finds. It also generates edge ids and edge order, and lays out nodes that don't have a position, so they don't all stack on top of each other in the editor.
+
+### Editing an existing agent
+
+```typescript
+const agent = await client.conversationalAi.agents.get("agent_id");
+const wf = Workflow.fromAgent(agent); // keeps node ids, editor positions and edge order
+
+wf.node("resolve").update({ prompt: "Explain the status, then offer a discount code" });
+wf.insertBetween("identify", "lookup_order", (from) => from.agent("verify", "Verify the caller's identity"));
+wf.remove("vip");
+
+await client.conversationalAi.agents.update("agent_id", { workflow: wf.build() });
+```
+
+### Storing workflows in git
+
+`toJSONString()` writes the workflow in API format: snake_case keys, sorted, the same shape the REST API and the ElevenLabs CLI use. `Workflow.fromJSON()` reads it back. It also accepts a full agent config file that has a `workflow` key.
+
+```typescript
+import { readFile, writeFile } from "node:fs/promises";
+
+await writeFile("workflows/support.json", wf.toJSONString());
+const stored = Workflow.fromJSON(await readFile("workflows/support.json", "utf8"));
+```
+
 ## Retries
 
 This Node SDK is instrumented with automatic retries with exponential backoff. A request will be
