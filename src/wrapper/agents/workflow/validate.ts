@@ -30,6 +30,14 @@ export function validate(graph: WorkflowGraph): WorkflowIssue[] {
 
     for (const edge of graph.edges) {
         const name = `"${edge.source}" → "${edge.target}"`;
+        if (edge.source === edge.target) {
+            issues.push({
+                code: "self_loop",
+                severity: "error",
+                message: `Edge ${name} connects a node to itself, which the API doesn't allow`,
+                nodeId: edge.source,
+            });
+        }
         for (const id of [edge.source, edge.target]) {
             if (!graph.nodes.has(id)) {
                 issues.push({
@@ -114,7 +122,11 @@ export function reverseEdgeMerges(graph: WorkflowGraph): Map<number, number> {
     const merges = new Map<number, number>();
     const taken = new Set<number>();
     graph.edges.forEach((later, j) => {
-        if (later.backwardCondition !== undefined || later.forwardCondition === undefined) {
+        if (
+            later.source === later.target ||
+            later.backwardCondition !== undefined ||
+            later.forwardCondition === undefined
+        ) {
             return;
         }
         const i = graph.edges.findIndex(

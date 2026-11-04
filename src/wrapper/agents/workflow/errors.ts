@@ -3,6 +3,7 @@ export type WorkflowIssueCode =
     | "unknown_node"
     | "unknown_edge"
     | "duplicate_edge"
+    | "self_loop"
     | "invalid_option"
     | "edge_into_start"
     | "end_has_outgoing_edges"

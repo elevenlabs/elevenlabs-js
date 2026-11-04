@@ -94,7 +94,7 @@ These rules make every SDK emit byte-identical JSON for the same program.
 - **Edge ids.** Edges loaded from an existing workflow keep their ids. A new edge gets `{source}__{target}`; if that id is taken, it gets `__2`, `__3` and so on, assigned in edge-list order.
 - **Edge list order.** Edges are kept in creation order. When loading, they are ordered by walking the nodes in document order, each node's `edge_order` in turn, followed by any edges not listed in an `edge_order`. `insertBetween` puts the first new hop where the replaced edge was.
 - **Loaded edges.** Edges kept from a loaded workflow are written back with their `reroutes` (editor bend points). Edges `insertBetween` creates in place of a removed one start without them.
-- **One edge per pair of nodes.** The API allows a single edge between two nodes, in either direction. When an edge goes the opposite way to an earlier edge between the same two nodes, and neither has a backward condition, `build()` sends it as the earlier edge's `backward_condition` instead of a separate edge. This is how `lookup.onFailure().goTo(identify)` loops back along `identify → lookup`. Any other second edge between the same two nodes is a `duplicate_edge` error.
+- **One edge per pair of nodes.** The API allows a single edge between two nodes, in either direction. When an edge goes the opposite way to an earlier edge between the same two nodes (never a self-loop), and neither has a backward condition, `build()` sends it as the earlier edge's `backward_condition` instead of a separate edge. This is how `lookup.onFailure().goTo(identify)` loops back along `identify → lookup`. Any other second edge between the same two nodes is a `duplicate_edge` error.
 - **`edge_order`.** For each node, the ids of the edges it can leave by: edges whose source it is, and edges whose target it is that have a backward condition (the API lists both). A node loaded from an existing workflow keeps its loaded order for the edges it still has, with the first new hop of an `insertBetween` taking the replaced edge's place; other entries follow in edge-list order, where a merged backward condition counts at the position of the edge it came from. Every node gets an `edge_order`, even if it is empty.
 - **Positions.** A node that has a `position` keeps it. Otherwise:
   1. Run a breadth-first search from the start node, following edges forward in edge-list order. A node's column is its BFS depth.
@@ -115,6 +115,7 @@ These rules make every SDK emit byte-identical JSON for the same program.
 | `unknown_edge` | error | `insertBetween` is given a pair of nodes with no edge between them |
 | `invalid_option` | error | An option doesn't apply to the node's kind, or a schema override names a tool the node doesn't run |
 | `duplicate_edge` | error | A second edge connects the same two nodes and can't be merged into the first as its backward condition (see "One edge per pair of nodes") |
+| `self_loop` | error | An edge's source and target are the same node |
 | `edge_into_start` | error | An edge targets the start node |
 | `end_has_outgoing_edges` | error | An end node has an outgoing edge |
 | `tool_edge_needs_result` | error | An edge leaving a tool node has a condition other than `result` |

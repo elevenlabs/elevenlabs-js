@@ -99,6 +99,15 @@ describe("build()", () => {
         expect([buildErrors(twice), buildErrors(withBack)]).toEqual([["duplicate_edge"], ["duplicate_edge"]]);
     });
 
+    it("rejects edges from a node to itself, without merging a second one into the first", () => {
+        const wf = new Workflow();
+        const a = wf.converse("a", "A");
+        a.when("Ask again").goTo(a);
+        a.when("Ask once more").goTo(a);
+
+        expect(buildErrors(wf)).toEqual(["duplicate_edge", "self_loop", "self_loop"]);
+    });
+
     it("sends goTo back along an existing edge as that edge's backward condition", () => {
         const wf = new Workflow();
         const identify = wf.converse("identify", "Ask for the order number");
