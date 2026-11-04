@@ -1,0 +1,63 @@
+name: type surface
+
+# Warns when a PR introduces a breaking change to the public type surface,
+# comparing the built dist/index.d.ts against the merge-base. A consumer-breaking
+# change fails the check; add the `breaking` label to acknowledge (turns it into
+# a warning). labeled/unlabeled re-run so toggling the label clears/raises it.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: type-surface-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  breaking-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout head
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Set up node
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/Krypton
+
+      - name: Build head
+        run: |
+          yarn install --frozen-lockfile
+          yarn build
+
+      - name: Build merge-base in a worktree
+        id: base
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "${{ github.event.pull_request.base.ref }}"
+          BASE_SHA="$(git merge-base FETCH_HEAD HEAD)"
+          echo "Merge-base: $BASE_SHA"
+          echo "sha=$BASE_SHA" >> "$GITHUB_OUTPUT"
+
+          # Same build, run against the base checkout — no drift between the two.
+          git worktree add --detach "$RUNNER_TEMP/base" "$BASE_SHA"
+          cd "$RUNNER_TEMP/base"
+          yarn install --frozen-lockfile
+          yarn build
+
+      - name: Check type surface
+        # TODO: switch to @main once elevenlabs/packages#917 merges.
+        uses: elevenlabs/packages/.github/actions/dts-breaking-changes@kh/dx-1319-dts-breaking-changes
+        with:
+          old-dir: ${{ runner.temp }}/base/dist
+          new-dir: dist
+          entry: index.d.ts
+          base-sha: ${{ steps.base.outputs.sha }}
+          title: "@elevenlabs/elevenlabs-js"
