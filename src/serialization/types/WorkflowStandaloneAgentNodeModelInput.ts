@@ -15,6 +15,7 @@ export const WorkflowStandaloneAgentNodeModelInput: core.serialization.ObjectSch
         core.serialization.list(core.serialization.string()).optional(),
     ),
     agentId: core.serialization.property("agent_id", core.serialization.string().optional()),
+    branchId: core.serialization.property("branch_id", core.serialization.string().optional()),
     nodeId: core.serialization.property("node_id", core.serialization.string().optional()),
     delayMs: core.serialization.property("delay_ms", core.serialization.number().optional()),
     transferMessage: core.serialization.property("transfer_message", core.serialization.string().optional()),
@@ -37,6 +38,7 @@ export declare namespace WorkflowStandaloneAgentNodeModelInput {
         position?: PositionInput.Raw | null;
         edge_order?: string[] | null;
         agent_id?: string | null;
+        branch_id?: string | null;
         node_id?: string | null;
         delay_ms?: number | null;
         transfer_message?: string | null;

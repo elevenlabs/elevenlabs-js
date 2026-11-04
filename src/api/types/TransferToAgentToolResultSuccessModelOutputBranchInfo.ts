@@ -3,10 +3,15 @@
 import type * as ElevenLabs from "../index";
 
 export type TransferToAgentToolResultSuccessModelOutputBranchInfo =
+    | ElevenLabs.TransferToAgentToolResultSuccessModelOutputBranchInfo.Configured
     | ElevenLabs.TransferToAgentToolResultSuccessModelOutputBranchInfo.DefaultingToMain
     | ElevenLabs.TransferToAgentToolResultSuccessModelOutputBranchInfo.TrafficSplit;
 
 export namespace TransferToAgentToolResultSuccessModelOutputBranchInfo {
+    export interface Configured extends ElevenLabs.TransferBranchInfoConfigured {
+        branchReason: "configured";
+    }
+
     export interface DefaultingToMain extends ElevenLabs.TransferBranchInfoDefaultingToMain {
         branchReason: "defaulting_to_main";
     }

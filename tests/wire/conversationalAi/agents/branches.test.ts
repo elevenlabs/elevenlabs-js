@@ -20,6 +20,7 @@ describe("BranchesClient", () => {
                     last_committed_at: 1,
                     is_archived: true,
                     protection_status: "writer_perms_required",
+                    auto_rebase: true,
                     access_info: {
                         is_creator: true,
                         creator_name: "John Doe",
@@ -69,6 +70,7 @@ describe("BranchesClient", () => {
                     lastCommittedAt: 1,
                     isArchived: true,
                     protectionStatus: "writer_perms_required",
+                    autoRebase: true,
                     accessInfo: {
                         isCreator: true,
                         creatorName: "John Doe",
@@ -129,6 +131,7 @@ describe("BranchesClient", () => {
             last_committed_at: 1,
             is_archived: true,
             protection_status: "writer_perms_required",
+            auto_rebase: true,
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -189,6 +192,7 @@ describe("BranchesClient", () => {
             lastCommittedAt: 1,
             isArchived: true,
             protectionStatus: "writer_perms_required",
+            autoRebase: true,
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -245,6 +249,7 @@ describe("BranchesClient", () => {
             last_committed_at: 1,
             is_archived: true,
             protection_status: "writer_perms_required",
+            auto_rebase: true,
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -308,6 +313,7 @@ describe("BranchesClient", () => {
             lastCommittedAt: 1,
             isArchived: true,
             protectionStatus: "writer_perms_required",
+            autoRebase: true,
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -379,6 +385,8 @@ describe("BranchesClient", () => {
                     merge_with_default_ignore_terms: false,
                     transcribe_on_disabled_interruptions: false,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
+                    noisy_environment_detection: true,
+                    noisy_environment_message: "noisy_environment_message",
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -394,7 +402,7 @@ describe("BranchesClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
-                    audio_effects: { distance: 1.1, send_level: 1.1 },
+                    audio_effects: { distance: 1.1, send_level: 1.1, pan: 1.1 },
                 },
                 conversation: {
                     text_only: true,
@@ -617,6 +625,9 @@ describe("BranchesClient", () => {
                     strip_audio_tags: true,
                     syntax_highlight_theme: "light",
                     show_resize_button: true,
+                    end_confirmation_enabled: true,
+                    mobile_fullscreen: true,
+                    transcript_speech_sync_enabled: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -730,6 +741,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     start_to_entry: {
                         source: "start_node",
@@ -740,6 +752,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_a_to_failure: {
                         source: "tool_node_a",
@@ -750,6 +763,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_a_to_tool_b: {
                         source: "tool_node_a",
@@ -760,6 +774,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_agent_transfer: {
                         source: "tool_node_b",
@@ -770,6 +785,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_conversation: {
                         source: "tool_node_b",
@@ -784,6 +800,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_end: {
                         source: "tool_node_b",
@@ -798,6 +815,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_phone: {
                         source: "tool_node_b",
@@ -812,6 +830,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                 },
                 nodes: {
@@ -1434,7 +1453,12 @@ describe("BranchesClient", () => {
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
-                    success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
+                    success_end: {
+                        type: "end",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        outcome: "success",
+                    },
                     success_phone: {
                         type: "phone_number",
                         custom_sip_headers: [{ type: "dynamic", value: "value", key: "key" }],
@@ -1455,6 +1479,7 @@ describe("BranchesClient", () => {
                         preserve_client_tts_overrides: true,
                         preserve_voice_settings: true,
                         agent_id: null,
+                        branch_id: null,
                         node_id: null,
                         transfer_message: null,
                     },
@@ -1529,6 +1554,7 @@ describe("BranchesClient", () => {
             {
                 targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
                 force: true,
+                includeProcedureGeneratedWorkflowElements: true,
             },
         );
         expect(response).toEqual({
@@ -1558,6 +1584,8 @@ describe("BranchesClient", () => {
                         timeoutSeconds: -1,
                         message: "Hhmmmm...yeah.",
                     },
+                    noisyEnvironmentDetection: true,
+                    noisyEnvironmentMessage: "noisy_environment_message",
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -1589,6 +1617,7 @@ describe("BranchesClient", () => {
                     audioEffects: {
                         distance: 1.1,
                         sendLevel: 1.1,
+                        pan: 1.1,
                     },
                 },
                 conversation: {
@@ -1862,6 +1891,9 @@ describe("BranchesClient", () => {
                     stripAudioTags: true,
                     syntaxHighlightTheme: "light",
                     showResizeButton: true,
+                    endConfirmationEnabled: true,
+                    mobileFullscreen: true,
+                    transcriptSpeechSyncEnabled: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -2024,6 +2056,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     start_to_entry: {
                         source: "start_node",
@@ -2038,6 +2076,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_a_to_failure: {
                         source: "tool_node_a",
@@ -2053,6 +2097,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_a_to_tool_b: {
                         source: "tool_node_a",
@@ -2068,6 +2118,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_agent_transfer: {
                         source: "tool_node_b",
@@ -2082,6 +2138,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_conversation: {
                         source: "tool_node_b",
@@ -2097,6 +2159,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_end: {
                         source: "tool_node_b",
@@ -2112,6 +2180,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_phone: {
                         source: "tool_node_b",
@@ -2130,6 +2204,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                 },
                 nodes: {
@@ -2874,6 +2954,7 @@ describe("BranchesClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
+                        outcome: "success",
                     },
                     success_phone: {
                         type: "phone_number",
@@ -3041,6 +3122,8 @@ describe("BranchesClient", () => {
                     merge_with_default_ignore_terms: false,
                     transcribe_on_disabled_interruptions: false,
                     soft_timeout_config: { timeout_seconds: -1, message: "Hhmmmm...yeah." },
+                    noisy_environment_detection: true,
+                    noisy_environment_message: "noisy_environment_message",
                 },
                 tts: {
                     model_id: "eleven_turbo_v2",
@@ -3056,7 +3139,7 @@ describe("BranchesClient", () => {
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
-                    audio_effects: { distance: 1.1, send_level: 1.1 },
+                    audio_effects: { distance: 1.1, send_level: 1.1, pan: 1.1 },
                 },
                 conversation: {
                     text_only: true,
@@ -3279,6 +3362,9 @@ describe("BranchesClient", () => {
                     strip_audio_tags: true,
                     syntax_highlight_theme: "light",
                     show_resize_button: true,
+                    end_confirmation_enabled: true,
+                    mobile_fullscreen: true,
+                    transcript_speech_sync_enabled: true,
                     language_selector: false,
                     supports_text_only: true,
                     custom_avatar_path: "https://example.com/avatar.png",
@@ -3392,6 +3478,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     start_to_entry: {
                         source: "start_node",
@@ -3402,6 +3489,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_a_to_failure: {
                         source: "tool_node_a",
@@ -3412,6 +3500,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_a_to_tool_b: {
                         source: "tool_node_a",
@@ -3422,6 +3511,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_agent_transfer: {
                         source: "tool_node_b",
@@ -3432,6 +3522,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_conversation: {
                         source: "tool_node_b",
@@ -3446,6 +3537,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_end: {
                         source: "tool_node_b",
@@ -3460,6 +3552,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                     tool_b_to_phone: {
                         source: "tool_node_b",
@@ -3474,6 +3567,7 @@ describe("BranchesClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                 },
                 nodes: {
@@ -4096,7 +4190,12 @@ describe("BranchesClient", () => {
                         label: "label",
                         entry_behavior: "generate_immediately",
                     },
-                    success_end: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
+                    success_end: {
+                        type: "end",
+                        position: { x: 1.1, y: 1.1 },
+                        edge_order: ["edge_order"],
+                        outcome: "success",
+                    },
                     success_phone: {
                         type: "phone_number",
                         custom_sip_headers: [{ type: "dynamic", value: "value", key: "key" }],
@@ -4117,6 +4216,7 @@ describe("BranchesClient", () => {
                         preserve_client_tts_overrides: true,
                         preserve_voice_settings: true,
                         agent_id: null,
+                        branch_id: null,
                         node_id: null,
                         transfer_message: null,
                     },
@@ -4188,6 +4288,10 @@ describe("BranchesClient", () => {
         const response = await client.conversationalAi.agents.branches.previewRebase(
             "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
             "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
+            {
+                sourceBranchId: "source_branch_id",
+                includeProcedureGeneratedWorkflowElements: true,
+            },
         );
         expect(response).toEqual({
             agentId: "agent_7101k5zvyjhmfg983brhmhkd98n6",
@@ -4216,6 +4320,8 @@ describe("BranchesClient", () => {
                         timeoutSeconds: -1,
                         message: "Hhmmmm...yeah.",
                     },
+                    noisyEnvironmentDetection: true,
+                    noisyEnvironmentMessage: "noisy_environment_message",
                 },
                 tts: {
                     modelId: "eleven_turbo_v2",
@@ -4247,6 +4353,7 @@ describe("BranchesClient", () => {
                     audioEffects: {
                         distance: 1.1,
                         sendLevel: 1.1,
+                        pan: 1.1,
                     },
                 },
                 conversation: {
@@ -4520,6 +4627,9 @@ describe("BranchesClient", () => {
                     stripAudioTags: true,
                     syntaxHighlightTheme: "light",
                     showResizeButton: true,
+                    endConfirmationEnabled: true,
+                    mobileFullscreen: true,
+                    transcriptSpeechSyncEnabled: true,
                     languageSelector: false,
                     supportsTextOnly: true,
                     customAvatarPath: "https://example.com/avatar.png",
@@ -4682,6 +4792,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     start_to_entry: {
                         source: "start_node",
@@ -4696,6 +4812,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_a_to_failure: {
                         source: "tool_node_a",
@@ -4711,6 +4833,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_a_to_tool_b: {
                         source: "tool_node_a",
@@ -4726,6 +4854,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_agent_transfer: {
                         source: "tool_node_b",
@@ -4740,6 +4874,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_conversation: {
                         source: "tool_node_b",
@@ -4755,6 +4895,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_end: {
                         source: "tool_node_b",
@@ -4770,6 +4916,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                     tool_b_to_phone: {
                         source: "tool_node_b",
@@ -4788,6 +4940,12 @@ describe("BranchesClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                 },
                 nodes: {
@@ -5532,6 +5690,7 @@ describe("BranchesClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
+                        outcome: "success",
                     },
                     success_phone: {
                         type: "phone_number",
@@ -5645,7 +5804,7 @@ describe("BranchesClient", () => {
     test("rebase", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -5653,6 +5812,7 @@ describe("BranchesClient", () => {
             .post(
                 "/v1/convai/agents/agent_3701k3ttaq12ewp8b7qv5rfyszkz/branches/agtbrch_8901k4t9z5defmb8vh3e9361y7nj/rebase",
             )
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
@@ -5661,6 +5821,9 @@ describe("BranchesClient", () => {
         const response = await client.conversationalAi.agents.branches.rebase(
             "agent_3701k3ttaq12ewp8b7qv5rfyszkz",
             "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
+            {
+                sourceBranchId: "source_branch_id",
+            },
         );
         expect(response).toEqual({
             key: "value",

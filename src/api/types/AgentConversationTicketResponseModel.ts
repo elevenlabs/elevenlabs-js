@@ -21,8 +21,13 @@ export interface AgentConversationTicketResponseModel {
     status: ElevenLabs.AgentConversationTicketStatus;
     priority?: ElevenLabs.AgentConversationTicketPriority;
     priorityChanges: ElevenLabs.TicketPriorityChangeResponseModel[];
+    statusChanges: ElevenLabs.TicketStatusChangeResponseModel[];
+    /** The ticket this one was merged into, set while its status is 'merged'. */
+    mergedIntoTicketId?: string;
     source: ElevenLabs.AgentConversationTicketSource;
     assigneeUserId?: string;
     createdAtUnixSecs: number;
     updatedAtUnixSecs: number;
+    /** Where the list's `search` query matched. Set only on searched lists. */
+    searchMatch?: ElevenLabs.TicketSearchMatchResponseModel;
 }

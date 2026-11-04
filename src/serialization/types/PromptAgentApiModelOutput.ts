@@ -8,6 +8,7 @@ import { CustomLlm } from "./CustomLlm";
 import { KnowledgeBaseLocator } from "./KnowledgeBaseLocator";
 import { Llm } from "./Llm";
 import { LlmReasoningEffort } from "./LlmReasoningEffort";
+import { LlmServiceTier } from "./LlmServiceTier";
 import { PromptAgentApiModelOutputBackupLlmConfig } from "./PromptAgentApiModelOutputBackupLlmConfig";
 import { PromptAgentApiModelOutputToolsItem } from "./PromptAgentApiModelOutputToolsItem";
 import { RagConfigOutput } from "./RagConfigOutput";
@@ -19,6 +20,7 @@ export const PromptAgentApiModelOutput: core.serialization.ObjectSchema<
     prompt: core.serialization.string().optional(),
     llm: Llm.optional(),
     reasoningEffort: core.serialization.property("reasoning_effort", LlmReasoningEffort.optional()),
+    serviceTier: core.serialization.property("service_tier", LlmServiceTier.optional()),
     thinkingBudget: core.serialization.property("thinking_budget", core.serialization.number().optional()),
     enableReasoningSummary: core.serialization.property(
         "enable_reasoning_summary",
@@ -27,6 +29,7 @@ export const PromptAgentApiModelOutput: core.serialization.ObjectSchema<
     temperature: core.serialization.number().optional(),
     maxTokens: core.serialization.property("max_tokens", core.serialization.number().optional()),
     toolIds: core.serialization.property("tool_ids", core.serialization.list(core.serialization.string()).optional()),
+    toolIdsStrict: core.serialization.property("tool_ids_strict", core.serialization.boolean().optional()),
     builtInTools: core.serialization.property("built_in_tools", BuiltInToolsOutput.optional()),
     enableParallelToolCalls: core.serialization.property(
         "enable_parallel_tool_calls",
@@ -67,11 +70,13 @@ export declare namespace PromptAgentApiModelOutput {
         prompt?: string | null;
         llm?: Llm.Raw | null;
         reasoning_effort?: LlmReasoningEffort.Raw | null;
+        service_tier?: LlmServiceTier.Raw | null;
         thinking_budget?: number | null;
         enable_reasoning_summary?: boolean | null;
         temperature?: number | null;
         max_tokens?: number | null;
         tool_ids?: string[] | null;
+        tool_ids_strict?: boolean | null;
         built_in_tools?: BuiltInToolsOutput.Raw | null;
         enable_parallel_tool_calls?: boolean | null;
         mcp_server_ids?: string[] | null;

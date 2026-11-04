@@ -8,7 +8,9 @@ export type AgentWorkflowResponseModelNodesValue =
     | ElevenLabs.AgentWorkflowResponseModelNodesValue.PhoneNumber
     | ElevenLabs.AgentWorkflowResponseModelNodesValue.StandaloneAgent
     | ElevenLabs.AgentWorkflowResponseModelNodesValue.Start
-    | ElevenLabs.AgentWorkflowResponseModelNodesValue.Tool;
+    | ElevenLabs.AgentWorkflowResponseModelNodesValue.Tool
+    | ElevenLabs.AgentWorkflowResponseModelNodesValue.Say
+    | ElevenLabs.AgentWorkflowResponseModelNodesValue.UpdateState;
 
 export namespace AgentWorkflowResponseModelNodesValue {
     export interface End extends ElevenLabs.WorkflowEndNodeModelOutput {
@@ -33,5 +35,13 @@ export namespace AgentWorkflowResponseModelNodesValue {
 
     export interface Tool extends ElevenLabs.WorkflowToolNodeModelOutput {
         type: "tool";
+    }
+
+    export interface Say extends ElevenLabs.WorkflowSayNodeModelOutput {
+        type: "say";
+    }
+
+    export interface UpdateState extends ElevenLabs.WorkflowUpdateStateNodeModelOutput {
+        type: "update_state";
     }
 }

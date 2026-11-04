@@ -27,6 +27,7 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gpt-6-sol",
     "gpt-6-luna",
     "gpt-6.1-sol",
+    "gpt-6.1-terra",
     "gpt-5-mini",
     "gpt-5-nano",
     "gpt-3.5-turbo",
@@ -46,7 +47,9 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gemini-3.6-flash",
     "gemini-3.7-flash",
     "gemini-3.8-flash",
+    "gemini-4-argon",
     "claude-sonnet-4-5",
+    "claude-opus-4-6",
     "claude-opus-4-7",
     "claude-opus-4-8",
     "claude-opus-5",
@@ -56,6 +59,7 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "claude-sonnet-5-5",
     "claude-sonnet-4",
     "claude-haiku-4-5",
+    "claude-haiku-5-5",
     "claude-3-7-sonnet",
     "claude-3-5-sonnet",
     "claude-3-5-sonnet-v1",
@@ -71,6 +75,7 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "glm-45-air-fp8",
     "glm-52",
     "deepseek-v41-flash",
+    "nemotron-35-super-vl-nvfp4",
     "gemini-2.5-flash-preview-09-2025",
     "gemini-2.5-flash-lite-preview-09-2025",
     "gemini-2.5-flash-preview-05-20",
@@ -138,6 +143,7 @@ export declare namespace Llm {
         | "gpt-6-sol"
         | "gpt-6-luna"
         | "gpt-6.1-sol"
+        | "gpt-6.1-terra"
         | "gpt-5-mini"
         | "gpt-5-nano"
         | "gpt-3.5-turbo"
@@ -157,7 +163,9 @@ export declare namespace Llm {
         | "gemini-3.6-flash"
         | "gemini-3.7-flash"
         | "gemini-3.8-flash"
+        | "gemini-4-argon"
         | "claude-sonnet-4-5"
+        | "claude-opus-4-6"
         | "claude-opus-4-7"
         | "claude-opus-4-8"
         | "claude-opus-5"
@@ -167,6 +175,7 @@ export declare namespace Llm {
         | "claude-sonnet-5-5"
         | "claude-sonnet-4"
         | "claude-haiku-4-5"
+        | "claude-haiku-5-5"
         | "claude-3-7-sonnet"
         | "claude-3-5-sonnet"
         | "claude-3-5-sonnet-v1"
@@ -182,6 +191,7 @@ export declare namespace Llm {
         | "glm-45-air-fp8"
         | "glm-52"
         | "deepseek-v41-flash"
+        | "nemotron-35-super-vl-nvfp4"
         | "gemini-2.5-flash-preview-09-2025"
         | "gemini-2.5-flash-lite-preview-09-2025"
         | "gemini-2.5-flash-preview-05-20"

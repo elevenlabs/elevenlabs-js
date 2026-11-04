@@ -10,11 +10,15 @@ export const TestToolResultModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     status: core.serialization.stringLiteral("success").optional(),
     reason: core.serialization.string().optional(),
+    toAgent: core.serialization.property("to_agent", core.serialization.string().optional()),
+    toNode: core.serialization.property("to_node", core.serialization.string().optional()),
 });
 
 export declare namespace TestToolResultModel {
     export interface Raw {
         status?: "success" | null;
         reason?: string | null;
+        to_agent?: string | null;
+        to_node?: string | null;
     }
 }

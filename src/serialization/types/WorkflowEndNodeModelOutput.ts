@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { PositionOutput } from "./PositionOutput";
+import { WorkflowEndNodeOutcome } from "./WorkflowEndNodeOutcome";
 
 export const WorkflowEndNodeModelOutput: core.serialization.ObjectSchema<
     serializers.WorkflowEndNodeModelOutput.Raw,
@@ -11,11 +12,13 @@ export const WorkflowEndNodeModelOutput: core.serialization.ObjectSchema<
 > = core.serialization.object({
     position: PositionOutput,
     edgeOrder: core.serialization.property("edge_order", core.serialization.list(core.serialization.string())),
+    outcome: WorkflowEndNodeOutcome,
 });
 
 export declare namespace WorkflowEndNodeModelOutput {
     export interface Raw {
         position: PositionOutput.Raw;
         edge_order: string[];
+        outcome: WorkflowEndNodeOutcome.Raw;
     }
 }

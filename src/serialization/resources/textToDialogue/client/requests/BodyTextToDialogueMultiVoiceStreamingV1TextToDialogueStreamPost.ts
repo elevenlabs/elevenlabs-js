@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../../../../api/index";
 import * as core from "../../../../../core";
 import type * as serializers from "../../../../index";
 import { DialogueInput } from "../../../../types/DialogueInput";
+import { EffectsSpecInput } from "../../../../types/EffectsSpecInput";
 import { PronunciationDictionaryVersionLocator } from "../../../../types/PronunciationDictionaryVersionLocator";
 import { ToDialogueSettingsResponseModel } from "../../../../types/ToDialogueSettingsResponseModel";
 import { BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization } from "../../types/BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization";
@@ -36,6 +37,7 @@ export const BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost: co
         "next_request_ids",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    audioEffects: core.serialization.property("audio_effects", EffectsSpecInput.optional()),
 });
 
 export declare namespace BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost {
@@ -52,5 +54,6 @@ export declare namespace BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueSt
         use_pvc_as_ivc?: boolean | null;
         previous_request_ids?: string[] | null;
         next_request_ids?: string[] | null;
+        audio_effects?: EffectsSpecInput.Raw | null;
     }
 }

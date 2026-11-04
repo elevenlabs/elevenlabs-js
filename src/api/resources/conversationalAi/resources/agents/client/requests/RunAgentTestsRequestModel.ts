@@ -11,6 +11,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface RunAgentTestsRequestModel {
+    /** Optional name for the test invocation. */
+    name?: string;
     /** List of tests to run on the agent */
     tests: ElevenLabs.SingleTestRunRequestModel[];
     /** Configuration overrides to use for testing. If not provided, the agent's default configuration will be used. */

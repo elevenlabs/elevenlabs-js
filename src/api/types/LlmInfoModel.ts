@@ -19,6 +19,8 @@ export interface LlmInfoModel {
     supportsParallelToolCalls: boolean;
     /** Available reasoning effort levels for this model. Null if the model does not support configurable reasoning. */
     availableReasoningEfforts?: ElevenLabs.LlmReasoningEffort[];
+    /** Available service tiers for this model. Always includes at least the standard tier. */
+    availableServiceTiers: ElevenLabs.LlmServiceTier[];
     /** Deprecation information if this model is deprecated or scheduled for deprecation. Null if the model is not affected. */
     deprecationInfo?: ElevenLabs.LlmDeprecationInfoModel;
     /** Regional processing surcharge details if this model has additional costs in the current deployment region. Null if no surcharge applies. */

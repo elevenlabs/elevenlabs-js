@@ -10,6 +10,7 @@ import * as errors from "../../../../errors/index";
 import * as serializers from "../../../../serialization/index";
 import * as ElevenLabs from "../../../index";
 import { AgentsClient } from "../resources/agents/client/Client";
+import { AnalysisItemsClient } from "../resources/analysisItems/client/Client";
 import { AnalyticsClient } from "../resources/analytics/client/Client";
 import { BatchCallsClient } from "../resources/batchCalls/client/Client";
 import { ConversationsClient } from "../resources/conversations/client/Client";
@@ -20,6 +21,7 @@ import { LlmClient } from "../resources/llm/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
 import { McpServersClient } from "../resources/mcpServers/client/Client";
 import { PhoneNumbersClient } from "../resources/phoneNumbers/client/Client";
+import { RealtimeClient } from "../resources/realtime/client/Client";
 import { SecretsClient } from "../resources/secrets/client/Client";
 import { SettingsClient } from "../resources/settings/client/Client";
 import { SipTrunkClient } from "../resources/sipTrunk/client/Client";
@@ -52,12 +54,14 @@ export class ConversationalAiClient {
     protected _llm: LlmClient | undefined;
     protected _knowledgeBase: KnowledgeBaseClient | undefined;
     protected _tools: ToolsClient | undefined;
+    protected _analysisItems: AnalysisItemsClient | undefined;
     protected _settings: SettingsClient | undefined;
     protected _secrets: SecretsClient | undefined;
     protected _batchCalls: BatchCallsClient | undefined;
     protected _sipTrunk: SipTrunkClient | undefined;
     protected _mcpServers: McpServersClient | undefined;
     protected _whatsappAccounts: WhatsappAccountsClient | undefined;
+    protected _realtime: RealtimeClient | undefined;
     protected _analytics: AnalyticsClient | undefined;
     protected _dashboard: DashboardClient | undefined;
 
@@ -117,6 +121,10 @@ export class ConversationalAiClient {
         return (this._tools ??= new ToolsClient(this._options));
     }
 
+    public get analysisItems(): AnalysisItemsClient {
+        return (this._analysisItems ??= new AnalysisItemsClient(this._options));
+    }
+
     public get settings(): SettingsClient {
         return (this._settings ??= new SettingsClient(this._options));
     }
@@ -139,6 +147,10 @@ export class ConversationalAiClient {
 
     public get whatsappAccounts(): WhatsappAccountsClient {
         return (this._whatsappAccounts ??= new WhatsappAccountsClient(this._options));
+    }
+
+    public get realtime(): RealtimeClient {
+        return (this._realtime ??= new RealtimeClient(this._options));
     }
 
     public get analytics(): AnalyticsClient {

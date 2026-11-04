@@ -13,6 +13,7 @@ export const SpeechEngineSummaryResponse: core.serialization.ObjectSchema<
     name: core.serialization.string(),
     voiceId: core.serialization.property("voice_id", core.serialization.string()),
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
+    updatedAtUnixSecs: core.serialization.property("updated_at_unix_secs", core.serialization.number()),
     tags: core.serialization.list(core.serialization.string()),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
 });
@@ -23,6 +24,7 @@ export declare namespace SpeechEngineSummaryResponse {
         name: string;
         voice_id: string;
         created_at_unix_secs: number;
+        updated_at_unix_secs: number;
         tags: string[];
         access_info: ResourceAccessInfo.Raw;
     }

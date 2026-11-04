@@ -25,6 +25,9 @@ export declare namespace WorkspaceClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * Access to workspace related endpoints.
+ */
 export class WorkspaceClient {
     protected readonly _options: NormalizedClientOptions<WorkspaceClient.Options>;
     protected _auditLogs: AuditLogsClient | undefined;

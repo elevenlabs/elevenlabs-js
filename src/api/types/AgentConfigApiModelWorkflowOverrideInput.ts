@@ -7,7 +7,7 @@ export interface AgentConfigApiModelWorkflowOverrideInput {
     firstMessage?: string;
     /** Language of the agent - used for ASR and TTS */
     language?: string;
-    /** When enabled and language is Hindi, the agent will respond in Hinglish */
+    /** When enabled, the agent mixes English words and phrases into responses in Hindi, Malayalam, Telugu, or Kannada. */
     hinglishMode?: boolean;
     /** Configuration for dynamic variables */
     dynamicVariables?: ElevenLabs.DynamicVariablesConfigWorkflowOverride;

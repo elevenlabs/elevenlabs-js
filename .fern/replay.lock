@@ -138,14 +138,44 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-typescript-sdk: 3.88.2
-current_generation: a05d0abe7976305e4dd706f57d3914c20086fd88
+  - commit_sha: a73c0abb4ca19e5e55795db1bdffed28ae4650fc
+    tree_hash: e9c736c26bfce85555a0a4327bd009875eb01227
+    timestamp: 2026-10-13T08:00:58.103Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.88.2
+  - commit_sha: a3bccc576fa5aee4ad4945fecad724e9e8e91324
+    tree_hash: 123c9e1721b710e6f29a9995ac9ff58039614e35
+    timestamp: 2026-10-15T09:27:41.487Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.88.2
+  - commit_sha: 8afc9cc087d768b14f12e4ef0e4c8d55feaa11c1
+    tree_hash: b5a78830c75c0909a3c2e3c20eface97df7a5d25
+    timestamp: 2026-10-20T08:02:30.024Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.88.2
+  - commit_sha: 655d9083892387e7e57e3d2ec3ca504d681ad894
+    tree_hash: 05719c455caaa6f11156848421ee8e2b75e99b5a
+    timestamp: 2026-10-27T22:27:18.313Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.88.2
+  - commit_sha: 5e55bed1235145a390346060dfb9afe35965ad3e
+    tree_hash: 1eb5cc1bef14422a51e7f5fc9849448a54f8634a
+    timestamp: 2026-11-03T11:29:07.721Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.88.2
+current_generation: 5e55bed1235145a390346060dfb9afe35965ad3e
 patches:
   - id: patch-f50f1558
     content_hash: sha256:5a09c3db02b795ab544221e13bf2681e7f9bb43c07e8cd96ac063a405dc3a2c6
     original_commit: f50f1558f741e331dd3949ded57771c012ef27ab
     original_message: Add missing methods and test (#399)
     original_author: Paul Asjes <paul.asjes@elevenlabs.io>
-    base_generation: a05d0abe7976305e4dd706f57d3914c20086fd88
+    base_generation: 5e55bed1235145a390346060dfb9afe35965ad3e
     files:
       - tests/unit/wrapper/music.test.ts
     patch_content: |

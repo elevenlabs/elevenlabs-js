@@ -3,7 +3,11 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { CallResult } from "./CallResult";
+import { WhatsAppCallPermissionRequest } from "./WhatsAppCallPermissionRequest";
 import { WhatsAppConversationInfoDirection } from "./WhatsAppConversationInfoDirection";
+import { WhatsAppOpeningMessage } from "./WhatsAppOpeningMessage";
+import { WhatsAppRecipient } from "./WhatsAppRecipient";
 
 export const WhatsAppConversationInfo: core.serialization.ObjectSchema<
     serializers.WhatsAppConversationInfo.Raw,
@@ -19,6 +23,13 @@ export const WhatsAppConversationInfo: core.serialization.ObjectSchema<
         "awaiting_first_user_message",
         core.serialization.boolean().optional(),
     ),
+    recipient: WhatsAppRecipient.optional(),
+    callPermissionRequest: core.serialization.property(
+        "call_permission_request",
+        WhatsAppCallPermissionRequest.optional(),
+    ),
+    callResult: core.serialization.property("call_result", CallResult.optional()),
+    openingMessage: core.serialization.property("opening_message", WhatsAppOpeningMessage.optional()),
 });
 
 export declare namespace WhatsAppConversationInfo {
@@ -27,5 +38,9 @@ export declare namespace WhatsAppConversationInfo {
         whatsapp_phone_number_id?: string | null;
         whatsapp_user_id: string;
         awaiting_first_user_message?: boolean | null;
+        recipient?: WhatsAppRecipient.Raw | null;
+        call_permission_request?: WhatsAppCallPermissionRequest.Raw | null;
+        call_result?: CallResult.Raw | null;
+        opening_message?: WhatsAppOpeningMessage.Raw | null;
     }
 }

@@ -9,10 +9,12 @@ export const DubbingLanguageOutputs: core.serialization.ObjectSchema<
     ElevenLabs.DubbingLanguageOutputs
 > = core.serialization.object({
     losslessAudio: core.serialization.property("lossless_audio", core.serialization.string().optional()),
+    subtitles: core.serialization.string().optional(),
 });
 
 export declare namespace DubbingLanguageOutputs {
     export interface Raw {
         lossless_audio?: string | null;
+        subtitles?: string | null;
     }
 }

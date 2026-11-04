@@ -15,6 +15,7 @@ describe("SpeechEngineClient", () => {
                     name: "My Speech Engine",
                     voice_id: "UCaNsl8F6Xh4GALkVMLS",
                     created_at_unix_secs: 1714000000,
+                    updated_at_unix_secs: 1714086400,
                     tags: ["production", "v1"],
                     access_info: {
                         is_creator: true,
@@ -44,6 +45,7 @@ describe("SpeechEngineClient", () => {
                     name: "My Speech Engine",
                     voiceId: "UCaNsl8F6Xh4GALkVMLS",
                     createdAtUnixSecs: 1714000000,
+                    updatedAtUnixSecs: 1714086400,
                     tags: ["production", "v1"],
                     accessInfo: {
                         isCreator: true,
@@ -92,7 +94,7 @@ describe("SpeechEngineClient", () => {
                     environment_id: "environment_id",
                     background_noise_id: "background_noise_id",
                     send_level: 1.1,
-                    seed: 1,
+                    pan: 1.1,
                 },
             },
             turn: {
@@ -135,6 +137,7 @@ describe("SpeechEngineClient", () => {
                 },
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
+            auth: { enable_auth: false },
             language: "en",
             cascade_timeout_seconds: 4,
             tags: ["production", "v1"],
@@ -217,7 +220,7 @@ describe("SpeechEngineClient", () => {
                     environmentId: "environment_id",
                     backgroundNoiseId: "background_noise_id",
                     sendLevel: 1.1,
-                    seed: 1,
+                    pan: 1.1,
                 },
             },
             turn: {
@@ -277,6 +280,9 @@ describe("SpeechEngineClient", () => {
                 dailyLimit: 100000,
                 burstingEnabled: true,
             },
+            auth: {
+                enableAuth: false,
+            },
             language: "en",
             cascadeTimeoutSeconds: 4,
             tags: ["production", "v1"],
@@ -334,7 +340,7 @@ describe("SpeechEngineClient", () => {
                     environment_id: "environment_id",
                     background_noise_id: "background_noise_id",
                     send_level: 1.1,
-                    seed: 1,
+                    pan: 1.1,
                 },
             },
             turn: {
@@ -377,6 +383,7 @@ describe("SpeechEngineClient", () => {
                 },
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
+            auth: { enable_auth: false },
             language: "en",
             cascade_timeout_seconds: 4,
             tags: ["production", "v1"],
@@ -454,7 +461,7 @@ describe("SpeechEngineClient", () => {
                     environmentId: "environment_id",
                     backgroundNoiseId: "background_noise_id",
                     sendLevel: 1.1,
-                    seed: 1,
+                    pan: 1.1,
                 },
             },
             turn: {
@@ -513,6 +520,9 @@ describe("SpeechEngineClient", () => {
                 agentConcurrencyLimit: -1,
                 dailyLimit: 100000,
                 burstingEnabled: true,
+            },
+            auth: {
+                enableAuth: false,
             },
             language: "en",
             cascadeTimeoutSeconds: 4,
@@ -586,7 +596,7 @@ describe("SpeechEngineClient", () => {
                     environment_id: "environment_id",
                     background_noise_id: "background_noise_id",
                     send_level: 1.1,
-                    seed: 1,
+                    pan: 1.1,
                 },
             },
             turn: {
@@ -629,6 +639,7 @@ describe("SpeechEngineClient", () => {
                 },
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
+            auth: { enable_auth: false },
             language: "en",
             cascade_timeout_seconds: 4,
             tags: ["production", "v1"],
@@ -707,7 +718,7 @@ describe("SpeechEngineClient", () => {
                     environmentId: "environment_id",
                     backgroundNoiseId: "background_noise_id",
                     sendLevel: 1.1,
-                    seed: 1,
+                    pan: 1.1,
                 },
             },
             turn: {
@@ -767,6 +778,9 @@ describe("SpeechEngineClient", () => {
                 dailyLimit: 100000,
                 burstingEnabled: true,
             },
+            auth: {
+                enableAuth: false,
+            },
             language: "en",
             cascadeTimeoutSeconds: 4,
             tags: ["production", "v1"],
@@ -824,7 +838,7 @@ describe("SpeechEngineClient", () => {
                     environment_id: "environment_id",
                     background_noise_id: "background_noise_id",
                     send_level: 1.1,
-                    seed: 1,
+                    pan: 1.1,
                 },
             },
             turn: {
@@ -867,6 +881,7 @@ describe("SpeechEngineClient", () => {
                 },
             },
             call_limits: { agent_concurrency_limit: -1, daily_limit: 100000, bursting_enabled: true },
+            auth: { enable_auth: false },
             language: "en",
             cascade_timeout_seconds: 4,
             tags: ["production", "v1"],
@@ -944,7 +959,7 @@ describe("SpeechEngineClient", () => {
                     environmentId: "environment_id",
                     backgroundNoiseId: "background_noise_id",
                     sendLevel: 1.1,
-                    seed: 1,
+                    pan: 1.1,
                 },
             },
             turn: {
@@ -1003,6 +1018,9 @@ describe("SpeechEngineClient", () => {
                 agentConcurrencyLimit: -1,
                 dailyLimit: 100000,
                 burstingEnabled: true,
+            },
+            auth: {
+                enableAuth: false,
             },
             language: "en",
             cascadeTimeoutSeconds: 4,

@@ -10,7 +10,12 @@ export interface ConversationSummaryResponseModel {
     conversationId: string;
     startTimeUnixSecs: number;
     callDurationSecs: number;
+    /** Number of transcript turns with text; tool-only turns are not counted. */
     messageCount: number;
+    /** Number of user transcript turns with text; tool-only turns are not counted. `null` for older conversations before this field whose transcript was deleted. */
+    userMessageCount?: number;
+    /** Number of agent transcript turns with text; tool-only turns are not counted. `null` for older conversations before this field whose transcript was deleted. */
+    agentMessageCount?: number;
     status: ElevenLabs.ConversationSummaryResponseModelStatus;
     terminationReason?: string;
     callSuccessful: ElevenLabs.EvaluationSuccessResult;

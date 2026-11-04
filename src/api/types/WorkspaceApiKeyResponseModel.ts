@@ -20,4 +20,6 @@ export interface WorkspaceApiKeyResponseModel {
     thirdPartyDisableAllowed?: boolean;
     /** Per-API-key concurrency limits (TTS/dubbing/music). Enterprise-only. */
     platformLimits?: ElevenLabs.PlatformLimits;
+    /** Unix timestamp (seconds) after which this API key stops working. Null means the key never expires. */
+    expiresAtUnix?: number;
 }

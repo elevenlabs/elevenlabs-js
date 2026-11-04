@@ -114,13 +114,7 @@ describe("DocumentsClient", () => {
             url: "url",
             extracted_inner_html: "extracted_inner_html",
             content_format: "html",
-            auto_sync_info: {
-                minimum_frequency_days: 1,
-                auto_remove: true,
-                auto_discover: true,
-                consec_failures: 1,
-                next_refresh_by: 1,
-            },
+            auto_sync_info: { minimum_frequency_days: 1, auto_remove: true, consec_failures: 1, next_refresh_by: 1 },
         };
 
         server
@@ -165,7 +159,6 @@ describe("DocumentsClient", () => {
             autoSyncInfo: {
                 minimumFrequencyDays: 1,
                 autoRemove: true,
-                autoDiscover: true,
                 consecFailures: 1,
                 nextRefreshBy: 1,
             },
@@ -217,13 +210,7 @@ describe("DocumentsClient", () => {
             url: "url",
             extracted_inner_html: "extracted_inner_html",
             content_format: "html",
-            auto_sync_info: {
-                minimum_frequency_days: 1,
-                auto_remove: true,
-                auto_discover: true,
-                consec_failures: 1,
-                next_refresh_by: 1,
-            },
+            auto_sync_info: { minimum_frequency_days: 1, auto_remove: true, consec_failures: 1, next_refresh_by: 1 },
         };
 
         server
@@ -267,7 +254,6 @@ describe("DocumentsClient", () => {
             autoSyncInfo: {
                 minimumFrequencyDays: 1,
                 autoRemove: true,
-                autoDiscover: true,
                 consecFailures: 1,
                 nextRefreshBy: 1,
             },

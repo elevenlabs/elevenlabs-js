@@ -53,6 +53,7 @@ describe("ToolsClient", () => {
             types: ["webhook"],
             sortDirection: "asc",
             sortBy: "name",
+            usedByAgentId: "used_by_agent_id",
             cursor: "cursor",
         });
         expect(response).toEqual({

@@ -18,6 +18,7 @@ export const AgentBranchSummary: core.serialization.ObjectSchema<
     lastCommittedAt: core.serialization.property("last_committed_at", core.serialization.number()),
     isArchived: core.serialization.property("is_archived", core.serialization.boolean()),
     protectionStatus: core.serialization.property("protection_status", BranchProtectionStatus.optional()),
+    autoRebase: core.serialization.property("auto_rebase", core.serialization.boolean().optional()),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
     currentLivePercentage: core.serialization.property(
         "current_live_percentage",
@@ -43,6 +44,7 @@ export declare namespace AgentBranchSummary {
         last_committed_at: number;
         is_archived: boolean;
         protection_status?: BranchProtectionStatus.Raw | null;
+        auto_rebase?: boolean | null;
         access_info?: ResourceAccessInfo.Raw | null;
         current_live_percentage?: number | null;
         parent_branch_id?: string | null;

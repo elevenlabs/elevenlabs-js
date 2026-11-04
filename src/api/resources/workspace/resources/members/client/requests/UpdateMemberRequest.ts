@@ -17,4 +17,6 @@ export interface UpdateMemberRequest {
     workspaceRole?: ElevenLabs.SeatType;
     /** The workspace seat type */
     workspaceSeatType?: ElevenLabs.SeatType;
+    /** When unlocking a user whose original seat type has no seats available but a basic seat is available, downgrade the user to a basic seat instead of failing. */
+    allowDowngradeToBasicSeat?: boolean;
 }

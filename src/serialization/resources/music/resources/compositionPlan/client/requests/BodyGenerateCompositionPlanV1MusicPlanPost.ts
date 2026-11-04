@@ -8,7 +8,7 @@ import { BodyGenerateCompositionPlanV1MusicPlanPostSourceCompositionPlan } from 
 
 export const BodyGenerateCompositionPlanV1MusicPlanPost: core.serialization.Schema<
     serializers.music.BodyGenerateCompositionPlanV1MusicPlanPost.Raw,
-    ElevenLabs.music.BodyGenerateCompositionPlanV1MusicPlanPost
+    Omit<ElevenLabs.music.BodyGenerateCompositionPlanV1MusicPlanPost, "enableLogging">
 > = core.serialization.object({
     prompt: core.serialization.string(),
     musicLengthMs: core.serialization.property("music_length_ms", core.serialization.number().optional()),

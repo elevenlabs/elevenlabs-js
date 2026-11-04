@@ -10,10 +10,15 @@ export const TurnConfigOverride: core.serialization.ObjectSchema<
     ElevenLabs.TurnConfigOverride
 > = core.serialization.object({
     softTimeoutConfig: core.serialization.property("soft_timeout_config", SoftTimeoutConfigOverride.optional()),
+    noisyEnvironmentMessage: core.serialization.property(
+        "noisy_environment_message",
+        core.serialization.string().optional(),
+    ),
 });
 
 export declare namespace TurnConfigOverride {
     export interface Raw {
         soft_timeout_config?: SoftTimeoutConfigOverride.Raw | null;
+        noisy_environment_message?: string | null;
     }
 }

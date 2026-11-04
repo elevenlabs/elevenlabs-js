@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { CampaignConversationType } from "./CampaignConversationType";
 
 export const BatchCallingCampaignInformation: core.serialization.ObjectSchema<
     serializers.BatchCallingCampaignInformation.Raw,
@@ -10,11 +11,15 @@ export const BatchCallingCampaignInformation: core.serialization.ObjectSchema<
 > = core.serialization.object({
     campaignId: core.serialization.property("campaign_id", core.serialization.string()),
     campaignLeadId: core.serialization.property("campaign_lead_id", core.serialization.string()),
+    coldAttempt: core.serialization.property("cold_attempt", core.serialization.number().optional()),
+    conversationType: core.serialization.property("conversation_type", CampaignConversationType.optional()),
 });
 
 export declare namespace BatchCallingCampaignInformation {
     export interface Raw {
         campaign_id: string;
         campaign_lead_id: string;
+        cold_attempt?: number | null;
+        conversation_type?: CampaignConversationType.Raw | null;
     }
 }

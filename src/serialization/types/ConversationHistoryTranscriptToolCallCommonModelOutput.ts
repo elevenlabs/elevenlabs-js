@@ -13,6 +13,7 @@ export const ConversationHistoryTranscriptToolCallCommonModelOutput: core.serial
     type: ToolType.optional(),
     requestId: core.serialization.property("request_id", core.serialization.string()),
     toolName: core.serialization.property("tool_name", core.serialization.string()),
+    toolId: core.serialization.property("tool_id", core.serialization.string().optional()),
     paramsAsJson: core.serialization.property("params_as_json", core.serialization.string()),
     toolHasBeenCalled: core.serialization.property("tool_has_been_called", core.serialization.boolean()),
     toolDetails: core.serialization.property(
@@ -26,6 +27,7 @@ export declare namespace ConversationHistoryTranscriptToolCallCommonModelOutput 
         type?: ToolType.Raw | null;
         request_id: string;
         tool_name: string;
+        tool_id?: string | null;
         params_as_json: string;
         tool_has_been_called: boolean;
         tool_details?: ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails.Raw | null;

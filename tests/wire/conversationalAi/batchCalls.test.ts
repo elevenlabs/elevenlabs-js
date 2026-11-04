@@ -34,7 +34,7 @@ describe("BatchCallsClient", () => {
             telephony_call_config: {
                 ringing_timeout_secs: 1,
                 twilio_call_recording_enabled: true,
-                twilio_machine_detection: { mode: "enable" },
+                twilio_machine_detection: { mode: "enable", actions: [{ action: "hang_up", answered_by: ["human"] }] },
             },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
@@ -83,6 +83,12 @@ describe("BatchCallsClient", () => {
                 twilioCallRecordingEnabled: true,
                 twilioMachineDetection: {
                     mode: "enable",
+                    actions: [
+                        {
+                            action: "hang_up",
+                            answeredBy: ["human"],
+                        },
+                    ],
                 },
             },
             targetConcurrencyLimit: 1,
@@ -208,7 +214,7 @@ describe("BatchCallsClient", () => {
             telephony_call_config: {
                 ringing_timeout_secs: 1,
                 twilio_call_recording_enabled: true,
-                twilio_machine_detection: { mode: "enable" },
+                twilio_machine_detection: { mode: "enable", actions: [{ action: "hang_up", answered_by: ["human"] }] },
             },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
@@ -292,6 +298,12 @@ describe("BatchCallsClient", () => {
                 twilioCallRecordingEnabled: true,
                 twilioMachineDetection: {
                     mode: "enable",
+                    actions: [
+                        {
+                            action: "hang_up",
+                            answeredBy: ["human"],
+                        },
+                    ],
                 },
             },
             targetConcurrencyLimit: 1,
@@ -395,7 +407,7 @@ describe("BatchCallsClient", () => {
             telephony_call_config: {
                 ringing_timeout_secs: 1,
                 twilio_call_recording_enabled: true,
-                twilio_machine_detection: { mode: "enable" },
+                twilio_machine_detection: { mode: "enable", actions: [{ action: "hang_up", answered_by: ["human"] }] },
             },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
@@ -439,6 +451,12 @@ describe("BatchCallsClient", () => {
                 twilioCallRecordingEnabled: true,
                 twilioMachineDetection: {
                     mode: "enable",
+                    actions: [
+                        {
+                            action: "hang_up",
+                            answeredBy: ["human"],
+                        },
+                    ],
                 },
             },
             targetConcurrencyLimit: 1,
@@ -477,7 +495,7 @@ describe("BatchCallsClient", () => {
             telephony_call_config: {
                 ringing_timeout_secs: 1,
                 twilio_call_recording_enabled: true,
-                twilio_machine_detection: { mode: "enable" },
+                twilio_machine_detection: { mode: "enable", actions: [{ action: "hang_up", answered_by: ["human"] }] },
             },
             target_concurrency_limit: 1,
             agent_name: "agent_name",
@@ -521,6 +539,12 @@ describe("BatchCallsClient", () => {
                 twilioCallRecordingEnabled: true,
                 twilioMachineDetection: {
                     mode: "enable",
+                    actions: [
+                        {
+                            action: "hang_up",
+                            answeredBy: ["human"],
+                        },
+                    ],
                 },
             },
             targetConcurrencyLimit: 1,

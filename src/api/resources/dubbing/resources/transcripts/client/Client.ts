@@ -24,6 +24,8 @@ export class TranscriptsClient {
     }
 
     /**
+     * @deprecated
+     *
      * Fetch the transcript for one of the languages in a dub.
      *
      * @param {string} dubbing_id - ID of the dubbing project.

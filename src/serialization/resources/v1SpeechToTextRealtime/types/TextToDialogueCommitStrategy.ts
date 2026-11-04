@@ -7,8 +7,8 @@ import type * as serializers from "../../../index";
 export const TextToDialogueCommitStrategy: core.serialization.Schema<
     serializers.TextToDialogueCommitStrategy.Raw,
     ElevenLabs.TextToDialogueCommitStrategy
-> = core.serialization.enum_(["manual", "vad"]);
+> = core.serialization.enum_(["manual", "vad", "turn_prediction"]);
 
 export declare namespace TextToDialogueCommitStrategy {
-    export type Raw = "manual" | "vad";
+    export type Raw = "manual" | "vad" | "turn_prediction";
 }

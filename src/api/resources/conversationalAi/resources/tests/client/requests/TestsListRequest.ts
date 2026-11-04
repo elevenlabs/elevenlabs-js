@@ -12,7 +12,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *         types: ["llm"],
  *         includeFolders: true,
  *         sortMode: "default",
- *         sharingMode: "all"
+ *         sharingMode: "all",
+ *         createdByUserId: "created_by_user_id"
  *     }
  */
 export interface TestsListRequest {
@@ -32,4 +33,6 @@ export interface TestsListRequest {
     sortMode?: ElevenLabs.conversationalAi.TestsListRequestSortMode;
     /** Filter test visibility. Use `shared_with_me` to return only tests/folders shared with the current user that they did not create. */
     sharingMode?: ElevenLabs.TestSharingMode;
+    /** Filter tests and folders by creator user ID. Use '@me' to refer to the authenticated user. */
+    createdByUserId?: string;
 }

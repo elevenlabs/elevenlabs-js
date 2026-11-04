@@ -17,6 +17,7 @@ describe("SummariesClient", () => {
                     voice_id: "UCaNsl8F6Xh4GALkVMLS",
                     tags: ["Customer Support", "Technical Help", "Eleven"],
                     created_at_unix_secs: 1716153600,
+                    updated_at_unix_secs: 1716240000,
                     access_info: {
                         is_creator: true,
                         creator_name: "John Doe",
@@ -49,6 +50,7 @@ describe("SummariesClient", () => {
                     voiceId: "UCaNsl8F6Xh4GALkVMLS",
                     tags: ["Customer Support", "Technical Help", "Eleven"],
                     createdAtUnixSecs: 1716153600,
+                    updatedAtUnixSecs: 1716240000,
                     accessInfo: {
                         isCreator: true,
                         creatorName: "John Doe",

@@ -53,4 +53,6 @@ export interface BodyTextToSpeechFullWithTimestamps {
     applyTextNormalization?: ElevenLabs.BodyTextToSpeechFullWithTimestampsApplyTextNormalization;
     /** This parameter controls language text normalization. This helps with proper pronunciation of text in some supported languages. WARNING: This parameter can heavily increase the latency of the request. Currently only supported for Japanese. */
     applyLanguageTextNormalization?: boolean;
+    /** Audio effects applied to the generated audio. Unknown IDs return 404 with `param` naming the field. Reverb (`environment_id` with `send_level` above 0) and a non-zero `pan` produce stereo audio and are rejected with 400 for `ulaw_*`, `alaw_*`, and `pcm_*` output formats. Effects don't change the cost of the request. */
+    audioEffects?: ElevenLabs.EffectsSpecInput;
 }

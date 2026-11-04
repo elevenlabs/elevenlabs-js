@@ -7,7 +7,7 @@ export interface AgentConfig {
     firstMessage?: string;
     /** Language of the agent - used for ASR and TTS */
     language?: string;
-    /** When enabled and language is Hindi, the agent will respond in Hinglish */
+    /** When enabled, the agent mixes English words and phrases into responses in Hindi, Malayalam, Telugu, or Kannada. */
     hinglishMode?: boolean;
     dynamicVariables?: unknown;
     /** If true, the user will not be able to interrupt the agent while the first message is being delivered. */

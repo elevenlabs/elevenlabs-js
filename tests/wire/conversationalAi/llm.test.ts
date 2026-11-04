@@ -19,6 +19,7 @@ describe("LlmClient", () => {
                     supports_document_input: true,
                     supports_parallel_tool_calls: true,
                     available_reasoning_efforts: ["none"],
+                    available_service_tiers: ["standard"],
                     deprecation_info: {
                         llm: "gpt-4o-mini",
                         is_deprecated: true,
@@ -67,6 +68,7 @@ describe("LlmClient", () => {
                     supportsDocumentInput: true,
                     supportsParallelToolCalls: true,
                     availableReasoningEfforts: ["none"],
+                    availableServiceTiers: ["standard"],
                     deprecationInfo: {
                         llm: "gpt-4o-mini",
                         isDeprecated: true,

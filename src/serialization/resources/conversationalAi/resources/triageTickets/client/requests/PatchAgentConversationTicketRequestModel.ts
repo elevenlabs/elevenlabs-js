@@ -11,6 +11,7 @@ export const PatchAgentConversationTicketRequestModel: core.serialization.Schema
     ElevenLabs.conversationalAi.PatchAgentConversationTicketRequestModel
 > = core.serialization.object({
     title: core.serialization.string().optional(),
+    qaComment: core.serialization.property("qa_comment", core.serialization.string().optional()),
     status: AgentConversationTicketStatus.optional(),
     assigneeUserId: core.serialization.property("assignee_user_id", core.serialization.string().optional()),
     priority: AgentConversationTicketPriority.optional(),
@@ -19,6 +20,7 @@ export const PatchAgentConversationTicketRequestModel: core.serialization.Schema
 export declare namespace PatchAgentConversationTicketRequestModel {
     export interface Raw {
         title?: string | null;
+        qa_comment?: string | null;
         status?: AgentConversationTicketStatus.Raw | null;
         assignee_user_id?: string | null;
         priority?: AgentConversationTicketPriority.Raw | null;

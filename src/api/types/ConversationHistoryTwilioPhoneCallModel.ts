@@ -7,6 +7,7 @@ export interface ConversationHistoryTwilioPhoneCallModel {
     phoneNumberId: string;
     agentNumber: string;
     externalNumber: string;
+    callResult?: ElevenLabs.CallResult;
     streamSid: string;
     callSid: string;
 }

@@ -11,6 +11,7 @@ export interface AgentBranchResponse {
     lastCommittedAt: number;
     isArchived: boolean;
     protectionStatus?: ElevenLabs.BranchProtectionStatus;
+    autoRebase?: boolean;
     /** Access information for the branch */
     accessInfo?: ElevenLabs.ResourceAccessInfo;
     /** Percentage of traffic live on the branch */

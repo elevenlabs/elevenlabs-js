@@ -14,6 +14,7 @@ export const AgentSummaryResponseModel: core.serialization.ObjectSchema<
     voiceId: core.serialization.property("voice_id", core.serialization.string()),
     tags: core.serialization.list(core.serialization.string()),
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
+    updatedAtUnixSecs: core.serialization.property("updated_at_unix_secs", core.serialization.number()),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
     lastCallTimeUnixSecs: core.serialization.property(
         "last_call_time_unix_secs",
@@ -29,6 +30,7 @@ export declare namespace AgentSummaryResponseModel {
         voice_id: string;
         tags: string[];
         created_at_unix_secs: number;
+        updated_at_unix_secs: number;
         access_info: ResourceAccessInfo.Raw;
         last_call_time_unix_secs?: number | null;
         archived?: boolean | null;

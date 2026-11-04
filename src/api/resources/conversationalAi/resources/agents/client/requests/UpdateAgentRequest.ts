@@ -6,7 +6,8 @@ import type * as ElevenLabs from "../../../../../../index";
  * @example
  *     {
  *         enableVersioningIfNotEnabled: true,
- *         branchId: "branch_id"
+ *         branchId: "branch_id",
+ *         includeProcedureGeneratedWorkflowElements: true
  *     }
  */
 export interface UpdateAgentRequest {
@@ -14,6 +15,8 @@ export interface UpdateAgentRequest {
     enableVersioningIfNotEnabled?: boolean;
     /** The ID of the branch to use */
     branchId?: string;
+    /** Whether to include the workflow nodes and edges generated from structured procedures. When false, the workflow contains only authored elements. */
+    includeProcedureGeneratedWorkflowElements?: boolean;
     /** Conversation configuration for an agent */
     conversationConfig?: ElevenLabs.ConversationalConfig;
     /** Platform settings for the agent are all settings that aren't related to the conversation orchestration and content. */

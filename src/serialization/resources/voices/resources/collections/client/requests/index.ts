@@ -1,0 +1,2 @@
+export { BodyCreateVoiceCollectionV1VoicesCollectionsPost } from "./BodyCreateVoiceCollectionV1VoicesCollectionsPost";
+export { BodyUpdateVoiceCollectionV1VoicesCollectionsCollectionIdPatch } from "./BodyUpdateVoiceCollectionV1VoicesCollectionsCollectionIdPatch";

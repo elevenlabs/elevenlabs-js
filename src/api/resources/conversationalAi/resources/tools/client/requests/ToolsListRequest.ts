@@ -12,6 +12,7 @@ import type * as ElevenLabs from "../../../../../../index";
  *         types: ["webhook"],
  *         sortDirection: "asc",
  *         sortBy: "name",
+ *         usedByAgentId: "used_by_agent_id",
  *         cursor: "cursor"
  *     }
  */
@@ -30,6 +31,8 @@ export interface ToolsListRequest {
     sortDirection?: ElevenLabs.SortDirection;
     /** The field to sort the results by */
     sortBy?: ElevenLabs.ToolSortBy;
+    /** Filter to tools referenced by this agent's main branch: tools attached to the agent, tools on authored workflow nodes, and tools referenced by procedures. */
+    usedByAgentId?: string;
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
 }

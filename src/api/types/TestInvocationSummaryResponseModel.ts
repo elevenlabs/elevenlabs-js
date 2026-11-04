@@ -5,6 +5,8 @@ import type * as ElevenLabs from "../index";
 export interface TestInvocationSummaryResponseModel {
     /** The ID of the test invocation */
     id: string;
+    /** The user-provided name of the test invocation, if one was set. */
+    name?: string;
     /** The ID of the agent this test invocation belongs to */
     agentId?: string;
     /** The ID of the branch this test invocation was run on */
@@ -27,7 +29,7 @@ export interface TestInvocationSummaryResponseModel {
     pendingCount: number;
     /** Number of test runs that were cancelled */
     cancelledCount: number;
-    /** Title of the test invocation - the folder name for folder runs, otherwise the single test name or count of tests */
+    /** Display title of the test invocation: the user-provided name when set, otherwise the folder name, single test name, or test count. */
     title: string;
     /** The access information of the test invocation */
     accessInfo?: ElevenLabs.ResourceAccessInfo;

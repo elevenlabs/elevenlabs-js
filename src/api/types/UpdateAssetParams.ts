@@ -2,4 +2,6 @@
 
 export interface UpdateAssetParams {
     smbToolType?: "update_asset";
+    /** Whether to offer an available_hours timezone, set from the workspace's enable_per_resource_timezones. */
+    perResourceTimezones?: boolean;
 }

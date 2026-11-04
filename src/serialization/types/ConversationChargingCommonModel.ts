@@ -31,6 +31,7 @@ export const ConversationChargingCommonModel: core.serialization.ObjectSchema<
     ttsUsage: core.serialization.property("tts_usage", ConversationTtsUsageModel.optional()),
     asrUsage: core.serialization.property("asr_usage", ConversationAsrUsageModel.optional()),
     analysis: AnalysisCharging.optional(),
+    voiceSurchargeCharge: core.serialization.property("voice_surcharge_charge", core.serialization.number().optional()),
 });
 
 export declare namespace ConversationChargingCommonModel {
@@ -50,5 +51,6 @@ export declare namespace ConversationChargingCommonModel {
         tts_usage?: ConversationTtsUsageModel.Raw | null;
         asr_usage?: ConversationAsrUsageModel.Raw | null;
         analysis?: AnalysisCharging.Raw | null;
+        voice_surcharge_charge?: number | null;
     }
 }

@@ -9,6 +9,6 @@ import type * as core from "../../../../../../../../../core";
  *     }
  */
 export interface BodyUploadFileV1ConvaiConversationsConversationIdFilesPost {
-    /** Image or PDF file to upload */
+    /** Image, PDF, or text file to upload */
     file: core.file.Uploadable;
 }

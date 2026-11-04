@@ -5,4 +5,6 @@
  */
 export interface CreateStaffParams {
     smbToolType?: "create_staff";
+    /** Whether to offer a working_hours timezone, set from the workspace's enable_per_resource_timezones. While that is off every staff member uses the workspace timezone, so the key is not offered. */
+    perResourceTimezones?: boolean;
 }

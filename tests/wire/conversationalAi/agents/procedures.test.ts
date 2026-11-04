@@ -107,9 +107,12 @@ describe("ProceduresClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                 },
-                nodes: { key: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] } },
+                nodes: {
+                    key: { type: "end", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"], outcome: "success" },
+                },
                 prevent_subagent_loops: true,
             },
         };
@@ -148,6 +151,12 @@ describe("ProceduresClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                 },
                 nodes: {
@@ -158,6 +167,7 @@ describe("ProceduresClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
+                        outcome: "success",
                     },
                 },
                 preventSubagentLoops: true,

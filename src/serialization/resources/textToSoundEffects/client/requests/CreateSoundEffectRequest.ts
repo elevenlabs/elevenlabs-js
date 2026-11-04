@@ -7,7 +7,7 @@ import { SfxModelId } from "../../../../types/SfxModelId";
 
 export const CreateSoundEffectRequest: core.serialization.Schema<
     serializers.CreateSoundEffectRequest.Raw,
-    Omit<ElevenLabs.CreateSoundEffectRequest, "outputFormat">
+    Omit<ElevenLabs.CreateSoundEffectRequest, "outputFormat" | "enableLogging">
 > = core.serialization.object({
     text: core.serialization.string(),
     loop: core.serialization.boolean().optional(),

@@ -8,13 +8,11 @@ export const SayNodePromptMessageInput: core.serialization.ObjectSchema<
     serializers.SayNodePromptMessageInput.Raw,
     ElevenLabs.SayNodePromptMessageInput
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("prompt").optional(),
     prompt: core.serialization.string(),
 });
 
 export declare namespace SayNodePromptMessageInput {
     export interface Raw {
-        type?: "prompt" | null;
         prompt: string;
     }
 }

@@ -524,6 +524,62 @@ await client.audioIsolation.delete("history_item_id");
 </dl>
 </details>
 
+## AudioEffects
+<details><summary><code>client.audioEffects.<a href="/src/api/resources/audioEffects/client/Client.ts">getCatalog</a>() -> ElevenLabs.AudioEffectsCatalogResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the filter presets, reverb environments, and background noises that `audio_effects` can reference in Text to Speech, Text to Dialogue, and agent configurations.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioEffects.getCatalog();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioEffectsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Samples
 <details><summary><code>client.samples.<a href="/src/api/resources/samples/client/Client.ts">delete</a>(voice_id, sample_id) -> ElevenLabs.DeleteSampleResponse</code></summary>
 <dl>
@@ -3478,7 +3534,7 @@ await client.pronunciationDictionaries.list({
 </dl>
 </details>
 
-## Workspace
+## workspace
 <details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">setThirdPartyDisablingPolicy</a>({ ...params }) -> unknown</code></summary>
 <dl>
 <dd>
@@ -4090,7 +4146,8 @@ Stream a song and its detailed metadata using Server-Sent Events (SSE).
 
 ```typescript
 const response = await client.music.composeDetailedStream({
-    outputFormat: "auto"
+    outputFormat: "auto",
+    enableLogging: true
 });
 for await (const item of response) {
     console.log(item);
@@ -5255,6 +5312,69 @@ await client.environmentVariables.get("env_var_id");
 </dl>
 </details>
 
+<details><summary><code>client.environmentVariables.<a href="/src/api/resources/environmentVariables/client/Client.ts">delete</a>(env_var_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an environment variable and its values in all environments. WARNING: Agents are not checked. A variable that an agent still uses (custom LLM, webhooks or cloud storage export, on any branch or version) is deleted anyway, and that agent's conversations then fail. The delete is only rejected while tools, MCP servers or the workspace conversation initiation webhook use the variable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environmentVariables.delete("env_var_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**env_var_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentVariablesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.environmentVariables.<a href="/src/api/resources/environmentVariables/client/Client.ts">update</a>(env_var_id, { ...params }) -> ElevenLabs.EnvironmentVariableResponse</code></summary>
 <dl>
 <dd>
@@ -5267,7 +5387,7 @@ await client.environmentVariables.get("env_var_id");
 <dl>
 <dd>
 
-Replace an environment variable's values. Use null to remove an environment (except production).
+Replace an environment variable's values. Use null to remove its value for an environment (except production); delete an environment with DELETE /v1/convai/environments/{environment}.
 </dd>
 </dl>
 </dd>
@@ -5317,6 +5437,190 @@ await client.environmentVariables.update("env_var_id", {
 <dd>
 
 **requestOptions:** `EnvironmentVariablesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Environments
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">list</a>() -> ElevenLabs.EnvironmentsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace environments, including 'production'.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environments.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.EnvironmentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a workspace environment. Variables without a value for it fall back to their production value.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environments.create({
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateEnvironmentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">delete</a>(environment) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a workspace environment and remove its values from all environment variables. 'production' cannot be deleted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.environments.delete("environment");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**environment:** `string` — Name of the environment to delete, e.g. 'staging'.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EnvironmentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6627,7 +6931,8 @@ Retrieve config for an agent
 ```typescript
 await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     versionId: "version_id",
-    branchId: "branch_id"
+    branchId: "branch_id",
+    includeProcedureGeneratedWorkflowElements: true
 });
 
 ```
@@ -6672,7 +6977,7 @@ await client.conversationalAi.agents.get("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">delete</a>(agent_id) -> void</code></summary>
+<details><summary><code>client.conversationalAi.agents.<a href="/src/api/resources/conversationalAi/resources/agents/client/Client.ts">delete</a>(agent_id, { ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -6699,7 +7004,9 @@ Delete an agent
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz");
+await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    force: true
+});
 
 ```
 </dd>
@@ -6716,6 +7023,14 @@ await client.conversationalAi.agents.delete("agent_3701k3ttaq12ewp8b7qv5rfyszkz"
 <dd>
 
 **agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.AgentsDeleteRequest` 
     
 </dd>
 </dl>
@@ -6764,7 +7079,8 @@ Patches an Agent settings
 ```typescript
 await client.conversationalAi.agents.update("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
     enableVersioningIfNotEnabled: true,
-    branchId: "branch_id"
+    branchId: "branch_id",
+    includeProcedureGeneratedWorkflowElements: true
 });
 
 ```
@@ -6894,7 +7210,7 @@ await client.conversationalAi.agents.list({
 <dl>
 <dd>
 
-Create a new agent by duplicating an existing one
+Create a new agent by duplicating an existing one. The new agent gets a copy of every unarchived branch of the source agent, each with the same name and description and starting from the latest version on that branch. The live traffic split is copied onto the new branches, with any share held by a branch that was not copied moved to main. Version history, drafts, archived branches, past traffic splits and experiments are not copied.
 </dd>
 </dl>
 </dd>
@@ -7618,7 +7934,8 @@ await client.conversationalAi.tests.list({
     types: ["llm"],
     includeFolders: true,
     sortMode: "default",
-    sharingMode: "all"
+    sharingMode: "all",
+    createdByUserId: "created_by_user_id"
 });
 
 ```
@@ -7768,6 +8085,8 @@ await client.conversationalAi.triageTickets.list("agent_id", {
     assigneeUserId: "assignee_user_id",
     issueType: "knowledge_gap",
     label: "label",
+    mergedIntoTicketId: "merged_into_ticket_id",
+    search: "search",
     cursor: "cursor"
 });
 
@@ -7898,7 +8217,7 @@ await client.conversationalAi.triageTickets.createManual("agent_id", {
 <dl>
 <dd>
 
-List conversation triage tickets across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, tickets assigned to the caller); for a single agent's tickets, use the per-agent endpoint instead. Tickets for agents the caller cannot access are omitted.
+List conversation triage tickets across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, tickets assigned to the caller). Supports the same filters, sorting and search as the per-agent endpoint. Tickets for agents the caller cannot access are omitted.
 </dd>
 </dl>
 </dd>
@@ -7915,8 +8234,17 @@ List conversation triage tickets across every agent in the workspace, ordered by
 ```typescript
 await client.conversationalAi.triageTickets.listForWorkspace({
     pageSize: 1,
+    agentId: "agent_id",
     status: "open",
+    sources: ["qa"],
+    priorities: ["low"],
+    sortBy: "created_at",
+    ownerUserId: "owner_user_id",
     assigneeUserId: "assignee_user_id",
+    issueType: "knowledge_gap",
+    label: "label",
+    mergedIntoTicketId: "merged_into_ticket_id",
+    search: "search",
     cursor: "cursor"
 });
 
@@ -8220,7 +8548,7 @@ await client.conversationalAi.triageTickets.delete("agentqa_ticket_id");
 <dl>
 <dd>
 
-Update a ticket's title, comment, status, priority, and/or assignee. Requires editor access to the ticket's agent.
+Update a ticket's title, comment, status, priority, and/or assignee. Requires viewer access to the ticket's agent.
 </dd>
 </dl>
 </dd>
@@ -8333,6 +8661,79 @@ await client.conversationalAi.triageTickets.addComment("agentqa_ticket_id", {
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.AddTicketCommentRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TriageTicketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.triageTickets.<a href="/src/api/resources/conversationalAi/resources/triageTickets/client/Client.ts">merge</a>(agentqa_ticket_id, { ...params }) -> ElevenLabs.AgentConversationTicketResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Merge other open tickets of the same agent into this pending, in-progress, or resolved one. Their conversations move onto this ticket, its priority is raised to the highest among them, and they are kept with status 'merged'. Requires viewer access to the ticket's agent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.triageTickets.merge("agentqa_ticket_id", {
+    sourceTicketIds: ["source_ticket_ids"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agentqa_ticket_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.MergeAgentConversationTicketsRequestModel` 
     
 </dd>
 </dl>
@@ -9282,6 +9683,7 @@ await client.conversationalAi.tools.list({
     types: ["webhook"],
     sortDirection: "asc",
     sortBy: "name",
+    usedByAgentId: "used_by_agent_id",
     cursor: "cursor"
 });
 
@@ -9676,6 +10078,566 @@ await client.conversationalAi.tools.getDependentAgents("tool_id", {
 <dd>
 
 **requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi AnalysisItems
+<details><summary><code>client.conversationalAi.analysisItems.<a href="/src/api/resources/conversationalAi/resources/analysisItems/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.AnalysisItemsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List analysis items available in the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.analysisItems.list({
+    search: "search",
+    pageSize: 1,
+    kind: "evaluation",
+    analysisItemIds: ["analysis_item_ids"],
+    createdByUserId: "created_by_user_id",
+    sortDirection: "asc",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.AnalysisItemsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AnalysisItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.analysisItems.<a href="/src/api/resources/conversationalAi/resources/analysisItems/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.AnalysisItemResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new analysis item (evaluation criterion or data collection) in the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.analysisItems.create({
+    kind: "evaluation",
+    name: "name",
+    conversationGoalPrompt: "conversation_goal_prompt"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.AnalysisItemsCreateRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AnalysisItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.analysisItems.<a href="/src/api/resources/conversationalAi/resources/analysisItems/client/Client.ts">updateAttachments</a>(analysis_item_id, { ...params }) -> ElevenLabs.UpdateAnalysisItemAttachmentsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Attach or detach one analysis item on multiple agent branches.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.analysisItems.updateAttachments("analysis_item_id", {
+    source: "user"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**analysis_item_id:** `string` — ID of the requested analysis item.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.UpdateAnalysisItemAttachmentsRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AnalysisItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.analysisItems.<a href="/src/api/resources/conversationalAi/resources/analysisItems/client/Client.ts">get</a>(analysis_item_id) -> ElevenLabs.AnalysisItemResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get an analysis item available in the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.analysisItems.get("analysis_item_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**analysis_item_id:** `string` — ID of the requested analysis item.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AnalysisItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.analysisItems.<a href="/src/api/resources/conversationalAi/resources/analysisItems/client/Client.ts">delete</a>(analysis_item_id, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an analysis item and all of its versions from the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.analysisItems.delete("analysis_item_id", {
+    force: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**analysis_item_id:** `string` — ID of the requested analysis item.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.AnalysisItemsDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AnalysisItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.analysisItems.<a href="/src/api/resources/conversationalAi/resources/analysisItems/client/Client.ts">update</a>(analysis_item_id, { ...params }) -> ElevenLabs.AnalysisItemResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an analysis item. Publishes a new version when the content changes.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.analysisItems.update("analysis_item_id", {
+    kind: "evaluation",
+    name: "name",
+    conversationGoalPrompt: "conversation_goal_prompt"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**analysis_item_id:** `string` — ID of the requested analysis item.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.AnalysisItemsUpdateRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AnalysisItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.analysisItems.<a href="/src/api/resources/conversationalAi/resources/analysisItems/client/Client.ts">listVersions</a>(analysis_item_id, { ...params }) -> ElevenLabs.AnalysisItemVersionsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the published versions of an analysis item, newest first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.analysisItems.listVersions("analysis_item_id", {
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**analysis_item_id:** `string` — ID of the requested analysis item.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.AnalysisItemsListVersionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AnalysisItemsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.analysisItems.<a href="/src/api/resources/conversationalAi/resources/analysisItems/client/Client.ts">copy</a>(analysis_item_id) -> ElevenLabs.AnalysisItemResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new analysis item from this item's current definition.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.analysisItems.copy("analysis_item_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**analysis_item_id:** `string` — ID of the requested analysis item.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AnalysisItemsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -11333,6 +12295,535 @@ await client.conversationalAi.whatsappAccounts.list({
 </dl>
 </details>
 
+## ConversationalAi Realtime
+<details><summary><code>client.conversationalAi.realtime.<a href="/src/api/resources/conversationalAi/resources/realtime/client/Client.ts">listConversationGroups</a>({ ...params }) -> ElevenLabs.RealtimeConversationGroupsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the realtime conversation groups the current user can view.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.realtime.listConversationGroups({
+    pageSize: 1,
+    search: "search",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.RealtimeListConversationGroupsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RealtimeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.realtime.<a href="/src/api/resources/conversationalAi/resources/realtime/client/Client.ts">createConversationGroup</a>({ ...params }) -> ElevenLabs.RealtimeConversationGroupResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a realtime conversation group owned by the current user.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.realtime.createConversationGroup({
+    title: "title"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.CreateRealtimeConversationGroupRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RealtimeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.realtime.<a href="/src/api/resources/conversationalAi/resources/realtime/client/Client.ts">getConversationGroup</a>(conversation_group_id) -> ElevenLabs.RealtimeConversationGroupResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a realtime conversation group by id.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.realtime.getConversationGroup("conversation_group_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_group_id:** `string` — The id of a realtime conversation group.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RealtimeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.realtime.<a href="/src/api/resources/conversationalAi/resources/realtime/client/Client.ts">deleteConversationGroup</a>(conversation_group_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a realtime conversation group. Every conversation in it becomes ungrouped, so access granted through the group is revoked.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.realtime.deleteConversationGroup("conversation_group_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_group_id:** `string` — The id of a realtime conversation group.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RealtimeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.realtime.<a href="/src/api/resources/conversationalAi/resources/realtime/client/Client.ts">updateConversationGroup</a>(conversation_group_id, { ...params }) -> ElevenLabs.RealtimeConversationGroupResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Rename or re-describe a realtime conversation group.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.realtime.updateConversationGroup("conversation_group_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_group_id:** `string` — The id of a realtime conversation group.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.UpdateRealtimeConversationGroupRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RealtimeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.realtime.<a href="/src/api/resources/conversationalAi/resources/realtime/client/Client.ts">setConversationGroup</a>(conversation_id, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Place a realtime conversation in a conversation group, moving it out of its current group if it has one.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.realtime.setConversationGroup("conversation_id", {
+    conversationGroupId: "conversation_group_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The id of a realtime conversation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.SetConversationGroupRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RealtimeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.realtime.<a href="/src/api/resources/conversationalAi/resources/realtime/client/Client.ts">clearConversationGroup</a>(conversation_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a realtime conversation from its conversation group.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.realtime.clearConversationGroup("conversation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The id of a realtime conversation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RealtimeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.realtime.<a href="/src/api/resources/conversationalAi/resources/realtime/client/Client.ts">createClientSecret</a>({ ...params }) -> ElevenLabs.ClientSecretResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create an ephemeral client secret for authenticating browser-based Realtime API sessions.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.realtime.createClientSecret();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.CreateClientSecretRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RealtimeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Agents Summaries
 <details><summary><code>client.conversationalAi.agents.summaries.<a href="/src/api/resources/conversationalAi/resources/agents/resources/summaries/client/Client.ts">get</a>({ ...params }) -> Record&lt;string, ElevenLabs.SummariesGetResponseValue&gt;</code></summary>
 <dl>
@@ -12044,7 +13535,7 @@ await client.conversationalAi.agents.branches.get("agent_3701k3ttaq12ewp8b7qv5rf
 <dl>
 <dd>
 
-Update agent branch properties such as archiving status and protection level
+Update agent branch properties such as name, description, archiving status, protection level, and auto-rebase onto main
 </dd>
 </dl>
 </dd>
@@ -12140,7 +13631,8 @@ Returns the result of merging the source branch into the target branch without p
 ```typescript
 await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
     targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
-    force: true
+    force: true,
+    includeProcedureGeneratedWorkflowElements: true
 });
 
 ```
@@ -12274,7 +13766,7 @@ await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">previewRebase</a>(agent_id, branch_id) -> ElevenLabs.MergePreviewResponseModel</code></summary>
+<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">previewRebase</a>(agent_id, branch_id, { ...params }) -> ElevenLabs.MergePreviewResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -12286,7 +13778,7 @@ await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5
 <dl>
 <dd>
 
-Returns the result of rebasing the branch onto main without performing the rebase. Useful for showing an accurate diff before confirming.
+Returns the result of pulling changes from a source branch (defaults to main) into the given branch without performing it, preserving the given branch's own changes. Useful for showing an accurate diff before confirming.
 </dd>
 </dl>
 </dd>
@@ -12301,7 +13793,10 @@ Returns the result of rebasing the branch onto main without performing the rebas
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+    sourceBranchId: "source_branch_id",
+    includeProcedureGeneratedWorkflowElements: true
+});
 
 ```
 </dd>
@@ -12326,6 +13821,14 @@ await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12e
 <dd>
 
 **branch_id:** `string` — Unique identifier for the source branch to merge from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BranchesPreviewRebaseRequest` 
     
 </dd>
 </dl>
@@ -12345,7 +13848,7 @@ await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12e
 </dl>
 </details>
 
-<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">rebase</a>(agent_id, branch_id) -> unknown</code></summary>
+<details><summary><code>client.conversationalAi.agents.branches.<a href="/src/api/resources/conversationalAi/resources/agents/resources/branches/client/Client.ts">rebase</a>(agent_id, branch_id, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -12357,7 +13860,7 @@ await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12e
 <dl>
 <dd>
 
-Rebase a branch onto the latest main branch, incorporating main's changes while preserving the branch's own changes.
+Pull changes from a source branch (defaults to main) into this branch as a new version, preserving this branch's own changes on conflicts.
 </dd>
 </dl>
 </dd>
@@ -12372,7 +13875,9 @@ Rebase a branch onto the latest main branch, incorporating main's changes while 
 <dd>
 
 ```typescript
-await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj");
+await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", {
+    sourceBranchId: "source_branch_id"
+});
 
 ```
 </dd>
@@ -12397,6 +13902,14 @@ await client.conversationalAi.agents.branches.rebase("agent_3701k3ttaq12ewp8b7qv
 <dd>
 
 **branch_id:** `string` — Unique identifier for the source branch to merge from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost` 
     
 </dd>
 </dl>
@@ -14189,6 +15702,81 @@ await client.conversationalAi.agents.widget.avatar.create("agent_3701k3ttaq12ewp
 </dl>
 </details>
 
+## ConversationalAi AnalysisItems DependentAgents
+<details><summary><code>client.conversationalAi.analysisItems.dependentAgents.<a href="/src/api/resources/conversationalAi/resources/analysisItems/resources/dependentAgents/client/Client.ts">get</a>(analysis_item_id, { ...params }) -> ElevenLabs.GetAnalysisItemDependentAgentsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a list of agents (and branches) that reference this analysis item.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.analysisItems.dependentAgents.get("analysis_item_id", {
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**analysis_item_id:** `string` — ID of the requested analysis item.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.analysisItems.DependentAgentsGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DependentAgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Analytics LiveCount
 <details><summary><code>client.conversationalAi.analytics.liveCount.<a href="/src/api/resources/conversationalAi/resources/analytics/resources/liveCount/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.GetLiveCountResponse</code></summary>
 <dl>
@@ -15048,7 +16636,7 @@ await client.conversationalAi.conversations.tags.update("tag_id");
 <dl>
 <dd>
 
-Upload an image or PDF file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
+Upload an image, PDF, or text file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
 </dd>
 </dl>
 </dd>
@@ -15935,7 +17523,7 @@ await client.conversationalAi.knowledgeBase.documents.delete("21m00Tcm4TlvDq8ikW
 <dl>
 <dd>
 
-Update the name and/or content of a document.
+Update the name, content and/or auto-sync settings of a document.
 </dd>
 </dl>
 </dd>
@@ -18055,6 +19643,11 @@ Lists all test invocations with pagination support and optional search filtering
 await client.conversationalAi.tests.invocations.list({
     agentId: "agent_id",
     branchId: "branch_id",
+    createdByUserId: "created_by_user_id",
+    testId: "test_id",
+    startTime: 1,
+    endTime: 1,
+    versionId: "version_id",
     pageSize: 1,
     search: "search",
     cursor: "cursor"
@@ -18138,6 +19731,77 @@ await client.conversationalAi.tests.invocations.get("test_invocation_id");
 <dd>
 
 **test_invocation_id:** `string` — The id of a test invocation. This is returned when tests are run.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InvocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.tests.invocations.<a href="/src/api/resources/conversationalAi/resources/tests/resources/invocations/client/Client.ts">update</a>(test_invocation_id, { ...params }) -> ElevenLabs.GetTestSuiteInvocationResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the user-provided name of a test invocation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.tests.invocations.update("test_invocation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**test_invocation_id:** `string` — The id of a test invocation. This is returned when tests are run.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.tests.UpdateTestSuiteInvocationRequestModel` 
     
 </dd>
 </dl>
@@ -21828,6 +23492,7 @@ Create a composition plan for music generation. Usage of this endpoint does not 
 
 ```typescript
 await client.music.compositionPlan.create({
+    enableLogging: true,
     prompt: "prompt"
 });
 
@@ -23469,6 +25134,77 @@ await client.serviceAccounts.apiKeys.update("service_account_user_id", "api_key_
 <dd>
 
 **request:** `ElevenLabs.serviceAccounts.BodyEditServiceAccountApiKeyV1ServiceAccountsServiceAccountUserIdApiKeysApiKeyIdPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ApiKeysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.serviceAccounts.apiKeys.<a href="/src/api/resources/serviceAccounts/resources/apiKeys/client/Client.ts">disable</a>(service_account_user_id, api_key_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Disable an existing API key for a service account without changing its other settings. This stays available after a workspace downgrades off a plan that includes service accounts. Turning the key back on still requires that plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.serviceAccounts.apiKeys.disable("service_account_user_id", "api_key_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_account_user_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**api_key_id:** `string` 
     
 </dd>
 </dl>
@@ -25346,6 +27082,467 @@ await client.user.subscription.get();
 <dd>
 
 **requestOptions:** `SubscriptionClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Voices Collections
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">list</a>() -> ElevenLabs.GetUserVoiceCollectionsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns all the voice collections the user has access to, sorted by title.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.UserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new voice collection. The caller becomes its admin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.create({
+    title: "title",
+    icon: "icon"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.BodyCreateVoiceCollectionV1VoicesCollectionsPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">get</a>(collection_id) -> ElevenLabs.UserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a voice collection the user has access to.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.get("collection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string` — Collection ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">delete</a>(collection_id) -> ElevenLabs.DeleteUserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a voice collection. The voices in it are not deleted. Requires admin access to the collection.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.delete("collection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string` — Collection ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">update</a>(collection_id, { ...params }) -> ElevenLabs.UserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the title and icon of a voice collection. Fields that are omitted are left unchanged. Requires editor access to the collection.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.update("collection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string` — Collection ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.voices.BodyUpdateVoiceCollectionV1VoicesCollectionsCollectionIdPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">addVoice</a>(collection_id, voice_id) -> ElevenLabs.AddVoiceToUserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Adds a voice to a voice collection. Adding a voice that is already in the collection succeeds without changes. Requires editor access to the collection.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.addVoice("collection_id", "21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string` — Collection ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**voice_id:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voices.collections.<a href="/src/api/resources/voices/resources/collections/client/Client.ts">removeVoice</a>(collection_id, voice_id) -> ElevenLabs.RemoveVoiceFromUserVoiceCollectionResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes a voice from a voice collection. The voice itself is not deleted. Requires editor access to the collection.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voices.collections.removeVoice("collection_id", "21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string` — Collection ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**voice_id:** `string` — Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CollectionsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -27786,7 +29983,7 @@ await client.workspace.resources.unshare("resource_id", {
 <dl>
 <dd>
 
-Returns credit usage broken down by product type over time. The response is a tabular structure with columns, column_types, column_units, and rows.
+Returns credit usage broken down by product type over time. The response is a tabular structure with columns, column_types, column_units, and rows. Some id columns also get a display-name column, such as user_label or voice_name, appended after the existing columns.
 </dd>
 </dl>
 </dd>

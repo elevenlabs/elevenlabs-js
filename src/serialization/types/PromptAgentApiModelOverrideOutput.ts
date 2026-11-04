@@ -13,6 +13,7 @@ export const PromptAgentApiModelOverrideOutput: core.serialization.ObjectSchema<
     prompt: core.serialization.string().optional(),
     llm: Llm.optional(),
     toolIds: core.serialization.property("tool_ids", core.serialization.list(core.serialization.string()).optional()),
+    toolIdsStrict: core.serialization.property("tool_ids_strict", core.serialization.boolean().optional()),
     nativeMcpServerIds: core.serialization.property(
         "native_mcp_server_ids",
         core.serialization.list(core.serialization.string()).optional(),
@@ -28,6 +29,7 @@ export declare namespace PromptAgentApiModelOverrideOutput {
         prompt?: string | null;
         llm?: Llm.Raw | null;
         tool_ids?: string[] | null;
+        tool_ids_strict?: boolean | null;
         native_mcp_server_ids?: string[] | null;
         knowledge_base?: KnowledgeBaseLocator.Raw[] | null;
     }

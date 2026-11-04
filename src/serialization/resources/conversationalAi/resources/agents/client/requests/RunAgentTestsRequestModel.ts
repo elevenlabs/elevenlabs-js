@@ -10,6 +10,7 @@ export const RunAgentTestsRequestModel: core.serialization.Schema<
     serializers.conversationalAi.RunAgentTestsRequestModel.Raw,
     ElevenLabs.conversationalAi.RunAgentTestsRequestModel
 > = core.serialization.object({
+    name: core.serialization.string().optional(),
     tests: core.serialization.list(SingleTestRunRequestModel),
     agentConfigOverride: core.serialization.property(
         "agent_config_override",
@@ -21,6 +22,7 @@ export const RunAgentTestsRequestModel: core.serialization.Schema<
 
 export declare namespace RunAgentTestsRequestModel {
     export interface Raw {
+        name?: string | null;
         tests: SingleTestRunRequestModel.Raw[];
         agent_config_override?: AdhocAgentConfigOverrideForTestRequestModel.Raw | null;
         branch_id?: string | null;

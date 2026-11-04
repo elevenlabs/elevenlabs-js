@@ -1,5 +1,7 @@
 export * as accents from "./accents";
 export * from "./accents/client/requests";
+export * as collections from "./collections";
+export * from "./collections/client/requests";
 export * as ivc from "./ivc";
 export * from "./ivc/client/requests";
 export * from "./ivc/types";

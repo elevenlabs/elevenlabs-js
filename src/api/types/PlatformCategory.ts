@@ -8,6 +8,9 @@ export const PlatformCategory = {
     Asr: "asr",
     TextMessage: "text_message",
     Reception: "reception",
+    V3Addon: "v3_addon",
+    V4Addon: "v4_addon",
+    RagAddon: "rag_addon",
     Other: "other",
 } as const;
 export type PlatformCategory = (typeof PlatformCategory)[keyof typeof PlatformCategory];

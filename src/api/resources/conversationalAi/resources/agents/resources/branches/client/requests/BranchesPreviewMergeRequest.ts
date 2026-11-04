@@ -4,7 +4,8 @@
  * @example
  *     {
  *         targetBranchId: "agtbrch_8901k4t9z5defmb8vh3e9361y7nj",
- *         force: true
+ *         force: true,
+ *         includeProcedureGeneratedWorkflowElements: true
  *     }
  */
 export interface BranchesPreviewMergeRequest {
@@ -12,4 +13,6 @@ export interface BranchesPreviewMergeRequest {
     targetBranchId: string;
     /** When true, source branch changes always win conflicts regardless of timestamps */
     force?: boolean;
+    /** Whether to include the workflow nodes and edges generated from structured procedures. When false, the workflow contains only authored elements. */
+    includeProcedureGeneratedWorkflowElements?: boolean;
 }

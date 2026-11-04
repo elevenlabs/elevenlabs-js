@@ -1,5 +1,8 @@
 export * as agents from "./agents";
 export * from "./agents/client/requests";
+export * as analysisItems from "./analysisItems";
+export * from "./analysisItems/client/requests";
+export * from "./analysisItems/types";
 export * as analytics from "./analytics";
 export * as batchCalls from "./batchCalls";
 export * from "./batchCalls/client/requests";
@@ -21,6 +24,8 @@ export * from "./mcpServers/types";
 export * as phoneNumbers from "./phoneNumbers";
 export * from "./phoneNumbers/client/requests";
 export * from "./phoneNumbers/types";
+export * as realtime from "./realtime";
+export * from "./realtime/client/requests";
 export * as secrets from "./secrets";
 export * from "./secrets/client/requests";
 export * as settings from "./settings";

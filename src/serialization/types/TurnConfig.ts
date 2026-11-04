@@ -41,6 +41,14 @@ export const TurnConfig: core.serialization.ObjectSchema<serializers.TurnConfig.
             core.serialization.boolean().optional(),
         ),
         softTimeoutConfig: core.serialization.property("soft_timeout_config", SoftTimeoutConfig.optional()),
+        noisyEnvironmentDetection: core.serialization.property(
+            "noisy_environment_detection",
+            core.serialization.boolean().optional(),
+        ),
+        noisyEnvironmentMessage: core.serialization.property(
+            "noisy_environment_message",
+            core.serialization.string().optional(),
+        ),
     });
 
 export declare namespace TurnConfig {
@@ -58,5 +66,7 @@ export declare namespace TurnConfig {
         merge_with_default_ignore_terms?: boolean | null;
         transcribe_on_disabled_interruptions?: boolean | null;
         soft_timeout_config?: SoftTimeoutConfig.Raw | null;
+        noisy_environment_detection?: boolean | null;
+        noisy_environment_message?: string | null;
     }
 }

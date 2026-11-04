@@ -4,6 +4,8 @@ import type * as ElevenLabs from "../index";
 
 export interface GetTestSuiteInvocationResponseModel {
     id: string;
+    /** The user-provided name of the test invocation, if one was set. */
+    name?: string;
     agentId?: string;
     branchId?: string;
     versionId?: string;

@@ -9,7 +9,7 @@ export interface ClientToolConfigOutput {
     name: string;
     /** Description of when the tool should be used and what it does. */
     description: string;
-    /** The maximum time in seconds to wait for the tool call to complete. Must be between 1 and 120 seconds (inclusive). */
+    /** The maximum time in seconds to wait for the tool call to complete. Must be between 1 and 120 seconds (inclusive), or -1 to wait for the client's response indefinitely (requires expects_response). */
     responseTimeoutSecs?: number;
     /** DEPRECATED: use `interruption_mode` instead. If true, the user will not be able to interrupt the agent while this tool is running. */
     disableInterruptions?: boolean;

@@ -12,10 +12,15 @@ export const UpdateAssetParams: core.serialization.ObjectSchema<
         "smb_tool_type",
         core.serialization.stringLiteral("update_asset").optional(),
     ),
+    perResourceTimezones: core.serialization.property(
+        "per_resource_timezones",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace UpdateAssetParams {
     export interface Raw {
         smb_tool_type?: "update_asset" | null;
+        per_resource_timezones?: boolean | null;
     }
 }

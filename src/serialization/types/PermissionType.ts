@@ -13,6 +13,8 @@ export const PermissionType: core.serialization.Schema<serializers.PermissionTyp
         "models_write",
         "voices_read",
         "voices_write",
+        "voice_collections_read",
+        "voice_collections_write",
         "speech_history_read",
         "speech_history_write",
         "sound_generation",
@@ -33,6 +35,7 @@ export const PermissionType: core.serialization.Schema<serializers.PermissionTyp
         "forced_alignment",
         "convai_read",
         "convai_write",
+        "agents_architect",
         "music_generation",
         "image_video_generation",
         "flows",
@@ -66,6 +69,8 @@ export declare namespace PermissionType {
         | "models_write"
         | "voices_read"
         | "voices_write"
+        | "voice_collections_read"
+        | "voice_collections_write"
         | "speech_history_read"
         | "speech_history_write"
         | "sound_generation"
@@ -86,6 +91,7 @@ export declare namespace PermissionType {
         | "forced_alignment"
         | "convai_read"
         | "convai_write"
+        | "agents_architect"
         | "music_generation"
         | "image_video_generation"
         | "flows"

@@ -24,6 +24,6 @@ export interface SpeechToTextChunkResponseModel {
     entities?: ElevenLabs.DetectedEntity[];
     /** The duration of the audio that was transcribed in seconds. */
     audioDurationSecs?: number;
-    /** Result of the optional transcript edit: the edited text, or an error if it could not be produced. Absent when no edit was requested. */
+    /** Result of the optional transcript edit: the edited text, or an error if it could not be produced. Absent when no edit was requested. On success, both `text` and `edited_text` hold the edited transcript; compare them with the top-level `text` to see what changed. */
     editedTranscript?: ElevenLabs.SpeechToTextChunkResponseModelEditedTranscript;
 }

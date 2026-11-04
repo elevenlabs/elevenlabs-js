@@ -4,7 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AudioRefChunk } from "./AudioRefChunk";
-import { GenerationChunkOutputConditionStrength } from "./GenerationChunkOutputConditionStrength";
+import { ConditionStrength } from "./ConditionStrength";
 import { GenerationChunkOutputContextAdherence } from "./GenerationChunkOutputContextAdherence";
 
 export const GenerationChunkOutput: core.serialization.ObjectSchema<
@@ -26,10 +26,7 @@ export const GenerationChunkOutput: core.serialization.ObjectSchema<
         GenerationChunkOutputContextAdherence.optional(),
     ),
     conditioningRef: core.serialization.property("conditioning_ref", AudioRefChunk.optional()),
-    conditionStrength: core.serialization.property(
-        "condition_strength",
-        GenerationChunkOutputConditionStrength.optional(),
-    ),
+    conditionStrength: core.serialization.property("condition_strength", ConditionStrength.optional()),
 });
 
 export declare namespace GenerationChunkOutput {
@@ -40,6 +37,6 @@ export declare namespace GenerationChunkOutput {
         negative_styles?: string[] | null;
         context_adherence?: GenerationChunkOutputContextAdherence.Raw | null;
         conditioning_ref?: AudioRefChunk.Raw | null;
-        condition_strength?: GenerationChunkOutputConditionStrength.Raw | null;
+        condition_strength?: ConditionStrength.Raw | null;
     }
 }

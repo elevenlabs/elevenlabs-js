@@ -49,6 +49,7 @@ export class ToolsClient {
      *         types: ["webhook"],
      *         sortDirection: "asc",
      *         sortBy: "name",
+     *         usedByAgentId: "used_by_agent_id",
      *         cursor: "cursor"
      *     })
      */
@@ -63,8 +64,17 @@ export class ToolsClient {
         request: ElevenLabs.conversationalAi.ToolsListRequest = {},
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ToolsResponseModel>> {
-        const { search, pageSize, showOnlyOwnedDocuments, createdByUserId, types, sortDirection, sortBy, cursor } =
-            request;
+        const {
+            search,
+            pageSize,
+            showOnlyOwnedDocuments,
+            createdByUserId,
+            types,
+            sortDirection,
+            sortBy,
+            usedByAgentId,
+            cursor,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             search,
             page_size: pageSize,
@@ -83,6 +93,7 @@ export class ToolsClient {
                 sortBy != null
                     ? serializers.ToolSortBy.jsonOrThrow(sortBy, { unrecognizedObjectKeys: "strip" })
                     : undefined,
+            used_by_agent_id: usedByAgentId,
             cursor,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

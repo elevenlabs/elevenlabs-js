@@ -15,6 +15,8 @@ import type * as ElevenLabs from "../../../../../../index";
  *         assigneeUserId: "assignee_user_id",
  *         issueType: "knowledge_gap",
  *         label: "label",
+ *         mergedIntoTicketId: "merged_into_ticket_id",
+ *         search: "search",
  *         cursor: "cursor"
  *     }
  */
@@ -39,6 +41,10 @@ export interface TriageTicketsListRequest {
     issueType?: ElevenLabs.AgentConversationTicketIssueType;
     /** Filter tickets by an exact label. */
     label?: string;
+    /** Filter tickets merged into this ticket. */
+    mergedIntoTicketId?: string;
+    /** Case-insensitive free-text search across the ticket's title, description, comments, and turn comments. */
+    search?: string;
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;
 }

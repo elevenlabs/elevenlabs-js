@@ -23,6 +23,8 @@ export const GetConversationResponseModel: core.serialization.ObjectSchema<
     versionId: core.serialization.property("version_id", core.serialization.string().optional()),
     metadata: ConversationHistoryMetadataCommonModel,
     analysis: ConversationHistoryAnalysisCommonModel.optional(),
+    userMessageCount: core.serialization.property("user_message_count", core.serialization.number().optional()),
+    agentMessageCount: core.serialization.property("agent_message_count", core.serialization.number().optional()),
     visitedAgents: core.serialization.property("visited_agents", core.serialization.list(VisitedAgentRef).optional()),
     conversationInitiationClientData: core.serialization.property(
         "conversation_initiation_client_data",
@@ -53,6 +55,8 @@ export declare namespace GetConversationResponseModel {
         version_id?: string | null;
         metadata: ConversationHistoryMetadataCommonModel.Raw;
         analysis?: ConversationHistoryAnalysisCommonModel.Raw | null;
+        user_message_count?: number | null;
+        agent_message_count?: number | null;
         visited_agents?: VisitedAgentRef.Raw[] | null;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestOutput.Raw | null;
         environment?: string | null;

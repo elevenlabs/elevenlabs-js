@@ -33,6 +33,7 @@ describe("CompositionPlanClient", () => {
             .build();
 
         const response = await client.music.compositionPlan.create({
+            enableLogging: true,
             prompt: "prompt",
         });
         expect(response).toEqual({

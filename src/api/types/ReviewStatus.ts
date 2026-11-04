@@ -5,6 +5,7 @@ export const ReviewStatus = {
     NotRequested: "not_requested",
     Pending: "pending",
     Declined: "declined",
+    DeclinedResubmittable: "declined_resubmittable",
     Allowed: "allowed",
     AllowedWithChanges: "allowed_with_changes",
 } as const;

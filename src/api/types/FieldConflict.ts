@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../index";
 
 export interface FieldConflict {
-    /** Identifier of the conflicting field relative to its section: a dot-path within conversation_config/platform_settings, or a procedure id. */
+    /** Identifier of the conflicting field relative to its section: a dot-path within conversation_config/platform_settings (e.g. `tts.voice_id`), a procedure id, or a workflow path: `nodes.<id>`, `edges.<id>`, or the name of a top-level workflow setting. */
     path: string;
     /** Which config section this path belongs to. */
     section: ElevenLabs.ConflictSection;

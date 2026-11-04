@@ -16,6 +16,9 @@ describe("GroupsClient", () => {
                 permissions: ["text_to_speech"],
                 group_usage_limit: "unlimited",
                 group_pvc_limit: "unlimited",
+                group_concurrency_limit: "unlimited",
+                group_dubbing_concurrency_limit: "unlimited",
+                group_music_concurrency_limit: "unlimited",
                 character_count: 1,
                 is_scim_synced: true,
                 scim_group: {
@@ -46,6 +49,9 @@ describe("GroupsClient", () => {
                 permissions: ["text_to_speech"],
                 groupUsageLimit: "unlimited",
                 groupPvcLimit: "unlimited",
+                groupConcurrencyLimit: "unlimited",
+                groupDubbingConcurrencyLimit: "unlimited",
+                groupMusicConcurrencyLimit: "unlimited",
                 characterCount: 1,
                 isScimSynced: true,
                 scimGroup: {

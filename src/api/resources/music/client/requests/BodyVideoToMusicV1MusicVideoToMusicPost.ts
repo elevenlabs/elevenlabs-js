@@ -6,6 +6,8 @@ import type * as ElevenLabs from "../../../../index";
 export interface BodyVideoToMusicV1MusicVideoToMusicPost {
     /** Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs. */
     outputFormat?: ElevenLabs.AllowedOutputFormats;
+    /** When enable_logging is set to false zero retention mode will be used for the request. Zero retention mode may only be used by enterprise customers. */
+    enableLogging?: boolean;
     /**
      *             One or more video files sent via FormData array (multipart/form-data). They will be combined into one codec in order.
      *             A maximum of 10 videos is allowed, where the total size of the combined video is limited to 200MB.
@@ -13,12 +15,18 @@ export interface BodyVideoToMusicV1MusicVideoToMusicPost {
      *
      */
     videos: core.file.Uploadable[];
-    /** Optional text description of the music you want. A maximum of 1000 characters is allowed. */
+    /** Optional text description of the music you want. A maximum of 4100 characters is allowed. */
     description?: string;
     /** Optional list of style tags (e.g. ['upbeat', 'cinematic']). A maximum of 10 tags is allowed. */
     tags?: string[];
     /** The model to use for the generation. */
     modelId?: ElevenLabs.MusicModelId;
+    /** When true, incorporate SFX cues from the video. */
+    addSfx?: boolean;
+    /** When true, return a ZIP with separate music and SFX audio tracks instead of a single mixed file. Use this for more flexibility to layer the tracks. */
+    separateTracks?: boolean;
+    /** When true, analyze the video's audio track and use its genres, BPM, instrumentation, mood, and arc as reference characteristics for music generation. */
+    useAudioAsReference?: boolean;
     /** Whether to sign the generated song with C2PA. Applicable only for mp3 files. */
     signWithC2Pa?: boolean;
 }

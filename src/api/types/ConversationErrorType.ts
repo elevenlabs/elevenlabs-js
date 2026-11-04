@@ -21,6 +21,7 @@ export const ConversationErrorType = {
     GuardrailTriggered: "guardrail_triggered",
     SafetyViolation: "safety_violation",
     MaxDurationExceeded: "max_duration_exceeded",
+    WorkflowEndFailure: "workflow_end_failure",
     InternalError: "internal_error",
     PostProcessingError: "post_processing_error",
 } as const;

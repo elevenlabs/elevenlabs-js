@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const AgentDeploymentSource: core.serialization.Schema<
     serializers.AgentDeploymentSource.Raw,
     ElevenLabs.AgentDeploymentSource
-> = core.serialization.enum_(["manual", "branch_merge"]);
+> = core.serialization.enum_(["manual", "branch_merge", "duplicate"]);
 
 export declare namespace AgentDeploymentSource {
-    export type Raw = "manual" | "branch_merge";
+    export type Raw = "manual" | "branch_merge" | "duplicate";
 }

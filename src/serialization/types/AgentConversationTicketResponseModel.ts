@@ -9,6 +9,8 @@ import { AgentConversationTicketSource } from "./AgentConversationTicketSource";
 import { AgentConversationTicketStatus } from "./AgentConversationTicketStatus";
 import { TicketCommentResponseModel } from "./TicketCommentResponseModel";
 import { TicketPriorityChangeResponseModel } from "./TicketPriorityChangeResponseModel";
+import { TicketSearchMatchResponseModel } from "./TicketSearchMatchResponseModel";
+import { TicketStatusChangeResponseModel } from "./TicketStatusChangeResponseModel";
 import { TurnCommentResponseModel } from "./TurnCommentResponseModel";
 
 export const AgentConversationTicketResponseModel: core.serialization.ObjectSchema<
@@ -38,10 +40,16 @@ export const AgentConversationTicketResponseModel: core.serialization.ObjectSche
         "priority_changes",
         core.serialization.list(TicketPriorityChangeResponseModel),
     ),
+    statusChanges: core.serialization.property(
+        "status_changes",
+        core.serialization.list(TicketStatusChangeResponseModel),
+    ),
+    mergedIntoTicketId: core.serialization.property("merged_into_ticket_id", core.serialization.string().optional()),
     source: AgentConversationTicketSource,
     assigneeUserId: core.serialization.property("assignee_user_id", core.serialization.string().optional()),
     createdAtUnixSecs: core.serialization.property("created_at_unix_secs", core.serialization.number()),
     updatedAtUnixSecs: core.serialization.property("updated_at_unix_secs", core.serialization.number()),
+    searchMatch: core.serialization.property("search_match", TicketSearchMatchResponseModel.optional()),
 });
 
 export declare namespace AgentConversationTicketResponseModel {
@@ -63,9 +71,12 @@ export declare namespace AgentConversationTicketResponseModel {
         status: AgentConversationTicketStatus.Raw;
         priority?: AgentConversationTicketPriority.Raw | null;
         priority_changes: TicketPriorityChangeResponseModel.Raw[];
+        status_changes: TicketStatusChangeResponseModel.Raw[];
+        merged_into_ticket_id?: string | null;
         source: AgentConversationTicketSource.Raw;
         assignee_user_id?: string | null;
         created_at_unix_secs: number;
         updated_at_unix_secs: number;
+        search_match?: TicketSearchMatchResponseModel.Raw | null;
     }
 }

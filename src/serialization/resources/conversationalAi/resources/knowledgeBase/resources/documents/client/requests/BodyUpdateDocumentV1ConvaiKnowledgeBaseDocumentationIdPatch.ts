@@ -10,11 +10,19 @@ export const BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch: core.s
 > = core.serialization.object({
     name: core.serialization.string().optional(),
     content: core.serialization.string().optional(),
+    enableAutoSync: core.serialization.property("enable_auto_sync", core.serialization.boolean().optional()),
+    autoRemove: core.serialization.property("auto_remove", core.serialization.boolean().optional()),
+    minimumFrequencyDays: core.serialization.property("minimum_frequency_days", core.serialization.number().optional()),
+    tightenOnly: core.serialization.property("tighten_only", core.serialization.boolean().optional()),
 });
 
 export declare namespace BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch {
     export interface Raw {
         name?: string | null;
         content?: string | null;
+        enable_auto_sync?: boolean | null;
+        auto_remove?: boolean | null;
+        minimum_frequency_days?: number | null;
+        tighten_only?: boolean | null;
     }
 }

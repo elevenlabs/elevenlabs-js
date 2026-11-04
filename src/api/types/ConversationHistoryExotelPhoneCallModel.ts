@@ -7,6 +7,7 @@ export interface ConversationHistoryExotelPhoneCallModel {
     phoneNumberId: string;
     agentNumber: string;
     externalNumber: string;
+    callResult?: ElevenLabs.CallResult;
     streamSid: string;
     callSid: string;
 }

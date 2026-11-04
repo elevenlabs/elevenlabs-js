@@ -7,4 +7,8 @@ export interface WhatsAppConversationInfo {
     whatsappPhoneNumberId?: string;
     whatsappUserId: string;
     awaitingFirstUserMessage?: boolean;
+    recipient?: ElevenLabs.WhatsAppRecipient;
+    callPermissionRequest?: ElevenLabs.WhatsAppCallPermissionRequest;
+    callResult?: ElevenLabs.CallResult;
+    openingMessage?: ElevenLabs.WhatsAppOpeningMessage;
 }

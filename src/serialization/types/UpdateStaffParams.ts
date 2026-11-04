@@ -12,10 +12,15 @@ export const UpdateStaffParams: core.serialization.ObjectSchema<
         "smb_tool_type",
         core.serialization.stringLiteral("update_staff").optional(),
     ),
+    perResourceTimezones: core.serialization.property(
+        "per_resource_timezones",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace UpdateStaffParams {
     export interface Raw {
         smb_tool_type?: "update_staff" | null;
+        per_resource_timezones?: boolean | null;
     }
 }

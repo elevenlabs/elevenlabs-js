@@ -6,4 +6,6 @@
 export interface TextToDialogueWebsocketVoiceSettings {
     /** Determines how stable the voice is and the randomness between each generation. Lower values introduce broader emotional range for the voice. Higher values can result in a monotonous voice with limited emotion. */
     stability?: number;
+    /** Controls how closely the voice matches the professional voice clone samples, from 0 (low) to 1 (high). We recommend 0 for most use cases. Increase this value only if you experience issues with the default settings. Only applies to professional voice clones fine-tuned for the selected v4 model. */
+    cloneStrength?: number;
 }

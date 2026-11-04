@@ -2,6 +2,7 @@
 
 export interface AgentTransferOutput {
     agentId?: string;
+    branchId?: string;
     nodeId?: string;
     condition: string;
     delayMs?: number;

@@ -5,7 +5,7 @@ export interface AlertingMonitorConfig {
     enabled?: boolean;
     /** Failure rate threshold at which this monitor can notify. */
     threshold?: number;
-    /** Relative increase over the trailing baseline at which this monitor can notify (0.2 = 20% above baseline, 0 = any failure). */
+    /** Relative increase over the trailing baseline at which this monitor can notify (0.2 = 20% above baseline, 0 = any failure). For conversation_volume_drop it is the share of the usual volume that must be missing, between 0.1 and 0.9 (0.5 = half). */
     relativeIncreaseThreshold?: number;
     /** Minimum failures in the window before this monitor can fire. */
     minFailureCount?: number;

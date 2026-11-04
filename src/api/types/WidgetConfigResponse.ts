@@ -93,6 +93,12 @@ export interface WidgetConfigResponse {
     styles?: ElevenLabs.WidgetStyles;
     /** Whether to show the resize button */
     showResizeButton?: boolean;
+    /** Whether to ask the user to confirm before ending a chat or call */
+    endConfirmationEnabled?: boolean;
+    /** Whether the widget opens fullscreen on mobile */
+    mobileFullscreen?: boolean;
+    /** Whether voice call transcripts are revealed as the agent speaks */
+    transcriptSpeechSyncEnabled?: boolean;
     language: string;
     supportedLanguageOverrides?: string[];
     /** Language presets for the widget */

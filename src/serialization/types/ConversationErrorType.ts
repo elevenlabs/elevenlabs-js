@@ -27,6 +27,7 @@ export const ConversationErrorType: core.serialization.Schema<
     "guardrail_triggered",
     "safety_violation",
     "max_duration_exceeded",
+    "workflow_end_failure",
     "internal_error",
     "post_processing_error",
 ]);
@@ -52,6 +53,7 @@ export declare namespace ConversationErrorType {
         | "guardrail_triggered"
         | "safety_violation"
         | "max_duration_exceeded"
+        | "workflow_end_failure"
         | "internal_error"
         | "post_processing_error";
 }

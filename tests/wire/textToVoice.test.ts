@@ -135,7 +135,14 @@ describe("TextToVoiceClient", () => {
             preview_url:
                 "https://storage.googleapis.com/eleven-public-prod/premade/voices/9BWtsMINqrJLrRacOk9x/405766b8-1f4e-4d3c-aba1-6f25333823ec.mp3",
             available_for_tiers: ["creator", "enterprise"],
-            settings: { stability: 1, use_speaker_boost: true, similarity_boost: 1, style: 0, speed: 1 },
+            settings: {
+                stability: 1,
+                use_speaker_boost: true,
+                similarity_boost: 1,
+                style: 0,
+                speed: 1,
+                clone_strength: 1.1,
+            },
             sharing: {
                 status: "enabled",
                 history_item_sample_id: "DCwhRBWXzGAHq8TQ4Fs18",
@@ -344,6 +351,7 @@ describe("TextToVoiceClient", () => {
                 similarityBoost: 1,
                 style: 0,
                 speed: 1,
+                cloneStrength: 1.1,
             },
             sharing: {
                 status: "enabled",

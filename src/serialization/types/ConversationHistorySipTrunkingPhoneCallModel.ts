@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { CallResult } from "./CallResult";
 import { TelephonyDirection } from "./TelephonyDirection";
 
 export const ConversationHistorySipTrunkingPhoneCallModel: core.serialization.ObjectSchema<
@@ -13,6 +14,7 @@ export const ConversationHistorySipTrunkingPhoneCallModel: core.serialization.Ob
     phoneNumberId: core.serialization.property("phone_number_id", core.serialization.string()),
     agentNumber: core.serialization.property("agent_number", core.serialization.string()),
     externalNumber: core.serialization.property("external_number", core.serialization.string()),
+    callResult: core.serialization.property("call_result", CallResult.optional()),
     callId: core.serialization.property("call_id", core.serialization.string().optional()),
     callSid: core.serialization.property("call_sid", core.serialization.string()),
     sipHeaderDynamicVariables: core.serialization.property(
@@ -27,6 +29,7 @@ export declare namespace ConversationHistorySipTrunkingPhoneCallModel {
         phone_number_id: string;
         agent_number: string;
         external_number: string;
+        call_result?: CallResult.Raw | null;
         call_id?: string | null;
         call_sid: string;
         sip_header_dynamic_variables?: Record<string, string> | null;

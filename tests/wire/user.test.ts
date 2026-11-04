@@ -10,6 +10,7 @@ describe("UserClient", () => {
 
         const rawResponseBody = {
             user_id: "1234567890",
+            workspace_id: "0987654321",
             subscription: {
                 tier: "trial",
                 character_count: 17231,
@@ -54,6 +55,7 @@ describe("UserClient", () => {
         const response = await client.user.get();
         expect(response).toEqual({
             userId: "1234567890",
+            workspaceId: "0987654321",
             subscription: {
                 tier: "trial",
                 characterCount: 17231,

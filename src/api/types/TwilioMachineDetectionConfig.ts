@@ -8,4 +8,6 @@ import type * as ElevenLabs from "../index";
 export interface TwilioMachineDetectionConfig {
     /** How thorough the detection should be. `enable` returns a verdict as soon as Twilio can tell a human from a machine. `detect_message_end` also waits for the voicemail greeting to finish, which is what produces the `machine_end_*` verdicts, but returns a result later. */
     mode?: ElevenLabs.TwilioMachineDetectionMode;
+    /** Actions to take on the call per AMD verdict. Each action can appear in at most one rule, so list all of its verdicts together. Verdicts without a rule leave the call running. */
+    actions?: ElevenLabs.TwilioMachineDetectionRule[];
 }

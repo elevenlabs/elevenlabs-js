@@ -8,7 +8,14 @@ describe("SettingsClient", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { stability: 1, use_speaker_boost: true, similarity_boost: 1, style: 0, speed: 1 };
+        const rawResponseBody = {
+            stability: 1,
+            use_speaker_boost: true,
+            similarity_boost: 1,
+            style: 0,
+            speed: 1,
+            clone_strength: 1.1,
+        };
 
         server
             .mockEndpoint()
@@ -25,6 +32,7 @@ describe("SettingsClient", () => {
             similarityBoost: 1,
             style: 0,
             speed: 1,
+            cloneStrength: 1.1,
         });
     });
 
@@ -32,7 +40,14 @@ describe("SettingsClient", () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { stability: 1, use_speaker_boost: true, similarity_boost: 1, style: 0, speed: 1 };
+        const rawResponseBody = {
+            stability: 1,
+            use_speaker_boost: true,
+            similarity_boost: 1,
+            style: 0,
+            speed: 1,
+            clone_strength: 1.1,
+        };
 
         server
             .mockEndpoint()
@@ -49,6 +64,7 @@ describe("SettingsClient", () => {
             similarityBoost: 1,
             style: 0,
             speed: 1,
+            cloneStrength: 1.1,
         });
     });
 

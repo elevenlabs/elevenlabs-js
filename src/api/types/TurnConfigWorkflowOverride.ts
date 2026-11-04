@@ -15,7 +15,7 @@ export interface TurnConfigWorkflowOverride {
     spellingPatience?: ElevenLabs.SpellingPatience;
     /** When enabled, starts generating LLM responses during silence before full turn confidence is reached, reducing perceived latency. May increase LLM costs. */
     speculativeTurn?: boolean;
-    /** When enabled, if VAD detects no speech, attempts to re-transcribe accumulated audio at turn timeout. Disables silence discount billing for affected turns. */
+    /** When enabled, if VAD detects no speech, attempts to re-transcribe accumulated audio at turn timeout. Disables silence discount billing while enabled for the active agent or workflow node. */
     retranscribeOnTurnTimeout?: boolean;
     /** Version of the turn detection model to use. */
     turnModel?: ElevenLabs.TurnModel;
@@ -29,4 +29,6 @@ export interface TurnConfigWorkflowOverride {
     transcribeOnDisabledInterruptions?: boolean;
     /** Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses. */
     softTimeoutConfig?: ElevenLabs.SoftTimeoutConfigWorkflowOverride;
+    /** What the agent says when it detects a noisy environment. */
+    noisyEnvironmentMessage?: string;
 }
