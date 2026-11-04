@@ -16,10 +16,10 @@ import {
 
 function supportLine(): Workflow {
     const wf = new Workflow({ preventSubagentLoops: true });
-    const triage = wf.agent("triage", "Greet the caller", { label: "Triage" });
-    const identify = triage.when("Caller wants to check an order").agent("identify", "Ask for the order number");
+    const triage = wf.converse("triage", "Greet the caller", { label: "Triage" });
+    const identify = triage.when("Caller wants to check an order").converse("identify", "Ask for the order number");
     const lookup = identify.when("Caller gave an order number").tool("lookup_order", ["tool_get_order"]);
-    const resolve = lookup.onSuccess().agent("resolve", "Explain the order status");
+    const resolve = lookup.onSuccess().converse("resolve", "Explain the order status");
     lookup.onFailure().goTo(identify);
     triage.when(Expr.variable("tier").eq("gold")).transfer("vip", Destination.agent("agent_vip"));
     resolve.when("Caller is satisfied").end();
@@ -60,9 +60,9 @@ describe("build()", () => {
 
     it("reports every problem in one error instead of failing on the first", () => {
         const wf = new Workflow();
-        const a = wf.agent("a", "A");
+        const a = wf.converse("a", "A");
         // None of these throw: chaining only records problems, so all of them surface together.
-        wf.agent("a", "duplicate id");
+        wf.converse("a", "duplicate id");
         a.goTo("missing");
         a.onSuccess().end();
 
@@ -72,8 +72,8 @@ describe("build()", () => {
 
     it("lets goTo target a node that is only created later", () => {
         const wf = new Workflow();
-        wf.agent("a", "A").when("Skip ahead").goTo("b");
-        wf.node("a").when("Normal path").agent("b", "B");
+        wf.converse("a", "A").when("Skip ahead").goTo("b");
+        wf.node("a").when("Normal path").converse("b", "B");
 
         expect(buildErrors(wf)).toEqual([]);
         expect(wf.build().nodes?.a?.edgeOrder).toEqual(["a__b", "a__b__2"]);
@@ -81,8 +81,8 @@ describe("build()", () => {
 
     it("builds despite unreachable nodes, reporting them as warnings", () => {
         const wf = new Workflow();
-        wf.agent("a", "A").end();
-        wf.node("a").when("never").agent("b", "B");
+        wf.converse("a", "A").end();
+        wf.node("a").when("never").converse("b", "B");
         wf.remove("a");
         const warnings: WorkflowIssue[] = [];
 
@@ -135,7 +135,7 @@ describe("Expr", () => {
 
     it("is accepted directly by when() as an expression condition", () => {
         const wf = new Workflow();
-        wf.agent("a", "A").when(Expr.variable("n").gt(1)).end();
+        wf.converse("a", "A").when(Expr.variable("n").gt(1)).end();
 
         expect(wf.build().edges?.a__end?.forwardCondition?.type).toBe("expression");
     });
@@ -186,7 +186,7 @@ describe("update()", () => {
 
     it("rejects options that belong to another node kind", () => {
         const wf = new Workflow();
-        wf.agent("a", "A");
+        wf.converse("a", "A");
         wf.node("a").update({ transferMessage: "agent transfers only", destination: Destination.phone("+1") });
 
         expect(buildErrors(wf)).toEqual(["invalid_option", "invalid_option"]);
@@ -196,7 +196,7 @@ describe("update()", () => {
 describe("insertBetween()", () => {
     it("fails the build when the callback doesn't return the last inserted node", () => {
         const wf = new Workflow();
-        wf.agent("a", "A").when("next").agent("b", "B");
+        wf.converse("a", "A").when("next").converse("b", "B");
 
         wf.insertBetween("a", "b", () => undefined);
 
@@ -205,11 +205,11 @@ describe("insertBetween()", () => {
 
     it("keeps the replaced edge's condition and its slot in the source's edge order", () => {
         const wf = new Workflow();
-        const a = wf.agent("a", "A");
-        a.when("first").agent("b", "B");
+        const a = wf.converse("a", "A");
+        a.when("first").converse("b", "B");
         a.when("second").end();
 
-        wf.insertBetween("a", "b", (from) => from.agent("verify", "Verify"));
+        wf.insertBetween("a", "b", (from) => from.converse("verify", "Verify"));
         const model = wf.build();
 
         expect(model.nodes?.a?.edgeOrder).toEqual(["a__verify", "a__end"]);

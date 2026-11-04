@@ -4,7 +4,7 @@ export { Expr, type ExprInput } from "./Expr";
 export { type WorkflowIssue, type WorkflowIssueCode, WorkflowValidationError } from "./errors";
 export { type BuildOptions, Workflow, type WorkflowOptions } from "./Workflow";
 export type {
-    AgentOptions,
+    ConverseOptions,
     EndOptions,
     NodeOptions,
     NodeUpdate,

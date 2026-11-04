@@ -3,7 +3,7 @@
   "description": "A tool node routed with onSuccess/onFailure, schema overrides, and a failure branch that goes back to an existing node.",
   "ops": [
     {
-      "op": "agent",
+      "op": "converse",
       "id": "identify",
       "prompt": "Ask for the order number"
     },
@@ -27,7 +27,7 @@
       }
     },
     {
-      "op": "agent",
+      "op": "converse",
       "at": "lookup_order",
       "onSuccess": true,
       "id": "resolve",

@@ -31,7 +31,7 @@ Node verbs exist on `Workflow`, `WorkflowNode` and `WorkflowBranch`. Each verb a
 
 | Verb | API node type |
 |---|---|
-| `agent(id, prompt, options?)` | `override_agent`. `prompt` maps to `additional_prompt`. `label` defaults to `id`. |
+| `converse(id, prompt, options?)` | `override_agent` (a "subagent" in the UI): the agent holds a conversation with `prompt` added to its instructions until an outgoing condition holds. `prompt` maps to `additional_prompt`. `label` defaults to `id`. |
 | `tool(id, toolIds, options?)` | `tool`. Creates one `{tool_id}` locator per id, with `schemaOverrides[toolId]` if given. |
 | `transfer(id, destination, options?)` | `phone_number` for phone or SIP destinations; `standalone_agent` for agent destinations. |
 | `end(options?)` | `end`. `options.id` defaults to `"end"`. When the id already belongs to an end node, that node is reused. |
@@ -54,20 +54,20 @@ Option keys are canonical names. Nested values use the SDK's generated types.
 | Node kind | Options (→ API field) |
 |---|---|
 | all | `position` |
-| agent | `label`, `toolIds` → `additional_tool_ids`, `knowledgeBase` → `additional_knowledge_base`, `conversationConfig`, `entryBehavior` |
+| converse | `label`, `toolIds` → `additional_tool_ids`, `knowledgeBase` → `additional_knowledge_base`, `conversationConfig`, `entryBehavior` |
 | tool | `schemaOverrides` (`{toolId: {path: override}}`) |
 | phone/SIP transfer | `transferType`, `customSipHeaders`, `sipReferPlayDialtone`, `uui`, `postDialDigits` |
 | agent transfer | `delayMs`, `transferMessage`, `enableTransferredAgentFirstMessage`, `preserveClientTtsOverrides`, `preserveVoiceSettings` |
 | end | `id` |
 
-`WorkflowNode.update(options)` accepts the options for the node's own kind. It also accepts `prompt` (agent), `toolIds` (agent or tool) and `destination` (transfer). Setting a `destination` of the other transfer kind changes the node's type and keeps only its position. A key that doesn't apply to the node's kind records an `invalid_option` error.
+`WorkflowNode.update(options)` accepts the options for the node's own kind. It also accepts `prompt` (converse), `toolIds` (converse or tool) and `destination` (transfer). Setting a `destination` of the other transfer kind changes the node's type and keeps only its position. A key that doesn't apply to the node's kind records an `invalid_option` error.
 
 ### Value types
 
 These are static constructors only, so they translate directly to languages without union types or overloading.
 
 - `Condition.llm(text, {label?})`, `Condition.expr(expr, {label?})`, `Condition.always()`, `Condition.success()`, `Condition.failure()`
-- `Destination.phone(number)`, `.phoneVariable(name)`, `.sip(uri)`, `.sipVariable(name)`, `.agent(agentId, {nodeId?})`
+- `Destination.phone(number)`, `.phoneVariable(name)`, `.sip(uri)`, `.sipVariable(name)`, `.converse(agentId, {nodeId?})`
 - `Expr.variable(name)`, `.literal(value)`, `.llm(prompt)`, `.allOf(...)`, `.anyOf(...)`, `.ifElse(cond, whenTrue, whenFalse)`, `.fromModel(ast)`
 - `Expr` instance methods `eq neq gt gte lt lte add sub mul div`. Each takes an `Expr` or a plain value; a plain value becomes a literal.
 
@@ -150,7 +150,7 @@ Each op calls one builder method:
 
 | Field | Meaning |
 |---|---|
-| `op` | `agent`, `tool`, `transfer`, `end`, `goTo`, `update`, `remove` or `insertBetween` |
+| `op` | `converse`, `tool`, `transfer`, `end`, `goTo`, `update`, `remove` or `insertBetween` |
 | `at` | Where the op applies. A node id, or `"$start"` for the workflow. Without it, the op continues from the previous op's result, or from the workflow / insert branch for the first op. |
 | `when` + `back` | Call `when(condition, {back})` first. A condition is a string (LLM), `{"llm": text, "label"?}` or `{"expr": <wire AST>, "label"?}`. |
 | `onSuccess` / `onFailure` | `true` calls the matching method first. |

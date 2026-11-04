@@ -3,12 +3,12 @@
   "description": "Expression conditions covering every operator, an edge label, a two-way edge via `back`, and goTo with `back`.",
   "ops": [
     {
-      "op": "agent",
+      "op": "converse",
       "id": "triage",
       "prompt": "Find out what the caller needs"
     },
     {
-      "op": "agent",
+      "op": "converse",
       "at": "triage",
       "when": {
         "llm": "Caller has a general question",
@@ -19,7 +19,7 @@
       "prompt": "Answer from the FAQ"
     },
     {
-      "op": "agent",
+      "op": "converse",
       "at": "triage",
       "id": "vip",
       "prompt": "Offer the VIP service",
@@ -70,7 +70,7 @@
       }
     },
     {
-      "op": "agent",
+      "op": "converse",
       "at": "triage",
       "id": "refund",
       "prompt": "Process the refund",

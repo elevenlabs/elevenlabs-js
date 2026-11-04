@@ -6,7 +6,7 @@
   },
   "ops": [
     {
-      "op": "agent",
+      "op": "converse",
       "id": "triage",
       "prompt": "Find out why the caller is calling",
       "options": {

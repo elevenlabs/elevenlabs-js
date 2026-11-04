@@ -211,7 +211,7 @@ Build an agent [workflow](https://elevenlabs.io/docs/eleven-agents/customization
 
 | Verb | Adds |
 |---|---|
-| `agent(id, prompt, options?)` | A subagent that adds `prompt` to the agent's instructions |
+| `converse(id, prompt, options?)` | The agent holds a conversation with `prompt` added to its instructions (a subagent node) |
 | `tool(id, toolIds, options?)` | A node that runs tools; route on the result with `onSuccess()` / `onFailure()` |
 | `transfer(id, destination, options?)` | A transfer to a phone number, SIP URI or another agent |
 | `end(options?)` | The end of the conversation (shared `"end"` node unless you pass an `id`) |
@@ -223,11 +223,11 @@ import { ElevenLabsClient, Workflow, Destination, Expr } from "@elevenlabs/eleve
 
 const wf = new Workflow();
 
-const triage = wf.agent("triage", "Greet the caller and find out why they're calling");
-const identify = triage.when("Caller wants to check an order").agent("identify", "Ask for the order number");
+const triage = wf.converse("triage", "Greet the caller and find out why they're calling");
+const identify = triage.when("Caller wants to check an order").converse("identify", "Ask for the order number");
 
 const lookup = identify.when("Caller gave an order number").tool("lookup_order", ["tool_get_order"]);
-lookup.onSuccess().agent("resolve", "Explain the order status").when("Caller is satisfied").end();
+lookup.onSuccess().converse("resolve", "Explain the order status").when("Caller is satisfied").end();
 lookup.onFailure().goTo(identify);
 
 triage.when(Expr.variable("tier").eq("gold")).transfer("vip", Destination.agent("agent_vip"));
@@ -246,7 +246,7 @@ const agent = await client.conversationalAi.agents.get("agent_id");
 const wf = Workflow.fromAgent(agent); // keeps node ids, editor positions and edge order
 
 wf.node("resolve").update({ prompt: "Explain the status, then offer a discount code" });
-wf.insertBetween("identify", "lookup_order", (from) => from.agent("verify", "Verify the caller's identity"));
+wf.insertBetween("identify", "lookup_order", (from) => from.converse("verify", "Verify the caller's identity"));
 wf.remove("vip");
 
 await client.conversationalAi.agents.update("agent_id", { workflow: wf.build() });

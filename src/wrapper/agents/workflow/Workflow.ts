@@ -46,9 +46,9 @@ function serializerKnowsNodeType(type: string): boolean {
  *
  * @example
  * const wf = new Workflow();
- * const triage = wf.agent("triage", "Find out what the caller needs");
+ * const triage = wf.converse("triage", "Find out what the caller needs");
  * const lookup = triage.when("Caller gave an order number").tool("lookup_order", ["tool_123"]);
- * lookup.onSuccess().agent("resolve", "Explain the order status").end();
+ * lookup.onSuccess().converse("resolve", "Explain the order status").end();
  * lookup.onFailure().transfer("human", Destination.phone("+15551234567"));
  *
  * await client.conversationalAi.agents.update(agentId, { workflow: wf.build() });
@@ -138,7 +138,7 @@ export class Workflow extends WorkflowChain {
      * edge's conditions and returns the last new node, which is then connected to `targetId`.
      *
      * @example
-     * wf.insertBetween("identify", "lookup_order", (from) => from.agent("verify", "Verify the caller"));
+     * wf.insertBetween("identify", "lookup_order", (from) => from.converse("verify", "Verify the caller"));
      */
     insertBetween(
         sourceId: string,

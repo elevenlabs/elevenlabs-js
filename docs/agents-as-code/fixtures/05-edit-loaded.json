@@ -127,7 +127,7 @@
       "target": "node_b2",
       "ops": [
         {
-          "op": "agent",
+          "op": "converse",
           "id": "verify",
           "prompt": "Verify the caller's identity with a one-time code"
         },

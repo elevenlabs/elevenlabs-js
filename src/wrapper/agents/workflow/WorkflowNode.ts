@@ -1,7 +1,7 @@
 import { Condition, type ConditionInput, type ConditionModel, type ConditionOptions, toCondition } from "./Condition";
 import type { Destination } from "./Destination";
 import type {
-    AgentOptions,
+    ConverseOptions,
     EndOptions,
     NodeUpdate,
     ToolOptions,
@@ -28,7 +28,7 @@ export interface EdgeOrigin {
 
 /**
  * The verbs that add a node and connect it to the current point in the workflow. Each returns the new node, so
- * linear flows chain: `wf.agent(...).when("...").tool(...)`.
+ * linear flows chain: `wf.converse(...).when("...").tool(...)`.
  */
 export abstract class WorkflowChain {
     /** @internal */
@@ -41,8 +41,11 @@ export abstract class WorkflowChain {
     /** @internal */
     protected abstract _origin(): EdgeOrigin;
 
-    /** Hands the conversation to a subagent, which adds `prompt` to the agent's instructions. */
-    agent(id: string, prompt: string, options: AgentOptions = {}): WorkflowNode {
+    /**
+     * The agent holds a conversation with `prompt` added to its instructions, until an outgoing condition holds.
+     * A subagent node in the API and the UI.
+     */
+    converse(id: string, prompt: string, options: ConverseOptions = {}): WorkflowNode {
         const model = this._graph.applyOptions(
             id,
             { type: "override_agent", label: id, additionalPrompt: prompt },

@@ -3,7 +3,7 @@
   "description": "The example from the Agent Workflows docs page: start, one subagent, end on an LLM condition.",
   "ops": [
     {
-      "op": "agent",
+      "op": "converse",
       "id": "support_agent",
       "prompt": "Help the user with their support request, then transition to the end node when resolved.",
       "options": {

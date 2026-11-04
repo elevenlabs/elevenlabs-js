@@ -20,7 +20,7 @@ type RawDestination =
     | { agent: string; nodeId?: string };
 
 export interface FixtureOp {
-    op: "agent" | "tool" | "transfer" | "end" | "goTo" | "update" | "remove" | "insertBetween";
+    op: "converse" | "tool" | "transfer" | "end" | "goTo" | "update" | "remove" | "insertBetween";
     at?: string;
     when?: RawCondition;
     back?: RawCondition;
@@ -116,8 +116,8 @@ function run(wf: Workflow, ops: FixtureOp[], first: WorkflowChain): WorkflowNode
         }
 
         switch (op.op) {
-            case "agent":
-                result = at.agent(op.id as string, op.prompt as string, options(op));
+            case "converse":
+                result = at.converse(op.id as string, op.prompt as string, options(op));
                 break;
             case "tool":
                 result = at.tool(op.id as string, op.toolIds as string[], options(op));

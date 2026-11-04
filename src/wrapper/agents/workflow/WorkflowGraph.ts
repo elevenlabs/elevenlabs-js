@@ -19,7 +19,7 @@ export interface NodeOptions {
     position?: ElevenLabs.PositionInput;
 }
 
-export interface AgentOptions extends NodeOptions {
+export interface ConverseOptions extends NodeOptions {
     /** Name shown in the workflow editor. Defaults to the node id. */
     label?: string;
     /** Tools available to this subagent, on top of the agent's own. */
@@ -65,7 +65,7 @@ export interface EndOptions extends NodeOptions {
 }
 
 /** Fields accepted by `WorkflowNode.update()`. Only the fields that apply to the node's kind may be set. */
-export interface NodeUpdate extends AgentOptions, ToolOptions, TransferOptions {
+export interface NodeUpdate extends ConverseOptions, ToolOptions, TransferOptions {
     /** Subagent nodes: the instructions added to the agent's prompt. */
     prompt?: string;
     /** Subagent nodes: extra tools. Tool nodes: the tools to run. */
