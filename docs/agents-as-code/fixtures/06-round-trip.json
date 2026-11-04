@@ -1,6 +1,6 @@
 {
   "name": "round-trip",
-  "description": "Loading a stored workflow and writing it back without changes produces the same document, including a node type this SDK version doesn't model (kept as-is).",
+  "description": "Loading a stored workflow and writing it back without changes produces the same document, including a node type the generated types model but the builder has no verb for (say), and one this SDK version doesn't know at all (future_survey). Both are kept as-is.",
   "from": {
     "prevent_subagent_loops": true,
     "nodes": {
@@ -43,16 +43,28 @@
           "y": 0
         },
         "edge_order": [
-          "announce__end"
+          "announce__survey"
         ]
       },
       "end": {
         "type": "end",
         "position": {
-          "x": 900,
+          "x": 1200,
           "y": 0
         },
         "edge_order": []
+      },
+      "survey": {
+        "type": "future_survey",
+        "label": "Survey",
+        "survey_id": "srv_1",
+        "position": {
+          "x": 900,
+          "y": 0
+        },
+        "edge_order": [
+          "survey__end"
+        ]
       }
     },
     "edges": {
@@ -84,8 +96,15 @@
           "condition": "Caller is done"
         }
       },
-      "announce__end": {
+      "announce__survey": {
         "source": "announce",
+        "target": "survey",
+        "forward_condition": {
+          "type": "unconditional"
+        }
+      },
+      "survey__end": {
+        "source": "survey",
         "target": "end",
         "forward_condition": {
           "type": "unconditional"
@@ -96,12 +115,12 @@
   "ops": [],
   "expected": {
     "edges": {
-      "announce__end": {
+      "announce__survey": {
         "forward_condition": {
           "type": "unconditional"
         },
         "source": "announce",
-        "target": "end"
+        "target": "survey"
       },
       "greet__announce": {
         "backward_condition": {
@@ -130,12 +149,19 @@
         },
         "source": "start",
         "target": "greet"
+      },
+      "survey__end": {
+        "forward_condition": {
+          "type": "unconditional"
+        },
+        "source": "survey",
+        "target": "end"
       }
     },
     "nodes": {
       "announce": {
         "edge_order": [
-          "announce__end"
+          "announce__survey"
         ],
         "label": "Announce",
         "message": {
@@ -151,7 +177,7 @@
       "end": {
         "edge_order": [],
         "position": {
-          "x": 900,
+          "x": 1200,
           "y": 0
         },
         "type": "end"
@@ -182,6 +208,18 @@
           "y": 0
         },
         "type": "start"
+      },
+      "survey": {
+        "edge_order": [
+          "survey__end"
+        ],
+        "label": "Survey",
+        "position": {
+          "x": 900,
+          "y": 0
+        },
+        "survey_id": "srv_1",
+        "type": "future_survey"
       }
     },
     "prevent_subagent_loops": true

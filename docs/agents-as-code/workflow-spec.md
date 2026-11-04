@@ -98,7 +98,7 @@ These rules make every SDK emit byte-identical JSON for the same program.
   2. Unreachable nodes go in the column after the deepest one, in insertion order.
   3. Auto-placed nodes are numbered per column in visiting order, which gives each one its row.
   4. The position is `x = column × 300`, `y = row × 200`. The start node, if it has no position, is placed at `(0, 0)`.
-- **Unknown node types.** Node types the SDK doesn't model yet, such as newer API node types, are kept exactly as loaded. Only their `edge_order` is recomputed.
+- **Node types without a verb.** Node types the builder has no verb for are kept exactly as loaded, whether the SDK's generated types model them (such as `say`) or not (newer API node types). Only their `edge_order` is recomputed. Decide which serialization a node needs from the generated types, not from the builder's own list of verbs, so a regeneration that adds a node type doesn't break round-trips.
 
 ## Validation
 
@@ -163,6 +163,6 @@ Regenerate the expected output in the reference SDK with `UPDATE_FIXTURES=1 yarn
 
 ## Not yet covered
 
-- `say` and `update_state` nodes. These are in the API but not yet in the generated JS types. Once they are, they become the verbs `say()` and `setVariable()`.
-- An end-node `outcome`. It's in the docs but not in the generated types.
+- Verbs for `say` and `update_state` nodes, planned as `say()` and `setVariable()`. The generated JS types now include both, so loaded nodes of these types round-trip, but they can't be created or updated with the builder yet.
+- An end-node `outcome` option on `end()`. The generated JS types now include the field, and loaded values round-trip, but `end()` can't set it yet.
 - Structured procedures. This is phase 2 and will reuse `Condition`, `Expr` and these rules.

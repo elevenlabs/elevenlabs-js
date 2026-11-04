@@ -114,11 +114,6 @@ const NODE_KIND: Record<string, string> = {
     standalone_agent: "agent transfer",
 };
 
-/** True for node types this SDK version models. Others (newer API node types) are carried through as-is. */
-export function isKnownNodeType(type: string): boolean {
-    return type in FIELDS;
-}
-
 /** Mutable state shared by a `Workflow` and every node handle created from it. */
 export class WorkflowGraph {
     readonly nodes: Map<string, NodeModel> = new Map();
@@ -207,7 +202,7 @@ export class WorkflowGraph {
         const edges = workflow.edges ?? {};
         const placed = new Set<string>();
         for (const [id, node] of Object.entries(nodes)) {
-            // Node types this SDK version doesn't model come through the serializer untouched, in wire format.
+            // Node types the serializer doesn't know come through it untouched, in wire format.
             const { edgeOrder: _, edge_order: __, ...model } = node as NodeModel & { edge_order?: string[] };
             this.nodes.set(id, model as NodeModel);
         }

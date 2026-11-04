@@ -4,7 +4,7 @@ import { Condition, type ConditionInput } from "./Condition";
 import { type WorkflowIssue, WorkflowValidationError } from "./errors";
 import { layout } from "./layout";
 import { validate } from "./validate";
-import { isKnownNodeType, WorkflowGraph } from "./WorkflowGraph";
+import { WorkflowGraph } from "./WorkflowGraph";
 import { branch, type EdgeOrigin, type WhenOptions, WorkflowBranch, WorkflowChain, WorkflowNode } from "./WorkflowNode";
 
 export interface WorkflowOptions {
@@ -22,6 +22,23 @@ const SERIALIZER_OPTIONS = {
     allowUnrecognizedUnionMembers: true,
     allowUnrecognizedEnumValues: true,
 } as const;
+
+const knownNodeTypes = new Map<string, boolean>();
+
+/**
+ * Whether this SDK version's generated serializer models a node type. Asked of the serializer rather than listed
+ * here, so a regeneration that adds a node type is picked up without a change to the builder. An unknown type is
+ * reported against the `type` key; a known one only fails on its other required fields.
+ */
+function serializerKnowsNodeType(type: string): boolean {
+    let known = knownNodeTypes.get(type);
+    if (known === undefined) {
+        const result = serializers.AgentWorkflowRequestModelNodesValue.parse({ type });
+        known = result.ok || !result.errors.some((error) => error.path.join(".") === "type");
+        knownNodeTypes.set(type, known);
+    }
+    return known;
+}
 
 /**
  * An agent workflow, written as code. The workflow itself is the start node: calling a verb on it branches
@@ -207,8 +224,8 @@ export class Workflow extends WorkflowChain {
         const nodes: Record<string, ElevenLabs.AgentWorkflowRequestModelNodesValue> = {};
         for (const [id, model] of graph.nodes) {
             const order = edgeOrder.get(id) ?? [];
-            // Unmodelled node types bypass the serializer, so they need the wire-format key.
-            nodes[id] = isKnownNodeType(model.type)
+            // Node types the serializer doesn't know pass through it untouched, so they need the wire-format key.
+            nodes[id] = serializerKnowsNodeType(model.type)
                 ? { ...model, position: positions.get(id), edgeOrder: order }
                 : ({ ...model, position: positions.get(id), edge_order: order } as unknown as typeof model);
         }
