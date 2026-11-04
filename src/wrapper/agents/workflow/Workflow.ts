@@ -4,8 +4,8 @@ import { Condition, type ConditionInput } from "./Condition";
 import { type WorkflowIssue, WorkflowValidationError } from "./errors";
 import { layout } from "./layout";
 import { serializerKnowsNodeType } from "./nodeTypes";
-import { validate } from "./validate";
-import { WorkflowGraph } from "./WorkflowGraph";
+import { reverseEdgeMerges, validate } from "./validate";
+import { type GraphEdge, WorkflowGraph } from "./WorkflowGraph";
 import { branch, type EdgeOrigin, type WhenOptions, WorkflowBranch, WorkflowChain, WorkflowNode } from "./WorkflowNode";
 
 export interface WorkflowOptions {
@@ -73,7 +73,7 @@ export class Workflow extends WorkflowChain {
         return wf;
     }
 
-    /** The id of the start node: `"start"`, or whatever a loaded workflow uses. */
+    /** The id of the start node: `"start_node"`, the id the API requires, or whatever a loaded workflow uses. */
     get startId(): string {
         return this._graph.startId;
     }
@@ -158,6 +158,11 @@ export class Workflow extends WorkflowChain {
         if (firstHop !== -1) {
             const [edge] = graph.edges.splice(firstHop, 1);
             graph.edges.splice(index, 0, edge);
+            const loaded = graph.loadedOrder.get(sourceId);
+            const slot = loaded?.indexOf(original) ?? -1;
+            if (loaded !== undefined && slot !== -1) {
+                loaded[slot] = edge;
+            }
         }
 
         if (!(last instanceof WorkflowNode)) {
@@ -193,13 +198,35 @@ export class Workflow extends WorkflowChain {
             options.onWarning?.(warning);
         }
 
-        const edgeIds = assignEdgeIds(graph);
+        // An edge that goes back the way another one came is sent as that edge's backward condition.
+        const merges = reverseEdgeMerges(graph);
+        const kept = graph.edges.filter((_, i) => !merges.has(i));
+        const keptIds = assignEdgeIds(kept);
+        const idOf = new Map(kept.map((edge, k) => [edge, keptIds[k]]));
         const positions = layout(graph);
-        const edgeOrder = new Map<string, string[]>();
+        const outgoing = new Map<string, GraphEdge[]>();
+        const addToOrder = (nodeId: string, edge: GraphEdge): void => {
+            outgoing.set(nodeId, [...(outgoing.get(nodeId) ?? []), edge]);
+        };
         const edges: Record<string, ElevenLabs.WorkflowEdgeModelInput> = {};
         graph.edges.forEach((edge, i) => {
-            const id = edgeIds[i];
-            edgeOrder.set(edge.source, [...(edgeOrder.get(edge.source) ?? []), id]);
+            const into = merges.get(i);
+            if (into !== undefined) {
+                const reverse = graph.edges[into];
+                const id = idOf.get(reverse) as string;
+                addToOrder(edge.source, reverse);
+                edges[id] = {
+                    ...edges[id],
+                    backwardCondition: edge.forwardCondition as ElevenLabs.WorkflowEdgeModelInputBackwardCondition,
+                };
+                return;
+            }
+            const id = idOf.get(edge) as string;
+            addToOrder(edge.source, edge);
+            // The API lists an edge with a backward condition among its target's outgoing edges as well.
+            if (edge.backwardCondition !== undefined) {
+                addToOrder(edge.target, edge);
+            }
             edges[id] = {
                 source: edge.source,
                 target: edge.target,
@@ -213,7 +240,9 @@ export class Workflow extends WorkflowChain {
 
         const nodes: Record<string, ElevenLabs.AgentWorkflowRequestModelNodesValue> = {};
         for (const [id, model] of graph.nodes) {
-            const order = edgeOrder.get(id) ?? [];
+            const order = edgeOrderOf(graph.loadedOrder.get(id) ?? [], outgoing.get(id) ?? []).map(
+                (edge) => idOf.get(edge) as string,
+            );
             // Node types the serializer doesn't know pass through it untouched, so they need the wire-format key.
             nodes[id] = serializerKnowsNodeType(model.type)
                 ? { ...model, position: positions.get(id), edgeOrder: order }
@@ -246,10 +275,16 @@ export class Workflow extends WorkflowChain {
     }
 }
 
+/** A loaded node's order for the edges it still has, then any others in edge-list order. */
+function edgeOrderOf(loaded: GraphEdge[], current: GraphEdge[]): GraphEdge[] {
+    const kept = loaded.filter((edge) => current.includes(edge));
+    return [...kept, ...current.filter((edge) => !kept.includes(edge))];
+}
+
 /** Loaded edges keep their ids. New ones get `source__target`, with `__2`, `__3`... on collision. */
-function assignEdgeIds(graph: WorkflowGraph): string[] {
-    const taken = new Set(graph.edges.flatMap((edge) => (edge.id === undefined ? [] : [edge.id])));
-    return graph.edges.map((edge) => {
+function assignEdgeIds(edges: GraphEdge[]): string[] {
+    const taken = new Set(edges.flatMap((edge) => (edge.id === undefined ? [] : [edge.id])));
+    return edges.map((edge) => {
         if (edge.id !== undefined) {
             return edge.id;
         }

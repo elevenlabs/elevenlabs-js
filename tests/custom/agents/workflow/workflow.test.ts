@@ -47,7 +47,7 @@ describe("build()", () => {
         );
 
         expect(Object.keys(body.workflow?.nodes ?? {})).toEqual([
-            "start",
+            "start_node",
             "triage",
             "identify",
             "lookup_order",
@@ -66,17 +66,60 @@ describe("build()", () => {
         a.goTo("missing");
         a.onSuccess().end();
 
-        expect(buildErrors(wf)).toEqual(["duplicate_node_id", "result_edge_needs_tool", "unknown_node"]);
+        // The duplicate node also adds a second start → "a" edge.
+        expect(buildErrors(wf)).toEqual([
+            "duplicate_edge",
+            "duplicate_node_id",
+            "result_edge_needs_tool",
+            "unknown_node",
+        ]);
         expect(() => wf.build()).toThrow(/Node id "a" is used by more than one node[\s\S]*unknown node "missing"/);
     });
 
     it("lets goTo target a node that is only created later", () => {
         const wf = new Workflow();
         wf.converse("a", "A").when("Skip ahead").goTo("b");
-        wf.node("a").when("Normal path").converse("b", "B");
+        wf.converse("b", "B");
 
         expect(buildErrors(wf)).toEqual([]);
-        expect(wf.build().nodes?.a?.edgeOrder).toEqual(["a__b", "a__b__2"]);
+        expect(wf.build().nodes?.a?.edgeOrder).toEqual(["a__b"]);
+    });
+
+    it("rejects a second edge between the same two nodes", () => {
+        // The API allows one edge per pair of nodes, in either direction.
+        const twice = new Workflow();
+        const a = twice.converse("a", "A");
+        a.when("first").converse("b", "B");
+        a.when("second").goTo("b");
+
+        // This edge already has a way back, so going back along it again can't be merged into it.
+        const withBack = new Workflow();
+        withBack.converse("a", "A").when("next", { back: "return" }).converse("b", "B").when("go back").goTo("a");
+
+        expect([buildErrors(twice), buildErrors(withBack)]).toEqual([["duplicate_edge"], ["duplicate_edge"]]);
+    });
+
+    it("sends goTo back along an existing edge as that edge's backward condition", () => {
+        const wf = new Workflow();
+        const identify = wf.converse("identify", "Ask for the order number");
+        const lookup = identify.when("Gave a number").tool("lookup", ["tool_get_order"]);
+        lookup.onSuccess().converse("resolve", "Resolve");
+        lookup.onFailure().goTo(identify);
+        const model = wf.build();
+
+        expect(Object.keys(model.edges ?? {})).toEqual(["start_node__identify", "identify__lookup", "lookup__resolve"]);
+        expect(model.edges?.identify__lookup?.backwardCondition).toEqual({ type: "result", successful: false });
+        // The API lists the edge under both nodes; the lookup node keeps its routing order.
+        expect(model.nodes?.identify?.edgeOrder).toEqual(["identify__lookup"]);
+        expect(model.nodes?.lookup?.edgeOrder).toEqual(["lookup__resolve", "identify__lookup"]);
+    });
+
+    it("lists an edge with a backward condition under both of its nodes", () => {
+        const wf = new Workflow();
+        wf.converse("a", "A").when("next", { back: "go back" }).converse("b", "B");
+        const nodes = wf.build().nodes;
+
+        expect([nodes?.a?.edgeOrder, nodes?.b?.edgeOrder]).toEqual([["a__b"], ["a__b"]]);
     });
 
     it("builds despite unreachable nodes, reporting them as warnings", () => {
@@ -340,7 +383,8 @@ describe("onResult()", () => {
 
         const lookup = wf.build().nodes?.lookup as ElevenLabs.WorkflowToolNodeModelInput;
 
-        expect(lookup.edgeOrder).toEqual(["lookup__triage"]);
+        // The failure route goes back along the triage → lookup edge.
+        expect(lookup.edgeOrder).toEqual(["triage__lookup"]);
     });
 
     it("puts the success edge first even when failure is listed first", () => {
@@ -426,7 +470,7 @@ describe("loading existing workflows", () => {
     it("fromAgent() gives an empty workflow for an agent that has none", () => {
         const wf = Workflow.fromAgent({ agentId: "a" } as ElevenLabs.GetAgentResponseModel);
 
-        expect(wf.nodeIds).toEqual(["start"]);
+        expect(wf.nodeIds).toEqual(["start_node"]);
         expect(buildErrors(wf)).toEqual([]);
     });
 

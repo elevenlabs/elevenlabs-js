@@ -6,6 +6,27 @@ import type { WorkflowGraph } from "./WorkflowGraph";
 export function validate(graph: WorkflowGraph): WorkflowIssue[] {
     const issues: WorkflowIssue[] = [...graph.issues];
     const endsWithEdges = new Set<string>();
+    const merged = reverseEdgeMerges(graph);
+    const connected = new Set<string>();
+
+    graph.edges.forEach((edge, i) => {
+        if (merged.has(i)) {
+            return;
+        }
+        // The API allows one edge per pair of nodes, in either direction.
+        const pair = JSON.stringify([edge.source, edge.target].sort());
+        if (connected.has(pair)) {
+            issues.push({
+                code: "duplicate_edge",
+                severity: "error",
+                message:
+                    `Edge "${edge.source}" → "${edge.target}" connects two nodes that already have an edge between ` +
+                    "them, and the API allows only one. Give the existing edge a different condition, or remove one",
+                nodeId: edge.source,
+            });
+        }
+        connected.add(pair);
+    });
 
     for (const edge of graph.edges) {
         const name = `"${edge.source}" → "${edge.target}"`;
@@ -83,6 +104,34 @@ export function validate(graph: WorkflowGraph): WorkflowIssue[] {
         }
     }
     return issues;
+}
+
+/**
+ * Edges the API stores as the backward condition of another edge: index of the later edge → index of the earlier one.
+ * The later edge goes the opposite way between the same two nodes, and neither has a backward condition of its own.
+ */
+export function reverseEdgeMerges(graph: WorkflowGraph): Map<number, number> {
+    const merges = new Map<number, number>();
+    const taken = new Set<number>();
+    graph.edges.forEach((later, j) => {
+        if (later.backwardCondition !== undefined || later.forwardCondition === undefined) {
+            return;
+        }
+        const i = graph.edges.findIndex(
+            (earlier, k) =>
+                k < j &&
+                !taken.has(k) &&
+                !merges.has(k) &&
+                earlier.source === later.target &&
+                earlier.target === later.source &&
+                earlier.backwardCondition === undefined,
+        );
+        if (i !== -1) {
+            merges.set(j, i);
+            taken.add(i);
+        }
+    });
+    return merges;
 }
 
 /**

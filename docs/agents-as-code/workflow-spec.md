@@ -12,10 +12,10 @@ Names are given in camelCase. Each SDK applies its own casing: `on_success` in P
 
 | Member | Description |
 |---|---|
-| `new Workflow(options?)` | An empty workflow. `options.preventSubagentLoops`. The constructor creates the start node with id `"start"`. |
+| `new Workflow(options?)` | An empty workflow. `options.preventSubagentLoops`. The constructor creates the start node with id `"start_node"`, the id the API requires. |
 | `Workflow.fromAgent(agentOrWorkflow)` | Loads the workflow from a get-agent response, or from its `workflow` field. |
 | `Workflow.fromJSON(json)` | Loads wire-format JSON, given as a string or a parsed object. The input is either a workflow or a whole agent config with a `workflow` key. |
-| `startId` | The start node's id. It is `"start"` unless the workflow was loaded with a different one. |
+| `startId` | The start node's id. It is `"start_node"` unless the workflow was loaded with a different one. |
 | `node(id)` | A handle to an existing node. |
 | `nodeIds` | Node ids, in insertion order. |
 | `remove(id)` | Removes the node and every edge that touches it. |
@@ -35,7 +35,7 @@ Node verbs exist on `Workflow`, `WorkflowNode` and `WorkflowBranch`. Each verb a
 | `tool(id, toolIds, options?)` | `tool`. Creates one `{tool_id}` locator per id, with `schemaOverrides[toolId]` if given. |
 | `transfer(id, destination, options?)` | `phone_number` for phone or SIP destinations; `standalone_agent` for agent destinations. |
 | `end(options?)` | `end`. `options.id` defaults to `"end"`. When the id already belongs to an end node, that node is reused. |
-| `goTo(target, options?)` | No new node. Moves the conversation to `target` with a new edge to it. `target` is a handle or an id, and may be created later. `options.back` sets the backward condition. |
+| `goTo(target, options?)` | No new node. Moves the conversation to `target` with a new edge to it, or, when `target` already has an edge to this node, as that edge's backward condition (see "One edge per pair of nodes"). `target` is a handle or an id, and may be created later. `options.back` sets the backward condition. |
 
 ### Routing
 
@@ -94,7 +94,8 @@ These rules make every SDK emit byte-identical JSON for the same program.
 - **Edge ids.** Edges loaded from an existing workflow keep their ids. A new edge gets `{source}__{target}`; if that id is taken, it gets `__2`, `__3` and so on, assigned in edge-list order.
 - **Edge list order.** Edges are kept in creation order. When loading, they are ordered by walking the nodes in document order, each node's `edge_order` in turn, followed by any edges not listed in an `edge_order`. `insertBetween` puts the first new hop where the replaced edge was.
 - **Loaded edges.** Edges kept from a loaded workflow are written back with their `reroutes` (editor bend points). Edges `insertBetween` creates in place of a removed one start without them.
-- **`edge_order`.** For each node, the ids of its outgoing edges in edge-list order. Every node gets one, even if it is empty.
+- **One edge per pair of nodes.** The API allows a single edge between two nodes, in either direction. When an edge goes the opposite way to an earlier edge between the same two nodes, and neither has a backward condition, `build()` sends it as the earlier edge's `backward_condition` instead of a separate edge. This is how `lookup.onFailure().goTo(identify)` loops back along `identify → lookup`. Any other second edge between the same two nodes is a `duplicate_edge` error.
+- **`edge_order`.** For each node, the ids of the edges it can leave by: edges whose source it is, and edges whose target it is that have a backward condition (the API lists both). A node loaded from an existing workflow keeps its loaded order for the edges it still has, with the first new hop of an `insertBetween` taking the replaced edge's place; other entries follow in edge-list order, where a merged backward condition counts at the position of the edge it came from. Every node gets an `edge_order`, even if it is empty.
 - **Positions.** A node that has a `position` keeps it. Otherwise:
   1. Run a breadth-first search from the start node, following edges forward in edge-list order. A node's column is its BFS depth.
   2. When that search ends, take the first edge in edge-list order that has a backward condition, a visited target and an unvisited source. Give the source the target's depth + 1, run step 1's search from it, and repeat. The same search decides which nodes are reachable for the `unreachable_node` warning.
@@ -113,6 +114,7 @@ These rules make every SDK emit byte-identical JSON for the same program.
 | `unknown_node` | error | An edge endpoint, `node(id)` or `update` refers to a node that doesn't exist |
 | `unknown_edge` | error | `insertBetween` is given a pair of nodes with no edge between them |
 | `invalid_option` | error | An option doesn't apply to the node's kind, or a schema override names a tool the node doesn't run |
+| `duplicate_edge` | error | A second edge connects the same two nodes and can't be merged into the first as its backward condition (see "One edge per pair of nodes") |
 | `edge_into_start` | error | An edge targets the start node |
 | `end_has_outgoing_edges` | error | An end node has an outgoing edge |
 | `tool_edge_needs_result` | error | An edge leaving a tool node has a condition other than `result` |

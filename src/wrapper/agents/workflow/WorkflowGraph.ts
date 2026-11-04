@@ -121,7 +121,9 @@ export class WorkflowGraph {
     readonly nodes: Map<string, NodeModel> = new Map();
     edges: GraphEdge[] = [];
     readonly issues: WorkflowIssue[] = [];
-    startId = "start";
+    startId = "start_node";
+    /** Each loaded node's `edgeOrder`, as edges. `build()` keeps this order and appends edges added since. */
+    readonly loadedOrder: Map<string, GraphEdge[]> = new Map();
     preventSubagentLoops: boolean | undefined;
 
     addNode(id: string, model: NodeModel): void {
@@ -204,17 +206,18 @@ export class WorkflowGraph {
         this.nodes.clear();
         this.edges = [];
         this.issues.length = 0;
+        this.loadedOrder.clear();
         this.preventSubagentLoops = workflow.preventSubagentLoops;
 
         const nodes = workflow.nodes ?? {};
         const edges = workflow.edges ?? {};
-        const placed = new Set<string>();
+        const placed = new Map<string, GraphEdge>();
         for (const [id, node] of Object.entries(nodes)) {
             // Node types the serializer doesn't know come through it untouched, in wire format.
             const { edgeOrder: _, edge_order: __, ...model } = node as NodeModel & { edge_order?: string[] };
             this.nodes.set(id, model as NodeModel);
         }
-        this.startId = Object.keys(nodes).find((id) => nodes[id]?.type === "start") ?? "start";
+        this.startId = Object.keys(nodes).find((id) => nodes[id]?.type === "start") ?? "start_node";
         if (!this.nodes.has(this.startId)) {
             this.nodes.set(this.startId, { type: "start" });
         }
@@ -225,14 +228,19 @@ export class WorkflowGraph {
             if (edge === undefined || placed.has(edgeId)) {
                 return;
             }
-            placed.add(edgeId);
-            this.edges.push({ id: edgeId, ...edge });
+            const graphEdge: GraphEdge = { id: edgeId, ...edge };
+            placed.set(edgeId, graphEdge);
+            this.edges.push(graphEdge);
         };
-        for (const node of Object.values(nodes)) {
+        for (const [id, node] of Object.entries(nodes)) {
             const order = node.edgeOrder ?? (node as { edge_order?: string[] }).edge_order ?? [];
             for (const edgeId of order) {
                 addEdge(edgeId);
             }
+            this.loadedOrder.set(
+                id,
+                order.flatMap((edgeId) => placed.get(edgeId) ?? []),
+            );
         }
         for (const edgeId of Object.keys(edges)) {
             addEdge(edgeId);
