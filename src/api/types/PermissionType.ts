@@ -30,6 +30,7 @@ export const PermissionType = {
     ForcedAlignment: "forced_alignment",
     ConvaiRead: "convai_read",
     ConvaiWrite: "convai_write",
+    AgentsArchitect: "agents_architect",
     MusicGeneration: "music_generation",
     ImageVideoGeneration: "image_video_generation",
     Flows: "flows",

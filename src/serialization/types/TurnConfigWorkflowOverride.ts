@@ -43,6 +43,10 @@ export const TurnConfigWorkflowOverride: core.serialization.ObjectSchema<
         core.serialization.boolean().optional(),
     ),
     softTimeoutConfig: core.serialization.property("soft_timeout_config", SoftTimeoutConfigWorkflowOverride.optional()),
+    noisyEnvironmentMessage: core.serialization.property(
+        "noisy_environment_message",
+        core.serialization.string().optional(),
+    ),
 });
 
 export declare namespace TurnConfigWorkflowOverride {
@@ -60,5 +64,6 @@ export declare namespace TurnConfigWorkflowOverride {
         merge_with_default_ignore_terms?: boolean | null;
         transcribe_on_disabled_interruptions?: boolean | null;
         soft_timeout_config?: SoftTimeoutConfigWorkflowOverride.Raw | null;
+        noisy_environment_message?: string | null;
     }
 }

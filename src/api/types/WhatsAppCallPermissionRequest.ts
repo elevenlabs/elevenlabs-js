@@ -5,4 +5,7 @@ import type * as ElevenLabs from "../index";
 export interface WhatsAppCallPermissionRequest {
     state: ElevenLabs.WhatsAppCallPermissionRequestState;
     requestedAtUnix?: number;
+    respondedAtUnix?: number;
+    permanent?: boolean;
+    grantedByUserCall?: boolean;
 }

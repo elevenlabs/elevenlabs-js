@@ -10,6 +10,7 @@ import { BaseTurnConfig } from "./BaseTurnConfig";
 import { ConversationConfigOutput } from "./ConversationConfigOutput";
 import { PrivacyConfigOutput } from "./PrivacyConfigOutput";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
+import { SpeechEngineAuthConfig } from "./SpeechEngineAuthConfig";
 import { SpeechEngineConfig } from "./SpeechEngineConfig";
 import { SpeechEngineConversationInitiationClientDataConfig } from "./SpeechEngineConversationInitiationClientDataConfig";
 import { TtsConversationalConfigOutput } from "./TtsConversationalConfigOutput";
@@ -29,6 +30,7 @@ export const SpeechEngineResponse: core.serialization.ObjectSchema<
     conversation: ConversationConfigOutput,
     privacy: PrivacyConfigOutput,
     callLimits: core.serialization.property("call_limits", AgentCallLimits),
+    auth: SpeechEngineAuthConfig,
     language: core.serialization.string(),
     cascadeTimeoutSeconds: core.serialization.property("cascade_timeout_seconds", core.serialization.number()),
     tags: core.serialization.list(core.serialization.string()),
@@ -49,6 +51,7 @@ export declare namespace SpeechEngineResponse {
         conversation: ConversationConfigOutput.Raw;
         privacy: PrivacyConfigOutput.Raw;
         call_limits: AgentCallLimits.Raw;
+        auth: SpeechEngineAuthConfig.Raw;
         language: string;
         cascade_timeout_seconds: number;
         tags: string[];

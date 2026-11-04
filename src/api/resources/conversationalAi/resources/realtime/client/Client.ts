@@ -25,6 +25,596 @@ export class RealtimeClient {
     }
 
     /**
+     * List the realtime conversation groups the current user can view.
+     *
+     * @param {ElevenLabs.conversationalAi.RealtimeListConversationGroupsRequest} request
+     * @param {RealtimeClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.realtime.listConversationGroups({
+     *         pageSize: 1,
+     *         search: "search",
+     *         cursor: "cursor"
+     *     })
+     */
+    public listConversationGroups(
+        request: ElevenLabs.conversationalAi.RealtimeListConversationGroupsRequest = {},
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.RealtimeConversationGroupsResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__listConversationGroups(request, requestOptions));
+    }
+
+    private async __listConversationGroups(
+        request: ElevenLabs.conversationalAi.RealtimeListConversationGroupsRequest = {},
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.RealtimeConversationGroupsResponseModel>> {
+        const { pageSize, search, cursor } = request;
+        const _queryParams: Record<string, unknown> = {
+            page_size: pageSize,
+            search,
+            cursor,
+        };
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/realtime/conversation-groups",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.RealtimeConversationGroupsResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/realtime/conversation-groups",
+        );
+    }
+
+    /**
+     * Create a realtime conversation group owned by the current user.
+     *
+     * @param {ElevenLabs.conversationalAi.CreateRealtimeConversationGroupRequestModel} request
+     * @param {RealtimeClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.realtime.createConversationGroup({
+     *         title: "title"
+     *     })
+     */
+    public createConversationGroup(
+        request: ElevenLabs.conversationalAi.CreateRealtimeConversationGroupRequestModel,
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.RealtimeConversationGroupResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__createConversationGroup(request, requestOptions));
+    }
+
+    private async __createConversationGroup(
+        request: ElevenLabs.conversationalAi.CreateRealtimeConversationGroupRequestModel,
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.RealtimeConversationGroupResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/realtime/conversation-groups",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.CreateRealtimeConversationGroupRequestModel.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.RealtimeConversationGroupResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/realtime/conversation-groups",
+        );
+    }
+
+    /**
+     * Get a realtime conversation group by id.
+     *
+     * @param {string} conversation_group_id - The id of a realtime conversation group.
+     * @param {RealtimeClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.realtime.getConversationGroup("conversation_group_id")
+     */
+    public getConversationGroup(
+        conversation_group_id: string,
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.RealtimeConversationGroupResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__getConversationGroup(conversation_group_id, requestOptions));
+    }
+
+    private async __getConversationGroup(
+        conversation_group_id: string,
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.RealtimeConversationGroupResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/realtime/conversation-groups/${core.url.encodePathParam(conversation_group_id)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.RealtimeConversationGroupResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/realtime/conversation-groups/{conversation_group_id}",
+        );
+    }
+
+    /**
+     * Delete a realtime conversation group. Every conversation in it becomes ungrouped, so access granted through the group is revoked.
+     *
+     * @param {string} conversation_group_id - The id of a realtime conversation group.
+     * @param {RealtimeClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.realtime.deleteConversationGroup("conversation_group_id")
+     */
+    public deleteConversationGroup(
+        conversation_group_id: string,
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): core.HttpResponsePromise<unknown> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__deleteConversationGroup(conversation_group_id, requestOptions),
+        );
+    }
+
+    private async __deleteConversationGroup(
+        conversation_group_id: string,
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): Promise<core.WithRawResponse<unknown>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/realtime/conversation-groups/${core.url.encodePathParam(conversation_group_id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "DELETE",
+            "/v1/convai/realtime/conversation-groups/{conversation_group_id}",
+        );
+    }
+
+    /**
+     * Rename or re-describe a realtime conversation group.
+     *
+     * @param {string} conversation_group_id - The id of a realtime conversation group.
+     * @param {ElevenLabs.conversationalAi.UpdateRealtimeConversationGroupRequestModel} request
+     * @param {RealtimeClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.realtime.updateConversationGroup("conversation_group_id")
+     */
+    public updateConversationGroup(
+        conversation_group_id: string,
+        request: ElevenLabs.conversationalAi.UpdateRealtimeConversationGroupRequestModel = {},
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.RealtimeConversationGroupResponseModel> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__updateConversationGroup(conversation_group_id, request, requestOptions),
+        );
+    }
+
+    private async __updateConversationGroup(
+        conversation_group_id: string,
+        request: ElevenLabs.conversationalAi.UpdateRealtimeConversationGroupRequestModel = {},
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.RealtimeConversationGroupResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/realtime/conversation-groups/${core.url.encodePathParam(conversation_group_id)}`,
+            ),
+            method: "PATCH",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.UpdateRealtimeConversationGroupRequestModel.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.RealtimeConversationGroupResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "PATCH",
+            "/v1/convai/realtime/conversation-groups/{conversation_group_id}",
+        );
+    }
+
+    /**
+     * Place a realtime conversation in a conversation group, moving it out of its current group if it has one.
+     *
+     * @param {string} conversation_id - The id of a realtime conversation.
+     * @param {ElevenLabs.conversationalAi.SetConversationGroupRequestModel} request
+     * @param {RealtimeClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.realtime.setConversationGroup("conversation_id", {
+     *         conversationGroupId: "conversation_group_id"
+     *     })
+     */
+    public setConversationGroup(
+        conversation_id: string,
+        request: ElevenLabs.conversationalAi.SetConversationGroupRequestModel,
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): core.HttpResponsePromise<unknown> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__setConversationGroup(conversation_id, request, requestOptions),
+        );
+    }
+
+    private async __setConversationGroup(
+        conversation_id: string,
+        request: ElevenLabs.conversationalAi.SetConversationGroupRequestModel,
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): Promise<core.WithRawResponse<unknown>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/realtime/conversations/${core.url.encodePathParam(conversation_id)}/conversation-group`,
+            ),
+            method: "PUT",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.SetConversationGroupRequestModel.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "PUT",
+            "/v1/convai/realtime/conversations/{conversation_id}/conversation-group",
+        );
+    }
+
+    /**
+     * Remove a realtime conversation from its conversation group.
+     *
+     * @param {string} conversation_id - The id of a realtime conversation.
+     * @param {RealtimeClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.realtime.clearConversationGroup("conversation_id")
+     */
+    public clearConversationGroup(
+        conversation_id: string,
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): core.HttpResponsePromise<unknown> {
+        return core.HttpResponsePromise.fromPromise(this.__clearConversationGroup(conversation_id, requestOptions));
+    }
+
+    private async __clearConversationGroup(
+        conversation_id: string,
+        requestOptions?: RealtimeClient.RequestOptions,
+    ): Promise<core.WithRawResponse<unknown>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/realtime/conversations/${core.url.encodePathParam(conversation_id)}/conversation-group`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "DELETE",
+            "/v1/convai/realtime/conversations/{conversation_id}/conversation-group",
+        );
+    }
+
+    /**
      * Create an ephemeral client secret for authenticating browser-based Realtime API sessions.
      *
      * @param {ElevenLabs.CreateClientSecretRequest} request

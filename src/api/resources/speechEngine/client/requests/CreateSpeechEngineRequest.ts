@@ -29,6 +29,8 @@ export interface CreateSpeechEngineRequest {
     privacy?: ElevenLabs.PrivacyConfigInput;
     /** Concurrency and daily conversation limits for this speech engine */
     callLimits?: ElevenLabs.AgentCallLimits;
+    /** Who may start a conversation with this speech engine */
+    auth?: ElevenLabs.SpeechEngineAuthConfig;
     /** Language for the speech engine */
     language?: string;
     /** Time in seconds to wait for the upstream speech engine endpoint to respond before the attempt is abandoned and retried. Must be between 2 and 15 seconds. */

@@ -91,6 +91,10 @@ export const WidgetConfig: core.serialization.ObjectSchema<serializers.WidgetCon
             core.serialization.boolean().optional(),
         ),
         mobileFullscreen: core.serialization.property("mobile_fullscreen", core.serialization.boolean().optional()),
+        transcriptSpeechSyncEnabled: core.serialization.property(
+            "transcript_speech_sync_enabled",
+            core.serialization.boolean().optional(),
+        ),
         languageSelector: core.serialization.property("language_selector", core.serialization.boolean().optional()),
         supportsTextOnly: core.serialization.property("supports_text_only", core.serialization.boolean().optional()),
         customAvatarPath: core.serialization.property("custom_avatar_path", core.serialization.string().optional()),
@@ -149,6 +153,7 @@ export declare namespace WidgetConfig {
         show_resize_button?: boolean | null;
         end_confirmation_enabled?: boolean | null;
         mobile_fullscreen?: boolean | null;
+        transcript_speech_sync_enabled?: boolean | null;
         language_selector?: boolean | null;
         supports_text_only?: boolean | null;
         custom_avatar_path?: string | null;

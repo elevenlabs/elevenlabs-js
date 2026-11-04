@@ -27,6 +27,7 @@ export const Llm: core.serialization.Schema<serializers.Llm.Raw, ElevenLabs.Llm>
     "gpt-6-sol",
     "gpt-6-luna",
     "gpt-6.1-sol",
+    "gpt-6.1-terra",
     "gpt-5-mini",
     "gpt-5-nano",
     "gpt-3.5-turbo",
@@ -142,6 +143,7 @@ export declare namespace Llm {
         | "gpt-6-sol"
         | "gpt-6-luna"
         | "gpt-6.1-sol"
+        | "gpt-6.1-terra"
         | "gpt-5-mini"
         | "gpt-5-nano"
         | "gpt-3.5-turbo"

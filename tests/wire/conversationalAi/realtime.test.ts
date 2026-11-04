@@ -4,6 +4,285 @@ import { ElevenLabsClient } from "../../../src/Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
 describe("RealtimeClient", () => {
+    test("list_conversation_groups", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            conversation_groups: [
+                {
+                    id: "id",
+                    title: "title",
+                    description: "description",
+                    access_info: {
+                        is_creator: true,
+                        creator_name: "John Doe",
+                        creator_email: "john.doe@example.com",
+                        role: "admin",
+                        access_source: "creator",
+                    },
+                    sharing: { people_count: 1 },
+                    created_at_unix_secs: 1,
+                },
+            ],
+            next_cursor: "next_cursor",
+            has_more: true,
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/convai/realtime/conversation-groups")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.realtime.listConversationGroups({
+            pageSize: 1,
+            search: "search",
+            cursor: "cursor",
+        });
+        expect(response).toEqual({
+            conversationGroups: [
+                {
+                    id: "id",
+                    title: "title",
+                    description: "description",
+                    accessInfo: {
+                        isCreator: true,
+                        creatorName: "John Doe",
+                        creatorEmail: "john.doe@example.com",
+                        role: "admin",
+                        accessSource: "creator",
+                    },
+                    sharing: {
+                        peopleCount: 1,
+                    },
+                    createdAtUnixSecs: 1,
+                },
+            ],
+            nextCursor: "next_cursor",
+            hasMore: true,
+        });
+    });
+
+    test("create_conversation_group", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { title: "title" };
+        const rawResponseBody = {
+            id: "id",
+            title: "title",
+            description: "description",
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+                anonymous_access_level_override: "admin",
+                access_source: "creator",
+            },
+            sharing: { people_count: 1, shared_with_everyone: true, everyone_role: "admin" },
+            created_at_unix_secs: 1,
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/realtime/conversation-groups")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.realtime.createConversationGroup({
+            title: "title",
+        });
+        expect(response).toEqual({
+            id: "id",
+            title: "title",
+            description: "description",
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+                anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
+            },
+            sharing: {
+                peopleCount: 1,
+                sharedWithEveryone: true,
+                everyoneRole: "admin",
+            },
+            createdAtUnixSecs: 1,
+        });
+    });
+
+    test("get_conversation_group", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            id: "id",
+            title: "title",
+            description: "description",
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+                anonymous_access_level_override: "admin",
+                access_source: "creator",
+            },
+            sharing: { people_count: 1, shared_with_everyone: true, everyone_role: "admin" },
+            created_at_unix_secs: 1,
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/convai/realtime/conversation-groups/conversation_group_id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.realtime.getConversationGroup("conversation_group_id");
+        expect(response).toEqual({
+            id: "id",
+            title: "title",
+            description: "description",
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+                anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
+            },
+            sharing: {
+                peopleCount: 1,
+                sharedWithEveryone: true,
+                everyoneRole: "admin",
+            },
+            createdAtUnixSecs: 1,
+        });
+    });
+
+    test("delete_conversation_group", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/realtime/conversation-groups/conversation_group_id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.realtime.deleteConversationGroup("conversation_group_id");
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
+
+    test("update_conversation_group", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = {
+            id: "id",
+            title: "title",
+            description: "description",
+            access_info: {
+                is_creator: true,
+                creator_name: "John Doe",
+                creator_email: "john.doe@example.com",
+                role: "admin",
+                anonymous_access_level_override: "admin",
+                access_source: "creator",
+            },
+            sharing: { people_count: 1, shared_with_everyone: true, everyone_role: "admin" },
+            created_at_unix_secs: 1,
+        };
+
+        server
+            .mockEndpoint()
+            .patch("/v1/convai/realtime/conversation-groups/conversation_group_id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.realtime.updateConversationGroup("conversation_group_id");
+        expect(response).toEqual({
+            id: "id",
+            title: "title",
+            description: "description",
+            accessInfo: {
+                isCreator: true,
+                creatorName: "John Doe",
+                creatorEmail: "john.doe@example.com",
+                role: "admin",
+                anonymousAccessLevelOverride: "admin",
+                accessSource: "creator",
+            },
+            sharing: {
+                peopleCount: 1,
+                sharedWithEveryone: true,
+                everyoneRole: "admin",
+            },
+            createdAtUnixSecs: 1,
+        });
+    });
+
+    test("set_conversation_group", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { conversation_group_id: "conversation_group_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .put("/v1/convai/realtime/conversations/conversation_id/conversation-group")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.realtime.setConversationGroup("conversation_id", {
+            conversationGroupId: "conversation_group_id",
+        });
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
+
+    test("clear_conversation_group", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/v1/convai/realtime/conversations/conversation_id/conversation-group")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.realtime.clearConversationGroup("conversation_id");
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
+
     test("create_client_secret", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });

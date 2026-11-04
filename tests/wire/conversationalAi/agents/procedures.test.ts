@@ -107,6 +107,7 @@ describe("ProceduresClient", () => {
                             expression: { type: "and_operator", children: [] },
                             label: null,
                         },
+                        reroutes: [{ x: 1.1, y: 1.1 }],
                     },
                 },
                 nodes: {
@@ -150,6 +151,12 @@ describe("ProceduresClient", () => {
                                 children: [],
                             },
                         },
+                        reroutes: [
+                            {
+                                x: 1.1,
+                                y: 1.1,
+                            },
+                        ],
                     },
                 },
                 nodes: {

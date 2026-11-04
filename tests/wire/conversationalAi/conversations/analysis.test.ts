@@ -97,6 +97,8 @@ describe("AnalysisClient", () => {
                     whatsapp_user_id: "whatsapp_user_id",
                     awaiting_first_user_message: true,
                     call_permission_request: { state: "blocked" },
+                    call_result: "answered",
+                    opening_message: { template_name: "template_name", sent_at_unix: 1 },
                 },
                 sms: {
                     direction: "inbound",
@@ -136,6 +138,8 @@ describe("AnalysisClient", () => {
                 call_summary_title: "call_summary_title",
                 scoped: [{ scope: "conversation", source_agent_id: "source_agent_id", successful: "success" }],
             },
+            user_message_count: 1,
+            agent_message_count: 1,
             visited_agents: [{ agent_id: "agent_id", branch_id: "branch_id" }],
             conversation_initiation_client_data: {
                 conversation_config_override: {
@@ -365,6 +369,11 @@ describe("AnalysisClient", () => {
                     callPermissionRequest: {
                         state: "blocked",
                     },
+                    callResult: "answered",
+                    openingMessage: {
+                        templateName: "template_name",
+                        sentAtUnix: 1,
+                    },
                 },
                 sms: {
                     direction: "inbound",
@@ -429,6 +438,8 @@ describe("AnalysisClient", () => {
                     },
                 ],
             },
+            userMessageCount: 1,
+            agentMessageCount: 1,
             visitedAgents: [
                 {
                     agentId: "agent_id",
@@ -686,6 +697,8 @@ describe("AnalysisClient", () => {
                     whatsapp_user_id: "whatsapp_user_id",
                     awaiting_first_user_message: true,
                     call_permission_request: { state: "blocked" },
+                    call_result: "answered",
+                    opening_message: { template_name: "template_name", sent_at_unix: 1 },
                 },
                 sms: {
                     direction: "inbound",
@@ -725,6 +738,8 @@ describe("AnalysisClient", () => {
                 call_summary_title: "call_summary_title",
                 scoped: [{ scope: "conversation", source_agent_id: "source_agent_id", successful: "success" }],
             },
+            user_message_count: 1,
+            agent_message_count: 1,
             visited_agents: [{ agent_id: "agent_id", branch_id: "branch_id" }],
             conversation_initiation_client_data: {
                 conversation_config_override: {
@@ -957,6 +972,11 @@ describe("AnalysisClient", () => {
                     callPermissionRequest: {
                         state: "blocked",
                     },
+                    callResult: "answered",
+                    openingMessage: {
+                        templateName: "template_name",
+                        sentAtUnix: 1,
+                    },
                 },
                 sms: {
                     direction: "inbound",
@@ -1021,6 +1041,8 @@ describe("AnalysisClient", () => {
                     },
                 ],
             },
+            userMessageCount: 1,
+            agentMessageCount: 1,
             visitedAgents: [
                 {
                     agentId: "agent_id",

@@ -9,4 +9,6 @@ export interface WhatsAppConversationInfo {
     awaitingFirstUserMessage?: boolean;
     recipient?: ElevenLabs.WhatsAppRecipient;
     callPermissionRequest?: ElevenLabs.WhatsAppCallPermissionRequest;
+    callResult?: ElevenLabs.CallResult;
+    openingMessage?: ElevenLabs.WhatsAppOpeningMessage;
 }

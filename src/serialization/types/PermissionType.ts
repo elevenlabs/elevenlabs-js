@@ -35,6 +35,7 @@ export const PermissionType: core.serialization.Schema<serializers.PermissionTyp
         "forced_alignment",
         "convai_read",
         "convai_write",
+        "agents_architect",
         "music_generation",
         "image_video_generation",
         "flows",
@@ -90,6 +91,7 @@ export declare namespace PermissionType {
         | "forced_alignment"
         | "convai_read"
         | "convai_write"
+        | "agents_architect"
         | "music_generation"
         | "image_video_generation"
         | "flows"

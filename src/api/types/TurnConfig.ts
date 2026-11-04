@@ -28,4 +28,8 @@ export interface TurnConfig {
     transcribeOnDisabledInterruptions?: boolean;
     /** Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses. */
     softTimeoutConfig?: ElevenLabs.SoftTimeoutConfig;
+    /** When enabled, the agent politely suggests the user move somewhere quieter when it hears other voices in the background. This improves transcription and turn-taking accuracy. */
+    noisyEnvironmentDetection?: boolean;
+    /** What the agent says when it detects a noisy environment. */
+    noisyEnvironmentMessage?: string;
 }

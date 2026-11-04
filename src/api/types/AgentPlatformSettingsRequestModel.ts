@@ -7,11 +7,11 @@ export interface AgentPlatformSettingsRequestModel {
     evaluation?: ElevenLabs.EvaluationSettingsInput;
     /** Configuration for the widget */
     widget?: ElevenLabs.WidgetConfig;
-    /** Data collection settings */
+    /** Data collection fields, keyed by ID. Each field is stored as an analysis item attached to the agent (see analysis_items). */
     dataCollection?: Record<string, ElevenLabs.AnalysisProperty>;
     /** Scope per data collection item ID. Missing keys default to conversation scope. */
     dataCollectionScopes?: Record<string, ElevenLabs.AnalysisScope>;
-    /** Evaluation + data-collection items attached by reference. None means the agent has not been migrated onto analysis items yet (distinct from an empty, migrated set); reads fall back to the legacy evaluation/data_collection fields in that case. */
+    /** Analysis items (evaluation criteria and data collection fields) attached to the agent by reference. They are the source of truth for the agent's analysis. Writing evaluation.criteria or data_collection inline is still supported: a new entry creates an item, and changing an entry publishes a new version of its attached item, which every agent using that item picks up. To attach or detach an existing item, use the analysis item attachments endpoint. None means the agent has no attached items yet, and its inline fields are used as they are. */
     analysisItems?: ElevenLabs.AgentAnalysisItemsInput;
     /** Additional overrides for the agent during conversation initiation */
     overrides?: ElevenLabs.ConversationInitiationClientDataConfigInput;

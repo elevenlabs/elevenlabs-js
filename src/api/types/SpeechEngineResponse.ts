@@ -23,6 +23,8 @@ export interface SpeechEngineResponse {
     privacy: ElevenLabs.PrivacyConfigOutput;
     /** Concurrency and daily conversation limits for this speech engine */
     callLimits: ElevenLabs.AgentCallLimits;
+    /** Who may start a conversation with this speech engine */
+    auth: ElevenLabs.SpeechEngineAuthConfig;
     /** ISO language code used by the speech engine (e.g. 'en') */
     language: string;
     /** Time in seconds to wait for the upstream speech engine endpoint to respond before the attempt is abandoned and retried. Must be between 2 and 15 seconds. */

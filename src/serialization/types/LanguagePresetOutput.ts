@@ -19,6 +19,10 @@ export const LanguagePresetOutput: core.serialization.ObjectSchema<
         "soft_timeout_translation",
         LanguagePresetTranslation.optional(),
     ),
+    noisyEnvironmentMessageTranslation: core.serialization.property(
+        "noisy_environment_message_translation",
+        LanguagePresetTranslation.optional(),
+    ),
 });
 
 export declare namespace LanguagePresetOutput {
@@ -26,5 +30,6 @@ export declare namespace LanguagePresetOutput {
         overrides: ConversationConfigClientOverrideOutput.Raw;
         first_message_translation?: LanguagePresetTranslation.Raw | null;
         soft_timeout_translation?: LanguagePresetTranslation.Raw | null;
+        noisy_environment_message_translation?: LanguagePresetTranslation.Raw | null;
     }
 }
