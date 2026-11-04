@@ -212,7 +212,7 @@ Build an agent [workflow](https://elevenlabs.io/docs/eleven-agents/customization
 | Verb | Adds |
 |---|---|
 | `converse(id, prompt, options?)` | The agent holds a conversation with `prompt` added to its instructions (a subagent node) |
-| `tool(id, toolIds, options?)` | A node that runs tools; route on the result with `onSuccess()` / `onFailure()` |
+| `tool(id, toolIds, options?)` | A node that runs tools; route on the result with `onResult()`, or `onSuccess()` / `onFailure()` |
 | `transfer(id, destination, options?)` | A transfer to a phone number, SIP URI or another agent |
 | `end(options?)` | The end of the conversation (shared `"end"` node unless you pass an `id`) |
 
@@ -227,8 +227,10 @@ const triage = wf.converse("triage", "Greet the caller and find out why they're 
 const identify = triage.when("Caller wants to check an order").converse("identify", "Ask for the order number");
 
 const lookup = identify.when("Caller gave an order number").tool("lookup_order", ["tool_get_order"]);
-lookup.onSuccess().converse("resolve", "Explain the order status").when("Caller is satisfied").end();
-lookup.onFailure().goTo(identify);
+lookup.onResult({
+    success: (ok) => ok.converse("resolve", "Explain the order status").when("Caller is satisfied").end(),
+    failure: (failed) => failed.goTo(identify),
+});
 
 triage.when(Expr.variable("tier").eq("gold")).transfer("vip", Destination.agent("agent_vip"));
 triage.when("Caller wants a human").transfer("human", Destination.phone("+15551234567"));
@@ -246,7 +248,8 @@ const agent = await client.conversationalAi.agents.get("agent_id");
 const wf = Workflow.fromAgent(agent); // keeps node ids, editor positions and edge order
 
 wf.node("resolve").update({ prompt: "Explain the status, then offer a discount code" });
-wf.insertBetween("identify", "lookup_order", (from) => from.converse("verify", "Verify the caller's identity"));
+const verify = wf.insertBetween("identify", "lookup_order", (from) => from.converse("verify", "Verify the caller's identity"));
+verify?.when("Caller can't verify").end({ id: "unverified" }); // returns the inserted node, or undefined if there's no such edge
 wf.remove("vip");
 
 await client.conversationalAi.agents.update("agent_id", { workflow: wf.build() });

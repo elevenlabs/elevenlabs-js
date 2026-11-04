@@ -11,4 +11,11 @@ export type {
     ToolOptions,
     TransferOptions,
 } from "./WorkflowGraph";
-export { type GoToOptions, type WhenOptions, WorkflowBranch, WorkflowChain, WorkflowNode } from "./WorkflowNode";
+export {
+    type GoToOptions,
+    type ResultBranches,
+    type WhenOptions,
+    WorkflowBranch,
+    WorkflowChain,
+    WorkflowNode,
+} from "./WorkflowNode";

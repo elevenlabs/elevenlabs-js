@@ -135,16 +135,19 @@ export class Workflow extends WorkflowChain {
 
     /**
      * Splices new nodes into the edge from `sourceId` to `targetId`. `insert` receives a branch carrying that
-     * edge's conditions and returns the last new node, which is then connected to `targetId`.
+     * edge's conditions and returns the last new node, which is then connected to `targetId`. Returns that node, or
+     * `undefined` if there is no such edge (the callback isn't called) or the callback returned nothing; `build()`
+     * reports both.
      *
      * @example
-     * wf.insertBetween("identify", "lookup_order", (from) => from.converse("verify", "Verify the caller"));
+     * const verify = wf.insertBetween("identify", "lookup_order", (from) => from.converse("verify", "Verify the caller"));
+     * verify?.when("Caller can't verify").end({ id: "unverified" });
      */
     insertBetween(
         sourceId: string,
         targetId: string,
         insert: (from: WorkflowBranch) => WorkflowNode | undefined,
-    ): this {
+    ): WorkflowNode | undefined {
         const graph = this._graph;
         const index = graph.edges.findIndex((edge) => edge.source === sourceId && edge.target === targetId);
         if (index === -1) {
@@ -154,7 +157,7 @@ export class Workflow extends WorkflowChain {
                 message: `There is no edge from "${sourceId}" to "${targetId}" to insert into`,
                 nodeId: sourceId,
             });
-            return this;
+            return undefined;
         }
         const [original] = graph.edges.splice(index, 1);
         const before = graph.edges.length;
@@ -180,12 +183,14 @@ export class Workflow extends WorkflowChain {
                 message: `insertBetween("${sourceId}", "${targetId}") must return the last inserted node`,
                 nodeId: sourceId,
             });
-        } else if (last.type === "tool") {
+            return undefined;
+        }
+        if (last.type === "tool") {
             last.onSuccess().goTo(targetId);
         } else {
             last.goTo(targetId);
         }
-        return this;
+        return last;
     }
 
     /**

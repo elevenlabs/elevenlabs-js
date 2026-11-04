@@ -20,7 +20,7 @@ type RawDestination =
     | { agent: string; nodeId?: string };
 
 export interface FixtureOp {
-    op: "converse" | "tool" | "transfer" | "end" | "goTo" | "update" | "remove" | "insertBetween";
+    op: "converse" | "tool" | "transfer" | "end" | "goTo" | "onResult" | "update" | "remove" | "insertBetween";
     at?: string;
     when?: RawCondition;
     back?: RawCondition;
@@ -35,6 +35,8 @@ export interface FixtureOp {
     source?: string;
     options?: Record<string, unknown>;
     ops?: FixtureOp[];
+    success?: FixtureOp[];
+    failure?: FixtureOp[];
 }
 
 export interface Fixture {
@@ -98,6 +100,15 @@ function run(wf: Workflow, ops: FixtureOp[], first: WorkflowChain): WorkflowNode
         }
         if (op.op === "remove") {
             wf.remove(op.node as string);
+            continue;
+        }
+        if (op.op === "onResult") {
+            const { success, failure } = op;
+            const node = op.at === undefined ? (previous as WorkflowNode) : wf.node(op.at);
+            node.onResult({
+                ...(success !== undefined && { success: (branch) => run(wf, success, branch) }),
+                ...(failure !== undefined && { failure: (branch) => run(wf, failure, branch) }),
+            });
             continue;
         }
         if (op.op === "insertBetween") {

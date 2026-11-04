@@ -193,6 +193,28 @@ describe("update()", () => {
     });
 });
 
+describe("onResult()", () => {
+    it("routes only the outcomes it is given", () => {
+        const wf = new Workflow();
+        const triage = wf.converse("triage", "Triage");
+        triage
+            .when("Has an order")
+            .tool("lookup", ["tool_get_order"])
+            .onResult({ failure: (failed) => failed.goTo(triage) });
+
+        const lookup = wf.build().nodes?.lookup as ElevenLabs.WorkflowToolNodeModelInput;
+
+        expect(lookup.edgeOrder).toEqual(["lookup__triage"]);
+    });
+
+    it("fails the build when used on a node that isn't a tool", () => {
+        const wf = new Workflow();
+        wf.converse("a", "A").onResult({ success: (ok) => ok.end() });
+
+        expect(buildErrors(wf)).toEqual(["result_edge_needs_tool"]);
+    });
+});
+
 describe("insertBetween()", () => {
     it("fails the build when the callback doesn't return the last inserted node", () => {
         const wf = new Workflow();
@@ -203,18 +225,21 @@ describe("insertBetween()", () => {
         expect(() => wf.build()).toThrow(/must return the last inserted node/);
     });
 
-    it("keeps the replaced edge's condition and its slot in the source's edge order", () => {
+    it("keeps the replaced edge's condition and slot, and returns the inserted node for further routing", () => {
         const wf = new Workflow();
         const a = wf.converse("a", "A");
         a.when("first").converse("b", "B");
         a.when("second").end();
 
-        wf.insertBetween("a", "b", (from) => from.converse("verify", "Verify"));
+        const verify = wf.insertBetween("a", "b", (from) => from.converse("verify", "Verify"));
+        verify?.when("Can't verify").end({ id: "unverified" });
         const model = wf.build();
 
         expect(model.nodes?.a?.edgeOrder).toEqual(["a__verify", "a__end"]);
         expect(model.edges?.a__verify?.forwardCondition).toEqual({ type: "llm", condition: "first" });
         expect(model.edges?.verify__b?.forwardCondition).toEqual({ type: "unconditional" });
+        // The returned node is the inserted one, so branches added to it leave "verify".
+        expect(model.nodes?.verify?.edgeOrder).toEqual(["verify__b", "verify__unverified"]);
     });
 });
 

@@ -14,6 +14,14 @@ export interface WhenOptions {
     back?: ConditionInput;
 }
 
+/** The branches of a tool node, for `onResult()`. Each callback gets the branch `onSuccess()` or `onFailure()` opens. */
+export interface ResultBranches {
+    /** Followed when every tool in the node succeeded. */
+    success?: (branch: WorkflowBranch) => unknown;
+    /** Followed when any tool in the node failed. */
+    failure?: (branch: WorkflowBranch) => unknown;
+}
+
 export interface GoToOptions {
     /** Condition for coming back along this edge, from the target to this node. */
     back?: ConditionInput;
@@ -139,6 +147,16 @@ export class WorkflowNode extends WorkflowChain {
     /** Opens the branch followed when any tool in this tool node failed. */
     onFailure(options: ConditionOptions = {}): WorkflowBranch {
         return branch(this._graph, this.id, Condition.failure(options));
+    }
+
+    /**
+     * Routes both outcomes of this tool node in one place. Same as calling `onSuccess()` and then `onFailure()`, so
+     * the success edge always comes first. Returns this node.
+     */
+    onResult(branches: ResultBranches): this {
+        branches.success?.(this.onSuccess());
+        branches.failure?.(this.onFailure());
+        return this;
     }
 
     /** Changes this node's options. Only fields that apply to the node's kind may be set. */

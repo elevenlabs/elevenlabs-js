@@ -19,7 +19,7 @@ Names are given in camelCase. Each SDK applies its own casing: `on_success` in P
 | `node(id)` | A handle to an existing node. |
 | `nodeIds` | Node ids, in insertion order. |
 | `remove(id)` | Removes the node and every edge that touches it. |
-| `insertBetween(sourceId, targetId, insert)` | Replaces the edge `source → target` with new nodes. See below. |
+| `insertBetween(sourceId, targetId, insert)` | Replaces the edge `source → target` with new nodes and returns the last one. See below. |
 | `build(options?)` | Validates, then returns the SDK request model. `options.onWarning` is called once per warning. |
 | `toJSON()` | Wire-format object. Validates like `build()`. |
 | `toJSONString()` | The canonical file format. See "Wire format". |
@@ -43,6 +43,7 @@ Node verbs exist on `Workflow`, `WorkflowNode` and `WorkflowBranch`. Each verb a
 |---|---|---|
 | `when(condition, options?)` | `Workflow`, `WorkflowNode` | `condition` as the forward condition. `options.back` sets the backward condition. |
 | `onSuccess(options?)` / `onFailure(options?)` | `WorkflowNode` | `{type: "result", successful: true/false}`. `options.label` is optional. |
+| `onResult({ success?, failure? })` | `WorkflowNode` | Calls `success` with `onSuccess()`'s branch, then `failure` with `onFailure()`'s, always in that order whatever order they are given in. Either may be omitted. Returns the node. Named, not positional, so the two branches can't be swapped by mistake: an options object, kwargs or a struct, never a method called `then`. |
 | A verb with no routing call | | `{type: "unconditional"}` |
 
 A `WorkflowBranch` (returned by `when` / `onSuccess` / `onFailure`) only has the node verbs and `goTo`.
@@ -124,6 +125,7 @@ These rules make every SDK emit byte-identical JSON for the same program.
 2. Remove that edge. Call `insert` with a branch from `source` that carries the removed edge's forward and backward conditions.
 3. Move the first new edge that leaves `source` into the removed edge's position. It gets a new generated id, because the old id named the old target.
 4. Connect the node `insert` returned to `target`. Use `onSuccess` if it's a tool node, otherwise an unconditional edge.
+5. Return that node, so callers can add more branches to it. When step 1 or 4 fails, return nothing (`undefined`, `None`, `nil`, `null`, or an empty `Option`); the problem is reported by `build()`.
 
 ## Wire format
 
@@ -150,7 +152,7 @@ Each op calls one builder method:
 
 | Field | Meaning |
 |---|---|
-| `op` | `converse`, `tool`, `transfer`, `end`, `goTo`, `update`, `remove` or `insertBetween` |
+| `op` | `converse`, `tool`, `transfer`, `end`, `goTo`, `onResult`, `update`, `remove` or `insertBetween` |
 | `at` | Where the op applies. A node id, or `"$start"` for the workflow. Without it, the op continues from the previous op's result, or from the workflow / insert branch for the first op. |
 | `when` + `back` | Call `when(condition, {back})` first. A condition is a string (LLM), `{"llm": text, "label"?}` or `{"expr": <wire AST>, "label"?}`. |
 | `onSuccess` / `onFailure` | `true` calls the matching method first. |
@@ -158,6 +160,7 @@ Each op calls one builder method:
 | `options` | Canonical option keys. Nested values (such as schema overrides) are in wire format. |
 | `node` | Target node for `update` and `remove`. |
 | `source`, `target`, `ops` | For `insertBetween`, where `ops` are run on the insert branch and the last op's result is returned. |
+| `success`, `failure` | For `onResult` (on the node given by `at`, or the previous op's), lists of ops run on each branch. |
 
 Regenerate the expected output in the reference SDK with `UPDATE_FIXTURES=1 yarn test:unit`, after an intentional change only, and review the diff.
 
