@@ -96,10 +96,11 @@ These rules make every SDK emit byte-identical JSON for the same program.
 - **Loaded edges.** Edges kept from a loaded workflow are written back with their `reroutes` (editor bend points). Edges `insertBetween` creates in place of a removed one start without them.
 - **`edge_order`.** For each node, the ids of its outgoing edges in edge-list order. Every node gets one, even if it is empty.
 - **Positions.** A node that has a `position` keeps it. Otherwise:
-  1. Run a breadth-first search from the start node, following edges in edge-list order. A node's column is its BFS depth.
-  2. Unreachable nodes go in the column after the deepest one, in insertion order.
-  3. Auto-placed nodes are numbered per column in visiting order, which gives each one its row. A row whose grid position (`x`, `y` as in step 4) is already taken by a node with a position, loaded or placed earlier, is skipped.
-  4. The position is `x = column × 300`, `y = row × 200`. The start node, if it has no position, is placed at `(0, 0)`.
+  1. Run a breadth-first search from the start node, following edges forward in edge-list order. A node's column is its BFS depth.
+  2. When that search ends, take the first edge in edge-list order that has a backward condition, a visited target and an unvisited source. Give the source the target's depth + 1, run step 1's search from it, and repeat. The same search decides which nodes are reachable for the `unreachable_node` warning.
+  3. Unreachable nodes go in the column after the deepest one, in insertion order.
+  4. Auto-placed nodes are numbered per column in visiting order, which gives each one its row. A row whose grid position (`x`, `y` as in step 5) is already taken by a node with a position, loaded or placed earlier, is skipped.
+  5. The position is `x = column × 300`, `y = row × 200`. The start node, if it has no position, is placed at `(0, 0)`.
 - **Node types without a verb.** Node types the builder has no verb for are kept exactly as loaded, whether the SDK's generated types model them (such as `say`) or not (newer API node types). Only their `edge_order` is recomputed. Their guarantee covers JSON export and loading: `toJSON()` / `fromJSON()` round-trip them. An SDK whose request serializer rejects a node type it doesn't know records an `unknown_node_type` warning for each such node, and documents a way to send `toJSON()`'s output directly. Decide which serialization a node needs from the generated types, not from the builder's own list of verbs, so a regeneration that adds a node type doesn't break round-trips.
 
 ## Validation

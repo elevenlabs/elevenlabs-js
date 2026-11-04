@@ -85,27 +85,39 @@ export function validate(graph: WorkflowGraph): WorkflowIssue[] {
     return issues;
 }
 
-/** Breadth-first depth of every node reachable from the start node, in visiting order. */
+/**
+ * Breadth-first depth of every node reachable from the start node, in visiting order. Forward edges come first;
+ * an edge's backward condition is followed only to reach a node the forward search can't.
+ */
 export function depthsFrom(graph: WorkflowGraph): Map<string, number> {
-    const depths = new Map<string, number>([[graph.startId, 0]]);
-    const queue = [graph.startId];
-    while (queue.length > 0) {
-        const id = queue.shift() as string;
-        for (const edge of graph.edges) {
-            // A backward condition lets the conversation travel the edge from target to source.
-            const next =
-                edge.source === id
-                    ? edge.target
-                    : edge.target === id && edge.backwardCondition !== undefined
-                      ? edge.source
-                      : undefined;
-            if (next !== undefined && !depths.has(next) && graph.nodes.has(next)) {
-                depths.set(next, (depths.get(id) as number) + 1);
-                queue.push(next);
+    const depths = new Map<string, number>();
+    const visit = (id: string, depth: number): void => {
+        depths.set(id, depth);
+        const queue = [id];
+        while (queue.length > 0) {
+            const current = queue.shift() as string;
+            for (const edge of graph.edges) {
+                if (edge.source === current && !depths.has(edge.target) && graph.nodes.has(edge.target)) {
+                    depths.set(edge.target, (depths.get(current) as number) + 1);
+                    queue.push(edge.target);
+                }
             }
         }
+    };
+    visit(graph.startId, 0);
+    for (;;) {
+        const back = graph.edges.find(
+            (edge) =>
+                edge.backwardCondition !== undefined &&
+                depths.has(edge.target) &&
+                !depths.has(edge.source) &&
+                graph.nodes.has(edge.source),
+        );
+        if (back === undefined) {
+            return depths;
+        }
+        visit(back.source, (depths.get(back.target) as number) + 1);
     }
-    return depths;
 }
 
 function reachableFrom(graph: WorkflowGraph): Set<string> {

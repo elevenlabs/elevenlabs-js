@@ -129,6 +129,38 @@ describe("build()", () => {
         expect(warnings).toEqual([]);
     });
 
+    it("lays out a node by its forward path, not by a back edge to an ancestor", () => {
+        const wf = new Workflow();
+        const a = wf.converse("a", "A");
+        a.when("next").converse("b", "B").when("next").converse("c", "C").goTo(a, { back: "Back to C" });
+
+        const nodes = wf.build().nodes;
+
+        expect(nodes?.c?.position).toEqual({ x: 900, y: 0 });
+    });
+
+    it("places a node reached only through a backward condition after its target", () => {
+        const always = { type: "unconditional" };
+        const wf = Workflow.fromJSON({
+            nodes: {
+                start: { type: "start", edge_order: ["start__a"], position: { x: 0, y: 0 } },
+                a: { type: "override_agent", label: "a", additional_prompt: "A", edge_order: [] },
+                b: { type: "override_agent", label: "b", additional_prompt: "B", edge_order: ["b__a"] },
+            },
+            edges: {
+                start__a: { source: "start", target: "a", forward_condition: always },
+                b__a: { source: "b", target: "a", forward_condition: always, backward_condition: always },
+            },
+        });
+
+        const nodes = wf.build().nodes;
+
+        expect([nodes?.a?.position, nodes?.b?.position]).toEqual([
+            { x: 300, y: 0 },
+            { x: 600, y: 0 },
+        ]);
+    });
+
     it("places a new node on a free row instead of on top of a loaded node", () => {
         const at = (x: number, y: number) => ({ position: { x, y } });
         const edge = (source: string, target: string) => ({
