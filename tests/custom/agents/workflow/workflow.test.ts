@@ -381,6 +381,50 @@ describe("update()", () => {
     });
 });
 
+describe("up()", () => {
+    it("lets the support line be written as one chain", () => {
+        const wf = new Workflow({ preventSubagentLoops: true });
+        wf.converse("triage", "Greet the caller", { label: "Triage" })
+            .when("Caller wants to check an order")
+            .converse("identify", "Ask for the order number")
+            .when("Caller gave an order number")
+            .tool("lookup_order", ["tool_get_order"])
+            .onResult({
+                success: (ok) => ok.converse("resolve", "Explain the order status").when("Caller is satisfied").end(),
+                failure: (failed) => failed.goTo("identify"),
+            })
+            .up()
+            .up()
+            .when(Expr.variable("tier").eq("gold"))
+            .transfer("vip", Destination.agent("agent_vip"));
+
+        expect(wf.toJSON()).toEqual(supportLine().toJSON());
+    });
+
+    it("goes to the source of the first edge into the node, ignoring later loops back into it", () => {
+        const wf = supportLine();
+
+        expect(wf.node("identify").up().id).toBe("triage");
+        expect(wf.node("resolve").up().id).toBe("lookup_order");
+    });
+
+    it("goes back along the chain, not to the first node that led to a shared node", () => {
+        const wf = supportLine();
+
+        // Shared end node, first reached from "resolve".
+        expect(wf.node("vip").up().when("Caller hangs up").end().up().id).toBe("triage");
+        expect(wf.node("vip").up().when("Caller wants an order").goTo("identify").up().id).toBe("triage");
+    });
+
+    it("goes to the start node from the top of the workflow and from nodes nothing leads to", () => {
+        const wf = supportLine();
+
+        expect(wf.node("triage").up().id).toBe("start_node");
+        expect(wf.node("triage").up().up().id).toBe("start_node");
+        expect(wf.node("unknown").up().id).toBe("start_node");
+    });
+});
+
 describe("onResult()", () => {
     it("routes only the outcomes it is given", () => {
         const wf = new Workflow();

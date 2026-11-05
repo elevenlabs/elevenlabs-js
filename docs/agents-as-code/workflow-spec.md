@@ -48,6 +48,16 @@ Node verbs exist on `Workflow`, `WorkflowNode` and `WorkflowBranch`. Each verb a
 
 A `WorkflowBranch` (returned by `when` / `onSuccess` / `onFailure`) only has the node verbs and `goTo`.
 
+`WorkflowNode.up()` returns a handle to the node this handle was chained from: the source of the edge that the verb or `goTo` that returned it created. For a handle from `node(id)`, it is the source of the first edge in the edge list into the node, other than a self-loop. For the start node, or a node nothing leads to, it is the start node. `up()` adds nothing to the graph; it lets a whole workflow be written as one chain:
+
+```ts
+wf.converse("triage", "Find out what the caller needs")
+    .when("Caller gave an order number").tool("lookup_order", ["tool_get_order"])
+    .onResult({ success: (ok) => ok.converse("resolve", "Explain the order status").end(), failure: (failed) => failed.goTo("triage") })
+    .up()
+    .when("Caller wants a human").transfer("human", Destination.phone("+15551234567"));
+```
+
 ### Node options
 
 Option keys are canonical names. Nested values use the SDK's generated types.
@@ -84,7 +94,7 @@ JS, Python, Ruby and PHP accept these implicitly. Rust uses `From<&str>` / `From
 2. **No `then` method.** JS treats any object with a `then` method as a promise.
 3. **Positional parameters have one fixed type each.** Everything optional goes in a trailing options object, struct or kwargs.
 4. **Chaining never fails.** All problems are recorded and reported together by `build()`, which throws or returns `(model, error)` / `Result` depending on the language. Duplicate ids, unknown targets and bad options all surface there.
-5. **Handles are references (workflow, node id).** All state lives in the workflow. Rust may use `Rc<RefCell<…>>` or copyable ids with `wf.at(id)`.
+5. **Handles are references (workflow, node id, and the id of the node they were chained from, for `up()`).** All graph state lives in the workflow. Rust may use `Rc<RefCell<…>>` or copyable ids with `wf.at(id)`.
 6. **Output types are the SDK's own generated types.** Implementations share nothing at runtime.
 
 ## Deterministic output

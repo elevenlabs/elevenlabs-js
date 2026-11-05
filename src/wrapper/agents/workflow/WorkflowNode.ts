@@ -99,7 +99,7 @@ export abstract class WorkflowChain {
             forwardCondition: origin.forwardCondition,
             backwardCondition: back === undefined ? origin.backwardCondition : toCondition(back).toModel(),
         });
-        return new WorkflowNode(this._graph, target);
+        return new WorkflowNode(this._graph, target, origin.source);
     }
 }
 
@@ -122,11 +122,13 @@ export class WorkflowBranch extends WorkflowChain {
 /** A handle to one node in a workflow. Handles are cheap: all state lives in the `Workflow`. */
 export class WorkflowNode extends WorkflowChain {
     readonly id: string;
+    private readonly _parentId: string | undefined;
 
     /** @internal */
-    constructor(graph: WorkflowGraph, id: string) {
+    constructor(graph: WorkflowGraph, id: string, parentId?: string) {
         super(graph);
         this.id = id;
+        this._parentId = parentId;
     }
 
     /** The API node type, e.g. `"override_agent"` or `"tool"`. */
@@ -157,6 +159,22 @@ export class WorkflowNode extends WorkflowChain {
         branches.success?.(this.onSuccess());
         branches.failure?.(this.onFailure());
         return this;
+    }
+
+    /**
+     * The node this handle was chained from, so a whole workflow can be written as one chain. For a handle from
+     * `node()`, the source of the first edge into the node. The start node if there is neither.
+     *
+     * @example
+     * wf.converse("triage", "Find out what the caller needs")
+     *     .when("Caller wants a human").transfer("human", Destination.phone("+15551234567")).up()
+     *     .when("Caller is done").end();
+     */
+    up(): WorkflowNode {
+        const parentId =
+            this._parentId ??
+            this._graph.edges.find((edge) => edge.target === this.id && edge.source !== this.id)?.source;
+        return new WorkflowNode(this._graph, parentId ?? this._graph.startId);
     }
 
     /** Changes this node's options. Only fields that apply to the node's kind may be set. */
