@@ -48,6 +48,8 @@ export * from "./textToSpeech/types";
 export * as textToVoice from "./textToVoice";
 export * from "./textToVoice/client/requests";
 export * from "./textToVoice/types";
+export * as v1DubbingLive from "./v1DubbingLive";
+export * from "./v1DubbingLive/types";
 export * as v1SpeechToTextRealtime from "./v1SpeechToTextRealtime";
 export * from "./v1SpeechToTextRealtime/types";
 export * as v1TextToDialogueMultiStreamInput from "./v1TextToDialogueMultiStreamInput";
