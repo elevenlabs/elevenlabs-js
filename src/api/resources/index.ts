@@ -63,6 +63,8 @@ export * as tokens from "./tokens";
 export * as usage from "./usage";
 export * from "./usage/client/requests";
 export * as user from "./user";
+export * as v1DubbingLive from "./v1DubbingLive";
+export * from "./v1DubbingLive/types";
 export * as v1SpeechToTextRealtime from "./v1SpeechToTextRealtime";
 export * from "./v1SpeechToTextRealtime/types";
 export * as v1TextToDialogueMultiStreamInput from "./v1TextToDialogueMultiStreamInput";
