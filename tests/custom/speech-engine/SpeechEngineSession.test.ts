@@ -103,6 +103,19 @@ describe("SpeechEngineSession", () => {
         expect(callCount).toBe(1);
     });
 
+    it("does not abort a newer transcript when an older event_id is replayed", () => {
+        const signals: AbortSignal[] = [];
+        session.on(SpeechEngine.USER_TRANSCRIPT, (_transcript, signal) => {
+            signals.push(signal);
+        });
+
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 2 });
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript2, event_id: 1 });
+
+        expect(signals).toHaveLength(1);
+        expect(signals[0].aborted).toBe(false);
+    });
+
     it("does not deduplicate transcripts without event_id", () => {
         let callCount = 0;
         session.on(SpeechEngine.USER_TRANSCRIPT, () => { callCount++; });

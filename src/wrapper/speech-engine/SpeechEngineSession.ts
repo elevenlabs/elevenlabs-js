@@ -179,8 +179,12 @@ export class SpeechEngineSession {
             }
 
             case "user_transcript": {
-                if (msg.event_id !== undefined && msg.event_id === this.currentEventId && this.currentAbortController !== null) {
-                    this.log(`skipping duplicate transcript, event_id=${msg.event_id}`);
+                if (
+                    msg.event_id !== undefined &&
+                    this.currentEventId !== undefined &&
+                    msg.event_id <= this.currentEventId
+                ) {
+                    this.log(`skipping stale transcript, event_id=${msg.event_id}, current=${this.currentEventId}`);
                     break;
                 }
 
