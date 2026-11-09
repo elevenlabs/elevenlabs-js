@@ -185,3 +185,7 @@ Regenerate the expected output in the reference SDK with `UPDATE_FIXTURES=1 yarn
 - Verbs for `say` and `update_state` nodes, planned as `say()` and `setVariable()`. The generated JS types now include both, so loaded nodes of these types round-trip, but they can't be created or updated with the builder yet.
 - An end-node `outcome` option on `end()`. The generated JS types now include the field, and loaded values round-trip, but `end()` can't set it yet.
 - Structured procedures. This is phase 2 and will reuse `Condition`, `Expr` and these rules.
+
+## Application tool boundaries
+
+Use [offline tool contract tests](offline-tool-testing.md) to check application arguments, backend responses and authorization independently of provider tool selection. The bundled example and tests require no live agent or API key.
