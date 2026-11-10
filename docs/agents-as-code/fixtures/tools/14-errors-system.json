@@ -1,0 +1,31 @@
+{
+  "name": "System tool errors",
+  "description": "An agent destination on transferToNumber leaves it with no transfers; an option that doesn't apply to system tools.",
+  "tool": {
+    "system": "transfer_to_number"
+  },
+  "ops": [
+    {
+      "op": "transfer",
+      "args": [
+        "Caller wants sales",
+        {
+          "agent": "agent_sales"
+        }
+      ]
+    },
+    {
+      "op": "options",
+      "args": [
+        {
+          "executionMode": "async"
+        }
+      ]
+    }
+  ],
+  "errors": [
+    "invalid_destination",
+    "no_transfers",
+    "invalid_option"
+  ]
+}

@@ -280,6 +280,36 @@ A workflow loaded from the API or a file can contain node types that are newer t
 await client.conversationalAi.agents.update("agent_id", {}, { additionalBodyParameters: { workflow: wf.toJSON() } });
 ```
 
+## Agent tools as code
+
+Define webhook, client and system tools with chained methods instead of nested JSON schemas. `build()` returns the request `tools.create()` and `tools.update()` accept, and `toJSONString()` writes the same file the ElevenLabs CLI keeps in `tool_configs/`:
+
+```typescript
+import { ElevenLabsClient, Tool, SystemTool, Schema, Header, Destination } from "@elevenlabs/elevenlabs-js";
+
+const refund = Tool.webhook("issue_refund", "Refund an order the caller asked to return")
+    .post("https://api.example.com/orders/{order_id}/refunds")
+    .pathParam("order_id", Schema.string().describe("The order number, e.g. A-1042"))
+    .header("Authorization", Header.secret("sec_orders_api"))
+    .body(
+        Schema.object()
+            .property("customer_id", Schema.string().fromVariable("customer_id"))
+            .property("reason", Schema.string().describe("Why the caller wants a refund").choices(["damaged", "late", "other"]))
+            .property("note", Schema.string().describe("Anything else the caller said").optional()),
+    )
+    .assign("refund_id", "refund.id");
+
+const client = new ElevenLabsClient();
+await client.conversationalAi.tools.create(refund.build());
+
+const transfer = SystemTool.transferToNumber()
+    .transfer("Caller asks for billing", Destination.phone("+15551234567"));
+```
+
+Each schema property gets its value from exactly one place: the LLM (`describe()`), a dynamic variable (`fromVariable()`), a `constant()`, the system (`systemProvided()`), or nowhere (`omit()`). Properties are required unless you call `optional()`. Schemas are values, so you can reuse one across tools.
+
+`build()` checks the whole tool first and throws a `ToolValidationError` listing every problem. For example, it reports a `{placeholder}` in the URL with no matching `pathParam()`, a property with two value sources, or a `GET` with a body. Load an existing tool with `Tool.fromResponse(await client.conversationalAi.tools.get(toolId))` or `Tool.fromJSON(file)`, edit it, and push it back with `tools.update()`.
+
 ## Retries
 
 This Node SDK is instrumented with automatic retries with exponential backoff. A request will be

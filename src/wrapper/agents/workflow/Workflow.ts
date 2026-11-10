@@ -4,6 +4,7 @@ import { Condition, type ConditionInput } from "./Condition";
 import { type WorkflowIssue, WorkflowValidationError } from "./errors";
 import { layout } from "./layout";
 import { serializerKnowsNodeType } from "./nodeTypes";
+import { sortKeys } from "./util";
 import { reverseEdgeMerges, validate } from "./validate";
 import { type GraphEdge, WorkflowGraph } from "./WorkflowGraph";
 import { branch, type EdgeOrigin, type WhenOptions, WorkflowBranch, WorkflowChain, WorkflowNode } from "./WorkflowNode";
@@ -296,18 +297,4 @@ function assignEdgeIds(edges: GraphEdge[]): string[] {
         taken.add(id);
         return id;
     });
-}
-
-function sortKeys(value: unknown): unknown {
-    if (Array.isArray(value)) {
-        return value.map(sortKeys);
-    }
-    if (typeof value === "object" && value !== null) {
-        return Object.fromEntries(
-            Object.keys(value)
-                .sort()
-                .map((key) => [key, sortKeys((value as Record<string, unknown>)[key])]),
-        );
-    }
-    return value;
 }

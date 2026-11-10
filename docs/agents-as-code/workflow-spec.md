@@ -78,7 +78,7 @@ Option keys are canonical names. Nested values use the SDK's generated types.
 These are static constructors only, so they translate directly to languages without union types or overloading.
 
 - `Condition.llm(text, {label?})`, `Condition.expr(expr, {label?})`, `Condition.always()`, `Condition.success()`, `Condition.failure()`
-- `Destination.phone(number)`, `.phoneVariable(name)`, `.sip(uri)`, `.sipVariable(name)`, `.converse(agentId, {nodeId?})`
+- `Destination.phone(number)`, `.phoneVariable(name)`, `.sip(uri)`, `.sipVariable(name)`, `.agent(agentId, {nodeId?})`
 - `Expr.variable(name)`, `.literal(value)`, `.llm(description, {type?, enum?})` (an LLM-extracted value with a `value_schema`; `type` defaults to `boolean`), `.allOf(...)`, `.anyOf(...)`, `.ifElse(cond, whenTrue, whenFalse)`, `.fromModel(ast)`
 - `Expr` instance methods `eq neq gt gte lt lte add sub mul div`. Each takes an `Expr` or a plain value; a plain value becomes a literal.
 
