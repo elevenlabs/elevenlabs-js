@@ -57,6 +57,29 @@ const MODELED_KEYS = new Set([
 ]);
 
 /**
+ * Whether `value` is what the API returns for an unset field. (It also returns `null` for some, which the SDK's
+ * serializers already treat as absent.) A literal's unset constant is `""`, so `""` can't be a constant.
+ */
+function isUnsetValue(key: string, value: unknown, kind: SchemaKind): boolean {
+    switch (key) {
+        case "description":
+        case "dynamicVariable":
+            return value === "";
+        case "constantValue":
+            return kind !== "object" && kind !== "array" && value === "";
+        case "isSystemProvided":
+        case "isOmitted":
+            return value === false;
+        case "required":
+            return Array.isArray(value) && value.length === 0;
+        case "properties":
+            return typeof value === "object" && Object.keys(value as object).length === 0;
+        default:
+            return false;
+    }
+}
+
+/**
  * A tool param's JSON schema, and where its value comes from. Schemas are values: every method returns a new
  * schema, so one can be reused across tools and properties.
  *
@@ -122,21 +145,27 @@ export class Schema {
     static fromModel(model: SchemaModel, optional = false): Schema {
         const m = model as Record<string, unknown>;
         const kind = kindOf(m);
-        const extra = Object.fromEntries(Object.entries(m).filter(([key]) => !MODELED_KEYS.has(key)));
+        // The API fills unset fields with defaults ("", false, null). They aren't value sources, but are kept as
+        // extra fields so a pulled config writes back unchanged.
+        const isUnset = (key: string, value: unknown) => isUnsetValue(key, value, kind);
+        const extra = Object.fromEntries(
+            Object.entries(m).filter(([key, value]) => !MODELED_KEYS.has(key) || isUnset(key, value)),
+        );
+        const set = (key: string): unknown => (isUnset(key, m[key]) ? undefined : m[key]);
         const base: SchemaState = {
             ...initial(kind),
-            description: m.description as string | undefined,
-            dynamicVariable: m.dynamicVariable as string | undefined,
-            hasConstant: m.constantValue !== undefined,
-            constantValue: m.constantValue,
+            description: set("description") as string | undefined,
+            dynamicVariable: set("dynamicVariable") as string | undefined,
+            hasConstant: m.constantValue !== undefined && !isUnset("constantValue", m.constantValue),
+            constantValue: set("constantValue"),
             omitted: m.isOmitted === true,
             optional,
             extra,
         };
         if (kind === "object") {
-            const required = Array.isArray(m.required) ? (m.required as string[]) : undefined;
+            const required = Array.isArray(set("required")) ? (m.required as string[]) : undefined;
             const constraints = (m.requiredConstraints ?? {}) as ElevenLabs.RequiredConstraints;
-            const properties = Object.entries((m.properties ?? {}) as Record<string, SchemaModel>).map(
+            const properties = Object.entries((set("properties") ?? {}) as Record<string, SchemaModel>).map(
                 ([name, child]) => [name, Schema.fromModel(child, !(required ?? []).includes(name))] as const,
             );
             return new ObjectSchema({
@@ -148,15 +177,15 @@ export class Schema {
             });
         }
         if (kind === "array") {
-            const items = m.items === undefined ? undefined : Schema.fromModel(m.items as SchemaModel, true);
+            const items = set("items") === undefined ? undefined : Schema.fromModel(m.items as SchemaModel, true);
             return new ArraySchema({ ...base, items });
         }
-        const allowed = m.allowedValues as ElevenLabs.AllowedValues | undefined;
+        const allowed = set("allowedValues") as ElevenLabs.AllowedValues | undefined;
         return new LiteralSchema({
             ...base,
             literalType: m.type as ElevenLabs.LiteralJsonSchemaPropertyType,
             systemProvided: m.isSystemProvided === true,
-            choices: m.enum as string[] | undefined,
+            choices: set("enum") as string[] | undefined,
             allowedFrom: allowed?.dynamicVariable,
         });
     }
@@ -217,12 +246,15 @@ export class Schema {
     /** @internal The SDK model of this schema. */
     toModel(): SchemaModel {
         const s = this._state;
+        // Modeled fields that are unset leave the matching extra field (an API default) in place.
         const common = {
             ...s.extra,
-            description: s.description,
-            dynamicVariable: s.dynamicVariable,
+            ...defined({
+                description: s.description,
+                dynamicVariable: s.dynamicVariable,
+                isOmitted: s.omitted ? true : undefined,
+            }),
             ...(s.hasConstant && { constantValue: s.constantValue }),
-            isOmitted: s.omitted ? true : undefined,
         };
         if (s.kind === "object") {
             const required = requiredOf(s);
@@ -230,31 +262,34 @@ export class Schema {
                 anyOf: s.anyOf.length > 0 ? s.anyOf.map((names) => ({ required: [...names] })) : undefined,
                 allOf: s.allOf.length > 0 ? s.allOf.map((names) => ({ required: [...names] })) : undefined,
             });
-            return defined({
+            return {
                 ...common,
-                type: "object",
-                properties:
-                    s.properties.length > 0
-                        ? Object.fromEntries(s.properties.map(([name, child]) => [name, child.toModel()]))
-                        : undefined,
-                required: required.length > 0 ? required : undefined,
-                requiredConstraints: Object.keys(constraints).length > 0 ? constraints : undefined,
-            }) as ElevenLabs.ObjectJsonSchemaPropertyInput;
+                ...defined({
+                    type: "object",
+                    properties:
+                        s.properties.length > 0
+                            ? Object.fromEntries(s.properties.map(([name, child]) => [name, child.toModel()]))
+                            : undefined,
+                    required: required.length > 0 ? required : undefined,
+                    requiredConstraints: Object.keys(constraints).length > 0 ? constraints : undefined,
+                }),
+            } as ElevenLabs.ObjectJsonSchemaPropertyInput;
         }
         if (s.kind === "array") {
-            return defined({
+            return {
                 ...common,
-                type: "array",
-                items: s.items?.toModel(),
-            }) as ElevenLabs.ArrayJsonSchemaPropertyInput;
+                ...defined({ type: "array", items: s.items?.toModel() }),
+            } as ElevenLabs.ArrayJsonSchemaPropertyInput;
         }
-        return defined({
+        return {
             ...common,
-            type: s.literalType ?? s.kind,
-            isSystemProvided: s.systemProvided ? true : undefined,
-            enum: s.choices === undefined ? undefined : [...s.choices],
-            allowedValues: s.allowedFrom === undefined ? undefined : { dynamicVariable: s.allowedFrom },
-        }) as ElevenLabs.LiteralJsonSchemaProperty;
+            ...defined({
+                type: s.literalType ?? s.kind,
+                isSystemProvided: s.systemProvided ? true : undefined,
+                enum: s.choices === undefined ? undefined : [...s.choices],
+                allowedValues: s.allowedFrom === undefined ? undefined : { dynamicVariable: s.allowedFrom },
+            }),
+        } as ElevenLabs.LiteralJsonSchemaProperty;
     }
 
     /** @internal */

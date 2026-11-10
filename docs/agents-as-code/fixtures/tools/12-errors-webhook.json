@@ -37,6 +37,16 @@
     {
       "op": "queryParam",
       "args": [
+        "a",
+        {
+          "type": "string",
+          "description": "Also A"
+        }
+      ]
+    },
+    {
+      "op": "queryParam",
+      "args": [
         "filter",
         {
           "type": "object",
@@ -92,6 +102,7 @@
     "unknown_path_param",
     "param_not_literal",
     "body_not_allowed",
+    "duplicate_param",
     "duplicate_header",
     "invalid_option",
     "invalid_option",

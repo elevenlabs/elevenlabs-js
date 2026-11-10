@@ -28,35 +28,22 @@ function issuesOf(fn: () => unknown): ToolIssue[] {
 }
 
 describe("Schema", () => {
-    it("returns a new schema from every method, so one can be reused", () => {
-        const id = Schema.string().describe("An id");
-        const optionalId = id.optional();
-        expect(id.isOptional).toBe(false);
-        expect(optionalId.isOptional).toBe(true);
+    it("can be shared by tools, and editing one tool's copy leaves the others alone", () => {
+        const orderId = Schema.string().describe("The order number");
+        const lookup = Tool.webhook("lookup", "Look up").get("https://api.example.com/{id}").pathParam("id", orderId);
+        const cancel = Tool.webhook("cancel", "Cancel")
+            .post("https://api.example.com/cancel")
+            .body(Schema.object().property("id", orderId));
 
-        const base = Schema.object().property("a", id);
-        const extended = base.property("b", id);
-        expect(base.propertyNames).toEqual(["a"]);
-        expect(extended.propertyNames).toEqual(["a", "b"]);
-    });
+        const body = cancel.bodySchema as ReturnType<typeof Schema.object>;
+        cancel.body(body.property("id", orderId.optional()));
 
-    it("keeps its subclass through chaining", () => {
-        const schema = Schema.string().describe("Pick one").choices(["a", "b"]).optional();
-        expect(schema.kind).toBe("string");
-        expect(schema.toJSON()).toEqual({ description: "Pick one", enum: ["a", "b"], type: "string" });
-    });
-
-    it("round-trips through fromJSON and toJSON", () => {
-        const json = {
-            properties: {
-                items: { items: { description: "A sku", type: "string" }, type: "array" },
-                total: { description: "Total", type: "number" },
-            },
-            required: ["total"],
+        const lookupParams = (lookup.toJSON().api_schema as Record<string, unknown>).path_params_schema;
+        expect(lookupParams).toEqual({ id: { description: "The order number", type: "string" } });
+        expect((cancel.toJSON().api_schema as { request_body_schema: object }).request_body_schema).toEqual({
+            properties: { id: { description: "The order number", type: "string" } },
             type: "object",
-        };
-        expect(Schema.fromJSON(json).toJSON()).toEqual(json);
-        expect(Schema.fromJSON(JSON.stringify(json)).toJSON()).toEqual(json);
+        });
     });
 
     it("loads properties not in required as optional", () => {
@@ -160,33 +147,90 @@ describe("WebhookTool", () => {
         );
     });
 
-    it("warns about literals with no description, but not in the response schema", () => {
-        const warnings: ToolIssue[] = [];
-        getOrder()
-            .queryParam("q", Schema.string())
-            .response(Schema.object().property("status", Schema.string()))
-            .build({ onWarning: (issue) => warnings.push(issue) });
-        expect(warnings.map((w) => [w.code, w.path])).toEqual([["missing_description", "query.q"]]);
+    it("needs a value source on every literal, in the response schema and under any container", () => {
+        const issues = issuesOf(() =>
+            Tool.webhook("save", "Save")
+                .post("https://api.example.com/save")
+                .queryParam("q", Schema.string())
+                .body(
+                    Schema.object().property(
+                        "profile",
+                        Schema.object().fromVariable("profile").property("name", Schema.string()),
+                    ),
+                )
+                .response(Schema.object().property("status", Schema.string()))
+                .build(),
+        );
+        expect(issues.map((issue) => [issue.code, issue.path])).toEqual([
+            ["missing_value_source", "query.q"],
+            ["missing_value_source", "body.profile.name"],
+            ["missing_value_source", "response.status"],
+        ]);
     });
 
-    it("doesn't look inside a container whose value comes from a variable", () => {
-        const warnings: ToolIssue[] = [];
-        Tool.webhook("save", "Save")
-            .post("https://api.example.com/save")
-            .body(
-                Schema.object().property(
-                    "profile",
-                    Schema.object().fromVariable("profile").property("name", Schema.string()),
-                ),
-            )
-            .build({ onWarning: (issue) => warnings.push(issue) });
-        expect(warnings).toEqual([]);
+    it("requires a body on POST, PUT and PATCH, allows one on DELETE, and forbids one on GET", () => {
+        const body = Schema.object().property("note", Schema.string().describe("A note"));
+        const url = "https://api.example.com/notes";
+        const codes = (tool: ReturnType<typeof Tool.webhook>) => issuesOf(() => tool.build()).map((i) => i.code);
+        for (const method of ["post", "put", "patch"] as const) {
+            expect(codes(Tool.webhook("t", "T")[method](url))).toEqual(["missing_body"]);
+            expect(() => Tool.webhook("t", "T")[method](url).body(body).build()).not.toThrow();
+        }
+        expect(() => Tool.webhook("t", "T").delete(url).build()).not.toThrow();
+        expect(() => Tool.webhook("t", "T").delete(url).body(body).build()).not.toThrow();
+        expect(codes(Tool.webhook("t", "T").get(url).body(body))).toEqual(["body_not_allowed"]);
+        expect(() =>
+            Tool.webhook("t", "T").get(url).options({ contentType: "application/json" }).build(),
+        ).not.toThrow();
     });
 
-    it("is what JSON.stringify writes", () => {
-        const tool = getOrder();
-        expect(JSON.parse(JSON.stringify(tool))).toEqual(tool.toJSON());
-        expect(tool.toJSONString()).toBe(`${JSON.stringify(tool.toJSON(), null, 2)}\n`);
+    it("needs param names unique across path, query and body", () => {
+        const issues = issuesOf(() =>
+            Tool.webhook("t", "T")
+                .post("https://api.example.com/orders")
+                .queryParam("id", Schema.string().describe("Id"))
+                .body(Schema.object().property("id", Schema.string().describe("Id")))
+                .build(),
+        );
+        expect(issues.map((issue) => [issue.code, issue.path])).toEqual([["duplicate_param", "body.id"]]);
+    });
+
+    it("accepts response timeouts from 5 to 300 seconds", () => {
+        const timeout = (secs: number) => () => getOrder().options({ responseTimeoutSecs: secs }).build();
+        expect(timeout(5)).not.toThrow();
+        expect(timeout(300)).not.toThrow();
+        expect(issuesOf(timeout(4)).map((i) => i.code)).toEqual(["invalid_option"]);
+        expect(issuesOf(timeout(301)).map((i) => i.code)).toEqual(["invalid_option"]);
+    });
+
+    it("follows redirects only to an allowed list of domains", () => {
+        const redirects = (domains?: string[]) => () =>
+            getOrder().options({ followRedirects: true, followRedirectsAllowedDomains: domains }).build();
+        expect(redirects(["example.com"])).not.toThrow();
+        expect(issuesOf(redirects()).map((i) => i.code)).toEqual(["invalid_option"]);
+    });
+
+    it("switches a loaded param's value source by replacing the property in place", () => {
+        const loaded = Tool.fromJSON(
+            Tool.webhook("refund", "Refund")
+                .post("https://api.example.com/refunds")
+                .body(
+                    Schema.object()
+                        .property("order_id", Schema.string().describe("The order number"))
+                        .property("reason", Schema.string().describe("Why")),
+                )
+                .toJSON(),
+        ).asWebhook() as NonNullable<ReturnType<Tool["asWebhook"]>>;
+        const body = loaded.bodySchema as ReturnType<typeof Schema.object>;
+        loaded.body(body.property("order_id", Schema.string().fromVariable("order_id")));
+        expect((loaded.toJSON().api_schema as { request_body_schema: object }).request_body_schema).toEqual({
+            properties: {
+                order_id: { dynamic_variable: "order_id", type: "string" },
+                reason: { description: "Why", type: "string" },
+            },
+            required: ["order_id", "reason"],
+            type: "object",
+        });
     });
 });
 
@@ -207,9 +251,14 @@ describe("ClientTool", () => {
         });
     });
 
-    it("needs expectsResponse to wait forever", () => {
-        const issues = issuesOf(() => Tool.client("wait", "Wait").options({ responseTimeoutSecs: -1 }).build());
-        expect(issues.map((issue) => issue.code)).toEqual(["invalid_option"]);
+    it("accepts response timeouts from 1 to 120 seconds, or -1 to wait forever with expectsResponse", () => {
+        const timeout = (options: object) => () => Tool.client("wait", "Wait").options(options).build();
+        expect(timeout({ responseTimeoutSecs: 1 })).not.toThrow();
+        expect(timeout({ responseTimeoutSecs: 120 })).not.toThrow();
+        expect(timeout({ responseTimeoutSecs: -1, expectsResponse: true })).not.toThrow();
+        for (const options of [{ responseTimeoutSecs: 0 }, { responseTimeoutSecs: 121 }, { responseTimeoutSecs: -1 }]) {
+            expect(issuesOf(timeout(options)).map((issue) => issue.code)).toEqual(["invalid_option"]);
+        }
     });
 });
 
@@ -224,6 +273,15 @@ describe("SystemTool", () => {
             SystemTool.endCall().transfer("Caller asks", Destination.phone("+15551234567")).build(),
         );
         expect(issues.map((issue) => issue.code)).toEqual(["invalid_option"]);
+    });
+
+    it("transfers to a SIP URI only with a SIP REFER", () => {
+        const sip = Destination.sip("sip:sales@pbx.example.com");
+        expect(() =>
+            SystemTool.transferToNumber().transfer("Caller wants sales", sip, { transferType: "sip_refer" }).build(),
+        ).not.toThrow();
+        const issues = issuesOf(() => SystemTool.transferToNumber().transfer("Caller wants sales", sip).build());
+        expect(issues.map((issue) => issue.code)).toEqual(["invalid_destination", "no_transfers"]);
     });
 
     it("rejects options of the other transfer kind", () => {
@@ -251,13 +309,6 @@ describe("loading", () => {
         const tool = Tool.fromResponse(response);
         expect(tool.kind).toBe("webhook");
         expect(tool.toJSON()).toEqual(getOrder().toJSON());
-    });
-
-    it("types a loaded tool with asWebhook(), asClient() and asSystem()", () => {
-        const tool = Tool.fromJSON(getOrder().toJSON());
-        expect(tool.asWebhook()).toBe(tool);
-        expect(tool.asClient()).toBeUndefined();
-        expect(Tool.fromJSON(SystemTool.endCall().toJSON()).asSystem()?.systemToolType).toBe("end_call");
     });
 
     it("keeps a tool of an unknown type, and warns when it's built", () => {

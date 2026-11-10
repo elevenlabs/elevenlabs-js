@@ -51,7 +51,17 @@
           "type": "string",
           "allowed_values": {
             "dynamic_variable": "ids"
-          }
+          },
+          "dynamic_variable": "id"
+        }
+      ]
+    },
+    {
+      "op": "param",
+      "args": [
+        "no_source",
+        {
+          "type": "string"
         }
       ]
     },
@@ -102,6 +112,25 @@
           "description": "No items"
         }
       ]
+    },
+    {
+      "op": "param",
+      "args": [
+        "empty_constant",
+        {
+          "build": [
+            {
+              "op": "string"
+            },
+            {
+              "op": "constant",
+              "args": [
+                ""
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "errors": [
@@ -109,6 +138,8 @@
     "omitted_required",
     "invalid_choices",
     "allowed_values_needs_description",
+    "missing_value_source",
+    "constant_type_mismatch",
     "constant_type_mismatch",
     "unknown_required_property",
     "missing_array_items"

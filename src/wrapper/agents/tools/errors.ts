@@ -5,6 +5,8 @@ export type ToolIssueCode =
     | "param_not_literal"
     | "body_not_object"
     | "body_not_allowed"
+    | "missing_body"
+    | "duplicate_param"
     | "conflicting_value_source"
     | "omitted_required"
     | "invalid_choices"
@@ -16,7 +18,7 @@ export type ToolIssueCode =
     | "invalid_destination"
     | "no_transfers"
     | "invalid_option"
-    | "missing_description"
+    | "missing_value_source"
     | "unknown_tool_type";
 
 export interface ToolIssue {

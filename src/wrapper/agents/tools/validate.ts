@@ -2,8 +2,6 @@ import type { ToolIssue } from "./errors";
 import type { Schema, SchemaKind } from "./Schema";
 
 export interface SchemaCheckOptions {
-    /** Warn about literals with no value source, so the LLM gets no description of them. */
-    warnMissingDescription: boolean;
     /** The schema is a property (or a param), so `omit()` needs it to be optional. */
     isProperty: boolean;
 }
@@ -44,18 +42,22 @@ export function checkSchema(schema: Schema, path: string, options: SchemaCheckOp
     }
     if (s.hasConstant && !matchesKind(s.kind, s.constantValue)) {
         issues.push(error("constant_type_mismatch", path, `"${path}" has a constant that isn't a ${s.kind}`));
+    } else if (s.hasConstant && s.constantValue === "") {
+        issues.push(
+            error("constant_type_mismatch", path, `"${path}" can't have "" as a constant: the API reads it as unset`),
+        );
     }
-    if (sources === 0 && isLiteral(s.kind) && options.warnMissingDescription) {
-        issues.push({
-            code: "missing_description",
-            severity: "warning",
-            message: `"${path}" has no describe(), fromVariable(), constant(), systemProvided() or omit(), so the LLM gets no description of it`,
-            path,
-        });
+    // The API rejects a literal with no value source wherever it appears, response schemas included.
+    if (sources === 0 && isLiteral(s.kind)) {
+        issues.push(
+            error(
+                "missing_value_source",
+                path,
+                `"${path}" needs one of describe(), fromVariable(), constant(), systemProvided() or omit()`,
+            ),
+        );
     }
 
-    // A container whose value comes from somewhere other than the LLM never asks the LLM for its parts.
-    const llmProvided = s.dynamicVariable === undefined && !s.hasConstant && !s.omitted;
     if (s.kind === "object") {
         const names = s.properties.map(([name]) => name);
         for (const group of [...s.anyOf, ...s.allOf]) {
@@ -69,16 +71,14 @@ export function checkSchema(schema: Schema, path: string, options: SchemaCheckOp
                 );
             }
         }
-        if (llmProvided) {
-            for (const [name, child] of s.properties) {
-                checkSchema(child, `${path}.${name}`, { ...options, isProperty: true }, issues);
-            }
+        for (const [name, child] of s.properties) {
+            checkSchema(child, `${path}.${name}`, { ...options, isProperty: true }, issues);
         }
     }
     if (s.kind === "array") {
         if (s.items === undefined) {
             issues.push(error("missing_array_items", path, `Array "${path}" has no items schema`));
-        } else if (llmProvided) {
+        } else {
             checkSchema(s.items, `${path}[]`, { ...options, isProperty: false }, issues);
         }
     }

@@ -99,6 +99,7 @@ const WEBHOOK_OPTIONS = [
     "followRedirectsAllowedDomains",
 ];
 const CLIENT_OPTIONS = [...COMMON_OPTIONS, "dynamicVariablePlaceholders", "executionMode", "expectsResponse"];
+const ENV_VAR_TEMPLATE = /\{\{system__env_[a-z][a-z0-9_]*\}\}/g;
 const PHONE_TRANSFER_OPTIONS = ["transferType", "customSipHeaders", "sipReferPlayDialtone", "uui", "postDialDigits"];
 const AGENT_TRANSFER_OPTIONS = [
     "delayMs",
@@ -218,8 +219,9 @@ export abstract class Tool {
     }
 
     /**
-     * Validates the tool and returns only its config: for an agent's inline `prompt.tools`, or for a system tool,
-     * its entry in `prompt.builtInTools`.
+     * Validates the tool and returns only its config: for a system tool, its entry in `prompt.builtInTools`.
+     * Create webhook and client tools with `tools.create(tool.build())` and attach them by id in `prompt.toolIds`;
+     * the inline `prompt.tools` field is deprecated, and replaces `builtInTools` with the system tools it contains.
      *
      * @throws {ToolValidationError} listing every problem, if the tool is invalid
      */
@@ -445,8 +447,12 @@ export class WebhookTool extends Tool {
                 ),
             );
         }
-        const placeholders = [...(url ?? "").matchAll(/\{([^{}/]+)\}/g)].map((match) => match[1]);
-        for (const name of placeholders.filter((p) => !this._pathParams.has(p))) {
+        // As the API does: env var templates aren't placeholders, and the auth connection fills `authResolvedParams`.
+        const placeholders = [...(url ?? "").replace(ENV_VAR_TEMPLATE, "env").matchAll(/\{([^{}]+)\}/g)].map(
+            (match) => match[1],
+        );
+        const authResolved = (this._api.authResolvedParams as string[] | undefined) ?? [];
+        for (const name of placeholders.filter((p) => !this._pathParams.has(p) && !authResolved.includes(p))) {
             issues.push(
                 error("missing_path_param", `pathParams.${name}`, `The URL has {${name}} but no pathParam("${name}")`),
             );
@@ -455,13 +461,17 @@ export class WebhookTool extends Tool {
             const path = `pathParams.${name}`;
             if (url !== undefined && !placeholders.includes(name)) {
                 issues.push(error("unknown_path_param", path, `pathParam("${name}") has no {${name}} in the URL`));
+            } else if (authResolved.includes(name)) {
+                issues.push(
+                    error("unknown_path_param", path, `{${name}} is filled by the auth connection, not a pathParam`),
+                );
             }
             if (!isLiteral(schema.kind)) {
                 issues.push(
                     error("param_not_literal", path, `Path param "${name}" must be a string, integer, number or bool`),
                 );
             }
-            checkSchema(schema, path, { warnMissingDescription: true, isProperty: true }, issues);
+            checkSchema(schema, path, { isProperty: true }, issues);
         }
         if (this._query !== undefined) {
             for (const name of this._query.propertyNames) {
@@ -476,12 +486,12 @@ export class WebhookTool extends Tool {
                         ),
                     );
                 }
-                checkSchema(schema, path, { warnMissingDescription: true, isProperty: true }, issues);
+                checkSchema(schema, path, { isProperty: true }, issues);
             }
         }
-        for (const [label, schema, warn] of [
-            ["body", this._body, true],
-            ["response", this._response, false],
+        for (const [label, schema] of [
+            ["body", this._body],
+            ["response", this._response],
         ] as const) {
             if (schema === undefined) {
                 continue;
@@ -489,10 +499,35 @@ export class WebhookTool extends Tool {
             if (schema.kind !== "object") {
                 issues.push(error("body_not_object", label, `The ${label} schema must be an object`));
             }
-            checkSchema(schema, label, { warnMissingDescription: warn, isProperty: false }, issues);
+            checkSchema(schema, label, { isProperty: false }, issues);
         }
-        if (this._api.method === "GET" && (this._body !== undefined || this._api.contentType !== undefined)) {
-            issues.push(error("body_not_allowed", "body", "A GET request can't have a body or contentType"));
+        const method = this._api.method;
+        if (method === "GET" && this._body !== undefined) {
+            issues.push(error("body_not_allowed", "body", "A GET request can't have a body"));
+        }
+        if ((method === "POST" || method === "PUT" || method === "PATCH") && this._body === undefined) {
+            issues.push(error("missing_body", "body", `A ${method} request needs a body`));
+        }
+        const where = new Map<string, string>();
+        for (const [location, names] of [
+            ["pathParams", [...this._pathParams.keys()]],
+            ["query", this._query?.propertyNames ?? []],
+            ["body", this._body?.kind === "object" ? (this._body as ObjectSchema).propertyNames : []],
+        ] as const) {
+            for (const name of names) {
+                const first = where.get(name);
+                if (first !== undefined) {
+                    issues.push(
+                        error(
+                            "duplicate_param",
+                            `${location}.${name}`,
+                            `"${name}" is in both ${first} and ${location}; param names must be unique across path, query and body`,
+                        ),
+                    );
+                } else {
+                    where.set(name, location);
+                }
+            }
         }
         const seen = new Map<string, string>();
         for (const name of this._headers.keys()) {
@@ -590,7 +625,7 @@ export class ClientTool extends Tool {
         if (this._parameters !== undefined) {
             for (const name of this._parameters.propertyNames) {
                 const schema = this._parameters.propertySchema(name) as Schema;
-                checkSchema(schema, `params.${name}`, { warnMissingDescription: true, isProperty: true }, issues);
+                checkSchema(schema, `params.${name}`, { isProperty: true }, issues);
             }
         }
         const timeout = this._config.responseTimeoutSecs as number | undefined;
@@ -746,6 +781,17 @@ export class SystemTool extends Tool {
         }
         const settings = Object.fromEntries(Object.entries(options).filter(([key]) => allowed.includes(key)));
         const { type: _type, ...target } = model;
+        const sipUri = ((target as Model).transferDestination as Model | undefined)?.type === "sip_uri";
+        if (sipUri && settings.transferType !== "sip_refer") {
+            this._issues.push(
+                error(
+                    "invalid_destination",
+                    "transfer",
+                    `A SIP URI destination needs { transferType: "sip_refer" } ("${condition}")`,
+                ),
+            );
+            return this;
+        }
         const entry = defined({ ...target, ...settings, condition });
         this._params.transfers = [...((this._params.transfers ?? []) as Model[]), entry];
         return this;

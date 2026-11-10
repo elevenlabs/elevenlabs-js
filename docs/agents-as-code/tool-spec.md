@@ -65,7 +65,7 @@ Names are given in camelCase. Each SDK applies its own casing, as in the workflo
 | `kind` | `"webhook"`, `"client"`, `"system"`, or `"other"` for a loaded tool of a type the builder has no constructor for. |
 | `asWebhook()` / `asClient()` / `asSystem()` | The same tool typed as that kind, or nothing (`undefined`, `None`, `nil`, `null`, empty `Option`) if it is another kind. For statically typed callers of `fromJSON`. |
 | `build(options?)` | Validates, then returns the SDK's `ToolRequestModel` (`{ toolConfig }`). `options.onWarning` is called once per warning. |
-| `buildConfig(options?)` | Validates, then returns only the tool config, for an agent's inline `prompt.tools` or, for a system tool, its `prompt.built_in_tools` entry. |
+| `buildConfig(options?)` | Validates, then returns only the tool config: for a system tool, its `prompt.built_in_tools` entry. Webhook and client tools go to `tools.create` and are attached by id in `prompt.tool_ids`. The API still accepts them inline in `prompt.tools`, but that field is deprecated, can't be combined with `tool_ids`, and replaces `built_in_tools` with the system tools it contains. |
 | `toJSON()` | The wire-format tool config (the `tool_config` object, with its `type`). Validates like `build()`. |
 | `toJSONString()` | The canonical file format, as in the workflow spec. |
 | `Tool.fromJSON(json)` | Loads wire-format JSON, a string or a parsed object: a bare tool config, or a request or response with a `tool_config` key. Returns a tool of the matching kind. |
@@ -147,7 +147,7 @@ The literal constructors return a `LiteralSchema`, `object()` an `ObjectSchema` 
 | `Schema.object()` | `object` |
 | `Schema.array(items)` | `array`, with `items` set to the `Schema` given |
 
-**Where the value comes from.** At most one of these may be set on a schema. With none, the value is LLM-provided with no description.
+**Where the value comes from.** Every literal needs exactly one of these, wherever it appears: in params, in a body, in a response schema, and under a container whose own value comes from a variable or a constant. The API checks each one. An object or array may have at most one, and needs none.
 
 | Method | Wire field | Applies to |
 |---|---|---|
@@ -195,6 +195,7 @@ The workflow spec's rules apply. Tool-specific notes:
 - **Only what was set.** The builder writes the fields the program set, plus the ones the API requires (`type`, `name`, `description`, `api_schema.url`, a literal's `type`). It never fills in API defaults.
 - **`required`.** Emitted in property insertion order, and left out when empty. A loaded schema keeps its `required` order for the properties it still has; new required properties follow in insertion order.
 - **Arrays the program builds** (`assignments`, `transfers`, `required_constraints`) keep call order.
+- **API defaults.** A config pulled from the API fills unset fields with defaults: `""` for `description` and `dynamic_variable`, `""` for a literal's `constant_value`, `false` for `is_system_provided` and `is_omitted`, and empty `required` and `properties`. A loaded default is not a value source. It is written back as loaded, and setting that field replaces it. `null` values are read as absent and are not written back.
 - **Loaded fields the builder doesn't model** (such as a loaded `request_headers` value of a kind `Header` doesn't cover) are kept exactly as loaded.
 
 ## Validation
@@ -205,25 +206,27 @@ The workflow spec's rules apply. Tool-specific notes:
 |---|---|---|
 | `missing_url` | error | A webhook tool has no method and URL |
 | `missing_path_param` | error | The URL has a `{name}` placeholder with no path param |
-| `unknown_path_param` | error | A path param has no `{name}` placeholder in the URL |
+| `unknown_path_param` | error | A path param has no `{name}` placeholder in the URL, or its placeholder is filled by the auth connection |
 | `param_not_literal` | error | A path or query param is an object or array |
 | `body_not_object` | error | `body()` or `response()` is given a schema that isn't an object |
-| `body_not_allowed` | error | A body or `contentType` is set on a `GET` |
+| `body_not_allowed` | error | A body is set on a `GET` (`contentType` is allowed; the API sets it on every webhook) |
+| `missing_body` | error | A `POST`, `PUT` or `PATCH` has no body. A `DELETE` may have one or not |
+| `duplicate_param` | error | A name is used in more than one of the path params, query params and body properties |
 | `conflicting_value_source` | error | A schema sets more than one of `describe`, `fromVariable`, `constant`, `systemProvided`, `omit` |
 | `omitted_required` | error | `omit()` is used on a schema that isn't optional |
 | `invalid_choices` | error | `choices` is used on a schema that isn't a string |
 | `allowed_values_needs_description` | error | `allowedFrom` is used without `describe` |
-| `constant_type_mismatch` | error | A constant's JSON type doesn't match the schema type |
+| `constant_type_mismatch` | error | A constant's JSON type doesn't match the schema type, or a literal's constant is `""`, which the API reads as unset |
 | `unknown_required_property` | error | A name in `requireAnyOf` / `requireAllOf` isn't a property of the object |
 | `missing_array_items` | error | An array schema has no `items` (only possible when loaded) |
 | `duplicate_header` | error | Two header names differ only in case |
-| `invalid_destination` | error | `transferToNumber` is given an agent destination, or `transferToAgent` a phone or SIP one |
+| `invalid_destination` | error | `transferToNumber` is given an agent destination, or a SIP URI destination without `transferType: "sip_refer"` (the API defaults to `conference`); or `transferToAgent` a phone or SIP one |
 | `no_transfers` | error | A transfer system tool has no `transfer()` entries |
 | `invalid_option` | error | An option doesn't apply to the tool's kind, or a documented range is broken: a webhook `responseTimeoutSecs` outside 5–300, a client one outside 1–120 other than -1, -1 without `expectsResponse: true`, or `followRedirects` without `followRedirectsAllowedDomains` |
-| `missing_description` | warning | A literal on a webhook or client tool has no value source, so the LLM gets no description of it |
+| `missing_value_source` | error | A literal has none of `describe`, `fromVariable`, `constant`, `systemProvided`, `omit` |
 | `unknown_tool_type` | warning | A loaded tool's type has no constructor in this SDK version (kind `"other"`); it round-trips but can't be edited |
 
-Path-placeholder matching uses `{name}` where `name` is one or more characters other than `{`, `}` and `/`.
+Path-placeholder matching uses `{name}` where `name` is one or more characters other than `{` and `}`, as the API does. Environment variable templates (`{{system__env_<label>}}`, label matching `[a-z][a-z0-9_]*`) aren't placeholders. A placeholder listed in a loaded `api_schema.auth_resolved_params` is filled by the auth connection: it needs no path param, and may not have one (`unknown_path_param`).
 
 ## Fixtures
 
@@ -241,7 +244,7 @@ Path-placeholder matching uses `{name}` where `name` is one or more characters o
 
 Each op calls one tool method. `{"op": "<method>", "args": [ … ]}`, where a schema argument is in wire format and loaded with `Schema.fromJSON`, or `{"build": [ops]}` for a schema built with `Schema` methods (needed for `optional()`, which has no wire form of its own), a header is `{"value"}`, `{"secret"}`, `{"variable"}` or `{"envVar"}`, and a destination is as in the workflow fixtures. Schema-only cases use `{"schema": <ops>}`, where the first op is a constructor (`string`, `integer`, `number`, `bool`, `object`, `array` with a schema argument, or `fromJSON` with a wire schema), each later op is a method called on the previous result, and `expected` is `schema.toJSON()`. In JS the runner is `tests/custom/agents/tools/fixtureRunner.ts`.
 
-The fixtures cover the example above, both transfer tools and a system tool with params, every value source, `required` order across a load, a replacement and a `without`, editing a loaded tool, a byte-identical round-trip with fields the builder doesn't model, an unknown tool type, and every validation error.
+The fixtures cover the example above, both transfer tools and a system tool with params, every value source, `required` order across a load, a replacement and a `without`, editing a loaded tool, a byte-identical round-trip with fields the builder doesn't model, a config with the API's defaults for unset fields, an unknown tool type, and every validation error.
 
 ## Not yet covered
 
@@ -249,3 +252,4 @@ The fixtures cover the example above, both transfer tools and a system tool with
 - MCP tools and API-integration webhook tools. They load as kind `"other"` and round-trip.
 - The `start_procedure` and `end_procedure` system tools, until the procedures builder exists to name the procedures they refer to.
 - Checking an agent's tool references (workflow `tool()` nodes, `prompt.tool_ids`) against the tools defined in code. That belongs to the `Agent` builder.
+- The API's rule that a body sent with a content type other than JSON has no nested objects, arrays of objects or nested arrays. `build()` doesn't check it yet.

@@ -1,6 +1,6 @@
 {
   "name": "System tool errors",
-  "description": "An agent destination on transferToNumber leaves it with no transfers; an option that doesn't apply to system tools.",
+  "description": "An agent destination, and a SIP URI destination without transferType \"sip_refer\", on transferToNumber leave it with no transfers; an option that doesn't apply to system tools.",
   "tool": {
     "system": "transfer_to_number"
   },
@@ -15,6 +15,15 @@
       ]
     },
     {
+      "op": "transfer",
+      "args": [
+        "Caller is a partner",
+        {
+          "sip": "sip:partners@pbx.example.com"
+        }
+      ]
+    },
+    {
       "op": "options",
       "args": [
         {
@@ -24,6 +33,7 @@
     }
   ],
   "errors": [
+    "invalid_destination",
     "invalid_destination",
     "no_transfers",
     "invalid_option"
