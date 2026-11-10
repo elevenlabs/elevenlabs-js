@@ -263,9 +263,15 @@ describe("ClientTool", () => {
 });
 
 describe("SystemTool", () => {
-    it("builds an entry for prompt.builtInTools", () => {
-        const config = SystemTool.endCall().buildConfig();
-        expect(config).toEqual({ type: "system", name: "end_call", params: { systemToolType: "end_call" } });
+    it("builds an entry that agents.create() accepts in prompt.builtInTools", () => {
+        const prompt: ElevenLabs.PromptAgentApiModelOutput = {
+            builtInTools: { endCall: SystemTool.endCall().buildConfig() },
+        };
+        expect(prompt.builtInTools?.endCall).toEqual({
+            type: "system",
+            name: "end_call",
+            params: { systemToolType: "end_call" },
+        });
     });
 
     it("rejects transfer() on a tool that doesn't transfer", () => {

@@ -420,6 +420,11 @@ export class WebhookTool extends Tool {
         return this._response;
     }
 
+    /** Merges options for webhook tools. A key that doesn't apply is reported by `build()`. */
+    options(options: WebhookToolOptions): this {
+        return super.options(options);
+    }
+
     /** @internal */
     protected _allowedOptions(): string[] {
         return WEBHOOK_OPTIONS;
@@ -614,6 +619,11 @@ export class ClientTool extends Tool {
         return this._parameters;
     }
 
+    /** Merges options for client tools. A key that doesn't apply is reported by `build()`. */
+    options(options: ClientToolOptions): this {
+        return super.options(options);
+    }
+
     /** @internal */
     protected _allowedOptions(): string[] {
         return CLIENT_OPTIONS;
@@ -795,6 +805,15 @@ export class SystemTool extends Tool {
         const entry = defined({ ...target, ...settings, condition });
         this._params.transfers = [...((this._params.transfers ?? []) as Model[]), entry];
         return this;
+    }
+
+    /**
+     * Validates the tool and returns its entry for the agent's `prompt.builtInTools`.
+     *
+     * @throws {ToolValidationError} listing every problem, if the tool is invalid
+     */
+    buildConfig(options: ToolBuildOptions = {}): ElevenLabs.ToolRequestModelToolConfig.System {
+        return super.buildConfig(options) as ElevenLabs.ToolRequestModelToolConfig.System;
     }
 
     /** @internal */
