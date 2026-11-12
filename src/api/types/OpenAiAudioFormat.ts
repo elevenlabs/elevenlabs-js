@@ -3,6 +3,5 @@
 export const OpenAiAudioFormat = {
     AudioPcm: "audio/pcm",
     AudioPcmu: "audio/pcmu",
-    AudioPcma: "audio/pcma",
 } as const;
 export type OpenAiAudioFormat = (typeof OpenAiAudioFormat)[keyof typeof OpenAiAudioFormat];

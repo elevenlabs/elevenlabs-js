@@ -521,7 +521,7 @@ export class BatchCallsClient {
     }
 
     /**
-     * Download all recipients and conversation results for a terminal batch call as CSV.
+     * Download all recipients and conversation results for a batch call as CSV, including calls that are still in progress.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
      * @throws {@link errors.ElevenLabsError}

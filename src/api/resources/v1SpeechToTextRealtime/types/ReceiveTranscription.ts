@@ -9,6 +9,8 @@ export type ReceiveTranscription =
     | ElevenLabs.SessionStartedPayload
     | ElevenLabs.PartialTranscriptPayload
     | ElevenLabs.CommittedTranscriptPayload
+    | ElevenLabs.DiarizedTranscript
+    | ElevenLabs.SpeakersMerged
     | ElevenLabs.CommittedTranscriptWithTimestampsPayload
     | ElevenLabs.CommittedTranscriptEntitiesPayload
     | ElevenLabs.RedactedTranscript

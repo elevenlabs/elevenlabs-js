@@ -5,6 +5,8 @@ export interface PromptAgentApiModelOverrideConfig {
     prompt?: boolean;
     /** Whether to allow overriding the llm field. */
     llm?: boolean;
+    /** Whether to allow overriding the reasoning_effort field. */
+    reasoningEffort?: boolean;
     /** Whether to allow overriding the tool_ids field. */
     toolIds?: boolean;
     /** Whether to allow overriding the tool_ids_strict field. */

@@ -22,6 +22,7 @@ export const SupportedVoice: core.serialization.ObjectSchema<
     stability: core.serialization.number().optional(),
     speed: core.serialization.number().optional(),
     similarityBoost: core.serialization.property("similarity_boost", core.serialization.number().optional()),
+    cloneStrength: core.serialization.property("clone_strength", core.serialization.number().optional()),
 });
 
 export declare namespace SupportedVoice {
@@ -35,5 +36,6 @@ export declare namespace SupportedVoice {
         stability?: number | null;
         speed?: number | null;
         similarity_boost?: number | null;
+        clone_strength?: number | null;
     }
 }

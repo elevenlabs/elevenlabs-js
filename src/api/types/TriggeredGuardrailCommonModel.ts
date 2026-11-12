@@ -5,4 +5,8 @@ import type * as ElevenLabs from "../index";
 export interface TriggeredGuardrailCommonModel {
     guardrailType: ElevenLabs.GuardrailType;
     guardrailName?: string;
+    /** `blocking` if the agent's response waited for the guardrail, `streaming` if the guardrail ran while the response was sent. */
+    executionMode?: ElevenLabs.GuardrailExecutionMode;
+    /** Why the guardrail triggered: the LLM's rationale for custom guardrails, or the score and threshold for moderation and content guardrails. */
+    guardrailDetails?: ElevenLabs.TriggeredGuardrailCommonModelGuardrailDetails;
 }

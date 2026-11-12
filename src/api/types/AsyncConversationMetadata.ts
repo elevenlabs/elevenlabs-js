@@ -15,4 +15,6 @@ export interface AsyncConversationMetadata {
     retryCount?: number;
     lastRetryTimestamp?: number;
     lastProcessedExternalMessageId?: string;
+    integrationTriggerId?: string;
+    platformMetadata?: ElevenLabs.AsyncConversationMetadataPlatformMetadata;
 }

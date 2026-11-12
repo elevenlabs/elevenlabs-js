@@ -13,5 +13,7 @@ export interface UpdateOAuth2JwtRequest {
     extraParams?: Record<string, string | undefined>;
     scopes?: string[];
     tokenResponseField?: ElevenLabs.UpdateOAuth2JwtRequestTokenResponseField;
+    jwtUsage?: ElevenLabs.UpdateOAuth2JwtRequestJwtUsage;
+    extraHeaders?: Record<string, string | undefined>;
     secretKey?: string;
 }

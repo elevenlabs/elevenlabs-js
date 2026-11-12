@@ -20,6 +20,7 @@ import { KnowledgeBaseClient } from "../resources/knowledgeBase/client/Client";
 import { LlmClient } from "../resources/llm/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
 import { McpServersClient } from "../resources/mcpServers/client/Client";
+import { OutboundCampaignsClient } from "../resources/outboundCampaigns/client/Client";
 import { PhoneNumbersClient } from "../resources/phoneNumbers/client/Client";
 import { RealtimeClient } from "../resources/realtime/client/Client";
 import { SecretsClient } from "../resources/secrets/client/Client";
@@ -61,6 +62,7 @@ export class ConversationalAiClient {
     protected _sipTrunk: SipTrunkClient | undefined;
     protected _mcpServers: McpServersClient | undefined;
     protected _whatsappAccounts: WhatsappAccountsClient | undefined;
+    protected _outboundCampaigns: OutboundCampaignsClient | undefined;
     protected _realtime: RealtimeClient | undefined;
     protected _analytics: AnalyticsClient | undefined;
     protected _dashboard: DashboardClient | undefined;
@@ -147,6 +149,10 @@ export class ConversationalAiClient {
 
     public get whatsappAccounts(): WhatsappAccountsClient {
         return (this._whatsappAccounts ??= new WhatsappAccountsClient(this._options));
+    }
+
+    public get outboundCampaigns(): OutboundCampaignsClient {
+        return (this._outboundCampaigns ??= new OutboundCampaignsClient(this._options));
     }
 
     public get realtime(): RealtimeClient {

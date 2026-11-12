@@ -3,13 +3,14 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ConvAiEnvVarLocator } from "./ConvAiEnvVarLocator";
 import { ConvAiSecretLocator } from "./ConvAiSecretLocator";
 
 export const ConversationInitiationClientDataWebhookRequestHeadersValue: core.serialization.Schema<
     serializers.ConversationInitiationClientDataWebhookRequestHeadersValue.Raw,
     ElevenLabs.ConversationInitiationClientDataWebhookRequestHeadersValue
-> = core.serialization.undiscriminatedUnion([core.serialization.string(), ConvAiSecretLocator]);
+> = core.serialization.undiscriminatedUnion([core.serialization.string(), ConvAiSecretLocator, ConvAiEnvVarLocator]);
 
 export declare namespace ConversationInitiationClientDataWebhookRequestHeadersValue {
-    export type Raw = string | ConvAiSecretLocator.Raw;
+    export type Raw = string | ConvAiSecretLocator.Raw | ConvAiEnvVarLocator.Raw;
 }

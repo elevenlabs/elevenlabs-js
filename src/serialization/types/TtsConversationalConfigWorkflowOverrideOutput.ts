@@ -35,6 +35,7 @@ export const TtsConversationalConfigWorkflowOverrideOutput: core.serialization.O
     stability: core.serialization.number().optional(),
     speed: core.serialization.number().optional(),
     similarityBoost: core.serialization.property("similarity_boost", core.serialization.number().optional()),
+    cloneStrength: core.serialization.property("clone_strength", core.serialization.number().optional()),
     textNormalisationType: core.serialization.property("text_normalisation_type", TextNormalisationType.optional()),
     pronunciationDictionaryLocators: core.serialization.property(
         "pronunciation_dictionary_locators",
@@ -56,6 +57,7 @@ export declare namespace TtsConversationalConfigWorkflowOverrideOutput {
         stability?: number | null;
         speed?: number | null;
         similarity_boost?: number | null;
+        clone_strength?: number | null;
         text_normalisation_type?: TextNormalisationType.Raw | null;
         pronunciation_dictionary_locators?: PydanticPronunciationDictionaryVersionLocator.Raw[] | null;
         enable_phoneme_tags?: boolean | null;

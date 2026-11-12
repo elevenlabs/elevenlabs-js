@@ -5,7 +5,7 @@ import type * as ElevenLabs from "../index";
 export interface AttachedUserEvaluationRef {
     /** Id of the referenced user evaluation item. */
     analysisItemId: string;
-    /** Primary item version whose result feeds scoring. None tracks the item's latest published version. */
+    /** Primary item version whose result feeds scoring. 'latest' tracks the item's latest published version. */
     versionId?: string;
     /** Extra item versions to also run for comparison (A/B). These are executed and stored but excluded from scoring; the primary version_id is the one that scores. */
     additionalVersionIds?: string[];

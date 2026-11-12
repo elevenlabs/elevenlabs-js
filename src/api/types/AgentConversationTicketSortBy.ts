@@ -3,6 +3,7 @@
 export const AgentConversationTicketSortBy = {
     CreatedAt: "created_at",
     Priority: "priority",
+    LastReported: "last_reported",
 } as const;
 export type AgentConversationTicketSortBy =
     (typeof AgentConversationTicketSortBy)[keyof typeof AgentConversationTicketSortBy];

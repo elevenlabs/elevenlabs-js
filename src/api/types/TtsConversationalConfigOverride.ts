@@ -15,6 +15,8 @@ export interface TtsConversationalConfigOverride {
     speed?: number;
     /** The similarity boost for generated speech */
     similarityBoost?: number;
+    /** The clone strength for generated speech */
+    cloneStrength?: number;
     /** The pronunciation dictionary locators */
     pronunciationDictionaryLocators?: ElevenLabs.PydanticPronunciationDictionaryVersionLocator[];
 }

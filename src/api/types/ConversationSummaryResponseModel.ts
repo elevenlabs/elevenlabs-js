@@ -10,6 +10,10 @@ export interface ConversationSummaryResponseModel {
     conversationId: string;
     startTimeUnixSecs: number;
     callDurationSecs: number;
+    /** Total cost of the conversation in credits. */
+    cost?: number;
+    /** Total fiat cost of the conversation in USD. `None` for conversations that predate fiat cost tracking. */
+    costFiat?: number;
     /** Number of transcript turns with text; tool-only turns are not counted. */
     messageCount: number;
     /** Number of user transcript turns with text; tool-only turns are not counted. `null` for older conversations before this field whose transcript was deleted. */

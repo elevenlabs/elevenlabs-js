@@ -3,5 +3,6 @@
 import type * as ElevenLabs from "../index";
 
 export interface LlmUsageOutput {
+    /** Token usage and USD price per LLM, keyed by model ID and broken down by token category. */
     modelUsage?: Record<string, ElevenLabs.LlmInputOutputTokensUsage>;
 }

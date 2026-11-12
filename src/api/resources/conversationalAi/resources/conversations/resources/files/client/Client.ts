@@ -24,6 +24,158 @@ export class FilesClient {
     }
 
     /**
+     * Download a file the user attached to a conversation, including while the conversation is still active.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     */
+    public get(
+        conversation_id: string,
+        file_id: string,
+        requestOptions?: FilesClient.RequestOptions,
+    ): core.HttpResponsePromise<ReadableStream<Uint8Array>> {
+        return core.HttpResponsePromise.fromPromise(this.__get(conversation_id, file_id, requestOptions));
+    }
+
+    private async __get(
+        conversation_id: string,
+        file_id: string,
+        requestOptions?: FilesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ReadableStream<Uint8Array>>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)<ReadableStream<Uint8Array>>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${core.url.encodePathParam(conversation_id)}/files/${core.url.encodePathParam(file_id)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            responseType: "streaming",
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/conversations/{conversation_id}/files/{file_id}",
+        );
+    }
+
+    /**
+     * Remove a file upload from a conversation. Only possible if the file hasn't already been used in the conversation.
+     *
+     * @param {string} conversation_id
+     * @param {string} file_id
+     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.conversations.files.delete("conversation_id", "file_id")
+     */
+    public delete(
+        conversation_id: string,
+        file_id: string,
+        requestOptions?: FilesClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.ConvAiFileUploadResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(conversation_id, file_id, requestOptions));
+    }
+
+    private async __delete(
+        conversation_id: string,
+        file_id: string,
+        requestOptions?: FilesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.ConvAiFileUploadResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${core.url.encodePathParam(conversation_id)}/files/${core.url.encodePathParam(file_id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.ConvAiFileUploadResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "DELETE",
+            "/v1/convai/conversations/{conversation_id}/files/{file_id}",
+        );
+    }
+
+    /**
      * Upload an image, PDF, or text file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
      *
      * @param {string} conversation_id
@@ -113,89 +265,6 @@ export class FilesClient {
             _response.rawResponse,
             "POST",
             "/v1/convai/conversations/{conversation_id}/files",
-        );
-    }
-
-    /**
-     * Remove a file upload from a conversation. Only possible if the file hasn't already been used in the conversation.
-     *
-     * @param {string} conversation_id
-     * @param {string} file_id
-     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link ElevenLabs.UnprocessableEntityError}
-     * @throws {@link errors.ElevenLabsError}
-     * @throws {@link errors.ElevenLabsTimeoutError}
-     *
-     * @example
-     *     await client.conversationalAi.conversations.files.delete("conversation_id", "file_id")
-     */
-    public delete(
-        conversation_id: string,
-        file_id: string,
-        requestOptions?: FilesClient.RequestOptions,
-    ): core.HttpResponsePromise<ElevenLabs.ConvAiFileUploadResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__delete(conversation_id, file_id, requestOptions));
-    }
-
-    private async __delete(
-        conversation_id: string,
-        file_id: string,
-        requestOptions?: FilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<ElevenLabs.ConvAiFileUploadResponseModel>> {
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ElevenLabsEnvironment.Production,
-                `v1/convai/conversations/${core.url.encodePathParam(conversation_id)}/files/${core.url.encodePathParam(file_id)}`,
-            ),
-            method: "DELETE",
-            headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: serializers.ConvAiFileUploadResponseModel.parseOrThrow(_response.body, {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    breadcrumbsPrefix: ["response"],
-                }),
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
-                default:
-                    throw new errors.ElevenLabsError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "DELETE",
-            "/v1/convai/conversations/{conversation_id}/files/{file_id}",
         );
     }
 }

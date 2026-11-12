@@ -73,6 +73,8 @@ describe("ConversationsClient", () => {
                     conversation_id: "conversation_id",
                     start_time_unix_secs: 1,
                     call_duration_secs: 1,
+                    cost: 1,
+                    cost_fiat: 1.1,
                     message_count: 1,
                     user_message_count: 1,
                     agent_message_count: 1,
@@ -129,13 +131,20 @@ describe("ConversationsClient", () => {
             evaluationParams: ["evaluation_params"],
             dataCollectionParams: ["data_collection_params"],
             dynamicVariableParams: ["dynamic_variable_params"],
+            dataCollectionFilter: "data_collection_filter",
+            dynamicVariableFilter: "dynamic_variable_filter",
             dataCollectionIds: ["data_collection_ids"],
             evaluationCriteriaIds: ["evaluation_criteria_ids"],
             toolNames: ["tool_names"],
             toolNamesSuccessful: ["tool_names_successful"],
             toolNamesErrored: ["tool_names_errored"],
+            toolIds: ["tool_ids"],
+            toolIdsSuccessful: ["tool_ids_successful"],
+            toolIdsErrored: ["tool_ids_errored"],
             includeInvalidToolCalls: true,
             mainLanguages: ["main_languages"],
+            phoneNumberIds: ["phone_number_ids"],
+            whatsappPhoneNumberIds: ["whatsapp_phone_number_ids"],
             pageSize: 1,
             summaryMode: "exclude",
             search: "search",
@@ -164,6 +173,8 @@ describe("ConversationsClient", () => {
                     conversationId: "conversation_id",
                     startTimeUnixSecs: 1,
                     callDurationSecs: 1,
+                    cost: 1,
+                    costFiat: 1.1,
                     messageCount: 1,
                     userMessageCount: 1,
                     agentMessageCount: 1,
@@ -283,6 +294,12 @@ describe("ConversationsClient", () => {
                     retry_count: 1,
                     last_retry_timestamp: 1,
                     last_processed_external_message_id: "last_processed_external_message_id",
+                    integration_trigger_id: "integration_trigger_id",
+                    platform_metadata: {
+                        conversation_initiation_source: "plain_integration",
+                        thread_id: "thread_id",
+                        workspace_id: "workspace_id",
+                    },
                 },
                 whatsapp: {
                     direction: "inbound",
@@ -421,6 +438,7 @@ describe("ConversationsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    created_at_unix_ms: 1,
                     triggered_guardrails: [{ guardrail_type: "custom" }],
                     file_input: {
                         file_id: "file_id",
@@ -556,6 +574,12 @@ describe("ConversationsClient", () => {
                     retryCount: 1,
                     lastRetryTimestamp: 1,
                     lastProcessedExternalMessageId: "last_processed_external_message_id",
+                    integrationTriggerId: "integration_trigger_id",
+                    platformMetadata: {
+                        conversationInitiationSource: "plain_integration",
+                        threadId: "thread_id",
+                        workspaceId: "workspace_id",
+                    },
                 },
                 whatsapp: {
                     direction: "inbound",
@@ -768,6 +792,7 @@ describe("ConversationsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    createdAtUnixMs: 1,
                     triggeredGuardrails: [
                         {
                             guardrailType: "custom",
@@ -886,6 +911,12 @@ describe("ConversationsClient", () => {
                     retry_count: 1,
                     last_retry_timestamp: 1,
                     last_processed_external_message_id: "last_processed_external_message_id",
+                    integration_trigger_id: "integration_trigger_id",
+                    platform_metadata: {
+                        conversation_initiation_source: "plain_integration",
+                        thread_id: "thread_id",
+                        workspace_id: "workspace_id",
+                    },
                 },
                 whatsapp: {
                     direction: "inbound",
@@ -1024,6 +1055,7 @@ describe("ConversationsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    created_at_unix_ms: 1,
                     triggered_guardrails: [{ guardrail_type: "custom" }],
                     file_input: {
                         file_id: "file_id",
@@ -1158,6 +1190,12 @@ describe("ConversationsClient", () => {
                     retryCount: 1,
                     lastRetryTimestamp: 1,
                     lastProcessedExternalMessageId: "last_processed_external_message_id",
+                    integrationTriggerId: "integration_trigger_id",
+                    platformMetadata: {
+                        conversationInitiationSource: "plain_integration",
+                        threadId: "thread_id",
+                        workspaceId: "workspace_id",
+                    },
                 },
                 whatsapp: {
                     direction: "inbound",
@@ -1370,6 +1408,7 @@ describe("ConversationsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    createdAtUnixMs: 1,
                     triggeredGuardrails: [
                         {
                             guardrailType: "custom",

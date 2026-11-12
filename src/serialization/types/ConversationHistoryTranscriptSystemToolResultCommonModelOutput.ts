@@ -12,6 +12,7 @@ export const ConversationHistoryTranscriptSystemToolResultCommonModelOutput: cor
 > = core.serialization.object({
     requestId: core.serialization.property("request_id", core.serialization.string()),
     toolName: core.serialization.property("tool_name", core.serialization.string()),
+    toolId: core.serialization.property("tool_id", core.serialization.string().optional()),
     resultValue: core.serialization.property("result_value", core.serialization.string()),
     isError: core.serialization.property("is_error", core.serialization.boolean()),
     isBlocked: core.serialization.property("is_blocked", core.serialization.boolean().optional()),
@@ -31,6 +32,7 @@ export declare namespace ConversationHistoryTranscriptSystemToolResultCommonMode
     export interface Raw {
         request_id: string;
         tool_name: string;
+        tool_id?: string | null;
         result_value: string;
         is_error: boolean;
         is_blocked?: boolean | null;

@@ -6,6 +6,7 @@ export const AgentDefinitionSource = {
     Api: "api",
     Template: "template",
     Architect: "architect",
+    Mcp: "mcp",
     Unknown: "unknown",
 } as const;
 export type AgentDefinitionSource = (typeof AgentDefinitionSource)[keyof typeof AgentDefinitionSource];

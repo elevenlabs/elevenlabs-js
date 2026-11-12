@@ -3,12 +3,15 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { SearchStrategy } from "./SearchStrategy";
 
 export const AgentKnowledgeBaseRagQueryRequestModel: core.serialization.ObjectSchema<
     serializers.AgentKnowledgeBaseRagQueryRequestModel.Raw,
     ElevenLabs.AgentKnowledgeBaseRagQueryRequestModel
 > = core.serialization.object({
-    query: core.serialization.string(),
+    strategy: SearchStrategy.optional(),
+    query: core.serialization.string().optional(),
+    documents: core.serialization.list(core.serialization.string()).optional(),
     useAgentDefaults: core.serialization.property("use_agent_defaults", core.serialization.boolean().optional()),
     maxDocumentsLength: core.serialization.property("max_documents_length", core.serialization.number().optional()),
     maxRetrievedRagChunksCount: core.serialization.property(
@@ -19,7 +22,9 @@ export const AgentKnowledgeBaseRagQueryRequestModel: core.serialization.ObjectSc
 
 export declare namespace AgentKnowledgeBaseRagQueryRequestModel {
     export interface Raw {
-        query: string;
+        strategy?: SearchStrategy.Raw | null;
+        query?: string | null;
+        documents?: string[] | null;
         use_agent_defaults?: boolean | null;
         max_documents_length?: number | null;
         max_retrieved_rag_chunks_count?: number | null;

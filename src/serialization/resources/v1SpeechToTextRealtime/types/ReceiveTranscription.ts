@@ -6,6 +6,7 @@ import type * as serializers from "../../../index";
 import { CommittedTranscriptEntitiesPayload } from "../../../types/CommittedTranscriptEntitiesPayload";
 import { CommittedTranscriptPayload } from "../../../types/CommittedTranscriptPayload";
 import { CommittedTranscriptWithTimestampsPayload } from "../../../types/CommittedTranscriptWithTimestampsPayload";
+import { DiarizedTranscript } from "../../../types/DiarizedTranscript";
 import { EditedTranscript } from "../../../types/EditedTranscript";
 import { PartialTranscriptPayload } from "../../../types/PartialTranscriptPayload";
 import { RedactedTranscript } from "../../../types/RedactedTranscript";
@@ -25,6 +26,7 @@ import { ScribeTranscriberErrorPayload } from "../../../types/ScribeTranscriberE
 import { ScribeUnacceptedTermsErrorPayload } from "../../../types/ScribeUnacceptedTermsErrorPayload";
 import { ScribeWarning } from "../../../types/ScribeWarning";
 import { SessionStartedPayload } from "../../../types/SessionStartedPayload";
+import { SpeakersMerged } from "../../../types/SpeakersMerged";
 
 export const ReceiveTranscription: core.serialization.Schema<
     serializers.ReceiveTranscription.Raw,
@@ -33,6 +35,8 @@ export const ReceiveTranscription: core.serialization.Schema<
     SessionStartedPayload,
     PartialTranscriptPayload,
     CommittedTranscriptPayload,
+    DiarizedTranscript,
+    SpeakersMerged,
     CommittedTranscriptWithTimestampsPayload,
     CommittedTranscriptEntitiesPayload,
     RedactedTranscript,
@@ -59,6 +63,8 @@ export declare namespace ReceiveTranscription {
         | SessionStartedPayload.Raw
         | PartialTranscriptPayload.Raw
         | CommittedTranscriptPayload.Raw
+        | DiarizedTranscript.Raw
+        | SpeakersMerged.Raw
         | CommittedTranscriptWithTimestampsPayload.Raw
         | CommittedTranscriptEntitiesPayload.Raw
         | RedactedTranscript.Raw
