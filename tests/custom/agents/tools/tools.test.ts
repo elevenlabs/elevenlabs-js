@@ -234,7 +234,71 @@ describe("WebhookTool", () => {
     });
 });
 
+describe("value sources", () => {
+    it("treats an empty description or variable name as no source, as the API does", () => {
+        const param = (schema: Schema) => () => Tool.client("t", "T").param("x", schema).build();
+        expect(issuesOf(param(Schema.string().describe(""))).map((i) => i.code)).toEqual(["missing_value_source"]);
+        expect(issuesOf(param(Schema.string().fromVariable(""))).map((i) => i.code)).toEqual(["missing_value_source"]);
+        expect(issuesOf(param(Schema.string().describe("").allowedFrom("fares"))).map((i) => i.code)).toEqual([
+            "allowed_values_needs_description",
+            "missing_value_source",
+        ]);
+    });
+
+    it("accepts a constant of a nullable literal type such as [integer, null] and writes the type back", () => {
+        for (const [type, value] of [
+            [["integer", "null"], 42],
+            [["number", "null"], 1.5],
+            [["boolean", "null"], true],
+        ] as const) {
+            const raw = {
+                name: "t",
+                description: "T",
+                type: "client",
+                parameters: { type: "object", properties: { x: { type, constant_value: value } }, required: ["x"] },
+            };
+            const tool = Tool.fromJSON(raw);
+            expect(() => tool.build()).not.toThrow();
+            expect(tool.toJSON()).toEqual(raw);
+        }
+    });
+
+    it("still rejects a constant of the wrong type for a nullable literal", () => {
+        const raw = {
+            name: "t",
+            description: "T",
+            type: "client",
+            parameters: { type: "object", properties: { x: { type: ["integer", "null"], constant_value: "a" } } },
+        };
+        expect(issuesOf(() => Tool.fromJSON(raw).build()).map((i) => i.code)).toEqual(["constant_type_mismatch"]);
+    });
+});
+
 describe("ClientTool", () => {
+    it("loads empty params with no type as an object, and can add to them", () => {
+        const tool = Tool.fromJSON({ name: "t", description: "T", type: "client", parameters: {} }).asClient();
+        expect(tool?.parametersSchema?.kind).toBe("object");
+        expect(() => tool?.param("x", Schema.string().describe("X")).build()).not.toThrow();
+    });
+
+    it("checks requireAnyOf() on the params object against the params it still has", () => {
+        const tool = Tool.fromJSON({
+            name: "t",
+            description: "T",
+            type: "client",
+            parameters: {
+                type: "object",
+                properties: { a: { type: "string", description: "A" }, b: { type: "string", description: "B" } },
+                required_constraints: { any_of: [{ required: ["a", "b"] }] },
+            },
+        }).asClient();
+        expect(() => tool?.build()).not.toThrow();
+        tool?.removeParam("b");
+        expect(issuesOf(() => tool?.build()).map((i) => [i.code, i.path])).toEqual([
+            ["unknown_required_property", "params"],
+        ]);
+    });
+
     it("removes params", () => {
         const tool = Tool.client("show", "Show something")
             .param("a", Schema.string().describe("A"))
@@ -290,6 +354,15 @@ describe("SystemTool", () => {
         expect(issues.map((issue) => issue.code)).toEqual(["invalid_destination", "no_transfers"]);
     });
 
+    it("transfers to a SIP URI held in a dynamic variable only with a SIP REFER", () => {
+        const sip = Destination.sipVariable("partner_sip");
+        expect(() =>
+            SystemTool.transferToNumber().transfer("Caller is a partner", sip, { transferType: "sip_refer" }).build(),
+        ).not.toThrow();
+        const issues = issuesOf(() => SystemTool.transferToNumber().transfer("Caller is a partner", sip).build());
+        expect(issues.map((issue) => issue.code)).toEqual(["invalid_destination", "no_transfers"]);
+    });
+
     it("rejects options of the other transfer kind", () => {
         const issues = issuesOf(() =>
             SystemTool.transferToAgent()
@@ -301,6 +374,22 @@ describe("SystemTool", () => {
 });
 
 describe("loading", () => {
+    it("loads empty webhook body and response schemas with no type as objects", () => {
+        const tool = Tool.fromJSON({
+            name: "t",
+            description: "T",
+            type: "webhook",
+            api_schema: {
+                url: "https://api.example.com/t",
+                method: "POST",
+                request_body_schema: {},
+                response_body_schema: {},
+            },
+        }).asWebhook();
+        expect(tool?.bodySchema?.kind).toBe("object");
+        expect(tool?.responseSchema?.kind).toBe("object");
+    });
+
     it("loads a request or a response wrapper with a tool_config key", () => {
         const config = getOrder().toJSON();
         expect(Tool.fromJSON({ tool_config: config }).toJSON()).toEqual(config);

@@ -9,9 +9,11 @@ export interface SchemaCheckOptions {
 /** Checks a schema and everything under it. `path` names it in messages, e.g. `"body.reason"`. */
 export function checkSchema(schema: Schema, path: string, options: SchemaCheckOptions, issues: ToolIssue[]): void {
     const s = schema.state;
+    // The API reads "" as unset, so an empty description or variable name isn't a value source.
+    const described = s.description !== undefined && s.description !== "";
     const sources = [
-        s.description !== undefined,
-        s.dynamicVariable !== undefined,
+        described,
+        s.dynamicVariable !== undefined && s.dynamicVariable !== "",
         s.hasConstant,
         s.systemProvided,
         s.omitted,
@@ -31,7 +33,7 @@ export function checkSchema(schema: Schema, path: string, options: SchemaCheckOp
     if (s.choices !== undefined && s.kind !== "string") {
         issues.push(error("invalid_choices", path, `"${path}" uses choices(), which only applies to strings`));
     }
-    if (s.allowedFrom !== undefined && s.description === undefined) {
+    if (s.allowedFrom !== undefined && !described) {
         issues.push(
             error(
                 "allowed_values_needs_description",
@@ -40,7 +42,7 @@ export function checkSchema(schema: Schema, path: string, options: SchemaCheckOp
             ),
         );
     }
-    if (s.hasConstant && !matchesKind(s.kind, s.constantValue)) {
+    if (s.hasConstant && !matchesKind(s.kind, s.constantValue, isNullable(s.literalType))) {
         issues.push(error("constant_type_mismatch", path, `"${path}" has a constant that isn't a ${s.kind}`));
     } else if (s.hasConstant && s.constantValue === "") {
         issues.push(
@@ -92,7 +94,15 @@ export function error(code: ToolIssue["code"], path: string | undefined, message
     return { code, severity: "error", message, ...(path !== undefined && { path }) };
 }
 
-function matchesKind(kind: SchemaKind, value: unknown): boolean {
+/** Whether a loaded literal's `type` is a list that includes `"null"`, e.g. `["integer", "null"]`. */
+function isNullable(type: unknown): boolean {
+    return Array.isArray(type) && type.includes("null");
+}
+
+function matchesKind(kind: SchemaKind, value: unknown, nullable: boolean): boolean {
+    if (value === null && nullable) {
+        return true;
+    }
     switch (kind) {
         case "string":
             return typeof value === "string";

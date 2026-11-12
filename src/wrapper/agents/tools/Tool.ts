@@ -160,7 +160,9 @@ export abstract class Tool {
             const { parameters, ...rest } = config;
             return new ClientTool(
                 rest,
-                parameters === undefined ? undefined : (Schema.fromModel(parameters as SchemaModel) as ObjectSchema),
+                parameters === undefined
+                    ? undefined
+                    : (Schema.fromModel(parameters as SchemaModel, false, "object") as ObjectSchema),
             );
         }
         const { params, ...rest } = config;
@@ -300,13 +302,13 @@ export class WebhookTool extends Tool {
             tool._pathParams.set(name, Schema.fromModel(model));
         }
         if (queryParamsSchema !== undefined) {
-            tool._query = Schema.fromModel(queryParamsSchema as SchemaModel) as ObjectSchema;
+            tool._query = Schema.fromModel(queryParamsSchema as SchemaModel, false, "object") as ObjectSchema;
         }
         if (requestBodySchema !== undefined) {
-            tool._body = Schema.fromModel(requestBodySchema as SchemaModel);
+            tool._body = Schema.fromModel(requestBodySchema as SchemaModel, false, "object");
         }
         if (responseBodySchema !== undefined) {
-            tool._response = Schema.fromModel(responseBodySchema as SchemaModel);
+            tool._response = Schema.fromModel(responseBodySchema as SchemaModel, false, "object");
         }
         for (const [name, value] of Object.entries((requestHeaders ?? {}) as Record<string, HeaderModel>)) {
             tool._headers.set(name, value);
@@ -633,10 +635,8 @@ export class ClientTool extends Tool {
     protected _validate(): ToolIssue[] {
         const issues: ToolIssue[] = [];
         if (this._parameters !== undefined) {
-            for (const name of this._parameters.propertyNames) {
-                const schema = this._parameters.propertySchema(name) as Schema;
-                checkSchema(schema, `params.${name}`, { isProperty: true }, issues);
-            }
+            // Checks the params object's own requireAnyOf()/requireAllOf() and every param under it.
+            checkSchema(this._parameters, "params", { isProperty: false }, issues);
         }
         const timeout = this._config.responseTimeoutSecs as number | undefined;
         if (timeout !== undefined && timeout !== -1 && (timeout < 1 || timeout > 120)) {
@@ -791,7 +791,9 @@ export class SystemTool extends Tool {
         }
         const settings = Object.fromEntries(Object.entries(options).filter(([key]) => allowed.includes(key)));
         const { type: _type, ...target } = model;
-        const sipUri = ((target as Model).transferDestination as Model | undefined)?.type === "sip_uri";
+        // A SIP URI held in a dynamic variable resolves to a SIP URI too, so it also needs SIP REFER.
+        const destinationType = ((target as Model).transferDestination as Model | undefined)?.type;
+        const sipUri = destinationType === "sip_uri" || destinationType === "sip_uri_dynamic_variable";
         if (sipUri && settings.transferType !== "sip_refer") {
             this._issues.push(
                 error(

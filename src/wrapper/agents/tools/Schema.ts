@@ -141,10 +141,16 @@ export class Schema {
         return Schema.fromModel(model);
     }
 
-    /** @internal Loads an SDK model. `optional` is whether its parent leaves it out of `required`. */
-    static fromModel(model: SchemaModel, optional = false): Schema {
+    /**
+     * @internal Loads an SDK model. `optional` is whether its parent leaves it out of `required`. `kind` is given
+     * where the API only allows one kind (e.g. a tool's params object), since an empty schema has no `type`.
+     */
+    static fromModel(
+        model: SchemaModel,
+        optional = false,
+        kind: SchemaKind = kindOf(model as Record<string, unknown>),
+    ): Schema {
         const m = model as Record<string, unknown>;
-        const kind = kindOf(m);
         // The API fills unset fields with defaults ("", false, null). They aren't value sources, but are kept as
         // extra fields so a pulled config writes back unchanged.
         const isUnset = (key: string, value: unknown) => isUnsetValue(key, value, kind);
@@ -405,7 +411,9 @@ function kindOf(model: Record<string, unknown>): SchemaKind {
     if (model.type === "array" || (model.type === undefined && "items" in model)) {
         return "array";
     }
-    return model.type === "integer" || model.type === "number" || model.type === "boolean" ? model.type : "string";
+    // A literal's type can be a list such as ["integer", "null"]; its kind is the non-null member.
+    const type = Array.isArray(model.type) ? model.type.find((t) => t !== "null") : model.type;
+    return type === "integer" || type === "number" || type === "boolean" ? type : "string";
 }
 
 /** A loaded object's `required` order for the required properties it still has, then new ones in property order. */

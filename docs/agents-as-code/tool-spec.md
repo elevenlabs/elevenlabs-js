@@ -216,14 +216,14 @@ The workflow spec's rules apply. Tool-specific notes:
 | `omitted_required` | error | `omit()` is used on a schema that isn't optional |
 | `invalid_choices` | error | `choices` is used on a schema that isn't a string |
 | `allowed_values_needs_description` | error | `allowedFrom` is used without `describe` |
-| `constant_type_mismatch` | error | A constant's JSON type doesn't match the schema type, or a literal's constant is `""`, which the API reads as unset |
+| `constant_type_mismatch` | error | A constant's JSON type doesn't match the schema type (`null` matches a loaded type list that includes `"null"`, and a list's kind is its non-null member), or a literal's constant is `""`, which the API reads as unset |
 | `unknown_required_property` | error | A name in `requireAnyOf` / `requireAllOf` isn't a property of the object |
 | `missing_array_items` | error | An array schema has no `items` (only possible when loaded) |
 | `duplicate_header` | error | Two header names differ only in case |
-| `invalid_destination` | error | `transferToNumber` is given an agent destination, or a SIP URI destination without `transferType: "sip_refer"` (the API defaults to `conference`); or `transferToAgent` a phone or SIP one |
+| `invalid_destination` | error | `transferToNumber` is given an agent destination, or a SIP URI destination (static or from a dynamic variable) without `transferType: "sip_refer"` (the API defaults to `conference`); or `transferToAgent` a phone or SIP one |
 | `no_transfers` | error | A transfer system tool has no `transfer()` entries |
 | `invalid_option` | error | An option doesn't apply to the tool's kind, or a documented range is broken: a webhook `responseTimeoutSecs` outside 5–300, a client one outside 1–120 other than -1, -1 without `expectsResponse: true`, or `followRedirects` without `followRedirectsAllowedDomains` |
-| `missing_value_source` | error | A literal has none of `describe`, `fromVariable`, `constant`, `systemProvided`, `omit` |
+| `missing_value_source` | error | A literal has none of `describe`, `fromVariable`, `constant`, `systemProvided`, `omit`. An empty description or variable name doesn't count, since the API reads `""` as unset |
 | `unknown_tool_type` | warning | A loaded tool's type has no constructor in this SDK version (kind `"other"`); it round-trips but can't be edited |
 
 Path-placeholder matching uses `{name}` where `name` is one or more characters other than `{` and `}`, as the API does. Environment variable templates (`{{system__env_<label>}}`, label matching `[a-z][a-z0-9_]*`) aren't placeholders. A placeholder listed in a loaded `api_schema.auth_resolved_params` is filled by the auth connection: it needs no path param, and may not have one (`unknown_path_param`).
