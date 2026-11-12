@@ -103,7 +103,7 @@ export class ServiceAccountsClient {
     }
 
     /**
-     * Create a new service account in the workspace. By default, a workspace can have up to 20 service accounts. Enterprise customers may request an increase to this limit, up to 100.
+     * Create a new service account in the workspace. By default, a workspace can have up to 20 service accounts. Enterprise customers may request an increase to this limit.
      *
      * @param {ElevenLabs.BodyCreateServiceAccountV1ServiceAccountsPost} request
      * @param {ServiceAccountsClient.RequestOptions} requestOptions - Request-specific configuration.

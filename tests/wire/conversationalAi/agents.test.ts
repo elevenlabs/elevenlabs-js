@@ -70,6 +70,7 @@ describe("AgentsClient", () => {
                     stability: 0.5,
                     speed: 1,
                     similarity_boost: 0.8,
+                    clone_strength: 1.1,
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
@@ -1261,6 +1262,7 @@ describe("AgentsClient", () => {
                     stability: 0.5,
                     speed: 1,
                     similarityBoost: 0.8,
+                    cloneStrength: 1.1,
                     textNormalisationType: "system_prompt",
                     pronunciationDictionaryLocators: [
                         {
@@ -2761,6 +2763,7 @@ describe("AgentsClient", () => {
                     stability: 0.5,
                     speed: 1,
                     similarity_boost: 0.8,
+                    clone_strength: 1.1,
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
@@ -3953,6 +3956,7 @@ describe("AgentsClient", () => {
                     stability: 0.5,
                     speed: 1,
                     similarityBoost: 0.8,
+                    cloneStrength: 1.1,
                     textNormalisationType: "system_prompt",
                     pronunciationDictionaryLocators: [
                         {
@@ -5535,6 +5539,7 @@ describe("AgentsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    created_at_unix_ms: 1,
                     triggered_guardrails: [{ guardrail_type: "custom" }],
                     file_input: {
                         file_id: "file_id",
@@ -5665,6 +5670,7 @@ describe("AgentsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    createdAtUnixMs: 1,
                     triggeredGuardrails: [
                         {
                             guardrailType: "custom",
@@ -5812,6 +5818,7 @@ describe("AgentsClient", () => {
                     workflow_node_id: "workflow_node_id",
                     status: "pending",
                     agent_responses: [{ role: "user", time_in_call_secs: 1 }],
+                    triggered_guardrails: [{ guardrail_type: "custom" }],
                     test_id: "test_id",
                     test_name: "test_name",
                     condition_result: { result: "success" },
@@ -5889,6 +5896,11 @@ describe("AgentsClient", () => {
                         {
                             role: "user",
                             timeInCallSecs: 1,
+                        },
+                    ],
+                    triggeredGuardrails: [
+                        {
+                            guardrailType: "custom",
                         },
                     ],
                     testId: "test_id",

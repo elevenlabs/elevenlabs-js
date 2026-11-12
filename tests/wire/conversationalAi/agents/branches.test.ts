@@ -132,6 +132,7 @@ describe("BranchesClient", () => {
             is_archived: true,
             protection_status: "writer_perms_required",
             auto_rebase: true,
+            sync_status: { last_attempt: { outcome: "succeeded", attempted_at: 1 } },
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -193,6 +194,12 @@ describe("BranchesClient", () => {
             isArchived: true,
             protectionStatus: "writer_perms_required",
             autoRebase: true,
+            syncStatus: {
+                lastAttempt: {
+                    outcome: "succeeded",
+                    attemptedAt: 1,
+                },
+            },
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -250,6 +257,7 @@ describe("BranchesClient", () => {
             is_archived: true,
             protection_status: "writer_perms_required",
             auto_rebase: true,
+            sync_status: { last_attempt: { outcome: "succeeded", attempted_at: 1 } },
             access_info: {
                 is_creator: true,
                 creator_name: "John Doe",
@@ -314,6 +322,12 @@ describe("BranchesClient", () => {
             isArchived: true,
             protectionStatus: "writer_perms_required",
             autoRebase: true,
+            syncStatus: {
+                lastAttempt: {
+                    outcome: "succeeded",
+                    attemptedAt: 1,
+                },
+            },
             accessInfo: {
                 isCreator: true,
                 creatorName: "John Doe",
@@ -399,6 +413,7 @@ describe("BranchesClient", () => {
                     stability: 0.5,
                     speed: 1,
                     similarity_boost: 0.8,
+                    clone_strength: 1.1,
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
@@ -1607,6 +1622,7 @@ describe("BranchesClient", () => {
                     stability: 0.5,
                     speed: 1,
                     similarityBoost: 0.8,
+                    cloneStrength: 1.1,
                     textNormalisationType: "system_prompt",
                     pronunciationDictionaryLocators: [
                         {
@@ -3136,6 +3152,7 @@ describe("BranchesClient", () => {
                     stability: 0.5,
                     speed: 1,
                     similarity_boost: 0.8,
+                    clone_strength: 1.1,
                     text_normalisation_type: "system_prompt",
                     pronunciation_dictionary_locators: [{ pronunciation_dictionary_id: "pronunciation_dictionary_id" }],
                     enable_phoneme_tags: true,
@@ -4343,6 +4360,7 @@ describe("BranchesClient", () => {
                     stability: 0.5,
                     speed: 1,
                     similarityBoost: 0.8,
+                    cloneStrength: 1.1,
                     textNormalisationType: "system_prompt",
                     pronunciationDictionaryLocators: [
                         {

@@ -3,8 +3,14 @@
 import type * as ElevenLabs from "../index";
 
 export interface AgentKnowledgeBaseRagQueryResponseModel {
-    /** Raw query used for retrieval (echoes the request query). */
-    retrievalQuery: string;
-    /** Ranked chunks the agent would retrieve, after distance and length filtering. */
+    /** Retrieval strategy that ran. */
+    strategy: ElevenLabs.SearchStrategy;
+    /** Raw query used for retrieval (echoes the request query), or null for the cat and ls strategies. */
+    retrievalQuery?: string;
+    /** Ranked chunks the agent would retrieve with semantic or keyword search, after distance and length filtering. Empty for the cat and ls strategies. */
     chunks: ElevenLabs.AgentKnowledgeBaseRagChunkResponseModel[];
+    /** Document read by the cat strategy, or null when the reference matched no document or another strategy ran. */
+    document?: ElevenLabs.AgentKnowledgeBaseRagDocumentResponseModel;
+    /** Entries listed by the ls strategy, or null when the reference matched nothing or another strategy ran. */
+    listing?: ElevenLabs.AgentKnowledgeBaseRagListingResponseModel;
 }

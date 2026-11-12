@@ -26,10 +26,10 @@ export declare namespace ConversationsClient {
 export class ConversationsClient {
     protected readonly _options: NormalizedClientOptions<ConversationsClient.Options>;
     protected _audio: AudioClient | undefined;
+    protected _files: FilesClient | undefined;
     protected _feedback: FeedbackClient | undefined;
     protected _messages: MessagesClient | undefined;
     protected _tags: TagsClient | undefined;
-    protected _files: FilesClient | undefined;
     protected _topics: TopicsClient | undefined;
     protected _analysis: AnalysisClient | undefined;
 
@@ -39,6 +39,10 @@ export class ConversationsClient {
 
     public get audio(): AudioClient {
         return (this._audio ??= new AudioClient(this._options));
+    }
+
+    public get files(): FilesClient {
+        return (this._files ??= new FilesClient(this._options));
     }
 
     public get feedback(): FeedbackClient {
@@ -51,10 +55,6 @@ export class ConversationsClient {
 
     public get tags(): TagsClient {
         return (this._tags ??= new TagsClient(this._options));
-    }
-
-    public get files(): FilesClient {
-        return (this._files ??= new FilesClient(this._options));
     }
 
     public get topics(): TopicsClient {
@@ -289,13 +289,20 @@ export class ConversationsClient {
      *         evaluationParams: ["evaluation_params"],
      *         dataCollectionParams: ["data_collection_params"],
      *         dynamicVariableParams: ["dynamic_variable_params"],
+     *         dataCollectionFilter: "data_collection_filter",
+     *         dynamicVariableFilter: "dynamic_variable_filter",
      *         dataCollectionIds: ["data_collection_ids"],
      *         evaluationCriteriaIds: ["evaluation_criteria_ids"],
      *         toolNames: ["tool_names"],
      *         toolNamesSuccessful: ["tool_names_successful"],
      *         toolNamesErrored: ["tool_names_errored"],
+     *         toolIds: ["tool_ids"],
+     *         toolIdsSuccessful: ["tool_ids_successful"],
+     *         toolIdsErrored: ["tool_ids_errored"],
      *         includeInvalidToolCalls: true,
      *         mainLanguages: ["main_languages"],
+     *         phoneNumberIds: ["phone_number_ids"],
+     *         whatsappPhoneNumberIds: ["whatsapp_phone_number_ids"],
      *         pageSize: 1,
      *         summaryMode: "exclude",
      *         search: "search",
@@ -344,13 +351,20 @@ export class ConversationsClient {
             evaluationParams,
             dataCollectionParams,
             dynamicVariableParams,
+            dataCollectionFilter,
+            dynamicVariableFilter,
             dataCollectionIds,
             evaluationCriteriaIds,
             toolNames,
             toolNamesSuccessful,
             toolNamesErrored,
+            toolIds,
+            toolIdsSuccessful,
+            toolIdsErrored,
             includeInvalidToolCalls,
             mainLanguages,
+            phoneNumberIds,
+            whatsappPhoneNumberIds,
             pageSize,
             summaryMode,
             search,
@@ -392,13 +406,20 @@ export class ConversationsClient {
             evaluation_params: evaluationParams,
             data_collection_params: dataCollectionParams,
             dynamic_variable_params: dynamicVariableParams,
+            data_collection_filter: dataCollectionFilter,
+            dynamic_variable_filter: dynamicVariableFilter,
             data_collection_ids: dataCollectionIds,
             evaluation_criteria_ids: evaluationCriteriaIds,
             tool_names: toolNames,
             tool_names_successful: toolNamesSuccessful,
             tool_names_errored: toolNamesErrored,
+            tool_ids: toolIds,
+            tool_ids_successful: toolIdsSuccessful,
+            tool_ids_errored: toolIdsErrored,
             include_invalid_tool_calls: includeInvalidToolCalls,
             main_languages: mainLanguages,
+            phone_number_ids: phoneNumberIds,
+            whatsapp_phone_number_ids: whatsappPhoneNumberIds,
             page_size: pageSize,
             summary_mode:
                 summaryMode != null

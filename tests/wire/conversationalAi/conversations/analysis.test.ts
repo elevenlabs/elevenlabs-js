@@ -90,6 +90,12 @@ describe("AnalysisClient", () => {
                     retry_count: 1,
                     last_retry_timestamp: 1,
                     last_processed_external_message_id: "last_processed_external_message_id",
+                    integration_trigger_id: "integration_trigger_id",
+                    platform_metadata: {
+                        conversation_initiation_source: "plain_integration",
+                        thread_id: "thread_id",
+                        workspace_id: "workspace_id",
+                    },
                 },
                 whatsapp: {
                     direction: "inbound",
@@ -228,6 +234,7 @@ describe("AnalysisClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    created_at_unix_ms: 1,
                     triggered_guardrails: [{ guardrail_type: "custom" }],
                     file_input: {
                         file_id: "file_id",
@@ -360,6 +367,12 @@ describe("AnalysisClient", () => {
                     retryCount: 1,
                     lastRetryTimestamp: 1,
                     lastProcessedExternalMessageId: "last_processed_external_message_id",
+                    integrationTriggerId: "integration_trigger_id",
+                    platformMetadata: {
+                        conversationInitiationSource: "plain_integration",
+                        threadId: "thread_id",
+                        workspaceId: "workspace_id",
+                    },
                 },
                 whatsapp: {
                     direction: "inbound",
@@ -572,6 +585,7 @@ describe("AnalysisClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    createdAtUnixMs: 1,
                     triggeredGuardrails: [
                         {
                             guardrailType: "custom",
@@ -690,6 +704,12 @@ describe("AnalysisClient", () => {
                     retry_count: 1,
                     last_retry_timestamp: 1,
                     last_processed_external_message_id: "last_processed_external_message_id",
+                    integration_trigger_id: "integration_trigger_id",
+                    platform_metadata: {
+                        conversation_initiation_source: "plain_integration",
+                        thread_id: "thread_id",
+                        workspace_id: "workspace_id",
+                    },
                 },
                 whatsapp: {
                     direction: "inbound",
@@ -828,6 +848,7 @@ describe("AnalysisClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    created_at_unix_ms: 1,
                     triggered_guardrails: [{ guardrail_type: "custom" }],
                     file_input: {
                         file_id: "file_id",
@@ -963,6 +984,12 @@ describe("AnalysisClient", () => {
                     retryCount: 1,
                     lastRetryTimestamp: 1,
                     lastProcessedExternalMessageId: "last_processed_external_message_id",
+                    integrationTriggerId: "integration_trigger_id",
+                    platformMetadata: {
+                        conversationInitiationSource: "plain_integration",
+                        threadId: "thread_id",
+                        workspaceId: "workspace_id",
+                    },
                 },
                 whatsapp: {
                     direction: "inbound",
@@ -1175,6 +1202,7 @@ describe("AnalysisClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    createdAtUnixMs: 1,
                     triggeredGuardrails: [
                         {
                             guardrailType: "custom",

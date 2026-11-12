@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const AgentConversationTicketSortBy: core.serialization.Schema<
     serializers.AgentConversationTicketSortBy.Raw,
     ElevenLabs.AgentConversationTicketSortBy
-> = core.serialization.enum_(["created_at", "priority"]);
+> = core.serialization.enum_(["created_at", "priority", "last_reported"]);
 
 export declare namespace AgentConversationTicketSortBy {
-    export type Raw = "created_at" | "priority";
+    export type Raw = "created_at" | "priority" | "last_reported";
 }

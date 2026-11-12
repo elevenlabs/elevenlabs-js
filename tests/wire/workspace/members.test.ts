@@ -62,4 +62,25 @@ describe("MembersClient", () => {
             status: "ok",
         });
     });
+
+    test("update_usage_limit", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = { status: "status" };
+
+        server
+            .mockEndpoint()
+            .put("/v1/workspace/members/user_id/usage-limit")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.members.updateUsageLimit("user_id");
+        expect(response).toEqual({
+            status: "status",
+        });
+    });
 });

@@ -3,8 +3,12 @@
 import type * as ElevenLabs from "../index";
 
 export interface LlmInputOutputTokensUsage {
+    /** Input (prompt) tokens not served from the prompt cache. */
     input?: ElevenLabs.LlmTokensCategoryUsage;
+    /** Input tokens read from the prompt cache. */
     inputCacheRead?: ElevenLabs.LlmTokensCategoryUsage;
+    /** Input tokens written to the prompt cache. */
     inputCacheWrite?: ElevenLabs.LlmTokensCategoryUsage;
+    /** Output (completion) tokens. */
     outputTotal?: ElevenLabs.LlmTokensCategoryUsage;
 }

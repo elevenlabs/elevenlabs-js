@@ -14,6 +14,7 @@ export const TtsConversationalConfigOverrideConfig: core.serialization.ObjectSch
     stability: core.serialization.boolean().optional(),
     speed: core.serialization.boolean().optional(),
     similarityBoost: core.serialization.property("similarity_boost", core.serialization.boolean().optional()),
+    cloneStrength: core.serialization.property("clone_strength", core.serialization.boolean().optional()),
     pronunciationDictionaryLocators: core.serialization.property(
         "pronunciation_dictionary_locators",
         core.serialization.boolean().optional(),
@@ -28,6 +29,7 @@ export declare namespace TtsConversationalConfigOverrideConfig {
         stability?: boolean | null;
         speed?: boolean | null;
         similarity_boost?: boolean | null;
+        clone_strength?: boolean | null;
         pronunciation_dictionary_locators?: boolean | null;
     }
 }

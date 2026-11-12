@@ -73,6 +73,21 @@ export class SpeechToTextClient {
             _body.append("language_code", request.languageCode);
         }
 
+        if (request.secondaryLanguageCodes != null) {
+            for (const _item of request.secondaryLanguageCodes) {
+                _body.append("secondary_language_codes", _item);
+            }
+        }
+
+        if (request.numbersFormat != null) {
+            _body.append(
+                "numbers_format",
+                serializers.SpeechToTextConvertRequestNumbersFormat.jsonOrThrow(request.numbersFormat, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+            );
+        }
+
         if (request.transcriptEdit != null) {
             _body.append("transcript_edit", request.transcriptEdit);
         }

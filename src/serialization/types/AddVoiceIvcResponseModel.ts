@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { LibraryVoiceMatchResponseModel } from "./LibraryVoiceMatchResponseModel";
 
 export const AddVoiceIvcResponseModel: core.serialization.ObjectSchema<
     serializers.AddVoiceIvcResponseModel.Raw,
@@ -10,11 +11,13 @@ export const AddVoiceIvcResponseModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     voiceId: core.serialization.property("voice_id", core.serialization.string()),
     requiresVerification: core.serialization.property("requires_verification", core.serialization.boolean()),
+    libraryVoiceMatch: core.serialization.property("library_voice_match", LibraryVoiceMatchResponseModel.optional()),
 });
 
 export declare namespace AddVoiceIvcResponseModel {
     export interface Raw {
         voice_id: string;
         requires_verification: boolean;
+        library_voice_match?: LibraryVoiceMatchResponseModel.Raw | null;
     }
 }

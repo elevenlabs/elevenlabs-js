@@ -21,6 +21,10 @@ export const CreatePrivateKeyJwtRequest: core.serialization.ObjectSchema<
         "extra_params",
         core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     ),
+    extraHeaders: core.serialization.property(
+        "extra_headers",
+        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    ),
     secretKey: core.serialization.property("secret_key", core.serialization.string()),
 });
 
@@ -35,6 +39,7 @@ export declare namespace CreatePrivateKeyJwtRequest {
         subject: string;
         expiration_seconds?: number | null;
         extra_params?: Record<string, string> | null;
+        extra_headers?: Record<string, string> | null;
         secret_key: string;
     }
 }

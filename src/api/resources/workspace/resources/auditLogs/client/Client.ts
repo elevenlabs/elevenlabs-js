@@ -40,8 +40,8 @@ export class AuditLogsClient {
      *         timeFromUnixMs: 1,
      *         timeToUnixMs: 1,
      *         actorUid: "actor_uid",
-     *         className: "class_name",
-     *         activityName: "activity_name"
+     *         className: "Account Change",
+     *         activityName: "Account Security Change"
      *     })
      */
     public list(
@@ -62,8 +62,14 @@ export class AuditLogsClient {
             time_from_unix_ms: timeFromUnixMs,
             time_to_unix_ms: timeToUnixMs,
             actor_uid: actorUid,
-            class_name: className,
-            activity_name: activityName,
+            class_name:
+                className != null
+                    ? serializers.AuditClassName.jsonOrThrow(className, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
+            activity_name:
+                activityName != null
+                    ? serializers.AuditActivityName.jsonOrThrow(activityName, { unrecognizedObjectKeys: "strip" })
+                    : undefined,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

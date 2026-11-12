@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { AuthConnectionDependencies } from "./AuthConnectionDependencies";
 import { AuthConnectionStatus } from "./AuthConnectionStatus";
 import { OAuth2JwtResponseAlgorithm } from "./OAuth2JwtResponseAlgorithm";
+import { OAuth2JwtResponseJwtUsage } from "./OAuth2JwtResponseJwtUsage";
 import { OAuth2JwtResponseTokenResponseField } from "./OAuth2JwtResponseTokenResponseField";
 
 export const OAuth2JwtResponse: core.serialization.ObjectSchema<
@@ -24,12 +25,17 @@ export const OAuth2JwtResponse: core.serialization.ObjectSchema<
         "extra_params",
         core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     ),
+    extraHeaders: core.serialization.property(
+        "extra_headers",
+        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    ),
     tokenUrl: core.serialization.property("token_url", core.serialization.string()),
     scopes: core.serialization.list(core.serialization.string()).optional(),
     tokenResponseField: core.serialization.property(
         "token_response_field",
         OAuth2JwtResponseTokenResponseField.optional(),
     ),
+    jwtUsage: core.serialization.property("jwt_usage", OAuth2JwtResponseJwtUsage.optional()),
     id: core.serialization.string(),
     usedBy: core.serialization.property("used_by", AuthConnectionDependencies.optional()),
     status: AuthConnectionStatus.optional(),
@@ -48,9 +54,11 @@ export declare namespace OAuth2JwtResponse {
         subject: string;
         expiration_seconds?: number | null;
         extra_params?: Record<string, string> | null;
+        extra_headers?: Record<string, string> | null;
         token_url: string;
         scopes?: string[] | null;
         token_response_field?: OAuth2JwtResponseTokenResponseField.Raw | null;
+        jwt_usage?: OAuth2JwtResponseJwtUsage.Raw | null;
         id: string;
         used_by?: AuthConnectionDependencies.Raw | null;
         status?: AuthConnectionStatus.Raw | null;

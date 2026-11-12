@@ -139,6 +139,7 @@ describe("InvocationsClient", () => {
                     workflow_node_id: "workflow_node_id",
                     status: "pending",
                     agent_responses: [{ role: "user", time_in_call_secs: 1 }],
+                    triggered_guardrails: [{ guardrail_type: "custom" }],
                     test_id: "test_id",
                     test_name: "test_name",
                     condition_result: { result: "success" },
@@ -211,6 +212,11 @@ describe("InvocationsClient", () => {
                             timeInCallSecs: 1,
                         },
                     ],
+                    triggeredGuardrails: [
+                        {
+                            guardrailType: "custom",
+                        },
+                    ],
                     testId: "test_id",
                     testName: "test_name",
                     conditionResult: {
@@ -267,6 +273,7 @@ describe("InvocationsClient", () => {
                     workflow_node_id: "workflow_node_id",
                     status: "pending",
                     agent_responses: [{ role: "user", time_in_call_secs: 1 }],
+                    triggered_guardrails: [{ guardrail_type: "custom" }],
                     test_id: "test_id",
                     test_name: "test_name",
                     condition_result: { result: "success" },
@@ -338,6 +345,11 @@ describe("InvocationsClient", () => {
                         {
                             role: "user",
                             timeInCallSecs: 1,
+                        },
+                    ],
+                    triggeredGuardrails: [
+                        {
+                            guardrailType: "custom",
                         },
                     ],
                     testId: "test_id",

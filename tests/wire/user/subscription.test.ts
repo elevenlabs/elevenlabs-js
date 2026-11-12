@@ -57,6 +57,7 @@ describe("SubscriptionClient", () => {
                 },
             ],
             has_open_invoices: true,
+            cancels_immediately: true,
             pending_change: {
                 kind: "change",
                 next_tier: "free",
@@ -137,6 +138,7 @@ describe("SubscriptionClient", () => {
                 },
             ],
             hasOpenInvoices: true,
+            cancelsImmediately: true,
             pendingChange: {
                 kind: "change",
                 nextTier: "free",

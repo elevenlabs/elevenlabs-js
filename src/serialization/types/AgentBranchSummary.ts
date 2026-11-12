@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { BranchProtectionStatus } from "./BranchProtectionStatus";
+import { BranchSyncStatus } from "./BranchSyncStatus";
 import { ResourceAccessInfo } from "./ResourceAccessInfo";
 
 export const AgentBranchSummary: core.serialization.ObjectSchema<
@@ -19,6 +20,7 @@ export const AgentBranchSummary: core.serialization.ObjectSchema<
     isArchived: core.serialization.property("is_archived", core.serialization.boolean()),
     protectionStatus: core.serialization.property("protection_status", BranchProtectionStatus.optional()),
     autoRebase: core.serialization.property("auto_rebase", core.serialization.boolean().optional()),
+    syncStatus: core.serialization.property("sync_status", BranchSyncStatus.optional()),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo.optional()),
     currentLivePercentage: core.serialization.property(
         "current_live_percentage",
@@ -45,6 +47,7 @@ export declare namespace AgentBranchSummary {
         is_archived: boolean;
         protection_status?: BranchProtectionStatus.Raw | null;
         auto_rebase?: boolean | null;
+        sync_status?: BranchSyncStatus.Raw | null;
         access_info?: ResourceAccessInfo.Raw | null;
         current_live_percentage?: number | null;
         parent_branch_id?: string | null;

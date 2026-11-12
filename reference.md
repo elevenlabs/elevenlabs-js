@@ -3666,7 +3666,7 @@ await client.serviceAccounts.list();
 <dl>
 <dd>
 
-Create a new service account in the workspace. By default, a workspace can have up to 20 service accounts. Enterprise customers may request an increase to this limit, up to 100.
+Create a new service account in the workspace. By default, a workspace can have up to 20 service accounts. Enterprise customers may request an increase to this limit.
 </dd>
 </dl>
 </dd>
@@ -6078,13 +6078,20 @@ await client.conversationalAi.conversations.list({
     evaluationParams: ["evaluation_params"],
     dataCollectionParams: ["data_collection_params"],
     dynamicVariableParams: ["dynamic_variable_params"],
+    dataCollectionFilter: "data_collection_filter",
+    dynamicVariableFilter: "dynamic_variable_filter",
     dataCollectionIds: ["data_collection_ids"],
     evaluationCriteriaIds: ["evaluation_criteria_ids"],
     toolNames: ["tool_names"],
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
+    toolIds: ["tool_ids"],
+    toolIdsSuccessful: ["tool_ids_successful"],
+    toolIdsErrored: ["tool_ids_errored"],
     includeInvalidToolCalls: true,
     mainLanguages: ["main_languages"],
+    phoneNumberIds: ["phone_number_ids"],
+    whatsappPhoneNumberIds: ["whatsapp_phone_number_ids"],
     pageSize: 1,
     summaryMode: "exclude",
     search: "search",
@@ -11584,7 +11591,7 @@ await client.conversationalAi.batchCalls.retry("batch_id");
 <dl>
 <dd>
 
-Download all recipients and conversation results for a terminal batch call as CSV.
+Download all recipients and conversation results for a batch call as CSV, including calls that are still in progress.
 </dd>
 </dl>
 </dd>
@@ -12284,6 +12291,637 @@ await client.conversationalAi.whatsappAccounts.list({
 <dd>
 
 **requestOptions:** `WhatsappAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi OutboundCampaigns
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.CampaignPageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace's outbound campaigns, newest first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.list({
+    pageSize: 1,
+    status: ["active"],
+    agentId: "agent_id",
+    channel: "phone",
+    mode: "voice",
+    search: "search",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.OutboundCampaignsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">pauseAll</a>() -> ElevenLabs.PauseAllCampaignsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Pause every running outbound campaign in the workspace. Paused campaigns place no new calls until resumed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.pauseAll();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">stopAll</a>() -> ElevenLabs.StopAllCampaignsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stop every outbound campaign in the workspace that hasn't finished. Returns `202` while calls already placed are still finishing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.stopAll();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.SubmitCampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create an outbound campaign that calls or messages each recipient with the agent, within the policy's calling windows, retrying and following up as it allows. Returns `201` for a new campaign. A repeated request, matched by `idempotency_key` or else by its body, returns the existing campaign with `created` false.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.create({
+    callName: "call_name",
+    agentId: "agent_id",
+    recipients: [{}],
+    channelConfig: {
+        channel: "phone",
+        agentPhoneNumberId: "agent_phone_number_id"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.SubmitCampaignRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">get</a>(campaign_id) -> ElevenLabs.CampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get an outbound campaign and its lead counts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.get("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">getProgress</a>(campaign_id) -> ElevenLabs.CampaignProgressResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get where an outbound campaign's leads and calls stand, and when its next call is due.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.getProgress("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">getFollowUpRequests</a>(campaign_id) -> ElevenLabs.CampaignFollowUpRequestsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Count the callbacks and redirects contacts asked for during an outbound campaign's calls.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.getFollowUpRequests("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">pause</a>(campaign_id) -> ElevenLabs.CampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Pause an outbound campaign. It places no new calls until resumed; calls already placed carry on.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.pause("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">resume</a>(campaign_id) -> ElevenLabs.CampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Resume a paused outbound campaign, including calls an attention item held back.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.resume("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">stop</a>(campaign_id) -> ElevenLabs.CampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stop an outbound campaign for good: queued calls are cancelled and no lead is called again. Returns `202` with the campaign `stopping` while calls already placed are still finishing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.stop("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -15908,6 +16546,222 @@ await client.conversationalAi.conversations.audio.get("conversation_id");
 </dl>
 </details>
 
+## ConversationalAi Conversations Files
+<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">get</a>(conversation_id, file_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download a file the user attached to a conversation, including while the conversation is still active.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.files.get("conversation_id", "file_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The id of the conversation you're taking the action on.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_id:** `string` — The file ID returned when it was uploaded.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">delete</a>(conversation_id, file_id) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a file upload from a conversation. Only possible if the file hasn't already been used in the conversation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.files.delete("conversation_id", "file_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">create</a>(conversation_id, { ...params }) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload an image, PDF, or text file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.files.create("conversation_id", {
+    file: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.BodyUploadFileV1ConvaiConversationsConversationIdFilesPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Conversations Feedback
 <details><summary><code>client.conversationalAi.conversations.feedback.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/feedback/client/Client.ts">create</a>(conversation_id, { ...params }) -> unknown</code></summary>
 <dl>
@@ -16031,8 +16885,13 @@ await client.conversationalAi.conversations.messages.textSearch({
     toolNames: ["tool_names"],
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
+    toolIds: ["tool_ids"],
+    toolIdsSuccessful: ["tool_ids_successful"],
+    toolIdsErrored: ["tool_ids_errored"],
     includeInvalidToolCalls: true,
     mainLanguages: ["main_languages"],
+    phoneNumberIds: ["phone_number_ids"],
+    whatsappPhoneNumberIds: ["whatsapp_phone_number_ids"],
     excludeStatuses: ["initiated"],
     terminationReasons: ["termination_reasons"],
     pageSize: 1,
@@ -16612,151 +17471,6 @@ await client.conversationalAi.conversations.tags.update("tag_id");
 <dd>
 
 **requestOptions:** `TagsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi Conversations Files
-<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">create</a>(conversation_id, { ...params }) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Upload an image, PDF, or text file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.conversations.files.create("conversation_id", {
-    file: fs.createReadStream("/path/to/your/file")
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**conversation_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.conversations.BodyUploadFileV1ConvaiConversationsConversationIdFilesPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `FilesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">delete</a>(conversation_id, file_id) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Remove a file upload from a conversation. Only possible if the file hasn't already been used in the conversation.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.conversations.files.delete("conversation_id", "file_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**conversation_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**file_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `FilesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -19326,6 +20040,702 @@ await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "to
 <dd>
 
 **requestOptions:** `ToolConfigsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi OutboundCampaigns Config
+<details><summary><code>client.conversationalAi.outboundCampaigns.config.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/config/client/Client.ts">get</a>() -> ElevenLabs.WorkspaceConfigResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the workspace's outbound campaign configuration: the default policy new campaigns take, and per-agent overrides.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.config.get();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConfigClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.config.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/config/client/Client.ts">update</a>({ ...params }) -> ElevenLabs.WorkspaceConfigResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create or replace the workspace's outbound campaign configuration. Send the `version` you last read as `expected_version`, or omit it to create the first configuration. A configuration changed since you read it is not replaced. Campaigns keep the policy they started with.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.config.update({
+    config: {}
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.ReplaceWorkspaceConfigRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConfigClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi OutboundCampaigns Leads
+<details><summary><code>client.conversationalAi.outboundCampaigns.leads.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/leads/client/Client.ts">list</a>(campaign_id, { ...params }) -> ElevenLabs.CampaignLeadsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the leads of an outbound campaign, one per recipient.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.leads.list("campaign_id", {
+    pageSize: 1,
+    search: "search",
+    status: "in_progress",
+    disposition: ["campaign_ended"],
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.LeadsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LeadsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.leads.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/leads/client/Client.ts">get</a>(campaign_id, lead_id) -> ElevenLabs.LeadDetailResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get one lead of an outbound campaign.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.leads.get("campaign_id", "lead_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lead_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LeadsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.leads.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/leads/client/Client.ts">delete</a>(campaign_id, lead_id) -> ElevenLabs.SuppressLeadResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a lead from an outbound campaign so it is never called again. Returns `202` when a call already placed may still go through.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.leads.delete("campaign_id", "lead_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lead_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LeadsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi OutboundCampaigns Calls
+<details><summary><code>client.conversationalAi.outboundCampaigns.calls.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/calls/client/Client.ts">list</a>(campaign_id, { ...params }) -> ElevenLabs.CampaignCallsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the calls of an outbound campaign, newest first: first contacts, retries, callbacks and redirects, whether queued, under way or done.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.calls.list("campaign_id", {
+    pageSize: 1,
+    leadId: "lead_id",
+    status: "queued",
+    callResult: ["answered"],
+    stage: "queued",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.CallsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.calls.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/calls/client/Client.ts">export</a>(campaign_id, { ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download every call of a campaign, with its lead and conversation results, as CSV.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.calls.export("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.CallsExportRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi OutboundCampaigns Attention
+<details><summary><code>client.conversationalAi.outboundCampaigns.attention.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/attention/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.AttentionPageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List problems in the workspace's outbound campaigns that need you to act, such as an agent or phone number that can no longer be used, newest first. A campaign with an open item holds back the calls it affects.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.attention.list({
+    campaignId: "campaign_id",
+    includeResolved: true,
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.AttentionListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AttentionClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.attention.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/attention/client/Client.ts">retry</a>(attention_id) -> ElevenLabs.AttentionView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Place the calls a retryable attention item holds back, once its cause is fixed. Resumes the campaign.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.attention.retry("attention_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**attention_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AttentionClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.attention.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/attention/client/Client.ts">resolve</a>(attention_id, { ...params }) -> ElevenLabs.AttentionView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Close an attention item that can't be retried, recording how it was handled.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.attention.resolve("attention_id", {
+    resolution: "resolution"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**attention_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.AttentionResolutionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AttentionClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -29011,8 +30421,8 @@ await client.workspace.auditLogs.list({
     timeFromUnixMs: 1,
     timeToUnixMs: 1,
     actorUid: "actor_uid",
-    className: "class_name",
-    activityName: "activity_name"
+    className: "Account Change",
+    activityName: "Account Security Change"
 });
 
 ```
@@ -29749,6 +31159,77 @@ await client.workspace.members.update({
 </dl>
 </details>
 
+<details><summary><code>client.workspace.members.<a href="/src/api/resources/workspace/resources/members/client/Client.ts">updateUsageLimit</a>(user_id, { ...params }) -> ElevenLabs.UpdateMemberUsageLimitResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sets or clears the monthly credit usage limit of a workspace member or service account. This endpoint may only be called by workspace administrators.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.members.updateUsageLimit("user_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**user_id:** `string` — User ID of the target user.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.workspace.UpdateMemberUsageLimitRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Workspace Resources
 <details><summary><code>client.workspace.resources.<a href="/src/api/resources/workspace/resources/resources/client/Client.ts">get</a>(resource_id, { ...params }) -> ElevenLabs.ResourceMetadataResponseModel</code></summary>
 <dl>
@@ -29983,7 +31464,7 @@ await client.workspace.resources.unshare("resource_id", {
 <dl>
 <dd>
 
-Returns credit usage broken down by product type over time. The response is a tabular structure with columns, column_types, column_units, and rows. Some id columns also get a display-name column, such as user_label or voice_name, appended after the existing columns.
+Returns credit usage broken down by product type over time, for workspaces billed in credits. The response is a tabular structure with columns, column_types, column_units, and rows. Some id columns also get a display-name column, such as user_label or voice_name, appended after the existing columns. For workspaces billed by cost, ranges that reach the date the workspace moved to cost billing return an error; use /v1/workspace/analytics/usage instead.
 </dd>
 </dl>
 </dd>
@@ -30018,6 +31499,73 @@ await client.workspace.usage.getUsageByProductOverTime({
 <dd>
 
 **request:** `ElevenLabs.workspace.BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `UsageClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.usage.<a href="/src/api/resources/workspace/resources/usage/client/Client.ts">getUsage</a>({ ...params }) -> ElevenLabs.WorkspaceAnalyticsQueryResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the cost of the workspace's usage over time, for workspaces billed by cost. Usage is bucketed by UTC day. The response is a tabular structure with columns, column_types, column_units, and rows, with one row per group and bucket. `total_cost` is the cost in the workspace's currency and `total_charge_count` the billed quantity. Usage can be grouped or filtered by at most two of `user_id`, `hashed_xi_api_key`, `region`, `reporting_workspace_id`, `billing_group_id`, `product_type`, `surface` and `actor`, and grouping by two of them requires an `eq` or `in` filter on one. `model`, `request_source`, `fiat_charge_type` and `fiat_currency` can always be added. Some id columns also get a display-name column, such as user_label, appended after the existing columns. Workspaces billed in credits should use /v1/workspace/analytics/query/usage-by-product-over-time.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.usage.getUsage({
+    startTime: 1,
+    endTime: 1,
+    intervalSeconds: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.workspace.BodyGetWorkspaceCostUsageV1WorkspaceAnalyticsUsagePost` 
     
 </dd>
 </dl>

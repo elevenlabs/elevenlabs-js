@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const CreateOAuth2JwtRequestAlgorithm: core.serialization.Schema<
     serializers.CreateOAuth2JwtRequestAlgorithm.Raw,
     ElevenLabs.CreateOAuth2JwtRequestAlgorithm
-> = core.serialization.enum_(["HS256", "HS384", "HS512", "RS256", "RS384", "RS512"]);
+> = core.serialization.enum_(["HS256", "HS384", "HS512", "RS256", "RS384", "RS512", "PS256", "PS384", "PS512"]);
 
 export declare namespace CreateOAuth2JwtRequestAlgorithm {
-    export type Raw = "HS256" | "HS384" | "HS512" | "RS256" | "RS384" | "RS512";
+    export type Raw = "HS256" | "HS384" | "HS512" | "RS256" | "RS384" | "RS512" | "PS256" | "PS384" | "PS512";
 }

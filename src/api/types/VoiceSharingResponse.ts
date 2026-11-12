@@ -7,7 +7,7 @@ export interface VoiceSharingResponse {
     status?: ElevenLabs.VoiceSharingState;
     /** The sample ID of the history item. */
     historyItemSampleId?: string;
-    /** The date of the voice sharing in Unix time. */
+    /** The Unix time, in seconds, at which the voice was shared. */
     dateUnix?: number;
     /** A list of whitelisted emails. */
     whitelistedEmails?: string[];
@@ -27,7 +27,7 @@ export interface VoiceSharingResponse {
     fiatRate?: number;
     /** The notice period of the voice sharing. */
     noticePeriod?: number;
-    /** The date of the voice sharing in Unix time. */
+    /** The Unix time, in seconds, at which users who added the voice from the Voice Library lose access to it. */
     disableAtUnix?: number;
     /** Whether voice mixing is allowed. */
     voiceMixingAllowed?: boolean;

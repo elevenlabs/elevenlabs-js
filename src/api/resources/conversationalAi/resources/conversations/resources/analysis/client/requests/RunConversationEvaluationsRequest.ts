@@ -12,4 +12,8 @@ export interface RunConversationEvaluationsRequest {
     /** ID of the single evaluation criterion to rerun. */
     evaluationId: string;
     scope?: ElevenLabs.AnalysisScope;
+    /** ID of the agent whose evaluation result to rerun, for conversations that transferred between agents. If omitted, a conversation-scoped evaluation reruns for the agent that started the conversation. */
+    evaluatedAgentId?: string;
+    /** Branch of `evaluated_agent_id` whose evaluation result to rerun, for conversations that visited the agent on more than one branch. If omitted, the result reruns for every branch of that agent. */
+    evaluatedBranchId?: string;
 }

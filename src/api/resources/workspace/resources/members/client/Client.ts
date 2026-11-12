@@ -178,4 +178,95 @@ export class MembersClient {
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/workspace/members");
     }
+
+    /**
+     * Sets or clears the monthly credit usage limit of a workspace member or service account. This endpoint may only be called by workspace administrators.
+     *
+     * @param {string} user_id - User ID of the target user.
+     * @param {ElevenLabs.workspace.UpdateMemberUsageLimitRequestModel} request
+     * @param {MembersClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.workspace.members.updateUsageLimit("user_id")
+     */
+    public updateUsageLimit(
+        user_id: string,
+        request: ElevenLabs.workspace.UpdateMemberUsageLimitRequestModel = {},
+        requestOptions?: MembersClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.UpdateMemberUsageLimitResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__updateUsageLimit(user_id, request, requestOptions));
+    }
+
+    private async __updateUsageLimit(
+        user_id: string,
+        request: ElevenLabs.workspace.UpdateMemberUsageLimitRequestModel = {},
+        requestOptions?: MembersClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.UpdateMemberUsageLimitResponseModel>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/workspace/members/${core.url.encodePathParam(user_id)}/usage-limit`,
+            ),
+            method: "PUT",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.workspace.UpdateMemberUsageLimitRequestModel.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.UpdateMemberUsageLimitResponseModel.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "PUT",
+            "/v1/workspace/members/{user_id}/usage-limit",
+        );
+    }
 }

@@ -5,7 +5,7 @@ import type * as ElevenLabs from "../index";
 export interface AttachedUserDataCollectionRef {
     /** Id of the referenced user data-collection item. */
     analysisItemId: string;
-    /** Pinned item version. None tracks the item's latest published version. */
+    /** Pinned item version. 'latest' tracks the item's latest published version. */
     versionId?: string;
     /** Transcript context ('conversation' or 'agent') used when running this item. */
     scope?: ElevenLabs.AnalysisScope;

@@ -8,6 +8,9 @@ export const CreateOAuth2JwtRequestAlgorithm = {
     Rs256: "RS256",
     Rs384: "RS384",
     Rs512: "RS512",
+    Ps256: "PS256",
+    Ps384: "PS384",
+    Ps512: "PS512",
 } as const;
 export type CreateOAuth2JwtRequestAlgorithm =
     (typeof CreateOAuth2JwtRequestAlgorithm)[keyof typeof CreateOAuth2JwtRequestAlgorithm];

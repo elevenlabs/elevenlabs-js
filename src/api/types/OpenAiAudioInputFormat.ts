@@ -4,5 +4,6 @@ import type * as ElevenLabs from "../index";
 
 export interface OpenAiAudioInputFormat {
     type?: ElevenLabs.OpenAiAudioFormat;
+    /** Sample rate in Hz of `audio/pcm` input. Only 24000 is supported; G.711 formats are always 8000 and ignore this field. */
     rate?: number;
 }

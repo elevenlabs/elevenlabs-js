@@ -22,5 +22,7 @@ export interface CreatePrivateKeyJwtRequest {
     expirationSeconds?: number;
     /** Additional custom claims to include in the JWT */
     extraParams?: Record<string, string>;
+    /** Additional JWT header parameters (e.g. x5t). 'alg' and 'kid' are set from algorithm and key_id. */
+    extraHeaders?: Record<string, string>;
     secretKey: string;
 }
