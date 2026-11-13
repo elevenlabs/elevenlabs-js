@@ -5,7 +5,7 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://buildwithfern.com/?utm_source=fern-elevenlabs/elevenlabs-python/readme)
 [![Discord](https://badgen.net/badge/black/ElevenLabs/icon?icon=discord&label)](https://discord.gg/elevenlabs)
 [![Twitter](https://badgen.net/badge/black/elevenlabsio/icon?icon=twitter&label)](https://twitter.com/elevenlabsio)
-[![npm shield](https://img.shields.io/npm/v/elevenlabs)](https://www.npmjs.com/package/@elevenlabs/elevenlabs-js)
+[![npm shield](https://img.shields.io/npm/v/@elevenlabs/elevenlabs-js)](https://www.npmjs.com/package/@elevenlabs/elevenlabs-js)
 
 > **Note:** This is the Node.js library for ElevenLabs. For the browser SDK, visit [`@elevenlabs/client`](https://www.npmjs.com/package/@elevenlabs/client). For the React SDK, check out [`@elevenlabs/react`](https://www.npmjs.com/package/@elevenlabs/react).
 
@@ -25,22 +25,29 @@ yarn add @elevenlabs/elevenlabs-js
 
 ### Main Models
 
-1. **Eleven Multilingual v2** (`eleven_multilingual_v2`)
-    - Excels in stability, language diversity, and accent accuracy
+1. **Eleven v4** (`eleven_v4`)
+    - Our most expressive, highest quality speech synthesis model
+    - Supports 90+ languages
+    - Exceptional voice cloning and natural multi-speaker dialogue
+    - Recommended for content creation, audiobooks and voiceovers
+
+2. **Eleven v4 Turbo** (`eleven_v4_turbo`)
+    - Our most expressive real-time model, with a median latency of ~100ms
+    - Supports 90+ languages
+    - Audio tags for fine-grained control
+    - Recommended for voice agents and other real-time use cases
+
+3. **Eleven Multilingual v2** (`eleven_multilingual_v2`)
+    - Lifelike, consistent quality
     - Supports 29 languages
-    - Recommended for most use cases
+    - Most stable on long-form generations
 
-2. **Eleven Flash v2.5** (`eleven_flash_v2_5`)
-    - Ultra-low latency
+4. **Eleven Flash v2.5** (`eleven_flash_v2_5`)
+    - Ultra-low latency (~100ms median)
     - Supports 32 languages
-    - Faster model, 50% lower price per character
+    - 50% lower price per character
 
-3. **Eleven Turbo v2.5** (`eleven_turbo_v2_5`)
-    - Good balance of quality and latency
-    - Ideal for developer use cases where speed is crucial
-    - Supports 32 languages
-
-For more detailed information about these models and others, visit the [ElevenLabs Models documentation](https://elevenlabs.io/docs/models).
+For speech to text use Scribe v2 (`scribe_v2`, or `scribe_v2_realtime` for live audio), and for music use Eleven Music v2.5 (`music_v2_5`). For more detailed information about these models and others, visit the [ElevenLabs Models documentation](https://elevenlabs.io/docs/overview/models).
 
 ```ts
 import { ElevenLabsClient, play } from "@elevenlabs/elevenlabs-js";
@@ -51,7 +58,7 @@ const elevenlabs = new ElevenLabsClient({
 
 const audio = await elevenlabs.textToSpeech.convert("Xb7hH8MSUJpSbSDYk0k2", {
     text: "Hello! 你好! Hola! नमस्ते! Bonjour! こんにちは! مرحبا! 안녕하세요! Ciao! Cześć! Привіт! வணக்கம்!",
-    modelId: "eleven_multilingual_v2",
+    modelId: "eleven_v4",
 });
 
 await play(audio);
@@ -88,9 +95,13 @@ For information about the structure of the voices output, please refer to the [o
 Stream audio in real-time, as it's being generated.
 
 ```ts
+import { ElevenLabsClient, stream } from "@elevenlabs/elevenlabs-js";
+
+const elevenlabs = new ElevenLabsClient();
+
 const audioStream = await elevenlabs.textToSpeech.stream("JBFqnCBsd6RMkjVDRZzb", {
     text: "This is a... streaming voice",
-    modelId: "eleven_multilingual_v2",
+    modelId: "eleven_v4",
 });
 
 stream(audioStream);
@@ -353,9 +364,7 @@ const response = await elevenlabs.voices.search(
 The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK
 works in the following runtimes:
 
-The following runtimes are supported:
-
-- Node.js 15+
+- Node.js 18+
 - Vercel
 - Cloudflare Workers
 - Deno v1.25+
@@ -369,7 +378,7 @@ All of the ElevenLabs models are nested within the `ElevenLabs` namespace.
 
 ## Languages Supported
 
-Explore [all models & languages](https://elevenlabs.io/docs/models).
+Explore [all models & languages](https://elevenlabs.io/docs/overview/models).
 
 ## Contributing
 
