@@ -93,26 +93,36 @@ export class Conversation extends EventEmitter {
         const wsUrl = this.requiresAuth ? await this._getSignedUrl() : this._getWssUrl();
 
         return new Promise((resolve, reject) => {
-            this.ws = this.webSocketFactory.create(wsUrl, {
+            let opened = false;
+
+            const ws = this.webSocketFactory.create(wsUrl, {
                 perMessageDeflate: false,
                 maxPayload: 16 * 1024 * 1024, // 16MB max message size
             });
+            this.ws = ws;
 
-            this.ws.on("open", () => {
+            ws.on("open", () => {
+                opened = true;
                 this._onWebSocketOpen();
                 resolve();
             });
 
-            this.ws.on("message", (data: WebSocket.Data) => {
+            ws.on("message", (data: WebSocket.Data) => {
                 this._onWebSocketMessage(data);
             });
 
-            this.ws.on("error", (error: Error) => {
-                this.emit("error", error);
+            ws.on("error", (error: Error) => {
+                if (!opened && this.ws === ws) {
+                    this.ws = undefined;
+                }
                 reject(error);
+                // emitting "error" with no listener would throw
+                if (this.listenerCount("error") > 0) {
+                    this.emit("error", error);
+                }
             });
 
-            this.ws.on("close", (code: number, reason: Buffer) => {
+            ws.on("close", (code: number, reason: Buffer) => {
                 this._onWebSocketClose(code, reason);
             });
         });
