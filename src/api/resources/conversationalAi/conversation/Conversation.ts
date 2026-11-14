@@ -123,6 +123,7 @@ export class Conversation extends EventEmitter {
             });
 
             ws.on("close", (code: number, reason: Buffer) => {
+                if (this.ws && this.ws !== ws) return;
                 this._onWebSocketClose(code, reason);
             });
         });

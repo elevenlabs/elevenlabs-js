@@ -81,6 +81,27 @@ describe("Conversation.startSession", () => {
         conversation.endSession();
     });
 
+    it("ignores close from a failed socket after a retry from the error listener", async () => {
+        let retry: Promise<void> | undefined;
+        conversation.on("error", () => {
+            retry = conversation.startSession();
+        });
+        const onSessionEnded = jest.fn();
+        conversation.on("session_ended", onSessionEnded);
+
+        const first = conversation.startSession();
+        const failed = factory.last;
+        failed.simulateError(connectionRefused());
+        await expect(first).rejects.toThrow("ECONNREFUSED");
+
+        failed.emit("close", 1006, Buffer.from(""));
+        expect(onSessionEnded).not.toHaveBeenCalled();
+
+        factory.last.simulateOpen();
+        await expect(retry).resolves.toBeUndefined();
+        conversation.endSession();
+    });
+
     it("does not throw on an error after the session is open with no error listener", async () => {
         const started = conversation.startSession();
         factory.last.simulateOpen();
