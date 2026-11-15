@@ -120,8 +120,11 @@ export class Conversation extends EventEmitter {
 
     /**
      * Ends the conversation session and cleans up resources.
+     *
+     * `session_ended` is emitted once per session, however many times this is called.
      */
     public endSession(): void {
+        const notify = !this.shouldStop;
         this.shouldStop = true;
 
         if (this.audioInterface) {
@@ -133,7 +136,9 @@ export class Conversation extends EventEmitter {
             this.ws = undefined;
         }
 
-        this.emit("session_ended", this.conversationId);
+        if (notify) {
+            this.emit("session_ended", this.conversationId);
+        }
     }
 
     /**
@@ -292,6 +297,10 @@ export class Conversation extends EventEmitter {
     }
 
     private _onWebSocketClose(code: number, reason: Buffer): void {
+        if (this.shouldStop) {
+            return;
+        }
+        this.shouldStop = true;
         this.emit("session_ended", this.conversationId, code, reason.toString());
     }
 
