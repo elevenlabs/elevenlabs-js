@@ -117,4 +117,52 @@ describe("Conversation session end", () => {
             closeReason: "",
         });
     });
+
+    it("reports an error as having ended a session the server closed abnormally", async () => {
+        const { socket, sessionEnded } = await startConversation();
+
+        socket.serverClose(1011, "internal error");
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", 1011, "internal error", {
+            reason: "error",
+            message: "WebSocket closed with code 1011",
+            closeCode: 1011,
+            closeReason: "internal error",
+        });
+    });
+
+    it("reports an error as having ended a session after a socket error", async () => {
+        const { conversation, socket, sessionEnded } = await startConversation();
+        conversation.on("error", () => {});
+
+        socket.emit("error", new Error("read ECONNRESET"));
+        socket.serverClose(1006, "");
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", 1006, "", {
+            reason: "error",
+            message: "read ECONNRESET",
+            closeCode: 1006,
+            closeReason: "",
+        });
+    });
+
+    it("reports an error as having ended a session when sending audio fails", async () => {
+        const { socket, audio, sessionEnded } = await startConversation();
+        const consoleError = jest.spyOn(console, "error").mockImplementation(() => {});
+        socket.send.mockImplementation(() => {
+            throw new Error("socket write failed");
+        });
+
+        audio.input?.(Buffer.from([1, 2, 3]));
+        socket.serverClose(1000, "");
+        consoleError.mockRestore();
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", undefined, undefined, {
+            reason: "error",
+            message: "socket write failed",
+        });
+    });
 });
