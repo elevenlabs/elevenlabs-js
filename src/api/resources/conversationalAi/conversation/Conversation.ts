@@ -19,7 +19,19 @@ import { WebSocketFactory, WebSocketInterface, DefaultWebSocketFactory } from ".
 import { ConversationClient } from "./interfaces/ConversationClient";
 
 /**
+ * Why a conversation session ended, passed as the last argument of `session_ended`.
+ *
+ * `user` is an explicit `endSession()`. `agent` is the server closing the socket, which is
+ * how a session ends when the agent ends the call.
+ */
+export type DisconnectionDetails = { reason: "user" } | { reason: "agent"; closeCode: number; closeReason: string };
+
+/**
  * Conversational AI session for Node.js.
+ *
+ * Emits `session_ended` once per session with `(conversationId, closeCode, closeReason, details)`.
+ * `closeCode` and `closeReason` are set when the server closed the socket, and `details` is the
+ * session's {@link DisconnectionDetails}.
  *
  * BETA: This API is subject to change without regard to backwards compatibility.
  */
@@ -137,7 +149,8 @@ export class Conversation extends EventEmitter {
         }
 
         if (notify) {
-            this.emit("session_ended", this.conversationId);
+            const details: DisconnectionDetails = { reason: "user" };
+            this.emit("session_ended", this.conversationId, undefined, undefined, details);
         }
     }
 
@@ -301,7 +314,8 @@ export class Conversation extends EventEmitter {
             return;
         }
         this.shouldStop = true;
-        this.emit("session_ended", this.conversationId, code, reason.toString());
+        const details: DisconnectionDetails = { reason: "agent", closeCode: code, closeReason: reason.toString() };
+        this.emit("session_ended", this.conversationId, code, details.closeReason, details);
     }
 
     private _handleMessage(message: any): void {

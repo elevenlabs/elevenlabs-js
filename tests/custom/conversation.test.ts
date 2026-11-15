@@ -83,7 +83,38 @@ describe("Conversation session end", () => {
         conversation.endSession();
 
         expect(sessionEnded).toHaveBeenCalledTimes(1);
-        expect(sessionEnded).toHaveBeenCalledWith("conv_1", 1000, "bye");
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", 1000, "bye", expect.anything());
         expect(audio.input).toBeUndefined();
+    });
+
+    it("reports the user as having ended a session ended with endSession", async () => {
+        const { conversation, socket, sessionEnded } = await startConversation();
+
+        conversation.endSession();
+        socket.serverClose(1000, "");
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", undefined, undefined, { reason: "user" });
+    });
+
+    it("reports the agent as having ended a session after an end_call", async () => {
+        const { conversation, socket, sessionEnded } = await startConversation();
+
+        socket.emit(
+            "message",
+            JSON.stringify({
+                type: "agent_tool_response",
+                agent_tool_response: { tool_name: "end_call", tool_call_id: "t1", tool_type: "system" },
+            }),
+        );
+        socket.serverClose(1000, "");
+        conversation.endSession();
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", 1000, "", {
+            reason: "agent",
+            closeCode: 1000,
+            closeReason: "",
+        });
     });
 });
